@@ -442,7 +442,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         //to-do set return type
-        public void CreateG7AlignmentCurve(int projectId,int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime)
+        public void CreateG7AlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -450,111 +450,52 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     MeasurementBusinessImpl measurementBusiness = new MeasurementBusinessImpl();
                     MeasurementDataResponse measurementDataResponse = measurementBusiness.Get1DMeasurementData(measurementIds);
 
-                    CPSyncClient syncClient = new CPSyncClient();
-                    Curve alignmentCurveRequest = new Curve();
-                    alignmentCurveRequest.arrDCS = new double[measurementDataResponse.DcsData.Count];
-                    for (int i = 0; i < measurementDataResponse.DcsData.Count; i++)
-                    {
-                        alignmentCurveRequest.arrDCS[i] = measurementDataResponse.DcsData[i];
-                    }
+                    ProfilerClient syncClient = new ProfilerClient();
 
-                    alignmentCurveRequest.arrPCS = new double[measurementDataResponse.PcsData.Count];
-                    for (int i = 0; i < measurementDataResponse.PcsData.Count; i++)
-                    {
-                        alignmentCurveRequest.arrPCS[i] = measurementDataResponse.PcsData[i];
-                    }
-                    alignmentCurveRequest.arrDensity = new double[measurementDataResponse.DensityData.Count];
-                    for (int i = 0; i < measurementDataResponse.DensityData.Count; i++)
-                    {
-                        alignmentCurveRequest.arrDensity[i] = measurementDataResponse.DensityData[i];
-                    }
-
-                    alignmentCurveRequest.UseDLP = useDLP;
-                    if (useDLP)
-                    {
-                        var dlp = BusinessFactory<IProjectBusiness>.CreateObject().Get1DLastOptimizedDlp(projectId);
-                        alignmentCurveRequest.ICCProfile = dlp;
-                    }
-
-                    Profile syncClientResponse = new Profile();
-                    syncClientResponse = syncClient.CreateCurve(alignmentCurveRequest);
-
-                    int n = 101;
-
-                    List<Entity.CPSync1D.OptimizeRunCurve> OptimizeRunCurveList = new List<Entity.CPSync1D.OptimizeRunCurve>();                 
-
-                    for (int i = 0; i < n; i++)
-                    {
-                        Entity.CPSync1D.OptimizeRunCurve OptimizeRunCurveItem = new Entity.CPSync1D.OptimizeRunCurve();
-                        OptimizeRunCurveItem.OptimizeRunID = optimizeRunId;
-                        OptimizeRunCurveItem.ReferenceNo = Convert.ToInt16(i);
-                        OptimizeRunCurveItem.CMYK_C = Convert.ToDecimal(syncClientResponse.Cyan[i]);
-                        OptimizeRunCurveItem.CMYK_M = Convert.ToDecimal(syncClientResponse.Magenta[i]);
-                        OptimizeRunCurveItem.CMYK_Y = Convert.ToDecimal(syncClientResponse.Yellow[i]);
-                        OptimizeRunCurveItem.CMYK_K = Convert.ToDecimal(syncClientResponse.Key[i]);
-                        OptimizeRunCurveList.Add(OptimizeRunCurveItem);
-                    }
-
-                    CreateOptimizeRunCurve(optimizeRunId, OptimizeRunCurveList);                    
-               
-                    DataAccessFactory.Instance.ExecuteProcedure("CPSync.UpdateOptimizeDlp",
-                                                                            new object[] { optimizeRunId, syncClientResponse.ICCProfile, status, endDateTime });
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateG7AlignmentCurve"));
-        }
-
-        public void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime)
-        {
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    MeasurementBusinessImpl measurementBusiness = new MeasurementBusinessImpl();
-                    MeasurementDataResponse measurementDataResponse = measurementBusiness.Get1DMeasurementData(measurementIds);
-
-                    CPSyncClient syncClient = new CPSyncClient();                
-
-                    var alignmentCurveRequest = new Curve()
-                    {                                  
-                        ProfileOptions = new List<Parameter>()
-                    };
-
-                    alignmentCurveRequest.arrDCS = new double[measurementDataResponse.DcsData.Count];
-                    for (int i = 0; i < measurementDataResponse.DcsData.Count; i++)
-                    {
-                        alignmentCurveRequest.arrDCS[i] = measurementDataResponse.DcsData[i];
-                    }
-
-                    alignmentCurveRequest.arrPCS = new double[measurementDataResponse.PcsData.Count];
-                    for (int i = 0; i < measurementDataResponse.PcsData.Count; i++)
-                    {
-                        alignmentCurveRequest.arrPCS[i] = measurementDataResponse.PcsData[i];
-                    }
-                    alignmentCurveRequest.arrDensity = new double[measurementDataResponse.DensityData.Count];
-                    for (int i = 0; i < measurementDataResponse.DensityData.Count; i++)
-                    {
-                        alignmentCurveRequest.arrDensity[i] = measurementDataResponse.DensityData[i];
-                    }
-
-                    alignmentCurveRequest.UseDLP = useDLP;
-                    if (useDLP)
-                    {
-                        var dlp = BusinessFactory<IProjectBusiness>.CreateObject().Get1DLastOptimizedDlp(projectId);
-                        alignmentCurveRequest.ICCProfile = dlp;
-                    }
-                
-                    //---Pass TVI values into Profiler Options, so now we don't need to pass Linearization TVIs----//
-                    var options = BusinessFactory<IMeasurementBusiness>.CreateObject().GetTargetTVIData(projectId);                       
-
-                    foreach (KeyValuePair<string, string> option in options)
-                    {
-                        alignmentCurveRequest.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
-                    }
-                   
-
+                    CreateG7AlignmentCurveRequest alignmentCurveRequest = new CreateG7AlignmentCurveRequest();
                     
-                 
-                    Profile syncClientResponse = new Profile();
-                    syncClientResponse = syncClient.CreateISOCurve(alignmentCurveRequest);
+
+                    alignmentCurveRequest.DCSData = new List<double>();
+                    
+
+                    for (int i = 0; i < measurementDataResponse.DcsData.Count; i++)
+                    {
+                        alignmentCurveRequest.DCSData.Add(measurementDataResponse.DcsData[i]);                        
+                    }
+
+                    alignmentCurveRequest.PCSData = new List<double>();
+                    
+                    for (int i = 0; i < measurementDataResponse.PcsData.Count; i++)
+                    {
+                        alignmentCurveRequest.PCSData.Add(measurementDataResponse.PcsData[i]);                        
+                    }
+                    alignmentCurveRequest.DensityData = new List<double>();                    
+                    for (int i = 0; i < measurementDataResponse.DensityData.Count; i++)
+                    {
+                        alignmentCurveRequest.DensityData.Add(measurementDataResponse.DensityData[i]);                        
+                    }
+
+                    alignmentCurveRequest.UseDLP = useDLP;
+                    if (useDLP)
+                    {
+                        var dlp = BusinessFactory<IProjectBusiness>.CreateObject().Get1DLastOptimizedDlp(projectId);                        
+                        alignmentCurveRequest.DeviceLinkProfile = new IccProfile();
+                        alignmentCurveRequest.DeviceLinkProfile.ProfileData = dlp;
+
+                    }
+                    alignmentCurveRequest.ProfileOptions = new List<Parameter>();
+                    
+                    //No need to pass as in service we have put static values
+                    //var ProfOption = BusinessFactory<IProjectBusiness>.CreateObject().GetProjectOption(projectId);
+                    //foreach (KeyValuePair<string, string> option in ProfOption)
+                    //{
+                    //    alignmentCurveRequest.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                    //}
+
+                    alignmentCurveRequest.PCSDataType = PCSDataType.XYZ;//(PCSDataType)Enum.Parse(typeof(PCSDataType), pcsDataType.ToString());                    
+
+                    CreateG7AlignmentCurveResponse syncClientResponse = new CreateG7AlignmentCurveResponse();                    
+                    syncClientResponse = syncClient.CreateG7AlignmentCurve(alignmentCurveRequest);
 
                     int n = 101;
 
@@ -573,9 +514,91 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
 
                     CreateOptimizeRunCurve(optimizeRunId, OptimizeRunCurveList);
-                    
+
                     DataAccessFactory.Instance.ExecuteProcedure("CPSync.UpdateOptimizeDlp",
-                                                                            new object[] { optimizeRunId, syncClientResponse.ICCProfile, status, endDateTime });
+                                                                            new object[] { optimizeRunId, syncClientResponse.DeviceLinkProfile.ProfileData, status, endDateTime });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateG7AlignmentCurve"));
+        }
+        
+        public void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    MeasurementBusinessImpl measurementBusiness = new MeasurementBusinessImpl();
+                    MeasurementDataResponse measurementDataResponse = measurementBusiness.Get1DMeasurementData(measurementIds);
+
+                    ProfilerClient syncClient = new ProfilerClient();
+
+                    CreateISOAlignmentCurveRequest alignmentCurveRequest = new CreateISOAlignmentCurveRequest();
+                    
+
+                    alignmentCurveRequest.DCSData = new List<double>();
+                    
+
+                    for (int i = 0; i < measurementDataResponse.DcsData.Count; i++)
+                    {
+                        alignmentCurveRequest.DCSData.Add(measurementDataResponse.DcsData[i]);
+                        
+                    }
+
+                    alignmentCurveRequest.PCSData = new List<double>();                    
+                    for (int i = 0; i < measurementDataResponse.PcsData.Count; i++)
+                    {
+                        alignmentCurveRequest.PCSData.Add(measurementDataResponse.PcsData[i]);                        
+                    }
+                    alignmentCurveRequest.DensityData = new List<double>();
+                    
+                    for (int i = 0; i < measurementDataResponse.DensityData.Count; i++)
+                    {
+                        alignmentCurveRequest.DensityData.Add(measurementDataResponse.DensityData[i]);                        
+                    }
+
+                    alignmentCurveRequest.UseDLP = useDLP;
+                    if (useDLP)
+                    {
+                        var dlp = BusinessFactory<IProjectBusiness>.CreateObject().Get1DLastOptimizedDlp(projectId);
+                        alignmentCurveRequest.DeviceLinkProfile = new IccProfile();                        
+                        alignmentCurveRequest.DeviceLinkProfile.ProfileData = dlp;                        
+                    }
+
+                    //---Pass TVI values into Profiler Options, so now we don't need to pass Linearization TVIs----//
+                    var ProfOption = BusinessFactory<IMeasurementBusiness>.CreateObject().GetTargetTVIData(projectId);
+                    alignmentCurveRequest.ProfileOptions = new List<Parameter>();
+
+                    foreach (KeyValuePair<string, string> option in ProfOption)
+                    {
+                        alignmentCurveRequest.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                    }
+
+                    alignmentCurveRequest.PCSDataType = PCSDataType.XYZ; // (PCSDataType)Enum.Parse(typeof(PCSDataType), pcsDataType.ToString());
+                    alignmentCurveRequest.DensityType = ProfilerService.DensityType.StatusE;
+                    
+                    CreateISOAlignmentCurveResponse syncClientResponse = new CreateISOAlignmentCurveResponse();                    
+                    syncClientResponse = syncClient.CreateISOAlignmentCurve(alignmentCurveRequest);
+
+
+                    int n = 101;
+
+                    List<Entity.CPSync1D.OptimizeRunCurve> OptimizeRunCurveList = new List<Entity.CPSync1D.OptimizeRunCurve>();
+
+                    for (int i = 0; i < n; i++)
+                    {
+                        Entity.CPSync1D.OptimizeRunCurve OptimizeRunCurveItem = new Entity.CPSync1D.OptimizeRunCurve();
+                        OptimizeRunCurveItem.OptimizeRunID = optimizeRunId;
+                        OptimizeRunCurveItem.ReferenceNo = Convert.ToInt16(i);
+                        OptimizeRunCurveItem.CMYK_C = Convert.ToDecimal(syncClientResponse.Cyan[i]);
+                        OptimizeRunCurveItem.CMYK_M = Convert.ToDecimal(syncClientResponse.Magenta[i]);
+                        OptimizeRunCurveItem.CMYK_Y = Convert.ToDecimal(syncClientResponse.Yellow[i]);
+                        OptimizeRunCurveItem.CMYK_K = Convert.ToDecimal(syncClientResponse.Key[i]);
+                        OptimizeRunCurveList.Add(OptimizeRunCurveItem);
+                    }
+
+                    CreateOptimizeRunCurve(optimizeRunId, OptimizeRunCurveList);
+
+                    DataAccessFactory.Instance.ExecuteProcedure("CPSync.UpdateOptimizeDlp",
+                                                                            new object[] { optimizeRunId, syncClientResponse.DeviceLinkProfile.ProfileData, status, endDateTime });
 
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateISOAlignmentCurve"));
