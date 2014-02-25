@@ -50,6 +50,8 @@ namespace ColorPathSync.Business
                     request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));                    
                     err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                     err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
+                    err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
+                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "G7");
 
                     CrossXColor.CLSetProfilerData(profiler, request.DCSData.Length / 4, DCSDataSet, PCSDataSet);
 
@@ -113,6 +115,8 @@ namespace ColorPathSync.Business
                     
                     err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                     err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
+                    err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
+                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "G7");
 
 
                     //Declare a byte array to load profile from the database 
