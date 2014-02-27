@@ -21,7 +21,6 @@ namespace ColorPathSync.Business
 
             try
             {
-
                 CLVectorDataSet DCSDataSet = new CLVectorDataSet();
                 CLVectorDataSet PCSDataSet = new CLVectorDataSet();
                 CrossXColor.CLInitVectorDataSet(DCSDataSet, CrossXColor.icSigCmykData, request.DCSData, request.DCSData.Length);
@@ -29,12 +28,9 @@ namespace ColorPathSync.Business
                 {
                     case DataContracts.PCSDataType.XYZ:                        
                         CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.icSigXYZData, request.PCSData, request.PCSData.Length);
-                        break;
-                    case DataContracts.PCSDataType.LAB:
-                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.icSigLabData, request.PCSData, request.PCSData.Length);
-                        break;
-                    case DataContracts.PCSDataType.Remission:
-                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.clRemission, request.PCSData, request.PCSData.Length);
+                        break;                
+                    case DataContracts.PCSDataType.Spectral:
+                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.clSpectral, request.PCSData, request.PCSData.Length);
                         break;
                 }
                 
@@ -44,148 +40,83 @@ namespace ColorPathSync.Business
                     return response;
                 }
 
+                //--------Set other parameters-------//
+                request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
+                err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
+                err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
+                err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
+                err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "G7");
+                err = CrossXColor.CLSetProfilerOption(profiler, "SaveProfilerData", "1");
+                err = CrossXColor.CLSetProfilerOption(profiler, "SaveProfilerInfo", "1");
 
-                if (request.DeviceLinkProfile == null || request.UseDLP == false)
+                CrossXColor.CLSetProfilerData(profiler, request.DCSData.Length / 4, DCSDataSet, PCSDataSet);
+
+                // calc profile in memory
+                err = CrossXColor.CLCalcProfile(profiler, prof);
+                if (err != 0)
                 {
-                    request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));                    
-                    err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
-                    err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
-                    err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
-                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "G7");
+                    throw new Exception(Enum.GetName(typeof(CrossXColor.CLErrorType), err));
+                }
 
-                    CrossXColor.CLSetProfilerData(profiler, request.DCSData.Length / 4, DCSDataSet, PCSDataSet);
+                // Use memory profile for calculation
+                // pulls the profile into a "trafo" or transformation
+                TYPE_p_void[] profiles = new TYPE_p_void[1] { prof };
+                trafo = CrossXColor.CLConcatICCProfileRefs(1, profiles, renderingIntents);
+                if (trafo == null)
+                {
+                    throw new Exception("CLConcatICCProfileRefs Error");
+                }
 
-                    // calc profile in memory
-                    err = CrossXColor.CLCalcProfile(profiler, prof);
+                int n = 101;
+                double[] c = new double[n];
+                double[] m = new double[n];
+                double[] y = new double[n];
+                double[] k = new double[n];
+                double[] input = new double[4];
+                double[] output = new double[4];
+                for (int i = 0; i < n; i++)
+                {
+                    input[0] = input[1] = input[2] = input[3] = (double)i;
+
+                    // Extract the desired datapoints from the Trafo, with the desired "IN" values this returns desired "OUT"
+                    err = CrossXColor.CLDoTrafo(trafo, input, output);
                     if (err != 0)
                     {
                         throw new Exception(Enum.GetName(typeof(CrossXColor.CLErrorType), err));
                     }
 
-                    // Use memory profile for calculation
-                    // pulls the profile into a "trafo" or transformation
-                    TYPE_p_void[] profiles = new TYPE_p_void[1] { prof };
-                    trafo = CrossXColor.CLConcatICCProfileRefs(1, profiles, renderingIntents);
-                    if (trafo == null)
-                    {
-                        throw new Exception("CLConcatICCProfileRefs Error");
-                    }
-
-                    int n = 101;
-                    double[] c = new double[n];
-                    double[] m = new double[n];
-                    double[] y = new double[n];
-                    double[] k = new double[n];
-                    double[] input = new double[4];
-                    double[] output = new double[4];
-                    for (int i = 0; i < n; i++)
-                    {
-                        input[0] = input[1] = input[2] = input[3] = (double)i;
-
-                        // Extract the desired datapoints from the Trafo, with the desired "IN" values this returns desired "OUT"
-                        err = CrossXColor.CLDoTrafo(trafo, input, output);
-                        if (err != 0)
-                        {
-                            throw new Exception(Enum.GetName(typeof(CrossXColor.CLErrorType), err));
-                        }
-
-                        c[i] = output[0];
-                        m[i] = output[1];
-                        y[i] = output[2];
-                        k[i] = output[3];
-                    }
-
-                    byte[] profData = GetDLP(ref prof);
-
-                    for (int i = 0; i < n; i++)
-                    {
-                        response.Cyan[i] = c[i];
-                        response.Magenta[i] = m[i];
-                        response.Yellow[i] = y[i];
-                        response.Key[i] = k[i];
-                    }
-                    response.DeviceLinkProfile.ProfileData = profData;
-                    return response;
-
+                    c[i] = output[0];
+                    m[i] = output[1];
+                    y[i] = output[2];
+                    k[i] = output[3];
                 }
-                else
+
+                byte[] profData = GetDLP(ref prof);
+
+                for (int i = 0; i < n; i++)
                 {
+                    response.Cyan[i] = c[i];
+                    response.Magenta[i] = m[i];
+                    response.Yellow[i] = y[i];
+                    response.Key[i] = k[i];
+                }
+                response.DeviceLinkProfile.ProfileData = profData;
 
-                    request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
-                    
-                    err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
-                    err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
-                    err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
-                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "G7");
-
-
+                //----Set Specific parameters for optimize run 1 to n.....(Like set source profile, not for initial 0 run)
+                if (request.DeviceLinkProfile != null || request.UseDLP == true)
+                {
                     //Declare a byte array to load profile from the database 
-                    byte[] profData = null;
-                    profData = request.DeviceLinkProfile.ProfileData;
+                    byte[] profData1 = null;
+                    profData1 = request.DeviceLinkProfile.ProfileData;
 
                     //copy byte array into unmangaed buffer (in memory profile)
-                    CopyProfileInMemory(profData, ref srcProf);
+                    CopyProfileInMemory(profData1, ref srcProf);
 
                     //Set the source profile 
                     CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", srcProf);
-
-                    CrossXColor.CLSetProfilerData(profiler, request.DCSData.Length / 4, DCSDataSet, PCSDataSet);
-
-                    // calc profile in memory
-                    err = CrossXColor.CLCalcProfile(profiler, prof);
-                    if (err != 0)
-                    {
-                        throw new Exception(Enum.GetName(typeof(CrossXColor.CLErrorType), err));
-                    }
-
-                    // Use memory profile for calculation
-                    // pulls the profile into a "trafo" or transformation
-                    TYPE_p_void[] profiles = new TYPE_p_void[1] { prof };
-                    trafo = CrossXColor.CLConcatICCProfileRefs(1, profiles, renderingIntents);
-                    if (trafo == null)
-                    {
-                        throw new Exception("CLConcatICCProfileRefs Error");
-                    }
-
-                    int n = 101;
-                    double[] c = new double[n];
-                    double[] m = new double[n];
-                    double[] y = new double[n];
-                    double[] k = new double[n];
-                    double[] input = new double[4];
-                    double[] output = new double[4];
-                    for (int i = 0; i < n; i++)
-                    {
-                        input[0] = input[1] = input[2] = input[3] = (double)i;
-
-                        // Extract the desired datapoints from the Trafo, with the desired "IN" values this returns desired "OUT"
-                        err = CrossXColor.CLDoTrafo(trafo, input, output);
-                        if (err != 0)
-                        {
-                            throw new Exception(Enum.GetName(typeof(CrossXColor.CLErrorType), err));
-                        }
-
-                        c[i] = output[0];
-                        m[i] = output[1];
-                        y[i] = output[2];
-                        k[i] = output[3];
-                    }
-
-
-                    byte[] profData1 = GetDLP(ref prof);
-
-                    for (int i = 0; i < n; i++)
-                    {
-                        response.Cyan[i] = c[i];
-                        response.Magenta[i] = m[i];
-                        response.Yellow[i] = y[i];
-                        response.Key[i] = k[i];
-                    }
-                    response.DeviceLinkProfile.ProfileData = profData1;
-                    return response;
-
                 }
 
+                return response;
             }
             catch (Exception ex)
             {

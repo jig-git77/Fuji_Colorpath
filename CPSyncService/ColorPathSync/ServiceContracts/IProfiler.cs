@@ -15,19 +15,13 @@ namespace ColorPathSync.ServiceContracts
         bool Ping();
 
         [OperationContract]
-        CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request);
-
-        [OperationContract]
-        CreateDeviceLinkProfileResponse CreateDeviceLinkProfile(CreateDeviceLinkProfileRequest request);
+        CreateDestinationAndDeviceLinkProfileResponse CreateDestinationAndDeviceLinkProfile(CreateDestinationAndDeviceLinkProfileRequest request);
 
         [OperationContract]
         OptimizeDeviceLinkProfileResponse OptimizeDeviceLinkProfile(OptimizeDeviceLinkProfileRequest request);
 
         [OperationContract]
-        CreateDestinationAndDeviceLinkProfileResponse CreateDestinationAndDeviceLinkProfile(CreateDestinationAndDeviceLinkProfileRequest request);
-
-        [OperationContract]
-        ExtractProfileValuesResponse ExtractProfileValues(ExtractProfileValuesRequest request);
+        CreateSourceToSourceDeviceLinkProfileResponse CreateSourceToSourceDeviceLinkProfile(CreateSourceToSourceDeviceLinkProfileRequest request);
 
         [OperationContract]
         CreateG7AlignmentCurveResponse CreateG7AlignmentCurve(CreateG7AlignmentCurveRequest request);
@@ -36,10 +30,17 @@ namespace ColorPathSync.ServiceContracts
         CreateISOAlignmentCurveResponse CreateISOAlignmentCurve(CreateISOAlignmentCurveRequest request);
 
         [OperationContract]
-        Profile CreateCurve(Curve objSync);
-
+        CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request);
+              
         [OperationContract]
-        Profile CreateISOCurve(Curve objSync);
+        ExtractProfileValuesResponse ExtractProfileValues(ExtractProfileValuesRequest request);
+               
+        ////Declaration for the ISO and G7 for Alignment Curve (Old Code)
+        //[OperationContract]
+        //Profile CreateCurve(Curve objSync);
+
+        //[OperationContract]
+        //Profile CreateISOCurve(Curve objSync);
 
     }
 }

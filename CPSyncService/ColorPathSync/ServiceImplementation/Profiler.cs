@@ -12,14 +12,9 @@ namespace ColorPathSync.ServiceImplementation
             return true;
         }
 
-        public CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request)
+        public CreateDestinationAndDeviceLinkProfileResponse CreateDestinationAndDeviceLinkProfile(CreateDestinationAndDeviceLinkProfileRequest request)
         {
-            return ProfilerBusiness.CreateSourceProfile(request);
-        }
-
-        public CreateDeviceLinkProfileResponse CreateDeviceLinkProfile(CreateDeviceLinkProfileRequest request)
-        {
-            return ProfilerBusiness.CreateDeviceLinkProfile(request);
+            return ProfilerBusiness.CreateDestinationAndDeviceLinkProfile(request);
         }
 
         public OptimizeDeviceLinkProfileResponse OptimizeDeviceLinkProfile(OptimizeDeviceLinkProfileRequest request)
@@ -27,14 +22,9 @@ namespace ColorPathSync.ServiceImplementation
             return ProfilerBusiness.OptimizeDeviceLinkProfile(request);
         }
 
-        public ExtractProfileValuesResponse ExtractProfileValues(ExtractProfileValuesRequest request)
+        public CreateSourceToSourceDeviceLinkProfileResponse CreateSourceToSourceDeviceLinkProfile(CreateSourceToSourceDeviceLinkProfileRequest request)
         {
-            return ProfilerBusiness.ExtractProfileValues(request);
-        }
-
-        public CreateDestinationAndDeviceLinkProfileResponse CreateDestinationAndDeviceLinkProfile(CreateDestinationAndDeviceLinkProfileRequest request)
-        {
-            return ProfilerBusiness.CreateDestinationAndDeviceLinkProfile(request);
+            return ProfilerBusiness.CreateSourceToSourceDeviceLinkProfile(request);
         }
 
         public CreateG7AlignmentCurveResponse CreateG7AlignmentCurve(CreateG7AlignmentCurveRequest request)
@@ -47,16 +37,27 @@ namespace ColorPathSync.ServiceImplementation
             return ProfilerBusiness.CreateISOAlignmentCurve(request);
         }
 
-        //Implementation for the ISO and G7 for Alignment Curve
-        public Profile CreateCurve(Curve request)
+        public CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request)
         {
-            return CreateCurveProfileBusiness.CreateCurve(request);
+            return ProfilerBusiness.CreateSourceProfile(request);
+        }     
+       
+        public ExtractProfileValuesResponse ExtractProfileValues(ExtractProfileValuesRequest request)
+        {
+            return ProfilerBusiness.ExtractProfileValues(request);
         }
 
-        public Profile CreateISOCurve(Curve request)
-        {
-            return CreateISOCurveProfileBusiness.CreateISOCurve(request);
-        }
+
+        ////Implementation for the ISO and G7 for Alignment Curve (Old Code)
+        //public Profile CreateCurve(Curve request)
+        //{
+        //    return CreateCurveProfileBusiness.CreateCurve(request);
+        //}
+
+        //public Profile CreateISOCurve(Curve request)
+        //{
+        //    return CreateISOCurveProfileBusiness.CreateISOCurve(request);
+        //}
         
     }
 }

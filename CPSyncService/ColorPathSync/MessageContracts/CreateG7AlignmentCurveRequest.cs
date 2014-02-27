@@ -13,9 +13,7 @@ namespace ColorPathSync.MessageContracts
         [DataMember]
         public double[] PCSData { get; set; }
         [DataMember]
-        public double[] DCSData { get; set; }
-        [DataMember]
-        public double[] DensityData { get; set; }
+        public double[] DCSData { get; set; }    
         [DataMember]
         public bool UseDLP { get; set; }
         [DataMember]

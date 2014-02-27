@@ -12,6 +12,6 @@ namespace ColorPathSync.MessageContracts
         [DataMember]
         public double[] DCSData { get; set; }
         [DataMember]
-        public List<Parameter> Options { get; set; }
+        public List<Parameter> ProfileOptions { get; set; }
     }
 }

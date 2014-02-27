@@ -20,7 +20,7 @@ namespace ColorPathSync.MessageContracts
         public List<Parameter> DestinationProfileOptions { get; set; }
 
         [DataMember]
-        public List<Parameter> DlpOptions { get; set; }
+        public List<Parameter> ProfileOptions { get; set; }
 
         [DataMember]
         public IccProfile SourceProfile { get; set; }

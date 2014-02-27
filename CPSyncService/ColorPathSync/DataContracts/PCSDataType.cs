@@ -4,15 +4,15 @@ namespace ColorPathSync.DataContracts
 {
     [DataContract]
     public enum PCSDataType
-    {
+    {              
         [EnumMember]
-        Remission,
+        Density,
         [EnumMember]
         XYZ,
         [EnumMember]
-        LAB,
-        [EnumMember]
-        Density
+        Spectral,
+        //[EnumMember]
+        //LAB
     }
 
     [DataContract]

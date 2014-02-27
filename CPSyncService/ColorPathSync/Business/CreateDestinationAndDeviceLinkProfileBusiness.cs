@@ -61,6 +61,7 @@ namespace ColorPathSync.Business
                 request.DestinationProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
                 err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                 err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
+
                 CrossXColor.CLSetProfilerData(profiler, request.DcsData.Length / 4, dcsDataSet, pcsDataSet);
 
                 // calc profile in memory
@@ -78,7 +79,7 @@ namespace ColorPathSync.Business
                 //clear profiler memory...
                 CrossXColor.CLFreeCLProfilerRef(profiler);
                 profiler = CrossXColor.CLNewCLProfilerRef();
-                request.DlpOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
+                request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
                 err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                 err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
 

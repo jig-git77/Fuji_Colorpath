@@ -13,23 +13,13 @@ namespace ColorPathSync.MessageContracts
         [DataMember]
         public double[] PCSData { get; set; }
         [DataMember]
-        public double[] DCSData { get; set; }
-        [DataMember]
-        public double[] DensityData { get; set; }
+        public double[] DCSData { get; set; }      
         [DataMember]
         public bool UseDLP { get; set; }
         [DataMember]
-        public IccProfile DeviceLinkProfile { get; set; }
+        public IccProfile DeviceLinkProfile { get; set; }     
         [DataMember]
-        public string LinearizationTVI25 { get; set; }
-        [DataMember]
-        public string LinearizationTVI50 { get; set; }
-        [DataMember]
-        public string LinearizationTVI75 { get; set; }        
-        [DataMember]
-        public List<Parameter> ProfileOptions { get; set; }
-        [DataMember]
-        public List<Parameter> LinearizationTVI { get; set; }
+        public List<Parameter> ProfileOptions { get; set; }    
         [DataMember]
         public PCSDataType PCSDataType { get; set; }
         [DataMember]

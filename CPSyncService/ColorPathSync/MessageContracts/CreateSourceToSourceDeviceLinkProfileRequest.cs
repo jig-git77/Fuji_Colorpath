@@ -5,11 +5,11 @@ using ColorPathSync.DataContracts;
 namespace ColorPathSync.MessageContracts
 {
     [DataContract]
-    public class CreateDeviceLinkProfileRequest
+    public class CreateSourceToSourceDeviceLinkProfileRequest
     {
         [DataMember]
         public IccProfile SourceProfile { get; set; }
         [DataMember]
-        public List<Parameter> DlpOptions { get; set; }
+        public List<Parameter> ProfileOptions { get; set; }
     }
 }

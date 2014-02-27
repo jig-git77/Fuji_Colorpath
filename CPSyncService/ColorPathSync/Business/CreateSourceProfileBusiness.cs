@@ -44,7 +44,7 @@ namespace ColorPathSync.Business
                 }
 
                 var err = CrossXColor.CLNoErr;
-                request.Options.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
+                request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
                 err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                 err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
                 CrossXColor.CLSetProfilerData(profiler, request.DCSData.Length / 4, dcsDataSet, pcsDataSet);

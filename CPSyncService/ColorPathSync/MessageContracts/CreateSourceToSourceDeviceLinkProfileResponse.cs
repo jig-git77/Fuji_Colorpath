@@ -4,7 +4,7 @@ using ColorPathSync.DataContracts;
 namespace ColorPathSync.MessageContracts
 {
     [DataContract]
-    public class CreateDeviceLinkProfileResponse : BaseResponse
+    public class CreateSourceToSourceDeviceLinkProfileResponse : BaseResponse
     {
         [DataMember]
         public IccProfile DeviceLinkProfile { get; set; }

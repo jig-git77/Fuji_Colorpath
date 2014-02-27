@@ -9,10 +9,10 @@ namespace ColorPathSync.Business
 {
     public partial class ProfilerBusiness
     {
-        public static CreateDeviceLinkProfileResponse CreateDeviceLinkProfile(CreateDeviceLinkProfileRequest request)
+        public static CreateSourceToSourceDeviceLinkProfileResponse CreateSourceToSourceDeviceLinkProfile(CreateSourceToSourceDeviceLinkProfileRequest request)
         {
             //----Use this fuction for Source to Source DLP creation-----//
-            var response = new CreateDeviceLinkProfileResponse()
+            var response = new CreateSourceToSourceDeviceLinkProfileResponse()
             {
                 DeviceLinkProfile = new IccProfile()
             };
@@ -30,7 +30,7 @@ namespace ColorPathSync.Business
             try
             {
                 var err = CrossXColor.CLNoErr;
-                request.DlpOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
+                request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
                 err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                 err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
                
