@@ -7,7 +7,7 @@ namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IMeasurementBusiness : ITaskBase
     {
-        MeasurementDataResponse GetMeasurementData(List<int> measurementIds);
+        MeasurementDataResponse GetMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType);
         int SaveMeasurement(Measurement measurement);
         int SaveVMeasurement(Measurement measurement);
         List<Measurement> GetMeasurementsOnRunId(int optimizeRunId);
@@ -44,7 +44,7 @@ namespace FujifilmUSA.Sync.Business.Interface
     
         int Save1DMeasurement(Measurement measurement);
         List<Measurement> Get1DMeasurementsOnRunId(int optimizeRunId);
-        MeasurementDataResponse Get1DMeasurementData(List<int> measurementIds);
+        MeasurementDataResponse Get1DMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType);
       
         Dictionary<string, string> GetTargetTVIData(int projectId);
 

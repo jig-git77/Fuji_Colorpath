@@ -491,17 +491,21 @@ namespace FujifilmUSA.Sync.Entity
     }
 
     public enum PCSDataTypes
-    {
-        XYZ,
-        Remission,        
-        LAB,
-        Density
+    {    
+        [Description("PCSDataTypes_Density")]
+        Density = 0,
+        [Description("PCSDataTypes_XYZ")]
+        XYZ = 1,
+        [Description("PCSDataTypes_Spectral")]
+        Spectral = 2
     }
 
     public enum DensityTypes
     {
-        Status_E,
-        Status_T
+        [Description("DensityTypes_StatusT")]
+        Status_T = 0,
+        [Description("DensityTypes_StatusE")]
+        Status_E = 1
     }
 
 }

@@ -8,7 +8,6 @@ namespace FujifilmUSA.Sync.Business.Messages
     public class MeasurementDataResponse
     {
         public List<Double> PcsData { get; set; }
-        public List<Double> DcsData { get; set; }
-        public List<Double> DensityData { get; set; }        
+        public List<Double> DcsData { get; set; }    
     }
 }

@@ -40,6 +40,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (ViewState[_vsPrintStandardType] == null)
             {
                 BindProfileSource();
+                BindDensityType(); //Load DensityType 
+                BindPCSDataType(); //Load PCSDataType 
                 LoadProjectInfoFromSession();
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
                 {
@@ -87,6 +89,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 else if(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
                     SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.InkOptimization;
             }
+            SessionManager.Instance.CurrentProject.DensityType = (DensityTypes)Convert.ToInt16(cmbDensityType.SelectedValue);  //DensityType Selection 
+            SessionManager.Instance.CurrentProject.PCSDataTypes = (PCSDataTypes)Convert.ToInt16(cmbPCSDataType.SelectedValue); //PCSDataType Selection 
 
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
@@ -108,7 +112,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void cmbProjectType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            {
                 BindTargetLAB();
+                BindPCSDataType();
+            }
         }
         #endregion
 
@@ -125,6 +132,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbProjectType.SelectedValue = SessionManager.Instance.CurrentProject.ProjectTypeId.ToString();
                 cmbProjectType_SelectedIndexChanged(null, null);
             }
+            cmbDensityType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.DensityType).ToString(); //DensityType Selection
+            cmbPCSDataType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.PCSDataTypes).ToString(); //PCSDataType Selection
         }
 
         private void BindProfileSource()
@@ -179,6 +188,35 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterTargetColorspace.GetTargetLABList();
             lvTargetLAB.DataSource = this.ProjectTargetLABList;
             lvTargetLAB.DataBind();
+        }
+
+        private void BindDensityType()
+        {
+            if (cmbDensityType.DataSource != null) return;
+
+            cmbDensityType.DataValueField = "Key";
+            cmbDensityType.DataTextField = "Value";
+            cmbDensityType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<DensityTypes>();
+            cmbDensityType.DataBind();
+        }
+
+        private void BindPCSDataType()
+        {
+            if (cmbPCSDataType.DataSource != null) return;
+
+            cmbPCSDataType.DataValueField = "Key";
+            cmbPCSDataType.DataTextField = "Value";
+            cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>();
+     
+            if (cmbProjectType.SelectedItem.Text == "G7" || SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D) //If 1D then G7 type, or foe all other Projects 4D,etc...
+            {
+                cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>().Where(p => p.Value != "Density").ToDictionary(p => p.Key, p => p.Value);
+            }
+            else if (cmbProjectType.SelectedItem.Text == "ISO")
+            {
+                cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>().Where(p => p.Value != "XYZ").ToDictionary(p => p.Key, p => p.Value);
+            }
+            cmbPCSDataType.DataBind();
         }
 
         #endregion

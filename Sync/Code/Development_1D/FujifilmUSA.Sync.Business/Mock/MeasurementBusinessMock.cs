@@ -11,7 +11,7 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IMeasurementBusiness Members
 
-        public MeasurementDataResponse GetMeasurementData(List<int> measurementIds)
+        public MeasurementDataResponse GetMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType)
         {
             return new MeasurementDataResponse();
         }
@@ -165,7 +165,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Measurement>();
         }
 
-        public MeasurementDataResponse Get1DMeasurementData(List<int> measurementIds)
+        public MeasurementDataResponse Get1DMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType)
         {
             return new MeasurementDataResponse();
         }

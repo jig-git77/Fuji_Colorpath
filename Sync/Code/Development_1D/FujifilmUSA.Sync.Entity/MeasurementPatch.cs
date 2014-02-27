@@ -17,6 +17,8 @@ namespace FujifilmUSA.Sync.Entity
         public decimal? Δe2000 { get; set; }
         public string HtmlColor { get; set; }
         public Density Density { get; set; }
+        public Spectral Spectral { get; set; }
+
         //public List<MeasuredColorChar> MeasuredColorChars { get; set; }
         //public Measurement Measurement { get; set; }
     }

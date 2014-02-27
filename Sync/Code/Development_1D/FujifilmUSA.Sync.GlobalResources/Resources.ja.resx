@@ -845,4 +845,19 @@
 	<data name="Duplicate_InsertReferenceChart" xml:space="preserve">
 		<value>Reference chart already exists with same name._ja</value>
 	</data>
+  <data name="PCSDataTypes_Spectral" xml:space="preserve">
+    <value>Spectral_ja</value>
+  </data>
+  <data name="PCSDataTypes_Density" xml:space="preserve">
+    <value>Density_ja</value>
+  </data>
+  <data name="PCSDataTypes_XYZ" xml:space="preserve">
+    <value>XYZ_ja</value>
+  </data>
+  <data name="DensityTypes_StatusT" xml:space="preserve">
+    <value>StatusT_ja</value>
+  </data>
+  <data name="DensityTypes_StatusE" xml:space="preserve">
+    <value>StatusE_ja</value>
+  </data>
 </root>

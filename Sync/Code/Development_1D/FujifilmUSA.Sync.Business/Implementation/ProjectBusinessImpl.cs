@@ -55,7 +55,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                           EnabledValidation = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "EnabledValidation"),
                                           LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID"),
                                           MetricTargetPresetId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MetricTargetPresetID"),
-                                          ProjectTypeId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId")
+                                          ProjectTypeId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId"),
+                                          DensityType = (DensityTypes)(DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DensityType") == -1 ? 0 : DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DensityType")),
+                                          PCSDataTypes = (PCSDataTypes)(DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType") == -1 ? (DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId") != 2 ? 1 : 0) : DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType"))  //----If Sync1D G7 projectType then default is XYZ and if ISO type then default is Density and for all 4D projects, default is XYZ like G7
                                       };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
@@ -100,7 +102,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                                         VUVMode = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VUVMode"),
                                         VMeasurementCount = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VMeasurementCount"),
-                                        VReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "VReadMode")
+                                        VReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "VReadMode")                                       
                                     };
                         }
                         if (dsProject.Tables[3].Rows.Count > 0)
@@ -585,7 +587,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.ProjectTypeId,
                                                      (project.MeasurementSetting.VUVMode == -1 ? 2 : project.MeasurementSetting.VUVMode),  //---For older project who doen't have VUVMode, so by default it will pass -1 because of NULL, so in that case make it 2 "UVCut"
                                                      (project.MeasurementSetting.VMeasurementCount == -1 ? 0 : project.MeasurementSetting.VMeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
-                                                     project.MeasurementSetting.VReadMode
+                                                     project.MeasurementSetting.VReadMode,
+                                                     Convert.ToInt16(project.DensityType),
+                                                     Convert.ToInt16(project.PCSDataTypes)
                                                  });
                         savedProjectId = project.ProjectId;
                     },
@@ -682,7 +686,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                                                      new Parameters() {ParameterName = "@VUVMode", Type = DbType.Int16, Value = project.MeasurementSetting.VUVMode},
                                                      new Parameters() {ParameterName = "@VMeasurementCount", Type = DbType.Int16, Value = project.MeasurementSetting.VMeasurementCount},
-                                                     new Parameters() {ParameterName = "@VReadMode", Type = DbType.String, Value = project.MeasurementSetting.VReadMode}
+                                                     new Parameters() {ParameterName = "@VReadMode", Type = DbType.String, Value = project.MeasurementSetting.VReadMode},
+                                                     new Parameters() {ParameterName = "@DensityType", Type = DbType.Int16, Value = Convert.ToInt16(project.DensityType)},
+                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int16, Value = Convert.ToInt16(project.PCSDataTypes)}
 
                                                  },
                                              new List<Parameters>()
@@ -719,7 +725,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         chartData.InstrumentTypeId = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "InstrumentTypeID");
                         chartData.MeasureDeviceSrNo = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "MeasureDeviceSrNo");
                         chartData.ActivationKey =
-                            Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + chartData.MeasureDeviceSrNo);
+                            Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + chartData.MeasureDeviceSrNo);                     
                         var UVMode = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "UVMode");
                        
                         chartData.DeviceSetting = new MeasurementDevice

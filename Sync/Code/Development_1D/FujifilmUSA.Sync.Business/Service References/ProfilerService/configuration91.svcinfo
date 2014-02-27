@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="4MAXH28mjQngS0o2OS9YylNIs0Q=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="I5DooejxOEPe1D1w/fXtjXgeYKI=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="wsHttpBinding" name="WSHttpBinding_IProfiler">
       <properties>
@@ -127,10 +127,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="WSHttpBinding_IProfiler" contract="ProfilerService.IProfiler" bindingType="wsHttpBinding" address="http://dev.taskero.com/Services/ColorPathSync4D/Profiler.svc" bindingConfiguration="WSHttpBinding_IProfiler">
+    <endpoint name="WSHttpBinding_IProfiler" contract="ProfilerService.IProfiler" bindingType="wsHttpBinding" address="http://dev.taskero.com/Services/ColorPathSync4D_Demo/Profiler.svc" bindingConfiguration="WSHttpBinding_IProfiler">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://dev.taskero.com/Services/ColorPathSync4D/Profiler.svc</serializedValue>
+          <serializedValue>http://dev.taskero.com/Services/ColorPathSync4D_Demo/Profiler.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

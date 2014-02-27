@@ -29,9 +29,9 @@ function SetChartResult(objChart) {
     g_Chart["Size"] = objChart.TotalPatches;
     g_Chart["Name"] = objChart.ChartName;
     g_Chart["NumberOfRows"] = objChart.NumOfRows;
-    g_Chart["NumberOfColumns"] = objChart.NumOfCols;
+    g_Chart["NumberOfColumns"] = objChart.NumOfCols; 
     actKey = objChart.ActivationKey;
-    g_Chart["ReadCS"] = "Density,CIELab,CIEXYZ,sRGB,Spectral";
+    g_Chart["ReadCS"] = "Spectral,Density,CIELab,CIEXYZ,sRGB";
 
     for (m = 1; m <= g_Chart["NumberOfRows"]; m++) {
         g_Chart["RowNames"].push("row " + m);

@@ -15,21 +15,27 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateSourceProfileRequest", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateDestinationAndDeviceLinkProfileRequest", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
     [System.SerializableAttribute()]
-    public partial class CreateSourceProfileRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class CreateDestinationAndDeviceLinkProfileRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> DCSDataField;
+        private System.Collections.Generic.List<double> DcsDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> OptionsField;
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> DestinationProfileOptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> PCSDataField;
+        private System.Collections.Generic.List<double> PcsDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptionsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile SourceProfileField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -42,40 +48,111 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> DCSData {
+        public System.Collections.Generic.List<double> DcsData {
             get {
-                return this.DCSDataField;
+                return this.DcsDataField;
             }
             set {
-                if ((object.ReferenceEquals(this.DCSDataField, value) != true)) {
-                    this.DCSDataField = value;
-                    this.RaisePropertyChanged("DCSData");
+                if ((object.ReferenceEquals(this.DcsDataField, value) != true)) {
+                    this.DcsDataField = value;
+                    this.RaisePropertyChanged("DcsData");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> Options {
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> DestinationProfileOptions {
             get {
-                return this.OptionsField;
+                return this.DestinationProfileOptionsField;
             }
             set {
-                if ((object.ReferenceEquals(this.OptionsField, value) != true)) {
-                    this.OptionsField = value;
-                    this.RaisePropertyChanged("Options");
+                if ((object.ReferenceEquals(this.DestinationProfileOptionsField, value) != true)) {
+                    this.DestinationProfileOptionsField = value;
+                    this.RaisePropertyChanged("DestinationProfileOptions");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> PCSData {
+        public System.Collections.Generic.List<double> PcsData {
             get {
-                return this.PCSDataField;
+                return this.PcsDataField;
             }
             set {
-                if ((object.ReferenceEquals(this.PCSDataField, value) != true)) {
-                    this.PCSDataField = value;
-                    this.RaisePropertyChanged("PCSData");
+                if ((object.ReferenceEquals(this.PcsDataField, value) != true)) {
+                    this.PcsDataField = value;
+                    this.RaisePropertyChanged("PcsData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptions {
+            get {
+                return this.ProfileOptionsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileOptionsField, value) != true)) {
+                    this.ProfileOptionsField = value;
+                    this.RaisePropertyChanged("ProfileOptions");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FujifilmUSA.Sync.Business.ProfilerService.IccProfile SourceProfile {
+            get {
+                return this.SourceProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SourceProfileField, value) != true)) {
+                    this.SourceProfileField = value;
+                    this.RaisePropertyChanged("SourceProfile");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="IccProfile", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts")]
+    [System.SerializableAttribute()]
+    public partial class IccProfile : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] ProfileDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] ProfileData {
+            get {
+                return this.ProfileDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileDataField, value) != true)) {
+                    this.ProfileDataField = value;
+                    this.RaisePropertyChanged("ProfileData");
                 }
             }
         }
@@ -155,13 +232,13 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BaseResponse", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.CreateDeviceLinkProfileResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.OptimizeDeviceLinkProfileResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.CreateSourceToSourceDeviceLinkProfileResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.CreateG7AlignmentCurveResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.CreateISOAlignmentCurveResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.CreateSourceProfileResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse))]
     public partial class BaseResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -221,29 +298,6 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateDeviceLinkProfileResponse", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
-    [System.SerializableAttribute()]
-    public partial class CreateDeviceLinkProfileResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfileField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfile {
-            get {
-                return this.DeviceLinkProfileField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DeviceLinkProfileField, value) != true)) {
-                    this.DeviceLinkProfileField = value;
-                    this.RaisePropertyChanged("DeviceLinkProfile");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="OptimizeDeviceLinkProfileResponse", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
     [System.SerializableAttribute()]
     public partial class OptimizeDeviceLinkProfileResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse {
@@ -267,28 +321,12 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateDestinationAndDeviceLinkProfileResponse", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateSourceToSourceDeviceLinkProfileResponse", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
     [System.SerializableAttribute()]
-    public partial class CreateDestinationAndDeviceLinkProfileResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DestinationProfileField;
+    public partial class CreateSourceToSourceDeviceLinkProfileResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfileField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public FujifilmUSA.Sync.Business.ProfilerService.IccProfile DestinationProfile {
-            get {
-                return this.DestinationProfileField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DestinationProfileField, value) != true)) {
-                    this.DestinationProfileField = value;
-                    this.RaisePropertyChanged("DestinationProfile");
-                }
-            }
-        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfile {
@@ -299,77 +337,6 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
                 if ((object.ReferenceEquals(this.DeviceLinkProfileField, value) != true)) {
                     this.DeviceLinkProfileField = value;
                     this.RaisePropertyChanged("DeviceLinkProfile");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ExtractProfileValuesResponse", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
-    [System.SerializableAttribute()]
-    public partial class ExtractProfileValuesResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> C_XField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> KField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> M_YField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> Y_ZField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> C_X {
-            get {
-                return this.C_XField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.C_XField, value) != true)) {
-                    this.C_XField = value;
-                    this.RaisePropertyChanged("C_X");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> K {
-            get {
-                return this.KField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.KField, value) != true)) {
-                    this.KField = value;
-                    this.RaisePropertyChanged("K");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> M_Y {
-            get {
-                return this.M_YField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.M_YField, value) != true)) {
-                    this.M_YField = value;
-                    this.RaisePropertyChanged("M_Y");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> Y_Z {
-            get {
-                return this.Y_ZField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Y_ZField, value) != true)) {
-                    this.Y_ZField = value;
-                    this.RaisePropertyChanged("Y_Z");
                 }
             }
         }
@@ -572,6 +539,116 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ExtractProfileValuesResponse", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
+    [System.SerializableAttribute()]
+    public partial class ExtractProfileValuesResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<double> C_XField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<double> KField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<double> M_YField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<double> Y_ZField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<double> C_X {
+            get {
+                return this.C_XField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.C_XField, value) != true)) {
+                    this.C_XField = value;
+                    this.RaisePropertyChanged("C_X");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<double> K {
+            get {
+                return this.KField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KField, value) != true)) {
+                    this.KField = value;
+                    this.RaisePropertyChanged("K");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<double> M_Y {
+            get {
+                return this.M_YField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.M_YField, value) != true)) {
+                    this.M_YField = value;
+                    this.RaisePropertyChanged("M_Y");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<double> Y_Z {
+            get {
+                return this.Y_ZField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Y_ZField, value) != true)) {
+                    this.Y_ZField = value;
+                    this.RaisePropertyChanged("Y_Z");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateDestinationAndDeviceLinkProfileResponse", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
+    [System.SerializableAttribute()]
+    public partial class CreateDestinationAndDeviceLinkProfileResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DestinationProfileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfileField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FujifilmUSA.Sync.Business.ProfilerService.IccProfile DestinationProfile {
+            get {
+                return this.DestinationProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DestinationProfileField, value) != true)) {
+                    this.DestinationProfileField = value;
+                    this.RaisePropertyChanged("DestinationProfile");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfile {
+            get {
+                return this.DeviceLinkProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DeviceLinkProfileField, value) != true)) {
+                    this.DeviceLinkProfileField = value;
+                    this.RaisePropertyChanged("DeviceLinkProfile");
+                }
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MessageSeverity", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts")]
     public enum MessageSeverity : int {
@@ -587,112 +664,6 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Warning = 3,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="IccProfile", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts")]
-    [System.SerializableAttribute()]
-    public partial class IccProfile : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] ProfileDataField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] ProfileData {
-            get {
-                return this.ProfileDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ProfileDataField, value) != true)) {
-                    this.ProfileDataField = value;
-                    this.RaisePropertyChanged("ProfileData");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateDeviceLinkProfileRequest", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
-    [System.SerializableAttribute()]
-    public partial class CreateDeviceLinkProfileRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> DlpOptionsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile SourceProfileField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> DlpOptions {
-            get {
-                return this.DlpOptionsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DlpOptionsField, value) != true)) {
-                    this.DlpOptionsField = value;
-                    this.RaisePropertyChanged("DlpOptions");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public FujifilmUSA.Sync.Business.ProfilerService.IccProfile SourceProfile {
-            get {
-                return this.SourceProfileField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SourceProfileField, value) != true)) {
-                    this.SourceProfileField = value;
-                    this.RaisePropertyChanged("SourceProfile");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -714,10 +685,10 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfileField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> OptionsField;
+        private System.Collections.Generic.List<double> PCSDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> PCSDataField;
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private FujifilmUSA.Sync.Business.ProfilerService.IccProfile SourceProfileField;
@@ -772,19 +743,6 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> Options {
-            get {
-                return this.OptionsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.OptionsField, value) != true)) {
-                    this.OptionsField = value;
-                    this.RaisePropertyChanged("Options");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Collections.Generic.List<double> PCSData {
             get {
                 return this.PCSDataField;
@@ -793,6 +751,19 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
                 if ((object.ReferenceEquals(this.PCSDataField, value) != true)) {
                     this.PCSDataField = value;
                     this.RaisePropertyChanged("PCSData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptions {
+            get {
+                return this.ProfileOptionsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileOptionsField, value) != true)) {
+                    this.ProfileOptionsField = value;
+                    this.RaisePropertyChanged("ProfileOptions");
                 }
             }
         }
@@ -822,24 +793,15 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateDestinationAndDeviceLinkProfileRequest", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateSourceToSourceDeviceLinkProfileRequest", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
     [System.SerializableAttribute()]
-    public partial class CreateDestinationAndDeviceLinkProfileRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class CreateSourceToSourceDeviceLinkProfileRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> DcsDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> DestinationProfileOptionsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> DlpOptionsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> PcsDataField;
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private FujifilmUSA.Sync.Business.ProfilerService.IccProfile SourceProfileField;
@@ -855,53 +817,14 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> DcsData {
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptions {
             get {
-                return this.DcsDataField;
+                return this.ProfileOptionsField;
             }
             set {
-                if ((object.ReferenceEquals(this.DcsDataField, value) != true)) {
-                    this.DcsDataField = value;
-                    this.RaisePropertyChanged("DcsData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> DestinationProfileOptions {
-            get {
-                return this.DestinationProfileOptionsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DestinationProfileOptionsField, value) != true)) {
-                    this.DestinationProfileOptionsField = value;
-                    this.RaisePropertyChanged("DestinationProfileOptions");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> DlpOptions {
-            get {
-                return this.DlpOptionsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DlpOptionsField, value) != true)) {
-                    this.DlpOptionsField = value;
-                    this.RaisePropertyChanged("DlpOptions");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> PcsData {
-            get {
-                return this.PcsDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PcsDataField, value) != true)) {
-                    this.PcsDataField = value;
-                    this.RaisePropertyChanged("PcsData");
+                if ((object.ReferenceEquals(this.ProfileOptionsField, value) != true)) {
+                    this.ProfileOptionsField = value;
+                    this.RaisePropertyChanged("ProfileOptions");
                 }
             }
         }
@@ -915,6 +838,374 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
                 if ((object.ReferenceEquals(this.SourceProfileField, value) != true)) {
                     this.SourceProfileField = value;
                     this.RaisePropertyChanged("SourceProfile");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateG7AlignmentCurveRequest", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
+    [System.SerializableAttribute()]
+    public partial class CreateG7AlignmentCurveRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<double> DCSDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<double> PCSDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FujifilmUSA.Sync.Business.ProfilerService.PCSDataType PCSDataTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptionsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool UseDLPField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<double> DCSData {
+            get {
+                return this.DCSDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DCSDataField, value) != true)) {
+                    this.DCSDataField = value;
+                    this.RaisePropertyChanged("DCSData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfile {
+            get {
+                return this.DeviceLinkProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DeviceLinkProfileField, value) != true)) {
+                    this.DeviceLinkProfileField = value;
+                    this.RaisePropertyChanged("DeviceLinkProfile");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<double> PCSData {
+            get {
+                return this.PCSDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PCSDataField, value) != true)) {
+                    this.PCSDataField = value;
+                    this.RaisePropertyChanged("PCSData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FujifilmUSA.Sync.Business.ProfilerService.PCSDataType PCSDataType {
+            get {
+                return this.PCSDataTypeField;
+            }
+            set {
+                if ((this.PCSDataTypeField.Equals(value) != true)) {
+                    this.PCSDataTypeField = value;
+                    this.RaisePropertyChanged("PCSDataType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptions {
+            get {
+                return this.ProfileOptionsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileOptionsField, value) != true)) {
+                    this.ProfileOptionsField = value;
+                    this.RaisePropertyChanged("ProfileOptions");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool UseDLP {
+            get {
+                return this.UseDLPField;
+            }
+            set {
+                if ((this.UseDLPField.Equals(value) != true)) {
+                    this.UseDLPField = value;
+                    this.RaisePropertyChanged("UseDLP");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PCSDataType", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts")]
+    public enum PCSDataType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Density = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        XYZ = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Spectral = 2,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateISOAlignmentCurveRequest", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
+    [System.SerializableAttribute()]
+    public partial class CreateISOAlignmentCurveRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<double> DCSDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FujifilmUSA.Sync.Business.ProfilerService.DensityType DensityTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<double> PCSDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FujifilmUSA.Sync.Business.ProfilerService.PCSDataType PCSDataTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptionsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool UseDLPField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<double> DCSData {
+            get {
+                return this.DCSDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DCSDataField, value) != true)) {
+                    this.DCSDataField = value;
+                    this.RaisePropertyChanged("DCSData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FujifilmUSA.Sync.Business.ProfilerService.DensityType DensityType {
+            get {
+                return this.DensityTypeField;
+            }
+            set {
+                if ((this.DensityTypeField.Equals(value) != true)) {
+                    this.DensityTypeField = value;
+                    this.RaisePropertyChanged("DensityType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfile {
+            get {
+                return this.DeviceLinkProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DeviceLinkProfileField, value) != true)) {
+                    this.DeviceLinkProfileField = value;
+                    this.RaisePropertyChanged("DeviceLinkProfile");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<double> PCSData {
+            get {
+                return this.PCSDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PCSDataField, value) != true)) {
+                    this.PCSDataField = value;
+                    this.RaisePropertyChanged("PCSData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FujifilmUSA.Sync.Business.ProfilerService.PCSDataType PCSDataType {
+            get {
+                return this.PCSDataTypeField;
+            }
+            set {
+                if ((this.PCSDataTypeField.Equals(value) != true)) {
+                    this.PCSDataTypeField = value;
+                    this.RaisePropertyChanged("PCSDataType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptions {
+            get {
+                return this.ProfileOptionsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileOptionsField, value) != true)) {
+                    this.ProfileOptionsField = value;
+                    this.RaisePropertyChanged("ProfileOptions");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool UseDLP {
+            get {
+                return this.UseDLPField;
+            }
+            set {
+                if ((this.UseDLPField.Equals(value) != true)) {
+                    this.UseDLPField = value;
+                    this.RaisePropertyChanged("UseDLP");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DensityType", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts")]
+    public enum DensityType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute(Value="Status-T")]
+        StatusT = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute(Value="Status-E")]
+        StatusE = 1,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateSourceProfileRequest", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
+    [System.SerializableAttribute()]
+    public partial class CreateSourceProfileRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<double> DCSDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<double> PCSDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptionsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<double> DCSData {
+            get {
+                return this.DCSDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DCSDataField, value) != true)) {
+                    this.DCSDataField = value;
+                    this.RaisePropertyChanged("DCSData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<double> PCSData {
+            get {
+                return this.PCSDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PCSDataField, value) != true)) {
+                    this.PCSDataField = value;
+                    this.RaisePropertyChanged("PCSData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptions {
+            get {
+                return this.ProfileOptionsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileOptionsField, value) != true)) {
+                    this.ProfileOptionsField = value;
+                    this.RaisePropertyChanged("ProfileOptions");
                 }
             }
         }
@@ -951,10 +1242,10 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         private System.Collections.Generic.List<double> M_YField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> OptionsField;
+        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile ProfileField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile ProfileField;
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<double> Y_ZField;
@@ -1022,19 +1313,6 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> Options {
-            get {
-                return this.OptionsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.OptionsField, value) != true)) {
-                    this.OptionsField = value;
-                    this.RaisePropertyChanged("Options");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public FujifilmUSA.Sync.Business.ProfilerService.IccProfile Profile {
             get {
                 return this.ProfileField;
@@ -1043,6 +1321,19 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
                 if ((object.ReferenceEquals(this.ProfileField, value) != true)) {
                     this.ProfileField = value;
                     this.RaisePropertyChanged("Profile");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptions {
+            get {
+                return this.ProfileOptionsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileOptionsField, value) != true)) {
+                    this.ProfileOptionsField = value;
+                    this.RaisePropertyChanged("ProfileOptions");
                 }
             }
         }
@@ -1084,304 +1375,6 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         CMYK = 2,
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateG7AlignmentCurveRequest", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
-    [System.SerializableAttribute()]
-    public partial class CreateG7AlignmentCurveRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> DCSDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> DensityDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfileField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> PCSDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptionsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool UseDLPField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> DCSData {
-            get {
-                return this.DCSDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DCSDataField, value) != true)) {
-                    this.DCSDataField = value;
-                    this.RaisePropertyChanged("DCSData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> DensityData {
-            get {
-                return this.DensityDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DensityDataField, value) != true)) {
-                    this.DensityDataField = value;
-                    this.RaisePropertyChanged("DensityData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfile {
-            get {
-                return this.DeviceLinkProfileField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DeviceLinkProfileField, value) != true)) {
-                    this.DeviceLinkProfileField = value;
-                    this.RaisePropertyChanged("DeviceLinkProfile");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> PCSData {
-            get {
-                return this.PCSDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PCSDataField, value) != true)) {
-                    this.PCSDataField = value;
-                    this.RaisePropertyChanged("PCSData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptions {
-            get {
-                return this.ProfileOptionsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ProfileOptionsField, value) != true)) {
-                    this.ProfileOptionsField = value;
-                    this.RaisePropertyChanged("ProfileOptions");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool UseDLP {
-            get {
-                return this.UseDLPField;
-            }
-            set {
-                if ((this.UseDLPField.Equals(value) != true)) {
-                    this.UseDLPField = value;
-                    this.RaisePropertyChanged("UseDLP");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateISOAlignmentCurveRequest", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
-    [System.SerializableAttribute()]
-    public partial class CreateISOAlignmentCurveRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> DCSDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> DensityDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfileField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LinearizationTVI25Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LinearizationTVI50Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LinearizationTVI75Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<double> PCSDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptionsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool UseDLPField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> DCSData {
-            get {
-                return this.DCSDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DCSDataField, value) != true)) {
-                    this.DCSDataField = value;
-                    this.RaisePropertyChanged("DCSData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> DensityData {
-            get {
-                return this.DensityDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DensityDataField, value) != true)) {
-                    this.DensityDataField = value;
-                    this.RaisePropertyChanged("DensityData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfile {
-            get {
-                return this.DeviceLinkProfileField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DeviceLinkProfileField, value) != true)) {
-                    this.DeviceLinkProfileField = value;
-                    this.RaisePropertyChanged("DeviceLinkProfile");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LinearizationTVI25 {
-            get {
-                return this.LinearizationTVI25Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LinearizationTVI25Field, value) != true)) {
-                    this.LinearizationTVI25Field = value;
-                    this.RaisePropertyChanged("LinearizationTVI25");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LinearizationTVI50 {
-            get {
-                return this.LinearizationTVI50Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LinearizationTVI50Field, value) != true)) {
-                    this.LinearizationTVI50Field = value;
-                    this.RaisePropertyChanged("LinearizationTVI50");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LinearizationTVI75 {
-            get {
-                return this.LinearizationTVI75Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LinearizationTVI75Field, value) != true)) {
-                    this.LinearizationTVI75Field = value;
-                    this.RaisePropertyChanged("LinearizationTVI75");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<double> PCSData {
-            get {
-                return this.PCSDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PCSDataField, value) != true)) {
-                    this.PCSDataField = value;
-                    this.RaisePropertyChanged("PCSData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptions {
-            get {
-                return this.ProfileOptionsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ProfileOptionsField, value) != true)) {
-                    this.ProfileOptionsField = value;
-                    this.RaisePropertyChanged("ProfileOptions");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool UseDLP {
-            get {
-                return this.UseDLPField;
-            }
-            set {
-                if ((this.UseDLPField.Equals(value) != true)) {
-                    this.UseDLPField = value;
-                    this.RaisePropertyChanged("UseDLP");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ProfilerService.IProfiler")]
     public interface IProfiler {
@@ -1389,26 +1382,26 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/Ping", ReplyAction="http://tempuri.org/IProfiler/PingResponse")]
         bool Ping();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/CreateSourceProfile", ReplyAction="http://tempuri.org/IProfiler/CreateSourceProfileResponse")]
-        FujifilmUSA.Sync.Business.ProfilerService.CreateSourceProfileResponse CreateSourceProfile(FujifilmUSA.Sync.Business.ProfilerService.CreateSourceProfileRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/CreateDeviceLinkProfile", ReplyAction="http://tempuri.org/IProfiler/CreateDeviceLinkProfileResponse")]
-        FujifilmUSA.Sync.Business.ProfilerService.CreateDeviceLinkProfileResponse CreateDeviceLinkProfile(FujifilmUSA.Sync.Business.ProfilerService.CreateDeviceLinkProfileRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/CreateDestinationAndDeviceLinkProfile", ReplyAction="http://tempuri.org/IProfiler/CreateDestinationAndDeviceLinkProfileResponse")]
+        FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse CreateDestinationAndDeviceLinkProfile(FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/OptimizeDeviceLinkProfile", ReplyAction="http://tempuri.org/IProfiler/OptimizeDeviceLinkProfileResponse")]
         FujifilmUSA.Sync.Business.ProfilerService.OptimizeDeviceLinkProfileResponse OptimizeDeviceLinkProfile(FujifilmUSA.Sync.Business.ProfilerService.OptimizeDeviceLinkProfileRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/CreateDestinationAndDeviceLinkProfile", ReplyAction="http://tempuri.org/IProfiler/CreateDestinationAndDeviceLinkProfileResponse")]
-        FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse CreateDestinationAndDeviceLinkProfile(FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/ExtractProfileValues", ReplyAction="http://tempuri.org/IProfiler/ExtractProfileValuesResponse")]
-        FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse ExtractProfileValues(FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/CreateSourceToSourceDeviceLinkProfile", ReplyAction="http://tempuri.org/IProfiler/CreateSourceToSourceDeviceLinkProfileResponse")]
+        FujifilmUSA.Sync.Business.ProfilerService.CreateSourceToSourceDeviceLinkProfileResponse CreateSourceToSourceDeviceLinkProfile(FujifilmUSA.Sync.Business.ProfilerService.CreateSourceToSourceDeviceLinkProfileRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/CreateG7AlignmentCurve", ReplyAction="http://tempuri.org/IProfiler/CreateG7AlignmentCurveResponse")]
         FujifilmUSA.Sync.Business.ProfilerService.CreateG7AlignmentCurveResponse CreateG7AlignmentCurve(FujifilmUSA.Sync.Business.ProfilerService.CreateG7AlignmentCurveRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/CreateISOAlignmentCurve", ReplyAction="http://tempuri.org/IProfiler/CreateISOAlignmentCurveResponse")]
         FujifilmUSA.Sync.Business.ProfilerService.CreateISOAlignmentCurveResponse CreateISOAlignmentCurve(FujifilmUSA.Sync.Business.ProfilerService.CreateISOAlignmentCurveRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/CreateSourceProfile", ReplyAction="http://tempuri.org/IProfiler/CreateSourceProfileResponse")]
+        FujifilmUSA.Sync.Business.ProfilerService.CreateSourceProfileResponse CreateSourceProfile(FujifilmUSA.Sync.Business.ProfilerService.CreateSourceProfileRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/ExtractProfileValues", ReplyAction="http://tempuri.org/IProfiler/ExtractProfileValuesResponse")]
+        FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse ExtractProfileValues(FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1442,24 +1435,16 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
             return base.Channel.Ping();
         }
         
-        public FujifilmUSA.Sync.Business.ProfilerService.CreateSourceProfileResponse CreateSourceProfile(FujifilmUSA.Sync.Business.ProfilerService.CreateSourceProfileRequest request) {
-            return base.Channel.CreateSourceProfile(request);
-        }
-        
-        public FujifilmUSA.Sync.Business.ProfilerService.CreateDeviceLinkProfileResponse CreateDeviceLinkProfile(FujifilmUSA.Sync.Business.ProfilerService.CreateDeviceLinkProfileRequest request) {
-            return base.Channel.CreateDeviceLinkProfile(request);
+        public FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse CreateDestinationAndDeviceLinkProfile(FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileRequest request) {
+            return base.Channel.CreateDestinationAndDeviceLinkProfile(request);
         }
         
         public FujifilmUSA.Sync.Business.ProfilerService.OptimizeDeviceLinkProfileResponse OptimizeDeviceLinkProfile(FujifilmUSA.Sync.Business.ProfilerService.OptimizeDeviceLinkProfileRequest request) {
             return base.Channel.OptimizeDeviceLinkProfile(request);
         }
         
-        public FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse CreateDestinationAndDeviceLinkProfile(FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileRequest request) {
-            return base.Channel.CreateDestinationAndDeviceLinkProfile(request);
-        }
-        
-        public FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse ExtractProfileValues(FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesRequest request) {
-            return base.Channel.ExtractProfileValues(request);
+        public FujifilmUSA.Sync.Business.ProfilerService.CreateSourceToSourceDeviceLinkProfileResponse CreateSourceToSourceDeviceLinkProfile(FujifilmUSA.Sync.Business.ProfilerService.CreateSourceToSourceDeviceLinkProfileRequest request) {
+            return base.Channel.CreateSourceToSourceDeviceLinkProfile(request);
         }
         
         public FujifilmUSA.Sync.Business.ProfilerService.CreateG7AlignmentCurveResponse CreateG7AlignmentCurve(FujifilmUSA.Sync.Business.ProfilerService.CreateG7AlignmentCurveRequest request) {
@@ -1468,6 +1453,14 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         
         public FujifilmUSA.Sync.Business.ProfilerService.CreateISOAlignmentCurveResponse CreateISOAlignmentCurve(FujifilmUSA.Sync.Business.ProfilerService.CreateISOAlignmentCurveRequest request) {
             return base.Channel.CreateISOAlignmentCurve(request);
+        }
+        
+        public FujifilmUSA.Sync.Business.ProfilerService.CreateSourceProfileResponse CreateSourceProfile(FujifilmUSA.Sync.Business.ProfilerService.CreateSourceProfileRequest request) {
+            return base.Channel.CreateSourceProfile(request);
+        }
+        
+        public FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse ExtractProfileValues(FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesRequest request) {
+            return base.Channel.ExtractProfileValues(request);
         }
     }
 }

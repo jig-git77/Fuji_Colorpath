@@ -46,12 +46,12 @@ textarea {
             <td>
                 <asp:Panel ID="panelAddProjectDescription" runat="server" BorderStyle="None" 
                     meta:resourcekey="panelAddProjectDescriptionResource1">
-                    <table>
+                    <table width="100%">
                         <tr>
-                            <td style="width: 130px">
+                            <td >
                                 <span><asp:Localize runat="server" Text="Target Print Condition:" ID="locTargetPrint"></asp:Localize></span>
                             </td>
-                            <td style="width: 450px">
+                            <td colspan="3" >
                                 <asp:DropDownList ID="cmbPrintStandardType" runat="server" CssClass="select" DataValueField="Key"
                                     DataTextField="Value" OnSelectedIndexChanged="cmbPrintStandardType_SelectedIndexChanged"
                                     AutoPostBack="True" meta:resourcekey="cmbSourceProfileResource1">
@@ -63,31 +63,47 @@ textarea {
                                 <span><asp:Localize runat="server" Text="Source Profile:" ID="locSourceProfile" 
                                     meta:resourcekey="locSourceProfileResource1"></asp:Localize></span>
                             </td>
-                            <td style="width: 450px">
+                            <td colspan="3">
                                 <asp:Label ID="lblSourceProfileName" runat="server"></asp:Label>
                             </td>
                         </tr>                       
                         <tr>
-                            <td valign="top" colspan="2">
+                            <td colspan="4" valign="top" >
                                 <span><asp:Localize runat="server" Text="Profile Description:" 
                                     ID="locProfileDesc" meta:resourcekey="locProfileDescResource1"></asp:Localize></span>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
-                                <asp:TextBox ID="txtProfileDescription" runat="server" Width="115%" Height="100px"
+                            <td colspan="4">
+                                <asp:TextBox ID="txtProfileDescription" runat="server" Width="100%" Height="100px"
                                     TextMode="MultiLine" Enabled="False" ReadOnly="True" 
                                     meta:resourcekey="txtProfileDescriptionResource1"></asp:TextBox>
                             </td>
-                        </tr>
+                        </tr>                       
                          <tr id="trProjectType" runat="server">
-                            <td style="width: 130px">
+                            <td >
                                 <span><asp:Localize runat="server" Text="Project Type:" ID="locProjectType" 
                                     meta:resourcekey="locProjectTypeResource1"></asp:Localize></span></td>
-                            <td style="width: 450px">
+                            <td colspan="3" >
                                 <asp:DropDownList ID="cmbProjectType" runat="server" onselectedindexchanged="cmbProjectType_SelectedIndexChanged" AutoPostBack="true">
                                     <asp:ListItem Text="G7" Value="1" Selected="True"></asp:ListItem>
                                     <asp:ListItem Text="ISO" Value="2"></asp:ListItem>
+                                </asp:DropDownList>
+                            </td>                           
+                        </tr>
+                        <tr>
+                             <td >
+                                <span><asp:Localize runat="server" Text="Density Type:" ID="Localize1" 
+                                    meta:resourcekey="locDensityTypeResource1"></asp:Localize></span></td>
+                            <td>
+                                <asp:DropDownList ID="cmbDensityType" runat="server" >                                  
+                                </asp:DropDownList>
+                            </td>                        
+                             <td style="width:130px;" >
+                                <span><asp:Localize runat="server" Text="PCS DataType:" ID="Localize2" 
+                                    meta:resourcekey="locPCSDataTypeResource1"></asp:Localize></span></td>
+                            <td >
+                                <asp:DropDownList ID="cmbPCSDataType" runat="server">
                                 </asp:DropDownList>
                             </td>
                         </tr>

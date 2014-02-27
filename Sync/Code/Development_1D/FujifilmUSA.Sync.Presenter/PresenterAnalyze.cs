@@ -166,12 +166,12 @@ namespace FujifilmUSA.Sync.Presenter
             _viewAnalyze.DTMaxSpreadChartData = measurementBusiness.GetMaxSpreadChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
         }
 
-        public void CreateDlp()
+        public void CreateSourceToSourceDlp()
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             optimizeRunBusiness.
-                CreateDeviceLinkProfile(
+                CreateSourceToSourceDeviceLinkProfile(
                     _viewAnalyze.ProjectId,
                     _viewAnalyze.OptimizeRunId,
                     _viewAnalyze.MeasurementIds,

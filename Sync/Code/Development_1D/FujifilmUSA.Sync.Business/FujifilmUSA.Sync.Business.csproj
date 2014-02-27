@@ -116,11 +116,6 @@
     <Compile Include="Mock\SourceProfileBusinessMock.cs" />
     <Compile Include="Mock\UserBusinessImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\CPSyncService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Service References\ProfilerService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -160,26 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Service References\CPSyncService\CPSync.wsdl" />
-    <None Include="Service References\CPSyncService\CPSync.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\CPSyncService\CPSync1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\CPSyncService\CPSync2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\CPSyncService\CPSync3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\CPSyncService\FujifilmUSA.Sync.Business.CPSyncService.Profile.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateDeviceLinkProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateG7AlignmentCurveResponse.datasource">
@@ -191,6 +167,9 @@
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateSourceProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateSourceToSourceDeviceLinkProfileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -199,7 +178,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\CPSyncService\" />
     <WCFMetadataStorage Include="Service References\ProfilerService\" />
   </ItemGroup>
   <ItemGroup>
@@ -209,20 +187,20 @@
     <None Include="Service References\ProfilerService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ProfilerService\Profiler.wsdl" />
-    <None Include="Service References\ProfilerService\Profiler.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\ProfilerService\Profiler1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler2.xsd">
+    <None Include="Service References\ProfilerService\Profiler11.wsdl" />
+    <None Include="Service References\ProfilerService\Profiler11.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler3.xsd">
+    <None Include="Service References\ProfilerService\Profiler12.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler4.xsd">
+    <None Include="Service References\ProfilerService\Profiler13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProfilerService\Profiler14.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ProfilerService\Reference.svcmap">
@@ -231,22 +209,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\CPSyncService\CPSync.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\CPSyncService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\CPSyncService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\CPSyncService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ProfilerService\Profiler.disco" />
+    <None Include="Service References\ProfilerService\Profiler11.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

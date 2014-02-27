@@ -119,7 +119,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
-        public void CreateDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
+        public void CreateSourceToSourceDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
         {
 
         }

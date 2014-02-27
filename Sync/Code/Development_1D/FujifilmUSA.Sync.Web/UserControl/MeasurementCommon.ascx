@@ -307,9 +307,8 @@
                     MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
                     ControlDisability(1,false,1,false,1,true,1,true);
                     return false;
-                }
-                
-                scan(g_ScannerList, 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
+                }            
+                scan(g_ScannerList, g_Chart["ReadCS"], g_Chart);
             }
             else if (jQuery("[id*='hdMeasureAndUploadChart']").val() == 'uploadmeasurement') {
                 upload();

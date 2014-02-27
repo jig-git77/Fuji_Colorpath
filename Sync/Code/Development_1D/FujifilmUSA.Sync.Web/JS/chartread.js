@@ -86,7 +86,45 @@ function Density(Red, Green, Blue, Visual) {
     this.Visual = Visual;
 }
 
-
+//constructor for Spectral object
+function Spectral(nm380, nm390, nm400, nm410, nm420, nm430, nm440, nm450, nm460, nm470, nm480, nm490, nm500, nm510, nm520, nm530, nm540, nm550, nm560, nm570, nm580, nm590, nm600, nm610, nm620, nm630, nm640, nm650, nm660, nm670, nm680, nm690, nm700, nm710, nm720, nm730) {
+    this.nm380 = nm380;
+    this.nm390 = nm390;
+    this.nm400 = nm400;
+    this.nm410 = nm410;
+    this.nm420 = nm420;
+    this.nm430 = nm430;
+    this.nm440 = nm440;
+    this.nm450 = nm450;
+    this.nm460 = nm460;
+    this.nm470 = nm470;
+    this.nm480 = nm480;
+    this.nm490 = nm490;
+    this.nm500 = nm500;
+    this.nm510 = nm510;
+    this.nm520 = nm520;
+    this.nm530 = nm530;
+    this.nm540 = nm540;
+    this.nm550 = nm550;
+    this.nm560 = nm560;
+    this.nm570 = nm570;
+    this.nm580 = nm580;
+    this.nm590 = nm590;
+    this.nm600 = nm600;
+    this.nm610 = nm610;
+    this.nm620 = nm620;
+    this.nm630 = nm630;
+    this.nm640 = nm640;
+    this.nm650 = nm650;
+    this.nm660 = nm660;
+    this.nm670 = nm670;
+    this.nm680 = nm680;
+    this.nm690 = nm690;
+    this.nm700 = nm700;
+    this.nm710 = nm710;
+    this.nm720 = nm720;
+    this.nm730 = nm730;
+}
 
 //Patch Object
 function Patch(LAB, XYZ, Density, sName) {
@@ -97,6 +135,16 @@ function Patch(LAB, XYZ, Density, sName) {
     this.SampleName = sName;
 }
 
+function ClipDecimal(number) {
+    var num;
+    if (number > 0) {
+        num = Math.floor(number * 100000) / 100000;
+    }
+    else {
+        num = 0;
+    }
+    return num;
+}
 
 
 // This is the spectral values of the paper used for density

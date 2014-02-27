@@ -392,13 +392,15 @@ function presentScanDonei1(scanner, mychart, final) {
     }
     g_Chart["Result"] = g_Chart["Result"].concat(results);
 
+   
     for (ind = 0; ind < g_Chart["NumberOfColumns"]; ind++) {
         var LABResults = results[ind]["CIELab"];
         var XYZResults = results[ind]["CIEXYZ"];
         var DensityResults = results[ind]["Density"];
+        var SpectralResults = results[ind]["Spectral"];
 
-        // var _Density = new Density(DensityResults[0].toFixed(5), DensityResults[1].toFixed(5), DensityResults[2].toFixed(5), DensityResults[3].toFixed(5));
         var _Density = new Density(ClipDecimal(DensityResults[0]), ClipDecimal(DensityResults[1]), ClipDecimal(DensityResults[2]), ClipDecimal(DensityResults[3]));
+        var _Spectral = new Spectral(ClipDecimal(SpectralResults[0]), ClipDecimal(SpectralResults[1]), ClipDecimal(SpectralResults[2]), ClipDecimal(SpectralResults[3]), ClipDecimal(SpectralResults[4]), ClipDecimal(SpectralResults[5]), ClipDecimal(SpectralResults[6]), ClipDecimal(SpectralResults[7]), ClipDecimal(SpectralResults[8]), ClipDecimal(SpectralResults[9]), ClipDecimal(SpectralResults[10]), ClipDecimal(SpectralResults[11]), ClipDecimal(SpectralResults[12]), ClipDecimal(SpectralResults[13]), ClipDecimal(SpectralResults[14]), ClipDecimal(SpectralResults[15]), ClipDecimal(SpectralResults[16]), ClipDecimal(SpectralResults[17]), ClipDecimal(SpectralResults[18]), ClipDecimal(SpectralResults[19]), ClipDecimal(SpectralResults[20]), ClipDecimal(SpectralResults[21]), ClipDecimal(SpectralResults[22]), ClipDecimal(SpectralResults[23]), ClipDecimal(SpectralResults[24]), ClipDecimal(SpectralResults[25]), ClipDecimal(SpectralResults[26]), ClipDecimal(SpectralResults[27]), ClipDecimal(SpectralResults[28]), ClipDecimal(SpectralResults[29]), ClipDecimal(SpectralResults[30]), ClipDecimal(SpectralResults[31]), ClipDecimal(SpectralResults[32]), ClipDecimal(SpectralResults[33]), ClipDecimal(SpectralResults[34]), ClipDecimal(SpectralResults[35]));
 
         mpatch = new Patch();
         mpatch.CiexyzX = XYZResults["X"].toFixed(2);
@@ -407,7 +409,9 @@ function presentScanDonei1(scanner, mychart, final) {
         mpatch.CielabL = LABResults["L"].toFixed(2);
         mpatch.CielabA = LABResults["A"].toFixed(2);
         mpatch.CielabB = LABResults["B"].toFixed(2);
-        mpatch.Density = _Density;
+        mpatch.Density = _Density;   
+        mpatch.Spectral = _Spectral;
+      
         mpatch.SampleName = mychart["ReferencePatch"][ind]["SampleName"];
         mpatch.PatchTypeID = mychart["ReferencePatch"][ind]["PatchTypeID"];
         MeasuredPatches.push(mpatch);
@@ -545,13 +549,3 @@ function presentProgressi1(scanner, mychart) {
     return "OK";
 }
 
-function ClipDecimal(number) {
-    var num;
-    if (number > 0) {
-        num = Math.floor(number * 100000) / 100000;
-    }
-    else {
-        num = 0;
-    }
-    return num;
-}

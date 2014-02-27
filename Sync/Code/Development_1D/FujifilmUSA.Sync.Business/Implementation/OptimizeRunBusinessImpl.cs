@@ -7,7 +7,6 @@ using FujifilmUSA.Sync.DataAccess;
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Business.ProfilerService;
-using FujifilmUSA.Sync.Business.CPSyncService;
 using FujifilmUSA.Sync.Business.Messages;
 using System.Xml.Linq;
 using FujifilmUSA.Sync.Business.CustomExceptions;
@@ -119,13 +118,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                           DcsData = new List<double>(),
                                           SourceProfile = new IccProfile() { ProfileData = sourceProfile },
                                           DestinationProfileOptions = new List<Parameter>(),
-                                          DlpOptions = new List<Parameter>()
+                                          ProfileOptions = new List<Parameter>()
                                       };
 
                     var measurementDataResponse =
                         BusinessFactory<IMeasurementBusiness>.
-                            CreateObject().
-                            GetMeasurementData(measurementIds);
+                            CreateObject().GetMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
                    
                     request.PcsData = measurementDataResponse.PcsData;
                     request.DcsData = measurementDataResponse.DcsData;
@@ -142,12 +140,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Destination profile option added to request object."), null, false);
 
-                    var dlpOptions = profilerOptionBusiness.GetProjectOption(projectId, EProfileType.DeviceLinkProfile);
-                    foreach (KeyValuePair<string, string> option in dlpOptions)
+                    var profileOptions = profilerOptionBusiness.GetProjectOption(projectId, EProfileType.DeviceLinkProfile);
+                    foreach (KeyValuePair<string, string> option in profileOptions)
                     {
-                        request.DlpOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                        request.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
                     }
-                    request.DlpOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
+                    request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
 
@@ -218,20 +216,19 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                           SourceProfile = new IccProfile() { ProfileData = sourceProfile },
                                           DestinationProfile = new IccProfile() { ProfileData = destinationProfile },
                                           DeviceLinkProfile = new IccProfile() { ProfileData = deviceLinkProfile },
-                                          Options = new List<Parameter>()
+                                          ProfileOptions = new List<Parameter>()
                                       };
 
-                    var measurementDataResponse = BusinessFactory<IMeasurementBusiness>.CreateObject().GetMeasurementData(measurementIds);
+                    var measurementDataResponse = BusinessFactory<IMeasurementBusiness>.CreateObject().GetMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
                     request.PCSData = measurementDataResponse.PcsData;
                     request.DCSData = measurementDataResponse.DcsData;
 
-                    var options = BusinessFactory<IProjectBusiness>.CreateObject().
-                        GetProjectOption(projectId, EProfileType.OptimizeDlp);
-                    foreach (KeyValuePair<string, string> option in options)
+                    var profileOptions = BusinessFactory<IProjectBusiness>.CreateObject().GetProjectOption(projectId, EProfileType.OptimizeDlp);
+                    foreach (KeyValuePair<string, string> option in profileOptions)
                     {
-                        request.Options.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                        request.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
                     }
-                    request.Options.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = description });
+                    request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = description });
 
                     using (var client = new ProfilerClient())
                     {
@@ -448,32 +445,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 () =>
                 {
                     MeasurementBusinessImpl measurementBusiness = new MeasurementBusinessImpl();
-                    MeasurementDataResponse measurementDataResponse = measurementBusiness.Get1DMeasurementData(measurementIds);
+                    MeasurementDataResponse measurementDataResponse = measurementBusiness.Get1DMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
 
                     ProfilerClient syncClient = new ProfilerClient();
 
                     CreateG7AlignmentCurveRequest alignmentCurveRequest = new CreateG7AlignmentCurveRequest();
-                    
 
-                    alignmentCurveRequest.DCSData = new List<double>();
-                    
 
+                    alignmentCurveRequest.DCSData = new List<double>();          //DSCData as CMYK Data           
                     for (int i = 0; i < measurementDataResponse.DcsData.Count; i++)
                     {
                         alignmentCurveRequest.DCSData.Add(measurementDataResponse.DcsData[i]);                        
                     }
 
-                    alignmentCurveRequest.PCSData = new List<double>();
-                    
+                    alignmentCurveRequest.PCSData = new List<double>();         //PCSData as either Spectral Data or XYZ Data            
                     for (int i = 0; i < measurementDataResponse.PcsData.Count; i++)
                     {
                         alignmentCurveRequest.PCSData.Add(measurementDataResponse.PcsData[i]);                        
-                    }
-                    alignmentCurveRequest.DensityData = new List<double>();                    
-                    for (int i = 0; i < measurementDataResponse.DensityData.Count; i++)
-                    {
-                        alignmentCurveRequest.DensityData.Add(measurementDataResponse.DensityData[i]);                        
-                    }
+                    }                   
 
                     alignmentCurveRequest.UseDLP = useDLP;
                     if (useDLP)
@@ -481,18 +470,20 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         var dlp = BusinessFactory<IProjectBusiness>.CreateObject().Get1DLastOptimizedDlp(projectId);                        
                         alignmentCurveRequest.DeviceLinkProfile = new IccProfile();
                         alignmentCurveRequest.DeviceLinkProfile.ProfileData = dlp;
+                    }                 
 
-                    }
+                    var ProfOption = BusinessFactory<IMeasurementBusiness>.CreateObject().GetTargetTVIData(projectId);
                     alignmentCurveRequest.ProfileOptions = new List<Parameter>();
-                    
-                    //No need to pass as in service we have put static values
-                    //var ProfOption = BusinessFactory<IProjectBusiness>.CreateObject().GetProjectOption(projectId);
-                    //foreach (KeyValuePair<string, string> option in ProfOption)
-                    //{
-                    //    alignmentCurveRequest.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
-                    //}
 
-                    alignmentCurveRequest.PCSDataType = PCSDataType.XYZ;//(PCSDataType)Enum.Parse(typeof(PCSDataType), pcsDataType.ToString());                    
+                    foreach (KeyValuePair<string, string> option in ProfOption)
+                    {
+                        alignmentCurveRequest.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                    }
+
+                    //alignmentCurveRequest.PCSDataType = PCSDataType.XYZ;//(PCSDataType)Enum.Parse(typeof(PCSDataType), pcsDataType.ToString());                    
+                    alignmentCurveRequest.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+                   
+                    //alignmentCurveRequest.DensityType = (ProfilerService.DensityType)SessionManager.Instance.CurrentProject.DensityType;  
 
                     CreateG7AlignmentCurveResponse syncClientResponse = new CreateG7AlignmentCurveResponse();                    
                     syncClientResponse = syncClient.CreateG7AlignmentCurve(alignmentCurveRequest);
@@ -527,34 +518,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 () =>
                 {
                     MeasurementBusinessImpl measurementBusiness = new MeasurementBusinessImpl();
-                    MeasurementDataResponse measurementDataResponse = measurementBusiness.Get1DMeasurementData(measurementIds);
+                    MeasurementDataResponse measurementDataResponse = measurementBusiness.Get1DMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
 
                     ProfilerClient syncClient = new ProfilerClient();
 
                     CreateISOAlignmentCurveRequest alignmentCurveRequest = new CreateISOAlignmentCurveRequest();
-                    
-
-                    alignmentCurveRequest.DCSData = new List<double>();
-                    
-
+                   
+                    alignmentCurveRequest.DCSData = new List<double>();    //DSCData as CMYK Data
                     for (int i = 0; i < measurementDataResponse.DcsData.Count; i++)
                     {
-                        alignmentCurveRequest.DCSData.Add(measurementDataResponse.DcsData[i]);
-                        
+                        alignmentCurveRequest.DCSData.Add(measurementDataResponse.DcsData[i]);                        
                     }
 
-                    alignmentCurveRequest.PCSData = new List<double>();                    
+                    alignmentCurveRequest.PCSData = new List<double>();    //PCSData as either Spectral Data or Density Data                
                     for (int i = 0; i < measurementDataResponse.PcsData.Count; i++)
                     {
                         alignmentCurveRequest.PCSData.Add(measurementDataResponse.PcsData[i]);                        
-                    }
-                    alignmentCurveRequest.DensityData = new List<double>();
-                    
-                    for (int i = 0; i < measurementDataResponse.DensityData.Count; i++)
-                    {
-                        alignmentCurveRequest.DensityData.Add(measurementDataResponse.DensityData[i]);                        
-                    }
-
+                    } 
+                 
                     alignmentCurveRequest.UseDLP = useDLP;
                     if (useDLP)
                     {
@@ -572,9 +553,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         alignmentCurveRequest.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
                     }
 
-                    alignmentCurveRequest.PCSDataType = PCSDataType.XYZ; // (PCSDataType)Enum.Parse(typeof(PCSDataType), pcsDataType.ToString());
-                    alignmentCurveRequest.DensityType = ProfilerService.DensityType.StatusE;
-                    
+                    //alignmentCurveRequest.PCSDataType = PCSDataType.Density; // (PCSDataType)Enum.Parse(typeof(PCSDataType), pcsDataType.ToString());
+                    alignmentCurveRequest.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+
+                    //alignmentCurveRequest.DensityType = ProfilerService.DensityType.StatusE;
+                    alignmentCurveRequest.DensityType = (ProfilerService.DensityType)SessionManager.Instance.CurrentProject.DensityType;    
+
                     CreateISOAlignmentCurveResponse syncClientResponse = new CreateISOAlignmentCurveResponse();                    
                     syncClientResponse = syncClient.CreateISOAlignmentCurve(alignmentCurveRequest);
 
@@ -714,7 +698,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return data == DBNull.Value ? null : (byte[])data;
         }
 
-        public void CreateDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
+        public void CreateSourceToSourceDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
         {
             //----This code is for Source to Source DLP generation-----------//
             Common.ImplementBusinessLogic(
@@ -725,24 +709,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             CreateObject().
                             GetSourceProfile(projectId);                  
 
-                    var request = new CreateDeviceLinkProfileRequest()
+                    var request = new CreateSourceToSourceDeviceLinkProfileRequest()
                     {
-                        SourceProfile = new IccProfile() { ProfileData = sourceProfile },                       
-                        DlpOptions = new List<Parameter>()
+                        SourceProfile = new IccProfile() { ProfileData = sourceProfile },
+                        ProfileOptions = new List<Parameter>()
                     };
               
                     var profilerOptionBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
-                 
-                    var dlpOptions = profilerOptionBusiness.GetProjectOption(projectId, EProfileType.DeviceLinkProfile);
-                    foreach (KeyValuePair<string, string> option in dlpOptions)
+
+                    var profileOptions = profilerOptionBusiness.GetProjectOption(projectId, EProfileType.DeviceLinkProfile);
+                    foreach (KeyValuePair<string, string> option in profileOptions)
                     {
-                        request.DlpOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                        request.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
                     }
-                    request.DlpOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
+                    request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
                   
                     using (var client = new ProfilerClient())
                     {
-                        var response = client.CreateDeviceLinkProfile(request);
+                        var response = client.CreateSourceToSourceDeviceLinkProfile(request);
                         if (response.DeviceLinkProfile.ProfileData == null)
                         {
                             throw new Exception("Device link profile has not been generated successfully from service for runId: " + optimizeRunId);
