@@ -444,6 +444,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else   //---For Sync 1D ISO or 4D ISO validation
                     {
+                        ChartResultSummary_Delta.Height = Unit.Pixel(30 * DT.Rows.Count);   //------Pass Chart height dynamically based on no. of Metric sums records  
+                       
                         List<decimal> levels = new List<decimal>();  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
                         for (int i = 0; i < DT.Rows.Count; i++)
                         {
