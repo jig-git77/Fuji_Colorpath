@@ -42,12 +42,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindProfileSource();
                 BindDensityType(); //Load DensityType 
                 BindPCSDataType(); //Load PCSDataType 
-                LoadProjectInfoFromSession();
+                //LoadProjectInfoFromSession();
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
                 {
                     trTargetLAB.Visible = false;
                     trProjectType.Visible = false;
                 }
+            }
+            if (Page.IsPostBack == false)
+            {
+                //---Only load project details from session when page is loaded first time---//
+                LoadProjectInfoFromSession();
             }
         }
         #endregion
@@ -113,10 +118,55 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
-                BindTargetLAB();
+                if (SessionManager.Instance.CurrentProject.ProjectTargetLAB == null || SessionManager.Instance.CurrentProject.ProjectTargetLAB.Count == 0)
+                {
+                    BindTargetLAB();
+                }
                 BindPCSDataType();
             }
         }
+
+        protected void chk_IsPaperScaling_CheckedChanged(object sender, EventArgs e)
+        {
+            Panel_PaperLAB.Enabled = chk_IsPaperScaling.Checked;
+        }
+
+        protected void btn_PaperApply_Click(object sender, EventArgs e)
+        {
+            //Load back data from Listview
+            this.ProjectTargetLABList = GetTargetLAB();
+
+            if (this.ProjectTargetLABList != null && this.ProjectTargetLABList.Count > 0)
+            {
+                CIELab Finallab = new CIELab(0, 0, 0);
+                CIEXYZ CurrentPaperxyz = new CIEXYZ(0, 0, 0);
+                CIEXYZ NewPaperxyz = new CIEXYZ(0, 0, 0);
+
+                //Create list for Paper Patch
+                List<Entity.CPSync1D.ProjectTargetLAB> PaperProjectTargetList = new List<Entity.CPSync1D.ProjectTargetLAB>();
+                PaperProjectTargetList = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList();
+
+                //Create list for new lab values
+                List<Entity.CPSync1D.ProjectTargetLAB> NewProjectTargetList = new List<Entity.CPSync1D.ProjectTargetLAB>();
+
+                //convert new Paper's LAB to XYZ
+                NewPaperxyz = ColorMath.LabtoXYZ(Convert.ToDouble(txtPaper_L.Text), Convert.ToDouble(txtPaper_a.Text), Convert.ToDouble(txtPaper_b.Text));
+
+                //convert current Paper's LAB to XYZ
+                CurrentPaperxyz = ColorMath.LabtoXYZ(Convert.ToDouble(PaperProjectTargetList[0].TargetL), Convert.ToDouble(PaperProjectTargetList[0].TargetA), Convert.ToDouble(PaperProjectTargetList[0].TargetB));
+
+                for (int i = 0; i < this.ProjectTargetLABList.Count; i++)
+                {
+                    Finallab = ColorMath.SubstrateRelCalc(CurrentPaperxyz.X, CurrentPaperxyz.Y, CurrentPaperxyz.Z, NewPaperxyz.X, NewPaperxyz.Y, NewPaperxyz.Z, Convert.ToDouble(ProjectTargetLABList[i].TargetL), Convert.ToDouble(ProjectTargetLABList[i].TargetA), Convert.ToDouble(ProjectTargetLABList[i].TargetB));
+                    NewProjectTargetList.Add(new Entity.CPSync1D.ProjectTargetLAB() { PatchType = this.ProjectTargetLABList[i].PatchType, TargetL = (decimal)Finallab.L, TargetA = (decimal)Finallab.A, TargetB = (decimal)Finallab.B });
+                }
+                //Assign new ProjectTargetLAB list
+                this.ProjectTargetLABList = NewProjectTargetList;
+                lvTargetLAB.DataSource = this.ProjectTargetLABList;
+                lvTargetLAB.DataBind();
+            }
+        }
+
         #endregion
 
         #region Method
@@ -131,6 +181,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbProjectType.SelectedValue = SessionManager.Instance.CurrentProject.ProjectTypeId.ToString();
                 cmbProjectType_SelectedIndexChanged(null, null);
+                if (SessionManager.Instance.CurrentProject.ProjectTargetLAB != null && SessionManager.Instance.CurrentProject.ProjectTargetLAB.Count > 0) //If open the existing project, then load from session
+                {
+                    //Load Target LAB Listview
+                    lvTargetLAB.DataSource = SessionManager.Instance.CurrentProject.ProjectTargetLAB;
+                    lvTargetLAB.DataBind();
+                    //Load Paper LAB values into top Textboxes from List
+                    txtPaper_L.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetL.ToString();   //Paper L* Value
+                    txtPaper_a.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetA.ToString();   //Paper a* Value
+                    txtPaper_b.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetB.ToString();   //Paper b* Value
+                }
             }
             cmbDensityType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.DensityType).ToString(); //DensityType Selection
             cmbPCSDataType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.PCSDataTypes).ToString(); //PCSDataType Selection
@@ -172,8 +232,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     itemLAB.TargetB = Convert.ToDecimal(txtPatchTargetB.Text);
 
                 HiddenField hdnPatchTypeId = item.FindControl("hdnPatchTypeId") as HiddenField;
+                Label lblPatch = item.FindControl("lblPatch") as Label;
                 if (hdnPatchTypeId != null)
-                    itemLAB.PatchType = new PatchType() { PatchTypeId = Convert.ToInt16(hdnPatchTypeId.Value) };
+                    itemLAB.PatchType = new PatchType() { PatchTypeId = Convert.ToInt16(hdnPatchTypeId.Value), Type = lblPatch.Text };
 
                 targetLAB.Add(itemLAB);
             }
@@ -188,6 +249,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterTargetColorspace.GetTargetLABList();
             lvTargetLAB.DataSource = this.ProjectTargetLABList;
             lvTargetLAB.DataBind();
+            
+            //Load Paper LAB values into top Textboxes from List
+            txtPaper_L.Text = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetL.ToString();   //Paper L* Value
+            txtPaper_a.Text = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetA.ToString();   //Paper a* Value
+            txtPaper_b.Text = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetB.ToString();   //Paper b* Value
         }
 
         private void BindDensityType()
@@ -208,7 +274,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbPCSDataType.DataTextField = "Value";
             cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>();
      
-            if (cmbProjectType.SelectedItem.Text == "G7" || SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D) //If 1D then G7 type, or foe all other Projects 4D,etc...
+            if (cmbProjectType.SelectedItem.Text == "G7" || SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D) //If 1D then G7 type, or for all other Projects 4D,etc...
             {
                 cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>().Where(p => p.Value != "Density").ToDictionary(p => p.Key, p => p.Value);
             }
@@ -233,6 +299,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D);
             }
         }
-        #endregion
+        #endregion        
+      
     }
 }

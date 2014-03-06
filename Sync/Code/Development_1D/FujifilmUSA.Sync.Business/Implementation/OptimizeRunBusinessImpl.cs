@@ -148,7 +148,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
-
+                    
                     using (var client = new ProfilerClient())
                     {
                         var response = client.CreateDestinationAndDeviceLinkProfile(request);

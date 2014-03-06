@@ -8,7 +8,11 @@ textarea {
  .textwidth50
     {
         width: 50px;
-    }
+    }    
+.textwidth40
+    {
+        width: 40px;
+    }    
 </style>
 
 <div class="head">
@@ -120,17 +124,38 @@ textarea {
                             <div class="combopart">
                                 <div class="header">
                                     <div class="content">
-                                        <div class="text" style="float: left;">
-                                            <label><asp:Localize runat="server" Text="Color Metric" 
+                                        <div class="text" style="float: left;">                                            
+                                            <table width="100%">
+                                                <tr>
+                                         <td style="width:150px;">
+                                                <label><asp:Localize runat="server" Text="Color Metric" 
                                                 ID="locTargetLAB"></asp:Localize></label>
+                                            </td>
+                                            <td align="right" style="width:240px;">
+                                                <asp:CheckBox ID="chk_IsPaperScaling" runat="server" Text="Use Paper Scaling" 
+                                                    AutoPostBack="True" oncheckedchanged="chk_IsPaperScaling_CheckedChanged" />
+                                            </td>
+                                            <td align="right">
+                                                 <asp:Panel ID="Panel_PaperLAB" Style="padding: 5px" runat="server" BorderStyle="None" Enabled="false">
+                                                    L*<asp:TextBox ID="txtPaper_L" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                                    &nbsp;a*<asp:TextBox ID="txtPaper_a" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                                    &nbsp;b*<asp:TextBox ID="txtPaper_b" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                                    &nbsp;<asp:Button ID="btn_PaperApply" runat="server" Text="Apply!" 
+                                                         onclick="btn_PaperApply_Click" />
+                                                 </asp:Panel>
+                                            </td>
+                                        </tr>
+                                            </table>
                                         </div>
                                         <div class="clear">
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <asp:Panel ID="panel1" Style="padding: 5px" runat="server"
                                 BorderStyle="None" Enabled="false">
-                                    <asp:ListView ID="lvTargetLAB" runat="server" ItemPlaceholderID="phItems">
+                                                                            
+                                     <asp:ListView ID="lvTargetLAB" runat="server" ItemPlaceholderID="phItems">
                                         <LayoutTemplate>
                                             <table border="0" cellspacing="2" cellpadding="0" width="50%">
                                                   <tr align="center" style="line-height:15px;">
@@ -151,12 +176,13 @@ textarea {
                                                 <td style="width: 150px;"><asp:Label ID="lblPatch" runat="server" Text='<%# Eval("PatchType.Type") %>'></asp:Label>
                                                     <asp:HiddenField ID="hdnPatchTypeId" runat="server" Value='<%# Eval("PatchType.PatchTypeId") %>' />
                                                 </td>
-                                                <td><asp:TextBox ID="txtPatchTargetL" runat="server" Text='<%# Eval("TargetL") %>' CssClass="textwidth50"></asp:TextBox></td>
-                                                <td><asp:TextBox ID="txtPatchTargetA" runat="server" Text='<%# Eval("TargetA") %>' CssClass="textwidth50"></asp:TextBox></td>
-                                                <td><asp:TextBox ID="txtPatchTargetB" runat="server" Text='<%# Eval("TargetB") %>' CssClass="textwidth50"></asp:TextBox></td>
+                                                <td><asp:TextBox ID="txtPatchTargetL" runat="server" Text='<%# string.Format("{0:n2}", Eval("TargetL")) %>' CssClass="textwidth50"></asp:TextBox></td>
+                                                <td><asp:TextBox ID="txtPatchTargetA" runat="server" Text='<%# string.Format("{0:n2}", Eval("TargetA")) %>' CssClass="textwidth50"></asp:TextBox></td>
+                                                <td><asp:TextBox ID="txtPatchTargetB" runat="server" Text='<%# string.Format("{0:n2}", Eval("TargetB")) %>' CssClass="textwidth50"></asp:TextBox></td>
                                             </tr>
                                         </ItemTemplate>
-                                    </asp:ListView>
+                                    </asp:ListView>                                    
+                                          
                                 </asp:Panel>
                             </div>
                     </div>
