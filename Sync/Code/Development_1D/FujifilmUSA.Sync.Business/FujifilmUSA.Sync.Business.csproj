@@ -187,20 +187,20 @@
     <None Include="Service References\ProfilerService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ProfilerService\Profiler1.xsd">
+    <None Include="Service References\ProfilerService\Profiler1.wsdl" />
+    <None Include="Service References\ProfilerService\Profiler5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler11.wsdl" />
-    <None Include="Service References\ProfilerService\Profiler11.xsd">
+    <None Include="Service References\ProfilerService\Profiler51.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler12.xsd">
+    <None Include="Service References\ProfilerService\Profiler52.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler13.xsd">
+    <None Include="Service References\ProfilerService\Profiler53.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler14.xsd">
+    <None Include="Service References\ProfilerService\Profiler54.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ProfilerService\Reference.svcmap">
@@ -209,7 +209,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ProfilerService\Profiler11.disco" />
+    <None Include="Service References\ProfilerService\Profiler1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

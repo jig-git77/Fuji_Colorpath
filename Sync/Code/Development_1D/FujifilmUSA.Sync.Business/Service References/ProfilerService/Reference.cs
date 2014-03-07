@@ -29,6 +29,9 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> DestinationProfileOptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FujifilmUSA.Sync.Business.ProfilerService.PCSDataType PCSDataTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<double> PcsDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -69,6 +72,19 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
                 if ((object.ReferenceEquals(this.DestinationProfileOptionsField, value) != true)) {
                     this.DestinationProfileOptionsField = value;
                     this.RaisePropertyChanged("DestinationProfileOptions");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FujifilmUSA.Sync.Business.ProfilerService.PCSDataType PCSDataType {
+            get {
+                return this.PCSDataTypeField;
+            }
+            set {
+                if ((this.PCSDataTypeField.Equals(value) != true)) {
+                    this.PCSDataTypeField = value;
+                    this.RaisePropertyChanged("PCSDataType");
                 }
             }
         }
@@ -226,6 +242,20 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PCSDataType", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts")]
+    public enum PCSDataType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Density = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        XYZ = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Spectral = 2,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -688,6 +718,9 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         private System.Collections.Generic.List<double> PCSDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FujifilmUSA.Sync.Business.ProfilerService.PCSDataType PCSDataTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -751,6 +784,19 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
                 if ((object.ReferenceEquals(this.PCSDataField, value) != true)) {
                     this.PCSDataField = value;
                     this.RaisePropertyChanged("PCSData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FujifilmUSA.Sync.Business.ProfilerService.PCSDataType PCSDataType {
+            get {
+                return this.PCSDataTypeField;
+            }
+            set {
+                if ((this.PCSDataTypeField.Equals(value) != true)) {
+                    this.PCSDataTypeField = value;
+                    this.RaisePropertyChanged("PCSDataType");
                 }
             }
         }
@@ -977,20 +1023,6 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PCSDataType", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts")]
-    public enum PCSDataType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Density = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        XYZ = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Spectral = 2,
-    }
-    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CreateISOAlignmentCurveRequest", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
@@ -1159,6 +1191,9 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         private System.Collections.Generic.List<double> PCSDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FujifilmUSA.Sync.Business.ProfilerService.PCSDataType PCSDataTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptionsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -1193,6 +1228,19 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
                 if ((object.ReferenceEquals(this.PCSDataField, value) != true)) {
                     this.PCSDataField = value;
                     this.RaisePropertyChanged("PCSData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FujifilmUSA.Sync.Business.ProfilerService.PCSDataType PCSDataType {
+            get {
+                return this.PCSDataTypeField;
+            }
+            set {
+                if ((this.PCSDataTypeField.Equals(value) != true)) {
+                    this.PCSDataTypeField = value;
+                    this.RaisePropertyChanged("PCSDataType");
                 }
             }
         }

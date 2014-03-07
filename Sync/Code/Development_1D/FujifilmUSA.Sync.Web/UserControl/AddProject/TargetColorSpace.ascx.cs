@@ -39,10 +39,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lnkbtnProjectDescription.Visible = IsXmfNewProject;
             if (ViewState[_vsPrintStandardType] == null)
             {
+                btn_PaperClear.Visible = false;
                 BindProfileSource();
                 BindDensityType(); //Load DensityType 
-                BindPCSDataType(); //Load PCSDataType 
-                //LoadProjectInfoFromSession();
+                BindPCSDataType(); //Load PCSDataType              
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
                 {
                     trTargetLAB.Visible = false;
@@ -165,6 +165,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lvTargetLAB.DataSource = this.ProjectTargetLABList;
                 lvTargetLAB.DataBind();
             }
+            btn_PaperApply.Visible = false;
+            btn_PaperClear.Visible = true;
         }
 
         #endregion
@@ -183,6 +185,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbProjectType_SelectedIndexChanged(null, null);
                 if (SessionManager.Instance.CurrentProject.ProjectTargetLAB != null && SessionManager.Instance.CurrentProject.ProjectTargetLAB.Count > 0) //If open the existing project, then load from session
                 {
+                    chk_IsPaperScaling.Enabled = false; //Disable Paper Scaling when project is already created
                     //Load Target LAB Listview
                     lvTargetLAB.DataSource = SessionManager.Instance.CurrentProject.ProjectTargetLAB;
                     lvTargetLAB.DataBind();
@@ -300,6 +303,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion        
-      
+
+        protected void btn_PaperClear_Click(object sender, EventArgs e)
+        {
+            BindTargetLAB();    //Apply old Target LAB from Main look up table
+            btn_PaperApply.Visible = true; 
+            btn_PaperClear.Visible = false;
+        }      
     }
 }

@@ -124,38 +124,53 @@ textarea {
                             <div class="combopart">
                                 <div class="header">
                                     <div class="content">
-                                        <div class="text" style="float: left;">                                            
-                                            <table width="100%">
-                                                <tr>
-                                         <td style="width:150px;">
+                                        <div class="text" style="float: left;">  
                                                 <label><asp:Localize runat="server" Text="Color Metric" 
                                                 ID="locTargetLAB"></asp:Localize></label>
-                                            </td>
-                                            <td align="right" style="width:240px;">
-                                                <asp:CheckBox ID="chk_IsPaperScaling" runat="server" Text="Use Paper Scaling" 
-                                                    AutoPostBack="True" oncheckedchanged="chk_IsPaperScaling_CheckedChanged" />
-                                            </td>
-                                            <td align="right">
-                                                 <asp:Panel ID="Panel_PaperLAB" Style="padding: 5px" runat="server" BorderStyle="None" Enabled="false">
-                                                    L*<asp:TextBox ID="txtPaper_L" runat="server" CssClass="textwidth40"></asp:TextBox>
-                                                    &nbsp;a*<asp:TextBox ID="txtPaper_a" runat="server" CssClass="textwidth40"></asp:TextBox>
-                                                    &nbsp;b*<asp:TextBox ID="txtPaper_b" runat="server" CssClass="textwidth40"></asp:TextBox>
-                                                    &nbsp;<asp:Button ID="btn_PaperApply" runat="server" Text="Apply!" 
-                                                         onclick="btn_PaperApply_Click" />
-                                                 </asp:Panel>
-                                            </td>
-                                        </tr>
-                                            </table>
                                         </div>
                                         <div class="clear">
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <asp:Panel ID="panel1" Style="padding: 5px" runat="server"
-                                BorderStyle="None" Enabled="false">
-                                                                            
-                                     <asp:ListView ID="lvTargetLAB" runat="server" ItemPlaceholderID="phItems">
+                             
+                                     
+                                     <table width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td style="padding-left:8px;">
+                                                <asp:CheckBox ID="chk_IsPaperScaling" runat="server" CssClass="checkbox" Text="  Relative Paper Scaling" 
+                                                    AutoPostBack="True" oncheckedchanged="chk_IsPaperScaling_CheckedChanged" />
+                                            </td>
+                                            <td>
+                                                <asp:Panel ID="Panel_PaperLAB" Style="padding: 5px" runat="server" BorderStyle="None" Enabled="false">
+                                                    New Paper Values:
+                                                    L*<asp:TextBox ID="txtPaper_L" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                                        <asp:RangeValidator ID="RangeValidator2" runat="server" 
+                                                            ControlToValidate="txtPaper_L" ErrorMessage="*" ForeColor="Red" 
+                                                             ValidationGroup="a" MinimumValue="0" MaximumValue="100" Type="Double"></asp:RangeValidator>
+                                                    &nbsp;
+                                                    a*<asp:TextBox ID="txtPaper_a" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                                        <asp:RangeValidator ID="RangeValidator3" runat="server" 
+                                                            ControlToValidate="txtPaper_a" ErrorMessage="*" ForeColor="Red" 
+                                                             ValidationGroup="a" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
+                                                    &nbsp;
+                                                    b*<asp:TextBox ID="txtPaper_b" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                                        <asp:RangeValidator ID="RangeValidator1" runat="server" 
+                                                            ControlToValidate="txtPaper_b" ErrorMessage="*" ForeColor="Red" 
+                                                             ValidationGroup="a" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
+                                                    &nbsp;
+                                                    <asp:Button ID="btn_PaperApply" runat="server" Text="Apply!" 
+                                                         onclick="btn_PaperApply_Click" ValidationGroup="a" />
+                                                    <asp:Button ID="btn_PaperClear" runat="server" onclick="btn_PaperClear_Click" 
+                                                         Text="Reset" />
+                                                 </asp:Panel>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                               <asp:Panel ID="panel1" Style="padding: 5px" runat="server"
+                                                 BorderStyle="None" Enabled="false">
+                                                    <asp:ListView ID="lvTargetLAB" runat="server" ItemPlaceholderID="phItems">
                                         <LayoutTemplate>
                                             <table border="0" cellspacing="2" cellpadding="0" width="50%">
                                                   <tr align="center" style="line-height:15px;">
@@ -181,9 +196,17 @@ textarea {
                                                 <td><asp:TextBox ID="txtPatchTargetB" runat="server" Text='<%# string.Format("{0:n2}", Eval("TargetB")) %>' CssClass="textwidth50"></asp:TextBox></td>
                                             </tr>
                                         </ItemTemplate>
-                                    </asp:ListView>                                    
+                                    </asp:ListView>
+                                              </asp:Panel>
+                                            </td>
+                                        </tr>
+                                     </table>
+                                     
+                                     
+                                                                                           
+                                                                         
                                           
-                                </asp:Panel>
+                               
                             </div>
                     </div>
                     <div class="section_bottom">

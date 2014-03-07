@@ -147,6 +147,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
                     request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
 
+                    request.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
                     
                     using (var client = new ProfilerClient())
@@ -229,6 +231,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         request.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
                     }
                     request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = description });
+
+                    request.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
 
                     using (var client = new ProfilerClient())
                     {
