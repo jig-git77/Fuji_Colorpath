@@ -59,7 +59,16 @@ namespace ColorPathSync.Business
                 var dcsDataSet = new CLVectorDataSet();
                 var pcsDataSet = new CLVectorDataSet();
                 CrossXColor.CLInitVectorDataSet(dcsDataSet, CrossXColor.icSigCmykData, request.DCSData, request.DCSData.Length);
-                CrossXColor.CLInitVectorDataSet(pcsDataSet, CrossXColor.icSigXYZData, request.PCSData, request.PCSData.Length);
+
+                switch (request.PCSDataType)
+                {
+                    case DataContracts.PCSDataType.XYZ:
+                        CrossXColor.CLInitVectorDataSet(pcsDataSet, CrossXColor.icSigXYZData, request.PCSData, request.PCSData.Length);
+                        break;
+                    case DataContracts.PCSDataType.Spectral:
+                        CrossXColor.CLInitVectorDataSet(pcsDataSet, CrossXColor.clRemission, request.PCSData, request.PCSData.Length);
+                        break;
+                }
 
                 if (request.PCSData.Length <= 0)
                 {

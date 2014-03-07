@@ -24,5 +24,8 @@ namespace ColorPathSync.MessageContracts
 
         [DataMember]
         public IccProfile SourceProfile { get; set; }
+
+        [DataMember]
+        public PCSDataType PCSDataType { get; set; }
     }
 }

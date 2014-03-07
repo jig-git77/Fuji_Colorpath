@@ -30,7 +30,7 @@ namespace ColorPathSync.Business
                         CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.icSigXYZData, request.PCSData, request.PCSData.Length);
                         break;                
                     case DataContracts.PCSDataType.Spectral:
-                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.clSpectral, request.PCSData, request.PCSData.Length);
+                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.clRemission, request.PCSData, request.PCSData.Length);
                         break;
                 }
                 

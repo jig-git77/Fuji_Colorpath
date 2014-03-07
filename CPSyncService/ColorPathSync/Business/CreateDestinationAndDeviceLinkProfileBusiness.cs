@@ -48,7 +48,16 @@ namespace ColorPathSync.Business
                 var dcsDataSet = new CLVectorDataSet();
                 var pcsDataSet = new CLVectorDataSet();
                 CrossXColor.CLInitVectorDataSet(dcsDataSet, CrossXColor.icSigCmykData, request.DcsData, request.DcsData.Length);
-                CrossXColor.CLInitVectorDataSet(pcsDataSet, CrossXColor.icSigXYZData, request.PcsData, request.PcsData.Length);
+
+                switch (request.PCSDataType)
+                {
+                    case DataContracts.PCSDataType.XYZ:
+                        CrossXColor.CLInitVectorDataSet(pcsDataSet, CrossXColor.icSigXYZData, request.PcsData, request.PcsData.Length);
+                        break;
+                    case DataContracts.PCSDataType.Spectral:
+                        CrossXColor.CLInitVectorDataSet(pcsDataSet, CrossXColor.clRemission, request.PcsData, request.PcsData.Length);
+                        break;
+                }
 
                 if (request.PcsData.Length <= 0)
                 {
@@ -61,6 +70,7 @@ namespace ColorPathSync.Business
                 request.DestinationProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
                 err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                 err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
+                err = CrossXColor.CLSetProfilerOption(profiler, "SaveProfilerData", "1");
 
                 CrossXColor.CLSetProfilerData(profiler, request.DcsData.Length / 4, dcsDataSet, pcsDataSet);
 
