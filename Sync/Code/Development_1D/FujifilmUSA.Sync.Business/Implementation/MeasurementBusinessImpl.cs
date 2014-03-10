@@ -1734,9 +1734,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return TVIChartDetails;
         }
 
-        public List<AnalyzeChart_DotGain> GetMaxSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        public DataTable GetMaxSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
-            var TVIChartDetails = new List<AnalyzeChart_DotGain>();
+            var TVIChartDetails = new DataTable();
+            //var TVIChartDetails = new List<AnalyzeChart_DotGain>();
             string storedProc = "CPSync.GetChartData_ISO_DotGain";  //----ISO Sync1D type  
             if (IsVerification)
                 storedProc = "CPSyncV.GetVChartData_ISO_DotGain";
@@ -1749,13 +1750,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             GetDsResult(
                                 storedProc,
                                 new object[] { MeasurementId });
-                    TVIChartDetails = dsMeasurements.Tables[3].
-                         AsEnumerable().
-                        Select(x => new AnalyzeChart_DotGain()
-                        {
-                            TonePct = DataReader.ReadDecimal(x, "TonePct"),
-                            MaxSpread = DataReader.ReadDecimal(x, "MaxSpread")
-                        }).ToList();
+                    TVIChartDetails = dsMeasurements.Tables[3];
+
+                    //TVIChartDetails = dsMeasurements.Tables[3].
+                    //     AsEnumerable().
+                    //    Select(x => new AnalyzeChart_DotGain()
+                    //    {
+                    //        TonePct = DataReader.ReadDecimal(x, "TonePct"),
+                    //        MaxSpread = DataReader.ReadDecimal(x, "MaxSpread")
+                    //    }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_ISO_TVI3"));
             return TVIChartDetails;

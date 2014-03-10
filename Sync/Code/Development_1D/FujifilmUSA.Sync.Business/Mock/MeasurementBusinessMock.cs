@@ -191,9 +191,9 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<AnalyzeChart_DotGain>();
         }
-        public List<AnalyzeChart_DotGain> GetMaxSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        public DataTable GetMaxSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
-            return new List<AnalyzeChart_DotGain>();
+            return new DataTable();
         }
         #endregion
 

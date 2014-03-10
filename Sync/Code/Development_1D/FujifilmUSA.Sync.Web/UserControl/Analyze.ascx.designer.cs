@@ -1012,31 +1012,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_SummaryISODotgain;
         
         /// <summary>
-        /// lblMaxSpread25 control.
+        /// rgChromVariation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMaxSpread25;
-        
-        /// <summary>
-        /// lblMaxSpread50 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMaxSpread50;
-        
-        /// <summary>
-        /// lblMaxSpread75 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMaxSpread75;
+        protected global::Telerik.Web.UI.RadGrid rgChromVariation;
         
         /// <summary>
         /// UpdatePanel1 control.

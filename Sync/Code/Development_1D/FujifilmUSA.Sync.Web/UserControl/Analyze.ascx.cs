@@ -1804,7 +1804,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private void FillSpreadChart(List<AnalyzeChart_DotGain> DTSpread, List<AnalyzeChart_DotGain> DTSpreadSplineRange, List<AnalyzeChart_DotGain> DTMaxSpreasTable)
+        private void FillSpreadChart(List<AnalyzeChart_DotGain> DTSpread, List<AnalyzeChart_DotGain> DTSpreadSplineRange, DataTable DTMaxSpreasTable)
         {
             try
             {
@@ -1916,17 +1916,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #endregion
 
                 #region Max Spread Table
-                if (DTMaxSpreasTable != null && DTMaxSpreasTable.Count > 0)
+                if (DTMaxSpreasTable != null && DTMaxSpreasTable.Rows.Count > 0)
                 {
-                    for (int i = 0; i < DTMaxSpreasTable.Count; i++)
-                    {
-                        if (DTMaxSpreasTable[i].TonePct.ToString() == "25")
-                            lblMaxSpread25.Text = DTMaxSpreasTable[i].MaxSpread.ToString();
-                        else if (DTMaxSpreasTable[i].TonePct.ToString() == "50")
-                            lblMaxSpread50.Text = DTMaxSpreasTable[i].MaxSpread.ToString();
-                        else if (DTMaxSpreasTable[i].TonePct.ToString() == "75")
-                            lblMaxSpread75.Text = DTMaxSpreasTable[i].MaxSpread.ToString();
-                    }
+                    rgChromVariation.DataSource = DTMaxSpreasTable;
+                    rgChromVariation.DataBind();                  
                 }
                 #endregion
             }
@@ -2762,6 +2755,43 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        protected void rgChromVariation_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            if (e.Item is GridDataItem)
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+                //----If any TVI Tone value is 0, then hide that column from list (ex., either 20, 40, 60 and 80% can be display or either 25, 50, 75% display on list; not both at same time)
+                if (item["Tone20"].Text == "0.00")
+                {
+                    rgChromVariation.Columns[0].Visible = false;
+                }
+                if (item["Tone25"].Text == "0.00")
+                {
+                    rgChromVariation.Columns[1].Visible = false;
+                }
+                if (item["Tone40"].Text == "0.00")
+                {
+                    rgChromVariation.Columns[2].Visible = false;
+                }
+                if (item["Tone50"].Text == "0.00")
+                {
+                    rgChromVariation.Columns[3].Visible = false;
+                }
+                if (item["Tone60"].Text == "0.00")
+                {
+                    rgChromVariation.Columns[4].Visible = false;
+                }
+                if (item["Tone75"].Text == "0.00")
+                {
+                    rgChromVariation.Columns[5].Visible = false;
+                }
+                if (item["Tone80"].Text == "0.00")
+                {
+                    rgChromVariation.Columns[6].Visible = false;
+                }
+            }
+        }
+
         protected void btnExcelExport_Click(object sender, EventArgs e)
         {
             ConfigureExport();
@@ -2943,10 +2973,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_DotGain> DTISOTVIChart { get; set; }
         public List<Entity.AnalyzeChart_DotGain> DTSpreadChartData { get; set; }
         public List<Entity.AnalyzeChart_DotGain> DTSpreadSplineRangeChartData { get; set; }
-        public List<Entity.AnalyzeChart_DotGain> DTMaxSpreadChartData { get; set; }
+        public DataTable DTMaxSpreadChartData { get; set; }
 
         #endregion     
 
-
+      
     }
 }

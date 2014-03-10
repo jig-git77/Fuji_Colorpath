@@ -2105,31 +2105,46 @@
                                         <tr>
                                             <td style="padding-left: 40px">
                                                 <table class="TDBOX" border="0" cellpadding="5" cellspacing="0" width="90%">
+                                                 
                                                     <tr class="TRTABLEBOX">
-                                                        <td style="width: 23%;">
-                                                        </td>
-                                                        <td style="width: 26%;">
-                                                            25%
-                                                        </td>
-                                                        <td style="width: 25%;">
-                                                            50%
-                                                        </td>
-                                                        <td style="width: 26%;">
-                                                            75%
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
                                                         <td class="TDTABLEBOXLEFT">
                                                             <b>Chromatic Variation</b>
-                                                        </td>
-                                                        <td class="TDTABLEBOX">
-                                                            <asp:Label ID="lblMaxSpread25" runat="server" Text=""></asp:Label>
-                                                        </td>
-                                                        <td class="TDTABLEBOX">
-                                                            <asp:Label ID="lblMaxSpread50" runat="server" Text=""></asp:Label>
-                                                        </td>
-                                                        <td class="TDTABLEBOX">
-                                                            <asp:Label ID="lblMaxSpread75" runat="server" Text=""></asp:Label>
+                                                        </td>                                                       
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4">
+                                                             <telerik:RadGrid ID="rgChromVariation" runat="server" 
+                                                                AutoGenerateColumns="False" EnableLinqExpressions="False"                     
+                                                                CellSpacing="0" GridLines="None" OnItemDataBound="rgChromVariation_ItemDataBound">   
+                                                                    <HeaderStyle Font-Bold="True" />  
+                                                                    <ItemStyle BackColor="#F2F2F2" />
+                                                                    <AlternatingItemStyle BackColor="#FFFFFF" />                    
+                                                                        <MasterTableView> 
+                                                                            <Columns>
+                                                                                <telerik:GridBoundColumn DataField="Tone20" HeaderText="20" 
+                                                                                    UniqueName="Tone20">
+                                                                                </telerik:GridBoundColumn>
+                                                                                <telerik:GridBoundColumn DataField="Tone25" HeaderText="25" 
+                                                                                    UniqueName="Tone25">
+                                                                                </telerik:GridBoundColumn>
+                                                                                <telerik:GridBoundColumn DataField="Tone40" HeaderText="40" 
+                                                                                    UniqueName="Tone40">
+                                                                                </telerik:GridBoundColumn>     
+                                                                                <telerik:GridBoundColumn DataField="Tone50" HeaderText="50" 
+                                                                                    UniqueName="Tone50">
+                                                                                </telerik:GridBoundColumn>    
+                                                                                <telerik:GridBoundColumn DataField="Tone60" HeaderText="60" 
+                                                                                    UniqueName="Tone60">
+                                                                                </telerik:GridBoundColumn>     
+                                                                                <telerik:GridBoundColumn DataField="Tone75" HeaderText="75" 
+                                                                                    UniqueName="Tone75">
+                                                                                </telerik:GridBoundColumn>     
+                                                                                <telerik:GridBoundColumn DataField="Tone80" HeaderText="80" 
+                                                                                    UniqueName="Tone80">
+                                                                                </telerik:GridBoundColumn>                                                
+                                                                            </Columns>  
+                                                                        </MasterTableView> 
+                                                            </telerik:RadGrid>
                                                         </td>
                                                     </tr>
                                                 </table>
