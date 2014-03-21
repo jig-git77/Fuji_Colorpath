@@ -119,7 +119,7 @@
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtProfileDescription" runat="server" MaxLength="150" Width="300px"
+                                        <asp:TextBox ID="txtProfileDescription" runat="server" MaxLength="200" Width="300px"
                                             Height="50px" TextMode="MultiLine" 
                                             meta:resourcekey="txtProfileDescriptionResource1"></asp:TextBox>
                                     </div>
@@ -147,7 +147,7 @@
                                             ForeColor="Red" ValidationGroup="vgSourceProfile" 
                                             meta:resourcekey="rfvProfileResource1"><ucValidationContainer:ValidationContainer ID="rfvProfileContainer" runat="server"
                                                 ValidationMsg="Please provide source profile file." Size="200" />
-</asp:RequiredFieldValidator>     
+                                        </asp:RequiredFieldValidator>     
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -182,13 +182,13 @@
                                                 OnClick="lbtnSave_Click">
                                                     <span> <asp:Localize runat="server" Text="Save" ID="locSave" 
                                                 meta:resourcekey="locSaveResource1"></asp:Localize>
- </span>
+                                                    </span>
                                             </asp:LinkButton>
                                             <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" 
                                                 PostBackUrl="~/SourceProfileManagement.aspx">
                                                     <span> <asp:Localize ID="locCancel" runat="server" Text="Cancel" 
                                                 meta:resourcekey="locCancelResource1"></asp:Localize>
- </span>
+                                                    </span>
                                             </asp:LinkButton>
                                         </div>
                                     </div>

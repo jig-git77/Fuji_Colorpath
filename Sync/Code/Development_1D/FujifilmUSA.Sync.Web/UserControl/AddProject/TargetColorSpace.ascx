@@ -79,7 +79,7 @@ textarea {
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <asp:TextBox ID="txtProfileDescription" runat="server" Width="100%" Height="100px"
+                                <asp:TextBox ID="txtProfileDescription" runat="server" Width="100%" Height="50px"
                                     TextMode="MultiLine" Enabled="False" ReadOnly="True" 
                                     meta:resourcekey="txtProfileDescriptionResource1"></asp:TextBox>
                             </td>

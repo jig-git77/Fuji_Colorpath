@@ -416,15 +416,23 @@
                                                             ></asp:Label>
                                                     </td>
                                                 </tr>
-                                                <tr class="White">   
+                                                 <tr class="White">   
+                                                    <td style="font-size:13px;"><asp:Localize Text="MeasurementID:" ID="Localize1" runat="server" meta:resourcekey="locMeasurementIDResource1"></asp:Localize> </td>                                  
+                                                    <td>
+                                                         <asp:Label ID="lblMeasurementID" runat="server" 
+                                                            Text='<%# Eval("MeasurementID") %>' 
+                                                            ></asp:Label>
+                                                    </td>
+                                                </tr>
+                                                <tr class="Gray">   
                                                     <td style="font-size:13px;"><asp:Localize Text="Upload Date:" ID="locUploadDate" runat="server" meta:resourcekey="locUploadDateResource1"></asp:Localize> </td>                                  
                                                     <td>
                                                         <asp:Label ID="lblMeasurementDate" runat="server" 
                                                             Text='<%# string.Format("{0:d}",Eval("MeasurementDate")) %>' 
                                                            ></asp:Label>
                                                     </td>
-                                                </tr>
-                                                <tr class="Gray">   
+                                                </tr>                                               
+                                                <tr class="White">   
                                                     <td style="font-size:13px;"><asp:Localize Text="Average Δ" ID="locAverageDelta" runat="server" meta:resourcekey="locAverageDeltaResource1"></asp:Localize> 
                                                         <asp:Label ID="lblAvgΔE" runat="server"></asp:Label></td>                                  
                                                     <td>
@@ -432,7 +440,7 @@
                                                            ></asp:Label>
                                                     </td>
                                                 </tr>
-                                                <tr class="White">   
+                                                <tr class="Gray">   
                                                     <td style="font-size:13px;"><asp:Localize Text="Maximum Δ" ID="locMaximumDelta" 
                                                             runat="server" meta:resourcekey="locMaximumDeltaResource1"></asp:Localize>
                                                         <asp:Label ID="lblMaxΔE" runat="server"></asp:Label></td>                                  
@@ -442,7 +450,7 @@
                                                     </td>
                                                 </tr>    
                                                 
-                                                  <tr class="Gray">   
+                                                  <tr class="White">   
                                                     <td style="font-size:13px;"><asp:Localize Text="Maximum Primary Δ" runat="server" 
                                                             ID="locMaxPrimaryDelta" meta:resourcekey="locMaxPrimaryDeltaResource1"></asp:Localize>
                                                         <asp:Label ID="lblPriΔE" runat="server"></asp:Label></td>                                  
@@ -451,7 +459,7 @@
                                                            ></asp:Label>
                                                     </td>
                                                 </tr>    
-                                                  <tr class="White">   
+                                                  <tr class="Gray">   
                                                     <td style="font-size:13px;"><asp:Localize Text="Maximum Primary ΔH:" 
                                                             ID="locMaxPrimaryDeltaH" runat="server" meta:resourcekey="locMaxPrimaryDeltaHResource1"
                                                             ></asp:Localize></td>                                  
@@ -460,7 +468,7 @@
                                                            ></asp:Label>
                                                     </td>
                                                 </tr>    
-                                                  <tr class="Gray">   
+                                                  <tr class="White">   
                                                     <td style="font-size:13px;"><asp:Localize Text="Gray Average Δ" 
                                                             ID="locGrayAvgDelta" runat="server" meta:resourcekey="locGrayAvgDeltaResource1"></asp:Localize>
                                                         <asp:Label ID="lblGrayΔE" runat="server" ></asp:Label></td>                                  
@@ -470,7 +478,7 @@
                                                     </td>
                                                 </tr>    
                                                                                         
-                                                <tr class="White">   
+                                                <tr class="Gray">   
                                                     <td style="font-size:13px;"><asp:Localize Text="10th Percentile Δ" 
                                                             ID="loc10PercentileDelta" runat="server" 
                                                             meta:resourcekey="loc10PercentileDeltaResource1"></asp:Localize>
@@ -481,7 +489,7 @@
                                                             ></asp:Label>
                                                     </td>
                                                 </tr>
-                                                <tr class="Gray">   
+                                                <tr class="White">   
                                                     <td style="font-size:13px;"><asp:Localize Text="90th Percentile Δ" 
                                                             ID="loc90PercentileDelta" runat="server" 
                                                             meta:resourcekey="loc90PercentileDeltaResource1"></asp:Localize>
@@ -492,7 +500,7 @@
                                                             ></asp:Label>
                                                     </td>
                                                 </tr>
-                                                <tr class="White">   
+                                                <tr class="Gray">   
                                                     <td style="font-size:13px;"><asp:Localize Text="95th Percentile Δ" 
                                                             ID="loc95PercentileDelta" runat="server" 
                                                             meta:resourcekey="loc95PercentileDeltaResource1"></asp:Localize>

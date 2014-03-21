@@ -126,6 +126,16 @@ function Spectral(nm380, nm390, nm400, nm410, nm420, nm430, nm440, nm450, nm460,
     this.nm730 = nm730;
 }
 
+function find_angle(ul, lr, c) {
+    var p0c = Math.sqrt(Math.pow(c.x - ul.x, 2) +
+                        Math.pow(c.y - ul.y, 2));
+    var p1c = Math.sqrt(Math.pow(c.x - lr.x, 2) +
+                        Math.pow(c.y - lr.y, 2));
+    var p0p1 = Math.sqrt(Math.pow(lr.x - ul.x, 2) +
+                         Math.pow(lr.y - ul.y, 2));
+    return Math.acos((p1c * p1c + p0c * p0c - p0p1 * p0p1) / (2 * p1c * p0c)) * 57.29578;
+}
+
 //Patch Object
 function Patch(LAB, XYZ, Density, sName) {
 
@@ -291,7 +301,7 @@ function scan(scanner, colorspace, chart) {
     localchart["ReadCS"] = colorspace;
     localchart["Substrate"] = paper;
     if (scanner["Type"] == "iO" ||
-        scanner["Type"] == "iSis") {
+        scanner["Type"] == "iSis" || scanner["Type"] == "SpectroLFP") {
         // This device will read the entire chart in a single go. So we copy entire RefBase (how chart is laid out) to the ReferencePatch
         if (typeof chart["RefBase"] != "undefined") {
             localchart["ReferencePatch"] = chart["RefBase"];
@@ -337,7 +347,7 @@ function scan(scanner, colorspace, chart) {
 
 
 
-    if (scanner["Type"] == "iSis" || scanner["Type"] == "iO") {
+    if (scanner["Type"] == "iSis" || scanner["Type"] == "iO" || scanner["Type"] == "SpectroLFP") {
 
         //------------------Preview chart---------------//                             
 
@@ -362,7 +372,7 @@ function scan(scanner, colorspace, chart) {
 
         context.globalAlpha = 1.0; //--------------Make regular background----------//
 
-        if (scanner["Type"] == "iO") {
+        if (scanner["Type"] == "iO" || scanner["Type"] == "SpectroLFP") {
 
             // var canvas = document.getElementById("Canvas");
             //var context = canvas.getContext("2d");
@@ -526,7 +536,11 @@ function upload() {
 function OnCancel() {
     g_SavedQuery["Result"] = 'CANCEL'; 
     var cancelstat = plugin().queryDone(g_SavedQuery);
-     
+
+    //added these lines for clean up of cancel???
+    jQuery("[id*='lblMessage']").css('color', 'Black');
+    jQuery("[id*='lblMessage']").html(locClickMeasureButton);
+    
     if (cancelstat == "Unhandled") {
         // If unhandled clean up this stuff here...
         jQuery("[id*='lblMessage']").css('color', 'Black');

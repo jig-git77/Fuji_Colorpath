@@ -80,7 +80,21 @@ function SetChartResult(objChart) {
     }
 
     if (objChart.ChartSetting != null) {
-        g_Chart["ChartType"] = "Native";
+
+        // Remember i1 charts are generally read vertical so if you look at
+        // the printout sideways it looks like it would be 21x40 with the columns named
+            
+        if (InstrumentTypeID == 6) {
+            g_Chart["ChartType"] = "AutoLocation";
+            g_Chart["Mode"] = "Contactless";
+            //patch around the setting of density for the LFP, here set to StatusT
+            g_Chart["ReadCS"] = "CIELab,CIEXYZ,sRGB,DensityT,Spectral";
+            g_Chart["NumPoints"] = 1; //1,2,3,4,5
+        }
+        else {
+            g_Chart["ChartType"] = "Native";
+            g_Chart["ReadCS"] = "CIELab,CIEXYZ,sRGB,Density,Spectral";
+        }
         g_Chart["ChartSizeX"] = objChart.ChartSetting["ChartSizeX"];
         g_Chart["ChartSizeY"] = objChart.ChartSetting["ChartSizeY"];
         g_Chart["BarSizeX"] = objChart.ChartSetting["BarSizeX"];
@@ -95,7 +109,7 @@ function SetChartResult(objChart) {
         g_Chart["FirstSample"] = objChart.ChartSetting["FirstSample"];
         g_Chart["ReadDirection"] = objChart.ChartSetting["ReadDirection"];
 
-        //g_Chart["NumPoints"] = 1; //1,2,3,4,5
+        
         g_Chart["RowsPerPage"] = objChart.ChartSetting["RowsPerPage"];
         g_Chart["Pages"] = objChart.ChartSetting["Pages"];
     }

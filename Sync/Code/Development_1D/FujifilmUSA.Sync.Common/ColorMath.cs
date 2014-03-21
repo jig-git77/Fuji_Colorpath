@@ -772,7 +772,7 @@ namespace FujifilmUSA.Sync.Common
             return LabtoXYZ(lab.L, lab.A, lab.B);
         }
 
-        public static CIELab SubstrateRelCalc(double currentpaper_X, double currentpaper_Y, double currentpaper_Z, double newpaper_X, double newpaper_Y, double newpaper_Z, double patch_L, double patch_A, double patch_B)
+        public static CIELab CalcPaperScaleLAB(double currentpaper_X, double currentpaper_Y, double currentpaper_Z, double newpaper_X, double newpaper_Y, double newpaper_Z, double patch_L, double patch_A, double patch_B)
         {
             CIELab lab = new CIELab(0, 0, 0);
             CIEXYZ xyz = new CIEXYZ(0, 0, 0);
