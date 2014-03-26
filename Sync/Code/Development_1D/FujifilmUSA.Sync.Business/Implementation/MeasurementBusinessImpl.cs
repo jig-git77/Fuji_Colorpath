@@ -31,7 +31,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             "CPSync4D.GetMeasurementData",
                             new object[]
                                     {
-                                        String.Join(",", measurementIds)
+                                        String.Join(",", measurementIds),
+                                        Convert.ToInt32(PCSDataType)
                                     });
                     if (dsPcsDcsData.Tables[0].Rows.Count > 0)
                     {
@@ -165,6 +166,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
                                                      new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
+                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = ((int)SessionManager.Instance.CurrentProject.PCSDataTypes)}
                                                  },
                                          new List<Parameters>()
                                                  {
@@ -1428,6 +1430,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
                                                      new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
+                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = ((int)SessionManager.Instance.CurrentProject.PCSDataTypes)}
+
                                                  },
                                          new List<Parameters>()
                                                  {
@@ -1483,7 +1487,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             "CPSync.GetMeasurementData",
                             new object[]
                                     {
-                                        String.Join(",", measurementIds)
+                                        String.Join(",", measurementIds),
+                                        Convert.ToInt32(PCSDataType)
                                     });
                     if (dsPcsDcsData.Tables[0].Rows.Count > 0)
                     {
