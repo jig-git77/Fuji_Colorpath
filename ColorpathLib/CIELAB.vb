@@ -24,38 +24,62 @@ Public Structure CIELab
 	''' <summary>
 	''' Gets or sets L component.
 	''' </summary>
-	Public Property L() As Double
-		Get
-			Return Me._l
-		End Get
-		Set
-			Me._l = value
-		End Set
-	End Property
+    Public Property L() As Double
+        Get
+            Return Me._l
+        End Get
+        Set(value As Double)
+            If value > 100 Then
+                Me._l = 100
+            Else
+                If value < 0 Then
+                    Me._l = 0
+                Else
+                    Me._l = value
+                End If
+            End If
+        End Set
+    End Property
 
 	''' <summary>
 	''' Gets or sets a component.
 	''' </summary>
-	Public Property A() As Double
-		Get
-			Return Me._a
-		End Get
-		Set
-			Me._a = value
-		End Set
-	End Property
+    Public Property A() As Double
+        Get
+            Return Me._a
+        End Get
+        Set(value As Double)
+            If value > 127 Then
+                Me._a = 127
+            Else
+                If value < -128 Then
+                    Me._a = -128
+                Else
+                    Me._a = value
+                End If
+            End If
+        End Set
+    End Property
 
 	''' <summary>
 	''' Gets or sets a component.
 	''' </summary>
-	Public Property B() As Double
-		Get
-			Return Me._b
-		End Get
-		Set
-			Me._b = value
-		End Set
-	End Property
+    Public Property B() As Double
+        Get
+            Return Me._b
+        End Get
+        Set(value As Double)
+            If value > 127 Then
+                Me._b = 127
+            Else
+                If value < -128 Then
+                    Me._b = -128
+                Else
+                    Me._b = value
+                End If
+            End If
+        End Set
+    End Property
 
 	Public Sub New(ByVal l As Double, ByVal a As Double, ByVal b As Double)
 		Me._l = l
