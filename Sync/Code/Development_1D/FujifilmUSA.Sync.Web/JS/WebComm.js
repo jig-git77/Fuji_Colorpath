@@ -61,11 +61,15 @@ function SetChartResult(objChart) {
         }
         else if (InstrumentTypeID == 5) {  //For i1-IO- Pro2
             g_Chart["ReadMode"] = objChart.DeviceSetting.MeasurementSettings.ReadMode; //Strip, Point
-            
-            if (UVMode == "M1" || UVMode == "M2") {  //For IO-Pro2 m1,m2=DualReflectanceSpot
-                g_Chart["DeviceSettings"]["MeasurementMode"] = "DualReflectanceSpot";
+
+            if (UVMode == "M1" || UVMode == "M2") {  //For IO-Pro2 m1,m2=DualReflectanceSpot if Point mode or DualReflectanceScan if in strip mode
+                if (g_Chart["ReadMode"] == "Strip") {
+                    g_Chart["DeviceSettings"]["MeasurementMode"] = "DualReflectanceScan";
+                }
+                else {
+                    g_Chart["DeviceSettings"]["MeasurementMode"] = "DualReflectanceSpot";
+                }
                 g_Chart["DeviceSettings"]["ResultIndexKey"] = UVMode; //Only needs to be set in Dual Measurement Modes, Cannot be set for i1Pro
-               
             }
             else {                                   //For IO-Pro2 m0=ReflectanceSpot, if only "Point" mode otherwise it will get default "ReflectanceScan" which is set with device itself
                 if (g_Chart["ReadMode"] == "Point") {

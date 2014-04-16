@@ -275,7 +275,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     cmbReadMode.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReadMode.ToString();
                 }
-                cmbMeasurementCount.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementCount.ToString();
+                if (SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementCount > 0)
+                {
+                    BindMeasurementCount(true);
+                    cmbMeasurementCount.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementCount.ToString();
+                    trMeasCount.Visible = true;
+                }
             }
         }
 
@@ -487,17 +492,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindReadMode()
         {
-            if (cmbUVSettings.SelectedValue == "1" || cmbUVSettings.SelectedValue == "2") //----If M1 or M2
-            {
-                cmbReadMode.Items.Clear();
-                cmbReadMode.Items.Add(new ListItem("Point", "Point"));
-            }
-            else
-            {
-                cmbReadMode.Items.Clear();
-                cmbReadMode.Items.Add(new ListItem("Strip", "Strip"));
-                cmbReadMode.Items.Add(new ListItem("Point", "Point"));
-            }
+            cmbReadMode.Items.Clear();
+            cmbReadMode.Items.Add(new ListItem("Strip", "Strip"));
+            cmbReadMode.Items.Add(new ListItem("Point", "Point"));
+
             cmbReadMode_SelectedIndexChanged(null, null);
         }
 

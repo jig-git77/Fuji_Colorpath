@@ -50,21 +50,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             var sb = new StringBuilder();
-            if (Convert.ToDecimal(Request.QueryString["days"]) <= 0)
-                sb.Append(string.Format(GetResourceString(_reccurrentRunIsOpen), RunNum));
-            else
-                sb.Append(string.Format(GetResourceString(_reccurrentRunIsOpenAndInactive), RunNum, Request.QueryString["days"]));
-
+            if (Request.QueryString["days"] != null && Request.QueryString["days"].Length > 0)
+            {
+                if (Convert.ToDecimal(Request.QueryString["days"]) <= 0)
+                    sb.Append(string.Format(GetResourceString(_reccurrentRunIsOpen), RunNum));
+                else
+                    sb.Append(string.Format(GetResourceString(_reccurrentRunIsOpenAndInactive), RunNum, Request.QueryString["days"]));
+            }
             sb.Append("</br>");
-            if (Server.UrlDecode(Request.QueryString["DlpName"]).Contains("-001"))
+            if (Request.QueryString["DlpName"] != null && Request.QueryString["DlpName"].Length > 0)
             {
-                sb.Append(GetResourceString(_recnoDLPText));
+                if (Server.UrlDecode(Request.QueryString["DlpName"]).Contains("-001"))
+                {
+                    sb.Append(GetResourceString(_recnoDLPText));
+                }
+                else
+                {
+                    sb.Append(string.Format(GetResourceString(_recconfirmDLPText), Server.UrlDecode(Request.QueryString["DlpName"])));
+                }
             }
-            else
-            {
-                sb.Append(string.Format(GetResourceString(_recconfirmDLPText), Server.UrlDecode(Request.QueryString["DlpName"])));
-            }
-
             lblOpenPrintConditionMessage.Text = sb.ToString();
         }
 

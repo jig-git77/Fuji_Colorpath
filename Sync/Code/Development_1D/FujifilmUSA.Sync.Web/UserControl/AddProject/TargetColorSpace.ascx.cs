@@ -252,11 +252,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterTargetColorspace.GetTargetLABList();
             lvTargetLAB.DataSource = this.ProjectTargetLABList;
             lvTargetLAB.DataBind();
-            
-            //Load Paper LAB values into top Textboxes from List
-            txtPaper_L.Text = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetL.ToString();   //Paper L* Value
-            txtPaper_a.Text = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetA.ToString();   //Paper a* Value
-            txtPaper_b.Text = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetB.ToString();   //Paper b* Value
+
+            if (this.ProjectTargetLABList.Count > 0)
+            {
+                //Load Paper LAB values into top Textboxes from List
+                txtPaper_L.Text = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetL.ToString();   //Paper L* Value
+                txtPaper_a.Text = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetA.ToString();   //Paper a* Value
+                txtPaper_b.Text = this.ProjectTargetLABList.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetB.ToString();   //Paper b* Value
+            }
+            else   //By Default
+            {
+                txtPaper_L.Text = "0";   //Paper L* Value
+                txtPaper_a.Text = "0";   //Paper a* Value
+                txtPaper_b.Text = "0";   //Paper b* Value
+            }
         }
 
         private void BindDensityType()
