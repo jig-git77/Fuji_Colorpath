@@ -9,12 +9,12 @@
       </basicHttpBinding>
     </bindings>
     <client>
-      <!--<endpoint address="http://www.colorpathsync.com/ColorOrganizerService/Sync4D.svc"
+      <endpoint address="http://stage.colorpathsync.com/ColorOrganizerService/Sync4D.svc"
        binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ISync4DServiceContract"
-       contract="Sync4DService.ISync4DServiceContract" name="BasicHttpBinding_ISync4DServiceContract" />-->
-      <endpoint address="http://localhost/ColorOrganizerService/sync4d.svc"
+       contract="Sync4DService.ISync4DServiceContract" name="BasicHttpBinding_ISync4DServiceContract" />
+      <!--<endpoint address="http://localhost/ColorOrganizerService/sync4d.svc"
           binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ISync4DServiceContract"
-          contract="Sync4DService.ISync4DServiceContract" name="BasicHttpBinding_ISync4DServiceContract" />
+          contract="Sync4DService.ISync4DServiceContract" name="BasicHttpBinding_ISync4DServiceContract" />-->
     </client>
   </system.serviceModel>
 </configuration>
