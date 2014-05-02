@@ -13,9 +13,11 @@
                 <tr>
                     <td valign="top">
                         <asp:TextBox ID="txt_MeasurementID" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txt_OptimizeRunID" runat="server"></asp:TextBox>
                         <asp:TextBox ID="txt_dTE" runat="server"></asp:TextBox>
                         <asp:TextBox ID="txt_DLPName" runat="server"></asp:TextBox>
                         <asp:TextBox ID="txt_Vali_Type" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txt_IsAvgMeasurement" runat="server"></asp:TextBox>
                         <br />
                         Target Versus Actual AB Plot
                         <br />

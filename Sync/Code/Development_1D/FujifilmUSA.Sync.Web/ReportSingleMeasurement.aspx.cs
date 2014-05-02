@@ -18,6 +18,11 @@ namespace FujifilmUSA.Sync.Web
                     TextBox txt_MeasurementID = ucReportSingle.FindControl("txt_MeasurementID") as TextBox;
                     txt_MeasurementID.Text = Request.QueryString["MeasurementID"].ToString();
                 }
+                if (Request.QueryString["OptimizeRunID"] != null)
+                {
+                    TextBox txt_OptimizeRunID = ucReportSingle.FindControl("txt_OptimizeRunID") as TextBox;
+                    txt_OptimizeRunID.Text = Request.QueryString["OptimizeRunID"].ToString();
+                }
                 if (Request.QueryString["From_ΔE"] != null)
                 {
                     TextBox txt_dTE = ucReportSingle.FindControl("txt_dTE") as TextBox;
@@ -32,6 +37,11 @@ namespace FujifilmUSA.Sync.Web
                 {
                     TextBox txt_Vali_Type = ucReportSingle.FindControl("txt_Vali_Type") as TextBox;
                     txt_Vali_Type.Text = Request.QueryString["Vali_Type"].ToString();
+                }
+                if (Request.QueryString["IsAvgMeas"] != null)
+                {
+                    TextBox txt_IsAvgMeasurement = ucReportSingle.FindControl("txt_IsAvgMeasurement") as TextBox;
+                    txt_IsAvgMeasurement.Text = Request.QueryString["IsAvgMeas"].ToString();
                 }
             }
         }

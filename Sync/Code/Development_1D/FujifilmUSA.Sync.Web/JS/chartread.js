@@ -385,7 +385,7 @@ function scan(scanner, colorspace, chart) {
             delete (localchart["LowerLeft"]);
             delete (localchart["LowerRight"]);
 
-            scanner["DeltaLLimit"] = "30.0";        // Any line delta E over this causes a retry
+            scanner["DeltaLLimit"] = "100.0";        // Any line delta E over this causes a retry
 
             var result = plugin().read(scanner, localchart, query,
                  presentStripDialogi1, presentProgressiSis, presentScanDoneiSis);

@@ -758,7 +758,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewReportSingleMeasurement Members
 
         public int MeasurementId { get; set; }
-
+        public int OptimizeRunId { get; set; }
         public DataSet DSReport { get; set; }
 
         public string From_ΔE { get; set; }
@@ -782,6 +782,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        public bool IsAverageOfMeasurements
+        {
+            get
+            {
+                return false;
+            }
+        }
         #endregion
        
     }

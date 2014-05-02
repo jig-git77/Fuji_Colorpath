@@ -5,6 +5,54 @@
     TagPrefix="uc" %>
 <script src="JS/DYMO.Label.Framework.latest.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/Printing.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //        $('#lblCheck').hide();
+        $('#chkAnalyzeAverageOfMeasurements').click(function () {
+            var $this = $('#chkAnalyzeAverageOfMeasurements')
+
+            if ($this.is(':checked')) {
+                //                $('#lblCheck').hide();
+                alert('1');
+                return true;
+            } else {
+                //                $('#lblCheck').show();
+                return false;
+            }
+        });
+    });
+</script>
+
+ <script type="text/javascript">
+
+     function GetServerDate() {
+         //         alert('1');
+        // alert(document.getElementById('abcId').value);
+        // alert(document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value);
+         var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
+        // alert(answer);
+         if (answer == "0") {
+             document.getElementById("ContentPlaceHolder1_ucAnalyze_lblCompError").innerHTML = "Success, now displaying average of all selected measurements!";
+             return true;
+         }
+         else if (answer == "1") {
+             document.getElementById("ContentPlaceHolder1_ucAnalyze_lblCompError").innerHTML = "Error in different ReferenceCharts, Please select only measurements which used same reference charts.";
+             return false;
+         }
+         else if (answer == "2") {
+             document.getElementById("ContentPlaceHolder1_ucAnalyze_lblCompError").innerHTML = "Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.";
+             return false;
+         }
+         else {
+             return false;
+         }
+
+       
+     }
+   
+    </script>
+
 <script type="text/javascript">
     var previewImageCodedString = '';
     var prm = Sys.WebForms.PageRequestManager.getInstance();
@@ -212,6 +260,19 @@
                 </asp:RadioButtonList>
             </td>
         </tr>
+        <tr>
+            <td id="tdAverageOfMeasurements" runat="server" visible="false" >                
+                <asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server" Checked="false"
+                    Font-Bold="true" AutoPostBack="true" OnCheckedChanged="chkAnalyzeAverageOfMeasurements_Click">
+                </asp:CheckBox>
+                <span style="font-weight: bold; vertical-align: text-top;">Analyze Average Of Measurements</span> 
+                <asp:Label ID="lblCompError" runat="server" Text="" ForeColor="Red"></asp:Label>     
+              <%--  <asp:HiddenField ID="Hd_CompError1" runat="server" />--%>
+                <input id="hd_CompError" type="hidden" runat="server"  value="5"/>
+         
+               
+            </td>
+        </tr>
         <tr id="trListHeader" runat="server">
             <td runat="server">
                 <div style="display: block;" class="contantbox tabcontant1">
@@ -221,7 +282,7 @@
                             <asp:Localize runat="server" Text="Analyze Measurement :" ID="locAnaluzeMeasurement"
                                 meta:resourcekey="locAnaluzeMeasurementResource1"></asp:Localize>
                             <asp:Label ID="lblMeasurementName" Style="font-size: 12px !important;" runat="server"></asp:Label>
-                        </div>
+                        </div>                      
                         <div id="Div_Validation_Header" runat="server" visible="false">
                             <asp:HiddenField ID="hdnTotalRecord" runat="server" Value="0" />
                             <asp:Literal ID="ltrlRecordsSummary" runat="server" Text="Record(s) {start} to {end} of {total}"></asp:Literal>&nbsp;|&nbsp;<asp:ImageButton
@@ -365,7 +426,7 @@
                         meta:resourcekey="locGrayResource1"></asp:Localize></a></span></li>  
                 <li id="Tab_TVI" runat="server"><span><a href="#tab7"><asp:Localize Text="Report" ID="locTVI" runat="server" 
                         meta:resourcekey="locTVIResource1"></asp:Localize></a></span></li>                                
-                <li><span><a href="#tab4"><asp:Localize Text="Patch Details" ID="locPatchDetails" 
+                <li id="Tab_PatchDetails" runat="server"><span><a href="#tab4"><asp:Localize Text="Patch Details" ID="locPatchDetails" 
                         runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>  
                 <li><span><a href="#tab5"><asp:Localize Text="Report" ID="locReport" runat="server" 
                         meta:resourcekey="locReportResource1"></asp:Localize></a></span></li>  
@@ -2120,7 +2181,7 @@
                                                         </td>                                                       
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="4">
+                                                        <td>
                                                              <telerik:RadGrid ID="rgChromVariation" runat="server" 
                                                                 AutoGenerateColumns="False" EnableLinqExpressions="False"                     
                                                                 CellSpacing="0" GridLines="None" OnItemDataBound="rgChromVariation_ItemDataBound">   
@@ -2180,7 +2241,7 @@
    </section>
    </div>
 
-    <div>
+    <div id="dvTab_PatchDetails" runat="server">
   <section id="tab4" class="contantbox tabcontant hideclass" >
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">

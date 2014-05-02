@@ -157,19 +157,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterGlobal = new PresenterGlobal();
         }
 
-        void Page_LoadComplete(object sender, EventArgs e)
-        {
-            //BindMesurementChart();
-            //rgPatchDetails.Rebind();
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             lbtnMeasurement.Visible = IsXMFUser;
-            //Page.LoadComplete += new EventHandler(Page_LoadComplete);
+
+            ChkAvgMeasurementCompatibility(); //--Load average Compatibility values
+
             if (!Page.IsPostBack)
             {
-
+                chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return GetServerDate();");
+                
                 ViewState["MetricSumID"] = "";
 
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
@@ -258,6 +255,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     else
                     {
                         dvTab_G7.Visible = Tab_G7.Visible = false;
+                        if (ValidationType == 2)  //ISO type
+                        {
+                            tdAverageOfMeasurements.Visible = true; //Only display in Sync1D ISO mode for Averaging measurements
+                           
+                        }
                     }
                     dvTab_TVI.Visible = Tab_TVI.Visible = true;
                     if (ValidationType == 0)   //Default View type, Hide TVI tab
@@ -265,6 +267,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         dvTab_TVI.Visible = Tab_TVI.Visible = false;
                     }                  
                     Div_MetricSumFilter.Visible = false;
+           
                 }
                 else   //-----DLP Optimization
                 {
@@ -281,7 +284,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                BindMesurementChart();                
+                //if (chkAnalyzeAverageOfMeasurements.Checked == false)
+                //{
+                //    BindMesurementChart();
+                //}
             }
             if (IsXMFUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
             {
@@ -307,6 +313,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnMeasurementVerification.Visible = false;
                 lbtnDownloadAndSaveDLP.Visible = false;
             }
+
+          
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
@@ -395,7 +403,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
             }
-
+            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             From_ΔE = rbtnListDeltaE.SelectedValue;
 
             if ((SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) || (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)) //---Validation mode or Sync1D project type
@@ -409,7 +417,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         tbOptSummary.Visible = false;
                         ValidationType = MeasurementSummary[0].ValidationType;
 
-                        dvValidationSummary.DataSource = MeasurementSummary;
+                        if (!IsAverageOfMeasurements)   //--Normal display Mode
+                        {
+                            dvValidationSummary.DataSource = MeasurementSummary;                           
+                        }
+                        else   //---Average of Measurements display mode
+                        {
+                            dvValidationSummary.DataSource = null;
+                            chartAnalyze.MapAreas.Clear();
+                            chartAnalyze.IsMapEnabled = false;
+                           // dvValidationSummary.EmptyDataText = "Averaging all measurements!";
+                        }
                         dvValidationSummary.DataBind();
 
                         if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
@@ -472,12 +490,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 dvTab_G7.Visible = Tab_G7.Visible = true;
                 ValidationType = 1;
-                path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
+                path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&OptimizeRunID=" + OptimizeRunId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
             }
             else
             {
                 dvTab_G7.Visible = Tab_G7.Visible = false;
-                path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
+                path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&OptimizeRunID=" + OptimizeRunId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D && ValidationType == 2) //Sync1D and ISO
+                {
+                    path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&OptimizeRunID=" + OptimizeRunId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType + "&IsAvgMeas=" + IsAverageOfMeasurements;
+                }
             }
             iframeGeneratePDFReport.Attributes.Add("src", path);
             iframeGeneratePDFReport.Style.Add("display", "");
@@ -495,7 +517,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
             }
-
+            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             From_ΔE = rbtnListDeltaE.SelectedValue;
             lblEPryPatches.Text = From_ΔE;
 
@@ -2975,8 +2997,72 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_DotGain> DTSpreadSplineRangeChartData { get; set; }
         public DataTable DTMaxSpreadChartData { get; set; }
 
+        public bool IsAverageOfMeasurements
+        {
+            get
+            {
+                return chkAnalyzeAverageOfMeasurements.Checked;
+            }
+            set
+            {
+                IsAverageOfMeasurements = chkAnalyzeAverageOfMeasurements.Checked;
+            }
+        }
         #endregion     
 
-      
+        protected void chkAnalyzeAverageOfMeasurements_Click(object sender, EventArgs e)
+        {
+            if (chkAnalyzeAverageOfMeasurements.Checked == true)
+            {
+                //int CompatibilityNo = _presenterAnalyze.ChkAvgMeasurementCompatibility();
+                //if (CompatibilityNo == 1)    //Error in different ReferenceCharts throughout whole OptimizationRun
+                //{
+                //    lblCompError.Text = "Error in different ReferenceCharts, Please select only measurements which used same reference charts.";
+                    
+                //}
+                //else if (CompatibilityNo == 2)   //Error in different MetricTargetPresets throughout whole OptimizationRun
+                //{
+                //    lblCompError.Text = "Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.";
+                //}
+                //else   //Success, No difference
+                //{
+                //    lblCompError.Text = "Success, now displaying average of all selected measurements!";
+                    //-----Re-fill all Tabs data by applying average of all measurements under this optimize run-------//
+                    BindAvgDelta();
+                    FillAllTabsData();
+                //}
+
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)
+                {
+                    dvTab_PatchDetails.Visible = Tab_PatchDetails.Visible = false;
+                }
+            }
+            else
+            {
+                dvTab_PatchDetails.Visible = Tab_PatchDetails.Visible = true;
+                lblCompError.Text = "";
+            }
+        }
+
+      public void ChkAvgMeasurementCompatibility()
+      {
+          OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+          int CompatibilityNo = _presenterAnalyze.ChkAvgMeasurementCompatibility();
+          if (CompatibilityNo == 1)    //Error in different ReferenceCharts throughout whole OptimizationRun
+          {
+              hd_CompError.Value = "1";
+          }
+          else if (CompatibilityNo == 2)   //Error in different MetricTargetPresets throughout whole OptimizationRun
+          {
+              hd_CompError.Value = "2";
+          }
+          else   //Success, No difference
+          {
+              hd_CompError.Value = "0";
+          }
+      }
+
+     
+       
     }
 }

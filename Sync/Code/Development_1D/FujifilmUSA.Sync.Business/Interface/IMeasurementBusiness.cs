@@ -19,19 +19,19 @@ namespace FujifilmUSA.Sync.Business.Interface
             
         DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
 
-        List<AnalyzeChart>[] GetChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false);
+        List<AnalyzeChart>[] GetChartData(int MeasurementId, string From_ΔE, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false);
         List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false);
         List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false);
         List<AnalyzeChart> GetDensityChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false);
 
-        List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
+        List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false);
         List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
         List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
         List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
-        DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1,  bool IsSync1DType = false);
+        DataSet GetReportDataOnMeasurement(int MeasurementId, int OptimizeRunId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false, bool IsAverageOfMeasurements = false);
         DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false);
 
-        List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false);
+        List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false);
 
         List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false);
 
@@ -49,9 +49,11 @@ namespace FujifilmUSA.Sync.Business.Interface
         Dictionary<string, string> GetTargetTVIData(int projectId);
 
         List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
-        List<AnalyzeChart_DotGain> GetISOTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
-        List<AnalyzeChart_DotGain> GetSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
-        List<AnalyzeChart_DotGain> GetSpreadSplineRangeChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
-        DataTable GetMaxSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
+        List<AnalyzeChart_DotGain> GetISOTVIChart(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false);
+        List<AnalyzeChart_DotGain> GetSpreadChartData(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false);
+        List<AnalyzeChart_DotGain> GetSpreadSplineRangeChartData(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false);
+        DataTable GetMaxSpreadChartData(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false);
+
+        int ChkAvgMeasurementCompatibility(int optimizeRunId);
     }
 }

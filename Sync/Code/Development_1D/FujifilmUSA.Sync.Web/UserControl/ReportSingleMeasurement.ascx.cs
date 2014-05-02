@@ -635,6 +635,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (txt_MeasurementID.Text != null)
             {
                 MeasurementId = Convert.ToInt32(txt_MeasurementID.Text);
+                OptimizeRunId = 0;
+                if (txt_OptimizeRunID.Text != null)
+                {
+                    OptimizeRunId = Convert.ToInt32(txt_OptimizeRunID.Text);
+                }
                 From_ΔE = txt_dTE.Text;
                 ValidationType = Convert.ToInt32(txt_Vali_Type.Text);
                 DSReport = new DataSet();
@@ -652,7 +657,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewReportSingleMeasurement Members
 
         public int MeasurementId { get; set; }
-
+        public int OptimizeRunId { get; set; }
         public DataSet DSReport { get; set; }
 
         public string From_ΔE { get; set; }
@@ -675,6 +680,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public DataSet DSReport_G7_Vali { get; set; }
         public int ValidationType { get; set; }
+
+        public bool IsAverageOfMeasurements
+        {
+            get
+            {
+                return Convert.ToBoolean(txt_IsAvgMeasurement.Text);
+            }
+        }
 
         #endregion
     }

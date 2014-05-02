@@ -154,6 +154,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public PCSDataTypes PCSDataTypes { get; set; }
         public DensityTypes DensityType { get; set; }
+
+        public bool IsAverageOfMeasurements { get; set; }
+       
         #endregion        
     }
 }
