@@ -30,18 +30,19 @@
          //         alert('1');
         // alert(document.getElementById('abcId').value);
         // alert(document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value);
-         var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
-        // alert(answer);
+         var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;         
          if (answer == "0") {
-             document.getElementById("ContentPlaceHolder1_ucAnalyze_lblCompError").innerHTML = "Success, now displaying average of all selected measurements!";
+             //document.getElementById("ContentPlaceHolder1_ucAnalyze_lblCompError").innerHTML = "Success, now displaying average of all selected measurements!";
+             setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ucAnalyze$chkAnalyzeAverageOfMeasurements\',\'\')', 0);
              return true;
          }
          else if (answer == "1") {
-             document.getElementById("ContentPlaceHolder1_ucAnalyze_lblCompError").innerHTML = "Error in different ReferenceCharts, Please select only measurements which used same reference charts.";
+             jQuery("[id*='lblMessage']").html("Error in different ReferenceCharts, Please select only measurements which used same reference charts.");
              return false;
          }
          else if (answer == "2") {
-             document.getElementById("ContentPlaceHolder1_ucAnalyze_lblCompError").innerHTML = "Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.";
+             jQuery("[id*='lblMessage']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
+             //document.getElementById("ContentPlaceHolder1_ucAnalyze_lblCompError").innerHTML = "Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.";
              return false;
          }
          else {
@@ -261,9 +262,9 @@
             </td>
         </tr>
         <tr>
-            <td id="tdAverageOfMeasurements" runat="server" visible="false" >                
-                <asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server" Checked="false"
-                    Font-Bold="true" AutoPostBack="true" OnCheckedChanged="chkAnalyzeAverageOfMeasurements_Click">
+            <td id="tdAverageOfMeasurements" runat="server" visible="false">                
+                <asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server" Checked="false" EnableViewState="true"
+                    Font-Bold="true" AutoPostBack="true" OnCheckedChanged="chkAnalyzeAverageOfMeasurements_Click" >
                 </asp:CheckBox>
                 <span style="font-weight: bold; vertical-align: text-top;">Analyze Average Of Measurements</span> 
                 <asp:Label ID="lblCompError" runat="server" Text="" ForeColor="Red"></asp:Label>     
@@ -686,6 +687,7 @@
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />  
                         <asp:PostBackTrigger ControlID="rbtnListDeltaE" />  
+                        <asp:PostBackTrigger ControlID="chkAnalyzeAverageOfMeasurements" />  
                     </Triggers>  
            </asp:UpdatePanel>
         </div>
@@ -933,6 +935,8 @@
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />  
                         <asp:PostBackTrigger ControlID="rbtnListDeltaE" />  
+                        <asp:PostBackTrigger ControlID="chkAnalyzeAverageOfMeasurements" />  
+                        
                     </Triggers>  
             </asp:UpdatePanel>
         </div>
@@ -1364,6 +1368,8 @@
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />   
                         <asp:PostBackTrigger ControlID="rbtnListDeltaE" />            
+                        <asp:PostBackTrigger ControlID="chkAnalyzeAverageOfMeasurements" />            
+                        
                     </Triggers>  
            </asp:UpdatePanel>       
         </div>
@@ -1883,7 +1889,9 @@
                </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />   
-                        <asp:PostBackTrigger ControlID="rbtnListDeltaE" />            
+                        <asp:PostBackTrigger ControlID="rbtnListDeltaE" />
+                        <asp:PostBackTrigger ControlID="chkAnalyzeAverageOfMeasurements" />
+                                    
                     </Triggers>  
            </asp:UpdatePanel>    
           
@@ -2230,6 +2238,8 @@
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />   
                         <asp:PostBackTrigger ControlID="rbtnListDeltaE" />            
+                        <asp:PostBackTrigger ControlID="chkAnalyzeAverageOfMeasurements" />            
+                        
                     </Triggers>  
            </asp:UpdatePanel>  
    

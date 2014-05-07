@@ -160,13 +160,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             lbtnMeasurement.Visible = IsXMFUser;
-
-            ChkAvgMeasurementCompatibility(); //--Load average Compatibility values
-
+            ChkAvgMeasurementCompatibility();
             if (!Page.IsPostBack)
             {
-                chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return GetServerDate();");
-                
+                 //--Load average Compatibility values
+                chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return GetServerDate();");                
                 ViewState["MetricSumID"] = "";
 
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
@@ -389,7 +387,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
                 BindAvgDelta();
-                FillAllTabsData();
+                //FillAllTabsData();
             }
         }
         #endregion
