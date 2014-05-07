@@ -6,50 +6,29 @@
 <script src="JS/DYMO.Label.Framework.latest.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/Printing.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        //        $('#lblCheck').hide();
-        $('#chkAnalyzeAverageOfMeasurements').click(function () {
-            var $this = $('#chkAnalyzeAverageOfMeasurements')
 
-            if ($this.is(':checked')) {
-                //                $('#lblCheck').hide();
-                alert('1');
-                return true;
-            } else {
-                //                $('#lblCheck').show();
-                return false;
-            }
-        });
-    });
-</script>
 
  <script type="text/javascript">
 
-     function GetServerDate() {
-         //         alert('1');
-        // alert(document.getElementById('abcId').value);
-        // alert(document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value);
-         var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;         
-         if (answer == "0") {
-             //document.getElementById("ContentPlaceHolder1_ucAnalyze_lblCompError").innerHTML = "Success, now displaying average of all selected measurements!";
+     function CheckAvgCompability() {
+       
+         var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
+        
+         if (answer == "0") { 
              setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ucAnalyze$chkAnalyzeAverageOfMeasurements\',\'\')', 0);
              return true;
          }
          else if (answer == "1") {
-             jQuery("[id*='lblMessage']").html("Error in different ReferenceCharts, Please select only measurements which used same reference charts.");
+             jQuery("[id*='lblCompError']").html("Error in different ReferenceCharts, Please select only measurements which used same reference charts.");
              return false;
          }
          else if (answer == "2") {
-             jQuery("[id*='lblMessage']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
-             //document.getElementById("ContentPlaceHolder1_ucAnalyze_lblCompError").innerHTML = "Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.";
+             jQuery("[id*='lblCompError']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
              return false;
          }
          else {
              return false;
          }
-
-       
      }
    
     </script>
@@ -267,11 +246,8 @@
                     Font-Bold="true" AutoPostBack="true" OnCheckedChanged="chkAnalyzeAverageOfMeasurements_Click" >
                 </asp:CheckBox>
                 <span style="font-weight: bold; vertical-align: text-top;">Analyze Average Of Measurements</span> 
-                <asp:Label ID="lblCompError" runat="server" Text="" ForeColor="Red"></asp:Label>     
-              <%--  <asp:HiddenField ID="Hd_CompError1" runat="server" />--%>
+                <asp:Label ID="lblCompError" runat="server" Text="" ForeColor="Red"></asp:Label> 
                 <input id="hd_CompError" type="hidden" runat="server"  value="5"/>
-         
-               
             </td>
         </tr>
         <tr id="trListHeader" runat="server">
@@ -584,9 +560,11 @@
                             <td valign="top" style="width:63%; border:1px Solid Gray;">
                                 <asp:DetailsView ID="dvValidationSummary" runat="server" Width="100%" 
                                     AutoGenerateRows="False" GridLines="None" CssClass="Validation_Summary"
-                                    meta:resourcekey="dvValidationSummaryResource1" >
+                                    meta:resourcekey="dvValidationSummaryResource1">
+                                     <EmptyDataTemplate>
+                THIS IS EMPTY
+            </EmptyDataTemplate>
                                     <Fields>
-                                       <%--<asp:ImageField dataimageurlfield="MeasurementStatus" dataimageurlformatstring="~/Images/{0}.png" headertext="Measurement Status:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"></asp:ImageField>                                      --%>
                                         <asp:BoundField DataField="MeasurementName" HeaderText="Measurement Name:"
                                             HeaderStyle-Width="150px" HeaderStyle-CssClass="Summary_Left" 
                                             ItemStyle-CssClass="Summary_Right">                                            
