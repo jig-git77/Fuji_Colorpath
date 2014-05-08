@@ -417,6 +417,7 @@
                 },
                 success:
                     function (response) {
+                       
                         bindMeasurementData();
                         StopProgressBrowserWindow();
                         jQuery("[id*='lblMessage']").html('<%= GetResourceString("statusText") %>' + " " + '<%= GetResourceString("measurementUploadedSuccess") %>');                       
@@ -637,6 +638,15 @@
         oWnd.close();
         return false;
     }
+        
+        var sessionTimeout = "<%= Session.Timeout %>";        
+        setTimeout('RedirectToWelcomePage()',parseInt(sessionTimeout) * 60 * 1000);
+
+        
+        //Session timeout
+        function RedirectToWelcomePage(){
+                isSessionExpired = true;        
+        }
 
 </script>
 <div id="divBackgroundProgressMaster" class="UpdateProgressBackground" style="display: none;
