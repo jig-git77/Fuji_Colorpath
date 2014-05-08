@@ -258,7 +258,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         dvTab_G7.Visible = Tab_G7.Visible = false;
                         if (ValidationType == 2)  //ISO type
                         {
-                            tdAverageOfMeasurements.Visible = true; //Only display in Sync1D ISO mode for Averaging measurements
+                           // tdAverageOfMeasurements.Visible = true; //Only display in Sync1D ISO mode for Averaging measurements
                         }
                     }
                     dvTab_TVI.Visible = Tab_TVI.Visible = true;

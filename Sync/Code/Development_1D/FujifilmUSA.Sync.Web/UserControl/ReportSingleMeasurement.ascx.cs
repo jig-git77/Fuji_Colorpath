@@ -685,7 +685,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return Convert.ToBoolean(txt_IsAvgMeasurement.Text);
+                return Convert.ToBoolean(Convert.ToInt32(txt_IsAvgMeasurement.Text));
             }
         }
 
