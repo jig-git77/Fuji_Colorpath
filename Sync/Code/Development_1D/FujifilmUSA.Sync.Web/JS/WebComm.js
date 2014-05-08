@@ -1,8 +1,12 @@
-﻿var isSessionExpired = false;
+﻿
 $(document).ready(function () {
     $(document).ajaxStart(function () {
-        if(isSessionExpired)
-            window.location.href = "Login.aspx";
+        if (isSessionExpired) {
+            if (window.parent)
+                window.parent.location.href = "Login.aspx";
+            else
+                window.location.href = "Login.aspx";
+        }
     });
 });
 Date.prototype.toMSJSON = function () {
