@@ -560,10 +560,8 @@
                             <td valign="top" style="width:63%; border:1px Solid Gray;">
                                 <asp:DetailsView ID="dvValidationSummary" runat="server" Width="100%" 
                                     AutoGenerateRows="False" GridLines="None" CssClass="Validation_Summary"
-                                    meta:resourcekey="dvValidationSummaryResource1">
-                                     <EmptyDataTemplate>
-                THIS IS EMPTY
-            </EmptyDataTemplate>
+                                    meta:resourcekey="dvValidationSummaryResource1" EmptyDataText="Averaging all measurements!" >
+                                     
                                     <Fields>
                                         <asp:BoundField DataField="MeasurementName" HeaderText="Measurement Name:"
                                             HeaderStyle-Width="150px" HeaderStyle-CssClass="Summary_Left" 

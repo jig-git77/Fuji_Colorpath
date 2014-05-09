@@ -246,8 +246,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     //Hide Verification button
                     lbtnMeasurementVerification.Visible = false;
-                    lbtnOptimize.Visible = false;
-                    trRBtnListDeltaE.Visible = false;
+                    lbtnOptimize.Visible = false; 
+                    trRBtnListDeltaE.Visible = false; 
                     Div_Opt_Header.Visible = true;
                     if (ValidationType == 1)  //G7 type
                     {
@@ -258,7 +258,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         dvTab_G7.Visible = Tab_G7.Visible = false;
                         if (ValidationType == 2)  //ISO type
                         {
-                           // tdAverageOfMeasurements.Visible = true; //Only display in Sync1D ISO mode for Averaging measurements
+                           tdAverageOfMeasurements.Visible = true; //Only display in Sync1D ISO mode for Averaging measurements
                         }
                     }
                     dvTab_TVI.Visible = Tab_TVI.Visible = true;
@@ -313,13 +313,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            if (dvValidationSummary.Rows.Count > 0)
-            {
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                    dvValidationSummary.Rows[0].Cells[0].Text = GetResourceString("locMeasurementNameResource1.Text");
-                else
-                    dvValidationSummary.Rows[0].Cells[0].Text = GetResourceString("BoundFieldResource1.HeaderText");
-            }
+            //if (dvValidationSummary.Rows.Count > 0)
+            //{
+            //    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            //    {
+            //        dvValidationSummary.Rows[0].Cells[0].Text = GetResourceString("locMeasurementNameResource1.Text");
+            //    }
+            //    else
+            //        dvValidationSummary.Rows[0].Cells[0].Text = GetResourceString("BoundFieldResource1.HeaderText");
+            //}
         }
         #endregion
 
@@ -412,17 +414,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         ValidationType = MeasurementSummary[0].ValidationType;
 
                         if (!IsAverageOfMeasurements)   //--Normal display Mode
-                        {
-                            dvValidationSummary.DataSource = MeasurementSummary;                           
+                        {                            
+                            dvValidationSummary.DataSource = MeasurementSummary;
+                            dvValidationSummary.DataBind();
                         }
                         else   //---Average of Measurements display mode
                         {
-                            dvValidationSummary.DataSource = new DataTable();
+                            dvValidationSummary.DataSource = new List<Entity.Measurement>();
+                            dvValidationSummary.DataBind();
+                            //dvValidationSummary.Visible = false;
                             chartAnalyze.MapAreas.Clear();
                             chartAnalyze.IsMapEnabled = false;
-                            dvValidationSummary.EmptyDataText = "Averaging all measurements!";
+                            //dvValidationSummary.EmptyDataText = "Averaging all measurements!";
                         }
-                        dvValidationSummary.DataBind();
+                        
 
                         if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                         {
