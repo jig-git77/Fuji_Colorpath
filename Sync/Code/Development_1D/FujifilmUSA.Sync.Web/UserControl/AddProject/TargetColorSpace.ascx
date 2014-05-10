@@ -95,7 +95,7 @@ textarea {
                                 </asp:DropDownList>
                             </td>                           
                         </tr>
-                        <tr>
+                        <tr id="trDensityPCS" runat="server" visible="false">
                              <td >
                                 <span><asp:Localize runat="server" Text="Density Type:" ID="Localize1" 
                                     meta:resourcekey="locDensityTypeResource1"></asp:Localize></span></td>

@@ -29,7 +29,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
         List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
         DataSet GetReportDataOnMeasurement(int MeasurementId, int OptimizeRunId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false, bool IsAverageOfMeasurements = false);
-        DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false);
+        DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, int OptimizeRunId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false);
 
         List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false);
 

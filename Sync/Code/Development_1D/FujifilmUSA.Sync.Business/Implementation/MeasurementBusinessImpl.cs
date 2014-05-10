@@ -869,7 +869,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false)
+        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, int OptimizeRunId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false)
         {
             var measurements = new DataSet();
             string storedProc = "Report.GetSingleVMeasurement";
@@ -883,7 +883,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                              Instance.
                              GetDsResult(
                                  storedProc,
-                                 new object[] { MeasurementId, From_ΔE, ValidationType });
+                                 new object[] { MeasurementId, From_ΔE, ValidationType, OptimizeRunId });
                   
                     measurements = dsMeasurements;
                 },

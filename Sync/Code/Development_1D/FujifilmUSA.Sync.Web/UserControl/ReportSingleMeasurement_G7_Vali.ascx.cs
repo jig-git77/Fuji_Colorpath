@@ -741,6 +741,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (txt_MeasurementID.Text != null)
             {
                 MeasurementId = Convert.ToInt32(txt_MeasurementID.Text);
+                OptimizeRunId = 0;
+               
                 From_ΔE = txt_dTE.Text;
                 ValidationType = Convert.ToInt32(txt_Vali_Type.Text);
                 DSReport_G7_Vali = new DataSet();
