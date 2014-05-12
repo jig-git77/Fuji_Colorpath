@@ -88,6 +88,7 @@
 <div>
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
+            <asp:HiddenField ID="hdnPCSType" runat="server" />
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                     <td style="width: 22%;" align="right">
@@ -122,7 +123,7 @@
                         <asp:Label ID="lblJDFJobId" runat="server" Text="JDF Job ID"  meta:resourcekey="lblJDFJobIdResource1"></asp:Label>:&nbsp;
                     </td>
                     <td>
-                        <asp:TextBox ID="txtJDFJobId" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>        
+                        <asp:TextBox ID="txtJDFJobId" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>                          
                     </td>
                 </tr>
             </table>                               
@@ -365,6 +366,7 @@
             var ReferenceChartTypeId = jQuery("input[id$=hdReferenceChartTypeId]").val();
             var MsmtName = jQuery("input[id*='txtMeasurementName']").val();                        
             var saveMeasurementUrl="";
+            var PCSDataType = jQuery("input[id*='hdnPCSType']").val();
             var obj;
             if(jQuery("input[id$=hdIsVerification]").val() == "true")
             {
@@ -379,6 +381,7 @@
                     Customer: jQuery('input[id*="txtCustomer"]').val(),
                     PageOrSurface: jQuery('input[id*="txtPageOrSurface"]').val(),
                     JDFJobId: jQuery('input[id*="txtJDFJobId"]').val(),
+                    PCSDataType :PCSDataType
                 };
             }
             else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>')
@@ -389,7 +392,8 @@
                     MeasurementDate: MeasurementDateTime,
                     OptimizeRunId: OptimizeRunId,
                     ReferenceChartTypeId: ReferenceChartTypeId,
-                    MeasurementPatches: MeasuredPatches
+                    MeasurementPatches: MeasuredPatches,
+                    PCSDataType :PCSDataType
                 };
             }
             else
@@ -400,7 +404,8 @@
                     MeasurementDate: MeasurementDateTime,
                     OptimizeRunId: OptimizeRunId,
                     ReferenceChartTypeId: ReferenceChartTypeId,
-                    MeasurementPatches: MeasuredPatches
+                    MeasurementPatches: MeasuredPatches,
+                    PCSDataType :PCSDataType
                 };
             }
             
@@ -638,16 +643,6 @@
         oWnd.close();
         return false;
     }
-        
-        var sessionTimeout = "<%= Session.Timeout %>";        
-        setTimeout('RedirectToWelcomePage()',parseInt(sessionTimeout) * 60 * 1000);
-
-        
-        //Session timeout
-        function RedirectToWelcomePage(){
-                isSessionExpired = true;        
-        }
-
 </script>
 <div id="divBackgroundProgressMaster" class="UpdateProgressBackground" style="display: none;
     position: fixed; top: 0px; left: 0px; height: 100%; width: 100%;">

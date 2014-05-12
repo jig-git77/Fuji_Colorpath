@@ -32,4 +32,3 @@ document.createElement("source");
 document.createElement("summary");
 document.createElement("time");
 document.createElement("video");
-var isSessionExpired = false;

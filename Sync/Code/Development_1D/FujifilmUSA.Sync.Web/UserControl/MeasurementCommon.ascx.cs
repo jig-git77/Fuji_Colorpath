@@ -28,6 +28,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblMeasurementName.Text = GetLocalResourceObject("JobNameCaption").ToString();
             else
                 lblMeasurementName.Text = GetLocalResourceObject("MeasurementNameCaption").ToString();
+            hdnPCSType.Value = Convert.ToInt32(SessionManager.Instance.CurrentProject.PCSDataTypes).ToString();
         }
         #endregion
 

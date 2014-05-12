@@ -166,7 +166,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
                                                      new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
-                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = ((int)SessionManager.Instance.CurrentProject.PCSDataTypes)}
+                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType)}
                                                  },
                                          new List<Parameters>()
                                                  {

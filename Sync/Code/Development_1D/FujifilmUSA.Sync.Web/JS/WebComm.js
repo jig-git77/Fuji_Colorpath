@@ -1,15 +1,4 @@
-﻿
-$(document).ready(function () {
-    $(document).ajaxStart(function () {
-        if (isSessionExpired) {
-            if (window.parent)
-                window.parent.location.href = "Login.aspx";
-            else
-                window.location.href = "Login.aspx";
-        }
-    });
-});
-Date.prototype.toMSJSON = function () {
+﻿Date.prototype.toMSJSON = function () {
     var date = '/Date(' + this.getTime() + ')/'; //the number of milliseconds since midnight of January 1, 1970 and the specified date.
     return date;
 };
