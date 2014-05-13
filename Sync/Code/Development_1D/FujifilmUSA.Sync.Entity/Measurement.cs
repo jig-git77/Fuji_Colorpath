@@ -24,5 +24,6 @@ namespace FujifilmUSA.Sync.Entity
         public string MetricTargetPresetName { get; set; }
         public int ValidationType { get; set; }
         public string PrintStandardType { get; set; }
+        public int PCSDataType { get; set; }
     }
 }

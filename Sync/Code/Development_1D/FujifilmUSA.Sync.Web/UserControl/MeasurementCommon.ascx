@@ -380,8 +380,7 @@
                     Notes: jQuery('textarea[id*="txtNotes"]').val(),
                     Customer: jQuery('input[id*="txtCustomer"]').val(),
                     PageOrSurface: jQuery('input[id*="txtPageOrSurface"]').val(),
-                    JDFJobId: jQuery('input[id*="txtJDFJobId"]').val(),
-                    PCSDataType :PCSDataType
+                    JDFJobId: jQuery('input[id*="txtJDFJobId"]').val()
                 };
             }
             else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>')

@@ -959,7 +959,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  new Parameters() {ParameterName = "@Notes", Type = DbType.String, Value = measurement.Notes},
                                                  new Parameters() {ParameterName = "@Customer", Type = DbType.String, Value = measurement.Customer},
                                                  new Parameters() {ParameterName = "@PageOrSurface", Type = DbType.String, Value = measurement.PageOrSurface},
-                                                 new Parameters() {ParameterName = "@JDFJobId", Type = DbType.String, Value = measurement.JDFJobId},
+                                                 new Parameters() {ParameterName = "@JDFJobId", Type = DbType.String, Value = measurement.JDFJobId}
                                              },
                                          new List<Parameters>()
                                              {
@@ -1451,7 +1451,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
                                                      new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
-                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = ((int)SessionManager.Instance.CurrentProject.PCSDataTypes)}
+                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = ((int)measurement.PCSDataType)}
 
                                                  },
                                          new List<Parameters>()
