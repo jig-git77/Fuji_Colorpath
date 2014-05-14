@@ -733,13 +733,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locBlackDeltaL;
         
         /// <summary>
-        /// Chart_GrayL control.
+        /// Chart_BlackL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart_GrayL;
+        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart_BlackL;
         
         /// <summary>
         /// locBlackDeltaLSummary control.
@@ -769,13 +769,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locGrayDeltaL;
         
         /// <summary>
-        /// Chart_BlackL control.
+        /// Chart_GrayL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart_BlackL;
+        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart_GrayL;
         
         /// <summary>
         /// locGrayDeltaLSummary control.
