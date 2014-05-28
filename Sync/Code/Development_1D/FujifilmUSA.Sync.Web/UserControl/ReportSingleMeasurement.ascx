@@ -13,11 +13,10 @@
                 <tr>
                     <td valign="top">
                         <asp:TextBox ID="txt_MeasurementID" runat="server"></asp:TextBox>
-                        <asp:TextBox ID="txt_OptimizeRunID" runat="server"></asp:TextBox>
                         <asp:TextBox ID="txt_dTE" runat="server"></asp:TextBox>
                         <asp:TextBox ID="txt_DLPName" runat="server"></asp:TextBox>
                         <asp:TextBox ID="txt_Vali_Type" runat="server"></asp:TextBox>
-                        <asp:TextBox ID="txt_IsAvgMeasurement" runat="server" Text="0"></asp:TextBox>
+                        <asp:TextBox ID="txt_IsAvgMeasurement" runat="server" Text="False"></asp:TextBox>
                         <br />
                         Target Versus Actual AB Plot
                         <br />
@@ -132,7 +131,7 @@
                     <td>
                         Summary Delta E Value
                         <br />
-                        <asp:Chart ID="ChartResultSummary_DeltaEValue" runat="server" Width="340px" Height="400px" BackColor="Transparent"
+                        <asp:Chart ID="ChartResultSummary_DeltaEValue" runat="server" Width="340px" Height="255px" BackColor="Transparent"
                              ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_ResultSummary_DeltaEValue"
                             ImageType="Jpeg">
                             <BorderSkin BackSecondaryColor="White" BorderColor="Black" BorderWidth="2"

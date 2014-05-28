@@ -52,12 +52,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new DataTable();
         }
 
-        public List<AnalyzeChart>[] GetChartData(int MeasurementId, string From_ΔE, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart>[] GetChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             throw new NotImplementedException();
         }
 
-        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             throw new NotImplementedException();
         }
@@ -96,12 +96,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<AnalyzeChart_Gray>();
         }
 
-        public DataSet GetReportDataOnMeasurement(int MeasurementId, int OptimizeRunId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             return new DataSet();
         }
 
-        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, int OptimizeRunId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false)
+        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false)
         {
             return new DataSet();
         }
@@ -117,7 +117,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         }
 
 
-        public List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             return new List<Measurement>();
         }
@@ -179,19 +179,19 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<AnalyzeChart_DotGain>();
         }
-        public List<AnalyzeChart_DotGain> GetISOTVIChart(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_DotGain> GetISOTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             return new List<AnalyzeChart_DotGain>();
         }
-        public List<AnalyzeChart_DotGain> GetSpreadChartData(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_DotGain> GetSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             return new List<AnalyzeChart_DotGain>();
         }
-        public List<AnalyzeChart_DotGain> GetSpreadSplineRangeChartData(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_DotGain> GetSpreadSplineRangeChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             return new List<AnalyzeChart_DotGain>(); 
         }
-        public DataTable GetMaxSpreadChartData(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public DataTable GetMaxSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             return new DataTable();
         }

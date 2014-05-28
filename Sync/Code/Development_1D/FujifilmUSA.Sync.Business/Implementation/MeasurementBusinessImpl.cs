@@ -364,7 +364,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             var VmeasurementSummary = new List<Measurement>();
             string storedProc = "CPSyncV.GetVMeasurementDeltasByMeasurementID";
@@ -384,7 +384,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 storedProc,
-                                new object[] { MeasurementId, From_ΔE, optimizeRunId });
+                                new object[] { MeasurementId, From_ΔE });
                     if (dsMeasurements.Tables[0].Rows.Count > 0)
                     {
                         VmeasurementSummary = dsMeasurements.Tables[0].AsEnumerable().
@@ -445,7 +445,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         #region Get common chart data
-        public List<AnalyzeChart>[] GetChartData(int MeasurementId, string From_ΔE, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart>[] GetChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             var DeltaEPatchDetails = new List<AnalyzeChart>();
             var ChartDetailArray = new List<AnalyzeChart>[3];
@@ -468,7 +468,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 storedProc,
-                                new object[] { MeasurementId, From_ΔE, optimizeRunId });
+                                new object[] { MeasurementId, From_ΔE });
 
                     //DeltaEPatchDetails
                     ChartDetailArray[0] = dsMeasurements.Tables[0].
@@ -626,7 +626,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         #region Get common Gamut chart data
-        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             var GamutChartDetails = new List<AnalyzeChart_Gray>();
             var GamutChartData = new List<AnalyzeChart_Gray>[3];
@@ -649,7 +649,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 storedProc,
-                                new object[] { MeasurementId, optimizeRunId });
+                                new object[] { MeasurementId });
                     //GamutChartDetails Char 1
                     GamutChartData[0] = dsMeasurements.Tables[0].
                          AsEnumerable().
@@ -829,7 +829,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return LABChartDetails;
         }
 
-        public DataSet GetReportDataOnMeasurement(int MeasurementId, int OptimizeRunId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             var measurements = new DataSet();
             string storedProc = "Report.GetSingleMeasurement";
@@ -861,7 +861,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                              Instance.
                              GetDsResult(
                                  storedProc,
-                                 new object[] { MeasurementId, From_ΔE, ValidationType, OptimizeRunId });
+                                 new object[] { MeasurementId, From_ΔE, ValidationType });
                     }
                     measurements = dsMeasurements;
                 },
@@ -869,7 +869,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, int OptimizeRunId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false)
+        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false)
         {
             var measurements = new DataSet();
             string storedProc = "Report.GetSingleVMeasurement";
@@ -883,7 +883,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                              Instance.
                              GetDsResult(
                                  storedProc,
-                                 new object[] { MeasurementId, From_ΔE, ValidationType, OptimizeRunId });
+                                 new object[] { MeasurementId, From_ΔE, ValidationType });
                   
                     measurements = dsMeasurements;
                 },
@@ -1665,7 +1665,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return TVIChartDetails;
         }
 
-        public List<AnalyzeChart_DotGain> GetISOTVIChart(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_DotGain> GetISOTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             var TVIChartDetails = new List<AnalyzeChart_DotGain>();
             string storedProc = "CPSync.GetChartData_ISO_DotGain";  //----ISO Sync1D type  
@@ -1686,7 +1686,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 storedProc,
-                                new object[] { MeasurementId, optimizeRunId });
+                                new object[] { MeasurementId });
                     TVIChartDetails = dsMeasurements.Tables[0].
                          AsEnumerable().
                         Select(x => new AnalyzeChart_DotGain()
@@ -1706,7 +1706,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return TVIChartDetails;
         }
 
-        public List<AnalyzeChart_DotGain> GetSpreadChartData(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_DotGain> GetSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             var TVIChartDetails = new List<AnalyzeChart_DotGain>();
             string storedProc = "CPSync.GetChartData_ISO_DotGain";  //----ISO Sync1D type  
@@ -1727,7 +1727,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                            Instance.
                            GetDsResult(
                                storedProc,
-                               new object[] { MeasurementId, optimizeRunId });
+                               new object[] { MeasurementId });
                     TVIChartDetails = dsMeasurements.Tables[1].
                          AsEnumerable().
                         Select(x => new AnalyzeChart_DotGain()
@@ -1746,7 +1746,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return TVIChartDetails;
         }
 
-        public List<AnalyzeChart_DotGain> GetSpreadSplineRangeChartData(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_DotGain> GetSpreadSplineRangeChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             var TVIChartDetails = new List<AnalyzeChart_DotGain>();
             string storedProc = "CPSync.GetChartData_ISO_DotGain";  //----ISO Sync1D type  
@@ -1767,7 +1767,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 storedProc,
-                                new object[] { MeasurementId, optimizeRunId });
+                                new object[] { MeasurementId });
                     TVIChartDetails = dsMeasurements.Tables[2].
                          AsEnumerable().
                         Select(x => new AnalyzeChart_DotGain()
@@ -1781,7 +1781,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return TVIChartDetails;
         }
 
-        public DataTable GetMaxSpreadChartData(int MeasurementId, int optimizeRunId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public DataTable GetMaxSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             var TVIChartDetails = new DataTable();
             string storedProc = "CPSync.GetChartData_ISO_DotGain";  //----ISO Sync1D type  
@@ -1802,7 +1802,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 storedProc,
-                                new object[] { MeasurementId, optimizeRunId });
+                                new object[] { MeasurementId });
                     TVIChartDetails = dsMeasurements.Tables[3];
 
                 },

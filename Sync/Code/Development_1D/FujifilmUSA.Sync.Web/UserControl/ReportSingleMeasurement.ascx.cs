@@ -396,6 +396,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (!IsVerification && !IsSync1DType) //--For Sync4D Optimization only
                     {
                         #region //-----for Sync4D
+
+                        ChartResultSummary_Delta.Height = Unit.Pixel(200);
+
                         List<decimal> levels = new List<decimal>();  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
                         levels.Add(Convert.ToDecimal(DT.Rows[0]["Avg_ΔE"].ToString()));
                         levels.Add(Convert.ToDecimal(DT.Rows[0]["Max_ΔE"].ToString()));
@@ -449,9 +452,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         List<decimal> levels = new List<decimal>();  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
                         for (int i = 0; i < DT.Rows.Count; i++)
                         {
-                            levels.Add(Convert.ToDecimal(DT.Rows[i]["MeasuredValue"].ToString()));
+                            levels.Add(Convert.ToDecimal(DT.Rows[i]["TargetValue"].ToString()));
                         }
-                        DtELimit = levels.Max() + 2;
+                        DtELimit = levels.Max() + 1;
                         DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
 
                         //---------Normal Binding Graph-------//
@@ -567,10 +570,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     if (DT != null && i < DT.Rows.Count)
                     {
-                        List<decimal> levels = DT.AsEnumerable().Select(al => al.Field<decimal>("ΔE")).Distinct().ToList(); //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
-                        DtELimit = levels.Max() + 2;
-                        DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
-
+                        if (!IsVerification && !IsSync1DType) //--For Sync4D Optimization only
+                        {
+                            List<decimal> levels = DT.AsEnumerable().Select(al => al.Field<decimal>("ΔE")).Distinct().ToList(); //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
+                            DtELimit = levels.Max() + 2;
+                            DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
+                        }
+                        else
+                        {
+                            List<decimal> levels = DT.AsEnumerable().Select(al => al.Field<decimal>("ΔELimit")).Distinct().ToList(); //-----------Get ΔElimit by getting ΔElimit plus add 1 more points
+                            DtELimit = levels.Max() + 1;
+                            DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
+                        }
                         BindDeltaEValueACTTHValue(objSeries0, objSeries1, objSeries2, DT.Rows[i], i, DtELimit);
                     }
                     else
@@ -635,11 +646,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (txt_MeasurementID.Text != null)
             {
                 MeasurementId = Convert.ToInt32(txt_MeasurementID.Text);
-                OptimizeRunId = 0;
-                if (txt_OptimizeRunID.Text != null)
-                {
-                    OptimizeRunId = Convert.ToInt32(txt_OptimizeRunID.Text);
-                }
+               
                 From_ΔE = txt_dTE.Text;
                 ValidationType = Convert.ToInt32(txt_Vali_Type.Text);
                 DSReport = new DataSet();
@@ -657,7 +664,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewReportSingleMeasurement Members
 
         public int MeasurementId { get; set; }
-        public int OptimizeRunId { get; set; }
         public DataSet DSReport { get; set; }
 
         public string From_ΔE { get; set; }
@@ -685,7 +691,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return Convert.ToBoolean(Convert.ToInt32(txt_IsAvgMeasurement.Text));
+                return Convert.ToBoolean(txt_IsAvgMeasurement.Text);
             }
         }
 

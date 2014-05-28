@@ -148,7 +148,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Analyze()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
-            this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
         }
         #region Page Method
         protected override void OnInit(EventArgs e)
@@ -258,7 +257,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         dvTab_G7.Visible = Tab_G7.Visible = false;
                         if (ValidationType == 2)  //ISO type
                         {
-                           tdAverageOfMeasurements.Visible = true; //Only display in Sync1D ISO mode for Averaging measurements
+                            tdAverageOfMeasurements.Visible = true; //Only display in Sync1D ISO mode for Averaging measurements
                         }
                     }
                     dvTab_TVI.Visible = Tab_TVI.Visible = true;
@@ -311,18 +310,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-            //if (dvValidationSummary.Rows.Count > 0)
-            //{
-            //    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-            //    {
-            //        dvValidationSummary.Rows[0].Cells[0].Text = GetResourceString("locMeasurementNameResource1.Text");
-            //    }
-            //    else
-            //        dvValidationSummary.Rows[0].Cells[0].Text = GetResourceString("BoundFieldResource1.HeaderText");
-            //}
-        }
+   
         #endregion
 
         #region Methods
@@ -489,15 +477,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 dvTab_G7.Visible = Tab_G7.Visible = true;
                 ValidationType = 1;
-                path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&OptimizeRunID=" + OptimizeRunId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
+                path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
             }
             else
             {
                 dvTab_G7.Visible = Tab_G7.Visible = false;
-                path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&OptimizeRunID=" + OptimizeRunId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
+                path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D && ValidationType == 2) //Sync1D and ISO
                 {
-                    path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&OptimizeRunID=" + OptimizeRunId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType + "&IsAvgMeas=" + IsAverageOfMeasurements;
+                    path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType + "&IsAvgMeas=" + IsAverageOfMeasurements;
                 }
             }
             iframeGeneratePDFReport.Attributes.Add("src", path);
@@ -655,8 +643,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (DT != null && DT.Count > 0)
             {
-                DtELimit = (from c in DT select c.ΔE).Max() + 2;  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
-                DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
+                //---Set up lenght of background DtELimit charts bar poll.
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                {
+                    DtELimit = (from c in DT select c.ΔELimit).Max() + 1;  //-----------Get ΔElimit by getting ΔELimit plus add 1 more points
+                    DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
+                }
+                else
+                {
+                    DtELimit = (from c in DT select c.ΔE).Max() + 2;  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
+                    DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
+                }
 
                 for (int i = 0; i < DT.Count; i++)
                 {

@@ -400,7 +400,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         levels.Add(Convert.ToDecimal(DT.Rows[i]["MeasuredValue"].ToString()));
                     }
-                    DtELimit = levels.Max() + 2;
+                    DtELimit = levels.Max() + 1;
                     DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
 
                     //---------Normal Binding Graph-------//
@@ -514,8 +514,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     if (DT != null && i < DT.Rows.Count)
                     {
-                        List<decimal> levels = DT.AsEnumerable().Select(al => al.Field<decimal>("ΔE")).Distinct().ToList(); //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
-                        DtELimit = levels.Max() + 2;
+                        List<decimal> levels = DT.AsEnumerable().Select(al => al.Field<decimal>("ΔELimit")).Distinct().ToList(); //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
+                        DtELimit = levels.Max() + 1;
                         DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
 
                         BindDeltaEValueACTTHValue(objSeries0, objSeries1, objSeries2, DT.Rows[i], i, DtELimit);

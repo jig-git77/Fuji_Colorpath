@@ -31,7 +31,8 @@ function SetChartResult(objChart) {
     g_Chart["NumberOfRows"] = objChart.NumOfRows;
     g_Chart["NumberOfColumns"] = objChart.NumOfCols; 
     actKey = objChart.ActivationKey;
-    g_Chart["ReadCS"] = "Spectral,Density,CIELab,CIEXYZ,sRGB";
+    // g_Chart["ReadCS"] = "Spectral,Density,CIELab,CIEXYZ,sRGB";
+    g_Chart["ReadCS"] = "CIELab,CIEXYZ,sRGB,Density";
 
     for (m = 1; m <= g_Chart["NumberOfRows"]; m++) {
         g_Chart["RowNames"].push("row " + m);
@@ -97,7 +98,8 @@ function SetChartResult(objChart) {
         }
         else {
             g_Chart["ChartType"] = "Native";
-            g_Chart["ReadCS"] = "CIELab,CIEXYZ,sRGB,Density,Spectral";
+            // g_Chart["ReadCS"] = "CIELab,CIEXYZ,sRGB,Density,Spectral";
+            g_Chart["ReadCS"] = "CIELab,CIEXYZ,sRGB,Density";
         }
         g_Chart["ChartSizeX"] = objChart.ChartSetting["ChartSizeX"];
         g_Chart["ChartSizeY"] = objChart.ChartSetting["ChartSizeY"];

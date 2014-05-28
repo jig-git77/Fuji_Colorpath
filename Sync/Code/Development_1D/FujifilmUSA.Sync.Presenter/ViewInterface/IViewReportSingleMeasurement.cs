@@ -9,7 +9,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     public interface IViewReportSingleMeasurement : IViewBase
     {
         int MeasurementId { get; set; }
-        int OptimizeRunId { get; set; }
         string From_ΔE { get; set; }
         bool IsVerification { get; }
         DataSet DSReport { get; set; }
