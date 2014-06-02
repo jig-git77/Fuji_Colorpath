@@ -67,8 +67,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 BindSummaryDeltaValueBarChart(DSReport.Tables[2]); // Bind Chart of Summary Delta Value Bar Chart
 
-                BindSummaryDeltaEValueBarChart(DSReport.Tables[3], 0, 11); //Bind Chart of Summary Delta E Value Bar Chart
-
                 #endregion
             }
             CreateReportPDF(DSReport); // Generates PDF Report.           
@@ -452,7 +450,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         List<decimal> levels = new List<decimal>();  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
                         for (int i = 0; i < DT.Rows.Count; i++)
                         {
-                            levels.Add(Convert.ToDecimal(DT.Rows[i]["TargetValue"].ToString()));
+                            levels.Add(Convert.ToDecimal(DT.Rows[i]["MeasuredValue"].ToString()));
                         }
                         DtELimit = levels.Max() + 1;
                         DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
@@ -504,140 +502,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
          
         }
-        #endregion
-
-        #region " ==== Summary Delta E Value Chart === "
-        private void BindSummaryDeltaEValueBarChart(DataTable DT, int _StartIndex, int _EndIndex)
-        {
-            
-                ChartResultSummary_DeltaEValue.BorderColor = Color.White;
-                ChartResultSummary_DeltaEValue.BorderWidth = 0;
-                ChartResultSummary_DeltaEValue.BackColor = Color.White;
-
-                //========== Clear Points and Show Chart ==========//
-                ChartResultSummary_DeltaEValue.Visible = true;
-                ChartResultSummary_DeltaEValue.Series[0].Points.Clear();
-                ChartResultSummary_DeltaEValue.Series[1].Points.Clear();
-                ChartResultSummary_DeltaEValue.Series[2].Points.Clear();
-
-                #region //========== Declarations ==========//
-                // === Series0 to display Thresold value === //
-                Series objSeries0 = (Series)ChartResultSummary_DeltaEValue.Series[0];
-                objSeries0.XValueType = ChartValueType.Int32;
-                objSeries0.YValueType = ChartValueType.String;
-                objSeries0.IsVisibleInLegend = false;
-                objSeries0.CustomProperties = "DrawingStyle=Cylinder";
-
-                // === Series1 to display Actual value === //
-                Series objSeries1 = (Series)ChartResultSummary_DeltaEValue.Series[1];
-                objSeries1.XValueType = ChartValueType.Int32;
-                objSeries1.YValueType = ChartValueType.String;           
-                objSeries1.CustomProperties = "DrawingStyle=Cylinder";
-
-                // === Series2 to display red marker on Thresold value === //
-                Series objSeries2 = (Series)ChartResultSummary_DeltaEValue.Series[2];
-                objSeries2.XValueType = ChartValueType.Int32;
-                objSeries2.YValueType = ChartValueType.String;
-                objSeries2.CustomProperties = "DrawingStyle=Cylinder";
-                #endregion
-
-                #region //========== ChartArea Settings ==========//
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].AxisX.LabelStyle.Enabled = false;
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].AxisX.LabelStyle.Interval = 1;
-
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].Position.Auto = true;
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].Position.X = float.Parse("0");
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].Position.Y = float.Parse("5");
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].Position.Width = float.Parse("99");
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].Position.Height = float.Parse("97");
-
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].InnerPlotPosition.Auto = true;
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].InnerPlotPosition.X = float.Parse("0");
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].InnerPlotPosition.Y = float.Parse("2");
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].InnerPlotPosition.Width = float.Parse("98");
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].InnerPlotPosition.Height = float.Parse("97");
-
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].ShadowOffset = 0;
-                ChartResultSummary_DeltaEValue.BorderSkin.SkinStyle = BorderSkinStyle.None;
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].BorderWidth = 0;
-                ChartResultSummary_DeltaEValue.BorderSkin.BorderWidth = 0;
-
-                #endregion
-
-                #region " === Fill Series === "
-                // === Limit with red marker === //
-                for (int i = _StartIndex; i < _EndIndex; i = i + 1)
-                {
-                    if (DT != null && i < DT.Rows.Count)
-                    {
-                        if (!IsVerification && !IsSync1DType) //--For Sync4D Optimization only
-                        {
-                            List<decimal> levels = DT.AsEnumerable().Select(al => al.Field<decimal>("ΔE")).Distinct().ToList(); //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
-                            DtELimit = levels.Max() + 2;
-                            DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
-                        }
-                        else
-                        {
-                            List<decimal> levels = DT.AsEnumerable().Select(al => al.Field<decimal>("ΔELimit")).Distinct().ToList(); //-----------Get ΔElimit by getting ΔElimit plus add 1 more points
-                            DtELimit = levels.Max() + 1;
-                            DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
-                        }
-                        BindDeltaEValueACTTHValue(objSeries0, objSeries1, objSeries2, DT.Rows[i], i, DtELimit);
-                    }
-                    else
-                    {
-                        BindDeltaEValueACTTHValue(objSeries0, objSeries1, objSeries2, null, i, DtELimit);
-                    }
-                }
-
-
-                // === Save Chart Image after generating image with proper data === //
-                string FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(ChartResultSummary_DeltaEValue.ImageLocation) + "." + ChartResultSummary_DeltaEValue.ImageType;
-                ChartResultSummary_DeltaEValue.SaveImage(Server.MapPath(FileName));
-
-                #endregion
-            
-        }
-
-        private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, Series objSeries2, DataRow DR, int Index, decimal DtELimit)
-        {
-            
-                string strHTMLColor = "";
-                Double Y1, Y2, Y3;
-                Y1 = Y2 = Y3 = 0;
-
-                if (DR != null)
-                {
-                    Y1 = (Convert.ToString(DtELimit) == "" ? 0 : Utilities.DecimalRound(Convert.ToDouble(DtELimit)));
-                    Y2 = (Convert.ToString(DR["ΔE"]) == "" ? 0 : Utilities.DecimalRound(Convert.ToDouble(DR["ΔE"].ToString())));
-                    Y3 = (Convert.ToString(DR["ΔELimit"]) == "" ? 0 : Utilities.DecimalRound(Convert.ToDouble(DR["ΔELimit"].ToString())));
-                    strHTMLColor = Convert.ToString(DR["HTMLColor"].ToString());
-                }
-
-                // === When Actual value is not available then no series will display and no marker will display
-                if (Y2 == 0)
-                    Y1 = Y2;
-
-                Series SeriesActual = objSeries1;
-                objSeries0.Points.AddXY((Double)0, Y1);
-                objSeries0.Points[Index]["PointWidth"] = "0.8";
-                objSeries1.Points.AddXY((Double)0, Y2);
-                objSeries0.Points[Index].BackGradientStyle = GradientStyle.DiagonalRight;
-
-                if (IsSync1DType || IsVerification) //-----For Sync1D projects or validation projects
-                {
-                    objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
-                }
-
-                SeriesActual.Points[Index].Color = System.Drawing.ColorTranslator.FromHtml(strHTMLColor);
-                SeriesActual.Points[Index]["PointWidth"] = "0.8";
-
-                if (Y1 == 0 && Y2 == 0)
-                {
-                    objSeries0.Points[Index].MarkerImage = "";
-                }           
-        }
-
         #endregion
 
      

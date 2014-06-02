@@ -708,7 +708,7 @@
                                     </td>
                                     <td style="width: 60%; " id="TDEPrimary" runat="server">
                                         <asp:Chart ID="chartDeltaE" runat="server" Width="210px" Height="362px" 
-                                            BackColor="Transparent" meta:resourcekey="chartDeltaEResource1">                  
+                                            BackColor="Transparent" meta:resourcekey="chartDeltaEResource1"  ImageType="Jpeg" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_ResultSummary_DeltaEValue">                  
                                                             <Series>
                                                                 <asp:Series Name="Series0"  Color="212, 232, 250" ChartArea="ChartArea1" 
                                                                     ChartType="Bar">                                              
@@ -759,7 +759,7 @@
                                                 <td>
                                                     <asp:Chart ID="CHRT_SummaryDensity" ImageType="Jpeg" runat="server" Width="380px"
                                                         Height="175px" ImageUrl="~/UploadFiles/temp/CHRT_DensityDeviation" BackGradientType="Center"
-                                                        BackGradientEndColor="#FFFFFF" BorderLineColor="#808080"
+                                                        BackGradientEndColor="#FFFFFF" BorderLineColor="#808080" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_Density"
                                                         EnableViewState="false">
                                                         <Series>
                                                             <asp:Series Name="Series0" BackGradientStyle="DiagonalRight" BorderColor="26, 59, 105"
@@ -812,7 +812,7 @@
                                                                                 height: 180px; padding-left: 20px; padding-bottom: 14px;">
                                                                                 
                                                             <asp:Chart ID="chartPaper1" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph1_Sync4D.jpg"
-                                                                ImageType="Jpeg"  Width="240px" Height="130px" 
+                                                                ImageType="Jpeg"  Width="240px" Height="130px" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_PaperLab1"
                                                                 meta:resourcekey="chartPaper1Resource1">
                                                                 <Legends>
                                                                     <asp:Legend Name="Default" Enabled="False">
@@ -857,7 +857,7 @@
 
 
                                                                 <asp:Chart ID="chartPaper2" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph2_Sync4D.jpg"
-                                                                ImageType="Jpeg" Width="69px" Height="130px" 
+                                                                ImageType="Jpeg" Width="69px" Height="130px" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_PaperLab2"
                                                                     meta:resourcekey="chartPaper2Resource1">
                                                                 <Legends>
                                                                     <asp:Legend Name="Default" Enabled="False">
@@ -945,7 +945,7 @@
                                     <tr>
                                         <td valign="top">
                                                 <asp:Chart ID="Chart_GrayF" runat="server" Width="400px"  Height="105px" BackGradientType="Center" 
-                                                BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
+                                                BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false" ImageType="Jpeg" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_DeltaChChart">
                                                 <Legends>
                                                     <asp:Legend Name="Default" Enabled="False">
                                                     </asp:Legend>
@@ -1048,7 +1048,7 @@
                                 <tr>
                                     <td valign="top">
                                     <asp:Chart ID="Chart_BlackL" runat="server" Width="400px"  Height="105px" BackGradientType="Center" 
-                                            BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
+                                            BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false" ImageType="Jpeg" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_BlackDeltaLChart">
                                             <Legends>
                                                 <asp:Legend Name="Default" Enabled="False">
                                                 </asp:Legend>
@@ -1156,7 +1156,7 @@
                                             
                                         <asp:Chart ID="Chart_GrayL" runat="server" BackGradientEndColor="White" 
                                             BackGradientType="Center" BorderLineColor="#808080" EnableViewState="false" 
-                                            Height="105px" Width="400px">
+                                            Height="105px" Width="400px" ImageType="Jpeg" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_GrayDeltaLChart">
                                             <Legends>
                                                 <asp:Legend Enabled="False" Name="Default">
                                                 </asp:Legend>
@@ -1629,7 +1629,7 @@
                                                                                 <asp:Chart ID="chartL" runat="server" Width="365px" Height="125px" 
                                                                                         BackGradientType="Center"
                                                                                         BackGradientEndColor="White" BorderLineColor="Gray" 
-                                                                                    meta:resourcekey="chartLResource1">
+                                                                                    meta:resourcekey="chartLResource1" ImageType="Jpeg" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_LChart">
                                                                                         <Titles>
                                                                                             <asp:Title Text="L*" Name="Title1">
                                                                                                 <Position X="94" Y="10" Auto="False" />
@@ -1676,7 +1676,7 @@
 
                                                                                  <asp:Chart ID="chartA" runat="server" Width="365px" Height="125px" BackGradientType="Center" 
                                                                                     BackGradientEndColor="White" BorderLineColor="Gray" 
-                                                                                     meta:resourcekey="chartAResource1">
+                                                                                     meta:resourcekey="chartAResource1" ImageType="Jpeg" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_AChart">
                                                                                     <Legends>
                                                                                         <asp:Legend Name="Default" Enabled="False">
                                                                                         </asp:Legend>
@@ -1723,7 +1723,7 @@
                                                                         
                                                                                  <asp:Chart ID="chartB" runat="server" Width="365px" Height="125px" BackGradientType="Center" 
                                                                                     BackGradientEndColor="White" BorderLineColor="Gray" 
-                                                                                     meta:resourcekey="chartBResource1">
+                                                                                     meta:resourcekey="chartBResource1" ImageType="Jpeg" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_BChart">
                                                                                     <Legends>
                                                                                         <asp:Legend Name="Default" Enabled="False">
                                                                                         </asp:Legend>
@@ -1908,7 +1908,7 @@
                                                 <td valign="top" align="center">
                                                     <asp:Chart ID="CHRT_DotgainISOCyan" runat="server" Width="325px" Height="175px"
                                                         ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/DotgainISOCyan" BackGradientStyle="Center"
-                                                        BackSecondaryColor="White" BorderLineColor="#808080">
+                                                        BackSecondaryColor="White" BorderLineColor="#808080" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page4_CyanTVI">
                                                         <Legends>
                                                             <asp:Legend Name="Default" Enabled="false">
                                                             </asp:Legend>
@@ -1957,7 +1957,7 @@
                                                 <td>
                                                     <asp:Chart ID="CHRT_DotgainISOMeganta" runat="server" Width="325px" Height="175px"
                                                         ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/DotgainISOMagenta" BackGradientStyle="Center"
-                                                        BackSecondaryColor="White" BorderLineColor="#808080">
+                                                        BackSecondaryColor="White" BorderLineColor="#808080" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page4_MagentaTVI">
                                                         <Legends>
                                                             <asp:Legend Name="Default" Enabled="false">
                                                             </asp:Legend>
@@ -2008,7 +2008,7 @@
                                                 <td>
                                                     <asp:Chart ID="CHRT_DotgainISOYellow" runat="server" Width="325px" Height="175px"
                                                         ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/DotgainISOYellow" BackGradientStyle="Center"
-                                                        BackSecondaryColor="White" BorderLineColor="#808080">
+                                                        BackSecondaryColor="White" BorderLineColor="#808080" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page4_YellowTVI">
                                                         <Legends>
                                                             <asp:Legend Name="Default" Enabled="false">
                                                             </asp:Legend>
@@ -2057,7 +2057,7 @@
                                                 <td>
                                                     <asp:Chart ID="CHRT_DotgainISOBlack" runat="server" Width="325px" Height="175px"
                                                         ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/DotgainISOBlack" BackGradientStyle="Center"
-                                                        BackSecondaryColor="White" BorderLineColor="#808080">
+                                                        BackSecondaryColor="White" BorderLineColor="#808080" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page4_BlackTVI">
                                                         <Legends>
                                                             <asp:Legend Name="Default" Enabled="false">
                                                             </asp:Legend>
@@ -2117,7 +2117,7 @@
                                             <td>
                                                 <asp:Chart ID="CHRT_SummaryISODotgain" runat="server" Width="650px" Height="310px"
                                                     ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/CHRT_SummaryISODotgain" BackGradientStyle="Center"
-                                                    BackSecondaryColor="#EDEDED" BorderLineColor="#808080"
+                                                    BackSecondaryColor="#EDEDED" BorderLineColor="#808080" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page4_TVISpread"
                                                     EnableViewState="false">
                                                     <Series>
                                                         <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"

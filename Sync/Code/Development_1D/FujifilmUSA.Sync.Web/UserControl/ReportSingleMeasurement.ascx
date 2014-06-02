@@ -127,44 +127,7 @@
                         </asp:Chart>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        Summary Delta E Value
-                        <br />
-                        <asp:Chart ID="ChartResultSummary_DeltaEValue" runat="server" Width="340px" Height="255px" BackColor="Transparent"
-                             ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_ResultSummary_DeltaEValue"
-                            ImageType="Jpeg">
-                            <BorderSkin BackSecondaryColor="White" BorderColor="Black" BorderWidth="2"
-                                SkinStyle="Raised" BackColor="White"></BorderSkin>                        
-                            <Series>
-                                <asp:Series Name="Series0"  Color="#D4E8FA" ChartArea="ChartArea1" ChartType="Bar" IsVisibleInLegend="true"  BackGradientStyle="DiagonalRight" >                                              
-                                </asp:Series>
-                                <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
-                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar">
-                                </asp:Series>    
-                                <asp:Series Name="Series2" BorderWidth="0"  Color="Transparent" 
-                                                           IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar" MarkerImage="~/Images/Chart-Red-Image-Vertical.png">
-                                </asp:Series> 
-                            </Series>
-                            <ChartAreas>
-                                <asp:ChartArea Name="ChartArea1" BackColor="White">
-                                         <Area3DStyle  Enable3D="True" Inclination="0" Rotation="0" IsRightAngleAxes="true" IsClustered="false" >
-                                        </Area3DStyle>
-                                          
-                                    <AxisX  Enabled="True"  IsReversed="True" IsLabelAutoFit="False" >
-                                        <MajorGrid Enabled="False" LineColor="Beige" />
-                                        <MajorTickMark Enabled="False" />
-                                        <LabelStyle Font="Verdana, 7pt" />
-                                    </AxisX>
-                                        <AxisY Enabled="True" IsLabelAutoFit="False">
-                                        <MajorGrid LineColor="Beige"></MajorGrid>
-                                        <LabelStyle Format="###" Font="Verdana, 7pt" />
-                                    </AxisY>
-                                </asp:ChartArea>
-                            </ChartAreas>
-                        </asp:Chart>
-                    </td>
-                </tr>          
+                   
             </table>
         </div>
     </asp:Panel>

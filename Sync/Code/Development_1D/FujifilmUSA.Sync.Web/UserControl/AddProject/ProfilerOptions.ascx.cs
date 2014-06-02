@@ -486,6 +486,38 @@ namespace FujifilmUSA.Sync.Web.UserControl
             List<Entity.CPSync1D.PrintStandardTVI> printStandardTVIList = new List<Entity.CPSync1D.PrintStandardTVI>();
         
             #region ---For Cyan Color
+            //--older codes
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Cyan_Quarter_Tone,
+                    Type = CPPatchType.Cyan_Quarter_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25CMY.Text.Trim()) ? "0" : txtTVI25CMY.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25CMY.Text.Trim()) ? "0" : txtThresh25CMY.Text.Trim()))
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Cyan_Half_Tone,
+                    Type = CPPatchType.Cyan_Half_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50CMY.Text.Trim()) ? "0" : txtTVI50CMY.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50CMY.Text.Trim()) ? "0" : txtThresh50CMY.Text.Trim()))
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Cyan_Three_Quarter_Tone,
+                    Type = CPPatchType.Cyan_Three_Quarter_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75CMY.Text.Trim()) ? "0" : txtTVI75CMY.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75CMY.Text.Trim()) ? "0" : txtThresh75CMY.Text.Trim()))
+            });
+            //--newer Codes
             printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
             {
                 PatchType = new PatchType()
@@ -599,6 +631,38 @@ namespace FujifilmUSA.Sync.Web.UserControl
             #endregion
 
             #region ---For Magenta Color
+            //--older codes
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Magenta_Quarter_Tone,
+                    Type = CPPatchType.Magenta_Quarter_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25CMY.Text.Trim()) ? "0" : txtTVI25CMY.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25CMY.Text.Trim()) ? "0" : txtThresh25CMY.Text.Trim()))
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Magenta_Half_Tone,
+                    Type = CPPatchType.Magenta_Half_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50CMY.Text.Trim()) ? "0" : txtTVI50CMY.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50CMY.Text.Trim()) ? "0" : txtThresh50CMY.Text.Trim()))
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Magenta_Three_Quarter_Tone,
+                    Type = CPPatchType.Magenta_Three_Quarter_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75CMY.Text.Trim()) ? "0" : txtTVI75CMY.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75CMY.Text.Trim()) ? "0" : txtThresh75CMY.Text.Trim()))
+            });
+            //---newer codes
             printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
             {
                 PatchType = new PatchType()
@@ -712,6 +776,38 @@ namespace FujifilmUSA.Sync.Web.UserControl
             #endregion
 
             #region ---For Yellow Color
+            //--older codes
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Yellow_Quarter_Tone,
+                    Type = CPPatchType.Yellow_Quarter_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25CMY.Text.Trim()) ? "0" : txtTVI25CMY.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25CMY.Text.Trim()) ? "0" : txtThresh25CMY.Text.Trim()))
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Yellow_Half_Tone,
+                    Type = CPPatchType.Yellow_Half_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50CMY.Text.Trim()) ? "0" : txtTVI50CMY.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50CMY.Text.Trim()) ? "0" : txtThresh50CMY.Text.Trim()))
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Yellow_Three_Quarter_Tone,
+                    Type = CPPatchType.Yellow_Three_Quarter_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75CMY.Text.Trim()) ? "0" : txtTVI75CMY.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75CMY.Text.Trim()) ? "0" : txtThresh75CMY.Text.Trim()))
+            });
+            //--newer codes
             printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
             {
                 PatchType = new PatchType()
@@ -825,6 +921,38 @@ namespace FujifilmUSA.Sync.Web.UserControl
             #endregion
 
             #region ---For Black Color
+            //--older codes
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Black_Quarter_Tone,
+                    Type = CPPatchType.Black_Quarter_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25K.Text.Trim()) ? "0" : txtTVI25K.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25K.Text.Trim()) ? "0" : txtThresh25K.Text.Trim()))
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Black_Half_Tone,
+                    Type = CPPatchType.Black_Half_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50K.Text.Trim()) ? "0" : txtTVI50K.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50K.Text.Trim()) ? "0" : txtThresh50K.Text.Trim()))
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Black_Three_Quarter_Tone,
+                    Type = CPPatchType.Black_Three_Quarter_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75K.Text.Trim()) ? "0" : txtTVI75K.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75K.Text.Trim()) ? "0" : txtThresh75K.Text.Trim()))
+            });
+            //--newer codes
             printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
             {
                 PatchType = new PatchType()

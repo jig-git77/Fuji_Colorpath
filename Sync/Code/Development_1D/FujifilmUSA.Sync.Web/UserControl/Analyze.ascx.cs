@@ -647,6 +647,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
                     DtELimit = (from c in DT select c.ΔELimit).Max() + 1;  //-----------Get ΔElimit by getting ΔELimit plus add 1 more points
+                    decimal DtELimit1 = (from c in DT select c.ΔE).Max() + 1;
+                    if (DtELimit1 > DtELimit)
+                    {
+                        DtELimit = DtELimit1;
+                    }
                     DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
                 }
                 else
@@ -707,6 +712,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 LitDeltaEPatches.Text = SBDeltaEPatches.ToString();
             }
             #endregion
+
+            FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(chartDeltaE.ImageLocation) + "." + chartDeltaE.ImageType;
+            chartDeltaE.SaveImage(Server.MapPath(FileName));
         }
 
         private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, Series objSeries2, List<AnalyzeChart> DR, int Index, string TooltipTitle)
@@ -817,6 +825,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 chartPaper1.Series["Paper"].Points[0].BorderWidth = 4;
                 chartPaper1.Series["Paper"].CustomProperties = "PolarDrawingStyle=Marker";
                 chartPaper1.Series["Paper"].Points[0].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+
+
+                FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(chartPaper1.ImageLocation) + "." + chartPaper1.ImageType;
+                chartPaper1.SaveImage(Server.MapPath(FileName));
                 #endregion
 
                 #region Fill Paper 2 chart
@@ -835,6 +847,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 chartPaper2.Series["Series1"].Points[0].Color = System.Drawing.ColorTranslator.FromHtml("#FFFFFF");
                 chartPaper2.Series["Series1"].CustomProperties = "DrawingStyle=Cylinder";
                 chartPaper2.Series["Series1"].Points[0].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+
+
+                FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(chartPaper2.ImageLocation) + "." + chartPaper2.ImageType;
+                chartPaper2.SaveImage(Server.MapPath(FileName));
                 #endregion
             }
         }
@@ -902,6 +918,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     AddDensityPoint(3, objSeries0, objSeries1, objSeries2, "K", "0", "#E9E9E9", "0", "0", "", false);
                 }
 
+                FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_SummaryDensity.ImageLocation) + "." + CHRT_SummaryDensity.ImageType;
+                CHRT_SummaryDensity.SaveImage(Server.MapPath(FileName));
             }
         }
 
@@ -1341,6 +1359,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     AddPointLABChart(i, chartB.Series["Series2"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].Targetb.ToString(), Color.Green.Name.ToString(), DT, false);
                 }
             }
+
+            FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(chartL.ImageLocation) + "." + chartL.ImageType;
+            chartL.SaveImage(Server.MapPath(FileName));
+            FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(chartA.ImageLocation) + "." + chartA.ImageType;
+            chartA.SaveImage(Server.MapPath(FileName));
+            FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(chartB.ImageLocation) + "." + chartB.ImageType;
+            chartB.SaveImage(Server.MapPath(FileName));
         }
 
         private void AddPointLABChart(int _Index, Series _objSeries, string _XValue, string _YValue, string ColorName, List<AnalyzeChart_Gray> DR, bool isActual)
@@ -1428,6 +1453,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     AddPointInChart(i, Chart_GrayF.Series["Series2"], Chart_GrayF.Series["Series2Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔCh*");
                 }
             }
+
+            FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(Chart_GrayF.ImageLocation) + "." + Chart_GrayF.ImageType;
+            Chart_GrayF.SaveImage(Server.MapPath(FileName));
             #endregion
 
             #region Fill Black ΔL Chart
@@ -1445,6 +1473,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     AddPointInChart(i, Chart_BlackL.Series["Series2"], Chart_BlackL.Series["Series2Point"], Convert.ToInt64(DTBlackL[i].Cmyk_Value).ToString(), DTBlackL[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔL*");
                 }
             }
+
+            FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(Chart_BlackL.ImageLocation) + "." + Chart_BlackL.ImageType;
+            Chart_BlackL.SaveImage(Server.MapPath(FileName));
             #endregion
 
             #region Fill CMY / Gray ΔL Chart
@@ -1462,6 +1493,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     AddPointInChart(i, Chart_GrayL.Series["Series2"], Chart_GrayL.Series["Series2Point"], Convert.ToInt64(DTGrayL[i].Cmyk_Value).ToString(), DTGrayL[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔL*");
                 }
             }
+
+            FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(Chart_GrayL.ImageLocation) + "." + Chart_GrayL.ImageType;
+            Chart_GrayL.SaveImage(Server.MapPath(FileName));
             #endregion
         }
 
@@ -1703,6 +1737,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             CHRT_DotgainISOCyan.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListCyan[i].CmykC.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
                         }
                     }
+
+                    FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_DotgainISOCyan.ImageLocation) + "." + CHRT_DotgainISOCyan.ImageType;
+                    CHRT_DotgainISOCyan.SaveImage(Server.MapPath(FileName));
                     #endregion
 
                     #region Magenta
@@ -1738,6 +1775,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                             CHRT_DotgainISOMeganta.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListMagenta[i].CmykM.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
                         }
+
+                        FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_DotgainISOMeganta.ImageLocation) + "." + CHRT_DotgainISOMeganta.ImageType;
+                        CHRT_DotgainISOMeganta.SaveImage(Server.MapPath(FileName));
                     }
                     #endregion
 
@@ -1775,6 +1815,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                             CHRT_DotgainISOYellow.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListYellow[i].CmykY.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
                         }
+
+                        FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_DotgainISOYellow.ImageLocation) + "." + CHRT_DotgainISOYellow.ImageType;
+                        CHRT_DotgainISOYellow.SaveImage(Server.MapPath(FileName));
                     }
                     #endregion
 
@@ -1812,6 +1855,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                             CHRT_DotgainISOBlack.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListBlack[i].CmykK.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
                         }
+
+                        FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_DotgainISOBlack.ImageLocation) + "." + CHRT_DotgainISOBlack.ImageType;
+                        CHRT_DotgainISOBlack.SaveImage(Server.MapPath(FileName));
                     }
                     #endregion
                 }
@@ -1926,8 +1972,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(0), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
                     for (int i = 0; i < DTSpreadSplineRange.Count; i++)
                     {
-                        CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].TVI.ToString())), Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].UpperLimit.ToString())), Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].LowerLimit.ToString())));
-
+                        if (DTSpreadSplineRange[i].UpperLimit != 0 && DTSpreadSplineRange[i].LowerLimit != 0) //When chart has 20-40-60-80 patches then dont display 25-50-75 patches and vice versa
+                        {
+                            CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].TVI.ToString())), Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].UpperLimit.ToString())), Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].LowerLimit.ToString())));
+                        }
                     }
                     CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(100), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
                 }
@@ -1937,9 +1985,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (DTMaxSpreasTable != null && DTMaxSpreasTable.Rows.Count > 0)
                 {
                     rgChromVariation.DataSource = DTMaxSpreasTable;
-                    rgChromVariation.DataBind();                  
+                    rgChromVariation.DataBind();
                 }
+               
                 #endregion
+             
+                FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_SummaryISODotgain.ImageLocation) + "." + CHRT_SummaryISODotgain.ImageType;
+                CHRT_SummaryISODotgain.SaveImage(Server.MapPath(FileName));
             }
             catch (Exception Exc)
             {
@@ -2799,6 +2851,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (e.Item is GridDataItem)
             {
                 GridDataItem item = (GridDataItem)e.Item;
+
+                #region Make all columns visible
+                rgChromVariation.Columns[0].Visible = true;
+                rgChromVariation.Columns[1].Visible = true;
+                rgChromVariation.Columns[2].Visible = true;
+                rgChromVariation.Columns[3].Visible = true;
+                rgChromVariation.Columns[4].Visible = true;
+                rgChromVariation.Columns[5].Visible = true;
+                rgChromVariation.Columns[6].Visible = true;
+                #endregion
+
                 //----If any TVI Tone value is 0, then hide that column from list (ex., either 20, 40, 60 and 80% can be display or either 25, 50, 75% display on list; not both at same time)
                 if (item["Tone20"].Text == "0.00")
                 {
@@ -3042,6 +3105,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IsAverageOfMeasurements = chkAnalyzeAverageOfMeasurements.Checked;
             }
         }
+
+        public string FileName;
         #endregion     
 
     }

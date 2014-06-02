@@ -268,7 +268,17 @@ namespace FujifilmUSA.Sync.Common
                 {
                     SBStr.Replace("###JobStatus###", Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() == "" ? "<td class='row-title'>Meas. Status:</td><td class='row-content'>&nbsp;</td>" : (Convert.ToString(DT.Rows[0]["JobStatus"]).Contains("OK")) ? "<td class='row-title'>Meas. Status:</td><td class='row-content'>" + Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() + "</td>" : "<td class='row-title'  style='color:Red;'>Meas. Status:</td><td class='row-content'  style='color:Red;'>" + Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() + "</td>");
                     SBStr.Replace("###MetricPreset###", Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim());
+                    if (ReportType == 17)   //----For ISO Opti / Validation Report + 4D ISO validation report
+                    {
+                        SBStr.Replace("###CompanyName###", Convert.ToString(DT.Rows[0]["CompanyName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["CompanyName"]).Trim());
+                        SBStr.Replace("###BranchName###", Convert.ToString(DT.Rows[0]["BranchName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["BranchName"]).Trim());
+                        SBStr.Replace("###PressName###", Convert.ToString(DT.Rows[0]["DeviceName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeviceName"]).Trim());
+                        SBStr.Replace("###ProjectName###", Convert.ToString(DT.Rows[0]["ProjectName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ProjectName"]).Trim());
+                        SBStr.Replace("##RunNo##", Convert.ToString(DT.Rows[0]["RunName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["RunName"]).Trim());
+                        SBStr.Replace("###CurrentDate###", System.DateTime.Now.ToShortDateString());
+                    }
                 }
+
             }
             else
             {
@@ -284,11 +294,19 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("###Location###", "&nbsp;");
                 SBStr.Replace("###DeltaEFormula###", "&nbsp;");
 
-                 //--------For G7 / ISO Reports
+                //--------For G7 / ISO Reports
                 if (ReportType == 16 || ReportType == 17)
                 {
                     SBStr.Replace("###JobStatus###", "<td class='row-title'>Meas. Status:</td><td class='row-content'>&nbsp;</td>");
                     SBStr.Replace("###MetricPreset###", "&nbsp;");
+
+                    if (ReportType == 17)   //----For ISO Opti / Validation Report + 4D ISO validation report
+                    {
+                        SBStr.Replace("###CompanyName###", "&nbsp;");
+                        SBStr.Replace("###BranchName###", "&nbsp;");
+                        SBStr.Replace("###PressName###", "&nbsp;");
+                        SBStr.Replace("###ProjectName###", "&nbsp;");
+                    }
                 }
             }
             #endregion
@@ -300,9 +318,9 @@ namespace FujifilmUSA.Sync.Common
 
             // === Table 2 = Chart of Summary Delta Value Graph Image And Table Value Ploted === //          
             #region ==== Summary Delta Value Graph Image ====
-                       
+
             DT = DS_Common.Tables[2];
-           
+
             StringBuilder SBstrDeltaValue = new StringBuilder();
             if (DT != null && DT.Rows.Count > 0)
             {
@@ -320,7 +338,7 @@ namespace FujifilmUSA.Sync.Common
                         else
                         {
                             SBstrDeltaValue.Append("<tr style='height: 27px'>");
-                        }                       
+                        }
                         SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                         SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>" + DT.Rows[i]["MetricSumName"] + "</td>");
                         SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["TargetValue"])) + "&nbsp;</td>");
@@ -478,14 +496,15 @@ namespace FujifilmUSA.Sync.Common
             {
                 string strStatusImg = "";
 
+                int RowHeight = 280 / (DT.Rows.Count + 2);
+
                 for (int i = 0; i < DT.Rows.Count; i++)
                 {
-
-                    SBstrDeltaEValue.Append("<tr style='height: 20px'>");
+                    SBstrDeltaEValue.Append("<tr style='height: " + RowHeight + "px'>");
                     SBstrDeltaEValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                     SBstrDeltaEValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>" + Convert.ToString(DT.Rows[i]["PatchType"]) + "</td>");
                     //--------For G7 / ISO Reports put Tolerance
-                    if (ReportType == 16 || ReportType == 17) 
+                    if (ReportType == 16 || ReportType == 17)
                     {
                         SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔELimit"])) + "&nbsp;</td>");
                     }
@@ -502,6 +521,126 @@ namespace FujifilmUSA.Sync.Common
             }
             SBStr.Replace("###ResultSummary_DeltaEImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_ResultSummary_DeltaEValue.Jpeg"));
             #endregion
+
+            if (ReportType == 17)   //----For ISO Opti / Validation Report + 4D ISO validation report
+            {
+                // === Table 4 = Chart of Paper L*A*B* === //           
+                #region ==== Paper  L*A*B* (Part 1)====
+                SBStr.Replace("###PaperLab1###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_PaperLab1.Jpeg"));
+                #endregion
+
+                // === Table 5 = Chart of Paper L*A*B* === //           
+                #region ==== Paper  L*A*B* (Part 2)====
+                SBStr.Replace("###PaperLab2###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_PaperLab2.Jpeg"));
+                #endregion
+
+                // === Table 6 = Chart of Density === //           
+                #region ==== Density ====
+                SBStr.Replace("###DensityChart###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_Density.Jpeg"));
+                #endregion
+
+                // === Table 7 = Chart of TVISpread === //           
+                #region ==== TVISpread ====
+                SBStr.Replace("###TVISpread###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page4_TVISpread.Jpeg"));
+                #endregion
+
+                // === Table 8 = Chart of TVISpread Data === //           
+                #region ==== TVISpreadData ====
+                DT = DS_Common.Tables[4];
+
+                StringBuilder SBstrTVIPatch = new StringBuilder();
+                StringBuilder SBstrTVIPatchVariation = new StringBuilder();
+             
+
+                SBstrTVIPatch.Append("<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0'>");
+                SBstrTVIPatch.Append("<tr class='row-1' style='BACKGROUND-COLOR:#333333;COLOR:#FFF;'>");
+                SBstrTVIPatchVariation.Append("<tr class='row-1'>");
+
+                StringBuilder SBstrDeltaValue1 = new StringBuilder();
+                if (DT != null && DT.Rows.Count > 0)
+                {
+                    //--------For ISO / 4D Validation ISO Reports
+                
+
+                        if (Convert.ToDecimal(DT.Rows[0]["Tone20"]) != 0)
+                        {
+
+                            SBstrTVIPatch.Append("<td valign='middle' align='left'  class='row-content1'> Tone20 </td>");
+
+                            SBstrTVIPatchVariation.Append("<td valign='middle' align='left'  class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone20"])) + "&nbsp;</td>");
+                           
+                        }
+                        if (Convert.ToDecimal(DT.Rows[0]["Tone25"]) != 0)
+                        {
+
+                            SBstrTVIPatch.Append("<td valign='middle' align='left'  class='row-content1'> Tone25 </td>");
+
+                            SBstrTVIPatchVariation.Append("<td valign='middle' align='left'   class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone25"])) + "&nbsp;</td>");
+                           
+                        }
+                        if (Convert.ToDecimal(DT.Rows[0]["Tone40"]) != 0)
+                        {
+
+                            SBstrTVIPatch.Append("<td valign='middle' align='left'  class='row-content1'> Tone40 </td>");
+
+                            SBstrTVIPatchVariation.Append("<td valign='middle' align='left' class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone40"])) + "&nbsp;</td>");
+                            
+                        }
+                        if (Convert.ToDecimal(DT.Rows[0]["Tone50"]) != 0)
+                        {
+
+                            SBstrTVIPatch.Append("<td valign='middle' align='left'  class='row-content1'> Tone50 </td>");
+
+                            SBstrTVIPatchVariation.Append("<td valign='middle' align='left'  class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone50"])) + "&nbsp;</td>");
+                        }
+                        if (Convert.ToDecimal(DT.Rows[0]["Tone60"]) != 0)
+                        {
+                            SBstrTVIPatch.Append("<td valign='middle' align='left' class='row-content1'> Tone60 </td>");
+
+                            SBstrTVIPatchVariation.Append("<td valign='middle' align='left'  class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone60"])) + "&nbsp;</td>");
+                           
+                        }
+                        if (Convert.ToDecimal(DT.Rows[0]["Tone75"]) != 0)
+                        {
+                            SBstrTVIPatch.Append("<td valign='middle' align='left'  class='row-content1'> Tone75 </td>");
+
+                            SBstrTVIPatchVariation.Append("<td valign='middle' align='left'  class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone75"])) + "&nbsp;</td>");
+                            
+                        }
+                        if (Convert.ToDecimal(DT.Rows[0]["Tone80"]) != 0)
+                        {
+                            SBstrTVIPatch.Append("<td valign='middle' align='left' class='row-content1'> Tone80 </td>");
+
+                            SBstrTVIPatchVariation.Append("<td valign='middle' align='left'  class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone80"])) + "&nbsp;</td>");
+                           
+                        }
+                        SBstrTVIPatch.Append("</tr>");
+                        SBstrTVIPatchVariation.Append("</tr>");
+                    
+                }
+                SBStr.Replace("###TVISpreadData###", SBstrTVIPatch.ToString() + SBstrTVIPatchVariation.ToString() + "</table>");
+                #endregion
+
+                // === Table 9 = Chart of CyanTVI === //           
+                #region ==== CyanTVI ====
+                SBStr.Replace("###CyanTVI###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page4_CyanTVI.Jpeg"));
+                #endregion
+
+                // === Table 10 = Chart of MagentaTVI === //           
+                #region ==== MagentaTVI ====
+                SBStr.Replace("###MagentaTVI###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page4_MagentaTVI.Jpeg"));
+                #endregion
+
+                // === Table 11 = Chart of YellowTVI === //           
+                #region ==== YellowTVI ====
+                SBStr.Replace("###YellowTVI###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page4_YellowTVI.Jpeg"));
+                #endregion
+
+                // === Table 12 = Chart of BlackTVI === //           
+                #region ==== BlackTVI ====
+                SBStr.Replace("###BlackTVI###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page4_BlackTVI.Jpeg"));
+                #endregion
+            }
 
             //--------For G7 / All Validation Report
             if (IsValidation)
