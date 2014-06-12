@@ -275,7 +275,7 @@ namespace FujifilmUSA.Sync.Common
                         SBStr.Replace("###PressName###", Convert.ToString(DT.Rows[0]["DeviceName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeviceName"]).Trim());
                         SBStr.Replace("###ProjectName###", Convert.ToString(DT.Rows[0]["ProjectName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ProjectName"]).Trim());
                         SBStr.Replace("##RunNo##", Convert.ToString(DT.Rows[0]["RunName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["RunName"]).Trim());
-                        SBStr.Replace("###CurrentDate###", System.DateTime.Now.ToShortDateString());
+                        SBStr.Replace("###CurrentDate###", System.DateTime.Now.ToString("dddd, MMMM dd, yyyy"));
                     }
                 }
 
@@ -325,6 +325,7 @@ namespace FujifilmUSA.Sync.Common
             if (DT != null && DT.Rows.Count > 0)
             {
                 string strStatusImg = "";
+                int RowHeight = 29;
 
                 //--------For G7 / ISO Reports
                 if (ReportType == 16 || ReportType == 17)
@@ -333,11 +334,11 @@ namespace FujifilmUSA.Sync.Common
                     {
                         if (Convert.ToDecimal(DT.Rows[i]["MeasuredValue"]) > Convert.ToDecimal(DT.Rows[i]["TargetValue"].ToString()))
                         {
-                            SBstrDeltaValue.Append("<tr style='height: 27px; color:Red;'>");
+                            SBstrDeltaValue.Append("<tr style='height: " + RowHeight + "px; color:Red;'>");
                         }
                         else
                         {
-                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                            SBstrDeltaValue.Append("<tr style='height: " + RowHeight + "px'>");
                         }
                         SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                         SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>" + DT.Rows[i]["MetricSumName"] + "</td>");
@@ -506,7 +507,12 @@ namespace FujifilmUSA.Sync.Common
                     //--------For G7 / ISO Reports put Tolerance
                     if (ReportType == 16 || ReportType == 17)
                     {
-                        SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔELimit"])) + "&nbsp;</td>");
+                        if (DT.Rows[i]["ΔELimit"].ToString() != "0.00") //If no Tolerance value exists for particular Metric Target Preset then don't display "0.00" instead even.
+                        {
+                            SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔELimit"])) + "&nbsp;</td>");
+                        }
+                        else
+                            SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'> &nbsp;</td>");
                     }
                     else
                         SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + "&nbsp;</td>");
