@@ -11,6 +11,7 @@ using System.Reflection;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.GlobalResources;
 using System.Globalization;
+using System.IO;
 namespace FujifilmUSA.Sync.Common
 {
     public class Utilities
@@ -415,6 +416,49 @@ namespace FujifilmUSA.Sync.Common
             }
             return "0";
 
+        }
+        #endregion
+
+        #region Encryipt / Decript
+        public static string Decrypt(string Value)
+        {            
+            byte[] key = System.Text.Encoding.UTF8.GetBytes("@" + System.Configuration.ConfigurationManager.AppSettings["CypherKey"]);
+            byte[] IV = { 18, 52, 86, 120, 144, 171, 205, 239 };
+            if (Value.Trim().Length > 0)
+            {
+                DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+                MemoryStream memoryStream = new MemoryStream
+                        (Convert.FromBase64String(Value));
+                CryptoStream cryptoStream = new CryptoStream(memoryStream,
+                    cryptoProvider.CreateDecryptor(key, IV), CryptoStreamMode.Read);
+                StreamReader reader = new StreamReader(cryptoStream);
+                return reader.ReadToEnd();
+            }
+            return Value;
+        }
+
+        public static string Encrypt(string Value)
+        {
+            try
+            {
+                byte[] key = System.Text.Encoding.UTF8.GetBytes("@" + System.Configuration.ConfigurationManager.AppSettings["CypherKey"]);
+                byte[] IV = { 18, 52, 86, 120, 144, 171, 205, 239 };
+                if (Value.Trim().Length > 0)
+                {
+                    DESCryptoServiceProvider des = new DESCryptoServiceProvider();
+                    byte[] inputByteArray = Encoding.UTF8.GetBytes(Value);
+                    MemoryStream ms = new MemoryStream();
+                    CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(key, IV), CryptoStreamMode.Write);
+                    cs.Write(inputByteArray, 0, inputByteArray.Length);
+                    cs.FlushFinalBlock();
+                    return Convert.ToBase64String(ms.ToArray());
+                }
+                return Value;
+            }
+            catch
+            {
+                return Value;
+            }
         }
         #endregion
 

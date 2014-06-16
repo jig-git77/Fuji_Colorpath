@@ -59,12 +59,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 lblHeader.Text = GetResourceString(_recAddUser); //"Add User";
                 BindRole();
-                BindLanguages();
+                BindLanguages();                
                 if (Request.QueryString["UserId"] != null)
                 {
                     lblHeader.Text = GetResourceString(_recEditUser); //"Edit User";
-                    UserId = Convert.ToInt32(Request.QueryString["UserId"]);
-                    SetUser();
+                    try
+                    {
+                        UserId = Convert.ToInt32(Common.Utilities.Decrypt(Request.QueryString["UserId"]));
+                        SetUser();
+                    }
+                    catch
+                    {
+                        UserId = 0;
+                    }                    
                 }
                 else
                 {
