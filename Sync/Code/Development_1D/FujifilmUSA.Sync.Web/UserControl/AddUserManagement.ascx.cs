@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
+using Telerik.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -65,7 +66,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lblHeader.Text = GetResourceString(_recEditUser); //"Edit User";
                     try
                     {
-                        UserId = Convert.ToInt32(Common.Utilities.Decrypt(Request.QueryString["UserId"]));
+                        string userID = Request.QueryString["UserId"];
+                        var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(userID, System.Configuration.ConfigurationManager.AppSettings["CypherKey"]));
+                        UserId = Convert.ToInt32(id);
                         SetUser();
                     }
                     catch

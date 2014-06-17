@@ -95,8 +95,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                 case "Edit":
                     User.UserId = Convert.ToInt32(e.CommandArgument);
-                    GridDataItem item = (GridDataItem)e.Item;                    
-                    Response.Redirect("AddUserManagement.aspx?UserId=" + Common.Utilities.Encrypt(User.UserId.ToString()));                      
+                    GridDataItem item = (GridDataItem)e.Item;
+                    string parms = Service.Common.Encryption.CryptHelper.EncryptString(User.UserId.ToString(), System.Configuration.ConfigurationManager.AppSettings["CypherKey"]);
+                    Response.Redirect("AddUserManagement.aspx?UserId="  + ContentEncoder.Encode(parms));                                          
                     break;
             }
         }
