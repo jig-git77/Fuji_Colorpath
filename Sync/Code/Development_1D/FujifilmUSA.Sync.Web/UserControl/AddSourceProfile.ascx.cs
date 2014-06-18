@@ -54,8 +54,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbRegion_SelectedIndexChanged(null, null);
             if (Request.QueryString["SourceProfileId"] != null)
             {
-                lblHeader.Text = GetResourceString(_recEditSourceProfile);//"Edit Source Profile";
-                LoadSourceProfile(Convert.ToInt32(Request.QueryString["SourceProfileId"]));
+                var SourceProfileId = Request.QueryString["SourceProfileId"];
+                var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(SourceProfileId, FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey));
+                int _SourceProfileId;
+                if (Int32.TryParse(id, out _SourceProfileId))
+                {
+                    lblHeader.Text = GetResourceString(_recEditSourceProfile);//"Edit Source Profile";
+                    LoadSourceProfile(_SourceProfileId);
+                }
             }
 
 

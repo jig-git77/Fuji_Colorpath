@@ -67,7 +67,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     try
                     {
                         string userID = Request.QueryString["UserId"];
-                        var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(userID, System.Configuration.ConfigurationManager.AppSettings["CypherKey"]));
+                        var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(userID, FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey));
                         UserId = Convert.ToInt32(id);
                         SetUser();
                     }

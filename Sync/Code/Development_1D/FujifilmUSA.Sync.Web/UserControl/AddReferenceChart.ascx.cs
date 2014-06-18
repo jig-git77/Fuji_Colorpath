@@ -9,6 +9,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using System.Xml.Linq;
+using Telerik.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -54,8 +55,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                
                 if (Request.QueryString["RefChartId"] != null)
                 {
-                    lblHeader.Text = GetResourceString(_recEditRefChart);//"Edit Reference Chart";
-                    LoadRefChart(Convert.ToInt32(Request.QueryString["RefChartId"]));
+                    var RefChartId = Request.QueryString["RefChartId"];
+                    var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(RefChartId, FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey));
+                    int _RefChartId;
+                    if (Int32.TryParse(id, out _RefChartId))
+                    {
+                        lblHeader.Text = GetResourceString(_recEditRefChart);//"Edit Reference Chart";
+                        LoadRefChart(_RefChartId);
+                    }
                 }
             }
         }

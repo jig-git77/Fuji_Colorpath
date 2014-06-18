@@ -5,6 +5,7 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System.Collections.Generic;
+using Telerik.Web.UI;
 
 
 namespace FujifilmUSA.Sync.Web.UserControl
@@ -69,8 +70,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             
             if (Request.QueryString["DeviceID"] != null)
             {
-                lblHeader.Text = GetResourceString(_recEditDevice); //"Edit Device";
-                SetDevice(Convert.ToInt32(Request.QueryString["DeviceID"]));
+                var DeviceID = Request.QueryString["DeviceID"];
+                var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(DeviceID, FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey));
+                int _DeviceID;
+                if (Int32.TryParse(id, out _DeviceID))
+                {
+                    lblHeader.Text = GetResourceString(_recEditDevice); //"Edit Device";
+                    SetDevice(_DeviceID);
+                }
             }
         }
         #endregion

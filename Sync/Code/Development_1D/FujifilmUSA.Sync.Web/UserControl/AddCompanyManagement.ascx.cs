@@ -5,6 +5,7 @@ using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
+using Telerik.Web.UI;
 
 
 namespace FujifilmUSA.Sync.Web.UserControl
@@ -47,8 +48,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindRegion();
             if (Request.QueryString["CompanyId"] != null)
             {
-                Setcompany(Convert.ToInt32(Request.QueryString["CompanyId"]));
-                lblHeader.Text = GetResourceString(_recEditCompany); //"Edit Company";
+                var CompanyID = Request.QueryString["CompanyId"];
+                var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(CompanyID, FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey));
+                int _CompanyID;
+                if (Int32.TryParse(id, out _CompanyID))
+                {
+                    Setcompany(_CompanyID);
+                    lblHeader.Text = GetResourceString(_recEditCompany); //"Edit Company";
+                }
             }
         }
         #endregion

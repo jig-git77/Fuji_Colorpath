@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System.Collections.Generic;
+using Telerik.Web.UI;
 
 
 namespace FujifilmUSA.Sync.Web.UserControl
@@ -50,8 +51,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindRegionDropDown();
             if (Request.QueryString["BranchId"] != null)
             {
-                SetBranch(Convert.ToInt32(Request.QueryString["BranchId"]));
-                lblHeader.Text = GetResourceString(_recEditBranch); //"Edit Branch"; 
+                var BranchId = Request.QueryString["BranchId"];
+                var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(BranchId, FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey));
+                int _BranchId;
+                if (Int32.TryParse(id, out _BranchId))
+                {
+                    SetBranch(_BranchId);
+                    lblHeader.Text = GetResourceString(_recEditBranch); //"Edit Branch"; 
+                }
             }
 
         }

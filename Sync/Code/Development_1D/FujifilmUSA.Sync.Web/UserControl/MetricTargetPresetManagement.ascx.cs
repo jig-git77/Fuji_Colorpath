@@ -91,7 +91,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case "Edit":
                     MetricTargetPreset.MetricTargetPresetID = Convert.ToInt32(e.CommandArgument);
                     GridDataItem item = (GridDataItem)e.Item;
-                    Response.Redirect("AddMetricTargetPreset.aspx?MetricTargetPresetId=" + MetricTargetPreset.MetricTargetPresetID);
+                    string parms = Service.Common.Encryption.CryptHelper.EncryptString(MetricTargetPreset.MetricTargetPresetID.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
+                    Response.Redirect("AddMetricTargetPreset.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms));
                     break;
             }
         }

@@ -58,8 +58,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lblHeader.Text = GetResourceString(_recAddMeasurementDevice); // "Add Measurement Device";
             if (Request.QueryString["MeasurementDeviceId"] != null)
             {
-                lblHeader.Text = GetResourceString(_recEditMeasurementDevice); //"Edit Measurement Device";
-                LoadMeasurementDevice(Convert.ToInt32(Request.QueryString["MeasurementDeviceId"]));
+                var MeasurementDeviceId = Request.QueryString["MeasurementDeviceId"];
+                var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(MeasurementDeviceId, FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey));
+                int _MeasurementDeviceId;
+                if (Int32.TryParse(id, out _MeasurementDeviceId))
+                {
+                    lblHeader.Text = GetResourceString(_recEditMeasurementDevice); //"Edit Measurement Device";
+                    LoadMeasurementDevice(_MeasurementDeviceId);
+                }
             }
         }
 

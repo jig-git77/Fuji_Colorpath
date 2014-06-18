@@ -135,15 +135,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case "Edit":
                     License.LicenseId = Convert.ToInt32(e.CommandArgument);
                     GridDataItem item = (GridDataItem)e.Item;
-                    Response.Redirect("AddLicenseManagement.aspx?LicenseId=" + License.LicenseId
-                                            + "&CompanyId=" + item.GetDataKeyValue("Branch.CompanyId").ToString()
-                                            + "&BranchId=" + item.GetDataKeyValue("Branch.BranchId").ToString()
-                                            + "&LicenseTypeId=" + item.GetDataKeyValue("LicenseTypeId").ToString()
-                                            + "&LicenseDesc=" + item.GetDataKeyValue("LicenseDesc").ToString()
-                                            + "&ActivationDate=" + item.GetDataKeyValue("ActivationDate").ToString()
-                                            + "&ExpirationDate=" + item.GetDataKeyValue("ExpirationDate").ToString()
-                                            + "&IsActive=" + item.GetDataKeyValue("IsActive").ToString()
-                                            );
+                    string parms = Service.Common.Encryption.CryptHelper.EncryptString(License.LicenseId.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
+                    Response.Redirect("AddLicenseManagement.aspx?LicenseId=" + ContentEncoder.Encode(parms));
+                    //Response.Redirect("AddLicenseManagement.aspx?LicenseId=" + License.LicenseId
+                    //                        + "&CompanyId=" + item.GetDataKeyValue("Branch.CompanyId").ToString()
+                    //                        + "&BranchId=" + item.GetDataKeyValue("Branch.BranchId").ToString()
+                    //                        + "&LicenseTypeId=" + item.GetDataKeyValue("LicenseTypeId").ToString()
+                    //                        + "&LicenseDesc=" + item.GetDataKeyValue("LicenseDesc").ToString()
+                    //                        + "&ActivationDate=" + item.GetDataKeyValue("ActivationDate").ToString()
+                    //                        + "&ExpirationDate=" + item.GetDataKeyValue("ExpirationDate").ToString()
+                    //                        + "&IsActive=" + item.GetDataKeyValue("IsActive").ToString()
+                    //                        );
                     break;
             }
         }

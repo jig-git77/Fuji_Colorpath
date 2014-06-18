@@ -78,7 +78,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                 case "Edit":
                     PrintStandardType.PrintStandardTypeID = (short)Convert.ToInt32(e.CommandArgument);
-                    Response.Redirect("AddPrintStandardType.aspx?PrintStandardTypeId=" + PrintStandardType.PrintStandardTypeID);
+                    string parms = Service.Common.Encryption.CryptHelper.EncryptString(PrintStandardType.PrintStandardTypeID.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
+                    Response.Redirect("AddPrintStandardType.aspx?PrintStandardTypeId=" + ContentEncoder.Encode(parms));
                     break;
             }
         }

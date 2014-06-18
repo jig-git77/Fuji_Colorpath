@@ -90,7 +90,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case "Edit":
                     Branch.BranchId = Convert.ToInt32(e.CommandArgument);
                     GridDataItem item = (GridDataItem)e.Item;
-                    Response.Redirect("AddBranchManagement.aspx?BranchId=" + Branch.BranchId);
+                    string parms = Service.Common.Encryption.CryptHelper.EncryptString(Branch.BranchId.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
+                    Response.Redirect("AddBranchManagement.aspx?BranchId=" + ContentEncoder.Encode(parms));
                     break;
             }
         }

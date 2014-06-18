@@ -47,8 +47,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
           
             if (Request.QueryString["PrintStandardTypeId"] != null)
             {
-                lblHeader.Text = GetResourceString(_recEditPrintStandardType);//"Edit PrintStandardType";
-                LoadPrintStandardType(Convert.ToInt32(Request.QueryString["PrintStandardTypeId"]));
+                var PrintStandardTypeId = Request.QueryString["PrintStandardTypeId"];
+                var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(PrintStandardTypeId, FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey));
+                int _PrintStandardTypeId;
+                if (Int32.TryParse(id, out _PrintStandardTypeId))
+                {
+                    lblHeader.Text = GetResourceString(_recEditPrintStandardType);//"Edit PrintStandardType";
+                    LoadPrintStandardType(_PrintStandardTypeId);
+                }
             }
         }
         #endregion

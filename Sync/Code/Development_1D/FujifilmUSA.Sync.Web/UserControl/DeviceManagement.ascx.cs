@@ -99,7 +99,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case "Edit":
                     Device.DeviceId = Convert.ToInt32(e.CommandArgument);
                     GridDataItem item = (GridDataItem)e.Item;
-                    Response.Redirect("AddDeviceManagement.aspx?DeviceID=" + Device.DeviceId);
+                    string parms = Service.Common.Encryption.CryptHelper.EncryptString(Device.DeviceId.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
+                    Response.Redirect("AddDeviceManagement.aspx?DeviceID=" + ContentEncoder.Encode(parms));
                     break;
             }
         }

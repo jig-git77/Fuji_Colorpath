@@ -89,7 +89,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                 case "Edit":
                     ReferenceChartType.ReferenceChartTypeId = (short)Convert.ToInt32(e.CommandArgument);
-                    Response.Redirect("AddReferenceChart.aspx?RefChartId=" + ReferenceChartType.ReferenceChartTypeId);
+                    string parms = Service.Common.Encryption.CryptHelper.EncryptString(ReferenceChartType.ReferenceChartTypeId.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
+                    Response.Redirect("AddReferenceChart.aspx?RefChartId=" + ContentEncoder.Encode(parms));
                     break;
             }
         }

@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System.Collections.Generic;
+using Telerik.Web.UI;
 
 
 namespace FujifilmUSA.Sync.Web.UserControl
@@ -53,8 +54,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lblHeader.Text = GetResourceString(_recAddLicense); //"Add License";
             if (Request.QueryString["LicenseId"] != null)
             {
-                lblHeader.Text = GetResourceString(_recEditLicense);  //"Edit License";
-                SetLicense(Convert.ToInt32(Request.QueryString["LicenseID"]));
+                var LicenseId = Request.QueryString["LicenseId"];
+                var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(LicenseId, FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey));
+                int _LicenseId;
+                if (Int32.TryParse(id, out _LicenseId))
+                {
+                    lblHeader.Text = GetResourceString(_recEditLicense);  //"Edit License";
+                    SetLicense(_LicenseId); 
+                }
             }
         }
         #endregion

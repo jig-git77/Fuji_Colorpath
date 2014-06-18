@@ -8,6 +8,7 @@ using System.IO;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
+using Telerik.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -51,8 +52,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindRegionDropDown();
             if (Request.QueryString["MetricTargetPresetId"] != null)
             {
-                SetMetricTargetPreset(Convert.ToInt32(Request.QueryString["MetricTargetPresetId"]));
-                lblHeader.Text = GetResourceString(_recEditMetricTargetPreset); //"Edit MetricTargetPreset"; 
+                var MetricTargetPresetId = Request.QueryString["MetricTargetPresetId"];
+                var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(MetricTargetPresetId, FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey));
+                int _MetricTargetPresetId;
+                if (Int32.TryParse(id, out _MetricTargetPresetId))
+                {
+                    SetMetricTargetPreset(_MetricTargetPresetId);
+                    lblHeader.Text = GetResourceString(_recEditMetricTargetPreset); //"Edit MetricTargetPreset"; 
+                }
             }
         }
         #endregion

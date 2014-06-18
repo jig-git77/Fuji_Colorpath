@@ -86,7 +86,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                 case "Edit":
                     SourceProfile.SourceProfileId = (short)Convert.ToInt32(e.CommandArgument);
-                    Response.Redirect("AddSourceProfile.aspx?SourceProfileId=" + SourceProfile.SourceProfileId);
+                    string parms = Service.Common.Encryption.CryptHelper.EncryptString(SourceProfile.SourceProfileId.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
+                    Response.Redirect("AddSourceProfile.aspx?SourceProfileId=" + ContentEncoder.Encode(parms));
                     break;
             }
         }

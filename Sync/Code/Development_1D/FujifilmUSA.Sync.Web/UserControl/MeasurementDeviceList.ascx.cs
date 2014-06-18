@@ -85,7 +85,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                 case "Edit":
                     MeasurementDevice.MeasurementDeviceId = (short)Convert.ToInt32(e.CommandArgument);
-                    Response.Redirect("AddMeasurementDevice.aspx?MeasurementDeviceId=" + MeasurementDevice.MeasurementDeviceId);
+                    string parms = Service.Common.Encryption.CryptHelper.EncryptString(MeasurementDevice.MeasurementDeviceId.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
+                    Response.Redirect("AddMeasurementDevice.aspx?MeasurementDeviceId=" + ContentEncoder.Encode(parms));
                     break;
             }
         }
