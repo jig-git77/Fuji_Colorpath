@@ -48,12 +48,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trTargetLAB.Visible = false;
                     trProjectType.Visible = false;
                 }
-            }
-            if (Page.IsPostBack == false)
-            {
-                //---Only load project details from session when page is loaded first time---//
                 LoadProjectInfoFromSession();
             }
+            //if (Page.IsPostBack == false)
+            //{
+            //    //---Only load project details from session when page is loaded first time---//
+            //    LoadProjectInfoFromSession();
+            //}
+            
         }
         #endregion
 
