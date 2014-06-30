@@ -1862,7 +1862,9 @@
     <Content Include="UserControl\App_LocalResources\SessionEnd.ascx.ja.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\ProjectMaxLimit.ascx.resx" />
+    <Content Include="UserControl\App_LocalResources\ProjectMaxLimit.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\ProjectMaxLimit.ascx.de.resx" />
@@ -2420,7 +2422,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

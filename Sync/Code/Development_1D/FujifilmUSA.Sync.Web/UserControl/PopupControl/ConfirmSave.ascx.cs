@@ -117,6 +117,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                 {
+                    PCSDataTypes = SessionManager.Instance.CurrentProject.PCSDataTypes;
+                    DensityType = SessionManager.Instance.CurrentProject.DensityType;
                     if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
                         _presenterConfirmSave.CreateG7AlignmentCurve();
                     else//ISO                                                    
@@ -195,6 +197,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Entity.Project Project { get; set; }
         public string ProfileDescription { get; set; }
         public EOptimizeRunStatus LastRunStatus { get; set; }
+        public PCSDataTypes PCSDataTypes { get; set; }
+        public DensityTypes DensityType { get; set; }
         #endregion
 
 

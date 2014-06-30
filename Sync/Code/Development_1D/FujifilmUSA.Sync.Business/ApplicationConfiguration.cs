@@ -22,6 +22,7 @@ namespace FujifilmUSA.Sync.Business
         private string _passwordReSetLink;
         private string _passwordForceReSetLink;
         private int _optimizeRunLimit;
+        private int _optimizeRunSync1DLimit;
         private int _measurementsLimit;
         private string _webSiteLink;
         private bool _enableActivityLog;
@@ -97,6 +98,9 @@ namespace FujifilmUSA.Sync.Business
                                                                   break;
                                                               case "FUJIFILMPLUGINVERSION":
                                                                   _fujifilmPluginVersion = x.Value;
+                                                                  break;
+                                                              case "OPTIMIZERUNSYNC1DLIMIT":
+                                                                  _optimizeRunSync1DLimit = Convert.ToInt32(x.Value);
                                                                   break;
                                                           }
                                                       });
@@ -182,6 +186,13 @@ namespace FujifilmUSA.Sync.Business
             get
             {
                 return _optimizeRunLimit;
+            }
+        }
+        public int OptimizeRunSync1DLimit
+        {
+            get
+            {
+                return _optimizeRunSync1DLimit;
             }
         }
         public int MeasurementsLimit

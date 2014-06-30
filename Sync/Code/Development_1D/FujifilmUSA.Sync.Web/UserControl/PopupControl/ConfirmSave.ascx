@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ConfirmSave.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ConfirmSave" %>
 <%@ Import Namespace="FujifilmUSA.Sync.Business" %>
+<%@ Import Namespace="FujifilmUSA.Sync.Common" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
     TagPrefix="uc" %>
@@ -22,7 +23,8 @@
     }
 
     function CheckOptRunLimit() {
-         if(jQuery("input[id*='hdOptRunLimit']").val() >= <%= ApplicationConfiguration.Instance.OptimizeRunLimit %>)
+        
+         if(jQuery("input[id*='hdOptRunLimit']").val() >= <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.OptimizeRunSync1DLimit : ApplicationConfiguration.Instance.OptimizeRunLimit) %>)
             {
                 alert("You reach your limit of adding Optimization Runs, Now you have to certify this run.");
                 return false;
