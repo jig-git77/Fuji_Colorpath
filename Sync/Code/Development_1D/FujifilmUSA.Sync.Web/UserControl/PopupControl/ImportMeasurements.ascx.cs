@@ -89,7 +89,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
             if (!IsErrorOccured)
             {
-                if (parentProjectMeasurementCount + Measurements.Count > Business.ApplicationConfiguration.Instance.MeasurementsLimit)
+                if (parentProjectMeasurementCount + Measurements.Count > (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? Business.ApplicationConfiguration.Instance.MeasurementLimitSync1D : Business.ApplicationConfiguration.Instance.MeasurementsLimit))
                 {
                     fujiStatusbar.DisplayMessage("Measurements cannot be imported as total allowed measurement limit exceeded.", false);
                     return;

@@ -303,7 +303,7 @@
                     ControlDisability(0,false,1,false,1,true,1,true);
                     return false;
                 }
-                if(('<%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentDlpSubOperation != FujifilmUSA.Sync.Entity.ELicenseType.Validation).ToString().ToLower() %>' == 'true') && (jQuery("input[id*='hdMeasurementLimit']").val() >= <%= ApplicationConfiguration.Instance.MeasurementsLimit %>))
+                if(('<%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentDlpSubOperation != FujifilmUSA.Sync.Entity.ELicenseType.Validation).ToString().ToLower() %>' == 'true') && (jQuery("input[id*='hdMeasurementLimit']").val() >= <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit) %>))
                 {
                     MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
                     ControlDisability(1,false,1,false,1,true,1,true);
@@ -478,7 +478,7 @@
                         //----------------Display Import Button--------------//  
                         if(jQuery("input[id*='hdDisplayImport']").val() == "yes")
                         {
-                            if(json.length < <%= ApplicationConfiguration.Instance.MeasurementsLimit %>)
+                            if(json.length < <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit)%>)
                             {                               
                                 $("#Div_ImportMeasurements").css('visibility', 'visible');
                             }    
