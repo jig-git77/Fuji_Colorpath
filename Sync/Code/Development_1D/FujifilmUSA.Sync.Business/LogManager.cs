@@ -42,18 +42,20 @@ namespace FujifilmUSA.Sync.Business
 
         public static void SendErrorEmail(AppErrorLog log)
         {
-            string Username = (SessionManager.Instance.CurrentUser != null)
-                                                  ? (SessionManager.Instance.CurrentUser.FirstName + " " + SessionManager.Instance.CurrentUser.LastName)
-                                                  : "NULL";
-            string UserEmail = (SessionManager.Instance.CurrentUser != null)
-                                                 ? (SessionManager.Instance.CurrentUser.Email)
-                                                 : "NULL";
-            
+            //string Username = ;
+            //string UserEmail = ;            
             var errorMessage = new MailMessage
                                    {
                                        Subject = ApplicationConfiguration.Instance.SendEmailNotificationOnErrorSubject,
                                        IsBodyHtml = true,
-                                       Body = "ErrorMessage: " + log.ExMessage + "<br/><br/>" + "ErrorStackTrace: " + log.ExStackTracke + "<br/><br/>" + "GeneratedTime: " + log.TimeStamp + "<br/><br/>" + "UserName: " + Username + "<br/>" + "Email: " + UserEmail
+                                       Body = "ErrorMessage: " + log.ExMessage + "<br/><br/>" + "ErrorStackTrace: " + log.ExStackTracke + "<br/><br/>" + "GeneratedTime: " + log.TimeStamp + "<br/><br/>" + "UserName: " +
+                                                ((SessionManager.Instance.CurrentUser != null)
+                                                  ? (SessionManager.Instance.CurrentUser.FirstName + " " + SessionManager.Instance.CurrentUser.LastName)
+                                                  : "NULL")
+                                       + "<br/>" + "Email: " +
+                                                ((SessionManager.Instance.CurrentUser != null)
+                                                     ? (SessionManager.Instance.CurrentUser.Email)
+                                                     : "NULL")
                                    };
             errorMessage.To.Add(ApplicationConfiguration.Instance.SendEmailNotificationOnErrorTo);
             var mySmtpClient = new SmtpClient();
