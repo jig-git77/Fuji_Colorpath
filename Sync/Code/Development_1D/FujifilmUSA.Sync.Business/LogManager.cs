@@ -10,12 +10,12 @@ namespace FujifilmUSA.Sync.Business
     {
         #region Set Global Variables
         private delegate void SendEmail(AppErrorLog log);
-        public static string Username = (SessionManager.Instance.CurrentUser != null)
-                                              ? (SessionManager.Instance.CurrentUser.FirstName + " " + SessionManager.Instance.CurrentUser.LastName)
-                                              : "NULL";
-        public static string UserEmail = (SessionManager.Instance.CurrentUser != null)
-                                             ? (SessionManager.Instance.CurrentUser.Email)
-                                             : "NULL";
+        //public static string Username = (SessionManager.Instance.CurrentUser != null)
+        //                                      ? (SessionManager.Instance.CurrentUser.FirstName + " " + SessionManager.Instance.CurrentUser.LastName)
+        //                                      : "NULL";
+        //public static string UserEmail = (SessionManager.Instance.CurrentUser != null)
+        //                                     ? (SessionManager.Instance.CurrentUser.Email)
+        //                                     : "NULL";
         #endregion
 
         public static void WriteLog(Exception e, BusinessHandlerRequest request, bool SendEmail = true)
@@ -41,7 +41,14 @@ namespace FujifilmUSA.Sync.Business
         }
 
         public static void SendErrorEmail(AppErrorLog log)
-        {           
+        {
+            string Username = (SessionManager.Instance.CurrentUser != null)
+                                                  ? (SessionManager.Instance.CurrentUser.FirstName + " " + SessionManager.Instance.CurrentUser.LastName)
+                                                  : "NULL";
+            string UserEmail = (SessionManager.Instance.CurrentUser != null)
+                                                 ? (SessionManager.Instance.CurrentUser.Email)
+                                                 : "NULL";
+            
             var errorMessage = new MailMessage
                                    {
                                        Subject = ApplicationConfiguration.Instance.SendEmailNotificationOnErrorSubject,
