@@ -41,9 +41,7 @@ namespace FujifilmUSA.Sync.Business
         }
 
         public static void SendErrorEmail(AppErrorLog log)
-        {
-            //string Username = ;
-            //string UserEmail = ;            
+        {            
             var errorMessage = new MailMessage
                                    {
                                        Subject = ApplicationConfiguration.Instance.SendEmailNotificationOnErrorSubject,
