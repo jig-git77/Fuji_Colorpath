@@ -78,13 +78,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
-            if (SessionManager.Instance.CurrentUser.Role.RoleId == 4) //Region Admin
-            {
-                if (Convert.ToInt32(cmbRegion.SelectedValue) == 0 || Convert.ToInt32(cmbCompanyName.SelectedValue) == 0)
-                {
-                    fujiStatusbar.DisplayMessage("Please select Region and Company first", true);
-                }
-            }
+           
             SourceProfile = new SourceProfile();
             SourceProfile.SourceProfileId = (short)Convert.ToInt32(hdnSourceProfileID.Value);
             if (Convert.ToInt32(cmbRegion.SelectedValue) > 0)
@@ -152,6 +146,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbRegion.DataSource = RegionList;
                 cmbRegion.DataBind();
                 cmbRegion.Items.Insert(0, new ListItem(GetResourceString(_recSelectRegionText), "0"));//-- Select Region --
+            }
+            if (cmbRegion.Items.Count == 2) //---By default give selected region for Region Admin
+            {
+                cmbRegion.SelectedIndex = 1;
+                cmbRegion.Enabled = false;
             }
         }
 
