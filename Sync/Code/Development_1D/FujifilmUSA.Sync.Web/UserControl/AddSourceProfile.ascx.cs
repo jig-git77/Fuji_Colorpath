@@ -78,6 +78,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            if (SessionManager.Instance.CurrentUser.Role.RoleId == 4) //Region Admin
+            {
+                if (Convert.ToInt32(cmbRegion.SelectedValue) == 0 || Convert.ToInt32(cmbCompanyName.SelectedValue) == 0)
+                {
+                    fujiStatusbar.DisplayMessage("Please select Region and Company first", true);
+                }
+            }
             SourceProfile = new SourceProfile();
             SourceProfile.SourceProfileId = (short)Convert.ToInt32(hdnSourceProfileID.Value);
             if (Convert.ToInt32(cmbRegion.SelectedValue) > 0)
@@ -101,19 +108,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             SourceProfile.IsUsed = chkIsActive.Checked;
-            if (hdnSourceProfileID.Value == "0")        //-------Add Source Profile
+            if ((SessionManager.Instance.CurrentUser.Role.RoleId == 4 && (SourceProfile.RegionId > 0 || SourceProfile.CompanyId > 0)) || SessionManager.Instance.CurrentUser.Role.RoleId == 1) //If Region Admin then need RegionID and CompanyID both, none is mandetory for System Admin
             {
-                _presentersourceprofile.InsertSourceProfile();
-                if (IsErrorOccured) return;
-                Response.Redirect("SourceProfileManagement.aspx");
+                if (hdnSourceProfileID.Value == "0")        //-------Add Source Profile
+                {
+                    _presentersourceprofile.InsertSourceProfile();
+                    if (IsErrorOccured) return;
+                    Response.Redirect("SourceProfileManagement.aspx");
+                }
+                else                                        //-------Edit Source Profile
+                {
+                    _presentersourceprofile.UpdateSourceProfile();
+                    if (IsErrorOccured) return;
+                    Response.Redirect("SourceProfileManagement.aspx");
+                }
             }
-            else                                        //-------Edit Source Profile
-            {
-                _presentersourceprofile.UpdateSourceProfile();
-                if (IsErrorOccured) return;
-                Response.Redirect("SourceProfileManagement.aspx");
-            }
-
         }
         #endregion
 

@@ -206,12 +206,16 @@ namespace FujifilmUSA.Sync.Entity
         ManageSourceProfile = 10,
         [Description("ERolePermission_ManageReferenceChart")]//Manage ReferenceChart
         ManageReferenceChart = 11,
+        [Description("ERolePermission_ManageMetricTargetPreset")]//Manage MetricTargetPreset
+        ManageMetricTargetPreset = 12,
+        [Description("ERolePermission_ManagePrintStandardType")]//Manage PrintStandardType
+        ManagePrintStandardType = 13,
         [Description("ERolePermission_ManageApplicationConfiguration")] //Manage Application Configuration
-        ManageApplicationConfiguration = 12,
+        ManageApplicationConfiguration = 14,
         [Description("ERolePermission_ManageActivityValidationRules")] //Manage Activity Validation Rules
-        ManageActivityValidationRules = 13,
+        ManageActivityValidationRules = 15,
         [Description("ERolePermission_ManageDeviceProfileSettings")] //Manage Device Profiler Settings
-        ManageDeviceProfileSettings = 14
+        ManageDeviceProfileSettings = 16
     }
     public enum ECurrentProjectStatus
     {
