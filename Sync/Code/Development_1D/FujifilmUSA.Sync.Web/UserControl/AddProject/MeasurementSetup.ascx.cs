@@ -448,7 +448,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] ==
                                     (EInstrumentType.i1Sis))
             {
-                cmbUVSettings.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EUVIncludedMode>().Where(p => p.Value != "M1").ToDictionary(p => p.Key, p => p.Value);
+                cmbUVSettings.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EUVIncludedMode>().Where(p => p.Value != Common.Utilities.GetEnumDescriptionAttributeValue(EUVIncludedMode.UVPlus)).ToDictionary(p => p.Key, p => p.Value);
             }
             cmbUVSettings.DataBind();
         }
