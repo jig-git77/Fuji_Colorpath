@@ -40,6 +40,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            if (SessionManager.Instance.CurrentUser.Role.RoleId == 4) //--Only for Region Admin, just disable option of ISync1DType temporary
+            {
+                chkIsSync1DType.Enabled = false;
+            }
             if (Page.IsPostBack) return;
 
             lblHeader.Text = GetResourceString(_recAddPrintStandardType); //"Add PrintStandardType";            

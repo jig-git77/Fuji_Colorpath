@@ -63,8 +63,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     LoadSourceProfile(_SourceProfileId);
                 }
             }
-
-
         }
 
         #endregion
@@ -78,7 +76,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
-           
+            if (SessionManager.Instance.CurrentUser.Role.RoleId == 4 && cmbCompanyName.SelectedIndex == 0)  //For Region Admin, needs to select Region and Company Name first
+            {
+                fujiStatusbar.DisplayMessage("Please select Company first.", false);
+                return;
+            }
+
             SourceProfile = new SourceProfile();
             SourceProfile.SourceProfileId = (short)Convert.ToInt32(hdnSourceProfileID.Value);
             if (Convert.ToInt32(cmbRegion.SelectedValue) > 0)
@@ -87,7 +90,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SourceProfile.CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue);
             SourceProfile.ProfileName = txtSourceProfile.Text.Trim();
             SourceProfile.ProfileDesc = txtProfileDescription.Text;
-            
+
             //Read source profile from file
             if (fuProfile.PostedFile != null)
             {
@@ -102,7 +105,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             SourceProfile.IsUsed = chkIsActive.Checked;
-            if ((SessionManager.Instance.CurrentUser.Role.RoleId == 4 && (SourceProfile.RegionId > 0 || SourceProfile.CompanyId > 0)) || SessionManager.Instance.CurrentUser.Role.RoleId == 1) //If Region Admin then need RegionID and CompanyID both, none is mandetory for System Admin
+            if ((SessionManager.Instance.CurrentUser.Role.RoleId == 4 && (SourceProfile.RegionId > 0 && SourceProfile.CompanyId > 0)) || SessionManager.Instance.CurrentUser.Role.RoleId == 1) //If Region Admin then need RegionID and CompanyID both, none is mandetory for System Admin
             {
                 if (hdnSourceProfileID.Value == "0")        //-------Add Source Profile
                 {
