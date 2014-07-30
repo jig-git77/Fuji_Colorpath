@@ -410,15 +410,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         {
                             dvValidationSummary.DataSource = new List<Entity.Measurement>();
                             dvValidationSummary.DataBind();
-                            //dvValidationSummary.Visible = false;
                             chartAnalyze.MapAreas.Clear();
                             chartAnalyze.IsMapEnabled = false;
-                            //dvValidationSummary.EmptyDataText = "Averaging all measurements!";
                         }
                         
 
                         if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                         {
+                            dvValidationSummary.Fields[1].Visible = false; //Out of Tolerance
                             dvValidationSummary.Fields[8].Visible = false; //Page or Surface
                             dvValidationSummary.Fields[9].Visible = false; //JDF Job Id
 
@@ -427,6 +426,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                             if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                             {
+                                dvValidationSummary.Fields[1].Visible = true; //Out of Tolerance
                                 dvValidationSummary.Fields[6].Visible = true; //Customer
                                 dvValidationSummary.Fields[10].Visible = true; //Notes
                             }
@@ -1443,14 +1443,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Chart_GrayF.Series["Series1"]["TooltipOffset"] = "True";
             Chart_GrayF.Series["Series1Point"].Points.Clear();
             Chart_GrayF.Series["Series2"].Points.Clear();
+            Chart_GrayF.Series["Series2"]["TooltipOffset"] = "True";
             Chart_GrayF.Series["Series2Point"].Points.Clear();
+            Chart_GrayF.Series["Series3"].Points.Clear();
+            Chart_GrayF.Series["Series3Point"].Points.Clear();
 
             if (DT != null && DT.Count > 0)
             {
                 for (int i = 0; i < DT.Count; i++)
                 {
                     AddPointInChart(i, Chart_GrayF.Series["Series1"], Chart_GrayF.Series["Series1Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔValue.ToString(), Color.Black.Name.ToString(), true, "ΔCh*");
-                    AddPointInChart(i, Chart_GrayF.Series["Series2"], Chart_GrayF.Series["Series2Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔCh*");
+                    if (SessionManager.Instance.CurrentProject.MeasurementSetting.PresetWeighted == true) //--If selected Metric Target Prest has Weighted Delta enabled, then only display weighted deltas blue bar
+                    {
+                        AddPointInChart(i, Chart_GrayF.Series["Series2"], Chart_GrayF.Series["Series2Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].wΔValue.ToString(), Color.Blue.Name.ToString(), true, "wΔCh*");
+                    }
+                    AddPointInChart(i, Chart_GrayF.Series["Series3"], Chart_GrayF.Series["Series3Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔCh*");
                 }
             }
 
@@ -1463,14 +1470,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Chart_BlackL.Series["Series1"]["TooltipOffset"] = "True";
             Chart_BlackL.Series["Series1Point"].Points.Clear();
             Chart_BlackL.Series["Series2"].Points.Clear();
+            Chart_BlackL.Series["Series2"]["TooltipOffset"] = "True";
             Chart_BlackL.Series["Series2Point"].Points.Clear();
+            Chart_BlackL.Series["Series3"].Points.Clear();
+            Chart_BlackL.Series["Series3Point"].Points.Clear();
 
             if (DTBlackL != null && DTBlackL.Count > 0)
             {
                 for (int i = 0; i < DTBlackL.Count; i++)
                 {
                     AddPointInChart(i, Chart_BlackL.Series["Series1"], Chart_BlackL.Series["Series1Point"], Convert.ToInt64(DTBlackL[i].Cmyk_Value).ToString(), DTBlackL[i].ΔValue.ToString(), Color.Black.Name.ToString(), true, "ΔL*");
-                    AddPointInChart(i, Chart_BlackL.Series["Series2"], Chart_BlackL.Series["Series2Point"], Convert.ToInt64(DTBlackL[i].Cmyk_Value).ToString(), DTBlackL[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔL*");
+                    if (SessionManager.Instance.CurrentProject.MeasurementSetting.PresetWeighted == true) //--If selected Metric Target Prest has Weighted Delta enabled, then only display weighted deltas blue bar
+                    {
+                        AddPointInChart(i, Chart_BlackL.Series["Series2"], Chart_BlackL.Series["Series2Point"], Convert.ToInt64(DTBlackL[i].Cmyk_Value).ToString(), DTBlackL[i].wΔValue.ToString(), Color.Blue.Name.ToString(), true, "wΔL*");
+                    }
+                    AddPointInChart(i, Chart_BlackL.Series["Series3"], Chart_BlackL.Series["Series3Point"], Convert.ToInt64(DTBlackL[i].Cmyk_Value).ToString(), DTBlackL[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔL*");
                 }
             }
 
@@ -1483,14 +1497,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Chart_GrayL.Series["Series1"]["TooltipOffset"] = "True";
             Chart_GrayL.Series["Series1Point"].Points.Clear();
             Chart_GrayL.Series["Series2"].Points.Clear();
+            Chart_GrayL.Series["Series2"]["TooltipOffset"] = "True";
             Chart_GrayL.Series["Series2Point"].Points.Clear();
+            Chart_GrayL.Series["Series3"].Points.Clear();
+            Chart_GrayL.Series["Series3Point"].Points.Clear();
 
             if (DTGrayL != null && DTGrayL.Count > 0)
             {
                 for (int i = 0; i < DTGrayL.Count; i++)
                 {
                     AddPointInChart(i, Chart_GrayL.Series["Series1"], Chart_GrayL.Series["Series1Point"], Convert.ToInt64(DTGrayL[i].Cmyk_Value).ToString(), DTGrayL[i].ΔValue.ToString(), Color.Black.Name.ToString(), true, "ΔL*");
-                    AddPointInChart(i, Chart_GrayL.Series["Series2"], Chart_GrayL.Series["Series2Point"], Convert.ToInt64(DTGrayL[i].Cmyk_Value).ToString(), DTGrayL[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔL*");
+                    if (SessionManager.Instance.CurrentProject.MeasurementSetting.PresetWeighted == true) //--If selected Metric Target Prest has Weighted Delta enabled, then only display weighted deltas blue bar
+                    {
+                        AddPointInChart(i, Chart_GrayL.Series["Series2"], Chart_GrayL.Series["Series2Point"], Convert.ToInt64(DTGrayL[i].Cmyk_Value).ToString(), DTGrayL[i].wΔValue.ToString(), Color.Blue.Name.ToString(), true, "wΔL*");
+                    }
+                    AddPointInChart(i, Chart_GrayL.Series["Series3"], Chart_GrayL.Series["Series3Point"], Convert.ToInt64(DTGrayL[i].Cmyk_Value).ToString(), DTGrayL[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔL*");
                 }
             }
 
@@ -2802,8 +2823,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 GridDataItem item = (GridDataItem)e.Item;
                 if (item["IsNotOK"].Text == "True")
                 {
-                    item.ForeColor = System.Drawing.Color.Red;
+                    item.ForeColor = System.Drawing.Color.Black;
                 }
+                else
+                    item.ForeColor = System.Drawing.Color.Green;
             }
         }
 
@@ -2815,8 +2838,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 GridDataItem item = (GridDataItem)e.Item;
                 if (item["IsNotOK"].Text == "True")
                 {
-                    item.ForeColor = System.Drawing.Color.Red;
+                    item.ForeColor = System.Drawing.Color.Black;
                 }
+                else
+                    item.ForeColor = System.Drawing.Color.Green;
             }
         }
 
@@ -2828,8 +2853,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 GridDataItem item = (GridDataItem)e.Item;
                 if (item["IsNotOK"].Text == "True")
                 {
-                    item.ForeColor = System.Drawing.Color.Red;
+                    item.ForeColor = System.Drawing.Color.Black;
                 }
+                else
+                    item.ForeColor = System.Drawing.Color.Green;
             }
         }
 
@@ -2841,8 +2868,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 GridDataItem item = (GridDataItem)e.Item;
                 if (item["IsNotOK"].Text == "True")
                 {
-                    item.ForeColor = System.Drawing.Color.Red;
+                    item.ForeColor = System.Drawing.Color.Black;
                 }
+                else
+                    item.ForeColor = System.Drawing.Color.Green;
             }
         }
 

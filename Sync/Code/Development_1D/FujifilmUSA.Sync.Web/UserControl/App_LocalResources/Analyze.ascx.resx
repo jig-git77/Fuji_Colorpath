@@ -308,7 +308,7 @@
     <value>False</value>
   </data>
   <data name="GridBoundColumnResource23.HeaderText" xml:space="preserve">
-    <value>Tolerance</value>
+    <value>Tol</value>
   </data>
   <data name="GridBoundColumnResource23.HtmlEncode" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -332,7 +332,7 @@
     <value>False</value>
   </data>
   <data name="GridBoundColumnResource27.HeaderText" xml:space="preserve">
-    <value>Tolerance</value>
+    <value>Tol</value>
   </data>
   <data name="GridBoundColumnResource27.HtmlEncode" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -362,7 +362,7 @@
     <value>False</value>
   </data>
   <data name="GridBoundColumnResource31.HeaderText" xml:space="preserve">
-    <value>Tolerance</value>
+    <value>Tol</value>
   </data>
   <data name="GridBoundColumnResource31.HtmlEncode" type="System.Boolean, mscorlib">
     <value>False</value>

@@ -54,6 +54,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!Page.IsPostBack)
             {
                 Hidden_ProjectName.Value = SessionManager.Instance.CurrentProject.ProjectName;
+
                 //-----------------Checking the Optimization Run limit set in web.config file, when user hits on "No, Optimize" button-------------//
                 int i, TotalOptRuns = 0;
                 for (i = SessionManager.Instance.CurrentProject.OptimizeRuns.Count - 2; i > 0; i--)

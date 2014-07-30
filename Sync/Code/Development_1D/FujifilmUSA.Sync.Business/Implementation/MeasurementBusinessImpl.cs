@@ -1007,6 +1007,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             {
                                 Cmyk_Value = DataReader.ReadDecimal(x, "CMYK_C"),
                                 ΔValue = DataReader.ReadDecimal(x, "ΔF"),
+                                wΔValue = DataReader.ReadDecimal(x, "wΔF"),
                                 ΔLimit = DataReader.ReadDecimal(x, "ΔLimit")
                             }).ToList();
                     },
@@ -1066,6 +1067,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         {
                             Cmyk_Value = DataReader.ReadDecimal(x, "CMYK_K"),
                             ΔValue = DataReader.ReadDecimal(x, "ΔL"),
+                            wΔValue = DataReader.ReadDecimal(x, "wΔL"),
                             ΔLimit = DataReader.ReadDecimal(x, "ΔLimit")
                         }).ToList();
                 },
@@ -1125,6 +1127,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         {
                             Cmyk_Value = DataReader.ReadDecimal(x, "CMYK_C"),
                             ΔValue = DataReader.ReadDecimal(x, "ΔL"),
+                            wΔValue = DataReader.ReadDecimal(x, "wΔL"),
                             ΔLimit = DataReader.ReadDecimal(x, "ΔLimit")
                         }).ToList();
                 },
@@ -1160,226 +1163,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return G7ChardDAta;
         }
 
-        public List<AnalyzeChart_G7> GetGrayFChart(int MeasurementId, bool IsVerification = false)
-        {
-            var G7ChartDetails = new List<AnalyzeChart_G7>();
-
-            string storedProc = "[CPSync].[GetChartData_G7]";
-            if (IsVerification)
-                storedProc = "[CPSyncV].[GetVChartData_G7]";
-
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    var dsMeasurements =
-                        DataAccessFactory.
-                            Instance.
-                            GetDsResult(
-                                storedProc,
-                                new object[] { MeasurementId });
-
-                    #region add Paper patch (CMYK = 0) at 0 index
-                    if (dsMeasurements.Tables[0] != null && dsMeasurements.Tables[0].Rows.Count > 0)
-                    {
-                        DataRow dr = dsMeasurements.Tables[0].NewRow();
-                        dr["CMYK_C"] = 0;
-                        dr["ΔF"] = 0;
-                        dr["ΔLimit"] = dsMeasurements.Tables[0].Rows[0]["ΔLimit"].ToString();
-                        dsMeasurements.Tables[0].Rows.InsertAt(dr, 0);
-                    }
-                    #endregion
-
-                    G7ChartDetails = dsMeasurements.Tables[0].
-                         AsEnumerable().
-                        Select(x => new AnalyzeChart_G7()
-                        {                          
-                            Cmyk_Value = DataReader.ReadDecimal(x, "CMYK_C"),
-                            ΔValue = DataReader.ReadDecimal(x, "ΔF"),
-                            ΔLimit = DataReader.ReadDecimal(x, "ΔLimit")                            
-                        }).ToList();
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_GrayF"));
-            return G7ChartDetails;
-        }
-
-        public List<AnalyzeChart_G7> GetGrayFSummary(int MeasurementId, bool IsVerification = false)
-        {
-            var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "[CPSync].[GetChartData_G7]";
-            if (IsVerification)
-                storedProc = "[CPSyncV].[GetVChartData_G7]";
-        
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    var dsMeasurements =
-                        DataAccessFactory.
-                            Instance.
-                            GetDsResult(
-                                storedProc,
-                                new object[] { MeasurementId });
-
-                    G7ChartDetails = dsMeasurements.Tables[1].
-                         AsEnumerable().
-                        Select(x => new AnalyzeChart_G7()
-                        {
-                            MetricMeasuredID = DataReader.ReadInt(x, "MetricMeasuredID"),
-                            Metric = DataReader.ReadString(x, "MetricSumName"),
-                            Tolerance = DataReader.ReadDecimal(x, "TargetValue"),
-                            Actual = DataReader.ReadDecimal(x, "MeasuredValue"),
-                            IsNotOK = DataReader.ReadBoolean(x, "IsNotOK")
-                        }).ToList();
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_GrayFSummary"));
-            return G7ChartDetails;
-        }
-
-        public List<AnalyzeChart_G7> GetBlackLChart(int MeasurementId, bool IsVerification = false)
-        {
-            var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "[CPSync].[GetChartData_G7]";
-            if (IsVerification)
-                storedProc = "[CPSyncV].[GetVChartData_G7]";
-
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    var dsMeasurements =
-                        DataAccessFactory.
-                            Instance.
-                            GetDsResult(
-                                storedProc,
-                                new object[] { MeasurementId });
-
-                    #region add Paper patch (CMYK = 0) at 0 index
-                    if (dsMeasurements.Tables[2] != null && dsMeasurements.Tables[2].Rows.Count > 0)
-                    {
-                        DataRow dr = dsMeasurements.Tables[2].NewRow();
-                        dr["CMYK_K"] = 0;
-                        dr["ΔL"] = 0;
-                        dr["ΔLimit"] = dsMeasurements.Tables[2].Rows[0]["ΔLimit"].ToString();
-                        dsMeasurements.Tables[2].Rows.InsertAt(dr, 0);
-                    }
-                    #endregion
-
-                    G7ChartDetails = dsMeasurements.Tables[2].
-                         AsEnumerable().
-                        Select(x => new AnalyzeChart_G7()
-                        {
-                            Cmyk_Value = DataReader.ReadDecimal(x, "CMYK_K"),
-                            ΔValue = DataReader.ReadDecimal(x, "ΔL"),
-                            ΔLimit = DataReader.ReadDecimal(x, "ΔLimit")     
-                        }).ToList();
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_BlackL"));
-            return G7ChartDetails;
-        }
-
-        public List<AnalyzeChart_G7> GetBlackLSummary(int MeasurementId, bool IsVerification = false)
-        {
-            var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "[CPSync].[GetChartData_G7]";
-            if (IsVerification)
-                storedProc = "[CPSyncV].[GetVChartData_G7]";
-
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    var dsMeasurements =
-                        DataAccessFactory.
-                            Instance.
-                            GetDsResult(
-                                storedProc,
-                                new object[] { MeasurementId });
-
-                    G7ChartDetails = dsMeasurements.Tables[3].
-                         AsEnumerable().
-                        Select(x => new AnalyzeChart_G7()
-                        {
-                            MetricMeasuredID = DataReader.ReadInt(x, "MetricMeasuredID"),
-                            Metric = DataReader.ReadString(x, "MetricSumName"),
-                            Tolerance = DataReader.ReadDecimal(x, "TargetValue"),
-                            Actual = DataReader.ReadDecimal(x, "MeasuredValue"),
-                            IsNotOK = DataReader.ReadBoolean(x, "IsNotOK")
-                        }).ToList();
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_BlackLSummary"));
-            return G7ChartDetails;
-        }
-
-        public List<AnalyzeChart_G7> GetGrayLChart(int MeasurementId, bool IsVerification = false)
-        {
-            var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "[CPSync].[GetChartData_G7]";
-            if (IsVerification)
-                storedProc = "[CPSyncV].[GetVChartData_G7]";
-
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    var dsMeasurements =
-                        DataAccessFactory.
-                            Instance.
-                            GetDsResult(
-                                storedProc,
-                                new object[] { MeasurementId });
-
-                    #region add Paper patch (CMYK = 0) at 0 index
-                    if (dsMeasurements.Tables[4] != null && dsMeasurements.Tables[4].Rows.Count > 0)
-                    {
-                        DataRow dr = dsMeasurements.Tables[4].NewRow();
-                        dr["CMYK_C"] = 0;
-                        dr["ΔL"] = 0;
-                        dr["ΔLimit"] = dsMeasurements.Tables[4].Rows[0]["ΔLimit"].ToString();
-                        dsMeasurements.Tables[4].Rows.InsertAt(dr, 0);
-                    }
-                    #endregion
-
-                    G7ChartDetails = dsMeasurements.Tables[4].
-                         AsEnumerable().
-                        Select(x => new AnalyzeChart_G7()
-                        {
-                            Cmyk_Value = DataReader.ReadDecimal(x, "CMYK_C"),
-                            ΔValue = DataReader.ReadDecimal(x, "ΔL"),
-                            ΔLimit = DataReader.ReadDecimal(x, "ΔLimit")     
-                        }).ToList();
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_GrayL"));
-            return G7ChartDetails;
-        }
-
-        public List<AnalyzeChart_G7> GetGrayLSummary(int MeasurementId, bool IsVerification = false)
-        {
-            var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "[CPSync].[GetChartData_G7]";
-            if (IsVerification)
-                storedProc = "[CPSyncV].[GetVChartData_G7]";
-
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    var dsMeasurements =
-                        DataAccessFactory.
-                            Instance.
-                            GetDsResult(
-                                storedProc,
-                                new object[] { MeasurementId });
-
-                    G7ChartDetails = dsMeasurements.Tables[5].
-                         AsEnumerable().
-                        Select(x => new AnalyzeChart_G7()
-                        {
-                            MetricMeasuredID = DataReader.ReadInt(x, "MetricMeasuredID"),
-                            Metric = DataReader.ReadString(x, "MetricSumName"),
-                            Tolerance = DataReader.ReadDecimal(x, "TargetValue"),
-                            Actual = DataReader.ReadDecimal(x, "MeasuredValue"),
-                            IsNotOK = DataReader.ReadBoolean(x, "IsNotOK")
-                        }).ToList();
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_GrayLSummary"));
-            return G7ChartDetails;
-        }
-
+    
         public int Save1DMeasurement(Measurement measurement)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };

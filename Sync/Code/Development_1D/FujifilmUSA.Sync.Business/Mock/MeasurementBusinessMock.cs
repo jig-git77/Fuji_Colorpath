@@ -122,39 +122,6 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Measurement>();
         }
 
-        public List<AnalyzeChart_G7> GetGrayFChart(int MeasurementId, bool IsVerification = false)
-        {
-            return new List<AnalyzeChart_G7>();
-        }
-        public List<AnalyzeChart_G7> GetGrayFSummary(int MeasurementId, bool IsVerification = false)
-        {
-            return new List<AnalyzeChart_G7>();
-        }
-        public List<AnalyzeChart_G7> GetBlackLChart(int MeasurementId, bool IsVerification = false)
-        {
-            return new List<AnalyzeChart_G7>();
-        }
-        public List<AnalyzeChart_G7> GetBlackLSummary(int MeasurementId, bool IsVerification = false)
-        {
-            return new List<AnalyzeChart_G7>();
-        }
-        public List<AnalyzeChart_G7> GetGrayLChart(int MeasurementId, bool IsVerification = false)
-        {
-            return new List<AnalyzeChart_G7>();
-        }
-        public List<AnalyzeChart_G7> GetGrayLSummary(int MeasurementId, bool IsVerification = false)
-        {
-            return new List<AnalyzeChart_G7>();
-        }
-        //public List<AnalyzeChart_G7> GetBlackNPDChart(int MeasurementId, bool IsVerification = false)
-        //{
-        //    return new List<AnalyzeChart_G7>();
-        //}
-        //public List<AnalyzeChart_G7> GetGrayNPDChart(int MeasurementId, bool IsVerification = false)
-        //{
-        //    return new List<AnalyzeChart_G7>();
-        //}
-
         public int Save1DMeasurement(Measurement measurement)
         {
             return 0;

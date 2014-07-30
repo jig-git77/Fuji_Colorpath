@@ -23,14 +23,14 @@
     }
 
     function CheckOptRunLimit() {
-        
-         if(jQuery("input[id*='hdOptRunLimit']").val() >= <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.OptimizeRunLimit) %>)
-            {
-                alert("You reach your limit of adding Optimization Runs, Now you have to certify this run.");
-                return false;
-            }
-            else
-                return true;
+ 
+        if(jQuery("input[id*='hdOptRunLimit']").val() >=  <%= ApplicationConfiguration.Instance.OptimizeRunLimit  %>)
+        {
+            alert("You reach your limit of adding Optimization Runs, Now you have to certify this run.");
+            return false;
+        }
+        else
+        return true;
    }
 
 </script>

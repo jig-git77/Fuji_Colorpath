@@ -2207,6 +2207,11 @@ label
     color: Red;
 }
 
+.Validation_Status_Black
+{
+    color: Black;
+}
+
 .Validation_Status_Green
 {
     color: Green;

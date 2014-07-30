@@ -571,7 +571,7 @@
                                             ItemStyle-CssClass="Summary_Right_Alt" 
                                             meta:resourcekey="TemplateFieldResource1">
                                             <ItemTemplate>
-                                                <div class='<%# ((string)Eval("MeasurementStatus") == "OK") ? "Validation_Status_Green" : "Validation_Status_Red" %>'>
+                                                <div class='<%# ((string)Eval("MeasurementStatus") == "OK") ? "Validation_Status_Green" : "Validation_Status_Black" %>'>
                                                     <asp:Label runat="server" ID="lblStatus" 
                                                         Text='<%# Eval("MeasurementStatus") %>'></asp:Label>
                                                 </div>
@@ -960,10 +960,18 @@
                                                         Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
                                                         MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
                                                     </asp:Series>  
-                                                    <asp:Series  Name="Series2" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false" Color="Red" ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
+                                                    <asp:Series Name="Series2" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                        Color="Blue" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                        MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                    </asp:Series>                                                         
+                                                    <asp:Series Name="Series2Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                        Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                        MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                    </asp:Series>  
+                                                    <asp:Series  Name="Series3" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false" Color="Red" ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
                                                                     BorderWidth="2">
                                                     </asp:Series>  
-                                                    <asp:Series Name="Series2Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    <asp:Series Name="Series3Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
                                                             Color="Red" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
                                                                 BackSecondaryColor="162, 164, 255">
                                                     </asp:Series>                                                       
@@ -1012,10 +1020,10 @@
                                                                 <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
                                                                     UniqueName="MetricSumName" meta:resourcekey="GridBoundColumnResource22">
                                                                 </telerik:GridBoundColumn>
-                                                                <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tolerance" 
+                                                                <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tol" 
                                                                     UniqueName="TargetValue" meta:resourcekey="GridBoundColumnResource23">
                                                                 </telerik:GridBoundColumn>
-                                                                <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual" 
+                                                                <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual"
                                                                     UniqueName="MeasuredValue" meta:resourcekey="GridBoundColumnResource24">
                                                                 </telerik:GridBoundColumn>     
                                                                 <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
@@ -1063,10 +1071,18 @@
                                                     Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
                                                     MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
                                                 </asp:Series>  
-                                                <asp:Series  Name="Series2" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false" Color="Red" ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
+                                                <asp:Series Name="Series2" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>                                                         
+                                                <asp:Series Name="Series2Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>  
+                                                <asp:Series  Name="Series3" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false" Color="Red" ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
                                                                 BorderWidth="2">
                                                 </asp:Series>  
-                                                <asp:Series Name="Series2Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                <asp:Series Name="Series3Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
                                                         Color="Red" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
                                                             BackSecondaryColor="162, 164, 255">
                                                 </asp:Series>                                                       
@@ -1117,7 +1133,7 @@
                                                                 <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
                                                                     UniqueName="MetricSumName" meta:resourcekey="GridBoundColumnResource26">
                                                                 </telerik:GridBoundColumn>
-                                                                <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tolerance" 
+                                                                <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tol" 
                                                                     UniqueName="TargetValue" meta:resourcekey="GridBoundColumnResource27">
                                                                 </telerik:GridBoundColumn>
                                                                 <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual" 
@@ -1173,15 +1189,25 @@
                                                     IsVisibleInLegend="false" LabelFormat="0" MarkerBorderColor="64, 64, 64" 
                                                     MarkerSize="15" MarkerStyle="Circle" Name="Series1Point">
                                                 </asp:Series>
+                                                 <asp:Series BackSecondaryColor="162, 164, 255" BorderWidth="2" 
+                                                    ChartType="Spline" Color="Black" IsValueShownAsLabel="false" 
+                                                    IsVisibleInLegend="false" LabelFormat="0" MarkerBorderColor="64, 64, 64" 
+                                                    MarkerSize="15" MarkerStyle="Circle" Name="Series2">
+                                                </asp:Series>
+                                                <asp:Series BackSecondaryColor="162, 164, 255" BorderWidth="2" 
+                                                    ChartType="Spline" Color="Black" IsValueShownAsLabel="false" 
+                                                    IsVisibleInLegend="false" LabelFormat="0" MarkerBorderColor="64, 64, 64" 
+                                                    MarkerSize="15" MarkerStyle="Circle" Name="Series2Point">
+                                                </asp:Series>
                                                 <asp:Series BackSecondaryColor="162, 164, 255" BorderWidth="2" 
                                                     ChartType="Spline" Color="Red" IsVisibleInLegend="false" 
                                                     MarkerBorderColor="64, 64, 64" MarkerSize="12" MarkerStyle="Circle" 
-                                                    Name="Series2">
+                                                    Name="Series3">
                                                 </asp:Series>
                                                 <asp:Series BackSecondaryColor="162, 164, 255" BorderWidth="2" 
                                                     ChartType="Spline" Color="Red" IsValueShownAsLabel="false" 
                                                     IsVisibleInLegend="false" LabelFormat="0" MarkerBorderColor="64, 64, 64" 
-                                                    Name="Series2Point">
+                                                    Name="Series3Point">
                                                 </asp:Series>
                                             </Series>
                                             <ChartAreas>
@@ -1232,7 +1258,7 @@
                                                                 <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
                                                                     UniqueName="MetricSumName" meta:resourcekey="GridBoundColumnResource30">
                                                                 </telerik:GridBoundColumn>
-                                                                <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tolerance" 
+                                                                <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tol" 
                                                                     UniqueName="TargetValue" meta:resourcekey="GridBoundColumnResource31">
                                                                 </telerik:GridBoundColumn>
                                                                 <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual" 

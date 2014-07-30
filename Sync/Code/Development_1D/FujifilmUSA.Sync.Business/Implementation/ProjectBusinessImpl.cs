@@ -102,7 +102,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                                         VUVMode = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VUVMode"),
                                         VMeasurementCount = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VMeasurementCount"),
-                                        VReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "VReadMode")                                       
+                                        VReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "VReadMode"),
+                                        PresetWeighted = DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "Weighted")
                                     };
                         }
                         if (dsProject.Tables[3].Rows.Count > 0)
