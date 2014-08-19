@@ -292,9 +292,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterMeasurementSetting.GetMeasurementDevice();
             if (SessionManager.Instance.CurrentColorOrgRequest != null)
             {
-                MeasurementDevices = MeasurementDevices.
-                    Where(x => x.InstrumentTypeId == SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId).
-                    ToList();
+                if (SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId == 1) //I1-Pro and I1-Pro2
+                {
+                    MeasurementDevices = MeasurementDevices.Where(x => x.InstrumentTypeId == 1 || x.InstrumentTypeId == 4).ToList();
+                }
+                else if (SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId == 3)  //I1-IO and I1-IO-Pro2
+                {
+                    MeasurementDevices = MeasurementDevices.Where(x => x.InstrumentTypeId == 3 || x.InstrumentTypeId == 5).ToList();
+                }
+                else  //I1-Sis
+                {
+                    MeasurementDevices = MeasurementDevices.Where(x => x.InstrumentTypeId == SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId).ToList();
+                }
             }
             if (!IsErrorOccured)
             {
