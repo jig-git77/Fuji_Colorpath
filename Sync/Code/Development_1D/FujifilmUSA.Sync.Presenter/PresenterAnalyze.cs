@@ -103,15 +103,13 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            var G7ChardData = measurementBusiness.GetG7ChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
-            _viewAnalyze.GrayFChart = G7ChardData[0];            
+            var G7ChardData = measurementBusiness.GetG7ChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsAverageOfMeasurements);
+            _viewAnalyze.GrayFChart = G7ChardData[0];
             _viewAnalyze.GrayFSummary = G7ChardData[1];
             _viewAnalyze.BlackLChart = G7ChardData[2];
             _viewAnalyze.BlackLSummary = G7ChardData[3];
             _viewAnalyze.GrayLChart = G7ChardData[4];
             _viewAnalyze.GrayLSummary = G7ChardData[5];
-            //_viewAnalyze.BlackNPDChart = measurementBusiness.GetBlackNPDChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
-            //_viewAnalyze.GrayNPDChart = measurementBusiness.GetGrayNPDChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
         }
 
         public void Get1DMeasurementsOnRunId()
@@ -154,7 +152,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.DTTVIChart = measurementBusiness.GetTVIChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            _viewAnalyze.DTTVIChart = measurementBusiness.GetTVIChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements);
         }
         public void GetISOTVIChart()
         {

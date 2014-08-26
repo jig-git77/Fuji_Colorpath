@@ -251,13 +251,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (ValidationType == 1)  //G7 type
                     {
                         dvTab_G7.Visible = Tab_G7.Visible = true;
+                        tdAverageOfMeasurements.Visible = true; //Display in Sync1D G7 mode for Averaging measurements
                     }
                     else
                     {
                         dvTab_G7.Visible = Tab_G7.Visible = false;
                         if (ValidationType == 2)  //ISO type
                         {
-                            tdAverageOfMeasurements.Visible = true; //Only display in Sync1D ISO mode for Averaging measurements
+                            tdAverageOfMeasurements.Visible = true; //Display in Sync1D ISO mode for Averaging measurements
                         }
                     }
                     dvTab_TVI.Visible = Tab_TVI.Visible = true;
@@ -478,6 +479,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 dvTab_G7.Visible = Tab_G7.Visible = true;
                 ValidationType = 1;
                 path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D && ValidationType == 1) //Sync1D and G7
+                {
+                    path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType + "&IsAvgMeas=" + IsAverageOfMeasurements;
+                }
             }
             else
             {

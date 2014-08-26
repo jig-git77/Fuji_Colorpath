@@ -62,7 +62,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             throw new NotImplementedException();
         }
 
-        public List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false)
+        public List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false, bool IsAverageOfMeasurements = false)
         {
             throw new NotImplementedException();
         }
@@ -101,7 +101,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new DataSet();
         }
 
-        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false)
+        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             return new DataSet();
         }
@@ -142,7 +142,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<string, string>();
         }
 
-        public List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        public List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             return new List<AnalyzeChart_DotGain>();
         }

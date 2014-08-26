@@ -496,7 +496,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return false;
+                return Convert.ToBoolean(txt_IsAvgMeasurement.Text);
             }
         }
         #endregion

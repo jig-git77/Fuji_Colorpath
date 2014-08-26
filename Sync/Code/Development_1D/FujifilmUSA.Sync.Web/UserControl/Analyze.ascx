@@ -1014,7 +1014,7 @@
                                                     <HeaderStyle Font-Bold="True" />  
                                                     <ItemStyle BackColor="#F2F2F2" />
                                                     <AlternatingItemStyle BackColor="#FFFFFF" />                    
-                                                        <MasterTableView DataKeyNames="MetricMeasuredID">  
+                                                        <MasterTableView>  
 
                                                             <Columns>
                                                                 <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
@@ -1127,7 +1127,7 @@
                                                     <HeaderStyle Font-Bold="True" />  
                                                     <ItemStyle BackColor="#F2F2F2" />
                                                     <AlternatingItemStyle BackColor="#FFFFFF" />                    
-                                                        <MasterTableView DataKeyNames="MetricMeasuredID">  
+                                                        <MasterTableView>  
 
                                                             <Columns>
                                                                 <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
@@ -1252,7 +1252,7 @@
                                                     <HeaderStyle Font-Bold="True" />  
                                                     <ItemStyle BackColor="#F2F2F2" />
                                                     <AlternatingItemStyle BackColor="#FFFFFF" />                    
-                                                        <MasterTableView DataKeyNames="MetricMeasuredID">  
+                                                        <MasterTableView>  
 
                                                             <Columns>
                                                                 <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 

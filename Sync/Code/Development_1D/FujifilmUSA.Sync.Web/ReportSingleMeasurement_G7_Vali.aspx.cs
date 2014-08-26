@@ -33,6 +33,11 @@ namespace FujifilmUSA.Sync.Web
                     TextBox txt_Vali_Type = ucReportSingle.FindControl("txt_Vali_Type") as TextBox;
                     txt_Vali_Type.Text = Request.QueryString["Vali_Type"].ToString();
                 }
+                if (Request.QueryString["IsAvgMeas"] != null)
+                {
+                    TextBox txt_IsAvgMeasurement = ucReportSingle.FindControl("txt_IsAvgMeasurement") as TextBox;
+                    txt_IsAvgMeasurement.Text = Request.QueryString["IsAvgMeas"].ToString();
+                }
             }
         }
     }

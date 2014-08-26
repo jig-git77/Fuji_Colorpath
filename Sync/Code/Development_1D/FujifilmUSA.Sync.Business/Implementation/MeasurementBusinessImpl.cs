@@ -869,13 +869,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false)
+        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             var measurements = new DataSet();
             string storedProc = "Report.GetSingleVMeasurement";
             if (IsSync1DType)
+            {
                 storedProc = "Report.GetSingle1DMeasurement";
-
+                if (IsAverageOfMeasurements)
+                {
+                    storedProc = "Report.GetSingle1DMeasurement_Avg";
+                }
+            }
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -970,11 +975,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return Convert.ToInt32(outParam.Value);
         }
 
-        public List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false)
+        public List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false, bool IsAverageOfMeasurements = false)
         {
             var G7ChardDAta = new List<AnalyzeChart_G7>[6];
 
             string storedProc = "[CPSync].[GetChartData_G7]";
+            if (IsAverageOfMeasurements)
+            {
+                storedProc = "CPSync.GetChartData_G7_Avg";
+            }
             if (IsVerification)
                 storedProc = "[CPSyncV].[GetVChartData_G7]";
 
@@ -1029,7 +1038,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                          AsEnumerable().
                         Select(x => new AnalyzeChart_G7()
                         {
-                            MetricMeasuredID = DataReader.ReadInt(x, "MetricMeasuredID"),
                             Metric = DataReader.ReadString(x, "MetricSumName"),
                             Tolerance = DataReader.ReadDecimal(x, "TargetValue"),
                             Actual = DataReader.ReadDecimal(x, "MeasuredValue"),
@@ -1089,7 +1097,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                          AsEnumerable().
                         Select(x => new AnalyzeChart_G7()
                         {
-                            MetricMeasuredID = DataReader.ReadInt(x, "MetricMeasuredID"),
                             Metric = DataReader.ReadString(x, "MetricSumName"),
                             Tolerance = DataReader.ReadDecimal(x, "TargetValue"),
                             Actual = DataReader.ReadDecimal(x, "MeasuredValue"),
@@ -1149,7 +1156,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                          AsEnumerable().
                         Select(x => new AnalyzeChart_G7()
                         {
-                            MetricMeasuredID = DataReader.ReadInt(x, "MetricMeasuredID"),
                             Metric = DataReader.ReadString(x, "MetricSumName"),
                             Tolerance = DataReader.ReadDecimal(x, "TargetValue"),
                             Actual = DataReader.ReadDecimal(x, "MeasuredValue"),
@@ -1418,10 +1424,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return TVIOptionsList;
         }
 
-        public List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        public List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             var TVIChartDetails = new List<AnalyzeChart_DotGain>();
             string storedProc = "CPSync.GetChartData_DotGain";   //----G7 Sync1D type
+            if (IsAverageOfMeasurements)
+            {
+                storedProc = "CPSync.GetChartData_DotGain_Avg";
+            }
             if (IsVerification)
                 storedProc = "CPSyncV.GetVChartData_DotGain";
             Common.ImplementBusinessLogic(
