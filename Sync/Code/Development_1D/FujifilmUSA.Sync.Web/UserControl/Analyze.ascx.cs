@@ -3042,7 +3042,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //-----Re-fill all Tabs data by applying average of all measurements under this optimize run-------//
                 BindMesurementChart();
                 BindAvgDelta();
-                FillAllTabsData();
+                //This function is calling twise that is why it might be slow.
+                //FillAllTabsData();
                 dvTab_PatchDetails.Visible = Tab_PatchDetails.Visible = false; //Because we can't display Patch Details tab in averaging mode
             }
             else
