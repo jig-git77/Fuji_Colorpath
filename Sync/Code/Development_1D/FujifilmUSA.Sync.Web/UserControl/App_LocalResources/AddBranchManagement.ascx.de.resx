@@ -118,45 +118,45 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Add Branch</value>
+    <value>Niederlassung hinzufügen</value>
   </data>
 	<data name="locBranchManagementResource1.Text" xml:space="preserve">
-    <value>Branch Management_de</value>
+    <value>Niederlassung verwalten</value>
   </data>
 	<data name="locBranchNameResource1.Text" xml:space="preserve">
-    <value>Branch Name_de</value>
+    <value>Name d.Niederlassung</value>
   </data>
 	<data name="locCancelResource1.Text" xml:space="preserve">
-    <value>Cancel_de</value>
+    <value>Zurück</value>
   </data>
 	<data name="locCompanyNameResource1.Text" xml:space="preserve">
-    <value>Company Name_de</value>
+    <value>Firmenname</value>
   </data>
 	<data name="locIsActiveResource1.Text" xml:space="preserve">
-    <value>Is Active?_De</value>
+    <value>aktiv?</value>
   </data>
 	<data name="locLocationResource1.Text" xml:space="preserve">
-    <value>Location_De</value>
+    <value>Ort</value>
   </data>
 	<data name="locRegionResource1.Text" xml:space="preserve">
-    <value>Region_De</value>
+    <value>Bundesland</value>
   </data>
 	<data name="locSaveResource1.Text" xml:space="preserve">
-    <value>Save_de</value>
+    <value>Sichern</value>
   </data>
 	<data name="locSupportIdResource1.Text" xml:space="preserve">
-    <value>Support ID_de</value>
+    <value>Support ID</value>
   </data>
 	<data name="addBranchText" xml:space="preserve">
-    <value>Add Branch_de</value>
+    <value>Niederlassung hinzufügen</value>
   </data>
 	<data name="editBranchText" xml:space="preserve">
-    <value>Edit Branch_de</value>
+    <value>Niederlassung ändern</value>
   </data>
 	<data name="selectRegionText" xml:space="preserve">
-    <value>-- Select Region --_de</value>
+    <value>--Bundesland auswählen--</value>
   </data>
 	<data name="selectCompanyText" xml:space="preserve">
-		<value>-- Select Company --_de</value>
+		<value>--Firma auswählen--</value>
 	</data>
 </root>

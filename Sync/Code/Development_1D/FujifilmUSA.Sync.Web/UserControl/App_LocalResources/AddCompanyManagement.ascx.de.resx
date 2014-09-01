@@ -118,33 +118,33 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="addCompanyText" xml:space="preserve">
-    <value>Add Company_de</value>
+    <value>Firma hinzufügen</value>
   </data>
 	<data name="editCompanyText" xml:space="preserve">
-    <value>Edit Company_de</value>
+    <value>Firma bearbeiten</value>
   </data>
 	<data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Add Company_de</value>
+    <value>Firma hinzufügen</value>
   </data>
 	<data name="locCancelResource1.Text" xml:space="preserve">
-    <value>Cancel_de</value>
+    <value>Zurück</value>
   </data>
 	<data name="locCompanyMgmtResource1.Text" xml:space="preserve">
-    <value>Company Management_de</value>
+    <value>Geschäftsführer</value>
   </data>
 	<data name="locCompanyNameResource1.Text" xml:space="preserve">
-    <value>Company Name_de</value>
+    <value>Firmenname</value>
   </data>
 	<data name="locIsActiveResource1.Text" xml:space="preserve">
-    <value>Is Active?_de</value>
+    <value>aktiv?</value>
   </data>
 	<data name="locRegionNameResource1.Text" xml:space="preserve">
-    <value>Region Name_De</value>
+    <value>Bundesland</value>
   </data>
 	<data name="locSaveResource1.Text" xml:space="preserve">
-    <value>Save_de</value>
+    <value>Sichern</value>
   </data>
 	<data name="selectText" xml:space="preserve">
-    <value>--Select--_de</value>
+    <value>--Auswählen--</value>
   </data>
 </root>

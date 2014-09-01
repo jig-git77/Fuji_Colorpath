@@ -118,48 +118,48 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Branch Name_de</value>
+    <value>Name d. Niederlassung</value>
   </data>
 	<data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Location_de</value>
+    <value>Standort</value>
   </data>
 	<data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>SupportID_de</value>
+    <value>SupportID</value>
   </data>
 	<data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>CompanyName_de</value>
+    <value>Firmenname</value>
   </data>
 	<data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
-    <value>Region_de</value>
+    <value>Bundesland</value>
   </data>
 	<data name="GridTemplateColumnResource6.HeaderText" xml:space="preserve">
-    <value>IsActive?_de</value>
+    <value>aktiv?</value>
   </data>
 	<data name="imgbtnDeleteResource1.AlternateText" xml:space="preserve">
-    <value>Delete_de</value>
+    <value>löschen</value>
   </data>
 	<data name="imgbtnDeleteResource1.ToolTip" xml:space="preserve">
-    <value>Delete Branch_de</value>
+    <value>Niederlassung löschen</value>
   </data>
 	<data name="imgbtnEditResource1.AlternateText" xml:space="preserve">
-    <value>Edit_de</value>
+    <value>bearbeiten</value>
   </data>
 	<data name="imgbtnEditResource1.ToolTip" xml:space="preserve">
-    <value>Edit Branch_de</value>
+    <value>Niederlassung bearbeiten</value>
   </data>
 	<data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
-    <value>Clear Fillter_de</value>
+    <value>Filter löschen</value>
   </data>
 	<data name="imgClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter_de</value>
+    <value>Filter löschen</value>
   </data>
 	<data name="lbtnClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter_de</value>
+    <value>Filter löschen</value>
   </data>
 	<data name="locAddBranchResource1.Text" xml:space="preserve">
-    <value>Add Branch_de</value>
+    <value>Niederlassung hinzufügen</value>
   </data>
 	<data name="locBranchMgmtResource1.Text" xml:space="preserve">
-    <value>Branch Management_de</value>
+    <value>Niederlassung verwalten</value>
   </data>
 </root>

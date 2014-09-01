@@ -118,96 +118,96 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="calibrateButton" xml:space="preserve">
-    <value>Calibrate_de</value>
+    <value>Kalibrieren</value>
   </data>
 	<data name="cancelMeasurement" xml:space="preserve">
-    <value>Cancel Measurement_de</value>
+    <value>Messung abbrechen</value>
   </data>
 	<data name="deleteButton" xml:space="preserve">
-    <value>Delete_de</value>
+    <value>löschen</value>
   </data>
 	<data name="deleteMeasurementTooltip" xml:space="preserve">
-    <value>Delete Measurement_de</value>
+    <value>Messung löschen</value>
   </data>
 	<data name="errorCause" xml:space="preserve">
-    <value>Error Cause:_de</value>
+    <value>Fehlergrund</value>
   </data>
 	<data name="errorDetail" xml:space="preserve">
-    <value>Error Detail:_de</value>
+    <value>Fehlerdetails:</value>
   </data>
 	<data name="errorText" xml:space="preserve">
-    <value>Error_de</value>
+    <value>Fehler</value>
   </data>
 	<data name="lblMeasurementNameResource1.Text" xml:space="preserve">
-    <value>Measurement Name_de</value>
+    <value>Name d.Messung</value>
   </data>
 	<data name="limitReachText" xml:space="preserve">
-    <value>Limit Reach_de</value>
+    <value>Limit Reach</value>
   </data>
 	<data name="locColorBarResource1.Text" xml:space="preserve">
-    <value>Colorbar_de</value>
+    <value>Druckkontrollstreifen</value>
   </data>
 	<data name="locRecentUploadResource1.Text" xml:space="preserve">
-    <value>Recent Upload_de</value>
+    <value>Zuletzt hochgeladen</value>
   </data>
 	<data name="locUploadingMeasurementResource1.Text" xml:space="preserve">
-    <value>Uploading Measurement..._de</value>
+    <value>Sende Messwerte...</value>
   </data>
 	<data name="measureChart" xml:space="preserve">
-    <value>Measure Chart_de</value>
+    <value>Chart messen</value>
   </data>
 	<data name="measurementNameLengthMsg" xml:space="preserve">
-    <value>Please enter measurement name that is at least 4 characters long._de</value>
+    <value>Der Name für die Messung muß mindestens 4 Zeichen lang sein.</value>
   </data>
 	<data name="measurementUploadedSuccess" xml:space="preserve">
-    <value>Measurement uploaded successfully._de</value>
+    <value>Messwerte erfolgreich hochgeladen.</value>
   </data>
 	<data name="measureUpload" xml:space="preserve">
-    <value>Measure / Upload_de</value>
+    <value>Messen / Hochladen</value>
   </data>
 	<data name="measurementName" xml:space="preserve">
-    <value>Measurement Name_de</value>
+    <value>Name d.Messung</value>
   </data>
 	<data name="noRecordsAvailable" xml:space="preserve">
-    <value>No records available_de</value>
+    <value>Keine Datensätze verfügbar</value>
   </data>
 	<data name="runLimitReached" xml:space="preserve">
-    <value>You reach your limit of adding measurements in one Optimization Run_de</value>
+    <value>Sie können in diesem Optimierungslauf keine weiteren Meßwerte mehr zufügen</value>
   </data>
 	<data name="statusText" xml:space="preserve">
-    <value>Status :_de</value>
+    <value>Status :</value>
   </data>
 	<data name="uploadDateTime" xml:space="preserve">
-    <value>Upload Date Time_de</value>
+    <value>Hochgeladen am</value>
   </data>
 	<data name="uploadMeasurement" xml:space="preserve">
-    <value>Upload Measurement_de</value>
+    <value>Messwerte hochladen</value>
   </data>
 	<data name="ImportMeasurementsButton" xml:space="preserve">
-    <value>Import Measurements_de</value>
+    <value>Messwerte importieren</value>
   </data>
 	<data name="JobNameCaption" xml:space="preserve">
-    <value>Job Name_de</value>
+    <value>Job Name</value>
   </data>
 	<data name="MeasurementNameCaption" xml:space="preserve">
-    <value>Measurement Name_de</value>
+    <value>Name d.Messung</value>
   </data>
 	<data name="btnImportMeasurements" xml:space="preserve">
-    <value>Import Measurements_de</value>
+    <value>Messwerte importieren</value>
   </data>
 	<data name="lblCustomerResource1.Text" xml:space="preserve">
-    <value>Customer</value>
+    <value>Kunde</value>
   </data>
 	<data name="lblJDFJobIdResource1.Text" xml:space="preserve">
     <value>JDF Job ID</value>
   </data>
 	<data name="lblNotesResource1.Text" xml:space="preserve">
-    <value>Notes</value>
+    <value>Anmerkungen</value>
   </data>
 	<data name="lblPageOrSurfaceResource1.Text" xml:space="preserve">
-    <value>Page/Surface</value>
+    <value>Seite/Oberfläche</value>
   </data>
 	<data name="locImportMeaResource1.Text" xml:space="preserve">
-		<value>Import Measurements_de</value>
+		<value>Messwerte importieren</value>
 	</data>
 </root>

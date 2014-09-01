@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,113 +59,107 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="lblClosePrintConditionMessageResource1.Text" xml:space="preserve">
-    <value />
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="lbtnDownloadCurrentDLPResource1.Text" xml:space="preserve">
+    <value>Lade aktuelle DLP</value>
   </data>
-  <data name="lblClosePrintConditionMessageResource1.ToolTip" xml:space="preserve">
-    <value />
+	<data name="lbtnReOptimizeResource1.Text" xml:space="preserve">
+    <value>reoptimieren</value>
   </data>
-  <data name="lbtnCloseResource1.Text" xml:space="preserve">
-    <value />
+	<data name="lbtnReOptimizeResource1.ToolTip" xml:space="preserve">
+    <value>reoptimieren</value>
   </data>
-  <data name="lbtnCloseResource1.ToolTip" xml:space="preserve">
-    <value />
+	<data name="lbtnViewLastAnalysisResource1.Text" xml:space="preserve">
+    <value>Letzte Analyse ansehen</value>
   </data>
-  <data name="lbtnDownloadCurrentDLPResource1.Text" xml:space="preserve">
-    <value />
+	<data name="lbtnViewLastAnalysisResource1.ToolTip" xml:space="preserve">
+    <value>Letzte Analyse ansehen</value>
   </data>
-  <data name="lbtnDownloadCurrentDLPResource1.ToolTip" xml:space="preserve">
-    <value />
+	<data name="locCancelResource1.Text" xml:space="preserve">
+    <value>Zurück</value>
   </data>
-  <data name="lbtnReOptimizeResource1.Text" xml:space="preserve">
-    <value />
+	<data name="locDownloadCurrentDLPResource1.Text" xml:space="preserve">
+    <value>Lade aktuelle DLP</value>
   </data>
-  <data name="lbtnReOptimizeResource1.ToolTip" xml:space="preserve">
-    <value />
+	<data name="locReOptimizeResource1.Text" xml:space="preserve">
+    <value>reoptimieren</value>
   </data>
-  <data name="lbtnViewLastAnalysisResource1.Text" xml:space="preserve">
-    <value />
+	<data name="locViewLastAnalysisResource1.Text" xml:space="preserve">
+    <value>Letzte Analyse ansehen</value>
   </data>
-  <data name="lbtnViewLastAnalysisResource1.ToolTip" xml:space="preserve">
-    <value />
+	<data name="noDLPText" xml:space="preserve">
+    <value>Ups! HIer gibt es keine DLP zum Herunterladen"</value>
   </data>
-  <data name="locCancelResource1.Text" xml:space="preserve">
-    <value>Cancel_de</value>
+	<data name="optimizeCompleteText" xml:space="preserve">
+    <value>Bei Abschluß der Optimierung {0} in den Workflow übernehmen und das {1} Chart noch einmal drucken._de</value>
   </data>
-  <data name="locDownloadCurrentDLPResource1.Text" xml:space="preserve">
-    <value>Download Current DLP_de</value>
+	<data name="printOptionsText" xml:space="preserve">
+    <value>Optionen für Druckbedingung "{0}"</value>
   </data>
-  <data name="locReOptimizeResource1.Text" xml:space="preserve">
-    <value>Re Optimize_de</value>
-  </data>
-  <data name="locViewLastAnalysisResource1.Text" xml:space="preserve">
-    <value>View Last Analysis_de</value>
-  </data>
-  <data name="noDLPText" xml:space="preserve">
-    <value>Sorry!There is no dlp to download"_de</value>
-  </data>
-  <data name="optimizeCompleteText" xml:space="preserve">
-    <value>Once optimization is complete, apply {0} to workflow and reprint the {1} chart._de</value>
-  </data>
-  <data name="printOptionsText" xml:space="preserve">
-    <value>Options for "{0}" print condition_de</value>
-  </data>
+	<data name="lbtnCloseResource1.Text" xml:space="preserve">
+		<value>Zurück</value>
+	</data>
+	<data name="lbtnCloseResource1.ToolTip" xml:space="preserve">
+		<value>Zurück</value>
+	</data>
+	<data name="lbtnDownloadCurrentDLPResource1.ToolTip" xml:space="preserve">
+		<value>Lade aktuelle DLP</value>
+	</data>
 </root>

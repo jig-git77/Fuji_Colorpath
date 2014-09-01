@@ -118,18 +118,18 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="locDescriptionResource1.Text" xml:space="preserve">
-    <value>Description_de</value>
+    <value>Beschreibung</value>
   </data>
 	<data name="locProfileDescResource1.Text" xml:space="preserve">
-    <value>Profile Description:_de</value>
+    <value>Profilbeschreibung:</value>
   </data>
 	<data name="locProfilerOptionsResource1.Text" xml:space="preserve">
-    <value>Profiler Options_de</value>
+    <value>Profiler Optionen</value>
   </data>
 	<data name="locSourceProfileResource1.Text" xml:space="preserve">
-    <value>Source Profile:_de</value>
+    <value>Quellprofil:</value>
   </data>
 	<data name="locTargetColorspaceResource1.Text" xml:space="preserve">
-    <value>New Print Condition - Target Colorspace_de</value>
+    <value>Neue Druckbedingung - Zielfarbraum</value>
   </data>
 </root>

@@ -691,4 +691,10 @@
   <data name="GridBoundColumnResource37.HeaderText" xml:space="preserve">
     <value>Density_Y</value>
   </data>
+  <data name="LocAvgMesurmentResource1.Text" xml:space="preserve">
+    <value>Analyze Average Of Measurements</value>
+  </data>
+  <data name="TemplateFieldResource0.HeaderText" xml:space="preserve">
+    <value>Measurement Name:</value>
+  </data>
 </root>

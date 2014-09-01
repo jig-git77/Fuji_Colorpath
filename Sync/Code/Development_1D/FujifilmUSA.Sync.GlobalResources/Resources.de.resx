@@ -118,744 +118,745 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="AddMeasurement_DeleteMeasurement_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete all information of selected measurement?_de</value>
+    <value>Wollen Sie wirklich alle Werte aus der gewählten Meßreihe löschen?</value>
   </data>
 	<data name="BranchManagement_DeleteBranch_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete selected branch?_de</value>
+    <value>Wollen Sie diese Niederlassung wirklich löschen?</value>
   </data>
 	<data name="CompanyManagement_DeleteCompany_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete selected company?_de</value>
+    <value>Wollen Sie wirklich diese Firma löschen?</value>
   </data>
 	<data name="DeviceManagement_DeleteDevice_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete selected device?_de</value>
+    <value>Wollen Sie wirklich das ausgewählte Gerät löschen?</value>
   </data>
 	<data name="Duplicate_InsertBranch" xml:space="preserve">
-    <value>Branch already exists with same name._de</value>
+    <value>Niederlassung mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Duplicate_InsertCompany" xml:space="preserve">
-    <value>Company already exists with same name._de</value>
+    <value>Firma mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Duplicate_InsertDevice" xml:space="preserve">
-    <value>Device already exists with same name under this branch._de</value>
+    <value>Gerätenamen wird in dieser Niederlassung bereits verwendet</value>
   </data>
 	<data name="Duplicate_InsertDeviceFamily" xml:space="preserve">
-    <value>Device family already exists with same name._de</value>
+    <value>Gerätefamilie mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Duplicate_InsertLicense" xml:space="preserve">
-    <value>License already exists with same branch._de</value>
+    <value>Lizenz existiert bereits in dieser Niederlassung</value>
   </data>
 	<data name="Duplicate_InsertLicenseType" xml:space="preserve">
-    <value>License type already exists with same name._de</value>
+    <value>Lizenztyp mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Duplicate_InsertMeasurementDevice" xml:space="preserve">
-    <value>Measurement device already exists with same name._de</value>
+    <value>Meßgerät mit diesem Namen existiert bereist.</value>
   </data>
 	<data name="Duplicate_InsertSourceProfile" xml:space="preserve">
-    <value>Source profile already exists with same name._de</value>
+    <value>Quellprofil mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Duplicate_InsertPrintStandardType" xml:space="preserve">
-    <value>PrintStandardType already exists with same name._de</value>
+    <value>Druckstandard mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Duplicate_InsertUser" xml:space="preserve">
-    <value>User already exists with same email / username._de</value>
+    <value>Benutzer mit diesem Namen/Email existiert bereits.</value>
   </data>
 	<data name="Duplicate_UpdateBranch" xml:space="preserve">
-    <value>Branch already exists with same name._de</value>
+    <value>Niederlassung mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Duplicate_UpdateCompany" xml:space="preserve">
-    <value>Company already exists with same name._de</value>
+    <value>Firma mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Duplicate_UpdateDevice" xml:space="preserve">
-    <value>Device already exists with same name under this branch._de</value>
+    <value>Gerätenamen wird in dieser Niederlassung bereits verwendet</value>
   </data>
 	<data name="Duplicate_UpdateLicense" xml:space="preserve">
-    <value>License already exists with same branch._de</value>
+    <value>Lizenz existiert bereits in dieser Niederlassung</value>
   </data>
 	<data name="Duplicate_UpdateReferenceChart" xml:space="preserve">
-    <value>Reference chart already exists with same name._de</value>
+    <value>Reference Chart mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Duplicate_UpdateSourceProfile" xml:space="preserve">
-    <value>Source profile already exists with same name._de</value>
+    <value>Quellprofil mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Duplicate_UpdatePrintStandardType" xml:space="preserve">
-    <value>PrintStandardType already exists with same name._de</value>
+    <value>Druckstandard mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Duplicate_UpdateUser" xml:space="preserve">
-    <value>User already exists with same email / username._de</value>
-  </data>
-	<data name="EInstrumentType_i1Pro" xml:space="preserve">
-    <value>i1-Pro_de</value>
-  </data>
-	<data name="EInstrumentType_i1Sis" xml:space="preserve">
-    <value>i1-Sis_de</value>
+    <value>Benutzer mit diesem Namen/Email existiert bereits.</value>
   </data>
 	<data name="ELicenseType_DLP" xml:space="preserve">
-    <value>DLP Optimization_de</value>
+    <value>DLP Optimierung</value>
   </data>
 	<data name="ELicenseType_IccProfiling" xml:space="preserve">
-    <value>ICC Profiling_de</value>
+    <value>ICC Profilerung</value>
   </data>
 	<data name="ELicenseType_InkOptimization" xml:space="preserve">
-    <value>Ink Optimization_de</value>
+    <value>Druckfarben-Verbrauchs- Optimierung</value>
   </data>
 	<data name="ELicenseType_InkOptimization_Source" xml:space="preserve">
-    <value>Ink Optimization Source_de</value>
+    <value>Ink Optimization Source</value>
   </data>
-  <data name="ELicenseType_Sync4DCertification" xml:space="preserve">
-    <value>Sync4D Certification_de</value>
+	<data name="ELicenseType_Sync4DCertification" xml:space="preserve">
+    <value>Sync4D Certification</value>
   </data>
 	<data name="ELicenseType_None" xml:space="preserve">
-    <value>INVALID_De_de</value>
+    <value>UNGÜLTIG</value>
   </data>
 	<data name="ELicenseType_Sync1D" xml:space="preserve">
-    <value>Alignment Curves_De_de</value>
+    <value>Alignment Curves</value>
   </data>
 	<data name="ELicenseType_Validation" xml:space="preserve">
-    <value>Color Validation_de_de</value>
+    <value>Color Validation</value>
   </data>
 	<data name="Email_Subject_SendPasswordForceResetEmail" xml:space="preserve">
-    <value>ColorPath - Reset your password_de</value>
+    <value>ColorPath - Bitte Passwort zurücksetzen</value>
   </data>
 	<data name="Email_Subject_SendPasswordResetEmail" xml:space="preserve">
-    <value>ColorPath - Reset your password_de</value>
+    <value>ColorPath - Bitte Passwort zurücksetzen</value>
   </data>
 	<data name="Email_Subject_SendUserCreatedEmail" xml:space="preserve">
-    <value>Welcome to ColorPath_de</value>
-  </data>
-	<data name="EProfileRendering_eCLAbsLightenerCompensationRI" xml:space="preserve">
-    <value>AbsLightenerCompensation_de</value>
-  </data>
-	<data name="EProfileRendering_eCLAbsoluteCompressionRI" xml:space="preserve">
-    <value>AbsoluteCompression_de</value>
-  </data>
-	<data name="EProfileRendering_eCLAbsolutePerceptualRI" xml:space="preserve">
-    <value>AbsolutePerceptual_de</value>
-  </data>
-	<data name="EProfileRendering_eCLAbsoluteRI" xml:space="preserve">
-    <value>pAbsolute_de</value>
-  </data>
-	<data name="EProfileRendering_eCLBlackCompensationRI" xml:space="preserve">
-    <value>BlackCompensation_de</value>
-  </data>
-	<data name="EProfileRendering_eCLGamutCompressionRI" xml:space="preserve">
-    <value>GamutCompression_de</value>
-  </data>
-	<data name="EProfileRendering_eCLMinimumBlackCompressionRI" xml:space="preserve">
-    <value>MinBlackCompression_de</value>
-  </data>
-	<data name="EProfileRendering_eCLMinimumCompressionRI" xml:space="preserve">
-    <value>MinCompression_de</value>
-  </data>
-	<data name="EProfileRendering_eCLMinimumWhiteCompressionRI" xml:space="preserve">
-    <value>MinWhiteCompression_de</value>
-  </data>
-	<data name="EProfileRendering_eCLPerceptualCompressionRI" xml:space="preserve">
-    <value>PerceptualCompression_de</value>
-  </data>
-	<data name="EProfileRendering_eCLRelativeCompressionRI" xml:space="preserve">
-    <value>RelativeCompression_de</value>
-  </data>
-	<data name="EProfileRendering_eCLRelativeLightness" xml:space="preserve">
-    <value>RelativeLightness_de</value>
-  </data>
-	<data name="EProfileRendering_eCLRelativeRI" xml:space="preserve">
-    <value>pRelative_de</value>
-  </data>
-	<data name="EProfileRendering_icAbsoluteColorimetric" xml:space="preserve">
-    <value>Absolute_de</value>
-  </data>
-	<data name="EProfileRendering_icPerceptual" xml:space="preserve">
-    <value>Perceptual_de</value>
-  </data>
-	<data name="EProfileRendering_icRelativeColorimetric" xml:space="preserve">
-    <value>Relative_de</value>
-  </data>
-	<data name="EProfileRendering_icSaturation" xml:space="preserve">
-    <value>Saturation_de</value>
-  </data>
-	<data name="EReferenceChartDisType_OptimizationChart" xml:space="preserve">
-    <value>Optimization Chart_de</value>
-  </data>
-	<data name="EReferenceChartDisType_ProfileChart" xml:space="preserve">
-    <value>Profile Chart_de</value>
-  </data>
-	<data name="ERolePermission_CreateDeleteProject" xml:space="preserve">
-    <value>Create Delete Project_de</value>
-  </data>
-	<data name="ERolePermission_ManageBranch" xml:space="preserve">
-    <value>Manage Branch_de</value>
-  </data>
-	<data name="ERolePermission_ManageCompany" xml:space="preserve">
-    <value>Manage Company_de</value>
-  </data>
-	<data name="ERolePermission_ManageDevice" xml:space="preserve">
-    <value>Manage Device_de</value>
-  </data>
-	<data name="ERolePermission_ManageLicense" xml:space="preserve">
-    <value>Manage License_de</value>
-  </data>
-	<data name="ERolePermission_ManageMeasurementDevice" xml:space="preserve">
-    <value>Manage Measurement Device_de</value>
-  </data>
-	<data name="ERolePermission_ManageReferenceChart" xml:space="preserve">
-    <value>Manage ReferenceChart_de</value>
-  </data>
-	<data name="ERolePermission_ManageRegion" xml:space="preserve">
-    <value>Manage Region_de</value>
-  </data>
-	<data name="ERolePermission_ManageSourceProfile" xml:space="preserve">
-    <value>Manage SourceProfile_de</value>
-  </data>
-	<data name="ERolePermission_ManageUser" xml:space="preserve">
-    <value>Manage User_de</value>
-  </data>
-	<data name="ERolePermission_ModifyProject" xml:space="preserve">
-    <value>Modify Project_de</value>
+    <value>Willkommen bei ColorPath</value>
   </data>
 	<data name="Error_CloseOptimizeRun" xml:space="preserve">
-    <value>Error occured while closing optimizing current run. Please contact your administrator._de</value>
+    <value>Fehler beim Schließen des aktuellen, optimierten Projekts. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_CreateInitialDestinationAndDeviceLinkProfiles" xml:space="preserve">
-    <value>Error occured while creating initial device link profile. Please contact your administrator._de</value>
+    <value>Fehler beim Erzeugen des Device Link Profiles. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_CreateOptimizeRun" xml:space="preserve">
-    <value>Error occured while creating optimize run. Please contact your administrator._de</value>
+    <value>Fehler beim Erzeugen der Optimierung. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_CreateReferenceChart" xml:space="preserve">
-    <value>Error occured while saving reference chart data.Please contact your administrator._de</value>
+    <value>Fehler beim Sichern der Daten der Reference Chart. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_DeleteBranch" xml:space="preserve">
-    <value>Error occured while deleting branch. Please contact your administrator._de</value>
+    <value>Fehler beim Löschen der Niederlassung.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_DeleteCompany" xml:space="preserve">
-    <value>Error occured while deleting company. Please contact your administrator._de</value>
+    <value>Fehler beim Löschen der Firma. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_DeleteDevice" xml:space="preserve">
-    <value>Error occured while deleting device.Please contact your administrator._de</value>
+    <value>Fehler beim Löschen des Gerätes.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_DeleteLicense" xml:space="preserve">
-    <value>Error occured while deleting license.Please contact your administrator._de</value>
+    <value>Fehler beim Löschen der Lizenz.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_DeleteMeasurement" xml:space="preserve">
-    <value>Error occured while closing optimizing current run. Please contact your administrator._de</value>
+    <value>Fehler beim Schließen des Optimierungslaufs.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_DeleteMeasurementDevice" xml:space="preserve">
-    <value>Error occured while deleting measurement device.Please contact your administrator._de</value>
+    <value>Fehler beim Löschen des Meßgerätes.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_DeleteOptimizeRun" xml:space="preserve">
-    <value>Error occured while deleting optimize run.Please contact your administrator._de</value>
+    <value>Fehler beim Löschen des Optimierungslaufs.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_DeleteOptimizeRunDLP" xml:space="preserve">
-    <value>Error occured while deleting optimize run's DLP.Please contact your administrator._de</value>
+    <value>Fehler beim Löschen des DLPs des Optimierungslaufs .  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_DeleteProject" xml:space="preserve">
-    <value>Error occured while deleting project. Please contact your administrator._de</value>
+    <value>Fehler beim Löschen des Projekts.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_DeleteSourceProfile" xml:space="preserve">
-    <value>Error occured while deleting source profile.Please contact your administrator._de</value>
+    <value>Fehler beim Löschen des Quellprofils.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_DeletePrintStandardType" xml:space="preserve">
-    <value>Error occured while deleting printstandardtype.Please contact your administrator._de</value>
+    <value>Fehler beim Löschen des Druckstandard-Typs.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_DeleteUser" xml:space="preserve">
-    <value>Error occured while deleting user information.Please contact your administrator._de</value>
+    <value>Fehler beim Löschen der Benutzerinformation.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetAllRegions" xml:space="preserve">
-    <value>Error occured while retrieving regions.Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Bundesländer.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetAnalyzeChartMeasurement" xml:space="preserve">
-    <value>Error occured while retrieving measurement data related to analyze chart. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Meßdaten zum Analysieren des Charts.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetApplicationConfigurations" xml:space="preserve">
-    <value>Error occured while retrieving application configuration data. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Konfigurationsdaten der Application.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetAvgDeltaMeasurement" xml:space="preserve">
-    <value>Error occured while retrieving measurement information. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Informationen für die Messung.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetBranch" xml:space="preserve">
-    <value>Error occured while retrieving branch list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Niederlassungsliste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetBranchList" xml:space="preserve">
-    <value>Error occured while retrieving branch list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Niederlassungsliste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetChartPreviewOnOptimizeRunId" xml:space="preserve">
-    <value>Error occured while retrieving chart preview. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Chart Vorschau.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetCompaniesByRegion" xml:space="preserve">
-    <value>Error occured while retrieving regions by company. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Informationen "regions by company" .  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetCompany" xml:space="preserve">
-    <value>Error occured while retrieving company list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Firmenliste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetCompanyList" xml:space="preserve">
-    <value>Error occured while retrieving company list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Firmenliste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetDestinationProfile" xml:space="preserve">
-    <value>Error occured while retrieving destination profile. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen des Zielprofils.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetDevice" xml:space="preserve">
-    <value>Error occured while retrieving device list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Geräteliste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetDeviceFamilyList" xml:space="preserve">
-    <value>Error occured while retrieving device families. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Gerätefamilien.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetDeviceFamilyProfilerOptionPreset" xml:space="preserve">
-    <value>Error occured while retrieving device family profiler option presets. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Presets für die gerätefamilienspezifischen Profiler-Optionen.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetDeviceLinkProfile" xml:space="preserve">
-    <value>Error occured while retrieving device link profile. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen des DLP.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetDeviceListById" xml:space="preserve">
-    <value>Error occured while retrieving device information. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Geräteinformation.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetIccProfileBySourceProfile" xml:space="preserve">
-    <value>Error occured while get source profile.Please contact your administrator._de</value>
+    <value>Fehler beim Empfangen des Quellprofils.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetIlluminantList" xml:space="preserve">
-    <value>Error occured while retrieving illuminant list. Please contact your administrator._de</value>
+    <value>Fehler beim Empfangen der Beleuchtungsquellen-Liste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetInstrumentTypeList" xml:space="preserve">
-    <value>Error occured while retrieving instrument type list. Please contact your administrator._de</value>
+    <value>Fehler beim Empfangen der Instrumenten-Typ-Liste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetLastOptimizedDlp" xml:space="preserve">
-    <value>Error occured while retrieving last optimized device link profile. Please contact your administrator._de</value>
+    <value>Fehler beim Empfangen des letzten oiptimierten Device-Link-Profils.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetLastOptimizeRunId" xml:space="preserve">
-    <value>Error occured while getting Last optimize run Id.Please contact your administrator._de</value>
+    <value>Fehler beim Empfangen der Id des letzten Optimierungslaufs.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetLastRunStatus" xml:space="preserve">
-    <value>Error occured while retrieving status data. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Statusinformationen.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetLicense" xml:space="preserve">
-    <value>Error occured while retrieving licence list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Lizenz-Liste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetLicenseList" xml:space="preserve">
-    <value>Error occured while retrieving licenses. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Lizenzen.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetLicenseTypeList" xml:space="preserve">
-    <value>Error occured while retrieving license type list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Lizenztypen-Liste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetMeasurementData" xml:space="preserve">
-    <value>Error occured while retrieving measurement data. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Meßdaten.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetMeasurementDevice" xml:space="preserve">
-    <value>Error occured while retrieving measurement device information. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Meßgeräteinformation.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetMeasurementDeviceList" xml:space="preserve">
-    <value>Error occured while retrieving measurement device list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Meßgeräte-Liste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetMeasurementDevices" xml:space="preserve">
-    <value>Error occured while retrieving measurement device list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Meßgeräte-Liste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetMeasurementsOnRunId" xml:space="preserve">
-    <value>Error occured while retrieving measurements. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Meßwerte.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetObserverTypeList" xml:space="preserve">
-    <value>Error occured while retrieving observer type list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Observer TYpe -Liste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetPatchDetailsofMeasurement" xml:space="preserve">
-    <value>Error occured while retrieving measurement information. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Messungs-Informationen.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetPrintActivities" xml:space="preserve">
-    <value>Error occured while retrieving print data. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Druckdaten.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetPrintConditionPreviewData" xml:space="preserve">
-    <value>Error occured while retrieving project preview data. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Daten für die Projekt-Vorschau.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetProjectDetail" xml:space="preserve">
-    <value>Error occured while retrieving project detail. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Projekt-Details.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetProjectOption" xml:space="preserve">
-    <value>Error occured while retrieving project options. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Projektoptionen.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetProjectsByDeviceId" xml:space="preserve">
-    <value>Error occured while retrieving project list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Projektliste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetProjectTypeList" xml:space="preserve">
-    <value>Error occured while retrieving project type information. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Projekttyp-Informationen.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetReferenceChartData" xml:space="preserve">
-    <value>Error occured while retrieving reference chart data. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen derReference Chart Daten.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetReferenceChartForLabCalculation" xml:space="preserve">
-    <value>Error occured while checking source profile and chart relationship. Please contact your administrator._de</value>
+    <value>Fehler beim Überprüfen  des Bezugs von Quellprofil und Chart.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetReferenceCharts" xml:space="preserve">
-    <value>Error occured while retrieving reference chart information. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Informationen über das Reference Chart.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetReferenceChartsForXmf" xml:space="preserve">
-    <value>Error occured while retrieving reference chart information. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Informationen über das Reference Chart.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetReferenceChartTypeList" xml:space="preserve">
-    <value>Error occured while retrieving reference chart type list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Reference Chart Typenliste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetRegionList" xml:space="preserve">
-    <value>Error occured while retrieving region list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Bundesländerliste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetRegions" xml:space="preserve">
-    <value>Error occured while retrieving region list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Bundesländerliste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetSecurityQuestions" xml:space="preserve">
-    <value>Error occured while retrieving user information. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Benutzerinformation.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetSourceProfile" xml:space="preserve">
-    <value>Error occured while retrieving source profile. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen des Quellprofils.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetSourceProfileByCompany" xml:space="preserve">
-    <value>Error occured while retrieving source profiles. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen des Quellprofils.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetSourceProfileInformation" xml:space="preserve">
-    <value>Error occured while retrieving source profile information. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Informationen des Quellprofils.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetSourceProfileList" xml:space="preserve">
-    <value>Error occured while retrieving source profiles. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Quellprofile.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetTemplate" xml:space="preserve">
-    <value>Error occured while retrieving template. Please contact your administrator._de</value>
+    <value>iFehler beim Abrufen des Templates.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetUser" xml:space="preserve">
-    <value>Error occured while retrieving users list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Benutzerliste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetUserAuthenticationInformation" xml:space="preserve">
-    <value>Error occured while validating username/password._de</value>
+    <value>Fehler beim Überprüfen von Benutzername/Passwort.</value>
   </data>
 	<data name="Error_GetUserRoleList" xml:space="preserve">
-    <value>Error occured while retrieving user roles. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der Benutzer-Rollen .  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_InsertBranch" xml:space="preserve">
-    <value>Error occured while inserting branch. Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen der Niederlassung.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_InsertCompany" xml:space="preserve">
-    <value>Error occured while inserting company. Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen der Firma.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_InsertDevice" xml:space="preserve">
-    <value>Error occured while inserting device.Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen des Gerätenamens.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_InsertDeviceFamily" xml:space="preserve">
-    <value>Error occured while inserting device family.Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen der Gerätefamilie.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_InsertLicense" xml:space="preserve">
-    <value>Error occured while inserting license.Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen der Lizenz.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_InsertLicenseType" xml:space="preserve">
-    <value>Error occured while inserting license type.Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen des Lizenztyps.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_InsertMeasurementDevice" xml:space="preserve">
-    <value>Error occured while inserting measurement device.Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen des Meßgerätes.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_InsertReferenceLabData" xml:space="preserve">
-    <value>Error occured while inserting reference lab data. Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen der Reference Lab Data.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_InsertSourceProfile" xml:space="preserve">
-    <value>Error occured while inserting source profile.Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen des Quellprofils.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_InsertPrintStandardType" xml:space="preserve">
-    <value>Error occured while inserting printstandardtype.Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen des Druckstandard-Typs.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_InsertUser" xml:space="preserve">
-    <value>Error occured while inserting user information.Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen der Benutzerinformation.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_NoPermission" xml:space="preserve">
-    <value>User credentials are validated but user doesn't have any permission._de</value>
+    <value>Die Benutzerreferenzen würden überprüft, der Benutzer hat jedoch keine Rechte.</value>
   </data>
 	<data name="Error_OptimizeDeviceLinkProfile" xml:space="preserve">
-    <value>Error occured while optimizing device link profile. Please contact your administrator._de</value>
+    <value>Fehler beim Optimieren des DLP.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_ReferenceChart_ColumnConvertFailedOnRow" xml:space="preserve">
-    <value>Value conversion failed on row {0}._de</value>
+    <value>Wertekonvertierung fehlgeschlagen in Reihe {0}.</value>
   </data>
 	<data name="Error_ReferenceChart_ColumnCountNotMatch" xml:space="preserve">
-    <value>Column counts are not matched with desired format._de</value>
+    <value>Anzahl der Spalten stimmt nicht mit dem erwünschten Format überein.</value>
   </data>
 	<data name="Error_ReferenceChart_ColumnCountNotMatchOnRow" xml:space="preserve">
-    <value>Column counts are not matched on row {0} with desired format._de</value>
+    <value>Anzahl der Spalten stimmt in Reihe {0} nicht mit dem
+erwünschten Format überein.</value>
   </data>
 	<data name="Error_ReferenceChart_ColumnEmptyValueOnRow" xml:space="preserve">
-    <value>Value can not be for value in row {0}._de</value>
+    <value>Dieser Wert in Reihe {0} kann nicht stimmern.</value>
   </data>
 	<data name="Error_ReferenceChart_ColumnNamesNotMatch" xml:space="preserve">
-    <value>Column names are not matched with desired format._de</value>
+    <value>Anzahl der Spalten stimmt nicht mit dem erwünschten Format überein.</value>
   </data>
 	<data name="Error_ReferenceChart_MissingEditFile" xml:space="preserve">
-    <value>You are missing of uploading neccessary data. Please check wheather you have upload chart preview image/ original chart._de</value>
+    <value>Unbedingt nötige Daten fehlen. Überprüfen Sie ob Sie den Chart Preview / das Original Chart hochgeladen haben.</value>
   </data>
 	<data name="Error_ReferenceChart_MissingUploadFile" xml:space="preserve">
-    <value>You are missing of uploading neccessary data. Please check wheather you have upload chart preview image/ original chart/ reference data(c,m,y,k,HTML_RGB)._de</value>
+    <value>Unbedingt nötige Daten fehlen. Überprüfen Sie ob Sie den Chart Preview/ das Original Chart/ reference data(c,m,y,k,HTML_RGB). hochgeladen haben.</value>
   </data>
 	<data name="Error_SaveMeasurement" xml:space="preserve">
-    <value>Error occured while saving measurement. Please contact your administrator._de</value>
+    <value>Fehler beim Sichern der Messung.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_SaveProject" xml:space="preserve">
-    <value>Error occured while saving project. Please contact your administrator._de</value>
+    <value>Fehler beim Sichern des Projekts.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_SendEmailToUser" xml:space="preserve">
-    <value>Error occured while inserting user information.Please contact your administrator._de</value>
+    <value>Fehler beim Einfügen der Benutzerinformation.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_StoreTempararyProjectInformation" xml:space="preserve">
-    <value>Error occured while inserting project information. Please contact your administrator._de</value>
+    <value>Fehler beim Einfügen der Projektrinformation.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateBranch" xml:space="preserve">
-    <value>Error occured while updating branch. Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren der Niederlassung. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateCompany" xml:space="preserve">
-    <value>Error occured while updating company. Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren der Firma. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateDevice" xml:space="preserve">
-    <value>Error occured while updating device.Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren des Gerätes. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateLicense" xml:space="preserve">
-    <value>Error occured while updating license.Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren der Lizenz. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateMeasurementByAnalyzeChart" xml:space="preserve">
-    <value>Error occured while updating measurement(isused flag).Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren der Messung (isused flag). Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateMeasurementDevice" xml:space="preserve">
-    <value>Error occured while updating measurement device.Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren des Meßgerätes. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdatePassword" xml:space="preserve">
-    <value>Error occured while updating user information.Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren der Benutzerinformation. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdatePreResetPasswordInformation" xml:space="preserve">
-    <value>Error occured while updating user information.Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren der Benutzerinformation. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateReferenceChart" xml:space="preserve">
-    <value>Error occured while updating reference chart. Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren des Refernezcharts. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateSecurityInformation" xml:space="preserve">
-    <value>Error occured while updating user information.Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren der Benutzerinformation. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateSourceProfile" xml:space="preserve">
-    <value>Error occured while updating source profile.Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren des Quellprofils. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdatePrintStandardType" xml:space="preserve">
-    <value>Error occured while updating printstandardtype.Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren des Druckstandard-Typs. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateUser" xml:space="preserve">
-    <value>Error occured while updating user information.Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren der Benutzerinformation. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateUserAuthenticationInformation" xml:space="preserve">
-    <value>Error occured while updating user information.Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren der Benutzerinformation. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UserLogin" xml:space="preserve">
-    <value>Error occured while validating username/password._de</value>
-  </data>
-	<data name="EUVIncludedMode_UV" xml:space="preserve">
-    <value>M0_de</value>
-  </data>
-	<data name="EUVIncludedMode_PlusUV" xml:space="preserve">
-    <value>M1_de</value>
-  </data>
-	<data name="EUVIncludedMode_UVCut" xml:space="preserve">
-    <value>M2_de</value>
-  </data>
-	<data name="Fields_Marked_With_Are_Required" xml:space="preserve">
-    <value>&lt;span&gt;Fields marked with (&lt;span style=\"color: Red;\"&gt;*&lt;/span&gt;) are Required_de&lt;/span&gt;_de</value>
+    <value>Fehler bei der Überprüfung von Benutzername/Passwort</value>
   </data>
 	<data name="LicenseManagement_DeleteLicense_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete selected license? It will delete all your related devices, measurement devices and projects. Do you really want to delete everything?_de</value>
+    <value>Wollen Sie die ausgewählte Lizenz wirklich löschen? Dies wird alle damit verbundenen Geräte, Meßgeräte und Projekte löschen! Möchten Sie wirklich alles löschen?</value>
   </data>
 	<data name="Login_InvalidLogin" xml:space="preserve">
-    <value>Username/Password is invalid._de</value>
+    <value>Benutzername/Passwort ist ungültig.</value>
   </data>
 	<data name="MeasurementDeviceList_DeleteMeasurementDevice_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete all information of selected measurement device?_de</value>
+    <value>Wollen Sie wirklich alle Informationen des ausgewählten Meßgerätes löschen?</value>
   </data>
 	<data name="ProjectList_DeleteProject_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete all information of selected Project?_de</value>
+    <value>Wollen Sie wirklich alle Informationen des ausgewählten Projektes löschen?</value>
   </data>
 	<data name="SourceProfileManagement_DeleteSourceProfile_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete selected source profile?_de</value>
-  </data>
-	<data name="PrintStandardTypeManagement_DeletePrintStandardType_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete selected Print Standard Type?_de</value>
+    <value>Wollen Sie wirklich das ausgewählte Quellprofil löschen?</value>
   </data>
 	<data name="UserManagement_DeleteUser_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete selected user?_de</value>
+    <value>Wollen Sie wirklich den ausgewählten Benutzer löschen?</value>
+  </data>
+	<data name="Fields_Marked_With_Are_Required" xml:space="preserve">
+    <value>&lt;span&gt;Fields marked with (&lt;span style=\"color: Red;\"&gt;*&lt;/span&gt;) are Required&lt;/span&gt;</value>
+  </data>
+	<data name="EInstrumentType_i1Pro" xml:space="preserve">
+    <value>i1-Pro</value>
+  </data>
+	<data name="EInstrumentType_i1Sis" xml:space="preserve">
+    <value>i1-Sis</value>
+  </data>
+	<data name="EInstrumentType_i1IO" xml:space="preserve">
+    <value>i1-IO</value>
+  </data>
+	<data name="EInstrumentType_i1Pro2" xml:space="preserve">
+    <value>i1-Pro2</value>
+  </data>
+	<data name="EInstrumentType_i1IOPro2" xml:space="preserve">
+    <value>i1-IO-Pro2</value>
+  </data>
+	<data name="EProfileRendering_eCLAbsLightenerCompensationRI" xml:space="preserve">
+    <value>AbsLightenerCompensation</value>
+  </data>
+	<data name="EProfileRendering_eCLAbsoluteCompressionRI" xml:space="preserve">
+    <value>AbsoluteCompression</value>
+  </data>
+	<data name="EProfileRendering_eCLAbsolutePerceptualRI" xml:space="preserve">
+    <value>AbsolutePerceptual</value>
+  </data>
+	<data name="EProfileRendering_eCLAbsoluteRI" xml:space="preserve">
+    <value>pAbsolute</value>
+  </data>
+	<data name="EProfileRendering_eCLBlackCompensationRI" xml:space="preserve">
+    <value>BlackCompensation</value>
+  </data>
+	<data name="EProfileRendering_eCLGamutCompressionRI" xml:space="preserve">
+    <value>GamutCompression</value>
+  </data>
+	<data name="EProfileRendering_eCLMinimumBlackCompressionRI" xml:space="preserve">
+    <value>MinBlackCompression</value>
+  </data>
+	<data name="EProfileRendering_eCLMinimumCompressionRI" xml:space="preserve">
+    <value>MinCompression</value>
+  </data>
+	<data name="EProfileRendering_eCLMinimumWhiteCompressionRI" xml:space="preserve">
+    <value>MinWhiteCompression</value>
+  </data>
+	<data name="EProfileRendering_eCLPerceptualCompressionRI" xml:space="preserve">
+    <value>PerceptualCompression</value>
+  </data>
+	<data name="EProfileRendering_eCLRelativeCompressionRI" xml:space="preserve">
+    <value>RelativeCompression</value>
+  </data>
+	<data name="EProfileRendering_eCLRelativeLightness" xml:space="preserve">
+    <value>RelativeLightness</value>
+  </data>
+	<data name="EProfileRendering_eCLRelativeRI" xml:space="preserve">
+    <value>pRelative</value>
+  </data>
+	<data name="EProfileRendering_icAbsoluteColorimetric" xml:space="preserve">
+    <value>Absolute</value>
+  </data>
+	<data name="EProfileRendering_icPerceptual" xml:space="preserve">
+    <value>Perceptual</value>
+  </data>
+	<data name="EProfileRendering_icRelativeColorimetric" xml:space="preserve">
+    <value>Relative</value>
+  </data>
+	<data name="EProfileRendering_icSaturation" xml:space="preserve">
+    <value>Saturation</value>
+  </data>
+	<data name="EReferenceChartDisType_OptimizationChart" xml:space="preserve">
+    <value>Optimierungs- Chart</value>
+  </data>
+	<data name="EReferenceChartDisType_ProfileChart" xml:space="preserve">
+    <value>Profilierungs-Chart</value>
+  </data>
+	<data name="ERolePermission_CreateDeleteProject" xml:space="preserve">
+    <value>Projekt erzeugen/löschen</value>
+  </data>
+	<data name="ERolePermission_ManageBranch" xml:space="preserve">
+    <value>Niederlassung verwalten</value>
+  </data>
+	<data name="ERolePermission_ManageCompany" xml:space="preserve">
+    <value>Firma verwalten</value>
+  </data>
+	<data name="ERolePermission_ManageDevice" xml:space="preserve">
+    <value>Geräte verwalten</value>
+  </data>
+	<data name="ERolePermission_ManageLicense" xml:space="preserve">
+    <value>Lizenz verwalten</value>
+  </data>
+	<data name="ERolePermission_ManageMeasurementDevice" xml:space="preserve">
+    <value>Meßgerät verwalten</value>
+  </data>
+	<data name="ERolePermission_ManageReferenceChart" xml:space="preserve">
+    <value>ReferenceChart verwalten</value>
+  </data>
+	<data name="ERolePermission_ManageRegion" xml:space="preserve">
+    <value>Bundesland verwalten</value>
+  </data>
+	<data name="ERolePermission_ManageSourceProfile" xml:space="preserve">
+    <value>Quellprofile verwalten</value>
+  </data>
+	<data name="ERolePermission_ManageUser" xml:space="preserve">
+    <value>Benutzer verwalten</value>
+  </data>
+	<data name="ERolePermission_ModifyProject" xml:space="preserve">
+    <value>Projekt bearbeiten</value>
+  </data>
+	<data name="EUVIncludedMode_UV" xml:space="preserve">
+    <value>M0</value>
+  </data>
+	<data name="EUVIncludedMode_PlusUV" xml:space="preserve">
+    <value>M1</value>
+  </data>
+	<data name="EUVIncludedMode_UVCut" xml:space="preserve">
+    <value>M2</value>
   </data>
 	<data name="CertificationStatusText" xml:space="preserve">
-    <value>Certification_de</value>
+    <value>Zertifizierung</value>
   </data>
 	<data name="DLPText" xml:space="preserve">
-    <value>DLP_de</value>
+    <value>DLP</value>
   </data>
 	<data name="OpenStatusText" xml:space="preserve">
-    <value>Open_de</value>
+    <value>Öffnen</value>
   </data>
 	<data name="LogActivityType_ChangeProfile" xml:space="preserve">
-    <value>ChangeProfile_de</value>
+    <value>ChangeProfile</value>
   </data>
 	<data name="LogActivityType_CreateDlp" xml:space="preserve">
-    <value>CreateDlp_de</value>
+    <value>CreateDlp</value>
   </data>
 	<data name="LogActivityType_CreateProject" xml:space="preserve">
-    <value>CreateProject_de</value>
+    <value>CreateProject</value>
   </data>
 	<data name="LogActivityType_LoggedIn" xml:space="preserve">
-    <value>LoggedIn_de</value>
+    <value>LoggedIn</value>
   </data>
 	<data name="LogActivityType_LoggedOut" xml:space="preserve">
-    <value>LoggedOut_de</value>
+    <value>LoggedOut</value>
   </data>
 	<data name="LogActivityType_None" xml:space="preserve">
-    <value>None_de</value>
+    <value>None</value>
   </data>
 	<data name="LogActivityType_OptimizeDlp" xml:space="preserve">
-    <value>OptimizeDlp_de</value>
+    <value>OptimizeDlp</value>
   </data>
 	<data name="Error_GettingApplicationConfiguration" xml:space="preserve">
-    <value>Error occurred while displaying configuration values._de</value>
+    <value>Fehler beim Anzeigen der Konfigurationswerte.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateApplicationConfiguration" xml:space="preserve">
-    <value>Error occurred while updating configuration values._de</value>
+    <value>Fehler beim Aktualisieren der Konfigurationswerte.</value>
   </data>
 	<data name="LogActivityType_CreateDlpError" xml:space="preserve">
     <value>CreateDlpError</value>
   </data>
 	<data name="LogActivityType_OptimizeDlpError" xml:space="preserve">
-    <value>OptimizeDlpError_de</value>
+    <value>OptimizeDlpError</value>
+  </data>
+	<data name="Duplicate_InsertReferenceChart" xml:space="preserve">
+    <value>Reference Chart mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="EReferenceChartDisType_ValidationChart" xml:space="preserve">
-    <value>Validation Chart_de</value>
+    <value>Validierungs-Chart</value>
   </data>
 	<data name="Error_ProfilerSettings_MissingUploadFile" xml:space="preserve">
-    <value>You are missing of uploading neccessary data. Please check wheather you have upload Profiler Settings file._de</value>
+    <value>Unbedingt nötige Daten fehlen. Überprüfen Sie ob Sie die Profiler-Einstellungen hochgeladen haben.</value>
   </data>
 	<data name="Duplicate_InsertDeviceFamilyProfilerOption" xml:space="preserve">
-    <value>Device family Profiler Option already exists with same name._de</value>
+    <value>Profiler Option für Gerätefamilie mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Error_InsertDeviceFamilyProfilerOption" xml:space="preserve">
-    <value>Error occured while inserting device family Profiler Option.Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen der Profiler-Optionen für die Gerätefamilie.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_InsertProfilerOptionPreset" xml:space="preserve">
-    <value>Error occured while inserting device family Profiler Option Presets.Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen der Presets der Profiler-Optionen für die Gerätefamilie.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetChartData_G7_GrayF" xml:space="preserve">
-    <value>Error occured while displaying G7 Gray ΔCh chart. Please contact your administrator._de</value>
+    <value>Fehler beim Anzeigen der G7 Gray ΔCh chart.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetChartData_G7_GrayFSummary" xml:space="preserve">
-    <value>Error occured while displaying G7 Gray ΔCh Summary. Please contact your administrator._de</value>
+    <value>Fehler beim Anzeigen der G7 Gray ΔCh Summary.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetChartData_G7_BlackL" xml:space="preserve">
-    <value>Error occured while displaying G7 Black ΔL chart. Please contact your administrator._de</value>
+    <value>Fehler beim Anzeigen der G7 Black ΔL chart.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetChartData_G7_BlackLSummary" xml:space="preserve">
-    <value>Error occured while displaying G7 Black ΔL Summary. Please contact your administrator._de</value>
+    <value>Fehler beim Anzeigen der G7 Black ΔL summary.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetChartData_G7_GrayL" xml:space="preserve">
-    <value>Error occured while displaying G7 Gray ΔL chart. Please contact your administrator._de</value>
+    <value>Fehler beim Anzeigen der G7 Gray ΔL chart.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetChartData_G7_GrayLSummary" xml:space="preserve">
-    <value>Error occured while displaying G7 Gray ΔL Summary. Please contact your administrator._de</value>
+    <value>Fehler beim Anzeigen der G7 Gray ΔL Summary.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetChartData_InkPaper_EPrimaryPatches" xml:space="preserve">
-    <value>Error occured while displaying Ink Paper ΔE Primary Patches chart. Please contact your administrator._de</value>
+    <value>Fehler beim Anzeigen des Ink Paper ΔE Primary Patches chart.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetChartData_InkPaper_PaperLAB" xml:space="preserve">
-    <value>Error occured while displaying Ink Paper LAB charts. Please contact your administrator._de</value>
+    <value>Fehler beim Anzeigen der Ink Paper LAB charts.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetChartData_GrayGamut1" xml:space="preserve">
-    <value>Error occured while displaying Gamut a*-b* Comparison chart. Please contact your administrator._de</value>
+    <value>Fehler beim Anzeigen des Gamut a*-b* Comparision chart.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetChartData_GrayGamut2" xml:space="preserve">
-    <value>Error occured while displaying Gamut L* Comparison chart. Please contact your administrator._de</value>
+    <value>Fehler beim Anzeigen des Gamut L* Comparision chart.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetChartData_LABChart" xml:space="preserve">
-    <value>Error occured while displaying Gamut LAB charts. Please contact your administrator._de</value>
+    <value>Fehler beim Anzeigen der Gamut LAB charts.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="ValidationStatus_Disabled" xml:space="preserve">
-    <value>Validation is disabled_de</value>
+    <value>Validierung ist deaktiviert.</value>
   </data>
 	<data name="ValidationStatus_LastFailed" xml:space="preserve">
-    <value>Last validation failed_de</value>
+    <value>Die letzte Validierung ist fehlgeschlagen.</value>
   </data>
 	<data name="ValidationStatus_LastOK" xml:space="preserve">
-    <value>Last validation is OK_de</value>
+    <value>Letzte Validierung ok.</value>
   </data>
 	<data name="ValidationStatus_NoMeasurement" xml:space="preserve">
-    <value>No measurement_de</value>
+    <value>Keine Messung</value>
   </data>
 	<data name="ValidationStatus_None" xml:space="preserve">
-    <value>None_de</value>
+    <value>Leer</value>
   </data>
 	<data name="ValidationStatus_NotCertified" xml:space="preserve">
-    <value>Not certified_de</value>
+    <value>Nicht zertifiziert.</value>
   </data>
 	<data name="ERolePermission_ManageActivityValidationRules" xml:space="preserve">
-    <value>Manage Activity Validation Rules_de</value>
+    <value>Manage Activity Validation Rules</value>
   </data>
 	<data name="ERolePermission_ManageApplicationConfiguration" xml:space="preserve">
-    <value>Manage Application Configuration_de</value>
+    <value>Manage Application Configuration</value>
   </data>
 	<data name="ERolePermission_ManageDeviceProfileSettings" xml:space="preserve">
-    <value>Manage Device Profiler Settings_de</value>
+    <value>Geräte-/Profiler Einstellungen verwalten</value>
   </data>
 	<data name="Login_PasswordSaved" xml:space="preserve">
-    <value>User activated successfully_de</value>
+    <value>Benutzer erfolgreich aktiviert.</value>
   </data>
 	<data name="JobName_LengthError" xml:space="preserve">
-    <value>Please enter Job Name that is at least 4 characters long._de</value>
+    <value>Der Jobname muß mindestens 4 Zeichen lang sein.</value>
   </data>
 	<data name="Duplicate_InsertMetricTargetPreset" xml:space="preserve">
-    <value>MetricTargetPreset already exists with same name._de</value>
+    <value>MetricTargetPreset mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Duplicate_UpdateMetricTargetPreset" xml:space="preserve">
-    <value>MetricTargetPreset already exists with same name._de</value>
+    <value>MetricTargetPreset mit diesem Namen existiert bereits.</value>
   </data>
 	<data name="Error_DeleteMetricTargetPreset" xml:space="preserve">
-    <value>Error occured while deleting MetricTargetPreset. Please contact your administrator._de</value>
+    <value>Fehler beim Löschen des Metric Target Presets.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_GetMetricTargetPresets" xml:space="preserve">
-    <value>Error occured while retrieving MetricTargetPreset list. Please contact your administrator._de</value>
+    <value>Fehler beim Abrufen der MetricTargetPreset Liste.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_InsertMetricTargetPreset" xml:space="preserve">
-    <value>Error occured while inserting MetricTargetPreset. Please contact your administrator._de</value>
+    <value>Fehler beim Einsetzen des MetricTargetPreset.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateMetricTargetPreset" xml:space="preserve">
-    <value>Error occured while updating MetricTargetPreset. Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren des MetricTargetPreset. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Validation_ProjectClosedError" xml:space="preserve">
-    <value>Current project is Closed, so validation cannot be performed_de</value>
+    <value>Das aktuelle Projekt ist geschlossen, deshalb kann keine Validierung durchgeführt werden.</value>
   </data>
 	<data name="MetricTargetPresetManagement_DeleteMetricTargetPreset_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete selected metric target preset?_de</value>
+    <value>Wollen Sie wirklich das ausgewählte Metric Target Preset löschen?</value>
+  </data>
+	<data name="PrintStandardTypeManagement_DeletePrintStandardType_Confirmation" xml:space="preserve">
+    <value>Wollen Sie wirklich den ausgewählten Druckstandard-Typ löschen?</value>
   </data>
 	<data name="Error_GetLanguages" xml:space="preserve">
-    <value>Error occured while retrieving languages. Please contact your administrator._de</value>
+    <value>Fehler beim Empfangen des Spracheninformation.  Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Error_UpdateLanguage" xml:space="preserve">
-    <value>Error occured while updating user information.Please contact your administrator._de</value>
+    <value>Fehler beim Aktualisieren der Benutzerinformation. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
 	<data name="Validation_ProjectOpenError" xml:space="preserve">
-    <value>Current project is Open, so validation cannot be performed_de</value>
+    <value>Das aktuelle Projekt ist geöffnet, deshalb kann keine Validierung durchgeführt werden.</value>
   </data>
 	<data name="Validation_NoMeasurements" xml:space="preserve">
-    <value>Current project has no Validation, so can not show Analyse page_de</value>
+    <value>Das aktuelle Projekt hat keine Validierung, eine Analyse kann deshalb nicht angezeigt werden.</value>
   </data>
-	<data name="EInstrumentType_i1IO" xml:space="preserve">
-		<value>i1-IO_de</value>
-	</data>
-	<data name="EInstrumentType_i1Pro2" xml:space="preserve">
-		<value>i1-Pro2_de</value>
-	</data>
-	<data name="EInstrumentType_i1IOPro2" xml:space="preserve">
-		<value>i1-IO-Pro2_de</value>
-	</data>
-	<data name="Duplicate_InsertReferenceChart" xml:space="preserve">
-		<value>Reference chart already exists with same name._de</value>
-	</data>
-  <data name="PCSDataTypes_Spectral" xml:space="preserve">
-    <value>Spectral_de</value>
+	<data name="PCSDataTypes_Spectral" xml:space="preserve">
+    <value>Spectral</value>
   </data>
-  <data name="PCSDataTypes_Density" xml:space="preserve">
-    <value>Density_de</value>
+	<data name="PCSDataTypes_Density" xml:space="preserve">
+    <value>Density</value>
   </data>
-  <data name="PCSDataTypes_XYZ" xml:space="preserve">
-    <value>XYZ_de</value>
+	<data name="PCSDataTypes_XYZ" xml:space="preserve">
+    <value>XYZ</value>
   </data>
-  <data name="DensityTypes_StatusT" xml:space="preserve">
-    <value>StatusT_de</value>
+	<data name="DensityTypes_StatusT" xml:space="preserve">
+    <value>StatusT</value>
   </data>
-  <data name="DensityTypes_StatusE" xml:space="preserve">
-    <value>StatusE_de</value>
+	<data name="DensityTypes_StatusE" xml:space="preserve">
+    <value>StatusE</value>
   </data>
 </root>

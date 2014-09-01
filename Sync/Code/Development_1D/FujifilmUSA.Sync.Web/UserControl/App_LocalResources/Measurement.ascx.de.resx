@@ -118,30 +118,33 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="lblMessageResource1.Text" xml:space="preserve">
-    <value>Status : Scanning device is not loaded._de</value>
+    <value>Status : Messgerät nicht geladen</value>
   </data>
 	<data name="lblPluginMessageResource1.Text" xml:space="preserve">
-    <value>loading..._de</value>
+    <value>lade...</value>
   </data>
 	<data name="locAnalyzeResource1.Text" xml:space="preserve">
-    <value>Analyze_de</value>
+    <value>Analysieren</value>
   </data>
 	<data name="locMeasurementResource1.Text" xml:space="preserve">
-    <value>Measurement_de</value>
+    <value>Messung</value>
   </data>
 	<data name="locMeasurementSetupResource1.Text" xml:space="preserve">
-    <value>Measurement Setup_de</value>
+    <value>Parameter f. Messung</value>
   </data>
 	<data name="locValidationSetupResource1.Text" xml:space="preserve">
-    <value>Validation Setup_de</value>
+    <value>Parameter f. Validierung</value>
   </data>
 	<data name="measureText" xml:space="preserve">
-    <value>Measure - {0}_de</value>
+    <value>Messen - {0}</value>
   </data>
 	<data name="newPrintConditionText" xml:space="preserve">
-    <value>New Print Condition - Measure (No DLP)_de</value>
+    <value>Neue Druckbedingung - Messen (ohne DLP)</value>
   </data>
 	<data name="validationMeasureText" xml:space="preserve">
-    <value>Validation - Measure_de</value>
+    <value>Validierung - Messen</value>
   </data>
+	<data name="btnAnalyzeResource1.Text" xml:space="preserve">
+		<value>Analysieren</value>
+	</data>
 </root>

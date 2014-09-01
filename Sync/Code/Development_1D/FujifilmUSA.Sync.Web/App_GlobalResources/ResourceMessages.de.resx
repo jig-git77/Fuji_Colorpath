@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="AddMeasurement_DeleteMeasurement_Confirmation" xml:space="preserve">
+    <value>Wollen Sie wirklich die komplette Messung löschen?</value>
+  </data>
+	<data name="Login_InvalidLogin" xml:space="preserve">
+    <value> Benutzername/Passwort ungültig.</value>
+  </data>
+	<data name="MeasurementDeviceList_DeleteMeasurementDevice_Confirmation" xml:space="preserve">
+    <value>Wollen Sie wirklich alle Informationen zum ausgewählten Meßgerät löschen?</value>
+  </data>
+	<data name="ProjectList_DeleteProject_Confirmation" xml:space="preserve">
+    <value>Wollen Sie wirklich das ausgewählte Projekt löschen?</value>
+  </data>
+	<data name="CompanyManagement_DeleteCompany_Confirmation" xml:space="preserve">
+    <value>Wollen Sie wirklich die ausgewählte Firma löschen?</value>
+  </data>
+	<data name="BranchManagement_DeleteBranch_Confirmation" xml:space="preserve">
+    <value>Wollen Sie wirklich die ausgewählte Niederlassung löschen?</value>
+  </data>
+	<data name="DeviceManagement_DeleteDevice_Confirmation" xml:space="preserve">
+    <value>Wollen Sie wirklich das ausgewählte Gerät löschen?</value>
+  </data>
+	<data name="UserManagement_DeleteUser_Confirmation" xml:space="preserve">
+    <value>Wollen Sie wirklich den ausgewählten Benutzer löschen?</value>
+  </data>
+	<data name="Error_CloseOptimizeRun" xml:space="preserve">
+    <value>Fehler beim Schließen des Optimierungslaufes. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_CreateInitialDestinationAndDeviceLinkProfiles" xml:space="preserve">
+    <value>Fehler beim Erzeugen des initialen DLPs. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_CreateOptimizeRun" xml:space="preserve">
+    <value>Fehler beim Erzeugen des Optimierungslaufes. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_DeleteBranch" xml:space="preserve">
+    <value>Fehler beim Löschen der Niederlassung. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_DeleteCompany" xml:space="preserve">
+    <value>Fehler beim Löschen der Firma. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_DeleteDevice" xml:space="preserve">
+    <value>Fehler beim Löschen des Gerätes. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_DeleteLicense" xml:space="preserve">
+    <value>Fehler beim Löschen der Lizenz. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_DeleteMeasurementDevice" xml:space="preserve">
+    <value>Fehler beim Löschen des Meßgerätes. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_DeleteProject" xml:space="preserve">
+    <value>Fehler beim Löschen des Projektes. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_DeleteSourceProfile" xml:space="preserve">
+    <value>Fehler beim Löschen des Quellprofiles. Bitte kontaktieren Sie Ihren Administrator..</value>
+  </data>
+	<data name="Error_DeletePrintStandardType" xml:space="preserve">
+    <value>Fehler beim Löschen des Druckstandard-Typs. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_DeleteUser" xml:space="preserve">
+    <value>Fehler beim Löschen der Benutzerinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetAnalyzeChartMeasurement" xml:space="preserve">
+    <value>Fehler beim Abrufen der Meßwerte des Analysierungscharts. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetBranch" xml:space="preserve">
+    <value>Fehler beim Abrufen der Niederlassungsliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetBranchList" xml:space="preserve">
+    <value>Fehler beim Abrufen der Niederlassungsliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetChartPreviewOnOptimizeRunId" xml:space="preserve">
+    <value>Fehler beim Abrufen des Chart Preview. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetCompany" xml:space="preserve">
+    <value>Fehler beim Abrufen der Firmenliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetCompanyList" xml:space="preserve">
+    <value>Fehler beim Abrufen der Firmenliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetDestinationProfile" xml:space="preserve">
+    <value>Fehler beim Abrufen des Zielprofils. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetDeviceFamilyList" xml:space="preserve">
+    <value>Fehler beim Abrufen der Gerätefamilien. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetDeviceFamilyProfilerOptionPreset" xml:space="preserve">
+    <value>Fehler beim Abrufen der Profiler Option Presets der Gerätefamilie. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetDeviceLinkProfile" xml:space="preserve">
+    <value>Fehler beim Abrufen des DLP. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetDevice" xml:space="preserve">
+    <value>Fehler beim Abrufen der Geräteliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetDeviceListById" xml:space="preserve">
+    <value>Fehler beim Abrufen der Geräteinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetIlluminantList" xml:space="preserve">
+    <value>Fehler beim Abrufen der Beleuchtungsquellenliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetInstrumentTypeList" xml:space="preserve">
+    <value>Fehler beim Abrufen der "Instrument Type"-Liste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetLastOptimizedDlp" xml:space="preserve">
+    <value>Fehler beim Abrufen des letzten optimierten DLP. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetLicenseList" xml:space="preserve">
+    <value>Fehler beim Abrufen der Lizenzen. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetLicense" xml:space="preserve">
+    <value>Fehler beim Abrufen der Lizenzliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetLicenseTypeList" xml:space="preserve">
+    <value>Fehler beim Abrufen der Lizenztypenliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetMeasurementData" xml:space="preserve">
+    <value>Fehler beim Abrufen der Messdtane. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetMeasurementDevice" xml:space="preserve">
+    <value>Fehler beim Abrufen der Meßgeräteinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetMeasurementDeviceList" xml:space="preserve">
+    <value>Fehler beim Abrufen der Meßgeräteliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetMeasurementDevices" xml:space="preserve">
+    <value>Fehler beim Abrufen der Meßgeräteliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetMeasurementsOnRunId" xml:space="preserve">
+    <value>Fehler beim Abrufen der Messungen. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetObserverTypeList" xml:space="preserve">
+    <value>Fehler beim Abrufen der Liste "Beobachtertyp". Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetPrintConditionPreviewData" xml:space="preserve">
+    <value>Fehler beim Abrufen der Projektvorschaudaten. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetProjectDetail" xml:space="preserve">
+    <value>Fehler beim Abrufen der Projektdetails. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetProjectOption" xml:space="preserve">
+    <value>Fehler beim Abrufen der Projektoptionen. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetProjectsByDeviceId" xml:space="preserve">
+    <value>Fehler beim Abrufen der Projektliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetReferenceChartData" xml:space="preserve">
+    <value>Fehler beim Abrufen der Daten des Referenzcharts. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetReferenceChartTypeList" xml:space="preserve">
+    <value>Fehler beim Abrufen der Referenzchart- Typenliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetRegionList" xml:space="preserve">
+    <value>Fehler beim Abrufen der Bundesländerliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetCompaniesByRegion" xml:space="preserve">
+    <value>Fehler beim Abrufen der Firmenliste der Niederlassungsliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetRegions" xml:space="preserve">
+    <value>Fehler beim Abrufen der Bundesländerliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetSourceProfile" xml:space="preserve">
+    <value>Fehler beim Abrufen des Quellprofiles. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetSourceProfileByCompany" xml:space="preserve">
+    <value>Fehler beim Abrufen des Quellprofiles. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetSourceProfileInformation" xml:space="preserve">
+    <value>Fehler beim Abrufen der Quellprofil- Information. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetSourceProfileList" xml:space="preserve">
+    <value>Fehler beim Abrufen des Quellprofiles. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetUserRoleList" xml:space="preserve">
+    <value>Fehler beim Abrufen der Benutzerrollen. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetUser" xml:space="preserve">
+    <value>Fehler beim Abrufen der Benutzerliste. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_InsertBranch" xml:space="preserve">
+    <value>Fehler beim Einfügen der Niederlassung. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_InsertCompany" xml:space="preserve">
+    <value>Fehler beim Einfügen der Firma. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_InsertDevice" xml:space="preserve">
+    <value>Fehler beim Einfügen des Gerätes. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_InsertDeviceFamily" xml:space="preserve">
+    <value>Fehler beim Einfügen der Gerätefamilie. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_InsertLicense" xml:space="preserve">
+    <value>Fehler beim Einfügen der Lizenz. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_InsertLicenseType" xml:space="preserve">
+    <value>Fehler beim Einfügen des Lizenztyps. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_InsertMeasurementDevice" xml:space="preserve">
+    <value>Fehler beim Einfügen des Meßgerätes. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_InsertSourceProfile" xml:space="preserve">
+    <value>Fehler beim Einfügen des Quellprofils. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_InsertPrintStandardType" xml:space="preserve">
+    <value>Fehler beim Einfügen des Druckstandard-Typs. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_InsertUser" xml:space="preserve">
+    <value>Fehler beim Einfügen derBenutzerinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_OptimizeDeviceLinkProfile" xml:space="preserve">
+    <value>Fehler beim Optimieren des DLP.  Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_SaveMeasurement" xml:space="preserve">
+    <value>Fehler beim Sichern der Messung. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_SaveProject" xml:space="preserve">
+    <value>Fehler beim Sichern des Projekts. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdateBranch" xml:space="preserve">
+    <value>Fehler beim Aktualisieren der Niederlassung. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdateCompany" xml:space="preserve">
+    <value>Fehler beim Aktualisieren der Firma.  Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdateDevice" xml:space="preserve">
+    <value>Fehler beim Aktualisieren des Gerätes. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdateLicense" xml:space="preserve">
+    <value>Fehler beim Aktualisieren der Lizenz. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdateMeasurementByAnalyzeChart" xml:space="preserve">
+    <value>Fehler beim Aktualisieren des measurement(isused flag). Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdateMeasurementDevice" xml:space="preserve">
+    <value>Fehler beim Aktualisieren des Meßgerätes. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdateSourceProfile" xml:space="preserve">
+    <value>Fehler beim Aktualisieren des Quellprofiles. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdatePrintStandardType" xml:space="preserve">
+    <value>Fehler beim Aktualisieren des Druckstandard-Typs. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdateUser" xml:space="preserve">
+    <value>Fehler beim Aktualisieren der Benutzerinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UserLogin" xml:space="preserve">
+    <value>Fehler beim Überprüfen von Benutzername/Passwort</value>
+  </data>
+	<data name="Error_NoPermission" xml:space="preserve">
+    <value>Die Benutzerreferenzen sind gültig aber der Benutzer hat keine Rechte.</value>
+  </data>
+	<data name="LicenseManagement_DeleteLicense_Confirmation" xml:space="preserve">
+    <value>Wollen Sie wirklich die ausgewählte Lizenz löschen? Alle damit verbundenen Geräte Meßgeräte und Projekte werden gelöscht. Wollen Sie wirklich alles löschen?</value>
+  </data>
+	<data name="SourceProfileManagement_DeleteSourceProfile_Confirmation" xml:space="preserve">
+    <value>Wollen Sie wirklich das ausgewählte Quellprofil löschen?</value>
+  </data>
+	<data name="PrintStandardTypeManagement_DeletePrintStandardType_Confirmation" xml:space="preserve">
+    <value>Wollen Sie wirklich den ausgewählten Druckstandard-Typ löschen?</value>
+  </data>
+	<data name="Error_GetIccProfileBySourceProfile" xml:space="preserve">
+    <value>Fehler beim Empfangen des Quellprofiles. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetLastOptimizeRunId" xml:space="preserve">
+    <value>Fehler beim Empfang der Id des letzten Optimierungslaufs. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetAllRegions" xml:space="preserve">
+    <value>Fehler beim Abrufen der Niederlassungen. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Duplicate_InsertBranch" xml:space="preserve">
+    <value>Niederlassung mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Duplicate_InsertCompany" xml:space="preserve">
+    <value>Firma mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Duplicate_InsertDevice" xml:space="preserve">
+    <value>Gerät mit diesem Namen existiert schon für diese Niederlassung. </value>
+  </data>
+	<data name="Duplicate_InsertDeviceFamily" xml:space="preserve">
+    <value>Gerätefamilie mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Duplicate_InsertLicense" xml:space="preserve">
+    <value>Lizenz existiert schon für diese Niederlassung.</value>
+  </data>
+	<data name="Duplicate_InsertLicenseType" xml:space="preserve">
+    <value>Lizenztyp mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Duplicate_InsertMeasurementDevice" xml:space="preserve">
+    <value>Meßgerät mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Duplicate_InsertSourceProfile" xml:space="preserve">
+    <value>Quellprofil mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Duplicate_InsertPrintStandardType" xml:space="preserve">
+    <value>Druckstandard-Typ mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Duplicate_InsertUser" xml:space="preserve">
+    <value>Benutzer mit diesem Namen/Email existiert schon.</value>
+  </data>
+	<data name="Error_ReferenceChart_ColumnConvertFailedOnRow" xml:space="preserve">
+    <value>Konvertierung der Werte fehlgeschlagen in Reihe {0}.</value>
+  </data>
+	<data name="Error_ReferenceChart_ColumnCountNotMatch" xml:space="preserve">
+    <value>Anzahl der Spalten entspricht nicht dem gewünschten Format.</value>
+  </data>
+	<data name="Error_ReferenceChart_ColumnCountNotMatchOnRow" xml:space="preserve">
+    <value>Anzahl der Spalten entspricht nicht dem gewünschten Format in Reihe {0}</value>
+  </data>
+	<data name="Error_ReferenceChart_ColumnEmptyValueOnRow" xml:space="preserve">
+    <value>Wert ungültig für Wert in Reihe {0}.</value>
+  </data>
+	<data name="Error_ReferenceChart_ColumnNamesNotMatch" xml:space="preserve">
+    <value>Nemen der Spalten entsprechen nicht dem gewünschten Format.</value>
+  </data>
+	<data name="Error_CreateReferenceChart" xml:space="preserve">
+    <value>Fehler beim Sichern der Daten des Referenzcharts. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_ReferenceChart_MissingUploadFile" xml:space="preserve">
+    <value>Keine Daten zum Hochladen vorhanden. Bitte prüfen ob chart preview image/ original chart/ reference data(c,m,y,k,HTML_RGB)  hochgeladen wurden.</value>
+  </data>
+	<data name="Error_ReferenceChart_MissingEditFile" xml:space="preserve">
+    <value>You are missing of uploading neccessary data. Please check wheather you have upload chart preview image/ original chart.</value>
+  </data>
+	<data name="Error_GetReferenceChartForLabCalculation" xml:space="preserve">
+    <value>Fehler beim Überprüfen des Bezugs von Quellprofil und Chart. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_InsertReferenceLabData" xml:space="preserve">
+    <value>Fehler beim Einfügen der Reference LAB Data. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Email_Subject_SendPasswordResetEmail" xml:space="preserve">
+    <value>ColorPath -  Passwort zurücksetzen</value>
+  </data>
+	<data name="Email_Subject_SendUserCreatedEmail" xml:space="preserve">
+    <value>Willkommen bei Color Path</value>
+  </data>
+	<data name="Error_GetTemplate" xml:space="preserve">
+    <value>Fehler beim Abrufen des Templates. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Duplicate_UpdateBranch" xml:space="preserve">
+    <value>Niederlassung mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Duplicate_UpdateCompany" xml:space="preserve">
+    <value>Firma mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Duplicate_UpdateDevice" xml:space="preserve">
+    <value>Gerät mit diesem Namen existiert schon für diese Niederlassung. </value>
+  </data>
+	<data name="Duplicate_UpdateLicense" xml:space="preserve">
+    <value>Lizenz existiert schon für diese Niederlassung.</value>
+  </data>
+	<data name="Duplicate_UpdateSourceProfile" xml:space="preserve">
+    <value>Quellprofil mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Duplicate_UpdatePrintStandardType" xml:space="preserve">
+    <value>Druckstandard-Typ mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Duplicate_UpdateUser" xml:space="preserve">
+    <value>Benutzer mit diesem Namen/Email existiert schon.</value>
+  </data>
+	<data name="Email_Subject_SendPasswordForceResetEmail" xml:space="preserve">
+    <value>ColorPath - Bitte Passwort zurücksetzen</value>
+  </data>
+	<data name="Error_DeleteMeasurement" xml:space="preserve">
+    <value>Fehler beim Schließen des Optimierungslaufes. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetAvgDeltaMeasurement" xml:space="preserve">
+    <value>Fehler beim Abrufen der Informationen der Messung. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetPatchDetailsofMeasurement" xml:space="preserve">
+    <value>Fehler beim Abrufen der Meßinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetProjectTypeList" xml:space="preserve">
+    <value>Fehler beim Abrufen derProjekttypinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetReferenceCharts" xml:space="preserve">
+    <value>Fehler beim Abrufen der Informationen des Referenzcharts. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetReferenceChartsForXmf" xml:space="preserve">
+    <value>Fehler beim Abrufen der Informationen des Referenzcharts. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetSecurityQuestions" xml:space="preserve">
+    <value>Fehler beim Abrufen der Benutzerinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetUserAuthenticationInformation" xml:space="preserve">
+    <value>Fehler beim Überprüfen von Username/Passwort</value>
+  </data>
+	<data name="Error_SendEmailToUser" xml:space="preserve">
+    <value>Fehler beim Einfügen der Benutzerinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdatePassword" xml:space="preserve">
+    <value>Fehler beim Aktualisieren der Benutzerinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdatePreResetPasswordInformation" xml:space="preserve">
+    <value>Fehler beim Aktualisieren der Benutzerinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdateSecurityInformation" xml:space="preserve">
+    <value>Fehler beim Aktualisieren der Benutzerinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdateUserAuthenticationInformation" xml:space="preserve">
+    <value>Fehler beim Aktualisieren der Benutzerinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_DeleteOptimizeRun" xml:space="preserve">
+    <value>Fehler beim Löschen des Optimierungslaufes. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_DeleteOptimizeRunDLP" xml:space="preserve">
+    <value>Fehler beim Löschen des DLP des Optimierungslaufes. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetApplicationConfigurations" xml:space="preserve">
+    <value>Fehler beim Abrufen der Konfigurationsdaten der Anwendung. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetLastRunStatus" xml:space="preserve">
+    <value>Fehler beim Abrufen der Statusinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetPrintActivities" xml:space="preserve">
+    <value>Fehler beim Abrufen der Druckdaten. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_StoreTempararyProjectInformation" xml:space="preserve">
+    <value>Fehler beim Einfügen der Projektinformation. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdateReferenceChart" xml:space="preserve">
+    <value>Fehler beim Aktualisieren des Referenz Charts.. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Duplicate_UpdateReferenceChart" xml:space="preserve">
+    <value>Referenzchart mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Error_GetMeasurementIDsbyProjectID" xml:space="preserve">
+    <value>Fehler beim Empfang der Liste der Messungen für das ausgewählte Projekt. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_ImportMeasurements" xml:space="preserve">
+    <value>Fehler beim Importieren der Messungen vom gewählten Projekt. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_ProfilerSettings_MissingUploadFile" xml:space="preserve">
+    <value>Keine Daten zum Hochladen vorhanden. Bitte prüfen ob die Profiler Settings hochgeladen wurden.</value>
+  </data>
+	<data name="Duplicate_InsertDeviceFamilyProfilerOption" xml:space="preserve">
+    <value>Profileroption  mit diesem Namen existiert schon für diese Gerätefamilie.</value>
+  </data>
+	<data name="Error_InsertDeviceFamilyProfilerOption" xml:space="preserve">
+    <value>Fehler beim Einfügen der Profiler Option der Gerätefamilie. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_InsertProfilerOptionPreset" xml:space="preserve">
+    <value>Fehler beim Einfügen der Profiler Option Presets der Gerätefamilie. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetChartData_G7_GrayF" xml:space="preserve">
+    <value>Fehler beim Anzeigen der G7 Gray ΔCh chart. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetChartData_G7_GrayFSummary" xml:space="preserve">
+    <value>Fehler beim Anzeigen der G7 Gray ΔCh Summary. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetChartData_G7_BlackL" xml:space="preserve">
+    <value>Fehler beim Anzeigen der G7 Black ΔL chart. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetChartData_G7_BlackLSummary" xml:space="preserve">
+    <value>Fehler beim Anzeigen der G7 Black ΔL Summary. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetChartData_G7_GrayL" xml:space="preserve">
+    <value>Fehler beim Anzeigen der G7 Gray ΔL chart. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetChartData_G7_GrayLSummary" xml:space="preserve">
+    <value>Fehler beim Anzeigen der G7 Gray ΔL Summary. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetChartData_InkPaper_EPrimaryPatches" xml:space="preserve">
+    <value>Fehler beim Anzeigen der Ink Paper  ΔE Primary Patches chart. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetChartData_InkPaper_PaperLAB" xml:space="preserve">
+    <value>Fehler beim Anzeigen der Ink Paper LAB charts. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetChartData_GrayGamut1" xml:space="preserve">
+    <value>Fehler beim Anzeigen der Gamut a*-b*Comparision chart. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetChartData_GrayGamut2" xml:space="preserve">
+    <value>Fehler beim Anzeigen der Gamut L*Comparision chart. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_GetChartData_LABChart" xml:space="preserve">
+    <value>Fehler beim Anzeigen der Gamutr LAB charts. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Duplicate_InsertMetricTargetPreset" xml:space="preserve">
+    <value>Metric Target Preset mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Duplicate_UpdateMetricTargetPreset" xml:space="preserve">
+    <value>Metric Target Preset mit diesem Namen existiert schon. </value>
+  </data>
+	<data name="Error_DeleteMetricTargetPreset" xml:space="preserve">
+    <value>Fehler beim Löschen des Metric Target Preset. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_InsertMetricTargetPreset" xml:space="preserve">
+    <value>Fehler beim Einfügen des Metric Target Preset. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="Error_UpdateMetricTargetPreset" xml:space="preserve">
+    <value>Fehler beim Aktualisieren des MetricTarge Preset. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+	<data name="MetricTargetPresetManagement_DeleteMetricTargetPreset_Confirmation" xml:space="preserve">
+    <value>Wollen Sie wirklich das ausgewählte MetricTargetPreset löschen?</value>
+  </data>
+</root>

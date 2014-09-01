@@ -222,6 +222,7 @@
     <Content Include="JQuery\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="JQuery\numeric.js" />
     <Content Include="JQuery\progressbar.js" />
+    <Content Include="JS\GlobalResource.fr-FR.js" />
     <Content Include="JS\GlobalResource.ja-JP.js" />
     <Content Include="JS\GlobalResource.de-DE.js" />
     <Content Include="JS\DYMO.Label.Framework.latest.js" />
@@ -614,10 +615,20 @@
     <Compile Include="ApplicationError.aspx.designer.cs">
       <DependentUpon>ApplicationError.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\RadFilter.Main.de.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RadFilter.Main.de.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\RadFilter.Main.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RadFilter.Main.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\RadFilter.Main.fr.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RadFilter.Main.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="App_GlobalResources\RadGrid.Main.de.designer.cs">
       <AutoGen>True</AutoGen>
@@ -629,10 +640,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RadGrid.Main.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\RadGrid.Main.fr.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RadGrid.Main.fr.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\RadGrid.Main.ja.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RadGrid.Main.ja.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\ResourceMessages.de.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceMessages.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\ResourceMessages.fr.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceMessages.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -2404,6 +2430,138 @@
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\PrintPreview.ascx.ja.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\RadFilter.Main.de.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>RadFilter.Main.de.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\RadFilter.Main.fr.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>RadFilter.Main.fr.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\RadGrid.Main.fr.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>RadGrid.Main.fr.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\ResourceMessages.de.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ResourceMessages.de.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\ResourceMessages.fr.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ResourceMessages.fr.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupClosePrintCondition.aspx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupImportMeasurements.aspx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupOpenPrintCondition.aspx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupSaveProject.aspx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PrintPreview.aspx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\PreviewPrintCondition.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\ProfilerOptions.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\ProjectDescription.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\TargetColorSpace.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\ValidationSetup.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddBranchManagement.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddCompanyManagement.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddMeasurementDevice.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddPrintStandardType.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddSourceProfile.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddUserManagement.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AdminMenuBar.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Analyze.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ApplicationError.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\BranchManagement.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CompanyManagement.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\COTransferSiteControl.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\DeviceList.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\DownloadSoftwares.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\Export.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\Footer.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\GlobalActivation.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\Header.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\InkOptSourceMiddle.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\InkOptSourceMiddle.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\LeftMenu.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\LeftMenuProjectItem.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\LeftMenuProjectSetting.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\Login.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\Measurement.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MeasurementCommon.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\MeasurementDeviceList.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\OperationSelection.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\Permission.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\PrintPreview.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\PrintStandardTypeManagement.ascx .de.resx" />
+    <Content Include="UserControl\App_LocalResources\PrintStandardTypeManagement.ascx .fr.resx" />
+    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\ProjectList.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\ProjectMaxLimit.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\SessionEnd.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\Settings.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\SourceProfileManagement.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\UserManagement.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ClosePrintCondition.ascx.fr.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\ConfirmSave.ascx.fr.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\CreateDLP.ascx.fr.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\DownloadSoftware.ascx.fr.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\ForgotPassword.ascx.fr.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\ImportMeasurements.ascx.fr.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\OpenPrintCondition.ascx.fr.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\SaveWindow.ascx.fr.resx" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
@@ -2422,7 +2580,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

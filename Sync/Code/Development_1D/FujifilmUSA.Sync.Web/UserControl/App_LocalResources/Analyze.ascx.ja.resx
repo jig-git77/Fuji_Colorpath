@@ -591,4 +591,10 @@
   <data name="GridBoundColumnResource37.HeaderText" xml:space="preserve">
     <value>Density_Y</value>
   </data>
+  <data name="LocAvgMesurmentResource1.Text" xml:space="preserve">
+    <value>測定値の平均を分析</value>
+  </data>
+  <data name="TemplateFieldResource0.HeaderText" xml:space="preserve">
+    <value>測色名:</value>
+  </data>
 </root>

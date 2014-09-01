@@ -118,42 +118,42 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="locBranchResource1.Text" xml:space="preserve">
-    <value>Branch_de</value>
+    <value>Niederlassung</value>
   </data>
 	<data name="locCompanyResource1.Text" xml:space="preserve">
-    <value>Company_de</value>
+    <value>Firma</value>
   </data>
 	<data name="locDeviceResource1.Text" xml:space="preserve">
-    <value>Device_de</value>
+    <value>Gerät</value>
   </data>
 	<data name="locDownloadResource1.Text" xml:space="preserve">
-    <value>Download_de</value>
+    <value>Download</value>
   </data>
 	<data name="locLicenseResource1.Text" xml:space="preserve">
-    <value>License_de</value>
+    <value>Lizenz</value>
   </data>
 	<data name="locMeasurementDeviceResource1.Text" xml:space="preserve">
-    <value>Measurement Device_de</value>
+    <value>Mesßgerät</value>
   </data>
 	<data name="locMySettingsResource1.Text" xml:space="preserve">
-    <value>My Settings_de</value>
+    <value>Meine Einstellungen</value>
   </data>
 	<data name="locReferenceChartResource1.Text" xml:space="preserve">
-    <value>Reference Chart_de</value>
+    <value>Reference Chart</value>
   </data>
 	<data name="locSourceProfileResource1.Text" xml:space="preserve">
-    <value>Source Profile_de</value>
+    <value>Quellprofil</value>
   </data>
 	<data name="locUserResource1.Text" xml:space="preserve">
-    <value>User_de</value>
+    <value>Benutzer</value>
   </data>
 	<data name="locProfilerSettingsResource1.Text" xml:space="preserve">
-    <value>Device Family Profiler Settings_de</value>
+    <value>Profileinstellungen Geraätefamilie</value>
   </data>
 	<data name="locActivityValidationRulesResource1.Text" xml:space="preserve">
     <value>Activity Validation Rules_de</value>
   </data>
 	<data name="locApplicationConfigurationResource1.Text" xml:space="preserve">
-    <value>Application Configuration_de</value>
+    <value>Anwendungskonfiguration</value>
   </data>
 </root>

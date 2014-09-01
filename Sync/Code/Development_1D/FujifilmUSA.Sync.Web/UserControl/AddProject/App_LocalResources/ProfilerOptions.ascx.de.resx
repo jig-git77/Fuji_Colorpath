@@ -118,103 +118,103 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="chk100BlackResource1.Text" xml:space="preserve">
-    <value>  100% Black_de</value>
+    <value>100% Black</value>
   </data>
 	<data name="chk100CMYResource1.Text" xml:space="preserve">
-    <value>  100% C,M,Y_de</value>
+    <value>100% C,M,Y</value>
   </data>
 	<data name="chk100RGBResource1.Text" xml:space="preserve">
-    <value>  100% R,G,B_de</value>
+    <value>100% R,G,B</value>
   </data>
 	<data name="chk400BlackResource1.Text" xml:space="preserve">
-    <value>  400% Black_de</value>
+    <value>400% Black</value>
   </data>
 	<data name="chkBlackOverPrintResource1.Text" xml:space="preserve">
-    <value>  Black Overprint_de</value>
+    <value>Black Overprint</value>
   </data>
 	<data name="chkBorderClippingResource1.Text" xml:space="preserve">
-    <value>  Border Clipping_de</value>
+    <value>Begrenzung</value>
   </data>
 	<data name="chkDuplexResource1.Text" xml:space="preserve">
-    <value>  Duplex_de</value>
+    <value>Duplex</value>
   </data>
 	<data name="chkGrayResource1.Text" xml:space="preserve">
-    <value>  Gray_de</value>
+    <value>Gray</value>
   </data>
 	<data name="chkMaxCMYResource1.Text" xml:space="preserve">
-    <value>  Max. C,M,Y_de</value>
+    <value>Max. C,M,Y</value>
   </data>
 	<data name="chkMaxRGBResource1.Text" xml:space="preserve">
-    <value>  Max. R,G,B_de</value>
+    <value>Max. R,G,B</value>
   </data>
 	<data name="chkPCResource1.Text" xml:space="preserve">
-    <value>  C_de</value>
+    <value>C</value>
   </data>
 	<data name="chkPMResource1.Text" xml:space="preserve">
-    <value>  M_de</value>
+    <value>M</value>
   </data>
 	<data name="chkPrimariesResource1.Text" xml:space="preserve">
-    <value>  Primaries_de</value>
+    <value>Primärfarben</value>
   </data>
 	<data name="chkPYResource1.Text" xml:space="preserve">
-    <value>  Y_de</value>
+    <value>Y</value>
   </data>
 	<data name="chkSCMResource1.Text" xml:space="preserve">
-    <value>  CM_de</value>
+    <value>CM</value>
   </data>
 	<data name="chkSCYResource1.Text" xml:space="preserve">
-    <value>  CY_de</value>
+    <value>CY</value>
   </data>
 	<data name="chkSecondariesResource1.Text" xml:space="preserve">
-    <value>  Secondaries_de</value>
+    <value>Sekundärfarben</value>
   </data>
 	<data name="chkSMYResource1.Text" xml:space="preserve">
-    <value>  MY_de</value>
+    <value>MY</value>
   </data>
 	<data name="chkTriplexResource1.Text" xml:space="preserve">
-    <value>  Triplex_de</value>
+    <value>Triplex</value>
   </data>
 	<data name="chkWhiteResource1.Text" xml:space="preserve">
-    <value>  White_de</value>
+    <value>Weiss</value>
   </data>
 	<data name="locAdvancedOptionsResource1.Text" xml:space="preserve">
-    <value>Advanced Options_de</value>
+    <value>Weitere Optionen</value>
   </data>
 	<data name="locBlackGenerationResource1.Text" xml:space="preserve">
-    <value>Black - Generation_de</value>
+    <value>Schwarzaufbau</value>
   </data>
 	<data name="locBlackStartResource1.Text" xml:space="preserve">
-    <value>Black-Start:_de</value>
+    <value>Schwarz-Start:</value>
   </data>
 	<data name="locBlackWidthResource1.Text" xml:space="preserve">
-    <value>Black-Width:_de</value>
+    <value>Schwarz-Bandbreite</value>
   </data>
 	<data name="locCustomResource1.Text" xml:space="preserve">
-    <value>Custom:_de</value>
+    <value>Kundenspezifisch</value>
   </data>
 	<data name="locExceptionsResource1.Text" xml:space="preserve">
-    <value>Exceptions_de</value>
+    <value>Ausnahmen</value>
   </data>
 	<data name="locGCRResource1.Text" xml:space="preserve">
-    <value>GCR:_de</value>
+    <value>GCR:</value>
   </data>
 	<data name="locMaxInkResource1.Text" xml:space="preserve">
-    <value>Max-Ink:_de</value>
+    <value>Max-Ink:</value>
   </data>
 	<data name="locMeasurementSetupResource1.Text" xml:space="preserve">
-    <value>Measurement Setup_de</value>
+    <value>Einstellung f. Messung</value>
   </data>
 	<data name="locNewPrintConditionResource1.Text" xml:space="preserve">
-    <value>New Print Condition - Profiler Options_de</value>
+    <value>Profiler Optionen für Neue Druckbedingung</value>
   </data>
 	<data name="locOptionsPresetsResource1.Text" xml:space="preserve">
-    <value>Options Presets_de</value>
+    <value>Presetzs f. Optionen</value>
   </data>
 	<data name="locPresetDescriptionResource1.Text" xml:space="preserve">
-    <value>Preset Description:_de</value>
+    <value>Beschreibung f.Optionen</value>
   </data>
 	<data name="locRangeResource1.Text" xml:space="preserve">
-    <value>Range:_de</value>
+    <value>Bereich:</value>
   </data>
 	<data name="locRendering1Resource1.Text" xml:space="preserve">
     <value>Rendering_de</value>
@@ -223,48 +223,48 @@
     <value>Rendering:_de</value>
   </data>
 	<data name="locSelectedPresetsResource1.Text" xml:space="preserve">
-    <value>Selected Presets:_de</value>
+    <value>Ausgewählte  Presets:</value>
   </data>
 	<data name="locTargetColorSpaceResource1.Text" xml:space="preserve">
-    <value>Target ColorSpace_de</value>
+    <value>Zielfarbraum</value>
   </data>
 	<data name="rdsBlackStartResource1.DecreaseText" xml:space="preserve">
-    <value>Decrease_de</value>
+    <value>Reduzieren</value>
   </data>
 	<data name="rdsBlackStartResource1.DragText" xml:space="preserve">
-    <value>Drag_de</value>
+    <value>Ziehen</value>
   </data>
 	<data name="rdsBlackStartResource1.IncreaseText" xml:space="preserve">
-    <value>Increase_de</value>
+    <value>Erhöhen</value>
   </data>
 	<data name="rdsBlackWidthResource1.DecreaseText" xml:space="preserve">
-    <value>Decrease_de</value>
+    <value>Reduzieren</value>
   </data>
 	<data name="rdsBlackWidthResource1.DragText" xml:space="preserve">
-    <value>Drag_de</value>
+    <value>Ziehen</value>
   </data>
 	<data name="rdsBlackWidthResource1.IncreaseText" xml:space="preserve">
-    <value>Increase_de</value>
+    <value>Erhöhen</value>
   </data>
 	<data name="rdsModeResource1.DecreaseText" xml:space="preserve">
-    <value>Decrease_de</value>
+    <value>Reduzieren</value>
   </data>
 	<data name="rdsModeResource1.DragText" xml:space="preserve">
-    <value>Drag_de</value>
+    <value>Ziehen</value>
   </data>
 	<data name="rdsModeResource1.IncreaseText" xml:space="preserve">
-    <value>Increase_de</value>
+    <value>Erhöhen</value>
   </data>
 	<data name="rdsRangeResource1.DecreaseText" xml:space="preserve">
-    <value>Decrease_de</value>
+    <value>Reduzieren</value>
   </data>
 	<data name="rdsRangeResource1.DragText" xml:space="preserve">
-    <value>Drag_de</value>
+    <value>Ziehen</value>
   </data>
 	<data name="rdsRangeResource1.IncreaseText" xml:space="preserve">
-    <value>Increase_de</value>
+    <value>Erhöhen</value>
   </data>
 	<data name="txtProfileDescriptionResource1.Text" xml:space="preserve">
-    <value>This preset is best used for analog devices ……_de</value>
+    <value>Dieses Preset eignet sich am Besten für analoge Geräte......</value>
   </data>
 </root>

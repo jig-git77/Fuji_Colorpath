@@ -245,7 +245,11 @@
                 <asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server" Checked="false" EnableViewState="true"
                     Font-Bold="true" AutoPostBack="true" OnCheckedChanged="chkAnalyzeAverageOfMeasurements_Click" >
                 </asp:CheckBox>
-                <span style="font-weight: bold; vertical-align: text-top;">Analyze Average Of Measurements</span> 
+                <span style="font-weight: bold; vertical-align: text-top;">
+                <asp:Localize runat="server" Text="Analyze Average Of Measurements" ID="LocAvgMesurment"
+                                meta:resourcekey="LocAvgMesurmentResource1"></asp:Localize>
+                
+                </span> 
                 <asp:Label ID="lblCompError" runat="server" Text="" ForeColor="Red"></asp:Label> 
                 <input id="hd_CompError" type="hidden" runat="server"  value="5"/>
             </td>
@@ -447,7 +451,7 @@
                                             </EmptyDataTemplate>
                                             <ItemTemplate>
                                                 <tr class="Gray">   
-                                                    <td style="font-size:13px; width:200px;"><asp:Localize ID="locMeasurementName" runat="server" meta:resourcekey="locMeasurementNameResource1" Text="Measurement Name:"></asp:Localize> </td>                                               
+                                                    <td style="font-size:13px; width:200px;"><asp:Localize ID="locMeasurementName" runat="server" meta:resourcekey="locMeasurementNameResource1" Text=""></asp:Localize> </td>                                               
                                                     <td>
                                                         <asp:Label ID="lblMeasurementName" runat="server" 
                                                             Text='<%# Eval("MeasurementName") %>' 
@@ -565,7 +569,8 @@
                                     <Fields>
                                         <asp:BoundField DataField="MeasurementName" HeaderText="Measurement Name:"
                                             HeaderStyle-Width="150px" HeaderStyle-CssClass="Summary_Left" 
-                                            ItemStyle-CssClass="Summary_Right">                                            
+                                            ItemStyle-CssClass="Summary_Right"
+                                            meta:resourcekey="TemplateFieldResource0">                                            
                                         </asp:BoundField>
                                         <asp:TemplateField HeaderText="Status:" HeaderStyle-CssClass="Summary_Left_Alt" 
                                             ItemStyle-CssClass="Summary_Right_Alt" 

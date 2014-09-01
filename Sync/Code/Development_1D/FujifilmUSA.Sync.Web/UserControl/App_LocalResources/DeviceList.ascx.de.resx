@@ -118,33 +118,33 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Device Name_de</value>
+    <value>Gerätename</value>
   </data>
 	<data name="Label1Resource1.Text" xml:space="preserve">
-    <value>Company_de</value>
+    <value>Firma</value>
   </data>
 	<data name="Label2Resource1.Text" xml:space="preserve">
-    <value>Branch_de</value>
+    <value>Niederlassung</value>
   </data>
 	<data name="locDeviceListResource1.Text" xml:space="preserve">
-    <value>Device List_de</value>
+    <value>Geräteliste</value>
   </data>
 	<data name="locHelpResource1.Text" xml:space="preserve">
-    <value>Help_de</value>
+    <value>Hilfe</value>
   </data>
 	<data name="locReportResource1.Text" xml:space="preserve">
-    <value>Report_de</value>
+    <value>Report</value>
   </data>
 	<data name="locSelectPressResource1.Text" xml:space="preserve">
-    <value>Select Press_de</value>
+    <value>Druckmaschine wählen</value>
   </data>
 	<data name="branchAndCompanyRequired" xml:space="preserve">
-    <value>Please select company and branch from above selection list._de</value>
+    <value>Bitte Firma und Niederlassung von der Liste oben auswählen.</value>
   </data>
 	<data name="noRecordsToDisplayText" xml:space="preserve">
-    <value>No records to display._de</value>
+    <value>Keine Einträge anzuzeigen.</value>
   </data>
 	<data name="selectText" xml:space="preserve">
-    <value>-- Select --_de</value>
+    <value>-- Auswählen --</value>
   </data>
 </root>

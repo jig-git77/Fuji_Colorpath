@@ -118,49 +118,49 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Profile Name_de</value>
+    <value>Profil Name</value>
   </data>
 	<data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Profile Description_de</value>
+    <value>Profilbeschreibung</value>
   </data>
 	<data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>Profile_de</value>
+    <value>Profil</value>
   </data>
 	<data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>IsActive?_de</value>
+    <value>aktiv?</value>
   </data>
 	<data name="imgbtnDeleteResource1.AlternateText" xml:space="preserve">
-    <value>Delete_de</value>
+    <value>Löschen</value>
   </data>
 	<data name="imgbtnDeleteResource1.ToolTip" xml:space="preserve">
-    <value>Delete Source Profile_de</value>
+    <value>Quellprofil löschen</value>
   </data>
 	<data name="imgbtnUpdateResource1.AlternateText" xml:space="preserve">
-    <value>Edit_de</value>
+    <value>bearbeiten</value>
   </data>
 	<data name="imgbtnUpdateResource1.ToolTip" xml:space="preserve">
-    <value>Edit Source Profile_de</value>
+    <value>Quellprofil bearbeiten</value>
   </data>
 	<data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
-    <value>Clear Filter_de</value>
+    <value>Filter löschen</value>
   </data>
 	<data name="imgClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Filter_de</value>
+    <value>Filter löschen</value>
   </data>
 	<data name="lbtnClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter_de</value>
+    <value>Filter löschen</value>
   </data>
 	<data name="lbtnProfileResource1.ToolTip" xml:space="preserve">
-    <value>Download source profile_de</value>
+    <value>Quellprofil herunterladen</value>
   </data>
 	<data name="locAddSourceProfileResource1.Text" xml:space="preserve">
-    <value>Add Source Profile_de</value>
+    <value>Quellprofil hinzufügen</value>
   </data>
 	<data name="locSourceProfileMgmtResource1.Text" xml:space="preserve">
-    <value>Source Profile Management_de</value>
+    <value>Quellprofil Verwaltung</value>
   </data>
 	<data name="locClickMeResource1.Text" xml:space="preserve">
-    <value>Click Me!_de</value>
+    <value>Click Mich!</value>
   </data>
 	<data name="GridTemplateColumnResource1.EditFormHeaderTextFormat" xml:space="preserve">
 		<value>{0}:</value>
@@ -178,13 +178,13 @@
 		<value>{0}:</value>
 	</data>
 	<data name="lbtnClearFillterResource2.ToolTip" xml:space="preserve">
-		<value>Clear Filter_de</value>
+		<value>Filter löschen</value>
 	</data>
 	<data name="lbtnProfileResource2.ToolTip" xml:space="preserve">
-		<value>Download source profile</value>
+		<value>Quellprofil herunterladen</value>
 	</data>
 	<data name="RadComboBoxItemResource1.Text" xml:space="preserve">
-		<value>ALL</value>
+		<value>alle</value>
 	</data>
 	<data name="RadComboBoxItemResource2.Text" xml:space="preserve">
 		<value>Not Certified</value>
@@ -193,10 +193,10 @@
 		<value>NotCertified</value>
 	</data>
 	<data name="RadComboBoxItemResource3.Text" xml:space="preserve">
-		<value>Disabled</value>
+		<value>Deaktiviert</value>
 	</data>
 	<data name="RadComboBoxItemResource3.Value" xml:space="preserve">
-		<value>Disabled</value>
+		<value>Deaktiviert</value>
 	</data>
 	<data name="RadComboBoxItemResource4.Text" xml:space="preserve">
 		<value>Last OK</value>
@@ -214,55 +214,55 @@
 		<value>Loading...</value>
 	</data>
 	<data name="rcmbValidationStatusResource1.Localization.AllItemsCheckedString" xml:space="preserve">
-		<value>All items checked</value>
+		<value>Alles geprüft</value>
 	</data>
 	<data name="rcmbValidationStatusResource1.Localization.CheckAllString" xml:space="preserve">
-		<value>Check All</value>
+		<value>Alles prüfen</value>
 	</data>
 	<data name="rcmbValidationStatusResource1.Localization.ItemsCheckedString" xml:space="preserve">
-		<value>items checked</value>
+		<value>Punkte geprüft</value>
 	</data>
 	<data name="rcmbValidationStatusResource1.Localization.NoMatches" xml:space="preserve">
-		<value>No matches</value>
+		<value>Keine Übereinstimmungen</value>
 	</data>
 	<data name="rcmbValidationStatusResource1.Localization.ShowMoreFormatString" xml:space="preserve">
-		<value>Items &lt;b&gt;1&lt;/b&gt;-&lt;b&gt;{0}&lt;/b&gt; out of &lt;b&gt;{1}&lt;/b&gt;</value>
+		<value>Punkte &lt;b&gt;1&lt;/b&gt;-&lt;b&gt;{0}&lt;/b&gt; out of &lt;b&gt;{1}&lt;/b&gt;</value>
 	</data>
 	<data name="rgSourceProfileResource1.GroupingSettings.CollapseTooltip" xml:space="preserve">
-		<value>Collapse group</value>
+		<value>Gruppe ausblenden</value>
 	</data>
 	<data name="rgSourceProfileResource1.GroupingSettings.ExpandTooltip" xml:space="preserve">
-		<value>Expand group</value>
+		<value>Gruppe einblenden</value>
 	</data>
 	<data name="rgSourceProfileResource1.GroupingSettings.GroupByFieldsSeparator" xml:space="preserve">
 		<value>; </value>
 	</data>
 	<data name="rgSourceProfileResource1.GroupingSettings.GroupContinuedFormatString" xml:space="preserve">
-		<value>... group continued from the previous page. </value>
+		<value>... Gruppe weitergeführt von der vorherigen Seite</value>
 	</data>
 	<data name="rgSourceProfileResource1.GroupingSettings.GroupContinuesFormatString" xml:space="preserve">
-		<value> Group continues on the next page.</value>
+		<value>Gruppe wird weitergeführt auf der nächsten Seite</value>
 	</data>
 	<data name="rgSourceProfileResource1.GroupingSettings.GroupSplitDisplayFormat" xml:space="preserve">
-		<value>Showing {0} of {1} items.</value>
+		<value>Zeige {0} von {1} Einträgen.</value>
 	</data>
 	<data name="rgSourceProfileResource1.GroupingSettings.GroupSplitFormat" xml:space="preserve">
 		<value> ({0})</value>
 	</data>
 	<data name="rgSourceProfileResource1.GroupingSettings.UnGroupButtonTooltip" xml:space="preserve">
-		<value>Click here to ungroup</value>
+		<value>Hier klicken um die Gruppe aufzulösen</value>
 	</data>
 	<data name="rgSourceProfileResource1.GroupingSettings.UnGroupTooltip" xml:space="preserve">
-		<value>Drag out of the bar to ungroup</value>
+		<value>Herausziehen um die Gruppe aufzulösen</value>
 	</data>
 	<data name="rgSourceProfileResource1.GroupPanel.Text" xml:space="preserve">
-		<value>Drag a column header and drop it here to group by that column</value>
+		<value>Eine Überschrift hierher ziehen um Sie mit der Spalte zu gruppieren</value>
 	</data>
 	<data name="rgSourceProfileResource1.HierarchySettings.CollapseTooltip" xml:space="preserve">
-		<value>Collapse</value>
+		<value>ausblenden</value>
 	</data>
 	<data name="rgSourceProfileResource1.HierarchySettings.ExpandTooltip" xml:space="preserve">
-		<value>Expand</value>
+		<value>einblenden</value>
 	</data>
 	<data name="rgSourceProfileResource1.HierarchySettings.SelfCollapseTooltip" xml:space="preserve">
 		<value>Self reference collapse</value>
@@ -271,19 +271,19 @@
 		<value>Self reference expand</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.CommandItemSettings.AddNewRecordText" xml:space="preserve">
-		<value>Add new record</value>
+		<value>Neuen Eintrag hinzufügen</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.CommandItemSettings.ExportToCsvText" xml:space="preserve">
-		<value>Export to CSV</value>
+		<value>Export in CSV Datei</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.CommandItemSettings.ExportToExcelText" xml:space="preserve">
-		<value>Export to Excel</value>
+		<value>Export in Excel Datei</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.CommandItemSettings.ExportToPdfText" xml:space="preserve">
-		<value>Export to PDF</value>
+		<value>Export in PDF Datei</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.CommandItemSettings.ExportToWordText" xml:space="preserve">
-		<value>Export to Word</value>
+		<value>Export in Word Datei</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.CommandItemSettings.RefreshText" xml:space="preserve">
 		<value>Refresh</value>
@@ -292,72 +292,75 @@
 		<value>{0}:</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.NoDetailRecordsText" xml:space="preserve">
-		<value>No child records to display.</value>
+		<value>Keine Untereinträge anzuzeigen</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.NoMasterRecordsText" xml:space="preserve">
-		<value>No records to display.</value>
+		<value>Keine Einträge anzuzeigen</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.PagerStyle.FirstPageToolTip" xml:space="preserve">
-		<value>First Page</value>
+		<value>Erste Seite</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.PagerStyle.LastPageToolTip" xml:space="preserve">
-		<value>Last Page</value>
+		<value>Letzte Seite</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.PagerStyle.NextPagesToolTip" xml:space="preserve">
-		<value>Next Pages</value>
+		<value>Nächste Seiten</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.PagerStyle.NextPageToolTip" xml:space="preserve">
-		<value>Next Page</value>
+		<value>Nächste Seite</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.PagerStyle.PagerTextFormat" xml:space="preserve">
 		<value>Change page: {4} &amp;nbsp;Page &lt;strong&gt;{0}&lt;/strong&gt; of &lt;strong&gt;{1}&lt;/strong&gt;, items &lt;strong&gt;{2}&lt;/strong&gt; to &lt;strong&gt;{3}&lt;/strong&gt; of &lt;strong&gt;{5}&lt;/strong&gt;.</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.PagerStyle.PageSizeLabelText" xml:space="preserve">
-		<value>Page size:</value>
+		<value>Seitengröße:</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.PagerStyle.PrevPagesToolTip" xml:space="preserve">
-		<value>Previous Pages</value>
+		<value>Vorherige Seiten</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.PagerStyle.PrevPageToolTip" xml:space="preserve">
-		<value>Previous Page</value>
+		<value>Vorherige Seite</value>
 	</data>
 	<data name="rgSourceProfileResource1.MasterTableView.RowIndicatorColumn.EditFormHeaderTextFormat" xml:space="preserve">
 		<value>{0}:</value>
 	</data>
 	<data name="rgSourceProfileResource1.PagerStyle.FirstPageToolTip" xml:space="preserve">
-		<value>First Page</value>
+		<value>Erste Seite</value>
 	</data>
 	<data name="rgSourceProfileResource1.PagerStyle.LastPageToolTip" xml:space="preserve">
-		<value>Last Page</value>
+		<value>Letzte Seite</value>
 	</data>
 	<data name="rgSourceProfileResource1.PagerStyle.NextPagesToolTip" xml:space="preserve">
-		<value>Next Pages</value>
+		<value>Nächste Seiten</value>
 	</data>
 	<data name="rgSourceProfileResource1.PagerStyle.NextPageToolTip" xml:space="preserve">
-		<value>Next Page</value>
+		<value>Nächste Seite</value>
 	</data>
 	<data name="rgSourceProfileResource1.PagerStyle.PagerTextFormat" xml:space="preserve">
 		<value>Change page: {4} &amp;nbsp;Page &lt;strong&gt;{0}&lt;/strong&gt; of &lt;strong&gt;{1}&lt;/strong&gt;, items &lt;strong&gt;{2}&lt;/strong&gt; to &lt;strong&gt;{3}&lt;/strong&gt; of &lt;strong&gt;{5}&lt;/strong&gt;.</value>
 	</data>
 	<data name="rgSourceProfileResource1.PagerStyle.PageSizeLabelText" xml:space="preserve">
-		<value>Page size:</value>
+		<value>Seitengröße:</value>
 	</data>
 	<data name="rgSourceProfileResource1.PagerStyle.PrevPagesToolTip" xml:space="preserve">
-		<value>Previous Pages</value>
+		<value>Vorherige Seiten</value>
 	</data>
 	<data name="rgSourceProfileResource1.PagerStyle.PrevPageToolTip" xml:space="preserve">
-		<value>Previous Page</value>
+		<value>Vorherige Seite</value>
 	</data>
 	<data name="rgSourceProfileResource1.SortingSettings.SortedAscToolTip" xml:space="preserve">
-		<value>Sorted asc</value>
+		<value>Aufsteigend sortiert</value>
 	</data>
 	<data name="rgSourceProfileResource1.SortingSettings.SortedDescToolTip" xml:space="preserve">
-		<value>Sorted desc</value>
+		<value>Absteigend sortiert</value>
 	</data>
 	<data name="rgSourceProfileResource1.SortingSettings.SortToolTip" xml:space="preserve">
-		<value>Click here to sort</value>
+		<value>Hier klicken zum Sortieren</value>
 	</data>
 	<data name="rgSourceProfileResource1.StatusBarSettings.LoadingText" xml:space="preserve">
 		<value>Loading...</value>
+	</data>
+	<data name="rgSourceProfileResource1.StatusBarSettings.ReadyText" xml:space="preserve">
+		<value>Fertig</value>
 	</data>
 </root>

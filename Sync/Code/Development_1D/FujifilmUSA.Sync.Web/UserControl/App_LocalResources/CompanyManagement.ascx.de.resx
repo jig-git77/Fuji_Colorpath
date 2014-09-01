@@ -118,39 +118,39 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Company Name_de</value>
+    <value>Firmenname</value>
   </data>
 	<data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Region Name_de</value>
+    <value>Bundesland</value>
   </data>
 	<data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>IsActive?_de</value>
+    <value>aktiv?</value>
   </data>
 	<data name="imgbtnDeleteResource1.AlternateText" xml:space="preserve">
-    <value>Delete_de</value>
+    <value>löschen</value>
   </data>
 	<data name="imgbtnDeleteResource1.ToolTip" xml:space="preserve">
-    <value>Delete Company_de</value>
+    <value>Firma löschen</value>
   </data>
 	<data name="imgbtnEditResource1.AlternateText" xml:space="preserve">
-    <value>Edit_de</value>
+    <value>ändern</value>
   </data>
 	<data name="imgbtnEditResource1.ToolTip" xml:space="preserve">
-    <value>Edit Company_de</value>
+    <value>Firma ändern</value>
   </data>
 	<data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
-    <value>Clear Fillter_de</value>
+    <value>Filter löschen</value>
   </data>
 	<data name="imgClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter_de</value>
+    <value>Filter löschen</value>
   </data>
 	<data name="lbtnClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter_de</value>
+    <value>Filter löschen</value>
   </data>
 	<data name="locAddCompanyResource1.Text" xml:space="preserve">
-    <value>Add Company_de</value>
+    <value>Firma hinzufügen</value>
   </data>
 	<data name="locCompanyMgmtResource1.Text" xml:space="preserve">
-    <value>Company Management_de</value>
+    <value>Firmen verwalten</value>
   </data>
 </root>
