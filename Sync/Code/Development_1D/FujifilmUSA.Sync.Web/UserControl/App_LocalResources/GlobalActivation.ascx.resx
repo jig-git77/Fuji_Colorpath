@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,86 +59,71 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="averageText" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="averageText" xml:space="preserve">
     <value>Average</value>
   </data>
-  <data name="cmbSecurityQuestionResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="confirmPasswordLength" xml:space="preserve">
+	<data name="confirmPasswordLength" xml:space="preserve">
     <value>Must be 4 char in confirm password</value>
   </data>
-  <data name="cvConfirmPasswordResource1.ErrorMessage" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cvConfirmPasswordResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cvConfirmPasswordResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cvPassWordResource1.ErrorMessage" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cvPassWordResource1.Text" xml:space="preserve">
+	<data name="cvPassWordResource1.Text" xml:space="preserve">
     <value>
                                         &lt;div class="tooltip_round_box" style=" margin-top: 0px; margin-left: 0px; width: 250px;"&gt;
                                         &lt;div class="tooltip_arrow" style="margin-top: -3px;"&gt;&amp;nbsp;&lt;/div&gt;
@@ -150,139 +135,82 @@
                                         &lt;/div&gt;
                                 </value>
   </data>
-  <data name="cvPassWordResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="excellentText" xml:space="preserve">
+	<data name="excellentText" xml:space="preserve">
     <value>Excellent</value>
   </data>
-  <data name="incorrectURL" xml:space="preserve">
+	<data name="incorrectURL" xml:space="preserve">
     <value>url is not correct. Please contact your administrator</value>
   </data>
-  <data name="invalidKeyPassed" xml:space="preserve">
+	<data name="invalidKeyPassed" xml:space="preserve">
     <value>invalid authentication key passed</value>
   </data>
-  <data name="invalidSecurityAns" xml:space="preserve">
+	<data name="invalidSecurityAns" xml:space="preserve">
     <value>Invalid security answer!!!</value>
   </data>
-  <data name="lblFirstNameResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblFirstNameResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblHeaderResource1.Text" xml:space="preserve">
+	<data name="lblHeaderResource1.Text" xml:space="preserve">
     <value>Set Profile</value>
   </data>
-  <data name="lblHeaderResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblLastNameResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblLastNameResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnSaveResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnSaveResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="locConfirmPasswordResource1.Text" xml:space="preserve">
+	<data name="lblLastNameResource1.ToolTip" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
-  <data name="locFirstNameResource1.Text" xml:space="preserve">
+	<data name="locConfirmPasswordResource1.Text" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+	<data name="locFirstNameResource1.Text" xml:space="preserve">
     <value>First Name</value>
   </data>
-  <data name="locLastNameResource1.Text" xml:space="preserve">
+	<data name="locLastNameResource1.Text" xml:space="preserve">
     <value>Last Name</value>
   </data>
-  <data name="locNewPasswordResource1.Text" xml:space="preserve">
+	<data name="locNewPasswordResource1.Text" xml:space="preserve">
     <value>New Password</value>
   </data>
-  <data name="locProfileMgmtResource1.Text" xml:space="preserve">
+	<data name="locProfileMgmtResource1.Text" xml:space="preserve">
     <value>Profile Management</value>
   </data>
-  <data name="locProvideConfirmPasswordResource1.Text" xml:space="preserve">
+	<data name="locProvideConfirmPasswordResource1.Text" xml:space="preserve">
     <value>Please provide confirm password.</value>
   </data>
-  <data name="locProvidePasswordResource1.Text" xml:space="preserve">
+	<data name="locProvidePasswordResource1.Text" xml:space="preserve">
     <value>Please provide password.</value>
   </data>
-  <data name="locSaveAndLoginResource1.Text" xml:space="preserve">
+	<data name="locSaveAndLoginResource1.Text" xml:space="preserve">
     <value>Save &amp; Login</value>
   </data>
-  <data name="locSecurityAnsResource1.Text" xml:space="preserve">
+	<data name="locSecurityAnsResource1.Text" xml:space="preserve">
     <value>Security Answer</value>
   </data>
-  <data name="locSecurityQueResource1.Text" xml:space="preserve">
+	<data name="locSecurityQueResource1.Text" xml:space="preserve">
     <value>Security Question</value>
   </data>
-  <data name="passwordLength" xml:space="preserve">
+	<data name="passwordLength" xml:space="preserve">
     <value>Must be 4 char in password</value>
   </data>
-  <data name="passwordsNotSame" xml:space="preserve">
+	<data name="passwordsNotSame" xml:space="preserve">
     <value>Password and comfirm password are not same.</value>
   </data>
-  <data name="provideSecurityAns" xml:space="preserve">
+	<data name="provideSecurityAns" xml:space="preserve">
     <value>Please provide security answer.</value>
   </data>
-  <data name="provideSecurityQue" xml:space="preserve">
+	<data name="provideSecurityQue" xml:space="preserve">
     <value>Please select security question.</value>
   </data>
-  <data name="rfvSecurityAnswerResource1.ErrorMessage" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvSecurityAnswerResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvSecurityAnswerResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvSecurityQuestionResource1.ErrorMessage" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvSecurityQuestionResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvSecurityQuestionResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="selectText" xml:space="preserve">
+	<data name="selectText" xml:space="preserve">
     <value>--Select--</value>
   </data>
-  <data name="spacesNotAllowed" xml:space="preserve">
+	<data name="spacesNotAllowed" xml:space="preserve">
     <value>Spaces are not allowed.</value>
   </data>
-  <data name="strongText" xml:space="preserve">
+	<data name="strongText" xml:space="preserve">
     <value>Strong</value>
   </data>
-  <data name="txtAdminPassWordResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtAdminPassWordResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtConfirmPassResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtConfirmPassResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtSecurityAnswerResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtSecurityAnswerResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="userAlreadyActivated" xml:space="preserve">
+	<data name="userAlreadyActivated" xml:space="preserve">
     <value>User already activated.</value>
   </data>
-  <data name="veryPoorText" xml:space="preserve">
+	<data name="veryPoorText" xml:space="preserve">
     <value>Very Poor</value>
   </data>
-  <data name="weakText" xml:space="preserve">
+	<data name="weakText" xml:space="preserve">
     <value>Weak</value>
   </data>
 </root>

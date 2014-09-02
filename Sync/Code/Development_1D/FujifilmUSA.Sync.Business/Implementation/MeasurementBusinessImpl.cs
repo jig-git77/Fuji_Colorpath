@@ -1005,7 +1005,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             DataRow dr = dsMeasurements.Tables[0].NewRow();
                             dr["CMYK_C"] = 0;
                             dr["ΔF"] = 0;
-                            dr["ΔLimit"] = dsMeasurements.Tables[0].Rows[0]["ΔLimit"].ToString();
+                            dr["ΔLimit"] = Convert.ToDecimal(dsMeasurements.Tables[0].Rows[0]["ΔLimit"].ToString());
                             dsMeasurements.Tables[0].Rows.InsertAt(dr, 0);
                         }
                         #endregion
@@ -1064,7 +1064,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataRow dr = dsMeasurements.Tables[2].NewRow();
                         dr["CMYK_K"] = 0;
                         dr["ΔL"] = 0;
-                        dr["ΔLimit"] = dsMeasurements.Tables[2].Rows[0]["ΔLimit"].ToString();
+                        dr["ΔLimit"] = Convert.ToDecimal(dsMeasurements.Tables[2].Rows[0]["ΔLimit"].ToString());
                         dsMeasurements.Tables[2].Rows.InsertAt(dr, 0);
                     }
                     #endregion
@@ -1123,7 +1123,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataRow dr = dsMeasurements.Tables[4].NewRow();
                         dr["CMYK_C"] = 0;
                         dr["ΔL"] = 0;
-                        dr["ΔLimit"] = dsMeasurements.Tables[4].Rows[0]["ΔLimit"].ToString();
+                        dr["ΔLimit"] = Convert.ToDecimal(dsMeasurements.Tables[4].Rows[0]["ΔLimit"].ToString());
                         dsMeasurements.Tables[4].Rows.InsertAt(dr, 0);
                     }
                     #endregion

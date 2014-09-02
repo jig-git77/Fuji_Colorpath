@@ -195,7 +195,7 @@
 	<data name="ELicenseType_InkOptimization_Source" xml:space="preserve">
     <value>Ink Optimization Source</value>
   </data>
-  <data name="ELicenseType_Sync4DCertification" xml:space="preserve">
+	<data name="ELicenseType_Sync4DCertification" xml:space="preserve">
     <value>Sync4D Certification</value>
   </data>
 	<data name="ELicenseType_None" xml:space="preserve">
@@ -843,19 +843,19 @@
 	<data name="Validation_NoMeasurements" xml:space="preserve">
     <value>Current project has no Validation, so can not show Analyse page</value>
   </data>
-  <data name="PCSDataTypes_Spectral" xml:space="preserve">
+	<data name="PCSDataTypes_Spectral" xml:space="preserve">
     <value>Spectral</value>
   </data>
-  <data name="PCSDataTypes_Density" xml:space="preserve">
+	<data name="PCSDataTypes_Density" xml:space="preserve">
     <value>Density</value>
   </data>
-  <data name="PCSDataTypes_XYZ" xml:space="preserve">
+	<data name="PCSDataTypes_XYZ" xml:space="preserve">
     <value>XYZ</value>
   </data>
-  <data name="DensityTypes_StatusT" xml:space="preserve">
+	<data name="DensityTypes_StatusT" xml:space="preserve">
     <value>StatusT</value>
   </data>
-  <data name="DensityTypes_StatusE" xml:space="preserve">
+	<data name="DensityTypes_StatusE" xml:space="preserve">
     <value>StatusE</value>
   </data>
 </root>

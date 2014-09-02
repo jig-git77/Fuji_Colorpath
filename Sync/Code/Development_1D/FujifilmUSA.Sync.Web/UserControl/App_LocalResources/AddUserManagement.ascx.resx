@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
     Microsoft ResX Schema 
@@ -136,7 +136,7 @@
     <value>Excellent</value>
   </data>
 	<data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Add User</value>
+    <value>Add user</value>
   </data>
 	<data name="ListItemResource1.Text" xml:space="preserve">
     <value>Website User</value>
@@ -246,7 +246,7 @@
 	<data name="locUserTypeResource1.Text" xml:space="preserve">
     <value>User Type</value>
   </data>
-  <data name="locUserLanguageResource1.Text" xml:space="preserve">
+	<data name="locUserLanguageResource1.Text" xml:space="preserve">
     <value>User Language</value>
   </data>
 </root>

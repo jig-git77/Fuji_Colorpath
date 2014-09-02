@@ -108,11 +108,11 @@ namespace FujifilmUSA.Sync.Web
             if (_isValidation) //if Validation
             {
                 string MeasurementDate1 = String.Format("{0:d}", MeasurementDate) + "\n" + String.Format("{0:T}", MeasurementDate); //---Formatted Date
-                AnalyzeChart.Series["Series" + seriesId].Points.AddXY(MeasurementDate1, measurementPatch.Δe2000.ToString()); // Add XY point
+                AnalyzeChart.Series["Series" + seriesId].Points.AddXY(MeasurementDate1, Convert.ToDecimal(measurementPatch.Δe2000.ToString())); // Add XY point
             }
             else   //if Optimization
             {
-                AnalyzeChart.Series["Series" + seriesId].Points.AddXY(measurementno + 1, measurementPatch.Δe2000.ToString()); // Add XY point
+                AnalyzeChart.Series["Series" + seriesId].Points.AddXY(measurementno + 1, Convert.ToDecimal(measurementPatch.Δe2000.ToString())); // Add XY point
             }
             AnalyzeChart.Series["Series" + seriesId].Color = ColorTranslator.FromHtml(measurementPatch.HtmlColor); // Set HTML color to series         
             AnalyzeChart.Series["Series" + seriesId].Points[index].ToolTip = measurementName;
