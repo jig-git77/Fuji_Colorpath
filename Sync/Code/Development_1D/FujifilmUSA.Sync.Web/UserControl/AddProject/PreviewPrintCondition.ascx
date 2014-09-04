@@ -155,7 +155,7 @@
                                     <tr>
                                         <td class="breakWord90">
                                             <span style="font-weight: bold;"><asp:Localize runat="server" 
-                                                Text="Target Print Condition" ID="locTargetPrintCondition"></asp:Localize></span>
+                                                Text="Target Print Condition" ID="locTargetPrintCondition" meta:resourcekey="locTargetPrintConditionResource1"></asp:Localize></span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
@@ -377,7 +377,7 @@
                             <div class="header">
                                 <div class="content">
                                     <div class="text" style="float: left">
-                                        <label><asp:Localize runat="server" Text="Metric Presets" ID="locMetricPresets"></asp:Localize></label>
+                                        <label><asp:Localize runat="server" Text="Metric Presets" ID="locMetricPresets" meta:resourcekey="locMetricPresetsResource1"></asp:Localize></label>
                                     </div>
                                     <div style="float: right">
                                     </div>

@@ -192,4 +192,10 @@
   <data name="locValidationMetricResource1.Text" xml:space="preserve">
     <value>Validation Metric</value>
   </data>
+  <data name="locMetricPresetsResource1.Text" xml:space="preserve">
+    <value>Metric Presets</value>
+  </data>
+  <data name="locTargetPrintConditionResource1.Text" xml:space="preserve">
+    <value>Target Print Condition</value>
+  </data>
 </root>

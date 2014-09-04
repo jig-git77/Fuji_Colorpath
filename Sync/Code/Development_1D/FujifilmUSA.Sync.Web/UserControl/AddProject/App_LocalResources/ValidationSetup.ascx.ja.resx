@@ -171,4 +171,7 @@
   <data name="locMeasurementSetupResource1.Text" xml:space="preserve">
     <value>測色設定</value>
   </data>
+  <data name="locDescriptionResource1.Text" xml:space="preserve">
+    <value>Description_ja:</value>
+  </data>
 </root>

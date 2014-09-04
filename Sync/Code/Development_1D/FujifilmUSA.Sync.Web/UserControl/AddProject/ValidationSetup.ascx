@@ -111,7 +111,7 @@ textarea {
                                                     <tr style="height: 44px;">
                                                         <td valign="top" style="width: 160px;">
                                                             <span><asp:Localize Text="Validation Metric:" runat="server" 
-                                                                ID="locValidationMetric"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
+                                                                ID="locValidationMetric" meta:resourcekey="locValidationMetricResource1"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
                                                         </td>
                                                         <td valign="top">
                                                             <div style="float: left;">
@@ -130,7 +130,10 @@ textarea {
                                                             </div>
                                                         </td> 
                                                         <td valign="top" >
-                                                             &nbsp;&nbsp;&nbsp;&nbsp; Description: 
+                                                             &nbsp;&nbsp;&nbsp;&nbsp;
+                                                             <asp:Localize Text="Description:" runat="server" 
+                                                                ID="locDescription" meta:resourcekey="locDescriptionResource1"></asp:Localize>
+                                                              
                                                         </td>  
                                                         <td valign="top" align="right" style="width:200px;">                                                           
                                                             <asp:TextBox ID="txtMTPDesc" runat="server" Text="" TextMode="MultiLine" Enabled="false"  Width="190px" ></asp:TextBox>

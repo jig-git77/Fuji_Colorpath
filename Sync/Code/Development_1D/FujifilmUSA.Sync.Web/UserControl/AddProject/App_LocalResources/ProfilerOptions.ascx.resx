@@ -420,4 +420,31 @@
   <data name="txtRangeResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="locAdvancedOptionsMetricResource1.Text" xml:space="preserve">
+    <value>Advanced Options</value>
+  </data>
+  <data name="locMetricPresetsResource1.Text" xml:space="preserve">
+    <value>Metric Presets</value>
+  </data>
+  <data name="locMPresetDescriptionResource1.Text" xml:space="preserve">
+    <value>Preset Description:</value>
+  </data>
+  <data name="locMSelectedPresetsResource1.Text" xml:space="preserve">
+    <value>Selected Presets:</value>
+  </data>
+  <data name="locTolerancesResource1.Text" xml:space="preserve">
+    <value>Tolerances</value>
+  </data>
+  <data name="locTVIBlackResource1" xml:space="preserve">
+    <value>K</value>
+  </data>
+  <data name="locTVICyanResource1.Text" xml:space="preserve">
+    <value>Cyan</value>
+  </data>
+  <data name="locTVIPatchResource1.Text" xml:space="preserve">
+    <value>Patch</value>
+  </data>
+  <data name="locTVITargetsResource1.Text" xml:space="preserve">
+    <value>TVI Targets</value>
+  </data>
 </root>

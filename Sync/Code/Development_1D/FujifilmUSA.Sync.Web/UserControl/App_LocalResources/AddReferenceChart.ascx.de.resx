@@ -219,4 +219,7 @@
   <data name="selectProjectType" xml:space="preserve">
     <value>-- Select Project Type --_de</value>
   </data>
+  <data name="locProjectResource1.Text" xml:space="preserve">
+    <value>Project Type_de:</value>
+  </data>
 </root>

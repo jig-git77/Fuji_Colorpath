@@ -171,4 +171,7 @@
   <data name="locMeasurementSetupResource1.Text" xml:space="preserve">
     <value>Measurement Setup</value>
   </data>
+  <data name="locDescriptionResource1.Text" xml:space="preserve">
+    <value>Description:</value>
+  </data>
 </root>

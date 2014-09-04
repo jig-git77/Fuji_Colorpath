@@ -499,7 +499,7 @@
                                 <div class="content">
                                     <div class="text" style="float: left;">
                                         <span><asp:Localize runat="server" Text="Metric Presets" 
-                                            ID="locMetricPresets"></asp:Localize></span>
+                                            ID="locMetricPresets" meta:resourcekey="locMetricPresetsResource1"></asp:Localize></span>
                                     </div>
                                     <div style="float: right">                
                                     </div>
@@ -513,7 +513,7 @@
                                     <tr>
                                         <td style="width: 100px">
                                             <span><asp:Localize runat="server" Text="Selected Presets:" 
-                                                ID="locMSelectedPresets"></asp:Localize></span>
+                                                ID="locMSelectedPresets" meta:resourcekey="locMSelectedPresetsResource1"></asp:Localize></span>
                                         </td>
                                         <td style="width: 450px">
                                             <asp:DropDownList ID="ddlMetricPresets" runat="server" CssClass="select" AutoPostBack="True" 
@@ -524,7 +524,7 @@
                                     <tr>
                                         <td valign="top" colspan="2">
                                             <span><asp:Localize runat="server" Text="Preset Description:" 
-                                                ID="locMPresetDescription"></asp:Localize></span>
+                                                ID="locMPresetDescription" meta:resourcekey="locMPresetDescriptionResource1" ></asp:Localize></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -562,7 +562,7 @@
                                                 &nbsp;</div>
                                             <label class="collapsibleContainerTitle">
                                                 <asp:Localize runat="server" Text="Advanced Options" 
-                                                ID="locAdvancedOptionsMetric"></asp:Localize></label>
+                                                ID="locAdvancedOptionsMetric" meta:resourcekey="locAdvancedOptionsMetricResource1"></asp:Localize></label>
                                         </div>
                                         <div class="clear">
                                         </div>
@@ -576,7 +576,7 @@
                                         <td valign="top" style="width: 250px; padding-right: 0px; border:1px Solid Gray;">  
                                                         <div id="dvTolerances" style="padding-left:5px;">
                                                              <label><b><asp:Localize runat="server" Text="Tolerances" 
-                                                                        ID="locTolerances"></asp:Localize></b></label>
+                                                                        ID="locTolerances" meta:resourcekey="locTolerancesResource1" ></asp:Localize></b></label>
                                                             <br />
                                                             <asp:ListView ID="lvTolerances" runat="server" ItemPlaceholderID="phItemTolerances">
                                                                 <LayoutTemplate>
@@ -607,7 +607,7 @@
                                           
                                                                
                                                         <div id="dvTVITargets" style="padding-left: 10px">
-                                                            <label><b><asp:Localize runat="server" Text="TVI Targets" ID="locTVITargets"></asp:Localize></b>
+                                                            <label><b><asp:Localize runat="server" Text="TVI Targets" ID="locTVITargets" meta:resourcekey="locTVITargetsResource1"></asp:Localize></b>
                                                             </label>
                                                             <br />
                                                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
@@ -619,13 +619,13 @@
                                                                 </tr>
                                                                 <tr style="line-height:15px;">
                                                                     <td align="left">
-                                                                        <span><b><asp:Localize ID="locTVIPatch" runat="server" Text="Patch"></asp:Localize></b></span>
+                                                                        <span><b><asp:Localize ID="locTVIPatch" runat="server" Text="Patch" meta:resourcekey="locTVIPatchResource1"></asp:Localize></b></span>
                                                                     </td>
                                                                     <td align="center">
-                                                                        <span><b><asp:Localize ID="locTVICyan" runat="server" Text="CMY"></asp:Localize></b></span>
+                                                                        <span><b><asp:Localize ID="locTVICyan" runat="server" Text="CMY" meta:resourcekey="locTVICyanResource1"></asp:Localize></b></span>
                                                                     </td>                                                             
                                                                     <td align="center">
-                                                                        <span><b><asp:Localize ID="locTVIBlack" runat="server" Text="K"></asp:Localize></b></span>
+                                                                        <span><b><asp:Localize ID="locTVIBlack" runat="server" Text="K" meta:resourcekey="locTVIBlackResource1"></asp:Localize></b></span>
                                                                     </td>
                                                                     <td></td>
                                                                     <td align="center">
