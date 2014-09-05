@@ -2897,31 +2897,31 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #endregion
 
                 //----If any TVI Tone value is 0, then hide that column from list (ex., either 20, 40, 60 and 80% can be display or either 25, 50, 75% display on list; not both at same time)
-                if (item["Tone20"].Text == "0.00")
+                if (item["Tone20"].Text == "0.00" || item["Tone20"].Text == "0,00") //"0,00" for Localization in German and French version of "0.00"
                 {
                     rgChromVariation.Columns[0].Visible = false;
                 }
-                if (item["Tone25"].Text == "0.00")
+                if (item["Tone25"].Text == "0.00" || item["Tone25"].Text == "0,00")
                 {
                     rgChromVariation.Columns[1].Visible = false;
                 }
-                if (item["Tone40"].Text == "0.00")
+                if (item["Tone40"].Text == "0.00" || item["Tone40"].Text == "0,00")
                 {
                     rgChromVariation.Columns[2].Visible = false;
                 }
-                if (item["Tone50"].Text == "0.00")
+                if (item["Tone50"].Text == "0.00" || item["Tone50"].Text == "0,00")
                 {
                     rgChromVariation.Columns[3].Visible = false;
                 }
-                if (item["Tone60"].Text == "0.00")
+                if (item["Tone60"].Text == "0.00" || item["Tone60"].Text == "0,00")
                 {
                     rgChromVariation.Columns[4].Visible = false;
                 }
-                if (item["Tone75"].Text == "0.00")
+                if (item["Tone75"].Text == "0.00" || item["Tone75"].Text == "0,00")
                 {
                     rgChromVariation.Columns[5].Visible = false;
                 }
-                if (item["Tone80"].Text == "0.00")
+                if (item["Tone80"].Text == "0.00" || item["Tone80"].Text == "0,00")
                 {
                     rgChromVariation.Columns[6].Visible = false;
                 }
