@@ -597,4 +597,28 @@
   <data name="TemplateFieldResource0.HeaderText" xml:space="preserve">
     <value>Name der Messung:</value>
   </data>
+  <data name="btnCGATSExportResource1.Text" xml:space="preserve">
+    <value>Export to CGATS_de</value>
+  </data>
+  <data name="btn_GeneratePDFResource1.ToolTip" xml:space="preserve">
+    <value>Download PDF_ja</value>
+  </data>
+  <data name="dvValidationSummaryResource1.EmptyDataText" xml:space="preserve">
+    <value>Averaging all measurements!_de</value>
+  </data>
+  <data name="locMeasurementIDResource1.Text" xml:space="preserve">
+    <value>MeasurementID_de:</value>
+  </data>
+  <data name="btnSpreadResource1.Text" xml:space="preserve">
+    <value>Spread_de</value>
+  </data>
+  <data name="btnTVIResource1.Text" xml:space="preserve">
+    <value>TVI_de</value>
+  </data>
+  <data name="locChromaticVariationResource1.Text" xml:space="preserve">
+    <value>Chromatic Variation_de</value>
+  </data>
+  <data name="percentPatchMetrics" xml:space="preserve">
+    <value>% Patch Metrics_de</value>
+  </data>
 </root>

@@ -294,4 +294,7 @@
   <data name="locMPresetDescriptionResource1.Text" xml:space="preserve">
     <value>Preset Description_ja:</value>
   </data>
+  <data name="lblWeightedTolerancesResource1.Text" xml:space="preserve">
+    <value>Use Weighted Tolerances_ja</value>
+  </data>
 </root>

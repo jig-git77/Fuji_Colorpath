@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,98 +59,167 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="metadata">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" />
-							</xsd:sequence>
-							<xsd:attribute name="name" use="required" type="xsd:string" />
-							<xsd:attribute name="type" type="xsd:string" />
-							<xsd:attribute name="mimetype" type="xsd:string" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="assembly">
-						<xsd:complexType>
-							<xsd:attribute name="alias" type="xsd:string" />
-							<xsd:attribute name="name" type="xsd:string" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="locAdvancedDownloadsResource1.Text" xml:space="preserve">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="locAdvancedDownloadsResource1.Text" xml:space="preserve">
     <value>Téléchargements Avancés</value>
   </data>
-	<data name="locDownloadChartAndPrintThroughWorkflowResource1.Text" xml:space="preserve">
+  <data name="locDownloadChartAndPrintThroughWorkflowResource1.Text" xml:space="preserve">
     <value>Télécharger la Charte et l'imprimer depuis le Flux de Travail :</value>
   </data>
-	<data name="locDownloadChartResource1.Text" xml:space="preserve">
+  <data name="locDownloadChartResource1.Text" xml:space="preserve">
     <value>Télécharger Charte</value>
   </data>
-	<data name="locDownloadDestinationICCResource1.Text" xml:space="preserve">
+  <data name="locDownloadDestinationICCResource1.Text" xml:space="preserve">
     <value>Télécharger ICC cible</value>
   </data>
-	<data name="locDownloadDLPAndChartResource1.Text" xml:space="preserve">
+  <data name="locDownloadDLPAndChartResource1.Text" xml:space="preserve">
     <value>Télécharger DLP et Charte</value>
   </data>
-	<data name="locDownloadDLPAndImplementWorkflowResource1.Text" xml:space="preserve">
+  <data name="locDownloadDLPAndImplementWorkflowResource1.Text" xml:space="preserve">
     <value>Télécharger le DLP et installer dans le Flux de Travail</value>
   </data>
-	<data name="locDownloadDLPResource1.Text" xml:space="preserve">
+  <data name="locDownloadDLPResource1.Text" xml:space="preserve">
     <value>Télécharger DLP</value>
   </data>
-	<data name="locDownloadResource1.Text" xml:space="preserve">
+  <data name="locDownloadResource1.Text" xml:space="preserve">
     <value>Télécharger</value>
   </data>
-	<data name="locMeasureResource1.Text" xml:space="preserve">
+  <data name="locMeasureResource1.Text" xml:space="preserve">
     <value>Mesure</value>
   </data>
-	<data name="dlpText" xml:space="preserve">
+  <data name="dlpText" xml:space="preserve">
     <value>DLP</value>
   </data>
-	<data name="downloadChartNotAvailableText" xml:space="preserve">
+  <data name="downloadChartNotAvailableText" xml:space="preserve">
     <value>Téléchargement de la Charte non disponible</value>
   </data>
-	<data name="downloadText" xml:space="preserve">
+  <data name="downloadText" xml:space="preserve">
     <value>Téléchargement - {0}</value>
+  </data>
+  <data name="BtnExportCurvesDeltaViewResource1.Text" xml:space="preserve">
+    <value>Export Delta_fr</value>
+  </data>
+  <data name="BtnExportCurvesExportViewResource1.Text" xml:space="preserve">
+    <value>Export Curves_fr</value>
+  </data>
+  <data name="CalderaResource1.Text" xml:space="preserve">
+    <value>Caldera</value>
+  </data>
+  <data name="Chk_CResource1.Text" xml:space="preserve">
+    <value>Cyan_fr</value>
+  </data>
+  <data name="Chk_KResource1.Text" xml:space="preserve">
+    <value>Black_fr</value>
+  </data>
+  <data name="Chk_MResource1.Text" xml:space="preserve">
+    <value>Magenta_fr</value>
+  </data>
+  <data name="Chk_YResource1.Text" xml:space="preserve">
+    <value>Yellow_fr</value>
+  </data>
+  <data name="ColCGCXResource1.Text" xml:space="preserve">
+    <value>ColorGate-CGCX</value>
+  </data>
+  <data name="ColTVIResource1.Text" xml:space="preserve">
+    <value>ColorGate-TVI</value>
+  </data>
+  <data name="fivepersResource1.Text" xml:space="preserve">
+    <value>5%</value>
+  </data>
+  <data name="HarmonyResource1.Text" xml:space="preserve">
+    <value>Harmony</value>
+  </data>
+  <data name="locCurveTypeResource1.Text" xml:space="preserve">
+    <value>Curve Type :_fr</value>
+  </data>
+  <data name="locDeltaViewResource1.Text" xml:space="preserve">
+    <value>ΔView_fr</value>
+  </data>
+  <data name="locExportViewResource1.Text" xml:space="preserve">
+    <value>Export View_fr</value>
+  </data>
+  <data name="locPreRunResource1.Text" xml:space="preserve">
+    <value>&amp;#916;Previous Run_fr</value>
+  </data>
+  <data name="locRefResource1.Text" xml:space="preserve">
+    <value>&amp;#916;Ref_fr</value>
+  </data>
+  <data name="NexusResource1.Text" xml:space="preserve">
+    <value>Nexus</value>
+  </data>
+  <data name="onepersResource1.Text" xml:space="preserve">
+    <value>1%</value>
+  </data>
+  <data name="OnyG7ImportResource1.Text" xml:space="preserve">
+    <value>Onyx G7 Import</value>
+  </data>
+  <data name="RampageResource1.Text" xml:space="preserve">
+    <value>Rampage</value>
+  </data>
+  <data name="tenpersResource1.Text" xml:space="preserve">
+    <value>10%</value>
+  </data>
+  <data name="XMFResource1.Text" xml:space="preserve">
+    <value>XMF</value>
+  </data>
+  <data name="GridBoundReference.HeaderText" xml:space="preserve">
+    <value>Reference%_fr</value>
   </data>
 </root>

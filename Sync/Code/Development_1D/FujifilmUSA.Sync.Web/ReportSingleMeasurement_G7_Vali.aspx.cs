@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class ReportSingleMeasurement_G7_Vali : System.Web.UI.Page
+    public partial class ReportSingleMeasurement_G7_Vali : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

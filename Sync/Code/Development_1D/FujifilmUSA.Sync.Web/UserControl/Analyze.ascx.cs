@@ -902,13 +902,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         CValue = Utilities.DecimalRound(Convert.ToDouble(DT[i].Density));
                         if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Cyan).ToString())
-                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "C", CValue.ToString(), DT[i].HtmlColor.ToString(), DT[i].Density.ToString(), DT[i].DensityLimit.ToString(), "Cyan", true);
+                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "C", CValue.ToString(), DT[i].HtmlColor.ToString(), DT[i].Density.ToString(), DT[i].DensityLimit.ToString(), GetResourceString(_recCyanPathMetrics), true);
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Magenta).ToString())
-                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "M", CValue.ToString(), DT[i].HtmlColor.ToString(), DT[i].Density.ToString(), DT[i].DensityLimit.ToString(), "Magenta", true);
+                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "M", CValue.ToString(), DT[i].HtmlColor.ToString(), DT[i].Density.ToString(), DT[i].DensityLimit.ToString(), GetResourceString(_recMagentaPathMetrics), true);
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Yellow).ToString())
-                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "Y", CValue.ToString(), DT[i].HtmlColor.ToString(), DT[i].Density.ToString(), DT[i].DensityLimit.ToString(), "Yellow", true);
+                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "Y", CValue.ToString(), DT[i].HtmlColor.ToString(), DT[i].Density.ToString(), DT[i].DensityLimit.ToString(), GetResourceString(_recYellowPathMetrics), true);
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Black).ToString())
-                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "K", CValue.ToString(), DT[i].HtmlColor.ToString(), DT[i].Density.ToString(), DT[i].DensityLimit.ToString(), "Black", true);
+                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "K", CValue.ToString(), DT[i].HtmlColor.ToString(), DT[i].Density.ToString(), DT[i].DensityLimit.ToString(), GetResourceString(_recBlackPathMetrics), true);
                     }
 
                 }
@@ -939,7 +939,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     #region Add Tooltip HTML
                     toolTip.Append("<table>");
-                    toolTip.Append("<tr><td><b>" + ColorName + " Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><b>" + ColorName + "</b></td></tr>");
                     toolTip.Append("<tr><td><table>");
                     toolTip.Append("<tr><td>Actual</td><td>");
                     toolTip.Append(Utilities.DecimalRound(Convert.ToDouble(_Actual)).ToString());
@@ -1545,7 +1545,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             #region Add Tooltip HTML
             StringBuilder toolTip = new StringBuilder();
             toolTip.Append("<table>");
-            toolTip.Append("<tr><td><b>" + _XValue + "% Patch Metrics</b></td></tr>");
+            toolTip.Append("<tr><td><b>" + _XValue + GetResourceString("percentPatchMetrics") + "</b></td></tr>");
             toolTip.Append("<tr><td><table>");
             if (!showCircle) { toolTip.Append("<tr><td>" + From_Delta + " Threshold : </td><td>"); }
             else { toolTip.Append("<tr><td>" + From_Delta + " : </td><td>"); };
@@ -2049,7 +2049,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     #region Add Tooltip HTML
                     StringBuilder toolTip = new StringBuilder();
                     toolTip.Append("<table>");
-                    toolTip.Append("<tr><td><b>" + ColorName + " " + _XValue + "% Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><b>" + ColorName + " " + _XValue + GetResourceString("percentPatchMetrics") + "</b></td></tr>");
                     toolTip.Append("<tr><td><table>");
                     toolTip.Append("<tr><td>Dot Gain : </td><td>");
                     toolTip.Append(_YValue);
@@ -2090,7 +2090,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     #region Add Tooltip HTML
                     StringBuilder toolTip = new StringBuilder();
                     toolTip.Append("<table>");
-                    toolTip.Append("<tr><td><b>" + ColorName + " " + _XValue + "% Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><b>" + ColorName + " " + _XValue + GetResourceString("percentPatchMetrics") + "</b></td></tr>");
                     toolTip.Append("<tr><td><table>");
                     toolTip.Append("<tr><td>Actual TVI:</td><td>");
                     toolTip.Append(_YValue);

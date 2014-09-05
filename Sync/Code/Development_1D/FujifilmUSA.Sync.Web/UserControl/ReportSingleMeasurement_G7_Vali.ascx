@@ -3,9 +3,8 @@
 <uc:Statusbar ID="fujiStatusbar" runat="server" />
 <asp:ImageButton ID="btn_GeneratePDF" 
     ImageUrl="../Images/Sync DLP Report_preview.jpg" runat="server" 
-    onclick="btn_GeneratePDF_Click" ToolTip="Download PDF" />
+    onclick="btn_GeneratePDF_Click" ToolTip="Download PDF" meta:resourcekey="btn_GeneratePDFResource1" />
 <br />
-
  <%------------------------ Report Generate Structure -------------------------%>
     <asp:Panel Style="width: 100%" ID="PNL_Result" runat="server" Visible="false">
         <div style="overflow: auto; height:400px;">

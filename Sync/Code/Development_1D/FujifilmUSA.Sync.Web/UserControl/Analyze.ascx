@@ -1919,8 +1919,8 @@
                 <table border="0" cellpadding="0" cellspacing="0" width="650px">
                     <tr>
                         <td>
-                            <asp:Button ID="btnTVI" runat="server" Text="TVI" OnClientClick="funTVIVisiblity(); return false;" />
-                            &nbsp;<asp:Button ID="btnSpread" OnClientClick="funSpreadVisiblity(); return false;"
+                            <asp:Button meta:resourcekey="btnTVIResource1" ID="btnTVI" runat="server" Text="TVI" OnClientClick="funTVIVisiblity(); return false;" />
+                            &nbsp;<asp:Button meta:resourcekey="btnSpreadResource1" ID="btnSpread" OnClientClick="funSpreadVisiblity(); return false;"
                                 runat="server" Text="Spread" />
                         </td>
                     </tr>
@@ -2203,7 +2203,7 @@
                                                  
                                                     <tr class="TRTABLEBOX">
                                                         <td class="TDTABLEBOXLEFT">
-                                                            <b>Chromatic Variation</b>
+                                                            <b><asp:Localize ID="locChromaticVariation" Text="Chromatic Variation" runat="server" meta:resourcekey="locChromaticVariationResource1"></asp:Localize></b>
                                                         </td>                                                       
                                                     </tr>
                                                     <tr>

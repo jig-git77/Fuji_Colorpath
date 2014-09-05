@@ -55,3 +55,7 @@ var locFailedReadExpectedSamplesError3 = "で異なります。";  //"Failed to 
 var locNoPrintInstalled = "ラベルプリンタが検出できませんでした。";
 var locErrorWhilePrintingLabel = "ラベル印刷に失敗しました。再度印刷してください。";
 var loc = "日本人_ja";
+
+//Download Software
+var locDownloadInstallMessage = "There is no plugin installed. Please install from here_ja.";
+var locDownloadPluginMessage = "Your installed plugin is outdated. Please install newer version_ja.";

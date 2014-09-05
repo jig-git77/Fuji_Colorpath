@@ -447,4 +447,7 @@
   <data name="locTVITargetsResource1.Text" xml:space="preserve">
     <value>TVI Targets</value>
   </data>
+  <data name="lblWeightedTolerancesResource1.Text" xml:space="preserve">
+    <value>Use Weighted Tolerances</value>
+  </data>
 </root>

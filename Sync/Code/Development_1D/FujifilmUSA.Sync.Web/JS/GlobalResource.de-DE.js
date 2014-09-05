@@ -55,3 +55,7 @@ var locFailedReadExpectedSamplesError3 = ")_de";  //"Failed to read expected num
 var locNoPrintInstalled = "No label writer printers available/installed._de";
 var locErrorWhilePrintingLabel = "Error while printing label. Please try again._de";
 var loc = "日本人_de";
+
+//Download Software
+var locDownloadInstallMessage = "There is no plugin installed. Please install from here._de";
+var locDownloadPluginMessage = "Your installed plugin is outdated. Please install newer version._de";

@@ -600,7 +600,7 @@
                                                                 </ItemTemplate>
                                                             </asp:ListView>
                                                             <br />
-                                                            <asp:CheckBox ID="chkWeightedTolerances" runat="server" />&nbsp;<asp:Label ID="lblWeightedTolerances" runat="server" Text="Use Weighted Tolerances"></asp:Label>
+                                                            <asp:CheckBox ID="chkWeightedTolerances" runat="server" />&nbsp;<asp:Label ID="lblWeightedTolerances" runat="server" Text="Use Weighted Tolerances" meta:resourcekey="lblWeightedTolerancesResource1"></asp:Label>
                                                         </div>
                                         </td>
                                         <td valign="top" style="width: 390px; border:1px Solid Gray;">

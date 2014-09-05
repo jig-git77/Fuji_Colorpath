@@ -54,3 +54,7 @@ var locFailedReadExpectedSamplesError3 = ")";  //"Failed to read expected number
 //Printing.js
 var locNoPrintInstalled = "No label writer printers available/installed.";
 var locErrorWhilePrintingLabel = "Error while printing label. Please try again.";
+
+//Download Software
+var locDownloadInstallMessage = "There is no plugin installed. Please install from here.";
+var locDownloadPluginMessage = "Your installed plugin is outdated. Please install newer version.";

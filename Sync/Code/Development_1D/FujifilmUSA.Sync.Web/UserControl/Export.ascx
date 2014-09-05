@@ -198,9 +198,9 @@
                                     <section class="inner_tab">
                                         <ul class="tabs">
                                             <li><span><a href="#tab1"><asp:Localize Text="Export View" ID="locExportView" 
-                                                    runat="server"></asp:Localize></a></span></li>                                                
+                                                    runat="server" meta:resourcekey="locExportViewResource1"></asp:Localize></a></span></li>                                                
                                             <li><span><a href="#tab2"><asp:Localize Text="ΔView" ID="locDeltaView" 
-                                                    runat="server"></asp:Localize></a></span></li>                                             
+                                                    runat="server" meta:resourcekey="locDeltaViewResource1"></asp:Localize></a></span></li>                                             
                                         </ul>                                                       
                                         <div class="clear"></div>
                                     </section>
@@ -211,30 +211,30 @@
                                                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                     <tr>
                                                         <td colspan="2" style="padding: 5px">
-                                                            Curve Type :
+                                                            <asp:Localize ID="locCurveType" runat="server"  Text="Curve Type :" meta:resourcekey="locCurveTypeResource1"></asp:Localize>
                                                             <asp:DropDownList ID="DdlCurveType" runat="server" Width="120px" CssClass="DROPDOWNLIST"
                                                                 AutoPostBack="True" OnSelectedIndexChanged="DdlCurveType_SelectedIndexChanged">
-                                                                <asp:ListItem Text="1%" Value="1"></asp:ListItem>
-                                                                <asp:ListItem Text="5%" Value="5"></asp:ListItem>
-                                                                <asp:ListItem Text="10%" Value="10"></asp:ListItem>
-                                                                <asp:ListItem Text="Rampage" Value="15"></asp:ListItem>
-                                                                <asp:ListItem Text="XMF" Value="25"></asp:ListItem>
-                                                                <asp:ListItem Text="Harmony" Value="35"></asp:ListItem>
-                                                                <asp:ListItem Text="Nexus" Value="45"></asp:ListItem>                                                                
-                                                                <asp:ListItem Text="Caldera" Value="55"></asp:ListItem>
-                                                                <asp:ListItem Text="ColorGate-TVI" Value="100"></asp:ListItem>
-                                                                <asp:ListItem Text="ColorGate-CGCX" Value="101"></asp:ListItem>   
-                                                                <asp:ListItem Text="Onyx G7 Import" Value="102"></asp:ListItem>                                                           
+                                                                <asp:ListItem Text="1%" meta:resourcekey="onepersResource1" Value="1"></asp:ListItem>
+                                                                <asp:ListItem Text="5%" meta:resourcekey="fivepersResource1" Value="5"></asp:ListItem>
+                                                                <asp:ListItem Text="10%" meta:resourcekey="tenpersResource1" Value="10"></asp:ListItem>
+                                                                <asp:ListItem Text="Rampage" meta:resourcekey="RampageResource1" Value="15"></asp:ListItem>
+                                                                <asp:ListItem Text="XMF" meta:resourcekey="XMFResource1" Value="25"></asp:ListItem>
+                                                                <asp:ListItem Text="Harmony" meta:resourcekey="HarmonyResource1" Value="35"></asp:ListItem>
+                                                                <asp:ListItem Text="Nexus" Value="45" meta:resourcekey="NexusResource1"></asp:ListItem>                                                                
+                                                                <asp:ListItem Text="Caldera" meta:resourcekey="CalderaResource1" Value="55"></asp:ListItem>
+                                                                <asp:ListItem Text="ColorGate-TVI" meta:resourcekey="ColTVIResource1" Value="100"></asp:ListItem>
+                                                                <asp:ListItem Text="ColorGate-CGCX" meta:resourcekey="ColCGCXResource1" Value="101"></asp:ListItem>   
+                                                                <asp:ListItem Text="Onyx G7 Import" meta:resourcekey="OnyG7ImportResource1" Value="102"></asp:ListItem>                                                           
                                                             </asp:DropDownList>
                                                             &nbsp;&nbsp;
                                                             <asp:CheckBox ID="Chk_C" runat="server" Text="Cyan" Checked="true" AutoPostBack="True"
-                                                                OnCheckedChanged="Chk_CheckedChanged" />&nbsp;
+                                                                OnCheckedChanged="Chk_CheckedChanged" meta:resourcekey="Chk_CResource1" />&nbsp;
                                                             <asp:CheckBox ID="Chk_M" runat="server" Text="Magenta" Checked="true" AutoPostBack="True"
-                                                                OnCheckedChanged="Chk_CheckedChanged" />&nbsp;
+                                                                OnCheckedChanged="Chk_CheckedChanged" meta:resourcekey="Chk_MResource1" />&nbsp;
                                                             <asp:CheckBox ID="Chk_Y" runat="server" Text="Yellow" Checked="true" AutoPostBack="True"
-                                                                OnCheckedChanged="Chk_CheckedChanged" />&nbsp;
+                                                                OnCheckedChanged="Chk_CheckedChanged" meta:resourcekey="Chk_YResource1" />&nbsp;
                                                             <asp:CheckBox ID="Chk_K" runat="server" Text="Black" Checked="true" AutoPostBack="True"
-                                                                OnCheckedChanged="Chk_CheckedChanged" />
+                                                                OnCheckedChanged="Chk_CheckedChanged" meta:resourcekey="Chk_KResource1" />
                                                         </td>
                                                     </tr>
                                                     <tr style="border: solid 1px;">
@@ -321,7 +321,7 @@
                                                     <tr>
                                                         <td colspan="2" align="right" style="padding-right: 15px; padding-top: 10px;">
                                                            &nbsp;<asp:Button ID="BtnExportCurvesExportView" runat="server" CssClass="BUTTON" Text="Export Curves"
-                                                                                                                OnClick="BtnExportCurvesExportView_Click" />
+                                                                                                                OnClick="BtnExportCurvesExportView_Click" meta:resourcekey="BtnExportCurvesExportViewResource1" />
                                                          </td>
                                                     </tr>
                                                 </table>                                                  
@@ -343,8 +343,8 @@
                                                           <asp:RadioButtonList ID="rbtnDetlaReflist" runat="server" AutoPostBack="True" 
                                                                 onselectedindexchanged="rbtnDetlaReflist_SelectedIndexChanged" 
                                                                 RepeatDirection="Horizontal">
-                                                            <asp:ListItem Text="&#916;Ref" Value="0" Selected="True"></asp:ListItem>
-                                                            <asp:ListItem Text="&#916;Previous Run" Value="1"></asp:ListItem>
+                                                            <asp:ListItem Text="&#916;Ref" Value="0" Selected="True" meta:resourcekey="locRefResource1"></asp:ListItem>
+                                                            <asp:ListItem Text="&#916;Previous Run" Value="1" meta:resourcekey="locPreRunResource1"></asp:ListItem>
                                                           </asp:RadioButtonList>                                                           
                                                         </td>
                                                      </tr>
@@ -432,7 +432,7 @@
                                                         <td colspan="2" align="right" style="padding-right: 15px; padding-top: 10px;">
                                                            
                                                             <asp:Button ID="BtnExportCurvesDeltaView" runat="server" CssClass="BUTTON" Text="Export Delta"
-                                                                OnClick="BtnExportCurvesDeltaView_Click" />
+                                                                OnClick="BtnExportCurvesDeltaView_Click" meta:resourcekey="BtnExportCurvesDeltaViewResource1" />
                                                         </td>
                                                     </tr>
                                                   </table>

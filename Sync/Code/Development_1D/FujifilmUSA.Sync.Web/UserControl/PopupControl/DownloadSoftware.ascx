@@ -77,16 +77,16 @@
     };
 
     $(document).ready(function () {
-        var message = '';
         var oWnd = GetRadWindow();
         var parentWindow = oWnd.BrowserWindow;
+        console.log(locDownloadInstallMessage);
         if (parentWindow.plugin().plugin_version == undefined) {
-            message = "There is no plugin installed. Please install from here.";
+            $('#<%= lblDownloadSoftwareMessage.ClientID %>').html(locDownloadInstallMessage);
         }
         else {
-            message = 'Your installed plugin is outdated. Please install newer version.';
+            $('#<%= lblDownloadSoftwareMessage.ClientID %>').html(locDownloadPluginMessage);
         }
-        $('#<%= lblDownloadSoftwareMessage.ClientID %>').html(message);
+
     });
 
     
@@ -106,7 +106,8 @@
                                      <table>
                                         <tr>
                                             <td class="Content" style="line-height: 24px; padding-left: 19px;">
-                                                <asp:Label runat="server" Text="Your installed plugin is outdated. Please install newer version." ID="lblDownloadSoftwareMessage" ></asp:Label>                                                                      
+                                                <%--<asp:Localize runat="server" ID="locOutdatedPlugin" Text="Your installed plugin is outdated. Please install newer version." meta:resourcekey="locOutdatedPluginResource1"></asp:Localize>--%>
+                                                <asp:Label runat="server" Text="Your installed plugin is outdated. Please install newer version." ID="lblDownloadSoftwareMessage"></asp:Label>
                                             </td>
                                         </tr>
                                     </table>
