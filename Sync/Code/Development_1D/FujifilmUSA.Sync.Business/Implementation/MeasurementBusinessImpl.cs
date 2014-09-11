@@ -1392,7 +1392,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         foreach (DataRow row in dsTVIData.Tables[0].Rows)
                         {
-                            AnswerTVI_CMY += DataReader.ReadInt(row, "TVI") + " " + DataReader.ReadString(row, "TVITarget");
+                            AnswerTVI_CMY += DataReader.ReadInt(row, "TVI") + " " + DataReader.ReadString(row, "TVITarget", true); //Prevent string to convert in localized string version, so passing hard coded USA english version for all conversions during values passing in Profiler in order to resolve error getting by passing wrong style of profiler options during ISO create DLP.
 
                             if (DataReader.ReadInt(row, "TVI") != 100)
                             {
@@ -1406,7 +1406,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         foreach (DataRow row in dsTVIData.Tables[1].Rows)
                         {
-                            AnswerTVI_K += DataReader.ReadInt(row, "TVI") + " " + DataReader.ReadString(row, "TVITarget");
+                            AnswerTVI_K += DataReader.ReadInt(row, "TVI") + " " + DataReader.ReadString(row, "TVITarget", true); //Prevent string to convert in localized string version, so passing hard coded USA english version for all conversions during values passing in Profiler in order to resolve error getting by passing wrong style of profiler options during ISO create DLP.
 
                             if (DataReader.ReadInt(row, "TVI") != 100)
                             {

@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using Microsoft.Practices.EnterpriseLibrary.Logging;
+using System.Globalization;
 
 namespace FujifilmUSA.Sync.Common
 {
@@ -23,7 +24,7 @@ namespace FujifilmUSA.Sync.Common
             else
                 sRetVal =
                     ignoreCulture ?
-                    Convert.ToString(objRow[columnName], System.Globalization.CultureInfo.CreateSpecificCulture("en-US")) :
+                    Convert.ToString(objRow[columnName], System.Globalization.CultureInfo.CreateSpecificCulture("en-US")) : //By default set English culture when we don't want to convert value in specific culture
                     objRow[columnName].ToString();
             return sRetVal;
         }
@@ -39,7 +40,6 @@ namespace FujifilmUSA.Sync.Common
             Boolean bRetVal = false;
             try
             {
-
                 if (objRow.IsNull(columnName))
                     return bRetVal;
                 else
@@ -89,7 +89,6 @@ namespace FujifilmUSA.Sync.Common
             short iRetVal = -1;
             try
             {
-
                 if (objRow.IsNull(columnName))
                     return iRetVal;
                 else
@@ -101,6 +100,8 @@ namespace FujifilmUSA.Sync.Common
             }
             return iRetVal;
         }
+
+
 
         /// <summary>
         /// To read a short column value from datarow.
@@ -114,7 +115,6 @@ namespace FujifilmUSA.Sync.Common
             short iRetVal = -1;
             try
             {
-
                 if (objRow[columnName, version].Equals(DBNull.Value))
                     return iRetVal;
                 else
@@ -125,7 +125,6 @@ namespace FujifilmUSA.Sync.Common
                 throw ex;
             }
             return iRetVal;
-
         }
 
         /// <summary>
@@ -150,7 +149,6 @@ namespace FujifilmUSA.Sync.Common
                 throw ex;
             }
             return iRetVal;
-
         }
 
         /// <summary>
@@ -174,7 +172,6 @@ namespace FujifilmUSA.Sync.Common
                 throw ex;
             }
             return iRetVal;
-
         }
 
         /// <summary>
@@ -198,7 +195,6 @@ namespace FujifilmUSA.Sync.Common
                 throw ex;
             }
             return iRetVal;
-
         }
 
         /// <summary>
@@ -212,7 +208,6 @@ namespace FujifilmUSA.Sync.Common
             long iRetVal = -1;
             try
             {
-
                 if (objRow.IsNull(columnName))
                     return iRetVal;
                 else
@@ -223,7 +218,6 @@ namespace FujifilmUSA.Sync.Common
                 throw ex;
             }
             return iRetVal;
-
         }
 
         /// <summary>
@@ -261,7 +255,6 @@ namespace FujifilmUSA.Sync.Common
             decimal dRetVal = -1;
             try
             {
-
                 if (objRow.IsNull(columnName))
                     return dRetVal;
                 else
@@ -310,7 +303,6 @@ namespace FujifilmUSA.Sync.Common
         }
 
 
-
         /// <summary>
         /// To read a DateTime column value from datarow.
         /// </summary>
@@ -326,6 +318,7 @@ namespace FujifilmUSA.Sync.Common
                 dtTime = Convert.ToDateTime(objRow[columnName]);
             return dtTime;
         }
+
 
         /// <summary>
         /// To read a integer column value from datarow.
@@ -380,6 +373,7 @@ namespace FujifilmUSA.Sync.Common
 
         }
 
+
         /// <summary>
         /// To read a double column value from datarow.
         /// </summary>
@@ -404,6 +398,7 @@ namespace FujifilmUSA.Sync.Common
             }
             return dRetVal;
         }
+
 
         /// <summary>
         /// To read a guid column value from datarow.
@@ -436,7 +431,6 @@ namespace FujifilmUSA.Sync.Common
         /// <returns>void</returns>
         public static void RemoveDbNull(object[] args)
         {
-
             try
             {
                 if (args != null)
@@ -471,7 +465,6 @@ namespace FujifilmUSA.Sync.Common
             return oRetValue;
 
         }
-
-
     }
 }
+
