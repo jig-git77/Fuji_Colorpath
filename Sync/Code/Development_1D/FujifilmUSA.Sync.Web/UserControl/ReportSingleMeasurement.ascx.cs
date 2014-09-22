@@ -45,7 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 btn_GeneratePDF.ImageUrl = "../Images/Sync DLP Report_preview.jpg";         //For Sync 4D Projects             
                 if (IsVerification)
                 {
-                    btn_GeneratePDF.ImageUrl = "../Images/Validation Report_preview.jpg";   //For Sync1D and Sync4D Validation Projects
+                    btn_GeneratePDF.ImageUrl = "../Images/Sync1D Report_preview_Vali.jpg";   //For Sync1D and Sync4D Validation Projects
                 }
                 else if (IsSync1DType)
                 {
@@ -77,11 +77,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             Common.ReportPDF objReportPDF = new Common.ReportPDF();
             objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_ISO;
+            if (ValidationType == 0) //For Default mode in Sync1D ISO, G7 or 4D validation project as choice of MTP
+            {
+                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_Default;
+            }
             objReportPDF.PDFPath = Server.MapPath("UploadFiles/Report_PDF/");
             objReportPDF.PDF_NAME = SessionManager.Instance.CurrentUser.UserId + "_ReportSingleMeasurement.PDF";
             objReportPDF.DS_Common = Ds;
             objReportPDF.From_ΔE = txt_dTE.Text;
             objReportPDF.DLPName = txt_DLPName.Text;
+            objReportPDF.IsValidation = IsVerification;
 
             if (IsVerification)
             {

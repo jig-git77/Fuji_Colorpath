@@ -484,7 +484,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType + "&IsAvgMeas=" + IsAverageOfMeasurements;
                 }
             }
-            else
+            else if (ValidationType == 2) //ISO type
             {
                 dvTab_G7.Visible = Tab_G7.Visible = false;
                 path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
@@ -492,6 +492,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType + "&IsAvgMeas=" + IsAverageOfMeasurements;
                 }
+            }
+            else //ValidationType = 0 for Default View type
+            {
+                dvTab_G7.Visible = Tab_G7.Visible = false;
+                path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
             }
             iframeGeneratePDFReport.Attributes.Add("src", path);
             iframeGeneratePDFReport.Style.Add("display", "");

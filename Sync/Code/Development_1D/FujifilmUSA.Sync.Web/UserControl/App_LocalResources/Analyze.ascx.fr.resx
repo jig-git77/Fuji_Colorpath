@@ -412,7 +412,7 @@
     <value>Analyse des Mesures :</value>
   </data>
   <data name="selectMeasurementMsg" xml:space="preserve">
-    <value>Vérification d'une mesure Obligatoire</value>
+    <value>Vérification d\x27une mesure Obligatoire</value>
   </data>
   <data name="validationAnalyzeHeaderText" xml:space="preserve">
     <value>Validation - Analyse</value>

@@ -79,7 +79,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             objReportPDF.DS_Common = Ds;
             objReportPDF.From_ΔE = txt_dTE.Text;
             objReportPDF.DLPName = txt_DLPName.Text;
-            objReportPDF.IsValidation = true;
+            objReportPDF.IsValidation = IsVerification;
             ValidationType = Convert.ToInt32(txt_Vali_Type.Text);
 
             if (ValidationType == 1)

@@ -50,12 +50,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 LoadProjectInfoFromSession();
             }
-            //if (Page.IsPostBack == false)
-            //{
-            //    //---Only load project details from session when page is loaded first time---//
-            //    LoadProjectInfoFromSession();
-            //}
-            
         }
         #endregion
 
@@ -198,6 +192,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
             cmbDensityType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.DensityType).ToString(); //DensityType Selection
+            BindPCSDataType();
             cmbPCSDataType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.PCSDataTypes).ToString(); //PCSDataType Selection
         }
 
@@ -282,8 +277,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindPCSDataType()
         {
-            if (cmbPCSDataType.DataSource != null) return;
-
             cmbPCSDataType.DataValueField = "Key";
             cmbPCSDataType.DataTextField = "Value";
             cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>();

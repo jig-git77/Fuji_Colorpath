@@ -148,6 +148,7 @@
     <Content Include="Images\InkOptimizeSource.png" />
     <Content Include="Images\Sync1D Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview_G7.jpg" />
+    <Content Include="Images\Sync1D Report_preview_Vali.jpg" />
     <Content Include="Images\Sync1D.png" />
     <Content Include="Images\Sync1D_Certified.png" />
     <Content Include="Images\DymoPrintPreviewIcon.png" />
@@ -271,6 +272,7 @@
     <Content Include="JS\MenuBar.js" />
     <Content Include="SourceProfileManagement.aspx" />
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
+    <Content Include="Templates\PrepressSingleMeasurement_Default.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_G7.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_ISO.htm" />
     <Content Include="Templates\style.css" />
@@ -2451,7 +2453,9 @@
     <Content Include="UserControl\App_LocalResources\AdminMenuBar.ascx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\Analyze.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\Analyze.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\ApplicationError.ascx.fr.resx" />
@@ -2681,7 +2685,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
