@@ -107,6 +107,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 else
                 {
                     fujiStatusbar.DisplayMessage(GetResourceString(_recinvalidSecurityAns), false);
+                    return;
                 }
             }
             else if (Request.QueryString["type"] != null && Request.QueryString["type"].StartsWith("fr"))
