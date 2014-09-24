@@ -51,6 +51,20 @@ namespace ColorPathSync.Business
 
                 CrossXColor.CLSetProfilerData(profiler, request.DCSData.Length / 4, DCSDataSet, PCSDataSet);
 
+                //----Set Specific parameters for optimize run 1 to n.....(Like set source profile, not for initial 0 run)
+                if (request.DeviceLinkProfile != null && request.UseDLP == true)
+                {
+                    //Declare a byte array to load profile from the database 
+                    byte[] profData1 = null;
+                    profData1 = request.DeviceLinkProfile.ProfileData;
+
+                    //copy byte array into unmangaed buffer (in memory profile)
+                    CopyProfileInMemory(profData1, ref srcProf);
+
+                    //Set the source profile 
+                    CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", srcProf);
+                }
+
                 // calc profile in memory
                 err = CrossXColor.CLCalcProfile(profiler, prof);
                 if (err != 0)
@@ -101,20 +115,6 @@ namespace ColorPathSync.Business
                     response.Key[i] = k[i];
                 }
                 response.DeviceLinkProfile.ProfileData = profData;
-
-                //----Set Specific parameters for optimize run 1 to n.....(Like set source profile, not for initial 0 run)
-                if (request.DeviceLinkProfile != null || request.UseDLP == true)
-                {
-                    //Declare a byte array to load profile from the database 
-                    byte[] profData1 = null;
-                    profData1 = request.DeviceLinkProfile.ProfileData;
-
-                    //copy byte array into unmangaed buffer (in memory profile)
-                    CopyProfileInMemory(profData1, ref srcProf);
-
-                    //Set the source profile 
-                    CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", srcProf);
-                }
 
                 return response;
             }
