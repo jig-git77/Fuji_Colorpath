@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Sync4DService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://pateldmac.enterprise.enovationgraphics.com/ColorOrganizerService/Sync4D.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://pateldmac.enterprise.enovationgraphics.com/ColorOrganizerService/Sync4D.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" />
+      <xsd:import schemaLocation="http://pateldmac.enterprise.enovationgraphics.com/ColorOrganizerService/Sync4D.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://pateldmac.enterprise.enovationgraphics.com/ColorOrganizerService/Sync4D.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" />
+      <xsd:import schemaLocation="http://pateldmac.enterprise.enovationgraphics.com/ColorOrganizerService/Sync4D.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" />
+      <xsd:import schemaLocation="http://pateldmac.enterprise.enovationgraphics.com/ColorOrganizerService/Sync4D.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Service.Common.DataContracts" />
+      <xsd:import schemaLocation="http://pateldmac.enterprise.enovationgraphics.com/ColorOrganizerService/Sync4D.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts" />
+      <xsd:import schemaLocation="http://pateldmac.enterprise.enovationgraphics.com/ColorOrganizerService/Sync4D.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts.Enums" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ISync4DServiceContract_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_Ping_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q1:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetDeviceList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeviceList" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetDeviceList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeviceListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetDeviceList_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q2:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetReferenceChartList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReferenceChartList" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetReferenceChartList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReferenceChartListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetReferenceChartList_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q3:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetReferenceChartData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReferenceChartData" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetReferenceChartData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReferenceChartDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetReferenceChartData_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q4:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetProjectInformation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProjectInformation" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetProjectInformation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProjectInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetProjectInformation_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q5:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProfile" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetProfile_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q6:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_StoreTempProjectInformation_InputMessage">
+    <wsdl:part name="parameters" element="tns:StoreTempProjectInformation" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_StoreTempProjectInformation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StoreTempProjectInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_StoreTempProjectInformation_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q7:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_CheckUserCredentials_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckUserCredentials" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_CheckUserCredentials_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckUserCredentialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_CheckUserCredentials_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q8:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_StoreTempValidationInformation_InputMessage">
+    <wsdl:part name="parameters" element="tns:StoreTempValidationInformation" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_StoreTempValidationInformation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StoreTempValidationInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_StoreTempValidationInformation_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q9:ServiceFault" />
+  </wsdl:message>
+  <wsdl:portType name="ISync4DServiceContract">
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISync4DServiceContract/Ping" message="tns:ISync4DServiceContract_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISync4DServiceContract/PingResponse" message="tns:ISync4DServiceContract_Ping_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISync4DServiceContract/PingServiceFaultFault" name="ServiceFaultFault" message="tns:ISync4DServiceContract_Ping_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviceList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetDeviceList" message="tns:ISync4DServiceContract_GetDeviceList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetDeviceListResponse" message="tns:ISync4DServiceContract_GetDeviceList_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetDeviceListServiceFaultFault" name="ServiceFaultFault" message="tns:ISync4DServiceContract_GetDeviceList_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceChartList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartList" message="tns:ISync4DServiceContract_GetReferenceChartList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartListResponse" message="tns:ISync4DServiceContract_GetReferenceChartList_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartListServiceFaultFault" name="ServiceFaultFault" message="tns:ISync4DServiceContract_GetReferenceChartList_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceChartData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartData" message="tns:ISync4DServiceContract_GetReferenceChartData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartDataResponse" message="tns:ISync4DServiceContract_GetReferenceChartData_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartDataServiceFaultFault" name="ServiceFaultFault" message="tns:ISync4DServiceContract_GetReferenceChartData_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectInformation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetProjectInformation" message="tns:ISync4DServiceContract_GetProjectInformation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetProjectInformationResponse" message="tns:ISync4DServiceContract_GetProjectInformation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetProjectInformationServiceFaultFault" name="ServiceFaultFault" message="tns:ISync4DServiceContract_GetProjectInformation_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetProfile" message="tns:ISync4DServiceContract_GetProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetProfileResponse" message="tns:ISync4DServiceContract_GetProfile_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetProfileServiceFaultFault" name="ServiceFaultFault" message="tns:ISync4DServiceContract_GetProfile_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StoreTempProjectInformation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISync4DServiceContract/StoreTempProjectInformation" message="tns:ISync4DServiceContract_StoreTempProjectInformation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISync4DServiceContract/StoreTempProjectInformationResponse" message="tns:ISync4DServiceContract_StoreTempProjectInformation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISync4DServiceContract/StoreTempProjectInformationServiceFaultFault" name="ServiceFaultFault" message="tns:ISync4DServiceContract_StoreTempProjectInformation_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserCredentials">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISync4DServiceContract/CheckUserCredentials" message="tns:ISync4DServiceContract_CheckUserCredentials_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISync4DServiceContract/CheckUserCredentialsResponse" message="tns:ISync4DServiceContract_CheckUserCredentials_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISync4DServiceContract/CheckUserCredentialsServiceFaultFault" name="ServiceFaultFault" message="tns:ISync4DServiceContract_CheckUserCredentials_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StoreTempValidationInformation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISync4DServiceContract/StoreTempValidationInformation" message="tns:ISync4DServiceContract_StoreTempValidationInformation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISync4DServiceContract/StoreTempValidationInformationResponse" message="tns:ISync4DServiceContract_StoreTempValidationInformation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISync4DServiceContract/StoreTempValidationInformationServiceFaultFault" name="ServiceFaultFault" message="tns:ISync4DServiceContract_StoreTempValidationInformation_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ISync4DServiceContract" type="tns:ISync4DServiceContract">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://tempuri.org/ISync4DServiceContract/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviceList">
+      <soap:operation soapAction="http://tempuri.org/ISync4DServiceContract/GetDeviceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceChartList">
+      <soap:operation soapAction="http://tempuri.org/ISync4DServiceContract/GetReferenceChartList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceChartData">
+      <soap:operation soapAction="http://tempuri.org/ISync4DServiceContract/GetReferenceChartData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectInformation">
+      <soap:operation soapAction="http://tempuri.org/ISync4DServiceContract/GetProjectInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetProfile">
+      <soap:operation soapAction="http://tempuri.org/ISync4DServiceContract/GetProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="StoreTempProjectInformation">
+      <soap:operation soapAction="http://tempuri.org/ISync4DServiceContract/StoreTempProjectInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserCredentials">
+      <soap:operation soapAction="http://tempuri.org/ISync4DServiceContract/CheckUserCredentials" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="StoreTempValidationInformation">
+      <soap:operation soapAction="http://tempuri.org/ISync4DServiceContract/StoreTempValidationInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Sync4DService">
+    <wsdl:port name="BasicHttpBinding_ISync4DServiceContract" binding="tns:BasicHttpBinding_ISync4DServiceContract">
+      <soap:address location="http://pateldmac.enterprise.enovationgraphics.com/ColorOrganizerService/Sync4D.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

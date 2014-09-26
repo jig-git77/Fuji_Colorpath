@@ -19,6 +19,9 @@ namespace FujifilmUSA.ColorOrganizerService.DataContracts
         I1Isis=2,
 
         [EnumMember]
-        I1IO=3
+        I1IO=3,
+
+        [EnumMember]
+        LFP=6
     }
 }

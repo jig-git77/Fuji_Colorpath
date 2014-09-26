@@ -148,31 +148,31 @@
     <None Include="Service References\Sync4DService\ServiceDemo.Sync4DService.StoreTempValidationInformationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\Sync4DService\Sync4D.xsd">
+    <None Include="Service References\Sync4DService\Sync4D10.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Sync4DService\Sync4D1.xsd">
+    <None Include="Service References\Sync4DService\Sync4D11.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Sync4DService\Sync4D2.xsd">
+    <None Include="Service References\Sync4DService\Sync4D12.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Sync4DService\Sync4D3.xsd">
+    <None Include="Service References\Sync4DService\Sync4D13.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Sync4DService\Sync4D4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Sync4DService\Sync4D5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Sync4DService\Sync4D6.xsd">
+    <None Include="Service References\Sync4DService\Sync4D14.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\Sync4DService\Sync4D7.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Sync4DService\Sync4DService.wsdl" />
+    <None Include="Service References\Sync4DService\Sync4D8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4DService1.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -215,7 +215,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\Sync4DService\Sync4D.disco" />
+    <None Include="Service References\Sync4DService\Sync4D1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
