@@ -24,10 +24,13 @@ var locInvalidMeasurementDevice = "Status : This is not valid licensed measureme
 
 //i1read.js
 var locStatusText = "Status :_de"; //"Status : {0}_de";
-var locCalibrationSuccessAndClickMeasureButton = "Status : Calibration Successful, Click on 'Measure Chart' button._de";
-var locPlaceCradlePressI1Trigger = "Please place i1Pro in the calibration cradle and press the i1 trigger._de";
-var locCalibrationInProgress = "Calibration In Progress._de";
-var locStripReadInProgress = "Strip read in progress._de";
+var locCalibrationSuccessAndClickMeasureButton = "Status : Calibration Successful, Click on 'Measure Chart' button._fr";
+var locPlaceCradlePressI1Trigger = "Please place i1Pro in the calibration cradle and press the i1 trigger._fr";
+var locCalibrationInProgress = "Calibration In Progress._fr";
+var locWhiteCalibrationSuccessAndClickMeasureButton = "Status : White point measurement Successful, Click on 'Measure Chart' button._fr";
+var locCloseExactTrigger = "Please place the eXact device on white substrate for the color chart and measure._fr";
+var locWhiteCalibrationInProgress = "White point measurement in progress._fr";
+var locStripReadInProgress = "Strip read in progress._fr";
 var locPlaceScannerAndSlideAcrossStrip1 = "Please place the scanner over the strip_de";   //"Please place the scanner over the strip {0}.press and hold the trigger while sliding the scanner across the strip._de";
 var locPlaceScannerAndSlideAcrossStrip2 = ".press and hold the trigger while sliding the scanner across the strip._de";
 var locPlaceChartiOTable = "Please place your chart on the iO table and click in this window to continue_de";

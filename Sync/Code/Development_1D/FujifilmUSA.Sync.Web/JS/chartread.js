@@ -257,7 +257,14 @@ function presentScannerList(ScannerList) {
         }
         else {
             g_ScannerList = ScannerList[i];
-            if (g_ScannerList["Requirements"].indexOf("RequiresCalibration") >= 0) {
+            if (g_ScannerList["Requirements"].indexOf("RequiresSubstrate") >= 0) {
+                jQuery("[id*='lblMessage']").css('color', 'Black');
+                jQuery("[id*='lblMessage']").html(locPleaseMeasWhite);
+                jQuery("[id*='btnCalibrate']").css('display', '');
+                return;
+            
+            }
+            else if  (g_ScannerList["Requirements"].indexOf("RequiresCalibration") >= 0) {
                 jQuery("[id*='lblMessage']").css('color', 'Black');
                 jQuery("[id*='lblMessage']").html(locPleaseCalibrate);
                 jQuery("[id*='btnCalibrate']").css('display', '');

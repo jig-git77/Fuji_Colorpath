@@ -88,13 +88,18 @@ function SetChartResult(objChart) {
 
         // Remember i1 charts are generally read vertical so if you look at
         // the printout sideways it looks like it would be 21x40 with the columns named
-            
-        if (InstrumentTypeID == 6) {
+
+        if (InstrumentTypeID == 6) {  //For LFP Instrument Type
             g_Chart["ChartType"] = "AutoLocation";
             g_Chart["Mode"] = "Contactless";
             //patch around the setting of density for the LFP, here set to StatusT
             g_Chart["ReadCS"] = "CIELab,CIEXYZ,sRGB,DensityT,Spectral";
             g_Chart["NumPoints"] = 1; //1,2,3,4,5
+        }
+        else if (InstrumentTypeID == 7) { //For eXact Instrument Type
+            //hard coded setting for density now, here set to StatusT
+            g_Chart["ReadCS"] = "CIELab,CIEXYZ,sRGB,DensityT";
+            g_Chart["DeviceSettings"]["ResultIndexKey"] = "M0";
         }
         else {
             g_Chart["ChartType"] = "Native";

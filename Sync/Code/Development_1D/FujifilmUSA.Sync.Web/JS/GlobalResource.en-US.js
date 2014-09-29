@@ -14,6 +14,7 @@ var locScanningDeviceUnplugged = "Status : Scanning Device has been unplugged.";
 var locDeviceSerialNotFound1 = "Status : Device Serial:"; //"Status : Device Serial: {0} not found.";
 var locDeviceSerialNotFound2 = "not found."; //"Status : Device Serial: {0} not found.";
 var locPleaseCalibrate = "Status : Please calibrate.";
+var locPleaseMeasWhite = "Status : Please calibrate to white reference.";
 var locClickMeasureButton = "Status : Click on 'Measure Chart' button.";
 var locNoScannerList = "Failed to request scanner list:"; //"Failed to request scanner list: {0}";
 var locErrorText = "Error";
@@ -27,6 +28,11 @@ var locStatusText = "Status :"; //"Status : {0}";
 var locCalibrationSuccessAndClickMeasureButton = "Status : Calibration Successful, Click on 'Measure Chart' button.";
 var locPlaceCradlePressI1Trigger = "Please place i1Pro in the calibration cradle and press the i1 trigger.";
 var locCalibrationInProgress = "Calibration In Progress.";
+
+var locWhiteCalibrationSuccessAndClickMeasureButton = "Status : White point measurement Successful, Click on 'Measure Chart' button.";
+var locCloseExactTrigger = "Please place the eXact device on white substrate for the color chart and measure.";
+var locWhiteCalibrationInProgress = "White point measurement in progress.";
+
 var locStripReadInProgress = "Strip read in progress.";
 var locPlaceScannerAndSlideAcrossStrip1 = "Please place the scanner over the strip";   //"Please place the scanner over the strip {0}.press and hold the trigger while sliding the scanner across the strip.";
 var locPlaceScannerAndSlideAcrossStrip2 = ".press and hold the trigger while sliding the scanner across the strip.";

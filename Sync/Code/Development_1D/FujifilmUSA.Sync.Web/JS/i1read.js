@@ -1,6 +1,9 @@
 ﻿// This function presents the EyeOne calibrate query.  We do this
 // in javascript so the web app can change everything including
 // the language of the query.
+// This function presents the EyeOne calibrate query.  We do this
+// in javascript so the web app can change everything including
+// the language of the query.
 function presentCalibrateDialog(scanner, myQuery) {
     // Everything needed for the generic presentQuery is already 
     // filled in, however you can use this to change the actual
@@ -12,6 +15,13 @@ function presentCalibrateDialog(scanner, myQuery) {
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html(locStatusText + " " + myQuery["Prompt"]);
     ControlDisability(0, false, 1, true, 0, false, 0, false); //------Make Measure button disable during Calbration
+
+    if (scanner["Type"] == "eXact") {
+        OnQuery(myQuery);
+    }
+
+
+
 }
 //
 // The "Done" callback functions take three args.  The scanner, the message
@@ -26,50 +36,72 @@ function presentCalibrateDone(scanner, msg, final) {
     // the browser thread to join with the calibrate thread to
     // keep the process state tidy.
     // the library that the poll thread can be 
-
+ 
+  
     if (typeof final != "undefined") {
         eval(final);
     }
     //
     // Now let the user know how things ended up.
+  
     if (typeof msg == "string") {
+       
         // This would be either "CANCELLED" or "ERROR: ..."
         // for CANCELLED, you might just want to do nothing.
-        if (!(msg == "OK" || msg == "CANCELLED")) {
+        if (!(msg == "OK" || msg == "CANCELLED")){
+        
             jQuery("[id*='lblMessage']").css('color', 'Black');
             jQuery("[id*='lblMessage']").html(locStatusText + " " + msg);
             ControlDisability(1, false, 0, false, 0, false, 0, false); //------Make Calibrate button enabled on error
         }
         else {
-            jQuery("[id*='lblMessage']").css('color', 'Black');
-            jQuery("[id*='lblMessage']").html(locCalibrationSuccessAndClickMeasureButton);
-            jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
-            jQuery("[id*='btnCancelMeasurement']").css('display', '');
-            jQuery("[id*='btnRewindMeasurement']").css('display', '');
-            ControlDisability(1, false, 1, false, 0, false, 0, false); //------Make Measure button & Calibrate button enabled after calibration done
+
+            if (scanner["Type"] == "eXact") {
+
+                jQuery("[id*='lblMessage']").css('color', 'Black');
+                jQuery("[id*='lblMessage']").html(locWhiteCalibrationSuccessAndClickMeasureButton);
+                jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
+                jQuery("[id*='btnCancelMeasurement']").css('display', '');
+                ControlDisability(1, false, 1, false, 0, false, 0, false); //------Make Measure button & Calibrate button enabled after calibration done
+            }
+            else {
+                jQuery("[id*='lblMessage']").css('color', 'Black');
+                jQuery("[id*='lblMessage']").html(locCalibrationSuccessAndClickMeasureButton);
+                jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
+                jQuery("[id*='btnCancelMeasurement']").css('display', '');
+                jQuery("[id*='btnRewindMeasurement']").css('display', '');
+                ControlDisability(1, false, 1, false, 0, false, 0, false); //------Make Measure button & Calibrate button enabled after calibration done
+            }
         }
     }
 }
+//
 // Calibrate the device.  We pass in the scanner to calibrate,
 //  a callback to present instructions to the user, and a callback
 // to notify the user that the calibration is done.
 function calibrateDevice(scanner) {
 
     var myQuery = new Object();
-    myQuery["CALIBRATEINSTRUCTIONS"] = locPlaceCradlePressI1Trigger;
-    myQuery["CALIBRATEACKNOWLEDGED"] = locCalibrationInProgress;
+    if (scanner["Type"] == "eXact") {
+        myQuery["CALIBRATEINSTRUCTIONS"] = locWhiteCalibrationSuccessAndClickMeasureButton;
+        myQuery["CALIBRATEACKNOWLEDGED"] = "Please Follow the directions on the eXact Device";
 
-    // scanner calibration for i1 supports "Mode", and "SampleSource".  Mode allows you to calibrate for
-    // "Point","Strip" or "Both".  
-    // SampleSource sets either "Paper for reflectance,"LCD" or "CRT" for monitor 
-    scanner["Mode"] = "Both"
-    scanner["SampleSource"] = "Paper";  // Choices are Paper, LCD or CRT and for the latter the chart must have 1 sample (spot)
+    }
+    else {
+        myQuery["CALIBRATEINSTRUCTIONS"] = locPlaceCradlePressI1Trigger;
+        myQuery["CALIBRATEACKNOWLEDGED"] = locCalibrationInProgress;
+        // scanner calibration for i1 supports "Mode", and "SampleSource".  Mode allows you to calibrate for
+        // "Point","Strip" or "Both".  
+        // SampleSource sets either "Paper for reflectance,"LCD" or "CRT" for monitor 
+        scanner["Mode"] = "Both"
+        scanner["SampleSource"] = "Paper";  // Choices are Paper, LCD or CRT and for the latter the chart must have 1 sample (spot)
+    }
     var result = plugin().calibrateDevice(scanner, myQuery, presentCalibrateDialog, presentCalibrateDone);
     if (result != "OK") {
         jQuery("[id*='lblMessage']").css('color', 'Red');
         jQuery("[id*='lblMessage']").html(locScanningDeviceUnplugged);
     }
-}
+}   
 // This function presents the EyeOne calibrate query.  We do this
 // in javascript so the web app can change everything including
 // the language of the query.
@@ -175,24 +207,31 @@ function OnQuery(question) {
     //$('modalWindow').onclick = function() { OnModalWindowClick(question) };
     // Change the text in the window then display it
     var newHTML = question['Prompt'];
+   // alert(question["Request"]);
+    //alert(question["Request"]);
     if (question["Request"] == "GETPOSINSTRUCTIONS") {
 
-        alert(newHTML)
+       // alert(newHTML)
         if (question["Answers"] == "NONE") {
             // If you can't answer it here, then just return
             return;
         }
-
+        
         // Notify the user that we are done
         question["Result"] = "OK";
         plugin().queryDone(question);
     }
-    else {
 
+    else if (question["Request"] == "CALIBRATEINSTRUCTIONS") {
+    
         // myQuery["Prompt"] = myQuery[myQuery["Request"]];
         jQuery("[id*='lblMessage']").css('color', 'Black');
         jQuery("[id*='lblMessage']").html(locStatusText + " " + newHTML);
-
+        if (question["Request"] == "CALIBRATEINSTRUCTIONS") {
+            // Notify the user that we are done
+            question["Result"] = "OK";
+            plugin().queryDone(question);
+        }
     }
 }
 
@@ -216,8 +255,7 @@ function presentGetPosDone(scanner, query, final) {
 
             jQuery("[id*='lblMessage']").css('color', 'Black');
             jQuery("[id*='lblMessage']").html(locClickMeasureButton);
-            refreshCanvas()
-
+            refreshCanvas();
         }
 
         return;
@@ -437,11 +475,17 @@ function presentScanDonei1(scanner, mychart, final) {
     }
     g_Chart["Result"] = g_Chart["Result"].concat(results);
 
-   
+
     for (ind = 0; ind < g_Chart["NumberOfColumns"]; ind++) {
         var LABResults = results[ind]["CIELab"];
         var XYZResults = results[ind]["CIEXYZ"];
-        var DensityResults = results[ind]["Density"];
+
+        if (scanner["Type"] == "eXact" || scanner["Type"] == "SpectroLFP") {
+            var DensityResults = results[ind]["DensityT"];
+        }
+        else {
+            var DensityResults = results[ind]["Density"];
+        }
         //var SpectralResults = results[ind]["Spectral"];
 
         var _Density = new Density(ClipDecimal(DensityResults[0]), ClipDecimal(DensityResults[1]), ClipDecimal(DensityResults[2]), ClipDecimal(DensityResults[3]));
