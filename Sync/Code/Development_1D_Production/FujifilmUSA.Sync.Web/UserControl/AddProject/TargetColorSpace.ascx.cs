@@ -50,12 +50,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 LoadProjectInfoFromSession();
             }
-            //if (Page.IsPostBack == false)
-            //{
-            //    //---Only load project details from session when page is loaded first time---//
-            //    LoadProjectInfoFromSession();
-            //}
-            
         }
         #endregion
 
@@ -90,10 +84,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
             }
             else
-            { 
-                if(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
+            {
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
                     SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
-                else if(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
+                else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
                     SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.InkOptimization;
             }
             SessionManager.Instance.CurrentProject.DensityType = (DensityTypes)Convert.ToInt16(cmbDensityType.SelectedValue);  //DensityType Selection 
@@ -102,7 +96,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
 
-           
+
         }
 
         protected void cmbPrintStandardType_SelectedIndexChanged(object sender, EventArgs e)
@@ -113,7 +107,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblSourceProfileName.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileName;
             }
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                 cmbProjectType_SelectedIndexChanged(null, null);
+                cmbProjectType_SelectedIndexChanged(null, null);
         }
 
         protected void cmbProjectType_SelectedIndexChanged(object sender, EventArgs e)
@@ -198,6 +192,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
             cmbDensityType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.DensityType).ToString(); //DensityType Selection
+            BindPCSDataType();
             cmbPCSDataType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.PCSDataTypes).ToString(); //PCSDataType Selection
         }
 
@@ -282,12 +277,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindPCSDataType()
         {
-            if (cmbPCSDataType.DataSource != null) return;
-
             cmbPCSDataType.DataValueField = "Key";
             cmbPCSDataType.DataTextField = "Value";
             cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>();
-     
+
             if (cmbProjectType.SelectedItem.Text == "G7" || SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D) //If 1D then G7 type, or for all other Projects 4D,etc...
             {
                 cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>().Where(p => p.Value != Common.Utilities.GetEnumDescriptionAttributeValue(PCSDataTypes.Density)).ToDictionary(p => p.Key, p => p.Value);
@@ -313,13 +306,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D);
             }
         }
-        #endregion        
+        #endregion
 
         protected void btn_PaperClear_Click(object sender, EventArgs e)
         {
             BindTargetLAB();    //Apply old Target LAB from Main look up table
-            btn_PaperApply.Visible = true; 
+            btn_PaperApply.Visible = true;
             btn_PaperClear.Visible = false;
-        }      
+        }
     }
 }

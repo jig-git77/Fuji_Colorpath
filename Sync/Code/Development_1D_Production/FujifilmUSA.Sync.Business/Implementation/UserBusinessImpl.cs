@@ -335,7 +335,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                               "[CP].[UpdatePreResetPasswordInformation]",
                               new List<Parameters>()
                                   {
-                                      new Parameters() {ParameterName = "@LoginID", Size = 30, Type = DbType.String, Value = user.LoginId},
+                                      new Parameters() {ParameterName = "@LoginID", Size = 50, Type = DbType.String, Value = user.LoginId},
                                       new Parameters() {ParameterName = "@AuthenticationKey",Size = 16,Type = DbType.Guid, Value = user.AuthenticationKey},
                                   },
                               new List<Parameters>()

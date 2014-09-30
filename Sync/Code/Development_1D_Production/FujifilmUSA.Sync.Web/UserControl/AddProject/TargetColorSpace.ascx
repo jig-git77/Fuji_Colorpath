@@ -53,7 +53,7 @@ textarea {
                     <table width="100%">
                         <tr>
                             <td >
-                                <span><asp:Localize runat="server" Text="Target Print Condition:" ID="locTargetPrint"></asp:Localize></span>
+                                <span><asp:Localize runat="server" Text="Target Print Condition:" ID="locTargetPrint" meta:resourcekey="locTargetPrintResource1"></asp:Localize></span>
                             </td>
                             <td colspan="3" >
                                 <asp:DropDownList ID="cmbPrintStandardType" runat="server" CssClass="select" DataValueField="Key"
@@ -126,7 +126,7 @@ textarea {
                                     <div class="content">
                                         <div class="text" style="float: left;">  
                                                 <label><asp:Localize runat="server" Text="Color Metric" 
-                                                ID="locTargetLAB"></asp:Localize></label>
+                                                ID="locTargetLAB" meta:resourcekey="locTargetLABResource1" ></asp:Localize></label>
                                         </div>
                                         <div class="clear">
                                         </div>
@@ -139,11 +139,12 @@ textarea {
                                         <tr>
                                             <td style="padding-left:8px;">
                                                 <asp:CheckBox ID="chk_IsPaperScaling" runat="server" CssClass="checkbox" Text="  Relative Paper Scaling" 
-                                                    AutoPostBack="True" oncheckedchanged="chk_IsPaperScaling_CheckedChanged" />
+                                                    AutoPostBack="True" oncheckedchanged="chk_IsPaperScaling_CheckedChanged" meta:resourcekey="chk_IsPaperScalingResource1" />
                                             </td>
                                             <td>
                                                 <asp:Panel ID="Panel_PaperLAB" Style="padding: 5px" runat="server" BorderStyle="None" Enabled="false">
-                                                    New Paper Values:
+                                                    <asp:Localize runat="server" Text="New Paper Values:" ID="locPanel_PaperLAB" meta:resourcekey="Panel_PaperLABResource1" ></asp:Localize>
+                                                    
                                                     L*<asp:TextBox ID="txtPaper_L" runat="server" CssClass="textwidth40"></asp:TextBox>
                                                         <asp:RangeValidator ID="RangeValidator2" runat="server" 
                                                             ControlToValidate="txtPaper_L" ErrorMessage="*" ForeColor="Red" 
@@ -175,7 +176,7 @@ textarea {
                                             <table border="0" cellspacing="2" cellpadding="0" width="50%">
                                                   <tr align="center" style="line-height:15px;">
                                                     <td></td>
-                                                    <td colspan="3"><b>Targets</b></td>
+                                                    <td colspan="3"><b><asp:Localize runat="server" Text="Targets" ID="locTargets" meta:resourcekey="locTargetsResource1" ></asp:Localize></b></td>
                                                   </tr>
                                                 <tr align="center" style="line-height:15px;">
                                                 <td align="left"><b>Patch</b></td>
@@ -201,11 +202,6 @@ textarea {
                                             </td>
                                         </tr>
                                      </table>
-                                     
-                                     
-                                                                                           
-                                                                         
-                                          
                                
                             </div>
                     </div>

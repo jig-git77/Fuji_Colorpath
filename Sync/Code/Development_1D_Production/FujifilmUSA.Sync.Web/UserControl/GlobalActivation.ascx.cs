@@ -43,7 +43,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public GlobalActivation()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
-        } 
+        }
         #endregion
 
         #region Page Events
@@ -85,18 +85,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             var authUser = (UserAuthenticationInformation)ViewState[VsUserInformation];
             User = new User()
-                       {
-                           UserId = authUser.UserId,
-                           LoginId = authUser.LoginId,
-                           LoginPass = authUser.LoginPass,
-                           LastName = authUser.LastName,
-                           FirstName = authUser.FirstName,
-                           Email = authUser.Email,
-                           AuthenticationKey = authUser.AuthenticationKey,
-                           IsActivated = authUser.IsActivated,
-                           SecurityQuestionId = authUser.SecurityQuestionId,
-                           SecurityAnswer = authUser.SecurityAnswer
-                       };
+            {
+                UserId = authUser.UserId,
+                LoginId = authUser.LoginId,
+                LoginPass = authUser.LoginPass,
+                LastName = authUser.LastName,
+                FirstName = authUser.FirstName,
+                Email = authUser.Email,
+                AuthenticationKey = authUser.AuthenticationKey,
+                IsActivated = authUser.IsActivated,
+                SecurityQuestionId = authUser.SecurityQuestionId,
+                SecurityAnswer = authUser.SecurityAnswer
+            };
             if (Request.QueryString["type"] != null && Request.QueryString["type"].StartsWith("r"))
             {
                 UpdateType = UserAuthenticationUpdateType.Reset;
@@ -107,6 +107,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 else
                 {
                     fujiStatusbar.DisplayMessage(GetResourceString(_recinvalidSecurityAns), false);
+                    return;
                 }
             }
             else if (Request.QueryString["type"] != null && Request.QueryString["type"].StartsWith("fr"))
@@ -205,7 +206,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 else
                 {
                     if (User.IsActivated)
-                    {                        
+                    {
                         fujiStatusbar.DisplayMessage(GetResourceString(_recuserAlreadyActivated), false);
                         lbtnSave.Enabled = false;
                         return;
@@ -215,22 +216,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     txtConfirmPass.Text = string.Empty;
                 }
                 var authUser = new UserAuthenticationInformation()
-                                   {
-                                       UserId = User.UserId,
-                                       LoginId = User.LoginId,
-                                       LoginPass = User.LoginPass,
-                                       LastName = User.LastName,
-                                       FirstName = User.FirstName,
-                                       Email = User.Email,
-                                       AuthenticationKey = User.AuthenticationKey,
-                                       IsActivated = User.IsActivated,
-                                       SecurityQuestionId = User.SecurityQuestionId,
-                                       SecurityAnswer = User.SecurityAnswer
-                                   };
+                {
+                    UserId = User.UserId,
+                    LoginId = User.LoginId,
+                    LoginPass = User.LoginPass,
+                    LastName = User.LastName,
+                    FirstName = User.FirstName,
+                    Email = User.Email,
+                    AuthenticationKey = User.AuthenticationKey,
+                    IsActivated = User.IsActivated,
+                    SecurityQuestionId = User.SecurityQuestionId,
+                    SecurityAnswer = User.SecurityAnswer
+                };
                 ViewState[VsUserInformation] = authUser;
             }
             else
-            {                
+            {
                 fujiStatusbar.DisplayMessage(GetResourceString(_recuserAlreadyActivated), false);
             }
         }
