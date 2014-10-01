@@ -44,7 +44,7 @@ namespace FujifilmUSA.Sync.Entity
         {
             if (Role.RoleId == 1) return true;
             if (Role.RolePermissions.Count == 0) return false;
-            return Role.RolePermissions.Any(x => x.Permission == rolePermission && x.Allow);
+            return Role.RolePermissions.Any(x => x.Permission == rolePermission && x.Allow == true);
         }
         public bool HasAdminPermission()
         {

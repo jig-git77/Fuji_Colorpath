@@ -35,8 +35,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             dvApplicationConfiguration.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageApplicationConfiguration);
             dvProfilerSettings.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDeviceProfileSettings);
 
-            divMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSourceProfile);
-            divPrintStandardType.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSourceProfile);
+            divMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
+            divPrintStandardType.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType);
 
             ////seperator image 
             divBranchSeprator.Visible = tdBranch.Visible && tdcompany.Visible;
