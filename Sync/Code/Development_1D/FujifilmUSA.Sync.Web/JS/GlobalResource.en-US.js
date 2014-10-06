@@ -34,8 +34,8 @@ var locCloseExactTrigger = "Please place the eXact device on white substrate for
 var locWhiteCalibrationInProgress = "White point measurement in progress.";
 
 var locStripReadInProgress = "Strip read in progress.";
-var locPlaceScannerAndSlideAcrossStrip1 = "Please place the scanner over the strip";   //"Please place the scanner over the strip {0}.press and hold the trigger while sliding the scanner across the strip.";
-var locPlaceScannerAndSlideAcrossStrip2 = ".press and hold the trigger while sliding the scanner across the strip.";
+var locPlaceScannerAndSlideAcrossStrip1 = "Please place the scanner over the strip.";   //"Please place the scanner over the strip {0}.press and hold the trigger while sliding the scanner across the strip.";
+var locPlaceScannerAndSlideAcrossStrip2 = " Press and hold the trigger while sliding the scanner across the strip.";
 var locPlaceChartiOTable = "Please place your chart on the iO table and click in this window to continue";
 var locMovei1VisorUpperLeftCorner = "Please move the i1 visor to the upper left corner of the chart and press press the i1 trigger";
 var locScanningDeviceUnpluggedWOStatusText = "Scanning Device has been unplugged";

@@ -51,7 +51,7 @@ function SetChartResult(objChart) {
         var UVMode = "M" + objChart.DeviceSetting.MeasurementSettings.UVMode;
         var InstrumentTypeID = objChart.InstrumentTypeId;
 
-        if (InstrumentTypeID == 4) {  //For i1- Pro2
+        if (InstrumentTypeID == 4) {  //For i1- Pro2 and eXact devices
             if (UVMode == "M1" || UVMode == "M2") {  //For i1-Pro2 m1,m2=DualReflectanceScan
                 g_Chart["DeviceSettings"]["MeasurementMode"] = "DualReflectanceScan";
                 g_Chart["DeviceSettings"]["ResultIndexKey"] = UVMode; //Only needs to be set in Dual Measurement Modes, Cannot be set for i1Pro
@@ -71,6 +71,16 @@ function SetChartResult(objChart) {
                     g_Chart["DeviceSettings"]["MeasurementMode"] = "DualReflectanceSpot";
                 }
                 g_Chart["DeviceSettings"]["ResultIndexKey"] = UVMode; //Only needs to be set in Dual Measurement Modes, Cannot be set for i1Pro
+            }
+            else if (InstrumentTypeID == 7) {  //For eXact devices
+                if (UVMode == "M1" || UVMode == "M2") {  //For eXact m1,m2=DualReflectanceScan
+                    g_Chart["DeviceSettings"]["MeasurementMode"] = "DualReflectanceScan";
+                    g_Chart["DeviceSettings"]["ResultIndexKey"] = UVMode; //Only needs to be set in Dual Measurement Modes, Cannot be set for i1Pro
+                }
+                else {                                   //For eXact m0=ReflectanceScan
+                    g_Chart["DeviceSettings"]["MeasurementMode"] = "ReflectanceScan";
+                    g_Chart["DeviceSettings"]["ResultIndexKey"] = "M0";
+                }
             }
             else {                                   //For IO-Pro2 m0=ReflectanceSpot, if only "Point" mode otherwise it will get default "ReflectanceScan" which is set with device itself
                 if (g_Chart["ReadMode"] == "Point") {
@@ -98,8 +108,7 @@ function SetChartResult(objChart) {
         }
         else if (InstrumentTypeID == 7) { //For eXact Instrument Type
             //hard coded setting for density now, here set to StatusT
-            g_Chart["ReadCS"] = "CIELab,CIEXYZ,sRGB,DensityT";
-            g_Chart["DeviceSettings"]["ResultIndexKey"] = "M0";
+            g_Chart["ReadCS"] = "CIELab,CIEXYZ,sRGB,DensityT,DensityE" 
         }
         else {
             g_Chart["ChartType"] = "Native";
