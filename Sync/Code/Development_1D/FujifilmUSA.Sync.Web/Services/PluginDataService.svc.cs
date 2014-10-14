@@ -143,6 +143,13 @@ namespace FujifilmUSA.Sync.Web.Services
             return true;
         }
 
+        [WebInvoke(Method = "POST", UriTemplate = "KeepUserSessionAlive/")]
+        [OperationContract]
+        public bool KeepUserSessionAlive()
+        {
+            return true;
+        }
+
         #region IViewPluginDataService Members
         public Entity.Measurement Measurement { get; set; }
         public int ProjectId { get; set; }

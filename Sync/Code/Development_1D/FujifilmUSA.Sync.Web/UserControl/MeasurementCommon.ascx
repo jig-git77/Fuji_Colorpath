@@ -253,6 +253,19 @@
 </script>
 <script language="javascript" type="text/javascript">
     var refreshTry = 0;
+    $(document).ready(function(){
+        var SessionTimeOut = <%= Session.Timeout %>;
+        setInterval(function(){ 
+            jQuery.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "Services/PluginDataService.svc/KeepUserSessionAlive/",
+                dataType: "JSON",             
+                success: function (response) { },
+                error: function (XMLHttpRequest, textStatus, errorThrown) { }
+            });
+         },(SessionTimeOut * 60 * 1000) - (1 * 60 * 1000));
+    });
     function ControlVisibility() {
         jQuery("[id*='btnCalibrate']").css('display', 'none');
         jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
