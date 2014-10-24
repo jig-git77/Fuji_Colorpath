@@ -33,6 +33,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                            ExpirationDate = DataReader.ReadDate(x, "ExpirationDate"),
                                            NumOfDevice = DataReader.ReadShort(x, "NumOfDevice"),
                                            LicenseDesc = DataReader.ReadString(x, "LicenseDesc"),
+                                           IsOneOff = DataReader.ReadBoolean(x, "IsOneOff"),
                                            IsActive = DataReader.ReadBoolean(x, "IsActive"),
                                            Branch = new Branch()
                                                         {
@@ -93,6 +94,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.ExpirationDate
                                         , license.NumOfDevice
                                         , license.LicenseDesc
+                                        , license.IsOneOff
                                         , license.IsActive
                                         , licenseDetails.ToString()
                                     });
@@ -130,6 +132,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.ExpirationDate
                                         , license.NumOfDevice
                                         , license.LicenseDesc
+                                        , license.IsOneOff
                                         , license.IsActive
                                         , licenseDetails.ToString()
                                     });
