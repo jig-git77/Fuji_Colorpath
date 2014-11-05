@@ -42,29 +42,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             lnkbtnTargetColorSpace.Visible = IsXmfNewProject;
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (ViewState[_vsMetricTargetPreset] == null)
             {
-                //Sync1D
-                tbOptionPreset.Visible = false;
-                tbMetricPreset.Visible = true;
-                BindMetricPresets();
-                BindPrintStandardTVI();              
-            }
-            else
-            {
-                tbOptionPreset.Visible = true;
-                tbMetricPreset.Visible = false;
-                BindProfileRenderings();
-                BindPresets();
-
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) //-----If Sync4D Certification Type, disable Preset Selection box
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                 {
-                    cmbSelectedPresets.Enabled = false;
+                    //Sync1D
+                    tbOptionPreset.Visible = false;
+                    tbMetricPreset.Visible = true;
+                    BindMetricPresets();
+                    GetPrintStandardTVI();
                 }
-            }
-            if (Page.IsPostBack == false)
-            {
-                //---Only load project details from session when page is loaded first time---//
+                else
+                {
+                    tbOptionPreset.Visible = true;
+                    tbMetricPreset.Visible = false;
+                    BindProfileRenderings();
+                    BindPresets();
+
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) //-----If Sync4D Certification Type, disable Preset Selection box
+                    {
+                        cmbSelectedPresets.Enabled = false;
+                    }
+                }
                 LoadProjectInfoFromSession();
             }
         }
@@ -146,114 +145,131 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private void BindPrintStandardTVI()
+        private void GetPrintStandardTVI()
         {
             PrintStandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
-            _presenterDeviceFamilyProfilerOption.GetPrintStandardTVI();
-            if (!IsErrorOccured)
-            {               
-                foreach (var item in PrintStandardTVI)
-                {                    
-                    switch (item.PatchType.Type.ToString())
-                    {
-                        case "Cyan10":
-                            txtTVI10CMY.Text = item.TVI.ToString();
-                            txtThresh10CMY.Text = item.Threshold.ToString();
-                            break;
-                        case "Cyan20":
-                            txtTVI20CMY.Text = item.TVI.ToString();
-                            txtThresh20CMY.Text = item.Threshold.ToString();
-                            break;
-                        case "Cyan25":
-                        case "Cyan Quarter Tone": 
-                            txtTVI25CMY.Text = item.TVI.ToString();
-                            txtThresh25CMY.Text = item.Threshold.ToString();
-                            break;
-                        case "Cyan30":
-                            txtTVI30CMY.Text = item.TVI.ToString();
-                            txtThresh30CMY.Text = item.Threshold.ToString();
-                            break;
-                        case "Cyan40":
-                            txtTVI40CMY.Text = item.TVI.ToString();
-                            txtThresh40CMY.Text = item.Threshold.ToString();
-                            break;
-                        case "Cyan50":
-                        case "Cyan Half Tone":
-                            txtTVI50CMY.Text = item.TVI.ToString();
-                            txtThresh50CMY.Text = item.Threshold.ToString();
-                            break;
-                        case "Cyan60":
-                            txtTVI60CMY.Text = item.TVI.ToString();
-                            txtThresh60CMY.Text = item.Threshold.ToString();
-                            break;
-                        case "Cyan70":
-                            txtTVI70CMY.Text = item.TVI.ToString();
-                            txtThresh70CMY.Text = item.Threshold.ToString();
-                            break;
-                        case "Cyan75":
-                        case "Cyan Three Quarter Tone":
-                            txtTVI75CMY.Text = item.TVI.ToString();
-                            txtThresh75CMY.Text = item.Threshold.ToString();
-                            break;
-                        case "Cyan80":
-                            txtTVI80CMY.Text = item.TVI.ToString();
-                            txtThresh80CMY.Text = item.Threshold.ToString();
-                            break;
-                        case "Cyan90":
-                            txtTVI90CMY.Text = item.TVI.ToString();
-                            txtThresh90CMY.Text = item.Threshold.ToString();
-                            break;
 
-                        case "Black10":
-                            txtTVI10K.Text = item.TVI.ToString();
-                            txtThresh10K.Text = item.Threshold.ToString();
-                            break;
-                        case "Black20":
-                            txtTVI20K.Text = item.TVI.ToString();
-                            txtThresh20K.Text = item.Threshold.ToString();
-                            break;
-                        case "Black25":
-                        case "Black Quarter Tone":
-                            txtTVI25K.Text = item.TVI.ToString();
-                            txtThresh25K.Text = item.Threshold.ToString();
-                            break;
-                        case "Black30":
-                            txtTVI30K.Text = item.TVI.ToString();
-                            txtThresh30K.Text = item.Threshold.ToString();
-                            break;
-                        case "Black40":
-                            txtTVI40K.Text = item.TVI.ToString();
-                            txtThresh40K.Text = item.Threshold.ToString();
-                            break;
-                        case "Black50":
-                        case "Black Half Tone":
-                            txtTVI50K.Text = item.TVI.ToString();
-                            txtThresh50K.Text = item.Threshold.ToString();
-                            break;
-                        case "Black60":
-                            txtTVI60K.Text = item.TVI.ToString();
-                            txtThresh60K.Text = item.Threshold.ToString();
-                            break;
-                        case "Black70":
-                            txtTVI70K.Text = item.TVI.ToString();
-                            txtThresh70K.Text = item.Threshold.ToString();
-                            break;
-                        case "Black75":
-                        case "Black Three Quarter Tone":
-                            txtTVI75K.Text = item.TVI.ToString();
-                            txtThresh75K.Text = item.Threshold.ToString();
-                            break;
-                        case "Black80":
-                            txtTVI80K.Text = item.TVI.ToString();
-                            txtThresh80K.Text = item.Threshold.ToString();
-                            break;
-                        case "Black90":
-                            txtTVI90K.Text = item.TVI.ToString();
-                            txtThresh90K.Text = item.Threshold.ToString();
-                            break;       
-                        default:
-                            break;
-                    }
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            {
+                if (SessionManager.Instance.CurrentProject.PrintStandardTVI == null || SessionManager.Instance.CurrentProject.PrintStandardTVI.Count == 0)
+                {
+                    _presenterDeviceFamilyProfilerOption.GetPrintStandardTVI();
+
+                    if (!IsErrorOccured)
+                    {
+                        BindPrintStandardTVI(PrintStandardTVI);
+                    }                
+                }
+                else // Load from session for existing project
+                {
+                    BindPrintStandardTVI(SessionManager.Instance.CurrentProject.PrintStandardTVI);
+                }
+            }
+        }
+
+        private void BindPrintStandardTVI(List<Entity.CPSync1D.PrintStandardTVI> PrintStandardTVI)
+        {
+            foreach (var item in PrintStandardTVI)
+            {
+                switch (item.PatchType.Type.ToString())
+                {
+                    case "Cyan10": case "Cyan_10":
+                        txtTVI10CMY.Text = item.TVI.ToString();
+                        txtThresh10CMY.Text = item.Threshold.ToString();
+                        break;
+                    case "Cyan20": case "Cyan_20":
+                        txtTVI20CMY.Text = item.TVI.ToString();
+                        txtThresh20CMY.Text = item.Threshold.ToString();
+                        break;
+                    case "Cyan25": case "Cyan_25":
+                    case "Cyan Quarter Tone": case "Cyan_Quarter_Tone":
+                        txtTVI25CMY.Text = item.TVI.ToString();
+                        txtThresh25CMY.Text = item.Threshold.ToString();
+                        break;
+                    case "Cyan30": case "Cyan_30":
+                        txtTVI30CMY.Text = item.TVI.ToString();
+                        txtThresh30CMY.Text = item.Threshold.ToString();
+                        break;
+                    case "Cyan40": case "Cyan_40":
+                        txtTVI40CMY.Text = item.TVI.ToString();
+                        txtThresh40CMY.Text = item.Threshold.ToString();
+                        break;
+                    case "Cyan50": case "Cyan_50":
+                    case "Cyan Half Tone": case "Cyan_Half_Tone":
+                        txtTVI50CMY.Text = item.TVI.ToString();
+                        txtThresh50CMY.Text = item.Threshold.ToString();
+                        break;
+                    case "Cyan60": case "Cyan_60":
+                        txtTVI60CMY.Text = item.TVI.ToString();
+                        txtThresh60CMY.Text = item.Threshold.ToString();
+                        break;
+                    case "Cyan70": case "Cyan_70":
+                        txtTVI70CMY.Text = item.TVI.ToString();
+                        txtThresh70CMY.Text = item.Threshold.ToString();
+                        break;
+                    case "Cyan75": case "Cyan_75":
+                    case "Cyan Three Quarter Tone": case "Cyan_Three_Quarter_Tone":
+                        txtTVI75CMY.Text = item.TVI.ToString();
+                        txtThresh75CMY.Text = item.Threshold.ToString();
+                        break;
+                    case "Cyan80": case "Cyan_80":
+                        txtTVI80CMY.Text = item.TVI.ToString();
+                        txtThresh80CMY.Text = item.Threshold.ToString();
+                        break;
+                    case "Cyan90": case "Cyan_90":
+                        txtTVI90CMY.Text = item.TVI.ToString();
+                        txtThresh90CMY.Text = item.Threshold.ToString();
+                        break;
+
+                    case "Black10": case "Black_10":
+                        txtTVI10K.Text = item.TVI.ToString();
+                        txtThresh10K.Text = item.Threshold.ToString();
+                        break;
+                    case "Black20": case "Black_20":
+                        txtTVI20K.Text = item.TVI.ToString();
+                        txtThresh20K.Text = item.Threshold.ToString();
+                        break;
+                    case "Black25": case "Black_25":
+                    case "Black Quarter Tone": case "Black_Quarter_Tone":
+                        txtTVI25K.Text = item.TVI.ToString();
+                        txtThresh25K.Text = item.Threshold.ToString();
+                        break;
+                    case "Black30": case "Black_30":
+                        txtTVI30K.Text = item.TVI.ToString();
+                        txtThresh30K.Text = item.Threshold.ToString();
+                        break;
+                    case "Black40": case "Black_40":
+                        txtTVI40K.Text = item.TVI.ToString();
+                        txtThresh40K.Text = item.Threshold.ToString();
+                        break;
+                    case "Black50": case "Black_50":
+                    case "Black Half Tone": case "Black_Half_Tone":
+                        txtTVI50K.Text = item.TVI.ToString();
+                        txtThresh50K.Text = item.Threshold.ToString();
+                        break;
+                    case "Black60": case "Black_60":
+                        txtTVI60K.Text = item.TVI.ToString();
+                        txtThresh60K.Text = item.Threshold.ToString();
+                        break;
+                    case "Black70": case "Black_70":
+                        txtTVI70K.Text = item.TVI.ToString();
+                        txtThresh70K.Text = item.Threshold.ToString();
+                        break;
+                    case "Black75": case "Black_75":
+                    case "Black Three Quarter Tone": case "Black_Three_Quarter_Tone":
+                        txtTVI75K.Text = item.TVI.ToString();
+                        txtThresh75K.Text = item.Threshold.ToString();
+                        break;
+                    case "Black80": case "Black_80":
+                        txtTVI80K.Text = item.TVI.ToString();
+                        txtThresh80K.Text = item.Threshold.ToString();
+                        break;
+                    case "Black90": case "Black_90":
+                        txtTVI90K.Text = item.TVI.ToString();
+                        txtThresh90K.Text = item.Threshold.ToString();
+                        break;
+                    default:
+                        break;
                 }
             }
         }

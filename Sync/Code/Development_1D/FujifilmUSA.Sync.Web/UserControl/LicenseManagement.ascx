@@ -132,15 +132,15 @@
             GridLines="None">
                     <GroupingSettings CaseSensitive="false" />
 
-<HeaderStyle Font-Bold="True"></HeaderStyle>
+                    <HeaderStyle Font-Bold="True"></HeaderStyle>
 
                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                     <MasterTableView DataKeyNames="LicenseID,Branch.CompanyId,Branch.BranchId,LicenseTypeId,LicenseDesc,ActivationDate,ExpirationDate,IsActive">
-<CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
+                    <CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
 
-<RowIndicatorColumn Visible="True" FilterControlAltText="Filter RowIndicator column"></RowIndicatorColumn>
+                    <RowIndicatorColumn Visible="True" FilterControlAltText="Filter RowIndicator column"></RowIndicatorColumn>
 
-<ExpandCollapseColumn Visible="True" FilterControlAltText="Filter ExpandColumn column"></ExpandCollapseColumn>
+                    <ExpandCollapseColumn Visible="True" FilterControlAltText="Filter ExpandColumn column"></ExpandCollapseColumn>
                         <Columns>                         
                             <telerik:GridTemplateColumn DataField="LicenseDesc" AllowFiltering="true" HeaderText="License Desc"
                                 UniqueName="LicenseDesc" SortExpression="LicenseDesc" 
@@ -153,9 +153,9 @@
                                         meta:resourcekey="lblLicenseDescResource1" />
                                 </ItemTemplate>
 
-<HeaderStyle Width="90px"></HeaderStyle>
+                                <HeaderStyle Width="90px"></HeaderStyle>
 
-<ItemStyle Wrap="True" CssClass="breakWord90" Width="90px"></ItemStyle>
+                                <ItemStyle Wrap="True" CssClass="breakWord90" Width="90px"></ItemStyle>
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridDateTimeColumn DataField="ActivationDate" HeaderText="Activation Date"
@@ -163,7 +163,7 @@
                                 ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100" 
                                 AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThanOrEqualTo" 
                                 meta:resourcekey="GridDateTimeColumnResource1">
-<HeaderStyle Width="100px"></HeaderStyle>
+                                <HeaderStyle Width="100px"></HeaderStyle>
 
                                 <ItemStyle HorizontalAlign="Left" Width="100" />
                             </telerik:GridDateTimeColumn>
@@ -173,7 +173,7 @@
                                 ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100" 
                                 AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThanOrEqualTo" 
                                 meta:resourcekey="GridDateTimeColumnResource2">
-<HeaderStyle Width="100px"></HeaderStyle>
+                                <HeaderStyle Width="100px"></HeaderStyle>
 
                                 <ItemStyle HorizontalAlign="Left" Width="100" />
                             </telerik:GridDateTimeColumn>
@@ -184,9 +184,9 @@
                                 ItemStyle-Wrap="true"  ShowFilterIcon="true" AutoPostBackOnFilter="true" 
                                 CurrentFilterFunction="GreaterThanOrEqualTo" 
                                 meta:resourcekey="GridNumericColumnResource1">  
-<HeaderStyle Width="100px"></HeaderStyle>
+                                <HeaderStyle Width="100px"></HeaderStyle>
 
-<ItemStyle Wrap="True"></ItemStyle>
+                                <ItemStyle Wrap="True"></ItemStyle>
                             </telerik:GridNumericColumn>
                             <telerik:GridTemplateColumn DataField="Branch.BranchName" AllowFiltering="true" HeaderText="Branch Name"
                                 UniqueName="BranchName" SortExpression="Branch.BranchName" 
@@ -201,10 +201,26 @@
                                         meta:resourcekey="lblBranchNameResource1" />
                                 </ItemTemplate>
 
-<HeaderStyle Width="80px"></HeaderStyle>
+                                <HeaderStyle Width="80px"></HeaderStyle>
 
-<ItemStyle Wrap="True" CssClass="breakWord80" Width="80px"></ItemStyle>
+                                <ItemStyle Wrap="True" CssClass="breakWord80" Width="80px"></ItemStyle>
                             </telerik:GridTemplateColumn>
+
+                             <telerik:GridTemplateColumn UniqueName="IsOneOff" AllowFiltering="false" HeaderText="IsOneOff?"
+                                DataField="IsOneOff" ItemStyle-HorizontalAlign="Center" 
+                                FilterControlWidth="40" HeaderStyle-Width ="40" 
+                                meta:resourcekey="GridTemplateColumnResource3OneOff">
+                                <ItemTemplate>
+                                    <asp:Image ID="imgIsOneOff" runat="server" 
+                                        ImageUrl='<%# Convert.ToBoolean(Eval("IsOneOff")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png" %>' 
+                                        meta:resourcekey="imgIsOneOffResource1" />
+                                </ItemTemplate>
+
+                                <HeaderStyle Width="40px"></HeaderStyle>
+
+                                <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                            </telerik:GridTemplateColumn>
+
                             <telerik:GridTemplateColumn UniqueName="IsActive" AllowFiltering="false" HeaderText="IsActive?"
                                 DataField="IsActive" ItemStyle-HorizontalAlign="Center" 
                                 FilterControlWidth="40" HeaderStyle-Width ="40" 
@@ -215,9 +231,9 @@
                                         meta:resourcekey="imgIsActiveResource1" />
                                 </ItemTemplate>
 
-<HeaderStyle Width="40px"></HeaderStyle>
+                                <HeaderStyle Width="40px"></HeaderStyle>
 
-<ItemStyle HorizontalAlign="Center"></ItemStyle>
+                                <ItemStyle HorizontalAlign="Center"></ItemStyle>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="LicenseID" AllowFiltering="true" HeaderText=""
                                 UniqueName="Edit" FilterControlWidth="70" HeaderStyle-Width ="70" 
@@ -257,7 +273,7 @@
                                     </div>
                                 </ItemTemplate>
 
-<HeaderStyle Width="70px"></HeaderStyle>
+                                <HeaderStyle Width="70px"></HeaderStyle>
                             </telerik:GridTemplateColumn>
                         </Columns>
 

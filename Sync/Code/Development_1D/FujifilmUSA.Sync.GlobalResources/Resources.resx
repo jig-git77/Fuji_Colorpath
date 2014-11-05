@@ -858,4 +858,77 @@
 	<data name="DensityTypes_StatusE" xml:space="preserve">
     <value>StatusE</value>
   </data>
+ 
+  <data name="EInkOrder_KCMY" xml:space="preserve">
+    <value>KCMY</value>
+  </data>
+  <data name="EInkOrder_CMYK" xml:space="preserve">
+    <value>CMYK</value>
+  </data>
+  <data name="EInkOrder_YMCK" xml:space="preserve">
+    <value>YMCK</value>
+  </data>
+  <data name="EInkOrder_CKMY" xml:space="preserve">
+    <value>CKMY</value>
+  </data>
+  <data name="EInkOrder_CKYM" xml:space="preserve">
+    <value>CKYM</value>
+  </data>
+  <data name="EInkOrder_CMKY" xml:space="preserve">
+    <value>CMKY</value>
+  </data>
+  <data name="EInkOrder_CYKM" xml:space="preserve">
+    <value>CYKM</value>
+  </data>
+  <data name="EInkOrder_CYMK" xml:space="preserve">
+    <value>CYMK</value>
+  </data>
+  <data name="EInkOrder_KCYM" xml:space="preserve">
+    <value>KCYM</value>
+  </data>
+  <data name="EInkOrder_KMCY" xml:space="preserve">
+    <value>KMCY</value>
+  </data>
+  <data name="EInkOrder_KMYC" xml:space="preserve">
+    <value>KMYC</value>
+  </data>
+  <data name="EInkOrder_KYCM" xml:space="preserve">
+    <value>KYCM</value>
+  </data>
+  <data name="EInkOrder_KYMC" xml:space="preserve">
+    <value>KYMC</value>
+  </data>
+  <data name="EInkOrder_MCKY" xml:space="preserve">
+    <value>MCKY</value>
+  </data>
+  <data name="EInkOrder_MCYK" xml:space="preserve">
+    <value>MCYK</value>
+  </data>
+  <data name="EInkOrder_MKCY" xml:space="preserve">
+    <value>MKCY</value>
+  </data>
+  <data name="EInkOrder_MKYC" xml:space="preserve">
+    <value>MKYC</value>
+  </data>
+  <data name="EInkOrder_MYCK" xml:space="preserve">
+    <value>MYCK</value>
+  </data>
+  <data name="EInkOrder_MYKC" xml:space="preserve">
+    <value>MYKC</value>
+  </data>
+  <data name="EInkOrder_YCKM" xml:space="preserve">
+    <value>YCKM</value>
+  </data>
+  <data name="EInkOrder_YCMK" xml:space="preserve">
+    <value>YCMK</value>
+  </data>
+  <data name="EInkOrder_YKCM" xml:space="preserve">
+    <value>YKCM</value>
+  </data>
+   <data name="EInkOrder_YKMC" xml:space="preserve">
+    <value>YKMC</value>
+  </data>
+   <data name="EInkOrder_YMKC" xml:space="preserve">
+    <value>YMKC</value>
+  </data>
 </root>

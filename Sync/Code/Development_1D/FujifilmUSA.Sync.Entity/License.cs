@@ -17,6 +17,7 @@ namespace FujifilmUSA.Sync.Entity
         public short NumOfDevice { get; set; }
         public string LicenseDesc { get; set; }
         public short LicenseTypeId { get; set; }
+        public bool IsOneOff { get; set; }
         public bool IsActive { get; set; }
         public Branch Branch { get; set; }
         public List<ELicenseType> LicenseType { get; set; }

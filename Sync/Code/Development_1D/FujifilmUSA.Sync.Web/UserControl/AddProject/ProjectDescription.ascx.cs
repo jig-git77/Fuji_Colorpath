@@ -27,6 +27,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!Page.IsPostBack)
             {
                 LoadLicenseType();
+                LoadInkOrder();
                 LoadDeviceInfoFromSession();
                 LoadProjectInfoFromSession();
             }
@@ -71,6 +72,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ddlLicenseType.Enabled = false;
             }
         }
+
+        private void LoadInkOrder()
+        {
+            if (cmbInkOrder.DataSource != null) return;
+
+            cmbInkOrder.DataValueField = "Key";
+            cmbInkOrder.DataTextField = "Value";
+            cmbInkOrder.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EInkOrder>();
+            cmbInkOrder.DataBind();
+
+            cmbInkOrder.SelectedIndex = 0;
+        }
+
         private void LoadDeviceInfoFromSession()
         {
             if (SessionManager.Instance.CurrentDevice.DeviceName != null)
@@ -88,9 +102,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtRipSetting.Text = SessionManager.Instance.CurrentProject.PrintCondition.RipSettings;
                 txtNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
                 txtTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
-                //txtMedia.Enabled = txtColorant.Enabled = txtRipSetting.Enabled = txtNotes.Enabled = txtTechnicianName.Enabled =
-                //!(SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0
-                //);
+
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    Tr_OffsetPrintData.Visible = true;
+
+                cmbInkOrder.SelectedIndex = cmbInkOrder.Items.IndexOf(cmbInkOrder.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.PrintCondition.InkOrder)));
+                txtFountainSol.Text = SessionManager.Instance.CurrentProject.PrintCondition.FountainSolution;
+                txtBlanket.Text = SessionManager.Instance.CurrentProject.PrintCondition.Blanket;
+                txtBlanketAge.Text = SessionManager.Instance.CurrentProject.PrintCondition.BlanketAge;
+                txtScreening.Text = SessionManager.Instance.CurrentProject.PrintCondition.Screening;
             }
         }
 
@@ -121,6 +141,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 RipSettings = txtRipSetting.Text.Trim(),
                 Notes = txtNotes.Text.Trim(),
                 TechnicianName = txtTechnicianName.Text.Trim(),
+                InkOrder = (EInkOrder)Convert.ToInt32(cmbInkOrder.SelectedItem.Value),
+                FountainSolution = txtFountainSol.Text.Trim(),
+                Blanket = txtBlanket.Text.Trim(),
+                BlanketAge = txtBlanketAge.Text.Trim(),
+                Screening = txtScreening.Text.Trim()
             };
 
             SessionManager.Instance.CurrentProject.LicenseType = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
@@ -138,5 +163,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
+
+        protected void ddlLicenseType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.Sync1D)
+            {
+                Tr_OffsetPrintData.Visible = true;
+            }
+            else
+            {
+                Tr_OffsetPrintData.Visible = false;
+            }
+        }
     }
 }

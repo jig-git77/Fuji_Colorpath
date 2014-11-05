@@ -60,7 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (Int32.TryParse(id, out _LicenseId))
                 {
                     lblHeader.Text = GetResourceString(_recEditLicense);  //"Edit License";
-                    SetLicense(_LicenseId); 
+                    SetLicense(_LicenseId);
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chkDlp.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
             chkInk.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
             chkInk_Source.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimizationSource);
-            chkSync4D_Certification.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync4DCertification); 
+            chkSync4D_Certification.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync4DCertification);
         }
         private void Bindcompany()
         {
@@ -127,16 +127,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             License = new License()
-                          {
-                              Branch = new Branch()
-                                            {
-                                                BranchId = Convert.ToInt32(cmbBranch.SelectedValue)
-                                            },
-                              ActivationDate = Convert.ToDateTime(txtActivationDate.Text),
-                              ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text),
-                              LicenseDesc = txtLicenseDescription.Text,
-                              IsActive = chkIsActive.Checked
-                          };
+            {
+                Branch = new Branch()
+                {
+                    BranchId = Convert.ToInt32(cmbBranch.SelectedValue)
+                },
+                ActivationDate = Convert.ToDateTime(txtActivationDate.Text),
+                ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text),
+                LicenseDesc = txtLicenseDescription.Text,
+                IsOneOff = chkIsOneOff.Checked,
+                IsActive = chkIsActive.Checked
+            };
             if (chkSync1D.Checked)
                 License.LicenseType.Add(ELicenseType.Sync1D);
             if (chkDlp.Checked)
@@ -172,29 +173,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindBranch();
                 cmbBranch.SelectedValue = License.BranchId.ToString();
                 License.LicenseType.ForEach(x =>
-                                                {
-                                                    switch (x)
-                                                    {
-                                                        case ELicenseType.Sync1D:
-                                                            chkSync1D.Checked = true;
-                                                            break;
-                                                        case ELicenseType.DLP:
-                                                            chkDlp.Checked = true;
-                                                            break;
-                                                        case ELicenseType.InkOptimization:
-                                                            chkInk.Checked = true;
-                                                            break;
-                                                        case ELicenseType.InkOptimizationSource:
-                                                            chkInk_Source.Checked = true;
-                                                            break;
-                                                        case ELicenseType.Sync4DCertification:
-                                                            chkSync4D_Certification.Checked = true;
-                                                            break;
-                                                    }
-                                                });
+                {
+                    switch (x)
+                    {
+                        case ELicenseType.Sync1D:
+                            chkSync1D.Checked = true;
+                            break;
+                        case ELicenseType.DLP:
+                            chkDlp.Checked = true;
+                            break;
+                        case ELicenseType.InkOptimization:
+                            chkInk.Checked = true;
+                            break;
+                        case ELicenseType.InkOptimizationSource:
+                            chkInk_Source.Checked = true;
+                            break;
+                        case ELicenseType.Sync4DCertification:
+                            chkSync4D_Certification.Checked = true;
+                            break;
+                    }
+                });
                 txtLicenseDescription.Text = License.LicenseDesc;
                 txtActivationDate.Text = Convert.ToDateTime(License.ActivationDate).ToString("d");
                 txtExpirationDate.Text = Convert.ToDateTime(License.ExpirationDate).ToString("d");
+                chkIsOneOff.Checked = License.IsOneOff;
                 chkIsActive.Checked = License.IsActive;
             }
         }

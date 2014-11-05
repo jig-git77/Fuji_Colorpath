@@ -23,7 +23,7 @@
     <div class="clear">
     </div>
     <div style="margin-left: 10px;">
-        <asp:UpdatePanel runat="server">
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <center>
                     <fieldset style="width: 70%;">
@@ -185,6 +185,23 @@
                                             ValidationGroup="vgAddLicense"><ucValidationContainer:ValidationContainer ID="rfvExpiraDateContainer" runat="server"
                                                 ValidationMsg="Please select expiration date." Size="200" />
 </asp:RequiredFieldValidator>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td style="width: 130px" align="right">
+                                    <span style="font-weight: bold;"><asp:Localize Text="Is One Offs?" runat="server" 
+                                        ID="Localize1" meta:resourcekey="locIsOneOffResource1"></asp:Localize></span>
+                                </td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
+                                <td style="width: 370px">
+                                    <div style="float: left;">
+                                        <asp:CheckBox ID="chkIsOneOff" runat="server" Checked="False" 
+                                            meta:resourcekey="chkIsOneOffResource1" />
                                     </div>
                                     <div class="clear">
                                     </div>

@@ -331,6 +331,222 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CKMY.
+        /// </summary>
+        internal static string EInkOrder_CKMY {
+            get {
+                return ResourceManager.GetString("EInkOrder_CKMY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CKYM.
+        /// </summary>
+        internal static string EInkOrder_CKYM {
+            get {
+                return ResourceManager.GetString("EInkOrder_CKYM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CMKY.
+        /// </summary>
+        internal static string EInkOrder_CMKY {
+            get {
+                return ResourceManager.GetString("EInkOrder_CMKY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CMYK.
+        /// </summary>
+        internal static string EInkOrder_CMYK {
+            get {
+                return ResourceManager.GetString("EInkOrder_CMYK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CYKM.
+        /// </summary>
+        internal static string EInkOrder_CYKM {
+            get {
+                return ResourceManager.GetString("EInkOrder_CYKM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CYMK.
+        /// </summary>
+        internal static string EInkOrder_CYMK {
+            get {
+                return ResourceManager.GetString("EInkOrder_CYMK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KCMY.
+        /// </summary>
+        internal static string EInkOrder_KCMY {
+            get {
+                return ResourceManager.GetString("EInkOrder_KCMY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KCYM.
+        /// </summary>
+        internal static string EInkOrder_KCYM {
+            get {
+                return ResourceManager.GetString("EInkOrder_KCYM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KMCY.
+        /// </summary>
+        internal static string EInkOrder_KMCY {
+            get {
+                return ResourceManager.GetString("EInkOrder_KMCY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KMYC.
+        /// </summary>
+        internal static string EInkOrder_KMYC {
+            get {
+                return ResourceManager.GetString("EInkOrder_KMYC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KYCM.
+        /// </summary>
+        internal static string EInkOrder_KYCM {
+            get {
+                return ResourceManager.GetString("EInkOrder_KYCM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KYMC.
+        /// </summary>
+        internal static string EInkOrder_KYMC {
+            get {
+                return ResourceManager.GetString("EInkOrder_KYMC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MCKY.
+        /// </summary>
+        internal static string EInkOrder_MCKY {
+            get {
+                return ResourceManager.GetString("EInkOrder_MCKY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MCYK.
+        /// </summary>
+        internal static string EInkOrder_MCYK {
+            get {
+                return ResourceManager.GetString("EInkOrder_MCYK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MKCY.
+        /// </summary>
+        internal static string EInkOrder_MKCY {
+            get {
+                return ResourceManager.GetString("EInkOrder_MKCY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MKYC.
+        /// </summary>
+        internal static string EInkOrder_MKYC {
+            get {
+                return ResourceManager.GetString("EInkOrder_MKYC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MYCK.
+        /// </summary>
+        internal static string EInkOrder_MYCK {
+            get {
+                return ResourceManager.GetString("EInkOrder_MYCK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MYKC.
+        /// </summary>
+        internal static string EInkOrder_MYKC {
+            get {
+                return ResourceManager.GetString("EInkOrder_MYKC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YCKM.
+        /// </summary>
+        internal static string EInkOrder_YCKM {
+            get {
+                return ResourceManager.GetString("EInkOrder_YCKM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YCMK.
+        /// </summary>
+        internal static string EInkOrder_YCMK {
+            get {
+                return ResourceManager.GetString("EInkOrder_YCMK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YKCM.
+        /// </summary>
+        internal static string EInkOrder_YKCM {
+            get {
+                return ResourceManager.GetString("EInkOrder_YKCM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YKMC.
+        /// </summary>
+        internal static string EInkOrder_YKMC {
+            get {
+                return ResourceManager.GetString("EInkOrder_YKMC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YMCK.
+        /// </summary>
+        internal static string EInkOrder_YMCK {
+            get {
+                return ResourceManager.GetString("EInkOrder_YMCK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YMKC.
+        /// </summary>
+        internal static string EInkOrder_YMKC {
+            get {
+                return ResourceManager.GetString("EInkOrder_YMKC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to i1-IO.
         /// </summary>
         internal static string EInstrumentType_i1IO {

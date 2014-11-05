@@ -32,7 +32,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
             this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
-        } 
+        }
         #endregion
 
         #region Page Events
@@ -42,7 +42,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            rgLicense.PageSize = Common.Utilities.PageSize; 
+            rgLicense.PageSize = Common.Utilities.PageSize;
             if (!Page.IsPostBack)
             {
                 BindLicense();
@@ -137,15 +137,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     GridDataItem item = (GridDataItem)e.Item;
                     string parms = Service.Common.Encryption.CryptHelper.EncryptString(License.LicenseId.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
                     Response.Redirect("AddLicenseManagement.aspx?LicenseId=" + ContentEncoder.Encode(parms));
-                    //Response.Redirect("AddLicenseManagement.aspx?LicenseId=" + License.LicenseId
-                    //                        + "&CompanyId=" + item.GetDataKeyValue("Branch.CompanyId").ToString()
-                    //                        + "&BranchId=" + item.GetDataKeyValue("Branch.BranchId").ToString()
-                    //                        + "&LicenseTypeId=" + item.GetDataKeyValue("LicenseTypeId").ToString()
-                    //                        + "&LicenseDesc=" + item.GetDataKeyValue("LicenseDesc").ToString()
-                    //                        + "&ActivationDate=" + item.GetDataKeyValue("ActivationDate").ToString()
-                    //                        + "&ExpirationDate=" + item.GetDataKeyValue("ExpirationDate").ToString()
-                    //                        + "&IsActive=" + item.GetDataKeyValue("IsActive").ToString()
-                    //                        );
+                  
                     break;
             }
         }

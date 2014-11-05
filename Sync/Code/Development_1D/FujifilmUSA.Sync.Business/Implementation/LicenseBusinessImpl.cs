@@ -26,42 +26,43 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         objLicenseList = dsLicenseList.Tables[0].AsEnumerable().
                             Select(x =>
                                    new License()
+                                   {
+                                       LicenseId = DataReader.ReadInt(x, "LicenseID"),
+                                       BranchId = DataReader.ReadInt(x, "BranchID"),
+                                       ActivationDate = DataReader.ReadDate(x, "ActivationDate"),
+                                       ExpirationDate = DataReader.ReadDate(x, "ExpirationDate"),
+                                       NumOfDevice = DataReader.ReadShort(x, "NumOfDevice"),
+                                       LicenseDesc = DataReader.ReadString(x, "LicenseDesc"),
+                                       IsOneOff = DataReader.ReadBoolean(x, "IsOneOff"),
+                                       IsActive = DataReader.ReadBoolean(x, "IsActive"),
+                                       Branch = new Branch()
                                        {
-                                           LicenseId = DataReader.ReadInt(x, "LicenseID"),
-                                           BranchId = DataReader.ReadInt(x, "BranchID"),
-                                           ActivationDate = DataReader.ReadDate(x, "ActivationDate"),
-                                           ExpirationDate = DataReader.ReadDate(x, "ExpirationDate"),
-                                           NumOfDevice = DataReader.ReadShort(x, "NumOfDevice"),
-                                           LicenseDesc = DataReader.ReadString(x, "LicenseDesc"),
-                                           IsActive = DataReader.ReadBoolean(x, "IsActive"),
-                                           Branch = new Branch()
-                                                        {
-                                                            BranchId = DataReader.ReadInt(x, "BranchId"),
-                                                            BranchName = DataReader.ReadString(x, "BranchName"),
-                                                            CompanyId = DataReader.ReadInt(x, "CompanyId")
-                                                        }
-                                       }).ToList();
+                                           BranchId = DataReader.ReadInt(x, "BranchId"),
+                                           BranchName = DataReader.ReadString(x, "BranchName"),
+                                           CompanyId = DataReader.ReadInt(x, "CompanyId")
+                                       }
+                                   }).ToList();
 
                         if (dsLicenseList.Tables[1].Rows.Count > 0)
                         {
                             var licenseDetail = dsLicenseList.Tables[1].AsEnumerable().
                                 Select(x => new
-                                                {
-                                                    LicenseID = DataReader.ReadInt(x, "LicenseID"),
-                                                    LicenseTypeID = DataReader.ReadShort(x, "LicenseTypeID"),
-                                                }).ToList();
+                                {
+                                    LicenseID = DataReader.ReadInt(x, "LicenseID"),
+                                    LicenseTypeID = DataReader.ReadShort(x, "LicenseTypeID"),
+                                }).ToList();
 
                             objLicenseList.
                                 ForEach(lic =>
-                                            {
-                                                if (licenseDetail.Where(x => x.LicenseID == lic.LicenseId).Count() > 0)
-                                                {
-                                                    licenseDetail.Where(x => x.LicenseID == lic.LicenseId).ToList().
-                                                        ForEach(
-                                                            type =>
-                                                            lic.LicenseType.Add((ELicenseType)System.Enum.Parse(typeof(ELicenseType), type.LicenseTypeID.ToString())));
-                                                }
-                                            });
+                                {
+                                    if (licenseDetail.Where(x => x.LicenseID == lic.LicenseId).Count() > 0)
+                                    {
+                                        licenseDetail.Where(x => x.LicenseID == lic.LicenseId).ToList().
+                                            ForEach(
+                                                type =>
+                                                lic.LicenseType.Add((ELicenseType)System.Enum.Parse(typeof(ELicenseType), type.LicenseTypeID.ToString())));
+                                    }
+                                });
                         }
                     }
                 },
@@ -93,6 +94,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.ExpirationDate
                                         , license.NumOfDevice
                                         , license.LicenseDesc
+                                        , license.IsOneOff
                                         , license.IsActive
                                         , licenseDetails.ToString()
                                     });
@@ -130,6 +132,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.ExpirationDate
                                         , license.NumOfDevice
                                         , license.LicenseDesc
+                                        , license.IsOneOff
                                         , license.IsActive
                                         , licenseDetails.ToString()
                                     });

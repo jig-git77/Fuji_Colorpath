@@ -519,4 +519,55 @@ namespace FujifilmUSA.Sync.Entity
         Status_E = 1
     }
 
+    public enum EInkOrder
+    {
+        [Description("EInkOrder_KCMY")]//K C M Y
+        KCMY = 0,
+        [Description("EInkOrder_CMYK")]//C M Y K
+        CMYK = 1,
+        [Description("EInkOrder_YMCK")]//Y M C K
+        YMCK = 2,
+        [Description("EInkOrder_CKMY")]//C K M Y
+        CKMY = 3,
+        [Description("EInkOrder_CKYM")]//C K Y M
+        CKYM = 4,
+        [Description("EInkOrder_CMKY")]//C M K Y
+        CMKY = 5,
+        [Description("EInkOrder_CYKM")]//C Y K M
+        CYKM = 6,
+        [Description("EInkOrder_CYMK")]//C Y M K
+        CYMK = 7,
+        [Description("EInkOrder_KCYM")]//K C Y M
+        KCYM = 8,
+        [Description("EInkOrder_KMCY")]//K M C Y
+        KMCY = 9,
+        [Description("EInkOrder_KMYC")]//K M Y C
+        KMYC = 10,
+        [Description("EInkOrder_KYCM")]//K Y C M
+        KYCM = 11,
+        [Description("EInkOrder_KYMC")]//K Y M C
+        KYMC = 12,
+        [Description("EInkOrder_MCKY")]//M C K Y
+        MCKY = 13,
+        [Description("EInkOrder_MCYK")]//M C Y K
+        MCYK = 14,
+        [Description("EInkOrder_MKCY")]//M K C Y
+        MKCY = 15,
+        [Description("EInkOrder_MKYC")]//M K Y C
+        MKYC = 16,
+        [Description("EInkOrder_MYCK")]//M Y C K
+        MYCK = 17,
+        [Description("EInkOrder_MYKC")]//M Y K C
+        MYKC = 18,
+        [Description("EInkOrder_YCKM")]//Y C K M
+        YCKM = 19,
+        [Description("EInkOrder_YCMK")]//Y C M K
+        YCMK = 20,
+        [Description("EInkOrder_YKCM")]//Y K C M
+        YKCM = 21,
+        [Description("EInkOrder_YKMC")]//Y K M C
+        YKMC = 22,
+        [Description("EInkOrder_YMKC")]//Y M K C
+        YMKC = 23
+    }
 }
