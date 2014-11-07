@@ -189,6 +189,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     txtPaper_L.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetL.ToString();   //Paper L* Value
                     txtPaper_a.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetA.ToString();   //Paper a* Value
                     txtPaper_b.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetB.ToString();   //Paper b* Value
+
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Project type selection is disable
+                    {
+                        cmbProjectType.Enabled = false;
+                    }
                 }
             }
             cmbDensityType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.DensityType).ToString(); //DensityType Selection

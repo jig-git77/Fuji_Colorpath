@@ -106,6 +106,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentProject.ProjectId > 0)
                     {
                         lnkSave.Enabled = true;
+                        lnkDescription.Enabled = true;
                     }
                     break;
                 case ECurrentProjectStatus.Run:

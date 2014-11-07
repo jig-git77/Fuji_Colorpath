@@ -111,6 +111,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtBlanket.Text = SessionManager.Instance.CurrentProject.PrintCondition.Blanket;
                 txtBlanketAge.Text = SessionManager.Instance.CurrentProject.PrintCondition.BlanketAge;
                 txtScreening.Text = SessionManager.Instance.CurrentProject.PrintCondition.Screening;
+
+                if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.Edit) //If project is in Edit mode display Description tab for editing everytime and pop up Next button to move to next page
+                {
+                    lnkbtNext.Visible = true;
+                    lnkbtnPrintDescription.Visible = false;
+                }
             }
         }
 
@@ -152,17 +158,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.TargetColorSpace;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
-        #endregion
-
-        #region Properties
-        private bool IsXmfUser
-        {
-            get
-            {
-                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
-            }
-        }
-        #endregion
 
         protected void ddlLicenseType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -175,5 +170,45 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Tr_OffsetPrintData.Visible = false;
             }
         }
+
+        protected void lnkbtnNext_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentProject.PrintCondition = new FujifilmUSA.Sync.Entity.PrintCondition
+            {
+                Media = txtMedia.Text.Trim(),
+                Colorant = txtColorant.Text.Trim(),
+                RipSettings = txtRipSetting.Text.Trim(),
+                Notes = txtNotes.Text.Trim(),
+                TechnicianName = txtTechnicianName.Text.Trim(),
+                InkOrder = (EInkOrder)Convert.ToInt32(cmbInkOrder.SelectedItem.Value),
+                FountainSolution = txtFountainSol.Text.Trim(),
+                Blanket = txtBlanket.Text.Trim(),
+                BlanketAge = txtBlanketAge.Text.Trim(),
+                Screening = txtScreening.Text.Trim()
+            };
+
+            SessionManager.Instance.CurrentProject.LicenseType = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //--If validation send it to Validation Setup page
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ValidationSetup;
+            }
+            else                //--Else send it to Measurement Setup page
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
+            }
+            ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
+        }
+        #endregion
+
+        #region Properties
+        private bool IsXmfUser
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
+            }
+        }
+        #endregion
+
     }
 }

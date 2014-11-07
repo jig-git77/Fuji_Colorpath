@@ -70,10 +70,21 @@
         <span>
             <asp:Image ID="imgAdd" runat="server" 
         ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
-<asp:Localize runat="server" ID="locTargetColorSpace" Text="Target ColorSpace" 
-        meta:resourcekey="locTargetColorSpaceResource1"></asp:Localize>
+            <asp:Localize runat="server" ID="locTargetColorSpace" Text="Target ColorSpace" 
+                meta:resourcekey="locTargetColorSpaceResource1"></asp:Localize>
+        </span>
+    </asp:LinkButton>
 
-</span></asp:LinkButton>
+    <asp:LinkButton ID="lnkbtNext" runat="server" CssClass="button" 
+        ValidationGroup="vgDescription" onclick="lnkbtnNext_Click" Visible="false">
+        <span>
+            <asp:Image ID="Image1" runat="server" 
+        ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
+            <asp:Localize runat="server" ID="Localize1" Text="Next" 
+                meta:resourcekey="locNextResource1"></asp:Localize>
+        </span>
+    </asp:LinkButton>
+
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
