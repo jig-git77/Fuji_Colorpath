@@ -601,6 +601,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chartDeltaE.Series[0].Points.Clear();
             chartDeltaE.Series[1].Points.Clear();
             chartDeltaE.Series[2].Points.Clear();
+            chartDeltaE.Series[3].Points.Clear();
 
             #region //========== Declarations ==========//
             // === Series0 to display Thresold value (ΔELimit) === //
@@ -620,6 +621,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             objSeries2.XValueType = ChartValueType.Int32;
             objSeries2.YValueType = ChartValueType.String;
             objSeries2.CustomProperties = "DrawingStyle=Cylinder";
+
+            // === Series3 to display red marker on Thresold value for Previous Run=== //
+            Series objSeries3 = (Series)chartDeltaE.Series[3];
+            objSeries3.XValueType = ChartValueType.Int32;
+            objSeries3.YValueType = ChartValueType.String;
+            objSeries3.CustomProperties = "DrawingStyle=Cylinder";
 
             #endregion
 
@@ -717,7 +724,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     SBDeltaEPatches.Append("</tr>");
 
-                    BindDeltaEValueACTTHValue(objSeries0, objSeries1, objSeries2, DT, i, TooltipTitle);
+                    BindDeltaEValueACTTHValue(objSeries0, objSeries1, objSeries2, objSeries3, DT, i, TooltipTitle);
                 }
                 LitDeltaEPatches.Text = SBDeltaEPatches.ToString();
             }
@@ -727,15 +734,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chartDeltaE.SaveImage(Server.MapPath(FileName));
         }
 
-        private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, Series objSeries2, List<AnalyzeChart> DR, int Index, string TooltipTitle)
+        private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, Series objSeries2, Series objSeries3, List<AnalyzeChart> DR, int Index, string TooltipTitle)
         {
-            Double Y1, Y2, Y3;
-            Y1 = Y2 = Y3 = 0;
+            Double Y1, Y2, Y3, Y4;
+            Y1 = Y2 = Y3 = Y4 = 0;
 
             Y1 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DtELimit))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DtELimit))));
             Y2 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))));
             Y3 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))));
-
+            Y4 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].PreAvgΔE.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].PreAvgΔE.ToString()))));
+       
             // === When Actual value is not available then no series will display and no marker will display
             if (Y2 == 0)
                 Y1 = Y2;
@@ -749,6 +757,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //-----For Sync1D projects or validation projects
             {
                 objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
+                if(Y4 > 0)
+                    objSeries3.Points.AddXY((Double)0, Y4); //------Green marker image plot for Previous Run's Avg ΔE
             }
 
             #region Add Tooltip HTML
@@ -774,6 +784,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 toolTip.Append(" (Thr." + DR[Index].ΔELimit.ToString() + ")");
             }
             toolTip.Append("</td></tr>");
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D && DR[Index].PreAvgΔE > 0) //-----For Sync1D projects, display Previous ΔE in tooltip also
+            {
+                toolTip.Append("<tr><td>Previous ΔE </td><td>"); //Previous ΔE Value
+                toolTip.Append(DR[Index].PreAvgΔE.ToString());
+                toolTip.Append("</td></tr>");
+            }
             toolTip.Append("</table></td></tr>");
             toolTip.Append("</table>");
             #endregion
@@ -879,6 +895,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 CHRT_SummaryDensity.Series[0].Points.Clear();
                 CHRT_SummaryDensity.Series[1].Points.Clear();
                 CHRT_SummaryDensity.Series[2].Points.Clear();
+                CHRT_SummaryDensity.Series[3].Points.Clear();
 
                 #region //========== Declarations ==========//
                 // === Series0 to display Thresold value === //    
@@ -899,6 +916,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 objSeries2.YValueType = ChartValueType.String;
                 objSeries2.CustomProperties = "DrawingStyle=Cylinder";
 
+                // === Series3 to display Green marker on Previous Run's average value === //
+                Series objSeries3 = (Series)CHRT_SummaryDensity.Series[3];
+                objSeries3.XValueType = ChartValueType.String;
+                objSeries3.YValueType = ChartValueType.String;
+                objSeries3.CustomProperties = "DrawingStyle=Cylinder";
+
                 #endregion
 
                 if (DT != null && DT.Count > 0)
@@ -907,25 +930,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         CValue = Utilities.DecimalRound(Convert.ToDouble(DT[i].Density));
                         if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Cyan).ToString())
-                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "C", CValue, DT[i].HtmlColor.ToString(), DT[i].Density, DT[i].DensityLimit, GetResourceString(_recCyanPathMetrics), true);
+                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, objSeries3, "C", CValue, DT[i].HtmlColor.ToString(), DT[i].Density, DT[i].DensityLimit, DT[i].PreAvgDensity, GetResourceString(_recCyanPathMetrics), true);
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Magenta).ToString())
-                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "M", CValue, DT[i].HtmlColor.ToString(), DT[i].Density, DT[i].DensityLimit, GetResourceString(_recMagentaPathMetrics), true);
+                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, objSeries3, "M", CValue, DT[i].HtmlColor.ToString(), DT[i].Density, DT[i].DensityLimit, DT[i].PreAvgDensity, GetResourceString(_recMagentaPathMetrics), true);
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Yellow).ToString())
-                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "Y", CValue, DT[i].HtmlColor.ToString(), DT[i].Density, DT[i].DensityLimit, GetResourceString(_recYellowPathMetrics), true);
+                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, objSeries3, "Y", CValue, DT[i].HtmlColor.ToString(), DT[i].Density, DT[i].DensityLimit, DT[i].PreAvgDensity, GetResourceString(_recYellowPathMetrics), true);
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Black).ToString())
-                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "K", CValue, DT[i].HtmlColor.ToString(), DT[i].Density, DT[i].DensityLimit, GetResourceString(_recBlackPathMetrics), true);
+                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, objSeries3, "K", CValue, DT[i].HtmlColor.ToString(), DT[i].Density, DT[i].DensityLimit, DT[i].PreAvgDensity, GetResourceString(_recBlackPathMetrics), true);
                     }
-
                 }
                 else
                 {
                     CHRT_SummaryDensity.ChartAreas["Default"].AxisY.Minimum = -10;
                     CHRT_SummaryDensity.ChartAreas["Default"].AxisY.Maximum = 10;
 
-                    AddDensityPoint(0, objSeries0, objSeries1, objSeries2, "C", 0, "#E9E9E9", 0, 0, "", false);
-                    AddDensityPoint(1, objSeries0, objSeries1, objSeries2, "M", 0, "#E9E9E9", 0, 0, "", false);
-                    AddDensityPoint(2, objSeries0, objSeries1, objSeries2, "Y", 0, "#E9E9E9", 0, 0, "", false);
-                    AddDensityPoint(3, objSeries0, objSeries1, objSeries2, "K", 0, "#E9E9E9", 0, 0, "", false);
+                    AddDensityPoint(0, objSeries0, objSeries1, objSeries2, objSeries3, "C", 0, "#E9E9E9", 0, 0, 0, "", false);
+                    AddDensityPoint(1, objSeries0, objSeries1, objSeries2, objSeries3, "M", 0, "#E9E9E9", 0, 0, 0, "", false);
+                    AddDensityPoint(2, objSeries0, objSeries1, objSeries2, objSeries3, "Y", 0, "#E9E9E9", 0, 0, 0, "", false);
+                    AddDensityPoint(3, objSeries0, objSeries1, objSeries2, objSeries3, "K", 0, "#E9E9E9", 0, 0, 0, "", false);
                 }
 
                 FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_SummaryDensity.ImageLocation) + "." + CHRT_SummaryDensity.ImageType;
@@ -933,7 +955,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private void AddDensityPoint(int Index, Series objSeries0, Series objSeries1, Series objSeries2, string _XValue, double _YValue, string HTMLColor, decimal _Actual, decimal _Target, string ColorName, bool isTooltip)
+        private void AddDensityPoint(int Index, Series objSeries0, Series objSeries1, Series objSeries2, Series objSeries3, string _XValue, double _YValue, string HTMLColor, decimal _Actual, decimal _Target, decimal _PreAvgDensity, string ColorName, bool isTooltip)
         {
             try
             {
@@ -952,12 +974,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append("<tr><td>Target</td><td>");
                     toolTip.Append(_Target);
                     toolTip.Append("</td></tr>");
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D && _PreAvgDensity > 0) //-----For Sync1D projects, display Previous Density Avg in tooltip also
+                    {
+                        toolTip.Append("<tr><td>Previous</td><td>");
+                        toolTip.Append(_PreAvgDensity);
+                        toolTip.Append("</td></tr>");
+                    }
                     toolTip.Append("</table></td></tr>");
                     toolTip.Append("</table>");
                     #endregion
                 }
                 objSeries1.Points[Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
-                objSeries2.Points.AddXY(_XValue, _Target);
+                objSeries2.Points.AddXY(_XValue, _Target);  //------Red marker image plot for Tolerance
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D && _PreAvgDensity > 0) //-----For Sync1D projects, display Previous Density Avg in green marker plot also
+                {
+                    objSeries3.Points.AddXY(_XValue, _PreAvgDensity); //------Green marker image plot for Previous Run's Avg Density
+                }
                 objSeries1.Points[Index].Color = System.Drawing.ColorTranslator.FromHtml(HTMLColor);
             }
             catch (Exception Ex)

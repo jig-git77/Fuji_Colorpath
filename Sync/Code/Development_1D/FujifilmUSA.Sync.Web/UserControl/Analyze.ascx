@@ -724,6 +724,9 @@
                                                                  <asp:Series Name="Series2" BorderWidth="0"  Color="Transparent" 
                                                                         IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar" MarkerImage="~/Images/Chart-Red-Image-Vertical.png">
                                                                 </asp:Series> 
+                                                                  <asp:Series Name="Series3" BorderWidth="0"  Color="Transparent" 
+                                                                        IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar" MarkerImage="~/Images/Chart-Red-Image-Vertical-Previous.png">
+                                                                </asp:Series> 
                                                             </Series>
                                                             <ChartAreas>
                                                                 <asp:ChartArea Name="ChartArea1" BackColor="Transparent">
@@ -775,8 +778,11 @@
                                                                 IsVisibleInLegend="false" ChartType="Column">
                                                             </asp:Series>
                                                             <asp:Series Name="Series2" BorderWidth="0" Color="Transparent"
+                                                                IsVisibleInLegend="false" MarkerImage="~/Images/Red.png">
+                                                            </asp:Series>  
+                                                            <asp:Series Name="Series3" BorderWidth="0" Color="Transparent"
                                                                 IsVisibleInLegend="false" MarkerImage="~/Images/green.png">
-                                                            </asp:Series>                                                             
+                                                            </asp:Series>                                                              
                                                         </Series>
                                                         <BorderSkin SkinStyle="None"></BorderSkin>                                                       
                                                         <ChartAreas>

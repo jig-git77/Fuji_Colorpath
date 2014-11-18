@@ -484,7 +484,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
                             TargetL = DataReader.ReadDecimal(x, "TargetL"),
                             Targeta = DataReader.ReadDecimal(x, "Targeta"),
-                            Targetb = DataReader.ReadDecimal(x, "Targetb")
+                            Targetb = DataReader.ReadDecimal(x, "Targetb"),
+                            PreAvgΔE = DataReader.ReadDecimal(x, "PreAvgΔE")
                         }).ToList();
 
                     //PaperPatchDetails
@@ -511,7 +512,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             HtmlColor = DataReader.ReadString(x, "HtmlColor"),
                             PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
                             Density = DataReader.ReadDecimal(x, "Density"),
-                            DensityLimit = DataReader.ReadDecimal(x, "DensityLimit")
+                            DensityLimit = DataReader.ReadDecimal(x, "DensityLimit"),
+                            PreAvgDensity = DataReader.ReadDecimal(x, "PreAvgDensity")
                         }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper_EPrimaryPatches"));

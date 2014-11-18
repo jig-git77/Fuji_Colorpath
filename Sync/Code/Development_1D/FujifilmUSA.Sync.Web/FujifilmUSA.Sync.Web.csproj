@@ -130,6 +130,7 @@
     <Content Include="Images\buttonNormal.png" />
     <Content Include="Images\buttonRight.png" />
     <Content Include="Images\center-content-whitebg.png" />
+    <Content Include="Images\Chart-Red-Image-Vertical-Previous.png" />
     <Content Include="Images\Chart-Red-Image-Vertical.png" />
     <Content Include="Images\chart_preview.png" />
     <Content Include="Images\clear-fillter.png" />
@@ -146,6 +147,7 @@
     <Content Include="Images\CPSPrintStandardLogo.jpg" />
     <Content Include="Images\green.png" />
     <Content Include="Images\InkOptimizeSource.png" />
+    <Content Include="Images\Red.png" />
     <Content Include="Images\Sync1D Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview_G7.jpg" />
     <Content Include="Images\Sync1D Report_preview_Vali.jpg" />
