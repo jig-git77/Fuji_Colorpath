@@ -114,7 +114,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
-                if (SessionManager.Instance.CurrentProject.ProjectTargetLAB == null || SessionManager.Instance.CurrentProject.ProjectTargetLAB.Count == 0)
+                if (SessionManager.Instance.CurrentProject.ProjectTargetLAB == null || SessionManager.Instance.CurrentProject.ProjectTargetLAB.Count == 0 || SessionManager.Instance.CurrentProject.OptimizeRuns == null) //Only get default LAB values when project is in set up mode, once it is saved, get it from its local LAB table
                 {
                     BindTargetLAB();
                 }
@@ -189,6 +189,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     txtPaper_L.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetL.ToString();   //Paper L* Value
                     txtPaper_a.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetA.ToString();   //Paper a* Value
                     txtPaper_b.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetB.ToString();   //Paper b* Value
+                    
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Project type selection is disable
+                    {
+                        cmbProjectType.Enabled = false;
+                    }
                 }
             }
             cmbDensityType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.DensityType).ToString(); //DensityType Selection
