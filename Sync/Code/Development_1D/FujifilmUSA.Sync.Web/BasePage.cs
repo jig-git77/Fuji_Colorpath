@@ -350,7 +350,7 @@ namespace FujifilmUSA.Sync.Web
         {
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
             SessionManager.Instance.CurrentProject = null;
-            Response.RedirectPermanent("SessionEnd.aspx");
+            Response.Redirect("SessionEnd.aspx");
         }
         private void NavigationToNoPermissionPage()
         {

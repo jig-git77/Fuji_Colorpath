@@ -1,10 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SessionEnd.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.SessionEnd" %>
-<script type="text/javascript" language="javascript">
-        function pageLoad() {
-                 $('#dock').hide();
-            }
-</script>
+
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle">

@@ -21,7 +21,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Response.RedirectPermanent("Index.aspx");
         }
         #endregion
-
-
     }
 }

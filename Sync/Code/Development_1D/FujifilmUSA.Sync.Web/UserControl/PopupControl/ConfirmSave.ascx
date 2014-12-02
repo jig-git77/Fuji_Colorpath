@@ -6,6 +6,9 @@
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
     TagPrefix="uc" %>
 <%@ Register TagPrefix="uc" TagName="Statusbar" Src="~/UserControl/Statusbar.ascx" %>
+
+
+
 <script type="text/javascript" language="javascript">
 
     //Click on Close Button
@@ -23,25 +26,36 @@
     }
 
     function CheckOptRunLimit() {
- 
-        if(jQuery("input[id*='hdOptRunLimit']").val() >=  <%= ApplicationConfiguration.Instance.OptimizeRunLimit  %>)
-        {
-            alert("You reach your limit of adding Optimization Runs, Now you have to certify this run.");
-            return false;
-        }
-        else
-        return true;
+   
+          if(jQuery("input[id*='hdOptRunLimit']").val() >= <%= ApplicationConfiguration.Instance.OptimizeRunLimit  %>)
+                {
+                    alert("You reach your limit of adding Optimization Runs, Now you have to certify this run.");
+                    return false;
+                }
+                else
+                    return true;
    }
 
 </script>
 <div id="divConfirmSave" style="display: block; margin: 3px;" class="contantbox tabcontant">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
+
+        <!---Code for stopping cache to store in browser for this page in order to limit same error pops up everytime from cache--->
+        <meta http-equiv="cache-control" content="max-age=0" />
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="expires" content="0" />
+        <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <!---End Code--->
+
             <div style="padding-bottom: 3px;">
                 <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
             </div>
+
         </ContentTemplate>
     </asp:UpdatePanel>
+
     <div class="section_top">
         &nbsp;</div>
     <div class="section_middle">
