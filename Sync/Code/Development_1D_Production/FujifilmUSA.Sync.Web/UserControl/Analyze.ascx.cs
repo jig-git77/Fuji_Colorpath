@@ -14,6 +14,7 @@ using System.Drawing;
 using System.Web.UI.DataVisualization.Charting;
 using System.Text;
 using System.IO;
+using System.Text.RegularExpressions;
 
 
 namespace FujifilmUSA.Sync.Web.UserControl
@@ -2474,9 +2475,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             labelXML = labelXML.Replace("locAct", GetResourceString(_reclocLabelAct));
             labelXML = labelXML.Replace("locSignature", GetResourceString(_reclocLabelSignature));
             labelXML = labelXML.Replace("locDate", GetResourceString(_reclocLabelDate));
-            
+
             //Set the values to Placeholder
-            labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
+            Regex badAmpersand = new Regex("&(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+            const string goodAmpersand = "&amp;";
+
+            labelXML = labelXML.Replace("[Job]", badAmpersand.Replace(measurmentSummary.MeasurementName, goodAmpersand)); //Here "&" is replaced by "&amp" in XML in order to display correctly if measurement name contains "&" letter
+            //labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
             labelXML = labelXML.Replace("[Device]", SessionManager.Instance.CurrentDevice.DeviceName);
             labelXML = labelXML.Replace("[Metric]", measurmentSummary.MetricTargetPresetName);
             labelXML = labelXML.Replace("[PrintStandard]", measurmentSummary.PrintStandardType);
