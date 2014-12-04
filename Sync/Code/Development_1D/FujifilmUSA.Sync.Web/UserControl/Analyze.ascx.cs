@@ -2539,11 +2539,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
             labelXML = labelXML.Replace("locSignature", GetResourceString(_reclocLabelSignature));
             labelXML = labelXML.Replace("locDate", GetResourceString(_reclocLabelDate));
             
-            //Set the values to Placeholder
+            //Replace 5 sensitive characters of XML before passing them
             Regex badAmpersand = new Regex("&(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+            Regex badLessThan = new Regex("<(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+            Regex badGreaterThan = new Regex(">(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+            Regex badDoubleQuotation = new Regex("\"(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+            Regex badapostrophes = new Regex("'(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
             const string goodAmpersand = "&amp;";
+            const string goodLessThan = "&lt;";
+            const string goodGreaterThan = "&gt;";
+            const string goodDoubleQuotation = "&quot;";
+            const string goodapostrophes = "&apos;";
 
-            labelXML = labelXML.Replace("[Job]", badAmpersand.Replace(measurmentSummary.MeasurementName, goodAmpersand)); //Here "&" is replaced by "&amp" in XML in order to display correctly if measurement name contains "&" letter
+            //Set the values to Placeholder
+            labelXML = labelXML.Replace("[Job]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.MeasurementName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if measurement name contains "&" letter or rest of 4 letters
             //labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
             labelXML = labelXML.Replace("[Device]", SessionManager.Instance.CurrentDevice.DeviceName);
             labelXML = labelXML.Replace("[Metric]", measurmentSummary.MetricTargetPresetName);

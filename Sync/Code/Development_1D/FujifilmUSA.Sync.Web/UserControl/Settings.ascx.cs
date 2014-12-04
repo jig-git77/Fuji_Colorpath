@@ -37,7 +37,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             divMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
             divPrintStandardType.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType);
-
+            divPatchTolerance.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance);
+            
             ////seperator image 
             divBranchSeprator.Visible = tdBranch.Visible && tdcompany.Visible;
             divUserSeprator.Visible = tdUser.Visible && tdBranch.Visible;
@@ -102,10 +103,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("MetricTargetPresetManagement.aspx");
         }
-
         protected void lnkbtnPrintStandardType_Click(object sender, EventArgs e)
         {
             Response.RedirectPermanent("PrintStandardTypeManagement.aspx");
+        }
+        protected void lnkbtnPatchTolerance_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("PatchTolerance.aspx");
         }
     }
 }
