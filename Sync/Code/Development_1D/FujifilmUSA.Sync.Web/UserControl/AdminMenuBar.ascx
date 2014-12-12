@@ -136,6 +136,13 @@
           ID="Localize2"></asp:Localize> 
             </span>
       </asp:LinkButton>
+      <asp:LinkButton ID="lnknPatchTolerance" runat="server" 
+          CssClass="dock-item overlapobject" onclick="lnkbtnPatchTolerance_Click">
+            <img src="Images/application-configuration.png" style="position:relative;z-index:1; " alt="Patch Tolerance" />
+            <span> <asp:Localize Text="Patch Tolerance" runat="server" 
+          ID="Localize3"></asp:Localize> 
+            </span>
+      </asp:LinkButton>
   </div> 
 </div>
 </div>

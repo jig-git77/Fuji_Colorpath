@@ -179,6 +179,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> Companies { get; set; }
         public Dictionary<int, string> RegionList { get; set; }
         public int RegionId { get; set; }
+        public List<ReferenceChartType> ReferenceChartType { get; set; }
+        public int InstrumentId { get; set; }
+        public Dictionary<int, string> InstrumentTypeList { get; set; }
+        public List<Entity.CPSyncV.MetricSum> MetricSumList { get; set; }
+        public int ReferenceChartTypeId { get; set; }
+        public Dictionary<int, string> ChartPatchList { get; set; }
         #endregion
     }
 }

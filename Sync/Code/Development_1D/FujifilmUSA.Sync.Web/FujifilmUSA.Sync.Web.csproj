@@ -79,6 +79,7 @@
     <Content Include="AddDeviceProfilerSettings.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
     <Content Include="AddMetricTargetPreset.aspx" />
+    <Content Include="AddPatchTolerance.aspx" />
     <Content Include="AddPrintStandardType.aspx" />
     <Content Include="AddReferenceChart.aspx" />
     <Content Include="AddSourceProfile.aspx" />
@@ -283,6 +284,7 @@
     <Content Include="UserControl\ActivityValidationRules.ascx" />
     <Content Include="UserControl\AddDeviceProfilerSettings.ascx" />
     <Content Include="UserControl\AddMetricTargetPreset.ascx" />
+    <Content Include="UserControl\AddPatchTolerance.ascx" />
     <Content Include="UserControl\AddPrintStandardType.ascx" />
     <Content Include="UserControl\AddProject\ValidationSetup.ascx" />
     <Content Include="UserControl\AddReferenceChart.ascx" />
@@ -575,6 +577,13 @@
     </Compile>
     <Compile Include="AddMetricTargetPreset.aspx.designer.cs">
       <DependentUpon>AddMetricTargetPreset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddPatchTolerance.aspx.cs">
+      <DependentUpon>AddPatchTolerance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddPatchTolerance.aspx.designer.cs">
+      <DependentUpon>AddPatchTolerance.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddPrintStandardType.aspx.cs">
       <DependentUpon>AddPrintStandardType.aspx</DependentUpon>
@@ -995,6 +1004,13 @@
     </Compile>
     <Compile Include="UserControl\AddMetricTargetPreset.ascx.designer.cs">
       <DependentUpon>AddMetricTargetPreset.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddPatchTolerance.ascx.cs">
+      <DependentUpon>AddPatchTolerance.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddPatchTolerance.ascx.designer.cs">
+      <DependentUpon>AddPatchTolerance.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddPrintStandardType.ascx.cs">
       <DependentUpon>AddPrintStandardType.ascx</DependentUpon>
@@ -2670,6 +2686,15 @@
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\PrintStandardTypeManagement.ascx.ja.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddPatchTolerance.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddPatchTolerance.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddPatchTolerance.ascx.de.resx" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
@@ -2688,7 +2713,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

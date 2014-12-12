@@ -33,6 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnApplicationConfiguration.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageApplicationConfiguration);
                 lbtnMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
                 lbtnPrintStandardType.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType);
+                lnknPatchTolerance.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance);
             }
         }
         #endregion
@@ -113,7 +114,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Response.RedirectPermanent("PrintStandardTypeManagement.aspx");
         }
 
+        protected void lnkbtnPatchTolerance_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("AddPatchTolerance.aspx");
+        }
         #endregion  
+
+        
                
     }
 }

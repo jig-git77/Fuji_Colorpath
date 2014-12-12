@@ -74,5 +74,41 @@ namespace FujifilmUSA.Sync.Presenter
             metricTargetPresetBusiness.ErrorOccured += _viewAddMetricTargetPreset.ErrorOccured;
             _viewAddMetricTargetPreset.MetricTargetPreset = metricTargetPresetBusiness.GetMetricTargetPreset(_viewAddMetricTargetPreset.MetricTargetPreset.MetricTargetPresetID, _viewAddMetricTargetPreset.CurrentUserId).FirstOrDefault();
         }
+
+        //-----Functions for Patch Tolerance level-------//
+        public void GetReferenceChartType()
+        {
+            var metricTargetPresetBusiness = BusinessFactory<IMetricTargetPresetBusiness>.CreateObject();
+            metricTargetPresetBusiness.ErrorOccured += _viewAddMetricTargetPreset.ErrorOccured;
+            _viewAddMetricTargetPreset.ReferenceChartType = metricTargetPresetBusiness.GetReferenceChartTypeList(0,0,0,0,_viewAddMetricTargetPreset.InstrumentId);
+        }
+
+        public void InstrumentTypeList()
+        {
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddMetricTargetPreset.ErrorOccured;
+            _viewAddMetricTargetPreset.InstrumentTypeList = miscDataBusiness.GetInstrumentTypeList();
+        }
+
+        public void GetMetricSumList()
+        {
+            var metricTargetPresetBusiness = BusinessFactory<IMetricTargetPresetBusiness>.CreateObject();
+            metricTargetPresetBusiness.ErrorOccured += _viewAddMetricTargetPreset.ErrorOccured;
+            _viewAddMetricTargetPreset.MetricSumList = metricTargetPresetBusiness.GetMetricSumList();
+        }
+
+        public void BindChartPatchList()
+        {
+            var metricTargetPresetBusiness = BusinessFactory<IMetricTargetPresetBusiness>.CreateObject();
+            metricTargetPresetBusiness.ErrorOccured += _viewAddMetricTargetPreset.ErrorOccured;
+            _viewAddMetricTargetPreset.ChartPatchList = metricTargetPresetBusiness.BindChartPatchList(_viewAddMetricTargetPreset.ReferenceChartTypeId);
+        }
+
+        public void InsertMetricTargetPatchPreset()
+        {
+            var metricTargetPresetBusiness = BusinessFactory<IMetricTargetPresetBusiness>.CreateObject();
+            metricTargetPresetBusiness.ErrorOccured += _viewAddMetricTargetPreset.ErrorOccured;
+            metricTargetPresetBusiness.InsertMetricTargetPatchPreset(_viewAddMetricTargetPreset.MetricTargetPreset);
+        }
     }
 }

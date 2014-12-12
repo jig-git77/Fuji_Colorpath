@@ -995,13 +995,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurementDevice;
         }
 
-        public List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0)
+        public List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0)
         {
             var presetList = new List<ReferenceChartType>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartTypeList", new object[] { measurementDeviceId, ChartDisplayType, ProjectTypeId, MetricTargetPresetID });
+                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartTypeList", new object[] { measurementDeviceId, ChartDisplayType, ProjectTypeId, MetricTargetPresetID, InstrumentTypeID });
                     if (dsPresetList != null && dsPresetList.Tables.Count > 0)
                     {
                         presetList = dsPresetList.Tables[0].AsEnumerable().Select(

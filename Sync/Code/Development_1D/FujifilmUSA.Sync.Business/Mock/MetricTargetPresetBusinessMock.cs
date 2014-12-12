@@ -4,7 +4,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Mock
 {
-    public class MetricTargetPresetBusinessMockP : IMetricTargetPresetBusiness
+    public class MetricTargetPresetBusinessMock : IMetricTargetPresetBusiness
     {
         #region  IMetricTargetPresetBusiness Members
 
@@ -28,6 +28,25 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Entity.CPSyncV.MetricTargetPreset>();
         }
 
+        public List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0)
+        {
+            return new List<ReferenceChartType>();
+        }
+
+        public List<Entity.CPSyncV.MetricSum> GetMetricSumList()
+        {
+            return new List<Entity.CPSyncV.MetricSum>();
+        }
+
+        public Dictionary<int, string> BindChartPatchList(int ReferenceChartTypeId)
+        {
+            return new Dictionary<int, string>();
+        }
+
+        public int InsertMetricTargetPatchPreset(Entity.CPSyncV.MetricTargetPreset MetricTargetPreset)
+        {
+            return 0;
+        }
         #endregion
 
         #region ITaskBase Members

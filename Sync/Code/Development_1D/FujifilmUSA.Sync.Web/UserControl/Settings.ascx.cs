@@ -109,7 +109,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void lnkbtnPatchTolerance_Click(object sender, EventArgs e)
         {
-            Response.RedirectPermanent("PatchTolerance.aspx");
+            Response.RedirectPermanent("AddPatchTolerance.aspx");
         }
     }
 }
