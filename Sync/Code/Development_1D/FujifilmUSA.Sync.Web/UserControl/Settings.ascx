@@ -264,22 +264,7 @@
                 <td style="height:50px;">
                 </td>
             </tr>
-            <tr align="center">
-                <td align="center" >
-                <div id="divPatchTolerance" runat ="server" align="center" valign="bottom" style="width:150px;float:left;">
-                    <asp:LinkButton ID="lnkbtnPatchTolerance" runat="server"
-                        PostBackUrl="~/AddPatchTolerance.aspx" onclick="lnkbtnPatchTolerance_Click">
-                        <div>
-                            <asp:Image ID="Image6" runat="server" AlternateText="Patch Tolerance"
-                                ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Patch Tolerance" meta:resourcekey="imgPatchToleranceResource1" />
-                        </div>
-                        <asp:Localize Text="Patch Tolerance" runat="server" ID="Localize3" meta:resourcekey="locPatchToleranceResource1"></asp:Localize>
-                    </asp:LinkButton>
-                </div>                               
-                
-                </td>
-                </tr>             
-                 
+          
         </table>
 
 

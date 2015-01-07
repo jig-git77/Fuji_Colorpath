@@ -203,27 +203,28 @@ function presentGetPosDialog(scanner, myQuery) {
     OnQuery(myQuery);
 }
 function OnQuery(question) {
+
     // Setup the clock to close the window with the appropriate question
     //$('modalWindow').onclick = function() { OnModalWindowClick(question) };
     // Change the text in the window then display it
     var newHTML = question['Prompt'];
-   // alert(question["Request"]);
+
+    // alert(question["Request"]);
+
     //alert(question["Request"]);
     if (question["Request"] == "GETPOSINSTRUCTIONS") {
 
-       // alert(newHTML)
+        alert(newHTML) //uncommented this line.
+
         if (question["Answers"] == "NONE") {
             // If you can't answer it here, then just return
             return;
         }
-        
         // Notify the user that we are done
         question["Result"] = "OK";
         plugin().queryDone(question);
     }
-
     else if (question["Request"] == "CALIBRATEINSTRUCTIONS") {
-    
         // myQuery["Prompt"] = myQuery[myQuery["Request"]];
         jQuery("[id*='lblMessage']").css('color', 'Black');
         jQuery("[id*='lblMessage']").html(locStatusText + " " + newHTML);
@@ -233,7 +234,13 @@ function OnQuery(question) {
             plugin().queryDone(question);
         }
     }
+    else { ////added this else
+        // myQuery["Prompt"] = myQuery[myQuery["Request"]];
+        jQuery("[id*='lblMessage']").css('color', 'Black');
+        jQuery("[id*='lblMessage']").html(locStatusText + " " + newHTML);
+    }
 }
+
 
 function presentGetPosDone(scanner, query, final) {
     //alert("#7 About to call presentGetPosDone");

@@ -24,5 +24,7 @@ namespace FujifilmUSA.Sync.Entity.CPSyncV
         public int ReferenceChartTypeId { get; set; }
         public List<MetricSum> MetricSumTolerances { get; set; }
         public List<PatchTolerance> PatchTolerances { get; set; }
+        public bool IsPatchTolerance { get; set; }
+        public int InstrumentTypeID { get; set; }
     }
 }

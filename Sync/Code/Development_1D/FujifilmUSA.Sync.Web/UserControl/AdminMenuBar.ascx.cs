@@ -31,17 +31,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnActivityValidationRules.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageActivityValidationRules);
                 lbtnProfilerSettings.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDeviceProfileSettings);
                 lbtnApplicationConfiguration.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageApplicationConfiguration);
-                lbtnMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
+                lbtnMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance); //Assign PatchTolerance Level to display only management page to Add patch Tolerance
                 lbtnPrintStandardType.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType);
-                lnknPatchTolerance.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance);
             }
         }
         #endregion
 
         #region "Control Events"
         
-
-
         protected void lbtnCompany_Click(object sender, EventArgs e)
         {
             Response.RedirectPermanent("CompanyManagement.aspx");
@@ -114,13 +111,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Response.RedirectPermanent("PrintStandardTypeManagement.aspx");
         }
 
-        protected void lnkbtnPatchTolerance_Click(object sender, EventArgs e)
-        {
-            Response.RedirectPermanent("AddPatchTolerance.aspx");
-        }
         #endregion  
-
-        
-               
+   
     }
 }

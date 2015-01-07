@@ -38,12 +38,22 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Entity.CPSyncV.MetricSum>();
         }
 
+        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPatchPreset(int metricTargetPresetId, int currentUserId)
+        {
+            return new List<Entity.CPSyncV.MetricTargetPreset>();
+        }
+
         public Dictionary<int, string> BindChartPatchList(int ReferenceChartTypeId)
         {
             return new Dictionary<int, string>();
         }
 
         public int InsertMetricTargetPatchPreset(Entity.CPSyncV.MetricTargetPreset MetricTargetPreset)
+        {
+            return 0;
+        }
+
+        public int UpdateMetricTargetPatchPreset(Entity.CPSyncV.MetricTargetPreset MetricTargetPreset)
         {
             return 0;
         }

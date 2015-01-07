@@ -231,7 +231,9 @@
                                                              <label><b><asp:Localize runat="server" Text="Metric Target Preset Tolerances" 
                                                                         ID="locTolerances" meta:resourcekey="locTolerancesResource1" ></asp:Localize></b></label>
                                                             <br />
-                                                            <asp:ListView ID="lvMTPTolerances" runat="server" ItemPlaceholderID="phMTPItemTolerances">
+                                                            <asp:ListView ID="lvMTPTolerances" runat="server" 
+                                                                 ItemPlaceholderID="phMTPItemTolerances" 
+                                                                 onitemdatabound="lvMTPTolerances_ItemDataBound">
                                                                 <LayoutTemplate>
                                                                     <table border="0" cellpadding="0" cellspacing="0">
 	                                                                    <tr>
@@ -248,7 +250,7 @@
 			                                                                  <asp:Label runat="server" Text='<%# Eval("MetricSumName") %>' ID="lblToleranceName"></asp:Label>
 		                                                                    </td>
 		                                                                    <td>
-			                                                                  <asp:TextBox runat="server" ID="txtTolerance" onkeypress="return AllowOnlyNumber(event)" Width="30px" MaxLength="2"></asp:TextBox>  
+			                                                                  <asp:TextBox runat="server" Text='<%# Eval("TargetValue") %>' ID="txtTolerance" onkeypress="return AllowOnlyNumber(event)" Width="30px" MaxLength="2"></asp:TextBox>  
 		                                                                    </td>		                                                                    
 	                                                                    </tr>
                                                                 </ItemTemplate>
@@ -316,8 +318,6 @@
                                     </td>
                                 </tr>
 
-
-
                                 <tr>
                                     <td>
                                     </td>
@@ -336,9 +336,7 @@
                                                     <span> <asp:Localize Text="Cancel" ID="locCancel" runat="server" 
                                                     meta:resourcekey="locCancelResource1"></asp:Localize> </span>
                                                 </asp:LinkButton>
-                                                <br />
-                                                <asp:Label ID="lblMsg" runat="server" Font-Bold="True" ForeColor="Green"></asp:Label>
-                                            </div>
+                                             </div>
                                         </div>
                                         <div class="clear">
                                         </div>

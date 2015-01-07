@@ -17,7 +17,9 @@ namespace FujifilmUSA.Sync.Business.Interface
 
         List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0);
         List<Entity.CPSyncV.MetricSum> GetMetricSumList();
+        List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPatchPreset(int metricTargetPresetId, int currentUserId);
         Dictionary<int, string> BindChartPatchList(int ReferenceChartTypeId);
         int InsertMetricTargetPatchPreset(Entity.CPSyncV.MetricTargetPreset MetricTargetPreset);
+        int UpdateMetricTargetPatchPreset(Entity.CPSyncV.MetricTargetPreset MetricTargetPreset);
     }
 }

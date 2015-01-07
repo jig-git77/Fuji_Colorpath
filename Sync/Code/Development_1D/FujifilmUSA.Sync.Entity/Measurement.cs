@@ -25,5 +25,6 @@ namespace FujifilmUSA.Sync.Entity
         public int ValidationType { get; set; }
         public string PrintStandardType { get; set; }
         public int PCSDataType { get; set; }
+        public List<Entity.CPSyncV.PatchTolerance> PatchTolerances { get; set; }
     }
 }

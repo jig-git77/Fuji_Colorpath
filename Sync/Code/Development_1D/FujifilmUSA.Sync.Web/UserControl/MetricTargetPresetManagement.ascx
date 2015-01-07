@@ -94,15 +94,27 @@
     <div class="head">
         <h1><asp:Localize runat="server" ID="locMetricTargetPresetMgmt" Text="Metric Target Preset Management" 
                 meta:resourcekey="locMetricTargetPresetMgmtResource1"></asp:Localize></h1>
-        <asp:LinkButton ID="likAdd" runat="server" class="button" 
-            OnClick="likAdd_Click" meta:resourcekey="likAddResource1">
+          <asp:LinkButton ID="lnkbtnPatchTolerance" runat="server" class="button" 
+                meta:resourcekey="likAddResource1" 
+            onclick="lnkbtnPatchTolerance_Click" Visible="false">
+                <span>
+                    <asp:Image ID="Image1" runat="server" 
+                ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
+                
+            <asp:Localize runat="server" Text="Add Metric Target Patch Preset" ID="Localize1" 
+                        meta:resourcekey="locAddMetricTargetPatchPresetResource1"></asp:Localize>
+            </span>
+        </asp:LinkButton>
+
+        &nbsp;<asp:LinkButton ID="likAdd" runat="server" class="button" 
+            OnClick="likAdd_Click" meta:resourcekey="likAddResource1" Visible="false">
             <span>
                 <asp:Image ID="imgAdd" runat="server" 
             ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
                 
-<asp:Localize runat="server" Text="Add Metric Target Preset" ID="locAddMetricTargetPreset" 
-            meta:resourcekey="locAddMetricTargetPresetResource1"></asp:Localize>
-</span>
+            <asp:Localize runat="server" Text="Add Metric Target Preset" ID="locAddMetricTargetPreset" 
+                        meta:resourcekey="locAddMetricTargetPresetResource1"></asp:Localize>
+            </span>
         </asp:LinkButton>
     </div>
     <div class="clear">
@@ -121,7 +133,7 @@
                     <GroupingSettings CaseSensitive="False" />
                     <HeaderStyle Font-Bold="True" />
                     <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
-                    <MasterTableView DataKeyNames="MetricTargetPresetID,Company.CompanyID,MetricTargetPresetName,IsUsed">
+                    <MasterTableView DataKeyNames="MetricTargetPresetID,Company.CompanyID,MetricTargetPresetName,IsUsed,IsPatchTolerance">
                         <CommandItemSettings ExportToPdfText="Export to PDF" />
                         <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" 
                             Visible="True">

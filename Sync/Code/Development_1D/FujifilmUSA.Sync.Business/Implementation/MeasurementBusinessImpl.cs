@@ -369,7 +369,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var VmeasurementSummary = new List<Measurement>();
             string storedProc = "CPSyncV.GetVMeasurementDeltasByMeasurementID";
             if (IsSync1DType)
-            {
+                {
                 storedProc = "CPSync.GetMeasurementDeltasByMeasurementID";
                 if (IsAverageOfMeasurements)
                 {
@@ -413,6 +413,19 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                Actual = DataReader.ReadDecimal(x, "MeasuredValue"),
                                IsNotOK = DataReader.ReadBoolean(x, "IsNotOK")
                            }).ToList();
+
+                        if (IsSync1DType == false) //----Patch Tolerance is only available for Validation projects
+                        {
+                            VmeasurementSummary[0].PatchTolerances = dsMeasurements.Tables[2].AsEnumerable().
+                               Select(x => new Entity.CPSyncV.PatchTolerance()
+                               {
+                                   SampleName = DataReader.ReadString(x, "SampleName"),
+                                   HtmlColor = DataReader.ReadString(x, "HtmlColor"),
+                                   Tolerance = DataReader.ReadDecimal(x, "TargetValue"),
+                                   Actual = DataReader.ReadDecimal(x, "MeasuredValue"),
+                                   IsNotOK = DataReader.ReadBoolean(x, "IsNotOK")
+                               }).ToList();
+                        }
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetAvgDeltaMeasurement"));

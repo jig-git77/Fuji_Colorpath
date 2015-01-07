@@ -437,6 +437,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
                         rgValidationSummaryMetrics.DataBind();
 
+                        if (MeasurementSummary[0].PatchTolerances != null && MeasurementSummary[0].PatchTolerances.Count > 0) //--If Patch Tolerance available for this mesurement then only display RadGrid
+                        {
+                            rgPatchTolerance.DataSource = MeasurementSummary[0].PatchTolerances;
+                            rgPatchTolerance.DataBind();
+                        }
                         ValidationMeasurementStatus = MeasurementSummary[0].MeasurementStatus;
 
                         if (Page.IsPostBack == false)   //-------Fill MetricSumList when 1st time page load only
@@ -2683,6 +2688,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                     {
+                        EndDate = System.DateTime.Now;
                         //Pass use DLP as false for initial call
                         useDLP = false;
                         DeviceLinkProfile = null;
@@ -2877,6 +2883,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (e.Item is GridDataItem)
             {
                 GridDataItem item = (GridDataItem)e.Item;
+                if (item["IsNotOK"].Text == "True")
+                {
+                    item.ForeColor = System.Drawing.Color.Black;
+                }
+                else
+                    item.ForeColor = System.Drawing.Color.Green;
+            }
+        }
+
+        protected void rgPatchTolerance_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            //---------Changed color of row, if that metric is failed---------------//
+            if (e.Item is GridDataItem)
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+
+                Label lblHTML = (Label)item["HtmlColor"].FindControl("lbl_HTML");
+                lblHTML.BackColor = System.Drawing.ColorTranslator.FromHtml(item.GetDataKeyValue("HTMLColor").ToString());
+
                 if (item["IsNotOK"].Text == "True")
                 {
                     item.ForeColor = System.Drawing.Color.Black;

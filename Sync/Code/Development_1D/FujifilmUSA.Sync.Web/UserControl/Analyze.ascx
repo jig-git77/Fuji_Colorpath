@@ -660,7 +660,42 @@
 
                                             </MasterTableView>                        
 
-                                </telerik:RadGrid>                                
+                                </telerik:RadGrid>      
+                               
+                                <telerik:RadGrid ID="rgPatchTolerance" runat="server" 
+                                    AutoGenerateColumns="False" EnableLinqExpressions="False"                     
+                                    OnItemDataBound="rgPatchTolerance_ItemDataBound" CellSpacing="0" 
+                                    GridLines="None" meta:resourcekey="rgPatchToleranceResource1">   
+                                        <HeaderStyle Font-Bold="True" />  
+                                        <ItemStyle BackColor="#F2F2F2" />
+                                        <AlternatingItemStyle BackColor="#FFFFFF" />                    
+                                            <MasterTableView DataKeyNames="HTMLColor">  
+                                                <Columns>
+                                                    <telerik:GridBoundColumn DataField="SampleName" HeaderText="SampleName" 
+                                                        UniqueName="SampleName" meta:resourcekey="GridBoundColumnResourceP1">
+                                                    </telerik:GridBoundColumn>
+                                                    <telerik:GridTemplateColumn UniqueName="HtmlColor" HeaderText="Patch"
+                                                        DataField="HTMLColor" 
+                                                        meta:resourcekey="GridBoundColumnResourceP2">
+                                                        <ItemTemplate>         
+                                                            <asp:Label ID="lbl_HTML" runat="server" Height="14px" Width="30px" 
+                                                                meta:resourcekey="lbl_HTMLResource1"></asp:Label>                                   
+                                                        </ItemTemplate>
+                                                    </telerik:GridTemplateColumn>  
+                                                    <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tol" 
+                                                        UniqueName="TargetValue" meta:resourcekey="GridBoundColumnResourceP3">
+                                                    </telerik:GridBoundColumn>
+                                                    <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual" 
+                                                        UniqueName="MeasuredValue" meta:resourcekey="GridBoundColumnResourceP4">
+                                                    </telerik:GridBoundColumn>     
+                                                    <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
+                                                        UniqueName="IsNotOK" Display="false"
+                                                        meta:resourcekey="GridBoundColumnResourceP5">
+                                                    </telerik:GridBoundColumn>                                               
+                                                </Columns>     
+                                            </MasterTableView>    
+                                </telerik:RadGrid>           
+                                                          
                             </td>
                         </tr>
                     </table>               

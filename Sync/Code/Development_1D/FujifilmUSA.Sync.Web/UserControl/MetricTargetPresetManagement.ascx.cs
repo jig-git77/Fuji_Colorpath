@@ -41,6 +41,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgMetricTargetPreset.PageSize = Common.Utilities.PageSize;
             if (!Page.IsPostBack)
             {
+                likAdd.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
+                lnkbtnPatchTolerance.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance);
                 BindMetricTargetPresets();
             }
         }
@@ -90,9 +92,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                 case "Edit":
                     MetricTargetPreset.MetricTargetPresetID = Convert.ToInt32(e.CommandArgument);
+                  
                     GridDataItem item = (GridDataItem)e.Item;
                     string parms = Service.Common.Encryption.CryptHelper.EncryptString(MetricTargetPreset.MetricTargetPresetID.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
-                    Response.Redirect("AddMetricTargetPreset.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms));
+
+                    Boolean IsPatchTolerance = Convert.ToBoolean(rgMetricTargetPreset.MasterTableView.DataKeyValues[e.Item.ItemIndex]["IsPatchTolerance"]);
+
+                    if (IsPatchTolerance == true)
+                    {
+                        Response.Redirect("AddPatchTolerance.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms));
+                    }
+                    else
+                    {
+                        Response.Redirect("AddMetricTargetPreset.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms));
+                    }
                     break;
             }
         }
@@ -104,11 +117,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 rgMetricTargetPreset.DataSource = MetricTargetPresetList;
             }
         }
+
+        protected void lnkbtnPatchTolerance_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("AddPatchTolerance.aspx");
+        }
+
         #endregion
 
         #region Implement Interface IViewMetricTargetPresetManagement
         public Entity.CPSyncV.MetricTargetPreset MetricTargetPreset { get; set; }
         public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPresetList { get; set; }
         #endregion
+
+      
     }
 }

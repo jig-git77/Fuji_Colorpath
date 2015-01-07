@@ -97,6 +97,13 @@ namespace FujifilmUSA.Sync.Presenter
             _viewAddMetricTargetPreset.MetricSumList = metricTargetPresetBusiness.GetMetricSumList();
         }
 
+        public void GetMetricTargetPatchPreset()
+        {
+            var metricTargetPresetBusiness = BusinessFactory<IMetricTargetPresetBusiness>.CreateObject();
+            metricTargetPresetBusiness.ErrorOccured += _viewAddMetricTargetPreset.ErrorOccured;
+            _viewAddMetricTargetPreset.MetricTargetPreset = metricTargetPresetBusiness.GetMetricTargetPatchPreset(_viewAddMetricTargetPreset.MetricTargetPreset.MetricTargetPresetID, _viewAddMetricTargetPreset.CurrentUserId).FirstOrDefault();
+        }
+
         public void BindChartPatchList()
         {
             var metricTargetPresetBusiness = BusinessFactory<IMetricTargetPresetBusiness>.CreateObject();
@@ -109,6 +116,13 @@ namespace FujifilmUSA.Sync.Presenter
             var metricTargetPresetBusiness = BusinessFactory<IMetricTargetPresetBusiness>.CreateObject();
             metricTargetPresetBusiness.ErrorOccured += _viewAddMetricTargetPreset.ErrorOccured;
             metricTargetPresetBusiness.InsertMetricTargetPatchPreset(_viewAddMetricTargetPreset.MetricTargetPreset);
+        }
+
+        public void UpdateMetricTargetPatchPreset()
+        {
+            var metricTargetPresetBusiness = BusinessFactory<IMetricTargetPresetBusiness>.CreateObject();
+            metricTargetPresetBusiness.ErrorOccured += _viewAddMetricTargetPreset.ErrorOccured;
+            metricTargetPresetBusiness.UpdateMetricTargetPatchPreset(_viewAddMetricTargetPreset.MetricTargetPreset);
         }
     }
 }
