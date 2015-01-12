@@ -91,7 +91,7 @@ function SetChartResult(objChart) {
                 g_Chart["NumPoints"] = objChart.DeviceSetting.MeasurementSettings.MeasurementCount; //1,2,3,4,5
             }
         }
-         g_Chart["Mode"] = objChart.DeviceSetting.MeasurementSettings.UvIncludedName;
+        g_Chart["Mode"] = objChart.DeviceSetting.MeasurementSettings.UvIncludedName;
     }
 
     if (objChart.ChartSetting != null) {

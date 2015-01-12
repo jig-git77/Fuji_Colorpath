@@ -48,7 +48,9 @@
                     <img alt="" src="Images/logo_Fujifilm.png" />
                 </td>
                 <td align="center">
-                    <b> © <%= DateTime.Now.Year %> FUJIFILM North America Corporation - Graphic Systems Division </b>
+                    <b> © <%= DateTime.Now.Year %> FUJIFILM North America Corporation - Graphics Division | 
+                        <a href="Terms/ColorPath Sync TC 2013.pdf"   title="Terms of Use" target="_blank">Terms and Conditions</a>
+                    </b>
                 </td>
                 <td align="right" style="width:20%;">
                      <img alt="" src="Images/logo_bottom.png" />
