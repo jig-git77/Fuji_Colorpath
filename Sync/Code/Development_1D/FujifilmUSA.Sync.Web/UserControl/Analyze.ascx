@@ -2338,7 +2338,7 @@
                         Text="Export to Excel" runat="server" onclick="btnExcelExport_Click" Visible="False" 
                         meta:resourcekey="btnExcelExportResource1"></asp:Button>                   
                     <asp:Button ID="btnCSVExport" CssClass="button" Width="150px" Text="Export to CSV" 
-                        runat="server" onclick="btnCSVExport_Click" meta:resourcekey="btnCSVExportResource1"></asp:Button>      
+                        runat="server" onclick="btnCSVExport_Click" Visible="False"  meta:resourcekey="btnCSVExportResource1"></asp:Button>      
                                     
                 </td>
                </tr>                            
