@@ -30,5 +30,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         void Delete1DOptimizeRunDLP(int OptimizeRunID, int ProjectID);
 
         void CreateSourceToSourceDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime);
+        void CreateReTargetProject(int projectId, int optimizeRunId, int status, DateTime endDateTime);
     }
 }

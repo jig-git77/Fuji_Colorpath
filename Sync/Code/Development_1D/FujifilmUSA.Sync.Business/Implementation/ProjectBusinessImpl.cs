@@ -57,7 +57,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                           MetricTargetPresetId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MetricTargetPresetID"),
                                           ProjectTypeId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId"),
                                           DensityType = (DensityTypes)(DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DensityType") == -1 ? 0 : DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DensityType")),
-                                          PCSDataTypes = (PCSDataTypes)(DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType") == -1 ? (DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId") != 2 ? 1 : 0) : DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType"))  //----If Sync1D G7 projectType then default is XYZ and if ISO type then default is Density and for all 4D projects, default is XYZ like G7
+                                          PCSDataTypes = (PCSDataTypes)(DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType") == -1 ? (DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId") != 2 ? 1 : 0) : DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType")),  //----If Sync1D G7 projectType then default is XYZ and if ISO type then default is Density and for all 4D projects, default is XYZ like G7
+                                          ReTargetProjectID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ReTargetProjectID")
                                       };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
@@ -600,7 +601,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      (project.MeasurementSetting.VMeasurementCount == -1 ? 0 : project.MeasurementSetting.VMeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
                                                      project.MeasurementSetting.VReadMode,
                                                      Convert.ToInt16(project.DensityType),
-                                                     Convert.ToInt16(project.PCSDataTypes)
+                                                     Convert.ToInt16(project.PCSDataTypes),
+                                                     project.ReTargetProjectID
                                                  });
                         savedProjectId = project.ProjectId;
                     },
@@ -705,7 +707,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@VMeasurementCount", Type = DbType.Int16, Value = project.MeasurementSetting.VMeasurementCount},
                                                      new Parameters() {ParameterName = "@VReadMode", Type = DbType.String, Value = project.MeasurementSetting.VReadMode},
                                                      new Parameters() {ParameterName = "@DensityType", Type = DbType.Int16, Value = Convert.ToInt16(project.DensityType)},
-                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int16, Value = Convert.ToInt16(project.PCSDataTypes)}
+                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int16, Value = Convert.ToInt16(project.PCSDataTypes)},
+                                                     new Parameters() {ParameterName = "@ReTargetProjectID", Type = DbType.Int32, Value = project.ReTargetProjectID}
 
                                                  },
                                              new List<Parameters>()
@@ -1017,7 +1020,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return presetList;
         }
 
-        public Dictionary<string, string> GetPrintConditionPreviewData(short MeasurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId, short V_measurementDeviceId, short Opt_ReferenceChartTypeId, short V_ReferenceChartTypeId, short metricTargetPresetId)
+        public Dictionary<string, string> GetPrintConditionPreviewData(short MeasurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId, short V_measurementDeviceId, short Opt_ReferenceChartTypeId, short V_ReferenceChartTypeId, short metricTargetPresetId, int ReTargetProjectId)
         {
             var data = new Dictionary<string, string>();
             Common.ImplementBusinessLogic(
@@ -1034,7 +1037,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                            V_measurementDeviceId,
                                                                                            Opt_ReferenceChartTypeId,
                                                                                            V_ReferenceChartTypeId,
-                                                                                           metricTargetPresetId
+                                                                                           metricTargetPresetId,
+                                                                                           ReTargetProjectId
                                                                                        });
 
                     if (dsPreviewData.Tables[0].Rows.Count > 0)
@@ -1074,6 +1078,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         data.Add("metricTargetPresetName", dsPreviewData.Tables[8].Rows[0]["MetricTargetPresetName"].ToString());
                         data.Add("metricTargetPresetDesc", dsPreviewData.Tables[8].Rows[0]["MetricTargetPresetDesc"].ToString());
+                    }
+                    if (dsPreviewData.Tables[9].Rows.Count > 0)
+                    {
+                        data.Add("ReTargetProject", dsPreviewData.Tables[9].Rows[0]["ProjectName"].ToString());
+                    }
+                    else
+                    {
+                        data.Add("ReTargetProject", "");
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintConditionPreviewData"));
@@ -1313,6 +1325,30 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastOptimizedDlp"));
             return data == DBNull.Value ? null : (byte[])data;
         }
+
+        public Dictionary<int, string> GetReTargetProjectList(int currentUserId, int ProjectTypeId, int DeviceId)
+        {
+            var dstReTargetProjectList = new Dictionary<int, string>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsReTargetProjectList = DataAccessFactory.Instance.GetDsResult("[CPSync].[GetReTargetProjectList]", new object[] { currentUserId, ProjectTypeId, DeviceId });
+                    if (dsReTargetProjectList != null && dsReTargetProjectList.Tables.Count > 0)
+                    {
+
+                        dstReTargetProjectList = (dsReTargetProjectList.Tables[0].AsEnumerable().Select(
+                            ReTargetProject => new
+                            {
+                                Value = DataReader.ReadInt(ReTargetProject, "ProjectID"),
+                                Text = DataReader.ReadString(ReTargetProject, "ProjectName")
+                            })).
+                            ToDictionary(ReTargetProject => ReTargetProject.Value, ReTargetProject => ReTargetProject.Text);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GeReTargetProjectList"));
+            return dstReTargetProjectList;
+        }
+
         #endregion
 
         #region ITaskBase Members

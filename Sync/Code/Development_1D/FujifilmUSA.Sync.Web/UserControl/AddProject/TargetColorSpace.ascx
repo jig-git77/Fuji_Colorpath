@@ -85,15 +85,32 @@ textarea {
                             </td>
                         </tr>                       
                          <tr id="trProjectType" runat="server">
-                            <td >
-                                <span><asp:Localize runat="server" Text="Project Type:" ID="locProjectType" 
-                                    meta:resourcekey="locProjectTypeResource1"></asp:Localize></span></td>
-                            <td colspan="3" >
-                                <asp:DropDownList ID="cmbProjectType" runat="server" onselectedindexchanged="cmbProjectType_SelectedIndexChanged" AutoPostBack="true">
-                                    <asp:ListItem Text="G7" Value="1" Selected="True"></asp:ListItem>
-                                    <asp:ListItem Text="ISO" Value="2"></asp:ListItem>
-                                </asp:DropDownList>
-                            </td>                           
+                            <td colspan="4">
+                                <asp:Panel ID="Panel2" runat="server" GroupingText="<b>Project Type</b>" Width="100%">
+                                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                        <tr>
+                                            <td colspan="2">
+                                                <span style="padding-left:5px;"><asp:Localize runat="server" Text="Choose Method:" ID="locChooseMethod" 
+                                                meta:resourcekey="locChooseMethodResource1"></asp:Localize></span>
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td valign="top" style="width: 130px; padding-left:5px;">
+                                                <asp:DropDownList ID="cmbProjectType" runat="server" onselectedindexchanged="cmbProjectType_SelectedIndexChanged" AutoPostBack="true" Width="100px">
+                                                    <asp:ListItem Text="G7" Value="1" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="ISO" Value="2"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </td>
+                                            <td>
+                                                 <asp:TextBox ID="txtProjectTypeDesc" runat="server" TextMode="MultiLine" Height="50px" Width="98%"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                   </asp:Panel>
+                            </td>                   
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="height:7px;"></td>
                         </tr>
                         <tr id="trDensityPCS" runat="server" visible="false">
                              <td >

@@ -39,6 +39,6 @@ namespace FujifilmUSA.Sync.Entity
 
         public DensityTypes DensityType { get; set; }
         public PCSDataTypes PCSDataTypes { get; set; }
-
+        public int ReTargetProjectID { get; set; }
     }
 }

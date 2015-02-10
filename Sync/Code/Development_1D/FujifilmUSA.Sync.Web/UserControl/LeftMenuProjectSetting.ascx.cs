@@ -76,6 +76,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         {
                             lnkDownload.Enabled = true;
                         }
+
+
+                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)
+                        {
+                            lnkMeasure.Enabled = false;
+                        }
+
                     }
                     break;
                 case ECurrentProjectStatus.Edit:

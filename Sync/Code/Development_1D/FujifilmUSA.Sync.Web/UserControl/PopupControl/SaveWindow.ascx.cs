@@ -61,7 +61,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
                     Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
                 }
-               
             }
             else //-----------For all other project types
             {
@@ -76,31 +75,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     else
                     {
                         _presenterSaveWindow.GetProjectDetail();
+
                     }
                     WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
                     SessionManager.Instance.CurrentProject = Project;
-                    //02/11/2014_Softweb Start: Disable links if project is already certified 
+                    //Disable links if project is already certified 
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification && SessionManager.Instance.CurrentProject.Status == EOptimizeRunStatus.Certify)
                     {
                         SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
                     }
-                    //02/11/2014_Softweb End
-                    SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
-                    if (SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                    //For Sync1D Retargted projects
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D && SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)
                     {
-                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
-                        Utilities.PopupWindowsRedirect(this, "Export.aspx");
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
+                        SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                        {
+                            Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
+                        }
                     }
-                    else if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
-                    {
-                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                        Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
-                    }
-                    else
-                    {
-                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
-                        Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
-                    }
+                    AssignLeftPanel();
                 }
             }
         }
@@ -134,6 +128,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
             }
         }
+
+        private void AssignLeftPanel()
+        {
+            SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+            if (SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+                Utilities.PopupWindowsRedirect(this, "Export.aspx");
+            }
+            else if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
+            }
+            else
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
+            }
+        }
+
         #endregion
 
         #region IViewSaveWindow Members

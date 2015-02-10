@@ -27,22 +27,37 @@
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
-        <asp:UpdatePanel ID="upCreateDLP" runat="server">
-            <ContentTemplate>
+       
                 <div class="head">
                     <h1 id="header" runat="server">
                     </h1>
+                     <asp:UpdatePanel ID="upCreateDLP" runat="server">
+                        <ContentTemplate>
+                            <div class="Information_divAnalyze">
+                                <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveDLP_Click">                           
+                                    <span>
+                                        <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
+                                        <asp:Localize runat="server" Text="Create DLP" ID="locCreateDLP" meta:resourcekey="locCreateDLPResource1"></asp:Localize>
+                                    </span>
+                                </asp:LinkButton>
+                            </div>
+                       </ContentTemplate>
+                    </asp:UpdatePanel>
                     <div class="Information_divAnalyze">
-                        <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveDLP_Click">                           
+                    
+                        <asp:LinkButton ID="lbtnReTargetProject" runat="server" CssClass="button" 
+                            onclick="lbtnReTargetProject_Click">                           
                             <span>
-                                <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
-                                <asp:Localize runat="server" Text="Create DLP" ID="locCreateDLP" meta:resourcekey="locCreateDLPResource1"></asp:Localize>
+                                <asp:Image ID="Image1" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
+                                <asp:Localize runat="server" Text="Retarget Project" ID="Localize1"></asp:Localize>
                             </span>
                         </asp:LinkButton>
                     </div>
+
                 </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+         
+
+      
 </div>
 <div class="contant_bottom">
     &nbsp;</div>

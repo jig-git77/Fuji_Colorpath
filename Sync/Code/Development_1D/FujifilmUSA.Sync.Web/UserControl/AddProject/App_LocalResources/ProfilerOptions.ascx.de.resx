@@ -300,4 +300,7 @@
   <data name="lblWeightedTolerancesResource1.Text" xml:space="preserve">
     <value>Use Weighted Tolerances_de</value>
   </data>
+  <data name="selectText" xml:space="preserve">
+    <value>--Select--</value>
+  </data>
 </root>

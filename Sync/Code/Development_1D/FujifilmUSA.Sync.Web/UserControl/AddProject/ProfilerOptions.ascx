@@ -568,10 +568,26 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">
+                                        <td valign="top"  colspan="2">
                                             <asp:TextBox ID="txtMPresetDescription" runat="server" Width="120%" Height="100px"
                                                 TextMode="MultiLine" Enabled="False" ReadOnly="True" 
                                                 Text="This preset is best used for analog devices ……" ></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                           
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <asp:Panel ID="Panel1" runat="server" GroupingText="<b>Optional Retarget</b>" Width="120%">
+                                                 <span style="padding-left:5px;"><asp:Localize runat="server" Text="Choose Certified Print Condition:" 
+                                                        ID="Localize1" meta:resourcekey="locReTargetResource1" ></asp:Localize></span>
+                                                        <br />
+                                                      &nbsp;<asp:DropDownList ID="ddlReTargetList" runat="server" CssClass="select">
+                                                    </asp:DropDownList>
+                                            </asp:Panel>
                                         </td>
                                     </tr>
                                 </table>

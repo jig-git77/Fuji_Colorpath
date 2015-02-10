@@ -99,7 +99,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<ReferenceChartType>();
         }
 
-        public Dictionary<string, string> GetPrintConditionPreviewData(short MeasurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId, short V_measurementDeviceId, short Opt_ReferenceChartTypeId, short V_ReferenceChartTypeId, short metricTargetPresetId)
+        public Dictionary<string, string> GetPrintConditionPreviewData(short MeasurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId, short V_measurementDeviceId, short Opt_ReferenceChartTypeId, short V_ReferenceChartTypeId, short metricTargetPresetId, int ReTargetProjectId)
         {
             return new Dictionary<string, string>();
         }
@@ -149,6 +149,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         public Entity.CPSyncV.TempValidationInfo GetTempValidationInfo(Guid tempValidationId)
         {
             return new Entity.CPSyncV.TempValidationInfo();
+        }
+
+        public Dictionary<int, string> GetReTargetProjectList(int currentUserId, int ProjectTypeId, int DeviceId)
+        {
+            return new Dictionary<int, string>();
         }
         #endregion
 

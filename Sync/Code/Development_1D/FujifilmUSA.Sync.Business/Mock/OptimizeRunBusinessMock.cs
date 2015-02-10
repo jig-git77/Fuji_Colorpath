@@ -123,6 +123,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
 
         }
+
+        public void CreateReTargetProject(int projectId, int optimizeRunId, int status, DateTime endDateTime)
+        {
+
+        }
         #endregion
 
         #region ITaskBase Members

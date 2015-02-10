@@ -27,6 +27,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _vsMetricTargetPreset = "vsMetricTargetPreset";
         private PresenterDeviceFamilyProfilerOption _presenterDeviceFamilyProfilerOption;
         private PresenterMeasurementSetting _presenterMeasurementSetting;
+        private const string _recSelectText = "selectText";
+
         #endregion
 
         public ProfilerOptions()
@@ -51,6 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     tbMetricPreset.Visible = true;
                     BindMetricPresets();
                     GetPrintStandardTVI();
+                    BindReTargetList();
                 }
                 else
                 {
@@ -106,6 +109,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     ddlMetricPresets.SelectedValue = SessionManager.Instance.CurrentProject.MetricTargetPresetId.ToString();
                     ddlMetricPresets_SelectedIndexChanged(null, null);
+                }
+                if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.ReTargetProjectID != 0)
+                {
+                    ddlReTargetList.SelectedValue = SessionManager.Instance.CurrentProject.ReTargetProjectID.ToString();
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns!= null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Project type selection is disable
+                    {
+                        ddlReTargetList.Enabled = false;
+                    }
                 }
             }
             else
@@ -271,6 +282,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     default:
                         break;
                 }
+            }
+        }
+
+        private void BindReTargetList()
+        {
+            DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
+          
+            _presenterMeasurementSetting.GetReTargetProjectList();
+            if (!IsErrorOccured)
+            {
+                ddlReTargetList.DataValueField = "Key";
+                ddlReTargetList.DataTextField = "Value";
+                ddlReTargetList.DataSource = ReTargetProjectList;
+                ddlReTargetList.DataBind();
+                ddlReTargetList.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), "0"));
             }
         }
 
@@ -451,6 +477,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.IsWeightedTolerances = chkWeightedTolerances.Checked;
                 SessionManager.Instance.CurrentProject.MetricTargetPresetId = Convert.ToInt32(ddlMetricPresets.SelectedValue);
                 SessionManager.Instance.CurrentProject.PrintStandardTVI = GetPrintStandardTVIList();
+                if (ddlReTargetList.SelectedIndex > 0)
+                {
+                    SessionManager.Instance.CurrentProject.ReTargetProjectID = Convert.ToInt32(ddlReTargetList.SelectedValue);
+                }
             }
             else
             {
@@ -1234,6 +1264,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
             }
         }
+        public Dictionary<int, string> ReTargetProjectList { get; set; }       
 
         #endregion
 

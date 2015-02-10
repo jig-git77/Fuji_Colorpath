@@ -221,7 +221,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
                     }
-                    Response.Redirect("~/Analyze.aspx");
+                   
+                    if ((SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D) && (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)) //---If Sync 1D, ReTargeted project and in Run-0 mode only, then go directly to Export page, since there is no Analyze Page for Run - 0
+                    {
+                        Response.Redirect("~/Export.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Analyze.aspx");
+                    }
                 }
             }
         }

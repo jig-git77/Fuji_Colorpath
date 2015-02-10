@@ -41,7 +41,44 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If  "Ink Optimization Source" project type
+            {
+                lbtnReTargetProject.Visible = false;
+            }
+            else
+            {
+                lbtnDownloadAndSaveDLP.Visible = false;
+
+                ////02/11/2014_Softweb End
+                //SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+                //if (SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                //{
+                //    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+                //    Utilities.PopupWindowsRedirect(this, "Export.aspx");
+                //}
+                //else if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
+                //{
+                //    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                //    Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
+                //}
+                //else if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns .Count > 1)
+                //{
+                //    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                //    Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
+                //}
+
+                //if (SessionManager.Instance.CurrentOptimizeRun.HasProfile) //----If already retargetted project, move directly to Export page for curves
+                //{
+                //    if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
+                //    {
+                //        Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
+                //    }
+                //    else
+                //    {
+                //        Response.Redirect("Export.aspx");
+                //    }
+                //}
+            }
         }
 
         protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
@@ -77,6 +114,37 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     WebLogActivityManager.LogActivity(LogActivityType.CreateDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
                                                   Request.UserHostAddress);
                 }
+            }
+        }
+
+
+        protected void lbtnReTargetProject_Click(object sender, EventArgs e)
+        {
+            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            EndDate = System.DateTime.Now;
+        
+            _presenterAnalyze.CreateReTargetProject();
+
+            if (!IsErrorOccured)
+            {
+                WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
+                                              Request.UserHostAddress);
+                SessionManager.Instance.CurrentProject.OptimizeRuns[0].EndDateTime = EndDate;
+                SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
+                if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
+                {
+                    Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
+                }
+                else
+                {
+                    Response.Redirect("Export.aspx");
+                }
+            }
+            else
+            {
+                WebLogActivityManager.LogActivity(LogActivityType.CreateDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
+                                              Request.UserHostAddress);
             }
         }
 
@@ -158,5 +226,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public bool IsAverageOfMeasurements { get; set; }
        
         #endregion        
+
     }
 }

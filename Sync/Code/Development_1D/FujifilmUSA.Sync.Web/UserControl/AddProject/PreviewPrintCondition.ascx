@@ -411,6 +411,18 @@
                                             <asp:Label ID="lblMPresetDescription" runat="server"></asp:Label>
                                         </td>
                                     </tr>
+                                     <tr>
+                                        <td style="line-height: 16px;">
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="ReTarget Project:" ID="locReTargetProj" 
+                                                meta:resourcekey="locReTargetProjResource1"></asp:Localize> </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-left: 20px;">
+                                            <asp:Label ID="lblReTargetProject" runat="server"></asp:Label>
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                             <div class="clear">

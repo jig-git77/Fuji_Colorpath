@@ -122,5 +122,12 @@ namespace FujifilmUSA.Sync.Presenter
                 Convert.ToInt32(EOptimizeRunStatus.Open),
                 DateTime.Now);
         }
+
+        public void GetReTargetProjectList()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
+            _viewMeasurementSetting.ReTargetProjectList = projectBusiness.GetReTargetProjectList(_viewMeasurementSetting.CurrentUserId, _viewMeasurementSetting.ProjectTypeID, _viewMeasurementSetting.DeviceId);
+        }
     }
 }

@@ -152,12 +152,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                         if (Request.QueryString["licenseTypeId"] != null)  //----Sync4D Certification Project type
                         {
-                             if ((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync4DCertification)
-                                 SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
+                            if ((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync4DCertification)
+                                SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
                         }
                     }
-                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                    Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
+                    if (((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync1D) && (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)) //---If Sync 1D, ReTargeted project and in Run-0 mode only, then go directly to Export page, since there is no Analyze Page for Run - 0
+                    {
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+                        Utilities.PopupWindowsRedirect(this, "Export.aspx");
+                    }
+                    else //---For all other types of projects
+                    {
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                        Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
+                    }
                 }
             }
 

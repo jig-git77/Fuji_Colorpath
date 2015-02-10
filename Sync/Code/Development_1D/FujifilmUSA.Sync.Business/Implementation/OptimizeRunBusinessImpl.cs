@@ -752,6 +752,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateInitialDestinationAndDeviceLinkProfiles"));
         }
 
+        public void CreateReTargetProject(int projectId, int optimizeRunId, int status, DateTime endDateTime)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                DataAccessFactory.
+                    Instance.
+                    ExecuteProcedure(
+                        "[CPSync].[CreateReTargetProject]",
+                        new object[]
+                            {
+                                projectId,
+                                optimizeRunId,                               
+                                status,
+                                endDateTime
+                            }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateReTargetProject"));
+        }
+
         #endregion
 
         #region ITaskBase Members

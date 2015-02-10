@@ -119,6 +119,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Opt_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
                 V_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key;
                 MetricTargetPresetId = Convert.ToInt16(SessionManager.Instance.CurrentProject.MetricTargetPresetId);
+                ReTargetProjectID = SessionManager.Instance.CurrentProject.ReTargetProjectID;
             }
             _presenterPreviewPrintCondition.GetPreviewPrintCondition();
 
@@ -135,6 +136,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lblMSelectedPresets.Text = Data["metricTargetPresetName"];
                         lblMPresetDescription.Text = Data["metricTargetPresetDesc"];
+                        if (Data["ReTargetProject"] != "") //---Only display ReTarget Project details when it is Sync1D project with ReTarget enabled
+                        {
+                            lblReTargetProject.Text = Data["ReTargetProject"];
+                        }
+                        else
+                        {
+                            lblReTargetProject.Text = "";
+                            locReTargetProj.Visible = false;
+
+                        }
                         dvMetricPreset.Visible = true;
                         dvOptionPreset.Visible = false;
                     }
@@ -226,6 +237,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short Opt_ReferenceChartTypeId { get; set; }
         public short V_ReferenceChartTypeId { get; set; }
         public short MetricTargetPresetId { get; set; }
+        public int ReTargetProjectID { get; set; }
         #endregion
 
         #region IViewSaveWindow Members

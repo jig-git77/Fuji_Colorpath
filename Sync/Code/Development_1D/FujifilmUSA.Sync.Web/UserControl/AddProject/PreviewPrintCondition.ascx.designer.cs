@@ -499,6 +499,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblMPresetDescription;
         
         /// <summary>
+        /// locReTargetProj control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locReTargetProj;
+        
+        /// <summary>
+        /// lblReTargetProject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblReTargetProject;
+        
+        /// <summary>
         /// Div_Alignment_Chart control.
         /// </summary>
         /// <remarks>

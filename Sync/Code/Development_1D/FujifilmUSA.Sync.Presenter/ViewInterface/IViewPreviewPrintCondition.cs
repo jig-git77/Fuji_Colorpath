@@ -14,5 +14,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         short Opt_ReferenceChartTypeId { get; set; }
         short V_ReferenceChartTypeId { get; set; }
         short MetricTargetPresetId { get; set; }
+        int ReTargetProjectID { get; set; }
     }
 }

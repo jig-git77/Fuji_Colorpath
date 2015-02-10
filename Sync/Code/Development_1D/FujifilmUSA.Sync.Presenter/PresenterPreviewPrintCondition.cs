@@ -26,7 +26,8 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewPreviewPrintCondition.V_MeasurementDeviceId.Value,
                 _viewPreviewPrintCondition.Opt_ReferenceChartTypeId,
                 _viewPreviewPrintCondition.V_ReferenceChartTypeId,
-                _viewPreviewPrintCondition.MetricTargetPresetId);
+                _viewPreviewPrintCondition.MetricTargetPresetId,
+                _viewPreviewPrintCondition.ReTargetProjectID);
         }
     }
 }
