@@ -1803,7 +1803,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             ThresholdTop = Convert.ToDouble(ListCyan[i].TargetDotGain) + ThresholdValue;
                             ThresholdBottom = Convert.ToDouble(ListCyan[i].TargetDotGain) - ThresholdValue;
 
-                            CHRT_DotgainISOCyan.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListCyan[i].CmykC.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                            //CHRT_DotgainISOCyan.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListCyan[i].CmykC.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                            if ((Convert.ToDouble(ListCyan[i].CmykC.ToString()) > 0 && Convert.ToDouble(ListCyan[i].CmykC.ToString()) < 100 && ThresholdValue > 0) || Convert.ToDouble(ListCyan[i].CmykC.ToString()) == 0 || Convert.ToDouble(ListCyan[i].CmykC.ToString()) == 100)//---If ThresholdValue is 0, then don't make entry on chart, because it will display screwy spread (Only if it is not starting 0 or ending 100 point patch)
+                            {
+                                CHRT_DotgainISOCyan.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListCyan[i].CmykC.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                            }
                         }
                     }
 
@@ -1842,7 +1846,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             ThresholdTop = Convert.ToDouble(ListMagenta[i].TargetDotGain) + ThresholdValue;
                             ThresholdBottom = Convert.ToDouble(ListMagenta[i].TargetDotGain) - ThresholdValue;
 
-                            CHRT_DotgainISOMeganta.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListMagenta[i].CmykM.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                            //CHRT_DotgainISOMeganta.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListMagenta[i].CmykM.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                            if ((Convert.ToDouble(ListMagenta[i].CmykM.ToString()) > 0 && Convert.ToDouble(ListMagenta[i].CmykM.ToString()) < 100 && ThresholdValue > 0) || Convert.ToDouble(ListMagenta[i].CmykM.ToString()) == 0 || Convert.ToDouble(ListMagenta[i].CmykM.ToString()) == 100) //---If ThresholdValue is 0, then don't make entry on chart, because it will display screwy spread (Only if it is not starting 0 or ending 100 point patch)
+                            {
+                                CHRT_DotgainISOMeganta.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListMagenta[i].CmykM.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                            }
                         }
 
                         FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_DotgainISOMeganta.ImageLocation) + "." + CHRT_DotgainISOMeganta.ImageType;
@@ -1882,7 +1890,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             ThresholdTop = Convert.ToDouble(ListYellow[i].TargetDotGain) + ThresholdValue;
                             ThresholdBottom = Convert.ToDouble(ListYellow[i].TargetDotGain) - ThresholdValue;
 
-                            CHRT_DotgainISOYellow.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListYellow[i].CmykY.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                            //CHRT_DotgainISOYellow.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListYellow[i].CmykY.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                            if ((Convert.ToDouble(ListYellow[i].CmykY.ToString()) > 0 && Convert.ToDouble(ListYellow[i].CmykY.ToString()) < 100 && ThresholdValue > 0) || Convert.ToDouble(ListYellow[i].CmykY.ToString()) == 0 || Convert.ToDouble(ListYellow[i].CmykY.ToString()) == 100) //---If ThresholdValue is 0, then don't make entry on chart, because it will display screwy spread (Only if it is not starting 0 or ending 100 point patch)
+                            {
+                                CHRT_DotgainISOYellow.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListYellow[i].CmykY.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                            }
                         }
 
                         FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_DotgainISOYellow.ImageLocation) + "." + CHRT_DotgainISOYellow.ImageType;
@@ -1922,7 +1934,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             ThresholdTop = Convert.ToDouble(ListBlack[i].TargetDotGain) + ThresholdValue;
                             ThresholdBottom = Convert.ToDouble(ListBlack[i].TargetDotGain) - ThresholdValue;
 
-                            CHRT_DotgainISOBlack.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListBlack[i].CmykK.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                            //CHRT_DotgainISOBlack.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListBlack[i].CmykK.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                            if ((Convert.ToDouble(ListBlack[i].CmykK.ToString()) > 0 && Convert.ToDouble(ListBlack[i].CmykK.ToString()) < 100 && ThresholdValue > 0) || Convert.ToDouble(ListBlack[i].CmykK.ToString()) == 0 || Convert.ToDouble(ListBlack[i].CmykK.ToString()) == 100) //---If ThresholdValue is 0, then don't make entry on chart, because it will display screwy spread (Only if it is not starting 0 or ending 100 point patch)
+                            {
+                                CHRT_DotgainISOBlack.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListBlack[i].CmykK.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                            }
                         }
 
                         FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_DotgainISOBlack.ImageLocation) + "." + CHRT_DotgainISOBlack.ImageType;
