@@ -112,18 +112,16 @@ textarea {
                         <tr>
                             <td colspan="4" style="height:7px;"></td>
                         </tr>
-                        <tr id="trDensityPCS" runat="server">
-                             <td >
-                                <span><asp:Localize runat="server" Text="Density Type:" ID="Localize1" 
-                                    meta:resourcekey="locDensityTypeResource1"></asp:Localize></span></td>
+                        <tr id="trDensityPCS" runat="server" visible="false">
+                            <td >
+                            </td>
                             <td>
-                                <asp:DropDownList ID="cmbDensityType" runat="server" >                                  
-                                </asp:DropDownList>
+                                
                             </td>                        
-                             <td style="width:130px; visibility:hidden;" >
+                             <td style="width:130px;" >
                                 <span><asp:Localize runat="server" Text="PCS DataType:" ID="Localize2" 
                                     meta:resourcekey="locPCSDataTypeResource1"></asp:Localize></span></td>
-                            <td style="visibility:hidden;">
+                            <td >
                                 <asp:DropDownList ID="cmbPCSDataType" runat="server">
                                 </asp:DropDownList>
                             </td>

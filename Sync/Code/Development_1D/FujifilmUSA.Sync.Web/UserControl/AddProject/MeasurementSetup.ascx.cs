@@ -99,6 +99,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindMeasurementCount(false);
                 BindIlluminant();
                 BindObserverType();
+                BindDensityType(); //Load DensityType 
                 ViewState[vsIsPostBack] = true;
                 LoadProjectInfoFromSession();
             }
@@ -183,6 +184,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             #region Assigning values to entity
             SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant = Convert.ToInt16(cmbIlluminant.SelectedValue);
             SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType = Convert.ToInt16(cmbObserver.SelectedValue);
+            SessionManager.Instance.CurrentProject.DensityType = (DensityTypes)Convert.ToInt16(cmbDensityType.SelectedValue);  //DensityType Selection 
             SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId = Convert.ToInt16(cmbMeasurementDevice.SelectedValue);
             SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType =
                 new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue),
@@ -255,6 +257,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbIlluminant.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant.ToString();
                 cmbObserver.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType.ToString();
+                cmbDensityType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.DensityType).ToString(); //DensityType Selection
                 cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId.ToString();
                
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
@@ -319,6 +322,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ToDictionary(x => x.Key, x => x.Value);
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
             }
+        }
+
+        private void BindDensityType()
+        {
+            if (cmbDensityType.DataSource != null) return;
+
+            cmbDensityType.DataValueField = "Key";
+            cmbDensityType.DataTextField = "Value";
+            cmbDensityType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<DensityTypes>();
+            cmbDensityType.DataBind();
         }
 
         private void BindIlluminant()

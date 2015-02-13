@@ -41,7 +41,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 btn_PaperClear.Visible = false;
                 BindProfileSource();
-                BindDensityType(); //Load DensityType 
                 BindPCSDataType(); //Load PCSDataType              
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
                 {
@@ -90,7 +89,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 else if(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
                     SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.InkOptimization;
             }
-            SessionManager.Instance.CurrentProject.DensityType = (DensityTypes)Convert.ToInt16(cmbDensityType.SelectedValue);  //DensityType Selection 
             SessionManager.Instance.CurrentProject.PCSDataTypes = (PCSDataTypes)Convert.ToInt16(cmbPCSDataType.SelectedValue); //PCSDataType Selection 
 
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
@@ -196,7 +194,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
             }
-            cmbDensityType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.DensityType).ToString(); //DensityType Selection
             BindPCSDataType();
             cmbPCSDataType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.PCSDataTypes).ToString(); //PCSDataType Selection
         }
@@ -268,16 +265,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtPaper_a.Text = "0";   //Paper a* Value
                 txtPaper_b.Text = "0";   //Paper b* Value
             }
-        }
-
-        private void BindDensityType()
-        {
-            if (cmbDensityType.DataSource != null) return;
-
-            cmbDensityType.DataValueField = "Key";
-            cmbDensityType.DataTextField = "Value";
-            cmbDensityType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<DensityTypes>();
-            cmbDensityType.DataBind();
         }
 
         private void BindPCSDataType()

@@ -122,6 +122,16 @@
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
+                                     <tr>
+                                        <td>
+                                            <span><asp:Localize runat="server" Text="Density Type:" ID="locDensityType" 
+                                                meta:resourcekey="locDensityTypeResource1"></asp:Localize></span>
+                                        </td>
+                                        <td>
+                                             <asp:DropDownList ID="cmbDensityType" runat="server" Width="200px" CssClass="select">                                  
+                                             </asp:DropDownList>
+                                        </td>
+                                    </tr>
                                     <tr id="trUVSettings" runat="server">
                                         <td >
                                             <span><asp:Localize runat="server" Text="UV Settings:" ID="locUVSettings" meta:resourcekey="locUVSettingsResource1"></asp:Localize></span>
