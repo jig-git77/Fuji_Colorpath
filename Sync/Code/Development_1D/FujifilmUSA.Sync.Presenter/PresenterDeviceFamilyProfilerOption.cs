@@ -33,5 +33,12 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
             _viewDeviceFamilyProfilerOption.PrintStandardTVI = projectBusiness.GetPrintStandardTVI(_viewDeviceFamilyProfilerOption.PrintStandardTypeId);
         }
+
+        public void GetPrintStandardDensity()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
+            _viewDeviceFamilyProfilerOption.ProjectTargetDensity = projectBusiness.GetPrintStandardDensity(_viewDeviceFamilyProfilerOption.PrintStandardTypeId);
+        }
     }
 }

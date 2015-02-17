@@ -234,6 +234,20 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         Threshold = DataReader.ReadDecimal(x, "Threshold")
                                     }).ToList();
                             }
+                            //----Select ProjectTargetDensity-----------//
+                            if (dsProject.Tables[7].Rows.Count > 0)
+                            {
+                                project.ProjectTargetDensity = dsProject.Tables[7].AsEnumerable().
+                                    Select(x => new Entity.CPSync1D.ProjectTargetDensity()
+                                    {
+                                        PatchType = new PatchType()
+                                        {
+                                            PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                                            Type = DataReader.ReadString(x, "PatchType")
+                                        },
+                                        Target = DataReader.ReadDecimal(x, "Target")
+                                    }).ToList();
+                            }
                         }
                     }
                 },
@@ -558,7 +572,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     new XAttribute("TargetL", x.TargetL),
                                                                                     new XAttribute("TargetA", x.TargetA),
                                                                                     new XAttribute("TargetB", x.TargetB))).ToList());
+                        }
 
+                        var projectTargetDensity = new XElement("ProjectTargetDensity", "");
+                        if (project.ProjectTargetDensity != null && project.ProjectTargetDensity.Count > 0)
+                        {
+                            projectTargetDensity = new XElement("ProjectTargetDensity", project.ProjectTargetDensity.Select(x => new XElement("TargetDensity",
+                                                                                    new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
+                                                                                    new XAttribute("Target", x.Target))).ToList());
                         }
 
                         DataAccessFactory.
@@ -596,6 +617,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      projectTargetTVI.ToString(),
                                                      project.MetricTargetPresetId,
                                                      projectTargetLAB.ToString(),
+                                                     projectTargetDensity.ToString(),
                                                      project.ProjectTypeId,
                                                      (project.MeasurementSetting.VUVMode == -1 ? 2 : project.MeasurementSetting.VUVMode),  //---For older project who doen't have VUVMode, so by default it will pass -1 because of NULL, so in that case make it 2 "UVCut"
                                                      (project.MeasurementSetting.VMeasurementCount == -1 ? 0 : project.MeasurementSetting.VMeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
@@ -651,6 +673,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                         }
 
+                        var projectTargetDensity = new XElement("ProjectTargetDensity", "");
+                        if (project.ProjectTargetDensity != null && project.ProjectTargetDensity.Count > 0)
+                        {
+                            projectTargetDensity = new XElement("ProjectTargetDensity", project.ProjectTargetDensity.Select(x => new XElement("TargetDensity",
+                                                                                    new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
+                                                                                    new XAttribute("Target", x.Target))).ToList());
+                        }
 
                         DataAccessFactory.
                             Instance.
@@ -701,6 +730,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() { ParameterName  = "@MetricTargetPresetOptionID", Type = DbType.Int16, Value = project.MetricTargetPresetId},
                                                      new Parameters(){ ParameterName="@ProjectTargetTVI", Value = projectTargetTVI.ToString() },
                                                      new Parameters() {ParameterName = "@ProjectTargetLAB", Value = projectTargetLAB.ToString() },
+                                                     new Parameters() {ParameterName = "@ProjectTargetDensity", Value = projectTargetDensity.ToString() },
                                                      new Parameters() { ParameterName = "@ProjectTypeId" ,Value = project.ProjectTypeId },
 
                                                      new Parameters() {ParameterName = "@VUVMode", Type = DbType.Int16, Value = project.MeasurementSetting.VUVMode},
@@ -1275,6 +1305,30 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
                 }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintStandardTVI"));
             return printStandardTVIList;
+        }
+
+        public List<Entity.CPSync1D.ProjectTargetDensity> GetPrintStandardDensity(int printStandardTypeId)
+        {
+            List<Entity.CPSync1D.ProjectTargetDensity> projectTargetDensityList = new List<Entity.CPSync1D.ProjectTargetDensity>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsPrintStandardDensityList = DataAccessFactory.Instance.GetDsResult("[CPSync].[GetDensityTargetsByPrintStandardTypeID]", new object[] { printStandardTypeId });
+                    if (dsPrintStandardDensityList != null && dsPrintStandardDensityList.Tables.Count > 0)
+                    {
+                        projectTargetDensityList = dsPrintStandardDensityList.Tables[0].AsEnumerable().Select(
+                            x => new Entity.CPSync1D.ProjectTargetDensity()
+                            {
+                                PatchType = new PatchType()
+                                {
+                                    PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
+                                    Type = DataReader.ReadString(x, "PatchType")
+                                },
+                                Target = DataReader.ReadDecimal(x, "Target")
+                            }).ToList();
+                    }
+                }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintStandardDensity"));
+            return projectTargetDensityList;
         }
 
         public List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId)

@@ -132,6 +132,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Entity.CPSync1D.PrintStandardTVI>();
         }
 
+        public List<Entity.CPSync1D.ProjectTargetDensity> GetPrintStandardDensity(int printStandardTypeId)
+        {
+            return new List<Entity.CPSync1D.ProjectTargetDensity>();
+        }
+
         public List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId)
         {
             return new List<Entity.CPSync1D.ProjectTargetLAB>();

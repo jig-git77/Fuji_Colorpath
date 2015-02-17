@@ -33,6 +33,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         int ImportMeasurements(int MeasurementID, int OptimizeRunID);
         List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId);
         List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVI(int printStandardTypeId);
+        List<Entity.CPSync1D.ProjectTargetDensity> GetPrintStandardDensity(int printStandardTypeId);
         List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId);
         byte[] Get1DLastOptimizedDlp(int projectId);
         Guid StoreTemporaryValidationInformation(string jobName, string customer, string pageOrSurface, string jdfJobId, int projectId, Guid tempValidationInfoId, string silverlightPostUrl);

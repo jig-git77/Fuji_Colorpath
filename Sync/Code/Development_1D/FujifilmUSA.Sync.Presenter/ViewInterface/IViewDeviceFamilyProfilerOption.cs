@@ -11,5 +11,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Entity.CPSyncV.MetricSum> MetricSumTargetValues { get; set; }
         int PrintStandardTypeId { get; set; }
         List<Entity.CPSync1D.PrintStandardTVI> PrintStandardTVI { get; set; }
+        List<Entity.CPSync1D.ProjectTargetDensity> ProjectTargetDensity { get; set; }
     }
 }

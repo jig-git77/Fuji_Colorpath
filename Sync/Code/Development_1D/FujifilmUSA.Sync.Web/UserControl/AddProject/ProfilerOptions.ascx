@@ -75,6 +75,23 @@
             return true;
 
     }
+
+    function validateDensityRange(txtValue) {
+
+        var txtDensity = document.getElementById(txtValue.id);
+        var txtDensityvalue = document.getElementById(txtValue.id).value;
+        if (txtDensityvalue > 2) {
+            alert('Density value should be between 0 to 2');
+            txtDensity.value = "";
+            txtDensity.SetFocus();
+            return false;
+        }
+
+        else
+            return true;
+
+    }
+
      </script>
 <script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {
@@ -645,7 +662,7 @@
                                                                     </table>                                                                    
                                                                 </LayoutTemplate>
                                                                 <ItemTemplate>
-                                                                        <tr>
+                                                                        <tr style="line-height:25px;">
 		                                                                    <td style="width: 160px;">
 			                                                                    <asp:Label runat="server" Text='<%# Eval("MetricSumName") %>' ID="lblToleranceName"></asp:Label>
 		                                                                    </td>
@@ -659,14 +676,14 @@
                                                             <asp:CheckBox ID="chkWeightedTolerances" runat="server" Visible="false" />&nbsp;<asp:Label ID="lblWeightedTolerances" runat="server" Text="Use Weighted Tolerances" meta:resourcekey="lblWeightedTolerancesResource1" Visible="false"></asp:Label>
                                                         </div>
                                         </td>
-                                        <td valign="top" style="width: 390px; border:1px Solid Gray;">
+                                        <td valign="top" style="width: 195px; border:1px Solid Gray;">
                                                                         
                                                                
                                                         <div id="dvTVITargets" style="padding-left: 10px; ">
                                                             <label><b><asp:Localize runat="server" Text="TVI Targets" ID="locTVITargets" meta:resourcekey="locTVITargetsResource1"></asp:Localize></b>
                                                             </label>
                                                             <br />
-                                                           <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                                           <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height:23px;">
                                                                 <tr style="line-height:15px;">
                                                                     <td></td>
                                                                     <td colspan="2" align="center"><b>Targets</b></td>
@@ -675,10 +692,10 @@
                                                                 </tr>
                                                                 <tr style="line-height:15px;">
                                                                     <td align="left">
-                                                                        <span><b><asp:Localize ID="locTVIPatch" runat="server" Text="Patch" meta:resourcekey="locTVIPatchResource1"></asp:Localize></b></span>
+                                                                        <span><b><asp:Localize ID="locTVIPatch" runat="server" Text="Patch %" meta:resourcekey="locTVIPatchPerResource1"></asp:Localize></b></span>
                                                                     </td>
                                                                     <td align="center">
-                                                                        <span><b><asp:Localize ID="locTVICyan" runat="server" Text="CMY" meta:resourcekey="locTVICyanResource1"></asp:Localize></b></span>
+                                                                        <span><b><asp:Localize ID="locTVICyan" runat="server" Text="CMY" meta:resourcekey="locTVICMYResource1"></asp:Localize></b></span>
                                                                     </td>                                                             
                                                                     <td align="center">
                                                                         <span><b><asp:Localize ID="locTVIBlack" runat="server" Text="K" meta:resourcekey="locTVIBlackResource1"></asp:Localize></b></span>
@@ -692,7 +709,7 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><asp:Label ID="lblTVI10" runat="server" Text="10 Tone"></asp:Label></td>
+                                                                    <td><asp:Label ID="lblTVI10" runat="server" Text="10"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI10CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI10K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td style="visibility:hidden;"></td>
@@ -700,7 +717,7 @@
                                                                     <td style="visibility:hidden;"><asp:TextBox ID="txtThresh10K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><asp:Label ID="lblTVI20" runat="server" Text="20 Tone"></asp:Label></td>
+                                                                    <td><asp:Label ID="lblTVI20" runat="server" Text="20"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI20CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI20K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td style="visibility:hidden;"></td>
@@ -708,7 +725,7 @@
                                                                     <td style="visibility:hidden;"><asp:TextBox ID="txtThresh20K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><asp:Label ID="lblTVI25" runat="server" Text="1/4 Tone"></asp:Label></td>
+                                                                    <td><asp:Label ID="lblTVI25" runat="server" Text="25"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI25CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI25K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td style="visibility:hidden;"></td>
@@ -716,7 +733,7 @@
                                                                     <td style="visibility:hidden;"><asp:TextBox ID="txtThresh25K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr>     
                                                                 <tr>
-                                                                    <td><asp:Label ID="lblTVI30" runat="server" Text="30 Tone"></asp:Label></td>
+                                                                    <td><asp:Label ID="lblTVI30" runat="server" Text="30"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI30CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI30K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td style="visibility:hidden;"></td>
@@ -724,7 +741,7 @@
                                                                     <td style="visibility:hidden;"><asp:TextBox ID="txtThresh30K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
-                                                                    <td><asp:Label ID="lblTVI40" runat="server" Text="40 Tone"></asp:Label></td>
+                                                                    <td><asp:Label ID="lblTVI40" runat="server" Text="40"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI40CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI40K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td style="visibility:hidden;"></td>
@@ -732,7 +749,7 @@
                                                                     <td style="visibility:hidden;"><asp:TextBox ID="txtThresh40K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
-                                                                    <td><asp:Label ID="lblTVI50" runat="server" Text="Mid Tone"></asp:Label></td>
+                                                                    <td><asp:Label ID="lblTVI50" runat="server" Text="50"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI50CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI50K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td style="visibility:hidden;"></td>
@@ -740,7 +757,7 @@
                                                                     <td style="visibility:hidden;"><asp:TextBox ID="txtThresh50K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
-                                                                    <td><asp:Label ID="lblTVI60" runat="server" Text="60 Tone"></asp:Label></td>
+                                                                    <td><asp:Label ID="lblTVI60" runat="server" Text="60"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI60CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI60K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td style="visibility:hidden;"></td>
@@ -748,7 +765,7 @@
                                                                     <td style="visibility:hidden;"><asp:TextBox ID="txtThresh60K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
-                                                                    <td><asp:Label ID="lblTVI70" runat="server" Text="70 Tone"></asp:Label></td>
+                                                                    <td><asp:Label ID="lblTVI70" runat="server" Text="70"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI70CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI70K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td style="visibility:hidden;"></td>
@@ -756,7 +773,7 @@
                                                                     <td style="visibility:hidden;"><asp:TextBox ID="txtThresh70K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
-                                                                    <td><asp:Label ID="lblTVI75" runat="server" Text="3/4 Tone"></asp:Label></td>
+                                                                    <td><asp:Label ID="lblTVI75" runat="server" Text="75"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI75CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI75K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td style="visibility:hidden;"></td>
@@ -764,7 +781,7 @@
                                                                     <td style="visibility:hidden;"><asp:TextBox ID="txtThresh75K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
-                                                                    <td><asp:Label ID="lblTVI80" runat="server" Text="80 Tone"></asp:Label></td>
+                                                                    <td><asp:Label ID="lblTVI80" runat="server" Text="80"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI80CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI80K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td style="visibility:hidden;"></td>
@@ -772,7 +789,7 @@
                                                                     <td style="visibility:hidden;"><asp:TextBox ID="txtThresh80K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr>   
                                                                 <tr>
-                                                                    <td><asp:Label ID="lblTVI90" runat="server" Text="90 Tone"></asp:Label></td>
+                                                                    <td><asp:Label ID="lblTVI90" runat="server" Text="90"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI90CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI90K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td style="visibility:hidden;"></td>
@@ -783,6 +800,51 @@
                                                       </div>
                                                        
                                         </td>
+
+                                         <td valign="top" style="width: 195px; border:1px Solid Gray;">
+                                                                        
+                                                               
+                                                        <div id="Div1" style="padding-left: 10px; ">
+                                                            <label><b><asp:Localize runat="server" Text="Density Targets" ID="Localize2" meta:resourcekey="locDensityTargetsResource1"></asp:Localize></b>
+                                                            </label>
+                                                            <br />
+                                                           <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height:23px;">
+                                                                 <tr>
+                                                                    <td colspan="4" align="center"><b>Targets</b></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="center">
+                                                                        <span><b><asp:Localize ID="Localize3" runat="server" Text="C" meta:resourcekey="locDensityCResource1"></asp:Localize></b></span>
+                                                                    </td>
+                                                                    <td align="center">
+                                                                        <span><b><asp:Localize ID="Localize4" runat="server" Text="M" meta:resourcekey="locDensityMResource1"></asp:Localize></b></span>
+                                                                    </td>                                                             
+                                                                    <td align="center">
+                                                                        <span><b><asp:Localize ID="Localize5" runat="server" Text="Y" meta:resourcekey="locDensityYResource1"></asp:Localize></b></span>
+                                                                    </td>
+                                                                    <td align="center">
+                                                                        <span><b><asp:Localize ID="Localize6" runat="server" Text="K" meta:resourcekey="locDensityKResource1"></asp:Localize></b></span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="center">
+                                                                        <asp:TextBox ID="txtDensityC" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateDensityRange(this)"></asp:TextBox>
+                                                                    </td>
+                                                                    <td align="center">
+                                                                        <asp:TextBox ID="txtDensityM" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateDensityRange(this)"></asp:TextBox>
+                                                                    </td>
+                                                                    <td align="center">
+                                                                        <asp:TextBox ID="txtDensityY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateDensityRange(this)"></asp:TextBox>
+                                                                    </td>
+                                                                    <td align="center">
+                                                                        <asp:TextBox ID="txtDensityK" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateDensityRange(this)"></asp:TextBox>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                      </div>
+                                                       
+                                        </td>
+
                                    </tr>
                                 </table>
                             </asp:Panel>

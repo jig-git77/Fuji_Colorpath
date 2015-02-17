@@ -53,6 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     tbMetricPreset.Visible = true;
                     BindMetricPresets();
                     GetPrintStandardTVI();
+                    GetPrintStandardDensity();
                     BindReTargetList();
                 }
                 else
@@ -169,6 +170,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (!IsErrorOccured)
                     {
                         BindPrintStandardTVI(PrintStandardTVI);
+                       
                     }                
                 }
                 else // Load from session for existing project
@@ -278,6 +280,52 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     case "Black90": case "Black_90":
                         txtTVI90K.Text = item.TVI.ToString();
                         txtThresh90K.Text = item.Threshold.ToString();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void GetPrintStandardDensity()
+        {
+            PrintStandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
+
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            {
+                if (SessionManager.Instance.CurrentProject.ProjectTargetDensity == null || SessionManager.Instance.CurrentProject.ProjectTargetDensity.Count == 0)
+                {
+                    _presenterDeviceFamilyProfilerOption.GetPrintStandardDensity();
+
+                    if (!IsErrorOccured)
+                    {
+                        BindPrintStandardDensity(ProjectTargetDensity);
+                    }
+                }
+                else // Load from session for existing project
+                {
+                    BindPrintStandardDensity(SessionManager.Instance.CurrentProject.ProjectTargetDensity);
+                }
+            }
+        }
+
+        private void BindPrintStandardDensity(List<Entity.CPSync1D.ProjectTargetDensity> ProjectTargetDensity)
+        {
+            foreach (var item in ProjectTargetDensity)
+            {
+                switch (item.PatchType.Type.ToString())
+                {
+                    case "Cyan":
+                        txtDensityC.Text = item.Target.ToString();
+                        break;
+                    case "Magenta":
+                        txtDensityM.Text = item.Target.ToString();
+                        break;
+                    case "Yellow":
+                        txtDensityY.Text = item.Target.ToString();
+                        break;
+                    case "Black":
+                        txtDensityK.Text = item.Target.ToString();
                         break;
                     default:
                         break;
@@ -477,6 +525,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.IsWeightedTolerances = chkWeightedTolerances.Checked;
                 SessionManager.Instance.CurrentProject.MetricTargetPresetId = Convert.ToInt32(ddlMetricPresets.SelectedValue);
                 SessionManager.Instance.CurrentProject.PrintStandardTVI = GetPrintStandardTVIList();
+                SessionManager.Instance.CurrentProject.ProjectTargetDensity = GetProjectTargetDensityList();
                 if (ddlReTargetList.SelectedIndex > 0)
                 {
                     SessionManager.Instance.CurrentProject.ReTargetProjectID = Convert.ToInt32(ddlReTargetList.SelectedValue);
@@ -1114,6 +1163,52 @@ namespace FujifilmUSA.Sync.Web.UserControl
             return printStandardTVIList;
         }
 
+        private List<Entity.CPSync1D.ProjectTargetDensity> GetProjectTargetDensityList()
+        {
+            List<Entity.CPSync1D.ProjectTargetDensity> ProjectTargetDensityList = new List<Entity.CPSync1D.ProjectTargetDensity>();
+
+            #region ---For CMYK Colors
+            ProjectTargetDensityList.Add(new Entity.CPSync1D.ProjectTargetDensity()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Cyan,
+                    Type = CPPatchType.Cyan.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtDensityC.Text.Trim()) ? "0" : txtDensityC.Text.Trim())),
+            });
+            ProjectTargetDensityList.Add(new Entity.CPSync1D.ProjectTargetDensity()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Magenta,
+                    Type = CPPatchType.Magenta.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtDensityM.Text.Trim()) ? "0" : txtDensityM.Text.Trim())),
+            });
+            ProjectTargetDensityList.Add(new Entity.CPSync1D.ProjectTargetDensity()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Yellow,
+                    Type = CPPatchType.Yellow.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtDensityY.Text.Trim()) ? "0" : txtDensityY.Text.Trim())),
+            });
+            ProjectTargetDensityList.Add(new Entity.CPSync1D.ProjectTargetDensity()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Black,
+                    Type = CPPatchType.Black.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtDensityK.Text.Trim()) ? "0" : txtDensityK.Text.Trim())),
+            });
+            #endregion
+
+            return ProjectTargetDensityList;
+        }
+
         private void ClearAdvancedOptionsControls()
         {
             cmbRendering.SelectedValue = "0";
@@ -1162,6 +1257,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.CPSyncV.MetricSum> MetricSumTargetValues { get; set; }
         public int PrintStandardTypeId { get; set; }
         public List<Entity.CPSync1D.PrintStandardTVI> PrintStandardTVI { get; set; }
+        public List<Entity.CPSync1D.ProjectTargetDensity> ProjectTargetDensity { get; set; }
         #endregion
 
         #region IViewMeasurementSetting Members
