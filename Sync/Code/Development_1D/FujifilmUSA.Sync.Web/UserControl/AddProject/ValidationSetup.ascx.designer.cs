@@ -436,6 +436,24 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvcValidationChartContainer;
         
         /// <summary>
+        /// lbtnDownloadChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnDownloadChart;
+        
+        /// <summary>
+        /// locDownloadChartButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDownloadChartButton;
+        
+        /// <summary>
         /// imgValidationChart control.
         /// </summary>
         /// <remarks>

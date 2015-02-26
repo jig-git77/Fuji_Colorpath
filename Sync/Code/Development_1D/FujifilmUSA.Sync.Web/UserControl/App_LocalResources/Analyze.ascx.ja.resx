@@ -339,6 +339,12 @@
   <data name="paperText" xml:space="preserve">
     <value>紙白</value>
   </data>
+  <data name="tripletPathMetrics" xml:space="preserve">
+    <value>3-c</value>
+  </data>
+  <data name="tripletText" xml:space="preserve">
+    <value>3-C</value>
+  </data>
   <data name="patchMetricsText" xml:space="preserve">
     <value>パッチ判定基準</value>
   </data>

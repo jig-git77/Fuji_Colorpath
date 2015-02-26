@@ -258,7 +258,14 @@ textarea {
                                                         ValidationMsg="Please select Validation chart." Size="200" />
                                                 </asp:RequiredFieldValidator>
                                             </div>
-                                            <div class="clear">
+                                            <div>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt" 
+                                                    OnClick="lbtnDownloadChart_Click">
+                                                    <span><asp:Localize ID="locDownloadChartButton" runat="server" 
+                                                    meta:resourcekey="locDownloadChartButtonResource1" Text="Download Chart"></asp:Localize>
+                                                    </span>
+                                                </asp:LinkButton>
                                             </div>
                                         </td>
                                     </tr>

@@ -30,6 +30,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         private PresenterMeasurementSetting _presenterMeasurementSetting;
         private const string vsIsPostBack = "_IsPostBack";
         private const string _vsMetricTargetPreset = "vsMetricTargetPreset";
+        private const string _recDownloadChartNotAvailable = "downloadChartNotAvailable";
 
         public bool IsXmfNewProject
         {
@@ -527,10 +528,32 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             }
         }
         public int MetricTargetPresetID { get; set; }
-        public Dictionary<int, string> ReTargetProjectList { get; set; }       
+        public Dictionary<int, string> ReTargetProjectList { get; set; }
+        public byte[] ChartPreview { get; set; }
         #endregion
 
-       
+        protected void lbtnDownloadChart_Click(object sender, EventArgs e)
+        {
+            string ChartName = "";
+            if (ValidationChartSelectedValue > 0)
+            {
+                ReferenceChartTypeId = Convert.ToInt16(ValidationChartSelectedValue);
+                ChartName = cmbValidationChart.SelectedItem.Text;
+
+                _presenterMeasurementSetting.GetChartPreview();
+                if (!IsErrorOccured)
+                {
+                    if (ChartPreview != null)
+                        Utilities.DownloadFile(ChartPreview, string.Format("{0}.pdf", ChartName), ".pdf");
+                    else
+                        fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
+                }
+            }
+            else
+            {
+                fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
+            }
+        }
 
     }
 }

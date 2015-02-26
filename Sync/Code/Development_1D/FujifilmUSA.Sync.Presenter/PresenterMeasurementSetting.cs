@@ -129,5 +129,12 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
             _viewMeasurementSetting.ReTargetProjectList = projectBusiness.GetReTargetProjectList(_viewMeasurementSetting.CurrentUserId, _viewMeasurementSetting.ProjectTypeID, _viewMeasurementSetting.DeviceId);
         }
+
+        public void GetChartPreview()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
+            _viewMeasurementSetting.ChartPreview = projectBusiness.GetChartPreviewOnReferenceChartTypeId(_viewMeasurementSetting.ReferenceChartTypeId, "Download");
+        }
     }
 }

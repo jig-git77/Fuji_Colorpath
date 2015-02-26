@@ -145,6 +145,7 @@ namespace FujifilmUSA.Sync.Common
                 }
                 else if (ReportType == 17) //----For ISO Opti / Validation Report + 4D ISO validation report
                 {
+                    //FileName = "Templates/PrepressSingleMeasurement_ISO_old.htm";
                     FileName = "Templates/PrepressSingleMeasurement_ISO.htm";
                 }
                 else if (ReportType == 18) //----For Default mode in Sync1D ISO, G7 or 4D validation project as choice of MTP
@@ -662,6 +663,13 @@ namespace FujifilmUSA.Sync.Common
                     // === Table 12 = Chart of BlackTVI === //           
                     #region ==== BlackTVI ====
                     SBStr.Replace("###BlackTVI###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page4_BlackTVI.Jpeg"));
+                    #endregion
+
+                    // === Table 13 = >Gray Balance L*a*b* === //           
+                    #region ==== Gray LAB* ====
+                    SBStr.Replace("###GrayL###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_LChart.Jpeg"));
+                    SBStr.Replace("###GrayA###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_AChart.Jpeg"));
+                    SBStr.Replace("###GrayB###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_BChart.Jpeg"));
                     #endregion
                 }
                 else if (ReportType == 18) //For Default mode report

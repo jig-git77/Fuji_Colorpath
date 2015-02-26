@@ -152,7 +152,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         }
 
         public int MetricTargetPresetID { get; set; }
-        public Dictionary<int, string> ReTargetProjectList { get; set; }       
+        public Dictionary<int, string> ReTargetProjectList { get; set; }
+        public byte[] ChartPreview { get; set; }
         #endregion
 
         #region IViewBase Members

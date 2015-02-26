@@ -278,6 +278,7 @@
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_Default.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_G7.htm" />
+    <Content Include="Templates\PrepressSingleMeasurement_ISO_old.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_ISO.htm" />
     <Content Include="Templates\style.css" />
     <Content Include="UserControl\AccessDenied.ascx" />

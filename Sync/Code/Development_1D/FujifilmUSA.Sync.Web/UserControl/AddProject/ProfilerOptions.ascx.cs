@@ -1360,7 +1360,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
             }
         }
-        public Dictionary<int, string> ReTargetProjectList { get; set; }       
+        public Dictionary<int, string> ReTargetProjectList { get; set; }
+        public byte[] ChartPreview { get; set; }
 
         #endregion
 

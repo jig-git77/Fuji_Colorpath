@@ -174,4 +174,7 @@
   <data name="locDescriptionResource1.Text" xml:space="preserve">
     <value>Description_ja:</value>
   </data>
+  <data name="downloadChartNotAvailable" xml:space="preserve">
+    <value>Download chart is not available</value>
+  </data>
 </root>

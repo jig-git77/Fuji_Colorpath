@@ -46,6 +46,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recBluePathMetrics = "bluePathMetrics";
         private const string _recPaper = "paperText";
         private const string _recPaperPathMetrics = "paperPathMetrics";
+        private const string _recTriplet = "tripletText";
+        private const string _recTripletPathMetrics = "tripletPathMetrics";
         private const string _recActual = "actualText";
         private const string _recL = "lText";
         private const string _recA = "aText";
@@ -689,45 +691,49 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Cyan).ToString())
                     {
-                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recCyan) + "</td>");//Cyan
+                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>" + GetResourceString(_recCyan) + "</td>");//Cyan
                         TooltipTitle = GetResourceString(_recCyanPathMetrics); //"Cyan Patch Metrics";
                     }
                     else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Magenta).ToString())
                     {
-                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recMagenta) + "</td>");//Magenta
+                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>" + GetResourceString(_recMagenta) + "</td>");//Magenta
                         TooltipTitle = GetResourceString(_recMagentaPathMetrics);//Magenta Patch Metrics
                     }
                     else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Yellow).ToString())
                     {
-                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recYellow) + "</td>");//Yellow
+                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>" + GetResourceString(_recYellow) + "</td>");//Yellow
                         TooltipTitle = GetResourceString(_recYellowPathMetrics); //"Yellow Patch Metrics";
                     }
                     else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Black).ToString())
                     {
-                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recBlack) + "</td>");//Black
+                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>" + GetResourceString(_recBlack) + "</td>");//Black
                         TooltipTitle = GetResourceString(_recBlackPathMetrics); //"Black Patch Metrics";
                     }
                     else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Overprint_Red).ToString())
                     {
-                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recRed) + "</td>");
+                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>" + GetResourceString(_recRed) + "</td>");
                         TooltipTitle = GetResourceString(_recRedPathMetrics); //"Red Patch Metrics";
                     }
                     else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Overprint_Green).ToString())
                     {
-                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>" + GetResourceString(_recGreen) + "</td>");//Green
+                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>" + GetResourceString(_recGreen) + "</td>");//Green
                         TooltipTitle = GetResourceString(_recGreenPathMetrics); //"Green Patch Metrics";
                     }
                     else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Overprint_Blue).ToString())
                     {
-                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>" + GetResourceString(_recBlue) + "</td>");//Blue
+                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>" + GetResourceString(_recBlue) + "</td>");//Blue
                         TooltipTitle = GetResourceString(_recBluePathMetrics); //"Blue Patch Metrics";
                     }
                     else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Paper).ToString())
                     {
-                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>" + GetResourceString(_recPaper) + "</td>");
+                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>" + GetResourceString(_recPaper) + "</td>");
                         TooltipTitle = GetResourceString(_recPaperPathMetrics); //"Paper Patch Metrics";
                     }
-
+                    else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Triplet_Solid_Gray).ToString())
+                    {
+                        SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>" + GetResourceString(_recTriplet) + "</td>");
+                        TooltipTitle = GetResourceString(_recTripletPathMetrics); //"Triplet Patch Metrics";
+                    }
                     SBDeltaEPatches.Append("</tr>");
 
                     BindDeltaEValueACTTHValue(objSeries0, objSeries1, objSeries2, objSeries3, DT, i, TooltipTitle);

@@ -74,7 +74,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             PrintStandardType = new Entity.CPSync1D.PrintStandardType()
             {
-                PrintStandard = txtPrintStandardType.Text,
+                PrintStandard = txtPrintStandardType.Text.Trim(),
                 IsSync1DType = chkIsSync1DType.Checked,
                 SourceProfile = new SourceProfile()
                 {

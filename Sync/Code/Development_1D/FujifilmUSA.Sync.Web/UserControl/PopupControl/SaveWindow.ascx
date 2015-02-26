@@ -118,9 +118,9 @@
                                             <td>
                                                 <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt" 
                                                     OnClick="lbtnDownloadChart_Click">
-                                        <span><asp:Localize runat="server" Text="Download Chart" ID="locDownloadChartButton" 
-                                                    meta:resourcekey="locDownloadChartButtonResource1"></asp:Localize>
-</span>
+                                                    <span><asp:Localize runat="server" Text="Download Chart" ID="locDownloadChartButton" 
+                                                        meta:resourcekey="locDownloadChartButtonResource1"></asp:Localize>
+                                                    </span>
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>

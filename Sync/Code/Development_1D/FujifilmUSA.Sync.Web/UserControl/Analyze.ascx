@@ -746,15 +746,15 @@
                                                 ></asp:Literal>
                                         </table>
                                     </td>
-                                    <td style="width: 60%; " id="TDEPrimary" runat="server">
-                                        <asp:Chart ID="chartDeltaE" runat="server" Width="210px" Height="362px" 
+                                    <td style="width: 60%; vertical-align: bottom; " id="TDEPrimary" runat="server">
+                                        <asp:Chart ID="chartDeltaE" runat="server" Width="210px" Height="375px" 
                                             BackColor="Transparent" meta:resourcekey="chartDeltaEResource1"  ImageType="Jpeg" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_ResultSummary_DeltaEValue">                  
                                                             <Series>
                                                                 <asp:Series Name="Series0"  Color="212, 232, 250" ChartArea="ChartArea1" 
-                                                                    ChartType="Bar">                                              
+                                                                    ChartType="Bar" CustomProperties="PointWidth=.6" >                                              
                                                                 </asp:Series>
                                                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
-                                                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar">
+                                                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar" >
                                                                 </asp:Series>   
                                                                  <asp:Series Name="Series2" BorderWidth="0"  Color="Transparent" 
                                                                         IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar" MarkerImage="~/Images/Chart-Red-Image-Vertical.png">
@@ -762,18 +762,18 @@
                                                                   <asp:Series Name="Series3" BorderWidth="0"  Color="Transparent" 
                                                                         IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar" MarkerImage="~/Images/Chart-Red-Image-Vertical-Previous.png">
                                                                 </asp:Series> 
-                                                            </Series>
+                                                             </Series>
                                                             <ChartAreas>
                                                                 <asp:ChartArea Name="ChartArea1" BackColor="Transparent">
-                                                                      <Area3DStyle  Enable3D="True" Inclination="0" Rotation="0" >
+                                                                      <Area3DStyle  Enable3D="True" Inclination="0" Rotation="0">
                                                                       </Area3DStyle>
                                           
-                                                                    <AxisX  Enabled="True"  IsReversed="True" >
+                                                                    <AxisX  Enabled="True"  IsReversed="True">
                                                                         <MajorGrid Enabled="False" LineColor="Beige" />
                                                                         <MajorTickMark Enabled="False" />
                                                                         <LabelStyle Font="Verdana, 7pt" />
                                                                     </AxisX>
-                                                                     <AxisY Enabled="True" IsLabelAutoFit="False">
+                                                                     <AxisY Enabled="True" IsLabelAutoFit="False"> 
                                                                         <MajorGrid LineColor="Beige"></MajorGrid>
                                                                         <LabelStyle Format="###" Font="Verdana, 7pt" />
                                                                     </AxisY>

@@ -20,6 +20,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int MetricTargetPresetID { get; set; }
         ELicenseType LicenseType { get; }
         int ProjectTypeID { get; }
-        Dictionary<int, string> ReTargetProjectList { get; set; }       
+        Dictionary<int, string> ReTargetProjectList { get; set; }
+        byte[] ChartPreview { get; set; }
     }
 }

@@ -649,6 +649,12 @@
   <data name="paperText" xml:space="preserve">
     <value>Paper</value>
   </data>
+  <data name="tripletPathMetrics" xml:space="preserve">
+    <value>3-C Patch Metrics</value>
+  </data>
+  <data name="tripletText" xml:space="preserve">
+    <value>3-C</value>
+  </data>
   <data name="patchMetricsText" xml:space="preserve">
     <value>Patch Metrics</value>
   </data>
