@@ -700,101 +700,61 @@
                                                                     <td align="center">
                                                                         <span><b><asp:Localize ID="locTVIBlack" runat="server" Text="K" meta:resourcekey="locTVIBlackResource1"></asp:Localize></b></span>
                                                                     </td>
-                                                                    <td style="visibility:hidden;"></td>
-                                                                    <td style="visibility:hidden;" align="center">
-                                                                        <span><b>ΔCMY</b></span>
-                                                                    </td>  
-                                                                    <td style="visibility:hidden;" align="center">
-                                                                        <span><b>ΔK</b></span>
-                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI10" runat="server" Text="10"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI10CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI10K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh10CMY" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh10K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI20" runat="server" Text="20"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI20CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI20K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh20CMY" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh20K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI25" runat="server" Text="25"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI25CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI25K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh25CMY" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh25K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr>     
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI30" runat="server" Text="30"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI30CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI30K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh30CMY" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh30K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI40" runat="server" Text="40"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI40CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI40K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh40CMY" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh40K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI50" runat="server" Text="50"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI50CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI50K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh50CMY" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh50K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI60" runat="server" Text="60"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI60CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI60K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh60CMY" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh60K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI70" runat="server" Text="70"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI70CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI70K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh70CMY" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh70K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI75" runat="server" Text="75"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI75CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI75K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh75CMY" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh75K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI80" runat="server" Text="80"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI80CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI80K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh80CMY" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh80K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr>   
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI90" runat="server" Text="90"></asp:Label></td>
                                                                     <td><asp:TextBox ID="txtTVI90CMY" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI90K" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh90CMY" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
-                                                                    <td style="visibility:hidden;"><asp:TextBox ID="txtThresh90K" runat="server" CssClass="textwidth30" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateTVIThrRange(this)"></asp:TextBox></td>
                                                                 </tr>                                                         
                                                            </table>
                                                       </div>

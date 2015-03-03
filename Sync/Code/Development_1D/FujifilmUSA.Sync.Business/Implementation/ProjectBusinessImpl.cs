@@ -560,8 +560,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                            project.PrintStandardTVI.
                                                                Select(x => new XElement("TargetTVI",
                                                                                    new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
-                                                                                   new XAttribute("TVI", x.TVI),                                                                                
-                                                                                   new XAttribute("Threshold", x.Threshold))).ToList());
+                                                                                   new XAttribute("TVI", x.TVI))).ToList());
                         }
 
                         var projectTargetLAB = new XElement("ProjectTargetLAB", "");
@@ -658,8 +657,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                 project.PrintStandardTVI.
                                                                     Select(x => new XElement("TargetTVI",
                                                                                         new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
-                                                                                        new XAttribute("TVI", x.TVI),                                                                          
-                                                                                        new XAttribute("Threshold", x.Threshold))).ToList());
+                                                                                        new XAttribute("TVI", x.TVI))).ToList());
                         }
 
                         var projectTargetLAB = new XElement("ProjectTargetLAB", "");
@@ -1299,8 +1297,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
                                     Type = DataReader.ReadString(x, "PatchType")
                                 },
-                                TVI = DataReader.ReadDecimal(x, "TVI"),
-                                Threshold = DataReader.ReadDecimal(x, "Threshold")                              
+                                TVI = DataReader.ReadDecimal(x, "TVI")                         
                             }).ToList();
                     }
                 }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintStandardTVI"));
