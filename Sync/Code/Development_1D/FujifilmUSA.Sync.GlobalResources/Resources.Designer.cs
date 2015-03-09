@@ -997,6 +997,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are missing of entering neccessary data. Please check whether you have entered LAB, TVI and Density data..
+        /// </summary>
+        internal static string Error_AddLookupTVILABDensity_MissingData {
+            get {
+                return ResourceManager.GetString("Error_AddLookupTVILABDensity_MissingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while closing optimizing current run. Please contact your administrator..
         /// </summary>
         internal static string Error_CloseOptimizeRun {
@@ -1821,6 +1830,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string Error_InsertLicenseType {
             get {
                 return ResourceManager.GetString("Error_InsertLicenseType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured while inserting Sync1D TVI LAB and Density values.Please contact your administrator..
+        /// </summary>
+        internal static string Error_InsertLookupTVILABDensity {
+            get {
+                return ResourceManager.GetString("Error_InsertLookupTVILABDensity", resourceCulture);
             }
         }
         

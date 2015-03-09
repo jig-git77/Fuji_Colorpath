@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="PresenterLicenseManagement.cs" />
     <Compile Include="PresenterDeviceManagement.cs" />
+    <Compile Include="PresenterLookupTVILABDensity.cs" />
     <Compile Include="PresenterMetricTargetPresetManagement.cs" />
     <Compile Include="PresenterPrintStandardType.cs" />
     <Compile Include="PresenterProfileManagement.cs">
@@ -118,6 +119,7 @@
     <Compile Include="ViewInterface\IViewAddDeviceManagement.cs" />
     <Compile Include="ViewInterface\IViewDeviceManagement.cs" />
     <Compile Include="ViewInterface\IViewAddUserManagement.cs" />
+    <Compile Include="ViewInterface\IViewLookupTVILABDensity.cs" />
     <Compile Include="ViewInterface\IViewMetricTargetPresetManagement.cs" />
     <Compile Include="ViewInterface\IViewPrintStandardType.cs" />
     <Compile Include="ViewInterface\IViewProfileManagement.cs" />

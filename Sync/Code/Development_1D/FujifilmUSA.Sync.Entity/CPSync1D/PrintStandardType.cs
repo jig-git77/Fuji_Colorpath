@@ -12,5 +12,8 @@ namespace FujifilmUSA.Sync.Entity.CPSync1D
         public string PrintStandard { get; set; }
         public bool IsSync1DType { get; set; }
         public SourceProfile SourceProfile { get; set; }
+        public List<CPSync1D.ProjectTargetLAB> PrintStandardLAB { get; set; }
+        public List<CPSync1D.PrintStandardTVI> PrintStandardTVI { get; set; }
+        public List<CPSync1D.ProjectTargetDensity> PrintStandardDensity { get; set; }
     }
 }

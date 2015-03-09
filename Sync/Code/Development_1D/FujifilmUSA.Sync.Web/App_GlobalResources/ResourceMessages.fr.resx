@@ -609,4 +609,10 @@
 	<data name="MetricTargetPresetManagement_DeleteMetricTargetPreset_Confirmation" xml:space="preserve">
     <value>Etes-vous sûre de vouloir supprimer le Préréglage des Cibles métrique sélectionné</value>
   </data>
+  <data name="Error_InsertLookupTVILABDensity" xml:space="preserve">
+    <value>Error occured while inserting Sync1D TVI LAB and Density values.Please contact your administrator.</value>
+  </data>
+  <data name="Error_AddLookupTVILABDensity_MissingData" xml:space="preserve">
+    <value>You are missing of entering neccessary data. Please check whether you have entered LAB, TVI and Density data.</value>
+  </data>
 </root>

@@ -136,6 +136,14 @@
           ID="Localize2"></asp:Localize> 
             </span>
       </asp:LinkButton>
+      <asp:LinkButton ID="lbtnLookupTVILABDensity" runat="server" 
+          CssClass="dock-item overlapobject" 
+          onclick="lbtnLookupTVILABDensity_Click"  >
+            <img src="Images/application-configuration.png" style="position:relative;z-index:1; " alt="Add Lookup TVILABDensity" />
+            <span> <asp:Localize Text="Sync1D LAB TVI Density Values" runat="server" 
+          ID="Localize3"></asp:Localize> 
+            </span>
+      </asp:LinkButton>
     
   </div> 
 </div>

@@ -18,5 +18,10 @@ namespace FujifilmUSA.Sync.Business.Interface
         bool DeletePrintStandardType(int printStandardTypeId);
         List<Entity.CPSync1D.PrintStandardType> GetPrintStandardType(int printStandardTypeId, int currentUserId);
         Dictionary<int, string> GetSourceProfileList(int currentUserId);
+        Dictionary<int, string> GetPrintStandardTypeList(int currentUserId);
+        List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVI(int printStandardTypeId);
+        List<Entity.CPSync1D.ProjectTargetLAB> GetPrintStandardLAB(int printStandardTypeId, int ProjectTypeId);
+        List<Entity.CPSync1D.ProjectTargetDensity> GetPrintStandardDensity(int printStandardTypeId);
+        int InsertLookupTVILABDensity(int printStandardTypeId, List<Entity.CPSync1D.ProjectTargetLAB> PrintStandardLAB, List<Entity.CPSync1D.PrintStandardTVI> PrintStandardTVI, List<Entity.CPSync1D.ProjectTargetDensity> PrintStandardDensity);
     }
 }

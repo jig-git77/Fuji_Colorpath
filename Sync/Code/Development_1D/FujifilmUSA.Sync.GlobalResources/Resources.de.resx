@@ -932,4 +932,10 @@ erwünschten Format überein.</value>
    <data name="EInkOrder_YMKC" xml:space="preserve">
     <value>YMKC</value>
   </data>
+  <data name="Error_InsertLookupTVILABDensity" xml:space="preserve">
+    <value>Error occured while inserting Sync1D TVI LAB and Density values.Please contact your administrator.</value>
+  </data>
+  <data name="Error_AddLookupTVILABDensity_MissingData" xml:space="preserve">
+    <value>You are missing of entering neccessary data. Please check whether you have entered LAB, TVI and Density data.</value>
+  </data>
 </root>

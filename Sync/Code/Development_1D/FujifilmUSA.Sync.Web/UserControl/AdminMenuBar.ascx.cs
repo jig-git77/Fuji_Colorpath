@@ -33,6 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnApplicationConfiguration.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageApplicationConfiguration);
                 lbtnMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance); //Assign PatchTolerance Level to display only management page to Add patch Tolerance
                 lbtnPrintStandardType.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType);
+                lbtnLookupTVILABDensity.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSync1DTVILABDensity);
             }
         }
         #endregion
@@ -109,6 +110,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnPrintStandardType_Click(object sender, EventArgs e)
         {
             Response.RedirectPermanent("PrintStandardTypeManagement.aspx");
+        }
+
+        protected void lbtnLookupTVILABDensity_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("AddLookupTVILABDensity.aspx");
         }
 
         #endregion  

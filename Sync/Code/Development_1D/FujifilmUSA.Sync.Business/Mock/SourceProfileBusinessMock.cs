@@ -62,6 +62,26 @@ namespace FujifilmUSA.Sync.Business.Mock
          {
              return new Dictionary<int, string>();
          }
+         public Dictionary<int, string> GetPrintStandardTypeList(int currentUserId)
+         {
+             return new Dictionary<int, string>();
+         }
+         public List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVI(int printStandardTypeId)
+         {
+             return new List<Entity.CPSync1D.PrintStandardTVI>();
+         }
+         public List<Entity.CPSync1D.ProjectTargetLAB> GetPrintStandardLAB(int printStandardTypeId, int ProjectTypeId)
+         {
+             return new List<Entity.CPSync1D.ProjectTargetLAB>();
+         }
+         public List<Entity.CPSync1D.ProjectTargetDensity> GetPrintStandardDensity(int printStandardTypeId)
+         {
+             return new List<Entity.CPSync1D.ProjectTargetDensity>();
+         }
+         public int InsertLookupTVILABDensity(int printStandardTypeId, List<Entity.CPSync1D.ProjectTargetLAB> PrintStandardLAB, List<Entity.CPSync1D.PrintStandardTVI> PrintStandardTVI, List<Entity.CPSync1D.ProjectTargetDensity> PrintStandardDensity)
+         {
+             return 0;
+         }
         #endregion
 
         #region ITaskBase Members

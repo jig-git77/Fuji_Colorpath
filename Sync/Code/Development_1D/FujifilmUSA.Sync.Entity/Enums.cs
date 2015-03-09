@@ -212,12 +212,14 @@ namespace FujifilmUSA.Sync.Entity
         ManagePrintStandardType = 13,
         [Description("ERolePermission_ManagePatchTolerance")] //Manage Patch Tolerance
         ManagePatchTolerance = 14,
+        [Description("ERolePermission_ManageSync1DTVILABDensity")] //Manage Sync1D TVILABDensity
+        ManageSync1DTVILABDensity = 15,
         [Description("ERolePermission_ManageApplicationConfiguration")] //Manage Application Configuration
-        ManageApplicationConfiguration = 15,
+        ManageApplicationConfiguration = 16,
         [Description("ERolePermission_ManageActivityValidationRules")] //Manage Activity Validation Rules
-        ManageActivityValidationRules = 16,
+        ManageActivityValidationRules = 17,
         [Description("ERolePermission_ManageDeviceProfileSettings")] //Manage Device Profiler Settings
-        ManageDeviceProfileSettings = 17
+        ManageDeviceProfileSettings = 18
     }
     public enum ECurrentProjectStatus
     {

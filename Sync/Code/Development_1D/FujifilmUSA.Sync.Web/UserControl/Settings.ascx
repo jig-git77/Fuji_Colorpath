@@ -255,15 +255,29 @@
                         </div>
                         <asp:Localize Text="Print Standard Type" runat="server" ID="Localize2"></asp:Localize>
                     </asp:LinkButton>                
-                </div>               
+                </div>
                 </td>
-                </tr>                  
+             </tr>                  
                 
-                
-                  <tr>
-                <td style="height:50px;">
+            <tr align="center">
+                <td align="center" >
+                    <div id="divLookupTVILABDensity" runat="server" align="center" valign="bottom" style="width: 150px; float: left">
+                        <asp:LinkButton ID="LinkButton1" runat="server" 
+                                ToolTip="Add Lookup TVILABDensity" 
+                                PostBackUrl="~/AddLookupTVILABDensity.aspx">
+                            <div>
+                                <asp:Image ID="Image6" runat="server" AlternateText="AddLookupTVILABDensity" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Add Lookup TVILABDensity" />
+                            </div>
+                            <asp:Localize Text="Sync1D LAB TVI Density Values" runat="server" ID="Localize3"></asp:Localize>
+                        </asp:LinkButton>                
+                    </div>        
                 </td>
             </tr>
+                
+            <tr>
+            <td style="height:50px;">
+            </td>
+        </tr>
           
         </table>
 

@@ -54,7 +54,7 @@
                                             <td>
                                                 <div style="float: left;">
                                                     <asp:TextBox ID="txtUserName" runat="server" Width="200px" Height="19px" 
-                                                        MaxLength="30" meta:resourcekey="txtUserNameResource1"></asp:TextBox>
+                                                        MaxLength="50" meta:resourcekey="txtUserNameResource1"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvUserName" runat="server" Display="Dynamic" ControlToValidate="txtUserName"

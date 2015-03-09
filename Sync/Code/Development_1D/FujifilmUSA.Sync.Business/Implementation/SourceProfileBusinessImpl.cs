@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.DataAccess;
 using System.Data;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Business.CustomExceptions;
+using System.Xml.Linq;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -258,6 +259,161 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSourceProfileList"));
             return dstSourceProfileList;
+        }
+
+
+        public Dictionary<int, string> GetPrintStandardTypeList(int currentUserId)
+        {
+            var dstPrintStandardTypeList = new Dictionary<int, string>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsPrintStandardType = DataAccessFactory.Instance.GetDsResult("[CP].[GetPrintStandardType]", new object[] { 0, currentUserId });
+                    if (dsPrintStandardType != null && dsPrintStandardType.Tables.Count > 0)
+                    {
+                        dstPrintStandardTypeList = (dsPrintStandardType.Tables[0].AsEnumerable().Select(
+                            printStandardType => new
+                            {
+                                Value = DataReader.ReadInt(printStandardType, "PrintStandardTypeID"),
+                                Text = DataReader.ReadString(printStandardType, "PrintStandard")
+                            })).ToDictionary(printStandardType => printStandardType.Value, printStandardType => printStandardType.Text);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintStandardTypeList"));
+            return dstPrintStandardTypeList;
+        }
+
+        public List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVI(int printStandardTypeId)
+        {
+            var printStandardTVI = new List<Entity.CPSync1D.PrintStandardTVI>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsPrintStandardTVI = DataAccessFactory.Instance.GetDsResult("[CPSync].[GetPrintStandardTVITargets]", new object[] { printStandardTypeId });
+                    if (dsPrintStandardTVI != null && dsPrintStandardTVI.Tables.Count > 0 && dsPrintStandardTVI.Tables[0].Rows.Count > 0)
+                    {
+                        printStandardTVI = dsPrintStandardTVI.Tables[0].AsEnumerable().
+                            Select(x => new Entity.CPSync1D.PrintStandardTVI()
+                            {
+                                PatchType = new PatchType()
+                                {
+                                    PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
+                                    Type = DataReader.ReadString(x, "PatchType")
+                                },
+                                TVI = DataReader.ReadDecimal(x, "TVI")
+                            }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintStandardTVI"));
+            return printStandardTVI;
+        }
+
+        public List<Entity.CPSync1D.ProjectTargetLAB> GetPrintStandardLAB(int printStandardTypeId, int ProjectTypeId)
+        {
+            var printStandardLAB = new List<Entity.CPSync1D.ProjectTargetLAB>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var StorProc = "[CPSync].[GetLABTargetsByPrintStandardTypeID]";
+                    if (ProjectTypeId != 0) //---Get initial dummy data entries, if it is first time entry
+                    {
+                        StorProc = "[CPSync].[GetLABTargetsByDummyPrintStandardTypeID]";
+                    }
+                    var dsPrintStandardLAB = DataAccessFactory.Instance.GetDsResult(StorProc, new object[] { printStandardTypeId, ProjectTypeId });
+                    if (dsPrintStandardLAB != null && dsPrintStandardLAB.Tables.Count > 0 && dsPrintStandardLAB.Tables[0].Rows.Count > 0)
+                    {
+                        printStandardLAB = dsPrintStandardLAB.Tables[0].AsEnumerable().
+                            Select(x => new Entity.CPSync1D.ProjectTargetLAB()
+                            {
+                                PatchType = new PatchType()
+                                {
+                                    PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                                    Type = DataReader.ReadString(x, "PatchType")
+                                },
+                                TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                                TargetA = DataReader.ReadDecimal(x, "TargetA"),
+                                TargetB = DataReader.ReadDecimal(x, "TargetB")
+                            }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintStandardLAB"));
+            return printStandardLAB;
+        }
+
+        public List<Entity.CPSync1D.ProjectTargetDensity> GetPrintStandardDensity(int printStandardTypeId)
+        {
+            var printStandardDensity = new List<Entity.CPSync1D.ProjectTargetDensity>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsPrintStandardDensity = DataAccessFactory.Instance.GetDsResult("[CPSync].[GetDensityTargetsByPrintStandardTypeID]", new object[] { printStandardTypeId });
+                    if (dsPrintStandardDensity != null && dsPrintStandardDensity.Tables.Count > 0 && dsPrintStandardDensity.Tables[0].Rows.Count > 0)
+                    {
+                        printStandardDensity = dsPrintStandardDensity.Tables[0].AsEnumerable().
+                            Select(x => new Entity.CPSync1D.ProjectTargetDensity()
+                            {
+                                PatchType = new PatchType()
+                                {
+                                    PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
+                                    Type = DataReader.ReadString(x, "PatchType")
+                                },
+                                Target = DataReader.ReadDecimal(x, "Target")
+                            }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintStandardDensity"));
+            return printStandardDensity;
+        }
+
+        public int InsertLookupTVILABDensity(int printStandardTypeId, List<Entity.CPSync1D.ProjectTargetLAB> PrintStandardLAB, List<Entity.CPSync1D.PrintStandardTVI> PrintStandardTVI, List<Entity.CPSync1D.ProjectTargetDensity> PrintStandardDensity)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var printStandardLAB = new XElement("PrintStandardLAB", "");
+                    if (PrintStandardLAB != null && PrintStandardLAB.Count > 0)
+                    {
+                        printStandardLAB = new XElement("PrintStandardLAB", PrintStandardLAB.Select(x => new XElement("StandardLAB",
+                                                                                new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
+                                                                                new XAttribute("TargetL", x.TargetL),
+                                                                                new XAttribute("TargetA", x.TargetA),
+                                                                                new XAttribute("TargetB", x.TargetB))).ToList());
+
+                    }
+
+                    var printStandardTVI = new XElement("PrintStandardTVI", "");
+                    if (PrintStandardTVI != null && PrintStandardTVI.Count > 0)
+                    {
+                        printStandardTVI = new XElement("PrintStandardTVI",
+                                                            PrintStandardTVI.
+                                                                Select(x => new XElement("StandardTVI",
+                                                                                    new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
+                                                                                    new XAttribute("TVI", x.TVI))).ToList());
+                    }
+
+                    var printStandardDensity = new XElement("PrintStandardDensity", "");
+                    if (PrintStandardDensity != null && PrintStandardDensity.Count > 0)
+                    {
+                        printStandardDensity = new XElement("PrintStandardDensity", PrintStandardDensity.Select(x => new XElement("StandardDensity",
+                                                                                new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
+                                                                                new XAttribute("Target", x.Target))).ToList());
+                    }
+
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CPSync].[InsertLookupTVILABDensity]",
+                            new object[]
+                                    {
+                                        printStandardTypeId,
+                                        printStandardLAB.ToString(),
+                                        printStandardTVI.ToString(),
+                                        printStandardDensity.ToString()                             
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertLookupTVILABDensity"));
+            return returnValue;
         }
 
         #endregion

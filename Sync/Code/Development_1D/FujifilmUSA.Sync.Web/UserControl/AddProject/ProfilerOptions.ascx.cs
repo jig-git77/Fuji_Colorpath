@@ -192,8 +192,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     case "Cyan20": case "Cyan_20":
                         txtTVI20CMY.Text = item.TVI.ToString();
                         break;
-                    case "Cyan25": case "Cyan_25":
-                    case "Cyan Quarter Tone": case "Cyan_Quarter_Tone":
+                    case "Cyan25": case "Cyan_25": case "Cyan Quarter Tone": case "Cyan_Quarter_Tone":
                         txtTVI25CMY.Text = item.TVI.ToString();
                         break;
                     case "Cyan30": case "Cyan_30":
@@ -202,8 +201,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     case "Cyan40": case "Cyan_40":
                         txtTVI40CMY.Text = item.TVI.ToString();
                         break;
-                    case "Cyan50": case "Cyan_50":
-                    case "Cyan Half Tone": case "Cyan_Half_Tone":
+                    case "Cyan50": case "Cyan_50": case "Cyan Half Tone": case "Cyan_Half_Tone":
                         txtTVI50CMY.Text = item.TVI.ToString();
                         break;
                     case "Cyan60": case "Cyan_60":
@@ -212,8 +210,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     case "Cyan70": case "Cyan_70":
                         txtTVI70CMY.Text = item.TVI.ToString();
                         break;
-                    case "Cyan75": case "Cyan_75":
-                    case "Cyan Three Quarter Tone": case "Cyan_Three_Quarter_Tone":
+                    case "Cyan75": case "Cyan_75": case "Cyan Three Quarter Tone": case "Cyan_Three_Quarter_Tone":
                         txtTVI75CMY.Text = item.TVI.ToString();
                         break;
                     case "Cyan80": case "Cyan_80":
@@ -229,8 +226,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     case "Black20": case "Black_20":
                         txtTVI20K.Text = item.TVI.ToString();
                         break;
-                    case "Black25": case "Black_25":
-                    case "Black Quarter Tone": case "Black_Quarter_Tone":
+                    case "Black25": case "Black_25": case "Black Quarter Tone": case "Black_Quarter_Tone":
                         txtTVI25K.Text = item.TVI.ToString();
                         break;
                     case "Black30": case "Black_30":
@@ -239,8 +235,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     case "Black40": case "Black_40":
                         txtTVI40K.Text = item.TVI.ToString();
                         break;
-                    case "Black50": case "Black_50":
-                    case "Black Half Tone": case "Black_Half_Tone":
+                    case "Black50": case "Black_50": case "Black Half Tone": case "Black_Half_Tone":
                         txtTVI50K.Text = item.TVI.ToString();
                         break;
                     case "Black60": case "Black_60":
@@ -249,8 +244,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     case "Black70": case "Black_70":
                         txtTVI70K.Text = item.TVI.ToString();
                         break;
-                    case "Black75": case "Black_75":
-                    case "Black Three Quarter Tone": case "Black_Three_Quarter_Tone":
+                    case "Black75": case "Black_75": case "Black Three Quarter Tone": case "Black_Three_Quarter_Tone":
                         txtTVI75K.Text = item.TVI.ToString();
                         break;
                     case "Black80": case "Black_80":

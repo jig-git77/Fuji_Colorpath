@@ -687,8 +687,6 @@
                                                                 <tr style="line-height:15px;">
                                                                     <td></td>
                                                                     <td colspan="2" align="center"><b>Targets</b></td>
-                                                                    <td style="width:5px; visibility:hidden;"></td>
-                                                                    <td colspan="2" align="center" style="visibility:hidden;"><b>Thresholds</b></td>
                                                                 </tr>
                                                                 <tr style="line-height:15px;">
                                                                     <td align="left">
