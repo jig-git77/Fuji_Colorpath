@@ -77,7 +77,8 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRun.Create1DOptimizeRun(
                 _viewClosePrintCondition.ProjectId,
                 Convert.ToInt32(EOptimizeRunStatus.Open),
-                DateTime.Now);
+                DateTime.Now,
+                0);
         }
 
         public void Get1DCurrentDeviceLinkProfile()

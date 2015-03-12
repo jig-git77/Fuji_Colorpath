@@ -61,7 +61,8 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRun.Create1DOptimizeRun(
                 _viewLeftMenuProjectItem.ProjectId,
                 Convert.ToInt32(EOptimizeRunStatus.Open),
-                DateTime.Now);
+                DateTime.Now,
+                1);
         }
     }
 }

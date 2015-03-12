@@ -425,7 +425,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return (affectedRow > 0);
         }
 
-        public void Create1DOptimizeRun(int projectId, int status, DateTime startDateTime)
+        public void Create1DOptimizeRun(int projectId, int status, DateTime startDateTime, short CurveTypeId)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -437,7 +437,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             {
                                 projectId,
                                 status,                               
-                                startDateTime
+                                startDateTime,
+                                CurveTypeId
                             }),
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateOptimizeRun"));
         }

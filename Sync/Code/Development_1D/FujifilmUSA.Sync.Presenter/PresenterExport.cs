@@ -48,7 +48,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewExport.ErrorOccured;
-            optimizeRunBusiness.Create1DOptimizeRun(_viewExport.ProjectId, Convert.ToInt32(EOptimizeRunStatus.Open), DateTime.Now);
+            optimizeRunBusiness.Create1DOptimizeRun(_viewExport.ProjectId, Convert.ToInt32(EOptimizeRunStatus.Open), DateTime.Now, _viewExport.CurveTypeId);
         }
 
         public void GetCurveData()

@@ -89,7 +89,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return true;
         }
 
-        public void Create1DOptimizeRun(int projectId, int status, DateTime startDateTime)
+        public void Create1DOptimizeRun(int projectId, int status, DateTime startDateTime, short CurveTypeId)
         {
 
         }

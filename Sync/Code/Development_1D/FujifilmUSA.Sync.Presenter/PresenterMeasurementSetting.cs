@@ -120,7 +120,8 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRun.Create1DOptimizeRun(
                 _viewMeasurementSetting.ProjectId,
                 Convert.ToInt32(EOptimizeRunStatus.Open),
-                DateTime.Now);
+                DateTime.Now,
+                0);
         }
 
         public void GetReTargetProjectList()

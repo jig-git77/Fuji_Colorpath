@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         bool DeleteVMeasurement(int measurementId);
         void DeleteOptimizeRunDLP(int OptimizeRunID, int ProjectID);
         bool Delete1DMeasurement(int measurementId);
-        void Create1DOptimizeRun(int projectId, int status, DateTime startDateTime);
+        void Create1DOptimizeRun(int projectId, int status, DateTime startDateTime, short CurveTypeId);
 
         void CreateG7AlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime);
         void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime);

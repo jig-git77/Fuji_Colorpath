@@ -226,6 +226,7 @@
                                                                 <asp:ListItem Text="ColorGate-CGCX" meta:resourcekey="ColCGCXResource1" Value="101"></asp:ListItem>   
                                                                 <asp:ListItem Text="Onyx G7 Import" meta:resourcekey="OnyxG7ImportResource1" Value="102"></asp:ListItem>                                                           
                                                             </asp:DropDownList>
+                                                            <asp:HiddenField ID="HD_CurveType" runat="server" Value="1"></asp:HiddenField>
                                                             &nbsp;&nbsp;
                                                             <asp:CheckBox ID="Chk_C" runat="server" Text="Cyan" Checked="true" AutoPostBack="True"
                                                                 OnCheckedChanged="Chk_CheckedChanged" meta:resourcekey="Chk_CResource1" />&nbsp;

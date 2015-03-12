@@ -58,7 +58,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                           ProjectTypeId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId"),
                                           DensityType = (DensityTypes)(DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DensityType") == -1 ? 0 : DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DensityType")),
                                           PCSDataTypes = (PCSDataTypes)(DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType") == -1 ? (DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId") != 2 ? 1 : 0) : DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType")),  //----If Sync1D G7 projectType then default is XYZ and if ISO type then default is Density and for all 4D projects, default is XYZ like G7
-                                          ReTargetProjectID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ReTargetProjectID")
+                                          ReTargetProjectID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ReTargetProjectID"),
+                                          CurveTypeID = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "CurveTypeID")
                                       };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
@@ -230,8 +231,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
                                             Type = DataReader.ReadString(x, "PatchType")
                                         },
-                                        TVI = DataReader.ReadDecimal(x, "TVI"),
-                                        Threshold = DataReader.ReadDecimal(x, "Threshold")
+                                        TVI = DataReader.ReadDecimal(x, "TVI")
                                     }).ToList();
                             }
                             //----Select ProjectTargetDensity-----------//

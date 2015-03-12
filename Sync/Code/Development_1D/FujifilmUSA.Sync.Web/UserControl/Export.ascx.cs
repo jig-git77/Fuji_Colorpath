@@ -53,6 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     trExportViewForSync1D.Visible = true;
                     trAdvancedDownload.Visible = false;
+                    DdlCurveType.SelectedValue = SessionManager.Instance.CurrentProject.CurveTypeID.ToString();
                     BindCurve(Convert.ToInt16(DdlCurveType.SelectedValue));
                 }
                 else
@@ -79,6 +80,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnMeasure_Click(object sender, EventArgs e)
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            CurveTypeId = Convert.ToInt16(HD_CurveType.Value);
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                 _presenterExport.Create1DOptimizeRun();
             else
@@ -151,7 +153,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         private void BindCurve(short _CurveTypeID)
-        {            
+        {  
             this.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             if (_CurveTypeID == 100 || _CurveTypeID == 101) //---Set same value for "ColorGate-TVI" and "ColorGate-CGCX" like "5%" for export curve data
             {
@@ -647,6 +649,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void DdlCurveType_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindCurve(Convert.ToInt16(DdlCurveType.SelectedValue));
+            HD_CurveType.Value = DdlCurveType.SelectedValue;
         }
 
         protected void Chk_CheckedChanged(object sender, EventArgs e)
