@@ -775,7 +775,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         chartData.ActivationKey =
                             Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + chartData.MeasureDeviceSrNo);                     
                         var UVMode = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "UVMode");
-                       
+                        var DensityType = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "DensityType");
+
                         chartData.DeviceSetting = new MeasurementDevice
                                                       {
                                                           SerialNumber = chartData.MeasureDeviceSrNo,
@@ -790,7 +791,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                         UVMode = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "UVMode"),
                                                                                         ReadMode = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ReadMode"),
                                                                                         MeasurementCount = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "MeasurementCount"),
-                                                                                        DensityType = EDensityType.ANSIT.ToString()
+                                                                                        DensityType = ((DensityType == 1) ? EDensityType.ANSIE.ToString() : EDensityType.ANSIT.ToString()) //---Pass by deafult "Status_T"
                                                                                     }
                                                       };
                         chartData.ReferenceCharts = dsReferenceChart.Tables[1].AsEnumerable().
