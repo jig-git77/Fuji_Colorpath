@@ -393,6 +393,7 @@ function presentScanDonei1(scanner, mychart, final) {
                     y1 = (next * (parseInt(area["H"]) + parseInt(distance["R"]))) + (parseInt(area["H"])); //-------With this new next value again calculate y1 for transfering it to back row and print on canvas-----//
 
                     g_Chart["Result"].splice((-1 * nCols), nCols); //Remove columns from back of array (so minus value) of 25th position upto 25 columns (eg., if we have 25 column chart)
+                    MeasuredPatches.splice((-1 * nCols), nCols); //Remove columns from back of flat patch array
 
                     mychart["CurrentStrip"] = mychart["RowNames"][next]; //---Set this previous row to current row-----------//
 
