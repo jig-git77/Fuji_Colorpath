@@ -145,6 +145,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void Bindcompany()
         {
+            cmbCompanyName.Enabled = true;
             Companies = new Dictionary<int, string>();
             RegionId = Convert.ToInt32(cmbRegion.SelectedValue);
             _presenterMetricTargetPresetManagement.GetCompaniesByRegion();

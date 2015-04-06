@@ -4,11 +4,28 @@
 <script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <script type = "text/javascript">
     function AllowOnlyNumber(evt) {
-        if (evt.charCode > 31 && (evt.charCode < 48 || evt.charCode > 57)) {
+        if (evt.charCode > 31 && evt.charCode != 46 && (evt.charCode < 48 || evt.charCode > 57)) {
             alert("Allow Only Numbers");
             return false;
         }
     }
+
+    function validateTolRange(txtValue) {
+
+        var txtTol = document.getElementById(txtValue.id);
+        var txtTolvalue = document.getElementById(txtValue.id).value;
+        if (txtTolvalue > 10) {
+            alert('Tolerance value should be between 0 to 10');
+            txtTol.value = "";
+            txtTol.SetFocus();
+            return false;
+        }
+
+        else
+            return true;
+
+    }
+
      </script>
 
 <div class="admin_top">
@@ -250,7 +267,7 @@
 			                                                                  <asp:Label runat="server" Text='<%# Eval("MetricSumName") %>' ID="lblToleranceName"></asp:Label>
 		                                                                    </td>
 		                                                                    <td>
-			                                                                  <asp:TextBox runat="server" Text='<%# Eval("TargetValue") %>' ID="txtTolerance" onkeypress="return AllowOnlyNumber(event)" Width="30px" MaxLength="2"></asp:TextBox>  
+			                                                                  <asp:TextBox runat="server" Text='<%# Eval("TargetValue") %>' ID="txtTolerance" onkeypress="return AllowOnlyNumber(event)" onchange="return validateTolRange(this)" Width="30px" MaxLength="4"></asp:TextBox>  
 		                                                                    </td>		                                                                    
 	                                                                    </tr>
                                                                 </ItemTemplate>
@@ -271,7 +288,7 @@
                                                                         </asp:DropDownList>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox runat="server" ID="txtPatchTolerance1" onkeypress="return AllowOnlyNumber(event)" Width="30px" MaxLength="2"></asp:TextBox>  
+                                                                        <asp:TextBox runat="server" ID="txtPatchTolerance1" onkeypress="return AllowOnlyNumber(event)" onchange="return validateTolRange(this)" Width="30px" MaxLength="4"></asp:TextBox>  
                                                                     </td>
                                                                 </tr>
                                                                 <tr >
@@ -280,7 +297,7 @@
                                                                         </asp:DropDownList>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox runat="server" ID="txtPatchTolerance2" onkeypress="return AllowOnlyNumber(event)" Width="30px" MaxLength="2"></asp:TextBox>  
+                                                                        <asp:TextBox runat="server" ID="txtPatchTolerance2" onkeypress="return AllowOnlyNumber(event)" onchange="return validateTolRange(this)" Width="30px" MaxLength="4"></asp:TextBox>  
                                                                     </td>
                                                                 </tr>
                                                                 <tr >
@@ -289,7 +306,7 @@
                                                                         </asp:DropDownList>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox runat="server" ID="txtPatchTolerance3" onkeypress="return AllowOnlyNumber(event)" Width="30px" MaxLength="2" ></asp:TextBox>  
+                                                                        <asp:TextBox runat="server" ID="txtPatchTolerance3" onkeypress="return AllowOnlyNumber(event)" onchange="return validateTolRange(this)" Width="30px" MaxLength="4" ></asp:TextBox>  
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -298,7 +315,7 @@
                                                                         </asp:DropDownList>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox runat="server" ID="txtPatchTolerance4" onkeypress="return AllowOnlyNumber(event)" Width="30px" MaxLength="2" ></asp:TextBox>  
+                                                                        <asp:TextBox runat="server" ID="txtPatchTolerance4" onkeypress="return AllowOnlyNumber(event)" onchange="return validateTolRange(this)" Width="30px" MaxLength="4" ></asp:TextBox>  
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -307,7 +324,7 @@
                                                                         </asp:DropDownList>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox runat="server" ID="txtPatchTolerance5" onkeypress="return AllowOnlyNumber(event)" Width="30px" MaxLength="2"></asp:TextBox>  
+                                                                        <asp:TextBox runat="server" ID="txtPatchTolerance5" onkeypress="return AllowOnlyNumber(event)" Width="30px" onchange="return validateTolRange(this)" MaxLength="4"></asp:TextBox>  
                                                                     </td>
                                                                 </tr>
                                                             </table>
