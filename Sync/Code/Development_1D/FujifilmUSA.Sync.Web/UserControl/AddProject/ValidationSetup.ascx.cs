@@ -173,12 +173,20 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 //------If validation, then check for required fields-----//
                 rfvValidationChart.ValidationGroup = "vgValidationSetup";
                 rfvMetricTargetPreset.ValidationGroup = "vgValidationSetup";
+
+                cmbMetricTargetPreset.Enabled = true;
+                cmbMeasurementDevice.Enabled = true;
+                cmbValidationChart.Enabled = true;
             }
             else
             {
                 //------If no validation, then don't check for required fields-----//
                 rfvValidationChart.ValidationGroup = "a";
                 rfvMetricTargetPreset.ValidationGroup = "a";
+
+                cmbMetricTargetPreset.Enabled = false;
+                cmbMeasurementDevice.Enabled = false;
+                cmbValidationChart.Enabled = false;
 
                 cmbValidationChart.SelectedIndex = 0;
                 cmbMetricTargetPreset.SelectedIndex = 0;
@@ -229,6 +237,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 }
                 else
                     EnableValidationValue = SessionManager.Instance.CurrentProject.EnabledValidation;
+               
+                if (EnableValidationValue == true) //Make all disable selection enabled, if they have Validation enabled
+                {
+                    cmbMetricTargetPreset.Enabled = true;
+                    cmbMeasurementDevice.Enabled = true;
+                    cmbValidationChart.Enabled = true;
+                }
 
                 if (SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Key > 0)
                 {

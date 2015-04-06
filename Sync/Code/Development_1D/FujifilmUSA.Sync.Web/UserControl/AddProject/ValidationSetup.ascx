@@ -117,7 +117,8 @@ textarea {
                                                             <div style="float: left;">
                                                             <asp:DropDownList ID="cmbMetricTargetPreset" runat="server" Width="200px" 
                                                                     CssClass="select" AutoPostBack="True" 
-                                                                    onselectedindexchanged="cmbMetricTargetPreset_SelectedIndexChanged"></asp:DropDownList>
+                                                                    onselectedindexchanged="cmbMetricTargetPreset_SelectedIndexChanged" 
+                                                                    Enabled="False"></asp:DropDownList>
                                                             </div>
                                                             <div style="float: left;">
                                                                 <asp:RequiredFieldValidator ID="rfvMetricTargetPreset" runat="server" Display="Dynamic"
@@ -186,7 +187,7 @@ textarea {
                                             <asp:DropDownList ID="cmbMeasurementDevice" runat="server" Width="200px" 
                                                     CssClass="select" AutoPostBack="True"
                                                     OnSelectedIndexChanged="cmbMeasurementDevice_SelectedIndexChanged" 
-                                                    meta:resourcekey="cmbMeasurementDeviceResource1"></asp:DropDownList>
+                                                    meta:resourcekey="cmbMeasurementDeviceResource1" Enabled="False"></asp:DropDownList>
                                             </div>
                                             <div style="float: left;">
                                                 <asp:RequiredFieldValidator ID="rfvMeasurementDevice" runat="server" Display="Dynamic"
@@ -249,7 +250,7 @@ textarea {
                                             <asp:DropDownList ID="cmbValidationChart" runat="server" Width="200px" 
                                                     CssClass="select" AutoPostBack="True"
                                                     OnSelectedIndexChanged="cmbValidationChart_SelectedIndexChanged" 
-                                                    meta:resourcekey="cmbValidationChartResource1"></asp:DropDownList>
+                                                    meta:resourcekey="cmbValidationChartResource1" Enabled="False"></asp:DropDownList>
                                             </div>
                                             <div style="float: left;">
                                                 <asp:RequiredFieldValidator ID="rfvValidationChart" runat="server" Display="Dynamic"
