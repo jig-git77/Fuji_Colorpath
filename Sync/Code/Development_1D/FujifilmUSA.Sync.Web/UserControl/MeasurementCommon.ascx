@@ -213,6 +213,7 @@
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
 <asp:HiddenField ID="hdMeasurementLimit" runat="server" Value="0" />
 <asp:HiddenField ID="hdDisplayImport" runat="server" Value="no" />
+<asp:HiddenField ID="hdDeviceType" runat="server"/>
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
 <span id="dummy"></span>
@@ -278,7 +279,15 @@
         {        
             //Proceed further
             ListDevices();
-            GetRefChartData();      
+            GetRefChartData();    
+            
+            //---If DeviceType is i1-Pro2, i1-IO-Pro2, LFP, eXact and plugin is older than 1.8 version--> force them to download new plugin---//
+            if(plugin().plugin_version < 1.8 &&  (jQuery("[id*='hdDeviceType']").val() == '4' || jQuery("[id*='hdDeviceType']").val() == '5' || jQuery("[id*='hdDeviceType']").val() == '6' || jQuery("[id*='hdDeviceType']").val() == '7'))
+            {
+                var oWindow;
+                oWindow = window.radopen("PopupDownloadSoftware.aspx", "DownloadSoftwareWindow");
+                oWindow.show();
+            } 
         }
         else
         {
