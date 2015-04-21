@@ -11,6 +11,9 @@ function presentCalibrateDialog(scanner, myQuery) {
     //
     // Calibrate sets the Request to standard strings regardless of language and you can
     // index pre-supplied strings (CALIBRATEINSTRUCTIONS, CALIBRATEACKNOWLEDGED, CANCELLED) like this:
+	    if (myQuery["Request"] == "CALIBRATEACKNOWLEDGED") {
+        //alert ("Please Follow the directions on the eXact Device");
+    }
     myQuery["Prompt"] = myQuery[myQuery["Request"]];
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html(locStatusText + " " + myQuery["Prompt"]);
@@ -22,6 +25,14 @@ function presentCalibrateDialog(scanner, myQuery) {
 
 
 
+}
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
 }
 //
 // The "Done" callback functions take three args.  The scanner, the message
@@ -62,6 +73,7 @@ function presentCalibrateDone(scanner, msg, final) {
                 jQuery("[id*='lblMessage']").html(locWhiteCalibrationSuccessAndClickMeasureButton);
                 jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
                 jQuery("[id*='btnCancelMeasurement']").css('display', '');
+				jQuery("[id*='btnRewindMeasurement']").css('display', '');
                 ControlDisability(1, false, 1, false, 0, false, 0, false); //------Make Measure button & Calibrate button enabled after calibration done
             }
             else {
@@ -83,8 +95,12 @@ function calibrateDevice(scanner) {
 
     var myQuery = new Object();
     if (scanner["Type"] == "eXact") {
-        myQuery["CALIBRATEINSTRUCTIONS"] = locWhiteCalibrationSuccessAndClickMeasureButton;
-        myQuery["CALIBRATEACKNOWLEDGED"] = "Please Follow the directions on the eXact Device";
+	 myQuery["CALIBRATEINSTRUCTIONS"] = locWhiteCalibrationSuccessAndClickMeasureButton;
+	 myQuery["CALIBRATEACKNOWLEDGED"] = "Please Follow the directions on the eXact Device";
+	var result = plugin().calibrateDevice(scanner, myQuery, presentCalibrateDialog, presentCalibrateDone);
+	
+	//hack to fix slow machines that do not respond to the calibrate command within a reasonable amount of time
+	sleep(1000);
 
     }
     else {
@@ -95,8 +111,9 @@ function calibrateDevice(scanner) {
         // SampleSource sets either "Paper for reflectance,"LCD" or "CRT" for monitor 
         scanner["Mode"] = "Both"
         scanner["SampleSource"] = "Paper";  // Choices are Paper, LCD or CRT and for the latter the chart must have 1 sample (spot)
+		var result = plugin().calibrateDevice(scanner, myQuery, presentCalibrateDialog, presentCalibrateDone);
     }
-    var result = plugin().calibrateDevice(scanner, myQuery, presentCalibrateDialog, presentCalibrateDone);
+
     if (result != "OK") {
         jQuery("[id*='lblMessage']").css('color', 'Red');
         jQuery("[id*='lblMessage']").html(locScanningDeviceUnplugged);
