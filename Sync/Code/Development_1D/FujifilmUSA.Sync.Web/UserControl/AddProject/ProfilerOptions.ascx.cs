@@ -44,9 +44,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             lnkbtnTargetColorSpace.Visible = IsXmfNewProject;
-            if (ViewState[_vsMetricTargetPreset] == null)
+
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                if (ViewState[_vsMetricTargetPreset] == null)
                 {
                     //Sync1D
                     tbOptionPreset.Visible = false;
@@ -55,8 +56,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     GetPrintStandardTVI();
                     GetPrintStandardDensity();
                     BindReTargetList();
+
+                    LoadProjectInfoFromSession();
                 }
-                else
+            }
+            else
+            {
+                if (ViewState[_vsDeviceFamilyProfilerOption] == null)
                 {
                     tbOptionPreset.Visible = true;
                     tbMetricPreset.Visible = false;
@@ -67,8 +73,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         cmbSelectedPresets.Enabled = false;
                     }
+                    LoadProjectInfoFromSession();
                 }
-                LoadProjectInfoFromSession();
             }
         }
         #endregion
@@ -111,9 +117,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ddlMetricPresets.SelectedValue = SessionManager.Instance.CurrentProject.MetricTargetPresetId.ToString();
                     ddlMetricPresets_SelectedIndexChanged(null, null);
                 }
-                if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.ReTargetProjectID != 0)
+                if (SessionManager.Instance.CurrentProject != null)
                 {
-                    ddlReTargetList.SelectedValue = SessionManager.Instance.CurrentProject.ReTargetProjectID.ToString();
+                    if (SessionManager.Instance.CurrentProject.ReTargetProjectID != 0)
+                    {
+                        ddlReTargetList.SelectedValue = SessionManager.Instance.CurrentProject.ReTargetProjectID.ToString();
+                    }
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns!= null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Project type selection is disable
                     {
                         ddlReTargetList.Enabled = false;
@@ -493,15 +502,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lnkbtnProfilerOptions_Click(object sender, EventArgs e)
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-            {                
+            {
                 SessionManager.Instance.CurrentProject.IsWeightedTolerances = chkWeightedTolerances.Checked;
                 SessionManager.Instance.CurrentProject.MetricTargetPresetId = Convert.ToInt32(ddlMetricPresets.SelectedValue);
                 SessionManager.Instance.CurrentProject.PrintStandardTVI = GetPrintStandardTVIList();
                 SessionManager.Instance.CurrentProject.ProjectTargetDensity = GetProjectTargetDensityList();
-                if (ddlReTargetList.SelectedIndex > 0)
-                {
-                    SessionManager.Instance.CurrentProject.ReTargetProjectID = Convert.ToInt32(ddlReTargetList.SelectedValue);
-                }
+                SessionManager.Instance.CurrentProject.ReTargetProjectID = Convert.ToInt32(ddlReTargetList.SelectedValue);
             }
             else
             {
