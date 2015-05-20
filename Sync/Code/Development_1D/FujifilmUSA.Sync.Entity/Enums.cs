@@ -250,7 +250,10 @@ namespace FujifilmUSA.Sync.Entity
         LFP = 6,
 
         [Description("EInstrumentType_eXact")]//eXact
-        eXact = 7
+        eXact = 7,
+
+        [Description("EInstrumentType_i1Sis2")]//i1-Sis2
+        i1Sis2 = 8
     }
 
     public enum EProfilerOption

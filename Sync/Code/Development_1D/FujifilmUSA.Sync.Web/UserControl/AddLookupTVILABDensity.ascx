@@ -89,7 +89,7 @@
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1><asp:Localize ID="locMetricTargetPreset" runat="server" Text="Metric Target Patch Level Preset Management" 
+        <h1><asp:Localize ID="locMetricTargetPreset" runat="server" Text="Add Sync1D Lookup Values Management" 
                 meta:resourcekey="locMetricTargetPresetResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
