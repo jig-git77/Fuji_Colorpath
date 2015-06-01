@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="chk100BlackResource1.Text" xml:space="preserve">
-    <value>100% Black</value>
+    <value>100% Schwarz</value>
   </data>
   <data name="chk100CMYResource1.Text" xml:space="preserve">
     <value>100% C,M,Y</value>
@@ -130,7 +130,7 @@
     <value>400% Black</value>
   </data>
   <data name="chkBlackOverPrintResource1.Text" xml:space="preserve">
-    <value>Black Overprint</value>
+    <value>Schwarz überdrucken</value>
   </data>
   <data name="chkBorderClippingResource1.Text" xml:space="preserve">
     <value>Begrenzung</value>
@@ -139,7 +139,7 @@
     <value>Duplex</value>
   </data>
   <data name="chkGrayResource1.Text" xml:space="preserve">
-    <value>Gray</value>
+    <value>Grau</value>
   </data>
   <data name="chkMaxCMYResource1.Text" xml:space="preserve">
     <value>Max. C,M,Y</value>
@@ -177,6 +177,12 @@
   <data name="chkWhiteResource1.Text" xml:space="preserve">
     <value>Weiss</value>
   </data>
+  <data name="lblWeightedTolerancesResource1.Text" xml:space="preserve">
+    <value>Use Weighted Tolerances_de</value>
+  </data>
+  <data name="locAdvancedOptionsMetricResource1.Text" xml:space="preserve">
+    <value>Advanced Options_de</value>
+  </data>
   <data name="locAdvancedOptionsResource1.Text" xml:space="preserve">
     <value>Weitere Optionen</value>
   </data>
@@ -204,11 +210,20 @@
   <data name="locMeasurementSetupResource1.Text" xml:space="preserve">
     <value>Einstellung f. Messung</value>
   </data>
+  <data name="locMetricPresetsResource1.Text" xml:space="preserve">
+    <value>Metric Presets_de</value>
+  </data>
+  <data name="locMPresetDescriptionResource1.Text" xml:space="preserve">
+    <value>Preset Description_de:</value>
+  </data>
+  <data name="locMSelectedPresetsResource1.Text" xml:space="preserve">
+    <value>Selected Presets_de:</value>
+  </data>
   <data name="locNewPrintConditionResource1.Text" xml:space="preserve">
     <value>Profiler Optionen für Neue Druckbedingung</value>
   </data>
   <data name="locOptionsPresetsResource1.Text" xml:space="preserve">
-    <value>Presetzs f. Optionen</value>
+    <value>Voreinstellungen</value>
   </data>
   <data name="locPresetDescriptionResource1.Text" xml:space="preserve">
     <value>Beschreibung f.Optionen</value>
@@ -217,9 +232,15 @@
     <value>Bereich:</value>
   </data>
   <data name="locRendering1Resource1.Text" xml:space="preserve">
+    <value>Rendering</value>
+  </data>
+  <data name="locRendering1Resource1.Text1" xml:space="preserve">
     <value>Rendering_de</value>
   </data>
   <data name="locRendering2Resource1.Text" xml:space="preserve">
+    <value>Rendering:</value>
+  </data>
+  <data name="locRendering2Resource1.Text1" xml:space="preserve">
     <value>Rendering:_de</value>
   </data>
   <data name="locSelectedPresetsResource1.Text" xml:space="preserve">
@@ -227,6 +248,21 @@
   </data>
   <data name="locTargetColorSpaceResource1.Text" xml:space="preserve">
     <value>Zielfarbraum</value>
+  </data>
+  <data name="locTolerancesResource1.Text" xml:space="preserve">
+    <value>Tolerances_de</value>
+  </data>
+  <data name="locTVIBlackResource1" xml:space="preserve">
+    <value>K_de</value>
+  </data>
+  <data name="locTVICyanResource1.Text" xml:space="preserve">
+    <value>Cyan_de</value>
+  </data>
+  <data name="locTVIPatchResource1.Text" xml:space="preserve">
+    <value>Patch_de</value>
+  </data>
+  <data name="locTVITargetsResource1.Text" xml:space="preserve">
+    <value>TVI Targets_de</value>
   </data>
   <data name="rdsBlackStartResource1.DecreaseText" xml:space="preserve">
     <value>Reduzieren</value>
@@ -266,41 +302,5 @@
   </data>
   <data name="txtProfileDescriptionResource1.Text" xml:space="preserve">
     <value>Dieses Preset eignet sich am Besten für analoge Geräte......</value>
-  </data>
-  <data name="locAdvancedOptionsMetricResource1.Text" xml:space="preserve">
-    <value>Advanced Options_de</value>
-  </data>
-  <data name="locMetricPresetsResource1.Text" xml:space="preserve">
-    <value>Metric Presets_de</value>
-  </data>
-  <data name="locMPresetDescriptionResource1.Text" xml:space="preserve">
-    <value>Preset Description_de:</value>
-  </data>
-  <data name="locMSelectedPresetsResource1.Text" xml:space="preserve">
-    <value>Selected Presets_de:</value>
-  </data>
-  <data name="locTolerancesResource1.Text" xml:space="preserve">
-    <value>Tolerances_de</value>
-  </data>
-  <data name="locTVIBlackResource1" xml:space="preserve">
-    <value>K_de</value>
-  </data>
-  <data name="locTVICyanResource1.Text" xml:space="preserve">
-    <value>Cyan_de</value>
-  </data>
-  <data name="locTVIPatchResource1.Text" xml:space="preserve">
-    <value>Patch_de</value>
-  </data>
-  <data name="locTVITargetsResource1.Text" xml:space="preserve">
-    <value>TVI Targets_de</value>
-  </data>
-  <data name="locMPresetDescriptionResource1.Text1" xml:space="preserve">
-    <value>Preset Description_de:</value>
-  </data>
-  <data name="lblWeightedTolerancesResource1.Text" xml:space="preserve">
-    <value>Use Weighted Tolerances_de</value>
-  </data>
-  <data name="selectText" xml:space="preserve">
-    <value>--Select--</value>
   </data>
 </root>

@@ -141,7 +141,7 @@
   <data name="locSpectrophotometerResource1.Text" xml:space="preserve">
     <value>Spectrophotometer Options</value>
   </data>
-  <data name="txtAlignmentChartResource1.Text" xml:space="preserve">
+  <data name="txtBaseDLPResource1.Text" xml:space="preserve">
     <value>Base DLP Chart:</value>
   </data>
   <data name="selectText" xml:space="preserve">
@@ -164,5 +164,17 @@
   </data>
   <data name="locUVSettingsResource1.Text" xml:space="preserve">
     <value>UV Settings:</value>
+  </data>
+  <data name="locAlignmentChartResource1" xml:space="preserve">
+    <value>Alignment Charts</value>
+  </data>
+  <data name="locDensityTypeResource1.Text" xml:space="preserve">
+    <value>Density Type:</value>
+  </data>
+  <data name="locMeasCountResource1.Text" xml:space="preserve">
+    <value>Measurement Count:</value>
+  </data>
+  <data name="locReadModeResource1.Text" xml:space="preserve">
+    <value>Read Mode:</value>
   </data>
 </root>

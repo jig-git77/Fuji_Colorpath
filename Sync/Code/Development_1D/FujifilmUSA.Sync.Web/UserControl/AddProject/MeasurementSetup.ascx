@@ -145,7 +145,8 @@
                                     </tr>
                                      <tr id="trReadMode" runat="server">
                                         <td >
-                                            <span><asp:Localize runat="server" Text="Read Mode:" ID="Localize2"></asp:Localize></span>
+                                            <span><asp:Localize runat="server" Text="Read Mode:" ID="Localize2"
+                                                meta:resourcekey="locReadModeResource1"></asp:Localize></span>
                                         </td>
                                         <td >
                                             <asp:DropDownList ID="cmbReadMode" runat="server" Width="200px" 
@@ -158,7 +159,8 @@
                                     </tr>
                                      <tr id="trMeasCount" runat="server">
                                         <td runat="server">
-                                            <span><asp:Localize runat="server" Text="Measurement Count:" ID="Localize1"></asp:Localize></span>
+                                            <span><asp:Localize runat="server" Text="Measurement Count:" ID="Localize1"
+                                                meta:resourcekey="locMeasCountResource1"></asp:Localize></span>
                                         </td>
                                         <td runat="server">
                                             <asp:DropDownList ID="cmbMeasurementCount" runat="server" Width="200px" CssClass="select">                                           
@@ -205,7 +207,7 @@
                                     <tr>
                                         <td valign="top" style="width: 160px;">
                                             <span><asp:Localize Text="Base DLP Chart:" runat="server" 
-                                                ID="txtAlignmentChart" meta:resourcekey="txtAlignmentChartResource1"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
+                                                ID="txtAlignmentChart" meta:resourcekey="txtBaseDLPResource1"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
                                         </td>
                                         <td valign="top">
                                           

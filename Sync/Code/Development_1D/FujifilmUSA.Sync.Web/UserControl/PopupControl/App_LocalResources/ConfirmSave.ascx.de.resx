@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,104 +59,107 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="metadata">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" />
-							</xsd:sequence>
-							<xsd:attribute name="name" use="required" type="xsd:string" />
-							<xsd:attribute name="type" type="xsd:string" />
-							<xsd:attribute name="mimetype" type="xsd:string" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="assembly">
-						<xsd:complexType>
-							<xsd:attribute name="alias" type="xsd:string" />
-							<xsd:attribute name="name" type="xsd:string" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="dlpText" xml:space="preserve">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="dlpText" xml:space="preserve">
     <value>DLP</value>
   </data>
-	<data name="lbtnOptimizeResource1.Text" xml:space="preserve">
+  <data name="lbtnOptimizeResource1.Text" xml:space="preserve">
     <value>Nein, optimieren</value>
   </data>
-	<data name="lbtnOptimizeResource1.ToolTip" xml:space="preserve">
+  <data name="lbtnOptimizeResource1.ToolTip" xml:space="preserve">
     <value>Nein, optimieren</value>
   </data>
-	<data name="lbtnYesResource1.Text" xml:space="preserve">
+  <data name="lbtnYesResource1.Text" xml:space="preserve">
     <value>zertifizieren</value>
   </data>
-	<data name="lbtnYesResource1.ToolTip" xml:space="preserve">
+  <data name="lbtnYesResource1.ToolTip" xml:space="preserve">
     <value>zertifizieren</value>
   </data>
-	<data name="locCancelResource1.Text" xml:space="preserve">
+  <data name="locCancelResource1.Text" xml:space="preserve">
     <value>Zurück</value>
   </data>
-	<data name="locCertifyResource1.Text" xml:space="preserve">
+  <data name="locCertifyResource1.Text" xml:space="preserve">
     <value>zertifizieren</value>
   </data>
-	<data name="locNoOptimizeResource1.Text" xml:space="preserve">
+  <data name="locNoOptimizeResource1.Text" xml:space="preserve">
     <value>Nein, optimieren</value>
   </data>
-	<data name="locOptimizeDLPResource1.Text" xml:space="preserve">
+  <data name="locOptimizeDLPResource1.Text" xml:space="preserve">
     <value>"Optimieren" erzeugt ein neues, optimiertes DLP welches im Workflow implementiert werden sollte.</value>
   </data>
-	<data name="locOptimizeResource1.Text" xml:space="preserve">
+  <data name="locOptimizeResource1.Text" xml:space="preserve">
     <value>Optimieren</value>
   </data>
-	<data name="locSatisfiedColorMatchMsgResource1.Text" xml:space="preserve">
+  <data name="locSatisfiedColorMatchMsgResource1.Text" xml:space="preserve">
     <value>"Zertifizieren" setzt den Status dieses DLP auf "zertifiziert" und erachtet dies als Bestätigung dafür, daß Sie mit dem Ergebnis der Farbabstimmung zufrieden sind.</value>
   </data>
-	<data name="locSatisfiedMsgResource1.Text" xml:space="preserve">
+  <data name="locSatisfiedMsgResource1.Text" xml:space="preserve">
     <value>Sind Sie mit dem Ergebnis zufrieden?</value>
   </data>
-	<data name="locYesCertifyResource1.Text" xml:space="preserve">
+  <data name="locYesCertifyResource1.Text" xml:space="preserve">
     <value>Ja, zertifizieren</value>
   </data>
-	<data name="optimizeCompleteMsg" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
+    <value>German (de)</value>
+  </data>
+  <data name="optimizeCompleteMsg" xml:space="preserve">
     <value>Wenn die Optimierung fertig ist, {0} auf den Workflow anwenden und das Chart {1} noch einmal drucken.</value>
   </data>
 </root>

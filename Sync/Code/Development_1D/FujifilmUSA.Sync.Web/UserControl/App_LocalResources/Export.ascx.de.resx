@@ -181,10 +181,10 @@
     <value>Export View_de</value>
   </data>
   <data name="locPreRunResource1.Text" xml:space="preserve">
-    <value>&amp;#916;Previous Run_de</value>
+    <value>ΔPrevious Run_de</value>
   </data>
   <data name="locRefResource1.Text" xml:space="preserve">
-    <value>&amp;#916;Ref_de</value>
+    <value>ΔRef_de</value>
   </data>
   <data name="CalderaResource1.Text" xml:space="preserve">
     <value>Caldera</value>

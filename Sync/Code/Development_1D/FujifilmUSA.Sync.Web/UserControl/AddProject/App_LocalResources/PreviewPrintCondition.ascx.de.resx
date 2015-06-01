@@ -121,13 +121,16 @@
     <value>Beschreibung</value>
   </data>
   <data name="locAlignmentChart1Resource1.Text" xml:space="preserve">
-    <value>Alignment Chart</value>
+    <value>Anpassungs-Chart</value>
   </data>
   <data name="locAlignmentChart2Resource1.Text" xml:space="preserve">
-    <value>Base DLP Chart</value>
+    <value>Base DLP Chart_de</value>
   </data>
   <data name="locColorantResource1.Text" xml:space="preserve">
     <value>Farbtyp</value>
+  </data>
+  <data name="locEnable_ValiResource1.Text" xml:space="preserve">
+    <value>Validierung einschalten</value>
   </data>
   <data name="locIlluminantResource1.Text" xml:space="preserve">
     <value>Lichtquelle</value>
@@ -135,11 +138,11 @@
   <data name="locMeasurementDeviceResource1.Text" xml:space="preserve">
     <value>Meßgerät</value>
   </data>
-  <data name="locValidationSetupResource1.Text" xml:space="preserve">
-    <value>Validierung -  Einstellungen</value>
-  </data>
   <data name="locMediaResource1.Text" xml:space="preserve">
     <value>Bedruckstoff</value>
+  </data>
+  <data name="locMetricPresetsResource1.Text" xml:space="preserve">
+    <value>Metric Presets_de</value>
   </data>
   <data name="locNewPrintConditionResource1.Text" xml:space="preserve">
     <value>Neue Druckbedingung - Auswahl überprüfen</value>
@@ -150,8 +153,11 @@
   <data name="locObserverResource1.Text" xml:space="preserve">
     <value>Beobachter</value>
   </data>
+  <data name="locOptimizationChart2Resource1.Text" xml:space="preserve">
+    <value>Optimierungs-Chart</value>
+  </data>
   <data name="locOptionPresetsResource1.Text" xml:space="preserve">
-    <value>Preset f. Optionen</value>
+    <value>Voreinstellungen</value>
   </data>
   <data name="locPresetDescResource1.Text" xml:space="preserve">
     <value>Beschreibung:</value>
@@ -171,31 +177,28 @@
   <data name="locSpectrophotometerResource1.Text" xml:space="preserve">
     <value>Spektrophotometer Optionen</value>
   </data>
+  <data name="locTargetPrintConditionResource1.Text" xml:space="preserve">
+    <value>Target Print Condition_de</value>
+  </data>
   <data name="locTechnicianNameResource1.Text" xml:space="preserve">
     <value>Name des Anwenders</value>
   </data>
   <data name="locUVSettingsResource1.Text" xml:space="preserve">
     <value>UV Settings</value>
   </data>
-  <data name="locEnable_ValiResource1.Text" xml:space="preserve">
-    <value>Validierung einschalten</value>
-  </data>
-  <data name="locVali_MeaDeviceResource1.Text" xml:space="preserve">
-    <value>Validierung - Gerät</value>
-  </data>
-  <data name="locOptimizationChart2Resource1.Text" xml:space="preserve">
-    <value>Optimierungs- Chart</value>
-  </data>
   <data name="locValiChart2Resource1.Text" xml:space="preserve">
-    <value>Validierungs- Chart</value>
+    <value>Validierungs-Chart</value>
   </data>
   <data name="locValidationMetricResource1.Text" xml:space="preserve">
-    <value>Validierung - Metric</value>
+    <value>Validierung-Metrik</value>
   </data>
-  <data name="locMetricPresetsResource1.Text" xml:space="preserve">
-    <value>Metric Presets_de</value>
+  <data name="locValidationSetupResource1.Text" xml:space="preserve">
+    <value>Validierung -  Einstellungen</value>
   </data>
-  <data name="locTargetPrintConditionResource1.Text" xml:space="preserve">
-    <value>Target Print Condition_de</value>
+  <data name="locVali_MeaDeviceResource1.Text" xml:space="preserve">
+    <value>Validierungs-Gerät</value>
+  </data>
+  <data name="locReTargetProjResource1.Text" xml:space="preserve">
+    <value>ReTarget Project:_de</value>
   </data>
 </root>

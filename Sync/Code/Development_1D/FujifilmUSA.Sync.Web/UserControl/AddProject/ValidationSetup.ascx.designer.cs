@@ -337,13 +337,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow trReadMode;
         
         /// <summary>
-        /// Localize2 control.
+        /// locReadMode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
+        protected global::System.Web.UI.WebControls.Localize locReadMode;
         
         /// <summary>
         /// cmbReadMode control.
@@ -373,13 +373,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::System.Web.UI.HtmlControls.HtmlTableCell Td1;
         
         /// <summary>
-        /// Localize1 control.
+        /// locMeasCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize1;
+        protected global::System.Web.UI.WebControls.Localize locMeasCount;
         
         /// <summary>
         /// Td2 control.

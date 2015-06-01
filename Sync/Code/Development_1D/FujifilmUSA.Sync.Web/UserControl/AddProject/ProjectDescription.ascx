@@ -294,7 +294,9 @@
                                                 </td>
                                                 <td style="width: 500px">
                                                      <asp:TextBox ID="txtFountainSol" runat="server" Width="200px" Height="19px" 
-                                                        MaxLength="100" meta:resourcekey="txtFountainSolResource1"></asp:TextBox> *Include Manufacture, Name
+                                                        MaxLength="100" meta:resourcekey="txtFountainSolResource1"></asp:TextBox>
+                                                        <span><asp:Localize runat="server" ID="Localize2" Text="*Include Manufacture, Name" 
+                                                                    meta:resourcekey="locFounSolRefResource1"></asp:Localize>&nbsp; </span> 
                                                 </td>
                                             </tr>
                                             <tr>
@@ -324,7 +326,9 @@
                                                 </td>
                                                 <td style="width: 500px">
                                                      <asp:TextBox ID="txtScreening" runat="server" Width="200px" Height="19px" 
-                                                        MaxLength="100" meta:resourcekey="txtScreeningResource1"></asp:TextBox>  *Include Type(AM-FM), Dot Shape, Frequency
+                                                        MaxLength="100" meta:resourcekey="txtScreeningResource1"></asp:TextBox>
+                                                        <span><asp:Localize runat="server" ID="Localize3" Text="*Include Type(AM-FM), Dot Shape, Frequency" 
+                                                                    meta:resourcekey="locScreeningRefResource1"></asp:Localize>&nbsp; </span>  
                                                 </td>
                                             </tr>
                                         </table>

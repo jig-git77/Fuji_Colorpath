@@ -117,197 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnCSVExportResource1.Text" xml:space="preserve">
-    <value>Export nach CSV</value>
-  </data>
-  <data name="btnExcelExportResource1.Text" xml:space="preserve">
-    <value>Export zu Excel</value>
-  </data>
-  <data name="btnAnalyzeResource1.Text" xml:space="preserve">
-    <value>Analysieren</value>
-  </data>
-  <data name="GridBoundColumnResource1.HeaderText" xml:space="preserve">
-    <value>ID_de</value>
-  </data>
-  <data name="GridBoundColumnResource10.HeaderText" xml:space="preserve">
-    <value>Actual L*_de</value>
-  </data>
-  <data name="GridBoundColumnResource11.HeaderText" xml:space="preserve">
-    <value>Zielwert a*</value>
-  </data>
-  <data name="GridBoundColumnResource12.HeaderText" xml:space="preserve">
-    <value>Actual a*_de</value>
-  </data>
-  <data name="GridBoundColumnResource13.HeaderText" xml:space="preserve">
-    <value>Zielwert b*</value>
-  </data>
-  <data name="GridBoundColumnResource14.HeaderText" xml:space="preserve">
-    <value>Actual b*_de</value>
-  </data>
-  <data name="GridBoundColumnResource2.HeaderText" xml:space="preserve">
-    <value>C_de</value>
-  </data>
-  <data name="GridBoundColumnResource3.HeaderText" xml:space="preserve">
-    <value>M_de</value>
-  </data>
-  <data name="GridBoundColumnResource4.HeaderText" xml:space="preserve">
-    <value>Y</value>
-  </data>
-  <data name="GridBoundColumnResource5.HeaderText" xml:space="preserve">
-    <value>K_de</value>
-  </data>
-  <data name="GridBoundColumnResource6.HeaderText" xml:space="preserve">
-    <value>ΔE_de</value>
-  </data>
-  <data name="GridBoundColumnResource7.HeaderText" xml:space="preserve">
-    <value>ΔE94_de</value>
-  </data>
-  <data name="GridBoundColumnResource8.HeaderText" xml:space="preserve">
-    <value>ΔE2000_de</value>
-  </data>
-  <data name="GridBoundColumnResource9.HeaderText" xml:space="preserve">
-    <value>Zielwert  L*</value>
-  </data>
-  <data name="GridBoundColumnResource15.HeaderText" xml:space="preserve">
-    <value>ΔH_de</value>
-  </data>
-  <data name="GridBoundColumnResource16.HeaderText" xml:space="preserve">
-    <value>ΔCh_ja</value>
-  </data>
-  <data name="GridBoundColumnResource17.HeaderText" xml:space="preserve">
-    <value>ΔL_ja</value>
-  </data>
-  <data name="GridBoundColumnResource18.HeaderText" xml:space="preserve">
-    <value>Metric</value>
-  </data>
-  <data name="GridBoundColumnResource19.HeaderText" xml:space="preserve">
-    <value>Tol</value>
-  </data>
-  <data name="GridBoundColumnResource20.HeaderText" xml:space="preserve">
-    <value>actual</value>
-  </data>
-  <data name="GridBoundColumnResource21.HeaderText" xml:space="preserve">
-    <value>Ist nicht ok</value>
-  </data>
-  <data name="GridBoundColumnResource22.HeaderText" xml:space="preserve">
-    <value>Metric</value>
-  </data>
-  <data name="GridBoundColumnResource23.HeaderText" xml:space="preserve">
-    <value>Toleranz</value>
-  </data>
-  <data name="GridBoundColumnResource24.HeaderText" xml:space="preserve">
-    <value>actual</value>
-  </data>
-  <data name="GridBoundColumnResource25.HeaderText" xml:space="preserve">
-    <value>Ist nicht ok</value>
-  </data>
-  <data name="GridBoundColumnResource26.HeaderText" xml:space="preserve">
-    <value>Metric</value>
-  </data>
-  <data name="GridBoundColumnResource27.HeaderText" xml:space="preserve">
-    <value>Toleranz</value>
-  </data>
-  <data name="GridBoundColumnResource28.HeaderText" xml:space="preserve">
-    <value>actual</value>
-  </data>
-  <data name="GridBoundColumnResource29.HeaderText" xml:space="preserve">
-    <value>Ist nicht ok</value>
-  </data>
-  <data name="GridBoundColumnResource30.HeaderText" xml:space="preserve">
-    <value>Metric</value>
-  </data>
-  <data name="GridBoundColumnResource31.HeaderText" xml:space="preserve">
-    <value>Toleranz</value>
-  </data>
-  <data name="GridBoundColumnResource32.HeaderText" xml:space="preserve">
-    <value>actual</value>
-  </data>
-  <data name="GridBoundColumnResource33.HeaderText" xml:space="preserve">
-    <value>Ist nicht ok</value>
-  </data>
-  <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Patch_de</value>
-  </data>
-  <data name="ImgBtn_ReportResource1.ToolTip" xml:space="preserve">
-    <value>PDF Report laden</value>
-  </data>
-  <data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
-    <value>Clear Fillter_de</value>
-  </data>
-  <data name="imgClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter_de</value>
-  </data>
-  <data name="lbtnClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter_de</value>
-  </data>
-  <data name="ListItemResource1.Text" xml:space="preserve">
-    <value>Idealliance Digital Chart_de</value>
-  </data>
-  <data name="LocalizeResource1.Text" xml:space="preserve">
-    <value> Primary Patches_de</value>
-  </data>
-  <data name="locAvgDeltaE2000Resource1.Text" xml:space="preserve">
-    <value>Avg ΔE2000_de</value>
-  </data>
-  <data name="locAvgDeltaE94Resource1.Text" xml:space="preserve">
-    <value>Avg ΔE94_de</value>
-  </data>
-  <data name="locAvgDeltaEResource1.Text" xml:space="preserve">
-    <value>Avg ΔE_de</value>
-  </data>
-  <data name="locCreateDLPResource1.Text" xml:space="preserve">
-    <value>Create DLP_de</value>
-  </data>
-  <data name="locGamutPlotResource1.Text" xml:space="preserve">
-    <value>Gamut Plot_de</value>
-  </data>
-  <data name="locGrayBalanceLABResource1.Text" xml:space="preserve">
-    <value>Gray Balance L* a* b*_de</value>
-  </data>
-  <data name="locGrayResource1.Text" xml:space="preserve">
-    <value>Gamut_de</value>
-  </data>
-  <data name="locInkPaperResource1.Text" xml:space="preserve">
-    <value>Ink Paper_de</value>
-  </data>
-  <data name="locMaxDeltaE2000Resource1.Text" xml:space="preserve">
-    <value>Max ΔE2000_de</value>
-  </data>
-  <data name="locMaxDeltaE94Resource1.Text" xml:space="preserve">
-    <value>Max ΔE94_de</value>
-  </data>
-  <data name="locMaxDeltaEResource1.Text" xml:space="preserve">
-    <value>Max ΔE_de</value>
-  </data>
-  <data name="locMeasurementNameResource1.Text" xml:space="preserve">
-    <value>Name der Messung</value>
-  </data>
-  <data name="locNoRecordsAvailableResource1.Text" xml:space="preserve">
-    <value>Keine Datensätze verfügbar</value>
-  </data>
-  <data name="locPaperResource1.Text" xml:space="preserve">
-    <value>Papier  L* a* b*</value>
-  </data>
-  <data name="locPatchDetailsResource1.Text" xml:space="preserve">
-    <value>Patch Details_de</value>
-  </data>
-  <data name="locReportResource1.Text" xml:space="preserve">
-    <value>Report</value>
-  </data>
-  <data name="locG7Resource1.Text" xml:space="preserve">
-    <value>G7</value>
-  </data>
-  <data name="locTVIResource1.Text" xml:space="preserve">
-    <value>Tonwertzuwachs</value>
-  </data>
-  <data name="locSelectedMetricResource1.Text" xml:space="preserve">
-    <value>Selected Metric:</value>
-  </data>
-  <data name="locSummaryResource1.Text" xml:space="preserve">
-    <value>Zusammenfassung</value>
-  </data>
-  <data name="locUploadDateResource1.Text" xml:space="preserve">
-    <value>Hochgeladen am:</value>
+  <data name="actualText" xml:space="preserve">
+    <value>IST</value>
   </data>
   <data name="analyze" xml:space="preserve">
     <value>Analysieren - {0}</value>
@@ -316,166 +127,16 @@
     <value>a*</value>
   </data>
   <data name="blackPathMetrics" xml:space="preserve">
-    <value>Black Patch Metrics</value>
+    <value>Schwarz Patch Metrics</value>
   </data>
   <data name="blackText" xml:space="preserve">
-    <value>Black</value>
+    <value>Schwarz</value>
   </data>
   <data name="bluePathMetrics" xml:space="preserve">
-    <value>Blue Patch Metrics</value>
+    <value>Blau Patch Metrics</value>
   </data>
   <data name="blueText" xml:space="preserve">
-    <value>Blue</value>
-  </data>
-  <data name="bText" xml:space="preserve">
-    <value>b*</value>
-  </data>
-  <data name="createDLP" xml:space="preserve">
-    <value>DLP erzeugen</value>
-  </data>
-  <data name="cyanPathMetrics" xml:space="preserve">
-    <value>Cyan Patch Metrics_de</value>
-  </data>
-  <data name="cyanText" xml:space="preserve">
-    <value>Cyan_de</value>
-  </data>
-  <data name="deltaAText" xml:space="preserve">
-    <value>&amp;Delta;a*_de</value>
-  </data>
-  <data name="deltaBText" xml:space="preserve">
-    <value>&amp;Delta;b*_de</value>
-  </data>
-  <data name="deltaEText" xml:space="preserve">
-    <value>&amp;Delta;E_de</value>
-  </data>
-  <data name="deltaLText" xml:space="preserve">
-    <value>&amp;Delta;L*_de</value>
-  </data>
-  <data name="dlpMsgText" xml:space="preserve">
-    <value>Wenn die Optimierung fertig ist, {0} auf den Workflow anwenden und das {1} chart nochmals drucken.</value>
-  </data>
-  <data name="dlpText" xml:space="preserve">
-    <value>DLP_de</value>
-  </data>
-  <data name="gbPatchMetricsText" xml:space="preserve">
-    <value>% GB Patch Metrics_de</value>
-  </data>
-  <data name="greenPathMetrics" xml:space="preserve">
-    <value>Green Patch Metrics_de</value>
-  </data>
-  <data name="greenText" xml:space="preserve">
-    <value>Green_de</value>
-  </data>
-  <data name="lText" xml:space="preserve">
-    <value>L*_de</value>
-  </data>
-  <data name="magentaPathMetrics" xml:space="preserve">
-    <value>Magenta Patch Metrics_de</value>
-  </data>
-  <data name="magentaText" xml:space="preserve">
-    <value>Magenta_de</value>
-  </data>
-  <data name="newPrintConditionText" xml:space="preserve">
-    <value>Neue Druckbedingung - Analysieren (No DLP)</value>
-  </data>
-  <data name="nextText" xml:space="preserve">
-    <value>nächster</value>
-  </data>
-  <data name="paperPathMetrics" xml:space="preserve">
-    <value>Paper Patch Metrics_de</value>
-  </data>
-  <data name="paperText" xml:space="preserve">
-    <value>Papier</value>
-  </data>
-  <data name="tripletPathMetrics" xml:space="preserve">
-    <value>3-C Patch Metrics_de</value>
-  </data>
-  <data name="tripletText" xml:space="preserve">
-    <value>3-C</value>
-  </data>
-  <data name="patchMetricsText" xml:space="preserve">
-    <value>Patch Metrics_de</value>
-  </data>
-  <data name="redPathMetrics" xml:space="preserve">
-    <value>Red Patch Metrics</value>
-  </data>
-  <data name="redText" xml:space="preserve">
-    <value>Rot</value>
-  </data>
-  <data name="targetText" xml:space="preserve">
-    <value>Zielwert</value>
-  </data>
-  <data name="yellowPathMetrics" xml:space="preserve">
-    <value>Yellow Patch Metrics_de</value>
-  </data>
-  <data name="yellowText" xml:space="preserve">
-    <value>Yellow_de</value>
-  </data>
-  <data name="actualText" xml:space="preserve">
-    <value>actual</value>
-  </data>
-  <data name="locAnaluzeMeasurementResource1.Text" xml:space="preserve">
-    <value>Messung analysieren :</value>
-  </data>
-  <data name="selectMeasurementMsg" xml:space="preserve">
-    <value>Mindestens ein Messung muß überprüft werden</value>
-  </data>
-  <data name="validationAnalyzeHeaderText" xml:space="preserve">
-    <value>Validierung - Analysiere</value>
-  </data>
-  <data name="locAverageDeltaResource1.Text" xml:space="preserve">
-    <value>Average Δ_de</value>
-  </data>
-  <data name="locLabelAct" xml:space="preserve">
-    <value>Act._de</value>
-  </data>
-  <data name="locLabelCustomer" xml:space="preserve">
-    <value>Kundenname:</value>
-  </data>
-  <data name="locLabelDate" xml:space="preserve">
-    <value>Datum</value>
-  </data>
-  <data name="locLabeldEType" xml:space="preserve">
-    <value>dE Type:_de</value>
-  </data>
-  <data name="locLabelDevice" xml:space="preserve">
-    <value>Gerät</value>
-  </data>
-  <data name="locLabelJDFJobID" xml:space="preserve">
-    <value>JDF Job ID:_de</value>
-  </data>
-  <data name="locLabelJob" xml:space="preserve">
-    <value>Job:</value>
-  </data>
-  <data name="locLabelMetric" xml:space="preserve">
-    <value>Metric:_de</value>
-  </data>
-  <data name="locLabelPageOrSurface" xml:space="preserve">
-    <value>Seite/Oberfläche:</value>
-  </data>
-  <data name="locLabelSignature" xml:space="preserve">
-    <value>Signature</value>
-  </data>
-  <data name="locLabelStandard" xml:space="preserve">
-    <value>Standard:</value>
-  </data>
-  <data name="locLabelTimestamp" xml:space="preserve">
-    <value>Timestamp:_de</value>
-  </data>
-  <data name="locLabelTol" xml:space="preserve">
-    <value>Tol.</value>
-  </data>
-  <data name="locMeasurementResource1.Text" xml:space="preserve">
-    <value>Messung</value>
-  </data>
-  <data name="locMeasurementVerificationResource1.Text" xml:space="preserve">
-    <value>Messen</value>
-  </data>
-  <data name="locOptimizeResource1.Text" xml:space="preserve">
-    <value>optimieren</value>
-  </data>
-  <data name="locSubmitResource1.Text" xml:space="preserve">
-    <value>Absenden</value>
+    <value>Blau</value>
   </data>
   <data name="BoundFieldResource1.HeaderText" xml:space="preserve">
     <value>Job:</value>
@@ -507,14 +168,191 @@
   <data name="BoundFieldResource9.HeaderText" xml:space="preserve">
     <value>JDF Job ID:</value>
   </data>
+  <data name="bText" xml:space="preserve">
+    <value>b*</value>
+  </data>
+  <data name="btnAnalyzeResource1.Text" xml:space="preserve">
+    <value>Analysieren</value>
+  </data>
+  <data name="btnCSVExportResource1.Text" xml:space="preserve">
+    <value>Export nach CSV</value>
+  </data>
+  <data name="btnExcelExportResource1.Text" xml:space="preserve">
+    <value>Export zu Excel</value>
+  </data>
+  <data name="createDLP" xml:space="preserve">
+    <value>DLP erzeugen</value>
+  </data>
+  <data name="cyanPathMetrics" xml:space="preserve">
+    <value>Cyan Patch Metrics</value>
+  </data>
+  <data name="cyanText" xml:space="preserve">
+    <value>Cyan</value>
+  </data>
+  <data name="deltaAText" xml:space="preserve">
+    <value>Δa*</value>
+  </data>
+  <data name="deltaBText" xml:space="preserve">
+    <value>Δb*</value>
+  </data>
+  <data name="deltaEText" xml:space="preserve">
+    <value>ΔE</value>
+  </data>
+  <data name="deltaLText" xml:space="preserve">
+    <value>ΔL*</value>
+  </data>
+  <data name="dlpMsgText" xml:space="preserve">
+    <value>Wenn die Optimierung fertig ist, {0} auf den Workflow anwenden und das {1} Chart nochmals drucken.</value>
+  </data>
+  <data name="dlpText" xml:space="preserve">
+    <value>DLP_de</value>
+  </data>
+  <data name="gbPatchMetricsText" xml:space="preserve">
+    <value>% GB Patch Metrics</value>
+  </data>
+  <data name="greenPathMetrics" xml:space="preserve">
+    <value>Green Patch Metrics</value>
+  </data>
+  <data name="greenText" xml:space="preserve">
+    <value>Green_de</value>
+  </data>
+  <data name="GridBoundColumnResource1.HeaderText" xml:space="preserve">
+    <value>ID_de</value>
+  </data>
+  <data name="GridBoundColumnResource10.HeaderText" xml:space="preserve">
+    <value>IST L*</value>
+  </data>
+  <data name="GridBoundColumnResource11.HeaderText" xml:space="preserve">
+    <value>Zielwert a*</value>
+  </data>
+  <data name="GridBoundColumnResource12.HeaderText" xml:space="preserve">
+    <value>IST a*</value>
+  </data>
+  <data name="GridBoundColumnResource13.HeaderText" xml:space="preserve">
+    <value>Zielwert b*</value>
+  </data>
+  <data name="GridBoundColumnResource14.HeaderText" xml:space="preserve">
+    <value>IST b*</value>
+  </data>
+  <data name="GridBoundColumnResource15.HeaderText" xml:space="preserve">
+    <value>ΔH</value>
+  </data>
+  <data name="GridBoundColumnResource16.HeaderText" xml:space="preserve">
+    <value>ΔCh</value>
+  </data>
+  <data name="GridBoundColumnResource17.HeaderText" xml:space="preserve">
+    <value>ΔL</value>
+  </data>
+  <data name="GridBoundColumnResource18.HeaderText" xml:space="preserve">
+    <value>Metric</value>
+  </data>
+  <data name="GridBoundColumnResource19.HeaderText" xml:space="preserve">
+    <value>Tol</value>
+  </data>
+  <data name="GridBoundColumnResource2.HeaderText" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="GridBoundColumnResource20.HeaderText" xml:space="preserve">
+    <value>IST</value>
+  </data>
+  <data name="GridBoundColumnResource21.HeaderText" xml:space="preserve">
+    <value>Ist nicht ok</value>
+  </data>
+  <data name="GridBoundColumnResource22.HeaderText" xml:space="preserve">
+    <value>Metric</value>
+  </data>
+  <data name="GridBoundColumnResource23.HeaderText" xml:space="preserve">
+    <value>Toleranz</value>
+  </data>
+  <data name="GridBoundColumnResource24.HeaderText" xml:space="preserve">
+    <value>IST</value>
+  </data>
+  <data name="GridBoundColumnResource25.HeaderText" xml:space="preserve">
+    <value>Ist nicht ok</value>
+  </data>
+  <data name="GridBoundColumnResource26.HeaderText" xml:space="preserve">
+    <value>Metric</value>
+  </data>
+  <data name="GridBoundColumnResource27.HeaderText" xml:space="preserve">
+    <value>Toleranz</value>
+  </data>
+  <data name="GridBoundColumnResource28.HeaderText" xml:space="preserve">
+    <value>IST</value>
+  </data>
+  <data name="GridBoundColumnResource29.HeaderText" xml:space="preserve">
+    <value>Ist nicht ok</value>
+  </data>
+  <data name="GridBoundColumnResource3.HeaderText" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="GridBoundColumnResource30.HeaderText" xml:space="preserve">
+    <value>Metric</value>
+  </data>
+  <data name="GridBoundColumnResource31.HeaderText" xml:space="preserve">
+    <value>Toleranz</value>
+  </data>
+  <data name="GridBoundColumnResource32.HeaderText" xml:space="preserve">
+    <value>IST</value>
+  </data>
+  <data name="GridBoundColumnResource33.HeaderText" xml:space="preserve">
+    <value>Ist nicht ok</value>
+  </data>
+  <data name="GridBoundColumnResource34.HeaderText" xml:space="preserve">
+    <value>Dichte_V</value>
+  </data>
+  <data name="GridBoundColumnResource35.HeaderText" xml:space="preserve">
+    <value>Dichte_C</value>
+  </data>
+  <data name="GridBoundColumnResource36.HeaderText" xml:space="preserve">
+    <value>Dichte_M</value>
+  </data>
+  <data name="GridBoundColumnResource37.HeaderText" xml:space="preserve">
+    <value>Dichte_Y</value>
+  </data>
+  <data name="GridBoundColumnResource4.HeaderText" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="GridBoundColumnResource5.HeaderText" xml:space="preserve">
+    <value>K</value>
+  </data>
+  <data name="GridBoundColumnResource6.HeaderText" xml:space="preserve">
+    <value>ΔE</value>
+  </data>
+  <data name="GridBoundColumnResource7.HeaderText" xml:space="preserve">
+    <value>ΔE94</value>
+  </data>
+  <data name="GridBoundColumnResource8.HeaderText" xml:space="preserve">
+    <value>ΔE2000</value>
+  </data>
+  <data name="GridBoundColumnResource9.HeaderText" xml:space="preserve">
+    <value>Zielwert  L*</value>
+  </data>
+  <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
+    <value>Patch</value>
+  </data>
   <data name="ibtnPrintLabelResource1.ToolTip" xml:space="preserve">
     <value>Aufkleber drucken</value>
   </data>
   <data name="ibtnPrintPreviewResource1.ToolTip" xml:space="preserve">
     <value>Aufkleber Voransicht</value>
   </data>
+  <data name="ImgBtn_ReportResource1.ToolTip" xml:space="preserve">
+    <value>PDF Report laden</value>
+  </data>
+  <data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
+    <value>Clear Fillter</value>
+  </data>
+  <data name="imgClearFillterResource1.ToolTip" xml:space="preserve">
+    <value>Filter löschen</value>
+  </data>
+  <data name="lbtnClearFillterResource1.ToolTip" xml:space="preserve">
+    <value>Clear Fillter</value>
+  </data>
   <data name="lbtnClearFillterResource2.ToolTip" xml:space="preserve">
     <value>Clear Fillter</value>
+  </data>
+  <data name="ListItemResource1.Text" xml:space="preserve">
+    <value>Idealliance Digital Chart</value>
   </data>
   <data name="loc10PercentileDeltaResource1.Text" xml:space="preserve">
     <value>10th Percentile Δ</value>
@@ -525,35 +363,122 @@
   <data name="loc95PercentileDeltaResource1.Text" xml:space="preserve">
     <value>95th Percentile Δ</value>
   </data>
+  <data name="LocalizeResource1.Text" xml:space="preserve">
+    <value>  Primärfarben Patches</value>
+  </data>
+  <data name="locAnaluzeMeasurementResource1.Text" xml:space="preserve">
+    <value>Messung analysieren :</value>
+  </data>
+  <data name="locAverageDeltaResource1.Text" xml:space="preserve">
+    <value>Durchschnitts Δ</value>
+  </data>
+  <data name="locAvgDeltaE2000Resource1.Text" xml:space="preserve">
+    <value>mittleres ΔE2000</value>
+  </data>
+  <data name="locAvgDeltaE94Resource1.Text" xml:space="preserve">
+    <value>mittleres  ΔE94</value>
+  </data>
+  <data name="locAvgDeltaEResource1.Text" xml:space="preserve">
+    <value>mittleres ΔE</value>
+  </data>
   <data name="locBlackDeltaLResource1.Text" xml:space="preserve">
     <value>Black ΔL</value>
   </data>
   <data name="locBlackDeltaLSummaryResource1.Text" xml:space="preserve">
-    <value>Black  ΔL Summary</value>
+    <value>Black  ΔL Zusammenfassung</value>
   </data>
   <data name="locComparisonResource1.Text" xml:space="preserve">
-    <value>a* - b* Comparison</value>
+    <value>a* - b* Vergleich</value>
+  </data>
+  <data name="locCreateDLPResource1.Text" xml:space="preserve">
+    <value>DLP Erzeugen</value>
   </data>
   <data name="locFilterMetricSumResource1.Text" xml:space="preserve">
     <value>Filter by Metric Sum:</value>
+  </data>
+  <data name="locG7Resource1.Text" xml:space="preserve">
+    <value>G7</value>
+  </data>
+  <data name="locGamutPlotResource1.Text" xml:space="preserve">
+    <value>Gamut Plot</value>
   </data>
   <data name="locGoToPageResource1.Text" xml:space="preserve">
     <value>Gehe zu Seite</value>
   </data>
   <data name="locGrayAvgDeltaResource1.Text" xml:space="preserve">
-    <value>Gray Average Δ</value>
+    <value>Mittleres Grau Δ</value>
   </data>
   <data name="locGrayBalanceDeltaCHResource1.Text" xml:space="preserve">
-    <value>Gray Balance ΔCh</value>
+    <value>Graubalance ΔCh</value>
+  </data>
+  <data name="locGrayBalanceLABResource1.Text" xml:space="preserve">
+    <value>Graubalance L* a* b*_de</value>
   </data>
   <data name="locGrayDeltaCHSummaryResource1.Text" xml:space="preserve">
-    <value>Gray  ΔCh Summary</value>
+    <value>Grau ΔCh Zusammenfassung</value>
   </data>
   <data name="locGrayDeltaLResource1.Text" xml:space="preserve">
-    <value>Gray ΔL</value>
+    <value>Grau ΔL</value>
   </data>
   <data name="locGrayDeltaLSummaryResource1.Text" xml:space="preserve">
-    <value>Gray  ΔL Summary</value>
+    <value>Grau  ΔL Zusammenfassung</value>
+  </data>
+  <data name="locGrayResource1.Text" xml:space="preserve">
+    <value>Gamut</value>
+  </data>
+  <data name="locInkPaperResource1.Text" xml:space="preserve">
+    <value>Ink Papier</value>
+  </data>
+  <data name="locLabelAct" xml:space="preserve">
+    <value>Act.</value>
+  </data>
+  <data name="locLabelCustomer" xml:space="preserve">
+    <value>Kundenname:</value>
+  </data>
+  <data name="locLabelDate" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="locLabeldEType" xml:space="preserve">
+    <value>dE Type:</value>
+  </data>
+  <data name="locLabelDevice" xml:space="preserve">
+    <value>Gerät</value>
+  </data>
+  <data name="locLabelJDFJobID" xml:space="preserve">
+    <value>JDF Job ID:</value>
+  </data>
+  <data name="locLabelJob" xml:space="preserve">
+    <value>Job:</value>
+  </data>
+  <data name="locLabelMetric" xml:space="preserve">
+    <value>Metric:</value>
+  </data>
+  <data name="locLabelPageOrSurface" xml:space="preserve">
+    <value>Seite/Oberfläche:</value>
+  </data>
+  <data name="locLabelSignature" xml:space="preserve">
+    <value>Signature</value>
+  </data>
+  <data name="locLabelStandard" xml:space="preserve">
+    <value>Standard:</value>
+  </data>
+  <data name="locLabelTimestamp" xml:space="preserve">
+    <value>Timestamp:</value>
+  </data>
+  <data name="locLabelTol" xml:space="preserve">
+    <value>Tol.</value>
+  </data>
+  <data name="locLComparisonResource1.Text" xml:space="preserve">
+    <value>L* Vergleich</value>
+  </data>
+  <data name="locMaxDeltaE2000Resource1.Text" xml:space="preserve">
+    <value>Max ΔE2000</value>
+  </data>
+  <data name="locMaxDeltaE94Resource1.Text" xml:space="preserve">
+    <value>Max ΔE94</value>
+  </data>
+  <data name="locMaxDeltaEResource1.Text" xml:space="preserve">
+    <value>Max ΔE</value>
   </data>
   <data name="locMaximumDeltaResource1.Text" xml:space="preserve">
     <value>Maximum Δ</value>
@@ -564,8 +489,53 @@
   <data name="locMaxPrimaryDeltaResource1.Text" xml:space="preserve">
     <value>Maximum Primary Δ</value>
   </data>
+  <data name="locMeasurementNameResource1.Text" xml:space="preserve">
+    <value>Name der Messung: </value>
+  </data>
+  <data name="locMeasurementResource1.Text" xml:space="preserve">
+    <value>Messung</value>
+  </data>
+  <data name="locMeasurementVerificationResource1.Text" xml:space="preserve">
+    <value>Messen</value>
+  </data>
+  <data name="locNoRecordsAvailableResource1.Text" xml:space="preserve">
+    <value>Keine Datensätze verfügbar</value>
+  </data>
+  <data name="locOptimizeResource1.Text" xml:space="preserve">
+    <value>optimieren</value>
+  </data>
+  <data name="locPaperResource1.Text" xml:space="preserve">
+    <value>Papier  L* a* b*</value>
+  </data>
+  <data name="locPatchDetailsResource1.Text" xml:space="preserve">
+    <value>Patch Details</value>
+  </data>
   <data name="locRecordsResource1.Text" xml:space="preserve">
     <value>Datensätze</value>
+  </data>
+  <data name="locReportResource1.Text" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="locSelectedMetricResource1.Text" xml:space="preserve">
+    <value>Selected Metric:</value>
+  </data>
+  <data name="locSubmitResource1.Text" xml:space="preserve">
+    <value>Absenden</value>
+  </data>
+  <data name="locSummaryResource1.Text" xml:space="preserve">
+    <value>Zusammenfassung</value>
+  </data>
+  <data name="locTVIResource1.Text" xml:space="preserve">
+    <value>Tonwertzuwachs</value>
+  </data>
+  <data name="locUploadDateResource1.Text" xml:space="preserve">
+    <value>Hochgeladen am:</value>
+  </data>
+  <data name="lText" xml:space="preserve">
+    <value>L*</value>
+  </data>
+  <data name="ltrlRecordsSummaryResource1.Text" xml:space="preserve">
+    <value>Datensätz(e) {start} bis {end} von {total}</value>
   </data>
   <data name="LTRL_CurrentPageResource1.Text" xml:space="preserve">
     <value>-1</value>
@@ -576,55 +546,49 @@
   <data name="LTRL_StartIndexResource1.Text" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ltrlRecordsSummaryResource1.Text" xml:space="preserve">
-    <value>Datensa(e)tz(e) {Anfang} bis {Ende} von {Gesamt}</value>
+  <data name="magentaPathMetrics" xml:space="preserve">
+    <value>Magenta Patch Metrics</value>
+  </data>
+  <data name="magentaText" xml:space="preserve">
+    <value>Magenta</value>
+  </data>
+  <data name="newPrintConditionText" xml:space="preserve">
+    <value>Neue Druckbedingung - Analysieren (No DLP)</value>
+  </data>
+  <data name="nextText" xml:space="preserve">
+    <value>nächster</value>
+  </data>
+  <data name="paperPathMetrics" xml:space="preserve">
+    <value>Paper Patch Metrics</value>
+  </data>
+  <data name="paperText" xml:space="preserve">
+    <value>Papier</value>
+  </data>
+  <data name="patchMetricsText" xml:space="preserve">
+    <value>Patch Metrics</value>
+  </data>
+  <data name="redPathMetrics" xml:space="preserve">
+    <value>Rot Patch Metrics</value>
+  </data>
+  <data name="redText" xml:space="preserve">
+    <value>Rot</value>
+  </data>
+  <data name="selectMeasurementMsg" xml:space="preserve">
+    <value>Mindestens ein Messung muß überprüft werden</value>
+  </data>
+  <data name="targetText" xml:space="preserve">
+    <value>Zielwert</value>
   </data>
   <data name="TemplateFieldResource1.HeaderText" xml:space="preserve">
     <value>Status:</value>
   </data>
-  <data name="locLComparisonResource1.Text" xml:space="preserve">
-    <value>L* Comparison</value>
+  <data name="validationAnalyzeHeaderText" xml:space="preserve">
+    <value>Validierung - Analyse</value>
   </data>
-  <data name="GridBoundColumnResource34.HeaderText" xml:space="preserve">
-    <value>Density_V</value>
+  <data name="yellowPathMetrics" xml:space="preserve">
+    <value>Gelb Patch Metrics</value>
   </data>
-  <data name="GridBoundColumnResource35.HeaderText" xml:space="preserve">
-    <value>Density_C</value>
-  </data>
-  <data name="GridBoundColumnResource36.HeaderText" xml:space="preserve">
-    <value>Density_M</value>
-  </data>
-  <data name="GridBoundColumnResource37.HeaderText" xml:space="preserve">
-    <value>Density_Y</value>
-  </data>
-  <data name="LocAvgMesurmentResource1.Text" xml:space="preserve">
-    <value>Analysieren Durchschnitt der Messungen</value>
-  </data>
-  <data name="TemplateFieldResource0.HeaderText" xml:space="preserve">
-    <value>Name der Messung:</value>
-  </data>
-  <data name="btnCGATSExportResource1.Text" xml:space="preserve">
-    <value>Export to CGATS_de</value>
-  </data>
-  <data name="btn_GeneratePDFResource1.ToolTip" xml:space="preserve">
-    <value>Download PDF_ja</value>
-  </data>
-  <data name="dvValidationSummaryResource1.EmptyDataText" xml:space="preserve">
-    <value>Averaging all measurements!_de</value>
-  </data>
-  <data name="locMeasurementIDResource1.Text" xml:space="preserve">
-    <value>MeasurementID_de:</value>
-  </data>
-  <data name="btnSpreadResource1.Text" xml:space="preserve">
-    <value>Spread_de</value>
-  </data>
-  <data name="btnTVIResource1.Text" xml:space="preserve">
-    <value>TVI_de</value>
-  </data>
-  <data name="locChromaticVariationResource1.Text" xml:space="preserve">
-    <value>Chromatic Variation_de</value>
-  </data>
-  <data name="percentPatchMetrics" xml:space="preserve">
-    <value>% Patch Metrics_de</value>
+  <data name="yellowText" xml:space="preserve">
+    <value>Gelb</value>
   </data>
 </root>

@@ -214,7 +214,7 @@ textarea {
                                     </tr>
                                      <tr id="trReadMode" runat="server">
                                         <td >
-                                            <span><asp:Localize runat="server" Text="Read Mode:" ID="Localize2"></asp:Localize></span>
+                                            <span><asp:Localize runat="server" Text="Read Mode:" ID="locReadMode" meta:resourcekey="locReadModeResource1"></asp:Localize></span>
                                         </td>
                                         <td >
                                             <asp:DropDownList ID="cmbReadMode" runat="server" Width="200px" 
@@ -227,7 +227,7 @@ textarea {
                                     </tr>
                                      <tr id="trMeasCount" runat="server">
                                         <td id="Td1" runat="server">
-                                            <span><asp:Localize runat="server" Text="Measurement Count:" ID="Localize1"></asp:Localize></span>
+                                            <span><asp:Localize runat="server" Text="Measurement Count:" ID="locMeasCount" meta:resourcekey="locMeasCountResource1"></asp:Localize></span>
                                         </td>
                                         <td id="Td2" runat="server">
                                             <asp:DropDownList ID="cmbMeasurementCount" runat="server" Width="200px" CssClass="select">                                           

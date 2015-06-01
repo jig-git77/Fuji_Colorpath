@@ -198,4 +198,7 @@
   <data name="locTargetPrintConditionResource1.Text" xml:space="preserve">
     <value>Target Print Condition</value>
   </data>
+  <data name="locReTargetProjResource1.Text" xml:space="preserve">
+    <value>ReTarget Project:</value>
+  </data>
 </root>

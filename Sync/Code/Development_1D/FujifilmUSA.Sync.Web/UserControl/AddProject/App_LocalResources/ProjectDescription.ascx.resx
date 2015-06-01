@@ -249,4 +249,28 @@
   <data name="txtTechnicianNameResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="locBlanketAgeResource1.Text" xml:space="preserve">
+    <value>Blanket Age:</value>
+  </data>
+  <data name="locBlanketResource1.Text" xml:space="preserve">
+    <value>Blanket:</value>
+  </data>
+  <data name="locFounSolRefResource1.Text" xml:space="preserve">
+    <value>*Include Manufacture, Name</value>
+  </data>
+  <data name="locFountainSolResource1.Text" xml:space="preserve">
+    <value>Fountain Solution:</value>
+  </data>
+  <data name="locInkOrderResource1.Text" xml:space="preserve">
+    <value>Ink Order:</value>
+  </data>
+  <data name="locOffsetDataResource1.Text" xml:space="preserve">
+    <value>Offset Printing Data</value>
+  </data>
+  <data name="locScreeningRefResource1.Text" xml:space="preserve">
+    <value>*Include Type(AM-FM), Dot Shape, Frequency</value>
+  </data>
+  <data name="locScreeningResource1.Text" xml:space="preserve">
+    <value>Screening:</value>
+  </data>
 </root>

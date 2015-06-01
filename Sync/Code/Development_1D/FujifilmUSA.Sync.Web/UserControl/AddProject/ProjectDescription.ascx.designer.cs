@@ -400,6 +400,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtFountainSol;
         
         /// <summary>
+        /// Localize2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize2;
+        
+        /// <summary>
         /// locBlanket control.
         /// </summary>
         /// <remarks>
@@ -452,5 +461,14 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtScreening;
+        
+        /// <summary>
+        /// Localize3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize3;
     }
 }

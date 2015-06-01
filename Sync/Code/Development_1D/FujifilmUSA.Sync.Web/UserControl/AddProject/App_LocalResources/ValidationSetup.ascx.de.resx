@@ -117,17 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="downloadChartNotAvailable" xml:space="preserve">
+    <value>Download chart is not available_de</value>
+  </data>
   <data name="ListItemResource1.Text" xml:space="preserve">
-    <value>Yes_De</value>
+    <value>Ja</value>
   </data>
   <data name="ListItemResource2.Text" xml:space="preserve">
     <value>Nein</value>
+  </data>
+  <data name="locDescriptionResource1.Text" xml:space="preserve">
+    <value>Description_de:</value>
   </data>
   <data name="locEnableValidationResource1.Text" xml:space="preserve">
     <value>Validierung aktivieren:</value>
   </data>
   <data name="locMeasurementDeviceResource1.Text" xml:space="preserve">
     <value>Meßgerät:</value>
+  </data>
+  <data name="locMeasurementSetupResource1.Text" xml:space="preserve">
+    <value>Messung Einstellungen</value>
   </data>
   <data name="locMeasureResource1.Text" xml:space="preserve">
     <value>Messen</value>
@@ -136,7 +145,7 @@
     <value>Neue Druckbedingung - Validierungs-Voreinstellung</value>
   </data>
   <data name="locReviewSelectionResource1.Text" xml:space="preserve">
-    <value>Auswahl übertprüfen</value>
+    <value>Auswahl überprüfen</value>
   </data>
   <data name="locValidationChart2Resource1.Text" xml:space="preserve">
     <value>Validierungschart:</value>
@@ -145,13 +154,13 @@
     <value>Validierungschart:</value>
   </data>
   <data name="locValidationMetricResource1.Text" xml:space="preserve">
-    <value>Validation Metric:</value>
+    <value>Validation Metric:_de</value>
   </data>
   <data name="locValidationMetricsResource1.Text" xml:space="preserve">
-    <value>Validation Metrics</value>
+    <value>Validation Metrics_de</value>
   </data>
   <data name="locValidationOptionsResource1.Text" xml:space="preserve">
-    <value>Validation Options</value>
+    <value>Validation Options_de</value>
   </data>
   <data name="noValidationLicense" xml:space="preserve">
     <value>Die Funktion "Validierung" ist nicht lizensiert</value>
@@ -166,15 +175,18 @@
     <value>-- Auswählen --</value>
   </data>
   <data name="vccmbMetricTargetPreset" xml:space="preserve">
-    <value>Bitte Validation metric auswählen</value>
+    <value>Bitte Validation Metrik auswählen</value>
   </data>
-  <data name="locMeasurementSetupResource1.Text" xml:space="preserve">
-    <value>Messung Einstellungen</value>
+  <data name="locDownloadChartButtonResource1.Text" xml:space="preserve">
+    <value>Download Chart_de</value>
   </data>
-  <data name="locDescriptionResource1.Text" xml:space="preserve">
-    <value>Description_fr:</value>
+  <data name="locMeasCountResource1.Text" xml:space="preserve">
+    <value>Measurement Count:_de</value>
   </data>
-  <data name="downloadChartNotAvailable" xml:space="preserve">
-    <value>Download chart is not available</value>
+  <data name="locReadModeResource1.Text" xml:space="preserve">
+    <value>Read Mode:_de</value>
+  </data>
+  <data name="locUVSettingsResource1.Text" xml:space="preserve">
+    <value>UV Settings:_de</value>
   </data>
 </root>

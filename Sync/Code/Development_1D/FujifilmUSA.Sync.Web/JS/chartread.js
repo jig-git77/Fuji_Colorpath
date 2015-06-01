@@ -257,14 +257,19 @@ function presentScannerList(ScannerList) {
         }
         else {
             g_ScannerList = ScannerList[i];
-            if (g_ScannerList["Requirements"].indexOf("RequiresSubstrate") >= 0) {
-                jQuery("[id*='lblMessage']").css('color', 'Black');
+
+			//commented the substrate calibration for the exact
+       //     if (g_ScannerList["Requirements"].indexOf("RequiresSubstrate") >= 0) {
+			//alert ("in requires substrate");
+         //       jQuery("[id*='lblMessage']").css('color', 'Black');
                 jQuery("[id*='lblMessage']").html(locPleaseMeasWhite);
-                jQuery("[id*='btnCalibrate']").css('display', '');
-                return;
+          //      jQuery("[id*='btnCalibrate']").css('display', '');
+			//	jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
+				//ControlDisability(0, false, 1, false, 0, false, 0, false); //------Make Measure button enabled.
+             //   return;
             
-            }
-            else if  (g_ScannerList["Requirements"].indexOf("RequiresCalibration") >= 0) {
+           // }
+             if  (g_ScannerList["Requirements"].indexOf("RequiresCalibration") >= 0) {
                 jQuery("[id*='lblMessage']").css('color', 'Black');
                 jQuery("[id*='lblMessage']").html(locPleaseCalibrate);
                 jQuery("[id*='btnCalibrate']").css('display', '');
@@ -275,7 +280,7 @@ function presentScannerList(ScannerList) {
                 jQuery("[id*='lblMessage']").html(locClickMeasureButton);
                 jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
                 jQuery("[id*='btnCancelMeasurement']").css('display', '');
-                if (!(scanner["Type"] == "iO" || scanner["Type"] == "iSis")) { //--------------Only display "Rewind" button in "i1-Pro" mode-----------//
+                if (!(g_ScannerList["Type"] == "iO" || g_ScannerList["Type"] == "iSis")) { //--------------Only display "Rewind" button in "i1-Pro" mode-----------//
                     jQuery("[id*='btnRewindMeasurement']").css('display', '');
                 }              
                 ControlDisability(0, false, 1, false, 0, false, 0, false); //------Make Measure button enabled.
@@ -559,8 +564,11 @@ function OnCancel() {
 function OnRewind() {
 
     if (next > 0) { //---------Call "Rewind" functionality if we are in a middle of the measurement and want to do rewind-------------//
-        g_SavedQuery["Result"] = 'REWIND';
+        g_SavedQuery["Result"] = 'CANCEL';
         backup1 = 1;
+
+		 // g_Question["Result"] = 'CANCEL';
+    //var cancelstat = plugin().queryDone(g_Question);
       
         var cancelstat = plugin().queryDone(g_SavedQuery);
 

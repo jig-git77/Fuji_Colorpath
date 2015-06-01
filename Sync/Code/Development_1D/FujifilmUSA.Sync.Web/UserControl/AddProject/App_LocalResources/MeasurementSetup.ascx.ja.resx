@@ -141,7 +141,7 @@
   <data name="locSpectrophotometerResource1.Text" xml:space="preserve">
     <value>測色機オプション</value>
   </data>
-  <data name="txtAlignmentChartResource1.Text" xml:space="preserve">
+  <data name="txtBaseDLPResource1.Text" xml:space="preserve">
     <value>DLP生成用チャート</value>
   </data>
   <data name="selectText" xml:space="preserve">
@@ -164,5 +164,14 @@
   </data>
   <data name="locUVSettingsResource1.Text" xml:space="preserve">
     <value>UV設定：</value>
+  </data>
+  <data name="locDensityTypeResource1.Text" xml:space="preserve">
+    <value>Density Type:_ja</value>
+  </data>
+  <data name="locMeasCountResource1.Text" xml:space="preserve">
+    <value>Measurement Count:_ja</value>
+  </data>
+  <data name="locReadModeResource1.Text" xml:space="preserve">
+    <value>Read Mode:_ja</value>
   </data>
 </root>

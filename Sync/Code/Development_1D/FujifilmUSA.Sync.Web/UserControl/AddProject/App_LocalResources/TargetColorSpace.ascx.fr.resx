@@ -150,4 +150,7 @@
   <data name="Panel_PaperLABResource1.Text" xml:space="preserve">
     <value>New Paper Values_fr:</value>
   </data>
+  <data name="locChooseMethodResource1.Text" xml:space="preserve">
+    <value>Choose Method_fr:</value>
+  </data>
 </root>

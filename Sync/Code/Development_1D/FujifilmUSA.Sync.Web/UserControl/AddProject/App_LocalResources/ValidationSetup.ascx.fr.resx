@@ -177,4 +177,13 @@
   <data name="downloadChartNotAvailable" xml:space="preserve">
     <value>Download chart is not available</value>
   </data>
+  <data name="locMeasCountResource1.Text" xml:space="preserve">
+    <value>Measurement Count:_fr</value>
+  </data>
+  <data name="locReadModeResource1.Text" xml:space="preserve">
+    <value>Read Mode:_fr</value>
+  </data>
+  <data name="locUVSettingsResource1.Text" xml:space="preserve">
+    <value>UV Settings:_fr</value>
+  </data>
 </root>

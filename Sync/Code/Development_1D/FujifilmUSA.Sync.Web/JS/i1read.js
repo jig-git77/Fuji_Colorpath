@@ -97,6 +97,9 @@ function calibrateDevice(scanner) {
     if (scanner["Type"] == "eXact") {
 	 myQuery["CALIBRATEINSTRUCTIONS"] = locWhiteCalibrationSuccessAndClickMeasureButton;
 	 myQuery["CALIBRATEACKNOWLEDGED"] = "Please Follow the directions on the eXact Device";
+	   if (typeof g_Chart["DeviceSettings"] != "undefined") {
+        scanner["DeviceSettings"] = g_Chart["DeviceSettings"];
+    }
 	var result = plugin().calibrateDevice(scanner, myQuery, presentCalibrateDialog, presentCalibrateDone);
 	
 	//hack to fix slow machines that do not respond to the calibrate command within a reasonable amount of time
