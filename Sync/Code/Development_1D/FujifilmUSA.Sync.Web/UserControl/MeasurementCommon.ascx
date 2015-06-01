@@ -281,8 +281,8 @@
             ListDevices();
             GetRefChartData();    
             
-            //---If DeviceType is i1-Pro2, i1-IO-Pro2, LFP, eXact and plugin is older than 1.8 version--> force them to download new plugin---//
-            if(plugin().plugin_version < 1.8 &&  (jQuery("[id*='hdDeviceType']").val() == '4' || jQuery("[id*='hdDeviceType']").val() == '5' || jQuery("[id*='hdDeviceType']").val() == '6' || jQuery("[id*='hdDeviceType']").val() == '7'))
+            //---If DeviceType is i1-Pro2, i1-IO-Pro2, LFP, eXact, i1-Sis2 and plugin is older than 1.8 version--> force them to download newer plugin---//
+            if(plugin().plugin_version < 1.8 &&  (jQuery("[id*='hdDeviceType']").val() == '4' || jQuery("[id*='hdDeviceType']").val() == '5' || jQuery("[id*='hdDeviceType']").val() == '6' || jQuery("[id*='hdDeviceType']").val() == '7' || jQuery("[id*='hdDeviceType']").val() == '8'))
             {
                 var oWindow;
                 oWindow = window.radopen("PopupDownloadSoftware.aspx", "DownloadSoftwareWindow");
