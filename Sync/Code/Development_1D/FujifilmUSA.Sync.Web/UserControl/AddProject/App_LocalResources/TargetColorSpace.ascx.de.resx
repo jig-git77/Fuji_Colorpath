@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="chk_IsPaperScalingResource1.Text" xml:space="preserve">
-    <value>Relative Paper Scaling_de</value>
+    <value>Papierweiss anpassen</value>
   </data>
   <data name="locDescriptionResource1.Text" xml:space="preserve">
     <value>Beschreibung</value>
@@ -130,7 +130,7 @@
     <value>Profiler Optionen</value>
   </data>
   <data name="locProjectTypeResource1.Text" xml:space="preserve">
-    <value>Project Type_de:</value>
+    <value>Projekttyp</value>
   </data>
   <data name="locSourceProfileResource1.Text" xml:space="preserve">
     <value>Quellprofil:</value>
@@ -139,18 +139,27 @@
     <value>Neue Druckbedingung - Zielfarbraum</value>
   </data>
   <data name="locTargetLABResource1.Text" xml:space="preserve">
-    <value>Color Metric_de</value>
+    <value>Farbmetrik</value>
   </data>
   <data name="locTargetPrintResource1.Text" xml:space="preserve">
-    <value>Target Print Condition_de:</value>
+    <value>Ziel-Druckbedingung</value>
   </data>
   <data name="locTargetsResource1.Text" xml:space="preserve">
-    <value>Targets_de</value>
+    <value>Zielwerte</value>
   </data>
   <data name="Panel_PaperLABResource1.Text" xml:space="preserve">
-    <value>New Paper Values_de:</value>
+    <value>Neue Papierparameter:</value>
   </data>
   <data name="locChooseMethodResource1.Text" xml:space="preserve">
-    <value>Choose Method_de:</value>
+    <value>Verfahren wählen:</value>
+  </data>
+  <data name="btn_PaperClear_Click.Text" xml:space="preserve">
+    <value>Reset_de</value>
+  </data>
+  <data name="locbtn_PaperApplyResource1.Text" xml:space="preserve">
+    <value>Anwenden!</value>
+  </data>
+  <data name="locPatchResource1.Text" xml:space="preserve">
+    <value>Meßfeld</value>
   </data>
 </root>

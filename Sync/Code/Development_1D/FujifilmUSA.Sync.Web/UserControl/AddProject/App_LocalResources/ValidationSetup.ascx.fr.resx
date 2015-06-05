@@ -186,4 +186,13 @@
   <data name="locUVSettingsResource1.Text" xml:space="preserve">
     <value>UV Settings:_fr</value>
   </data>
+  <data name="locDownloadChartButtonResource1.Text" xml:space="preserve">
+    <value>Download Chart_fr</value>
+  </data>
+  <data name="locReadModePointResource1.Text" xml:space="preserve">
+    <value>Point_fr</value>
+  </data>
+  <data name="locReadModeStripResource1.Text" xml:space="preserve">
+    <value>Strip_fr</value>
+  </data>
 </root>

@@ -153,4 +153,13 @@
   <data name="locChooseMethodResource1.Text" xml:space="preserve">
     <value>Choose Method:</value>
   </data>
+  <data name="btn_PaperClear_Click.Text" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="locbtn_PaperApplyResource1.Text" xml:space="preserve">
+    <value>Apply!</value>
+  </data>
+  <data name="locPatchResource1.Text" xml:space="preserve">
+    <value>Patch</value>
+  </data>
 </root>

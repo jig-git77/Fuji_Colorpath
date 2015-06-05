@@ -1551,7 +1551,7 @@
                                                                                 <div style="float: left;" >
                                                                                     <div id="imgHeader" class="expanded">
                                                                                         &nbsp;</div>
-                                                                                    <asp:Localize ID="Localize2" runat="server" Text="a* - b* Gamut Comparison"></asp:Localize>
+                                                                                    <asp:Localize ID="locabGamutCompResource1" runat="server" Text="a* - b* Gamut Comparison"></asp:Localize>
                                                                                 </div>
                                                                                 <div class="clear">
                                                                                 </div>
@@ -1973,7 +1973,7 @@
                                         <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
                                             <tr>
                                                 <td class="green-title" align="center">
-                                                    Cyan
+                                                   <asp:Localize ID="locTVICyan" Text="Cyan" runat="server" meta:resourcekey="locTVICyanResource1"></asp:Localize>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -2022,7 +2022,7 @@
                                         <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
                                             <tr>
                                                 <td class="green-title" align="center">
-                                                    Magenta
+                                                      <asp:Localize ID="locTVIMeganta" Text="Magenta" runat="server" meta:resourcekey="locTVIMagentaResource1"></asp:Localize>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -2073,7 +2073,7 @@
                                         <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
                                             <tr>
                                                 <td class="green-title" align="center">
-                                                    Yellow
+                                                     <asp:Localize ID="locTVIYellow" Text="Yellow" runat="server" meta:resourcekey="locTVIYellowResource1"></asp:Localize>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -2122,7 +2122,7 @@
                                         <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
                                             <tr>
                                                 <td class="green-title" align="center">
-                                                    Black
+                                                     <asp:Localize ID="locTVIBlack" Text="Black" runat="server" meta:resourcekey="locTVIBlackResource1"></asp:Localize>
                                                 </td>
                                             </tr>
                                             <tr>

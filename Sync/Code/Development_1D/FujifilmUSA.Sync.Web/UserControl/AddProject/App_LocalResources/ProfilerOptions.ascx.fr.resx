@@ -303,4 +303,31 @@
   <data name="selectText" xml:space="preserve">
     <value>--Select--</value>
   </data>
+  <data name="locDensityTargetsResource1.Text" xml:space="preserve">
+    <value>Density Targets_fr</value>
+  </data>
+  <data name="locReTargetResource1.Text" xml:space="preserve">
+    <value>Choose Certified Print Condition:_fr</value>
+  </data>
+  <data name="locDensityCResource1.Text" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="locDensityKResource1.Text" xml:space="preserve">
+    <value>K</value>
+  </data>
+  <data name="locDensityMResource1.Text" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="locDensityYResource1.Text" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="locTargetsResource1.Text" xml:space="preserve">
+    <value>Targets_fr</value>
+  </data>
+  <data name="locTVICMYResource1.Text" xml:space="preserve">
+    <value>CMY</value>
+  </data>
+  <data name="locTVIPatchPerResource1.Text" xml:space="preserve">
+    <value>Patch％_fr</value>
+  </data>
 </root>

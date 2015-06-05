@@ -175,13 +175,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow trProjectType;
         
         /// <summary>
-        /// Panel2 control.
+        /// PanelProjectType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel2;
+        protected global::System.Web.UI.WebControls.Panel PanelProjectType;
         
         /// <summary>
         /// locChooseMethod control.

@@ -153,6 +153,21 @@
   <data name="locSerialNumberResource1.Text" xml:space="preserve">
     <value>Seriennummer</value>
   </data>
+  <data name="rfvBranchContainer" xml:space="preserve">
+    <value>Please select branch._de</value>
+  </data>
+  <data name="rfvCompnayContainer" xml:space="preserve">
+    <value>Please select company._de</value>
+  </data>
+  <data name="rfvInstrumentContainer" xml:space="preserve">
+    <value>Bitte Meßgerät auswählen.</value>
+  </data>
+  <data name="rfvLicenseContainer" xml:space="preserve">
+    <value>Please select license name._de</value>
+  </data>
+  <data name="rfvSerialNumberContainer" xml:space="preserve">
+    <value>Please provide serial number._de</value>
+  </data>
   <data name="selectBranchText" xml:space="preserve">
     <value>--Niederlassung auswählen--</value>
   </data>

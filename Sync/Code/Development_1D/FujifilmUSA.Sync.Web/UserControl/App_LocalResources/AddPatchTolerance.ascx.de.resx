@@ -118,24 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="addMetricTargetPresetText" xml:space="preserve">
-    <value>Add Metric Target Patch Level Preset_de</value>
+    <value>Voreinstellung hinzufügen</value>
   </data>
   <data name="editMetricTargetPresetText" xml:space="preserve">
-    <value>Edit Metric Target Patch Level Preset_de</value>
+    <value>Voreinstellung bearbeiten</value>
+  </data>
+  <data name="errorSamePatchTol" xml:space="preserve">
+    <value>Es kann nur ein Toleranzwert je Meßfeld benutzt werden.</value>
   </data>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Add Metric Target Patch Level Preset_de</value>
+    <value>Voreinstellung hinzufügen</value>
+  </data>
+  <data name="rfvcAlignmentChartContainer" xml:space="preserve">
+    <value>Please select Validation chart._de</value>
+  </data>
+  <data name="rfvcInstrumentTypeContainer" xml:space="preserve">
+    <value>Bitte Meßgerät auswählen.</value>
+  </data>
+  <data name="rfvPresetContainer" xml:space="preserve">
+    <value>Bitte einen Namen eingeben.</value>
   </data>
   <data name="selectCompanyText" xml:space="preserve">
-    <value>-- Select Company --_de</value>
+    <value>-- Firma auswählen --</value>
   </data>
   <data name="selectInstrumentTypeText" xml:space="preserve">
-    <value>-- Select Instrument Type --_de</value>
+    <value>-- Meßgerät auswählen --</value>
   </data>
   <data name="selectRegionText" xml:space="preserve">
-    <value>-- Select Region --_de</value>
+    <value>-- Region auswählen --</value>
   </data>
   <data name="selectText" xml:space="preserve">
-    <value>-- Select --_de</value>
+    <value>-- auswählen --</value>
   </data>
 </root>

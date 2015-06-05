@@ -95,11 +95,10 @@
         <h1><asp:Localize runat="server" ID="locMetricTargetPresetMgmt" Text="Metric Target Preset Management" 
                 meta:resourcekey="locMetricTargetPresetMgmtResource1"></asp:Localize></h1>
           <asp:LinkButton ID="lnkbtnPatchTolerance" runat="server" class="button" 
-                meta:resourcekey="likAddResource1" 
             onclick="lnkbtnPatchTolerance_Click" Visible="false">
                 <span>
                     <asp:Image ID="Image1" runat="server" 
-                ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
+                ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddPMTPResource1" />
                 
             <asp:Localize runat="server" Text="Add Metric Target Patch Preset" ID="Localize1" 
                         meta:resourcekey="locAddMetricTargetPatchPresetResource1"></asp:Localize>
@@ -107,10 +106,10 @@
         </asp:LinkButton>
 
         &nbsp;<asp:LinkButton ID="likAdd" runat="server" class="button" 
-            OnClick="likAdd_Click" meta:resourcekey="likAddResource1" Visible="false">
+            OnClick="likAdd_Click"  Visible="false">
             <span>
                 <asp:Image ID="imgAdd" runat="server" 
-            ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
+            ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddMTPResource1" />
                 
             <asp:Localize runat="server" Text="Add Metric Target Preset" ID="locAddMetricTargetPreset" 
                         meta:resourcekey="locAddMetricTargetPresetResource1"></asp:Localize>
@@ -173,7 +172,7 @@
                                 SortExpression="Company.CompanyName" FilterControlWidth="70px" 
                                 AutoPostBackOnFilter="True" CurrentFilterFunction="Contains" 
                                 FilterControlAltText="Filter CompanyName column" 
-                                meta:resourcekey="GridTemplateColumnResource4">
+                                meta:resourcekey="GridTemplateColumnResource3">
                                 <ItemTemplate>
                                     <asp:Label ID="lblCompanyName" runat="server" 
                                         Text='<%# Eval("Company.CompanyName") %>' 
@@ -186,7 +185,7 @@
                                 HeaderText="Region" UniqueName="Region" SortExpression="Region.RegionName" 
                                 FilterControlWidth="50px" AutoPostBackOnFilter="True" 
                                 CurrentFilterFunction="Contains" FilterControlAltText="Filter Region column" 
-                                meta:resourcekey="GridTemplateColumnResource5">
+                                meta:resourcekey="GridTemplateColumnResource4">
                                 <ItemTemplate>
                                     <asp:Label ID="lblRegion" runat="server" 
                                         Text='<%# Eval("Region.RegionName") %>' meta:resourcekey="lblRegionResource1" />
@@ -210,7 +209,7 @@
                                 HeaderText="Type" UniqueName="ValidationType" SortExpression="ValidationType" 
                                 FilterControlWidth="40px" AutoPostBackOnFilter="True" 
                                 CurrentFilterFunction="Contains" FilterControlAltText="Filter ValidationType column" 
-                                meta:resourcekey="GridTemplateColumnResource5">
+                                meta:resourcekey="GridTemplateColumnResource6">
                                 <ItemTemplate>
                                     <asp:Label ID="lblValidationType" runat="server" 
                                         Text='<%# Convert.ToInt16(Eval("ValidationType")) == 1? "G7" : Convert.ToInt16(Eval("ValidationType")) == 2? "ISO" : "Default" %>'  meta:resourcekey="lblValidationTypeResource1" />
@@ -222,7 +221,7 @@
                              <telerik:GridTemplateColumn UniqueName="IsSync1D" AllowFiltering="False" 
                                 HeaderText="1D?" FilterControlWidth="50px" DataField="IsSync1D" 
                                 FilterControlAltText="Filter IsSync1D column" 
-                                meta:resourcekey="GridTemplateColumnResource6">
+                                meta:resourcekey="GridTemplateColumnResource7">
                                 <ItemTemplate>
                                     <asp:Image ID="imgIsSync1D" runat="server" 
                                         ImageUrl='<%# Convert.ToBoolean(Eval("IsSync1D")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png" %>' 
@@ -234,7 +233,7 @@
                              <telerik:GridTemplateColumn UniqueName="Validation_1D" AllowFiltering="False" 
                                 HeaderText="V_1D?" FilterControlWidth="50px" DataField="Validation_1D" 
                                 FilterControlAltText="Filter Validation_1D column" 
-                                meta:resourcekey="GridTemplateColumnResource6">
+                                meta:resourcekey="GridTemplateColumnResource8">
                                 <ItemTemplate>
                                     <asp:Image ID="imgValidation_1D" runat="server" 
                                         ImageUrl='<%# Convert.ToBoolean(Eval("Validation_1D")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png" %>' 
@@ -246,7 +245,7 @@
                              <telerik:GridTemplateColumn UniqueName="Validation_4D" AllowFiltering="False" 
                                 HeaderText="V_4D?" FilterControlWidth="50px" DataField="Validation_4D" 
                                 FilterControlAltText="Filter Validation_4D column" 
-                                meta:resourcekey="GridTemplateColumnResource6">
+                                meta:resourcekey="GridTemplateColumnResource9">
                                 <ItemTemplate>
                                     <asp:Image ID="imgValidation_4D" runat="server" 
                                         ImageUrl='<%# Convert.ToBoolean(Eval("Validation_4D")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png" %>' 
@@ -259,7 +258,7 @@
                             <telerik:GridTemplateColumn UniqueName="IsUsed" AllowFiltering="False" 
                                 HeaderText="IsUsed?" FilterControlWidth="50px" DataField="IsUsed" 
                                 FilterControlAltText="Filter IsUsed column" 
-                                meta:resourcekey="GridTemplateColumnResource6">
+                                meta:resourcekey="GridTemplateColumnResource10">
                                 <ItemTemplate>
                                     <asp:Image ID="imgIsUsed" runat="server" 
                                         ImageUrl='<%# Convert.ToBoolean(Eval("IsUsed")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png" %>' 
@@ -270,7 +269,7 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="MetricTargetPresetID"
                                 UniqueName="Edit" FilterControlAltText="Filter Edit column" 
-                                meta:resourcekey="GridTemplateColumnResource7">
+                                meta:resourcekey="GridTemplateColumnResource11">
                                 <FilterTemplate>
                                     <center>
                                         <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip="Clear Fillter" 

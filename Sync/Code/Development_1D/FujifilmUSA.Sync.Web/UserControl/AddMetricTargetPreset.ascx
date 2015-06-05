@@ -115,7 +115,7 @@
                                 </tr>
                                    <tr>
                                     <td align="right">
-                                        <span style="font-weight: bold;"><asp:Localize Text="ΔE Methord" runat="server" 
+                                        <span style="font-weight: bold;"><asp:Localize Text="ΔE Method" runat="server" 
                                             ID="locEType" meta:resourcekey="locETypeResource1"></asp:Localize>
                                             <span style="color: Red;">*</span>
                                        </span></td>

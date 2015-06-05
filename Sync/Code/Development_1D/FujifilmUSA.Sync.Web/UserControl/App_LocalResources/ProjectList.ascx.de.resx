@@ -136,7 +136,7 @@
     <value>Name</value>
   </data>
   <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>Standard</value>
+    <value>Druckstandard</value>
   </data>
   <data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
     <value>Bedruckstoff</value>
@@ -220,6 +220,6 @@
     <value>Zuletzt ok</value>
   </data>
   <data name="validationStatusNotCertified" xml:space="preserve">
-    <value>Nicht zertifiziert</value>
+    <value>nicht zertifiziert</value>
   </data>
 </root>

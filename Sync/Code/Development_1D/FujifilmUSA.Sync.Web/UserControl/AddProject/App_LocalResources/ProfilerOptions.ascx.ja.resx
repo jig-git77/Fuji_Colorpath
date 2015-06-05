@@ -211,7 +211,7 @@
     <value>オプションプリセット</value>
   </data>
   <data name="locPresetDescriptionResource1.Text" xml:space="preserve">
-    <value>プリセットの説明</value>
+    <value>判定基準の説明：</value>
   </data>
   <data name="locRangeResource1.Text" xml:space="preserve">
     <value>レンジ</value>
@@ -268,36 +268,63 @@
     <value>このプリセットはアナログデバイスに最適で・・・</value>
   </data>
   <data name="locAdvancedOptionsMetricResource1.Text" xml:space="preserve">
-    <value>Advanced Options_ja</value>
+    <value>詳細オプション</value>
   </data>
   <data name="locMetricPresetsResource1.Text" xml:space="preserve">
-    <value>Metric Presets_ja</value>
+    <value>判定基準</value>
   </data>
   <data name="locMSelectedPresetsResource1.Text" xml:space="preserve">
-    <value>Selected Presets_ja:</value>
+    <value>プリセット選択：</value>
   </data>
   <data name="locTolerancesResource1.Text" xml:space="preserve">
-    <value>Tolerances_ja</value>
+    <value>許容値</value>
   </data>
-  <data name="locTVIBlackResource1" xml:space="preserve">
-    <value>K_ja</value>
+  <data name="locTVIBlackResource1.Text" xml:space="preserve">
+    <value>K</value>
   </data>
   <data name="locTVICyanResource1.Text" xml:space="preserve">
-    <value>Cyan_ja</value>
+    <value>シアン</value>
   </data>
   <data name="locTVIPatchResource1.Text" xml:space="preserve">
-    <value>Patch_ja</value>
+    <value>網％</value>
   </data>
   <data name="locTVITargetsResource1.Text" xml:space="preserve">
-    <value>TVI Targets_ja</value>
+    <value>ドットゲイン基準値</value>
   </data>
   <data name="locMPresetDescriptionResource1.Text" xml:space="preserve">
-    <value>Preset Description_ja:</value>
+    <value>判定基準の説明：</value>
   </data>
   <data name="lblWeightedTolerancesResource1.Text" xml:space="preserve">
     <value>Use Weighted Tolerances_ja</value>
   </data>
   <data name="selectText" xml:space="preserve">
-    <value>--Select--</value>
+    <value>--条件を選択--</value>
+  </data>
+  <data name="locDensityTargetsResource1.Text" xml:space="preserve">
+    <value>濃度基準値</value>
+  </data>
+  <data name="locReTargetResource1.Text" xml:space="preserve">
+    <value>承認済みカーブプロジェクトの選択</value>
+  </data>
+  <data name="locDensityCResource1.Text" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="locDensityKResource1.Text" xml:space="preserve">
+    <value>K</value>
+  </data>
+  <data name="locDensityMResource1.Text" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="locDensityYResource1.Text" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="locTargetsResource1.Text" xml:space="preserve">
+    <value>基準値</value>
+  </data>
+  <data name="locTVICMYResource1.Text" xml:space="preserve">
+    <value>CMY</value>
+  </data>
+  <data name="locTVIPatchPerResource1.Text" xml:space="preserve">
+    <value>網％</value>
   </data>
 </root>

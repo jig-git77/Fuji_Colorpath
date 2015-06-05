@@ -145,16 +145,16 @@
     <value>Gleich zu</value>
   </data>
   <data name="FilterFunctionGreaterThan" xml:space="preserve">
-    <value>Größer als</value>
+    <value>Grösser als</value>
   </data>
   <data name="FilterFunctionGreaterThanOrEqualTo" xml:space="preserve">
-    <value>Größer oder gleich als</value>
+    <value>Grösser als und gleich zu</value>
   </data>
   <data name="FilterFunctionIsEmpty" xml:space="preserve">
     <value>Ist leer</value>
   </data>
   <data name="FilterFunctionIsNull" xml:space="preserve">
-    <value>Ist Null</value>
+    <value>Ist nicht null</value>
   </data>
   <data name="FilterFunctionLessThan" xml:space="preserve">
     <value>Weniger als</value>

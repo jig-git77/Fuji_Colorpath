@@ -124,7 +124,7 @@
     <value>Anpassungs-Chart</value>
   </data>
   <data name="locAlignmentChart2Resource1.Text" xml:space="preserve">
-    <value>Base DLP Chart_de</value>
+    <value>Testform</value>
   </data>
   <data name="locColorantResource1.Text" xml:space="preserve">
     <value>Farbtyp</value>
@@ -142,7 +142,7 @@
     <value>Bedruckstoff</value>
   </data>
   <data name="locMetricPresetsResource1.Text" xml:space="preserve">
-    <value>Metric Presets_de</value>
+    <value>Einstellungen</value>
   </data>
   <data name="locNewPrintConditionResource1.Text" xml:space="preserve">
     <value>Neue Druckbedingung - Auswahl überprüfen</value>
@@ -178,13 +178,13 @@
     <value>Spektrophotometer Optionen</value>
   </data>
   <data name="locTargetPrintConditionResource1.Text" xml:space="preserve">
-    <value>Target Print Condition_de</value>
+    <value>Ziel-Druckbedingung</value>
   </data>
   <data name="locTechnicianNameResource1.Text" xml:space="preserve">
     <value>Name des Anwenders</value>
   </data>
   <data name="locUVSettingsResource1.Text" xml:space="preserve">
-    <value>UV Settings</value>
+    <value>UV Einstellungen</value>
   </data>
   <data name="locValiChart2Resource1.Text" xml:space="preserve">
     <value>Validierungs-Chart</value>
@@ -199,6 +199,9 @@
     <value>Validierungs-Gerät</value>
   </data>
   <data name="locReTargetProjResource1.Text" xml:space="preserve">
-    <value>ReTarget Project:_de</value>
+    <value>Projekt neu berechnen:</value>
+  </data>
+  <data name="locAlignmentChart1Resource1.Text1" xml:space="preserve">
+    <value>Kontrollelement</value>
   </data>
 </root>

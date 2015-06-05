@@ -233,13 +233,11 @@
                 </div> 
                  <div id="divMetricTargetPreset" runat="server" align="center" valign="bottom" style="width: 150px; float: left">
                     <asp:LinkButton ID="lnkbtnMetricTargetPreset" runat="server" 
-                         ToolTip="Metric Target Preset" 
-                         PostBackUrl="~/MetricTargetPresetManagement.aspx" 
-                         onclick="lnkbtnMetricTargetPreset_Click">
+                         PostBackUrl="~/MetricTargetPresetManagement.aspx" onclick="lnkbtnMetricTargetPreset_Click">
                         <div>
-                            <asp:Image ID="Image7" runat="server" AlternateText="Metric Target Preset" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Metric Target Preset" />
+                            <asp:Image ID="Image7" runat="server" AlternateText="Metric Target Preset" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Metric Target Preset"  meta:resourcekey="imgMetricTargetPresetResource1"/>
                         </div>
-                        <asp:Localize Text="Metric Target Preset" runat="server" ID="Localize1"></asp:Localize>
+                        <asp:Localize Text="Metric Target Preset" runat="server" ID="locMetricTargetPreset" meta:resourcekey="locMetricTargetPresetResource1"></asp:Localize>
                     </asp:LinkButton>                
                 </div>               
                 <div id="divPrintStandardTypeSeparator" runat ="server" align="center" valign="bottom" style="float:left;">

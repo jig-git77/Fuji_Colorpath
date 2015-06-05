@@ -191,7 +191,7 @@
     </div>
     <div class='buttons'>
         <div class='no simplemodal-close'>
-            <input type="button" value="OK" id="btnCloseModelPopup" style="border: none; background-color: transparent;
+            <input type="button" id="btnCloseModelPopup" value='<%= GetResourceString("btnCloseModelPopup") %>' style="border: none; background-color: transparent;
                 padding-top: 4px" /></div>
     </div>
 </div>

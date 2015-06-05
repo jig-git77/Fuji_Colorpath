@@ -8,7 +8,7 @@ Language: de-DE
 var locErrorPlugin = "Error in plugin._de";
 var locAlertOnFiredLoad = "onfired() from load():_de"; //"onfired() from load(): {0}_de";
 var locFujiCMPluginNotInstalled = "Status : The Fujifilm CM plugin is not installed._de";
-var locFujiCMPluginVersion = "Fuji Color Manager Plugin Version_de";  //"Fuji Color Manager Plugin Version {0}_de";
+var locFujiCMPluginVersion = "Fuji Color Manager Plugin Version";  //"Fuji Color Manager Plugin Version {0}_de";
 var locFujiCMPluginIsOutdated = "Status : Your plugin is outdated. Please install newer version._de";
 var locScanningDeviceUnplugged = "Status : Scanning Device has been unplugged._de";
 var locDeviceSerialNotFound1 = "Status : Device Serial:_de"; //"Status : Device Serial: {0} not found._de";
@@ -61,5 +61,5 @@ var locErrorWhilePrintingLabel = "Error while printing label. Please try again._
 var loc = "日本人_de";
 
 //Download Software
-var locDownloadInstallMessage = "There is no plugin installed. Please install from here._de";
+var locDownloadInstallMessage = "Kein Plugin installiert. Zum installieren hier klicken.";
 var locDownloadPluginMessage = "Your installed plugin is outdated. Please install newer version._de";

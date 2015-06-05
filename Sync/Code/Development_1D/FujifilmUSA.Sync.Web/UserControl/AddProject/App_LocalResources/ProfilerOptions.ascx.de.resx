@@ -181,7 +181,7 @@
     <value>Use Weighted Tolerances_de</value>
   </data>
   <data name="locAdvancedOptionsMetricResource1.Text" xml:space="preserve">
-    <value>Advanced Options_de</value>
+    <value>Weitere Optionen</value>
   </data>
   <data name="locAdvancedOptionsResource1.Text" xml:space="preserve">
     <value>Weitere Optionen</value>
@@ -211,13 +211,13 @@
     <value>Einstellung f. Messung</value>
   </data>
   <data name="locMetricPresetsResource1.Text" xml:space="preserve">
-    <value>Metric Presets_de</value>
+    <value>Voreinstellungen</value>
   </data>
   <data name="locMPresetDescriptionResource1.Text" xml:space="preserve">
-    <value>Preset Description_de:</value>
+    <value>Beschreibung:</value>
   </data>
   <data name="locMSelectedPresetsResource1.Text" xml:space="preserve">
-    <value>Selected Presets_de:</value>
+    <value>Gewählte Voreinstellungen</value>
   </data>
   <data name="locNewPrintConditionResource1.Text" xml:space="preserve">
     <value>Profiler Optionen für Neue Druckbedingung</value>
@@ -250,19 +250,19 @@
     <value>Zielfarbraum</value>
   </data>
   <data name="locTolerancesResource1.Text" xml:space="preserve">
-    <value>Tolerances_de</value>
+    <value>Toleranzen</value>
   </data>
   <data name="locTVIBlackResource1" xml:space="preserve">
-    <value>K_de</value>
+    <value>Schwarz</value>
   </data>
   <data name="locTVICyanResource1.Text" xml:space="preserve">
-    <value>Cyan_de</value>
+    <value>Cyan</value>
   </data>
   <data name="locTVIPatchResource1.Text" xml:space="preserve">
-    <value>Patch_de</value>
+    <value>Meßfeld</value>
   </data>
   <data name="locTVITargetsResource1.Text" xml:space="preserve">
-    <value>TVI Targets_de</value>
+    <value>Ziel-Tonwertkurven</value>
   </data>
   <data name="rdsBlackStartResource1.DecreaseText" xml:space="preserve">
     <value>Reduzieren</value>
@@ -302,5 +302,41 @@
   </data>
   <data name="txtProfileDescriptionResource1.Text" xml:space="preserve">
     <value>Dieses Preset eignet sich am Besten für analoge Geräte......</value>
+  </data>
+  <data name="locDensityTargetsResource1.Text" xml:space="preserve">
+    <value>Dichte Zielwerte</value>
+  </data>
+  <data name="locReTargetResource1.Text" xml:space="preserve">
+    <value>Wähle Zertifizierte Druckbedingung:</value>
+  </data>
+  <data name="locDensityCResource1.Text" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="locDensityKResource1.Text" xml:space="preserve">
+    <value>K</value>
+  </data>
+  <data name="locDensityMResource1.Text" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="locDensityYResource1.Text" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="locTargetsResource1.Text" xml:space="preserve">
+    <value>Zielwerte</value>
+  </data>
+  <data name="locTVICMYResource1.Text" xml:space="preserve">
+    <value>CMY</value>
+  </data>
+  <data name="locTVIPatchPerResource1.Text" xml:space="preserve">
+    <value>Meßfeld%</value>
+  </data>
+  <data name="locMSelectedPresetsResource1.Text1" xml:space="preserve">
+    <value>Gewählte Voreinstellungen:</value>
+  </data>
+  <data name="locPresetDescriptionResource1.Text1" xml:space="preserve">
+    <value>Beschreibung:</value>
+  </data>
+  <data name="selectText" xml:space="preserve">
+    <value>--Bitte wählen--</value>
   </data>
 </root>

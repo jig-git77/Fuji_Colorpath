@@ -189,4 +189,10 @@
   <data name="locUVSettingsResource1.Text" xml:space="preserve">
     <value>UV Settings:</value>
   </data>
+  <data name="locReadModePointResource1.Text" xml:space="preserve">
+    <value>Point</value>
+  </data>
+  <data name="locReadModeStripResource1.Text" xml:space="preserve">
+    <value>Strip</value>
+  </data>
 </root>

@@ -210,4 +210,7 @@
   <data name="uploadMeasurement" xml:space="preserve">
     <value>Messwerte hochladen</value>
   </data>
+  <data name="btnCloseModelPopup" xml:space="preserve">
+    <value>OK</value>
+  </data>
 </root>

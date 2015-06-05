@@ -86,7 +86,7 @@ textarea {
                         </tr>                       
                          <tr id="trProjectType" runat="server">
                             <td colspan="4">
-                                <asp:Panel ID="Panel2" runat="server" GroupingText="<b>Project Type</b>" Width="100%">
+                                <asp:Panel ID="PanelProjectType" runat="server" GroupingText="<b>Project Type</b>" Width="100%">
                                      <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                         <tr>
                                             <td colspan="2">
@@ -176,9 +176,9 @@ textarea {
                                                              ValidationGroup="a" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
                                                     &nbsp;
                                                     <asp:Button ID="btn_PaperApply" runat="server" Text="Apply!" 
-                                                         onclick="btn_PaperApply_Click" ValidationGroup="a" />
+                                                         onclick="btn_PaperApply_Click" ValidationGroup="a"  meta:resourcekey="locbtn_PaperApplyResource1"/>
                                                     <asp:Button ID="btn_PaperClear" runat="server" onclick="btn_PaperClear_Click" 
-                                                         Text="Reset" />
+                                                         Text="Reset" meta:resourcekey="locbtn_PaperClearResource1"/>
                                                  </asp:Panel>
                                             </td>
                                         </tr>
@@ -194,7 +194,10 @@ textarea {
                                                     <td colspan="3"><b><asp:Localize runat="server" Text="Targets" ID="locTargets" meta:resourcekey="locTargetsResource1" ></asp:Localize></b></td>
                                                   </tr>
                                                 <tr align="center" style="line-height:15px;">
-                                                <td align="left"><b>Patch</b></td>
+                                                <td align="left">
+                                                    <b><asp:Localize runat="server" Text="Patch" 
+                                                        ID="locPatch" meta:resourcekey="locPatchResource1" ></asp:Localize></b>
+                                                </td>
                                                 <td><b>L*</b></td>
                                                 <td><b>a*</b></td>
                                                 <td><b>b*</b></td>

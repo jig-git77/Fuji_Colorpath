@@ -49,7 +49,7 @@
                             onclick="lbtnReTargetProject_Click">                           
                             <span>
                                 <asp:Image ID="Image1" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
-                                <asp:Localize runat="server" Text="Retarget Project" ID="Localize1"></asp:Localize>
+                                <asp:Localize runat="server" Text="Retarget Project" ID="locReTarget" meta:resourcekey="locReTargetResource1"></asp:Localize>
                             </span>
                         </asp:LinkButton>
                     </div>

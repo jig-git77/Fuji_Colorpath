@@ -148,7 +148,7 @@
     <value>Zugriffsart</value>
   </data>
   <data name="locBranchNameResource1.Text" xml:space="preserve">
-    <value>Niederlassung</value>
+    <value>Niederlassung:</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
     <value>Zurück</value>

@@ -23,6 +23,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recSelectCompanyText = "selectCompanyText";
         private const string _recSelectText = "selectText";
         private const string _recSelectInstrumentType = "selectInstrumentTypeText";
+        private const string _recErrorSamePatchTol = "errorSamePatchTol";
 
         #endregion
 
@@ -386,7 +387,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             AfterTotal = MetricTargetPreset.PatchTolerances.Count;
             if (AfterTotal < OriginalTotal)
             {
-                fujiStatusbar.DisplayMessage("You can not have more than one Patch Tolerance for same patch.", false);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recErrorSamePatchTol), false);
                 return;
             }
 

@@ -727,4 +727,40 @@
   <data name="percentPatchMetrics" xml:space="preserve">
     <value>% Patch Metrics</value>
   </data>
+  <data name="locDensityResource1.Text" xml:space="preserve">
+    <value>Density</value>
+  </data>
+  <data name="locTVICyanResource1.Text" xml:space="preserve">
+    <value>Cyan</value>
+  </data>
+  <data name="locTVIMagentaResource1.Text" xml:space="preserve">
+    <value>Magenta</value>
+  </data>
+  <data name="locTVIYellowResource1.Text" xml:space="preserve">
+    <value>Yellow</value>
+  </data>
+  <data name="locTVIBlackResource1.Text" xml:space="preserve">
+    <value>Black</value>
+  </data>
+  <data name="actualTVI" xml:space="preserve">
+    <value>Actual TVI:</value>
+  </data>
+  <data name="targetTVI" xml:space="preserve">
+    <value>Target TVI:</value>
+  </data>
+  <data name="spreadThr" xml:space="preserve">
+    <value>Spread Threshold:</value>
+  </data>
+  <data name="TVIThr" xml:space="preserve">
+    <value>TVI Threashold</value>
+  </data>
+  <data name="dotGain" xml:space="preserve">
+    <value>Dot Gain</value>
+  </data>
+  <data name="locabGamutCompResource1.Text" xml:space="preserve">
+    <value>a* - b* Gamut Comparison</value>
+  </data>
+  <data name="PreDeltaE" xml:space="preserve">
+    <value>Previous ΔE</value>
+  </data>
 </root>

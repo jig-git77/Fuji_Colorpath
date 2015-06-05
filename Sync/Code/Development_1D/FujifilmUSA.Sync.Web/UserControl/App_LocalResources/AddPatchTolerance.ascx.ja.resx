@@ -123,8 +123,23 @@
   <data name="editMetricTargetPresetText" xml:space="preserve">
     <value>Edit Metric Target Patch Level Preset_ja</value>
   </data>
+  <data name="errorSamePatchTol" xml:space="preserve">
+    <value>You can not have more than one Patch Tolerance for same patch._ja</value>
+  </data>
+  <data name="errorSamePatchTol1" xml:space="preserve">
+    <value>You can not have more than one Patch Tolerance for same patch._ja</value>
+  </data>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
     <value>Add Metric Target Patch Level Preset_ja</value>
+  </data>
+  <data name="rfvcAlignmentChartContainer" xml:space="preserve">
+    <value>Please select Validation chart._ja</value>
+  </data>
+  <data name="rfvcInstrumentTypeContainer" xml:space="preserve">
+    <value>Please select instrument type._ja</value>
+  </data>
+  <data name="rfvPresetContainer" xml:space="preserve">
+    <value>Please provide Preset name._ja</value>
   </data>
   <data name="selectCompanyText" xml:space="preserve">
     <value>-- Select Company --_ja</value>

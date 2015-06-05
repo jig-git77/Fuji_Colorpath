@@ -126,6 +126,33 @@
   <data name="lblHeaderResource1.Text" xml:space="preserve">
     <value>Add Metric Target Preset</value>
   </data>
+  <data name="locCancelResource1.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="locCompanyNameResource1.Text" xml:space="preserve">
+    <value>Company Name</value>
+  </data>
+  <data name="locDescriptionResource1.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="locETypeResource1.Text" xml:space="preserve">
+    <value>ΔE Method</value>
+  </data>
+  <data name="locIsActiveResource1.Text" xml:space="preserve">
+    <value>Is Active?</value>
+  </data>
+  <data name="locPresetNameResource1.Text" xml:space="preserve">
+    <value>Preset Name</value>
+  </data>
+  <data name="locRegionResource1.Text" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="locSaveResource1.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="locValidationTypeResource1.Text" xml:space="preserve">
+    <value>Validation Type</value>
+  </data>
   <data name="selectCompanyText" xml:space="preserve">
     <value>-- Select Company --</value>
   </data>

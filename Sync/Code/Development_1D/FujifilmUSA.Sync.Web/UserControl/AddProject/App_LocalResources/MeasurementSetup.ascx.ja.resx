@@ -121,7 +121,7 @@
     <value>チャート</value>
   </data>
   <data name="locIlluminantResource1.Text" xml:space="preserve">
-    <value>光源</value>
+    <value>観察光源</value>
   </data>
   <data name="locMeasurementDeviceResource1.Text" xml:space="preserve">
     <value>測色機：</value>
@@ -133,7 +133,7 @@
     <value>新規印刷条件 - 説明</value>
   </data>
   <data name="locObeserverResource1.Text" xml:space="preserve">
-    <value>観察者：</value>
+    <value>視野：</value>
   </data>
   <data name="locProfilerOptionsResource1.Text" xml:space="preserve">
     <value>プロファイル生成オプション</value>
@@ -163,15 +163,21 @@
     <value>DLP調整チャート：</value>
   </data>
   <data name="locUVSettingsResource1.Text" xml:space="preserve">
-    <value>UV設定：</value>
+    <value>測定照明条件：</value>
   </data>
   <data name="locDensityTypeResource1.Text" xml:space="preserve">
-    <value>Density Type:_ja</value>
+    <value>濃度フィルター：</value>
   </data>
   <data name="locMeasCountResource1.Text" xml:space="preserve">
-    <value>Measurement Count:_ja</value>
+    <value>測定回数：</value>
   </data>
   <data name="locReadModeResource1.Text" xml:space="preserve">
-    <value>Read Mode:_ja</value>
+    <value>測定方式：</value>
+  </data>
+  <data name="locReadModePointResource1.Text" xml:space="preserve">
+    <value>スポット測定</value>
+  </data>
+  <data name="locReadModeStripResource1.Text" xml:space="preserve">
+    <value>スキャン測定</value>
   </data>
 </root>

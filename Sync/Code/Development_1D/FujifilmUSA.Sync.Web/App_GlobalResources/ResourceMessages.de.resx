@@ -154,7 +154,7 @@
     <value>Meßgerät mit diesem Namen existiert schon. </value>
   </data>
   <data name="Duplicate_InsertMetricTargetPreset" xml:space="preserve">
-    <value>Metric Target Preset mit diesem Namen existiert schon. </value>
+    <value>Voreinstellung mit diesem Namen existiert schon.</value>
   </data>
   <data name="Duplicate_InsertPrintStandardType" xml:space="preserve">
     <value>Druckstandard-Typ mit diesem Namen existiert schon. </value>
@@ -601,7 +601,7 @@
     <value>Wollen Sie wirklich alle Informationen zum ausgewählten Meßgerät löschen?</value>
   </data>
   <data name="MetricTargetPresetManagement_DeleteMetricTargetPreset_Confirmation" xml:space="preserve">
-    <value>Wollen Sie wirklich das ausgewählte MetricTargetPreset löschen?</value>
+    <value>Diese Voreinstellung wirklich löschen?</value>
   </data>
   <data name="PrintStandardTypeManagement_DeletePrintStandardType_Confirmation" xml:space="preserve">
     <value>Wollen Sie wirklich den ausgewählten Druckstandard-Typ löschen?</value>

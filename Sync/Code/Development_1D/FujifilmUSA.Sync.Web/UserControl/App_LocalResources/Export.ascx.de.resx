@@ -124,19 +124,19 @@
     <value>Download Chart und mit dem DLP Workflow drucken:</value>
   </data>
   <data name="locDownloadChartResource1.Text" xml:space="preserve">
-    <value>Download Chart</value>
+    <value>Chart laden</value>
   </data>
   <data name="locDownloadDestinationICCResource1.Text" xml:space="preserve">
     <value>Download Ziel ICC</value>
   </data>
   <data name="locDownloadDLPAndChartResource1.Text" xml:space="preserve">
-    <value>Download DLP und Chart</value>
+    <value>DLP und Chart laden</value>
   </data>
   <data name="locDownloadDLPAndImplementWorkflowResource1.Text" xml:space="preserve">
     <value>Download DLP und im Workflow anwenden :</value>
   </data>
   <data name="locDownloadDLPResource1.Text" xml:space="preserve">
-    <value>Download DLP</value>
+    <value>DLP laden</value>
   </data>
   <data name="locDownloadResource1.Text" xml:space="preserve">
     <value>Download</value>
@@ -151,40 +151,40 @@
     <value>Download Chart ist nicht vorhanden</value>
   </data>
   <data name="downloadText" xml:space="preserve">
-    <value>Download - {0}</value>
+    <value>Laden - {0}</value>
   </data>
   <data name="BtnExportCurvesDeltaViewResource1.Text" xml:space="preserve">
-    <value>Export Delta_de</value>
+    <value>Export Delta</value>
   </data>
   <data name="BtnExportCurvesExportViewResource1.Text" xml:space="preserve">
-    <value>Export Curves_de</value>
+    <value>Export Kurven</value>
   </data>
   <data name="Chk_CResource1.Text" xml:space="preserve">
-    <value>Cyan_de</value>
+    <value>Cyan</value>
   </data>
   <data name="Chk_KResource1.Text" xml:space="preserve">
-    <value>Black_de</value>
+    <value>Schwarz</value>
   </data>
   <data name="Chk_MResource1.Text" xml:space="preserve">
-    <value>Magenta_de</value>
+    <value>Magenta</value>
   </data>
   <data name="Chk_YResource1.Text" xml:space="preserve">
-    <value>Yellow_de</value>
+    <value>Gelb</value>
   </data>
   <data name="locCurveTypeResource1.Text" xml:space="preserve">
-    <value>Curve Type :_de</value>
+    <value>Kurventyp:</value>
   </data>
   <data name="locDeltaViewResource1.Text" xml:space="preserve">
-    <value>ΔView_de</value>
+    <value>Δansicht</value>
   </data>
   <data name="locExportViewResource1.Text" xml:space="preserve">
-    <value>Export View_de</value>
+    <value>Export-Format</value>
   </data>
   <data name="locPreRunResource1.Text" xml:space="preserve">
-    <value>ΔPrevious Run_de</value>
+    <value>Δvorherige Messung</value>
   </data>
   <data name="locRefResource1.Text" xml:space="preserve">
-    <value>ΔRef_de</value>
+    <value>ΔRef</value>
   </data>
   <data name="CalderaResource1.Text" xml:space="preserve">
     <value>Caldera</value>
@@ -220,6 +220,6 @@
     <value>XMF</value>
   </data>
   <data name="GridBoundReference.HeaderText" xml:space="preserve">
-    <value>Reference%_de</value>
+    <value>Referenz%</value>
   </data>
 </root>

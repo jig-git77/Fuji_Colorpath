@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Software Name</value>
+    <value>Software</value>
   </data>
   <data name="locDownloadResource1.Text" xml:space="preserve">
     <value>Download</value>

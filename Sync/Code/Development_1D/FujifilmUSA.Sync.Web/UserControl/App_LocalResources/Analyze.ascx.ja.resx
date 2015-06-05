@@ -193,7 +193,7 @@
     <value>絞り込み解除</value>
   </data>
   <data name="LocalizeResource1.Text" xml:space="preserve">
-    <value>チャートをダウンロードし、色変換なしのワークフローで印刷してください：</value>
+    <value>ベタ部の色差</value>
   </data>
   <data name="locAvgDeltaE2000Resource1.Text" xml:space="preserve">
     <value>平均ΔE2000</value>
@@ -247,7 +247,7 @@
     <value>G7</value>
   </data>
   <data name="locTVIResource1.Text" xml:space="preserve">
-    <value>TVI_ja</value>
+    <value>ドットゲイン</value>
   </data>
   <data name="locSelectedMetricResource1.Text" xml:space="preserve">
     <value>選択中の判定基準</value>
@@ -340,7 +340,7 @@
     <value>紙白</value>
   </data>
   <data name="tripletPathMetrics" xml:space="preserve">
-    <value>3-c</value>
+    <value>3-C</value>
   </data>
   <data name="tripletText" xml:space="preserve">
     <value>3-C</value>
@@ -586,16 +586,16 @@
     <value>Idealliance Digital Chart</value>
   </data>
   <data name="GridBoundColumnResource34.HeaderText" xml:space="preserve">
-    <value>Density_V</value>
+    <value>K濃度</value>
   </data>
   <data name="GridBoundColumnResource35.HeaderText" xml:space="preserve">
-    <value>Density_C</value>
+    <value>C濃度</value>
   </data>
   <data name="GridBoundColumnResource36.HeaderText" xml:space="preserve">
-    <value>Density_M</value>
+    <value>M濃度</value>
   </data>
   <data name="GridBoundColumnResource37.HeaderText" xml:space="preserve">
-    <value>Density_Y</value>
+    <value>Y濃度</value>
   </data>
   <data name="LocAvgMesurmentResource1.Text" xml:space="preserve">
     <value>測定値の平均を分析</value>
@@ -604,27 +604,60 @@
     <value>測色名:</value>
   </data>
   <data name="btnCGATSExportResource1.Text" xml:space="preserve">
-    <value>Export to CGATS_ja</value>
+    <value>CGATS形式で出力</value>
   </data>
   <data name="dvValidationSummaryResource1.EmptyDataText" xml:space="preserve">
-    <value>Averaging all measurements!_ja</value>
+    <value>チェックされたサンプル測定値の平均を表示しています</value>
   </data>
   <data name="locMeasurementIDResource1.Text" xml:space="preserve">
-    <value>MeasurementID_ja:</value>
+    <value>測定データID</value>
   </data>
   <data name="btn_GeneratePDFResource1.ToolTip" xml:space="preserve">
-    <value>Download PDF_ja</value>
+    <value>PDFダウンロード</value>
   </data>
   <data name="btnSpreadResource1.Text" xml:space="preserve">
-    <value>Spread_ja</value>
+    <value>スプレッド</value>
   </data>
   <data name="btnTVIResource1.Text" xml:space="preserve">
-    <value>TVI_ja</value>
+    <value>ドットゲイン</value>
   </data>
   <data name="locChromaticVariationResource1.Text" xml:space="preserve">
-    <value>Chromatic Variation_ja</value>
+    <value>ドットゲインの差</value>
   </data>
   <data name="percentPatchMetrics" xml:space="preserve">
-    <value>% Patch Metrics_ja</value>
+    <value>% パッチ</value>
+  </data>
+  <data name="locDensityResource1.Text" xml:space="preserve">
+    <value>濃度</value>
+  </data>
+  <data name="locTVICyanResource1.Text" xml:space="preserve">
+    <value>シアン</value>
+  </data>
+  <data name="locTVIMagentaResource1.Text" xml:space="preserve">
+    <value>マゼンタ</value>
+   </data>
+  <data name="locTVIYellowResource1.Text" xml:space="preserve">
+    <value>イエロー</value>
+   </data>
+  <data name="locTVIBlackResource1.Text" xml:space="preserve">
+    <value>ブラック</value>
+   </data>
+  <data name="actualTVI" xml:space="preserve">
+    <value>測定値:</value>
+  </data>
+  <data name="targetTVI" xml:space="preserve">
+    <value>基準値:</value>
+  </data>
+  <data name="spreadThr" xml:space="preserve">
+    <value>ドットゲイン差許容値:</value>
+  </data>
+  <data name="TVIThr" xml:space="preserve">
+    <value>許容幅:</value>
+  </data>
+  <data name="dotGain" xml:space="preserve">
+    <value>ドットゲイン</value>
+  </data>
+  <data name="PreDeltaE" xml:space="preserve">
+    <value>Previous ΔE_ja</value>
   </data>
 </root>

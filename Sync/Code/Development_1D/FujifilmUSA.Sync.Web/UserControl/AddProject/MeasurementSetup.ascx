@@ -152,8 +152,8 @@
                                             <asp:DropDownList ID="cmbReadMode" runat="server" Width="200px" 
                                                 CssClass="select" AutoPostBack="true" 
                                                 onselectedindexchanged="cmbReadMode_SelectedIndexChanged">
-                                                <asp:ListItem Text="Strip" Value="Strip" Selected="True"></asp:ListItem>
-                                                <asp:ListItem Text="Point" Value="Point"></asp:ListItem>
+                                                <asp:ListItem Text="Strip" Value="Strip" Selected="True" meta:resourcekey="locReadModeStripResource1"></asp:ListItem>
+                                                <asp:ListItem Text="Point" Value="Point" meta:resourcekey="locReadModePointResource1"></asp:ListItem>
                                             </asp:DropDownList>
                                         </td>
                                     </tr>

@@ -304,16 +304,16 @@
     <value>Druckfarben-Verbrauchs- Optimierung</value>
   </data>
   <data name="ELicenseType_InkOptimization_Source" xml:space="preserve">
-    <value>Ink Optimization Source</value>
+    <value>Farboptimierungsquelle</value>
   </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>UNGÜLTIG</value>
   </data>
   <data name="ELicenseType_Sync1D" xml:space="preserve">
-    <value>Alignment Curves</value>
+    <value>Anpassungskurven</value>
   </data>
   <data name="ELicenseType_Sync4DCertification" xml:space="preserve">
-    <value>Sync4D Certification</value>
+    <value>Sync 4D Zertifizierung</value>
   </data>
   <data name="ELicenseType_Validation" xml:space="preserve">
     <value>Color Validation</value>

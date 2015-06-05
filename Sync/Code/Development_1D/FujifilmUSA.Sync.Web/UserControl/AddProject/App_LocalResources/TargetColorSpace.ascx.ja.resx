@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="chk_IsPaperScalingResource1.Text" xml:space="preserve">
-    <value>Relative Paper Scaling_ja</value>
+    <value>紙白による相対的補正</value>
   </data>
   <data name="locDescriptionResource1.Text" xml:space="preserve">
     <value>説明</value>
@@ -130,7 +130,7 @@
     <value>プロファイル生成オプション</value>
   </data>
   <data name="locProjectTypeResource1.Text" xml:space="preserve">
-    <value>Project Type_ja:</value>
+    <value>プロジェクトタイプ：</value>
   </data>
   <data name="locSourceProfileResource1.Text" xml:space="preserve">
     <value>ターゲットプロファイル：</value>
@@ -139,18 +139,33 @@
     <value>新規印刷条件 - ターゲット色空間</value>
   </data>
   <data name="locTargetLABResource1.Text" xml:space="preserve">
-    <value>Color Metric_ja</value>
+    <value>色基準</value>
   </data>
   <data name="locTargetPrintResource1.Text" xml:space="preserve">
-    <value>Target Print Condition_ja:</value>
+    <value>基準印刷条件：</value>
   </data>
   <data name="locTargetsResource1.Text" xml:space="preserve">
-    <value>Targets_ja</value>
+    <value>基準値</value>
   </data>
   <data name="Panel_PaperLABResource1.Text" xml:space="preserve">
-    <value>New Paper Values_ja:</value>
+    <value>新しい用紙の値：</value>
   </data>
   <data name="locChooseMethodResource1.Text" xml:space="preserve">
-    <value>Choose Method_ja:</value>
+    <value>カーブ補正方式の選択：</value>
+  </data>
+  <data name="btn_PaperClear_Click.Text" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="locbtn_PaperApplyResource1.Text" xml:space="preserve">
+    <value>適用</value>
+  </data>
+  <data name="locPatchResource1.Text" xml:space="preserve">
+    <value>パッチ</value>
+  </data>
+  <data name="PanelProjectType.GroupingText" xml:space="preserve">
+    <value>プロジェクトタイプ</value>
+  </data>
+  <data name="PanelProjectType.Text" xml:space="preserve">
+    <value>プロジェクトタイプ</value>
   </data>
 </root>

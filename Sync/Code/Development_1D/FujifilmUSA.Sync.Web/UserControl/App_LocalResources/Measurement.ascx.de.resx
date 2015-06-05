@@ -129,6 +129,9 @@
   <data name="locAnalyzeResource1.Text" xml:space="preserve">
     <value>Analysieren</value>
   </data>
+  <data name="locDownloadSoftwareWindowResource1.Text" xml:space="preserve">
+    <value>Software laden</value>
+  </data>
   <data name="locMeasurementResource1.Text" xml:space="preserve">
     <value>Messung</value>
   </data>

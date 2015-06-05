@@ -127,6 +127,6 @@
     <value>ユーザ名</value>
   </data>
   <data name="locOutdatedPluginResource1.Text" xml:space="preserve">
-    <value>Your installed plugin is outdated. Please install newer version._ja</value>
+    <value>インストールされたプラグインは古いバージョンです。新しいバージョンをインストールしてください。</value>
   </data>
 </root>

@@ -127,7 +127,7 @@
     <value>Zurück</value>
   </data>
   <data name="ChangePageSizeLabelText" xml:space="preserve">
-    <value>Einträge:</value>
+    <value>Seitengröße:</value>
   </data>
   <data name="ChangePageSizeLinkButtonText" xml:space="preserve">
     <value>Wechseln</value>
@@ -199,10 +199,10 @@
     <value>Gehe</value>
   </data>
   <data name="GreaterThanOrEqualToText" xml:space="preserve">
-    <value>Größer oder gleich zu</value>
+    <value>Grösser als und gleich zu</value>
   </data>
   <data name="GreaterThanText" xml:space="preserve">
-    <value>Größer als</value>
+    <value>Grösser als</value>
   </data>
   <data name="GroupByFieldsSeparator" xml:space="preserve">
     <value>; </value>
@@ -337,13 +337,13 @@
     <value>Kein Filter</value>
   </data>
   <data name="NoMasterRecordsText" xml:space="preserve">
-    <value>Keine Einträge zum Anzeigen</value>
+    <value>Keine Einträge anzuzeigen.</value>
   </data>
   <data name="NotBetweenText" xml:space="preserve">
     <value>Nicht zwischen</value>
   </data>
   <data name="NotEqualToText" xml:space="preserve">
-    <value>Ist nicht gleich zu</value>
+    <value>Nicht gleich zu</value>
   </data>
   <data name="NotIsEmptyText" xml:space="preserve">
     <value>Ist nicht leer</value>
@@ -382,7 +382,7 @@
     <value>Abszeigend sortiert</value>
   </data>
   <data name="SortToolTip" xml:space="preserve">
-    <value>Hier klicken zum Sortieren</value>
+    <value>Zum Sortieren hier klicken</value>
   </data>
   <data name="StartsWithText" xml:space="preserve">
     <value>Beginnt mit</value>

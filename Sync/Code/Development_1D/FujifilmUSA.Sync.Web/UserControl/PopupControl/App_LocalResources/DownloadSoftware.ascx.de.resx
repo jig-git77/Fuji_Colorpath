@@ -124,7 +124,7 @@
     <value>Colorpath Installer - PC</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Software Name</value>
+    <value>Software</value>
   </data>
   <data name="locOutdatedPluginResource1.Text" xml:space="preserve">
     <value>Your installed plugin is outdated. Please install newer version.</value>

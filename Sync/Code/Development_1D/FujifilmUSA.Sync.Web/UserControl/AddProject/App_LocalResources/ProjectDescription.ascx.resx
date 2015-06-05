@@ -273,4 +273,7 @@
   <data name="locScreeningResource1.Text" xml:space="preserve">
     <value>Screening:</value>
   </data>
+  <data name="locProjectDescriptionResource1.Text" xml:space="preserve">
+    <value>Project Description</value>
+  </data>
 </root>

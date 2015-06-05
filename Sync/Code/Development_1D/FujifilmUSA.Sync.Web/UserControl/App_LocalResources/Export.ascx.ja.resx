@@ -154,25 +154,25 @@
     <value>ダウンロード - {0}</value>
   </data>
   <data name="BtnExportCurvesDeltaViewResource1.Text" xml:space="preserve">
-    <value>Export Delta_ja</value>
+    <value>データ出力</value>
   </data>
   <data name="BtnExportCurvesExportViewResource1.Text" xml:space="preserve">
-    <value>Export Curves_ja</value>
+    <value>カーブファイル出力</value>
   </data>
   <data name="CalderaResource1.Text" xml:space="preserve">
     <value>Caldera</value>
   </data>
   <data name="Chk_CResource1.Text" xml:space="preserve">
-    <value>Cyan_ja</value>
+    <value>シアン</value>
   </data>
   <data name="Chk_KResource1.Text" xml:space="preserve">
-    <value>Black_ja</value>
+    <value>ブラック</value>
   </data>
   <data name="Chk_MResource1.Text" xml:space="preserve">
-    <value>Magenta_ja</value>
+    <value>マゼンタ</value>
   </data>
   <data name="Chk_YResource1.Text" xml:space="preserve">
-    <value>Yellow_ja</value>
+    <value>イエロー</value>
   </data>
   <data name="ColCGCXResource1.Text" xml:space="preserve">
     <value>ColorGate-CGCX</value>
@@ -181,31 +181,31 @@
     <value>ColorGate-TVI</value>
   </data>
   <data name="fivepersResource1.Text" xml:space="preserve">
-    <value>5%_ja</value>
+    <value>5%ステップ</value>
   </data>
   <data name="HarmonyResource1.Text" xml:space="preserve">
     <value>Harmony</value>
   </data>
   <data name="locCurveTypeResource1.Text" xml:space="preserve">
-    <value>Curve Type :_ja</value>
+    <value>カーブ形式</value>
   </data>
   <data name="locDeltaViewResource1.Text" xml:space="preserve">
-    <value>ΔView_ja</value>
+    <value>差分表示</value>
   </data>
   <data name="locExportViewResource1.Text" xml:space="preserve">
-    <value>Export View_ja</value>
+    <value>出力カーブ表示</value>
   </data>
   <data name="locPreRunResource1.Text" xml:space="preserve">
-    <value>&amp;#916;Previous Run_ja</value>
+    <value>&amp;#916;前回結果との差</value>
   </data>
   <data name="locRefResource1.Text" xml:space="preserve">
-    <value>&amp;#916;Ref_ja</value>
+    <value>&amp;#916;データ</value>
   </data>
   <data name="NexusResource1.Text" xml:space="preserve">
     <value>Nexus</value>
   </data>
   <data name="onepersResource1.Text" xml:space="preserve">
-    <value>1%_ja</value>
+    <value>1%ステップ</value>
   </data>
   <data name="OnyxG7ImportResource1.Text" xml:space="preserve">
     <value>Onyx G7 Import</value>
@@ -214,13 +214,13 @@
     <value>Rampage</value>
   </data>
   <data name="tenpersResource1.Text" xml:space="preserve">
-    <value>10%_ja</value>
+    <value>10%ステップ</value>
   </data>
   <data name="XMFResource1.Text" xml:space="preserve">
     <value>XMF</value>
   </data>
   <data name="GridBoundReference.HeaderText" xml:space="preserve">
-    <value>Reference%_ja</value>
+    <value>データ％</value>
   </data>
   <data name="String1" xml:space="preserve">
     <value />

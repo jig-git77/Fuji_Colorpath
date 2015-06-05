@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="downloadChartNotAvailable" xml:space="preserve">
-    <value>Download chart is not available_de</value>
+    <value>Testform nicht gefunden</value>
   </data>
   <data name="ListItemResource1.Text" xml:space="preserve">
     <value>Ja</value>
@@ -127,7 +127,7 @@
     <value>Nein</value>
   </data>
   <data name="locDescriptionResource1.Text" xml:space="preserve">
-    <value>Description_de:</value>
+    <value>Beschreibung:</value>
   </data>
   <data name="locEnableValidationResource1.Text" xml:space="preserve">
     <value>Validierung aktivieren:</value>
@@ -154,13 +154,13 @@
     <value>Validierungschart:</value>
   </data>
   <data name="locValidationMetricResource1.Text" xml:space="preserve">
-    <value>Validation Metric:_de</value>
+    <value>Voreinstellung:</value>
   </data>
   <data name="locValidationMetricsResource1.Text" xml:space="preserve">
-    <value>Validation Metrics_de</value>
+    <value>Voreinstellung</value>
   </data>
   <data name="locValidationOptionsResource1.Text" xml:space="preserve">
-    <value>Validation Options_de</value>
+    <value>Optionen Validierung</value>
   </data>
   <data name="noValidationLicense" xml:space="preserve">
     <value>Die Funktion "Validierung" ist nicht lizensiert</value>
@@ -178,15 +178,21 @@
     <value>Bitte Validation Metrik auswählen</value>
   </data>
   <data name="locDownloadChartButtonResource1.Text" xml:space="preserve">
-    <value>Download Chart_de</value>
+    <value>Testform laden</value>
   </data>
   <data name="locMeasCountResource1.Text" xml:space="preserve">
-    <value>Measurement Count:_de</value>
+    <value>Anzahl Messungen:</value>
   </data>
   <data name="locReadModeResource1.Text" xml:space="preserve">
-    <value>Read Mode:_de</value>
+    <value>Lesemodus:</value>
   </data>
   <data name="locUVSettingsResource1.Text" xml:space="preserve">
-    <value>UV Settings:_de</value>
+    <value>UV Einstellung:</value>
+  </data>
+  <data name="locReadModePointResource1.Text" xml:space="preserve">
+    <value>Punkt</value>
+  </data>
+  <data name="locReadModeStripResource1.Text" xml:space="preserve">
+    <value>Streifen</value>
   </data>
 </root>

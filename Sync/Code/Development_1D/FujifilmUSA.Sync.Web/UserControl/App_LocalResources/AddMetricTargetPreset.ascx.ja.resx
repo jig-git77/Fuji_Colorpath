@@ -118,18 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="addMetricTargetPresetText" xml:space="preserve">
-    <value>Add Metric Target Preset_ja</value>
+    <value>色差判定プリセットの追加</value>
   </data>
   <data name="editMetricTargetPresetText" xml:space="preserve">
-    <value>Edit Metric Target Preset_ja</value>
+    <value>色差判定プリセットの編集</value>
   </data>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Add Metric Target Preset_ja</value>
+    <value>色差判定プリセットの追加</value>
+  </data>
+  <data name="locCancelResource1.Text" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="locCompanyNameResource1.Text" xml:space="preserve">
+    <value>企業名</value>
+  </data>
+  <data name="locDescriptionResource1.Text" xml:space="preserve">
+    <value>詳細</value>
+  </data>
+  <data name="locETypeResource1.Text" xml:space="preserve">
+    <value>ΔE方式</value>
+  </data>
+  <data name="locIsActiveResource1.Text" xml:space="preserve">
+    <value>有効</value>
+  </data>
+  <data name="locPresetNameResource1.Text" xml:space="preserve">
+    <value>プリセット名</value>
+  </data>
+  <data name="locRegionResource1.Text" xml:space="preserve">
+    <value>国</value>
+  </data>
+  <data name="locSaveResource1.Text" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="locValidationTypeResource1.Text" xml:space="preserve">
+    <value>評価方式</value>
   </data>
   <data name="selectCompanyText" xml:space="preserve">
-    <value>-- Select Company --_ja</value>
+    <value>--企業の選択--</value>
   </data>
   <data name="selectRegionText" xml:space="preserve">
-    <value>-- Select Region --_ja</value>
+    <value>--国の選択--</value>
   </data>
 </root>

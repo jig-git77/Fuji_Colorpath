@@ -156,4 +156,7 @@
   <data name="locApplicationConfigurationResource1.Text" xml:space="preserve">
     <value>Application Configuration</value>
   </data>
+  <data name="locMetricTargetPresetResource1.Text" xml:space="preserve">
+    <value>色差判定プリセット</value>
+  </data>
 </root>

@@ -686,7 +686,9 @@
                                                            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height:23px;">
                                                                 <tr style="line-height:15px;">
                                                                     <td></td>
-                                                                    <td colspan="2" align="center"><b>Targets</b></td>
+                                                                    <td colspan="2" align="center">
+                                                                        <b><asp:Localize runat="server" Text="Targets" ID="locTargets" meta:resourcekey="locTargetsResource1"></asp:Localize></b>
+                                                                   </td>
                                                                 </tr>
                                                                 <tr style="line-height:15px;">
                                                                     <td align="left">
@@ -768,7 +770,9 @@
                                                             <br />
                                                            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height:23px;">
                                                                  <tr>
-                                                                    <td colspan="4" align="center"><b>Targets</b></td>
+                                                                    <td colspan="4" align="center">
+                                                                        <b><asp:Localize runat="server" Text="Targets" ID="Localize7" meta:resourcekey="locTargetsResource1"></asp:Localize></b>
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="center">

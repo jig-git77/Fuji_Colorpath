@@ -163,27 +163,30 @@
     <value>RIP設定を入力してください。</value>
   </data>
   <data name="locBlanketAgeResource1.Text" xml:space="preserve">
-    <value>Blanket Age:_ja</value>
+    <value>ブランケット使用日数：</value>
   </data>
   <data name="locBlanketResource1.Text" xml:space="preserve">
-    <value>Blanket:_ja</value>
+    <value>ブランケット：</value>
   </data>
   <data name="locFounSolRefResource1.Text" xml:space="preserve">
-    <value>*Include Manufacture, Name_ja</value>
+    <value>※メーカー名も記載</value>
   </data>
   <data name="locFountainSolResource1.Text" xml:space="preserve">
-    <value>Fountain Solution:_ja</value>
+    <value>湿し水：</value>
   </data>
   <data name="locInkOrderResource1.Text" xml:space="preserve">
-    <value>Ink Order:_ja</value>
+    <value>刷り順：</value>
   </data>
   <data name="locOffsetDataResource1.Text" xml:space="preserve">
-    <value>Offset Printing Data_ja</value>
+    <value>オフセット印刷条件情報</value>
   </data>
   <data name="locScreeningRefResource1.Text" xml:space="preserve">
-    <value>*Include Type(AM-FM), Dot Shape, Frequency_ja</value>
+    <value>※網種タイプ（FM、AM）、形状、線数も記載</value>
   </data>
   <data name="locScreeningResource1.Text" xml:space="preserve">
-    <value>Screening:_ja</value>
+    <value>網情報：</value>
+  </data>
+  <data name="locProjectDescriptionResource1.Text" xml:space="preserve">
+    <value>プロジェクトの条件説明</value>
   </data>
 </root>

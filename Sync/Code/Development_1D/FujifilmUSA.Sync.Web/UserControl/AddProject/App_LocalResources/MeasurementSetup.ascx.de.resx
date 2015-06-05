@@ -163,18 +163,24 @@
     <value>-- Auswählen --</value>
   </data>
   <data name="txtBaseDLPResource1.Text" xml:space="preserve">
-    <value>Base DLP Chart:_de</value>
+    <value>Testform:</value>
   </data>
   <data name="String1" xml:space="preserve">
-    <value>Alignment Charts</value>
+    <value>Kontrollelement</value>
   </data>
   <data name="locDensityTypeResource1.Text" xml:space="preserve">
-    <value>Density Type:_de</value>
+    <value>Dichtemessung</value>
   </data>
   <data name="locMeasCountResource1.Text" xml:space="preserve">
-    <value>Measurement Count:_de</value>
+    <value>Anzahl Messungen:</value>
   </data>
   <data name="locReadModeResource1.Text" xml:space="preserve">
-    <value>Read Mode:_de</value>
+    <value>Lesemodus:</value>
+  </data>
+  <data name="locReadModePointResource1.Text" xml:space="preserve">
+    <value>Punkt</value>
+  </data>
+  <data name="locReadModeStripResource1.Text" xml:space="preserve">
+    <value>Streifen</value>
   </data>
 </root>

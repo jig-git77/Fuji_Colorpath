@@ -76,13 +76,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
-        /// Localize1 control.
+        /// locReTarget control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize1;
+        protected global::System.Web.UI.WebControls.Localize locReTarget;
         
         /// <summary>
         /// updateProgress control.

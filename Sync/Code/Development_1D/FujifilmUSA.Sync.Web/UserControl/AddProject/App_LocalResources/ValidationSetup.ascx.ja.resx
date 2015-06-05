@@ -172,18 +172,27 @@
     <value>測色設定</value>
   </data>
   <data name="locDescriptionResource1.Text" xml:space="preserve">
-    <value>Description_ja:</value>
+    <value>説明：</value>
   </data>
   <data name="downloadChartNotAvailable" xml:space="preserve">
     <value>Download chart is not available</value>
   </data>
   <data name="locMeasCountResource1.Text" xml:space="preserve">
-    <value>Measurement Count:_ja</value>
+    <value>測定回数：</value>
   </data>
   <data name="locReadModeResource1.Text" xml:space="preserve">
-    <value>Read Mode:_ja</value>
+    <value>測定方式：</value>
   </data>
   <data name="locUVSettingsResource1.Text" xml:space="preserve">
-    <value>UV Settings:_ja</value>
+    <value>測定照明条件：</value>
+  </data>
+  <data name="locDownloadChartButtonResource1.Text" xml:space="preserve">
+    <value>チャートダウンロード</value>
+  </data>
+  <data name="locReadModePointResource1.Text" xml:space="preserve">
+    <value>スポット測定</value>
+  </data>
+  <data name="locReadModeStripResource1.Text" xml:space="preserve">
+    <value>スキャン測定</value>
   </data>
 </root>

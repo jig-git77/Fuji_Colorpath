@@ -121,22 +121,22 @@
     <value>名</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>姓</value>
+    <value>印刷条件名</value>
   </data>
   <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>Eメール</value>
+    <value>ターゲット</value>
   </data>
   <data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
-    <value>企業</value>
+    <value>メディア</value>
   </data>
   <data name="GridTemplateColumnResource6.HeaderText" xml:space="preserve">
-    <value>支社</value>
+    <value>色材</value>
   </data>
   <data name="imgbtnDeleteResource1.AlternateText" xml:space="preserve">
     <value>削除</value>
   </data>
   <data name="imgbtnDeleteResource1.ToolTip" xml:space="preserve">
-    <value>ユーザ削除</value>
+    <value>印刷条件の削除</value>
   </data>
   <data name="imgbtnSelectResource1.AlternateText" xml:space="preserve">
     <value>選択</value>
@@ -199,7 +199,7 @@
     <value>最後は合格</value>
   </data>
   <data name="GridDateTimeColumnResource1.HeaderText" xml:space="preserve">
-    <value>有効化</value>
+    <value>最新承認日時</value>
   </data>
   <data name="allText" xml:space="preserve">
     <value>全て</value>

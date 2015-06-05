@@ -61,6 +61,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recgbPatchMetrics = "gbPatchMetricsText";
         private const string _recValidationAnalyzeHeaderText = "validationAnalyzeHeaderText";
         private const string _reclocOptimizeResource1 = "locOptimizeResource1.Text";
+        private const string _recpercentPatchMetrics = "percentPatchMetrics";
+        private const string _recactualTVI = "actualTVI";
+        private const string _rectargetTVI = "targetTVI";
+        private const string _recspreadThr = "spreadThr";
+        private const string _recTVIThr = "TVIThr";
+        private const string _recDotGain = "dotGain";
+        private const string _recPreDeltaE = "PreDeltaE";
 
         //Label localization variables
         private const string _reclocLabelJob = "locLabelJob";
@@ -798,7 +805,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             toolTip.Append("</td></tr>");
             if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D && DR[Index].PreAvgΔE > 0) //-----For Sync1D projects, display Previous ΔE in tooltip also
             {
-                toolTip.Append("<tr><td>Previous ΔE </td><td>"); //Previous ΔE Value
+                toolTip.Append("<tr><td>" + GetResourceString(_recPreDeltaE) + "</td><td>"); //Previous ΔE Value
                 toolTip.Append(DR[Index].PreAvgΔE.ToString());
                 toolTip.Append("</td></tr>");
             }
@@ -980,10 +987,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append("<table>");
                     toolTip.Append("<tr><td><b>" + ColorName + "</b></td></tr>");
                     toolTip.Append("<tr><td><table>");
-                    toolTip.Append("<tr><td>Actual</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recActual) + "</td><td>");
                     toolTip.Append(_Actual);
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>Target</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recTarget) + "</td><td>");
                     toolTip.Append(_Target);
                     toolTip.Append("</td></tr>");
                     if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D && _PreAvgDensity > 0) //-----For Sync1D projects, display Previous Density Avg in tooltip also
@@ -1059,25 +1066,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             #region Set the colors first
-            BindLABComparision("Cyan", DTColors, Papera, Paperb, 5, false, false);
-            BindLABComparision("Magenta", DTColors, Papera, Paperb, 5, false, false);
-            BindLABComparision("Yellow", DTColors, Papera, Paperb, 5, false, false);
+            BindLABComparision("Cyan", GetResourceString(_recCyanPathMetrics), DTColors, Papera, Paperb, 5, false, false);
+            BindLABComparision("Magenta", GetResourceString(_recMagentaPathMetrics), DTColors, Papera, Paperb, 5, false, false);
+            BindLABComparision("Yellow", GetResourceString(_recYellowPathMetrics), DTColors, Papera, Paperb, 5, false, false);
 
-            BindLABComparision("Cyan", DTTarget, 0, 0, 9, true, false);
-            BindLABComparision("Magenta", DTTarget, 0, 0, 9, true, false);
-            BindLABComparision("Yellow", DTTarget, 0, 0, 9, true, false);
-            BindLABComparision("Red", DTTarget, 0, 0, 9, true, false);
-            BindLABComparision("Green", DTTarget, 0, 0, 9, true, false);
-            BindLABComparision("Blue", DTTarget, 0, 0, 9, true, false);
-            BindLABComparision("Paper", DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Cyan", GetResourceString(_recCyanPathMetrics), DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Magenta", GetResourceString(_recMagentaPathMetrics), DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Yellow", GetResourceString(_recYellowPathMetrics), DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Red", GetResourceString(_recRedPathMetrics), DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Green", GetResourceString(_recGreenPathMetrics), DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Blue", GetResourceString(_recBluePathMetrics), DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Paper", GetResourceString(_recPaperPathMetrics), DTTarget, 0, 0, 9, true, false);
 
-            BindLABComparision("Cyan", DTTarget, 0, 0, 6, false, true);
-            BindLABComparision("Magenta", DTTarget, 0, 0, 6, false, true);
-            BindLABComparision("Yellow", DTTarget, 0, 0, 6, false, true);
-            BindLABComparision("Red", DTTarget, 0, 0, 6, false, true);
-            BindLABComparision("Green", DTTarget, 0, 0, 6, false, true);
-            BindLABComparision("Blue", DTTarget, 0, 0, 6, false, true);
-            BindLABComparision("Paper", DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Cyan", GetResourceString(_recCyanPathMetrics), DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Magenta", GetResourceString(_recMagentaPathMetrics), DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Yelllow", GetResourceString(_recYellowPathMetrics), DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Red", GetResourceString(_recRedPathMetrics), DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Green", GetResourceString(_recGreenPathMetrics), DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Blue", GetResourceString(_recBluePathMetrics), DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Paper", GetResourceString(_recPaperPathMetrics), DTTarget, 0, 0, 6, false, true);
             #endregion
 
             BindLABComparison_1(DTTarget);
@@ -1236,7 +1243,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private void BindLABComparision(string ColorName, List<AnalyzeChart_Gray> DT, Double Papera, Double Paperb, int MarkerSize, bool isTarget, bool isActual)
+        private void BindLABComparision(string ColorName, string TooltipColorName, List<AnalyzeChart_Gray> DT, Double Papera, Double Paperb, int MarkerSize, bool isTarget, bool isActual)
         {
             StringBuilder toolTip = new StringBuilder();
             List<AnalyzeChart_Gray> ListFilter = new List<AnalyzeChart_Gray>();
@@ -1260,7 +1267,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     #region Add Tooltip HTML
                     toolTip.Append("<table>");
-                    toolTip.Append("<tr><td><b>" + ColorName + " " + GetResourceString(_recPatchMetrics) + "</b></td></tr>");
+                    toolTip.Append("<tr><td><b>" + TooltipColorName + "</b></td></tr>");
                     toolTip.Append("<tr><td><table>");
                     toolTip.Append("<tr><td>" + GetResourceString(_recActual) + "</td><td>"); //Actual
                     toolTip.Append(GetResourceString(_recL) + ListFilter[i].CielabL.ToString());
@@ -1272,10 +1279,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append(" " + GetResourceString(_recA) + ListFilter[i].Targeta.ToString());
                     toolTip.Append(" " + GetResourceString(_recB) + ListFilter[i].Targetb.ToString());
                     toolTip.Append("</td></tr>");
-                    //toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>"); //ΔE
-                    //toolTip.Append(ListFilter[i].ΔE.ToString());
-                    //toolTip.Append("</td></tr>");
-
+                   
                     toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>"); //ΔL*
                     toolTip.Append(ListFilter[i].ΔL.ToString());
                     toolTip.Append("</td></tr>");
@@ -1594,7 +1598,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             #region Add Tooltip HTML
             StringBuilder toolTip = new StringBuilder();
             toolTip.Append("<table>");
-            toolTip.Append("<tr><td><b>" + _XValue + GetResourceString("percentPatchMetrics") + "</b></td></tr>");
+            toolTip.Append("<tr><td><b>" + _XValue + GetResourceString(_recpercentPatchMetrics) + "</b></td></tr>");
             toolTip.Append("<tr><td><table>");
             if (!showCircle) { toolTip.Append("<tr><td>" + From_Delta + " Threshold : </td><td>"); }
             else { toolTip.Append("<tr><td>" + From_Delta + " : </td><td>"); };
@@ -1718,30 +1722,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         if (Convert.ToInt16(DT[i].CmykC) == 0 && Convert.ToInt16(DT[i].CmykM) == 0 && Convert.ToInt16(DT[i].CmykY) == 0 && Convert.ToInt16(DT[i].CmykK) == 0)
                         {
-                            AddG7TVIPointChart(C, CHRT_SummaryDotgain.Series["Series1"], CHRT_SummaryDotgain.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC), DT[i].DotGain, Color.Cyan.Name.ToString());
-                            AddG7TVIPointChart(M, CHRT_SummaryDotgain.Series["Series2"], CHRT_SummaryDotgain.Series["Series2Point"], Convert.ToInt64(DT[i].CmykM), DT[i].DotGain, Color.Magenta.Name.ToString());
-                            AddG7TVIPointChart(Y, CHRT_SummaryDotgain.Series["Series3"], CHRT_SummaryDotgain.Series["Series3Point"], Convert.ToInt64(DT[i].CmykY), DT[i].DotGain, Color.Yellow.Name.ToString());
-                            AddG7TVIPointChart(K, CHRT_SummaryDotgain.Series["Series4"], CHRT_SummaryDotgain.Series["Series4Point"], Convert.ToInt64(DT[i].CmykK), DT[i].DotGain, Color.Black.Name.ToString());
+                            AddG7TVIPointChart(C, CHRT_SummaryDotgain.Series["Series1"], CHRT_SummaryDotgain.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC), DT[i].DotGain, GetResourceString(_recCyan));
+                            AddG7TVIPointChart(M, CHRT_SummaryDotgain.Series["Series2"], CHRT_SummaryDotgain.Series["Series2Point"], Convert.ToInt64(DT[i].CmykM), DT[i].DotGain, GetResourceString(_recMagenta));
+                            AddG7TVIPointChart(Y, CHRT_SummaryDotgain.Series["Series3"], CHRT_SummaryDotgain.Series["Series3Point"], Convert.ToInt64(DT[i].CmykY), DT[i].DotGain, GetResourceString(_recYellow));
+                            AddG7TVIPointChart(K, CHRT_SummaryDotgain.Series["Series4"], CHRT_SummaryDotgain.Series["Series4Point"], Convert.ToInt64(DT[i].CmykK), DT[i].DotGain, GetResourceString(_recBlack));
                             C++; M++; Y++; K++;
                         }
                         if (Convert.ToInt16(DT[i].CmykC) != 0)
                         {
-                            AddG7TVIPointChart(C, CHRT_SummaryDotgain.Series["Series1"], CHRT_SummaryDotgain.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC), DT[i].DotGain, Color.Cyan.Name.ToString());
+                            AddG7TVIPointChart(C, CHRT_SummaryDotgain.Series["Series1"], CHRT_SummaryDotgain.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC), DT[i].DotGain, GetResourceString(_recCyan));
                             C++;
                         }
                         if (Convert.ToInt16(DT[i].CmykM) != 0)
                         {
-                            AddG7TVIPointChart(M, CHRT_SummaryDotgain.Series["Series2"], CHRT_SummaryDotgain.Series["Series2Point"], Convert.ToInt64(DT[i].CmykM), DT[i].DotGain, Color.Magenta.Name.ToString());
+                            AddG7TVIPointChart(M, CHRT_SummaryDotgain.Series["Series2"], CHRT_SummaryDotgain.Series["Series2Point"], Convert.ToInt64(DT[i].CmykM), DT[i].DotGain, GetResourceString(_recMagenta));
                             M++;
                         }
                         if (Convert.ToInt16(DT[i].CmykY) != 0)
                         {
-                            AddG7TVIPointChart(Y, CHRT_SummaryDotgain.Series["Series3"], CHRT_SummaryDotgain.Series["Series3Point"], Convert.ToInt64(DT[i].CmykY), DT[i].DotGain, Color.Yellow.Name.ToString());
+                            AddG7TVIPointChart(Y, CHRT_SummaryDotgain.Series["Series3"], CHRT_SummaryDotgain.Series["Series3Point"], Convert.ToInt64(DT[i].CmykY), DT[i].DotGain, GetResourceString(_recYellow));
                             Y++;
                         }
                         if (Convert.ToInt16(DT[i].CmykK) != 0)
                         {
-                            AddG7TVIPointChart(K, CHRT_SummaryDotgain.Series["Series4"], CHRT_SummaryDotgain.Series["Series4Point"], Convert.ToInt64(DT[i].CmykK), DT[i].DotGain, Color.Black.Name.ToString());
+                            AddG7TVIPointChart(K, CHRT_SummaryDotgain.Series["Series4"], CHRT_SummaryDotgain.Series["Series4Point"], Convert.ToInt64(DT[i].CmykK), DT[i].DotGain, GetResourceString(_recBlack));
                             K++;
                         }
                     }
@@ -1797,9 +1801,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         for (int i = 0; i < ListCyan.Count; i++)
                         {
                             //---Target
-                            AddISOTVIPointChart(i, CHRT_DotgainISOCyan.Series["Series0"], ListCyan[i].CmykC, ListCyan[i].TargetDotGain, ListCyan[i].TargetDotGain, ListCyan[i].Threshold, ListCyan[i].PatchTypeId, ListCyan[i].HtmlColor.ToString(), Color.Cyan.Name.ToString(), false);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOCyan.Series["Series0"], ListCyan[i].CmykC, ListCyan[i].TargetDotGain, ListCyan[i].TargetDotGain, ListCyan[i].Threshold, ListCyan[i].PatchTypeId, ListCyan[i].HtmlColor.ToString(), GetResourceString(_recCyan), false);
                             //--Actual                          
-                            AddISOTVIPointChart(i, CHRT_DotgainISOCyan.Series["Series1"], ListCyan[i].CmykC, ListCyan[i].DotGain, ListCyan[i].TargetDotGain, ListCyan[i].Threshold, ListCyan[i].PatchTypeId, ListCyan[i].HtmlColor.ToString(), Color.Cyan.Name.ToString(), true);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOCyan.Series["Series1"], ListCyan[i].CmykC, ListCyan[i].DotGain, ListCyan[i].TargetDotGain, ListCyan[i].Threshold, ListCyan[i].PatchTypeId, ListCyan[i].HtmlColor.ToString(), GetResourceString(_recCyan), true);
 
                             if (Convert.ToInt16(ListCyan[i].Threshold) == 0)
                                 ThresholdValue = 0;
@@ -1840,9 +1844,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         for (int i = 0; i < ListMagenta.Count; i++)
                         {
                             //---Target
-                            AddISOTVIPointChart(i, CHRT_DotgainISOMeganta.Series["Series0"], ListMagenta[i].CmykM, ListMagenta[i].TargetDotGain, ListMagenta[i].TargetDotGain, ListMagenta[i].Threshold, ListMagenta[i].PatchTypeId, ListMagenta[i].HtmlColor.ToString(), Color.Magenta.Name.ToString(), false);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOMeganta.Series["Series0"], ListMagenta[i].CmykM, ListMagenta[i].TargetDotGain, ListMagenta[i].TargetDotGain, ListMagenta[i].Threshold, ListMagenta[i].PatchTypeId, ListMagenta[i].HtmlColor.ToString(), GetResourceString(_recMagenta), false);
                             //---Actual
-                            AddISOTVIPointChart(i, CHRT_DotgainISOMeganta.Series["Series1"], ListMagenta[i].CmykM, ListMagenta[i].DotGain, ListMagenta[i].TargetDotGain, ListMagenta[i].Threshold, ListMagenta[i].PatchTypeId, ListMagenta[i].HtmlColor.ToString(), Color.Magenta.Name.ToString(), true);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOMeganta.Series["Series1"], ListMagenta[i].CmykM, ListMagenta[i].DotGain, ListMagenta[i].TargetDotGain, ListMagenta[i].Threshold, ListMagenta[i].PatchTypeId, ListMagenta[i].HtmlColor.ToString(), GetResourceString(_recMagenta), true);
 
                             if (Convert.ToInt16(ListMagenta[i].Threshold) == 0)
                                 ThresholdValue = 0;
@@ -1884,9 +1888,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         for (int i = 0; i < ListYellow.Count; i++)
                         {
                             //----Target
-                            AddISOTVIPointChart(i, CHRT_DotgainISOYellow.Series["Series0"], ListYellow[i].CmykY, ListYellow[i].TargetDotGain, ListYellow[i].TargetDotGain, ListYellow[i].Threshold, ListYellow[i].PatchTypeId, ListYellow[i].HtmlColor.ToString(), Color.Yellow.Name.ToString(), false);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOYellow.Series["Series0"], ListYellow[i].CmykY, ListYellow[i].TargetDotGain, ListYellow[i].TargetDotGain, ListYellow[i].Threshold, ListYellow[i].PatchTypeId, ListYellow[i].HtmlColor.ToString(), GetResourceString(_recYellow), false);
                             //---Actual                         
-                            AddISOTVIPointChart(i, CHRT_DotgainISOYellow.Series["Series1"], ListYellow[i].CmykY, ListYellow[i].DotGain, ListYellow[i].TargetDotGain, ListYellow[i].Threshold, ListYellow[i].PatchTypeId, ListYellow[i].HtmlColor.ToString(), Color.Yellow.Name.ToString(), true);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOYellow.Series["Series1"], ListYellow[i].CmykY, ListYellow[i].DotGain, ListYellow[i].TargetDotGain, ListYellow[i].Threshold, ListYellow[i].PatchTypeId, ListYellow[i].HtmlColor.ToString(), GetResourceString(_recYellow), true);
 
                             if (Convert.ToInt16(ListYellow[i].Threshold) == 0)
                                 ThresholdValue = 0;
@@ -1928,9 +1932,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         for (int i = 0; i < ListBlack.Count; i++)
                         {
                             //---Target
-                            AddISOTVIPointChart(i, CHRT_DotgainISOBlack.Series["Series0"], ListBlack[i].CmykK, ListBlack[i].TargetDotGain, ListBlack[i].TargetDotGain, ListBlack[i].Threshold, ListBlack[i].PatchTypeId, ListBlack[i].HtmlColor.ToString(), Color.Black.Name.ToString(), false);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOBlack.Series["Series0"], ListBlack[i].CmykK, ListBlack[i].TargetDotGain, ListBlack[i].TargetDotGain, ListBlack[i].Threshold, ListBlack[i].PatchTypeId, ListBlack[i].HtmlColor.ToString(), GetResourceString(_recBlack), false);
                             //---Actual
-                            AddISOTVIPointChart(i, CHRT_DotgainISOBlack.Series["Series1"], ListBlack[i].CmykK, ListBlack[i].DotGain, ListBlack[i].TargetDotGain, ListBlack[i].Threshold, ListBlack[i].PatchTypeId, ListBlack[i].HtmlColor.ToString(), Color.Black.Name.ToString(), true);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOBlack.Series["Series1"], ListBlack[i].CmykK, ListBlack[i].DotGain, ListBlack[i].TargetDotGain, ListBlack[i].Threshold, ListBlack[i].PatchTypeId, ListBlack[i].HtmlColor.ToString(), GetResourceString(_recBlack), true);
 
                             if (Convert.ToInt16(ListBlack[i].Threshold) == 0)
                                 ThresholdValue = 0;
@@ -1994,11 +1998,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (Convert.ToInt16(DTSpread[i].CmykC) == 0 && Convert.ToInt16(DTSpread[i].CmykM) == 0 && Convert.ToInt16(DTSpread[i].CmykY) == 0)
                         {
                             if (ChkC.Checked)
-                                AddTVISpreadPointChart(C, CHRT_SummaryISODotgain.Series["Series1"], CHRT_SummaryISODotgain.Series["Series1Point"], Convert.ToInt64(DTSpread[i].CmykC), DTSpread[i].DotGain, Color.Cyan.Name.ToString(), DTSpread[i].DotGainSpreadTh, "", "", "", "");
+                                AddTVISpreadPointChart(C, CHRT_SummaryISODotgain.Series["Series1"], CHRT_SummaryISODotgain.Series["Series1Point"], Convert.ToInt64(DTSpread[i].CmykC), DTSpread[i].DotGain, "Cyan", GetResourceString(_recCyan), DTSpread[i].DotGainSpreadTh, "", "", "", "");
                             if (ChkM.Checked)
-                                AddTVISpreadPointChart(M, CHRT_SummaryISODotgain.Series["Series2"], CHRT_SummaryISODotgain.Series["Series2Point"], Convert.ToInt64(DTSpread[i].CmykM), DTSpread[i].DotGain, Color.Magenta.Name.ToString(), DTSpread[i].DotGainSpreadTh, "", "", "", "");
+                                AddTVISpreadPointChart(M, CHRT_SummaryISODotgain.Series["Series2"], CHRT_SummaryISODotgain.Series["Series2Point"], Convert.ToInt64(DTSpread[i].CmykM), DTSpread[i].DotGain, "Magenta", GetResourceString(_recMagenta), DTSpread[i].DotGainSpreadTh, "", "", "", "");
                             if (ChkY.Checked)
-                                AddTVISpreadPointChart(Y, CHRT_SummaryISODotgain.Series["Series3"], CHRT_SummaryISODotgain.Series["Series3Point"], Convert.ToInt64(DTSpread[i].CmykY), DTSpread[i].DotGain, Color.Yellow.Name.ToString(), DTSpread[i].DotGainSpreadTh, "", "", "", "");
+                                AddTVISpreadPointChart(Y, CHRT_SummaryISODotgain.Series["Series3"], CHRT_SummaryISODotgain.Series["Series3Point"], Convert.ToInt64(DTSpread[i].CmykY), DTSpread[i].DotGain, "Yellow", GetResourceString(_recYellow), DTSpread[i].DotGainSpreadTh, "", "", "", "");
                             C++; M++; Y++;
 
                         }
@@ -2016,7 +2020,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             DiffrentTitleOne = "C - M";
                             DiffrentTitleTwo = "C - Y";
 
-                            AddTVISpreadPointChart(C, CHRT_SummaryISODotgain.Series["Series1"], CHRT_SummaryISODotgain.Series["Series1Point"], Convert.ToInt64(DTSpread[i].CmykC), DTSpread[i].DotGain, Color.Cyan.Name.ToString(), DTSpread[i].DotGainSpreadTh, DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
+                            AddTVISpreadPointChart(C, CHRT_SummaryISODotgain.Series["Series1"], CHRT_SummaryISODotgain.Series["Series1Point"], Convert.ToInt64(DTSpread[i].CmykC), DTSpread[i].DotGain, "Cyan", GetResourceString(_recCyan), DTSpread[i].DotGainSpreadTh, DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
                             C++;
                         }
                         if (Convert.ToInt16(DTSpread[i].CmykM) != 0 && ChkM.Checked)
@@ -2033,7 +2037,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             DiffrentTitleOne = "M - C";
                             DiffrentTitleTwo = "M - Y";
 
-                            AddTVISpreadPointChart(M, CHRT_SummaryISODotgain.Series["Series2"], CHRT_SummaryISODotgain.Series["Series2Point"], Convert.ToInt64(DTSpread[i].CmykM), DTSpread[i].DotGain, Color.Magenta.Name.ToString(), DTSpread[i].DotGainSpreadTh, DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
+                            AddTVISpreadPointChart(M, CHRT_SummaryISODotgain.Series["Series2"], CHRT_SummaryISODotgain.Series["Series2Point"], Convert.ToInt64(DTSpread[i].CmykM), DTSpread[i].DotGain, "Magenta", GetResourceString(_recMagenta), DTSpread[i].DotGainSpreadTh, DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
                             M++;
                         }
                         if (Convert.ToInt16(DTSpread[i].CmykY) != 0 && ChkY.Checked)
@@ -2050,7 +2054,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             DiffrentTitleOne = "Y - C";
                             DiffrentTitleTwo = "Y - M";
 
-                            AddTVISpreadPointChart(Y, CHRT_SummaryISODotgain.Series["Series3"], CHRT_SummaryISODotgain.Series["Series3Point"], Convert.ToInt64(DTSpread[i].CmykY), DTSpread[i].DotGain, Color.Yellow.Name.ToString(), DTSpread[i].DotGainSpreadTh, DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
+                            AddTVISpreadPointChart(Y, CHRT_SummaryISODotgain.Series["Series3"], CHRT_SummaryISODotgain.Series["Series3Point"], Convert.ToInt64(DTSpread[i].CmykY), DTSpread[i].DotGain, "Yellow", GetResourceString(_recYellow), DTSpread[i].DotGainSpreadTh, DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
                             Y++;
                         }
                     }
@@ -2114,9 +2118,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     #region Add Tooltip HTML
                     StringBuilder toolTip = new StringBuilder();
                     toolTip.Append("<table>");
-                    toolTip.Append("<tr><td><b>" + ColorName + " " + _XValue + GetResourceString("percentPatchMetrics") + "</b></td></tr>");
+                    toolTip.Append("<tr><td><b>" + ColorName + " " + _XValue + GetResourceString(_recpercentPatchMetrics) + "</b></td></tr>");
                     toolTip.Append("<tr><td><table>");
-                    toolTip.Append("<tr><td>Dot Gain : </td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDotGain) + ": </td><td>");
                     toolTip.Append(_YValue);
                     toolTip.Append("</td></tr>");
                     toolTip.Append("</table></td></tr>");
@@ -2132,7 +2136,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private void AddTVISpreadPointChart(int _Index, Series _objSeries, Series _objSeriesPoint, long _XValue, decimal _YValue, string ColorName, decimal _TVISpreadTh, string DiffrentTitleOne, string DiffrentTitleTwo, string DiffrentOne, string DiffrentTwo)
+        private void AddTVISpreadPointChart(int _Index, Series _objSeries, Series _objSeriesPoint, long _XValue, decimal _YValue, string ColorName, string ToolltipColor, decimal _TVISpreadTh, string DiffrentTitleOne, string DiffrentTitleTwo, string DiffrentOne, string DiffrentTwo)
         {
             try
             {
@@ -2155,12 +2159,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     #region Add Tooltip HTML
                     StringBuilder toolTip = new StringBuilder();
                     toolTip.Append("<table>");
-                    toolTip.Append("<tr><td><b>" + ColorName + " " + _XValue + GetResourceString("percentPatchMetrics") + "</b></td></tr>");
+                    toolTip.Append("<tr><td><b>" + ToolltipColor + " " + _XValue + GetResourceString(_recpercentPatchMetrics) + "</b></td></tr>");
                     toolTip.Append("<tr><td><table>");
-                    toolTip.Append("<tr><td>Actual TVI:</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recactualTVI) + "</td><td>");
                     toolTip.Append(_YValue);
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>Spread Threshold:</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recspreadThr) + "</td><td>");
                     toolTip.Append(_TVISpreadTh);
                     toolTip.Append("</td></tr>");
                     toolTip.Append("<tr><td>" + DiffrentTitleOne + ":</td><td>");
@@ -2212,15 +2216,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     #region Add Tooltip HTML
                     StringBuilder toolTip = new StringBuilder();
                     toolTip.Append("<table>");
-                    toolTip.Append("<tr><td><b>" + ColorName + " " + _TitleValue + " Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><b>" + ColorName + " " + _TitleValue + GetResourceString(_recPatchMetrics) + "</b></td></tr>");
                     toolTip.Append("<tr><td><table>");
-                    toolTip.Append("<tr><td>Actual TVI</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recactualTVI) + "</td><td>");
                     toolTip.Append(_YValue + "%");
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>Target TVI</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_rectargetTVI) + "</td><td>");
                     toolTip.Append(_Target + "%");
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>TVI Threshold</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recTVIThr) + "</td><td>");
                     toolTip.Append(_Threshold + "%");
                     toolTip.Append("</td></tr>");
                     toolTip.Append("</table></td></tr>");

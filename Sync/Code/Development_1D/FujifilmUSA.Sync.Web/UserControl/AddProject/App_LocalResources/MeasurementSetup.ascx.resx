@@ -177,4 +177,10 @@
   <data name="locReadModeResource1.Text" xml:space="preserve">
     <value>Read Mode:</value>
   </data>
+  <data name="locReadModePointResource1.Text" xml:space="preserve">
+    <value>Point</value>
+  </data>
+  <data name="locReadModeStripResource1.Text" xml:space="preserve">
+    <value>Strip</value>
+  </data>
 </root>

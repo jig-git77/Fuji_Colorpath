@@ -159,4 +159,7 @@
   <data name="Name" xml:space="preserve">
     <value>German (de)</value>
   </data>
+  <data name="locMetricTargetPresetResource1.Text" xml:space="preserve">
+    <value>Voreinstellungen</value>
+  </data>
 </root>

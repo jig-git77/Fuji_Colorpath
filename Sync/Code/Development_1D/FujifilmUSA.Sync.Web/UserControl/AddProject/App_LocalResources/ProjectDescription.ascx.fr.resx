@@ -160,7 +160,7 @@
     <value>Renseigner Nom Encre</value>
   </data>
   <data name="rfvRipSettingsContainer" xml:space="preserve">
-    <value>Please provide rip settings._de</value>
+    <value>Please provide rip settings._fr</value>
   </data>
   <data name="locBlanketAgeResource1.Text" xml:space="preserve">
     <value>Blanket Age:_fr</value>
@@ -185,5 +185,8 @@
   </data>
   <data name="locScreeningResource1.Text" xml:space="preserve">
     <value>Screening:_fr</value>
+  </data>
+  <data name="locProjectDescriptionResource1.Text" xml:space="preserve">
+    <value>Project Description_fr</value>
   </data>
 </root>

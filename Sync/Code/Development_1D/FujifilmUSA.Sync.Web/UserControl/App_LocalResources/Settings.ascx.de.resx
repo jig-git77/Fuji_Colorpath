@@ -273,4 +273,13 @@
   <data name="locUserMgmtResource1.Text" xml:space="preserve">
     <value>Benutzerverwaltung</value>
   </data>
+  <data name="imgMetricTargetPresetResource1.AlternateText" xml:space="preserve">
+    <value>Voreinstellungen</value>
+  </data>
+  <data name="imgMetricTargetPresetResource1.ToolTip" xml:space="preserve">
+    <value>Voreinstellungen</value>
+  </data>
+  <data name="locMetricTargetPresetResource1.Text" xml:space="preserve">
+    <value>Voreinstellungen</value>
+  </data>
 </root>

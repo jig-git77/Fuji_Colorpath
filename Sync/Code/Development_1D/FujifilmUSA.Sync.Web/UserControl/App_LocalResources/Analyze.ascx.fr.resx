@@ -613,7 +613,7 @@
     <value>MeasurementID_fr:</value>
   </data>
   <data name="btn_GeneratePDFResource1.ToolTip" xml:space="preserve">
-    <value>Download PDF_ja</value>
+    <value>Download PDF_fr</value>
   </data>
   <data name="btnSpreadResource1.Text" xml:space="preserve">
     <value>Spread_fr</value>
@@ -626,5 +626,35 @@
   </data>
   <data name="percentPatchMetrics" xml:space="preserve">
     <value>% Patch Metrics_fr</value>
+  </data>
+  <data name="locTVICyanResource1.Text" xml:space="preserve">
+    <value>Cyan_fr</value>
+   </data>
+  <data name="locTVIMagentaResource1.Text" xml:space="preserve">
+    <value>Magenta_fr</value>
+   </data>
+  <data name="locTVIYellowResource1.Text" xml:space="preserve">
+    <value>Yellow_fr</value>
+   </data>
+  <data name="locTVIBlackResource1.Text" xml:space="preserve">
+    <value>Black_fr</value>
+   </data>
+  <data name="actualTVI" xml:space="preserve">
+    <value>Actual TVI:_fr</value>
+  </data>
+  <data name="targetTVI" xml:space="preserve">
+    <value>Target TVI:_fr</value>
+  </data>
+  <data name="spreadThr" xml:space="preserve">
+    <value>Spread Threshold:_fr</value>
+  </data>
+  <data name="TVIThr" xml:space="preserve">
+    <value>TVI Threashold:_fr</value>
+  </data>
+  <data name="dotGain" xml:space="preserve">
+    <value>Dot Gain_fr</value>
+  </data>
+  <data name="PreDeltaE" xml:space="preserve">
+    <value>Previous ΔE_fr</value>
   </data>
 </root>

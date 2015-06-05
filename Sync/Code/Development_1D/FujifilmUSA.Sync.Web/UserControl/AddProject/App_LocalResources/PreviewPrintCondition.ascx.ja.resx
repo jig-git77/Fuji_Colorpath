@@ -193,12 +193,12 @@
     <value>色差評価判定基準</value>
   </data>
   <data name="locMetricPresetsResource1.Text" xml:space="preserve">
-    <value>Metric Presets_ja</value>
+    <value>判定基準</value>
   </data>
   <data name="locTargetPrintConditionResource1.Text" xml:space="preserve">
-    <value>Target Print Condition_ja</value>
+    <value>基準印刷条件</value>
   </data>
   <data name="locReTargetProjResource1.Text" xml:space="preserve">
-    <value>ReTarget Project:_ja</value>
+    <value>再補正での元プロジェクト：</value>
   </data>
 </root>

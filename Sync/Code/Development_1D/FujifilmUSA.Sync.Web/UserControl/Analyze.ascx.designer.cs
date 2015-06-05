@@ -859,13 +859,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.DataVisualization.Charting.Chart chartABComparison;
         
         /// <summary>
-        /// Localize2 control.
+        /// locabGamutCompResource1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
+        protected global::System.Web.UI.WebControls.Localize locabGamutCompResource1;
         
         /// <summary>
         /// panelabGamutComparison control.
@@ -994,6 +994,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Button btnSpread;
         
         /// <summary>
+        /// locTVICyan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locTVICyan;
+        
+        /// <summary>
         /// CHRT_DotgainISOCyan control.
         /// </summary>
         /// <remarks>
@@ -1001,6 +1010,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_DotgainISOCyan;
+        
+        /// <summary>
+        /// locTVIMeganta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locTVIMeganta;
         
         /// <summary>
         /// CHRT_DotgainISOMeganta control.
@@ -1012,6 +1030,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_DotgainISOMeganta;
         
         /// <summary>
+        /// locTVIYellow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locTVIYellow;
+        
+        /// <summary>
         /// CHRT_DotgainISOYellow control.
         /// </summary>
         /// <remarks>
@@ -1019,6 +1046,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_DotgainISOYellow;
+        
+        /// <summary>
+        /// locTVIBlack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locTVIBlack;
         
         /// <summary>
         /// CHRT_DotgainISOBlack control.

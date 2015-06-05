@@ -190,13 +190,13 @@
     <value>ICCプロファイル生成</value>
   </data>
 	<data name="ELicenseType_InkOptimization" xml:space="preserve">
-    <value>インク調整</value>
+    <value>インク削減DLP最適化</value>
   </data>
 	<data name="ELicenseType_InkOptimization_Source" xml:space="preserve">
-    <value>Ink Optimization Source_ja</value>
+    <value>インク削減DLP生成</value>
   </data>
   <data name="ELicenseType_Sync4DCertification" xml:space="preserve">
-    <value>Sync4D Certification_ja</value>
+    <value>SyncDLP判定</value>
   </data>
 	<data name="ELicenseType_None" xml:space="preserve">
     <value>無効</value>
@@ -640,12 +640,12 @@
     <value>ユーザ名、パスワードの検証中にエラーが発生しました。</value>
   </data>
 	<data name="EUVIncludedMode_PlusUV" xml:space="preserve">
-    <value>M1_ja</value>  </data>
+    <value>M1 D50</value>  </data>
 	<data name="EUVIncludedMode_UV" xml:space="preserve">
-    <value>M0フィルターなし</value>
+    <value>M0 タングステン</value>
   </data>
 	<data name="EUVIncludedMode_UVCut" xml:space="preserve">
-    <value>M2フィルターあり</value>
+    <value>M2 UVカット</value>
   </data>
 	<data name="Fields_Marked_With_Are_Required" xml:space="preserve">
     <value>&lt;span&gt;(&lt;span style=\"color: Red;\"&gt;*&lt;/span&gt;)の付いた項目は必須です。&lt;/span&gt;</value>
@@ -855,10 +855,10 @@
     <value>XYZ_ja</value>
   </data>
   <data name="DensityTypes_StatusT" xml:space="preserve">
-    <value>StatusT_ja</value>
+    <value>ステータスT</value>
   </data>
   <data name="DensityTypes_StatusE" xml:space="preserve">
-    <value>StatusE_ja</value>
+    <value>ステータスE</value>
   </data>
 
   <data name="EInkOrder_KCMY" xml:space="preserve">

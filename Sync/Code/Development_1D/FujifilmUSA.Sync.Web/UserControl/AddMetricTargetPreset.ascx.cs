@@ -9,6 +9,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using Telerik.Web.UI;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
