@@ -1080,7 +1080,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             BindLABComparision("Cyan", GetResourceString(_recCyanPathMetrics), DTTarget, 0, 0, 6, false, true);
             BindLABComparision("Magenta", GetResourceString(_recMagentaPathMetrics), DTTarget, 0, 0, 6, false, true);
-            BindLABComparision("Yelllow", GetResourceString(_recYellowPathMetrics), DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Yellow", GetResourceString(_recYellowPathMetrics), DTTarget, 0, 0, 6, false, true);
             BindLABComparision("Red", GetResourceString(_recRedPathMetrics), DTTarget, 0, 0, 6, false, true);
             BindLABComparision("Green", GetResourceString(_recGreenPathMetrics), DTTarget, 0, 0, 6, false, true);
             BindLABComparision("Blue", GetResourceString(_recBluePathMetrics), DTTarget, 0, 0, 6, false, true);
