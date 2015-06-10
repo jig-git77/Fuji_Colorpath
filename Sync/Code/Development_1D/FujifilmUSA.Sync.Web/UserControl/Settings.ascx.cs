@@ -35,9 +35,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             dvApplicationConfiguration.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageApplicationConfiguration);
             dvProfilerSettings.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDeviceProfileSettings);
 
-            divMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance); //Assign PatchTolerance Level to display only management page to Add patch Tolerance
+            divMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset); 
             divPrintStandardType.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType);
             divLookupTVILABDensity.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSync1DTVILABDensity);
+            divPatchPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance); 
             
             ////seperator image 
             divBranchSeprator.Visible = tdBranch.Visible && tdcompany.Visible;
@@ -54,7 +55,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divApplicationConfigurationSeparator.Visible = dvApplicationConfiguration.Visible && dvProfilerSettings.Visible;
 
             divMetricTargetPresetSeparator.Visible = divMetricTargetPreset.Visible && dvApplicationConfiguration.Visible;
-            divPrintStandardTypeSeparator.Visible = divPrintStandardType.Visible && divMetricTargetPreset.Visible;
+            divPatchPresetSeparator.Visible = divPatchPreset.Visible && dvApplicationConfiguration.Visible;
+            divLookupTVILABDensitySeparator.Visible = divLookupTVILABDensity.Visible && divPrintStandardType.Visible;
         }
         #endregion
 
@@ -106,6 +108,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lnkbtnPrintStandardType_Click(object sender, EventArgs e)
         {
             Response.RedirectPermanent("PrintStandardTypeManagement.aspx");
+        }
+
+        protected void lnkbtnPatchPreset_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("PatchPresetManagement.aspx");
         }
     }
 }

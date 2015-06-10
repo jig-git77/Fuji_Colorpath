@@ -1519,6 +1519,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete selected patch preset?.
+        /// </summary>
+        internal static string PatchPresetManagement_DeletePatchPreset_Confirmation {
+            get {
+                return ResourceManager.GetString("PatchPresetManagement_DeletePatchPreset_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You hit the limit of adding new Patch Presets. Please contact your Region Admin..
+        /// </summary>
+        internal static string PatchPresetManagement_HitLimitPatchPresets {
+            get {
+                return ResourceManager.GetString("PatchPresetManagement_HitLimitPatchPresets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete selected Print Standard Type?.
         /// </summary>
         internal static string PrintStandardTypeManagement_DeletePrintStandardType_Confirmation {

@@ -151,16 +151,16 @@
     <value>Edit Print Standard Type</value>
   </data>
   <data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
-    <value>Clear Filter</value>
+    <value>絞り込み解除</value>
   </data>
   <data name="imgClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Filter</value>
+    <value>絞り込み解除</value>
   </data>
   <data name="lbtnClearFillterResource1.ToolTip" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>絞り込み解除</value>
   </data>
   <data name="lbtnClearFillterResource2.ToolTip" xml:space="preserve">
-    <value>Clear Filter</value>
+    <value>絞り込み解除</value>
   </data>
   <data name="locAddPrintStandardTypeResource1.Text" xml:space="preserve">
     <value>Add Print Standard Type</value>

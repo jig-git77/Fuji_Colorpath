@@ -939,4 +939,10 @@
   <data name="Error_AddLookupTVILABDensity_MissingData" xml:space="preserve">
     <value>You are missing of entering neccessary data. Please check whether you have entered LAB, TVI and Density data.</value>
   </data>
+  <data name="PatchPresetManagement_DeletePatchPreset_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete selected patch preset?_ja</value>
+  </data>
+  <data name="PatchPresetManagement_HitLimitPatchPresets" xml:space="preserve">
+    <value>You hit the limit of adding new Patch Presets. Please contact your Region Admin._ja</value>
+  </data>
 </root>

@@ -193,21 +193,23 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 ReferenceChartTypeId = DataReader.ReadInt(x, "ReferenceChartTypeId"),
                                 InstrumentTypeID = DataReader.ReadInt(x, "InstrumentTypeID")
                             }).ToList();
+                        if (metricTargetPresetId != 0)
+                        {
+                            metricTargetPresets[0].MetricSumTolerances = dsmetricTargetPresets.Tables[1].AsEnumerable().
+                               Select(x => new Entity.CPSyncV.MetricSum()
+                               {
+                                   MetricSumId = DataReader.ReadInt(x, "MetricSumID"),
+                                   MetricSumName = DataReader.ReadString(x, "MetricSumName"),
+                                   TargetValue = DataReader.ReadDecimal(x, "TargetValue")
+                               }).ToList();
 
-                        metricTargetPresets[0].MetricSumTolerances = dsmetricTargetPresets.Tables[1].AsEnumerable().
-                           Select(x => new Entity.CPSyncV.MetricSum()
-                           {
-                               MetricSumId = DataReader.ReadInt(x, "MetricSumID"),
-                               MetricSumName = DataReader.ReadString(x, "MetricSumName"),
-                               TargetValue = DataReader.ReadDecimal(x, "TargetValue")
-                           }).ToList();
-
-                        metricTargetPresets[0].PatchTolerances = dsmetricTargetPresets.Tables[2].AsEnumerable().
-                          Select(x => new Entity.CPSyncV.PatchTolerance()
-                          {
-                              SampleName = DataReader.ReadString(x, "SampleName"),
-                              Tolerance = DataReader.ReadDecimal(x, "TargetValue")
-                          }).ToList();
+                            metricTargetPresets[0].PatchTolerances = dsmetricTargetPresets.Tables[2].AsEnumerable().
+                              Select(x => new Entity.CPSyncV.PatchTolerance()
+                              {
+                                  SampleName = DataReader.ReadString(x, "SampleName"),
+                                  Tolerance = DataReader.ReadDecimal(x, "TargetValue")
+                              }).ToList();
+                        }
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMetricTargetPresets"));

@@ -24,6 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recSelectText = "selectText";
         private const string _recSelectInstrumentType = "selectInstrumentTypeText";
         private const string _recErrorSamePatchTol = "errorSamePatchTol";
+        private const string _recErrorTolMissing = "errorTolMissing";
 
         #endregion
 
@@ -390,19 +391,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(GetResourceString(_recErrorSamePatchTol), false);
                 return;
             }
+            if (MetricTargetPreset.MetricSumTolerances.Count == 0 || MetricTargetPreset.PatchTolerances.Count == 0)
+            {
+                fujiStatusbar.DisplayMessage(GetResourceString(_recErrorTolMissing), false);
+                return;
+            }
 
-            if (BId == 0) // Add New MetricTargetPatchPreset
+            if (BId == 0) // Add New PatchPreset
             {
                 _presenterMetricTargetPresetManagement.InsertMetricTargetPatchPreset();
                 if (IsErrorOccured) return;
             }
-            else // Edit New MetricTargetPreset
+            else // Edit PatchPreset
             {
                 MetricTargetPreset.MetricTargetPresetID = BId;
                 _presenterMetricTargetPresetManagement.UpdateMetricTargetPatchPreset();
                 if (IsErrorOccured) return;
             }
-            Response.Redirect("MetricTargetPresetManagement.aspx");
+            Response.Redirect("PatchPresetManagement.aspx");
         }
         #endregion
 
@@ -419,6 +425,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> ChartPatchList { get; set; }
 
         #endregion
+
+        protected void lbtnCancel_Click(object sender, EventArgs e)
+        {
+
+        }
 
     }
 }

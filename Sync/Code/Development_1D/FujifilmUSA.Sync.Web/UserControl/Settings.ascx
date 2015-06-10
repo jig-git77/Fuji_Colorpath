@@ -240,25 +240,42 @@
                         <asp:Localize Text="Metric Target Preset" runat="server" ID="locMetricTargetPreset" meta:resourcekey="locMetricTargetPresetResource1"></asp:Localize>
                     </asp:LinkButton>                
                 </div>               
-                <div id="divPrintStandardTypeSeparator" runat ="server" align="center" valign="bottom" style="float:left;">
+                <div id="divPatchPresetSeparator" runat ="server" align="center" valign="bottom" style="float:left;">
                     <img alt="" src="Images/admin-icon-divider.png" />
                 </div> 
-                 <div id="divPrintStandardType" runat="server" align="center" valign="bottom" style="width: 150px; float: left">
-                    <asp:LinkButton ID="lnkbtnPrintStandardType" runat="server" 
-                         ToolTip="Print Standard Type" 
-                         PostBackUrl="~/PrintStandardTypeManagement.aspx" 
-                         onclick="lnkbtnPrintStandardType_Click">
+                 <div id="divPatchPreset" runat="server" align="center" valign="bottom" style="width: 150px; float: left">
+                    <asp:LinkButton ID="lnkbtnPatchPreset" runat="server" 
+                         PostBackUrl="~/PatchPresetManagement.aspx" onclick="lnkbtnPatchPreset_Click">
                         <div>
-                            <asp:Image ID="Image8" runat="server" AlternateText="Print Standard Type" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Print Standard Type" />
+                            <asp:Image ID="Image9" runat="server" AlternateText="Patch Preset" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Patch Preset"  meta:resourcekey="imgPatchPresetResource1"/>
                         </div>
-                        <asp:Localize Text="Print Standard Type" runat="server" ID="Localize2"></asp:Localize>
+                        <asp:Localize Text="Patch Preset" runat="server" ID="Localize1" meta:resourcekey="locPatchPresetResource1"></asp:Localize>
                     </asp:LinkButton>                
-                </div>
-                </td>
-             </tr>                  
+                </div>  
+               
                 
+               </td>
+            </tr>                  
+            <tr>
+                <td style="height:50px;">
+                </td>
+            </tr>    
             <tr align="center">
                 <td align="center" >
+                   <div id="divPrintStandardType" runat="server" align="center" valign="bottom" style="width: 150px; float: left">
+                        <asp:LinkButton ID="lnkbtnPrintStandardType" runat="server" 
+                             ToolTip="Print Standard Type" 
+                             PostBackUrl="~/PrintStandardTypeManagement.aspx" 
+                             onclick="lnkbtnPrintStandardType_Click">
+                            <div>
+                                <asp:Image ID="Image8" runat="server" AlternateText="Print Standard Type" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Print Standard Type" />
+                            </div>
+                            <asp:Localize Text="Print Standard Type" runat="server" ID="Localize2"></asp:Localize>
+                        </asp:LinkButton>                
+                    </div>
+                    <div id="divLookupTVILABDensitySeparator" runat ="server" align="center" valign="bottom" style="float:left;">
+                        <img alt="" src="Images/admin-icon-divider.png" />
+                    </div> 
                     <div id="divLookupTVILABDensity" runat="server" align="center" valign="bottom" style="width: 150px; float: left">
                         <asp:LinkButton ID="LinkButton1" runat="server" 
                                 ToolTip="Add Lookup TVILABDensity" 

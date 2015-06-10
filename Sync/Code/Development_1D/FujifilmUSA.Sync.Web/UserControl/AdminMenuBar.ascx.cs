@@ -31,7 +31,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnActivityValidationRules.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageActivityValidationRules);
                 lbtnProfilerSettings.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDeviceProfileSettings);
                 lbtnApplicationConfiguration.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageApplicationConfiguration);
-                lbtnMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance); //Assign PatchTolerance Level to display only management page to Add patch Tolerance
+                lbtnMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
+                lbtnPatchPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance);
                 lbtnPrintStandardType.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType);
                 lbtnLookupTVILABDensity.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSync1DTVILABDensity);
             }
@@ -107,6 +108,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Response.RedirectPermanent("MetricTargetPresetManagement.aspx");
         }
 
+        protected void lbtnPatchPreset_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("PatchPresetManagement.aspx");
+        }
+   
         protected void lbtnPrintStandardType_Click(object sender, EventArgs e)
         {
             Response.RedirectPermanent("PrintStandardTypeManagement.aspx");
@@ -118,6 +124,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         #endregion  
-   
+
+       
     }
 }

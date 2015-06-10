@@ -97,6 +97,13 @@ namespace FujifilmUSA.Sync.Presenter
             _viewAddMetricTargetPreset.MetricSumList = metricTargetPresetBusiness.GetMetricSumList();
         }
 
+        public void GetMetricTargetPatchPresets()
+        {
+            var metricTargetPresetBusiness = BusinessFactory<IMetricTargetPresetBusiness>.CreateObject();
+            metricTargetPresetBusiness.ErrorOccured += _viewMetricTargetPresetManagement.ErrorOccured;
+            _viewMetricTargetPresetManagement.MetricTargetPresetList = metricTargetPresetBusiness.GetMetricTargetPatchPreset(0, _viewMetricTargetPresetManagement.CurrentUserId);
+        }
+
         public void GetMetricTargetPatchPreset()
         {
             var metricTargetPresetBusiness = BusinessFactory<IMetricTargetPresetBusiness>.CreateObject();

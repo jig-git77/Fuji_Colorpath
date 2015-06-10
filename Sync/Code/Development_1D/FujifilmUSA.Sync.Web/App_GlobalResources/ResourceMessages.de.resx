@@ -615,4 +615,10 @@
   <data name="UserManagement_DeleteUser_Confirmation" xml:space="preserve">
     <value>Wollen Sie wirklich den ausgewählten Benutzer löschen?</value>
   </data>
+  <data name="PatchPresetManagement_DeletePatchPreset_Confirmation" xml:space="preserve">
+    <value>>Are you sure you want to delete selected patch preset?_de</value>
+  </data>
+  <data name="PatchPresetManagement_HitLimitPatchPresets" xml:space="preserve">
+    <value>You hit the limit of adding new Patch Presets. Please contact your Region Admin._de</value>
+  </data>
 </root>

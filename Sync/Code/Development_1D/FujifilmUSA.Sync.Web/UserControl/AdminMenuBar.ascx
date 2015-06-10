@@ -129,6 +129,13 @@
           ID="locMetricTargetPresetResource1"></asp:Localize> 
             </span>
       </asp:LinkButton> 
+      <asp:LinkButton ID="lbtnPatchPreset" runat="server" 
+          CssClass="dock-item overlapobject" onclick="lbtnPatchPreset_Click" >
+            <img src="Images/application-configuration.png" style="position:relative;z-index:1; " alt="Patch Preset" />
+            <span> <asp:Localize Text="Patch Preset" runat="server" 
+          ID="locPatchPresetResource1"></asp:Localize> 
+            </span>
+      </asp:LinkButton>
       <asp:LinkButton ID="lbtnPrintStandardType" runat="server" 
           CssClass="dock-item overlapobject" onclick="lbtnPrintStandardType_Click" >
             <img src="Images/application-configuration.png" style="position:relative;z-index:1; " alt="Print Standard Type" />

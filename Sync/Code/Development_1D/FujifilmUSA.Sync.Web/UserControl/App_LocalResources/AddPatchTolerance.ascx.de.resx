@@ -150,4 +150,7 @@
   <data name="selectText" xml:space="preserve">
     <value>-- auswählen --</value>
   </data>
+  <data name="errorTolMissing" xml:space="preserve">
+    <value>Please provide Metric sum values and Patch Tolerance values._de</value>
+  </data>
 </root>

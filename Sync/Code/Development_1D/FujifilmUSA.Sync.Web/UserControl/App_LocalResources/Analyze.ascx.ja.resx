@@ -635,13 +635,13 @@
   </data>
   <data name="locTVIMagentaResource1.Text" xml:space="preserve">
     <value>マゼンタ</value>
-   </data>
+  </data>
   <data name="locTVIYellowResource1.Text" xml:space="preserve">
     <value>イエロー</value>
-   </data>
+  </data>
   <data name="locTVIBlackResource1.Text" xml:space="preserve">
     <value>ブラック</value>
-   </data>
+  </data>
   <data name="actualTVI" xml:space="preserve">
     <value>測定値:</value>
   </data>

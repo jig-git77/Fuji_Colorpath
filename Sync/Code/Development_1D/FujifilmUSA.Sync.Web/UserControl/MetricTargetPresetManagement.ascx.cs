@@ -41,8 +41,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgMetricTargetPreset.PageSize = Common.Utilities.PageSize;
             if (!Page.IsPostBack)
             {
-                likAdd.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
-                lnkbtnPatchTolerance.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance);
                 BindMetricTargetPresets();
             }
         }
@@ -118,11 +116,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        protected void lnkbtnPatchTolerance_Click(object sender, EventArgs e)
-        {
-            Response.RedirectPermanent("AddPatchTolerance.aspx");
-        }
-
         #endregion
 
         #region Implement Interface IViewMetricTargetPresetManagement
@@ -130,6 +123,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPresetList { get; set; }
         #endregion
 
-      
     }
 }
