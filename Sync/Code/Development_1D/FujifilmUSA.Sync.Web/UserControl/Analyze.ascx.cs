@@ -276,7 +276,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         dvTab_TVI.Visible = Tab_TVI.Visible = false;
                     }
-                    Div_MetricSumFilter.Visible = false;
+                    Div_MetricSumFilter.Visible = true;
                 }
                 else   //-----DLP Optimization
                 {
@@ -2774,8 +2774,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Now we are using DataTable as DataSource                    
                     rgPatchDetails.DataSource = FilteredPatchDetailsTable(ViewState["MetricSumID"].ToString(), dtPatchDetails);
 
-                    #region Make Visible/Invisible columns according to MetricSum selected in Validation
-                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //--If validation, visible metricsum columns respectively
+                    #region Make Visible/Invisible columns according to MetricSum selected in Validation and Sync 1D projects
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)      //--If validation / Sync 1D, visible metricsum columns respectively
                     {
                         if (ViewState["MetricSumID"].ToString() == "5" || ViewState["MetricSumID"].ToString() == "6" || ViewState["MetricSumID"].ToString() == "7")
                         {
@@ -3060,11 +3060,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     sw.WriteLine(@"KEYWORD	""SampleID""");
                     sw.WriteLine(@"KEYWORD	""SAMPLE_NAME""");
 
-                    sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "18");
+                    sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "19");
 
                     sw.WriteLine("BEGIN_DATA_FORMAT");
 
-                    sw.WriteLine("SampleID\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS");
+                    sw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS");
 
                     sw.WriteLine("END_DATA_FORMAT");
                     sw.WriteLine("NUMBER_OF_SETS" + "\t" + dtFilteredPatchDetails.Rows.Count.ToString());
@@ -3072,7 +3072,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     for (int i = 0; i < dtFilteredPatchDetails.Rows.Count; i++)
                     {
-                        sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString());
+                        sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString());
                     }
 
                     sw.WriteLine("END_DATA");

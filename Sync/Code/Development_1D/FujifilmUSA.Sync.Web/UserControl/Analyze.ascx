@@ -2353,7 +2353,7 @@
                         meta:resourcekey="rgPatchDetailsResource1" >
                     <GroupingSettings CaseSensitive="False" />
                          <ClientSettings>
-                            <Scrolling AllowScroll="True" UseStaticHeaders="True" FrozenColumnsCount="6">
+                            <Scrolling AllowScroll="True" UseStaticHeaders="True" FrozenColumnsCount="7">
                             </Scrolling>
                          </ClientSettings>
                         <HeaderStyle Font-Bold="True"/>
@@ -2396,6 +2396,11 @@
                                         SortExpression="SampleID" AllowFiltering="False" UniqueName="SampleId" 
                                         FilterControlAltText="Filter SampleId column" 
                                         meta:resourcekey="GridBoundColumnResource1">
+                                    </telerik:GridBoundColumn> 
+                                    <telerik:GridBoundColumn DataField="SampleName" HeaderText="Name" 
+                                        SortExpression="SampleName" AllowFiltering="False" UniqueName="SampleName" 
+                                        FilterControlAltText="Filter SampleName column" 
+                                        meta:resourcekey="GridBoundColumnResource38">
                                     </telerik:GridBoundColumn> 
                                     <telerik:GridBoundColumn DataField="CMYK_C" HeaderText="C" 
                                         SortExpression="CMYK_C" FilterControlWidth="30px" 
