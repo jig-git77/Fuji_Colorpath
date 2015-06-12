@@ -77,6 +77,7 @@
         line-height: 15px;
     }
 </style>
+ 
 <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
     <script type="text/javascript" language="javascript">
         function ConfirmDeletePatchPreset() {
@@ -91,18 +92,19 @@
                 return true;
             else
                 alert('<%= PatchPresetManagement_HitLimitPatchPresets %>');
-                return false;
+            return false;
         }
     </script>
 </telerik:RadCodeBlock>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle">
+
     <div class="head">
         <h1><asp:Localize runat="server" Text="Patch Preset Management" ID="locPatchPresetMgmt" 
                 meta:resourcekey="locPatchPresetMgmtResource1"></asp:Localize></h1>
             <asp:LinkButton ID="lnkbtnPatchTolerance" runat="server" class="button" OnClientClick="javascript:return ConfirmTotalPatchPreset();"
-             onclick="lnkbtnPatchTolerance_Click" Visible="false">
+             onclick="lnkbtnPatchTolerance_Click">
                 <span>
                     <asp:Image ID="Image1" runat="server" 
                 ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddPMTPResource1" />
@@ -115,13 +117,13 @@
     <div class="clear">
     </div>
     <div style="margin-left: 10px;">
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
+       <%-- <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>--%>
                 <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
                     Visible="False" />
                 <telerik:RadGrid ID="rgMetricTargetPreset" AllowFilteringByColumn="True" AllowSorting="True"
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
-                    OnNeedDataSource="rgMetricTargetPreset_NeedDataSource" OnItemCommand="rgMetricTargetPreset_ItemCommand"
+                    OnNeedDataSource="rgMetricTargetPreset_NeedDataSource" OnItemCommand="rgMetricTargetPreset_ItemCommand" 
                     Width="98%" CellSpacing="0" GridLines="None" 
                     meta:resourcekey="rgMetricTargetPresetResource1">
                     <GroupingSettings CaseSensitive="False" />
@@ -254,9 +256,10 @@
                         </Columns>                        
                     </MasterTableView>                    
                 </telerik:RadGrid>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+           <%-- </ContentTemplate>
+        </asp:UpdatePanel>--%>
     </div>
+   
 </div>
 <div class="admin_bottom">
     &nbsp;</div>

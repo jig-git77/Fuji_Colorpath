@@ -50,7 +50,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgMetricTargetPreset.PageSize = Common.Utilities.PageSize;
             if (!Page.IsPostBack)
             {
-                lnkbtnPatchTolerance.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance);
                 BindMetricTargetPresets();
             }
         }
@@ -62,18 +61,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
             MetricTargetPresetList = new List<Entity.CPSyncV.MetricTargetPreset>();
             _presenterMetricTargetPresetManagement.GetMetricTargetPatchPresets();
 
+            CheckLimit4Add();
+        }
+
+        private void CheckLimit4Add()
+        {
             //-----Code to check limit of 3 for Company Admin, for adding new Patch Presets-----//
             if (MetricTargetPresetList.Count > 0)
             {
-                for (int i = 0; i < MetricTargetPresetList.Count; i++)
+                if (MetricTargetPresetList.Contains(MetricTargetPresetList.Find(item => item.Company.CompanyId == SessionManager.Instance.CurrentUser.UserCompany.CompanyId)))
                 {
-                    if (MetricTargetPresetList[i].Company.CompanyId == SessionManager.Instance.CurrentUser.UserCompany.CompanyId)
-                    {
-                        TotalPatchPresets++;
-                    }
+                    List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPresetList1 = new List<Entity.CPSyncV.MetricTargetPreset>();
+                    MetricTargetPresetList1 = MetricTargetPresetList.FindAll(item => item.Company.CompanyId == SessionManager.Instance.CurrentUser.UserCompany.CompanyId).ToList();
+                    TotalPatchPresets = MetricTargetPresetList1.Count;
                 }
             }
         }
+
         private void BindMetricTargetPresets()
         {
             GetMetricTargetPresets();
@@ -109,6 +113,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case "Delete":
                     MetricTargetPreset.MetricTargetPresetID = Convert.ToInt32(e.CommandArgument);
                     _presenterMetricTargetPresetManagement.DeleteMetricTargetPreset();
+                  
+                    GetMetricTargetPresets();
+                    rgMetricTargetPreset.MasterTableView.Rebind();
                     break;
                 case "Edit":
                     MetricTargetPreset.MetricTargetPresetID = Convert.ToInt32(e.CommandArgument);
@@ -121,6 +128,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
             }
         }
+      
         protected void rgMetricTargetPreset_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             GetMetricTargetPresets();
@@ -141,7 +149,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Entity.CPSyncV.MetricTargetPreset MetricTargetPreset { get; set; }
         public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPresetList { get; set; }
         #endregion
-
       
     }
 }

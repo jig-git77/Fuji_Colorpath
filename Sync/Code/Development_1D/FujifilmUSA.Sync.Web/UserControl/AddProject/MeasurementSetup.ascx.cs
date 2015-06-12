@@ -299,13 +299,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     MeasurementDevices = MeasurementDevices.Where(x => x.InstrumentTypeId == 1 || x.InstrumentTypeId == 4).ToList();
                 }
+                else if (SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId == 2)  //I1-iSis and I1-iSis2
+                {
+                    MeasurementDevices = MeasurementDevices.Where(x => x.InstrumentTypeId == 2 || x.InstrumentTypeId == 8).ToList();
+                }
                 else if (SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId == 3)  //I1-IO and I1-IO-Pro2
                 {
                     MeasurementDevices = MeasurementDevices.Where(x => x.InstrumentTypeId == 3 || x.InstrumentTypeId == 5).ToList();
-                }
-                else  //I1-Sis
-                {
-                    MeasurementDevices = MeasurementDevices.Where(x => x.InstrumentTypeId == SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId).ToList();
                 }
             }
             if (!IsErrorOccured)
