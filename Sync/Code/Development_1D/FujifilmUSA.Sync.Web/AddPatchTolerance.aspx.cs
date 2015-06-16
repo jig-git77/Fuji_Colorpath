@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class AddPatchTolerance : System.Web.UI.Page
+    public partial class AddPatchTolerance : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

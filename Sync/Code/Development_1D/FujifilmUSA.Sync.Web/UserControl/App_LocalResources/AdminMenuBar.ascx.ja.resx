@@ -159,4 +159,7 @@
   <data name="locMetricTargetPresetResource1.Text" xml:space="preserve">
     <value>色差判定プリセット</value>
   </data>
+  <data name="locPatchPresetResource1.Text" xml:space="preserve">
+    <value>Patch Preset_ja</value>
+  </data>
 </root>

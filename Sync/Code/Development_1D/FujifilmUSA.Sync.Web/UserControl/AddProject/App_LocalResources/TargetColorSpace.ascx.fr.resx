@@ -162,4 +162,7 @@
   <data name="locPatchResource1.Text" xml:space="preserve">
     <value>Patch_fr</value>
   </data>
+  <data name="locbtn_PaperClearResource1.Text" xml:space="preserve">
+    <value>Reset_fr</value>
+  </data>
 </root>

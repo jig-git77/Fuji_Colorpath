@@ -148,28 +148,28 @@
     <value>V_4D?</value>
   </data>
   <data name="imgbtnDeleteResource1.AlternateText" xml:space="preserve">
-    <value>Delete_de</value>
+    <value>löschen</value>
   </data>
   <data name="imgbtnDeleteResource1.Text" xml:space="preserve">
-    <value>Delete_de</value>
+    <value>löschen</value>
   </data>
   <data name="imgbtnDeleteResource1.Tooltip" xml:space="preserve">
-    <value>Delete MetricTargetPreset_de</value>
+    <value>löschen Voreinstellungen</value>
   </data>
   <data name="imgbtnEditResource1.AlternateText" xml:space="preserve">
-    <value>Edit_de</value>
+    <value>ändern</value>
   </data>
   <data name="imgbtnEditResource1.Text" xml:space="preserve">
-    <value>Edit_de</value>
+    <value>ändern</value>
   </data>
   <data name="imgbtnEditResource1.Tootltip" xml:space="preserve">
-    <value>Edit MetricTargetPreset_de</value>
+    <value>ändern Voreinstellungen</value>
   </data>
   <data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
-    <value>Clear Filter_de</value>
+    <value>Filter löschen</value>
   </data>
   <data name="imgClearFillterResource1.Tooltip" xml:space="preserve">
-    <value>Clear Filter_de</value>
+    <value>Filter löschen</value>
   </data>
   <data name="locAddMetricTargetPatchPresetResource1.Text" xml:space="preserve">
     <value>Voreinstellung f. Meßfeld hinzufügen</value>

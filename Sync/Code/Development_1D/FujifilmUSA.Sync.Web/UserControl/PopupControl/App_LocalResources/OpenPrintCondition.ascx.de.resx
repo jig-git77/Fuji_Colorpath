@@ -124,7 +124,7 @@
     <value>Aktuelle Messung {0} ist offen.</value>
   </data>
   <data name="currentRunIsOpenAndInactive" xml:space="preserve">
-    <value>Aktuelle Messung {0} ist geöffnet und seit{1} Tagen inaktiv._de</value>
+    <value>Aktuelle Messung {0} ist geöffnet und seit{1} Tagen inaktiv.</value>
   </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
     <value>Zurück</value>

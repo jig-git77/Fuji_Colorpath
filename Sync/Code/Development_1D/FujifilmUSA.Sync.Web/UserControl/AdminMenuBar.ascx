@@ -126,21 +126,21 @@
           CssClass="dock-item overlapobject" onclick="lbtnMetricTargetPreset_Click" >
             <img src="Images/application-configuration.png" style="position:relative;z-index:1; " alt="Metric Target Preset" />
             <span> <asp:Localize Text="Metric Target Preset" runat="server" 
-          ID="locMetricTargetPresetResource1"></asp:Localize> 
+          ID="locMetricTargetPreset" meta:resourcekey="locMetricTargetPresetResource1"></asp:Localize> 
             </span>
       </asp:LinkButton> 
       <asp:LinkButton ID="lbtnPatchPreset" runat="server" 
           CssClass="dock-item overlapobject" onclick="lbtnPatchPreset_Click" >
             <img src="Images/application-configuration.png" style="position:relative;z-index:1; " alt="Patch Preset" />
             <span> <asp:Localize Text="Patch Preset" runat="server" 
-          ID="locPatchPresetResource1"></asp:Localize> 
+          ID="locPatchPreset" meta:resourcekey="locPatchPresetResource1"></asp:Localize> 
             </span>
       </asp:LinkButton>
       <asp:LinkButton ID="lbtnPrintStandardType" runat="server" 
           CssClass="dock-item overlapobject" onclick="lbtnPrintStandardType_Click" >
             <img src="Images/application-configuration.png" style="position:relative;z-index:1; " alt="Print Standard Type" />
             <span> <asp:Localize Text="Print Standard Type" runat="server" 
-          ID="Localize2"></asp:Localize> 
+          ID="locPrintStandardType" meta:resourcekey="locPrintStandardTypeResource1"></asp:Localize> 
             </span>
       </asp:LinkButton>
       <asp:LinkButton ID="lbtnLookupTVILABDensity" runat="server" 
@@ -148,7 +148,7 @@
           onclick="lbtnLookupTVILABDensity_Click"  >
             <img src="Images/application-configuration.png" style="position:relative;z-index:1; " alt="Add Lookup TVILABDensity" />
             <span> <asp:Localize Text="Sync1D LAB TVI Density Values" runat="server" 
-          ID="Localize3"></asp:Localize> 
+          ID="locLookupTVILABDensity" meta:resourcekey="locLookupTVILABDensityResource1"></asp:Localize> 
             </span>
       </asp:LinkButton>
     

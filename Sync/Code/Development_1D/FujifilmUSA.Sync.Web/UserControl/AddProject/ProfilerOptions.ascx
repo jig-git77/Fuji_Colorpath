@@ -39,7 +39,7 @@
     function validateTVI(evt) {
        
         if (evt.charCode > 31 && evt.charCode != 46 && (evt.charCode < 48 || evt.charCode > 57)) {
-            alert("Allow Only Numbers");
+            alert('<%= ProfilerOptions_JavascriptAllownumbers %>');
             return false;
         }
     }
@@ -49,7 +49,7 @@
         var txtTVI = document.getElementById(txtValue.id);
         var txtTVIvalue = document.getElementById(txtValue.id).value;
         if (txtTVIvalue > 50) {
-            alert('TVI value should be between 0 to 50');
+            alert('<%= ProfilerOptions_JavascriptTVIRange %>');
             txtTVI.value = "";
             txtTVI.SetFocus();
             return false;
@@ -60,28 +60,12 @@
 
     }
 
-    function validateTVIThrRange(txtValue) {
-
-        var txtTVI = document.getElementById(txtValue.id);
-        var txtTVIvalue = document.getElementById(txtValue.id).value;
-        if (txtTVIvalue > 10) {
-            alert('TVI threashold value should be between 0 to 10');
-            txtTVI.value = "";
-            txtTVI.SetFocus();
-            return false;
-        }
-
-        else
-            return true;
-
-    }
-
     function validateDensityRange(txtValue) {
 
         var txtDensity = document.getElementById(txtValue.id);
         var txtDensityvalue = document.getElementById(txtValue.id).value;
         if (txtDensityvalue > 2) {
-            alert('Density value should be between 0 to 2');
+            alert('<%= ProfilerOptions_JavascriptDensityRange %>');
             txtDensity.value = "";
             txtDensity.SetFocus();
             return false;

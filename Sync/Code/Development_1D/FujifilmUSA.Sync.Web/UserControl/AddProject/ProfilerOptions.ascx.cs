@@ -21,6 +21,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        public string ProfilerOptions_JavascriptAllownumbers
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("ProfilerOptions_JavascriptAllownumbers");
+            }
+        }
+        public string ProfilerOptions_JavascriptTVIRange
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("ProfilerOptions_JavascriptTVIRange");
+            }
+        }
+        public string ProfilerOptions_JavascriptDensityRange
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("ProfilerOptions_JavascriptDensityRange");
+            }
+        }
         private const string _vsDeviceFamilyProfilerOption = "vsDeviceFamilyProfilerOption";
         private const string _vsDeviceFamilyMetricPresetOption = "vsDeviceFamilyMetricPresetOption";
         private const string _vsProfileRendering = "vsProfileRendering";

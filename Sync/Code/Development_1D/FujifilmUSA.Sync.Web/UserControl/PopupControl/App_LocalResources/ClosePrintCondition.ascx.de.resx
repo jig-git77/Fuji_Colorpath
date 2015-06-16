@@ -162,4 +162,7 @@
   <data name="printOptionsText" xml:space="preserve">
     <value>Optionen für Druckbedingung "{0}"</value>
   </data>
+  <data name="locViewDetailResource1.Text" xml:space="preserve">
+    <value>View Details_de</value>
+  </data>
 </root>

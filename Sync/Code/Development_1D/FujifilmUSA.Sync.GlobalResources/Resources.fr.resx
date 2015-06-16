@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,806 +59,805 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="metadata">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" />
-							</xsd:sequence>
-							<xsd:attribute name="name" use="required" type="xsd:string" />
-							<xsd:attribute name="type" type="xsd:string" />
-							<xsd:attribute name="mimetype" type="xsd:string" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="assembly">
-						<xsd:complexType>
-							<xsd:attribute name="alias" type="xsd:string" />
-							<xsd:attribute name="name" type="xsd:string" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="AddMeasurement_DeleteMeasurement_Confirmation" xml:space="preserve">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddMeasurement_DeleteMeasurement_Confirmation" xml:space="preserve">
     <value>Etes-vous sûre de vouloir supprimer toutes les informations des mesures sélectionnées?</value>
   </data>
-	<data name="BranchManagement_DeleteBranch_Confirmation" xml:space="preserve">
+  <data name="BranchManagement_DeleteBranch_Confirmation" xml:space="preserve">
     <value>Etes-vous sûre de vouloir supprimer les Divisions sélectionnées?</value>
   </data>
-	<data name="CompanyManagement_DeleteCompany_Confirmation" xml:space="preserve">
+  <data name="CompanyManagement_DeleteCompany_Confirmation" xml:space="preserve">
     <value>Etes-vous sûre de vouloir supprimer les Sociétés sélectionnées?</value>
   </data>
-	<data name="DeviceManagement_DeleteDevice_Confirmation" xml:space="preserve">
+  <data name="DeviceManagement_DeleteDevice_Confirmation" xml:space="preserve">
     <value>Etes-vous sûre de vouloir supprimer les Imprimantes sélectionnées?</value>
   </data>
-	<data name="Duplicate_InsertBranch" xml:space="preserve">
+  <data name="Duplicate_InsertBranch" xml:space="preserve">
     <value>Nom de Division déjà utilisé.</value>
   </data>
-	<data name="Duplicate_InsertCompany" xml:space="preserve">
+  <data name="Duplicate_InsertCompany" xml:space="preserve">
     <value>Nom de Société déjà utilisé.</value>
   </data>
-	<data name="Duplicate_InsertDevice" xml:space="preserve">
+  <data name="Duplicate_InsertDevice" xml:space="preserve">
     <value>Imprimante déjà utilisé pour cette Division.</value>
   </data>
-	<data name="Duplicate_InsertDeviceFamily" xml:space="preserve">
+  <data name="Duplicate_InsertDeviceFamily" xml:space="preserve">
     <value>Famille d'imprimante déjà existante.</value>
   </data>
-	<data name="Duplicate_InsertLicense" xml:space="preserve">
+  <data name="Duplicate_InsertLicense" xml:space="preserve">
     <value>Licence déjà utilisée pour cette Division.</value>
   </data>
-	<data name="Duplicate_InsertLicenseType" xml:space="preserve">
+  <data name="Duplicate_InsertLicenseType" xml:space="preserve">
     <value>Catégorie de Licence déjà existante.</value>
   </data>
-	<data name="Duplicate_InsertMeasurementDevice" xml:space="preserve">
+  <data name="Duplicate_InsertMeasurementDevice" xml:space="preserve">
     <value>Instrument de Mesure déjà existant.</value>
   </data>
-	<data name="Duplicate_InsertSourceProfile" xml:space="preserve">
+  <data name="Duplicate_InsertSourceProfile" xml:space="preserve">
     <value>Profil Source déjà existant.</value>
   </data>
-	<data name="Duplicate_InsertPrintStandardType" xml:space="preserve">
+  <data name="Duplicate_InsertPrintStandardType" xml:space="preserve">
     <value>Standard d'Imprimante déjà existant.</value>
   </data>
-	<data name="Duplicate_InsertUser" xml:space="preserve">
+  <data name="Duplicate_InsertUser" xml:space="preserve">
     <value>Email / Utilisateur déja existant.</value>
   </data>
-	<data name="Duplicate_UpdateBranch" xml:space="preserve">
+  <data name="Duplicate_UpdateBranch" xml:space="preserve">
     <value>Nom de Division déjà utilisé.</value>
   </data>
-	<data name="Duplicate_UpdateCompany" xml:space="preserve">
+  <data name="Duplicate_UpdateCompany" xml:space="preserve">
     <value>Nom de Société déjà utilisé.</value>
   </data>
-	<data name="Duplicate_UpdateDevice" xml:space="preserve">
+  <data name="Duplicate_UpdateDevice" xml:space="preserve">
     <value>Imprimante déjà utilisé pour cette Division.</value>
   </data>
-	<data name="Duplicate_UpdateLicense" xml:space="preserve">
+  <data name="Duplicate_UpdateLicense" xml:space="preserve">
     <value>Licence déjà utilisée pour cette Division.</value>
   </data>
-	<data name="Duplicate_UpdateReferenceChart" xml:space="preserve">
+  <data name="Duplicate_UpdateReferenceChart" xml:space="preserve">
     <value>Charte de Référence déjà existante.</value>
   </data>
-	<data name="Duplicate_UpdateSourceProfile" xml:space="preserve">
+  <data name="Duplicate_UpdateSourceProfile" xml:space="preserve">
     <value>Profil Source déjà existant.</value>
   </data>
-	<data name="Duplicate_UpdatePrintStandardType" xml:space="preserve">
+  <data name="Duplicate_UpdatePrintStandardType" xml:space="preserve">
     <value>Standard d'Imprimante déjà existant.</value>
   </data>
-	<data name="Duplicate_UpdateUser" xml:space="preserve">
+  <data name="Duplicate_UpdateUser" xml:space="preserve">
     <value>Email / Utilisateur déja existant.</value>
   </data>
-	<data name="ELicenseType_DLP" xml:space="preserve">
+  <data name="ELicenseType_DLP" xml:space="preserve">
     <value>Optimisation DLP</value>
   </data>
-	<data name="ELicenseType_IccProfiling" xml:space="preserve">
+  <data name="ELicenseType_IccProfiling" xml:space="preserve">
     <value>Profilage ICC</value>
   </data>
-	<data name="ELicenseType_InkOptimization" xml:space="preserve">
+  <data name="ELicenseType_InkOptimization" xml:space="preserve">
     <value>Ink Optimization</value>
   </data>
-	<data name="ELicenseType_InkOptimization_Source" xml:space="preserve">
+  <data name="ELicenseType_InkOptimization_Source" xml:space="preserve">
     <value>Ink Optimization Source</value>
   </data>
-	<data name="ELicenseType_Sync4DCertification" xml:space="preserve">
+  <data name="ELicenseType_Sync4DCertification" xml:space="preserve">
     <value>Sync4D Certification</value>
   </data>
-	<data name="ELicenseType_None" xml:space="preserve">
+  <data name="ELicenseType_None" xml:space="preserve">
     <value>INVALIDE</value>
   </data>
-	<data name="ELicenseType_Sync1D" xml:space="preserve">
+  <data name="ELicenseType_Sync1D" xml:space="preserve">
     <value>Alignment Curves</value>
   </data>
-	<data name="ELicenseType_Validation" xml:space="preserve">
+  <data name="ELicenseType_Validation" xml:space="preserve">
     <value>Validation Couleur</value>
   </data>
-	<data name="Email_Subject_SendPasswordForceResetEmail" xml:space="preserve">
+  <data name="Email_Subject_SendPasswordForceResetEmail" xml:space="preserve">
     <value>ColorPath - Réinitialiser Mot de Passe</value>
   </data>
-	<data name="Email_Subject_SendPasswordResetEmail" xml:space="preserve">
+  <data name="Email_Subject_SendPasswordResetEmail" xml:space="preserve">
     <value>ColorPath - Réinitialiser Mot de Passe</value>
   </data>
-	<data name="Email_Subject_SendUserCreatedEmail" xml:space="preserve">
+  <data name="Email_Subject_SendUserCreatedEmail" xml:space="preserve">
     <value>Bienvenue sur ColorPath</value>
   </data>
-	<data name="Error_CloseOptimizeRun" xml:space="preserve">
+  <data name="Error_CloseOptimizeRun" xml:space="preserve">
     <value>Erreur rencontrée durant la finalisation de l'Optimisation. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_CreateInitialDestinationAndDeviceLinkProfiles" xml:space="preserve">
+  <data name="Error_CreateInitialDestinationAndDeviceLinkProfiles" xml:space="preserve">
     <value>Erreur rencontrée durant la création du DLP. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_CreateOptimizeRun" xml:space="preserve">
+  <data name="Error_CreateOptimizeRun" xml:space="preserve">
     <value>Erreur rencontrée durant la création de l'Optimisation. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_CreateReferenceChart" xml:space="preserve">
+  <data name="Error_CreateReferenceChart" xml:space="preserve">
     <value>Erreur rencontrée durant la sauvegarde des données de la Charte de référence. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_DeleteBranch" xml:space="preserve">
+  <data name="Error_DeleteBranch" xml:space="preserve">
     <value>Erreur rencontrée durant la suppression de la Division. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_DeleteCompany" xml:space="preserve">
+  <data name="Error_DeleteCompany" xml:space="preserve">
     <value>Erreur rencontrée durant la suppression de la Société. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_DeleteDevice" xml:space="preserve">
+  <data name="Error_DeleteDevice" xml:space="preserve">
     <value>Erreur rencontrée durant la suppression de l'Imprimante. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_DeleteLicense" xml:space="preserve">
+  <data name="Error_DeleteLicense" xml:space="preserve">
     <value>Erreur rencontrée durant la suppression de la Licence. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_DeleteMeasurement" xml:space="preserve">
+  <data name="Error_DeleteMeasurement" xml:space="preserve">
     <value>Erreur rencontrée durant la finalisation de l'Optimisation. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_DeleteMeasurementDevice" xml:space="preserve">
+  <data name="Error_DeleteMeasurementDevice" xml:space="preserve">
     <value>Erreur rencontrée durant la suppression de l'Instrument de Mesure. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_DeleteOptimizeRun" xml:space="preserve">
+  <data name="Error_DeleteOptimizeRun" xml:space="preserve">
     <value>Erreur rencontrée durant la suppression de l'Optimisation. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_DeleteOptimizeRunDLP" xml:space="preserve">
+  <data name="Error_DeleteOptimizeRunDLP" xml:space="preserve">
     <value>Erreur rencontrée durant la suppression de l'optimisation du DLP. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_DeleteProject" xml:space="preserve">
+  <data name="Error_DeleteProject" xml:space="preserve">
     <value>Erreur rencontrée durant la suppression du Projet. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_DeleteSourceProfile" xml:space="preserve">
+  <data name="Error_DeleteSourceProfile" xml:space="preserve">
     <value>Erreur rencontrée durant la suppression du Profil Source. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_DeletePrintStandardType" xml:space="preserve">
+  <data name="Error_DeletePrintStandardType" xml:space="preserve">
     <value>Erreur rencontrée durant la suppression du Standard d'Impression. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_DeleteUser" xml:space="preserve">
+  <data name="Error_DeleteUser" xml:space="preserve">
     <value>Erreur rencontrée durant la suppression des Informations Utilisateur. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetAllRegions" xml:space="preserve">
+  <data name="Error_GetAllRegions" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Régions. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetAnalyzeChartMeasurement" xml:space="preserve">
+  <data name="Error_GetAnalyzeChartMeasurement" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Mesures de la Charte. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetApplicationConfigurations" xml:space="preserve">
+  <data name="Error_GetApplicationConfigurations" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des données de configuration de l'Application. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetAvgDeltaMeasurement" xml:space="preserve">
+  <data name="Error_GetAvgDeltaMeasurement" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Informations de Mesure. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetBranch" xml:space="preserve">
+  <data name="Error_GetBranch" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Divisions. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetBranchList" xml:space="preserve">
+  <data name="Error_GetBranchList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Divisions. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetChartPreviewOnOptimizeRunId" xml:space="preserve">
+  <data name="Error_GetChartPreviewOnOptimizeRunId" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la prévisualisation de la Charte. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetCompaniesByRegion" xml:space="preserve">
+  <data name="Error_GetCompaniesByRegion" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Régions selon les Sociétés. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetCompany" xml:space="preserve">
+  <data name="Error_GetCompany" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Société. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetCompanyList" xml:space="preserve">
+  <data name="Error_GetCompanyList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Société. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetDestinationProfile" xml:space="preserve">
+  <data name="Error_GetDestinationProfile" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération du Profil de Destination. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetDevice" xml:space="preserve">
+  <data name="Error_GetDevice" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Imprimantes. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetDeviceFamilyList" xml:space="preserve">
+  <data name="Error_GetDeviceFamilyList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Imprimantes. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetDeviceFamilyProfilerOptionPreset" xml:space="preserve">
+  <data name="Error_GetDeviceFamilyProfilerOptionPreset" xml:space="preserve">
     <value>Error occured while retrieving device family profiler option presets. Please contact your administrator.</value>
   </data>
-	<data name="Error_GetDeviceLinkProfile" xml:space="preserve">
+  <data name="Error_GetDeviceLinkProfile" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Profils Device Ink. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetDeviceListById" xml:space="preserve">
+  <data name="Error_GetDeviceListById" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Informations d'Imprimante. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetIccProfileBySourceProfile" xml:space="preserve">
+  <data name="Error_GetIccProfileBySourceProfile" xml:space="preserve">
     <value>Erreur rencontrée durant l'obtention du Profil Source. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetIlluminantList" xml:space="preserve">
+  <data name="Error_GetIlluminantList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Illuminants. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetInstrumentTypeList" xml:space="preserve">
+  <data name="Error_GetInstrumentTypeList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Instruments. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetLastOptimizedDlp" xml:space="preserve">
+  <data name="Error_GetLastOptimizedDlp" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la dernière Optimisation du DLP. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetLastOptimizeRunId" xml:space="preserve">
+  <data name="Error_GetLastOptimizeRunId" xml:space="preserve">
     <value>Erreur rencontrée durant l'obtention de la dernière Optimisation. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetLastRunStatus" xml:space="preserve">
+  <data name="Error_GetLastRunStatus" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des données de status. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetLicense" xml:space="preserve">
+  <data name="Error_GetLicense" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Licences. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetLicenseList" xml:space="preserve">
+  <data name="Error_GetLicenseList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la dernière Optimisation du DLP. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetLicenseTypeList" xml:space="preserve">
+  <data name="Error_GetLicenseTypeList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Licences. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetMeasurementData" xml:space="preserve">
+  <data name="Error_GetMeasurementData" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Mesures. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetMeasurementDevice" xml:space="preserve">
+  <data name="Error_GetMeasurementDevice" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Informations de Mesure. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetMeasurementDeviceList" xml:space="preserve">
+  <data name="Error_GetMeasurementDeviceList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Instruments de Mesure. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetMeasurementDevices" xml:space="preserve">
+  <data name="Error_GetMeasurementDevices" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Instruments de Mesure. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetMeasurementsOnRunId" xml:space="preserve">
+  <data name="Error_GetMeasurementsOnRunId" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Mesures. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetObserverTypeList" xml:space="preserve">
+  <data name="Error_GetObserverTypeList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Observateurs. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetPatchDetailsofMeasurement" xml:space="preserve">
+  <data name="Error_GetPatchDetailsofMeasurement" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Informations de Mesure. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetPrintActivities" xml:space="preserve">
+  <data name="Error_GetPrintActivities" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des données d'impression. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetPrintConditionPreviewData" xml:space="preserve">
+  <data name="Error_GetPrintConditionPreviewData" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la prévisualisation des données du Projet. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetProjectDetail" xml:space="preserve">
+  <data name="Error_GetProjectDetail" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des détails du Projet. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetProjectOption" xml:space="preserve">
+  <data name="Error_GetProjectOption" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des options du Projet. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetProjectsByDeviceId" xml:space="preserve">
+  <data name="Error_GetProjectsByDeviceId" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Projets. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetProjectTypeList" xml:space="preserve">
+  <data name="Error_GetProjectTypeList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Informations. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetReferenceChartData" xml:space="preserve">
+  <data name="Error_GetReferenceChartData" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la Charte de Référence. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetReferenceChartForLabCalculation" xml:space="preserve">
+  <data name="Error_GetReferenceChartForLabCalculation" xml:space="preserve">
     <value>Erreur rencontrée durant la vérification du lien entre le Profil Source et la Charte. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetReferenceCharts" xml:space="preserve">
+  <data name="Error_GetReferenceCharts" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Informations de la Charte. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetReferenceChartsForXmf" xml:space="preserve">
+  <data name="Error_GetReferenceChartsForXmf" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Informations de la Charte. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetReferenceChartTypeList" xml:space="preserve">
+  <data name="Error_GetReferenceChartTypeList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Chartes de Référence. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetRegionList" xml:space="preserve">
+  <data name="Error_GetRegionList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Régions. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetRegions" xml:space="preserve">
+  <data name="Error_GetRegions" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Régions. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetSecurityQuestions" xml:space="preserve">
+  <data name="Error_GetSecurityQuestions" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Informations d'Utilisateur. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetSourceProfile" xml:space="preserve">
+  <data name="Error_GetSourceProfile" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération du Profil Source. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetSourceProfileByCompany" xml:space="preserve">
+  <data name="Error_GetSourceProfileByCompany" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Profils Source. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetSourceProfileInformation" xml:space="preserve">
+  <data name="Error_GetSourceProfileInformation" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Informations du Profil. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetSourceProfileList" xml:space="preserve">
+  <data name="Error_GetSourceProfileList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Profils Source. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetTemplate" xml:space="preserve">
+  <data name="Error_GetTemplate" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des modèles. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetUser" xml:space="preserve">
+  <data name="Error_GetUser" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération de la liste des Utilisateurs. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetUserAuthenticationInformation" xml:space="preserve">
+  <data name="Error_GetUserAuthenticationInformation" xml:space="preserve">
     <value>Erreur rencontrée durant l'authentification Utilisateur/Mot de Passe.</value>
   </data>
-	<data name="Error_GetUserRoleList" xml:space="preserve">
+  <data name="Error_GetUserRoleList" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Rôles Utilisateur. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_InsertBranch" xml:space="preserve">
+  <data name="Error_InsertBranch" xml:space="preserve">
     <value>Erreur rencontrée durant l'introduction de la Division. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_InsertCompany" xml:space="preserve">
+  <data name="Error_InsertCompany" xml:space="preserve">
     <value>Erreur rencontrée durant l'introduction de la Société. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_InsertDevice" xml:space="preserve">
+  <data name="Error_InsertDevice" xml:space="preserve">
     <value>Erreur rencontrée durant l'introduction de l'Imprimante. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_InsertDeviceFamily" xml:space="preserve">
+  <data name="Error_InsertDeviceFamily" xml:space="preserve">
     <value>Erreur rencontrée durant l'introduction de la famille d'Imprimante. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_InsertLicense" xml:space="preserve">
+  <data name="Error_InsertLicense" xml:space="preserve">
     <value>Erreur rencontrée durant l'introduction de la Licence. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_InsertLicenseType" xml:space="preserve">
+  <data name="Error_InsertLicenseType" xml:space="preserve">
     <value>Erreur rencontrée durant l'introduction de la catégorie de Licence. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_InsertMeasurementDevice" xml:space="preserve">
+  <data name="Error_InsertMeasurementDevice" xml:space="preserve">
     <value>Erreur rencontrée durant l'introduction des Instruments de mesure. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_InsertReferenceLabData" xml:space="preserve">
+  <data name="Error_InsertReferenceLabData" xml:space="preserve">
     <value>Erreur rencontrée durant l'introduction des Références Lab. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_InsertSourceProfile" xml:space="preserve">
+  <data name="Error_InsertSourceProfile" xml:space="preserve">
     <value>Erreur rencontrée durant l'introduction des Profils Source. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_InsertPrintStandardType" xml:space="preserve">
+  <data name="Error_InsertPrintStandardType" xml:space="preserve">
     <value>Erreur rencontrée durant l'introduction des Standards d'Impression. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_InsertUser" xml:space="preserve">
+  <data name="Error_InsertUser" xml:space="preserve">
     <value>Erreur rencontrée durant l'introduction des Informations Utilisateur. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_NoPermission" xml:space="preserve">
+  <data name="Error_NoPermission" xml:space="preserve">
     <value>Informations d'Utilisateur valide mais ne dispose pas des autorisations necessaires.</value>
   </data>
-	<data name="Error_OptimizeDeviceLinkProfile" xml:space="preserve">
+  <data name="Error_OptimizeDeviceLinkProfile" xml:space="preserve">
     <value>Erreur rencontrée durant l'optimisation du DLP. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_ReferenceChart_ColumnConvertFailedOnRow" xml:space="preserve">
+  <data name="Error_ReferenceChart_ColumnConvertFailedOnRow" xml:space="preserve">
     <value>Echec de la conversion de la ligne {0}.</value>
   </data>
-	<data name="Error_ReferenceChart_ColumnCountNotMatch" xml:space="preserve">
+  <data name="Error_ReferenceChart_ColumnCountNotMatch" xml:space="preserve">
     <value>Le nombre de Colonne ne correpond pas au format désiré.</value>
   </data>
-	<data name="Error_ReferenceChart_ColumnCountNotMatchOnRow" xml:space="preserve">
+  <data name="Error_ReferenceChart_ColumnCountNotMatchOnRow" xml:space="preserve">
     <value>Le nombre de Colonne ne correspond pas à la ligne {0} avec le format désiré.</value>
   </data>
-	<data name="Error_ReferenceChart_ColumnEmptyValueOnRow" xml:space="preserve">
+  <data name="Error_ReferenceChart_ColumnEmptyValueOnRow" xml:space="preserve">
     <value>La valeur ne correspond pas à la valeur de la  ligne {0}.</value>
   </data>
-	<data name="Error_ReferenceChart_ColumnNamesNotMatch" xml:space="preserve">
+  <data name="Error_ReferenceChart_ColumnNamesNotMatch" xml:space="preserve">
     <value>Le nombre de Colonne ne correpond pas au format désiré.</value>
   </data>
-	<data name="Error_ReferenceChart_MissingEditFile" xml:space="preserve">
+  <data name="Error_ReferenceChart_MissingEditFile" xml:space="preserve">
     <value>Données chargées manquantes.Vérifier si vous avez chargé la prévisualisation de la Charte/ la Charte d'origine.</value>
   </data>
-	<data name="Error_ReferenceChart_MissingUploadFile" xml:space="preserve">
+  <data name="Error_ReferenceChart_MissingUploadFile" xml:space="preserve">
     <value>Données chargées manquantes.Vérifier si vous avez chargé la prévisualisation de la Charte/ la Charte d'origine/ les données de référence (c,m,y,k,HTML_RGB).</value>
   </data>
-	<data name="Error_SaveMeasurement" xml:space="preserve">
+  <data name="Error_SaveMeasurement" xml:space="preserve">
     <value>Erreur rencontrée durant la sauvegarde des Mesures. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_SaveProject" xml:space="preserve">
+  <data name="Error_SaveProject" xml:space="preserve">
     <value>Erreur rencontrée durant la sauvegarde du Project. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_SendEmailToUser" xml:space="preserve">
+  <data name="Error_SendEmailToUser" xml:space="preserve">
     <value>Erreur rencontrée durant l'introduction des Informations Utilisateur. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_StoreTempararyProjectInformation" xml:space="preserve">
+  <data name="Error_StoreTempararyProjectInformation" xml:space="preserve">
     <value>Erreur rencontrée durant l'Introduction des Informations de Projet. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdateBranch" xml:space="preserve">
+  <data name="Error_UpdateBranch" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour de la Division. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdateCompany" xml:space="preserve">
+  <data name="Error_UpdateCompany" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour de la Société. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdateDevice" xml:space="preserve">
+  <data name="Error_UpdateDevice" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour de l'Imprimante. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdateLicense" xml:space="preserve">
+  <data name="Error_UpdateLicense" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour de la Licence. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdateMeasurementByAnalyzeChart" xml:space="preserve">
+  <data name="Error_UpdateMeasurementByAnalyzeChart" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour des Mesures (isused flag). Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdateMeasurementDevice" xml:space="preserve">
+  <data name="Error_UpdateMeasurementDevice" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour des Instruments de Mesure. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdatePassword" xml:space="preserve">
+  <data name="Error_UpdatePassword" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour des Informations d'Utilisateur. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdatePreResetPasswordInformation" xml:space="preserve">
+  <data name="Error_UpdatePreResetPasswordInformation" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour des Informations d'Utilisateur. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdateReferenceChart" xml:space="preserve">
+  <data name="Error_UpdateReferenceChart" xml:space="preserve">
     <value>Erreur rencontrée durant a mise a jour de la Charte de Référence. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdateSecurityInformation" xml:space="preserve">
+  <data name="Error_UpdateSecurityInformation" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour des Informations d'Utilisateur. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdateSourceProfile" xml:space="preserve">
+  <data name="Error_UpdateSourceProfile" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour des Profils Source. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdatePrintStandardType" xml:space="preserve">
+  <data name="Error_UpdatePrintStandardType" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour des Standards d'Impression. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdateUser" xml:space="preserve">
+  <data name="Error_UpdateUser" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour des Informations d'Utilisateur. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdateUserAuthenticationInformation" xml:space="preserve">
+  <data name="Error_UpdateUserAuthenticationInformation" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour des Informations d'Utilisateur. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UserLogin" xml:space="preserve">
+  <data name="Error_UserLogin" xml:space="preserve">
     <value>Erreur rencontrée durant l'authentification Utilisateur/Mot de Passe.</value>
   </data>
-	<data name="LicenseManagement_DeleteLicense_Confirmation" xml:space="preserve">
+  <data name="LicenseManagement_DeleteLicense_Confirmation" xml:space="preserve">
     <value>Etes-vous sûre de vouloir supprimer la licence sélectionnée? Toutes les Imprimantes, Mesures et Projets relatif seront supprimés. Etes-vous sûre de tout vouloir supprimer?</value>
   </data>
-	<data name="Login_InvalidLogin" xml:space="preserve">
+  <data name="Login_InvalidLogin" xml:space="preserve">
     <value>Identfiant/Mot de Passe Incorrect.</value>
   </data>
-	<data name="MeasurementDeviceList_DeleteMeasurementDevice_Confirmation" xml:space="preserve">
+  <data name="MeasurementDeviceList_DeleteMeasurementDevice_Confirmation" xml:space="preserve">
     <value>Etes-vous sûre de vouloir supprimer toutes les informations des Instruments de Mesure sélectionnées?</value>
   </data>
-	<data name="ProjectList_DeleteProject_Confirmation" xml:space="preserve">
+  <data name="ProjectList_DeleteProject_Confirmation" xml:space="preserve">
     <value>Etes-vous sûre de vouloir supprimer toutes les informations des Projets sélectionnés?</value>
   </data>
-	<data name="SourceProfileManagement_DeleteSourceProfile_Confirmation" xml:space="preserve">
+  <data name="SourceProfileManagement_DeleteSourceProfile_Confirmation" xml:space="preserve">
     <value>Etes-vous sûre de vouloir supprimer le Profil Source sélectionné?</value>
   </data>
-	<data name="UserManagement_DeleteUser_Confirmation" xml:space="preserve">
+  <data name="UserManagement_DeleteUser_Confirmation" xml:space="preserve">
     <value>Etes-vous sûre de vouloir supprimer les Utilisateurs sélectionnés?</value>
   </data>
-	<data name="Fields_Marked_With_Are_Required" xml:space="preserve">
+  <data name="Fields_Marked_With_Are_Required" xml:space="preserve">
     <value>&lt;span&gt; Champs marqués par (&lt;span style=\"color: Red;\"&gt;*&lt;/span&gt;) sont Obligatoire &lt;/span&gt;</value>
   </data>
-	<data name="EInstrumentType_i1Pro" xml:space="preserve">
+  <data name="EInstrumentType_i1Pro" xml:space="preserve">
     <value>i1-Pro</value>
   </data>
-	<data name="EInstrumentType_i1Sis" xml:space="preserve">
+  <data name="EInstrumentType_i1Sis" xml:space="preserve">
     <value>i1-Sis</value>
   </data>
-	<data name="EInstrumentType_i1IO" xml:space="preserve">
+  <data name="EInstrumentType_i1IO" xml:space="preserve">
     <value>i1-IO</value>
   </data>
-	<data name="EInstrumentType_i1Pro2" xml:space="preserve">
+  <data name="EInstrumentType_i1Pro2" xml:space="preserve">
     <value>i1-Pro2</value>
   </data>
-	<data name="EInstrumentType_i1IOPro2" xml:space="preserve">
+  <data name="EInstrumentType_i1IOPro2" xml:space="preserve">
     <value>i1-IO-Pro2</value>
   </data>
-	<data name="EProfileRendering_eCLAbsLightenerCompensationRI" xml:space="preserve">
+  <data name="EProfileRendering_eCLAbsLightenerCompensationRI" xml:space="preserve">
     <value>AbsLightenerCompensation</value>
   </data>
-	<data name="EProfileRendering_eCLAbsoluteCompressionRI" xml:space="preserve">
+  <data name="EProfileRendering_eCLAbsoluteCompressionRI" xml:space="preserve">
     <value>AbsoluteCompression</value>
   </data>
-	<data name="EProfileRendering_eCLAbsolutePerceptualRI" xml:space="preserve">
+  <data name="EProfileRendering_eCLAbsolutePerceptualRI" xml:space="preserve">
     <value>AbsolutePerceptual</value>
   </data>
-	<data name="EProfileRendering_eCLAbsoluteRI" xml:space="preserve">
+  <data name="EProfileRendering_eCLAbsoluteRI" xml:space="preserve">
     <value>pAbsolute</value>
   </data>
-	<data name="EProfileRendering_eCLBlackCompensationRI" xml:space="preserve">
+  <data name="EProfileRendering_eCLBlackCompensationRI" xml:space="preserve">
     <value>BlackCompensation</value>
   </data>
-	<data name="EProfileRendering_eCLGamutCompressionRI" xml:space="preserve">
+  <data name="EProfileRendering_eCLGamutCompressionRI" xml:space="preserve">
     <value>GamutCompression</value>
   </data>
-	<data name="EProfileRendering_eCLMinimumBlackCompressionRI" xml:space="preserve">
+  <data name="EProfileRendering_eCLMinimumBlackCompressionRI" xml:space="preserve">
     <value>MinBlackCompression</value>
   </data>
-	<data name="EProfileRendering_eCLMinimumCompressionRI" xml:space="preserve">
+  <data name="EProfileRendering_eCLMinimumCompressionRI" xml:space="preserve">
     <value>MinCompression</value>
   </data>
-	<data name="EProfileRendering_eCLMinimumWhiteCompressionRI" xml:space="preserve">
+  <data name="EProfileRendering_eCLMinimumWhiteCompressionRI" xml:space="preserve">
     <value>MinWhiteCompression</value>
   </data>
-	<data name="EProfileRendering_eCLPerceptualCompressionRI" xml:space="preserve">
+  <data name="EProfileRendering_eCLPerceptualCompressionRI" xml:space="preserve">
     <value>PerceptualCompression</value>
   </data>
-	<data name="EProfileRendering_eCLRelativeCompressionRI" xml:space="preserve">
+  <data name="EProfileRendering_eCLRelativeCompressionRI" xml:space="preserve">
     <value>RelativeCompression</value>
   </data>
-	<data name="EProfileRendering_eCLRelativeLightness" xml:space="preserve">
+  <data name="EProfileRendering_eCLRelativeLightness" xml:space="preserve">
     <value>RelativeLightness</value>
   </data>
-	<data name="EProfileRendering_eCLRelativeRI" xml:space="preserve">
+  <data name="EProfileRendering_eCLRelativeRI" xml:space="preserve">
     <value>pRelative</value>
   </data>
-	<data name="EProfileRendering_icAbsoluteColorimetric" xml:space="preserve">
+  <data name="EProfileRendering_icAbsoluteColorimetric" xml:space="preserve">
     <value>Absolute</value>
   </data>
-	<data name="EProfileRendering_icPerceptual" xml:space="preserve">
+  <data name="EProfileRendering_icPerceptual" xml:space="preserve">
     <value>Perceptual</value>
   </data>
-	<data name="EProfileRendering_icRelativeColorimetric" xml:space="preserve">
+  <data name="EProfileRendering_icRelativeColorimetric" xml:space="preserve">
     <value>Relative</value>
   </data>
-	<data name="EProfileRendering_icSaturation" xml:space="preserve">
+  <data name="EProfileRendering_icSaturation" xml:space="preserve">
     <value>Saturation</value>
   </data>
-	<data name="EReferenceChartDisType_OptimizationChart" xml:space="preserve">
+  <data name="EReferenceChartDisType_OptimizationChart" xml:space="preserve">
     <value>Charte d'Optimisation</value>
   </data>
-	<data name="EReferenceChartDisType_ProfileChart" xml:space="preserve">
+  <data name="EReferenceChartDisType_ProfileChart" xml:space="preserve">
     <value>Charte de Profil</value>
   </data>
-	<data name="ERolePermission_CreateDeleteProject" xml:space="preserve">
+  <data name="ERolePermission_CreateDeleteProject" xml:space="preserve">
     <value>Créer Supprimer Projet</value>
   </data>
-	<data name="ERolePermission_ManageBranch" xml:space="preserve">
+  <data name="ERolePermission_ManageBranch" xml:space="preserve">
     <value>Gestion Division</value>
   </data>
-	<data name="ERolePermission_ManageCompany" xml:space="preserve">
+  <data name="ERolePermission_ManageCompany" xml:space="preserve">
     <value>Gestion Société</value>
   </data>
-	<data name="ERolePermission_ManageDevice" xml:space="preserve">
+  <data name="ERolePermission_ManageDevice" xml:space="preserve">
     <value>Gestion Imprimante</value>
   </data>
-	<data name="ERolePermission_ManageLicense" xml:space="preserve">
+  <data name="ERolePermission_ManageLicense" xml:space="preserve">
     <value>Gestion Licence</value>
   </data>
-	<data name="ERolePermission_ManageMeasurementDevice" xml:space="preserve">
+  <data name="ERolePermission_ManageMeasurementDevice" xml:space="preserve">
     <value>Gestion Instrument de Mesure</value>
   </data>
-	<data name="ERolePermission_ManageReferenceChart" xml:space="preserve">
+  <data name="ERolePermission_ManageReferenceChart" xml:space="preserve">
     <value>Gestion Charte de Référence</value>
   </data>
-	<data name="ERolePermission_ManageRegion" xml:space="preserve">
+  <data name="ERolePermission_ManageRegion" xml:space="preserve">
     <value>Gestion Région</value>
   </data>
-	<data name="ERolePermission_ManageSourceProfile" xml:space="preserve">
+  <data name="ERolePermission_ManageSourceProfile" xml:space="preserve">
     <value>Gestion Profil Source</value>
   </data>
-	<data name="ERolePermission_ManageUser" xml:space="preserve">
+  <data name="ERolePermission_ManageUser" xml:space="preserve">
     <value>Gestion Utilisateur</value>
   </data>
-	<data name="ERolePermission_ModifyProject" xml:space="preserve">
+  <data name="ERolePermission_ModifyProject" xml:space="preserve">
     <value>Modifier Projet</value>
   </data>
-	<data name="EUVIncludedMode_UV" xml:space="preserve">
+  <data name="EUVIncludedMode_UV" xml:space="preserve">
     <value>M0</value>
   </data>
-	<data name="EUVIncludedMode_PlusUV" xml:space="preserve">
+  <data name="EUVIncludedMode_PlusUV" xml:space="preserve">
     <value>M1</value>
   </data>
-	<data name="EUVIncludedMode_UVCut" xml:space="preserve">
+  <data name="EUVIncludedMode_UVCut" xml:space="preserve">
     <value>M2</value>
   </data>
-	<data name="CertificationStatusText" xml:space="preserve">
+  <data name="CertificationStatusText" xml:space="preserve">
     <value>Certification</value>
   </data>
-	<data name="DLPText" xml:space="preserve">
+  <data name="DLPText" xml:space="preserve">
     <value>DLP</value>
   </data>
-	<data name="OpenStatusText" xml:space="preserve">
+  <data name="OpenStatusText" xml:space="preserve">
     <value>Ouvrir</value>
   </data>
-	<data name="LogActivityType_ChangeProfile" xml:space="preserve">
+  <data name="LogActivityType_ChangeProfile" xml:space="preserve">
     <value>Modification Profil</value>
   </data>
-	<data name="LogActivityType_CreateDlp" xml:space="preserve">
+  <data name="LogActivityType_CreateDlp" xml:space="preserve">
     <value>Créer DLP</value>
   </data>
-	<data name="LogActivityType_CreateProject" xml:space="preserve">
+  <data name="LogActivityType_CreateProject" xml:space="preserve">
     <value>Créer Projet</value>
   </data>
-	<data name="LogActivityType_LoggedIn" xml:space="preserve">
+  <data name="LogActivityType_LoggedIn" xml:space="preserve">
     <value>Connecter en</value>
   </data>
-	<data name="LogActivityType_LoggedOut" xml:space="preserve">
+  <data name="LogActivityType_LoggedOut" xml:space="preserve">
     <value>Deconnexion</value>
   </data>
-	<data name="LogActivityType_None" xml:space="preserve">
+  <data name="LogActivityType_None" xml:space="preserve">
     <value>Aucun</value>
   </data>
-	<data name="LogActivityType_OptimizeDlp" xml:space="preserve">
+  <data name="LogActivityType_OptimizeDlp" xml:space="preserve">
     <value>Optimiser DLP</value>
   </data>
-	<data name="Error_GettingApplicationConfiguration" xml:space="preserve">
+  <data name="Error_GettingApplicationConfiguration" xml:space="preserve">
     <value>Erreur rencontrée durant la visualisation des valeurs de configuration.</value>
   </data>
-	<data name="Error_UpdateApplicationConfiguration" xml:space="preserve">
+  <data name="Error_UpdateApplicationConfiguration" xml:space="preserve">
     <value>Erreur rencontrée durant la mise à jour des valeurs de configuration.</value>
   </data>
-	<data name="LogActivityType_CreateDlpError" xml:space="preserve">
+  <data name="LogActivityType_CreateDlpError" xml:space="preserve">
     <value>Erreur Création DLP</value>
   </data>
-	<data name="LogActivityType_OptimizeDlpError" xml:space="preserve">
+  <data name="LogActivityType_OptimizeDlpError" xml:space="preserve">
     <value>Erreur Optimisation DLP</value>
   </data>
-	<data name="Duplicate_InsertReferenceChart" xml:space="preserve">
+  <data name="Duplicate_InsertReferenceChart" xml:space="preserve">
     <value>Charte de Référence déjà existante.</value>
   </data>
-	<data name="EReferenceChartDisType_ValidationChart" xml:space="preserve">
+  <data name="EReferenceChartDisType_ValidationChart" xml:space="preserve">
     <value>Charte de Validation</value>
   </data>
-	<data name="Error_ProfilerSettings_MissingUploadFile" xml:space="preserve">
+  <data name="Error_ProfilerSettings_MissingUploadFile" xml:space="preserve">
     <value>Données chargées manquantes.Vérifier si vous avez chargé les Paramètres de Profilage.</value>
   </data>
-	<data name="Duplicate_InsertDeviceFamilyProfilerOption" xml:space="preserve">
+  <data name="Duplicate_InsertDeviceFamilyProfilerOption" xml:space="preserve">
     <value>Option de famille d'Imprimante déja existant.</value>
   </data>
-	<data name="Error_InsertDeviceFamilyProfilerOption" xml:space="preserve">
+  <data name="Error_InsertDeviceFamilyProfilerOption" xml:space="preserve">
     <value>Erreur rencontrée durant l'Introduction des Option de famille d'Imprimante. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_InsertProfilerOptionPreset" xml:space="preserve">
+  <data name="Error_InsertProfilerOptionPreset" xml:space="preserve">
     <value>Erreur rencontrée durant l'Introduction des préréglages des Informations de Projet. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetChartData_G7_GrayF" xml:space="preserve">
+  <data name="Error_GetChartData_G7_GrayF" xml:space="preserve">
     <value>Erreur rencontrée durant la visualisation de la Charte G7 Gray ΔCh. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetChartData_G7_GrayFSummary" xml:space="preserve">
+  <data name="Error_GetChartData_G7_GrayFSummary" xml:space="preserve">
     <value>Erreur rencontrée durant la visualisation du Sommaire G7 Gray ΔCh. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetChartData_G7_BlackL" xml:space="preserve">
+  <data name="Error_GetChartData_G7_BlackL" xml:space="preserve">
     <value>Erreur rencontrée durant la visualisation de la Charte G7 Black ΔL. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetChartData_G7_BlackLSummary" xml:space="preserve">
+  <data name="Error_GetChartData_G7_BlackLSummary" xml:space="preserve">
     <value>Erreur rencontrée durant la visualisation du Sommaire G7 Black ΔL. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetChartData_G7_GrayL" xml:space="preserve">
+  <data name="Error_GetChartData_G7_GrayL" xml:space="preserve">
     <value>Erreur rencontrée durant la visualisation de la Charte G7 Gray ΔL. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetChartData_G7_GrayLSummary" xml:space="preserve">
+  <data name="Error_GetChartData_G7_GrayLSummary" xml:space="preserve">
     <value>Erreur rencontrée durant la visualisation du Sommaire G7 Gray ΔL. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetChartData_InkPaper_EPrimaryPatches" xml:space="preserve">
+  <data name="Error_GetChartData_InkPaper_EPrimaryPatches" xml:space="preserve">
     <value>Erreur rencontrée durant la visualisation Ink Paper ΔE Primary Patches chart. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetChartData_InkPaper_PaperLAB" xml:space="preserve">
+  <data name="Error_GetChartData_InkPaper_PaperLAB" xml:space="preserve">
     <value>Erreur rencontrée durant la visualisation Ink Paper LAB charts. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetChartData_GrayGamut1" xml:space="preserve">
+  <data name="Error_GetChartData_GrayGamut1" xml:space="preserve">
     <value>Erreur rencontrée durant la visualisation Gamut a*-b* Comparison chart. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetChartData_GrayGamut2" xml:space="preserve">
+  <data name="Error_GetChartData_GrayGamut2" xml:space="preserve">
     <value>Erreur rencontrée durant la visualisation Gamut L* Comparison chart. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetChartData_LABChart" xml:space="preserve">
+  <data name="Error_GetChartData_LABChart" xml:space="preserve">
     <value>Erreur rencontrée durant la visualisation Gamut LAB charts. Contacter votre Administrateur.</value>
   </data>
-	<data name="ValidationStatus_Disabled" xml:space="preserve">
+  <data name="ValidationStatus_Disabled" xml:space="preserve">
     <value>Validation est Désactivée</value>
   </data>
-	<data name="ValidationStatus_LastFailed" xml:space="preserve">
+  <data name="ValidationStatus_LastFailed" xml:space="preserve">
     <value>Echec de la dernière Validation</value>
   </data>
-	<data name="ValidationStatus_LastOK" xml:space="preserve">
+  <data name="ValidationStatus_LastOK" xml:space="preserve">
     <value>Dernière Validation OK</value>
   </data>
-	<data name="ValidationStatus_NoMeasurement" xml:space="preserve">
+  <data name="ValidationStatus_NoMeasurement" xml:space="preserve">
     <value>Pas de Mesure</value>
   </data>
-	<data name="ValidationStatus_None" xml:space="preserve">
+  <data name="ValidationStatus_None" xml:space="preserve">
     <value>Aucun</value>
   </data>
-	<data name="ValidationStatus_NotCertified" xml:space="preserve">
+  <data name="ValidationStatus_NotCertified" xml:space="preserve">
     <value>Non Certifié</value>
   </data>
-	<data name="ERolePermission_ManageActivityValidationRules" xml:space="preserve">
+  <data name="ERolePermission_ManageActivityValidationRules" xml:space="preserve">
     <value>Gestions des règles de validation d'activité</value>
   </data>
-	<data name="ERolePermission_ManageApplicationConfiguration" xml:space="preserve">
+  <data name="ERolePermission_ManageApplicationConfiguration" xml:space="preserve">
     <value>Gestion de la configuration de l'application</value>
   </data>
-	<data name="ERolePermission_ManageDeviceProfileSettings" xml:space="preserve">
+  <data name="ERolePermission_ManageDeviceProfileSettings" xml:space="preserve">
     <value>Gestion des paramètres de l'Imprimante</value>
   </data>
-	<data name="Login_PasswordSaved" xml:space="preserve">
+  <data name="Login_PasswordSaved" xml:space="preserve">
     <value>Activation de l'Utilisateur effectuée avec succès</value>
   </data>
-	<data name="JobName_LengthError" xml:space="preserve">
+  <data name="JobName_LengthError" xml:space="preserve">
     <value>Entrer un nom pour le travail avec au moins 4 caractères.</value>
   </data>
-	<data name="Duplicate_InsertMetricTargetPreset" xml:space="preserve">
+  <data name="Duplicate_InsertMetricTargetPreset" xml:space="preserve">
     <value>Préréglage des Cibles métrique déjà existant.</value>
   </data>
-	<data name="Duplicate_UpdateMetricTargetPreset" xml:space="preserve">
+  <data name="Duplicate_UpdateMetricTargetPreset" xml:space="preserve">
     <value>Préréglage des Cibles métrique déjà existant.</value>
   </data>
-	<data name="Error_DeleteMetricTargetPreset" xml:space="preserve">
+  <data name="Error_DeleteMetricTargetPreset" xml:space="preserve">
     <value>Erreur rencontrée durant la suppression du Préréglage des Cibles  métrique. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_GetMetricTargetPresets" xml:space="preserve">
+  <data name="Error_GetMetricTargetPresets" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération du Préréglage des Cibles  métrique. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_InsertMetricTargetPreset" xml:space="preserve">
+  <data name="Error_InsertMetricTargetPreset" xml:space="preserve">
     <value>Erreur rencontrée durant l'Introduction du Préréglage des Cibles  métrique. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdateMetricTargetPreset" xml:space="preserve">
+  <data name="Error_UpdateMetricTargetPreset" xml:space="preserve">
     <value>Erreur rencontrée durant la Mise à Jour du Préréglage des Cibles  métrique. Contacter votre Administrateur.</value>
   </data>
-	<data name="Validation_ProjectClosedError" xml:space="preserve">
+  <data name="Validation_ProjectClosedError" xml:space="preserve">
     <value>Ce Projet est fermé, la validation ne peut-être réalisée</value>
   </data>
-	<data name="MetricTargetPresetManagement_DeleteMetricTargetPreset_Confirmation" xml:space="preserve">
+  <data name="MetricTargetPresetManagement_DeleteMetricTargetPreset_Confirmation" xml:space="preserve">
     <value>Etes-vous sûre de vouloir supprimer le Préréglage des Cibles métrique sélectionné</value>
   </data>
-	<data name="PrintStandardTypeManagement_DeletePrintStandardType_Confirmation" xml:space="preserve">
+  <data name="PrintStandardTypeManagement_DeletePrintStandardType_Confirmation" xml:space="preserve">
     <value>Etes-vous sûre de vouloir supprimer le Standard d'Impression sélectionné?</value>
   </data>
-	<data name="Error_GetLanguages" xml:space="preserve">
+  <data name="Error_GetLanguages" xml:space="preserve">
     <value>Erreur rencontrée durant la récupération des Langages. Contacter votre Administrateur.</value>
   </data>
-	<data name="Error_UpdateLanguage" xml:space="preserve">
+  <data name="Error_UpdateLanguage" xml:space="preserve">
     <value>Erreur rencontrée durant la Mise a Jour des Informations d'Utilisateur. Contacter votre Administrateur.</value>
   </data>
-	<data name="Validation_ProjectOpenError" xml:space="preserve">
+  <data name="Validation_ProjectOpenError" xml:space="preserve">
     <value>Ce Projet est ouvert, la validation ne peut-être réalisée</value>
   </data>
-	<data name="Validation_NoMeasurements" xml:space="preserve">
+  <data name="Validation_NoMeasurements" xml:space="preserve">
     <value>Ce Projet n'est pas validé, la page d'Analyse ne peut-être affichée</value>
   </data>
-	<data name="PCSDataTypes_Spectral" xml:space="preserve">
+  <data name="PCSDataTypes_Spectral" xml:space="preserve">
     <value>Spectral</value>
   </data>
-	<data name="PCSDataTypes_Density" xml:space="preserve">
+  <data name="PCSDataTypes_Density" xml:space="preserve">
     <value>Densité</value>
   </data>
-	<data name="PCSDataTypes_XYZ" xml:space="preserve">
+  <data name="PCSDataTypes_XYZ" xml:space="preserve">
     <value>XYZ</value>
   </data>
-	<data name="DensityTypes_StatusT" xml:space="preserve">
+  <data name="DensityTypes_StatusT" xml:space="preserve">
     <value>StatusT</value>
   </data>
-	<data name="DensityTypes_StatusE" xml:space="preserve">
+  <data name="DensityTypes_StatusE" xml:space="preserve">
     <value>StatusE</value>
   </data>
-
   <data name="EInkOrder_KCMY" xml:space="preserve">
     <value>KCMY</value>
   </data>
@@ -925,10 +924,10 @@
   <data name="EInkOrder_YKCM" xml:space="preserve">
     <value>YKCM</value>
   </data>
-   <data name="EInkOrder_YKMC" xml:space="preserve">
+  <data name="EInkOrder_YKMC" xml:space="preserve">
     <value>YKMC</value>
   </data>
-   <data name="EInkOrder_YMKC" xml:space="preserve">
+  <data name="EInkOrder_YMKC" xml:space="preserve">
     <value>YMKC</value>
   </data>
   <data name="Error_InsertLookupTVILABDensity" xml:space="preserve">
@@ -942,5 +941,20 @@
   </data>
   <data name="PatchPresetManagement_HitLimitPatchPresets" xml:space="preserve">
     <value>You hit the limit of adding new Patch Presets. Please contact your Region Admin._fr</value>
+  </data>
+  <data name="AddPatchPreset_JavascriptTollimit1" xml:space="preserve">
+    <value>Allow Only Numbers_fr</value>
+  </data>
+  <data name="AddPatchPreset_JavascriptTollimit2" xml:space="preserve">
+    <value>Tolerance value should be between 0 to 10_fr</value>
+  </data>
+  <data name="ProfilerOptions_JavascriptAllownumbers" xml:space="preserve">
+    <value>Allow Only Numbers_fr</value>
+  </data>
+  <data name="ProfilerOptions_JavascriptTVIRange" xml:space="preserve">
+    <value>TVI value should be between 0 to 50_fr</value>
+  </data>
+  <data name="ProfilerOptions_JavascriptDensityRange" xml:space="preserve">
+    <value>Density value should be between 0 to 2_fr</value>
   </data>
 </root>

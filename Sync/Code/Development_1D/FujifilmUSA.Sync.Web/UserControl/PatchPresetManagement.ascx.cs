@@ -18,7 +18,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterMetricTargetPresetManagement _presenterMetricTargetPresetManagement;
         public int TotalPatchPresets = 0;
 
-         #region Declaration
+        #region Declaration
         public string PatchPresetManagement_DeletePatchPreset_Confirmation
          {
              get
@@ -33,7 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("PatchPresetManagement_HitLimitPatchPresets");
             }
         }
-         #endregion
+        #endregion
 
         public PatchPresetManagement()
         {

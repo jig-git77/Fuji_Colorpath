@@ -129,15 +129,6 @@
   <data name="lblHeaderResource1.Text" xml:space="preserve">
     <value>Add Metric Target Patch Level Preset_fr</value>
   </data>
-  <data name="rfvcAlignmentChartContainer" xml:space="preserve">
-    <value>Please select Validation chart._fr</value>
-  </data>
-  <data name="rfvcInstrumentTypeContainer" xml:space="preserve">
-    <value>Please select instrument type._fr</value>
-  </data>
-  <data name="rfvPresetContainer" xml:space="preserve">
-    <value>Please provide Preset name._fr</value>
-  </data>
   <data name="selectCompanyText" xml:space="preserve">
     <value>-- Select Company --_fr</value>
   </data>
@@ -152,5 +143,53 @@
   </data>
   <data name="errorTolMissing" xml:space="preserve">
     <value>Please provide Metric sum values and Patch Tolerance values._fr</value>
+  </data>
+  <data name="locCompanyNameResource1.Text" xml:space="preserve">
+    <value>Company Name_fr</value>
+  </data>
+  <data name="locDescriptionResource1.Text" xml:space="preserve">
+    <value>Description_fr</value>
+  </data>
+  <data name="locETypeResource1.Text" xml:space="preserve">
+    <value>ΔE Method_fr</value>
+  </data>
+  <data name="locInstrumentTypeResource1.Text" xml:space="preserve">
+    <value>Instrument Type_fr</value>
+  </data>
+  <data name="locIsActiveResource1.Text" xml:space="preserve">
+    <value>Is Active?_fr</value>
+  </data>
+  <data name="locMetricTargetPresetResource1.Text" xml:space="preserve">
+    <value>Patch Preset Management_fr</value>
+  </data>
+  <data name="locPresetNameResource1.Text" xml:space="preserve">
+    <value>Preset Name_fr</value>
+  </data>
+  <data name="locRegionResource1.Text" xml:space="preserve">
+    <value>Region_fr</value>
+  </data>
+  <data name="locValidationChartResource1.Text" xml:space="preserve">
+    <value>Validation Chart_fr</value>
+  </data>
+  <data name="provideAlignmentChartText" xml:space="preserve">
+    <value>Please select Validation chart._fr</value>
+  </data>
+  <data name="provideInstrumentTypeText" xml:space="preserve">
+    <value>Please select instrument type._fr</value>
+  </data>
+  <data name="providePresetNameText" xml:space="preserve">
+    <value>Please provide Preset name._fr</value>
+  </data>
+  <data name="locCancelResource1.Text" xml:space="preserve">
+    <value>Cancel_fr</value>
+  </data>
+  <data name="locPatchTargetsResource1.Text" xml:space="preserve">
+    <value>Patch Tolerances_fr</value>
+  </data>
+  <data name="locSaveResource1.Text" xml:space="preserve">
+    <value>Save_fr</value>
+  </data>
+  <data name="locTolerancesResource1.Text" xml:space="preserve">
+    <value>Metric Target Patch Preset Tolerances_fr</value>
   </data>
 </root>

@@ -219,7 +219,7 @@
   <data name="XMFResource1.Text" xml:space="preserve">
     <value>XMF</value>
   </data>
-  <data name="GridBoundReference.HeaderText" xml:space="preserve">
+  <data name="GridBoundColumnResource1.HeaderText" xml:space="preserve">
     <value>Reference%</value>
   </data>
 </root>

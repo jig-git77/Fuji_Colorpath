@@ -138,4 +138,7 @@
 	<data name="printOptionsText" xml:space="preserve">
     <value>「{0}」印刷条件のオプション</value>
   </data>
+  <data name="locViewDetailResource1.Text" xml:space="preserve">
+    <value>View Details_ja</value>
+  </data>
 </root>

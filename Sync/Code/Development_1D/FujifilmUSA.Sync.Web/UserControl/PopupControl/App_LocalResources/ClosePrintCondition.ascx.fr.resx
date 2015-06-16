@@ -162,4 +162,7 @@
 	<data name="lbtnDownloadCurrentDLPResource1.ToolTip" xml:space="preserve">
 		<value>Télécharger DLP</value>
 	</data>
+  <data name="locViewDetailResource1.Text" xml:space="preserve">
+    <value>View Details_fr</value>
+  </data>
 </root>

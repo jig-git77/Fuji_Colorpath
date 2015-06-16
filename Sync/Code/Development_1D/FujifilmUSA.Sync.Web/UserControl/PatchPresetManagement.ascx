@@ -235,7 +235,7 @@
                                     <div>
                                         <center>
                                             <div style="width: 45px;">
-                                                <div style="float: left; padding-right: 10px;">
+                                                 <div style="float: left; padding-right: 10px;">
                                                     <asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit PatchPreset" AlternateText="Edit"
                                                         ImageUrl="../Images/edit_icon.png" CommandArgument='<%# Eval("MetricTargetPresetID") %>'
                                                         CommandName="Edit" meta:resourcekey="imgbtnEditResource1" />

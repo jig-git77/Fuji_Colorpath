@@ -82,7 +82,8 @@
                                     </asp:LinkButton>
                                     <asp:LinkButton ID="lbtnViewDetail" runat="server" CssClass="gray_bt" Visible="false" onclick="lbtnViewDetail_Click" >
                                       
-                                         <span><asp:Localize runat="server" Text="View Details"></asp:Localize>
+                                         <span><asp:Localize runat="server" Text="View Details" ID="locViewDetail" 
+                                            meta:resourcekey="locViewDetailResource1"></asp:Localize>
                                         </span>
                                     </asp:LinkButton>
                                 </div>

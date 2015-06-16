@@ -296,7 +296,7 @@
                                                                         <Columns>                                                                                                              
                                                                             <telerik:GridBoundColumn DataField="ReferenceNo" UniqueName="ReferenceNo" AllowFiltering="false"
                                                                                 Visible="true" HeaderText="Reference%" ItemStyle-Width="35%" HeaderStyle-Width="35%"
-                                                                                ItemStyle-HorizontalAlign="Center">                                                                                     
+                                                                                ItemStyle-HorizontalAlign="Center" meta:resourcekey="GridBoundColumnResource1">                                                                                     
                                                                             </telerik:GridBoundColumn>
                                                                             <telerik:GridBoundColumn DataField="CMYK_C" UniqueName="CMYK_C" AllowFiltering="false"
                                                                                 ItemStyle-BackColor="#E0F3FF" Visible="true" HeaderText="C" ItemStyle-Width="16%"

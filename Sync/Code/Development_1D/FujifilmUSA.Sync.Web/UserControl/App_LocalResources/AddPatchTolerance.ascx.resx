@@ -127,15 +127,15 @@
     <value>You can not have more than one Patch Tolerance for same patch.</value>
   </data>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>Add Metric Target Patch Level Preset</value>
+    <value>Add Metric Target Patch Preset</value>
   </data>
-  <data name="rfvcAlignmentChartContainer" xml:space="preserve">
+  <data name="provideAlignmentChartText" xml:space="preserve">
     <value>Please select Validation chart.</value>
   </data>
-  <data name="rfvcInstrumentTypeContainer" xml:space="preserve">
+  <data name="provideInstrumentTypeText" xml:space="preserve">
     <value>Please select instrument type.</value>
   </data>
-  <data name="rfvPresetContainer" xml:space="preserve">
+  <data name="providePresetNameText" xml:space="preserve">
     <value>Please provide Preset name.</value>
   </data>
   <data name="selectCompanyText" xml:space="preserve">
@@ -152,5 +152,44 @@
   </data>
   <data name="errorTolMissing" xml:space="preserve">
     <value>Please provide Metric sum values and Patch Tolerance values.</value>
+  </data>
+  <data name="locCompanyNameResource1.Text" xml:space="preserve">
+    <value>Company Name</value>
+  </data>
+  <data name="locDescriptionResource1.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="locETypeResource1.Text" xml:space="preserve">
+    <value>ΔE Method</value>
+  </data>
+  <data name="locInstrumentTypeResource1.Text" xml:space="preserve">
+    <value>Instrument Type</value>
+  </data>
+  <data name="locIsActiveResource1.Text" xml:space="preserve">
+    <value>Is Active?</value>
+  </data>
+  <data name="locMetricTargetPresetResource1.Text" xml:space="preserve">
+    <value>Patch Preset Management</value>
+  </data>
+  <data name="locPresetNameResource1.Text" xml:space="preserve">
+    <value>Preset Name</value>
+  </data>
+  <data name="locRegionResource1.Text" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="locValidationChartResource1.Text" xml:space="preserve">
+    <value>Validation Chart</value>
+  </data>
+  <data name="locCancelResource1.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="locPatchTargetsResource1.Text" xml:space="preserve">
+    <value>Patch Tolerances</value>
+  </data>
+  <data name="locSaveResource1.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="locTolerancesResource1.Text" xml:space="preserve">
+    <value>Metric Target Patch Preset Tolerances</value>
   </data>
 </root>

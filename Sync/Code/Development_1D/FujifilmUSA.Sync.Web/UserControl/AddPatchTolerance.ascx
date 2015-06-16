@@ -5,7 +5,7 @@
 <script type = "text/javascript">
     function AllowOnlyNumber(evt) {
         if (evt.charCode > 31 && evt.charCode != 46 && (evt.charCode < 48 || evt.charCode > 57)) {
-            alert("Allow Only Numbers");
+            alert('<%= AddPatchPreset_JavascriptTollimit1 %>');
             return false;
         }
     }
@@ -15,7 +15,7 @@
         var txtTol = document.getElementById(txtValue.id);
         var txtTolvalue = document.getElementById(txtValue.id).value;
         if (txtTolvalue > 10) {
-            alert('Tolerance value should be between 0 to 10');
+            alert('<%= AddPatchPreset_JavascriptTollimit2 %>');
             txtTol.value = "";
             txtTol.SetFocus();
             return false;
@@ -32,7 +32,7 @@
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1><asp:Localize ID="locMetricTargetPreset" runat="server" Text="Metric Target Patch Level Preset Management" 
+        <h1><asp:Localize ID="locMetricTargetPreset" runat="server" Text="Patch Preset Management" 
                 meta:resourcekey="locMetricTargetPresetResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
@@ -197,7 +197,7 @@
                                 </tr>
                                  <tr>
                                     <td align="right">
-                                        <span style="font-weight: bold;"><asp:Localize Text="ΔE Methord" runat="server" 
+                                        <span style="font-weight: bold;"><asp:Localize Text="ΔE Method" runat="server" 
                                             ID="locEType" meta:resourcekey="locETypeResource1"></asp:Localize>
                                             <span style="color: Red;">*</span>
                                        </span></td>

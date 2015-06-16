@@ -162,4 +162,7 @@
 	<data name="lbtnCloseResource1.ToolTip" xml:space="preserve">
 		<value>Cancel</value>
 	</data>
+  <data name="locViewDetailResource1.Text" xml:space="preserve">
+    <value>View Details</value>
+  </data>
 </root>

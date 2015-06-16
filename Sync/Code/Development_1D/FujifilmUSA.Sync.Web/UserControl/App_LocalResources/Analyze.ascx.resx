@@ -763,4 +763,7 @@
   <data name="PreDeltaE" xml:space="preserve">
     <value>Previous ΔE</value>
   </data>
+  <data name="PreviousText" xml:space="preserve">
+    <value>Previous</value>
+  </data>
 </root>

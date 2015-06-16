@@ -681,4 +681,13 @@
   <data name="PreDeltaE" xml:space="preserve">
     <value>vorheriges ΔE</value>
   </data>
+  <data name="btnTVIResource1.Text" xml:space="preserve">
+    <value>TVZ</value>
+  </data>
+  <data name="LocAvgMesurmentResource1.Text" xml:space="preserve">
+    <value>Analyze Average Of Measurements_de</value>
+  </data>
+  <data name="PreviousText" xml:space="preserve">
+    <value>vorheriges</value>
+  </data>
 </root>

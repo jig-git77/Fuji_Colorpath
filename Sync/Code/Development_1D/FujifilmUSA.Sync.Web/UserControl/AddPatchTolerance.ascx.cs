@@ -26,9 +26,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recErrorSamePatchTol = "errorSamePatchTol";
         private const string _recErrorTolMissing = "errorTolMissing";
 
+        private const string _recprovidePresetName = "providePresetNameText";
+        private const string _recprovideAlignmentChart = "provideAlignmentChartText";
+        private const string _recprovideInstrumentType = "provideInstrumentTypeText";
+
         #endregion
 
         #region Declaration
+        public string AddPatchPreset_JavascriptTollimit1
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("AddPatchPreset_JavascriptTollimit1");
+            }
+        }
+        public string AddPatchPreset_JavascriptTollimit2
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("AddPatchPreset_JavascriptTollimit2");
+            }
+        }
         private int BId
         {
             get
@@ -52,6 +70,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+
+            rfvPresetContainer.ValidationMsg = GetResourceString(_recprovidePresetName);
+            rfvcAlignmentChartContainer.ValidationMsg = GetResourceString(_recprovideAlignmentChart);
+            rfvcInstrumentTypeContainer.ValidationMsg = GetResourceString(_recprovideInstrumentType);
+
             if (Page.IsPostBack) return;
 
             lblHeader.Text = GetResourceString(_recAddMetricTargetPreset);  //"Add MetricTargetPreset";

@@ -81,8 +81,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             lnkbtnProfilerOptions.Visible = IsXmfNewProject;
-            if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser) &&
-                SessionManager.Instance.CurrentProject.ProjectId > 0)
+            if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser) && SessionManager.Instance.CurrentProject.ProjectId > 0)
             {
                 lbtnMeasure.Visible = true;
                 lnkbtnMeasurementSetup.Visible = false;

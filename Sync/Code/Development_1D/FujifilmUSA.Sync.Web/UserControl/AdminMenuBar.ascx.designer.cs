@@ -256,13 +256,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnMetricTargetPreset;
         
         /// <summary>
-        /// locMetricTargetPresetResource1 control.
+        /// locMetricTargetPreset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locMetricTargetPresetResource1;
+        protected global::System.Web.UI.WebControls.Localize locMetricTargetPreset;
         
         /// <summary>
         /// lbtnPatchPreset control.
@@ -274,13 +274,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnPatchPreset;
         
         /// <summary>
-        /// locPatchPresetResource1 control.
+        /// locPatchPreset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locPatchPresetResource1;
+        protected global::System.Web.UI.WebControls.Localize locPatchPreset;
         
         /// <summary>
         /// lbtnPrintStandardType control.
@@ -292,13 +292,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnPrintStandardType;
         
         /// <summary>
-        /// Localize2 control.
+        /// locPrintStandardType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
+        protected global::System.Web.UI.WebControls.Localize locPrintStandardType;
         
         /// <summary>
         /// lbtnLookupTVILABDensity control.
@@ -310,12 +310,12 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnLookupTVILABDensity;
         
         /// <summary>
-        /// Localize3 control.
+        /// locLookupTVILABDensity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize3;
+        protected global::System.Web.UI.WebControls.Localize locLookupTVILABDensity;
     }
 }

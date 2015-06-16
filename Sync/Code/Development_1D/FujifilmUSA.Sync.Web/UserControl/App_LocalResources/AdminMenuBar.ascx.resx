@@ -157,6 +157,9 @@
     <value>Application Configuration</value>
   </data>
   <data name="locMetricTargetPresetResource1.Text" xml:space="preserve">
-    <value>Metric Target Preset 1</value>
+    <value>Metric Target Preset</value>
+  </data>
+  <data name="locPatchPresetResource1.Text" xml:space="preserve">
+    <value>Patch Preset</value>
   </data>
 </root>

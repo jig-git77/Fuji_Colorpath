@@ -162,4 +162,7 @@
   <data name="locMetricTargetPresetResource1.Text" xml:space="preserve">
     <value>Voreinstellungen</value>
   </data>
+  <data name="locPatchPresetResource1.Text" xml:space="preserve">
+    <value>Patch Preset_de</value>
+  </data>
 </root>

@@ -169,7 +169,7 @@
     <value>Kontrollelement</value>
   </data>
   <data name="locDensityTypeResource1.Text" xml:space="preserve">
-    <value>Dichtemessung</value>
+    <value>Dichtemessung:</value>
   </data>
   <data name="locMeasCountResource1.Text" xml:space="preserve">
     <value>Anzahl Messungen:</value>

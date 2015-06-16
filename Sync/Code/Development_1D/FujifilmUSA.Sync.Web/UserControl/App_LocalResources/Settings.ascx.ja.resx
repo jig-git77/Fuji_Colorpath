@@ -282,4 +282,13 @@
   <data name="locMetricTargetPresetResource1.Text" xml:space="preserve">
     <value>色差判定基準</value>
   </data>
+  <data name="imgPatchPresetResource1.AlternateText" xml:space="preserve">
+    <value>Patch Preset_ja</value>
+  </data>
+  <data name="imgPatchPresetResource1.ToolTip" xml:space="preserve">
+    <value>Patch Preset_ja</value>
+  </data>
+  <data name="locPatchPresetResource1.Text" xml:space="preserve">
+    <value>Patch Preset_ja</value>
+  </data>
 </root>

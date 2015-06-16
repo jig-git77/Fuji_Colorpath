@@ -68,6 +68,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recTVIThr = "TVIThr";
         private const string _recDotGain = "dotGain";
         private const string _recPreDeltaE = "PreDeltaE";
+        private const string _recPrevious = "PreviousText";
 
         //Label localization variables
         private const string _reclocLabelJob = "locLabelJob";
@@ -995,7 +996,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append("</td></tr>");
                     if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D && _PreAvgDensity > 0) //-----For Sync1D projects, display Previous Density Avg in tooltip also
                     {
-                        toolTip.Append("<tr><td>Previous</td><td>");
+                        toolTip.Append("<tr><td>" + GetResourceString(_recPrevious) + "</td><td>");
                         toolTip.Append(_PreAvgDensity);
                         toolTip.Append("</td></tr>");
                     }

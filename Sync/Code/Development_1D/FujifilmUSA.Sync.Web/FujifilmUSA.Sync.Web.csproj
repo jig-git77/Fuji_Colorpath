@@ -685,11 +685,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResourceMessages.fr.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\ResourceMessages.ja.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ResourceMessages.ja.resx</DependentUpon>
-    </Compile>
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2127,7 +2122,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.resx" />
+    <Content Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.de.resx">
@@ -2162,11 +2159,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\AddProject\App_LocalResources\TargetColorSpace.ascx.resx" />
+    <Content Include="UserControl\AddProject\App_LocalResources\TargetColorSpace.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\AddProject\App_LocalResources\TargetColorSpace.ascx.de.resx" />
-    <Content Include="UserControl\AddProject\App_LocalResources\TargetColorSpace.ascx.ja.resx" />
+    <Content Include="UserControl\AddProject\App_LocalResources\TargetColorSpace.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\AddProject\App_LocalResources\TargetColorSpace.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\AddProject\App_LocalResources\ProfilerOptions.ascx.resx" />
@@ -2191,7 +2194,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\PopupControl\App_LocalResources\ClosePrintCondition.ascx.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\ClosePrintCondition.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\ClosePrintCondition.ascx.de.resx">
@@ -2216,7 +2221,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\PopupControl\App_LocalResources\OpenPrintCondition.ascx.de.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\OpenPrintCondition.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UserControl\PopupControl\App_LocalResources\OpenPrintCondition.ascx.ja.resx">
       <SubType>Designer</SubType>
     </Content>
@@ -2524,10 +2531,14 @@
     <Content Include="UserControl\App_LocalResources\ApplicationError.ascx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\BranchManagement.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\BranchManagement.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\CompanyManagement.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\CompanyManagement.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\COTransferSiteControl.ascx.fr.resx" />
@@ -2621,7 +2632,9 @@
     <Content Include="UserControl\App_LocalResources\UserManagement.ascx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\PopupControl\App_LocalResources\ClosePrintCondition.ascx.fr.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\ClosePrintCondition.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\ConfirmSave.ascx.fr.resx" />
@@ -2697,7 +2710,9 @@
     <Content Include="UserControl\AddProject\App_LocalResources\ValidationSetup.ascx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\AddProject\App_LocalResources\TargetColorSpace.ascx.fr.resx" />
+    <Content Include="UserControl\AddProject\App_LocalResources\TargetColorSpace.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\AddProject\App_LocalResources\ProjectDescription.ascx.fr.resx">
@@ -2711,7 +2726,9 @@
     <Content Include="UserControl\AddProject\App_LocalResources\PreviewPrintCondition.ascx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.fr.resx" />
+    <Content Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\ReportSingleMeasurement.ascx.resx">
@@ -2804,7 +2821,9 @@
     <Content Include="UserControl\App_LocalResources\MetricTargetPresetManagement.ascx.de.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\DeviceManagement.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\DeviceManagement.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddPatchTolerance.ascx.fr.resx">
@@ -2812,9 +2831,23 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\ResourceMessages.ja.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>ResourceMessages.ja.designer.cs</LastGenOutput>
+    <Content Include="UserControl\App_LocalResources\PatchPresetManagement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\PatchPresetManagement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\PatchPresetManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\PatchPresetManagement.ascx.fr.resx">
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -2835,7 +2868,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
