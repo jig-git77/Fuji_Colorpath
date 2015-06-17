@@ -327,4 +327,7 @@
   <data name="locTVIPatchPerResource1.Text" xml:space="preserve">
     <value>網％</value>
   </data>
+  <data name="PanelOptionalRetarget" xml:space="preserve">
+    <value>PanelOptionalRetarget_ja</value>
+  </data>
 </root>

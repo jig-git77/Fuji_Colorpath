@@ -65,7 +65,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             lnkbtnTargetColorSpace.Visible = IsXmfNewProject;
-
+            PanelOptionalRetarget.GroupingText = "<b>" + GetResourceString("PanelOptionalRetarget") + "</b>";
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
                 if (ViewState[_vsMetricTargetPreset] == null)

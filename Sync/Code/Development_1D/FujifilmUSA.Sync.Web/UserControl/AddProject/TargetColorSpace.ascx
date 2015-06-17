@@ -86,7 +86,7 @@ textarea {
                         </tr>                       
                          <tr id="trProjectType" runat="server">
                             <td colspan="4">
-                                <asp:Panel ID="PanelProjectType" runat="server" GroupingText="<b>Project Type</b>" Width="100%">
+                                <asp:Panel ID="PanelProjectType" runat="server" GroupingText="Project Type" Width="100%">
                                      <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                         <tr>
                                             <td colspan="2">

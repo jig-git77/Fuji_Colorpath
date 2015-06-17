@@ -582,7 +582,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <asp:Panel ID="Panel1" runat="server" GroupingText="<b>Optional Retarget</b>" Width="120%">
+                                            <asp:Panel ID="PanelOptionalRetarget" runat="server" GroupingText="<b>Optional Retarget</b>" Width="120%">
                                                  <span style="padding-left:5px;"><asp:Localize runat="server" Text="Choose Certified Print Condition:" 
                                                         ID="Localize1" meta:resourcekey="locReTargetResource1" ></asp:Localize></span>
                                                         <br />

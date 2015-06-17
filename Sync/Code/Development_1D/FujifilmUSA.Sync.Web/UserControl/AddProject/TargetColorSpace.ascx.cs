@@ -41,7 +41,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 btn_PaperClear.Visible = false;
                 BindProfileSource();
-                BindPCSDataType(); //Load PCSDataType              
+                BindPCSDataType(); //Load PCSDataType 
+                PanelProjectType.GroupingText = "<b>" + GetResourceString("PanelProjectType") + "</b>";
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
                 {
                     trTargetLAB.Visible = false;
