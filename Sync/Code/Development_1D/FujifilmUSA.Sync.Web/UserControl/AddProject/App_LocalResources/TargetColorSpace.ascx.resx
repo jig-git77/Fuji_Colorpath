@@ -165,4 +165,10 @@
   <data name="locbtn_PaperClearResource1.Text" xml:space="preserve">
     <value>Reset</value>
   </data>
+  <data name="PanelProjectType" xml:space="preserve">
+    <value>Project Type</value>
+  </data>
+  <data name="PanelProjectType.Text" xml:space="preserve">
+    <value>Project Type</value>
+  </data>
 </root>

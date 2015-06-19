@@ -339,4 +339,7 @@
   <data name="selectText" xml:space="preserve">
     <value>--Bitte wählen--</value>
   </data>
+  <data name="PanelOptionalRetarget" xml:space="preserve">
+    <value>Optional Retarget_de</value>
+  </data>
 </root>

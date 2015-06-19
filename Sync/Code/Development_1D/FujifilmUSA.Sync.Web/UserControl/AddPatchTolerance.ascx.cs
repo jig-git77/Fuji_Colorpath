@@ -74,8 +74,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rfvPresetContainer.ValidationMsg = GetResourceString(_recprovidePresetName);
             rfvcAlignmentChartContainer.ValidationMsg = GetResourceString(_recprovideAlignmentChart);
             rfvcInstrumentTypeContainer.ValidationMsg = GetResourceString(_recprovideInstrumentType);
-
-            if (Page.IsPostBack) return;
+            if (IsPostBack) return;
 
             lblHeader.Text = GetResourceString(_recAddMetricTargetPreset);  //"Add MetricTargetPreset";
             BindRegionDropDown();
@@ -154,9 +153,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Methods
         private void BindRegionDropDown()
         {
+           // IsErrorOccured = false;
+            RegionList = new Dictionary<int, string>();
             _presenterMetricTargetPresetManagement.RegionList();
             if (!IsErrorOccured)
             {
+                cmbRegion.SelectedIndex = -1;
+                cmbRegion.DataTextField = "Value";
+                cmbRegion.DataValueField = "Key";
                 cmbRegion.DataSource = RegionList;
                 cmbRegion.DataBind();
                 cmbRegion.Items.Insert(0, new ListItem(GetResourceString(_recSelectRegionText), "0"));
@@ -176,6 +180,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterMetricTargetPresetManagement.GetCompaniesByRegion();
             if (!IsErrorOccured)
             {
+                cmbCompanyName.SelectedIndex = -1;
                 cmbCompanyName.DataTextField = "Value";
                 cmbCompanyName.DataValueField = "Key";
                 cmbCompanyName.DataSource = Companies;
@@ -256,6 +261,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void SetMetricTargetPreset(int MetricTargetPresetId)
         {
+           // IsErrorOccured = false;
             MetricTargetPreset = new Entity.CPSyncV.MetricTargetPreset { MetricTargetPresetID = MetricTargetPresetId };
             _presenterMetricTargetPresetManagement.GetMetricTargetPatchPreset();
             if (!IsErrorOccured)
@@ -404,6 +410,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 MetricTargetPreset.PatchTolerances.Add(PatchItem5);
             }
 
+            MetricTargetPreset.IsPatchTolerance = (MetricTargetPreset.PatchTolerances.Count == 0 ? false : true);
             int OriginalTotal = 0;
             OriginalTotal = MetricTargetPreset.PatchTolerances.Count;
             int AfterTotal = 0;
@@ -414,7 +421,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(GetResourceString(_recErrorSamePatchTol), false);
                 return;
             }
-            if (MetricTargetPreset.MetricSumTolerances.Count == 0 || MetricTargetPreset.PatchTolerances.Count == 0)
+            if (MetricTargetPreset.MetricSumTolerances.Count == 0)
             {
                 fujiStatusbar.DisplayMessage(GetResourceString(_recErrorTolMissing), false);
                 return;

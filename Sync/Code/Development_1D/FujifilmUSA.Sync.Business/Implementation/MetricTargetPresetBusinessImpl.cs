@@ -282,7 +282,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             MetricTargetPreset.IsUsed,
                                             MetricTargetPreset.ReferenceChartTypeId,
                                             MetricSumToleranceData.ToString(),
-                                            PatchToleranceData.ToString()
+                                            PatchToleranceData.ToString(),
+                                            MetricTargetPreset.IsPatchTolerance
                                         });
                         if (returnValue == -1)
                         {

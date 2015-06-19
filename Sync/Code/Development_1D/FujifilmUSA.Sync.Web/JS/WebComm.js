@@ -47,22 +47,25 @@ function SetChartResult(objChart) {
         if (objChart.DeviceSetting.MeasurementSettings.UVMode == -1) {      //----------If NULL then pass UVCut bydefault
             objChart.DeviceSetting.MeasurementSettings.UVMode = 2;
         }
-    
-        var UVMode = "M" + objChart.DeviceSetting.MeasurementSettings.UVMode;
+      g_Chart["Mode"] = objChart.DeviceSetting.MeasurementSettings.UvIncludedName;
+       var UVMode = "M" + objChart.DeviceSetting.MeasurementSettings.UVMode;
         var InstrumentTypeID = objChart.InstrumentTypeId;
-
+		
 		  if (InstrumentTypeID == 8) {  //For isis....maybe only2???
-		    g_Chart["DeviceSettings"]["IlluminationCondition"] = UVMode;
-            if (UVMode == "M0" || UVMode == "M1") {  //isis m0 and m1
+		  g_Chart["ChartType"] = "Native";
+		  g_Chart["Mode"] = UVMode;
+		    //g_Chart["DeviceSettings"]["IlluminationCondition"] = UVMode;
+            //if (UVMode == "M0" || UVMode == "M1") {  //isis m0 and m1
 
-			g_Chart["DeviceSettings"]["IlluminationMode"] = 1;
-			g_Chart["DeviceSettings"]["MeasurementFlow"] = 1;
+			//g_Chart["DeviceSettings"]["IlluminationMode"] = 1;
+			//g_Chart["DeviceSettings"]["MeasurementFlow"] = 1;
 
-            }
-            else {                                   //For isis m2 uvcut
-               g_Chart["DeviceSettings"]["IlluminationMode"] = 0;
-				g_Chart["DeviceSettings"]["MeasurementFlow"] = 0;
-            }
+           // }
+            //else {                                   //For isis m2 uvcut
+              // g_Chart["DeviceSettings"]["IlluminationMode"] = 0;
+				//g_Chart["DeviceSettings"]["MeasurementFlow"] = 0;
+            //}
+			//g_Chart["Mode"] = UVMode;
         }
         
         else if (InstrumentTypeID == 4) {  //For i1- Pro2 
@@ -116,7 +119,7 @@ function SetChartResult(objChart) {
                     g_Chart["DeviceSettings"]["ResultIndexKey"] = "M0";
                 }
             }
-        g_Chart["Mode"] = objChart.DeviceSetting.MeasurementSettings.UvIncludedName;
+      
     }
 
     if (objChart.ChartSetting != null) {

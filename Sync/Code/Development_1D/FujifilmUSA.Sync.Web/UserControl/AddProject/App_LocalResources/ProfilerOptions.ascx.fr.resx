@@ -330,4 +330,7 @@
   <data name="locTVIPatchPerResource1.Text" xml:space="preserve">
     <value>Patch％_fr</value>
   </data>
+  <data name="PanelOptionalRetarget" xml:space="preserve">
+    <value>Optional Retarget_fr</value>
+  </data>
 </root>

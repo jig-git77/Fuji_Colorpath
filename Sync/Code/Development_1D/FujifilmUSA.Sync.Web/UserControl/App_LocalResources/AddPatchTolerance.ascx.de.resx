@@ -142,7 +142,7 @@
     <value>-- auswählen --</value>
   </data>
   <data name="errorTolMissing" xml:space="preserve">
-    <value>Please provide Metric sum values and Patch Tolerance values._de</value>
+    <value>Please provide Metric sum values._de</value>
   </data>
   <data name="locCompanyNameResource1.Text" xml:space="preserve">
     <value>Firmenname</value>

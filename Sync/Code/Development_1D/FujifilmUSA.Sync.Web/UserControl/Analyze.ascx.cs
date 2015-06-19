@@ -2280,19 +2280,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         .Where(r => r.Field<byte>("PatchTypeID") == 1 || r.Field<byte>("PatchTypeID") == 2 || r.Field<byte>("PatchTypeID") == 3 || r.Field<byte>("PatchTypeID") == 4 || r.Field<byte>("PatchTypeID") == 5 || r.Field<byte>("PatchTypeID") == 6 || r.Field<byte>("PatchTypeID") == 7)
                         .CopyToDataTable();
             }
-            else if (MetricSumID == "8" || MetricSumID == "9")    //----For 'G7 Gray ΔCh Avg' or ----For 'G7 Gray ΔCh Max'
+            else if (MetricSumID == "8" || MetricSumID == "9" || MetricSumID == "36" || MetricSumID == "37")    //----For 'G7 Gray ΔCh Avg' or ----For 'G7 Gray ΔCh Max' or ----For 'wG7 Gray ΔCh Avg'  or ---_For 'wG7 Gray ΔCh Max'
             {
                 DT = dtPatchDetails.AsEnumerable()
                         .Where(r => r.Field<byte>("PatchTypeID") == 9 || r.Field<byte>("PatchTypeID") == 10 || r.Field<byte>("PatchTypeID") == 28 || r.Field<byte>("PatchTypeID") == 29 || r.Field<byte>("PatchTypeID") == 30 || r.Field<byte>("PatchTypeID") == 31 || r.Field<byte>("PatchTypeID") == 32 || r.Field<byte>("PatchTypeID") == 33 || r.Field<byte>("PatchTypeID") == 34 || r.Field<byte>("PatchTypeID") == 35 || r.Field<byte>("PatchTypeID") == 36 || r.Field<byte>("PatchTypeID") == 37 || r.Field<byte>("PatchTypeID") == 38 || r.Field<byte>("PatchTypeID") == 39 || r.Field<byte>("PatchTypeID") == 40 || r.Field<byte>("PatchTypeID") == 41 || r.Field<byte>("PatchTypeID") == 42 || r.Field<byte>("PatchTypeID") == 43 || r.Field<byte>("PatchTypeID") == 44 || r.Field<byte>("PatchTypeID") == 45 || r.Field<byte>("PatchTypeID") == 46 || r.Field<byte>("PatchTypeID") == 47 || r.Field<byte>("PatchTypeID") == 48 || r.Field<byte>("PatchTypeID") == 49 || r.Field<byte>("PatchTypeID") == 50)
                         .CopyToDataTable();
             }
-            else if (MetricSumID == "10" || MetricSumID == "11")   //----For 'G7 Black ΔL Avg' or ----For 'G7 Black ΔL Max'
+            else if (MetricSumID == "10" || MetricSumID == "11" || MetricSumID == "38" || MetricSumID == "39")   //----For 'G7 Black ΔL Avg' or ----For 'G7 Black ΔL Max' or ----For 'wG7 Black ΔL Avg' or ----For 'wG7 Black ΔL Max'
             {
                 DT = dtPatchDetails.AsEnumerable()
                         .Where(r => r.Field<byte>("PatchTypeID") == 4 || r.Field<byte>("PatchTypeID") == 15 || r.Field<byte>("PatchTypeID") == 25 || r.Field<byte>("PatchTypeID") == 26 || r.Field<byte>("PatchTypeID") == 27)
                         .CopyToDataTable();
             }
-            else if (MetricSumID == "12" || MetricSumID == "13")    //----For 'G7 CMY / Gray ΔL Avg' or ----For 'G7 CMY / Gray ΔL Max'
+            else if (MetricSumID == "12" || MetricSumID == "13" || MetricSumID == "40" || MetricSumID == "41")    //----For 'G7 CMY / Gray ΔL Avg' or ----For 'G7 CMY / Gray ΔL Max' or ----For 'wG7 CMY / Gray ΔL Avg' or ----For 'wG7 CMY / Gray ΔL Max'
             {
                 DT = dtPatchDetails.AsEnumerable()
                         .Where(r => r.Field<byte>("PatchTypeID") == 9 || r.Field<byte>("PatchTypeID") == 28 || r.Field<byte>("PatchTypeID") == 29 || r.Field<byte>("PatchTypeID") == 30 || r.Field<byte>("PatchTypeID") == 31 || r.Field<byte>("PatchTypeID") == 32 || r.Field<byte>("PatchTypeID") == 33 || r.Field<byte>("PatchTypeID") == 34 || r.Field<byte>("PatchTypeID") == 35 || r.Field<byte>("PatchTypeID") == 36 || r.Field<byte>("PatchTypeID") == 37 || r.Field<byte>("PatchTypeID") == 38 || r.Field<byte>("PatchTypeID") == 39 || r.Field<byte>("PatchTypeID") == 40 || r.Field<byte>("PatchTypeID") == 41 || r.Field<byte>("PatchTypeID") == 42 || r.Field<byte>("PatchTypeID") == 43 || r.Field<byte>("PatchTypeID") == 44 || r.Field<byte>("PatchTypeID") == 45 || r.Field<byte>("PatchTypeID") == 46 || r.Field<byte>("PatchTypeID") == 47 || r.Field<byte>("PatchTypeID") == 48 || r.Field<byte>("PatchTypeID") == 49 || r.Field<byte>("PatchTypeID") == 50)
@@ -2302,6 +2302,78 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 DT = dtPatchDetails.AsEnumerable()
                         .Where(r => r.Field<byte>("PatchTypeID") == 5 || r.Field<byte>("PatchTypeID") == 6 || r.Field<byte>("PatchTypeID") == 7)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "15" || MetricSumID == "18")    //----For 'ΔTVI25', 'ΔTVI25Spread'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 16 || r.Field<byte>("PatchTypeID") == 19 || r.Field<byte>("PatchTypeID") == 22 || r.Field<byte>("PatchTypeID") == 25)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "16" || MetricSumID == "19")    //----For 'ΔTVI50', 'ΔTVI50Spread'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 17 || r.Field<byte>("PatchTypeID") == 20 || r.Field<byte>("PatchTypeID") == 23 || r.Field<byte>("PatchTypeID") == 26)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "17" || MetricSumID == "20")    //----For 'ΔTVI75', 'ΔTVI75Spread'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 18 || r.Field<byte>("PatchTypeID") == 21 || r.Field<byte>("PatchTypeID") == 24 || r.Field<byte>("PatchTypeID") == 27)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "21" || MetricSumID == "22" || MetricSumID == "23")    //----For 'Paper ΔL', 'Paper Δa', 'Paper Δb'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 8)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "24")    //----For 'CMY100 ΔE Max'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 9)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "25")    //----For 'Japan Gray ΔH Avg'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 61 || r.Field<byte>("PatchTypeID") == 62 || r.Field<byte>("PatchTypeID") == 63 || r.Field<byte>("PatchTypeID") == 64 || r.Field<byte>("PatchTypeID") == 65)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "26")    //----For 'G7 Gray ΔH Avg'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 8 || r.Field<byte>("PatchTypeID") == 9 || r.Field<byte>("PatchTypeID") == 28 || r.Field<byte>("PatchTypeID") == 29 || r.Field<byte>("PatchTypeID") == 30 || r.Field<byte>("PatchTypeID") == 31 || r.Field<byte>("PatchTypeID") == 32 || r.Field<byte>("PatchTypeID") == 33 || r.Field<byte>("PatchTypeID") == 34 || r.Field<byte>("PatchTypeID") == 35 || r.Field<byte>("PatchTypeID") == 36 || r.Field<byte>("PatchTypeID") == 37 || r.Field<byte>("PatchTypeID") == 38 || r.Field<byte>("PatchTypeID") == 39 || r.Field<byte>("PatchTypeID") == 40 || r.Field<byte>("PatchTypeID") == 41 || r.Field<byte>("PatchTypeID") == 42 || r.Field<byte>("PatchTypeID") == 43 || r.Field<byte>("PatchTypeID") == 44 || r.Field<byte>("PatchTypeID") == 45 || r.Field<byte>("PatchTypeID") == 46 || r.Field<byte>("PatchTypeID") == 47 || r.Field<byte>("PatchTypeID") == 48 || r.Field<byte>("PatchTypeID") == 49 || r.Field<byte>("PatchTypeID") == 50)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "27")    //----For 'ΔE Max No Paper'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") != 8)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "28" || MetricSumID == "32")    //----For 'ΔTVI20', 'ΔTVI20Spread'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 113 || r.Field<byte>("PatchTypeID") == 124 || r.Field<byte>("PatchTypeID") == 135 || r.Field<byte>("PatchTypeID") == 146)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "29" || MetricSumID == "33")    //----For 'ΔTVI40', 'ΔTVI40Spread'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 116 || r.Field<byte>("PatchTypeID") == 127 || r.Field<byte>("PatchTypeID") == 138 || r.Field<byte>("PatchTypeID") == 149)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "30" || MetricSumID == "34")    //----For 'ΔTVI60', 'ΔTVI60Spread'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 118 || r.Field<byte>("PatchTypeID") == 129 || r.Field<byte>("PatchTypeID") == 140 || r.Field<byte>("PatchTypeID") == 151)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "31" || MetricSumID == "35")    //----For 'ΔTVI80', 'ΔTVI80Spread'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 121 || r.Field<byte>("PatchTypeID") == 132 || r.Field<byte>("PatchTypeID") == 143 || r.Field<byte>("PatchTypeID") == 154)
                         .CopyToDataTable();
             }
             else
@@ -2778,19 +2850,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     #region Make Visible/Invisible columns according to MetricSum selected in Validation and Sync 1D projects
                     if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)      //--If validation / Sync 1D, visible metricsum columns respectively
                     {
-                        if (ViewState["MetricSumID"].ToString() == "5" || ViewState["MetricSumID"].ToString() == "6" || ViewState["MetricSumID"].ToString() == "7")
+                        if (ViewState["MetricSumID"].ToString() == "5" || ViewState["MetricSumID"].ToString() == "6" || ViewState["MetricSumID"].ToString() == "7" || ViewState["MetricSumID"].ToString() == "25" || ViewState["MetricSumID"].ToString() == "26")
                         {
                             rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔH").Visible = true;  //----ΔH
                             rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔCh").Visible = false;  //----ΔCh
                             rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔL").Visible = false;  //----ΔL
                         }
-                        else if (ViewState["MetricSumID"].ToString() == "8" || ViewState["MetricSumID"].ToString() == "9")
+                        else if (ViewState["MetricSumID"].ToString() == "8" || ViewState["MetricSumID"].ToString() == "9" || ViewState["MetricSumID"].ToString() == "36" || ViewState["MetricSumID"].ToString() == "37")
                         {
                             rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔCh").Visible = true;  //----ΔCh
                             rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔH").Visible = false;  //----ΔH
                             rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔL").Visible = false;  //----ΔL
                         }
-                        else if (ViewState["MetricSumID"].ToString() == "10" || ViewState["MetricSumID"].ToString() == "11" || ViewState["MetricSumID"].ToString() == "12" || ViewState["MetricSumID"].ToString() == "13")
+                        else if (ViewState["MetricSumID"].ToString() == "10" || ViewState["MetricSumID"].ToString() == "11" || ViewState["MetricSumID"].ToString() == "12" || ViewState["MetricSumID"].ToString() == "13" || ViewState["MetricSumID"].ToString() == "38" || ViewState["MetricSumID"].ToString() == "39" || ViewState["MetricSumID"].ToString() == "40" || ViewState["MetricSumID"].ToString() == "41")
                         {
                             rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔL").Visible = true;  //-----ΔL
                             rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔH").Visible = false;  //----ΔH
