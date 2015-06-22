@@ -51,24 +51,24 @@
                                                     <a href="Download/temprh/pc/Taskero%20Temp%20RH%20Installer%20(PC).zip">TempRH Installer - PC</a>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td valign="middle" style="height: 30px;padding-left: 15px;" class=DownloadALTERNATINGSTYLE1>
-                                                    <a href="Download/TUPress/ITX-PDCSII Colorpath Verified Installation.zip">ITX-PDCSII Colorpath Verified Installation</a>
-                                                </td>
-                                            </tr>
                                              <tr>
-                                                <td valign="middle" style="height: 30px;padding-left: 15px;" class=DownloadSTYLE1>
+                                                <td valign="middle" style="height: 30px;padding-left: 15px;" class=DownloadALTERNATINGSTYLE1>
                                                     <a href="Download/ColorpathXF/ColorpathXFSetup.zip">ColorpathXF Installer</a>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td valign="middle" style="height: 30px;padding-left: 15px;" class=DownloadALTERNATINGSTYLE1>
+                                                <td valign="middle" style="height: 30px;padding-left: 15px;" class=DownloadSTYLE1>
                                                     <a href="Download/CTWeb/TaskeroCTWebSetup.zip">Taskero ColorTuner</a>
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td valign="middle" style="height: 30px;padding-left: 15px;" class=DownloadALTERNATINGSTYLE1>
+                                                    <a href="Download/Colorpath_MacPlugin_Installer.zip">ColorPath MacPlugin</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td valign="middle" style="height: 30px;padding-left: 15px;" class=DownloadSTYLE1>
-                                                    <a href="Download/ColorGATE/TUColorGATEClientSetup.zip">Taskero ColorGATE Client</a>
+                                                    <a href="Download/Colorpath_PCPlugin_Installer.zip">ColorPath PCPlugin</a>
                                                 </td>
                                             </tr>
                                              
