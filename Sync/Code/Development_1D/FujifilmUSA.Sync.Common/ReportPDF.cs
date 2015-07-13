@@ -24,6 +24,8 @@ namespace FujifilmUSA.Sync.Common
         string CSSPath = "";
         int theCount = 0;
         private DataSet _DS_Common;
+        private DataSet _DS_MetricAvgScoring;
+        private DataSet _DS_ScoringMeasurementList;
         private DataGrid _Dg;
         string _From_ΔE;
         string _DLPName;
@@ -56,6 +58,18 @@ namespace FujifilmUSA.Sync.Common
         {
             get { return _DS_Common; }
             set { _DS_Common = value; }
+        }
+
+        public DataSet DS_MetricAvgScoring
+        {
+            get { return _DS_MetricAvgScoring; }
+            set { _DS_MetricAvgScoring = value; }
+        }
+
+        public DataSet DS_ScoringMeasurementList
+        {
+            get { return _DS_ScoringMeasurementList; }
+            set { _DS_ScoringMeasurementList = value; }
         }
 
         public DataGrid Dg
@@ -152,6 +166,10 @@ namespace FujifilmUSA.Sync.Common
                 {
                     FileName = "Templates/PrepressSingleMeasurement_Default.htm";
                 }
+                else if (ReportType == 19) //----For Default mode in Sync4D validation project for Scoring report
+                {
+                    FileName = "Templates/ScoringMeasurement_Default.htm";
+                }
                 else  //-----For 4D Optimization report
                 {
                     FileName = "Templates/PrepressSingleMeasurement.htm";
@@ -243,7 +261,7 @@ namespace FujifilmUSA.Sync.Common
             SBStr.Replace("#csspath#", CSSPath);
             SBStr.Replace("###ReportName###", ReportName);
 
-            // === Table 0 = "JobDetail" : Replace Job Detail In HTML Tamplate ==== //    
+            // === Table 0 = "JobDetail" : Replace Job Detail In HTML Template ==== //    
             #region ==== Table = 0,  Job Detail  ====
             if (DS_Common.Tables[0] != null && DS_Common.Tables[0].Rows.Count > 0)
             {
@@ -268,8 +286,8 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("###Location###", Location.Trim() == "" ? "&nbsp;" : Location.Trim());
                 SBStr.Replace("###DeltaEFormula###", Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim());
 
-                //--------For G7 / ISO / Default Reports
-                if (ReportType == 16 || ReportType == 17 || ReportType == 18)
+                //--------For G7 / ISO / Default Reports OR 4D Validation Scoring Report
+                if (ReportType == 16 || ReportType == 17 || ReportType == 18 || ReportType == 19)
                 {
                     if (IsValidation) //Only show Measurement Status in Validation mode in G7/ ISO / Default/ 4D
                     {
@@ -281,7 +299,7 @@ namespace FujifilmUSA.Sync.Common
 
                     }
                     SBStr.Replace("###MetricPreset###", Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim());
-                    if (ReportType == 17 || ReportType == 18)   //----For ISO Opti / Validation Report & 4D ISO validation report + Default mode report
+                    if (ReportType == 17 || ReportType == 18 || ReportType  == 19)   //----For ISO Opti / Validation Report & 4D ISO validation report + Default mode report OR 4D Validation Scoring Report
                     {
                         SBStr.Replace("###CompanyName###", Convert.ToString(DT.Rows[0]["CompanyName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["CompanyName"]).Trim());
                         SBStr.Replace("###BranchName###", Convert.ToString(DT.Rows[0]["BranchName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["BranchName"]).Trim());
@@ -307,8 +325,8 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("###Location###", "&nbsp;");
                 SBStr.Replace("###DeltaEFormula###", "&nbsp;");
 
-                //--------For G7 / ISO / Default Reports
-                if (ReportType == 16 || ReportType == 17 || ReportType == 18)
+                //--------For G7 / ISO / Default Reports OR 4D Validation Scoring Report
+                if (ReportType == 16 || ReportType == 17 || ReportType == 18 || ReportType == 19)
                 {
                     if (IsValidation) //Only show Measurement STatus in Validation mode in G7/ ISO / Default/ 4D
                         SBStr.Replace("###JobStatus###", "<tr class='row-2'><td class='row-title'>Meas. Status:</td><td class='row-content'>&nbsp;</td></tr>");
@@ -316,7 +334,7 @@ namespace FujifilmUSA.Sync.Common
                         SBStr.Replace("###JobStatus###", "&nbsp;");
                     SBStr.Replace("###MetricPreset###", "&nbsp;");
 
-                    if (ReportType == 17 || ReportType == 18)   //----For ISO Opti / Validation Report & 4D ISO validation report + Default mode report
+                    if (ReportType == 17 || ReportType == 18 || ReportType == 19)   //----For ISO Opti / Validation Report & 4D ISO validation report + Default mode report OR 4D Validaton Scoring Report
                     {
                         SBStr.Replace("###CompanyName###", "&nbsp;");
                         SBStr.Replace("###BranchName###", "&nbsp;");
@@ -332,178 +350,181 @@ namespace FujifilmUSA.Sync.Common
             SBStr.Replace("###TargetVersusActualAB###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_TargetVersusActualAB.Jpeg"));
             #endregion
 
-            // === Table 2 = Chart of Summary Delta Value Graph Image And Table Value Ploted === //          
-            #region ==== Summary Delta Value Graph Image ====
-
-            DT = DS_Common.Tables[2];
-
-            StringBuilder SBstrDeltaValue = new StringBuilder();
-            if (DT != null && DT.Rows.Count > 0)
+            if (ReportType != 19) //---Only if not 4D Validation Scoring Report
             {
-                string strStatusImg = "";
-                int RowHeight = 29;
+                // === Table 2 = Chart of Summary Delta Value Graph Image And Table Value Ploted === //          
+                #region ==== Summary Delta Value Graph Image ====
 
-                //--------For G7 / ISO /Default Reports
-                if (ReportType == 16 || ReportType == 17 || ReportType == 18)
+                DT = DS_Common.Tables[2];
+
+                StringBuilder SBstrDeltaValue = new StringBuilder();
+                if (DT != null && DT.Rows.Count > 0)
                 {
-                    for (int i = 0; i < DT.Rows.Count; i++)
+                    string strStatusImg = "";
+                    int RowHeight = 29;
+
+                    //--------For G7 / ISO /Default Reports
+                    if (ReportType == 16 || ReportType == 17 || ReportType == 18)
                     {
-                        if (Convert.ToDecimal(DT.Rows[i]["MeasuredValue"]) > Convert.ToDecimal(DT.Rows[i]["TargetValue"].ToString()))
+                        for (int i = 0; i < DT.Rows.Count; i++)
                         {
-                            SBstrDeltaValue.Append("<tr style='height: " + RowHeight + "px; color:Red;'>");
+                            if (Convert.ToDecimal(DT.Rows[i]["MeasuredValue"]) > Convert.ToDecimal(DT.Rows[i]["TargetValue"].ToString()))
+                            {
+                                SBstrDeltaValue.Append("<tr style='height: " + RowHeight + "px; color:Red;'>");
+                            }
+                            else
+                            {
+                                SBstrDeltaValue.Append("<tr style='height: " + RowHeight + "px'>");
+                            }
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>" + DT.Rows[i]["MetricSumName"] + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["TargetValue"])) + "&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["MeasuredValue"])) + "&nbsp;</td>");
+                            SBstrDeltaValue.Append("</tr>");
+                        }
+                    }
+                    else
+                    {
+                        #region "AverageDE"
+                        if (Convert.IsDBNull(DT.Rows[0]["Avg_ΔE"]))
+                        {
+                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' class='BottomBorder' style='width: 160px;'>Average &Delta;" + From_ΔE + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("</tr>");
                         }
                         else
                         {
-                            SBstrDeltaValue.Append("<tr style='height: " + RowHeight + "px'>");
+                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Average &Delta;" + From_ΔE + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Avg_ΔE"])) + "&nbsp;</td>");
+                            SBstrDeltaValue.Append("</tr>");
                         }
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>" + DT.Rows[i]["MetricSumName"] + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["TargetValue"])) + "&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["MeasuredValue"])) + "&nbsp;</td>");
-                        SBstrDeltaValue.Append("</tr>");
+                        #endregion
+
+                        #region "MaximumDE"
+                        if (Convert.IsDBNull(DT.Rows[0]["Max_ΔE"]))
+                        {
+                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Maximum &Delta;" + From_ΔE + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("</tr>");
+                        }
+                        else
+                        {
+
+                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Maximum &Delta;" + From_ΔE + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Max_ΔE"])) + "&nbsp;</td>");
+                            SBstrDeltaValue.Append("</tr>");
+                        }
+                        #endregion
+
+                        #region "PrimaryDE"
+                        if (Convert.IsDBNull(DT.Rows[0]["PriΔE"]))
+                        {
+                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta;" + From_ΔE + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("</tr>");
+                        }
+                        else
+                        {
+                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta;" + From_ΔE + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["PriΔE"])) + "&nbsp;</td>");
+                            SBstrDeltaValue.Append("</tr>");
+                        }
+                        #endregion
+
+                        #region "PrimaryDH"
+                        if (Convert.IsDBNull(DT.Rows[0]["PriΔH"]))
+                        {
+                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta;H</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("</tr>");
+                        }
+                        else
+                        {
+
+                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta;H</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["PriΔH"])) + "&nbsp;</td>");
+                            SBstrDeltaValue.Append("</tr>");
+                        }
+                        #endregion
+
+                        #region "GrayAverageDE"
+                        if (Convert.IsDBNull(DT.Rows[0]["GrayΔE"]))
+                        {
+                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Gray Average &Delta;" + From_ΔE + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("</tr>");
+                        }
+                        else
+                        {
+
+                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Gray Average &Delta;" + From_ΔE + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["GrayΔE"])) + "&nbsp;</td>");
+                            SBstrDeltaValue.Append("</tr>");
+                        }
+
+                        #endregion
+
+                        #region "dE_95pct_Patches"
+                        if (Convert.IsDBNull(DT.Rows[0]["NinetyFiveΔE"]))
+                        {
+                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95th Percentile &Delta;" + From_ΔE + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("</tr>");
+                        }
+                        else
+                        {
+
+                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95th Percentile &Delta;" + From_ΔE + "</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
+                            SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["NinetyFiveΔE"])) + "&nbsp;</td>");
+                            SBstrDeltaValue.Append("</tr>");
+                        }
+                        #endregion
                     }
+                    SBStr.Replace("###DeltaSummaryDetail###", SBstrDeltaValue.ToString());
                 }
                 else
                 {
-                    #region "AverageDE"
-                    if (Convert.IsDBNull(DT.Rows[0]["Avg_ΔE"]))
-                    {
-                        SBstrDeltaValue.Append("<tr style='height: 27px'>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' class='BottomBorder' style='width: 160px;'>Average &Delta;" + From_ΔE + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("</tr>");
-                    }
-                    else
-                    {
-                        SBstrDeltaValue.Append("<tr style='height: 27px'>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Average &Delta;" + From_ΔE + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Avg_ΔE"])) + "&nbsp;</td>");
-                        SBstrDeltaValue.Append("</tr>");
-                    }
-                    #endregion
-
-                    #region "MaximumDE"
-                    if (Convert.IsDBNull(DT.Rows[0]["Max_ΔE"]))
-                    {
-                        SBstrDeltaValue.Append("<tr style='height: 27px'>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Maximum &Delta;" + From_ΔE + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("</tr>");
-                    }
-                    else
-                    {
-
-                        SBstrDeltaValue.Append("<tr style='height: 27px'>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Maximum &Delta;" + From_ΔE + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Max_ΔE"])) + "&nbsp;</td>");
-                        SBstrDeltaValue.Append("</tr>");
-                    }
-                    #endregion
-
-                    #region "PrimaryDE"
-                    if (Convert.IsDBNull(DT.Rows[0]["PriΔE"]))
-                    {
-                        SBstrDeltaValue.Append("<tr style='height: 27px'>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta;" + From_ΔE + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("</tr>");
-                    }
-                    else
-                    {
-                        SBstrDeltaValue.Append("<tr style='height: 27px'>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta;" + From_ΔE + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["PriΔE"])) + "&nbsp;</td>");
-                        SBstrDeltaValue.Append("</tr>");
-                    }
-                    #endregion
-
-                    #region "PrimaryDH"
-                    if (Convert.IsDBNull(DT.Rows[0]["PriΔH"]))
-                    {
-                        SBstrDeltaValue.Append("<tr style='height: 27px'>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta;H</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("</tr>");
-                    }
-                    else
-                    {
-
-                        SBstrDeltaValue.Append("<tr style='height: 27px'>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta;H</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["PriΔH"])) + "&nbsp;</td>");
-                        SBstrDeltaValue.Append("</tr>");
-                    }
-                    #endregion
-
-                    #region "GrayAverageDE"
-                    if (Convert.IsDBNull(DT.Rows[0]["GrayΔE"]))
-                    {
-                        SBstrDeltaValue.Append("<tr style='height: 27px'>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Gray Average &Delta;" + From_ΔE + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("</tr>");
-                    }
-                    else
-                    {
-
-                        SBstrDeltaValue.Append("<tr style='height: 27px'>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Gray Average &Delta;" + From_ΔE + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["GrayΔE"])) + "&nbsp;</td>");
-                        SBstrDeltaValue.Append("</tr>");
-                    }
-
-                    #endregion
-
-                    #region "dE_95pct_Patches"
-                    if (Convert.IsDBNull(DT.Rows[0]["NinetyFiveΔE"]))
-                    {
-                        SBstrDeltaValue.Append("<tr style='height: 27px'>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95th Percentile &Delta;" + From_ΔE + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("</tr>");
-                    }
-                    else
-                    {
-
-                        SBstrDeltaValue.Append("<tr style='height: 27px'>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95th Percentile &Delta;" + From_ΔE + "</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
-                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["NinetyFiveΔE"])) + "&nbsp;</td>");
-                        SBstrDeltaValue.Append("</tr>");
-                    }
-                    #endregion
+                    SBStr.Replace("###DeltaSummaryDetail###", "");
                 }
-                SBStr.Replace("###DeltaSummaryDetail###", SBstrDeltaValue.ToString());
+                SBStr.Replace("###ResultSummary_DeltaImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_ResultSummary_Delta.Jpeg"));
+                #endregion
             }
-            else
-            {
-                SBStr.Replace("###DeltaSummaryDetail###", "");
-            }
-            SBStr.Replace("###ResultSummary_DeltaImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_ResultSummary_Delta.Jpeg"));
-            #endregion
 
             // === Table 3 = Chart of Summary Delta E Value Graph Image And Table Value Ploted  === //         
             #region ==== Summary Delta E Value Graph Image ====
@@ -521,7 +542,7 @@ namespace FujifilmUSA.Sync.Common
                     SBstrDeltaEValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                     SBstrDeltaEValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>" + Convert.ToString(DT.Rows[i]["PatchType"]) + "</td>");
                     //--------For G7 / ISO Reports put Tolerance
-                    if (ReportType == 16 || ReportType == 17 || ReportType == 18)
+                    if (ReportType == 16 || ReportType == 17 || ReportType == 18 || ReportType == 19)
                     {
                         if (DT.Rows[i]["ΔELimit"].ToString() != "0.00") //If no Tolerance value exists for particular Metric Target Preset then don't display "0.00" instead even.
                         {
@@ -544,7 +565,7 @@ namespace FujifilmUSA.Sync.Common
             SBStr.Replace("###ResultSummary_DeltaEImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_ResultSummary_DeltaEValue.Jpeg"));
             #endregion
 
-            if (ReportType == 17 || ReportType == 18)   //----For ISO Opti / Validation Report & 4D ISO validation report + Default mode report
+            if (ReportType == 17 || ReportType == 18 || ReportType == 19)   //----For ISO Opti / Validation Report & 4D ISO validation report + Default mode report OR 4D Validation Scoring report
             {
                 // === Table 4 = Chart of Paper L*A*B* === //           
                 #region ==== Paper  L*A*B* (Part 1)====
@@ -672,7 +693,7 @@ namespace FujifilmUSA.Sync.Common
                     SBStr.Replace("###GrayB###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_BChart.Jpeg"));
                     #endregion
                 }
-                else if (ReportType == 18) //For Default mode report
+                else if (ReportType == 18 || ReportType == 19) //For Default mode report OR 4D Validation Scoring Report
                 {
                     // === Table 13 = >Gray Balance L*a*b* === //           
                     #region ==== Gray LAB* ====
@@ -716,6 +737,105 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("###ResultSummary_GraybImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_BChart.Jpeg"));
                 #endregion
             }
+
+            if (ReportType == 19) //---Only if 4D Validation Scoring Report
+            {
+                // === Table 4.1 = Display Metrics with Average Scoring on list === //          
+                #region ==== Metric Avg Scoring Graph Image ====
+
+                DT = DS_MetricAvgScoring.Tables[0];
+
+                StringBuilder SBstrMetricAvgScoring = new StringBuilder();
+                decimal CMYKPrimaries = 0;
+                decimal RGBSecondaries = 0;
+                decimal dt_HGray = 0;
+                decimal dt_EPaper = 0;
+
+                if (DT != null && DT.Rows.Count > 0)
+                {
+                    string strStatusImg = "";
+                    int RowHeight = 29;
+
+                    for (int i = 0; i < DT.Rows.Count; i++)
+                    {
+                        SBstrMetricAvgScoring.Append("<tr style='height: " + RowHeight + "px'>");
+                        SBstrMetricAvgScoring.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
+                        SBstrMetricAvgScoring.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>" + DT.Rows[i]["Color"] + "</td>");
+                        SBstrMetricAvgScoring.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["AvgScore"])),0) + "&nbsp;</td>");
+                        SBstrMetricAvgScoring.Append("</tr>");
+
+                        if (i >= 0 && i <= 3)
+                        {
+                            CMYKPrimaries = CMYKPrimaries + Convert.ToDecimal(DT.Rows[i]["AvgScore"]);
+                        }
+                        else if (i >= 4 && i <= 6)
+                        {
+                            RGBSecondaries = RGBSecondaries + Convert.ToDecimal(DT.Rows[i]["AvgScore"]);
+                        }
+                        else if (i >= 7 && i <= 9)
+                        {
+                            dt_HGray = dt_HGray + Convert.ToDecimal(DT.Rows[i]["AvgScore"]);
+                        }
+                        else if (i == 10)
+                        {
+                            dt_EPaper = dt_EPaper + Convert.ToDecimal(DT.Rows[i]["AvgScore"]);
+                        }
+                    }
+                    CMYKPrimaries = ((CMYKPrimaries) / 4);
+                    RGBSecondaries = ((RGBSecondaries) / 3);
+                    dt_HGray = ((dt_HGray) / 3);
+
+                    SBStr.Replace("###MetricAvgScoringDetail###", SBstrMetricAvgScoring.ToString());
+                    SBStr.Replace("###AvgScoringCMYKPrimaries###", Math.Round(CMYKPrimaries, 0).ToString());
+                    SBStr.Replace("###AvgScoringRGBSecondaries###", Math.Round(RGBSecondaries, 0).ToString());
+                    SBStr.Replace("###AvgScoringΔHGray###", Math.Round(dt_HGray, 0).ToString());
+                    SBStr.Replace("###AvgScoringPaperΔE###", Math.Round(dt_EPaper, 0).ToString());
+                    SBStr.Replace("###TotalScore###", Math.Round(((CMYKPrimaries + RGBSecondaries + dt_HGray + dt_EPaper) / 4), 0).ToString());
+                }
+                else
+                {
+                    SBStr.Replace("###MetricAvgScoringDetail###", "");
+                    SBStr.Replace("###AvgScoringCMYKPrimaries###", "");
+                    SBStr.Replace("###AvgScoringRGBSecondaries###", "");
+                    SBStr.Replace("###AvgScoringΔHGray###", "");
+                    SBStr.Replace("###AvgScoringPaperΔE###", "");
+                    SBStr.Replace("###TotalScore###", "");
+                }
+
+                // === Table 4.2 = Display Scoring Measurement List === //          
+             
+                DT = DS_ScoringMeasurementList.Tables[0];
+
+                StringBuilder SBstrScoringMeasurementList = new StringBuilder();
+                if (DT != null && DT.Rows.Count > 0)
+                {
+                    int RowHeight = 29;
+
+                    for (int i = 0; i < DT.Rows.Count; i++)
+                    {
+                        SBstrScoringMeasurementList.Append("<tr style='height: " + RowHeight + "px'>");
+                        SBstrScoringMeasurementList.Append("<td valign='middle' align='left' class='BottomBorder'>" + DT.Rows[i]["MeasurementID"] + "</td>");
+                        SBstrScoringMeasurementList.Append("<td valign='middle' align='left' class='BottomBorder'>" + DT.Rows[i]["Name"] + "</td>");
+                        SBstrScoringMeasurementList.Append("<td valign='middle' align='left' class='BottomBorder'>" + DT.Rows[i]["Date"] + "</td>");
+                        SBstrScoringMeasurementList.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["CMYKPri"])), 0) + "&nbsp;</td>");
+                        SBstrScoringMeasurementList.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["RGBSec"])), 0) + "&nbsp;</td>");
+                        SBstrScoringMeasurementList.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["GrayBalance"])), 0) + "&nbsp;</td>");
+                        SBstrScoringMeasurementList.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["Paper"])), 0) + "&nbsp;</td>");
+                        SBstrScoringMeasurementList.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["Overall"])), 0) + "&nbsp;</td>");
+                        SBstrScoringMeasurementList.Append("</tr>");
+                    }
+
+                    SBStr.Replace("###ScoringMeasurementList###", SBstrScoringMeasurementList.ToString());
+                }
+                else
+                {
+                    SBStr.Replace("###ScoringMeasurementList###", "");
+                }
+                //SBStr.Replace("###ResultSummary_DeltaImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_ResultSummary_Delta.Jpeg"));
+                #endregion
+            }
+
+
             #region Assign Server
             SBStr.Replace("##IMAGES##", strServer);
             #endregion

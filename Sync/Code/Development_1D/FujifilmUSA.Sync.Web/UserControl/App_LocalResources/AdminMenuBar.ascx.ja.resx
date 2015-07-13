@@ -160,6 +160,6 @@
     <value>色差判定プリセット</value>
   </data>
   <data name="locPatchPresetResource1.Text" xml:space="preserve">
-    <value>Patch Preset_ja</value>
+    <value>色差判定設定</value>
   </data>
 </root>

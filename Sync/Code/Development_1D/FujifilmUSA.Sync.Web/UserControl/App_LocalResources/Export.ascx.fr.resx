@@ -196,10 +196,10 @@
     <value>Export View_fr</value>
   </data>
   <data name="locPreRunResource1.Text" xml:space="preserve">
-    <value>&amp;#916;Previous Run_fr</value>
+    <value>ΔPrevious Run_fr</value>
   </data>
   <data name="locRefResource1.Text" xml:space="preserve">
-    <value>&amp;#916;Ref_fr</value>
+    <value>ΔRef_fr</value>
   </data>
   <data name="NexusResource1.Text" xml:space="preserve">
     <value>Nexus</value>

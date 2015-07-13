@@ -438,4 +438,7 @@
   <data name="UpdateText" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="CalendarImageToolTip" xml:space="preserve">
+    <value>Open the calendar pop up.</value>
+  </data>
 </root>

@@ -139,13 +139,13 @@
     <value>削除</value>
   </data>
   <data name="imgbtnDeleteResource1.Tooltip" xml:space="preserve">
-    <value>Delete PatchPreset_ja</value>
+    <value>色差判定プリセットの削除</value>
   </data>
   <data name="imgbtnEditResource1.AlternateText" xml:space="preserve">
     <value>編集</value>
   </data>
   <data name="imgbtnEditResource1.Tooltip" xml:space="preserve">
-    <value>Edit PatchPreset_ja</value>
+    <value>色差判定プリセットの編集</value>
   </data>
   <data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
     <value>絞り込み解除</value>
@@ -154,9 +154,9 @@
     <value>絞り込み解除</value>
   </data>
   <data name="locAddPatchPresetResource1.Text" xml:space="preserve">
-    <value>Add Patch Preset_ja</value>
+    <value>色差判定プリセットの追加</value>
   </data>
   <data name="locPatchPresetMgmtResource1.Text" xml:space="preserve">
-    <value>Patch Preset Management_ja</value>
+    <value>色差判定プリセットの管理</value>
   </data>
 </root>

@@ -175,7 +175,7 @@
     <value>説明：</value>
   </data>
   <data name="downloadChartNotAvailable" xml:space="preserve">
-    <value>Download chart is not available</value>
+    <value>ダウンロードチャートは使用できません</value>
   </data>
   <data name="locMeasCountResource1.Text" xml:space="preserve">
     <value>測定回数：</value>

@@ -564,7 +564,7 @@ function OnCancel() {
 function OnRewind() {
 
     if (next > 0) { //---------Call "Rewind" functionality if we are in a middle of the measurement and want to do rewind-------------//
-        g_SavedQuery["Result"] = 'CANCEL';
+        g_SavedQuery["Result"] = 'REWIND';
         backup1 = 1;
 
 		 // g_Question["Result"] = 'CANCEL';

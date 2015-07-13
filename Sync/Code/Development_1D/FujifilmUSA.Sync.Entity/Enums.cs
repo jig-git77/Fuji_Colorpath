@@ -481,7 +481,8 @@ namespace FujifilmUSA.Sync.Entity
         //CPSPrintStandardsReportISO = 15,
         ReportSingleMeasurement_G7 = 16,
         ReportSingleMeasurement_ISO = 17,
-        ReportSingleMeasurement_Default = 18
+        ReportSingleMeasurement_Default = 18,
+        ReportScoringMeasurement_Default = 19
     }
 
     public enum ValidationRuleType

@@ -226,6 +226,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
                     //Verification mode
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //---Only display Report Grading for Sync4D Validation
+                    {
+                        Div_ReportGrading.Visible = true;
+                    }
+                    
                     lbtnDownloadAndSaveDLP.Visible = false;
                     lbtnMeasurementVerification.Visible = true;
                     if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification) //---If not Sync 4D Certification type of project, then only display Optimize button
@@ -516,6 +521,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             iframeGeneratePDFReport.Attributes.Add("src", path);
             iframeGeneratePDFReport.Style.Add("display", "");
+
+            //-------Assign Report Grading Pop up to load report in "Report" tab--------------//
+            ReportGradingWindow.NavigateUrl = "../PopupReportGrading.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType + "&IsAvgMeas=" + IsAverageOfMeasurements;
         }
 
         #endregion

@@ -234,14 +234,8 @@
   <data name="locRendering1Resource1.Text" xml:space="preserve">
     <value>Rendering</value>
   </data>
-  <data name="locRendering1Resource1.Text1" xml:space="preserve">
-    <value>Rendering_de</value>
-  </data>
   <data name="locRendering2Resource1.Text" xml:space="preserve">
     <value>Rendering:</value>
-  </data>
-  <data name="locRendering2Resource1.Text1" xml:space="preserve">
-    <value>Rendering:_de</value>
   </data>
   <data name="locSelectedPresetsResource1.Text" xml:space="preserve">
     <value>Ausgewählte  Presets:</value>

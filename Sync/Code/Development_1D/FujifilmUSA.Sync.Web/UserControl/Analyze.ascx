@@ -92,7 +92,18 @@
     function CloseClosePrintConditionWindow() {
         var oWnd = $find("<%= ClosePrintConditionWindow.ClientID %>");
         oWnd.close();
-    }       
+    }
+    function ShowReportGradingWindow() {
+        var oWnd = $find("<%= ReportGradingWindow.ClientID %>");
+        oWnd.show();
+        return false;
+    }
+
+    function Close() {
+        var oWnd = $find("<%= ReportGradingWindow.ClientID %>");
+        oWnd.close();
+        return false;
+    }  
 </script>
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
@@ -2576,6 +2587,11 @@
                                          <iframe id="iframeGeneratePDFReport" runat="server" name="iframeGeneratePDFReport" style="height: 350px;
                                                 width: 100%; display: none" frameborder="0" scrolling="no"></iframe>                                           
                                         </td>
+                                        <td>
+                                            <div id="Div_ReportGrading" runat="server" visible="false" style="float:right; padding-right:10px;">
+                                                <input type="button" id="btnReportGrading"  value="Scoring Report" onclick="javascript:return ShowReportGradingWindow();" />             
+                                            </div>
+                                        </td>
                                     </tr>
                                 </table>
                             </td>
@@ -2618,6 +2634,10 @@
         <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" VisibleStatusbar="false"
             ShowContentDuringLoad="false" Title="Close Print Condition" Width="720" Height="200"
             Behaviors="Move,Close">
+        </telerik:RadWindow>
+        <telerik:RadWindow ID="ReportGradingWindow" runat="server" VisibleStatusbar="false"
+            ShowContentDuringLoad="false" Title="Import Measurements" Width="730" Height="420"
+            Behaviors="Close, Move" Behavior="Close, Move">
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>

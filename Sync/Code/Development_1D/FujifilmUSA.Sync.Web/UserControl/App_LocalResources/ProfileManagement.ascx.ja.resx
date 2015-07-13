@@ -196,7 +196,7 @@
     <value>スペースは禁止されています。</value>
   </data>
   <data name="changeLanguageSuccess" xml:space="preserve">
-    <value>Language saved successfully!_ja</value>
+    <value>言語設定が保存されました</value>
   </data>
   <data name="lblChangeLanguageResource1.Text" xml:space="preserve">
     <value>表示言語の変更</value>
@@ -205,6 +205,6 @@
     <value>言語</value>
   </data>
   <data name="selectLanguageText" xml:space="preserve">
-    <value>Please select language._ja</value>
+    <value>言語を選択してください</value>
   </data>
 </root>

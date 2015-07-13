@@ -166,6 +166,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+        public DataSet GetMeasurementDataForScoring(int MeasurementId, string From_ΔE, int ProjectId, bool IsAverageOfMeasurements = false)
+        {
+            return new DataSet();
+        }
         #endregion
 
         #region ITaskBase Members

@@ -49,5 +49,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         DataTable GetMaxSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false);
 
         int ChkAvgMeasurementCompatibility(int optimizeRunId);
+        DataSet GetMeasurementDataForScoring(int MeasurementId, string From_ΔE, int ProjectId, bool IsAverageOfMeasurements = false);
     }
 }

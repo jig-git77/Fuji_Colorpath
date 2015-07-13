@@ -75,10 +75,10 @@ namespace FujifilmUSA.Sync.Web
                             break;
                     }
                 });
-                if (!IsValidation) //if Optimization, then only add checkboxes
-                {
+                //if (!IsValidation) //if Optimization, then only add checkboxes
+                //{
                     AddCheckBox(i, p, Measurements.Where(x => x.IsUsed).Count());
-                }
+                //}
                 i++;
             });
 

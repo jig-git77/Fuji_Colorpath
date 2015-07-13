@@ -148,7 +148,7 @@
     <value>DLP</value>
   </data>
   <data name="downloadChartNotAvailableText" xml:space="preserve">
-    <value>チャートのダウンロードができません</value>
+    <value>ダウンロードチャートは使用できません</value>
   </data>
   <data name="downloadText" xml:space="preserve">
     <value>ダウンロード - {0}</value>
@@ -196,10 +196,10 @@
     <value>出力カーブ表示</value>
   </data>
   <data name="locPreRunResource1.Text" xml:space="preserve">
-    <value>&amp;#916;前回結果との差</value>
+    <value>前回結果との差</value>
   </data>
   <data name="locRefResource1.Text" xml:space="preserve">
-    <value>&amp;#916;データ</value>
+    <value>リニア設定との差</value>
   </data>
   <data name="NexusResource1.Text" xml:space="preserve">
     <value>Nexus</value>

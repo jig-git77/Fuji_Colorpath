@@ -1641,7 +1641,28 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return Convert.ToInt32(outParam.Value);
         }
 
-    
+
+        public DataSet GetMeasurementDataForScoring(int MeasurementId, string From_ΔE, int ProjectId, bool IsAverageOfMeasurements = false)
+        {
+            var measurements = new DataSet();
+            string storedProc = "Report.GetVMeasurementDataForScoring";
+           
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements = new DataSet();
+                        dsMeasurements = DataAccessFactory.
+                             Instance.
+                             GetDsResult(
+                                 storedProc,
+                                 new object[] { MeasurementId, From_ΔE, ProjectId, IsAverageOfMeasurements});
+                    
+                    measurements = dsMeasurements;
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_Report_GetReportGrading"));
+            return measurements;
+        }
+
         #endregion
 
         #region ITaskBase Members

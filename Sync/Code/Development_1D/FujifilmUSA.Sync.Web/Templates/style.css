@@ -96,7 +96,7 @@ font-family:Verdana, Tahoma; font-size:11px; font-weight:bold; color:#fff; curso
 
 /*.summary-area-bg { margin:0; padding:0 14px; width:660px;}*/
 .graph-title-text { color:#246126; font-weight:bold; font-size:11px; }
-
+.graph-title-text-small { color:#246126; font-weight:bold; font-size:8px; }
 
 .table-grid-title { margin:0; padding:0; background-color:#c0c0bf; color:#000; height:18px; font-size:12px; }
 

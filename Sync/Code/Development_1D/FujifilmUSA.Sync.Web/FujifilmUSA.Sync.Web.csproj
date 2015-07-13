@@ -240,6 +240,7 @@
     <Content Include="PopupDownloadSoftware.aspx" />
     <Content Include="PopupImportMeasurements.aspx" />
     <Content Include="PopupOpenForgotPassword.aspx" />
+    <Content Include="PopupReportGrading.aspx" />
     <Content Include="PrintPreview.aspx" />
     <Content Include="PrintStandardTypeManagement.aspx" />
     <Content Include="ProfileManagement.aspx" />
@@ -282,6 +283,7 @@
     <Content Include="Templates\PrepressSingleMeasurement_G7.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_ISO_old.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_ISO.htm" />
+    <Content Include="Templates\ScoringMeasurement_Default.htm" />
     <Content Include="Templates\style.css" />
     <Content Include="UserControl\AccessDenied.ascx" />
     <Content Include="UserControl\ActivityValidationRules.ascx" />
@@ -318,6 +320,7 @@
     <Content Include="UserControl\PopupControl\DownloadSoftware.ascx" />
     <Content Include="UserControl\PopupControl\ForgotPassword.ascx" />
     <Content Include="UserControl\PopupControl\ImportMeasurements.ascx" />
+    <Content Include="UserControl\PopupControl\ReportGrading.ascx" />
     <Content Include="UserControl\PrintPreview.ascx" />
     <Content Include="UserControl\PrintStandardTypeManagement.ascx" />
     <Content Include="UserControl\ProfileManagement.ascx" />
@@ -919,6 +922,13 @@
     <Compile Include="PopupOpenForgotPassword.aspx.designer.cs">
       <DependentUpon>PopupOpenForgotPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PopupReportGrading.aspx.cs">
+      <DependentUpon>PopupReportGrading.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupReportGrading.aspx.designer.cs">
+      <DependentUpon>PopupReportGrading.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PrintPreview.aspx.cs">
       <DependentUpon>PrintPreview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1222,6 +1232,13 @@
     </Compile>
     <Compile Include="UserControl\PopupControl\ImportMeasurements.ascx.designer.cs">
       <DependentUpon>ImportMeasurements.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\ReportGrading.ascx.cs">
+      <DependentUpon>ReportGrading.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\ReportGrading.ascx.designer.cs">
+      <DependentUpon>ReportGrading.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\PrintPreview.ascx.cs">
       <DependentUpon>PrintPreview.ascx</DependentUpon>
@@ -2868,7 +2885,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

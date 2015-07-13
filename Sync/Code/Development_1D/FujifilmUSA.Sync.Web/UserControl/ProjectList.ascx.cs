@@ -210,7 +210,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SetOperationImageURL(btnSelect, project.LicenseType, project.Status);
             SetValidationImageURL(imgbtnVarification, project);
 
-            if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject) || project.LicenseType == ELicenseType.InkOptimizationSource) //-------------No Delete project permission for Ink Optimization SOurce project type----//
+            if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject) || project.LicenseType == ELicenseType.InkOptimizationSource) //-------------No Delete project permission for Ink Optimization Source project type----//
             {
                 var imgDelete = e.Item.FindControl("imgbtnDelete") as ImageButton;
                 if (imgDelete != null)

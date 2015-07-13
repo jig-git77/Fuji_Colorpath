@@ -127,6 +127,6 @@
     <value>ユーザ名</value>
   </data>
   <data name="locOutdatedPluginResource1.Text" xml:space="preserve">
-    <value>インストールされたプラグインは古いバージョンです。新しいバージョンをインストールしてください。</value>
+    <value>インストール済みプラグインは古いバージョンです。新しいバージョンをインストールしてください。</value>
   </data>
 </root>

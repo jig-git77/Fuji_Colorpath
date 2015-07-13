@@ -295,7 +295,7 @@
     <value>判定基準の説明：</value>
   </data>
   <data name="lblWeightedTolerancesResource1.Text" xml:space="preserve">
-    <value>Use Weighted Tolerances_ja</value>
+    <value>重み付けされた許容値を使用</value>
   </data>
   <data name="selectText" xml:space="preserve">
     <value>--条件を選択--</value>
@@ -328,6 +328,6 @@
     <value>網％</value>
   </data>
   <data name="PanelOptionalRetarget" xml:space="preserve">
-    <value>PanelOptionalRetarget_ja</value>
+    <value>調整済みカーブからの再補正</value>
   </data>
 </root>

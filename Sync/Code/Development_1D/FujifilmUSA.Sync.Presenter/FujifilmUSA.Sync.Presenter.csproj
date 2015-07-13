@@ -79,6 +79,7 @@
     <Compile Include="PresenterProfileManagement.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PresenterReportGrading.cs" />
     <Compile Include="PresenterReportSingleMeasurement.cs" />
     <Compile Include="PresenterUserManagement.cs" />
     <Compile Include="PresenterBranchManagement.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="ViewInterface\IViewPrintStandardType.cs" />
     <Compile Include="ViewInterface\IViewProfileManagement.cs" />
     <Compile Include="ViewInterface\IViewReferenceChartManagement.cs" />
+    <Compile Include="ViewInterface\IViewReportGrading.cs" />
     <Compile Include="ViewInterface\IViewReportSingleMeasurement.cs" />
     <Compile Include="ViewInterface\IViewSourceProfile.cs" />
     <Compile Include="ViewInterface\IViewUserManagement.cs" />

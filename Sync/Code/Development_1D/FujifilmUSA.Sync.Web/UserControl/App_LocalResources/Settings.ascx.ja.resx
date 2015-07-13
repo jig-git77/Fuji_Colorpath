@@ -214,7 +214,7 @@
     <value>リファレンスチャート</value>
   </data>
   <data name="locAdminResource1.Text" xml:space="preserve">
-    <value>管理</value>
+    <value>環境設定</value>
   </data>
   <data name="locBranchManagementResource1.Text" xml:space="preserve">
     <value>支社管理</value>
@@ -283,12 +283,12 @@
     <value>色差判定基準</value>
   </data>
   <data name="imgPatchPresetResource1.AlternateText" xml:space="preserve">
-    <value>Patch Preset_ja</value>
+    <value>色差判定設定</value>
   </data>
   <data name="imgPatchPresetResource1.ToolTip" xml:space="preserve">
-    <value>Patch Preset_ja</value>
+    <value>色差判定設定</value>
   </data>
   <data name="locPatchPresetResource1.Text" xml:space="preserve">
-    <value>Patch Preset_ja</value>
+    <value>色差判定設定</value>
   </data>
 </root>

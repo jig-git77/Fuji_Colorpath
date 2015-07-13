@@ -133,10 +133,10 @@
     <value>Eメールが送信されました</value>
   </data>
   <data name="excellentText" xml:space="preserve">
-    <value>Excellent</value>
+    <value>優秀</value>
   </data>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
-    <value>パスワード変更</value>
+    <value>ユーザ追加</value>
   </data>
   <data name="ListItemResource1.Text" xml:space="preserve">
     <value>ウェブサイトのユーザー</value>
