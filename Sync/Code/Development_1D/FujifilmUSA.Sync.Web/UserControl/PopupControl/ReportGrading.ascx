@@ -165,6 +165,7 @@
         <tr>
             <td>
                 <asp:CheckBox ID="chkAverageOfMeasurements" runat="server"  Text="Average Of Measurements" />
+                <span style="font-size:x-small;">(Note: All measurements will be into consideration during calculations whose checkboxes are checked)</span>
             </td>
         </tr>
         <tr>

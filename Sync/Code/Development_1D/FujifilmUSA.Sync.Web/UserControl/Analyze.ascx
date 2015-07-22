@@ -2587,9 +2587,9 @@
                                          <iframe id="iframeGeneratePDFReport" runat="server" name="iframeGeneratePDFReport" style="height: 350px;
                                                 width: 100%; display: none" frameborder="0" scrolling="no"></iframe>                                           
                                         </td>
-                                        <td>
-                                            <div id="Div_ReportGrading" runat="server" visible="false" style="float:right; padding-right:10px;">
-                                                <input type="button" id="btnReportGrading"  value="Scoring Report" onclick="javascript:return ShowReportGradingWindow();" />             
+                                        <td valign="top" style="padding-top:8px;">
+                                            <div id="Div_ReportGrading" runat="server" visible="false"  style="float:right; padding-right:10px;">
+                                                <asp:ImageButton ID="btnReportGrading" runat="server" Visible="false" ImageUrl="../Images/Sync DLP Scoring Report_preview.jpg" ToolTip="Scoring Report" onClientclick="javascript:return ShowReportGradingWindow();"></asp:ImageButton>         
                                             </div>
                                         </td>
                                     </tr>

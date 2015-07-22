@@ -2664,16 +2664,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
             const string goodapostrophes = "&apos;";
 
             //Set the values to Placeholder
-            labelXML = labelXML.Replace("[Job]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.MeasurementName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if measurement name contains "&" letter or rest of 4 letters
-            //labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
-            labelXML = labelXML.Replace("[Device]", SessionManager.Instance.CurrentDevice.DeviceName);
-            labelXML = labelXML.Replace("[Metric]", measurmentSummary.MetricTargetPresetName);
-            labelXML = labelXML.Replace("[PrintStandard]", measurmentSummary.PrintStandardType);
+            labelXML = labelXML.Replace("[Job]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.MeasurementName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if Measurement name contains "&" letter or rest of 4 letters
+            labelXML = labelXML.Replace("[Device]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(SessionManager.Instance.CurrentDevice.DeviceName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if Device name contains "&" letter or rest of 4 letters
+            labelXML = labelXML.Replace("[Metric]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.MetricTargetPresetName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if MTP name contains "&" letter or rest of 4 letters
+            labelXML = labelXML.Replace("[PrintStandard]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.PrintStandardType, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if PrintStandardType name contains "&" letter or rest of 4 letters
             labelXML = labelXML.Replace("[Timestamp]", measurmentSummary.MeasurementDate.ToString("g"));
-            labelXML = labelXML.Replace("[Customer]", measurmentSummary.Customer);
+            labelXML = labelXML.Replace("[Customer]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.Customer, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if Customer name contains "&" letter or rest of 4 letters
             labelXML = labelXML.Replace("[dEType]", measurmentSummary.dEMethod);
-            labelXML = labelXML.Replace("[PageOrSurface]", measurmentSummary.PageOrSurface);
-            labelXML = labelXML.Replace("[JDFJobId]", measurmentSummary.JDFJobId);
+            labelXML = labelXML.Replace("[PageOrSurface]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.PageOrSurface, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if PageOrSurface contains "&" letter or rest of 4 letters
+            labelXML = labelXML.Replace("[JDFJobId]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.JDFJobId, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if JDFJobId contains "&" letter or rest of 4 letters
+            //labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
+            //labelXML = labelXML.Replace("[Device]", SessionManager.Instance.CurrentDevice.DeviceName);
+            //labelXML = labelXML.Replace("[Metric]", measurmentSummary.MetricTargetPresetName);
+            //labelXML = labelXML.Replace("[PrintStandard]", measurmentSummary.PrintStandardType);
+            //labelXML = labelXML.Replace("[Customer]", measurmentSummary.Customer);
+            //labelXML = labelXML.Replace("[PageOrSurface]", measurmentSummary.PageOrSurface);
+            //labelXML = labelXML.Replace("[JDFJobId]", measurmentSummary.JDFJobId);
             
             System.Text.StringBuilder metricName = new StringBuilder();
             System.Text.StringBuilder metricTol = new StringBuilder();
