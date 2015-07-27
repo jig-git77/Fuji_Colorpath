@@ -97,7 +97,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                          {
                              BranchName = txtBranchName.Text,
                              Location = txtLocation.Text,
-                             CompanyId = Convert.ToByte(cmbCompanyName.SelectedValue),
+                             CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue),
                              SupportID= txtSupportID.Text,
                              IsActive = chkIsActive.Checked
                          };
