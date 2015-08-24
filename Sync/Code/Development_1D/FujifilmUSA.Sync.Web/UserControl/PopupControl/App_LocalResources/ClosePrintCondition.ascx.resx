@@ -150,6 +150,9 @@
 	<data name="noDLPText" xml:space="preserve">
     <value>Sorry! There is no dlp to download"</value>
   </data>
+  <data name="noSourceText" xml:space="preserve">
+    <value>Sorry! There is no source profile to download"</value>
+  </data>
 	<data name="optimizeCompleteText" xml:space="preserve">
     <value>Once optimization is complete, apply {0} to workflow and reprint the {1} chart.</value>
   </data>

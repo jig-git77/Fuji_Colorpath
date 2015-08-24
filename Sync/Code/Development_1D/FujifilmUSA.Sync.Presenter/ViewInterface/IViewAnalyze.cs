@@ -50,6 +50,8 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Entity.AnalyzeChart_DotGain> DTSpreadChartData { get; set; }
         List<Entity.AnalyzeChart_DotGain> DTSpreadSplineRangeChartData { get; set; }
         //List<Entity.AnalyzeChart_DotGain> DTMaxSpreadChartData { get; set; }
+        List<Entity.AnalyzeChart_DotGain> DTSpreadChartData_CMYK { get; set; }
+
         DataTable DTMaxSpreadChartData { get; set; }
 
         bool IsAverageOfMeasurements { get; set; }

@@ -161,13 +161,20 @@
     function funTVIVisiblity() {
         document.getElementById("trTVI").style.display = "";
         document.getElementById("trSpread").style.display = "none";
-
+        document.getElementById("trCMYK").style.display = "none";
     }
     function funSpreadVisiblity() {
         document.getElementById("trTVI").style.display = "none";
         document.getElementById("trSpread").style.display = "";
-
+        document.getElementById("trCMYK").style.display = "none";
     }
+
+    function funCMYKVisiblity() {
+        document.getElementById("trTVI").style.display = "none";
+        document.getElementById("trSpread").style.display = "none";
+        document.getElementById("trCMYK").style.display = "";
+    }
+    
 </script>
 <script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {
@@ -1974,6 +1981,8 @@
                             <asp:Button meta:resourcekey="btnTVIResource1" ID="btnTVI" runat="server" Text="TVI" OnClientClick="funTVIVisiblity(); return false;" />
                             &nbsp;<asp:Button meta:resourcekey="btnSpreadResource1" ID="btnSpread" OnClientClick="funSpreadVisiblity(); return false;"
                                 runat="server" Text="Spread" />
+                            &nbsp;<asp:Button meta:resourcekey="btnCMYKResource1" ID="btnCMYK" OnClientClick="funCMYKVisiblity(); return false;"
+                                runat="server" Text="CMYK" />
                         </td>
                     </tr>
                     <tr id="trTVI">
@@ -2015,10 +2024,10 @@
                                                             <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
                                                                 BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
                                                                 <Position Height="99" Width="94" X="0" Y="2" />
-                                                                <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="Auto">
+                                                                <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="Auto" Minimum="0">
                                                                     <MajorGrid LineColor="Gray"></MajorGrid>
                                                                 </AxisY>
-                                                                <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="">
+                                                                <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0">
                                                                     <MajorGrid LineColor="Gray"></MajorGrid>
                                                                     <LabelStyle Angle="0" />
                                                                 </AxisX>
@@ -2064,10 +2073,10 @@
                                                             <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
                                                                 BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
                                                                 <Position Height="99" Width="94" X="0" Y="2" />
-                                                                <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="Auto">
+                                                                <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="Auto" Minimum="0">
                                                                     <MajorGrid LineColor="Gray"></MajorGrid>
                                                                 </AxisY>
-                                                                <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="">
+                                                                <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0">
                                                                     <MajorGrid LineColor="Gray"></MajorGrid>
                                                                     <LabelStyle Angle="0" />
                                                                 </AxisX>
@@ -2115,10 +2124,10 @@
                                                             <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
                                                                 BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
                                                                 <Position Height="99" Width="94" X="0" Y="2" />
-                                                                <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="Auto">
+                                                                <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="Auto" Minimum="0">
                                                                     <MajorGrid LineColor="Gray"></MajorGrid>
                                                                 </AxisY>
-                                                                <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="">
+                                                                <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0">
                                                                     <MajorGrid LineColor="Gray"></MajorGrid>
                                                                     <LabelStyle Angle="0" />
                                                                 </AxisX>
@@ -2164,10 +2173,10 @@
                                                             <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
                                                                 BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
                                                                 <Position Height="99" Width="94" X="0" Y="2" />
-                                                                <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="Auto">
+                                                                <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="Auto" Minimum="0">
                                                                     <MajorGrid LineColor="Gray"></MajorGrid>
                                                                 </AxisY>
-                                                                <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="">
+                                                                <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0">
                                                                     <MajorGrid LineColor="Gray"></MajorGrid>
                                                                     <LabelStyle Angle="0" />
                                                                 </AxisX>
@@ -2295,6 +2304,85 @@
                                                         </td>
                                                     </tr>
                                                 </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </td>
+                    </tr>
+                    <tr id="trCMYK" style="display: none">
+                        <td>
+                             <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+                                <ContentTemplate>
+                                    <table border="0" cellpadding="0" cellspacing="0" width="650px">
+                                        <tr>
+                                            <td align="right" style="padding-right: 30px">
+                                                <asp:CheckBox ID="ChkCMYK_C" runat="server" Text="C" Checked="true" AutoPostBack="true"
+                                                    OnCheckedChanged="Chk_CMYKCheckedChanged" />&nbsp;&nbsp;
+                                                <asp:CheckBox ID="ChkCMYK_M" runat="server" Text="M" Checked="true" AutoPostBack="true"
+                                                    OnCheckedChanged="Chk_CMYKCheckedChanged" />&nbsp;&nbsp;
+                                                <asp:CheckBox ID="ChkCMYK_Y" runat="server"
+                                                        Text="Y" Checked="true" AutoPostBack="true" OnCheckedChanged="Chk_CMYKCheckedChanged" />&nbsp;&nbsp;
+                                                <asp:CheckBox ID="ChkCMYK_K" runat="server"
+                                                        Text="K" Checked="true" AutoPostBack="true" OnCheckedChanged="Chk_CMYKCheckedChanged" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:Chart ID="CHRT_SummaryISODotgain_CMYK" runat="server" Width="650px" Height="310px"
+                                                    ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/CHRT_SummaryISODotgain" BackGradientStyle="Center"
+                                                    BackSecondaryColor="#EDEDED" BorderLineColor="#808080" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page4_TVISpread"
+                                                    EnableViewState="false">
+                                                    <Series>
+                                                        <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                            Color="Cyan" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                            MarkerStyle="Circle" MarkerSize="15"  BackSecondaryColor="162, 164, 255">
+                                                        </asp:Series>
+                                                        <asp:Series Name="Series1Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                            Color="Cyan" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                            MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                        </asp:Series>
+                                                        <asp:Series Name="Series2" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                            Color="Magenta" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                            MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                        </asp:Series>
+                                                        <asp:Series Name="Series2Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                            Color="Magenta" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                            MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                        </asp:Series>
+                                                        <asp:Series Name="Series3" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                            Color="Yellow" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                            MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                        </asp:Series>
+                                                        <asp:Series Name="Series3Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                            Color="Yellow" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                            MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                        </asp:Series>
+                                                         <asp:Series Name="Series4" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                            Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                            MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                        </asp:Series>
+                                                        <asp:Series Name="Series4Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                            Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                            MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                        </asp:Series>
+                                                    </Series>
+                                                    <BorderSkin SkinStyle="None"></BorderSkin>
+                                                                               
+                                                    <ChartAreas>
+                                                        <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
+                                                            BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                            <Position Height="99" Width="94" X="0" Y="2" />
+                                                            <AxisY IsLabelAutoFit="False" Title="" Interval="Auto">
+                                                                <MajorGrid LineColor="Gray"></MajorGrid>
+                                                            </AxisY>
+                                                            <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="">
+                                                                <MajorGrid LineColor="Gray"></MajorGrid>
+                                                            </AxisX>
+                                                        </asp:ChartArea>
+                                                    </ChartAreas>
+                                                </asp:Chart>
                                             </td>
                                         </tr>
                                     </table>

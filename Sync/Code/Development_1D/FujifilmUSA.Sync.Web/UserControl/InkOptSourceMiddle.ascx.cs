@@ -23,7 +23,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterAnalyze _presenterAnalyze;
         public DateTime EndDate;
         private const string _recDLPText = "dlpText";
-        private const string _recDLPMsgText = "dlpMsgText";            
+        private const string _recDLPMsgText = "dlpMsgText";
+        private const string _reclocCreateSourceProfile = "locCreateSourceProfile";   
 
         public string CreateDLPUpdateProgressClientID
         {
@@ -41,43 +42,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If  "Ink Optimization Source" project type
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //--If "Custom Source Profile", then change button name
+            {
+                locCreateDLP.Text = GetResourceString(_reclocCreateSourceProfile);
+            }
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //---If  "Ink Optimization Source" project type
             {
                 lbtnReTargetProject.Visible = false;
             }
             else
             {
                 lbtnDownloadAndSaveDLP.Visible = false;
-
-                ////02/11/2014_Softweb End
-                //SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
-                //if (SessionManager.Instance.CurrentOptimizeRun.HasProfile)
-                //{
-                //    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
-                //    Utilities.PopupWindowsRedirect(this, "Export.aspx");
-                //}
-                //else if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
-                //{
-                //    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                //    Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
-                //}
-                //else if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns .Count > 1)
-                //{
-                //    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
-                //    Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
-                //}
-
-                //if (SessionManager.Instance.CurrentOptimizeRun.HasProfile) //----If already retargetted project, move directly to Export page for curves
-                //{
-                //    if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
-                //    {
-                //        Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
-                //    }
-                //    else
-                //    {
-                //        Response.Redirect("Export.aspx");
-                //    }
-                //}
             }
         }
 
@@ -92,7 +67,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 EndDate = System.DateTime.Now;
                 DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
                 DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
-                _presenterAnalyze.CreateSourceToSourceDlp();
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //---If custom Source profile then call CreateSourceProfile function----//
+                {
+                    _presenterAnalyze.CreateCustomSourceProfileDlp();
+                }
+                else   //--call SourcetoSource function----//
+                {
+                    _presenterAnalyze.CreateSourceToSourceDlp();
+                }
 
                 if (!IsErrorOccured)
                 {
@@ -100,6 +82,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                   Request.UserHostAddress);
                     SessionManager.Instance.CurrentProject.OptimizeRuns[0].EndDateTime = EndDate;
                     SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
+
                     if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
                     {
                         Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
@@ -217,6 +200,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_DotGain> DTTVIChart { get; set; }
         public List<Entity.AnalyzeChart_DotGain> DTISOTVIChart { get; set; }
         public List<Entity.AnalyzeChart_DotGain> DTSpreadChartData { get; set; }
+        public List<Entity.AnalyzeChart_DotGain> DTSpreadChartData_CMYK { get; set; }
         public List<Entity.AnalyzeChart_DotGain> DTSpreadSplineRangeChartData { get; set; }
         public DataTable DTMaxSpreadChartData { get; set; }
 

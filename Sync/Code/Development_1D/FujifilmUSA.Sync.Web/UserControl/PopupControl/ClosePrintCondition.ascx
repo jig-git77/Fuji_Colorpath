@@ -74,6 +74,14 @@
                                     </asp:LinkButton>
                                 </div>
                                 <div class="buttonleft">
+                                    <asp:LinkButton ID="lbtnDownloadSourceProf" runat="server" CssClass="gray_bt" 
+                                         Visible="false" onclick="lbtnDownloadSourceProf_Click">
+                                        <span><asp:Localize runat="server" Text="Download Source Profile" 
+                                        ID="locDownloadSourceProf" meta:resourcekey="locDownloadSourceProfResource1"></asp:Localize>
+                                        </span>
+                                    </asp:LinkButton>
+                                </div>
+                                <div class="buttonleft">
                                     <asp:LinkButton ID="lbtnViewLastAnalysis" runat="server" CssClass="gray_bt" 
                                         OnClick="lbtnViewLastAnalysis_Click">
                 <span><asp:Localize runat="server" Text="View Last Analysis" ID="locViewLastAnalysis" 

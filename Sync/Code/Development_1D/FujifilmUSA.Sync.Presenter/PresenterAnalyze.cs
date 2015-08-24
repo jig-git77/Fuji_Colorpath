@@ -160,6 +160,7 @@ namespace FujifilmUSA.Sync.Presenter
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             _viewAnalyze.DTISOTVIChart = measurementBusiness.GetISOTVIChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements);
             _viewAnalyze.DTSpreadChartData = measurementBusiness.GetSpreadChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements);
+            _viewAnalyze.DTSpreadChartData_CMYK = measurementBusiness.GetSpreadChartData_CMYK(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements);
             _viewAnalyze.DTSpreadSplineRangeChartData = measurementBusiness.GetSpreadSplineRangeChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements);
             _viewAnalyze.DTMaxSpreadChartData = measurementBusiness.GetMaxSpreadChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements);
         }
@@ -170,6 +171,21 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             optimizeRunBusiness.
                 CreateSourceToSourceDeviceLinkProfile(
+                    _viewAnalyze.ProjectId,
+                    _viewAnalyze.OptimizeRunId,
+                    _viewAnalyze.MeasurementIds,
+                    _viewAnalyze.DestinationProfileDescription,
+                    _viewAnalyze.DlpDescription,
+                    Convert.ToInt32(EOptimizeRunStatus.Closed),
+                    DateTime.Now);
+        }
+
+        public void CreateCustomSourceProfileDlp()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            optimizeRunBusiness.
+                CreateCustomSourceProfile(
                     _viewAnalyze.ProjectId,
                     _viewAnalyze.OptimizeRunId,
                     _viewAnalyze.MeasurementIds,

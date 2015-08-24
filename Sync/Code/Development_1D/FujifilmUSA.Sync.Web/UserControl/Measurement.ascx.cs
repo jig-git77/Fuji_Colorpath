@@ -47,6 +47,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //---If custom Source profile, then directly pass on to next middle page instead of Analyze page
+                {
+                    btnCustomSourceProfile.Visible = true;
+                    btnAnalyze.Visible = false;
+                }
+                else
+                {
+                    btnCustomSourceProfile.Visible = false;
+                }
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
                     header.InnerText = GetResourceString(_recValidationMeasure); //"Validation - Measure";
@@ -110,7 +119,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Response.Redirect(string.Format("COMeasurementSetup.aspx?id={0}", Guid.NewGuid()));
         }
 
+        protected void btnCustomSourceProfile_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements = true;
+            SessionManager.Instance.CurrentOptimizeRun.HasMeasurements = true;
+            Response.Redirect(string.Format("InkOptSourceMiddle.aspx"));
+        }
+
         #endregion      
+
+       
 
     }
 }

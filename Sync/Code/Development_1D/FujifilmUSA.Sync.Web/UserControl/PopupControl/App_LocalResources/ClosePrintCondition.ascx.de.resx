@@ -156,6 +156,9 @@
   <data name="noDLPText" xml:space="preserve">
     <value>Ups! Hier gibt es keine DLP zum Herunterladen"</value>
   </data>
+  <data name="noSourceText" xml:space="preserve">
+    <value>Sorry! There is no source profile to download_de"</value>
+  </data>
   <data name="optimizeCompleteText" xml:space="preserve">
     <value>Bei Abschluß der Optimierung {0} in den Workflow übernehmen und das {1} Chart noch einmal drucken.</value>
   </data>

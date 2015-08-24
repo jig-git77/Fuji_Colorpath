@@ -154,6 +154,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<AnalyzeChart_DotGain>();
         }
+        public List<AnalyzeChart_DotGain> GetSpreadChartData_CMYK(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        {
+            return new List<AnalyzeChart_DotGain>();
+        }
         public List<AnalyzeChart_DotGain> GetSpreadSplineRangeChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
         {
             return new List<AnalyzeChart_DotGain>(); 

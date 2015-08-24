@@ -132,6 +132,9 @@
 	<data name="noDLPText" xml:space="preserve">
     <value>現在DLPはありません。</value>
   </data>
+  <data name="noSourceText" xml:space="preserve">
+    <value>Sorry! There is no source profile to download_ja"</value>
+  </data>
 	<data name="optimizeCompleteText" xml:space="preserve">
     <value>調整が完了したら{0}をワークフローに適用して{1}チャートを再印刷してください。</value>
   </data>

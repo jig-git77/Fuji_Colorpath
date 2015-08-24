@@ -65,6 +65,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return "0";
             }
         }
+        private const string _reclocValidationSetupNextText = "locValidationSetupNextText";
         #endregion
 
         public MeasurementSetup()
@@ -90,6 +91,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 lbtnMeasure.Visible = false;
                 lnkbtnMeasurementSetup.Visible = true;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //-----If Custom Source Profile project type then rename Validation Setup to Next button---//
+                {
+                    locValidationSetup.Text = GetResourceString(_reclocValidationSetupNextText);
+                }
             }
 
             if (ViewState[vsIsPostBack] == null)
@@ -202,7 +207,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             #endregion
 
             //Set next navigation level as ValidationSetup
-            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ValidationSetup;
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile)
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
+                SessionManager.Instance.CurrentProject.EnabledValidation = false;
+            }
+            else
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ValidationSetup;
+            }
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
 

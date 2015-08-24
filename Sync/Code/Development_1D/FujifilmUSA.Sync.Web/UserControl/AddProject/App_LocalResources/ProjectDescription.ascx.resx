@@ -156,6 +156,12 @@
   <data name="locTargetColorSpaceResource1.Text" xml:space="preserve">
     <value>Target ColorSpace</value>
   </data>
+  <data name="locTargetColorSpaceText" xml:space="preserve">
+    <value>Target ColorSpace</value>
+  </data>
+  <data name="locTargetColorSpaceNextText" xml:space="preserve">
+    <value>Next</value>
+  </data>
   <data name="locTechnicianNameResource1.Text" xml:space="preserve">
     <value>Technician Name:</value>
   </data>

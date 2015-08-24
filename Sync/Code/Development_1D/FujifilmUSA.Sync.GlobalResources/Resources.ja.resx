@@ -198,6 +198,9 @@
   <data name="ELicenseType_Sync4DCertification" xml:space="preserve">
     <value>SyncDLP判定</value>
   </data>
+  <data name="ELicenseType_CustomSourceProfile" xml:space="preserve">
+    <value>Custom Source Profile_ja</value>
+  </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>無効</value>
   </data>

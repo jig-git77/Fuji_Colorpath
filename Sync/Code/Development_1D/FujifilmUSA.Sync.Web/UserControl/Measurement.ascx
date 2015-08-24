@@ -48,6 +48,14 @@
                         ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="Image2Resource1" />
                     <asp:Localize runat="server" Text="Measurement Setup" id="locMeasurementSetup"  meta:resourcekey="locMeasurementSetupResource1"></asp:Localize>
                 </span>
+            </asp:LinkButton>    
+             <asp:LinkButton ID="btnCustomSourceProfile" runat="server" CssClass="button" 
+                Visible="false" onclick="btnCustomSourceProfile_Click"  OnClientClick="return AllowToAnalyze();">
+                <span>
+                    <asp:Image ID="Image3" runat="server" 
+                        ImageUrl="~/Images/analyze.png" meta:resourcekey="Image2Resource1" />
+                    <asp:Localize runat="server" Text="Next" id="locCustomSourceProf"  meta:resourcekey="locCustomSourceProfResource1"></asp:Localize>
+                </span>
             </asp:LinkButton>                
         </div>
     </div>

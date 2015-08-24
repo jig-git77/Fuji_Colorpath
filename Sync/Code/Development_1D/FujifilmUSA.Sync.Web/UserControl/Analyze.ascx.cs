@@ -572,6 +572,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         FillISOTVIChart(DTISOTVIChart);
                         FillSpreadChart(DTSpreadChartData, DTSpreadSplineRangeChartData, DTMaxSpreadChartData);
+                        FillSpreadChart_CMYK(DTSpreadChartData_CMYK);
                     }
                     UpdatePanel_TVI_ISO.Visible = true;
                     UpdatePanel_TVI_G7.Visible = false;
@@ -1821,7 +1822,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                             ThresholdTop = Convert.ToDouble(ListCyan[i].TargetDotGain) + ThresholdValue;
                             ThresholdBottom = Convert.ToDouble(ListCyan[i].TargetDotGain) - ThresholdValue;
-
+                            
                             //CHRT_DotgainISOCyan.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListCyan[i].CmykC.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
                             if ((Convert.ToDouble(ListCyan[i].CmykC.ToString()) > 0 && Convert.ToDouble(ListCyan[i].CmykC.ToString()) < 100 && ThresholdValue > 0) || Convert.ToDouble(ListCyan[i].CmykC.ToString()) == 0 || Convert.ToDouble(ListCyan[i].CmykC.ToString()) == 100)//---If ThresholdValue is 0, then don't make entry on chart, because it will display screwy spread (Only if it is not starting 0 or ending 100 point patch)
                             {
@@ -2073,7 +2074,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #region Spread Spline Range (green boundries)
                 if (DTSpreadSplineRange != null && DTSpreadSplineRange.Count > 0)
                 {
-                    CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(0), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
+                   // CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(0), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
                     for (int i = 0; i < DTSpreadSplineRange.Count; i++)
                     {
                         if (DTSpreadSplineRange[i].UpperLimit != 0 && DTSpreadSplineRange[i].LowerLimit != 0) //When chart has 20-40-60-80 patches then dont display 25-50-75 patches and vice versa
@@ -2081,7 +2082,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].TVI.ToString())), Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].UpperLimit.ToString())), Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].LowerLimit.ToString())));
                         }
                     }
-                    CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(100), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
+                   // CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(100), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
                 }
                 #endregion
 
@@ -2096,6 +2097,82 @@ namespace FujifilmUSA.Sync.Web.UserControl
              
                 FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_SummaryISODotgain.ImageLocation) + "." + CHRT_SummaryISODotgain.ImageType;
                 CHRT_SummaryISODotgain.SaveImage(Server.MapPath(FileName));
+            }
+            catch (Exception Exc)
+            {
+                throw Exc;
+            }
+        }
+
+        private void FillSpreadChart_CMYK(List<AnalyzeChart_DotGain> DTSpread)
+        {
+            try
+            {
+                #region //========== Clear Points==========//
+                CHRT_SummaryISODotgain_CMYK.Series["Series1"].Points.Clear();
+                CHRT_SummaryISODotgain_CMYK.Series["Series2"].Points.Clear();
+                CHRT_SummaryISODotgain_CMYK.Series["Series3"].Points.Clear();
+                CHRT_SummaryISODotgain_CMYK.Series["Series4"].Points.Clear();
+
+                CHRT_SummaryISODotgain_CMYK.Series["Series1Point"].Points.Clear();
+                CHRT_SummaryISODotgain_CMYK.Series["Series2Point"].Points.Clear();
+                CHRT_SummaryISODotgain_CMYK.Series["Series3Point"].Points.Clear();
+                CHRT_SummaryISODotgain_CMYK.Series["Series4Point"].Points.Clear();
+             
+                #endregion
+
+                #region Dotgain Spread CMYK Chart
+                if (DTSpread != null && DTSpread.Count > 0)
+                {
+                    int C = 0;
+                    int M = 0;
+                    int Y = 0;
+                    int K = 0;
+                    AnalyzeChart_DotGain FilterSpread = new AnalyzeChart_DotGain();
+
+                    for (int i = 0; i < DTSpread.Count; i++)
+                    {
+                        if (Convert.ToInt16(DTSpread[i].CmykC) == 0 && Convert.ToInt16(DTSpread[i].CmykM) == 0 && Convert.ToInt16(DTSpread[i].CmykY) == 0 && Convert.ToInt16(DTSpread[i].CmykK) == 0)
+                        {
+                            if (ChkCMYK_C.Checked)
+                                AddTVISpreadPointChart(C, CHRT_SummaryISODotgain_CMYK.Series["Series1"], CHRT_SummaryISODotgain_CMYK.Series["Series1Point"], Convert.ToInt64(DTSpread[i].CmykC), DTSpread[i].DotGain, "Cyan", GetResourceString(_recCyan), DTSpread[i].DotGainSpreadTh, "", "", "", "", "CMYK");
+                            if (ChkCMYK_M.Checked)
+                                AddTVISpreadPointChart(M, CHRT_SummaryISODotgain_CMYK.Series["Series2"], CHRT_SummaryISODotgain_CMYK.Series["Series2Point"], Convert.ToInt64(DTSpread[i].CmykM), DTSpread[i].DotGain, "Magenta", GetResourceString(_recMagenta), DTSpread[i].DotGainSpreadTh, "", "", "", "", "CMYK");
+                            if (ChkCMYK_Y.Checked)
+                                AddTVISpreadPointChart(Y, CHRT_SummaryISODotgain_CMYK.Series["Series3"], CHRT_SummaryISODotgain_CMYK.Series["Series3Point"], Convert.ToInt64(DTSpread[i].CmykY), DTSpread[i].DotGain, "Yellow", GetResourceString(_recYellow), DTSpread[i].DotGainSpreadTh, "", "", "", "", "CMYK");
+                            if (ChkCMYK_K.Checked)
+                                AddTVISpreadPointChart(K, CHRT_SummaryISODotgain_CMYK.Series["Series4"], CHRT_SummaryISODotgain_CMYK.Series["Series4Point"], Convert.ToInt64(DTSpread[i].CmykK), DTSpread[i].DotGain, "Black", GetResourceString(_recBlack), DTSpread[i].DotGainSpreadTh, "", "", "", "", "CMYK");
+
+                            C++; M++; Y++; K++;
+
+                        }
+                        if (Convert.ToInt16(DTSpread[i].CmykC) != 0 && ChkCMYK_C.Checked)
+                        {
+                            AddTVISpreadPointChart(C, CHRT_SummaryISODotgain_CMYK.Series["Series1"], CHRT_SummaryISODotgain_CMYK.Series["Series1Point"], Convert.ToInt64(DTSpread[i].CmykC), DTSpread[i].DotGain, "Cyan", GetResourceString(_recCyan), DTSpread[i].DotGainSpreadTh, "", "", "", "", "CMYK");
+                            C++;
+                        }
+                        if (Convert.ToInt16(DTSpread[i].CmykM) != 0 && ChkCMYK_M.Checked)
+                        {
+                            AddTVISpreadPointChart(M, CHRT_SummaryISODotgain_CMYK.Series["Series2"], CHRT_SummaryISODotgain_CMYK.Series["Series2Point"], Convert.ToInt64(DTSpread[i].CmykM), DTSpread[i].DotGain, "Magenta", GetResourceString(_recMagenta), DTSpread[i].DotGainSpreadTh, "", "", "", "", "CMYK");
+                            M++;
+                        }
+                        if (Convert.ToInt16(DTSpread[i].CmykY) != 0 && ChkCMYK_Y.Checked)
+                        {
+                            AddTVISpreadPointChart(Y, CHRT_SummaryISODotgain_CMYK.Series["Series3"], CHRT_SummaryISODotgain_CMYK.Series["Series3Point"], Convert.ToInt64(DTSpread[i].CmykY), DTSpread[i].DotGain, "Yellow", GetResourceString(_recYellow), DTSpread[i].DotGainSpreadTh, "", "", "", "", "CMYK");
+                            Y++;
+                        }
+                        if (Convert.ToInt16(DTSpread[i].CmykK) != 0 && ChkCMYK_K.Checked)
+                        {
+                            AddTVISpreadPointChart(K, CHRT_SummaryISODotgain_CMYK.Series["Series4"], CHRT_SummaryISODotgain_CMYK.Series["Series4Point"], Convert.ToInt64(DTSpread[i].CmykK), DTSpread[i].DotGain, "Black", GetResourceString(_recBlack), DTSpread[i].DotGainSpreadTh, "", "", "", "", "CMYK");
+                            K++;
+                        }
+                    }
+                }
+                #endregion
+
+             
+                FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_SummaryISODotgain_CMYK.ImageLocation) + "." + CHRT_SummaryISODotgain_CMYK.ImageType;
+                CHRT_SummaryISODotgain_CMYK.SaveImage(Server.MapPath(FileName));
             }
             catch (Exception Exc)
             {
@@ -2145,7 +2222,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private void AddTVISpreadPointChart(int _Index, Series _objSeries, Series _objSeriesPoint, long _XValue, decimal _YValue, string ColorName, string ToolltipColor, decimal _TVISpreadTh, string DiffrentTitleOne, string DiffrentTitleTwo, string DiffrentOne, string DiffrentTwo)
+        private void AddTVISpreadPointChart(int _Index, Series _objSeries, Series _objSeriesPoint, long _XValue, decimal _YValue, string ColorName, string ToolltipColor, decimal _TVISpreadTh, string DiffrentTitleOne, string DiffrentTitleTwo, string DiffrentOne, string DiffrentTwo, string ComingFrom = "")
         {
             try
             {
@@ -2173,15 +2250,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append("<tr><td>" + GetResourceString(_recactualTVI) + "</td><td>");
                     toolTip.Append(_YValue);
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>" + GetResourceString(_recspreadThr) + "</td><td>");
-                    toolTip.Append(_TVISpreadTh);
-                    toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>" + DiffrentTitleOne + ":</td><td>");
-                    toolTip.Append(DiffrentOne);
-                    toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>" + DiffrentTitleTwo + ":</td><td>");
-                    toolTip.Append(DiffrentTwo);
-                    toolTip.Append("</td></tr>");
+                    if (ComingFrom != "CMYK")
+                    {
+                        toolTip.Append("<tr><td>" + GetResourceString(_recspreadThr) + "</td><td>");
+                        toolTip.Append(_TVISpreadTh);
+                        toolTip.Append("</td></tr>");
+                        toolTip.Append("<tr><td>" + DiffrentTitleOne + ":</td><td>");
+                        toolTip.Append(DiffrentOne);
+                        toolTip.Append("</td></tr>");
+                        toolTip.Append("<tr><td>" + DiffrentTitleTwo + ":</td><td>");
+                        toolTip.Append(DiffrentTwo);
+                        toolTip.Append("</td></tr>");
+                    }
                     toolTip.Append("</table></td></tr>");
                     toolTip.Append("</table>");
                     #endregion
@@ -3190,6 +3270,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ScriptManager.RegisterStartupScript(Page, typeof(Page), Guid.NewGuid().ToString(), "funSpreadVisiblity();", true);
         }
 
+        protected void Chk_CMYKCheckedChanged(object sender, EventArgs e)
+        {
+            //----Call Javascript function to hide TVI charts row and only show Spread Chart row------------//
+            ScriptManager.RegisterStartupScript(Page, typeof(Page), Guid.NewGuid().ToString(), "funCMYKVisiblity();", true);
+        }
+
         protected void lbtnSubmit_Click(object sender, EventArgs e)
         {
             Response.Redirect(string.Format("COValidationCallback.aspx?projectid={0}&result={1}&id={2}", SessionManager.Instance.CurrentProject.ProjectId, ValidationMeasurementStatus, Guid.NewGuid()));
@@ -3287,6 +3373,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_DotGain> DTTVIChart { get; set; }
         public List<Entity.AnalyzeChart_DotGain> DTISOTVIChart { get; set; }
         public List<Entity.AnalyzeChart_DotGain> DTSpreadChartData { get; set; }
+        public List<Entity.AnalyzeChart_DotGain> DTSpreadChartData_CMYK { get; set; }
         public List<Entity.AnalyzeChart_DotGain> DTSpreadSplineRangeChartData { get; set; }
         public DataTable DTMaxSpreadChartData { get; set; }
 

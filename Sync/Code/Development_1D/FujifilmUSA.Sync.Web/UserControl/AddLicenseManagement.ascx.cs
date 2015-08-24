@@ -74,6 +74,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chkInk.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
             chkInk_Source.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimizationSource);
             chkSync4D_Certification.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync4DCertification);
+            chkCustomSourceProfile.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomSourceProfile);
         }
         private void Bindcompany()
         {
@@ -120,7 +121,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectBranch), false);
                 return;
             }
-            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked)
+            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked)
             {
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectLicenseType), false);//Please select any one license type.
                 return;
@@ -148,6 +149,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 License.LicenseType.Add(ELicenseType.InkOptimizationSource);
             if (chkSync4D_Certification.Checked)
                 License.LicenseType.Add(ELicenseType.Sync4DCertification);
+            if (chkCustomSourceProfile.Checked)
+                License.LicenseType.Add(ELicenseType.CustomSourceProfile);
 
             if (LId == 0) // Add New company
             {
@@ -190,6 +193,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.Sync4DCertification:
                             chkSync4D_Certification.Checked = true;
+                            break;
+                        case ELicenseType.CustomSourceProfile:
+                            chkCustomSourceProfile.Checked = true;
                             break;
                     }
                 });

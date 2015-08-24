@@ -120,6 +120,9 @@
   <data name="locCreateDLPResource1.Text" xml:space="preserve">
     <value>Create DLP</value>
   </data>
+  <data name="locCreateSourceProfile" xml:space="preserve">
+    <value>Create Source Profile</value>
+  </data>
   <data name="locReTargetResource1.Text" xml:space="preserve">
     <value>Retarget Project</value>
   </data>

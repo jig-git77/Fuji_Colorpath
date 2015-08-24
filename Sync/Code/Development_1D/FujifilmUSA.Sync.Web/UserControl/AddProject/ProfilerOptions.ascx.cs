@@ -116,6 +116,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (ViewState[_vsDeviceFamilyProfilerOption] == null)
             {
                 DeviceFamilyId = SessionManager.Instance.CurrentDevice.DeviceFamily.DeviceFamilyId;
+                LicenseTypeId = (short)SessionManager.Instance.CurrentProject.LicenseType;
                 _presenterDeviceFamilyProfilerOption.GetDeviceFamilyProfilerOption();
                 if (!IsErrorOccured)
                 {
@@ -1201,6 +1202,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int PrintStandardTypeId { get; set; }
         public List<Entity.CPSync1D.PrintStandardTVI> PrintStandardTVI { get; set; }
         public List<Entity.CPSync1D.ProjectTargetDensity> ProjectTargetDensity { get; set; }
+        public short LicenseTypeId { get; set; }
         #endregion
 
         #region IViewMeasurementSetting Members

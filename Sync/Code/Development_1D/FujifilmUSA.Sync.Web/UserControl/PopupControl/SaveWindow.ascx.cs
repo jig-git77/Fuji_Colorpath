@@ -62,6 +62,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
                 }
             }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //---If  "Custom Source Profile" project type
+            {
+                SessionManager.Instance.CurrentProject.PrintStandardType = new Entity.CPSync1D.PrintStandardType()
+                {
+                    PrintStandardTypeID = 1 //---By default pass 1 as PrintStandard Type---//
+                };
+                _presenterSaveWindow.SaveProject_CustomSourceProfile(); //---Call save project function, w/o any ref charts details
+                if (!IsErrorOccured)
+                {
+                    _presenterSaveWindow.GetProjectDetail();
+                    WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
+                    SessionManager.Instance.CurrentProject = Project;
+                    AssignLeftPanel();
+                }
+            }
             else //-----------For all other project types
             {
                 _presenterSaveWindow.SaveProject();

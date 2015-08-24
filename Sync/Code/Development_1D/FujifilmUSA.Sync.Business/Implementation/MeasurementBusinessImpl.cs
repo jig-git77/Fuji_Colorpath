@@ -1619,6 +1619,46 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return TVIChartDetails;
         }
 
+        public List<AnalyzeChart_DotGain> GetSpreadChartData_CMYK(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        {
+            var TVIChartDetails = new List<AnalyzeChart_DotGain>();
+            string storedProc = "CPSync.GetChartData_ISO_DotGain";  //----ISO Sync1D type  
+            if (IsSync1DType)
+            {
+                if (IsAverageOfMeasurements)
+                {
+                    storedProc = "CPSync.GetChartData_ISO_DotGain_Avg";
+                }
+            }
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_ISO_DotGain";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                       DataAccessFactory.
+                           Instance.
+                           GetDsResult(
+                               storedProc,
+                               new object[] { MeasurementId });
+                    TVIChartDetails = dsMeasurements.Tables[4].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_DotGain()
+                        {
+                            CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                            CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
+                            CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
+                            CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
+                            DotGain = DataReader.ReadDecimal(x, "DotGain"),
+                            HtmlColor = DataReader.ReadString(x, "HTMLColor"),
+                            PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                            DotGainSpreadTh = DataReader.ReadDecimal(x, "DotGainSpreadTh")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_ISO_TVI4"));
+            return TVIChartDetails;
+        }
+
         public int ChkAvgMeasurementCompatibility(int optimizeRunId)
         {
             var outParam = new Parameters() { ParameterName = "@CompatibilityNo", Type = DbType.Int32 };

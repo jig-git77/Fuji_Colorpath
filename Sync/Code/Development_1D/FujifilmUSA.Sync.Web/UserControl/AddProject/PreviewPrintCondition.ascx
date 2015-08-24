@@ -152,32 +152,34 @@
                                                 meta:resourcekey="lblTechnicianNameResource1"></asp:Label>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="breakWord90">
-                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
-                                                Text="Target Print Condition" ID="locTargetPrintCondition" meta:resourcekey="locTargetPrintConditionResource1"></asp:Localize></span>
-                                        </td>
-                                        <td style="width: 10px;">
-                                            <span style="font-weight: bold;">:</span>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lblTargetPrintCondition" runat="server" CssClass="breakWord100"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="breakWord90">
-                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
-                                                Text="Source Profile" ID="locSourceProfile" 
-                                                meta:resourcekey="locSourceProfileResource1"></asp:Localize></span>
-                                        </td>
-                                        <td style="width: 10px;">
-                                            <span style="font-weight: bold;">:</span>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lblSourceProfile" runat="server" CssClass="breakWord100" 
-                                                meta:resourcekey="lblSourceProfileResource1"></asp:Label>
-                                        </td>
-                                    </tr>
+                                    <div id="Div_TargetColorSpace" runat="server">
+                                        <tr>
+                                            <td class="breakWord90">
+                                                <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                    Text="Target Print Condition" ID="locTargetPrintCondition" meta:resourcekey="locTargetPrintConditionResource1"></asp:Localize></span>
+                                            </td>
+                                            <td style="width: 10px;">
+                                                <span style="font-weight: bold;">:</span>
+                                            </td>
+                                            <td>
+                                                <asp:Label ID="lblTargetPrintCondition" runat="server" CssClass="breakWord100"></asp:Label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="breakWord90">
+                                                <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                    Text="Source Profile" ID="locSourceProfile" 
+                                                    meta:resourcekey="locSourceProfileResource1"></asp:Localize></span>
+                                            </td>
+                                            <td style="width: 10px;">
+                                                <span style="font-weight: bold;">:</span>
+                                            </td>
+                                            <td>
+                                                <asp:Label ID="lblSourceProfile" runat="server" CssClass="breakWord100" 
+                                                    meta:resourcekey="lblSourceProfileResource1"></asp:Label>
+                                            </td>
+                                        </tr>
+                                    </div>
                                 </table>
                             </div>
                             <div class="clear">

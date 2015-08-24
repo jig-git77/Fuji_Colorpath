@@ -95,15 +95,33 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lblRipSettings.Text = SessionManager.Instance.CurrentProject.PrintCondition.RipSettings;
             lblNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
             lblTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
-            lblTargetPrintCondition.Text = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandard;
-            lblSourceProfile.Text = SessionManager.Instance.CurrentProject.SourceProfile.ProfileName;
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile)
+            {
+                lblTargetPrintCondition.Text = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandard;
+                lblSourceProfile.Text = SessionManager.Instance.CurrentProject.SourceProfile.ProfileName;
+            }
 
             DeviceFamilyProfilerOptionId = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId;
 
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If "Ink Optimization Source" project type, then skip Measurement and Validation setup pages.
             {
                 IlluminantId = ObserverTypeId = ReferenceChartTypeId = Opt_ReferenceChartTypeId = V_ReferenceChartTypeId = MetricTargetPresetId = 0;
-                MeasurementDeviceId = V_MeasurementDeviceId  = 0;
+                MeasurementDeviceId = V_MeasurementDeviceId = 0;
+                if (SessionManager.Instance.CurrentOptimizeRun != null && SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                {
+                    lnkbtnSavePrintCondition.Visible = false;
+                }
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //---If "Ink Optimization Source" project type, then skip Measurement and Validation setup pages.
+            {
+               V_ReferenceChartTypeId = MetricTargetPresetId = 0;
+                V_MeasurementDeviceId = 0;
+                Div_TargetColorSpace.Visible = false;
+                IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
+                ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
+                ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
+                MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId;
+                Opt_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
                 if (SessionManager.Instance.CurrentOptimizeRun != null && SessionManager.Instance.CurrentOptimizeRun.HasProfile)
                 {
                     lnkbtnSavePrintCondition.Visible = false;
@@ -123,7 +141,52 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             _presenterPreviewPrintCondition.GetPreviewPrintCondition();
 
-            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimizationSource) //---If not "Ink Optimization Source" project type, then display all tabs.
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource)  //---If "Ink Optimization Source" project type, then only display "Description" and "Option Presets" tabs.
+            {
+                if (!IsErrorOccured)
+                {
+                    lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
+                    lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
+                }
+                dvMetricPreset.Visible = false;
+                dvOptionPreset.Visible = true;
+                Div_Spectrophotometer_Options.Visible = false;
+                Div_Alignment_Chart.Visible = false;
+                Div_OptChart.Visible = false;
+                Div_ValidationChart.Visible = false;
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile)  //---If "Custom Source Project" project type
+            {
+                if (!IsErrorOccured)
+                {
+                    lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
+                    lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
+
+                    lblMeasurementDevice.Text = Data["MeasurementDeviceId"];
+                    lblIlluminant.Text = Data["illuminantId"];
+                    lblObserver.Text = Data["observerTypeId"];
+                    lblAlignmentChart.Text = Data["referenceChartTypeId"];
+
+                    imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId) + "&Preview=1";
+                    if (Opt_ReferenceChartTypeId != 0)
+                    {
+                        lblOptimizationChart.Text = Data["opt_referenceChartTypeId"];
+                        Image_OptimizationChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key) + "&Preview=1";
+                    }
+                    trUVSettings.Visible = (lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis))
+                                           || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro2))
+                                           || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2)));
+                    lblUVSettings.Text = Enum.GetName(typeof(EUVIncludedMode), SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode);
+                    lblEnableValidation.Text = SessionManager.Instance.CurrentProject.EnabledValidation.ToString();
+                }
+                dvMetricPreset.Visible = false;
+                dvOptionPreset.Visible = true;
+                Div_Spectrophotometer_Options.Visible = true;
+                Div_Alignment_Chart.Visible = true;
+                Div_OptChart.Visible = true;
+                Div_ValidationChart.Visible = false;
+            }
+            else //---If not "Ink Optimization Source" or "Custom Source Profile" project types, then display all tabs.
             {
                 if (!IsErrorOccured)
                 {
@@ -184,20 +247,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Div_ValidationChart.Visible = true;
                     lblVali_Metric.Text = SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Value;
                 }
-            }
-            else        //---If "Ink Optimization Source" project type, then only display "Description" and "Option Presets" tabs.
-            {
-                if (!IsErrorOccured)
-                {
-                    lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
-                    lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
-                }
-                dvMetricPreset.Visible = false;
-                dvOptionPreset.Visible = true;
-                Div_Spectrophotometer_Options.Visible = false;
-                Div_Alignment_Chart.Visible = false;
-                Div_OptChart.Visible = false;
-                Div_ValidationChart.Visible = false;
             }
         }
 

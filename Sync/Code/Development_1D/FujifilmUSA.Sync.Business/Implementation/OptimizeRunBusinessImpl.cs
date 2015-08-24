@@ -753,6 +753,68 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateInitialDestinationAndDeviceLinkProfiles"));
         }
 
+        public void CreateCustomSourceProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var sourcerequest = new CreateSourceProfileRequest()
+                    {
+                        PCSData = new List<double>(),
+                        DCSData = new List<double>(),
+                        ProfileOptions = new List<Parameter>()
+                    };
+
+                    var SourcemeasurementDataResponse =
+                        BusinessFactory<IMeasurementBusiness>.
+                            CreateObject().GetMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
+
+                    sourcerequest.PCSData = SourcemeasurementDataResponse.PcsData;
+                    sourcerequest.DCSData = SourcemeasurementDataResponse.DcsData;
+
+                    var sourceprofilerOptionBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+                    var sourceprofileOptions =
+                        sourceprofilerOptionBusiness.
+                            GetProjectOption(projectId, EProfileType.SourceProfile);
+                    foreach (KeyValuePair<string, string> option in sourceprofileOptions)
+                    {
+                        sourcerequest.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                    }
+                    sourcerequest.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = destinationDescription });
+
+                    sourcerequest.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+                
+                    using (var client = new ProfilerClient())
+                    {
+                        var sourceresponse = client.CreateSourceProfile(sourcerequest);
+                        if (sourceresponse.Profile.ProfileData == null || sourceresponse.Profile.ProfileData == null)
+                        {
+
+                            throw new Exception("Custom Source profile has not been generated successfully from service for runId: " + optimizeRunId + " Error: " + sourceresponse.Message);
+                        }
+
+                        DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure(
+                                "CP.InsertCustomSourceProfile",
+                                new object[]
+                                    {
+                                        projectId,
+                                        destinationDescription,
+                                        destinationDescription,
+                                        sourceresponse.Profile.ProfileData,
+                                        true
+                                    });
+                       
+                    }
+
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateInitialDestinationAndDeviceLinkProfiles"));
+
+           // CreateInitialDestinationAndDeviceLinkProfiles(projectId, optimizeRunId, measurementIds, destinationDescription, dlpDescription, status, endDateTime);
+        }
+
+
         public void CreateReTargetProject(int projectId, int optimizeRunId, int status, DateTime endDateTime)
         {
             Common.ImplementBusinessLogic(

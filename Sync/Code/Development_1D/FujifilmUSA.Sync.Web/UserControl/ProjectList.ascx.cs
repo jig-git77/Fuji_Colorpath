@@ -235,9 +235,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case ValidationStatus.Disabled:
                     //Validation is not enabled
                     imgValidationButton.Visible = false;
-                    //imgValidationButton.ImageUrl = @"../Images/Validation_Not_Active.png";
-                    //imgValidationButton.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue(ValidationStatus.Disabled);
-                    //imgValidationButton.Attributes.Add("onclick", "javascript: return false;");
                     break;
                 case ValidationStatus.NoMeasurement:
                     //No validation found
@@ -284,6 +281,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.Sync4DCertification:
                             operationImageURL = @"../Images/DLP.png";
+                            break;
+                        case ELicenseType.CustomSourceProfile:
+                            operationImageURL = @"../Images/DLPSource.png";
                             break;
                         case ELicenseType.Validation:
 

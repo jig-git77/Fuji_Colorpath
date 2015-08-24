@@ -65,6 +65,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Div_Chart.Visible = false;
                         header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.ProjectName + ".icc");
                     }
+                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //---If "Custom Source Profile" project type, then skip Measure button and Advanced Download button (since we don't have desctination profile in this case).
+                    {
+                        trSourceProfDownload.Visible = true;
+                        trDLPDownload.Visible = false;
+                        trAdvancedDownload.Visible = false;
+                        lbtnMeasure.Visible = false;
+                        header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.ProjectName + ".icc");
+                    }
                     else  //----Sync4D or Ink Optimization case
                     {
                         trAdvancedDownload.Visible = true;
@@ -108,7 +116,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentOptimizeRun.EndDateTime.HasValue)
             {
                 DLPName = SessionManager.Instance.CurrentProject.ProjectName + " "+ GetResourceString(_recDLP) + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc";
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If "Ink Optimization Source" project type, then only Project name as DLP name.
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If "Ink Optimization Source" / "Custom Source Profile" project type, then only Project name as DLP name.
                 {
                     DLPName = SessionManager.Instance.CurrentProject.ProjectName + ".icc";
                 }
@@ -119,6 +127,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Utilities.DownloadFile(DeviceLinkProfile, string.Format("{0}", DLPName));
             }
         }
+
+        protected void lbtnDownloadSourceProf_Click(object sender, EventArgs e)
+        {
+            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            _presenterExport.GetSourceProfile();
+            if (!IsErrorOccured)
+            {
+                if (SourceProfile != null)
+                    Utilities.DownloadFile(SourceProfile,
+                                           string.Format("{0}.icc",
+                                                         SessionManager.Instance.CurrentProject.ProjectName));
+            }
+        }
+        
 
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)
         {
@@ -750,6 +772,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short CurveTypeId { get; set; }
         public Business.Messages.CurveDataResponse CurveData { get; set; }
         #endregion        
-        
+
+      
     }
 }

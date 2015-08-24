@@ -144,6 +144,12 @@
   <data name="locTargetColorSpaceResource1.Text" xml:space="preserve">
     <value>新規印刷条件 - ターゲット色空間</value>
   </data>
+  <data name="locTargetColorSpaceText" xml:space="preserve">
+    <value>新規印刷条件 - ターゲット色空間</value>
+  </data>
+  <data name="locTargetColorSpaceNextText" xml:space="preserve">
+    <value>Next</value>
+  </data>
   <data name="locTechnicianNameResource1.Text" xml:space="preserve">
     <value>技術者名：</value>
   </data>

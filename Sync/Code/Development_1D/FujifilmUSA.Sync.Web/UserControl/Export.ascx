@@ -68,7 +68,7 @@
                     <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
                 </td>
             </tr>
-            <tr id="tr1">
+            <tr id="trDLPDownload" runat="server">
                 <td>
                     <div style="display: block;" class="contantbox tabcontant">
                         <div class="section_top">
@@ -125,6 +125,52 @@
                                                 </td>
                                             </tr>
                                             </div>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section_bottom">
+                            &nbsp;</div>
+                    </div>
+                </td>
+            </tr>
+            <tr id="trSourceProfDownload" runat="server" visible="false">
+                <td>
+                    <div style="display: block;" class="contantbox tabcontant">
+                        <div class="section_top">
+                            &nbsp;</div>
+                        <div class="section_middle">
+                            <div class="combopart">
+                                <div id="div1" class="header collapsibleContainerTitle">
+                                    <div class="content">
+                                        <div class="text" style="float: left">
+                                            <asp:Localize Text="Download Source Profile" runat="server" 
+                                                id="Localize1" meta:resourcekey="locDownloadSourceProfResource1"></asp:Localize>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="div3" style="border-style: None; padding: 5px">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:LinkButton ID="lbtnDownloadSourceProf" runat="server" CssClass="gray_bt" onclick="lbtnDownloadSourceProf_Click">
+                                                    <span><asp:Localize runat="server" Text="Download Source Profile" 
+                                                        ID="Localize2" 
+                                                        meta:resourcekey="locDownloadSourceProfICCResource1"></asp:Localize>
+                                                    </span>
+                                                    </asp:LinkButton>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

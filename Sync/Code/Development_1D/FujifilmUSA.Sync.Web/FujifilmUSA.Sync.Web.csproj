@@ -147,6 +147,7 @@
     <Content Include="Images\activity-validation-rules.png" />
     <Content Include="Images\CPSPrintStandardBottomImage.jpg" />
     <Content Include="Images\CPSPrintStandardLogo.jpg" />
+    <Content Include="Images\DLPSource.png" />
     <Content Include="Images\green.png" />
     <Content Include="Images\InkOptimizeSource.png" />
     <Content Include="Images\Red.png" />
@@ -1803,7 +1804,9 @@
     <Content Include="UserControl\App_LocalResources\OperationSelection.ascx.ja.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\PopupControl\App_LocalResources\CreateDLP.ascx.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\CreateDLP.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\CreateDLP.ascx.de.resx" />
@@ -2820,7 +2823,9 @@
     <Content Include="UserControl\App_LocalResources\AddLookupTVILABDensity.ascx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\InkOptSourceMiddle.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\InkOptSourceMiddle.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddMetricTargetPreset.ascx.fr.resx" />

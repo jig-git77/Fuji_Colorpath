@@ -150,6 +150,9 @@
   <data name="locValidationSetupResource1.Text" xml:space="preserve">
     <value>Paramètre Validation</value>
   </data>
+  <data name="locValidationSetupNextText" xml:space="preserve">
+    <value>Next</value>
+  </data>
   <data name="rfvcAlignmentChartContainer" xml:space="preserve">
     <value>Sélectionner Charte de Base</value>
   </data>

@@ -52,6 +52,13 @@ namespace FujifilmUSA.Sync.Presenter
             _viewSaveWindow.ProjectId = projectBusiness.SaveProject(_viewSaveWindow.Project);
         }
 
+        public void SaveProject_CustomSourceProfile()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
+            _viewSaveWindow.ProjectId = projectBusiness.SaveProject(_viewSaveWindow.Project);
+        }
+
         public void GetProjectDetail()
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();

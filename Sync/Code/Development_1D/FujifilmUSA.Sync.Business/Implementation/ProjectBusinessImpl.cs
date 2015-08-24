@@ -393,13 +393,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstSourceList;
         }
 
-        public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId)
+        public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId, short LicenseTypeId)
         {
             var presetList = new List<DeviceFamilyProfilerOption>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetDeviceFamilyProfilerOption", new object[] { deviceFamilyId });
+                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetDeviceFamilyProfilerOption", new object[] { deviceFamilyId, LicenseTypeId });
                     if (dsPresetList != null && dsPresetList.Tables.Count > 0)
                     {
                         presetList = dsPresetList.Tables[0].AsEnumerable().Select(

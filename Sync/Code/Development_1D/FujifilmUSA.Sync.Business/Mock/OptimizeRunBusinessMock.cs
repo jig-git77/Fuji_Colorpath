@@ -124,6 +124,11 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         }
 
+        public void CreateCustomSourceProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
+        {
+
+        }
+
         public void CreateReTargetProject(int projectId, int optimizeRunId, int status, DateTime endDateTime)
         {
 

@@ -92,8 +92,8 @@
     </div>
 </div>
 <div class="listDevice" style="margin-left: 10px;">
-<asp:UpdatePanel runat="server">
-        <ContentTemplate>
+<%--<asp:UpdatePanel runat="server">
+        <ContentTemplate>--%>
             <table cellpadding="0" cellspacing="10" border="0" width="97%" id="tbProjectDescription">
                 <tr id="trListHeader" runat="server">
                     <td>
@@ -342,6 +342,6 @@
                 </tr>
             </table>
             
-        </ContentTemplate>
-    </asp:UpdatePanel>
+    <%--    </ContentTemplate>
+    </asp:UpdatePanel>--%>
 </div>

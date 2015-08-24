@@ -14,6 +14,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recrfvColorantContainer = "rfvColorantContainer";
         private const string _recrfvRipSettingsContainer = "rfvRipSettingsContainer";
         private const string _recoperationSelectText = "operationSelectText";
+        private const string _reclocTargetColorSpaceText = "locTargetColorSpaceText";
+        private const string _reclocTargetColorSpaceNextText = "locTargetColorSpaceNextText";
         #endregion
 
         public ProjectDescription()
@@ -70,6 +72,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 ddlLicenseType.SelectedIndex = ddlLicenseType.Items.IndexOf(ddlLicenseType.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.LicenseType)));
                 ddlLicenseType.Enabled = false;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //-----If Custom Source Profile project type then rename Target ColorSpace to Next button---//
+                {
+                    locTargetColorSpace.Text = GetResourceString(_reclocTargetColorSpaceNextText);
+                }
             }
         }
 
@@ -155,12 +161,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
             };
 
             SessionManager.Instance.CurrentProject.LicenseType = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
-            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.TargetColorSpace;
+            if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomSourceProfile)
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
+                //SessionManager.Instance.CurrentProject.PrintStandardType = null;
+                SessionManager.Instance.CurrentProject.SourceProfile = null;
+                SessionManager.Instance.CurrentProject.ProjectTargetLAB = null;
+                SessionManager.Instance.CurrentProject.ProjectTypeId = 0;
+                SessionManager.Instance.CurrentProject.PCSDataTypes = (PCSDataTypes)(PCSDataTypes.XYZ); //PCSDataType Selection 
+            }
+            else
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.TargetColorSpace;
+            }
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
 
         protected void ddlLicenseType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            locTargetColorSpace.Text = GetResourceString(_reclocTargetColorSpaceText);
             if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.Sync1D)
             {
                 Tr_OffsetPrintData.Visible = true;
@@ -168,6 +187,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else
             {
                 Tr_OffsetPrintData.Visible = false;
+                if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomSourceProfile)
+                {
+                    locTargetColorSpace.Text = GetResourceString(_reclocTargetColorSpaceNextText);
+                }
             }
         }
 

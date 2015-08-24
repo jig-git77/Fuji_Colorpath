@@ -16,6 +16,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recprintOptionsText = "printOptionsText";
         private const string _recoptimizeCompleteText = "optimizeCompleteText";
         private const string _recnoDLPText = "noDLPText";
+        private const string _recnoSourceText = "noSourceText";
+
         #endregion
         public ClosePrintCondition()
         {
@@ -59,8 +61,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else if (CurrentLicenseType == ELicenseType.Sync4DCertification) //---If Sync 4D Certification type of project, then they can not create optimize runs or Download DLP since there is no DLP
                 {
-                    lbtnReOptimize.Visible = false;               
+                    lbtnReOptimize.Visible = false;
                     lbtnDownloadCurrentDLP.Visible = false;
+                }
+                else if (CurrentLicenseType == ELicenseType.CustomSourceProfile)  //-------If LicenseTypeID = 6 (Custom Source Profile), then they can not create optimize runs, they has to close after 1st run--------------------//
+                {
+                    lbtnDownloadCurrentDLP.Visible = false;
+                    lbtnReOptimize.Visible = false;
+                    lbtnViewLastAnalysis.Visible = false;
+                    lbtnDownloadSourceProf.Visible = true;
+                    lbtnViewDetail.Visible = true;
                 }
             }
         }
@@ -233,6 +243,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-      
+        protected void lbtnDownloadSourceProf_Click(object sender, EventArgs e)
+        {
+            string DLPName = Request.QueryString["ProjectName"] + ".icc";
+            ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+
+            _presenterClosePrintCondition.GetCurrentDeviceLinkProfile();
+
+            if (!IsErrorOccured)
+            {
+                if (CurrentDlp != null)
+                {
+                    Utilities.DownloadFile(CurrentDlp, DLPName);
+                }
+                else
+                {
+                    fujiStatusbar.DisplayMessage(GetResourceString(_recnoSourceText), false);
+                }
+            }
+        }
     }
 }

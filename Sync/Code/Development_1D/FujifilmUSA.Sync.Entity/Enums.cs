@@ -403,10 +403,12 @@ namespace FujifilmUSA.Sync.Entity
         InkOptimizationSource = 4,
         [Description("ELicenseType_Sync4DCertification")]//Sync4D Certification
         Sync4DCertification = 5,
+        [Description("ELicenseType_CustomSourceProfile")]//Custom Source Profile
+        CustomSourceProfile = 6,
         [Description("ELicenseType_Validation")]//Color Validation
-        Validation = 6,
+        Validation = 7,
         [Description("ELicenseType_IccProfiling")]//ICC Profiling
-        IccProfiling = 7       
+        IccProfiling = 8       
     }
 
     public enum UserType

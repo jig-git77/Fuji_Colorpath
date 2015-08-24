@@ -144,6 +144,12 @@
   <data name="locTargetColorSpaceResource1.Text" xml:space="preserve">
     <value>Zielfarbraum</value>
   </data>
+  <data name="locTargetColorSpaceText" xml:space="preserve">
+    <value>Zielfarbraum</value>
+  </data>
+  <data name="locTargetColorSpaceNextText" xml:space="preserve">
+    <value>Next</value>
+  </data>
   <data name="locTechnicianNameResource1.Text" xml:space="preserve">
     <value>Name des Anwenders</value>
   </data>

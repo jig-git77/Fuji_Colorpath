@@ -120,6 +120,9 @@
   <data name="locCreateDLPResource1.Text" xml:space="preserve">
     <value>DLP作成</value>
   </data>
+  <data name="locCreateSourceProfile" xml:space="preserve">
+    <value>Create Source Profile_ja</value>
+  </data>
   <data name="locReTargetResource1.Text" xml:space="preserve">
     <value>再補正での元プロジェクト</value>
   </data>

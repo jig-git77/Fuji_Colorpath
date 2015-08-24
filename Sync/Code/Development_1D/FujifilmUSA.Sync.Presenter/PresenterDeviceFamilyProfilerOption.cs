@@ -17,7 +17,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
-            _viewDeviceFamilyProfilerOption.ProfileOption = projectBusiness.GetDeviceFamilyProfilerOptionPreset(_viewDeviceFamilyProfilerOption.DeviceFamilyId);
+            _viewDeviceFamilyProfilerOption.ProfileOption = projectBusiness.GetDeviceFamilyProfilerOptionPreset(_viewDeviceFamilyProfilerOption.DeviceFamilyId,_viewDeviceFamilyProfilerOption.LicenseTypeId);
         }
 
         public void GetMetricSumTargetValues()
