@@ -348,9 +348,7 @@
                                                     <span> <asp:Localize Text="Save" ID="locSave" runat="server" 
                                                     meta:resourcekey="locSaveResource1"></asp:Localize> </span>
                                                 </asp:LinkButton>
-                                                <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" 
-                                                    PostBackUrl="~/PatchPresetManagement.aspx" 
-                                                    onclick="lbtnCancel_Click">
+                                                <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" onclick="lbtnCancel_Click">
                                                     <span> <asp:Localize Text="Cancel" ID="locCancel" runat="server" 
                                                     meta:resourcekey="locCancelResource1"></asp:Localize> </span>
                                                 </asp:LinkButton>

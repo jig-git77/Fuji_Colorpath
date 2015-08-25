@@ -210,7 +210,7 @@
                                                     meta:resourcekey="locSaveResource1"></asp:Localize> </span>
                                                 </asp:LinkButton>
                                                 <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" 
-                                                    PostBackUrl="~/MetricTargetPresetManagement.aspx">
+                                                    onclick="lbtnCancel_Click">
                                                     <span> <asp:Localize Text="Cancel" ID="locCancel" runat="server" 
                                                     meta:resourcekey="locCancelResource1"></asp:Localize> </span>
                                                 </asp:LinkButton>

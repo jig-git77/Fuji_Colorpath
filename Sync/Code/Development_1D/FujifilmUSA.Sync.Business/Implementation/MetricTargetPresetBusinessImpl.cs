@@ -189,6 +189,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 MetricTargetPresetDesc = DataReader.ReadString(x, "MetricTargetPresetDesc"),
                                 dEMethod = DataReader.ReadString(x, "dEMethod"),
                                 ValidationType = DataReader.ReadInt(x, "ValidationType"),
+                                IsPatchTolerance = DataReader.ReadBoolean(x, "IsPatchTolerance"),
                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
                                 ReferenceChartTypeId = DataReader.ReadInt(x, "ReferenceChartTypeId"),
                                 InstrumentTypeID = DataReader.ReadInt(x, "InstrumentTypeID")

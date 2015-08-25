@@ -55,6 +55,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             set { ViewState["MetricTargetPresetId"] = value.ToString(); }
         }
+        public string ComingFrom
+        {
+            get
+            {
+                return (Request.QueryString["ComingFrom"] != null ? Request.QueryString["ComingFrom"].ToString() : "");
+            }
+        }
+
         #endregion
 
         public AddPatchTolerance()
@@ -438,7 +446,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterMetricTargetPresetManagement.UpdateMetricTargetPatchPreset();
                 if (IsErrorOccured) return;
             }
-            Response.Redirect("PatchPresetManagement.aspx");
+
+            if (ComingFrom == "MTP")
+            {
+                Response.Redirect("MetricTargetPresetManagement.aspx");
+            }
+            else
+            {
+                Response.Redirect("PatchPresetManagement.aspx");
+            }
         }
         #endregion
 
@@ -458,7 +474,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnCancel_Click(object sender, EventArgs e)
         {
-
+            if (ComingFrom == "MTP")
+            {
+                Response.Redirect("MetricTargetPresetManagement.aspx");
+            }
+            else
+            {
+                Response.Redirect("PatchPresetManagement.aspx");
+            }
         }
 
     }

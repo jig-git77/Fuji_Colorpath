@@ -123,8 +123,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     GridDataItem item = (GridDataItem)e.Item;
                     string parms = Service.Common.Encryption.CryptHelper.EncryptString(MetricTargetPreset.MetricTargetPresetID.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
 
-                    Response.Redirect("AddPatchTolerance.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms));
-                  
+                    Boolean IsPatchTolerance = Convert.ToBoolean(rgMetricTargetPreset.MasterTableView.DataKeyValues[e.Item.ItemIndex]["IsPatchTolerance"]);
+
+                    if (IsPatchTolerance == true)
+                    {
+                        Response.Redirect("AddPatchTolerance.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms));
+                    }
+                    else
+                    {
+                        Response.Redirect("AddMetricTargetPreset.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms) + "&&ComingFrom=PTP");
+                    }
                     break;
             }
         }

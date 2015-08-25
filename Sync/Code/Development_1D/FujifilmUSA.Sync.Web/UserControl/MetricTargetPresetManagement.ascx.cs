@@ -98,7 +98,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     if (IsPatchTolerance == true)
                     {
-                        Response.Redirect("AddPatchTolerance.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms));
+                        Response.Redirect("AddPatchTolerance.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms) + "&&ComingFrom=MTP");
                     }
                     else
                     {
