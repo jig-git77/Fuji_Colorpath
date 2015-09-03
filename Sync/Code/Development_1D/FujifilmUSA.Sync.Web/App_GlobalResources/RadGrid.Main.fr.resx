@@ -124,7 +124,7 @@
     <value>Séparation Groupe</value>
   </data>
   <data name="ColumnResizeTooltipFormatString" xml:space="preserve">
-    <value>Largeur: &lt;strong&gt;{0}&lt;/strong&gt; &lt;em&gt;pixels&lt;/em&gt;_de</value>
+    <value>Largeur: &lt;strong&gt;{0}&lt;/strong&gt; &lt;em&gt;pixels&lt;/em&gt;</value>
   </data>
   <data name="DragToGroupOrReorder" xml:space="preserve">
     <value>Glisser dans le groupe ou réorganiser</value>
@@ -139,7 +139,7 @@
     <value>Développer le groupe</value>
   </data>
   <data name="ExportToCsvText" xml:space="preserve">
-    <value>Exporter en CSV_de</value>
+    <value>Exporter en CSV</value>
   </data>
   <data name="ExportToExcelText" xml:space="preserve">
     <value>Exporter en Excel</value>

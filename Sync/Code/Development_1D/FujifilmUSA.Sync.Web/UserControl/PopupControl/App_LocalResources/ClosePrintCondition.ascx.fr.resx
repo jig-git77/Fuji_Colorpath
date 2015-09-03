@@ -148,7 +148,7 @@
     <value>Désolé! Il n'y a pas de DLP à télécharger</value>
   </data>
   <data name="noSourceText" xml:space="preserve">
-    <value>Sorry! There is no source profile to download_fr"</value>
+    <value>Sorry! There is no source profile to download_fr</value>
   </data>
 	<data name="optimizeCompleteText" xml:space="preserve">
     <value>Après l'optimisation, appliquer {0} au Flux de Travail et ré-imprimer {1} la Charte.</value>
