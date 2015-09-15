@@ -2579,6 +2579,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             int _CurrentPageIndex = Convert.ToInt32(LTRL_CurrentPage.Text);
             int _PageCount = MeasurementList.Count / _PageSize; if ((MeasurementList.Count % _PageSize) > 0) { _PageCount = _PageCount + 1; }
             int _StartIndex = 1;
+            //int _ReminderVal = _PageSize - (MeasurementList.Count % _PageSize);
+            int _ReminderVal = (MeasurementList.Count % _PageSize);
             int _EndIndex = 0;
             #endregion
 
@@ -2598,11 +2600,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
             #region Settings for Paging
             _CurrentPageIndex = Convert.ToInt32(DDL_GoToPage.SelectedValue);
 
-            if (_CurrentPageIndex == 0) { _StartIndex = 0; } else { _StartIndex = (_CurrentPageIndex * _PageSize); }
-
-            _EndIndex = _StartIndex + _PageSize;
-
-            if (MeasurementList.Count < _EndIndex) { _EndIndex = MeasurementList.Count; }
+            //---Changed the code to display highest to last page and rest reminder to the first page in trendline chart---//
+            if (_ReminderVal > 0)
+            {
+                _EndIndex = ((_CurrentPageIndex * _PageSize) + _ReminderVal);
+            }
+            else   //--If no ReminderValue then add Index to 1 more in order to get right number of endpoint like in ex., Pagesize = 5 case when total no. of Measurements = 20---//
+            {
+                _EndIndex = (((_CurrentPageIndex + 1) * _PageSize) + _ReminderVal);
+            }
+            if (_CurrentPageIndex == 0)
+            {
+                _StartIndex = 0;
+            }
+            else
+            {
+                _StartIndex = _EndIndex - _PageSize;
+            }
 
             //========== Show Hide Settings and Setting Label Values ==========//        
             IBTN_FirstPage.Enabled = true; IBTN_FirstPage.ImageUrl = "~/Images/Nav_FirstPage.gif";
@@ -2649,10 +2663,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //========== Set Values Back To Label ==========//
             LTRL_StartIndex.Text = _StartIndex.ToString();
             LTRL_CurrentPage.Text = _CurrentPageIndex.ToString();
-            //Modified for localization
-            //LTRL_StartRecord.Text = Convert.ToString(_StartIndex + 1);
-            //LTRL_EndRecord.Text = _EndIndex.ToString();
-            //LTRL_TotalRec.Text = MeasurementList.Count.ToString();
             ltrlRecordsSummary.Text = GetResourceString("ltrlRecordsSummaryResource1.Text");
             ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{start}", Convert.ToString(_StartIndex + 1));
             ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{end}", _EndIndex.ToString());
