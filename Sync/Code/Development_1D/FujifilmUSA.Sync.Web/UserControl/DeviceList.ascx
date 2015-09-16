@@ -116,12 +116,12 @@
                                 meta:resourcekey="locDeviceListResource1"></asp:Localize></h1>
                     </td>
                     <td>
-                        <asp:LinkButton ID="lbtnReport" runat="server"><h1><asp:Localize ID="locReport" 
+                        <asp:LinkButton ID="lbtnReport" runat="server" Visible="false"><h1><asp:Localize ID="locReport" 
                                 runat="server" Text="Report" meta:resourcekey="locReportResource1"></asp:Localize>
                             </h1></asp:LinkButton>
                     </td>
                     <td>
-                        <asp:LinkButton ID="LinkButton1" runat="server"><h1><asp:Localize ID="locHelp" 
+                        <asp:LinkButton ID="LinkButton1" runat="server" Visible="false"><h1><asp:Localize ID="locHelp" 
                                 runat="server" Text="Help" meta:resourcekey="locHelpResource1"></asp:Localize>
                             </h1></asp:LinkButton>
                     </td>
