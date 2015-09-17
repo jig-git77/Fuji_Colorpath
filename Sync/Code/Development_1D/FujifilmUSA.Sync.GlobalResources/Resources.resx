@@ -790,7 +790,7 @@
     <value>None</value>
   </data>
   <data name="ValidationStatus_NotCertified" xml:space="preserve">
-    <value>Not certified</value>
+    <value>Validation can not be opened as the project is not in a Certified state</value>
   </data>
   <data name="ERolePermission_ManageActivityValidationRules" xml:space="preserve">
     <value>Manage Activity Validation Rules</value>

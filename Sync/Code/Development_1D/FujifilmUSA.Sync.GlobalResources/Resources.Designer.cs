@@ -70,6 +70,24 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allow Only Numbers.
+        /// </summary>
+        internal static string AddPatchPreset_JavascriptTollimit1 {
+            get {
+                return ResourceManager.GetString("AddPatchPreset_JavascriptTollimit1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tolerance value should be between 0 to 10.
+        /// </summary>
+        internal static string AddPatchPreset_JavascriptTollimit2 {
+            get {
+                return ResourceManager.GetString("AddPatchPreset_JavascriptTollimit2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete selected branch?.
         /// </summary>
         internal static string BranchManagement_DeleteBranch_Confirmation {
@@ -588,6 +606,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string EInstrumentType_i1Sis {
             get {
                 return ResourceManager.GetString("EInstrumentType_i1Sis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Source Profile.
+        /// </summary>
+        internal static string ELicenseType_CustomSourceProfile {
+            get {
+                return ResourceManager.GetString("ELicenseType_CustomSourceProfile", resourceCulture);
             }
         }
         
@@ -2428,6 +2455,33 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allow Only Numbers.
+        /// </summary>
+        internal static string ProfilerOptions_JavascriptAllownumbers {
+            get {
+                return ResourceManager.GetString("ProfilerOptions_JavascriptAllownumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Density value should be between 0 to 2.
+        /// </summary>
+        internal static string ProfilerOptions_JavascriptDensityRange {
+            get {
+                return ResourceManager.GetString("ProfilerOptions_JavascriptDensityRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TVI value should be between 0 to 50.
+        /// </summary>
+        internal static string ProfilerOptions_JavascriptTVIRange {
+            get {
+                return ResourceManager.GetString("ProfilerOptions_JavascriptTVIRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete all information of selected Project?.
         /// </summary>
         internal static string ProjectList_DeleteProject_Confirmation {
@@ -2527,7 +2581,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not certified.
+        ///   Looks up a localized string similar to Validation can not be opened as the project is not in a Certified state.
         /// </summary>
         internal static string ValidationStatus_NotCertified {
             get {
