@@ -130,7 +130,7 @@
                                             meta:resourcekey="chkInkResource1"/>    
                                         <asp:CheckBox runat="server" ID="chkInk_Source" CssClass="checkListBox"/>
                                         <asp:CheckBox runat="server" ID="chkSync4D_Certification" CssClass="checkListBox"/>       
-                                         <asp:CheckBox runat="server" ID="chkCustomSourceProfile" CssClass="checkListBox"/>                            
+                                         <asp:CheckBox runat="server" ID="chkCustomSourceProfile" CssClass="checkListBox" Visible="false"/>                            
                                     </div>
                                     <div style="float: left">
                                     </div>
