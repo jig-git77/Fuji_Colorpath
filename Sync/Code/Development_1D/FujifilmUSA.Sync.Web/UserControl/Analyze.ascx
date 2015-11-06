@@ -259,17 +259,31 @@
             </td>
         </tr>
         <tr>
-            <td id="tdAverageOfMeasurements" runat="server" visible="false">                
-                <asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server" Checked="false" EnableViewState="true"
-                    Font-Bold="true" AutoPostBack="true" OnCheckedChanged="chkAnalyzeAverageOfMeasurements_Click" >
-                </asp:CheckBox>
-                <span style="font-weight: bold; vertical-align: text-top;">
-                <asp:Localize runat="server" Text="Analyze Average Of Measurements" ID="LocAvgMesurment"
-                                meta:resourcekey="LocAvgMesurmentResource1"></asp:Localize>
-                
-                </span> 
-                <asp:Label ID="lblCompError" runat="server" Text="" ForeColor="Red"></asp:Label> 
-                <input id="hd_CompError" type="hidden" runat="server"  value="5"/>
+            <td> 
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td id="tdAverageOfMeasurements" runat="server" visible="false">
+                            <asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server" Checked="false" EnableViewState="true"
+                                Font-Bold="true" AutoPostBack="true" OnCheckedChanged="chkAnalyzeAverageOfMeasurements_Click" >
+                            </asp:CheckBox>
+                            <span style="font-weight: bold; vertical-align: text-top;">
+                                <asp:Localize runat="server" Text="Analyze Average Of Measurements" ID="LocAvgMesurment"
+                               meta:resourcekey="LocAvgMesurmentResource1"></asp:Localize>
+                            </span> 
+                            <asp:Label ID="lblCompError" runat="server" Text="" ForeColor="Red"></asp:Label> 
+                            <input id="hd_CompError" type="hidden" runat="server"  value="5"/>
+                        </td>
+                        <td id="td1DSmoothing" runat="server" align="right" visible="false">
+                            <asp:CheckBox ID="chk1DMeasurementSmoothing" runat="server" Checked="false" EnableViewState="true"
+                                Font-Bold="true" AutoPostBack="true" 
+                                oncheckedchanged="chk1DMeasurementSmoothing_CheckedChanged">
+                            </asp:CheckBox>
+                            <span style="font-weight: bold; vertical-align: text-top;">
+                                <asp:Localize runat="server" Text="Enable measurement smoothing" ID="Localize2"></asp:Localize>
+                            </span> 
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
         <tr id="trListHeader" runat="server">

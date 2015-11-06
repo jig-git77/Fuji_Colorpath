@@ -137,7 +137,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new MeasurementDataResponse();
         }
 
-        public Dictionary<string, string> GetTargetTVIData(int projectId)
+        public Dictionary<string, string> GetTargetTVIData(int projectId, bool Is1DMeasurementSmoothing)
         {
             return new Dictionary<string, string>();
         }

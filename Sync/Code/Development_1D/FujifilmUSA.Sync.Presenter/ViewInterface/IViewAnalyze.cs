@@ -55,5 +55,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         DataTable DTMaxSpreadChartData { get; set; }
 
         bool IsAverageOfMeasurements { get; set; }
+        bool Is1DMeasurementSmoothing { get; set; }
     }
 }

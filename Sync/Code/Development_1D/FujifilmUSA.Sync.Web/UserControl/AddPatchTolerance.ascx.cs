@@ -339,7 +339,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 if (Convert.ToInt32(cmbCompanyName.SelectedValue) > 0)
                 {
-                    MetricTargetPreset.CompanyId = Convert.ToByte(cmbCompanyName.Text);
+                    MetricTargetPreset.CompanyId = Convert.ToInt32(cmbCompanyName.Text);
                 }
             }
             MetricTargetPreset.MetricTargetPresetName = txtPresetName.Text;

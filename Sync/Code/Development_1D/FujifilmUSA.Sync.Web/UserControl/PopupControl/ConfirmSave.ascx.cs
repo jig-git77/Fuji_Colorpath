@@ -200,6 +200,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public EOptimizeRunStatus LastRunStatus { get; set; }
         public PCSDataTypes PCSDataTypes { get; set; }
         public DensityTypes DensityType { get; set; }
+        
+        public bool Is1DMeasurementSmoothing
+        {
+            get
+            {
+                return SessionManager.Instance.CurrentProject.Is1DMeasurementSmoothing;
+            }
+        }
+
         #endregion
 
 

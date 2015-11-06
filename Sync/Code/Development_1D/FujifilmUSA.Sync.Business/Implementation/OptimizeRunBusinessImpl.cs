@@ -444,7 +444,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         //to-do set return type
-        public void CreateG7AlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime)
+        public void CreateG7AlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime, bool Is1DMeasurementSmoothing)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -477,7 +477,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         alignmentCurveRequest.DeviceLinkProfile.ProfileData = dlp;
                     }                 
 
-                    var ProfOption = BusinessFactory<IMeasurementBusiness>.CreateObject().GetTargetTVIData(projectId);
+                    var ProfOption = BusinessFactory<IMeasurementBusiness>.CreateObject().GetTargetTVIData(projectId, Is1DMeasurementSmoothing);
                     alignmentCurveRequest.ProfileOptions = new List<Parameter>();
 
                     foreach (KeyValuePair<string, string> option in ProfOption)
@@ -516,8 +516,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateG7AlignmentCurve"));
         }
-        
-        public void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime)
+
+        public void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime, bool Is1DMeasurementSmoothing)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -550,7 +550,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
 
                     //---Pass TVI values into Profiler Options, so now we don't need to pass Linearization TVIs----//
-                    var ProfOption = BusinessFactory<IMeasurementBusiness>.CreateObject().GetTargetTVIData(projectId);
+                    var ProfOption = BusinessFactory<IMeasurementBusiness>.CreateObject().GetTargetTVIData(projectId, Is1DMeasurementSmoothing);
                     alignmentCurveRequest.ProfileOptions = new List<Parameter>();
 
                     foreach (KeyValuePair<string, string> option in ProfOption)

@@ -129,7 +129,8 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewAnalyze.MeasurementIds,
                 _viewAnalyze.useDLP,              
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
-                    DateTime.Now);
+                DateTime.Now,
+                _viewAnalyze.Is1DMeasurementSmoothing);
 
         }
 
@@ -139,12 +140,12 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             optimizeRunBusiness.CreateISOAlignmentCurve(
                 _viewAnalyze.ProjectId,
-                 _viewAnalyze.OptimizeRunId,
+                _viewAnalyze.OptimizeRunId,
                 _viewAnalyze.MeasurementIds,
                 _viewAnalyze.useDLP,                
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
-                    DateTime.Now
-                    );
+                DateTime.Now,
+                _viewAnalyze.Is1DMeasurementSmoothing);
 
         }
 

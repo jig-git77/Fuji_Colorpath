@@ -42,5 +42,6 @@ namespace FujifilmUSA.Sync.Entity
         public PCSDataTypes PCSDataTypes { get; set; }
         public int ReTargetProjectID { get; set; }
         public short CurveTypeID { get; set; }
+        public bool Is1DMeasurementSmoothing { get; set; }
     }
 }

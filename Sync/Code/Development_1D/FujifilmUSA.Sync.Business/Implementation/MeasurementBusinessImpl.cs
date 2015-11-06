@@ -1384,7 +1384,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return response;
         }
 
-        public Dictionary<string, string> GetTargetTVIData(int projectId)
+        public Dictionary<string, string> GetTargetTVIData(int projectId, bool Is1DMeasurementSmoothing)
         {
             var TVIOptionsList = new Dictionary<string, string>();
            
@@ -1433,7 +1433,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     TVIOptionsList.Add("LinearizationTVIChannel0", AnswerTVI_CMY);
                     TVIOptionsList.Add("LinearizationTVIChannel1", AnswerTVI_CMY);
                     TVIOptionsList.Add("LinearizationTVIChannel2", AnswerTVI_CMY);
-                    TVIOptionsList.Add("LinearizationTVIChannel3", AnswerTVI_K);                   
+                    TVIOptionsList.Add("LinearizationTVIChannel3", AnswerTVI_K);
+                    if (Is1DMeasurementSmoothing == true)
+                    {
+                        TVIOptionsList.Add("MeasurementCorrection", "16");       //---New setting for enable measurement smoothing in Sync1D projects
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetTVIData"));
             return TVIOptionsList;

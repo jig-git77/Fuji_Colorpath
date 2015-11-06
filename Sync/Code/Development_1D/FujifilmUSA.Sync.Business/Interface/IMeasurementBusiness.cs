@@ -39,8 +39,8 @@ namespace FujifilmUSA.Sync.Business.Interface
         int Save1DMeasurement(Measurement measurement);
         List<Measurement> Get1DMeasurementsOnRunId(int optimizeRunId);
         MeasurementDataResponse Get1DMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType);
-      
-        Dictionary<string, string> GetTargetTVIData(int projectId);
+
+        Dictionary<string, string> GetTargetTVIData(int projectId, bool is1DMeasurementSmoothing);
 
         List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false);
         List<AnalyzeChart_DotGain> GetISOTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false);

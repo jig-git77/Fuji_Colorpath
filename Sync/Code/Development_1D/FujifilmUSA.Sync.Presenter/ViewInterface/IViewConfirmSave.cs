@@ -14,5 +14,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         EOptimizeRunStatus LastRunStatus { get; set; }
         PCSDataTypes PCSDataTypes { get; set; }
         DensityTypes DensityType { get; set; }
+        bool Is1DMeasurementSmoothing { get; }
     }
 }

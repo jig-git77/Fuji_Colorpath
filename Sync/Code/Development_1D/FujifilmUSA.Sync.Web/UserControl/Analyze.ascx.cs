@@ -264,6 +264,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnOptimize.Visible = false; 
                     trRBtnListDeltaE.Visible = false; 
                     Div_Opt_Header.Visible = true;
+                    //td1DSmoothing.Visible = true;  //Display in Sync1D for Smoothing measurements (Commented out for temporary untill get decided to use this feature)
+
                     if (ValidationType == 1)  //G7 type
                     {
                         dvTab_G7.Visible = Tab_G7.Visible = true;
@@ -3296,11 +3298,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (chkAnalyzeAverageOfMeasurements.Checked == true)
             {
-                //This functions are calling twise that is why it might be slow.
-                //-----Re-fill all Tabs data by applying average of all measurements under this optimize run-------//
-                //BindMesurementChart();
-                //BindAvgDelta();
-                //FillAllTabsData();
                 dvTab_PatchDetails.Visible = Tab_PatchDetails.Visible = false; //Because we can't display Patch Details tab in averaging mode
             }
             else
@@ -3308,6 +3305,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 dvTab_PatchDetails.Visible = Tab_PatchDetails.Visible = true;
                 lblCompError.Text = "";
             }
+        }
+
+        protected void chk1DMeasurementSmoothing_CheckedChanged(object sender, EventArgs e)  //---(Commented out / not being used for temporary untill get decided to use this feature)//---
+        {
+            SessionManager.Instance.CurrentProject.Is1DMeasurementSmoothing = chk1DMeasurementSmoothing.Checked;
         }
 
         #endregion
@@ -3396,6 +3398,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             set
             {
                 IsAverageOfMeasurements = chkAnalyzeAverageOfMeasurements.Checked;
+            }
+        }
+      
+        public bool Is1DMeasurementSmoothing
+        {
+            get
+            {
+                return chk1DMeasurementSmoothing.Checked;
+            }
+            set
+            {
+                Is1DMeasurementSmoothing = chk1DMeasurementSmoothing.Checked;
             }
         }
 
