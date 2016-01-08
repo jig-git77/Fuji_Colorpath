@@ -1205,45 +1205,45 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                   new XAttribute("Density_C", x.Density.Red),
                                                                                   new XAttribute("Density_M", x.Density.Green),
                                                                                   new XAttribute("Density_Y", x.Density.Blue),
-                                                                                  new XAttribute("Density_V", x.Density.Visual)
+                                                                                  new XAttribute("Density_V", x.Density.Visual),
 
                                                                                     //---Spectral Data
-                                                                                  //new XAttribute("nm380", x.Spectral.nm380),
-                                                                                  //new XAttribute("nm390", x.Spectral.nm390),
-                                                                                  //new XAttribute("nm400", x.Spectral.nm400),
-                                                                                  //new XAttribute("nm410", x.Spectral.nm410),
-                                                                                  //new XAttribute("nm420", x.Spectral.nm420),
-                                                                                  //new XAttribute("nm430", x.Spectral.nm430),
-                                                                                  //new XAttribute("nm440", x.Spectral.nm440),
-                                                                                  //new XAttribute("nm450", x.Spectral.nm450),
-                                                                                  //new XAttribute("nm460", x.Spectral.nm460),
-                                                                                  //new XAttribute("nm470", x.Spectral.nm470),
-                                                                                  //new XAttribute("nm480", x.Spectral.nm480),
-                                                                                  //new XAttribute("nm490", x.Spectral.nm490),
-                                                                                  //new XAttribute("nm500", x.Spectral.nm500),
-                                                                                  //new XAttribute("nm510", x.Spectral.nm510),
-                                                                                  //new XAttribute("nm520", x.Spectral.nm520),
-                                                                                  //new XAttribute("nm530", x.Spectral.nm530),
-                                                                                  //new XAttribute("nm540", x.Spectral.nm540),
-                                                                                  //new XAttribute("nm550", x.Spectral.nm550),
-                                                                                  //new XAttribute("nm560", x.Spectral.nm560),
-                                                                                  //new XAttribute("nm570", x.Spectral.nm570),
-                                                                                  //new XAttribute("nm580", x.Spectral.nm580),
-                                                                                  //new XAttribute("nm590", x.Spectral.nm590),
-                                                                                  //new XAttribute("nm600", x.Spectral.nm600),
-                                                                                  //new XAttribute("nm610", x.Spectral.nm610),
-                                                                                  //new XAttribute("nm620", x.Spectral.nm620),
-                                                                                  //new XAttribute("nm630", x.Spectral.nm630),
-                                                                                  //new XAttribute("nm640", x.Spectral.nm640),
-                                                                                  //new XAttribute("nm650", x.Spectral.nm650),
-                                                                                  //new XAttribute("nm660", x.Spectral.nm660),
-                                                                                  //new XAttribute("nm670", x.Spectral.nm670),
-                                                                                  //new XAttribute("nm680", x.Spectral.nm680),
-                                                                                  //new XAttribute("nm690", x.Spectral.nm690),
-                                                                                  //new XAttribute("nm700", x.Spectral.nm700),
-                                                                                  //new XAttribute("nm710", x.Spectral.nm710),
-                                                                                  //new XAttribute("nm720", x.Spectral.nm720),
-                                                                                  //new XAttribute("nm730", x.Spectral.nm730)
+                                                                                  new XAttribute("nm380", x.Spectral.nm380),
+                                                                                  new XAttribute("nm390", x.Spectral.nm390),
+                                                                                  new XAttribute("nm400", x.Spectral.nm400),
+                                                                                  new XAttribute("nm410", x.Spectral.nm410),
+                                                                                  new XAttribute("nm420", x.Spectral.nm420),
+                                                                                  new XAttribute("nm430", x.Spectral.nm430),
+                                                                                  new XAttribute("nm440", x.Spectral.nm440),
+                                                                                  new XAttribute("nm450", x.Spectral.nm450),
+                                                                                  new XAttribute("nm460", x.Spectral.nm460),
+                                                                                  new XAttribute("nm470", x.Spectral.nm470),
+                                                                                  new XAttribute("nm480", x.Spectral.nm480),
+                                                                                  new XAttribute("nm490", x.Spectral.nm490),
+                                                                                  new XAttribute("nm500", x.Spectral.nm500),
+                                                                                  new XAttribute("nm510", x.Spectral.nm510),
+                                                                                  new XAttribute("nm520", x.Spectral.nm520),
+                                                                                  new XAttribute("nm530", x.Spectral.nm530),
+                                                                                  new XAttribute("nm540", x.Spectral.nm540),
+                                                                                  new XAttribute("nm550", x.Spectral.nm550),
+                                                                                  new XAttribute("nm560", x.Spectral.nm560),
+                                                                                  new XAttribute("nm570", x.Spectral.nm570),
+                                                                                  new XAttribute("nm580", x.Spectral.nm580),
+                                                                                  new XAttribute("nm590", x.Spectral.nm590),
+                                                                                  new XAttribute("nm600", x.Spectral.nm600),
+                                                                                  new XAttribute("nm610", x.Spectral.nm610),
+                                                                                  new XAttribute("nm620", x.Spectral.nm620),
+                                                                                  new XAttribute("nm630", x.Spectral.nm630),
+                                                                                  new XAttribute("nm640", x.Spectral.nm640),
+                                                                                  new XAttribute("nm650", x.Spectral.nm650),
+                                                                                  new XAttribute("nm660", x.Spectral.nm660),
+                                                                                  new XAttribute("nm670", x.Spectral.nm670),
+                                                                                  new XAttribute("nm680", x.Spectral.nm680),
+                                                                                  new XAttribute("nm690", x.Spectral.nm690),
+                                                                                  new XAttribute("nm700", x.Spectral.nm700),
+                                                                                  new XAttribute("nm710", x.Spectral.nm710),
+                                                                                  new XAttribute("nm720", x.Spectral.nm720),
+                                                                                  new XAttribute("nm730", x.Spectral.nm730)
                                                                          )).ToList());
 
                     DataAccessFactory.
@@ -1436,7 +1436,16 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     TVIOptionsList.Add("LinearizationTVIChannel3", AnswerTVI_K);
                     if (Is1DMeasurementSmoothing == true)
                     {
-                        TVIOptionsList.Add("MeasurementCorrection", "16");       //---New setting for enable measurement smoothing in Sync1D projects
+                        TVIOptionsList.Add("LinearizationSmoothing", "25");       //---New setting for enable measurement smoothing in Sync1D projects
+                    }
+
+                    //----Table 2 : Pass Profiler Options from CPSync.ProjectOption Table
+                    if (dsTVIData.Tables[2].Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dsTVIData.Tables[2].Rows.Count; i++)
+                        {
+                            TVIOptionsList.Add(dsTVIData.Tables[2].Rows[i]["ProfilerOption"].ToString(), dsTVIData.Tables[2].Rows[i]["ProfilerOptionValue"].ToString());
+                        }
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetTVIData"));
@@ -1704,6 +1713,27 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     measurements = dsMeasurements;
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_Report_GetReportGrading"));
+            return measurements;
+        }
+
+        public DataSet GetDensityData_C(int OptimizeRunId)
+        {
+            var measurements = new DataSet();
+            string storedProc = "Report.GetCMYKDensityData";
+
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements = new DataSet();
+                    dsMeasurements = DataAccessFactory.
+                         Instance.
+                         GetDsResult(
+                             storedProc,
+                             new object[] { OptimizeRunId });
+
+                    measurements = dsMeasurements;
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_Report_GetCMYKDensityData"));
             return measurements;
         }
 

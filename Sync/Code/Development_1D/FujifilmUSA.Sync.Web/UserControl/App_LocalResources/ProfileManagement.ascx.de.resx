@@ -120,6 +120,9 @@
   <data name="changeLanguageSuccess" xml:space="preserve">
     <value>Spracheinstellung erfolgreich gesichert!</value>
   </data>
+  <data name="userDeviceInfoSavedSuccess" xml:space="preserve">
+    <value>User Device information saved successfully!_de</value>
+  </data>
   <data name="confirmPasswordLengthText" xml:space="preserve">
     <value>Bestätigung muß mind. 4 Zeichen haben</value>
   </data>
@@ -167,6 +170,15 @@
   </data>
   <data name="locSecurityQuestionResource1.Text" xml:space="preserve">
     <value>Sicherheitsfrage</value>
+  </data>
+  <data name="locSerialNumberResource1.Text" xml:space="preserve">
+    <value>Serial Number_de</value>
+  </data>
+  <data name="locDensityTypeResource1.Text" xml:space="preserve">
+    <value>Density Type_de</value>
+  </data>
+  <data name="locUVSettingsResource1.Text" xml:space="preserve">
+    <value>UV Settings_de</value>
   </data>
   <data name="locUsernameResource1.Text" xml:space="preserve">
     <value>Benutzername</value>

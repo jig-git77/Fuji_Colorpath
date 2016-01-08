@@ -79,6 +79,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     BindReTargetList();
 
                     LoadProjectInfoFromSession();
+
+                    if (ProjectTypeID == 1) //-----Option only for G7 Sync1D projects
+                    {
+                        Div_LinearizationType.Visible = true;
+                    }
                 }
             }
             else
@@ -145,9 +150,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         ddlReTargetList.SelectedValue = SessionManager.Instance.CurrentProject.ReTargetProjectID.ToString();
                     }
-                    if (SessionManager.Instance.CurrentProject.OptimizeRuns!= null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Project type selection is disable
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Project type selection is disable
                     {
                         ddlReTargetList.Enabled = false;
+                    }
+
+                    if (SessionManager.Instance.CurrentProject.ProjectOption != null && SessionManager.Instance.CurrentProject.ProjectOption.Count > 0) //Profiler options value set from session for existing Sync 1D projects
+                    {
+                        int indexLType = SessionManager.Instance.CurrentProject.ProjectOption.FindIndex(item => item.ProfilerOptionId == 40 && item.ProfilerOptionValue == "TR015");
+                        if (indexLType > 0) //If LinearizationType is selected, then send LR015
+                        {
+                            chkLinearizationType.Checked = true;
+                        }
+                        else //else send G7
+                        {
+                            chkLinearizationType.Checked = false;
+                        }
+                        int indexMCorrection = SessionManager.Instance.CurrentProject.ProjectOption.FindIndex(item => item.ProfilerOptionId == 7);
+                        if (indexMCorrection > 0)
+                        {
+                            cmbMeaCorrection.SelectedValue = SessionManager.Instance.CurrentProject.ProjectOption[indexMCorrection].ProfilerOptionValue;
+                        }
                     }
                 }
             }
@@ -530,6 +553,31 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.PrintStandardTVI = GetPrintStandardTVIList();
                 SessionManager.Instance.CurrentProject.ProjectTargetDensity = GetProjectTargetDensityList();
                 SessionManager.Instance.CurrentProject.ReTargetProjectID = Convert.ToInt32(ddlReTargetList.SelectedValue);
+
+                SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
+
+                SessionManager.Instance.CurrentProject.ProjectOption.Add(new ProjectOption()
+                                                                        {
+                                                                            ProfileTypeId = 0,
+                                                                            ProfilerOptionId = 1,
+                                                                            ProfilerOptionValue = "LinearizationDeviceLink",
+                                                                        });
+                SessionManager.Instance.CurrentProject.ProjectOption.Add(new ProjectOption()
+                                                                        {
+                                                                            ProfileTypeId = 0,
+                                                                            ProfilerOptionId = 7,
+                                                                            ProfilerOptionValue = cmbMeaCorrection.SelectedValue,
+                                                                        });
+                if (ProjectTypeID == 1) //-----Option only for G7 Sync1D projects
+                {
+                    SessionManager.Instance.CurrentProject.ProjectOption.Add(new ProjectOption()
+                                                                           {
+                                                                               ProfileTypeId = 0,
+                                                                               ProfilerOptionId = 40,
+                                                                               ProfilerOptionValue = (chkLinearizationType.Checked) ? "TR015" : "G7",
+                                                                           });
+                }
+                
             }
             else
             {

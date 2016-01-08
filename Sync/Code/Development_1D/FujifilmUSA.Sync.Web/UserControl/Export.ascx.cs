@@ -65,7 +65,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Div_Chart.Visible = false;
                         header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.ProjectName + ".icc");
                     }
-                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //---If "Custom Source Profile" project type, then skip Measure button and Advanced Download button (since we don't have desctination profile in this case).
+                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource) //---If "Custom Source Profile" project type, then skip Measure button and Advanced Download button (since we don't have desctination profile in this case).
                     {
                         trSourceProfDownload.Visible = true;
                         trDLPDownload.Visible = false;

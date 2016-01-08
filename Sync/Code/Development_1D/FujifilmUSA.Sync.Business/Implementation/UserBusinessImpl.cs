@@ -48,6 +48,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        IsActivated = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActivated"),
                                        UserType = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserType"),
                                        LanguageCultureCode = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LanguageCultureCode"),
+                                       MeasurementDeviceId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "MeasurementDeviceID"),
+                                       DensityType = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "DensityType"),
+                                       UVMode = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "UVMode"),
                                    };
                         user.Role.RolePermissions = dsUser.Tables[1].AsEnumerable().
                             Select(x => new RolePermission()
@@ -123,6 +126,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                            IsActivated = DataReader.ReadBoolean(x, "IsActivated"),
                                            UserType = DataReader.ReadInt(x, "UserType"),
                                            LanguageCultureCode = DataReader.ReadString(x, "LanguageCultureCode"),
+                                           MeasurementDeviceId = DataReader.ReadInt(x, "MeasurementDeviceID"),
+                                           DensityType = DataReader.ReadShort(x, "DensityType"),
+                                           UVMode = DataReader.ReadShort(x, "UVMode"),
                                            Region = new Region()
                                                         {
                                                             RegionId = DataReader.ReadByte(x, "CompanyRegionId"),
@@ -487,6 +493,52 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateLanguage"));
             return returnValue;
         }
+
+        public List<MeasurementDevice> GetMeasurementDeviceList(int loginId, int deviceId)
+        {
+            var measurementDevice = new List<MeasurementDevice>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurementDevice = DataAccessFactory.Instance.GetDsResult("CP.GetMeasurementDeviceList",
+                                                                                     new object[] { loginId, deviceId });
+                    measurementDevice = dsMeasurementDevice.Tables[0].AsEnumerable().
+                        Select(x =>
+                               new MeasurementDevice()
+                               {
+                                   MeasurementDeviceId = DataReader.ReadShort(x, "MeasurementDeviceID"),
+                                   InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
+                                   InstrumentType = new InstrumentType()
+                                   {
+                                       InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
+                                       InstrumentName = DataReader.ReadString(x, "InstrumentName")
+                                   },
+                                   SerialNumber = DataReader.ReadString(x, "MeasurementDevi")
+                               }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementDeviceList"));
+            return measurementDevice;
+        }
+
+        public int UpdateUserDeviceInfo(int loginId, int measurementDeviceId, int densityType, int UVMode)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[UpdateUserDevice]",
+                            new object[]
+                                    {
+                                        loginId, measurementDeviceId, densityType, UVMode
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateUserDevice"));
+            return returnValue;
+        }
+
 
         #region ITaskBase Members
 

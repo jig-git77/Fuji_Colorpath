@@ -51,5 +51,19 @@ namespace FujifilmUSA.Sync.Presenter
             userBusiness.ErrorOccured += _viewProfileManagement.ErrorOccured;
             _viewProfileManagement.LanguageList = userBusiness.GetLanguages();
         }
+
+        public void UpdateUserDeviceInfo()
+        {
+            var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
+            userBusiness.ErrorOccured += _viewProfileManagement.ErrorOccured;
+            userBusiness.UpdateUserDeviceInfo(_viewProfileManagement.LoginId, _viewProfileManagement.MeasurementDeviceID, _viewProfileManagement.DensityType, _viewProfileManagement.UVMode);
+        }
+
+        public void GetMeasurementDevice()
+        {
+            var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
+            userBusiness.ErrorOccured += _viewProfileManagement.ErrorOccured;
+            _viewProfileManagement.MeasurementDevices = userBusiness.GetMeasurementDeviceList(_viewProfileManagement.LoginId, 0);
+        }
     }
 }

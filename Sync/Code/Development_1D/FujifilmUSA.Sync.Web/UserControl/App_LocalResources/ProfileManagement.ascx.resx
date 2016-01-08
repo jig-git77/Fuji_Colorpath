@@ -156,6 +156,15 @@
 	<data name="locSecurityQuestionResource1.Text" xml:space="preserve">
     <value>Security Question</value>
   </data>
+  <data name="locSerialNumberResource1.Text" xml:space="preserve">
+    <value>Serial Number</value>
+  </data>
+  <data name="locDensityTypeResource1.Text" xml:space="preserve">
+    <value>Density Type</value>
+  </data>
+  <data name="locUVSettingsResource1.Text" xml:space="preserve">
+    <value>UV Settings</value>
+  </data>
 	<data name="locUsernameResource1.Text" xml:space="preserve">
     <value>User Name</value>
   </data>
@@ -206,5 +215,8 @@
   </data>
 	<data name="selectLanguageText" xml:space="preserve">
     <value>Please select language.</value>
+  </data>
+  <data name="userDeviceInfoSavedSuccess" xml:space="preserve">
+    <value>User Device information saved successfully!</value>
   </data>
 </root>

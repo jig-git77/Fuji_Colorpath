@@ -24,7 +24,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public DateTime EndDate;
         private const string _recDLPText = "dlpText";
         private const string _recDLPMsgText = "dlpMsgText";
-        private const string _reclocCreateSourceProfile = "locCreateSourceProfile";   
+        private const string _reclocCreateSourceProfile = "locCreateSourceProfile";
+        private const string _reclocCreateReProfileSourceProfile = "locCreateSourceProfile";   
 
         public string CreateDLPUpdateProgressClientID
         {
@@ -46,7 +47,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 locCreateDLP.Text = GetResourceString(_reclocCreateSourceProfile);
             }
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //---If  "Ink Optimization Source" project type
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource) //--If "ReProfile Custom Source", then change button name
+            {
+                locCreateDLP.Text = GetResourceString(_reclocCreateReProfileSourceProfile);
+            }
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource) //---If  "Ink Optimization Source" project type
             {
                 lbtnReTargetProject.Visible = false;
             }
@@ -67,7 +72,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 EndDate = System.DateTime.Now;
                 DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
                 DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //---If custom Source profile then call CreateSourceProfile function----//
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource) //---If custom Source profile then call CreateSourceProfile function----//
                 {
                     _presenterAnalyze.CreateCustomSourceProfileDlp();
                 }

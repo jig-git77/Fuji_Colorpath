@@ -1001,14 +1001,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstObserverTypeList;
         }
 
-        public List<MeasurementDevice> GetMeasurementDeviceList(int deviceId)
+        public List<MeasurementDevice> GetMeasurementDeviceList(int loginId, int deviceId)
         {
             var measurementDevice = new List<MeasurementDevice>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
                     var dsMeasurementDevice = DataAccessFactory.Instance.GetDsResult("CP.GetMeasurementDeviceList",
-                                                                                     new object[] { deviceId });
+                                                                                     new object[] { loginId, deviceId });
                     measurementDevice = dsMeasurementDevice.Tables[0].AsEnumerable().
                         Select(x =>
                                new MeasurementDevice()

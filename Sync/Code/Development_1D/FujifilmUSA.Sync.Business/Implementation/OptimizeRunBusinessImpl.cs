@@ -758,10 +758,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
+                    var sourceProfile =
+                       BusinessFactory<IProjectBusiness>.
+                           CreateObject().
+                           GetSourceProfile(projectId);
+
+                  
                     var sourcerequest = new CreateSourceProfileRequest()
                     {
                         PCSData = new List<double>(),
                         DCSData = new List<double>(),
+                        SourceProfile = new IccProfile() { ProfileData = sourceProfile },
                         ProfileOptions = new List<Parameter>()
                     };
 
@@ -810,8 +817,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateInitialDestinationAndDeviceLinkProfiles"));
-
-           // CreateInitialDestinationAndDeviceLinkProfiles(projectId, optimizeRunId, measurementIds, destinationDescription, dlpDescription, status, endDateTime);
         }
 
 

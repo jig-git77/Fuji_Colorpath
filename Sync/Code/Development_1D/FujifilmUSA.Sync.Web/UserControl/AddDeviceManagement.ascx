@@ -160,7 +160,7 @@
                                     &nbsp;:&nbsp;
                                 </td>
                                 <td>
-                                    <div style="line-height: 30px; overflow-y: scroll; height: 195px; border-width: 1px;
+                                    <div style="line-height: 30px; overflow-y: scroll; height: 226px; border-width: 1px;
                                                                     border-style: solid; width: 240px">
                                     <table width="100%">
                                         <tr>
@@ -266,6 +266,24 @@
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvCustomSourceProfile" runat="server" Display="Dynamic" ControlToValidate="txtCustomSourceProfile"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer5" runat="server"
+                                                            ValidationMsg="Please provide no.of projects." />
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>
+                                                 <span>
+                                                    <%=ELicenseReProfileCustomSourceText%> &nbsp;</span></td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtReProfileCustomSource" runat="server" Height="19px" Width="50px" MaxLength="4"
+                                                        onkeypress="return CheckNumeric(event)" 
+                                                        meta:resourcekey="txtReProfileCustomSourceResource1"></asp:TextBox>
+                                                </div>
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfvtxtReProfileCustomSource" runat="server" Display="Dynamic" ControlToValidate="txtReProfileCustomSource"
+                                                        ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer6" runat="server"
                                                             ValidationMsg="Please provide no.of projects." />
                                                     </asp:RequiredFieldValidator>
                                                 </div>

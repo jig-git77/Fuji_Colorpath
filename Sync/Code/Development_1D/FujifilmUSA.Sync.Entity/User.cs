@@ -36,7 +36,10 @@ namespace FujifilmUSA.Sync.Entity
         public string SecurityAnswer { get; set; }
         public int UserType { get; set; }
         public DateTime LastPingTime { get; set; }
-        public string LanguageCultureCode { get; set; }     
+        public string LanguageCultureCode { get; set; }
+        public int MeasurementDeviceId { get; set; }
+        public short DensityType { get; set; }
+        public short UVMode { get; set; }
         #endregion
 
         #region extension Methods

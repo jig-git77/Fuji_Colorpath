@@ -174,6 +174,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataSet();
         }
+        public DataSet GetDensityData_C(int OptimizeRunId)
+        {
+            return new DataSet();
+        }
         #endregion
 
         #region ITaskBase Members

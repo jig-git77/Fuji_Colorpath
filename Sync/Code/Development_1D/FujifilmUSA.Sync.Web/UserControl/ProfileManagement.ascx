@@ -180,7 +180,7 @@
                             </table>
                         </fieldset>
                         <br />
-                        <br />
+                       
                         <fieldset style="width: 50%;">
                             <legend>
                                 <asp:Label ID="lblHeader" runat="server" Text="Change Password" 
@@ -303,7 +303,7 @@
                             </table>
                         </fieldset>
                         <br />
-                        <br />
+                        
                         <fieldset style="width: 60%;">
                             <legend>
                                 <asp:Label ID="Label1" runat="server" Text="Change Security Information" 
@@ -387,6 +387,121 @@
                                                     ID="locCancelSecurityQuestion" 
                                                     meta:resourcekey="locCancelSecurityQuestionResource1"></asp:Localize> 
  </span>
+                                                </asp:LinkButton>
+                                            </div>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                        <br />
+                       
+                        <fieldset style="width: 50%;">
+                            <legend>
+                                <asp:Label ID="lblChangeUserDevice" runat="server" Text="Change User Device Info" 
+                                    meta:resourcekey="lblChangeUserDeviceResource1"></asp:Label>
+                            </legend>
+                            <table>
+                                <tr>
+                                    <td align="right">
+                                        <span style="font-weight: bold;"><asp:Localize Text="Serial Number" 
+                                            runat="server" ID="locSerialNumber" 
+                                            meta:resourcekey="locSerialNumberResource1"></asp:Localize><span style="color: Red;">*</span>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <b>&nbsp;:&nbsp;</b>
+                                    </td>
+                                    <td align="left">
+                                        <div style="float: left;">
+                                            <asp:DropDownList ID="cmbMeasurementDevice" runat="server" Width="200px" 
+                                                CssClass="select" DataValueField="Key" DataTextField="Value" 
+                                                meta:resourcekey="cmbMeasurementDeviceResource1">
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div style="float: left">
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Display="Dynamic"
+                                                ControlToValidate="cmbMeasurementDevice" ForeColor="Red" 
+                                                ValidationGroup="vgChangeUserDevice">
+                                                <ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
+                                                    ValidationMsg="Please select device serial number." Size="200" />
+                                            </asp:RequiredFieldValidator>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        <span style="font-weight: bold;"><asp:Localize Text="Density Type" 
+                                            runat="server" ID="locDensityType" 
+                                            meta:resourcekey="locDensityTypeResource1"></asp:Localize>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <b>&nbsp;:&nbsp;</b>
+                                    </td>
+                                    <td align="left">
+                                        <div style="float: left;">
+                                            <asp:DropDownList ID="cmbDensityType" runat="server" Width="200px" 
+                                                CssClass="select" DataValueField="Key" DataTextField="Value" 
+                                                meta:resourcekey="cmbDensityTypeResource1">
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div style="float: left">
+                                          
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>
+                               <tr>
+                                    <td align="right">
+                                        <span style="font-weight: bold;"><asp:Localize Text="UV Settings" 
+                                            runat="server" ID="locUVSettings" 
+                                            meta:resourcekey="locUVSettingsResource1"></asp:Localize>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <b>&nbsp;:&nbsp;</b>
+                                    </td>
+                                    <td align="left">
+                                        <div style="float: left;">
+                                            <asp:DropDownList ID="cmbUVSettings" runat="server" Width="200px" 
+                                                CssClass="select" DataValueField="Key" DataTextField="Value" 
+                                                meta:resourcekey="cmbUVSettingsResource1">
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div style="float: left">
+                                           
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td align="left">
+                                        <div class="text">
+                                            <div style="padding-left: 3px;">
+                                                <asp:LinkButton ID="lbtnSaveUserDevice" runat="server" CssClass="gray_bt" 
+                                                    ValidationGroup="vgChangeUserDevice" onclick="lbtnSaveUserDevice_Click">
+                                                    <span> <asp:Localize runat="server" Text="Save" 
+                                                        ID="Localize3" 
+                                                        meta:resourcekey="locSaveUserDeviceResource1"></asp:Localize> 
+                                                    </span>
+                                                </asp:LinkButton>
+                                                <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" 
+                                                    PostBackUrl="~/Settings.aspx">
+                                                    <span> <asp:Localize Text="Cancel" runat="server" 
+                                                        ID="Localize4" 
+                                                        meta:resourcekey="locCancelUserDeviceResource1"></asp:Localize> 
+                                                    </span>
                                                 </asp:LinkButton>
                                             </div>
                                         </div>

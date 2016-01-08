@@ -15,6 +15,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recSecurityInfoSavedSuccess = "securityInfoSavedSuccess";
         private const string _recSelect = "selectText";
         private const string _recChangeLanguageSuccess = "changeLanguageSuccess";
+        private const string _recUserDeviceInfoSavedSuccess = "userDeviceInfoSavedSuccess";
         #endregion
 
         #region Variable Declarations
@@ -43,6 +44,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblUserName.Text = SessionManager.Instance.CurrentUser.LoginId;
                 GetSecurityQuestions();
                 GetLanguageList();
+                GetMDeviceSerialNumberList();
+                GetDensityTypeList();
+                GetUVMethodList();
             }
         }
         #endregion
@@ -86,7 +90,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(GetResourceString(_recChangeLanguageSuccess), false);
                 Response.Redirect("~/ProfileManagement.aspx");
             }
-        }  
+        }
+
+        protected void lbtnSaveUserDevice_Click(object sender, EventArgs e)
+        {
+            LoginId = SessionManager.Instance.CurrentUser.UserId;
+            MeasurementDeviceID = Convert.ToInt32(cmbMeasurementDevice.SelectedValue);
+            DensityType = Convert.ToInt16(cmbDensityType.SelectedValue);
+            UVMode = Convert.ToInt16(cmbUVSettings.SelectedValue);
+            _presenterProfileManagement.UpdateUserDeviceInfo();
+            if (!IsErrorOccured)
+            {
+                SessionManager.Instance.CurrentUser.MeasurementDeviceId = MeasurementDeviceID;
+                SessionManager.Instance.CurrentUser.DensityType = DensityType;
+                SessionManager.Instance.CurrentUser.UVMode = UVMode;
+                WebLogActivityManager.LogActivity(LogActivityType.ChangeProfile, null, Request.UserHostAddress);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recUserDeviceInfoSavedSuccess), false);
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -120,6 +142,46 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ddlLanguages.SelectedIndex = 0;
             }
         }
+
+        private void GetMDeviceSerialNumberList()
+        {
+            if (cmbMeasurementDevice.DataSource != null) return;
+
+            LoginId = SessionManager.Instance.CurrentUser.UserId;
+            _presenterProfileManagement.GetMeasurementDevice();
+          
+            if (!IsErrorOccured)
+            {
+                cmbMeasurementDevice.DataValueField = "MeasurementDeviceId";
+                cmbMeasurementDevice.DataTextField = "SerialNumber";
+                cmbMeasurementDevice.DataSource = MeasurementDevices;
+                cmbMeasurementDevice.DataBind();
+                cmbMeasurementDevice.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
+                cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentUser.MeasurementDeviceId.ToString();
+            }
+        }
+
+        private void GetDensityTypeList()
+        {
+            if (cmbDensityType.DataSource != null) return;
+
+            cmbDensityType.DataValueField = "Key";
+            cmbDensityType.DataTextField = "Value";
+            cmbDensityType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<DensityTypes>();
+            cmbDensityType.DataBind();
+            cmbDensityType.SelectedValue = SessionManager.Instance.CurrentUser.DensityType.ToString();
+        }
+
+        private void GetUVMethodList()
+        {
+            if (cmbUVSettings.DataSource != null) return;
+
+            cmbUVSettings.DataValueField = "Key";
+            cmbUVSettings.DataTextField = "Value";
+            cmbUVSettings.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EUVIncludedMode>();
+            cmbUVSettings.DataBind();
+            cmbUVSettings.SelectedValue = SessionManager.Instance.CurrentUser.UVMode.ToString();
+        }
         #endregion
 
         public int LoginId { get; set; }
@@ -129,5 +191,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> SecurityQuestions { get; set; }
         public string LanguageCultureCode { get; set; }
         public List<Language> LanguageList { get; set; }
+        public int MeasurementDeviceID { get; set; }
+        public short UVMode { get; set; }
+        public short DensityType { get; set; }
+        public List<MeasurementDevice> MeasurementDevices { get; set; }
     }
 }

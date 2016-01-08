@@ -220,6 +220,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.CheckBox chkCustomSourceProfile;
         
         /// <summary>
+        /// chkReProfileCustomSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkReProfileCustomSource;
+        
+        /// <summary>
         /// locActivationDate control.
         /// </summary>
         /// <remarks>

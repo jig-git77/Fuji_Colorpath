@@ -281,7 +281,7 @@
             ListDevices();
             GetRefChartData();    
             
-            //---If plugin is older than 1.9.6 version--> force them to download newer plugin---//
+            //---If plugin is older than 1.9.6 version--> force them to download new version plugin---//
             if(plugin().plugin_version != '1.9.6')
             {
                 var oWindow;

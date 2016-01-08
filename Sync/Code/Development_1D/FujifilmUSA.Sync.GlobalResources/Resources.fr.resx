@@ -201,6 +201,9 @@
   <data name="ELicenseType_CustomSourceProfile" xml:space="preserve">
     <value>Custom Source Profile_fr</value>
   </data>
+  <data name="ELicenseType_ReProfileCustomSourceProfile" xml:space="preserve">
+    <value>ReProfile Custom Source_fr</value>
+  </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>INVALIDE</value>
   </data>
@@ -838,6 +841,9 @@
     <value>Erreur rencontrée durant la récupération des Langages. Contacter votre Administrateur.</value>
   </data>
   <data name="Error_UpdateLanguage" xml:space="preserve">
+    <value>Erreur rencontrée durant la Mise a Jour des Informations d'Utilisateur. Contacter votre Administrateur.</value>
+  </data>
+  <data name="Error_UpdateUserDevice" xml:space="preserve">
     <value>Erreur rencontrée durant la Mise a Jour des Informations d'Utilisateur. Contacter votre Administrateur.</value>
   </data>
   <data name="Validation_ProjectOpenError" xml:space="preserve">

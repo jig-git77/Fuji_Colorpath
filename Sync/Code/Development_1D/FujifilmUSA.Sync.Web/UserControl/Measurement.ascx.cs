@@ -47,7 +47,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //---If custom Source profile, then directly pass on to next middle page instead of Analyze page
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource) //---If custom Source profile / ReProfile Custom Source, then directly pass on to next middle page instead of Analyze page
                 {
                     btnCustomSourceProfile.Visible = true;
                     btnAnalyze.Visible = false;

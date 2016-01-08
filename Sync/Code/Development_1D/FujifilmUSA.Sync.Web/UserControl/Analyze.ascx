@@ -98,12 +98,23 @@
         oWnd.show();
         return false;
     }
-
     function Close() {
         var oWnd = $find("<%= ReportGradingWindow.ClientID %>");
         oWnd.close();
         return false;
-    }  
+    }
+
+    function ShowReportCMYKDensityWindow() {
+        var oWnd = $find("<%= ReportCMYKDensityWindow.ClientID %>");
+        oWnd.show();
+        return false;
+    }
+    function CloseReportCMYKDensityWindow() {
+        var oWnd = $find("<%= ReportCMYKDensityWindow.ClientID %>");
+        oWnd.close();
+        return false;
+    } 
+     
 </script>
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
@@ -279,7 +290,7 @@
                                 oncheckedchanged="chk1DMeasurementSmoothing_CheckedChanged">
                             </asp:CheckBox>
                             <span style="font-weight: bold; vertical-align: text-top;">
-                                <asp:Localize runat="server" Text="Enable measurement smoothing" ID="Localize2"></asp:Localize>
+                                <asp:Localize runat="server" Text="Enable output smoothing" ID="Localize2"></asp:Localize>
                             </span> 
                         </td>
                     </tr>
@@ -1072,6 +1083,14 @@
                                             </asp:Chart>
                                         </td>
                                     </tr>
+                                   <%-- <tr>
+                                        <td>
+                                            <span style="color:Blue;font-weight:bolder;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =====</span>
+                                            Weighted&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                                            <span style="font-weight:bolder;">=====</span>
+                                            Non-Weighted
+                                        </td>
+                                    </tr>--%>
                                 </table>
                             </td>
                             <td style="width: 2%;">
@@ -1184,6 +1203,14 @@
                                             
                                     </td>
                                 </tr>
+                                <%-- <tr>
+                                        <td>
+                                            <span style="color:Blue;font-weight:bolder;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =====</span>
+                                            Weighted&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                                            <span style="font-weight:bolder;">=====</span>
+                                            Non-Weighted
+                                        </td>
+                                    </tr>--%>
                             </table>
                         </td>
                         <td style="width: 2%;">
@@ -1309,6 +1336,14 @@
                                             
                                     </td>
                                 </tr>
+                                 <tr>
+                                        <td>
+                                            <span style="color:Blue;font-weight:bolder;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =====</span>
+                                            Weighted&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                                            <span style="font-weight:bolder;">=====</span>
+                                            Non-Weighted
+                                        </td>
+                                    </tr>
                             </table>
                         </td>
                         <td style="width: 2%;">
@@ -2691,7 +2726,10 @@
                                         </td>
                                         <td valign="top" style="padding-top:8px;">
                                             <div id="Div_ReportGrading" runat="server" visible="false"  style="float:right; padding-right:10px;">
-                                                <asp:ImageButton ID="btnReportGrading" runat="server" Visible="false" ImageUrl="../Images/Sync DLP Scoring Report_preview.jpg" ToolTip="Scoring Report" onClientclick="javascript:return ShowReportGradingWindow();"></asp:ImageButton>         
+                                                <asp:ImageButton ID="btnReportGrading" runat="server" Visible="true" ImageUrl="../Images/Sync DLP Scoring Report_preview.jpg" ToolTip="Scoring Report" onClientclick="javascript:return ShowReportGradingWindow();"></asp:ImageButton>         
+                                            </div>
+                                            <div id="Div_ReportCMYKDensity" runat="server" visible="false"  style="float:right; padding-right:10px;">
+                                                <asp:ImageButton ID="btnReportCMYKDensity" runat="server" ImageUrl="../Images/Sync DLP Scoring Report_preview.jpg" ToolTip="CMYK Density Report" onClientclick="javascript:return ShowReportCMYKDensityWindow();"></asp:ImageButton>         
                                             </div>
                                         </td>
                                     </tr>
@@ -2739,6 +2777,10 @@
         </telerik:RadWindow>
         <telerik:RadWindow ID="ReportGradingWindow" runat="server" VisibleStatusbar="false"
             ShowContentDuringLoad="false" Title="Import Measurements" Width="730" Height="420"
+            Behaviors="Close, Move" Behavior="Close, Move">
+        </telerik:RadWindow>
+        <telerik:RadWindow ID="ReportCMYKDensityWindow" runat="server" VisibleStatusbar="false"
+            ShowContentDuringLoad="false" Title="CMYK Density" Width="730" Height="420"
             Behaviors="Close, Move" Behavior="Close, Move">
         </telerik:RadWindow>
     </Windows>

@@ -658,6 +658,17 @@
                                                             </asp:ListView>
                                                             <br />
                                                             <asp:CheckBox ID="chkWeightedTolerances" runat="server" Visible="false" />&nbsp;<asp:Label ID="lblWeightedTolerances" runat="server" Text="Use Weighted Tolerances" meta:resourcekey="lblWeightedTolerancesResource1" Visible="false"></asp:Label>
+                                                            <div id="Div_LinearizationType" runat="server" visible="false">
+                                                                <asp:CheckBox ID="chkLinearizationType" runat="server" Checked="true"/>&nbsp;<asp:Label ID="lblLinearizationType" runat="server" Text="Use LinearizationType TR015" meta:resourcekey="lblLinearizationTypeResource1"></asp:Label>
+                                                            </div>
+                                                                Choose Measurement Correction: 
+                                                                    <asp:DropDownList ID="cmbMeaCorrection" runat="server">
+                                                                        <asp:ListItem Value="0" Text="None"></asp:ListItem>
+                                                                        <asp:ListItem Value="1" Text="Correction" Selected="True"></asp:ListItem>
+                                                                        <asp:ListItem Value="2" Text="Smoothing"></asp:ListItem>
+                                                                        <asp:ListItem Value="3" Text="Correction + Smoothing"></asp:ListItem>
+                                                                    </asp:DropDownList>
+                                                            
                                                         </div>
                                         </td>
                                         <td valign="top" style="width: 195px; border:1px Solid Gray;">

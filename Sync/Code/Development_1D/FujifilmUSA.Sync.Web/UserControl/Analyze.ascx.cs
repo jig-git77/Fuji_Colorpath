@@ -194,7 +194,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D
                     {
                         //------If project is Sync1D type, Assign 'E' to radiolist, bydefault (because Sync 1D has only dt_E type)----------------//
-                        rbtnListDeltaE.SelectedValue = "E";
+                        //rbtnListDeltaE.SelectedValue = "E";
+                        rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
                     }
                     if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
                     {
@@ -228,7 +229,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Verification mode
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //---Only display Report Grading for Sync4D Validation
                     {
-                        Div_ReportGrading.Visible = true;
+                       // Div_ReportGrading.Visible = true; //---Disable for time being in Production code
                     }
                     
                     lbtnDownloadAndSaveDLP.Visible = false;
@@ -264,7 +265,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnOptimize.Visible = false; 
                     trRBtnListDeltaE.Visible = false; 
                     Div_Opt_Header.Visible = true;
-                    //td1DSmoothing.Visible = true;  //Display in Sync1D for Smoothing measurements (Commented out for temporary untill get decided to use this feature)
+                    td1DSmoothing.Visible = true;  //Display in Sync1D for Smoothing measurements (Commented out for temporary untill get decided to use this feature)
 
                     if (ValidationType == 1)  //G7 type
                     {
@@ -285,6 +286,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         dvTab_TVI.Visible = Tab_TVI.Visible = false;
                     }
                     Div_MetricSumFilter.Visible = true;
+                    //Div_ReportCMYKDensity.Visible = true;  //---Disable for time being in Production code
                 }
                 else   //-----DLP Optimization
                 {
@@ -526,6 +528,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             //-------Assign Report Grading Pop up to load report in "Report" tab--------------//
             ReportGradingWindow.NavigateUrl = "../PopupReportGrading.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType + "&IsAvgMeas=" + IsAverageOfMeasurements;
+
+            //-------Assign Report CMYK Density Pop up to load report in "Report" tab--------------//
+            ReportCMYKDensityWindow.NavigateUrl = "../PopupReportCMYKDensity.aspx?ProjectID=" + SessionManager.Instance.CurrentProject.ProjectId + "&OptimizeRunID=" + SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId + "&MeasurementID=" + MeasurementId;
+       
         }
 
         #endregion
@@ -3239,19 +3245,38 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     sw.WriteLine(@"KEYWORD	""SampleID""");
                     sw.WriteLine(@"KEYWORD	""SAMPLE_NAME""");
 
-                    sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "19");
-
+                    if (IsSync1DType)
+                    {
+                        sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "55"); //-----Only for Sync1D projects, add Spectral data into CGATES file
+                    }
+                    else
+                    {
+                        sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "19");
+                    }
                     sw.WriteLine("BEGIN_DATA_FORMAT");
 
-                    sw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS");
-
+                    if (IsSync1DType)
+                    {
+                        sw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS\tnm380\tnm390\tnm400\tnm410\tnm420\tnm430\tnm440\tnm450\tnm460\tnm470\tnm480\tnm490\tnm500\tnm510\tnm520\tnm530\tnm540\tnm550\tnm560\tnm570\tnm580\tnm590\tnm600\tnm610\tnm620\tnm630\tnm640\tnm650\tnm660\tnm670\tnm680\tnm690\tnm700\tnm710\tnm720\tnm730");
+                    }
+                    else
+                    {
+                        sw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS");
+                    }
                     sw.WriteLine("END_DATA_FORMAT");
                     sw.WriteLine("NUMBER_OF_SETS" + "\t" + dtFilteredPatchDetails.Rows.Count.ToString());
                     sw.WriteLine("BEGIN_DATA");
 
                     for (int i = 0; i < dtFilteredPatchDetails.Rows.Count; i++)
                     {
-                        sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString());
+                        if (IsSync1DType)
+                        {
+                            sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm380"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm390"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm400"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm410"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm420"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm430"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm440"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm450"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm460"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm470"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm480"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm490"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm500"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm510"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm520"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm530"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm540"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm550"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm560"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm570"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm580"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm590"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm600"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm610"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm620"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm630"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm640"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm650"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm660"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm670"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm680"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm690"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm700"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm710"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm720"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm730"].ToString());
+                        }
+                        else
+                        {
+                            sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString());
+                        }
                     }
 
                     sw.WriteLine("END_DATA");
@@ -3307,7 +3332,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        protected void chk1DMeasurementSmoothing_CheckedChanged(object sender, EventArgs e)  //---(Commented out / not being used for temporary untill get decided to use this feature)//---
+        protected void chk1DMeasurementSmoothing_CheckedChanged(object sender, EventArgs e) 
         {
             SessionManager.Instance.CurrentProject.Is1DMeasurementSmoothing = chk1DMeasurementSmoothing.Checked;
         }

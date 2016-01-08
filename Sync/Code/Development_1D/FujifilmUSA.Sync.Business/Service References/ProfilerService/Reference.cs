@@ -1195,6 +1195,9 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptionsField;
+
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile SourceProfileField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1254,6 +1257,23 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
                 if ((object.ReferenceEquals(this.ProfileOptionsField, value) != true)) {
                     this.ProfileOptionsField = value;
                     this.RaisePropertyChanged("ProfileOptions");
+                }
+            }
+        }
+
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public FujifilmUSA.Sync.Business.ProfilerService.IccProfile SourceProfile
+        {
+            get
+            {
+                return this.SourceProfileField;
+            }
+            set
+            {
+                if ((object.ReferenceEquals(this.SourceProfileField, value) != true))
+                {
+                    this.SourceProfileField = value;
+                    this.RaisePropertyChanged("SourceProfile");
                 }
             }
         }

@@ -151,6 +151,7 @@
     <Content Include="Images\green.png" />
     <Content Include="Images\InkOptimizeSource.png" />
     <Content Include="Images\Red.png" />
+    <Content Include="Images\Sync DLP Scoring Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview_G7.jpg" />
     <Content Include="Images\Sync1D Report_preview_Vali.jpg" />
@@ -241,6 +242,7 @@
     <Content Include="PopupDownloadSoftware.aspx" />
     <Content Include="PopupImportMeasurements.aspx" />
     <Content Include="PopupOpenForgotPassword.aspx" />
+    <Content Include="PopupReportCMYKDensity.aspx" />
     <Content Include="PopupReportGrading.aspx" />
     <Content Include="PrintPreview.aspx" />
     <Content Include="PrintStandardTypeManagement.aspx" />
@@ -321,6 +323,7 @@
     <Content Include="UserControl\PopupControl\DownloadSoftware.ascx" />
     <Content Include="UserControl\PopupControl\ForgotPassword.ascx" />
     <Content Include="UserControl\PopupControl\ImportMeasurements.ascx" />
+    <Content Include="UserControl\PopupControl\ReportCMYKDensity.ascx" />
     <Content Include="UserControl\PopupControl\ReportGrading.ascx" />
     <Content Include="UserControl\PrintPreview.ascx" />
     <Content Include="UserControl\PrintStandardTypeManagement.ascx" />
@@ -923,6 +926,13 @@
     <Compile Include="PopupOpenForgotPassword.aspx.designer.cs">
       <DependentUpon>PopupOpenForgotPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PopupReportCMYKDensity.aspx.cs">
+      <DependentUpon>PopupReportCMYKDensity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupReportCMYKDensity.aspx.designer.cs">
+      <DependentUpon>PopupReportCMYKDensity.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PopupReportGrading.aspx.cs">
       <DependentUpon>PopupReportGrading.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1233,6 +1243,13 @@
     </Compile>
     <Compile Include="UserControl\PopupControl\ImportMeasurements.ascx.designer.cs">
       <DependentUpon>ImportMeasurements.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\ReportCMYKDensity.ascx.cs">
+      <DependentUpon>ReportCMYKDensity.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\ReportCMYKDensity.ascx.designer.cs">
+      <DependentUpon>ReportCMYKDensity.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\PopupControl\ReportGrading.ascx.cs">
       <DependentUpon>ReportGrading.ascx</DependentUpon>
@@ -1996,10 +2013,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.resx" />
+    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.ja.resx">
       <SubType>Designer</SubType>
     </Content>
@@ -2631,7 +2652,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\ProjectList.ascx.fr.resx" />
@@ -2890,7 +2913,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

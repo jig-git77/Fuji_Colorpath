@@ -51,5 +51,6 @@ namespace FujifilmUSA.Sync.Business.Interface
 
         int ChkAvgMeasurementCompatibility(int optimizeRunId);
         DataSet GetMeasurementDataForScoring(int MeasurementId, string From_ΔE, int ProjectId, bool IsAverageOfMeasurements = false);
+        DataSet GetDensityData_C(int OptimizeRunId);
     }
 }

@@ -318,6 +318,9 @@
   <data name="ELicenseType_CustomSourceProfile" xml:space="preserve">
     <value>Custom Source Profile_de</value>
   </data>
+  <data name="ELicenseType_ReProfileCustomSourceProfile" xml:space="preserve">
+    <value>ReProfile Custom Source_de</value>
+  </data>
   <data name="ELicenseType_Validation" xml:space="preserve">
     <value>Color Validation</value>
   </data>
@@ -791,6 +794,9 @@ erwünschten Format überein.</value>
     <value>Fehler beim Aktualisieren des Gerätes. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
   <data name="Error_UpdateLanguage" xml:space="preserve">
+    <value>Fehler beim Aktualisieren der Benutzerinformation. Bitte benachrichtigen Sie Ihren Administrator.</value>
+  </data>
+  <data name="Error_UpdateUserDevice" xml:space="preserve">
     <value>Fehler beim Aktualisieren der Benutzerinformation. Bitte benachrichtigen Sie Ihren Administrator.</value>
   </data>
   <data name="Error_UpdateLicense" xml:space="preserve">

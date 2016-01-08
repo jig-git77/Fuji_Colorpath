@@ -112,11 +112,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lnkbtnSavePrintCondition.Visible = false;
                 }
             }
-            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //---If "Ink Optimization Source" project type, then skip Measurement and Validation setup pages.
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource) //---If "Custom Source Profile" / "ReProfile Custom Source" project type, then skip Validation setup page.
             {
                V_ReferenceChartTypeId = MetricTargetPresetId = 0;
                 V_MeasurementDeviceId = 0;
-                Div_TargetColorSpace.Visible = false;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile)
+                {
+                    Div_TargetColorSpace.Visible = false;
+                }
                 IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
                 ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
                 ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
@@ -155,7 +158,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Div_OptChart.Visible = false;
                 Div_ValidationChart.Visible = false;
             }
-            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile)  //---If "Custom Source Project" project type
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource)  //---If "Custom Source Project" / "ReProfile Custom Source" project types
             {
                 if (!IsErrorOccured)
                 {

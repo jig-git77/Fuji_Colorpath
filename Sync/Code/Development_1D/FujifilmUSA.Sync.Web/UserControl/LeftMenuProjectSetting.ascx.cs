@@ -68,7 +68,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0)
                     {
                         lnkMeasure.Enabled = true;
-                        if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile)
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource)
                         {
                             lnkAnalyze.Enabled = true;
                         }
@@ -96,7 +96,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                         if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0)
                         {
-                            if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile)
+                            if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource)
                             {
                                 lnkAnalyze.Enabled = true;
                             }

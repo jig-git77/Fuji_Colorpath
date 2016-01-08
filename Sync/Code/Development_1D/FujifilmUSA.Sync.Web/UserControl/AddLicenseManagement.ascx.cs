@@ -75,6 +75,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chkInk_Source.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimizationSource);
             chkSync4D_Certification.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync4DCertification);
             chkCustomSourceProfile.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomSourceProfile);
+            chkReProfileCustomSource.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.ReProfileCustomSource);
         }
         private void Bindcompany()
         {
@@ -121,7 +122,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectBranch), false);
                 return;
             }
-            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked)
+            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked && !chkReProfileCustomSource.Checked)
             {
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectLicenseType), false);//Please select any one license type.
                 return;
@@ -151,6 +152,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 License.LicenseType.Add(ELicenseType.Sync4DCertification);
             if (chkCustomSourceProfile.Checked)
                 License.LicenseType.Add(ELicenseType.CustomSourceProfile);
+            if (chkReProfileCustomSource.Checked)
+                License.LicenseType.Add(ELicenseType.ReProfileCustomSource);
 
             if (LId == 0) // Add New company
             {
@@ -196,6 +199,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.CustomSourceProfile:
                             chkCustomSourceProfile.Checked = true;
+                            break;
+                        case ELicenseType.ReProfileCustomSource:
+                            chkReProfileCustomSource.Checked = true;
                             break;
                     }
                 });

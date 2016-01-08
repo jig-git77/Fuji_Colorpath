@@ -201,6 +201,9 @@
   <data name="ELicenseType_CustomSourceProfile" xml:space="preserve">
     <value>Custom Source Profile_ja</value>
   </data>
+  <data name="ELicenseType_ReProfileCustomSourceProfile" xml:space="preserve">
+    <value>ReProfile Custom Source_ja</value>
+  </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>無効</value>
   </data>
@@ -832,6 +835,9 @@
     <value>Error occured while retrieving languages. Please contact your administrator._ja</value>
   </data>
   <data name="Error_UpdateLanguage" xml:space="preserve">
+    <value>Error occured while updating user information.Please contact your administrator._ja</value>
+  </data>
+  <data name="Error_UpdateUserDevice" xml:space="preserve">
     <value>Error occured while updating user information.Please contact your administrator._ja</value>
   </data>
   <data name="EInstrumentType_i1IO" xml:space="preserve">

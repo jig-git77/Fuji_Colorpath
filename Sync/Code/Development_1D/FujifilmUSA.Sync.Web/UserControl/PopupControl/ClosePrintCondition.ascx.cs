@@ -64,7 +64,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnReOptimize.Visible = false;
                     lbtnDownloadCurrentDLP.Visible = false;
                 }
-                else if (CurrentLicenseType == ELicenseType.CustomSourceProfile)  //-------If LicenseTypeID = 6 (Custom Source Profile), then they can not create optimize runs, they has to close after 1st run--------------------//
+                else if (CurrentLicenseType == ELicenseType.CustomSourceProfile || CurrentLicenseType == ELicenseType.ReProfileCustomSource)  //-------If LicenseTypeID = 6 (Custom Source Profile) or LicenseTypeID = 7 (ReProfile Custom Source), then they can not create optimize runs, they has to close after 1st run--------------------//
                 {
                     lbtnDownloadCurrentDLP.Visible = false;
                     lbtnReOptimize.Visible = false;

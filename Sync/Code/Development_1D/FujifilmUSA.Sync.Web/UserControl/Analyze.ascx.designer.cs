@@ -1345,6 +1345,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.ImageButton btnReportGrading;
         
         /// <summary>
+        /// Div_ReportCMYKDensity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_ReportCMYKDensity;
+        
+        /// <summary>
+        /// btnReportCMYKDensity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnReportCMYKDensity;
+        
+        /// <summary>
         /// hdnSelectedTabIndex control.
         /// </summary>
         /// <remarks>
@@ -1406,6 +1424,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadWindow ReportGradingWindow;
+        
+        /// <summary>
+        /// ReportCMYKDensityWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindow ReportCMYKDensityWindow;
         
         /// <summary>
         /// LTRL_PageSize control.

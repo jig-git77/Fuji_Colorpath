@@ -201,6 +201,9 @@
   <data name="ELicenseType_CustomSourceProfile" xml:space="preserve">
     <value>Custom Source Profile</value>
   </data>
+  <data name="ELicenseType_ReProfileCustomSourceProfile" xml:space="preserve">
+    <value>ReProfile Custom Source</value>
+  </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>INVALID</value>
   </data>
@@ -838,6 +841,9 @@
     <value>Error occured while retrieving languages. Please contact your administrator.</value>
   </data>
   <data name="Error_UpdateLanguage" xml:space="preserve">
+    <value>Error occured while updating user information.Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateUserDevice" xml:space="preserve">
     <value>Error occured while updating user information.Please contact your administrator.</value>
   </data>
   <data name="Validation_ProjectOpenError" xml:space="preserve">

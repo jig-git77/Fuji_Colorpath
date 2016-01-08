@@ -69,6 +69,22 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<Language>();
         }
+
+        public int UpdateLanguage(int loginId, string languageCultureCode)
+        {
+            return 0;
+        }
+
+        public int UpdateUserDeviceInfo(int loginId, int measurementDeviceId, int densityType, int UVMode)
+        {
+            return 0;
+        }
+
+        public List<MeasurementDevice> GetMeasurementDeviceList(int loginId, int deviceId)
+        {
+            return new List<MeasurementDevice>();
+        }
+
         #endregion
 
         #region ITaskBase Members
@@ -77,9 +93,6 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         #endregion
 
-        public int UpdateLanguage(int loginId, string languageCultureCode)
-        {
-            return 0;
-        }
+       
     }
 }

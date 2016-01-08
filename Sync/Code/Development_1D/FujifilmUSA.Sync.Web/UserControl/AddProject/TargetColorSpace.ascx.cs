@@ -283,6 +283,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>().Where(p => p.Value != Common.Utilities.GetEnumDescriptionAttributeValue(PCSDataTypes.XYZ)).ToDictionary(p => p.Key, p => p.Value);
             }
             cmbPCSDataType.DataBind();
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D) //Bydefault spectral selection for Sync1D projects only
+            {
+                cmbPCSDataType.SelectedIndex = 1; //Bydefault spectral selection
+            }
         }
 
         #endregion
