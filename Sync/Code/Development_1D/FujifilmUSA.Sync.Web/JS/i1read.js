@@ -196,7 +196,7 @@ function getChartLocation(scanner) {
     myQuery["GETPOSINSTRUCTIONS"] = locPlaceChartiOTable;
     myQuery["GETPOINTINSTRUCTIONS"] = locMovei1VisorUpperLeftCorner;
     myQuery["First"] = "true";
-    playSound('Download/Done.wav')
+    playSound('Done')
     var result = plugin().getPosition(scanner, myQuery, presentGetPosDialog, presentGetPosDone);
     if (result != "OK") {
         alert(locScanningDeviceUnpluggedWOStatusText);
@@ -384,7 +384,7 @@ function presentScanDonei1(scanner, mychart, final) {
         // error
         if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED" || backup1 == 1)) {
             //--------Play "Error - Not Matched" sound--------//
-            playSound('Download/Error.wav');
+            playSound('Error');
             alert(mychart["Result"]);
             //MeasurementDialog(mychart["Result"], "Error");           
         }
@@ -452,7 +452,7 @@ function presentScanDonei1(scanner, mychart, final) {
     if (!(scanner["Type"] == "iO" || scanner["Type"] == "iSis" || scanner["Type"] == "SpectroLFP")) {
         if (results.length != mychart["NumberOfColumns"]) {
             //--------Play "Error - Not Matched" sound--------//
-            playSound('Download/Error.wav');
+            playSound('Error');
             alert(locFailedReadExpectedSamples1 + results.length + " " + locFailedReadExpectedSamples2 + " " + mychart["NumberOfColumns"] + " " + locFailedReadExpectedSamples3);
             // MeasurementDialog("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"], "Error");
 
@@ -648,7 +648,7 @@ function presentScanDonei1(scanner, mychart, final) {
     }
 
     //--------Play "OK - Passed" sound--------//
-    playSound('Download/Done.wav');
+    playSound('Done');
 }
 function presentProgressi1(scanner, mychart) {
     console.log("In presentProgress");
