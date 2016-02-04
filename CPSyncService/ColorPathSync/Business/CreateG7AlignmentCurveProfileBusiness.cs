@@ -18,6 +18,7 @@ namespace ColorPathSync.Business
             TYPE_p_void srcProf = CrossXColor.CLNewICCProfileRef();
             TYPE_p_void trafo = null;
             int[] renderingIntents = new int[] { CrossXColor.icPerceptual };
+            int outvar = 0;
 
             try
             {
@@ -42,10 +43,20 @@ namespace ColorPathSync.Business
 
                 //--------Set other parameters-------//
                 request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
+
+               // request.ProfileOptions.ForEach((param) => outvar = (param.Name.Contains("LinearizationType")) ? outvar = outvar + 1 : outvar = outvar + 0);
+
+                int index = request.ProfileOptions.FindIndex(item => item.Name == "LinearizationType");
+
                 err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                 err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
                 err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
-                err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "G7");
+
+                if (index < 0)
+                {
+                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "G7");
+                }
+                
                 err = CrossXColor.CLSetProfilerOption(profiler, "SaveProfilerData", "1");
                 err = CrossXColor.CLSetProfilerOption(profiler, "SaveProfilerInfo", "1");
 

@@ -25,9 +25,11 @@ namespace ColorPathSync.Business
                 response.Severity = MessageSeverity.Error;
                 return response;
             }
-
+            
+          
             TYPE_p_void profiler = CrossXColor.CLNewCLProfilerRef(); // this object referece to CroxColor Profiler object
             TYPE_p_void prof = CrossXColor.CLNewICCProfileRef();  // this object  references an ICC profile to access its data.
+            TYPE_p_void srcProf = CrossXColor.CLNewICCProfileRef(); 
 
             try
             {
@@ -58,6 +60,12 @@ namespace ColorPathSync.Business
                 err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
                 CrossXColor.CLSetProfilerData(profiler, request.DCSData.Length / 4, dcsDataSet, pcsDataSet);
 
+                if (request.SourceProfile != null || request.SourceProfile.ProfileData != null)
+                {
+                    Curve.CopyProfileInMemory(request.SourceProfile.ProfileData, ref srcProf);
+                    err = CrossXColor.CLSetOptionProfile(profiler, "RefProfile", srcProf);
+                }
+
                 // calc profile in memory
                 err = CrossXColor.CLCalcProfile(profiler, prof);
                 if (err != 0)
@@ -78,6 +86,7 @@ namespace ColorPathSync.Business
                 //clear the unmanaged memory
                 CrossXColor.CLFreeCLProfilerRef(profiler);
                 CrossXColor.CLFreeICCProfileRef(prof);
+                CrossXColor.CLFreeICCProfileRef(srcProf);
             }
             return response;
         }
