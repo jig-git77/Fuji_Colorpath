@@ -76,6 +76,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chkSync4D_Certification.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync4DCertification);
             chkCustomSourceProfile.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.CustomSourceProfile);
             chkReProfileCustomSource.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.ReProfileCustomSource);
+            chkFullGamutCustomSource.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.FullGamutCustomSource);
         }
         private void Bindcompany()
         {
@@ -122,7 +123,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectBranch), false);
                 return;
             }
-            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked && !chkReProfileCustomSource.Checked)
+            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked && !chkReProfileCustomSource.Checked && !chkFullGamutCustomSource.Checked)
             {
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectLicenseType), false);//Please select any one license type.
                 return;
@@ -154,7 +155,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 License.LicenseType.Add(ELicenseType.CustomSourceProfile);
             if (chkReProfileCustomSource.Checked)
                 License.LicenseType.Add(ELicenseType.ReProfileCustomSource);
-
+            if (chkFullGamutCustomSource.Checked)
+                License.LicenseType.Add(ELicenseType.FullGamutCustomSource);
+            
             if (LId == 0) // Add New company
             {
                 _presenterLicenseManagement.InsertLicense();
@@ -202,6 +205,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.ReProfileCustomSource:
                             chkReProfileCustomSource.Checked = true;
+                            break;
+                        case ELicenseType.FullGamutCustomSource:
+                            chkFullGamutCustomSource.Checked = true;
                             break;
                     }
                 });

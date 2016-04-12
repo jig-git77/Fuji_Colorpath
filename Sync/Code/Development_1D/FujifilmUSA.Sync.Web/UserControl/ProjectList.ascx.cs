@@ -288,6 +288,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.ReProfileCustomSource:
                             operationImageURL = @"../Images/DLPReProfileSource.png";
                             break;
+                        case ELicenseType.FullGamutCustomSource:
+                            operationImageURL = @"../Images/DLPFullGamutSource.png";
+                            break;
                         case ELicenseType.Validation:
 
                             break;

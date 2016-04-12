@@ -1106,6 +1106,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             #endregion
 
             BindLABComparison_1(DTTarget);
+
+            FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(chartABComparison_1.ImageLocation) + "." + chartABComparison_1.ImageType;
+            chartABComparison_1.SaveImage(Server.MapPath(FileName));
+
+            FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(chartLComparison.ImageLocation) + "." + chartLComparison.ImageType;
+            chartLComparison.SaveImage(Server.MapPath(FileName));
         }
 
         private void BindLABComparison_1(List<AnalyzeChart_Gray> DT)
@@ -1768,6 +1774,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                     }
                 }
+
+                FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_SummaryDotgain.ImageLocation) + "." + CHRT_SummaryDotgain.ImageType;
+                CHRT_SummaryDotgain.SaveImage(Server.MapPath(FileName));
+
                 #endregion
             }
             catch (Exception Exc)

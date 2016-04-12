@@ -113,7 +113,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
-                if (SessionManager.Instance.CurrentProject.ProjectTargetLAB == null || SessionManager.Instance.CurrentProject.ProjectTargetLAB.Count == 0)
+                if(ViewState[_vsPrintStandardType] != null)
                 {
                     BindTargetLAB();
                 }

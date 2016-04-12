@@ -418,6 +418,33 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer ValidationContainer6;
         
         /// <summary>
+        /// txtFullGamutCustomSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFullGamutCustomSource;
+        
+        /// <summary>
+        /// rfvtxtFullGamutCustomSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtFullGamutCustomSource;
+        
+        /// <summary>
+        /// ValidationContainer7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer ValidationContainer7;
+        
+        /// <summary>
         /// locIsValidation control.
         /// </summary>
         /// <remarks>

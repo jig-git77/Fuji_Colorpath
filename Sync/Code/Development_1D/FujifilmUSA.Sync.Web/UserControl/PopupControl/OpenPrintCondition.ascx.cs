@@ -84,6 +84,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
                 }
+                else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource && (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile)) //---If Source to Source project and in Run-0 mode only, then go directly to Middle Create DLP page, since there is no Measurement and Analyze Pages
+                {
+                    Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
+                }
                 else
                 {
                     Utilities.PopupWindowsRedirect(this,

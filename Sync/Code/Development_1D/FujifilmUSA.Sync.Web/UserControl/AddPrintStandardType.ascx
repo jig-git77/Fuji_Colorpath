@@ -77,7 +77,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr style="visibility:hidden;">
                                 <td  align="right">
                                     <span style="font-weight: bold;"><asp:Localize Text="Is Sync1DType?" runat="server" 
                                         ID="locIsSync1DType" meta:resourcekey="locIsSync1DTypeResource1"></asp:Localize></span>

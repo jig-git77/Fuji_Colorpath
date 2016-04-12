@@ -204,6 +204,9 @@
   <data name="ELicenseType_ReProfileCustomSourceProfile" xml:space="preserve">
     <value>ReProfile Custom Source_fr</value>
   </data>
+  <data name="ELicenseType_FullGamutCustomSourceProfile" xml:space="preserve">
+    <value>Full Gamut Custom Source_fr</value>
+  </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>INVALIDE</value>
   </data>

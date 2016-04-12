@@ -88,7 +88,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             if (IsSync1DType)
             {
-                objReportPDF.ReportName = "G7 Alignment Curves Report";                 
+                objReportPDF.ReportName = "Press Alignment Report";                 
             }
 
             objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_G7;

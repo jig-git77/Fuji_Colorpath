@@ -62,7 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
                 }
             }
-            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //---If  "Custom Source Profile" project type
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //---If  "Custom Source Profile" / "Full Gamut Source Profile" project type
             {
                 SessionManager.Instance.CurrentProject.PrintStandardType = new Entity.CPSync1D.PrintStandardType()
                 {

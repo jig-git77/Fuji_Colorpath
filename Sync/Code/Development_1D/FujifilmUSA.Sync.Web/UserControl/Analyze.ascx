@@ -1628,7 +1628,7 @@
                                                                      <asp:Panel ID="panelabGamutComparison" runat="server" BorderStyle="None"
                                                                         Width="100%" meta:resourcekey="panelabGamutComparisonResource1">                                                                        
                                                                             <asp:chart ID="chartABComparison_1" runat="server"  Width="280px" Height="250px" BackGradientType="Center" 
-                                                                                    BackGradientEndColor="White" BorderLineColor="#808080"  EnableViewState="false">
+                                                                                    BackGradientEndColor="White" BorderLineColor="#808080"  EnableViewState="false" ImageType="Jpeg" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page4_Gamut_ABComparison">
                                                                                         <Legends>
                                                                                                 <asp:Legend Name="Default" Enabled="False">
                                                                                             </asp:Legend>
@@ -1689,7 +1689,7 @@
                                                             <td align="center" valign="top" runat="server">                                                            
                                                                 <asp:Chart ID="chartLComparison" runat="server" BackGradientType="Center"
                                                                                         BackGradientEndColor="White" BorderLineColor="Gray" 
-                                                                    Width="280px" Height="75px">
+                                                                    Width="280px" Height="75px"  ImageType="Jpeg" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page4_Gamut_LComparison">
                                                                     <Legends>
                                                                         <asp:Legend Name="Default" Enabled="False">
                                                                         </asp:Legend>
@@ -1952,9 +1952,9 @@
                                         <td valign="top">
 
                                             <asp:Chart ID="CHRT_SummaryDotgain" runat="server" Width="650px" Height="360px"
-                                            ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/CHRT_SummaryTVI" BackGradientType="Center"
+                                            ImageType="Jpeg" BackGradientType="Center"
                                             BackGradientEndColor="White" BorderLineColor="#808080"
-                                            EnableViewState="false">
+                                            EnableViewState="false" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page4_CHRT_SummaryTVI">
                                             <Series>
                                                 <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
                                                     Color="Cyan" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"

@@ -61,13 +61,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkSave.Enabled = true;
                     }
-                    if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0)
-                    {
-                        lnkMeasurementSetup.Enabled = true;
-                    }
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0)
                     {
                         lnkMeasure.Enabled = true;
+
                         if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource)
                         {
                             lnkAnalyze.Enabled = true;
@@ -77,8 +74,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             lnkDownload.Enabled = true;
                         }
 
-
-                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)
+                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource || (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)) //-- If ProjectType is Source to Source Profile or Sync 1D ReTarget then, don't show Measurement Page
                         {
                             lnkMeasure.Enabled = false;
                         }

@@ -321,6 +321,9 @@
   <data name="ELicenseType_ReProfileCustomSourceProfile" xml:space="preserve">
     <value>ReProfile Custom Source_de</value>
   </data>
+  <data name="ELicenseType_FullGamutCustomSourceProfile" xml:space="preserve">
+    <value>Full Gamut Custom Source_de</value>
+  </data>
   <data name="ELicenseType_Validation" xml:space="preserve">
     <value>Color Validation</value>
   </data>

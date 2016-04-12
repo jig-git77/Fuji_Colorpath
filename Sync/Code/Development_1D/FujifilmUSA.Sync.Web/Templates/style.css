@@ -117,3 +117,398 @@ font-family:Verdana, Tahoma; font-size:11px; font-weight:bold; color:#fff; curso
 .ISOPaperGraph1-bg {background:url(../Images/BGISOPaperGraph1_Sync4D.jpg) no-repeat;}
 .ISOPaperGraph2-bg {background:url(../Images/BGISOPaperGraph2_Sync4D.jpg) no-repeat;}
 
+.header-bg-main {margin:0; padding:0; background-color:White;}
+.header-title-image { margin:0; padding:0 0 0 0; vertical-align:middle; font-size:22px; color:#23408f; width:300px; line-height:43px; height:53px; display:block;; font-family:Gill Sans MT;}
+.header-title-main { margin:0; padding:0 0 0 10px; vertical-align:top; font-size:20px; color:#23408f; width:300px; line-height:43px; height:53px; display:block;}
+.footer1-bg-main {margin:0; padding: 0 0 0 20px; background-color:#22af7c; width:218px;}
+.footer2-bg-main {margin:0; padding: 0 20px 0 0; background-color:#b5ddc6; width:443px;}
+.divider-line-main {margin:0; padding: 0 20px 0 0; color:#22af7c;}
+
+
+p.Body-Text {
+	-epub-hyphens:none;
+	color:#000000;
+	font-family: Arial;
+	font-size:8px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:300;
+	line-height:1.25;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.Body-Text-Bold {
+	-epub-hyphens:none;
+	color:#000000;
+	font-family: Arial;
+	font-size:8px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:bold;
+	line-height:1.25;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.Body-Text-Center {
+	-epub-hyphens:none;
+	color:#000000;
+	font-family: Arial;
+	font-size:8px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:300;
+	line-height:1.25;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:center;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+p.Body-Text-Bold-Center {
+	-epub-hyphens:none;
+	color:#000000;
+	font-family: Arial;
+	font-size:8px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:bold;
+	line-height:1.25;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:center;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+	widows:1;
+}
+.Cover-Title {
+	color:#000000;
+	font-family: Gill Sans MT;
+	font-size:28px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.2;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+}
+
+.Cover-Subtitle-1 {
+	color:#000000;
+	font-family: Gill Sans MT;
+	font-size:18px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.2;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+}
+.Cover-Subtitle-2 {
+	color:#000000;
+	font-family: Gill Sans MT;
+	font-size:14px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.2;
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+}
+.Header_1
+{
+    color:#000000;
+	font-family: Gill Sans MT;
+	font-size:12px;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:bold;
+	line-height:1.2;
+	margin-bottom:5px;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	orphans:1;
+	page-break-after:auto;
+	page-break-before:auto;
+	text-align:left;
+	text-decoration:none;
+	text-indent:0;
+	text-transform:none;
+}
+
+.table-grid-row 
+{
+    background-color:#b6ddc7;
+	min-height:27px;
+}
+.table-grid-altrow 
+{
+    background-color:#b6ddc7;
+	min-height:27px;
+}
+table.Metadata-Table {
+	border-collapse:collapse;
+	border-color:#000000;
+	border-style:solid;
+	border-width:0px;
+}
+td.Metadata-Table {
+	border-left-width:0px;
+	border-left-style:solid;
+	border-left-color:#000000;
+	border-top-width:0px;
+	border-top-style:solid;
+	border-top-color:#000000;
+	border-right-width:0px;
+	border-right-style:solid;
+	border-right-color:#000000;
+	border-bottom-width:0px;
+	border-bottom-style:solid;
+	border-bottom-color:#000000;
+	border-bottom-style:solid;
+	border-bottom-color:#000000;
+	padding-top:4px;
+	padding-bottom:4px;
+	padding-left:4px;
+	padding-right:4px;
+	vertical-align:top;
+}
+
+col._idGenTableRowColumn-1 {
+	width:72px;
+}
+col._idGenTableRowColumn-2 {
+	width:192px;
+}
+tr._idGenTableRowColumn-3 {
+	background-color:#b6ddc7;
+	min-height:27px;
+}
+tr._idGenTableRowColumn-4 {
+	min-height:27px;
+}
+tr._idGenTableRowColumn-5 {
+	background-color:#b6ddc7;
+	min-height:36px;
+}
+tr._idGenTableRowColumn-6 {
+	min-height:36px;
+}
+col._idGenTableRowColumn-7 {
+	width:79px;
+}
+col._idGenTableRowColumn-8 {
+	width:35px;
+}
+col._idGenTableRowColumn-9 {
+	width:36px;
+}
+tr._idGenTableRowColumn-10 {
+	min-height:22px;
+}
+tr._idGenTableRowColumn-11 {
+	background-color:#b6ddc7;
+	min-height:20px;
+}
+tr._idGenTableRowColumn-12 {
+	min-height:20px;
+}
+col._idGenTableRowColumn-13 {
+	width:43px;
+}
+col._idGenTableRowColumn-14 {
+	width:54px;
+}
+col._idGenTableRowColumn-15 {
+	width:45px;
+}
+tr._idGenTableRowColumn-title {
+	background-color:#22af7c;
+	min-height:27px;
+}
+tr._idGenTableRowColumn-title-black {
+	background-color:#000000;
+	min-height:27px;
+}
+
+#_idContainer000 {
+	display:inline-block;
+	height:112px;
+	width:441px;
+}
+#_idContainer002 {
+	display:inline-block;
+	height:0px;
+	position:relative;
+	width:259px;
+}
+#_idContainer018 {
+	display:inline-block;
+	height:65px;
+	width:164px;
+}
+#_idContainer019 {
+	display:inline-block;
+	height:148px;
+	width:117px;
+}
+#_idContainer021, #_idContainer023 {
+	display:inline-block;
+	height:74px;
+	width:264px;
+}
+#_idContainer025 {
+	display:inline-block;
+	height:73px;
+	width:266px;
+}
+#_idContainer027 {
+	display:inline-block;
+	height:143px;
+	width:160px;
+}
+#_idContainer030 {
+	display:inline-block;
+	height:43px;
+	width:159px;
+}
+#_idContainer035 {
+	display:inline-block;
+	height:142px;
+	width:150px;
+}
+#_idContainer036 {
+	display:inline-block;
+	height:51px;
+	width:221px;
+}
+#_idContainer037 {
+	display:inline-block;
+	height:147px;
+	width:251px;
+}
+#_idContainer038 {
+	display:inline-block;
+	height:50px;
+	width:215px;
+}
+#_idContainer039 {
+	display:inline-block;
+	height:54px;
+	width:214px;
+}
+#_idContainer043 {
+	display:inline-block;
+	height:207px;
+	width:131px;
+}
+
+
+span.Body-Text-white {
+	color:#ffffff;
+	font-family:Helvetica, sans-serif;
+	font-size:8px;
+	font-style:normal;
+	font-weight:bold;
+}
+
+td.C
+{
+    background-color:#c2e6fa;
+}
+td.M
+{
+    background-color:#f9cde0;
+}
+td.Y
+{
+    background-color:#fffacb;
+}
+td.B
+{
+    background-color:#c9caca;
+}
+td.R
+{
+    background-color:#f9c1b8;
+}
+td.G
+{
+    background-color:#badcbf;
+}
+td.B
+{
+    background-color:#b6c0e2;
+}
+td.Substrate
+{
+    background-color:#ffffff;
+}
+td.CMY
+{
+    background-color:#c5b9b4;
+}
+td.Gray
+{
+    background-color:#d3d4d5;
+}

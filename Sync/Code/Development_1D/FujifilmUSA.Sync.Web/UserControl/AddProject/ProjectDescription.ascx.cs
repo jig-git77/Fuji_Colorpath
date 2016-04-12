@@ -72,7 +72,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 ddlLicenseType.SelectedIndex = ddlLicenseType.Items.IndexOf(ddlLicenseType.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.LicenseType)));
                 ddlLicenseType.Enabled = false;
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile) //-----If Custom Source Profile project type then rename Target ColorSpace to Next button---//
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //-----If Custom Source Profile / Full Gamut Source Profile project type then rename Target ColorSpace to Next button---//
                 {
                     locTargetColorSpace.Text = GetResourceString(_reclocTargetColorSpaceNextText);
                 }
@@ -161,7 +161,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             };
 
             SessionManager.Instance.CurrentProject.LicenseType = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
-            if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomSourceProfile)
+            if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomSourceProfile || (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.FullGamutCustomSource)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
                 //SessionManager.Instance.CurrentProject.PrintStandardType = null;
@@ -187,7 +187,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else
             {
                 Tr_OffsetPrintData.Visible = false;
-                if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomSourceProfile)
+                if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomSourceProfile || (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.FullGamutCustomSource)
                 {
                     locTargetColorSpace.Text = GetResourceString(_reclocTargetColorSpaceNextText);
                 }

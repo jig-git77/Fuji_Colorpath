@@ -147,10 +147,17 @@
     <Content Include="Images\activity-validation-rules.png" />
     <Content Include="Images\CPSPrintStandardBottomImage.jpg" />
     <Content Include="Images\CPSPrintStandardLogo.jpg" />
+    <Content Include="Images\DLPFullGamutSource.png" />
+    <Content Include="Images\DLPReProfileSource.png" />
     <Content Include="Images\DLPSource.png" />
+    <Content Include="Images\FujiFilm.png" />
+    <Content Include="Images\FujiFilm2.png" />
+    <Content Include="Images\G7AlignmentReportTitle.png" />
     <Content Include="Images\green.png" />
     <Content Include="Images\InkOptimizeSource.png" />
+    <Content Include="Images\Logo-report.png" />
     <Content Include="Images\Red.png" />
+    <Content Include="Images\Report-Title.png" />
     <Content Include="Images\Sync DLP Scoring Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview_G7.jpg" />
@@ -281,10 +288,9 @@
     <Content Include="JS\jquery.js" />
     <Content Include="JS\MenuBar.js" />
     <Content Include="SourceProfileManagement.aspx" />
+    <Content Include="Templates\PrepressSingleMeasurement_G7.htm" />
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_Default.htm" />
-    <Content Include="Templates\PrepressSingleMeasurement_G7.htm" />
-    <Content Include="Templates\PrepressSingleMeasurement_ISO_old.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_ISO.htm" />
     <Content Include="Templates\ScoringMeasurement_Default.htm" />
     <Content Include="Templates\style.css" />
@@ -2913,7 +2919,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
