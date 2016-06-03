@@ -2726,7 +2726,7 @@
                                         </td>
                                         <td valign="top" style="padding-top:8px;">
                                             <div id="Div_ReportGrading" runat="server" visible="false"  style="float:right; padding-right:10px;">
-                                                <asp:ImageButton ID="btnReportGrading" runat="server" Visible="true" ImageUrl="../Images/Sync DLP Scoring Report_preview.jpg" ToolTip="Scoring Report" onClientclick="javascript:return ShowReportGradingWindow();"></asp:ImageButton>         
+                                                <asp:ImageButton ID="btnReportGrading" runat="server" ImageUrl="../Images/Sync DLP Scoring Report_preview.jpg" ToolTip="Scoring Report" onClientclick="javascript:return ShowReportGradingWindow();"></asp:ImageButton>         
                                             </div>
                                             <div id="Div_ReportCMYKDensity" runat="server" visible="false"  style="float:right; padding-right:10px;">
                                                 <asp:ImageButton ID="btnReportCMYKDensity" runat="server" ImageUrl="../Images/Sync DLP Scoring Report_preview.jpg" ToolTip="CMYK Density Report" onClientclick="javascript:return ShowReportCMYKDensityWindow();"></asp:ImageButton>         

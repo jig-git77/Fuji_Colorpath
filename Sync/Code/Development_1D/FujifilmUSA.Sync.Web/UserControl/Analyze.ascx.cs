@@ -229,7 +229,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Verification mode
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //---Only display Report Grading for Sync4D Validation
                     {
-                       // Div_ReportGrading.Visible = true; //---Disable for time being in Production code
+                        Div_ReportGrading.Visible = true; //---Disable for time being in Production code
                     }
                     
                     lbtnDownloadAndSaveDLP.Visible = false;

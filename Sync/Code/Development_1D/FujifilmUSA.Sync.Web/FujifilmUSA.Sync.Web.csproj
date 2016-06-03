@@ -150,6 +150,8 @@
     <Content Include="Images\DLPFullGamutSource.png" />
     <Content Include="Images\DLPReProfileSource.png" />
     <Content Include="Images\DLPSource.png" />
+    <Content Include="Images\Drupa1.png" />
+    <Content Include="Images\Drupa2.png" />
     <Content Include="Images\FujiFilm.png" />
     <Content Include="Images\FujiFilm2.png" />
     <Content Include="Images\G7AlignmentReportTitle.png" />
@@ -2919,7 +2921,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

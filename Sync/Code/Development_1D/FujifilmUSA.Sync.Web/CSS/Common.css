@@ -241,12 +241,16 @@ label
     padding-top: 18px;
     float: left;
 }
+#header .drupa
+{
+    margin: 2px 0 0 0;
+}
 #header .setting a
 {
     background: url(../Images/setting_icon.png) no-repeat top left;
     width: 39px;
     height: 40px;
-    margin: 15px 18px 0 0;
+    margin: 8px 18px 0 0;
     float: right;
 }
 #header .setting a:hover
