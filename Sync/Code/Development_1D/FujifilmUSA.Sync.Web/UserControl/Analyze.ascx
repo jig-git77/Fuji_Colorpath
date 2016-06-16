@@ -1395,7 +1395,7 @@
                     </tr>
                 </table>                   
 
-                    <%--<table cellpadding="0" cellspacing="0" width="650px">
+                    <table cellpadding="0" cellspacing="0" width="650px">
                         <tr>
                             <td style="width: 49%">
                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
@@ -1407,7 +1407,7 @@
                                 <tr>
                                     <td valign="top">
                                         <asp:Chart ID="CHRT_BlackNPD" runat="server" Width="320px" Height="250px" ImageType="Jpeg"
-                                            ImageUrl="~/UploadFiles/temp/GrayNPD" BackGradientType="Center" 
+                                            ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_BlackNPD" BackGradientType="Center" 
                                             BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
                                             <Legends>
                                                 <asp:Legend Name="Default" Enabled="false">
@@ -1454,7 +1454,7 @@
                                     <tr>
                                         <td>
                                             <asp:Chart ID="CHRT_GrayNPD" runat="server" Width="320px" Height="250px" ImageType="Jpeg"
-                                                ImageUrl="~/UploadFiles/temp/GrayNPD" BackGradientType="Center" 
+                                                ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_GrayNPD" BackGradientType="Center" 
                                                 BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
                                                 <Legends>
                                                     <asp:Legend Name="Default" Enabled="false">
@@ -1488,7 +1488,7 @@
                                 </table>
                             </td>
                         </tr>
-                    </table>--%>
+                    </table>
                
                </ContentTemplate>
                     <Triggers>
@@ -1540,7 +1540,7 @@
                                                             <td align="center" valign="top">                                                      
                                                                 <asp:Chart ID="chartABComparison" runat="server" 
                                                                      Width="280px" Height="250px" BackGradientType="Center" 
-                                                                                    BackGradientEndColor="White" BorderLineColor="#808080"  EnableViewState="false">
+                                                                            BackGradientEndColor="White" BorderLineColor="#808080"  EnableViewState="false" ImageType="Jpeg" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_TargetVersusActualAB">
                                                                     <Titles>
                                                                         <asp:Title ForeColor="Black" Text="a*">
                                                                             <Position X="15" Y="42" />

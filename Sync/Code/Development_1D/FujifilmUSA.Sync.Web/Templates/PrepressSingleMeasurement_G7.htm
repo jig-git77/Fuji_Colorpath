@@ -21,7 +21,7 @@
                             <img src="##IMAGES##login_logo.png" style="width: 485px; height: 94px" />
                         </td>
                     </tr>
-                    <tr style="height:600px; overflow:hidden">
+                    <tr style="height:550px; overflow:hidden">
                         <td valign="top">
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr style="height:45px;">
@@ -29,7 +29,7 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                        <td></td>
+                                        <td align="right" style="padding-right:10px;"> <img src="##IMAGES##G7_logo_web.gif" style="width: 92px; height: 50px" /></td>
                                         <td class="Cover-Title">
                                         ###ReportName###<br />
                                     </td>
@@ -63,6 +63,16 @@
                             </table>
                         </td>
                     </tr>
+                    <tr>
+                        <td style=" vertical-align:middle ; color :Black; font-size :10px; font-family : Arial; padding : 0 0 0 30px;">
+                            This report shows G7 compliance but does not qualify the holder as a Master G7 print provider.
+                        </td>
+                    </tr>
+                     <tr>
+                        <td style=" vertical-align:middle ; color :Black; font-size :10px; font-family : Arial; padding : 0 0 0 30px;">
+                            Version 2.0
+                        </td>
+                    </tr>
                 </table>
             </td>
         </tr>
@@ -88,6 +98,16 @@
                         <td colspan="3" valign="top" style="padding-left:35px; padding-right:20px;">
                             <br />
                             <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td colspan="3">
+                                        <p class="Header_1">
+                                            ###MeasurementType### 
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                </tr>
                                 <tr>
                                     <td style="width:49%;">
                               
@@ -217,7 +237,7 @@
 			                                <br /><br /><p class="Header_1">Notes</p>
 		                                </div>
 		                               <div id="_idContainer008" style="background-color:#b6ddc7;">
-			                                <p class="Body-Text"><span class="Red">###Notes###</span></p>
+			                                <p class="Body-Text" style="padding-left:4px;"><span class="Red">###Notes###</span></p>
 		                                </div>
                                     </td>
                                     <td style="width:2%;"></td>
@@ -270,6 +290,14 @@
 						                                </td>
 						                                <td class="Metadata-Table Green">
 							                                <p class="Body-Text"><span class="Red">###MetricPreset###</span></p>
+						                                </td>
+					                                </tr>
+                                                    <tr class="Metadata-Table _idGenTableRowColumn-4">
+						                                <td class="Metadata-Table Green">
+							                                <p class="Body-Text-Bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</p>
+						                                </td>
+						                                <td class="Metadata-Table Green">
+							                                <p class="Body-Text"><span class="Red"></span></p>
 						                                </td>
 					                                </tr>
 				                                </tbody>
@@ -403,7 +431,7 @@
                                             </table>
 		                                </div>
 		                                <div>
-			                                <br /><p class="Body-Text">G7 gray balance is a standardized scale of CMY percentages that should appear neutral to the eye relative to the paper, and can be calculated and measured in a* and b* values for each scale step.</p>
+			                                <br /><p class="Body-Text">G7 gray balance is a standardized scale of CMY percentages that should appear neutral to the eye relative to the paper, and can be calculated and measured in a* and b* values for each scale step. Red lines indicate tolerances and green lines indicate the previous run.</p>
 		                                </div>
 		                                <div id="_idContainer016" class="Basic-Text-Frame">
 			                                <br /><br /><p class="Header_1">Density</p>
@@ -445,8 +473,9 @@
 				                                </tbody>
 			                                </table>
 		                                </div>
-		                               
-		                                
+		                                <div>
+			                                <br /><p class="Body-Text">The red lines indicate the targeted density. The green lines indicate the previous run.</p>
+		                                </div>
                                     </td>
                                     <td style="width:2%;"></td>
                                     <td valign="top" style="width:49%;" >
@@ -480,9 +509,33 @@
 		                                </div>
                                     </td>
                                 </tr>
+                                <tr>
+                                     <td style="width:49%;">
+		                                <br /><div id="Div23" class="Basic-Text-Frame">
+			                                    <p class="Header_1">Black NPD</p>
+		                                </div>
+		                                <div class="_idGenObjectLayout-1">
+			                                <div id="Div24" class="_idGenObjectStyleOverride-1">
+				                                <img class="_idGenObjectAttribute-1" src="###ResultSummary_BlackNPDImage###" alt="" width="300px" height="234px"/>
+			                                </div>
+		                                </div>
+                                    </td>
+                                    <td style="width:2%;"></td>
+                                    <td valign="top" style="width:49%;" >
+                                        <br /><div id="Div31" class="Basic-Text-Frame">
+			                                    <p class="Header_1">Gray NPD</p>
+		                                </div>
+		                                <div class="_idGenObjectLayout-1">
+			                                <div id="Div32" class="_idGenObjectStyleOverride-1">
+				                                <img class="_idGenObjectAttribute-1" src="###ResultSummary_GrayNPDImage###" alt="" width="300px" height="234px"/>
+			                                </div>
+		                                </div>
+                                    </td> 
+                               </tr>
                             </table>
                         </td>
                    </tr>
+                  
                 </table>
             </td>
         </tr>
@@ -574,7 +627,7 @@
                                                     </td>
                                                     <td valign="top">
                                                         <div class="_idGenObjectLayout-1">
-			                                                <div id="Div6" class="_idGenObjectStyleOverride-1" style="padding-top:20px;">
+			                                                <div id="Div6" class="_idGenObjectStyleOverride-1" style="padding-top:30px;">
                                                                  <div>
 			                                                        <p class="Header_1">###DeltaEFormula### Primary Aims</p>
 		                                                        </div>
@@ -596,8 +649,6 @@
                                 </tr>
                                 <tr>
                                     <td style="width:200px;">
-                              
-                                       
                                         <div id="Div3" class="Basic-Text-Frame">
 			                                <br /><p class="Header_1">a* b* Aims: Spider Plot</p>
 		                                </div>
@@ -605,7 +656,7 @@
 			                               <img class="_idGenObjectAttribute-1" src="###TargetVersusActualAB###" height="190px" width="190px" alt='Target Versus Actual AB'/>
 		                                </div>
 		                                <div id="Div5" class="Basic-Text-Frame">
-			                                <br /><p class="Header_1">a* b* Aims: Actual vs Target</p>
+			                                <p class="Header_1">a* b* Aims: Actual vs Target</p>
 		                                </div>
 		                               <div id="Div11" class="Basic-Text-Frame">
 			                               <img class="_idGenObjectAttribute-1" src="###ABComparison###" height="190px" width="190px" alt='Target Versus Actual AB'/>
@@ -614,13 +665,13 @@
 			                               <p class="Header_1">L* Aims: Actual vs Target</p>
 		                                </div>
                                         <div id="Div13" class="Basic-Text-Frame">
-			                               <img class="_idGenObjectAttribute-1" src="###LComparison###" height="50px" width="190px" alt='Target Versus Actual AB'/>
+			                               <img class="_idGenObjectAttribute-1" src="###LComparison###" height="44px" width="190px" alt='Target Versus Actual AB'/>
 		                                </div>
                                     </td>
                                     
                                     <td valign="top" >
                                         <div id="Div7" class="Basic-Text-Frame">
-			                               <br /><p class="Header_1" style="padding-left:15px;">Greay Balance L*a*b*</p>
+			                               <br /><p class="Header_1" style="padding-left:15px;">Gray Balance L*a*b*</p>
 		                                </div>
 		                                <div id="Div8" class="Basic-Text-Frame">
 			                                <table width="100%" cellpadding="0" cellspacing="0">
@@ -636,8 +687,8 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width:60%; " valign="top">
-                                                        <img src="###ResultSummary_GrayaImage###" width="300px" height="70px" alt='Summary Delta'
+                                                    <td style="width:60%; padding-left:8px;" valign="top">
+                                                        <img src="###ResultSummary_GrayaImage###" width="292px" height="70px" alt='Summary Delta'
                                                         id='img7' />
                                                     </td>
                                                     <td style="width:40%; padding-right:5px;" valign="top">
@@ -645,8 +696,8 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="width:60%;" valign="top">
-                                                         <img src="###ResultSummary_GraybImage###" width="300px" height="70px" alt='Summary Delta'
+                                                    <td style="width:60%; padding-left:8px;" valign="top">
+                                                         <img src="###ResultSummary_GraybImage###" width="292px" height="70px" alt='Summary Delta'
                                                         id='img8' />
                                                     </td>
                                                     <td style="width:40%; padding-right:5px;" valign="top">
@@ -656,7 +707,7 @@
                                             </table>
 		                                </div>
 		                                <div id="Div9" class="Basic-Text-Frame">
-			                                <br /><br /><p class="Header_1" style="padding-left:15px;">TVI</p>
+			                                <br /><p class="Header_1" style="padding-left:15px;">TVI</p>
 		                                </div>
 		                                <div id="Div10" class="Basic-Text-Frame">
 			                                <table width="100%" cellpadding="0" cellspacing="0">

@@ -567,7 +567,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterAnalyze.GetG7Chart();
                 if (!IsErrorOccured)
                 {
-                    FillG7Chart(GrayFChart, GrayFSummary, BlackLChart, BlackLSummary, GrayLChart, GrayLSummary);
+                    FillG7Chart(GrayFChart, GrayFSummary, BlackLChart, BlackLSummary, GrayLChart, GrayLSummary, BlackNPDChart, GrayNPDChart);
                 }
             }
             if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //-----For Sync1D projects or validation projects
@@ -1087,6 +1087,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindLABComparision("Cyan", GetResourceString(_recCyanPathMetrics), DTColors, Papera, Paperb, 5, false, false);
             BindLABComparision("Magenta", GetResourceString(_recMagentaPathMetrics), DTColors, Papera, Paperb, 5, false, false);
             BindLABComparision("Yellow", GetResourceString(_recYellowPathMetrics), DTColors, Papera, Paperb, 5, false, false);
+            BindLABComparision("Red", GetResourceString(_recRedPathMetrics), DTColors, Papera, Paperb, 5, false, false);
+            BindLABComparision("Green", GetResourceString(_recGreenPathMetrics), DTColors, Papera, Paperb, 5, false, false);
+            BindLABComparision("Blue", GetResourceString(_recBluePathMetrics), DTColors, Papera, Paperb, 5, false, false);
 
             BindLABComparision("Cyan", GetResourceString(_recCyanPathMetrics), DTTarget, 0, 0, 9, true, false);
             BindLABComparision("Magenta", GetResourceString(_recMagentaPathMetrics), DTTarget, 0, 0, 9, true, false);
@@ -1106,6 +1109,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             #endregion
 
             BindLABComparison_1(DTTarget);
+
+            FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(chartABComparison.ImageLocation) + "." + chartABComparison.ImageType;
+            chartABComparison.SaveImage(Server.MapPath(FileName));
 
             FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(chartABComparison_1.ImageLocation) + "." + chartABComparison_1.ImageType;
             chartABComparison_1.SaveImage(Server.MapPath(FileName));
@@ -1330,6 +1336,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     chartABComparison.Series[ColorName].ChartType = SeriesChartType.Line;
                     chartABComparison.Series[ColorName].Points.AddXY(Convert.ToDouble(ListFilter[i].CielabA), Convert.ToDouble(ListFilter[i].CielabB));
+                    chartABComparison.Series[ColorName].MarkerBorderColor = Color.Black;
                 }
 
 
@@ -1339,6 +1346,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         chartABComparison.Series[ColorName].Points[pointCount].BorderWidth = 1;
                         chartABComparison.Series[ColorName].Points[pointCount].MarkerSize = MarkerSize;
+                        chartABComparison.Series[ColorName].MarkerBorderColor = Color.Black;
                         chartABComparison.Series[ColorName].Points[pointCount].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
                         chartABComparison.Series[ColorName].Points[pointCount].Color = (Color)new ColorConverter().ConvertFromString(ColorName.Equals("paper", StringComparison.CurrentCultureIgnoreCase) ? "White" : ColorName);
                     }
@@ -1346,7 +1354,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 else
                 {
                     chartABComparison.Series[ColorName].Points[pointCount].BorderWidth = 1;
-                    chartABComparison.Series[ColorName].Points[pointCount].MarkerSize = 0;
+                    chartABComparison.Series[ColorName].Points[pointCount].MarkerSize = MarkerSize;
+                    chartABComparison.Series[ColorName].MarkerBorderColor = Color.Black;
                     chartABComparison.Series[ColorName].Points[pointCount].Color = (Color)new ColorConverter().ConvertFromString(ColorName.Equals("paper", StringComparison.CurrentCultureIgnoreCase) ? "White" : ColorName);
                 }
                 #endregion
@@ -1507,14 +1516,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Fill G7 Tab
-        private void FillG7Chart(List<AnalyzeChart_G7> GrayFChart, List<AnalyzeChart_G7> GrayFSummary, List<AnalyzeChart_G7> BlackLChart, List<AnalyzeChart_G7> BlackLSummary, List<AnalyzeChart_G7> GrayLChart, List<AnalyzeChart_G7> GrayLSummary)
+        private void FillG7Chart(List<AnalyzeChart_G7> GrayFChart, List<AnalyzeChart_G7> GrayFSummary, List<AnalyzeChart_G7> BlackLChart, List<AnalyzeChart_G7> BlackLSummary, List<AnalyzeChart_G7> GrayLChart, List<AnalyzeChart_G7> GrayLSummary, List<AnalyzeChart_G7> BlackNPDChart, List<AnalyzeChart_G7> GrayNPDChart)
         {
             if (GrayFChart != null && BlackLChart != null && GrayLChart != null)
                 FillGrayFLChart(GrayFChart, BlackLChart, GrayLChart);
             if (GrayFSummary != null)
                 FillGrayQuartileSummary(GrayFSummary, BlackLSummary, GrayLSummary);
-            // if (BlackNPDChart != null && GrayNPDChart != null)
-            // FillNPDChart(BlackNPDChart, GrayNPDChart);
+            if (BlackNPDChart != null && GrayNPDChart != null)
+                FillNPDChart(BlackNPDChart, GrayNPDChart);
         }
 
         #region Fill Gray Ch / F  and ΔL Charts
@@ -1657,59 +1666,65 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Fill NPD Chart
         private void FillNPDChart(List<AnalyzeChart_G7> DTBlack, List<AnalyzeChart_G7> DTGray)
         {
-            //CHRT_BlackNPD.Series["Series0"].Points.Clear();
-            //CHRT_BlackNPD.Series["Series0Point"].Points.Clear();
+            CHRT_BlackNPD.Series["Series0"].Points.Clear();
+            CHRT_BlackNPD.Series["Series0Point"].Points.Clear();
 
-            //// There is an issue with tooltip on spline chart, by default it ignores 
-            ////http://support2.dundas.com/OnlineDocumentation/WebChart2003/CustomAttributes_TooltipOffset.html
-            //CHRT_BlackNPD.Series["Series0"]["TooltipOffset"] = "True";
+            // There is an issue with tooltip on spline chart, by default it ignores 
+            //http://support2.dundas.com/OnlineDocumentation/WebChart2003/CustomAttributes_TooltipOffset.html
+            CHRT_BlackNPD.Series["Series0"]["TooltipOffset"] = "True";
 
-            //if (DTBlack != null && DTBlack.Count > 0)
-            //{
-            //    for (int i = 0; i < DTBlack.Count; i++)
-            //    {
-            //        AddNPDPointChart(i, CHRT_BlackNPD.Series["Series0"], Convert.ToInt64(DTBlack[i].Cmyk_Value).ToString(), DTBlack[i].ΔValue.ToString(), Color.Black.Name.ToString(), "Black Target NPD", "G7NPDC");
-            //    }
-            //}
+            if (DTBlack != null && DTBlack.Count > 0)
+            {
+                for (int i = 0; i < DTBlack.Count; i++)
+                {
+                    AddNPDPointChart(i, CHRT_BlackNPD.Series["Series0"], Convert.ToInt64(DTBlack[i].Cmyk_Value).ToString(), DTBlack[i].ΔValue.ToString(), Color.Black.Name.ToString(), "Black Target NPD", "G7NPDC");
+                }
+            }
 
-            //CHRT_GrayNPD.Series["Series0"].Points.Clear();
-            //// CHRT_GrayNPD.Series["Series0Point"].Points.Clear();           
+            FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_BlackNPD.ImageLocation) + "." + CHRT_BlackNPD.ImageType;
+            CHRT_BlackNPD.SaveImage(Server.MapPath(FileName));
 
-            //CHRT_GrayNPD.Series["Series0"]["TooltipOffset"] = "True";
+            CHRT_GrayNPD.Series["Series0"].Points.Clear();
+            // CHRT_GrayNPD.Series["Series0Point"].Points.Clear();           
 
-            //if (DTGray != null && DTGray.Count > 0)
-            //{
-            //    for (int i = 0; i < DTGray.Count; i++)
-            //    {
-            //        AddNPDPointChart(i, CHRT_GrayNPD.Series["Series0"], Convert.ToInt64(DTGray[i].Cmyk_Value).ToString(), DTGray[i].ΔValue.ToString(), Color.Black.Name.ToString(), "Gray Target NPD", "G7NPDC");
-            //    }
-            //}
+            CHRT_GrayNPD.Series["Series0"]["TooltipOffset"] = "True";
+
+            if (DTGray != null && DTGray.Count > 0)
+            {
+                for (int i = 0; i < DTGray.Count; i++)
+                {
+                    AddNPDPointChart(i, CHRT_GrayNPD.Series["Series0"], Convert.ToInt64(DTGray[i].Cmyk_Value).ToString(), DTGray[i].ΔValue.ToString(), Color.Black.Name.ToString(), "Gray Target NPD", "G7NPDC");
+                }
+            }
+
+            FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_GrayNPD.ImageLocation) + "." + CHRT_GrayNPD.ImageType;
+            CHRT_GrayNPD.SaveImage(Server.MapPath(FileName));
         }
 
-        //private void AddNPDPointChart(int _Index, Series _objSeries, string _XValue, string _YValue, string ColorName, string TitleName, string ValueName)
-        //{
-        //    _objSeries.ChartType = SeriesChartType.Spline;
+        private void AddNPDPointChart(int _Index, Series _objSeries, string _XValue, string _YValue, string ColorName, string TitleName, string ValueName)
+        {
+            _objSeries.ChartType = SeriesChartType.Spline;
 
-        //    _objSeries.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
-        //    _objSeries.Points[_Index].MarkerColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
-        //    _objSeries.Points[_Index].MarkerStyle = MarkerStyle.None;
-        //    _objSeries.Points[_Index].MarkerSize = 1;  //changed 0 by chirag on 10/23/10 as we will drawing more points and make smooth curve 
-        //    _objSeries.Points[_Index].BorderWidth = 1;
-        //    _objSeries.Points[_Index].MarkerBorderColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
+            _objSeries.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
+            _objSeries.Points[_Index].MarkerColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
+            _objSeries.Points[_Index].MarkerStyle = MarkerStyle.None;
+            _objSeries.Points[_Index].MarkerSize = 1;  //changed 0 by chirag on 10/23/10 as we will drawing more points and make smooth curve 
+            _objSeries.Points[_Index].BorderWidth = 1;
+            _objSeries.Points[_Index].MarkerBorderColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
 
-        //    #region Add Tooltip HTML
-        //    StringBuilder toolTip = new StringBuilder();
-        //    toolTip.Append("<table>");
-        //    toolTip.Append("<tr><td><b> " + TitleName + " " + _XValue + "% Patch Metrics</b></td></tr>");
-        //    toolTip.Append("<tr><td><table>");
-        //    toolTip.Append("<tr><td>" + ValueName + " : </td><td>");
-        //    toolTip.Append(Utilities.DecimalRound(Convert.ToDouble(_YValue)).ToString());
-        //    toolTip.Append("</td></tr>");
-        //    toolTip.Append("</table></td></tr>");
-        //    toolTip.Append("</table>");
-        //    #endregion
-        //    _objSeries.Points[_Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
-        //}
+            #region Add Tooltip HTML
+            StringBuilder toolTip = new StringBuilder();
+            toolTip.Append("<table>");
+            toolTip.Append("<tr><td><b> " + TitleName + " " + _XValue + "% Patch Metrics</b></td></tr>");
+            toolTip.Append("<tr><td><table>");
+            toolTip.Append("<tr><td>" + ValueName + " : </td><td>");
+            toolTip.Append(Utilities.DecimalRound(Convert.ToDouble(_YValue)).ToString());
+            toolTip.Append("</td></tr>");
+            toolTip.Append("</table></td></tr>");
+            toolTip.Append("</table>");
+            #endregion
+            _objSeries.Points[_Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+        }
 
         #endregion
 

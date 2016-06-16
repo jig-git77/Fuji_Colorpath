@@ -155,6 +155,7 @@
     <Content Include="Images\FujiFilm.png" />
     <Content Include="Images\FujiFilm2.png" />
     <Content Include="Images\G7AlignmentReportTitle.png" />
+    <Content Include="Images\G7_logo_web.gif" />
     <Content Include="Images\green.png" />
     <Content Include="Images\InkOptimizeSource.png" />
     <Content Include="Images\Logo-report.png" />
@@ -2921,7 +2922,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

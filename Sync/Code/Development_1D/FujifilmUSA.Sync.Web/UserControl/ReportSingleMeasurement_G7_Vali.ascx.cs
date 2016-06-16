@@ -61,7 +61,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #region " === Page : 1 Result Summary === "
 
                 Bind_TargetVersusActual_CHART(DSReport.Tables[1]); // Bind Chart Of Target And Actual Value
-
                 BindSummaryDeltaValueBarChart(DSReport.Tables[2]); // Bind Chart of Summary Delta Value Bar Chart
 
                 #endregion
@@ -84,7 +83,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (ValidationType == 1)
             {
-                objReportPDF.ReportName = "G7 Validation Report";               
+                objReportPDF.ReportName = "Validation Report";               
             }
             if (IsSync1DType)
             {

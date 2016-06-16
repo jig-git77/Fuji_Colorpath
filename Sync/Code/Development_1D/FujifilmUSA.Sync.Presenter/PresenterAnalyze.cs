@@ -110,6 +110,8 @@ namespace FujifilmUSA.Sync.Presenter
             _viewAnalyze.BlackLSummary = G7ChardData[3];
             _viewAnalyze.GrayLChart = G7ChardData[4];
             _viewAnalyze.GrayLSummary = G7ChardData[5];
+            _viewAnalyze.BlackNPDChart = G7ChardData[6];
+            _viewAnalyze.GrayNPDChart = G7ChardData[7];
         }
 
         public void Get1DMeasurementsOnRunId()

@@ -228,7 +228,7 @@ namespace FujifilmUSA.Sync.Common
                     if (ReportType == 16) //----For G7 Opti / Validation Report + 4D G7 validation report
                     {
                         str = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"> " +
-                       "<tr style=\"height:52px\"><td align=\"left\" valign=\"middle\" bgcolor=\"#22af7c\" style=\"color:#000000; font-size:10px; font-family: Arial; padding: 0 0 0 20px; \" width=\"218px\" >" + DateTime.Now.ToLongDateString() + "</td> " +
+                       "<tr style=\"height:52px\"><td align=\"left\" valign=\"middle\" bgcolor=\"#22af7c\" style=\"color:#000000; font-size:10px; font-family: Arial; padding: 0 0 0 50px; \" width=\"218px\" >" + DateTime.Now.ToLongDateString() + "</td> " +
                        "<td width=\"443px\" align=\"right\" valign=\"middle\" bgcolor=\"#b5ddc6\" style=\"color:#000000; font-size:10px; font-family: Arial; \">© Fujifilm North America Corporation, Graphic Systems Division " + " </td></tr></table>";
 
                     }
@@ -318,6 +318,7 @@ namespace FujifilmUSA.Sync.Common
 
                     if (ReportType == 16) //--------For G7 Report
                     {
+                        SBStr.Replace("###MeasurementType###", Convert.ToString(DT.Rows[0]["MeasurementName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MeasurementName"]).Trim().Contains("Averaging") == true ?  "This report details an average of measurements." : "This report details a single measurement.");
                         SBStr.Replace("###Technician###", Convert.ToString(DT.Rows[0]["TechnicianName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["TechnicianName"]).Trim());
                         SBStr.Replace("###MeasurementDevice###", Convert.ToString(DT.Rows[0]["InstrumentType"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["InstrumentType"]).Trim());
                         SBStr.Replace("###SerialNumber###", Convert.ToString(DT.Rows[0]["SerialNumber"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["SerialNumber"]).Trim());
@@ -602,8 +603,8 @@ namespace FujifilmUSA.Sync.Common
                         SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ActualL"])) + "&nbsp;</p></td>");
                         SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["Actuala"])) + "&nbsp;</p></td>");
                         SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["Actualb"])) + "&nbsp;</p></td>");
-                        SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Gray'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔE"])) + "&nbsp;</p></td>");
-                        SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔELimit"])) + "&nbsp;</p></td>");
+                        SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Gray'> <p class='Body-Text-Center'>" + (DT.Rows[i]["ΔELimit"].ToString() == "0.00" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔELimit"]))) + "&nbsp;</p></td>");
+                        SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔE"])) + "&nbsp;</p></td>");
                         SBstrDeltaEValue.Append("</tr>");
                     }
                 }
@@ -811,6 +812,16 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("###ResultSummary_GraybImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_BChart.Jpeg"));
                 #endregion
 
+                // === Table 10 = for Chart of Black NPD === //           
+                #region ==== Black NPD Chart ====
+                SBStr.Replace("###ResultSummary_BlackNPDImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_BlackNPD.Jpeg"));
+                #endregion
+
+                // === Table 11 = for Chart of Gray NPD === //           
+                #region ==== Gray NPD Chart ====
+                SBStr.Replace("###ResultSummary_GrayNPDImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_GrayNPD.Jpeg"));
+                #endregion
+
                 //-------Extra items for new G7 formatted reports--------------//
                 SBStr.Replace("###DensityChart###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_Density.Jpeg"));
                 SBStr.Replace("###ABComparison###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page4_Gamut_ABComparison.Jpeg"));
@@ -822,42 +833,41 @@ namespace FujifilmUSA.Sync.Common
 
                 StringBuilder SBstrDeltaValue = new StringBuilder();
                 StringBuilder SBstrDeltaValue1 = new StringBuilder();
+                StringBuilder SBstrDeltaValue2 = new StringBuilder();
 
                 if (DT != null && DT.Rows.Count > 0)
                 {
                     int RowHeight = 12;
-                    //string HeaderName = "";
-
-                    //for (int i = 0; i < DT.Rows.Count; i++)
-                    //{
-                    //    if ((i % 2) == 0) //----If even row then make background color green----//
-                    //    {
-                    //        SBstrDeltaValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-3' style='height: " + RowHeight + "px'>");
-                    //        HeaderName = "Target";
-                    //    }
-                    //    else             //------Else keep background color white-----//
-                    //    {
-                    //        SBstrDeltaValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-4' style='height: " + RowHeight + "px'>");
-                    //        HeaderName = "Actual";
-                    //    }
 
                     SBstrDeltaValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-3' style='height: " + RowHeight + "px'>");
                     SBstrDeltaValue1.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-4' style='height: " + RowHeight + "px'>");
+                    SBstrDeltaValue2.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-3' style='height: " + RowHeight + "px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='left' class='Metadata-Table Green'> <p class='Body-Text-Bold'>Target</p></td>");
                     SBstrDeltaValue1.Append("<td valign='middle' align='left' class='Metadata-Table Green'> <p class='Body-Text-Bold'>Actual</p></td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["DensityLimit"])) + "&nbsp;</p></td>");
-                    SBstrDeltaValue1.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Density"])) + "&nbsp;</p></td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[1]["DensityLimit"])) + "&nbsp;</p></td>");
-                    SBstrDeltaValue1.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[1]["Density"])) + "&nbsp;</p></td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[2]["DensityLimit"])) + "&nbsp;</p></td>");
-                    SBstrDeltaValue1.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[2]["Density"])) + "&nbsp;</p></td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[3]["DensityLimit"])) + "&nbsp;</p></td>");
-                    SBstrDeltaValue1.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[3]["Density"])) + "&nbsp;</p></td>");
+                    SBstrDeltaValue2.Append("<td valign='middle' align='left' class='Metadata-Table Green'> <p class='Body-Text-Bold'>Previous</p></td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[0]["DensityLimit"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["DensityLimit"]))) + "&nbsp;</p></td>");
+                    SBstrDeltaValue1.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[0]["Density"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Density"]))) + "&nbsp;</p></td>");
+                    SBstrDeltaValue2.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[0]["PreAvgDensity"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["PreAvgDensity"]))) + "&nbsp;</p></td>");
+
+                    SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[1]["DensityLimit"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[1]["DensityLimit"]))) + "&nbsp;</p></td>");
+                    SBstrDeltaValue1.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[1]["Density"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[1]["Density"]))) + "&nbsp;</p></td>");
+                    SBstrDeltaValue2.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[1]["PreAvgDensity"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[1]["PreAvgDensity"]))) + "&nbsp;</p></td>");
+
+                    SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[2]["DensityLimit"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[2]["DensityLimit"]))) + "&nbsp;</p></td>");
+                    SBstrDeltaValue1.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[2]["Density"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[2]["Density"]))) + "&nbsp;</p></td>");
+                    SBstrDeltaValue2.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[2]["PreAvgDensity"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[2]["PreAvgDensity"]))) + "&nbsp;</p></td>");
+
+                    SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[3]["DensityLimit"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[3]["DensityLimit"]))) + "&nbsp;</p></td>");
+                    SBstrDeltaValue1.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[3]["Density"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[3]["Density"]))) + "&nbsp;</p></td>");
+                    SBstrDeltaValue2.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[3]["PreAvgDensity"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[3]["PreAvgDensity"]))) + "&nbsp;</p></td>");
+
                     SBstrDeltaValue.Append("</tr>");
                     SBstrDeltaValue1.Append("</tr>");
+                    SBstrDeltaValue2.Append("</tr>");
 
                     SBstrDeltaValue.Append(SBstrDeltaValue1);
-                    //}
+                    SBstrDeltaValue.Append(SBstrDeltaValue2);
+                   
                     SBStr.Replace("###DensitySummaryDetails###", SBstrDeltaValue.ToString());
                 }
                 //------End Region: for Density Data--------//

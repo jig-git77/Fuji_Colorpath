@@ -992,7 +992,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false, bool IsAverageOfMeasurements = false)
         {
-            var G7ChardDAta = new List<AnalyzeChart_G7>[6];
+            var G7ChardDAta = new List<AnalyzeChart_G7>[8];
 
             string storedProc = "[CPSync].[GetChartData_G7]";
             if (IsAverageOfMeasurements)
@@ -1180,6 +1180,70 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_GrayLSummary"));
             #endregion
 
+            #region Get Data logic for the Black NPD Chart
+            Common.ImplementBusinessLogic(
+                    () =>
+                    {
+                        var dsMeasurements =
+                            DataAccessFactory.
+                                Instance.
+                                GetDsResult(
+                                    storedProc,
+                                    new object[] { MeasurementId });
+
+                        #region add Paper patch (CMYK = 0) at 0 index
+                        if (dsMeasurements.Tables[6] != null && dsMeasurements.Tables[6].Rows.Count > 0)
+                        {
+                            DataRow dr = dsMeasurements.Tables[6].NewRow();
+                            dr["CMYK_K"] = 0;
+                            dr["G7NPDC"] = 0;
+                            dsMeasurements.Tables[6].Rows.InsertAt(dr, 0);
+                        }
+                        #endregion
+
+                        G7ChardDAta[6] = dsMeasurements.Tables[6].
+                             AsEnumerable().
+                            Select(x => new AnalyzeChart_G7()
+                            {
+                                Cmyk_Value = DataReader.ReadDecimal(x, "CMYK_K"),
+                                ΔValue = DataReader.ReadDecimal(x, "G7NPDC")
+                            }).ToList();
+                    },
+                    new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_BlackNPD"));
+            #endregion
+
+
+            #region Get Data logic for the Gray NPD Chart
+            Common.ImplementBusinessLogic(
+                    () =>
+                    {
+                        var dsMeasurements =
+                            DataAccessFactory.
+                                Instance.
+                                GetDsResult(
+                                    storedProc,
+                                    new object[] { MeasurementId });
+
+                        #region add Paper patch (CMYK = 0) at 0 index
+                        if (dsMeasurements.Tables[7] != null && dsMeasurements.Tables[7].Rows.Count > 0)
+                        {
+                            DataRow dr = dsMeasurements.Tables[7].NewRow();
+                            dr["CMYK_C"] = 0;
+                            dr["G7NPDC"] = 0;
+                            dsMeasurements.Tables[7].Rows.InsertAt(dr, 0);
+                        }
+                        #endregion
+
+                        G7ChardDAta[7] = dsMeasurements.Tables[7].
+                             AsEnumerable().
+                            Select(x => new AnalyzeChart_G7()
+                            {
+                                Cmyk_Value = DataReader.ReadDecimal(x, "CMYK_C"),
+                                ΔValue = DataReader.ReadDecimal(x, "G7NPDC")
+                            }).ToList();
+                    },
+                    new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_CHRT_GrayNPD"));
+            #endregion
 
             return G7ChardDAta;
         }
