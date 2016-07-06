@@ -331,6 +331,16 @@
                                                                     meta:resourcekey="locScreeningRefResource1"></asp:Localize>&nbsp; </span>  
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td style="width: 130px">
+                                                   <span><asp:Localize runat="server" ID="locCoating" Text="Coating:" 
+                                                                    meta:resourcekey="locCoatingResource1"></asp:Localize>&nbsp; </span>&nbsp; 
+                                                </td>
+                                                <td style="width: 500px">
+                                                     <asp:TextBox ID="txtCoating" runat="server" Width="200px" Height="19px" 
+                                                        MaxLength="100" meta:resourcekey="txtCoatingResource1"></asp:TextBox>
+                                                </td>
+                                            </tr>
                                         </table>
                                     </asp:Panel>
                                 </div>

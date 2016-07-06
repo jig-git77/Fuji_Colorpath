@@ -157,7 +157,7 @@
     <value>PrintStandardType already exists with same name.</value>
   </data>
   <data name="Duplicate_InsertUser" xml:space="preserve">
-    <value>User already exists with same email / username.</value>
+    <value>Please use a different e-mail address or username.</value>
   </data>
   <data name="Duplicate_UpdateBranch" xml:space="preserve">
     <value>Branch already exists with same name.</value>
@@ -181,7 +181,7 @@
     <value>PrintStandardType already exists with same name.</value>
   </data>
   <data name="Duplicate_UpdateUser" xml:space="preserve">
-    <value>User already exists with same email / username.</value>
+    <value>Please use a different e-mail address or username.</value>
   </data>
   <data name="ELicenseType_DLP" xml:space="preserve">
     <value>DLP Optimization</value>
@@ -587,6 +587,15 @@
   </data>
   <data name="EInstrumentType_i1IOPro2" xml:space="preserve">
     <value>i1-IO-Pro2</value>
+  </data>
+  <data name="EInstrumentType_LFP" xml:space="preserve">
+    <value>LFP</value>
+  </data>
+  <data name="EInstrumentType_eXact" xml:space="preserve">
+    <value>eXact</value>
+  </data>
+  <data name="EInstrumentType_i1Sis2" xml:space="preserve">
+    <value>i1-Sis2</value>
   </data>
   <data name="EProfileRendering_eCLAbsLightenerCompensationRI" xml:space="preserve">
     <value>AbsLightenerCompensation</value>

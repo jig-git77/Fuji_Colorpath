@@ -192,6 +192,9 @@
   <data name="locScreeningResource1.Text" xml:space="preserve">
     <value>網情報：</value>
   </data>
+  <data name="locCoatingResource1.Text" xml:space="preserve">
+    <value>Coating:_ja</value>
+  </data>
   <data name="locProjectDescriptionResource1.Text" xml:space="preserve">
     <value>プロジェクトの条件説明</value>
   </data>

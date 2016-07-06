@@ -76,6 +76,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         Blanket = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Blanket"),
                                         BlanketAge = DataReader.ReadString(dsProject.Tables[1].Rows[0], "BlanketAge"),
                                         Screening = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Screening"),
+                                        Coating = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Coating")
                                     };
                         }
                         if (dsProject.Tables[2].Rows.Count > 0)
@@ -599,6 +600,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.PrintCondition.Blanket,
                                                      project.PrintCondition.BlanketAge,
                                                      project.PrintCondition.Screening,
+                                                     project.PrintCondition.Coating,
                                                      project.MeasurementSetting.ObserverType,
                                                      project.MeasurementSetting.Illuminant,
                                                      (project.MeasurementSetting.UVMode == -1 ? 2 : project.MeasurementSetting.UVMode),  //---For older project who doen't have UVMode, so by default it will pass -1 because of NULL, so in that case make it 2 "UVCut"
@@ -704,7 +706,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@Blanket", Size = 100, Type = DbType.String, Value = project.PrintCondition.Blanket},
                                                      new Parameters() {ParameterName = "@BlanketAge", Size = 100, Type = DbType.String, Value = project.PrintCondition.BlanketAge},
                                                      new Parameters() {ParameterName = "@Screening", Size = 100, Type = DbType.String, Value = project.PrintCondition.Screening},
-                                                  
+                                                     new Parameters() {ParameterName = "@Coating", Size = 100, Type = DbType.String, Value = project.PrintCondition.Coating},
+
                                                      new Parameters() {ParameterName = "@ObserverType", Type = DbType.Int16, Value = project.MeasurementSetting.ObserverType},
                                                      new Parameters() {ParameterName = "@Illuminant", Type = DbType.Int16, Value = project.MeasurementSetting.Illuminant},
                                                      new Parameters() {ParameterName = "@UVMode", Type = DbType.Int16, Value = project.MeasurementSetting.UVMode},

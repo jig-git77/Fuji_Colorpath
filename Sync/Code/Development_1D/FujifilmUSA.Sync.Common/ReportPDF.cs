@@ -295,6 +295,7 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("###RipSettings###", RipSettings.Trim() == "" ? "&nbsp;" : RipSettings.Trim());
                 SBStr.Replace("###Location###", Location.Trim() == "" ? "&nbsp;" : Location.Trim());
                 SBStr.Replace("###DeltaEFormula###", Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim());
+                SBStr.Replace("###OffsetNA###", Convert.ToString(DT.Rows[0]["LicenseTypeID"]).Trim() == "2" ? "(N/A)" : "&nbsp;"); //----Display "N/A" in offset printing data label for Sync 4D project types---//
 
                 //--------For ISO / Default Reports OR 4D Validation Scoring Report
                 if (ReportType == 16 || ReportType == 17 || ReportType == 18 || ReportType == 19)
@@ -302,18 +303,20 @@ namespace FujifilmUSA.Sync.Common
                     if (IsValidation) //Only show Measurement Status in Validation mode in G7/ ISO / Default/ 4D
                     {
                         SBStr.Replace("###JobStatus###", Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() == "" ? "<tr class='row-2'><td class='row-title'>Meas. Status:</td><td class='row-content'>&nbsp;</td></tr>" : (Convert.ToString(DT.Rows[0]["JobStatus"]).Contains("OK")) ? "<tr class='row-2'><td class='row-title'>Meas. Status:</td><td class='row-content'>" + Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() + "</td></tr>" : "<tr class='row-2'><td class='row-title'  style='color:Red;'>Meas. Status:</td><td class='row-content'  style='color:Red;'>" + Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() + "</td></tr>");
+                        SBStr.Replace("###RunNo###", "&nbsp;");   //-----In validation report there is no run numbers-------//
+                        SBStr.Replace("##ReportTitle##", "G7VAlignmentReportTitle");
                     }
                     else
                     {
                         SBStr.Replace("###JobStatus###", "&nbsp;");
-
+                        SBStr.Replace("###RunNo###", "(" + (Convert.ToString(DT.Rows[0]["RunName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["RunName"]).Trim()) + ")");
+                        SBStr.Replace("##ReportTitle##", "G7AlignmentReportTitle");
                     }
                     SBStr.Replace("###MetricPreset###", Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim());
                     SBStr.Replace("###CompanyName###", Convert.ToString(DT.Rows[0]["CompanyName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["CompanyName"]).Trim());
                     SBStr.Replace("###BranchName###", Convert.ToString(DT.Rows[0]["BranchName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["BranchName"]).Trim());
                     SBStr.Replace("###PressName###", Convert.ToString(DT.Rows[0]["DeviceName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeviceName"]).Trim());
                     SBStr.Replace("###ProjectName###", Convert.ToString(DT.Rows[0]["ProjectName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ProjectName"]).Trim());
-                    SBStr.Replace("##RunNo##", Convert.ToString(DT.Rows[0]["RunName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["RunName"]).Trim());
                     SBStr.Replace("###CurrentDate###", System.DateTime.Now.ToString("dddd, MMMM dd, yyyy"));
 
                     if (ReportType == 16) //--------For G7 Report
@@ -330,6 +333,7 @@ namespace FujifilmUSA.Sync.Common
                         SBStr.Replace("###Blanket###", Convert.ToString(DT.Rows[0]["Blanket"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["Blanket"]).Trim());
                         SBStr.Replace("###BlanketAge###", Convert.ToString(DT.Rows[0]["BlanketAge"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["BlanketAge"]).Trim());
                         SBStr.Replace("###Screening###", Convert.ToString(DT.Rows[0]["Screening"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["Screening"]).Trim());
+                        SBStr.Replace("###Coating###", Convert.ToString(DT.Rows[0]["Coating"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["Coating"]).Trim());
                         SBStr.Replace("###Notes###", Convert.ToString(DT.Rows[0]["Notes"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["Notes"]).Trim());
                     }
                 }
@@ -376,6 +380,7 @@ namespace FujifilmUSA.Sync.Common
                         SBStr.Replace("###Blanket###", "&nbsp;");
                         SBStr.Replace("###BlanketAge###", "&nbsp;");
                         SBStr.Replace("###Screening###", "&nbsp;");
+                        SBStr.Replace("###Coating###", "&nbsp;");
                         SBStr.Replace("###Notes###", "&nbsp;");
                     }
                 }
@@ -866,7 +871,10 @@ namespace FujifilmUSA.Sync.Common
                     SBstrDeltaValue2.Append("</tr>");
 
                     SBstrDeltaValue.Append(SBstrDeltaValue1);
-                    SBstrDeltaValue.Append(SBstrDeltaValue2);
+                    if (!IsValidation) //----Don't add Previous run row into Validation report since there is no previous run in validation
+                    {
+                        SBstrDeltaValue.Append(SBstrDeltaValue2);
+                    }
                    
                     SBStr.Replace("###DensitySummaryDetails###", SBstrDeltaValue.ToString());
                 }

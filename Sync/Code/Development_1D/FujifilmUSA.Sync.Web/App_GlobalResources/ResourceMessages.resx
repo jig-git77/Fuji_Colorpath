@@ -412,7 +412,7 @@
     <value>PrintStandardType already exists with same name.</value>
   </data>
   <data name="Duplicate_InsertUser" xml:space="preserve">
-    <value>User already exists with same email / username.</value>
+    <value>Please use a different e-mail address or username.</value>
   </data>
   <data name="Error_ReferenceChart_ColumnConvertFailedOnRow" xml:space="preserve">
     <value>Value conversion failed on row {0}.</value>
@@ -472,7 +472,7 @@
     <value>PrintStandardType already exists with same name.</value>
   </data>
   <data name="Duplicate_UpdateUser" xml:space="preserve">
-    <value>User already exists with same email / username.</value>
+    <value>Please use a different e-mail address or username.</value>
   </data>
   <data name="Email_Subject_SendPasswordForceResetEmail" xml:space="preserve">
     <value>ColorPath - Reset your password</value>

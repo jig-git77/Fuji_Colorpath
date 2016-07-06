@@ -14,6 +14,7 @@ namespace FujifilmUSA.Sync.Entity
         public string Blanket { get; set; }
         public string BlanketAge { get; set; }
         public string Screening { get; set; }
+        public string Coating { get; set; }
         //public Project Project { get; set; }
     }
 }

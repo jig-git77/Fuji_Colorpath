@@ -221,7 +221,8 @@
                                 <td style="width: 370px">
                                     <div style="float: left;">
                                         <asp:CheckBox ID="chkIsActive" runat="server" Checked="True" 
-                                            meta:resourcekey="chkIsActiveResource1" />
+                                            meta:resourcekey="chkIsActiveResource1" AutoPostBack="True" 
+                                            oncheckedchanged="chkIsActive_CheckedChanged" />
                                     </div>
                                     <div class="clear">
                                     </div>

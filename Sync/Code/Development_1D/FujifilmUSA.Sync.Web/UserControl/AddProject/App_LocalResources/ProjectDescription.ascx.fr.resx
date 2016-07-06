@@ -192,6 +192,9 @@
   <data name="locScreeningResource1.Text" xml:space="preserve">
     <value>Screening:_fr</value>
   </data>
+  <data name="locCoatingResource1.Text" xml:space="preserve">
+    <value>Coating:_fr</value>
+  </data>
   <data name="locProjectDescriptionResource1.Text" xml:space="preserve">
     <value>Project Description_fr</value>
   </data>

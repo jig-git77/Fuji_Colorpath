@@ -123,10 +123,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectBranch), false);
                 return;
             }
-            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked && !chkReProfileCustomSource.Checked && !chkFullGamutCustomSource.Checked)
+            if (Request.QueryString["LicenseId"] == null) //----Only force to check one licensetype when its a new license not in edit mode of existing license-----//
             {
-                fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectLicenseType), false);//Please select any one license type.
-                return;
+                if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked && !chkReProfileCustomSource.Checked && !chkFullGamutCustomSource.Checked)
+                {
+                    fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectLicenseType), false);//Please select any one license type.
+                    return;
+                }
             }
 
             License = new License()
@@ -216,6 +219,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtExpirationDate.Text = Convert.ToDateTime(License.ExpirationDate).ToString("d");
                 chkIsOneOff.Checked = License.IsOneOff;
                 chkIsActive.Checked = License.IsActive;
+                if (chkIsActive.Checked == false)
+                {
+                    chkSync1D.Checked = chkDlp.Checked = chkInk.Checked = chkInk_Source.Checked = chkSync4D_Certification.Checked = chkCustomSourceProfile.Checked = chkReProfileCustomSource.Checked = chkFullGamutCustomSource.Checked = false;
+                    chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = false;
+                }
             }
         }
         #endregion
@@ -229,6 +237,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             SaveDevice();
+        }
+        protected void chkIsActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkIsActive.Checked == true)
+            {
+                chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = true;
+            }
+            else
+            {
+                chkSync1D.Checked = chkDlp.Checked = chkInk.Checked = chkInk_Source.Checked = chkSync4D_Certification.Checked = chkCustomSourceProfile.Checked = chkReProfileCustomSource.Checked = chkFullGamutCustomSource.Checked = false;
+                chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = false;
+            }
         }
         #endregion
 

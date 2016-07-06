@@ -117,6 +117,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtBlanket.Text = SessionManager.Instance.CurrentProject.PrintCondition.Blanket;
                 txtBlanketAge.Text = SessionManager.Instance.CurrentProject.PrintCondition.BlanketAge;
                 txtScreening.Text = SessionManager.Instance.CurrentProject.PrintCondition.Screening;
+                txtCoating.Text = SessionManager.Instance.CurrentProject.PrintCondition.Coating;
 
                 if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.Edit) //If project is in Edit mode display Description tab for editing everytime and pop up Next button to move to next page
                 {
@@ -157,7 +158,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 FountainSolution = txtFountainSol.Text.Trim(),
                 Blanket = txtBlanket.Text.Trim(),
                 BlanketAge = txtBlanketAge.Text.Trim(),
-                Screening = txtScreening.Text.Trim()
+                Screening = txtScreening.Text.Trim(),
+                Coating = txtCoating.Text.Trim()
             };
 
             SessionManager.Instance.CurrentProject.LicenseType = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
@@ -207,7 +209,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 FountainSolution = txtFountainSol.Text.Trim(),
                 Blanket = txtBlanket.Text.Trim(),
                 BlanketAge = txtBlanketAge.Text.Trim(),
-                Screening = txtScreening.Text.Trim()
+                Screening = txtScreening.Text.Trim(),
+                Coating = txtCoating.Text.Trim()
             };
 
             SessionManager.Instance.CurrentProject.LicenseType = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
