@@ -280,7 +280,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             operationImageURL = @"../Images/InkOptimizeSource.png";
                             break;
                         case ELicenseType.Sync4DCertification:
-                            operationImageURL = @"../Images/DLP.png";
+                            operationImageURL = @"../Images/4DCertification.png";
                             break;
                         case ELicenseType.CustomSourceProfile:
                             operationImageURL = @"../Images/DLPSource.png";
@@ -318,7 +318,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             operationImageURL = @"../Images/InkOptimize_Certified.png";
                             break;
                         case ELicenseType.Sync4DCertification:
-                            operationImageURL = @"../Images/DLP_Certified.png";
+                            operationImageURL = @"../Images/4DCertification_Certified.png";
                             break;
                         case ELicenseType.Validation:
 

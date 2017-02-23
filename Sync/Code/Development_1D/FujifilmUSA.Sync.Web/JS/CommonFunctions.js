@@ -80,6 +80,16 @@ function CheckNumeric(e)
     }
 }
 
+/*--------------- Function to ensure the only numeric and Alphabets value ----------------------*/
+function CheckNumericAlpha(e) {
+    key = (window.event) ? e.keyCode : e.which;
+    if ((key >= 48 && key <= 57) || (key >= 65 && key <= 90) || (key >= 97 && key <= 122)) {
+    }
+    else {
+        RemoveCharKeyValue(e);
+    }
+}
+
 
 function CallPrint(strid)
 {

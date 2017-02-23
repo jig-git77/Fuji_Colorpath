@@ -363,4 +363,16 @@
   <data name="rgSourceProfileResource1.StatusBarSettings.ReadyText" xml:space="preserve">
     <value>Fertig</value>
   </data>
+  <data name="GridTemplateColumnResource6.EditFormHeaderTextFormat" xml:space="preserve">
+    <value>{0}:</value>
+  </data>
+  <data name="GridTemplateColumnResource6.HeaderText" xml:space="preserve">
+    <value>Region Name</value>
+  </data>
+  <data name="GridTemplateColumnResource7.EditFormHeaderTextFormat" xml:space="preserve">
+    <value>{0}:</value>
+  </data>
+  <data name="GridTemplateColumnResource7.HeaderText" xml:space="preserve">
+    <value>Company Name</value>
+  </data>
 </root>

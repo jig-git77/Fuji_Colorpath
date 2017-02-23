@@ -70,30 +70,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //dr3["DownloadPath"] = "Download/4";
             //dt.Rows.Add(dr3);
 
-            //DataRow dr4 = dt.NewRow();
-            //dr4["DownloadId"] = "5";
-            //dr4["DownloadName"] = "TempRH Installer - PC";
-            //dt.Rows.Add(dr4);
-
-            //DataRow dr5 = dt.NewRow();
-            //dr5["DownloadId"] = "6";
-            //dr5["DownloadName"] = "ITX-PDCSII Colorpath Verified Installation";
-            //dt.Rows.Add(dr5);
-
-            //DataRow dr6 = dt.NewRow();
-            //dr6["DownloadId"] = "7";
-            //dr6["DownloadName"] = "ColorpathXF Installer";
-            //dt.Rows.Add(dr6);
-
-            //DataRow dr7 = dt.NewRow();
-            //dr7["DownloadId"] = "8";
-            //dr7["DownloadName"] = "Taskero ColorTuner";
-            //dt.Rows.Add(dr7);
-
-            //DataRow dr8 = dt.NewRow();
-            //dr8["DownloadId"] = "9";
-            //dr8["DownloadName"] = "Taskero ColorGATE Client";
-            //dt.Rows.Add(dr8);
 
             return dt;
         }

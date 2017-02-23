@@ -1672,12 +1672,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             // There is an issue with tooltip on spline chart, by default it ignores 
             //http://support2.dundas.com/OnlineDocumentation/WebChart2003/CustomAttributes_TooltipOffset.html
             CHRT_BlackNPD.Series["Series0"]["TooltipOffset"] = "True";
+            CHRT_BlackNPD.Series["Series0Point"]["TooltipOffset"] = "True";
 
             if (DTBlack != null && DTBlack.Count > 0)
             {
                 for (int i = 0; i < DTBlack.Count; i++)
                 {
-                    AddNPDPointChart(i, CHRT_BlackNPD.Series["Series0"], Convert.ToInt64(DTBlack[i].Cmyk_Value).ToString(), DTBlack[i].ΔValue.ToString(), Color.Black.Name.ToString(), "Black Target NPD", "G7NPDC");
+                    AddNPDPointChart(i, CHRT_BlackNPD.Series["Series0"], Convert.ToInt64(DTBlack[i].Cmyk_Value).ToString(), DTBlack[i].ΔLimit.ToString(), Color.Black.Name.ToString(), "Black Target NPD", "G7NPDC");
+                    AddNPDPointChart(i, CHRT_BlackNPD.Series["Series0Point"], Convert.ToInt64(DTBlack[i].Cmyk_Value).ToString(), DTBlack[i].ΔValue.ToString(), Color.Green.Name.ToString(), "Black Actual NPD", "G7NPDC Actual");
                 }
             }
 
@@ -1685,15 +1687,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             CHRT_BlackNPD.SaveImage(Server.MapPath(FileName));
 
             CHRT_GrayNPD.Series["Series0"].Points.Clear();
-            // CHRT_GrayNPD.Series["Series0Point"].Points.Clear();           
+            CHRT_GrayNPD.Series["Series0Point"].Points.Clear();           
 
             CHRT_GrayNPD.Series["Series0"]["TooltipOffset"] = "True";
+            CHRT_GrayNPD.Series["Series0Point"]["TooltipOffset"] = "True";
 
             if (DTGray != null && DTGray.Count > 0)
             {
                 for (int i = 0; i < DTGray.Count; i++)
                 {
-                    AddNPDPointChart(i, CHRT_GrayNPD.Series["Series0"], Convert.ToInt64(DTGray[i].Cmyk_Value).ToString(), DTGray[i].ΔValue.ToString(), Color.Black.Name.ToString(), "Gray Target NPD", "G7NPDC");
+                    AddNPDPointChart(i, CHRT_GrayNPD.Series["Series0"], Convert.ToInt64(DTGray[i].Cmyk_Value).ToString(), DTGray[i].ΔLimit.ToString(), Color.Black.Name.ToString(), "Gray Target NPD", "G7NPDC");
+                    AddNPDPointChart(i, CHRT_GrayNPD.Series["Series0Point"], Convert.ToInt64(DTGray[i].Cmyk_Value).ToString(), DTGray[i].ΔValue.ToString(), Color.Green.Name.ToString(), "Gray Actual NPD", "G7NPDC Actual");
                 }
             }
 
@@ -2497,6 +2501,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         .Where(r => r.Field<byte>("PatchTypeID") == 121 || r.Field<byte>("PatchTypeID") == 132 || r.Field<byte>("PatchTypeID") == 143 || r.Field<byte>("PatchTypeID") == 154)
                         .CopyToDataTable();
             }
+            else if (MetricSumID == "48")    //----For 'Fogra Gray ΔCh Avg'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 9 || r.Field<byte>("PatchTypeID") == 52 || r.Field<byte>("PatchTypeID") == 53 || r.Field<byte>("PatchTypeID") == 54 || r.Field<byte>("PatchTypeID") == 55 || r.Field<byte>("PatchTypeID") == 56 || r.Field<byte>("PatchTypeID") == 57 || r.Field<byte>("PatchTypeID") == 58 || r.Field<byte>("PatchTypeID") == 59 || r.Field<byte>("PatchTypeID") == 60)
+                        .CopyToDataTable();
+            }
             else
             {
                 DT = dtPatchDetails;
@@ -2993,7 +3003,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔCh").Visible = false;  //----ΔCh
                             rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔL").Visible = false;  //----ΔL
                         }
-                        else if (ViewState["MetricSumID"].ToString() == "8" || ViewState["MetricSumID"].ToString() == "9" || ViewState["MetricSumID"].ToString() == "36" || ViewState["MetricSumID"].ToString() == "37")
+                        else if (ViewState["MetricSumID"].ToString() == "8" || ViewState["MetricSumID"].ToString() == "9" || ViewState["MetricSumID"].ToString() == "36" || ViewState["MetricSumID"].ToString() == "37" || ViewState["MetricSumID"].ToString() == "48")
                         {
                             rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔCh").Visible = true;  //----ΔCh
                             rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔH").Visible = false;  //----ΔH
@@ -3313,6 +3323,83 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+
+        protected void btnCXFExport_Click(object sender, EventArgs e)
+        {
+            MeasurementId = 0;
+            if (hdMeasurement.Value != "")
+            {
+                MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above                   
+
+                //Now we are using DataTable to get data of RadGrid      
+                dtPatchDetails = new DataTable();
+                dtFilteredPatchDetails = new DataTable();
+
+                _presenterAnalyze.GetPatchDetailsofMeasurement();
+                if (!IsErrorOccured)
+                {
+                    //Now we are using DataTable as DataSource                    
+                    dtFilteredPatchDetails = FilteredPatchDetailsTable(ViewState["MetricSumID"].ToString(), dtPatchDetails);
+                    char qt = '\u0022'; //---Pass " as a char into string
+
+                    #region Generate .Cxf file
+                    System.IO.StreamWriter sw;
+                    sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/") + MeasurementId.ToString() + "_MeasurementFile.cxf");
+                    sw.WriteLine(@"<?xml version=""1.0"" encoding=""UTF-8"" ?>");
+                    sw.WriteLine(@"<cc:CxF xmlns:xsi=""http:///www.w3.org/2001/XMLSchema-instance"" xmlns:cc=""http://colorexchangeformat.com/CxF3-core"">");
+                    sw.WriteLine(@"    <cc:FileInformation>");
+                    sw.WriteLine(@"        <cc:Creator>Fujifilm</cc:Creator>");
+                    sw.WriteLine(@"        <cc:CreationDate>2016-12-19T16:31:27</cc:CreationDate>");
+                    sw.WriteLine(@"        <cc:Description>Unknown</cc:Description>");
+                    sw.WriteLine(@"    </cc:FileInformation>");
+                    sw.WriteLine(@"    <cc:Resources>");
+                    sw.WriteLine(@"        <cc:ObjectCollection>");
+
+
+                    for (int i = 0; i < dtFilteredPatchDetails.Rows.Count; i++)
+                    {
+                        sw.WriteLine(@"            <cc:Object ObjectType=""Standard"" Name=" + qt + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + qt + " Id=" + qt + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + qt + ">");
+                        sw.WriteLine(@"                <cc:CreationDate>" + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss")+ "</cc:CreationDate>");
+                        sw.WriteLine(@"                <cc:ColorValues>");
+                        sw.WriteLine(@"                    <cc:ColorCIELab ColorSpecification=""M0"">");
+                        sw.WriteLine(@"                        <cc:L>" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() +"</cc:L>");
+                        sw.WriteLine(@"                        <cc:a>" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() +"</cc:a>");
+                        sw.WriteLine(@"                        <cc:b>" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() +"</cc:b>");
+                        sw.WriteLine(@"                    </cc:ColorCIELab>");
+                        sw.WriteLine(@"                </cc:ColorValues>");
+                        sw.WriteLine(@"            </cc:Object>");
+                    }
+
+                    sw.WriteLine(@"        </cc:ObjectCollection>");
+                    sw.WriteLine(@"        <cc:ColorSpecificationCollection>");
+                    sw.WriteLine(@"            <cc:ColorSpecification Id=""M0"">");
+                    sw.WriteLine(@"                <cc:MeasurementSpec>");
+                    sw.WriteLine(@"                    <cc:MeasurementType>Colorimetric Reflectance</cc:MeasurementType>");
+                    sw.WriteLine(@"                    <cc:GeometryChoice>");
+                    sw.WriteLine(@"                        <cc:SingleAngle>");
+                    sw.WriteLine(@"                            <cc:SingleAngleConfiguration>Uniplanar</cc:SingleAngleConfiguration>");
+                    sw.WriteLine(@"                            <cc:IlluminationAngle>45</cc:IlluminationAngle>");
+                    sw.WriteLine(@"                            <cc:MeasurementAngle>0</cc:MeasurementAngle>");
+                    sw.WriteLine(@"                        </cc:SingleAngle>");
+                    sw.WriteLine(@"                    </cc:GeometryChoice>");
+                    sw.WriteLine(@"                    <cc:Device>");
+                    sw.WriteLine(@"                        <cc:DeviceIllumination>M0 Incandescent</cc:DeviceIllumination>");
+                    sw.WriteLine(@"                    </cc:Device>");
+                    sw.WriteLine(@"                </cc:MeasurementSpec>");
+                    sw.WriteLine(@"            </cc:ColorSpecification>");
+                    sw.WriteLine(@"        </cc:ColorSpecificationCollection>");
+                    sw.WriteLine(@"    </cc:Resources>");
+                    sw.WriteLine(@"</cc:CxF>");
+                    sw.Close();
+
+                    Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), MeasurementId.ToString() + "_MeasurementFile.cxf", MeasurementId.ToString() + "_MeasurementFile.cxf");
+                    #endregion
+                }
+            }
+        }
+
+
+
         protected void lbtnMeasurement_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
@@ -3465,6 +3552,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public string FileName;
         #endregion     
-
+     
     }
 }

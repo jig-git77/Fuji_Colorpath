@@ -1197,6 +1197,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             DataRow dr = dsMeasurements.Tables[6].NewRow();
                             dr["CMYK_K"] = 0;
                             dr["G7NPDC"] = 0;
+                            dr["G7NPDC_Act"] = 0;
                             dsMeasurements.Tables[6].Rows.InsertAt(dr, 0);
                         }
                         #endregion
@@ -1206,7 +1207,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Select(x => new AnalyzeChart_G7()
                             {
                                 Cmyk_Value = DataReader.ReadDecimal(x, "CMYK_K"),
-                                ΔValue = DataReader.ReadDecimal(x, "G7NPDC")
+                                ΔValue = DataReader.ReadDecimal(x, "G7NPDC_Act"),
+                                ΔLimit = DataReader.ReadDecimal(x, "G7NPDC")
                             }).ToList();
                     },
                     new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_BlackNPD"));
@@ -1230,6 +1232,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             DataRow dr = dsMeasurements.Tables[7].NewRow();
                             dr["CMYK_C"] = 0;
                             dr["G7NPDC"] = 0;
+                            dr["G7NPDC_Act"] = 0;
                             dsMeasurements.Tables[7].Rows.InsertAt(dr, 0);
                         }
                         #endregion
@@ -1239,7 +1242,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Select(x => new AnalyzeChart_G7()
                             {
                                 Cmyk_Value = DataReader.ReadDecimal(x, "CMYK_C"),
-                                ΔValue = DataReader.ReadDecimal(x, "G7NPDC")
+                                ΔValue = DataReader.ReadDecimal(x, "G7NPDC_Act"),
+                                ΔLimit = DataReader.ReadDecimal(x, "G7NPDC")
                             }).ToList();
                     },
                     new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_CHRT_GrayNPD"));

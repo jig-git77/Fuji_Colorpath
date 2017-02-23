@@ -175,4 +175,7 @@
   <data name="locLicenseMgmtResource1.Text" xml:space="preserve">
     <value>License Management</value>
   </data>
+  <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
+    <value>Company Name</value>
+  </data>
 </root>

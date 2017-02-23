@@ -55,7 +55,7 @@
                             <td align="left">
                                 <div style="float: left;"> 
                                                                
-                                    <asp:TextBox ID="txtChartName" runat="server" MaxLength="25" Width="400px" 
+                                    <asp:TextBox ID="txtChartName" runat="server" MaxLength="27" Width="400px" 
                                         Height="19px" meta:resourcekey="txtChartNameResource1"></asp:TextBox>
                                       <asp:HiddenField ID="hdnRefChartID" runat="server" Value="0" />
                                 </div>
@@ -222,7 +222,69 @@
                             </td>
                         </tr>       
                            
-                       
+
+
+
+                         <tr>
+                            <td align="right">
+                                <span style="font-weight: bold;"><asp:Localize Text="How many Colors" 
+                                    runat="server" ID="locHowManyColors" 
+                                    meta:resourcekey="locHowManyColorsResource1"></asp:Localize><span style="color: Red;">*</span>
+                                </span>
+                            </td>
+                            <td>
+                                <b>&nbsp;: &nbsp;</b>
+                            </td>
+                            <td align="left">
+                                <div style="float: left;">
+                                    <asp:DropDownList ID="cmbHowManyColors" runat="server" Width="400px" CssClass="select" OnSelectedIndexChanged="cmbHowManyColors_SelectedIndexChanged" AutoPostBack="true"
+                                        DataValueField="Key" DataTextField="Value" 
+                                        meta:resourcekey="cmbHowManyColorResource1">
+                                        <asp:ListItem Text="--Select--" Value="0" Selected="True"></asp:ListItem>
+                                        <asp:ListItem Text="5" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="6" Value="2"></asp:ListItem>
+                                        <asp:ListItem Text="7" Value="3"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                                <div style="float: left">
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Display="Dynamic"
+                                        ControlToValidate="cmbHowManyColors" ForeColor="Red" 
+                                        ValidationGroup="vgAddRefChart">
+                                        <ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
+                                            ValidationMsg="Please select How Many Colors." Size="200" />
+                                    </asp:RequiredFieldValidator>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </td>
+                        </tr>   
+
+                         <tr id="Tr_NameOfColors" runat="server" visible="false">
+                            <td align="right">
+                                <span style="font-weight: bold;"><asp:Localize Text="Name of Colors" 
+                                    runat="server" ID="locNameOfColors" 
+                                    meta:resourcekey="locNameOfColorsResource1"></asp:Localize><span style="color: Red;">*</span>
+                                </span>
+                            </td>
+                            <td>
+                                <b>&nbsp;: &nbsp;</b>
+                            </td>
+                            <td align="left">
+                                <div style="float: left;">
+                                    <asp:TextBox ID="txtColor5" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtColor6" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtColor7" runat="server"></asp:TextBox>
+                                </div>
+                                <div style="float: left">
+                                   
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </td>
+                        </tr>   
+
+
+
                         <tr>
                             <td align="right">
                                 <span style="font-weight: bold;"><asp:Localize runat="server" 

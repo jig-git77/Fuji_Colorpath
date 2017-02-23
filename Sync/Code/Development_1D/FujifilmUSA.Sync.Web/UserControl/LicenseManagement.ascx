@@ -178,16 +178,24 @@
                                 <ItemStyle HorizontalAlign="Left" Width="100" />
                             </telerik:GridDateTimeColumn>
 
-                            <telerik:GridNumericColumn DataField="NumOfDevice" AllowFiltering="true" HeaderText="Total Devices"
-                                UniqueName="NumOfDevice" SortExpression="NumOfDevice" 
-                                FilterControlWidth="100" HeaderStyle-Width ="100"
-                                ItemStyle-Wrap="true"  ShowFilterIcon="true" AutoPostBackOnFilter="true" 
-                                CurrentFilterFunction="GreaterThanOrEqualTo" 
-                                meta:resourcekey="GridNumericColumnResource1">  
-                                <HeaderStyle Width="100px"></HeaderStyle>
+                            <telerik:GridTemplateColumn DataField="Branch.Company.CompanyName" AllowFiltering="true" HeaderText="Company Name"
+                                UniqueName="CompanyName" SortExpression="Branch.Company.CompanyName" 
+                                FilterControlWidth="80" HeaderStyle-Width ="80"
+                                ShowFilterIcon="true"
+                                ItemStyle-CssClass="breakWord80" ItemStyle-Width="80" 
+                                ItemStyle-Wrap="true" AutoPostBackOnFilter="true" 
+                                CurrentFilterFunction="Contains" meta:resourcekey="GridTemplateColumnResource4">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblCompanyName" runat="server" 
+                                        Text='<%# Eval("Branch.Company.CompanyName") %>' 
+                                        meta:resourcekey="lblCompanyNameResource1" />
+                                </ItemTemplate>
 
-                                <ItemStyle Wrap="True"></ItemStyle>
-                            </telerik:GridNumericColumn>
+                                <HeaderStyle Width="80px"></HeaderStyle>
+
+                                <ItemStyle Wrap="True" CssClass="breakWord80" Width="80px"></ItemStyle>
+                            </telerik:GridTemplateColumn>
+
                             <telerik:GridTemplateColumn DataField="Branch.BranchName" AllowFiltering="true" HeaderText="Branch Name"
                                 UniqueName="BranchName" SortExpression="Branch.BranchName" 
                                 FilterControlWidth="80" HeaderStyle-Width ="80"
@@ -237,7 +245,7 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="LicenseID" AllowFiltering="true" HeaderText=""
                                 UniqueName="Edit" FilterControlWidth="70" HeaderStyle-Width ="70" 
-                                meta:resourcekey="GridTemplateColumnResource4">
+                                meta:resourcekey="GridTemplateColumnResource40">
                                 <FilterTemplate>
                                     <center>
                                     <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip ="Clear Fillter" 

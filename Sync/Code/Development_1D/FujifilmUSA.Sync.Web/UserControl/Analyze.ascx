@@ -1420,7 +1420,7 @@
                                                     Color="Black" BorderWidth="3" ChartType="Spline" MarkerBorderColor="Black" BackSecondaryColor="162, 164, 255">
                                                 </asp:Series>
                                                 <asp:Series Name="Series0Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                    Color="Black" BorderWidth="3" ChartType="Spline" MarkerBorderColor="Black" BackSecondaryColor="162, 164, 255">
+                                                    Color="Green" BorderWidth="3" ChartType="Spline" MarkerBorderColor="Green" BackSecondaryColor="162, 164, 255">
                                                 </asp:Series>                                               
                                             </Series>
                                             <ChartAreas>
@@ -1466,7 +1466,10 @@
                                                     <asp:Series Name="Series0" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
                                                         Color="Black" BorderWidth="3" ChartType="Spline" MarkerBorderColor="Black" MarkerStyle="Circle"
                                                         MarkerSize="15" BackSecondaryColor="162, 164, 255">
-                                                    </asp:Series>                                            
+                                                    </asp:Series>   
+                                                    <asp:Series Name="Series0Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Green" BorderWidth="3" ChartType="Spline" MarkerBorderColor="Green" BackSecondaryColor="162, 164, 255">
+                                                    </asp:Series>                                             
                                                 </Series>
                                                 <ChartAreas>
                                                     <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
@@ -2482,6 +2485,10 @@
                 <td align="right">
                      <asp:Button ID="btnCGATSExport" CssClass="button" Width="150px" Text="Export to CGATS" 
                         runat="server" onclick="btnCGATSExport_Click" meta:resourcekey="btnCGATSExportResource1"></asp:Button> 
+                     <asp:Button ID="btnCXFExport" CssClass="button" Width="150px" Text="Export to CXF" 
+                        runat="server"  meta:resourcekey="btnCXFExportResource1" 
+                         onclick="btnCXFExport_Click"></asp:Button> 
+                    
                     <asp:Button ID="btnExcelExport" CssClass="button" Width="150px" 
                         Text="Export to Excel" runat="server" onclick="btnExcelExport_Click" Visible="False" 
                         meta:resourcekey="btnExcelExportResource1"></asp:Button>                   
@@ -2690,6 +2697,7 @@
          </ContentTemplate> 
          <Triggers>
                 <asp:PostBackTrigger ControlID="btnCGATSExport" />         
+                <asp:PostBackTrigger ControlID="btnCXFExport" />  
                 <asp:PostBackTrigger ControlID="btnExcelExport" />               
                 <asp:PostBackTrigger ControlID="btnCSVExport" />   
                 <asp:PostBackTrigger ControlID="rcmbMetricSumlist" />                                

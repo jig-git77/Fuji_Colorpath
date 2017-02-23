@@ -52,15 +52,24 @@
             background-position: 0px;
     }
     
-     .breakWord290
+     .breakWord150
      {
-            max-width: 290px !important;
+            max-width: 150px !important;
             word-break: break-all !important;
             word-wrap: break-word !important;
             vertical-align: top;
             line-height: 15px;
      }
     
+      .breakWord70
+     {
+            max-width: 70px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+     
 </style>
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteSourceProfile() {
@@ -127,20 +136,57 @@
                             DataField="ProfileName" 
                             SortExpression="ProfileName" 
                             ShowFilterIcon="true"
-                            FilterControlWidth="290"
-                            HeaderStyle-Width ="290" 
+                            FilterControlWidth="150"
+                            HeaderStyle-Width ="150" 
                             AllowFiltering="true" 
-                            ItemStyle-CssClass="breakWord290" ItemStyle-Width="290" 
+                            ItemStyle-CssClass="breakWord150" ItemStyle-Width="150" 
                             ItemStyle-Wrap="true" AutoPostBackOnFilter="true" 
                             CurrentFilterFunction="Contains" meta:resourcekey="GridTemplateColumnResource1">
                             <ItemTemplate>
                                 <asp:Label ID="lblProfileName" runat="server" Text='<%# Eval("ProfileName") %>' 
                                     meta:resourcekey="lblProfileNameResource1"/>
                             </ItemTemplate>
+                            <HeaderStyle Width="150px"></HeaderStyle>
+                            <ItemStyle Wrap="True" CssClass="breakWord150" Width="150px"></ItemStyle>
+                        </telerik:GridTemplateColumn>
+                        
+                        <telerik:GridTemplateColumn 
+                            UniqueName="Region" 
+                            HeaderText="Region Name"
+                            DataField="Region.RegionName" 
+                            SortExpression="Region.RegionName" 
+                            ShowFilterIcon="true"
+                            FilterControlWidth="70"
+                            HeaderStyle-Width ="70" 
+                            AllowFiltering="true" 
+                            ItemStyle-CssClass="breakWord70" ItemStyle-Width="70" 
+                            ItemStyle-Wrap="true" AutoPostBackOnFilter="true" 
+                            CurrentFilterFunction="Contains" meta:resourcekey="GridTemplateColumnResource6">
+                            <ItemTemplate>
+                                <asp:Label ID="lblRegion" runat="server" Text='<%# Eval("Region.RegionName") %>' />
+                            </ItemTemplate>
+                            <HeaderStyle Width="70px"></HeaderStyle>
+                            <ItemStyle Wrap="True" CssClass="breakWord150" Width="70px"></ItemStyle>
+                        </telerik:GridTemplateColumn>
 
-<HeaderStyle Width="290px"></HeaderStyle>
-
-<ItemStyle Wrap="True" CssClass="breakWord290" Width="290px"></ItemStyle>
+                        <telerik:GridTemplateColumn 
+                            UniqueName="CompanyName" 
+                            HeaderText="Company Name"
+                            DataField="Company.CompanyName" 
+                            SortExpression="Company.CompanyName" 
+                            ShowFilterIcon="true"
+                            FilterControlWidth="150"
+                            HeaderStyle-Width ="150" 
+                            AllowFiltering="true" 
+                            ItemStyle-CssClass="breakWord150" ItemStyle-Width="150" 
+                            ItemStyle-Wrap="true" AutoPostBackOnFilter="true" 
+                            CurrentFilterFunction="Contains" meta:resourcekey="GridTemplateColumnResource7">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("Company.CompanyName") %>' 
+                                   meta:resourcekey="lblCompanyNameResource1"/>
+                            </ItemTemplate>
+                            <HeaderStyle Width="150px"></HeaderStyle>
+                            <ItemStyle Wrap="True" CssClass="breakWord150" Width="150px"></ItemStyle>
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn 
@@ -150,9 +196,9 @@
                             DataField="ProfileDesc" 
                             SortExpression="ProfileDesc" 
                             ShowFilterIcon="true"
-                            FilterControlWidth="290"
-                            HeaderStyle-Width ="290"
-                            ItemStyle-CssClass="breakWord290" ItemStyle-Width="290" 
+                            FilterControlWidth="150"
+                            HeaderStyle-Width ="150"
+                            ItemStyle-CssClass="breakWord150" ItemStyle-Width="150" 
                             ItemStyle-Wrap="true" AutoPostBackOnFilter="true" 
                             CurrentFilterFunction="Contains" meta:resourcekey="GridTemplateColumnResource2">
                             <ItemTemplate>
@@ -160,9 +206,9 @@
                                         meta:resourcekey="lblProfileDescResource1" />
                             </ItemTemplate>
 
-<HeaderStyle Width="290px"></HeaderStyle>
+<HeaderStyle Width="150px"></HeaderStyle>
 
-<ItemStyle Wrap="True" CssClass="breakWord290" Width="290px"></ItemStyle>
+<ItemStyle Wrap="True" CssClass="breakWord150" Width="150px"></ItemStyle>
                         </telerik:GridTemplateColumn>
                         
                         <telerik:GridTemplateColumn 

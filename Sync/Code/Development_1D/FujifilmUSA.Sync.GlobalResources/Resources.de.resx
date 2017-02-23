@@ -333,6 +333,9 @@
   <data name="ELicenseType_FullGamutCustomSourceProfile" xml:space="preserve">
     <value>Full Gamut Custom Source_de</value>
   </data>
+  <data name="ELicenseType_MultiColorCustomSourceProfile" xml:space="preserve">
+    <value>Multi Color Custom Source_de</value>
+  </data>
   <data name="ELicenseType_Validation" xml:space="preserve">
     <value>Color Validation</value>
   </data>

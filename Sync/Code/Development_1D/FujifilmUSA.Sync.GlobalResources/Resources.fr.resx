@@ -207,6 +207,9 @@
   <data name="ELicenseType_FullGamutCustomSourceProfile" xml:space="preserve">
     <value>Full Gamut Custom Source_fr</value>
   </data>
+  <data name="ELicenseType_MultiColorCustomSourceProfile" xml:space="preserve">
+    <value>Multi Color Custom Source_fr</value>
+  </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>INVALIDE</value>
   </data>

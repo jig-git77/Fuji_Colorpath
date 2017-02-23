@@ -132,7 +132,8 @@
                                         <asp:CheckBox runat="server" ID="chkSync4D_Certification" CssClass="checkListBox"/>       
                                          <asp:CheckBox runat="server" ID="chkCustomSourceProfile" CssClass="checkListBox" Visible="true"/>  
                                          <asp:CheckBox runat="server" ID="chkReProfileCustomSource" CssClass="checkListBox" Visible="true"/>    
-                                         <asp:CheckBox runat="server" ID="chkFullGamutCustomSource" CssClass="checkListBox" Visible="true"/>                      
+                                         <asp:CheckBox runat="server" ID="chkFullGamutCustomSource" CssClass="checkListBox" Visible="true"/> 
+                                         <asp:CheckBox runat="server" ID="chkMultiColorCustomSource" CssClass="checkListBox" Visible="true"/>                     
                                     </div>
                                     <div style="float: left">
                                     </div>

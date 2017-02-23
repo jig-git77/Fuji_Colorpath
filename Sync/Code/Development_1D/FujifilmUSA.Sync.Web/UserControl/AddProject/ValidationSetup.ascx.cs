@@ -421,7 +421,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             trUVSettings.Visible = (MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1Sis)
                                     || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1Pro2)
                                     || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2)
-                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.eXact));
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.eXact) 
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1Sis2));
             trReadMode.Visible = (MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IO)
                                     || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2));
 
@@ -463,17 +464,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         private void BindReadMode()
         {
-            if (cmbUVSettings.SelectedValue == "1" || cmbUVSettings.SelectedValue == "2") //----If M1 or M2
-            {
-                cmbReadMode.Items.Clear();
-                cmbReadMode.Items.Add(new ListItem("Point", "Point"));
-            }
-            else
-            {
-                cmbReadMode.Items.Clear();
-                cmbReadMode.Items.Add(new ListItem("Strip", "Strip"));
-                cmbReadMode.Items.Add(new ListItem("Point", "Point"));
-            }
+            cmbReadMode.Items.Clear();
+            cmbReadMode.Items.Add(new ListItem("Strip", "Strip"));
+            cmbReadMode.Items.Add(new ListItem("Point", "Point"));
+
             cmbReadMode_SelectedIndexChanged(null, null);
         }
         #endregion

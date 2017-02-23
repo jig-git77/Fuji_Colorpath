@@ -117,7 +117,7 @@
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtSerialNumber" runat="server" Width="200px" Height="19px" MaxLength="20"
-                                            onkeypress="return CheckNumeric(event)" 
+                                            onkeypress="return CheckNumericAlpha(event)" 
                                             meta:resourcekey="txtSerialNumberResource1"></asp:TextBox>
                                     </div>
                                     <div style="float: left">

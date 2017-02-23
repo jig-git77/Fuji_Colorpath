@@ -51,10 +51,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            //------------Apply default CurrentFilterFunction for "NumOfDevice" column of rgLicense RadGrid-----------------//
+            //------------Apply default CurrentFilterFunction for numeric columns of rgLicense RadGrid-----------------//
             rgLicense.Columns[1].CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;
             rgLicense.Columns[2].CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;
-            rgLicense.Columns[3].CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;
         }
         #endregion
 

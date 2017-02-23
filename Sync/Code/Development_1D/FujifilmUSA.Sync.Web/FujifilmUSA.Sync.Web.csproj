@@ -115,6 +115,8 @@
     <Content Include="Global.asax" />
     <Content Include="GlobalActivation.aspx" />
     <Content Include="GlobalMaster.Master" />
+    <Content Include="Images\4DCertification.png" />
+    <Content Include="Images\4DCertification_Certified.png" />
     <Content Include="Images\abChartBackGround.gif" />
     <Content Include="Images\AlignCurve.png" />
     <Content Include="Images\AlignCurve_Certified.png" />
@@ -2904,6 +2906,9 @@
     <Content Include="UserControl\App_LocalResources\PatchPresetManagement.ascx.fr.resx">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\LicenseManagement.ascx.fr.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

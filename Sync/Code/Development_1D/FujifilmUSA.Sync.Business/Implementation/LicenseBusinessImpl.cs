@@ -39,7 +39,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        {
                                            BranchId = DataReader.ReadInt(x, "BranchId"),
                                            BranchName = DataReader.ReadString(x, "BranchName"),
-                                           CompanyId = DataReader.ReadInt(x, "CompanyId")
+                                           CompanyId = DataReader.ReadInt(x, "CompanyId"),
+                                           Company = new Company()
+                                           {
+                                               CompanyName = DataReader.ReadString(x, "CompanyName")
+                                           }
                                        }
                                    }).ToList();
 

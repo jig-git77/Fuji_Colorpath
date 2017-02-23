@@ -24,6 +24,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public decimal CmykY { get; set; }
         public decimal CmykK { get; set; }
         public string HTMLColor { get; set; }
+        public decimal Color5 { get; set; }
+        public decimal Color6 { get; set; }
+        public decimal Color7 { get; set; }
     }
 
     public partial class AddReferenceChart : BaseControl, IViewAddReferenceChart
@@ -197,9 +200,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         else
                         {
                             var dataRow = sr.ReadLine().Split(',');
-                            if (dataRow.Length != 7)
+                            if (cmbHowManyColors.SelectedIndex == 0)
                             {
-                                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatchOnRow"), rows));
+                                if (dataRow.Length != 7)
+                                {
+                                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatchOnRow"), rows));
+                                }
+                            }
+                            else
+                            {
+                                if (dataRow.Length != 10)
+                                {
+                                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatchOnRow"), rows));
+                                }
                             }
                             dataRow.ToList().ForEach(x => x = x.Trim());
                             var chartDataRow = new ReferenceChartImportData();
@@ -278,6 +291,39 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             //PatchTypeId
                             //TODO: Need to calculate patch type Id
 
+                            if (cmbHowManyColors.SelectedIndex > 0)
+                            {
+                                //Color5
+                                if (decimal.TryParse(dataRow[7], out cmyk))
+                                {
+                                    chartDataRow.Color5 = cmyk;
+                                }
+                                else
+                                {
+                                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                }
+
+                                //Color6
+                                if (decimal.TryParse(dataRow[8], out cmyk))
+                                {
+                                    chartDataRow.Color6 = cmyk;
+                                }
+                                else
+                                {
+                                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                }
+
+                                //Color7
+                                if (decimal.TryParse(dataRow[9], out cmyk))
+                                {
+                                    chartDataRow.Color7 = cmyk;
+                                }
+                                else
+                                {
+                                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                                }
+
+                            }
                             #endregion
                             refChartImportData.Add(chartDataRow);
                         }
@@ -409,5 +455,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public ReferenceChartType ReferenceChartType { get; set; }
 
         #endregion
+
+        protected void cmbHowManyColors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbHowManyColors.SelectedIndex == 0)
+            {
+                Tr_NameOfColors.Visible = false;
+            }
+            else
+            {
+                Tr_NameOfColors.Visible = true;
+            }
+        }
     }
 }
