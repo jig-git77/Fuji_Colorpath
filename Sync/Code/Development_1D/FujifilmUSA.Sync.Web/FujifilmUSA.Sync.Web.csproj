@@ -108,10 +108,12 @@
     <Content Include="COValidationCallback.aspx" />
     <Content Include="COValidationSetup.aspx" />
     <Content Include="COViewOpenProject.aspx" />
+    <Content Include="CSS\FirefoxPluginStyle.css" />
     <Content Include="CSS\jquery-ui-1.8.16.custom.css" />
     <Content Include="DownloadSoftwares.aspx" />
     <Content Include="Download\Done.wav" />
     <Content Include="Download\Error.wav" />
+    <Content Include="FireFoxPluginDetails.aspx" />
     <Content Include="Global.asax" />
     <Content Include="GlobalActivation.aspx" />
     <Content Include="GlobalMaster.Master" />
@@ -139,6 +141,7 @@
     <Content Include="Images\chart_preview.png" />
     <Content Include="Images\clear-fillter.png" />
     <Content Include="Images\collapsed.png" />
+    <Content Include="Images\ColorPath_Avatar_small.png" />
     <Content Include="Images\ColorPathLogoForLabel.png" />
     <Content Include="Images\company-management.png" />
     <Content Include="Images\contant_box_haed_bt_left_hover_Rev.png" />
@@ -156,10 +159,12 @@
     <Content Include="Images\Drupa2.png" />
     <Content Include="Images\FujiFilm.png" />
     <Content Include="Images\FujiFilm2.png" />
+    <Content Include="Images\FUJIFILM_Slogan_270_100.png" />
     <Content Include="Images\G7AlignmentReportTitle.png" />
     <Content Include="Images\G7VAlignmentReportTitle.png" />
     <Content Include="Images\G7_logo_web.gif" />
     <Content Include="Images\green.png" />
+    <Content Include="Images\header_bg1.png" />
     <Content Include="Images\InkOptimizeSource.png" />
     <Content Include="Images\Logo-report.png" />
     <Content Include="Images\Red.png" />
@@ -870,6 +875,13 @@
     </Compile>
     <Compile Include="DownloadSoftwares.aspx.designer.cs">
       <DependentUpon>DownloadSoftwares.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FireFoxPluginDetails.aspx.cs">
+      <DependentUpon>FireFoxPluginDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FireFoxPluginDetails.aspx.designer.cs">
+      <DependentUpon>FireFoxPluginDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2461,6 +2473,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Templates\CertifiedLabel.label" />
+    <None Include="Terms\ColorPath SYNC Firefox ESR.pdf" />
     <None Include="Terms\ColorPath Sync TC 2013.pdf" />
   </ItemGroup>
   <ItemGroup>
@@ -2928,7 +2941,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

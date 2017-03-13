@@ -76,6 +76,8 @@
         oWnd.close();
     }
 </script>
+
+
 <div id="login_box">
     <div class="curve_top_login">
          <div style="text-align:right; padding-right:40px; padding-top:20px;">
@@ -124,6 +126,7 @@
     <div class="curve_bottom">
         &nbsp;</div>
 </div>
+
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
     <Windows>
         <telerik:RadWindow ID="OpenForgotPasswordWindow" runat="server" IconUrl="" VisibleStatusbar="false"

@@ -3,9 +3,12 @@
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
     TagPrefix="uc" %>
-<script src="JS/DYMO.Label.Framework.latest.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<%--<script src="JS/DYMO.Label.Framework.latest.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>--%>
 <script src="JS/Printing.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 
+<%--<script src="JS/DYMO.Label.Framework.latest.js" type="text/javascript" charset="UTF-8"></script>--%>
+
+<script src = "http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>
 
 
  <script type="text/javascript">
