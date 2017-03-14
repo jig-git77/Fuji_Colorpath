@@ -7,5 +7,10 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         string UserName { get; set; }
         string Password { get; set; }
         User CurrentUser { get; set; }
+
+        int UserId { get; set; }
+        string OSName { get; set; }
+        string BrowserName { get; set; }
+        string EntryDate { get; set; }
     }
 }

@@ -19,85 +19,6 @@
     }
         </script>
 
-<script type="text/javascript" language="javascript">
-    $(document).ready(function () {
-        var navigatorVersion = navigator.appVersion;
-        var navigatorAgent = navigator.userAgent;
-        var browserName = navigator.appName;
-        var fullVersionName = '' + parseFloat(navigator.appVersion);
-        var majorVersionName = parseInt(navigator.appVersion, 10);
-        var nameOffset, verOffset, ix;
-
-        // In Firefox, the true version is after "Firefox" 
-        if ((verOffset = navigatorAgent.indexOf("Firefox")) != -1) {
-            browserName = "Firefox";
-            fullVersionName = navigatorAgent.substring(verOffset + 8);
-
-            if (fullVersionName > 51) {
-
-                var PluginVersion = Plugin_load();
-            
-                if (PluginVersion == "") {
-                    var r = confirm("This version of FireFox does not support the FujiFilm Measurement Plugin!\n\nPress OK for More Details or Cancel to Exit.");
-                    if (r == true) {
-                        document.location.href = 'FireFoxPluginDetails.aspx';
-                    }
-                }
-            }
-        }
-    });
-</script>
-
-<script type="text/javascript">
-
-    //-----------Script to check Fuji Plugin is installed or not--------//
-    OSName = "Unknown OS";
-    if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
-    if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
-    if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
-    if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
-
-    function plugin() {
-        return document.getElementById('plugin0');
-    }
-    function addEvent(obj, name, func) {
-        if (window.addEventListener) {
-            obj.addEventListener(name, func, false);
-        } else {
-            obj.attachEvent("on" + name, func);
-        }
-    }
-
-    function Plugin_load() {
-
-        var c = document.getElementById("Hidden_PluginMessage");
-        c.value = "Error in plugin.";
-        addEvent(plugin(), 'fire', function (x) {
-            alert('onfired() from load(): ' + x)
-        });
-
-        try {
-            if (OSName == "Windows") {
-                plugin().setDebug("C:/temp/FujiCM.log");
-            } 
-            else {
-                plugin().setDebug("/tmp/isis.log");
-            }
-
-            var newHTML = 'Fuji Color Manager Plugin Version ' + plugin().plugin_version;
-            c.value = newHTML;
-
-            //------Assign Plugin Version-----//
-            var d = document.getElementById("Hidden_PluginVersion");
-            d.value = plugin().plugin_version;
-        }
-        catch (err) {
-            return "";
-        }
-        return d.value;
-    }
-
-</script>
 
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
     <form id="form1" runat="server">
@@ -142,13 +63,6 @@
       </center>
     </div>
 
-     <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
-            </object>
-            <br />
-            <div id="DivTable" runat="server" style="visibility: hidden;">
-                <input id="Hidden_PluginMessage" type="hidden" runat="server" />
-                <input id="Hidden_PluginVersion" type="hidden" runat="server" />
-            </div>
     </form>
 </body>
 </html>

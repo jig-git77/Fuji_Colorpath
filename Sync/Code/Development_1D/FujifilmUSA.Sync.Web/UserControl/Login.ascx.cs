@@ -18,6 +18,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get { return bntLogin.UniqueID; }
         }
+
+
         #endregion
 
         #region "Page Events"
@@ -28,7 +30,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             //if (SessionManager.Instance.CurrentUser != null)
-            //    Response.Redirect("Index.aspx");
+            //    Response.Redirect("Index.aspx");'
+           
             if (!IsPostBack)
             {
                 if ((Request.Cookies["SyncFujiLogin"] == null || Request.Cookies["SyncFujiLogin"].Value == "") &&
@@ -47,15 +50,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void bntLogin_Click(object sender, EventArgs e)
         {
-            //FormsAuthentication.
+         
             UserName = txtUserName.Text.Trim();
             Password = txtPassword.Text.Trim();
+          
             _presenterlogin.UserLogin();
+
             if (!IsErrorOccured)
             {
                 if (CurrentUser != null && CurrentUser.LoginId != null)
                 {
                     SessionManager.Instance.CurrentUser = CurrentUser;
+
+                    //----*Start: Adding entry for all login to site----//
+                    UserId = SessionManager.Instance.CurrentUser.UserId;
+                    OSName = Hidden_OSName.Value.ToString();
+                    BrowserName = Hidden_BrowserName.Value.ToString();
+                    EntryDate = DateTime.Now.ToString();
+                    _presenterlogin.InsertLoginActivityLogs();
+                    //-------------------*End--------------------------//
 
                     WebLogActivityManager.LogActivity(LogActivityType.LoggedIn, null, Request.UserHostAddress);
                     
@@ -170,6 +183,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string UserName { get; set; }
         public string Password { get; set; }
         public User CurrentUser { get; set; }
+
+        public int UserId { get; set; }
+        public string OSName { get; set; }
+        public string BrowserName { get; set; }
+        public string EntryDate { get; set; }
+
         #endregion
     }
 }

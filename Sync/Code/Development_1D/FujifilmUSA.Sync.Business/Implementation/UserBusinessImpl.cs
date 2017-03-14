@@ -539,6 +539,25 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
+        public int InsertLoginActivityLogs(int UserId, string OSName, string BrowserName, string EntryTime)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[dbo].[InsertLoginActivityLogs]",
+                            new object[]
+                                    {
+                                       UserId, OSName, BrowserName, EntryTime
+                                    });
+                 
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertLoginActivityLogs"));
+            return returnValue;
+        }
 
         #region ITaskBase Members
 

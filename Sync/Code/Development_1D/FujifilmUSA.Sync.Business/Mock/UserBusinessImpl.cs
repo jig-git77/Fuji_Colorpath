@@ -85,6 +85,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<MeasurementDevice>();
         }
 
+        public int InsertLoginActivityLogs(int UserId, string OSName, string BrowserName, string EntryTime)
+        {
+            return 0;
+        }
+
         #endregion
 
         #region ITaskBase Members

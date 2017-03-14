@@ -77,6 +77,127 @@
     }
 </script>
 
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        var navigatorVersion = navigator.appVersion;
+        var navigatorAgent = navigator.userAgent;
+        var browserName = navigator.appName;
+        var fullVersionName = '' + parseFloat(navigator.appVersion);
+        var majorVersionName = parseInt(navigator.appVersion, 10);
+        var nameOffset, verOffset, ix;
+
+        // In Firefox, the true version is after "Firefox" 
+        if ((verOffset = navigatorAgent.indexOf("Firefox")) != -1) {
+            browserName = "Firefox";
+            fullVersionName = navigatorAgent.substring(verOffset + 8);
+
+            if (fullVersionName > 51) {
+
+                var PluginVersion = Plugin_load();
+        
+                if (PluginVersion == "") {
+                    var r = confirm("This version of FireFox does not support the FujiFilm Measurement Plugin!\n\nPress OK for More Details or Cancel to Exit.");
+                    if (r == true) {
+                        document.location.href = 'FireFoxPluginDetails.aspx';
+                    }
+                }
+            }
+        }
+        // In MSIE, the true version is after "MSIE" in userAgent
+        else if ((verOffset = navigatorAgent.indexOf("MSIE")) != -1) {
+            browserName = "Microsoft Internet Explorer";
+            fullVersionName = navigatorAgent.substring(verOffset + 5);
+        }
+
+        // In Chrome, the true version is after "Chrome" 
+        else if ((verOffset = navigatorAgent.indexOf("Chrome")) != -1) {
+            browserName = "Chrome";
+            fullVersionName = navigatorAgent.substring(verOffset + 7);
+        }
+
+        // In Opera, the true version is after "Opera" or after "Version"
+        else if ((verOffset = navigatorAgent.indexOf("Opera")) != -1) {
+            browserName = "Opera";
+            fullVersionName = navigatorAgent.substring(verOffset + 6);
+            if ((verOffset = navigatorAgent.indexOf("Version")) != -1)
+                fullVersionName = navigatorAgent.substring(verOffset + 8);
+        }
+
+        // In Safari, the true version is after "Safari" or after "Version" 
+        else if ((verOffset = navigatorAgent.indexOf("Safari")) != -1) {
+            browserName = "Safari";
+            fullVersionName = navigatorAgent.substring(verOffset + 7);
+            if ((verOffset = navigatorAgent.indexOf("Version")) != -1)
+                fullVersionName = navigatorAgent.substring(verOffset + 8);
+        }
+
+        // In most other browsers, "name/version" is at the end of userAgent 
+        else if ((nameOffset = navigatorAgent.lastIndexOf(' ') + 1) < (verOffset = navigatorAgent.lastIndexOf('/'))) {
+            browserName = navigatorAgent.substring(nameOffset, verOffset);
+            fullVersionName = navigatorAgent.substring(verOffset + 1);
+            if (browserName.toLowerCase() == browserName.toUpperCase()) {
+                browserName = navigator.appName;
+            }
+        }
+
+        document.getElementById('<%=Hidden_BrowserName.ClientID %>').value = browserName;
+    });
+</script>
+
+<script type="text/javascript">
+
+    //-----------Script to check Fuji Plugin is installed or not--------//
+    OSName = "Unknown OS";
+    if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
+    if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
+    if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
+    if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
+
+    function plugin() {
+   
+        return document.getElementById("plugin0");
+    }
+    function addEvent(obj, name, func) {
+        if (window.addEventListener) {
+            obj.addEventListener(name, func, false);
+        } else {
+            obj.attachEvent("on" + name, func);
+        }
+    }
+
+    function Plugin_load() {
+     
+        document.getElementById('<%=Hidden_OSName.ClientID %>').value = OSName;
+      
+        var c = document.getElementById('<%=Hidden_PluginMessage.ClientID %>');
+        c.value = "Error in plugin.";
+       
+        addEvent(plugin(), 'fire', function (x) {
+            alert('onfired() from load(): ' + x)
+        });
+       
+        try {
+            if (OSName == "Windows") {
+                plugin().setDebug("C:/temp/FujiCM.log");
+            }
+            else {
+                plugin().setDebug("/tmp/isis.log");
+            }
+
+            var newHTML = 'Fuji Color Manager Plugin Version ' + plugin().plugin_version;
+            c.value = newHTML;
+
+            //------Assign Plugin Version-----//
+            var d = document.getElementById('<%=Hidden_PluginVersion.ClientID %>');
+            d.value = plugin().plugin_version;
+        }
+        catch (err) {
+            return "";
+        }
+        return d.value;
+    }
+
+</script>
 
 <div id="login_box">
     <div class="curve_top_login">
@@ -117,12 +238,24 @@
             <asp:Button ID="bntLogin" runat="server" CssClass="login_bt" 
                 OnClick="bntLogin_Click" OnClientClick="return SendMessageToParent();" 
                 meta:resourcekey="bntLoginResource1" />            
+            
         </div>
         <div class="clear">
         </div>
      </ContentTemplate>           
         </asp:UpdatePanel>     
     </div>
+
+      <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
+            </object>
+            <br />
+            <div id="DivTable" runat="server" style="visibility: hidden;">
+                <input id="Hidden_PluginMessage" type="hidden" runat="server" />
+                <input id="Hidden_PluginVersion" type="hidden" runat="server" />
+
+                 <input id="Hidden_OSName" type="hidden" runat="server" />
+                 <input id="Hidden_BrowserName" type="hidden" runat="server" />
+            </div>
     <div class="curve_bottom">
         &nbsp;</div>
 </div>

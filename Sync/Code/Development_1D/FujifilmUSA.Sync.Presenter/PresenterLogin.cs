@@ -19,5 +19,12 @@ namespace FujifilmUSA.Sync.Presenter
             userBusiness.ErrorOccured += _viewLogin.ErrorOccured;
             _viewLogin.CurrentUser = userBusiness.UserLogin(_viewLogin.UserName, _viewLogin.Password, UserType.WebSiteUser);
         }
+
+        public void InsertLoginActivityLogs()
+        {
+            var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
+            userBusiness.ErrorOccured += _viewLogin.ErrorOccured;
+            userBusiness.InsertLoginActivityLogs(_viewLogin.UserId, _viewLogin.OSName, _viewLogin.BrowserName, _viewLogin.EntryDate);
+        }
     }
 }
