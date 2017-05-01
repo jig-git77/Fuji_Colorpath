@@ -85,6 +85,8 @@
         var fullVersionName = '' + parseFloat(navigator.appVersion);
         var majorVersionName = parseInt(navigator.appVersion, 10);
         var nameOffset, verOffset, ix;
+ 
+        var PluginVersion = Plugin_load();
 
         // In Firefox, the true version is after "Firefox" 
         if ((verOffset = navigatorAgent.indexOf("Firefox")) != -1) {
@@ -93,8 +95,6 @@
 
             if (fullVersionName > 51) {
 
-                var PluginVersion = Plugin_load();
-        
                 if (PluginVersion == "") {
                     var r = confirm("This version of FireFox does not support the FujiFilm Measurement Plugin!\n\nPress OK for More Details or Cancel to Exit.");
                     if (r == true) {

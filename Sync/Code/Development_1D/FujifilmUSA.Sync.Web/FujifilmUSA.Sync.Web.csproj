@@ -247,6 +247,7 @@
     <Content Include="JQuery\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="JQuery\numeric.js" />
     <Content Include="JQuery\progressbar.js" />
+    <Content Include="JS\DYMO_Label_Framework_2_0_2.js" />
     <Content Include="JS\GlobalResource.fr-FR.js" />
     <Content Include="JS\GlobalResource.ja-JP.js" />
     <Content Include="JS\GlobalResource.de-DE.js" />
@@ -2941,7 +2942,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

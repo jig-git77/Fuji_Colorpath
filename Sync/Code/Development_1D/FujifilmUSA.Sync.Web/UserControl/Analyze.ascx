@@ -14,10 +14,10 @@
  <script type="text/javascript">
 
      function CheckAvgCompability() {
-       
+
          var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
-        
-         if (answer == "0") { 
+
+         if (answer == "0") {
              setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ucAnalyze$chkAnalyzeAverageOfMeasurements\',\'\')', 0);
              return true;
          }
@@ -125,7 +125,7 @@
             $('input[type="image"][id*="ibtnPrintPreview"]').hide();
             $('input[type="image"][id*="ibtnPrintLabel"]').hide();
         }
-        //Default Action
+        Default Action
         $(".hideclass").hide(); //Hide all content
         $("ul.tabs li:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").addClass("active").show(); //Activate first tab
         $(".hideclass:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").show(); //Show first tab content
@@ -208,7 +208,7 @@
                 }
         );
 
-        $("div[id*='accordion']").click();        
+        $("div[id*='accordion']").click();
     });
     
 </script>
@@ -301,7 +301,7 @@
             </td>
         </tr>
         <tr id="trListHeader" runat="server">
-            <td runat="server">
+            <td id="Td1" runat="server">
                 <div style="display: block;" class="contantbox tabcontant1">
                     <div class="Analyze_head">
                         <div id="Div_Opt_Header" runat="server" visible="false" class="Analyze_head_text"
@@ -777,7 +777,7 @@
                                     <td colspan="2" class="green-title">
                                         &nbsp; &Delta;<asp:Label ID="lblEPryPatches" runat="server" 
                                             ></asp:Label>
-                                        <asp:Localize Text=" Primary Patches" runat="server"
+                                        <asp:Localize ID="Localize1" Text=" Primary Patches" runat="server"
                                             meta:resourcekey="LocalizeResource1" ></asp:Localize>
                                     </td>
                                 </tr>
@@ -1535,8 +1535,8 @@
                                             <tr>
                                                 <td>
                                                     <table id="Table1" runat="server" cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">                                                     
-                                                        <tr runat="server">
-                                                            <td class="green-title" runat="server">
+                                                        <tr id="Tr1" runat="server">
+                                                            <td id="Td2" class="green-title" runat="server">
                                                                 <asp:Localize ID="locComparison" runat="server" Text="a* - b* Comparison" 
                                                                     meta:resourcekey="locComparisonResource1"></asp:Localize>
                                                             </td>
@@ -1685,14 +1685,14 @@
                                                                     </div>
                                                             </td>
                                                         </tr>                                                      
-                                                        <tr runat="server">
-                                                            <td class="green-title" runat="server">
+                                                        <tr id="Tr2" runat="server">
+                                                            <td id="Td3" class="green-title" runat="server">
                                                                 <asp:Localize runat="server" Text="L* Comparison" ID="locLComparison" 
                                                                     meta:resourcekey="locLComparisonResource1"></asp:Localize>
                                                             </td>
                                                         </tr>
-                                                        <tr runat="server">
-                                                            <td align="center" valign="top" runat="server">                                                            
+                                                        <tr id="Tr3" runat="server">
+                                                            <td id="Td4" align="center" valign="top" runat="server">                                                            
                                                                 <asp:Chart ID="chartLComparison" runat="server" BackGradientType="Center"
                                                                                         BackGradientEndColor="White" BorderLineColor="Gray" 
                                                                     Width="280px" Height="75px"  ImageType="Jpeg" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page4_Gamut_LComparison">
@@ -2730,8 +2730,8 @@
                             <td>
                                 <table id="TblGeneratePDFReport" runat="server" border="0" width="100%" style="height: 100%;"
                                         cellpadding="0" cellspacing="0" class="TABLE1">
-                                    <tr runat="server">
-                                        <td valign="top" runat="server">
+                                    <tr id="Tr4" runat="server">
+                                        <td id="Td5" valign="top" runat="server">
                                          <iframe id="iframeGeneratePDFReport" runat="server" name="iframeGeneratePDFReport" style="height: 350px;
                                                 width: 100%; display: none" frameborder="0" scrolling="no"></iframe>                                           
                                         </td>

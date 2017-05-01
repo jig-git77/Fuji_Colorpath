@@ -22,7 +22,7 @@ PrintLabel = function (previewLabel) {
         //It contains the label template in XML with the required values replaced with placeholders
         var label = dymo.label.framework.openLabelXml(GetLabelXml());
         // var label = dymo.label.framework.openLabelXml(getAddressLabelXml());
-     
+
         //GetStatusIconImageString() is registered from C# code in javascript in analyze.aspx page.
         //It contains the image in base64 encoded string format which will be replaced with placeholders in template using below line of code
         label.setObjectText('imgMeasurementStatusIcon', GetStatusIconImageString());
@@ -52,6 +52,18 @@ PrintLabel = function (previewLabel) {
             catch (e) {
                 alert(locErrorWhilePrintingLabel);
             }
+        }
+    }
+    else {
+        var label = dymo.label.framework.openLabelXml(GetLabelXml());
+        // var label = dymo.label.framework.openLabelXml(getAddressLabelXml());
+
+        //GetStatusIconImageString() is registered from C# code in javascript in analyze.aspx page.
+        //It contains the image in base64 encoded string format which will be replaced with placeholders in template using below line of code
+        label.setObjectText('imgMeasurementStatusIcon', GetStatusIconImageString());
+        if (previewLabel) {
+            //Code to view preview
+            previewImageCodedString = label.render();
         }
     }
     return false;
