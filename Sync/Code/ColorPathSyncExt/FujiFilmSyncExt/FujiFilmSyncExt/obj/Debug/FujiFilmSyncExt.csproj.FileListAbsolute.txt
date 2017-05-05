@@ -1,0 +1,9 @@
+D:\Projects\FujiFilm\FujiFilmSyncExt\FujiFilmSyncExt\bin\Debug\FujiFilmSyncExt.exe.config
+D:\Projects\FujiFilm\FujiFilmSyncExt\FujiFilmSyncExt\bin\Debug\FujiFilmSyncExt.exe
+D:\Projects\FujiFilm\FujiFilmSyncExt\FujiFilmSyncExt\bin\Debug\FujiFilmSyncExt.pdb
+D:\Projects\FujiFilm\FujiFilmSyncExt\FujiFilmSyncExt\obj\Debug\FujiFilmSyncExt.Form1.resources
+D:\Projects\FujiFilm\FujiFilmSyncExt\FujiFilmSyncExt\obj\Debug\FujiFilmSyncExt.Properties.Resources.resources
+D:\Projects\FujiFilm\FujiFilmSyncExt\FujiFilmSyncExt\obj\Debug\FujiFilmSyncExt.csproj.GenerateResource.Cache
+D:\Projects\FujiFilm\FujiFilmSyncExt\FujiFilmSyncExt\obj\Debug\FujiFilmSyncExt.exe
+D:\Projects\FujiFilm\FujiFilmSyncExt\FujiFilmSyncExt\obj\Debug\FujiFilmSyncExt.pdb
+D:\Projects\FujiFilm\FujiFilmSyncExt\FujiFilmSyncExt\obj\Debug\FujiFilmSyncExt.csprojResolveAssemblyReference.cache
