@@ -125,7 +125,7 @@
             $('input[type="image"][id*="ibtnPrintPreview"]').hide();
             $('input[type="image"][id*="ibtnPrintLabel"]').hide();
         }
-        Default Action
+        //Default Action
         $(".hideclass").hide(); //Hide all content
         $("ul.tabs li:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").addClass("active").show(); //Activate first tab
         $(".hideclass:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").show(); //Show first tab content

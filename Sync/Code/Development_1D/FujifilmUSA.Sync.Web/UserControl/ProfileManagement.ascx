@@ -398,7 +398,7 @@
                         </fieldset>
                         <br />
                        
-                        <fieldset style="width: 50%;">
+                        <fieldset style="width: 50%; visibility:hidden;">
                             <legend>
                                 <asp:Label ID="lblChangeUserDevice" runat="server" Text="Change User Device Info" 
                                     meta:resourcekey="lblChangeUserDeviceResource1"></asp:Label>
