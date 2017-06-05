@@ -12,27 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encryption", "Encryption\Encryption.csproj", "{DFD92926-174B-4205-80F2-CFA5544638BA}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Business\\Business.csproj
-		SccProjectName1 = Business
-		SccLocalPath1 = Business
-		SccProjectUniqueName2 = DataContracts\\DataContracts.csproj
-		SccProjectName2 = DataContracts
-		SccLocalPath2 = DataContracts
-		SccProjectUniqueName3 = FaultContracts\\FaultContracts.csproj
-		SccProjectName3 = FaultContracts
-		SccLocalPath3 = FaultContracts
-		SccProjectUniqueName4 = MessageContracts\\MessageContracts.csproj
-		SccProjectName4 = MessageContracts
-		SccLocalPath4 = MessageContracts
-		SccProjectUniqueName5 = Encryption\\Encryption.csproj
-		SccProjectName5 = Encryption
-		SccLocalPath5 = Encryption
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms

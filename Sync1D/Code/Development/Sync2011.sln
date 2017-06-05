@@ -39,29 +39,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPSync", "CPSync\CPSync.csproj", "{44201393-AFF4-4B3C-AB54-ED81C80A6131}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Business\\Business.csproj
-		SccProjectName1 = Business
-		SccLocalPath1 = Business
-		SccProjectUniqueName2 = Common\\Common.csproj
-		SccProjectName2 = Common
-		SccLocalPath2 = Common
-		SccProjectUniqueName3 = CPSync\\CPSync.csproj
-		SccProjectName3 = CPSync
-		SccLocalPath3 = CPSync
-		SccProjectUniqueName4 = DataAccess\\DataAccess.csproj
-		SccProjectName4 = DataAccess
-		SccLocalPath4 = DataAccess
-		SccWebProject5 = true
-		SccProjectUniqueName5 = Web
-		SccProjectName5 = Web
-		SccLocalPath5 = Web
-		SccProjectEnlistmentChoice5 = 2
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
 		Debug|Any CPU = Debug|Any CPU

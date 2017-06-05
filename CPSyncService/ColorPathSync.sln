@@ -22,24 +22,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorPathSync4DTest", "ColorPathSync4DTest\ColorPathSync4DTest.csproj", "{9BADDCE6-813D-48C1-B771-BFB14EDC5C4C}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ColorPathSync\\ColorPathSync.csproj
-		SccProjectName1 = ColorPathSync
-		SccLocalPath1 = ColorPathSync
-		SccProjectUniqueName2 = ColorPathSyncTest\\ColorPathSyncTest.csproj
-		SccProjectName2 = ColorPathSyncTest
-		SccLocalPath2 = ColorPathSyncTest
-		SccProjectUniqueName3 = TestColorPathSync\\TestCPSync\\TestCPSync.csproj
-		SccProjectName3 = TestColorPathSync/TestCPSync
-		SccLocalPath3 = TestColorPathSync\\TestCPSync
-		SccProjectUniqueName4 = ColorPathSync4DTest\\ColorPathSync4DTest.csproj
-		SccProjectName4 = ColorPathSync4DTest
-		SccLocalPath4 = ColorPathSync4DTest
-	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = ColorPathSync.vsmdi
 	EndGlobalSection

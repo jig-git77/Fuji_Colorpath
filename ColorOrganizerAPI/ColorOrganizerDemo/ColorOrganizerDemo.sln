@@ -8,21 +8,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorOrganizerDemoLib", "ColorOrganizerDemoLib\ColorOrganizerDemoLib.csproj", "{B4876279-3976-437F-94AA-D00F290D8220}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ColorOrganizerDemo.Web\\ColorOrganizerDemo.Web.csproj
-		SccProjectName1 = ColorOrganizerDemo.Web
-		SccLocalPath1 = ColorOrganizerDemo.Web
-		SccProjectUniqueName2 = ColorOrganizerDemo\\ColorOrganizerDemo.csproj
-		SccProjectName2 = ColorOrganizerDemo
-		SccLocalPath2 = ColorOrganizerDemo
-		SccProjectUniqueName3 = ColorOrganizerDemoLib\\ColorOrganizerDemoLib.csproj
-		SccProjectName3 = ColorOrganizerDemoLib
-		SccLocalPath3 = ColorOrganizerDemoLib
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

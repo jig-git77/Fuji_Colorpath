@@ -34,26 +34,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Web", "Web", "{6E165720-5C0
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Business\\Business.csproj
-		SccProjectName1 = Business
-		SccLocalPath1 = Business
-		SccProjectUniqueName2 = Common\\Common.csproj
-		SccProjectName2 = Common
-		SccLocalPath2 = Common
-		SccProjectUniqueName3 = DataAccess\\DataAccess.csproj
-		SccProjectName3 = DataAccess
-		SccLocalPath3 = DataAccess
-		SccWebProject4 = true
-		SccProjectUniqueName4 = Web
-		SccProjectName4 = Web
-		SccLocalPath4 = Web
-		SccProjectEnlistmentChoice4 = 2
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
 		Debug|Any CPU = Debug|Any CPU

@@ -22,33 +22,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.GlobalResources", "FujifilmUSA.Sync.GlobalResources\FujifilmUSA.Sync.GlobalResources.csproj", "{E8BB8C58-8365-4FFD-8F1C-F37E9ACD8E50}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/tfs/softweb
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = FujifilmUSA.Sync.Common\\FujifilmUSA.Sync.Common.csproj
-		SccProjectName1 = FujifilmUSA.Sync.Common
-		SccLocalPath1 = FujifilmUSA.Sync.Common
-		SccProjectUniqueName2 = FujifilmUSA.Sync.Model\\FujifilmUSA.Sync.DataAccess.csproj
-		SccProjectName2 = FujifilmUSA.Sync.Model
-		SccLocalPath2 = FujifilmUSA.Sync.Model
-		SccProjectUniqueName3 = FujifilmUSA.Sync.Presenter\\FujifilmUSA.Sync.Presenter.csproj
-		SccProjectName3 = FujifilmUSA.Sync.Presenter
-		SccLocalPath3 = FujifilmUSA.Sync.Presenter
-		SccProjectUniqueName4 = FujifilmUSA.Sync.Business\\FujifilmUSA.Sync.Business.csproj
-		SccProjectName4 = FujifilmUSA.Sync.Business
-		SccLocalPath4 = FujifilmUSA.Sync.Business
-		SccProjectUniqueName5 = FujifilmUSA.Sync.Entity\\FujifilmUSA.Sync.Entity.csproj
-		SccProjectName5 = FujifilmUSA.Sync.Entity
-		SccLocalPath5 = FujifilmUSA.Sync.Entity
-		SccProjectUniqueName6 = FujifilmUSA.Sync.Web\\FujifilmUSA.Sync.Web.csproj
-		SccProjectName6 = FujifilmUSA.Sync.Web
-		SccLocalPath6 = FujifilmUSA.Sync.Web
-		SccProjectUniqueName7 = FujifilmUSA.Sync.GlobalResources\\FujifilmUSA.Sync.GlobalResources.csproj
-		SccProjectName7 = FujifilmUSA.Sync.GlobalResources
-		SccLocalPath7 = FujifilmUSA.Sync.GlobalResources
-	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FujifilmUSA.Sync.vsmdi
 	EndGlobalSection

@@ -20,36 +20,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceDemo", "ServiceDemo\
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Business\\Business.csproj
-		SccProjectName1 = Business
-		SccLocalPath1 = Business
-		SccProjectUniqueName2 = ColorOrganizerService\\ColorOrganizerService.csproj
-		SccProjectName2 = ColorOrganizerService
-		SccLocalPath2 = ColorOrganizerService
-		SccProjectUniqueName3 = SecurityTokenGenerator\\SecurityTokenGenerator.csproj
-		SccProjectName3 = SecurityTokenGenerator
-		SccLocalPath3 = SecurityTokenGenerator
-		SccProjectUniqueName4 = Service\u0020Interface\\DataContracts\\DataContracts.csproj
-		SccProjectName4 = Service\u0020Interface/DataContracts
-		SccLocalPath4 = Service\u0020Interface\\DataContracts
-		SccProjectUniqueName5 = Service\u0020Interface\\MessageContracts\\MessageContracts.csproj
-		SccProjectName5 = Service\u0020Interface/MessageContracts
-		SccLocalPath5 = Service\u0020Interface\\MessageContracts
-		SccProjectUniqueName6 = Service\u0020Interface\\ServiceContracts\\ServiceContracts.csproj
-		SccProjectName6 = Service\u0020Interface/ServiceContracts
-		SccLocalPath6 = Service\u0020Interface\\ServiceContracts
-		SccProjectUniqueName7 = Service\u0020Interface\\ServiceImplementation\\ServiceImplementation.csproj
-		SccProjectName7 = Service\u0020Interface/ServiceImplementation
-		SccLocalPath7 = Service\u0020Interface\\ServiceImplementation
-		SccProjectUniqueName8 = ServiceDemo\\ServiceDemo.csproj
-		SccProjectName8 = ServiceDemo
-		SccLocalPath8 = ServiceDemo
-	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = ColorOrganizerService.vsmdi
 	EndGlobalSection
