@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,16 +8,25 @@ namespace FujiFilmUSA.Sync.Service.Models
 {
     public class Patch
     {
+        [JsonProperty("patchID")]
         public int PatchID { get; set; }
+        [JsonProperty("colorName")]
         public string ColorName { get; set; }
-
-        public double cmyk_C { get; set; }
-        public double cmyk_M { get; set; }
-        public double cmyk_Y { get; set; }
-        public double cmyk_K { get; set; }
-        public double spot1 { get; set; }
-        public double cie_L { get; set; }
-        public double cie_a { get; set; }
-        public double cie_b { get; set; }
+        [JsonProperty("cmyk_C")]
+        public double Cmyk_C { get; set; }
+        [JsonProperty("cmyk_M")]
+        public double Cmyk_M { get; set; }
+        [JsonProperty("cmyk_Y")]
+        public double Cmyk_Y { get; set; }
+        [JsonProperty("cmyk_K")]
+        public double Cmyk_K { get; set; }
+        [JsonProperty("spot1")]
+        public double Spot1 { get; set; }
+        [JsonProperty("cie_L")]
+        public double Cie_L { get; set; }
+        [JsonProperty("cie_a")]
+        public double Cie_a { get; set; }
+        [JsonProperty("cie_b")]
+        public double Cie_b { get; set; }
     }
 }

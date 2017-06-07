@@ -2,6 +2,7 @@
 using FujiFilmUSA.Sync.Service.Models;
 using FujiFilmUSA.Sync.Service.Utility;
 using Newtonsoft.Json;
+using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,16 +16,15 @@ using System.Web.Http;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
-    public class ChartPDFController : ApiController
+    public class ChartController : ApiController
     {
         [HttpPost]
-        public async Task<IHttpActionResult> GetGraphicsChartFiles(ICCFileParams param)
-        {
-            //ICCFileParams param
-            //string content = string.Empty;
-            //var param = new JavaScriptSerializer().Deserialize<ICCFileParams>(content);
-
-            //ICCFileParams param = new ICCFileParams();
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(BaseResponse<FileResponse>))]
+        [SwaggerResponse(HttpStatusCode.PreconditionFailed, Type = typeof(BaseResponse<FileResponse>))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, Type = typeof(BaseResponse<FileResponse>))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, Type = typeof(BaseResponse<FileResponse>))]
+        public async Task<IHttpActionResult> GenerateFiles(IccFileParams param)
+        {      
             string output = JsonConvert.SerializeObject(param);
             IHttpActionResult result = null;
 
@@ -32,21 +32,23 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             FileResponse responseUpload = new FileResponse();
             try
             {
-                if (param == null || param.wedge == null || param.property == null)
+                if (param == null || param.Patches == null || param.Configurations == null || param.Patches.Count == 0)
                 {
-                    result = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, response));
+                    response.Error.UserMessage = "Insufficient parameters have been provided.";
+                    response.Error.InternalMessage = "Insufficient parameters have been provided.";
+                    result = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, response));
                 }
                 else
                 {
-                    PDFProperty property = new PDFProperty();
-                    property = param.property;
+                    PdfConfigurations property = new PdfConfigurations();
+                    property = param.Configurations;
 
-                    ChartUtility chart = new ChartUtility(property.numberOfPatches, property.chartPages, property.patchWidth,
-                        property.patchHeight, property.chartBorder, property.chartSizeW, property.chartSizeH,
-                        property.rowsPerChart, property.columsPerChart, property.vGap, property.hGap,
-                        property.gapLeval, property.previousL, property.chartName);
+                    ChartUtility chart = new ChartUtility(property.NumberOfPatches, property.ChartPages, property.PatchWidth,
+                        property.PatchHeight, property.ChartBorder, property.ChartSizeW, property.ChartSizeH,
+                        property.RowsPerChart, property.ColumsPerChart, property.Vgap, property.Hgap,
+                        property.GapLeval, property.PreviousL, property.ChartName);
 
-                    var image = await chart.GenerateColorListChart(param.wedge);
+                    var image = await chart.GenerateColorListChart(param.Patches);
 
                     var fileDirPath = System.Web.Hosting.HostingEnvironment.MapPath(ConfigurationManager.AppSettings["ZipDirectoryPath"]);
                     string fileDirPDFPath = fileDirPath + string.Format("{0}", DateTime.Now.ToString("ddMMyyyyhhmmssffftt"));
@@ -58,7 +60,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     }
 
                     DirectoryInfo dirFile = new DirectoryInfo(fileDirPDFPath);
-                    PDFUtility pdfUtil = new PDFUtility();
+                    PdfUtility pdfUtil = new PdfUtility();
                     pdfUtil.IT_MemoryBufferSize = 4800000;
                     pdfUtil.IT_PhotometricInterpretation = "CMYK";
                     pdfUtil.IT_ResolutionUnit = "cm";
@@ -82,38 +84,28 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             GC.Collect();
                             GC.WaitForPendingFinalizers();
                             Directory.Delete(sourcePath, true);
-                        }
-
-
-                        responseUpload.isSuccess = true;
+                        }                        
                         responseUpload.FilePath = destinationPath;
-                        responseUpload.FileName = Path.GetFileName(destinationPath);
-                        responseUpload.Message = "success";
+                        responseUpload.FileName = Path.GetFileName(destinationPath);                        
                     }
                     else
-                    {
-                        responseUpload.isSuccess = false;
-                        responseUpload.FilePath = "";
-                        responseUpload.FileName = "";
-                        responseUpload.Message = "Pdf not created";
+                    {                        
+                        throw new Exception("There is some error while generating PDF files.");
                     }
                     response.Data = responseUpload;
-                    response.status = ResponseStatus.Success;
+                    result = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, response));
                 }
             }
             catch (Exception ex)
             {
                 ErrorLog.WriteErrorLog("From Controller : " + ex.Message);
 
-                responseUpload.isSuccess = false;
                 responseUpload.FilePath = "";
-                responseUpload.Message = ex.Message;
                 response.Data = responseUpload;
-                response.status = ResponseStatus.Business_CustomError;
-                //result = ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.OK, ex));
-            }
-
-            result = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, response));
+                response.Error.InternalMessage = ex.Message;
+                response.Error.UserMessage = "There is some problem.";
+                result = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, response));
+            }            
             return result;
         }
     }

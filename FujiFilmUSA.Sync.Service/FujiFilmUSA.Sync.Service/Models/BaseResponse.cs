@@ -17,6 +17,7 @@ namespace FujiFilmUSA.Sync.Service.Models
             }
         }
 
+        [JsonIgnore]
         public ResponseStatus status { get; set; }
 
         [JsonProperty("data")]
@@ -39,13 +40,13 @@ namespace FujiFilmUSA.Sync.Service.Models
         [JsonIgnore]
         private string _userMessage = string.Empty;
 
-        [JsonProperty("usermessage")]
+        [JsonProperty("userMessage")]
         public string UserMessage { get { return _userMessage; } set { _userMessage = value; } }
 
         [JsonIgnore]
         private string _internalMessage = string.Empty;
 
-        [JsonProperty("internalmessage")]
+        [JsonProperty("internalMessage")]
         public string InternalMessage { get { return _internalMessage; } set { _internalMessage = value; } }
 
         [JsonIgnore]

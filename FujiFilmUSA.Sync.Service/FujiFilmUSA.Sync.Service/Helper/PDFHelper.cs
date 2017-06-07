@@ -8,15 +8,15 @@ using System.Web;
 
 namespace FujiFilmUSA.Sync.Service.Helper
 {
-    public class PDFHelper
+    public class PdfHelper
     {
         public BinaryDataWriter b { get; set; }
         public int n { get; set; }
         public List<string> xref { get; set; }
         public FileStream outFileStream;
-        internal PDFHelper Dictionary;			// indirect objects dictionary or stream dictionary
+        internal PdfHelper Dictionary;			// indirect objects dictionary or stream dictionary
 
-        public PDFHelper(char orientation = 'P', string unit = "mm", string format = "A4", double pWidth = 0, double pHeigth = 0)
+        public PdfHelper(char orientation = 'P', string unit = "mm", string format = "A4", double pWidth = 0, double pHeigth = 0)
         {
             this.n = 0;
             xref = new List<string>();

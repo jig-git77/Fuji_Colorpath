@@ -31,8 +31,8 @@ namespace FujiFilmUSA.Sync.Service.Utility
 
         //counstructor
         public ChartUtility() { }
-        public ChartUtility(int numberOfPatchs, int chartpages, int patchwidth, int patchHeight, 
-            int chartborder, int chartsizeW, int chartsizeH, int rowsperchart, int columsperchart, 
+        public ChartUtility(int numberOfPatchs, int chartpages, int patchwidth, int patchHeight,
+            int chartborder, int chartsizeW, int chartsizeH, int rowsperchart, int columsperchart,
             int vgap, int hgap, int gapLval, double previousL, string chartname)
         {
             //check value passed or not otherwise default
@@ -80,7 +80,7 @@ namespace FujiFilmUSA.Sync.Service.Utility
 
         }
 
-        public async Task<List<Bitmap>> GenerateColorListChart(Wedge wedge)
+        public async Task<List<Bitmap>> GenerateColorListChart(List<Patch> patchs)
         {
             try
             {
@@ -91,13 +91,11 @@ namespace FujiFilmUSA.Sync.Service.Utility
                 chartSizeW = columsPerChart * patchWidth + (chartBorder * 2) + totalVgap;
                 chartSizeH = rowsPerChart * patchHeight + (chartBorder * 2) + totalHgap;
 
-                
-
                 List<Bitmap> listBitMapImage = new List<Bitmap>();
-               int patchid = 0;
+                int patchid = 0;
                 for (int thispage = 1; thispage <= chartPages; thispage++)
                 {
-                    
+
 
                     //create image
                     Bitmap image = new Bitmap(chartSizeW, chartSizeH, PixelFormat.Format32bppArgb);
@@ -125,22 +123,22 @@ namespace FujiFilmUSA.Sync.Service.Utility
 
                     //Get the patches list
                     List<Patch> listPatch = new List<Patch>();
-                    if (wedge.listPatch != null)
-                        listPatch = wedge.listPatch;
+                    if (patchs != null)
+                        listPatch = patchs;
 
                     for (int i = 0; i < rowsPerChart; i++)
                     {
                         for (int j = 0; j < columsPerChart; j++)
                         {
                             Patch patch = listPatch[patchid];
-                            if (j == 0 && patch.cie_L >= gapLeval)
+                            if (j == 0 && patch.Cie_L >= gapLeval)
                             {
                                 int patchX = chartBorder + (j * patchWidth) + ((j + 1) * vGap) - vGap;
                                 int patchY = chartBorder + (i * patchHeight) + ((i + 1) * hGap);
                                 graphics2.FillRectangle(k_Brush, patchX, patchY, vGap, patchHeight);
                             }
 
-                            if (j == (columsPerChart - 1) && patch.cie_L >= gapLeval)
+                            if (j == (columsPerChart - 1) && patch.Cie_L >= gapLeval)
                             {
                                 int patchX = chartBorder + (j * patchWidth) + ((j + 1) * vGap) + patchWidth;
                                 int patchY = chartBorder + (i * patchHeight) + ((i + 1) * hGap);
@@ -148,10 +146,10 @@ namespace FujiFilmUSA.Sync.Service.Utility
 
                             }
 
-                            decimal colorC = Convert.ToDecimal((patch.cmyk_C));
-                            decimal colorM = Convert.ToDecimal((patch.cmyk_M));
-                            decimal colorY = Convert.ToDecimal((patch.cmyk_Y));
-                            decimal colorK = Convert.ToDecimal((patch.cmyk_K));
+                            decimal colorC = Convert.ToDecimal((patch.Cmyk_C));
+                            decimal colorM = Convert.ToDecimal((patch.Cmyk_M));
+                            decimal colorY = Convert.ToDecimal((patch.Cmyk_Y));
+                            decimal colorK = Convert.ToDecimal((patch.Cmyk_K));
 
                             Color color_CMY = Color.FromArgb(255, (int)(255 * (colorY / 100)), (int)(255 * (colorM / 100)), (int)(255 * (colorC / 100)));
                             Color color_K = Color.FromArgb(255, (int)(255 * (colorK / 100)), 0, 0);
@@ -171,14 +169,14 @@ namespace FujiFilmUSA.Sync.Service.Utility
                             patchid = patchid + 1;
                             if (j > 0)
                             {
-                                if (previousL >= gapLeval && patch.cie_L >= gapLeval)
+                                if (previousL >= gapLeval && patch.Cie_L >= gapLeval)
                                 {
                                     int patchX = chartBorder + (j * patchWidth) + ((j + 1) * vGap) - vGap;
                                     int patchY = chartBorder + (i * patchHeight) + ((i + 1) * hGap);
                                     graphics2.FillRectangle(k_Brush, patchX, patchY, vGap, patchHeight);
                                 }
                             }
-                            previousL = patch.cie_L;
+                            previousL = patch.Cie_L;
                         }
                     }
 
@@ -295,7 +293,7 @@ namespace FujiFilmUSA.Sync.Service.Utility
                 }
 
                 // copy modified bytes back
-                 Marshal.Copy(pixels, 0, ptrFirstPixel, pixels.Length);
+                Marshal.Copy(pixels, 0, ptrFirstPixel, pixels.Length);
                 processedBitmap.UnlockBits(bitmapData);
                 processedBitmapK.UnlockBits(bitmapDataK);
             }

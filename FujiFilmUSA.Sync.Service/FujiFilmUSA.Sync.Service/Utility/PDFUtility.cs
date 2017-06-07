@@ -9,9 +9,9 @@ using System.Web;
 
 namespace FujiFilmUSA.Sync.Service.Utility
 {
-    public class PDFUtility
+    public class PdfUtility
     {
-        public PDFUtility()
+        public PdfUtility()
         {
             outputZ = new MemoryStream();
         }
@@ -65,13 +65,14 @@ namespace FujiFilmUSA.Sync.Service.Utility
                 int currentFileName = 1;
                 foreach (var pictureObject in PictureObjects)
                 {
-                    PDFHelper pdf = new PDFHelper('P', "mm", "letter");
+                    PdfHelper pdf = new PdfHelper('P', "mm", "letter");
                     DirectoryInfo SaveInFolderItem = new DirectoryInfo(SaveInFolder.FullName + "/PDFFile" + currentFileName.ToString() + ".pdf");
                     //validate the image
                     returnCode = ValidateParametersAndProperties(SaveInFolderItem, pictureObject, CMYKAlphaChannelPictureObject);
                     if ((returnCode != 0))
                     {
-                        return returnCode;
+                        throw new Exception("Invalid settings for PDF generation.");
+                        //return returnCode;
                     }
                     else
                     {
@@ -173,9 +174,10 @@ namespace FujiFilmUSA.Sync.Service.Utility
 
                                 pdf.b.Close();
                                 currentFileName++;
-                            }
+                            }                            
                         }
                     }
+                    
                 }
                 return 0;                
             }

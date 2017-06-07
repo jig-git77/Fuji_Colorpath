@@ -1,18 +1,22 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace FujiFilmUSA.Sync.Service.Models
 {
-    public class ICCFileParams
+    public class IccFileParams
     {        
-        public ICCFileParams()
+        public IccFileParams()
         {
-            wedge = new Wedge();
-            property = new PDFProperty();
+            Patches = new List<Patch>();
+            Configurations = new PdfConfigurations();
         }
-        public Wedge wedge { get; set; }
-        public PDFProperty property { get; set; }
+
+        [JsonProperty("patches")]
+        public List<Patch> Patches { get; set; }
+        [JsonProperty("configurations")]
+        public PdfConfigurations Configurations { get; set; }
     }
 }
