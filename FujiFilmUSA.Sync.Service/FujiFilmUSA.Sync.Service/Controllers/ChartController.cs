@@ -20,37 +20,98 @@ namespace FujiFilmUSA.Sync.Service.Controllers
     {
         [HttpPost]
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(BaseResponse<FileResponse>))]
-        [SwaggerResponse(HttpStatusCode.PreconditionFailed, Type = typeof(BaseResponse<FileResponse>))]
-        [SwaggerResponse(HttpStatusCode.InternalServerError, Type = typeof(BaseResponse<FileResponse>))]
-        [SwaggerResponse(HttpStatusCode.BadRequest, Type = typeof(BaseResponse<FileResponse>))]
-        public async Task<IHttpActionResult> GenerateFiles(IccFileParams param)
-        {      
-            string output = JsonConvert.SerializeObject(param);
+        [SwaggerResponse(HttpStatusCode.PreconditionFailed, Type = typeof(BaseErrorResponse))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, Type = typeof(BaseErrorResponse))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, Type = typeof(BaseErrorResponse))]
+        public async Task<IHttpActionResult> GenerateFiles([FromBody]IccFileParams param)
+        {
             IHttpActionResult result = null;
-
             BaseResponse<FileResponse> response = new BaseResponse<FileResponse>();
             FileResponse responseUpload = new FileResponse();
+
+            bool isValidParameter = false;
+            string validationMessage = "";
             try
             {
+
                 if (param == null || param.Patches == null || param.Configurations == null || param.Patches.Count == 0)
                 {
-                    response.Error.UserMessage = "Insufficient parameters have been provided.";
-                    response.Error.InternalMessage = "Insufficient parameters have been provided.";
-                    result = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, response));
+                    validationMessage = "Invalid patches have been provided.";
+                    isValidParameter = false;
+                }
+                else if (param.Configurations.NumberOfPatches <= 0)
+                {
+                    validationMessage = "Number of patches provided are insuffiecient";
+                    isValidParameter = false;
+                }
+                else if (param.Configurations.ChartPages <= 0)
+                {
+                    validationMessage = "Provided chart pages are insuffiecient";
+                    isValidParameter = false;
+                }
+                else if (!(param.Configurations.PatchWidth >= 15 && param.Configurations.PatchWidth < 30))
+                {
+                    validationMessage = "Patch width should be between 15 and 30.";
+                    isValidParameter = false;
+                }
+                else if (!(param.Configurations.PatchHeight >= 15 && param.Configurations.PatchHeight < 30))
+                {
+                    validationMessage = "Patch height should be between 15 and 30.";
+                    isValidParameter = false;
+                }
+                else if (!(param.Configurations.RowsPerChart >= 20 && param.Configurations.RowsPerChart < 30))
+                {
+                    validationMessage = "Rows per chart should be between 15 and 30.";
+                    isValidParameter = false;
+                }
+                else if (!(param.Configurations.ColumsPerChart >= 20 && param.Configurations.ColumsPerChart < 30))
+                {
+                    validationMessage = "Columns per chart should be between 15 and 30.";
+                    isValidParameter = false;
+                }
+                else if (param.Configurations.Vgap <= 0)
+                {
+                    validationMessage = "Vgap should be greater than 0.";
+                    isValidParameter = false;
+                }
+                else if (param.Configurations.GapLeval <= 0)
+                {
+                    validationMessage = "GapLeval should be greater than 0.";
+                    isValidParameter = false;
+                }
+                else if (string.IsNullOrEmpty(param.Configurations.ChartName))
+                {
+                    validationMessage = "Chart name is required.";
+                    isValidParameter = false;
+                }
+                else
+                {
+                    isValidParameter = true;
+                }
+
+                if (!isValidParameter)
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.Message = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    result = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));
                 }
                 else
                 {
                     PdfConfigurations property = new PdfConfigurations();
                     property = param.Configurations;
 
+                    //Chart utility object
                     ChartUtility chart = new ChartUtility(property.NumberOfPatches, property.ChartPages, property.PatchWidth,
                         property.PatchHeight, property.ChartBorder, property.ChartSizeW, property.ChartSizeH,
                         property.RowsPerChart, property.ColumsPerChart, property.Vgap, property.Hgap,
                         property.GapLeval, property.PreviousL, property.ChartName);
 
+                    //Generate images from the patches
                     var image = await chart.GenerateColorListChart(param.Patches);
 
-                    var fileDirPath = System.Web.Hosting.HostingEnvironment.MapPath(ConfigurationManager.AppSettings["ZipDirectoryPath"]);
+                    string zipDirFolderName = Convert.ToString(ConfigurationManager.AppSettings["ZipDirectoryPath"]);
+                    var fileDirPath = System.Web.Hosting.HostingEnvironment.MapPath(zipDirFolderName);
                     string fileDirPDFPath = fileDirPath + string.Format("{0}", DateTime.Now.ToString("ddMMyyyyhhmmssffftt"));
                     if (!Directory.Exists(fileDirPDFPath))
                     {
@@ -84,12 +145,16 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             GC.Collect();
                             GC.WaitForPendingFinalizers();
                             Directory.Delete(sourcePath, true);
-                        }                        
-                        responseUpload.FilePath = destinationPath;
-                        responseUpload.FileName = Path.GetFileName(destinationPath);                        
+                        }
+
+                        //createing the path
+                        string zipfolderName = Path.GetDirectoryName(destinationPath).Split(Path.DirectorySeparatorChar).Last();
+                        string fullVirtualPath = string.Format("{0}{1}/{2}", Convert.ToString(ConfigurationManager.AppSettings["ServiceURL"]), zipfolderName, Path.GetFileName(destinationPath));
+                        responseUpload.FilePath = fullVirtualPath;
+                        responseUpload.FileName = Path.GetFileName(destinationPath);
                     }
                     else
-                    {                        
+                    {
                         throw new Exception("There is some error while generating PDF files.");
                     }
                     response.Data = responseUpload;
@@ -98,14 +163,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             catch (Exception ex)
             {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
                 ErrorLog.WriteErrorLog("From Controller : " + ex.Message);
-
-                responseUpload.FilePath = "";
-                response.Data = responseUpload;
-                response.Error.InternalMessage = ex.Message;
-                response.Error.UserMessage = "There is some problem.";
-                result = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, response));
-            }            
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                result = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));
+            }
             return result;
         }
     }

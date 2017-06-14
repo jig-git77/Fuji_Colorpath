@@ -83,8 +83,8 @@ namespace FujiFilmUSA.Sync.Service.Utility
         public async Task<List<Bitmap>> GenerateColorListChart(List<Patch> patchs)
         {
             try
-            {
-                int result = 0;
+            {                
+                int result = 0;                
                 //calculate height and width of image
                 int totalVgap = vGap * (columsPerChart + 2);
                 int totalHgap = hGap * (rowsPerChart + 2);
