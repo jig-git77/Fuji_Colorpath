@@ -81,7 +81,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 }
                 else if (string.IsNullOrEmpty(param.Configurations.ChartName))
                 {
-                    validationMessage = "Chart name is required. ";
+                    validationMessage = "Chart name is required.";
                     isValidParameter = false;
                 }
                 else
