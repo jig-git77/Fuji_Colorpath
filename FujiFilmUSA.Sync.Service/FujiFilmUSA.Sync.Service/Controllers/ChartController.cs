@@ -41,7 +41,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 }
                 else if (param.Configurations.NumberOfPatches <= 0)
                 {
-                    validationMessage = "Number of patches provided are insuffiecient";
+                    validationMessage = "Number of patches provided are insuffiecient ";
                     isValidParameter = false;
                 }
                 else if (param.Configurations.ChartPages <= 0)
