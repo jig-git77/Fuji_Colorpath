@@ -46,7 +46,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 }
                 else if (param.Configurations.ChartPages <= 0)
                 {
-                    validationMessage = "Provided chart pages are insuffiecient";
+                    validationMessage = "Provided chart pages are insuffiecient.";
                     isValidParameter = false;
                 }
                 else if (!(param.Configurations.PatchWidth >= 15 && param.Configurations.PatchWidth < 30))
