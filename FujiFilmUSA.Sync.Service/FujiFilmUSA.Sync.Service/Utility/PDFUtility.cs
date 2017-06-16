@@ -32,33 +32,14 @@ namespace FujiFilmUSA.Sync.Service.Utility
         public async Task<int> SaveAsPDF(DirectoryInfo SaveInFolder, List<Bitmap> PictureObjects, Bitmap CMYKAlphaChannelPictureObject = null)
         {
             int returnCode = 0;
-            int row = 0;
-            int column = 0;
             int width = 0;
             int height = 0;
             int widthMinusOne = 0;
             int heightMinusOne = 0;
             int numChannels = 0;
-            int bufferSize = 0;
-            int memOffset = 0;
-            int totalBytes = 0;
-            int i = 0;
-            long tempPosition = 0;
-            int IFDEntryCount = 0;
-            int IFDOffset = 0;
-            int IFDValueOffset = 0;
-            int IFDWordBoundaryAdjustment = 0;
-            bool writeBitsPerSample = false;
+            int bufferSize = 0;            
+            int totalBytes = 0;                        
             MemoryStream RAMBuffer = new MemoryStream();
-            //BinaryDataWriter RAMBuffer = new BinaryDataWriter();
-            Graphics pictureMask;
-            Graphics blackChannel;
-            string line1 = null;
-            long streamstart = 0;
-            long streamend = 0;
-            long stream1 = 0;
-            long stream2 = 0;
-
             
             try
             {

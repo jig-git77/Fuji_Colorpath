@@ -33,7 +33,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             string validationMessage = "";
             try
             {
-
+                //validation for parameters
                 if (param == null || param.Patches == null || param.Configurations == null || param.Patches.Count == 0)
                 {
                     validationMessage = "Invalid patches have been provided.";
@@ -89,14 +89,15 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     isValidParameter = true;
                 }
 
+                //checks parmeters valid or not
                 if (!isValidParameter)
-                {
+                {                    
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
                     errprResponse.Error.Message = validationMessage;
                     errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
-                    result = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));
+                    result = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
                 }
-                else
+                else//if valid parameters
                 {
                     PdfConfigurations property = new PdfConfigurations();
                     property = param.Configurations;
@@ -113,13 +114,16 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     string zipDirFolderName = Convert.ToString(ConfigurationManager.AppSettings["ZipDirectoryPath"]);
                     var fileDirPath = System.Web.Hosting.HostingEnvironment.MapPath(zipDirFolderName);
                     string fileDirPDFPath = fileDirPath + string.Format("{0}", DateTime.Now.ToString("ddMMyyyyhhmmssffftt"));
+                    //check file directory is exists or not
                     if (!Directory.Exists(fileDirPDFPath))
                     {
+                        //wait for pending processes
                         GC.Collect();
                         GC.WaitForPendingFinalizers();
                         Directory.CreateDirectory(fileDirPDFPath);
                     }
 
+                    //set the parameters which required to write the pdf
                     DirectoryInfo dirFile = new DirectoryInfo(fileDirPDFPath);
                     PdfUtility pdfUtil = new PdfUtility();
                     pdfUtil.IT_MemoryBufferSize = 4800000;
@@ -130,6 +134,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     pdfUtil.IT_XResolutionDenominator = 1;
                     pdfUtil.IT_YResolutionNumerator = 30;
                     pdfUtil.IT_YResolutionDenominator = 1;
+                    
+                    //create the pdf
                     if (await pdfUtil.SaveAsPDF(dirFile, image) == 0)
                     {
                         string sourcePath = fileDirPDFPath;
@@ -137,14 +143,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                         GC.Collect();
                         GC.WaitForPendingFinalizers();
+                        //create zip file of directory containing the pdf files
                         ZipFile.CreateFromDirectory(sourcePath, destinationPath, CompressionLevel.Fastest, true);
-
 
                         if (Directory.Exists(sourcePath))
                         {
                             GC.Collect();
                             GC.WaitForPendingFinalizers();
-                            Directory.Delete(sourcePath, true);
+                            Directory.Delete(sourcePath, true);//delete the directory
                         }
 
                         //createing the path
@@ -155,7 +161,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     }
                     else
                     {
-                        throw new Exception("There is some error while generating PDF files.");
+                        throw new Exception("There is some error while generating PDF files.");//if pdf not create then
                     }
                     response.Data = responseUpload;
                     result = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, response));
@@ -167,7 +173,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 ErrorLog.WriteErrorLog("From Controller : " + ex.Message);
                 errprResponse.Error.Message = ex.Message;
                 errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                result = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));
+                result = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return result;
         }
