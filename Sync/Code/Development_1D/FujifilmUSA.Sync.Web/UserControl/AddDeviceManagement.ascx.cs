@@ -21,6 +21,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string ELicenseReProfileCustomSourceText { get; set; }
         public string ELicenseFullGamutCustomSourceText { get; set; }
         public string ELicenseMultiColorCustomSourceText { get; set; }
+        public string ELicenseSpotLibraryText { get; set; }
 
         #region Private Variables - Globalization
         private const string _recAddDevice = "addDeviceText";
@@ -67,6 +68,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ELicenseReProfileCustomSourceText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.ReProfileCustomSource);
             ELicenseFullGamutCustomSourceText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.FullGamutCustomSource);
             ELicenseMultiColorCustomSourceText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.MultiColorCustomSource);
+            ELicenseSpotLibraryText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary);
 
             if (Page.IsPostBack) return;
 
@@ -167,11 +169,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtReProfileCustomSource.Enabled = false;
                         txtFullGamutCustomSource.Enabled = false;
                         txtMultiColorCustomSource.Enabled = false;
+                        txtSpotLibrary.Enabled = false;
                     }
                     else
                     {
                         cmbLicense.SelectedIndex = 0;
-                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = "0";                      
+                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text = "0";                      
                         txtSync1D.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1D).Count() > 0);
                         txtDlp.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLP).Count() > 0);
                         txtInkOpt.Enabled = (License.LicenseType.Where(x => x == ELicenseType.InkOptimization).Count() > 0);
@@ -180,7 +183,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtCustomSourceProfile.Enabled = (License.LicenseType.Where(x => x == ELicenseType.CustomSourceProfile).Count() > 0);
                         txtReProfileCustomSource.Enabled = (License.LicenseType.Where(x => x == ELicenseType.ReProfileCustomSource).Count() > 0);
                         txtFullGamutCustomSource.Enabled = (License.LicenseType.Where(x => x == ELicenseType.FullGamutCustomSource).Count() > 0);
-                        txtMultiColorCustomSource.Enabled = (License.LicenseType.Where(x => x == ELicenseType.MultiColorCustomSource).Count() > 0); 
+                        txtMultiColorCustomSource.Enabled = (License.LicenseType.Where(x => x == ELicenseType.MultiColorCustomSource).Count() > 0);
+                        txtSpotLibrary.Enabled = (License.LicenseType.Where(x => x == ELicenseType.SpotLibrary).Count() > 0);
                     }
                 }
             }
@@ -232,7 +236,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (txtFullGamutCustomSource.Enabled)
                 Device.LicenseTypeProject.Add(ELicenseType.FullGamutCustomSource, Convert.ToInt32(txtFullGamutCustomSource.Text));
             if (txtMultiColorCustomSource.Enabled)
-                Device.LicenseTypeProject.Add(ELicenseType.MultiColorCustomSource, Convert.ToInt32(txtMultiColorCustomSource.Text));    
+                Device.LicenseTypeProject.Add(ELicenseType.MultiColorCustomSource, Convert.ToInt32(txtMultiColorCustomSource.Text));
+            if (txtSpotLibrary.Enabled)
+                Device.LicenseTypeProject.Add(ELicenseType.SpotLibrary, Convert.ToInt32(txtSpotLibrary.Text));
 
             if (DId == 0) // Add New company
             {
@@ -300,6 +306,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.MultiColorCustomSource:
                             txtMultiColorCustomSource.Text = val.ToString();
+                            break;
+                        case ELicenseType.SpotLibrary:
+                            txtSpotLibrary.Text = val.ToString();
                             break;
                         case ELicenseType.IccProfiling:                            
                             break;

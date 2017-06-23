@@ -78,6 +78,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chkReProfileCustomSource.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.ReProfileCustomSource);
             chkFullGamutCustomSource.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.FullGamutCustomSource);
             chkMultiColorCustomSource.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.MultiColorCustomSource);
+            chkSpotLibrary.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary);
         }
         private void Bindcompany()
         {
@@ -126,7 +127,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             if (Request.QueryString["LicenseId"] == null) //----Only force to check one licensetype when its a new license not in edit mode of existing license-----//
             {
-                if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked && !chkReProfileCustomSource.Checked && !chkFullGamutCustomSource.Checked && !chkMultiColorCustomSource.Checked)
+                if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked && !chkCustomSourceProfile.Checked && !chkReProfileCustomSource.Checked && !chkFullGamutCustomSource.Checked && !chkMultiColorCustomSource.Checked && !chkSpotLibrary.Checked)
                 {
                     fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectLicenseType), false);//Please select any one license type.
                     return;
@@ -163,6 +164,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 License.LicenseType.Add(ELicenseType.FullGamutCustomSource);
             if (chkMultiColorCustomSource.Checked)
                 License.LicenseType.Add(ELicenseType.MultiColorCustomSource);
+            if (chkSpotLibrary.Checked)
+                License.LicenseType.Add(ELicenseType.SpotLibrary);
             
             if (LId == 0) // Add New company
             {
@@ -218,6 +221,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.MultiColorCustomSource:
                             chkMultiColorCustomSource.Checked = true;
                             break;
+                        case ELicenseType.SpotLibrary:
+                            chkSpotLibrary.Checked = true;
+                            break;
                     }
                 });
                 txtLicenseDescription.Text = License.LicenseDesc;
@@ -227,8 +233,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 chkIsActive.Checked = License.IsActive;
                 if (chkIsActive.Checked == false)
                 {
-                    chkSync1D.Checked = chkDlp.Checked = chkInk.Checked = chkInk_Source.Checked = chkSync4D_Certification.Checked = chkCustomSourceProfile.Checked = chkReProfileCustomSource.Checked = chkFullGamutCustomSource.Checked = chkMultiColorCustomSource.Checked = false;
-                    chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = chkMultiColorCustomSource.Enabled = false;
+                    chkSync1D.Checked = chkDlp.Checked = chkInk.Checked = chkInk_Source.Checked = chkSync4D_Certification.Checked = chkCustomSourceProfile.Checked = chkReProfileCustomSource.Checked = chkFullGamutCustomSource.Checked = chkMultiColorCustomSource.Checked = chkSpotLibrary.Checked = false;
+                    chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = chkMultiColorCustomSource.Enabled = chkSpotLibrary.Enabled = false;
                 }
             }
         }
@@ -248,12 +254,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (chkIsActive.Checked == true)
             {
-                chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = chkMultiColorCustomSource.Enabled = true;
+                chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = chkMultiColorCustomSource.Enabled = chkSpotLibrary.Enabled = true;
             }
             else
             {
-                chkSync1D.Checked = chkDlp.Checked = chkInk.Checked = chkInk_Source.Checked = chkSync4D_Certification.Checked = chkCustomSourceProfile.Checked = chkReProfileCustomSource.Checked = chkFullGamutCustomSource.Checked = chkMultiColorCustomSource.Checked = false;
-                chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = chkMultiColorCustomSource.Enabled = false;
+                chkSync1D.Checked = chkDlp.Checked = chkInk.Checked = chkInk_Source.Checked = chkSync4D_Certification.Checked = chkCustomSourceProfile.Checked = chkReProfileCustomSource.Checked = chkFullGamutCustomSource.Checked = chkMultiColorCustomSource.Checked = chkSpotLibrary.Checked = false;
+                chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = chkMultiColorCustomSource.Enabled = chkSpotLibrary.Enabled = false;
             }
         }
         #endregion

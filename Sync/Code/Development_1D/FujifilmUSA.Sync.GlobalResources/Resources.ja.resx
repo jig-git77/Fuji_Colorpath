@@ -210,6 +210,9 @@
   <data name="ELicenseType_MultiColorCustomSourceProfile" xml:space="preserve">
     <value>Multi Color Custom Source_ja</value>
   </data>
+   <data name="ELicenseType_SpotLibrary" xml:space="preserve">
+    <value>Spot Color Library_ja</value>
+  </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>無効</value>
   </data>

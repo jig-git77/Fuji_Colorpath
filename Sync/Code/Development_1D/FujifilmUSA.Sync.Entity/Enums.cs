@@ -411,10 +411,12 @@ namespace FujifilmUSA.Sync.Entity
         FullGamutCustomSource = 8,
         [Description("ELicenseType_MultiColorCustomSourceProfile")]//Multi Color Custom Source
         MultiColorCustomSource = 9,
+        [Description("ELicenseType_SpotLibrary")]//Spot Color Library
+        SpotLibrary = 10,
         [Description("ELicenseType_Validation")]//Color Validation
-        Validation = 10,
+        Validation = 11,
         [Description("ELicenseType_IccProfiling")]//ICC Profiling
-        IccProfiling = 11       
+        IccProfiling = 12       
     }
 
     public enum UserType

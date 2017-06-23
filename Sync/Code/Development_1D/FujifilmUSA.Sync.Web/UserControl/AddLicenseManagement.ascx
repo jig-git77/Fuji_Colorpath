@@ -133,7 +133,8 @@
                                          <asp:CheckBox runat="server" ID="chkCustomSourceProfile" CssClass="checkListBox" Visible="true"/>  
                                          <asp:CheckBox runat="server" ID="chkReProfileCustomSource" CssClass="checkListBox" Visible="true"/>    
                                          <asp:CheckBox runat="server" ID="chkFullGamutCustomSource" CssClass="checkListBox" Visible="true"/> 
-                                         <asp:CheckBox runat="server" ID="chkMultiColorCustomSource" CssClass="checkListBox" Visible="true"/>                     
+                                         <asp:CheckBox runat="server" ID="chkMultiColorCustomSource" CssClass="checkListBox" Visible="true"/>   
+                                         <asp:CheckBox runat="server" ID="chkSpotLibrary" CssClass="checkListBox" Visible="true"/>                  
                                     </div>
                                     <div style="float: left">
                                     </div>
