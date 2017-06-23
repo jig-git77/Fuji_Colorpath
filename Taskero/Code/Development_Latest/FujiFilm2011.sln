@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{B3FFF4E8-5BB9-447E-AA48-DA1E565F2E4D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{95CAD4F3-9F21-4084-93B2-02AD5038BEF6} = {95CAD4F3-9F21-4084-93B2-02AD5038BEF6}
@@ -10,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{148671CB-CF13-4754-AB36-A3A2A0EE5A05}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Web", "Web", "{6E165720-5C04-46FE-A491-A94B80E22A7E}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Web", "Web\", "{6E165720-5C04-46FE-A491-A94B80E22A7E}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = "SAK"
 		SccAuxPath = "SAK"
@@ -34,9 +36,10 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Web", "Web", "{6E165720-5C0
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "1260"
 		VWDDynamicPort = "false"
+		SlnRelativePath = "Web\"
 	EndProjectSection
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TaskeroMobile", "TaskeroMobile", "{CED81264-A9AD-4B8E-8992-0484EB7F789A}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TaskeroMobile", "TaskeroMobile\", "{CED81264-A9AD-4B8E-8992-0484EB7F789A}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = "SAK"
 		SccAuxPath = "SAK"
@@ -59,6 +62,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TaskeroMobile", "TaskeroMob
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "49347"
+		SlnRelativePath = "TaskeroMobile\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject

@@ -30,5 +30,7 @@ namespace FujiFilmSyncExt.Common
         public double Cie_a { get; set; }
         [JsonProperty("cie_b")]
         public double Cie_b { get; set; }
+        [JsonProperty("spot2")]
+        public double Spot2 { get; set; }
     }
 }

@@ -1,13 +1,15 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{B3FFF4E8-5BB9-447E-AA48-DA1E565F2E4D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{95CAD4F3-9F21-4084-93B2-02AD5038BEF6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{148671CB-CF13-4754-AB36-A3A2A0EE5A05}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Web", "Web", "{6E165720-5C04-46FE-A491-A94B80E22A7E}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Web", "Web\", "{6E165720-5C04-46FE-A491-A94B80E22A7E}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = "SAK"
 		SccAuxPath = "SAK"
@@ -31,6 +33,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Web", "Web", "{6E165720-5C0
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "3300"
 		VWDDynamicPort = "false"
+		SlnRelativePath = "Web\"
 	EndProjectSection
 EndProject
 Global
@@ -73,16 +76,18 @@ Global
 		{148671CB-CF13-4754-AB36-A3A2A0EE5A05}.Release|Any CPU.Build.0 = Release|Any CPU
 		{148671CB-CF13-4754-AB36-A3A2A0EE5A05}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{148671CB-CF13-4754-AB36-A3A2A0EE5A05}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Debug|.NET.ActiveCfg = Debug|.NET
-		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Debug|.NET.Build.0 = Debug|.NET
-		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Debug|Any CPU.ActiveCfg = Debug|.NET
-		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Debug|Mixed Platforms.ActiveCfg = Debug|.NET
-		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Debug|Mixed Platforms.Build.0 = Debug|.NET
-		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Release|.NET.ActiveCfg = Debug|.NET
-		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Release|.NET.Build.0 = Debug|.NET
-		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Release|Any CPU.ActiveCfg = Debug|.NET
-		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Release|Mixed Platforms.ActiveCfg = Debug|.NET
-		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Release|Mixed Platforms.Build.0 = Debug|.NET
+		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Debug|.NET.Build.0 = Debug|Any CPU
+		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Release|.NET.ActiveCfg = Debug|Any CPU
+		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Release|.NET.Build.0 = Debug|Any CPU
+		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6E165720-5C04-46FE-A491-A94B80E22A7E}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -129,8 +129,8 @@ namespace FujiFilmSyncExt
         {
             try
             {
-                //string BaseUri = "http://localhost/FujiFilmUSA.Sync.Service/";
-                string BaseUri = "http://115.115.91.47/FujiFilmSyncService/";
+                //string BaseUri = "http://dev.taskero.com/Services/CPSyncPDFService/";
+                string BaseUri = "http://dev.taskero.com/Services/CPSyncPDFService/";
                 string methodUrl = "api/Chart/GenerateFiles";
                 using (HttpClient httpClient = new HttpClient())
                 {
