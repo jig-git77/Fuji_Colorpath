@@ -233,5 +233,50 @@ textarea {
                 </div>
            </td> 
         </tr>
+
+          <tr id="trSpotTarget" runat="server" visible="false">
+            <td>
+                <asp:Panel ID="panelSpotTarget" runat="server" BorderStyle="None" 
+                    meta:resourcekey="panelAddProjectDescriptionResource1">
+                    <table width="100%">
+                        <tr>
+                            <td >
+                                <span><asp:Localize runat="server" Text="Spot Target:" ID="Localize1" meta:resourcekey="locSpotTargetResource1"></asp:Localize></span>
+                            </td>
+                            <td colspan="3" >
+                                <asp:DropDownList ID="cmbSportTargetList" runat="server" CssClass="select" DataValueField="Key"
+                                    DataTextField="Value" OnSelectedIndexChanged="cmbSportTargetList_SelectedIndexChanged"
+                                    AutoPostBack="True" meta:resourcekey="cmbSpotTargetResource1">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 130px">
+                                <span><asp:Localize runat="server" Text="Measurement Mode:" ID="Localize3" 
+                                    meta:resourcekey="locMeasurementResource1"></asp:Localize></span>
+                            </td>
+                            <td colspan="3">
+                                <asp:Label ID="lblMeasMode" runat="server"></asp:Label>
+                            </td>
+                        </tr>                       
+                        <tr>
+                            <td colspan="4" valign="top" >
+                                <span><asp:Localize runat="server" Text="Owner Name / Description:" 
+                                    ID="Localize4" meta:resourcekey="locOwnerResource1"></asp:Localize></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <asp:TextBox ID="txtOwner" runat="server" Width="100%" Height="50px"
+                                    TextMode="MultiLine" Enabled="False" ReadOnly="True" 
+                                    meta:resourcekey="txtOwnerDescriptionResource1"></asp:TextBox>
+                            </td>
+                        </tr>                       
+                       
+                     
+                    </table>
+                </asp:Panel>
+            </td>
+        </tr>
     </table>
 </div>

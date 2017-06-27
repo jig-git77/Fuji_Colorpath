@@ -74,6 +74,8 @@
     <Compile Include="CPSyncV\MetricTargetPreset.cs" />
     <Compile Include="CPSync1D\PrintStandardType.cs" />
     <Compile Include="Spectral.cs" />
+    <Compile Include="CPSpot\SpotProjectLibrary.cs" />
+    <Compile Include="CPSpot\SpotTarget.cs" />
     <Compile Include="TempProjectInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

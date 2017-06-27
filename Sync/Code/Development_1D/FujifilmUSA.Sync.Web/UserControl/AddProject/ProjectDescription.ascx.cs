@@ -32,6 +32,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 LoadInkOrder();
                 LoadDeviceInfoFromSession();
                 LoadProjectInfoFromSession();
+                LoadSpotTargetInfoFromSession();
             }
             if (IsXmfUser)
             {
@@ -57,12 +58,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 && SessionManager.Instance.CurrentDevice.LicenseTypeProject != null
                     && SessionManager.Instance.CurrentDevice.LicenseTypeProject.Count > 0)
             {
-
+              
                 foreach (KeyValuePair<ELicenseType, int> item in SessionManager.Instance.CurrentDevice.LicenseTypeProject)
                 {
-                    ddlLicenseType.Items.Add(new System.Web.UI.WebControls.ListItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = Convert.ToString((int)item.Key) });
+                    //if (Common.Utilities.GetEnumDescriptionAttributeValue(item.Key) != Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary))
+                    //{
+                        ddlLicenseType.Items.Add(new System.Web.UI.WebControls.ListItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = Convert.ToString((int)item.Key) });
+                    //}
                 }
-
                 ddlLicenseType.Items.Insert(0, new System.Web.UI.WebControls.ListItem() { Text = GetResourceString(_recoperationSelectText), Value = "-1" });
                 ddlLicenseType.SelectedIndex = 0;
             }
@@ -77,6 +80,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     locTargetColorSpace.Text = GetResourceString(_reclocTargetColorSpaceNextText);
                 }
             }
+           
         }
 
         private void LoadInkOrder()
@@ -124,6 +128,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lnkbtNext.Visible = true;
                     lnkbtnPrintDescription.Visible = false;
                 }
+            }
+        }
+
+        private void LoadSpotTargetInfoFromSession()
+        {
+            if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            {
+                txtMedia.Text = "none";
+                txtColorant.Text = "none";
+                txtRipSetting.Text = "none";
+                Tr_Media.Visible = false;
+                Tr_Rip.Visible = false;
+                Tr_Colorant.Visible = false;
             }
         }
 

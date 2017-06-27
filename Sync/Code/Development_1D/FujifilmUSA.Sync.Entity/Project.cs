@@ -43,5 +43,7 @@ namespace FujifilmUSA.Sync.Entity
         public int ReTargetProjectID { get; set; }
         public short CurveTypeID { get; set; }
         public bool Is1DMeasurementSmoothing { get; set; }
+        
+        public List<CPSpot.SpotProjectLibrary> SpotProjectLibrary { get; set; }
     }
 }

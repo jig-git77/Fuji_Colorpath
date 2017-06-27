@@ -7,6 +7,7 @@ using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.DataAccess;
 using System.Xml.Linq;
+using FujifilmUSA.Sync.Entity.CPSpot;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -1403,6 +1404,50 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GeReTargetProjectList"));
             return dstReTargetProjectList;
         }
+
+        public List<Entity.CPSpot.SpotProjectLibrary> GetSpotLibraryListByProjectId(int projectId)
+        {
+            var objProjectList = new List<Entity.CPSpot.SpotProjectLibrary>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProjectList =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSpot.GetSpotLibraryList",
+                                new object[]
+                                        {
+                                            projectId
+                                        });
+                    if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
+                    {
+                        objProjectList = dsProjectList.Tables[0].AsEnumerable().
+                            Select(x => new Entity.CPSpot.SpotProjectLibrary()
+                            {
+                                SpotProjectId = DataReader.ReadInt(x, "SpotProjectID"),
+                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                ProjectName = DataReader.ReadString(x, "ProjectName"),
+                           
+                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                             
+                               // TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
+                             
+                                SpotTarget = new Entity.CPSpot.SpotTarget()
+                                {
+                                    SpotTargetID = DataReader.ReadShort(x, "SpotTargetID"),
+                                    SpotTargetName = DataReader.ReadString(x, "SpotTargetName")
+                                },
+                             
+                                CreateDate = DataReader.ReadDate(x, "EndDateTime")
+                              
+                            }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectsByDeviceId"));
+            return objProjectList;
+        }
+
 
         #endregion
 

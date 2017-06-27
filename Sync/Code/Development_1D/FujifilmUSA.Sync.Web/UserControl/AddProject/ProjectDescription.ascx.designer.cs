@@ -193,6 +193,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvcLicenseType;
         
         /// <summary>
+        /// Tr_Media control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow Tr_Media;
+        
+        /// <summary>
         /// locMedia control.
         /// </summary>
         /// <remarks>
@@ -229,6 +238,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvcMediaContainer;
         
         /// <summary>
+        /// Tr_Colorant control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow Tr_Colorant;
+        
+        /// <summary>
         /// locColorant control.
         /// </summary>
         /// <remarks>
@@ -263,6 +281,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvColorantContainer;
+        
+        /// <summary>
+        /// Tr_Rip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow Tr_Rip;
         
         /// <summary>
         /// locRipSettings control.

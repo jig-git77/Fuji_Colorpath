@@ -12,5 +12,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int ProjectId { get; set; }
         int LicenseTypeID { get; set; }
         Project Project { get; set; }
+        List<Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
     }
 }

@@ -159,7 +159,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr id="Tr_Media" runat="server">
                                                 <td>
                                                     <span><asp:Localize runat="server" Text="Media:" ID="locMedia" 
                                                         meta:resourcekey="locMediaResource1"></asp:Localize><span style="color: Red;">*</span></span>
@@ -179,7 +179,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr id="Tr_Colorant" runat="server">
                                                 <td>
                                                     <span><asp:Localize runat="server" Text="Colorant:" ID="locColorant" 
                                                         meta:resourcekey="locColorantResource1"></asp:Localize><span style="color: Red;">*</span></span>
@@ -199,7 +199,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr id="Tr_Rip" runat="server">
                                                 <td>
                                                     <span><asp:Localize runat="server" Text="Rip Settings:" ID="locRipSettings" 
                                                         meta:resourcekey="locRipSettingsResource1"></asp:Localize><span style="color: Red;">*</span></span>

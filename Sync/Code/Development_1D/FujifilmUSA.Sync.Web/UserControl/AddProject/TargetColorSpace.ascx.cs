@@ -48,6 +48,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trTargetLAB.Visible = false;
                     trProjectType.Visible = false;
                 }
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+                {
+                    trListHeader.Visible = false;
+                    trTargetLAB.Visible = false;
+                    trSpotTarget.Visible = true;
+                }
                 LoadProjectInfoFromSession();
             }
         }
@@ -310,6 +316,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindTargetLAB();    //Apply old Target LAB from Main look up table
             btn_PaperApply.Visible = true; 
             btn_PaperClear.Visible = false;
-        }      
+        }
+
+        protected void cmbSportTargetList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

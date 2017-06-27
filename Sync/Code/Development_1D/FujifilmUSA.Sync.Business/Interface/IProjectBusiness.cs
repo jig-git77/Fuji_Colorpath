@@ -39,5 +39,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Guid StoreTemporaryValidationInformation(string jobName, string customer, string pageOrSurface, string jdfJobId, int projectId, Guid tempValidationInfoId, string silverlightPostUrl);
         Entity.CPSyncV.TempValidationInfo GetTempValidationInfo(Guid tempValidationId);
         Dictionary<int, string> GetReTargetProjectList(int currentUserId, int ProjectTypeId, int DeviceId);
+        List<Entity.CPSpot.SpotProjectLibrary> GetSpotLibraryListByProjectId(int projectId);
     }
 }

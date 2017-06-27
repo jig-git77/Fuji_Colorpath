@@ -148,12 +148,31 @@
                             <telerik:RadGrid ID="rgProjectList" AllowFilteringByColumn="True" AllowPaging="True"
                                 PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
                                 OnNeedDataSource="rgProjectList_NeedDataSource" OnItemCommand="rgProjectList_ItemCommand" OnItemCreated="rgProjectList_ItemCreated"
-                                OnItemDataBound="rgProjectList_ItemDataBound" Width="100%" CellSpacing="0" GridLines="None"
+                                OnItemDataBound="rgProjectList_ItemDataBound" OnDetailTableDataBind="rgProjectList_DetailTableDataBind" Width="100%" CellSpacing="0" GridLines="None"
                                 AllowSorting="True">
                                 <GroupingSettings CaseSensitive="False" />
                                 <HeaderStyle Font-Bold="True" />
                                 <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
-                                <MasterTableView DataKeyNames="ProjectId">                                
+                                <MasterTableView DataKeyNames="ProjectId">         
+                                    <DetailTables>
+                                                <telerik:GridTableView DataKeyNames="SpotProjectID" Name="SpotProjects" Width="100%" AutoGenerateColumns="false" CommandItemDisplay="Top" >
+                                                    <CommandItemSettings ShowAddNewRecordButton="false" />
+                                                    <CommandItemTemplate>
+                                                        <asp:Button ID="btnAddSpotLibrary" runat="server" Text="Create New Library" CommandName="AddSpotLibrary" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectID") %>'  />
+                                                    </CommandItemTemplate>
+                                                    <Columns>
+                                                        <telerik:GridBoundColumn SortExpression="ProjectName" HeaderText="Name" HeaderButtonType="TextButton"
+                                                            DataField="ProjectName">
+                                                        </telerik:GridBoundColumn>
+                                                        <telerik:GridBoundColumn SortExpression="SpotTarget.SpotTargetName" HeaderText="Library" HeaderButtonType="TextButton"
+                                                            DataField="SpotTarget.SpotTargetName">
+                                                        </telerik:GridBoundColumn>
+                                                        <telerik:GridBoundColumn SortExpression="CreateDate" HeaderText="Last Active" HeaderButtonType="TextButton"
+                                                            DataField="CreateDate" DataFormatString="{0:MM/dd/yy hh:mm}" ShowFilterIcon="False">
+                                                        </telerik:GridBoundColumn>
+                                                    </Columns>
+                                                </telerik:GridTableView>
+                                    </DetailTables>                              
                                     <CommandItemSettings ExportToPdfText="Export to PDF" />
                                     <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" Visible="True">
                                     </RowIndicatorColumn>

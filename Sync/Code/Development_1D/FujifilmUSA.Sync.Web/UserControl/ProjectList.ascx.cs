@@ -144,6 +144,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     rgProjectList.MasterTableView.FilterExpression = string.Empty;
                     rgProjectList.MasterTableView.Rebind();
                     break;
+                case "AddSpotLibrary":
+                    if (e.CommandArgument != null)
+                    {
+                        //ProjectId = Convert.ToInt32(e.CommandArgument);
+                        //------------Create new Project under this Device-----------------//
+                        SessionManager.Instance.CurrentProject = new Project()
+                        {
+                            DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
+                            IsUsed = true,
+                            CurrentDisplayStatus = ECurrentProjectStatus.New,
+                            LicenseType = ELicenseType.SpotLibrary
+                        };
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
+                       // Response.Redirect("AddProject.aspx?ProjectId=" + ProjectId.ToString());
+                        Response.Redirect("AddProject.aspx?ProjectId=7564");
+                    }
+                    break;
             }
         }
         protected void rgProjectList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
@@ -217,6 +234,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     imgDelete.Visible = false;
                 }
+            }
+        }
+
+        protected void rgProjectList_DetailTableDataBind(object sender, GridDetailTableDataBindEventArgs e)
+        {
+            GridDataItem dataItem = (GridDataItem)e.DetailTableView.ParentItem;
+
+            ProjectId = Convert.ToInt32(dataItem.GetDataKeyValue("ProjectId").ToString());
+            _presenterProjectList.GetSpotLibraryListByProjectId();
+            if (!IsErrorOccured)
+            {
+                //SessionManager.Instance.ProjectList = Projects;
+                e.DetailTableView.DataSource = SpotProjectLibraries;
             }
         }
         #endregion
@@ -381,6 +411,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int DeviceId { get; set; }
         public int LicenseTypeID { get; set; }
         public Project Project { get; set; }
+        public List<Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
+
         #endregion
     }
 }
