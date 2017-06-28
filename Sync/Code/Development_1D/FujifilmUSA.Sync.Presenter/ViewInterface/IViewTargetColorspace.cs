@@ -7,8 +7,10 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     {
         List<Entity.CPSync1D.PrintStandardType> PrintStandardTypeList { get; set; }
         List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
+        List<Entity.CPSpot.SpotTarget> SpotTargetList { get; set; }
         int PrintstandardTypeId { get; set; }
         bool IsSync1DType { get; }
+        bool IsSpotTargetType { get; }
         int ProjectTypeId { get; set; }
     }
 }

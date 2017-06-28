@@ -38,6 +38,15 @@ textarea {
 <asp:Localize runat="server" Text="Description" ID="locDescription" 
         meta:resourcekey="locDescriptionResource1"></asp:Localize>
 </span></asp:LinkButton>
+ <asp:LinkButton ID="lnkbtNext" runat="server" CssClass="button" 
+        ValidationGroup="vgDescription" onclick="lnkbtnNext_Click" Visible="false">
+        <span>
+            <asp:Image ID="Image2" runat="server" 
+        ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
+            <asp:Localize runat="server" ID="Localize5" Text="Next" 
+                meta:resourcekey="locNextResource1"></asp:Localize>
+        </span>
+    </asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
@@ -244,8 +253,8 @@ textarea {
                                 <span><asp:Localize runat="server" Text="Spot Target:" ID="Localize1" meta:resourcekey="locSpotTargetResource1"></asp:Localize></span>
                             </td>
                             <td colspan="3" >
-                                <asp:DropDownList ID="cmbSportTargetList" runat="server" CssClass="select" DataValueField="Key"
-                                    DataTextField="Value" OnSelectedIndexChanged="cmbSportTargetList_SelectedIndexChanged"
+                                <asp:DropDownList ID="cmbSpotTargetList" runat="server" CssClass="select" DataValueField="Key"
+                                    DataTextField="Value" OnSelectedIndexChanged="cmbSpotTargetList_SelectedIndexChanged"
                                     AutoPostBack="True" meta:resourcekey="cmbSpotTargetResource1">
                                 </asp:DropDownList>
                             </td>

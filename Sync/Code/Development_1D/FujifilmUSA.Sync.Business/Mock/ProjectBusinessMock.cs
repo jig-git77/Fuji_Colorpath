@@ -89,7 +89,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<ObserverType>();
         }
 
-        public List<MeasurementDevice> GetMeasurementDeviceList(int loginId, int deviceId)
+        public List<MeasurementDevice> GetMeasurementDeviceList(int loginId, int deviceId, bool isSpotTargetType = false)
         {
             return new List<MeasurementDevice>();
         }
@@ -164,6 +164,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         public List<Entity.CPSpot.SpotProjectLibrary> GetSpotLibraryListByProjectId(int projectId)
         {
             return new List<Entity.CPSpot.SpotProjectLibrary>();
+        }
+
+        public List<Entity.CPSpot.SpotTarget> GetSpotTargetList(int currentUserId, bool isSpotTargetType)
+        {
+            return new List<Entity.CPSpot.SpotTarget>();
         }
         #endregion
 

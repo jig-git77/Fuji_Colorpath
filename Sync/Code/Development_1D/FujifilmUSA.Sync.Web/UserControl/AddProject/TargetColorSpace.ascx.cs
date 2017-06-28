@@ -22,6 +22,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         private const string _vsPrintStandardType = "vsPrintStandardType";
+        private const string _vsSpotTarget = "vsSpotTarget";
+
         private PresenterTargetColorspace _presenterTargetColorspace;
         #endregion
         public TargetColorSpace()
@@ -42,6 +44,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 btn_PaperClear.Visible = false;
                 BindProfileSource();
                 BindPCSDataType(); //Load PCSDataType 
+                BindSpotTarget(); //Load Spot Target List
                 PanelProjectType.GroupingText = "<b>" + GetResourceString("PanelProjectType") + "</b>";
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
                 {
@@ -90,18 +93,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
             }
             else
-            { 
-                if(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
+            {
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
                     SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
-                else if(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
+                else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
                     SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.InkOptimization;
             }
             SessionManager.Instance.CurrentProject.PCSDataTypes = (PCSDataTypes)Convert.ToInt16(cmbPCSDataType.SelectedValue); //PCSDataType Selection 
-
+            
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
-            ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
 
-           
+            ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
 
         protected void cmbPrintStandardType_SelectedIndexChanged(object sender, EventArgs e)
@@ -203,6 +205,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             BindPCSDataType();
             cmbPCSDataType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.PCSDataTypes).ToString(); //PCSDataType Selection
+
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            {
+                lnkbtNext.Visible = true;
+                lnkbtnTargetColorSpace.Visible = false;
+            }
         }
 
         private void BindProfileSource()
@@ -295,11 +303,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        private void BindSpotTarget()
+        {
+            if (ViewState[_vsSpotTarget] != null) return;
+
+            _presenterTargetColorspace.GetSpotTargetList();
+            if (!IsErrorOccured)
+            {
+                cmbSpotTargetList.DataValueField = "SpotTargetID";
+                cmbSpotTargetList.DataTextField = "SpotTargetName";
+                ViewState[_vsSpotTarget] = SpotTargetList;
+                cmbSpotTargetList.DataSource = (List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget];
+                cmbSpotTargetList.DataBind();
+                cmbSpotTargetList_SelectedIndexChanged(null, null);
+            }
+        }
+
         #endregion
 
         #region IViewTargetColorspace Members
         public List<Entity.CPSync1D.PrintStandardType> PrintStandardTypeList { get; set; }
         public List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
+        public List<Entity.CPSpot.SpotTarget> SpotTargetList { get; set; }
         public int PrintstandardTypeId { get; set; }
         public int ProjectTypeId { get; set; }
         public bool IsSync1DType
@@ -307,6 +332,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             get
             {
                 return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D);
+            }
+        }
+        public bool IsSpotTargetType
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary);
             }
         }
         #endregion        
@@ -318,8 +350,44 @@ namespace FujifilmUSA.Sync.Web.UserControl
             btn_PaperClear.Visible = false;
         }
 
-        protected void cmbSportTargetList_SelectedIndexChanged(object sender, EventArgs e)
+        protected void cmbSpotTargetList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ViewState[_vsSpotTarget] != null)
+            {
+                txtOwner.Text = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).OwnerName;
+                lblMeasMode.Text = "M" + ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).MeasurementMode;
+            }
+        }
+
+        protected void lnkbtnNext_Click(object sender, EventArgs e)
+        {
+
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //Skip Profiler Options page for Spot Target project type
+            {
+                SessionManager.Instance.CurrentProject.SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary()
+                {
+                    SpotTarget = new Entity.CPSpot.SpotTarget()
+                    {
+                        SpotTargetID = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.SourceProfileId,
+                        SpotTargetName = lblSourceProfileName.Text
+                    }
+                };
+                //-----Pass Dummy data---------//
+                SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = 0;
+                SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
+                SessionManager.Instance.CurrentProject.ProjectOption.Add(new ProjectOption()
+                {
+                    ProfileTypeId = 0,
+                    ProfilerOptionId = 0,
+                    ProfilerOptionValue = "",
+                });
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
+            }
+            else
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
+            }
+            ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
 
         }
     }

@@ -91,7 +91,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 lbtnMeasure.Visible = false;
                 lnkbtnMeasurementSetup.Visible = true;
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //-----If Custom Source Profile / ReProfile Custom Source / Full Gamut Custom Source project type then rename Validation Setup to Next button---//
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //-----If Custom Source Profile / ReProfile Custom Source / Full Gamut Custom Source project type then rename Validation Setup to Next button---//
                 {
                     locValidationSetup.Text = GetResourceString(_reclocValidationSetupNextText);
                 }
@@ -207,7 +207,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             #endregion
 
             //Set next navigation level as ValidationSetup
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
                 SessionManager.Instance.CurrentProject.EnabledValidation = false;
@@ -296,6 +296,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     cmbMeasurementCount.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementCount.ToString();
                     trMeasCount.Visible = true;
                 }
+            }
+
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            {
+                Tr_Charts.Visible = false;
             }
         }
 
@@ -563,7 +568,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int MetricTargetPresetID { get; set; }
         public Dictionary<int, string> ReTargetProjectList { get; set; }
         public byte[] ChartPreview { get; set; }
+
+        public bool IsSpotTargetType
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary);
+            }
+        }
         #endregion
-                      
+
+     
     }
 }

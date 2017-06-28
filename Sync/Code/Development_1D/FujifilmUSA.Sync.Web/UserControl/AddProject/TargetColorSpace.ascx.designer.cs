@@ -85,6 +85,33 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locDescription;
         
         /// <summary>
+        /// lnkbtNext control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkbtNext;
+        
+        /// <summary>
+        /// Image2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image2;
+        
+        /// <summary>
+        /// Localize5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize5;
+        
+        /// <summary>
         /// fujiStatusbar control.
         /// </summary>
         /// <remarks>
@@ -400,13 +427,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize Localize1;
         
         /// <summary>
-        /// cmbSportTargetList control.
+        /// cmbSpotTargetList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbSportTargetList;
+        protected global::System.Web.UI.WebControls.DropDownList cmbSpotTargetList;
         
         /// <summary>
         /// Localize3 control.

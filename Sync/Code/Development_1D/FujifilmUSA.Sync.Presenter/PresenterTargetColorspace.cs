@@ -25,5 +25,11 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewTargetColorspace.ErrorOccured;
             _viewTargetColorspace.ProjectTargetLABList = projectBusiness.GetProjectTargetLAB(_viewTargetColorspace.PrintstandardTypeId, _viewTargetColorspace.ProjectTypeId);
         }
+        public void GetSpotTargetList()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewTargetColorspace.ErrorOccured;
+            _viewTargetColorspace.SpotTargetList = projectBusiness.GetSpotTargetList(_viewTargetColorspace.CurrentUserId, _viewTargetColorspace.IsSpotTargetType);
+        }
     }
 }

@@ -539,6 +539,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         public int MetricTargetPresetID { get; set; }
         public Dictionary<int, string> ReTargetProjectList { get; set; }
         public byte[] ChartPreview { get; set; }
+        public bool IsSpotTargetType
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary);
+            }
+        }
         #endregion
 
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)

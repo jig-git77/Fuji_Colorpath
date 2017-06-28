@@ -1355,7 +1355,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         public Dictionary<int, string> ReTargetProjectList { get; set; }
         public byte[] ChartPreview { get; set; }
-
+        public bool IsSpotTargetType
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary);
+            }
+        }
         #endregion
 
     }

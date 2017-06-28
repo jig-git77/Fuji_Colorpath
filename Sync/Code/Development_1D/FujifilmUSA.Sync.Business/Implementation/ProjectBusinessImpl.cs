@@ -1005,27 +1005,27 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstObserverTypeList;
         }
 
-        public List<MeasurementDevice> GetMeasurementDeviceList(int loginId, int deviceId)
+        public List<MeasurementDevice> GetMeasurementDeviceList(int loginId, int deviceId, bool isSpotTargetType = false)
         {
             var measurementDevice = new List<MeasurementDevice>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
                     var dsMeasurementDevice = DataAccessFactory.Instance.GetDsResult("CP.GetMeasurementDeviceList",
-                                                                                     new object[] { loginId, deviceId });
+                                                                                     new object[] { loginId, deviceId, isSpotTargetType });
                     measurementDevice = dsMeasurementDevice.Tables[0].AsEnumerable().
                         Select(x =>
                                new MeasurementDevice()
+                               {
+                                   MeasurementDeviceId = DataReader.ReadShort(x, "MeasurementDeviceID"),
+                                   InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
+                                   InstrumentType = new InstrumentType()
                                    {
-                                       MeasurementDeviceId = DataReader.ReadShort(x, "MeasurementDeviceID"),
                                        InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
-                                       InstrumentType = new InstrumentType()
-                                                            {
-                                                                InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
-                                                                InstrumentName = DataReader.ReadString(x, "InstrumentName")
-                                                            },
-                                       SerialNumber = DataReader.ReadString(x, "MeasurementDevi")
-                                   }).ToList();
+                                       InstrumentName = DataReader.ReadString(x, "InstrumentName")
+                                   },
+                                   SerialNumber = DataReader.ReadString(x, "MeasurementDevi")
+                               }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementDeviceList"));
             return measurementDevice;
@@ -1448,6 +1448,38 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return objProjectList;
         }
 
+        public List<Entity.CPSpot.SpotTarget> GetSpotTargetList(int currentUserId, bool isSpotTargetType)
+        {
+            var dstSpotTargetList = new List<Entity.CPSpot.SpotTarget>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsSpotTargetList =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "[CPSpot].[GetSpotTargetList]",
+                                new object[] { currentUserId, isSpotTargetType });
+                    if (dsSpotTargetList != null && dsSpotTargetList.Tables.Count > 0)
+                    {
+                        dstSpotTargetList = (dsSpotTargetList.Tables[0].AsEnumerable().Select(
+                            spotTarget => new Entity.CPSpot.SpotTarget()
+                            {
+                                SpotTargetID = DataReader.ReadShort(spotTarget, "SpotTargetID"),
+                                SpotTargetName = DataReader.ReadString(spotTarget, "SpotTargetName"),
+                                MeasurementMode = DataReader.ReadShort(spotTarget, "MeasurementMode"),
+                                OwnerName = DataReader.ReadString(spotTarget, "OwnerName"),
+                                Company = new Company()
+                                {
+                                    CompanyId = DataReader.ReadShort(spotTarget, "CompanyID"),
+                                    CompanyName = DataReader.ReadString(spotTarget, "CompanyName")
+                                }
+                            })).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotTargetList"));
+            return dstSpotTargetList;
+        }
 
         #endregion
 

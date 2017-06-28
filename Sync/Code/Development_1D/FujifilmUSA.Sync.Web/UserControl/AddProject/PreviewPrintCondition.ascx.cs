@@ -95,7 +95,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lblRipSettings.Text = SessionManager.Instance.CurrentProject.PrintCondition.RipSettings;
             lblNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
             lblTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
-            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.FullGamutCustomSource)
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.FullGamutCustomSource && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
             {
                 lblTargetPrintCondition.Text = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandard;
                 lblSourceProfile.Text = SessionManager.Instance.CurrentProject.SourceProfile.ProfileName;
@@ -112,9 +112,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lnkbtnSavePrintCondition.Visible = false;
                 }
             }
-            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //---If "Custom Source Profile" / "ReProfile Custom Source" / "Full Gamut Source Profile" project type, then skip Validation setup page.
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource ) //---If "Custom Source Profile" / "ReProfile Custom Source" / "Full Gamut Source Profile" project type, then skip Validation setup page.
             {
-               V_ReferenceChartTypeId = MetricTargetPresetId = 0;
+                V_ReferenceChartTypeId = MetricTargetPresetId = 0;
                 V_MeasurementDeviceId = 0;
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource)
                 {
@@ -122,9 +122,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
                 ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
-                ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
                 MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId;
-                Opt_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
+               
+                    ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
+                    Opt_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
+               
+                if (SessionManager.Instance.CurrentOptimizeRun != null && SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                {
+                    lnkbtnSavePrintCondition.Visible = false;
+                }
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            {
+                V_ReferenceChartTypeId = MetricTargetPresetId = 0;
+                V_MeasurementDeviceId = 0;
+
+                Div_TargetColorSpace.Visible = false;
+
+                IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
+                ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
+                MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId;
+
+                ReferenceChartTypeId = 0;
+                Opt_ReferenceChartTypeId = 0;
+
                 if (SessionManager.Instance.CurrentOptimizeRun != null && SessionManager.Instance.CurrentOptimizeRun.HasProfile)
                 {
                     lnkbtnSavePrintCondition.Visible = false;
@@ -158,6 +179,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Div_OptChart.Visible = false;
                 Div_ValidationChart.Visible = false;
             }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            {
+                if (!IsErrorOccured)
+                {
+                    lblMeasurementDevice.Text = Data["MeasurementDeviceId"];
+                    lblIlluminant.Text = Data["illuminantId"];
+                    lblObserver.Text = Data["observerTypeId"];
+                    trUVSettings.Visible = (lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis))
+                                          || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro2))
+                                          || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2))
+                                          || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.eXact)));
+                    lblUVSettings.Text = "M" + SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode.ToString();
+                    dvMetricPreset.Visible = false;
+                    dvOptionPreset.Visible = false;
+                    Div_Spectrophotometer_Options.Visible = true;
+                    Div_Alignment_Chart.Visible = false;
+                    Div_OptChart.Visible = false;
+                    Div_ValidationChart.Visible = false;
+                }
+
+            }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource)  //---If "Custom Source Project" / "ReProfile Custom Source" / "Full Gamut Source Profile" project types
             {
                 if (!IsErrorOccured)
@@ -180,7 +222,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                            || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro2))
                                            || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2))
                                            || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.eXact)));
-                    //lblUVSettings.Text = Enum.GetName(typeof(EUVIncludedMode), SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode);
                     lblUVSettings.Text = "M" + SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode.ToString();
                     lblEnableValidation.Text = SessionManager.Instance.CurrentProject.EnabledValidation.ToString();
                 }

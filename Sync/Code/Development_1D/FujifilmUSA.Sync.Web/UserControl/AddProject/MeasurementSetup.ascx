@@ -48,6 +48,7 @@
 <asp:Localize runat="server" Text="Profiler Options" ID="locProfilerOptions" 
         meta:resourcekey="locProfilerOptionsResource1"></asp:Localize>
 </span></asp:LinkButton>
+
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <div class="clear">
@@ -183,7 +184,7 @@
                 </div>
             </td>
         </tr>
-        <tr>
+        <tr id="Tr_Charts" runat="server">
             <td>
                 <div style="display: block;" class="contantbox tabcontant">
                     <div class="section_top">
