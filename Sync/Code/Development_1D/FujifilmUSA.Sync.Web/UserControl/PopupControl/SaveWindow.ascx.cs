@@ -29,7 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If  "Ink Optimization Source" project type, then don't display Download Chart option (since there is no charts in this type of project).
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If  "Ink Optimization Source" / "Spot Project Library" project type, then don't display Download Chart option (since there is no charts in this type of project).
                 {
                     Tr_DownloadChart.Visible = false;
                     Page.Title = GetResourceString(_recSaveProjInkOptSource);
@@ -55,6 +55,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured)
                 {
                     _presenterSaveWindow.GetProjectDetail();
+                    WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
+                    SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
+                    Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
+                }
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If  "Spot Target Library" project type
+            {
+                _presenterSaveWindow.SaveProject_SpotTargetProject(); //---Call save project function, w/o any ref charts details
+                if (!IsErrorOccured)
+                {
+                    _presenterSaveWindow.GetProjectDetail_SpotProject();
                     WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
                     SessionManager.Instance.CurrentProject = Project;
                     SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();

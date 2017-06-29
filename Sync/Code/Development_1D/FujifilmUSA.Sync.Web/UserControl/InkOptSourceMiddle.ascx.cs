@@ -54,10 +54,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource) //---If  "Ink Optimization Source" project type
             {
                 lbtnReTargetProject.Visible = false;
+                lbtnSpotProjectChartCreation.Visible = false;
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            {
+                lbtnReTargetProject.Visible = false;
+                lbtnDownloadAndSaveDLP.Visible = false;
+                lbtnSpotProjectChartCreation.Visible = true;
             }
             else
             {
                 lbtnDownloadAndSaveDLP.Visible = false;
+                lbtnSpotProjectChartCreation.Visible = false;
             }
         }
 
@@ -111,7 +119,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             EndDate = System.DateTime.Now;
-        
+
             _presenterAnalyze.CreateReTargetProject();
 
             if (!IsErrorOccured)
@@ -134,6 +142,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 WebLogActivityManager.LogActivity(LogActivityType.CreateDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
                                               Request.UserHostAddress);
             }
+        }
+
+        protected void lbtnSpotProjectChartCreation_Click(object sender, EventArgs e)
+        {
+            //----------Place chart generation service code here--------------//
+            Response.Write("1");
         }
 
         #region IViewAnalyze Members
@@ -215,7 +229,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public bool IsAverageOfMeasurements { get; set; }
         public bool Is1DMeasurementSmoothing { get; set; }
 
-        #endregion        
+        #endregion
 
+       
     }
 }

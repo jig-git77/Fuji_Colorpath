@@ -368,9 +368,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     SpotTarget = new Entity.CPSpot.SpotTarget()
                     {
-                        SpotTargetID = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.SourceProfileId,
-                        SpotTargetName = lblSourceProfileName.Text
-                    }
+                        SpotTargetID = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetID,
+                        SpotTargetName = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetName
+                    },
+                    ProjectId = 7564
                 };
                 //-----Pass Dummy data---------//
                 SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = 0;

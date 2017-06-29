@@ -19,5 +19,6 @@ namespace FujifilmUSA.Sync.Entity
         public KeyValuePair<short, string> ReferenceChartType { get; set; }
         public string DlpName { get; set; }
         public string LastDlpName { get; set; }
+        public byte[] NamedColorProfile { get; set; }
     }
 }

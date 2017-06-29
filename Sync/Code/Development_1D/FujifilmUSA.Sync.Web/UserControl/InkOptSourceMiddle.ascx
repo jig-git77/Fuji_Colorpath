@@ -53,6 +53,15 @@
                             </span>
                         </asp:LinkButton>
                     </div>
+                     <div class="Information_divAnalyze">
+                        <asp:LinkButton ID="lbtnSpotProjectChartCreation" runat="server" CssClass="button" 
+                            onclick="lbtnSpotProjectChartCreation_Click">                           
+                            <span>
+                                <asp:Image ID="Image3" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
+                                <asp:Localize runat="server" Text="Create Name Color Profile & Generate Chart" ID="Localize1" meta:resourcekey="locSpotProjectChartCreationResource1"></asp:Localize>
+                            </span>
+                        </asp:LinkButton>
+                    </div>
 
                 </div>
          

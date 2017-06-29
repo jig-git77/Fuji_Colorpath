@@ -1481,6 +1481,230 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstSpotTargetList;
         }
 
+        public int SaveSpotProject(Project project)
+        {
+            int savedProjectId = 0;
+            if (project.ProjectId > 0)
+            {
+                #region Update Project
+                Common.ImplementBusinessLogic(
+                    () =>
+                    {
+                        DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure("CPSpot.UpdateSpotProject",
+                                             new object[]
+                                                 {
+                                                     project.ProjectId,
+                                                     project.SpotTargetProject.SpotTarget.SpotTargetID,
+                                                     project.ProjectName,
+                                                     project.PrintCondition.TechnicianName,
+                                                     project.PrintCondition.Notes,
+                                                     project.MeasurementSetting.ObserverType,
+                                                     project.MeasurementSetting.Illuminant,
+                                                     (project.MeasurementSetting.UVMode == -1 ? 2 : project.MeasurementSetting.UVMode),  //---For older project who doen't have UVMode, so by default it will pass -1 because of NULL, so in that case make it 2 "UVCut"
+                                                     (project.MeasurementSetting.MeasurementCount == -1 ? 0 : project.MeasurementSetting.MeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
+                                                     project.MeasurementSetting.ReadMode,
+                                                     project.MeasurementSetting.MeasurementDeviceId
+                                                
+                                                 });
+                        savedProjectId = project.ProjectId;
+                    },
+                    new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveProject"));
+                #endregion
+            }
+            else
+            {
+                #region Insert Project
+                var outParam = new Parameters() { ParameterName = "@ProjectID", Type = DbType.Int32 };
+                Common.ImplementBusinessLogic(
+                    () =>
+                    {
+                        DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure("CPSpot.CreateSpotProject",
+                                             new List<Parameters>()
+                                                 {
+                                                     new Parameters() {ParameterName = "@CPDeviceID", Type = DbType.Int32, Value = project.DeviceId},
+                                                     new Parameters() {ParameterName = "@SpotTargetID", Type = DbType.Int32, Value = project.SpotTargetProject.SpotTarget.SpotTargetID},
+                                                     new Parameters() {ParameterName = "@ProjectName", Size = 30, Type = DbType.String, Value = project.ProjectName},
+                                                     new Parameters()
+                                                         {
+                                                             ParameterName = "@CreateDate",
+                                                             Type = DbType.DateTime,
+                                                             Value = project.CreateDate.AddMilliseconds(-project.CreateDate.Millisecond)
+                                                         },
+                                                     new Parameters() {ParameterName = "@TechnicalName", Size = 30, Type = DbType.String, Value = project.PrintCondition.TechnicianName},
+                                                     new Parameters() {ParameterName = "@Notes", Size = 500, Type = DbType.String, Value = project.PrintCondition.Notes},
+
+                                                     new Parameters() {ParameterName = "@ObserverType", Type = DbType.Int16, Value = project.MeasurementSetting.ObserverType},
+                                                     new Parameters() {ParameterName = "@Illuminant", Type = DbType.Int16, Value = project.MeasurementSetting.Illuminant},
+                                                     new Parameters() {ParameterName = "@UVMode", Type = DbType.Int16, Value = project.MeasurementSetting.UVMode},
+                                                     new Parameters() {ParameterName = "@MeasurementCount", Type = DbType.Int16, Value = project.MeasurementSetting.MeasurementCount},
+                                                     new Parameters() {ParameterName = "@ReadMode", Type = DbType.String, Value = project.MeasurementSetting.ReadMode},
+
+                                                     new Parameters()
+                                                         {ParameterName = "@MeasurementDeviceID", Type = DbType.Int16, Value = project.MeasurementSetting.MeasurementDeviceId},
+                                                     new Parameters() {ParameterName = "@Status", Type = DbType.Int32, Value = Convert.ToInt32(EOptimizeRunStatus.Open)},
+                                                     new Parameters() {ParameterName = "@StartDateTime", Type = DbType.DateTime, Value = DateTime.Now},
+                                                     new Parameters() {ParameterName = "@LicenseTypeID", Type = DbType.Int32, Value = (int)project.LicenseType},
+                                                     new Parameters() {ParameterName = "@MasterProjectID", Type = DbType.Int32, Value = project.SpotTargetProject.ProjectId}
+                                                 },
+                                             new List<Parameters>()
+                                                 {
+                                                     outParam
+                                                 });
+                    },
+                    new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveProject"));
+                if (outParam.Value != null)
+                {
+                    var projectId = Convert.ToInt32(outParam.Value);
+                    savedProjectId = projectId;
+                }
+                #endregion
+            }
+            return savedProjectId;
+        }
+
+        public Project GetProjectDetail_SpotProject(int projectId)
+        {
+            var project = new Project();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProject =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSpot.GetSpotProjectDetail",
+                                new object[]
+                                        {
+                                            projectId
+                                        });
+                    if (dsProject.Tables[0].Rows.Count > 0)
+                    {
+                        project = new Project()
+                        {
+                            DeviceId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CPDeviceID"),
+                            LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID")
+                        };
+
+                        project.SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary()
+                        {
+                            SpotProjectId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "SpotProjectID"),
+                            ProjectId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjectID"),
+                            DeviceId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CPDeviceID"),
+                            ProjectName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProjectName"),
+                            CreateDate = DataReader.ReadDate(dsProject.Tables[0].Rows[0], "CreateDate"),
+                            CurrDlpId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CurrDLPID"),
+                            IsUsed = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "IsUsed"),
+                            Status = (EOptimizeRunStatus)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjStatus"),
+                            SpotTarget = new Entity.CPSpot.SpotTarget()
+                            {
+                                SpotTargetID = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "SpotTargetID"),
+                                SpotTargetName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "SpotTargetName"),
+                                OwnerName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "OwnerName"),
+                                MeasurementMode = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MeasurementMode")
+                            }
+                        };
+                        if (dsProject.Tables[1].Rows.Count > 0)
+                        {
+                            project.PrintCondition =
+                                new PrintCondition()
+                                {
+                                    TechnicianName = DataReader.ReadString(dsProject.Tables[1].Rows[0], "TechnicianName"),
+                                    Notes = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Notes")
+                                };
+                        }
+                        if (dsProject.Tables[2].Rows.Count > 0)
+                        {
+                            project.MeasurementSetting =
+                                new MeasurementSetting()
+                                {
+                                    ObserverType = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ObserverType"),
+                                    Illuminant = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "Illuminant"),
+                                    UVMode = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "UVMode"),
+                                    MeasurementCount = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementCount"),
+                                    ReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "ReadMode"),
+                                    MeasurementDeviceId =
+                                            DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementDeviceID"),
+                                    InstrumentTypeId =
+                                            DataReader.ReadShort(dsProject.Tables[2].Rows[0], "InstrumentTypeID")
+                                };
+                        }
+                        project.OptimizeRuns = dsProject.Tables[3].AsEnumerable().
+                            Select(x => new OptimizeRun()
+                            {
+                                OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
+                                RunName = ((EOptimizeRunStatus)DataReader.ReadInt(x, "Status")) == EOptimizeRunStatus.Closed
+                                                              ? (GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("DLPText") + " " +
+                                                                 Convert.ToDateTime(DataReader.ReadDate(x, "EndDateTime")).ToString("MMdd") + " " +
+                                                                 Convert.ToDateTime(DataReader.ReadDate(x, "EndDateTime")).ToString("HH:mm"))
+                                                              : ((EOptimizeRunStatus)DataReader.ReadInt(x, "Status")) == EOptimizeRunStatus.Open
+                                                                    ? GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("OpenStatusText")
+                                                                    : GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString(
+                                                                        "CertificationStatusText"),
+                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "Status"),
+                                StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
+                                EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
+                                MasterRunId = DataReader.ReadInt(x, "MasterRunID"),
+                                HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
+                                HasProfile = DataReader.ReadBoolean(x, "HasProfile"),
+                                NamedColorProfile = DataReader.ReadByteArray(x, "NamedColorProfile")
+                            }).ToList();
+
+
+                        int index = 0;
+                        string LastDLPName = "";
+                        project.OptimizeRuns.ForEach(x =>
+                        {
+                            if (index > 0)
+                            {
+                                LastDLPName = project.ProjectName + " DLP" +
+                                              project.OptimizeRuns[index - 1].EndDateTime.Value.Month.ToString("00") +
+                                              project.OptimizeRuns[index - 1].EndDateTime.Value.Day.ToString("00") +
+                                              project.OptimizeRuns[index - 1].EndDateTime.Value.Hour.ToString("00") +
+                                              project.OptimizeRuns[index - 1].EndDateTime.Value.Minute.ToString("00") +
+                                              ".icc";
+                                if (index > 1)
+                                {
+                                    if (project.OptimizeRuns[index - 1].Status == EOptimizeRunStatus.Certify)
+                                    {
+                                        LastDLPName = project.ProjectName + " DLP" +
+                                                      project.OptimizeRuns[index - 2].EndDateTime.Value.Month.ToString("00") +
+                                                      project.OptimizeRuns[index - 2].EndDateTime.Value.Day.ToString("00") +
+                                                      project.OptimizeRuns[index - 2].EndDateTime.Value.Hour.ToString("00") +
+                                                      project.OptimizeRuns[index - 2].EndDateTime.Value.Minute.ToString(
+                                                          "00") + ".icc";
+                                            //----If last run is certify run, then get DLP of its previous run----//
+                                        }
+                                }
+                            }
+                            x.LastDlpName = (index == 0) ? string.Empty : LastDLPName;
+                            x.DlpName = string.Format("{0} DLP {1}.icc",
+                                                      project.ProjectName,
+                                                      index++.ToString("000"));
+
+                        });
+                        if (project.CurrDlpId > 0)
+                        {
+                            project.CurrentDlpName = project.OptimizeRuns.Single(x => x.OptimizeRunId == project.CurrDlpId).DlpName;
+                            project.ProposedDlpName = project.OptimizeRuns.Last().DlpName;
+                        }
+
+                        project.CurrentDisplayStatus =
+                            project.OptimizeRuns.Count() == 1
+                                ? ECurrentProjectStatus.New
+                                : ECurrentProjectStatus.Run;
+
+
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectDetail"));
+            return project;
+        }
+
         #endregion
 
         #region ITaskBase Members

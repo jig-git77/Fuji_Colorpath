@@ -59,6 +59,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
+        public int SaveSpotProject(Project project)
+        {
+            return 0;
+        }
+
         public ReferenceChartData GetReferenceChartData(int projectId, EReferenceChartDisType referenceChartDisType)
         {
             return new ReferenceChartData();
@@ -169,6 +174,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         public List<Entity.CPSpot.SpotTarget> GetSpotTargetList(int currentUserId, bool isSpotTargetType)
         {
             return new List<Entity.CPSpot.SpotTarget>();
+        }
+
+        public Project GetProjectDetail_SpotProject(int projectId)
+        {
+            return new Project();
         }
         #endregion
 

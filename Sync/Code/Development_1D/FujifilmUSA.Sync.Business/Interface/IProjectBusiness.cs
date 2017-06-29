@@ -24,6 +24,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         byte[] GetDestinationProfile(int projectId);
         byte[] GetLastOptimizedDlp(int projectId);
         int SaveProject(Project project);
+        int SaveSpotProject(Project project);
         ReferenceChartData GetReferenceChartData(int projectId, EReferenceChartDisType referenceChartDisType);
         Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, int measurementDeviceTypeId, int chartId, int projectId, Guid tempProjectId, string silverlightPostUrl);
         TempProjectInfo GetTempProjectInfo(Guid tempProjectId);
@@ -41,5 +42,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Dictionary<int, string> GetReTargetProjectList(int currentUserId, int ProjectTypeId, int DeviceId);
         List<Entity.CPSpot.SpotProjectLibrary> GetSpotLibraryListByProjectId(int projectId);
         List<Entity.CPSpot.SpotTarget> GetSpotTargetList(int currentUserId, bool isSpotTargetType);
+        Project GetProjectDetail_SpotProject(int projectId);
     }
 }
