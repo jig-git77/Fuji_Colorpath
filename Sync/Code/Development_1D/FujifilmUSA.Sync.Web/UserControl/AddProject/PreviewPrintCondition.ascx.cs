@@ -138,6 +138,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 V_MeasurementDeviceId = 0;
 
                 Div_TargetColorSpace.Visible = false;
+                Div_SpotTarget.Visible = true;
 
                 IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
                 ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
@@ -191,6 +192,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                           || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2))
                                           || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.eXact)));
                     lblUVSettings.Text = "M" + SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode.ToString();
+                    lblSpotTarget.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetName;
+                    lblEnableValidation.Text = SessionManager.Instance.CurrentProject.EnabledValidation.ToString();
                     dvMetricPreset.Visible = false;
                     dvOptionPreset.Visible = false;
                     Div_Spectrophotometer_Options.Visible = true;
@@ -283,7 +286,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                             || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro2))
                                             || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2))
                                             || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.eXact)));
-                //lblUVSettings.Text = Enum.GetName(typeof(EUVIncludedMode), SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode);
                 lblUVSettings.Text = "M" + SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode.ToString();
 
                 lblEnableValidation.Text = SessionManager.Instance.CurrentProject.EnabledValidation.ToString();

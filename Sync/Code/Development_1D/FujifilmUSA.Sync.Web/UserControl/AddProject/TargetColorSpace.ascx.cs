@@ -371,7 +371,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         SpotTargetID = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetID,
                         SpotTargetName = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetName
                     },
-                    ProjectId = 7564
+                    ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID
                 };
                 //-----Pass Dummy data---------//
                 SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = 0;

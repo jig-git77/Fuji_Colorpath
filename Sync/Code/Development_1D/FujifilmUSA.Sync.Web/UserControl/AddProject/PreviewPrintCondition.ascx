@@ -180,6 +180,20 @@
                                             </td>
                                         </tr>
                                     </div>
+                                     <div id="Div_SpotTarget" runat="server" visible="false">
+                                        <tr>
+                                            <td class="breakWord90">
+                                                <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                    Text="Spot Target" ID="Localize3" meta:resourcekey="locSpotTargetResource1"></asp:Localize></span>
+                                            </td>
+                                            <td style="width: 10px;">
+                                                <span style="font-weight: bold;">:</span>
+                                            </td>
+                                            <td>
+                                                <asp:Label ID="lblSpotTarget" runat="server" CssClass="breakWord100"></asp:Label>
+                                            </td>
+                                        </tr>
+                                    </div>
                                 </table>
                             </div>
                             <div class="clear">
@@ -325,11 +339,11 @@
         </tr>
         <tr>
             <td valign="top">
-                <div style="display: block;">
+                <div id="dvOptionPreset" runat="server" style="display: block;">
                     <div class="section_small_top">
                         &nbsp;</div>
                     <div class="section_small_middle">
-                        <div class="combopart" id="dvOptionPreset" runat="server">
+                        <div class="combopart">
                             <div class="header">
                                 <div class="content">
                                     <div class="text" style="float: left">

@@ -147,18 +147,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case "AddSpotLibrary":
                     if (e.CommandArgument != null)
                     {
-                        //ProjectId = Convert.ToInt32(e.CommandArgument);
+                        ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID;
+
                         //------------Create new Project under this Device-----------------//
                         SessionManager.Instance.CurrentProject = new Project()
                         {
                             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
                             IsUsed = true,
                             CurrentDisplayStatus = ECurrentProjectStatus.New,
-                            LicenseType = ELicenseType.SpotLibrary
+                            LicenseType = ELicenseType.SpotLibrary,
+                            SpotTargetMasterProjectID = ProjectId
                         };
+
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
-                       // Response.Redirect("AddProject.aspx?ProjectId=" + ProjectId.ToString());
-                        Response.Redirect("AddProject.aspx?ProjectId=7564");
+                        Response.Redirect("AddProject.aspx");
                     }
                     break;
             }
@@ -242,10 +244,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             GridDataItem dataItem = (GridDataItem)e.DetailTableView.ParentItem;
 
             ProjectId = Convert.ToInt32(dataItem.GetDataKeyValue("ProjectId").ToString());
+            SessionManager.Instance.CurrentProject = new Project()
+            {
+                SpotTargetMasterProjectID = ProjectId
+            };
             _presenterProjectList.GetSpotLibraryListByProjectId();
             if (!IsErrorOccured)
             {
-                //SessionManager.Instance.ProjectList = Projects;
                 e.DetailTableView.DataSource = SpotProjectLibraries;
             }
         }
