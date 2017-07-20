@@ -44,7 +44,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 btn_PaperClear.Visible = false;
                 BindProfileSource();
                 BindPCSDataType(); //Load PCSDataType 
-                BindSpotTarget(); //Load Spot Target List
+            
                 PanelProjectType.GroupingText = "<b>" + GetResourceString("PanelProjectType") + "</b>";
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
                 {
@@ -53,6 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
                 {
+                    BindSpotTarget(); //Load Spot Target List
                     trListHeader.Visible = false;
                     trTargetLAB.Visible = false;
                     trSpotTarget.Visible = true;
