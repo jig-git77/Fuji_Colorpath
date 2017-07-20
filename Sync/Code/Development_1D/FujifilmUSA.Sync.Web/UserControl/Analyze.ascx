@@ -46,7 +46,8 @@
         var measurementID = parseInt($('#ContentPlaceHolder1_ucAnalyze_hdMeasurement').val());
         var isAverageOfMeasurements = true;
         $.ajax({
-            url: 'http://localhost/FujiFilmUSA.Sync.Service/api/Chart/GenerateGrayChart',
+            //url: 'http://localhost/FujiFilmUSA.Sync.Service/api/Chart/GenerateGrayChart',
+            url: 'http://dev.taskero.com/Services/CPChartService/api/Chart/GenerateGrayChart',
             data: { MeasurementId: measurementID, IsAverageOfMeasurements: isAverageOfMeasurements },
             type: 'GET',
             dataType: 'json',

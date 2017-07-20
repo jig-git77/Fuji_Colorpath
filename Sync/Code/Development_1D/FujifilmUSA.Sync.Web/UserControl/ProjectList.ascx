@@ -155,7 +155,7 @@
                                 <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
                                 <MasterTableView DataKeyNames="ProjectId">         
                                     <DetailTables>
-                                                <telerik:GridTableView DataKeyNames="SpotProjectID" Name="SpotProjects" Width="100%" AutoGenerateColumns="false" CommandItemDisplay="Top" >
+                                                <telerik:GridTableView DataKeyNames="SpotProjectID" Name="SpotProjects" Width="100%" AutoGenerateColumns="false" CommandItemDisplay="Top" ShowHeadersWhenNoRecords="false" NoDetailRecordsText="" >
                                                     <CommandItemSettings ShowAddNewRecordButton="false" />
                                                     <CommandItemTemplate>
                                                         <asp:Button ID="btnAddSpotLibrary" runat="server" Text="Create New Library" CommandName="AddSpotLibrary" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectID") %>'  />
