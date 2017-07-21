@@ -65,6 +65,30 @@
                 alert(exception);
             }
         });
+
+        $('#imgEyeABCompLarge').on('click',function (e) {
+            e.preventDefault();
+
+            var kendoOptions = $("#kendoChartTargetVersusActualAB").data("kendoChart").options;
+            kendoOptions.chartArea.width = 580;
+            kendoOptions.chartArea.height = 480;
+
+            $("#kendoChartTargetVersusActualABLarge").kendoChart(kendoOptions);
+
+            $("#kendoChartTargetVersusActualABLargeArea").kendoWindow({
+                width: "600px",
+                modal: true,
+                height: '500px',                
+                resizable: false,
+                title: "a* - b* Comparison Chart",
+                //content: url,
+                visible: false
+            });
+
+            var popup = $("#kendoChartTargetVersusActualABLargeArea").data('kendoWindow');
+            popup.open();
+            popup.center();
+        });
     });
 
     ////**************** START BIND THE AB COMPARISION CHART  ****************////
@@ -642,16 +666,7 @@
             title: {
                 text: "b* Balance Gray Chart",
                 font: "13px Tahoma"
-            },
-            //series: [{
-            //    data: grayBlackB,
-            //    color: "Black",
-            //    markers: { background: "Black" }
-            //}, {
-            //    data: grayGreenB,
-            //    color: "Green",
-            //    markers: { background: "Green" }
-            //}],
+            },      
             series: [{
                 //data: grayBlackL,
                 xField: "CmykC",
@@ -3468,12 +3483,19 @@
                                                                                         <td id="Td6" class="green-title" runat="server">
                                                                                             <asp:Localize ID="Localize5" runat="server" Text="a* - b* Comparison"
                                                                                                 meta:resourcekey="locComparisonResource1"></asp:Localize>
-                                                                                        </td>
+                                                                                            <%--<img style="height: 22px;" src="../Images/eye_blue.png" />--%>
+                                                                                            <a id="imgEyeABCompLarge" style="float:right;"><asp:Image ID="Image1" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" style="height: 22px;" /></a>
+                                                                                        </td>                                                                                        
                                                                                     </tr>
 
                                                                                     <tr>
                                                                                         <td align="center" valign="top">
                                                                                             <div id="kendoChartTargetVersusActualAB"></div>
+                                                                                            <input type="button" id="btnZoomTargetVersusActual" value="click" />
+                                                                                            <div id="kendoChartTargetVersusActualABLargeArea">
+                                                                                            
+                                                                                            <div id="kendoChartTargetVersusActualABLarge"></div>
+
                                                                                         </td>
                                                                                     </tr>
                                                                                     <tr>

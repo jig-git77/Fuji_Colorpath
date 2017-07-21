@@ -808,6 +808,7 @@
     <Content Include="Images\DLPSource.png" />
     <Content Include="Images\Drupa1.png" />
     <Content Include="Images\Drupa2.png" />
+    <Content Include="Images\eye_blue.png" />
     <Content Include="Images\FujiFilm.png" />
     <Content Include="Images\FujiFilm2.png" />
     <Content Include="Images\FUJIFILM_Slogan_270_100.png" />
@@ -5148,7 +5149,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
