@@ -30,7 +30,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GenerateGrayChart(int? MeasurementId, bool? IsAverageOfMeasurements)
         {
             //int? MeasurementId = 15081;
-            //bool? IsAverageOfMeasurements = true;
+            //bool? IsAverageOfMeasurements = true;   
             IHttpActionResult actionResult = null;
             string validationMessage = "";
 
