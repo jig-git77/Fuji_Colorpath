@@ -3443,21 +3443,7 @@
 
                             <div>
                                 <section id="tab6" class="contantbox tabcontant hideclass">
-                                    <%--<div class="tab_top">&nbsp;</div>
-                                    <div class="tab_middle">
-                                        <div class="combopart">
-                                            <div class="float_l" style="padding-left: 10px;">
-                                                <div id="kendoChartTargetVersusActualAB"></div>
-                                                <br />
-                                                <div id="kendoChartGamut_ABComparison"></div>
-                                                <br />
-                                                <div id="kendoChartLComaparision"></div>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </div>
-                                    <div class="tab_bottom">&nbsp;</div>--%>
-
+                             
                                     <div class="tab_top">&nbsp;</div>
                                     <div class="tab_middle">
                                         <div class="combopart">
@@ -3465,7 +3451,8 @@
 
                                                 <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                                                     <ContentTemplate>
-
+                                                        <asp:Button ID="btnGeneratePDF" runat="server" Text="Generate PDF Report" />
+                                                        <br />
                                                         <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color: White;">
                                                             <tr>
                                                                 <td style="width: 45%;" valign="top" class="CHARTTABLE">
