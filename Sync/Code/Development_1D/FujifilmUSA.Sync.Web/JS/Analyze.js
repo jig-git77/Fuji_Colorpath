@@ -9,6 +9,7 @@ $(document).ready(function () {
 
     var measurementID = parseInt($('#ContentPlaceHolder1_ucAnalyze_hdMeasurement').val());
     var isAverageOfMeasurements = true;
+    kendo.ui.progress($(".chart-loading"), true);
     $.ajax({
         url: SERVICE_BASE_URL + 'api/Chart/GenerateGrayChart',
         data: { MeasurementId: measurementID, IsAverageOfMeasurements: isAverageOfMeasurements },
@@ -24,9 +25,11 @@ $(document).ready(function () {
             BindChartGamutABComparision();
             BindChartLComparision();
             BindChartLGrayBalance();
+            kendo.ui.progress($(".chart-loading"), false);
         },
         error: function (xhr, errorType, exception) {
-            alert(exception);
+            //alert(exception);
+            kendo.ui.progress($(".chart-loading"), false);
         }
     });
 
@@ -148,10 +151,10 @@ function BindChartTargetVersusActualAB() {
 
         var tooltipString = '<table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
         tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + element.CielabL + ' ' + _Resources._recA + ': ' + element.CielabA + ' ' + _Resources._recB + ': ' + element.CielabB + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recTarget+' L: *' + element.TargetL + ' a*: ' + element.Targeta + ' b*: ' + element.Targetb + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaL +'   ' + element["ΔL"] + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaA +'   ' + element["Δa"] + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaB +'   ' + element["Δb"] + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recTarget + ' L: *' + element.TargetL + ' a*: ' + element.Targeta + ' b*: ' + element.Targetb + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"] + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"] + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"] + '</td></tr>';
         tooltipString += '</table>';
 
         kendoSeriseObj.tooltip = { visible: true, template: tooltipString, shared: true };
@@ -447,7 +450,7 @@ function BindChartLComparision() {
             case "Paper":
                 tooltipCaption = _Resources._recPaperPathMetrics;
                 break;
-        }     
+        }
 
         var tooltipString = '<table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
         tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + element.CielabL + ' ' + _Resources._recA + ': ' + element.CielabA + ' ' + _Resources._recB + ': ' + element.CielabB + '</td></tr>';

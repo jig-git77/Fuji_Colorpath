@@ -2780,16 +2780,18 @@
                              
                                     <div class="tab_top">&nbsp;</div>
                                     <div class="tab_middle">
-                                        <div class="combopart">
+                                        <div class="combopart" style="position:relative;">
+                                            <div class="chart-loading"></div>
                                             <div class="float_l" style="padding-left: 10px;">
-
                                                 <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                                                     <ContentTemplate>
                                                         <asp:Button ID="btnGeneratePDF" runat="server" Text="Generate PDF Report" />
+                                                         
                                                         <br />
                                                         <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color: White;">
                                                             <tr>
                                                                 <td style="width: 45%;" valign="top" class="CHARTTABLE">
+                                                                    
                                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                         <tr>
                                                                             <td class="green-title">&nbsp;
@@ -2811,9 +2813,8 @@
 
                                                                                     <tr>
                                                                                         <td align="center" valign="top">
-                                                                                            <div id="kendoChartTargetVersusActualAB"></div>
-                                                                                            <div id="kendoChartTargetVersusActualABLargeArea">
-                                                                                            
+                                                                                            <div id="kendoChartTargetVersusActualAB" style="min-height:250px;min-width:300px;"></div>
+                                                                                            <div id="kendoChartTargetVersusActualABLargeArea">                                                                                            
                                                                                             <div id="kendoChartTargetVersusActualABLarge"></div>
 
                                                                                         </td>
@@ -2839,7 +2840,7 @@
                                                                                                 </div>
                                                                                                 <asp:Panel ID="panelabGamutComparisonNew" runat="server" BorderStyle="None"
                                                                                                     Width="100%" meta:resourcekey="panelabGamutComparisonResource1">
-                                                                                                    <div id="kendoChartGamut_ABComparison"></div>
+                                                                                                    <div id="kendoChartGamut_ABComparison" style="min-height:250px;min-width:300px;"></div>
                                                                                                 </asp:Panel>
                                                                                             </div>
                                                                                         </td>
@@ -2852,7 +2853,7 @@
                                                                                     </tr>
                                                                                     <tr id="Tr7" runat="server">
                                                                                         <td id="Td8" align="center" valign="top" runat="server">
-                                                                                            <div id="kendoChartLComaparision"></div>
+                                                                                            <div id="kendoChartLComaparision" style="min-height:80px;min-width:300px;"></div>
                                                                                         </td>
                                                                                     </tr>
                                                                                 </table>
@@ -2874,7 +2875,7 @@
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>
-                                                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:350px;">
                                                                                                 <tr>
                                                                                                     <td>
                                                                                                         <div id="kendoChartLBalanceChart"></div>
