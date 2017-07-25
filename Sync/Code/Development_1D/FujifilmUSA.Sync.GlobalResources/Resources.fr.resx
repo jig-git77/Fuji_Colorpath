@@ -984,4 +984,55 @@
   <data name="ProfilerOptions_JavascriptDensityRange" xml:space="preserve">
     <value>Density value should be between 0 to 2_fr</value>
   </data>
+  <data name="actualText" xml:space="preserve">
+    <value>Actuel</value>
+  </data>
+  <data name="blackPathMetrics" xml:space="preserve">
+    <value>Black Patch Metrics</value>
+  </data>
+  <data name="bluePathMetrics" xml:space="preserve">
+    <value>Blue Patch Metrics</value>
+  </data>
+  <data name="bText" xml:space="preserve">
+    <value>b*</value>
+  </data>
+  <data name="cyanPathMetrics" xml:space="preserve">
+    <value>Cyan Patch Metrics_de</value>
+  </data>
+  <data name="deltaAText" xml:space="preserve">
+    <value>&amp;Delta;a*</value>
+  </data>
+  <data name="deltaLText" xml:space="preserve">
+    <value>&amp;Delta;L*</value>
+  </data>
+  <data name="gbPatchMetricsText" xml:space="preserve">
+    <value>% GB Patch Metrics_de</value>
+  </data>
+  <data name="greenPathMetrics" xml:space="preserve">
+    <value>Green Patch Metrics_de</value>
+  </data>
+  <data name="magentaPathMetrics" xml:space="preserve">
+    <value>Magenta Patch Metrics</value>
+  </data>
+  <data name="paperPathMetrics" xml:space="preserve">
+    <value>Paper Patch Metrics</value>
+  </data>
+  <data name="redPathMetrics" xml:space="preserve">
+    <value>Red Patch Metrics</value>
+  </data>
+  <data name="targetText" xml:space="preserve">
+    <value>Cible</value>
+  </data>
+  <data name="yellowPathMetrics" xml:space="preserve">
+    <value>Yellow Patch Metrics</value>
+  </data>
+  <data name="aText" xml:space="preserve">
+    <value>a*</value>
+  </data>
+  <data name="bText1" xml:space="preserve">
+    <value>b*</value>
+  </data>
+  <data name="lText" xml:space="preserve">
+    <value>L*</value>
+  </data>
 </root>

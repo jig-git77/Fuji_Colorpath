@@ -11,7 +11,7 @@
 <%--<script src="JS/DYMO.Label.Framework.latest.js" type="text/javascript" charset="UTF-8"></script>--%>
 
 <script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>
-
+<script src="JS/Analyze.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 
@@ -34,692 +34,6 @@
         else {
             return false;
         }
-    }
-
-    var jsonTarget = [];
-    var jsonColors = [];
-    var jsonGray = [];
-
-
-    $(document).ready(function () {
-
-        var measurementID = parseInt($('#ContentPlaceHolder1_ucAnalyze_hdMeasurement').val());
-        var isAverageOfMeasurements = true;
-        $.ajax({
-            //url: 'http://localhost/FujiFilmUSA.Sync.Service/api/Chart/GenerateGrayChart',
-            url: 'http://dev.taskero.com/Services/CPChartService/api/Chart/GenerateGrayChart',
-            data: { MeasurementId: measurementID, IsAverageOfMeasurements: isAverageOfMeasurements },
-            type: 'GET',
-            dataType: 'json',
-            success: function (response) {
-                console.log(response);
-                jsonTarget = response.data.GamutChartActual;
-                jsonColors = response.data.GamutChart;
-                jsonGray = response.data.LABChart;
-                BindChartTargetVersusActualAB();
-                BindChartGamutABComparision();
-                BindChartLComparision();
-                BindChartLGrayBalance();
-            },
-            error: function (xhr, errorType, exception) {
-                alert(exception);
-            }
-        });
-
-        $('#imgEyeABCompLarge').on('click',function (e) {
-            e.preventDefault();
-
-            var kendoOptions = $("#kendoChartTargetVersusActualAB").data("kendoChart").options;
-            kendoOptions.chartArea.width = 580;
-            kendoOptions.chartArea.height = 480;
-
-            $("#kendoChartTargetVersusActualABLarge").kendoChart(kendoOptions);
-
-            $("#kendoChartTargetVersusActualABLargeArea").kendoWindow({
-                width: "600px",
-                modal: true,
-                height: '500px',                
-                resizable: false,
-                title: "a* - b* Comparison Chart",
-                //content: url,
-                visible: false
-            });
-
-            var popup = $("#kendoChartTargetVersusActualABLargeArea").data('kendoWindow');
-            popup.open();
-            popup.center();
-        });
-    });
-
-    ////**************** START BIND THE AB COMPARISION CHART  ****************////
-    function BindChartTargetVersusActualAB() {
-
-
-        //************* Get object from array ***************//
-        var paperObj = $.grep(jsonTarget, function (element) { return element.PatchType == "Paper"; })[0];
-
-        //************* Target Objects ***************//
-        var targetArray = {};
-        var targetCYAN = {};
-        var targetMAGENTA = {};
-        var targetYELLOW = {};
-        var targetRED = {};
-        var targetGREEN = {};
-        var targetBLUE = {};
-        var targetPAPERObj = [paperObj.Targeta, paperObj.Targetb];
-        var targetPAPER = [targetPAPERObj];
-
-        //************* SERIES ARRAY ***************//
-
-        var targetCYANSeriseObj = {};
-        var targetMAGENTASeriseObj = {};
-        var targetYELLOWSeriseObj = {};
-        var targetREDSeriseObj = {};
-        var targetGREENSeriseObj = {};
-        var targetBLUESeriseObj = {};
-        var targetPAPERSeriseObj = {};
-
-        $.each(jsonTarget, function (index, element) {
-
-            var seriesArray = [];
-            seriesArray.push(targetPAPERObj);
-
-
-            //Get colors from the colors array
-            var colorsArray = $.grep(jsonColors, function (colorObj) { return colorObj.PatchType == element.PatchType });
-            $.each(colorsArray, function (i, colorObj) {
-                var dots = [colorObj.CielabA, colorObj.CielabB];
-                seriesArray.push(dots);
-            });
-
-            //add actuall color object
-            var actualObject = [element.CielabA, element.CielabB];
-            seriesArray.push(actualObject);
-
-            //create the series of the array for line
-            var kendoSeriseObj = {};
-            kendoSeriseObj.data = seriesArray;
-            kendoSeriseObj.color = element.PatchType;
-            kendoSeriseObj.markers = { background: element.PatchType, size: 6 };
-            kendoSeriseObj.width = 2;
-            kendoSeriseObj.highlight = {
-                visible: false
-            }
-
-            //create tool tip
-            var tooltipString = '<table><tr><td><center><b>' + element.PatchType + ' Patch Matrics</b></center><td></tr>';
-            tooltipString += '<tr><td>Actual L: *' + element.CielabL + ' a:*: ' + element.CielabA + ' b:*' + element.CielabB + '</td></tr>';
-            tooltipString += '<tr><td>Target L: *' + element.TargetL + ' a:*: ' + element.Targeta + ' b:*' + element.Targetb + '</td></tr>';
-            tooltipString += '<tr><td>ΔL*   ' + element["ΔL"] + '</td></tr>';
-            tooltipString += '<tr><td>Δa*   ' + element["Δa"] + '</td></tr>';
-            tooltipString += '<tr><td>Δb*   ' + element["Δb"] + '</td></tr>';
-            tooltipString += '</table>';
-            kendoSeriseObj.tooltip = { visible: true, template: tooltipString, shared: true };
-
-            //Calcaulte Targets
-            var kendoTargetObj = {};
-            kendoTargetObj.data = [[element.Targeta, element.Targetb]];
-            kendoTargetObj.color = "Green";
-            kendoTargetObj.markers = { background: "Green" };
-            kendoTargetObj.highlight = {
-                visible: false
-            }
-
-
-            $('#tootipDemo').html(tooltipString);
-            if (element.PatchType == "Cyan") {
-                targetCYANSeriseObj = kendoSeriseObj;
-                targetCYAN = kendoTargetObj;
-            }
-            if (element.PatchType == "Magenta") {
-                targetMAGENTASeriseObj = kendoSeriseObj;
-                targetMAGENTA = kendoTargetObj;
-
-            }
-            if (element.PatchType == "Yellow") {
-                targetYELLOWSeriseObj = kendoSeriseObj;
-                targetYELLOW = kendoTargetObj;
-            }
-            if (element.PatchType == "Red") {
-                targetREDSeriseObj = kendoSeriseObj;
-                targetRED = kendoTargetObj;
-            }
-            if (element.PatchType == "Green") {
-                targetGREENSeriseObj = kendoSeriseObj;
-                targetGREEN = kendoTargetObj;
-            }
-            if (element.PatchType == "Blue") {
-                targetBLUESeriseObj = kendoSeriseObj;
-                targetBLUE = kendoTargetObj;
-            }
-            if (element.PatchType == "Paper") {
-                kendoSeriseObj.data = [targetPAPERObj];
-                kendoSeriseObj.color = "White";
-                kendoSeriseObj.markers = { background: "White", size: 6 };
-                targetPAPERSeriseObj = kendoSeriseObj;
-            }
-        });
-
-
-        $("#kendoChartTargetVersusActualAB").kendoChart({
-            seriesDefaults: {
-                type: "scatterLine",
-                style: "smooth"
-            },
-            //title: {
-            //    text: "a* - b* Comparison"
-            //},
-            series: [
-                targetCYAN,
-                targetMAGENTA,
-                targetYELLOW,
-                targetRED,
-                targetGREEN,
-                targetBLUE,
-                targetCYANSeriseObj,
-                targetMAGENTASeriseObj,
-                targetYELLOWSeriseObj,
-                targetREDSeriseObj,
-                targetGREENSeriseObj,
-                targetBLUESeriseObj,
-                targetPAPERSeriseObj
-            ],
-            xAxis: {
-                min: -100,
-                max: 100,
-                majorUnit: 20,
-                axisCrossingValues: [-100, 100],
-                labels: {
-                    format: "{0}"
-                },
-                title: {
-                    text: ""
-                }
-            },
-            yAxis: {
-                min: -100,
-                max: 100,
-                step: 20,
-                majorUnit: 20,
-                axisCrossingValues: [-100, 100],
-                labels: {
-                    format: "{0}"
-                },
-                title: {
-                    text: ""
-                }
-            },
-            chartArea: {
-                width: 300,
-                height: 250
-            },
-            plotArea: {
-                background: "lightgray"
-            }
-        });
-    }
-
-    ////**************** START BIND THE AB COMPARISION GAMUT CHART  ****************////
-    function BindChartGamutABComparision() {
-
-        var targetCYANPoint = {};
-        var targetMAGENTAPoint = {};
-        var targetYELLOWPoint = {};
-        var targetREDPoint = {};
-        var targetGREENPoint = {};
-        var targetBLUEPoint = {};
-
-        var arrTargetsABComparision = [];
-        var arrActualABComparision = [];
-        var colorOrderArray = ["Cyan", "Green", "Yellow", "Red", "Magenta", "Blue", "Cyan"]
-
-        $.each(colorOrderArray, function (index, colorObj) {
-
-            //set target points
-            var jsonTargetColor = $.grep(jsonTarget, function (targetObj) { return targetObj.PatchType == colorObj })[0];
-            var objTarget = [jsonTargetColor.Targeta, jsonTargetColor.Targetb];
-            arrTargetsABComparision.push(objTarget);
-
-            //set actual point black
-            var objActual = [jsonTargetColor.CielabA, jsonTargetColor.CielabB];
-            arrActualABComparision.push(objActual);
-
-            //set actual color points
-            var actualColorPointObj = {};
-            actualColorPointObj.data = [objActual];
-            actualColorPointObj.color = jsonTargetColor.PatchType;
-            actualColorPointObj.markers = { background: jsonTargetColor.PatchType, size: 10 };
-            actualColorPointObj.width = 2;
-
-            if (colorObj == "Cyan") {
-                targetCYANPoint = actualColorPointObj;
-            }
-            if (colorObj == "Green") {
-                targetGREENPoint = actualColorPointObj;
-            }
-            if (colorObj == "Yellow") {
-                targetYELLOWPoint = actualColorPointObj;
-            }
-            if (colorObj == "Red") {
-                targetREDPoint = actualColorPointObj;
-            }
-            if (colorObj == "Magenta") {
-                targetMAGENTAPoint = actualColorPointObj;
-            }
-            if (colorObj == "Blue") {
-                targetBLUEPoint = actualColorPointObj;
-            }
-        });
-        //set the paper objects
-        var paperObj = $.grep(jsonTarget, function (element) { return element.PatchType == "Paper"; })[0];
-        var targetPAPERObject = [[paperObj.Targeta, paperObj.Targetb]];
-        var colorPAPERObject = [[paperObj.CielabA, paperObj.CielabB]];
-
-
-        $("#kendoChartGamut_ABComparison").kendoChart({
-            seriesDefaults: {
-                type: "scatterLine"
-            },
-            //title: {
-            //    text: "a* - b* Gamut Comparison"
-            //},
-            series: [{
-                data: arrTargetsABComparision,
-                color: "Green",
-                markers: { background: "Green" },
-                highlight: {
-                    visible: false
-                }
-            }, {
-                data: arrActualABComparision,
-                color: "Black",
-                markers: { background: "Black", visible: false },
-                highlight: {
-                    visible: false
-                }
-            }, {
-                data: targetPAPERObject,
-                color: "Green",
-                markers: { background: "Green", size: 10 },
-                highlight: {
-                    visible: false
-                }
-            }, {
-                data: colorPAPERObject,
-                color: "Black",
-                markers: { background: "White", size: 10 },
-                highlight: {
-                    visible: false
-                }
-            }, targetCYANPoint,
-                targetMAGENTAPoint,
-                targetYELLOWPoint,
-                targetREDPoint,
-                targetGREENPoint,
-                targetBLUEPoint
-            ],
-            xAxis: {
-                min: -100,
-                max: 100,
-                majorUnit: 20,
-                axisCrossingValues: [-100, 100],
-                labels: {
-                    format: "{0}"
-                },
-                title: {
-                    text: ""
-                }
-            },
-            yAxis: {
-                min: -100,
-                max: 100,
-                step: 20,
-                majorUnit: 20,
-                axisCrossingValues: [-100, 100],
-                labels: {
-                    format: "{0}"
-                },
-            },
-            chartArea: {
-                width: 300,
-                height: 250,
-            },
-            plotArea: {
-                background: "lightgray"
-            }
-        });
-    }
-
-    ////**************** START BIND THE L COMPARISION CHART  ****************////
-    function BindChartLComparision() {
-
-        var cyanLComparisionPoint = {};
-        var yellowLComparisionPoint = {};
-        var blueLComparisionPoint = {};
-        var redLComparisionPoint = {};
-        var magentaLComparisionPoint = {};
-        var greenLComparisionPoint = {};
-        var paperLComparisionPoint = {};
-
-        var cyanLComparisionPointSmall = {};
-        var yellowLComparisionPointSmall = {};
-        var blueLComparisionPointSmall = {};
-        var redLComparisionPointSmall = {};
-        var magentaLComparisionPointSmall = {};
-        var greenLComparisionPointSmall = {};
-        var paperLComparisionPointSmall = {};
-
-        $.each(jsonTarget, function (index, element) {
-
-            var pointsObj = {};
-            pointsObj.data = [[element.CielabA, 0]];
-            pointsObj.color = element.PatchType;
-            pointsObj.markers = { background: element.PatchType, size: 10 };
-
-
-            var pointsObjSmall = {};
-            pointsObjSmall.data = [[element.CielabA, element["ΔL"]]];
-            pointsObjSmall.color = element.PatchType;
-            pointsObjSmall.markers = { background: element.PatchType, size: 6 };
-
-
-            //create tool tip
-            var tooltipString = '<table><tr><td><center><b>' + element.PatchType + ' Patch Matrics</b></center><td></tr>';
-            tooltipString += '<tr><td>Actual L: *' + element.CielabL + ' a:*: ' + element.CielabA + ' b:*' + element.CielabB + '</td></tr>';
-            tooltipString += '<tr><td>Target L: *' + element.TargetL + ' a:*: ' + element.Targeta + ' b:*' + element.Targetb + '</td></tr>';
-            tooltipString += '<tr><td>ΔL*   ' + element["ΔL"] + '</td></tr>';
-            tooltipString += '<tr><td>Δa*   ' + element["Δa"] + '</td></tr>';
-            tooltipString += '<tr><td>Δb*   ' + element["Δb"] + '</td></tr>';
-            tooltipString += '</table>';
-            pointsObj.tooltip = { visible: true, template: tooltipString };
-            pointsObjSmall.tooltip = { visible: true, template: tooltipString };
-
-            if (element.PatchType == "Cyan") {
-                cyanLComparisionPoint = pointsObj;
-                cyanLComparisionPointSmall = pointsObjSmall;
-            }
-            if (element.PatchType == "Magenta") {
-                magentaLComparisionPoint = pointsObj;
-                magentaLComparisionPointSmall = pointsObjSmall;
-            }
-            if (element.PatchType == "Yellow") {
-                yellowLComparisionPoint = pointsObj;
-                yellowLComparisionPointSmall = pointsObjSmall;
-            }
-            if (element.PatchType == "Red") {
-                redLComparisionPoint = pointsObj;
-                redLComparisionPointSmall = pointsObjSmall;
-            }
-            if (element.PatchType == "Green") {
-                greenLComparisionPoint = pointsObj;
-                greenLComparisionPointSmall = pointsObjSmall;
-            }
-            if (element.PatchType == "Blue") {
-                blueLComparisionPoint = pointsObj;
-                blueLComparisionPointSmall = pointsObjSmall;
-            }
-            if (element.PatchType == "Paper") {
-                paperLComparisionPoint = pointsObj;
-                paperLComparisionPoint.color = "Black";
-                paperLComparisionPoint.markers = { background: "White", size: 10 };
-
-                paperLComparisionPointSmall = pointsObjSmall;
-                paperLComparisionPointSmall.color = "Black";
-                paperLComparisionPointSmall.markers = { background: "White", size: 10 };
-            }
-
-        });
-
-        $("#kendoChartLComaparision").kendoChart({
-            seriesDefaults: {
-                type: "scatter",
-            },
-            //title: {
-            //    text: "L* Comparison"
-            //},
-            series: [cyanLComparisionPoint
-                , magentaLComparisionPoint
-                , yellowLComparisionPoint
-                , redLComparisionPoint
-                , greenLComparisionPoint
-                , blueLComparisionPoint
-                , paperLComparisionPoint
-                , cyanLComparisionPointSmall
-                , magentaLComparisionPointSmall
-                , yellowLComparisionPointSmall
-                , redLComparisionPointSmall
-                , greenLComparisionPointSmall
-                , blueLComparisionPointSmall
-            ],
-            xAxis: {
-                min: -100,
-                max: 100,
-                majorUnit: 20,
-                axisCrossingValues: [-100, 100],
-                labels: {
-                    format: "{0}"
-                },
-                title: {
-                    text: ""
-                }
-            },
-            yAxis: {
-                min: -15,
-                max: 15,
-                majorUnit: 15,
-                axisCrossingValues: [-15, 15],
-                labels: {
-                    format: "{0}"
-                },
-                title: {
-                    text: ""
-                }
-            },
-            chartArea: {
-                width: 300,
-                height: 80
-            },
-            plotArea: {
-                background: "lightgray"
-            }
-        });
-    }
-
-    ////**************** START BIND THE GRAY BALANCE L* CHART  ****************////
-    function BindChartLGrayBalance() {
-
-     
-        $("#kendoChartLBalanceChart").kendoChart({
-            seriesDefaults: {
-                type: "scatterLine",
-                style: "smooth"
-            },
-            dataSource: jsonGray,
-            title: {
-                text: "L* Balance Gray Chart",
-                font: "13px Tahoma"
-            },
-            series: [{
-                //data: grayBlackL,
-                xField: "CmykC",
-                yField: "TargetL",
-                color: "Green",
-                markers: { background: "Green" },
-                highlight: {
-                    visible: false
-                }
-            },{
-                //data: grayBlackL,
-                xField: "CmykC",
-                yField: "CielabL",
-                color: "Black",
-                markers: { background: "Black" },
-                tooltip: {
-                    visible: true,
-                    template: '<table><tr><td><center><b>100% GB Patch Matrics</b></center><td></tr><tr><td>Actual L: *#= dataItem.CielabL # a:*: #= dataItem.CielabA# b:* #= dataItem.CielabB#</td></tr><tr><td>Target L: *#=dataItem.TargetL# a:*: #=dataItem.Targeta# b:*#=dataItem.Targetb#</td></tr><tr><td>ΔL*   #=dataItem.ΔL#</td></tr><tr><td>Δa*   #=dataItem.Δa#</td></tr><tr><td>Δb*   #=dataItem.Δb#</td></tr></table>'
-                }
-            }],
-            xAxis: {
-                min: 0,
-                max: 100,
-                majorUnit: 25,
-                axisCrossingValues: [0, 100],
-                labels: {
-                    format: "{0}"
-                },
-                title: {
-                    text: ""
-                }
-            },
-            yAxis: {
-                min: 0,
-                max: 100,
-                step: 25,
-                majorUnit: 25,
-                axisCrossingValues: [0, 100],
-                labels: {
-                    format: "{0}"
-                },
-            },
-            chartArea: {
-                width: 350,
-                height: 150
-            },
-            plotArea: {
-                background: "lightgray"
-            }
-        });
-
-        $("#kendoChartABalanceChart").kendoChart({
-            seriesDefaults: {
-                type: "scatterLine",
-                style: "smooth"
-            },
-            dataSource: jsonGray,
-            title: {
-                text: "a* Balance Gray Chart",
-                font: "13px Tahoma"
-            },
-            //series: [{
-            //    data: grayBlackA,
-            //    color: "Black",
-            //    markers: { background: "Black" }
-            //}, {
-            //    data: grayGreenA,
-            //    color: "Green",
-            //    markers: { background: "Green" }
-            //    }],
-            series: [{
-                //data: grayBlackL,
-                xField: "CmykC",
-                yField: "Targeta",
-                color: "Green",
-                markers: { background: "Green" },
-                highlight: {
-                    visible: false
-                }
-            }, {
-                    //data: grayBlackL,
-                    xField: "CmykC",
-                    yField: "CielabA",
-                    color: "Black",
-                    markers: { background: "Black" },
-                    tooltip: {
-                        visible: true,
-                        template: '<table><tr><td><center><b>100% GB Patch Matrics</b></center><td></tr><tr><td>Actual L: *#= dataItem.CielabL # a:*: #= dataItem.CielabA# b:* #= dataItem.CielabB#</td></tr><tr><td>Target L: *#=dataItem.TargetL# a:*: #=dataItem.Targeta# b:*#=dataItem.Targetb#</td></tr><tr><td>ΔL*   #=dataItem.ΔL#</td></tr><tr><td>Δa*   #=dataItem.Δa#</td></tr><tr><td>Δb*   #=dataItem.Δb#</td></tr></table>'
-                    }
-                }],
-            xAxis: {
-                min: 0,
-                max: 100,
-                majorUnit: 25,
-                axisCrossingValues: [0, 25],
-                labels: {
-                    format: "{0}"
-                },
-            },
-            yAxis: {
-                min: -6,
-                max: 6,
-                step: 2,
-                majorUnit: 2,
-                axisCrossingValues: [-6, 6],
-                labels: {
-                    format: "{0}"
-                },
-            },
-            chartArea: {
-                width: 350,
-                height: 150
-            },
-            plotArea: {
-                background: "lightgray"
-            }
-        });
-
-        $("#kendoChartBBalanceChart").kendoChart({
-            seriesDefaults: {
-                type: "scatterLine",
-                style: "smooth"
-            },
-            dataSource: jsonGray,
-            title: {
-                text: "b* Balance Gray Chart",
-                font: "13px Tahoma"
-            },      
-            series: [{
-                //data: grayBlackL,
-                xField: "CmykC",
-                yField: "Targetb",
-                color: "Green",
-                markers: { background: "Green" },
-                highlight: {
-                    visible: false
-                }
-            }, {
-                //data: grayBlackL,
-                xField: "CmykC",
-                yField: "CielabB",
-                color: "Black",
-                markers: { background: "Black" },
-                tooltip: {
-                    visible: true,
-                    template: '<table><tr><td><center><b>100% GB Patch Matrics</b></center><td></tr><tr><td>Actual L: *#= dataItem.CielabL # a:*: #= dataItem.CielabA# b:* #= dataItem.CielabB#</td></tr><tr><td>Target L: *#=dataItem.TargetL# a:*: #=dataItem.Targeta# b:*#=dataItem.Targetb#</td></tr><tr><td>ΔL*   #=dataItem.ΔL#</td></tr><tr><td>Δa*   #=dataItem.Δa#</td></tr><tr><td>Δb*   #=dataItem.Δb#</td></tr></table>'
-                }
-            }],
-            xAxis: {
-                min: 0,
-                max: 100,
-                majorUnit: 25,
-                axisCrossingValues: [0, 25],
-                labels: {
-                    format: "{0}"
-                },
-                title: {
-                    text: ""
-                }
-            },
-            yAxis: {
-                min: -6,
-                max: 6,
-                step: 2,
-                majorUnit: 2,
-                axisCrossingValues: [-6, 6],
-                labels: {
-                    format: "{0}"
-                },
-                title: {
-                    text: ""
-                }
-            },
-            chartArea: {
-                width: 350,
-                height: 150
-            },
-            plotArea: {
-                background: "lightgray"
-            }
-        });
     }
 
 </script>
@@ -878,9 +192,10 @@
     }
 
 </script>
+
 <script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {
-        $("div[id*='accordion']").click
+        $("div[id='accordion']").click
             (
             function () {
                 var $panel = $("div[id*='panelabGamutComparison']");
@@ -896,7 +211,25 @@
             }
             );
 
-        $("div[id*='accordion']").click();
+        //$("div[id='accordion']").click();
+
+        $("#accordionNew").click
+            (
+            function () {
+                var $panel1 = $("div[id*='panelabGamutComparisonNew']");
+                var $img1 = $("div[id*='imgHeaderNew']");
+                $panel1.slideToggle(500);
+                if ($img1.hasClass('expanded')) {
+                    $img1.addClass('collapsed').removeClass('expanded');
+                }
+                else {
+                    $img1.addClass('expanded').removeClass('collapsed');
+                }
+                return false;
+            }
+            );
+
+        //$("#accordionNew").click();
     });
 
 </script>
@@ -907,6 +240,7 @@
     <asp:UpdatePanel ID="upCreateDLP" runat="server">
         <ContentTemplate>
             <div class="head">
+                <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">
@@ -3478,7 +2812,6 @@
                                                                                     <tr>
                                                                                         <td align="center" valign="top">
                                                                                             <div id="kendoChartTargetVersusActualAB"></div>
-                                                                                            <input type="button" id="btnZoomTargetVersusActual" value="click" />
                                                                                             <div id="kendoChartTargetVersusActualABLargeArea">
                                                                                             
                                                                                             <div id="kendoChartTargetVersusActualABLarge"></div>
@@ -3488,13 +2821,13 @@
                                                                                     <tr>
                                                                                         <td>
                                                                                             <div style="padding-left: -5px;">
-                                                                                                <div id="accordion" class="header collapsibleContainerTitle">
+                                                                                                <div id="accordionNew" class="header collapsibleContainerTitle">
                                                                                                     <div>
                                                                                                         <div class="green-title">
                                                                                                             <div style="float: left">
                                                                                                             </div>
                                                                                                             <div style="float: left;">
-                                                                                                                <div id="imgHeader" class="expanded">
+                                                                                                                <div id="imgHeaderNew" class="expanded">
                                                                                                                     &nbsp;
                                                                                                                 </div>
                                                                                                                 <asp:Localize ID="Localize6" runat="server" Text="a* - b* Gamut Comparison"></asp:Localize>
@@ -3504,7 +2837,7 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <asp:Panel ID="panel1" runat="server" BorderStyle="None"
+                                                                                                <asp:Panel ID="panelabGamutComparisonNew" runat="server" BorderStyle="None"
                                                                                                     Width="100%" meta:resourcekey="panelabGamutComparisonResource1">
                                                                                                     <div id="kendoChartGamut_ABComparison"></div>
                                                                                                 </asp:Panel>

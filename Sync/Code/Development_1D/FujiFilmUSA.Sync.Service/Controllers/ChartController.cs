@@ -1,5 +1,6 @@
 ﻿using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujiFilmUSA.Sync.Service.Models;
@@ -16,13 +17,40 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 {
     public class ChartController : BaseController, IViewAnalyze
     {
-        #region Variable DeclarationsS
+        #region Variable Declarations
         private PresenterAnalyze _presenterAnalyze;
+        private Dictionary<string, string> _resourceValues { get; set; }
+        private Dictionary<string, string> _globalResourceValues { get; set; }
         #endregion
 
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             _presenterAnalyze = new PresenterAnalyze(this);
+            _globalResourceValues = new Dictionary<string, string>();
+            _resourceValues = new Dictionary<string, string>();
+            _resourceValues.Add("_recgbPatchMetrics", "gbPatchMetricsText");
+            _resourceValues.Add("_recActual", "actualText");
+            _resourceValues.Add("_recL", "lText");
+            _resourceValues.Add("_recA", "aText");
+            _resourceValues.Add("_recB", "bText");
+            _resourceValues.Add("_recTarget", "targetText");
+            _resourceValues.Add("_recDeltaL", "deltaLText");
+            _resourceValues.Add("_recDeltaA", "deltaAText");
+            _resourceValues.Add("_recDeltaB", "deltaBText");
+
+            _resourceValues.Add("_recCyanPathMetrics", "cyanPathMetrics");
+            _resourceValues.Add("_recMagentaPathMetrics", "magentaPathMetrics");
+            _resourceValues.Add("_recYellowPathMetrics", "yellowPathMetrics");
+            _resourceValues.Add("_recRedPathMetrics", "redPathMetrics");
+            _resourceValues.Add("_recGreenPathMetrics", "greenPathMetrics");
+            _resourceValues.Add("_recBluePathMetrics", "bluePathMetrics");
+            _resourceValues.Add("_recBlackPathMetrics", "blackPathMetrics");
+            _resourceValues.Add("_recPaperPathMetrics", "paperPathMetrics");
+
+            _resourceValues.Add("_recLBalanceChartTitle", "lBalanceChartTitle");
+            _resourceValues.Add("_recABalanceChartTitle", "aBalanceChartTitle");
+            _resourceValues.Add("_recBBalanceChartTitle", "bBalanceChartTitle");
+
             base.Initialize(controllerContext);
         }
 
@@ -38,13 +66,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (MeasurementId == null)
-                {
                     validationMessage = "Invalid MeasurementId have been provided.";
-                }
+
                 if (IsAverageOfMeasurements == null)
-                {
                     validationMessage = "Invalid IsAverageOfMeasurements have been provided.";
-                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -64,12 +89,13 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     //this.IsSync1DType = IsSync1DType;
                     this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
                     _presenterAnalyze.GetGrayChart();
-
+                    GenerateResources();
                     httpResponse.Data = new
                     {
                         GamutChartActual = DTGaumatChart1,
                         GamutChart = DTGaumatChart2,
-                        LABChart = DTLABChart
+                        LABChart = DTLABChart,
+                        GlobalResources = _globalResourceValues
                     };
 
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
@@ -85,6 +111,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
             }
             return actionResult;
+        }
+
+        public void GenerateResources()
+        {
+            foreach (var item in _resourceValues)
+            {
+                _globalResourceValues.Add(item.Key, GlobalResourceManager.Instance.GetGlobalResourceString(item.Value));
+            }
         }
 
 
@@ -155,3 +189,4 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         #endregion
     }
 }
+

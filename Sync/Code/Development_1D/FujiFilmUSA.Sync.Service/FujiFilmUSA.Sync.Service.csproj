@@ -124,6 +124,10 @@
       <Project>{050cfe70-aff6-4d52-93e6-2c804cf143d7}</Project>
       <Name>FujifilmUSA.Sync.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FujifilmUSA.Sync.GlobalResources\FujifilmUSA.Sync.GlobalResources.csproj">
+      <Project>{e8bb8c58-8365-4ffd-8f1c-f37e9acd8e50}</Project>
+      <Name>FujifilmUSA.Sync.GlobalResources</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FujifilmUSA.Sync.Presenter\FujifilmUSA.Sync.Presenter.csproj">
       <Project>{05ec147c-dcdc-4470-a7fd-7579e28735ec}</Project>
       <Name>FujifilmUSA.Sync.Presenter</Name>

@@ -22,6 +22,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.UpdatePanel upCreateDLP;
         
         /// <summary>
+        /// hdnBaseServiceUrl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnBaseServiceUrl;
+        
+        /// <summary>
         /// header control.
         /// </summary>
         /// <remarks>
@@ -1570,13 +1579,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize Localize6;
         
         /// <summary>
-        /// panel1 control.
+        /// panelabGamutComparisonNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel1;
+        protected global::System.Web.UI.WebControls.Panel panelabGamutComparisonNew;
         
         /// <summary>
         /// Tr6 control.

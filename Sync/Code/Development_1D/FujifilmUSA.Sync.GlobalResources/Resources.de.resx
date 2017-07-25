@@ -985,4 +985,55 @@ erwünschten Format überein.</value>
   <data name="ProfilerOptions_JavascriptDensityRange" xml:space="preserve">
     <value>Density value should be between 0 to 2_de</value>
   </data>
+  <data name="actualText" xml:space="preserve">
+    <value>aktuell</value>
+  </data>
+  <data name="aText" xml:space="preserve">
+    <value>a*</value>
+  </data>
+  <data name="blackPathMetrics" xml:space="preserve">
+    <value>Schwarz Meßwerte</value>
+  </data>
+  <data name="bluePathMetrics" xml:space="preserve">
+    <value>Blau Meßwerte</value>
+  </data>
+  <data name="bText" xml:space="preserve">
+    <value>b*</value>
+  </data>
+  <data name="cyanPathMetrics" xml:space="preserve">
+    <value>Cyan Meßwerte</value>
+  </data>
+  <data name="deltaAText" xml:space="preserve">
+    <value>Δa*</value>
+  </data>
+  <data name="deltaBText" xml:space="preserve">
+    <value>Δb*</value>
+  </data>
+  <data name="deltaLText" xml:space="preserve">
+    <value>ΔL*</value>
+  </data>
+  <data name="gbPatchMetricsText" xml:space="preserve">
+    <value>% GB Meßwerte</value>
+  </data>
+  <data name="greenPathMetrics" xml:space="preserve">
+    <value>Grün Meßwerte</value>
+  </data>
+  <data name="lText" xml:space="preserve">
+    <value>L*</value>
+  </data>
+  <data name="magentaPathMetrics" xml:space="preserve">
+    <value>Magenta Meßwerte</value>
+  </data>
+  <data name="paperPathMetrics" xml:space="preserve">
+    <value>Paper Meßwerte</value>
+  </data>
+  <data name="redPathMetrics" xml:space="preserve">
+    <value>Rot Meßwerte</value>
+  </data>
+  <data name="targetText" xml:space="preserve">
+    <value>Ziel</value>
+  </data>
+  <data name="yellowPathMetrics" xml:space="preserve">
+    <value>Gelb Meßwerte</value>
+  </data>
 </root>

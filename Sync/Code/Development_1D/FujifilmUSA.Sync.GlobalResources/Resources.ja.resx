@@ -210,7 +210,7 @@
   <data name="ELicenseType_MultiColorCustomSourceProfile" xml:space="preserve">
     <value>Multi Color Custom Source_ja</value>
   </data>
-   <data name="ELicenseType_SpotLibrary" xml:space="preserve">
+  <data name="ELicenseType_SpotLibrary" xml:space="preserve">
     <value>Spot Color Library_ja</value>
   </data>
   <data name="ELicenseType_None" xml:space="preserve">
@@ -983,5 +983,56 @@
   </data>
   <data name="ProfilerOptions_JavascriptDensityRange" xml:space="preserve">
     <value>濃度値は0～2.0の範囲内で入力してください</value>
+  </data>
+  <data name="actualText" xml:space="preserve">
+    <value>測定値</value>
+  </data>
+  <data name="blackPathMetrics" xml:space="preserve">
+    <value>ブラックパッチ</value>
+  </data>
+  <data name="bluePathMetrics" xml:space="preserve">
+    <value>ブルーパッチ</value>
+  </data>
+  <data name="cyanPathMetrics" xml:space="preserve">
+    <value>シアンパッチ</value>
+  </data>
+  <data name="deltaAText" xml:space="preserve">
+    <value>&amp;Delta;a*</value>
+  </data>
+  <data name="deltaBText" xml:space="preserve">
+    <value>&amp;Delta;b*</value>
+  </data>
+  <data name="deltaLText" xml:space="preserve">
+    <value>&amp;Delta;L*</value>
+  </data>
+  <data name="gbPatchMetricsText" xml:space="preserve">
+    <value>% GB パッチ</value>
+  </data>
+  <data name="greenPathMetrics" xml:space="preserve">
+    <value>グリーンパッチ</value>
+  </data>
+  <data name="magentaPathMetrics" xml:space="preserve">
+    <value>マゼンタパッチ</value>
+  </data>
+  <data name="paperPathMetrics" xml:space="preserve">
+    <value>紙白パッチ</value>
+  </data>
+  <data name="redPathMetrics" xml:space="preserve">
+    <value>レッドパッチ</value>
+  </data>
+  <data name="targetText" xml:space="preserve">
+    <value>基準値</value>
+  </data>
+  <data name="yellowPathMetrics" xml:space="preserve">
+    <value>イエローパッチ</value>
+  </data>
+  <data name="aText" xml:space="preserve">
+    <value>a*</value>
+  </data>
+  <data name="bText" xml:space="preserve">
+    <value>b*</value>
+  </data>
+  <data name="lText" xml:space="preserve">
+    <value> L*</value>
   </data>
 </root>

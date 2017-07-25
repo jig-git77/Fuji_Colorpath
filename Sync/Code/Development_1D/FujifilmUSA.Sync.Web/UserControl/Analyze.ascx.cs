@@ -173,6 +173,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (!Page.IsPostBack)
             {
+                hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
                 //--Start: Load average Compatibility values
                 chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return CheckAvgCompability();");
                 ChkAvgMeasurementCompatibility();
