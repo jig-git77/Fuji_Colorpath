@@ -54,6 +54,7 @@
     <Compile Include="AnalyzeChart_G7.cs" />
     <Compile Include="AnalyzeChart_Gray.cs" />
     <Compile Include="ApplicationConfiguration.cs" />
+    <Compile Include="ChartContent.cs" />
     <Compile Include="CPSync1D\OptimizeRunCurve.cs" />
     <Compile Include="CPSync1D\ProjectTargetDensity.cs" />
     <Compile Include="CPSync1D\ProjectTargetLAB.cs" />

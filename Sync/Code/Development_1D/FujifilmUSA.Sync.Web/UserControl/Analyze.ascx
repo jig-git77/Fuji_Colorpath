@@ -486,7 +486,7 @@
                                         <asp:Localize Text="Report" ID="locReport" runat="server"
                                             meta:resourcekey="locReportResource1"></asp:Localize></a></span></li>
                                     <li><span><a href="#tab6">
-                                        <asp:Localize Text="New Gamut" ID="Localize3" runat="server" ></asp:Localize></a></span></li>
+                                        <asp:Localize Text="New Gamut" ID="Localize3" runat="server"></asp:Localize></a></span></li>
                                 </ul>
                                 <div style="float: right; padding-right: 3px; height: 26px; padding-top: 2px;">
                                     <asp:ImageButton ID="ibtnPrintPreview" runat="server"
@@ -2777,21 +2777,21 @@
 
                             <div>
                                 <section id="tab6" class="contantbox tabcontant hideclass">
-                             
+
                                     <div class="tab_top">&nbsp;</div>
                                     <div class="tab_middle">
-                                        <div class="combopart" style="position:relative;">
+                                        <div class="combopart" style="position: relative;">
                                             <div class="chart-loading"></div>
                                             <div class="float_l" style="padding-left: 10px;">
                                                 <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                                                     <ContentTemplate>
-                                                        <asp:Button ID="btnGeneratePDF" runat="server" Text="Generate PDF Report" />
-                                                         
+                                                        <asp:Button ID="btnGeneratePDF" ClientIDMode="Static" runat="server" Text="Generate PDF Report" />
+
                                                         <br />
                                                         <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color: White;">
                                                             <tr>
                                                                 <td style="width: 45%;" valign="top" class="CHARTTABLE">
-                                                                    
+
                                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                         <tr>
                                                                             <td class="green-title">&nbsp;
@@ -2807,16 +2807,16 @@
                                                                                             <asp:Localize ID="Localize5" runat="server" Text="a* - b* Comparison"
                                                                                                 meta:resourcekey="locComparisonResource1"></asp:Localize>
                                                                                             <%--<img style="height: 22px;" src="../Images/eye_blue.png" />--%>
-                                                                                            <a id="imgEyeABCompLarge" style="float:right;"><asp:Image ID="Image1" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" style="height: 22px;" /></a>
-                                                                                        </td>                                                                                        
+                                                                                            <a id="imgEyeABCompLarge" style="float: right;">
+                                                                                                <asp:Image ID="Image1" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" /></a>
+                                                                                        </td>
                                                                                     </tr>
 
                                                                                     <tr>
                                                                                         <td align="center" valign="top">
-                                                                                            <div id="kendoChartTargetVersusActualAB" style="min-height:250px;min-width:300px;"></div>
-                                                                                            <div id="kendoChartTargetVersusActualABLargeArea">                                                                                            
-                                                                                            <div id="kendoChartTargetVersusActualABLarge"></div>
-
+                                                                                            <div id="kendoChartTargetVersusActualAB" style="min-height: 250px; min-width: 300px;"></div>
+                                                                                            <div id="kendoChartTargetVersusActualABLargeArea">
+                                                                                                <div id="kendoChartTargetVersusActualABLarge"></div>
                                                                                         </td>
                                                                                     </tr>
                                                                                     <tr>
@@ -2840,7 +2840,7 @@
                                                                                                 </div>
                                                                                                 <asp:Panel ID="panelabGamutComparisonNew" runat="server" BorderStyle="None"
                                                                                                     Width="100%" meta:resourcekey="panelabGamutComparisonResource1">
-                                                                                                    <div id="kendoChartGamut_ABComparison" style="min-height:250px;min-width:300px;"></div>
+                                                                                                    <div id="kendoChartGamut_ABComparison" style="min-height: 250px; min-width: 300px;"></div>
                                                                                                 </asp:Panel>
                                                                                             </div>
                                                                                         </td>
@@ -2853,7 +2853,7 @@
                                                                                     </tr>
                                                                                     <tr id="Tr7" runat="server">
                                                                                         <td id="Td8" align="center" valign="top" runat="server">
-                                                                                            <div id="kendoChartLComaparision" style="min-height:80px;min-width:300px;"></div>
+                                                                                            <div id="kendoChartLComaparision" style="min-height: 80px; min-width: 300px;"></div>
                                                                                         </td>
                                                                                     </tr>
                                                                                 </table>
@@ -2875,7 +2875,7 @@
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>
-                                                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:350px;">
+                                                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 350px;">
                                                                                                 <tr>
                                                                                                     <td>
                                                                                                         <div id="kendoChartLBalanceChart"></div>
@@ -2892,7 +2892,12 @@
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 <tr>
-                                                                                                    <td></td>
+                                                                                                    <td>
+                                                                                                        <div style="display: none;">
+                                                                                                            <div id="kendoChartDummy">
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </td>
                                                                                                 </tr>
                                                                                             </table>
                                                                                         </td>

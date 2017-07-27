@@ -56,6 +56,54 @@ $(document).ready(function () {
         popup.open();
         popup.center();
     });
+
+    $('#btnGeneratePDF').on('click', function (e) {
+        e.preventDefault();
+
+        var chartABSpider = $("#kendoChartTargetVersusActualAB").getKendoChart();
+        var chartABActualTarget = $("#kendoChartGamut_ABComparison").getKendoChart();
+        var chartLComparision = $("#kendoChartLComaparision").getKendoChart();
+        var chartLBalanceChart = $("#kendoChartLBalanceChart").getKendoChart();
+        var chartABalanceChart = $("#kendoChartABalanceChart").getKendoChart();
+        var chartBBalanceChart = $("#kendoChartBBalanceChart").getKendoChart();
+
+        var chartContent = {
+            ABComparisionSpiderChart: '',
+            ABActualTargetChart: chartABActualTarget.imageDataURL(),
+            LComparisionChart: chartLComparision.imageDataURL(),
+            LGrayBalanceChart: chartLBalanceChart.imageDataURL(),
+            AGrayBalanceChart: chartABalanceChart.imageDataURL(),
+            BGrayBalanceChart: chartBBalanceChart.imageDataURL()
+        };
+
+        var kendoOptions = $("#kendoChartTargetVersusActualAB").data("kendoChart").options;
+        kendoOptions.plotArea.background = 'gray';
+        //kendoOptions.chartArea.width = 700;
+        //kendoOptions.chartArea.height = 100;
+        $("#kendoChartDummy").kendoChart(kendoOptions);
+        var dummyChart = $("#kendoChartDummy").data('kendoChart');
+        dummyChart.options.transitions = false
+        dummyChart.refresh();
+        chartContent.ABComparisionSpiderChart = dummyChart.imageDataURL();
+
+        $.ajax({
+            url: SERVICE_BASE_URL + 'api/Chart/ExportChartReport',
+            data: JSON.stringify(chartContent),
+            type: 'POST',
+            //dataType: 'json',
+            headers: {
+                "content-type": "application/json",
+            },
+            success: function (response) {
+                console.log(response);
+                alert(response);
+            },
+            error: function (xhr, errorType, exception) {
+                alert(exception);
+
+            }
+        });
+    });
 });
 
 ////**************** START BIND THE AB COMPARISION CHART  ****************////

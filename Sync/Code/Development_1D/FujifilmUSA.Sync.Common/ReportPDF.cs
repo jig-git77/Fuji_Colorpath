@@ -9,10 +9,11 @@ using System.Text;
 using WebSupergoo.ABCpdf8;
 using WebSupergoo.ABCpdf8.Atoms;
 using WebSupergoo.ABCpdf8.Objects;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Common
 {
-    public class ReportPDF
+    public partial class ReportPDF
     {
         #region Declaration
 
@@ -321,7 +322,7 @@ namespace FujifilmUSA.Sync.Common
 
                     if (ReportType == 16) //--------For G7 Report
                     {
-                        SBStr.Replace("###MeasurementType###", Convert.ToString(DT.Rows[0]["MeasurementName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MeasurementName"]).Trim().Contains("Averaging") == true ?  "This report details an average of measurements." : "This report details a single measurement.");
+                        SBStr.Replace("###MeasurementType###", Convert.ToString(DT.Rows[0]["MeasurementName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MeasurementName"]).Trim().Contains("Averaging") == true ? "This report details an average of measurements." : "This report details a single measurement.");
                         SBStr.Replace("###Technician###", Convert.ToString(DT.Rows[0]["TechnicianName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["TechnicianName"]).Trim());
                         SBStr.Replace("###MeasurementDevice###", Convert.ToString(DT.Rows[0]["InstrumentType"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["InstrumentType"]).Trim());
                         SBStr.Replace("###SerialNumber###", Convert.ToString(DT.Rows[0]["SerialNumber"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["SerialNumber"]).Trim());
@@ -875,7 +876,7 @@ namespace FujifilmUSA.Sync.Common
                     {
                         SBstrDeltaValue.Append(SBstrDeltaValue2);
                     }
-                   
+
                     SBStr.Replace("###DensitySummaryDetails###", SBstrDeltaValue.ToString());
                 }
                 //------End Region: for Density Data--------//
@@ -909,7 +910,7 @@ namespace FujifilmUSA.Sync.Common
                         SBstrMetricAvgScoring.Append("<tr style='height: " + RowHeight + "px'>");
                         SBstrMetricAvgScoring.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                         SBstrMetricAvgScoring.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>" + DT.Rows[i]["Color"] + "</td>");
-                        SBstrMetricAvgScoring.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["AvgScore"])),0) + "&nbsp;</td>");
+                        SBstrMetricAvgScoring.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["AvgScore"])), 0) + "&nbsp;</td>");
                         SBstrMetricAvgScoring.Append("</tr>");
 
                         if (i >= 0 && i <= 3)
@@ -951,7 +952,7 @@ namespace FujifilmUSA.Sync.Common
                 }
 
                 // === Table 4.2 = Display Scoring Measurement List === //          
-             
+
                 DT = DS_ScoringMeasurementList.Tables[0];
 
                 StringBuilder SBstrScoringMeasurementList = new StringBuilder();
@@ -991,6 +992,108 @@ namespace FujifilmUSA.Sync.Common
             return SBStr;
         }
         #endregion
+
+    }
+
+    //Create another class for report generation of client charts
+    public partial class ReportPDF
+    {
+        #region Declaration
+        private ChartContent _chartContent;
+        #endregion
+
+        #region Property
+        public ChartContent chartContent
+        {
+            get { return _chartContent; }
+            set { _chartContent = value; }
+        }
+        #endregion
+
+        public void GenerateClientReportPDF()
+        {
+            try
+            {
+                string FileName = "~/Templates/KendoReportTest.htm";
+
+                Doc theDoc = new Doc();
+                //theDoc.HtmlOptions.Engine = WebSupergoo.ABCpdf8.EngineType.Gecko;
+                //========== Reads the template ==========//
+                StreamReader fp;
+
+                //========== The rectangle for the content on pdf ==========//
+                theDoc.Rect.Left = 0;
+                theDoc.Rect.Bottom = 30;
+                theDoc.Rect.Width = 610;
+                theDoc.Rect.Height = 770;
+                theDoc.Page = theDoc.AddPage();
+
+
+                //========== The page ID Default is 1 ==========//
+                int theID;
+
+                fp = File.OpenText(System.Web.HttpContext.Current.Server.MapPath(FileName));
+                StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
+                //SBStr = SetPDFContent(SBStr);
+                fp.Close();
+                theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
+                theDoc.Rect.Inset(0, 1);
+
+
+                while (true)
+                {
+                    //========== Create A chanin for a pdf with multiple page ==========//
+                    if (!theDoc.Chainable(theID))
+                        break;
+
+                    theDoc.Page = theDoc.AddPage();
+                    theCount++;
+                    theID = theDoc.AddImageToChain(theID);
+                }
+
+                theDoc.Rect.Inset(0, -1);
+
+                if (FileName.Trim() == "")
+                {
+                    throw new Exception("Please Enter Report Type.");
+                }
+
+                string pth = PDFPath + PDF_NAME;
+
+                if (System.IO.File.Exists(pth))
+                    System.IO.File.Delete(pth);
+
+                theDoc.Save(pth);
+                theDoc.Clear();
+                theDoc.Dispose();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        public StringBuilder SetPDFContent(StringBuilder SBStr)
+        {
+            try
+            {
+                //SBStr.Replace("###TargetVersusActualAB###", System.Web.HttpContext.Current.Server.MapPath("~/Content/newchart.png"));
+                SBStr.Replace("###TargetVersusActualAB###", this.chartContent.ABComparisionSpiderChart);
+
+                SBStr.Replace("###ABComparison###", this.chartContent.ABActualTargetChart);
+                SBStr.Replace("###LComparison###", this.chartContent.LComparisionChart);
+                SBStr.Replace("###GrayL###", this.chartContent.LGrayBalanceChart);
+                SBStr.Replace("###GrayA###", this.chartContent.AGrayBalanceChart);
+                SBStr.Replace("###GrayB###", this.chartContent.BGrayBalanceChart);
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return SBStr;
+        }
 
     }
 }

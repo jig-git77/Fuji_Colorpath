@@ -7,9 +7,11 @@ using FujiFilmUSA.Sync.Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 
@@ -104,6 +106,57 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             catch (Exception ex)
             {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
+
+        [HttpPost]
+        public IHttpActionResult ExportChartReport(ChartContent chart)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
+            try
+            {
+                if (chart == null)
+                {
+                    validationMessage = "Invalid Charts, Please try again.";
+
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.Message = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+
+                    ReportPDF objReportPDF = new ReportPDF();
+                    objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+
+                    if (!Directory.Exists(objReportPDF.PDFPath))
+                        Directory.CreateDirectory(objReportPDF.PDFPath);
+
+                    objReportPDF.chartContent = chart;
+                    objReportPDF.PDF_NAME = "ReportSingleMeasurement.PDF";
+                    objReportPDF.ReportName = "Single Measurement Report";
+                    objReportPDF.GenerateClientReportPDF();
+
+                    string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
+                    httpResponse.status = ResponseStatus.Success;
+                    httpResponse.Data = ReportPath;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+            }
+            catch (Exception ex)
+            {
+
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
                 errprResponse.Error.Message = ex.Message;
                 errprResponse.Error.Code = (int)ResponseStatus.InternalServer;

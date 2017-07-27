@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Templates\KendoReportTest.htm" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DLL\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj">
