@@ -1,15 +1,48 @@
-﻿var jsonTarget = [];
+﻿////*********** Declarations ***********////
+var jsonTarget = [];
 var jsonColors = [];
 var jsonGray = [];
 var _Resources = {};
+var SERVICE_BASE_URL = '';
+var $hdnBaseServiceUrl;
+var $btnGeneratePDF;
+var $imgEyeABCompLarge;
+var $chartLoader;
+var $hdMeasurement;
+var $chart_TargetVersusActualAB;
+var $chart_Gamut_ABComparison;
+var $chart_L_Comaparision;
+var $chart_L_BalanceChart;
+var $chart_A_BalanceChart;
+var $chart_B_BalanceChart;
+var $chartTargetVersusActualABLarge;
+var $chartTargetVersusActualABLargeArea;
+var $kendoChartDummy;
 
 
 $(document).ready(function () {
-    var SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
 
-    var measurementID = parseInt($('#ContentPlaceHolder1_ucAnalyze_hdMeasurement').val());
+    ////*********** HTML Element Declarations ***********////
+    $hdnBaseServiceUrl = $('#hdnBaseServiceUrl').val();
+    $hdMeasurement = $('#ContentPlaceHolder1_ucAnalyze_hdMeasurement').val();
+    $chartLoader = $(".chart-loading");
+    $imgEyeABCompLarge = $('#imgEyeABCompLarge')
+    $btnGeneratePDF = $('#btnGeneratePDF')
+    $chart_TargetVersusActualAB = $("#kendoChartTargetVersusActualAB");
+    $chart_Gamut_ABComparison = $("#kendoChartGamut_ABComparison");
+    $chart_L_Comaparision = $("#kendoChartLComaparision");
+    $chart_L_BalanceChart = $("#kendoChartLBalanceChart");
+    $chart_A_BalanceChart = $("#kendoChartABalanceChart");
+    $chart_B_BalanceChart = $("#kendoChartBBalanceChart");
+    $chartTargetVersusActualABLarge = $("#kendoChartTargetVersusActualABLarge");
+    $chartTargetVersusActualABLargeArea = $("#kendoChartTargetVersusActualABLargeArea");
+    $kendoChartDummy = $("#kendoChartDummy");
+
+    SERVICE_BASE_URL = $hdnBaseServiceUrl;
+
+    var measurementID = parseInt($hdMeasurement);
     var isAverageOfMeasurements = true;
-    kendo.ui.progress($(".chart-loading"), true);
+    kendo.ui.progress($chartLoader, true);
     $.ajax({
         url: SERVICE_BASE_URL + 'api/Chart/GenerateGrayChart',
         data: { MeasurementId: measurementID, IsAverageOfMeasurements: isAverageOfMeasurements },
@@ -25,24 +58,24 @@ $(document).ready(function () {
             BindChartGamutABComparision();
             BindChartLComparision();
             BindChartLGrayBalance();
-            kendo.ui.progress($(".chart-loading"), false);
+            kendo.ui.progress($chartLoader, false);
         },
         error: function (xhr, errorType, exception) {
             //alert(exception);
-            kendo.ui.progress($(".chart-loading"), false);
+            kendo.ui.progress($chartLoader, false);
         }
     });
 
-    $('#imgEyeABCompLarge').on('click', function (e) {
+    $imgEyeABCompLarge.on('click', function (e) {
         e.preventDefault();
 
-        var kendoOptions = $("#kendoChartTargetVersusActualAB").data("kendoChart").options;
+        var kendoOptions = $chart_TargetVersusActualAB.data("kendoChart").options;
         kendoOptions.chartArea.width = 580;
         kendoOptions.chartArea.height = 480;
 
-        $("#kendoChartTargetVersusActualABLarge").kendoChart(kendoOptions);
+        $chartTargetVersusActualABLarge.kendoChart(kendoOptions);
 
-        $("#kendoChartTargetVersusActualABLargeArea").kendoWindow({
+        $chartTargetVersusActualABLargeArea.kendoWindow({
             width: "600px",
             modal: true,
             height: '500px',
@@ -52,39 +85,45 @@ $(document).ready(function () {
             visible: false
         });
 
-        var popup = $("#kendoChartTargetVersusActualABLargeArea").data('kendoWindow');
+        var popup = $chartTargetVersusActualABLargeArea.data('kendoWindow');
         popup.open();
         popup.center();
     });
 
-    $('#btnGeneratePDF').on('click', function (e) {
+    $btnGeneratePDF.on('click', function (e) {
         e.preventDefault();
 
-        var chartABSpider = $("#kendoChartTargetVersusActualAB").getKendoChart();
-        var chartABActualTarget = $("#kendoChartGamut_ABComparison").getKendoChart();
-        var chartLComparision = $("#kendoChartLComaparision").getKendoChart();
-        var chartLBalanceChart = $("#kendoChartLBalanceChart").getKendoChart();
-        var chartABalanceChart = $("#kendoChartABalanceChart").getKendoChart();
-        var chartBBalanceChart = $("#kendoChartBBalanceChart").getKendoChart();
+        //var chartABSpider = $chart_TargetVersusActualAB.getKendoChart();
+        //var chartABActualTarget = $chart_Gamut_ABComparison.getKendoChart();
+        //var chartLComparision = $chart_L_Comaparision.getKendoChart();
+        //var chartLBalanceChart = $chart_L_BalanceChart.getKendoChart();
+        //var chartABalanceChart = $chart_A_BalanceChart.getKendoChart();
+        //var chartBBalanceChart = $chart_B_BalanceChart.getKendoChart();
+        //var chartContent = {
+        //    ABComparisionSpiderChart: '',
+        //    ABActualTargetChart: chartABActualTarget.imageDataURL(),
+        //    LComparisionChart: chartLComparision.imageDataURL(),
+        //    LGrayBalanceChart: chartLBalanceChart.imageDataURL(),
+        //    AGrayBalanceChart: chartABalanceChart.imageDataURL(),
+        //    BGrayBalanceChart: chartBBalanceChart.imageDataURL()
+        //};
+
 
         var chartContent = {
             ABComparisionSpiderChart: '',
-            ABActualTargetChart: chartABActualTarget.imageDataURL(),
-            LComparisionChart: chartLComparision.imageDataURL(),
-            LGrayBalanceChart: chartLBalanceChart.imageDataURL(),
-            AGrayBalanceChart: chartABalanceChart.imageDataURL(),
-            BGrayBalanceChart: chartBBalanceChart.imageDataURL()
+            ABActualTargetChart: '',
+            LComparisionChart: '',
+            LGrayBalanceChart: '',
+            AGrayBalanceChart: '',
+            BGrayBalanceChart: ''
         };
 
-        var kendoOptions = $("#kendoChartTargetVersusActualAB").data("kendoChart").options;
-        kendoOptions.plotArea.background = 'gray';
-        //kendoOptions.chartArea.width = 700;
-        //kendoOptions.chartArea.height = 100;
-        $("#kendoChartDummy").kendoChart(kendoOptions);
-        var dummyChart = $("#kendoChartDummy").data('kendoChart');
-        dummyChart.options.transitions = false
-        dummyChart.refresh();
-        chartContent.ABComparisionSpiderChart = dummyChart.imageDataURL();
+        chartContent.ABComparisionSpiderChart = GetABComparisionSpiderChartImage();
+        chartContent.ABActualTargetChart = GetActualVsTargetChartImage();
+        chartContent.LComparisionChart = GetLComparisionChartImage();
+        chartContent.LGrayBalanceChart = Get_L_BalanceChartImage();
+        chartContent.AGrayBalanceChart = Get_A_BalanceChartImage();
+        chartContent.BGrayBalanceChart = Get_B_BalanceChartImage();
 
         $.ajax({
             url: SERVICE_BASE_URL + 'api/Chart/ExportChartReport',
@@ -252,7 +291,7 @@ function BindChartTargetVersusActualAB() {
     });
 
 
-    $("#kendoChartTargetVersusActualAB").kendoChart({
+    $chart_TargetVersusActualAB.kendoChart({
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -367,7 +406,7 @@ function BindChartGamutABComparision() {
     var colorPAPERObject = [[paperObj.CielabA, paperObj.CielabB]];
 
 
-    $("#kendoChartGamut_ABComparison").kendoChart({
+    $chart_Gamut_ABComparison.kendoChart({
         seriesDefaults: {
             type: "scatterLine"
         },
@@ -556,7 +595,7 @@ function BindChartLComparision() {
 
     });
 
-    $("#kendoChartLComaparision").kendoChart({
+    $chart_L_Comaparision.kendoChart({
         seriesDefaults: {
             type: "scatter",
         },
@@ -615,7 +654,7 @@ function BindChartLComparision() {
 function BindChartLGrayBalance() {
 
 
-    $("#kendoChartLBalanceChart").kendoChart({
+    $chart_L_BalanceChart.kendoChart({
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -674,7 +713,7 @@ function BindChartLGrayBalance() {
         }
     });
 
-    $("#kendoChartABalanceChart").kendoChart({
+    $chart_A_BalanceChart.kendoChart({
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -730,7 +769,7 @@ function BindChartLGrayBalance() {
         }
     });
 
-    $("#kendoChartBBalanceChart").kendoChart({
+    $chart_B_BalanceChart.kendoChart({
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -793,4 +832,92 @@ function BindChartLGrayBalance() {
             background: "lightgray"
         }
     });
+}
+
+
+////**************** GET IMAGE OF AB COMPARSION SPIDER CHART FOR REPORT  ****************////
+function GetABComparisionSpiderChartImage() {
+    var kendoOptions = $chart_TargetVersusActualAB.data("kendoChart").options;
+    kendoOptions.plotArea.background = 'gray';
+    //kendoOptions.chartArea.width = 700;
+    //kendoOptions.chartArea.height = 100;
+    $kendoChartDummy.kendoChart(kendoOptions);
+    var dummyChart = $kendoChartDummy.data('kendoChart');
+    dummyChart.options.transitions = false
+    dummyChart.refresh();
+    return dummyChart.imageDataURL();
+}
+
+////**************** GET IMAGE OF ACTUAL VS TARGET CHART FOR REPORT  ****************////
+function GetActualVsTargetChartImage() {
+    var kendoOptions = $chart_Gamut_ABComparison.data("kendoChart").options;
+    //kendoOptions.plotArea.background = 'gray';
+    //kendoOptions.chartArea.width = 700;
+    //kendoOptions.chartArea.height = 100;
+    $kendoChartDummy.kendoChart(kendoOptions);
+    var dummyChart = $kendoChartDummy.data('kendoChart');
+    dummyChart.options.transitions = false
+    dummyChart.refresh();
+    return dummyChart.imageDataURL();
+}
+
+
+////**************** GET IMAGE OF L-COMPARSION CHART FOR REPORT  ****************////
+function GetLComparisionChartImage() {
+    var kendoOptions = $chart_L_Comaparision.data("kendoChart").options;
+    //kendoOptions.plotArea.background = 'gray';
+    kendoOptions.chartArea.width = 650;
+    kendoOptions.chartArea.height = 150;
+    $kendoChartDummy.kendoChart(kendoOptions);
+    var dummyChart = $kendoChartDummy.data('kendoChart');
+    dummyChart.options.transitions = false
+    dummyChart.refresh();
+    return dummyChart.imageDataURL();
+}
+
+
+////**************** GET IMAGE OF L-BALANCE CHART FOR REPORT  ****************////
+function Get_L_BalanceChartImage() {
+    var kendoOptions = $chart_L_BalanceChart.data("kendoChart").options;
+    var kendodataSource = $chart_L_BalanceChart.data("kendoChart").dataSource;
+
+    //kendoOptions.plotArea.background = 'gray';
+    //kendoOptions.chartArea.width = 700;
+    //kendoOptions.chartArea.height = 100;
+    $kendoChartDummy.kendoChart(kendoOptions);
+    var dummyChart = $kendoChartDummy.data('kendoChart');
+    dummyChart.dataSource = kendodataSource;
+    dummyChart.options.transitions = false
+    dummyChart.refresh();
+    return dummyChart.imageDataURL();
+}
+
+////**************** GET IMAGE OF A-BALANCE CHART FOR REPORT  ****************////
+function Get_A_BalanceChartImage() {
+    var kendoOptions = $chart_A_BalanceChart.data("kendoChart").options;
+    var kendodataSource = $chart_A_BalanceChart.data("kendoChart").dataSource;
+    //kendoOptions.plotArea.background = 'gray';
+    //kendoOptions.chartArea.width = 700;
+    //kendoOptions.chartArea.height = 100;
+    $kendoChartDummy.kendoChart(kendoOptions);
+    var dummyChart = $kendoChartDummy.data('kendoChart');
+    dummyChart.dataSource = kendodataSource;
+    dummyChart.options.transitions = false
+    dummyChart.refresh();
+    return dummyChart.imageDataURL();
+}
+
+////**************** GET IMAGE OF B-BALANCE CHART FOR REPORT  ****************////
+function Get_B_BalanceChartImage() {
+    var kendoOptions = $chart_B_BalanceChart.data("kendoChart").options;
+    var kendodataSource = $chart_B_BalanceChart.data("kendoChart").dataSource;
+    //kendoOptions.plotArea.background = 'gray';
+    //kendoOptions.chartArea.width = 700;
+    //kendoOptions.chartArea.height = 100;
+    $kendoChartDummy.kendoChart(kendoOptions);
+    var dummyChart = $kendoChartDummy.data('kendoChart');
+    dummyChart.dataSource = kendodataSource;
+    dummyChart.options.transitions = false
+    dummyChart.refresh();
+    return dummyChart.imageDataURL();
 }

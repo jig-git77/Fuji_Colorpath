@@ -137,7 +137,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 else
                 {
 
-                    ReportPDF objReportPDF = new ReportPDF();
+                    Utility.ReportPDF objReportPDF = new Utility.ReportPDF();
                     objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
 
                     if (!Directory.Exists(objReportPDF.PDFPath))
@@ -146,6 +146,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     objReportPDF.chartContent = chart;
                     objReportPDF.PDF_NAME = "ReportSingleMeasurement.PDF";
                     objReportPDF.ReportName = "Single Measurement Report";
+                    objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");                    
+
                     objReportPDF.GenerateClientReportPDF();
 
                     string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
