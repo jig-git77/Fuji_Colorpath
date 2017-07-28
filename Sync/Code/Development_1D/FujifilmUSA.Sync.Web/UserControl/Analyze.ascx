@@ -485,7 +485,7 @@
                                     <li><span><a href="#tab5">
                                         <asp:Localize Text="Report" ID="locReport" runat="server"
                                             meta:resourcekey="locReportResource1"></asp:Localize></a></span></li>
-                                    <li><span><a href="#tab6">
+                                    <li><span><a href="#tab8">
                                         <asp:Localize Text="New Gamut" ID="Localize3" runat="server"></asp:Localize></a></span></li>
                                 </ul>
                                 <div style="float: right; padding-right: 3px; height: 26px; padding-top: 2px;">
@@ -2776,7 +2776,7 @@
                             </div>
 
                             <div>
-                                <section id="tab6" class="contantbox tabcontant hideclass">
+                                <section id="tab8" class="contantbox tabcontant hideclass">
 
                                     <div class="tab_top">&nbsp;</div>
                                     <div class="tab_middle">
