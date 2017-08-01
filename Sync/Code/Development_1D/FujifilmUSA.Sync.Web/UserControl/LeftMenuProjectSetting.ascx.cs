@@ -45,7 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkTargetColorSpace.Enabled = true;
                     }
-                    if (SessionManager.Instance.CurrentProject.ProjectOption != null && SessionManager.Instance.CurrentProject.ProjectOption.Count > 0)
+                    if (SessionManager.Instance.CurrentProject.ProjectOption != null && SessionManager.Instance.CurrentProject.ProjectOption.Count > 0 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary) //No Profiler Options for Spot Target Library project type)
                     {
                         lnkProfilerOption.Enabled = true;
                     }
@@ -65,7 +65,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkMeasure.Enabled = true;
 
-                        if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource)
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource && SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
                         {
                             lnkAnalyze.Enabled = true;
                         }
@@ -74,7 +74,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             lnkDownload.Enabled = true;
                         }
 
-                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource || (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)) //-- If ProjectType is Source to Source Profile or Sync 1D ReTarget then, don't show Measurement Page
+                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource || (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0) || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //-- If ProjectType is Source to Source Profile or Sync 1D ReTarget or Spot Target Library project type then, don't show Measurement Page
                         {
                             lnkMeasure.Enabled = false;
                         }
@@ -92,7 +92,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                         if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0)
                         {
-                            if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource)
+                            if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
                             {
                                 lnkAnalyze.Enabled = true;
                             }
