@@ -13,7 +13,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Common
 {
-    public partial class ReportPDF
+    public class ReportPDF
     {
         #region Declaration
 
@@ -32,6 +32,8 @@ namespace FujifilmUSA.Sync.Common
         string _DLPName;
         string _ReportName;
         bool _IsValidation;
+        string _WebURL;
+        private ChartContent _chartContent;
         #endregion
 
 
@@ -103,6 +105,16 @@ namespace FujifilmUSA.Sync.Common
             set { _IsValidation = value; }
         }
 
+        public string BaseWebURL
+        {
+            get { return _WebURL; }
+            set { _WebURL = value; }
+        }
+        public ChartContent chartContent
+        {
+            get { return _chartContent; }
+            set { _chartContent = value; }
+        }
         #endregion
 
         #region Constructor
@@ -115,7 +127,12 @@ namespace FujifilmUSA.Sync.Common
             if (System.IO.Directory.Exists(Dir2) == false) { System.IO.Directory.CreateDirectory(Dir2); }
             if (System.IO.Directory.Exists(Dir3) == false) { System.IO.Directory.CreateDirectory(Dir3); }
 
-            CSSPath = System.Web.HttpContext.Current.Server.MapPath("Templates/style.css");
+            //string currentBaseUrl = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority +
+            //                      System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
+            this._WebURL = Utilities.ReadConfigValue("BaseWebURL");
+            CSSPath = this._WebURL + "Templates/style.css";
+            
+            //CSSPath = System.Web.HttpContext.Current.Server.MapPath("Templates/style.css");
             DS_Common = new DataSet();
         }
         #endregion
@@ -260,6 +277,68 @@ namespace FujifilmUSA.Sync.Common
                 throw new Exception(Exc.ToString());
             }
         }
+        public void GenerateClientReportPDF()
+        {
+            try
+            {
+                string FilePath= this._WebURL + "Templates/KendoReportTest.htm";
+                if (FilePath.Trim() == "")
+                {
+                    throw new Exception("Please Enter Report Type.");
+                }
+                Doc theDoc = new Doc();
+
+                
+                //========== The rectangle for the content on pdf ==========//
+                theDoc.Rect.Left = 0;
+                theDoc.Rect.Bottom = 30;
+                theDoc.Rect.Width = 610;
+                theDoc.Rect.Height = 770;
+                theDoc.Page = theDoc.AddPage();
+
+                //========== The page ID Default is 1 ==========//
+                int theID;
+
+                //========== Reads the template ==========//
+                var webClient = new System.Net.WebClient();
+                StringBuilder SBStr = new StringBuilder(webClient.DownloadString(FilePath));
+
+                SBStr = SetPDFContent(SBStr);
+
+                theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
+                theDoc.Rect.Inset(0, 1);
+
+                while (true)
+                {
+                    //========== Create A chanin for a pdf with multiple page ==========//
+                    if (!theDoc.Chainable(theID))
+                        break;
+
+                    theDoc.Page = theDoc.AddPage();
+                    theCount++;
+                    theID = theDoc.AddImageToChain(theID);
+                }
+
+                theDoc.Rect.Inset(0, -1);
+
+                
+
+                string pth = PDFPath + PDF_NAME;
+
+                if (System.IO.File.Exists(pth))
+                    System.IO.File.Delete(pth);
+
+                theDoc.Save(pth);
+                theDoc.Clear();
+                theDoc.Dispose();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        
         #endregion
 
         #region Report 13 : Single Measureament Report
@@ -988,6 +1067,39 @@ namespace FujifilmUSA.Sync.Common
             #region Assign Server
             SBStr.Replace("##IMAGES##", strServer);
             #endregion
+
+            return SBStr;
+        }
+        public StringBuilder SetPDFContent(StringBuilder SBStr)
+        {
+            try
+            {
+                //string currentBaseUrl = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority +
+                //                    System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
+
+                //** Add Styles Path ***//
+                string cssFullPath = this._WebURL + "Templates/style.css";
+                SBStr.Replace("#csspath#", cssFullPath);
+
+                //** Add Images Path ***//
+                string imagesPath = this.BaseWebURL + "Images/";
+                SBStr.Replace("##IMAGES##", imagesPath);
+
+                //** Add Content ***//
+                SBStr.Replace("###ReportName###", this.ReportName);
+
+                SBStr.Replace("###TargetVersusActualAB###", this.chartContent.ABComparisionSpiderChart);
+                SBStr.Replace("###ABComparison###", this.chartContent.ABActualTargetChart);
+                SBStr.Replace("###LComparison###", this.chartContent.LComparisionChart);
+                SBStr.Replace("###GrayL###", this.chartContent.LGrayBalanceChart);
+                SBStr.Replace("###GrayA###", this.chartContent.AGrayBalanceChart);
+                SBStr.Replace("###GrayB###", this.chartContent.BGrayBalanceChart);
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
 
             return SBStr;
         }
