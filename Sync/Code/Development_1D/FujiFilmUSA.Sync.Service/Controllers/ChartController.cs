@@ -85,7 +85,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     //temp code start
                     //SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Validation;
                     //temp code end
-                    IsVerification = true;
+                   // IsVerification = true;
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
                     //this.IsVerification = IsVerification;
                     //this.IsSync1DType = IsSync1DType;
