@@ -127,11 +127,11 @@ namespace FujifilmUSA.Sync.Common
             if (System.IO.Directory.Exists(Dir2) == false) { System.IO.Directory.CreateDirectory(Dir2); }
             if (System.IO.Directory.Exists(Dir3) == false) { System.IO.Directory.CreateDirectory(Dir3); }
 
-            //string currentBaseUrl = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority +
-            //                      System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
-            this._WebURL = Utilities.ReadConfigValue("BaseWebURL");
-            CSSPath = this._WebURL + "Templates/style.css";
-            
+            string currentBaseUrl = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority +
+                                  System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
+
+            CSSPath = currentBaseUrl + "Templates/style.css";
+
             //CSSPath = System.Web.HttpContext.Current.Server.MapPath("Templates/style.css");
             DS_Common = new DataSet();
         }
@@ -281,6 +281,7 @@ namespace FujifilmUSA.Sync.Common
         {
             try
             {
+                CSSPath = this.BaseWebURL + "Templates/style.css";
                 string FilePath= this._WebURL + "Templates/KendoReportTest.htm";
                 if (FilePath.Trim() == "")
                 {

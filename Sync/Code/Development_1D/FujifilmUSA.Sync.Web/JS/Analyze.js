@@ -3,8 +3,10 @@ var jsonTarget = [];
 var jsonColors = [];
 var jsonGray = [];
 var _Resources = {};
+var CURRENT_USER_ID
 var SERVICE_BASE_URL = '';
 var $hdnBaseServiceUrl;
+var $hdnCurrentUserID;
 var $btnGeneratePDF;
 var $imgEyeABCompLarge;
 var $chartLoader;
@@ -24,6 +26,7 @@ $(document).ready(function () {
 
     ////*********** HTML Element Declarations ***********////
     $hdnBaseServiceUrl = $('#hdnBaseServiceUrl').val();
+    $hdnCurrentUserID = $('#hdnCurrentUserID').val();
     $hdMeasurement = $('#ContentPlaceHolder1_ucAnalyze_hdMeasurement').val();
     $chartLoader = $(".chart-loading");
     $imgEyeABCompLarge = $('#imgEyeABCompLarge')
@@ -38,6 +41,7 @@ $(document).ready(function () {
     $chartTargetVersusActualABLargeArea = $("#kendoChartTargetVersusActualABLargeArea");
     $kendoChartDummy = $("#kendoChartDummy");
 
+    CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
 
     var measurementID = parseInt($hdMeasurement);
@@ -93,23 +97,8 @@ $(document).ready(function () {
     $btnGeneratePDF.on('click', function (e) {
         e.preventDefault();
 
-        //var chartABSpider = $chart_TargetVersusActualAB.getKendoChart();
-        //var chartABActualTarget = $chart_Gamut_ABComparison.getKendoChart();
-        //var chartLComparision = $chart_L_Comaparision.getKendoChart();
-        //var chartLBalanceChart = $chart_L_BalanceChart.getKendoChart();
-        //var chartABalanceChart = $chart_A_BalanceChart.getKendoChart();
-        //var chartBBalanceChart = $chart_B_BalanceChart.getKendoChart();
-        //var chartContent = {
-        //    ABComparisionSpiderChart: '',
-        //    ABActualTargetChart: chartABActualTarget.imageDataURL(),
-        //    LComparisionChart: chartLComparision.imageDataURL(),
-        //    LGrayBalanceChart: chartLBalanceChart.imageDataURL(),
-        //    AGrayBalanceChart: chartABalanceChart.imageDataURL(),
-        //    BGrayBalanceChart: chartBBalanceChart.imageDataURL()
-        //};
-
-
         var chartContent = {
+            CurrentUserId: CURRENT_USER_ID,
             ABComparisionSpiderChart: '',
             ABActualTargetChart: '',
             LComparisionChart: '',
@@ -135,7 +124,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 console.log(response);
-                alert(response);
+                window.open(SERVICE_BASE_URL + response.data, "_blank");
             },
             error: function (xhr, errorType, exception) {
                 alert(exception);

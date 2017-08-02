@@ -7,6 +7,7 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class ChartContent
     {
+        public int CurrentUserId { get; set; }
         public string ABComparisionSpiderChart { get; set; }
         public string ABActualTargetChart { get; set; }
         public string LComparisionChart { get; set; }

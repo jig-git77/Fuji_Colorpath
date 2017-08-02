@@ -144,9 +144,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         Directory.CreateDirectory(objReportPDF.PDFPath);
 
                     objReportPDF.chartContent = chart;
-                    objReportPDF.PDF_NAME = "ReportSingleMeasurement.PDF";
+                    objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
                     objReportPDF.ReportName = "Single Measurement Report";
-                    //objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");                    
+                    objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");                    
 
                     objReportPDF.GenerateClientReportPDF();
 
