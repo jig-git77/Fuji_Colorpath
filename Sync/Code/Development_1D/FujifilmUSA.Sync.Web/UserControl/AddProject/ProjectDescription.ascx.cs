@@ -63,6 +63,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     //if (Common.Utilities.GetEnumDescriptionAttributeValue(item.Key) != Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary))
                     //{
+                    if (((SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) || (ELicenseType.SpotLibrary != item.Key)))
                         ddlLicenseType.Items.Add(new System.Web.UI.WebControls.ListItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = Convert.ToString((int)item.Key) });
                     //}
                 }
