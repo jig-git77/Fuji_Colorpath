@@ -171,6 +171,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             var project = e.Item.DataItem as Project;
             if (e.Item.ItemType != GridItemType.Item && e.Item.ItemType != GridItemType.AlternatingItem) return;
+            var btnExpand = e.Item.FindControl("GECBtnExpandColumn") as Button;
             var btnSelect = e.Item.FindControl("imgbtnSelect") as ImageButton;
             var imgStatus = e.Item.FindControl("imgStatus") as Image;
             var imgbtnVarification = e.Item.FindControl("imgbtnVarification") as Image;
@@ -222,9 +223,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
                     break;                   
             }
-         
+
             //Decide and set image URL based on conditions
-            SetOperationImageURL(btnSelect, project.LicenseType, project.Status);
+            SetOperationImageURL(btnSelect, project.LicenseType, project.Status, btnExpand);
             SetValidationImageURL(imgbtnVarification, project);
 
             if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject) || (project.LicenseType == ELicenseType.InkOptimizationSource && SessionManager.Instance.CurrentUser.Role.RoleId > 4)) //-------------No Delete project permission for Ink Optimization Source project type for below Region Admin level----//
@@ -285,9 +286,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
             }
         }
-        private void SetOperationImageURL(ImageButton imgOperationButton, ELicenseType selectedLicenseType, EOptimizeRunStatus optimizeRunStatus)
+        private void SetOperationImageURL(ImageButton imgOperationButton, ELicenseType selectedLicenseType, EOptimizeRunStatus optimizeRunStatus, Button btnExpand)
         {
             string operationImageURL = "";
+            bool isExpandable = false;
             switch (optimizeRunStatus)
             {
                 //Open and Closed has same type of images
@@ -343,6 +345,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.DLP:
                             operationImageURL = @"../Images/DLP_Certified.png";
+                            isExpandable = true;
                             break;
                         case ELicenseType.InkOptimization:
                             operationImageURL = @"../Images/InkOptimize_Certified.png";
@@ -365,6 +368,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             imgOperationButton.ImageUrl = operationImageURL;
             imgOperationButton.Visible = operationImageURL.Length > 0;
+            btnExpand.Visible = isExpandable;
         }
         private void GetSourceProfiles()
         {

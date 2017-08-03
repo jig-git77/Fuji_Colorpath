@@ -58,11 +58,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 && SessionManager.Instance.CurrentDevice.LicenseTypeProject != null
                     && SessionManager.Instance.CurrentDevice.LicenseTypeProject.Count > 0)
             {
-              
+
                 foreach (KeyValuePair<ELicenseType, int> item in SessionManager.Instance.CurrentDevice.LicenseTypeProject)
                 {
                     //if (Common.Utilities.GetEnumDescriptionAttributeValue(item.Key) != Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary))
                     //{
+                    if (((SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) || (ELicenseType.SpotLibrary != item.Key)))
                         ddlLicenseType.Items.Add(new System.Web.UI.WebControls.ListItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = Convert.ToString((int)item.Key) });
                     //}
                 }
@@ -70,7 +71,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ddlLicenseType.SelectedIndex = 0;
             }
 
-            if (SessionManager.Instance.CurrentProject != null &&                
+            if (SessionManager.Instance.CurrentProject != null &&
                 SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.None)
             {
                 ddlLicenseType.SelectedIndex = ddlLicenseType.Items.IndexOf(ddlLicenseType.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.LicenseType)));
@@ -80,7 +81,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     locTargetColorSpace.Text = GetResourceString(_reclocTargetColorSpaceNextText);
                 }
             }
-           
+
         }
 
         private void LoadInkOrder()
