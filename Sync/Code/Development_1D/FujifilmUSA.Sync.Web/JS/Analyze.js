@@ -833,11 +833,12 @@ function BindChartLGrayBalance() {
 ////**************** GET IMAGE OF AB COMPARSION SPIDER CHART FOR REPORT  ****************////
 function GetABComparisionSpiderChartImage() {
     var kendoOptions = $chart_TargetVersusActualAB.data("kendoChart").options;
-    kendoOptions.plotArea.background = 'gray';
+    //kendoOptions.plotArea.background = 'gray';
     //kendoOptions.chartArea.width = 700;
     //kendoOptions.chartArea.height = 100;
     $kendoChartDummy.kendoChart(kendoOptions);
     var dummyChart = $kendoChartDummy.data('kendoChart');
+    dummyChart.options.plotArea.background = 'gray';
     dummyChart.options.transitions = false
     dummyChart.refresh();
     return dummyChart.imageDataURL();
