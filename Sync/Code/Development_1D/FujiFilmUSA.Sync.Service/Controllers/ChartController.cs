@@ -23,6 +23,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private PresenterAnalyze _presenterAnalyze;
         private Dictionary<string, string> _resourceValues { get; set; }
         private Dictionary<string, string> _globalResourceValues { get; set; }
+        private const string _InvalidMeasurementId = "Invalid_MeasurementId";
+        private const string _InvalidIsAverageOfMeasurements = "Invalid_IsAverageOfMeasurements";
+        private const string _InvalidIsVerificationProject = "Invalid_IsVerificationProject";
+        private const string _InvalidIsSync4DTypeProject = "Invalid_IsSync4DTypeProject";
         #endregion
 
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -57,7 +61,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GenerateGrayChart(int? MeasurementId, bool? IsAverageOfMeasurements)
+        public IHttpActionResult GenerateGrayChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync4DTypeProject)
         {
             //int? MeasurementId = 15081;
             //bool? IsAverageOfMeasurements = true;   
@@ -68,10 +72,16 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (MeasurementId == null)
-                    validationMessage = "Invalid MeasurementId have been provided.";
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
 
                 if (IsAverageOfMeasurements == null)
-                    validationMessage = "Invalid IsAverageOfMeasurements have been provided.";
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+
+                if (IsVerificationProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+
+                if (IsSync4DTypeProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync4DTypeProject);
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -85,10 +95,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     //temp code start
                     //SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Validation;
                     //temp code end
-                   // IsVerification = true;
+                    //IsVerification = true;
+                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    this.IsSync1DType = IsSync4DTypeProject == null ? false : Convert.ToBoolean(IsSync4DTypeProject);
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    //this.IsVerification = IsVerification;
-                    //this.IsSync1DType = IsSync1DType;
                     this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
                     _presenterAnalyze.GetGrayChart();
                     GenerateResources();
@@ -146,7 +156,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     objReportPDF.chartContent = chart;
                     objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
                     objReportPDF.ReportName = "Single Measurement Report";
-                    objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");                    
+                    objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
 
                     objReportPDF.GenerateClientReportPDF();
 
@@ -225,7 +235,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         public bool useDLP { get; set; }
         public byte[] DeviceLinkProfile { get; set; }
-        public bool IsSync1DType { get; }
+        public bool IsSync1DType { get; set; }
         public PCSDataTypes PCSDataTypes { get; set; }
         public DensityTypes DensityType { get; set; }
 

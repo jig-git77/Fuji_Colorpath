@@ -242,6 +242,8 @@
             <div class="head">
                 <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnCurrentUserID" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnVerification" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnSync1DType" ClientIDMode="Static" />
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">

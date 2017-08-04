@@ -20,6 +20,8 @@ var $chart_B_BalanceChart;
 var $chartTargetVersusActualABLarge;
 var $chartTargetVersusActualABLargeArea;
 var $kendoChartDummy;
+var $hdnVerification;
+var $hdnSync1DType;
 
 
 $(document).ready(function () {
@@ -27,6 +29,10 @@ $(document).ready(function () {
     ////*********** HTML Element Declarations ***********////
     $hdnBaseServiceUrl = $('#hdnBaseServiceUrl').val();
     $hdnCurrentUserID = $('#hdnCurrentUserID').val();
+
+    $hdnVerification = $('#hdnVerification').val();
+    $hdnSync1DType = $('#hdnSync1DType').val();
+
     $hdMeasurement = $('#ContentPlaceHolder1_ucAnalyze_hdMeasurement').val();
     $chartLoader = $(".chart-loading");
     $imgEyeABCompLarge = $('#imgEyeABCompLarge')
@@ -49,7 +55,7 @@ $(document).ready(function () {
     kendo.ui.progress($chartLoader, true);
     $.ajax({
         url: SERVICE_BASE_URL + 'api/Chart/GenerateGrayChart',
-        data: { MeasurementId: measurementID, IsAverageOfMeasurements: isAverageOfMeasurements },
+        data: { MeasurementId: measurementID, IsAverageOfMeasurements: isAverageOfMeasurements, IsVerificationProject: $hdnVerification, IsSync4DTypeProject: $hdnSync1DType },
         type: 'GET',
         dataType: 'json',
         success: function (response) {

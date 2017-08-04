@@ -2446,6 +2446,42 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid IsAverageOfMeasurements have been provided..
+        /// </summary>
+        internal static string Invalid_IsAverageOfMeasurements {
+            get {
+                return ResourceManager.GetString("Invalid_IsAverageOfMeasurements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Sync4DType have been provided..
+        /// </summary>
+        internal static string Invalid_IsSync4DTypeProject {
+            get {
+                return ResourceManager.GetString("Invalid_IsSync4DTypeProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid varification have been provided..
+        /// </summary>
+        internal static string Invalid_IsVerificationProject {
+            get {
+                return ResourceManager.GetString("Invalid_IsVerificationProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid MeasurementId have been provided..
+        /// </summary>
+        internal static string Invalid_MeasurementId {
+            get {
+                return ResourceManager.GetString("Invalid_MeasurementId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter Job Name that is at least 4 characters long..
         /// </summary>
         internal static string JobName_LengthError {
