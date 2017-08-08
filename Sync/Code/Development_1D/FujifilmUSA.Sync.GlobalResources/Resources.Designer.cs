@@ -2455,11 +2455,11 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid Sync4DType have been provided..
+        ///   Looks up a localized string similar to Invalid Sync1DType have been provided..
         /// </summary>
-        internal static string Invalid_IsSync4DTypeProject {
+        internal static string Invalid_IsSync1DTypeProject {
             get {
-                return ResourceManager.GetString("Invalid_IsSync4DTypeProject", resourceCulture);
+                return ResourceManager.GetString("Invalid_IsSync1DTypeProject", resourceCulture);
             }
         }
         

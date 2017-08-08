@@ -1047,8 +1047,8 @@
   <data name="Invalid_IsAverageOfMeasurements" xml:space="preserve">
     <value>Invalid IsAverageOfMeasurements have been provided.</value>
   </data>
-  <data name="Invalid_IsSync4DTypeProject" xml:space="preserve">
-    <value>Invalid Sync4DType have been provided.</value>
+  <data name="Invalid_IsSync1DTypeProject" xml:space="preserve">
+    <value>Invalid Sync1DType have been provided.</value>
   </data>
   <data name="Invalid_IsVerificationProject" xml:space="preserve">
     <value>Invalid varification have been provided.</value>

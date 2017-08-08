@@ -55,7 +55,7 @@ $(document).ready(function () {
     kendo.ui.progress($chartLoader, true);
     $.ajax({
         url: SERVICE_BASE_URL + 'api/Chart/GenerateGrayChart',
-        data: { MeasurementId: measurementID, IsAverageOfMeasurements: isAverageOfMeasurements, IsVerificationProject: $hdnVerification, IsSync4DTypeProject: $hdnSync1DType },
+        data: { MeasurementId: measurementID, IsAverageOfMeasurements: isAverageOfMeasurements, IsVerificationProject: $hdnVerification, IsSync1DTypeProject: $hdnSync1DType },
         type: 'GET',
         dataType: 'json',
         success: function (response) {
@@ -855,7 +855,7 @@ function GetABComparisionSpiderChartImage() {
     //kendoOptions.chartArea.height = 100;
     $kendoChartDummy.kendoChart(kendoOptions);
     var dummyChart = $kendoChartDummy.data('kendoChart');
-    //dummyChart.options.plotArea.background = 'gray';
+    dummyChart.options.plotArea.background = '#D0D0D0';
     dummyChart.options.transitions = false
     dummyChart.refresh();
     return dummyChart.imageDataURL();
@@ -864,7 +864,7 @@ function GetABComparisionSpiderChartImage() {
 ////**************** GET IMAGE OF ACTUAL VS TARGET CHART FOR REPORT  ****************////
 function GetActualVsTargetChartImage() {
     var kendoOptions = $chart_Gamut_ABComparison.data("kendoChart").options;
-    //kendoOptions.plotArea.background = 'gray';
+    kendoOptions.plotArea.background = '#D0D0D0';
     //kendoOptions.chartArea.width = 700;
     //kendoOptions.chartArea.height = 100;
     $kendoChartDummy.kendoChart(kendoOptions);
@@ -878,7 +878,7 @@ function GetActualVsTargetChartImage() {
 ////**************** GET IMAGE OF L-COMPARSION CHART FOR REPORT  ****************////
 function GetLComparisionChartImage() {
     var kendoOptions = $chart_L_Comaparision.data("kendoChart").options;
-    //kendoOptions.plotArea.background = 'gray';
+    kendoOptions.plotArea.background = '#D0D0D0';
     kendoOptions.chartArea.width = 650;
     kendoOptions.chartArea.height = 150;
     $kendoChartDummy.kendoChart(kendoOptions);
@@ -894,7 +894,7 @@ function Get_L_BalanceChartImage() {
     var kendoOptions = $chart_L_BalanceChart.data("kendoChart").options;
     var kendodataSource = $chart_L_BalanceChart.data("kendoChart").dataSource;
 
-    //kendoOptions.plotArea.background = 'gray';
+    kendoOptions.plotArea.background = '#D0D0D0';
     //kendoOptions.chartArea.width = 700;
     //kendoOptions.chartArea.height = 100;
     $kendoChartDummy.kendoChart(kendoOptions);
@@ -909,7 +909,7 @@ function Get_L_BalanceChartImage() {
 function Get_A_BalanceChartImage() {
     var kendoOptions = $chart_A_BalanceChart.data("kendoChart").options;
     var kendodataSource = $chart_A_BalanceChart.data("kendoChart").dataSource;
-    //kendoOptions.plotArea.background = 'gray';
+    kendoOptions.plotArea.background = '#D0D0D0';
     //kendoOptions.chartArea.width = 700;
     //kendoOptions.chartArea.height = 100;
     $kendoChartDummy.kendoChart(kendoOptions);
@@ -924,7 +924,7 @@ function Get_A_BalanceChartImage() {
 function Get_B_BalanceChartImage() {
     var kendoOptions = $chart_B_BalanceChart.data("kendoChart").options;
     var kendodataSource = $chart_B_BalanceChart.data("kendoChart").dataSource;
-    //kendoOptions.plotArea.background = 'gray';
+    kendoOptions.plotArea.background = '#D0D0D0';
     //kendoOptions.chartArea.width = 700;
     //kendoOptions.chartArea.height = 100;
     $kendoChartDummy.kendoChart(kendoOptions);

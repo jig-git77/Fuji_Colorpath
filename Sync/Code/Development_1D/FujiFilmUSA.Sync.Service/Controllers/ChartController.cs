@@ -26,7 +26,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private const string _InvalidMeasurementId = "Invalid_MeasurementId";
         private const string _InvalidIsAverageOfMeasurements = "Invalid_IsAverageOfMeasurements";
         private const string _InvalidIsVerificationProject = "Invalid_IsVerificationProject";
-        private const string _InvalidIsSync4DTypeProject = "Invalid_IsSync4DTypeProject";
+        private const string _InvalidIsSync1DTypeProject = "Invalid_IsSync1DTypeProject";
         #endregion
 
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -61,7 +61,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GenerateGrayChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync4DTypeProject)
+        public IHttpActionResult GenerateGrayChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject)
         {
             //int? MeasurementId = 15081;
             //bool? IsAverageOfMeasurements = true;   
@@ -80,8 +80,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (IsVerificationProject == null)
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
 
-                if (IsSync4DTypeProject == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync4DTypeProject);
+                if (IsSync1DTypeProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -97,7 +97,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     //temp code end
                     //IsVerification = true;
                     this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                    this.IsSync1DType = IsSync4DTypeProject == null ? false : Convert.ToBoolean(IsSync4DTypeProject);
+                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
                     this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
                     _presenterAnalyze.GetGrayChart();
