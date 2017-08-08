@@ -189,7 +189,16 @@ function BindChartTargetVersusActualAB() {
         var kendoSeriseObj = {};
         kendoSeriseObj.data = seriesArray;
         kendoSeriseObj.color = element.PatchType;
-        kendoSeriseObj.markers = { background: element.PatchType, size: 6 };
+        kendoSeriseObj.markers = {
+            background: element.PatchType,
+            //size: 6,
+            border: {
+                width: 1,
+                color: function (e) {
+                    return 'black';
+                }
+            }
+        };
         kendoSeriseObj.width = 2;
         kendoSeriseObj.highlight = {
             visible: false
@@ -373,7 +382,15 @@ function BindChartGamutABComparision() {
         var actualColorPointObj = {};
         actualColorPointObj.data = [objActual];
         actualColorPointObj.color = jsonTargetColor.PatchType;
-        actualColorPointObj.markers = { background: jsonTargetColor.PatchType, size: 10 };
+        actualColorPointObj.markers = {
+            background: jsonTargetColor.PatchType, size: 10,
+            border: {
+                width: 1,
+                color: function (e) {
+                    return 'black';
+                }
+            }
+        };
         actualColorPointObj.width = 2;
 
         if (colorObj == "Cyan") {
@@ -663,7 +680,7 @@ function BindChartLGrayBalance() {
             xField: "CmykC",
             yField: "TargetL",
             color: "Green",
-            markers: { background: "Green" },
+            markers: { background: "Green", size: 4 },
             highlight: {
                 visible: false
             }
@@ -671,7 +688,7 @@ function BindChartLGrayBalance() {
             xField: "CmykC",
             yField: "CielabL",
             color: "Black",
-            markers: { background: "Black" },
+            markers: { background: "Black",size:4 },
             tooltip: {
                 visible: true,
                 template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= dataItem.CielabL # ' + _Resources._recA + ': #= dataItem.CielabA# ' + _Resources._recB + ' #= dataItem.CielabB#</td></tr><tr><td>' + _Resources._recTarget + ' L*: #=dataItem.TargetL# a*: #=dataItem.Targeta# b*: #=dataItem.Targetb#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=dataItem.ΔL#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=dataItem.Δa#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=dataItem.Δb#</td></tr></table>'
@@ -722,7 +739,7 @@ function BindChartLGrayBalance() {
             xField: "CmykC",
             yField: "Targeta",
             color: "Green",
-            markers: { background: "Green" },
+            markers: { background: "Green", size: 4 },
             highlight: {
                 visible: false
             }
@@ -730,7 +747,7 @@ function BindChartLGrayBalance() {
             xField: "CmykC",
             yField: "CielabA",
             color: "Black",
-            markers: { background: "Black" },
+            markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
                 template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= dataItem.CielabL # ' + _Resources._recA + ': #= dataItem.CielabA# ' + _Resources._recB + ' #= dataItem.CielabB#</td></tr><tr><td>' + _Resources._recTarget + ' L*: #=dataItem.TargetL# a*: #=dataItem.Targeta# b*: #=dataItem.Targetb#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=dataItem.ΔL#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=dataItem.Δa#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=dataItem.Δb#</td></tr></table>'
@@ -779,7 +796,7 @@ function BindChartLGrayBalance() {
             xField: "CmykC",
             yField: "Targetb",
             color: "Green",
-            markers: { background: "Green" },
+            markers: { background: "Green", size: 4 },
             highlight: {
                 visible: false
             }
@@ -788,7 +805,7 @@ function BindChartLGrayBalance() {
             xField: "CmykC",
             yField: "CielabB",
             color: "Black",
-            markers: { background: "Black" },
+            markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
                 template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= dataItem.CielabL # ' + _Resources._recA + ': #= dataItem.CielabA# ' + _Resources._recB + ' #= dataItem.CielabB#</td></tr><tr><td>' + _Resources._recTarget + ' L*: #=dataItem.TargetL# a*: #=dataItem.Targeta# b*: #=dataItem.Targetb#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=dataItem.ΔL#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=dataItem.Δa#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=dataItem.Δb#</td></tr></table>'
@@ -838,7 +855,7 @@ function GetABComparisionSpiderChartImage() {
     //kendoOptions.chartArea.height = 100;
     $kendoChartDummy.kendoChart(kendoOptions);
     var dummyChart = $kendoChartDummy.data('kendoChart');
-    dummyChart.options.plotArea.background = 'gray';
+    //dummyChart.options.plotArea.background = 'gray';
     dummyChart.options.transitions = false
     dummyChart.refresh();
     return dummyChart.imageDataURL();
