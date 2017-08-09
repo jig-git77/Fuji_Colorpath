@@ -172,15 +172,18 @@ function BindChartTargetVersusActualAB() {
     $.each(jsonTarget, function (index, element) {
 
         var seriesArray = [];
-        seriesArray.push(targetPAPERObj);
+        
 
 
-        //Get colors from the colors array
+        //Get colors from the colors array ()
         var colorsArray = $.grep(jsonColors, function (colorObj) { return colorObj.PatchType == element.PatchType });
-        $.each(colorsArray, function (i, colorObj) {
-            var dots = [colorObj.CielabA, colorObj.CielabB];
-            seriesArray.push(dots);
-        });
+        if (colorsArray.length > 0) {
+            seriesArray.push(targetPAPERObj);
+            $.each(colorsArray, function (i, colorObj) {
+                var dots = [colorObj.CielabA, colorObj.CielabB];
+                seriesArray.push(dots);
+            });
+        }        
 
         //add actuall color object
         var actualObject = [element.CielabA, element.CielabB];
