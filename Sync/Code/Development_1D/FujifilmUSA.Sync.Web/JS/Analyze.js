@@ -391,6 +391,9 @@ function BindChartGamutABComparision() {
                 }
             }
         };
+        actualColorPointObj.highlight = {
+            visible: false
+        }
         actualColorPointObj.width = 2;
 
         if (colorObj == "Cyan") {
@@ -517,12 +520,26 @@ function BindChartLComparision() {
         pointsObj.data = [[element.CielabA, 0]];
         pointsObj.color = element.PatchType;
         pointsObj.markers = { background: element.PatchType, size: 10 };
+        pointsObj.highlight = {
+            visible: false
+        }
 
 
         var pointsObjSmall = {};
         pointsObjSmall.data = [[element.CielabA, element["ΔL"]]];
         pointsObjSmall.color = element.PatchType;
-        pointsObjSmall.markers = { background: element.PatchType, size: 6 };
+        pointsObjSmall.markers = {
+            background: element.PatchType, size: 6,
+            border: {
+                width: 1,
+                color: function (e) {
+                    return 'black';
+                }
+            }
+        };
+        pointsObjSmall.highlight = {
+            visible: false
+        }
 
 
         //Check patch type for tooltip caption
@@ -559,17 +576,8 @@ function BindChartLComparision() {
         tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"] + '</td></tr>';
         tooltipString += '</table>';
 
-        ////create tool tip
-        //var tooltipString = '<table><tr><td><center><b>' + element.PatchType + ' Patch Matrics</b></center><td></tr>';
-        //tooltipString += '<tr><td>Actual L: *' + element.CielabL + ' a:*: ' + element.CielabA + ' b:*' + element.CielabB + '</td></tr>';
-        //tooltipString += '<tr><td>Target L: *' + element.TargetL + ' a:*: ' + element.Targeta + ' b:*' + element.Targetb + '</td></tr>';
-        //tooltipString += '<tr><td>ΔL*   ' + element["ΔL"] + '</td></tr>';
-        //tooltipString += '<tr><td>Δa*   ' + element["Δa"] + '</td></tr>';
-        //tooltipString += '<tr><td>Δb*   ' + element["Δb"] + '</td></tr>';
-        //tooltipString += '</table>';
-
         pointsObj.tooltip = { visible: true, template: tooltipString };
-        pointsObjSmall.tooltip = { visible: true, template: tooltipString };
+        //pointsObjSmall.tooltip = { visible: true, template: tooltipString };
 
         if (element.PatchType == "Cyan") {
             cyanLComparisionPoint = pointsObj;
@@ -597,12 +605,20 @@ function BindChartLComparision() {
         }
         if (element.PatchType == "Paper") {
             paperLComparisionPoint = pointsObj;
-            paperLComparisionPoint.color = "Black";
-            paperLComparisionPoint.markers = { background: "White", size: 10 };
+            paperLComparisionPoint.color = "White";
+            //paperLComparisionPoint.markers = {
+            //    background: "White", size: 10,
+            //    //border: {
+            //    //    width: 1,
+            //    //    color: function (e) {
+            //    //        return 'black';
+            //    //    }
+            //    //}
+            //};
 
             paperLComparisionPointSmall = pointsObjSmall;
-            paperLComparisionPointSmall.color = "Black";
-            paperLComparisionPointSmall.markers = { background: "White", size: 10 };
+            paperLComparisionPointSmall.color = "White";
+            paperLComparisionPointSmall.markers.background = "White";
         }
 
     });
@@ -614,7 +630,8 @@ function BindChartLComparision() {
         //title: {
         //    text: "L* Comparison"
         //},
-        series: [cyanLComparisionPoint
+        series: [
+            cyanLComparisionPoint
             , magentaLComparisionPoint
             , yellowLComparisionPoint
             , redLComparisionPoint
@@ -627,6 +644,7 @@ function BindChartLComparision() {
             , redLComparisionPointSmall
             , greenLComparisionPointSmall
             , blueLComparisionPointSmall
+            , paperLComparisionPointSmall
         ],
         xAxis: {
             min: -100,
@@ -688,7 +706,7 @@ function BindChartLGrayBalance() {
             xField: "CmykC",
             yField: "CielabL",
             color: "Black",
-            markers: { background: "Black",size:4 },
+            markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
                 template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= dataItem.CielabL # ' + _Resources._recA + ': #= dataItem.CielabA# ' + _Resources._recB + ' #= dataItem.CielabB#</td></tr><tr><td>' + _Resources._recTarget + ' L*: #=dataItem.TargetL# a*: #=dataItem.Targeta# b*: #=dataItem.Targetb#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=dataItem.ΔL#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=dataItem.Δa#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=dataItem.Δb#</td></tr></table>'
