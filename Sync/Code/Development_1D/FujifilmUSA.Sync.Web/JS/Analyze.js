@@ -535,7 +535,7 @@ function BindChartLComparision() {
         pointsObjSmall.markers = {
             background: element.PatchType, size: 6,
             border: {
-                width: 1,
+                width: 0.25,
                 color: function (e) {
                     return 'black';
                 }
