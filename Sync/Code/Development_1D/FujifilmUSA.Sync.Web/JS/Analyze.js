@@ -22,6 +22,7 @@ var $chartTargetVersusActualABLargeArea;
 var $kendoChartDummy;
 var $hdnVerification;
 var $hdnSync1DType;
+var $isAverageOfMeasurements;
 
 
 $(document).ready(function () {
@@ -32,7 +33,7 @@ $(document).ready(function () {
 
     $hdnVerification = $('#hdnVerification').val();
     $hdnSync1DType = $('#hdnSync1DType').val();
-
+    $isAverageOfMeasurements = $('#ContentPlaceHolder1_ucAnalyze_chkAnalyzeAverageOfMeasurements').is(':checked');
     $hdMeasurement = $('#ContentPlaceHolder1_ucAnalyze_hdMeasurement').val();
     $chartLoader = $(".chart-loading");
     $imgEyeABCompLarge = $('#imgEyeABCompLarge')
@@ -51,11 +52,11 @@ $(document).ready(function () {
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
 
     var measurementID = parseInt($hdMeasurement);
-    var isAverageOfMeasurements = true;
+    //var isAverageOfMeasurements = true;
     kendo.ui.progress($chartLoader, true);
     $.ajax({
         url: SERVICE_BASE_URL + 'api/Chart/GenerateGrayChart',
-        data: { MeasurementId: measurementID, IsAverageOfMeasurements: isAverageOfMeasurements, IsVerificationProject: $hdnVerification, IsSync1DTypeProject: $hdnSync1DType },
+        data: { MeasurementId: measurementID, IsAverageOfMeasurements: $isAverageOfMeasurements, IsVerificationProject: $hdnVerification, IsSync1DTypeProject: $hdnSync1DType },
         type: 'GET',
         dataType: 'json',
         success: function (response) {
