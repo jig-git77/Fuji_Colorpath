@@ -2752,6 +2752,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete all information of selected Spot Target Project?.
+        /// </summary>
+        internal static string ProjectList_DeleteSpotProject_Confirmation {
+            get {
+                return ResourceManager.GetString("ProjectList_DeleteSpotProject_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Red Patch Metrics.
         /// </summary>
         internal static string redPathMetrics {

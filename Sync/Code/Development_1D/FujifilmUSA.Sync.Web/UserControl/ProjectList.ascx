@@ -14,6 +14,14 @@
     }
 </script>
 <script type="text/javascript" language="javascript">
+    function ConfirmDeleteSpotProject() {
+        if (confirm('<%= ProjectListDeleteSpotProjectConfirmation %>'))
+            return true;
+        else
+            return false;
+    }
+</script>
+<script type="text/javascript" language="javascript">
     function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns) {
         var oWindow;
         oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns , "OpenPrintConditionWindow");
@@ -170,6 +178,25 @@
                                                         <telerik:GridBoundColumn SortExpression="CreateDate" HeaderText="Last Active" HeaderButtonType="TextButton"
                                                             DataField="CreateDate" DataFormatString="{0:MM/dd/yy hh:mm}" ShowFilterIcon="False">
                                                         </telerik:GridBoundColumn>
+                                                         <telerik:GridTemplateColumn DataField="SpotProjectID" UniqueName="Delete" FilterControlAltText="Filter Delete column"
+                                                            meta:resourcekey="GridTemplateColumnResource7">
+                                                            <FilterTemplate>
+                                                                <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="button" CommandName="ClearFilter"
+                                                                    ToolTip="Clear Fillter">
+                                                                    <span>
+                                                                        <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png"
+                                                                            meta:resourcekey="imgClearFillterResource1" />
+                                                                    </span>
+                                                                </asp:LinkButton>
+                                                            </FilterTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete SpotProject" AlternateText="Delete"
+                                                                    ImageUrl="../Images/delete_icon.png" OnClientClick="return ConfirmDeleteSpotProject();"
+                                                                    CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SpotProjectID") %>' CommandName="DeleteSpotProject"
+                                                                    meta:resourcekey="imgbtnDeleteResource1" />
+                                                            </ItemTemplate>
+                                                            <HeaderStyle Width="40px" />
+                                                        </telerik:GridTemplateColumn>
                                                     </Columns>
                                                 </telerik:GridTableView>
                                     </DetailTables>                              

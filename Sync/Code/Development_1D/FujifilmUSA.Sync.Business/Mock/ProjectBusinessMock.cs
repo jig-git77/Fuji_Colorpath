@@ -180,6 +180,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Project();
         }
+
+        public int DeleteSpotProject(int spotprojectId)
+        {
+            return 0;
+        }
         #endregion
 
         #region ITaskBase Members

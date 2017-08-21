@@ -1056,4 +1056,7 @@
   <data name="Invalid_MeasurementId" xml:space="preserve">
     <value>Invalid MeasurementId have been provided.</value>
   </data>
+  <data name="ProjectList_DeleteSpotProject_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete all information of selected Spot Target Project?</value>
+  </data>
 </root>

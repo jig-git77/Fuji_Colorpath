@@ -29,6 +29,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("ProjectList_DeleteProject_Confirmation");
             }
         }
+        public string ProjectListDeleteSpotProjectConfirmation
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("ProjectList_DeleteSpotProject_Confirmation");
+            }
+        }
         #endregion
         public ProjectList()
         {
@@ -159,6 +166,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
                        // Response.Redirect("AddProject.aspx?ProjectId=" + ProjectId.ToString());
                         Response.Redirect("AddProject.aspx?ProjectId=7564");
+                    }
+                    break;
+                case "DeleteSpotProject":
+                    if (e.CommandArgument != null)
+                    {
+                        DeleteProject(Convert.ToInt32(e.CommandArgument));
+                        rgProjectList.MasterTableView.Rebind();
                     }
                     break;
             }
@@ -403,6 +417,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void DeleteProject(int projectId)
         {
             ProjectId = projectId;
+            _presenterProjectList.DeleteProject();
+        }
+        private void DeleteSpotProject(int spotprojectId)
+        {
+            Project.SpotTargetProject.SpotProjectId = spotprojectId;
             _presenterProjectList.DeleteProject();
         }
         #endregion

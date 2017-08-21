@@ -43,5 +43,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Entity.CPSpot.SpotProjectLibrary> GetSpotLibraryListByProjectId(int projectId);
         List<Entity.CPSpot.SpotTarget> GetSpotTargetList(int currentUserId, bool isSpotTargetType);
         Project GetProjectDetail_SpotProject(int projectId);
+        int DeleteSpotProject(int spotprojectId);
     }
 }

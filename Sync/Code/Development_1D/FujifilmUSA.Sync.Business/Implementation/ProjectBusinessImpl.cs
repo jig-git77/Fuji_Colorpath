@@ -1705,6 +1705,25 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return project;
         }
 
+        public int DeleteSpotProject(int spotprojectId)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[DeleteSpotProject]",
+                            new object[]
+                                    {
+                                        spotprojectId
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteSpotProject"));
+            return returnValue;
+        }
+
         #endregion
 
         #region ITaskBase Members
