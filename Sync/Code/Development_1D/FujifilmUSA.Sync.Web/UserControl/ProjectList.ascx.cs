@@ -154,24 +154,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case "AddSpotLibrary":
                     if (e.CommandArgument != null)
                     {
-                        //ProjectId = Convert.ToInt32(e.CommandArgument);
+                        ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID;
+
                         //------------Create new Project under this Device-----------------//
                         SessionManager.Instance.CurrentProject = new Project()
                         {
                             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
                             IsUsed = true,
                             CurrentDisplayStatus = ECurrentProjectStatus.New,
-                            LicenseType = ELicenseType.SpotLibrary
+                            LicenseType = ELicenseType.SpotLibrary,
+                            SpotTargetMasterProjectID = ProjectId
                         };
+
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
-                       // Response.Redirect("AddProject.aspx?ProjectId=" + ProjectId.ToString());
-                        Response.Redirect("AddProject.aspx?ProjectId=7564");
+                        Response.Redirect("AddProject.aspx");
                     }
+                    break;
+                case "ClearFilterSpotTarget":
+                   
                     break;
                 case "DeleteSpotProject":
                     if (e.CommandArgument != null)
                     {
-                        DeleteProject(Convert.ToInt32(e.CommandArgument));
+                        DeleteSpotProject(Convert.ToInt32(e.CommandArgument));
                         rgProjectList.MasterTableView.Rebind();
                     }
                     break;
@@ -421,8 +426,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void DeleteSpotProject(int spotprojectId)
         {
-            Project.SpotTargetProject.SpotProjectId = spotprojectId;
-            _presenterProjectList.DeleteProject();
+            SpotProjectId = spotprojectId;
+            _presenterProjectList.DeleteSpotProject();
         }
         #endregion
 
@@ -435,6 +440,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int LicenseTypeID { get; set; }
         public Project Project { get; set; }
         public List<Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
+        public int SpotProjectId { get; set; }
 
         #endregion
     }

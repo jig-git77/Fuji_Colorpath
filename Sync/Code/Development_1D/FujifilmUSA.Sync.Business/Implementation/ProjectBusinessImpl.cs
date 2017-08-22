@@ -1714,7 +1714,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     returnValue = DataAccessFactory.
                         Instance.
                         ExecuteProcedure(
-                            "[CP].[DeleteSpotProject]",
+                            "[CPSpot].[DeleteSpotProject]",
                             new object[]
                                     {
                                         spotprojectId

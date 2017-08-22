@@ -181,8 +181,8 @@
                                                          <telerik:GridTemplateColumn DataField="SpotProjectID" UniqueName="Delete" FilterControlAltText="Filter Delete column"
                                                             meta:resourcekey="GridTemplateColumnResource7">
                                                             <FilterTemplate>
-                                                                <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="button" CommandName="ClearFilter"
-                                                                    ToolTip="Clear Fillter">
+                                                                <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="button" CommandName="ClearFilterSpotTarget"
+                                                                    ToolTip="Clear Filter">
                                                                     <span>
                                                                         <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png"
                                                                             meta:resourcekey="imgClearFillterResource1" />
@@ -333,7 +333,7 @@
                                             meta:resourcekey="GridTemplateColumnResource7">
                                             <FilterTemplate>
                                                 <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="button" CommandName="ClearFilter"
-                                                    ToolTip="Clear Fillter">
+                                                    ToolTip="Clear Filter">
                                                     <span>
                                                         <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png"
                                                             meta:resourcekey="imgClearFillterResource1" />
