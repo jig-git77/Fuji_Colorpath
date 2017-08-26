@@ -1439,8 +1439,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     SpotTargetName = DataReader.ReadString(x, "SpotTargetName")
                                 },
                              
-                                CreateDate = DataReader.ReadDate(x, "EndDateTime")
-                              
+                                CreateDate = DataReader.ReadDate(x, "EndDateTime"),
+                                TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
+                                HasColorProfile = DataReader.ReadBoolean(x, "HasColorProfile"),
+                                LastOptmizeId = DataReader.ReadInt(x, "LastOptimizeID"),
                             }).ToList();
                     }
                 },
@@ -1484,7 +1486,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public int SaveSpotProject(Project project)
         {
             int savedProjectId = 0;
-            if (project.ProjectId > 0)
+            if (project.ProjectId > 0 || project.SpotTargetProject.SpotProjectId > 0)
             {
                 #region Update Project
                 Common.ImplementBusinessLogic(
@@ -1516,7 +1518,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             else
             {
                 #region Insert Project
-                var outParam = new Parameters() { ParameterName = "@ProjectID", Type = DbType.Int32 };
+                var outParam = new Parameters() { ParameterName = "@SpotProjectID", Type = DbType.Int32 };
                 Common.ImplementBusinessLogic(
                     () =>
                     {
@@ -1644,7 +1646,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                     ? GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("OpenStatusText")
                                                                     : GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString(
                                                                         "CertificationStatusText"),
-                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                ProjectId = DataReader.ReadInt(x, "SpotProjectID"),
                                 Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "Status"),
                                 StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
                                 EndDateTime = DataReader.ReadDate(x, "EndDateTime"),

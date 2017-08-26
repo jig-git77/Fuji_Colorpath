@@ -21,10 +21,11 @@ namespace FujifilmUSA.Sync.Entity.CPSpot
      
         public ECurrentProjectStatus CurrentDisplayStatus { set; get; }
         public EOptimizeRunStatus Status { get; set; }
-        public int TotalRuns { get; set; }
-      
+       
         public KeyValuePair<short, string> Measurements { get; set; }
-     
-
+      
+        public int TotalRuns { get; set; }
+        public bool HasColorProfile { get; set; }
+        public int LastOptmizeId { get; set; }
     }
 }

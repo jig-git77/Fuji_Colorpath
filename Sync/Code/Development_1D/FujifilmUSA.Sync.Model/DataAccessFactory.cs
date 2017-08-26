@@ -36,14 +36,14 @@ namespace FujifilmUSA.Sync.DataAccess
             get
             {
                 //#if Local
-                return ConfigurationManager.ConnectionStrings["LocalConnection"].ConnectionString;
+                //return ConfigurationManager.ConnectionStrings["LocalConnection"].ConnectionString;
                 //#elif Jay_Local
                 //                                return ConfigurationManager.ConnectionStrings["Jay_LocalConnection"].ConnectionString;
                 //#elif Dev
-                //return ConfigurationManager.ConnectionStrings["DevConnection"].ConnectionString;
-//#elif Production
-//                                return ConfigurationManager.ConnectionStrings["ProductionConnection"].ConnectionString;
-//#endif
+                return ConfigurationManager.ConnectionStrings["DevConnection"].ConnectionString;
+                //#elif Production
+                //                                return ConfigurationManager.ConnectionStrings["ProductionConnection"].ConnectionString;
+                //#endif
             }
         }
         public SqlDatabase Database

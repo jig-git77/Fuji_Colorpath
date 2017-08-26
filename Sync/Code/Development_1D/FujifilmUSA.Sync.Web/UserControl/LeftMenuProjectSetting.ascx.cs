@@ -41,15 +41,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkDescription.Enabled = true;
                     }
-                    if (SessionManager.Instance.CurrentProject.SourceProfile != null && SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile) //No Target ColorSpace for Custom Source Profile project type
+                    if ((SessionManager.Instance.CurrentProject.SourceProfile != null && SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile) //No Target ColorSpace for Custom Source Profile project type
+                        || (SessionManager.Instance.CurrentProject.SpotTargetProject != null && SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)) // Show Target Color Space for Spot Color Target project type
                     {
                         lnkTargetColorSpace.Enabled = true;
                     }
-                    if (SessionManager.Instance.CurrentProject.ProjectOption != null && SessionManager.Instance.CurrentProject.ProjectOption.Count > 0)
+                    if (SessionManager.Instance.CurrentProject.ProjectOption != null && SessionManager.Instance.CurrentProject.ProjectOption.Count > 0 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary) // No Profiler Options for Spot Color Target project type
                     {
                         lnkProfilerOption.Enabled = true;
                     }
-                    if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0)
+                    if (SessionManager.Instance.CurrentProject.MeasurementSetting != null 
+                        && ((SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0) || (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)))
                     {
                         lnkMeasurementSetup.Enabled = true;
                     }

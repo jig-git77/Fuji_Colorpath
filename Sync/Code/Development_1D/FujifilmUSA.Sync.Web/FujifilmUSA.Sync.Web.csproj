@@ -95,6 +95,7 @@
     <Content Include="AddPrintStandardType.aspx" />
     <Content Include="AddReferenceChart.aspx" />
     <Content Include="AddSourceProfile.aspx" />
+    <Content Include="Analyze_SpotColor.aspx" />
     <Content Include="ApplicationConfiguration.aspx" />
     <Content Include="ApplicationError.aspx" />
     <Content Include="App_Browsers\firefox.browser" />
@@ -1970,6 +1971,7 @@
     <Content Include="UserControl\AddDeviceFamily.ascx" />
     <Content Include="UserControl\AddLicenseType.ascx" />
     <Content Include="UserControl\AddLicenseManagement.ascx" />
+    <Content Include="UserControl\Analyze_SpotColor.ascx" />
     <Content Include="UserControl\ApplicationConfiguration.ascx" />
     <Content Include="UserControl\ApplicationError.ascx" />
     <Content Include="UserControl\App_LocalResources\DownloadSoftwares.ascx.ja.resx">
@@ -2297,6 +2299,13 @@
     </Compile>
     <Compile Include="AdminMaster.Master.designer.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Analyze_SpotColor.aspx.cs">
+      <DependentUpon>Analyze_SpotColor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analyze_SpotColor.aspx.designer.cs">
+      <DependentUpon>Analyze_SpotColor.aspx</DependentUpon>
     </Compile>
     <Compile Include="ApplicationConfiguration.aspx.cs">
       <DependentUpon>ApplicationConfiguration.aspx</DependentUpon>
@@ -2800,6 +2809,13 @@
     </Compile>
     <Compile Include="UserControl\AddLicenseManagement.ascx.designer.cs">
       <DependentUpon>AddLicenseManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Analyze_SpotColor.ascx.cs">
+      <DependentUpon>Analyze_SpotColor.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Analyze_SpotColor.ascx.designer.cs">
+      <DependentUpon>Analyze_SpotColor.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ApplicationConfiguration.ascx.cs">
       <DependentUpon>ApplicationConfiguration.ascx</DependentUpon>
@@ -5151,7 +5167,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

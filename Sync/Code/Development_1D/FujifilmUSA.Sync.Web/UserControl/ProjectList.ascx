@@ -169,6 +169,14 @@
                                                         <asp:Button ID="btnAddSpotLibrary" runat="server" Text="Create New Library" CommandName="AddSpotLibrary" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectID") %>'  />
                                                     </CommandItemTemplate>
                                                     <Columns>
+                                                         <telerik:GridTemplateColumn DataField="LastOptmizeId"  UniqueName="LastOptmizeId"  
+                                                            ItemStyle-Width="30px"  meta:resourcekey="GridTemplateColumnResource30">
+                                                            <ItemTemplate>
+                                                               <asp:ImageButton ID="imgbtnSpotSelect" runat="server" ToolTip="Open" AlternateText="Select"
+                                                                    ImageUrl="../Images/open_folder_yellow.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"LastOptmizeId") %>'
+                                                                    CommandName="SelectSpotTargetProject" meta:resourcekey="imgbtnSelectSpotResource1"  Width="20" Height="20"/>
+                                                            </ItemTemplate>                  
+                                                        </telerik:GridTemplateColumn>
                                                         <telerik:GridBoundColumn SortExpression="ProjectName" HeaderText="Name" HeaderButtonType="TextButton"
                                                             DataField="ProjectName">
                                                         </telerik:GridBoundColumn>

@@ -191,8 +191,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                           || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2))
                                           || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.eXact)));
                     lblUVSettings.Text = "M" + SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode.ToString();
-                    dvMetricPreset.Visible = false;
-                    dvOptionPreset.Visible = false;
+                    Div_Presets.Visible = false;
                     Div_Spectrophotometer_Options.Visible = true;
                     Div_Alignment_Chart.Visible = false;
                     Div_OptChart.Visible = false;
@@ -283,7 +282,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                             || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro2))
                                             || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2))
                                             || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.eXact)));
-                //lblUVSettings.Text = Enum.GetName(typeof(EUVIncludedMode), SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode);
+              
                 lblUVSettings.Text = "M" + SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode.ToString();
 
                 lblEnableValidation.Text = SessionManager.Instance.CurrentProject.EnabledValidation.ToString();
