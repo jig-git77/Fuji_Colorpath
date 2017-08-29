@@ -79,6 +79,13 @@ namespace FujifilmUSA.Sync.Presenter
             _viewAnalyze.dtPatchDetails = measurementBusiness.GetPatchDetailsofMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
         }
 
+        public void GetSpotPatchDetailsofMeasurement()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsofMeasurement(_viewAnalyze.MeasurementId, 1);
+        }
+
         public void GetInkPaperChart()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();

@@ -178,6 +178,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataSet();
         }
+        public DataTable GetSpotPatchDetailsofMeasurement(int MeasurementId, int OperationID)
+        {
+            return new DataTable();
+        }
         #endregion
 
         #region ITaskBase Members

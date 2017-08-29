@@ -198,7 +198,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     };
 
                     SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                    Response.Redirect("Analyze_SpotColor.aspx?OptimizeRunID =" + Convert.ToInt32(e.CommandArgument));
+                    Response.Redirect("Analyze_SpotColor.aspx?OptimizeRunID=" + Convert.ToInt32(e.CommandArgument));
            
                     break;
             }

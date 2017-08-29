@@ -1805,6 +1805,26 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
+        public DataTable GetSpotPatchDetailsofMeasurement(int MeasurementId, int OperationID)
+        {
+            // var PatchDetails = new List<MeasurementPatchDetails>();
+            string storedProc = "CPSpot.GetPatchDetailsByMeasurementID";
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId, OperationID });
+                    if (dsMeasurements.Tables.Count > 0)
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurement"));
+            return dtPatchDetails;
+        }
         #endregion
 
         #region ITaskBase Members
