@@ -159,25 +159,25 @@
                                                                 FilterControlAltText="Filter Targetb column"
                                                                 meta:resourcekey="GridBoundColumnResource13" UniqueName="Targetb">
                                                             </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="CIELAB_L" HeaderText="Actual L*"
+                                                            <telerik:GridBoundColumn DataField="CIELAB_L" HeaderText="P_L*"
                                                                 SortExpression="CIELAB_L" FilterControlWidth="30px"
                                                                 CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
                                                                 FilterControlAltText="Filter CielabL column"
                                                                 meta:resourcekey="GridBoundColumnResource10" UniqueName="CielabL">
                                                             </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="CIELAB_a" HeaderText="Actual a*"
+                                                            <telerik:GridBoundColumn DataField="CIELAB_a" HeaderText="P_a*"
                                                                 SortExpression="CIELAB_a" FilterControlWidth="30px"
                                                                 CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
                                                                 FilterControlAltText="Filter CielabA column"
                                                                 meta:resourcekey="GridBoundColumnResource12" UniqueName="CielabA">
                                                             </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="CIELAB_b" HeaderText="Actual b*"
+                                                            <telerik:GridBoundColumn DataField="CIELAB_b" HeaderText="P_b*"
                                                                 SortExpression="CIELAB_b" FilterControlWidth="30px"
                                                                 CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
                                                                 FilterControlAltText="Filter CielabB column"
                                                                 meta:resourcekey="GridBoundColumnResource14" UniqueName="CielabB">
                                                             </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="ΔE" HeaderText="ΔE" SortExpression="ΔE"
+                                                            <telerik:GridBoundColumn DataField="ΔE" HeaderText="ΔE2" SortExpression="ΔE"
                                                                 FilterControlWidth="30px" CurrentFilterFunction="GreaterThanOrEqualTo"
                                                                 AutoPostBackOnFilter="True" UniqueName="ΔE"
                                                                 FilterControlAltText="Filter ΔE column"
