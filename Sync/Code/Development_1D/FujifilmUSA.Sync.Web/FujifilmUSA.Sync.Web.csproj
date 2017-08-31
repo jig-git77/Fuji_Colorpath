@@ -804,6 +804,7 @@
     <Content Include="Images\activity-validation-rules.png" />
     <Content Include="Images\CPSPrintStandardBottomImage.jpg" />
     <Content Include="Images\CPSPrintStandardLogo.jpg" />
+    <Content Include="Images\detail1.png" />
     <Content Include="Images\DLPFullGamutSource.png" />
     <Content Include="Images\DLPReProfileSource.png" />
     <Content Include="Images\DLPSource.png" />
@@ -917,6 +918,7 @@
     <Content Include="PopupOpenForgotPassword.aspx" />
     <Content Include="PopupReportCMYKDensity.aspx" />
     <Content Include="PopupReportGrading.aspx" />
+    <Content Include="PopupSpotColorPatchDetails.aspx" />
     <Content Include="PrintPreview.aspx" />
     <Content Include="PrintStandardTypeManagement.aspx" />
     <Content Include="ProfileManagement.aspx" />
@@ -1993,6 +1995,7 @@
     <Content Include="UserControl\PopupControl\ImportMeasurements.ascx" />
     <Content Include="UserControl\PopupControl\ReportCMYKDensity.ascx" />
     <Content Include="UserControl\PopupControl\ReportGrading.ascx" />
+    <Content Include="UserControl\PopupControl\SpotColorPatchDetails.ascx" />
     <Content Include="UserControl\PrintPreview.ascx" />
     <Content Include="UserControl\PrintStandardTypeManagement.ascx" />
     <Content Include="UserControl\ProfileManagement.ascx" />
@@ -2622,6 +2625,13 @@
     <Compile Include="PopupReportGrading.aspx.designer.cs">
       <DependentUpon>PopupReportGrading.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PopupSpotColorPatchDetails.aspx.cs">
+      <DependentUpon>PopupSpotColorPatchDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupSpotColorPatchDetails.aspx.designer.cs">
+      <DependentUpon>PopupSpotColorPatchDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PrintPreview.aspx.cs">
       <DependentUpon>PrintPreview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2944,6 +2954,13 @@
     </Compile>
     <Compile Include="UserControl\PopupControl\ReportGrading.ascx.designer.cs">
       <DependentUpon>ReportGrading.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\SpotColorPatchDetails.ascx.cs">
+      <DependentUpon>SpotColorPatchDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\SpotColorPatchDetails.ascx.designer.cs">
+      <DependentUpon>SpotColorPatchDetails.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\PrintPreview.ascx.cs">
       <DependentUpon>PrintPreview.ascx</DependentUpon>
@@ -5167,7 +5184,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

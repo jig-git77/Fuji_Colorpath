@@ -13,6 +13,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class Analyze_SpotColor {
         
         /// <summary>
+        /// hdnSelectedTabIndex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSelectedTabIndex;
+        
+        /// <summary>
         /// hdMeasurement control.
         /// </summary>
         /// <remarks>
@@ -40,15 +49,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locSummary;
         
         /// <summary>
-        /// Tab_PatchDetails control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Tab_PatchDetails;
-        
-        /// <summary>
         /// locPatchDetails control.
         /// </summary>
         /// <remarks>
@@ -58,6 +58,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locPatchDetails;
         
         /// <summary>
+        /// lblMaxDeltaE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMaxDeltaE;
+        
+        /// <summary>
+        /// lblAvgDeltaE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAvgDeltaE;
+        
+        /// <summary>
         /// rgPatchDetails control.
         /// </summary>
         /// <remarks>
@@ -65,5 +83,23 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadGrid rgPatchDetails;
+        
+        /// <summary>
+        /// RadWindowManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindowManager RadWindowManager;
+        
+        /// <summary>
+        /// windowPatchDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindow windowPatchDetails;
     }
 }

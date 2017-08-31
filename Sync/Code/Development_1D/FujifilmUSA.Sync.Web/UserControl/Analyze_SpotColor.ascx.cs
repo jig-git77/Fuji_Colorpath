@@ -33,6 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
                 //hdMeasurement.Value = "390151";
+
             }
         }
 
@@ -41,20 +42,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
             MeasurementId = 0;
             //if (hdMeasurement.Value != "" && hdMeasurement.Value != "0")
             //{
-                MeasurementId = 0;
+            MeasurementId = 0;
 
-                //Now we are using DataTable to bind the grid               
-                dtPatchDetails = new DataTable();
-                _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
+            //Now we are using DataTable to bind the grid               
+            dtPatchDetails = new DataTable();
+            _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
 
 
-                if (!IsErrorOccured)
+            if (!IsErrorOccured)
+            {
+                //Now we are using DataTable as DataSource                    
+                rgPatchDetails.DataSource = dtPatchDetails;
+                //rgPatchDetails.DataSource = FilteredPatchDetailsTable(ViewState["MetricSumID"].ToString(), dtPatchDetails);
+                decimal totalDeltaE = 0;
+                decimal avgDeltaE = 0;
+                //count max and avg ΔE
+                if (dtPatchDetails != null)
                 {
-                    //Now we are using DataTable as DataSource                    
-                    rgPatchDetails.DataSource = dtPatchDetails;
-                    //rgPatchDetails.DataSource = FilteredPatchDetailsTable(ViewState["MetricSumID"].ToString(), dtPatchDetails);
-
+                    for (int index = 0; index < dtPatchDetails.Rows.Count; index++)
+                        totalDeltaE += (dtPatchDetails.Rows[index]["ΔE"] == null) ? 0 : Convert.ToDecimal(dtPatchDetails.Rows[index]["ΔE"]);
+                    avgDeltaE = totalDeltaE/ dtPatchDetails.Rows.Count;
+                    
                 }
+                lblMaxDeltaE.Text = String.Format("{0:0.###}", totalDeltaE);
+                lblAvgDeltaE.Text = String.Format("{0:0.###}", avgDeltaE);
+            }
+            
             //}
         }
 
@@ -112,6 +125,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 Label lblHTML = (Label)item["HtmlColor"].FindControl("lbl_HTML");
                 lblHTML.BackColor = System.Drawing.ColorTranslator.FromHtml(item.GetDataKeyValue("HTMLColor").ToString());
+
+                //LinkButton lnklnkView = (LinkButton)item["ViewDetail"].FindControl("lnkView");
+
+                var lnklnkView = e.Item.FindControl("lnkView") as ImageButton;
+
+                string HTMLColor = Convert.ToString(DataBinder.Eval(item.DataItem, "HTMLColor"));
+                HTMLColor = HTMLColor.Substring(1, HTMLColor.Length - 1);
+                lnklnkView.Attributes.Add("onclick",
+                                                 "return ShowSpotColorPatchDetailsWindow('" + HTMLColor + "','" +
+                                                 DataBinder.Eval(item.DataItem, "CIELAB_L") + "','" + DataBinder.Eval(item.DataItem, "CIELAB_a") + "','" +
+                                                 DataBinder.Eval(item.DataItem, "CIELAB_b") + "','" + DataBinder.Eval(item.DataItem, "TargetL") + "','" +
+                                                 DataBinder.Eval(item.DataItem, "Targeta") + "','" + DataBinder.Eval(item.DataItem, "Targetb") + "')");
+
             }
         }
 

@@ -1,8 +1,54 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Analyze_SpotColor.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze_SpotColor" %>
+<%@ Register Src="~/UserControl/PopupControl/SpotColorPatchDetails.ascx" TagName="SpotColorPatchDetails" TagPrefix="pd" %>
+<style>
+    .PatchDetailsSummaryTable {
+        line-height: 35px;
+        width: 50%;
+    }
+
+        .PatchDetailsSummaryTable th {
+            color: black;
+            text-align: center;
+            font-weight: bold;
+            background-color: darkgray;
+        }
+
+        .PatchDetailsSummaryTable td {
+            text-align: center;
+        }
+</style>
+<script src="JS/ChartTooltip.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Default Action
+        $(".hideclass").hide(); //Hide all content
+        $("ul.tabs li:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").addClass("active").show(); //Activate first tab
+        $(".hideclass:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").show(); //Show first tab content
+        //On Click Event
+        $("ul.tabs li").click(function () {
+            $("ul.tabs li").removeClass("active"); //Remove any "active" class
+            $('#<%= hdnSelectedTabIndex.ClientID %>').val($(this).index());
+            $(this).addClass("active"); //Add "active" class to selected tab
+            $(".hideclass").hide(); //Hide all tab content
+            var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+            $(activeTab).fadeIn(); //Fade in the active content
+
+            return false;
+        });
+    });
+
+    function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB) {
+        var oWindow;
+        oWindow = window.radopen("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB, "ClosePrintConditionWindow");
+        oWindow.show();
+        return false;
+    }
+</script>
 <div class="contant_top">
     &nbsp;
 </div>
 <div class="contant_middle">
+    <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
     <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
     <div class="listDevice" style="margin-left: 10px;">
         <div id="divToRender" runat="server">
@@ -15,7 +61,7 @@
                                     <li><span><a href="#tab1">
                                         <asp:Localize Text="Summary" ID="locSummary"
                                             runat="server" meta:resourcekey="locSummaryResource1"></asp:Localize></a></span></li>
-                                    <li id="Tab_PatchDetails" runat="server"><span><a href="#tab2">
+                                    <li><span><a href="#tab2">
                                         <asp:Localize Text="Patch Details" ID="locPatchDetails"
                                             runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>
                                 </ul>
@@ -37,7 +83,25 @@
                                     <div class="tab_top">&nbsp;</div>
                                     <div class="tab_middle">
                                         <div class="combopart">
-                                            <div class="float_l" style="padding-left: 10px;">
+                                            <div style="padding-left: 10px;">
+                                                <%--<pd:SpotColorPatchDetails runat="server" ID="ucSpotColorPathDetails" />--%>
+
+                                                <table class="PatchDetailsSummaryTable">
+                                                    <tr>
+                                                        <th colspan="2">Optimal Device Predication</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Max ΔE</b></td>
+                                                        <td>
+                                                            <asp:Label runat="server" ID="lblMaxDeltaE"></asp:Label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Average ΔE</b></td>
+                                                        <td>
+                                                            <asp:Label runat="server" ID="lblAvgDeltaE"></asp:Label></td>
+                                                    </tr>
+                                                </table>
+
                                             </div>
                                             <div class="clear"></div>
                                         </div>
@@ -57,13 +121,13 @@
                                                 <telerik:RadGrid ID="rgPatchDetails" AllowSorting="True" Width="650px"
                                                     AllowPaging="True" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
                                                     AllowFilteringByColumn="True"
-                                                    OnNeedDataSource="rgPatchDetails_NeedDataSource" OnItemDataBound="rgPatchDetails_ItemDataBound" 
-                                                     OnSortCommand="rgPatchDetails_SortCommand"  OnItemCommand="rgPatchDetails_ItemCommand"
+                                                    OnNeedDataSource="rgPatchDetails_NeedDataSource" OnItemDataBound="rgPatchDetails_ItemDataBound"
+                                                    OnSortCommand="rgPatchDetails_SortCommand" OnItemCommand="rgPatchDetails_ItemCommand"
                                                     CellSpacing="0" GridLines="None"
                                                     meta:resourcekey="rgPatchDetailsResource1">
                                                     <GroupingSettings CaseSensitive="False" />
                                                     <ClientSettings>
-                                                        <Scrolling AllowScroll="True" UseStaticHeaders="True" FrozenColumnsCount="7"></Scrolling>
+                                                        <Scrolling AllowScroll="True" UseStaticHeaders="True" FrozenColumnsCount="8"></Scrolling>
                                                     </ClientSettings>
                                                     <HeaderStyle Font-Bold="True" />
                                                     <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
@@ -76,11 +140,12 @@
                                                             Visible="True">
                                                         </ExpandCollapseColumn>
                                                         <Columns>
-                                                             <telerik:GridBoundColumn DataField="SpotID" HeaderText="ID"
+                                                            <telerik:GridBoundColumn DataField="SpotID" HeaderText="ID"
                                                                 SortExpression="SpotID" AllowFiltering="False" UniqueName="SpotID"
                                                                 FilterControlAltText="Filter SpotId column"
                                                                 meta:resourcekey="GridBoundColumnResource1">
                                                             </telerik:GridBoundColumn>
+                                                            
 
                                                             <telerik:GridTemplateColumn UniqueName="HtmlColor" HeaderText="Patch"
                                                                 DataField="HTMLColor" FilterControlAltText="Filter HtmlColor column"
@@ -105,8 +170,12 @@
                                                                 </ItemTemplate>
 
                                                             </telerik:GridTemplateColumn>
+                                                            <telerik:GridTemplateColumn UniqueName="ViewDetail" HeaderText="View" AllowFiltering="False">
+                                                                <ItemTemplate>
+                                                                    <asp:ImageButton ID="lnkView" runat="server" ImageUrl="~/Images/detail1.png"></asp:ImageButton>
+                                                                </ItemTemplate>
+                                                            </telerik:GridTemplateColumn>
 
-                                                           
                                                             <telerik:GridBoundColumn DataField="SpotName" HeaderText="Name"
                                                                 SortExpression="SpotName" AllowFiltering="False" UniqueName="SpotName"
                                                                 FilterControlAltText="Filter SpotName column"
@@ -183,67 +252,17 @@
                                                                 FilterControlAltText="Filter ΔE column"
                                                                 meta:resourcekey="GridBoundColumnResource6">
                                                             </telerik:GridBoundColumn>
-                                                            <%--<telerik:GridBoundColumn DataField="ΔE94" HeaderText="ΔE94"
-                                                                SortExpression="ΔE94" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter ΔE94 column"
-                                                                meta:resourcekey="GridBoundColumnResource7" UniqueName="ΔE94">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="ΔE2000" HeaderText="ΔE2000"
-                                                                SortExpression="ΔE2000" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter ΔE2000 column"
-                                                                meta:resourcekey="GridBoundColumnResource8" UniqueName="ΔE2000">
-                                                            </telerik:GridBoundColumn>--%>
-                                                            <%--<telerik:GridBoundColumn DataField="Density_V" HeaderText="Density_V"
-                                                                SortExpression="Density_V" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter Density_V column"
-                                                                meta:resourcekey="GridBoundColumnResource34" UniqueName="Density_V">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="Density_C" HeaderText="Density_C"
-                                                                SortExpression="Density_C" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter Density_C column"
-                                                                meta:resourcekey="GridBoundColumnResource35" UniqueName="Density_C">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="Density_M" HeaderText="Density_M"
-                                                                SortExpression="Density_M" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter Density_M column"
-                                                                meta:resourcekey="GridBoundColumnResource36" UniqueName="Density_M">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="Density_Y" HeaderText="Density_Y"
-                                                                SortExpression="Density_Y" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter Density_Y column"
-                                                                meta:resourcekey="GridBoundColumnResource37" UniqueName="Density_Y">
-                                                            </telerik:GridBoundColumn>
-
-                                                            <telerik:GridBoundColumn DataField="ΔH" HeaderText="ΔH"
-                                                                SortExpression="ΔH" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter ΔH column"
-                                                                meta:resourcekey="GridBoundColumnResource15" UniqueName="ΔH" Visible="false">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="ΔCh" HeaderText="ΔCh"
-                                                                SortExpression="ΔCh" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter ΔCh column"
-                                                                meta:resourcekey="GridBoundColumnResource16" UniqueName="ΔCh" Visible="false">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="ΔL" HeaderText="ΔL"
-                                                                SortExpression="ΔL" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter ΔL column"
-                                                                meta:resourcekey="GridBoundColumnResource17" UniqueName="ΔL" Visible="false">
-                                                            </telerik:GridBoundColumn>--%>
                                                         </Columns>
-
-
-
                                                     </MasterTableView>
                                                 </telerik:RadGrid>
+                                                <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True"
+                                                    Height="235" Width="900" VisibleStatusbar="false" Title="Patch Details: A10(C: 0.00, M: 0.00, Y: 100.00, K: 0.00, Delta E: 1)"
+                                                    ShowContentDuringLoad="false" Behaviors="Move,Close">
+                                                    <Windows>
+                                                        <telerik:RadWindow ID="windowPatchDetails" runat="server">
+                                                        </telerik:RadWindow>
+                                                    </Windows>
+                                                </telerik:RadWindowManager>
                                             </div>
                                             <div class="clear"></div>
                                         </div>
