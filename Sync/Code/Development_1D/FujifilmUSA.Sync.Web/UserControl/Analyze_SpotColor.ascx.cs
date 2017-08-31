@@ -32,43 +32,41 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!Page.IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                //hdMeasurement.Value = "390151";
-
             }
         }
 
         protected void rgPatchDetails_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             MeasurementId = 0;
-            //if (hdMeasurement.Value != "" && hdMeasurement.Value != "0")
-            //{
-            MeasurementId = 0;
 
             //Now we are using DataTable to bind the grid               
             dtPatchDetails = new DataTable();
             _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
 
-
             if (!IsErrorOccured)
             {
                 //Now we are using DataTable as DataSource                    
                 rgPatchDetails.DataSource = dtPatchDetails;
-                //rgPatchDetails.DataSource = FilteredPatchDetailsTable(ViewState["MetricSumID"].ToString(), dtPatchDetails);
                 decimal totalDeltaE = 0;
                 decimal avgDeltaE = 0;
-                //count max and avg ΔE
-                if (dtPatchDetails != null)
+
+                //count Avg, Max and Min ΔE
+                decimal minDtE = int.MaxValue;
+                decimal maxDtE = int.MinValue;
+
+                foreach (DataRow dr in dtPatchDetails.Rows)
                 {
-                    for (int index = 0; index < dtPatchDetails.Rows.Count; index++)
-                        totalDeltaE += (dtPatchDetails.Rows[index]["ΔE"] == null) ? 0 : Convert.ToDecimal(dtPatchDetails.Rows[index]["ΔE"]);
-                    avgDeltaE = totalDeltaE/ dtPatchDetails.Rows.Count;
-                    
+                    decimal DtE = dr.Field<decimal>("ΔE");
+                    totalDeltaE += DtE;
+                    minDtE = Math.Min(minDtE, DtE);
+                    maxDtE = Math.Max(maxDtE, DtE);
                 }
-                lblMaxDeltaE.Text = String.Format("{0:0.###}", totalDeltaE);
+                avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
+
+                lblMinDeltaE.Text = minDtE.ToString();
+                lblMaxDeltaE.Text = maxDtE.ToString();
                 lblAvgDeltaE.Text = String.Format("{0:0.###}", avgDeltaE);
             }
-            
-            //}
         }
 
         protected void rgPatchDetails_ItemCommand(object sender, GridCommandEventArgs e)

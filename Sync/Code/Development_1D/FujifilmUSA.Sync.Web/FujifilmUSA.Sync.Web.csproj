@@ -821,8 +821,11 @@
     <Content Include="Images\header_bg1.png" />
     <Content Include="Images\InkOptimizeSource.png" />
     <Content Include="Images\Logo-report.png" />
+    <Content Include="Images\open_folder_yellow.png" />
     <Content Include="Images\Red.png" />
     <Content Include="Images\Report-Title.png" />
+    <Content Include="Images\SpotAB_Bg.gif" />
+    <Content Include="Images\SpotL_Bg.jpg" />
     <Content Include="Images\Sync DLP Scoring Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview_G7.jpg" />
@@ -5184,7 +5187,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
