@@ -34,102 +34,102 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     if (dsProject.Tables[0].Rows.Count > 0)
                     {
                         project = new Project()
-                                      {
-                                          ProjectId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjectID"),
-                                          DeviceId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CPDeviceID"),
-                                          ProjectName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProjectName"),
-                                          CreateDate = DataReader.ReadDate(dsProject.Tables[0].Rows[0], "CreateDate"),
-                                          CurrDlpId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CurrDLPID"),
-                                          IsUsed = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "IsUsed"),
-                                          Status = (EOptimizeRunStatus)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjStatus"),
-                                          SourceProfile = new SourceProfile()
-                                                              {
-                                                                  SourceProfileId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "SourceProfileID"),
-                                                                  ProfileName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProfileName")
-                                                              },
-                                          PrintStandardType = new Entity.CPSync1D.PrintStandardType()
-                                          {
-                                              PrintStandard = DataReader.ReadString(dsProject.Tables[0].Rows[0], "PrintStandard"),
-                                              PrintStandardTypeID = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "PrintStandardTypeId"),
-                                          },
-                                          DeviceFamilyProfilerOptionId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "BaseDeviceFamilyProfilerOption"),
-                                          EnabledValidation = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "EnabledValidation"),
-                                          LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID"),
-                                          MetricTargetPresetId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MetricTargetPresetID"),
-                                          ProjectTypeId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId"),
-                                          DensityType = (DensityTypes)(DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DensityType") == -1 ? 0 : DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DensityType")),
-                                          PCSDataTypes = (PCSDataTypes)(DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType") == -1 ? (DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId") != 2 ? 1 : 0) : DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType")),  //----If Sync1D G7 projectType then default is XYZ and if ISO type then default is Density and for all 4D projects, default is XYZ like G7
-                                          ReTargetProjectID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ReTargetProjectID"),
-                                          CurveTypeID = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "CurveTypeID")
-                                      };
+                        {
+                            ProjectId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjectID"),
+                            DeviceId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CPDeviceID"),
+                            ProjectName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProjectName"),
+                            CreateDate = DataReader.ReadDate(dsProject.Tables[0].Rows[0], "CreateDate"),
+                            CurrDlpId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CurrDLPID"),
+                            IsUsed = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "IsUsed"),
+                            Status = (EOptimizeRunStatus)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjStatus"),
+                            SourceProfile = new SourceProfile()
+                            {
+                                SourceProfileId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "SourceProfileID"),
+                                ProfileName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProfileName")
+                            },
+                            PrintStandardType = new Entity.CPSync1D.PrintStandardType()
+                            {
+                                PrintStandard = DataReader.ReadString(dsProject.Tables[0].Rows[0], "PrintStandard"),
+                                PrintStandardTypeID = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "PrintStandardTypeId"),
+                            },
+                            DeviceFamilyProfilerOptionId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "BaseDeviceFamilyProfilerOption"),
+                            EnabledValidation = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "EnabledValidation"),
+                            LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID"),
+                            MetricTargetPresetId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MetricTargetPresetID"),
+                            ProjectTypeId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId"),
+                            DensityType = (DensityTypes)(DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DensityType") == -1 ? 0 : DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DensityType")),
+                            PCSDataTypes = (PCSDataTypes)(DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType") == -1 ? (DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId") != 2 ? 1 : 0) : DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType")),  //----If Sync1D G7 projectType then default is XYZ and if ISO type then default is Density and for all 4D projects, default is XYZ like G7
+                            ReTargetProjectID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ReTargetProjectID"),
+                            CurveTypeID = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "CurveTypeID")
+                        };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
                             project.PrintCondition =
                                 new PrintCondition()
-                                    {
-                                        Media = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Media"),
-                                        Colorant = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Colorant"),
-                                        RipSettings = DataReader.ReadString(dsProject.Tables[1].Rows[0], "RipSettings"),
-                                        TechnicianName = DataReader.ReadString(dsProject.Tables[1].Rows[0], "TechnicianName"),
-                                        Notes = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Notes"),
-                                        InkOrder = (EInkOrder)DataReader.ReadInt(dsProject.Tables[1].Rows[0], "InkOrder"),
-                                        FountainSolution = DataReader.ReadString(dsProject.Tables[1].Rows[0], "FountainSolution"),
-                                        Blanket = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Blanket"),
-                                        BlanketAge = DataReader.ReadString(dsProject.Tables[1].Rows[0], "BlanketAge"),
-                                        Screening = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Screening"),
-                                        Coating = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Coating")
-                                    };
+                                {
+                                    Media = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Media"),
+                                    Colorant = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Colorant"),
+                                    RipSettings = DataReader.ReadString(dsProject.Tables[1].Rows[0], "RipSettings"),
+                                    TechnicianName = DataReader.ReadString(dsProject.Tables[1].Rows[0], "TechnicianName"),
+                                    Notes = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Notes"),
+                                    InkOrder = (EInkOrder)DataReader.ReadInt(dsProject.Tables[1].Rows[0], "InkOrder"),
+                                    FountainSolution = DataReader.ReadString(dsProject.Tables[1].Rows[0], "FountainSolution"),
+                                    Blanket = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Blanket"),
+                                    BlanketAge = DataReader.ReadString(dsProject.Tables[1].Rows[0], "BlanketAge"),
+                                    Screening = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Screening"),
+                                    Coating = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Coating")
+                                };
                         }
                         if (dsProject.Tables[2].Rows.Count > 0)
                         {
                             project.MeasurementSetting =
                                 new MeasurementSetting()
-                                    {
-                                        ObserverType = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ObserverType"),
-                                        Illuminant = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "Illuminant"),  
-                                        UVMode = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "UVMode"),
-                                        MeasurementCount = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementCount"),
-                                        ReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "ReadMode"),
-                                        MeasurementDeviceId =
+                                {
+                                    ObserverType = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ObserverType"),
+                                    Illuminant = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "Illuminant"),
+                                    UVMode = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "UVMode"),
+                                    MeasurementCount = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementCount"),
+                                    ReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "ReadMode"),
+                                    MeasurementDeviceId =
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementDeviceID"),
-                                        InstrumentTypeId =
+                                    InstrumentTypeId =
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "InstrumentTypeID"),
-                                        ReferenceChartType = new KeyValuePair<short, string>(
+                                    ReferenceChartType = new KeyValuePair<short, string>(
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ReferenceChartTypeID"),
                                             DataReader.ReadString(dsProject.Tables[2].Rows[0], "ChartName")),
-                                        VMeasurementDeviceID = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VMeasurementDeviceID"),
-                                        OptReferenceChartType = new KeyValuePair<short, string>(
+                                    VMeasurementDeviceID = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VMeasurementDeviceID"),
+                                    OptReferenceChartType = new KeyValuePair<short, string>(
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "OPTReferenceChartTypeID"),
                                             DataReader.ReadString(dsProject.Tables[2].Rows[0], "OPTChartName")),
-                                        VReferenceChartType = new KeyValuePair<short, string>(
+                                    VReferenceChartType = new KeyValuePair<short, string>(
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VReferenceChartTypeID"),
                                         DataReader.ReadString(dsProject.Tables[2].Rows[0], "VChartName")),
-                                        MetricTargetPreset = new KeyValuePair<int, string>(
+                                    MetricTargetPreset = new KeyValuePair<int, string>(
                                                 DataReader.ReadInt(dsProject.Tables[2].Rows[0], "MetricTargetPresetID"),
                                                 DataReader.ReadString(dsProject.Tables[2].Rows[0], "MetricTargetPresetName")),
-                                        dEMethod = DataReader.ReadString(dsProject.Tables[2].Rows[0], "dEMethod"),
+                                    dEMethod = DataReader.ReadString(dsProject.Tables[2].Rows[0], "dEMethod"),
 
-                                        VUVMode = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VUVMode"),
-                                        VMeasurementCount = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VMeasurementCount"),
-                                        VReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "VReadMode"),
-                                        PresetWeighted = DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "Weighted")
-                                    };
+                                    VUVMode = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VUVMode"),
+                                    VMeasurementCount = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VMeasurementCount"),
+                                    VReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "VReadMode"),
+                                    PresetWeighted = DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "Weighted")
+                                };
                         }
                         if (dsProject.Tables[3].Rows.Count > 0)
                         {
                             project.ProjectOption = dsProject.Tables[3].AsEnumerable().
                                 Select(x => new ProjectOption()
-                                                {
-                                                    ProfileTypeId = DataReader.ReadShort(x, "ProfileTypeID"),
-                                                    ProfilerOptionId = DataReader.ReadShort(x, "ProfilerOptionID"),
-                                                    ProfilerOptionValue = DataReader.ReadString(x, "ProfilerOptionValue"),
-                                                }).ToList();
+                                {
+                                    ProfileTypeId = DataReader.ReadShort(x, "ProfileTypeID"),
+                                    ProfilerOptionId = DataReader.ReadShort(x, "ProfilerOptionID"),
+                                    ProfilerOptionValue = DataReader.ReadString(x, "ProfilerOptionValue"),
+                                }).ToList();
                         }
                         project.OptimizeRuns = dsProject.Tables[4].AsEnumerable().
                             Select(x => new OptimizeRun()
-                                            {
-                                                OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
-                                                RunName =
+                            {
+                                OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
+                                RunName =
                                                     isVerification
                                                         ? "Validation"
                                                         : ((EOptimizeRunStatus)DataReader.ReadInt(x, "Status")) == EOptimizeRunStatus.Closed
@@ -140,18 +140,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                     ? GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("OpenStatusText")
                                                                     : GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString(
                                                                         "CertificationStatusText"),
-                                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
-                                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "Status"),
-                                                StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
-                                                EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
-                                                MasterRunId = DataReader.ReadInt(x, "MasterRunID"),
-                                                HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
-                                                HasProfile = DataReader.ReadBoolean(x, "HasProfile"),
-                                                ReferenceChartType =
+                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "Status"),
+                                StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
+                                EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
+                                MasterRunId = DataReader.ReadInt(x, "MasterRunID"),
+                                HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
+                                HasProfile = DataReader.ReadBoolean(x, "HasProfile"),
+                                ReferenceChartType =
                                                     new KeyValuePair<short, string>(DataReader.ReadShort(x, "ReferenceChartTypeId"),
                                                                                     DataReader.ReadString(x, "ChartName")),
-                                                DeviceLinkProfile = DataReader.ReadByteArray(x,"DeviceLinkProfile")
-                                            }).ToList();
+                                DeviceLinkProfile = DataReader.ReadByteArray(x, "DeviceLinkProfile")
+                            }).ToList();
 
                         if (!isVerification)
                         {
@@ -211,7 +211,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             {
                                 project.ProjectTargetLAB = dsProject.Tables[5].AsEnumerable().
                                     Select(x => new Entity.CPSync1D.ProjectTargetLAB()
-                                    {                                      
+                                    {
                                         PatchType = new PatchType()
                                         {
                                             PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
@@ -276,42 +276,42 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         objProjectList = dsProjectList.Tables[0].AsEnumerable().
                             Select(x => new Project()
-                                            {
-                                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
-                                                ProjectName = DataReader.ReadString(x, "ProjectName"),
-                                                DeviceId = DataReader.ReadInt(x, "CpDeviceId"),
-                                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                                                LicenseType = (ELicenseType)DataReader.ReadInt(x, "LicenseTypeID"),
-                                                TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
-                                                //HasDLP = DataReader.ReadBoolean(x, "HasDLP"),
-                                                SourceProfile = new SourceProfile()
-                                                                    {
-                                                                        SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),
-                                                                        ProfileName = DataReader.ReadString(x, "ProfileName")
-                                                                    },
-                                                PrintStandardType = new Entity.CPSync1D.PrintStandardType()
-                                                {
-                                                    PrintStandardTypeID = DataReader.ReadShort(x, "PrintStandardTypeID"),
-                                                    PrintStandard = DataReader.ReadString(x, "PrintStandard"),
-                                                },
-                                                CreateDate = DataReader.ReadDate(x, "EndDateTime"),
-                                                PrintCondition =
+                            {
+                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                ProjectName = DataReader.ReadString(x, "ProjectName"),
+                                DeviceId = DataReader.ReadInt(x, "CpDeviceId"),
+                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                LicenseType = (ELicenseType)DataReader.ReadInt(x, "LicenseTypeID"),
+                                TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
+                                //HasDLP = DataReader.ReadBoolean(x, "HasDLP"),
+                                SourceProfile = new SourceProfile()
+                                {
+                                    SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),
+                                    ProfileName = DataReader.ReadString(x, "ProfileName")
+                                },
+                                PrintStandardType = new Entity.CPSync1D.PrintStandardType()
+                                {
+                                    PrintStandardTypeID = DataReader.ReadShort(x, "PrintStandardTypeID"),
+                                    PrintStandard = DataReader.ReadString(x, "PrintStandard"),
+                                },
+                                CreateDate = DataReader.ReadDate(x, "EndDateTime"),
+                                PrintCondition =
                                                     new PrintCondition()
-                                                        {
-                                                            Media = DataReader.ReadString(x, "Media"),
-                                                            Colorant = DataReader.ReadString(x, "Colorant"),
-                                                            RipSettings = DataReader.ReadString(x, "RipSettings")
-                                                        },
-                                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
-                                                CurrentDlpName = (DataReader.ReadInt(x, "CurrentDlpNo").ToString("000").Contains("-001")) ? String.Format("{0} DLP {1}.icc",
+                                                    {
+                                                        Media = DataReader.ReadString(x, "Media"),
+                                                        Colorant = DataReader.ReadString(x, "Colorant"),
+                                                        RipSettings = DataReader.ReadString(x, "RipSettings")
+                                                    },
+                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
+                                CurrentDlpName = (DataReader.ReadInt(x, "CurrentDlpNo").ToString("000").Contains("-001")) ? String.Format("{0} DLP {1}.icc",
                                                                                DataReader.ReadString(x, "ProjectName"),
                                                                                DataReader.ReadInt(x, "CurrentDlpNo").ToString("000"))
                                                                                : String.Format("{0} DLP{1}.icc",
                                                                                DataReader.ReadString(x, "ProjectName"),
                                                                                DataReader.ReadDate(x, "EndDateTime").Month.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Day.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Hour.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Minute.ToString("00")),
-                                                EnabledValidation = DataReader.ReadBoolean(x, "EnabledValidation"),
-                                                ValidationStatus = (ValidationStatus)DataReader.ReadInt(x, "ValidationStatus")
-                                            }).ToList();
+                                EnabledValidation = DataReader.ReadBoolean(x, "EnabledValidation"),
+                                ValidationStatus = (ValidationStatus)DataReader.ReadInt(x, "ValidationStatus")
+                            }).ToList();
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectsByDeviceId"));
@@ -406,26 +406,26 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         presetList = dsPresetList.Tables[0].AsEnumerable().Select(
                             x => new DeviceFamilyProfilerOption()
-                                     {
-                                         DeviceFamilyProfilerOptionId = DataReader.ReadInt(x, "DeviceFamilyProfilerOptionID"),
-                                         ProfilerOptionsName = DataReader.ReadString(x, "ProfilerOptionsName"),
-                                         ProfilerOptionsDesc = DataReader.ReadString(x, "ProfilerOptionsDesc"),
-                                     }).ToList();
+                            {
+                                DeviceFamilyProfilerOptionId = DataReader.ReadInt(x, "DeviceFamilyProfilerOptionID"),
+                                ProfilerOptionsName = DataReader.ReadString(x, "ProfilerOptionsName"),
+                                ProfilerOptionsDesc = DataReader.ReadString(x, "ProfilerOptionsDesc"),
+                            }).ToList();
 
                         var profilerOptionPresets = dsPresetList.Tables[1].
                             AsEnumerable().
                             Select(x =>
                                    new ProfilerOptionPreset()
+                                   {
+                                       DeviceFamilyProfilerOptionId = DataReader.ReadInt(x, "DeviceFamilyProfilerOptionID"),
+                                       ProfileTypeId = DataReader.ReadShort(x, "ProfileTypeID"),
+                                       ProfilerOption = new ProfilerOption()
                                        {
-                                           DeviceFamilyProfilerOptionId = DataReader.ReadInt(x, "DeviceFamilyProfilerOptionID"),
-                                           ProfileTypeId = DataReader.ReadShort(x, "ProfileTypeID"),
-                                           ProfilerOption = new ProfilerOption()
-                                                                {
-                                                                    ProfilerOptionId = DataReader.ReadShort(x, "ProfilerOptionID"),
-                                                                    Option = DataReader.ReadString(x, "ProfilerOption")
-                                                                },
-                                           ProfilerOptionValue = DataReader.ReadString(x, "ProfilerOptionValue")
-                                       }).ToList();
+                                           ProfilerOptionId = DataReader.ReadShort(x, "ProfilerOptionID"),
+                                           Option = DataReader.ReadString(x, "ProfilerOption")
+                                       },
+                                       ProfilerOptionValue = DataReader.ReadString(x, "ProfilerOptionValue")
+                                   }).ToList();
                         presetList.
                             ForEach(x =>
                                     x.ProfilerOptionPresets = profilerOptionPresets.
@@ -588,7 +588,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             ExecuteProcedure("CPSync4D.UpdateProject",
                                              new object[]
                                                  {
-                                                     project.ProjectId,                                                     
+                                                     project.ProjectId,
                                                      project.PrintStandardType.PrintStandardTypeID,
                                                      project.ProjectName,
                                                      project.PrintCondition.Media,
@@ -688,7 +688,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                              new List<Parameters>()
                                                  {
                                                      new Parameters() {ParameterName = "@CPDeviceID", Type = DbType.Int32, Value = project.DeviceId},
-                                                     new Parameters() {ParameterName = "@PrintStandardTypeID", Type = DbType.Int32, Value = project.PrintStandardType.PrintStandardTypeID},                                                     
+                                                     new Parameters() {ParameterName = "@PrintStandardTypeID", Type = DbType.Int32, Value = project.PrintStandardType.PrintStandardTypeID},
                                                      new Parameters() {ParameterName = "@ProjectName", Size = 30, Type = DbType.String, Value = project.ProjectName},
                                                      new Parameters()
                                                          {
@@ -777,40 +777,40 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         chartData.InstrumentTypeId = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "InstrumentTypeID");
                         chartData.MeasureDeviceSrNo = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "MeasureDeviceSrNo");
                         chartData.ActivationKey =
-                            Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + chartData.MeasureDeviceSrNo);                     
+                            Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + chartData.MeasureDeviceSrNo);
                         var UVMode = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "UVMode");
                         var DensityType = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "DensityType");
 
                         chartData.DeviceSetting = new MeasurementDevice
-                                                      {
-                                                          SerialNumber = chartData.MeasureDeviceSrNo,
-                                                          MeasurementSettings = new MeasurementSetting()
-                                                                                    {
-                                                                                        IlluminantName =
+                        {
+                            SerialNumber = chartData.MeasureDeviceSrNo,
+                            MeasurementSettings = new MeasurementSetting()
+                            {
+                                IlluminantName =
                                                                                             DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "IlluminantType"),
-                                                                                        ObserverTypeName =
+                                ObserverTypeName =
                                                                                             Utilities.GetValueFromDescription<EObserverType>(
                                                                                                 DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ObserverType")),
-                                                                                        UvIncludedName = ((UVMode == 0) ? EUVIncludedMode.UV.ToString() : (UVMode == 1) ? EUVIncludedMode.UVPlus.ToString() : EUVIncludedMode.UVCut.ToString()),
-                                                                                        UVMode = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "UVMode"),
-                                                                                        ReadMode = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ReadMode"),
-                                                                                        MeasurementCount = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "MeasurementCount"),
-                                                                                        DensityType = ((DensityType == 1) ? EDensityType.ANSIE.ToString() : EDensityType.ANSIT.ToString()) //---Pass by deafult "Status_T"
-                                                                                    }
-                                                      };
+                                UvIncludedName = ((UVMode == 0) ? EUVIncludedMode.UV.ToString() : (UVMode == 1) ? EUVIncludedMode.UVPlus.ToString() : EUVIncludedMode.UVCut.ToString()),
+                                UVMode = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "UVMode"),
+                                ReadMode = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ReadMode"),
+                                MeasurementCount = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "MeasurementCount"),
+                                DensityType = ((DensityType == 1) ? EDensityType.ANSIE.ToString() : EDensityType.ANSIT.ToString()) //---Pass by deafult "Status_T"
+                            }
+                        };
                         chartData.ReferenceCharts = dsReferenceChart.Tables[1].AsEnumerable().
                             Select(x =>
                                    new ReferenceChart()
-                                       {
-                                           ChartTypeId = DataReader.ReadShort(x, "ChartTypeID"),
-                                           SampleName = DataReader.ReadString(x, "SampleName"),
-                                           CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
-                                           CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
-                                           CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
-                                           CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
-                                           PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
-                                           HtmlColor = DataReader.ReadString(x, "HTMLColor")
-                                       }).ToList();
+                                   {
+                                       ChartTypeId = DataReader.ReadShort(x, "ChartTypeID"),
+                                       SampleName = DataReader.ReadString(x, "SampleName"),
+                                       CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                                       CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
+                                       CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
+                                       CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
+                                       PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                                       HtmlColor = DataReader.ReadString(x, "HTMLColor")
+                                   }).ToList();
 
                         var reader = DataAccessFactory.Instance.GetXmlResult("CPSync4D.GetChartSettings", new object[] { chartData.ReferenceChartTypeId });
                         var dsChartSettings = new DataSet();
@@ -900,7 +900,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                    new Parameters() {ParameterName = "@JobName", Type = DbType.String, Size = 50, Value = jobName},
                                                    new Parameters() {ParameterName = "@Customer", Type = DbType.String, Size = 50, Value = customer},
                                                    new Parameters() {ParameterName = "@PageOrSurface", Type = DbType.String, Size = 50, Value = pageOrSurface},
-                                                   new Parameters() {ParameterName = "@JDFJobId", Type = DbType.String, Size = 50, Value = jdfJobId},                                                   
+                                                   new Parameters() {ParameterName = "@JDFJobId", Type = DbType.String, Size = 50, Value = jdfJobId},
                                                    new Parameters() {ParameterName = "@ProjectId", Type = DbType.Int32, Size = 4, Value = projectId},
                                                    new Parameters() {ParameterName = "@SilverlightPostUrl", Type = DbType.String, Size = 200, Value = silverlightPostUrl},
                                                    new Parameters() {ParameterName = "@TempValidationInfoIdIN", Type = DbType.Guid, Size = 16, Value = tempValidationInfoId},
@@ -954,7 +954,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         validationInfo.JobName = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "JobName");
                         validationInfo.Customer = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "Customer");
                         validationInfo.PageOrSurface = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "PageOrSurface");
-                        validationInfo.JDFJobId = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "JDFJobId");                        
+                        validationInfo.JDFJobId = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "JDFJobId");
                         validationInfo.ProjectId = DataReader.ReadInt(dsProjectInfo.Tables[0].Rows[0], "ProjectId");
                         validationInfo.SilverlightPostUrl = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "SilverlightPostUrl");
                     }
@@ -974,10 +974,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         dstIlluminantList = (dsIlluminantList.Tables[0].AsEnumerable().Select(
                             illumin => new Illuminant()
-                                           {
-                                               IlluminantId = DataReader.ReadShort(illumin, "IlluminantID"),
-                                               IlluminantType = DataReader.ReadString(illumin, "IlluminantType"),
-                                           })).ToList();
+                            {
+                                IlluminantId = DataReader.ReadShort(illumin, "IlluminantID"),
+                                IlluminantType = DataReader.ReadString(illumin, "IlluminantType"),
+                            })).ToList();
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetIlluminantList"));
@@ -995,10 +995,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         dstObserverTypeList = (dsObserverTypeList.Tables[0].AsEnumerable().Select(
                             observer => new ObserverType()
-                                            {
-                                                ObserverTypeId = DataReader.ReadShort(observer, "ObserverTypeID"),
-                                                Type = DataReader.ReadString(observer, "ObserverType"),
-                                            })).ToList();
+                            {
+                                ObserverTypeId = DataReader.ReadShort(observer, "ObserverTypeID"),
+                                Type = DataReader.ReadString(observer, "ObserverType"),
+                            })).ToList();
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetObserverTypeList"));
@@ -1042,11 +1042,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         presetList = dsPresetList.Tables[0].AsEnumerable().Select(
                             x => new ReferenceChartType()
-                                     {
-                                         ReferenceChartTypeId = DataReader.ReadShort(x, "ReferenceChartTypeID"),
-                                         ChartName = DataReader.ReadString(x, "ChartName"),
-                                         ChartPreview = DataReader.ReadByteArray(x, "ChartPreview"),
-                                     }).ToList();
+                            {
+                                ReferenceChartTypeId = DataReader.ReadShort(x, "ReferenceChartTypeID"),
+                                ChartName = DataReader.ReadString(x, "ChartName"),
+                                ChartPreview = DataReader.ReadByteArray(x, "ChartPreview"),
+                            }).ToList();
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartTypeList"));
@@ -1133,7 +1133,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 {
                     string procedureName = "[CPSync].[GetMetricTargetPresetList]";
 
-                    if(isVerification)
+                    if (isVerification)
                         procedureName = "[CPSyncV].[GetMetricTargetPresetList]";
 
                     var dsMetricTargetPresetList = DataAccessFactory.Instance.GetDsResult(procedureName, new object[] { currentUserId, ProjectTypeId });
@@ -1302,7 +1302,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
                                     Type = DataReader.ReadString(x, "PatchType")
                                 },
-                                TVI = DataReader.ReadDecimal(x, "TVI")                         
+                                TVI = DataReader.ReadDecimal(x, "TVI")
                             }).ToList();
                     }
                 }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintStandardTVI"));
@@ -1428,17 +1428,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 SpotProjectId = DataReader.ReadInt(x, "SpotProjectID"),
                                 ProjectId = DataReader.ReadInt(x, "ProjectID"),
                                 ProjectName = DataReader.ReadString(x, "ProjectName"),
-                           
+
                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                             
-                               // TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
-                             
+
+                                // TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
+
                                 SpotTarget = new Entity.CPSpot.SpotTarget()
                                 {
                                     SpotTargetID = DataReader.ReadShort(x, "SpotTargetID"),
                                     SpotTargetName = DataReader.ReadString(x, "SpotTargetName")
                                 },
-                             
+
                                 CreateDate = DataReader.ReadDate(x, "EndDateTime"),
                                 TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
                                 HasColorProfile = DataReader.ReadBoolean(x, "HasColorProfile"),
@@ -1508,7 +1508,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      (project.MeasurementSetting.MeasurementCount == -1 ? 0 : project.MeasurementSetting.MeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
                                                      project.MeasurementSetting.ReadMode,
                                                      project.MeasurementSetting.MeasurementDeviceId
-                                                
+
                                                  });
                         savedProjectId = project.ProjectId;
                     },
@@ -1588,7 +1588,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         project = new Project()
                         {
                             DeviceId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CPDeviceID"),
-                            LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID")
+                            LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID"),
+                            ProjectName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProjectName"),
+                            //ProjectId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "SpotProjectID"),
+
                         };
 
                         project.SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary()
@@ -1679,8 +1682,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                       project.OptimizeRuns[index - 2].EndDateTime.Value.Hour.ToString("00") +
                                                       project.OptimizeRuns[index - 2].EndDateTime.Value.Minute.ToString(
                                                           "00") + ".icc";
-                                            //----If last run is certify run, then get DLP of its previous run----//
-                                        }
+                                        //----If last run is certify run, then get DLP of its previous run----//
+                                    }
                                 }
                             }
                             x.LastDlpName = (index == 0) ? string.Empty : LastDLPName;
@@ -1726,6 +1729,33 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
+        public int AddDummyData(int spotprojectId, int optimizationRunID)
+        {
+            int returnValue = 0;
+            var outParam = new Parameters() { ParameterName = "@LastOptimizationRunID", Type = DbType.Int32 };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure("[CPSpot].[InsertDummyMeasurement]",
+                                         new List<Parameters>()
+                                             {
+                                                     new Parameters() {ParameterName = "@SpotProjectID", Type = DbType.Int32, Value = spotprojectId},
+                                                     new Parameters() {ParameterName = "@OptimizationRunID", Type = DbType.Int32, Value = optimizationRunID},
+                                             },
+                                         new List<Parameters>()
+                                             {
+                                                     outParam
+                                             });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDummyMeasurement"));
+            if (outParam.Value != null)
+            {
+                returnValue = Convert.ToInt32(outParam.Value);
+            }
+            return returnValue;
+        }
         #endregion
 
         #region ITaskBase Members

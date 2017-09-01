@@ -185,6 +185,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+
+        public int AddDummyData(int spotprojectId, int optimizationRunID)
+        {
+            return 0;
+        }
         #endregion
 
         #region ITaskBase Members

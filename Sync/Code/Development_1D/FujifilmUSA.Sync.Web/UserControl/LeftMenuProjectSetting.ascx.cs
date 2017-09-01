@@ -37,7 +37,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             switch (SessionManager.Instance.CurrentProject.CurrentDisplayStatus)
             {
                 case ECurrentProjectStatus.New:
-                    if (SessionManager.Instance.CurrentProject.PrintCondition != null && !string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.PrintCondition.Media))
+                    if (SessionManager.Instance.CurrentProject.PrintCondition != null && (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.PrintCondition.Media) || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.SpotLibrary))
                     {
                         lnkDescription.Enabled = true;
                     }
@@ -50,7 +50,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkProfilerOption.Enabled = true;
                     }
-                    if (SessionManager.Instance.CurrentProject.MeasurementSetting != null 
+                    if (SessionManager.Instance.CurrentProject.MeasurementSetting != null
                         && ((SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0) || (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)))
                     {
                         lnkMeasurementSetup.Enabled = true;
@@ -67,7 +67,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkMeasure.Enabled = true;
 
-                        if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource)
+                        //if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource)
+                        if ((SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary || SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements) && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource)
                         {
                             lnkAnalyze.Enabled = true;
                         }
@@ -103,6 +104,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 lnkDownload.Enabled = true;
                             }
                         }
+                    }
+                    if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.SpotLibrary)
+                    {
+
                     }
                     if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key > 0)
                     {

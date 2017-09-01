@@ -37,35 +37,38 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void rgPatchDetails_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            MeasurementId = 0;
-
-            //Now we are using DataTable to bind the grid               
-            dtPatchDetails = new DataTable();
-            _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
-
-            if (!IsErrorOccured)
+            if (Request.QueryString["OptimizeRunId"] != null)
             {
-                //Now we are using DataTable as DataSource                    
-                rgPatchDetails.DataSource = dtPatchDetails;
-                decimal totalDeltaE = 0;
-                decimal avgDeltaE = 0;
+                MeasurementId = 0;
+                OptimizeRunId = Convert.ToInt32(Request.QueryString["OptimizeRunId"]);
+                //Now we are using DataTable to bind the grid               
+                dtPatchDetails = new DataTable();
+                _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
 
-                //count Avg, Max and Min ΔE
-                decimal minDtE = int.MaxValue;
-                decimal maxDtE = int.MinValue;
-
-                foreach (DataRow dr in dtPatchDetails.Rows)
+                if (!IsErrorOccured)
                 {
-                    decimal DtE = dr.Field<decimal>("ΔE");
-                    totalDeltaE += DtE;
-                    minDtE = Math.Min(minDtE, DtE);
-                    maxDtE = Math.Max(maxDtE, DtE);
-                }
-                avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
+                    //Now we are using DataTable as DataSource                    
+                    rgPatchDetails.DataSource = dtPatchDetails;
+                    decimal totalDeltaE = 0;
+                    decimal avgDeltaE = 0;
 
-                lblMinDeltaE.Text = minDtE.ToString();
-                lblMaxDeltaE.Text = maxDtE.ToString();
-                lblAvgDeltaE.Text = String.Format("{0:0.###}", avgDeltaE);
+                    //count Avg, Max and Min ΔE
+                    decimal minDtE = int.MaxValue;
+                    decimal maxDtE = int.MinValue;
+
+                    foreach (DataRow dr in dtPatchDetails.Rows)
+                    {
+                        decimal DtE = dr.Field<decimal>("ΔE");
+                        totalDeltaE += DtE;
+                        minDtE = Math.Min(minDtE, DtE);
+                        maxDtE = Math.Max(maxDtE, DtE);
+                    }
+                    avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
+
+                    lblMinDeltaE.Text = minDtE.ToString();
+                    lblMaxDeltaE.Text = maxDtE.ToString();
+                    lblAvgDeltaE.Text = String.Format("{0:0.###}", avgDeltaE);
+                }
             }
         }
 
@@ -129,7 +132,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 var lnklnkView = e.Item.FindControl("lnkView") as ImageButton;
 
                 string HTMLColor = Convert.ToString(DataBinder.Eval(item.DataItem, "HTMLColor"));
-                HTMLColor = HTMLColor.Substring(1, HTMLColor.Length - 1);
+                if (!string.IsNullOrEmpty(HTMLColor))
+                    HTMLColor = HTMLColor.Substring(1, HTMLColor.Length - 1);
                 lnklnkView.Attributes.Add("onclick",
                                                  "return ShowSpotColorPatchDetailsWindow('" + HTMLColor + "','" +
                                                  DataBinder.Eval(item.DataItem, "CIELAB_L") + "','" + DataBinder.Eval(item.DataItem, "CIELAB_a") + "','" +

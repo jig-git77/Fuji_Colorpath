@@ -71,8 +71,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
                     SessionManager.Instance.CurrentProject = Project;
                     SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
-                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
-                    Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
+                    //SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
+                    //Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
+                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                    Utilities.PopupWindowsRedirect(this, "SpotMeasurement.aspx");                    
                 }
             }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //---If  "Custom Source Profile" / "Full Gamut Source Profile" project type

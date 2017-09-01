@@ -83,7 +83,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsofMeasurement(_viewAnalyze.MeasurementId, 1);
+            _viewAnalyze.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsofMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.OptimizeRunId);
         }
 
         public void GetInkPaperChart()
