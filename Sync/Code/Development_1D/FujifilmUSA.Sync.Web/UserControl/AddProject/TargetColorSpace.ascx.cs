@@ -206,7 +206,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                if (SessionManager.Instance.CurrentProject.SpotTargetProject != null)
+                if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)
                     cmbSpotTargetList.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID);
             }
             BindPCSDataType();
@@ -370,24 +370,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //Skip Profiler Options page for Spot Target project type
             {
-                SessionManager.Instance.CurrentProject.SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary()
-                {
-                    SpotTarget = new Entity.CPSpot.SpotTarget()
+                if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget == null)
+                    SessionManager.Instance.CurrentProject.SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary()
                     {
-                        SpotTargetID = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetID,
-                        SpotTargetName = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetName
-                    },
-                    ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID
-                };
+                        SpotTarget = new Entity.CPSpot.SpotTarget()
+                        {
+                            SpotTargetID = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetID,
+                            SpotTargetName = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetName
+                        },
+                        ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID
+                    };
+
                 //-----Pass Dummy data---------//
-                SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = 0;
-                SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
-                SessionManager.Instance.CurrentProject.ProjectOption.Add(new ProjectOption()
-                {
-                    ProfileTypeId = 0,
-                    ProfilerOptionId = 0,
-                    ProfilerOptionValue = "",
-                });
+                //SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = 0;
+                //SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
+                //SessionManager.Instance.CurrentProject.ProjectOption.Add(new ProjectOption()
+                //{
+                //    ProfileTypeId = 0,
+                //    ProfilerOptionId = 0,
+                //    ProfilerOptionValue = "",
+                //});
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
             }
             else

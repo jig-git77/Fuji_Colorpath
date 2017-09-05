@@ -37,10 +37,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void rgPatchDetails_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            if (Request.QueryString["OptimizeRunId"] != null)
+
+            if (SessionManager.Instance.CurrentOptimizeRun != null)            
             {
                 MeasurementId = 0;
-                OptimizeRunId = Convert.ToInt32(Request.QueryString["OptimizeRunId"]);
+                OptimizeRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId);
                 //Now we are using DataTable to bind the grid               
                 dtPatchDetails = new DataTable();
                 _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
@@ -56,14 +57,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     decimal minDtE = int.MaxValue;
                     decimal maxDtE = int.MinValue;
 
-                    foreach (DataRow dr in dtPatchDetails.Rows)
+                    if (dtPatchDetails.Rows.Count > 0)
                     {
-                        decimal DtE = dr.Field<decimal>("ΔE");
-                        totalDeltaE += DtE;
-                        minDtE = Math.Min(minDtE, DtE);
-                        maxDtE = Math.Max(maxDtE, DtE);
+                        foreach (DataRow dr in dtPatchDetails.Rows)
+                        {
+                            decimal DtE = dr.Field<decimal>("ΔE");
+                            totalDeltaE += DtE;
+                            minDtE = Math.Min(minDtE, DtE);
+                            maxDtE = Math.Max(maxDtE, DtE);
+                        }
+                        avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
                     }
-                    avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
+
 
                     lblMinDeltaE.Text = minDtE.ToString();
                     lblMaxDeltaE.Text = maxDtE.ToString();

@@ -163,7 +163,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             IsUsed = true,
                             CurrentDisplayStatus = ECurrentProjectStatus.New,
                             LicenseType = ELicenseType.SpotLibrary,
-                            SpotTargetMasterProjectID = ProjectId
+                            SpotTargetMasterProjectID = ProjectId,
+                            SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary(){
+                                ProjectId= ProjectId
+                            }
                         };
 
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
@@ -187,33 +190,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (!IsErrorOccured)
                     {
                         SessionManager.Instance.CurrentProject = Project;
-                        SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                        SessionManager.Instance.CurrentOptimizeRun = Project.SpotTargetProject.OptimizeRuns.Last();
                         SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.SpotLibrary;                 
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-
+                        Response.Redirect("Analyze_SpotColor.aspx");
                         //SessionManager.Instance.CurrentProject.ProjectId = Project.SpotTargetProject.ProjectId;
                         //SessionManager.Instance.CurrentProject.ProjectName = Project.SpotTargetProject.SpotProjectId;
-                        Response.Redirect("Analyze_SpotColor.aspx?OptimizeRunID=" + Project.OptimizeRuns.Last().OptimizeRunId);
+                        //Response.Redirect("Analyze_SpotColor.aspx?OptimizeRunID=" + Project.SpotTargetProject.OptimizeRuns.Last().OptimizeRunId);
                     }
 
-                    //ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID;
-                    //------------Create new Project under this Device-----------------//
-                    //SessionManager.Instance.CurrentProject = new Project()
-                    //{
-                    //    DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
-                    //    IsUsed = true,
-                    //    CurrentDisplayStatus = ECurrentProjectStatus.New,
-                    //    LicenseType = ELicenseType.SpotLibrary,
-                    //    SpotTargetMasterProjectID = ProjectId,
-                    //    SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary()
-                    //    {
-                    //        LastOptmizeId = Convert.ToInt32(e.CommandArgument)
-                    //    }
-                    //};
-
-                    //SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                    //Response.Redirect("Analyze_SpotColor.aspx?OptimizeRunID=" + Convert.ToInt32(e.CommandArgument));
-                    //Response.Redirect("Analyze_SpotColor.aspx?SpotProjectID=" + Convert.ToInt32(e.CommandArgument));
                     break;
             }
         }

@@ -34,9 +34,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Tr_DownloadChart.Visible = false;
                     Page.Title = GetResourceString(_recSaveProjInkOptSource);
                 }
-                if (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName))
+
+                //check the current project is spot or not
+                string ProjectName = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary ?
+                                    SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName :
+                                    SessionManager.Instance.CurrentProject.ProjectName;
+
+                if (!string.IsNullOrEmpty(ProjectName))
                 {
-                    txtProjectName.Text = SessionManager.Instance.CurrentProject.ProjectName;
+                    txtProjectName.Text = ProjectName;
                     Page.Title = GetResourceString(_recSaveAs);
                 }
             }
@@ -64,17 +70,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If  "Spot Target Library" project type
             {
+                bool isNewSpotProject = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId == 0 ? true : false;
+                SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName = txtProjectName.Text;
+                SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
                 _presenterSaveWindow.SaveProject_SpotTargetProject(); //---Call save project function, w/o any ref charts details
                 if (!IsErrorOccured)
                 {
                     _presenterSaveWindow.GetProjectDetail_SpotProject();
                     WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
                     SessionManager.Instance.CurrentProject = Project;
-                    SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+                    SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last();
                     //SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
                     //Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
-                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
-                    Utilities.PopupWindowsRedirect(this, "SpotMeasurement.aspx");                    
+
+                    if (isNewSpotProject)
+                    {
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                        Utilities.PopupWindowsRedirect(this, "SpotMeasurement.aspx");                        
+                    }
+                    else
+                    {
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                        Utilities.PopupWindowsRedirect(this, "Analyze_SpotColor.aspx?OptimizeRunID=" + SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId);
+                    }
+
                 }
             }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //---If  "Custom Source Profile" / "Full Gamut Source Profile" project type

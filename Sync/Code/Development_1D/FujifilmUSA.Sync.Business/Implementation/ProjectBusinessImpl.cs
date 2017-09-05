@@ -1497,9 +1497,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             ExecuteProcedure("CPSpot.UpdateSpotProject",
                                              new object[]
                                                  {
-                                                     project.ProjectId,
+                                                     project.SpotTargetProject.SpotProjectId,
                                                      project.SpotTargetProject.SpotTarget.SpotTargetID,
-                                                     project.ProjectName,
+                                                     project.SpotTargetProject.ProjectName,
                                                      project.PrintCondition.TechnicianName,
                                                      project.PrintCondition.Notes,
                                                      project.MeasurementSetting.ObserverType,
@@ -1510,7 +1510,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.MeasurementSetting.MeasurementDeviceId
 
                                                  });
-                        savedProjectId = project.ProjectId;
+                        savedProjectId = project.SpotTargetProject.SpotProjectId;
                     },
                     new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveProject"));
                 #endregion
@@ -1529,7 +1529,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  {
                                                      new Parameters() {ParameterName = "@CPDeviceID", Type = DbType.Int32, Value = project.DeviceId},
                                                      new Parameters() {ParameterName = "@SpotTargetID", Type = DbType.Int32, Value = project.SpotTargetProject.SpotTarget.SpotTargetID},
-                                                     new Parameters() {ParameterName = "@ProjectName", Size = 30, Type = DbType.String, Value = project.ProjectName},
+                                                     new Parameters() {ParameterName = "@ProjectName", Size = 30, Type = DbType.String, Value = project.SpotTargetProject.ProjectName},
                                                      new Parameters()
                                                          {
                                                              ParameterName = "@CreateDate",
@@ -1589,9 +1589,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         {
                             DeviceId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CPDeviceID"),
                             LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID"),
-                            ProjectName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProjectName"),
-                            //ProjectId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "SpotProjectID"),
-
                         };
 
                         project.SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary()
@@ -1637,7 +1634,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "InstrumentTypeID")
                                 };
                         }
-                        project.OptimizeRuns = dsProject.Tables[3].AsEnumerable().
+                        project.SpotTargetProject.OptimizeRuns = dsProject.Tables[3].AsEnumerable().
                             Select(x => new OptimizeRun()
                             {
                                 OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
@@ -1662,44 +1659,47 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                         int index = 0;
                         string LastDLPName = "";
-                        project.OptimizeRuns.ForEach(x =>
+                        if(project.SpotTargetProject.OptimizeRuns.Count>0)
                         {
-                            if (index > 0)
+                            project.SpotTargetProject.OptimizeRuns.ForEach(x =>
                             {
-                                LastDLPName = project.ProjectName + " DLP" +
-                                              project.OptimizeRuns[index - 1].EndDateTime.Value.Month.ToString("00") +
-                                              project.OptimizeRuns[index - 1].EndDateTime.Value.Day.ToString("00") +
-                                              project.OptimizeRuns[index - 1].EndDateTime.Value.Hour.ToString("00") +
-                                              project.OptimizeRuns[index - 1].EndDateTime.Value.Minute.ToString("00") +
-                                              ".icc";
-                                if (index > 1)
+                                if (index > 0)
                                 {
-                                    if (project.OptimizeRuns[index - 1].Status == EOptimizeRunStatus.Certify)
+                                    LastDLPName = project.SpotTargetProject.ProjectName + " DLP" +
+                                                  project.SpotTargetProject.OptimizeRuns[index - 1].EndDateTime.Value.Month.ToString("00") +
+                                                  project.SpotTargetProject.OptimizeRuns[index - 1].EndDateTime.Value.Day.ToString("00") +
+                                                  project.SpotTargetProject.OptimizeRuns[index - 1].EndDateTime.Value.Hour.ToString("00") +
+                                                  project.SpotTargetProject.OptimizeRuns[index - 1].EndDateTime.Value.Minute.ToString("00") +
+                                                  ".icc";
+                                    if (index > 1)
                                     {
-                                        LastDLPName = project.ProjectName + " DLP" +
-                                                      project.OptimizeRuns[index - 2].EndDateTime.Value.Month.ToString("00") +
-                                                      project.OptimizeRuns[index - 2].EndDateTime.Value.Day.ToString("00") +
-                                                      project.OptimizeRuns[index - 2].EndDateTime.Value.Hour.ToString("00") +
-                                                      project.OptimizeRuns[index - 2].EndDateTime.Value.Minute.ToString(
-                                                          "00") + ".icc";
-                                        //----If last run is certify run, then get DLP of its previous run----//
+                                        if (project.SpotTargetProject.OptimizeRuns[index - 1].Status == EOptimizeRunStatus.Certify)
+                                        {
+                                            LastDLPName = project.SpotTargetProject.ProjectName + " DLP" +
+                                                          project.SpotTargetProject.OptimizeRuns[index - 2].EndDateTime.Value.Month.ToString("00") +
+                                                          project.SpotTargetProject.OptimizeRuns[index - 2].EndDateTime.Value.Day.ToString("00") +
+                                                          project.SpotTargetProject.OptimizeRuns[index - 2].EndDateTime.Value.Hour.ToString("00") +
+                                                          project.SpotTargetProject.OptimizeRuns[index - 2].EndDateTime.Value.Minute.ToString(
+                                                              "00") + ".icc";
+                                            //----If last run is certify run, then get DLP of its previous run----//
+                                        }
                                     }
                                 }
-                            }
-                            x.LastDlpName = (index == 0) ? string.Empty : LastDLPName;
-                            x.DlpName = string.Format("{0} DLP {1}.icc",
-                                                      project.ProjectName,
-                                                      index++.ToString("000"));
+                                x.LastDlpName = (index == 0) ? string.Empty : LastDLPName;
+                                x.DlpName = string.Format("{0} DLP {1}.icc",
+                                                          project.SpotTargetProject.ProjectName,
+                                                          index++.ToString("000"));
 
-                        });
+                            });
+                        }
                         if (project.CurrDlpId > 0)
                         {
-                            project.CurrentDlpName = project.OptimizeRuns.Single(x => x.OptimizeRunId == project.CurrDlpId).DlpName;
-                            project.ProposedDlpName = project.OptimizeRuns.Last().DlpName;
+                            project.CurrentDlpName = project.SpotTargetProject.OptimizeRuns.Single(x => x.OptimizeRunId == project.CurrDlpId).DlpName;
+                            project.ProposedDlpName = project.SpotTargetProject.OptimizeRuns.Last().DlpName;
                         }
 
                         project.CurrentDisplayStatus =
-                            project.OptimizeRuns.Count() == 1
+                            project.SpotTargetProject.OptimizeRuns.Count() == 1
                                 ? ECurrentProjectStatus.New
                                 : ECurrentProjectStatus.Run;
 

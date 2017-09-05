@@ -103,7 +103,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ph.Controls.Add(ctrlItem);
 
             if (SessionManager.Instance.CurrentProject != null
-                && (SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.New 
+                && (SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.New
                 || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count() == 1)))
             {
                 ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
@@ -120,9 +120,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case ECurrentProjectStatus.New:
                     ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
                     ctrlItem.ItemLevel = ELeftMenuItemLevel.ProjectSetup;
-                    ctrlItem.ItemName = string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName)
+                    ctrlItem.ItemName = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary ? //if current project is spotlibrary
+                        (string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName) // name from the spotproject
                                             ? GetResourceString("newPrintConditionText")
-                                            : SessionManager.Instance.CurrentProject.ProjectName;
+                                            : SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName):
+                        (string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName)               // else name from the parent project
+                                            ? GetResourceString("newPrintConditionText")
+                                            : SessionManager.Instance.CurrentProject.ProjectName);
                     ph.Controls.Add(ctrlItem);
                     ph.Controls.Add(this.LoadControl("~/UserControl/LeftMenuProjectSetting.ascx"));
                     break;

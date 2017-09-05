@@ -14,6 +14,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
+            bool isSpotLibraryProject = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary;
+
             lnkDescription.Enabled =
                 lnkTargetColorSpace.Enabled =
                 lnkProfilerOption.Enabled =
@@ -37,12 +39,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             switch (SessionManager.Instance.CurrentProject.CurrentDisplayStatus)
             {
                 case ECurrentProjectStatus.New:
-                    if (SessionManager.Instance.CurrentProject.PrintCondition != null && (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.PrintCondition.Media) || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.SpotLibrary))
+                    if (SessionManager.Instance.CurrentProject.PrintCondition != null && (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.PrintCondition.Media) || isSpotLibraryProject))
                     {
                         lnkDescription.Enabled = true;
                     }
                     if ((SessionManager.Instance.CurrentProject.SourceProfile != null && SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile) //No Target ColorSpace for Custom Source Profile project type
-                        || (SessionManager.Instance.CurrentProject.SpotTargetProject != null && SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)) // Show Target Color Space for Spot Color Target project type
+                        || (isSpotLibraryProject && SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)) // Show Target Color Space for Spot Color Target project type
                     {
                         lnkTargetColorSpace.Enabled = true;
                     }
@@ -51,7 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lnkProfilerOption.Enabled = true;
                     }
                     if (SessionManager.Instance.CurrentProject.MeasurementSetting != null
-                        && ((SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0) || (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)))
+                        && ((SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0) || isSpotLibraryProject))
                     {
                         lnkMeasurementSetup.Enabled = true;
                     }
@@ -59,23 +61,41 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkValidationSetup.Enabled = true;
                     }
-                    if (SessionManager.Instance.CurrentProject.ProjectId > 0)
+                    //check for spotlibrary
+                    bool isSaveEnabled = isSpotLibraryProject ? (SessionManager.Instance.CurrentProject.SpotTargetProject == null ? false :
+                                        SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId > 0 ? true : false) :
+                                        (SessionManager.Instance.CurrentProject.ProjectId > 0 ? true : false);
+
+                    if (isSaveEnabled)
                     {
                         lnkSave.Enabled = true;
                     }
-                    if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0)
+
+                    bool isMeasureEnabled = isSpotLibraryProject ? (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns == null ? false :
+                                            SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count > 0) :
+                                            (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0);
+
+                    if (isMeasureEnabled)
                     {
                         lnkMeasure.Enabled = true;
 
-                        //if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource)
-                        if ((SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary || SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements) && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource)
-                        {
+                        bool isAnalyzeEnabled = isSpotLibraryProject ?
+                                                (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns[0].HasMeasurements ? true : false) :
+                                                (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements &&
+                                                SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
+                                                SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource);
+
+                        //if ((isSpotLibraryProject || SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements) && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource)
+                        if (isAnalyzeEnabled)
                             lnkAnalyze.Enabled = true;
-                        }
-                        if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile)
-                        {
+
+                        bool isDownloadEnabled = isSpotLibraryProject ? (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns == null ? false ://spot libary project condition
+                                                SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count > 0 ? false :
+                                                SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns[0].HasProfile) :
+                                                SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile;
+
+                        if (isDownloadEnabled)
                             lnkDownload.Enabled = true;
-                        }
 
                         if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource || (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)) //-- If ProjectType is Source to Source Profile or Sync 1D ReTarget then, don't show Measurement Page
                         {
@@ -199,11 +219,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case "lnkMeasure":
                             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
-                            Response.Redirect("~/Measurement.aspx");
+                            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+                                Response.Redirect("~/SpotMeasurement.aspx");
+                            else
+                                Response.Redirect("~/Measurement.aspx");
                             break;
                         case "lnkAnalyze":
                             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                            Response.Redirect("~/Analyze.aspx");
+                            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+                                Response.Redirect("~/Analyze_SpotColor.aspx");
+                            else
+                                Response.Redirect("~/Analyze.aspx");                            
                             break;
                         case "lnkDownload":
                             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
