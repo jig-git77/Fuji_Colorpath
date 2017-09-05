@@ -2229,6 +2229,8 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="_app_offline.htm" />
+    <Content Include="UploadFiles\Named Color Profile.icc" />
+    <Content Include="UploadFiles\spotchart.zip" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessDenied.aspx.cs">
@@ -5203,7 +5205,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

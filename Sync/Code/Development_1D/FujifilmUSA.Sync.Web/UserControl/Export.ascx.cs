@@ -65,6 +65,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Div_Chart.Visible = false;
                         header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.ProjectName + ".icc");
                     }
+                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If "Spot Target Library" project type, then skip Measure button and DLP Download button (since we don't have desctination profile in this case).
+                    {
+                        trSourceProfDownload.Visible = false;
+                        trDLPDownload.Visible = true;
+                        trDLPDownload1.Visible = false;
+                        trDLPDownload2.Visible = false;
+                        trAdvancedDownload.Visible = true;
+                        Div_Chart.Visible = true;
+                        lbtnMeasure.Visible = false;
+                        locDownloadDLPAndChart.Text = "Download Chart";
+                        locDownloadDestinationICC.Text = "Download Named Color Profile ICC";
+                        header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + ".icc");
+                    }
                     else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource) //---If "Custom Source Profile" project type, then skip Measure button and Advanced Download button (since we don't have desctination profile in this case).
                     {
                         trSourceProfDownload.Visible = true;
@@ -78,7 +91,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         trAdvancedDownload.Visible = true;
                     }
                 }
-                if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
+                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
                 {
                     rbtnDetlaReflist.Items[1].Enabled = false;
                 }
@@ -144,33 +157,48 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)
         {
-            //ReferenceChartTypeId = SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Key;  
-            //Here we are considering optimization chart as export will be visible only once DLP is created (i.e. success of Run0)
-            ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;  
-            _presenterExport.GetChartPreview();
-            if (!IsErrorOccured)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                if (ChartPreview != null)
-                    Utilities.DownloadFile(ChartPreview, string.Format("{0}.pdf", SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Value), ".pdf");
-                else
-                    fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
+                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), "spotchart.zip", "spotchart.zip");
             }
             else
             {
-                fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
+                //ReferenceChartTypeId = SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Key;  
+                //Here we are considering optimization chart as export will be visible only once DLP is created (i.e. success of Run0)
+                ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
+                _presenterExport.GetChartPreview();
+                if (!IsErrorOccured)
+                {
+                    if (ChartPreview != null)
+                        Utilities.DownloadFile(ChartPreview, string.Format("{0}.pdf", SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Value), ".pdf");
+                    else
+                        fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
+                }
+                else
+                {
+                    fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
+                }
             }
         }
 
         protected void lbtnDownloadDestinationICC_Click(object sender, EventArgs e)
         {
-            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            _presenterExport.GetDestinationProfile();
-            if (!IsErrorOccured)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                if (SourceProfile != null)
-                    Utilities.DownloadFile(SourceProfile,
-                                           string.Format("{0}.icc",
-                                                         SessionManager.Instance.CurrentProject.ProjectName));
+                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), "Named Color Profile.icc", "Named Color Profile.icc");
+
+            }
+            else
+            {
+                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                _presenterExport.GetDestinationProfile();
+                if (!IsErrorOccured)
+                {
+                    if (SourceProfile != null)
+                        Utilities.DownloadFile(SourceProfile,
+                                               string.Format("{0}.icc",
+                                                             SessionManager.Instance.CurrentProject.ProjectName));
+                }
             }
         }
 

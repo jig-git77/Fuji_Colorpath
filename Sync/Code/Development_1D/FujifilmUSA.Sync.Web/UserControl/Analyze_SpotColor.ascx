@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Analyze_SpotColor.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze_SpotColor" %>
 <%@ Register Src="~/UserControl/PopupControl/SpotColorPatchDetails.ascx" TagName="SpotColorPatchDetails" TagPrefix="pd" %>
+<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
+
 <style>
     .PatchDetailsSummaryTable {
         line-height: 35px;
@@ -48,8 +50,21 @@
     &nbsp;
 </div>
 <div class="contant_middle">
+    <div class="head">
     <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
     <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
+         <div class="Information_divAnalyze">
+                    <asp:LinkButton ID="lbtnDownloadAndSaveNCP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveNCP_Click">
+                        <span>
+                            <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
+                            <asp:Localize runat="server" Text="Create NCP" ID="locCreateNCP" meta:resourcekey="locCreateNCPResource1"></asp:Localize>
+                        </span>
+                    </asp:LinkButton>
+                </div>
+           </div>
+            <div class="listDevice" style="margin-left: 10px;">
+                <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
+            </div>
     <div class="listDevice" style="margin-left: 10px;">
         <div id="divToRender" runat="server">
             <table cellpadding="0" cellspacing="10" border="0" width="97%">

@@ -252,6 +252,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         public string FileName;
-        #endregion     
+        #endregion
+
+        protected void lbtnDownloadAndSaveNCP_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Export.aspx");
+        }
     }
 }

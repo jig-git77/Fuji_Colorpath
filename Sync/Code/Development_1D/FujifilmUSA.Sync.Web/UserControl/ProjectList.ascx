@@ -123,6 +123,41 @@
         line-height: 15px;
     }
 </style>
+
+<style type="text/css">
+    .InnerHeaderStyle
+    {
+      background: #C0C0C0 !important;
+      /*font-size: 13px !important;*/
+      /*color: black !important;*/ /*add more style definitions here*/
+    }
+    .InnerItemStyle
+    {
+      background: #C0C0C0 !important;
+      /*color: brown !important;*/ /*add more style definitions here*/
+    }
+    .InnerAlernatingItemStyle
+    {
+      background: #C0C0C0 !important;
+      /*color: brown !important;*/ /*add more style definitions here*/
+    }
+    .CommandItemStyle
+    {
+      background: #C0C0C0 !important;
+      /*color: brown !important;*/ /*add more style definitions here*/
+    }
+    .FilterItemStyle
+    {
+      background: #C0C0C0 !important;
+      /*color: brown !important;*/ /*add more style definitions here*/
+    }
+    .PagerItemStyle
+    {
+      background: #C0C0C0 !important;
+      /*color: brown !important;*/ /*add more style definitions here*/
+    }
+</style>
+
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
@@ -164,6 +199,14 @@
                                 <MasterTableView DataKeyNames="ProjectId">         
                                     <DetailTables>
                                                 <telerik:GridTableView DataKeyNames="SpotProjectID" Name="SpotProjects" Width="100%" AutoGenerateColumns="false" CommandItemDisplay="Top" >
+                                                    
+                                                    <HeaderStyle CssClass="InnerHeaderStyle" />
+                                                    <ItemStyle CssClass="InnerItemStyle" />
+                                                    <AlternatingItemStyle CssClass="InnerAlernatingItemStyle" />
+                                                    <CommandItemStyle CssClass="CommandItemStyle" />
+                                                    <FilterItemStyle CssClass="FilterItemStyle" />
+                                                    <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" CssClass="PagerItemStyle" />
+
                                                     <CommandItemSettings ShowAddNewRecordButton="false" />
                                                     <CommandItemTemplate>
                                                         <asp:Button ID="btnAddSpotLibrary" runat="server" Text="Create New Library" CommandName="AddSpotLibrary" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectID") %>'  />

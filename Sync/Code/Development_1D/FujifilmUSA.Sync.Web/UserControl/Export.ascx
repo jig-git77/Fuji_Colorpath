@@ -88,7 +88,7 @@
                                 <div style="border-style: None; padding: 5px">
                                     <table>
                                         <tbody>
-                                            <tr>
+                                            <tr id="trDLPDownload1" runat="server">
                                                 <td>
                                                     <span><asp:Localize runat="server" 
                                                         Text="Download DLP and Implement in Workflow :" 
@@ -96,7 +96,7 @@
                                                         meta:resourcekey="locDownloadDLPAndImplementWorkflowResource1"></asp:Localize></span>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr id="trDLPDownload2" runat="server">
                                                 <td>
                                                     <asp:LinkButton ID="lbtnDownloadDLP" runat="server" CssClass="gray_bt" 
                                                         OnClick="lbtnDownloadDLP_Click">
