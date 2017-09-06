@@ -371,15 +371,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //Skip Profiler Options page for Spot Target project type
             {
                 if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget == null)
-                    SessionManager.Instance.CurrentProject.SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary()
+                {
+                    SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget = new Entity.CPSpot.SpotTarget()
                     {
-                        SpotTarget = new Entity.CPSpot.SpotTarget()
-                        {
-                            SpotTargetID = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetID,
-                            SpotTargetName = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetName
-                        },
-                        ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID
+                        SpotTargetID = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetID,
+                        SpotTargetName = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetName
                     };
+                    SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID;
+                }
 
                 //-----Pass Dummy data---------//
                 //SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = 0;

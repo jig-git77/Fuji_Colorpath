@@ -123,17 +123,17 @@
                                                     <tr>
                                                         <td><b>Media</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblMedia" Text="Epson 24in Proofer Media"></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblMedia" ></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Colorant</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblColorant" Text="Epson UltraChrome HDR/PX-P"></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblColorant" ></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Rip Settings</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblRipSettings" Text="720 dpi"></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblRipSettings" ></asp:Label></td>
                                                     </tr>
                                                 </table>
 

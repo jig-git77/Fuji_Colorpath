@@ -1500,8 +1500,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.SpotTargetProject.SpotProjectId,
                                                      project.SpotTargetProject.SpotTarget.SpotTargetID,
                                                      project.SpotTargetProject.ProjectName,
-                                                     project.PrintCondition.TechnicianName,
-                                                     project.PrintCondition.Notes,
+                                                     project.SpotTargetProject.PrintCondition.TechnicianName,
+                                                     project.SpotTargetProject.PrintCondition.Notes,
+                                                     project.SpotTargetProject.PrintCondition.Media,
+                                                     project.SpotTargetProject.PrintCondition.Colorant,
+                                                     project.SpotTargetProject.PrintCondition.RipSettings,
                                                      project.MeasurementSetting.ObserverType,
                                                      project.MeasurementSetting.Illuminant,
                                                      (project.MeasurementSetting.UVMode == -1 ? 2 : project.MeasurementSetting.UVMode),  //---For older project who doen't have UVMode, so by default it will pass -1 because of NULL, so in that case make it 2 "UVCut"
@@ -1536,8 +1539,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                              Type = DbType.DateTime,
                                                              Value = project.CreateDate.AddMilliseconds(-project.CreateDate.Millisecond)
                                                          },
-                                                     new Parameters() {ParameterName = "@TechnicalName", Size = 30, Type = DbType.String, Value = project.PrintCondition.TechnicianName},
-                                                     new Parameters() {ParameterName = "@Notes", Size = 500, Type = DbType.String, Value = project.PrintCondition.Notes},
+                                                     new Parameters() {ParameterName = "@TechnicalName", Size = 30, Type = DbType.String, Value = project.SpotTargetProject.PrintCondition.TechnicianName},
+                                                     new Parameters() {ParameterName = "@Notes", Size = 500, Type = DbType.String, Value = project.SpotTargetProject.PrintCondition.Notes},
+                                                     new Parameters() {ParameterName = "@Media", Size = 500, Type = DbType.String, Value = project.SpotTargetProject.PrintCondition.Media},
+                                                     new Parameters() {ParameterName = "@Colorant", Size = 500, Type = DbType.String, Value = project.SpotTargetProject.PrintCondition.Colorant},
+                                                     new Parameters() {ParameterName = "@RipSettings", Size = 500, Type = DbType.String, Value = project.SpotTargetProject.PrintCondition.RipSettings},
+
 
                                                      new Parameters() {ParameterName = "@ObserverType", Type = DbType.Int16, Value = project.MeasurementSetting.ObserverType},
                                                      new Parameters() {ParameterName = "@Illuminant", Type = DbType.Int16, Value = project.MeasurementSetting.Illuminant},
@@ -1611,11 +1618,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
-                            project.PrintCondition =
+                            project.SpotTargetProject.PrintCondition =
                                 new PrintCondition()
                                 {
                                     TechnicianName = DataReader.ReadString(dsProject.Tables[1].Rows[0], "TechnicianName"),
-                                    Notes = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Notes")
+                                    Notes = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Notes"),
+                                    Media = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Media"),
+                                    Colorant = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Colorant"),
+                                    RipSettings = DataReader.ReadString(dsProject.Tables[1].Rows[0], "RipSettings")
                                 };
                         }
                         if (dsProject.Tables[2].Rows.Count > 0)

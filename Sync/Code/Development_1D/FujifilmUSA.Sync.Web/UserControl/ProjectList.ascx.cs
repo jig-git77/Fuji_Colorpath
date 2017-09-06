@@ -7,6 +7,7 @@ using Telerik.Web.UI;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using System.Linq;
+using FujifilmUSA.Sync.Entity.CPSpot;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -17,7 +18,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recvalidationStatusNotCertified = "validationStatusNotCertified";
         private const string _recvalidationStatusDisabled = "validationStatusDisabled";
         private const string _recvalidationStatusLastOK = "validationStatusLastOK";
-        private const string _recvalidationStatusLastFailed = "validationStatusLastFailed"; 
+        private const string _recvalidationStatusLastFailed = "validationStatusLastFailed";
         #endregion
 
         #region Variable Declaration
@@ -110,11 +111,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             //------------Create new Project under this Device-----------------//
             SessionManager.Instance.CurrentProject = new Project()
-                                                         {
-                                                             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
-                                                             IsUsed = true,
-                                                             CurrentDisplayStatus = ECurrentProjectStatus.New
-                                                         };
+            {
+                DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
+                IsUsed = true,
+                CurrentDisplayStatus = ECurrentProjectStatus.New
+            };
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
             Response.Redirect("AddProject.aspx");
         }
@@ -154,9 +155,35 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case "AddSpotLibrary":
                     if (e.CommandArgument != null)
                     {
+                        //------------Create new Project under this Device-----------------//
+
                         ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID;
 
-                        //------------Create new Project under this Device-----------------//
+                        //_presenterProjectList.GetProjectDetail();
+                        //if (!IsErrorOccured)
+                        //{
+                        //    SessionManager.Instance.CurrentProject = new Project()
+                        //    {
+                        //        DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
+                        //        IsUsed = true,
+                        //        CurrentDisplayStatus = ECurrentProjectStatus.New,
+                        //        LicenseType = ELicenseType.SpotLibrary,
+                        //        SpotTargetMasterProjectID = ProjectId,
+                        //        SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary()
+                        //        {
+                        //            PrintCondition = new PrintCondition()
+                        //            {
+                        //                Media = Project.PrintCondition.Media,
+                        //                Colorant = Project.PrintCondition.Colorant,
+                        //                RipSettings = Project.PrintCondition.RipSettings
+                        //            },
+                        //            ProjectId = ProjectId
+                        //        }
+                        //    };
+                        //    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
+                        //}
+
+
                         SessionManager.Instance.CurrentProject = new Project()
                         {
                             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
@@ -164,17 +191,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             CurrentDisplayStatus = ECurrentProjectStatus.New,
                             LicenseType = ELicenseType.SpotLibrary,
                             SpotTargetMasterProjectID = ProjectId,
-                            SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary(){
-                                ProjectId= ProjectId
+                            SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary()
+                            {
+                                ProjectId = ProjectId
                             }
                         };
 
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
+
                         Response.Redirect("AddProject.aspx");
                     }
                     break;
                 case "ClearFilterSpotTarget":
-                   
+
                     break;
                 case "DeleteSpotProject":
                     if (e.CommandArgument != null)
@@ -184,14 +213,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     break;
                 case "SelectSpotTargetProject":
-                    
+
                     ProjectId = Convert.ToInt32(e.CommandArgument);
                     _presenterProjectList.GetProjectDetail_SpotProject();
                     if (!IsErrorOccured)
                     {
                         SessionManager.Instance.CurrentProject = Project;
                         SessionManager.Instance.CurrentOptimizeRun = Project.SpotTargetProject.OptimizeRuns.Last();
-                        SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.SpotLibrary;                 
+                        SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.SpotLibrary;
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
                         Response.Redirect("Analyze_SpotColor.aspx");
                         //SessionManager.Instance.CurrentProject.ProjectId = Project.SpotTargetProject.ProjectId;
@@ -208,72 +237,102 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgProjectList_ItemDataBound(object sender, GridItemEventArgs e)
         {
-            var project = e.Item.DataItem as Project;
-            if (e.Item.ItemType != GridItemType.Item && e.Item.ItemType != GridItemType.AlternatingItem) return;
-            var btnExpand = e.Item.FindControl("GECBtnExpandColumn") as Button;
-            var btnSelect = e.Item.FindControl("imgbtnSelect") as ImageButton;
-            var imgStatus = e.Item.FindControl("imgStatus") as Image;
-            var imgbtnVarification = e.Item.FindControl("imgbtnVarification") as Image;
-            if (imgStatus == null || btnSelect == null || imgbtnVarification == null) return;
-            imgStatus.ToolTip = imgStatus.AlternateText = GetResourceString("ProjectStatus_" + project.Status.ToString());
-            btnSelect.AlternateText = btnSelect.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue(project.LicenseType);
-
-            var days = (DateTime.Now - project.CreateDate).TotalDays;
-
-            switch (project.Status)
+            if (e.Item is GridDataItem && e.Item.OwnerTableView.Name == "ParentProjects")
             {
-                case EOptimizeRunStatus.Open:
-                    if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
-                    {
-                        btnSelect.Attributes.Add("onclick",
-                                                 "javascript: return ShowOpenPrintConditionWindow('" +
-                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" +
-                                                 Math.Round(days, 1) +
-                                                 "','" + Server.UrlEncode(project.CurrentDlpName) + "','" + project.TotalRuns + "')");
-                    }
-                    else
-                        btnSelect.Attributes.Add("onclick", "javascript: return false;");
+                var project = e.Item.DataItem as Project;
+                if (e.Item.ItemType != GridItemType.Item && e.Item.ItemType != GridItemType.AlternatingItem) return;
+                var btnExpand = e.Item.FindControl("GECBtnExpandColumn") as Button;
+                var btnSelect = e.Item.FindControl("imgbtnSelect") as ImageButton;
+                var imgStatus = e.Item.FindControl("imgStatus") as Image;
+                var imgbtnVarification = e.Item.FindControl("imgbtnVarification") as Image;
+                if (imgStatus == null || btnSelect == null || imgbtnVarification == null) return;
+                imgStatus.ToolTip = imgStatus.AlternateText = GetResourceString("ProjectStatus_" + project.Status.ToString());
+                btnSelect.AlternateText = btnSelect.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue(project.LicenseType);
 
-                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
+                var days = (DateTime.Now - project.CreateDate).TotalDays;
 
-                    break;
-                case EOptimizeRunStatus.Closed:
-                    if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
-                    {
-                        btnSelect.Attributes.Add("onclick",
-                                                 "javascript: return ShowClosePrintConditionWindow('" +
-                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + (int)project.LicenseType + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
-                    }
-                    else
-                        btnSelect.Attributes.Add("onclick", "javascript: return false;");
-
-                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
-                    break;
-                case EOptimizeRunStatus.Certify:
-                    if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
-                    {
-                        btnSelect.Attributes.Add("onclick",
-                                                 "javascript: return ShowClosePrintConditionWindow('" +
-                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + (int)project.LicenseType + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
-                    }
-                    else
-                        btnSelect.Attributes.Add("onclick", "javascript: return false;");
-
-                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
-                    break;                   
-            }
-
-            //Decide and set image URL based on conditions
-            SetOperationImageURL(btnSelect, project.LicenseType, project.Status, btnExpand);
-            SetValidationImageURL(imgbtnVarification, project);
-
-            if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject) || (project.LicenseType == ELicenseType.InkOptimizationSource && SessionManager.Instance.CurrentUser.Role.RoleId > 4)) //-------------No Delete project permission for Ink Optimization Source project type for below Region Admin level----//
-            {
-                var imgDelete = e.Item.FindControl("imgbtnDelete") as ImageButton;
-                if (imgDelete != null)
+                switch (project.Status)
                 {
-                    imgDelete.Visible = false;
+                    case EOptimizeRunStatus.Open:
+                        if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
+                        {
+                            btnSelect.Attributes.Add("onclick",
+                                                     "javascript: return ShowOpenPrintConditionWindow('" +
+                                                     project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" +
+                                                     Math.Round(days, 1) +
+                                                     "','" + Server.UrlEncode(project.CurrentDlpName) + "','" + project.TotalRuns + "')");
+                        }
+                        else
+                            btnSelect.Attributes.Add("onclick", "javascript: return false;");
+
+                        imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
+
+                        break;
+                    case EOptimizeRunStatus.Closed:
+                        if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
+                        {
+                            btnSelect.Attributes.Add("onclick",
+                                                     "javascript: return ShowClosePrintConditionWindow('" +
+                                                     project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + (int)project.LicenseType + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
+                        }
+                        else
+                            btnSelect.Attributes.Add("onclick", "javascript: return false;");
+
+                        imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
+                        break;
+                    case EOptimizeRunStatus.Certify:
+                        if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
+                        {
+                            btnSelect.Attributes.Add("onclick",
+                                                     "javascript: return ShowClosePrintConditionWindow('" +
+                                                     project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + (int)project.LicenseType + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
+                        }
+                        else
+                            btnSelect.Attributes.Add("onclick", "javascript: return false;");
+
+                        imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
+                        break;
                 }
+
+                //Decide and set image URL based on conditions
+                SetOperationImageURL(btnSelect, project.LicenseType, project.Status, btnExpand);
+                SetValidationImageURL(imgbtnVarification, project);
+
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject) || (project.LicenseType == ELicenseType.InkOptimizationSource && SessionManager.Instance.CurrentUser.Role.RoleId > 4)) //-------------No Delete project permission for Ink Optimization Source project type for below Region Admin level----//
+                {
+                    var imgDelete = e.Item.FindControl("imgbtnDelete") as ImageButton;
+                    if (imgDelete != null)
+                    {
+                        imgDelete.Visible = false;
+                    }
+                }
+            }
+            else if (e.Item is GridDataItem && e.Item.OwnerTableView.Name == "SpotProjects")
+            {
+                //var spotProject = e.Item.DataItem as SpotProjectLibrary;
+                //var btnSelect = e.Item.FindControl("imgbtnSpotSelect") as ImageButton;
+                //var days = (DateTime.Now - spotProject.CreateDate).TotalDays;
+
+                //btnSelect.Attributes.Add("onclick",
+                //           "javascript: return ShowOpenPrintConditionWindow('" +
+                //               spotProject.ProjectId + "','" + Server.UrlEncode(spotProject.ProjectName) + "','" +
+                //               Math.Round(days, 1) +
+                //               "','','" + spotProject.TotalRuns + "',true,'" + spotProject.SpotProjectId + "')");
+
+                //switch (spotProject.Status)
+                //{
+                //    case EOptimizeRunStatus.Open:
+                //        btnSelect.Attributes.Add("onclick",
+                //            "javascript: return ShowOpenPrintConditionWindow('" +
+                //                spotProject.SpotProjectId + "','" + Server.UrlEncode(spotProject.ProjectName) + "','" +
+                //                Math.Round(days, 1) +
+                //                "','','" + spotProject.TotalRuns + "',true)");
+                //        break;
+                //    case EOptimizeRunStatus.Closed:
+                //        break;
+                //    case EOptimizeRunStatus.Certify:
+                //        break;
+                //}
             }
         }
 

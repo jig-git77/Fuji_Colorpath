@@ -32,6 +32,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!Page.IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                if(SessionManager.Instance.CurrentProject.SpotTargetProject!=null && SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition != null)
+                {
+                    lblMedia.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Media;
+                    lblColorant.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Colorant;
+                    lblRipSettings.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.RipSettings;
+                }
             }
         }
 

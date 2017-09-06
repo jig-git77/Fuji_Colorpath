@@ -32,7 +32,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
-                LoadData();
+                if (SessionManager.Instance.CurrentProject.SpotTargetProject != null &&
+                    SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns != null &&
+                    SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count >= 1)
+                {
+                    LoadData();
+                }
             }
         }
 
@@ -45,7 +50,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 LastOptimizationRunID = _presenterImportMeasurements.ImportDummyMeasurement();
                 ViewState["LastOptimizationRunID"] = LastOptimizationRunID;
             }
-        }      
+        }
 
         protected void btnAnalyze_Click(object sender, EventArgs e)
         {

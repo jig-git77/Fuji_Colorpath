@@ -8,7 +8,7 @@ namespace FujifilmUSA.Sync.Entity.CPSpot
         public int SpotProjectId { get; set; }
         public int ProjectId { get; set; }
         public int DeviceId { get; set; }
-
+        public PrintCondition PrintCondition { get; set; }
         public string ProjectName { get; set; }
         public DateTime CreateDate { get; set; }
         public int CurrDlpId { get; set; }

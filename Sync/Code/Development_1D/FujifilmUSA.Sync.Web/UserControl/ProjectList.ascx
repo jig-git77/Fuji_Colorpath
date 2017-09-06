@@ -22,13 +22,19 @@
     }
 </script>
 <script type="text/javascript" language="javascript">
+    //function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns, isSpotLibraryProject = false, spotProjectID = 0) {
+    //    var oWindow;
+    //    oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&isSpotLibraryProject=" + isSpotLibraryProject + "&spotProjectID=" + spotProjectID, "OpenPrintConditionWindow");
+    //    oWindow.show();
+    //    return false;
+    //}
     function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns) {
         var oWindow;
-        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns , "OpenPrintConditionWindow");
+        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns, "OpenPrintConditionWindow");
         oWindow.show();
         return false;
     }
-    function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId ,DlpName) {
+    function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName) {
         var oWindow;
         oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
         oWindow.show();
@@ -46,32 +52,30 @@
     }
 </script>
 <style type="text/css">
-    .RadGrid .rgRow td, .RadGrid .rgAltRow td, .RadGrid .rgEditRow td, .RadGrid .rgFooter td, .RadGrid .rgFilterRow td, .RadGrid .rgHeader, .RadGrid .rgResizeCol, .RadGrid .rgGroupHeader td
-    {
+    .RadGrid .rgRow td, .RadGrid .rgAltRow td, .RadGrid .rgEditRow td, .RadGrid .rgFooter td, .RadGrid .rgFilterRow td, .RadGrid .rgHeader, .RadGrid .rgResizeCol, .RadGrid .rgGroupHeader td {
         padding-right: 0px !important;
     }
-    
-    div.RadGrid .rgRow
-    {
+
+    div.RadGrid .rgRow {
         background: #F7F7F7;
     }
-    div.RadGrid .rgAltRow
-    {
+
+    div.RadGrid .rgAltRow {
         background: #F7F7F7;
     }
-    .rgPager table
-    {
+
+    .rgPager table {
         border-top: 0px;
         border-bottom: 1px solid #000000;
         border-spacing: 1pt;
         width: 100%;
     }
-    .RadGrid_Default .rgRow a, .RadGrid_Default .rgAltRow a, .RadGrid_Default .rgEditRow a, .RadGrid_Default tr.rgEditRow a, .RadGrid_Default tr.rgHoveredRow a, .RadGrid_Default tr.rgActiveRow a, .RadGrid_Default .rgFooter a, .RadGrid_Default .rgEditForm a
-    {
+
+    .RadGrid_Default .rgRow a, .RadGrid_Default .rgAltRow a, .RadGrid_Default .rgEditRow a, .RadGrid_Default tr.rgEditRow a, .RadGrid_Default tr.rgHoveredRow a, .RadGrid_Default tr.rgActiveRow a, .RadGrid_Default .rgFooter a, .RadGrid_Default .rgEditForm a {
         color: #003CA9;
     }
-    .RadGrid_Default td.rgPagerCell
-    {
+
+    .RadGrid_Default td.rgPagerCell {
         -moz-border-bottom-colors: none;
         -moz-border-image: none;
         -moz-border-left-colors: none;
@@ -81,41 +85,37 @@
         border-style: solid;
         border-width: 0px 0 0px 0px;
     }
-    .RadGrid_Default .rgRow td, .RadGrid_Default .rgAltRow td, .RadGrid_Default .rgEditRow td, .RadGrid_Default .rgFooter td
-    {
+
+    .RadGrid_Default .rgRow td, .RadGrid_Default .rgAltRow td, .RadGrid_Default .rgEditRow td, .RadGrid_Default .rgFooter td {
         border-style: none;
         border-width: 0 0 1px;
     }
-    
-    
-    .RadGrid_Default .rgRow .rgSorted
-    {
+
+
+    .RadGrid_Default .rgRow .rgSorted {
         background-color: #F7F7F7;
         border-bottom-color: #F7F7F7;
     }
-    .RadGrid_Default .rgAltRow .rgSorted
-    {
+
+    .RadGrid_Default .rgAltRow .rgSorted {
         background-color: #F7F7F7;
         border-bottom-color: #F7F7F7;
     }
-    
-    .RadGrid_Default th.rgSorted
-    {
+
+    .RadGrid_Default th.rgSorted {
         background-color: #F1F1F1;
         background-position: 0px;
     }
-    
-    .breakWord80
-    {
+
+    .breakWord80 {
         max-width: 80px !important;
         word-break: break-all !important;
         word-wrap: break-word !important;
         vertical-align: top;
         line-height: 15px;
     }
-    
-    .breakWord60
-    {
+
+    .breakWord60 {
         max-width: 60px !important;
         word-break: break-all !important;
         word-wrap: break-word !important;
@@ -125,48 +125,48 @@
 </style>
 
 <style type="text/css">
-    .InnerHeaderStyle
-    {
-      background: #C0C0C0 !important;
-      /*font-size: 13px !important;*/
-      /*color: black !important;*/ /*add more style definitions here*/
+    .InnerHeaderStyle {
+        background: #C0C0C0 !important;
+        /*font-size: 13px !important;*/
+        /*color: black !important;*/ /*add more style definitions here*/
     }
-    .InnerItemStyle
-    {
-      background: #C0C0C0 !important;
-      /*color: brown !important;*/ /*add more style definitions here*/
+
+    .InnerItemStyle {
+        background: #C0C0C0 !important;
+        /*color: brown !important;*/ /*add more style definitions here*/
     }
-    .InnerAlernatingItemStyle
-    {
-      background: #C0C0C0 !important;
-      /*color: brown !important;*/ /*add more style definitions here*/
+
+    .InnerAlernatingItemStyle {
+        background: #C0C0C0 !important;
+        /*color: brown !important;*/ /*add more style definitions here*/
     }
-    .CommandItemStyle
-    {
-      background: #C0C0C0 !important;
-      /*color: brown !important;*/ /*add more style definitions here*/
+
+    .CommandItemStyle {
+        background: #C0C0C0 !important;
+        /*color: brown !important;*/ /*add more style definitions here*/
     }
-    .FilterItemStyle
-    {
-      background: #C0C0C0 !important;
-      /*color: brown !important;*/ /*add more style definitions here*/
+
+    .FilterItemStyle {
+        background: #C0C0C0 !important;
+        /*color: brown !important;*/ /*add more style definitions here*/
     }
-    .PagerItemStyle
-    {
-      background: #C0C0C0 !important;
-      /*color: brown !important;*/ /*add more style definitions here*/
+
+    .PagerItemStyle {
+        background: #C0C0C0 !important;
+        /*color: brown !important;*/ /*add more style definitions here*/
     }
 </style>
 
 <div class="contant_top">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="contant_middle">
     <div class="head">
         <h1>
             <asp:Label ID="lblTitle" runat="server" Text="Project List" meta:resourcekey="lblTitleResource1"></asp:Label>
         </h1>
         <asp:LinkButton ID="lbtnCreateNewPrintCondition" runat="server" CssClass="button"
-            ValidationGroup="vgDestination" 
+            ValidationGroup="vgDestination"
             OnClick="lbtnCreateNewPrintCondition_Click">
             <span>
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
@@ -196,64 +196,64 @@
                                 <GroupingSettings CaseSensitive="False" />
                                 <HeaderStyle Font-Bold="True" />
                                 <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
-                                <MasterTableView DataKeyNames="ProjectId">         
+                                <MasterTableView Name="ParentProjects" DataKeyNames="ProjectId">
                                     <DetailTables>
-                                                <telerik:GridTableView DataKeyNames="SpotProjectID" Name="SpotProjects" Width="100%" AutoGenerateColumns="false" CommandItemDisplay="Top" >
-                                                    
-                                                    <HeaderStyle CssClass="InnerHeaderStyle" />
-                                                    <ItemStyle CssClass="InnerItemStyle" />
-                                                    <AlternatingItemStyle CssClass="InnerAlernatingItemStyle" />
-                                                    <CommandItemStyle CssClass="CommandItemStyle" />
-                                                    <FilterItemStyle CssClass="FilterItemStyle" />
-                                                    <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" CssClass="PagerItemStyle" />
+                                        <telerik:GridTableView DataKeyNames="SpotProjectID" Name="SpotProjects" Width="100%" AutoGenerateColumns="false" CommandItemDisplay="Top">
 
-                                                    <CommandItemSettings ShowAddNewRecordButton="false" />
-                                                    <CommandItemTemplate>
-                                                        <asp:Button ID="btnAddSpotLibrary" runat="server" Text="Create New Library" CommandName="AddSpotLibrary" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectID") %>'  />
-                                                    </CommandItemTemplate>
-                                                    <Columns>
-                                                         <telerik:GridTemplateColumn DataField="LastOptmizeId"  UniqueName="LastOptmizeId"  
-                                                            ItemStyle-Width="30px"  meta:resourcekey="GridTemplateColumnResource30">
-                                                            <ItemTemplate>
-                                                               <%--<asp:ImageButton ID="imgbtnSpotSelect" runat="server" ToolTip="Open" AlternateText="Select"
+                                            <HeaderStyle CssClass="InnerHeaderStyle" />
+                                            <ItemStyle CssClass="InnerItemStyle" />
+                                            <AlternatingItemStyle CssClass="InnerAlernatingItemStyle" />
+                                            <CommandItemStyle CssClass="CommandItemStyle" />
+                                            <FilterItemStyle CssClass="FilterItemStyle" />
+                                            <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" CssClass="PagerItemStyle" />
+
+                                            <CommandItemSettings ShowAddNewRecordButton="false" />
+                                            <CommandItemTemplate>
+                                                <asp:Button ID="btnAddSpotLibrary" runat="server" Text="Create New Library" CommandName="AddSpotLibrary" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectID") %>' />
+                                            </CommandItemTemplate>
+                                            <Columns>
+                                                <telerik:GridTemplateColumn DataField="LastOptmizeId" UniqueName="LastOptmizeId"
+                                                    ItemStyle-Width="30px" meta:resourcekey="GridTemplateColumnResource30">
+                                                    <ItemTemplate>
+                                                        <%--<asp:ImageButton ID="imgbtnSpotSelect" runat="server" ToolTip="Open" AlternateText="Select"
                                                                     ImageUrl="../Images/open_folder_yellow.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"LastOptmizeId") %>'
                                                                     CommandName="SelectSpotTargetProject" meta:resourcekey="imgbtnSelectSpotResource1"  Width="20" Height="20"/>--%>
-                                                                <asp:ImageButton ID="imgbtnSpotSelect" runat="server" ToolTip="Open" AlternateText="Select"
-                                                                    ImageUrl="../Images/open_folder_yellow.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SpotProjectID") %>'
-                                                                    CommandName="SelectSpotTargetProject" meta:resourcekey="imgbtnSelectSpotResource1"  Width="20" Height="20"/>
-                                                            </ItemTemplate>                  
-                                                        </telerik:GridTemplateColumn>
-                                                        <telerik:GridBoundColumn SortExpression="ProjectName" HeaderText="Name" HeaderButtonType="TextButton"
-                                                            DataField="ProjectName">
-                                                        </telerik:GridBoundColumn>
-                                                        <telerik:GridBoundColumn SortExpression="SpotTarget.SpotTargetName" HeaderText="Library" HeaderButtonType="TextButton"
-                                                            DataField="SpotTarget.SpotTargetName">
-                                                        </telerik:GridBoundColumn>
-                                                        <telerik:GridBoundColumn SortExpression="CreateDate" HeaderText="Last Active" HeaderButtonType="TextButton"
-                                                            DataField="CreateDate" DataFormatString="{0:MM/dd/yy hh:mm}" ShowFilterIcon="False">
-                                                        </telerik:GridBoundColumn>
-                                                         <telerik:GridTemplateColumn DataField="SpotProjectID" UniqueName="Delete" FilterControlAltText="Filter Delete column"
-                                                            meta:resourcekey="GridTemplateColumnResource7">
-                                                            <FilterTemplate>
-                                                                <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="button" CommandName="ClearFilterSpotTarget"
-                                                                    ToolTip="Clear Filter">
-                                                                    <span>
-                                                                        <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png"
-                                                                            meta:resourcekey="imgClearFillterResource1" />
-                                                                    </span>
-                                                                </asp:LinkButton>
-                                                            </FilterTemplate>
-                                                            <ItemTemplate>
-                                                                <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete SpotProject" AlternateText="Delete"
-                                                                    ImageUrl="../Images/delete_icon.png" OnClientClick="return ConfirmDeleteSpotProject();"
-                                                                    CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SpotProjectID") %>' CommandName="DeleteSpotProject"
-                                                                    meta:resourcekey="imgbtnDeleteResource1" />
-                                                            </ItemTemplate>
-                                                            <HeaderStyle Width="40px" />
-                                                        </telerik:GridTemplateColumn>
-                                                    </Columns>
-                                                </telerik:GridTableView>
-                                    </DetailTables>                              
+                                                        <asp:ImageButton ID="imgbtnSpotSelect" runat="server" ToolTip="Open" AlternateText="Select"
+                                                            ImageUrl="../Images/open_folder_yellow.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SpotProjectID") %>'
+                                                            CommandName="SelectSpotTargetProject" meta:resourcekey="imgbtnSelectSpotResource1" Width="20" Height="20" />
+                                                    </ItemTemplate>
+                                                </telerik:GridTemplateColumn>
+                                                <telerik:GridBoundColumn SortExpression="ProjectName" HeaderText="Name" HeaderButtonType="TextButton"
+                                                    DataField="ProjectName">
+                                                </telerik:GridBoundColumn>
+                                                <telerik:GridBoundColumn SortExpression="SpotTarget.SpotTargetName" HeaderText="Library" HeaderButtonType="TextButton"
+                                                    DataField="SpotTarget.SpotTargetName">
+                                                </telerik:GridBoundColumn>
+                                                <telerik:GridBoundColumn SortExpression="CreateDate" HeaderText="Last Active" HeaderButtonType="TextButton"
+                                                    DataField="CreateDate" DataFormatString="{0:MM/dd/yy hh:mm}" ShowFilterIcon="False">
+                                                </telerik:GridBoundColumn>
+                                                <telerik:GridTemplateColumn DataField="SpotProjectID" UniqueName="Delete" FilterControlAltText="Filter Delete column"
+                                                    meta:resourcekey="GridTemplateColumnResource7">
+                                                    <FilterTemplate>
+                                                        <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="button" CommandName="ClearFilterSpotTarget"
+                                                            ToolTip="Clear Filter">
+                                                            <span>
+                                                                <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png"
+                                                                    meta:resourcekey="imgClearFillterResource1" />
+                                                            </span>
+                                                        </asp:LinkButton>
+                                                    </FilterTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete SpotProject" AlternateText="Delete"
+                                                            ImageUrl="../Images/delete_icon.png" OnClientClick="return ConfirmDeleteSpotProject();"
+                                                            CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SpotProjectID") %>' CommandName="DeleteSpotProject"
+                                                            meta:resourcekey="imgbtnDeleteResource1" />
+                                                    </ItemTemplate>
+                                                    <HeaderStyle Width="40px" />
+                                                </telerik:GridTemplateColumn>
+                                            </Columns>
+                                        </telerik:GridTableView>
+                                    </DetailTables>
                                     <CommandItemSettings ExportToPdfText="Export to PDF" />
                                     <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" Visible="True">
                                     </RowIndicatorColumn>
@@ -261,39 +261,39 @@
                                     </ExpandCollapseColumn>
                                     <Columns>
                                         <telerik:GridTemplateColumn DataField="LicenseType" AllowFiltering="True" UniqueName="LicenseType" FilterControlAltText="Filter Select column" HeaderText="Type"
-                                            ItemStyle-Width="30px"  meta:resourcekey="GridTemplateColumnResource0">
+                                            ItemStyle-Width="30px" meta:resourcekey="GridTemplateColumnResource0">
                                             <ItemTemplate>
-                                               <asp:ImageButton ID="imgbtnSelect" runat="server" ToolTip="Optimization" AlternateText="Select"
+                                                <asp:ImageButton ID="imgbtnSelect" runat="server" ToolTip="Optimization" AlternateText="Select"
                                                     ImageUrl="../Images/OptimizationBlue.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
                                                     CommandName="Select" meta:resourcekey="imgbtnSelectResource1" />
                                             </ItemTemplate>
                                             <FilterTemplate>
                                                 <telerik:RadComboBox ID="rcmbLicenseType" AppendDataBoundItems="True" runat="server"
-                                                SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("LicenseType").CurrentFilterValue %>'
+                                                    SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("LicenseType").CurrentFilterValue %>'
                                                     OnClientSelectedIndexChanged="LicenseTypeIndexChanged" Width="40px" DropDownWidth="150px">
                                                 </telerik:RadComboBox>
                                                 <telerik:RadScriptBlock ID="radscriptLicenseType" runat="server">
                                                     <script type="text/javascript">
                                                         function LicenseTypeIndexChanged(sender, args) {
-                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");                                                                                                                        
+                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
                                                             tableView.filter("LicenseType", args.get_item().get_value(), "EqualTo");
                                                         }
                                                     </script>
                                                 </telerik:RadScriptBlock>
-                                            </FilterTemplate>                                            
-                                            <HeaderStyle Width="30px" />                                            
+                                            </FilterTemplate>
+                                            <HeaderStyle Width="30px" />
                                         </telerik:GridTemplateColumn>
                                         <telerik:GridTemplateColumn DataField="ValidationStatus" AllowFiltering="True" UniqueName="ValidationStatus" HeaderText="Validation"
                                             FilterControlAltText="Filter ValidationStatus column" meta:resourcekey="GridTemplateColumnResource1">
                                             <ItemTemplate>
-                                                 <asp:ImageButton ID="imgbtnVarification" runat="server" ToolTip="Validation" AlternateText="Validation"
-                                                    ImageUrl="../Images/next.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'                                                    
+                                                <asp:ImageButton ID="imgbtnVarification" runat="server" ToolTip="Validation" AlternateText="Validation"
+                                                    ImageUrl="../Images/next.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
                                                     CommandName="Validation" />
                                             </ItemTemplate>
                                             <FilterTemplate>
                                                 <telerik:RadComboBox ID="rcmbValidationStatus" AppendDataBoundItems="True" runat="server"
-                                                SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("ValidationStatus").CurrentFilterValue %>'
-                                                    OnClientSelectedIndexChanged="ValidationStatusIndexChanged" Width="40px" DropDownWidth="120px">                                                    
+                                                    SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("ValidationStatus").CurrentFilterValue %>'
+                                                    OnClientSelectedIndexChanged="ValidationStatusIndexChanged" Width="40px" DropDownWidth="120px">
                                                 </telerik:RadComboBox>
                                                 <telerik:RadScriptBlock ID="radscriptValidationStatus" runat="server">
                                                     <script type="text/javascript">
@@ -402,8 +402,8 @@
                                             </ItemTemplate>
                                             <HeaderStyle Width="40px" />
                                         </telerik:GridTemplateColumn>
-                                    </Columns>                                                                   
-                                </MasterTableView>                                
+                                    </Columns>
+                                </MasterTableView>
                             </telerik:RadGrid>
                             <asp:HiddenField ID="hdSelectedSourceProfileId" runat="server" Value="0" />
                         </td>
@@ -429,4 +429,5 @@
     <input id="Hidden_TotalProjects" type="hidden" runat="server" value="0" />
 </div>
 <div class="contant_bottom">
-    &nbsp;</div>
+    &nbsp;
+</div>

@@ -45,10 +45,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            btnValidationSetup.Visible = IsXmfNewProject;           
+            btnValidationSetup.Visible = IsXmfNewProject;
             LoadRecord();
         }
-               
+
         protected void btnValidationSetup_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ValidationSetup;
@@ -59,7 +59,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (IsXmfUser)
             {
-                SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;                
+                SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
                 Project = SessionManager.Instance.CurrentProject;
                 _presenterSaveWindow.SaveProject();
                 _presenterSaveWindow.GetProjectDetail();
@@ -90,11 +90,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void LoadRecord()
         {
-            lblMedia.Text = SessionManager.Instance.CurrentProject.PrintCondition.Media;
-            lblColorant.Text = SessionManager.Instance.CurrentProject.PrintCondition.Colorant;
-            lblRipSettings.Text = SessionManager.Instance.CurrentProject.PrintCondition.RipSettings;
-            lblNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
-            lblTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
+            if (SessionManager.Instance.CurrentProject.PrintCondition != null)
+            {
+                lblMedia.Text = SessionManager.Instance.CurrentProject.PrintCondition.Media;
+                lblColorant.Text = SessionManager.Instance.CurrentProject.PrintCondition.Colorant;
+                lblRipSettings.Text = SessionManager.Instance.CurrentProject.PrintCondition.RipSettings;
+                lblNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
+                lblTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
+            }
+
             if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.FullGamutCustomSource && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
             {
                 lblTargetPrintCondition.Text = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandard;
@@ -112,7 +116,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lnkbtnSavePrintCondition.Visible = false;
                 }
             }
-            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource ) //---If "Custom Source Profile" / "ReProfile Custom Source" / "Full Gamut Source Profile" project type, then skip Validation setup page.
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //---If "Custom Source Profile" / "ReProfile Custom Source" / "Full Gamut Source Profile" project type, then skip Validation setup page.
             {
                 V_ReferenceChartTypeId = MetricTargetPresetId = 0;
                 V_MeasurementDeviceId = 0;
@@ -123,10 +127,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
                 ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
                 MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId;
-               
-                    ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
-                    Opt_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
-               
+
+                ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
+                Opt_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
+
                 if (SessionManager.Instance.CurrentOptimizeRun != null && SessionManager.Instance.CurrentOptimizeRun.HasProfile)
                 {
                     lnkbtnSavePrintCondition.Visible = false;
@@ -183,6 +187,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 if (!IsErrorOccured)
                 {
+                    if(SessionManager.Instance.CurrentProject.SpotTargetProject!=null && SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition != null)
+                    {
+                        lblMedia.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Media;
+                        lblColorant.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Colorant;
+                        lblRipSettings.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.RipSettings;
+                        lblNotes.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Notes;
+                        lblTechnicianName.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.TechnicianName;
+                    }
+
                     lblMeasurementDevice.Text = Data["MeasurementDeviceId"];
                     lblIlluminant.Text = Data["illuminantId"];
                     lblObserver.Text = Data["observerTypeId"];
@@ -282,7 +295,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                             || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro2))
                                             || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2))
                                             || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.eXact)));
-              
+
                 lblUVSettings.Text = "M" + SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode.ToString();
 
                 lblEnableValidation.Text = SessionManager.Instance.CurrentProject.EnabledValidation.ToString();

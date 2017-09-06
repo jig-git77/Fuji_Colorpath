@@ -39,7 +39,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             switch (SessionManager.Instance.CurrentProject.CurrentDisplayStatus)
             {
                 case ECurrentProjectStatus.New:
-                    if (SessionManager.Instance.CurrentProject.PrintCondition != null && (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.PrintCondition.Media) || isSpotLibraryProject))
+                    bool isDescEnabled = isSpotLibraryProject ?
+                                    (SessionManager.Instance.CurrentProject.SpotTargetProject != null &&
+                                    SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition != null &&
+                                    !string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Media)) :
+                                    (SessionManager.Instance.CurrentProject.PrintCondition != null &&
+                                    !string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.PrintCondition.Media));
+                    //if (SessionManager.Instance.CurrentProject.PrintCondition != null && (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.PrintCondition.Media) || isSpotLibraryProject)
+                    if (isDescEnabled)
                     {
                         lnkDescription.Enabled = true;
                     }
@@ -80,7 +87,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lnkMeasure.Enabled = true;
 
                         bool isAnalyzeEnabled = isSpotLibraryProject ?
-                                                (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns[0].HasMeasurements ? true : false) :
+                                                (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count == 1 ? true : false) :
                                                 (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements &&
                                                 SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile &&
                                                 SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource);
@@ -89,9 +96,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (isAnalyzeEnabled)
                             lnkAnalyze.Enabled = true;
 
-                        bool isDownloadEnabled = isSpotLibraryProject ? (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns == null ? false ://spot libary project condition
-                                                SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count > 0 ? false :
-                                                SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns[0].HasProfile) :
+                        bool isDownloadEnabled = isSpotLibraryProject ? 
+                                                (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count == 1 ? true : false) : //spot libary project condition
+                                                //SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns[0].HasProfile) :
                                                 SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile;
 
                         if (isDownloadEnabled)
@@ -229,7 +236,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
                                 Response.Redirect("~/Analyze_SpotColor.aspx");
                             else
-                                Response.Redirect("~/Analyze.aspx");                            
+                                Response.Redirect("~/Analyze.aspx");
                             break;
                         case "lnkDownload":
                             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
