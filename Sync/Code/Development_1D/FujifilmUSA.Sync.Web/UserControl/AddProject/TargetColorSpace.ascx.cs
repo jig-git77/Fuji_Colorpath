@@ -57,6 +57,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trListHeader.Visible = false;
                     trTargetLAB.Visible = false;
                     trSpotTarget.Visible = true;
+                    trMeasurementMode.Visible = false;
                 }
                 LoadProjectInfoFromSession();
             }

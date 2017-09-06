@@ -53,6 +53,8 @@
     <div class="head">
     <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
     <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
+         <h1 id="header" runat="server">
+                    <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
          <div class="Information_divAnalyze">
                     <asp:LinkButton ID="lbtnDownloadAndSaveNCP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveNCP_Click">
                         <span>
@@ -210,7 +212,9 @@
                                                             </telerik:GridTemplateColumn>
 
                                                             <telerik:GridBoundColumn DataField="SpotName" HeaderText="Name"
-                                                                SortExpression="SpotName" AllowFiltering="False" UniqueName="SpotName"
+                                                                SortExpression="SpotName" UniqueName="SpotName" 
+                                                                FilterControlWidth="70px" CurrentFilterFunction="Contains" AutoPostBackOnFilter="True"
+                                                                DataType="System.String"
                                                                 FilterControlAltText="Filter SpotName column"
                                                                 meta:resourcekey="GridBoundColumnResource38">
                                                             </telerik:GridBoundColumn>
@@ -280,25 +284,25 @@
                                                                 meta:resourcekey="GridBoundColumnResource14" UniqueName="CielabB" Visible="false">
                                                             </telerik:GridBoundColumn>
 
-                                                             <telerik:GridBoundColumn DataField="ΔL" HeaderText="ΔL"
+                                                             <telerik:GridBoundColumn DataField="ΔL" HeaderText="pΔL"
                                                                 SortExpression="ΔL" FilterControlWidth="30px"
                                                                 CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
                                                                 FilterControlAltText="Filter CielabL column"
                                                                 meta:resourcekey="GridBoundColumnResource15" UniqueName="ΔL" >
                                                             </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="Δa" HeaderText="Δa"
+                                                            <telerik:GridBoundColumn DataField="Δa" HeaderText="pΔa"
                                                                 SortExpression="Δa" FilterControlWidth="30px"
                                                                 CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
                                                                 FilterControlAltText="Filter CielabA column"
                                                                 meta:resourcekey="GridBoundColumnResource16" UniqueName="Δa">
                                                             </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="Δb" HeaderText="Δb"
+                                                            <telerik:GridBoundColumn DataField="Δb" HeaderText="pΔb"
                                                                 SortExpression="Δb" FilterControlWidth="30px"
                                                                 CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
                                                                 FilterControlAltText="Filter CielabB column"
                                                                 meta:resourcekey="GridBoundColumnResource17" UniqueName="Δb">
                                                             </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="ΔE" HeaderText="ΔE" SortExpression="ΔE"
+                                                            <telerik:GridBoundColumn DataField="ΔE" HeaderText="pΔE" SortExpression="ΔE"
                                                                 FilterControlWidth="30px" CurrentFilterFunction="GreaterThanOrEqualTo"
                                                                 AutoPostBackOnFilter="True" UniqueName="ΔE"
                                                                 FilterControlAltText="Filter ΔE column"
@@ -328,4 +332,7 @@
             </table>
         </div>
     </div>
+</div>
+<div class="contant_bottom">
+    &nbsp;
 </div>

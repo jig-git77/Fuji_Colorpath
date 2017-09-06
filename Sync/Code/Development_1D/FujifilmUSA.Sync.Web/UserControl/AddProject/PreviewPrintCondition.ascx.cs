@@ -150,10 +150,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ReferenceChartTypeId = 0;
                 Opt_ReferenceChartTypeId = 0;
 
-                if (SessionManager.Instance.CurrentOptimizeRun != null && SessionManager.Instance.CurrentOptimizeRun.HasProfile)
-                {
-                    lnkbtnSavePrintCondition.Visible = false;
-                }
+                //if (SessionManager.Instance.CurrentOptimizeRun != null && SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                //{
+                //    lnkbtnSavePrintCondition.Visible = false;
+                //}
+                Tr_Validation.Visible = false;
             }
             else
             {

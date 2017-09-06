@@ -103,13 +103,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image Image2;
         
         /// <summary>
-        /// Localize5 control.
+        /// Localize50 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize5;
+        protected global::System.Web.UI.WebControls.Localize Localize50;
         
         /// <summary>
         /// fujiStatusbar control.
@@ -434,6 +434,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cmbSpotTargetList;
+        
+        /// <summary>
+        /// trMeasurementMode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trMeasurementMode;
         
         /// <summary>
         /// Localize3 control.

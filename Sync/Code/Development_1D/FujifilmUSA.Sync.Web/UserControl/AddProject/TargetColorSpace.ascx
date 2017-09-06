@@ -39,11 +39,11 @@ textarea {
         meta:resourcekey="locDescriptionResource1"></asp:Localize>
 </span></asp:LinkButton>
  <asp:LinkButton ID="lnkbtNext" runat="server" CssClass="button" 
-        ValidationGroup="vgDescription" onclick="lnkbtnNext_Click" Visible="false">
+       onclick="lnkbtnNext_Click" Visible="false">
         <span>
             <asp:Image ID="Image2" runat="server" 
-        ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
-            <asp:Localize runat="server" ID="Localize5" Text="Next" 
+        ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="imgAddResource11" />
+            <asp:Localize runat="server" ID="Localize50" Text="Next" 
                 meta:resourcekey="locNextResource1"></asp:Localize>
         </span>
     </asp:LinkButton>
@@ -259,7 +259,7 @@ textarea {
                                 </asp:DropDownList>
                             </td>
                         </tr>
-                        <tr>
+                        <tr id="trMeasurementMode" runat="server">
                             <td style="width: 130px">
                                 <span><asp:Localize runat="server" Text="Measurement Mode:" ID="Localize3" 
                                     meta:resourcekey="locMeasurementResource1"></asp:Localize></span>

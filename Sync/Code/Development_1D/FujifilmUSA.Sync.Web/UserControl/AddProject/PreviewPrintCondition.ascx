@@ -266,7 +266,7 @@
                                                 meta:resourcekey="lblUVSettingsResource1"></asp:Label>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr id="Tr_Validation" runat="server">
                                         <td>
                                             <span style="font-weight: bold;"><asp:Localize runat="server" 
                                                 Text="Enable Validation" ID="locEnable_Vali" 
