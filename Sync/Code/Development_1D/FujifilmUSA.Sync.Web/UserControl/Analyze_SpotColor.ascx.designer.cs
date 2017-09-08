@@ -112,15 +112,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locPatchDetails;
         
         /// <summary>
-        /// lblMaxDeltaE control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMaxDeltaE;
-        
-        /// <summary>
         /// lblMinDeltaE control.
         /// </summary>
         /// <remarks>
@@ -137,6 +128,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAvgDeltaE;
+        
+        /// <summary>
+        /// lblMaxDeltaE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMaxDeltaE;
         
         /// <summary>
         /// lblMedia control.
@@ -164,6 +164,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblRipSettings;
+        
+        /// <summary>
+        /// lblSpotTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSpotTarget;
         
         /// <summary>
         /// rgPatchDetails control.

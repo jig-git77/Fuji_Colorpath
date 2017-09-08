@@ -142,6 +142,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 V_MeasurementDeviceId = 0;
 
                 Div_TargetColorSpace.Visible = false;
+                Div_SpotTarget.Visible = true;
 
                 IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
                 ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
@@ -195,6 +196,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lblRipSettings.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.RipSettings;
                         lblNotes.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Notes;
                         lblTechnicianName.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.TechnicianName;
+                        lblSpotTarget.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetName;
                     }
 
                     lblMeasurementDevice.Text = Data["MeasurementDeviceId"];

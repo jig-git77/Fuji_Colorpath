@@ -105,12 +105,7 @@
 
                                                 <table class="PatchDetailsSummaryTable">
                                                     <tr>
-                                                        <th colspan="2">Optimal Device Predication</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Max ΔE</b></td>
-                                                        <td>
-                                                            <asp:Label runat="server" ID="lblMaxDeltaE"></asp:Label></td>
+                                                        <th colspan="2">Optimal Device Prediction</th>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Min ΔE</b></td>
@@ -121,6 +116,11 @@
                                                         <td><b>Average ΔE</b></td>
                                                         <td>
                                                             <asp:Label runat="server" ID="lblAvgDeltaE"></asp:Label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Max ΔE</b></td>
+                                                        <td>
+                                                            <asp:Label runat="server" ID="lblMaxDeltaE"></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Media</b></td>
@@ -136,6 +136,11 @@
                                                         <td><b>Rip Settings</b></td>
                                                         <td>
                                                             <asp:Label runat="server" ID="lblRipSettings" ></asp:Label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Spot Target</b></td>
+                                                        <td>
+                                                            <asp:Label runat="server" ID="lblSpotTarget" ></asp:Label></td>
                                                     </tr>
                                                 </table>
 

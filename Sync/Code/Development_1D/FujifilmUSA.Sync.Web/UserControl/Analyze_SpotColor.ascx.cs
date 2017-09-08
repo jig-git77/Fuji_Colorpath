@@ -24,7 +24,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected override void OnInit(EventArgs e)
         {
             _presenterAnalyze = new PresenterAnalyze(this);
-            //_presenterGlobal = new PresenterGlobal();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -37,6 +36,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lblMedia.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Media;
                     lblColorant.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Colorant;
                     lblRipSettings.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.RipSettings;
+                    lblSpotTarget.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetName;
                 }
             }
         }

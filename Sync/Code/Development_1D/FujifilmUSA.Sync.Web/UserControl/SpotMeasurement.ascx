@@ -6,14 +6,14 @@
     $(document).ready(function () {
         $loader = $(".contant_middle");
         kendo.ui.progress($loader, true);
-        setTimeout(function () { kendo.ui.progress($loader, false); }, 3000);
+        setTimeout(function () { kendo.ui.progress($loader, false); document.getElementById("<%=lblMsg.ClientID%>").style.display = "block"; }, 3000);
     });
 </script>
 <div class="contant_top">
 </div>
 <div class="contant_middle">
     <div class="head">
-        <h1 id="header" runat="server"><asp:Localize runat="server" Text="Measurement" 
+        <h1 id="header" runat="server"><asp:Localize runat="server" Text="Calculating" 
                 ID="locMeasurement" meta:resourcekey="locMeasurementResource1"></asp:Localize></h1>
         <div class="Information_divAnalyze"> 
                         
@@ -68,6 +68,9 @@
         <div class="bottom">
             &nbsp;</div>
     </div>--%>    
+    <div class="mesurementStatusbar info_form">
+        <br /><br /><b><asp:Label ID="lblMsg" runat="server" Text="Calculations complete. Click Analyze to continue." style="display: none;" ></asp:Label></b>
+    </div>
 </div>
 <div class="contant_bottom">
     &nbsp;</div>

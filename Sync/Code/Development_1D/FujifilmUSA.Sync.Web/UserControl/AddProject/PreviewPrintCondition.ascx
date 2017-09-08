@@ -180,6 +180,21 @@
                                             </td>
                                         </tr>
                                     </div>
+                                     <div id="Div_SpotTarget" runat="server" visible="false">
+                                        <tr>
+                                            <td class="breakWord90">
+                                                <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                    Text="Spot Target" ID="Localize3" meta:resourcekey="locSpotTargetResource1"></asp:Localize></span>
+                                            </td>
+                                            <td style="width: 10px;">
+                                                <span style="font-weight: bold;">:</span>
+                                            </td>
+                                            <td>
+                                                <asp:Label ID="lblSpotTarget" runat="server" CssClass="breakWord100"></asp:Label>
+                                            </td>
+                                        </tr>
+                                        
+                                    </div>
                                 </table>
                             </div>
                             <div class="clear">
