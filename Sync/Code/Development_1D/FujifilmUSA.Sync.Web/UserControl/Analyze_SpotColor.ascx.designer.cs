@@ -13,6 +13,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class Analyze_SpotColor {
         
         /// <summary>
+        /// hdfOptimizationRunID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfOptimizationRunID;
+        
+        /// <summary>
         /// hdnSelectedTabIndex control.
         /// </summary>
         /// <remarks>
@@ -110,6 +119,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locPatchDetails;
+        
+        /// <summary>
+        /// locPatchDetailsNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locPatchDetailsNew;
         
         /// <summary>
         /// lblMinDeltaE control.

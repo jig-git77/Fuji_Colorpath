@@ -1,7 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Analyze_SpotColor.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze_SpotColor" %>
 <%@ Register Src="~/UserControl/PopupControl/SpotColorPatchDetails.ascx" TagName="SpotColorPatchDetails" TagPrefix="pd" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
-
+<link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>
 <style>
     .PatchDetailsSummaryTable {
         line-height: 35px;
@@ -21,6 +23,7 @@
 </style>
 <script src="JS/ChartTooltip.js" type="text/javascript"></script>
 <script type="text/javascript">
+    var record = 0;
     $(document).ready(function () {
         //Default Action
         $(".hideclass").hide(); //Hide all content
@@ -37,6 +40,117 @@
 
             return false;
         });
+
+        var oId = $('#hdfOptimizationRunID').val();
+
+        //$.ajax({
+        //    type: 'GET',
+        //    url: 'http://localhost/FujiFilmUSA.Sync.Service/api/Chart/GetPatchDetails',
+        //    contentType: "application/json; charset=utf-8",
+        //    dataType: 'json',
+        //    data: { id: oId },
+        //    success: function (response) {
+        //        console.log(response);
+        //        console.log(JSON.stringify(response));
+        //    },
+        //    error: function (xhr, errorType, exception) {            
+        //        console.log(xhr);
+        //    }
+        //});
+
+        $("#divPathDetails").kendoGrid({
+            dataSource: {
+                //transport: {
+                //    //read: "/FujifilmUSA.Sync.Web/Analyze_SpotColor.aspx/GetPatchDetails"
+                //    read: "http://localhost/FujiFilmUSA.Sync.Service/api/Chart/GetPatchDetails/" + oId
+                //},
+                transport: {
+                    //read: "/FujifilmUSA.Sync.Web/Analyze_SpotColor.aspx/GetPatchDetails"
+                    read: function (options) {
+                        $.ajax({
+                            type: "GET",
+                            url: "http://localhost/FujiFilmUSA.Sync.Service/api/Chart/GetPatchDetails/",
+                            data: { id: oId },
+                            dataType: "json",
+                            success: function (response) {
+                                options.success(response.data)
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                alert(textStatus);
+                            }
+                        });
+                    },
+
+                },
+                pageSize: 10
+            },
+            sortable: true,
+            filterable: {
+                extra: false,
+                operators: {
+                    string: {
+                        eq: "Is equal to"
+                    }
+                }
+            },
+            //height: 550,
+            //groupable: true,
+            sortable: true,
+            //columnMenu: true,            
+            filterable:true,
+            //filterable: {
+            //    extra: false,
+
+            //    operators: {
+            //        string: {
+            //            eq: "Is equal to"
+            //        }
+            //    }
+            //},
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+            columns: [
+               {
+                   field: "SpotID",
+                   title: "<b>ID</b>",
+                   width: 50,
+                   filterable: false,
+               },
+               {
+                   filterable: false,
+                   title: "<b>Patch</b>",
+                   //template: "<span id='sp' style='display:inline-block;background-color:#FFB700;height:14px;width:30px;'></span>",
+                   template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
+                   width: 50
+               },
+              {
+                  field: "SpotName",
+                  title: "<b>Spot Name</b>",
+              },
+                {
+                    field: "ΔL",
+                    title: "<b>pΔL</b>",
+                },
+                {
+                    field: "Δa",
+                    title: "<b>pΔa</b>",
+                },
+                {
+                    field: "Δb",
+                    title: "<b>pΔb</b>",
+                },
+                {
+                    field: "ΔE",
+                    title: "<b>pΔE</b>",
+                }
+            ]
+            //dataBinding: function (e) {
+            //    debugger;
+            //    //record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
+            //}
+        });
     });
 
     function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB) {
@@ -51,22 +165,23 @@
 </div>
 <div class="contant_middle">
     <div class="head">
-    <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
-    <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
-         <h1 id="header" runat="server">
-                    <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
-         <div class="Information_divAnalyze">
-                    <asp:LinkButton ID="lbtnDownloadAndSaveNCP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveNCP_Click">
-                        <span>
-                            <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
-                            <asp:Localize runat="server" Text="Create NCP" ID="locCreateNCP" meta:resourcekey="locCreateNCPResource1"></asp:Localize>
-                        </span>
-                    </asp:LinkButton>
-                </div>
-           </div>
-            <div class="listDevice" style="margin-left: 10px;">
-                <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
-            </div>
+        <asp:HiddenField ID="hdfOptimizationRunID" runat="server" Value="0" ClientIDMode="Static" />
+        <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
+        <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
+        <h1 id="header" runat="server">
+            <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
+        <div class="Information_divAnalyze">
+            <asp:LinkButton ID="lbtnDownloadAndSaveNCP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveNCP_Click">
+                <span>
+                    <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
+                    <asp:Localize runat="server" Text="Create NCP" ID="locCreateNCP" meta:resourcekey="locCreateNCPResource1"></asp:Localize>
+                </span>
+            </asp:LinkButton>
+        </div>
+    </div>
+    <div class="listDevice" style="margin-left: 10px;">
+        <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
+    </div>
     <div class="listDevice" style="margin-left: 10px;">
         <div id="divToRender" runat="server">
             <table cellpadding="0" cellspacing="10" border="0" width="97%">
@@ -80,6 +195,9 @@
                                             runat="server" meta:resourcekey="locSummaryResource1"></asp:Localize></a></span></li>
                                     <li><span><a href="#tab2">
                                         <asp:Localize Text="Patch Details" ID="locPatchDetails"
+                                            runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>
+                                    <li><span><a href="#tab3">
+                                        <asp:Localize Text="Patch Details New" ID="locPatchDetailsNew"
                                             runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>
                                 </ul>
                                 <div style="float: right; padding-right: 3px; height: 26px; padding-top: 2px;">
@@ -125,22 +243,22 @@
                                                     <tr>
                                                         <td><b>Media</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblMedia" ></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblMedia"></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Colorant</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblColorant" ></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblColorant"></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Rip Settings</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblRipSettings" ></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblRipSettings"></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Spot Target</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblSpotTarget" ></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblSpotTarget"></asp:Label></td>
                                                     </tr>
                                                 </table>
 
@@ -168,7 +286,7 @@
                                                     CellSpacing="0" GridLines="None"
                                                     meta:resourcekey="rgPatchDetailsResource1">
                                                     <GroupingSettings CaseSensitive="False" />
-                                                   <%-- <ClientSettings>
+                                                    <%-- <ClientSettings>
                                                         <Scrolling AllowScroll="True" UseStaticHeaders="True" FrozenColumnsCount="4"></Scrolling>
                                                     </ClientSettings>--%>
                                                     <HeaderStyle Font-Bold="True" />
@@ -187,7 +305,7 @@
                                                                 FilterControlAltText="Filter SpotId column"
                                                                 meta:resourcekey="GridBoundColumnResource1">
                                                             </telerik:GridBoundColumn>
-                                                            
+
 
                                                             <telerik:GridTemplateColumn UniqueName="HtmlColor" HeaderText="Patch"
                                                                 DataField="HTMLColor" FilterControlAltText="Filter HtmlColor column"
@@ -217,7 +335,7 @@
                                                             </telerik:GridTemplateColumn>
 
                                                             <telerik:GridBoundColumn DataField="SpotName" HeaderText="Name"
-                                                                SortExpression="SpotName" UniqueName="SpotName" 
+                                                                SortExpression="SpotName" UniqueName="SpotName"
                                                                 FilterControlWidth="70px" CurrentFilterFunction="Contains" AutoPostBackOnFilter="True"
                                                                 DataType="System.String"
                                                                 FilterControlAltText="Filter SpotName column"
@@ -289,11 +407,11 @@
                                                                 meta:resourcekey="GridBoundColumnResource14" UniqueName="CielabB" Visible="false">
                                                             </telerik:GridBoundColumn>
 
-                                                             <telerik:GridBoundColumn DataField="ΔL" HeaderText="pΔL"
+                                                            <telerik:GridBoundColumn DataField="ΔL" HeaderText="pΔL"
                                                                 SortExpression="ΔL" FilterControlWidth="30px"
                                                                 CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
                                                                 FilterControlAltText="Filter CielabL column"
-                                                                meta:resourcekey="GridBoundColumnResource15" UniqueName="ΔL" >
+                                                                meta:resourcekey="GridBoundColumnResource15" UniqueName="ΔL">
                                                             </telerik:GridBoundColumn>
                                                             <telerik:GridBoundColumn DataField="Δa" HeaderText="pΔa"
                                                                 SortExpression="Δa" FilterControlWidth="30px"
@@ -329,6 +447,23 @@
                                         </div>
                                     </div>
                                     <div class="tab_bottom">&nbsp;</div>
+                                </section>
+                            </div>
+
+                            <div>
+                                <section id="tab3" class="contantbox tabcontant hideclass">
+                                    <div class="tab_top">&nbsp;</div>
+                                    <div class="tab_middle">
+                                        <div class="combopart">
+                                            <div style="padding-left: 10px;">
+                                                <div id="divPathDetails"></div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                    <div class="tab_bottom">
+                                        &nbsp;
+                                    </div>
                                 </section>
                             </div>
                         </section>

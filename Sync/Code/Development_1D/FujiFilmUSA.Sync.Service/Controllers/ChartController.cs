@@ -186,6 +186,40 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
         }
 
+        public IHttpActionResult GetPatchDetails(int id)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<List<Dictionary<string, object>>> httpResponse = new BaseResponse<List<Dictionary<string, object>>>();
+            try
+            {
+                MeasurementId = 0;
+                OptimizeRunId = Convert.ToInt32(id);
+
+                _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
+                List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
+                Dictionary<string, object> childRow;
+                foreach (DataRow row in dtPatchDetails.Rows)
+                {
+                    childRow = new Dictionary<string, object>();
+                    foreach (DataColumn col in dtPatchDetails.Columns)
+                    {
+                        childRow.Add(col.ColumnName, row[col]);
+                    }
+                    parentRow.Add(childRow);
+                }
+                httpResponse.Data = parentRow;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+
 
         #region IViewAnalyze Members
         public int ProjectId { get; set; }

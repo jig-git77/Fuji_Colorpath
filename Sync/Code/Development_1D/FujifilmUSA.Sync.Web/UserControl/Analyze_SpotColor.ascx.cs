@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
@@ -31,7 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!Page.IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                if(SessionManager.Instance.CurrentProject.SpotTargetProject!=null && SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition != null)
+                if (SessionManager.Instance.CurrentProject.SpotTargetProject != null && SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition != null)
                 {
                     lblMedia.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Media;
                     lblColorant.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Colorant;
@@ -44,10 +46,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgPatchDetails_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
 
-            if (SessionManager.Instance.CurrentOptimizeRun != null)            
+            if (SessionManager.Instance.CurrentOptimizeRun != null)
             {
                 MeasurementId = 0;
                 OptimizeRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId);
+                hdfOptimizationRunID.Value = OptimizeRunId.ToString(); ;
                 //Now we are using DataTable to bind the grid               
                 dtPatchDetails = new DataTable();
                 _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
@@ -263,6 +266,39 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnDownloadAndSaveNCP_Click(object sender, EventArgs e)
         {
             Response.Redirect("Export.aspx");
+        }
+
+        [WebMethod(EnableSession = true)]
+        public static string GetPatchDetails()
+        {
+            string jsonPathDetails = "";
+            //if (SessionManager.Instance.CurrentOptimizeRun != null)
+            //{
+
+            //    MeasurementId = 0;
+            //    OptimizeRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId);
+            //    //Now we are using DataTable to bind the grid               
+            //    dtPatchDetails = new DataTable();
+            //    _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
+
+            //    if (!IsErrorOccured)
+            //    {
+            //        JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+            //        List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
+            //        Dictionary<string, object> childRow;
+            //        foreach (DataRow row in dtPatchDetails.Rows)
+            //        {
+            //            childRow = new Dictionary<string, object>();
+            //            foreach (DataColumn col in dtPatchDetails.Columns)
+            //            {
+            //                childRow.Add(col.ColumnName, row[col]);
+            //            }
+            //            parentRow.Add(childRow);
+            //        }
+            //        jsonPathDetails= jsSerializer.Serialize(parentRow);
+            //    }
+            //}
+            return jsonPathDetails;
         }
     }
 }
