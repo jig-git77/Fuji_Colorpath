@@ -5,7 +5,178 @@
     TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/PopupControl/OpenPrintCondition.ascx" TagName="OpenPrintCondition"
     TagPrefix="uc" %>
+<link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>
 <script type="text/javascript" language="javascript">
+
+    $(document).ready(function () {
+        var dID = 16;
+        $("#kendoProjectList").kendoGrid({
+            dataSource: {
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            type: "GET",
+                            url: "http://localhost/FujiFilmUSA.Sync.Service/api/Grid/GetProjectDetailsByDeviceID/",
+                            data: { deviceID: dID },
+                            dataType: "json",
+                            success: function (response) {
+                                options.success(response.data)
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                alert(textStatus);
+                            }
+                        });
+                    },
+                },
+                schema: {
+                    model: {
+                        id: "ProjectId",
+                        fields: {
+                            ProjectName: {
+                                from: "ProjectName"
+                            },
+                            SourceProfileName: {
+                                from: "SourceProfile.ProfileName"
+                            },
+                            PrintConditionMedia: {
+                                from: "PrintCondition.Media"
+                            },
+                            PrintConditionColorant: {
+                                from: "PrintCondition.Colorant"
+                            },
+                            CreateDate: {
+                                from: "CreateDate"
+                            }
+                        }
+                    }
+                },
+                pageSize: 10
+            },
+            sortable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+            detailInit: detailInit,
+            dataBound: function () {
+                //this.expandRow(this.tbody.find("tr.k-master-row").first());
+                debugger;
+                var dataSource = this.dataSource;
+                this.element.find('tr.k-master-row').each(function () {
+                    var row = $(this);
+                    var data = dataSource.getByUid(row.data('uid'));
+
+                    if (!(data.Status == 3 && data.LicenseType == 2)) {
+                        row.find("td.k-hierarchy-cell .k-icon").removeClass();
+                    }
+                });
+            },
+            columns: [
+               {
+                   field: "ProjectName",
+                   title: "<b>Project Name</b>",
+                   width: 50,
+               },
+               {
+                   field: "SourceProfileName",
+                   title: "<b>Standard</b>",
+                   width: 50
+               },
+               {
+                   field: "PrintConditionMedia",
+                   title: "<b>Media</b>",
+                   width: 50,
+               },
+               {
+                   field: "PrintConditionColorant",
+                   title: "<b>Colorant</b>",
+                   width: 50,
+               },
+                {
+                    field: "CreateDate",
+                    title: "<b>Last Active</b>",
+                    template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm") #',
+                    width: 50,
+                }
+
+               //{
+               //    filterable: false,
+               //    title: "<b>View</b>",
+               //    template: "<center><a id='lnkView' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#);'><img src='Images/detail1.png'></img></a></center>",
+               //    width: 55
+               //},              
+            ]
+        });
+    });
+
+    function detailInit(e) {
+        var pID = e.data.id;
+        //if (pID == 13643)
+        {
+            $("<div/>").appendTo(e.detailCell).kendoGrid({
+                dataSource: {
+                    transport: {
+                        read: function (options) {
+                            $.ajax({
+                                type: "GET",
+                                url: "http://localhost/FujiFilmUSA.Sync.Service/api/Grid/GetSpotProjectDetailsByProjectID/",
+                                data: { projectID: pID },
+                                dataType: "json",
+                                success: function (response) {
+                                    options.success(response.data)
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                    alert(textStatus);
+                                }
+                            });
+                        },
+                    },
+                    schema: {
+                        model: {
+                            fields: {
+                                ProjectName: {
+                                    from: "ProjectName"
+                                },
+                                LibraryName: {
+                                    from: "SpotTarget.SpotTargetName"
+                                },
+                                CreateDate: {
+                                    from: "CreateDate"
+                                }
+                            }
+                        }
+                    },
+                    pageSize: 10
+                },
+                sortable: true,
+                filterable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true
+                },
+                columns: [
+                   {
+                       field: "ProjectName",
+                       title: "<b>Name</b>",
+                   },
+                   {
+                       field: "LibraryName",
+                       title: "<b>Library</b>",
+                   },
+                    {
+                        field: "CreateDate",
+                        title: "<b>Last Active</b>",
+                        template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm") #',
+                    }
+                ]
+            });
+        }
+
+    }
+
     function ConfirmDeleteProject() {
         if (confirm('<%= ProjectListDeleteProjectConfirmation %>'))
             return true;
@@ -154,6 +325,12 @@
     .PagerItemStyle {
         background: #C0C0C0 !important;
         /*color: brown !important;*/ /*add more style definitions here*/
+    }
+
+    .k-grid .k-hierarchy-col,
+    .k-grid .k-hierarchy-cell {
+        width: 10px;
+        overflow: hidden;
     }
 </style>
 
@@ -411,6 +588,14 @@
                 </table>
             </ContentTemplate>
         </asp:UpdatePanel>
+    </div>
+    <div class="clear">
+    </div>
+    <div class="listDevice">
+        <br />
+        <div>
+            <div id="kendoProjectList"></div>
+        </div>
     </div>
     <div class="clear">
     </div>

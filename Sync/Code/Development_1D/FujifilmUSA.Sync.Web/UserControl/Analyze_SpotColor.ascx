@@ -42,22 +42,6 @@
         });
 
         var oId = $('#hdfOptimizationRunID').val();
-
-        //$.ajax({
-        //    type: 'GET',
-        //    url: 'http://localhost/FujiFilmUSA.Sync.Service/api/Chart/GetPatchDetails',
-        //    contentType: "application/json; charset=utf-8",
-        //    dataType: 'json',
-        //    data: { id: oId },
-        //    success: function (response) {
-        //        console.log(response);
-        //        console.log(JSON.stringify(response));
-        //    },
-        //    error: function (xhr, errorType, exception) {            
-        //        console.log(xhr);
-        //    }
-        //});
-
         $("#divPathDetails").kendoGrid({
             dataSource: {
                 //transport: {
@@ -65,11 +49,10 @@
                 //    read: "http://localhost/FujiFilmUSA.Sync.Service/api/Chart/GetPatchDetails/" + oId
                 //},
                 transport: {
-                    //read: "/FujifilmUSA.Sync.Web/Analyze_SpotColor.aspx/GetPatchDetails"
                     read: function (options) {
                         $.ajax({
                             type: "GET",
-                            url: "http://localhost/FujiFilmUSA.Sync.Service/api/Chart/GetPatchDetails/",
+                            url: "http://localhost/FujiFilmUSA.Sync.Service/api/Grid/GetPatchDetails/",
                             data: { id: oId },
                             dataType: "json",
                             success: function (response) {
@@ -93,20 +76,8 @@
                     }
                 }
             },
-            //height: 550,
-            //groupable: true,
             sortable: true,
-            //columnMenu: true,            
             filterable:true,
-            //filterable: {
-            //    extra: false,
-
-            //    operators: {
-            //        string: {
-            //            eq: "Is equal to"
-            //        }
-            //    }
-            //},
             pageable: {
                 refresh: true,
                 pageSizes: true
@@ -125,6 +96,12 @@
                    template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
                    width: 50
                },
+               {
+                   filterable: false,
+                   title: "<b>View</b>",
+                   template: "<center><a id='lnkView' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#);'><img src='Images/detail1.png'></img></a></center>",
+                   width: 55
+               },
               {
                   field: "SpotName",
                   title: "<b>Spot Name</b>",
@@ -132,28 +109,28 @@
                 {
                     field: "ΔL",
                     title: "<b>pΔL</b>",
+                    width: 80
                 },
                 {
                     field: "Δa",
                     title: "<b>pΔa</b>",
+                    width: 80
                 },
                 {
                     field: "Δb",
                     title: "<b>pΔb</b>",
+                    width: 80
                 },
                 {
                     field: "ΔE",
                     title: "<b>pΔE</b>",
+                    width: 80
                 }
             ]
-            //dataBinding: function (e) {
-            //    debugger;
-            //    //record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
-            //}
         });
     });
 
-    function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB) {
+    function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB) {        
         var oWindow;
         oWindow = window.radopen("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB, "ClosePrintConditionWindow");
         oWindow.show();
