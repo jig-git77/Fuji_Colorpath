@@ -176,13 +176,27 @@ $(document).ready(function () {
                 if (projectValidationImagePath != '') {
                     row.find("td #imgprojectValidation").attr('src', projectValidationImagePath);   //set the project validation image path
                 }
+
+                switch (data.Status) {
+                    case EOptimizeRunStatus.Open: 
+                        row.find("td #lnkProjectType").attr("onclick", "javascript: return ShowOpenPrintConditionWindow('" + data.ProjectId + "','" + data.ProjectName + "','10','" + data.CurrentDlpName + "','" + data.TotalRuns + "')");
+                        break;
+                    case EOptimizeRunStatus.Closed: 
+                        row.find("td #lnkProjectType").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.ProjectId + "','" + data.ProjectName + "','" + data.LicenseType + "','" + data.CurrentDlpName + "')");
+                        break;
+                    case EOptimizeRunStatus.Certify:
+                        row.find("td #lnkProjectType").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.ProjectId + "','" + data.ProjectName + "','" + data.LicenseType + "','" + data.CurrentDlpName + "')");
+                        break;
+                }
+                
+                
             });
         },
         columns: [
             {
                 //filterable: false,
                 title: "<b>Type</b>",
-                template: "<center><img id='imgprojectType' src=''></img></center>",
+                template: "<center><a id='lnkProjectType'><img id='imgprojectType' src=''></img></a></center>",
                 width: 30,
                 filterable: {
                     ui: function (element) {
@@ -239,7 +253,7 @@ $(document).ready(function () {
                         }
                     },
                     ui: "datetimepicker" // use Kendo UI DateTimePicker
-                }               
+                }
             },
             {
                 filterable: false,
@@ -253,71 +267,68 @@ $(document).ready(function () {
 
 function detailInit(e) {
     var pID = e.data.id;
-    //if (pID == 13643)
-    {
-        $("<div/>").appendTo(e.detailCell).kendoGrid({
-            dataSource: {
-                transport: {
-                    read: function (options) {
-                        $.ajax({
-                            type: "GET",
-                            url: "http://localhost/FujiFilmUSA.Sync.Service/api/Grid/GetSpotProjectDetailsByProjectID/",
-                            data: { projectID: pID },
-                            dataType: "json",
-                            success: function (response) {
-                                options.success(response.data)
-                            },
-                            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                alert(textStatus);
-                            }
-                        });
-                    },
+    $("<div/>").appendTo(e.detailCell).kendoGrid({
+        dataSource: {
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        type: "GET",
+                        url: "http://localhost/FujiFilmUSA.Sync.Service/api/Grid/GetSpotProjectDetailsByProjectID/",
+                        data: { projectID: pID },
+                        dataType: "json",
+                        success: function (response) {
+                            options.success(response.data)
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert(textStatus);
+                        }
+                    });
                 },
-                schema: {
-                    model: {
-                        fields: {
-                            ProjectName: {
-                                from: "ProjectName"
-                            },
-                            LibraryName: {
-                                from: "SpotTarget.SpotTargetName"
-                            },
-                            CreateDate: {
-                                from: "CreateDate"
-                            }
+            },
+            schema: {
+                model: {
+                    fields: {
+                        ProjectName: {
+                            from: "ProjectName"
+                        },
+                        LibraryName: {
+                            from: "SpotTarget.SpotTargetName"
+                        },
+                        CreateDate: {
+                            from: "CreateDate"
                         }
                     }
-                },
-                pageSize: 5
-            },
-            sortable: true,
-            filterable: true,
-            pageable: {
-                refresh: true,
-                pageSizes: true
-            },
-            columns: [
-                 {
-                     filterable: false,
-                     title: "<b></b>",
-                     template: "<center><img id='imgspotProject' src='Images/open_folder_yellow.png' style='width: 20px;'></img></center>",
-                     width: 40
-                 },
-               {
-                   field: "ProjectName",
-                   title: "<b>Name</b>",
-               },
-               {
-                   field: "LibraryName",
-                   title: "<b>Library</b>",
-               },
-                {
-                    field: "CreateDate",
-                    title: "<b>Last Active</b>",
-                    template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm") #',
                 }
-            ]
-        });
-    }
+            },
+            pageSize: 5
+        },
+        sortable: true,
+        filterable: true,
+        pageable: {
+            refresh: true,
+            pageSizes: true
+        },
+        columns: [
+             {
+                 filterable: false,
+                 title: "<b></b>",
+                 template: "<center><img id='imgspotProject' src='Images/open_folder_yellow.png' style='width: 20px;'></img></center>",
+                 width: 40
+             },
+           {
+               field: "ProjectName",
+               title: "<b>Name</b>",
+           },
+           {
+               field: "LibraryName",
+               title: "<b>Library</b>",
+           },
+            {
+                field: "CreateDate",
+                title: "<b>Last Active</b>",
+                template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm") #',
+            }
+        ]
+    });
 
 }
