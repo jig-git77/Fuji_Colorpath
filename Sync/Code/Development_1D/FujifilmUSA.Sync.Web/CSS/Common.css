@@ -2252,3 +2252,8 @@ label
 .TRTABLEBOX{background-color:Gray; font-size:11px; font-weight:bold; color:White;}
 .TDTABLEBOXLEFT{padding-left:4px}
 .TDTABLEBOX{padding-top:3px; padding-bottom:3px;}
+
+.k-state-selected, .k-state-selected:link, .k-state-selected:visited, .k-list>.k-state-selected, .k-list>.k-state-highlight, .k-panel>.k-state-selected, .k-ghost-splitbar-vertical, .k-ghost-splitbar-horizontal, .k-draghandle.k-state-selected:hover, .k-scheduler .k-scheduler-toolbar .k-state-selected, .k-scheduler .k-today.k-state-selected, .k-marquee-color,.k-overflow-container .k-primary, .k-primary, .k-button.k-state-active:hover, .k-button:active:hover{
+    background-color:#01906D !important;
+    border-color:#01906D !important;
+}

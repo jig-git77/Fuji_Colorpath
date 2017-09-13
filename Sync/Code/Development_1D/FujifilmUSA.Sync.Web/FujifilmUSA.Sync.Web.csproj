@@ -913,6 +913,7 @@
     <Content Include="JS\GlobalResource.en-US.js" />
     <Content Include="JS\jquery.tools.min.js" />
     <Content Include="JS\Printing.js" />
+    <Content Include="JS\ProjectList.js" />
     <Content Include="MetricTargetPresetManagement.aspx" />
     <Content Include="PatchPresetManagement.aspx" />
     <Content Include="Permission.aspx" />
@@ -5205,7 +5206,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
