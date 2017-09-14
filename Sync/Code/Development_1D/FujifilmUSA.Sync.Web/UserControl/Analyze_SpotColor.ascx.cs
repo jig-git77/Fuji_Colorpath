@@ -40,11 +40,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lblRipSettings.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.RipSettings;
                     lblSpotTarget.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetName;
                     hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
+                    BindPatchDetails_Summary();
                 }
             }
         }
 
-        protected void rgPatchDetails_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        private void BindPatchDetails_Summary()
         {
 
             if (SessionManager.Instance.CurrentOptimizeRun != null)
@@ -59,7 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured)
                 {
                     //Now we are using DataTable as DataSource                    
-                    rgPatchDetails.DataSource = dtPatchDetails;
+           
                     decimal totalDeltaE = 0;
                     decimal avgDeltaE = 0;
 
@@ -84,77 +85,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lblMaxDeltaE.Text = maxDtE.ToString();
                     lblAvgDeltaE.Text = String.Format("{0:0.###}", avgDeltaE);
                 }
-            }
-        }
-
-        protected void rgPatchDetails_ItemCommand(object sender, GridCommandEventArgs e)
-        {
-            switch (e.CommandName)
-            {
-                case "Fillter":
-                    foreach (GridColumn column in rgPatchDetails.MasterTableView.Columns)
-                    {
-                        column.CurrentFilterFunction = GridKnownFunction.NoFilter;
-                        column.CurrentFilterValue = string.Empty;
-                    }
-                    rgPatchDetails.MasterTableView.FilterExpression = string.Empty;
-                    rgPatchDetails.MasterTableView.Rebind();
-                    break;
-            }
-        }
-
-        protected void rgPatchDetails_SortCommand(object source, Telerik.Web.UI.GridSortCommandEventArgs e)
-        {
-            //Apply custom sorting -- make "Descending" order by default
-
-            GridSortExpression sortExpr = new GridSortExpression();
-            switch (e.OldSortOrder)
-            {
-                case GridSortOrder.None:
-                    sortExpr.FieldName = e.SortExpression;
-                    sortExpr.SortOrder = GridSortOrder.Descending;
-
-                    e.Item.OwnerTableView.SortExpressions.AddSortExpression(sortExpr);
-                    break;
-                case GridSortOrder.Ascending:
-                    sortExpr.FieldName = e.SortExpression;
-                    sortExpr.SortOrder = rgPatchDetails.MasterTableView.AllowNaturalSort ? GridSortOrder.None : GridSortOrder.Descending;
-                    e.Item.OwnerTableView.SortExpressions.AddSortExpression(sortExpr);
-                    break;
-                case GridSortOrder.Descending:
-                    sortExpr.FieldName = e.SortExpression;
-                    sortExpr.SortOrder = GridSortOrder.Ascending;
-
-                    e.Item.OwnerTableView.SortExpressions.AddSortExpression(sortExpr);
-                    break;
-            }
-
-            e.Canceled = true;
-            rgPatchDetails.Rebind();
-        }
-
-        protected void rgPatchDetails_ItemDataBound(object sender, GridItemEventArgs e)
-        {
-            if (e.Item is GridDataItem)
-            {
-                GridDataItem item = (GridDataItem)e.Item;
-
-                Label lblHTML = (Label)item["HtmlColor"].FindControl("lbl_HTML");
-                lblHTML.BackColor = System.Drawing.ColorTranslator.FromHtml(item.GetDataKeyValue("HTMLColor").ToString());
-
-                //LinkButton lnklnkView = (LinkButton)item["ViewDetail"].FindControl("lnkView");
-
-                var lnklnkView = e.Item.FindControl("lnkView") as ImageButton;
-
-                string HTMLColor = Convert.ToString(DataBinder.Eval(item.DataItem, "HTMLColor"));
-                if (!string.IsNullOrEmpty(HTMLColor))
-                    HTMLColor = HTMLColor.Substring(1, HTMLColor.Length - 1);
-                lnklnkView.Attributes.Add("onclick",
-                                                 "return ShowSpotColorPatchDetailsWindow('" + HTMLColor + "','" +
-                                                 DataBinder.Eval(item.DataItem, "CIELAB_L") + "','" + DataBinder.Eval(item.DataItem, "CIELAB_a") + "','" +
-                                                 DataBinder.Eval(item.DataItem, "CIELAB_b") + "','" + DataBinder.Eval(item.DataItem, "TargetL") + "','" +
-                                                 DataBinder.Eval(item.DataItem, "Targeta") + "','" + DataBinder.Eval(item.DataItem, "Targetb") + "')");
-
             }
         }
 

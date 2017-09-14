@@ -175,20 +175,8 @@
                                     <li><span><a href="#tab2">
                                         <asp:Localize Text="Patch Details" ID="locPatchDetails"
                                             runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>
-                                    <li><span><a href="#tab3">
-                                        <asp:Localize Text="Patch Details New" ID="locPatchDetailsNew"
-                                            runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>
-                                </ul>
-                                <div style="float: right; padding-right: 3px; height: 26px; padding-top: 2px;">
-                                    <%--<asp:ImageButton ID="ibtnPrintPreview" runat="server"
-                                        ImageUrl="../Images/DymoPrintPreviewIcon.png" ToolTip="Preview label"
-                                        OnClientClick="ShowLabelPrintPreview(); return false;"
-                                        meta:resourcekey="ibtnPrintPreviewResource1" />
-                                    <asp:ImageButton ID="ibtnPrintLabel" runat="server"
-                                        ImageUrl="../Images/DymoPrintIcon.png" ToolTip="Print label"
-                                        OnClientClick="PrintLabel(false); return false;"
-                                        meta:resourcekey="ibtnPrintLabelResource1" />--%>
-                                </div>
+                              </ul>
+                              
                                 <div class="clear"></div>
                             </section>
 
@@ -251,186 +239,9 @@
                                 </section>
                             </div>
 
+
                             <div>
                                 <section id="tab2" class="contantbox tabcontant hideclass">
-                                    <div class="tab_top">&nbsp;</div>
-                                    <div class="tab_middle">
-                                        <div class="combopart">
-                                            <div class="float_l" style="padding-left: 10px;">
-                                                <telerik:RadGrid ID="rgPatchDetails" AllowSorting="True" Width="650px"
-                                                    AllowPaging="True" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
-                                                    AllowFilteringByColumn="True"
-                                                    OnNeedDataSource="rgPatchDetails_NeedDataSource" OnItemDataBound="rgPatchDetails_ItemDataBound"
-                                                    OnSortCommand="rgPatchDetails_SortCommand" OnItemCommand="rgPatchDetails_ItemCommand"
-                                                    CellSpacing="0" GridLines="None"
-                                                    meta:resourcekey="rgPatchDetailsResource1">
-                                                    <GroupingSettings CaseSensitive="False" />
-                                                    <%-- <ClientSettings>
-                                                        <Scrolling AllowScroll="True" UseStaticHeaders="True" FrozenColumnsCount="4"></Scrolling>
-                                                    </ClientSettings>--%>
-                                                    <HeaderStyle Font-Bold="True" />
-                                                    <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
-                                                    <MasterTableView DataKeyNames="HTMLColor">
-                                                        <CommandItemSettings ExportToPdfText="Export to PDF" />
-                                                        <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column"
-                                                            Visible="True">
-                                                        </RowIndicatorColumn>
-                                                        <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column"
-                                                            Visible="True">
-                                                        </ExpandCollapseColumn>
-                                                        <Columns>
-                                                            <telerik:GridBoundColumn DataField="SpotID" HeaderText="ID"
-                                                                SortExpression="SpotID" AllowFiltering="False" UniqueName="SpotID"
-                                                                FilterControlAltText="Filter SpotId column"
-                                                                meta:resourcekey="GridBoundColumnResource1">
-                                                            </telerik:GridBoundColumn>
-
-
-                                                            <telerik:GridTemplateColumn UniqueName="HtmlColor" HeaderText="Patch"
-                                                                DataField="HTMLColor" FilterControlAltText="Filter HtmlColor column"
-                                                                meta:resourcekey="GridTemplateColumnResource1">
-                                                                <FilterTemplate>
-                                                                    <center>
-                                                                            <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip="Clear Filter"  
-                                                                                    CommandName="Fillter" meta:resourcekey="lbtnClearFillterResource2">
-                                                                                            <span>
-                                                                                                <asp:Image ID="imgClearFillter" runat="server" 
-                                                                                    AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" 
-                                                                                    meta:resourcekey="imgClearFillterResource1" />
-                                                                                            </span>
-                                                                            </asp:LinkButton>
-                                                                            </center>
-                                                                </FilterTemplate>
-                                                                <ItemTemplate>
-                                                                    <asp:Label ID="lbl_HTML" runat="server" Height="14px" Width="30px"
-                                                                        meta:resourcekey="lbl_HTMLResource1"></asp:Label>
-                                                                </ItemTemplate>
-
-                                                            </telerik:GridTemplateColumn>
-                                                            <telerik:GridTemplateColumn UniqueName="ViewDetail" HeaderText="View" AllowFiltering="False">
-                                                                <ItemTemplate>
-                                                                    <asp:ImageButton ID="lnkView" runat="server" ImageUrl="~/Images/detail1.png"></asp:ImageButton>
-                                                                </ItemTemplate>
-                                                            </telerik:GridTemplateColumn>
-
-                                                            <telerik:GridBoundColumn DataField="SpotName" HeaderText="Name"
-                                                                SortExpression="SpotName" UniqueName="SpotName"
-                                                                FilterControlWidth="70px" CurrentFilterFunction="Contains" AutoPostBackOnFilter="True"
-                                                                DataType="System.String"
-                                                                FilterControlAltText="Filter SpotName column"
-                                                                meta:resourcekey="GridBoundColumnResource38">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="CMYK_C" HeaderText="Cyan"
-                                                                SortExpression="CMYK_C" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                UniqueName="CmykC" DataType="System.Int32"
-                                                                FilterControlAltText="Filter CmykC column"
-                                                                meta:resourcekey="GridBoundColumnResource2" Visible="false">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="CMYK_M" HeaderText="Magenta"
-                                                                SortExpression="CMYK_M" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                UniqueName="CmykM" DataType="System.Int32"
-                                                                FilterControlAltText="Filter CmykM column"
-                                                                meta:resourcekey="GridBoundColumnResource3" Visible="false">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="CMYK_Y" HeaderText="Yellow"
-                                                                SortExpression="CMYK_Y" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                UniqueName="CmykY" DataType="System.Int32"
-                                                                FilterControlAltText="Filter CmykY column"
-                                                                meta:resourcekey="GridBoundColumnResource4" Visible="false">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="CMYK_K" HeaderText="Black"
-                                                                SortExpression="CMYK_K" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                UniqueName="CmykK" DataType="System.Int32"
-                                                                FilterControlAltText="Filter CmykK column"
-                                                                meta:resourcekey="GridBoundColumnResource5" Visible="false">
-                                                            </telerik:GridBoundColumn>
-
-                                                            <telerik:GridBoundColumn DataField="TargetL" HeaderText="Target L*"
-                                                                SortExpression="TargetL" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter TargetL column"
-                                                                meta:resourcekey="GridBoundColumnResource9" UniqueName="TargetL" Visible="false">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="Targeta" HeaderText="Target a*"
-                                                                SortExpression="Targeta" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter Targeta column"
-                                                                meta:resourcekey="GridBoundColumnResource11" UniqueName="Targeta" Visible="false">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="Targetb" HeaderText="Target b*"
-                                                                SortExpression="Targetb" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter Targetb column"
-                                                                meta:resourcekey="GridBoundColumnResource13" UniqueName="Targetb" Visible="false">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="CIELAB_L" HeaderText="P_L*"
-                                                                SortExpression="CIELAB_L" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter CielabL column"
-                                                                meta:resourcekey="GridBoundColumnResource10" UniqueName="CielabL" Visible="false">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="CIELAB_a" HeaderText="P_a*"
-                                                                SortExpression="CIELAB_a" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter CielabA column"
-                                                                meta:resourcekey="GridBoundColumnResource12" UniqueName="CielabA" Visible="false">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="CIELAB_b" HeaderText="P_b*"
-                                                                SortExpression="CIELAB_b" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter CielabB column"
-                                                                meta:resourcekey="GridBoundColumnResource14" UniqueName="CielabB" Visible="false">
-                                                            </telerik:GridBoundColumn>
-
-                                                            <telerik:GridBoundColumn DataField="ΔL" HeaderText="pΔL"
-                                                                SortExpression="ΔL" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter CielabL column"
-                                                                meta:resourcekey="GridBoundColumnResource15" UniqueName="ΔL">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="Δa" HeaderText="pΔa"
-                                                                SortExpression="Δa" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter CielabA column"
-                                                                meta:resourcekey="GridBoundColumnResource16" UniqueName="Δa">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="Δb" HeaderText="pΔb"
-                                                                SortExpression="Δb" FilterControlWidth="30px"
-                                                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True"
-                                                                FilterControlAltText="Filter CielabB column"
-                                                                meta:resourcekey="GridBoundColumnResource17" UniqueName="Δb">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="ΔE" HeaderText="pΔE" SortExpression="ΔE"
-                                                                FilterControlWidth="30px" CurrentFilterFunction="GreaterThanOrEqualTo"
-                                                                AutoPostBackOnFilter="True" UniqueName="ΔE"
-                                                                FilterControlAltText="Filter ΔE column"
-                                                                meta:resourcekey="GridBoundColumnResource6">
-                                                            </telerik:GridBoundColumn>
-                                                        </Columns>
-                                                    </MasterTableView>
-                                                </telerik:RadGrid>
-                                                <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True"
-                                                    Height="240" Width="900" VisibleStatusbar="false" Title="Patch Details"
-                                                    ShowContentDuringLoad="false" Behaviors="Move,Close">
-                                                    <Windows>
-                                                        <telerik:RadWindow ID="windowPatchDetails" runat="server">
-                                                        </telerik:RadWindow>
-                                                    </Windows>
-                                                </telerik:RadWindowManager>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </div>
-                                    <div class="tab_bottom">&nbsp;</div>
-                                </section>
-                            </div>
-
-                            <div>
-                                <section id="tab3" class="contantbox tabcontant hideclass">
                                     <div class="tab_top">&nbsp;</div>
                                     <div class="tab_middle">
                                         <div class="combopart">
@@ -455,3 +266,12 @@
 <div class="contant_bottom">
     &nbsp;
 </div>
+
+  <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True"
+                                                    Height="240" Width="900" VisibleStatusbar="false" Title="Patch Details"
+                                                    ShowContentDuringLoad="false" Behaviors="Move,Close">
+                                                    <Windows>
+                                                        <telerik:RadWindow ID="windowPatchDetails" runat="server">
+                                                        </telerik:RadWindow>
+                                                    </Windows>
+                                                </telerik:RadWindowManager>
