@@ -17,11 +17,10 @@ using System.Web.Http.Controllers;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
-    public class ChartController : BaseController, IViewAnalyze, IViewProjectList
+    public class ChartController : BaseController, IViewAnalyze
     {
         #region Variable Declarations
-        private PresenterAnalyze _presenterAnalyze;
-        private PresenterProjectList _presenterProjectList;
+        private PresenterAnalyze _presenterAnalyze;        
         private Dictionary<string, string> _resourceValues { get; set; }
         private Dictionary<string, string> _globalResourceValues { get; set; }
         private const string _InvalidMeasurementId = "Invalid_MeasurementId";
@@ -32,8 +31,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         protected override void Initialize(HttpControllerContext controllerContext)
         {
-            _presenterAnalyze = new PresenterAnalyze(this);
-            _presenterProjectList = new PresenterProjectList(this);
+            _presenterAnalyze = new PresenterAnalyze(this);            
             _globalResourceValues = new Dictionary<string, string>();
             _resourceValues = new Dictionary<string, string>();
             _resourceValues.Add("_recgbPatchMetrics", "gbPatchMetricsText");
@@ -220,33 +218,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
-        }
-
-        public IHttpActionResult GetProjectDetailsByDeviceID(int deviceID)
-        {
-            IHttpActionResult actionResult = null;
-            BaseResponse<List<Project>> httpResponse = new BaseResponse<List<Project>>();
-            try
-            {
-                Projects = new List<Project>();
-                DeviceId = deviceID;
-                //Now we are passing LicenseTypeID as None to bring all projects based on DeviceId
-                LicenseTypeID = Convert.ToInt32(ELicenseType.None);
-
-                _presenterProjectList.GetProjectListByDeviceId();
-                httpResponse.Data = Projects;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
-            }
-            catch (Exception ex)
-            {
-                BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
-            }
-            return actionResult;
-        }
-
+        }        
 
         #region IViewAnalyze Members
         public int ProjectId { get; set; }
@@ -312,19 +284,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         public bool IsAverageOfMeasurements { get; set; }
         public bool Is1DMeasurementSmoothing { get; set; }
-        #endregion
-
-        #region IViewProjectList Members
-        public List<Project> Projects { get; set; }
-        public int CompanyId { get; set; }
-        public Dictionary<int, string> SourceProfile { get; set; }
-        //public int ProjectId { get; set; }
-        public int DeviceId { get; set; }
-        public int LicenseTypeID { get; set; }
-        public Project Project { get; set; }
-        public List<FujifilmUSA.Sync.Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
-        public int SpotProjectId { get; set; }
-        #endregion
+        #endregion        
     }
 }
 

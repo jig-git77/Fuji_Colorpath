@@ -170,6 +170,10 @@
 </style>
 
 <div class="contant_top">
+    <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
+    <asp:HiddenField runat="server" ID="hdfHasDeletePermission" ClientIDMode="Static" />
+    <asp:HiddenField runat="server" ID="hdfCurrentUser" ClientIDMode="Static" />
+    <asp:HiddenField runat="server" ID="hdfCurrentDeviceID" ClientIDMode="Static" />
     &nbsp;
 </div>
 <div class="contant_middle">

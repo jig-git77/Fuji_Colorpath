@@ -52,6 +52,10 @@
       <HintPath>..\..\Solution References\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Service.Common.Encryption">
       <HintPath>..\..\..\..\Reference\Service.Common.Encryption.dll</HintPath>
     </Reference>
@@ -5206,7 +5210,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

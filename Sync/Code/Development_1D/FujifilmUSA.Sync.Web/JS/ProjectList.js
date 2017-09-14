@@ -28,17 +28,27 @@ var EValidationStatus = {
     LastOK: 4,
     LastFailed: 5
 }
+var SERVICE_BASE_URL = '';
+var $kendoProjectList;
+var $hdfHasDeletePermission;
+var CurrentDeviceID;
+var CurrentUserID;
 
 $(document).ready(function () {
-    var dID = 16;
-    $("#kendoProjectList").kendoGrid({
+    SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
+    $kendoProjectList = $("#kendoProjectList");
+    $hdfHasDeletePermission = $("#hdfHasDeletePermission");
+    CurrentDeviceID = $("#hdfCurrentDeviceID").val();
+    CurrentUserID = $("#hdfCurrentUser").val();
+    //var dID = $hdfCurrentDeviceID.val();
+    $kendoProjectList.kendoGrid({
         dataSource: {
             transport: {
                 read: function (options) {
                     $.ajax({
                         type: "GET",
-                        url: "http://localhost/FujiFilmUSA.Sync.Service/api/Grid/GetProjectDetailsByDeviceID/",
-                        data: { deviceID: dID },
+                        url: SERVICE_BASE_URL + "api/Project/GetProjectDetailsByDeviceID/",
+                        data: { deviceID: CurrentDeviceID },
                         dataType: "json",
                         success: function (response) {
                             options.success(response.data)
@@ -78,6 +88,9 @@ $(document).ready(function () {
         pageable: {
             refresh: true,
             pageSizes: true
+        },
+        noRecords: {
+            template: "No records to display."
         },
         detailInit: detailInit,
         dataBound: function () {
@@ -178,29 +191,73 @@ $(document).ready(function () {
                 }
 
                 switch (data.Status) {
-                    case EOptimizeRunStatus.Open: 
+                    case EOptimizeRunStatus.Open:
                         row.find("td #lnkProjectType").attr("onclick", "javascript: return ShowOpenPrintConditionWindow('" + data.ProjectId + "','" + data.ProjectName + "','10','" + data.CurrentDlpName + "','" + data.TotalRuns + "')");
                         break;
-                    case EOptimizeRunStatus.Closed: 
+                    case EOptimizeRunStatus.Closed:
                         row.find("td #lnkProjectType").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.ProjectId + "','" + data.ProjectName + "','" + data.LicenseType + "','" + data.CurrentDlpName + "')");
                         break;
                     case EOptimizeRunStatus.Certify:
                         row.find("td #lnkProjectType").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.ProjectId + "','" + data.ProjectName + "','" + data.LicenseType + "','" + data.CurrentDlpName + "')");
                         break;
                 }
-                
-                
+
+
             });
         },
         columns: [
             {
                 //filterable: false,
                 title: "<b>Type</b>",
+                field: "LicenseType",
                 template: "<center><a id='lnkProjectType'><img id='imgprojectType' src=''></img></a></center>",
                 width: 30,
                 filterable: {
+                    extra: false,
+                    operators: {
+                        string: {
+                            eq: "Is equal to"
+                        }
+                    },
                     ui: function (element) {
-                        element.kendoAutoComplete(); // initialize a Kendo UI AutoComplete
+
+                        $.ajax({
+                            type: "GET",
+                            url: SERVICE_BASE_URL + "api/Device/GetProjectLicenseType/",
+                            data: { UserID: CurrentUserID, DeviceID: CurrentDeviceID },
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.data.length > 0) {
+                                    element.kendoDropDownList({
+                                        dataSource: response.data,
+                                        dataTextField: "Type",
+                                        dataValueField: "LicenseTypeId",
+                                    });
+                                }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                console.log(errorThrown);
+                            }
+                        });
+
+                        //element.kendoAutoComplete(); // initialize a Kendo UI AutoComplete
+                        //var licenseProjectTypes = [{
+                        //    text: "Alignment Curves", value: 1
+                        //}, {
+                        //    text: "DLP Optimization", value: 2
+                        //}, {
+                        //    text: "Ink Optimization", value: 3
+                        //}, {
+                        //    text: "Sync4D Certification", value: 5
+                        //}, {
+                        //    text: "Spot Color Library", value: 10
+                        //}];
+
+                        //element.kendoDropDownList({
+                        //    dataSource: licenseProjectTypes,
+                        //    dataTextField: "text",
+                        //    dataValueField: "value",
+                        //});
                     }
                 }
             },
@@ -214,11 +271,11 @@ $(document).ready(function () {
                field: "ProjectName",
                title: "<b>Project Name</b>",
                width: 50,
-               filterable: {
-                   ui: function (element) {
-                       element.kendoAutoComplete(); // initialize a Kendo UI AutoComplete
-                   }
-               }
+               //filterable: {
+               //    ui: function (element) {
+               //        element.kendoAutoComplete(); // initialize a Kendo UI AutoComplete
+               //    }
+               //}
            },
            {
                field: "SourceProfileName",
@@ -263,6 +320,13 @@ $(document).ready(function () {
             }
         ]
     });
+
+
+    var grid = $kendoProjectList.data("kendoGrid");
+
+    if ($hdfHasDeletePermission.val() !== 'True') {
+        grid.hideColumn(7);
+    }
 });
 
 function detailInit(e) {
@@ -273,7 +337,7 @@ function detailInit(e) {
                 read: function (options) {
                     $.ajax({
                         type: "GET",
-                        url: "http://localhost/FujiFilmUSA.Sync.Service/api/Grid/GetSpotProjectDetailsByProjectID/",
+                        url: SERVICE_BASE_URL + "api/Project/GetSpotProjectDetailsByProjectID/",
                         data: { projectID: pID },
                         dataType: "json",
                         success: function (response) {
@@ -308,6 +372,10 @@ function detailInit(e) {
             refresh: true,
             pageSizes: true
         },
+        noRecords: {
+            template: "No records to display."
+        },
+        toolbar: [{ 'name': 'createSpot', template: '<button onclick=\'alert("pending"); return false;\' class=\'k-button\'>Create New Library</button>' }],
         columns: [
              {
                  filterable: false,

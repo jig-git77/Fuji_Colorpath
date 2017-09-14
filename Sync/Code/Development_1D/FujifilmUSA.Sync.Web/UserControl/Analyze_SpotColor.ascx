@@ -24,6 +24,7 @@
 <script src="JS/ChartTooltip.js" type="text/javascript"></script>
 <script type="text/javascript">
     var record = 0;
+    var SERVICE_BASE_URL = '';
     $(document).ready(function () {
         //Default Action
         $(".hideclass").hide(); //Hide all content
@@ -40,8 +41,8 @@
 
             return false;
         });
-
-        var oId = $('#hdfOptimizationRunID').val();
+        SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
+        var optimizationId = $('#hdfOptimizationRunID').val();
         $("#divPathDetails").kendoGrid({
             dataSource: {
                 //transport: {
@@ -52,8 +53,8 @@
                     read: function (options) {
                         $.ajax({
                             type: "GET",
-                            url: "http://localhost/FujiFilmUSA.Sync.Service/api/Grid/GetPatchDetails/",
-                            data: { id: oId },
+                            url: SERVICE_BASE_URL+ "api/Chart/GetPatchDetails/",
+                            data: { id: optimizationId },
                             dataType: "json",
                             success: function (response) {
                                 options.success(response.data)
@@ -142,6 +143,7 @@
 </div>
 <div class="contant_middle">
     <div class="head">
+        <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
         <asp:HiddenField ID="hdfOptimizationRunID" runat="server" Value="0" ClientIDMode="Static" />
         <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
         <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />

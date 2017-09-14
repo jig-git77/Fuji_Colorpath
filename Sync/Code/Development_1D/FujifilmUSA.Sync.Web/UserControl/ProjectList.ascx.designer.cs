@@ -13,6 +13,42 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class ProjectList {
         
         /// <summary>
+        /// hdnBaseServiceUrl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnBaseServiceUrl;
+        
+        /// <summary>
+        /// hdfHasDeletePermission control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfHasDeletePermission;
+        
+        /// <summary>
+        /// hdfCurrentUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfCurrentUser;
+        
+        /// <summary>
+        /// hdfCurrentDeviceID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfCurrentDeviceID;
+        
+        /// <summary>
         /// lblTitle control.
         /// </summary>
         /// <remarks>

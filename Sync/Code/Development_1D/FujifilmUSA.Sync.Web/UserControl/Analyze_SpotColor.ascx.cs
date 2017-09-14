@@ -39,6 +39,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lblColorant.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Colorant;
                     lblRipSettings.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.RipSettings;
                     lblSpotTarget.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetName;
+                    hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
                 }
             }
         }

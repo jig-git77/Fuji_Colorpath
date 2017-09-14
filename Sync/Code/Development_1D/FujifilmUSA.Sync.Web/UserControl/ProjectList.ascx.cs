@@ -8,6 +8,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using System.Linq;
 using FujifilmUSA.Sync.Entity.CPSpot;
+using Newtonsoft.Json;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -63,6 +64,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Device;
                 //set dlpsuboperation session to none everytime page loads fresh(!ispostback)...
                 SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
+                hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
+                hdfHasDeletePermission.Value = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject).ToString();
+                hdfCurrentUser.Value = Convert.ToString(SessionManager.Instance.CurrentUser.UserId);
+                hdfCurrentDeviceID.Value = Convert.ToString(SessionManager.Instance.CurrentDevice.DeviceId);
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)
