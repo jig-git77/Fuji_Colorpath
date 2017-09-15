@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System;
 namespace FujifilmUSA.Sync.Entity
 {
-    //[Serializable]
+    [Serializable]
     public class SourceProfile
     {
         public short SourceProfileId { get; set; }

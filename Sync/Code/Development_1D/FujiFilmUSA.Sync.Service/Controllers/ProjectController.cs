@@ -70,7 +70,52 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
-        }       
+        }
+
+        [HttpPost]
+        public IHttpActionResult DeleteProject(int projectID)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<bool> httpResponse = new BaseResponse<bool>();
+            try
+            {
+                ProjectId = projectID;
+                _presenterProjectList.DeleteProject();
+                httpResponse.Data = true;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+
+        [HttpPost]
+        public IHttpActionResult DeleteSpotProject(int spotProjectID)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<bool> httpResponse = new BaseResponse<bool>();
+            try
+            {
+
+                SpotProjectId = spotProjectID;
+                _presenterProjectList.DeleteSpotProject();
+                httpResponse.Data = true;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
 
         #region IViewProjectList Members
         public List<Project> Projects { get; set; }

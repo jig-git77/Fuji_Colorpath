@@ -28,6 +28,7 @@ var EValidationStatus = {
     LastOK: 4,
     LastFailed: 5
 }
+
 var SERVICE_BASE_URL = '';
 var $kendoProjectList;
 var $hdfHasDeletePermission;
@@ -93,9 +94,10 @@ $(document).ready(function () {
             template: "No records to display."
         },
         detailInit: detailInit,
-        dataBound: function () {
+        dataBound: function (e) {
             var projectTypeImagePath = '';
             var projectValidationImagePath = '';
+            var projectValidationTooltip = '';
             var dataSource = this.dataSource;
             this.element.find('tr.k-master-row').each(function () {
                 var row = $(this);
@@ -166,19 +168,22 @@ $(document).ready(function () {
                 switch (data.ValidationStatus) {
                     case EValidationStatus.NotCertified:
                         projectValidationImagePath = 'Images/Validation_Not_Certified.png';
+                        projectValidationTooltip = 'Validation can not be opened as the project is not in a Certified state.';
                         break;
                     case EValidationStatus.Disabled:
                         //projectValidationImagePath = 'Images/Validation_Not_Certified.png';
                         row.find("td #imgprojectValidation").css('display', 'none');
                         break;
                     case EValidationStatus.NoMeasurement:;
-                        projectValidationImagePath = 'Images/Validation_Not_Active.png';
+                        projectValidationImagePath = 'Images/Validation_Not_Active.png';                        
                         break;
                     case EValidationStatus.LastOK:
                         projectValidationImagePath = 'Images/Validation_Last_OK.png';
+                        projectValidationTooltip = 'Last validation is OK';
                         break;
                     case EValidationStatus.LastFailed:
                         projectValidationImagePath = 'Images/Validation_Last_Failed.png';
+                        projectValidationTooltip = 'Last validation failed';
                         break;
                 }
 
@@ -188,6 +193,7 @@ $(document).ready(function () {
                 }
                 if (projectValidationImagePath != '') {
                     row.find("td #imgprojectValidation").attr('src', projectValidationImagePath);   //set the project validation image path
+                    row.find("td #imgprojectValidation").attr('title', projectValidationTooltip);   //set the project validation tooltip
                 }
 
                 switch (data.Status) {
@@ -204,11 +210,12 @@ $(document).ready(function () {
 
 
             });
+
         },
         columns: [
             {
                 //filterable: false,
-                title: "<b>Type</b>",
+                title: "<b>Type</b>",                
                 field: "LicenseType",
                 template: "<center><a id='lnkProjectType'><img id='imgprojectType' src=''></img></a></center>",
                 width: 30,
@@ -262,20 +269,41 @@ $(document).ready(function () {
                 }
             },
             {
-                filterable: false,
+                //filterable: true,
+                field: "ValidationStatus",
                 title: "<b>Validation</b>",
-                template: "<center><img id='imgprojectValidation' src=''></img></center>",
-                width: 30
+                template: "<center><img id='imgprojectValidation'  title='this will be displayed as a tooltip' src=''></img></center>",
+                width: 30,
+                filterable: {
+                    extra: false,
+                    operators: {
+                        string: {
+                            eq: "Is equal to"
+                        }
+                    },
+                    ui: function (element) {                                          
+                        var validationStatus = [{
+                            text: "NotCertified", value: 1
+                        }, {
+                            text: "Disabled", value: 2
+                        }, {
+                            text: "LastOK", value: 4
+                        }, {
+                            text: "LastFailed", value: 5
+                        }];
+
+                        element.kendoDropDownList({
+                            dataSource: validationStatus,
+                            dataTextField: "text",
+                            dataValueField: "value",
+                        });
+                    }
+                }
             },
            {
                field: "ProjectName",
                title: "<b>Project Name</b>",
                width: 50,
-               //filterable: {
-               //    ui: function (element) {
-               //        element.kendoAutoComplete(); // initialize a Kendo UI AutoComplete
-               //    }
-               //}
            },
            {
                field: "SourceProfileName",
@@ -315,7 +343,7 @@ $(document).ready(function () {
             {
                 filterable: false,
                 title: "<b></b>",
-                template: "<center><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></center>",
+                template: "<center><a id='lnkDeleteProject' onclick='return deleteProject(#=id#);'><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
                 width: 20
             }
         ]
@@ -395,8 +423,54 @@ function detailInit(e) {
                 field: "CreateDate",
                 title: "<b>Last Active</b>",
                 template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm") #',
+            },
+            {
+                filterable: false,
+                title: "<b></b>",
+                template: "<center><a id='lnkDeleteSpotProject' onclick='return deleteSpotProject(#=id#);'><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
+                width: 20
             }
         ]
     });
 
+}
+
+function deleteProject(id) {
+    if (confirm('Are you sure you want to delete all information of selected Project?')) {
+        kendo.ui.progress($kendoProjectList, true);
+        $.ajax({
+            type: "POST",
+            url: SERVICE_BASE_URL + "api/Project/DeleteProject?projectID=" + id,
+            success: function (response) {
+                console.log(JSON.stringify(response));
+                $kendoProjectList.data('kendoGrid').dataSource.read();
+                $kendoProjectList.data('kendoGrid').refresh();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(errorThrown);
+
+            }
+        });
+        kendo.ui.progress($kendoProjectList, false);
+    }
+}
+
+function deleteSpotProject(id) {
+    if (confirm('Are you sure you want to delete all information of selected Spot Target Project?')) {
+        //kendo.ui.progress($kendoProjectList, true);
+        //$.ajax({
+        //    type: "POST",
+        //    url: SERVICE_BASE_URL + "api/Project/DeleteSpotProject?spotProjectID=" + id,
+        //    success: function (response) {
+        //        console.log(JSON.stringify(response));
+        //        //$kendoProjectList.data('kendoGrid').dataSource.read();
+        //        //$kendoProjectList.data('kendoGrid').refresh();
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log(errorThrown);
+
+        //    }
+        //});
+        //kendo.ui.progress($kendoProjectList, false);
+    }
 }

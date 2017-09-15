@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FujifilmUSA.Sync.Entity.CPSpot
 {
-    //[Serializable]
+    [Serializable]
     public class SpotTarget
     {
         public short SpotTargetID { get; set; }

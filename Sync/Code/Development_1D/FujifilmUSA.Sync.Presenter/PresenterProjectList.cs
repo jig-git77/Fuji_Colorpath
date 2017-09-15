@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewProjectList.ErrorOccured;
-            _viewProjectList.Projects = projectBusiness.GetProjectsByDeviceId(_viewProjectList.DeviceId,_viewProjectList.LicenseTypeID);
+            _viewProjectList.Projects = projectBusiness.GetProjectsByDeviceId(_viewProjectList.DeviceId,_viewProjectList.LicenseTypeID);             
         }
 
         public void DeleteProject()
