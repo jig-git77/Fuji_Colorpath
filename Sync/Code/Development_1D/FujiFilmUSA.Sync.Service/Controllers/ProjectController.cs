@@ -12,6 +12,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
@@ -29,16 +31,17 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GetProjectDetailsByDeviceID(int deviceID)
         {
             IHttpActionResult actionResult = null;
-            BaseResponse<List<Project>> httpResponse = new BaseResponse<List<Project>>();
+            //BaseResponse<List<Project>> httpResponse = new BaseResponse<List<Project>>();
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
             try
             {
                 Projects = new List<Project>();
                 DeviceId = deviceID;
                 //Now we are passing LicenseTypeID as None to bring all projects based on DeviceId
                 LicenseTypeID = Convert.ToInt32(ELicenseType.None);
-
                 _presenterProjectList.GetProjectListByDeviceId();
-                httpResponse.Data = Projects;
+                var json = JsonConvert.SerializeObject(Projects);
+                httpResponse.Data = json;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
             }
             catch (Exception ex)
@@ -54,12 +57,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GetSpotProjectDetailsByProjectID(int projectID)
         {
             IHttpActionResult actionResult = null;
-            BaseResponse<List<SpotProjectLibrary>> httpResponse = new BaseResponse<List<SpotProjectLibrary>>();
+            //BaseResponse<List<SpotProjectLibrary>> httpResponse = new BaseResponse<List<SpotProjectLibrary>>();
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
             try
             {
                 ProjectId = projectID;
                 _presenterProjectList.GetSpotLibraryListByProjectId();
-                httpResponse.Data = SpotProjectLibraries;
+                var json = JsonConvert.SerializeObject(SpotProjectLibraries);
+                httpResponse.Data = json;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
             }
             catch (Exception ex)

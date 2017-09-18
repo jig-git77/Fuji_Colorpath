@@ -931,6 +931,7 @@
     <Content Include="PrintStandardTypeManagement.aspx" />
     <Content Include="ProfileManagement.aspx" />
     <Content Include="ProjectMaxLimit.aspx" />
+    <Content Include="RedirectFromProjectList.aspx" />
     <Content Include="ReferenceChartManagement.aspx" />
     <Content Include="ReportSingleMeasurement.aspx" />
     <Content Include="ReportSingleMeasurement_G7_Vali.aspx" />
@@ -2009,6 +2010,7 @@
     <Content Include="UserControl\PrintStandardTypeManagement.ascx" />
     <Content Include="UserControl\ProfileManagement.ascx" />
     <Content Include="UserControl\ProjectMaxLimit.ascx" />
+    <Content Include="UserControl\RedirectFromProjectList.ascx" />
     <Content Include="UserControl\ReferenceChartManagement.ascx" />
     <Content Include="UserControl\ReportSingleMeasurement.ascx" />
     <Content Include="UserControl\ReportSingleMeasurement_G7_Vali.ascx" />
@@ -2672,6 +2674,13 @@
     <Compile Include="ProjectMaxLimit.aspx.designer.cs">
       <DependentUpon>ProjectMaxLimit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RedirectFromProjectList.aspx.cs">
+      <DependentUpon>RedirectFromProjectList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RedirectFromProjectList.aspx.designer.cs">
+      <DependentUpon>RedirectFromProjectList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReferenceChartManagement.aspx.cs">
       <DependentUpon>ReferenceChartManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3008,6 +3017,13 @@
     </Compile>
     <Compile Include="UserControl\ProjectMaxLimit.ascx.designer.cs">
       <DependentUpon>ProjectMaxLimit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\RedirectFromProjectList.ascx.cs">
+      <DependentUpon>RedirectFromProjectList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\RedirectFromProjectList.ascx.designer.cs">
+      <DependentUpon>RedirectFromProjectList.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ReferenceChartManagement.ascx.cs">
       <DependentUpon>ReferenceChartManagement.ascx</DependentUpon>
@@ -5210,7 +5226,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

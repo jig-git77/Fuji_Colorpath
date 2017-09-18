@@ -11,7 +11,7 @@
 <script src="JS/ProjectList.js"></script>
 <script type="text/javascript" language="javascript">
 
-   
+
     function ConfirmDeleteProject() {
         if (confirm('<%= ProjectListDeleteProjectConfirmation %>'))
             return true;
@@ -166,6 +166,10 @@
     .k-grid .k-hierarchy-cell {
         width: 10px;
         overflow: hidden;
+    }
+
+    #kendoProjectList >  .k-grid-content {
+        min-height: 100px;        
     }
 </style>
 

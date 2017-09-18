@@ -46,18 +46,25 @@ $(document).ready(function () {
         dataSource: {
             transport: {
                 read: function (options) {
+                    //kendo.ui.progress($kendoProjectList, true);
+                    kendo.ui.progress($('#kendoProjectList .k-grid-content'), true);
                     $.ajax({
                         type: "GET",
                         url: SERVICE_BASE_URL + "api/Project/GetProjectDetailsByDeviceID/",
                         data: { deviceID: CurrentDeviceID },
                         dataType: "json",
-                        success: function (response) {
-                            options.success(response.data)
+                        success: function (response) {                            
+                            var jsonProjectList = JSON.parse(response.data);
+                            options.success(jsonProjectList);
+                            kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             alert(textStatus);
+                            kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
                         }
                     });
+                    //kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
+                    //kendo.ui.progress($kendoProjectList, false);
                 },
             },
             schema: {
@@ -85,7 +92,7 @@ $(document).ready(function () {
             pageSize: 10
         },
         sortable: true,
-        filterable: true,
+        filterable: true,        
         pageable: {
             refresh: true,
             pageSizes: true
@@ -175,7 +182,7 @@ $(document).ready(function () {
                         row.find("td #imgprojectValidation").css('display', 'none');
                         break;
                     case EValidationStatus.NoMeasurement:;
-                        projectValidationImagePath = 'Images/Validation_Not_Active.png';                        
+                        projectValidationImagePath = 'Images/Validation_Not_Active.png';
                         break;
                     case EValidationStatus.LastOK:
                         projectValidationImagePath = 'Images/Validation_Last_OK.png';
@@ -215,7 +222,7 @@ $(document).ready(function () {
         columns: [
             {
                 //filterable: false,
-                title: "<b>Type</b>",                
+                title: "<b>Type</b>",
                 field: "LicenseType",
                 template: "<center><a id='lnkProjectType'><img id='imgprojectType' src=''></img></a></center>",
                 width: 30,
@@ -246,25 +253,6 @@ $(document).ready(function () {
                                 console.log(errorThrown);
                             }
                         });
-
-                        //element.kendoAutoComplete(); // initialize a Kendo UI AutoComplete
-                        //var licenseProjectTypes = [{
-                        //    text: "Alignment Curves", value: 1
-                        //}, {
-                        //    text: "DLP Optimization", value: 2
-                        //}, {
-                        //    text: "Ink Optimization", value: 3
-                        //}, {
-                        //    text: "Sync4D Certification", value: 5
-                        //}, {
-                        //    text: "Spot Color Library", value: 10
-                        //}];
-
-                        //element.kendoDropDownList({
-                        //    dataSource: licenseProjectTypes,
-                        //    dataTextField: "text",
-                        //    dataValueField: "value",
-                        //});
                     }
                 }
             },
@@ -272,7 +260,7 @@ $(document).ready(function () {
                 //filterable: true,
                 field: "ValidationStatus",
                 title: "<b>Validation</b>",
-                template: "<center><img id='imgprojectValidation'  title='this will be displayed as a tooltip' src=''></img></center>",
+                template: "<center><a onclick='return Redirect(#=id#,\"ProjectValidation\");'><img id='imgprojectValidation'  title='this will be displayed as a tooltip' src=''></img></a></center>",
                 width: 30,
                 filterable: {
                     extra: false,
@@ -281,7 +269,7 @@ $(document).ready(function () {
                             eq: "Is equal to"
                         }
                     },
-                    ui: function (element) {                                          
+                    ui: function (element) {
                         var validationStatus = [{
                             text: "NotCertified", value: 1
                         }, {
@@ -355,6 +343,33 @@ $(document).ready(function () {
     if ($hdfHasDeletePermission.val() !== 'True') {
         grid.hideColumn(7);
     }
+
+    $kendoProjectList.on('click', '#lnkDeleteSpotProject', function (e) {
+        var spotProjectID = $(this).attr('data-spot');
+        var detailGrid = $(this).closest('.k-grid').data("kendoGrid");
+
+        //$(this).closest('.k-grid').data('kendoGrid').dataSource.read();
+        //$(this).closest('.k-grid').data('kendoGrid').refresh();
+
+        if (confirm('Are you sure you want to delete all information of selected Spot Target Project?')) {
+            kendo.ui.progress($('#kendoProjectList .k-grid-content'), true);
+            //kendo.ui.progress($kendoProjectList, true);
+            $.ajax({
+                type: "POST",
+                url: SERVICE_BASE_URL + "api/Project/DeleteSpotProject?spotProjectID=" + spotProjectID,
+                success: function (response) {
+                    console.log(JSON.stringify(response));
+                    detailGrid.dataSource.read();
+                    detailGrid.refresh();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+            kendo.ui.progress($kendoProjectList, false);
+        }
+
+    })
 });
 
 function detailInit(e) {
@@ -369,7 +384,10 @@ function detailInit(e) {
                         data: { projectID: pID },
                         dataType: "json",
                         success: function (response) {
-                            options.success(response.data)
+                            var jsonSpotProjectList = JSON.parse(response.data);
+                            console.log(response.data);
+                            console.log(jsonSpotProjectList);
+                            options.success(jsonSpotProjectList);
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             alert(textStatus);
@@ -380,6 +398,12 @@ function detailInit(e) {
             schema: {
                 model: {
                     fields: {
+                        ProjectId: {
+                            from: "ProjectId"
+                        },
+                        SpotProjectId: {
+                            from: "SpotProjectId"
+                        },
                         ProjectName: {
                             from: "ProjectName"
                         },
@@ -403,14 +427,15 @@ function detailInit(e) {
         noRecords: {
             template: "No records to display."
         },
-        toolbar: [{ 'name': 'createSpot', template: '<button onclick=\'alert("pending"); return false;\' class=\'k-button\'>Create New Library</button>' }],
+        //toolbar: [{ 'name': 'createSpot', template: '<button onclick="location.href = \'http://localhost/FujifilmUSA.Sync.Web/RedirectFromProjectList.aspx?ProjectID=' + pID + ';\'" class=\'k-button\'>Create New Library</button>' }],
+        toolbar: [{ 'name': 'createSpot', template: '<button onclick="return Redirect(' + pID + ',\'AddSpotProject\');" class=\'k-button\'>Create New Library</button>' }],
         columns: [
-             {
-                 filterable: false,
-                 title: "<b></b>",
-                 template: "<center><img id='imgspotProject' src='Images/open_folder_yellow.png' style='width: 20px;'></img></center>",
-                 width: 40
-             },
+             //{
+             //    filterable: false,
+             //    title: "<b></b>",
+             //    template: "<center><img id='imgspotProject' src='Images/open_folder_yellow.png' style='width: 20px;'></img></center>",
+             //    width: 40
+             //},
            {
                field: "ProjectName",
                title: "<b>Name</b>",
@@ -427,11 +452,13 @@ function detailInit(e) {
             {
                 filterable: false,
                 title: "<b></b>",
-                template: "<center><a id='lnkDeleteSpotProject' onclick='return deleteSpotProject(#=id#);'><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
-                width: 20
+                template: "<center><a id='lnkDeleteSpotProject' data-spot='#=SpotProjectId#'><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
+                width: 40
             }
         ]
     });
+
+
 
 }
 
@@ -473,4 +500,9 @@ function deleteSpotProject(id) {
         //});
         //kendo.ui.progress($kendoProjectList, false);
     }
+}
+
+function Redirect(projectID, type) {
+    document.location.href = 'RedirectFromProjectList.aspx?RedirectType=' + type + '&ProjectID=' + projectID;
+    return false;
 }
