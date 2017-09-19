@@ -199,6 +199,7 @@ $(document).ready(function () {
                     row.find("td #imgprojectType").attr('src', projectTypeImagePath);   //set the project type image path
                 }
                 if (projectValidationImagePath != '') {
+                    row.find("td #lnkValidation").css('pointer-events', 'none');
                     row.find("td #imgprojectValidation").attr('src', projectValidationImagePath);   //set the project validation image path
                     row.find("td #imgprojectValidation").attr('title', projectValidationTooltip);   //set the project validation tooltip
                 }
@@ -215,7 +216,7 @@ $(document).ready(function () {
                         break;
                 }
 
-
+                
             });
 
         },
@@ -260,7 +261,7 @@ $(document).ready(function () {
                 //filterable: true,
                 field: "ValidationStatus",
                 title: "<b>Validation</b>",
-                template: "<center><a onclick='return Redirect(#=id#,\"ProjectValidation\");'><img id='imgprojectValidation'  title='this will be displayed as a tooltip' src=''></img></a></center>",
+                template: "<center><a id='lnkValidation' onclick='return Redirect(#=id#,\"ProjectValidation\");'><img id='imgprojectValidation'  title='this will be displayed as a tooltip' src=''></img></a></center>",
                 width: 30,
                 filterable: {
                     extra: false,
@@ -430,12 +431,12 @@ function detailInit(e) {
         //toolbar: [{ 'name': 'createSpot', template: '<button onclick="location.href = \'http://localhost/FujifilmUSA.Sync.Web/RedirectFromProjectList.aspx?ProjectID=' + pID + ';\'" class=\'k-button\'>Create New Library</button>' }],
         toolbar: [{ 'name': 'createSpot', template: '<button onclick="return Redirect(' + pID + ',\'AddSpotProject\');" class=\'k-button\'>Create New Library</button>' }],
         columns: [
-             //{
-             //    filterable: false,
-             //    title: "<b></b>",
-             //    template: "<center><img id='imgspotProject' src='Images/open_folder_yellow.png' style='width: 20px;'></img></center>",
-             //    width: 40
-             //},
+             {
+                 filterable: false,
+                 title: "<b></b>",
+                 template: "<center><a onclick='return Redirect(#=SpotProjectId#,\"SelectSpotTargetProject\");'><img id='imgspotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
+                 width: 40
+             },
            {
                field: "ProjectName",
                title: "<b>Name</b>",

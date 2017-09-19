@@ -59,6 +59,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                               : "Measurement.aspx");
                     }
                 }
+                else if(Convert.ToString(Request.QueryString["RedirectType"]) == "SelectSpotTargetProject")
+                {
+                    _presenterProjectList.GetProjectDetail_SpotProject();
+                    if (!IsErrorOccured)
+                    {
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = Project.SpotTargetProject.OptimizeRuns.Last();
+                        SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.SpotLibrary;
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                        Response.Redirect("Analyze_SpotColor.aspx");
+                    }
+                }
             }
         }
         #endregion
