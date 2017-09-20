@@ -88,7 +88,8 @@ $(document).ready(function () {
                             from: "PrintCondition.Colorant"
                         },
                         CreateDate: {
-                            from: "CreateDate"
+                            from: "CreateDate",
+                            type: "date"
                         }
                     }
                 }                
@@ -180,19 +181,20 @@ $(document).ready(function () {
                 switch (data.LicenseType) {
                     case ELicenseType.None: break;
                     case ELicenseType.Sync1D:
-                        projectTypeTooltip = 'Alignment Curves';
+                        //projectTypeTooltip = 'Alignment Curves';
+                        projectTypeTooltip = Resources.ELicenseType_Sync1D;
                         break;
                     case ELicenseType.DLP:
-                        projectTypeTooltip = 'DLP Optimization';
+                        projectTypeTooltip = Resources.ELicenseType_DLP;
                         break;
                     case ELicenseType.InkOptimization:
-                        projectTypeTooltip = 'Ink Optimization';
+                        projectTypeTooltip = Resources.ELicenseType_InkOptimization;
                         break;
                     case ELicenseType.InkOptimizationSource:
-                        projectTypeTooltip = 'Ink Optimization Source';
+                        projectTypeTooltip = Resources.ELicenseType_InkOptimization_Source;
                         break;
                     case ELicenseType.Sync4DCertification:
-                        projectTypeTooltip = 'Sync4D Certification';
+                        projectTypeTooltip = Resources.ELicenseType_Sync4DCertification;
                         break;                    
                     case ELicenseType.Validation:
                         break;
@@ -205,7 +207,7 @@ $(document).ready(function () {
                         projectValidationImagePath = 'Images/Validation_Not_Certified.png';
                         row.find("td #lnkValidation").attr('onclick', '');
                         
-                        projectValidationTooltip = 'Validation can not be opened as the project is not in a Certified state.';
+                        projectValidationTooltip = Resources.ValidationStatus_NotCertified;
                         break;
                     case EValidationStatus.Disabled:
                         //projectValidationImagePath = 'Images/Validation_Not_Certified.png';
@@ -216,11 +218,11 @@ $(document).ready(function () {
                         break;
                     case EValidationStatus.LastOK:
                         projectValidationImagePath = 'Images/Validation_Last_OK.png';
-                        projectValidationTooltip = 'Last validation is OK';
+                        projectValidationTooltip = Resources.ValidationStatus_LastOK;
                         break;
                     case EValidationStatus.LastFailed:
                         projectValidationImagePath = 'Images/Validation_Last_Failed.png';
-                        projectValidationTooltip = 'Last validation failed';
+                        projectValidationTooltip = Resources.ValidationStatus_LastFailed;
                         break;
                 }
 
@@ -467,7 +469,7 @@ function detailInit(e) {
              {
                  filterable: false,
                  title: "<b></b>",
-                 template: "<center><a onclick='return Redirect(#=SpotProjectId#,\"SelectSpotTargetProject\");'><img id='imgspotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
+                 template: "<center><a onclick='return Redirect(#=SpotProjectId#,\"SelectSpotTargetProject\");'><img title='Open' id='imgspotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
                  width: 40
              },
            {

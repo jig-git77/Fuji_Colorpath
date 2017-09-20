@@ -31,6 +31,19 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues = new Dictionary<string, string>();
             _globalResourceValues = new Dictionary<string, string>();
             _resourceValues.Add("GridDateTimeColumnResource1", "GridDateTimeColumnResource1");
+            _resourceValues.Add("ELicenseType_DLP", "ELicenseType_DLP");
+            _resourceValues.Add("ELicenseType_Sync1D", "ELicenseType_Sync1D");
+            _resourceValues.Add("ELicenseType_Sync4DCertification", "ELicenseType_Sync4DCertification");
+            _resourceValues.Add("ELicenseType_InkOptimization", "ELicenseType_InkOptimization");
+            _resourceValues.Add("ELicenseType_InkOptimization_Source", "ELicenseType_InkOptimization_Source");
+            _resourceValues.Add("ELicenseType_SpotLibrary", "ELicenseType_SpotLibrary");
+            _resourceValues.Add("ELicenseType_Validation", "ELicenseType_Validation");
+            _resourceValues.Add("ValidationStatus_LastOK", "ValidationStatus_LastOK");
+            _resourceValues.Add("ValidationStatus_NotCertified", "ValidationStatus_NotCertified");
+            _resourceValues.Add("ValidationStatus_LastFailed", "ValidationStatus_LastFailed");
+            _resourceValues.Add("ValidationStatus_Disabled", "ValidationStatus_Disabled");
+            _resourceValues.Add("ValidationStatus_None", "ValidationStatus_None");
+            _resourceValues.Add("ValidationStatus_NoMeasurement", "ValidationStatus_NoMeasurement");
             base.Initialize(controllerContext);
         }
 
