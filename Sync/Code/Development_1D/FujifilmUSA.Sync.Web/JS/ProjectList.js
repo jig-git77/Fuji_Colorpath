@@ -34,6 +34,7 @@ var $kendoProjectList;
 var $hdfHasDeletePermission;
 var CurrentDeviceID;
 var CurrentUserID;
+var Resources = {};
 
 $(document).ready(function () {
     SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
@@ -55,7 +56,9 @@ $(document).ready(function () {
                         dataType: "json",
                         success: function (response) {                            
                             var jsonProjectList = JSON.parse(response.data);
-                            options.success(jsonProjectList);
+                            console.log(jsonProjectList);
+                            Resources = jsonProjectList.GlobalResources;
+                            options.success(jsonProjectList.Projects);
                             kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -68,6 +71,7 @@ $(document).ready(function () {
                 },
             },
             schema: {
+                //data: "",
                 model: {
                     id: "ProjectId",
                     fields: {
@@ -87,7 +91,7 @@ $(document).ready(function () {
                             from: "CreateDate"
                         }
                     }
-                }
+                }                
             },
             pageSize: 10
         },
@@ -105,6 +109,7 @@ $(document).ready(function () {
             var projectTypeImagePath = '';
             var projectValidationImagePath = '';
             var projectValidationTooltip = '';
+            var projectTypeTooltip = '';
             var dataSource = this.dataSource;
             this.element.find('tr.k-master-row').each(function () {
                 var row = $(this);
@@ -171,10 +176,35 @@ $(document).ready(function () {
                         break;
                 }
 
+                //set project type image tooltip
+                switch (data.LicenseType) {
+                    case ELicenseType.None: break;
+                    case ELicenseType.Sync1D:
+                        projectTypeTooltip = 'Alignment Curves';
+                        break;
+                    case ELicenseType.DLP:
+                        projectTypeTooltip = 'DLP Optimization';
+                        break;
+                    case ELicenseType.InkOptimization:
+                        projectTypeTooltip = 'Ink Optimization';
+                        break;
+                    case ELicenseType.InkOptimizationSource:
+                        projectTypeTooltip = 'Ink Optimization Source';
+                        break;
+                    case ELicenseType.Sync4DCertification:
+                        projectTypeTooltip = 'Sync4D Certification';
+                        break;                    
+                    case ELicenseType.Validation:
+                        break;
+                    case ELicenseType.IccProfiling: break;
+                }
+
                 //set project validation image
                 switch (data.ValidationStatus) {
                     case EValidationStatus.NotCertified:
                         projectValidationImagePath = 'Images/Validation_Not_Certified.png';
+                        row.find("td #lnkValidation").attr('onclick', '');
+                        
                         projectValidationTooltip = 'Validation can not be opened as the project is not in a Certified state.';
                         break;
                     case EValidationStatus.Disabled:
@@ -197,9 +227,10 @@ $(document).ready(function () {
 
                 if (projectTypeImagePath != '') {
                     row.find("td #imgprojectType").attr('src', projectTypeImagePath);   //set the project type image path
+                    row.find("td #imgprojectType").attr('title', projectTypeTooltip);   //set the project type image path
                 }
                 if (projectValidationImagePath != '') {
-                    row.find("td #lnkValidation").css('pointer-events', 'none');
+                    
                     row.find("td #imgprojectValidation").attr('src', projectValidationImagePath);   //set the project validation image path
                     row.find("td #imgprojectValidation").attr('title', projectValidationTooltip);   //set the project validation tooltip
                 }
@@ -223,10 +254,11 @@ $(document).ready(function () {
         columns: [
             {
                 //filterable: false,
-                title: "<b>Type</b>",
+                title: "<b>Type</b>",                
                 field: "LicenseType",
                 template: "<center><a id='lnkProjectType'><img id='imgprojectType' src=''></img></a></center>",
                 width: 30,
+                sortable: false,
                 filterable: {
                     extra: false,
                     operators: {
@@ -263,6 +295,7 @@ $(document).ready(function () {
                 title: "<b>Validation</b>",
                 template: "<center><a id='lnkValidation' onclick='return Redirect(#=id#,\"ProjectValidation\");'><img id='imgprojectValidation'  title='this will be displayed as a tooltip' src=''></img></a></center>",
                 width: 30,
+                sortable: false,
                 filterable: {
                     extra: false,
                     operators: {
@@ -290,28 +323,28 @@ $(document).ready(function () {
                 }
             },
            {
-               field: "ProjectName",
-               title: "<b>Project Name</b>",
+               field: "ProjectName",               
+               title: "<b title='Click here to sort'>Name</b>",
                width: 50,
            },
            {
                field: "SourceProfileName",
-               title: "<b>Standard</b>",
+               title: "<b title='Click here to sort'>Standard</b>",
                width: 50
            },
            {
                field: "PrintConditionMedia",
-               title: "<b>Media</b>",
+               title: "<b title='Click here to sort'>Media</b>",
                width: 50,
            },
            {
                field: "PrintConditionColorant",
-               title: "<b>Colorant</b>",
+               title: "<b title='Click here to sort'>Colorant</b>",
                width: 50,
            },
             {
                 field: "CreateDate",
-                title: "<b>Last Active</b>",
+                title: "<b title='Click here to sort'>Last Active</b>",
                 template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm") #',
                 width: 50,
                 filterable: {
@@ -332,7 +365,7 @@ $(document).ready(function () {
             {
                 filterable: false,
                 title: "<b></b>",
-                template: "<center><a id='lnkDeleteProject' onclick='return deleteProject(#=id#);'><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
+                template: "<center><a id='lnkDeleteProject' title='Delete Project' onclick='return deleteProject(#=id#);'><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
                 width: 20
             }
         ]
@@ -453,7 +486,7 @@ function detailInit(e) {
             {
                 filterable: false,
                 title: "<b></b>",
-                template: "<center><a id='lnkDeleteSpotProject' data-spot='#=SpotProjectId#'><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
+                template: "<center><a id='lnkDeleteSpotProject' title='Delete Project' data-spot='#=SpotProjectId#'><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
                 width: 40
             }
         ]

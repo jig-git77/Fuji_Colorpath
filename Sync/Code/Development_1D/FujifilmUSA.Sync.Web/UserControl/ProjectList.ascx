@@ -432,7 +432,7 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-    <div class="clear">
+    <div class="clear">        
     </div>
     <div class="listDevice">
         <br />

@@ -1059,4 +1059,7 @@
   <data name="ProjectList_DeleteSpotProject_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete all information of selected Spot Target Project?</value>
   </data>
+  <data name="GridDateTimeColumnResource1" xml:space="preserve">
+    <value>Last Active</value>
+  </data>
 </root>

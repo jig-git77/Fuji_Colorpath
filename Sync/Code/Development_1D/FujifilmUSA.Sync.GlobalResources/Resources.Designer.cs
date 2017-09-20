@@ -2446,6 +2446,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Active.
+        /// </summary>
+        internal static string GridDateTimeColumnResource1 {
+            get {
+                return ResourceManager.GetString("GridDateTimeColumnResource1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid IsAverageOfMeasurements have been provided..
         /// </summary>
         internal static string Invalid_IsAverageOfMeasurements {
