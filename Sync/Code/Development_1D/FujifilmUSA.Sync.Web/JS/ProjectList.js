@@ -231,6 +231,7 @@ $(document).ready(function () {
                         break;
                     case EValidationStatus.NoMeasurement:;
                         projectValidationImagePath = 'Images/Validation_Not_Active.png';
+                        projectValidationTooltip = Resources.ValidationStatus_NoMeasurement;
                         break;
                     case EValidationStatus.LastOK:
                         projectValidationImagePath = 'Images/Validation_Last_OK.png';
