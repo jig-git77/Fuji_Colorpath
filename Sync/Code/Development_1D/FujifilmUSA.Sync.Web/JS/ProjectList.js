@@ -54,12 +54,13 @@ $(document).ready(function () {
                         url: SERVICE_BASE_URL + "api/Project/GetProjectDetailsByDeviceID/",
                         data: { deviceID: CurrentDeviceID },
                         dataType: "json",
-                        success: function (response) {                            
+                        success: function (response) {
                             var jsonProjectList = JSON.parse(response.data);
                             console.log(jsonProjectList);
                             Resources = jsonProjectList.GlobalResources;
                             options.success(jsonProjectList.Projects);
                             kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
+                            var grid = $kendoProjectList.data("kendoGrid");
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             alert(textStatus);
@@ -328,21 +329,85 @@ $(document).ready(function () {
                field: "ProjectName",               
                title: "<b title='Click here to sort'>Name</b>",
                width: 50,
+               filterable: {
+                   operators: {
+                       string: {
+                           contains: "Contains",
+                           eq: "Is equal to",
+                           neq: "Not equal to",
+                           startswith: "Starts with",
+                           doesnotcontain: "Does not contain",
+                           endswith: "Ends with",
+                           isnull: "Is null",
+                           isnotnull: "Is not null",
+                           isempty: "Is empty",
+                           isnotempty: "Is not empty",
+                       }
+                   },
+               }           
            },
            {
                field: "SourceProfileName",
                title: "<b title='Click here to sort'>Standard</b>",
-               width: 50
+               width: 50,
+               filterable: {
+                   operators: {
+                       string: {
+                           contains: "Contains",
+                           eq: "Is equal to",
+                           neq: "Not equal to",
+                           startswith: "Starts with",
+                           doesnotcontain: "Does not contain",
+                           endswith: "Ends with",
+                           isnull: "Is null",
+                           isnotnull: "Is not null",
+                           isempty: "Is empty",
+                           isnotempty: "Is not empty",
+                       }
+                   },
+               }
            },
            {
                field: "PrintConditionMedia",
                title: "<b title='Click here to sort'>Media</b>",
                width: 50,
+               filterable: {
+                   operators: {
+                       string: {
+                           contains: "Contains",
+                           eq: "Is equal to",
+                           neq: "Not equal to",
+                           startswith: "Starts with",
+                           doesnotcontain: "Does not contain",
+                           endswith: "Ends with",
+                           isnull: "Is null",
+                           isnotnull: "Is not null",
+                           isempty: "Is empty",
+                           isnotempty: "Is not empty",
+                       }
+                   },
+               }
            },
            {
                field: "PrintConditionColorant",
                title: "<b title='Click here to sort'>Colorant</b>",
                width: 50,
+               filterable: {
+                   operators: {
+                       string: {
+                           contains: "Contains",
+                           eq: "Is equal to",
+                           neq: "Not equal to",
+                           startswith: "Starts with",
+                           doesnotcontain: "Does not contain",
+                           endswith: "Ends with",
+                           isnull: "Is null",
+                           isnotnull: "Is not null",
+                           isempty: "Is empty",
+                           isnotempty: "Is not empty",
+                       }
+                   },
+               }
            },
             {
                 field: "CreateDate",
@@ -353,10 +418,10 @@ $(document).ready(function () {
                     extra: false,
                     operators: {
                         date: {
+                            gt: "Is after",
                             eq: "Equal to",
                             neq: "Not equal to",
-                            gte: "Is after or equal to",
-                            gt: "Is after",
+                            gte: "Is after or equal to",                            
                             lte: "Is before or equal to",
                             lt: "Is before"
                         }
@@ -366,7 +431,7 @@ $(document).ready(function () {
             },
             {
                 filterable: false,
-                title: "<b></b>",
+                title: "<center><a id='lnkLinkFilter' title='Clear Filter' onclick='clearFilter()'><img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;'></img></a></center>",
                 template: "<center><a id='lnkDeleteProject' title='Delete Project' onclick='return deleteProject(#=id#);'><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
                 width: 20
             }
@@ -405,7 +470,7 @@ $(document).ready(function () {
             kendo.ui.progress($kendoProjectList, false);
         }
 
-    })
+    })  
 });
 
 function detailInit(e) {
@@ -463,7 +528,6 @@ function detailInit(e) {
         noRecords: {
             template: "No records to display."
         },
-        //toolbar: [{ 'name': 'createSpot', template: '<button onclick="location.href = \'http://localhost/FujifilmUSA.Sync.Web/RedirectFromProjectList.aspx?ProjectID=' + pID + ';\'" class=\'k-button\'>Create New Library</button>' }],
         toolbar: [{ 'name': 'createSpot', template: '<button onclick="return Redirect(' + pID + ',\'AddSpotProject\');" class=\'k-button\'>Create New Library</button>' }],
         columns: [
              {
@@ -475,27 +539,82 @@ function detailInit(e) {
            {
                field: "ProjectName",
                title: "<b>Name</b>",
+               filterable: {
+                   operators: {
+                       string: {
+                           contains: "Contains",
+                           eq: "Is equal to",
+                           neq: "Not equal to",
+                           startswith: "Starts with",
+                           doesnotcontain: "Does not contain",
+                           endswith: "Ends with",
+                           isnull: "Is null",
+                           isnotnull: "Is not null",
+                           isempty: "Is empty",
+                           isnotempty: "Is not empty",
+                       }
+                   },
+               }
            },
            {
                field: "LibraryName",
                title: "<b>Library</b>",
+               filterable: {
+                   operators: {
+                       string: {
+                           contains: "Contains",
+                           eq: "Is equal to",
+                           neq: "Not equal to",
+                           startswith: "Starts with",
+                           doesnotcontain: "Does not contain",
+                           endswith: "Ends with",
+                           isnull: "Is null",
+                           isnotnull: "Is not null",
+                           isempty: "Is empty",
+                           isnotempty: "Is not empty",
+                       }
+                   },
+               }
            },
             {
                 field: "CreateDate",
                 title: "<b>Last Active</b>",
                 template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm") #',
+                filterable: {
+                    extra: false,
+                    operators: {
+                        date: {
+                            lt: "Is before",
+                            gt: "Is after",
+                            eq: "Equal to",
+                            neq: "Not equal to",
+                            gte: "Is after or equal to",
+                            lte: "Is before or equal to",
+                            
+                        }
+                    },
+                    ui: "datetimepicker" // use Kendo UI DateTimePicker
+                }
             },
             {
                 filterable: false,
-                title: "<b></b>",
+                //title: "<center><a id='lnkInnerGridFilter' title='Clear Filter' data-spot='#=SpotProjectId#'><img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;'></img></a></center>",
+                headerTemplate: "<center><a id='lnkInnerGridFilter' title='Clear Filter' onclick='clearNestGridFilters()'><img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;'></img></a></center>",
                 template: "<center><a id='lnkDeleteSpotProject' title='Delete Project' data-spot='#=SpotProjectId#'><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
                 width: 40
             }
         ]
     });
+    
+}
 
 
+function clearFilter() {
+    $("form.k-filter-menu button[type='reset']").trigger("click");
+}
 
+function clearNestGridFilters(btn) {
+    $("form.k-filter-menu button[type='reset']").trigger("click");
 }
 
 function deleteProject(id) {
@@ -518,25 +637,6 @@ function deleteProject(id) {
     }
 }
 
-function deleteSpotProject(id) {
-    if (confirm('Are you sure you want to delete all information of selected Spot Target Project?')) {
-        //kendo.ui.progress($kendoProjectList, true);
-        //$.ajax({
-        //    type: "POST",
-        //    url: SERVICE_BASE_URL + "api/Project/DeleteSpotProject?spotProjectID=" + id,
-        //    success: function (response) {
-        //        console.log(JSON.stringify(response));
-        //        //$kendoProjectList.data('kendoGrid').dataSource.read();
-        //        //$kendoProjectList.data('kendoGrid').refresh();
-        //    },
-        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //        console.log(errorThrown);
-
-        //    }
-        //});
-        //kendo.ui.progress($kendoProjectList, false);
-    }
-}
 
 function Redirect(projectID, type) {
     document.location.href = 'RedirectFromProjectList.aspx?RedirectType=' + type + '&ProjectID=' + projectID;
