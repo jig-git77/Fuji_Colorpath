@@ -55,12 +55,27 @@ $(document).ready(function () {
                         data: { deviceID: CurrentDeviceID },
                         dataType: "json",
                         success: function (response) {
+                            debugger;
                             var jsonProjectList = JSON.parse(response.data);
                             console.log(jsonProjectList);
                             Resources = jsonProjectList.GlobalResources;
                             options.success(jsonProjectList.Projects);
                             kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
-                            var grid = $kendoProjectList.data("kendoGrid");
+
+                            //var grid = $kendoProjectList.data("kendoGrid");
+                            $kendoProjectList.find("th[data-field=LicenseType] b").html(Resources.GridTemplateColumnResource0);
+                            $kendoProjectList.find("th[data-field=ValidationStatus] b").html(Resources.GridTemplateColumnResource1);
+                            $kendoProjectList.find("th[data-field=ProjectName] b").html(Resources.GridTemplateColumnResource3);
+                            $kendoProjectList.find("th[data-field=ProjectName] b").attr("title", Resources.ToolTipClickToShort);
+                            $kendoProjectList.find("th[data-field=SourceProfileName] b").html(Resources.GridTemplateColumnResource4);
+                            $kendoProjectList.find("th[data-field=SourceProfileName] b").attr("title", Resources.ToolTipClickToShort);
+                            $kendoProjectList.find("th[data-field=PrintConditionMedia] b").html(Resources.GridTemplateColumnResource5);
+                            $kendoProjectList.find("th[data-field=PrintConditionMedia] b").attr("title", Resources.ToolTipClickToShort);
+                            $kendoProjectList.find("th[data-field=PrintConditionColorant] b").html(Resources.GridTemplateColumnResource6);
+                            $kendoProjectList.find("th[data-field=PrintConditionColorant] b").attr("title", Resources.ToolTipClickToShort);
+                            $kendoProjectList.find("th[data-field=CreateDate] b").html(Resources.GridDateTimeColumnResource1);
+                            $kendoProjectList.find("th[data-field=CreateDate] b").attr("title", Resources.ToolTipClickToShort);
+
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             alert(textStatus);
@@ -93,12 +108,12 @@ $(document).ready(function () {
                             type: "date"
                         }
                     }
-                }                
+                }
             },
             pageSize: 10
         },
         sortable: true,
-        filterable: true,        
+        filterable: true,
         pageable: {
             refresh: true,
             pageSizes: true
@@ -196,7 +211,7 @@ $(document).ready(function () {
                         break;
                     case ELicenseType.Sync4DCertification:
                         projectTypeTooltip = Resources.ELicenseType_Sync4DCertification;
-                        break;                    
+                        break;
                     case ELicenseType.Validation:
                         break;
                     case ELicenseType.IccProfiling: break;
@@ -207,7 +222,7 @@ $(document).ready(function () {
                     case EValidationStatus.NotCertified:
                         projectValidationImagePath = 'Images/Validation_Not_Certified.png';
                         row.find("td #lnkValidation").attr('onclick', '');
-                        
+
                         projectValidationTooltip = Resources.ValidationStatus_NotCertified;
                         break;
                     case EValidationStatus.Disabled:
@@ -233,7 +248,7 @@ $(document).ready(function () {
                     row.find("td #imgprojectType").attr('title', projectTypeTooltip);   //set the project type image path
                 }
                 if (projectValidationImagePath != '') {
-                    
+
                     row.find("td #imgprojectValidation").attr('src', projectValidationImagePath);   //set the project validation image path
                     row.find("td #imgprojectValidation").attr('title', projectValidationTooltip);   //set the project validation tooltip
                 }
@@ -250,14 +265,14 @@ $(document).ready(function () {
                         break;
                 }
 
-                
+
             });
 
         },
         columns: [
             {
                 //filterable: false,
-                title: "<b>Type</b>",                
+                title: "<b></b>",
                 field: "LicenseType",
                 template: "<center><a id='lnkProjectType'><img id='imgprojectType' src=''></img></a></center>",
                 width: 30,
@@ -295,7 +310,7 @@ $(document).ready(function () {
             {
                 //filterable: true,
                 field: "ValidationStatus",
-                title: "<b>Validation</b>",
+                title: "<b></b>",
                 template: "<center><a id='lnkValidation' onclick='return Redirect(#=id#,\"ProjectValidation\");'><img id='imgprojectValidation'  title='this will be displayed as a tooltip' src=''></img></a></center>",
                 width: 30,
                 sortable: false,
@@ -326,8 +341,8 @@ $(document).ready(function () {
                 }
             },
            {
-               field: "ProjectName",               
-               title: "<b title='Click here to sort'>Name</b>",
+               field: "ProjectName",
+               title: "<b title='Click here to sort'></b>",
                width: 50,
                filterable: {
                    operators: {
@@ -344,11 +359,11 @@ $(document).ready(function () {
                            isnotempty: "Is not empty",
                        }
                    },
-               }           
+               }
            },
            {
                field: "SourceProfileName",
-               title: "<b title='Click here to sort'>Standard</b>",
+               title: "<b title='Click here to sort'></b>",
                width: 50,
                filterable: {
                    operators: {
@@ -369,7 +384,7 @@ $(document).ready(function () {
            },
            {
                field: "PrintConditionMedia",
-               title: "<b title='Click here to sort'>Media</b>",
+               title: "<b title='Click here to sort'></b>",
                width: 50,
                filterable: {
                    operators: {
@@ -390,7 +405,7 @@ $(document).ready(function () {
            },
            {
                field: "PrintConditionColorant",
-               title: "<b title='Click here to sort'>Colorant</b>",
+               title: "<b title='Click here to sort'></b>",
                width: 50,
                filterable: {
                    operators: {
@@ -411,7 +426,7 @@ $(document).ready(function () {
            },
             {
                 field: "CreateDate",
-                title: "<b title='Click here to sort'>Last Active</b>",
+                title: "<b title='Click here to sort'></b>",
                 template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm") #',
                 width: 50,
                 filterable: {
@@ -421,7 +436,7 @@ $(document).ready(function () {
                             gt: "Is after",
                             eq: "Equal to",
                             neq: "Not equal to",
-                            gte: "Is after or equal to",                            
+                            gte: "Is after or equal to",
                             lte: "Is before or equal to",
                             lt: "Is before"
                         }
@@ -470,7 +485,7 @@ $(document).ready(function () {
             kendo.ui.progress($kendoProjectList, false);
         }
 
-    })  
+    })
 });
 
 function detailInit(e) {
@@ -538,7 +553,7 @@ function detailInit(e) {
              },
            {
                field: "ProjectName",
-               title: "<b>Name</b>",
+               title: "<b>" + Resources.GridTemplateColumnResource3 + "</b>",
                filterable: {
                    operators: {
                        string: {
@@ -557,8 +572,8 @@ function detailInit(e) {
                }
            },
            {
-               field: "LibraryName",
-               title: "<b>Library</b>",
+               field: "LibraryName",               
+               title: "<b>" + Resources.GridTemplateColumnResourceLibrary + "</b>",
                filterable: {
                    operators: {
                        string: {
@@ -578,7 +593,7 @@ function detailInit(e) {
            },
             {
                 field: "CreateDate",
-                title: "<b>Last Active</b>",
+                title: "<b>" + Resources.GridDateTimeColumnResource1 + "</b>",
                 template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm") #',
                 filterable: {
                     extra: false,
@@ -590,7 +605,7 @@ function detailInit(e) {
                             neq: "Not equal to",
                             gte: "Is after or equal to",
                             lte: "Is before or equal to",
-                            
+
                         }
                     },
                     ui: "datetimepicker" // use Kendo UI DateTimePicker
@@ -605,7 +620,7 @@ function detailInit(e) {
             }
         ]
     });
-    
+
 }
 
 

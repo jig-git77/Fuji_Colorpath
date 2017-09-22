@@ -31,6 +31,18 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues = new Dictionary<string, string>();
             _globalResourceValues = new Dictionary<string, string>();
             _resourceValues.Add("GridDateTimeColumnResource1", "GridDateTimeColumnResource1");
+            _resourceValues.Add("GridTemplateColumnResource0", "GridTemplateColumnResource0");
+            _resourceValues.Add("GridTemplateColumnResource1", "GridTemplateColumnResource1");
+            _resourceValues.Add("GridTemplateColumnResource2", "GridTemplateColumnResource2");
+            _resourceValues.Add("GridTemplateColumnResource3", "GridTemplateColumnResource3");
+            _resourceValues.Add("GridTemplateColumnResource4", "GridTemplateColumnResource4");
+            _resourceValues.Add("GridTemplateColumnResource5", "GridTemplateColumnResource5");
+            _resourceValues.Add("GridTemplateColumnResource6", "GridTemplateColumnResource6");
+            _resourceValues.Add("ToolTipClickToShort", "ToolTipClickToShort");
+            _resourceValues.Add("GridTemplateColumnResourceLibrary", "GridTemplateColumnResourceLibrary");
+            
+
+
             _resourceValues.Add("ELicenseType_DLP", "ELicenseType_DLP");
             _resourceValues.Add("ELicenseType_Sync1D", "ELicenseType_Sync1D");
             _resourceValues.Add("ELicenseType_Sync4DCertification", "ELicenseType_Sync4DCertification");
@@ -146,6 +158,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             return actionResult;
         }
+
 
         public void GenerateResources()
         {

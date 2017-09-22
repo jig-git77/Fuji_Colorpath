@@ -1035,4 +1035,31 @@
   <data name="lText" xml:space="preserve">
     <value>L*</value>
   </data>
+  <data name="GridTemplateColumnResource0" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="GridTemplateColumnResource1" xml:space="preserve">
+    <value>Validation</value>
+  </data>
+  <data name="GridTemplateColumnResource2" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="GridTemplateColumnResource3" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="GridTemplateColumnResource4" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="GridTemplateColumnResource5" xml:space="preserve">
+    <value>Supprot</value>
+  </data>
+  <data name="GridTemplateColumnResource6" xml:space="preserve">
+    <value>Encre</value>
+  </data>
+  <data name="GridTemplateColumnResourceLibrary" xml:space="preserve">
+    <value>Library</value>
+  </data>
+  <data name="ToolTipClickToShort" xml:space="preserve">
+    <value>Click here to sort</value>
+  </data>
 </root>

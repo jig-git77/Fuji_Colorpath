@@ -2455,6 +2455,78 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        internal static string GridTemplateColumnResource0 {
+            get {
+                return ResourceManager.GetString("GridTemplateColumnResource0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validation.
+        /// </summary>
+        internal static string GridTemplateColumnResource1 {
+            get {
+                return ResourceManager.GetString("GridTemplateColumnResource1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string GridTemplateColumnResource2 {
+            get {
+                return ResourceManager.GetString("GridTemplateColumnResource2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string GridTemplateColumnResource3 {
+            get {
+                return ResourceManager.GetString("GridTemplateColumnResource3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard.
+        /// </summary>
+        internal static string GridTemplateColumnResource4 {
+            get {
+                return ResourceManager.GetString("GridTemplateColumnResource4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Media.
+        /// </summary>
+        internal static string GridTemplateColumnResource5 {
+            get {
+                return ResourceManager.GetString("GridTemplateColumnResource5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Colorant.
+        /// </summary>
+        internal static string GridTemplateColumnResource6 {
+            get {
+                return ResourceManager.GetString("GridTemplateColumnResource6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Library.
+        /// </summary>
+        internal static string GridTemplateColumnResourceLibrary {
+            get {
+                return ResourceManager.GetString("GridTemplateColumnResourceLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid IsAverageOfMeasurements have been provided..
         /// </summary>
         internal static string Invalid_IsAverageOfMeasurements {
@@ -2793,6 +2865,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string targetText {
             get {
                 return ResourceManager.GetString("targetText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to sort.
+        /// </summary>
+        internal static string ToolTipClickToShort {
+            get {
+                return ResourceManager.GetString("ToolTipClickToShort", resourceCulture);
             }
         }
         
