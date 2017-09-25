@@ -190,6 +190,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+
+        public byte[] GetNamedColorProfile(int operationId)
+        {
+            return new byte[1];
+        }
         #endregion
 
         #region ITaskBase Members

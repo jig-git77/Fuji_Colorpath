@@ -1766,6 +1766,30 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
             return returnValue;
         }
+
+        public byte[] GetNamedColorProfile(int operationId)
+        {
+            var data = new object();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    data = DataAccessFactory.
+                        Instance.
+                        GetScalar(
+                            "CpSpot.GetNamedColorProfileData",
+                            new object[]
+                                    {
+                                        operationId
+                                    });
+                    if (data == null || data == DBNull.Value)
+                    {
+                        throw new Exception("named color profile not found for operationId: " + operationId);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetNamedColorProfile"));
+            return data == DBNull.Value ? null : (byte[])data;
+        }
+
         #endregion
 
         #region ITaskBase Members

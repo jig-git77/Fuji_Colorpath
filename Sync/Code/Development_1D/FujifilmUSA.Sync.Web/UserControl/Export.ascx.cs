@@ -73,7 +73,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         trDLPDownload2.Visible = false;
                         trAdvancedDownload.Visible = true;
                         Div_Chart.Visible = true;
-                        lbtnMeasure.Visible = false;
+                        lbtnMeasure.Visible = true;
                         locDownloadDLPAndChart.Text = "Download Chart";
                         locDownloadDestinationICC.Text = "Download Named Color Profile ICC";
                         header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + ".icc");
@@ -100,6 +100,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnMeasure_Click(object sender, EventArgs e)
         {
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            {
+                Response.Redirect("Spot_Measurement.aspx");
+            }
+            else
+            {
+
+            }
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             CurveTypeId = Convert.ToInt16(HD_CurveType.Value);
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
@@ -185,6 +193,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
+                OptimizeRunId = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last().OptimizeRunId;
+                _presenterExport.GetNamedColorProfile();
+                if (!IsErrorOccured)
+                {
+                    if (SourceProfile != null)
+                        Utilities.DownloadFile(SourceProfile,
+                                               string.Format("{0}.icc",
+                                                             SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName));
+                }
+
                 Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), "Named Color Profile.icc", "Named Color Profile.icc");
 
             }

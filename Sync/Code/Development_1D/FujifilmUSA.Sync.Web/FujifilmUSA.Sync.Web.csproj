@@ -1960,6 +1960,7 @@
     <Content Include="JS\MenuBar.js" />
     <Content Include="SourceProfileManagement.aspx" />
     <Content Include="SpotMeasurement.aspx" />
+    <Content Include="Spot_Measurement.aspx" />
     <Content Include="Templates\KendoReportTest.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_G7.htm" />
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
@@ -2015,6 +2016,7 @@
     <Content Include="UserControl\ReportSingleMeasurement.ascx" />
     <Content Include="UserControl\ReportSingleMeasurement_G7_Vali.ascx" />
     <Content Include="UserControl\SpotMeasurement.ascx" />
+    <Content Include="UserControl\Spot_Measurement.ascx" />
     <Content Include="UserControl\ValidationContainer.ascx" />
     <Content Include="UserControl\Permission.ascx" />
     <Content Include="UserControl\SessionEnd.ascx" />
@@ -2737,6 +2739,13 @@
     <Compile Include="SpotMeasurement.aspx.designer.cs">
       <DependentUpon>SpotMeasurement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Spot_Measurement.aspx.cs">
+      <DependentUpon>Spot_Measurement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Spot_Measurement.aspx.designer.cs">
+      <DependentUpon>Spot_Measurement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\AccessDenied.ascx.cs">
       <DependentUpon>AccessDenied.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3052,6 +3061,13 @@
     </Compile>
     <Compile Include="UserControl\SpotMeasurement.ascx.designer.cs">
       <DependentUpon>SpotMeasurement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Spot_Measurement.ascx.cs">
+      <DependentUpon>Spot_Measurement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Spot_Measurement.ascx.designer.cs">
+      <DependentUpon>Spot_Measurement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ValidationContainer.ascx.cs">
       <DependentUpon>ValidationContainer.ascx</DependentUpon>
@@ -5226,7 +5242,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

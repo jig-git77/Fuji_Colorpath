@@ -70,5 +70,12 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.ErrorOccured += _viewExport.ErrorOccured;
             _viewExport.DeviceLinkProfile = optimizeRunBusiness.Get1DDeviceLinkProfile(_viewExport.OptimizeRunId);
         }
+
+        public void GetNamedColorProfile()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.SourceProfile = projectBusiness.GetNamedColorProfile(_viewExport.OptimizeRunId);
+        }
     }
 }
