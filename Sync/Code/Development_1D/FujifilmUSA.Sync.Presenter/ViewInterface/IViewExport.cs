@@ -13,6 +13,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         Project Project { get; set; }
         short CurveTypeId { get; set; }
         FujifilmUSA.Sync.Business.Messages.CurveDataResponse CurveData { get; set; }
-      
+        int SpotProjectId { get; set; }
     }
 }

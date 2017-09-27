@@ -64,7 +64,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else
                 {
-                    if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+                    if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId)
                     {
                         header.InnerText = GetResourceString(_recnewPrintConditionText); //"New Print Condition - Measure (No DLP)";
                     }

@@ -37,89 +37,178 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_PreRender(object sender, EventArgs e)
         {
             lnkRunName.Text = ItemName;
-
-            switch (ItemLevel)
+            //check the current project type
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                case ELeftMenuItemLevel.OptimizeRun:
-                    if (CurrentRun.Status == EOptimizeRunStatus.Closed)
-                    {
-                        lnkMeasurement.Visible = false;
-                    }
-                    //----------If current run is closed (certify) run-----//
-                    else if (CurrentRun.Status == EOptimizeRunStatus.Certify)
-                    {
-                        lnkMeasurement.Visible = false;
-                        lnkDownload.Visible = false;
-
-                        //----------------If LicenseTypeID != 3 (Ink Optimization)----------------//
-                        if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimization)
+                switch (ItemLevel)
+                {
+                    case ELeftMenuItemLevel.OptimizeRun:
+                        if (CurrentRun.Status == EOptimizeRunStatus.Closed)
                         {
-                            //------If current run is closed (certify) and it is last run of this project--------//
-                            if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
-                                SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId)
-                            {
-                                lnkAddRun.Visible = true;
-                            }
+                            lnkMeasurement.Visible = false;
                         }
-                    }
-
-                    if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 1)
-                    {
-                        //---------------Display Delete button for last run----------------//
-                        if (CurrentRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId)
+                        //----------If current run is closed (certify) run-----//
+                        else if (CurrentRun.Status == EOptimizeRunStatus.Certify)
                         {
-                            btnRunDelete.Visible = true;
-                            //---------------If last run has already created DLP, invisible measurement link---------//
-                            if (CurrentRun.HasProfile)
+                            lnkMeasurement.Visible = false;
+                            lnkDownload.Visible = false;
+
+                            //----------------If LicenseTypeID != 3 (Ink Optimization)----------------//
+                            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimization)
                             {
-                                lnkMeasurement.Visible = false;
-                                //------------Only visible DeleteDLP button, if DLP is created for this last run---------//
-                                btnDLPDelete.Visible = true;
-                            }
-                            else
-                            {
-                                //-------------It is a certify run, don't give option to delete if it is Run-1-------------//
-                                if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 2 &&
-                                    (SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Closed ||
-                                     SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Certify))
+                                //------If current run is closed (certify) and it is last run of this project--------//
+                                if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
+                                    SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last().OptimizeRunId)
                                 {
-                                    btnRunDelete.Visible = false;
+                                    lnkAddRun.Visible = true;
                                 }
                             }
                         }
-                    }
 
-                    if (CurrentRun != null && SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == CurrentRun.OptimizeRunId)
-                    {
-                        ulSubMenu.Visible = true;
-                        lnkRunName.Font.Bold = true;
-                        lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
-                        lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
-                        lnkDownload.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Download;
-                        lnkAnalyse.Enabled = lnkDownload.Enabled = CurrentRun.HasMeasurements;
-                        lnkDownload.Enabled = CurrentRun.HasProfile;
-                    }
-                    else
-                    {
-                        ulSubMenu.Visible = false;
-                    }
-                    break;
-                case ELeftMenuItemLevel.Validation:
-                    lnkDownload.Visible = false;
-                    if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.Run)
-                    {
-                        ulSubMenu.Visible = true;
-                        lnkRunName.Font.Bold = true;
-                        lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
-                        lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
-                        lnkAnalyse.Enabled = lnkDownload.Enabled = CurrentRun.HasMeasurements;
-                    }
-                    else
-                    {
-                        ulSubMenu.Visible = false;
-                    }
-                    break;
+                        if (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count > 1)
+                        {
+                            //---------------Display Delete button for last run----------------//
+                            if (CurrentRun.OptimizeRunId == SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last().OptimizeRunId)
+                            {
+                                btnRunDelete.Visible = true;
+                                //---------------If last run has already created DLP, invisible measurement link---------//
+                                if (CurrentRun.HasProfile)
+                                {
+                                    lnkMeasurement.Visible = false;
+                                    //------------Only visible DeleteDLP button, if DLP is created for this last run---------//
+                                    btnDLPDelete.Visible = true;
+                                }
+                                else
+                                {
+                                    //-------------It is a certify run, don't give option to delete if it is Run-1-------------//
+                                    if (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count == 2 &&
+                                        (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Closed ||
+                                         SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Certify))
+                                    {
+                                        btnRunDelete.Visible = false;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (CurrentRun != null && SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == CurrentRun.OptimizeRunId)
+                        {
+                            ulSubMenu.Visible = true;
+                            lnkRunName.Font.Bold = true;
+                            lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
+                            lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
+                            lnkDownload.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Download;
+                            lnkAnalyse.Enabled = lnkDownload.Enabled = CurrentRun.HasMeasurements;
+                            lnkDownload.Enabled = CurrentRun.HasProfile;
+                        }
+                        else
+                        {
+                            ulSubMenu.Visible = false;
+                        }
+                        break;
+                    case ELeftMenuItemLevel.Validation:
+                        lnkDownload.Visible = false;
+                        if (SessionManager.Instance.CurrentProject.SpotTargetProject.CurrentDisplayStatus == ECurrentProjectStatus.Run)
+                        {
+                            ulSubMenu.Visible = true;
+                            lnkRunName.Font.Bold = true;
+                            lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
+                            lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
+                            lnkAnalyse.Enabled = lnkDownload.Enabled = CurrentRun.HasMeasurements;
+                        }
+                        else
+                        {
+                            ulSubMenu.Visible = false;
+                        }
+                        break;
+                }
             }
+            else
+            {
+                switch (ItemLevel)
+                {
+                    case ELeftMenuItemLevel.OptimizeRun:
+                        if (CurrentRun.Status == EOptimizeRunStatus.Closed)
+                        {
+                            lnkMeasurement.Visible = false;
+                        }
+                        //----------If current run is closed (certify) run-----//
+                        else if (CurrentRun.Status == EOptimizeRunStatus.Certify)
+                        {
+                            lnkMeasurement.Visible = false;
+                            lnkDownload.Visible = false;
+
+                            //----------------If LicenseTypeID != 3 (Ink Optimization)----------------//
+                            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimization)
+                            {
+                                //------If current run is closed (certify) and it is last run of this project--------//
+                                if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
+                                    SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId)
+                                {
+                                    lnkAddRun.Visible = true;
+                                }
+                            }
+                        }
+
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 1)
+                        {
+                            //---------------Display Delete button for last run----------------//
+                            if (CurrentRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId)
+                            {
+                                btnRunDelete.Visible = true;
+                                //---------------If last run has already created DLP, invisible measurement link---------//
+                                if (CurrentRun.HasProfile)
+                                {
+                                    lnkMeasurement.Visible = false;
+                                    //------------Only visible DeleteDLP button, if DLP is created for this last run---------//
+                                    btnDLPDelete.Visible = true;
+                                }
+                                else
+                                {
+                                    //-------------It is a certify run, don't give option to delete if it is Run-1-------------//
+                                    if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 2 &&
+                                        (SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Closed ||
+                                         SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Certify))
+                                    {
+                                        btnRunDelete.Visible = false;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (CurrentRun != null && SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == CurrentRun.OptimizeRunId)
+                        {
+                            ulSubMenu.Visible = true;
+                            lnkRunName.Font.Bold = true;
+                            lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
+                            lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
+                            lnkDownload.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Download;
+                            lnkAnalyse.Enabled = lnkDownload.Enabled = CurrentRun.HasMeasurements;
+                            lnkDownload.Enabled = CurrentRun.HasProfile;
+                        }
+                        else
+                        {
+                            ulSubMenu.Visible = false;
+                        }
+                        break;
+                    case ELeftMenuItemLevel.Validation:
+                        lnkDownload.Visible = false;
+                        if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.Run)
+                        {
+                            ulSubMenu.Visible = true;
+                            lnkRunName.Font.Bold = true;
+                            lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
+                            lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
+                            lnkAnalyse.Enabled = lnkDownload.Enabled = CurrentRun.HasMeasurements;
+                        }
+                        else
+                        {
+                            ulSubMenu.Visible = false;
+                        }
+                        break;
+                }
+            }
+
             lnkMeasurement.ForeColor = lnkMeasurement.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
             lnkAnalyse.ForeColor = lnkAnalyse.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
             lnkDownload.ForeColor = lnkDownload.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
@@ -221,7 +310,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
                     }
-                   
+
                     if ((SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D) && (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)) //---If Sync 1D, ReTargeted project and in Run-0 mode only, then go directly to Export page, since there is no Analyze Page for Run - 0
                     {
                         Response.Redirect("~/Export.aspx");

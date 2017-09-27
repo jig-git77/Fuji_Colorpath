@@ -102,28 +102,39 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                Response.Redirect("Spot_Measurement.aspx");
-            }
-            else
-            {
-
-            }
-            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            CurveTypeId = Convert.ToInt16(HD_CurveType.Value);
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                _presenterExport.Create1DOptimizeRun();
-            else
-                _presenterExport.CreateOptimizeRun();
-            if (!IsErrorOccured)
-            {
-                _presenterExport.GetProjectDetail();
+                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
+                _presenterExport.CreateOptimizeRun_SpotProject();
                 if (!IsErrorOccured)
                 {
-                    SessionManager.Instance.CurrentProject = Project;
-                    SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
-                    Response.Redirect("Measurement.aspx");
+                    _presenterExport.GetProjectDetail_SpotProject();
+                    if (!IsErrorOccured)
+                    {
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last();
+                        Response.Redirect("Spot_Measurement.aspx");
+                    }
                 }
             }
+            else
+            {
+                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                CurveTypeId = Convert.ToInt16(HD_CurveType.Value);
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    _presenterExport.Create1DOptimizeRun();
+                else
+                    _presenterExport.CreateOptimizeRun();
+                if (!IsErrorOccured)
+                {
+                    _presenterExport.GetProjectDetail();
+                    if (!IsErrorOccured)
+                    {
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+                        Response.Redirect("Measurement.aspx");
+                    }
+                }
+            }
+            
         }
 
         protected void lbtnDownloadDLP_Click(object sender, EventArgs e)
@@ -817,8 +828,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short ReferenceChartTypeId { get; set; }
         public short CurveTypeId { get; set; }
         public Business.Messages.CurveDataResponse CurveData { get; set; }
-        #endregion        
+        public int SpotProjectId { get; set; }
+        #endregion
 
-      
+
     }
 }

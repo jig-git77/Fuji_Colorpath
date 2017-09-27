@@ -133,6 +133,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
 
         }
+        public void CreateSpotProjectOptimizeRun(int spotProjectId, int status, DateTime startDateTime)
+        {
+
+        }
         #endregion
 
         #region ITaskBase Members
