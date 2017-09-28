@@ -1641,7 +1641,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     MeasurementDeviceId =
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementDeviceID"),
                                     InstrumentTypeId =
-                                            DataReader.ReadShort(dsProject.Tables[2].Rows[0], "InstrumentTypeID")
+                                            DataReader.ReadShort(dsProject.Tables[2].Rows[0], "InstrumentTypeID"),                                    
+                                    OptReferenceChartType = new KeyValuePair<short, string>(
+                                            DataReader.ReadShort(dsProject.Tables[2].Rows[0], "OPTReferenceChartTypeID"),
+                                            DataReader.ReadString(dsProject.Tables[2].Rows[0], "OPTChartName")),
                                 };
                         }
                         project.SpotTargetProject.OptimizeRuns = dsProject.Tables[3].AsEnumerable().

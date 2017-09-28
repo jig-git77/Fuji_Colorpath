@@ -196,6 +196,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnDownloadAndSaveNCP_Click(object sender, EventArgs e)
         {
+            if (!IsNCPCreated)
+            {
+                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    _presenterAnalyze.Get1DMeasurementsOnRunId();
+                else
+                    _presenterAnalyze.GetMeasurementsOnRunId();
+            }
             Response.Redirect("Export.aspx");
         }
 
@@ -230,6 +239,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //    }
             //}
             return jsonPathDetails;
+        }
+
+        public bool IsNewNCP
+        {
+            get
+            {
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If Sync 4D Certification type of project
+                {
+                    return SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1;
+                }
+                return false;
+            }
+        }
+
+        public bool IsNCPCreated
+        {
+            get { return SessionManager.Instance.CurrentOptimizeRun.HasProfile; }
         }
     }
 }

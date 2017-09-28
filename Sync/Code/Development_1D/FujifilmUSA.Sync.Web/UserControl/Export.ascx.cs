@@ -176,12 +176,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)
         {
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
-            {
-                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), "spotchart.zip", "spotchart.zip");
-            }
-            else
-            {
+            //if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            //{
+            //    Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), "spotchart.zip", "spotchart.zip");
+            //}
+            //else
+            //{
                 //ReferenceChartTypeId = SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Key;  
                 //Here we are considering optimization chart as export will be visible only once DLP is created (i.e. success of Run0)
                 ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
@@ -197,7 +197,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
                 }
-            }
+            //}
         }
 
         protected void lbtnDownloadDestinationICC_Click(object sender, EventArgs e)
