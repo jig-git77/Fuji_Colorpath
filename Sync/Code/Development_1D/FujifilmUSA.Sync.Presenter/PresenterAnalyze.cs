@@ -223,5 +223,12 @@ namespace FujifilmUSA.Sync.Presenter
                     Convert.ToInt32(EOptimizeRunStatus.Closed),
                     DateTime.Now);
         }
+
+        public void UpdateOptimizeRun_SpotProject()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            optimizeRunBusiness.UpdateSpotProjectOptimizeRun(_viewAnalyze.OptimizeRunId, _viewAnalyze.ProjectStatus, DateTime.Now);
+        }
     }
 }

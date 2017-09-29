@@ -1443,6 +1443,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
                                 HasColorProfile = DataReader.ReadBoolean(x, "HasColorProfile"),
                                 LastOptmizeId = DataReader.ReadInt(x, "LastOptimizeID"),
+                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus")
                             }).ToList();
                     }
                 },
@@ -1667,6 +1668,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
                                 HasProfile = DataReader.ReadBoolean(x, "HasProfile"),
                                 NamedColorProfile = DataReader.ReadByteArray(x, "NamedColorProfile")
+                                //ReferenceChartType =
+                                //                    new KeyValuePair<short, string>(DataReader.ReadShort(x, "ReferenceChartTypeId"),
+                                //                                                    DataReader.ReadString(x, "ChartName")),
+
                             }).ToList();
 
 

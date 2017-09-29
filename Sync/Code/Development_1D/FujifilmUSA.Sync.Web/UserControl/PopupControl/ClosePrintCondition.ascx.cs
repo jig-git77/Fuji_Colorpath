@@ -79,15 +79,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (Request.QueryString["ProjectId"] != null)
             {
                 ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
-                _presenterClosePrintCondition.GetProjectDetail();
-                if (!IsErrorOccured && Project != null)
+                if (Convert.ToString(Request.QueryString["isSpotProject"]) != "" && Convert.ToBoolean(Request.QueryString["isSpotProject"]))
                 {
-                    ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = string.Format(
-                        GetResourceString(_recoptimizeCompleteText),
-                        Project.OptimizeRuns.Last().DlpName,
-                        ((Project.OptimizeRuns != null)
-                             ? Project.OptimizeRuns.Last().ReferenceChartType.Value
-                             : string.Empty));
+                    SpotProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                    _presenterClosePrintCondition.GetProjectDetail_SpotProject();
+                    if (!IsErrorOccured && Project != null)
+                    {
+                        //((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = string.Format(
+                        //    GetResourceString(_recoptimizeCompleteText),
+                        //    Project.OptimizeRuns.Last().DlpName,
+                        //    ((Project.OptimizeRuns != null)
+                        //         ? Project.OptimizeRuns.Last().ReferenceChartType.Value
+                        //         : string.Empty));
+                    }
+                }
+                else
+                {
+                    _presenterClosePrintCondition.GetProjectDetail();
+                    if (!IsErrorOccured && Project != null)
+                    {
+                        ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = string.Format(
+                            GetResourceString(_recoptimizeCompleteText),
+                            Project.OptimizeRuns.Last().DlpName,
+                            ((Project.OptimizeRuns != null)
+                                 ? Project.OptimizeRuns.Last().ReferenceChartType.Value
+                                 : string.Empty));
+                    }
                 }
             }
         }
@@ -192,7 +209,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentProject = Project;
                     SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                     SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
-                   
+
                     SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
                     Utilities.PopupWindowsRedirect(this, "Export.aspx");
                 }
@@ -240,6 +257,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Entity.Project Project { get; set; }
 
         public string DeviceName { get; set; }
+        public int SpotProjectId { get; set; }
 
         #endregion
 

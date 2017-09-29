@@ -54,8 +54,7 @@ $(document).ready(function () {
                         url: SERVICE_BASE_URL + "api/Project/GetProjectDetailsByDeviceID/",
                         data: { deviceID: CurrentDeviceID },
                         dataType: "json",
-                        success: function (response) {
-                            debugger;
+                        success: function (response) {                            
                             var jsonProjectList = JSON.parse(response.data);
                             console.log(jsonProjectList);
                             Resources = jsonProjectList.GlobalResources;
@@ -122,7 +121,7 @@ $(document).ready(function () {
             template: "No records to display."
         },
         detailInit: detailInit,
-        dataBound: function (e) {
+        dataBound: function (e) {            
             var projectTypeImagePath = '';
             var projectValidationImagePath = '';
             var projectValidationTooltip = '';
@@ -253,10 +252,14 @@ $(document).ready(function () {
                     row.find("td #imgprojectValidation").attr('src', projectValidationImagePath);   //set the project validation image path
                     row.find("td #imgprojectValidation").attr('title', projectValidationTooltip);   //set the project validation tooltip
                 }
-
                 switch (data.Status) {
                     case EOptimizeRunStatus.Open:
-                        row.find("td #lnkProjectType").attr("onclick", "javascript: return ShowOpenPrintConditionWindow('" + data.ProjectId + "','" + data.ProjectName + "','10','" + data.CurrentDlpName + "','" + data.TotalRuns + "')");
+                        var dateCreate = new Date(data.CreateDate);
+                        var dateCurrent = new Date();
+                        var timeDiff = Math.abs(dateCurrent.getTime() - dateCreate.getTime());
+                        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                        row.find("td #lnkProjectType").attr("onclick", "javascript: return ShowOpenPrintConditionWindow('" + data.ProjectId + "','" + data.ProjectName + "','" + diffDays + "','" + data.CurrentDlpName + "','" + data.TotalRuns + "')");
                         break;
                     case EOptimizeRunStatus.Closed:
                         row.find("td #lnkProjectType").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.ProjectId + "','" + data.ProjectName + "','" + data.LicenseType + "','" + data.CurrentDlpName + "')");
@@ -545,11 +548,42 @@ function detailInit(e) {
             template: "No records to display."
         },
         toolbar: [{ 'name': 'createSpot', template: '<button onclick="return Redirect(' + pID + ',\'AddSpotProject\');" class=\'k-button\'>Create New Library</button>' }],
+        dataBound: function (e) {
+            console.log('chile bound event');
+            debugger;
+
+            var dataSource = this.dataSource;
+            this.element.find('tr').each(function (){
+                var row = $(this);
+                if (dataSource.getByUid(row.data('uid')) != undefined) {
+                    debugger;
+
+                    var data = dataSource.getByUid(row.data('uid'));
+                    switch (data.Status) {
+                        case EOptimizeRunStatus.Open:
+                            var dateCreate = new Date(data.CreateDate);
+                            var dateCurrent = new Date();
+                            var timeDiff = Math.abs(dateCurrent.getTime() - dateCreate.getTime());
+                            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                            row.find("td #imgspotProject").attr("onclick", "javascript: return ShowOpenPrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + diffDays + "','','" + data.TotalRuns + "',true)");
+                            break;
+                        case EOptimizeRunStatus.Closed:
+                            row.find("td #imgspotProject").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','',true)");
+                            break;
+                        case EOptimizeRunStatus.Certify:
+                            row.find("td #imgspotProject").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','',true)");
+                            break;
+                    }
+                }
+            });
+        },
         columns: [
              {
                  filterable: false,
                  title: "<b></b>",
-                 template: "<center><a onclick='return Redirect(#=SpotProjectId#,\"SelectSpotTargetProject\");'><img title='Open' id='imgspotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
+                 //template: "<center><a onclick='return Redirect(#=SpotProjectId#,\"SelectSpotTargetProject\");'><img title='Open' id='imgspotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
+                 template: "<center><a><img title='Open' id='imgspotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
                  width: 40
              },
            {

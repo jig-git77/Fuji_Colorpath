@@ -34,5 +34,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         void CreateReTargetProject(int projectId, int optimizeRunId, int status, DateTime endDateTime);
 
         void CreateSpotProjectOptimizeRun(int spotProjectId, int status, DateTime startDateTime);
+        void UpdateSpotProjectOptimizeRun(int optimizeRunID, int status, DateTime startDateTime);
     }
 }

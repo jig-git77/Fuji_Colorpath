@@ -855,6 +855,23 @@ namespace FujifilmUSA.Sync.Business.Implementation
                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateSpotProjectOptimizeRun"));
         }
 
+        public void UpdateSpotProjectOptimizeRun(int optimizeRunID, int status, DateTime startDateTime)
+        {
+            Common.ImplementBusinessLogic(
+               () =>
+               DataAccessFactory.
+                   Instance.
+                   ExecuteProcedure(
+                       "[CPSpot].[UpdateOptimizeDlp]",
+                       new object[]
+                           {
+                                optimizeRunID,
+                                status,
+                                startDateTime
+                           }),
+               new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateSpotProjectOptimizeRun"));
+        }
+
         #endregion
 
         #region ITaskBase Members

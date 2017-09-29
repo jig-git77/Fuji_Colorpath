@@ -87,5 +87,12 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
             _viewClosePrintCondition.CurrentDlp = projectBusiness.Get1DLastOptimizedDlp(_viewClosePrintCondition.ProjectId);
         }
+
+        public void GetProjectDetail_SpotProject()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
+            _viewClosePrintCondition.Project = projectBusiness.GetProjectDetail_SpotProject(_viewClosePrintCondition.SpotProjectId);
+        }
     }
 }

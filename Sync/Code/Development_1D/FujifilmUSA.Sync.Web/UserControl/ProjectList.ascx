@@ -27,22 +27,22 @@
             return false;
     }
 </script>
-<script type="text/javascript" language="javascript">
-    //function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns, isSpotLibraryProject = false, spotProjectID = 0) {
-    //    var oWindow;
-    //    oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&isSpotLibraryProject=" + isSpotLibraryProject + "&spotProjectID=" + spotProjectID, "OpenPrintConditionWindow");
-    //    oWindow.show();
-    //    return false;
-    //}
-    function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns) {
+<script type="text/javascript" language="javascript">   
+    function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns, isSpotProject) {
+        if (isSpotProject === undefined) {
+            isSpotProject = false;
+        }
         var oWindow;
-        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns, "OpenPrintConditionWindow");
+        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&isSpotProject=" + isSpotProject, "OpenPrintConditionWindow");
         oWindow.show();
         return false;
     }
-    function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName) {
+    function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName, isSpotProject) {
+        if (isSpotProject === undefined) {
+            isSpotProject = false;
+        }
         var oWindow;
-        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName + "&isSpotProject=" + isSpotProject, "ClosePrintConditionWindow");
         oWindow.show();
         return false;
     }

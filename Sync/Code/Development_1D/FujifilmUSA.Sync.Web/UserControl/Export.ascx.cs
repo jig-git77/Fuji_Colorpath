@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Export()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
-        } 
+        }
         #endregion
 
         private PresenterExport _presenterExport;
@@ -42,7 +42,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {            
+        {
 
             if (!IsPostBack)
             {
@@ -134,7 +134,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
             }
-            
+
         }
 
         protected void lbtnDownloadDLP_Click(object sender, EventArgs e)
@@ -147,7 +147,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             string DLPName = SessionManager.Instance.CurrentOptimizeRun.DlpName;
             if (SessionManager.Instance.CurrentOptimizeRun.EndDateTime.HasValue)
             {
-                DLPName = SessionManager.Instance.CurrentProject.ProjectName + " "+ GetResourceString(_recDLP) + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc";
+                DLPName = SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLP) + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc";
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If "Ink Optimization Source" / "Custom Source Profile" project type, then only Project name as DLP name.
                 {
                     DLPName = SessionManager.Instance.CurrentProject.ProjectName + ".icc";
@@ -172,16 +172,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                          SessionManager.Instance.CurrentProject.ProjectName));
             }
         }
-        
+
 
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)
         {
-            //if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
-            //{
-            //    Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), "spotchart.zip", "spotchart.zip");
-            //}
-            //else
-            //{
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            {
+                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), "spotchart.zip", "spotchart.zip");
+            }
+            else
+            {
                 //ReferenceChartTypeId = SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Key;  
                 //Here we are considering optimization chart as export will be visible only once DLP is created (i.e. success of Run0)
                 ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
@@ -197,7 +197,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
                 }
-            //}
+            }
         }
 
         protected void lbtnDownloadDestinationICC_Click(object sender, EventArgs e)
@@ -232,7 +232,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         private void BindCurve(short _CurveTypeID)
-        {  
+        {
             this.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             if (_CurveTypeID == 100 || _CurveTypeID == 101) //---Set same value for "ColorGate-TVI" and "ColorGate-CGCX" like "5%" for export curve data
             {
@@ -251,7 +251,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurveDeltaPrevRunView = this.CurveData.CurveDeltaPrevRunView;
                 BindCharts(this.CurveData.CurveExportView, this.CurveData.CurveDeltaRefView, this.CurveData.CurveDeltaPrevRunView);
                 rgCurveExportView.Rebind();
-                rgCurveDeltaView.Rebind();                
+                rgCurveDeltaView.Rebind();
             }
         }
 
@@ -281,7 +281,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Int64 MaxDelta = 0;
             Int64 MinDelta = 0;
-         
+
             List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaView = new List<Entity.CPSync1D.OptimizeRunCurve>();
 
             if (rbtnDetlaReflist.Items[0].Selected == true)
@@ -355,7 +355,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurveExportView != null && SessionManager.Instance.CurveExportView != null && SessionManager.Instance.CurveExportView.Count > 0)
             {
-                rgCurveExportView.DataSource = SessionManager.Instance.CurveExportView;     
+                rgCurveExportView.DataSource = SessionManager.Instance.CurveExportView;
             }
         }
 
@@ -411,7 +411,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         sw.WriteLine("BEGIN_DATA");
                         for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
                         {
-                            sw.WriteLine(DT_CPSyncPressRunCurve[i].ReferenceNo.ToString()  + "\t" + DT_CPSyncPressRunCurve[i].CMYK_C.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_M.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_Y.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_K.ToString());
+                            sw.WriteLine(DT_CPSyncPressRunCurve[i].ReferenceNo.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_C.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_M.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_Y.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_K.ToString());
                         }
                         sw.WriteLine("END_DATA");
                         sw.Close();
@@ -426,25 +426,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         System.IO.StreamWriter swM;
                         System.IO.StreamWriter swY;
                         System.IO.StreamWriter swK;
-                        swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_C.oli");
+                        swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_C.oli");
                         swC.WriteLine("2");
                         swC.WriteLine("0.0000000000");
                         swC.WriteLine("0.0000000000");
                         swC.WriteLine("25");
 
-                        swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_M.oli");
+                        swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_M.oli");
                         swM.WriteLine("2");
                         swM.WriteLine("0.0000000000");
                         swM.WriteLine("0.0000000000");
                         swM.WriteLine("25");
 
-                        swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Y.oli");
+                        swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Y.oli");
                         swY.WriteLine("2");
                         swY.WriteLine("0.0000000000");
                         swY.WriteLine("0.0000000000");
                         swY.WriteLine("25");
 
-                        swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_K.oli");
+                        swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_K.oli");
                         swK.WriteLine("2");
                         swK.WriteLine("0.0000000000");
                         swK.WriteLine("0.0000000000");
@@ -469,19 +469,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         swK.WriteLine("Version: 2.0");
                         swK.Close();
 
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_C.oli");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_M.oli");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Y.oli");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_K.oli");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_C.oli");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_M.oli");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Y.oli");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_K.oli");
 
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"),  CurveFileName + "_CMYKFile.zip",  CurveFileName + "_CMYKFile.zip");
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CMYKFile.zip", CurveFileName + "_CMYKFile.zip");
                         #endregion
                     }
                     else if (DdlCurveType.SelectedValue == "25")  // for XMF
                     {
                         #region Create file and download txt file for XMF
                         System.IO.StreamWriter sw;
-                        sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_CurvesFile.csv");
+                        sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CurvesFile.csv");
                         sw.WriteLine("Cyan;Magenta;Yellow;Black");
                         for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
                         {
@@ -489,7 +489,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                         sw.Close();
 
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"),  CurveFileName + "_CurvesFile.csv",  CurveFileName + "_CurvesFile.csv");
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurvesFile.csv", CurveFileName + "_CurvesFile.csv");
                         #endregion
 
                     }
@@ -502,17 +502,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         System.IO.StreamWriter swK;
 
                         //cyan
-                        swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_C.txt");
+                        swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_C.txt");
 
                         //magenta
-                        swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_M.txt");
+                        swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_M.txt");
 
                         //yellow    
-                        swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Y.txt");
-                        
+                        swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Y.txt");
+
                         //black
-                        swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_K.txt");
-                        
+                        swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_K.txt");
+
                         for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
                         {
                             swC.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.00") + "\t" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_C).ToString("0.00"));
@@ -526,12 +526,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         swY.Close();
                         swK.Close();
 
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_C.txt");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_M.txt");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Y.txt");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_K.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_C.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_M.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Y.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_K.txt");
 
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"),  CurveFileName + "_Harmony.zip",  CurveFileName + "_Harmony.zip");
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_Harmony.zip", CurveFileName + "_Harmony.zip");
                         #endregion
                     }
                     else if (DdlCurveType.SelectedValue == "45")  // nexus
@@ -539,17 +539,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         #region Create Zip file and download file for nexus
 
                         //check if file exists and delete it
-                        if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus.zip") == true)
-                            System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus.zip");
+                        if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus.zip") == true)
+                            System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus.zip");
 
                         System.IO.StreamWriter swC;
                         System.IO.StreamWriter swM;
                         System.IO.StreamWriter swY;
                         System.IO.StreamWriter swK;
-                        swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus_Cya.txt");
-                        swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus_Mag.txt");
-                        swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus_Yel.txt");
-                        swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus_Bla.txt");
+                        swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Cya.txt");
+                        swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Mag.txt");
+                        swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Yel.txt");
+                        swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Bla.txt");
 
 
                         for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
@@ -565,19 +565,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         swY.Close();
                         swK.Close();
 
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus_Cya.txt");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus_Mag.txt");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus_Yel.txt");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_Nexus_Bla.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Cya.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Mag.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Yel.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Bla.txt");
 
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"),  CurveFileName + "_Nexus.zip",  CurveFileName + "_Nexus.zip");
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_Nexus.zip", CurveFileName + "_Nexus.zip");
                         #endregion
                     }
                     else if (DdlCurveType.SelectedValue == "55")  // for sericol UK Caldera
                     {
                         #region Create file and download txt file for sericol UK
                         System.IO.StreamWriter sw;
-                        sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_CurvesFile.ppc");
+                        sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CurvesFile.ppc");
                         sw.WriteLine("Device = CMYK");
                         sw.WriteLine("Max ink = 400");
                         sw.WriteLine("Max ink reduction = preserve black");
@@ -625,10 +625,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                         sw.Close();
 
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"),  CurveFileName + "_CurvesFile.ppc",  CurveFileName + "_CurvesFile.ppc");
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurvesFile.ppc", CurveFileName + "_CurvesFile.ppc");
                         #endregion
 
-                    }                   
+                    }
                     else if (DdlCurveType.SelectedValue == "100")  // for ColorGate-TVI
                     {
                         #region Create file and download .ctvx file for ColorGate-TVI
@@ -643,7 +643,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                         //-----------------Make .ctvx xml file------------------//
                         System.IO.StreamWriter sw3;
-                        sw3 = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_CurveDelta.ctvx");
+                        sw3 = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CurveDelta.ctvx");
                         sw3.WriteLine("<?xml version=" + str0 + " encoding=" + str1 + "?>");
                         sw3.WriteLine("<TonalValues xmlns=" + str2 + ">");
 
@@ -657,7 +657,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         sw3.WriteLine("</TonalValues>");
                         sw3.Close();
 
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"),  CurveFileName + "_CurveDelta.ctvx",  CurveFileName + "_CurveDelta.ctvx");
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurveDelta.ctvx", CurveFileName + "_CurveDelta.ctvx");
 
                         #endregion
                     }
@@ -675,7 +675,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                         //-----------------Make .cgcx xml file------------------//
                         System.IO.StreamWriter sw3;
-                        sw3 = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_CurveDelta.cgcx");
+                        sw3 = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CurveDelta.cgcx");
                         sw3.WriteLine("<?xml version=" + str0 + " encoding=" + str1 + "?>");
                         sw3.WriteLine("<GradationCurves xmlns=" + str2 + ">");
 
@@ -690,7 +690,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         sw3.WriteLine("</GradationCurves>");
                         sw3.Close();
 
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"),  CurveFileName + "_CurveDelta.cgcx",  CurveFileName + "_CurveDelta.cgcx");
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurveDelta.cgcx", CurveFileName + "_CurveDelta.cgcx");
 
                         #endregion
                     }
@@ -698,7 +698,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         #region Create file and download txt file for weighted highlight shadow and then 5% increment
                         System.IO.StreamWriter sw;
-                        sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") +  CurveFileName + "_CurvesFile.txt");
+                        sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CurvesFile.txt");
                         sw.WriteLine("\"Fujifilm Colorpath Sync 1D\"");
                         sw.WriteLine("BEGIN_DATA_FORMAT");
                         sw.WriteLine("SampleID\tSampleName\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
@@ -712,7 +712,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         sw.WriteLine("END_DATA");
                         sw.Close();
 
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"),  CurveFileName + "_CurvesFile.txt",  CurveFileName + "_CurvesFile.txt");
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurvesFile.txt", CurveFileName + "_CurvesFile.txt");
                         #endregion
                     }
                 }
@@ -723,7 +723,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-       
+
 
         protected void DdlCurveType_SelectedIndexChanged(object sender, EventArgs e)
         {

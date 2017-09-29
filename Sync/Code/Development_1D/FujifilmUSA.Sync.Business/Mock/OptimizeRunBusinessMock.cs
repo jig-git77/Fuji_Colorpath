@@ -137,6 +137,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
 
         }
+        public void UpdateSpotProjectOptimizeRun(int optimizeRunID, int status, DateTime startDateTime)
+        {
+
+        }
         #endregion
 
         #region ITaskBase Members
