@@ -47,5 +47,6 @@ namespace FujifilmUSA.Sync.Business.Interface
 
         int AddDummyData(int spotprojectId,int optimizationRunID);
         byte[] GetNamedColorProfile(int operationId);
+        byte[] GetLastOptimizedNamedColorProfile(int spotProjectId);
     }
 }

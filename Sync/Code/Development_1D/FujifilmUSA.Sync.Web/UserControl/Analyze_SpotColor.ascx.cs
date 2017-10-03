@@ -60,7 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured)
                 {
                     //Now we are using DataTable as DataSource                    
-           
+
                     decimal totalDeltaE = 0;
                     decimal avgDeltaE = 0;
 
@@ -192,6 +192,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         public string FileName;
+        public int ProjectStatus { get; set; }
         #endregion
 
         protected void lbtnDownloadAndSaveNCP_Click(object sender, EventArgs e)
@@ -200,12 +201,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                    _presenterAnalyze.Get1DMeasurementsOnRunId();
-                else
-                    _presenterAnalyze.GetMeasurementsOnRunId();
+                ProjectStatus = Convert.ToInt32(EOptimizeRunStatus.Closed);
+                _presenterAnalyze.UpdateOptimizeRun_SpotProject();
+                if (!IsErrorOccured)
+                {
+                    SessionManager.Instance.CurrentOptimizeRun.Status = EOptimizeRunStatus.Closed;
+                    SessionManager.Instance.CurrentOptimizeRun.EndDateTime = DateTime.Now;
+                    Response.Redirect("Export.aspx");
+                }
             }
-            Response.Redirect("Export.aspx");
+            else
+            {
+                Response.Redirect("Export.aspx");
+            }
         }
 
         [WebMethod(EnableSession = true)]
