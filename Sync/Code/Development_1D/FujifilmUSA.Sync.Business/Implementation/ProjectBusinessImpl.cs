@@ -1798,6 +1798,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return data == DBNull.Value ? null : (byte[])data;
         }
 
+        public byte[] GetLastOptimizedNamedColorProfile(int spotProjectId)
+        {
+            var data = new object();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    data = DataAccessFactory.
+                        Instance.
+                        GetScalar(
+                            "CPSpot.GetLastOptimizedNamedColorProfile",
+                            new object[]
+                                    {
+                                        spotProjectId
+                                    });
+                    if (data == null || data == DBNull.Value)
+                    {
+                        throw new Exception("Last optimized named color profile not found for spot projectId: " + spotProjectId);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastOptimizedNamedColorProfile"));
+            return data == DBNull.Value ? null : (byte[])data;
+        }
+
         #endregion
 
         #region ITaskBase Members

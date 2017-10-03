@@ -78,23 +78,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (Request.QueryString["ProjectId"] != null)
             {
-                ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
                 if (Convert.ToString(Request.QueryString["isSpotProject"]) != "" && Convert.ToBoolean(Request.QueryString["isSpotProject"]))
                 {
                     SpotProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
                     _presenterClosePrintCondition.GetProjectDetail_SpotProject();
                     if (!IsErrorOccured && Project != null)
                     {
-                        //((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = string.Format(
-                        //    GetResourceString(_recoptimizeCompleteText),
-                        //    Project.OptimizeRuns.Last().DlpName,
-                        //    ((Project.OptimizeRuns != null)
-                        //         ? Project.OptimizeRuns.Last().ReferenceChartType.Value
-                        //         : string.Empty));
+                        ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = string.Format(
+                            GetResourceString(_recoptimizeCompleteText),
+                            Project.SpotTargetProject.OptimizeRuns.Last().DlpName,
+                            ((Project.SpotTargetProject.OptimizeRuns != null)
+                                 ? Project.SpotTargetProject.OptimizeRuns.Last().ReferenceChartType.Value
+                                 : string.Empty));
                     }
                 }
                 else
                 {
+                    ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
                     _presenterClosePrintCondition.GetProjectDetail();
                     if (!IsErrorOccured && Project != null)
                     {
@@ -112,40 +112,59 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (Request.QueryString["ProjectId"] != null)
             {
-                ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
-                DeviceName = SessionManager.Instance.CurrentDevice.DeviceName;
-
-                #region Verification mode - Check for querystring of DLP Sub Operation
-                if (Request.QueryString["ToSubOperation"] != null && Convert.ToInt32(Request.QueryString["ToSubOperation"]) == (int)ELicenseType.None)
+                if (Convert.ToString(Request.QueryString["isSpotProject"]) != "" && Convert.ToBoolean(Request.QueryString["isSpotProject"]))
                 {
-                    //Verification mode
-
-                    //As we also using this popup in Verification -> Optimize
-                    //So while opening this page we pass querystring ToSubOperation as 0 which says we need to set current DLP sub operation as NONE
-
-                    SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
-                }
-                #endregion
-
-                if (!IsErrorOccured)
-                {
-                    if (Request.QueryString["licenseTypeId"] != null)
-                    {
-                        if ((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync1D)
-                            _presenterClosePrintCondition.Create1DOptimizeRun();
-                        else
-                            _presenterClosePrintCondition.CreateOptimizeRun();
-                    }
+                    SpotProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                    _presenterClosePrintCondition.CreateOptimizeRun_SpotProject();
                     if (!IsErrorOccured)
                     {
-                        _presenterClosePrintCondition.GetProjectDetail();
+                        _presenterClosePrintCondition.GetProjectDetail_SpotProject();
                         if (!IsErrorOccured)
                         {
                             SessionManager.Instance.CurrentProject = Project;
-                            SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                            SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last();
                             SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Spot_Measurement.aspx';", true);                            
+                        }
+                    }
+                }
+                else
+                {
+                    ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                    DeviceName = SessionManager.Instance.CurrentDevice.DeviceName;
 
-                            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Measurement.aspx';", true);
+                    #region Verification mode - Check for querystring of DLP Sub Operation
+                    if (Request.QueryString["ToSubOperation"] != null && Convert.ToInt32(Request.QueryString["ToSubOperation"]) == (int)ELicenseType.None)
+                    {
+                        //Verification mode
+
+                        //As we also using this popup in Verification -> Optimize
+                        //So while opening this page we pass querystring ToSubOperation as 0 which says we need to set current DLP sub operation as NONE
+
+                        SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
+                    }
+                    #endregion
+
+                    if (!IsErrorOccured)
+                    {
+                        if (Request.QueryString["licenseTypeId"] != null)
+                        {
+                            if ((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync1D)
+                                _presenterClosePrintCondition.Create1DOptimizeRun();
+                            else
+                                _presenterClosePrintCondition.CreateOptimizeRun();
+                        }
+                        if (!IsErrorOccured)
+                        {
+                            _presenterClosePrintCondition.GetProjectDetail();
+                            if (!IsErrorOccured)
+                            {
+                                SessionManager.Instance.CurrentProject = Project;
+                                SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                                SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+
+                                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Measurement.aspx';", true);
+                            }
                         }
                     }
                 }
@@ -155,43 +174,66 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (Request.QueryString["ProjectId"] != null)
             {
-                #region Verification mode - Check for querystring of DLP Sub Operation
-                if (Request.QueryString["ToSubOperation"] != null && Convert.ToInt32(Request.QueryString["ToSubOperation"]) == (int)ELicenseType.None)
+                if (Convert.ToString(Request.QueryString["isSpotProject"]) != "" && Convert.ToBoolean(Request.QueryString["isSpotProject"]))
                 {
-                    //Verification mode
-
-                    //As we also using this popup in Verification -> Optimize
-                    //So while opening this page we pass querystring ToSubOperation as 0 which says we need to set current DLP sub operation as NONE
-
-                    SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
-                }
-                #endregion
-                ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
-                _presenterClosePrintCondition.GetProjectDetail();
-                if (!IsErrorOccured)
-                {
-                    SessionManager.Instance.CurrentProject = Project;
-                    SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-                    SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
-                    if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
+                    SpotProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                    _presenterClosePrintCondition.GetProjectDetail_SpotProject();
+                    if (!IsErrorOccured)
                     {
-                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
-
-                        if (Request.QueryString["licenseTypeId"] != null)  //----Sync4D Certification Project type
-                        {
-                            if ((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync4DCertification)
-                                SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
-                        }
-                    }
-                    if (((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync1D) && (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)) //---If Sync 1D, ReTargeted project and in Run-0 mode only, then go directly to Export page, since there is no Analyze Page for Run - 0
-                    {
-                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
-                        Utilities.PopupWindowsRedirect(this, "Export.aspx");
-                    }
-                    else //---For all other types of projects
-                    {
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = Project.SpotTargetProject.OptimizeRuns.Last();
+                        SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.SpotLibrary;
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                        Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
+                        Utilities.PopupWindowsRedirect(this, "Analyze_SpotColor.aspx");
+                        //if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
+                        //{
+                        //    SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
+                        //}
+
+                        //SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                        //SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                    }
+                }
+                else
+                {
+                    #region Verification mode - Check for querystring of DLP Sub Operation
+                    if (Request.QueryString["ToSubOperation"] != null && Convert.ToInt32(Request.QueryString["ToSubOperation"]) == (int)ELicenseType.None)
+                    {
+                        //Verification mode
+
+                        //As we also using this popup in Verification -> Optimize
+                        //So while opening this page we pass querystring ToSubOperation as 0 which says we need to set current DLP sub operation as NONE
+
+                        SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
+                    }
+                    #endregion
+                    ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                    _presenterClosePrintCondition.GetProjectDetail();
+                    if (!IsErrorOccured)
+                    {
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
+                        {
+                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
+
+                            if (Request.QueryString["licenseTypeId"] != null)  //----Sync4D Certification Project type
+                            {
+                                if ((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync4DCertification)
+                                    SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
+                            }
+                        }
+                        if (((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync1D) && (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)) //---If Sync 1D, ReTargeted project and in Run-0 mode only, then go directly to Export page, since there is no Analyze Page for Run - 0
+                        {
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+                            Utilities.PopupWindowsRedirect(this, "Export.aspx");
+                        }
+                        else //---For all other types of projects
+                        {
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                            Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
+                        }
                     }
                 }
             }
@@ -219,19 +261,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnDownloadCurrentDLP_Click(object sender, EventArgs e)
         {
             string DLPName = "Profile.icc";
-            if (Request.QueryString["DlpName"] != null)
+            if (Request.QueryString["DlpName"] != null && Convert.ToString(Request.QueryString["DlpName"]) != "")
             {
                 DLPName = Request.QueryString["DlpName"].ToString();
             }
-
-            ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
-            if (Request.QueryString["licenseTypeId"] != null)
+            if (Convert.ToString(Request.QueryString["isSpotProject"]) != "" && Convert.ToBoolean(Request.QueryString["isSpotProject"]))
             {
-                if ((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync1D)
-                    _presenterClosePrintCondition.Get1DCurrentDeviceLinkProfile();
-                else
-                    _presenterClosePrintCondition.GetCurrentDeviceLinkProfile();
-
+                SpotProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                _presenterClosePrintCondition.GetCurrentNamedColorProfile();
+            }
+            else
+            {
+                if (Request.QueryString["licenseTypeId"] != null)
+                {
+                    ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                    if ((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync1D)
+                        _presenterClosePrintCondition.Get1DCurrentDeviceLinkProfile();
+                    else
+                        _presenterClosePrintCondition.GetCurrentDeviceLinkProfile();
+                }
             }
             if (!IsErrorOccured)
             {

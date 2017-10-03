@@ -195,6 +195,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new byte[1];
         }
+        public byte[] GetLastOptimizedNamedColorProfile(int spotProjectId)
+        {
+            return new byte[1];
+        }
         #endregion
 
         #region ITaskBase Members
