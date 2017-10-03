@@ -90,6 +90,72 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
+    
+
+        protected void lbtnDownloadAndSaveNCP_Click(object sender, EventArgs e)
+        {
+            if (!IsNCPCreated)
+            {
+                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    _presenterAnalyze.Get1DMeasurementsOnRunId();
+                else
+                    _presenterAnalyze.GetMeasurementsOnRunId();
+            }
+            Response.Redirect("Export.aspx");
+        }
+
+        [WebMethod(EnableSession = true)]
+        public static string GetPatchDetails()
+        {
+            string jsonPathDetails = "";
+            //if (SessionManager.Instance.CurrentOptimizeRun != null)
+            //{
+
+            //    MeasurementId = 0;
+            //    OptimizeRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId);
+            //    //Now we are using DataTable to bind the grid               
+            //    dtPatchDetails = new DataTable();
+            //    _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
+
+            //    if (!IsErrorOccured)
+            //    {
+            //        JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+            //        List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
+            //        Dictionary<string, object> childRow;
+            //        foreach (DataRow row in dtPatchDetails.Rows)
+            //        {
+            //            childRow = new Dictionary<string, object>();
+            //            foreach (DataColumn col in dtPatchDetails.Columns)
+            //            {
+            //                childRow.Add(col.ColumnName, row[col]);
+            //            }
+            //            parentRow.Add(childRow);
+            //        }
+            //        jsonPathDetails= jsSerializer.Serialize(parentRow);
+            //    }
+            //}
+            return jsonPathDetails;
+        }
+
+        public bool IsNewNCP
+        {
+            get
+            {
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If Sync 4D Certification type of project
+                {
+                    return SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1;
+                }
+                return false;
+            }
+        }
+
+        public bool IsNCPCreated
+        {
+            get { return SessionManager.Instance.CurrentOptimizeRun.HasProfile; }
+        }
+
         #region IViewAnalyze Members
 
         public int ProjectId { get; set; }
@@ -192,70 +258,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         public string FileName;
+        public int ProjectStatus { get; set; }
         #endregion
-
-        protected void lbtnDownloadAndSaveNCP_Click(object sender, EventArgs e)
-        {
-            if (!IsNCPCreated)
-            {
-                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                    _presenterAnalyze.Get1DMeasurementsOnRunId();
-                else
-                    _presenterAnalyze.GetMeasurementsOnRunId();
-            }
-            Response.Redirect("Export.aspx");
-        }
-
-        [WebMethod(EnableSession = true)]
-        public static string GetPatchDetails()
-        {
-            string jsonPathDetails = "";
-            //if (SessionManager.Instance.CurrentOptimizeRun != null)
-            //{
-
-            //    MeasurementId = 0;
-            //    OptimizeRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId);
-            //    //Now we are using DataTable to bind the grid               
-            //    dtPatchDetails = new DataTable();
-            //    _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
-
-            //    if (!IsErrorOccured)
-            //    {
-            //        JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
-            //        List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
-            //        Dictionary<string, object> childRow;
-            //        foreach (DataRow row in dtPatchDetails.Rows)
-            //        {
-            //            childRow = new Dictionary<string, object>();
-            //            foreach (DataColumn col in dtPatchDetails.Columns)
-            //            {
-            //                childRow.Add(col.ColumnName, row[col]);
-            //            }
-            //            parentRow.Add(childRow);
-            //        }
-            //        jsonPathDetails= jsSerializer.Serialize(parentRow);
-            //    }
-            //}
-            return jsonPathDetails;
-        }
-
-        public bool IsNewNCP
-        {
-            get
-            {
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If Sync 4D Certification type of project
-                {
-                    return SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1;
-                }
-                return false;
-            }
-        }
-
-        public bool IsNCPCreated
-        {
-            get { return SessionManager.Instance.CurrentOptimizeRun.HasProfile; }
-        }
     }
 }
