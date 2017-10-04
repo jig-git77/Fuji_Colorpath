@@ -82,7 +82,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     SessionManager.Instance.CurrentProject = Project;
                     SessionManager.Instance.CurrentOptimizeRun = Project.SpotTargetProject.OptimizeRuns.Last();
-                    Utilities.PopupWindowsRedirect(this, "Analyze_SpotColor.aspx");
+
+                    if (Project.SpotTargetProject.OptimizeRuns.Count == 1)
+                        Utilities.PopupWindowsRedirect(this, "Analyze_SpotColor.aspx");
+                    else
+                        Utilities.PopupWindowsRedirect(this,
+                                                           SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
+                                                               ? "Analyze_SpotColor.aspx"
+                                                               : "Spot_Measurement.aspx");
+
                     //Utilities.PopupWindowsRedirect(this,
                     //                                   SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
                     //                                       ? "Analyze_SpotColor.aspx"
