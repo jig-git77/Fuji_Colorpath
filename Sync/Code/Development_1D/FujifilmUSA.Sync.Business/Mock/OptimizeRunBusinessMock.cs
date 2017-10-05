@@ -141,6 +141,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
 
         }
+        public void DeleteSpotOptimizeRun(int OptimizeRunID, int SpotProjectID, int MasterRunID, EOptimizeRunStatus RunStatus)
+        {
+
+        }
         #endregion
 
         #region ITaskBase Members

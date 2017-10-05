@@ -872,6 +872,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateSpotProjectOptimizeRun"));
         }
 
+        public void DeleteSpotOptimizeRun(int OptimizeRunID, int SpotProjectID, int MasterRunID, EOptimizeRunStatus RunStatus)
+        {
+            Common.ImplementBusinessLogic(
+               () =>
+               DataAccessFactory.
+                   Instance.
+                   ExecuteProcedure(
+                      "[CPSpot].[DeleteOptimizeRun]",
+                       new object[]
+                           {
+                                OptimizeRunID,
+                                SpotProjectID,
+                                MasterRunID,
+                                (int)RunStatus
+                           }),
+               new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteSpotOptimizeRun"));
+        }
+
         #endregion
 
         #region ITaskBase Members

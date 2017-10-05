@@ -64,5 +64,17 @@ namespace FujifilmUSA.Sync.Presenter
                 DateTime.Now,
                 1);
         }
+        public void DeleteSpotOptimizeRun()
+        {
+            var optimizeRun = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRun.ErrorOccured += _viewLeftMenuProjectItem.ErrorOccured;
+            optimizeRun.DeleteSpotOptimizeRun(_viewLeftMenuProjectItem.OptimizeRunID, _viewLeftMenuProjectItem.SpotProjectId, _viewLeftMenuProjectItem.MasterRunID, _viewLeftMenuProjectItem.RunStatus);
+        }
+        public void GetProjectDetail_SpotProject()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewLeftMenuProjectItem.ErrorOccured;
+            _viewLeftMenuProjectItem.Project = projectBusiness.GetProjectDetail_SpotProject(_viewLeftMenuProjectItem.SpotProjectId);
+        }
     }
 }

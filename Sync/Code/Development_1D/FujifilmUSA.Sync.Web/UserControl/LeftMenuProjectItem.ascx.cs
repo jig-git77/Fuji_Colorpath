@@ -285,39 +285,64 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void btnRunDelete_Click(object sender, System.Web.UI.ImageClickEventArgs e)
         {
-            //--------------Delete the current run and move control to analyze page of last optimized run for this project-------------//
-            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            OptimizeRunID = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId;
-            MasterRunID = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
-            RunStatus = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status;
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                _presenterLeftMenuProjectItem.Delete1DOptimizeRun();
-            else
-                _presenterLeftMenuProjectItem.DeleteOptimizeRun();
 
-            if (!IsErrorOccured)
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
             {
-                _presenterLeftMenuProjectItem.GetProjectDetail();
+                //--------------Delete the current run and move control to analyze page of last optimized run for this project-------------//
+                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                OptimizeRunID = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId;
+                MasterRunID = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
+                RunStatus = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    _presenterLeftMenuProjectItem.Delete1DOptimizeRun();
+                else
+                    _presenterLeftMenuProjectItem.DeleteOptimizeRun();
+
                 if (!IsErrorOccured)
                 {
-                    SessionManager.Instance.CurrentProject = Project;
-                    SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-                    if (Project.OptimizeRuns.Count > 1)
+                    _presenterLeftMenuProjectItem.GetProjectDetail();
+                    if (!IsErrorOccured)
                     {
-                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
-                    }
-                    else
-                    {
-                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
-                    }
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                        if (Project.OptimizeRuns.Count > 1)
+                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                        else
+                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
 
-                    if ((SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D) && (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)) //---If Sync 1D, ReTargeted project and in Run-0 mode only, then go directly to Export page, since there is no Analyze Page for Run - 0
-                    {
-                        Response.Redirect("~/Export.aspx");
+                        if ((SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D) && (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0)) //---If Sync 1D, ReTargeted project and in Run-0 mode only, then go directly to Export page, since there is no Analyze Page for Run - 0
+                            Response.Redirect("~/Export.aspx");
+                        else
+                            Response.Redirect("~/Analyze.aspx");
                     }
-                    else
+                }
+            }
+            else
+            {
+                //current project spot library project
+                //--------------Delete the current run and move control to analyze page of last optimized run for this project-------------//
+                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
+                OptimizeRunID = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last().OptimizeRunId;
+                MasterRunID = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
+                RunStatus = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last().Status;
+
+                _presenterLeftMenuProjectItem.DeleteSpotOptimizeRun();
+                if (!IsErrorOccured)
+                {
+                    _presenterLeftMenuProjectItem.GetProjectDetail_SpotProject();
+                    if (!IsErrorOccured)
                     {
-                        Response.Redirect("~/Analyze.aspx");
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = Project.SpotTargetProject.OptimizeRuns.Last();
+                        if (Project.SpotTargetProject.OptimizeRuns.Count > 1)
+                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                        else
+                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
+
+                        if (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count == 1)
+                            Response.Redirect("~/Export.aspx");
+                        else
+                            Response.Redirect("~/Analyze_SpotColor.aspx");
                     }
                 }
             }
@@ -335,6 +360,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public EOptimizeRunStatus RunStatus { get; set; }
 
+        public int SpotProjectId { get; set; }
         #endregion
 
         protected void btnDLPDelete_Click(object sender, System.Web.UI.ImageClickEventArgs e)
