@@ -15,22 +15,20 @@
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 
 <style type="text/css">
-    .my_rectangle
-    {
+    .my_rectangle {
         width: 25px;
         height: 25px;
         background: pink;
     }
-    .tooltipclass
-    {
+
+    .tooltipclass {
         background: #fbfacd;
         border-width: 1px;
         border-style: solid;
         border-color: #000;
     }
-    
-    .pluginImageTooltipClass
-    {
+
+    .pluginImageTooltipClass {
         background: #fbfacd;
         border-width: 1px;
         border-style: solid;
@@ -38,8 +36,8 @@
         font-family: Tahoma;
         font-size: 11px;
     }
-    #modalBackground
-    {
+
+    #modalBackground {
         position: fixed;
         left: 0;
         top: 0;
@@ -51,8 +49,8 @@
         opacity: 0.40;
         filter: alpha(opacity=40);
     }
-    #modalWindow
-    {
+
+    #modalWindow {
         position: fixed;
         left: 0;
         top: 0;
@@ -62,10 +60,9 @@
         width: 40em;
         height: 10em;
     }
-    
+
     /************ Progress bar ***************/
-    .UpdateProgressBackground
-    {
+    .UpdateProgressBackground {
         z-index: 3003;
         position: fixed !important;
         filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=10);
@@ -103,7 +100,7 @@
 <div>
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
-           
+
             <asp:HiddenField ID="hdnPCSType" runat="server" />
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
@@ -111,38 +108,38 @@
                         <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name" meta:resourcekey="lblMeasurementNameResource1"></asp:Label>:&nbsp;
                     </td>
                     <td style="height: 27px;">
-                        <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px" meta:resourcekey="txtMeasurementNameResource1" MaxLength="30"></asp:TextBox>        
-                    </td>                    
-                    <td rowspan="2" ID="tdNotesCaption" runat="server" visible="false" align="right">
+                        <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px" meta:resourcekey="txtMeasurementNameResource1" MaxLength="30"></asp:TextBox>
+                    </td>
+                    <td rowspan="2" id="tdNotesCaption" runat="server" visible="false" align="right">
                         <asp:Label ID="lblNotes" runat="server" Text="Notes" meta:resourcekey="lblNotesResource1"></asp:Label>:&nbsp;
                     </td>
-                    <td rowspan="2" ID="tdNotes" runat="server" visible="false">
-                        <asp:TextBox ID="txtNotes" runat="server" Width="178px" Height="50px" TextMode="MultiLine" style="resize: none;" MaxLength="1000"></asp:TextBox>
+                    <td rowspan="2" id="tdNotes" runat="server" visible="false">
+                        <asp:TextBox ID="txtNotes" runat="server" Width="178px" Height="50px" TextMode="MultiLine" Style="resize: none;" MaxLength="1000"></asp:TextBox>
                     </td>
                 </tr>
-                <tr ID="trCustomer" runat="server" visible="false">
-                    <td align="right">            
+                <tr id="trCustomer" runat="server" visible="false">
+                    <td align="right">
                         <asp:Label ID="lblCustomer" runat="server" Text="Customer" meta:resourcekey="lblCustomerResource1"></asp:Label>:&nbsp;
                     </td>
                     <td>
                         <asp:TextBox ID="txtCustomer" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>
-                    </td>                   
+                    </td>
                 </tr>
                 <tr id="trValidationDetails" runat="server" visible="false">
                     <td align="right">
-                        <asp:Label ID="lblPageOrSurface" runat="server" Text="Page/Surface"  meta:resourcekey="lblPageOrSurfaceResource1"></asp:Label>:&nbsp;
+                        <asp:Label ID="lblPageOrSurface" runat="server" Text="Page/Surface" meta:resourcekey="lblPageOrSurfaceResource1"></asp:Label>:&nbsp;
                     </td>
                     <td style="height: 27px;">
-                        <asp:TextBox ID="txtPageOrSurface" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>        
+                        <asp:TextBox ID="txtPageOrSurface" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>
                     </td>
                     <td align="right">
-                        <asp:Label ID="lblJDFJobId" runat="server" Text="JDF Job ID"  meta:resourcekey="lblJDFJobIdResource1"></asp:Label>:&nbsp;
+                        <asp:Label ID="lblJDFJobId" runat="server" Text="JDF Job ID" meta:resourcekey="lblJDFJobIdResource1"></asp:Label>:&nbsp;
                     </td>
                     <td>
-                        <asp:TextBox ID="txtJDFJobId" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>                          
+                        <asp:TextBox ID="txtJDFJobId" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>
                     </td>
                 </tr>
-            </table>                               
+            </table>
         </div>
         <div class="float_r">
             <span>
@@ -165,7 +162,8 @@
     </div>
     <div class="color_pallate">
         <div class="color_pallate_head">
-            <asp:Localize runat="server" Text="Colorbar" ID="locColorBar" meta:resourcekey="locColorBarResource1"></asp:Localize></div>
+            <asp:Localize runat="server" Text="Colorbar" ID="locColorBar" meta:resourcekey="locColorBarResource1"></asp:Localize>
+        </div>
         <div class="color_pallate_middle">
             <div id='divProgressImageMaster' style="display: none;">
                 <div style="width: 200px; text-align: center; margin-left: 150px;">
@@ -181,13 +179,14 @@
             </div>
         </div>
         <div class="color_pallate_bottom">
-            &nbsp;</div>
+            &nbsp;
+        </div>
     </div>
     <div class="color_pallate">
         <div class="color_pallate_head">
             <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" meta:resourcekey="locRecentUploadResource1"></asp:Localize>
-              <div id="Div_ImportMeasurements" style="float:right; padding-right:10px;">
-                <input type="button" id="btnImportMeasurements"  value='<%= GetResourceString("btnImportMeasurements") %>' onclick="javascript:return ShowImportWindow();" />             
+            <div id="Div_ImportMeasurements" style="float: right; padding-right: 10px;">
+                <input type="button" id="btnImportMeasurements" value='<%= GetResourceString("btnImportMeasurements") %>' onclick="javascript:return ShowImportWindow();" />
             </div>
         </div>
         <div class="color_pallate_middle">
@@ -195,7 +194,8 @@
             </div>
         </div>
         <div class="color_pallate_bottom">
-            &nbsp;</div>
+            &nbsp;
+        </div>
     </div>
 </div>
 <!-- modal content -->
@@ -207,8 +207,8 @@
     </div>
     <div class='buttons'>
         <div class='no simplemodal-close'>
-            <input type="button" id="btnCloseModelPopup" value='<%= GetResourceString("btnCloseModelPopup") %>' style="border: none; background-color: transparent;
-                padding-top: 4px" /></div>
+            <input type="button" id="btnCloseModelPopup" value='<%= GetResourceString("btnCloseModelPopup") %>' style="border: none; background-color: transparent; padding-top: 4px" />
+        </div>
     </div>
 </div>
 <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Modal="True">
@@ -229,44 +229,41 @@
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
 <asp:HiddenField ID="hdMeasurementLimit" runat="server" Value="0" />
 <asp:HiddenField ID="hdDisplayImport" runat="server" Value="no" />
-<asp:HiddenField ID="hdDeviceType" runat="server"/>
+<asp:HiddenField ID="hdDeviceType" runat="server" />
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
 <span id="dummy"></span>
 <script id="MeasurementHeaderTemplate" type="text/x-jQuery-tmpl">
-          <tr>
-                <th scope="col">                
-                    <%= GetResourceString("measurementName") %>
-                </th>
-                <th scope="col">
-                    <%= GetResourceString("uploadDateTime") %>
-                </th>
-                <th scope="col">
-                    <%= GetResourceString("deleteButton") %>
-                </th>
-          </tr>
+    <tr>
+        <th scope="col">
+            <%= GetResourceString("measurementName") %>
+        </th>
+        <th scope="col">
+            <%= GetResourceString("uploadDateTime") %>
+        </th>
+        <th scope="col">
+            <%= GetResourceString("deleteButton") %>
+        </th>
+    </tr>
 </script>
 <script id="MeasurementDetailTemplate" type="text/x-jQuery-tmpl">
-         <tr id = "${MeasurementId}">
-                <td align="center">
-                    <span id="lblMeasurementName">
-                        ${MeasurementName}</span>
-                </td>
-                <td align="center">
-                    <span id="lblMeasurementDate">
-                       ${UploadDate}</span>
-                </td>
-                <td align="center">
-                    <input 
-                           type="image" 
-                            onclick="javascript:return ConfirmDeleteMeasurement(this);" 
-                            alt="Delete"
-                            src="Images/delete_icon.png" title="Delete Measurement" 
-                            id="imgbtnDelete"
-                            name=" ${MeasurementId}"
-                            >
-                </td>
-         </tr>
+    <tr id="${MeasurementId}">
+        <td align="center">
+            <span id="lblMeasurementName">${MeasurementName}</span>
+        </td>
+        <td align="center">
+            <span id="lblMeasurementDate">${UploadDate}</span>
+        </td>
+        <td align="center">
+            <input
+                type="image"
+                onclick="javascript:return ConfirmDeleteMeasurement(this);"
+                alt="Delete"
+                src="Images/delete_icon.png" title="Delete Measurement"
+                id="imgbtnDelete"
+                name=" ${MeasurementId}">
+        </td>
+    </tr>
 </script>
 <script language="javascript" type="text/javascript">
     var refreshTry = 0;
@@ -281,7 +278,7 @@
                 success: function (response) { },
                 error: function (XMLHttpRequest, textStatus, errorThrown) { }
             });
-         },(SessionTimeOut * 60 * 1000) - (1 * 60 * 1000));
+        },(SessionTimeOut * 60 * 1000) - (1 * 60 * 1000));
     });
     function ControlVisibility() {
         jQuery("[id*='btnCalibrate']").css('display', 'none');
@@ -393,7 +390,7 @@
         }
         else
         {
-             //Load progress bar
+            //Load progress bar
             LoadProgressBrowserWindow();
 
             var dt = new Date();
@@ -473,8 +470,8 @@
                     }
             });
      
-            refreshCanvas();
-            jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
+                refreshCanvas();
+                jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
             jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
         }
     }
@@ -519,43 +516,43 @@
                             if(json.length < <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit)%>)
                             {                               
                                 $("#Div_ImportMeasurements").css('visibility', 'visible');
-                            }    
-                            else
-                            {                               
-                                $("#Div_ImportMeasurements").css('visibility', 'hidden');
-                            }
-                        } 
+                        }    
                         else
-                        {
-                             $("#Div_ImportMeasurements").css('visibility', 'hidden');
-                        }                  
-                    }
-                    else {
+                        {                               
+                            $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                        }
+                    } 
+                    else
+                    {
+                        $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                    }                  
+                }
+        else {
                         jQuery("input[id*='hdHasMeasurement']").val('false');
-                        $("#measurementContainer").html("");
-                        $("#measurementContainer").append("<div class='no_data_found'>" + '<%= GetResourceString("noRecordsAvailable") %>' + "</div>");
-                        //----------------Display Import Button--------------//
+            $("#measurementContainer").html("");
+            $("#measurementContainer").append("<div class='no_data_found'>" + '<%= GetResourceString("noRecordsAvailable") %>' + "</div>");
+        //----------------Display Import Button--------------//
                         if(jQuery("input[id*='hdDisplayImport']").val() == "yes")
                         {
-                             $("#Div_ImportMeasurements").css('visibility', 'visible');
+                            $("#Div_ImportMeasurements").css('visibility', 'visible');
                         }
                         else
                         {
-                             $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            $("#Div_ImportMeasurements").css('visibility', 'hidden');
                         } 
                     }
-                },
-            success:
-                function (response) { },
-            error:
-                function (XMLHttpRequest, textStatus, errorThrown) {
-                    var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                    MeasurementDialog('<%= GetResourceString("errorCause") %>'+ jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
+                    },
+                    success:
+                        function (response) { },
+                    error:
+                        function (XMLHttpRequest, textStatus, errorThrown) {
+                            var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                            MeasurementDialog('<%= GetResourceString("errorCause") %>'+ jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
                 }
-        });
-    }
-    function ConfirmDeleteMeasurement(measurement) {
-        if (confirm('<%= AddMeasurement_DeleteMeasurement_Confirmation %>')) {
+                });
+                }
+                function ConfirmDeleteMeasurement(measurement) {
+                    if (confirm('<%= AddMeasurement_DeleteMeasurement_Confirmation %>')) {
             deletemeasurement(measurement.name);
             bindMeasurementData();
         }
@@ -669,20 +666,19 @@
         jQuery("[id*='divProgressImageMaster']").hide();
     }
 
-     function ShowImportWindow() {      
+    function ShowImportWindow() {      
         var oWnd = $find("<%= ImportMeasurementWindow.ClientID %>");
         oWnd.show();
         return false;
     }
 
-      function Close() {
+    function Close() {
         var oWnd = $find("<%= ImportMeasurementWindow.ClientID %>");
-        oWnd.close();
-        return false;
-    }
+          oWnd.close();
+          return false;
+      }
 </script>
-<div id="divBackgroundProgressMaster" class="UpdateProgressBackground" style="display: none;
-    position: fixed; top: 0px; left: 0px; height: 100%; width: 100%;">
+<div id="divBackgroundProgressMaster" class="UpdateProgressBackground" style="display: none; position: fixed; top: 0px; left: 0px; height: 100%; width: 100%;">
 </div>
 
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">

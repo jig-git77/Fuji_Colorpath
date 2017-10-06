@@ -21,5 +21,9 @@ namespace FujifilmUSA.Sync.Entity
 
         //public List<MeasuredColorChar> MeasuredColorChars { get; set; }
         //public Measurement Measurement { get; set; }
+
+        //for spot color measurement pathches properties
+        public int SpotId { get; set; }
+        public string SpotName { get; set; }
     }
 }

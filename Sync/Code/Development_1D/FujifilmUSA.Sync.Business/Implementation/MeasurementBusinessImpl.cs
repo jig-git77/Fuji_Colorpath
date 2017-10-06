@@ -1825,6 +1825,44 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurement"));
             return dtPatchDetails;
         }
+
+        public int SaveSpotMeasurement(Measurement measurement)
+        {
+            var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                var measurementPatches = new XElement("MeasurementPatches",
+                                                      measurement.MeasurementPatches.
+                                                          Select(x =>
+                                                                 new XElement("MeasurementPatch",
+                                                                              new XAttribute("SpotID", x.SampleName),
+                                                                              new XAttribute("SpotName", x.SampleName),
+                                                                              new XAttribute("Measured_L", x.CielabL),
+                                                                              new XAttribute("Measured_a", x.CielabA),
+                                                                              new XAttribute("Measured_b", x.CielabB)
+                                                                         )).ToList());
+
+                    DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure("CPSync4D.CreateMeasurement",
+                                         new List<Parameters>()
+                                                 {
+                                                     new Parameters() {ParameterName = "@MeasurementName", Size = 50, Type = DbType.String, Value = measurement.MeasurementName},
+                                                     new Parameters() {ParameterName = "@OptimizeRunID", Type = DbType.Int32, Value = measurement.OptimizeRunId},
+                                                     new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
+                                                     new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
+                                                     new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
+                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType)}
+                                                 },
+                                         new List<Parameters>()
+                                                 {
+                                                     outParam
+                                                 });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
+            return Convert.ToInt32(outParam.Value);
+        }
         #endregion
 
         #region ITaskBase Members

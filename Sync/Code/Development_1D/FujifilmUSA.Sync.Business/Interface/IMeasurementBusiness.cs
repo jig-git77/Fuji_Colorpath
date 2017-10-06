@@ -53,5 +53,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         DataSet GetMeasurementDataForScoring(int MeasurementId, string From_ΔE, int ProjectId, bool IsAverageOfMeasurements = false);
         DataSet GetDensityData_C(int OptimizeRunId);
         DataTable GetSpotPatchDetailsofMeasurement(int MeasurementId, int OperationID);
+        int SaveSpotMeasurement(Measurement measurement);
     }
 }

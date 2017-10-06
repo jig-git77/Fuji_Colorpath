@@ -182,6 +182,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataTable();
         }
+        public int SaveSpotMeasurement(Measurement measurement)
+        {
+            return 0;
+        }
         #endregion
 
         #region ITaskBase Members
