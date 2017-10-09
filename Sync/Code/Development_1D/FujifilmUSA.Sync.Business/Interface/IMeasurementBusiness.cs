@@ -54,5 +54,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         DataSet GetDensityData_C(int OptimizeRunId);
         DataTable GetSpotPatchDetailsofMeasurement(int MeasurementId, int OperationID);
         int SaveSpotMeasurement(Measurement measurement);
+        List<Measurement> GetSpotMeasurementsOnRunId(int optimizeRunId);
     }
 }

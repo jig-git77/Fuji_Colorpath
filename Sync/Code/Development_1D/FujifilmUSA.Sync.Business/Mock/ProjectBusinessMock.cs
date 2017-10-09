@@ -199,6 +199,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new byte[1];
         }
+        public ReferenceChartData GetSpotReferenceChartData(int spotProjectId, EReferenceChartDisType referenceChartDisType)
+        {
+            return new ReferenceChartData();
+        }
         #endregion
 
         #region ITaskBase Members

@@ -1863,6 +1863,35 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
             return Convert.ToInt32(outParam.Value);
         }
+
+        public List<Measurement> GetSpotMeasurementsOnRunId(int optimizeRunId)
+        {
+            var measurements = new List<Measurement>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSpot.GetMeasurementByOptimizeRunID",
+                                new object[] { optimizeRunId });
+                    measurements = dsMeasurements.
+                        Tables[0].
+                        AsEnumerable().
+                        Select(x => new Measurement()
+                        {
+                            MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                            MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                            MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
+                            UploadDate = DataReader.ReadString(x, "MeasurementDate"),
+                            OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
+                            IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotMeasurementsOnRunId"));
+            return measurements;
+        }
         #endregion
 
         #region ITaskBase Members

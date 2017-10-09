@@ -158,6 +158,7 @@ namespace FujifilmUSA.Sync.Web.Services
         public List<Entity.Measurement> Measurements { get; set; }
         public int MeasurementId { get; set; }
         public EReferenceChartDisType ReferenceChartDisType { get; set; }
+        public int SpotProjectId { get; set; }
         #endregion
 
         #region IViewBase Members
