@@ -3,12 +3,12 @@
     return date;
 };
 //here we are adding dummy querystring in URL as IE do not invoke service each and every time rather it takes from cache
-function GetReferenceChart(ProjectID, ReferenceChartDisplayTypeId) {
+function GetReferenceChart(ProjectID, ReferenceChartDisplayTypeId, IsSpotProjectType) {
    // debugger;
     jQuery.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: "Services/PluginDataService.svc/GetReferenceChart/" + ProjectID + "/" + ReferenceChartDisplayTypeId + "?TempId=" + Math.floor(Math.random() * 1000),
+        url: "Services/PluginDataService.svc/GetReferenceChart/" + ProjectID + "/" + ReferenceChartDisplayTypeId + "/" + IsSpotProjectType + "?TempId=" + Math.floor(Math.random() * 1000),
         processData: false,
         dataType: "json",
         success:
@@ -39,7 +39,9 @@ function SetChartResult(objChart) {
     }
 
     if (objChart.DeviceSetting != null && objChart.DeviceSetting.MeasurementSettings != null) {
+        alert('1');
         g_Chart["MeasurementDeviceSerial"] = objChart.DeviceSetting.SerialNumber;
+        alert(objChart.DeviceSetting.SerialNumber);
         g_Chart["DeviceSettings"]["Colorimetric.Illumination"] = objChart.DeviceSetting.MeasurementSettings.IlluminantName;
         g_Chart["DeviceSettings"]["Colorimetric.DensityStandard"] = objChart.DeviceSetting.MeasurementSettings.DensityType;
         g_Chart["DeviceSettings"]["Colorimetric.Observer"] = objChart.DeviceSetting.MeasurementSettings.ObserverTypeName;

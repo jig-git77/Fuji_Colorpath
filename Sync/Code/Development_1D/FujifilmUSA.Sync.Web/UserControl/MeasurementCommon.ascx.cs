@@ -77,6 +77,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                     }
                 }
+                hdSpotProjectType.Value = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary).ToString().ToLower();
             }
             SetVerificationControlVisibility();
         }

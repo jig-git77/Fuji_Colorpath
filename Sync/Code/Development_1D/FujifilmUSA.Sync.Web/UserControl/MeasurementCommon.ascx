@@ -230,6 +230,7 @@
 <asp:HiddenField ID="hdMeasurementLimit" runat="server" Value="0" />
 <asp:HiddenField ID="hdDisplayImport" runat="server" Value="no" />
 <asp:HiddenField ID="hdDeviceType" runat="server" />
+<asp:HiddenField ID="hdSpotProjectType" runat="server" />
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
 <span id="dummy"></span>
@@ -315,16 +316,16 @@
         jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
         var ReferenceChartTypeId = '';
         var SerialNo;
-        GetReferenceChart(jQuery("[id*='hdProjectId']").val(), jQuery("input[id$=hdReferenceChartDisplayType]").val());
+        GetReferenceChart(jQuery("[id*='hdProjectId']").val(), jQuery("input[id$=hdReferenceChartDisplayType]").val(), jQuery("[id*='hdSpotProjectType']").val());
     }
     jQuery(document).ready(function () {   
         
         ControlDisability(1,false,1,false,1,true,1,true);
-   
         jQuery("[id*='btnCalibrate']").click(function () {    
        
             ControlDisability(1,true,0,false,0,false,0,false);              
             calibrateDevice(g_ScannerList);     
+       
             return false;
         });
         jQuery("[id*='btnMeasureAndUploadChart']").click(function () {

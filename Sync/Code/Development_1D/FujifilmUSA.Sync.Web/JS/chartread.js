@@ -239,6 +239,8 @@ function presentScannerList(ScannerList) {
 
 
     for (var i = 0; i < ScannerList.length; i++) {
+        //alert(ScannerList[i]["Serial"]);
+        alert(g_Chart["MeasurementDeviceSerial"]);
         if (ScannerList[i]["State"] == "Deleted" || ScannerList[i]["Serial"] != g_Chart["MeasurementDeviceSerial"]) {
 
             jQuery("[id*='btnCalibrate']").css('display', 'none');

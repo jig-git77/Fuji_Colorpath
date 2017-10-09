@@ -50,14 +50,18 @@ namespace FujifilmUSA.Sync.Web.Services
             presenter.Save1DMeasurement();
         }
 
-        [WebGet(UriTemplate = "GetReferenceChart/{projectId}/{referencechartdisplaytype}")]
+        [WebGet(UriTemplate = "GetReferenceChart/{projectId}/{referencechartdisplaytype}/{IsSpotProjectType}")]
         [OperationContract]
-        public ReferenceChartData GetReferenceChart(string projectId, string referenceChartDisplayType)
+        public ReferenceChartData GetReferenceChart(string projectId, string referenceChartDisplayType, bool IsSpotProjectType)
         {
             this.ProjectId = Convert.ToInt32(projectId);
             this.ReferenceChartDisType = (EReferenceChartDisType) Enum.Parse(typeof (EReferenceChartDisType), referenceChartDisplayType);
             var presenter = new PresenterPluginDataService(this);
-            presenter.GetReferenceChartData();
+            if (IsSpotProjectType == false)
+            {
+                presenter.GetReferenceChartData();
+            }
+            else { presenter.GetSpotReferenceChartData(); }
             return ReferenceChartData;
         }
 
