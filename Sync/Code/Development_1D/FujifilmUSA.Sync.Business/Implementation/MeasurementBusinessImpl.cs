@@ -1845,7 +1845,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     DataAccessFactory.
                         Instance.
-                        ExecuteProcedure("CPSync4D.CreateMeasurement",
+                        ExecuteProcedure("CPSpot.CreateMeasurement",
                                          new List<Parameters>()
                                                  {
                                                      new Parameters() {ParameterName = "@MeasurementName", Size = 50, Type = DbType.String, Value = measurement.MeasurementName},
@@ -1860,7 +1860,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      outParam
                                                  });
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveSpotMeasurement"));
             return Convert.ToInt32(outParam.Value);
         }
 

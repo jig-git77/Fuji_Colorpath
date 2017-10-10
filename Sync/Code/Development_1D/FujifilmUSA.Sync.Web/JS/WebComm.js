@@ -39,9 +39,8 @@ function SetChartResult(objChart) {
     }
 
     if (objChart.DeviceSetting != null && objChart.DeviceSetting.MeasurementSettings != null) {
-        alert('1');
         g_Chart["MeasurementDeviceSerial"] = objChart.DeviceSetting.SerialNumber;
-        alert(objChart.DeviceSetting.SerialNumber);
+        //alert(objChart.DeviceSetting.SerialNumber);
         g_Chart["DeviceSettings"]["Colorimetric.Illumination"] = objChart.DeviceSetting.MeasurementSettings.IlluminantName;
         g_Chart["DeviceSettings"]["Colorimetric.DensityStandard"] = objChart.DeviceSetting.MeasurementSettings.DensityType;
         g_Chart["DeviceSettings"]["Colorimetric.Observer"] = objChart.DeviceSetting.MeasurementSettings.ObserverTypeName;

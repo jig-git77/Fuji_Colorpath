@@ -47,7 +47,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation).ToString().ToLower();
                 hdLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
-                hdProjectId.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
+                    hdProjectId.Value = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId.ToString();
+                else
+                    hdProjectId.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
+
                 hdOptimizeRunId.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
                 hdDeviceType.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId.ToString();
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)

@@ -329,6 +329,7 @@
             return false;
         });
         jQuery("[id*='btnMeasureAndUploadChart']").click(function () {
+
             if (jQuery("[id*='hdMeasureAndUploadChart']").val() == 'measurechart') 
             {              
                 ControlDisability(1,true,1,true,1,false,1,true);
@@ -431,6 +432,18 @@
                     PCSDataType :PCSDataType
                 };
             }
+            else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary %>')
+            {
+                saveMeasurementUrl="Services/PluginDataService.svc/SaveSpotMeasurement";
+                obj = {
+                    MeasurementName: MsmtName,
+                    MeasurementDate: MeasurementDateTime,
+                    OptimizeRunId: OptimizeRunId,
+                    ReferenceChartTypeId: ReferenceChartTypeId,
+                    MeasurementPatches: MeasuredPatches,
+                    PCSDataType :PCSDataType
+                };
+            }
             else
             {
                 saveMeasurementUrl="Services/PluginDataService.svc/SaveMeasurement";
@@ -488,6 +501,10 @@
         else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>')
         {
             getMeasurementUrl = "Services/PluginDataService.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
+        }
+        else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary %>')
+        {
+            getMeasurementUrl = "Services/PluginDataService.svc/GetSpotMeasurementsByOptimizeId/" + OptimizeRunId;
         }
         else
         {
@@ -569,6 +586,10 @@
         else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>')
         {
             deleteMeasurementUrl = "Services/PluginDataService.svc/Delete1DMeasurement/" + measurementId;
+        }
+        else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary %>')
+        {
+            deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteSpotMeasurement/" + measurementId;
         }
         else
         {

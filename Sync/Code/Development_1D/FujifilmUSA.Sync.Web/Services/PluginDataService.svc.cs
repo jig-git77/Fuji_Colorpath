@@ -52,16 +52,21 @@ namespace FujifilmUSA.Sync.Web.Services
 
         [WebGet(UriTemplate = "GetReferenceChart/{projectId}/{referencechartdisplaytype}/{IsSpotProjectType}")]
         [OperationContract]
-        public ReferenceChartData GetReferenceChart(string projectId, string referenceChartDisplayType, bool IsSpotProjectType)
+        public ReferenceChartData GetReferenceChart(string projectId, string referenceChartDisplayType, string IsSpotProjectType)
         {
-            this.ProjectId = Convert.ToInt32(projectId);
+            
             this.ReferenceChartDisType = (EReferenceChartDisType) Enum.Parse(typeof (EReferenceChartDisType), referenceChartDisplayType);
             var presenter = new PresenterPluginDataService(this);
-            if (IsSpotProjectType == false)
+            if (Convert.ToBoolean(IsSpotProjectType) == false)
             {
+                this.ProjectId = Convert.ToInt32(projectId);
                 presenter.GetReferenceChartData();
             }
-            else { presenter.GetSpotReferenceChartData(); }
+            else
+            {
+                this.SpotProjectId = Convert.ToInt32(projectId);
+                presenter.GetSpotReferenceChartData();
+            }
             return ReferenceChartData;
         }
 
@@ -152,6 +157,38 @@ namespace FujifilmUSA.Sync.Web.Services
         public bool KeepUserSessionAlive()
         {
             return true;
+        }
+
+        [WebInvoke(Method = "POST", UriTemplate = "SaveSpotMeasurement")]
+        [OperationContract]
+        public void SaveSpotMeasurement(Entity.Measurement measurement)
+        {
+            this.Measurement = measurement;
+            var presenter = new PresenterPluginDataService(this);
+            presenter.SaveSpotMeasurement();
+        }
+
+        [WebInvoke(Method = "GET", UriTemplate = "GetSpotMeasurementsByOptimizeId/{optimizeRunId}")]
+        [OperationContract]
+        public List<Entity.Measurement> GetSpotMeasurementsByOptimizeId(string optimizeRunId)
+        {
+            this.OptimizeRunId = Convert.ToInt32(optimizeRunId);
+            var presenter = new PresenterPluginDataService(this);
+            presenter.GetSpotMeasurementsOnRunId();
+            if (Measurements.Count == 0) //------If someone delete all measurements, and still able to go to Analyze page, then set this to false
+            {
+                FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentOptimizeRun.HasMeasurements = false;
+            }
+            return Measurements;
+        }
+
+        [WebInvoke(Method = "POST", UriTemplate = "DeleteSpotMeasurement/{measurementId}")]
+        [OperationContract]
+        public bool DeleteSpotMeasurement(string measurementId)
+        {
+            MeasurementId = Convert.ToInt32(measurementId);
+            var presenter = new PresenterPluginDataService(this);
+            return presenter.DeleteSpotMeasurement();
         }
 
         #region IViewPluginDataService Members

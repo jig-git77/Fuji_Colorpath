@@ -890,6 +890,25 @@ namespace FujifilmUSA.Sync.Business.Implementation
                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteSpotOptimizeRun"));
         }
 
+        public bool DeleteSpotMeasurement(int measurementId)
+        {
+            int affectedRow = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    affectedRow = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CPSpot].[DeleteMeasurement]",
+                            new object[]
+                                    {
+                                        measurementId
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteSpotMeasurement"));
+            return (affectedRow > 0);
+        }
+
         #endregion
 
         #region ITaskBase Members
