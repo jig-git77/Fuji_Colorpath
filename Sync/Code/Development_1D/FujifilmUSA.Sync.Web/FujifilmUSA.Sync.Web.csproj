@@ -2016,6 +2016,7 @@
     <Content Include="UserControl\ReportSingleMeasurement.ascx" />
     <Content Include="UserControl\ReportSingleMeasurement_G7_Vali.ascx" />
     <Content Include="UserControl\SpotMeasurement.ascx" />
+    <Content Include="UserControl\SpotMeasurementCommon.ascx" />
     <Content Include="UserControl\Spot_Measurement.ascx" />
     <Content Include="UserControl\ValidationContainer.ascx" />
     <Content Include="UserControl\Permission.ascx" />
@@ -3061,6 +3062,13 @@
     </Compile>
     <Compile Include="UserControl\SpotMeasurement.ascx.designer.cs">
       <DependentUpon>SpotMeasurement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SpotMeasurementCommon.ascx.cs">
+      <DependentUpon>SpotMeasurementCommon.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SpotMeasurementCommon.ascx.designer.cs">
+      <DependentUpon>SpotMeasurementCommon.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\Spot_Measurement.ascx.cs">
       <DependentUpon>Spot_Measurement.ascx</DependentUpon>
@@ -5222,6 +5230,9 @@
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\Spot_Measurement.ascx.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\SpotMeasurementCommon.ascx.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -5245,7 +5256,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

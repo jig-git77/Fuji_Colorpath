@@ -328,8 +328,7 @@
        
             return false;
         });
-        jQuery("[id*='btnMeasureAndUploadChart']").click(function () {
-
+        jQuery("[id*='btnMeasureAndUploadChart']").click(function () {            
             if (jQuery("[id*='hdMeasureAndUploadChart']").val() == 'measurechart') 
             {              
                 ControlDisability(1,true,1,true,1,false,1,true);
