@@ -308,7 +308,7 @@ function ListDevicesNow() {
 }
 
 function scan(scanner, colorspace, chart) {
-
+    alert('1');
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
     if (g_Chart["Result"] > 0) g_Chart["Result"].length = 0;
     var localchart = chart;
@@ -427,25 +427,30 @@ function scan(scanner, colorspace, chart) {
         }
     }
     else {
-
+       
         //-----------------Preview chart for i1-Pro----------------//
         var canvas = document.getElementById("Canvas");
         var context = canvas.getContext("2d");
         context.clearRect(0, 0, canvas.width, canvas.height);
 
+       
         var result = plugin().read(scanner, localchart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
+       
+        alert(result);
         if (result == "ERROR: Activation Error") {
+           
             jQuery("[id*='lblMessage']").css('color', 'Red');
             jQuery("[id*='lblMessage']").html(locInvalidMeasurementDevice);
             return;
         }
         else if (result != "OK") {
+          
             jQuery("[id*='lblMessage']").css('color', 'Red');
             jQuery("[id*='lblMessage']").html(locScanningDeviceUnplugged);
             return;
         }
         // Display the original chart from the reference values.
-
+     
         var area = new Object();
         area["W"] = 0;
         area["H"] = 0;
@@ -475,7 +480,7 @@ function scan(scanner, colorspace, chart) {
         else {
             h = h * 6;
         }
-
+        
         canvas.width = w;       //---Assign new height & width
         canvas.height = h;
 
@@ -488,6 +493,7 @@ function scan(scanner, colorspace, chart) {
 
             area["W"] = ((w / col) / 2) + '';
             distance["C"] = ((w / col) / 2) + '';
+
         }
         else {
 
@@ -498,7 +504,6 @@ function scan(scanner, colorspace, chart) {
             area["W"] = ((w / col) / 2) - 1 + '';       // Have to do 1 minus because it doesn't fit in canvas width for last cell
             distance["C"] = ((w / col) / 2) - 1 + '';   // Have to do 1 minus because it doesn't fit in canvas width for last cell
         }
-
 
         var noOfCells = chart["Size"];
         var drawCells = 0;
@@ -519,7 +524,6 @@ function scan(scanner, colorspace, chart) {
                     x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
 
                     var rgbx = chart["RefBase"][cId]["HTMLColor"];
-
                     context.fillStyle = rgbx;
                     context.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
 

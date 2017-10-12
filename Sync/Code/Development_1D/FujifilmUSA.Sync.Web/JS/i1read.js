@@ -135,11 +135,13 @@ function presentStripDialogi1(scanner, chart, query) {
     // will present the options of which strip to read next (defaulting to the
     // next strip in the sequence).
     //
+   
     if (query["Request"] == "READACKNOWLEDGED") {
         query["Prompt"] = locStripReadInProgress;
     } else if (query["Request"] == "GETCHARTLOCATION") {
         // reget the chart position and we'll see if it changes.
         g_SavedQuery = query;
+       
         getChartLocation(scanner);
     } else {
 

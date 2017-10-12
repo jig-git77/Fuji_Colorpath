@@ -40,7 +40,6 @@ function SetChartResult(objChart) {
 
     if (objChart.DeviceSetting != null && objChart.DeviceSetting.MeasurementSettings != null) {
         g_Chart["MeasurementDeviceSerial"] = objChart.DeviceSetting.SerialNumber;
-        //alert(objChart.DeviceSetting.SerialNumber);
         g_Chart["DeviceSettings"]["Colorimetric.Illumination"] = objChart.DeviceSetting.MeasurementSettings.IlluminantName;
         g_Chart["DeviceSettings"]["Colorimetric.DensityStandard"] = objChart.DeviceSetting.MeasurementSettings.DensityType;
         g_Chart["DeviceSettings"]["Colorimetric.Observer"] = objChart.DeviceSetting.MeasurementSettings.ObserverTypeName;
@@ -168,11 +167,11 @@ function SetChartResult(objChart) {
         var patch = new Object();
         patch["SampleName"] = objChart.ReferenceCharts[i].SampleName;
         patch["HTMLColor"] = objChart.ReferenceCharts[i].HtmlColor;
-        patch["CMYK_C"] = objChart.ReferenceCharts[i].CmykC;
-        patch["CMYK_M"] = objChart.ReferenceCharts[i].CmykM;
-        patch["CMYK_Y"] = objChart.ReferenceCharts[i].CmykY;
-        patch["CMYK_K"] = objChart.ReferenceCharts[i].CmykK;
-        patch["PatchTypeID"] = objChart.ReferenceCharts[i].PatchTypeId;
+        //patch["CMYK_C"] = objChart.ReferenceCharts[i].CmykC;
+        //patch["CMYK_M"] = objChart.ReferenceCharts[i].CmykM;
+        //patch["CMYK_Y"] = objChart.ReferenceCharts[i].CmykY;
+        //patch["CMYK_K"] = objChart.ReferenceCharts[i].CmykK;
+        //patch["PatchTypeID"] = objChart.ReferenceCharts[i].PatchTypeId;
         g_Chart["RefBase"].push(patch);
     }
 

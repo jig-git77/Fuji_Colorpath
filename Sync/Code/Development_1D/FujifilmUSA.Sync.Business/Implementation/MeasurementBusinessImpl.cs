@@ -1836,7 +1836,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                       measurement.MeasurementPatches.
                                                           Select(x =>
                                                                  new XElement("MeasurementPatch",
-                                                                              new XAttribute("SpotID", x.SampleName),
                                                                               new XAttribute("SpotName", x.SampleName),
                                                                               new XAttribute("Measured_L", x.CielabL),
                                                                               new XAttribute("Measured_a", x.CielabA),
@@ -1851,7 +1850,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@MeasurementName", Size = 50, Type = DbType.String, Value = measurement.MeasurementName},
                                                      new Parameters() {ParameterName = "@OptimizeRunID", Type = DbType.Int32, Value = measurement.OptimizeRunId},
                                                      new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
-                                                     new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
+                                                  //   new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
                                                      new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType)}
                                                  },

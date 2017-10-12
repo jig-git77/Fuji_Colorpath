@@ -54,7 +54,6 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public ReferenceChartData GetReferenceChart(string projectId, string referenceChartDisplayType, string IsSpotProjectType)
         {
-            
             this.ReferenceChartDisType = (EReferenceChartDisType) Enum.Parse(typeof (EReferenceChartDisType), referenceChartDisplayType);
             var presenter = new PresenterPluginDataService(this);
             if (Convert.ToBoolean(IsSpotProjectType) == false)
