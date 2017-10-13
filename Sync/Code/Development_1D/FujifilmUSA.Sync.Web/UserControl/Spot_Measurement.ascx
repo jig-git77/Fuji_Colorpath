@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="Spot_Measurement.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Spot_Measurement" %>
 <meta http-equiv="Cache-Control" content="no-cache" />
-<%@ Register Src="~/UserControl/SpotMeasurementCommon.ascx" TagName="SpotMeasurementCommon"
+<%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon"
     TagPrefix="uc" %>
 <script language="javascript">
     function AllowToAnalyze() {
@@ -74,7 +74,7 @@
         <div class="bottom">
             &nbsp;</div>
     </div>
-    <uc:SpotMeasurementCommon ID="ucSpotMeasurementCommon" runat="server" Type="Optimization" />
+    <uc:MeasurementCommon ID="ucMeasurementCommon" runat="server" Type="Optimization" />
 </div>
 <div class="contant_bottom">
     &nbsp;</div>

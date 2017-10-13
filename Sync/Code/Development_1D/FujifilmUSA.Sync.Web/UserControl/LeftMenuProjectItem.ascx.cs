@@ -233,11 +233,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
                     if (lnkItem.ID == "lnkMeasurement")
                     {
-                        Response.Redirect("Measurement.aspx");
+                        if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
+                            Response.Redirect("Measurement.aspx");
+                        else
+                            Response.Redirect("Spot_Measurement.aspx");
                     }
                     else if (lnkItem.ID == "lnkAnalyse")
                     {
-                        Response.Redirect("Analyze.aspx");
+                        if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
+                            Response.Redirect("Analyze.aspx");
+                        else
+                            Response.Redirect("Analyze_SpotColor.aspx");
                     }
                     else if (lnkItem.ID == "lnkDownload")
                     {
@@ -250,14 +256,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lnkRunName_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+
             switch (ItemLevel)
             {
                 case ELeftMenuItemLevel.OptimizeRun:
                     SessionManager.Instance.CurrentOptimizeRun = this.CurrentRun;
-                    Response.Redirect(
+                    if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
+                        Response.Redirect(
+                            CurrentRun.HasMeasurements
+                                ? "Analyze.aspx"
+                                : "Measurement.aspx");
+                    else
+                        Response.Redirect(
                         CurrentRun.HasMeasurements
-                            ? "Analyze.aspx"
-                            : "Measurement.aspx");
+                            ? "Analyze_SpotColor.aspx"
+                            : "Spot_Measurement.aspx");
+
                     break;
             }
         }
@@ -265,22 +279,43 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkAddRun_Click(object sender, EventArgs e)
         {
-            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                _presenterLeftMenuProjectItem.Create1DOptimizeRun();
-            else
-                _presenterLeftMenuProjectItem.CreateOptimizeRun();
-            if (!IsErrorOccured)
+
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                _presenterLeftMenuProjectItem.GetProjectDetail();
+                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    _presenterLeftMenuProjectItem.Create1DOptimizeRun();
+                else
+                    _presenterLeftMenuProjectItem.CreateOptimizeRun();
                 if (!IsErrorOccured)
                 {
-                    SessionManager.Instance.CurrentProject = Project;
-                    SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-                    SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
-                    Response.Redirect("~/Measurement.aspx");
+                    _presenterLeftMenuProjectItem.GetProjectDetail();
+                    if (!IsErrorOccured)
+                    {
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                        Response.Redirect("~/Measurement.aspx");
+                    }
                 }
             }
+            else
+            {
+                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
+                _presenterLeftMenuProjectItem.CreateOptimizeRun_SpotProject();
+                if (!IsErrorOccured)
+                {
+                    _presenterLeftMenuProjectItem.GetProjectDetail_SpotProject();
+                    if (!IsErrorOccured)
+                    {
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last();
+                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                        Response.Redirect("Spot_Measurement.aspx");
+                    }
+                }
+            }
+            
         }
 
         protected void btnRunDelete_Click(object sender, System.Web.UI.ImageClickEventArgs e)

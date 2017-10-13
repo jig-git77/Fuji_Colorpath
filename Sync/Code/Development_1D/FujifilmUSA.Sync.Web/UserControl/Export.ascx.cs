@@ -134,7 +134,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
             }
-
         }
 
         protected void lbtnDownloadDLP_Click(object sender, EventArgs e)
