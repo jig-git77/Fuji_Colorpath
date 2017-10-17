@@ -866,6 +866,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                        new object[]
                            {
                                 optimizeRunID,
+                                //ProfileData,
                                 status,
                                 startDateTime
                            }),

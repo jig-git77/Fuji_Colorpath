@@ -285,7 +285,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public bool IsAverageOfMeasurements { get; set; }
         public bool Is1DMeasurementSmoothing { get; set; }
         public int ProjectStatus { get; set; }
-        
+        public Project Project { get; set; }
+        public int SpotProjectId { get; set; }
         #endregion        
     }
 }

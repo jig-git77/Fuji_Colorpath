@@ -57,5 +57,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         bool IsAverageOfMeasurements { get; set; }
         bool Is1DMeasurementSmoothing { get; set; }
         int ProjectStatus { get; set; }
+        Project Project { get; set; }
+        int SpotProjectId { get; set; }
     }
 }

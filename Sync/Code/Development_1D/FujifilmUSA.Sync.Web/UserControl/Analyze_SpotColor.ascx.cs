@@ -60,7 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured)
                 {
                     //Now we are using DataTable as DataSource                    
-           
+
                     decimal totalDeltaE = 0;
                     decimal avgDeltaE = 0;
 
@@ -90,20 +90,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-    
+
 
         protected void lbtnDownloadAndSaveNCP_Click(object sender, EventArgs e)
         {
             if (!IsNCPCreated)
             {
-                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                    _presenterAnalyze.Get1DMeasurementsOnRunId();
-                else
-                    _presenterAnalyze.GetMeasurementsOnRunId();
+                ProjectStatus = Convert.ToInt32(EOptimizeRunStatus.Closed);
+                _presenterAnalyze.UpdateOptimizeRun_SpotProject();
+                if (!IsErrorOccured)
+                {
+                    _presenterAnalyze.GetProjectDetail_SpotProject();
+                    if (!IsErrorOccured)
+                    {
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last();
+                        Response.Redirect("Export.aspx");
+                    }
+                }
             }
-            Response.Redirect("Export.aspx");
+            else
+            {
+                Response.Redirect("Export.aspx");
+            }
+            
         }
 
         [WebMethod(EnableSession = true)]
@@ -259,6 +271,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public string FileName;
         public int ProjectStatus { get; set; }
+        public Project Project { get; set; }
+        public int SpotProjectId { get; set; }
         #endregion
     }
 }

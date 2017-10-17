@@ -3556,7 +3556,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public string FileName;
         public int ProjectStatus { get; set; }
-
+        public Project Project { get; set; }
+        public int SpotProjectId { get; set; }
         #endregion
 
     }
