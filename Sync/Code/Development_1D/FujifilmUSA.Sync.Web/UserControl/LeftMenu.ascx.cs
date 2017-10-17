@@ -133,24 +133,51 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case ECurrentProjectStatus.Edit:
                     ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
                     ctrlItem.ItemLevel = ELeftMenuItemLevel.Project;
-                    ctrlItem.ItemName = SessionManager.Instance.CurrentProject.ProjectName;
-                    ph.Controls.Add(ctrlItem);
-
-                    ph.Controls.Add(this.LoadControl("~/UserControl/LeftMenuProjectSetting.ascx"));
-
-                    if (SessionManager.Instance.CurrentProject.OptimizeRuns == null) return;
-                    foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
+                    if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
                     {
-                        if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation ||
-                            item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+                        
+                        ctrlItem.ItemName = SessionManager.Instance.CurrentProject.ProjectName;
+                        ph.Controls.Add(ctrlItem);
+
+                        ph.Controls.Add(this.LoadControl("~/UserControl/LeftMenuProjectSetting.ascx"));
+
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns == null) return;
+                        foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
                         {
-                            var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
-                            ctrlProjItem.ItemLevel = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
-                                                         ? ELeftMenuItemLevel.Validation
-                                                         : ELeftMenuItemLevel.OptimizeRun;
-                            ctrlProjItem.ItemName = item.RunName;
-                            ctrlProjItem.CurrentRun = item;
-                            ph.Controls.Add(ctrlProjItem);
+                            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation ||
+                                item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+                            {
+                                var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
+                                ctrlProjItem.ItemLevel = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                                                             ? ELeftMenuItemLevel.Validation
+                                                             : ELeftMenuItemLevel.OptimizeRun;
+                                ctrlProjItem.ItemName = item.RunName;
+                                ctrlProjItem.CurrentRun = item;
+                                ph.Controls.Add(ctrlProjItem);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ctrlItem.ItemName = SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName;
+                        ph.Controls.Add(ctrlItem);
+
+                        ph.Controls.Add(this.LoadControl("~/UserControl/LeftMenuProjectSetting.ascx"));
+
+                        if (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns == null) return;
+                        foreach (var item in SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns)
+                        {
+                            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation ||
+                                item.OptimizeRunId != SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId)
+                            {
+                                var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
+                                ctrlProjItem.ItemLevel = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                                                             ? ELeftMenuItemLevel.Validation
+                                                             : ELeftMenuItemLevel.OptimizeRun;
+                                ctrlProjItem.ItemName = item.RunName;
+                                ctrlProjItem.CurrentRun = item;
+                                ph.Controls.Add(ctrlProjItem);
+                            }
                         }
                     }
                     break;

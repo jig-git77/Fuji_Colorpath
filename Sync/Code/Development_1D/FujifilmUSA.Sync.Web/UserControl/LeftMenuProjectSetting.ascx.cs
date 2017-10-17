@@ -113,39 +113,68 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                 case ECurrentProjectStatus.Edit:
                     //If verification, then don't enable Measurementsetup, analyze and download links...
-                    if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation)
+                    if(!isSpotLibraryProject)
                     {
-                        if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0)
+                        if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation)
                         {
-                            lnkMeasurementSetup.Enabled = true;
+                            if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0)
+                            {
+                                lnkMeasurementSetup.Enabled = true;
+                            }
+
+                            if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0)
+                            {
+                                if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource)
+                                {
+                                    lnkAnalyze.Enabled = true;
+                                }
+                                if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile)
+                                {
+                                    lnkDownload.Enabled = true;
+                                }
+                            }
                         }
 
-                        if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0)
+                        if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key > 0)
                         {
-                            if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.CustomSourceProfile && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.ReProfileCustomSource)
+                            lnkValidationSetup.Enabled = true;
+                        }
+                        if (SessionManager.Instance.CurrentProject.ProjectId > 0)
+                        {
+                            lnkSave.Enabled = true;
+                            lnkDescription.Enabled = true;
+                        }
+                        break;
+
+                    }
+                    else
+                    {
+                        if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation)
+                        {
+                            //if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0)
+                            {
+                                lnkMeasurementSetup.Enabled = true;
+                            }
+
+                            if (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count > 0)
                             {
                                 lnkAnalyze.Enabled = true;
-                            }
-                            if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile)
-                            {
-                                lnkDownload.Enabled = true;
+                                lnkDownload.Enabled = true;                                
                             }
                         }
-                    }
-                    if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.SpotLibrary)
-                    {
 
+                        if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key > 0)
+                        {
+                            lnkValidationSetup.Enabled = true;
+                        }
+                        if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId > 0)
+                        {
+                            lnkSave.Enabled = true;
+                            lnkDescription.Enabled = true;
+                        }
+                        break;
                     }
-                    if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key > 0)
-                    {
-                        lnkValidationSetup.Enabled = true;
-                    }
-                    if (SessionManager.Instance.CurrentProject.ProjectId > 0)
-                    {
-                        lnkSave.Enabled = true;
-                        lnkDescription.Enabled = true;
-                    }
-                    break;
+                    
                 case ECurrentProjectStatus.Run:
                     //This control won't load...
                     break;
