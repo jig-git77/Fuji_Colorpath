@@ -57,7 +57,12 @@
                             data: { id: optimizationId },
                             dataType: "json",
                             success: function (response) {
-                                options.success(response.data)
+                                if (response.data != null) {
+                                    $('#lblMinDeltaE').html(response.data.minDeltaE);
+                                    $('#lblMaxDeltaE').html(response.data.maxDeltaE);
+                                    $('#lblAvgDeltaE').html(response.data.avgDeltaE);
+                                }
+                                options.success(response.data.patchDetails)
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
                                 alert(textStatus);
@@ -195,17 +200,17 @@
                                                     <tr>
                                                         <td><b>Min ΔE</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblMinDeltaE"></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblMinDeltaE" ClientIDMode="Static" ></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Average ΔE</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblAvgDeltaE"></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblAvgDeltaE" ClientIDMode="Static"></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Max ΔE</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblMaxDeltaE"></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblMaxDeltaE" ClientIDMode="Static"></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Media</b></td>

@@ -189,14 +189,22 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GetPatchDetails(int id)
         {
             IHttpActionResult actionResult = null;
-            BaseResponse<List<Dictionary<string, object>>> httpResponse = new BaseResponse<List<Dictionary<string, object>>>();
+            BaseResponse<SpotAnalyze> httpResponse = new BaseResponse<SpotAnalyze>();
             try
             {
                 MeasurementId = 0;
                 OptimizeRunId = Convert.ToInt32(id);
 
                 _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
-                List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
+                //Now we are using DataTable as DataSource                    
+                SpotAnalyze spotAnalyzeDetails = new SpotAnalyze();
+                decimal totalDeltaE = 0;
+                decimal avgDeltaE = 0;
+
+                //count Avg, Max and Min ΔE
+                decimal minDtE = int.MaxValue;
+                decimal maxDtE = int.MinValue;
+                //List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
                 Dictionary<string, object> childRow;
                 foreach (DataRow row in dtPatchDetails.Rows)
                 {
@@ -205,9 +213,21 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     {
                         childRow.Add(col.ColumnName, row[col]);
                     }
-                    parentRow.Add(childRow);
+
+                    decimal DtE = row.Field<decimal>("ΔE");
+                    totalDeltaE += DtE;
+                    minDtE = Math.Min(minDtE, DtE);
+                    maxDtE = Math.Max(maxDtE, DtE);
+
+                    spotAnalyzeDetails.patchDetails.Add(childRow);
                 }
-                httpResponse.Data = parentRow;
+
+                avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
+                spotAnalyzeDetails.minDeltaE = minDtE.ToString();
+                spotAnalyzeDetails.maxDeltaE = maxDtE.ToString();
+                spotAnalyzeDetails.avgDeltaE = String.Format("{0:0.###}", avgDeltaE);
+
+                httpResponse.Data = spotAnalyzeDetails;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
             }
             catch (Exception ex)
