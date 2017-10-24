@@ -1806,7 +1806,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         public DataTable GetSpotPatchDetailsofMeasurement(int OperationID)
-        {
+        {            
             // var PatchDetails = new List<MeasurementPatchDetails>();
             string storedProc = "CPSpot.GetPatchDetailsByMeasurementID";
             DataTable dtPatchDetails = new DataTable();
@@ -1822,7 +1822,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     if (dsMeasurements.Tables.Count > 0)
                         dtPatchDetails = dsMeasurements.Tables[0];
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurement"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotPatchDetailsofMeasurement"));
             return dtPatchDetails;
         }
 

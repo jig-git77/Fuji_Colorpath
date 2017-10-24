@@ -20,11 +20,12 @@
 </style>
 <div style="display: block;" class="contantbox">
     <div>
-        <div style="float: left; width: 50%;">
+        <div style="float: left; width: 70%;">
             <table class="PatchDetailsTable">
                 <tr>
                     <th>Target</th>
                     <th>Predicted</th>
+                    <th>Measured</th>
                 </tr>
                 <tr style="height: 75px;">
                     <td>
@@ -32,6 +33,9 @@
                     </td>
                     <td>
                         <div runat="server" id="divActual" style="height: 75px;"></div>
+                    </td>
+                    <td>
+                        <div runat="server" id="divMeasured" style="height: 75px;"></div>
                     </td>
                 </tr>
                 <tr>
@@ -96,6 +100,65 @@
                                     <asp:Label runat="server" ID="lblActualB"></asp:Label></td>
                                 <td>
                                     <asp:Label runat="server" ID="lblDeltaB">---</asp:Label></td>
+                            </tr>
+                            <%--<tr>
+                                <td>
+                                    <asp:Label runat="server" ID="lblActualH"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblDeltaH">---</asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label runat="server" ID="lblActualC"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblDeltaC">---</asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label runat="server" ID="lblActualPC"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblDeltaPC">---</asp:Label></td>
+                            </tr>--%>
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <th>Measured</th>
+                                <th>DeltaL</th>
+                                <th>DeltaA</th>
+                                <th>DeltaB</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label runat="server" ID="Label1" Text="Measured_L*"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="Label2" Text="0"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="Label7" Text="0"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="Label8" Text="0"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label runat="server" ID="Label3" Text="Measured_a*"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="Label4" Text="0"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="Label9" Text="0"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="Label10" Text="0"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label runat="server" ID="Label5" Text="Measured_b*"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="Label6" Text="0"></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="Label11" Text="0"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="Label12" Text="0"></asp:Label></td>
                             </tr>
                             <%--<tr>
                                 <td>
