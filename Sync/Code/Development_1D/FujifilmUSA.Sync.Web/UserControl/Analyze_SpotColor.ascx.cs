@@ -40,7 +40,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lblRipSettings.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.RipSettings;
                     lblSpotTarget.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetName;
                     hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
-                    BindPatchDetails_Summary();
+                    OptimizeRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId);
+                    hdfOptimizationRunID.Value = OptimizeRunId.ToString(); ;
+                    //BindPatchDetails_Summary();
                 }
             }
         }
@@ -51,8 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentOptimizeRun != null)
             {
                 MeasurementId = 0;
-                OptimizeRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId);
-                hdfOptimizationRunID.Value = OptimizeRunId.ToString(); ;
+                
                 //Now we are using DataTable to bind the grid               
                 dtPatchDetails = new DataTable();
                 _presenterAnalyze.GetSpotPatchDetailsofMeasurement();

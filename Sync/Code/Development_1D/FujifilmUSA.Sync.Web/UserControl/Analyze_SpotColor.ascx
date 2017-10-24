@@ -57,10 +57,17 @@
                             data: { id: optimizationId },
                             dataType: "json",
                             success: function (response) {
-                                options.success(response.data)
+                                console.log(response.data);
+                                if (response.data != null) {
+                                    $('#lblMinDeltaE').html(response.data.minDeltaE);
+                                    $('#lblMaxDeltaE').html(response.data.maxDeltaE);
+                                    $('#lblAvgDeltaE').html(response.data.avgDeltaE);
+                                }
+                                options.success(response.data.patchDetails);
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                alert(textStatus);
+                                console.log(XMLHttpRequest);
+                                //alert(XMLHttpRequest);
                             }
                         });
                     },
@@ -106,6 +113,7 @@
               {
                   field: "SpotName",
                   title: "<b>Spot Name</b>",
+                  width: 150
               },
                 {
                     field: "ΔL",
@@ -126,8 +134,41 @@
                     field: "ΔE",
                     title: "<b>pΔE</b>",
                     width: 80
+                },
+                {
+                    field: "ΔE_T_P",
+                    title: "<b>ΔE_T_P</b>",
+                    width: 120
+                },
+                {
+                    field: "ΔE_M_T",
+                    title: "<b>ΔE_M_T</b>",
+                    width: 120
+                },
+                {
+                    field: "ΔE_M_P",
+                    title: "<b>ΔE_M_P</b>",
+                    width: 120
                 }
-            ]
+            ],
+            dataBound: function (e) {
+                var measurementId = 0;
+                if (e.sender.dataSource._view.length > 0) {
+                    measurementId = e.sender.dataSource._view[0].MeasurementID;
+                }
+
+                if (measurementId > 0) {
+                    this.hideColumn(4);
+                    this.hideColumn(5);
+                    this.hideColumn(6);
+                    this.hideColumn(7);
+                }
+                else {
+                    this.hideColumn(8);
+                    this.hideColumn(9);
+                    this.hideColumn(10);
+                }
+            }
         });
     });
 
@@ -195,17 +236,17 @@
                                                     <tr>
                                                         <td><b>Min ΔE</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblMinDeltaE"></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblMinDeltaE" ClientIDMode="Static" Text="Loading..." ></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Average ΔE</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblAvgDeltaE"></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblAvgDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Max ΔE</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblMaxDeltaE"></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblMaxDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Media</b></td>

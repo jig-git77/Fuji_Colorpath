@@ -20,7 +20,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
     public class ChartController : BaseController, IViewAnalyze
     {
         #region Variable Declarations
-        private PresenterAnalyze _presenterAnalyze;        
+        private PresenterAnalyze _presenterAnalyze;
         private Dictionary<string, string> _resourceValues { get; set; }
         private Dictionary<string, string> _globalResourceValues { get; set; }
         private const string _InvalidMeasurementId = "Invalid_MeasurementId";
@@ -31,7 +31,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         protected override void Initialize(HttpControllerContext controllerContext)
         {
-            _presenterAnalyze = new PresenterAnalyze(this);            
+            _presenterAnalyze = new PresenterAnalyze(this);
             _globalResourceValues = new Dictionary<string, string>();
             _resourceValues = new Dictionary<string, string>();
             _resourceValues.Add("_recgbPatchMetrics", "gbPatchMetricsText");
@@ -189,25 +189,58 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GetPatchDetails(int id)
         {
             IHttpActionResult actionResult = null;
-            BaseResponse<List<Dictionary<string, object>>> httpResponse = new BaseResponse<List<Dictionary<string, object>>>();
+            BaseResponse<SpotAnalyze> httpResponse = new BaseResponse<SpotAnalyze>();
             try
             {
                 MeasurementId = 0;
                 OptimizeRunId = Convert.ToInt32(id);
 
                 _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
-                List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
-                Dictionary<string, object> childRow;
-                foreach (DataRow row in dtPatchDetails.Rows)
+
+                //Now we are using DataTable as DataSource                    
+                SpotAnalyze spotAnalyzeDetails = new SpotAnalyze();
+                decimal totalDeltaE = 0;
+                decimal avgDeltaE = 0;
+                int measurementID = 0;
+                //count Avg, Max and Min ΔE
+                decimal minDtE = int.MaxValue;
+                decimal maxDtE = int.MinValue;
+
+                if (dtPatchDetails.Rows.Count > 0)
                 {
-                    childRow = new Dictionary<string, object>();
-                    foreach (DataColumn col in dtPatchDetails.Columns)
+                    //get the measurement id 
+                    measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
+
+                    Dictionary<string, object> childRow;
+                    foreach (DataRow row in dtPatchDetails.Rows)
                     {
-                        childRow.Add(col.ColumnName, row[col]);
+                        childRow = new Dictionary<string, object>();
+                        foreach (DataColumn col in dtPatchDetails.Columns)
+                        {
+                            childRow.Add(col.ColumnName, row[col]);
+                        }
+
+                        decimal DtE = 0;
+                        if (measurementID > 0)
+                            DtE = string.IsNullOrEmpty(Convert.ToString(row.Field<decimal?>("ΔE_M_T"))) ? 0 : row.Field<decimal>("ΔE_M_T");//for run-1,2,.....
+                        else
+                            DtE = row.Field<decimal?>("ΔE") == null ? 0 : row.Field<decimal>("ΔE");//only for run-0
+
+                        totalDeltaE += DtE;
+                        minDtE = Math.Min(minDtE, DtE);
+                        maxDtE = Math.Max(maxDtE, DtE);
+
+                        spotAnalyzeDetails.patchDetails.Add(childRow);
                     }
-                    parentRow.Add(childRow);
+                    avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
                 }
-                httpResponse.Data = parentRow;
+
+                
+                spotAnalyzeDetails.minDeltaE = minDtE.ToString();
+                spotAnalyzeDetails.maxDeltaE = maxDtE.ToString();
+                spotAnalyzeDetails.avgDeltaE = String.Format("{0:0.###}", avgDeltaE);
+
+                httpResponse.Data = spotAnalyzeDetails;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
             }
             catch (Exception ex)
@@ -218,7 +251,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
-        }        
+        }
 
         #region IViewAnalyze Members
         public int ProjectId { get; set; }

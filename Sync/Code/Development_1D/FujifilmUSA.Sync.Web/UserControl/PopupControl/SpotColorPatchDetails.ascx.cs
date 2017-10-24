@@ -62,6 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
             divActual.Style.Add("background-color", htmlColor);
             divTarget.Style.Add("background-color", htmlColor);
+            divMeasured.Style.Add("background-color", htmlColor);
 
             //FillPaperChart(Delta_L, Delta_a, Delta_b);
         }
