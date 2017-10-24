@@ -586,6 +586,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 var familyPreset =
                     ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
                         x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
+
+                familyPreset.
+                ProfilerOptionPresets.Where(x => x.ProfileTypeId == Convert.ToInt32(EProfileType.DeviceLinkProfile)).ToList().
+                ForEach(x =>
+                {
+                    var option = (EProfilerOption)Enum.Parse(typeof(EProfilerOption), x.ProfilerOption.ProfilerOptionId.ToString());
+                    switch (option)
+                    {
+                        case EProfilerOption.BlackStart:
+                            x.ProfilerOptionValue = rdsBlackStart.Value.ToString();
+                            x.ProfilerOptionValue = txtBlackStart.Text;
+                            break;
+                        case EProfilerOption.BlackWidth:
+                            x.ProfilerOptionValue = rdsBlackWidth.Value.ToString();
+                            x.ProfilerOptionValue = txtBlackWidth.Text;
+                            break;
+                    }
+                });
+
                 familyPreset.ProfilerOptionPresets.ForEach(x =>
                                                            SessionManager.Instance.CurrentProject.ProjectOption.
                                                                Add(new ProjectOption()
@@ -594,6 +613,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                                            ProfilerOptionId = x.ProfilerOption.ProfilerOptionId,
                                                                            ProfilerOptionValue = x.ProfilerOptionValue,
                                                                        }));
+
+              
             }
 
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If "Ink Optimization Source" project type, then skip Measurement and Validation setup pages.
@@ -619,6 +640,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
             }
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
+        }
+
+        protected void rdsMode_ValueChanged(object sender, EventArgs e)
+        {
+            txtMode.Text = (sender as Telerik.Web.UI.RadSlider).Value.ToString();
+        }
+
+        protected void rdsBlackStart_ValueChanged(object sender, EventArgs e)
+        {
+            txtBlackStart.Text = (sender as Telerik.Web.UI.RadSlider).Value.ToString();
+        }
+      
+        protected void rdsBlackWidth_ValueChanged(object sender, EventArgs e)
+        {
+            txtBlackWidth.Text = (sender as Telerik.Web.UI.RadSlider).Value.ToString();
         }
         #endregion
 

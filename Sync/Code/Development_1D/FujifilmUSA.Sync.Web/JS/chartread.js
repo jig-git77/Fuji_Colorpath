@@ -308,7 +308,6 @@ function ListDevicesNow() {
 }
 
 function scan(scanner, colorspace, chart) {
-    alert('1');
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
     if (g_Chart["Result"] > 0) g_Chart["Result"].length = 0;
     var localchart = chart;
@@ -436,7 +435,6 @@ function scan(scanner, colorspace, chart) {
        
         var result = plugin().read(scanner, localchart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
        
-        alert(result);
         if (result == "ERROR: Activation Error") {
            
             jQuery("[id*='lblMessage']").css('color', 'Red');

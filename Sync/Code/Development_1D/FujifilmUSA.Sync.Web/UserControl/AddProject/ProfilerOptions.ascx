@@ -76,6 +76,14 @@
 
     }
 
+    function clientValueChange(sender, eventArgs) {
+        //var myDiv = document.getElementById("myDiv")
+        //myDiv.innerHTML = "Old value is:" + eventArgs.get_oldValue()
+        // + "  New value:" + sender.get_value();
+
+        document.getElementById("<%=txtBlackStart.ClientID%>").val(sender.get_value());
+    }
+
      </script>
 <script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {
@@ -221,7 +229,7 @@
                                 </div>
                             </div>
                             <asp:Panel ID="panelAdvancedOptions" Style="padding: 1px" runat="server" BorderStyle="None"
-                                Width="100%" Enabled="False" 
+                                Width="100%" Enabled="true" 
                                 meta:resourcekey="panelAdvancedOptionsResource1">
                                 <table cellpadding="0" cellspacing="10" border="0">
                                     <tr>
@@ -290,10 +298,10 @@
                                                                             meta:resourcekey="locGCRResource1"></asp:Localize></span>
                                                                     </td>
                                                                     <td style="width: 160px;">
-                                                                        <telerik:RadSlider runat="server" ID="rdsMode" MinimumValue="-100" MaximumValue="10"
-                                                                            Width="160px" DbValue="-100" Height="22px" Length="160" 
-                                                                            meta:resourcekey="rdsModeResource1" SelectionEnd="-100" SelectionStart="-100" 
-                                                                            Value="-100" Enabled="false">
+                                                                        <telerik:RadSlider runat="server" ID="rdsMode" MinimumValue="-100" MaximumValue="10"  OnValueChanged="rdsMode_ValueChanged" 
+                                                                            Width="160px" DbValue="0" Height="22px" Length="160" 
+                                                                            meta:resourcekey="rdsModeResource1" SelectionEnd="10" SelectionStart="-100" 
+                                                                            Enabled="true" AutoPostBack="true">
                                                                         </telerik:RadSlider>
                                                                     </td>
                                                                     <td>
@@ -307,9 +315,9 @@
                                                                             meta:resourcekey="locBlackStartResource1"></asp:Localize></span>
                                                                     </td>
                                                                     <td style="width: 160px;">
-                                                                        <telerik:RadSlider runat="server" ID="rdsBlackStart"
-                                                                            Width="160px" DbValue="0" Height="22px" Length="160" 
-                                                                            meta:resourcekey="rdsBlackStartResource1" Enabled="false">
+                                                                        <telerik:RadSlider runat="server" ID="rdsBlackStart" OnValueChanged="rdsBlackStart_ValueChanged" 
+                                                                            Width="160px" DbValue="0" Height="22px" Length="160"  MinimumValue="0" MaximumValue="100"
+                                                                            meta:resourcekey="rdsBlackStartResource1" Enabled="true" AutoPostBack="true">
                                                                         </telerik:RadSlider>
                                                                     </td>
                                                                     <td>
@@ -323,9 +331,9 @@
                                                                             meta:resourcekey="locBlackWidthResource1"></asp:Localize></span>
                                                                     </td>
                                                                     <td style="width: 160px;">
-                                                                        <telerik:RadSlider runat="server" ID="rdsBlackWidth"
-                                                                            Width="160px" DbValue="0" Height="22px" Length="160" 
-                                                                            meta:resourcekey="rdsBlackWidthResource1" Enabled="false">
+                                                                        <telerik:RadSlider runat="server" ID="rdsBlackWidth" OnValueChanged="rdsBlackWidth_ValueChanged" 
+                                                                            Width="160px" DbValue="0" Height="22px" Length="160"  MinimumValue="0" MaximumValue="100"
+                                                                            meta:resourcekey="rdsBlackWidthResource1" Enabled="true" AutoPostBack="true">
                                                                         </telerik:RadSlider>
                                                                     </td>
                                                                     <td>
