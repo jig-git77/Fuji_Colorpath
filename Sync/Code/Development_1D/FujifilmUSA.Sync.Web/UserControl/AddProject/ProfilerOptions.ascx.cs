@@ -180,6 +180,39 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     cmbSelectedPresets.SelectedValue = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId.ToString();
                     cmbSelectedPresets_SelectedIndexChanged(null, null);
+
+                    if (SessionManager.Instance.CurrentProject.ProjectOption != null && SessionManager.Instance.CurrentProject.ProjectOption.Count > 0) //Profiler options value set from session for existing Sync 4D projects
+                    {
+                        int indexMode = SessionManager.Instance.CurrentProject.ProjectOption.FindIndex(item => item.ProfilerOptionId == 20);
+                        if (indexMode > 0)
+                        {
+                            txtMode.Text = SessionManager.Instance.CurrentProject.ProjectOption[indexMode].ProfilerOptionValue;
+                            rdsMode.Value = Convert.ToDecimal(SessionManager.Instance.CurrentProject.ProjectOption[indexMode].ProfilerOptionValue);
+                        }
+                        int indexBlackStart = SessionManager.Instance.CurrentProject.ProjectOption.FindIndex(item => item.ProfilerOptionId == 21);
+                        if (indexBlackStart > 0)
+                        {
+                            txtBlackStart.Text = SessionManager.Instance.CurrentProject.ProjectOption[indexBlackStart].ProfilerOptionValue;
+                            rdsBlackStart.Value = Convert.ToDecimal(SessionManager.Instance.CurrentProject.ProjectOption[indexBlackStart].ProfilerOptionValue);
+                        }
+                        int indexBlackWidth = SessionManager.Instance.CurrentProject.ProjectOption.FindIndex(item => item.ProfilerOptionId == 22);
+                        if (indexBlackWidth > 0)
+                        {
+                            txtBlackWidth.Text = SessionManager.Instance.CurrentProject.ProjectOption[indexBlackWidth].ProfilerOptionValue;
+                            rdsBlackWidth.Value = Convert.ToDecimal(SessionManager.Instance.CurrentProject.ProjectOption[indexBlackWidth].ProfilerOptionValue);
+                        }
+                        int indexInkTotal = SessionManager.Instance.CurrentProject.ProjectOption.FindIndex(item => item.ProfilerOptionId == 19);
+                        if (indexInkTotal > 0)
+                        {
+                            txtInkTotal.Text = SessionManager.Instance.CurrentProject.ProjectOption[indexInkTotal].ProfilerOptionValue;
+                            rdsInkTotal.Value = Convert.ToDecimal(SessionManager.Instance.CurrentProject.ProjectOption[indexInkTotal].ProfilerOptionValue);
+                        }
+                        int indexInkMax = SessionManager.Instance.CurrentProject.ProjectOption.FindIndex(item => item.ProfilerOptionId == 18);
+                        if (indexInkMax > 0)
+                        {
+                            txtBlackPointCustom.Text = SessionManager.Instance.CurrentProject.ProjectOption[indexInkMax].ProfilerOptionValue;
+                        }
+                    }
                 }
             }
         }
@@ -401,11 +434,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                             txtBlackPointCustom.Text = x.ProfilerOptionValue;
                                             break;
                                         case EProfilerOption.InkTotal:
-                                            txtMaxInk.Text = x.ProfilerOptionValue;
+                                            rdsInkTotal.Value = Convert.ToDecimal(x.ProfilerOptionValue);
+                                            txtInkTotal.Text = x.ProfilerOptionValue;
                                             break;
                                         case EProfilerOption.BlackGeneration:
-                                            //rdsMode.Value = Convert.ToDecimal(x.ProfilerOptionValue);
-                                            //txtMode.Text = x.ProfilerOptionValue;
+                                            rdsMode.Value = Convert.ToDecimal(x.ProfilerOptionValue);
+                                            txtMode.Text = x.ProfilerOptionValue;
                                             break;
                                         case EProfilerOption.BlackStart:
                                             rdsBlackStart.Value = Convert.ToDecimal(x.ProfilerOptionValue);
@@ -594,6 +628,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     var option = (EProfilerOption)Enum.Parse(typeof(EProfilerOption), x.ProfilerOption.ProfilerOptionId.ToString());
                     switch (option)
                     {
+                        case EProfilerOption.BlackGeneration:
+                            x.ProfilerOptionValue = rdsMode.Value.ToString();
+                            x.ProfilerOptionValue = txtMode.Text;
+                            break;
                         case EProfilerOption.BlackStart:
                             x.ProfilerOptionValue = rdsBlackStart.Value.ToString();
                             x.ProfilerOptionValue = txtBlackStart.Text;
@@ -601,6 +639,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case EProfilerOption.BlackWidth:
                             x.ProfilerOptionValue = rdsBlackWidth.Value.ToString();
                             x.ProfilerOptionValue = txtBlackWidth.Text;
+                            break;
+                        case EProfilerOption.InkTotal:
+                            x.ProfilerOptionValue = rdsInkTotal.Value.ToString();
+                            x.ProfilerOptionValue = txtInkTotal.Text;
+                            break;
+                        case EProfilerOption.InkMax:
+                            x.ProfilerOptionValue = txtBlackPointCustom.Text;
                             break;
                     }
                 });
@@ -655,6 +700,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rdsBlackWidth_ValueChanged(object sender, EventArgs e)
         {
             txtBlackWidth.Text = (sender as Telerik.Web.UI.RadSlider).Value.ToString();
+        }
+
+        protected void rdsInkTotal_ValueChanged(object sender, EventArgs e)
+        {
+            txtInkTotal.Text = (sender as Telerik.Web.UI.RadSlider).Value.ToString();
         }
         #endregion
 
@@ -1241,7 +1291,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             cmbRendering.SelectedValue = "0";
             txtBlackPointCustom.Text = string.Empty;
-            txtMaxInk.Text = string.Empty;
+            txtInkTotal.Text = string.Empty;
             rdsMode.Value = rdsMode.MinimumValue;
             txtMode.Text = string.Empty;
             rdsBlackStart.Value = rdsBlackStart.MinimumValue;
