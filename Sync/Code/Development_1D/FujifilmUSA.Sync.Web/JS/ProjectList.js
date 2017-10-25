@@ -550,13 +550,11 @@ function detailInit(e) {
         toolbar: [{ 'name': 'createSpot', template: '<button onclick="return Redirect(' + pID + ',\'AddSpotProject\');" class=\'k-button\'>Create New Library</button>' }],
         dataBound: function (e) {
             console.log('chile bound event');
-            debugger;
 
             var dataSource = this.dataSource;
             this.element.find('tr').each(function (){
                 var row = $(this);
                 if (dataSource.getByUid(row.data('uid')) != undefined) {
-                    debugger;
 
                     var data = dataSource.getByUid(row.data('uid'));
                     switch (data.Status) {

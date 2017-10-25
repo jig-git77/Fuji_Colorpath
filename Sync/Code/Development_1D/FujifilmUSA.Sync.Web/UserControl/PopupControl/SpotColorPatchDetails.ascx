@@ -20,7 +20,89 @@
 </style>
 <div style="display: block;" class="contantbox">
     <div>
-        <div style="float: left; width: 70%;">
+        <div runat="server" id="divPatchDetailsRun0" visible="false" style="float: left; width: 50%;">
+            <table class="PatchDetailsTable">
+                <tr>
+                    <th>Target</th>
+                    <th>Predicted</th>
+                </tr>
+                <tr style="height: 75px;">
+                    <td>
+                        <div runat="server" id="divTargetRun0" style="height: 75px;"></div>
+                    </td>
+                    <td>
+                        <div runat="server" id="divActualRun0" style="height: 75px;"></div>
+                    </td>                    
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Target</th>
+                            </tr>
+                            <tr>
+                                <td><b>L</b></td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblTargetLRun0"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td><b>A</b></td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblTargetARun0"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td><b>B</b></td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblTargetBRun0"></asp:Label></td>
+                            </tr>
+                            <%--  <tr>
+                                <td><b>H</b></td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblTargetH">---</asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td><b>C</b></td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblTargetC">---</asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td><b>PC</b></td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblTargetPC">---</asp:Label></td>
+                            </tr>--%>
+                        </table>
+                    </td>
+                    <td>
+                        <table runat="server">
+                            <tr>
+                                <th>Predicted</th>
+                                <th>Delta</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label runat="server" ID="lblActualLRun0"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblDeltaL"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label runat="server" ID="lblActualARun0"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblDeltaA"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label runat="server" ID="lblActualBRun0"></asp:Label></td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblDeltaB">---</asp:Label></td>
+                            </tr>
+                        </table>                        
+                    </td>
+            </tr>
+            </table>
+        </div>
+        <div runat="server" id="divPatchDetailsRun"  visible="false" style="float: left; width: 70%;">
             <table class="PatchDetailsTable">
                 <tr>
                     <th>Target</th>
@@ -60,127 +142,69 @@
                                 <td>
                                     <asp:Label runat="server" ID="lblTargetB"></asp:Label></td>
                             </tr>
-                            <%--  <tr>
-                                <td><b>H</b></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTargetH">---</asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td><b>C</b></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTargetC">---</asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td><b>PC</b></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTargetPC">---</asp:Label></td>
-                            </tr>--%>
                         </table>
                     </td>
                     <td>
-                        <table>
+                        <table runat="server" id="Table1">
                             <tr>
                                 <th>Predicted</th>
-                                <th>Delta</th>
+                                <th>Measured</th>
                             </tr>
                             <tr>
                                 <td>
                                     <asp:Label runat="server" ID="lblActualL"></asp:Label></td>
                                 <td>
-                                    <asp:Label runat="server" ID="lblDeltaL"></asp:Label></td>
+                                    <asp:Label runat="server" ID="lblMeasuredL"></asp:Label></td>
                             </tr>
                             <tr>
                                 <td>
                                     <asp:Label runat="server" ID="lblActualA"></asp:Label></td>
                                 <td>
-                                    <asp:Label runat="server" ID="lblDeltaA"></asp:Label></td>
+                                    <asp:Label runat="server" ID="lblMeasuredA"></asp:Label></td>
                             </tr>
                             <tr>
                                 <td>
                                     <asp:Label runat="server" ID="lblActualB"></asp:Label></td>
                                 <td>
-                                    <asp:Label runat="server" ID="lblDeltaB">---</asp:Label></td>
+                                    <asp:Label runat="server" ID="lblMeasuredB">---</asp:Label></td>
                             </tr>
-                            <%--<tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblActualH"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblDeltaH">---</asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblActualC"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblDeltaC">---</asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblActualPC"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblDeltaPC">---</asp:Label></td>
-                            </tr>--%>
-                        </table>
+                        </table>                        
                     </td>
                     <td>
                         <table>
                             <tr>
-                                <th>Measured</th>
-                                <th>DeltaL</th>
-                                <th>DeltaA</th>
-                                <th>DeltaB</th>
+                                <th>Delta_T_P</th>
+                                <th>Delta_M_T</th>
+                                <th>Delta_M_P</th>
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Label runat="server" ID="Label1" Text="Measured_L*"></asp:Label></td>
+                                    <asp:Label runat="server" ID="lblTarget_PredictedL" Text="0"></asp:Label></td>
                                 <td>
-                                    <asp:Label runat="server" ID="Label2" Text="0"></asp:Label></td>
+                                    <asp:Label runat="server" ID="lblMeasured_TargetL" Text="0"></asp:Label></td>
                                 <td>
-                                    <asp:Label runat="server" ID="Label7" Text="0"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="Label8" Text="0"></asp:Label></td>
+                                    <asp:Label runat="server" ID="lblMeasured_PredictedL" Text="0"></asp:Label></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Label runat="server" ID="Label3" Text="Measured_a*"></asp:Label></td>
+                                    <asp:Label runat="server" ID="lblTarget_PredictedA" Text="0"></asp:Label></td>
                                 <td>
-                                    <asp:Label runat="server" ID="Label4" Text="0"></asp:Label></td>
+                                    <asp:Label runat="server" ID="lblMeasured_TargetA" Text="0"></asp:Label></td>
                                 <td>
-                                    <asp:Label runat="server" ID="Label9" Text="0"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="Label10" Text="0"></asp:Label></td>
+                                    <asp:Label runat="server" ID="lblMeasured_PredictedA" Text="0"></asp:Label></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Label runat="server" ID="Label5" Text="Measured_b*"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="Label6" Text="0"></asp:Label>
+                                    <asp:Label runat="server" ID="lblTarget_PredictedB" Text="0"></asp:Label>
                                 </td>
                                 <td>
-                                    <asp:Label runat="server" ID="Label11" Text="0"></asp:Label></td>
+                                    <asp:Label runat="server" ID="lblMeasured_TargetB" Text="0"></asp:Label></td>
                                 <td>
-                                    <asp:Label runat="server" ID="Label12" Text="0"></asp:Label></td>
+                                    <asp:Label runat="server" ID="lblMeasured_PredictedB" Text="0"></asp:Label></td>
                             </tr>
-                            <%--<tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblActualH"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblDeltaH">---</asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblActualC"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblDeltaC">---</asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblActualPC"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblDeltaPC">---</asp:Label></td>
-                            </tr>--%>
                         </table>
                     </td>
-                </tr>
+            </tr>
             </table>
         </div>
         <div>
@@ -196,13 +220,17 @@
                                 </asp:Legend>
                             </Legends>
                             <Series>
-                                <asp:Series Name="Red" ChartType="Polar"  Color="Red"
-                                     MarkerSize="20" MarkerBorderWidth="2" MarkerBorderColor="Red" MarkerStyle="Circle" 
-                                     MarkerColor="Red" ShadowOffset="1" ChartArea="Default" Legend="Default">
+                                <asp:Series Name="Red" ChartType="Polar" Color="Red"
+                                    MarkerSize="20" MarkerBorderWidth="2" MarkerBorderColor="Red" MarkerStyle="Circle"
+                                    MarkerColor="Red" ShadowOffset="1" ChartArea="Default" Legend="Default">
                                 </asp:Series>
                                 <asp:Series Name="Green" ChartType="Polar" Color="Green"
                                     MarkerSize="10" MarkerBorderWidth="2" MarkerBorderColor="Green" MarkerStyle="Circle"
                                     MarkerColor="Green" ShadowOffset="1" ChartArea="Default" Legend="Default">
+                                </asp:Series>
+                                <asp:Series Name="Purple" ChartType="Polar" Color="Green"
+                                    MarkerSize="7" MarkerBorderWidth="2" MarkerBorderColor="Purple" MarkerStyle="Circle"
+                                    MarkerColor="Purple" ShadowOffset="1" ChartArea="Default" Legend="Default">
                                 </asp:Series>
                             </Series>
                             <BorderSkin PageColor="AliceBlue" />
@@ -227,8 +255,8 @@
                             </ChartAreas>
                         </asp:Chart>
                     </td>
-                  
-                    <td align="center" style="width: 50px; padding-left:22px;">
+
+                    <td align="center" style="width: 50px; padding-left: 22px;">
 
                         <asp:Chart ID="chartPaper2" runat="server" BackImage="~/Images/SpotL_Bg.jpg" BackImageWrapMode="Scaled"
                             ImageType="Jpeg" Width="50px" Height="180px" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_PaperLab2"
@@ -238,13 +266,17 @@
                                 </asp:Legend>
                             </Legends>
                             <Series>
-                                <asp:Series Name="Red" ChartType="Polar"  Color="Red"
-                                     MarkerSize="20" MarkerBorderWidth="2" MarkerBorderColor="Red" MarkerStyle="Circle" 
-                                     MarkerColor="Red" ShadowOffset="1" ChartArea="Default" Legend="Default">
+                                <asp:Series Name="Red" ChartType="Polar" Color="Red"
+                                    MarkerSize="20" MarkerBorderWidth="2" MarkerBorderColor="Red" MarkerStyle="Circle"
+                                    MarkerColor="Red" ShadowOffset="1" ChartArea="Default" Legend="Default">
                                 </asp:Series>
                                 <asp:Series Name="Green" ChartType="Polar" Color="Green"
                                     MarkerSize="10" MarkerBorderWidth="2" MarkerBorderColor="Green" MarkerStyle="Circle"
                                     MarkerColor="Green" ShadowOffset="1" ChartArea="Default" Legend="Default">
+                                </asp:Series>
+                                <asp:Series Name="Purple" ChartType="Polar" Color="Purple"
+                                    MarkerSize="7" MarkerBorderWidth="2" MarkerBorderColor="Purple" MarkerStyle="Circle"
+                                    MarkerColor="Purple" ShadowOffset="1" ChartArea="Default" Legend="Default">
                                 </asp:Series>
                             </Series>
                             <BorderSkin PageColor="AliceBlue" />

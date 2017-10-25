@@ -53,7 +53,7 @@
                     read: function (options) {
                         $.ajax({
                             type: "GET",
-                            url: SERVICE_BASE_URL+ "api/Chart/GetPatchDetails/",
+                            url: SERVICE_BASE_URL + "api/Chart/GetPatchDetails/",
                             data: { id: optimizationId },
                             dataType: "json",
                             success: function (response) {
@@ -73,6 +73,69 @@
                     },
 
                 },
+                schema: {
+                    model: {
+                        fields: {
+                            SpotID: {
+                                from: "SpotID"
+                            },
+                            SpotName: {
+                                from: "SpotName"
+                            },
+                            CMYK_C: {
+                                from: "CMYK_C"
+                            },
+                            CMYK_M: {
+                                from: "CMYK_M"
+                            },
+                            CMYK_Y: {
+                                from: "CMYK_Y"
+                            },
+                            CMYK_K: {
+                                from: "CMYK_K"
+                            },
+                            HTMLColor: {
+                                from: "HTMLColor"
+                            },
+                            TargetL: {
+                                from: "TargetL"
+                            },
+                            Targeta: {
+                                from: "Targeta"
+                            },
+                            Targetb: {
+                                from: "Targetb"
+                            },
+                            CIELAB_L: {
+                                from: "CIELAB_L"
+                            },
+                            CIELAB_a: {
+                                from: "CIELAB_a"
+                            },
+                            ΔL: {
+                                from: "ΔL"
+                            },
+                            Δa: {
+                                from: "Δa"
+                            },
+                            Δb: {
+                                from: "Δb"
+                            },
+                            Measured_L: {
+                                from: "Measured_L"
+                            },
+                            Measured_a: {
+                                from: "Measured_a"
+                            },
+                            Measured_b: {
+                                from: "Measured_b"
+                            },
+                            MeasurementID: {
+                                from: "MeasurementID"
+                            }
+                        }
+                    }
+                },
                 pageSize: 10
             },
             sortable: true,
@@ -85,36 +148,37 @@
                 }
             },
             sortable: true,
-            filterable:true,
+            filterable: true,
             pageable: {
                 refresh: true,
                 pageSizes: true
             },
             columns: [
-               {
-                   field: "SpotID",
-                   title: "<b>ID</b>",
-                   width: 50,
-                   filterable: false,
-               },
-               {
-                   filterable: false,
-                   title: "<b>Patch</b>",
-                   //template: "<span id='sp' style='display:inline-block;background-color:#FFB700;height:14px;width:30px;'></span>",
-                   template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
-                   width: 50
-               },
-               {
-                   filterable: false,
-                   title: "<b>View</b>",
-                   template: "<center><a id='lnkView' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#);'><img src='Images/detail1.png'></img></a></center>",
-                   width: 55
-               },
-              {
-                  field: "SpotName",
-                  title: "<b>Spot Name</b>",
-                  width: 150
-              },
+                {
+                    field: "SpotID",
+                    title: "<b>ID</b>",
+                    width: 50,
+                    filterable: false,
+                },
+                {
+                    filterable: false,
+                    title: "<b>Patch</b>",
+                    //template: "<span id='sp' style='display:inline-block;background-color:#FFB700;height:14px;width:30px;'></span>",
+                    template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
+                    width: 50
+                },
+                {
+                    filterable: false,
+                    title: "<b>View</b>",
+                    template: "<center><a id='lnkView' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#,#=Measured_L#,#=Measured_a#,#=Measured_b#,#=MeasurementID#);'><img src='Images/detail1.png'></img></a></center>",
+                    //template: "<center><a id='lnkView' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#);'><img src='Images/detail1.png'></img></a></center>",
+                    width: 55
+                },
+                {
+                    field: "SpotName",
+                    title: "<b>Spot Name</b>",
+                    width: 150
+                },
                 {
                     field: "ΔL",
                     title: "<b>pΔL</b>",
@@ -172,9 +236,13 @@
         });
     });
 
-    function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB) {        
+    function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID) {
+        measuredL = isNaN(measuredL) ? 0 : measuredL;
+        measuredA = isNaN(measuredA) ? 0 : measuredA;
+        measuredB = isNaN(measuredB) ? 0 : measuredB;
+
         var oWindow;
-        oWindow = window.radopen("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB, "ClosePrintConditionWindow");
+        oWindow = window.radopen("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID, "ClosePrintConditionWindow");
         oWindow.show();
         return false;
     }
@@ -216,8 +284,8 @@
                                     <li><span><a href="#tab2">
                                         <asp:Localize Text="Patch Details" ID="locPatchDetails"
                                             runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>
-                              </ul>
-                              
+                                </ul>
+
                                 <div class="clear"></div>
                             </section>
 
@@ -236,7 +304,7 @@
                                                     <tr>
                                                         <td><b>Min ΔE</b></td>
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblMinDeltaE" ClientIDMode="Static" Text="Loading..." ></asp:Label></td>
+                                                            <asp:Label runat="server" ID="lblMinDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><b>Average ΔE</b></td>
@@ -308,11 +376,11 @@
     &nbsp;
 </div>
 
-  <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True"
-                                                    Height="240" Width="900" VisibleStatusbar="false" Title="Patch Details"
-                                                    ShowContentDuringLoad="false" Behaviors="Move,Close">
-                                                    <Windows>
-                                                        <telerik:RadWindow ID="windowPatchDetails" runat="server">
-                                                        </telerik:RadWindow>
-                                                    </Windows>
-                                                </telerik:RadWindowManager>
+<telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True"
+    Height="240" Width="900" VisibleStatusbar="false" Title="Patch Details"
+    ShowContentDuringLoad="false" Behaviors="Move,Close">
+    <Windows>
+        <telerik:RadWindow ID="windowPatchDetails" runat="server">
+        </telerik:RadWindow>
+    </Windows>
+</telerik:RadWindowManager>
