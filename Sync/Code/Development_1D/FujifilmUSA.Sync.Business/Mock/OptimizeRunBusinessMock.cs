@@ -149,6 +149,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return true;
         }
+        public void DeleteSpotOptimizeRunDLP(int OptimizeRunID, int SpotProjectID)
+        {
+
+        }
+
         #endregion
 
         #region ITaskBase Members

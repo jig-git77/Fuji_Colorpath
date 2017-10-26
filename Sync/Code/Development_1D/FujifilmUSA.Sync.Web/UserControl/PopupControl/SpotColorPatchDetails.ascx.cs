@@ -149,14 +149,14 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
             if (measurementID > 0)
             {
-                chartPaper1.Series["Purple"].Points.AddXY(Convert.ToDouble(Measured_A), Convert.ToDouble(Measured_B));
-                chartPaper1.Series["Purple"].ChartType = SeriesChartType.Point;
-                chartPaper1.Series["Purple"].Points[0].BorderWidth = 2;
-                chartPaper1.Series["Purple"].CustomProperties = "PolarDrawingStyle=Marker";
+                chartPaper1.Series["Blue"].Points.AddXY(Convert.ToDouble(Measured_A), Convert.ToDouble(Measured_B));
+                chartPaper1.Series["Blue"].ChartType = SeriesChartType.Point;
+                chartPaper1.Series["Blue"].Points[0].BorderWidth = 2;
+                chartPaper1.Series["Blue"].CustomProperties = "PolarDrawingStyle=Marker";
             }
             else
             {
-                chartPaper1.Series["Purple"].Enabled = false;
+                chartPaper1.Series["Blue"].Enabled = false;
             }
 
             #endregion
@@ -178,14 +178,14 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
             if (measurementID > 0)
             {
-                chartPaper2.Series["Purple"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(Measured_L));
-                chartPaper2.Series["Purple"].ChartType = SeriesChartType.Point;
-                chartPaper2.Series["Purple"].Points[0].BorderWidth = 2;
-                chartPaper2.Series["Purple"].CustomProperties = "PolarDrawingStyle=Marker";
+                chartPaper2.Series["Blue"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(Measured_L));
+                chartPaper2.Series["Blue"].ChartType = SeriesChartType.Point;
+                chartPaper2.Series["Blue"].Points[0].BorderWidth = 2;
+                chartPaper2.Series["Blue"].CustomProperties = "PolarDrawingStyle=Marker";
             }
             else
             {
-                chartPaper1.Series["Purple"].Enabled = false;
+                chartPaper1.Series["Blue"].Enabled = false;
             }
             #endregion
         }

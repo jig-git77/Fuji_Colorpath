@@ -315,7 +315,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
             }
-            
+
         }
 
         protected void btnRunDelete_Click(object sender, System.Web.UI.ImageClickEventArgs e)
@@ -401,29 +401,55 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void btnDLPDelete_Click(object sender, System.Web.UI.ImageClickEventArgs e)
         {
             //--------------Delete the current run and move control to analyze page of last optimized run for this project-------------//            
-            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            OptimizeRunID = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId;
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                _presenterLeftMenuProjectItem.Delete1DOptimizeRunDLP();
-            else
-                _presenterLeftMenuProjectItem.DeleteOptimizeRunDLP();
-
-            if (!IsErrorOccured)
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
             {
-                _presenterLeftMenuProjectItem.GetProjectDetail();
+                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                OptimizeRunID = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    _presenterLeftMenuProjectItem.Delete1DOptimizeRunDLP();
+                else
+                    _presenterLeftMenuProjectItem.DeleteOptimizeRunDLP();
+
                 if (!IsErrorOccured)
                 {
-                    SessionManager.Instance.CurrentProject = Project;
-                    SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-                    if (Project.OptimizeRuns.Count > 1)
+                    _presenterLeftMenuProjectItem.GetProjectDetail();
+                    if (!IsErrorOccured)
                     {
-                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                        if (Project.OptimizeRuns.Count > 1)
+                        {
+                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                        }
+                        else
+                        {
+                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
+                        }
+                        Response.Redirect("~/Analyze.aspx");
                     }
-                    else
+                }
+            }
+            else
+            {
+                //current project spot library project
+                //--------------Delete the current run and move control to analyze page of last optimized run for this project-------------//
+                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
+                OptimizeRunID = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last().OptimizeRunId;
+                _presenterLeftMenuProjectItem.DeleteSpotOptimizeRunDLP();
+                if (!IsErrorOccured)
+                {
+                    _presenterLeftMenuProjectItem.GetProjectDetail_SpotProject();
+                    if (!IsErrorOccured)
                     {
-                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = Project.SpotTargetProject.OptimizeRuns.Last();
+                        if (Project.SpotTargetProject.OptimizeRuns.Count > 1)
+                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                        else
+                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
+
+                        Response.Redirect("~/Analyze_SpotColor.aspx");
                     }
-                    Response.Redirect("~/Analyze.aspx");
                 }
             }
         }

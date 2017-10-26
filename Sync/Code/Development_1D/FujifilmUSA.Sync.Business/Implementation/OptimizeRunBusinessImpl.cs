@@ -910,6 +910,23 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return (affectedRow > 0);
         }
 
+        public void DeleteSpotOptimizeRunDLP(int OptimizeRunID, int SpotProjectID)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                DataAccessFactory.
+                    Instance.
+                    ExecuteProcedure(
+                        "CPSpot.DeleteOptimizeRunDLP",
+                        new object[]
+                            {
+                                OptimizeRunID,
+                                SpotProjectID
+                            }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteSpotOptimizeRunDLP"));
+        }
+
+
         #endregion
 
         #region ITaskBase Members

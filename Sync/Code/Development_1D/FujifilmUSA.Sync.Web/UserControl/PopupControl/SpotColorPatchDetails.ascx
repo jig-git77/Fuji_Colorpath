@@ -228,9 +228,9 @@
                                     MarkerSize="10" MarkerBorderWidth="2" MarkerBorderColor="Green" MarkerStyle="Circle"
                                     MarkerColor="Green" ShadowOffset="1" ChartArea="Default" Legend="Default">
                                 </asp:Series>
-                                <asp:Series Name="Purple" ChartType="Polar" Color="Green"
-                                    MarkerSize="7" MarkerBorderWidth="2" MarkerBorderColor="Purple" MarkerStyle="Circle"
-                                    MarkerColor="Purple" ShadowOffset="1" ChartArea="Default" Legend="Default">
+                                <asp:Series Name="Blue" ChartType="Polar" Color="Blue"
+                                    MarkerSize="7" MarkerBorderWidth="2" MarkerBorderColor="Blue" MarkerStyle="Circle"
+                                    MarkerColor="Blue" ShadowOffset="1" ChartArea="Default" Legend="Default">
                                 </asp:Series>
                             </Series>
                             <BorderSkin PageColor="AliceBlue" />
@@ -274,9 +274,9 @@
                                     MarkerSize="10" MarkerBorderWidth="2" MarkerBorderColor="Green" MarkerStyle="Circle"
                                     MarkerColor="Green" ShadowOffset="1" ChartArea="Default" Legend="Default">
                                 </asp:Series>
-                                <asp:Series Name="Purple" ChartType="Polar" Color="Purple"
-                                    MarkerSize="7" MarkerBorderWidth="2" MarkerBorderColor="Purple" MarkerStyle="Circle"
-                                    MarkerColor="Purple" ShadowOffset="1" ChartArea="Default" Legend="Default">
+                                <asp:Series Name="Blue" ChartType="Polar" Color="Blue"
+                                    MarkerSize="7" MarkerBorderWidth="2" MarkerBorderColor="Blue" MarkerStyle="Circle"
+                                    MarkerColor="Blue" ShadowOffset="1" ChartArea="Default" Legend="Default">
                                 </asp:Series>
                             </Series>
                             <BorderSkin PageColor="AliceBlue" />

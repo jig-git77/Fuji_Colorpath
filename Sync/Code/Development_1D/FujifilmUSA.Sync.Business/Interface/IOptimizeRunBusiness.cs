@@ -38,5 +38,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         void DeleteSpotOptimizeRun(int OptimizeRunID, int SpotProjectID, int MasterRunID, EOptimizeRunStatus RunStatus);
 
         bool DeleteSpotMeasurement(int measurementId);
+        void DeleteSpotOptimizeRunDLP(int OptimizeRunID, int SpotProjectID);
     }
 }
