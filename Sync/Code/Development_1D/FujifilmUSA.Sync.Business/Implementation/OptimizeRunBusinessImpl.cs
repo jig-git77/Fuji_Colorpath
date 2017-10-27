@@ -926,6 +926,44 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteSpotOptimizeRunDLP"));
         }
 
+        public EOptimizeRunStatus GetSpotLastRunStatus(int OptimizeRunId)
+        {
+            int LastRunStatus = 1;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    LastRunStatus =
+                        Convert.ToInt32(
+                            DataAccessFactory.
+                                Instance.
+                                GetScalar(
+                                    "CPSpot.GetLastRunStatus",
+                                    new object[]
+                                            {
+                                                OptimizeRunId
+                                            }));
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastRunStatus"));
+            return (EOptimizeRunStatus)LastRunStatus;
+        }
+
+        public void CertifySpotOptimizeRun(int optimizeRunId, int SpotProjectId, int MasterRunId, int status, DateTime endDateTime)
+        {
+            Common.ImplementBusinessLogic(
+                () => DataAccessFactory.
+                          Instance.
+                          ExecuteProcedure(
+                              "CPSpot.CertifyOptimizeRun",
+                              new object[]
+                                  {
+                                      optimizeRunId,
+                                      SpotProjectId,
+                                      MasterRunId,
+                                      status,
+                                      endDateTime
+                                  }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CloseOptimizeRun"));
+        }
 
         #endregion
 

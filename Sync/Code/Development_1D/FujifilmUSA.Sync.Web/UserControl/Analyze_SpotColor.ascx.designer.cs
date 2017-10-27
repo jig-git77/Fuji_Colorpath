@@ -22,6 +22,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.HiddenField hdnBaseServiceUrl;
         
         /// <summary>
+        /// hdnIsNewNCP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnIsNewNCP;
+        
+        /// <summary>
+        /// hdnIsNcpCreated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnIsNcpCreated;
+        
+        /// <summary>
         /// hdfOptimizationRunID control.
         /// </summary>
         /// <remarks>
@@ -193,6 +211,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblSpotTarget;
         
         /// <summary>
+        /// hdHasMeasurement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdHasMeasurement;
+        
+        /// <summary>
         /// RadWindowManager control.
         /// </summary>
         /// <remarks>
@@ -209,5 +236,14 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadWindow windowPatchDetails;
+        
+        /// <summary>
+        /// ConfirmSaveWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindow ConfirmSaveWindow;
     }
 }

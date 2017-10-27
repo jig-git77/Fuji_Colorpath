@@ -22,6 +22,7 @@
         }
 </style>
 <script src="JS/ChartTooltip.js" type="text/javascript"></script>
+
 <script type="text/javascript">
     var record = 0;
     var SERVICE_BASE_URL = '';
@@ -246,20 +247,54 @@
         oWindow.show();
         return false;
     }
+
+    
 </script>
+
+<script type="text/javascript" language="javascript">
+
+    //According to new or old Project open rad window
+    function ChooseRadWindow() {
+        debugger;
+        if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
+
+            if (jQuery("input[id$=hdHasMeasurement]").val() == 'True' || jQuery("input[id$=hdHasMeasurement]").val() == 'true') {  //-------------If there are measurements under this opt. run, then only able to create DLP
+
+                if (jQuery("input[id$=hdnIsNewNCP]").val() == "True") {
+                    return true;
+                }
+                else {
+                    if (jQuery("input[id$=hdnIsNcpCreated]").val() == "True") {
+                        return true;
+                    }
+                    else {
+                        var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
+                        oWnd.show();
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+    }
+</script>
+
 <div class="contant_top">
     &nbsp;
 </div>
 <div class="contant_middle">
     <div class="head">
         <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hdnIsNewNCP" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hdnIsNcpCreated" ClientIDMode="Static" />
         <asp:HiddenField ID="hdfOptimizationRunID" runat="server" Value="0" ClientIDMode="Static" />
         <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
         <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
         <h1 id="header" runat="server">
             <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
         <div class="Information_divAnalyze">
-            <asp:LinkButton ID="lbtnDownloadAndSaveNCP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveNCP_Click">
+            <asp:LinkButton ID="lbtnDownloadAndSaveNCP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveNCP_Click" OnClientClick="return ChooseRadWindow();">
                 <span>
                     <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
                     <asp:Localize runat="server" Text="Create NCP" ID="locCreateNCP" meta:resourcekey="locCreateNCPResource1"></asp:Localize>
@@ -375,12 +410,16 @@
 <div class="contant_bottom">
     &nbsp;
 </div>
-
+<asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True"
     Height="240" Width="900" VisibleStatusbar="false" Title="Patch Details"
     ShowContentDuringLoad="false" Behaviors="Move,Close">
     <Windows>
         <telerik:RadWindow ID="windowPatchDetails" runat="server">
+        </telerik:RadWindow>
+        <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
+            VisibleStatusbar="false" Title="Choose Next Action" Width="702" Height="250"
+            Behaviors="Move,Close" NavigateUrl="~/PopupConfirmSave.aspx" meta:resourcekey="ConfirmSaveWindowResource1">
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>

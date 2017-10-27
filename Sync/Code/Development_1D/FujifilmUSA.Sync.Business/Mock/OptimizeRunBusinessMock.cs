@@ -153,7 +153,14 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
 
         }
+        public EOptimizeRunStatus GetSpotLastRunStatus(int OptimizeRunID)
+        {
+            return default(EOptimizeRunStatus);
+        }
+        public void CertifySpotOptimizeRun(int optimizeRunId, int SpotProjectId, int MasterRunId, int status, DateTime endDateTime)
+        {
 
+        }
         #endregion
 
         #region ITaskBase Members

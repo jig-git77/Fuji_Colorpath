@@ -19,7 +19,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Variable Declarations
         private PresenterAnalyze _presenterAnalyze;
-        //private PresenterGlobal _presenterGlobal;
+        private const string _recCreateDLP = "createDLP";
+        private const string _recNext = "nextText";
+        private const string _recnewPrintCondition = "newPrintConditionText";
+        private const string _recAnalyze = "analyze";
+        public string DLPName = "";
         #endregion
 
         #region Page Method
@@ -41,9 +45,33 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lblSpotTarget.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetName;
                     hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
                     OptimizeRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId);
-                    hdfOptimizationRunID.Value = OptimizeRunId.ToString(); ;
+                    hdfOptimizationRunID.Value = OptimizeRunId.ToString();
+                    hdnIsNewNCP.Value=IsNewNCP.ToString();
+                    hdnIsNcpCreated.Value = IsNCPCreated.ToString();
                     //BindPatchDetails_Summary();
                 }
+
+                if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId)
+                {
+                    header.InnerText = GetResourceString(_recnewPrintCondition);//"New Print Condition - Analyze (No DLP)";
+                    DLPName = "No DLP";
+                }
+                else
+                {
+                    header.InnerText = string.Format(GetResourceString(_recAnalyze), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Analyze - {0}
+                    DLPName = SessionManager.Instance.CurrentOptimizeRun.LastDlpName.Replace(SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + " ", ""); //---DLPName to pass into report
+                    DLPName = DLPName.Remove(DLPName.Length - 4);
+                }
+
+                lbtnDownloadAndSaveNCP.Text = IsNewNCP
+                                                  ? "<span><img id='imgAdd' src='Images/export.png'/>" + GetResourceString(_recCreateDLP) + "</span>"
+                                                  : "<span><img id='imgAdd' src='Images/save_icon.png'/>" + GetResourceString(_recNext) + "</span>";//Create DLP - Next
+
+                hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
+
+                //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//
+                if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
+                    lbtnDownloadAndSaveNCP.Visible = false;
             }
         }
 
@@ -156,9 +184,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If Sync 4D Certification type of project
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If Sync spot library type of project
                 {
-                    return SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1;
+                    return SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count == 1;
                 }
                 return false;
             }

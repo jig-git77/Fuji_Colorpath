@@ -280,7 +280,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lnkAddRun_Click(object sender, EventArgs e)
         {
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
             {
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
