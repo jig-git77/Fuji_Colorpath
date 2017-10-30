@@ -156,58 +156,79 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnOptimize_Click(object sender, EventArgs e)
         {
-            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                _presenterConfirmSave.Get1DMeasurementsOnRunId();
-            else
-                _presenterConfirmSave.GetMeasurementsOnRunId();
-            if (!IsErrorOccured)
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary) //---If Sync spot library type of project
             {
+                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                {
-                    PCSDataTypes = SessionManager.Instance.CurrentProject.PCSDataTypes;
-                    DensityType = SessionManager.Instance.CurrentProject.DensityType;
-                    if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
-                        _presenterConfirmSave.CreateG7AlignmentCurve();
-                    else//ISO                                                    
-                        _presenterConfirmSave.CreateISOAlignmentCurve();
-                }
+                    _presenterConfirmSave.Get1DMeasurementsOnRunId();
                 else
-                {
-
-                    EndDate = System.DateTime.Now;
-                    ProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
-
-                    _presenterConfirmSave.OptimizeDlp();
-                }
+                    _presenterConfirmSave.GetMeasurementsOnRunId();
                 if (!IsErrorOccured)
                 {
-                    WebLogActivityManager.LogActivity(LogActivityType.OptimizeDlp, new object[] { ProfileDescription, SessionManager.Instance.CurrentProject.ProjectId },
-                                                      Request.UserHostAddress);
-                    _presenterConfirmSave.GetProjectDetail();
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    {
+                        PCSDataTypes = SessionManager.Instance.CurrentProject.PCSDataTypes;
+                        DensityType = SessionManager.Instance.CurrentProject.DensityType;
+                        if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
+                            _presenterConfirmSave.CreateG7AlignmentCurve();
+                        else//ISO                                                    
+                            _presenterConfirmSave.CreateISOAlignmentCurve();
+                    }
+                    else
+                    {
+
+                        EndDate = System.DateTime.Now;
+                        ProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+
+                        _presenterConfirmSave.OptimizeDlp();
+                    }
+                    if (!IsErrorOccured)
+                    {
+                        WebLogActivityManager.LogActivity(LogActivityType.OptimizeDlp, new object[] { ProfileDescription, SessionManager.Instance.CurrentProject.ProjectId },
+                                                          Request.UserHostAddress);
+                        _presenterConfirmSave.GetProjectDetail();
+                        if (!IsErrorOccured)
+                        {
+                            SessionManager.Instance.CurrentProject = Project;
+                            SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+                            if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
+                            {
+                                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId",
+                                                                    string.Format("window.parent.location='COTransferSiteControl.aspx?projectid={0}&id={1}';",
+                                                                                  SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()), true);
+                            }
+                            else
+                            {
+                                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Export.aspx';", true);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        WebLogActivityManager.LogActivity(LogActivityType.OptimizeDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
+                                                             Request.UserHostAddress);
+                    }
+                }
+            }
+            else
+            {
+                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                ProjectStatus = Convert.ToInt32(EOptimizeRunStatus.Closed);
+                _presenterConfirmSave.UpdateOptimizeRun_SpotProject();
+                if (!IsErrorOccured)
+                {
+                    _presenterConfirmSave.GetProjectDetail_SpotProject();
                     if (!IsErrorOccured)
                     {
                         SessionManager.Instance.CurrentProject = Project;
-                        SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
-                        if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
-                        {
-                            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId",
-                                                                string.Format("window.parent.location='COTransferSiteControl.aspx?projectid={0}&id={1}';",
-                                                                              SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()), true);
-                        }
-                        else
-                        {
-                            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Export.aspx';", true);
-                        }
+                        SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last();
+                        ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Export.aspx';", true);
                     }
                 }
-                else
-                {
-                    WebLogActivityManager.LogActivity(LogActivityType.OptimizeDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
-                                                         Request.UserHostAddress);
-                }
             }
+
         }
 
         protected void lbtnYes_Click(object sender, EventArgs e)
@@ -279,7 +300,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return SessionManager.Instance.CurrentProject.Is1DMeasurementSmoothing;
             }
         }
-
+        public int ProjectStatus { get; set; }
         #endregion
 
 

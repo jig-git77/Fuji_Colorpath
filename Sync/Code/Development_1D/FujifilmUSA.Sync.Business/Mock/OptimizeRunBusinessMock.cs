@@ -161,6 +161,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
 
         }
+        public void OptimizeNamedColoredProfile(int projectId, int optimizeRunId, List<int> measurementIds, string description, int status, DateTime endDateTime)
+        {
+
+        }
         #endregion
 
         #region ITaskBase Members

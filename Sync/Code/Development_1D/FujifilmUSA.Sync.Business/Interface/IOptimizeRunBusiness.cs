@@ -41,5 +41,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         void DeleteSpotOptimizeRunDLP(int OptimizeRunID, int SpotProjectID);
         void CertifySpotOptimizeRun(int optimizeRunId, int SpotProjectId, int MasterRunId, int status, DateTime endDateTime);
         EOptimizeRunStatus GetSpotLastRunStatus(int OptimizeRunID);
+        void OptimizeNamedColoredProfile(int projectId, int optimizeRunId, List<int> measurementIds, string description, int status, DateTime endDateTime);
     }
 }

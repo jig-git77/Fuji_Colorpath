@@ -57,6 +57,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (ViewState["LastOptimizationRunID"] != null)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns[0].HasMeasurements = true;
+                SessionManager.Instance.CurrentOptimizeRun.HasMeasurements = true;
                 LastOptimizationRunID = Convert.ToInt32(ViewState["LastOptimizationRunID"]);
                 Response.Redirect("~/Analyze_SpotColor.aspx?OptimizeRunID=" + LastOptimizationRunID.ToString());
             }

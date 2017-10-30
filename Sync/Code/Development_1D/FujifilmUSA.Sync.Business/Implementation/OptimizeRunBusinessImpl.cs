@@ -965,6 +965,51 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CloseOptimizeRun"));
         }
 
+        public void OptimizeNamedColoredProfile(int projectId, int optimizeRunId, List<int> measurementIds, string description, int status, DateTime endDateTime)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var sourceProfile = BusinessFactory<IProjectBusiness>.CreateObject().GetSourceProfile(projectId);
+                    var destinationProfile = BusinessFactory<IProjectBusiness>.CreateObject().GetDestinationProfile(projectId);
+                    var deviceLinkProfile = BusinessFactory<IProjectBusiness>.CreateObject().GetLastOptimizedDlp(projectId);
+                    var request = new OptimizeDeviceLinkProfileRequest()
+                    {
+                        PCSData = new List<double>(),
+                        DCSData = new List<double>(),
+                        SourceProfile = new IccProfile() { ProfileData = sourceProfile },
+                        DestinationProfile = new IccProfile() { ProfileData = destinationProfile },
+                        DeviceLinkProfile = new IccProfile() { ProfileData = deviceLinkProfile },
+                        ProfileOptions = new List<Parameter>()
+                    };
+
+                    var measurementDataResponse = BusinessFactory<IMeasurementBusiness>.CreateObject().GetMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
+                    request.PCSData = measurementDataResponse.PcsData;
+                    request.DCSData = measurementDataResponse.DcsData;
+
+                    var profileOptions = BusinessFactory<IProjectBusiness>.CreateObject().GetProjectOption(projectId, EProfileType.OptimizeDlp);
+                    foreach (KeyValuePair<string, string> option in profileOptions)
+                    {
+                        request.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                    }
+                    request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = description });
+
+                    request.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+
+                    using (var client = new ProfilerClient())
+                    {
+                        var response = client.OptimizeDeviceLinkProfile(request);
+                        if (response.OptimizedProfile.ProfileData == null)
+                        {
+                            throw new Exception("Optimized device link profile has not been generated successfully from service for runId:" + optimizeRunId + " Error: " + response.Message);
+                        }
+                        DataAccessFactory.Instance.ExecuteProcedure("CPSync4D.UpdateOptimizeDlp",
+                                                                    new object[] { optimizeRunId, response.OptimizedProfile.ProfileData, status, endDateTime });
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_OptimizeDeviceLinkProfile"));
+        }
+
         #endregion
 
         #region ITaskBase Members

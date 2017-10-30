@@ -128,5 +128,18 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
             optimizeRunBusiness.CertifySpotOptimizeRun(_viewConfirmSave.OptimizeRunId, _viewConfirmSave.SpotProjectId, _viewConfirmSave.MasterRunId, Convert.ToInt32(EOptimizeRunStatus.Certify), DateTime.Now);
         }
+        public void UpdateOptimizeRun_SpotProject()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
+            optimizeRunBusiness.UpdateSpotProjectOptimizeRun(_viewConfirmSave.OptimizeRunId, _viewConfirmSave.ProjectStatus, DateTime.Now);
+        }
+
+        public void GetProjectDetail_SpotProject()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
+            _viewConfirmSave.Project = projectBusiness.GetProjectDetail_SpotProject(_viewConfirmSave.SpotProjectId);
+        }
     }
 }
