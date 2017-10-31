@@ -1724,7 +1724,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectDetail"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotProjectDetail"));
             return project;
         }
 
@@ -1767,7 +1767,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      outParam
                                              });
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDummyMeasurement"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
             if (outParam.Value != null)
             {
                 returnValue = Convert.ToInt32(outParam.Value);
@@ -1912,7 +1912,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         }
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotReferenceChartData"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartData"));
             return chartData;
         }
 

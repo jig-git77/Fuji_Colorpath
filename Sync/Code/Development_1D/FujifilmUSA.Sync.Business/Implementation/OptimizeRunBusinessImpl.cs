@@ -852,7 +852,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 status,
                                 startDateTime
                            }),
-               new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateSpotProjectOptimizeRun"));
+               new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateOptimizeRun"));
         }
 
         public void UpdateSpotProjectOptimizeRun(int optimizeRunID, int status, DateTime startDateTime)
@@ -870,7 +870,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 status,
                                 startDateTime
                            }),
-               new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateSpotProjectOptimizeRun"));
+               new BusinessHandlerRequest(this, ErrorOccured, "Error_OptimizeNamedColorProfile"));
         }
 
         public void DeleteSpotOptimizeRun(int OptimizeRunID, int SpotProjectID, int MasterRunID, EOptimizeRunStatus RunStatus)
@@ -888,7 +888,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 MasterRunID,
                                 (int)RunStatus
                            }),
-               new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteSpotOptimizeRun"));
+               new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteOptimizeRun"));
         }
 
         public bool DeleteSpotMeasurement(int measurementId)
@@ -923,7 +923,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 OptimizeRunID,
                                 SpotProjectID
                             }),
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteSpotOptimizeRunDLP"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteOptimizeRunNCP"));
         }
 
         public EOptimizeRunStatus GetSpotLastRunStatus(int OptimizeRunId)
@@ -1007,7 +1007,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                     new object[] { optimizeRunId, response.OptimizedProfile.ProfileData, status, endDateTime });
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_OptimizeDeviceLinkProfile"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_OptimizeNamedColorProfile"));
         }
 
         #endregion

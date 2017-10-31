@@ -1312,6 +1312,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured while deleting optimize run&apos;s NCP.Please contact your administrator..
+        /// </summary>
+        internal static string Error_DeleteOptimizeRunNCP {
+            get {
+                return ResourceManager.GetString("Error_DeleteOptimizeRunNCP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while deleting printstandardtype.Please contact your administrator..
         /// </summary>
         internal static string Error_DeletePrintStandardType {
@@ -1636,6 +1645,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured while retrieving last optimized named color profile. Please contact your administrator..
+        /// </summary>
+        internal static string Error_GetLastOptimizedNamedColorProfile {
+            get {
+                return ResourceManager.GetString("Error_GetLastOptimizedNamedColorProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while getting Last optimize run Id.Please contact your administrator..
         /// </summary>
         internal static string Error_GetLastOptimizeRunId {
@@ -1915,6 +1933,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured while retrieving spot project detail. Please contact your administrator..
+        /// </summary>
+        internal static string Error_GetSpotProjectDetail {
+            get {
+                return ResourceManager.GetString("Error_GetSpotProjectDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while retrieving template. Please contact your administrator..
         /// </summary>
         internal static string Error_GetTemplate {
@@ -2109,6 +2136,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string Error_OptimizeDeviceLinkProfile {
             get {
                 return ResourceManager.GetString("Error_OptimizeDeviceLinkProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured while optimizing named color profile. Please contact your administrator..
+        /// </summary>
+        internal static string Error_OptimizeNamedColorProfile {
+            get {
+                return ResourceManager.GetString("Error_OptimizeNamedColorProfile", resourceCulture);
             }
         }
         

@@ -1822,7 +1822,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     if (dsMeasurements.Tables.Count > 0)
                         dtPatchDetails = dsMeasurements.Tables[0];
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotPatchDetailsofMeasurement"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurement"));
             return dtPatchDetails;
         }
 
@@ -1859,7 +1859,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      outParam
                                                  });
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveSpotMeasurement"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
             return Convert.ToInt32(outParam.Value);
         }
 
@@ -1888,7 +1888,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             IsUsed = DataReader.ReadBoolean(x, "IsUsed")
                         }).ToList();
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotMeasurementsOnRunId"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementsOnRunId"));
             return measurements;
         }
         #endregion

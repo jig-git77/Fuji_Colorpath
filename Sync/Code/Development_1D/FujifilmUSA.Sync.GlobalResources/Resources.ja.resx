@@ -1065,4 +1065,16 @@
   <data name="ToolTipClickToShort" xml:space="preserve">
     <value>Click here to sort</value>
   </data>
+  <data name="Error_DeleteOptimizeRunNCP" xml:space="preserve">
+    <value>Error occured while deleting optimize run's NCP.Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetLastOptimizedNamedColorProfile" xml:space="preserve">
+    <value>Error occured while retrieving last optimized named color profile. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetSpotProjectDetail" xml:space="preserve">
+    <value>Error occured while retrieving spot project detail. Please contact your administrator.</value>
+  </data>
+  <data name="Error_OptimizeNamedColorProfile" xml:space="preserve">
+    <value>Error occured while optimizing named color profile. Please contact your administrator.</value>
+  </data>
 </root>
