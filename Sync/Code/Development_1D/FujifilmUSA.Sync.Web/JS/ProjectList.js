@@ -564,13 +564,13 @@ function detailInit(e) {
                             var timeDiff = Math.abs(dateCurrent.getTime() - dateCreate.getTime());
                             var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-                            row.find("td #imgspotProject").attr("onclick", "javascript: return ShowOpenPrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + diffDays + "','','" + data.TotalRuns + "',true)");
+                            row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowOpenPrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + diffDays + "','','" + data.TotalRuns + "',true)");
                             break;
                         case EOptimizeRunStatus.Closed:
-                            row.find("td #imgspotProject").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','',true)");
+                            row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','',true)");
                             break;
                         case EOptimizeRunStatus.Certify:
-                            row.find("td #imgspotProject").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','',true)");
+                            row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','',true)");
                             break;
                     }
                 }
@@ -581,7 +581,7 @@ function detailInit(e) {
                  filterable: false,
                  title: "<b></b>",
                  //template: "<center><a onclick='return Redirect(#=SpotProjectId#,\"SelectSpotTargetProject\");'><img title='Open' id='imgspotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
-                 template: "<center><a><img title='Open' id='imgspotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
+                 template: "<center><a id='lnkSpotProject'><img title='Open' id='imgSpotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
                  width: 40
              },
            {
@@ -648,7 +648,7 @@ function detailInit(e) {
                 filterable: false,
                 //title: "<center><a id='lnkInnerGridFilter' title='Clear Filter' data-spot='#=SpotProjectId#'><img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;'></img></a></center>",
                 headerTemplate: "<center><a id='lnkInnerGridFilter' title='Clear Filter' onclick='clearNestGridFilters()'><img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;'></img></a></center>",
-                template: "<center><a id='lnkDeleteSpotProject' title='Delete Project' data-spot='#=SpotProjectId#'><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
+                template: "<center><a id='lnkDeleteSpotProject' title='Delete Project' data-spot='#=SpotProjectId#'><img id='imgspotProjectDelete' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
                 width: 40
             }
         ]

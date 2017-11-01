@@ -105,8 +105,12 @@
                                     <asp:Localize runat="server" 
                                         Text="Certify sets the state of this DLP to Certified and is considered a confirmation that your are satisfied with the colormatch." 
                                         ID="locSatisfiedColorMatchMsg" 
-                                        meta:resourcekey="locSatisfiedColorMatchMsgResource1"></asp:Localize>
+                                        meta:resourcekey="locSatisfiedColorMatchMsgResource1"  Visible="false"></asp:Localize>
                                     
+                                    <asp:Localize runat="server" 
+                                        Text="Certify sets the state of this NCP to Certified and is considered a confirmation that your are satisfied with the colormatch." 
+                                        ID="locSatisfiedColorMatchMsgNCP" 
+                                        meta:resourcekey="locSatisfiedColorMatchMsgResource1NCP" Visible="false"></asp:Localize>
                                 </p>
                             </td>
                         </tr>
@@ -119,7 +123,11 @@
                                 <p style="padding-top: 7px;">
                                     <asp:Localize runat="server" 
                                         Text="Optimize creates new optimized DLP which should be implemented in your workflow." 
-                                        ID="locOptimizeDLP" meta:resourcekey="locOptimizeDLPResource1"></asp:Localize>
+                                        ID="locOptimizeDLP" meta:resourcekey="locOptimizeDLPResource1"  Visible="false"></asp:Localize>
+
+                                    <asp:Localize runat="server" 
+                                        Text="Optimize creates new optimized NCP which should be implemented in your workflow." 
+                                        ID="locOptimizeNCP" meta:resourcekey="locOptimizeDLPResource1NCP"  Visible="false"></asp:Localize>
                                 </p>
                             </td>
                         </tr>

@@ -70,6 +70,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary) //---If Sync spot library type of project
                 {
+                    //enable message for non-spot color project
+                    locSatisfiedColorMatchMsg.Visible = true;
+                    locOptimizeDLP.Visible = true;
                     Hidden_ProjectName.Value = SessionManager.Instance.CurrentProject.ProjectName;
                     //-----------------Checking the Optimization Run limit set in web.config file, when user hits on "No, Optimize" button-------------//
                     int i, TotalOptRuns = 0;
@@ -122,6 +125,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else
                 {
+                    //enable message for spot color project
+                    locSatisfiedColorMatchMsgNCP.Visible = true;
+                    locOptimizeNCP.Visible = true;
                     Hidden_ProjectName.Value = SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName;
                     //-----------------Checking the Optimization Run limit set in web.config file, when user hits on "No, Optimize" button-------------//
                     int i, TotalOptRuns = 0;
