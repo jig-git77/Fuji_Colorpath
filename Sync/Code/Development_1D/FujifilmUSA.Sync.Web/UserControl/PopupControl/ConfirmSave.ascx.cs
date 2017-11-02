@@ -276,14 +276,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;
-                    if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
-                    {
-                        Utilities.PopupWindowsRedirect(this, string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", ProjectId, Guid.NewGuid()));
-                    }
-                    else
-                    {
-                        Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
-                    }
+                    Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
                 }
             }
         }

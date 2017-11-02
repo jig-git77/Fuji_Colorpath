@@ -130,7 +130,7 @@ $(document).ready(function () {
             this.element.find('tr.k-master-row').each(function () {
                 var row = $(this);
                 var data = dataSource.getByUid(row.data('uid'));
-                if (!(data.Status === EOptimizeRunStatus.Certify && data.LicenseType === ELicenseType.DLP)) {
+                if (!(data.Status === EOptimizeRunStatus.Certify && data.LicenseType === ELicenseType.DLP && data.HasSpotProject === true)) {
                     row.find("td.k-hierarchy-cell .k-icon").removeClass();
                 }
 
@@ -268,8 +268,6 @@ $(document).ready(function () {
                         row.find("td #lnkProjectType").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.ProjectId + "','" + data.ProjectName + "','" + data.LicenseType + "','" + data.CurrentDlpName + "')");
                         break;
                 }
-
-
             });
 
         },
@@ -547,7 +545,7 @@ function detailInit(e) {
         noRecords: {
             template: "No records to display."
         },
-        toolbar: [{ 'name': 'createSpot', template: '<button onclick="return Redirect(' + pID + ',\'AddSpotProject\');" class=\'k-button\'>Create New Library</button>' }],
+        toolbar: [{ 'name': 'createSpot', template: '<button id="btnCreateSpotProject" onclick="return Redirect(' + pID + ',\'AddSpotProject\');" class=\'k-button\'>Create New Library</button>' }],
         dataBound: function (e) {
             console.log('chile bound event');
 
@@ -572,6 +570,9 @@ function detailInit(e) {
                         case EOptimizeRunStatus.Certify:
                             row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','',true)");
                             break;
+                    }
+
+                    if (!data.isAllowSpotProject){
                     }
                 }
             });

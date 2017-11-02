@@ -310,7 +310,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                DataReader.ReadString(x, "ProjectName"),
                                                                                DataReader.ReadDate(x, "EndDateTime").Month.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Day.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Hour.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Minute.ToString("00")),
                                 EnabledValidation = DataReader.ReadBoolean(x, "EnabledValidation"),
-                                ValidationStatus = (ValidationStatus)DataReader.ReadInt(x, "ValidationStatus")
+                                ValidationStatus = (ValidationStatus)DataReader.ReadInt(x, "ValidationStatus"),
+                                HasSpotProject = DataReader.ReadBoolean(x, "HasSpotProject")
                             }).ToList();
                     }
                 },
@@ -1443,7 +1444,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
                                 HasColorProfile = DataReader.ReadBoolean(x, "HasColorProfile"),
                                 LastOptmizeId = DataReader.ReadInt(x, "LastOptimizeID"),
-                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus")
+                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
+                                isAllowSpotProject = DataReader.ReadBoolean(x, "isAllowSpotProject")
                             }).ToList();
                     }
                 },

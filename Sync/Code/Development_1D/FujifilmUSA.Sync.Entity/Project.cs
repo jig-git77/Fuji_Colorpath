@@ -47,5 +47,6 @@ namespace FujifilmUSA.Sync.Entity
        // public List<CPSpot.SpotProjectLibrary> SpotProjectLibraryList { get; set; }
         public CPSpot.SpotProjectLibrary SpotTargetProject { get; set; }
         public int SpotTargetMasterProjectID { get; set; }
+        public bool HasSpotProject { get; set; }
     }
 }

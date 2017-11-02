@@ -27,5 +27,6 @@ namespace FujifilmUSA.Sync.Entity.CPSpot
         public int TotalRuns { get; set; }
         public bool HasColorProfile { get; set; }
         public int LastOptmizeId { get; set; }
+        public bool isAllowSpotProject { get; set; }
     }
 }
