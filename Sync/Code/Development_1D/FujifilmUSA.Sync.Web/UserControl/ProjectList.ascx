@@ -208,7 +208,7 @@
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tr id="trListHeader" runat="server">
                         <td runat="server">
-                            <telerik:RadGrid ID="rgProjectList" Visible="false" AllowFilteringByColumn="True" AllowPaging="True"
+                            <telerik:RadGrid ID="rgProjectList" Visible="true" AllowFilteringByColumn="True" AllowPaging="True"
                                 PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
                                 OnNeedDataSource="rgProjectList_NeedDataSource" OnItemCommand="rgProjectList_ItemCommand" OnItemCreated="rgProjectList_ItemCreated"
                                 OnItemDataBound="rgProjectList_ItemDataBound" OnDetailTableDataBind="rgProjectList_DetailTableDataBind" Width="100%" CellSpacing="0" GridLines="None"

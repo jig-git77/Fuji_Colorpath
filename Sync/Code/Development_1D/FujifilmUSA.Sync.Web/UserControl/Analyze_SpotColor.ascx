@@ -238,9 +238,9 @@
     });
 
     function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID) {
-        measuredL = isNaN(measuredL) ? 0 : measuredL;
-        measuredA = isNaN(measuredA) ? 0 : measuredA;
-        measuredB = isNaN(measuredB) ? 0 : measuredB;
+        measuredL = (isNaN(measuredL) || measuredL == null) ? 0 : measuredL;
+        measuredA = (isNaN(measuredA) || measuredA == null) ? 0 : measuredA;
+        measuredB = (isNaN(measuredB) || measuredB == null) ? 0 : measuredB;
 
         var oWindow;
         oWindow = window.radopen("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID, "ClosePrintConditionWindow");

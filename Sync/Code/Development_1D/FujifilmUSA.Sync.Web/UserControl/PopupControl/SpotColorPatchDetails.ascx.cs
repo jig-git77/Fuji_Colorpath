@@ -18,7 +18,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         private const string _recL = "lText";
         private const string _recA = "aText";
         private const string _recB = "bText";
-        private const string _recTarget = "targetText";
+        private const string _recTarget = "targe39tText";
         private const string _recDeltaL = "deltaLText";
         private const string _recDeltaA = "deltaAText";
         private const string _recDeltaB = "deltaBText";

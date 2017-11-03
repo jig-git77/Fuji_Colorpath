@@ -23,8 +23,8 @@
         <div runat="server" id="divPatchDetailsRun0" visible="false" style="float: left; width: 50%;">
             <table class="PatchDetailsTable">
                 <tr>
-                    <th>Target</th>
-                    <th>Predicted</th>
+                    <th><asp:Localize runat="server" Text="Target" ID="locTargetHead" meta:resourcekey="locTargetResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Predicted" ID="locPredictedHead" meta:resourcekey="locPredictedResource"></asp:Localize></th>
                 </tr>
                 <tr style="height: 75px;">
                     <td>
@@ -38,8 +38,8 @@
                     <td>
                         <table>
                             <tr>
-                                <th>Metric</th>
-                                <th>Target</th>
+                                <th><asp:Localize runat="server" Text="Metric" ID="locMetrictbl1" meta:resourcekey="locMetricResource"></asp:Localize></th>
+                                <th><asp:Localize runat="server" Text="Target" ID="locTargetTbl1" meta:resourcekey="locTargetResource"></asp:Localize></th>
                             </tr>
                             <tr>
                                 <td><b>L</b></td>
@@ -76,8 +76,8 @@
                     <td>
                         <table runat="server">
                             <tr>
-                                <th>Predicted</th>
-                                <th>Delta</th>
+                                <th><asp:Localize runat="server" Text="Predicted" ID="locPredictedTbl1" meta:resourcekey="locPredictedResource"></asp:Localize></th>
+                                <th><asp:Localize runat="server" Text="Delta" ID="locDelta" meta:resourcekey="locDeltaResource"></asp:Localize></th>
                             </tr>
                             <tr>
                                 <td>
@@ -105,9 +105,14 @@
         <div runat="server" id="divPatchDetailsRun"  visible="false" style="float: left; width: 70%;">
             <table class="PatchDetailsTable">
                 <tr>
-                    <th>Target</th>
-                    <th>Predicted</th>
-                    <th>Measured</th>
+                    <th>
+                        <asp:Localize runat="server" Text="Target" 
+                            ID="locTargetHead1" meta:resourcekey="locTargetResource"></asp:Localize>
+                    </th>
+                    <th><asp:Localize runat="server" Text="Predicted" 
+                            ID="locPredictedHead1" meta:resourcekey="locPredictedResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Measured" 
+                            ID="locMeasuredHead" meta:resourcekey="locMeasuredResource"></asp:Localize></th>
                 </tr>
                 <tr style="height: 75px;">
                     <td>
@@ -124,8 +129,12 @@
                     <td>
                         <table>
                             <tr>
-                                <th>Metric</th>
-                                <th>Target</th>
+                                <th><asp:Localize runat="server" Text="Metric" 
+                            ID="locMetricHead1" meta:resourcekey="locMetricResource"></asp:Localize></th>
+                                <th>
+                                    <asp:Localize runat="server" Text="Target" 
+                            ID="locTarget" meta:resourcekey="locTargetResource"></asp:Localize>
+                                </th>
                             </tr>
                             <tr>
                                 <td><b>L</b></td>
@@ -147,8 +156,10 @@
                     <td>
                         <table runat="server" id="Table1">
                             <tr>
-                                <th>Predicted</th>
-                                <th>Measured</th>
+                                <th><asp:Localize runat="server" Text="Predicted" 
+                            ID="locPredicted" meta:resourcekey="locPredictedResource"></asp:Localize></th>
+                                <th><asp:Localize runat="server" Text="Measured" 
+                            ID="locMeasured" meta:resourcekey="locMeasuredResource"></asp:Localize></th>
                             </tr>
                             <tr>
                                 <td>
@@ -173,9 +184,9 @@
                     <td>
                         <table>
                             <tr>
-                                <th>Delta_T_P</th>
-                                <th>Delta_M_T</th>
-                                <th>Delta_M_P</th>
+                                <th><asp:Localize runat="server" Text="Delta_T_P" ID="locTP" meta:resourcekey="locT_PResource"></asp:Localize></th>
+                                <th><asp:Localize runat="server" Text="Delta_M_T" ID="locMT" meta:resourcekey="locM_TResource"></asp:Localize></th>
+                                <th><asp:Localize runat="server" Text="Delta_M_P" ID="locMP" meta:resourcekey="locM_PResource"></asp:Localize></th>
                             </tr>
                             <tr>
                                 <td>
