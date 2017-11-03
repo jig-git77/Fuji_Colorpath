@@ -572,7 +572,9 @@ function detailInit(e) {
                             break;
                     }
 
-                    if (!data.isAllowSpotProject){
+                    if (!data.isAllowSpotProject) {
+                        var gridCurrent = row[0].closest('.k-grid');
+                        $(gridCurrent).find('.k-grid-toolbar').hide();
                     }
                 }
             });
