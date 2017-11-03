@@ -139,6 +139,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Panel panelAddProjectDescription;
         
         /// <summary>
+        /// locTargetPrintCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locTargetPrintCategory;
+        
+        /// <summary>
+        /// cmbTargetPrintCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbTargetPrintCategory;
+        
+        /// <summary>
         /// locTargetPrint control.
         /// </summary>
         /// <remarks>

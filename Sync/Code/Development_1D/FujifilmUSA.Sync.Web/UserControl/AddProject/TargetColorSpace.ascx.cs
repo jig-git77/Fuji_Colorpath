@@ -42,6 +42,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (ViewState[_vsPrintStandardType] == null)
             {
                 btn_PaperClear.Visible = false;
+                BindTargetPrintCategory();
                 BindProfileSource();
                 BindPCSDataType(); //Load PCSDataType 
 
@@ -222,7 +223,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindProfileSource()
         {
-            if (ViewState[_vsPrintStandardType] != null) return;
+            TargetPrintCategory = Convert.ToInt32(cmbTargetPrintCategory.SelectedValue);
+           // if (ViewState[_vsPrintStandardType] != null) return;
 
             _presenterTargetColorspace.GetPrintStandardTypeList();
             if (!IsErrorOccured)
@@ -326,6 +328,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        private void BindTargetPrintCategory()
+        {
+            cmbTargetPrintCategory.DataValueField = "Key";
+            cmbTargetPrintCategory.DataTextField = "Value";
+            cmbTargetPrintCategory.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<ESourceProfileCategory>();
+            cmbTargetPrintCategory.DataBind();
+            cmbTargetPrintCategory.SelectedIndex = 0;
+        }
+
         #endregion
 
         #region IViewTargetColorspace Members
@@ -348,7 +359,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary);
             }
         }
-        #endregion        
+        public int TargetPrintCategory { get; set; }
+        #endregion
 
         protected void btn_PaperClear_Click(object sender, EventArgs e)
         {
@@ -400,5 +412,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         }
 
+        protected void cmbTargetPrintCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BindProfileSource();
+        }
+
+      
     }
 }

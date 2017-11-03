@@ -2428,6 +2428,51 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        internal static string ESourceProfileCategory_All {
+            get {
+                return ResourceManager.GetString("ESourceProfileCategory_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Europian Standards.
+        /// </summary>
+        internal static string ESourceProfileCategory_EuropianStandards {
+            get {
+                return ResourceManager.GetString("ESourceProfileCategory_EuropianStandards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Japan Standards.
+        /// </summary>
+        internal static string ESourceProfileCategory_JapanStandards {
+            get {
+                return ResourceManager.GetString("ESourceProfileCategory_JapanStandards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to North American Standards.
+        /// </summary>
+        internal static string ESourceProfileCategory_NorthAmericanStandards {
+            get {
+                return ResourceManager.GetString("ESourceProfileCategory_NorthAmericanStandards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        internal static string ESourceProfileCategory_Other {
+            get {
+                return ResourceManager.GetString("ESourceProfileCategory_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to M1.
         /// </summary>
         internal static string EUVIncludedMode_PlusUV {

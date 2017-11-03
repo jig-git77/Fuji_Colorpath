@@ -588,4 +588,18 @@ namespace FujifilmUSA.Sync.Entity
         [Description("EInkOrder_YMKC")]//Y M K C
         YMKC = 23
     }
+
+    public enum ESourceProfileCategory
+    {
+        [Description("ESourceProfileCategory_All")] //All
+        All = 0,
+        [Description("ESourceProfileCategory_NorthAmericanStandards")] //North American Standards
+        NorthAmericanStandards = 1,
+        [Description("ESourceProfileCategory_EuropianStandards")] //Europian Standards
+        EuropianStandards = 2,
+        [Description("ESourceProfileCategory_JapanStandards")] //Japan Standards
+        JapanStandards = 3,
+        [Description("ESourceProfileCategory_Other")] //Other
+        Other = 11
+    }
 }

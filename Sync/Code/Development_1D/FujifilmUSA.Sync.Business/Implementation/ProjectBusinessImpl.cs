@@ -364,7 +364,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return projectOptions;
         }
 
-        public List<Entity.CPSync1D.PrintStandardType> GetPrintStandardTypeList(int currentUserId, bool isSync1DType)
+        public List<Entity.CPSync1D.PrintStandardType> GetPrintStandardTypeList(int currentUserId, bool isSync1DType, int TargetPrintCategory = 0)
         {
             var dstSourceList = new List<Entity.CPSync1D.PrintStandardType>();
             Common.ImplementBusinessLogic(
@@ -375,7 +375,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 "[CP].[GetPrintStandardTypeList]",
-                                new object[] { currentUserId, isSync1DType });
+                                new object[] { currentUserId, isSync1DType, TargetPrintCategory });
                     if (dsSourceList != null && dsSourceList.Tables.Count > 0)
                     {
                         dstSourceList = (dsSourceList.Tables[0].AsEnumerable().Select(

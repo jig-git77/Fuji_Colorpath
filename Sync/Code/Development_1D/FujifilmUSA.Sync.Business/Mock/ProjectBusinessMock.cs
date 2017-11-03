@@ -29,7 +29,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<string, string>();
         }
 
-        public List<Entity.CPSync1D.PrintStandardType> GetPrintStandardTypeList(int currentUserId, bool isSync1DType)
+        public List<Entity.CPSync1D.PrintStandardType> GetPrintStandardTypeList(int currentUserId, bool isSync1DType, int TargetPrintCategory = 0)
         {
             return new List<Entity.CPSync1D.PrintStandardType>();
         }

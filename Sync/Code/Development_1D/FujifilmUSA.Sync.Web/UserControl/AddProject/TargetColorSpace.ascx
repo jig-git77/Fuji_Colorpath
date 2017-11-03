@@ -66,6 +66,18 @@
                         <tr>
                             <td>
                                 <span>
+                                    <asp:Localize runat="server" Text="Profile Category:" ID="locTargetPrintCategory" meta:resourcekey="locTargetPrintCategoryResource1"></asp:Localize></span>
+                            </td>
+                            <td colspan="3">
+                                <asp:DropDownList ID="cmbTargetPrintCategory" runat="server" CssClass="select" DataValueField="Key"
+                                    DataTextField="Value" OnSelectedIndexChanged="cmbTargetPrintCategory_SelectedIndexChanged"
+                                    AutoPostBack="True" meta:resourcekey="cmbTargetPrintCategoryResource1">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>
                                     <asp:Localize runat="server" Text="Target Print Condition:" ID="locTargetPrint" meta:resourcekey="locTargetPrintResource1"></asp:Localize></span>
                             </td>
                             <td colspan="3">

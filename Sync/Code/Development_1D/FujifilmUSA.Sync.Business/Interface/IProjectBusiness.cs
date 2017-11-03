@@ -12,7 +12,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID);
         int DeleteProject(int projectId);
         Dictionary<string, string> GetProjectOption(int projectId, EProfileType type);
-        List<Entity.CPSync1D.PrintStandardType> GetPrintStandardTypeList(int currentUserId, bool isSync1DType);
+        List<Entity.CPSync1D.PrintStandardType> GetPrintStandardTypeList(int currentUserId, bool isSync1DType, int TargetPrintCategory = 0);
         List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId, short LicenseTypeId);
         List<Illuminant> GetIlluminantList();
         List<ObserverType> GetObserverTypeList();

@@ -12,5 +12,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         bool IsSync1DType { get; }
         bool IsSpotTargetType { get; }
         int ProjectTypeId { get; set; }
+        int TargetPrintCategory { get; set; }
     }
 }
