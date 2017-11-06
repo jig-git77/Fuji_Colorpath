@@ -14,7 +14,7 @@
 <div class="contant_middle">
     <div class="head">
         <h1 id="header" runat="server"><asp:Localize runat="server" Text="Calculating" 
-                ID="locMeasurement" meta:resourcekey="locMeasurementResource1"></asp:Localize></h1>
+                ID="locMeasurement" meta:resourcekey="locHeaderResource1"></asp:Localize></h1>
         <div class="Information_divAnalyze"> 
                         
             <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" OnClick="btnAnalyze_Click"
@@ -69,7 +69,7 @@
             &nbsp;</div>
     </div>--%>    
     <div class="mesurementStatusbar info_form">
-        <br /><br /><b><asp:Label ID="lblMsg" runat="server" Text="Calculations complete. Click Analyze to continue." style="display: none;" ></asp:Label></b>
+        <br /><br /><b><asp:Label ID="lblMsg" runat="server" Text="Calculations complete. Click Analyze to continue." meta:resourcekey="locMessageResource1" style="display: none;" ></asp:Label></b>
     </div>
 </div>
 <div class="contant_bottom">

@@ -61,6 +61,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgProjectList.PageSize = Common.Utilities.PageSize;
             if (!IsPostBack)
             {
+
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Device;
                 //set dlpsuboperation session to none everytime page loads fresh(!ispostback)...
                 SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
@@ -68,6 +69,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdfHasDeletePermission.Value = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject).ToString();
                 hdfCurrentUser.Value = Convert.ToString(SessionManager.Instance.CurrentUser.UserId);
                 hdfCurrentDeviceID.Value = Convert.ToString(SessionManager.Instance.CurrentDevice.DeviceId);
+                hdfCurrentCulture.Value = getCurrentCultureLanguage();
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)
@@ -516,6 +518,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SpotProjectId = spotprojectId;
             _presenterProjectList.DeleteSpotProject();
         }
+        
         #endregion
 
         #region IViewProjectList Members

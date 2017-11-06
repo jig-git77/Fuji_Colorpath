@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class SpotMeasurement : System.Web.UI.Page
+    public partial class SpotMeasurement : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

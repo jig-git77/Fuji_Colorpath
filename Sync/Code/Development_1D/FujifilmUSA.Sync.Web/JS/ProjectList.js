@@ -42,6 +42,7 @@ $(document).ready(function () {
     $hdfHasDeletePermission = $("#hdfHasDeletePermission");
     CurrentDeviceID = $("#hdfCurrentDeviceID").val();
     CurrentUserID = $("#hdfCurrentUser").val();
+    CurrentCulture = $("#hdfCurrentCulture").val();
     //var dID = $hdfCurrentDeviceID.val();
     $kendoProjectList.kendoGrid({
         dataSource: {
@@ -54,6 +55,9 @@ $(document).ready(function () {
                         url: SERVICE_BASE_URL + "api/Project/GetProjectDetailsByDeviceID/",
                         data: { deviceID: CurrentDeviceID },
                         dataType: "json",
+                        headers: {
+                            'Accept-Language': CurrentCulture
+                        },
                         success: function (response) {                            
                             var jsonProjectList = JSON.parse(response.data);
                             console.log(jsonProjectList);

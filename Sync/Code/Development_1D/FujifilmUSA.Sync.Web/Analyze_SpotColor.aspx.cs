@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class Analyze_SpotColor : System.Web.UI.Page
+    public partial class Analyze_SpotColor : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class PopupSpotColorPatchDetails : System.Web.UI.Page
+    public partial class PopupSpotColorPatchDetails : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

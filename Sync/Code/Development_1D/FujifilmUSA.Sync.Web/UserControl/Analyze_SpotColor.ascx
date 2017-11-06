@@ -415,7 +415,7 @@
     Height="240" Width="900" VisibleStatusbar="false" Title="Patch Details"
     ShowContentDuringLoad="false" Behaviors="Move,Close">
     <Windows>
-        <telerik:RadWindow ID="windowPatchDetails" runat="server">
+        <telerik:RadWindow ID="windowPatchDetails" runat="server" ShowContentDuringLoad="false" VisibleStatusbar="false" Title="Patch Detailserere">
         </telerik:RadWindow>
         <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
             VisibleStatusbar="false" Title="Choose Next Action" Width="702" Height="250"
