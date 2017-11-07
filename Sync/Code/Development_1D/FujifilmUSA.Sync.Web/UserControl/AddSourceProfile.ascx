@@ -153,6 +153,27 @@
                                     </div>
                                 </td>
                             </tr>
+                              <tr>
+                                <td style="width: 130px" align="right">
+                                    <span style="font-weight:bold;"><asp:Localize runat="server" Text="Profile Type" 
+                                        ID="Localize1" meta:resourcekey="locProfileTypeResource1"></asp:Localize><span style="color: Red;">*</span> </span>
+                                </td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
+                                <td style="width: 400px">
+                                    <div style="float: left;">
+                                        <asp:DropDownList ID="cmbProfileCategory" runat="server" CssClass="select" DataValueField="Key"
+                                            DataTextField="Value" meta:resourcekey="cmbProfileCategoryResource1">
+                                        </asp:DropDownList>
+                                    </div>
+                                    <div style="float: left">
+                                           
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
                             <tr>
                                 <td style="width: 130px" align="right">
                                     <span style="font-weight:bold;"><asp:Localize runat="server" Text="Is Used?" 
