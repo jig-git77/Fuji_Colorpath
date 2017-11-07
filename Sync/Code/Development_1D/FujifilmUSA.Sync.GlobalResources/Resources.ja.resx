@@ -1092,4 +1092,19 @@
   <data name="ESourceProfileCategory_Other" xml:space="preserve">
     <value>Other</value>
   </data>
+  <data name="CreateNewLibrary" xml:space="preserve">
+    <value>Create New Library</value>
+  </data>
+  <data name="MsgDeleteProject" xml:space="preserve">
+    <value>印刷条件の削除</value>
+  </data>
+  <data name="OpenProject" xml:space="preserve">
+    <value>Open Project</value>
+  </data>
+  <data name="ClearFillterResource" xml:space="preserve">
+    <value>絞り込み解除</value>
+  </data>
+  <data name="MsgNoRecords" xml:space="preserve">
+    <value>表示するレコードがありません</value>
+  </data>
 </root>

@@ -1003,9 +1003,6 @@ erwünschten Format überein.</value>
   <data name="cyanPathMetrics" xml:space="preserve">
     <value>Cyan Meßwerte</value>
   </data>
-  <data name="deltaAText" xml:space="preserve">
-    <value>Δa*</value>
-  </data>
   <data name="deltaBText" xml:space="preserve">
     <value>Δb*</value>
   </data>
@@ -1092,5 +1089,23 @@ erwünschten Format überein.</value>
   </data>
   <data name="ESourceProfileCategory_Other" xml:space="preserve">
     <value>Other</value>
+  </data>
+  <data name="CreateNewLibrary" xml:space="preserve">
+    <value>Create New Library de</value>
+  </data>
+  <data name="MsgDeleteProject" xml:space="preserve">
+    <value>Projekt löschen</value>
+  </data>
+  <data name="OpenProject" xml:space="preserve">
+    <value>Open Project de</value>
+  </data>
+  <data name="ClearFillterResource" xml:space="preserve">
+    <value>Filter löschen</value>
+  </data>
+  <data name="MsgNoRecords" xml:space="preserve">
+    <value>Keine Untereinträge zum Anzeigen</value>
+  </data>
+  <data name="deltaAText" xml:space="preserve">
+    <value>Δa*</value>
   </data>
 </root>

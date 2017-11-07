@@ -56,6 +56,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("ValidationStatus_Disabled", "ValidationStatus_Disabled");
             _resourceValues.Add("ValidationStatus_None", "ValidationStatus_None");
             _resourceValues.Add("ValidationStatus_NoMeasurement", "ValidationStatus_NoMeasurement");
+            _resourceValues.Add("OpenProject", "OpenProject");
+            _resourceValues.Add("MsgDeleteProject", "MsgDeleteProject");
+            _resourceValues.Add("CreateNewLibrary", "CreateNewLibrary");
+            _resourceValues.Add("MsgNoRecords", "MsgNoRecords");
+            _resourceValues.Add("ClearFillterResource", "ClearFillterResource");
+
             base.Initialize(controllerContext);
         }
 

@@ -37,6 +37,7 @@ var CurrentUserID;
 var Resources = {};
 
 $(document).ready(function () {
+
     SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
     $kendoProjectList = $("#kendoProjectList");
     $hdfHasDeletePermission = $("#hdfHasDeletePermission");
@@ -58,7 +59,7 @@ $(document).ready(function () {
                         headers: {
                             'Accept-Language': CurrentCulture
                         },
-                        success: function (response) {                            
+                        success: function (response) {
                             var jsonProjectList = JSON.parse(response.data);
                             console.log(jsonProjectList);
                             Resources = jsonProjectList.GlobalResources;
@@ -78,6 +79,7 @@ $(document).ready(function () {
                             $kendoProjectList.find("th[data-field=PrintConditionColorant] b").attr("title", Resources.ToolTipClickToShort);
                             $kendoProjectList.find("th[data-field=CreateDate] b").html(Resources.GridDateTimeColumnResource1);
                             $kendoProjectList.find("th[data-field=CreateDate] b").attr("title", Resources.ToolTipClickToShort);
+                            $kendoProjectList.find('thead').first().find('th').last().find('#imgClearFilter').attr('title', Resources.ClearFillterResource);
 
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -122,10 +124,10 @@ $(document).ready(function () {
             pageSizes: true
         },
         noRecords: {
-            template: "No records to display."
+            template: ''
         },
         detailInit: detailInit,
-        dataBound: function (e) {            
+        dataBound: function (e) {
             var projectTypeImagePath = '';
             var projectValidationImagePath = '';
             var projectValidationTooltip = '';
@@ -232,7 +234,7 @@ $(document).ready(function () {
                         //projectValidationImagePath = 'Images/Validation_Not_Certified.png';
                         row.find("td #imgprojectValidation").css('display', 'none');
                         break;
-                    case EValidationStatus.NoMeasurement:;
+                    case EValidationStatus.NoMeasurement: ;
                         projectValidationImagePath = 'Images/Validation_Not_Active.png';
                         projectValidationTooltip = Resources.ValidationStatus_NoMeasurement;
                         break;
@@ -272,6 +274,9 @@ $(document).ready(function () {
                         row.find("td #lnkProjectType").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.ProjectId + "','" + data.ProjectName + "','" + data.LicenseType + "','" + data.CurrentDlpName + "')");
                         break;
                 }
+
+                //set resource message
+                row.find('#lnkDeleteProject').attr('title', Resources.MsgDeleteProject);
             });
 
         },
@@ -346,90 +351,90 @@ $(document).ready(function () {
                     }
                 }
             },
-           {
-               field: "ProjectName",
-               title: "<b title='Click here to sort'></b>",
-               width: 50,
-               filterable: {
-                   operators: {
-                       string: {
-                           contains: "Contains",
-                           eq: "Is equal to",
-                           neq: "Not equal to",
-                           startswith: "Starts with",
-                           doesnotcontain: "Does not contain",
-                           endswith: "Ends with",
-                           isnull: "Is null",
-                           isnotnull: "Is not null",
-                           isempty: "Is empty",
-                           isnotempty: "Is not empty",
-                       }
-                   },
-               }
-           },
-           {
-               field: "SourceProfileName",
-               title: "<b title='Click here to sort'></b>",
-               width: 50,
-               filterable: {
-                   operators: {
-                       string: {
-                           contains: "Contains",
-                           eq: "Is equal to",
-                           neq: "Not equal to",
-                           startswith: "Starts with",
-                           doesnotcontain: "Does not contain",
-                           endswith: "Ends with",
-                           isnull: "Is null",
-                           isnotnull: "Is not null",
-                           isempty: "Is empty",
-                           isnotempty: "Is not empty",
-                       }
-                   },
-               }
-           },
-           {
-               field: "PrintConditionMedia",
-               title: "<b title='Click here to sort'></b>",
-               width: 50,
-               filterable: {
-                   operators: {
-                       string: {
-                           contains: "Contains",
-                           eq: "Is equal to",
-                           neq: "Not equal to",
-                           startswith: "Starts with",
-                           doesnotcontain: "Does not contain",
-                           endswith: "Ends with",
-                           isnull: "Is null",
-                           isnotnull: "Is not null",
-                           isempty: "Is empty",
-                           isnotempty: "Is not empty",
-                       }
-                   },
-               }
-           },
-           {
-               field: "PrintConditionColorant",
-               title: "<b title='Click here to sort'></b>",
-               width: 50,
-               filterable: {
-                   operators: {
-                       string: {
-                           contains: "Contains",
-                           eq: "Is equal to",
-                           neq: "Not equal to",
-                           startswith: "Starts with",
-                           doesnotcontain: "Does not contain",
-                           endswith: "Ends with",
-                           isnull: "Is null",
-                           isnotnull: "Is not null",
-                           isempty: "Is empty",
-                           isnotempty: "Is not empty",
-                       }
-                   },
-               }
-           },
+            {
+                field: "ProjectName",
+                title: "<b title='Click here to sort'></b>",
+                width: 50,
+                filterable: {
+                    operators: {
+                        string: {
+                            contains: "Contains",
+                            eq: "Is equal to",
+                            neq: "Not equal to",
+                            startswith: "Starts with",
+                            doesnotcontain: "Does not contain",
+                            endswith: "Ends with",
+                            isnull: "Is null",
+                            isnotnull: "Is not null",
+                            isempty: "Is empty",
+                            isnotempty: "Is not empty",
+                        }
+                    },
+                }
+            },
+            {
+                field: "SourceProfileName",
+                title: "<b title='Click here to sort'></b>",
+                width: 50,
+                filterable: {
+                    operators: {
+                        string: {
+                            contains: "Contains",
+                            eq: "Is equal to",
+                            neq: "Not equal to",
+                            startswith: "Starts with",
+                            doesnotcontain: "Does not contain",
+                            endswith: "Ends with",
+                            isnull: "Is null",
+                            isnotnull: "Is not null",
+                            isempty: "Is empty",
+                            isnotempty: "Is not empty",
+                        }
+                    },
+                }
+            },
+            {
+                field: "PrintConditionMedia",
+                title: "<b title='Click here to sort'></b>",
+                width: 50,
+                filterable: {
+                    operators: {
+                        string: {
+                            contains: "Contains",
+                            eq: "Is equal to",
+                            neq: "Not equal to",
+                            startswith: "Starts with",
+                            doesnotcontain: "Does not contain",
+                            endswith: "Ends with",
+                            isnull: "Is null",
+                            isnotnull: "Is not null",
+                            isempty: "Is empty",
+                            isnotempty: "Is not empty",
+                        }
+                    },
+                }
+            },
+            {
+                field: "PrintConditionColorant",
+                title: "<b title='Click here to sort'></b>",
+                width: 50,
+                filterable: {
+                    operators: {
+                        string: {
+                            contains: "Contains",
+                            eq: "Is equal to",
+                            neq: "Not equal to",
+                            startswith: "Starts with",
+                            doesnotcontain: "Does not contain",
+                            endswith: "Ends with",
+                            isnull: "Is null",
+                            isnotnull: "Is not null",
+                            isempty: "Is empty",
+                            isnotempty: "Is not empty",
+                        }
+                    },
+                }
+            },
             {
                 field: "CreateDate",
                 title: "<b title='Click here to sort'></b>",
@@ -452,7 +457,7 @@ $(document).ready(function () {
             },
             {
                 filterable: false,
-                title: "<center><a id='lnkLinkFilter' title='Clear Filter' onclick='clearFilter()'><img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;'></img></a></center>",
+                title: "<center><a id='lnkLinkFilter' title='Clear filter' onclick='clearFilter()'><img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;'></img></a></center>",
                 template: "<center><a id='lnkDeleteProject' title='Delete Project' onclick='return deleteProject(#=id#);'><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
                 width: 20
             }
@@ -547,14 +552,15 @@ function detailInit(e) {
             pageSizes: true
         },
         noRecords: {
-            template: "No records to display."
+            //template: Resources.MsgNoRecords
+            template: ''
         },
-        toolbar: [{ 'name': 'createSpot', template: '<button id="btnCreateSpotProject" onclick="return Redirect(' + pID + ',\'AddSpotProject\');" class=\'k-button\'>Create New Library</button>' }],
+        toolbar: [{ 'name': 'createSpot', template: '<button id="btnCreateSpotProject" onclick="return Redirect(' + pID + ',\'AddSpotProject\');" class=\'k-button\'>' + Resources.CreateNewLibrary + '</button>' }],
         dataBound: function (e) {
-            console.log('chile bound event');
+            //console.log('chile bound event');
 
             var dataSource = this.dataSource;
-            this.element.find('tr').each(function (){
+            this.element.find('tr').each(function () {
                 var row = $(this);
                 if (dataSource.getByUid(row.data('uid')) != undefined) {
 
@@ -584,53 +590,53 @@ function detailInit(e) {
             });
         },
         columns: [
-             {
-                 filterable: false,
-                 title: "<b></b>",
-                 //template: "<center><a onclick='return Redirect(#=SpotProjectId#,\"SelectSpotTargetProject\");'><img title='Open' id='imgspotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
-                 template: "<center><a id='lnkSpotProject'><img title='Open' id='imgSpotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
-                 width: 40
-             },
-           {
-               field: "ProjectName",
-               title: "<b>" + Resources.GridTemplateColumnResource3 + "</b>",
-               filterable: {
-                   operators: {
-                       string: {
-                           contains: "Contains",
-                           eq: "Is equal to",
-                           neq: "Not equal to",
-                           startswith: "Starts with",
-                           doesnotcontain: "Does not contain",
-                           endswith: "Ends with",
-                           isnull: "Is null",
-                           isnotnull: "Is not null",
-                           isempty: "Is empty",
-                           isnotempty: "Is not empty",
-                       }
-                   },
-               }
-           },
-           {
-               field: "LibraryName",               
-               title: "<b>" + Resources.GridTemplateColumnResourceLibrary + "</b>",
-               filterable: {
-                   operators: {
-                       string: {
-                           contains: "Contains",
-                           eq: "Is equal to",
-                           neq: "Not equal to",
-                           startswith: "Starts with",
-                           doesnotcontain: "Does not contain",
-                           endswith: "Ends with",
-                           isnull: "Is null",
-                           isnotnull: "Is not null",
-                           isempty: "Is empty",
-                           isnotempty: "Is not empty",
-                       }
-                   },
-               }
-           },
+            {
+                filterable: false,
+                title: "<b></b>",
+                //template: "<center><a onclick='return Redirect(#=SpotProjectId#,\"SelectSpotTargetProject\");'><img title='Open' id='imgspotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
+                template: "<center><a id='lnkSpotProject'><img title='" + Resources.OpenProject + "' id='imgSpotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
+                width: 40
+            },
+            {
+                field: "ProjectName",
+                title: "<b>" + Resources.GridTemplateColumnResource3 + "</b>",
+                filterable: {
+                    operators: {
+                        string: {
+                            contains: "Contains",
+                            eq: "Is equal to",
+                            neq: "Not equal to",
+                            startswith: "Starts with",
+                            doesnotcontain: "Does not contain",
+                            endswith: "Ends with",
+                            isnull: "Is null",
+                            isnotnull: "Is not null",
+                            isempty: "Is empty",
+                            isnotempty: "Is not empty",
+                        }
+                    },
+                }
+            },
+            {
+                field: "LibraryName",
+                title: "<b>" + Resources.GridTemplateColumnResourceLibrary + "</b>",
+                filterable: {
+                    operators: {
+                        string: {
+                            contains: "Contains",
+                            eq: "Is equal to",
+                            neq: "Not equal to",
+                            startswith: "Starts with",
+                            doesnotcontain: "Does not contain",
+                            endswith: "Ends with",
+                            isnull: "Is null",
+                            isnotnull: "Is not null",
+                            isempty: "Is empty",
+                            isnotempty: "Is not empty",
+                        }
+                    },
+                }
+            },
             {
                 field: "CreateDate",
                 title: "<b>" + Resources.GridDateTimeColumnResource1 + "</b>",
@@ -654,8 +660,8 @@ function detailInit(e) {
             {
                 filterable: false,
                 //title: "<center><a id='lnkInnerGridFilter' title='Clear Filter' data-spot='#=SpotProjectId#'><img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;'></img></a></center>",
-                headerTemplate: "<center><a id='lnkInnerGridFilter' title='Clear Filter' onclick='clearNestGridFilters()'><img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;'></img></a></center>",
-                template: "<center><a id='lnkDeleteSpotProject' title='Delete Project' data-spot='#=SpotProjectId#'><img id='imgspotProjectDelete' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
+                headerTemplate: "<center><a id='lnkInnerGridFilter' title='" + Resources.ClearFillterResource + "' onclick='clearNestGridFilters()'><img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;'></img></a></center>",
+                template: "<center><a id='lnkDeleteSpotProject' title='" + Resources.MsgDeleteProject + "' data-spot='#=SpotProjectId#'><img id='imgspotProjectDelete' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
                 width: 40
             }
         ]

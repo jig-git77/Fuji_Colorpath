@@ -169,11 +169,29 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear Fillter.
+        /// </summary>
+        internal static string ClearFillterResource {
+            get {
+                return ResourceManager.GetString("ClearFillterResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete selected company?.
         /// </summary>
         internal static string CompanyManagement_DeleteCompany_Confirmation {
             get {
                 return ResourceManager.GetString("CompanyManagement_DeleteCompany_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create New Library.
+        /// </summary>
+        internal static string CreateNewLibrary {
+            get {
+                return ResourceManager.GetString("CreateNewLibrary", resourceCulture);
             }
         }
         
@@ -2802,6 +2820,33 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string MetricTargetPresetManagement_DeleteMetricTargetPreset_Confirmation {
             get {
                 return ResourceManager.GetString("MetricTargetPresetManagement_DeleteMetricTargetPreset_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Project.
+        /// </summary>
+        internal static string MsgDeleteProject {
+            get {
+                return ResourceManager.GetString("MsgDeleteProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No records to display..
+        /// </summary>
+        internal static string MsgNoRecords {
+            get {
+                return ResourceManager.GetString("MsgNoRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Project.
+        /// </summary>
+        internal static string OpenProject {
+            get {
+                return ResourceManager.GetString("OpenProject", resourceCulture);
             }
         }
         
