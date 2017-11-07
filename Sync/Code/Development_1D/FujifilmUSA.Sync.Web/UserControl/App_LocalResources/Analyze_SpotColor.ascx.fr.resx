@@ -660,4 +660,22 @@
   <data name="yellowText" xml:space="preserve">
     <value>Yellow</value>
   </data>
+  <data name="locColorantResource1.Text" xml:space="preserve">
+    <value>Encre</value>
+  </data>
+  <data name="locMediaResource1.Text" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="locMinDeltaEResource1.Text" xml:space="preserve">
+    <value>Min ΔE</value>
+  </data>
+  <data name="locOptDevicePredResource1.Text" xml:space="preserve">
+    <value>Optimal Device Prediction</value>
+  </data>
+  <data name="locRipSettingsResource1.Text" xml:space="preserve">
+    <value>Paramètre RIP</value>
+  </data>
+  <data name="locSpotTargetResource1.Text" xml:space="preserve">
+    <value>Spot Target</value>
+  </data>
 </root>

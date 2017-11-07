@@ -1107,4 +1107,40 @@
   <data name="MsgNoRecords" xml:space="preserve">
     <value>表示するレコードがありません</value>
   </data>
+  <data name="gridAnalyzeHeaderDeltaAResource" xml:space="preserve">
+    <value>pΔa</value>
+  </data>
+  <data name="gridAnalyzeHeaderDeltaBesource" xml:space="preserve">
+    <value>pΔb</value>
+  </data>
+  <data name="gridAnalyzeHeaderDeltaEResource" xml:space="preserve">
+    <value>pΔE</value>
+  </data>
+  <data name="gridAnalyzeHeaderDeltaLResource" xml:space="preserve">
+    <value>pΔL</value>
+  </data>
+  <data name="gridAnalyzeHeaderEMPResource" xml:space="preserve">
+    <value>ΔE_M_P</value>
+  </data>
+  <data name="gridAnalyzeHeaderEMTResource" xml:space="preserve">
+    <value>ΔE_M_T</value>
+  </data>
+  <data name="gridAnalyzeHeaderETPResource" xml:space="preserve">
+    <value>ΔE_T_P</value>
+  </data>
+  <data name="gridAnalyzeHeaderIDResource" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="gridAnalyzeHeaderPatchResource" xml:space="preserve">
+    <value>Patch</value>
+  </data>
+  <data name="gridAnalyzeHeaderSpotNameResource" xml:space="preserve">
+    <value>Spot Name</value>
+  </data>
+  <data name="gridAnalyzeHeaderViewResource" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="gridAnalyzeToolTipViewResource" xml:space="preserve">
+    <value>View Patch Details</value>
+  </data>
 </root>

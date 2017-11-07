@@ -1,9 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Analyze_SpotColor.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze_SpotColor" %>
 <%@ Register Src="~/UserControl/PopupControl/SpotColorPatchDetails.ascx" TagName="SpotColorPatchDetails" TagPrefix="pd" %>
-<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
+<%--<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>--%>
 <link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
 <link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
-<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>
+<%--<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>--%>
 <style>
     .PatchDetailsSummaryTable {
         line-height: 35px;
@@ -21,11 +21,11 @@
             text-align: left;
         }
 </style>
-<script src="JS/ChartTooltip.js" type="text/javascript"></script>
 
 <script type="text/javascript">
     var record = 0;
     var SERVICE_BASE_URL = '';
+    var Resources = {};
     $(document).ready(function () {
         //Default Action
         $(".hideclass").hide(); //Hide all content
@@ -42,9 +42,11 @@
 
             return false;
         });
+        var CurrentCulture = $("#hdfCurrentCulture").val();
         SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
         var optimizationId = $('#hdfOptimizationRunID').val();
-        $("#divPathDetails").kendoGrid({
+        var $divPathDetails = $("#divPathDetails");
+        $divPathDetails.kendoGrid({
             dataSource: {
                 //transport: {
                 //    //read: "/FujifilmUSA.Sync.Web/Analyze_SpotColor.aspx/GetPatchDetails"
@@ -57,14 +59,31 @@
                             url: SERVICE_BASE_URL + "api/Chart/GetPatchDetails/",
                             data: { id: optimizationId },
                             dataType: "json",
+                            headers: {
+                                'Accept-Language': CurrentCulture
+                            },
                             success: function (response) {
-                                console.log(response.data);
                                 if (response.data != null) {
-                                    $('#lblMinDeltaE').html(response.data.minDeltaE);
-                                    $('#lblMaxDeltaE').html(response.data.maxDeltaE);
-                                    $('#lblAvgDeltaE').html(response.data.avgDeltaE);
+                                    Resources = response.data.GlobalResources;
+                                    var spotStates = response.data.spotAnalyzeDetails;
+                                    $('#lblMinDeltaE').html(spotStates.minDeltaE);
+                                    $('#lblMaxDeltaE').html(spotStates.maxDeltaE);
+                                    $('#lblAvgDeltaE').html(spotStates.avgDeltaE);
+
+                                    $divPathDetails.find("th[data-field=SpotID] b").html(Resources.gridAnalyzeHeaderIDResource);
+                                    $divPathDetails.find("th[data-field=SpotPatch] b").html(Resources.gridAnalyzeHeaderPatchResource);
+                                    $divPathDetails.find("th[data-field=SpotView] b").html(Resources.gridAnalyzeHeaderViewResource);
+                                    $divPathDetails.find("th[data-field=SpotName] b").html(Resources.gridAnalyzeHeaderSpotNameResource);
+                                    $divPathDetails.find("th[data-field=ΔL] b").html(Resources.gridAnalyzeHeaderDeltaLResource);
+                                    $divPathDetails.find("th[data-field=Δa] b").html(Resources.gridAnalyzeHeaderDeltaAResource);
+                                    $divPathDetails.find("th[data-field=Δb] b").html(Resources.gridAnalyzeHeaderDeltaBesource);
+                                    $divPathDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeaderDeltaEResource);
+                                    $divPathDetails.find("th[data-field=ΔE_T_P] b").html(Resources.gridAnalyzeHeaderETPResource);
+                                    $divPathDetails.find("th[data-field=ΔE_M_T] b").html(Resources.gridAnalyzeHeaderEMTResource);
+                                    $divPathDetails.find("th[data-field=ΔE_M_P] b").html(Resources.gridAnalyzeHeaderEMPResource);
+
                                 }
-                                options.success(response.data.patchDetails);
+                                options.success(spotStates.patchDetails);
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
                                 console.log(XMLHttpRequest);
@@ -154,6 +173,9 @@
                 refresh: true,
                 pageSizes: true
             },
+            noRecords: {
+                template: ''
+            },
             columns: [
                 {
                     field: "SpotID",
@@ -162,6 +184,7 @@
                     filterable: false,
                 },
                 {
+                    field: "SpotPatch",
                     filterable: false,
                     title: "<b>Patch</b>",
                     //template: "<span id='sp' style='display:inline-block;background-color:#FFB700;height:14px;width:30px;'></span>",
@@ -169,9 +192,10 @@
                     width: 50
                 },
                 {
+                    field: "SpotView",
                     filterable: false,
                     title: "<b>View</b>",
-                    template: "<center><a id='lnkView' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#,#=Measured_L#,#=Measured_a#,#=Measured_b#,#=MeasurementID#);'><img src='Images/detail1.png'></img></a></center>",
+                    template: "<center><a id='lnkView' title='View Patch Details' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#,#=Measured_L#,#=Measured_a#,#=Measured_b#,#=MeasurementID#);'><img src='Images/detail1.png'></img></a></center>",
                     //template: "<center><a id='lnkView' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#);'><img src='Images/detail1.png'></img></a></center>",
                     width: 55
                 },
@@ -217,6 +241,7 @@
                 }
             ],
             dataBound: function (e) {
+                debugger;
                 var measurementId = 0;
                 if (e.sender.dataSource._view.length > 0) {
                     measurementId = e.sender.dataSource._view[0].MeasurementID;
@@ -233,6 +258,14 @@
                     this.hideColumn(9);
                     this.hideColumn(10);
                 }
+
+
+                var dataSource = this.dataSource;
+                this.element.find('tr').each(function () {
+                    var row = $(this);
+                    //set resource message
+                    row.find('#lnkView').attr('title', Resources.gridAnalyzeToolTipViewResource);
+                });
             }
         });
     });
@@ -248,7 +281,7 @@
         return false;
     }
 
-    
+
 </script>
 
 <script type="text/javascript" language="javascript">
@@ -291,6 +324,7 @@
         <asp:HiddenField ID="hdfOptimizationRunID" runat="server" Value="0" ClientIDMode="Static" />
         <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
         <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
+        <asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />
         <h1 id="header" runat="server">
             <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
         <div class="Information_divAnalyze">
@@ -302,9 +336,9 @@
             </asp:LinkButton>
         </div>
     </div>
-    <div class="listDevice" style="margin-left: 10px;">
+    <%--<div class="listDevice" style="margin-left: 10px;">
         <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
-    </div>
+    </div>--%>
     <div class="listDevice" style="margin-left: 10px;">
         <div id="divToRender" runat="server">
             <table cellpadding="0" cellspacing="10" border="0" width="97%">
@@ -334,40 +368,64 @@
 
                                                 <table class="PatchDetailsSummaryTable">
                                                     <tr>
-                                                        <th colspan="2">Optimal Device Prediction</th>
+                                                        <th colspan="2"><span>
+                                                            <asp:Localize Text="Optimal Device Prediction" runat="server"
+                                                                ID="Localize1" meta:resourcekey="locOptDevicePredResource1"></asp:Localize>
+                                                        </span></th>
                                                     </tr>
                                                     <tr>
-                                                        <td><b>Min ΔE</b></td>
+                                                        <td><span style="font-weight: bold;">
+                                                            <asp:Localize Text="Min ΔE" runat="server"
+                                                                ID="locMinDeltaE" meta:resourcekey="locMinDeltaEResource1"></asp:Localize>
+                                                        </span></td>
                                                         <td>
                                                             <asp:Label runat="server" ID="lblMinDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><b>Average ΔE</b></td>
+                                                        <td><span style="font-weight: bold;">
+                                                            <asp:Localize Text="Average ΔE" runat="server"
+                                                                ID="locAvgDeltaE" meta:resourcekey="locAvgDeltaEResource1"></asp:Localize>
+                                                        </span></td>
                                                         <td>
                                                             <asp:Label runat="server" ID="lblAvgDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><b>Max ΔE</b></td>
+                                                        <td><span style="font-weight: bold;">
+                                                            <asp:Localize Text="Max ΔE" runat="server"
+                                                                ID="loclocMaxDeltaE" meta:resourcekey="locMaxDeltaEResource1"></asp:Localize>
+                                                        </span></td>
                                                         <td>
                                                             <asp:Label runat="server" ID="lblMaxDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><b>Media</b></td>
+                                                        <td><span style="font-weight: bold;">
+                                                            <asp:Localize Text="Media" runat="server"
+                                                                ID="locMedia" meta:resourcekey="locMediaResource1"></asp:Localize>
+                                                        </span></td>
                                                         <td>
                                                             <asp:Label runat="server" ID="lblMedia"></asp:Label></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><b>Colorant</b></td>
+                                                        <td><span style="font-weight: bold;">
+                                                            <asp:Localize Text="Colorant" runat="server"
+                                                                ID="locColorant" meta:resourcekey="locColorantResource1"></asp:Localize></span></td>
                                                         <td>
                                                             <asp:Label runat="server" ID="lblColorant"></asp:Label></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><b>Rip Settings</b></td>
+                                                        <td><span style="font-weight: bold;">
+                                                            <asp:Localize runat="server"
+                                                                Text="Rip Settings" ID="locRipSettings"
+                                                                meta:resourcekey="locRipSettingsResource1"></asp:Localize></span></td>
                                                         <td>
                                                             <asp:Label runat="server" ID="lblRipSettings"></asp:Label></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><b>Spot Target</b></td>
+                                                        <td><span style="font-weight: bold;">
+                                                            <asp:Localize runat="server"
+                                                                Text="Spot Target" ID="locSpotTarget"
+                                                                meta:resourcekey="locSpotTargetResource1"></asp:Localize></span>
+                                                        </td>
                                                         <td>
                                                             <asp:Label runat="server" ID="lblSpotTarget"></asp:Label></td>
                                                     </tr>

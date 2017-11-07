@@ -35,6 +35,7 @@ var $hdfHasDeletePermission;
 var CurrentDeviceID;
 var CurrentUserID;
 var Resources = {};
+var CurrentCulture;
 
 $(document).ready(function () {
 

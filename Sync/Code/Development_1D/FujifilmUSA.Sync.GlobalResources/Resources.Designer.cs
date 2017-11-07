@@ -2545,6 +2545,114 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to pΔa.
+        /// </summary>
+        internal static string gridAnalyzeHeaderDeltaAResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderDeltaAResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pΔb.
+        /// </summary>
+        internal static string gridAnalyzeHeaderDeltaBesource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderDeltaBesource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pΔE.
+        /// </summary>
+        internal static string gridAnalyzeHeaderDeltaEResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderDeltaEResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pΔL.
+        /// </summary>
+        internal static string gridAnalyzeHeaderDeltaLResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderDeltaLResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ΔE_M_P.
+        /// </summary>
+        internal static string gridAnalyzeHeaderEMPResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderEMPResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ΔE_M_T.
+        /// </summary>
+        internal static string gridAnalyzeHeaderEMTResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderEMTResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ΔE_T_P.
+        /// </summary>
+        internal static string gridAnalyzeHeaderETPResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderETPResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        internal static string gridAnalyzeHeaderIDResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderIDResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patch.
+        /// </summary>
+        internal static string gridAnalyzeHeaderPatchResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderPatchResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spot Name.
+        /// </summary>
+        internal static string gridAnalyzeHeaderSpotNameResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderSpotNameResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        internal static string gridAnalyzeHeaderViewResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderViewResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Patch Details.
+        /// </summary>
+        internal static string gridAnalyzeToolTipViewResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeToolTipViewResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Active.
         /// </summary>
         internal static string GridDateTimeColumnResource1 {

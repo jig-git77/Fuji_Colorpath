@@ -690,4 +690,22 @@
   <data name="yellowText" xml:space="preserve">
     <value>Gelb</value>
   </data>
+  <data name="locColorantResource1.Text" xml:space="preserve">
+    <value>Farbtyp</value>
+  </data>
+  <data name="locMediaResource1.Text" xml:space="preserve">
+    <value>Bedruckstoff</value>
+  </data>
+  <data name="locMinDeltaEResource1.Text" xml:space="preserve">
+    <value>Min ΔE</value>
+  </data>
+  <data name="locOptDevicePredResource1.Text" xml:space="preserve">
+    <value>Optimal Device Prediction</value>
+  </data>
+  <data name="locRipSettingsResource1.Text" xml:space="preserve">
+    <value>Rip Einstellungen</value>
+  </data>
+  <data name="locSpotTargetResource1.Text" xml:space="preserve">
+    <value>Spot Target</value>
+  </data>
 </root>

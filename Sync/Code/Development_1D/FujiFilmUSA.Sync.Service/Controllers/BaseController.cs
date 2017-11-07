@@ -18,7 +18,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         }
 
-        public void DetermineBestCulture()
+        public void DetermineCulture()
         {
             // Somehow determine the best-suited culture for the specified request,
             CultureInfo culture = CultureInfo.GetCultureInfo(Request.Headers.AcceptLanguage.First().ToString());

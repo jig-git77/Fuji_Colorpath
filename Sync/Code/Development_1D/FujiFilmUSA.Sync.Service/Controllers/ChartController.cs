@@ -57,6 +57,21 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("_recABalanceChartTitle", "aBalanceChartTitle");
             _resourceValues.Add("_recBBalanceChartTitle", "bBalanceChartTitle");
 
+            //for patch details grid in spot analyze page
+            _resourceValues.Add("gridAnalyzeHeaderIDResource", "gridAnalyzeHeaderIDResource");
+            _resourceValues.Add("gridAnalyzeHeaderPatchResource", "gridAnalyzeHeaderPatchResource");
+            _resourceValues.Add("gridAnalyzeHeaderViewResource", "gridAnalyzeHeaderViewResource");
+            _resourceValues.Add("gridAnalyzeHeaderSpotNameResource", "gridAnalyzeHeaderSpotNameResource");
+            _resourceValues.Add("gridAnalyzeHeaderETPResource", "gridAnalyzeHeaderETPResource");
+            _resourceValues.Add("gridAnalyzeHeaderEMTResource", "gridAnalyzeHeaderEMTResource");
+            _resourceValues.Add("gridAnalyzeHeaderEMPResource", "gridAnalyzeHeaderEMPResource");
+            _resourceValues.Add("gridAnalyzeHeaderDeltaLResource", "gridAnalyzeHeaderDeltaLResource");
+            _resourceValues.Add("gridAnalyzeHeaderDeltaAResource", "gridAnalyzeHeaderDeltaAResource");
+            _resourceValues.Add("gridAnalyzeHeaderDeltaBesource", "gridAnalyzeHeaderDeltaBesource");
+            _resourceValues.Add("gridAnalyzeHeaderDeltaEResource", "gridAnalyzeHeaderDeltaEResource");
+            _resourceValues.Add("gridAnalyzeToolTipViewResource", "gridAnalyzeToolTipViewResource");
+
+
             base.Initialize(controllerContext);
         }
 
@@ -189,12 +204,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GetPatchDetails(int id)
         {
             IHttpActionResult actionResult = null;
-            BaseResponse<SpotAnalyze> httpResponse = new BaseResponse<SpotAnalyze>();
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
+                DetermineCulture();
                 MeasurementId = 0;
-                OptimizeRunId = Convert.ToInt32(id);
-
+                OptimizeRunId = Convert.ToInt32(id);                
                 _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
 
                 //Now we are using DataTable as DataSource                    
@@ -239,8 +254,13 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 spotAnalyzeDetails.minDeltaE = minDtE.ToString();
                 spotAnalyzeDetails.maxDeltaE = maxDtE.ToString();
                 spotAnalyzeDetails.avgDeltaE = String.Format("{0:0.###}", avgDeltaE);
-
-                httpResponse.Data = spotAnalyzeDetails;
+                GenerateResources();
+                var objGroup = new
+                {
+                    spotAnalyzeDetails = spotAnalyzeDetails,
+                    GlobalResources = _globalResourceValues
+                };
+                httpResponse.Data = objGroup;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
             }
             catch (Exception ex)

@@ -48,6 +48,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     hdfOptimizationRunID.Value = OptimizeRunId.ToString();
                     hdnIsNewNCP.Value=IsNewNCP.ToString();
                     hdnIsNcpCreated.Value = IsNCPCreated.ToString();
+                    hdfCurrentCulture.Value = getCurrentCultureLanguage();
                     //BindPatchDetails_Summary();
                 }
 

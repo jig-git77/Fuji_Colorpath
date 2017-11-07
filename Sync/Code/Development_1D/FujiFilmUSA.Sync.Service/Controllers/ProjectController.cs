@@ -72,7 +72,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
-                DetermineBestCulture();
+                DetermineCulture();
                 Projects = new List<Project>();
                 DeviceId = deviceID;
                 //Now we are passing LicenseTypeID as None to bring all projects based on DeviceId
