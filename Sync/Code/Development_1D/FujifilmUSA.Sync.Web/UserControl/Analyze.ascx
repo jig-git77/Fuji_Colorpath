@@ -7,7 +7,7 @@
 <script src="JS/Printing.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
 <link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
-<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>
+<%--<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>--%>
 <%--<script src="JS/DYMO.Label.Framework.latest.js" type="text/javascript" charset="UTF-8"></script>--%>
 
 <script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>
@@ -244,6 +244,7 @@
                 <asp:HiddenField runat="server" ID="hdnCurrentUserID" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnVerification" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnSync1DType" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">

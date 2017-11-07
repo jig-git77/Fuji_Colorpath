@@ -111,6 +111,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     //SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Validation;
                     //temp code end
                     //IsVerification = true;
+                    DetermineCulture();
                     this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
                     this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     this.MeasurementId = Convert.ToInt32(MeasurementId);

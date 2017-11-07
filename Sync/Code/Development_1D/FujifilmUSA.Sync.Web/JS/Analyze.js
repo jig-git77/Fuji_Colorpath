@@ -23,6 +23,7 @@ var $kendoChartDummy;
 var $hdnVerification;
 var $hdnSync1DType;
 var $isAverageOfMeasurements;
+var $CurrentCulture;
 
 
 $(document).ready(function () {
@@ -30,7 +31,7 @@ $(document).ready(function () {
     ////*********** HTML Element Declarations ***********////
     $hdnBaseServiceUrl = $('#hdnBaseServiceUrl').val();
     $hdnCurrentUserID = $('#hdnCurrentUserID').val();
-
+    $CurrentCulture = $("#hdfCurrentCulture").val();
     $hdnVerification = $('#hdnVerification').val();
     $hdnSync1DType = $('#hdnSync1DType').val();
     $isAverageOfMeasurements = $('#ContentPlaceHolder1_ucAnalyze_chkAnalyzeAverageOfMeasurements').is(':checked');
@@ -59,6 +60,9 @@ $(document).ready(function () {
         data: { MeasurementId: measurementID, IsAverageOfMeasurements: $isAverageOfMeasurements, IsVerificationProject: $hdnVerification, IsSync1DTypeProject: $hdnSync1DType },
         type: 'GET',
         dataType: 'json',
+        headers: {
+            'Accept-Language': $CurrentCulture
+        },
         success: function (response) {
             console.log(response);
             jsonTarget = response.data.GamutChartActual;
