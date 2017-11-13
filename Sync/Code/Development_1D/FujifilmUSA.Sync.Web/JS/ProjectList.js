@@ -118,6 +118,7 @@ $(document).ready(function () {
             },
             pageSize: 10
         },
+        //scrollable: false,
         sortable: true,
         filterable: true,
         pageable: {
@@ -129,6 +130,7 @@ $(document).ready(function () {
         },
         detailInit: detailInit,
         dataBound: function (e) {
+
             var projectTypeImagePath = '';
             var projectValidationImagePath = '';
             var projectValidationTooltip = '';

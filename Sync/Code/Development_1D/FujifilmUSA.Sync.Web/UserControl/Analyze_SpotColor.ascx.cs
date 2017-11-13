@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Variable Declarations
         private PresenterAnalyze _presenterAnalyze;
-        private const string _recCreateDLP = "createDLP";
+        private const string _recCreateDLP = "locCreateNCPResource1";
         private const string _recNext = "nextText";
         private const string _recnewPrintCondition = "newPrintConditionText";
         private const string _recAnalyze = "analyze";

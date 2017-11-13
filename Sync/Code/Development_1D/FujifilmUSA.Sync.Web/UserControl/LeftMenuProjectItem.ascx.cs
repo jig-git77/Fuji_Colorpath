@@ -53,15 +53,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             lnkMeasurement.Visible = false;
                             lnkDownload.Visible = false;
 
-                            //----------------If LicenseTypeID != 3 (Ink Optimization)----------------//
-                            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimization)
+                            //------If current run is closed (certify) and it is last run of this project--------//
+                            if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
+                                SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last().OptimizeRunId)
                             {
-                                //------If current run is closed (certify) and it is last run of this project--------//
-                                if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
-                                    SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last().OptimizeRunId)
-                                {
-                                    lnkAddRun.Visible = true;
-                                }
+                                lnkAddRun.Visible = true;
                             }
                         }
 

@@ -687,4 +687,7 @@
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
     <value>Spot Target</value>
   </data>
+  <data name="locCreateNCPResource1" xml:space="preserve">
+    <value>Create Chart</value>
+  </data>
 </root>

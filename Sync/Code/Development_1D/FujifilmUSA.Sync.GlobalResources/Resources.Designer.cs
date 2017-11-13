@@ -2950,6 +2950,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NCP.
+        /// </summary>
+        internal static string NCPText {
+            get {
+                return ResourceManager.GetString("NCPText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Project.
         /// </summary>
         internal static string OpenProject {

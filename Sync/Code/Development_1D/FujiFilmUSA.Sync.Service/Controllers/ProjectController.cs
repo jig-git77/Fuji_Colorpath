@@ -105,6 +105,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             BaseResponse<string> httpResponse = new BaseResponse<string>();
             try
             {
+                GenerateResources();
                 ProjectId = projectID;
                 _presenterProjectList.GetSpotLibraryListByProjectId();
                 var json = JsonConvert.SerializeObject(SpotProjectLibraries);

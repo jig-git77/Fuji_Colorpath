@@ -1167,4 +1167,7 @@
   <data name="gridAnalyzeToolTipViewResource" xml:space="preserve">
     <value>View Patch Details</value>
   </data>
+  <data name="NCPText" xml:space="preserve">
+    <value>NCP</value>
+  </data>
 </root>

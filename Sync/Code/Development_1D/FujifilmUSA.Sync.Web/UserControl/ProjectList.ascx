@@ -7,9 +7,9 @@
     TagPrefix="uc" %>
 
 <link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
-        <link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
-        
-    <script src="JS/ProjectList.js"></script>
+<link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
+
+<script src="JS/ProjectList.js"></script>
 
 <script type="text/javascript" language="javascript">
 
@@ -130,6 +130,18 @@
         vertical-align: top;
         line-height: 15px;
     }
+
+    .k-grid-header {
+        padding-right: 0 !important;
+    }
+
+    .k-grid-content {
+        overflow-y: hidden;
+    }
+
+    .k-grid td {
+        line-height: 2em;
+    }
 </style>
 
 <style type="text/css">
@@ -170,8 +182,8 @@
         overflow: hidden;
     }
 
-    #kendoProjectList >  .k-grid-content {
-        min-height: 100px;        
+    #kendoProjectList > .k-grid-content {
+        min-height: 100px;
     }
 </style>
 
@@ -435,10 +447,10 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-    <div class="clear">        
+    <div class="clear">
     </div>
     <div class="listDevice">
-     
+
         <div>
             <div id="kendoProjectList"></div>
         </div>

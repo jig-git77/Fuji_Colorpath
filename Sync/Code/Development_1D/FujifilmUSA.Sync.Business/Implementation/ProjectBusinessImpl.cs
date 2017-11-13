@@ -1655,7 +1655,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             {
                                 OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
                                 RunName = ((EOptimizeRunStatus)DataReader.ReadInt(x, "Status")) == EOptimizeRunStatus.Closed
-                                                              ? (GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("DLPText") + " " +
+                                                              ? (GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("NCPText") + " " +
                                                                  Convert.ToDateTime(DataReader.ReadDate(x, "EndDateTime")).ToString("MMdd") + " " +
                                                                  Convert.ToDateTime(DataReader.ReadDate(x, "EndDateTime")).ToString("HH:mm"))
                                                               : ((EOptimizeRunStatus)DataReader.ReadInt(x, "Status")) == EOptimizeRunStatus.Open
