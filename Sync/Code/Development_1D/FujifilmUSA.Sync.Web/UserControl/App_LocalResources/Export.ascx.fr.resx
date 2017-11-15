@@ -222,4 +222,7 @@
   <data name="GridBoundColumnResource1.HeaderText" xml:space="preserve">
     <value>Reference%_fr</value>
   </data>
+  <data name="locDownloadChartAndPrintThroughWorkflowResource1NCP" xml:space="preserve">
+    <value>Télécharger la Charte et l'imprimer depuis le Flux de Travail :</value>
+  </data>
 </root>

@@ -1685,7 +1685,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             {
                                 if (index > 0)
                                 {
-                                    LastDLPName = project.SpotTargetProject.ProjectName + " DLP" +
+                                    LastDLPName = project.SpotTargetProject.ProjectName + " NCP" +
                                                   project.SpotTargetProject.OptimizeRuns[index - 1].EndDateTime.Value.Month.ToString("00") +
                                                   project.SpotTargetProject.OptimizeRuns[index - 1].EndDateTime.Value.Day.ToString("00") +
                                                   project.SpotTargetProject.OptimizeRuns[index - 1].EndDateTime.Value.Hour.ToString("00") +
@@ -1695,7 +1695,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     {
                                         if (project.SpotTargetProject.OptimizeRuns[index - 1].Status == EOptimizeRunStatus.Certify)
                                         {
-                                            LastDLPName = project.SpotTargetProject.ProjectName + " DLP" +
+                                            LastDLPName = project.SpotTargetProject.ProjectName + " NCP" +
                                                           project.SpotTargetProject.OptimizeRuns[index - 2].EndDateTime.Value.Month.ToString("00") +
                                                           project.SpotTargetProject.OptimizeRuns[index - 2].EndDateTime.Value.Day.ToString("00") +
                                                           project.SpotTargetProject.OptimizeRuns[index - 2].EndDateTime.Value.Hour.ToString("00") +
@@ -1706,7 +1706,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     }
                                 }
                                 x.LastDlpName = (index == 0) ? string.Empty : LastDLPName;
-                                x.DlpName = string.Format("{0} DLP {1}.icc",
+                                x.DlpName = string.Format("{0} NCP {1}.icc",
                                                           project.SpotTargetProject.ProjectName,
                                                           index++.ToString("000"));
 

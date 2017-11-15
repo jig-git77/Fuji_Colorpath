@@ -225,4 +225,7 @@
   <data name="GridBoundColumnResource1.HeaderText" xml:space="preserve">
     <value>データ％</value>
   </data>
+  <data name="locDownloadChartAndPrintThroughWorkflowResource1NCP" xml:space="preserve">
+    <value>チャートをダウンロードし、DLPを適用したワークフローで印刷してください：</value>
+  </data>
 </root>

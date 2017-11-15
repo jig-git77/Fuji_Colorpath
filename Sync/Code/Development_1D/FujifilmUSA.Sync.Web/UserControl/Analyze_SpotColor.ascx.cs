@@ -21,7 +21,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterAnalyze _presenterAnalyze;
         private const string _recCreateDLP = "locCreateNCPResource1";
         private const string _recNext = "nextText";
-        private const string _recnewPrintCondition = "newPrintConditionText";
+        private const string _recnewPrintCondition = "newNCPPrintConditionText";
         private const string _recAnalyze = "analyze";
         public string DLPName = "";
         #endregion
@@ -55,7 +55,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId)
                 {
                     header.InnerText = GetResourceString(_recnewPrintCondition);//"New Print Condition - Analyze (No DLP)";
-                    DLPName = "No DLP";
+                    DLPName = "No NCP";
                 }
                 else
                 {

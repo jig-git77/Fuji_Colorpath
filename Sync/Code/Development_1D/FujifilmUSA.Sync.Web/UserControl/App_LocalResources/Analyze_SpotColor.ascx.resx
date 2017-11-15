@@ -690,4 +690,7 @@
   <data name="locCreateNCPResource1" xml:space="preserve">
     <value>Create Chart</value>
   </data>
+  <data name="newNCPPrintConditionText" xml:space="preserve">
+    <value>New Print Condition - Analyze (No NCP)</value>
+  </data>
 </root>
