@@ -1029,6 +1029,10 @@
 
                                                     </Triggers>
                                                 </asp:UpdatePanel>
+
+                                                <div>
+                                                    <div id="divChartInkPaperABComparision"></div>
+                                                </div>
                                             </div>
                                             <div class="clear"></div>
                                         </div>

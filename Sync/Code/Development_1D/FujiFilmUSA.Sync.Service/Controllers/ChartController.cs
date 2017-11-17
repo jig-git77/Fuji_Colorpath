@@ -274,6 +274,63 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+        //public IHttpActionResult GenerateInkPaperChart(int? MeasurementId, string fromDeltaE, bool? IsVerificationProject, bool? IsSync1DTypeProject, bool? IsAverageOfMeasurements)
+        public IHttpActionResult GenerateInkPaperChart(int? MeasurementId, string fromDeltaE)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                if (MeasurementId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+                if (fromDeltaE == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.Message = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    //temp code start
+                    //SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Validation;
+                    //temp code end
+                    //IsVerification = true;
+                    DetermineCulture();                   
+                    this.MeasurementId = Convert.ToInt32(MeasurementId);
+                    this.From_ΔE = fromDeltaE;
+                    _presenterAnalyze.GetInkPaperChart();
+                    GenerateResources();
+                    httpResponse.Data = new
+                    {
+                        DeltaEPrimaryPatcheList = DTDeltaEPrimaryPatches,
+                        PaperPatcheList = DTPaperPatches,
+                        DensityList = DTDensity,
+                        GlobalResources = _globalResourceValues
+                    };
+
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
         #region IViewAnalyze Members
         public int ProjectId { get; set; }
 

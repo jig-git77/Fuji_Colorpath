@@ -25,6 +25,8 @@ var $hdnSync1DType;
 var $isAverageOfMeasurements;
 var $CurrentCulture;
 
+var $divChartInkPaperABComparision
+
 
 $(document).ready(function () {
 
@@ -48,6 +50,7 @@ $(document).ready(function () {
     $chartTargetVersusActualABLarge = $("#kendoChartTargetVersusActualABLarge");
     $chartTargetVersusActualABLargeArea = $("#kendoChartTargetVersusActualABLargeArea");
     $kendoChartDummy = $("#kendoChartDummy");
+    $divChartInkPaperABComparision = $("#divChartInkPaperABComparision");
 
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
@@ -143,6 +146,8 @@ $(document).ready(function () {
             }
         });
     });
+
+    BindInkPaperChartABComparision();
 });
 
 ////**************** START BIND THE AB COMPARISION CHART  ****************////
@@ -960,3 +965,82 @@ function Get_B_BalanceChartImage() {
     dummyChart.refresh();
     return dummyChart.imageDataURL();
 }
+
+
+////**************** START BIND THE AB COMPARISION INK PAPER CHART  ****************////
+
+function BindInkPaperChartABComparision() {
+
+    var json = [{ "HtmlColor": "#009de3", "PatchTypeId": 1, "?E": 0.81, "?ELimit": 0.00, "CielabL": 55.64, "CielabA": -37.92, "CielabB": -49.04, "TargetL": 55.00, "Targeta": -37.00, "Targetb": -50.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 },
+    { "HtmlColor": "#e4007b", "PatchTypeId": 2, "?E": 1.17, "?ELimit": 0.00, "CielabL": 49.17, "CielabA": 74.52, "CielabB": -2.92, "TargetL": 48.00, "Targeta": 74.00, "Targetb": -3.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 },
+    { "HtmlColor": "#ffec00", "PatchTypeId": 3, "?E": 0.36, "?ELimit": 0.00, "CielabL": 89.03, "CielabA": -5.59, "CielabB": 92.29, "TargetL": 89.00, "Targeta": -5.00, "Targetb": 93.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }, { "HtmlColor": "#1b1a19", "PatchTypeId": 4, "?E": 0.49, "?ELimit": 0.00, "CielabL": 15.85, "CielabA": 0.07, "CielabB": -0.47, "TargetL": 16.00, "Targeta": 0.00, "Targetb": 0.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }, { "HtmlColor": "#e40006", "PatchTypeId": 5, "?E": 0.58, "?ELimit": 0.00, "CielabL": 46.45, "CielabA": 68.30, "CielabB": 48.64, "TargetL": 47.00, "Targeta": 68.00, "Targetb": 48.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }, { "HtmlColor": "#009644", "PatchTypeId": 6, "?E": 1.66, "?ELimit": 0.00, "CielabL": 51.62, "CielabA": -64.02, "CielabB": 27.47, "TargetL": 50.00, "Targeta": -65.00, "Targetb": 27.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }, { "HtmlColor": "#1f2c82", "PatchTypeId": 7, "?E": 0.90, "?ELimit": 0.00, "CielabL": 24.78, "CielabA": 22.36, "CielabB": -44.38, "TargetL": 24.00, "Targeta": 22.00, "Targetb": -46.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }, { "HtmlColor": "#D4CBC5", "PatchTypeId": 8, "?E": 1.31, "?ELimit": 0.00, "CielabL": 96.34, "CielabA": 0.67, "CielabB": -2.42, "TargetL": 95.00, "Targeta": 0.00, "Targetb": -2.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }, { "HtmlColor": "#323130", "PatchTypeId": 9, "?E": 0.56, "?ELimit": 0.00, "CielabL": 23.05, "CielabA": 0.04, "CielabB": -0.56, "TargetL": 23.00, "Targeta": 0.00, "Targetb": 0.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }];
+
+
+    var formattedJson = [];
+    var patchColor = ["Cyan", "Magenta", "Yellow", "Black", "Red", "Green", "Blue", "Paper", "3-C"]
+
+    $.each(json, function (index, obj) {
+
+        var item = {
+            color: obj.HtmlColor,
+            name: patchColor[index],
+            value: obj["?E"],
+            CielabL: obj.CielabL,
+            CielabA: obj.CielabA,
+            CielabB: obj.CielabB,
+            TargetL: obj.TargetL,
+            Targeta: obj.Targeta,
+            Targetb: obj.Targetb
+        };
+        formattedJson.push(item);
+    });
+
+    var axis = json.map(function (a) { return a["?E"]; });
+
+
+    var patches = json.map(function (a) { return a["HtmlColor"]; });
+
+    $divChartInkPaperABComparision.kendoChart({
+
+        title: {
+            text: "ΔE2000 Primary Patches"
+        },
+        seriesDefaults:
+        {
+            type: "column",
+            stack: true,
+            width: 10,
+            gap: 2,
+        },
+        series: [{
+            type: "bar",
+            field: "value",
+            data: formattedJson,
+            //color: patches
+        }],
+        categoryAxis: {
+            categories: patchColor
+        },
+        valueAxis: {
+            max: 3,
+            line: {
+                visible: false
+            },
+            minorGridLines: {
+                visible: true
+            },
+            labels: {
+                rotation: "auto"
+            }
+        },
+        tooltip: {
+            visible: true,
+            template: "#= dataItem.name # Patch Metrics <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
+        },
+        chartArea: {
+            width: 600,
+            height: 400
+        },
+    });
+}
+
