@@ -1144,4 +1144,49 @@ erwünschten Format überein.</value>
   <data name="gridAnalyzeToolTipViewResource" xml:space="preserve">
     <value>View Patch Details</value>
   </data>
+  <data name="Error_Invalid_IsAverageOfMeasurements" xml:space="preserve">
+    <value>Invalid IsAverageOfMeasurements have been provided.</value>
+  </data>
+  <data name="Error_Invalid_IsSync1DTypeProject" xml:space="preserve">
+    <value>Invalid Sync1DType have been provided.</value>
+  </data>
+  <data name="Error_Invalid_IsVerificationProject" xml:space="preserve">
+    <value>Invalid varification have been provided.</value>
+  </data>
+  <data name="Error_Invalid_MeasurementId" xml:space="preserve">
+    <value>Invalid MeasurementId have been provided.</value>
+  </data>
+  <data name="blackText" xml:space="preserve">
+    <value>Schwarz</value>
+  </data>
+  <data name="blueText" xml:space="preserve">
+    <value>Blau</value>
+  </data>
+  <data name="cyanText" xml:space="preserve">
+    <value>Cyan</value>
+  </data>
+  <data name="greenText" xml:space="preserve">
+    <value>Grün</value>
+  </data>
+  <data name="magentaText" xml:space="preserve">
+    <value>Magenta</value>
+  </data>
+  <data name="paperText" xml:space="preserve">
+    <value>Papier</value>
+  </data>
+  <data name="redText" xml:space="preserve">
+    <value>Rot</value>
+  </data>
+  <data name="tripletPathMetrics" xml:space="preserve">
+    <value>3 Farben Meßwerte</value>
+  </data>
+  <data name="tripletText" xml:space="preserve">
+    <value>3 Farben</value>
+  </data>
+  <data name="yellowText" xml:space="preserve">
+    <value>Gelb</value>
+  </data>
+  <data name="deltaEText" xml:space="preserve">
+    <value>ΔE</value>
+  </data>
 </root>

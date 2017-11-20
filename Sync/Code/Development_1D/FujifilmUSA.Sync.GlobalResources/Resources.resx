@@ -1044,16 +1044,16 @@
   <data name="lBalanceChartTitle" xml:space="preserve">
     <value>L* Balance Gray Chart</value>
   </data>
-  <data name="Invalid_IsAverageOfMeasurements" xml:space="preserve">
+  <data name="Error_Invalid_IsAverageOfMeasurements" xml:space="preserve">
     <value>Invalid IsAverageOfMeasurements have been provided.</value>
   </data>
-  <data name="Invalid_IsSync1DTypeProject" xml:space="preserve">
+  <data name="Error_Invalid_IsSync1DTypeProject" xml:space="preserve">
     <value>Invalid Sync1DType have been provided.</value>
   </data>
-  <data name="Invalid_IsVerificationProject" xml:space="preserve">
+  <data name="Error_Invalid_IsVerificationProject" xml:space="preserve">
     <value>Invalid varification have been provided.</value>
   </data>
-  <data name="Invalid_MeasurementId" xml:space="preserve">
+  <data name="Error_Invalid_MeasurementId" xml:space="preserve">
     <value>Invalid MeasurementId have been provided.</value>
   </data>
   <data name="ProjectList_DeleteSpotProject_Confirmation" xml:space="preserve">
@@ -1169,5 +1169,41 @@
   </data>
   <data name="NCPText" xml:space="preserve">
     <value>NCP</value>
+  </data>
+  <data name="blackText" xml:space="preserve">
+    <value>Black</value>
+  </data>
+  <data name="blueText" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="cyanText" xml:space="preserve">
+    <value>Cyan</value>
+  </data>
+  <data name="Error_Invalid_DeltaEValue" xml:space="preserve">
+    <value>Invalid Delta E value has been provided.</value>
+  </data>
+  <data name="greenText" xml:space="preserve">
+    <value>Green</value>
+  </data>
+  <data name="magentaText" xml:space="preserve">
+    <value>Magenta</value>
+  </data>
+  <data name="paperText" xml:space="preserve">
+    <value>Paper</value>
+  </data>
+  <data name="redText" xml:space="preserve">
+    <value>Red</value>
+  </data>
+  <data name="tripletPathMetrics" xml:space="preserve">
+    <value>3-C Patch Metrics</value>
+  </data>
+  <data name="tripletText" xml:space="preserve">
+    <value>3-C</value>
+  </data>
+  <data name="yellowText" xml:space="preserve">
+    <value>Yellow</value>
+  </data>
+  <data name="deltaEText" xml:space="preserve">
+    <value>ΔE</value>
   </data>
 </root>

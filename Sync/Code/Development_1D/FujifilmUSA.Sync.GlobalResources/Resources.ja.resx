@@ -1143,4 +1143,49 @@
   <data name="gridAnalyzeToolTipViewResource" xml:space="preserve">
     <value>View Patch Details</value>
   </data>
+  <data name="Error_Invalid_IsAverageOfMeasurements" xml:space="preserve">
+    <value>Invalid IsAverageOfMeasurements have been provided.</value>
+  </data>
+  <data name="Error_Invalid_IsSync1DTypeProject" xml:space="preserve">
+    <value>Invalid Sync1DType have been provided.</value>
+  </data>
+  <data name="Error_Invalid_IsVerificationProject" xml:space="preserve">
+    <value>Invalid varification have been provided.</value>
+  </data>
+  <data name="Error_Invalid_MeasurementId" xml:space="preserve">
+    <value>Invalid MeasurementId have been provided.</value>
+  </data>
+  <data name="blackText" xml:space="preserve">
+    <value>ブラック</value>
+  </data>
+  <data name="blueText" xml:space="preserve">
+    <value>ブルー</value>
+  </data>
+  <data name="cyanText" xml:space="preserve">
+    <value>シアン</value>
+  </data>
+  <data name="greenText" xml:space="preserve">
+    <value>グリーン</value>
+  </data>
+  <data name="magentaText" xml:space="preserve">
+    <value>マゼンタ</value>
+  </data>
+  <data name="paperText" xml:space="preserve">
+    <value>紙白</value>
+  </data>
+  <data name="redText" xml:space="preserve">
+    <value>レッド</value>
+  </data>
+  <data name="tripletPathMetrics" xml:space="preserve">
+    <value>3-C</value>
+  </data>
+  <data name="tripletText" xml:space="preserve">
+    <value>3-C</value>
+  </data>
+  <data name="yellowText" xml:space="preserve">
+    <value>イエロー</value>
+  </data>
+  <data name="deltaEText" xml:space="preserve">
+    <value>&amp;Delta;E</value>
+  </data>
 </root>

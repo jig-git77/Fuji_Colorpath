@@ -23,10 +23,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private PresenterAnalyze _presenterAnalyze;
         private Dictionary<string, string> _resourceValues { get; set; }
         private Dictionary<string, string> _globalResourceValues { get; set; }
-        private const string _InvalidMeasurementId = "Invalid_MeasurementId";
-        private const string _InvalidIsAverageOfMeasurements = "Invalid_IsAverageOfMeasurements";
-        private const string _InvalidIsVerificationProject = "Invalid_IsVerificationProject";
-        private const string _InvalidIsSync1DTypeProject = "Invalid_IsSync1DTypeProject";
+        private const string _InvalidMeasurementId = "Error_Invalid_MeasurementId";
+        private const string _InvalidIsAverageOfMeasurements = "Error_Invalid_IsAverageOfMeasurements";
+        private const string _InvalidIsVerificationProject = "Error_Invalid_IsVerificationProject";
+        private const string _InvalidIsSync1DTypeProject = "Error_Invalid_IsSync1DTypeProject";
+        private const string _InvalidDeltaEValue = "Error_Invalid_DeltaEValue";
+
         #endregion
 
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -39,6 +41,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("_recL", "lText");
             _resourceValues.Add("_recA", "aText");
             _resourceValues.Add("_recB", "bText");
+            _resourceValues.Add("_recDeltaE", "deltaEText");
             _resourceValues.Add("_recTarget", "targetText");
             _resourceValues.Add("_recDeltaL", "deltaLText");
             _resourceValues.Add("_recDeltaA", "deltaAText");
@@ -52,6 +55,17 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("_recBluePathMetrics", "bluePathMetrics");
             _resourceValues.Add("_recBlackPathMetrics", "blackPathMetrics");
             _resourceValues.Add("_recPaperPathMetrics", "paperPathMetrics");
+
+            _resourceValues.Add("_recCyan", "cyanText");
+            _resourceValues.Add("_recMagenta", "magentaText");
+            _resourceValues.Add("_recYellow", "yellowText");
+            _resourceValues.Add("_recBlack", "blackText");
+            _resourceValues.Add("_recRed", "redText");
+            _resourceValues.Add("_recGreen", "greenText");
+            _resourceValues.Add("_recBlue", "blueText");
+            _resourceValues.Add("_recPaper", "paperText");
+            _resourceValues.Add("_recTriplet", "tripletText");
+            _resourceValues.Add("_recTripletPathMetrics", "tripletPathMetrics");
 
             _resourceValues.Add("_recLBalanceChartTitle", "lBalanceChartTitle");
             _resourceValues.Add("_recABalanceChartTitle", "aBalanceChartTitle");
@@ -210,7 +224,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
                 DetermineCulture();
                 MeasurementId = 0;
-                OptimizeRunId = Convert.ToInt32(id);                
+                OptimizeRunId = Convert.ToInt32(id);
                 _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
 
                 //Now we are using DataTable as DataSource                    
@@ -251,7 +265,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
                 }
 
-                
+
                 spotAnalyzeDetails.minDeltaE = minDtE.ToString();
                 spotAnalyzeDetails.maxDeltaE = maxDtE.ToString();
                 spotAnalyzeDetails.avgDeltaE = String.Format("{0:0.###}", avgDeltaE);
@@ -275,6 +289,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         //public IHttpActionResult GenerateInkPaperChart(int? MeasurementId, string fromDeltaE, bool? IsVerificationProject, bool? IsSync1DTypeProject, bool? IsAverageOfMeasurements)
+        [HttpGet]
         public IHttpActionResult GenerateInkPaperChart(int? MeasurementId, string fromDeltaE)
         {
             IHttpActionResult actionResult = null;
@@ -303,7 +318,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     //SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Validation;
                     //temp code end
                     //IsVerification = true;
-                    DetermineCulture();                   
+                    DetermineCulture();
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
                     this.From_ΔE = fromDeltaE;
                     _presenterAnalyze.GetInkPaperChart();
@@ -312,6 +327,87 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     {
                         DeltaEPrimaryPatcheList = DTDeltaEPrimaryPatches,
                         PaperPatcheList = DTPaperPatches,
+                        DensityList = DTDensity,
+                        GlobalResources = _globalResourceValues
+                    };
+
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
+        public IHttpActionResult GenerateAnalyzeCharts(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject, string fromDeltaE)
+        {
+            //int? MeasurementId = 15081;
+            //bool? IsAverageOfMeasurements = true;   
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                if (MeasurementId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+                if (IsAverageOfMeasurements == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+
+                if (IsVerificationProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+
+                if (IsSync1DTypeProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+
+                if (string.IsNullOrEmpty(Convert.ToString(fromDeltaE)))
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.Message = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    //temp code start
+                    //SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Validation;
+                    //temp code end
+                    //IsVerification = true;
+                    DetermineCulture();
+                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    this.MeasurementId = Convert.ToInt32(MeasurementId);
+                    this.From_ΔE = fromDeltaE;
+                    this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
+
+                    //Get Ink gray chart details
+                    _presenterAnalyze.GetGrayChart();
+
+                    //Get Ink paper chart details
+                    _presenterAnalyze.GetInkPaperChart();
+
+                    //Get resource values
+                    GenerateResources();
+
+                    httpResponse.Data = new
+                    {
+                        GamutChartActual = DTGaumatChart1,
+                        GamutChart = DTGaumatChart2,
+                        LABChart = DTLABChart,
+                        DeltaEPrimaryPatchList = DTDeltaEPrimaryPatches,
+                        PaperPatchList = DTPaperPatches,
                         DensityList = DTDensity,
                         GlobalResources = _globalResourceValues
                     };

@@ -2,6 +2,7 @@
 var jsonTarget = [];
 var jsonColors = [];
 var jsonGray = [];
+var jsonDeltaEPrimaryPatchList = [];
 var _Resources = {};
 var CURRENT_USER_ID
 var SERVICE_BASE_URL = '';
@@ -24,8 +25,9 @@ var $hdnVerification;
 var $hdnSync1DType;
 var $isAverageOfMeasurements;
 var $CurrentCulture;
-
-var $divChartInkPaperABComparision
+var $rbtnListDeltaE;
+var $divChartInkPaperABComparision;
+var $selectedDeltaE;
 
 
 $(document).ready(function () {
@@ -39,8 +41,9 @@ $(document).ready(function () {
     $isAverageOfMeasurements = $('#ContentPlaceHolder1_ucAnalyze_chkAnalyzeAverageOfMeasurements').is(':checked');
     $hdMeasurement = $('#ContentPlaceHolder1_ucAnalyze_hdMeasurement').val();
     $chartLoader = $(".chart-loading");
-    $imgEyeABCompLarge = $('#imgEyeABCompLarge')
-    $btnGeneratePDF = $('#btnGeneratePDF')
+    $imgEyeABCompLarge = $('#imgEyeABCompLarge');
+    $btnGeneratePDF = $('#btnGeneratePDF');
+    $rbtnListDeltaE = $('#rbtnListDeltaE');
     $chart_TargetVersusActualAB = $("#kendoChartTargetVersusActualAB");
     $chart_Gamut_ABComparison = $("#kendoChartGamut_ABComparison");
     $chart_L_Comaparision = $("#kendoChartLComaparision");
@@ -52,15 +55,25 @@ $(document).ready(function () {
     $kendoChartDummy = $("#kendoChartDummy");
     $divChartInkPaperABComparision = $("#divChartInkPaperABComparision");
 
+    $selectedDeltaE = $rbtnListDeltaE.find('input:checked').val();
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
 
     var measurementID = parseInt($hdMeasurement);
     //var isAverageOfMeasurements = true;
+    var apiParameters = {
+        MeasurementId: measurementID,
+        IsAverageOfMeasurements: $isAverageOfMeasurements,
+        IsVerificationProject: $hdnVerification,
+        IsSync1DTypeProject: $hdnSync1DType,
+        fromDeltaE: $selectedDeltaE
+    };
+
     kendo.ui.progress($chartLoader, true);
     $.ajax({
-        url: SERVICE_BASE_URL + 'api/Chart/GenerateGrayChart',
-        data: { MeasurementId: measurementID, IsAverageOfMeasurements: $isAverageOfMeasurements, IsVerificationProject: $hdnVerification, IsSync1DTypeProject: $hdnSync1DType },
+        url: SERVICE_BASE_URL + 'api/Chart/GenerateAnalyzeCharts',
+        //data: { MeasurementId: measurementID, IsAverageOfMeasurements: $isAverageOfMeasurements, IsVerificationProject: $hdnVerification, IsSync1DTypeProject: $hdnSync1DType },
+        data: apiParameters,
         type: 'GET',
         dataType: 'json',
         headers: {
@@ -71,12 +84,14 @@ $(document).ready(function () {
             jsonTarget = response.data.GamutChartActual;
             jsonColors = response.data.GamutChart;
             jsonGray = response.data.LABChart;
+            jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
             _Resources = response.data.GlobalResources;
             BindChartTargetVersusActualAB();
             BindChartGamutABComparision();
             BindChartLComparision();
             BindChartLGrayBalance();
             kendo.ui.progress($chartLoader, false);
+            BindInkPaperChartABComparision();
         },
         error: function (xhr, errorType, exception) {
             //alert(exception);
@@ -147,7 +162,7 @@ $(document).ready(function () {
         });
     });
 
-    BindInkPaperChartABComparision();
+
 });
 
 ////**************** START BIND THE AB COMPARISION CHART  ****************////
@@ -181,7 +196,7 @@ function BindChartTargetVersusActualAB() {
     $.each(jsonTarget, function (index, element) {
 
         var seriesArray = [];
-        
+
 
 
         //Get colors from the colors array ()
@@ -192,7 +207,7 @@ function BindChartTargetVersusActualAB() {
                 var dots = [colorObj.CielabA, colorObj.CielabB];
                 seriesArray.push(dots);
             });
-        }        
+        }
 
         //add actuall color object
         var actualObject = [element.CielabA, element.CielabB];
@@ -971,42 +986,49 @@ function Get_B_BalanceChartImage() {
 
 function BindInkPaperChartABComparision() {
 
-    var json = [{ "HtmlColor": "#009de3", "PatchTypeId": 1, "?E": 0.81, "?ELimit": 0.00, "CielabL": 55.64, "CielabA": -37.92, "CielabB": -49.04, "TargetL": 55.00, "Targeta": -37.00, "Targetb": -50.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 },
-    { "HtmlColor": "#e4007b", "PatchTypeId": 2, "?E": 1.17, "?ELimit": 0.00, "CielabL": 49.17, "CielabA": 74.52, "CielabB": -2.92, "TargetL": 48.00, "Targeta": 74.00, "Targetb": -3.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 },
-    { "HtmlColor": "#ffec00", "PatchTypeId": 3, "?E": 0.36, "?ELimit": 0.00, "CielabL": 89.03, "CielabA": -5.59, "CielabB": 92.29, "TargetL": 89.00, "Targeta": -5.00, "Targetb": 93.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }, { "HtmlColor": "#1b1a19", "PatchTypeId": 4, "?E": 0.49, "?ELimit": 0.00, "CielabL": 15.85, "CielabA": 0.07, "CielabB": -0.47, "TargetL": 16.00, "Targeta": 0.00, "Targetb": 0.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }, { "HtmlColor": "#e40006", "PatchTypeId": 5, "?E": 0.58, "?ELimit": 0.00, "CielabL": 46.45, "CielabA": 68.30, "CielabB": 48.64, "TargetL": 47.00, "Targeta": 68.00, "Targetb": 48.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }, { "HtmlColor": "#009644", "PatchTypeId": 6, "?E": 1.66, "?ELimit": 0.00, "CielabL": 51.62, "CielabA": -64.02, "CielabB": 27.47, "TargetL": 50.00, "Targeta": -65.00, "Targetb": 27.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }, { "HtmlColor": "#1f2c82", "PatchTypeId": 7, "?E": 0.90, "?ELimit": 0.00, "CielabL": 24.78, "CielabA": 22.36, "CielabB": -44.38, "TargetL": 24.00, "Targeta": 22.00, "Targetb": -46.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }, { "HtmlColor": "#D4CBC5", "PatchTypeId": 8, "?E": 1.31, "?ELimit": 0.00, "CielabL": 96.34, "CielabA": 0.67, "CielabB": -2.42, "TargetL": 95.00, "Targeta": 0.00, "Targetb": -2.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }, { "HtmlColor": "#323130", "PatchTypeId": 9, "?E": 0.56, "?ELimit": 0.00, "CielabL": 23.05, "CielabA": 0.04, "CielabB": -0.56, "TargetL": 23.00, "Targeta": 0.00, "Targetb": 0.00, "?L": 0, "?a": 0, "?b": 0, "Density": 0, "DensityLimit": 0, "PreAvg?E": 0, "PreAvgDensity": 0 }];
+    //var json = jsonDeltaEPrimaryPatchList;
+
+    var formattedDeltaEPrimaryPatchList = [];
+    //var patchColor = ["Cyan", "Magenta", "Yellow", "Black", "Red", "Green", "Blue", "Paper", "3-C"]
+
+    //set the color name and its tooltip title with resources
+    var patchColor = [
+        { colorName: _Resources._recCyan, colorTitle: _Resources._recCyanPathMetrics }, { colorName: _Resources._recMagenta, colorTitle: _Resources._recMagentaPathMetrics },
+        { colorName: _Resources._recYellow, colorTitle: _Resources._recYellowPathMetrics }, { colorName: _Resources._recBlack, colorTitle: _Resources._recBlackPathMetrics },
+        { colorName: _Resources._recRed, colorTitle: _Resources._recRedPathMetrics }, { colorName: _Resources._recGreen, colorTitle: _Resources._recGreenPathMetrics },
+        { colorName: _Resources._recBlue, colorTitle: _Resources._recBluePathMetrics }, { colorName: _Resources._recPaper, colorTitle: _Resources._recPaperPathMetrics },
+        { colorName: _Resources._recTriplet, colorTitle: _Resources._recTripletPathMetrics }];
 
 
-    var formattedJson = [];
-    var patchColor = ["Cyan", "Magenta", "Yellow", "Black", "Red", "Green", "Blue", "Paper", "3-C"]
-
-    $.each(json, function (index, obj) {
+    $.each(jsonDeltaEPrimaryPatchList, function (index, obj) {
 
         var item = {
             color: obj.HtmlColor,
-            name: patchColor[index],
-            value: obj["?E"],
+            name: patchColor[index].colorName,
+            title: patchColor[index].colorTitle,
+            value: obj.ΔE,
             CielabL: obj.CielabL,
             CielabA: obj.CielabA,
             CielabB: obj.CielabB,
             TargetL: obj.TargetL,
             Targeta: obj.Targeta,
-            Targetb: obj.Targetb
+            Targetb: obj.Targetb,
+
         };
-        formattedJson.push(item);
+        formattedDeltaEPrimaryPatchList.push(item);
     });
 
-    var axis = json.map(function (a) { return a["?E"]; });
+    //var axis = json.map(function (a) { return a["?E"]; });
+    var axis = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔE; });
 
-
-    var patches = json.map(function (a) { return a["HtmlColor"]; });
+    var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
 
     $divChartInkPaperABComparision.kendoChart({
 
-        title: {
-            text: "ΔE2000 Primary Patches"
-        },
-        seriesDefaults:
-        {
+        //title: {
+        //    text: "ΔE2000 Primary Patches"
+        //},
+        seriesDefaults: {
             type: "column",
             stack: true,
             width: 10,
@@ -1015,19 +1037,19 @@ function BindInkPaperChartABComparision() {
         series: [{
             type: "bar",
             field: "value",
-            data: formattedJson,
+            data: formattedDeltaEPrimaryPatchList,
             //color: patches
         }],
         categoryAxis: {
-            categories: patchColor
+            categories: patchColorList
         },
         valueAxis: {
-            max: 3,
+            //max: 20,
             line: {
                 visible: false
             },
             minorGridLines: {
-                visible: true
+                visible: false
             },
             labels: {
                 rotation: "auto"
@@ -1035,10 +1057,11 @@ function BindInkPaperChartABComparision() {
         },
         tooltip: {
             visible: true,
-            template: "#= dataItem.name # Patch Metrics <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
+            //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
+            template: "#= dataItem.title # <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
         },
         chartArea: {
-            width: 600,
+            width: 305,
             height: 400
         },
     });

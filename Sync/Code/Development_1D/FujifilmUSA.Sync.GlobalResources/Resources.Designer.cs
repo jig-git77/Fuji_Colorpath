@@ -133,11 +133,29 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Black.
+        /// </summary>
+        internal static string blackText {
+            get {
+                return ResourceManager.GetString("blackText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Blue Patch Metrics.
         /// </summary>
         internal static string bluePathMetrics {
             get {
                 return ResourceManager.GetString("bluePathMetrics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blue.
+        /// </summary>
+        internal static string blueText {
+            get {
+                return ResourceManager.GetString("blueText", resourceCulture);
             }
         }
         
@@ -205,6 +223,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cyan.
+        /// </summary>
+        internal static string cyanText {
+            get {
+                return ResourceManager.GetString("cyanText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Δa*.
         /// </summary>
         internal static string deltaAText {
@@ -219,6 +246,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string deltaBText {
             get {
                 return ResourceManager.GetString("deltaBText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ΔE.
+        /// </summary>
+        internal static string deltaEText {
+            get {
+                return ResourceManager.GetString("deltaEText", resourceCulture);
             }
         }
         
@@ -2140,6 +2176,51 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid Delta E value has been provided..
+        /// </summary>
+        internal static string Error_Invalid_DeltaEValue {
+            get {
+                return ResourceManager.GetString("Error_Invalid_DeltaEValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid IsAverageOfMeasurements have been provided..
+        /// </summary>
+        internal static string Error_Invalid_IsAverageOfMeasurements {
+            get {
+                return ResourceManager.GetString("Error_Invalid_IsAverageOfMeasurements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Sync1DType have been provided..
+        /// </summary>
+        internal static string Error_Invalid_IsSync1DTypeProject {
+            get {
+                return ResourceManager.GetString("Error_Invalid_IsSync1DTypeProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid varification have been provided..
+        /// </summary>
+        internal static string Error_Invalid_IsVerificationProject {
+            get {
+                return ResourceManager.GetString("Error_Invalid_IsVerificationProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid MeasurementId have been provided..
+        /// </summary>
+        internal static string Error_Invalid_MeasurementId {
+            get {
+                return ResourceManager.GetString("Error_Invalid_MeasurementId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User credentials are validated but user doesn&apos;t have any permission..
         /// </summary>
         internal static string Error_NoPermission {
@@ -2545,6 +2626,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Green.
+        /// </summary>
+        internal static string greenText {
+            get {
+                return ResourceManager.GetString("greenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to pΔa.
         /// </summary>
         internal static string gridAnalyzeHeaderDeltaAResource {
@@ -2734,42 +2824,6 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid IsAverageOfMeasurements have been provided..
-        /// </summary>
-        internal static string Invalid_IsAverageOfMeasurements {
-            get {
-                return ResourceManager.GetString("Invalid_IsAverageOfMeasurements", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid Sync1DType have been provided..
-        /// </summary>
-        internal static string Invalid_IsSync1DTypeProject {
-            get {
-                return ResourceManager.GetString("Invalid_IsSync1DTypeProject", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid varification have been provided..
-        /// </summary>
-        internal static string Invalid_IsVerificationProject {
-            get {
-                return ResourceManager.GetString("Invalid_IsVerificationProject", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid MeasurementId have been provided..
-        /// </summary>
-        internal static string Invalid_MeasurementId {
-            get {
-                return ResourceManager.GetString("Invalid_MeasurementId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Please enter Job Name that is at least 4 characters long..
         /// </summary>
         internal static string JobName_LengthError {
@@ -2914,6 +2968,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Magenta.
+        /// </summary>
+        internal static string magentaText {
+            get {
+                return ResourceManager.GetString("magentaText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete all information of selected measurement device?.
         /// </summary>
         internal static string MeasurementDeviceList_DeleteMeasurementDevice_Confirmation {
@@ -2982,6 +3045,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string paperPathMetrics {
             get {
                 return ResourceManager.GetString("paperPathMetrics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paper.
+        /// </summary>
+        internal static string paperText {
+            get {
+                return ResourceManager.GetString("paperText", resourceCulture);
             }
         }
         
@@ -3094,6 +3166,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Red.
+        /// </summary>
+        internal static string redText {
+            get {
+                return ResourceManager.GetString("redText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete selected source profile?.
         /// </summary>
         internal static string SourceProfileManagement_DeleteSourceProfile_Confirmation {
@@ -3117,6 +3198,24 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string ToolTipClickToShort {
             get {
                 return ResourceManager.GetString("ToolTipClickToShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3-C Patch Metrics.
+        /// </summary>
+        internal static string tripletPathMetrics {
+            get {
+                return ResourceManager.GetString("tripletPathMetrics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3-C.
+        /// </summary>
+        internal static string tripletText {
+            get {
+                return ResourceManager.GetString("tripletText", resourceCulture);
             }
         }
         
@@ -3216,6 +3315,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string yellowPathMetrics {
             get {
                 return ResourceManager.GetString("yellowPathMetrics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yellow.
+        /// </summary>
+        internal static string yellowText {
+            get {
+                return ResourceManager.GetString("yellowText", resourceCulture);
             }
         }
     }

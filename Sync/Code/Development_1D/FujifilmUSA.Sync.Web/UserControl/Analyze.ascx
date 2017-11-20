@@ -293,7 +293,7 @@
             <td align="center">
                 <asp:RadioButtonList ID="rbtnListDeltaE" runat="server" RepeatDirection="Horizontal"
                     AutoPostBack="true" OnSelectedIndexChanged="rbtnListDeltaE_SelectedIndexChanged"
-                    CssClass="RadioList">
+                    CssClass="RadioList" ClientIDMode="Static">
                     <asp:ListItem Text="ΔE2000" Value="E2000" Selected="True"></asp:ListItem>
                     <asp:ListItem Text="ΔE" Value="E"></asp:ListItem>
                 </asp:RadioButtonList>
