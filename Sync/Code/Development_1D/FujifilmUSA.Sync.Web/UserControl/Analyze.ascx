@@ -5,6 +5,7 @@
     TagPrefix="uc" %>
 <%--<script src="JS/DYMO.Label.Framework.latest.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>--%>
 <script src="JS/Printing.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<%--<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.common-material.min.css" />--%>
 <link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
 <link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
 <%--<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>--%>
@@ -1030,8 +1031,11 @@
                                                     </Triggers>
                                                 </asp:UpdatePanel>
 
-                                                <div>
+                                                <div  style="float:left;">
                                                     <div id="divChartInkPaperABComparision"></div>
+                                                </div>
+                                                <div style="float:right;">
+                                                    <div id="divChartInkPaperPaperLab1"></div>
                                                 </div>
                                             </div>
                                             <div class="clear"></div>

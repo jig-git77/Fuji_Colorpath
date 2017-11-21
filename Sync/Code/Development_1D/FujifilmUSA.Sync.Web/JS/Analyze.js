@@ -3,6 +3,7 @@ var jsonTarget = [];
 var jsonColors = [];
 var jsonGray = [];
 var jsonDeltaEPrimaryPatchList = [];
+var jsonDeltaPaperLAB_1 = [];
 var _Resources = {};
 var CURRENT_USER_ID
 var SERVICE_BASE_URL = '';
@@ -28,7 +29,9 @@ var $CurrentCulture;
 var $rbtnListDeltaE;
 var $divChartInkPaperABComparision;
 var $selectedDeltaE;
-
+var $divChartInkPaperPaperLab1;
+var drawing = kendo.drawing;
+var geometry = kendo.geometry;
 
 $(document).ready(function () {
 
@@ -54,7 +57,7 @@ $(document).ready(function () {
     $chartTargetVersusActualABLargeArea = $("#kendoChartTargetVersusActualABLargeArea");
     $kendoChartDummy = $("#kendoChartDummy");
     $divChartInkPaperABComparision = $("#divChartInkPaperABComparision");
-
+    $divChartInkPaperPaperLab1 = $("#divChartInkPaperPaperLab1");
     $selectedDeltaE = $rbtnListDeltaE.find('input:checked').val();
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
@@ -85,6 +88,7 @@ $(document).ready(function () {
             jsonColors = response.data.GamutChart;
             jsonGray = response.data.LABChart;
             jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
+            jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
             _Resources = response.data.GlobalResources;
             BindChartTargetVersusActualAB();
             BindChartGamutABComparision();
@@ -983,7 +987,6 @@ function Get_B_BalanceChartImage() {
 
 
 ////**************** START BIND THE AB COMPARISION INK PAPER CHART  ****************////
-
 function BindInkPaperChartABComparision() {
 
     //var json = jsonDeltaEPrimaryPatchList;
@@ -1029,16 +1032,32 @@ function BindInkPaperChartABComparision() {
         //    text: "ΔE2000 Primary Patches"
         //},
         seriesDefaults: {
-            type: "column",
+            type: "bar",
             stack: true,
             width: 10,
             gap: 2,
+            highlight: {
+                toggle: function (e) {
+                    // Don't create a highlight overlay,
+                    // we'll modify the existing visual instead
+                    e.preventDefault();
+
+                    var visual = e.visual;
+                    var opacity = e.show ? 0.8 : 1;
+
+                    visual.opacity(opacity);
+                }
+            },
+            //visual: function (e) {
+            //    //return createColumn(e.rect, e.options.color);
+            //    return createColumn(e.rect, e.dataItem.color);
+            //}
         },
         series: [{
-            type: "bar",
-            field: "value",
             data: formattedDeltaEPrimaryPatchList,
-            //color: patches
+        }],
+        panes: [{
+            clip: false
         }],
         categoryAxis: {
             categories: patchColorList
@@ -1065,5 +1084,157 @@ function BindInkPaperChartABComparision() {
             height: 400
         },
     });
+
+
+    var paperAB = {};    
+    paperAB.data = [[0, 0]];
+    paperAB.color = "Green";
+    paperAB.markers = { background: "Green" };
+    paperAB.highlight = {
+        visible: false
+    }
+
+    var tooltipString = "";
+    var paperL = {};
+    if (jsonDeltaPaperLAB_1.length > 0) {
+        var paperObj = jsonDeltaPaperLAB_1[0];
+        var deltaA = paperObj.Δa == 0 ? 0.01 : paperObj.Δa;
+        paperL.data = [[deltaA, paperObj.Δb]];
+
+        tooltipString = '<table><tr><td><center><b>' + _Resources._recPaperPathMetrics + '</b></center><td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + paperObj.CielabL + ' ' + _Resources._recA + ': ' + paperObj.CielabA + ' ' + _Resources._recB + ': ' + paperObj.CielabB + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recTarget + ' L: *' + paperObj.TargetL + ' a*: ' + paperObj.Targeta + ' b*: ' + paperObj.Targetb + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + paperObj["ΔL"] + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + paperObj["Δa"] + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + paperObj["Δb"] + '</td></tr>';
+        tooltipString += '</table>';
+    }
+    paperL.color = "White";
+    paperL.markers = {
+        background: "White",
+        border: {
+            width: 1,
+            color: function (e) {
+                return 'black';
+            }
+        }
+    };
+    paperL.width = 2;
+    paperL.highlight = {
+        visible: false
+    }
+    paperL.tooltip = { visible: true, template: tooltipString, shared: true };
+   
+
+    $divChartInkPaperPaperLab1.kendoChart({
+        seriesDefaults: {
+            type: "scatterLine",
+            style: "smooth"
+        },
+        series: [
+            paperAB,   
+            paperL
+        ],
+        xAxis: {
+            min: -10,
+            max: 10,
+            majorUnit: 5,
+            axisCrossingValues: [-100, 100],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: ""
+            }, majorGridLines: {
+                visible: true
+            }           
+        },
+        yAxis: {
+            min: -10,
+            max: 10,
+            step: 5,
+            majorUnit: 5,
+            axisCrossingValues: [-100, 100],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: ""
+            }, majorGridLines: {
+                visible: true
+            }
+        },
+        chartArea: {
+            width: 300,
+            height: 250
+        },
+        plotArea: {
+            background: "lightgray"
+        }
+    });
 }
+
+function createColumn(rect, color) {
+    var origin = rect.origin;
+    var center = rect.center();
+    var bottomRight = rect.bottomRight();
+    var radiusX = rect.width() / 2;
+    var radiusY = radiusX / 3;
+    var gradient = new drawing.LinearGradient({
+        stops: [{
+            offset: 0,
+            color: color
+        }, {
+            offset: 0.5,
+            color: color,
+            opacity: 0.9
+        }, {
+            offset: 0.5,
+            color: color,
+            opacity: 0.9
+        }, {
+            offset: 1,
+            color: color
+        }]
+    });
+
+    var path = new drawing.Path({
+        fill: gradient,
+        stroke: {
+            color: "none"
+        }
+    })
+    //.moveTo(origin.x, origin.y)
+    //.lineTo(origin.x, bottomRight.y)
+    //.arc(180, 0, radiusX, radiusY, true)
+    //.lineTo(bottomRight.x, origin.y)
+    //.arc(0, 180, radiusX, radiusY);
+
+
+    //.moveTo(origin.x, origin.y)
+    //.lineTo(origin.x, bottomRight.y)
+    //.arc(180, 0, radiusX, radiusY, true)
+    //.lineTo(bottomRight.y, origin.x)
+    //.arc(0, 180, radiusY, radiusX);
+
+    var topArcGeometry = new geometry.Arc([center.x, origin.y], {
+        startAngle: 0,
+        endAngle: 360,
+        radiusX: radiusX,
+        radiusY: radiusY
+    });
+
+    var topArc = new drawing.Arc(topArcGeometry, {
+        fill: {
+            color: color
+        },
+        stroke: {
+            color: "#ebebeb"
+        }
+    });
+    var group = new drawing.Group();
+    group.append(path, topArc);
+    return group;
+}
+
 
