@@ -48,5 +48,10 @@ namespace FujifilmUSA.Sync.Entity
         public CPSpot.SpotProjectLibrary SpotTargetProject { get; set; }
         public int SpotTargetMasterProjectID { get; set; }
         public bool HasSpotProject { get; set; }
+
+        public bool EnabledPaperScaling { get; set; }
+        public decimal NewPaper_L { get; set; }
+        public decimal NewPaper_a { get; set; }
+        public decimal NewPaper_b { get; set; }
     }
 }

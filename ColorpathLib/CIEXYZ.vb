@@ -34,8 +34,8 @@ Public Structure CIEXYZ
             Return _x
         End Get
         Set(ByVal value)
-            If value > 0.9505 Then
-                _x = 0.9505
+            If value > 95.05 Then
+                _x = 95.05
             Else
                 If value < 0 Then
                     _x = 0
@@ -51,8 +51,8 @@ Public Structure CIEXYZ
             Return _y
         End Get
         Set(ByVal value)
-            If value > 1.0 Then
-                _y = 1.0
+            If value > 100.0 Then
+                _y = 100.0
             Else
                 If value < 0 Then
                     _y = 0
@@ -68,8 +68,8 @@ Public Structure CIEXYZ
             Return _z
         End Get
         Set(ByVal value)
-            If value > 1.089 Then
-                _z = 1.089
+            If value > 100.089 Then
+                _z = 100.089
             Else
                 If value < 0 Then
                     _z = 0
