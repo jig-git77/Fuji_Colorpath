@@ -246,6 +246,9 @@
                 <asp:HiddenField runat="server" ID="hdnVerification" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnSync1DType" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnValidationType" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnCurrentDlpSubOperation" ClientIDMode="Static" />
+
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">
@@ -490,8 +493,6 @@
                                     <li><span><a href="#tab5">
                                         <asp:Localize Text="Report" ID="locReport" runat="server"
                                             meta:resourcekey="locReportResource1"></asp:Localize></a></span></li>
-                                    <li><span><a href="#tab8">
-                                        <asp:Localize Text="New Gamut" ID="Localize3" runat="server"></asp:Localize></a></span></li>
                                 </ul>
                                 <div style="float: right; padding-right: 3px; height: 26px; padding-top: 2px;">
                                     <asp:ImageButton ID="ibtnPrintPreview" runat="server"
@@ -1031,15 +1032,89 @@
                                                     </Triggers>
                                                 </asp:UpdatePanel>
 
-                                                <div  style="float:left;">
-                                                    <div id="divChartInkPaperABComparision"></div>
-                                                </div>
-                                                <div style="float:right;">
-                                                    <div id="divChartInkPaperPaperLab1"></div>
+                                                <div>
+                                                    <table border="1" cellpadding="0" cellspacing="0" width="100%" style="background-color: White;">
+                                                        <tr>
+                                                            <td style="width: 50%;" valign="top" class="CHARTTABLE">
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                    <tr>
+                                                                        <td colspan="2" class="green-title">&nbsp; &Delta;<asp:Label ID="Label4" runat="server"></asp:Label>
+                                                                            <asp:Localize ID="Localize9" Text=" Primary Patches" runat="server"
+                                                                                meta:resourcekey="LocalizeResource1"></asp:Localize>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td valign="top">
+                                                                            <div id="divChartInkPaperABComparision"></div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 50%;" valign="top" class="CHARTTABLE">
+                                                                <%-- <div id="Div_Density" runat="server" visible="false">--%>
+                                                                <table id="tblDensityChart" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                    <tr>
+                                                                        <td colspan="2" class="green-title">&nbsp;
+                                                                                <asp:Localize Text="Density" runat="server" ID="Localize10"
+                                                                                    meta:resourcekey="locDensityResource1"></asp:Localize>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div id="divChartInkPaperDansityChart"></div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                                <%-- </div>--%>
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+                                                                    <tr>
+                                                                        <td colspan="2" class="green-title">&nbsp; &#916;
+                                                                                <asp:Localize Text="Paper L* a* b*" runat="server" ID="Localize11"
+                                                                                    meta:resourcekey="locPaperResource1"></asp:Localize>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div id="divChartInkPaperPaperLab1"></div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                        <td>
+                                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div id="divChartInkPaperPaperLab2"></div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                                                 </div>
                                             </div>
                                             <div class="clear"></div>
                                         </div>
+
                                     </div>
                                     <div class="tab_bottom">&nbsp;</div>
                                 </section>
@@ -1531,6 +1606,153 @@
                                             </div>
                                             <div class="clear"></div>
                                         </div>
+                                        <br />
+                                        <div class="combopart">
+                                            <div class="float_l" style="padding-left: 10px;">
+                                                <table cellpadding="0" cellspacing="0" width="650px">
+                                                    <tr>
+                                                        <td valign="top" style="width: 59%">
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                                <tr>
+                                                                    <td class="green-title">&nbsp;
+                                                                                <asp:Localize Text="Gray Balance ΔCh" runat="server"
+                                                                                    ID="Localize12" meta:resourcekey="locGrayBalanceDeltaCHResource1"></asp:Localize>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td valign="top">
+                                                                        <div id="divChartG7GrayBalanceDeltaCh"></div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td style="width: 2%;"></td>
+                                                        <td style="width: 39%" valign="top">
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                                <tr>
+                                                                    <td class="green-title">&nbsp;
+                                                                                <asp:Localize Text="Gray  ΔCh Summary" runat="server"
+                                                                                    ID="Localize13" meta:resourcekey="locGrayDeltaCHSummaryResource1"></asp:Localize>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td valign="top" style="padding: 2px"></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                                <table cellpadding="0" cellspacing="0" width="650px">
+                                                    <tr>
+                                                        <td valign="top" style="width: 59%">
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                                <tr>
+                                                                    <td class="green-title">&nbsp;
+                                                                                <asp:Localize Text="Black ΔL" runat="server" ID="Localize14"
+                                                                                    meta:resourcekey="locBlackDeltaLResource1"></asp:Localize>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td valign="top">
+                                                                        <div id="divChartG7BlackDeltaL"></div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td style="width: 2%;"></td>
+                                                        <td style="width: 39%" valign="top">
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                                <tr>
+                                                                    <td class="green-title">&nbsp;
+                                                                                <asp:Localize Text="Black  ΔL Summary" runat="server"
+                                                                                    ID="Localize15" meta:resourcekey="locBlackDeltaLSummaryResource1"></asp:Localize>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td valign="top" style="padding: 2px"></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                                <table cellpadding="0" cellspacing="0" width="650px">
+                                                    <tr>
+                                                        <td valign="top" style="width: 59%">
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                                <tr>
+                                                                    <td class="green-title">&nbsp;
+                                                                                <asp:Localize runat="server" Text="Gray ΔL" ID="Localize16"
+                                                                                    meta:resourcekey="locGrayDeltaLResource1"></asp:Localize>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td valign="top">
+                                                                        <div id="divChartG7GrayDeltaL"></div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <span style="color: Blue; font-weight: bolder;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =====</span>
+                                                                        Weighted&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                                            <span style="font-weight: bolder;">=====</span>
+                                                                        Non-Weighted
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td style="width: 2%;"></td>
+                                                        <td style="width: 39%" valign="top">
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                                <tr>
+                                                                    <td class="green-title">&nbsp;
+                                                                                <asp:Localize runat="server" Text="Gray  ΔL Summary"
+                                                                                    ID="Localize17" meta:resourcekey="locGrayDeltaLSummaryResource1"></asp:Localize>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td valign="top" style="padding: 2px"></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                                <table cellpadding="0" cellspacing="0" width="650px">
+                                                    <tr>
+                                                        <td style="width: 49%">
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                                <tr>
+                                                                    <td class="green-title">&nbsp; Black NPD
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td valign="top">
+                                                                        <div id="divChartG7BlackNPD"></div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td style="width: 2%;"></td>
+                                                        <td style="width: 49%;">
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                                <tr>
+                                                                    <td class="green-title">&nbsp; Gray NPD
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div id="divChartG7GrayNPD"></div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
                                     </div>
                                     <div class="tab_bottom">&nbsp;</div>
                                 </section>
@@ -1959,6 +2181,138 @@
                                             </div>
                                             <div class="clear"></div>
                                         </div>
+                                        <div class="combopart" style="position: relative;">
+                                            <div class="chart-loading"></div>
+                                            <div class="float_l" style="padding-left: 10px;">
+
+                                                <asp:Button ID="btnGeneratePDF" ClientIDMode="Static" runat="server" Text="Generate PDF Report" />
+
+                                                <br />
+                                                <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color: White;">
+                                                    <tr>
+                                                        <td style="width: 45%;" valign="top" class="CHARTTABLE">
+
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                <tr>
+                                                                    <td class="green-title">&nbsp;
+                                                                                <asp:Localize runat="server" Text="Gamut Plot" ID="Localize4"
+                                                                                    meta:resourcekey="locGamutPlotResource1"></asp:Localize>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <table id="Table2" runat="server" cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
+                                                                            <tr id="Tr5" runat="server">
+                                                                                <td id="Td6" class="green-title" runat="server">
+                                                                                    <asp:Localize ID="Localize5" runat="server" Text="a* - b* Comparison"
+                                                                                        meta:resourcekey="locComparisonResource1"></asp:Localize>
+                                                                                    <%--<img style="height: 22px;" src="../Images/eye_blue.png" />--%>
+                                                                                    <a id="imgEyeABCompLarge" style="float: right;">
+                                                                                        <asp:Image ID="Image1" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" /></a>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td align="center" valign="top">
+                                                                                    <div id="kendoChartTargetVersusActualAB" style="min-height: 250px; min-width: 300px;"></div>
+                                                                                    <div id="kendoChartTargetVersusActualABLargeArea">
+                                                                                        <div id="kendoChartTargetVersusActualABLarge"></div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div style="padding-left: -5px;">
+                                                                                        <div id="accordionNew" class="header collapsibleContainerTitle">
+                                                                                            <div>
+                                                                                                <div class="green-title">
+                                                                                                    <div style="float: left">
+                                                                                                    </div>
+                                                                                                    <div style="float: left;">
+                                                                                                        <div id="imgHeaderNew" class="expanded">
+                                                                                                            &nbsp;
+                                                                                                        </div>
+                                                                                                        <asp:Localize ID="Localize6" runat="server" Text="a* - b* Gamut Comparison"></asp:Localize>
+                                                                                                    </div>
+                                                                                                    <div class="clear">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <asp:Panel ID="panelabGamutComparisonNew" runat="server" BorderStyle="None"
+                                                                                            Width="100%" meta:resourcekey="panelabGamutComparisonResource1">
+                                                                                            <div id="kendoChartGamut_ABComparison" style="min-height: 250px; min-width: 300px;"></div>
+                                                                                        </asp:Panel>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr id="Tr6" runat="server">
+                                                                                <td id="Td7" class="green-title" runat="server">
+                                                                                    <asp:Localize runat="server" Text="L* Comparison" ID="Localize7"
+                                                                                        meta:resourcekey="locLComparisonResource1"></asp:Localize>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr id="Tr7" runat="server">
+                                                                                <td id="Td8" align="center" valign="top" runat="server">
+                                                                                    <div id="kendoChartLComaparision" style="min-height: 80px; min-width: 300px;"></div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+
+                                                        <td style="width: 55%;" valign="top">
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                <tr>
+                                                                    <td>
+                                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                                            <tr>
+                                                                                <td class="green-title">&nbsp;
+                                                                                            <asp:Localize runat="server" Text="Gray Balance L* a* b*"
+                                                                                                ID="Localize8" meta:resourcekey="locGrayBalanceLABResource1"></asp:Localize>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 350px;">
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <div id="kendoChartLBalanceChart"></div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <div id="kendoChartABalanceChart"></div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <div id="kendoChartBBalanceChart"></div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <div style="display: none;">
+                                                                                                    <div id="kendoChartDummy">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
                                     </div>
                                     <div class="tab_bottom">&nbsp;</div>
                                 </section>
@@ -2041,6 +2395,7 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
+
 
                                                     </ContentTemplate>
                                                     <Triggers>
@@ -2268,6 +2623,29 @@
                                                                             </td>
                                                                         </tr>
                                                                     </table>
+                                                                    <br />
+                                                                    <table style="">
+                                                            <tr>
+                                                                <td>
+                                                                    <div id="divChartTVIISO_CYAN">
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div id="divChartTVIISO_Magenta">
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div id="divChartTVIISO_Yellow">
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div id="divChartTVIISO_Black">
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
                                                                 </td>
                                                             </tr>
                                                             <tr id="trSpread" style="display: none">
@@ -2466,12 +2844,18 @@
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
+                                                                            <br />
+                                                                            <div id="divChartTVIISO_CMYK"></div>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
                                                                 </td>
                                                             </tr>
-                                                        </table>
 
+
+
+                                                        </table>
+                                                   
+                                                        
                                                     </ContentTemplate>
                                                     <Triggers>
                                                         <asp:PostBackTrigger ControlID="chartAnalyze" />
@@ -2481,6 +2865,24 @@
                                                     </Triggers>
                                                 </asp:UpdatePanel>
 
+                                                <div id="divTVI_G7">
+                                                    <table cellpadding="0" cellspacing="0" width="650px">
+                                                        <tr>
+                                                            <td valign="top" style="width: 59%">
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+
+                                                                    <tr>
+                                                                        <td valign="top">
+                                                                            <div id="divChartTVISummaryDotGain"></div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div id="divTVI_ISO">
+                                                </div>
                                             </div>
                                             <div class="clear"></div>
                                         </div>
@@ -2779,154 +3181,6 @@
                                                         <asp:PostBackTrigger ControlID="chartAnalyze" />
                                                     </Triggers>
                                                 </asp:UpdatePanel>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </div>
-                                    <div class="tab_bottom">&nbsp;</div>
-                                </section>
-                            </div>
-
-                            <div>
-                                <section id="tab8" class="contantbox tabcontant hideclass">
-
-                                    <div class="tab_top">&nbsp;</div>
-                                    <div class="tab_middle">
-                                        <div class="combopart" style="position: relative;">
-                                            <div class="chart-loading"></div>
-                                            <div class="float_l" style="padding-left: 10px;">
-                                                <asp:UpdatePanel ID="UpdatePanel9" runat="server">
-                                                    <ContentTemplate>
-                                                        <asp:Button ID="btnGeneratePDF" ClientIDMode="Static" runat="server" Text="Generate PDF Report" />
-
-                                                        <br />
-                                                        <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color: White;">
-                                                            <tr>
-                                                                <td style="width: 45%;" valign="top" class="CHARTTABLE">
-
-                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                                        <tr>
-                                                                            <td class="green-title">&nbsp;
-                                                                                <asp:Localize runat="server" Text="Gamut Plot" ID="Localize4"
-                                                                                    meta:resourcekey="locGamutPlotResource1"></asp:Localize>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <table id="Table2" runat="server" cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
-                                                                                    <tr id="Tr5" runat="server">
-                                                                                        <td id="Td6" class="green-title" runat="server">
-                                                                                            <asp:Localize ID="Localize5" runat="server" Text="a* - b* Comparison"
-                                                                                                meta:resourcekey="locComparisonResource1"></asp:Localize>
-                                                                                            <%--<img style="height: 22px;" src="../Images/eye_blue.png" />--%>
-                                                                                            <a id="imgEyeABCompLarge" style="float: right;">
-                                                                                                <asp:Image ID="Image1" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" /></a>
-                                                                                        </td>
-                                                                                    </tr>
-
-                                                                                    <tr>
-                                                                                        <td align="center" valign="top">
-                                                                                            <div id="kendoChartTargetVersusActualAB" style="min-height: 250px; min-width: 300px;"></div>
-                                                                                            <div id="kendoChartTargetVersusActualABLargeArea">
-                                                                                                <div id="kendoChartTargetVersusActualABLarge"></div>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td>
-                                                                                            <div style="padding-left: -5px;">
-                                                                                                <div id="accordionNew" class="header collapsibleContainerTitle">
-                                                                                                    <div>
-                                                                                                        <div class="green-title">
-                                                                                                            <div style="float: left">
-                                                                                                            </div>
-                                                                                                            <div style="float: left;">
-                                                                                                                <div id="imgHeaderNew" class="expanded">
-                                                                                                                    &nbsp;
-                                                                                                                </div>
-                                                                                                                <asp:Localize ID="Localize6" runat="server" Text="a* - b* Gamut Comparison"></asp:Localize>
-                                                                                                            </div>
-                                                                                                            <div class="clear">
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <asp:Panel ID="panelabGamutComparisonNew" runat="server" BorderStyle="None"
-                                                                                                    Width="100%" meta:resourcekey="panelabGamutComparisonResource1">
-                                                                                                    <div id="kendoChartGamut_ABComparison" style="min-height: 250px; min-width: 300px;"></div>
-                                                                                                </asp:Panel>
-                                                                                            </div>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr id="Tr6" runat="server">
-                                                                                        <td id="Td7" class="green-title" runat="server">
-                                                                                            <asp:Localize runat="server" Text="L* Comparison" ID="Localize7"
-                                                                                                meta:resourcekey="locLComparisonResource1"></asp:Localize>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr id="Tr7" runat="server">
-                                                                                        <td id="Td8" align="center" valign="top" runat="server">
-                                                                                            <div id="kendoChartLComaparision" style="min-height: 80px; min-width: 300px;"></div>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </table>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-
-                                                                <td style="width: 55%;" valign="top">
-                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                                        <tr>
-                                                                            <td>
-                                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
-                                                                                    <tr>
-                                                                                        <td class="green-title">&nbsp;
-                                                                                            <asp:Localize runat="server" Text="Gray Balance L* a* b*"
-                                                                                                ID="Localize8" meta:resourcekey="locGrayBalanceLABResource1"></asp:Localize>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td>
-                                                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 350px;">
-                                                                                                <tr>
-                                                                                                    <td>
-                                                                                                        <div id="kendoChartLBalanceChart"></div>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                                <tr>
-                                                                                                    <td>
-                                                                                                        <div id="kendoChartABalanceChart"></div>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                                <tr>
-                                                                                                    <td>
-                                                                                                        <div id="kendoChartBBalanceChart"></div>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                                <tr>
-                                                                                                    <td>
-                                                                                                        <div style="display: none;">
-                                                                                                            <div id="kendoChartDummy">
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </table>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </table>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </ContentTemplate>
-                                                    <Triggers>
-                                                        <asp:PostBackTrigger ControlID="chartAnalyze" />
-                                                    </Triggers>
-                                                </asp:UpdatePanel>
-
                                             </div>
                                             <div class="clear"></div>
                                         </div>

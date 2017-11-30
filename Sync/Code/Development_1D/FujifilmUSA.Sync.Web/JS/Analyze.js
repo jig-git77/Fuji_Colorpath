@@ -4,7 +4,23 @@ var jsonColors = [];
 var jsonGray = [];
 var jsonDeltaEPrimaryPatchList = [];
 var jsonDeltaPaperLAB_1 = [];
+var jsonDensityList = [];
+
+//G7 result array
+var jsonGrayFChartList = [];
+var jsonBlackLChartList = [];
+var jsonGrayLChartList = [];
+var jsonBlackNPDChartList = [];
+var jsonGrayNPDChartList = [];
+
+//TVI result array
+var jsonTVIG7ChartList = [];
+var jsonDTISOTVIChartList = [];
+var jsonDTSpreadChartData_CMYKList = [];
+
+
 var _Resources = {};
+
 var CURRENT_USER_ID
 var SERVICE_BASE_URL = '';
 var $hdnBaseServiceUrl;
@@ -24,12 +40,31 @@ var $chartTargetVersusActualABLargeArea;
 var $kendoChartDummy;
 var $hdnVerification;
 var $hdnSync1DType;
+var $hdnValidationType;
+var $hdnCurrentDlpSubOperation;
 var $isAverageOfMeasurements;
 var $CurrentCulture;
 var $rbtnListDeltaE;
 var $divChartInkPaperABComparision;
 var $selectedDeltaE;
 var $divChartInkPaperPaperLab1;
+var $divChartInkPaperPaperLab2;
+var $divChartInkPaperDansityChart;
+var $divChartG7GrayBalanceDeltaCh;
+var $divChartG7BlackDeltaL;
+var $divChartG7GrayDeltaL;
+var $divChartG7BlackNPD;
+var $divChartG7GrayNPD;
+var $divChartTVISummaryDotGain;
+var $divTVI_G7;
+var $divTVI_ISO;
+
+var $divChartTVIISO_CYAN;
+var $divChartTVIISO_Magenta;
+var $divChartTVIISO_Yellow;
+var $divChartTVIISO_Black;
+var $divChartTVIISO_CMYK;
+var $tblDensityChart
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
 
@@ -41,6 +76,8 @@ $(document).ready(function () {
     $CurrentCulture = $("#hdfCurrentCulture").val();
     $hdnVerification = $('#hdnVerification').val();
     $hdnSync1DType = $('#hdnSync1DType').val();
+    $hdnValidationType = isNaN(parseInt($('#hdnValidationType').val())) ? 0 : parseInt($('#hdnValidationType').val());
+    $hdnCurrentDlpSubOperation = parseInt($('#hdnCurrentDlpSubOperation').val());
     $isAverageOfMeasurements = $('#ContentPlaceHolder1_ucAnalyze_chkAnalyzeAverageOfMeasurements').is(':checked');
     $hdMeasurement = $('#ContentPlaceHolder1_ucAnalyze_hdMeasurement').val();
     $chartLoader = $(".chart-loading");
@@ -58,23 +95,47 @@ $(document).ready(function () {
     $kendoChartDummy = $("#kendoChartDummy");
     $divChartInkPaperABComparision = $("#divChartInkPaperABComparision");
     $divChartInkPaperPaperLab1 = $("#divChartInkPaperPaperLab1");
+    $divChartInkPaperPaperLab2 = $("#divChartInkPaperPaperLab2");
+    $divChartInkPaperDansityChart = $("#divChartInkPaperDansityChart");
+    $divChartG7GrayBalanceDeltaCh = $("#divChartG7GrayBalanceDeltaCh");
+    $divChartG7BlackDeltaL = $("#divChartG7BlackDeltaL");
+    $divChartG7GrayDeltaL = $("#divChartG7GrayDeltaL");
+    $divChartG7BlackNPD = $("#divChartG7BlackNPD");
+    $divChartG7GrayNPD = $("#divChartG7GrayNPD");
+    $divChartTVISummaryDotGain = $("#divChartTVISummaryDotGain");
+    $divTVI_G7 = $("#divTVI_G7");
+    $divTVI_ISO = $("#divTVI_ISO");
+
+    $divChartTVIISO_CYAN = $("#divChartTVIISO_CYAN");
+    $divChartTVIISO_Magenta = $("#divChartTVIISO_Magenta");
+    $divChartTVIISO_Yellow = $("#divChartTVIISO_Yellow");
+    $divChartTVIISO_Black = $("#divChartTVIISO_Black");
+    $divChartTVIISO_CMYK = $("#divChartTVIISO_CMYK");
+
+    $tblDensityChart = $("#tblDensityChart");
     $selectedDeltaE = $rbtnListDeltaE.find('input:checked').val();
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
 
     var measurementID = parseInt($hdMeasurement);
-    //var isAverageOfMeasurements = true;
+
+    if (!$selectedDeltaE) {//set default value for sync1D projects
+        $selectedDeltaE = 'E2000';
+    }
+
     var apiParameters = {
         MeasurementId: measurementID,
         IsAverageOfMeasurements: $isAverageOfMeasurements,
         IsVerificationProject: $hdnVerification,
         IsSync1DTypeProject: $hdnSync1DType,
-        fromDeltaE: $selectedDeltaE
+        //fromDeltaE: $selectedDeltaE,
+        //validationType: $hdnValidationType
     };
 
     kendo.ui.progress($chartLoader, true);
     $.ajax({
-        url: SERVICE_BASE_URL + 'api/Chart/GenerateAnalyzeCharts',
+        //url: SERVICE_BASE_URL + 'api/Chart/GenerateAnalyzeCharts',
+        url: SERVICE_BASE_URL + 'api/Chart/GenerateGrayChart',
         //data: { MeasurementId: measurementID, IsAverageOfMeasurements: $isAverageOfMeasurements, IsVerificationProject: $hdnVerification, IsSync1DTypeProject: $hdnSync1DType },
         data: apiParameters,
         type: 'GET',
@@ -87,21 +148,31 @@ $(document).ready(function () {
             jsonTarget = response.data.GamutChartActual;
             jsonColors = response.data.GamutChart;
             jsonGray = response.data.LABChart;
-            jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
-            jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
             _Resources = response.data.GlobalResources;
             BindChartTargetVersusActualAB();
             BindChartGamutABComparision();
             BindChartLComparision();
             BindChartLGrayBalance();
             kendo.ui.progress($chartLoader, false);
-            BindInkPaperChartABComparision();
+
         },
         error: function (xhr, errorType, exception) {
             //alert(exception);
             kendo.ui.progress($chartLoader, false);
         }
     });
+
+
+    BindInkPaperChartABComparision();
+
+    if ($hdnValidationType == 1) {
+        BindG7Charts();
+    }
+
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+
+        BindTVICharts();
+    }
 
     $imgEyeABCompLarge.on('click', function (e) {
         e.preventDefault();
@@ -165,8 +236,6 @@ $(document).ready(function () {
             }
         });
     });
-
-
 });
 
 ////**************** START BIND THE AB COMPARISION CHART  ****************////
@@ -264,17 +333,10 @@ function BindChartTargetVersusActualAB() {
 
 
         //create tool tip
-        //var tooltipString = '<table><tr><td><center><b>' + element.PatchType + ' Patch Matrics</b></center><td></tr>';
-        //tooltipString += '<tr><td>Actual L: *' + element.CielabL + ' a:*: ' + element.CielabA + ' b:*' + element.CielabB + '</td></tr>';
-        //tooltipString += '<tr><td>Target L: *' + element.TargetL + ' a:*: ' + element.Targeta + ' b:*' + element.Targetb + '</td></tr>';
-        //tooltipString += '<tr><td>ΔL*   ' + element["ΔL"] + '</td></tr>';
-        //tooltipString += '<tr><td>Δa*   ' + element["Δa"] + '</td></tr>';
-        //tooltipString += '<tr><td>Δb*   ' + element["Δb"] + '</td></tr>';
-        //tooltipString += '</table>';
 
         var tooltipString = '<table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
         tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + element.CielabL + ' ' + _Resources._recA + ': ' + element.CielabA + ' ' + _Resources._recB + ': ' + element.CielabB + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recTarget + ' L: *' + element.TargetL + ' a*: ' + element.Targeta + ' b*: ' + element.Targetb + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL + ' ' + _Resources._recA + ': ' + element.Targeta + ' ' + _Resources._recB + ': ' + element.Targetb + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"] + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"] + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"] + '</td></tr>';
@@ -602,7 +664,7 @@ function BindChartLComparision() {
 
         var tooltipString = '<table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
         tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + element.CielabL + ' ' + _Resources._recA + ': ' + element.CielabA + ' ' + _Resources._recB + ': ' + element.CielabB + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recTarget + ' L: *' + element.TargetL + ' a*: ' + element.Targeta + ' b*: ' + element.Targetb + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL + ' ' + _Resources._recA + ': ' + element.Targeta + ' ' + _Resources._recB + ': ' + element.Targetb + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"] + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"] + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"] + '</td></tr>';
@@ -987,12 +1049,56 @@ function Get_B_BalanceChartImage() {
 
 
 ////**************** START BIND THE AB COMPARISION INK PAPER CHART  ****************////
+
 function BindInkPaperChartABComparision() {
+    var measurementID = parseInt($hdMeasurement);
+    var apiParameters = {
+        MeasurementId: measurementID,
+        IsAverageOfMeasurements: $isAverageOfMeasurements,
+        IsVerificationProject: $hdnVerification,
+        IsSync1DTypeProject: $hdnSync1DType,
+        fromDeltaE: $selectedDeltaE,
+    };
+
+    kendo.ui.progress($chartLoader, true);
+    $.ajax({
+        url: SERVICE_BASE_URL + 'api/Chart/GenerateInkPaperChart',
+        data: apiParameters,
+        type: 'GET',
+        dataType: 'json',
+        headers: {
+            'Accept-Language': $CurrentCulture
+        },
+        success: function (response) {
+            console.log('Ink paper chart');
+            console.log(response);
+            if (response.data != null) {
+                jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
+                if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
+                    $tblDensityChart.css('display', 'none');
+                }
+                jsonDensityList = response.data.DensityList;
+                jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
+                _Resources = response.data.GlobalResources;
+            }
+
+            PopulateInkPaperChartABComparision();
+            kendo.ui.progress($chartLoader, false);
+        },
+        error: function (xhr, errorType, exception) {
+            //alert(exception);
+            kendo.ui.progress($chartLoader, false);
+        }
+    });
+}
+function PopulateInkPaperChartABComparision() {
+
+
+
 
     //var json = jsonDeltaEPrimaryPatchList;
 
     var formattedDeltaEPrimaryPatchList = [];
-    //var patchColor = ["Cyan", "Magenta", "Yellow", "Black", "Red", "Green", "Blue", "Paper", "3-C"]
 
     //set the color name and its tooltip title with resources
     var patchColor = [
@@ -1032,7 +1138,7 @@ function BindInkPaperChartABComparision() {
         //    text: "ΔE2000 Primary Patches"
         //},
         seriesDefaults: {
-            type: "bar",
+            type: "column",
             stack: true,
             width: 10,
             gap: 2,
@@ -1048,10 +1154,9 @@ function BindInkPaperChartABComparision() {
                     visual.opacity(opacity);
                 }
             },
-            //visual: function (e) {
-            //    //return createColumn(e.rect, e.options.color);
-            //    return createColumn(e.rect, e.dataItem.color);
-            //}
+            visual: function (e) {
+                return createColumn(e, e.rect, e.dataItem.color);
+            }
         },
         series: [{
             data: formattedDeltaEPrimaryPatchList,
@@ -1077,40 +1182,141 @@ function BindInkPaperChartABComparision() {
         tooltip: {
             visible: true,
             //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
-            template: "#= dataItem.title # <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
+            template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
         },
         chartArea: {
-            width: 305,
-            height: 400
+            width: 650,
+            height: 300
+        },
+    });
+
+    //var densityPatchColor = [
+    //    { colorName: _Resources._recCyan, colorTitle: _Resources._recCyanPathMetrics },
+    //    { colorName: _Resources._recMagenta, colorTitle: _Resources._recMagentaPathMetrics },
+    //    { colorName: _Resources._recYellow, colorTitle: _Resources._recYellowPathMetrics },
+    //    { colorName: _Resources._recBlack, colorTitle: _Resources._recBlackPathMetrics }
+    //];
+
+    var formattedDensityList = [];
+    $.each(jsonDensityList, function (index, obj) {
+        var patchTitle = '';
+        switch (obj.PatchTypeId) {
+            case 1: patchTitle = _Resources._recCyanPathMetrics; break;
+            case 2: patchTitle = _Resources._recMagentaPathMetrics; break;
+            case 3: patchTitle = _Resources._recYellowPathMetrics; break;
+            case 4: patchTitle = _Resources._recBlackPathMetrics; break;
+        }
+
+        var item = {
+            color: obj.HtmlColor,
+            title: patchTitle,
+            value: obj.Density,
+            density: obj.Density,
+            densityLimit: obj.DensityLimit,
+            preAvgDensity: obj.PreAvgDensity
+        };
+        formattedDensityList.push(item);
+    });
+
+
+    var densityPatchColorList = ['C', 'M', 'Y', 'K'];
+    $divChartInkPaperDansityChart.kendoChart({
+
+        //title: {
+        //    text: "ΔE2000 Primary Patches"
+        //},
+        seriesDefaults: {
+            type: "column",
+            stack: true,
+            width: 10,
+            gap: 2,
+            highlight: {
+                toggle: function (e) {
+                    // Don't create a highlight overlay,
+                    // we'll modify the existing visual instead
+                    e.preventDefault();
+
+                    var visual = e.visual;
+                    var opacity = e.show ? 0.8 : 1;
+
+                    visual.opacity(opacity);
+                }
+            },
+            visual: function (e) {
+                return createColumn(e, e.rect, e.dataItem.color);
+            }
+        },
+        series: [{
+            data: formattedDensityList,
+        }],
+        panes: [{
+            clip: false
+        }],
+        categoryAxis: {
+            categories: densityPatchColorList
+        },
+        valueAxis: {
+            //max: 20,
+            line: {
+                visible: false
+            },
+            minorGridLines: {
+                visible: false
+            },
+            labels: {
+                rotation: "auto"
+            },
+            majorUnit: 0.5,
+        },
+        tooltip: {
+            visible: true,
+            //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
+            template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " :    #= dataItem.density # <br/>" + _Resources._recTarget + " :    #= dataItem.densityLimit # <br/>" + _Resources._recPrevious + " :    #= dataItem.preAvgDensity #"
+        },
+        chartArea: {
+            width: 650,
+            height: 200
         },
     });
 
 
-    var paperAB = {};    
-    paperAB.data = [[0, 0]];
-    paperAB.color = "Green";
-    paperAB.markers = { background: "Green" };
-    paperAB.highlight = {
+
+    var paperABGreen = {};
+    paperABGreen.data = [[0, 0]];
+    paperABGreen.color = "Green";
+    paperABGreen.markers = { background: "Green" };
+    paperABGreen.highlight = {
         visible: false
     }
 
     var tooltipString = "";
-    var paperL = {};
+    var paperAB = {};
+    var paperLArray = [];
     if (jsonDeltaPaperLAB_1.length > 0) {
         var paperObj = jsonDeltaPaperLAB_1[0];
         var deltaA = paperObj.Δa == 0 ? 0.01 : paperObj.Δa;
-        paperL.data = [[deltaA, paperObj.Δb]];
+        paperAB.data = [[deltaA, paperObj.Δb]];
 
         tooltipString = '<table><tr><td><center><b>' + _Resources._recPaperPathMetrics + '</b></center><td></tr>';
         tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + paperObj.CielabL + ' ' + _Resources._recA + ': ' + paperObj.CielabA + ' ' + _Resources._recB + ': ' + paperObj.CielabB + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recTarget + ' L: *' + paperObj.TargetL + ' a*: ' + paperObj.Targeta + ' b*: ' + paperObj.Targetb + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + paperObj["ΔL"] + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + paperObj["Δa"] + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + paperObj["Δb"] + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + paperObj.TargetL + ' ' + _Resources._recA + ': ' + paperObj.Targeta + ' ' + _Resources._recB + ': ' + paperObj.Targetb + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaL + ':   ' + paperObj["ΔL"] + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaA + ':   ' + paperObj["Δa"] + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaB + ':   ' + paperObj["Δb"] + '</td></tr>';
         tooltipString += '</table>';
+
+
+        //bind json data for L chart
+        var paperLObject = {
+            color: '#D4CBC5',
+            //name: patchColor[index].colorName,
+            value: paperObj["ΔL"],
+        };
+        paperLArray.push(paperLObject);
     }
-    paperL.color = "White";
-    paperL.markers = {
+
+    paperAB.color = "White";
+    paperAB.markers = {
         background: "White",
         border: {
             width: 1,
@@ -1119,12 +1325,12 @@ function BindInkPaperChartABComparision() {
             }
         }
     };
-    paperL.width = 2;
-    paperL.highlight = {
+    paperAB.width = 2;
+    paperAB.highlight = {
         visible: false
     }
-    paperL.tooltip = { visible: true, template: tooltipString, shared: true };
-   
+    paperAB.tooltip = { visible: true, template: tooltipString, shared: true };
+
 
     $divChartInkPaperPaperLab1.kendoChart({
         seriesDefaults: {
@@ -1132,40 +1338,567 @@ function BindInkPaperChartABComparision() {
             style: "smooth"
         },
         series: [
-            paperAB,   
-            paperL
+            paperABGreen,
+            paperAB
         ],
         xAxis: {
             min: -10,
             max: 10,
             majorUnit: 5,
-            axisCrossingValues: [-100, 100],
+            axisCrossingValues: [-10, 10],
             labels: {
                 format: "{0}"
             },
             title: {
-                text: ""
+                text: _Resources._recDeltaA
             }, majorGridLines: {
-                visible: true
-            }           
+                visible: true,
+                step: -10
+            }
         },
         yAxis: {
             min: -10,
             max: 10,
             step: 5,
             majorUnit: 5,
-            axisCrossingValues: [-100, 100],
+            axisCrossingValues: [-10, 10],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: _Resources._recDeltaB
+            }, majorGridLines: {
+                visible: true,
+                step: -10
+            }
+        },
+        chartArea: {
+            width: 400,
+            height: 280
+        },
+        //plotArea: {
+        //    background: "lightgray"
+        //}
+    });
+
+
+    $divChartInkPaperPaperLab2.kendoChart({
+        seriesDefaults: {
+            type: "column",
+            width: 25,
+            //gap: 2,
+        },
+        series: [{
+            data: paperLArray,
+        }],
+        categoryAxis: {
+            categories: [],
+            line: {
+                visible: true,
+                width: 2,
+            },
+        },
+        valueAxis: {
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: _Resources._recDeltaL
+            },
+            line: {
+                visible: false,
+            },
+            axisCrossingValue: 0,
+            min: -10,
+            max: 10,
+            majorUnit: 5,
+        },
+        tooltip: {
+            visible: true,
+            template: tooltipString
+            //template: "#= dataItem.title # <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
+        },
+        chartArea: {
+            width: 200,
+            height: 280
+        },
+    });
+
+}
+
+function BindG7Charts() {
+    var measurementID = parseInt($hdMeasurement);
+    var apiParameters = {
+        MeasurementId: measurementID,
+        IsAverageOfMeasurements: $isAverageOfMeasurements,
+        IsVerificationProject: $hdnVerification,
+    };
+
+    //kendo.ui.progress($chartLoader, true);
+    $.ajax({
+        url: SERVICE_BASE_URL + 'api/Chart/GenerateG7Chart',
+        data: apiParameters,
+        type: 'GET',
+        dataType: 'json',
+        headers: {
+            'Accept-Language': $CurrentCulture
+        },
+        success: function (response) {
+            //console.log('G7 Chart data');
+            //console.log(response);
+            //console.log(JSON.stringify(response));
+            if (response.data != null) {
+                jsonGrayFChartList = response.data.GrayFChartList;
+                jsonBlackLChartList = response.data.BlackLChartList;
+                jsonGrayLChartList = response.data.GrayLChartList;
+                jsonBlackNPDChartList = response.data.BlackNPDChartList;
+                jsonGrayNPDChartList = response.data.GrayNPDChartList;
+            }
+            GenerateG7Charts();
+
+            //kendo.ui.progress($chartLoader, false);
+        },
+        error: function (xhr, errorType, exception) {
+            //alert(exception);
+            kendo.ui.progress($chartLoader, false);
+        }
+    });
+}
+
+function BindTVICharts() {
+
+    var measurementID = parseInt($hdMeasurement);
+    var apiParameters = {
+        MeasurementId: measurementID,
+        IsAverageOfMeasurements: $isAverageOfMeasurements,
+        IsVerificationProject: $hdnVerification,
+        IsSync1DTypeProject: $hdnSync1DType
+    };
+
+
+    if ($hdnValidationType == 2) {
+
+        $divTVI_G7.css('display', 'none');
+        $divTVI_ISO.css('display', 'block');
+
+        
+        //kendo.ui.progress($chartLoader, true);
+        $.ajax({
+            url: SERVICE_BASE_URL + 'api/Chart/GenerateISOTVIChart',
+            data: apiParameters,
+            type: 'GET',
+            dataType: 'json',
+            headers: {
+                'Accept-Language': $CurrentCulture
+            },
+            success: function (response) {
+
+                if (response.data != null) {
+                    jsonDTISOTVIChartList = response.data.DTISOTVIChartList;
+                    jsonDTSpreadChartData_CMYKList = response.data.DTSpreadChartData_CMYKList;
+                    PopulateTVIISOChart();
+                    PopulateTVIG7CMYKChart();
+                }                
+                //kendo.ui.progress($chartLoader, false);
+            },
+            error: function (xhr, errorType, exception) {
+                //alert(exception);
+                kendo.ui.progress($chartLoader, false);
+            }
+        });
+    }
+
+    
+    if ($hdnValidationType == 1) {
+        $divTVI_G7.css('display', 'block');
+        $divTVI_ISO.css('display', 'none');       
+
+        //kendo.ui.progress($chartLoader, true);
+        $.ajax({
+            url: SERVICE_BASE_URL + 'api/Chart/GenerateISOTVIChart',
+            data: apiParameters,
+            type: 'GET',
+            dataType: 'json',
+            headers: {
+                'Accept-Language': $CurrentCulture
+            },
+            success: function (response) {
+                
+                if (response.data != null) {
+                    
+                    jsonTVIG7ChartList = response.data.DTTVIChartList;
+                    PopulateTVIG7Chart();
+                }                
+
+                //kendo.ui.progress($chartLoader, false);
+            },
+            error: function (xhr, errorType, exception) {
+                //alert(exception);
+                kendo.ui.progress($chartLoader, false);
+            }
+        });
+        
+    }
+    
+
+}
+
+
+////**************** START BIND THE G7 CHART  ****************////
+function GenerateG7Charts() {
+
+    $divChartG7GrayBalanceDeltaCh.kendoChart({
+        //title: {
+        //    text: "Gray Balance ΔCh"
+        //},
+        seriesDefaults: {
+            type: "scatterLine",
+            style: "smooth"
+        },
+        dataSource: jsonGrayFChartList,
+        series: [{
+            xField: "Cmyk_Value",
+            yField: "ΔValue",
+            color: "Black",
+            markers: { background: "Black", size: 4 },
+            //highlight: {
+            //    visible: false
+            //},
+            tooltip: {
+                visible: true,
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+            }
+        },
+        {
+            xField: "Cmyk_Value",
+            yField: "wΔValue",
+            color: "Blue",
+            markers: { background: "Blue", size: 4 },
+            tooltip: {
+                visible: true,
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+            }
+        },
+        {
+            xField: "Cmyk_Value",
+            yField: "ΔLimit",
+            color: "Red",
+            markers: { background: "Red", size: 0 },
+            highlight: {
+                visible: false
+            }
+        }
+        ],
+        xAxis: {
+            min: 0,
+            max: 100,
+            majorUnit: 25,
+            axisCrossingValues: [0, 100],
             labels: {
                 format: "{0}"
             },
             title: {
                 text: ""
-            }, majorGridLines: {
-                visible: true
             }
         },
+        yAxis: {
+            min: 0,
+            max: 6,
+            majorUnit: 2,
+            axisCrossingValues: [0, 100],
+            labels: {
+                format: "{0}"
+            },
+        },
         chartArea: {
-            width: 300,
+            width: 400,
+            height: 120
+        },
+        plotArea: {
+            background: "lightgray"
+        }
+    });
+
+    $divChartG7BlackDeltaL.kendoChart({
+        //title: {
+        //    text: "Black ΔL"
+        //},
+        seriesDefaults: {
+            type: "scatterLine",
+            style: "smooth"
+        },
+        dataSource: jsonBlackLChartList,
+        series: [{
+            xField: "Cmyk_Value",
+            yField: "ΔValue",
+            color: "Black",
+            markers: { background: "Black", size: 4 },
+            //highlight: {
+            //    visible: false
+            //},
+            tooltip: {
+                visible: true,
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+            }
+        },
+        {
+            xField: "Cmyk_Value",
+            yField: "wΔValue",
+            color: "Blue",
+            markers: { background: "Blue", size: 4 },
+            tooltip: {
+                visible: true,
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
+            }
+        },
+        {
+            xField: "Cmyk_Value",
+            yField: "ΔLimit",
+            color: "Red",
+            markers: { background: "Red", size: 0 },
+            highlight: {
+                visible: false
+            }
+        }
+        ],
+        xAxis: {
+            min: 0,
+            max: 100,
+            majorUnit: 25,
+            axisCrossingValues: [0, 100],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: ""
+            }
+        },
+        yAxis: {
+            min: 0,
+            max: 6,
+            majorUnit: 2,
+            axisCrossingValues: [0, 100],
+            labels: {
+                format: "{0}"
+            },
+        },
+        chartArea: {
+            width: 400,
+            height: 120
+        },
+        plotArea: {
+            background: "lightgray"
+        }
+    });
+
+    $divChartG7GrayDeltaL.kendoChart({
+        //title: {
+        //    text: "Gray ΔL"
+        //},
+        seriesDefaults: {
+            type: "scatterLine",
+            style: "smooth"
+        },
+        legend: {
+            position: "bottom"
+        },
+        dataSource: jsonGrayLChartList,
+        series: [{
+            xField: "Cmyk_Value",
+            yField: "ΔValue",
+            color: "Black",
+            markers: { background: "Black", size: 4 },
+            //highlight: {
+            //    visible: false
+            //},
+            tooltip: {
+                visible: true,
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+            }
+        },
+        {
+            xField: "Cmyk_Value",
+            yField: "wΔValue",
+            color: "Blue",
+            markers: { background: "Blue", size: 4 },
+            tooltip: {
+                visible: true,
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
+            }
+        },
+        {
+            xField: "Cmyk_Value",
+            yField: "ΔLimit",
+            color: "Red",
+            markers: { background: "Red", size: 0 },
+            highlight: {
+                visible: false
+            }
+        }
+        ],
+        xAxis: {
+            min: 0,
+            max: 100,
+            majorUnit: 25,
+            axisCrossingValues: [0, 100],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: ""
+            }
+        },
+        yAxis: {
+            min: 0,
+            max: 6,
+            majorUnit: 2,
+            axisCrossingValues: [0, 100],
+            labels: {
+                format: "{0}"
+            },
+        },
+        chartArea: {
+            width: 400,
+            height: 120
+        },
+        plotArea: {
+            background: "lightgray"
+        }
+    });
+
+    $divChartG7BlackNPD.kendoChart({
+        //title: {
+        //    text: "Black NPD"
+        //},
+        seriesDefaults: {
+            type: "scatterLine",
+            style: "smooth"
+        },
+        legend: {
+            position: "bottom"
+        },
+        dataSource: jsonBlackNPDChartList,
+        series: [
+            {
+                xField: "Cmyk_Value",
+                yField: "ΔLimit",
+                color: "Black",
+                markers: { background: "Black", size: 0 },
+                highlight: {
+                    visible: false
+                },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Black Target NPD  #= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> G7NPDC:  #= dataItem.ΔLimit #</td></tr></table>'
+                }
+            },
+            {
+                xField: "Cmyk_Value",
+                yField: "ΔValue",
+                color: "Green",
+                markers: { background: "Green", size: 0 },
+                highlight: {
+                    visible: false
+                },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Black Actual NPD  #= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> G7NPDC Actual:  #= dataItem.ΔValue #</td></tr></table>'
+                }
+            }
+        ],
+        xAxis: {
+            min: 0,
+            max: 100,
+            majorUnit: 25,
+            axisCrossingValues: [0, 100],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: ""
+            }
+        },
+        yAxis: {
+            min: 0,
+            max: 2,
+            majorUnit: 0.5,
+            axisCrossingValues: [0, 100],
+            labels: {
+                format: "{0}"
+            },
+        },
+        chartArea: {
+            width: 320,
+            height: 250
+        },
+        plotArea: {
+            background: "lightgray"
+        }
+    });
+
+    $divChartG7GrayNPD.kendoChart({
+        //title: {
+        //    text: "Gray NPD"
+        //},
+        seriesDefaults: {
+            type: "scatterLine",
+            style: "smooth"
+        },
+        legend: {
+            position: "bottom"
+        },
+        dataSource: jsonGrayNPDChartList,
+        series: [
+            {
+                xField: "Cmyk_Value",
+                yField: "ΔLimit",
+                color: "Black",
+                markers: { background: "Black", size: 0 },
+                highlight: {
+                    visible: false
+                },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Gray Target NPD  #= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> G7NPDC:  #= dataItem.ΔLimit #</td></tr></table>'
+                }
+            },
+            {
+                xField: "Cmyk_Value",
+                yField: "ΔValue",
+                color: "Green",
+                markers: { background: "Green", size: 0 },
+                highlight: {
+                    visible: false
+                },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Gray Actual NPD  #= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> G7NPDC Actual:  #= dataItem.ΔValue #</td></tr></table>'
+                }
+            }
+        ],
+        xAxis: {
+            min: 0,
+            max: 100,
+            majorUnit: 25,
+            axisCrossingValues: [0, 100],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: ""
+            }
+        },
+        yAxis: {
+            min: 0,
+            max: 2,
+            majorUnit: 0.5,
+            axisCrossingValues: [0, 100],
+            labels: {
+                format: "{0}"
+            },
+        },
+        chartArea: {
+            width: 320,
             height: 250
         },
         plotArea: {
@@ -1174,7 +1907,692 @@ function BindInkPaperChartABComparision() {
     });
 }
 
-function createColumn(rect, color) {
+
+////**************** START BIND THE TVI CHART  ****************////
+function PopulateTVIG7Chart() {
+    var jsonEmpty = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.CmykK == 0; })
+
+    var jsonC = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykC != 0; });
+    var jsonM = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykM != 0; });
+    var jsonY = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykY != 0; });
+    var jsonK = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykK != 0; });
+
+    var jsonCResult = jsonEmpty.concat(jsonC);
+    var jsonMResult = jsonEmpty.concat(jsonM);
+    var jsonYResult = jsonEmpty.concat(jsonY);
+    var jsonKResult = jsonEmpty.concat(jsonK);
+
+    $divChartTVISummaryDotGain.kendoChart({
+        //title: {
+        //    text: "TVI Chart"
+        //},
+        seriesDefaults: {
+            type: "scatterLine",
+            style: "smooth"
+        },
+        //dataSource: jsonKResult,
+        series: [
+            {
+                data: jsonCResult,
+                xField: "CmykC",
+                yField: "DotGain",
+                color: "Cyan",
+                markers: {
+                    background: "Cyan",
+                    size: 6,
+                    border: {
+                        width: 1,
+                        color: function (e) {
+                            return 'black';
+                        }
+                    }
+                },
+                highlight: {
+                    visible: false
+                },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
+                }
+            }, {
+                data: jsonMResult,
+                xField: "CmykM",
+                yField: "DotGain",
+                color: "Magenta",
+                markers: {
+                    background: "Magenta", size: 6, border: {
+                        width: 1,
+                        color: function (e) {
+                            return 'black';
+                        }
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
+                },
+                highlight: {
+                    visible: false
+                },
+            }, {
+                data: jsonYResult,
+                xField: "CmykY",
+                yField: "DotGain",
+                color: "Yellow",
+                markers: {
+                    background: "Yellow", size: 6, border: {
+                        width: 1,
+                        color: function (e) {
+                            return 'black';
+                        }
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
+                },
+                highlight: {
+                    visible: false
+                },
+            }, {
+                data: jsonKResult,
+                xField: "CmykK",
+                yField: "DotGain",
+                color: "Black",
+                markers: { background: "Black", size: 4 },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykK.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
+                },
+                highlight: {
+                    visible: false
+                },
+            },
+
+        ],
+        xAxis: {
+            min: 0,
+            max: 100,
+            majorUnit: 25,
+            axisCrossingValues: [0, 100],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: ""
+            }
+        },
+        yAxis: {
+            min: -5,
+            max: 25,
+            majorUnit: 5,
+            axisCrossingValues: [-5, 25],
+            labels: {
+                format: "{0}"
+            },
+        },
+        chartArea: {
+            width: 650,
+            height: 400
+        },
+        plotArea: {
+            background: "lightgray"
+        }
+    });
+}
+
+function PopulateTVIISOChart() {
+    var isoCyanList = [];
+    var isoMagentaList = [];
+    var isoYellowList = [];
+    var isoBlackList = [];
+
+    if (jsonDTISOTVIChartList.length > 0) {
+        isoCyanList = $.grep(jsonDTISOTVIChartList, function (element) {
+            var matched = false;
+            switch (element.PatchTypeId) {
+                case CPPatchType.Cyan:
+                case CPPatchType.Paper:
+                case CPPatchType.Cyan_Quarter_Tone:
+                case CPPatchType.Cyan_Half_Tone:
+                case CPPatchType.Cyan_Three_Quarter_Tone:
+                case CPPatchType.Cyan_10:
+                case CPPatchType.Cyan_20:
+                case CPPatchType.Cyan_25:
+                case CPPatchType.Cyan_30:
+                case CPPatchType.Cyan_40:
+                case CPPatchType.Cyan_50:
+                case CPPatchType.Cyan_60:
+                case CPPatchType.Cyan_70:
+                case CPPatchType.Cyan_75:
+                case CPPatchType.Cyan_80:
+                case CPPatchType.Cyan_90:
+                    matched = true;
+                    break;
+                default: break;
+            }
+            return matched;
+        });
+        isoCyanList.sort(function (a, b) { return a.CmykC - b.CmykC; });
+
+        $.each(isoCyanList, function (index, obj) {
+            var thrashHoldObject = [];
+            var ThresholdTop = 0;
+            var ThresholdBottom = 0;
+            var thresHoldValue = obj.Threshold;
+            ThresholdTop = obj.TargetDotGain + thresHoldValue;
+            ThresholdBottom = obj.TargetDotGain - thresHoldValue;
+            obj.ThresholdTop = ThresholdTop;
+            obj.ThresholdBottom = ThresholdBottom;
+        });
+        //console.log(isoCyanList);
+    }
+
+    if (jsonDTISOTVIChartList.length > 0) {
+        isoMagentaList = $.grep(jsonDTISOTVIChartList, function (element) {
+            var matched = false;
+            switch (element.PatchTypeId) {
+                case CPPatchType.Magenta:
+                case CPPatchType.Paper:
+                case CPPatchType.Magenta_Quarter_Tone:
+                case CPPatchType.Magenta_Half_Tone:
+                case CPPatchType.Magenta_Three_Quarter_Tone:
+                case CPPatchType.Magenta_10:
+                case CPPatchType.Magenta_20:
+                case CPPatchType.Magenta_25:
+                case CPPatchType.Magenta_30:
+                case CPPatchType.Magenta_40:
+                case CPPatchType.Magenta_50:
+                case CPPatchType.Magenta_60:
+                case CPPatchType.Magenta_70:
+                case CPPatchType.Magenta_75:
+                case CPPatchType.Magenta_80:
+                case CPPatchType.Magenta_90:
+                    matched = true;
+                    break;
+                default: break;
+            }
+            return matched;
+        });
+        isoMagentaList.sort(function (a, b) { return a.CmykM - b.CmykM; });
+
+        $.each(isoMagentaList, function (index, obj) {
+            var thrashHoldObject = [];
+            var ThresholdTop = 0;
+            var ThresholdBottom = 0;
+            var thresHoldValue = obj.Threshold;
+            ThresholdTop = obj.TargetDotGain + thresHoldValue;
+            ThresholdBottom = obj.TargetDotGain - thresHoldValue;
+            obj.ThresholdTop = ThresholdTop;
+            obj.ThresholdBottom = ThresholdBottom;
+        });
+        //console.log(isoMagentaList);
+    }
+
+    if (jsonDTISOTVIChartList.length > 0) {
+        isoYellowList = $.grep(jsonDTISOTVIChartList, function (element) {
+            var matched = false;
+            switch (element.PatchTypeId) {
+                case CPPatchType.Yellow:
+                case CPPatchType.Paper:
+                case CPPatchType.Yellow_Quarter_Tone:
+                case CPPatchType.Yellow_Half_Tone:
+                case CPPatchType.Yellow_Three_Quarter_Tone:
+                case CPPatchType.Yellow_10:
+                case CPPatchType.Yellow_20:
+                case CPPatchType.Yellow_25:
+                case CPPatchType.Yellow_30:
+                case CPPatchType.Yellow_40:
+                case CPPatchType.Yellow_50:
+                case CPPatchType.Yellow_60:
+                case CPPatchType.Yellow_70:
+                case CPPatchType.Yellow_75:
+                case CPPatchType.Yellow_80:
+                case CPPatchType.Yellow_90:
+                    matched = true;
+                    break;
+                default: break;
+            }
+            return matched;
+        });
+        isoYellowList.sort(function (a, b) { return a.CmykY - b.CmykY; });
+
+        $.each(isoYellowList, function (index, obj) {
+            var thrashHoldObject = [];
+            var ThresholdTop = 0;
+            var ThresholdBottom = 0;
+            var thresHoldValue = obj.Threshold;
+            ThresholdTop = obj.TargetDotGain + thresHoldValue;
+            ThresholdBottom = obj.TargetDotGain - thresHoldValue;
+            obj.ThresholdTop = ThresholdTop;
+            obj.ThresholdBottom = ThresholdBottom;
+        });
+        //console.log(isoYellowList);
+    }
+
+    if (jsonDTISOTVIChartList.length > 0) {
+        isoBlackList = $.grep(jsonDTISOTVIChartList, function (element) {
+            var matched = false;
+            switch (element.PatchTypeId) {
+                case CPPatchType.Black:
+                case CPPatchType.Paper:
+                case CPPatchType.Black_Quarter_Tone:
+                case CPPatchType.Black_Half_Tone:
+                case CPPatchType.Black_Three_Quarter_Tone:
+                case CPPatchType.Black_10:
+                case CPPatchType.Black_20:
+                case CPPatchType.Black_25:
+                case CPPatchType.Black_30:
+                case CPPatchType.Black_40:
+                case CPPatchType.Black_50:
+                case CPPatchType.Black_60:
+                case CPPatchType.Black_70:
+                case CPPatchType.Black_75:
+                case CPPatchType.Black_80:
+                case CPPatchType.Black_90:
+                    matched = true;
+                    break;
+                default: break;
+            }
+            return matched;
+        });
+        isoBlackList.sort(function (a, b) { return a.CmykK - b.CmykK; });
+
+        $.each(isoBlackList, function (index, obj) {
+            var thrashHoldObject = [];
+            var ThresholdTop = 0;
+            var ThresholdBottom = 0;
+            var thresHoldValue = obj.Threshold;
+            ThresholdTop = obj.TargetDotGain + thresHoldValue;
+            ThresholdBottom = obj.TargetDotGain - thresHoldValue;
+            obj.ThresholdTop = ThresholdTop;
+            obj.ThresholdBottom = ThresholdBottom;
+        });
+        //console.log(isoBlackList);
+    }
+    
+    $divChartTVIISO_CYAN.kendoChart({
+        title: {
+            text: "Cyan"
+        },
+        dataSource: {
+            data: isoCyanList
+        },
+        series: [
+            {
+                type: "rangeArea",
+                fromField: "ThresholdBottom",
+                toField: "ThresholdTop",
+                color: "Green",
+                line: {
+                    style: "smooth",
+                    color: "green",
+                    width: 1
+                },
+                highlight: {
+                    visible: false,
+                }
+            },
+            {
+                type: "line",
+                field: "TargetDotGain",
+                color: "Green",
+                markers: { background: "Green" },
+                highlight: {
+                    visible: false
+                }
+            },
+            {
+                type: "line",
+                field: "DotGain",
+                color: "Cyan",
+                markers: { background: "Cyan" },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Target TVI:  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> TVI Threashhold:  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
+                }
+            }
+        ],
+        valueAxis: {
+            majorUnit: 5
+        },
+        seriesDefaults: {
+            line: {
+                style: "smooth"
+            }
+        },
+        categoryAxis: {
+            field: "CmykC"
+        },
+        chartArea: {
+            width: 325,
+            height: 200
+        },
+    });
+
+
+    $divChartTVIISO_Magenta.kendoChart({
+        title: {
+            text: "Magenta"
+        },
+        dataSource: {
+            data: isoMagentaList
+        },
+        series: [
+            {
+                type: "rangeArea",
+                fromField: "ThresholdBottom",
+                toField: "ThresholdTop",
+                color: "Green",
+                line: {
+                    style: "smooth",
+                    color: "green",
+                    width: 1
+                },
+                highlight: {
+                    visible: false
+                }
+            },
+            {
+                type: "line",
+                field: "TargetDotGain",
+                color: "Green",
+                markers: { background: "Green" },
+                highlight: {
+                    visible: false
+                }
+            },
+            {
+                type: "line",
+                field: "DotGain",
+                color: "Magenta",
+                markers: { background: "Magenta" },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Target TVI:  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> TVI Threashhold:  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
+                }
+            }
+        ],
+        valueAxis: {
+            majorUnit: 5
+        },
+        seriesDefaults: {
+            line: {
+                style: "smooth"
+            }
+        },
+        categoryAxis: {
+            field: "CmykM"
+        },
+        chartArea: {
+            width: 325,
+            height: 200
+        },
+    });
+
+
+    $divChartTVIISO_Yellow.kendoChart({
+        title: {
+            text: "Yellow"
+        },
+        dataSource: {
+            data: isoYellowList
+        },
+        series: [
+            {
+                type: "rangeArea",
+                fromField: "ThresholdBottom",
+                toField: "ThresholdTop",
+                color: "Green",
+                line: {
+                    style: "smooth",
+                    color: "green",
+                    width: 1
+                },
+                highlight: {
+                    visible: false
+                }
+            },
+            {
+                type: "line",
+                field: "TargetDotGain",
+                color: "Green",
+                markers: { background: "Green" },
+                highlight: {
+                    visible: false
+                }
+            },
+            {
+                type: "line",
+                field: "DotGain",
+                color: "Yellow",
+                markers: { background: "Yellow" },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Target TVI:  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> TVI Threashhold:  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
+                }
+            }
+        ],
+        valueAxis: {
+            majorUnit: 5
+        },
+        seriesDefaults: {
+            line: {
+                style: "smooth"
+            }
+        },
+        categoryAxis: {
+            field: "CmykY"
+        },
+        chartArea: {
+            width: 325,
+            height: 200
+        },
+    });
+
+    $divChartTVIISO_Black.kendoChart({
+        title: {
+            text: "Black"
+        },
+        dataSource: {
+            data: isoBlackList
+        },
+        series: [
+            {
+                type: "rangeArea",
+                fromField: "ThresholdBottom",
+                toField: "ThresholdTop",
+                color: "Green",
+                line: {
+                    style: "smooth",
+                    color: "green",
+                    width: 1
+                },
+                highlight: {
+                    visible: false
+                }
+            },
+            {
+                type: "line",
+                field: "TargetDotGain",
+                color: "Green",
+                markers: { background: "Green" },
+                highlight: {
+                    visible: false
+                }
+            },
+            {
+                type: "line",
+                field: "DotGain",
+                color: "Black",
+                markers: { background: "Black" },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykK.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Target TVI:  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> TVI Threashhold:  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
+                }
+            }
+        ],
+        valueAxis: {
+            majorUnit: 5
+        },
+        seriesDefaults: {
+            line: {
+                style: "smooth"
+            }
+        },
+        categoryAxis: {
+            field: "CmykK"
+        },
+        chartArea: {
+            width: 325,
+            height: 200
+        },
+    });
+}
+
+function PopulateTVIG7CMYKChart() {
+
+    var jsonCMYK_C = $.grep(jsonDTSpreadChartData_CMYKList, function (element) { return (element.CmykC != 0 || element.DotGain == 0) });
+    var jsonCMYK_M = $.grep(jsonDTSpreadChartData_CMYKList, function (element) { return (element.CmykM != 0 || element.DotGain == 0) });
+    var jsonCMYK_Y = $.grep(jsonDTSpreadChartData_CMYKList, function (element) { return (element.CmykY != 0 || element.DotGain == 0) });
+    var jsonCMYK_K = $.grep(jsonDTSpreadChartData_CMYKList, function (element) { return (element.CmykK != 0 || element.DotGain == 0) });
+
+
+    $divChartTVIISO_CMYK.kendoChart({
+        title: {
+            text: "TVI CMYK Chart"
+        },
+        seriesDefaults: {
+            type: "scatterLine",
+            style: "smooth",
+
+        },
+        legend: {
+            position: "top",
+            //labels: {
+            //    template: "Name: #= text #"
+            //}
+        },
+        //dataSource: jsonKResult,
+        series: [
+            {
+                data: jsonCMYK_C,
+                xField: "CmykC",
+                yField: "DotGain",
+                name: "C",
+                color: "Cyan",
+                markers: {
+                    background: "Cyan",
+                    size: 7,
+                    border: {
+                        width: 1,
+                        color: function (e) {
+                            return 'black';
+                        }
+                    }
+                },
+                highlight: {
+                    visible: false
+                },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #</td></tr></table>'
+                },
+                line: {
+                    width: 5
+                },
+            },
+            {
+                data: jsonCMYK_M,
+                xField: "CmykM",
+                yField: "DotGain",
+                color: "Magenta",
+                name: "M",
+                markers: {
+                    background: "Magenta", size: 7, border: {
+                        width: 1,
+                        color: function (e) {
+                            return 'black';
+                        }
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #</td></tr></table>'
+                },
+                highlight: {
+                    visible: false
+                },
+            },
+            {
+                data: jsonCMYK_Y,
+                xField: "CmykY",
+                yField: "DotGain",
+                color: "Yellow",
+                name: "Y",
+                markers: {
+                    background: "Yellow", size: 7, border: {
+                        width: 1,
+                        color: function (e) {
+                            return 'black';
+                        }
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #</td></tr></table>'
+                },
+                highlight: {
+                    visible: false
+                },
+            }, {
+                data: jsonCMYK_K,
+                xField: "CmykK",
+                yField: "DotGain",
+                color: "Black",
+                name: "K",
+                markers: { background: "Black", size: 7 },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykK.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #</td></tr></table>'
+                },
+                highlight: {
+                    visible: false
+                },
+            },
+        ],
+        xAxis: {
+            min: 0,
+            max: 100,
+            majorUnit: 25,
+            axisCrossingValues: [0, 100],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                text: ""
+            }
+        },
+        yAxis: {
+            min: 0,
+            max: 20,
+            majorUnit: 5,
+            axisCrossingValues: [0, 20],
+            labels: {
+                format: "{0}"
+            },
+        },
+        chartArea: {
+            width: 650,
+            height: 400
+        },
+        plotArea: {
+            background: "lightgray"
+        }
+    });
+}
+
+function createColumn(e, rect, color) {
     var origin = rect.origin;
     var center = rect.center();
     var bottomRight = rect.bottomRight();
@@ -1187,8 +2605,9 @@ function createColumn(rect, color) {
         }, {
             offset: 0.5,
             color: color,
-            opacity: 0.9
-        }, {
+            opacity: 1.9
+        },
+        {
             offset: 0.5,
             color: color,
             opacity: 0.9
@@ -1201,21 +2620,14 @@ function createColumn(rect, color) {
     var path = new drawing.Path({
         fill: gradient,
         stroke: {
-            color: "none"
+            color: "#ebebeb"
         }
     })
-    //.moveTo(origin.x, origin.y)
-    //.lineTo(origin.x, bottomRight.y)
-    //.arc(180, 0, radiusX, radiusY, true)
-    //.lineTo(bottomRight.x, origin.y)
-    //.arc(0, 180, radiusX, radiusY);
-
-
-    //.moveTo(origin.x, origin.y)
-    //.lineTo(origin.x, bottomRight.y)
-    //.arc(180, 0, radiusX, radiusY, true)
-    //.lineTo(bottomRight.y, origin.x)
-    //.arc(0, 180, radiusY, radiusX);
+        .moveTo(origin.x, origin.y)
+        .lineTo(origin.x, bottomRight.y)
+        .arc(180, 0, radiusX, radiusY, true)
+        .lineTo(bottomRight.x, origin.y)
+        .arc(0, 180, radiusX, radiusY);
 
     var topArcGeometry = new geometry.Arc([center.x, origin.y], {
         startAngle: 0,
@@ -1236,5 +2648,68 @@ function createColumn(rect, color) {
     group.append(path, topArc);
     return group;
 }
+
+//function createColumn(rect, color) {
+//    var origin = rect.origin;
+//    var center = rect.center();
+//    var bottomRight = rect.bottomRight();
+//    var radiusX = rect.width() / 2;
+//    var radiusY = radiusX / 3;
+//    var gradient = new drawing.LinearGradient({
+//        stops: [{
+//            offset: 0,
+//            color: color
+//        }, {
+//            offset: 0.5,
+//            color: color,
+//            opacity: 0.9
+//        }, {
+//            offset: 0.5,
+//            color: color,
+//            opacity: 0.9
+//        }, {
+//            offset: 1,
+//            color: color
+//        }]
+//    });
+
+//    var path = new drawing.Path({
+//        fill: gradient,
+//        stroke: {
+//            color: "none"
+//        }
+//    })
+//    //.moveTo(origin.x, origin.y)
+//    //.lineTo(origin.x, bottomRight.y)
+//    //.arc(180, 0, radiusX, radiusY, true)
+//    //.lineTo(bottomRight.x, origin.y)
+//    //.arc(0, 180, radiusX, radiusY);
+
+
+//    //.moveTo(origin.x, origin.y)
+//    //.lineTo(origin.x, bottomRight.y)
+//    //.arc(180, 0, radiusX, radiusY, true)
+//    //.lineTo(bottomRight.y, origin.x)
+//    //.arc(0, 180, radiusY, radiusX);
+
+//    var topArcGeometry = new geometry.Arc([center.x, origin.y], {
+//        startAngle: 0,
+//        endAngle: 360,
+//        radiusX: radiusX,
+//        radiusY: radiusY
+//    });
+
+//    var topArc = new drawing.Arc(topArcGeometry, {
+//        fill: {
+//            color: color
+//        },
+//        stroke: {
+//            color: "#ebebeb"
+//        }
+//    });
+//    var group = new drawing.Group();
+//    group.append(path, topArc);
+//    return group;
+//}
 
 

@@ -1,33 +1,33 @@
-﻿var EOptimizeRunStatus = {
-    Open: 1,
-    Closed: 2,
-    Certify: 3
-}
+﻿//var EOptimizeRunStatus = {
+//    Open: 1,
+//    Closed: 2,
+//    Certify: 3
+//}
 
-var ELicenseType = {
-    None: 0,
-    Sync1D: 1,
-    DLP: 2,
-    InkOptimization: 3,
-    InkOptimizationSource: 4,
-    Sync4DCertification: 5,
-    CustomSourceProfile: 6,
-    ReProfileCustomSource: 7,
-    FullGamutCustomSource: 8,
-    MultiColorCustomSource: 9,
-    SpotLibrary: 10,
-    Validation: 11,
-    IccProfiling: 12
-}
+//var ELicenseType = {
+//    None: 0,
+//    Sync1D: 1,
+//    DLP: 2,
+//    InkOptimization: 3,
+//    InkOptimizationSource: 4,
+//    Sync4DCertification: 5,
+//    CustomSourceProfile: 6,
+//    ReProfileCustomSource: 7,
+//    FullGamutCustomSource: 8,
+//    MultiColorCustomSource: 9,
+//    SpotLibrary: 10,
+//    Validation: 11,
+//    IccProfiling: 12
+//}
 
-var EValidationStatus = {
-    None: 0,
-    NotCertified: 1,
-    Disabled: 2,
-    NoMeasurement: 3,
-    LastOK: 4,
-    LastFailed: 5
-}
+//var EValidationStatus = {
+//    None: 0,
+//    NotCertified: 1,
+//    Disabled: 2,
+//    NoMeasurement: 3,
+//    LastOK: 4,
+//    LastFailed: 5
+//}
 
 var SERVICE_BASE_URL = '';
 var $kendoProjectList;

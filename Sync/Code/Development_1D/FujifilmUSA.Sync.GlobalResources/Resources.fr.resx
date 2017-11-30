@@ -1185,4 +1185,7 @@
   <data name="deltaEText" xml:space="preserve">
     <value>&amp;Delta;E</value>
   </data>
+  <data name="PreviousText" xml:space="preserve">
+    <value>Previous_fr</value>
+  </data>
 </root>

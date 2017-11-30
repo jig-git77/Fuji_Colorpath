@@ -176,6 +176,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
                 hdnCurrentUserID.Value = Convert.ToString(SessionManager.Instance.CurrentUser.UserId) ?? "0";
                 hdfCurrentCulture.Value = getCurrentCultureLanguage();
+                
+                hdnValidationType.Value = ValidationType.ToString();
                 //--Start: Load average Compatibility values
                 chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return CheckAvgCompability();");
                 ChkAvgMeasurementCompatibility();
@@ -218,6 +220,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
                 hdnVerification.Value = IsVerification.ToString();
+                hdnCurrentDlpSubOperation.Value = ((int)SessionManager.Instance.CurrentDlpSubOperation).ToString();
                 hdnSync1DType.Value = IsSync1DType.ToString();
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                 {
@@ -426,7 +429,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         tbOptSummary.Visible = false;
                         ValidationType = MeasurementSummary[0].ValidationType;
-
+                        hdnValidationType.Value = ValidationType.ToString();
                         if (!IsAverageOfMeasurements)   //--Normal display Mode
                         {                            
                             dvValidationSummary.DataSource = MeasurementSummary;

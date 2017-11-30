@@ -28,6 +28,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private const string _InvalidIsVerificationProject = "Error_Invalid_IsVerificationProject";
         private const string _InvalidIsSync1DTypeProject = "Error_Invalid_IsSync1DTypeProject";
         private const string _InvalidDeltaEValue = "Error_Invalid_DeltaEValue";
+        private const string _InvalidValidationType = "Error_Invalid_ValidationType";
 
         #endregion
 
@@ -43,6 +44,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("_recB", "bText");
             _resourceValues.Add("_recDeltaE", "deltaEText");
             _resourceValues.Add("_recTarget", "targetText");
+            _resourceValues.Add("_recPrevious", "PreviousText");
             _resourceValues.Add("_recDeltaL", "deltaLText");
             _resourceValues.Add("_recDeltaA", "deltaAText");
             _resourceValues.Add("_recDeltaB", "deltaBText");
@@ -92,8 +94,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         [HttpGet]
         public IHttpActionResult GenerateGrayChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject)
         {
-            //int? MeasurementId = 15081;
-            //bool? IsAverageOfMeasurements = true;   
             IHttpActionResult actionResult = null;
             string validationMessage = "";
 
@@ -208,13 +208,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
-        public void GenerateResources()
-        {
-            foreach (var item in _resourceValues)
-            {
-                _globalResourceValues.Add(item.Key, GlobalResourceManager.Instance.GetGlobalResourceString(item.Value));
-            }
-        }
+       
 
         public IHttpActionResult GetPatchDetails(int id)
         {
@@ -290,7 +284,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         //public IHttpActionResult GenerateInkPaperChart(int? MeasurementId, string fromDeltaE, bool? IsVerificationProject, bool? IsSync1DTypeProject, bool? IsAverageOfMeasurements)
         [HttpGet]
-        public IHttpActionResult GenerateInkPaperChart(int? MeasurementId, string fromDeltaE)
+        public IHttpActionResult GenerateInkPaperChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject, string fromDeltaE)
         {
             IHttpActionResult actionResult = null;
             string validationMessage = "";
@@ -301,8 +295,17 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (MeasurementId == null)
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
 
-                if (fromDeltaE == null)
+                if (IsAverageOfMeasurements == null)
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+
+                if (IsVerificationProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+
+                if (IsSync1DTypeProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+
+                if (string.IsNullOrEmpty(Convert.ToString(fromDeltaE)))
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
 
 
                 if (!string.IsNullOrEmpty(validationMessage))
@@ -314,19 +317,19 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 }
                 else
                 {
-                    //temp code start
-                    //SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Validation;
-                    //temp code end
-                    //IsVerification = true;
                     DetermineCulture();
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
+                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    this.IsAverageOfMeasurements = IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
                     this.From_ΔE = fromDeltaE;
+
                     _presenterAnalyze.GetInkPaperChart();
                     GenerateResources();
                     httpResponse.Data = new
                     {
-                        DeltaEPrimaryPatcheList = DTDeltaEPrimaryPatches,
-                        PaperPatcheList = DTPaperPatches,
+                        DeltaEPrimaryPatchList = DTDeltaEPrimaryPatches,
+                        PaperPatchList = DTPaperPatches,
                         DensityList = DTDensity,
                         GlobalResources = _globalResourceValues
                     };
@@ -346,8 +349,213 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+
         [HttpGet]
-        public IHttpActionResult GenerateAnalyzeCharts(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject, string fromDeltaE)
+        public IHttpActionResult GenerateG7Chart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                if (MeasurementId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+                if (IsAverageOfMeasurements == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+
+                if (IsVerificationProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+
+                //if (string.IsNullOrEmpty(Convert.ToString(validationType)))
+                //    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidValidationType);
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.Message = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    DetermineCulture();
+                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    this.MeasurementId = Convert.ToInt32(MeasurementId);
+                    this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
+
+                    //-------------Only call G7 tab data if it is G7 type of Validation / Sync 1D / Sync 4D Project
+                    _presenterAnalyze.GetG7Chart();
+
+                    //Get resource values
+                    GenerateResources();
+
+                    httpResponse.Data = new
+                    {
+                        GrayFChartList = GrayFChart,
+                        //GrayFSummaryList = GrayFSummary,
+                        BlackLChartList = BlackLChart,
+                        //BlackLSummaryList = BlackLSummary,
+                        GrayLChartList = GrayLChart,
+                        //GrayLSummaryList = GrayLSummary,
+                        BlackNPDChartList = BlackNPDChart,
+                        GrayNPDChartList = GrayNPDChart,
+
+                        GlobalResources = _globalResourceValues
+                    };
+
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
+        public IHttpActionResult GenerateTVIChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                if (MeasurementId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+                if (IsAverageOfMeasurements == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+
+                if (IsVerificationProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+
+                if (IsSync1DTypeProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.Message = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    DetermineCulture();
+
+                    this.MeasurementId = Convert.ToInt32(MeasurementId);
+                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    this.IsAverageOfMeasurements = IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
+
+                    //-------------G7 type for validation type 1
+                    _presenterAnalyze.GetTVIChart();
+
+                    //Get resource values
+                    GenerateResources();
+
+                    httpResponse.Data = new
+                    {
+                        DTTVIChartList = DTTVIChart,
+                        GlobalResources = _globalResourceValues
+                    };
+
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
+        public IHttpActionResult GenerateISOTVIChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                if (MeasurementId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+                if (IsAverageOfMeasurements == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+
+                if (IsVerificationProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+
+                if (IsSync1DTypeProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.Message = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    DetermineCulture();
+
+                    this.MeasurementId = Convert.ToInt32(MeasurementId);
+                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    this.IsAverageOfMeasurements = IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
+
+                    //-------------G7 type for validation type 1
+                    _presenterAnalyze.GetISOTVIChart();
+
+                    //Get resource values
+                    GenerateResources();
+
+                    httpResponse.Data = new
+                    {
+                        DTISOTVIChartList = DTISOTVIChart,
+                        DTSpreadChartDataList = DTSpreadChartData,
+                        DTSpreadChartData_CMYKList = DTSpreadChartData_CMYK,
+                        DTSpreadSplineRangeChartDataList = DTSpreadSplineRangeChartData,
+                        DTMaxSpreadChartDataList = DTMaxSpreadChartData,
+                        GlobalResources = _globalResourceValues
+                    };
+
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
+        //combined service for all charts
+        [HttpGet]
+        public IHttpActionResult GenerateAnalyzeCharts(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject,
+                                                            bool? IsSync1DTypeProject, string fromDeltaE, int validationType)
         {
             //int? MeasurementId = 15081;
             //bool? IsAverageOfMeasurements = true;   
@@ -372,6 +580,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (string.IsNullOrEmpty(Convert.ToString(fromDeltaE)))
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
 
+                if (string.IsNullOrEmpty(Convert.ToString(validationType)))
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidValidationType);
+
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
@@ -381,10 +592,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 }
                 else
                 {
-                    //temp code start
-                    //SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Validation;
-                    //temp code end
-                    //IsVerification = true;
                     DetermineCulture();
                     this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
                     this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
@@ -398,6 +605,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     //Get Ink paper chart details
                     _presenterAnalyze.GetInkPaperChart();
 
+                    if (validationType == 1) //-------------Only call G7 tab data if it is G7 type of Validation / Sync 1D / Sync 4D Project
+                    {
+                        _presenterAnalyze.GetG7Chart();
+                    }
+
                     //Get resource values
                     GenerateResources();
 
@@ -409,6 +621,17 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         DeltaEPrimaryPatchList = DTDeltaEPrimaryPatches,
                         PaperPatchList = DTPaperPatches,
                         DensityList = DTDensity,
+
+                        //Gray chart list
+                        GrayFChartList = GrayFChart,
+                        //GrayFSummaryList = GrayFSummary,
+                        BlackLChartList = BlackLChart,
+                        //BlackLSummaryList = BlackLSummary,
+                        GrayLChartList = GrayLChart,
+                        //GrayLSummaryList = GrayLSummary,
+                        BlackNPDChartList = BlackNPDChart,
+                        GrayNPDChartList = GrayNPDChart,
+
                         GlobalResources = _globalResourceValues
                     };
 
@@ -425,6 +648,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
             }
             return actionResult;
+        }
+
+        public void GenerateResources()
+        {
+            foreach (var item in _resourceValues)
+            {
+                _globalResourceValues.Add(item.Key, GlobalResourceManager.Instance.GetGlobalResourceString(item.Value));
+            }
         }
 
         #region IViewAnalyze Members

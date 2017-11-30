@@ -3103,6 +3103,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Previous.
+        /// </summary>
+        internal static string PreviousText {
+            get {
+                return ResourceManager.GetString("PreviousText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete selected Print Standard Type?.
         /// </summary>
         internal static string PrintStandardTypeManagement_DeletePrintStandardType_Confirmation {
