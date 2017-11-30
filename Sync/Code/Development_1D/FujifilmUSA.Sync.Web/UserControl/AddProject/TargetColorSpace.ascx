@@ -22,7 +22,7 @@
             meta:resourcekey="locTargetColorspaceResource1"></asp:Localize>
     </h1>
     <asp:LinkButton ID="lnkbtnTargetColorSpace" runat="server" CssClass="button"
-        OnClick="lnkbtnTargetColorSpace_Click">
+        OnClick="lnkbtnTargetColorSpace_Click" ValidationGroup="b">
         <span>
             <asp:Image ID="imgAdd" runat="server"
                 ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
@@ -318,6 +318,65 @@
                         </asp:Panel>
                     </ContentTemplate>
                 </asp:UpdatePanel>
+            </td>
+        </tr>
+
+         <tr id="trPaperScaling_4D" runat="server" visible="false">
+            <td>
+                <div style="display: block;" class="contantbox tabcontant">
+                    <div class="section_top">
+                        &nbsp;
+                    </div>
+                    <div class="section_middle">
+                        <div class="combopart">
+                            <div class="header">
+                                <div class="content">
+                                    <div class="text" style="float: left;">
+                                        <label>
+                                            <asp:Localize runat="server" Text="Color Metric"
+                                                ID="Localize5" meta:resourcekey="locTargetLABResource1"></asp:Localize></label>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="padding-left: 8px;">
+                                        <asp:CheckBox ID="chk_IsPaperScaling4D" runat="server" CssClass="checkbox" Text="  Relative Paper Scaling"
+                                            AutoPostBack="True" OnCheckedChanged="chk_IsPaperScaling4D_CheckedChanged" meta:resourcekey="chk_IsPaperScalingResource1" />
+                                    </td>
+                                    <td>
+                                        <asp:Panel ID="Panel_PaperLAB4D" Style="padding: 5px" runat="server" BorderStyle="None" Enabled="false">
+                                            <asp:Localize runat="server" Text="New Paper Values:" ID="Localize6" meta:resourcekey="Panel_PaperLABResource1"></asp:Localize>
+
+                                            L*<asp:TextBox ID="txtPaper_L_4D" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                            <asp:RangeValidator ID="RangeValidator4" runat="server"
+                                                ControlToValidate="txtPaper_L_4D" ErrorMessage="*" ForeColor="Red"
+                                                ValidationGroup="b" MinimumValue="0" MaximumValue="100" Type="Double"></asp:RangeValidator>
+                                            &nbsp;
+                                                    a*<asp:TextBox ID="txtPaper_a_4D" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                            <asp:RangeValidator ID="RangeValidator5" runat="server"
+                                                ControlToValidate="txtPaper_a_4D" ErrorMessage="*" ForeColor="Red"
+                                                ValidationGroup="b" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
+                                            &nbsp;
+                                                    b*<asp:TextBox ID="txtPaper_b_4D" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                            <asp:RangeValidator ID="RangeValidator6" runat="server"
+                                                ControlToValidate="txtPaper_b_4D" ErrorMessage="*" ForeColor="Red"
+                                                ValidationGroup="b" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
+                                        </asp:Panel>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="section_bottom">
+                        &nbsp;
+                    </div>
+                </div>
             </td>
         </tr>
     </table>

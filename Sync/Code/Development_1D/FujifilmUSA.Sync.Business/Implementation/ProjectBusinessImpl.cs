@@ -60,7 +60,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             DensityType = (DensityTypes)(DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DensityType") == -1 ? 0 : DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DensityType")),
                             PCSDataTypes = (PCSDataTypes)(DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType") == -1 ? (DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId") != 2 ? 1 : 0) : DataReader.ReadInt(dsProject.Tables[0].Rows[0], "PCSDataType")),  //----If Sync1D G7 projectType then default is XYZ and if ISO type then default is Density and for all 4D projects, default is XYZ like G7
                             ReTargetProjectID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ReTargetProjectID"),
-                            CurveTypeID = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "CurveTypeID")
+                            CurveTypeID = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "CurveTypeID"),
+                            EnabledPaperScaling = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "EnabledPaperScaling"),
+                            NewPaper_L = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_L"),
+                            NewPaper_a = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_a"),
+                            NewPaper_b = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_b")
                         };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
@@ -627,7 +631,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.MeasurementSetting.VReadMode,
                                                      Convert.ToInt16(project.DensityType),
                                                      Convert.ToInt16(project.PCSDataTypes),
-                                                     project.ReTargetProjectID
+                                                     project.ReTargetProjectID,
+                                                     project.EnabledPaperScaling,
+                                                     project.NewPaper_L,
+                                                     project.NewPaper_a,
+                                                     project.NewPaper_b
                                                  });
                         savedProjectId = project.ProjectId;
                     },
@@ -741,7 +749,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@VReadMode", Type = DbType.String, Value = project.MeasurementSetting.VReadMode},
                                                      new Parameters() {ParameterName = "@DensityType", Type = DbType.Int16, Value = Convert.ToInt16(project.DensityType)},
                                                      new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int16, Value = Convert.ToInt16(project.PCSDataTypes)},
-                                                     new Parameters() {ParameterName = "@ReTargetProjectID", Type = DbType.Int32, Value = project.ReTargetProjectID}
+                                                     new Parameters() {ParameterName = "@ReTargetProjectID", Type = DbType.Int32, Value = project.ReTargetProjectID},
+
+                                                     new Parameters() {ParameterName = "@EnabledPaperScaling", Type = DbType.Boolean, Value = project.EnabledPaperScaling},
+                                                     new Parameters() {ParameterName = "@NewPaper_L", Type = DbType.Decimal, Value = project.NewPaper_L},
+                                                     new Parameters() {ParameterName = "@NewPaper_a", Type = DbType.Decimal, Value = project.NewPaper_a},
+                                                     new Parameters() {ParameterName = "@NewPaper_b", Type = DbType.Decimal, Value = project.NewPaper_b}
 
                                                  },
                                              new List<Parameters>()

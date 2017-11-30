@@ -52,6 +52,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trTargetLAB.Visible = false;
                     trProjectType.Visible = false;
                 }
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
+                {
+                    trPaperScaling_4D.Visible = true;
+                }
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
                 {
                     BindSpotTarget(); //Load Spot Target List
@@ -98,7 +102,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else
             {
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
+                {
                     SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
+                    //------If 4D project then pass NewPaperScaling LAB values--------//
+                    SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling4D.Checked;
+                    SessionManager.Instance.CurrentProject.NewPaper_L = Convert.ToDecimal(txtPaper_L_4D.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_a = Convert.ToDecimal(txtPaper_a_4D.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_b = Convert.ToDecimal(txtPaper_b_4D.Text);
+                }
                 else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
                     SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.InkOptimization;
             }
@@ -206,7 +217,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
             }
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //-----If it is projecttype SYnc4D, then display New Paper scaling L,a,b values---//
+            {
+                chk_IsPaperScaling4D.Checked = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
+                if (chk_IsPaperScaling4D.Checked)
+                    Panel_PaperLAB4D.Enabled = true;
+                txtPaper_L_4D.Text = SessionManager.Instance.CurrentProject.NewPaper_L.ToString();
+                txtPaper_a_4D.Text = SessionManager.Instance.CurrentProject.NewPaper_a.ToString();
+                txtPaper_b_4D.Text = SessionManager.Instance.CurrentProject.NewPaper_b.ToString();
+
+                if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Paper Scaling L,a,b selection is disable
+                {
+                    chk_IsPaperScaling4D.Enabled = false;
+                    Panel_PaperLAB4D.Enabled = false;
+                }
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
                 if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)
                     cmbSpotTargetList.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID);
@@ -337,31 +363,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbTargetPrintCategory.SelectedIndex = 0;
         }
 
-        #endregion
-
-        #region IViewTargetColorspace Members
-        public List<Entity.CPSync1D.PrintStandardType> PrintStandardTypeList { get; set; }
-        public List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
-        public List<Entity.CPSpot.SpotTarget> SpotTargetList { get; set; }
-        public int PrintstandardTypeId { get; set; }
-        public int ProjectTypeId { get; set; }
-        public bool IsSync1DType
-        {
-            get
-            {
-                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D);
-            }
-        }
-        public bool IsSpotTargetType
-        {
-            get
-            {
-                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary);
-            }
-        }
-        public int TargetPrintCategory { get; set; }
-        #endregion
-
         protected void btn_PaperClear_Click(object sender, EventArgs e)
         {
             BindTargetLAB();    //Apply old Target LAB from Main look up table
@@ -417,6 +418,41 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindProfileSource();
         }
 
-      
+        protected void chk_IsPaperScaling4D_CheckedChanged(object sender, EventArgs e)
+        {
+            Panel_PaperLAB4D.Enabled = chk_IsPaperScaling4D.Checked;
+            if (!chk_IsPaperScaling4D.Checked)
+            {
+                txtPaper_L_4D.Text = "0";
+                txtPaper_a_4D.Text = "0";
+                txtPaper_b_4D.Text = "0";
+            }
+        }
+
+        #endregion
+
+        #region IViewTargetColorspace Members
+        public List<Entity.CPSync1D.PrintStandardType> PrintStandardTypeList { get; set; }
+        public List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
+        public List<Entity.CPSpot.SpotTarget> SpotTargetList { get; set; }
+        public int PrintstandardTypeId { get; set; }
+        public int ProjectTypeId { get; set; }
+        public bool IsSync1DType
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D);
+            }
+        }
+        public bool IsSpotTargetType
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary);
+            }
+        }
+        public int TargetPrintCategory { get; set; }
+        #endregion
+
     }
 }
