@@ -17,7 +17,8 @@ var jsonGrayNPDChartList = [];
 var jsonTVIG7ChartList = [];
 var jsonDTISOTVIChartList = [];
 var jsonDTSpreadChartData_CMYKList = [];
-
+var jsonDTSpreadChartDataList = [];
+var jsonDTSpreadSplineRangeChartDataList=[];
 
 var _Resources = {};
 
@@ -56,6 +57,7 @@ var $divChartG7GrayDeltaL;
 var $divChartG7BlackNPD;
 var $divChartG7GrayNPD;
 var $divChartTVISummaryDotGain;
+var $divChartTVISpread;
 var $divTVI_G7;
 var $divTVI_ISO;
 
@@ -103,6 +105,7 @@ $(document).ready(function () {
     $divChartG7BlackNPD = $("#divChartG7BlackNPD");
     $divChartG7GrayNPD = $("#divChartG7GrayNPD");
     $divChartTVISummaryDotGain = $("#divChartTVISummaryDotGain");
+    $divChartTVISpread = $("#divChartTVISpread");
     $divTVI_G7 = $("#divTVI_G7");
     $divTVI_ISO = $("#divTVI_ISO");
 
@@ -1496,8 +1499,11 @@ function BindTVICharts() {
                 if (response.data != null) {
                     jsonDTISOTVIChartList = response.data.DTISOTVIChartList;
                     jsonDTSpreadChartData_CMYKList = response.data.DTSpreadChartData_CMYKList;
+                    jsonDTSpreadChartDataList = response.data.DTSpreadChartDataList;
+                    jsonDTSpreadSplineRangeChartDataList = response.data.DTSpreadSplineRangeChartDataList;
                     PopulateTVIISOChart();
                     PopulateTVIG7CMYKChart();
+                    PopulateTVISpreadChart();
                 }                
                 //kendo.ui.progress($chartLoader, false);
             },
@@ -2262,7 +2268,8 @@ function PopulateTVIISOChart() {
             }
         },
         categoryAxis: {
-            field: "CmykC"
+            field: "CmykC",
+            justified: true
         },
         chartArea: {
             width: 325,
@@ -2322,7 +2329,8 @@ function PopulateTVIISOChart() {
             }
         },
         categoryAxis: {
-            field: "CmykM"
+            field: "CmykM",
+            justified: true
         },
         chartArea: {
             width: 325,
@@ -2382,7 +2390,8 @@ function PopulateTVIISOChart() {
             }
         },
         categoryAxis: {
-            field: "CmykY"
+            field: "CmykY",
+            justified: true
         },
         chartArea: {
             width: 325,
@@ -2441,7 +2450,8 @@ function PopulateTVIISOChart() {
             }
         },
         categoryAxis: {
-            field: "CmykK"
+            field: "CmykK",
+            justified: true
         },
         chartArea: {
             width: 325,
@@ -2459,9 +2469,9 @@ function PopulateTVIG7CMYKChart() {
 
 
     $divChartTVIISO_CMYK.kendoChart({
-        title: {
-            text: "TVI CMYK Chart"
-        },
+        //title: {
+        //    text: "TVI CMYK Chart"
+        //},
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth",
@@ -2591,6 +2601,191 @@ function PopulateTVIG7CMYKChart() {
         }
     });
 }
+
+function PopulateTVISpreadChart() {    
+
+    var jsonSpread_C = $.grep(jsonDTSpreadChartDataList, function (element) { return (element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.DotGain == 0) || element.CmykC != 0 });
+    var jsonSpread_M = $.grep(jsonDTSpreadChartDataList, function (element) { return (element.CmykM == 0 && element.CmykC == 0 && element.CmykY == 0 && element.DotGain == 0) || element.CmykM != 0 });
+    var jsonSpread_Y = $.grep(jsonDTSpreadChartDataList, function (element) { return (element.CmykY == 0 && element.CmykC == 0 && element.CmykM == 0 && element.DotGain == 0) || element.CmykY != 0 });
+
+    var splineRangeResultList = $.grep(jsonDTSpreadSplineRangeChartDataList, function (element) { return element.UpperLimit != 0 && element.LowerLimit != 0 });
+
+    var obj = Object.assign({}, splineRangeResultList[0]);
+    obj.UpperLimit = null;
+    obj.LowerLimit = null;
+    obj.TVI = 0;
+
+    splineRangeResultList.push(obj);
+
+    obj = Object.assign({}, splineRangeResultList[0])
+    obj.UpperLimit = null;
+    obj.LowerLimit = null;
+    obj.TVI = 100;
+    splineRangeResultList.push(obj);
+
+
+    splineRangeResultList = splineRangeResultList.sort(function (e, e1) { return e.TVI - e1.TVI });
+
+    $.each(jsonSpread_C, function (index, obj) {
+
+        if (obj.CmykC != 0) {
+
+            var Mres = $.grep(jsonSpread_M, function (e) { return e.CmykM == obj.CmykC; });
+            var magValue = Mres[0].DotGain;
+
+            var Yres = $.grep(jsonSpread_Y, function (e) {
+                return e.CmykY == obj.CmykC;
+            });
+
+            var yelValue = Yres[0].DotGain;
+
+            var DiffrentOne = obj.DotGain - magValue;
+            var DiffrentTwo = obj.DotGain - yelValue;
+            var DifferentTitleOne = "C - M";
+            var DifferentTitleTwo = "C - Y";
+            obj.DiffrentOne = Math.abs(DiffrentOne);
+            obj.DiffrentTwo = Math.abs(DiffrentTwo);
+            obj.DifferentTitleOne = DifferentTitleOne;
+            obj.DifferentTitleTwo = DifferentTitleTwo;
+        }
+    });
+
+
+    $.each(jsonSpread_M, function (index, obj) {
+
+        if (obj.CmykM != 0) {
+
+            var Cres = $.grep(jsonSpread_C, function (e) { return e.CmykC == obj.CmykM; });
+            var cynValue = Cres[0].DotGain;
+
+            var Yres = $.grep(jsonSpread_Y, function (e) { return e.CmykY == obj.CmykM; });
+            var yelValue = Yres[0].DotGain;
+
+            var DiffrentOne = obj.DotGain - cynValue;
+            var DiffrentTwo = obj.DotGain - yelValue;
+            var DifferentTitleOne = "M - C";
+            var DifferentTitleTwo = "M - Y";
+            obj.DiffrentOne = Math.abs(DiffrentOne);
+            obj.DiffrentTwo = Math.abs(DiffrentTwo);
+            obj.DifferentTitleOne = DifferentTitleOne;
+            obj.DifferentTitleTwo = DifferentTitleTwo;
+        }
+    });
+
+    $.each(jsonSpread_Y, function (index, obj) {
+
+        if (obj.CmykY != 0) {
+
+            var Cres = $.grep(jsonSpread_C, function (e) { return e.CmykC == obj.CmykY; });
+            var cynValue = Cres[0].DotGain;
+
+            var Mres = $.grep(jsonSpread_M, function (e) { return e.CmykM == obj.CmykY; });
+            var magValue = Mres[0].DotGain;
+
+            var DiffrentOne = obj.DotGain - cynValue;
+            var DiffrentTwo = obj.DotGain - magValue;
+            var DifferentTitleOne = "Y - C";
+            var DifferentTitleTwo = "Y - M";
+            obj.DiffrentOne = Math.abs(DiffrentOne);
+            obj.DiffrentTwo = Math.abs(DiffrentTwo);
+            obj.DifferentTitleOne = DifferentTitleOne;
+            obj.DifferentTitleTwo = DifferentTitleTwo;
+        }
+    });
+
+
+    $divChartTVISpread.kendoChart({
+        //title: {
+        //    text: "Cyan"
+        //},
+        legend: {
+            position: "top",
+            //labels: {
+            //    template: "Name: #= text #"
+            //}
+        },
+        //dataSource: {
+        //    data: jsonSpread_C
+        //},
+        series: [
+
+            {
+                data: jsonSpread_C,
+                type: "line",
+                field: "DotGain",
+                color: "Cyan",
+                name: "C",
+                markers: { background: "Cyan" },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
+                }
+            },
+
+            {
+                data: jsonSpread_M,
+                type: "line",
+                field: "DotGain",
+                color: "Magenta",
+                name: "M",
+                markers: { background: "Magenta" },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Magenta #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
+                }
+            },
+
+            {
+                data: jsonSpread_Y,
+                type: "line",
+                field: "DotGain",
+                color: "Yellow",
+                name: "Y",
+                markers: { background: "Yellow"  },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>Yellow #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
+                }
+            },
+            {
+                data: splineRangeResultList,
+                type: "rangeArea",
+                fromField: "LowerLimit",
+                toField: "UpperLimit",
+                categoryField: "TVI",
+                color: "Green",
+                line: {
+                    style: "smooth",
+                    color: "green",
+                    width: 1,
+                },
+                highlight: {
+                    visible: false,
+                }
+            },
+        ],
+        valueAxis: {
+            majorUnit: 5
+        },
+        seriesDefaults: {
+            line: {
+                style: "smooth"
+            }
+        },
+        categoryAxis: {
+            //field: "CmykC"
+            justified: true,
+            categories: [0, 25, 50, 75, 100],
+            //min: 0,
+            max: 100,
+        },
+        chartArea: {
+            width: 650,
+            height: 350
+        },
+    });
+}
+
 
 function createColumn(e, rect, color) {
     var origin = rect.origin;

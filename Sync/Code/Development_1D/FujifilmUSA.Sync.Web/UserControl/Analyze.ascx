@@ -2625,27 +2625,27 @@
                                                                     </table>
                                                                     <br />
                                                                     <table style="">
-                                                            <tr>
-                                                                <td>
-                                                                    <div id="divChartTVIISO_CYAN">
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div id="divChartTVIISO_Magenta">
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div id="divChartTVIISO_Yellow">
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div id="divChartTVIISO_Black">
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div id="divChartTVIISO_CYAN">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div id="divChartTVIISO_Magenta">
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div id="divChartTVIISO_Yellow">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div id="divChartTVIISO_Black">
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
                                                                 </td>
                                                             </tr>
                                                             <tr id="trSpread" style="display: none">
@@ -2767,6 +2767,23 @@
                                                                             </table>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
+                                                                    <br />
+                                                                    <div id="divTVI_Spread">
+                                                                        <table cellpadding="0" cellspacing="0" width="650px">
+                                                                            <tr>
+                                                                                <td valign="top" style="width: 59%">
+                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+
+                                                                                        <tr>
+                                                                                            <td valign="top">
+                                                                                                <div id="divChartTVISpread"></div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                                             <tr id="trCMYK" style="display: none">
@@ -2854,8 +2871,8 @@
 
 
                                                         </table>
-                                                   
-                                                        
+
+
                                                     </ContentTemplate>
                                                     <Triggers>
                                                         <asp:PostBackTrigger ControlID="chartAnalyze" />
