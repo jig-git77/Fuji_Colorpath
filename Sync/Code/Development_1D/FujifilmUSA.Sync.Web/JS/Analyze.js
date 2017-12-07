@@ -1521,7 +1521,7 @@ function BindTVICharts() {
 
         //kendo.ui.progress($chartLoader, true);
         $.ajax({
-            url: SERVICE_BASE_URL + 'api/Chart/GenerateISOTVIChart',
+            url: SERVICE_BASE_URL + 'api/Chart/GenerateTVIChart',
             data: apiParameters,
             type: 'GET',
             dataType: 'json',
@@ -1529,12 +1529,12 @@ function BindTVICharts() {
                 'Accept-Language': $CurrentCulture
             },
             success: function (response) {
-                
+
                 if (response.data != null) {
-                    
+
                     jsonTVIG7ChartList = response.data.DTTVIChartList;
                     PopulateTVIG7Chart();
-                }                
+                }
 
                 //kendo.ui.progress($chartLoader, false);
             },
@@ -2015,24 +2015,25 @@ function PopulateTVIG7Chart() {
                 },
             },
 
-        ],
+        ],        
         xAxis: {
             min: 0,
             max: 100,
             majorUnit: 25,
             axisCrossingValues: [0, 100],
             labels: {
-                format: "{0}"
+                format: "{0}",
+                padding: { top: 0 }
             },
-            title: {
-                text: ""
-            }
+            //title: {
+            //    text: ""
+            //}
         },
         yAxis: {
-            min: -5,
-            max: 25,
-            majorUnit: 5,
-            axisCrossingValues: [-5, 25],
+           // min: -5,
+           // max: 25,
+            //majorUnit: 5,
+           // axisCrossingValues: [-5, 25],
             labels: {
                 format: "{0}"
             },
@@ -2043,8 +2044,19 @@ function PopulateTVIG7Chart() {
         },
         plotArea: {
             background: "lightgray"
-        }
+        },
     });
+
+    //load the chart again to adjust the xAxis lables according to negative values
+    var chart = $divChartTVISummaryDotGain.data("kendoChart");
+    var yArray = chart._plotArea.axisY.children.map(r => parseInt(r.content));
+    var minValue = Math.abs(Math.min.apply(Math, yArray));
+    if (minValue > 0) {
+        var kendoOptions = chart.options;
+        kendoOptions.xAxis.labels.padding.top = (minValue * 10);
+        chart.options = kendoOptions.options;
+        chart.redraw();
+    }    
 }
 
 function PopulateTVIISOChart() {
@@ -2572,10 +2584,10 @@ function PopulateTVIG7CMYKChart() {
             },
         ],
         xAxis: {
-            min: 0,
-            max: 100,
+            //min: 0,
+            //max: 100,
             majorUnit: 25,
-            axisCrossingValues: [0, 100],
+            //axisCrossingValues: [0, 100],
             labels: {
                 format: "{0}"
             },
@@ -2773,11 +2785,10 @@ function PopulateTVISpreadChart() {
             }
         },
         categoryAxis: {
-            //field: "CmykC"
             justified: true,
             categories: [0, 25, 50, 75, 100],
             //min: 0,
-            max: 100,
+            //max: 100,
         },
         chartArea: {
             width: 650,
