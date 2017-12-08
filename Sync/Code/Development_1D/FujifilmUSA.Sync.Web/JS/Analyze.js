@@ -70,6 +70,21 @@ var $tblDensityChart
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
 
+var gradient = new drawing.LinearGradient({
+    start: [0, 0], // Bottom left
+    end: [0, 1],   // Top left
+    stops: [{
+        offset: 0,
+        color: "#000",
+        opacity: 0.4
+    }, {
+        offset: 1,
+        color: "#000",
+        opacity: 0
+    }]
+});
+
+
 $(document).ready(function () {
 
     ////*********** HTML Element Declarations ***********////
@@ -2017,6 +2032,7 @@ function PopulateTVIG7Chart() {
 
         ],        
         xAxis: {
+            name: "xAxis",
             min: 0,
             max: 100,
             majorUnit: 25,
@@ -2030,6 +2046,7 @@ function PopulateTVIG7Chart() {
             //}
         },
         yAxis: {
+            name: "yAxis",
            // min: -5,
            // max: 25,
             //majorUnit: 5,
@@ -2045,6 +2062,7 @@ function PopulateTVIG7Chart() {
         plotArea: {
             background: "lightgray"
         },
+        
     });
 
     //load the chart again to adjust the xAxis lables according to negative values
@@ -2481,6 +2499,7 @@ function PopulateTVIG7CMYKChart() {
 
 
     $divChartTVIISO_CMYK.kendoChart({
+        renderAs:"canvas",
         //title: {
         //    text: "TVI CMYK Chart"
         //},
@@ -2584,8 +2603,9 @@ function PopulateTVIG7CMYKChart() {
             },
         ],
         xAxis: {
+            name: "xAxis",
             //min: 0,
-            //max: 100,
+            max: 100,
             majorUnit: 25,
             //axisCrossingValues: [0, 100],
             labels: {
@@ -2596,6 +2616,7 @@ function PopulateTVIG7CMYKChart() {
             }
         },
         yAxis: {
+            name: "yAxis",
             min: 0,
             max: 20,
             majorUnit: 5,
@@ -2608,8 +2629,32 @@ function PopulateTVIG7CMYKChart() {
             width: 650,
             height: 400
         },
-        plotArea: {
-            background: "lightgray"
+        //plotArea: {
+        //    background: "lightgray"
+        //},
+        render: function (e) {
+            var chart = e.sender;
+            var xAxis = chart.getAxis("xAxis");
+            var yAxis = chart.getAxis("yAxis");
+            var xAxisArray = xAxis._axis.children.map(r => parseInt(r.content));
+            var yAxisArray = yAxis._axis.children.map(r => parseInt(r.content));
+            var xSlot = xAxis.slot(Math.abs(Math.min.apply(Math, xAxisArray)), Math.abs(Math.max.apply(Math, xAxisArray)));
+            var ySlot = yAxis.slot(Math.abs(Math.min.apply(Math, yAxisArray)), Math.abs(Math.max.apply(Math, yAxisArray)));
+
+            var rect = new geometry.Rect([
+                // Origin X, Y
+                xSlot.origin.x, ySlot.origin.y
+            ], [
+                    // Width, height
+                    xSlot.width(), ySlot.height()
+                ]);
+
+            var path = drawing.Path.fromRect(rect, {
+                stroke: null,
+                fill: gradient
+            });
+
+            chart.surface.draw(path);
         }
     });
 }
@@ -2793,7 +2838,7 @@ function PopulateTVISpreadChart() {
         chartArea: {
             width: 650,
             height: 350
-        },
+        }
     });
 }
 
