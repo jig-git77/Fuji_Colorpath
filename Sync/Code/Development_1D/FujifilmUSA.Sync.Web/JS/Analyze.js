@@ -18,7 +18,7 @@ var jsonTVIG7ChartList = [];
 var jsonDTISOTVIChartList = [];
 var jsonDTSpreadChartData_CMYKList = [];
 var jsonDTSpreadChartDataList = [];
-var jsonDTSpreadSplineRangeChartDataList=[];
+var jsonDTSpreadSplineRangeChartDataList = [];
 
 var _Resources = {};
 
@@ -67,16 +67,76 @@ var $divChartTVIISO_Yellow;
 var $divChartTVIISO_Black;
 var $divChartTVIISO_CMYK;
 var $tblDensityChart
+
+//********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
 
-var gradient = new drawing.LinearGradient({
+//********** Gradient kendo objects *********//
+
+var gradientGray = new drawing.LinearGradient({
     start: [0, 0], // Bottom left
     end: [0, 1],   // Top left
     stops: [{
         offset: 0,
         color: "#000",
+        opacity: 0.2
+    }, {
+        offset: 1,
+        color: "#000",
+        opacity: 0
+    }]
+});
+
+var gradientRedGreen = new drawing.LinearGradient({
+    start: [0, 1], // Bottom left
+    end: [1, 1],   // Top left
+    stops: [{
+        offset: 0,
+        color: "green",
         opacity: 0.4
+    }, {
+        offset: 1,
+        color: "red",
+        opacity: 0.2
+    }]
+});
+
+var gradientPinkGreen = new drawing.LinearGradient({
+    start: [0, 0], // Bottom left
+    end: [0, 1],   // Top left
+    stops: [{
+        offset: 0,
+        color: "#FF7FFF",
+        opacity: 0.4
+    }, {
+        offset: 1,
+        color: "green",
+        opacity: 0.5
+    }]
+});
+
+var gradientYellowBlue = new drawing.LinearGradient({
+    start: [0, 0], // Bottom left
+    end: [0, 1],   // Top left
+    stops: [{
+        offset: 0,
+        color: "yellow",
+        opacity: 0.5
+    }, {
+        offset: 1,
+        color: "blue",
+        opacity: 0.5
+    }]
+});
+
+var gradientGray2 = new drawing.LinearGradient({
+    start: [1, 1], // Bottom left
+    end: [1, 0],   // Top left
+    stops: [{
+        offset: 0,
+        color: "#000",
+        opacity: 0.3
     }, {
         offset: 1,
         color: "#000",
@@ -200,6 +260,7 @@ $(document).ready(function () {
         kendoOptions.chartArea.height = 480;
 
         $chartTargetVersusActualABLarge.kendoChart(kendoOptions);
+        //$chartTargetVersusActualABLarge.render = renderChartWithBackground;
 
         $chartTargetVersusActualABLargeArea.kendoWindow({
             width: "600px",
@@ -408,6 +469,7 @@ function BindChartTargetVersusActualAB() {
 
 
     $chart_TargetVersusActualAB.kendoChart({
+        renderAs: "canvas",
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -431,6 +493,7 @@ function BindChartTargetVersusActualAB() {
             targetPAPERSeriseObj
         ],
         xAxis: {
+            name: "xAxis",
             min: -100,
             max: 100,
             majorUnit: 20,
@@ -443,6 +506,7 @@ function BindChartTargetVersusActualAB() {
             }
         },
         yAxis: {
+            name: "yAxis",
             min: -100,
             max: 100,
             step: 20,
@@ -460,8 +524,12 @@ function BindChartTargetVersusActualAB() {
             height: 250
         },
         plotArea: {
-            background: "lightgray"
-        }
+            border: {
+                width: 2,
+                color: "black"
+            }
+        },
+        render: renderChartWithBackground
     });
 }
 
@@ -534,6 +602,7 @@ function BindChartGamutABComparision() {
 
 
     $chart_Gamut_ABComparison.kendoChart({
+        renderAs:"canvas",
         seriesDefaults: {
             type: "scatterLine"
         },
@@ -576,6 +645,7 @@ function BindChartGamutABComparision() {
             targetBLUEPoint
         ],
         xAxis: {
+            name: "xAxis",
             min: -100,
             max: 100,
             majorUnit: 20,
@@ -588,6 +658,7 @@ function BindChartGamutABComparision() {
             }
         },
         yAxis: {
+            name: "yAxis",
             min: -100,
             max: 100,
             step: 20,
@@ -602,8 +673,12 @@ function BindChartGamutABComparision() {
             height: 250,
         },
         plotArea: {
-            background: "lightgray"
-        }
+            border: {
+                width: 2,
+                color: "black"
+            }
+        },
+        render: renderChartWithBackground
     });
 }
 
@@ -736,6 +811,7 @@ function BindChartLComparision() {
     });
 
     $chart_L_Comaparision.kendoChart({
+        renderAs:"canvas",
         seriesDefaults: {
             type: "scatter",
         },
@@ -759,6 +835,7 @@ function BindChartLComparision() {
             , paperLComparisionPointSmall
         ],
         xAxis: {
+            name: "xAxis",
             min: -100,
             max: 100,
             majorUnit: 20,
@@ -771,6 +848,7 @@ function BindChartLComparision() {
             }
         },
         yAxis: {
+            name: "yAxis",
             min: -15,
             max: 15,
             majorUnit: 15,
@@ -787,8 +865,12 @@ function BindChartLComparision() {
             height: 80
         },
         plotArea: {
-            background: "lightgray"
-        }
+            border: {
+                width: 2,
+                color: "black"
+            }
+        },
+        render: renderChartWithBackground
     });
 }
 
@@ -797,6 +879,7 @@ function BindChartLGrayBalance() {
 
 
     $chart_L_BalanceChart.kendoChart({
+        renderAs: "canvas",
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -825,6 +908,7 @@ function BindChartLGrayBalance() {
             }
         }],
         xAxis: {
+            name: "xAxis",
             min: 0,
             max: 100,
             majorUnit: 25,
@@ -837,6 +921,7 @@ function BindChartLGrayBalance() {
             }
         },
         yAxis: {
+            name: "yAxis",
             min: 0,
             max: 100,
             step: 25,
@@ -851,11 +936,16 @@ function BindChartLGrayBalance() {
             height: 150
         },
         plotArea: {
-            background: "lightgray"
-        }
+            border: {
+                width: 2,
+                color: "black"
+            }
+        },
+        render: renderChartWithBackground
     });
 
     $chart_A_BalanceChart.kendoChart({
+        renderAs:"canvas",
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -884,6 +974,7 @@ function BindChartLGrayBalance() {
             }
         }],
         xAxis: {
+            name: "xAxis",
             min: 0,
             max: 100,
             majorUnit: 25,
@@ -893,6 +984,7 @@ function BindChartLGrayBalance() {
             },
         },
         yAxis: {
+            name: "yAxis",
             min: -6,
             max: 6,
             step: 2,
@@ -907,11 +999,16 @@ function BindChartLGrayBalance() {
             height: 150
         },
         plotArea: {
-            background: "lightgray"
-        }
+            border: {
+                width: 2,
+                color: "black"
+            }
+        },
+        render: renderChartWithBackground
     });
 
     $chart_B_BalanceChart.kendoChart({
+        renderAs:"canvas",
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -942,6 +1039,7 @@ function BindChartLGrayBalance() {
             }
         }],
         xAxis: {
+            name: "xAxis",
             min: 0,
             max: 100,
             majorUnit: 25,
@@ -954,6 +1052,7 @@ function BindChartLGrayBalance() {
             }
         },
         yAxis: {
+            name: "yAxis",
             min: -6,
             max: 6,
             step: 2,
@@ -971,8 +1070,12 @@ function BindChartLGrayBalance() {
             height: 150
         },
         plotArea: {
-            background: "lightgray"
-        }
+            border: {
+                width: 2,
+                color: "black"
+            }
+        },
+        render: renderChartWithBackground
     });
 }
 
@@ -1499,7 +1602,7 @@ function BindTVICharts() {
         $divTVI_G7.css('display', 'none');
         $divTVI_ISO.css('display', 'block');
 
-        
+
         //kendo.ui.progress($chartLoader, true);
         $.ajax({
             url: SERVICE_BASE_URL + 'api/Chart/GenerateISOTVIChart',
@@ -1519,7 +1622,7 @@ function BindTVICharts() {
                     PopulateTVIISOChart();
                     PopulateTVIG7CMYKChart();
                     PopulateTVISpreadChart();
-                }                
+                }
                 //kendo.ui.progress($chartLoader, false);
             },
             error: function (xhr, errorType, exception) {
@@ -1529,10 +1632,10 @@ function BindTVICharts() {
         });
     }
 
-    
+
     if ($hdnValidationType == 1) {
         $divTVI_G7.css('display', 'block');
-        $divTVI_ISO.css('display', 'none');       
+        $divTVI_ISO.css('display', 'none');
 
         //kendo.ui.progress($chartLoader, true);
         $.ajax({
@@ -1558,9 +1661,9 @@ function BindTVICharts() {
                 kendo.ui.progress($chartLoader, false);
             }
         });
-        
+
     }
-    
+
 
 }
 
@@ -1572,6 +1675,7 @@ function GenerateG7Charts() {
         //title: {
         //    text: "Gray Balance ΔCh"
         //},
+        renderAs: "canvas",
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -1611,6 +1715,7 @@ function GenerateG7Charts() {
         }
         ],
         xAxis: {
+            name: "xAxis",
             min: 0,
             max: 100,
             majorUnit: 25,
@@ -1623,6 +1728,7 @@ function GenerateG7Charts() {
             }
         },
         yAxis: {
+            name: "yAxis",
             min: 0,
             max: 6,
             majorUnit: 2,
@@ -1636,14 +1742,19 @@ function GenerateG7Charts() {
             height: 120
         },
         plotArea: {
-            background: "lightgray"
-        }
+            border: {
+                width: 2,
+                color: "black"
+            }
+        },
+        render: renderChartWithBackground
     });
 
     $divChartG7BlackDeltaL.kendoChart({
         //title: {
         //    text: "Black ΔL"
         //},
+        renderAs: "canvas",
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -1683,6 +1794,7 @@ function GenerateG7Charts() {
         }
         ],
         xAxis: {
+            name: "xAxis",
             min: 0,
             max: 100,
             majorUnit: 25,
@@ -1695,6 +1807,7 @@ function GenerateG7Charts() {
             }
         },
         yAxis: {
+            name: "yAxis",
             min: 0,
             max: 6,
             majorUnit: 2,
@@ -1708,14 +1821,19 @@ function GenerateG7Charts() {
             height: 120
         },
         plotArea: {
-            background: "lightgray"
-        }
+            border: {
+                width: 2,
+                color: "black"
+            }
+        },
+        render: renderChartWithBackground
     });
 
     $divChartG7GrayDeltaL.kendoChart({
         //title: {
         //    text: "Gray ΔL"
         //},
+        renderAs: "canvas",
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -1758,6 +1876,7 @@ function GenerateG7Charts() {
         }
         ],
         xAxis: {
+            name: "xAxis",
             min: 0,
             max: 100,
             majorUnit: 25,
@@ -1770,6 +1889,7 @@ function GenerateG7Charts() {
             }
         },
         yAxis: {
+            name: "yAxis",
             min: 0,
             max: 6,
             majorUnit: 2,
@@ -1783,14 +1903,19 @@ function GenerateG7Charts() {
             height: 120
         },
         plotArea: {
-            background: "lightgray"
-        }
+            border: {
+                width: 2,
+                color: "black"
+            }
+        },
+        render: renderChartWithBackground
     });
 
     $divChartG7BlackNPD.kendoChart({
         //title: {
         //    text: "Black NPD"
         //},
+        renderAs: "canvas",
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -1828,6 +1953,7 @@ function GenerateG7Charts() {
             }
         ],
         xAxis: {
+            name: "xAxis",
             min: 0,
             max: 100,
             majorUnit: 25,
@@ -1840,6 +1966,7 @@ function GenerateG7Charts() {
             }
         },
         yAxis: {
+            name: "yAxis",
             min: 0,
             max: 2,
             majorUnit: 0.5,
@@ -1853,14 +1980,19 @@ function GenerateG7Charts() {
             height: 250
         },
         plotArea: {
-            background: "lightgray"
-        }
+            border: {
+                width: 2,
+                color: "black"
+            }
+        },
+        render: renderChartWithBackground
     });
 
     $divChartG7GrayNPD.kendoChart({
         //title: {
         //    text: "Gray NPD"
         //},
+        renderAs: "canvas",
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -1898,6 +2030,7 @@ function GenerateG7Charts() {
             }
         ],
         xAxis: {
+            name: "xAxis",
             min: 0,
             max: 100,
             majorUnit: 25,
@@ -1910,6 +2043,7 @@ function GenerateG7Charts() {
             }
         },
         yAxis: {
+            name: "yAxis",
             min: 0,
             max: 2,
             majorUnit: 0.5,
@@ -1923,8 +2057,12 @@ function GenerateG7Charts() {
             height: 250
         },
         plotArea: {
-            background: "lightgray"
-        }
+            border: {
+                width: 2,
+                color: "black"
+            }
+        },
+        render: renderChartWithBackground
     });
 }
 
@@ -2030,7 +2168,7 @@ function PopulateTVIG7Chart() {
                 },
             },
 
-        ],        
+        ],
         xAxis: {
             name: "xAxis",
             min: 0,
@@ -2047,10 +2185,10 @@ function PopulateTVIG7Chart() {
         },
         yAxis: {
             name: "yAxis",
-           // min: -5,
-           // max: 25,
+            // min: -5,
+            // max: 25,
             //majorUnit: 5,
-           // axisCrossingValues: [-5, 25],
+            // axisCrossingValues: [-5, 25],
             labels: {
                 format: "{0}"
             },
@@ -2060,9 +2198,12 @@ function PopulateTVIG7Chart() {
             height: 400
         },
         plotArea: {
-            background: "lightgray"
+            border: {
+                width: 2,
+                color: "black"
+            }
         },
-        
+        render: renderChartWithBackground
     });
 
     //load the chart again to adjust the xAxis lables according to negative values
@@ -2074,7 +2215,7 @@ function PopulateTVIG7Chart() {
         kendoOptions.xAxis.labels.padding.top = (minValue * 10);
         chart.options = kendoOptions.options;
         chart.redraw();
-    }    
+    }
 }
 
 function PopulateTVIISOChart() {
@@ -2246,7 +2387,7 @@ function PopulateTVIISOChart() {
         });
         //console.log(isoBlackList);
     }
-    
+
     $divChartTVIISO_CYAN.kendoChart({
         title: {
             text: "Cyan"
@@ -2499,7 +2640,7 @@ function PopulateTVIG7CMYKChart() {
 
 
     $divChartTVIISO_CMYK.kendoChart({
-        renderAs:"canvas",
+        renderAs: "canvas",
         //title: {
         //    text: "TVI CMYK Chart"
         //},
@@ -2629,37 +2770,41 @@ function PopulateTVIG7CMYKChart() {
             width: 650,
             height: 400
         },
-        //plotArea: {
-        //    background: "lightgray"
-        //},
-        render: function (e) {
-            var chart = e.sender;
-            var xAxis = chart.getAxis("xAxis");
-            var yAxis = chart.getAxis("yAxis");
-            var xAxisArray = xAxis._axis.children.map(r => parseInt(r.content));
-            var yAxisArray = yAxis._axis.children.map(r => parseInt(r.content));
-            var xSlot = xAxis.slot(Math.abs(Math.min.apply(Math, xAxisArray)), Math.abs(Math.max.apply(Math, xAxisArray)));
-            var ySlot = yAxis.slot(Math.abs(Math.min.apply(Math, yAxisArray)), Math.abs(Math.max.apply(Math, yAxisArray)));
+        plotArea: {
+            border: {
+                width: 1,
+                color: "black"
+            }
+        },
+        render: renderChartWithBackground
+        //render: function (e) {
+        //    var chart = e.sender;
+        //    var xAxis = chart.getAxis("xAxis");
+        //    var yAxis = chart.getAxis("yAxis");
+        //    var xAxisArray = xAxis._axis.children.map(r => parseInt(r.content));
+        //    var yAxisArray = yAxis._axis.children.map(r => parseInt(r.content));
+        //    var xSlot = xAxis.slot(Math.abs(Math.min.apply(Math, xAxisArray)), Math.abs(Math.max.apply(Math, xAxisArray)));
+        //    var ySlot = yAxis.slot(Math.abs(Math.min.apply(Math, yAxisArray)), Math.abs(Math.max.apply(Math, yAxisArray)));
 
-            var rect = new geometry.Rect([
-                // Origin X, Y
-                xSlot.origin.x, ySlot.origin.y
-            ], [
-                    // Width, height
-                    xSlot.width(), ySlot.height()
-                ]);
+        //    var rect = new geometry.Rect([
+        //        // Origin X, Y
+        //        xSlot.origin.x, ySlot.origin.y
+        //    ], [
+        //            // Width, height
+        //            xSlot.width(), ySlot.height()
+        //        ]);
 
-            var path = drawing.Path.fromRect(rect, {
-                stroke: null,
-                fill: gradient
-            });
+        //    var path = drawing.Path.fromRect(rect, {
+        //        stroke: null,
+        //        fill: gradientGray
+        //    });
 
-            chart.surface.draw(path);
-        }
+        //    chart.surface.draw(path);
+        //}
     });
 }
 
-function PopulateTVISpreadChart() {    
+function PopulateTVISpreadChart() {
 
     var jsonSpread_C = $.grep(jsonDTSpreadChartDataList, function (element) { return (element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.DotGain == 0) || element.CmykC != 0 });
     var jsonSpread_M = $.grep(jsonDTSpreadChartDataList, function (element) { return (element.CmykM == 0 && element.CmykC == 0 && element.CmykY == 0 && element.DotGain == 0) || element.CmykM != 0 });
@@ -2798,7 +2943,7 @@ function PopulateTVISpreadChart() {
                 field: "DotGain",
                 color: "Yellow",
                 name: "Y",
-                markers: { background: "Yellow"  },
+                markers: { background: "Yellow" },
                 tooltip: {
                     visible: true,
                     template: '<table><tr><td><center><b>Yellow #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
@@ -2898,6 +3043,71 @@ function createColumn(e, rect, color) {
     var group = new drawing.Group();
     group.append(path, topArc);
     return group;
+}
+
+function renderChartWithBackground(e) {
+    var xSlot = {};
+    var ySlot = {};
+    var path = {};
+    var chart = e.sender;
+    var xAxis = chart.getAxis("xAxis");
+    var yAxis = chart.getAxis("yAxis");
+    var xAxisArray = xAxis._axis.children.map(r => parseInt(r.content));
+    var yAxisArray = yAxis._axis.children.map(r => parseInt(r.content));
+
+
+    if (chart.element[0].id == "kendoChartTargetVersusActualAB" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparison" || chart.element[0].id == "kendoChartABalanceChart" || chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartLComaparision") {
+        xSlot = xAxis.slot(Math.min.apply(Math, xAxisArray), Math.max.apply(Math, xAxisArray));
+        ySlot = yAxis.slot(Math.min.apply(Math, yAxisArray), Math.max.apply(Math, yAxisArray));
+
+
+    }
+    else {
+        xSlot = xAxis.slot(Math.abs(Math.min.apply(Math, xAxisArray)), Math.abs(Math.max.apply(Math, xAxisArray)));
+        ySlot = yAxis.slot(Math.abs(Math.min.apply(Math, yAxisArray)), Math.abs(Math.max.apply(Math, yAxisArray)));
+    }
+
+
+    //set the rectangle area on chart
+    var rect = new geometry.Rect([
+        xSlot.origin.x, ySlot.origin.y
+    ], [
+            xSlot.width(), ySlot.height()
+        ]);
+
+
+    if (chart.element[0].id == "kendoChartTargetVersusActualAB" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparison") {
+        path = drawing.Path.fromRect(rect, {
+            stroke: null,
+            fill: gradientRedGreen
+        });
+    }
+    else if (chart.element[0].id == "kendoChartABalanceChart") {
+        path = drawing.Path.fromRect(rect, {
+            stroke: null,
+            fill: gradientPinkGreen
+        });
+    }
+    else if (chart.element[0].id == "kendoChartLComaparision" || chart.element[0].id == " kendoChartLBalanceChart") {
+        path = drawing.Path.fromRect(rect, {
+            stroke: null,
+            fill: gradientGray2
+        });
+    }
+    else if (chart.element[0].id == "kendoChartBBalanceChart") {
+        path = drawing.Path.fromRect(rect, {
+            stroke: null,
+            fill: gradientYellowBlue
+        });
+    }
+    else {
+        path = drawing.Path.fromRect(rect, {
+            stroke: null,
+            fill: gradientGray
+        });
+    }
+
+    chart.surface.draw(path);
 }
 
 //function createColumn(rect, color) {
