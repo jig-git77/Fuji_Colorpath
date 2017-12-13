@@ -106,9 +106,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
                     //------If 4D project then pass NewPaperScaling LAB values--------//
                     SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling4D.Checked;
-                    SessionManager.Instance.CurrentProject.NewPaper_L = Convert.ToDecimal(txtPaper_L_4D.Text);
-                    SessionManager.Instance.CurrentProject.NewPaper_a = Convert.ToDecimal(txtPaper_a_4D.Text);
-                    SessionManager.Instance.CurrentProject.NewPaper_b = Convert.ToDecimal(txtPaper_b_4D.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(txtPaper_L_4D_White.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(txtPaper_a_4D_White.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(txtPaper_b_4D_White.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_Black_L = Convert.ToDecimal(txtPaper_L_4D_Black.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_Black_a = Convert.ToDecimal(txtPaper_a_4D_Black.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_Black_b = Convert.ToDecimal(txtPaper_b_4D_Black.Text);
                 }
                 else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
                     SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.InkOptimization;
@@ -221,15 +224,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 chk_IsPaperScaling4D.Checked = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
                 if (chk_IsPaperScaling4D.Checked)
-                    Panel_PaperLAB4D.Enabled = true;
-                txtPaper_L_4D.Text = SessionManager.Instance.CurrentProject.NewPaper_L.ToString();
-                txtPaper_a_4D.Text = SessionManager.Instance.CurrentProject.NewPaper_a.ToString();
-                txtPaper_b_4D.Text = SessionManager.Instance.CurrentProject.NewPaper_b.ToString();
+                {
+                    Panel_PaperLAB4D_White.Enabled = true;
+                    Panel_PaperLAB4D_Black.Enabled = true;
+                }
+                txtPaper_L_4D_White.Text = SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString();
+                txtPaper_a_4D_White.Text = SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString();
+                txtPaper_b_4D_White.Text = SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString();
+                txtPaper_L_4D_Black.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString();
+                txtPaper_a_4D_Black.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString();
+                txtPaper_b_4D_Black.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString();
 
                 if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Paper Scaling L,a,b selection is disable
                 {
                     chk_IsPaperScaling4D.Enabled = false;
-                    Panel_PaperLAB4D.Enabled = false;
+                    Panel_PaperLAB4D_White.Enabled = false;
+                    Panel_PaperLAB4D_Black.Enabled = false;
                 }
             }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
@@ -420,12 +430,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void chk_IsPaperScaling4D_CheckedChanged(object sender, EventArgs e)
         {
-            Panel_PaperLAB4D.Enabled = chk_IsPaperScaling4D.Checked;
+            Panel_PaperLAB4D_White.Enabled = Panel_PaperLAB4D_Black.Enabled = chk_IsPaperScaling4D.Checked;
             if (!chk_IsPaperScaling4D.Checked)
             {
-                txtPaper_L_4D.Text = "0";
-                txtPaper_a_4D.Text = "0";
-                txtPaper_b_4D.Text = "0";
+                txtPaper_L_4D_White.Text = "0";
+                txtPaper_a_4D_White.Text = "0";
+                txtPaper_b_4D_White.Text = "0";
+                txtPaper_L_4D_Black.Text = "0";
+                txtPaper_a_4D_Black.Text = "0";
+                txtPaper_b_4D_Black.Text = "0";
             }
         }
 
