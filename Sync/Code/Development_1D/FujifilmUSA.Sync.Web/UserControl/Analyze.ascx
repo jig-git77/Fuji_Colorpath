@@ -1692,14 +1692,14 @@
                                                                         <div id="divChartG7GrayDeltaL"></div>
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
+                                                                <%--<tr>
                                                                     <td>
                                                                         <span style="color: Blue; font-weight: bolder;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =====</span>
                                                                         Weighted&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
                                             <span style="font-weight: bolder;">=====</span>
                                                                         Non-Weighted
                                                                     </td>
-                                                                </tr>
+                                                                </tr>--%>
                                                             </table>
                                                         </td>
                                                         <td style="width: 2%;"></td>
