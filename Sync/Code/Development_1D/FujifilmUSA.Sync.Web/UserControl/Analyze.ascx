@@ -1034,6 +1034,77 @@
 
                                                 <div>
                                                     <table border="1" cellpadding="0" cellspacing="0" width="100%" style="background-color: White;">
+                                                            <tr>
+                                                                <td style="width: 50%;" valign="top" class="CHARTTABLE">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tr>
+                                                                            <td class="green-title">&nbsp; &Delta;<asp:Label ID="Label6" runat="server"></asp:Label>
+                                                                                <asp:Localize ID="Localize3" Text=" Primary Patches" runat="server"
+                                                                                    meta:resourcekey="LocalizeResource1"></asp:Localize>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="width: 60%; vertical-align: bottom;" id="TD9" runat="server">
+                                                                                <div id="divChartInkPaperABComparision"></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+
+                                                                <td style="width: 50%;" valign="top" class="CHARTTABLE">
+                                                                    <table id="tblDensityChart"   border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tr>
+                                                                            <td class="green-title">&nbsp;
+                                                                                <asp:Localize Text="Density" runat="server" ID="Localize18"
+                                                                                    meta:resourcekey="locDensityResource1"></asp:Localize>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                             <div id="divChartInkPaperDansityChart"></div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+                                                                        <tr>
+                                                                            <td class="green-title">&nbsp; &#916;
+                                                                                <asp:Localize Text="Paper L* a* b*" runat="server" ID="Localize19"
+                                                                                    meta:resourcekey="locPaperResource1"></asp:Localize>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td align="center" >
+                                                                                            <div id="divChartInkPaperPaperLab1"></div>
+                                                                                        </td>
+
+                                                                                        <td align="center">
+                                                                                           <div id="divChartInkPaperPaperLab2"></div> 
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    <%--<table border="1" cellpadding="0" cellspacing="0" width="100%" style="background-color: White;">
                                                         <tr>
                                                             <td style="width: 50%;" valign="top" class="CHARTTABLE">
                                                                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -1045,18 +1116,14 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td valign="top">
-                                                                            <div id="divChartInkPaperABComparision"></div>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
-
-
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 50%;" valign="top" class="CHARTTABLE">
-                                                                <%-- <div id="Div_Density" runat="server" visible="false">--%>
-                                                                <table id="tblDensityChart" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                     <tr>
                                                                         <td colspan="2" class="green-title">&nbsp;
                                                                                 <asp:Localize Text="Density" runat="server" ID="Localize10"
@@ -1069,14 +1136,12 @@
 
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <div id="divChartInkPaperDansityChart"></div>
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
-                                                                <%-- </div>--%>
                                                                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 
                                                                     <tr>
@@ -1090,7 +1155,6 @@
                                                                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <div id="divChartInkPaperPaperLab1"></div>
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
@@ -1099,7 +1163,6 @@
                                                                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                                 <tr>
                                                                                     <td>
-                                                                                        <div id="divChartInkPaperPaperLab2"></div>
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
@@ -1109,7 +1172,7 @@
                                                                 </table>
                                                             </td>
                                                         </tr>
-                                                    </table>
+                                                    </table>--%>
                                                 </div>
                                             </div>
                                             <div class="clear"></div>

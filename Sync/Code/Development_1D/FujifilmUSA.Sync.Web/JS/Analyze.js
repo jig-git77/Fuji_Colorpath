@@ -1193,6 +1193,7 @@ function BindInkPaperChartABComparision() {
         success: function (response) {
             console.log('Ink paper chart');
             console.log(response);
+            debugger;
             if (response.data != null) {
                 jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
                 if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
@@ -1216,7 +1217,7 @@ function BindInkPaperChartABComparision() {
 function PopulateInkPaperChartABComparision() {
 
 
-
+    debugger;
 
     //var json = jsonDeltaEPrimaryPatchList;
 
@@ -1255,15 +1256,15 @@ function PopulateInkPaperChartABComparision() {
     var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
 
     $divChartInkPaperABComparision.kendoChart({
-
+        renderAs: "canvas",
         //title: {
         //    text: "ΔE2000 Primary Patches"
         //},
         seriesDefaults: {
-            type: "column",
+            type: "bar",
             stack: true,
             width: 10,
-            gap: 2,
+            gap: 0.2,
             highlight: {
                 toggle: function (e) {
                     // Don't create a highlight overlay,
@@ -1276,20 +1277,29 @@ function PopulateInkPaperChartABComparision() {
                     visual.opacity(opacity);
                 }
             },
-            visual: function (e) {
-                return createColumn(e, e.rect, e.dataItem.color);
-            }
+
+            //visual: function (e) {
+            //    return createColumn(e, e.rect, e.dataItem.color);
+            //}
         },
         series: [{
             data: formattedDeltaEPrimaryPatchList,
+            overlay: {
+                gradient: "glass",
+            }
         }],
         panes: [{
             clip: false
         }],
         categoryAxis: {
-            categories: patchColorList
+            name: "categoryAxis",
+            categories: patchColorList,
+            majorGridLines: {
+                visible: false
+            }
         },
         valueAxis: {
+            name: "valueAxis",
             //max: 20,
             line: {
                 visible: false
@@ -1307,9 +1317,10 @@ function PopulateInkPaperChartABComparision() {
             template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
         },
         chartArea: {
-            width: 650,
-            height: 300
+            width: 310,
+            height: 325
         },
+        //render: renderChartWithBackgroundByCategory
     });
 
     //var densityPatchColor = [
@@ -1343,7 +1354,7 @@ function PopulateInkPaperChartABComparision() {
 
     var densityPatchColorList = ['C', 'M', 'Y', 'K'];
     $divChartInkPaperDansityChart.kendoChart({
-
+        renderAs: "canvas",
         //title: {
         //    text: "ΔE2000 Primary Patches"
         //},
@@ -1351,7 +1362,7 @@ function PopulateInkPaperChartABComparision() {
             type: "column",
             stack: true,
             width: 10,
-            gap: 2,
+            gap: 0.5,
             highlight: {
                 toggle: function (e) {
                     // Don't create a highlight overlay,
@@ -1364,20 +1375,25 @@ function PopulateInkPaperChartABComparision() {
                     visual.opacity(opacity);
                 }
             },
-            visual: function (e) {
-                return createColumn(e, e.rect, e.dataItem.color);
-            }
+            //visual: function (e) {
+            //    return createColumn(e, e.rect, e.dataItem.color);
+            //}
         },
         series: [{
             data: formattedDensityList,
+            overlay: {
+                gradient: "glass",
+            }
         }],
         panes: [{
             clip: false
         }],
         categoryAxis: {
+            name: "categoryAxis",
             categories: densityPatchColorList
         },
         valueAxis: {
+            name: "valueAxis",
             //max: 20,
             line: {
                 visible: false
@@ -1396,9 +1412,10 @@ function PopulateInkPaperChartABComparision() {
             template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " :    #= dataItem.density # <br/>" + _Resources._recTarget + " :    #= dataItem.densityLimit # <br/>" + _Resources._recPrevious + " :    #= dataItem.preAvgDensity #"
         },
         chartArea: {
-            width: 650,
-            height: 200
+            width: 325,
+            height: 150
         },
+        render: renderChartWithBackgroundByCategory
     });
 
 
@@ -1455,6 +1472,7 @@ function PopulateInkPaperChartABComparision() {
 
 
     $divChartInkPaperPaperLab1.kendoChart({
+        renderAs:"canvas",
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -1464,6 +1482,7 @@ function PopulateInkPaperChartABComparision() {
             paperAB
         ],
         xAxis: {
+            name: "xAxis",
             min: -10,
             max: 10,
             majorUnit: 5,
@@ -1472,13 +1491,14 @@ function PopulateInkPaperChartABComparision() {
                 format: "{0}"
             },
             title: {
-                text: _Resources._recDeltaA
+                //text: _Resources._recDeltaA
             }, majorGridLines: {
                 visible: true,
                 step: -10
             }
         },
         yAxis: {
+            name: "yAxis",
             min: -10,
             max: 10,
             step: 5,
@@ -1488,16 +1508,17 @@ function PopulateInkPaperChartABComparision() {
                 format: "{0}"
             },
             title: {
-                text: _Resources._recDeltaB
+                //text: _Resources._recDeltaB
             }, majorGridLines: {
                 visible: true,
                 step: -10
             }
         },
         chartArea: {
-            width: 400,
-            height: 280
+            width: 250,
+            height: 180
         },
+        render: renderChartWithBackgroundByAxis
         //plotArea: {
         //    background: "lightgray"
         //}
@@ -1505,6 +1526,7 @@ function PopulateInkPaperChartABComparision() {
 
 
     $divChartInkPaperPaperLab2.kendoChart({
+        renderAs:"canvas",
         seriesDefaults: {
             type: "column",
             width: 25,
@@ -1514,6 +1536,7 @@ function PopulateInkPaperChartABComparision() {
             data: paperLArray,
         }],
         categoryAxis: {
+            name: "categoryAxis",
             categories: [],
             line: {
                 visible: true,
@@ -1521,11 +1544,12 @@ function PopulateInkPaperChartABComparision() {
             },
         },
         valueAxis: {
+            name: "valueAxis",
             labels: {
                 format: "{0}"
             },
             title: {
-                text: _Resources._recDeltaL
+                //text: _Resources._recDeltaL
             },
             line: {
                 visible: false,
@@ -1541,9 +1565,10 @@ function PopulateInkPaperChartABComparision() {
             //template: "#= dataItem.title # <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
         },
         chartArea: {
-            width: 200,
-            height: 280
+            width: 100,
+            height: 180
         },
+        render: renderChartWithBackgroundByCategory
     });
 
 }
@@ -3090,7 +3115,7 @@ function renderChartWithBackgroundByAxis(e) {
     var yAxisArray = yAxis._axis.children.map(r => parseInt(r.content));
 
 
-    if (chart.element[0].id == "kendoChartTargetVersusActualAB" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparison" || chart.element[0].id == "kendoChartABalanceChart" || chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartLComaparision") {
+    if (chart.element[0].id == "kendoChartTargetVersusActualAB" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparison" || chart.element[0].id == "kendoChartABalanceChart" || chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartLComaparision" || chart.element[0].id == "divChartInkPaperPaperLab1") {
         xSlot = xAxis.slot(Math.min.apply(Math, xAxisArray), Math.max.apply(Math, xAxisArray));
         ySlot = yAxis.slot(Math.min.apply(Math, yAxisArray), Math.max.apply(Math, yAxisArray));
 
@@ -3110,7 +3135,7 @@ function renderChartWithBackgroundByAxis(e) {
         ]);
 
 
-    if (chart.element[0].id == "kendoChartTargetVersusActualAB" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparison") {
+    if (chart.element[0].id == "kendoChartTargetVersusActualAB" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparison" || chart.element[0].id == "divChartInkPaperPaperLab1") {
         path = drawing.Path.fromRect(rect, {
             stroke: null,
             fill: gradientRedGreen
