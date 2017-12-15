@@ -535,13 +535,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.CheckBox chk_IsPaperScaling4D;
         
         /// <summary>
-        /// Panel_PaperLAB4D_White control.
+        /// Panel_PaperLAB4D control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel_PaperLAB4D_White;
+        protected global::System.Web.UI.WebControls.Panel Panel_PaperLAB4D;
         
         /// <summary>
         /// Localize6 control.
@@ -553,13 +553,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize Localize6;
         
         /// <summary>
-        /// txtPaper_L_4D_White control.
+        /// txtPaper_L_4D control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPaper_L_4D_White;
+        protected global::System.Web.UI.WebControls.TextBox txtPaper_L_4D;
         
         /// <summary>
         /// RangeValidator4 control.
@@ -571,13 +571,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.RangeValidator RangeValidator4;
         
         /// <summary>
-        /// txtPaper_a_4D_White control.
+        /// txtPaper_a_4D control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPaper_a_4D_White;
+        protected global::System.Web.UI.WebControls.TextBox txtPaper_a_4D;
         
         /// <summary>
         /// RangeValidator5 control.
@@ -589,13 +589,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.RangeValidator RangeValidator5;
         
         /// <summary>
-        /// txtPaper_b_4D_White control.
+        /// txtPaper_b_4D control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPaper_b_4D_White;
+        protected global::System.Web.UI.WebControls.TextBox txtPaper_b_4D;
         
         /// <summary>
         /// RangeValidator6 control.
@@ -605,77 +605,5 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RangeValidator RangeValidator6;
-        
-        /// <summary>
-        /// Panel_PaperLAB4D_Black control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel_PaperLAB4D_Black;
-        
-        /// <summary>
-        /// Localize7 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize7;
-        
-        /// <summary>
-        /// txtPaper_L_4D_Black control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPaper_L_4D_Black;
-        
-        /// <summary>
-        /// RangeValidator7 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator RangeValidator7;
-        
-        /// <summary>
-        /// txtPaper_a_4D_Black control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPaper_a_4D_Black;
-        
-        /// <summary>
-        /// RangeValidator8 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator RangeValidator8;
-        
-        /// <summary>
-        /// txtPaper_b_4D_Black control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPaper_b_4D_Black;
-        
-        /// <summary>
-        /// RangeValidator9 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator RangeValidator9;
     }
 }
