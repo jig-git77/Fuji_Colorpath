@@ -351,7 +351,7 @@
                                     </td>
                                     <td>
                                         <asp:Panel ID="Panel_PaperLAB4D_White" Style="padding: 5px" runat="server" BorderStyle="None" Enabled="false">
-                                            <asp:Localize runat="server" Text="New White Paper Values:" ID="Localize6" meta:resourcekey="Panel_PaperLABResource1"></asp:Localize>
+                                            <asp:Localize runat="server" Text="New White Paper Value:" ID="Localize6" meta:resourcekey="Panel_PaperLABResource1"></asp:Localize>
 
                                             L*<asp:TextBox ID="txtPaper_L_4D_White" runat="server" CssClass="textwidth40"></asp:TextBox>
                                             <asp:RangeValidator ID="RangeValidator4" runat="server"
@@ -376,7 +376,7 @@
                                     </td>
                                     <td>
                                         <asp:Panel ID="Panel_PaperLAB4D_Black" Style="padding: 5px" runat="server" BorderStyle="None" Enabled="false">
-                                            <asp:Localize runat="server" Text="New Black Paper Values:" ID="Localize7" meta:resourcekey="Panel_PaperLABResource1"></asp:Localize>
+                                            <asp:Localize runat="server" Text="Min L* value:" ID="Localize7" meta:resourcekey="Panel_PaperLABBlackResource1"></asp:Localize>
 
                                             L*<asp:TextBox ID="txtPaper_L_4D_Black" runat="server" CssClass="textwidth40"></asp:TextBox>
                                             <asp:RangeValidator ID="RangeValidator7" runat="server"

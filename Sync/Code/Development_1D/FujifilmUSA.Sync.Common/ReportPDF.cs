@@ -19,6 +19,8 @@ namespace FujifilmUSA.Sync.Common
 
         //string strServer = System.Web.HttpContext.Current.Request.Url.AbsoluteUri.Substring(0, System.Web.HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1);
         string strServer = System.Web.HttpContext.Current.Server.MapPath("Images") + "\\";
+        string strServerStyleSheet = System.Web.HttpContext.Current.Server.MapPath("Templates") + "\\";
+
         int _ReportType = 0;
         string _PDFPath;
         string _PDF_NAME;
@@ -191,6 +193,7 @@ namespace FujifilmUSA.Sync.Common
                 {
                     FileName = "Templates/PrepressSingleMeasurement.htm";
                 }
+
                 fp = File.OpenText(System.Web.HttpContext.Current.Server.MapPath(FileName));
                 StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
 
@@ -205,7 +208,7 @@ namespace FujifilmUSA.Sync.Common
 
                 //========== Leave 30 Px on top of next page ==========//
                 theDoc.Rect.Inset(0, 1);
-
+             
                 //========== Loops till the paging ==========//
                 while (true)
                 {
@@ -281,7 +284,8 @@ namespace FujifilmUSA.Sync.Common
         {
             try
             {
-                CSSPath = this.BaseWebURL + "Templates/style.css";
+                //CSSPath = this.BaseWebURL + "Templates/style.css";
+                CSSPath = strServerStyleSheet;
                 string FilePath= this._WebURL + "Templates/KendoReportTest.htm";
                 if (FilePath.Trim() == "")
                 {
@@ -349,7 +353,7 @@ namespace FujifilmUSA.Sync.Common
 
             DataTable DT = new DataTable();
 
-            SBStr.Replace("#csspath#", CSSPath);
+            //SBStr.Replace("#csspath#", CSSPath);  //-- It was commented out passing path this way since it was giving error after putting KendoChart
             SBStr.Replace("###ReportName###", ReportName);
 
             // === Table 0 = "JobDetail" : Replace Job Detail In HTML Template ==== //    
@@ -1067,6 +1071,7 @@ namespace FujifilmUSA.Sync.Common
 
             #region Assign Server
             SBStr.Replace("##IMAGES##", strServer);
+            SBStr.Replace("#csspath#", strServerStyleSheet);
             #endregion
 
             return SBStr;

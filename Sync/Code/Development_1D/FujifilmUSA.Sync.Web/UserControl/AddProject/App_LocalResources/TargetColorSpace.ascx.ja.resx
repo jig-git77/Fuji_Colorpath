@@ -150,6 +150,9 @@
   <data name="Panel_PaperLABResource1.Text" xml:space="preserve">
     <value>新しい用紙の値：</value>
   </data>
+  <data name="Panel_PaperLABBlackResource1.Text" xml:space="preserve">
+    <value>Min L* value:_ja</value>
+  </data>
   <data name="locChooseMethodResource1.Text" xml:space="preserve">
     <value>カーブ補正方式の選択：</value>
   </data>

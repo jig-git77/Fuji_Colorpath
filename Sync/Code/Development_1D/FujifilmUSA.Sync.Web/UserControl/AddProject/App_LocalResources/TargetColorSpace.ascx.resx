@@ -148,7 +148,10 @@
     <value>Targets</value>
   </data>
   <data name="Panel_PaperLABResource1.Text" xml:space="preserve">
-    <value>New Paper Values:</value>
+    <value>New Paper Value:</value>
+  </data>
+  <data name="Panel_PaperLABBlackResource1.Text" xml:space="preserve">
+    <value>Min L* value:</value>
   </data>
   <data name="locChooseMethodResource1.Text" xml:space="preserve">
     <value>Choose Method:</value>

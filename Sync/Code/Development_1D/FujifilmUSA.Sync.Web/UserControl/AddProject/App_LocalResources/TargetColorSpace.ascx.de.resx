@@ -150,6 +150,9 @@
   <data name="Panel_PaperLABResource1.Text" xml:space="preserve">
     <value>Neue Papierparameter:</value>
   </data>
+    <data name="Panel_PaperLABBlackResource1.Text" xml:space="preserve">
+    <value>Min L* value:_de</value>
+  </data>
   <data name="locChooseMethodResource1.Text" xml:space="preserve">
     <value>Verfahren wählen:</value>
   </data>

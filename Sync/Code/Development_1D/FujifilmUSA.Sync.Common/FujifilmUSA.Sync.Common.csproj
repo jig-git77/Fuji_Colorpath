@@ -68,6 +68,7 @@
     <Compile Include="CIEXYZ.cs" />
     <Compile Include="ColorMath.cs" />
     <Compile Include="DataReader.cs" />
+    <Compile Include="ErrorLog.cs" />
     <Compile Include="ExportFile.cs" />
     <Compile Include="ReportPDF.cs" />
     <Compile Include="ResourceManager.cs" />
