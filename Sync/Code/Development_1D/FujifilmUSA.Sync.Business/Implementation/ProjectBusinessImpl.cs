@@ -62,12 +62,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             ReTargetProjectID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ReTargetProjectID"),
                             CurveTypeID = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "CurveTypeID"),
                             EnabledPaperScaling = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "EnabledPaperScaling"),
-                            NewPaper_White_L = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_White_L"),
-                            NewPaper_White_a = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_White_a"),
-                            NewPaper_White_b = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_White_b"),
-                            NewPaper_Black_L = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_Black_L"),
-                            NewPaper_Black_a = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_Black_a"),
-                            NewPaper_Black_b = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_Black_b")
+                            NewPaper_L = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_L"),
+                            NewPaper_a = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_a"),
+                            NewPaper_b = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_b")
                         };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
@@ -636,12 +633,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      Convert.ToInt16(project.PCSDataTypes),
                                                      project.ReTargetProjectID,
                                                      project.EnabledPaperScaling,
-                                                     project.NewPaper_White_L,
-                                                     project.NewPaper_White_a,
-                                                     project.NewPaper_White_b,
-                                                     project.NewPaper_Black_L,
-                                                     project.NewPaper_Black_a,
-                                                     project.NewPaper_Black_b
+                                                     project.NewPaper_L,
+                                                     project.NewPaper_a,
+                                                     project.NewPaper_b
                                                  });
                         savedProjectId = project.ProjectId;
                     },
@@ -758,12 +752,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@ReTargetProjectID", Type = DbType.Int32, Value = project.ReTargetProjectID},
 
                                                      new Parameters() {ParameterName = "@EnabledPaperScaling", Type = DbType.Boolean, Value = project.EnabledPaperScaling},
-                                                     new Parameters() {ParameterName = "@NewPaper_White_L", Type = DbType.Decimal, Value = project.NewPaper_White_L},
-                                                     new Parameters() {ParameterName = "@NewPaper_White_a", Type = DbType.Decimal, Value = project.NewPaper_White_a},
-                                                     new Parameters() {ParameterName = "@NewPaper_White_b", Type = DbType.Decimal, Value = project.NewPaper_White_b},
-                                                     new Parameters() {ParameterName = "@NewPaper_Black_L", Type = DbType.Decimal, Value = project.NewPaper_Black_L},
-                                                     new Parameters() {ParameterName = "@NewPaper_Black_a", Type = DbType.Decimal, Value = project.NewPaper_Black_a},
-                                                     new Parameters() {ParameterName = "@NewPaper_Black_b", Type = DbType.Decimal, Value = project.NewPaper_Black_b}
+                                                     new Parameters() {ParameterName = "@NewPaper_L", Type = DbType.Decimal, Value = project.NewPaper_L},
+                                                     new Parameters() {ParameterName = "@NewPaper_a", Type = DbType.Decimal, Value = project.NewPaper_a},
+                                                     new Parameters() {ParameterName = "@NewPaper_b", Type = DbType.Decimal, Value = project.NewPaper_b}
 
                                                  },
                                              new List<Parameters>()

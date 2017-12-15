@@ -350,47 +350,22 @@
                                             AutoPostBack="True" OnCheckedChanged="chk_IsPaperScaling4D_CheckedChanged" meta:resourcekey="chk_IsPaperScalingResource1" />
                                     </td>
                                     <td>
-                                        <asp:Panel ID="Panel_PaperLAB4D_White" Style="padding: 5px" runat="server" BorderStyle="None" Enabled="false">
-                                            <asp:Localize runat="server" Text="New White Paper Values:" ID="Localize6" meta:resourcekey="Panel_PaperLABResource1"></asp:Localize>
+                                        <asp:Panel ID="Panel_PaperLAB4D" Style="padding: 5px" runat="server" BorderStyle="None" Enabled="false">
+                                            <asp:Localize runat="server" Text="New Paper Values:" ID="Localize6" meta:resourcekey="Panel_PaperLABResource1"></asp:Localize>
 
-                                            L*<asp:TextBox ID="txtPaper_L_4D_White" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                            L*<asp:TextBox ID="txtPaper_L_4D" runat="server" CssClass="textwidth40"></asp:TextBox>
                                             <asp:RangeValidator ID="RangeValidator4" runat="server"
-                                                ControlToValidate="txtPaper_L_4D_White" ErrorMessage="*" ForeColor="Red"
+                                                ControlToValidate="txtPaper_L_4D" ErrorMessage="*" ForeColor="Red"
                                                 ValidationGroup="b" MinimumValue="0" MaximumValue="100" Type="Double"></asp:RangeValidator>
                                             &nbsp;
-                                                    a*<asp:TextBox ID="txtPaper_a_4D_White" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                                    a*<asp:TextBox ID="txtPaper_a_4D" runat="server" CssClass="textwidth40"></asp:TextBox>
                                             <asp:RangeValidator ID="RangeValidator5" runat="server"
-                                                ControlToValidate="txtPaper_a_4D_White" ErrorMessage="*" ForeColor="Red"
+                                                ControlToValidate="txtPaper_a_4D" ErrorMessage="*" ForeColor="Red"
                                                 ValidationGroup="b" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
                                             &nbsp;
-                                                    b*<asp:TextBox ID="txtPaper_b_4D_White" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                                    b*<asp:TextBox ID="txtPaper_b_4D" runat="server" CssClass="textwidth40"></asp:TextBox>
                                             <asp:RangeValidator ID="RangeValidator6" runat="server"
-                                                ControlToValidate="txtPaper_b_4D_White" ErrorMessage="*" ForeColor="Red"
-                                                ValidationGroup="b" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
-                                        </asp:Panel>
-                                    </td>
-                                </tr>
-                                 <tr>
-                                    <td style="padding-left: 8px;">
-                                       
-                                    </td>
-                                    <td>
-                                        <asp:Panel ID="Panel_PaperLAB4D_Black" Style="padding: 5px" runat="server" BorderStyle="None" Enabled="false">
-                                            <asp:Localize runat="server" Text="New Black Paper Values:" ID="Localize7" meta:resourcekey="Panel_PaperLABResource1"></asp:Localize>
-
-                                            L*<asp:TextBox ID="txtPaper_L_4D_Black" runat="server" CssClass="textwidth40"></asp:TextBox>
-                                            <asp:RangeValidator ID="RangeValidator7" runat="server"
-                                                ControlToValidate="txtPaper_L_4D_Black" ErrorMessage="*" ForeColor="Red"
-                                                ValidationGroup="b" MinimumValue="0" MaximumValue="100" Type="Double"></asp:RangeValidator>
-                                            &nbsp;
-                                                    a*<asp:TextBox ID="txtPaper_a_4D_Black" runat="server" CssClass="textwidth40"></asp:TextBox>
-                                            <asp:RangeValidator ID="RangeValidator8" runat="server"
-                                                ControlToValidate="txtPaper_a_4D_Black" ErrorMessage="*" ForeColor="Red"
-                                                ValidationGroup="b" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
-                                            &nbsp;
-                                                    b*<asp:TextBox ID="txtPaper_b_4D_Black" runat="server" CssClass="textwidth40"></asp:TextBox>
-                                            <asp:RangeValidator ID="RangeValidator9" runat="server"
-                                                ControlToValidate="txtPaper_b_4D_Black" ErrorMessage="*" ForeColor="Red"
+                                                ControlToValidate="txtPaper_b_4D" ErrorMessage="*" ForeColor="Red"
                                                 ValidationGroup="b" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
                                         </asp:Panel>
                                     </td>

@@ -50,11 +50,8 @@ namespace FujifilmUSA.Sync.Entity
         public bool HasSpotProject { get; set; }
 
         public bool EnabledPaperScaling { get; set; }
-        public decimal NewPaper_White_L { get; set; }
-        public decimal NewPaper_White_a { get; set; }
-        public decimal NewPaper_White_b { get; set; }
-        public decimal NewPaper_Black_L { get; set; }
-        public decimal NewPaper_Black_a { get; set; }
-        public decimal NewPaper_Black_b { get; set; }
+        public decimal NewPaper_L { get; set; }
+        public decimal NewPaper_a { get; set; }
+        public decimal NewPaper_b { get; set; }
     }
 }
