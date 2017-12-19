@@ -290,16 +290,45 @@ $(document).ready(function () {
             BGrayBalanceChart: ''
         };
 
-        chartContent.ABComparisionSpiderChart = GetABComparisionSpiderChartImage();
-        chartContent.ABActualTargetChart = GetActualVsTargetChartImage();
-        chartContent.LComparisionChart = GetLComparisionChartImage();
-        chartContent.LGrayBalanceChart = Get_L_BalanceChartImage();
-        chartContent.AGrayBalanceChart = Get_A_BalanceChartImage();
-        chartContent.BGrayBalanceChart = Get_B_BalanceChartImage();
+        //chartContent.ABComparisionSpiderChart = GetABComparisionSpiderChartImage();
+        //chartContent.ABActualTargetChart = GetActualVsTargetChartImage();
+        //chartContent.LComparisionChart = GetLComparisionChartImage();
+        //chartContent.LGrayBalanceChart = Get_L_BalanceChartImage();
+        //chartContent.AGrayBalanceChart = Get_A_BalanceChartImage();
+        //chartContent.BGrayBalanceChart = Get_B_BalanceChartImage();
+
+        var apiParameter = {
+            //chart: chartContent,
+            MeasurementId: measurementID,
+            IsAverageOfMeasurements: $isAverageOfMeasurements,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            fromDeltaE: $selectedDeltaE,
+            validationType: $hdnValidationType,
+            CurrentUserId: CURRENT_USER_ID,
+            ABComparisionSpiderChart: '',
+            InkPaperPatchChart:'',
+            ABActualTargetChart: '',
+            LComparisionChart: '',
+            LGrayBalanceChart: '',
+            AGrayBalanceChart: '',
+            BGrayBalanceChart: ''
+        };
+
+        apiParameter.ABComparisionSpiderChart = GetABComparisionSpiderChartImage();
+        apiParameter.InkPaperPatchChart = GetInkPaperPatchChartImage();        
+        //apiParameter.ABActualTargetChart = GetActualVsTargetChartImage();
+        //apiParameter.LComparisionChart = GetLComparisionChartImage();
+        //apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
+        //apiParameter.AGrayBalanceChart = Get_A_BalanceChartImage();
+        //apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
 
         $.ajax({
-            url: SERVICE_BASE_URL + 'api/Chart/ExportChartReport',
-            data: JSON.stringify(chartContent),
+            url: SERVICE_BASE_URL + 'api/Report/ExportPrepressSingleMeasurementReportTest',
+            //url: SERVICE_BASE_URL + 'api/Report/ExportChartReport',
+            //data: {},
+            //data: JSON.stringify(chartContent),
+            data: JSON.stringify(apiParameter),
             type: 'POST',
             //dataType: 'json',
             headers: {
@@ -1082,90 +1111,124 @@ function BindChartLGrayBalance() {
 
 ////**************** GET IMAGE OF AB COMPARSION SPIDER CHART FOR REPORT  ****************////
 function GetABComparisionSpiderChartImage() {
-    var kendoOptions = $chart_TargetVersusActualAB.data("kendoChart").options;
-    //kendoOptions.plotArea.background = 'gray';
-    //kendoOptions.chartArea.width = 700;
-    //kendoOptions.chartArea.height = 100;
-    $kendoChartDummy.kendoChart(kendoOptions);
-    var dummyChart = $kendoChartDummy.data('kendoChart');
-    dummyChart.options.plotArea.background = '#D0D0D0';
-    dummyChart.options.transitions = false
-    dummyChart.refresh();
-    return dummyChart.imageDataURL();
+    var chart = $chart_TargetVersusActualAB.data("kendoChart");
+    return chart.imageDataURL();
+    //var kendoOptions = $chart_TargetVersusActualAB.data("kendoChart").options;
+    ////kendoOptions.plotArea.background = 'gray';
+    ////kendoOptions.chartArea.width = 700;
+    ////kendoOptions.chartArea.height = 100;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.options.plotArea.background = '#D0D0D0';
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
+}
+
+function GetInkPaperPatchChartImage() {
+    var chart = $divChartInkPaperABComparision.data("kendoChart");
+    return chart.imageDataURL();
+    //var kendoOptions = $chart_Gamut_ABComparison.data("kendoChart").options;
+    //kendoOptions.plotArea.background = '#D0D0D0';
+    ////kendoOptions.chartArea.width = 700;
+    ////kendoOptions.chartArea.height = 100;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
 }
 
 ////**************** GET IMAGE OF ACTUAL VS TARGET CHART FOR REPORT  ****************////
 function GetActualVsTargetChartImage() {
-    var kendoOptions = $chart_Gamut_ABComparison.data("kendoChart").options;
-    kendoOptions.plotArea.background = '#D0D0D0';
-    //kendoOptions.chartArea.width = 700;
-    //kendoOptions.chartArea.height = 100;
-    $kendoChartDummy.kendoChart(kendoOptions);
-    var dummyChart = $kendoChartDummy.data('kendoChart');
-    dummyChart.options.transitions = false
-    dummyChart.refresh();
-    return dummyChart.imageDataURL();
+    var chart = $chart_Gamut_ABComparison.data("kendoChart");
+    return chart.imageDataURL();
+    //var kendoOptions = $chart_Gamut_ABComparison.data("kendoChart").options;
+    //kendoOptions.plotArea.background = '#D0D0D0';
+    ////kendoOptions.chartArea.width = 700;
+    ////kendoOptions.chartArea.height = 100;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
 }
 
 
 ////**************** GET IMAGE OF L-COMPARSION CHART FOR REPORT  ****************////
 function GetLComparisionChartImage() {
-    var kendoOptions = $chart_L_Comaparision.data("kendoChart").options;
-    kendoOptions.plotArea.background = '#D0D0D0';
-    kendoOptions.chartArea.width = 650;
-    kendoOptions.chartArea.height = 150;
-    $kendoChartDummy.kendoChart(kendoOptions);
-    var dummyChart = $kendoChartDummy.data('kendoChart');
-    dummyChart.options.transitions = false
-    dummyChart.refresh();
-    return dummyChart.imageDataURL();
+
+    var chart = $chart_L_Comaparision.data("kendoChart");
+    return chart.imageDataURL();
+
+    //var kendoOptions = $chart_L_Comaparision.data("kendoChart").options;
+    //kendoOptions.plotArea.background = '#D0D0D0';
+    //kendoOptions.chartArea.width = 650;
+    //kendoOptions.chartArea.height = 150;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
 }
 
 
 ////**************** GET IMAGE OF L-BALANCE CHART FOR REPORT  ****************////
 function Get_L_BalanceChartImage() {
-    var kendoOptions = $chart_L_BalanceChart.data("kendoChart").options;
-    var kendodataSource = $chart_L_BalanceChart.data("kendoChart").dataSource;
+    var chart = $chart_L_BalanceChart.data("kendoChart");
+    return chart.imageDataURL();
 
-    kendoOptions.plotArea.background = '#D0D0D0';
-    //kendoOptions.chartArea.width = 700;
-    //kendoOptions.chartArea.height = 100;
-    $kendoChartDummy.kendoChart(kendoOptions);
-    var dummyChart = $kendoChartDummy.data('kendoChart');
-    dummyChart.dataSource = kendodataSource;
-    dummyChart.options.transitions = false
-    dummyChart.refresh();
-    return dummyChart.imageDataURL();
+    //var kendoOptions = $chart_L_BalanceChart.data("kendoChart").options;
+    //var kendodataSource = $chart_L_BalanceChart.data("kendoChart").dataSource;
+
+    //kendoOptions.plotArea.background = '#D0D0D0';
+    ////kendoOptions.chartArea.width = 700;
+    ////kendoOptions.chartArea.height = 100;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.dataSource = kendodataSource;
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
 }
 
 ////**************** GET IMAGE OF A-BALANCE CHART FOR REPORT  ****************////
 function Get_A_BalanceChartImage() {
-    var kendoOptions = $chart_A_BalanceChart.data("kendoChart").options;
-    var kendodataSource = $chart_A_BalanceChart.data("kendoChart").dataSource;
-    kendoOptions.plotArea.background = '#D0D0D0';
-    //kendoOptions.chartArea.width = 700;
-    //kendoOptions.chartArea.height = 100;
-    $kendoChartDummy.kendoChart(kendoOptions);
-    var dummyChart = $kendoChartDummy.data('kendoChart');
-    dummyChart.dataSource = kendodataSource;
-    dummyChart.options.transitions = false
-    dummyChart.refresh();
-    return dummyChart.imageDataURL();
+
+    var chart = $chart_A_BalanceChart.data("kendoChart");
+    return chart.imageDataURL();
+
+    //var kendoOptions = $chart_A_BalanceChart.data("kendoChart").options;
+    //var kendodataSource = $chart_A_BalanceChart.data("kendoChart").dataSource;
+    //kendoOptions.plotArea.background = '#D0D0D0';
+    ////kendoOptions.chartArea.width = 700;
+    ////kendoOptions.chartArea.height = 100;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.dataSource = kendodataSource;
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
 }
 
 ////**************** GET IMAGE OF B-BALANCE CHART FOR REPORT  ****************////
 function Get_B_BalanceChartImage() {
-    var kendoOptions = $chart_B_BalanceChart.data("kendoChart").options;
-    var kendodataSource = $chart_B_BalanceChart.data("kendoChart").dataSource;
-    kendoOptions.plotArea.background = '#D0D0D0';
-    //kendoOptions.chartArea.width = 700;
-    //kendoOptions.chartArea.height = 100;
-    $kendoChartDummy.kendoChart(kendoOptions);
-    var dummyChart = $kendoChartDummy.data('kendoChart');
-    dummyChart.dataSource = kendodataSource;
-    dummyChart.options.transitions = false
-    dummyChart.refresh();
-    return dummyChart.imageDataURL();
+
+    var chart = $chart_B_BalanceChart.data("kendoChart");
+    return chart.imageDataURL();
+
+
+    //var kendoOptions = $chart_B_BalanceChart.data("kendoChart").options;
+    //var kendodataSource = $chart_B_BalanceChart.data("kendoChart").dataSource;
+    //kendoOptions.plotArea.background = '#D0D0D0';
+    ////kendoOptions.chartArea.width = 700;
+    ////kendoOptions.chartArea.height = 100;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.dataSource = kendodataSource;
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
 }
 
 
@@ -1472,7 +1535,7 @@ function PopulateInkPaperChartABComparision() {
 
 
     $divChartInkPaperPaperLab1.kendoChart({
-        renderAs:"canvas",
+        renderAs: "canvas",
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -1526,7 +1589,7 @@ function PopulateInkPaperChartABComparision() {
 
 
     $divChartInkPaperPaperLab2.kendoChart({
-        renderAs:"canvas",
+        renderAs: "canvas",
         seriesDefaults: {
             type: "column",
             width: 25,
@@ -1880,7 +1943,7 @@ function GenerateG7Charts() {
         },
         dataSource: jsonGrayLChartList,
         series: [{
-            name:"Weighted",
+            name: "Weighted",
             xField: "Cmyk_Value",
             yField: "ΔValue",
             color: "Black",
@@ -2955,7 +3018,7 @@ function PopulateTVISpreadChart() {
         //title: {
         //    text: "Cyan"
         //},
-        renderAs:"canvas",
+        renderAs: "canvas",
         legend: {
             position: "top",
             //labels: {

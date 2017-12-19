@@ -1963,7 +1963,7 @@
     <Content Include="SpotMeasurement.aspx" />
     <Content Include="Spot_Measurement.aspx" />
     <Content Include="Templates\HelloWorld.htm" />
-    <Content Include="Templates\KendoReportTest.htm" />
+    <Content Include="Templates\kendoPrepressSingleMeasurement.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_G7.htm" />
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_Default.htm" />
@@ -5293,7 +5293,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

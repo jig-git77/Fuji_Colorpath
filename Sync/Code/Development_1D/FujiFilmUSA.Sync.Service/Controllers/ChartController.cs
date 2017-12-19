@@ -188,7 +188,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     objReportPDF.ReportName = "Single Measurement Report";
                     objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
 
-                    objReportPDF.GenerateClientReportPDF();
+                    //objReportPDF.GenerateClientReportPDF();
 
                     string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
                     httpResponse.status = ResponseStatus.Success;
