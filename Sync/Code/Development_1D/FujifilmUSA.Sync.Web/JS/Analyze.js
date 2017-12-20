@@ -108,11 +108,14 @@ var gradientPinkGreen = new drawing.LinearGradient({
     stops: [{
         offset: 0,
         color: "#FF7FFF",
-        opacity: 0.4
-    }, {
-        offset: 1,
-        color: "green",
+        //color: "pink",
         opacity: 0.5
+    },
+    {
+        offset: 1,
+        //color: "green",
+        color: "#4C9371",
+        opacity: 0.8
     }]
 });
 
@@ -122,11 +125,14 @@ var gradientYellowBlue = new drawing.LinearGradient({
     stops: [{
         offset: 0,
         color: "yellow",
+        //color: "#F0EF9D",
         opacity: 0.5
-    }, {
+    },
+    {
         offset: 1,
         color: "blue",
-        opacity: 0.5
+        //color: "#4748C7",
+        opacity: 0.8
     }]
 });
 
@@ -141,6 +147,20 @@ var gradientGray2 = new drawing.LinearGradient({
         offset: 1,
         color: "#000",
         opacity: 0
+    }]
+});
+
+var gradientGray3 = new drawing.LinearGradient({
+    start: [0, 0], // Bottom left
+    end: [0, 1],   // Top left
+    stops: [{
+        offset: 0,
+        color: "#000",
+        opacity: 0
+    }, {
+        offset: 1,
+        color: "#000",
+        opacity: 0.4
     }]
 });
 
@@ -307,7 +327,7 @@ $(document).ready(function () {
             validationType: $hdnValidationType,
             CurrentUserId: CURRENT_USER_ID,
             ABComparisionSpiderChart: '',
-            InkPaperPatchChart:'',
+            InkPaperPatchChart: '',
             ABActualTargetChart: '',
             LComparisionChart: '',
             LGrayBalanceChart: '',
@@ -316,7 +336,7 @@ $(document).ready(function () {
         };
 
         apiParameter.ABComparisionSpiderChart = GetABComparisionSpiderChartImage();
-        apiParameter.InkPaperPatchChart = GetInkPaperPatchChartImage();        
+        apiParameter.InkPaperPatchChart = GetInkPaperPatchChartImage();
         //apiParameter.ABActualTargetChart = GetActualVsTargetChartImage();
         //apiParameter.LComparisionChart = GetLComparisionChartImage();
         //apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
@@ -962,7 +982,7 @@ function BindChartLGrayBalance() {
         },
         chartArea: {
             width: 350,
-            height: 150
+            height: 180
         },
         plotArea: {
             border: {
@@ -1025,7 +1045,7 @@ function BindChartLGrayBalance() {
         },
         chartArea: {
             width: 350,
-            height: 150
+            height: 180
         },
         plotArea: {
             border: {
@@ -1096,7 +1116,7 @@ function BindChartLGrayBalance() {
         },
         chartArea: {
             width: 350,
-            height: 150
+            height: 180
         },
         plotArea: {
             border: {
@@ -1315,8 +1335,28 @@ function PopulateInkPaperChartABComparision() {
 
     //var axis = json.map(function (a) { return a["?E"]; });
     var axis = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔE; });
-
     var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
+    var maxNum = Math.max.apply(Math, axis);
+    var maxValue = 0;
+    var marginValue = 1;
+    switch (true) {
+        case (maxNum < 5): maxValue = 5; marginValue = 1; break;
+        case (maxNum == 5): maxValue = 6; marginValue = 1; break;
+        case (maxNum >= 5 && maxNum < 10): maxValue = 10; marginValue = 2; break;
+        case (maxNum >= 10 && maxNum < 15): maxValue = 15; marginValue = 3; break;
+        case (maxNum >= 15 && maxNum < 20): maxValue = 20; marginValue = 5; break;
+        case (maxNum >= 20 && maxNum < 30): maxValue = 30; marginValue = 5; break;
+        case (maxNum >= 30): maxValue = 50; marginValue = 5; break;
+    }
+
+    //generate the second stacked chart by max value
+    var stackedChart = [];
+    $.each(axis, function (index, num) {
+        var stack = {
+            value: maxValue
+        };
+        stackedChart.push(stack);
+    });
 
     $divChartInkPaperABComparision.kendoChart({
         renderAs: "canvas",
@@ -1350,6 +1390,16 @@ function PopulateInkPaperChartABComparision() {
             overlay: {
                 gradient: "glass",
             }
+        },
+        {
+            data: stackedChart,
+            overlay: {
+                gradient: "glass",
+            },
+            tooltip: {
+                visible: false
+            },
+            color:"#C8D6E3"
         }],
         panes: [{
             clip: false
@@ -1372,7 +1422,9 @@ function PopulateInkPaperChartABComparision() {
             },
             labels: {
                 rotation: "auto"
-            }
+            },
+            max: maxValue,
+            margin: marginValue
         },
         tooltip: {
             visible: true,
@@ -2503,10 +2555,10 @@ function PopulateTVIISOChart() {
                 type: "rangeArea",
                 fromField: "ThresholdBottom",
                 toField: "ThresholdTop",
-                color: "Green",
+                color: "#148787",
                 line: {
                     style: "smooth",
-                    color: "green",
+                    color: "#058e8e",
                     width: 1
                 },
                 highlight: {
@@ -2516,8 +2568,8 @@ function PopulateTVIISOChart() {
             {
                 type: "line",
                 field: "TargetDotGain",
-                color: "Green",
-                markers: { background: "Green" },
+                color: "#3eb257",
+                markers: { background: "#3eb257" },
                 highlight: {
                     visible: false
                 }
@@ -2568,10 +2620,10 @@ function PopulateTVIISOChart() {
                 type: "rangeArea",
                 fromField: "ThresholdBottom",
                 toField: "ThresholdTop",
-                color: "Green",
+                color: "#148787",
                 line: {
                     style: "smooth",
-                    color: "green",
+                    color: "#058e8e",
                     width: 1
                 },
                 highlight: {
@@ -2581,8 +2633,8 @@ function PopulateTVIISOChart() {
             {
                 type: "line",
                 field: "TargetDotGain",
-                color: "Green",
-                markers: { background: "Green" },
+                color: "#3eb257",
+                markers: { background: "#3eb257" },
                 highlight: {
                     visible: false
                 }
@@ -2633,10 +2685,10 @@ function PopulateTVIISOChart() {
                 type: "rangeArea",
                 fromField: "ThresholdBottom",
                 toField: "ThresholdTop",
-                color: "Green",
+                color: "#148787",
                 line: {
                     style: "smooth",
-                    color: "green",
+                    color: "#058e8e",
                     width: 1
                 },
                 highlight: {
@@ -2646,8 +2698,8 @@ function PopulateTVIISOChart() {
             {
                 type: "line",
                 field: "TargetDotGain",
-                color: "Green",
-                markers: { background: "Green" },
+                color: "#3eb257",
+                markers: { background: "#3eb257" },
                 highlight: {
                     visible: false
                 }
@@ -2697,10 +2749,10 @@ function PopulateTVIISOChart() {
                 type: "rangeArea",
                 fromField: "ThresholdBottom",
                 toField: "ThresholdTop",
-                color: "Green",
+                color: "#148787",
                 line: {
                     style: "smooth",
-                    color: "green",
+                    color: "#058e8e",
                     width: 1
                 },
                 highlight: {
@@ -2710,8 +2762,8 @@ function PopulateTVIISOChart() {
             {
                 type: "line",
                 field: "TargetDotGain",
-                color: "Green",
-                markers: { background: "Green" },
+                color: "#3eb257",
+                markers: { background: "#3eb257" },
                 highlight: {
                     visible: false
                 }
@@ -2876,10 +2928,10 @@ function PopulateTVIG7CMYKChart() {
         },
         yAxis: {
             name: "yAxis",
-            min: 0,
-            max: 20,
+            //min: 0,
+            //max: 20,
             majorUnit: 5,
-            axisCrossingValues: [0, 20],
+            //axisCrossingValues: [0, 20],
             labels: {
                 format: "{0}"
             },
@@ -3074,10 +3126,10 @@ function PopulateTVISpreadChart() {
                 fromField: "LowerLimit",
                 toField: "UpperLimit",
                 categoryField: "TVI",
-                color: "Green",
+                color: "#148787",
                 line: {
                     style: "smooth",
-                    color: "green",
+                    color: "#058e8e",
                     width: 1,
                 },
                 highlight: {
@@ -3210,7 +3262,13 @@ function renderChartWithBackgroundByAxis(e) {
             fill: gradientPinkGreen
         });
     }
-    else if (chart.element[0].id == "kendoChartLComaparision" || chart.element[0].id == " kendoChartLBalanceChart") {
+    else if (chart.element[0].id == "kendoChartLBalanceChart") {
+        path = drawing.Path.fromRect(rect, {
+            stroke: null,
+            fill: gradientGray3
+        });
+    }
+    else if (chart.element[0].id == "kendoChartLComaparision") {
         path = drawing.Path.fromRect(rect, {
             stroke: null,
             fill: gradientGray2
