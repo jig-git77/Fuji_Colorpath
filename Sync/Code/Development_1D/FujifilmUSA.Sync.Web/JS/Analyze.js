@@ -1145,7 +1145,6 @@ function BindChartLGrayBalance() {
 
 ////**************** START BIND THE DELTA SUMMARY STATASTICS CHART FOR REPORT  ****************////
 function BindDeltaSummaryStatesChart() {
-    debugger;
     var measurementID = parseInt($hdMeasurement);
     var apiParameters = {
         MeasurementId: measurementID,
@@ -1329,7 +1328,6 @@ function BindInkPaperChartABComparision() {
         success: function (response) {
             console.log('Ink paper chart');
             console.log(response);
-            debugger;
             if (response.data != null) {
                 jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
                 if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
@@ -1352,9 +1350,6 @@ function BindInkPaperChartABComparision() {
 
 
 function PopulateInkPaperChartABComparision() {
-
-
-    debugger;
 
     //var json = jsonDeltaEPrimaryPatchList;
 
@@ -1382,7 +1377,8 @@ function PopulateInkPaperChartABComparision() {
             TargetL: obj.TargetL,
             Targeta: obj.Targeta,
             Targetb: obj.Targetb,
-
+            ΔELimit: obj.ΔELimit,
+            PreAvgΔE: obj.PreAvgΔE
         };
         formattedDeltaEPrimaryPatchList.push(item);
     });
@@ -1412,6 +1408,8 @@ function PopulateInkPaperChartABComparision() {
         stackedChart.push(stack);
     });
 
+    var thrashHold = { paths: [] };
+
     $divChartInkPaperABComparision.kendoChart({
         renderAs: "canvas",
         //title: {
@@ -1434,10 +1432,57 @@ function PopulateInkPaperChartABComparision() {
                     visual.opacity(opacity);
                 }
             },
+            visual: function (e) {
 
-            //visual: function (e) {
-            //    return createColumn(e, e.rect, e.dataItem.color);
-            //}
+
+                var visual = e.createVisual();
+                if (e.series.index == 0) {
+                    var axis = e.sender.getAxis("valueAxis");
+
+                    ////set the path for the green target
+                    // var targetGreen = axis.slot(e.dataItem.PreAvgΔE).origin.x;
+                    // var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: "#34E61E" } }).moveTo(targetGreen, e.rect.topRight().y).lineTo(targetGreen, (e.rect.topRight().y + e.rect.size.height));
+                    // visual.append(pathGreen);
+                    // //set the dot on the green target
+                    // var circleGeoGreenPath = new kendo.geometry.Circle([axis.slot(e.dataItem.PreAvgΔE).origin.x, (e.rect.topRight().y + (e.rect.size.height / 2))], 2);
+                    // var circleGreenPath = new kendo.drawing.Circle(circleGeoGreenPath).fill("#34E61E", 1);
+                    // circleGreenPath.options.stroke.color = "#34E61E";
+                    // visual.append(circleGreenPath);
+
+                    // //set the path for the red target
+                    // var targetRed = axis.slot(e.dataItem.ΔELimit).origin.x;
+                    // var pathRed = new kendo.drawing.Path({ stroke: { width: 2, color: "red" } }).moveTo(targetRed, e.rect.topRight().y).lineTo(targetRed, (e.rect.topRight().y + e.rect.size.height));
+                    // visual.append(pathRed);
+                    // //set the dot on the red target
+                    // var circleGeoRedPath = new kendo.geometry.Circle([axis.slot(e.dataItem.ΔELimit).origin.x, (e.rect.topRight().y + (e.rect.size.height / 2))], 2);
+                    // var circleRedPath = new kendo.drawing.Circle(circleGeoRedPath).fill("red", 1);
+                    // circleRedPath.options.stroke.color = "red";
+                    // visual.append(circleRedPath);
+
+                    if (e.dataItem.PreAvgΔE > 0) {
+                        var greenObj = {};
+                        greenObj.x = axis.slot(e.dataItem.PreAvgΔE).origin.x;
+                        greenObj.y1 = e.rect.topRight().y
+                        //greenObj.x = axis.slot(e.dataItem.PreAvgΔE).origin.x;
+                        greenObj.y2 = (e.rect.topRight().y + e.rect.size.height);
+                        greenObj.y3 = (e.rect.topRight().y + (e.rect.size.height / 2));
+                        greenObj.color = "#34E61E";
+                        thrashHold.paths.push(greenObj);
+                    }
+
+                    if (e.dataItem.ΔELimit > 0) {
+                        var redObj = {};
+                        redObj.x = axis.slot(e.dataItem.ΔELimit).origin.x;
+                        redObj.y1 = e.rect.topRight().y
+                        //redObj.x2 = axis.slot(e.dataItem.ΔELimit).origin.x;
+                        redObj.y2 = (e.rect.topRight().y + e.rect.size.height);
+                        redObj.y3 = (e.rect.topRight().y + (e.rect.size.height / 2));
+                        redObj.color = "red";
+                        thrashHold.paths.push(redObj);
+                    }
+                }
+                return visual;
+            }
         },
         series: [{
             data: formattedDeltaEPrimaryPatchList,
@@ -1489,7 +1534,25 @@ function PopulateInkPaperChartABComparision() {
             width: 310,
             height: 325
         },
-        //render: renderChartWithBackgroundByCategory
+        render: function (e) {
+
+            var chart = e.sender;
+            $.each(thrashHold.paths, function (index, obj) {
+                var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: obj.color } }).moveTo(obj.x, obj.y1).lineTo(obj.x, obj.y2);
+                chart.surface.draw(pathGreen);
+
+                var circleGeoPath = new kendo.geometry.Circle([obj.x, obj.y3], 2);
+                var circlePath = new kendo.drawing.Circle(circleGeoPath).fill(obj.color, 1);
+                circlePath.options.stroke.color = obj.color;
+                chart.surface.draw(circlePath);
+            });
+
+            //$.each(thrashHold.dots, function (index, obj) {
+            //  //  var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: obj.color } }).moveTo(obj.x1, obj.y1).lineTo(obj.x2, obj.y2);
+            //  //  chart.surface.draw(pathGreen);
+            //});
+
+        }
     });
 
     //var densityPatchColor = [
@@ -1544,9 +1607,32 @@ function PopulateInkPaperChartABComparision() {
                     visual.opacity(opacity);
                 }
             },
-            //visual: function (e) {
-            //    return createColumn(e, e.rect, e.dataItem.color);
-            //}
+            visual: function (e) {
+                debugger;
+                var visual = e.createVisual();
+                var axis = e.sender.getAxis("valueAxis");
+
+                var target = axis.slot(e.dataItem.densityLimit).origin.y;                
+                var path = new kendo.drawing.Path({ stroke: { width: 3, color: "red" } }).moveTo(e.rect.origin.x, target).lineTo(e.rect.topRight().x, target);
+                visual.append(path);
+
+                var circleGeometry = new kendo.geometry.Circle([(e.rect.origin.x + (e.rect.size.width / 2)), target], 3);
+                var circleDensity = new kendo.drawing.Circle(circleGeometry).fill("red", 1);
+                circleDensity.options.stroke.color = "red";
+                visual.append(circleDensity);
+
+
+                var targetAvg = axis.slot(e.dataItem.preAvgDensity).origin.y;
+                var pathAvg = new kendo.drawing.Path({ stroke: { width: 3, color: "#34E61E" } }).moveTo(e.rect.origin.x, targetAvg).lineTo(e.rect.topRight().x, targetAvg);
+                visual.append(pathAvg);
+
+                var circleAvg = new kendo.geometry.Circle([(e.rect.origin.x + (e.rect.size.width / 2)), targetAvg], 3);
+                var circleDensityAvg = new kendo.drawing.Circle(circleAvg).fill("#34E61E", 1);
+                circleDensityAvg.options.stroke.color = "#34E61E";
+                visual.append(circleDensityAvg);
+           
+                return visual;
+            }
         },
         series: [{
             data: formattedDensityList,
@@ -3262,7 +3348,7 @@ function PopulateSummaryDeltaChart() {
             case "NinetyFiveΔE": categoryList.push("95th Percentile " + selectedDeltaE); break;
         }
     });
-    
+
     console.log(jsonSummaryNameList);
     console.log(categoryList);
 
@@ -3276,18 +3362,18 @@ function PopulateSummaryDeltaChart() {
             stack: true,
             width: 10,
             gap: 0.2,
-            color: "#A1A1A1"           
+            color: "#A1A1A1"
         },
         series: [{
             data: jsonSummaryValueList,
             overlay: {
                 gradient: "glass",
             }
-        },{
+        }, {
             data: stackedChart,
             overlay: {
                 gradient: "glass",
-            },            
+            },
             color: "#C8D6E3"
         }],
         panes: [{
