@@ -14,6 +14,7 @@ namespace FujifilmUSA.Sync.Entity
         public string fromDeltaE { get; set; }
         public int validationType { get; set; }
         public int CurrentUserId { get; set; }
+        public string ReportDLPName { get; set; }
         public string ABComparisionSpiderChart { get; set; }
         public string InkPaperPatchChart { get; set; }
         public string ABActualTargetChart { get; set; }
@@ -21,5 +22,6 @@ namespace FujifilmUSA.Sync.Entity
         public string LGrayBalanceChart { get; set; }
         public string AGrayBalanceChart { get; set; }
         public string BGrayBalanceChart { get; set; }
+        public string DeltaSummaryChart { get; set; }
     }
 }

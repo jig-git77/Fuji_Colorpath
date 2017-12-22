@@ -212,6 +212,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         header.InnerText = string.Format(GetResourceString(_recAnalyze), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Analyze - {0}
                         DLPName = SessionManager.Instance.CurrentOptimizeRun.LastDlpName.Replace(SessionManager.Instance.CurrentProject.ProjectName + " ", ""); //---DLPName to pass into report
                         DLPName = DLPName.Remove(DLPName.Length - 4);
+                        hdnReportDLPName.Value = DLPName;
                     }
                 }
                 lbtnDownloadAndSaveDLP.Text = IsNewDlp

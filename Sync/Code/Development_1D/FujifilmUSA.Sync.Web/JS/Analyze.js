@@ -20,6 +20,9 @@ var jsonDTSpreadChartData_CMYKList = [];
 var jsonDTSpreadChartDataList = [];
 var jsonDTSpreadSplineRangeChartDataList = [];
 
+//DeltaSummaryDetails array
+var jsonSummaryNameList = [];
+var jsonSummaryValueList = [];
 var _Resources = {};
 
 var CURRENT_USER_ID
@@ -57,6 +60,7 @@ var $divChartG7GrayDeltaL;
 var $divChartG7BlackNPD;
 var $divChartG7GrayNPD;
 var $divChartTVISummaryDotGain;
+var $divChartSummaryDeltaChart
 var $divChartTVISpread;
 var $divTVI_G7;
 var $divTVI_ISO;
@@ -66,7 +70,8 @@ var $divChartTVIISO_Magenta;
 var $divChartTVIISO_Yellow;
 var $divChartTVIISO_Black;
 var $divChartTVIISO_CMYK;
-var $tblDensityChart
+var $tblDensityChart;
+var $hdnReportDLPName;
 
 //********** kendo objects *********//
 var drawing = kendo.drawing;
@@ -175,6 +180,7 @@ $(document).ready(function () {
     $hdnSync1DType = $('#hdnSync1DType').val();
     $hdnValidationType = isNaN(parseInt($('#hdnValidationType').val())) ? 0 : parseInt($('#hdnValidationType').val());
     $hdnCurrentDlpSubOperation = parseInt($('#hdnCurrentDlpSubOperation').val());
+    $hdnReportDLPName = $('#hdnReportDLPName').val();
     $isAverageOfMeasurements = $('#ContentPlaceHolder1_ucAnalyze_chkAnalyzeAverageOfMeasurements').is(':checked');
     $hdMeasurement = $('#ContentPlaceHolder1_ucAnalyze_hdMeasurement').val();
     $chartLoader = $(".chart-loading");
@@ -209,6 +215,7 @@ $(document).ready(function () {
     $divChartTVIISO_Yellow = $("#divChartTVIISO_Yellow");
     $divChartTVIISO_Black = $("#divChartTVIISO_Black");
     $divChartTVIISO_CMYK = $("#divChartTVIISO_CMYK");
+    $divChartSummaryDeltaChart = $("#divChartSummaryDeltaChart");
 
     $tblDensityChart = $("#tblDensityChart");
     $selectedDeltaE = $rbtnListDeltaE.find('input:checked').val();
@@ -272,6 +279,7 @@ $(document).ready(function () {
         BindTVICharts();
     }
 
+    BindDeltaSummaryStatesChart();
     $imgEyeABCompLarge.on('click', function (e) {
         e.preventDefault();
 
@@ -326,17 +334,20 @@ $(document).ready(function () {
             fromDeltaE: $selectedDeltaE,
             validationType: $hdnValidationType,
             CurrentUserId: CURRENT_USER_ID,
+            ReportDLPName: $hdnReportDLPName,
             ABComparisionSpiderChart: '',
             InkPaperPatchChart: '',
             ABActualTargetChart: '',
             LComparisionChart: '',
             LGrayBalanceChart: '',
             AGrayBalanceChart: '',
-            BGrayBalanceChart: ''
+            BGrayBalanceChart: '',
+            DeltaSummaryChart: ''
         };
 
         apiParameter.ABComparisionSpiderChart = GetABComparisionSpiderChartImage();
         apiParameter.InkPaperPatchChart = GetInkPaperPatchChartImage();
+        apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
         //apiParameter.ABActualTargetChart = GetActualVsTargetChartImage();
         //apiParameter.LComparisionChart = GetLComparisionChartImage();
         //apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
@@ -580,6 +591,9 @@ function BindChartTargetVersusActualAB() {
         },
         render: renderChartWithBackgroundByAxis
     });
+
+
+
 }
 
 ////**************** START BIND THE AB COMPARISION GAMUT CHART  ****************////
@@ -1129,6 +1143,41 @@ function BindChartLGrayBalance() {
 }
 
 
+////**************** START BIND THE DELTA SUMMARY STATASTICS CHART FOR REPORT  ****************////
+function BindDeltaSummaryStatesChart() {
+    debugger;
+    var measurementID = parseInt($hdMeasurement);
+    var apiParameters = {
+        MeasurementId: measurementID,
+        IsAverageOfMeasurements: $isAverageOfMeasurements,
+        IsVerificationProject: $hdnVerification,
+        IsSync1DTypeProject: $hdnSync1DType,
+        fromDeltaE: $selectedDeltaE,
+        validationType: $hdnValidationType
+    };
+
+    $.ajax({
+        url: SERVICE_BASE_URL + 'api/Report/GenerateSummaryDeltaCharts',
+        data: apiParameters,
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            if (response != null) {
+                jsonSummaryNameList = response.data.DTDeltaSummaryLables;
+                jsonSummaryValueList = response.data.DTDeltaSummaryValues;
+            }
+            PopulateSummaryDeltaChart();
+        },
+        error: function (xhr, errorType, exception) {
+            //alert(exception);
+            kendo.ui.progress($chartLoader, false);
+        }
+    });
+
+
+}
+
+
 ////**************** GET IMAGE OF AB COMPARSION SPIDER CHART FOR REPORT  ****************////
 function GetABComparisionSpiderChartImage() {
     var chart = $chart_TargetVersusActualAB.data("kendoChart");
@@ -1251,6 +1300,10 @@ function Get_B_BalanceChartImage() {
     //return dummyChart.imageDataURL();
 }
 
+function Get_DeltaSummaryChartImage() {
+    var chart = $divChartSummaryDeltaChart.data("kendoChart");
+    return chart.imageDataURL();
+}
 
 ////**************** START BIND THE AB COMPARISION INK PAPER CHART  ****************////
 
@@ -1296,6 +1349,7 @@ function BindInkPaperChartABComparision() {
         }
     });
 }
+
 
 function PopulateInkPaperChartABComparision() {
 
@@ -1399,7 +1453,7 @@ function PopulateInkPaperChartABComparision() {
             tooltip: {
                 visible: false
             },
-            color:"#C8D6E3"
+            color: "#C8D6E3"
         }],
         panes: [{
             clip: false
@@ -1685,6 +1739,10 @@ function PopulateInkPaperChartABComparision() {
         },
         render: renderChartWithBackgroundByCategory
     });
+
+
+
+
 
 }
 
@@ -3161,6 +3219,115 @@ function PopulateTVISpreadChart() {
     });
 }
 
+function PopulateSummaryDeltaChart() {
+
+    //var axis = json.map(function (a) { return a["?E"]; });
+    //var axis = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔE; });
+    //var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
+    var maxNum = Math.max.apply(Math, jsonSummaryValueList);
+    var maxValue = 0;
+    var marginValue = 1;
+    switch (true) {
+        case (maxNum < 5): maxValue = 5; marginValue = 1; break;
+        case (maxNum == 5): maxValue = 6; marginValue = 1; break;
+        case (maxNum >= 5 && maxNum < 10): maxValue = 10; marginValue = 2; break;
+        case (maxNum >= 10 && maxNum < 15): maxValue = 15; marginValue = 3; break;
+        case (maxNum >= 15 && maxNum < 20): maxValue = 20; marginValue = 5; break;
+        case (maxNum >= 20 && maxNum < 30): maxValue = 30; marginValue = 5; break;
+        case (maxNum >= 30): maxValue = 50; marginValue = 5; break;
+    }
+
+    //generate the second stacked chart by max value
+    var stackedChart = [];
+    var categoryList = [];
+    $.each(jsonSummaryValueList, function (index, num) {
+        var stack = {
+            value: maxValue
+        };
+        stackedChart.push(stack);
+    });
+
+    var selectedDeltaE = $selectedDeltaE;
+    if (selectedDeltaE == "E") {
+        selectedDeltaE = "ΔE";
+    }
+
+    $.each(jsonSummaryNameList, function (index, text) {
+        switch (text) {
+            case "Avg_ΔE": categoryList.push("Average " + selectedDeltaE); break;
+            case "Max_ΔE": categoryList.push("Maximum " + selectedDeltaE); break;
+            case "PriΔE": categoryList.push("Max Primary " + selectedDeltaE); break;
+            case "PriΔH": categoryList.push("Max Primary ΔH"); break;
+            case "GrayΔE": categoryList.push("Gray Average " + selectedDeltaE); break;
+            case "NinetyFiveΔE": categoryList.push("95th Percentile " + selectedDeltaE); break;
+        }
+    });
+    
+    console.log(jsonSummaryNameList);
+    console.log(categoryList);
+
+    $divChartSummaryDeltaChart.kendoChart({
+        renderAs: "canvas",
+        //title: {
+        //    text: "ΔE2000 Primary Patches"
+        //},
+        seriesDefaults: {
+            type: "bar",
+            stack: true,
+            width: 10,
+            gap: 0.2,
+            color: "#A1A1A1"           
+        },
+        series: [{
+            data: jsonSummaryValueList,
+            overlay: {
+                gradient: "glass",
+            }
+        },{
+            data: stackedChart,
+            overlay: {
+                gradient: "glass",
+            },            
+            color: "#C8D6E3"
+        }],
+        panes: [{
+            clip: false
+        }],
+        categoryAxis: {
+            name: "categoryAxis",
+            categories: categoryList,
+            //categories: [],
+            majorGridLines: {
+                visible: false
+            }
+        },
+        valueAxis: {
+            name: "valueAxis",
+            //max: 20,
+            line: {
+                visible: false
+            },
+            minorGridLines: {
+                visible: false
+            },
+            labels: {
+                rotation: "auto"
+            },
+            max: maxValue,
+            margin: marginValue
+        },
+        //tooltip: {
+        //    visible: true,
+        //    //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
+        //    template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
+        //},
+        chartArea: {
+            width: 310,
+            height: 260
+        },
+        //render: renderChartWithBackgroundByCategory
+    });
+}
 
 function createColumn(e, rect, color) {
     var origin = rect.origin;
