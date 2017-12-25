@@ -4,6 +4,7 @@ using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujiFilmUSA.Sync.Service.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -48,6 +49,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("_recDeltaL", "deltaLText");
             _resourceValues.Add("_recDeltaA", "deltaAText");
             _resourceValues.Add("_recDeltaB", "deltaBText");
+            _resourceValues.Add("_recPreDeltaE", "PreDeltaE");
 
             _resourceValues.Add("_recCyanPathMetrics", "cyanPathMetrics");
             _resourceValues.Add("_recMagentaPathMetrics", "magentaPathMetrics");
@@ -132,6 +134,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
                     _presenterAnalyze.GetGrayChart();
                     GenerateResources();
+                    
                     httpResponse.Data = new
                     {
                         GamutChartActual = DTGaumatChart1,
@@ -325,6 +328,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.From_ΔE = fromDeltaE;
 
                     _presenterAnalyze.GetInkPaperChart();
+                    var str = JsonConvert.SerializeObject(DTDeltaEPrimaryPatches);
                     GenerateResources();
                     httpResponse.Data = new
                     {

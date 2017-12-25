@@ -1192,4 +1192,7 @@ erwünschten Format überein.</value>
   <data name="PreviousText" xml:space="preserve">
     <value>vorheriges</value>
   </data>
+  <data name="PreDeltaE" xml:space="preserve">
+    <value>vorheriges ΔE</value>
+  </data>
 </root>

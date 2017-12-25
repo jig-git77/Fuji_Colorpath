@@ -1191,4 +1191,7 @@
   <data name="PreviousText" xml:space="preserve">
     <value>Previous_ja</value>
   </data>
+  <data name="PreDeltaE" xml:space="preserve">
+    <value>Previous ΔE_ja</value>
+  </data>
 </root>

@@ -474,11 +474,11 @@ function BindChartTargetVersusActualAB() {
         //create tool tip
 
         var tooltipString = '<table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + element.CielabL + ' ' + _Resources._recA + ': ' + element.CielabA + ' ' + _Resources._recB + ': ' + element.CielabB + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL + ' ' + _Resources._recA + ': ' + element.Targeta + ' ' + _Resources._recB + ': ' + element.Targetb + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"] + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"] + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"] + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + element.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + element.CielabB.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + element.Targetb.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"].toFixed(2) + '</td></tr>';
         tooltipString += '</table>';
 
         kendoSeriseObj.tooltip = { visible: true, template: tooltipString, shared: true };
@@ -967,7 +967,7 @@ function BindChartLGrayBalance() {
             markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= dataItem.CielabL # ' + _Resources._recA + ': #= dataItem.CielabA# ' + _Resources._recB + ' #= dataItem.CielabB#</td></tr><tr><td>' + _Resources._recTarget + ' L*: #=dataItem.TargetL# a*: #=dataItem.Targeta# b*: #=dataItem.Targetb#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=dataItem.ΔL#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=dataItem.Δa#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=dataItem.Δb#</td></tr></table>'
+                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB+': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
             }
         }],
         xAxis: {
@@ -1033,7 +1033,7 @@ function BindChartLGrayBalance() {
             markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= dataItem.CielabL # ' + _Resources._recA + ': #= dataItem.CielabA# ' + _Resources._recB + ' #= dataItem.CielabB#</td></tr><tr><td>' + _Resources._recTarget + ' L*: #=dataItem.TargetL# a*: #=dataItem.Targeta# b*: #=dataItem.Targetb#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=dataItem.ΔL#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=dataItem.Δa#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=dataItem.Δb#</td></tr></table>'
+                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB+': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
             }
         }],
         xAxis: {
@@ -1098,7 +1098,7 @@ function BindChartLGrayBalance() {
             markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= dataItem.CielabL # ' + _Resources._recA + ': #= dataItem.CielabA# ' + _Resources._recB + ' #= dataItem.CielabB#</td></tr><tr><td>' + _Resources._recTarget + ' L*: #=dataItem.TargetL# a*: #=dataItem.Targeta# b*: #=dataItem.Targetb#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=dataItem.ΔL#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=dataItem.Δa#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=dataItem.Δb#</td></tr></table>'
+                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB+': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
             }
         }],
         xAxis: {
@@ -1433,52 +1433,53 @@ function PopulateInkPaperChartABComparision() {
                 }
             },
             visual: function (e) {
-
-
                 var visual = e.createVisual();
-                if (e.series.index == 0) {
-                    var axis = e.sender.getAxis("valueAxis");
+                //-----For Sync1D projects or validation projects
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                    if (e.series.index == 0) {
+                        var axis = e.sender.getAxis("valueAxis");
 
-                    ////set the path for the green target
-                    // var targetGreen = axis.slot(e.dataItem.PreAvgΔE).origin.x;
-                    // var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: "#34E61E" } }).moveTo(targetGreen, e.rect.topRight().y).lineTo(targetGreen, (e.rect.topRight().y + e.rect.size.height));
-                    // visual.append(pathGreen);
-                    // //set the dot on the green target
-                    // var circleGeoGreenPath = new kendo.geometry.Circle([axis.slot(e.dataItem.PreAvgΔE).origin.x, (e.rect.topRight().y + (e.rect.size.height / 2))], 2);
-                    // var circleGreenPath = new kendo.drawing.Circle(circleGeoGreenPath).fill("#34E61E", 1);
-                    // circleGreenPath.options.stroke.color = "#34E61E";
-                    // visual.append(circleGreenPath);
+                        ////set the path for the green target
+                        // var targetGreen = axis.slot(e.dataItem.PreAvgΔE).origin.x;
+                        // var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: "#34E61E" } }).moveTo(targetGreen, e.rect.topRight().y).lineTo(targetGreen, (e.rect.topRight().y + e.rect.size.height));
+                        // visual.append(pathGreen);
+                        // //set the dot on the green target
+                        // var circleGeoGreenPath = new kendo.geometry.Circle([axis.slot(e.dataItem.PreAvgΔE).origin.x, (e.rect.topRight().y + (e.rect.size.height / 2))], 2);
+                        // var circleGreenPath = new kendo.drawing.Circle(circleGeoGreenPath).fill("#34E61E", 1);
+                        // circleGreenPath.options.stroke.color = "#34E61E";
+                        // visual.append(circleGreenPath);
 
-                    // //set the path for the red target
-                    // var targetRed = axis.slot(e.dataItem.ΔELimit).origin.x;
-                    // var pathRed = new kendo.drawing.Path({ stroke: { width: 2, color: "red" } }).moveTo(targetRed, e.rect.topRight().y).lineTo(targetRed, (e.rect.topRight().y + e.rect.size.height));
-                    // visual.append(pathRed);
-                    // //set the dot on the red target
-                    // var circleGeoRedPath = new kendo.geometry.Circle([axis.slot(e.dataItem.ΔELimit).origin.x, (e.rect.topRight().y + (e.rect.size.height / 2))], 2);
-                    // var circleRedPath = new kendo.drawing.Circle(circleGeoRedPath).fill("red", 1);
-                    // circleRedPath.options.stroke.color = "red";
-                    // visual.append(circleRedPath);
+                        // //set the path for the red target
+                        // var targetRed = axis.slot(e.dataItem.ΔELimit).origin.x;
+                        // var pathRed = new kendo.drawing.Path({ stroke: { width: 2, color: "red" } }).moveTo(targetRed, e.rect.topRight().y).lineTo(targetRed, (e.rect.topRight().y + e.rect.size.height));
+                        // visual.append(pathRed);
+                        // //set the dot on the red target
+                        // var circleGeoRedPath = new kendo.geometry.Circle([axis.slot(e.dataItem.ΔELimit).origin.x, (e.rect.topRight().y + (e.rect.size.height / 2))], 2);
+                        // var circleRedPath = new kendo.drawing.Circle(circleGeoRedPath).fill("red", 1);
+                        // circleRedPath.options.stroke.color = "red";
+                        // visual.append(circleRedPath);
 
-                    if (e.dataItem.PreAvgΔE > 0) {
-                        var greenObj = {};
-                        greenObj.x = axis.slot(e.dataItem.PreAvgΔE).origin.x;
-                        greenObj.y1 = e.rect.topRight().y
-                        //greenObj.x = axis.slot(e.dataItem.PreAvgΔE).origin.x;
-                        greenObj.y2 = (e.rect.topRight().y + e.rect.size.height);
-                        greenObj.y3 = (e.rect.topRight().y + (e.rect.size.height / 2));
-                        greenObj.color = "#34E61E";
-                        thrashHold.paths.push(greenObj);
-                    }
+                        //------Green marker image plot for Previous Run's Avg ΔE
+                        if (e.dataItem.PreAvgΔE > 0) {
+                            var greenObj = {};
+                            greenObj.x = axis.slot(e.dataItem.PreAvgΔE).origin.x;
+                            greenObj.y1 = e.rect.topRight().y                            
+                            greenObj.y2 = (e.rect.topRight().y + e.rect.size.height);
+                            greenObj.y3 = (e.rect.topRight().y + (e.rect.size.height / 2));//---green dot mid of the line
+                            greenObj.color = "#34E61E";
+                            thrashHold.paths.push(greenObj);
+                        }
 
-                    if (e.dataItem.ΔELimit > 0) {
-                        var redObj = {};
-                        redObj.x = axis.slot(e.dataItem.ΔELimit).origin.x;
-                        redObj.y1 = e.rect.topRight().y
-                        //redObj.x2 = axis.slot(e.dataItem.ΔELimit).origin.x;
-                        redObj.y2 = (e.rect.topRight().y + e.rect.size.height);
-                        redObj.y3 = (e.rect.topRight().y + (e.rect.size.height / 2));
-                        redObj.color = "red";
-                        thrashHold.paths.push(redObj);
+                        //------Red marker image plot for Tolerance
+                        if (e.dataItem.ΔELimit > 0) {
+                            var redObj = {};
+                            redObj.x = axis.slot(e.dataItem.ΔELimit).origin.x;
+                            redObj.y1 = e.rect.topRight().y                            
+                            redObj.y2 = (e.rect.topRight().y + e.rect.size.height);
+                            redObj.y3 = (e.rect.topRight().y + (e.rect.size.height / 2)); //---red dot mid of the line
+                            redObj.color = "red";
+                            thrashHold.paths.push(redObj);
+                        }
                     }
                 }
                 return visual;
@@ -1528,7 +1529,43 @@ function PopulateInkPaperChartABComparision() {
         tooltip: {
             visible: true,
             //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
-            template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
+            //template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
+            template: function (dataItem) {
+                debugger;
+                var item = dataItem.dataItem;
+                var toolTipString = "<table>";
+                toolTipString += "<tr><td><b>" + item.title + "</b></td></tr>";
+                toolTipString += "<tr><td><table>";
+                toolTipString += "<tr><td><b>" + _Resources._recActual + "</b></td><td>";
+                toolTipString += _Resources._recL + ": " + item.CielabL.toFixed(2);
+                toolTipString += " " + _Resources._recA + ": " + item.CielabA.toFixed(2);
+                toolTipString += " " + _Resources._recB + ": " + item.CielabB.toFixed(2);
+                toolTipString += "</td></tr>";
+                toolTipString += "<tr><td><b>" + _Resources._recTarget + "</b></td><td>";
+                toolTipString += _Resources._recL + ": " + item.TargetL.toFixed(2);
+                toolTipString += " " + _Resources._recA + ": " + item.Targeta.toFixed(2);
+                toolTipString += " " + _Resources._recB + ": " + item.Targetb.toFixed(2);
+                toolTipString += "</td></tr>";
+                toolTipString += "<tr><td><b>" + _Resources._recDeltaE + "</b></td><td>";
+                toolTipString += item.value.toFixed(2);
+
+                //-----For Sync1D projects or validation projects
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                    toolTipString += " (Thr." + item.ΔELimit.toFixed(2) + ")";
+                }
+
+                //-----For Sync1D projects, display Previous ΔE in tooltip also
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && item.PreAvgΔE>0) {
+                    toolTipString += "<tr><td><b>" + _Resources._recPreDeltaE + "</b></td><td>";
+                    toolTipString += item.PreAvgΔE.toFixed(2);
+                    toolTipString += "</td></tr>";
+                }
+
+                toolTipString += "</table></td></tr>";
+                toolTipString += "</table>";
+                //var toolTipString = "<b>#= item.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= item.CielabL # " + _Resources._recA + ": #= item.CielabA # " + _Resources._recB + ": #= item.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= item.TargetL # " + _Resources._recA + ": #= item.Targeta # " + _Resources._recB + ": #= item.Targetb # <br/>" + _Resources._recDeltaE + ":  #= item.value #";
+                return toolTipString;
+            }
         },
         chartArea: {
             width: 310,
@@ -1536,22 +1573,21 @@ function PopulateInkPaperChartABComparision() {
         },
         render: function (e) {
 
-            var chart = e.sender;
-            $.each(thrashHold.paths, function (index, obj) {
-                var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: obj.color } }).moveTo(obj.x, obj.y1).lineTo(obj.x, obj.y2);
-                chart.surface.draw(pathGreen);
+            //-----For Sync1D projects or validation projects
+            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                var chart = e.sender;
+                $.each(thrashHold.paths, function (index, obj) {
+                    //set the line 
+                    var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: obj.color } }).moveTo(obj.x, obj.y1).lineTo(obj.x, obj.y2);
+                    chart.surface.draw(pathGreen);
 
-                var circleGeoPath = new kendo.geometry.Circle([obj.x, obj.y3], 2);
-                var circlePath = new kendo.drawing.Circle(circleGeoPath).fill(obj.color, 1);
-                circlePath.options.stroke.color = obj.color;
-                chart.surface.draw(circlePath);
-            });
-
-            //$.each(thrashHold.dots, function (index, obj) {
-            //  //  var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: obj.color } }).moveTo(obj.x1, obj.y1).lineTo(obj.x2, obj.y2);
-            //  //  chart.surface.draw(pathGreen);
-            //});
-
+                    //set the dot mid of the line
+                    var circleGeoPath = new kendo.geometry.Circle([obj.x, obj.y3], 2);  //
+                    var circlePath = new kendo.drawing.Circle(circleGeoPath).fill(obj.color, 1);
+                    circlePath.options.stroke.color = obj.color;
+                    chart.surface.draw(circlePath);
+                });
+            }
         }
     });
 
@@ -1607,12 +1643,11 @@ function PopulateInkPaperChartABComparision() {
                     visual.opacity(opacity);
                 }
             },
-            visual: function (e) {
-                debugger;
+            visual: function (e) {                
                 var visual = e.createVisual();
                 var axis = e.sender.getAxis("valueAxis");
 
-                var target = axis.slot(e.dataItem.densityLimit).origin.y;                
+                var target = axis.slot(e.dataItem.densityLimit).origin.y;
                 var path = new kendo.drawing.Path({ stroke: { width: 3, color: "red" } }).moveTo(e.rect.origin.x, target).lineTo(e.rect.topRight().x, target);
                 visual.append(path);
 
@@ -1621,16 +1656,16 @@ function PopulateInkPaperChartABComparision() {
                 circleDensity.options.stroke.color = "red";
                 visual.append(circleDensity);
 
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && e.dataItem.preAvgDensity > 0) {
+                    var targetAvg = axis.slot(e.dataItem.preAvgDensity).origin.y;
+                    var pathAvg = new kendo.drawing.Path({ stroke: { width: 3, color: "#34E61E" } }).moveTo(e.rect.origin.x, targetAvg).lineTo(e.rect.topRight().x, targetAvg);
+                    visual.append(pathAvg);
 
-                var targetAvg = axis.slot(e.dataItem.preAvgDensity).origin.y;
-                var pathAvg = new kendo.drawing.Path({ stroke: { width: 3, color: "#34E61E" } }).moveTo(e.rect.origin.x, targetAvg).lineTo(e.rect.topRight().x, targetAvg);
-                visual.append(pathAvg);
-
-                var circleAvg = new kendo.geometry.Circle([(e.rect.origin.x + (e.rect.size.width / 2)), targetAvg], 3);
-                var circleDensityAvg = new kendo.drawing.Circle(circleAvg).fill("#34E61E", 1);
-                circleDensityAvg.options.stroke.color = "#34E61E";
-                visual.append(circleDensityAvg);
-           
+                    var circleAvg = new kendo.geometry.Circle([(e.rect.origin.x + (e.rect.size.width / 2)), targetAvg], 3);
+                    var circleDensityAvg = new kendo.drawing.Circle(circleAvg).fill("#34E61E", 1);
+                    circleDensityAvg.options.stroke.color = "#34E61E";
+                    visual.append(circleDensityAvg);
+                }
                 return visual;
             }
         },
@@ -1664,7 +1699,17 @@ function PopulateInkPaperChartABComparision() {
         tooltip: {
             visible: true,
             //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
-            template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " :    #= dataItem.density # <br/>" + _Resources._recTarget + " :    #= dataItem.densityLimit # <br/>" + _Resources._recPrevious + " :    #= dataItem.preAvgDensity #"
+            //template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " :    #= dataItem.density # <br/>" + _Resources._recTarget + " :    #= dataItem.densityLimit # <br/>" + _Resources._recPrevious + " :    #= dataItem.preAvgDensity #"
+            template: function (e) {
+                var item = e.dataItem;
+                var tooltipString = "<b>" + item.title + "</b><br/>";
+                tooltipString += "<b>" + _Resources._recActual + ":</b> " + item.density.toFixed(2) + "<br/>";
+                tooltipString += "<b>" + _Resources._recTarget + ":</b> " + item.densityLimit.toFixed(2) + "<br/>";
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && item.preAvgDensity > 0) {
+                    tooltipString += "<b>" + _Resources._recPrevious + ":</b> " + item.preAvgDensity.toFixed(2);
+                }
+                return tooltipString;
+            }
         },
         chartArea: {
             width: 325,
@@ -1692,11 +1737,11 @@ function PopulateInkPaperChartABComparision() {
         paperAB.data = [[deltaA, paperObj.Δb]];
 
         tooltipString = '<table><tr><td><center><b>' + _Resources._recPaperPathMetrics + '</b></center><td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + paperObj.CielabL + ' ' + _Resources._recA + ': ' + paperObj.CielabA + ' ' + _Resources._recB + ': ' + paperObj.CielabB + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + paperObj.TargetL + ' ' + _Resources._recA + ': ' + paperObj.Targeta + ' ' + _Resources._recB + ': ' + paperObj.Targetb + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaL + ':   ' + paperObj["ΔL"] + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaA + ':   ' + paperObj["Δa"] + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaB + ':   ' + paperObj["Δb"] + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + paperObj.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + paperObj.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + paperObj.CielabB.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + paperObj.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + paperObj.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + paperObj.Targetb.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaL + ':   ' + paperObj["ΔL"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaA + ':   ' + paperObj["Δa"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaB + ':   ' + paperObj["Δb"].toFixed(2) + '</td></tr>';
         tooltipString += '</table>';
 
 

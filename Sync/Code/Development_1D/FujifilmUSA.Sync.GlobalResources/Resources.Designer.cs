@@ -3103,6 +3103,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Previous ΔE.
+        /// </summary>
+        internal static string PreDeltaE {
+            get {
+                return ResourceManager.GetString("PreDeltaE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Previous.
         /// </summary>
         internal static string PreviousText {
