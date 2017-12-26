@@ -2635,6 +2635,105 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to C.
+        /// </summary>
+        internal static string gridAnalyzeHeader_C_Resource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeader_C_Resource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ΔE.
+        /// </summary>
+        internal static string gridAnalyzeHeader_E_Resource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeader_E_Resource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to K.
+        /// </summary>
+        internal static string gridAnalyzeHeader_K_Resource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeader_K_Resource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to M.
+        /// </summary>
+        internal static string gridAnalyzeHeader_M_Resource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeader_M_Resource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Y.
+        /// </summary>
+        internal static string gridAnalyzeHeader_Y_Resource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeader_Y_Resource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual a*.
+        /// </summary>
+        internal static string gridAnalyzeHeaderCIELAB_AResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderCIELAB_AResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual b*.
+        /// </summary>
+        internal static string gridAnalyzeHeaderCIELAB_BResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderCIELAB_BResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual L*.
+        /// </summary>
+        internal static string gridAnalyzeHeaderCIELAB_LResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderCIELAB_LResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ΔCh.
+        /// </summary>
+        internal static string gridAnalyzeHeaderDelta_CHResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderDelta_CHResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ΔH.
+        /// </summary>
+        internal static string gridAnalyzeHeaderDelta_HResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderDelta_HResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ΔL.
+        /// </summary>
+        internal static string gridAnalyzeHeaderDelta_LResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderDelta_LResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to pΔa.
         /// </summary>
         internal static string gridAnalyzeHeaderDeltaAResource {
@@ -2667,6 +2766,60 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string gridAnalyzeHeaderDeltaLResource {
             get {
                 return ResourceManager.GetString("gridAnalyzeHeaderDeltaLResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Density_C.
+        /// </summary>
+        internal static string gridAnalyzeHeaderDensity_CResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderDensity_CResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Density_M.
+        /// </summary>
+        internal static string gridAnalyzeHeaderDensity_MResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderDensity_MResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Density_V.
+        /// </summary>
+        internal static string gridAnalyzeHeaderDensity_VResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderDensity_VResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Density_Y.
+        /// </summary>
+        internal static string gridAnalyzeHeaderDensity_YResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderDensity_YResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ΔE2000.
+        /// </summary>
+        internal static string gridAnalyzeHeaderE2000Resource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderE2000Resource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ΔE94.
+        /// </summary>
+        internal static string gridAnalyzeHeaderE94Resource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderE94Resource", resourceCulture);
             }
         }
         
@@ -2721,6 +2874,33 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string gridAnalyzeHeaderSpotNameResource {
             get {
                 return ResourceManager.GetString("gridAnalyzeHeaderSpotNameResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target a*.
+        /// </summary>
+        internal static string gridAnalyzeHeaderTargetAResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderTargetAResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target b*.
+        /// </summary>
+        internal static string gridAnalyzeHeaderTargetBResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderTargetBResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target L*.
+        /// </summary>
+        internal static string gridAnalyzeHeaderTargetLResource {
+            get {
+                return ResourceManager.GetString("gridAnalyzeHeaderTargetLResource", resourceCulture);
             }
         }
         

@@ -1212,4 +1212,64 @@
   <data name="PreDeltaE" xml:space="preserve">
     <value>Previous ΔE</value>
   </data>
+  <data name="gridAnalyzeHeaderCIELAB_AResource" xml:space="preserve">
+    <value>Actual a*</value>
+  </data>
+  <data name="gridAnalyzeHeaderCIELAB_BResource" xml:space="preserve">
+    <value>Actual b*</value>
+  </data>
+  <data name="gridAnalyzeHeaderCIELAB_LResource" xml:space="preserve">
+    <value>Actual L*</value>
+  </data>
+  <data name="gridAnalyzeHeaderDelta_CHResource" xml:space="preserve">
+    <value>ΔCh</value>
+  </data>
+  <data name="gridAnalyzeHeaderDelta_HResource" xml:space="preserve">
+    <value>ΔH</value>
+  </data>
+  <data name="gridAnalyzeHeaderDelta_LResource" xml:space="preserve">
+    <value>ΔL</value>
+  </data>
+  <data name="gridAnalyzeHeaderDensity_CResource" xml:space="preserve">
+    <value>Density_C</value>
+  </data>
+  <data name="gridAnalyzeHeaderDensity_MResource" xml:space="preserve">
+    <value>Density_M</value>
+  </data>
+  <data name="gridAnalyzeHeaderDensity_VResource" xml:space="preserve">
+    <value>Density_V</value>
+  </data>
+  <data name="gridAnalyzeHeaderDensity_YResource" xml:space="preserve">
+    <value>Density_Y</value>
+  </data>
+  <data name="gridAnalyzeHeaderE2000Resource" xml:space="preserve">
+    <value>ΔE2000</value>
+  </data>
+  <data name="gridAnalyzeHeaderE94Resource" xml:space="preserve">
+    <value>ΔE94</value>
+  </data>
+  <data name="gridAnalyzeHeaderTargetAResource" xml:space="preserve">
+    <value>Target a*</value>
+  </data>
+  <data name="gridAnalyzeHeaderTargetBResource" xml:space="preserve">
+    <value>Target b*</value>
+  </data>
+  <data name="gridAnalyzeHeaderTargetLResource" xml:space="preserve">
+    <value>Target L*</value>
+  </data>
+  <data name="gridAnalyzeHeader_C_Resource" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="gridAnalyzeHeader_E_Resource" xml:space="preserve">
+    <value>ΔE</value>
+  </data>
+  <data name="gridAnalyzeHeader_K_Resource" xml:space="preserve">
+    <value>K</value>
+  </data>
+  <data name="gridAnalyzeHeader_M_Resource" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="gridAnalyzeHeader_Y_Resource" xml:space="preserve">
+    <value>Y</value>
+  </data>
 </root>

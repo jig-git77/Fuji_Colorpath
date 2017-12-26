@@ -10,7 +10,19 @@
 <link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
 <%--<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>--%>
 <%--<script src="JS/DYMO.Label.Framework.latest.js" type="text/javascript" charset="UTF-8"></script>--%>
+<style>
+    /*#ContentPlaceHolder1_ucAnalyze_dvTab_PatchDetails #divMeasurementPatchDetails .k-grid-content-locked {
+        height: unset;
+    }*/
 
+    #divMeasurementPatchDetails .k-grid td {
+        line-height: 18px;
+    }
+
+    /*#divMeasurementPatchDetails .k-grid-content-locked {
+        height: 290px;
+    }*/
+</style>
 <script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>
 <script src="JS/Analyze.js" type="text/javascript"></script>
 
@@ -1103,7 +1115,7 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <div style="display:none;">
+                                                    <div style="display: none;">
                                                         <table>
                                                             <tr>
                                                                 <td>
@@ -2984,7 +2996,7 @@
                                     <div class="tab_top">&nbsp;</div>
                                     <div class="tab_middle">
                                         <div class="combopart">
-                                            <div class="float_l" style="padding-left: 10px;">
+                                            <div class="float_l" style="padding-left: 10px; float: unset;">
 
                                                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                                     <ContentTemplate>
@@ -3212,6 +3224,7 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
+
                                                     </ContentTemplate>
                                                     <Triggers>
                                                         <asp:PostBackTrigger ControlID="btnCGATSExport" />
@@ -3221,7 +3234,12 @@
                                                         <asp:PostBackTrigger ControlID="rcmbMetricSumlist" />
                                                     </Triggers>
                                                 </asp:UpdatePanel>
-
+                                                <br />
+                                                <br />
+                                                <div>
+                                                    <div id="divMeasurementPatchDetails">
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="clear"></div>
                                         </div>

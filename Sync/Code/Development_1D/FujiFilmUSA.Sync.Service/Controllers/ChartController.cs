@@ -88,7 +88,26 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("gridAnalyzeHeaderDeltaBesource", "gridAnalyzeHeaderDeltaBesource");
             _resourceValues.Add("gridAnalyzeHeaderDeltaEResource", "gridAnalyzeHeaderDeltaEResource");
             _resourceValues.Add("gridAnalyzeToolTipViewResource", "gridAnalyzeToolTipViewResource");
-
+            _resourceValues.Add("gridAnalyzeHeader_C_Resource", "gridAnalyzeHeader_C_Resource");
+            _resourceValues.Add("gridAnalyzeHeader_M_Resource", "gridAnalyzeHeader_M_Resource");
+            _resourceValues.Add("gridAnalyzeHeader_Y_Resource", "gridAnalyzeHeader_Y_Resource");
+            _resourceValues.Add("gridAnalyzeHeader_K_Resource", "gridAnalyzeHeader_K_Resource");
+            _resourceValues.Add("gridAnalyzeHeader_E_Resource", "gridAnalyzeHeader_E_Resource");
+            _resourceValues.Add("gridAnalyzeHeaderE94Resource", "gridAnalyzeHeaderE94Resource");
+            _resourceValues.Add("gridAnalyzeHeaderE2000Resource", "gridAnalyzeHeaderE2000Resource");
+            _resourceValues.Add("gridAnalyzeHeaderTargetLResource", "gridAnalyzeHeaderTargetLResource");
+            _resourceValues.Add("gridAnalyzeHeaderCIELAB_LResource", "gridAnalyzeHeaderCIELAB_LResource");
+            _resourceValues.Add("gridAnalyzeHeaderTargetAResource", "gridAnalyzeHeaderTargetAResource");
+            _resourceValues.Add("gridAnalyzeHeaderCIELAB_AResource", "gridAnalyzeHeaderCIELAB_AResource");
+            _resourceValues.Add("gridAnalyzeHeaderTargetBResource", "gridAnalyzeHeaderTargetBResource");
+            _resourceValues.Add("gridAnalyzeHeaderCIELAB_BResource", "gridAnalyzeHeaderCIELAB_BResource");
+            _resourceValues.Add("gridAnalyzeHeaderDensity_VResource", "gridAnalyzeHeaderDensity_VResource");
+            _resourceValues.Add("gridAnalyzeHeaderDensity_CResource", "gridAnalyzeHeaderDensity_CResource");
+            _resourceValues.Add("gridAnalyzeHeaderDensity_MResource", "gridAnalyzeHeaderDensity_MResource");
+            _resourceValues.Add("gridAnalyzeHeaderDensity_YResource", "gridAnalyzeHeaderDensity_YResource");
+            _resourceValues.Add("gridAnalyzeHeaderDelta_HResource", "gridAnalyzeHeaderDelta_HResource");
+            _resourceValues.Add("gridAnalyzeHeaderDelta_CHResource", "gridAnalyzeHeaderDelta_CHResource");
+            _resourceValues.Add("gridAnalyzeHeaderDelta_LResource", "gridAnalyzeHeaderDelta_LResource");
 
             base.Initialize(controllerContext);
         }
@@ -134,7 +153,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
                     _presenterAnalyze.GetGrayChart();
                     GenerateResources();
-                    
+
                     httpResponse.Data = new
                     {
                         GamutChartActual = DTGaumatChart1,
@@ -211,9 +230,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
-       
 
-        public IHttpActionResult GetPatchDetails(int id)
+
+        public IHttpActionResult GetSpotPatchDetails(int id)
         {
             IHttpActionResult actionResult = null;
             BaseResponse<object> httpResponse = new BaseResponse<object>();
@@ -552,6 +571,124 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
 
+            }
+            return actionResult;
+        }
+
+
+        [HttpGet]
+        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            string validationMessage = "";
+            List<Dictionary<string, object>> patchDetails = new List<Dictionary<string, object>>();
+            try
+            {
+                if (MeasurementId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+                if (IsSync1DTypeProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+
+                if (IsVerificationProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.Message = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    DetermineCulture();
+                    this.MeasurementId = Convert.ToInt32(MeasurementId);
+                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    _presenterAnalyze.GetPatchDetailsofMeasurement();
+                    if (dtPatchDetails.Rows.Count > 0)
+                    {                        
+                        Dictionary<string, object> childRow;
+                        foreach (DataRow row in dtPatchDetails.Rows)
+                        {
+                            childRow = new Dictionary<string, object>();
+                            foreach (DataColumn col in dtPatchDetails.Columns)
+                            {
+                                childRow.Add(col.ColumnName, row[col]);
+                            }
+                            patchDetails.Add(childRow);
+                        }
+                    }
+                    GenerateResources();
+                    var objGroup = new
+                    {
+                        measurementPatchDetails = patchDetails,
+                        GlobalResources = _globalResourceValues
+                    };
+                    httpResponse.Data = objGroup;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+               
+
+                //Now we are using DataTable as DataSource                    
+                //SpotAnalyze spotAnalyzeDetails = new SpotAnalyze();
+                //decimal totalDeltaE = 0;
+                //decimal avgDeltaE = 0;
+                //int measurementID = 0;
+                ////count Avg, Max and Min ΔE
+                //decimal minDtE = int.MaxValue;
+                //decimal maxDtE = int.MinValue;
+
+                //if (dtPatchDetails.Rows.Count > 0)
+                //{
+                //    //get the measurement id 
+                //    measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
+
+                //    Dictionary<string, object> childRow;
+                //    foreach (DataRow row in dtPatchDetails.Rows)
+                //    {
+                //        childRow = new Dictionary<string, object>();
+                //        foreach (DataColumn col in dtPatchDetails.Columns)
+                //        {
+                //            childRow.Add(col.ColumnName, row[col]);
+                //        }
+
+                //        decimal DtE = 0;
+                //        if (measurementID > 0)
+                //            DtE = string.IsNullOrEmpty(Convert.ToString(row.Field<decimal?>("ΔE_M_T"))) ? 0 : row.Field<decimal>("ΔE_M_T");//for run-1,2,.....
+                //        else
+                //            DtE = row.Field<decimal?>("ΔE") == null ? 0 : row.Field<decimal>("ΔE");//only for run-0
+
+                //        totalDeltaE += DtE;
+                //        minDtE = Math.Min(minDtE, DtE);
+                //        maxDtE = Math.Max(maxDtE, DtE);
+
+                //        spotAnalyzeDetails.patchDetails.Add(childRow);
+                //    }
+                //    avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
+                //}
+
+
+                //spotAnalyzeDetails.minDeltaE = minDtE.ToString();
+                //spotAnalyzeDetails.maxDeltaE = maxDtE.ToString();
+                //spotAnalyzeDetails.avgDeltaE = String.Format("{0:0.###}", avgDeltaE);
+                //GenerateResources();
+                //var objGroup = new
+                //{
+                //    spotAnalyzeDetails = spotAnalyzeDetails,
+                //    GlobalResources = _globalResourceValues
+                //};
+                //httpResponse.Data = objGroup;
+                //actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
         }

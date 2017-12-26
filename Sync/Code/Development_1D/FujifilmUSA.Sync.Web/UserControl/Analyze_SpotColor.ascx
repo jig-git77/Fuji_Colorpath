@@ -56,7 +56,7 @@
                     read: function (options) {
                         $.ajax({
                             type: "GET",
-                            url: SERVICE_BASE_URL + "api/Chart/GetPatchDetails/",
+                            url: SERVICE_BASE_URL + "api/Chart/GetSpotPatchDetails/",
                             data: { id: optimizationId },
                             dataType: "json",
                             headers: {

@@ -64,6 +64,7 @@ var $divChartSummaryDeltaChart
 var $divChartTVISpread;
 var $divTVI_G7;
 var $divTVI_ISO;
+var $divMeasurementPatchDetails;
 
 var $divChartTVIISO_CYAN;
 var $divChartTVIISO_Magenta;
@@ -209,7 +210,7 @@ $(document).ready(function () {
     $divChartTVISpread = $("#divChartTVISpread");
     $divTVI_G7 = $("#divTVI_G7");
     $divTVI_ISO = $("#divTVI_ISO");
-
+    $divMeasurementPatchDetails = $("#divMeasurementPatchDetails");
     $divChartTVIISO_CYAN = $("#divChartTVIISO_CYAN");
     $divChartTVIISO_Magenta = $("#divChartTVIISO_Magenta");
     $divChartTVIISO_Yellow = $("#divChartTVIISO_Yellow");
@@ -270,6 +271,7 @@ $(document).ready(function () {
 
     BindInkPaperChartABComparision();
 
+    BindMeasurementPatchDetails();
     if ($hdnValidationType == 1) {
         BindG7Charts();
     }
@@ -280,6 +282,7 @@ $(document).ready(function () {
     }
 
     BindDeltaSummaryStatesChart();
+
     $imgEyeABCompLarge.on('click', function (e) {
         e.preventDefault();
 
@@ -376,6 +379,9 @@ $(document).ready(function () {
         });
     });
 });
+
+
+////************************ CHART BINDINGS  ***********************////
 
 ////**************** START BIND THE AB COMPARISION CHART  ****************////
 function BindChartTargetVersusActualAB() {
@@ -967,7 +973,7 @@ function BindChartLGrayBalance() {
             markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB+': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
+                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB + ': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
             }
         }],
         xAxis: {
@@ -1033,7 +1039,7 @@ function BindChartLGrayBalance() {
             markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB+': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
+                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB + ': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
             }
         }],
         xAxis: {
@@ -1098,7 +1104,7 @@ function BindChartLGrayBalance() {
             markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB+': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
+                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB + ': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
             }
         }],
         xAxis: {
@@ -1176,136 +1182,7 @@ function BindDeltaSummaryStatesChart() {
 
 }
 
-
-////**************** GET IMAGE OF AB COMPARSION SPIDER CHART FOR REPORT  ****************////
-function GetABComparisionSpiderChartImage() {
-    var chart = $chart_TargetVersusActualAB.data("kendoChart");
-    return chart.imageDataURL();
-    //var kendoOptions = $chart_TargetVersusActualAB.data("kendoChart").options;
-    ////kendoOptions.plotArea.background = 'gray';
-    ////kendoOptions.chartArea.width = 700;
-    ////kendoOptions.chartArea.height = 100;
-    //$kendoChartDummy.kendoChart(kendoOptions);
-    //var dummyChart = $kendoChartDummy.data('kendoChart');
-    //dummyChart.options.plotArea.background = '#D0D0D0';
-    //dummyChart.options.transitions = false
-    //dummyChart.refresh();
-    //return dummyChart.imageDataURL();
-}
-
-function GetInkPaperPatchChartImage() {
-    var chart = $divChartInkPaperABComparision.data("kendoChart");
-    return chart.imageDataURL();
-    //var kendoOptions = $chart_Gamut_ABComparison.data("kendoChart").options;
-    //kendoOptions.plotArea.background = '#D0D0D0';
-    ////kendoOptions.chartArea.width = 700;
-    ////kendoOptions.chartArea.height = 100;
-    //$kendoChartDummy.kendoChart(kendoOptions);
-    //var dummyChart = $kendoChartDummy.data('kendoChart');
-    //dummyChart.options.transitions = false
-    //dummyChart.refresh();
-    //return dummyChart.imageDataURL();
-}
-
-////**************** GET IMAGE OF ACTUAL VS TARGET CHART FOR REPORT  ****************////
-function GetActualVsTargetChartImage() {
-    var chart = $chart_Gamut_ABComparison.data("kendoChart");
-    return chart.imageDataURL();
-    //var kendoOptions = $chart_Gamut_ABComparison.data("kendoChart").options;
-    //kendoOptions.plotArea.background = '#D0D0D0';
-    ////kendoOptions.chartArea.width = 700;
-    ////kendoOptions.chartArea.height = 100;
-    //$kendoChartDummy.kendoChart(kendoOptions);
-    //var dummyChart = $kendoChartDummy.data('kendoChart');
-    //dummyChart.options.transitions = false
-    //dummyChart.refresh();
-    //return dummyChart.imageDataURL();
-}
-
-
-////**************** GET IMAGE OF L-COMPARSION CHART FOR REPORT  ****************////
-function GetLComparisionChartImage() {
-
-    var chart = $chart_L_Comaparision.data("kendoChart");
-    return chart.imageDataURL();
-
-    //var kendoOptions = $chart_L_Comaparision.data("kendoChart").options;
-    //kendoOptions.plotArea.background = '#D0D0D0';
-    //kendoOptions.chartArea.width = 650;
-    //kendoOptions.chartArea.height = 150;
-    //$kendoChartDummy.kendoChart(kendoOptions);
-    //var dummyChart = $kendoChartDummy.data('kendoChart');
-    //dummyChart.options.transitions = false
-    //dummyChart.refresh();
-    //return dummyChart.imageDataURL();
-}
-
-
-////**************** GET IMAGE OF L-BALANCE CHART FOR REPORT  ****************////
-function Get_L_BalanceChartImage() {
-    var chart = $chart_L_BalanceChart.data("kendoChart");
-    return chart.imageDataURL();
-
-    //var kendoOptions = $chart_L_BalanceChart.data("kendoChart").options;
-    //var kendodataSource = $chart_L_BalanceChart.data("kendoChart").dataSource;
-
-    //kendoOptions.plotArea.background = '#D0D0D0';
-    ////kendoOptions.chartArea.width = 700;
-    ////kendoOptions.chartArea.height = 100;
-    //$kendoChartDummy.kendoChart(kendoOptions);
-    //var dummyChart = $kendoChartDummy.data('kendoChart');
-    //dummyChart.dataSource = kendodataSource;
-    //dummyChart.options.transitions = false
-    //dummyChart.refresh();
-    //return dummyChart.imageDataURL();
-}
-
-////**************** GET IMAGE OF A-BALANCE CHART FOR REPORT  ****************////
-function Get_A_BalanceChartImage() {
-
-    var chart = $chart_A_BalanceChart.data("kendoChart");
-    return chart.imageDataURL();
-
-    //var kendoOptions = $chart_A_BalanceChart.data("kendoChart").options;
-    //var kendodataSource = $chart_A_BalanceChart.data("kendoChart").dataSource;
-    //kendoOptions.plotArea.background = '#D0D0D0';
-    ////kendoOptions.chartArea.width = 700;
-    ////kendoOptions.chartArea.height = 100;
-    //$kendoChartDummy.kendoChart(kendoOptions);
-    //var dummyChart = $kendoChartDummy.data('kendoChart');
-    //dummyChart.dataSource = kendodataSource;
-    //dummyChart.options.transitions = false
-    //dummyChart.refresh();
-    //return dummyChart.imageDataURL();
-}
-
-////**************** GET IMAGE OF B-BALANCE CHART FOR REPORT  ****************////
-function Get_B_BalanceChartImage() {
-
-    var chart = $chart_B_BalanceChart.data("kendoChart");
-    return chart.imageDataURL();
-
-
-    //var kendoOptions = $chart_B_BalanceChart.data("kendoChart").options;
-    //var kendodataSource = $chart_B_BalanceChart.data("kendoChart").dataSource;
-    //kendoOptions.plotArea.background = '#D0D0D0';
-    ////kendoOptions.chartArea.width = 700;
-    ////kendoOptions.chartArea.height = 100;
-    //$kendoChartDummy.kendoChart(kendoOptions);
-    //var dummyChart = $kendoChartDummy.data('kendoChart');
-    //dummyChart.dataSource = kendodataSource;
-    //dummyChart.options.transitions = false
-    //dummyChart.refresh();
-    //return dummyChart.imageDataURL();
-}
-
-function Get_DeltaSummaryChartImage() {
-    var chart = $divChartSummaryDeltaChart.data("kendoChart");
-    return chart.imageDataURL();
-}
-
 ////**************** START BIND THE AB COMPARISION INK PAPER CHART  ****************////
-
 function BindInkPaperChartABComparision() {
     var measurementID = parseInt($hdMeasurement);
     var apiParameters = {
@@ -1348,535 +1225,7 @@ function BindInkPaperChartABComparision() {
     });
 }
 
-
-function PopulateInkPaperChartABComparision() {
-
-    //var json = jsonDeltaEPrimaryPatchList;
-
-    var formattedDeltaEPrimaryPatchList = [];
-
-    //set the color name and its tooltip title with resources
-    var patchColor = [
-        { colorName: _Resources._recCyan, colorTitle: _Resources._recCyanPathMetrics }, { colorName: _Resources._recMagenta, colorTitle: _Resources._recMagentaPathMetrics },
-        { colorName: _Resources._recYellow, colorTitle: _Resources._recYellowPathMetrics }, { colorName: _Resources._recBlack, colorTitle: _Resources._recBlackPathMetrics },
-        { colorName: _Resources._recRed, colorTitle: _Resources._recRedPathMetrics }, { colorName: _Resources._recGreen, colorTitle: _Resources._recGreenPathMetrics },
-        { colorName: _Resources._recBlue, colorTitle: _Resources._recBluePathMetrics }, { colorName: _Resources._recPaper, colorTitle: _Resources._recPaperPathMetrics },
-        { colorName: _Resources._recTriplet, colorTitle: _Resources._recTripletPathMetrics }];
-
-
-    $.each(jsonDeltaEPrimaryPatchList, function (index, obj) {
-
-        var item = {
-            color: obj.HtmlColor,
-            name: patchColor[index].colorName,
-            title: patchColor[index].colorTitle,
-            value: obj.ΔE,
-            CielabL: obj.CielabL,
-            CielabA: obj.CielabA,
-            CielabB: obj.CielabB,
-            TargetL: obj.TargetL,
-            Targeta: obj.Targeta,
-            Targetb: obj.Targetb,
-            ΔELimit: obj.ΔELimit,
-            PreAvgΔE: obj.PreAvgΔE
-        };
-        formattedDeltaEPrimaryPatchList.push(item);
-    });
-
-    //var axis = json.map(function (a) { return a["?E"]; });
-    var axis = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔE; });
-    var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
-    var maxNum = Math.max.apply(Math, axis);
-    var maxValue = 0;
-    var marginValue = 1;
-    switch (true) {
-        case (maxNum < 5): maxValue = 5; marginValue = 1; break;
-        case (maxNum == 5): maxValue = 6; marginValue = 1; break;
-        case (maxNum >= 5 && maxNum < 10): maxValue = 10; marginValue = 2; break;
-        case (maxNum >= 10 && maxNum < 15): maxValue = 15; marginValue = 3; break;
-        case (maxNum >= 15 && maxNum < 20): maxValue = 20; marginValue = 5; break;
-        case (maxNum >= 20 && maxNum < 30): maxValue = 30; marginValue = 5; break;
-        case (maxNum >= 30): maxValue = 50; marginValue = 5; break;
-    }
-
-    //generate the second stacked chart by max value
-    var stackedChart = [];
-    $.each(axis, function (index, num) {
-        var stack = {
-            value: maxValue
-        };
-        stackedChart.push(stack);
-    });
-
-    var thrashHold = { paths: [] };
-
-    $divChartInkPaperABComparision.kendoChart({
-        renderAs: "canvas",
-        //title: {
-        //    text: "ΔE2000 Primary Patches"
-        //},
-        seriesDefaults: {
-            type: "bar",
-            stack: true,
-            width: 10,
-            gap: 0.2,
-            highlight: {
-                toggle: function (e) {
-                    // Don't create a highlight overlay,
-                    // we'll modify the existing visual instead
-                    e.preventDefault();
-
-                    var visual = e.visual;
-                    var opacity = e.show ? 0.8 : 1;
-
-                    visual.opacity(opacity);
-                }
-            },
-            visual: function (e) {
-                var visual = e.createVisual();
-                //-----For Sync1D projects or validation projects
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-                    if (e.series.index == 0) {
-                        var axis = e.sender.getAxis("valueAxis");
-
-                        ////set the path for the green target
-                        // var targetGreen = axis.slot(e.dataItem.PreAvgΔE).origin.x;
-                        // var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: "#34E61E" } }).moveTo(targetGreen, e.rect.topRight().y).lineTo(targetGreen, (e.rect.topRight().y + e.rect.size.height));
-                        // visual.append(pathGreen);
-                        // //set the dot on the green target
-                        // var circleGeoGreenPath = new kendo.geometry.Circle([axis.slot(e.dataItem.PreAvgΔE).origin.x, (e.rect.topRight().y + (e.rect.size.height / 2))], 2);
-                        // var circleGreenPath = new kendo.drawing.Circle(circleGeoGreenPath).fill("#34E61E", 1);
-                        // circleGreenPath.options.stroke.color = "#34E61E";
-                        // visual.append(circleGreenPath);
-
-                        // //set the path for the red target
-                        // var targetRed = axis.slot(e.dataItem.ΔELimit).origin.x;
-                        // var pathRed = new kendo.drawing.Path({ stroke: { width: 2, color: "red" } }).moveTo(targetRed, e.rect.topRight().y).lineTo(targetRed, (e.rect.topRight().y + e.rect.size.height));
-                        // visual.append(pathRed);
-                        // //set the dot on the red target
-                        // var circleGeoRedPath = new kendo.geometry.Circle([axis.slot(e.dataItem.ΔELimit).origin.x, (e.rect.topRight().y + (e.rect.size.height / 2))], 2);
-                        // var circleRedPath = new kendo.drawing.Circle(circleGeoRedPath).fill("red", 1);
-                        // circleRedPath.options.stroke.color = "red";
-                        // visual.append(circleRedPath);
-
-                        //------Green marker image plot for Previous Run's Avg ΔE
-                        if (e.dataItem.PreAvgΔE > 0) {
-                            var greenObj = {};
-                            greenObj.x = axis.slot(e.dataItem.PreAvgΔE).origin.x;
-                            greenObj.y1 = e.rect.topRight().y                            
-                            greenObj.y2 = (e.rect.topRight().y + e.rect.size.height);
-                            greenObj.y3 = (e.rect.topRight().y + (e.rect.size.height / 2));//---green dot mid of the line
-                            greenObj.color = "#34E61E";
-                            thrashHold.paths.push(greenObj);
-                        }
-
-                        //------Red marker image plot for Tolerance
-                        if (e.dataItem.ΔELimit > 0) {
-                            var redObj = {};
-                            redObj.x = axis.slot(e.dataItem.ΔELimit).origin.x;
-                            redObj.y1 = e.rect.topRight().y                            
-                            redObj.y2 = (e.rect.topRight().y + e.rect.size.height);
-                            redObj.y3 = (e.rect.topRight().y + (e.rect.size.height / 2)); //---red dot mid of the line
-                            redObj.color = "red";
-                            thrashHold.paths.push(redObj);
-                        }
-                    }
-                }
-                return visual;
-            }
-        },
-        series: [{
-            data: formattedDeltaEPrimaryPatchList,
-            overlay: {
-                gradient: "glass",
-            }
-        },
-        {
-            data: stackedChart,
-            overlay: {
-                gradient: "glass",
-            },
-            tooltip: {
-                visible: false
-            },
-            color: "#C8D6E3"
-        }],
-        panes: [{
-            clip: false
-        }],
-        categoryAxis: {
-            name: "categoryAxis",
-            categories: patchColorList,
-            majorGridLines: {
-                visible: false
-            }
-        },
-        valueAxis: {
-            name: "valueAxis",
-            //max: 20,
-            line: {
-                visible: false
-            },
-            minorGridLines: {
-                visible: false
-            },
-            labels: {
-                rotation: "auto"
-            },
-            max: maxValue,
-            margin: marginValue
-        },
-        tooltip: {
-            visible: true,
-            //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
-            //template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
-            template: function (dataItem) {
-                debugger;
-                var item = dataItem.dataItem;
-                var toolTipString = "<table>";
-                toolTipString += "<tr><td><b>" + item.title + "</b></td></tr>";
-                toolTipString += "<tr><td><table>";
-                toolTipString += "<tr><td><b>" + _Resources._recActual + "</b></td><td>";
-                toolTipString += _Resources._recL + ": " + item.CielabL.toFixed(2);
-                toolTipString += " " + _Resources._recA + ": " + item.CielabA.toFixed(2);
-                toolTipString += " " + _Resources._recB + ": " + item.CielabB.toFixed(2);
-                toolTipString += "</td></tr>";
-                toolTipString += "<tr><td><b>" + _Resources._recTarget + "</b></td><td>";
-                toolTipString += _Resources._recL + ": " + item.TargetL.toFixed(2);
-                toolTipString += " " + _Resources._recA + ": " + item.Targeta.toFixed(2);
-                toolTipString += " " + _Resources._recB + ": " + item.Targetb.toFixed(2);
-                toolTipString += "</td></tr>";
-                toolTipString += "<tr><td><b>" + _Resources._recDeltaE + "</b></td><td>";
-                toolTipString += item.value.toFixed(2);
-
-                //-----For Sync1D projects or validation projects
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-                    toolTipString += " (Thr." + item.ΔELimit.toFixed(2) + ")";
-                }
-
-                //-----For Sync1D projects, display Previous ΔE in tooltip also
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && item.PreAvgΔE>0) {
-                    toolTipString += "<tr><td><b>" + _Resources._recPreDeltaE + "</b></td><td>";
-                    toolTipString += item.PreAvgΔE.toFixed(2);
-                    toolTipString += "</td></tr>";
-                }
-
-                toolTipString += "</table></td></tr>";
-                toolTipString += "</table>";
-                //var toolTipString = "<b>#= item.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= item.CielabL # " + _Resources._recA + ": #= item.CielabA # " + _Resources._recB + ": #= item.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= item.TargetL # " + _Resources._recA + ": #= item.Targeta # " + _Resources._recB + ": #= item.Targetb # <br/>" + _Resources._recDeltaE + ":  #= item.value #";
-                return toolTipString;
-            }
-        },
-        chartArea: {
-            width: 310,
-            height: 325
-        },
-        render: function (e) {
-
-            //-----For Sync1D projects or validation projects
-            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-                var chart = e.sender;
-                $.each(thrashHold.paths, function (index, obj) {
-                    //set the line 
-                    var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: obj.color } }).moveTo(obj.x, obj.y1).lineTo(obj.x, obj.y2);
-                    chart.surface.draw(pathGreen);
-
-                    //set the dot mid of the line
-                    var circleGeoPath = new kendo.geometry.Circle([obj.x, obj.y3], 2);  //
-                    var circlePath = new kendo.drawing.Circle(circleGeoPath).fill(obj.color, 1);
-                    circlePath.options.stroke.color = obj.color;
-                    chart.surface.draw(circlePath);
-                });
-            }
-        }
-    });
-
-    //var densityPatchColor = [
-    //    { colorName: _Resources._recCyan, colorTitle: _Resources._recCyanPathMetrics },
-    //    { colorName: _Resources._recMagenta, colorTitle: _Resources._recMagentaPathMetrics },
-    //    { colorName: _Resources._recYellow, colorTitle: _Resources._recYellowPathMetrics },
-    //    { colorName: _Resources._recBlack, colorTitle: _Resources._recBlackPathMetrics }
-    //];
-
-    var formattedDensityList = [];
-    $.each(jsonDensityList, function (index, obj) {
-        var patchTitle = '';
-        switch (obj.PatchTypeId) {
-            case 1: patchTitle = _Resources._recCyanPathMetrics; break;
-            case 2: patchTitle = _Resources._recMagentaPathMetrics; break;
-            case 3: patchTitle = _Resources._recYellowPathMetrics; break;
-            case 4: patchTitle = _Resources._recBlackPathMetrics; break;
-        }
-
-        var item = {
-            color: obj.HtmlColor,
-            title: patchTitle,
-            value: obj.Density,
-            density: obj.Density,
-            densityLimit: obj.DensityLimit,
-            preAvgDensity: obj.PreAvgDensity
-        };
-        formattedDensityList.push(item);
-    });
-
-
-    var densityPatchColorList = ['C', 'M', 'Y', 'K'];
-    $divChartInkPaperDansityChart.kendoChart({
-        renderAs: "canvas",
-        //title: {
-        //    text: "ΔE2000 Primary Patches"
-        //},
-        seriesDefaults: {
-            type: "column",
-            stack: true,
-            width: 10,
-            gap: 0.5,
-            highlight: {
-                toggle: function (e) {
-                    // Don't create a highlight overlay,
-                    // we'll modify the existing visual instead
-                    e.preventDefault();
-
-                    var visual = e.visual;
-                    var opacity = e.show ? 0.8 : 1;
-
-                    visual.opacity(opacity);
-                }
-            },
-            visual: function (e) {                
-                var visual = e.createVisual();
-                var axis = e.sender.getAxis("valueAxis");
-
-                var target = axis.slot(e.dataItem.densityLimit).origin.y;
-                var path = new kendo.drawing.Path({ stroke: { width: 3, color: "red" } }).moveTo(e.rect.origin.x, target).lineTo(e.rect.topRight().x, target);
-                visual.append(path);
-
-                var circleGeometry = new kendo.geometry.Circle([(e.rect.origin.x + (e.rect.size.width / 2)), target], 3);
-                var circleDensity = new kendo.drawing.Circle(circleGeometry).fill("red", 1);
-                circleDensity.options.stroke.color = "red";
-                visual.append(circleDensity);
-
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && e.dataItem.preAvgDensity > 0) {
-                    var targetAvg = axis.slot(e.dataItem.preAvgDensity).origin.y;
-                    var pathAvg = new kendo.drawing.Path({ stroke: { width: 3, color: "#34E61E" } }).moveTo(e.rect.origin.x, targetAvg).lineTo(e.rect.topRight().x, targetAvg);
-                    visual.append(pathAvg);
-
-                    var circleAvg = new kendo.geometry.Circle([(e.rect.origin.x + (e.rect.size.width / 2)), targetAvg], 3);
-                    var circleDensityAvg = new kendo.drawing.Circle(circleAvg).fill("#34E61E", 1);
-                    circleDensityAvg.options.stroke.color = "#34E61E";
-                    visual.append(circleDensityAvg);
-                }
-                return visual;
-            }
-        },
-        series: [{
-            data: formattedDensityList,
-            overlay: {
-                gradient: "glass",
-            }
-        }],
-        panes: [{
-            clip: false
-        }],
-        categoryAxis: {
-            name: "categoryAxis",
-            categories: densityPatchColorList
-        },
-        valueAxis: {
-            name: "valueAxis",
-            //max: 20,
-            line: {
-                visible: false
-            },
-            minorGridLines: {
-                visible: false
-            },
-            labels: {
-                rotation: "auto"
-            },
-            majorUnit: 0.5,
-        },
-        tooltip: {
-            visible: true,
-            //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
-            //template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " :    #= dataItem.density # <br/>" + _Resources._recTarget + " :    #= dataItem.densityLimit # <br/>" + _Resources._recPrevious + " :    #= dataItem.preAvgDensity #"
-            template: function (e) {
-                var item = e.dataItem;
-                var tooltipString = "<b>" + item.title + "</b><br/>";
-                tooltipString += "<b>" + _Resources._recActual + ":</b> " + item.density.toFixed(2) + "<br/>";
-                tooltipString += "<b>" + _Resources._recTarget + ":</b> " + item.densityLimit.toFixed(2) + "<br/>";
-                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && item.preAvgDensity > 0) {
-                    tooltipString += "<b>" + _Resources._recPrevious + ":</b> " + item.preAvgDensity.toFixed(2);
-                }
-                return tooltipString;
-            }
-        },
-        chartArea: {
-            width: 325,
-            height: 150
-        },
-        render: renderChartWithBackgroundByCategory
-    });
-
-
-
-    var paperABGreen = {};
-    paperABGreen.data = [[0, 0]];
-    paperABGreen.color = "Green";
-    paperABGreen.markers = { background: "Green" };
-    paperABGreen.highlight = {
-        visible: false
-    }
-
-    var tooltipString = "";
-    var paperAB = {};
-    var paperLArray = [];
-    if (jsonDeltaPaperLAB_1.length > 0) {
-        var paperObj = jsonDeltaPaperLAB_1[0];
-        var deltaA = paperObj.Δa == 0 ? 0.01 : paperObj.Δa;
-        paperAB.data = [[deltaA, paperObj.Δb]];
-
-        tooltipString = '<table><tr><td><center><b>' + _Resources._recPaperPathMetrics + '</b></center><td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + paperObj.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + paperObj.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + paperObj.CielabB.toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + paperObj.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + paperObj.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + paperObj.Targetb.toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaL + ':   ' + paperObj["ΔL"].toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaA + ':   ' + paperObj["Δa"].toFixed(2) + '</td></tr>';
-        tooltipString += '<tr><td>' + _Resources._recDeltaB + ':   ' + paperObj["Δb"].toFixed(2) + '</td></tr>';
-        tooltipString += '</table>';
-
-
-        //bind json data for L chart
-        var paperLObject = {
-            color: '#D4CBC5',
-            //name: patchColor[index].colorName,
-            value: paperObj["ΔL"],
-        };
-        paperLArray.push(paperLObject);
-    }
-
-    paperAB.color = "White";
-    paperAB.markers = {
-        background: "White",
-        border: {
-            width: 1,
-            color: function (e) {
-                return 'black';
-            }
-        }
-    };
-    paperAB.width = 2;
-    paperAB.highlight = {
-        visible: false
-    }
-    paperAB.tooltip = { visible: true, template: tooltipString, shared: true };
-
-
-    $divChartInkPaperPaperLab1.kendoChart({
-        renderAs: "canvas",
-        seriesDefaults: {
-            type: "scatterLine",
-            style: "smooth"
-        },
-        series: [
-            paperABGreen,
-            paperAB
-        ],
-        xAxis: {
-            name: "xAxis",
-            min: -10,
-            max: 10,
-            majorUnit: 5,
-            axisCrossingValues: [-10, 10],
-            labels: {
-                format: "{0}"
-            },
-            title: {
-                //text: _Resources._recDeltaA
-            }, majorGridLines: {
-                visible: true,
-                step: -10
-            }
-        },
-        yAxis: {
-            name: "yAxis",
-            min: -10,
-            max: 10,
-            step: 5,
-            majorUnit: 5,
-            axisCrossingValues: [-10, 10],
-            labels: {
-                format: "{0}"
-            },
-            title: {
-                //text: _Resources._recDeltaB
-            }, majorGridLines: {
-                visible: true,
-                step: -10
-            }
-        },
-        chartArea: {
-            width: 250,
-            height: 180
-        },
-        render: renderChartWithBackgroundByAxis
-        //plotArea: {
-        //    background: "lightgray"
-        //}
-    });
-
-
-    $divChartInkPaperPaperLab2.kendoChart({
-        renderAs: "canvas",
-        seriesDefaults: {
-            type: "column",
-            width: 25,
-            //gap: 2,
-        },
-        series: [{
-            data: paperLArray,
-        }],
-        categoryAxis: {
-            name: "categoryAxis",
-            categories: [],
-            line: {
-                visible: true,
-                width: 2,
-            },
-        },
-        valueAxis: {
-            name: "valueAxis",
-            labels: {
-                format: "{0}"
-            },
-            title: {
-                //text: _Resources._recDeltaL
-            },
-            line: {
-                visible: false,
-            },
-            axisCrossingValue: 0,
-            min: -10,
-            max: 10,
-            majorUnit: 5,
-        },
-        tooltip: {
-            visible: true,
-            template: tooltipString
-            //template: "#= dataItem.title # <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
-        },
-        chartArea: {
-            width: 100,
-            height: 180
-        },
-        render: renderChartWithBackgroundByCategory
-    });
-
-
-
-
-
-}
-
+////**************** START BIND THE G7 CHART  ****************////
 function BindG7Charts() {
     var measurementID = parseInt($hdMeasurement);
     var apiParameters = {
@@ -1916,6 +1265,7 @@ function BindG7Charts() {
     });
 }
 
+////**************** START BIND THE TVI CHARTS  ****************////
 function BindTVICharts() {
 
     var measurementID = parseInt($hdMeasurement);
@@ -1996,7 +1346,6 @@ function BindTVICharts() {
 
 
 }
-
 
 ////**************** START BIND THE G7 CHART  ****************////
 function GenerateG7Charts() {
@@ -2409,8 +1758,862 @@ function GenerateG7Charts() {
     });
 }
 
+function BindMeasurementPatchDetails() {
+    
+    var measurementID = parseInt($hdMeasurement);
+    var apiParameters = {
+        MeasurementId: measurementID,
+        IsVerificationProject: $hdnVerification,
+        IsSync1DTypeProject: $hdnSync1DType
+    };
 
-////**************** START BIND THE TVI CHART  ****************////
+
+    $divMeasurementPatchDetails.kendoGrid({
+        dataSource: {
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        type: "GET",
+                        url: SERVICE_BASE_URL + 'api/Chart/GetMeasurementPatchDetails',
+                        data: apiParameters,
+                        dataType: "json",
+                        headers: {
+                            'Accept-Language': $CurrentCulture
+                        },
+                        success: function (response) {
+                            debugger;
+                            if (response.data != null) {
+                                Resources = response.data.GlobalResources;
+                                var patches = response.data.measurementPatchDetails;
+                                options.success(patches);
+
+                                //set the column header
+                                $divMeasurementPatchDetails.find("th[data-field=HTMLColor] b").html(Resources.gridAnalyzeHeaderPatchResource);
+                                $divMeasurementPatchDetails.find("th[data-field=SampleID] b").html(Resources.gridAnalyzeHeaderIDResource);
+                                $divMeasurementPatchDetails.find("th[data-field=SampleName] b").html(Resources.GridTemplateColumnResource3);
+                                $divMeasurementPatchDetails.find("th[data-field=CMYK_C] b").html(Resources.gridAnalyzeHeader_C_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=CMYK_M] b").html(Resources.gridAnalyzeHeader_M_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=CMYK_Y] b").html(Resources.gridAnalyzeHeader_Y_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=CMYK_K] b").html(Resources.gridAnalyzeHeader_K_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeader_E_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=ΔE94] b").html(Resources.gridAnalyzeHeaderE94Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=ΔE2000] b").html(Resources.gridAnalyzeHeaderE2000Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=TargetL] b").html(Resources.gridAnalyzeHeaderTargetLResource);
+                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_L] b").html(Resources.gridAnalyzeHeaderCIELAB_LResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Targeta] b").html(Resources.gridAnalyzeHeaderTargetAResource);
+                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_a] b").html(Resources.gridAnalyzeHeaderCIELAB_AResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Targetb] b").html(Resources.gridAnalyzeHeaderTargetBResource);
+                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_b] b").html(Resources.gridAnalyzeHeaderCIELAB_BResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Density_V] b").html(Resources.gridAnalyzeHeaderDensity_VResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Density_C] b").html(Resources.gridAnalyzeHeaderDensity_CResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
+                            }
+                            
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            console.log(XMLHttpRequest.responseText);
+                        }
+                    });
+                },
+
+            },
+            schema: {
+                model: {
+                    fields: {
+                        SampleID: {
+                            from: "SampleID"
+                        },
+                        SampleName: {
+                            from: "SampleName"
+                        },
+                        CMYK_C: {
+                            from: "CMYK_C"                            
+                        },
+                        CMYK_M: {
+                            from: "CMYK_M"
+                        },
+                        CMYK_Y: {
+                            from: "CMYK_Y"
+                        },
+                        CMYK_K: {
+                            from: "CMYK_K"
+                        },
+                        HTMLColor: {
+                            from: "HTMLColor"
+                        },
+                        TargetL: {
+                            from: "TargetL"
+                        },
+                        Targeta: {
+                            from: "Targeta"
+                        },
+                        Targetb: {
+                            from: "Targetb"
+                        },
+                        CIELAB_L: {
+                            from: "CIELAB_L"
+                        },
+                        CIELAB_a: {
+                            from: "CIELAB_a"
+                        },
+                        CIELAB_b: {
+                            from: "CIELAB_b"
+                        },
+                        ΔE: {
+                            from: "ΔE"
+                        },
+                        ΔE94: {
+                            from: "ΔE94"
+                        },
+                        ΔE2000: {
+                            from: "ΔE2000"
+                        },
+                        Density_V: {
+                            from: "Density_V"
+                        },
+                        Density_C: {
+                            from: "Density_C"
+                        },
+                        Density_M: {
+                            from: "Density_M"
+                        },
+                        Density_Y: {
+                            from: "Density_Y"
+                        },
+                        PatchTypeID: {
+                            from: "PatchTypeID"
+                        },
+                        ΔH: {
+                            from: "ΔH"
+                        },
+                        ΔCh: {
+                            from: "ΔCh"
+                        },
+                        ΔL: {
+                            from: "ΔL"
+                        }
+                    }
+                }
+            },
+            pageSize: 10
+        },
+        sortable: true,
+        scrollable: true,
+        filterable: true,
+        //filterable: {
+        //    extra: false,
+        //    operators: {
+        //        string: {
+        //            eq: "Is equal to"
+        //        }
+        //    }
+        //},
+        pageable: {
+            refresh: true,
+            pageSizes: true
+        },
+        noRecords: {
+            template: ''
+        },
+        //toolbar: [{ 'name': 'exportCGATS', template: '<div style="float:left;"><button id="btnExportCGATS" class=\'k-button\'>Export CGATS</button></div>' }],
+        columns: [
+            {
+                field: "HTMLColor",
+                filterable: false,
+                title: "<b>Patch</b>",
+                //template: "<span id='sp' style='display:inline-block;background-color:#FFB700;height:14px;width:30px;'></span>",
+                template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
+                width: "50px",
+                //locked: true,
+                //lockable: false,
+            },
+            {
+                field: "SampleID",
+                title: "<b>ID</b>",
+                width: "50px",
+                filterable: false,
+                //locked: true,
+            },
+            {
+                field: "SampleName",
+                title: "<b>Name</b>",
+                filterable: false,
+                width: "50px",
+               // locked: true,
+            },
+            {
+                field: "CMYK_C",
+                title: "<b>C</b>",
+                format: "{0:n2}",
+                width: "50px",
+                //locked: true,
+            },
+            {
+                field: "CMYK_M",
+                title: "<b>M</b>",
+                format: "{0:n2}",
+                width: "50px",
+                //locked: true,
+            },
+            {
+                field: "CMYK_Y",
+                title: "<b>Y</b>",
+                format: "{0:n2}",
+                width: "50px",
+                //locked: true,
+            },
+            {
+                field: "CMYK_K",
+                title: "<b>K</b>",
+                format: "{0:n2}",
+                width: "50px",
+                //locked: true,
+            },
+            {
+                field: "ΔE",
+                title: "<b>ΔE</b>",
+                width: "50px",
+                format: "{0:n2}",
+            },
+            {
+                field: "ΔE94",
+                title: "<b>ΔE94</b>",
+                width: "50px",
+                format: "{0:n2}",
+            },
+            {
+                field: "ΔE2000",
+                title: "<b>ΔE2000</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },
+            {
+                field: "TargetL",
+                title: "<b>TargetL</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },
+            {
+                field: "CIELAB_L",
+                title: "<b>CIELAB_L</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },
+            {
+                field: "Targeta",
+                title: "<b>Targeta</b>",
+                width: '80px',
+                format: "{0:n2}",
+            },
+            {
+                field: "CIELAB_a",
+                title: "<b>CIELAB_a</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },
+            {
+                field: "Targetb",
+                title: "<b>Targetb</b>",
+                width: '80px',
+                format: "{0:n2}",
+            },
+            {
+                field: "CIELAB_b",
+                title: "<b>CIELAB_b</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },            
+            {
+                field: "Density_V",
+                title: "<b>Density_V</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },
+            {
+                field: "Density_C",
+                title: "<b>Density_C</b>",
+                width: '80px',
+                format: "{0:n2}",
+            },
+            {
+                field: "Density_M",
+                title: "<b>Density_M</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },
+            {
+                field: "Density_Y",
+                title: "<b>Density_Y</b>",
+                width: '80px',
+                format: "{0:n2}",
+            },          
+        ],
+        //dataBound: function (e) {
+        //    debugger;
+        //    var measurementId = 0;
+        //    if (e.sender.dataSource._view.length > 0) {
+        //        measurementId = e.sender.dataSource._view[0].MeasurementID;
+        //    }
+
+        //    if (measurementId > 0) {
+        //        this.hideColumn(4);
+        //        this.hideColumn(5);
+        //        this.hideColumn(6);
+        //        this.hideColumn(7);
+        //    }
+        //    else {
+        //        this.hideColumn(8);
+        //        this.hideColumn(9);
+        //        this.hideColumn(10);
+        //    }
+
+
+        //    var dataSource = this.dataSource;
+        //    this.element.find('tr').each(function () {
+        //        var row = $(this);
+        //        //set resource message
+        //        row.find('#lnkView').attr('title', Resources.gridAnalyzeToolTipViewResource);
+        //    });
+        //}
+    });
+
+    //$divMeasurementPatchDetails.data('kendoGrid').refresh();
+    //$divMeasurementPatchDetails.find('.k-grid-content-locked').css('height', 'unset');
+}
+
+////************************ CHART POPULATIONS  ***********************////
+
+////**************** POPULATE THE INK PAPER AB COMPARISION CHART  ****************////
+function PopulateInkPaperChartABComparision() {
+
+    //var json = jsonDeltaEPrimaryPatchList;
+
+    var formattedDeltaEPrimaryPatchList = [];
+
+    //set the color name and its tooltip title with resources
+    var patchColor = [
+        { colorName: _Resources._recCyan, colorTitle: _Resources._recCyanPathMetrics }, { colorName: _Resources._recMagenta, colorTitle: _Resources._recMagentaPathMetrics },
+        { colorName: _Resources._recYellow, colorTitle: _Resources._recYellowPathMetrics }, { colorName: _Resources._recBlack, colorTitle: _Resources._recBlackPathMetrics },
+        { colorName: _Resources._recRed, colorTitle: _Resources._recRedPathMetrics }, { colorName: _Resources._recGreen, colorTitle: _Resources._recGreenPathMetrics },
+        { colorName: _Resources._recBlue, colorTitle: _Resources._recBluePathMetrics }, { colorName: _Resources._recPaper, colorTitle: _Resources._recPaperPathMetrics },
+        { colorName: _Resources._recTriplet, colorTitle: _Resources._recTripletPathMetrics }];
+
+
+    $.each(jsonDeltaEPrimaryPatchList, function (index, obj) {
+
+        var item = {
+            color: obj.HtmlColor,
+            name: patchColor[index].colorName,
+            title: patchColor[index].colorTitle,
+            value: obj.ΔE,
+            CielabL: obj.CielabL,
+            CielabA: obj.CielabA,
+            CielabB: obj.CielabB,
+            TargetL: obj.TargetL,
+            Targeta: obj.Targeta,
+            Targetb: obj.Targetb,
+            ΔELimit: obj.ΔELimit,
+            PreAvgΔE: obj.PreAvgΔE
+        };
+        formattedDeltaEPrimaryPatchList.push(item);
+    });
+
+    //var axis = json.map(function (a) { return a["?E"]; });
+    var axis = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔE; });
+    var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
+    var maxNum = Math.max.apply(Math, axis);
+    var maxValue = 0;
+    var marginValue = 1;
+    switch (true) {
+        case (maxNum < 5): maxValue = 5; marginValue = 1; break;
+        case (maxNum == 5): maxValue = 6; marginValue = 1; break;
+        case (maxNum >= 5 && maxNum < 10): maxValue = 10; marginValue = 2; break;
+        case (maxNum >= 10 && maxNum < 15): maxValue = 15; marginValue = 3; break;
+        case (maxNum >= 15 && maxNum < 20): maxValue = 20; marginValue = 5; break;
+        case (maxNum >= 20 && maxNum < 30): maxValue = 30; marginValue = 5; break;
+        case (maxNum >= 30): maxValue = 50; marginValue = 5; break;
+    }
+
+    //generate the second stacked chart by max value
+    var stackedChart = [];
+    $.each(axis, function (index, num) {
+        var stack = {
+            value: maxValue
+        };
+        stackedChart.push(stack);
+    });
+
+    var thrashHold = { paths: [] };
+
+    $divChartInkPaperABComparision.kendoChart({
+        renderAs: "canvas",
+        //title: {
+        //    text: "ΔE2000 Primary Patches"
+        //},
+        seriesDefaults: {
+            type: "bar",
+            stack: true,
+            width: 10,
+            gap: 0.2,
+            highlight: {
+                toggle: function (e) {
+                    // Don't create a highlight overlay,
+                    // we'll modify the existing visual instead
+                    e.preventDefault();
+
+                    var visual = e.visual;
+                    var opacity = e.show ? 0.8 : 1;
+
+                    visual.opacity(opacity);
+                }
+            },
+            visual: function (e) {
+                var visual = e.createVisual();
+                //-----For Sync1D projects or validation projects
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                    if (e.series.index == 0) {
+                        var axis = e.sender.getAxis("valueAxis");
+
+                        ////set the path for the green target
+                        // var targetGreen = axis.slot(e.dataItem.PreAvgΔE).origin.x;
+                        // var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: "#34E61E" } }).moveTo(targetGreen, e.rect.topRight().y).lineTo(targetGreen, (e.rect.topRight().y + e.rect.size.height));
+                        // visual.append(pathGreen);
+                        // //set the dot on the green target
+                        // var circleGeoGreenPath = new kendo.geometry.Circle([axis.slot(e.dataItem.PreAvgΔE).origin.x, (e.rect.topRight().y + (e.rect.size.height / 2))], 2);
+                        // var circleGreenPath = new kendo.drawing.Circle(circleGeoGreenPath).fill("#34E61E", 1);
+                        // circleGreenPath.options.stroke.color = "#34E61E";
+                        // visual.append(circleGreenPath);
+
+                        // //set the path for the red target
+                        // var targetRed = axis.slot(e.dataItem.ΔELimit).origin.x;
+                        // var pathRed = new kendo.drawing.Path({ stroke: { width: 2, color: "red" } }).moveTo(targetRed, e.rect.topRight().y).lineTo(targetRed, (e.rect.topRight().y + e.rect.size.height));
+                        // visual.append(pathRed);
+                        // //set the dot on the red target
+                        // var circleGeoRedPath = new kendo.geometry.Circle([axis.slot(e.dataItem.ΔELimit).origin.x, (e.rect.topRight().y + (e.rect.size.height / 2))], 2);
+                        // var circleRedPath = new kendo.drawing.Circle(circleGeoRedPath).fill("red", 1);
+                        // circleRedPath.options.stroke.color = "red";
+                        // visual.append(circleRedPath);
+
+                        //------Green marker image plot for Previous Run's Avg ΔE
+                        if (e.dataItem.PreAvgΔE > 0) {
+                            var greenObj = {};
+                            greenObj.x = axis.slot(e.dataItem.PreAvgΔE).origin.x;
+                            greenObj.y1 = e.rect.topRight().y
+                            greenObj.y2 = (e.rect.topRight().y + e.rect.size.height);
+                            greenObj.y3 = (e.rect.topRight().y + (e.rect.size.height / 2));//---green dot mid of the line
+                            greenObj.color = "#34E61E";
+                            thrashHold.paths.push(greenObj);
+                        }
+
+                        //------Red marker image plot for Tolerance
+                        if (e.dataItem.ΔELimit > 0) {
+                            var redObj = {};
+                            redObj.x = axis.slot(e.dataItem.ΔELimit).origin.x;
+                            redObj.y1 = e.rect.topRight().y
+                            redObj.y2 = (e.rect.topRight().y + e.rect.size.height);
+                            redObj.y3 = (e.rect.topRight().y + (e.rect.size.height / 2)); //---red dot mid of the line
+                            redObj.color = "red";
+                            thrashHold.paths.push(redObj);
+                        }
+                    }
+                }
+                return visual;
+            }
+        },
+        series: [{
+            data: formattedDeltaEPrimaryPatchList,
+            overlay: {
+                gradient: "glass",
+            }
+        },
+        {
+            data: stackedChart,
+            overlay: {
+                gradient: "glass",
+            },
+            tooltip: {
+                visible: false
+            },
+            color: "#C8D6E3"
+        }],
+        panes: [{
+            clip: false
+        }],
+        categoryAxis: {
+            name: "categoryAxis",
+            categories: patchColorList,
+            majorGridLines: {
+                visible: false
+            }
+        },
+        valueAxis: {
+            name: "valueAxis",
+            //max: 20,
+            line: {
+                visible: false
+            },
+            minorGridLines: {
+                visible: false
+            },
+            labels: {
+                rotation: "auto"
+            },
+            max: maxValue,
+            margin: marginValue
+        },
+        tooltip: {
+            visible: true,
+            //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
+            //template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
+            template: function (dataItem) {
+                debugger;
+                var item = dataItem.dataItem;
+                var toolTipString = "<table>";
+                toolTipString += "<tr><td><b>" + item.title + "</b></td></tr>";
+                toolTipString += "<tr><td><table>";
+                toolTipString += "<tr><td><b>" + _Resources._recActual + "</b></td><td>";
+                toolTipString += _Resources._recL + ": " + item.CielabL.toFixed(2);
+                toolTipString += " " + _Resources._recA + ": " + item.CielabA.toFixed(2);
+                toolTipString += " " + _Resources._recB + ": " + item.CielabB.toFixed(2);
+                toolTipString += "</td></tr>";
+                toolTipString += "<tr><td><b>" + _Resources._recTarget + "</b></td><td>";
+                toolTipString += _Resources._recL + ": " + item.TargetL.toFixed(2);
+                toolTipString += " " + _Resources._recA + ": " + item.Targeta.toFixed(2);
+                toolTipString += " " + _Resources._recB + ": " + item.Targetb.toFixed(2);
+                toolTipString += "</td></tr>";
+                toolTipString += "<tr><td><b>" + _Resources._recDeltaE + "</b></td><td>";
+                toolTipString += item.value.toFixed(2);
+
+                //-----For Sync1D projects or validation projects
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                    toolTipString += " (Thr." + item.ΔELimit.toFixed(2) + ")";
+                }
+
+                //-----For Sync1D projects, display Previous ΔE in tooltip also
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && item.PreAvgΔE > 0) {
+                    toolTipString += "<tr><td><b>" + _Resources._recPreDeltaE + "</b></td><td>";
+                    toolTipString += item.PreAvgΔE.toFixed(2);
+                    toolTipString += "</td></tr>";
+                }
+
+                toolTipString += "</table></td></tr>";
+                toolTipString += "</table>";
+                //var toolTipString = "<b>#= item.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= item.CielabL # " + _Resources._recA + ": #= item.CielabA # " + _Resources._recB + ": #= item.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= item.TargetL # " + _Resources._recA + ": #= item.Targeta # " + _Resources._recB + ": #= item.Targetb # <br/>" + _Resources._recDeltaE + ":  #= item.value #";
+                return toolTipString;
+            }
+        },
+        chartArea: {
+            width: 310,
+            height: 325
+        },
+        render: function (e) {
+
+            //-----For Sync1D projects or validation projects
+            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                var chart = e.sender;
+                $.each(thrashHold.paths, function (index, obj) {
+                    //set the line 
+                    var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: obj.color } }).moveTo(obj.x, obj.y1).lineTo(obj.x, obj.y2);
+                    chart.surface.draw(pathGreen);
+
+                    //set the dot mid of the line
+                    var circleGeoPath = new kendo.geometry.Circle([obj.x, obj.y3], 2);  //
+                    var circlePath = new kendo.drawing.Circle(circleGeoPath).fill(obj.color, 1);
+                    circlePath.options.stroke.color = obj.color;
+                    chart.surface.draw(circlePath);
+                });
+            }
+        }
+    });
+
+    //var densityPatchColor = [
+    //    { colorName: _Resources._recCyan, colorTitle: _Resources._recCyanPathMetrics },
+    //    { colorName: _Resources._recMagenta, colorTitle: _Resources._recMagentaPathMetrics },
+    //    { colorName: _Resources._recYellow, colorTitle: _Resources._recYellowPathMetrics },
+    //    { colorName: _Resources._recBlack, colorTitle: _Resources._recBlackPathMetrics }
+    //];
+
+    var formattedDensityList = [];
+    $.each(jsonDensityList, function (index, obj) {
+        var patchTitle = '';
+        switch (obj.PatchTypeId) {
+            case 1: patchTitle = _Resources._recCyanPathMetrics; break;
+            case 2: patchTitle = _Resources._recMagentaPathMetrics; break;
+            case 3: patchTitle = _Resources._recYellowPathMetrics; break;
+            case 4: patchTitle = _Resources._recBlackPathMetrics; break;
+        }
+
+        var item = {
+            color: obj.HtmlColor,
+            title: patchTitle,
+            value: obj.Density,
+            density: obj.Density,
+            densityLimit: obj.DensityLimit,
+            preAvgDensity: obj.PreAvgDensity
+        };
+        formattedDensityList.push(item);
+    });
+
+
+    var densityPatchColorList = ['C', 'M', 'Y', 'K'];
+    $divChartInkPaperDansityChart.kendoChart({
+        renderAs: "canvas",
+        //title: {
+        //    text: "ΔE2000 Primary Patches"
+        //},
+        seriesDefaults: {
+            type: "column",
+            stack: true,
+            width: 10,
+            gap: 0.5,
+            highlight: {
+                toggle: function (e) {
+                    // Don't create a highlight overlay,
+                    // we'll modify the existing visual instead
+                    e.preventDefault();
+
+                    var visual = e.visual;
+                    var opacity = e.show ? 0.8 : 1;
+
+                    visual.opacity(opacity);
+                }
+            },
+            visual: function (e) {
+                var visual = e.createVisual();
+                var axis = e.sender.getAxis("valueAxis");
+
+                var target = axis.slot(e.dataItem.densityLimit).origin.y;
+                var path = new kendo.drawing.Path({ stroke: { width: 3, color: "red" } }).moveTo(e.rect.origin.x, target).lineTo(e.rect.topRight().x, target);
+                visual.append(path);
+
+                var circleGeometry = new kendo.geometry.Circle([(e.rect.origin.x + (e.rect.size.width / 2)), target], 3);
+                var circleDensity = new kendo.drawing.Circle(circleGeometry).fill("red", 1);
+                circleDensity.options.stroke.color = "red";
+                visual.append(circleDensity);
+
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && e.dataItem.preAvgDensity > 0) {
+                    var targetAvg = axis.slot(e.dataItem.preAvgDensity).origin.y;
+                    var pathAvg = new kendo.drawing.Path({ stroke: { width: 3, color: "#34E61E" } }).moveTo(e.rect.origin.x, targetAvg).lineTo(e.rect.topRight().x, targetAvg);
+                    visual.append(pathAvg);
+
+                    var circleAvg = new kendo.geometry.Circle([(e.rect.origin.x + (e.rect.size.width / 2)), targetAvg], 3);
+                    var circleDensityAvg = new kendo.drawing.Circle(circleAvg).fill("#34E61E", 1);
+                    circleDensityAvg.options.stroke.color = "#34E61E";
+                    visual.append(circleDensityAvg);
+                }
+                return visual;
+            }
+        },
+        series: [{
+            data: formattedDensityList,
+            overlay: {
+                gradient: "glass",
+            }
+        }],
+        panes: [{
+            clip: false
+        }],
+        categoryAxis: {
+            name: "categoryAxis",
+            categories: densityPatchColorList
+        },
+        valueAxis: {
+            name: "valueAxis",
+            //max: 20,
+            line: {
+                visible: false
+            },
+            minorGridLines: {
+                visible: false
+            },
+            labels: {
+                rotation: "auto"
+            },
+            majorUnit: 0.5,
+        },
+        tooltip: {
+            visible: true,
+            //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
+            //template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " :    #= dataItem.density # <br/>" + _Resources._recTarget + " :    #= dataItem.densityLimit # <br/>" + _Resources._recPrevious + " :    #= dataItem.preAvgDensity #"
+            template: function (e) {
+                var item = e.dataItem;
+                var tooltipString = "<b>" + item.title + "</b><br/>";
+                tooltipString += "<b>" + _Resources._recActual + ":</b> " + item.density.toFixed(2) + "<br/>";
+                tooltipString += "<b>" + _Resources._recTarget + ":</b> " + item.densityLimit.toFixed(2) + "<br/>";
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && item.preAvgDensity > 0) {
+                    tooltipString += "<b>" + _Resources._recPrevious + ":</b> " + item.preAvgDensity.toFixed(2);
+                }
+                return tooltipString;
+            }
+        },
+        chartArea: {
+            width: 325,
+            height: 150
+        },
+        render: renderChartWithBackgroundByCategory
+    });
+
+
+
+    var paperABGreen = {};
+    paperABGreen.data = [[0, 0]];
+    paperABGreen.color = "Green";
+    paperABGreen.markers = { background: "Green" };
+    paperABGreen.highlight = {
+        visible: false
+    }
+
+    var tooltipString = "";
+    var paperAB = {};
+    var paperLArray = [];
+    if (jsonDeltaPaperLAB_1.length > 0) {
+        var paperObj = jsonDeltaPaperLAB_1[0];
+        var deltaA = paperObj.Δa == 0 ? 0.01 : paperObj.Δa;
+        paperAB.data = [[deltaA, paperObj.Δb]];
+
+        tooltipString = '<table><tr><td><center><b>' + _Resources._recPaperPathMetrics + '</b></center><td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + paperObj.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + paperObj.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + paperObj.CielabB.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + paperObj.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + paperObj.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + paperObj.Targetb.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaL + ':   ' + paperObj["ΔL"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaA + ':   ' + paperObj["Δa"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaB + ':   ' + paperObj["Δb"].toFixed(2) + '</td></tr>';
+        tooltipString += '</table>';
+
+
+        //bind json data for L chart
+        var paperLObject = {
+            color: '#D4CBC5',
+            //name: patchColor[index].colorName,
+            value: paperObj["ΔL"],
+        };
+        paperLArray.push(paperLObject);
+    }
+
+    paperAB.color = "White";
+    paperAB.markers = {
+        background: "White",
+        border: {
+            width: 1,
+            color: function (e) {
+                return 'black';
+            }
+        }
+    };
+    paperAB.width = 2;
+    paperAB.highlight = {
+        visible: false
+    }
+    paperAB.tooltip = { visible: true, template: tooltipString, shared: true };
+
+
+    $divChartInkPaperPaperLab1.kendoChart({
+        renderAs: "canvas",
+        seriesDefaults: {
+            type: "scatterLine",
+            style: "smooth"
+        },
+        series: [
+            paperABGreen,
+            paperAB
+        ],
+        xAxis: {
+            name: "xAxis",
+            min: -10,
+            max: 10,
+            majorUnit: 5,
+            axisCrossingValues: [-10, 10],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                //text: _Resources._recDeltaA
+            }, majorGridLines: {
+                visible: true,
+                step: -10
+            }
+        },
+        yAxis: {
+            name: "yAxis",
+            min: -10,
+            max: 10,
+            step: 5,
+            majorUnit: 5,
+            axisCrossingValues: [-10, 10],
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                //text: _Resources._recDeltaB
+            }, majorGridLines: {
+                visible: true,
+                step: -10
+            }
+        },
+        chartArea: {
+            width: 250,
+            height: 180
+        },
+        render: renderChartWithBackgroundByAxis
+        //plotArea: {
+        //    background: "lightgray"
+        //}
+    });
+
+
+    $divChartInkPaperPaperLab2.kendoChart({
+        renderAs: "canvas",
+        seriesDefaults: {
+            type: "column",
+            width: 25,
+            //gap: 2,
+        },
+        series: [{
+            data: paperLArray,
+        }],
+        categoryAxis: {
+            name: "categoryAxis",
+            categories: [],
+            line: {
+                visible: true,
+                width: 2,
+            },
+        },
+        valueAxis: {
+            name: "valueAxis",
+            labels: {
+                format: "{0}"
+            },
+            title: {
+                //text: _Resources._recDeltaL
+            },
+            line: {
+                visible: false,
+            },
+            axisCrossingValue: 0,
+            min: -10,
+            max: 10,
+            majorUnit: 5,
+        },
+        tooltip: {
+            visible: true,
+            template: tooltipString
+            //template: "#= dataItem.title # <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
+        },
+        chartArea: {
+            width: 100,
+            height: 180
+        },
+        render: renderChartWithBackgroundByCategory
+    });
+
+
+
+
+
+}
+
+////**************** POPULATE THE TVI CHART  ****************////
 function PopulateTVIG7Chart() {
     var jsonEmpty = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.CmykK == 0; })
 
@@ -2561,6 +2764,7 @@ function PopulateTVIG7Chart() {
     }
 }
 
+////**************** POPULATE THE TVI ISO CHART  ****************////
 function PopulateTVIISOChart() {
     var isoCyanList = [];
     var isoMagentaList = [];
@@ -2990,6 +3194,8 @@ function PopulateTVIISOChart() {
     });
 }
 
+
+////**************** POPULATE THE TVI G7 CHART  ****************////
 function PopulateTVIG7CMYKChart() {
 
     var jsonCMYK_C = $.grep(jsonDTSpreadChartData_CMYKList, function (element) { return (element.CmykC != 0 || element.DotGain == 0) });
@@ -3163,6 +3369,7 @@ function PopulateTVIG7CMYKChart() {
     });
 }
 
+////**************** POPULATE THE TVI SPREAD CHART  ****************////
 function PopulateTVISpreadChart() {
 
     var jsonSpread_C = $.grep(jsonDTSpreadChartDataList, function (element) { return (element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.DotGain == 0) || element.CmykC != 0 });
@@ -3350,6 +3557,7 @@ function PopulateTVISpreadChart() {
     });
 }
 
+////**************** POPULATE THE DELTA SUMMARY REPORT CHART  ****************////
 function PopulateSummaryDeltaChart() {
 
     //var axis = json.map(function (a) { return a["?E"]; });
@@ -3458,6 +3666,135 @@ function PopulateSummaryDeltaChart() {
         },
         //render: renderChartWithBackgroundByCategory
     });
+}
+
+
+////**************** GET IMAGE OF AB COMPARSION SPIDER CHART FOR REPORT  ****************////
+function GetABComparisionSpiderChartImage() {
+    var chart = $chart_TargetVersusActualAB.data("kendoChart");
+    return chart.imageDataURL();
+    //var kendoOptions = $chart_TargetVersusActualAB.data("kendoChart").options;
+    ////kendoOptions.plotArea.background = 'gray';
+    ////kendoOptions.chartArea.width = 700;
+    ////kendoOptions.chartArea.height = 100;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.options.plotArea.background = '#D0D0D0';
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
+}
+
+function GetInkPaperPatchChartImage() {
+    var chart = $divChartInkPaperABComparision.data("kendoChart");
+    return chart.imageDataURL();
+    //var kendoOptions = $chart_Gamut_ABComparison.data("kendoChart").options;
+    //kendoOptions.plotArea.background = '#D0D0D0';
+    ////kendoOptions.chartArea.width = 700;
+    ////kendoOptions.chartArea.height = 100;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
+}
+
+////**************** GET IMAGE OF ACTUAL VS TARGET CHART FOR REPORT  ****************////
+function GetActualVsTargetChartImage() {
+    var chart = $chart_Gamut_ABComparison.data("kendoChart");
+    return chart.imageDataURL();
+    //var kendoOptions = $chart_Gamut_ABComparison.data("kendoChart").options;
+    //kendoOptions.plotArea.background = '#D0D0D0';
+    ////kendoOptions.chartArea.width = 700;
+    ////kendoOptions.chartArea.height = 100;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
+}
+
+
+////**************** GET IMAGE OF L-COMPARSION CHART FOR REPORT  ****************////
+function GetLComparisionChartImage() {
+
+    var chart = $chart_L_Comaparision.data("kendoChart");
+    return chart.imageDataURL();
+
+    //var kendoOptions = $chart_L_Comaparision.data("kendoChart").options;
+    //kendoOptions.plotArea.background = '#D0D0D0';
+    //kendoOptions.chartArea.width = 650;
+    //kendoOptions.chartArea.height = 150;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
+}
+
+
+////**************** GET IMAGE OF L-BALANCE CHART FOR REPORT  ****************////
+function Get_L_BalanceChartImage() {
+    var chart = $chart_L_BalanceChart.data("kendoChart");
+    return chart.imageDataURL();
+
+    //var kendoOptions = $chart_L_BalanceChart.data("kendoChart").options;
+    //var kendodataSource = $chart_L_BalanceChart.data("kendoChart").dataSource;
+
+    //kendoOptions.plotArea.background = '#D0D0D0';
+    ////kendoOptions.chartArea.width = 700;
+    ////kendoOptions.chartArea.height = 100;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.dataSource = kendodataSource;
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
+}
+
+////**************** GET IMAGE OF A-BALANCE CHART FOR REPORT  ****************////
+function Get_A_BalanceChartImage() {
+
+    var chart = $chart_A_BalanceChart.data("kendoChart");
+    return chart.imageDataURL();
+
+    //var kendoOptions = $chart_A_BalanceChart.data("kendoChart").options;
+    //var kendodataSource = $chart_A_BalanceChart.data("kendoChart").dataSource;
+    //kendoOptions.plotArea.background = '#D0D0D0';
+    ////kendoOptions.chartArea.width = 700;
+    ////kendoOptions.chartArea.height = 100;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.dataSource = kendodataSource;
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
+}
+
+////**************** GET IMAGE OF B-BALANCE CHART FOR REPORT  ****************////
+function Get_B_BalanceChartImage() {
+
+    var chart = $chart_B_BalanceChart.data("kendoChart");
+    return chart.imageDataURL();
+
+
+    //var kendoOptions = $chart_B_BalanceChart.data("kendoChart").options;
+    //var kendodataSource = $chart_B_BalanceChart.data("kendoChart").dataSource;
+    //kendoOptions.plotArea.background = '#D0D0D0';
+    ////kendoOptions.chartArea.width = 700;
+    ////kendoOptions.chartArea.height = 100;
+    //$kendoChartDummy.kendoChart(kendoOptions);
+    //var dummyChart = $kendoChartDummy.data('kendoChart');
+    //dummyChart.dataSource = kendodataSource;
+    //dummyChart.options.transitions = false
+    //dummyChart.refresh();
+    //return dummyChart.imageDataURL();
+}
+
+////**************** GET IMAGE OF DELTA SUMMARY CHART FOR REPORT  ****************////
+function Get_DeltaSummaryChartImage() {
+    var chart = $divChartSummaryDeltaChart.data("kendoChart");
+    return chart.imageDataURL();
 }
 
 function createColumn(e, rect, color) {
