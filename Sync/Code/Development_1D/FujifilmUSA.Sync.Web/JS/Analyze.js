@@ -1916,6 +1916,7 @@ function BindMeasurementPatchDetails() {
         noRecords: {
             template: ''
         },
+        toolbar: kendo.template($("#templatePatchDetails").html()),
         //toolbar: [{ 'name': 'exportCGATS', template: '<div style="float:left;"><button id="btnExportCGATS" class=\'k-button\'>Export CGATS</button></div>' }],
         columns: [
             {
@@ -2078,8 +2079,129 @@ function BindMeasurementPatchDetails() {
         //}
     });
 
+    var dropDownMatricSum = null;
+
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+
+        var params = {
+            MeasurementId: measurementID,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            fromDeltaE: $selectedDeltaE,
+            IsAverageOfMeasurements: $isAverageOfMeasurements
+        };
+
+        var matricList = [];
+        $.ajax({
+            type: "GET",
+            url: SERVICE_BASE_URL + 'api/Chart/GetValidationMetrics',
+            data: apiParameters,
+            dataType: "json",
+            headers: {
+                'Accept-Language': $CurrentCulture
+            },
+            success: function (response) {
+                debugger;
+                console.log(response.data);
+                if (response.data != null) {
+                   matricList = response.data
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.responseText);
+            }
+        });
+        console.log(matricList);
+        dropDownMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").kendoDropDownList({
+            dataTextField: "Metric",
+            dataValueField: "MetricSumID",
+            autoBind: true,
+            keepOpen: false,
+            optionLabel: "All",
+            dataSource: matricList,
+            //dataSource: {
+            //    //type: "odata",
+            //    //severFiltering: true,
+            //    transport: {
+            //        read: function (options) {
+                       
+            //        },
+            //    }
+            //}            
+        });
+    } else {
+        $divMeasurementPatchDetails.find("#ddlMatricSum").css('display', 'none');
+    }
+
+    
+
+
     //$divMeasurementPatchDetails.data('kendoGrid').refresh();
     //$divMeasurementPatchDetails.find('.k-grid-content-locked').css('height', 'unset');
+
+    $divMeasurementPatchDetails.find('#btnExportCGATS').on('click', function (e) {
+        e.preventDefault();
+
+        var selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
+        alert(selectedMatricSum);
+        var measurementID = parseInt($hdMeasurement);
+        var apiReportParameters = {
+            MeasurementId: measurementID,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            metricSumID: selectedMatricSum
+        };
+
+        $.ajax({
+            type: "GET",
+            url: SERVICE_BASE_URL + 'api/Chart/GetCGATSPatchReport',
+            data: apiReportParameters,
+            dataType: "json",           
+            success: function (response) {                
+                if (response.data != null) {                    
+                    //window.location = (SERVICE_BASE_URL + response.data);
+                    //var filePath = (SERVICE_BASE_URL + response.data);
+                    window.open(SERVICE_BASE_URL + response.data, "_blank");    
+                    //window.location.href = filePath;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.responseText);
+            }
+        });
+    });
+
+    $divMeasurementPatchDetails.find('#btnExportCFX').on('click', function (e) {
+        e.preventDefault();
+        var measurementID = parseInt($hdMeasurement);
+        var selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
+        var apiReportParameters = {
+            MeasurementId: measurementID,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            metricSumID: selectedMatricSum
+        };
+        $.ajax({
+            type: "GET",
+            url: SERVICE_BASE_URL + 'api/Chart/GetCFXPatchReport',
+            data: apiReportParameters,
+            dataType: "json",
+            success: function (response) {
+                //if (response.data != null) {
+                //    window.location = (SERVICE_BASE_URL + response.data);
+                //}
+                if (response.data != null) {
+                    //window.location = (SERVICE_BASE_URL + response.data);
+                    //var filePath = (SERVICE_BASE_URL + response.data);
+                    window.open(SERVICE_BASE_URL + response.data, "_blank");
+                    //window.location.href = filePath;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.responseText);
+            }
+        });
+    });
 }
 
 ////************************ CHART POPULATIONS  ***********************////
@@ -3194,7 +3316,6 @@ function PopulateTVIISOChart() {
     });
 }
 
-
 ////**************** POPULATE THE TVI G7 CHART  ****************////
 function PopulateTVIG7CMYKChart() {
 
@@ -3668,7 +3789,6 @@ function PopulateSummaryDeltaChart() {
     });
 }
 
-
 ////**************** GET IMAGE OF AB COMPARSION SPIDER CHART FOR REPORT  ****************////
 function GetABComparisionSpiderChartImage() {
     var chart = $chart_TargetVersusActualAB.data("kendoChart");
@@ -3685,6 +3805,7 @@ function GetABComparisionSpiderChartImage() {
     //return dummyChart.imageDataURL();
 }
 
+////**************** GET IMAGE OF INK PAPER CHART FOR REPORT  ****************////
 function GetInkPaperPatchChartImage() {
     var chart = $divChartInkPaperABComparision.data("kendoChart");
     return chart.imageDataURL();
@@ -3714,7 +3835,6 @@ function GetActualVsTargetChartImage() {
     //return dummyChart.imageDataURL();
 }
 
-
 ////**************** GET IMAGE OF L-COMPARSION CHART FOR REPORT  ****************////
 function GetLComparisionChartImage() {
 
@@ -3731,7 +3851,6 @@ function GetLComparisionChartImage() {
     //dummyChart.refresh();
     //return dummyChart.imageDataURL();
 }
-
 
 ////**************** GET IMAGE OF L-BALANCE CHART FOR REPORT  ****************////
 function Get_L_BalanceChartImage() {
@@ -3961,67 +4080,53 @@ function renderChartWithBackgroundByCategory(e) {
     chart.surface.draw(path);
 }
 
-//function createColumn(rect, color) {
-//    var origin = rect.origin;
-//    var center = rect.center();
-//    var bottomRight = rect.bottomRight();
-//    var radiusX = rect.width() / 2;
-//    var radiusY = radiusX / 3;
-//    var gradient = new drawing.LinearGradient({
-//        stops: [{
-//            offset: 0,
-//            color: color
-//        }, {
-//            offset: 0.5,
-//            color: color,
-//            opacity: 0.9
-//        }, {
-//            offset: 0.5,
-//            color: color,
-//            opacity: 0.9
-//        }, {
-//            offset: 1,
-//            color: color
-//        }]
-//    });
-
-//    var path = new drawing.Path({
-//        fill: gradient,
-//        stroke: {
-//            color: "none"
-//        }
-//    })
-//    //.moveTo(origin.x, origin.y)
-//    //.lineTo(origin.x, bottomRight.y)
-//    //.arc(180, 0, radiusX, radiusY, true)
-//    //.lineTo(bottomRight.x, origin.y)
-//    //.arc(0, 180, radiusX, radiusY);
-
-
-//    //.moveTo(origin.x, origin.y)
-//    //.lineTo(origin.x, bottomRight.y)
-//    //.arc(180, 0, radiusX, radiusY, true)
-//    //.lineTo(bottomRight.y, origin.x)
-//    //.arc(0, 180, radiusY, radiusX);
-
-//    var topArcGeometry = new geometry.Arc([center.x, origin.y], {
-//        startAngle: 0,
-//        endAngle: 360,
-//        radiusX: radiusX,
-//        radiusY: radiusY
-//    });
-
-//    var topArc = new drawing.Arc(topArcGeometry, {
-//        fill: {
-//            color: color
-//        },
-//        stroke: {
-//            color: "#ebebeb"
-//        }
-//    });
-//    var group = new drawing.Group();
-//    group.append(path, topArc);
-//    return group;
-//}
+function getBlobFromURI(url, data, responseType, success, error, continueFunc) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open('post', url, true);
+    xmlHttp.setRequestHeader("Content-Type", "text/plain; charset=utf-8");
+    if (responseType != null) {
+        xmlHttp.setRequestHeader("Accept", responseType);
+        xmlHttp.responseType = "blob";
+    }
+    xmlHttp.send(data);
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState === 4) {
+            try {
+                if (xmlHttp.status === 200) {
+                    if (xmlHttp.responseType === "blob") {
+                        success.call(null, xmlHttp.response, continueFunc, xmlHttp.getResponseHeader('Extension'));
+                    } else {
+                        success.call(null, JSON.parse(xmlHttp.responseText), continueFunc);
+                    }
+                } else {
+                    if (xmlHttp.responseType === "blob") {
+                        error.call(null, xmlHttp.response, continueFunc);
+                    } else {
+                        error.call(null, xmlHttp.responseText, continueFunc);
+                    }
+                }
+            } catch (e) {
+                if (continueFunc) {
+                    continueFunc.call(null, e);
+                }
+            }
+        } else {
+        }
+    };
+};
 
 
+
+
+function downloadFileDirect(file) {
+    getBlobFromURI(file.URL, null, file.ContentType, function (response, continueFunc) {
+        var downloadUri = URL.createObjectURL(response);
+
+        var downloadElem = $("<a href=\"" + downloadUri + "\" download=\"" + file.Name + "\" target=\"_blank\">Download</a>");
+        downloadElem.get(0).click();
+        setTimeout(function () { URL.revokeObjectURL(downloadUri) }, 1000);
+
+    }, function (error, continueFunc) {
+        alert('File downloaded not succesfully');
+    });
+}

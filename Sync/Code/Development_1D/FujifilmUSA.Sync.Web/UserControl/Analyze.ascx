@@ -3239,6 +3239,16 @@
                                                 <div>
                                                     <div id="divMeasurementPatchDetails">
                                                     </div>
+                                                    <script type="text/x-kendo-template" id="templatePatchDetails">    
+                                                        <div style="float:left;">
+                                                            <input type="search" id="ddlMatricSum" style="width: 150px"/>
+                                                        </div>
+                                                        <div class="toolbar" style="float:right;">
+                                                            <button id="btnExportCGATS" class="k-button">Export to CGATS</button>
+                                                            <button id="btnExportCFX" class="k-button">Export to CFX</button>
+                                                            
+                                                        </div>
+                                                    </script>
                                                 </div>
                                             </div>
                                             <div class="clear"></div>
