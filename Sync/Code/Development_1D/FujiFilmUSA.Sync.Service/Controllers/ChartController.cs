@@ -732,7 +732,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                     #region Generate CGATS .txt file
                     System.IO.StreamWriter sw;
-                    ReportFileName = "/UploadFiles/"+ MeasurementId.ToString() + "_MeasurementFile.txt";
+                    ReportFileName = "/UploadFiles/" + MeasurementId.ToString() + "_MeasurementFile.txt";
                     string ReportFilePath = HostingEnvironment.MapPath("~/UploadFiles/") + MeasurementId.ToString() + "_MeasurementFile.txt";
                     sw = System.IO.File.CreateText(ReportFilePath);
                     sw.WriteLine(@"ORIGINATOR	""FujiFilm Colorpath Sync""");
@@ -775,7 +775,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString());
                         }
                     }
-                    sw.WriteLine("END_DATA");                   
+                    sw.WriteLine("END_DATA");
                     sw.Close();
                     #endregion
 
@@ -1009,69 +1009,32 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
-        [HttpGet]
-        public IHttpActionResult GetValidationMetrics(int? MeasurementId, string fromDeltaE, bool? IsAverageOfMeasurements, bool? IsVerificationProject,
-                                                            bool? IsSync1DTypeProject)
-        {
-            IHttpActionResult actionResult = null;
-            string validationMessage = "";
+        
 
-            BaseResponse<object> httpResponse = new BaseResponse<object>();
+        [HttpGet]
+        public ValidationMetrics[] GetValidationMetrics(int? MeasurementId, string fromDeltaE, bool? IsAverageOfMeasurements, bool? IsVerificationProject,
+                                                           bool? IsSync1DTypeProject)
+        {
+            ValidationMetrics[] matricsArray = null;
             try
             {
-                if (MeasurementId == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                this.MeasurementId = Convert.ToInt32(MeasurementId);
+                this.From_ΔE = fromDeltaE;
+                this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
 
-                if (IsAverageOfMeasurements == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+                //Get Ink gray chart details
+                _presenterAnalyze.GetAvgDeltaMeasurement_Validation();
+                matricsArray = MeasurementSummary[0].ValidationMetrics.ToArray();
 
-                if (IsVerificationProject == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
-
-                if (IsSync1DTypeProject == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
-
-                if (string.IsNullOrEmpty(Convert.ToString(fromDeltaE)))
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
-
-
-                if (!string.IsNullOrEmpty(validationMessage))
-                {
-                    BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
-                }
-                else
-                {
-                    DetermineCulture();
-                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
-                    this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    this.From_ΔE = fromDeltaE;
-                    this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
-
-                    //Get Ink gray chart details
-                    _presenterAnalyze.GetAvgDeltaMeasurement_Validation();                  
-
-                    //Get resource values
-                    GenerateResources();
-
-                    httpResponse.Data = MeasurementSummary[0].ValidationMetrics;
-
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
-                }
+                return matricsArray;
 
             }
             catch (Exception ex)
             {
-                BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
-
             }
-            return actionResult;
+            return matricsArray;
         }
 
         //combined service for all charts
@@ -1173,7 +1136,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
 
-        
+
 
         [HttpGet]
         public HttpResponseMessage DownloadFile(string filePath)
@@ -1181,7 +1144,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             byte[] dataBytes = new System.Net.WebClient().DownloadData(filePath);
             //var dataBytes = File.ReadAllBytes(System.Web.Hosting.HostingEnvironment.MapPath(filePath));
             var dataStream = new MemoryStream(dataBytes);
-            
+
             // processing the stream.
 
             var result = new HttpResponseMessage(HttpStatusCode.OK)
@@ -1351,7 +1314,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
             return DT;
         }
-               
+
         #endregion
 
         #region IViewAnalyze Members

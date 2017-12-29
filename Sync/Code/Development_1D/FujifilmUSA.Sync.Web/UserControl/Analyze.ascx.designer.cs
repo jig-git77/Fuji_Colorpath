@@ -1705,6 +1705,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadGrid rgPatchDetails;
         
         /// <summary>
+        /// locFilterMetricSumTemplate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locFilterMetricSumTemplate;
+        
+        /// <summary>
         /// UpdatePanel6 control.
         /// </summary>
         /// <remarks>

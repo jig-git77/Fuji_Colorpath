@@ -3240,7 +3240,9 @@
                                                     <div id="divMeasurementPatchDetails">
                                                     </div>
                                                     <script type="text/x-kendo-template" id="templatePatchDetails">    
-                                                        <div style="float:left;">
+                                                        <div id="divMetricSum" style="float:left;">
+                                                        <asp:Localize Text="Filter by Metric Sum:" runat="server"
+                                                                            ID="locFilterMetricSumTemplate" meta:resourcekey="locFilterMetricSumResource1"></asp:Localize>
                                                             <input type="search" id="ddlMatricSum" style="width: 150px"/>
                                                         </div>
                                                         <div class="toolbar" style="float:right;">

@@ -2079,10 +2079,10 @@ function BindMeasurementPatchDetails() {
         //}
     });
 
-    var dropDownMatricSum = null;
-
+    
     if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
 
+        var measurementID = parseInt($hdMeasurement);
         var params = {
             MeasurementId: measurementID,
             IsVerificationProject: $hdnVerification,
@@ -2091,46 +2091,26 @@ function BindMeasurementPatchDetails() {
             IsAverageOfMeasurements: $isAverageOfMeasurements
         };
 
-        var matricList = [];
-        $.ajax({
-            type: "GET",
-            url: SERVICE_BASE_URL + 'api/Chart/GetValidationMetrics',
-            data: apiParameters,
-            dataType: "json",
-            headers: {
-                'Accept-Language': $CurrentCulture
-            },
-            success: function (response) {
-                debugger;
-                console.log(response.data);
-                if (response.data != null) {
-                   matricList = response.data
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(XMLHttpRequest.responseText);
-            }
-        });
-        console.log(matricList);
-        dropDownMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").kendoDropDownList({
+        $divMeasurementPatchDetails.find("#ddlMatricSum").kendoDropDownList({
             dataTextField: "Metric",
             dataValueField: "MetricSumID",
             autoBind: true,
             keepOpen: false,
             optionLabel: "All",
-            dataSource: matricList,
-            //dataSource: {
-            //    //type: "odata",
-            //    //severFiltering: true,
-            //    transport: {
-            //        read: function (options) {
-                       
-            //        },
-            //    }
-            //}            
+            dataSource: {
+                transport: {
+                    read: {
+                        type: "GET",
+                        url: SERVICE_BASE_URL + 'api/Chart/GetValidationMetrics',
+                        dataType: "json",
+                        data: params,
+                    }
+                }
+            }
         });
+        
     } else {
-        $divMeasurementPatchDetails.find("#ddlMatricSum").css('display', 'none');
+        $divMeasurementPatchDetails.find("#divMetricSum").css('display', 'none');
     }
 
     
@@ -2142,8 +2122,10 @@ function BindMeasurementPatchDetails() {
     $divMeasurementPatchDetails.find('#btnExportCGATS').on('click', function (e) {
         e.preventDefault();
 
-        var selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
-        alert(selectedMatricSum);
+        var selectedMatricSum = '';
+        if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
+            selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
+        }                
         var measurementID = parseInt($hdMeasurement);
         var apiReportParameters = {
             MeasurementId: measurementID,
