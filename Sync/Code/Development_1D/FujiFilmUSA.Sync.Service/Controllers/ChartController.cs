@@ -114,6 +114,73 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
+        public IHttpActionResult GenerateAnalyzeChart(int? ProjectId, int? OptimizeRunId, bool? IsSync1DTypeProject, string fromDeltaE, int ProjectType)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                //if (MeasurementId == null)
+                //    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+                if (string.IsNullOrEmpty(Convert.ToString(fromDeltaE)))
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
+
+                if (IsSync1DTypeProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.Message = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    DetermineCulture();
+                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    this.From_ΔE = Convert.ToString(fromDeltaE);
+                    //this.MeasurementId = Convert.ToInt32(MeasurementId);
+                    if (ProjectType == (int)ELicenseType.Validation)
+                    {
+                        //This will be called when Verification process is going on
+                        this.ProjectId = Convert.ToInt32(ProjectId);
+                        _presenterAnalyze.GetAnalyzeChartVMeasurement();                        
+                    }
+                    else
+                    {
+                        //In case of None (i.e. Optimization or Sync1D)
+                        this.OptimizeRunId = Convert.ToInt32(OptimizeRunId);
+                        _presenterAnalyze.GetAnalyzeChartMeasurement();
+                    }
+                    GenerateResources();
+
+                    httpResponse.Data = new
+                    {
+                        Measurements = Measurements,
+                        GlobalResources = _globalResourceValues
+                    };
+
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
+
+        [HttpGet]
         public IHttpActionResult GenerateGrayChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject)
         {
             IHttpActionResult actionResult = null;
@@ -1037,127 +1104,30 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return matricsArray;
         }
 
-        //combined service for all charts
-        [HttpGet]
-        public IHttpActionResult GenerateAnalyzeCharts(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject,
-                                                            bool? IsSync1DTypeProject, string fromDeltaE, int validationType)
-        {
-            //int? MeasurementId = 15081;
-            //bool? IsAverageOfMeasurements = true;   
-            IHttpActionResult actionResult = null;
-            string validationMessage = "";
-
-            BaseResponse<object> httpResponse = new BaseResponse<object>();
-            try
-            {
-                if (MeasurementId == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
-
-                if (IsAverageOfMeasurements == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
-
-                if (IsVerificationProject == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
-
-                if (IsSync1DTypeProject == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
-
-                if (string.IsNullOrEmpty(Convert.ToString(fromDeltaE)))
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
-
-                if (string.IsNullOrEmpty(Convert.ToString(validationType)))
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidValidationType);
-
-                if (!string.IsNullOrEmpty(validationMessage))
-                {
-                    BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
-                }
-                else
-                {
-                    DetermineCulture();
-                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
-                    this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    this.From_ΔE = fromDeltaE;
-                    this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
-
-                    //Get Ink gray chart details
-                    _presenterAnalyze.GetGrayChart();
-
-                    //Get Ink paper chart details
-                    _presenterAnalyze.GetInkPaperChart();
-
-                    if (validationType == 1) //-------------Only call G7 tab data if it is G7 type of Validation / Sync 1D / Sync 4D Project
-                    {
-                        _presenterAnalyze.GetG7Chart();
-                    }
-
-                    //Get resource values
-                    GenerateResources();
-
-                    httpResponse.Data = new
-                    {
-                        GamutChartActual = DTGaumatChart1,
-                        GamutChart = DTGaumatChart2,
-                        LABChart = DTLABChart,
-                        DeltaEPrimaryPatchList = DTDeltaEPrimaryPatches,
-                        PaperPatchList = DTPaperPatches,
-                        DensityList = DTDensity,
-
-                        //Gray chart list
-                        GrayFChartList = GrayFChart,
-                        //GrayFSummaryList = GrayFSummary,
-                        BlackLChartList = BlackLChart,
-                        //BlackLSummaryList = BlackLSummary,
-                        GrayLChartList = GrayLChart,
-                        //GrayLSummaryList = GrayLSummary,
-                        BlackNPDChartList = BlackNPDChart,
-                        GrayNPDChartList = GrayNPDChart,
-
-                        GlobalResources = _globalResourceValues
-                    };
-
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
-                }
-
-            }
-            catch (Exception ex)
-            {
-                BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
-
-            }
-            return actionResult;
-        }
-
-
-
-
         [HttpGet]
         public HttpResponseMessage DownloadFile(string filePath)
         {
-            byte[] dataBytes = new System.Net.WebClient().DownloadData(filePath);
+            var fullPath = System.Web.Hosting.HostingEnvironment.MapPath(filePath);
+            var fileName = Path.GetFileName(fullPath);
+            var stream = new FileStream(fullPath, FileMode.Open);
+          //  byte[] dataBytes = new System.Net.WebClient().DownloadData(filePath);
             //var dataBytes = File.ReadAllBytes(System.Web.Hosting.HostingEnvironment.MapPath(filePath));
-            var dataStream = new MemoryStream(dataBytes);
+          //  var dataStream = new MemoryStream(dataBytes);
 
             // processing the stream.
 
             var result = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new ByteArrayContent(dataStream.ToArray())
+                Content = new StreamContent(stream)
             };
             result.Content.Headers.ContentDisposition =
                 new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
                 {
-                    FileName = "test.txt"
+                    FileName = fileName
                 };
             result.Content.Headers.ContentType =
                 new MediaTypeHeaderValue("application/octet-stream");
+            //result.Content.Headers.ContentDisposition.FileName = "test.txt";
 
             return result;
         }

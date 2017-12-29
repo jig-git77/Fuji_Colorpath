@@ -2140,11 +2140,9 @@ function BindMeasurementPatchDetails() {
             data: apiReportParameters,
             dataType: "json",           
             success: function (response) {                
-                if (response.data != null) {                    
-                    //window.location = (SERVICE_BASE_URL + response.data);
-                    //var filePath = (SERVICE_BASE_URL + response.data);
-                    window.open(SERVICE_BASE_URL + response.data, "_blank");    
-                    //window.location.href = filePath;
+                if (response.data != null) {                      
+                    var fileName = '~' + response.data;
+                    window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -2156,7 +2154,11 @@ function BindMeasurementPatchDetails() {
     $divMeasurementPatchDetails.find('#btnExportCFX').on('click', function (e) {
         e.preventDefault();
         var measurementID = parseInt($hdMeasurement);
-        var selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
+
+        var selectedMatricSum = '';
+        if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
+            selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
+        }              
         var apiReportParameters = {
             MeasurementId: measurementID,
             IsVerificationProject: $hdnVerification,
@@ -2169,14 +2171,9 @@ function BindMeasurementPatchDetails() {
             data: apiReportParameters,
             dataType: "json",
             success: function (response) {
-                //if (response.data != null) {
-                //    window.location = (SERVICE_BASE_URL + response.data);
-                //}
                 if (response.data != null) {
-                    //window.location = (SERVICE_BASE_URL + response.data);
-                    //var filePath = (SERVICE_BASE_URL + response.data);
-                    window.open(SERVICE_BASE_URL + response.data, "_blank");
-                    //window.location.href = filePath;
+                    var fileName = '~' + response.data;
+                    window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
