@@ -186,7 +186,7 @@
                                     </td>
                                     <td>
                                         <asp:Panel ID="Panel_PaperLAB" Style="padding: 5px" runat="server" BorderStyle="None" Enabled="false">
-                                            <asp:Localize runat="server" Text="New Paper Values:" ID="locPanel_PaperLAB" meta:resourcekey="Panel_PaperLABResource1"></asp:Localize>
+                                            <asp:Localize runat="server" Text="New Paper Value:" ID="locPanel_PaperLAB" meta:resourcekey="Panel_PaperLABResource1"></asp:Localize>
 
                                             L*<asp:TextBox ID="txtPaper_L" runat="server" CssClass="textwidth40"></asp:TextBox>
                                             <asp:RangeValidator ID="RangeValidator2" runat="server"
@@ -206,7 +206,29 @@
                                                     <asp:Button ID="btn_PaperApply" runat="server" Text="Apply!"
                                                         OnClick="btn_PaperApply_Click" ValidationGroup="a" meta:resourcekey="locbtn_PaperApplyResource1" />
                                             <asp:Button ID="btn_PaperClear" runat="server" OnClick="btn_PaperClear_Click"
-                                                Text="Reset" meta:resourcekey="locbtn_PaperClearResource1" />
+                                                Text="Reset" meta:resourcekey="locbtn_PaperClearResource1" /> 
+                                            <br />
+
+                                             <asp:Localize runat="server" Text="Min L* Value:" ID="Localize8" meta:resourcekey="Panel_PaperLABBlackResource1"></asp:Localize>
+                                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                            L*<asp:TextBox ID="txtPaper_Black_L" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                            <asp:RangeValidator ID="RangeValidator10" runat="server"
+                                                ControlToValidate="txtPaper_Black_L" ErrorMessage="*" ForeColor="Red"
+                                                ValidationGroup="a" MinimumValue="0" MaximumValue="100" Type="Double"></asp:RangeValidator>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtPaper_Black_L" ValidationGroup="a" ForeColor="Red"></asp:RequiredFieldValidator>
+                                          
+                                                    a*<asp:TextBox ID="txtPaper_Black_a" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                            <asp:RangeValidator ID="RangeValidator11" runat="server"
+                                                ControlToValidate="txtPaper_Black_a" ErrorMessage="*" ForeColor="Red"
+                                                ValidationGroup="a" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="txtPaper_Black_a" ValidationGroup="a" ForeColor="Red"></asp:RequiredFieldValidator>
+                                           
+                                                    b*<asp:TextBox ID="txtPaper_Black_b" runat="server" CssClass="textwidth40"></asp:TextBox>
+                                            <asp:RangeValidator ID="RangeValidator12" runat="server"
+                                                ControlToValidate="txtPaper_Black_b" ErrorMessage="*" ForeColor="Red"
+                                                ValidationGroup="a" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtPaper_Black_b" ValidationGroup="a" ForeColor="Red"></asp:RequiredFieldValidator>
+                                            &nbsp;
                                         </asp:Panel>
                                     </td>
                                 </tr>

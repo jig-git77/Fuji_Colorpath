@@ -98,6 +98,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentProject.ProjectTargetLAB = GetTargetLAB();
                 SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
+
+                //------If 1D project then pass NewPaperScaling LAB values--------//
+                SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(txtPaper_L.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(txtPaper_a.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(txtPaper_b.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_Black_L = Convert.ToDecimal(txtPaper_Black_L.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_Black_a = Convert.ToDecimal(txtPaper_Black_a.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_Black_b = Convert.ToDecimal(txtPaper_Black_b.Text);
             }
             else
             {
@@ -161,6 +169,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 CIELab Finallab = new CIELab(0, 0, 0);
                 CIEXYZ CurrentPaperxyz = new CIEXYZ(0, 0, 0);
                 CIEXYZ NewPaperxyz = new CIEXYZ(0, 0, 0);
+                CIEXYZ NewMinxyz = new CIEXYZ(0, 0, 0);
+
 
                 //Create list for Paper Patch
                 List<Entity.CPSync1D.ProjectTargetLAB> PaperProjectTargetList = new List<Entity.CPSync1D.ProjectTargetLAB>();
@@ -171,13 +181,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 //convert new Paper's LAB to XYZ
                 NewPaperxyz = ColorMath.LabtoXYZ(Convert.ToDouble(txtPaper_L.Text), Convert.ToDouble(txtPaper_a.Text), Convert.ToDouble(txtPaper_b.Text));
+                NewMinxyz = ColorMath.LabtoXYZ(Convert.ToDouble(txtPaper_Black_L.Text), Convert.ToDouble(txtPaper_Black_a.Text), Convert.ToDouble(txtPaper_Black_b.Text));
 
                 //convert current Paper's LAB to XYZ
                 CurrentPaperxyz = ColorMath.LabtoXYZ(Convert.ToDouble(PaperProjectTargetList[0].TargetL), Convert.ToDouble(PaperProjectTargetList[0].TargetA), Convert.ToDouble(PaperProjectTargetList[0].TargetB));
 
                 for (int i = 0; i < this.ProjectTargetLABList.Count; i++)
                 {
-                    Finallab = ColorMath.CalcPaperScaleLAB(CurrentPaperxyz.X, CurrentPaperxyz.Y, CurrentPaperxyz.Z, NewPaperxyz.X, NewPaperxyz.Y, NewPaperxyz.Z, Convert.ToDouble(ProjectTargetLABList[i].TargetL), Convert.ToDouble(ProjectTargetLABList[i].TargetA), Convert.ToDouble(ProjectTargetLABList[i].TargetB));
+                    Finallab = ColorMath.CalcPaperScaleLAB(CurrentPaperxyz.X, CurrentPaperxyz.Y, CurrentPaperxyz.Z, NewPaperxyz.X, NewPaperxyz.Y, NewPaperxyz.Z, NewMinxyz.X, NewMinxyz.Y, NewMinxyz.Z, Convert.ToDouble(ProjectTargetLABList[i].TargetL), Convert.ToDouble(ProjectTargetLABList[i].TargetA), Convert.ToDouble(ProjectTargetLABList[i].TargetB));
                     NewProjectTargetList.Add(new Entity.CPSync1D.ProjectTargetLAB() { PatchType = this.ProjectTargetLABList[i].PatchType, TargetL = (decimal)Finallab.L, TargetA = (decimal)Finallab.A, TargetB = (decimal)Finallab.B });
                 }
                 //Assign new ProjectTargetLAB list
@@ -213,6 +224,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     txtPaper_L.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetL.ToString();   //Paper L* Value
                     txtPaper_a.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetA.ToString();   //Paper a* Value
                     txtPaper_b.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetB.ToString();   //Paper b* Value
+
+                    txtPaper_Black_L.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString();
+                    txtPaper_Black_a.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString();
+                    txtPaper_Black_b.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString();
 
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Project type selection is disable
                     {
@@ -324,6 +339,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtPaper_L.Text = "0";   //Paper L* Value
                 txtPaper_a.Text = "0";   //Paper a* Value
                 txtPaper_b.Text = "0";   //Paper b* Value
+                txtPaper_Black_L.Text = "0";
+                txtPaper_Black_a.Text = "0";
+                txtPaper_Black_b.Text = "0";
             }
         }
 
