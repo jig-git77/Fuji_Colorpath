@@ -1,0 +1,3029 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cc:CxF xmlns:xsi="http:///www.w3.org/2001/XMLSchema-instance" xmlns:cc="http://colorexchangeformat.com/CxF3-core">
+    <cc:FileInformation>
+        <cc:Creator>Fujifilm</cc:Creator>
+        <cc:CreationDate>2016-12-19T16:31:27</cc:CreationDate>
+        <cc:Description>Unknown</cc:Description>
+    </cc:FileInformation>
+    <cc:Resources>
+        <cc:ObjectCollection>
+            <cc:Object ObjectType="Standard" Name="A25" Id="A25">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>47.10</cc:L>
+                        <cc:a>66.09</cc:a>
+                        <cc:b>44.25</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A24" Id="A24">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>48.45</cc:L>
+                        <cc:a>63.55</cc:a>
+                        <cc:b>43.38</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A23" Id="A23">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>50.28</cc:L>
+                        <cc:a>60.15</cc:a>
+                        <cc:b>42.22</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A22" Id="A22">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>54.04</cc:L>
+                        <cc:a>53.59</cc:a>
+                        <cc:b>40.26</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A21" Id="A21">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>58.39</cc:L>
+                        <cc:a>45.42</cc:a>
+                        <cc:b>36.82</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A20" Id="A20">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>62.79</cc:L>
+                        <cc:a>38.35</cc:a>
+                        <cc:b>33.21</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A19" Id="A19">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>67.81</cc:L>
+                        <cc:a>31.08</cc:a>
+                        <cc:b>28.85</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A18" Id="A18">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>72.53</cc:L>
+                        <cc:a>23.64</cc:a>
+                        <cc:b>23.50</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A17" Id="A17">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>78.31</cc:L>
+                        <cc:a>16.22</cc:a>
+                        <cc:b>17.66</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A16" Id="A16">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>83.36</cc:L>
+                        <cc:a>10.63</cc:a>
+                        <cc:b>12.72</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A15" Id="A15">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>88.79</cc:L>
+                        <cc:a>5.01</cc:a>
+                        <cc:b>5.31</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A14" Id="A14">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>90.84</cc:L>
+                        <cc:a>2.25</cc:a>
+                        <cc:b>2.15</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A13" Id="A13">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>57.66</cc:L>
+                        <cc:a>-36.48</cc:a>
+                        <cc:b>-46.65</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A12" Id="A12">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>59.30</cc:L>
+                        <cc:a>-35.33</cc:a>
+                        <cc:b>-44.98</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A11" Id="A11">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>60.88</cc:L>
+                        <cc:a>-33.54</cc:a>
+                        <cc:b>-42.87</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A10" Id="A10">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>63.60</cc:L>
+                        <cc:a>-30.72</cc:a>
+                        <cc:b>-39.46</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A9" Id="A9">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>66.85</cc:L>
+                        <cc:a>-27.05</cc:a>
+                        <cc:b>-35.26</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A8" Id="A8">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>70.18</cc:L>
+                        <cc:a>-23.25</cc:a>
+                        <cc:b>-30.82</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A7" Id="A7">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>73.97</cc:L>
+                        <cc:a>-19.53</cc:a>
+                        <cc:b>-25.64</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A6" Id="A6">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>77.30</cc:L>
+                        <cc:a>-15.68</cc:a>
+                        <cc:b>-21.88</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A5" Id="A5">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>81.45</cc:L>
+                        <cc:a>-11.80</cc:a>
+                        <cc:b>-16.57</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A4" Id="A4">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>85.20</cc:L>
+                        <cc:a>-7.82</cc:a>
+                        <cc:b>-11.71</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A3" Id="A3">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>89.48</cc:L>
+                        <cc:a>-3.81</cc:a>
+                        <cc:b>-5.86</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A2" Id="A2">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>91.50</cc:L>
+                        <cc:a>-1.96</cc:a>
+                        <cc:b>-3.10</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="A1" Id="A1">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>25.97</cc:L>
+                        <cc:a>-0.84</cc:a>
+                        <cc:b>-1.61</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B25" Id="B25">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>53.33</cc:L>
+                        <cc:a>-65.46</cc:a>
+                        <cc:b>23.52</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B24" Id="B24">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>55.41</cc:L>
+                        <cc:a>-62.15</cc:a>
+                        <cc:b>23.54</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B23" Id="B23">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>56.84</cc:L>
+                        <cc:a>-59.04</cc:a>
+                        <cc:b>23.17</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B22" Id="B22">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>60.34</cc:L>
+                        <cc:a>-49.14</cc:a>
+                        <cc:b>22.85</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B21" Id="B21">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>64.27</cc:L>
+                        <cc:a>-41.87</cc:a>
+                        <cc:b>20.27</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B20" Id="B20">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>68.29</cc:L>
+                        <cc:a>-35.13</cc:a>
+                        <cc:b>17.78</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B19" Id="B19">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>72.01</cc:L>
+                        <cc:a>-28.14</cc:a>
+                        <cc:b>14.40</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B18" Id="B18">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>75.49</cc:L>
+                        <cc:a>-21.92</cc:a>
+                        <cc:b>10.73</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B17" Id="B17">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>80.07</cc:L>
+                        <cc:a>-16.18</cc:a>
+                        <cc:b>7.68</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B16" Id="B16">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>84.72</cc:L>
+                        <cc:a>-10.59</cc:a>
+                        <cc:b>5.50</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B15" Id="B15">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>89.58</cc:L>
+                        <cc:a>-5.30</cc:a>
+                        <cc:b>1.77</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B14" Id="B14">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>91.46</cc:L>
+                        <cc:a>-2.98</cc:a>
+                        <cc:b>0.31</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B13" Id="B13">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>48.41</cc:L>
+                        <cc:a>72.28</cc:a>
+                        <cc:b>-4.01</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B12" Id="B12">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>49.98</cc:L>
+                        <cc:a>69.23</cc:a>
+                        <cc:b>-3.94</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B11" Id="B11">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>51.65</cc:L>
+                        <cc:a>65.74</cc:a>
+                        <cc:b>-4.24</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B10" Id="B10">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>55.64</cc:L>
+                        <cc:a>58.72</cc:a>
+                        <cc:b>-4.50</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B9" Id="B9">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>59.96</cc:L>
+                        <cc:a>50.45</cc:a>
+                        <cc:b>-5.30</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B8" Id="B8">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>64.52</cc:L>
+                        <cc:a>42.61</cc:a>
+                        <cc:b>-5.79</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B7" Id="B7">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>69.40</cc:L>
+                        <cc:a>34.21</cc:a>
+                        <cc:b>-5.33</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B6" Id="B6">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>74.06</cc:L>
+                        <cc:a>27.03</cc:a>
+                        <cc:b>-4.56</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B5" Id="B5">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>79.17</cc:L>
+                        <cc:a>19.42</cc:a>
+                        <cc:b>-3.98</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B4" Id="B4">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>84.05</cc:L>
+                        <cc:a>12.52</cc:a>
+                        <cc:b>-3.28</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B3" Id="B3">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>88.67</cc:L>
+                        <cc:a>5.99</cc:a>
+                        <cc:b>-2.18</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B2" Id="B2">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>91.30</cc:L>
+                        <cc:a>2.66</cc:a>
+                        <cc:b>-1.62</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="B1" Id="B1">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>93.34</cc:L>
+                        <cc:a>-0.27</cc:a>
+                        <cc:b>-0.72</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C25" Id="C25">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>27.86</cc:L>
+                        <cc:a>17.80</cc:a>
+                        <cc:b>-44.95</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C24" Id="C24">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>29.97</cc:L>
+                        <cc:a>17.50</cc:a>
+                        <cc:b>-43.59</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C23" Id="C23">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>32.08</cc:L>
+                        <cc:a>17.26</cc:a>
+                        <cc:b>-41.43</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C22" Id="C22">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>36.39</cc:L>
+                        <cc:a>17.33</cc:a>
+                        <cc:b>-38.47</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C21" Id="C21">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>41.66</cc:L>
+                        <cc:a>14.84</cc:a>
+                        <cc:b>-34.74</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C20" Id="C20">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>47.60</cc:L>
+                        <cc:a>13.87</cc:a>
+                        <cc:b>-31.18</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C19" Id="C19">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>54.35</cc:L>
+                        <cc:a>11.13</cc:a>
+                        <cc:b>-27.19</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C18" Id="C18">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>61.22</cc:L>
+                        <cc:a>9.06</cc:a>
+                        <cc:b>-23.08</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C17" Id="C17">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>68.69</cc:L>
+                        <cc:a>6.87</cc:a>
+                        <cc:b>-17.61</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C16" Id="C16">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>76.57</cc:L>
+                        <cc:a>4.35</cc:a>
+                        <cc:b>-12.88</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C15" Id="C15">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>84.99</cc:L>
+                        <cc:a>2.33</cc:a>
+                        <cc:b>-6.76</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C14" Id="C14">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>89.60</cc:L>
+                        <cc:a>0.82</cc:a>
+                        <cc:b>-4.10</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C13" Id="C13">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>88.19</cc:L>
+                        <cc:a>-6.21</cc:a>
+                        <cc:b>88.91</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C12" Id="C12">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>88.25</cc:L>
+                        <cc:a>-6.13</cc:a>
+                        <cc:b>86.26</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C11" Id="C11">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>88.36</cc:L>
+                        <cc:a>-6.02</cc:a>
+                        <cc:b>81.52</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C10" Id="C10">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>88.78</cc:L>
+                        <cc:a>-6.13</cc:a>
+                        <cc:b>73.70</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C9" Id="C9">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>89.51</cc:L>
+                        <cc:a>-6.75</cc:a>
+                        <cc:b>64.29</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C8" Id="C8">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>90.05</cc:L>
+                        <cc:a>-6.13</cc:a>
+                        <cc:b>54.06</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C7" Id="C7">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>90.62</cc:L>
+                        <cc:a>-5.47</cc:a>
+                        <cc:b>43.12</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C6" Id="C6">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>91.29</cc:L>
+                        <cc:a>-5.45</cc:a>
+                        <cc:b>35.35</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C5" Id="C5">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>91.57</cc:L>
+                        <cc:a>-3.69</cc:a>
+                        <cc:b>25.28</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C4" Id="C4">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>92.23</cc:L>
+                        <cc:a>-2.80</cc:a>
+                        <cc:b>16.10</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C3" Id="C3">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>92.95</cc:L>
+                        <cc:a>-1.56</cc:a>
+                        <cc:b>6.83</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C2" Id="C2">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>93.23</cc:L>
+                        <cc:a>-1.04</cc:a>
+                        <cc:b>2.91</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="C1" Id="C1">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>9.27</cc:L>
+                        <cc:a>-0.19</cc:a>
+                        <cc:b>2.15</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D25" Id="D25">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>18.77</cc:L>
+                        <cc:a>-0.42</cc:a>
+                        <cc:b>-1.28</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D24" Id="D24">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>20.37</cc:L>
+                        <cc:a>-0.40</cc:a>
+                        <cc:b>-1.38</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D23" Id="D23">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>23.44</cc:L>
+                        <cc:a>-0.65</cc:a>
+                        <cc:b>-1.59</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D22" Id="D22">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>27.90</cc:L>
+                        <cc:a>-1.03</cc:a>
+                        <cc:b>-2.01</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D21" Id="D21">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>31.67</cc:L>
+                        <cc:a>-0.90</cc:a>
+                        <cc:b>-2.30</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D20" Id="D20">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>36.40</cc:L>
+                        <cc:a>-1.25</cc:a>
+                        <cc:b>-2.31</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D19" Id="D19">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>40.53</cc:L>
+                        <cc:a>-0.65</cc:a>
+                        <cc:b>-2.54</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D18" Id="D18">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>44.34</cc:L>
+                        <cc:a>-0.84</cc:a>
+                        <cc:b>-2.49</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D17" Id="D17">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>48.11</cc:L>
+                        <cc:a>-0.39</cc:a>
+                        <cc:b>-2.78</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D16" Id="D16">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>52.05</cc:L>
+                        <cc:a>-0.69</cc:a>
+                        <cc:b>-3.17</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D15" Id="D15">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>55.94</cc:L>
+                        <cc:a>-0.76</cc:a>
+                        <cc:b>-3.33</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D14" Id="D14">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>59.63</cc:L>
+                        <cc:a>-0.96</cc:a>
+                        <cc:b>-3.48</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D13" Id="D13">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>62.84</cc:L>
+                        <cc:a>-0.56</cc:a>
+                        <cc:b>-3.25</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D12" Id="D12">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>66.59</cc:L>
+                        <cc:a>-0.65</cc:a>
+                        <cc:b>-3.07</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D11" Id="D11">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>70.25</cc:L>
+                        <cc:a>-0.89</cc:a>
+                        <cc:b>-2.97</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D10" Id="D10">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>73.78</cc:L>
+                        <cc:a>-0.72</cc:a>
+                        <cc:b>-2.88</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D9" Id="D9">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>77.26</cc:L>
+                        <cc:a>-0.79</cc:a>
+                        <cc:b>-2.54</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D8" Id="D8">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>80.07</cc:L>
+                        <cc:a>-0.89</cc:a>
+                        <cc:b>-2.38</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D7" Id="D7">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>83.40</cc:L>
+                        <cc:a>-0.61</cc:a>
+                        <cc:b>-2.31</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D6" Id="D6">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>86.91</cc:L>
+                        <cc:a>-0.36</cc:a>
+                        <cc:b>-2.28</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D5" Id="D5">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>87.88</cc:L>
+                        <cc:a>-0.28</cc:a>
+                        <cc:b>-1.98</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D4" Id="D4">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>89.04</cc:L>
+                        <cc:a>-0.23</cc:a>
+                        <cc:b>-1.98</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D3" Id="D3">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>90.36</cc:L>
+                        <cc:a>-0.23</cc:a>
+                        <cc:b>-1.54</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D2" Id="D2">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>92.07</cc:L>
+                        <cc:a>-0.31</cc:a>
+                        <cc:b>-1.04</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="D1" Id="D1">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>93.51</cc:L>
+                        <cc:a>-0.27</cc:a>
+                        <cc:b>-0.76</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E25" Id="E25">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>25.99</cc:L>
+                        <cc:a>-0.70</cc:a>
+                        <cc:b>-1.41</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E24" Id="E24">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>27.30</cc:L>
+                        <cc:a>-0.82</cc:a>
+                        <cc:b>-1.66</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E23" Id="E23">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>28.57</cc:L>
+                        <cc:a>-1.01</cc:a>
+                        <cc:b>-1.63</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E22" Id="E22">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>31.23</cc:L>
+                        <cc:a>-1.00</cc:a>
+                        <cc:b>-1.04</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E21" Id="E21">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>34.21</cc:L>
+                        <cc:a>-0.61</cc:a>
+                        <cc:b>-0.80</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E20" Id="E20">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>37.86</cc:L>
+                        <cc:a>-1.12</cc:a>
+                        <cc:b>-0.51</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E19" Id="E19">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>40.82</cc:L>
+                        <cc:a>-0.37</cc:a>
+                        <cc:b>-0.67</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E18" Id="E18">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>44.22</cc:L>
+                        <cc:a>-0.78</cc:a>
+                        <cc:b>-0.59</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E17" Id="E17">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>47.36</cc:L>
+                        <cc:a>-1.02</cc:a>
+                        <cc:b>-0.28</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E16" Id="E16">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>50.78</cc:L>
+                        <cc:a>-1.11</cc:a>
+                        <cc:b>-1.32</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E15" Id="E15">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>54.05</cc:L>
+                        <cc:a>-0.91</cc:a>
+                        <cc:b>-1.49</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E14" Id="E14">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>57.54</cc:L>
+                        <cc:a>-0.65</cc:a>
+                        <cc:b>-0.99</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E13" Id="E13">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>60.99</cc:L>
+                        <cc:a>-1.10</cc:a>
+                        <cc:b>-0.96</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E12" Id="E12">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>64.42</cc:L>
+                        <cc:a>-1.48</cc:a>
+                        <cc:b>-1.32</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E11" Id="E11">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>67.93</cc:L>
+                        <cc:a>-0.89</cc:a>
+                        <cc:b>-0.93</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E10" Id="E10">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>71.54</cc:L>
+                        <cc:a>-0.86</cc:a>
+                        <cc:b>-0.68</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E9" Id="E9">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>74.81</cc:L>
+                        <cc:a>-0.50</cc:a>
+                        <cc:b>-1.20</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E8" Id="E8">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>78.65</cc:L>
+                        <cc:a>-0.55</cc:a>
+                        <cc:b>-1.36</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E7" Id="E7">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>82.41</cc:L>
+                        <cc:a>-0.55</cc:a>
+                        <cc:b>-1.85</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E6" Id="E6">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>86.12</cc:L>
+                        <cc:a>-0.31</cc:a>
+                        <cc:b>-0.83</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E5" Id="E5">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>87.90</cc:L>
+                        <cc:a>-0.54</cc:a>
+                        <cc:b>-1.14</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E4" Id="E4">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>89.13</cc:L>
+                        <cc:a>-0.44</cc:a>
+                        <cc:b>-1.22</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E3" Id="E3">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>90.76</cc:L>
+                        <cc:a>-0.30</cc:a>
+                        <cc:b>-0.22</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E2" Id="E2">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>92.06</cc:L>
+                        <cc:a>-0.53</cc:a>
+                        <cc:b>-0.33</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="E1" Id="E1">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>93.46</cc:L>
+                        <cc:a>-0.25</cc:a>
+                        <cc:b>-0.68</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F25" Id="F25">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>50.08</cc:L>
+                        <cc:a>10.19</cc:a>
+                        <cc:b>6.92</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F24" Id="F24">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>53.30</cc:L>
+                        <cc:a>3.97</cc:a>
+                        <cc:b>9.30</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F23" Id="F23">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>56.48</cc:L>
+                        <cc:a>-3.12</cc:a>
+                        <cc:b>12.28</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F22" Id="F22">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>59.96</cc:L>
+                        <cc:a>-9.27</cc:a>
+                        <cc:b>13.47</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F21" Id="F21">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>63.86</cc:L>
+                        <cc:a>-15.62</cc:a>
+                        <cc:b>16.18</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F20" Id="F20">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>50.36</cc:L>
+                        <cc:a>11.20</cc:a>
+                        <cc:b>1.97</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F19" Id="F19">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>54.01</cc:L>
+                        <cc:a>4.22</cc:a>
+                        <cc:b>3.85</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F18" Id="F18">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>56.94</cc:L>
+                        <cc:a>-1.20</cc:a>
+                        <cc:b>5.67</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F17" Id="F17">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>60.38</cc:L>
+                        <cc:a>-8.06</cc:a>
+                        <cc:b>7.31</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F16" Id="F16">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>63.89</cc:L>
+                        <cc:a>-14.79</cc:a>
+                        <cc:b>9.02</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F15" Id="F15">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>50.61</cc:L>
+                        <cc:a>12.25</cc:a>
+                        <cc:b>-3.85</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F14" Id="F14">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>54.28</cc:L>
+                        <cc:a>4.84</cc:a>
+                        <cc:b>-2.45</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F13" Id="F13">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>57.46</cc:L>
+                        <cc:a>-0.77</cc:a>
+                        <cc:b>-1.03</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F12" Id="F12">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>60.64</cc:L>
+                        <cc:a>-6.88</cc:a>
+                        <cc:b>0.54</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F11" Id="F11">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>64.30</cc:L>
+                        <cc:a>-13.53</cc:a>
+                        <cc:b>1.61</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F10" Id="F10">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>50.60</cc:L>
+                        <cc:a>13.20</cc:a>
+                        <cc:b>-9.44</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F9" Id="F9">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>54.37</cc:L>
+                        <cc:a>6.31</cc:a>
+                        <cc:b>-8.55</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F8" Id="F8">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>57.73</cc:L>
+                        <cc:a>0.32</cc:a>
+                        <cc:b>-7.72</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F7" Id="F7">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>61.34</cc:L>
+                        <cc:a>-6.16</cc:a>
+                        <cc:b>-5.61</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F6" Id="F6">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>64.64</cc:L>
+                        <cc:a>-12.08</cc:a>
+                        <cc:b>-4.83</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F5" Id="F5">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>50.93</cc:L>
+                        <cc:a>14.03</cc:a>
+                        <cc:b>-14.64</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F4" Id="F4">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>54.60</cc:L>
+                        <cc:a>7.69</cc:a>
+                        <cc:b>-14.29</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F3" Id="F3">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>58.42</cc:L>
+                        <cc:a>1.46</cc:a>
+                        <cc:b>-13.04</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F2" Id="F2">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>61.68</cc:L>
+                        <cc:a>-4.42</cc:a>
+                        <cc:b>-12.34</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="F1" Id="F1">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>65.21</cc:L>
+                        <cc:a>-10.50</cc:a>
+                        <cc:b>-10.99</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G25" Id="G25">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>70.41</cc:L>
+                        <cc:a>4.83</cc:a>
+                        <cc:b>4.31</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G24" Id="G24">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>72.19</cc:L>
+                        <cc:a>1.65</cc:a>
+                        <cc:b>5.73</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G23" Id="G23">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>74.43</cc:L>
+                        <cc:a>-1.69</cc:a>
+                        <cc:b>7.09</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G22" Id="G22">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>76.57</cc:L>
+                        <cc:a>-4.55</cc:a>
+                        <cc:b>7.63</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G21" Id="G21">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>78.76</cc:L>
+                        <cc:a>-8.25</cc:a>
+                        <cc:b>8.75</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G20" Id="G20">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>70.28</cc:L>
+                        <cc:a>5.79</cc:a>
+                        <cc:b>0.99</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G19" Id="G19">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>72.74</cc:L>
+                        <cc:a>1.95</cc:a>
+                        <cc:b>2.08</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G18" Id="G18">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>74.41</cc:L>
+                        <cc:a>-1.61</cc:a>
+                        <cc:b>2.69</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G17" Id="G17">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>77.01</cc:L>
+                        <cc:a>-4.33</cc:a>
+                        <cc:b>3.71</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G16" Id="G16">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>79.03</cc:L>
+                        <cc:a>-7.90</cc:a>
+                        <cc:b>4.02</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G15" Id="G15">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>70.52</cc:L>
+                        <cc:a>5.69</cc:a>
+                        <cc:b>-2.38</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G14" Id="G14">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>72.65</cc:L>
+                        <cc:a>2.84</cc:a>
+                        <cc:b>-1.39</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G13" Id="G13">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>74.91</cc:L>
+                        <cc:a>-0.69</cc:a>
+                        <cc:b>-1.22</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G12" Id="G12">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>77.11</cc:L>
+                        <cc:a>-3.81</cc:a>
+                        <cc:b>0.07</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G11" Id="G11">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>79.53</cc:L>
+                        <cc:a>-7.44</cc:a>
+                        <cc:b>0.12</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G10" Id="G10">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>70.42</cc:L>
+                        <cc:a>6.59</cc:a>
+                        <cc:b>-6.20</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G9" Id="G9">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>72.51</cc:L>
+                        <cc:a>3.78</cc:a>
+                        <cc:b>-6.06</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G8" Id="G8">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>74.99</cc:L>
+                        <cc:a>-0.20</cc:a>
+                        <cc:b>-5.33</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G7" Id="G7">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>77.00</cc:L>
+                        <cc:a>-3.37</cc:a>
+                        <cc:b>-4.85</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G6" Id="G6">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>79.28</cc:L>
+                        <cc:a>-6.29</cc:a>
+                        <cc:b>-4.29</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G5" Id="G5">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>70.82</cc:L>
+                        <cc:a>7.11</cc:a>
+                        <cc:b>-9.89</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G4" Id="G4">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>72.84</cc:L>
+                        <cc:a>4.09</cc:a>
+                        <cc:b>-9.40</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G3" Id="G3">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>74.83</cc:L>
+                        <cc:a>0.31</cc:a>
+                        <cc:b>-9.32</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G2" Id="G2">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>77.51</cc:L>
+                        <cc:a>-2.95</cc:a>
+                        <cc:b>-8.31</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="G1" Id="G1">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>79.83</cc:L>
+                        <cc:a>-6.33</cc:a>
+                        <cc:b>-8.06</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H25" Id="H25">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>42.22</cc:L>
+                        <cc:a>9.62</cc:a>
+                        <cc:b>5.94</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H24" Id="H24">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>45.55</cc:L>
+                        <cc:a>3.20</cc:a>
+                        <cc:b>8.34</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H23" Id="H23">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>48.33</cc:L>
+                        <cc:a>-2.90</cc:a>
+                        <cc:b>10.91</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H22" Id="H22">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>51.71</cc:L>
+                        <cc:a>-9.80</cc:a>
+                        <cc:b>12.63</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H21" Id="H21">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>55.18</cc:L>
+                        <cc:a>-15.77</cc:a>
+                        <cc:b>15.29</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H20" Id="H20">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>42.63</cc:L>
+                        <cc:a>10.46</cc:a>
+                        <cc:b>1.38</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H19" Id="H19">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>45.65</cc:L>
+                        <cc:a>4.63</cc:a>
+                        <cc:b>3.73</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H18" Id="H18">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>48.76</cc:L>
+                        <cc:a>-1.41</cc:a>
+                        <cc:b>5.08</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H17" Id="H17">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>52.15</cc:L>
+                        <cc:a>-8.71</cc:a>
+                        <cc:b>7.56</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H16" Id="H16">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>55.37</cc:L>
+                        <cc:a>-14.94</cc:a>
+                        <cc:b>9.01</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H15" Id="H15">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>42.78</cc:L>
+                        <cc:a>10.91</cc:a>
+                        <cc:b>-4.25</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H14" Id="H14">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>45.79</cc:L>
+                        <cc:a>5.58</cc:a>
+                        <cc:b>-2.36</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H13" Id="H13">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>49.16</cc:L>
+                        <cc:a>-1.17</cc:a>
+                        <cc:b>-1.14</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H12" Id="H12">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>52.38</cc:L>
+                        <cc:a>-7.15</cc:a>
+                        <cc:b>1.13</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H11" Id="H11">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>55.43</cc:L>
+                        <cc:a>-14.17</cc:a>
+                        <cc:b>2.72</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H10" Id="H10">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>43.25</cc:L>
+                        <cc:a>12.43</cc:a>
+                        <cc:b>-9.00</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H9" Id="H9">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>46.14</cc:L>
+                        <cc:a>6.85</cc:a>
+                        <cc:b>-8.68</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H8" Id="H8">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>49.45</cc:L>
+                        <cc:a>0.27</cc:a>
+                        <cc:b>-6.33</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H7" Id="H7">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>52.45</cc:L>
+                        <cc:a>-5.70</cc:a>
+                        <cc:b>-5.07</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H6" Id="H6">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>55.71</cc:L>
+                        <cc:a>-12.05</cc:a>
+                        <cc:b>-3.86</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H5" Id="H5">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>43.52</cc:L>
+                        <cc:a>14.22</cc:a>
+                        <cc:b>-14.29</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H4" Id="H4">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>46.51</cc:L>
+                        <cc:a>7.91</cc:a>
+                        <cc:b>-13.59</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H3" Id="H3">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>49.94</cc:L>
+                        <cc:a>1.60</cc:a>
+                        <cc:b>-12.19</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H2" Id="H2">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>52.97</cc:L>
+                        <cc:a>-4.15</cc:a>
+                        <cc:b>-11.00</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="H1" Id="H1">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>56.36</cc:L>
+                        <cc:a>-10.92</cc:a>
+                        <cc:b>-9.67</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I25" Id="I25">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>60.35</cc:L>
+                        <cc:a>7.03</cc:a>
+                        <cc:b>6.71</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I24" Id="I24">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>62.90</cc:L>
+                        <cc:a>2.61</cc:a>
+                        <cc:b>8.03</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I23" Id="I23">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>65.96</cc:L>
+                        <cc:a>-2.65</cc:a>
+                        <cc:b>9.83</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I22" Id="I22">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>68.33</cc:L>
+                        <cc:a>-7.00</cc:a>
+                        <cc:b>10.49</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I21" Id="I21">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>70.79</cc:L>
+                        <cc:a>-11.65</cc:a>
+                        <cc:b>11.99</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I20" Id="I20">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>60.49</cc:L>
+                        <cc:a>7.74</cc:a>
+                        <cc:b>1.96</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I19" Id="I19">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>63.12</cc:L>
+                        <cc:a>3.09</cc:a>
+                        <cc:b>2.45</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I18" Id="I18">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>65.94</cc:L>
+                        <cc:a>-1.38</cc:a>
+                        <cc:b>4.06</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I17" Id="I17">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>68.29</cc:L>
+                        <cc:a>-6.15</cc:a>
+                        <cc:b>5.01</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I16" Id="I16">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>71.17</cc:L>
+                        <cc:a>-10.71</cc:a>
+                        <cc:b>6.27</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I15" Id="I15">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>60.57</cc:L>
+                        <cc:a>8.85</cc:a>
+                        <cc:b>-2.96</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I14" Id="I14">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>63.26</cc:L>
+                        <cc:a>3.65</cc:a>
+                        <cc:b>-1.72</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I13" Id="I13">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>66.31</cc:L>
+                        <cc:a>-0.84</cc:a>
+                        <cc:b>-1.13</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I12" Id="I12">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>68.90</cc:L>
+                        <cc:a>-5.45</cc:a>
+                        <cc:b>0.10</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I11" Id="I11">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>71.45</cc:L>
+                        <cc:a>-9.69</cc:a>
+                        <cc:b>0.81</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I10" Id="I10">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>60.62</cc:L>
+                        <cc:a>9.45</cc:a>
+                        <cc:b>-7.35</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I9" Id="I9">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>63.50</cc:L>
+                        <cc:a>4.14</cc:a>
+                        <cc:b>-6.60</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I8" Id="I8">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>66.11</cc:L>
+                        <cc:a>0.10</cc:a>
+                        <cc:b>-6.13</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I7" Id="I7">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>68.87</cc:L>
+                        <cc:a>-4.10</cc:a>
+                        <cc:b>-5.65</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I6" Id="I6">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>71.63</cc:L>
+                        <cc:a>-8.99</cc:a>
+                        <cc:b>-4.89</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I5" Id="I5">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>60.35</cc:L>
+                        <cc:a>9.99</cc:a>
+                        <cc:b>-12.06</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I4" Id="I4">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>63.83</cc:L>
+                        <cc:a>5.38</cc:a>
+                        <cc:b>-11.28</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I3" Id="I3">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>66.44</cc:L>
+                        <cc:a>1.23</cc:a>
+                        <cc:b>-11.20</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I2" Id="I2">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>69.18</cc:L>
+                        <cc:a>-3.53</cc:a>
+                        <cc:b>-10.77</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="I1" Id="I1">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>72.16</cc:L>
+                        <cc:a>-7.82</cc:a>
+                        <cc:b>-10.37</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J25" Id="J25">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>81.30</cc:L>
+                        <cc:a>3.01</cc:a>
+                        <cc:b>3.19</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J24" Id="J24">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>82.84</cc:L>
+                        <cc:a>0.66</cc:a>
+                        <cc:b>3.35</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J23" Id="J23">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>83.83</cc:L>
+                        <cc:a>-0.97</cc:a>
+                        <cc:b>4.09</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J22" Id="J22">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>85.40</cc:L>
+                        <cc:a>-2.69</cc:a>
+                        <cc:b>4.79</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J21" Id="J21">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>86.81</cc:L>
+                        <cc:a>-5.12</cc:a>
+                        <cc:b>5.38</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J20" Id="J20">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>81.42</cc:L>
+                        <cc:a>2.87</cc:a>
+                        <cc:b>0.23</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J19" Id="J19">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>83.13</cc:L>
+                        <cc:a>1.16</cc:a>
+                        <cc:b>1.10</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J18" Id="J18">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>84.10</cc:L>
+                        <cc:a>-0.64</cc:a>
+                        <cc:b>1.63</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J17" Id="J17">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>85.52</cc:L>
+                        <cc:a>-2.74</cc:a>
+                        <cc:b>1.99</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J16" Id="J16">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>86.86</cc:L>
+                        <cc:a>-4.56</cc:a>
+                        <cc:b>1.96</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J15" Id="J15">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>81.85</cc:L>
+                        <cc:a>2.97</cc:a>
+                        <cc:b>-1.92</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J14" Id="J14">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>83.01</cc:L>
+                        <cc:a>1.73</cc:a>
+                        <cc:b>-1.41</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J13" Id="J13">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>84.00</cc:L>
+                        <cc:a>-0.18</cc:a>
+                        <cc:b>-1.59</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J12" Id="J12">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>85.67</cc:L>
+                        <cc:a>-2.03</cc:a>
+                        <cc:b>-0.71</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J11" Id="J11">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>87.06</cc:L>
+                        <cc:a>-4.01</cc:a>
+                        <cc:b>0.13</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J10" Id="J10">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>81.74</cc:L>
+                        <cc:a>3.88</cc:a>
+                        <cc:b>-4.18</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J9" Id="J9">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>83.42</cc:L>
+                        <cc:a>1.99</cc:a>
+                        <cc:b>-3.94</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J8" Id="J8">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>84.30</cc:L>
+                        <cc:a>-0.45</cc:a>
+                        <cc:b>-3.35</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J7" Id="J7">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>85.69</cc:L>
+                        <cc:a>-2.26</cc:a>
+                        <cc:b>-3.10</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J6" Id="J6">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>87.29</cc:L>
+                        <cc:a>-3.86</cc:a>
+                        <cc:b>-2.62</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J5" Id="J5">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>81.43</cc:L>
+                        <cc:a>4.22</cc:a>
+                        <cc:b>-7.01</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J4" Id="J4">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>83.14</cc:L>
+                        <cc:a>2.24</cc:a>
+                        <cc:b>-6.62</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J3" Id="J3">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>84.40</cc:L>
+                        <cc:a>0.23</cc:a>
+                        <cc:b>-5.49</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J2" Id="J2">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>85.57</cc:L>
+                        <cc:a>-2.04</cc:a>
+                        <cc:b>-5.76</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="J1" Id="J1">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>87.29</cc:L>
+                        <cc:a>-4.11</cc:a>
+                        <cc:b>-5.23</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K25" Id="K25">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>35.25</cc:L>
+                        <cc:a>9.82</cc:a>
+                        <cc:b>4.98</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K24" Id="K24">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>37.63</cc:L>
+                        <cc:a>3.08</cc:a>
+                        <cc:b>7.31</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K23" Id="K23">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>40.44</cc:L>
+                        <cc:a>-2.77</cc:a>
+                        <cc:b>9.47</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K22" Id="K22">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>43.25</cc:L>
+                        <cc:a>-9.25</cc:a>
+                        <cc:b>11.40</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K21" Id="K21">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>46.10</cc:L>
+                        <cc:a>-15.14</cc:a>
+                        <cc:b>13.13</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K20" Id="K20">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>34.97</cc:L>
+                        <cc:a>10.06</cc:a>
+                        <cc:b>0.39</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K19" Id="K19">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>37.86</cc:L>
+                        <cc:a>4.13</cc:a>
+                        <cc:b>2.29</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K18" Id="K18">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>40.40</cc:L>
+                        <cc:a>-1.59</cc:a>
+                        <cc:b>4.08</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K17" Id="K17">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>43.58</cc:L>
+                        <cc:a>-8.44</cc:a>
+                        <cc:b>6.63</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K16" Id="K16">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>46.75</cc:L>
+                        <cc:a>-14.72</cc:a>
+                        <cc:b>8.59</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K15" Id="K15">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>35.62</cc:L>
+                        <cc:a>10.56</cc:a>
+                        <cc:b>-4.69</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K14" Id="K14">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>38.16</cc:L>
+                        <cc:a>4.83</cc:a>
+                        <cc:b>-3.15</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K13" Id="K13">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>41.04</cc:L>
+                        <cc:a>-0.75</cc:a>
+                        <cc:b>-0.73</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K12" Id="K12">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>44.16</cc:L>
+                        <cc:a>-7.39</cc:a>
+                        <cc:b>1.57</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K11" Id="K11">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>47.02</cc:L>
+                        <cc:a>-14.01</cc:a>
+                        <cc:b>3.13</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K10" Id="K10">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>35.84</cc:L>
+                        <cc:a>12.24</cc:a>
+                        <cc:b>-9.36</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K9" Id="K9">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>38.41</cc:L>
+                        <cc:a>5.97</cc:a>
+                        <cc:b>-8.04</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K8" Id="K8">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>41.42</cc:L>
+                        <cc:a>0.04</cc:a>
+                        <cc:b>-5.77</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K7" Id="K7">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>43.82</cc:L>
+                        <cc:a>-6.08</cc:a>
+                        <cc:b>-4.19</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K6" Id="K6">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>47.19</cc:L>
+                        <cc:a>-12.77</cc:a>
+                        <cc:b>-2.65</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K5" Id="K5">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>35.82</cc:L>
+                        <cc:a>13.13</cc:a>
+                        <cc:b>-13.37</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K4" Id="K4">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>38.90</cc:L>
+                        <cc:a>7.72</cc:a>
+                        <cc:b>-12.67</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K3" Id="K3">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>41.46</cc:L>
+                        <cc:a>1.45</cc:a>
+                        <cc:b>-11.23</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K2" Id="K2">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>44.11</cc:L>
+                        <cc:a>-4.44</cc:a>
+                        <cc:b>-9.69</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="K1" Id="K1">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>47.18</cc:L>
+                        <cc:a>-10.83</cc:a>
+                        <cc:b>-8.59</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L25" Id="L25">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>27.98</cc:L>
+                        <cc:a>8.38</cc:a>
+                        <cc:b>2.70</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L24" Id="L24">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>29.95</cc:L>
+                        <cc:a>2.60</cc:a>
+                        <cc:b>4.26</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L23" Id="L23">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>32.66</cc:L>
+                        <cc:a>-2.47</cc:a>
+                        <cc:b>6.88</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L22" Id="L22">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>35.00</cc:L>
+                        <cc:a>-8.34</cc:a>
+                        <cc:b>9.26</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L21" Id="L21">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>37.66</cc:L>
+                        <cc:a>-13.99</cc:a>
+                        <cc:b>11.54</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L20" Id="L20">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>28.24</cc:L>
+                        <cc:a>8.88</cc:a>
+                        <cc:b>-0.71</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L19" Id="L19">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>30.42</cc:L>
+                        <cc:a>4.17</cc:a>
+                        <cc:b>1.26</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L18" Id="L18">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>32.30</cc:L>
+                        <cc:a>-1.37</cc:a>
+                        <cc:b>3.19</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L17" Id="L17">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>35.44</cc:L>
+                        <cc:a>-8.25</cc:a>
+                        <cc:b>5.49</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L16" Id="L16">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>38.08</cc:L>
+                        <cc:a>-13.58</cc:a>
+                        <cc:b>7.41</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L15" Id="L15">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>28.61</cc:L>
+                        <cc:a>9.67</cc:a>
+                        <cc:b>-4.53</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L14" Id="L14">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>30.52</cc:L>
+                        <cc:a>4.70</cc:a>
+                        <cc:b>-2.40</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L13" Id="L13">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>32.48</cc:L>
+                        <cc:a>-0.72</cc:a>
+                        <cc:b>-0.95</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L12" Id="L12">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>35.86</cc:L>
+                        <cc:a>-7.53</cc:a>
+                        <cc:b>1.09</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L11" Id="L11">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>38.35</cc:L>
+                        <cc:a>-13.59</cc:a>
+                        <cc:b>3.02</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L10" Id="L10">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>28.74</cc:L>
+                        <cc:a>10.70</cc:a>
+                        <cc:b>-7.97</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L9" Id="L9">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>30.90</cc:L>
+                        <cc:a>5.45</cc:a>
+                        <cc:b>-7.03</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L8" Id="L8">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>33.53</cc:L>
+                        <cc:a>-0.39</cc:a>
+                        <cc:b>-5.49</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L7" Id="L7">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>36.21</cc:L>
+                        <cc:a>-6.86</cc:a>
+                        <cc:b>-3.45</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L6" Id="L6">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>38.48</cc:L>
+                        <cc:a>-11.67</cc:a>
+                        <cc:b>-1.81</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L5" Id="L5">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>29.26</cc:L>
+                        <cc:a>12.14</cc:a>
+                        <cc:b>-12.19</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L4" Id="L4">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>31.59</cc:L>
+                        <cc:a>6.75</cc:a>
+                        <cc:b>-10.90</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L3" Id="L3">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>33.89</cc:L>
+                        <cc:a>1.33</cc:a>
+                        <cc:b>-10.04</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L2" Id="L2">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>36.48</cc:L>
+                        <cc:a>-5.04</cc:a>
+                        <cc:b>-8.35</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+            <cc:Object ObjectType="Standard" Name="L1" Id="L1">
+                <cc:CreationDate>2018-01-02T23:00:01</cc:CreationDate>
+                <cc:ColorValues>
+                    <cc:ColorCIELab ColorSpecification="M0">
+                        <cc:L>39.02</cc:L>
+                        <cc:a>-10.42</cc:a>
+                        <cc:b>-6.56</cc:b>
+                    </cc:ColorCIELab>
+                </cc:ColorValues>
+            </cc:Object>
+        </cc:ObjectCollection>
+        <cc:ColorSpecificationCollection>
+            <cc:ColorSpecification Id="M0">
+                <cc:MeasurementSpec>
+                    <cc:MeasurementType>Colorimetric Reflectance</cc:MeasurementType>
+                    <cc:GeometryChoice>
+                        <cc:SingleAngle>
+                            <cc:SingleAngleConfiguration>Uniplanar</cc:SingleAngleConfiguration>
+                            <cc:IlluminationAngle>45</cc:IlluminationAngle>
+                            <cc:MeasurementAngle>0</cc:MeasurementAngle>
+                        </cc:SingleAngle>
+                    </cc:GeometryChoice>
+                    <cc:Device>
+                        <cc:DeviceIllumination>M0 Incandescent</cc:DeviceIllumination>
+                    </cc:Device>
+                </cc:MeasurementSpec>
+            </cc:ColorSpecification>
+        </cc:ColorSpecificationCollection>
+    </cc:Resources>
+</cc:CxF>
