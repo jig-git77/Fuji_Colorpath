@@ -7,6 +7,9 @@ var jsonDeltaPaperLAB_1 = [];
 var jsonDensityList = [];
 
 //G7 result array
+var jsonAnalyzeList = [];
+
+//G7 result array
 var jsonGrayFChartList = [];
 var jsonBlackLChartList = [];
 var jsonGrayLChartList = [];
@@ -33,6 +36,8 @@ var $btnGeneratePDF;
 var $imgEyeABCompLarge;
 var $chartLoader;
 var $hdMeasurement;
+var $hdnProjectID;
+var $hdnOptimizationRunID;
 var $chart_TargetVersusActualAB;
 var $chart_Gamut_ABComparison;
 var $chart_L_Comaparision;
@@ -65,7 +70,7 @@ var $divChartTVISpread;
 var $divTVI_G7;
 var $divTVI_ISO;
 var $divMeasurementPatchDetails;
-
+var $divAnalyzeChart;
 var $divChartTVIISO_CYAN;
 var $divChartTVIISO_Magenta;
 var $divChartTVIISO_Yellow;
@@ -184,6 +189,8 @@ $(document).ready(function () {
     $hdnReportDLPName = $('#hdnReportDLPName').val();
     $isAverageOfMeasurements = $('#ContentPlaceHolder1_ucAnalyze_chkAnalyzeAverageOfMeasurements').is(':checked');
     $hdMeasurement = $('#ContentPlaceHolder1_ucAnalyze_hdMeasurement').val();
+    $hdnProjectID = $('#hdnProjectID').val();
+    $hdnOptimizationRunID = $('#hdnOptimizationRunID').val();
     $chartLoader = $(".chart-loading");
     $imgEyeABCompLarge = $('#imgEyeABCompLarge');
     $btnGeneratePDF = $('#btnGeneratePDF');
@@ -217,7 +224,7 @@ $(document).ready(function () {
     $divChartTVIISO_Black = $("#divChartTVIISO_Black");
     $divChartTVIISO_CMYK = $("#divChartTVIISO_CMYK");
     $divChartSummaryDeltaChart = $("#divChartSummaryDeltaChart");
-
+    $divAnalyzeChart = $("#divAnalyzeChart");
     $tblDensityChart = $("#tblDensityChart");
     $selectedDeltaE = $rbtnListDeltaE.find('input:checked').val();
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
@@ -228,6 +235,8 @@ $(document).ready(function () {
     if (!$selectedDeltaE) {//set default value for sync1D projects
         $selectedDeltaE = 'E2000';
     }
+
+    BindAnalyzeChart(); //Bind analyze chart
 
     var apiParameters = {
         MeasurementId: measurementID,
@@ -250,7 +259,7 @@ $(document).ready(function () {
             'Accept-Language': $CurrentCulture
         },
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             jsonTarget = response.data.GamutChartActual;
             jsonColors = response.data.GamutChart;
             jsonGray = response.data.LABChart;
@@ -369,7 +378,7 @@ $(document).ready(function () {
                 "content-type": "application/json",
             },
             success: function (response) {
-                console.log(response);
+                //console.log(response);
                 window.open(SERVICE_BASE_URL + response.data, "_blank");
             },
             error: function (xhr, errorType, exception) {
@@ -382,6 +391,36 @@ $(document).ready(function () {
 
 
 ////************************ CHART BINDINGS  ***********************////
+
+function BindAnalyzeChart() {
+   
+    var apiParameters = {
+        ProjectId: $hdnProjectID,
+        OptimizeRunId: $hdnOptimizationRunID,
+        IsSync1DTypeProject: $hdnSync1DType,
+        fromDeltaE: $selectedDeltaE,
+        ProjectType: $hdnCurrentDlpSubOperation
+    };
+
+    $.ajax({
+        url: SERVICE_BASE_URL + 'api/Chart/GenerateAnalyzeChart',
+        data: apiParameters,
+        type: 'GET',
+        dataType: 'json',
+        headers: {
+            'Accept-Language': $CurrentCulture
+        },
+        success: function (response) {
+            if (response.data != null) {
+                jsonAnalyzeList = response.data;
+                PopulateAnalyzeChart();
+            }
+        },
+        error: function (xhr, errorType, exception) {
+            kendo.ui.progress($chartLoader, false);
+        }
+    });
+}
 
 ////**************** START BIND THE AB COMPARISION CHART  ****************////
 function BindChartTargetVersusActualAB() {
@@ -1203,8 +1242,8 @@ function BindInkPaperChartABComparision() {
             'Accept-Language': $CurrentCulture
         },
         success: function (response) {
-            console.log('Ink paper chart');
-            console.log(response);
+            //console.log('Ink paper chart');
+            //console.log(response);
             if (response.data != null) {
                 jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
                 if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
@@ -1759,7 +1798,7 @@ function GenerateG7Charts() {
 }
 
 function BindMeasurementPatchDetails() {
-    
+
     var measurementID = parseInt($hdMeasurement);
     var apiParameters = {
         MeasurementId: measurementID,
@@ -1809,7 +1848,7 @@ function BindMeasurementPatchDetails() {
                                 $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
                                 $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
                             }
-                            
+
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             console.log(XMLHttpRequest.responseText);
@@ -1828,7 +1867,7 @@ function BindMeasurementPatchDetails() {
                             from: "SampleName"
                         },
                         CMYK_C: {
-                            from: "CMYK_C"                            
+                            from: "CMYK_C"
                         },
                         CMYK_M: {
                             from: "CMYK_M"
@@ -1941,7 +1980,7 @@ function BindMeasurementPatchDetails() {
                 title: "<b>Name</b>",
                 filterable: false,
                 width: "50px",
-               // locked: true,
+                // locked: true,
             },
             {
                 field: "CMYK_C",
@@ -2024,7 +2063,7 @@ function BindMeasurementPatchDetails() {
                 title: "<b>CIELAB_b</b>",
                 width: "80px",
                 format: "{0:n2}",
-            },            
+            },
             {
                 field: "Density_V",
                 title: "<b>Density_V</b>",
@@ -2048,7 +2087,7 @@ function BindMeasurementPatchDetails() {
                 title: "<b>Density_Y</b>",
                 width: '80px',
                 format: "{0:n2}",
-            },          
+            },
         ],
         //dataBound: function (e) {
         //    debugger;
@@ -2079,7 +2118,7 @@ function BindMeasurementPatchDetails() {
         //}
     });
 
-    
+
     if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
 
         var measurementID = parseInt($hdMeasurement);
@@ -2108,12 +2147,12 @@ function BindMeasurementPatchDetails() {
                 }
             }
         });
-        
+
     } else {
         $divMeasurementPatchDetails.find("#divMetricSum").css('display', 'none');
     }
 
-    
+
 
 
     //$divMeasurementPatchDetails.data('kendoGrid').refresh();
@@ -2125,7 +2164,7 @@ function BindMeasurementPatchDetails() {
         var selectedMatricSum = '';
         if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
             selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
-        }                
+        }
         var measurementID = parseInt($hdMeasurement);
         var apiReportParameters = {
             MeasurementId: measurementID,
@@ -2138,9 +2177,9 @@ function BindMeasurementPatchDetails() {
             type: "GET",
             url: SERVICE_BASE_URL + 'api/Chart/GetCGATSPatchReport',
             data: apiReportParameters,
-            dataType: "json",           
-            success: function (response) {                
-                if (response.data != null) {                      
+            dataType: "json",
+            success: function (response) {
+                if (response.data != null) {
                     var fileName = '~' + response.data;
                     window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
                 }
@@ -2158,7 +2197,7 @@ function BindMeasurementPatchDetails() {
         var selectedMatricSum = '';
         if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
             selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
-        }              
+        }
         var apiReportParameters = {
             MeasurementId: measurementID,
             IsVerificationProject: $hdnVerification,
@@ -2184,6 +2223,143 @@ function BindMeasurementPatchDetails() {
 }
 
 ////************************ CHART POPULATIONS  ***********************////
+
+////**************** POPULATE THE ANALYZE CHART  ****************////
+function PopulateAnalyzeChart() {
+    //console.log(jsonAnalyzeList);
+    var measurementNamesList = [];
+    var patchArray = [];
+    if (jsonAnalyzeList.Measurements.length > 0) {
+
+        //get the name of the measurement name list
+        measurementNamesList = $.map(jsonAnalyzeList.Measurements, function (e) {
+            return e.MeasurementName;
+        });
+
+        //get the available list of htmlcodes
+        var htmlPatchCodeList = $.map(jsonAnalyzeList.Measurements[0].MeasurementPatches, function (e) {
+            return e.HtmlColor;
+        });
+
+        //generate new array to display the patches
+        $.each(htmlPatchCodeList, function (index, htmlCode) {
+
+            //check one by one all html code
+            $.each(jsonAnalyzeList.Measurements, function (index, measureObj) {
+
+                //check the current patch in the main list
+                var arr1Obj1 = $.grep(measureObj.MeasurementPatches, function (e) {
+                    return e.HtmlColor == htmlCode;
+                });
+
+                //check the patch is already available in the resulted array
+                var availablePatch = $.grep(patchArray, function (e) {
+                    return e.color == htmlCode;
+                });
+                //if exists then
+                if (availablePatch.length > 0) {
+                    availablePatch[0].data.push(arr1Obj1[0].Δe2000); //add into existing E2000 in data array
+                }
+                else {//add new object in resulted array
+
+                    if (arr1Obj1.length > 0) {
+                        var patchObj = {
+                            data: [arr1Obj1[0].Δe2000],
+                            color: arr1Obj1[0].HtmlColor,
+                            markers: {
+                                background: arr1Obj1[0].HtmlColor
+                            }
+                        }
+                        patchArray.push(patchObj);
+                    }
+                }
+            });
+        });
+    }
+
+    $divAnalyzeChart.kendoChart({
+        //title: {
+        //    text: "Analyze Chart"
+        //},
+        //legend: {
+        //    position: "bottom"
+        //},
+        //chartArea: {
+        //    background: ""
+        //},
+        seriesDefaults: {
+            type: "line",
+            style: "smooth"
+        },
+        series: patchArray,
+        valueAxis: {
+            labels: {
+                format: "{0}"
+            },
+            line: {
+                visible: false
+            },
+            axisCrossingValue: -10,
+            //majorUnit: 2
+        },
+        categoryAxis: {
+            categories: measurementNamesList,
+            majorGridLines: {
+                visible: false
+            },
+            labels: {
+                rotation: "auto",
+                visual: function (e) {
+
+                    console.log(e);
+
+                    // Build an HTML fragment and append it to the body
+                    var html = $('<div><input type="checkbox" id="chk" checked /></div>')
+                        .appendTo(document.body);
+
+                    // Create an empty group that will hold the rendered label
+                    var visual = new kendo.drawing.Group();
+
+                    // Store a reference to the target rectangle, see below
+                    var rect = e.rect;
+
+                    kendo.drawing.drawDOM(html)
+                        .done(function (group) {
+                            // Clean-up HTML fragment
+                            html.remove();
+
+                            // Center the label using Layout
+                            var layout = new kendo.drawing.Layout(rect, {
+                                justifyContent: "center"
+                            });
+                            layout.append(group);
+                            layout.reflow();
+
+                            // Render the content
+                            visual.append(layout);
+                        });
+
+                    return visual;
+                }
+            },
+        },
+        //tooltip: {
+        //    visible: true,
+        //    format: "{0}%",
+        //    template: "#= series.name #: #= value #"
+        //},
+        chartArea: {
+            width: 675,
+            height: 200,
+        },
+        plotArea: {
+            background: "lightgray"
+        },
+        axisLabelClick: function (e) {
+            alert(1);
+        }
+    });
+}
 
 ////**************** POPULATE THE INK PAPER AB COMPARISION CHART  ****************////
 function PopulateInkPaperChartABComparision() {
@@ -3702,8 +3878,8 @@ function PopulateSummaryDeltaChart() {
         }
     });
 
-    console.log(jsonSummaryNameList);
-    console.log(categoryList);
+    //console.log(jsonSummaryNameList);
+    //console.log(categoryList);
 
     $divChartSummaryDeltaChart.kendoChart({
         renderAs: "canvas",

@@ -176,7 +176,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
                 hdnCurrentUserID.Value = Convert.ToString(SessionManager.Instance.CurrentUser.UserId) ?? "0";
                 hdfCurrentCulture.Value = getCurrentCultureLanguage();
-                
+                hdnProjectID.Value = SessionManager.Instance.CurrentOptimizeRun.ProjectId.ToString();
+                hdnOptimizationRunID.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
                 hdnValidationType.Value = ValidationType.ToString();
                 //--Start: Load average Compatibility values
                 chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return CheckAvgCompability();");
