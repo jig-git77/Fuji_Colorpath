@@ -3373,6 +3373,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Atleast one measurement should be checked.
+        /// </summary>
+        internal static string selectMeasurementMsg {
+            get {
+                return ResourceManager.GetString("selectMeasurementMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete selected source profile?.
         /// </summary>
         internal static string SourceProfileManagement_DeleteSourceProfile_Confirmation {

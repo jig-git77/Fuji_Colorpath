@@ -1254,4 +1254,7 @@
   <data name="gridAnalyzeHeader_Y_Resource" xml:space="preserve">
     <value>Y</value>
   </data>
+  <data name="selectMeasurementMsg" xml:space="preserve">
+    <value>少なくとも１つの測色結果をチェックしてください</value>
+  </data>
 </root>

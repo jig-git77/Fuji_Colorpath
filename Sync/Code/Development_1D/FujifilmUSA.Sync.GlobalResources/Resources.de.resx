@@ -1255,4 +1255,7 @@ erwünschten Format überein.</value>
   <data name="gridAnalyzeHeader_Y_Resource" xml:space="preserve">
     <value>Y</value>
   </data>
+  <data name="selectMeasurementMsg" xml:space="preserve">
+    <value>Mindestens ein Messung muß überprüft werden</value>
+  </data>
 </root>

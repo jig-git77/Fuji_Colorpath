@@ -329,6 +329,33 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         }
 
+        public int UpdateMeasurementByAnalyzeChartFromService(int MeasurementId,bool isUsedMeasurement, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            int returnValue = 0;
+            string storedProc = "[CPSync4D].[UpdateMeasurementByAnalyzeChart]";
+            if (IsSync1DType)
+                storedProc = "[CPSync].[UpdateMeasurementByAnalyzeChart]";
+            if (IsVerification)
+                storedProc = "[CPSyncV].[UpdateVMeasurementByAnalyzeChart]";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue =
+                        DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure(
+                                storedProc,
+                                new object[]
+                                        {
+                                            MeasurementId,
+                                            isUsedMeasurement
+                                        });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateMeasurementByAnalyzeChart"));
+            return returnValue;
+
+        }
+
         public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false)
         {
             string storedProc = "CPSync4D.GetMeasurementDeltasByMeasurementID";  

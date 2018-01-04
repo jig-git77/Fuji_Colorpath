@@ -109,6 +109,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("gridAnalyzeHeaderDelta_HResource", "gridAnalyzeHeaderDelta_HResource");
             _resourceValues.Add("gridAnalyzeHeaderDelta_CHResource", "gridAnalyzeHeaderDelta_CHResource");
             _resourceValues.Add("gridAnalyzeHeaderDelta_LResource", "gridAnalyzeHeaderDelta_LResource");
+            _resourceValues.Add("selectMeasurementMsg", "selectMeasurementMsg");
+            
 
             base.Initialize(controllerContext);
         }
@@ -1105,6 +1107,44 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
+        public IHttpActionResult UpdateMeasurementFromAnalyzeChart(int? MeasurementId, bool? isMeasurementUsed, bool? IsVerificationProject, bool? IsSync1DTypeProject)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<bool> httpResponse = new BaseResponse<bool>();
+            string validationMessage = "";
+            bool isSuccess = false;
+            try
+            {
+                if (MeasurementId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+                if (IsSync1DTypeProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+
+                if (IsVerificationProject == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+
+                this.MeasurementId = Convert.ToInt32(MeasurementId);
+                this.IsUsed = isMeasurementUsed == null ? false : Convert.ToBoolean(isMeasurementUsed); ;
+                this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);                               
+                _presenterAnalyze.UpdateMeasurementByAnalyzeChartFromService();
+                isSuccess = true;
+
+                httpResponse.Data = isSuccess;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
         public HttpResponseMessage DownloadFile(string filePath)
         {
             var fullPath = System.Web.Hosting.HostingEnvironment.MapPath(filePath);
@@ -1354,7 +1394,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public int ProjectStatus { get; set; }
         public Project Project { get; set; }
         public int SpotProjectId { get; set; }
-        #endregion        
+        public bool IsUsed { get; set; }
+        #endregion
     }
 }
 

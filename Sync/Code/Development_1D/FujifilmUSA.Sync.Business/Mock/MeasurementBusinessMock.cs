@@ -190,6 +190,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<Measurement>();
         }
+        public int UpdateMeasurementByAnalyzeChartFromService(int MeasurementId, bool isUsedMeasurement, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            return 0;
+        }
         #endregion
 
         #region ITaskBase Members

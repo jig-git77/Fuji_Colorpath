@@ -231,6 +231,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int ProjectStatus { get; set; }
         public Project Project { get; set; }
         public int SpotProjectId { get; set; }
+        public bool IsUsed { get; set; }
         #endregion
 
 
