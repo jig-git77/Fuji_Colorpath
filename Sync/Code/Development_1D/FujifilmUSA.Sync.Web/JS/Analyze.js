@@ -1575,6 +1575,17 @@ function GenerateG7Charts() {
         series: [{
             name: "Weighted",
             xField: "Cmyk_Value",
+            yField: "wΔValue",
+            color: "Blue",
+            markers: { background: "Blue", size: 4 },
+            tooltip: {
+                visible: true,
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
+            }
+        },
+        {
+            name: "Non-Weighted",
+            xField: "Cmyk_Value",
             yField: "ΔValue",
             color: "Black",
             markers: { background: "Black", size: 4 },
@@ -1584,17 +1595,6 @@ function GenerateG7Charts() {
             tooltip: {
                 visible: true,
                 template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
-            }
-        },
-        {
-            name: "Non-Weighted",
-            xField: "Cmyk_Value",
-            yField: "wΔValue",
-            color: "Blue",
-            markers: { background: "Blue", size: 4 },
-            tooltip: {
-                visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
             }
         },
         {
