@@ -263,6 +263,7 @@
                 <asp:HiddenField runat="server" ID="hdnReportDLPName" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnOptimizationRunID" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnProjectID" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnCurrentMeasurement" ClientIDMode="Static" />
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">
@@ -456,7 +457,7 @@
                         
                     </div>
                 </div>
-                
+                <br />
                 <div>
                             <div id="divAnalyzeChart"></div>
                         </div>

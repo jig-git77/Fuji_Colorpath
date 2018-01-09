@@ -79,6 +79,7 @@ var $divChartTVIISO_Black;
 var $divChartTVIISO_CMYK;
 var $tblDensityChart;
 var $hdnReportDLPName;
+var $hdnCurrentMeasurement;
 
 //********** kendo objects *********//
 var drawing = kendo.drawing;
@@ -177,7 +178,7 @@ var gradientGray3 = new drawing.LinearGradient({
 });
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     ////*********** HTML Element Declarations ***********////
     $hdnBaseServiceUrl = $('#hdnBaseServiceUrl').val();
@@ -228,6 +229,7 @@ $(document).ready(function() {
     $divAnalyzeChart = $("#divAnalyzeChart");
     $tblDensityChart = $("#tblDensityChart");
     $selectedDeltaE = $rbtnListDeltaE.find('input:checked').val();
+    $hdnCurrentMeasurement = $("#hdnCurrentMeasurement");
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
 
@@ -259,7 +261,7 @@ $(document).ready(function() {
         headers: {
             'Accept-Language': $CurrentCulture
         },
-        success: function(response) {
+        success: function (response) {
             //console.log(response);
             jsonTarget = response.data.GamutChartActual;
             jsonColors = response.data.GamutChart;
@@ -272,7 +274,7 @@ $(document).ready(function() {
             kendo.ui.progress($chartLoader, false);
 
         },
-        error: function(xhr, errorType, exception) {
+        error: function (xhr, errorType, exception) {
             //alert(exception);
             kendo.ui.progress($chartLoader, false);
         }
@@ -293,7 +295,7 @@ $(document).ready(function() {
 
     BindDeltaSummaryStatesChart();
 
-    $imgEyeABCompLarge.on('click', function(e) {
+    $imgEyeABCompLarge.on('click', function (e) {
         e.preventDefault();
 
         var kendoOptions = $chart_TargetVersusActualAB.data("kendoChart").options;
@@ -318,7 +320,7 @@ $(document).ready(function() {
         popup.center();
     });
 
-    $btnGeneratePDF.on('click', function(e) {
+    $btnGeneratePDF.on('click', function (e) {
         e.preventDefault();
 
         var chartContent = {
@@ -378,11 +380,11 @@ $(document).ready(function() {
             headers: {
                 "content-type": "application/json",
             },
-            success: function(response) {
+            success: function (response) {
                 //console.log(response);
                 window.open(SERVICE_BASE_URL + response.data, "_blank");
             },
-            error: function(xhr, errorType, exception) {
+            error: function (xhr, errorType, exception) {
                 alert(exception);
 
             }
@@ -411,13 +413,13 @@ function BindAnalyzeChart() {
         headers: {
             'Accept-Language': $CurrentCulture
         },
-        success: function(response) {
+        success: function (response) {
             if (response.data != null) {
                 jsonAnalyzeList = response.data;
                 PopulateAnalyzeChart();
             }
         },
-        error: function(xhr, errorType, exception) {
+        error: function (xhr, errorType, exception) {
             kendo.ui.progress($chartLoader, false);
         }
     });
@@ -428,7 +430,7 @@ function BindChartTargetVersusActualAB() {
 
 
     //************* Get object from array ***************//
-    var paperObj = $.grep(jsonTarget, function(element) { return element.PatchType == "Paper"; })[0];
+    var paperObj = $.grep(jsonTarget, function (element) { return element.PatchType == "Paper"; })[0];
 
     //************* Target Objects ***************//
     var targetArray = {};
@@ -451,17 +453,17 @@ function BindChartTargetVersusActualAB() {
     var targetBLUESeriseObj = {};
     var targetPAPERSeriseObj = {};
 
-    $.each(jsonTarget, function(index, element) {
+    $.each(jsonTarget, function (index, element) {
 
         var seriesArray = [];
 
 
 
         //Get colors from the colors array ()
-        var colorsArray = $.grep(jsonColors, function(colorObj) { return colorObj.PatchType == element.PatchType });
+        var colorsArray = $.grep(jsonColors, function (colorObj) { return colorObj.PatchType == element.PatchType });
         if (colorsArray.length > 0) {
             seriesArray.push(targetPAPERObj);
-            $.each(colorsArray, function(i, colorObj) {
+            $.each(colorsArray, function (i, colorObj) {
                 var dots = [colorObj.CielabA, colorObj.CielabB];
                 seriesArray.push(dots);
             });
@@ -480,7 +482,7 @@ function BindChartTargetVersusActualAB() {
             //size: 6,
             border: {
                 width: 1,
-                color: function(e) {
+                color: function (e) {
                     return 'black';
                 }
             }
@@ -656,10 +658,10 @@ function BindChartGamutABComparision() {
     var arrActualABComparision = [];
     var colorOrderArray = ["Cyan", "Green", "Yellow", "Red", "Magenta", "Blue", "Cyan"]
 
-    $.each(colorOrderArray, function(index, colorObj) {
+    $.each(colorOrderArray, function (index, colorObj) {
 
         //set target points
-        var jsonTargetColor = $.grep(jsonTarget, function(targetObj) { return targetObj.PatchType == colorObj })[0];
+        var jsonTargetColor = $.grep(jsonTarget, function (targetObj) { return targetObj.PatchType == colorObj })[0];
         var objTarget = [jsonTargetColor.Targeta, jsonTargetColor.Targetb];
         arrTargetsABComparision.push(objTarget);
 
@@ -675,7 +677,7 @@ function BindChartGamutABComparision() {
             background: jsonTargetColor.PatchType, size: 10,
             border: {
                 width: 1,
-                color: function(e) {
+                color: function (e) {
                     return 'black';
                 }
             }
@@ -705,7 +707,7 @@ function BindChartGamutABComparision() {
         }
     });
     //set the paper objects
-    var paperObj = $.grep(jsonTarget, function(element) { return element.PatchType == "Paper"; })[0];
+    var paperObj = $.grep(jsonTarget, function (element) { return element.PatchType == "Paper"; })[0];
     var targetPAPERObject = [[paperObj.Targeta, paperObj.Targetb]];
     var colorPAPERObject = [[paperObj.CielabA, paperObj.CielabB]];
 
@@ -810,7 +812,7 @@ function BindChartLComparision() {
     var greenLComparisionPointSmall = {};
     var paperLComparisionPointSmall = {};
 
-    $.each(jsonTarget, function(index, element) {
+    $.each(jsonTarget, function (index, element) {
 
         var pointsObj = {};
         pointsObj.data = [[element.CielabA, 0]];
@@ -828,7 +830,7 @@ function BindChartLComparision() {
             background: element.PatchType, size: 6,
             border: {
                 width: 0.25,
-                color: function(e) {
+                color: function (e) {
                     return 'black';
                 }
             }
@@ -1206,14 +1208,14 @@ function BindDeltaSummaryStatesChart() {
         data: apiParameters,
         type: 'GET',
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
             if (response != null) {
                 jsonSummaryNameList = response.data.DTDeltaSummaryLables;
                 jsonSummaryValueList = response.data.DTDeltaSummaryValues;
             }
             PopulateSummaryDeltaChart();
         },
-        error: function(xhr, errorType, exception) {
+        error: function (xhr, errorType, exception) {
             //alert(exception);
             kendo.ui.progress($chartLoader, false);
         }
@@ -1242,7 +1244,7 @@ function BindInkPaperChartABComparision() {
         headers: {
             'Accept-Language': $CurrentCulture
         },
-        success: function(response) {
+        success: function (response) {
             //console.log('Ink paper chart');
             //console.log(response);
             if (response.data != null) {
@@ -1258,7 +1260,7 @@ function BindInkPaperChartABComparision() {
             PopulateInkPaperChartABComparision();
             kendo.ui.progress($chartLoader, false);
         },
-        error: function(xhr, errorType, exception) {
+        error: function (xhr, errorType, exception) {
             //alert(exception);
             kendo.ui.progress($chartLoader, false);
         }
@@ -1283,7 +1285,7 @@ function BindG7Charts() {
         headers: {
             'Accept-Language': $CurrentCulture
         },
-        success: function(response) {
+        success: function (response) {
             //console.log('G7 Chart data');
             //console.log(response);
             //console.log(JSON.stringify(response));
@@ -1298,7 +1300,7 @@ function BindG7Charts() {
 
             //kendo.ui.progress($chartLoader, false);
         },
-        error: function(xhr, errorType, exception) {
+        error: function (xhr, errorType, exception) {
             //alert(exception);
             kendo.ui.progress($chartLoader, false);
         }
@@ -1332,7 +1334,7 @@ function BindTVICharts() {
             headers: {
                 'Accept-Language': $CurrentCulture
             },
-            success: function(response) {
+            success: function (response) {
 
                 if (response.data != null) {
                     jsonDTISOTVIChartList = response.data.DTISOTVIChartList;
@@ -1345,7 +1347,7 @@ function BindTVICharts() {
                 }
                 //kendo.ui.progress($chartLoader, false);
             },
-            error: function(xhr, errorType, exception) {
+            error: function (xhr, errorType, exception) {
                 //alert(exception);
                 kendo.ui.progress($chartLoader, false);
             }
@@ -1366,7 +1368,7 @@ function BindTVICharts() {
             headers: {
                 'Accept-Language': $CurrentCulture
             },
-            success: function(response) {
+            success: function (response) {
 
                 if (response.data != null) {
 
@@ -1376,7 +1378,7 @@ function BindTVICharts() {
 
                 //kendo.ui.progress($chartLoader, false);
             },
-            error: function(xhr, errorType, exception) {
+            error: function (xhr, errorType, exception) {
                 //alert(exception);
                 kendo.ui.progress($chartLoader, false);
             }
@@ -1556,7 +1558,7 @@ function GenerateG7Charts() {
         legend: {
             position: "top"
         },
-        legendItemClick: function(e) {
+        legendItemClick: function (e) {
             var seriesDeltaCh = $divChartG7GrayBalanceDeltaCh.data("kendoChart").findSeriesByIndex(e.seriesIndex);
             var seriesDeltaL = $divChartG7BlackDeltaL.data("kendoChart").findSeriesByIndex(e.seriesIndex);
 
@@ -1811,7 +1813,7 @@ function BindMeasurementPatchDetails() {
     $divMeasurementPatchDetails.kendoGrid({
         dataSource: {
             transport: {
-                read: function(options) {
+                read: function (options) {
                     $.ajax({
                         type: "GET",
                         url: SERVICE_BASE_URL + 'api/Chart/GetMeasurementPatchDetails',
@@ -1820,7 +1822,7 @@ function BindMeasurementPatchDetails() {
                         headers: {
                             'Accept-Language': $CurrentCulture
                         },
-                        success: function(response) {
+                        success: function (response) {
                             debugger;
                             if (response.data != null) {
                                 Resources = response.data.GlobalResources;
@@ -1851,7 +1853,7 @@ function BindMeasurementPatchDetails() {
                             }
 
                         },
-                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
                             console.log(XMLHttpRequest.responseText);
                         }
                     });
@@ -2159,7 +2161,7 @@ function BindMeasurementPatchDetails() {
     //$divMeasurementPatchDetails.data('kendoGrid').refresh();
     //$divMeasurementPatchDetails.find('.k-grid-content-locked').css('height', 'unset');
 
-    $divMeasurementPatchDetails.find('#btnExportCGATS').on('click', function(e) {
+    $divMeasurementPatchDetails.find('#btnExportCGATS').on('click', function (e) {
         e.preventDefault();
 
         var selectedMatricSum = '';
@@ -2179,19 +2181,19 @@ function BindMeasurementPatchDetails() {
             url: SERVICE_BASE_URL + 'api/Chart/GetCGATSPatchReport',
             data: apiReportParameters,
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 if (response.data != null) {
                     var fileName = '~' + response.data;
                     window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
                 }
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log(XMLHttpRequest.responseText);
             }
         });
     });
 
-    $divMeasurementPatchDetails.find('#btnExportCFX').on('click', function(e) {
+    $divMeasurementPatchDetails.find('#btnExportCFX').on('click', function (e) {
         e.preventDefault();
         var measurementID = parseInt($hdMeasurement);
 
@@ -2210,13 +2212,13 @@ function BindMeasurementPatchDetails() {
             url: SERVICE_BASE_URL + 'api/Chart/GetCFXPatchReport',
             data: apiReportParameters,
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 if (response.data != null) {
                     var fileName = '~' + response.data;
                     window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
                 }
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log(XMLHttpRequest.responseText);
             }
         });
@@ -2232,38 +2234,45 @@ function PopulateAnalyzeChart() {
     var patchArray = [];
     if (jsonAnalyzeList.Measurements.length > 0) {
 
+        //check last measurement
+        if ($hdnCurrentMeasurement.val() == '') {
+            $hdnCurrentMeasurement.val(jsonAnalyzeList.Measurements[jsonAnalyzeList.Measurements.length - 1].MeasurementId);
+        }
+
         //get the name of the measurement name list
         //measurementNamesList = $.map(jsonAnalyzeList.Measurements, function (e) {
         //    return e.MeasurementName;
         //});
 
-        measurementNamesList = $.map(jsonAnalyzeList.Measurements, function(e) {
+        measurementNamesList = $.map(jsonAnalyzeList.Measurements, function (e) {
             var curObj = {
                 MeasurementId: e.MeasurementId,
                 MeasurementName: e.MeasurementName,
-                IsUsed: e.IsUsed
+                IsUsed: e.IsUsed,
+                MeasurementStatus: e.MeasurementStatus,
+                MeasurementDate: e.MeasurementDate,
             };
             return curObj;
         });
 
         //get the available list of htmlcodes
-        var htmlPatchCodeList = $.map(jsonAnalyzeList.Measurements[0].MeasurementPatches, function(e) {
+        var htmlPatchCodeList = $.map(jsonAnalyzeList.Measurements[0].MeasurementPatches, function (e) {
             return e.HtmlColor;
         });
 
         //generate new array to display the patches
-        $.each(htmlPatchCodeList, function(index, htmlCode) {
+        $.each(htmlPatchCodeList, function (index, htmlCode) {
 
             //check one by one all html code
-            $.each(jsonAnalyzeList.Measurements, function(index, measureObj) {
+            $.each(jsonAnalyzeList.Measurements, function (index, measureObj) {
 
                 //check the current patch in the main list
-                var arr1Obj1 = $.grep(measureObj.MeasurementPatches, function(e) {
+                var arr1Obj1 = $.grep(measureObj.MeasurementPatches, function (e) {
                     return e.HtmlColor == htmlCode;
                 });
 
                 //check the patch is already available in the resulted array
-                var availablePatch = $.grep(patchArray, function(e) {
+                var availablePatch = $.grep(patchArray, function (e) {
                     return e.color == htmlCode;
                 });
                 //if exists then
@@ -2276,37 +2285,87 @@ function PopulateAnalyzeChart() {
                         var patchObj = {
                             data: [arr1Obj1[0].Δe2000],
                             color: arr1Obj1[0].HtmlColor,
-                            markers: {
-                                background: arr1Obj1[0].HtmlColor
-                            }
+                            //markers: {
+                            //    background: arr1Obj1[0].HtmlColor
+                            //}
                         }
+                        //$hdnCurrentMeasurement
+                        //if (measureObj.MeasurementId == 12653) {
+                        //    patchObj.markers.background = 'gray';
+                        //}
+
                         patchArray.push(patchObj);
                     }
                 }
             });
         });
+        console.log(patchArray);
     }
 
 
 
     $divAnalyzeChart.kendoChart({
-        //title: {
-        //    text: "Analyze Chart"
-        //},
-        //legend: {
-        //    position: "bottom"
-        //},
-        //chartArea: {
-        //    background: ""
-        //},
         seriesDefaults: {
             type: "line",
-            style: "smooth"
+            style: "smooth",
+            markers: {
+                background: function (e) {
+                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation && e.category.MeasurementId != parseInt($hdnCurrentMeasurement.val())) {
+                        if (e.category.MeasurementStatus != 'OK') {
+                            return "red";
+                        } else {
+                            return "gray";
+                        }
+                    }
+                    else {
+                        if (e.category.MeasurementId == parseInt($hdnCurrentMeasurement.val())) {
+                            return e.series.color;
+                        }
+                        else {
+                            return "gray";
+                        }
+                    }
+                },
+                border: {
+                    width: 1,
+                    color: function (e) {
+                        if ($hdnCurrentDlpSubOperation == ELicenseType.Validation && e.category.MeasurementId != parseInt($hdnCurrentMeasurement.val())) {
+                            if (e.category.MeasurementStatus != 'OK') {
+                                return "red";
+                            } else {
+                                return "gray";
+                            }
+                        }
+                        else {
+                            if (e.category.MeasurementId == parseInt($hdnCurrentMeasurement.val())) {
+                                return e.series.color;
+                            }
+                            else {
+                                return "gray";
+                            }
+                        }
+                    }
+                },
+                type: function (e) {
+
+                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation && e.category.MeasurementId != parseInt($hdnCurrentMeasurement.val())) {
+                        if (e.category.MeasurementStatus != 'OK') {
+                            return "triangle";
+                        } else {
+                            return "circle";
+                        }
+                    }
+                    else {
+                        return "circle";
+                    }
+                },
+            }
         },
         series: patchArray,
         valueAxis: {
+            // name: "valueAxis",
             title: {
-                text: 'Δ'+$selectedDeltaE
+                text: 'Δ' + $selectedDeltaE
             },
             labels: {
                 format: "{0}"
@@ -2318,6 +2377,7 @@ function PopulateAnalyzeChart() {
             //majorUnit: 2
         },
         categoryAxis: {
+            name: "categoryAxis",
             categories: measurementNamesList,
             majorGridLines: {
                 visible: false
@@ -2325,43 +2385,73 @@ function PopulateAnalyzeChart() {
             labels: {
                 rotation: "auto",
                 //cursor: "pointer",
-                visual: function(e) {
+                visual: function (e) {
 
-                    //console.log(e);
-
+                    // Create an empty group that will hold the rendered label
+                    var visual = new kendo.drawing.Group();
                     // Build an HTML fragment and append it to the body                    
                     //get the category values
                     var catValue = e.value;
 
-                    //set checked or not
-                    var catText = '<div style="font-size:18px;cursor: pointer;">☐</div>'
-                    if (catValue.IsUsed) {
-                        catText = '<div style="font-size:18px;cursor: pointer;">☑</div>'
-                    }
-                    var html = $(catText).appendTo(document.body);
+                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                        //
 
-                    // Create an empty group that will hold the rendered label
-                    var visual = new kendo.drawing.Group();
+                        //set checked or not
+                        var catText = '<div style="font-size:10px;cursor: pointer;">' + formatMeasurementDateWithTime(catValue.MeasurementDate) + '</div>';
+                        //if (catValue.IsUsed) {
+                        //    catText = '<div style="font-size:18px;cursor: pointer;">☑</div>'
+                        //}
+                        var html = $(catText).appendTo(document.body);
 
-                    // Store a reference to the target rectangle, see below
-                    var rect = e.rect;
+                        // Store a reference to the target rectangle, see below
+                        var rect = e.rect;
 
-                    kendo.drawing.drawDOM(html)
-                        .done(function(group) {
-                            // Clean-up HTML fragment
-                            html.remove();
+                        //create kendo DOM
+                        kendo.drawing.drawDOM(html)
+                            .done(function (group) {
+                                // Clean-up HTML fragment
+                                html.remove();
 
-                            // Center the label using Layout
-                            var layout = new kendo.drawing.Layout(rect, {
-                                justifyContent: "center"
+                                // Center the label using Layout
+                                var layout = new kendo.drawing.Layout(rect, {
+                                    justifyContent: "center"
+                                });
+                                layout.append(group);
+                                layout.reflow();
+
+                                // Render the content
+                                visual.append(layout);
                             });
-                            layout.append(group);
-                            layout.reflow();
+                    } else {
 
-                            // Render the content
-                            visual.append(layout);
-                        });
+                        //set checked or not
+                        var catText = '<div style="font-size:18px;cursor: pointer;">' + (catValue.IsUsed ? '☑' : '☐') + '</div>'
+                        //if (catValue.IsUsed) {
+                        //    catText = '<div style="font-size:18px;cursor: pointer;">☑</div>'
+                        //}
+                        var html = $(catText).appendTo(document.body);
 
+                        // Store a reference to the target rectangle, see below
+                        var rect = e.rect;
+
+                        //create kendo DOM
+                        kendo.drawing.drawDOM(html)
+                            .done(function (group) {
+                                // Clean-up HTML fragment
+                                html.remove();
+
+                                // Center the label using Layout
+                                var layout = new kendo.drawing.Layout(rect, {
+                                    justifyContent: "center"
+                                });
+                                layout.append(group);
+                                layout.reflow();
+
+                                // Render the content
+                                visual.append(layout);
+                            });
+
+                    }
                     return visual;
                 }
             },
@@ -2374,11 +2464,25 @@ function PopulateAnalyzeChart() {
         chartArea: {
             width: 675,
             height: 200,
+            background: "gray",
+            opacity: 0.3
         },
-        plotArea: {
-            background: "lightgray"
+        pannable: {
+            lock: "y"
         },
-        axisLabelClick: function(e) {
+        zoomable: {
+            mousewheel: {
+                lock: "y"
+            },
+            selection: {
+                lock: "y"
+            }
+        },
+        //render: renderChartWithBackgroundByCategory,
+        //plotArea: {
+        //    background: "lightgray"
+        //},
+        axisLabelClick: function (e) {
 
             //get the current clicked category data
             var currentObj = e.value;
@@ -2389,7 +2493,7 @@ function PopulateAnalyzeChart() {
             }
 
             //check in multiple category
-            var otherMeasurements = $.grep(measurementNamesList, function(elem) {
+            var otherMeasurements = $.grep(measurementNamesList, function (elem) {
                 return elem.MeasurementId != currentObj.MeasurementId && (elem.IsUsed || !currentObj.IsUsed)
             });
 
@@ -2411,10 +2515,11 @@ function PopulateAnalyzeChart() {
                 data: apiParameters,
                 type: 'GET',
                 dataType: 'json',
-                success: function(response) {
+                success: function (response) {
+                    $hdnCurrentMeasurement.val(MeasurementId);
                     BindAnalyzeChart();
                 },
-                error: function(xhr, errorType, exception) {
+                error: function (xhr, errorType, exception) {
                     //alert(exception);                    
                 }
             });
@@ -2439,7 +2544,7 @@ function PopulateInkPaperChartABComparision() {
         { colorName: _Resources._recTriplet, colorTitle: _Resources._recTripletPathMetrics }];
 
 
-    $.each(jsonDeltaEPrimaryPatchList, function(index, obj) {
+    $.each(jsonDeltaEPrimaryPatchList, function (index, obj) {
 
         var item = {
             color: obj.HtmlColor,
@@ -2459,8 +2564,8 @@ function PopulateInkPaperChartABComparision() {
     });
 
     //var axis = json.map(function (a) { return a["?E"]; });
-    var axis = jsonDeltaEPrimaryPatchList.map(function(a) { return a.ΔE; });
-    var patchColorList = formattedDeltaEPrimaryPatchList.map(function(a) { return a.name; });
+    var axis = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔE; });
+    var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
     var maxNum = Math.max.apply(Math, axis);
     var maxValue = 0;
     var marginValue = 1;
@@ -2476,7 +2581,7 @@ function PopulateInkPaperChartABComparision() {
 
     //generate the second stacked chart by max value
     var stackedChart = [];
-    $.each(axis, function(index, num) {
+    $.each(axis, function (index, num) {
         var stack = {
             value: maxValue
         };
@@ -2496,7 +2601,7 @@ function PopulateInkPaperChartABComparision() {
             width: 10,
             gap: 0.2,
             highlight: {
-                toggle: function(e) {
+                toggle: function (e) {
                     // Don't create a highlight overlay,
                     // we'll modify the existing visual instead
                     e.preventDefault();
@@ -2507,7 +2612,7 @@ function PopulateInkPaperChartABComparision() {
                     visual.opacity(opacity);
                 }
             },
-            visual: function(e) {
+            visual: function (e) {
                 var visual = e.createVisual();
                 //-----For Sync1D projects or validation projects
                 if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
@@ -2605,7 +2710,7 @@ function PopulateInkPaperChartABComparision() {
             visible: true,
             //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
             //template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
-            template: function(dataItem) {
+            template: function (dataItem) {
                 debugger;
                 var item = dataItem.dataItem;
                 var toolTipString = "<table>";
@@ -2646,12 +2751,12 @@ function PopulateInkPaperChartABComparision() {
             width: 310,
             height: 325
         },
-        render: function(e) {
+        render: function (e) {
 
             //-----For Sync1D projects or validation projects
             if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
                 var chart = e.sender;
-                $.each(thrashHold.paths, function(index, obj) {
+                $.each(thrashHold.paths, function (index, obj) {
                     //set the line 
                     var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: obj.color } }).moveTo(obj.x, obj.y1).lineTo(obj.x, obj.y2);
                     chart.surface.draw(pathGreen);
@@ -2674,7 +2779,7 @@ function PopulateInkPaperChartABComparision() {
     //];
 
     var formattedDensityList = [];
-    $.each(jsonDensityList, function(index, obj) {
+    $.each(jsonDensityList, function (index, obj) {
         var patchTitle = '';
         switch (obj.PatchTypeId) {
             case 1: patchTitle = _Resources._recCyanPathMetrics; break;
@@ -2707,7 +2812,7 @@ function PopulateInkPaperChartABComparision() {
             width: 10,
             gap: 0.5,
             highlight: {
-                toggle: function(e) {
+                toggle: function (e) {
                     // Don't create a highlight overlay,
                     // we'll modify the existing visual instead
                     e.preventDefault();
@@ -2718,7 +2823,7 @@ function PopulateInkPaperChartABComparision() {
                     visual.opacity(opacity);
                 }
             },
-            visual: function(e) {
+            visual: function (e) {
                 var visual = e.createVisual();
                 var axis = e.sender.getAxis("valueAxis");
 
@@ -2775,7 +2880,7 @@ function PopulateInkPaperChartABComparision() {
             visible: true,
             //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
             //template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " :    #= dataItem.density # <br/>" + _Resources._recTarget + " :    #= dataItem.densityLimit # <br/>" + _Resources._recPrevious + " :    #= dataItem.preAvgDensity #"
-            template: function(e) {
+            template: function (e) {
                 var item = e.dataItem;
                 var tooltipString = "<b>" + item.title + "</b><br/>";
                 tooltipString += "<b>" + _Resources._recActual + ":</b> " + item.density.toFixed(2) + "<br/>";
@@ -2834,7 +2939,7 @@ function PopulateInkPaperChartABComparision() {
         background: "White",
         border: {
             width: 1,
-            color: function(e) {
+            color: function (e) {
                 return 'black';
             }
         }
@@ -2954,12 +3059,12 @@ function PopulateInkPaperChartABComparision() {
 
 ////**************** POPULATE THE TVI CHART  ****************////
 function PopulateTVIG7Chart() {
-    var jsonEmpty = $.grep(jsonTVIG7ChartList, function(element) { return element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.CmykK == 0; })
+    var jsonEmpty = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.CmykK == 0; })
 
-    var jsonC = $.grep(jsonTVIG7ChartList, function(element) { return element.CmykC != 0; });
-    var jsonM = $.grep(jsonTVIG7ChartList, function(element) { return element.CmykM != 0; });
-    var jsonY = $.grep(jsonTVIG7ChartList, function(element) { return element.CmykY != 0; });
-    var jsonK = $.grep(jsonTVIG7ChartList, function(element) { return element.CmykK != 0; });
+    var jsonC = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykC != 0; });
+    var jsonM = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykM != 0; });
+    var jsonY = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykY != 0; });
+    var jsonK = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykK != 0; });
 
     var jsonCResult = jsonEmpty.concat(jsonC);
     var jsonMResult = jsonEmpty.concat(jsonM);
@@ -2986,7 +3091,7 @@ function PopulateTVIG7Chart() {
                     size: 6,
                     border: {
                         width: 1,
-                        color: function(e) {
+                        color: function (e) {
                             return 'black';
                         }
                     }
@@ -3006,7 +3111,7 @@ function PopulateTVIG7Chart() {
                 markers: {
                     background: "Magenta", size: 6, border: {
                         width: 1,
-                        color: function(e) {
+                        color: function (e) {
                             return 'black';
                         }
                     }
@@ -3026,7 +3131,7 @@ function PopulateTVIG7Chart() {
                 markers: {
                     background: "Yellow", size: 6, border: {
                         width: 1,
-                        color: function(e) {
+                        color: function (e) {
                             return 'black';
                         }
                     }
@@ -3111,7 +3216,7 @@ function PopulateTVIISOChart() {
     var isoBlackList = [];
 
     if (jsonDTISOTVIChartList.length > 0) {
-        isoCyanList = $.grep(jsonDTISOTVIChartList, function(element) {
+        isoCyanList = $.grep(jsonDTISOTVIChartList, function (element) {
             var matched = false;
             switch (element.PatchTypeId) {
                 case CPPatchType.Cyan:
@@ -3136,9 +3241,9 @@ function PopulateTVIISOChart() {
             }
             return matched;
         });
-        isoCyanList.sort(function(a, b) { return a.CmykC - b.CmykC; });
+        isoCyanList.sort(function (a, b) { return a.CmykC - b.CmykC; });
 
-        $.each(isoCyanList, function(index, obj) {
+        $.each(isoCyanList, function (index, obj) {
             var thrashHoldObject = [];
             var ThresholdTop = 0;
             var ThresholdBottom = 0;
@@ -3152,7 +3257,7 @@ function PopulateTVIISOChart() {
     }
 
     if (jsonDTISOTVIChartList.length > 0) {
-        isoMagentaList = $.grep(jsonDTISOTVIChartList, function(element) {
+        isoMagentaList = $.grep(jsonDTISOTVIChartList, function (element) {
             var matched = false;
             switch (element.PatchTypeId) {
                 case CPPatchType.Magenta:
@@ -3177,9 +3282,9 @@ function PopulateTVIISOChart() {
             }
             return matched;
         });
-        isoMagentaList.sort(function(a, b) { return a.CmykM - b.CmykM; });
+        isoMagentaList.sort(function (a, b) { return a.CmykM - b.CmykM; });
 
-        $.each(isoMagentaList, function(index, obj) {
+        $.each(isoMagentaList, function (index, obj) {
             var thrashHoldObject = [];
             var ThresholdTop = 0;
             var ThresholdBottom = 0;
@@ -3193,7 +3298,7 @@ function PopulateTVIISOChart() {
     }
 
     if (jsonDTISOTVIChartList.length > 0) {
-        isoYellowList = $.grep(jsonDTISOTVIChartList, function(element) {
+        isoYellowList = $.grep(jsonDTISOTVIChartList, function (element) {
             var matched = false;
             switch (element.PatchTypeId) {
                 case CPPatchType.Yellow:
@@ -3218,9 +3323,9 @@ function PopulateTVIISOChart() {
             }
             return matched;
         });
-        isoYellowList.sort(function(a, b) { return a.CmykY - b.CmykY; });
+        isoYellowList.sort(function (a, b) { return a.CmykY - b.CmykY; });
 
-        $.each(isoYellowList, function(index, obj) {
+        $.each(isoYellowList, function (index, obj) {
             var thrashHoldObject = [];
             var ThresholdTop = 0;
             var ThresholdBottom = 0;
@@ -3234,7 +3339,7 @@ function PopulateTVIISOChart() {
     }
 
     if (jsonDTISOTVIChartList.length > 0) {
-        isoBlackList = $.grep(jsonDTISOTVIChartList, function(element) {
+        isoBlackList = $.grep(jsonDTISOTVIChartList, function (element) {
             var matched = false;
             switch (element.PatchTypeId) {
                 case CPPatchType.Black:
@@ -3259,9 +3364,9 @@ function PopulateTVIISOChart() {
             }
             return matched;
         });
-        isoBlackList.sort(function(a, b) { return a.CmykK - b.CmykK; });
+        isoBlackList.sort(function (a, b) { return a.CmykK - b.CmykK; });
 
-        $.each(isoBlackList, function(index, obj) {
+        $.each(isoBlackList, function (index, obj) {
             var thrashHoldObject = [];
             var ThresholdTop = 0;
             var ThresholdBottom = 0;
@@ -3536,10 +3641,10 @@ function PopulateTVIISOChart() {
 ////**************** POPULATE THE TVI G7 CHART  ****************////
 function PopulateTVIG7CMYKChart() {
 
-    var jsonCMYK_C = $.grep(jsonDTSpreadChartData_CMYKList, function(element) { return (element.CmykC != 0 || element.DotGain == 0) });
-    var jsonCMYK_M = $.grep(jsonDTSpreadChartData_CMYKList, function(element) { return (element.CmykM != 0 || element.DotGain == 0) });
-    var jsonCMYK_Y = $.grep(jsonDTSpreadChartData_CMYKList, function(element) { return (element.CmykY != 0 || element.DotGain == 0) });
-    var jsonCMYK_K = $.grep(jsonDTSpreadChartData_CMYKList, function(element) { return (element.CmykK != 0 || element.DotGain == 0) });
+    var jsonCMYK_C = $.grep(jsonDTSpreadChartData_CMYKList, function (element) { return (element.CmykC != 0 || element.DotGain == 0) });
+    var jsonCMYK_M = $.grep(jsonDTSpreadChartData_CMYKList, function (element) { return (element.CmykM != 0 || element.DotGain == 0) });
+    var jsonCMYK_Y = $.grep(jsonDTSpreadChartData_CMYKList, function (element) { return (element.CmykY != 0 || element.DotGain == 0) });
+    var jsonCMYK_K = $.grep(jsonDTSpreadChartData_CMYKList, function (element) { return (element.CmykK != 0 || element.DotGain == 0) });
 
 
     $divChartTVIISO_CMYK.kendoChart({
@@ -3571,7 +3676,7 @@ function PopulateTVIG7CMYKChart() {
                     size: 7,
                     border: {
                         width: 1,
-                        color: function(e) {
+                        color: function (e) {
                             return 'black';
                         }
                     }
@@ -3596,7 +3701,7 @@ function PopulateTVIG7CMYKChart() {
                 markers: {
                     background: "Magenta", size: 7, border: {
                         width: 1,
-                        color: function(e) {
+                        color: function (e) {
                             return 'black';
                         }
                     }
@@ -3618,7 +3723,7 @@ function PopulateTVIG7CMYKChart() {
                 markers: {
                     background: "Yellow", size: 7, border: {
                         width: 1,
-                        color: function(e) {
+                        color: function (e) {
                             return 'black';
                         }
                     }
@@ -3710,11 +3815,11 @@ function PopulateTVIG7CMYKChart() {
 ////**************** POPULATE THE TVI SPREAD CHART  ****************////
 function PopulateTVISpreadChart() {
 
-    var jsonSpread_C = $.grep(jsonDTSpreadChartDataList, function(element) { return (element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.DotGain == 0) || element.CmykC != 0 });
-    var jsonSpread_M = $.grep(jsonDTSpreadChartDataList, function(element) { return (element.CmykM == 0 && element.CmykC == 0 && element.CmykY == 0 && element.DotGain == 0) || element.CmykM != 0 });
-    var jsonSpread_Y = $.grep(jsonDTSpreadChartDataList, function(element) { return (element.CmykY == 0 && element.CmykC == 0 && element.CmykM == 0 && element.DotGain == 0) || element.CmykY != 0 });
+    var jsonSpread_C = $.grep(jsonDTSpreadChartDataList, function (element) { return (element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.DotGain == 0) || element.CmykC != 0 });
+    var jsonSpread_M = $.grep(jsonDTSpreadChartDataList, function (element) { return (element.CmykM == 0 && element.CmykC == 0 && element.CmykY == 0 && element.DotGain == 0) || element.CmykM != 0 });
+    var jsonSpread_Y = $.grep(jsonDTSpreadChartDataList, function (element) { return (element.CmykY == 0 && element.CmykC == 0 && element.CmykM == 0 && element.DotGain == 0) || element.CmykY != 0 });
 
-    var splineRangeResultList = $.grep(jsonDTSpreadSplineRangeChartDataList, function(element) { return element.UpperLimit != 0 && element.LowerLimit != 0 });
+    var splineRangeResultList = $.grep(jsonDTSpreadSplineRangeChartDataList, function (element) { return element.UpperLimit != 0 && element.LowerLimit != 0 });
 
     var obj = Object.assign({}, splineRangeResultList[0]);
     obj.UpperLimit = null;
@@ -3730,16 +3835,16 @@ function PopulateTVISpreadChart() {
     splineRangeResultList.push(obj);
 
 
-    splineRangeResultList = splineRangeResultList.sort(function(e, e1) { return e.TVI - e1.TVI });
+    splineRangeResultList = splineRangeResultList.sort(function (e, e1) { return e.TVI - e1.TVI });
 
-    $.each(jsonSpread_C, function(index, obj) {
+    $.each(jsonSpread_C, function (index, obj) {
 
         if (obj.CmykC != 0) {
 
-            var Mres = $.grep(jsonSpread_M, function(e) { return e.CmykM == obj.CmykC; });
+            var Mres = $.grep(jsonSpread_M, function (e) { return e.CmykM == obj.CmykC; });
             var magValue = Mres[0].DotGain;
 
-            var Yres = $.grep(jsonSpread_Y, function(e) {
+            var Yres = $.grep(jsonSpread_Y, function (e) {
                 return e.CmykY == obj.CmykC;
             });
 
@@ -3757,14 +3862,14 @@ function PopulateTVISpreadChart() {
     });
 
 
-    $.each(jsonSpread_M, function(index, obj) {
+    $.each(jsonSpread_M, function (index, obj) {
 
         if (obj.CmykM != 0) {
 
-            var Cres = $.grep(jsonSpread_C, function(e) { return e.CmykC == obj.CmykM; });
+            var Cres = $.grep(jsonSpread_C, function (e) { return e.CmykC == obj.CmykM; });
             var cynValue = Cres[0].DotGain;
 
-            var Yres = $.grep(jsonSpread_Y, function(e) { return e.CmykY == obj.CmykM; });
+            var Yres = $.grep(jsonSpread_Y, function (e) { return e.CmykY == obj.CmykM; });
             var yelValue = Yres[0].DotGain;
 
             var DiffrentOne = obj.DotGain - cynValue;
@@ -3778,14 +3883,14 @@ function PopulateTVISpreadChart() {
         }
     });
 
-    $.each(jsonSpread_Y, function(index, obj) {
+    $.each(jsonSpread_Y, function (index, obj) {
 
         if (obj.CmykY != 0) {
 
-            var Cres = $.grep(jsonSpread_C, function(e) { return e.CmykC == obj.CmykY; });
+            var Cres = $.grep(jsonSpread_C, function (e) { return e.CmykC == obj.CmykY; });
             var cynValue = Cres[0].DotGain;
 
-            var Mres = $.grep(jsonSpread_M, function(e) { return e.CmykM == obj.CmykY; });
+            var Mres = $.grep(jsonSpread_M, function (e) { return e.CmykM == obj.CmykY; });
             var magValue = Mres[0].DotGain;
 
             var DiffrentOne = obj.DotGain - cynValue;
@@ -3917,7 +4022,7 @@ function PopulateSummaryDeltaChart() {
     //generate the second stacked chart by max value
     var stackedChart = [];
     var categoryList = [];
-    $.each(jsonSummaryValueList, function(index, num) {
+    $.each(jsonSummaryValueList, function (index, num) {
         var stack = {
             value: maxValue
         };
@@ -3929,7 +4034,7 @@ function PopulateSummaryDeltaChart() {
         selectedDeltaE = "ΔE";
     }
 
-    $.each(jsonSummaryNameList, function(index, text) {
+    $.each(jsonSummaryNameList, function (index, text) {
         switch (text) {
             case "Avg_ΔE": categoryList.push("Average " + selectedDeltaE); break;
             case "Max_ΔE": categoryList.push("Maximum " + selectedDeltaE); break;
@@ -4297,53 +4402,19 @@ function renderChartWithBackgroundByCategory(e) {
     chart.surface.draw(path);
 }
 
-function getBlobFromURI(url, data, responseType, success, error, continueFunc) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open('post', url, true);
-    xmlHttp.setRequestHeader("Content-Type", "text/plain; charset=utf-8");
-    if (responseType != null) {
-        xmlHttp.setRequestHeader("Accept", responseType);
-        xmlHttp.responseType = "blob";
-    }
-    xmlHttp.send(data);
-    xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState === 4) {
-            try {
-                if (xmlHttp.status === 200) {
-                    if (xmlHttp.responseType === "blob") {
-                        success.call(null, xmlHttp.response, continueFunc, xmlHttp.getResponseHeader('Extension'));
-                    } else {
-                        success.call(null, JSON.parse(xmlHttp.responseText), continueFunc);
-                    }
-                } else {
-                    if (xmlHttp.responseType === "blob") {
-                        error.call(null, xmlHttp.response, continueFunc);
-                    } else {
-                        error.call(null, xmlHttp.responseText, continueFunc);
-                    }
-                }
-            } catch (e) {
-                if (continueFunc) {
-                    continueFunc.call(null, e);
-                }
-            }
-        } else {
-        }
-    };
-};
 
-
-
-
-function downloadFileDirect(file) {
-    getBlobFromURI(file.URL, null, file.ContentType, function(response, continueFunc) {
-        var downloadUri = URL.createObjectURL(response);
-
-        var downloadElem = $("<a href=\"" + downloadUri + "\" download=\"" + file.Name + "\" target=\"_blank\">Download</a>");
-        downloadElem.get(0).click();
-        setTimeout(function() { URL.revokeObjectURL(downloadUri) }, 1000);
-
-    }, function(error, continueFunc) {
-        alert('File downloaded not succesfully');
-    });
+function formatMeasurementDateWithTime(d) {
+    var date = new Date(d);
+    var day = date.getDate();
+    var month = date.getMonth();
+    var year = date.getFullYear();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = month + '/' + day + '/' + year + '<br/>' + hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+    return strTime
 }
