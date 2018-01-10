@@ -2296,10 +2296,6 @@ function PopulateAnalyzeChart() {
                             //    background: arr1Obj1[0].HtmlColor
                             //}
                         }
-                        //$hdnCurrentMeasurement
-                        //if (measureObj.MeasurementId == 12653) {
-                        //    patchObj.markers.background = 'gray';
-                        //}
 
                         patchArray.push(patchObj);
                     }
@@ -2463,11 +2459,10 @@ function PopulateAnalyzeChart() {
                 }
             },
         },
-        //tooltip: {
-        //    visible: true,
-        //    format: "{0}%",
-        //    template: "#= series.name #: #= value #"
-        //},
+        tooltip: {
+            visible: true,
+            template: "${category.MeasurementName}",
+        },
         chartArea: {
             width: 675,
             height: 200,
