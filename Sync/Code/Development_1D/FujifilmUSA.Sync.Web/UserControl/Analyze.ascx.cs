@@ -193,6 +193,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     header.InnerText = GetResourceString(_recValidationAnalyzeHeaderText); //"Validation - Analyze";
                     //------Assign dEMethod value to radiolist, based on selected MetricTargetPresetID----------------//
                     rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
+                    hdnDefaultSelectedDelta.Value= SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
                 }
                 else
                 {
@@ -202,6 +203,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         //------If project is Sync1D type, Assign 'E' to radiolist, bydefault (because Sync 1D has only dt_E type)----------------//
                         //rbtnListDeltaE.SelectedValue = "E";
                         rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
+                        hdnDefaultSelectedDelta.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
                     }
                     if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
                     {

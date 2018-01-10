@@ -235,9 +235,17 @@ $(document).ready(function () {
 
     var measurementID = parseInt($hdMeasurement);
 
-    if (!$selectedDeltaE) {//set default value for sync1D projects
-        $selectedDeltaE = 'E2000';
+    if (!$selectedDeltaE) {
+        if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+            $selectedDeltaE = $('#hdnDefaultSelectedDelta').val();
+        }
+        else {
+            
+            $selectedDeltaE = 'E2000';  //set default value for sync1D projects
+        }
     }
+
+
 
     BindAnalyzeChart(); //Bind analyze chart
 
@@ -1823,7 +1831,6 @@ function BindMeasurementPatchDetails() {
                             'Accept-Language': $CurrentCulture
                         },
                         success: function (response) {
-                            debugger;
                             if (response.data != null) {
                                 Resources = response.data.GlobalResources;
                                 var patches = response.data.measurementPatchDetails;
