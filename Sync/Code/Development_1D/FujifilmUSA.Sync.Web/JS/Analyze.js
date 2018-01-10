@@ -2533,8 +2533,8 @@ function PopulateAnalyzeChart() {
 ////**************** POPULATE THE INK PAPER AB COMPARISION CHART  ****************////
 function PopulateInkPaperChartABComparision() {
 
-    //var json = jsonDeltaEPrimaryPatchList;
-
+    var maxNum = 0;
+    var maxDeltaLimit = 0;
     var formattedDeltaEPrimaryPatchList = [];
 
     //set the color name and its tooltip title with resources
@@ -2565,27 +2565,44 @@ function PopulateInkPaperChartABComparision() {
         formattedDeltaEPrimaryPatchList.push(item);
     });
 
+    debugger;
     //var axis = json.map(function (a) { return a["?E"]; });
     var axis = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔE; });
     var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
-    var maxNum = Math.max.apply(Math, axis);
+    
+
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+        maxNum = Math.max.apply(Math, axis) + 1;    //get the max ΔE with +1
+        var DeltaLimitArray = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔELimit; });
+        maxDeltaLimit = Math.max.apply(Math, DeltaLimitArray) + 1
+        if (maxNum > maxDeltaLimit) {
+            maxDeltaLimit = maxNum;
+        }
+        maxDeltaLimit = (maxDeltaLimit > 4 ? maxDeltaLimit : maxDeltaLimit + 1)
+    } else {
+        maxDeltaLimit = Math.max.apply(Math, axis) + 2;    //get the max ΔE with +1
+        maxDeltaLimit = (maxDeltaLimit > 4 ? maxDeltaLimit : maxDeltaLimit + 1)
+    }
+
+    
     var maxValue = 0;
     var marginValue = 1;
     switch (true) {
-        case (maxNum < 5): maxValue = 5; marginValue = 1; break;
-        case (maxNum == 5): maxValue = 6; marginValue = 1; break;
-        case (maxNum >= 5 && maxNum < 10): maxValue = 10; marginValue = 2; break;
-        case (maxNum >= 10 && maxNum < 15): maxValue = 15; marginValue = 3; break;
-        case (maxNum >= 15 && maxNum < 20): maxValue = 20; marginValue = 5; break;
-        case (maxNum >= 20 && maxNum < 30): maxValue = 30; marginValue = 5; break;
-        case (maxNum >= 30): maxValue = 50; marginValue = 5; break;
+        case (maxDeltaLimit < 5): maxValue = 5; marginValue = 1; break;
+        case (maxDeltaLimit == 5): maxValue = 6; marginValue = 1; break;
+        case (maxDeltaLimit >= 5 && maxDeltaLimit < 8): maxValue = 8; marginValue = 2; break;
+        case (maxDeltaLimit >= 8 && maxDeltaLimit < 10): maxValue = 10; marginValue = 2; break;
+        case (maxDeltaLimit >= 10 && maxDeltaLimit < 15): maxValue = 15; marginValue = 3; break;
+        case (maxDeltaLimit >= 15 && maxDeltaLimit < 20): maxValue = 20; marginValue = 5; break;
+        case (maxDeltaLimit >= 20 && maxDeltaLimit < 30): maxValue = 30; marginValue = 5; break;
+        case (maxDeltaLimit >= 30): maxValue = 50; marginValue = 5; break;
     }
 
     //generate the second stacked chart by max value
     var stackedChart = [];
     $.each(axis, function (index, num) {
         var stack = {
-            value: maxValue
+            value: maxDeltaLimit - num
         };
         stackedChart.push(stack);
     });
