@@ -83,7 +83,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _reclocLabelTol = "locLabelTol";
         private const string _reclocLabelAct = "locLabelAct";
         private const string _reclocLabelSignature = "locLabelSignature";
-        private const string _reclocLabelDate = "locLabelDate";        
+        private const string _reclocLabelDate = "locLabelDate";
 
         public DateTime EndDate;
         public decimal DtELimit = 0;
@@ -192,8 +192,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     header.InnerText = GetResourceString(_recValidationAnalyzeHeaderText); //"Validation - Analyze";
                     //------Assign dEMethod value to radiolist, based on selected MetricTargetPresetID----------------//
-                    rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
-                    hdnDefaultSelectedDelta.Value= SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
+                    hdnDefaultSelectedDelta.Value = rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
                 }
                 else
                 {
@@ -202,8 +201,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         //------If project is Sync1D type, Assign 'E' to radiolist, bydefault (because Sync 1D has only dt_E type)----------------//
                         //rbtnListDeltaE.SelectedValue = "E";
-                        rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
-                        hdnDefaultSelectedDelta.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
+                        hdnDefaultSelectedDelta.Value = rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
                     }
                     if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
                     {
@@ -241,9 +239,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Verification mode
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //---Only display Report Grading for Sync4D Validation
                     {
-                       // Div_ReportGrading.Visible = true; //---Disable for time being in Production code
+                        // Div_ReportGrading.Visible = true; //---Disable for time being in Production code
                     }
-                    
+
                     lbtnDownloadAndSaveDLP.Visible = false;
                     lbtnMeasurementVerification.Visible = true;
                     if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification) //---If not Sync 4D Certification type of project, then only display Optimize button
@@ -274,8 +272,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     //Hide Verification button
                     lbtnMeasurementVerification.Visible = false;
-                    lbtnOptimize.Visible = false; 
-                    trRBtnListDeltaE.Visible = false; 
+                    lbtnOptimize.Visible = false;
+                    trRBtnListDeltaE.Visible = false;
                     Div_Opt_Header.Visible = true;
                     td1DSmoothing.Visible = true;  //Display in Sync1D for Smoothing measurements (Commented out for temporary untill get decided to use this feature)
 
@@ -343,7 +341,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-   
+
         #endregion
 
         #region Methods
@@ -435,7 +433,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         ValidationType = MeasurementSummary[0].ValidationType;
                         hdnValidationType.Value = ValidationType.ToString();
                         if (!IsAverageOfMeasurements)   //--Normal display Mode
-                        {                            
+                        {
                             dvValidationSummary.DataSource = MeasurementSummary;
                             dvValidationSummary.DataBind();
                         }
@@ -446,7 +444,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             chartAnalyze.MapAreas.Clear();
                             chartAnalyze.IsMapEnabled = false;
                         }
-                        
+
 
                         if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                         {
@@ -543,7 +541,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             //-------Assign Report CMYK Density Pop up to load report in "Report" tab--------------//
             ReportCMYKDensityWindow.NavigateUrl = "../PopupReportCMYKDensity.aspx?ProjectID=" + SessionManager.Instance.CurrentProject.ProjectId + "&OptimizeRunID=" + SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId + "&MeasurementID=" + MeasurementId;
-       
+
         }
 
         #endregion
@@ -623,11 +621,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (Paper != null)
                 FillPaperChart(Paper);
             if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.DLP || ValidationType == 0)  //If Default view in Validation of Sync4D or Normal Sync4D optimization mode, don't display Density chart
-            {        
+            {
                 Table_Density.Visible = false;
             }
             else
-            {              
+            {
                 Table_Density.Visible = true;
                 if (DTDensity != null)
                     FillDensityChart(DTDensity);
@@ -792,7 +790,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Y2 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))));
             Y3 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))));
             Y4 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].PreAvgΔE.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].PreAvgΔE.ToString()))));
-       
+
             // === When Actual value is not available then no series will display and no marker will display
             if (Y2 == 0)
                 Y1 = Y2;
@@ -806,7 +804,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //-----For Sync1D projects or validation projects
             {
                 objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
-                if(Y4 > 0)
+                if (Y4 > 0)
                     objSeries3.Points.AddXY((Double)0, Y4); //------Green marker image plot for Previous Run's Avg ΔE
             }
 
@@ -1321,7 +1319,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append(" " + GetResourceString(_recA) + ListFilter[i].Targeta.ToString());
                     toolTip.Append(" " + GetResourceString(_recB) + ListFilter[i].Targetb.ToString());
                     toolTip.Append("</td></tr>");
-                   
+
                     toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>"); //ΔL*
                     toolTip.Append(ListFilter[i].ΔL.ToString());
                     toolTip.Append("</td></tr>");
@@ -1699,7 +1697,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             CHRT_BlackNPD.SaveImage(Server.MapPath(FileName));
 
             CHRT_GrayNPD.Series["Series0"].Points.Clear();
-            CHRT_GrayNPD.Series["Series0Point"].Points.Clear();           
+            CHRT_GrayNPD.Series["Series0Point"].Points.Clear();
 
             CHRT_GrayNPD.Series["Series0"]["TooltipOffset"] = "True";
             CHRT_GrayNPD.Series["Series0Point"]["TooltipOffset"] = "True";
@@ -1850,10 +1848,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Filter DT1 = "(PatchTypeID in (1,8,16,17,18))";
                     List<AnalyzeChart_DotGain> ListCyan = new List<AnalyzeChart_DotGain>();
                     ListCyan = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Three_Quarter_Tone)
-                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_10) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_20) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_25) 
-                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_30) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_40)  || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_50)
-                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_60)    || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_70)  || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_75) 
-                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_80) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_90) )).OrderBy(item => item.CmykC).ToList();
+                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_10) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_20) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_25)
+                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_30) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_40) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_50)
+                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_60) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_70) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_75)
+                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_80) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_90))).OrderBy(item => item.CmykC).ToList();
 
                     if (ListCyan.Count > 0)
                     {
@@ -1871,7 +1869,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                             ThresholdTop = Convert.ToDouble(ListCyan[i].TargetDotGain) + ThresholdValue;
                             ThresholdBottom = Convert.ToDouble(ListCyan[i].TargetDotGain) - ThresholdValue;
-                            
+
                             //CHRT_DotgainISOCyan.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListCyan[i].CmykC.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
                             if ((Convert.ToDouble(ListCyan[i].CmykC.ToString()) > 0 && Convert.ToDouble(ListCyan[i].CmykC.ToString()) < 100 && ThresholdValue > 0) || Convert.ToDouble(ListCyan[i].CmykC.ToString()) == 0 || Convert.ToDouble(ListCyan[i].CmykC.ToString()) == 100)//---If ThresholdValue is 0, then don't make entry on chart, because it will display screwy spread (Only if it is not starting 0 or ending 100 point patch)
                             {
@@ -1891,7 +1889,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     //Filter DT1 = "(PatchTypeID in (2,8,19,20,21))";
                     List<AnalyzeChart_DotGain> ListMagenta = new List<AnalyzeChart_DotGain>();
-                   // ListMagenta = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Three_Quarter_Tone))).OrderBy(item => item.CmykM).ToList();
+                    // ListMagenta = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Three_Quarter_Tone))).OrderBy(item => item.CmykM).ToList();
                     ListMagenta = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Three_Quarter_Tone)
                                                || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_10) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_20) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_25)
                                                || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_30) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_40) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_50)
@@ -2123,7 +2121,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #region Spread Spline Range (green boundries)
                 if (DTSpreadSplineRange != null && DTSpreadSplineRange.Count > 0)
                 {
-                   // CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(0), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
+                    // CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(0), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
                     for (int i = 0; i < DTSpreadSplineRange.Count; i++)
                     {
                         if (DTSpreadSplineRange[i].UpperLimit != 0 && DTSpreadSplineRange[i].LowerLimit != 0) //When chart has 20-40-60-80 patches then dont display 25-50-75 patches and vice versa
@@ -2131,7 +2129,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].TVI.ToString())), Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].UpperLimit.ToString())), Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].LowerLimit.ToString())));
                         }
                     }
-                   // CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(100), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
+                    // CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(100), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
                 }
                 #endregion
 
@@ -2141,9 +2139,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     rgChromVariation.DataSource = DTMaxSpreasTable;
                     rgChromVariation.DataBind();
                 }
-               
+
                 #endregion
-             
+
                 FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_SummaryISODotgain.ImageLocation) + "." + CHRT_SummaryISODotgain.ImageType;
                 CHRT_SummaryISODotgain.SaveImage(Server.MapPath(FileName));
             }
@@ -2167,7 +2165,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 CHRT_SummaryISODotgain_CMYK.Series["Series2Point"].Points.Clear();
                 CHRT_SummaryISODotgain_CMYK.Series["Series3Point"].Points.Clear();
                 CHRT_SummaryISODotgain_CMYK.Series["Series4Point"].Points.Clear();
-             
+
                 #endregion
 
                 #region Dotgain Spread CMYK Chart
@@ -2219,7 +2217,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 #endregion
 
-             
+
                 FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_SummaryISODotgain_CMYK.ImageLocation) + "." + CHRT_SummaryISODotgain_CMYK.ImageType;
                 CHRT_SummaryISODotgain_CMYK.SaveImage(Server.MapPath(FileName));
             }
@@ -2795,7 +2793,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             labelXML = labelXML.Replace("locAct", GetResourceString(_reclocLabelAct));
             labelXML = labelXML.Replace("locSignature", GetResourceString(_reclocLabelSignature));
             labelXML = labelXML.Replace("locDate", GetResourceString(_reclocLabelDate));
-            
+
             //Replace 5 sensitive characters of XML before passing them
             Regex badAmpersand = new Regex("&(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
             Regex badLessThan = new Regex("<(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
@@ -2818,14 +2816,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             labelXML = labelXML.Replace("[dEType]", measurmentSummary.dEMethod);
             labelXML = labelXML.Replace("[PageOrSurface]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.PageOrSurface, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if PageOrSurface contains "&" letter or rest of 4 letters
             labelXML = labelXML.Replace("[JDFJobId]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.JDFJobId, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if JDFJobId contains "&" letter or rest of 4 letters
-            //labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
-            //labelXML = labelXML.Replace("[Device]", SessionManager.Instance.CurrentDevice.DeviceName);
-            //labelXML = labelXML.Replace("[Metric]", measurmentSummary.MetricTargetPresetName);
-            //labelXML = labelXML.Replace("[PrintStandard]", measurmentSummary.PrintStandardType);
-            //labelXML = labelXML.Replace("[Customer]", measurmentSummary.Customer);
-            //labelXML = labelXML.Replace("[PageOrSurface]", measurmentSummary.PageOrSurface);
-            //labelXML = labelXML.Replace("[JDFJobId]", measurmentSummary.JDFJobId);
-            
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[Device]", SessionManager.Instance.CurrentDevice.DeviceName);
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[Metric]", measurmentSummary.MetricTargetPresetName);
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[PrintStandard]", measurmentSummary.PrintStandardType);
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[Customer]", measurmentSummary.Customer);
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[PageOrSurface]", measurmentSummary.PageOrSurface);
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[JDFJobId]", measurmentSummary.JDFJobId);
+
             System.Text.StringBuilder metricName = new StringBuilder();
             System.Text.StringBuilder metricTol = new StringBuilder();
             System.Text.StringBuilder metricActual = new StringBuilder();
@@ -2992,7 +2990,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgPatchDetails_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             MeasurementId = 0;
-            
+
             if (hdMeasurement.Value != "" && hdMeasurement.Value != "0")
             {
                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above                   
@@ -3036,7 +3034,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     #endregion
                 }
-            } 
+            }
         }
 
         protected void rgPatchDetails_ItemDataBound(object sender, GridItemEventArgs e)
@@ -3371,12 +3369,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     for (int i = 0; i < dtFilteredPatchDetails.Rows.Count; i++)
                     {
                         sw.WriteLine(@"            <cc:Object ObjectType=""Standard"" Name=" + qt + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + qt + " Id=" + qt + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + qt + ">");
-                        sw.WriteLine(@"                <cc:CreationDate>" + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss")+ "</cc:CreationDate>");
+                        sw.WriteLine(@"                <cc:CreationDate>" + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss") + "</cc:CreationDate>");
                         sw.WriteLine(@"                <cc:ColorValues>");
                         sw.WriteLine(@"                    <cc:ColorCIELab ColorSpecification=""M0"">");
-                        sw.WriteLine(@"                        <cc:L>" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() +"</cc:L>");
-                        sw.WriteLine(@"                        <cc:a>" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() +"</cc:a>");
-                        sw.WriteLine(@"                        <cc:b>" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() +"</cc:b>");
+                        sw.WriteLine(@"                        <cc:L>" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "</cc:L>");
+                        sw.WriteLine(@"                        <cc:a>" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "</cc:a>");
+                        sw.WriteLine(@"                        <cc:b>" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "</cc:b>");
                         sw.WriteLine(@"                    </cc:ColorCIELab>");
                         sw.WriteLine(@"                </cc:ColorValues>");
                         sw.WriteLine(@"            </cc:Object>");
@@ -3456,7 +3454,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        protected void chk1DMeasurementSmoothing_CheckedChanged(object sender, EventArgs e) 
+        protected void chk1DMeasurementSmoothing_CheckedChanged(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject.Is1DMeasurementSmoothing = chk1DMeasurementSmoothing.Checked;
         }
@@ -3549,7 +3547,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IsAverageOfMeasurements = chkAnalyzeAverageOfMeasurements.Checked;
             }
         }
-      
+
         public bool Is1DMeasurementSmoothing
         {
             get

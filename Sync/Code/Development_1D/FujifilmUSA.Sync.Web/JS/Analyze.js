@@ -236,11 +236,10 @@ $(document).ready(function () {
     var measurementID = parseInt($hdMeasurement);
 
     if (!$selectedDeltaE) {
-        if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+        if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
             $selectedDeltaE = $('#hdnDefaultSelectedDelta').val();
         }
         else {
-            
             $selectedDeltaE = 'E2000';  //set default value for sync1D projects
         }
     }
@@ -301,7 +300,9 @@ $(document).ready(function () {
         BindTVICharts();
     }
 
-    BindDeltaSummaryStatesChart();
+    if ($hdnCurrentDlpSubOperation != ELicenseType.Sync1D && $hdnCurrentDlpSubOperation != ELicenseType.Validation) {
+        BindDeltaSummaryStatesChart();
+    }
 
     $imgEyeABCompLarge.on('click', function (e) {
         e.preventDefault();
@@ -2302,7 +2303,6 @@ function PopulateAnalyzeChart() {
                 }
             });
         });
-        console.log(patchArray);
     }
 
 
@@ -2595,7 +2595,9 @@ function PopulateInkPaperChartABComparision() {
         case (maxDeltaLimit >= 10 && maxDeltaLimit < 15): maxValue = 15; marginValue = 3; break;
         case (maxDeltaLimit >= 15 && maxDeltaLimit < 20): maxValue = 20; marginValue = 5; break;
         case (maxDeltaLimit >= 20 && maxDeltaLimit < 30): maxValue = 30; marginValue = 5; break;
-        case (maxDeltaLimit >= 30): maxValue = 50; marginValue = 5; break;
+        case (maxDeltaLimit >= 30 && maxDeltaLimit < 40): maxValue = 40; marginValue = 5; break;
+        case (maxDeltaLimit >= 40 && maxDeltaLimit < 50): maxValue = 50; marginValue = 5; break;
+        case (maxDeltaLimit >= 50): maxValue = 50; marginValue = 5; break;
     }
 
     //generate the second stacked chart by max value
