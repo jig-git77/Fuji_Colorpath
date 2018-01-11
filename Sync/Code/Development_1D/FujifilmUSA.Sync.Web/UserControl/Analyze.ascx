@@ -2276,11 +2276,7 @@
                                         </div>
                                         <div class="combopart" style="position: relative;">
                                             <div class="chart-loading"></div>
-                                            <div class="float_l" style="padding-left: 10px;">
-
-                                                <asp:Button ID="btnGeneratePDF" ClientIDMode="Static" runat="server" Text="Generate PDF Report" />
-
-                                                <br />
+                                            <div class="float_l" style="padding-left: 10px;">                                                
                                                 <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color: White;">
                                                     <tr>
                                                         <td style="width: 45%;" valign="top" class="CHARTTABLE">
@@ -3278,6 +3274,9 @@
                                     <div class="tab_middle">
                                         <div class="combopart">
                                             <div class="float_l" style="padding-left: 10px;">
+                                                <br />
+                                                <asp:Button ID="btnGeneratePDF" ClientIDMode="Static" runat="server" Text="Generate PDF Report" />
+                                                <br />
                                                 <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                                                     <ContentTemplate>
 

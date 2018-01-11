@@ -342,12 +342,7 @@ $(document).ready(function () {
             BGrayBalanceChart: ''
         };
 
-        //chartContent.ABComparisionSpiderChart = GetABComparisionSpiderChartImage();
-        //chartContent.ABActualTargetChart = GetActualVsTargetChartImage();
-        //chartContent.LComparisionChart = GetLComparisionChartImage();
-        //chartContent.LGrayBalanceChart = Get_L_BalanceChartImage();
-        //chartContent.AGrayBalanceChart = Get_A_BalanceChartImage();
-        //chartContent.BGrayBalanceChart = Get_B_BalanceChartImage();
+     
 
         var apiParameter = {
             //chart: chartContent,
@@ -366,17 +361,40 @@ $(document).ready(function () {
             LGrayBalanceChart: '',
             AGrayBalanceChart: '',
             BGrayBalanceChart: '',
-            DeltaSummaryChart: ''
+            DeltaSummaryChart: '',
+            InkPaperLAB1Chart: '',
+            InkPaperLAB2Chart: '',
+            InkPaperDansityChart: '',
+            TVI_ISO_CMYK_Chart: '',
+            TVI_ISO_Cyan_Chart: '',
+            TVI_ISO_Magenta_Chart: '',
+            TVI_ISO_Yellow_Chart: '',
+            TVI_ISO_Black_Chart: '',
         };
 
         apiParameter.ABComparisionSpiderChart = GetABComparisionSpiderChartImage();
         apiParameter.InkPaperPatchChart = GetInkPaperPatchChartImage();
-        apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
+
+        if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+            apiParameter.DeltaSummaryChart = '';
+        } else {
+            apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
+        }
+        
         //apiParameter.ABActualTargetChart = GetActualVsTargetChartImage();
         //apiParameter.LComparisionChart = GetLComparisionChartImage();
-        //apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
-        //apiParameter.AGrayBalanceChart = Get_A_BalanceChartImage();
-        //apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
+        apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
+        apiParameter.AGrayBalanceChart = Get_A_BalanceChartImage();
+        apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
+        apiParameter.InkPaperLAB1Chart = Get_InkPaperChartLAB_OneChartImage();
+        apiParameter.InkPaperLAB2Chart = Get_InkPaperChartLAB_TwoChartImage();
+        apiParameter.InkPaperDansityChart = Get_InkPaperChartDansityChartImage();
+
+        apiParameter.TVI_ISO_CMYK_Chart = Get_TVI_ISO_CMYK_ChartImage();
+        apiParameter.TVI_ISO_Cyan_Chart = Get_TVI_ISO_CYAN_ChartImage();
+        apiParameter.TVI_ISO_Magenta_Chart = Get_TVI_ISO_MAGENTA_ChartImage();
+        apiParameter.TVI_ISO_Yellow_Chart = Get_TVI_ISO_YELLOW_ChartImage();
+        apiParameter.TVI_ISO_Black_Chart = Get_TVI_ISO_BLACK_ChartImage();
 
         $.ajax({
             url: SERVICE_BASE_URL + 'api/Report/ExportPrepressSingleMeasurementReportTest',
@@ -4252,6 +4270,57 @@ function Get_B_BalanceChartImage() {
     //dummyChart.refresh();
     //return dummyChart.imageDataURL();
 }
+
+////**************** GET IMAGE OF INK PAPER CHART LAB ONE CHART FOR REPORT  ****************////
+function Get_InkPaperChartLAB_OneChartImage() {
+    var chart = $divChartInkPaperPaperLab1.data("kendoChart");
+    return chart.imageDataURL();
+}
+
+////**************** GET IMAGE OF INK PAPER CHART LAB TWO CHART FOR REPORT  ****************////
+function Get_InkPaperChartLAB_TwoChartImage() {
+    var chart = $divChartInkPaperPaperLab2.data("kendoChart");
+    return chart.imageDataURL();
+}
+
+////**************** GET IMAGE OF INK PAPER DANSITY CHART FOR REPORT  ****************////
+function Get_InkPaperChartDansityChartImage() {
+    var chart = $divChartInkPaperDansityChart.data("kendoChart");
+    return chart.imageDataURL();
+}
+
+
+////**************** GET IMAGE OF TVI ISO CMYK CHART FOR REPORT  ****************////
+function Get_TVI_ISO_CMYK_ChartImage() {
+    var chart = $divChartTVIISO_CMYK.data("kendoChart");
+    return chart.imageDataURL();
+}
+
+
+////**************** GET IMAGE OF TVI ISO CYAN CHART FOR REPORT  ****************////
+function Get_TVI_ISO_CYAN_ChartImage() {
+    var chart = $divChartTVIISO_CYAN.data("kendoChart");
+    return chart.imageDataURL();
+}
+
+////**************** GET IMAGE OF TVI ISO MAGENTA CHART FOR REPORT  ****************////
+function Get_TVI_ISO_MAGENTA_ChartImage() {
+    var chart = $divChartTVIISO_Magenta.data("kendoChart");
+    return chart.imageDataURL();
+}
+
+////**************** GET IMAGE OF TVI ISO YELLOW CHART FOR REPORT  ****************////
+function Get_TVI_ISO_YELLOW_ChartImage() {
+    var chart = $divChartTVIISO_Yellow.data("kendoChart");
+    return chart.imageDataURL();
+}
+
+////**************** GET IMAGE OF TVI ISO BLACK CHART FOR REPORT  ****************////
+function Get_TVI_ISO_BLACK_ChartImage() {
+    var chart = $divChartTVIISO_Black.data("kendoChart");
+    return chart.imageDataURL();
+}
+
 
 ////**************** GET IMAGE OF DELTA SUMMARY CHART FOR REPORT  ****************////
 function Get_DeltaSummaryChartImage() {

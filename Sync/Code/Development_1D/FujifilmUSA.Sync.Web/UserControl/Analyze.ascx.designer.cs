@@ -1264,15 +1264,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.DataVisualization.Charting.Chart chartB;
         
         /// <summary>
-        /// btnGeneratePDF control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGeneratePDF;
-        
-        /// <summary>
         /// Localize4 control.
         /// </summary>
         /// <remarks>
@@ -1748,6 +1739,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locFilterMetricSumTemplate;
+        
+        /// <summary>
+        /// btnGeneratePDF control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGeneratePDF;
         
         /// <summary>
         /// UpdatePanel6 control.

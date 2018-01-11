@@ -208,7 +208,7 @@ namespace FujifilmUSA.Sync.Common
 
                 //========== Leave 30 Px on top of next page ==========//
                 theDoc.Rect.Inset(0, 1);
-             
+
                 //========== Loops till the paging ==========//
                 while (true)
                 {
@@ -284,16 +284,34 @@ namespace FujifilmUSA.Sync.Common
         {
             try
             {
+                string FileName = "Templates/kendoPrepressSingleMeasurement.htm";
                 //CSSPath = this.BaseWebURL + "Templates/style.css";
                 CSSPath = strServerStyleSheet;
-                string FilePath= this._WebURL + "Templates/kendoPrepressSingleMeasurement.htm";
+                if (ReportType == 16) //----For G7 Opti / Validation Report + 4D G7 validation report
+                {
+                    FileName = "Templates/PrepressSingleMeasurement_G7.htm";
+                }
+                else if (ReportType == 17) //----For ISO Opti / Validation Report + 4D ISO validation report
+                {
+                    FileName = "Templates/kendoPrepressSingleMeasurement_ISO.htm";
+                }
+                else if (ReportType == 18) //----For Default mode in Sync1D ISO, G7 or 4D validation project as choice of MTP
+                {
+                    FileName = "Templates/PrepressSingleMeasurement_Default.htm";
+                }
+                else if (ReportType == 19) //----For Default mode in Sync4D validation project for Scoring report
+                {
+                    FileName = "Templates/ScoringMeasurement_Default.htm";
+                }
+
+                string FilePath = this._WebURL + FileName;
                 if (FilePath.Trim() == "")
                 {
                     throw new Exception("Please Enter Report Type.");
                 }
                 Doc theDoc = new Doc();
 
-                
+
                 //========== The rectangle for the content on pdf ==========//
                 theDoc.Rect.Left = 0;
                 theDoc.Rect.Bottom = 30;
@@ -326,7 +344,7 @@ namespace FujifilmUSA.Sync.Common
 
                 theDoc.Rect.Inset(0, -1);
 
-                
+
 
                 string pth = PDFPath + PDF_NAME;
 
@@ -343,7 +361,7 @@ namespace FujifilmUSA.Sync.Common
                 throw;
             }
         }
-        
+
         #endregion
 
         #region Report 13 : Single Measureament Report
@@ -1119,10 +1137,101 @@ namespace FujifilmUSA.Sync.Common
                     SBStr.Replace("###DeltaEFormula###", Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim());
                     //SBStr.Replace("###OffsetNA###", Convert.ToString(DT.Rows[0]["LicenseTypeID"]).Trim() == "2" ? "(N/A)" : "&nbsp;"); //----Display "N/A" in offset printing data label for Sync 4D project types---//
 
+                    if (ReportType == 16 || ReportType == 17 || ReportType == 18 || ReportType == 19)
+                    {
+                        if (IsValidation) //Only show Measurement Status in Validation mode in G7/ ISO / Default/ 4D
+                        {
+                            SBStr.Replace("###JobStatus###", Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() == "" ? "<tr class='row-2'><td class='row-title'>Meas. Status:</td><td class='row-content'>&nbsp;</td></tr>" : (Convert.ToString(DT.Rows[0]["JobStatus"]).Contains("OK")) ? "<tr class='row-2'><td class='row-title'>Meas. Status:</td><td class='row-content'>" + Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() + "</td></tr>" : "<tr class='row-2'><td class='row-title'  style='color:Red;'>Meas. Status:</td><td class='row-content'  style='color:Red;'>" + Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() + "</td></tr>");
+                            SBStr.Replace("###RunNo###", "&nbsp;");   //-----In validation report there is no run numbers-------//
+                            SBStr.Replace("##ReportTitle##", "G7VAlignmentReportTitle");
+                        }
+                        else
+                        {
+                            SBStr.Replace("###JobStatus###", "&nbsp;");
+                            SBStr.Replace("###RunNo###", "(" + (Convert.ToString(DT.Rows[0]["RunName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["RunName"]).Trim()) + ")");
+                            SBStr.Replace("##ReportTitle##", "G7AlignmentReportTitle");
+                        }
+                        SBStr.Replace("###MetricPreset###", Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim());
+                        SBStr.Replace("###CompanyName###", Convert.ToString(DT.Rows[0]["CompanyName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["CompanyName"]).Trim());
+                        SBStr.Replace("###BranchName###", Convert.ToString(DT.Rows[0]["BranchName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["BranchName"]).Trim());
+                        SBStr.Replace("###PressName###", Convert.ToString(DT.Rows[0]["DeviceName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeviceName"]).Trim());
+                        SBStr.Replace("###ProjectName###", Convert.ToString(DT.Rows[0]["ProjectName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ProjectName"]).Trim());
+                        SBStr.Replace("###CurrentDate###", System.DateTime.Now.ToString("dddd, MMMM dd, yyyy"));
+
+                        if (ReportType == 16) //--------For G7 Report
+                        {
+                            SBStr.Replace("###MeasurementType###", Convert.ToString(DT.Rows[0]["MeasurementName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MeasurementName"]).Trim().Contains("Averaging") == true ? "This report details an average of measurements." : "This report details a single measurement.");
+                            SBStr.Replace("###Technician###", Convert.ToString(DT.Rows[0]["TechnicianName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["TechnicianName"]).Trim());
+                            SBStr.Replace("###MeasurementDevice###", Convert.ToString(DT.Rows[0]["InstrumentType"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["InstrumentType"]).Trim());
+                            SBStr.Replace("###SerialNumber###", Convert.ToString(DT.Rows[0]["SerialNumber"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["SerialNumber"]).Trim());
+                            SBStr.Replace("###UVMode###", Convert.ToString(DT.Rows[0]["UVMode"]).Trim() == "" ? "&nbsp;" : 'M' + Convert.ToString(DT.Rows[0]["UVMode"]).Trim());
+                            SBStr.Replace("###DLPChart###", Convert.ToString(DT.Rows[0]["ChartName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ChartName"]).Trim());
+                            SBStr.Replace("###OptiChart###", Convert.ToString(DT.Rows[0]["OPTChartName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["OPTChartName"]).Trim());
+                            SBStr.Replace("###InkOrder###", Convert.ToString(DT.Rows[0]["InkOrder"]).Trim() == "" ? "&nbsp;" : Convert.ToString((Entity.EInkOrder)Convert.ToInt16(DT.Rows[0]["InkOrder"])).Trim());
+                            SBStr.Replace("###Fountain###", Convert.ToString(DT.Rows[0]["FountainSolution"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["FountainSolution"]).Trim());
+                            SBStr.Replace("###Blanket###", Convert.ToString(DT.Rows[0]["Blanket"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["Blanket"]).Trim());
+                            SBStr.Replace("###BlanketAge###", Convert.ToString(DT.Rows[0]["BlanketAge"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["BlanketAge"]).Trim());
+                            SBStr.Replace("###Screening###", Convert.ToString(DT.Rows[0]["Screening"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["Screening"]).Trim());
+                            SBStr.Replace("###Coating###", Convert.ToString(DT.Rows[0]["Coating"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["Coating"]).Trim());
+                            SBStr.Replace("###Notes###", Convert.ToString(DT.Rows[0]["Notes"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["Notes"]).Trim());
+                        }
+                    }
                 }
-                SBStr.Replace("###TargetVersusActualAB###", this.chartContent.ABComparisionSpiderChart);
+                else
+                {
+                    SBStr.Replace("###JobName###", "&nbsp;");
+                    SBStr.Replace("###ProjectName###", "&nbsp;");
+                    SBStr.Replace("###Device###", "&nbsp;");
+                    SBStr.Replace("###TimeStamp###", "&nbsp;");
+                    SBStr.Replace("###OptimizedDLP###", "&nbsp;");
+                    SBStr.Replace("###PrintTarget###", "&nbsp;");
+                    SBStr.Replace("###Media###", "&nbsp;");
+                    SBStr.Replace("###Colorant###", "&nbsp;");
+                    SBStr.Replace("###RipSettings###", "&nbsp;");
+                    SBStr.Replace("###Location###", "&nbsp;");
+                    SBStr.Replace("###DeltaEFormula###", "&nbsp;");
+
+                    //--------For G7 / ISO / Default Reports OR 4D Validation Scoring Report
+                    if (ReportType == 16 || ReportType == 17 || ReportType == 18 || ReportType == 19)
+                    {
+                        if (IsValidation) //Only show Measurement STatus in Validation mode in G7/ ISO / Default/ 4D
+                            SBStr.Replace("###JobStatus###", "<tr class='row-2'><td class='row-title'>Meas. Status:</td><td class='row-content'>&nbsp;</td></tr>");
+                        else
+                            SBStr.Replace("###JobStatus###", "&nbsp;");
+
+                        SBStr.Replace("###MetricPreset###", "&nbsp;");
+                        SBStr.Replace("###CompanyName###", "&nbsp;");
+                        SBStr.Replace("###BranchName###", "&nbsp;");
+                        SBStr.Replace("###PressName###", "&nbsp;");
+                        SBStr.Replace("###ProjectName###", "&nbsp;");
+
+                        if (ReportType == 16) //--------For G7 Report
+                        {
+                            SBStr.Replace("###Technician###", "&nbsp;");
+                            SBStr.Replace("###MeasurementDevice###", "&nbsp;");
+                            SBStr.Replace("###SerialNumber###", "&nbsp;");
+                            SBStr.Replace("###UVMode###", "&nbsp;");
+                            SBStr.Replace("###DLPChart###", "&nbsp;");
+                            SBStr.Replace("###OptiChart###", "&nbsp;");
+                            SBStr.Replace("###InkOrder###", "&nbsp;");
+                            SBStr.Replace("###Fountain###", "&nbsp;");
+                            SBStr.Replace("###Blanket###", "&nbsp;");
+                            SBStr.Replace("###BlanketAge###", "&nbsp;");
+                            SBStr.Replace("###Screening###", "&nbsp;");
+                            SBStr.Replace("###Coating###", "&nbsp;");
+                            SBStr.Replace("###Notes###", "&nbsp;");
+                        }
+                    }
+                }
+
+
                 #endregion
 
+                // === Table 1 = Chart of Target Vs Actual AB Plot === //           
+                #region ==== Target Vs Actual AB Plot ====
+                SBStr.Replace("###TargetVersusActualAB###", this.chartContent.ABComparisionSpiderChart);
+                #endregion
+                
                 #region ==== Summary Delta E Value Graph Image ====
                 DT = DS_Common.Tables[3];
                 StringBuilder SBstrDeltaEValue = new StringBuilder();
@@ -1375,6 +1484,344 @@ namespace FujifilmUSA.Sync.Common
                     #endregion
                 }
 
+                if (ReportType == 17 || ReportType == 18 || ReportType == 19)   //----For ISO Opti / Validation Report & 4D ISO validation report + Default mode report OR 4D Validation Scoring report
+                {
+                    // === Table 4 = Chart of Paper L*A*B* === //           
+                    #region ==== Paper  L*A*B* (Part 1)====
+                    SBStr.Replace("###PaperLab1###", this.chartContent.InkPaperLAB1Chart);
+                    #endregion
+
+                    // === Table 5 = Chart of Paper L*A*B* === //           
+                    #region ==== Paper  L*A*B* (Part 2)====
+                    SBStr.Replace("###PaperLab2###", this.chartContent.InkPaperLAB2Chart);
+                    #endregion
+
+                    if (ReportType == 17) //For ISO Opti / Validation Report & 4D ISO validation report
+                    {
+                        // === Table 6 = Chart of Density === //           
+                        #region ==== Density ====
+                        SBStr.Replace("###DensityChart###", this.chartContent.InkPaperDansityChart);
+                        #endregion
+
+                        // === Table 7 = Chart of TVISpread === //           
+                        #region ==== TVISpread ====
+                        SBStr.Replace("###TVISpread###", this.chartContent.TVI_ISO_CMYK_Chart);
+                        #endregion
+
+                        // === Table 8 = Chart of TVISpread Data === //           
+                        #region ==== TVISpreadData ====
+                        DT = DS_Common.Tables[4];
+
+                        StringBuilder SBstrTVIPatch = new StringBuilder();
+                        StringBuilder SBstrTVIPatchVariation = new StringBuilder();
+
+
+                        SBstrTVIPatch.Append("<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0'>");
+                        SBstrTVIPatch.Append("<tr class='row-1' style='BACKGROUND-COLOR:#333333;COLOR:#FFF;'>");
+                        SBstrTVIPatchVariation.Append("<tr class='row-1'>");
+
+                        StringBuilder SBstrDeltaValue1 = new StringBuilder();
+                        if (DT != null && DT.Rows.Count > 0)
+                        {
+                            //--------For ISO / 4D Validation ISO Reports
+
+
+                            if (Convert.ToDecimal(DT.Rows[0]["Tone20"]) != 0)
+                            {
+
+                                SBstrTVIPatch.Append("<td valign='middle' align='left'  class='row-content1'> Tone20 </td>");
+
+                                SBstrTVIPatchVariation.Append("<td valign='middle' align='left'  class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone20"])) + "&nbsp;</td>");
+
+                            }
+                            if (Convert.ToDecimal(DT.Rows[0]["Tone25"]) != 0)
+                            {
+
+                                SBstrTVIPatch.Append("<td valign='middle' align='left'  class='row-content1'> Tone25 </td>");
+
+                                SBstrTVIPatchVariation.Append("<td valign='middle' align='left'   class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone25"])) + "&nbsp;</td>");
+
+                            }
+                            if (Convert.ToDecimal(DT.Rows[0]["Tone40"]) != 0)
+                            {
+
+                                SBstrTVIPatch.Append("<td valign='middle' align='left'  class='row-content1'> Tone40 </td>");
+
+                                SBstrTVIPatchVariation.Append("<td valign='middle' align='left' class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone40"])) + "&nbsp;</td>");
+
+                            }
+                            if (Convert.ToDecimal(DT.Rows[0]["Tone50"]) != 0)
+                            {
+
+                                SBstrTVIPatch.Append("<td valign='middle' align='left'  class='row-content1'> Tone50 </td>");
+
+                                SBstrTVIPatchVariation.Append("<td valign='middle' align='left'  class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone50"])) + "&nbsp;</td>");
+                            }
+                            if (Convert.ToDecimal(DT.Rows[0]["Tone60"]) != 0)
+                            {
+                                SBstrTVIPatch.Append("<td valign='middle' align='left' class='row-content1'> Tone60 </td>");
+
+                                SBstrTVIPatchVariation.Append("<td valign='middle' align='left'  class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone60"])) + "&nbsp;</td>");
+
+                            }
+                            if (Convert.ToDecimal(DT.Rows[0]["Tone75"]) != 0)
+                            {
+                                SBstrTVIPatch.Append("<td valign='middle' align='left'  class='row-content1'> Tone75 </td>");
+
+                                SBstrTVIPatchVariation.Append("<td valign='middle' align='left'  class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone75"])) + "&nbsp;</td>");
+
+                            }
+                            if (Convert.ToDecimal(DT.Rows[0]["Tone80"]) != 0)
+                            {
+                                SBstrTVIPatch.Append("<td valign='middle' align='left' class='row-content1'> Tone80 </td>");
+
+                                SBstrTVIPatchVariation.Append("<td valign='middle' align='left'  class='row-content1'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Tone80"])) + "&nbsp;</td>");
+
+                            }
+                            SBstrTVIPatch.Append("</tr>");
+                            SBstrTVIPatchVariation.Append("</tr>");
+
+                        }
+                        SBStr.Replace("###TVISpreadData###", SBstrTVIPatch.ToString() + SBstrTVIPatchVariation.ToString() + "</table>");
+                        #endregion
+
+                        // === Table 9 = Chart of CyanTVI === //           
+                        #region ==== CyanTVI ====
+                        SBStr.Replace("###CyanTVI###", this.chartContent.TVI_ISO_Cyan_Chart);
+                        #endregion
+
+                        // === Table 10 = Chart of MagentaTVI === //           
+                        #region ==== MagentaTVI ====
+                        SBStr.Replace("###MagentaTVI###", this.chartContent.TVI_ISO_Magenta_Chart);
+                        #endregion
+
+                        // === Table 11 = Chart of YellowTVI === //           
+                        #region ==== YellowTVI ====
+                        SBStr.Replace("###YellowTVI###", this.chartContent.TVI_ISO_Yellow_Chart);
+                        #endregion
+
+                        // === Table 12 = Chart of BlackTVI === //           
+                        #region ==== BlackTVI ====
+                        SBStr.Replace("###BlackTVI###", this.chartContent.TVI_ISO_Black_Chart);
+                        #endregion
+
+                        // === Table 13 = >Gray Balance L*a*b* === //           
+                        #region ==== Gray LAB* ====
+                        SBStr.Replace("###GrayL###", this.chartContent.LGrayBalanceChart);
+                        SBStr.Replace("###GrayA###", this.chartContent.AGrayBalanceChart);
+                        SBStr.Replace("###GrayB###", this.chartContent.BGrayBalanceChart);
+                        #endregion
+                    }
+                    else if (ReportType == 18 || ReportType == 19) //For Default mode report OR 4D Validation Scoring Report
+                    {
+                        // === Table 13 = >Gray Balance L*a*b* === //           
+                        #region ==== Gray LAB* ====
+                        //SBStr.Replace("###GrayL###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_LChart.Jpeg"));
+                        //SBStr.Replace("###GrayA###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_AChart.Jpeg"));
+                        //SBStr.Replace("###GrayB###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_BChart.Jpeg"));
+                        #endregion
+                    }
+                }
+
+                //--------For G7 / All Validation Report
+                if (ReportType == 16)
+                {
+                    // === Table 4 = for Chart of Gray ΔCh === //           
+                    #region ==== Gray ΔCh Chart ====
+                    SBStr.Replace("###ResultSummary_DeltaChImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_DeltaChChart.Jpeg"));
+                    #endregion
+
+                    // === Table 5 = for Chart of Black ΔL === //           
+                    #region ==== Black ΔL Chart ====
+                    SBStr.Replace("###ResultSummary_BlackDeltaLImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_BlackDeltaLChart.Jpeg"));
+                    #endregion
+
+                    // === Table 6 = for Chart of Gray ΔL === //           
+                    #region ==== Gray ΔL Chart ====
+                    SBStr.Replace("###ResultSummary_GrayDeltaLImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_GrayDeltaLChart.Jpeg"));
+                    #endregion
+
+                    // === Table 7 = for Chart of Gray Balance L* === //           
+                    #region ==== Gray Balance L* Chart ====
+                    SBStr.Replace("###ResultSummary_GrayLImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_LChart.Jpeg"));
+                    #endregion
+
+                    // === Table 8 = for Chart of Gray Balance a* === //           
+                    #region ==== Gray Balance a* Chart ====
+                    SBStr.Replace("###ResultSummary_GrayaImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_AChart.Jpeg"));
+                    #endregion
+
+                    // === Table 9 = for Chart of Gray Balance b* === //           
+                    #region ==== Gray Balance b* Chart ====
+                    SBStr.Replace("###ResultSummary_GraybImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_BChart.Jpeg"));
+                    #endregion
+
+                    // === Table 10 = for Chart of Black NPD === //           
+                    #region ==== Black NPD Chart ====
+                    SBStr.Replace("###ResultSummary_BlackNPDImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_BlackNPD.Jpeg"));
+                    #endregion
+
+                    // === Table 11 = for Chart of Gray NPD === //           
+                    #region ==== Gray NPD Chart ====
+                    SBStr.Replace("###ResultSummary_GrayNPDImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_GrayNPD.Jpeg"));
+                    #endregion
+
+                    //-------Extra items for new G7 formatted reports--------------//
+                    SBStr.Replace("###DensityChart###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_Density.Jpeg"));
+                    SBStr.Replace("###ABComparison###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page4_Gamut_ABComparison.Jpeg"));
+                    SBStr.Replace("###LComparison###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page4_Gamut_LComparison.Jpeg"));
+                    SBStr.Replace("###ResultSummary_TVIImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page4_CHRT_SummaryTVI.Jpeg"));
+
+                    //------Region: for Density Data----//
+                    DT = DS_Common.Tables[5];
+
+                    StringBuilder SBstrDeltaValue = new StringBuilder();
+                    StringBuilder SBstrDeltaValue1 = new StringBuilder();
+                    StringBuilder SBstrDeltaValue2 = new StringBuilder();
+
+                    if (DT != null && DT.Rows.Count > 0)
+                    {
+                        int RowHeight = 12;
+
+                        SBstrDeltaValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-3' style='height: " + RowHeight + "px'>");
+                        SBstrDeltaValue1.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-4' style='height: " + RowHeight + "px'>");
+                        SBstrDeltaValue2.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-3' style='height: " + RowHeight + "px'>");
+                        SBstrDeltaValue.Append("<td valign='middle' align='left' class='Metadata-Table Green'> <p class='Body-Text-Bold'>Target</p></td>");
+                        SBstrDeltaValue1.Append("<td valign='middle' align='left' class='Metadata-Table Green'> <p class='Body-Text-Bold'>Actual</p></td>");
+                        SBstrDeltaValue2.Append("<td valign='middle' align='left' class='Metadata-Table Green'> <p class='Body-Text-Bold'>Previous</p></td>");
+                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[0]["DensityLimit"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["DensityLimit"]))) + "&nbsp;</p></td>");
+                        SBstrDeltaValue1.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[0]["Density"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Density"]))) + "&nbsp;</p></td>");
+                        SBstrDeltaValue2.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[0]["PreAvgDensity"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["PreAvgDensity"]))) + "&nbsp;</p></td>");
+
+                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[1]["DensityLimit"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[1]["DensityLimit"]))) + "&nbsp;</p></td>");
+                        SBstrDeltaValue1.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[1]["Density"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[1]["Density"]))) + "&nbsp;</p></td>");
+                        SBstrDeltaValue2.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[1]["PreAvgDensity"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[1]["PreAvgDensity"]))) + "&nbsp;</p></td>");
+
+                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[2]["DensityLimit"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[2]["DensityLimit"]))) + "&nbsp;</p></td>");
+                        SBstrDeltaValue1.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[2]["Density"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[2]["Density"]))) + "&nbsp;</p></td>");
+                        SBstrDeltaValue2.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[2]["PreAvgDensity"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[2]["PreAvgDensity"]))) + "&nbsp;</p></td>");
+
+                        SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[3]["DensityLimit"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[3]["DensityLimit"]))) + "&nbsp;</p></td>");
+                        SBstrDeltaValue1.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[3]["Density"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[3]["Density"]))) + "&nbsp;</p></td>");
+                        SBstrDeltaValue2.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + (Convert.ToString(DT.Rows[3]["PreAvgDensity"]) == "" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[3]["PreAvgDensity"]))) + "&nbsp;</p></td>");
+
+                        SBstrDeltaValue.Append("</tr>");
+                        SBstrDeltaValue1.Append("</tr>");
+                        SBstrDeltaValue2.Append("</tr>");
+
+                        SBstrDeltaValue.Append(SBstrDeltaValue1);
+                        if (!IsValidation) //----Don't add Previous run row into Validation report since there is no previous run in validation
+                        {
+                            SBstrDeltaValue.Append(SBstrDeltaValue2);
+                        }
+
+                        SBStr.Replace("###DensitySummaryDetails###", SBstrDeltaValue.ToString());
+                    }
+                    //------End Region: for Density Data--------//
+
+                    //------Region: for ∆E Primary Colorimetric Aims (Ink tab)-------//
+
+
+                    //------End Region: for ∆E Primary Colorimetric Aims (Ink tab)-------//
+                }
+
+                if (ReportType == 19) //---Only if 4D Validation Scoring Report
+                {
+                    // === Table 4.1 = Display Metrics with Average Scoring on list === //          
+                    #region ==== Metric Avg Scoring Graph Image ====
+
+                    DT = DS_MetricAvgScoring.Tables[0];
+
+                    StringBuilder SBstrMetricAvgScoring = new StringBuilder();
+                    decimal CMYKPrimaries = 0;
+                    decimal RGBSecondaries = 0;
+                    decimal dt_HGray = 0;
+                    decimal dt_EPaper = 0;
+
+                    if (DT != null && DT.Rows.Count > 0)
+                    {
+                        string strStatusImg = "";
+                        int RowHeight = 29;
+
+                        for (int i = 0; i < DT.Rows.Count; i++)
+                        {
+                            SBstrMetricAvgScoring.Append("<tr style='height: " + RowHeight + "px'>");
+                            SBstrMetricAvgScoring.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
+                            SBstrMetricAvgScoring.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>" + DT.Rows[i]["Color"] + "</td>");
+                            SBstrMetricAvgScoring.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["AvgScore"])), 0) + "&nbsp;</td>");
+                            SBstrMetricAvgScoring.Append("</tr>");
+
+                            if (i >= 0 && i <= 3)
+                            {
+                                CMYKPrimaries = CMYKPrimaries + Convert.ToDecimal(DT.Rows[i]["AvgScore"]);
+                            }
+                            else if (i >= 4 && i <= 6)
+                            {
+                                RGBSecondaries = RGBSecondaries + Convert.ToDecimal(DT.Rows[i]["AvgScore"]);
+                            }
+                            else if (i >= 7 && i <= 9)
+                            {
+                                dt_HGray = dt_HGray + Convert.ToDecimal(DT.Rows[i]["AvgScore"]);
+                            }
+                            else if (i == 10)
+                            {
+                                dt_EPaper = dt_EPaper + Convert.ToDecimal(DT.Rows[i]["AvgScore"]);
+                            }
+                        }
+                        CMYKPrimaries = ((CMYKPrimaries) / 4);
+                        RGBSecondaries = ((RGBSecondaries) / 3);
+                        dt_HGray = ((dt_HGray) / 3);
+
+                        SBStr.Replace("###MetricAvgScoringDetail###", SBstrMetricAvgScoring.ToString());
+                        SBStr.Replace("###AvgScoringCMYKPrimaries###", Math.Round(CMYKPrimaries, 0).ToString());
+                        SBStr.Replace("###AvgScoringRGBSecondaries###", Math.Round(RGBSecondaries, 0).ToString());
+                        SBStr.Replace("###AvgScoringΔHGray###", Math.Round(dt_HGray, 0).ToString());
+                        SBStr.Replace("###AvgScoringPaperΔE###", Math.Round(dt_EPaper, 0).ToString());
+                        SBStr.Replace("###TotalScore###", Math.Round(((CMYKPrimaries + RGBSecondaries + dt_HGray + dt_EPaper) / 4), 0).ToString());
+                    }
+                    else
+                    {
+                        SBStr.Replace("###MetricAvgScoringDetail###", "");
+                        SBStr.Replace("###AvgScoringCMYKPrimaries###", "");
+                        SBStr.Replace("###AvgScoringRGBSecondaries###", "");
+                        SBStr.Replace("###AvgScoringΔHGray###", "");
+                        SBStr.Replace("###AvgScoringPaperΔE###", "");
+                        SBStr.Replace("###TotalScore###", "");
+                    }
+
+                    // === Table 4.2 = Display Scoring Measurement List === //          
+
+                    DT = DS_ScoringMeasurementList.Tables[0];
+
+                    StringBuilder SBstrScoringMeasurementList = new StringBuilder();
+                    if (DT != null && DT.Rows.Count > 0)
+                    {
+                        int RowHeight = 29;
+
+                        for (int i = 0; i < DT.Rows.Count; i++)
+                        {
+                            SBstrScoringMeasurementList.Append("<tr style='height: " + RowHeight + "px'>");
+                            SBstrScoringMeasurementList.Append("<td valign='middle' align='left' class='BottomBorder'>" + DT.Rows[i]["MeasurementID"] + "</td>");
+                            SBstrScoringMeasurementList.Append("<td valign='middle' align='left' class='BottomBorder'>" + DT.Rows[i]["Name"] + "</td>");
+                            SBstrScoringMeasurementList.Append("<td valign='middle' align='left' class='BottomBorder'>" + DT.Rows[i]["Date"] + "</td>");
+                            SBstrScoringMeasurementList.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["CMYKPri"])), 0) + "&nbsp;</td>");
+                            SBstrScoringMeasurementList.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["RGBSec"])), 0) + "&nbsp;</td>");
+                            SBstrScoringMeasurementList.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["GrayBalance"])), 0) + "&nbsp;</td>");
+                            SBstrScoringMeasurementList.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["Paper"])), 0) + "&nbsp;</td>");
+                            SBstrScoringMeasurementList.Append("<td valign='middle' align='center' class='BottomBorder'>" + Math.Round((Convert.ToDecimal(DT.Rows[i]["Overall"])), 0) + "&nbsp;</td>");
+                            SBstrScoringMeasurementList.Append("</tr>");
+                        }
+
+                        SBStr.Replace("###ScoringMeasurementList###", SBstrScoringMeasurementList.ToString());
+                    }
+                    else
+                    {
+                        SBStr.Replace("###ScoringMeasurementList###", "");
+                    }
+                    //SBStr.Replace("###ResultSummary_DeltaImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_ResultSummary_Delta.Jpeg"));
+                    #endregion
+                }
+
 
                 //SBStr.Replace("###LComparison###", this.chartContent.LComparisionChart);
                 //SBStr.Replace("###GrayL###", this.chartContent.LGrayBalanceChart);
@@ -1393,5 +1840,5 @@ namespace FujifilmUSA.Sync.Common
 
     }
 
-    
+
 }
