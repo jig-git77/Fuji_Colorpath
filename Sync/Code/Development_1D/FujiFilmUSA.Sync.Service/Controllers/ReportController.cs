@@ -148,10 +148,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         From_ΔE = Convert.ToString(chart.fromDeltaE);
                         ValidationType = Convert.ToInt32(chart.validationType);
 
-
-
-                        _presenterReportSingleMeasurement.GetReportDataOnMeasurement();
-
+                        
                         ReportPDF objReportPDF = new ReportPDF();
                         objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
 
@@ -163,31 +160,52 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         objReportPDF.From_ΔE = From_ΔE;
                         objReportPDF.IsValidation = IsVerification;
                         objReportPDF.DLPName = chart.ReportDLPName;
-                        objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_ISO;
-                        if (ValidationType == 0) //For Default mode in Sync1D ISO, G7 or 4D validation project as choice of MTP
-                        {
-                            objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_Default;
-                        }
-
-                        //code to set the report title
-                        if (IsVerification)
-                        {
-                            objReportPDF.ReportName = "Validation Report";
-                        }
-                        else if (IsSync1DType)
-                        {
-                            objReportPDF.ReportName = "Alignment Curves Report";
-                        }
-                        else
-                        {
-                            objReportPDF.ReportName = "DLP Optimization Report";
-                            objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement; //Only in 4D Optimization part
-                        }
-
                         //objReportPDF.ReportName = "Single Measurement Report";
                         //objReportPDF.DLPName = "DLP_NAME";
                         objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
-                        objReportPDF.DS_Common = DSReport;
+
+                        if (chart.validationType == 1)
+                        {
+                            //code to set the report title
+                            objReportPDF.ReportName = "Validation Report";
+                            if (IsSync1DType)
+                            {
+                                objReportPDF.ReportName = "Press Alignment Report";
+                            }
+
+
+                            DSReport_G7_Vali = new DataSet();
+                            _presenterReportSingleMeasurement.GetReportDataOnMeasurement_G7_Vali();
+                            objReportPDF.DS_Common = DSReport_G7_Vali;
+                            objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_G7;
+                        }
+                        else
+                        {
+                            objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_ISO;
+                            if (ValidationType == 0) //For Default mode in Sync1D ISO, G7 or 4D validation project as choice of MTP
+                            {
+                                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_Default;
+                            }
+                            //code to set the report title
+                            if (IsVerification)
+                            {
+                                objReportPDF.ReportName = "Validation Report";
+                            }
+                            else if (IsSync1DType)
+                            {
+                                objReportPDF.ReportName = "Alignment Curves Report";
+                            }
+                            else
+                            {
+                                objReportPDF.ReportName = "DLP Optimization Report";
+                                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement; //Only in 4D Optimization part
+                            }
+
+                            DSReport = new DataSet();
+                            _presenterReportSingleMeasurement.GetReportDataOnMeasurement();
+                            objReportPDF.DS_Common = DSReport;
+                        }
+
                         objReportPDF.GenerateClientReportPDF();
                         string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
                         httpResponse.status = ResponseStatus.Success;

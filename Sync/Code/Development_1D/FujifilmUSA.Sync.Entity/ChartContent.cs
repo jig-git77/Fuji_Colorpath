@@ -33,5 +33,14 @@ namespace FujifilmUSA.Sync.Entity
         public string TVI_ISO_Magenta_Chart { get; set; }
         public string TVI_ISO_Yellow_Chart { get; set; }
         public string TVI_ISO_Black_Chart { get; set; }
+
+        public string TVI_Summary_Chart { get; set; }
+
+        public string GrayBalanceDeltaCH_Chart { get; set; }
+        public string GrayBalanceDeltaL_Chart { get; set; }
+        public string BlackBalanceDeltaL_Chart { get; set; }
+
+        public string BlackNPDChart { get; set; }
+        public string GrayNPDChart { get; set; }
     }
 }

@@ -1974,6 +1974,7 @@
     <Content Include="Templates\PrepressSingleMeasurement_ISO.htm" />
     <Content Include="Templates\ScoringMeasurement_Default.htm" />
     <Content Include="Templates\style.css" />
+    <Content Include="Templates\kendoPrepressSingleMeasurement_G7.htm" />
     <Content Include="UserControl\AccessDenied.ascx" />
     <Content Include="UserControl\ActivityValidationRules.ascx" />
     <Content Include="UserControl\AddDeviceProfilerSettings.ascx" />

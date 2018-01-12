@@ -289,7 +289,7 @@ namespace FujifilmUSA.Sync.Common
                 CSSPath = strServerStyleSheet;
                 if (ReportType == 16) //----For G7 Opti / Validation Report + 4D G7 validation report
                 {
-                    FileName = "Templates/PrepressSingleMeasurement_G7.htm";
+                    FileName = "Templates/kendoPrepressSingleMeasurement_G7.htm";
                 }
                 else if (ReportType == 17) //----For ISO Opti / Validation Report + 4D ISO validation report
                 {
@@ -1135,7 +1135,7 @@ namespace FujifilmUSA.Sync.Common
                     SBStr.Replace("###RipSettings###", RipSettings.Trim() == "" ? "&nbsp;" : RipSettings.Trim());
                     SBStr.Replace("###Location###", Location.Trim() == "" ? "&nbsp;" : Location.Trim());
                     SBStr.Replace("###DeltaEFormula###", Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim());
-                    //SBStr.Replace("###OffsetNA###", Convert.ToString(DT.Rows[0]["LicenseTypeID"]).Trim() == "2" ? "(N/A)" : "&nbsp;"); //----Display "N/A" in offset printing data label for Sync 4D project types---//
+                    SBStr.Replace("###OffsetNA###", Convert.ToString(DT.Rows[0]["LicenseTypeID"]).Trim() == "2" ? "(N/A)" : "&nbsp;"); //----Display "N/A" in offset printing data label for Sync 4D project types---//
 
                     if (ReportType == 16 || ReportType == 17 || ReportType == 18 || ReportType == 19)
                     {
@@ -1616,9 +1616,9 @@ namespace FujifilmUSA.Sync.Common
                     {
                         // === Table 13 = >Gray Balance L*a*b* === //           
                         #region ==== Gray LAB* ====
-                        //SBStr.Replace("###GrayL###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_LChart.Jpeg"));
-                        //SBStr.Replace("###GrayA###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_AChart.Jpeg"));
-                        //SBStr.Replace("###GrayB###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_BChart.Jpeg"));
+                        SBStr.Replace("###GrayL###", this.chartContent.LGrayBalanceChart);
+                        SBStr.Replace("###GrayA###", this.chartContent.AGrayBalanceChart);
+                        SBStr.Replace("###GrayB###", this.chartContent.BGrayBalanceChart);
                         #endregion
                     }
                 }
@@ -1628,49 +1628,49 @@ namespace FujifilmUSA.Sync.Common
                 {
                     // === Table 4 = for Chart of Gray ΔCh === //           
                     #region ==== Gray ΔCh Chart ====
-                    SBStr.Replace("###ResultSummary_DeltaChImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_DeltaChChart.Jpeg"));
+                    SBStr.Replace("###ResultSummary_DeltaChImage###", this.chartContent.GrayBalanceDeltaCH_Chart);
                     #endregion
 
                     // === Table 5 = for Chart of Black ΔL === //           
                     #region ==== Black ΔL Chart ====
-                    SBStr.Replace("###ResultSummary_BlackDeltaLImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_BlackDeltaLChart.Jpeg"));
+                    SBStr.Replace("###ResultSummary_BlackDeltaLImage###", this.chartContent.BlackBalanceDeltaL_Chart);
                     #endregion
 
                     // === Table 6 = for Chart of Gray ΔL === //           
                     #region ==== Gray ΔL Chart ====
-                    SBStr.Replace("###ResultSummary_GrayDeltaLImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_GrayDeltaLChart.Jpeg"));
+                    SBStr.Replace("###ResultSummary_GrayDeltaLImage###", this.chartContent.GrayBalanceDeltaL_Chart);
                     #endregion
 
                     // === Table 7 = for Chart of Gray Balance L* === //           
                     #region ==== Gray Balance L* Chart ====
-                    SBStr.Replace("###ResultSummary_GrayLImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_LChart.Jpeg"));
+                    SBStr.Replace("###ResultSummary_GrayLImage###", this.chartContent.LGrayBalanceChart);
                     #endregion
 
                     // === Table 8 = for Chart of Gray Balance a* === //           
                     #region ==== Gray Balance a* Chart ====
-                    SBStr.Replace("###ResultSummary_GrayaImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_AChart.Jpeg"));
+                    SBStr.Replace("###ResultSummary_GrayaImage###", this.chartContent.AGrayBalanceChart);
                     #endregion
 
                     // === Table 9 = for Chart of Gray Balance b* === //           
                     #region ==== Gray Balance b* Chart ====
-                    SBStr.Replace("###ResultSummary_GraybImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_BChart.Jpeg"));
+                    SBStr.Replace("###ResultSummary_GraybImage###", this.chartContent.BGrayBalanceChart);
                     #endregion
 
                     // === Table 10 = for Chart of Black NPD === //           
                     #region ==== Black NPD Chart ====
-                    SBStr.Replace("###ResultSummary_BlackNPDImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_BlackNPD.Jpeg"));
+                    SBStr.Replace("###ResultSummary_BlackNPDImage###", this.chartContent.BlackNPDChart);
                     #endregion
 
                     // === Table 11 = for Chart of Gray NPD === //           
                     #region ==== Gray NPD Chart ====
-                    SBStr.Replace("###ResultSummary_GrayNPDImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_GrayNPD.Jpeg"));
+                    SBStr.Replace("###ResultSummary_GrayNPDImage###", this.chartContent.GrayNPDChart);
                     #endregion
 
                     //-------Extra items for new G7 formatted reports--------------//
-                    SBStr.Replace("###DensityChart###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_Density.Jpeg"));
-                    SBStr.Replace("###ABComparison###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page4_Gamut_ABComparison.Jpeg"));
-                    SBStr.Replace("###LComparison###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page4_Gamut_LComparison.Jpeg"));
-                    SBStr.Replace("###ResultSummary_TVIImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page4_CHRT_SummaryTVI.Jpeg"));
+                    SBStr.Replace("###DensityChart###", this.chartContent.InkPaperDansityChart);
+                    SBStr.Replace("###ABComparison###", this.chartContent.ABActualTargetChart);
+                    SBStr.Replace("###LComparison###", this.chartContent.LComparisionChart);
+                    SBStr.Replace("###ResultSummary_TVIImage###", this.chartContent.TVI_Summary_Chart);
 
                     //------Region: for Density Data----//
                     DT = DS_Common.Tables[5];
