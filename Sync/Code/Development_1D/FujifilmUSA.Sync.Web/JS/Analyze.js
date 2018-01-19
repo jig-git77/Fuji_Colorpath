@@ -26,6 +26,7 @@ var jsonDTSpreadSplineRangeChartDataList = [];
 //DeltaSummaryDetails array
 var jsonSummaryNameList = [];
 var jsonSummaryValueList = [];
+var jsonSummaryLimitList = [];
 var measurementNamesList = [];
 var _Resources = {};
 
@@ -261,7 +262,6 @@ $(document).ready(function () {
     $.ajax({
         //url: SERVICE_BASE_URL + 'api/Chart/GenerateAnalyzeCharts',
         url: SERVICE_BASE_URL + 'api/Chart/GenerateGrayChart',
-        //data: { MeasurementId: measurementID, IsAverageOfMeasurements: $isAverageOfMeasurements, IsVerificationProject: $hdnVerification, IsSync1DTypeProject: $hdnSync1DType },
         data: apiParameters,
         type: 'GET',
         dataType: 'json',
@@ -300,10 +300,10 @@ $(document).ready(function () {
         BindTVICharts();
     }
     debugger;
-    if ($hdnCurrentDlpSubOperation != ELicenseType.Sync1D && $hdnCurrentDlpSubOperation != ELicenseType.Validation) {
-        BindDeltaSummaryStatesChart();
-    }
-
+    //if ($hdnCurrentDlpSubOperation != ELicenseType.Sync1D && $hdnCurrentDlpSubOperation != ELicenseType.Validation) {
+    //    BindDeltaSummaryStatesChart();
+    //}
+    BindDeltaSummaryStatesChart();
     //if ($hdnValidationType == 1) {       
     //    BindDeltaSummaryStatesChart();
     //}
@@ -352,7 +352,7 @@ $(document).ready(function () {
             BGrayBalanceChart: ''
         };
 
-     
+
 
         var apiParameter = {
             //chart: chartContent,
@@ -387,7 +387,7 @@ $(document).ready(function () {
             BlackBalanceDeltaL_Chart: '',
             BlackNPDChart: '',
             GrayNPDChart: '',
-            
+
         };
 
 
@@ -406,7 +406,7 @@ $(document).ready(function () {
             apiParameter.BlackBalanceDeltaL_Chart = Get_GrayDelta_L_ChartImage();
             apiParameter.BlackNPDChart = Get_Black_NPD_ChartImage();
             apiParameter.GrayNPDChart = Get_Gray_NPD_ChartImage();
-            //apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
+            apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
             apiParameter.ABActualTargetChart = GetActualVsTargetChartImage();
         }
         else {
@@ -435,20 +435,20 @@ $(document).ready(function () {
             }
         }
 
-        
+
 
         //if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
         //    apiParameter.DeltaSummaryChart = '';
         //} else {
-            
-        //}
-        
-        
-        //apiParameter.LComparisionChart = GetLComparisionChartImage();
-        
-        
 
-        
+        //}
+
+
+        //apiParameter.LComparisionChart = GetLComparisionChartImage();
+
+
+
+
 
         $.ajax({
             url: SERVICE_BASE_URL + 'api/Report/ExportPrepressSingleMeasurementReportTest',
@@ -1293,6 +1293,7 @@ function BindDeltaSummaryStatesChart() {
             if (response != null) {
                 jsonSummaryNameList = response.data.DTDeltaSummaryLables;
                 jsonSummaryValueList = response.data.DTDeltaSummaryValues;
+                jsonSummaryLimitList = response.data.DTDeltaSummaryLimits;
             }
             PopulateSummaryDeltaChart();
         },
@@ -2637,11 +2638,10 @@ function PopulateInkPaperChartABComparision() {
         formattedDeltaEPrimaryPatchList.push(item);
     });
 
-    debugger;
     //var axis = json.map(function (a) { return a["?E"]; });
     var axis = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔE; });
     var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
-    
+
 
     if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
         maxNum = Math.max.apply(Math, axis) + 1;    //get the max ΔE with +1
@@ -2656,7 +2656,7 @@ function PopulateInkPaperChartABComparision() {
         maxDeltaLimit = (maxDeltaLimit > 4 ? maxDeltaLimit : maxDeltaLimit + 1)
     }
 
-    
+
     var maxValue = 0;
     var marginValue = 1;
     switch (true) {
@@ -2864,12 +2864,6 @@ function PopulateInkPaperChartABComparision() {
         }
     });
 
-    //var densityPatchColor = [
-    //    { colorName: _Resources._recCyan, colorTitle: _Resources._recCyanPathMetrics },
-    //    { colorName: _Resources._recMagenta, colorTitle: _Resources._recMagentaPathMetrics },
-    //    { colorName: _Resources._recYellow, colorTitle: _Resources._recYellowPathMetrics },
-    //    { colorName: _Resources._recBlack, colorTitle: _Resources._recBlackPathMetrics }
-    //];
 
     var formattedDensityList = [];
     $.each(jsonDensityList, function (index, obj) {
@@ -4113,14 +4107,26 @@ function PopulateSummaryDeltaChart() {
     }
 
     //generate the second stacked chart by max value
+    var summarySeries = [];
     var stackedChart = [];
     var categoryList = [];
-    $.each(jsonSummaryValueList, function (index, num) {
+
+    for (var i = 0; i < jsonSummaryValueList.length; i++) {
+
+        //create the series chart
+        var obj = {
+            value: jsonSummaryValueList[i],
+            limit: jsonSummaryLimitList.length > 0 ? jsonSummaryLimitList[i] : 0
+        }
+        summarySeries.push(obj);
+
+
+        //set the stack chart(upper chart)
         var stack = {
-            value: maxValue
+            value: maxValue - jsonSummaryValueList[i]
         };
         stackedChart.push(stack);
-    });
+    }
 
     var selectedDeltaE = $selectedDeltaE;
     if (selectedDeltaE == "E") {
@@ -4135,12 +4141,11 @@ function PopulateSummaryDeltaChart() {
             case "PriΔH": categoryList.push("Max Primary ΔH"); break;
             case "GrayΔE": categoryList.push("Gray Average " + selectedDeltaE); break;
             case "NinetyFiveΔE": categoryList.push("95th Percentile " + selectedDeltaE); break;
+            //default: categoryList.push(selectedDeltaE); break;
         }
     });
 
-    //console.log(jsonSummaryNameList);
-    //console.log(categoryList);
-
+    var thrashHold = { paths: [] };
     $divChartSummaryDeltaChart.kendoChart({
         renderAs: "canvas",
         //title: {
@@ -4151,10 +4156,33 @@ function PopulateSummaryDeltaChart() {
             stack: true,
             width: 10,
             gap: 0.2,
-            color: "#A1A1A1"
+            color: "#A1A1A1",
+            visual: function (e) {
+                var visual = e.createVisual();
+                //-----For Sync1D projects or validation projects
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                    if (e.series.index == 0) {
+                        var axis = e.sender.getAxis("valueAxis");
+
+
+                        //------Red marker image plot for Tolerance
+                        if (e.dataItem.limit > 0) {
+                            var redObj = {};
+                            redObj.x = axis.slot(e.dataItem.limit).origin.x;
+                            redObj.y1 = e.rect.topRight().y
+                            redObj.y2 = (e.rect.topRight().y + e.rect.size.height);
+                            redObj.y3 = (e.rect.topRight().y + (e.rect.size.height / 2)); //---red dot mid of the line
+                            redObj.color = "red";
+                            thrashHold.paths.push(redObj);
+                        }
+                    }
+                }
+                return visual;
+            }
         },
         series: [{
-            data: jsonSummaryValueList,
+            //data: jsonSummaryValueList,summarySeries
+            data: summarySeries,
             overlay: {
                 gradient: "glass",
             }
@@ -4200,7 +4228,24 @@ function PopulateSummaryDeltaChart() {
             width: 310,
             height: 260
         },
-        //render: renderChartWithBackgroundByCategory
+        render: function (e) {
+
+            //-----For Sync1D projects or validation projects
+            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                var chart = e.sender;
+                $.each(thrashHold.paths, function (index, obj) {
+                    //set the line 
+                    var pathRed = new kendo.drawing.Path({ stroke: { width: 2, color: obj.color } }).moveTo(obj.x, obj.y1).lineTo(obj.x, obj.y2);
+                    chart.surface.draw(pathRed);
+
+                    //set the dot mid of the line
+                    var circleGeoPath = new kendo.geometry.Circle([obj.x, obj.y3], 2);  //
+                    var circlePath = new kendo.drawing.Circle(circleGeoPath).fill(obj.color, 1);
+                    circlePath.options.stroke.color = obj.color;
+                    chart.surface.draw(circlePath);
+                });
+            }
+        }
     });
 }
 
@@ -4425,8 +4470,25 @@ function Get_Gray_NPD_ChartImage() {
 
 ////**************** GET IMAGE OF DELTA SUMMARY CHART FOR REPORT  ****************////
 function Get_DeltaSummaryChartImage() {
+
     var chart = $divChartSummaryDeltaChart.data("kendoChart");
     return chart.imageDataURL();
+
+    //if ($hdnValidationType == 1) {
+    //    var kendoOptions = $divChartSummaryDeltaChart.data("kendoChart").options;
+    //    //kendoOptions.plotArea.background = '#D0D0D0';
+    //    kendoOptions.chartArea.width = 310;
+    //    kendoOptions.chartArea.height = 200;
+    //    $kendoChartDummy.kendoChart(kendoOptions);
+    //    var dummyChart = $kendoChartDummy.data('kendoChart');
+    //    dummyChart.options.transitions = false
+    //    dummyChart.refresh();
+    //    return dummyChart.imageDataURL();
+    //}
+    //else {
+    //    var chart = $divChartSummaryDeltaChart.data("kendoChart");
+    //    return chart.imageDataURL();
+    //}
 }
 
 function createColumn(e, rect, color) {

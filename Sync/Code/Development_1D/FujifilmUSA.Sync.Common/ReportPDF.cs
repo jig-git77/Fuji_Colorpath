@@ -284,6 +284,26 @@ namespace FujifilmUSA.Sync.Common
         {
             try
             {
+                string str = "";
+                //========== Object of PDF ==========//
+                Doc theDoc = new Doc();                
+
+                //========== The rectangle for the content on pdf ==========//
+                theDoc.Rect.Left = 0;
+                theDoc.Rect.Bottom = 30;
+                theDoc.Rect.Width = 610;
+                theDoc.Rect.Height = 770;
+
+                //========== The page ID Default is 1 ==========//
+                int theID;
+
+                #region Prepress Single Measurement ReportSingleMeasurement
+                //========== Adds New Page IN PDF ==========//
+                theDoc.Page = theDoc.AddPage();
+
+                //========== Adds a counter to Page ==========//
+                theCount++;
+
                 string FileName = "Templates/kendoPrepressSingleMeasurement.htm";
                 //CSSPath = this.BaseWebURL + "Templates/style.css";
                 CSSPath = strServerStyleSheet;
@@ -309,18 +329,18 @@ namespace FujifilmUSA.Sync.Common
                 {
                     throw new Exception("Please Enter Report Type.");
                 }
-                Doc theDoc = new Doc();
 
 
-                //========== The rectangle for the content on pdf ==========//
-                theDoc.Rect.Left = 0;
-                theDoc.Rect.Bottom = 30;
-                theDoc.Rect.Width = 610;
-                theDoc.Rect.Height = 770;
-                theDoc.Page = theDoc.AddPage();
 
-                //========== The page ID Default is 1 ==========//
-                int theID;
+                ////========== The rectangle for the content on pdf ==========//
+                //theDoc.Rect.Left = 0;
+                //theDoc.Rect.Bottom = 30;
+                //theDoc.Rect.Width = 610;
+                //theDoc.Rect.Height = 770;
+                //theDoc.Page = theDoc.AddPage();
+
+                ////========== The page ID Default is 1 ==========//
+                //int theID;
 
                 //========== Reads the template ==========//
                 var webClient = new System.Net.WebClient();
@@ -344,7 +364,40 @@ namespace FujifilmUSA.Sync.Common
 
                 theDoc.Rect.Inset(0, -1);
 
+                #endregion
 
+                #region Add Footer
+                theDoc.HPos = 0.0;
+                theDoc.VPos = 0.0;
+                theDoc.Color.String = "255 255 255";
+                theDoc.FontSize = 8;
+
+                theDoc.Rect.String = "-10 0 622 52";
+                for (int i = 1; i <= theCount; i++)
+                {
+                    theDoc.HPos = 0.0;
+                    theDoc.VPos = 0.0;
+                    theDoc.PageNumber = i;
+
+
+                    if (ReportType == 16) //----For G7 Opti / Validation Report + 4D G7 validation report
+                    {
+                        str = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"> " +
+                       "<tr style=\"height:52px\"><td align=\"left\" valign=\"middle\" bgcolor=\"#22af7c\" style=\"color:#000000; font-size:10px; font-family: Arial; padding: 0 0 0 50px; \" width=\"218px\" >" + DateTime.Now.ToLongDateString() + "</td> " +
+                       "<td width=\"443px\" align=\"right\" valign=\"middle\" bgcolor=\"#b5ddc6\" style=\"color:#000000; font-size:10px; font-family: Arial; \">© Fujifilm North America Corporation, Graphic Systems Division " + " </td></tr></table>";
+
+                    }
+                    else
+                    {
+                        str = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"> " +
+                            "<tr style=\"height:25px\"><td align=\"center\" valign=\"middle\" bgcolor=\"#C1C1C1\" style=\"color:#000000; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif;\" width=\"150px\" >" + DateTime.Now.ToLongDateString() + "</td> " +
+                            "<td align=\"center\" valign=\"middle\" bgcolor=\"#C1C1C1\" style=\"color:#000000; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif; \">&copy; Fujifilm " + DateTime.Now.Year.ToString() + "</td> " +
+                            "<td width=\"112px\" align=\"center\" valign=\"middle\" bgcolor=\"#5A5A5A\" style=\"color:#CCCCCC; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif; \">Page " + i.ToString() + " of " + theCount.ToString() + " </td></tr></table>";
+                    }
+                    theDoc.AddImageHtml(str);
+                }
+
+                #endregion
 
                 string pth = PDFPath + PDF_NAME;
 

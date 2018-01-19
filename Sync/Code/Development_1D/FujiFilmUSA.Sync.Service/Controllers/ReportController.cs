@@ -148,7 +148,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         From_ΔE = Convert.ToString(chart.fromDeltaE);
                         ValidationType = Convert.ToInt32(chart.validationType);
 
-                        
+
                         ReportPDF objReportPDF = new ReportPDF();
                         objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
 
@@ -277,6 +277,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     //List<Dictionary<string, decimal>> listDeltaSummary = new List<Dictionary<string, decimal>>();
                     List<string> listStatesNames = new List<string>();
                     List<decimal> listStatesValues = new List<decimal>();
+                    List<decimal> listStatesLimits = new List<decimal>();
                     if (DSReport != null)
                         if (DSReport.Tables[2] != null)
                         {
@@ -285,37 +286,30 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             //    listStatesNames.Add(dc.ColumnName);
                             //}
 
-                            for (int index = 0; index < DSReport.Tables[2].Columns.Count - 1; index++)
+                            if (!IsVerification && !IsSync1DType)
                             {
-                                listStatesNames.Add(DSReport.Tables[2].Columns[index].ColumnName);
+                                for (int index = 0; index < DSReport.Tables[2].Columns.Count - 1; index++)
+                                    listStatesNames.Add(DSReport.Tables[2].Columns[index].ColumnName);
+                                if (DSReport.Tables[2].Rows.Count > 0)
+                                    foreach (string columnName in listStatesNames)
+                                        listStatesValues.Add(DataReader.ReadDecimal(DSReport.Tables[2].Rows[0], columnName));
                             }
-
-
-                            if (DSReport.Tables[2].Rows.Count > 0)
-
-                                foreach (string columnName in listStatesNames)
+                            else
+                            {
+                                for (int index = 0; index < DSReport.Tables[2].Rows.Count; index++)
                                 {
-                                    listStatesValues.Add(DataReader.ReadDecimal(DSReport.Tables[2].Rows[0], columnName));
+                                    listStatesNames.Add(Convert.ToString(DSReport.Tables[2].Rows[index]["MetricSumName"]));
+                                    listStatesValues.Add(Convert.ToDecimal(DSReport.Tables[2].Rows[index]["MeasuredValue"]));
+                                    listStatesLimits.Add(Convert.ToDecimal(DSReport.Tables[2].Rows[index]["TargetValue"]));
                                 }
+                            }
+                            
                         }
-
-
-                    //listDeltaSummary.Add(new Dictionary<string, decimal>();
-                    //listDeltaSummary =  new Dictionary<string, decimal>
-                    //            {
-                    //              {"Avg_ΔE", 10},
-                    //              {"Max_ΔE", 20},
-                    //              {"PriΔE", 20},
-                    //              {"PriΔH", 20},
-                    //              {"GrayΔE", 20},
-                    //              {"NinetyFiveΔE", 20}
-                    //            };
-
-
                     httpResponse.Data = new
                     {
                         DTDeltaSummaryLables = listStatesNames,
-                        DTDeltaSummaryValues = listStatesValues
+                        DTDeltaSummaryValues = listStatesValues,
+                        DTDeltaSummaryLimits = listStatesLimits
                     };
 
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
