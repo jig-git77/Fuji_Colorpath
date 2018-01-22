@@ -3275,7 +3275,10 @@
                                         <div class="combopart">
                                             <div class="float_l" style="padding-left: 10px;">
                                                 <br />
-                                                <asp:Button ID="btnGeneratePDF" ClientIDMode="Static" runat="server" Text="Generate PDF Report" />
+                                                <%--<asp:Button ID="btnGeneratePDF" ClientIDMode="Static" runat="server" Text="Generate PDF Report" />--%>
+                                                <a id="btnGeneratePDF">
+                                                    <img src="Images/processbar.gif" />
+                                                </a>
                                                 <br />
                                                 <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                                                     <ContentTemplate>

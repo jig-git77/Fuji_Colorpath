@@ -90,6 +90,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Images\login_logo.png" />
+    <Content Include="Images\logo.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

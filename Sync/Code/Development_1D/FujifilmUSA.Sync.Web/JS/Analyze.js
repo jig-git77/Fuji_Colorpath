@@ -299,11 +299,13 @@ $(document).ready(function () {
 
         BindTVICharts();
     }
-    debugger;
     //if ($hdnCurrentDlpSubOperation != ELicenseType.Sync1D && $hdnCurrentDlpSubOperation != ELicenseType.Validation) {
     //    BindDeltaSummaryStatesChart();
     //}
     BindDeltaSummaryStatesChart();
+
+    //set the report image on report generation link as per project type
+    SetReportImage();
     //if ($hdnValidationType == 1) {       
     //    BindDeltaSummaryStatesChart();
     //}
@@ -409,46 +411,44 @@ $(document).ready(function () {
             apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
             apiParameter.ABActualTargetChart = GetActualVsTargetChartImage();
         }
-        else {
+        else if ($hdnValidationType == 2) {
+            apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
+            apiParameter.AGrayBalanceChart = Get_A_BalanceChartImage();
+            apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
 
-            if ($hdnValidationType == 0) {
+            apiParameter.InkPaperLAB1Chart = Get_InkPaperChartLAB_OneChartImage();
+            apiParameter.InkPaperLAB2Chart = Get_InkPaperChartLAB_TwoChartImage();
+            apiParameter.InkPaperDansityChart = Get_InkPaperChartDansityChartImage();
 
-            }
-
-            if ($hdnVerification == 'True' || $hdnSync1DType == 'True') {
-                apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
-                apiParameter.AGrayBalanceChart = Get_A_BalanceChartImage();
-                apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
-
-                apiParameter.InkPaperLAB1Chart = Get_InkPaperChartLAB_OneChartImage();
-                apiParameter.InkPaperLAB2Chart = Get_InkPaperChartLAB_TwoChartImage();
-                apiParameter.InkPaperDansityChart = Get_InkPaperChartDansityChartImage();
-
-                apiParameter.TVI_ISO_CMYK_Chart = Get_TVI_ISO_CMYK_ChartImage();
-                apiParameter.TVI_ISO_Cyan_Chart = Get_TVI_ISO_CYAN_ChartImage();
-                apiParameter.TVI_ISO_Magenta_Chart = Get_TVI_ISO_MAGENTA_ChartImage();
-                apiParameter.TVI_ISO_Yellow_Chart = Get_TVI_ISO_YELLOW_ChartImage();
-                apiParameter.TVI_ISO_Black_Chart = Get_TVI_ISO_BLACK_ChartImage();
-            }
-            else {
-                apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
-            }
+            apiParameter.TVI_ISO_CMYK_Chart = Get_TVI_ISO_CMYK_ChartImage();
+            apiParameter.TVI_ISO_Cyan_Chart = Get_TVI_ISO_CYAN_ChartImage();
+            apiParameter.TVI_ISO_Magenta_Chart = Get_TVI_ISO_MAGENTA_ChartImage();
+            apiParameter.TVI_ISO_Yellow_Chart = Get_TVI_ISO_YELLOW_ChartImage();
+            apiParameter.TVI_ISO_Black_Chart = Get_TVI_ISO_BLACK_ChartImage();
         }
+        else if ($hdnValidationType == 0) {
+            apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
+            apiParameter.AGrayBalanceChart = Get_A_BalanceChartImage();
+            apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
+            apiParameter.InkPaperLAB1Chart = Get_InkPaperChartLAB_OneChartImage();
+            apiParameter.InkPaperLAB2Chart = Get_InkPaperChartLAB_TwoChartImage();
+            apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
+        }
+        else {          
+            apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
+            //if ($hdnVerification == 'True' || $hdnSync1DType == 'True') {
+            //    apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
+            //    apiParameter.AGrayBalanceChart = Get_A_BalanceChartImage();
+            //    apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
 
-
-
-        //if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-        //    apiParameter.DeltaSummaryChart = '';
-        //} else {
-
-        //}
-
-
-        //apiParameter.LComparisionChart = GetLComparisionChartImage();
-
-
-
-
+            //    apiParameter.InkPaperLAB1Chart = Get_InkPaperChartLAB_OneChartImage();
+            //    apiParameter.InkPaperLAB2Chart = Get_InkPaperChartLAB_TwoChartImage();
+            //    apiParameter.InkPaperDansityChart = Get_InkPaperChartDansityChartImage();                
+            //}
+            //else {
+            //    apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
+            //}
+        }
 
         $.ajax({
             url: SERVICE_BASE_URL + 'api/Report/ExportPrepressSingleMeasurementReportTest',
@@ -3059,7 +3059,8 @@ function PopulateInkPaperChartABComparision() {
             },
             title: {
                 //text: _Resources._recDeltaA
-            }, majorGridLines: {
+            },
+            majorGridLines: {
                 visible: true,
                 step: -10
             }
@@ -3137,10 +3138,6 @@ function PopulateInkPaperChartABComparision() {
         },
         render: renderChartWithBackgroundByCategory
     });
-
-
-
-
 
 }
 
@@ -4491,6 +4488,31 @@ function Get_DeltaSummaryChartImage() {
     //}
 }
 
+////**************** SET IMAGE ON LINK TO GENERATE REPORT  ****************////
+function SetReportImage() {
+
+    var imagePath = '';
+    if ($hdnValidationType == 1) {  //G7 type
+        imagePath = 'Images/Validation Report_G7_preview.jpg';  //For Sync1D and Sync4D Validation G7 Projects
+
+        if ($hdnSync1DType == 'True'){
+            imagePath = 'Images/Sync1D Report_preview_G7.jpg';   //For Sync1D G7 Projects
+        }
+    }
+    else {          //ISO type OR ValidationType = 0 for Default View type
+
+        imagePath = 'Images/Sync DLP Report_preview.jpg';       //For Sync 4D Projects    
+
+        if ($hdnVerification == 'True') {       
+            imagePath = 'Images/Sync1D Report_preview_Vali.jpg';   //For Sync1D and Sync4D Validation Projects
+        }
+        if ($hdnSync1DType == 'True') {
+            imagePath = 'Images/Sync1D Report_preview.jpg';   //For Sync1D Projects
+        }
+    }
+    $btnGeneratePDF.find('img').attr('src', imagePath);
+}
+
 function createColumn(e, rect, color) {
     var origin = rect.origin;
     var center = rect.center();
@@ -4555,8 +4577,8 @@ function renderChartWithBackgroundByAxis(e) {
     var chart = e.sender;
     var xAxis = chart.getAxis("xAxis");
     var yAxis = chart.getAxis("yAxis");
-    var xAxisArray = xAxis._axis.children.map(r => parseInt(r.content));
-    var yAxisArray = yAxis._axis.children.map(r => parseInt(r.content));
+    var xAxisArray = xAxis._axis.children.map(r => parseFloat(r.content));
+    var yAxisArray = yAxis._axis.children.map(r => parseFloat(r.content));
 
 
     if (chart.element[0].id == "kendoChartTargetVersusActualAB" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparison" || chart.element[0].id == "kendoChartABalanceChart" || chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartLComaparision" || chart.element[0].id == "divChartInkPaperPaperLab1") {
@@ -4625,7 +4647,7 @@ function renderChartWithBackgroundByCategory(e) {
     //get value axis object
     var valueAxis = chart.getAxis("valueAxis");
     //get maximum value from the value axis
-    var maxValue = Math.abs(Math.max.apply(Math, valueAxis._axis.children.map(r => parseInt(r.content))))
+    var maxValue = Math.abs(Math.max.apply(Math, valueAxis._axis.children.map(r => parseFloat(r.content))))
     //get top slot
     var valueSlot = valueAxis.slot(maxValue);
 

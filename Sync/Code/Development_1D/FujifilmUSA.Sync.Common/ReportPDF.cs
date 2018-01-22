@@ -317,7 +317,7 @@ namespace FujifilmUSA.Sync.Common
                 }
                 else if (ReportType == 18) //----For Default mode in Sync1D ISO, G7 or 4D validation project as choice of MTP
                 {
-                    FileName = "Templates/PrepressSingleMeasurement_Default.htm";
+                    FileName = "Templates/kendoPrepressSingleMeasurement_Default.htm";
                 }
                 else if (ReportType == 19) //----For Default mode in Sync4D validation project for Scoring report
                 {
@@ -1159,6 +1159,11 @@ namespace FujifilmUSA.Sync.Common
                 string cssFullPath = this._WebURL + "Templates/style.css";
                 SBStr.Replace("#csspath#", cssFullPath);
 
+                //** Add Images Path ***//
+                string imagesLogoPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
+                SBStr.Replace("##LOGOIMAGES##", imagesLogoPath);
+
+                
                 //** Add Images Path ***//
                 string imagesPath = this.BaseWebURL + "Images/";
                 SBStr.Replace("##IMAGES##", imagesPath);
