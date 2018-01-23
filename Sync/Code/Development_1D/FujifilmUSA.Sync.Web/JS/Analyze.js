@@ -434,7 +434,7 @@ $(document).ready(function () {
             apiParameter.InkPaperLAB2Chart = Get_InkPaperChartLAB_TwoChartImage();
             apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
         }
-        else {          
+        else {
             apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
             //if ($hdnVerification == 'True' || $hdnSync1DType == 'True') {
             //    apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
@@ -1269,6 +1269,7 @@ function BindChartLGrayBalance() {
         },
         render: renderChartWithBackgroundByAxis
     });
+
 }
 
 
@@ -1417,7 +1418,7 @@ function BindTVICharts() {
                 'Accept-Language': $CurrentCulture
             },
             success: function (response) {
-
+                debugger;
                 if (response.data != null) {
                     jsonDTISOTVIChartList = response.data.DTISOTVIChartList;
                     jsonDTSpreadChartData_CMYKList = response.data.DTSpreadChartData_CMYKList;
@@ -2851,7 +2852,7 @@ function PopulateInkPaperChartABComparision() {
                 var chart = e.sender;
                 $.each(thrashHold.paths, function (index, obj) {
                     //set the line 
-                    var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: obj.color } }).moveTo(obj.x, obj.y1).lineTo(obj.x, obj.y2);
+                    var pathGreen = new kendo.drawing.Path({ stroke: { width: 0.6, color: obj.color } }).moveTo(obj.x, obj.y1).lineTo(obj.x, obj.y2);
                     chart.surface.draw(pathGreen);
 
                     //set the dot mid of the line
@@ -2915,7 +2916,7 @@ function PopulateInkPaperChartABComparision() {
                 var axis = e.sender.getAxis("valueAxis");
 
                 var target = axis.slot(e.dataItem.densityLimit).origin.y;
-                var path = new kendo.drawing.Path({ stroke: { width: 3, color: "red" } }).moveTo(e.rect.origin.x, target).lineTo(e.rect.topRight().x, target);
+                var path = new kendo.drawing.Path({ stroke: { width: 1, color: "red" } }).moveTo(e.rect.origin.x, target).lineTo(e.rect.topRight().x, target);
                 visual.append(path);
 
                 var circleGeometry = new kendo.geometry.Circle([(e.rect.origin.x + (e.rect.size.width / 2)), target], 3);
@@ -2925,7 +2926,7 @@ function PopulateInkPaperChartABComparision() {
 
                 if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && e.dataItem.preAvgDensity > 0) {
                     var targetAvg = axis.slot(e.dataItem.preAvgDensity).origin.y;
-                    var pathAvg = new kendo.drawing.Path({ stroke: { width: 3, color: "#34E61E" } }).moveTo(e.rect.origin.x, targetAvg).lineTo(e.rect.topRight().x, targetAvg);
+                    var pathAvg = new kendo.drawing.Path({ stroke: { width: 1, color: "#34E61E" } }).moveTo(e.rect.origin.x, targetAvg).lineTo(e.rect.topRight().x, targetAvg);
                     visual.append(pathAvg);
 
                     var circleAvg = new kendo.geometry.Circle([(e.rect.origin.x + (e.rect.size.width / 2)), targetAvg], 3);
@@ -3465,9 +3466,9 @@ function PopulateTVIISOChart() {
 
     $divChartTVIISO_CYAN.kendoChart({
         renderAs: "canvas",
-        title: {
-            text: "Cyan"
-        },
+        //title: {
+        //    text: "Cyan"
+        //},
         dataSource: {
             data: isoCyanList
         },
@@ -3530,9 +3531,9 @@ function PopulateTVIISOChart() {
 
     $divChartTVIISO_Magenta.kendoChart({
         renderAs: "canvas",
-        title: {
-            text: "Magenta"
-        },
+        //title: {
+        //    text: "Magenta"
+        //},
         dataSource: {
             data: isoMagentaList
         },
@@ -3595,9 +3596,9 @@ function PopulateTVIISOChart() {
 
     $divChartTVIISO_Yellow.kendoChart({
         renderAs: "canvas",
-        title: {
-            text: "Yellow"
-        },
+        //title: {
+        //    text: "Yellow"
+        //},
         dataSource: {
             data: isoYellowList
         },
@@ -3659,9 +3660,9 @@ function PopulateTVIISOChart() {
 
     $divChartTVIISO_Black.kendoChart({
         renderAs: "canvas",
-        title: {
-            text: "Black"
-        },
+        //title: {
+        //    text: "Black"
+        //},
         dataSource: {
             data: isoBlackList
         },
@@ -4199,6 +4200,9 @@ function PopulateSummaryDeltaChart() {
             //categories: [],
             majorGridLines: {
                 visible: false
+            },
+            labels: {
+                font: "12px Arial,Helvetica,sans-serif"
             }
         },
         valueAxis: {
@@ -4211,7 +4215,8 @@ function PopulateSummaryDeltaChart() {
                 visible: false
             },
             labels: {
-                rotation: "auto"
+                rotation: "auto",
+                font: "12px Arial,Helvetica,sans-serif"
             },
             max: maxValue,
             margin: marginValue
@@ -4222,8 +4227,8 @@ function PopulateSummaryDeltaChart() {
         //    template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
         //},
         chartArea: {
-            width: 310,
-            height: 260
+            width: 400,
+            height: 250
         },
         render: function (e) {
 
@@ -4311,58 +4316,72 @@ function GetLComparisionChartImage() {
 
 ////**************** GET IMAGE OF L-BALANCE CHART FOR REPORT  ****************////
 function Get_L_BalanceChartImage() {
-    var chart = $chart_L_BalanceChart.data("kendoChart");
-    //chart.options.title = null;
-    //chart.refresh();
-    return chart.imageDataURL();
 
-    //var kendoOptions = $chart_L_BalanceChart.data("kendoChart").options;
-    //var kendodataSource = $chart_L_BalanceChart.data("kendoChart").dataSource;
-    //kendoOptions.title = '';
-    //$kendoChartDummy.kendoChart(kendoOptions);
-    //var dummyChart = $kendoChartDummy.data('kendoChart');
-    //dummyChart.dataSource = kendodataSource;
-    //dummyChart.options.transitions = false;
-    //dummyChart.refresh();
-    //return dummyChart.imageDataURL();
+    if ($hdnValidationType == 2) {
+
+        if ($hdnSync1DType == 'True') {
+
+            var kendoOptions = $chart_L_BalanceChart.data("kendoChart").options;
+            var kendodataSource = $chart_L_BalanceChart.data("kendoChart").dataSource;
+            kendoOptions.chartArea.width = 600;
+            kendoOptions.chartArea.height = 250;
+            $('#kendoChartDummyBalanceL').kendoChart(kendoOptions);
+            var dummyChart = $('#kendoChartDummyBalanceL').data('kendoChart');
+            dummyChart.dataSource = kendodataSource;
+            dummyChart.options.transitions = false;
+            dummyChart.refresh();
+            return dummyChart.imageDataURL();
+        }
+    }
+    var chart = $chart_L_BalanceChart.data("kendoChart");
+    return chart.imageDataURL();    
 }
 
 ////**************** GET IMAGE OF A-BALANCE CHART FOR REPORT  ****************////
 function Get_A_BalanceChartImage() {
 
-    var chart = $chart_A_BalanceChart.data("kendoChart");
-    //chart.options.title = null;
-    //chart.refresh();
-    return chart.imageDataURL();
+    if ($hdnValidationType == 2) {
 
-    //var kendoOptions = $chart_A_BalanceChart.data("kendoChart").options;
-    //var kendodataSource = $chart_A_BalanceChart.data("kendoChart").dataSource;
-    //kendoOptions.title = '';
-    //$kendoChartDummy.kendoChart(kendoOptions);
-    //var dummyChart = $kendoChartDummy.data('kendoChart');
-    //dummyChart.dataSource = kendodataSource;
-    //dummyChart.options.transitions = false;
-    //dummyChart.refresh();
-    //return dummyChart.imageDataURL();
+        if ($hdnSync1DType == 'True') {
+
+            var kendoOptions = $chart_A_BalanceChart.data("kendoChart").options;
+            var kendodataSource = $chart_A_BalanceChart.data("kendoChart").dataSource;
+            kendoOptions.chartArea.width = 600;
+            kendoOptions.chartArea.height = 250;
+            $('#kendoChartDummyBalanceA').kendoChart(kendoOptions);
+            var dummyChart = $('#kendoChartDummyBalanceA').data('kendoChart');
+            dummyChart.dataSource = kendodataSource;
+            dummyChart.options.transitions = false;
+            dummyChart.refresh();
+            return dummyChart.imageDataURL();
+        }
+    }
+    var chart = $chart_A_BalanceChart.data("kendoChart");
+    return chart.imageDataURL();   
 }
 
 ////**************** GET IMAGE OF B-BALANCE CHART FOR REPORT  ****************////
 function Get_B_BalanceChartImage() {
 
-    var chart = $chart_B_BalanceChart.data("kendoChart");
-    //chart.options.title = null;
-    //chart.refresh();
-    return chart.imageDataURL();
+    if ($hdnValidationType == 2) {
 
-    //var kendoOptions = $chart_B_BalanceChart.data("kendoChart").options;
-    //var kendodataSource = $chart_B_BalanceChart.data("kendoChart").dataSource;
-    //kendoOptions.title = '';
-    //$kendoChartDummy.kendoChart(kendoOptions);
-    //var dummyChart = $kendoChartDummy.data('kendoChart');
-    //dummyChart.dataSource = kendodataSource;
-    //dummyChart.options.transitions = false;
-    //dummyChart.refresh();
-    //return dummyChart.imageDataURL();
+        if ($hdnSync1DType == 'True') {
+
+            var kendoOptions = $chart_B_BalanceChart.data("kendoChart").options;
+            var kendodataSource = $chart_B_BalanceChart.data("kendoChart").dataSource;
+            kendoOptions.chartArea.width = 600;
+            kendoOptions.chartArea.height = 250;
+            $('#kendoChartDummyBalanceB').kendoChart(kendoOptions);
+            var dummyChart = $('#kendoChartDummyBalanceB').data('kendoChart');
+            dummyChart.dataSource = kendodataSource;
+            dummyChart.options.transitions = false;
+            dummyChart.refresh();
+            return dummyChart.imageDataURL();
+        }
+    }
+
+    var chart = $chart_B_BalanceChart.data("kendoChart");
+    return chart.imageDataURL();
 }
 
 ////**************** GET IMAGE OF INK PAPER CHART LAB ONE CHART FOR REPORT  ****************////
@@ -4495,7 +4514,7 @@ function SetReportImage() {
     if ($hdnValidationType == 1) {  //G7 type
         imagePath = 'Images/Validation Report_G7_preview.jpg';  //For Sync1D and Sync4D Validation G7 Projects
 
-        if ($hdnSync1DType == 'True'){
+        if ($hdnSync1DType == 'True') {
             imagePath = 'Images/Sync1D Report_preview_G7.jpg';   //For Sync1D G7 Projects
         }
     }
@@ -4503,7 +4522,7 @@ function SetReportImage() {
 
         imagePath = 'Images/Sync DLP Report_preview.jpg';       //For Sync 4D Projects    
 
-        if ($hdnVerification == 'True') {       
+        if ($hdnVerification == 'True') {
             imagePath = 'Images/Sync1D Report_preview_Vali.jpg';   //For Sync1D and Sync4D Validation Projects
         }
         if ($hdnSync1DType == 'True') {
@@ -4581,7 +4600,11 @@ function renderChartWithBackgroundByAxis(e) {
     var yAxisArray = yAxis._axis.children.map(r => parseFloat(r.content));
 
 
-    if (chart.element[0].id == "kendoChartTargetVersusActualAB" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparison" || chart.element[0].id == "kendoChartABalanceChart" || chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartLComaparision" || chart.element[0].id == "divChartInkPaperPaperLab1") {
+    if (chart.element[0].id == "kendoChartTargetVersusActualAB" || chart.element[0].id == "kendoChartTargetVersusActualABLarge"
+        || chart.element[0].id == "kendoChartGamut_ABComparison" || chart.element[0].id == "kendoChartABalanceChart"
+        || chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartLComaparision"
+        || chart.element[0].id == "divChartInkPaperPaperLab1" || chart.element[0].id == "kendoChartDummyBalanceL"
+        || chart.element[0].id == "kendoChartDummyBalanceA" || chart.element[0].id == "kendoChartDummyBalanceB") {
         xSlot = xAxis.slot(Math.min.apply(Math, xAxisArray), Math.max.apply(Math, xAxisArray));
         ySlot = yAxis.slot(Math.min.apply(Math, yAxisArray), Math.max.apply(Math, yAxisArray));
 
@@ -4607,13 +4630,13 @@ function renderChartWithBackgroundByAxis(e) {
             fill: gradientRedGreen
         });
     }
-    else if (chart.element[0].id == "kendoChartABalanceChart") {
+    else if (chart.element[0].id == "kendoChartABalanceChart" || chart.element[0].id == "kendoChartDummyBalanceA") {
         path = drawing.Path.fromRect(rect, {
             stroke: null,
             fill: gradientPinkGreen
         });
     }
-    else if (chart.element[0].id == "kendoChartLBalanceChart") {
+    else if (chart.element[0].id == "kendoChartLBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceL") {
         path = drawing.Path.fromRect(rect, {
             stroke: null,
             fill: gradientGray3
@@ -4625,7 +4648,7 @@ function renderChartWithBackgroundByAxis(e) {
             fill: gradientGray2
         });
     }
-    else if (chart.element[0].id == "kendoChartBBalanceChart") {
+    else if (chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceB") {
         path = drawing.Path.fromRect(rect, {
             stroke: null,
             fill: gradientYellowBlue

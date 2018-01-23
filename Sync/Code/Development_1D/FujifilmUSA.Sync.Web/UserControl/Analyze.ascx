@@ -455,13 +455,13 @@
                             <asp:HiddenField ID="hdCheckBoxChange" runat="server" Value="0" />
                         </center>
                         <br />
-                        
+
                     </div>
                 </div>
                 <br />
                 <div>
-                            <div id="divAnalyzeChart"></div>
-                        </div>
+                    <div id="divAnalyzeChart"></div>
+                </div>
             </td>
         </tr>
     </table>
@@ -1125,7 +1125,7 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <div style="display: none;">
+                                                    <div style="display: block;">
                                                         <table>
                                                             <tr>
                                                                 <td>
@@ -2276,7 +2276,7 @@
                                         </div>
                                         <div class="combopart" style="position: relative;">
                                             <div class="chart-loading"></div>
-                                            <div class="float_l" style="padding-left: 10px;">                                                
+                                            <div class="float_l" style="padding-left: 10px;">
                                                 <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color: White;">
                                                     <tr>
                                                         <td style="width: 45%;" valign="top" class="CHARTTABLE">
@@ -2385,6 +2385,9 @@
                                                                                                 <div style="display: none;">
                                                                                                     <div id="kendoChartDummy">
                                                                                                     </div>
+                                                                                                    <div id="kendoChartDummyBalanceL"></div>
+                                                                                                    <div id="kendoChartDummyBalanceA"></div>
+                                                                                                    <div id="kendoChartDummyBalanceB"></div>
                                                                                                 </div>
                                                                                             </td>
                                                                                         </tr>
@@ -2713,28 +2716,68 @@
                                                                         </tr>
                                                                     </table>
                                                                     <br />
-                                                                    <table style="">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                         <tr>
                                                                             <td>
-                                                                                <div id="divChartTVIISO_CYAN">
-                                                                                </div>
+                                                                                <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
+                                                                                    <tr>
+                                                                                        <td class="green-title" align="center">
+                                                                                            <asp:Localize ID="Localize9" Text="Cyan" runat="server" meta:resourcekey="locTVICyanResource1"></asp:Localize>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td valign="top" align="center">
+                                                                                            <div id="divChartTVIISO_CYAN"></div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
                                                                             </td>
                                                                             <td>
-                                                                                <div id="divChartTVIISO_Magenta">
-                                                                                </div>
+                                                                                <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
+                                                                                    <tr>
+                                                                                        <td class="green-title" align="center">
+                                                                                            <asp:Localize ID="Localize10" Text="Magenta" runat="server" meta:resourcekey="locTVIMagentaResource1"></asp:Localize>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <div id="divChartTVIISO_Magenta"></div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
-                                                                                <div id="divChartTVIISO_Yellow">
-                                                                                </div>
+                                                                                <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
+                                                                                    <tr>
+                                                                                        <td class="green-title" align="center">
+                                                                                            <asp:Localize ID="Localize11" Text="Yellow" runat="server" meta:resourcekey="locTVIYellowResource1"></asp:Localize>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <div id="divChartTVIISO_Yellow"></div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
                                                                             </td>
                                                                             <td>
-                                                                                <div id="divChartTVIISO_Black">
-                                                                                </div>
+                                                                                <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
+                                                                                    <tr>
+                                                                                        <td class="green-title" align="center">
+                                                                                            <asp:Localize ID="Localize20" Text="Black" runat="server" meta:resourcekey="locTVIBlackResource1"></asp:Localize>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <div id="divChartTVIISO_Black"></div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
                                                                             </td>
                                                                         </tr>
-                                                                    </table>
+                                                                    </table>                                                                    
                                                                 </td>
                                                             </tr>
                                                             <tr id="trSpread" style="display: none">
@@ -2866,6 +2909,43 @@
                                                                                         <tr>
                                                                                             <td valign="top">
                                                                                                 <div id="divChartTVISpread"></div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <%--<table class="TDBOX" border="0" cellpadding="5" cellspacing="0" width="90%">
+                                                                                                    <tr class="TRTABLEBOX">
+                                                                                                        <td class="TDTABLEBOXLEFT">
+                                                                                                            <b>
+                                                                                                            <asp:Localize ID="locChromVariation" Text="Chromatic Variation" runat="server" meta:resourcekey="locChromaticVariationResource1"></asp:Localize></b>
+                                                                                                        </td>                                                                                                        
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <table class="chromVariationTable">
+                                                                                                                <tr>
+                                                                                                                    <th>20</th>
+                                                                                                                    <th class="td25">25</th>
+                                                                                                                    <th>40</th>
+                                                                                                                    <th>50</th>
+                                                                                                                    <th>60</th>
+                                                                                                                    <th>75</th>
+                                                                                                                    <th>80</th>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td>10</td>
+                                                                                                                    <td>20</td>
+                                                                                                                    <td>30</td>
+                                                                                                                    <td>40</td>
+                                                                                                                    <td>50</td>
+                                                                                                                    <td>60</td>
+                                                                                                                    <td>70</td>
+                                                                                                                </tr>
+                                                                                                            </table>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </table>--%>
+
                                                                                             </td>
                                                                                         </tr>
                                                                                     </table>
