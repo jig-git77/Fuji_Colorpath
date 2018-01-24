@@ -239,7 +239,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Verification mode
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //---Only display Report Grading for Sync4D Validation
                     {
-                        // Div_ReportGrading.Visible = true; //---Disable for time being in Production code
+                        Div_ReportGrading.Visible = true; //---Disable for time being in Production code
                     }
 
                     lbtnDownloadAndSaveDLP.Visible = false;
@@ -296,7 +296,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         dvTab_TVI.Visible = Tab_TVI.Visible = false;
                     }
                     Div_MetricSumFilter.Visible = true;
-                    //Div_ReportCMYKDensity.Visible = true;  //---Disable for time being in Production code
+                    Div_ReportCMYKDensity.Visible = true;  //---Disable for time being in Production code
                 }
                 else   //-----DLP Optimization
                 {

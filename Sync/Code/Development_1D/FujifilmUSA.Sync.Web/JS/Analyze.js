@@ -343,19 +343,6 @@ $(document).ready(function () {
 
     $btnGeneratePDF.on('click', function (e) {
         e.preventDefault();
-        debugger;
-        var chartContent = {
-            CurrentUserId: CURRENT_USER_ID,
-            ABComparisionSpiderChart: '',
-            ABActualTargetChart: '',
-            LComparisionChart: '',
-            LGrayBalanceChart: '',
-            AGrayBalanceChart: '',
-            BGrayBalanceChart: ''
-        };
-
-
-
         var apiParameter = {
             //chart: chartContent,
             MeasurementId: measurementID,
@@ -472,6 +459,75 @@ $(document).ready(function () {
         });
     });
 });
+
+function GetGradingReport(reportDetail) {
+
+    var measurementID = parseInt($hdMeasurement);
+    var apiParameter = {
+        MeasurementId: measurementID,
+        ProjectId: $hdnProjectID,
+        IsAverageOfMeasurements: $isAverageOfMeasurements,
+        IsVerificationProject: $hdnVerification,
+        IsSync1DTypeProject: $hdnSync1DType,
+        fromDeltaE: $selectedDeltaE,
+        validationType: $hdnValidationType,
+        CurrentUserId: CURRENT_USER_ID,
+        ReportDLPName: $hdnReportDLPName,
+        ABComparisionSpiderChart: '',
+        InkPaperPatchChart: '',
+        ABActualTargetChart: '',
+        LComparisionChart: '',
+        LGrayBalanceChart: '',
+        AGrayBalanceChart: '',
+        BGrayBalanceChart: '',
+        DeltaSummaryChart: '',
+        InkPaperLAB1Chart: '',
+        InkPaperLAB2Chart: '',
+        InkPaperDansityChart: '',
+        TVI_ISO_CMYK_Chart: '',
+        TVI_ISO_Cyan_Chart: '',
+        TVI_ISO_Magenta_Chart: '',
+        TVI_ISO_Yellow_Chart: '',
+        TVI_ISO_Black_Chart: '',
+
+        TVI_Summary_Chart: '',
+        GrayBalanceDeltaCH_Chart: '',
+        GrayBalanceDeltaL_Chart: '',
+        BlackBalanceDeltaL_Chart: '',
+        BlackNPDChart: '',
+        GrayNPDChart: '',
+        grading: reportDetail
+    };
+
+    apiParameter.ABComparisionSpiderChart = GetABComparisionSpiderChartImage();
+    apiParameter.InkPaperPatchChart = GetInkPaperPatchChartImage();
+    apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
+    apiParameter.AGrayBalanceChart = Get_A_BalanceChartImage();
+    apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
+    apiParameter.InkPaperLAB1Chart = Get_InkPaperChartLAB_OneChartImage();
+    apiParameter.InkPaperLAB2Chart = Get_InkPaperChartLAB_TwoChartImage();
+
+    $.ajax({
+        url: SERVICE_BASE_URL + 'api/Report/ExportReportGrading',
+        //url: SERVICE_BASE_URL + 'api/Report/ExportChartReport',
+        //data: {},
+        //data: JSON.stringify(chartContent),
+        data: JSON.stringify(apiParameter),
+        type: 'POST',
+        //dataType: 'json',
+        headers: {
+            "content-type": "application/json",
+        },
+        success: function (response) {
+            //console.log(response);
+            window.open(SERVICE_BASE_URL + response.data, "_blank");
+        },
+        error: function (xhr, errorType, exception) {
+            alert(exception);
+
+        }
+    });
+}
 
 
 ////************************ CHART BINDINGS  ***********************////

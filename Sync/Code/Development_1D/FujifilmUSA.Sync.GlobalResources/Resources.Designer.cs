@@ -2185,6 +2185,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid Grading details have been provided..
+        /// </summary>
+        internal static string Error_Invalid_GradingDetails {
+            get {
+                return ResourceManager.GetString("Error_Invalid_GradingDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid IsAverageOfMeasurements have been provided..
         /// </summary>
         internal static string Error_Invalid_IsAverageOfMeasurements {
@@ -2217,6 +2226,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string Error_Invalid_MeasurementId {
             get {
                 return ResourceManager.GetString("Error_Invalid_MeasurementId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid ProjectId has been provided..
+        /// </summary>
+        internal static string Error_Invalid_ProjectId {
+            get {
+                return ResourceManager.GetString("Error_Invalid_ProjectId", resourceCulture);
             }
         }
         

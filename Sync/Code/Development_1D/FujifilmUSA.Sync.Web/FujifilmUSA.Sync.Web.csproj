@@ -1973,6 +1973,7 @@
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_Default.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_ISO.htm" />
+    <Content Include="Templates\kendoScoringMeasurement_Default.htm" />
     <Content Include="Templates\ScoringMeasurement_Default.htm" />
     <Content Include="Templates\style.css" />
     <Content Include="Templates\kendoPrepressSingleMeasurement_G7.htm" />

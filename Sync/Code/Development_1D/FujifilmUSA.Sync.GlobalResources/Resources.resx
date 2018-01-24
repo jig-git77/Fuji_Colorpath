@@ -1275,4 +1275,10 @@
   <data name="selectMeasurementMsg" xml:space="preserve">
     <value>Atleast one measurement should be checked</value>
   </data>
+  <data name="Error_Invalid_ProjectId" xml:space="preserve">
+    <value>Invalid ProjectId has been provided.</value>
+  </data>
+  <data name="Error_Invalid_GradingDetails" xml:space="preserve">
+    <value>Invalid Grading details have been provided.</value>
+  </data>
 </root>

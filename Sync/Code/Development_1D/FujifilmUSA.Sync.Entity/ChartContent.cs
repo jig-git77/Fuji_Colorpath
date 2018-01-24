@@ -6,8 +6,9 @@ using System.Text;
 namespace FujifilmUSA.Sync.Entity
 {
     public class ChartContent
-    {
+    {        
         public int? MeasurementId { get; set; }
+        public int? ProjectId { get; set; }
         public bool? IsAverageOfMeasurements { get; set; }
         public string IsVerificationProject { get; set; }
         public string IsSync1DTypeProject { get; set; }
@@ -42,5 +43,7 @@ namespace FujifilmUSA.Sync.Entity
 
         public string BlackNPDChart { get; set; }
         public string GrayNPDChart { get; set; }
+
+        public ReportGrading grading { get; set; }
     }
 }

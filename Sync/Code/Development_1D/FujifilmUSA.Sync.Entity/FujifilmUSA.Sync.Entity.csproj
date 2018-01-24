@@ -74,6 +74,7 @@
     <Compile Include="MeasurementPatch_AvgDelta.cs" />
     <Compile Include="CPSyncV\MetricTargetPreset.cs" />
     <Compile Include="CPSync1D\PrintStandardType.cs" />
+    <Compile Include="ReportGrading.cs" />
     <Compile Include="Spectral.cs" />
     <Compile Include="CPSpot\SpotProjectLibrary.cs" />
     <Compile Include="CPSpot\SpotTarget.cs" />

@@ -321,7 +321,7 @@ namespace FujifilmUSA.Sync.Common
                 }
                 else if (ReportType == 19) //----For Default mode in Sync4D validation project for Scoring report
                 {
-                    FileName = "Templates/ScoringMeasurement_Default.htm";
+                    FileName = "Templates/kendoScoringMeasurement_Default.htm";
                 }
 
                 string FilePath = this._WebURL + FileName;
