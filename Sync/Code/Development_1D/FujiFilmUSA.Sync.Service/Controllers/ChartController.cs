@@ -19,10 +19,11 @@ using System.Web.Http.Controllers;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
-    public class ChartController : BaseController, IViewAnalyze
+    public class ChartController : BaseController, IViewAnalyze, IViewReportCMYKDensity
     {
         #region Variable Declarations
         private PresenterAnalyze _presenterAnalyze;
+        private PresenterReportCMYKDensity _presenterReportCMYKDensity;
         private Dictionary<string, string> _resourceValues { get; set; }
         private Dictionary<string, string> _globalResourceValues { get; set; }
         private const string _InvalidMeasurementId = "Error_Invalid_MeasurementId";
@@ -37,6 +38,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             _presenterAnalyze = new PresenterAnalyze(this);
+            _presenterReportCMYKDensity = new PresenterReportCMYKDensity(this);
             _globalResourceValues = new Dictionary<string, string>();
             _resourceValues = new Dictionary<string, string>();
             _resourceValues.Add("_recgbPatchMetrics", "gbPatchMetricsText");
@@ -110,7 +112,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("gridAnalyzeHeaderDelta_CHResource", "gridAnalyzeHeaderDelta_CHResource");
             _resourceValues.Add("gridAnalyzeHeaderDelta_LResource", "gridAnalyzeHeaderDelta_LResource");
             _resourceValues.Add("selectMeasurementMsg", "selectMeasurementMsg");
-            
+
 
             base.Initialize(controllerContext);
         }
@@ -150,7 +152,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     {
                         //This will be called when Verification process is going on
                         this.ProjectId = Convert.ToInt32(ProjectId);
-                        _presenterAnalyze.GetAnalyzeChartVMeasurement();                        
+                        _presenterAnalyze.GetAnalyzeChartVMeasurement();
                     }
                     else
                     {
@@ -1078,7 +1080,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
-        
+
 
         [HttpGet]
         public ValidationMetrics[] GetValidationMetrics(int? MeasurementId, string fromDeltaE, bool? IsAverageOfMeasurements, bool? IsVerificationProject,
@@ -1127,7 +1129,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 this.MeasurementId = Convert.ToInt32(MeasurementId);
                 this.IsUsed = isMeasurementUsed == null ? false : Convert.ToBoolean(isMeasurementUsed); ;
                 this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);                               
+                this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                 _presenterAnalyze.UpdateMeasurementByAnalyzeChartFromService();
                 isSuccess = true;
 
@@ -1145,14 +1147,72 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
+        public IHttpActionResult GetColorDensityChart(int? OptimizationRunId)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            CMYKDensity colorDensity = new CMYKDensity();
+            try
+            {
+                if (OptimizationRunId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.Message = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    DetermineCulture();
+                    DSDensity_C = new DataTable();
+                    DSDensity_M = new DataTable();
+                    DSDensity_Y = new DataTable();
+                    DSDensity_K = new DataTable();
+
+                    this.OptimizeRunId = Convert.ToInt32(OptimizationRunId);
+                    _presenterReportCMYKDensity.GetDensityData_C();
+
+                    colorDensity.CyanList = GetColorDensityDetails(DSDensity_C);
+                    colorDensity.MagentaList = GetColorDensityDetails(DSDensity_M);
+                    colorDensity.YellowList = GetColorDensityDetails(DSDensity_Y);
+                    colorDensity.BlackList = GetColorDensityDetails(DSDensity_K);
+
+                    //Get resource values
+                    GenerateResources();
+                    httpResponse.Data = new
+                    {
+                        CMYKDensity = colorDensity,
+                        GlobalResources = _globalResourceValues
+                    };
+
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.Message = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
         public HttpResponseMessage DownloadFile(string filePath)
         {
             var fullPath = System.Web.Hosting.HostingEnvironment.MapPath(filePath);
             var fileName = Path.GetFileName(fullPath);
             var stream = new FileStream(fullPath, FileMode.Open);
-          //  byte[] dataBytes = new System.Net.WebClient().DownloadData(filePath);
+            //  byte[] dataBytes = new System.Net.WebClient().DownloadData(filePath);
             //var dataBytes = File.ReadAllBytes(System.Web.Hosting.HostingEnvironment.MapPath(filePath));
-          //  var dataStream = new MemoryStream(dataBytes);
+            //  var dataStream = new MemoryStream(dataBytes);
 
             // processing the stream.
 
@@ -1178,6 +1238,23 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
                 _globalResourceValues.Add(item.Key, GlobalResourceManager.Instance.GetGlobalResourceString(item.Value));
             }
+        }
+
+        public List<ColorDensity> GetColorDensityDetails(DataTable dt)
+        {
+            List<ColorDensity> list = new List<ColorDensity>();
+            if (dt != null && dt.Rows.Count > 0)
+                for (int index = 0; index < dt.Rows.Count; index++)
+                    list.Add(new ColorDensity()
+                    {
+                        MeasurementID = Convert.ToInt32(dt.Rows[index]["MeasurementID"]),
+                        Color = Convert.ToString(dt.Rows[index]["Color"]),
+                        Density = Convert.ToDecimal(dt.Rows[index]["Density"]),
+                        ΔE = Convert.ToDecimal(dt.Rows[index]["ΔE"]),
+                        ΔElimit = Convert.ToDecimal(dt.Rows[index]["ΔElimit"])
+                    });
+
+            return list;
         }
 
         #region Methods for Patch Details tab
@@ -1395,6 +1472,13 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public Project Project { get; set; }
         public int SpotProjectId { get; set; }
         public bool IsUsed { get; set; }
+        #endregion
+
+        #region IViewReportCMYKDensity Members
+        public DataTable DSDensity_C { get; set; }
+        public DataTable DSDensity_M { get; set; }
+        public DataTable DSDensity_Y { get; set; }
+        public DataTable DSDensity_K { get; set; }
         #endregion
     }
 }
