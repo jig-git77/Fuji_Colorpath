@@ -457,11 +457,46 @@
                         <br />
 
                     </div>
+                    <br />
+                    <div class="Analyze_head">
+                        <div id="divAnalyzeHeader"  class="Analyze_head_text" 
+                            style="font-weight: bold; font-size: 14px; float: left;display:none;">
+                            <asp:Localize runat="server" Text="Analyze Measurement :" ID="Localize21"
+                                meta:resourcekey="locAnaluzeMeasurementResource1"></asp:Localize>
+                            <asp:Label ID="lblNewAnalyzeLabel" Style="font-size: 12px !important;" runat="server" ClientIDMode="Static"></asp:Label>
+                        </div>
+                        <div id="divAnalyzePagingSection" style="display:none;">
+                            <asp:Label ID="lblPagingMsg" runat="server" ClientIDMode="Static" Text="Record(s) {start} to {end} of {total}"></asp:Label>
+                            &nbsp;|&nbsp;<asp:ImageButton
+                                ID="btnFirst" runat="server" ImageUrl="~/Images/Nav_FirstPage_off.gif" ClientIDMode="Static"/>&nbsp;
+                                <asp:ImageButton ID="btnPrevious" runat="server" ClientIDMode="Static"
+                                    ImageUrl="~/Images/Nav_PreviousPage_off.gif" Style="height: 13px" />&nbsp;
+                                    <asp:ImageButton ID="btnNext" runat="server" ImageUrl="~/Images/Nav_NextPage_off.gif" ClientIDMode="Static" />&nbsp;
+                                        <asp:ImageButton ID="btnLast" runat="server" ImageUrl="~/Images/Nav_LastPage_off.gif"  ClientIDMode="Static" />&nbsp;|&nbsp;
+                                        <asp:Localize runat="server" ID="Localize22" Text="Records" meta:resourcekey="locRecordsResource1"></asp:Localize>&nbsp;
+                                        <asp:DropDownList ID="ddlView" runat="server" CssClass="DROPDOWNLIST2" ClientIDMode="Static">
+                                                    <asp:ListItem Value="5" Selected="True">5</asp:ListItem>
+                                                    <asp:ListItem Value="10">10</asp:ListItem>
+                                                    <asp:ListItem Value="25">25</asp:ListItem>
+                                                    <asp:ListItem Value="50">50</asp:ListItem>
+                                                    <asp:ListItem Value="100">100</asp:ListItem>
+                                                </asp:DropDownList>
+                            &nbsp;|&nbsp;<asp:Localize Text="Go to page" runat="server" ID="Localize23" meta:resourcekey="locGoToPageResource1"></asp:Localize>&nbsp;
+                            <asp:DropDownList ID="ddlPaging" runat="server" CssClass="DROPDOWNLIST2" Width="45px"  ClientIDMode="Static">
+                            </asp:DropDownList>
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="section_middle">
+                        <center>
+                    <div id="divAnalyzeChart"></div>                                    
+                        </center>
+                    </div>
                 </div>
-                <br />
+                <%--<br />
                 <div>
-                    <div id="divAnalyzeChart"></div>
-                </div>
+                    
+                </div>--%>
             </td>
         </tr>
     </table>

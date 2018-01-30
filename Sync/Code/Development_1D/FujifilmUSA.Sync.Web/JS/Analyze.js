@@ -81,6 +81,15 @@ var $divChartTVIISO_CMYK;
 var $tblDensityChart;
 var $hdnReportDLPName;
 var $hdnCurrentMeasurement;
+var viewNumber = 0;
+var pageNumber = 0;
+var totalPages = 0;
+var $btnPrevious;
+var $ddlView;
+var $ddlPaging;
+var $btnNext;
+var $btnLast;
+var $btnFirst;
 
 //********** kendo objects *********//
 var drawing = kendo.drawing;
@@ -231,6 +240,12 @@ $(document).ready(function () {
     $tblDensityChart = $("#tblDensityChart");
     $selectedDeltaE = $rbtnListDeltaE.find('input:checked').val();
     $hdnCurrentMeasurement = $("#hdnCurrentMeasurement");
+    $btnPrevious = $('#btnPrevious');
+    $ddlView = $('#ddlView');
+    $ddlPaging = $('#ddlPaging');
+    $btnNext = $('#btnNext');
+    $btnLast = $('#btnLast');
+    $btnFirst = $('#btnFirst');
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
 
@@ -458,6 +473,63 @@ $(document).ready(function () {
             }
         });
     });
+
+
+    //------------ Analyze paging feture events -------------//
+    $ddlView.on('change', function (e) {
+        e.preventDefault();
+        BindPageNumber();
+        PopulateAnalyzeChart();
+    });
+
+    $ddlPaging.on('change', function (e) {
+        e.preventDefault();
+        PopulateAnalyzeChart();
+    });
+
+    $btnPrevious.on('click', function (e) {
+        e.preventDefault();
+
+        var prevPageNumber = pageNumber - 1;
+        $ddlPaging.val(prevPageNumber.toString());
+        if (prevPageNumber == 1) {
+            SetPrevButtonDisabled(true);
+        }
+        SetNextButtonDisabled(false);
+        PopulateAnalyzeChart();
+    });
+
+    $btnNext.on('click', function (e) {
+        e.preventDefault();
+
+        var nextPageNumber = pageNumber + 1;
+        $ddlPaging.val(nextPageNumber.toString());
+        if (nextPageNumber == totalPages) {
+            SetNextButtonDisabled(true);
+        }
+        SetPrevButtonDisabled(false);
+        PopulateAnalyzeChart();
+    });
+
+    $btnFirst.on('click', function (e) {
+        e.preventDefault();
+        $ddlPaging.val('1');
+
+        SetPrevButtonDisabled(true);
+        SetNextButtonDisabled(false);
+        PopulateAnalyzeChart();
+    });
+
+    $btnLast.on('click', function (e) {
+        e.preventDefault();
+        $ddlPaging.val(totalPages);
+
+        SetPrevButtonDisabled(false);
+        SetNextButtonDisabled(true);
+        PopulateAnalyzeChart();
+    });
+
+
 });
 
 function GetGradingReport(reportDetail) {
@@ -553,7 +625,17 @@ function BindAnalyzeChart() {
         success: function (response) {
             if (response.data != null) {
                 jsonAnalyzeList = response.data;
-                PopulateAnalyzeChart();
+                if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
+                    $('#divAnalyzeHeader').css('display', 'block');
+                    $('#lblNewAnalyzeLabel').html(jsonAnalyzeList.Measurements[0].MeasurementName);
+                } else {
+                    $('#divAnalyzePagingSection').css('display', 'block');
+
+                }
+                //PopulateAnalyzeChart();
+                //PopulateAnalyzeChart1();
+                BindPageNumber();
+                SetInitialAnalyzeBinding();
             }
         },
         error: function (xhr, errorType, exception) {
@@ -2367,10 +2449,320 @@ function BindMeasurementPatchDetails() {
 
 ////**************** POPULATE THE ANALYZE CHART  ****************////
 function PopulateAnalyzeChart() {
+
+    var indexStart = 0;
+    var indexEnd = 0;
+    viewNumber = parseInt($ddlView.val());
+    pageNumber = parseInt($ddlPaging.val());
+    if (viewNumber != -1) {
+        indexEnd = viewNumber * pageNumber;
+        indexStart = indexEnd - viewNumber;
+        indexEnd = indexEnd > jsonAnalyzeList.Measurements.length ? jsonAnalyzeList.Measurements.length : indexEnd;
+    } else {
+        indexEnd = jsonAnalyzeList.Measurements.length - 1;
+        indexStart = 0;
+    }
+
+    $('#lblPagingMsg').html('Record(s) ' + (indexStart + 1) + ' to ' + (indexEnd) + ' of ' + jsonAnalyzeList.Measurements.length + '');
+
+
+    var analyzeSeriesResult = $.grep(jsonAnalyzeList.Measurements, function (item, index) {
+        return index > indexStart - 1 && index < indexEnd;
+    });
+
+
+    var patchArray = [];
+    if (analyzeSeriesResult.length > 0) {
+
+        //check last measurement
+        if ($hdnCurrentMeasurement.val() == '') {
+            $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
+        }
+
+        //get the name of the measurement name list
+        //measurementNamesList = $.map(jsonAnalyzeList.Measurements, function (e) {
+        //    return e.MeasurementName;
+        //});
+
+        measurementNamesList = $.map(analyzeSeriesResult, function (e) {
+            var curObj = {
+                MeasurementId: e.MeasurementId,
+                MeasurementName: e.MeasurementName,
+                IsUsed: e.IsUsed,
+                MeasurementStatus: e.MeasurementStatus,
+                MeasurementDate: e.MeasurementDate,
+            };
+            return curObj;
+        });
+
+        //get the available list of htmlcodes
+        var htmlPatchCodeList = $.map(analyzeSeriesResult[0].MeasurementPatches, function (e) {
+            return e.HtmlColor;
+        });
+
+        //generate new array to display the patches
+        $.each(htmlPatchCodeList, function (index, htmlCode) {
+
+            //check one by one all html code
+            $.each(analyzeSeriesResult, function (index, measureObj) {
+
+                //check the current patch in the main list
+                var arr1Obj1 = $.grep(measureObj.MeasurementPatches, function (e) {
+                    return e.HtmlColor == htmlCode;
+                });
+
+                //check the patch is already available in the resulted array
+                var availablePatch = $.grep(patchArray, function (e) {
+                    return e.color == htmlCode;
+                });
+                //if exists then
+                if (availablePatch.length > 0) {
+                    availablePatch[0].data.push(arr1Obj1[0].Δe2000); //add into existing E2000 in data array
+                }
+                else {//add new object in resulted array
+
+                    if (arr1Obj1.length > 0) {
+                        var patchObj = {
+                            data: [arr1Obj1[0].Δe2000],
+                            color: arr1Obj1[0].HtmlColor,
+                            //markers: {
+                            //    background: arr1Obj1[0].HtmlColor
+                            //}
+                        }
+
+                        patchArray.push(patchObj);
+                    }
+                }
+            });
+        });
+    }
+
+
+
+    $divAnalyzeChart.kendoChart({
+        seriesDefaults: {
+            type: "line",
+            style: "smooth",
+            markers: {
+                background: function (e) {
+                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation && e.category.MeasurementId != parseInt($hdnCurrentMeasurement.val())) {
+                        if (e.category.MeasurementStatus != 'OK') {
+                            return "red";
+                        } else {
+                            return "gray";
+                        }
+                    }
+                    else {
+                        if (e.category.MeasurementId == parseInt($hdnCurrentMeasurement.val())) {
+                            return e.series.color;
+                        }
+                        else {
+                            return "gray";
+                        }
+                    }
+                },
+                border: {
+                    width: 1,
+                    color: function (e) {
+                        if ($hdnCurrentDlpSubOperation == ELicenseType.Validation && e.category.MeasurementId != parseInt($hdnCurrentMeasurement.val())) {
+                            if (e.category.MeasurementStatus != 'OK') {
+                                return "red";
+                            } else {
+                                return "gray";
+                            }
+                        }
+                        else {
+                            if (e.category.MeasurementId == parseInt($hdnCurrentMeasurement.val())) {
+                                return e.series.color;
+                            }
+                            else {
+                                return "gray";
+                            }
+                        }
+                    }
+                },
+                type: function (e) {
+
+                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation && e.category.MeasurementId != parseInt($hdnCurrentMeasurement.val())) {
+                        if (e.category.MeasurementStatus != 'OK') {
+                            return "triangle";
+                        } else {
+                            return "circle";
+                        }
+                    }
+                    else {
+                        return "circle";
+                    }
+                },
+            }
+        },
+        series: patchArray,
+        valueAxis: {
+            // name: "valueAxis",
+            title: {
+                text: 'Δ' + $selectedDeltaE
+            },
+            labels: {
+                format: "{0}"
+            },
+            line: {
+                visible: false
+            },
+            axisCrossingValue: -10,
+            //majorUnit: 2
+        },
+        categoryAxis: {
+            name: "categoryAxis",
+            categories: measurementNamesList,
+            majorGridLines: {
+                visible: false
+            },
+            labels: {
+                rotation: "auto",
+                //cursor: "pointer",
+                visual: function (e) {
+
+                    // Create an empty group that will hold the rendered label
+                    var visual = new kendo.drawing.Group();
+                    // Build an HTML fragment and append it to the body                    
+                    //get the category values
+                    var catValue = e.value;
+
+                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                        //
+
+                        //set checked or not
+                        var catText = '<div style="font-size:10px;cursor: pointer;">' + formatMeasurementDateWithTime(catValue.MeasurementDate) + '</div>';
+                        //if (catValue.IsUsed) {
+                        //    catText = '<div style="font-size:18px;cursor: pointer;">☑</div>'
+                        //}
+                        var html = $(catText).appendTo(document.body);
+
+                        // Store a reference to the target rectangle, see below
+                        var rect = e.rect;
+
+                        //create kendo DOM
+                        kendo.drawing.drawDOM(html)
+                            .done(function (group) {
+                                // Clean-up HTML fragment
+                                html.remove();
+
+                                // Center the label using Layout
+                                var layout = new kendo.drawing.Layout(rect, {
+                                    justifyContent: "center"
+                                });
+                                layout.append(group);
+                                layout.reflow();
+
+                                // Render the content
+                                visual.append(layout);
+                            });
+                    } else {
+
+                        //set checked or not
+                        var catText = '<div style="font-size:18px;cursor: pointer;">' + (catValue.IsUsed ? '☑' : '☐') + '</div>'
+                        //if (catValue.IsUsed) {
+                        //    catText = '<div style="font-size:18px;cursor: pointer;">☑</div>'
+                        //}
+                        var html = $(catText).appendTo(document.body);
+
+                        // Store a reference to the target rectangle, see below
+                        var rect = e.rect;
+
+                        //create kendo DOM
+                        kendo.drawing.drawDOM(html)
+                            .done(function (group) {
+                                // Clean-up HTML fragment
+                                html.remove();
+
+                                // Center the label using Layout
+                                var layout = new kendo.drawing.Layout(rect, {
+                                    justifyContent: "center"
+                                });
+                                layout.append(group);
+                                layout.reflow();
+
+                                // Render the content
+                                visual.append(layout);
+                            });
+
+                    }
+                    return visual;
+                }
+            },
+        },
+        tooltip: {
+            visible: true,
+            template: "${category.MeasurementName}",
+        },
+        chartArea: {
+            width: 675,
+            height: 200,
+            background: "gray",
+            opacity: 0.3
+        },
+
+        axisLabelClick: function (e) {
+
+            //get the current clicked category data
+            var currentObj = e.value;
+            //check only one category available or not
+            if (measurementNamesList.length <= 1 && currentObj.IsUsed) {
+                alert(_Resources.selectMeasurementMsg);
+                return false;
+            }
+
+            //check in multiple category
+            var otherMeasurements = $.grep(measurementNamesList, function (elem) {
+                return elem.MeasurementId != currentObj.MeasurementId && (elem.IsUsed || !currentObj.IsUsed)
+            });
+
+            //check atleast one category should checked
+            if (otherMeasurements.length == 0) {
+                alert(_Resources.selectMeasurementMsg);
+                return false;
+            }
+            //api call to update the measurement
+            var apiParameters = {
+                MeasurementId: currentObj.MeasurementId,
+                isMeasurementUsed: !currentObj.IsUsed,
+                IsVerificationProject: $hdnVerification,
+                IsSync1DTypeProject: $hdnSync1DType,
+            };
+
+            $.ajax({
+                url: SERVICE_BASE_URL + 'api/Chart/UpdateMeasurementFromAnalyzeChart',
+                data: apiParameters,
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    $hdnCurrentMeasurement.val(MeasurementId);
+                    BindAnalyzeChart();
+                },
+                error: function (xhr, errorType, exception) {
+                    //alert(exception);                    
+                }
+            });
+
+        }
+    });
+}
+
+
+
+function PopulateAnalyzeChart1() {
     //console.log(jsonAnalyzeList);
     //var measurementNamesList = [];
     var patchArray = [];
     if (jsonAnalyzeList.Measurements.length > 0) {
+
+        if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
+            $('#divAnalyzeHeader').css('display', 'block');
+            $('#lblNewAnalyzeLabel').html(jsonAnalyzeList.Measurements[0].MeasurementName);
+        } else {
+            $('#divAnalyzePagingSection').css('display', 'block');
+
+        }
 
         //check last measurement
         if ($hdnCurrentMeasurement.val() == '') {
@@ -2599,17 +2991,17 @@ function PopulateAnalyzeChart() {
             background: "gray",
             opacity: 0.3
         },
-        pannable: {
-            lock: "y"
-        },
-        zoomable: {
-            mousewheel: {
-                lock: "y"
-            },
-            selection: {
-                lock: "y"
-            }
-        },
+        //pannable: {
+        //    lock: "y"
+        //},
+        //zoomable: {
+        //    mousewheel: {
+        //        lock: "y"
+        //    },
+        //    selection: {
+        //        lock: "y"
+        //    }
+        //},
         //render: renderChartWithBackgroundByCategory,
         //plotArea: {
         //    background: "lightgray"
@@ -4390,7 +4782,7 @@ function Get_L_BalanceChartImage() {
         }
     }
     var chart = $chart_L_BalanceChart.data("kendoChart");
-    return chart.imageDataURL();    
+    return chart.imageDataURL();
 }
 
 ////**************** GET IMAGE OF A-BALANCE CHART FOR REPORT  ****************////
@@ -4413,7 +4805,7 @@ function Get_A_BalanceChartImage() {
         }
     }
     var chart = $chart_A_BalanceChart.data("kendoChart");
-    return chart.imageDataURL();   
+    return chart.imageDataURL();
 }
 
 ////**************** GET IMAGE OF B-BALANCE CHART FOR REPORT  ****************////
@@ -4760,7 +5152,7 @@ function renderChartWithBackgroundByCategory(e) {
 function formatMeasurementDateWithTime(d) {
     var date = new Date(d);
     var day = date.getDate();
-    var month = date.getMonth();
+    var month = date.getMonth() + 1;
     var year = date.getFullYear();
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -4771,4 +5163,44 @@ function formatMeasurementDateWithTime(d) {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     var strTime = month + '/' + day + '/' + year + '<br/>' + hours + ':' + minutes + ':' + seconds + ' ' + ampm;
     return strTime
+}
+
+
+function BindPageNumber() {
+
+    if (jsonAnalyzeList.Measurements.length > 0) {
+        viewNumber = parseInt($ddlView.val());
+        totalPages = jsonAnalyzeList.Measurements.length % viewNumber == 0 ? (jsonAnalyzeList.Measurements.length / viewNumber) : (jsonAnalyzeList.Measurements.length / viewNumber + 1);
+        totalPages = totalPages <= 0 ? 1 : parseInt(totalPages);
+        if (totalPages == 1) {
+            SetPrevButtonDisabled(true);
+            SetNextButtonDisabled(true);
+        } else {
+            SetPrevButtonDisabled(false);
+            SetNextButtonDisabled(false);
+        }
+        $ddlPaging.empty();
+        for (var index = 1; index <= totalPages; index++) {
+            $ddlPaging.append($('<option>', {
+                value: index,
+                text: index
+            }));
+        }
+    }
+}
+
+function SetPrevButtonDisabled(enabled) {
+    $btnPrevious.prop('disabled', enabled);
+    $btnFirst.prop('disabled', enabled);
+}
+
+function SetNextButtonDisabled(enabled) {
+    $btnNext.prop('disabled', enabled);
+    $btnLast.prop('disabled', enabled);
+}
+
+function SetInitialAnalyzeBinding() {
+    SetNextButtonDisabled(true);
+    $ddlPaging.find('option').last().attr('selected', true);
+    PopulateAnalyzeChart();
 }
