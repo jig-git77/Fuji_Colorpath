@@ -2475,9 +2475,9 @@ function PopulateAnalyzeChart() {
     if (analyzeSeriesResult.length > 0) {
 
         //check last measurement
-        if ($hdnCurrentMeasurement.val() == '') {
+        //if ($hdnCurrentMeasurement.val() == '') {
             $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
-        }
+        //}
 
         //get the name of the measurement name list
         //measurementNamesList = $.map(jsonAnalyzeList.Measurements, function (e) {
@@ -2736,7 +2736,7 @@ function PopulateAnalyzeChart() {
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
-                    $hdnCurrentMeasurement.val(MeasurementId);
+                    $hdnCurrentMeasurement.val(currentObj.MeasurementId);
                     BindAnalyzeChart();
                 },
                 error: function (xhr, errorType, exception) {
