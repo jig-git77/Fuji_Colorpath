@@ -466,7 +466,7 @@
                             <asp:Label ID="lblNewAnalyzeLabel" Style="font-size: 12px !important;" runat="server" ClientIDMode="Static"></asp:Label>
                         </div>
                         <div id="divAnalyzePagingSection" style="display:none;">
-                            <asp:Label ID="lblPagingMsg" runat="server" ClientIDMode="Static" Text="Record(s) {start} to {end} of {total}"></asp:Label>
+                            <asp:Label ID="lblPagingMsg" runat="server" ClientIDMode="Static" Text="Record(s) {start} to {end} of {total}" Width="140"></asp:Label>
                             &nbsp;|&nbsp;<asp:ImageButton
                                 ID="btnFirst" runat="server" ImageUrl="~/Images/Nav_FirstPage_off.gif" ClientIDMode="Static"/>&nbsp;
                                 <asp:ImageButton ID="btnPrevious" runat="server" ClientIDMode="Static"

@@ -635,7 +635,7 @@ function BindAnalyzeChart() {
                 //PopulateAnalyzeChart();
                 //PopulateAnalyzeChart1();
                 BindPageNumber();
-                SetInitialAnalyzeBinding();
+                //SetInitialAnalyzeBinding();
             }
         },
         error: function (xhr, errorType, exception) {
@@ -2455,9 +2455,13 @@ function PopulateAnalyzeChart() {
     viewNumber = parseInt($ddlView.val());
     pageNumber = parseInt($ddlPaging.val());
     if (viewNumber != -1) {
-        indexEnd = viewNumber * pageNumber;
-        indexStart = indexEnd - viewNumber;
-        indexEnd = indexEnd > jsonAnalyzeList.Measurements.length ? jsonAnalyzeList.Measurements.length : indexEnd;
+        //indexEnd = viewNumber * pageNumber;
+        //indexStart = indexEnd - viewNumber;
+        //indexEnd = indexEnd > jsonAnalyzeList.Measurements.length ? jsonAnalyzeList.Measurements.length : indexEnd;
+
+        indexEnd = jsonAnalyzeList.Measurements.length - ((totalPages - pageNumber) * viewNumber);
+        indexStart = (indexEnd - viewNumber) < 0 ? 0 : (indexEnd - viewNumber);
+
     } else {
         indexEnd = jsonAnalyzeList.Measurements.length - 1;
         indexStart = 0;
@@ -2633,7 +2637,7 @@ function PopulateAnalyzeChart() {
                         //
 
                         //set checked or not
-                        var catText = '<div style="font-size:12px;cursor: pointer;">' + formatMeasurementDateWithTime(catValue.MeasurementDate) + '</div>';
+                        var catText = '<div style="font-size:12px;cursor: pointer;text-align:center;">' + formatMeasurementDateWithTime(catValue.MeasurementDate) + '</div>';
                         //if (catValue.IsUsed) {
                         //    catText = '<div style="font-size:18px;cursor: pointer;">☑</div>'
                         //}
@@ -2749,309 +2753,6 @@ function PopulateAnalyzeChart() {
     });
 }
 
-
-
-function PopulateAnalyzeChart1() {
-    //console.log(jsonAnalyzeList);
-    //var measurementNamesList = [];
-    var patchArray = [];
-    if (jsonAnalyzeList.Measurements.length > 0) {
-
-        if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
-            $('#divAnalyzeHeader').css('display', 'block');
-            $('#lblNewAnalyzeLabel').html(jsonAnalyzeList.Measurements[0].MeasurementName);
-        } else {
-            $('#divAnalyzePagingSection').css('display', 'block');
-
-        }
-
-        //check last measurement
-        if ($hdnCurrentMeasurement.val() == '') {
-            $hdnCurrentMeasurement.val(jsonAnalyzeList.Measurements[jsonAnalyzeList.Measurements.length - 1].MeasurementId);
-        }
-
-        //get the name of the measurement name list
-        //measurementNamesList = $.map(jsonAnalyzeList.Measurements, function (e) {
-        //    return e.MeasurementName;
-        //});
-
-        measurementNamesList = $.map(jsonAnalyzeList.Measurements, function (e) {
-            var curObj = {
-                MeasurementId: e.MeasurementId,
-                MeasurementName: e.MeasurementName,
-                IsUsed: e.IsUsed,
-                MeasurementStatus: e.MeasurementStatus,
-                MeasurementDate: e.MeasurementDate,
-            };
-            return curObj;
-        });
-
-        //get the available list of htmlcodes
-        var htmlPatchCodeList = $.map(jsonAnalyzeList.Measurements[0].MeasurementPatches, function (e) {
-            return e.HtmlColor;
-        });
-
-        //generate new array to display the patches
-        $.each(htmlPatchCodeList, function (index, htmlCode) {
-
-            //check one by one all html code
-            $.each(jsonAnalyzeList.Measurements, function (index, measureObj) {
-
-                //check the current patch in the main list
-                var arr1Obj1 = $.grep(measureObj.MeasurementPatches, function (e) {
-                    return e.HtmlColor == htmlCode;
-                });
-
-                //check the patch is already available in the resulted array
-                var availablePatch = $.grep(patchArray, function (e) {
-                    return e.color == htmlCode;
-                });
-                //if exists then
-                if (availablePatch.length > 0) {
-                    availablePatch[0].data.push(arr1Obj1[0].Δe2000); //add into existing E2000 in data array
-                }
-                else {//add new object in resulted array
-
-                    if (arr1Obj1.length > 0) {
-                        var patchObj = {
-                            data: [arr1Obj1[0].Δe2000],
-                            color: arr1Obj1[0].HtmlColor,
-                            //markers: {
-                            //    background: arr1Obj1[0].HtmlColor
-                            //}
-                        }
-
-                        patchArray.push(patchObj);
-                    }
-                }
-            });
-        });
-    }
-
-
-
-    $divAnalyzeChart.kendoChart({
-        seriesDefaults: {
-            type: "line",
-            style: "smooth",
-            markers: {
-                background: function (e) {
-                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation && e.category.MeasurementId != parseInt($hdnCurrentMeasurement.val())) {
-                        if (e.category.MeasurementStatus != 'OK') {
-                            return "red";
-                        } else {
-                            return "gray";
-                        }
-                    }
-                    else {
-                        if (e.category.MeasurementId == parseInt($hdnCurrentMeasurement.val())) {
-                            return e.series.color;
-                        }
-                        else {
-                            return "gray";
-                        }
-                    }
-                },
-                border: {
-                    width: 1,
-                    color: function (e) {
-                        if ($hdnCurrentDlpSubOperation == ELicenseType.Validation && e.category.MeasurementId != parseInt($hdnCurrentMeasurement.val())) {
-                            if (e.category.MeasurementStatus != 'OK') {
-                                return "red";
-                            } else {
-                                return "gray";
-                            }
-                        }
-                        else {
-                            if (e.category.MeasurementId == parseInt($hdnCurrentMeasurement.val())) {
-                                return e.series.color;
-                            }
-                            else {
-                                return "gray";
-                            }
-                        }
-                    }
-                },
-                type: function (e) {
-
-                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation && e.category.MeasurementId != parseInt($hdnCurrentMeasurement.val())) {
-                        if (e.category.MeasurementStatus != 'OK') {
-                            return "triangle";
-                        } else {
-                            return "circle";
-                        }
-                    }
-                    else {
-                        return "circle";
-                    }
-                },
-            }
-        },
-        series: patchArray,
-        valueAxis: {
-            // name: "valueAxis",
-            title: {
-                text: 'Δ' + $selectedDeltaE
-            },
-            labels: {
-                format: "{0}"
-            },
-            line: {
-                visible: false
-            },
-            axisCrossingValue: -10,
-            //majorUnit: 2
-        },
-        categoryAxis: {
-            name: "categoryAxis",
-            categories: measurementNamesList,
-            majorGridLines: {
-                visible: false
-            },
-            labels: {
-                rotation: "auto",
-                //cursor: "pointer",
-                visual: function (e) {
-
-                    // Create an empty group that will hold the rendered label
-                    var visual = new kendo.drawing.Group();
-                    // Build an HTML fragment and append it to the body                    
-                    //get the category values
-                    var catValue = e.value;
-
-                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-                        //
-
-                        //set checked or not
-                        var catText = '<div style="font-size:10px;cursor: pointer;">' + formatMeasurementDateWithTime(catValue.MeasurementDate) + '</div>';
-                        //if (catValue.IsUsed) {
-                        //    catText = '<div style="font-size:18px;cursor: pointer;">☑</div>'
-                        //}
-                        var html = $(catText).appendTo(document.body);
-
-                        // Store a reference to the target rectangle, see below
-                        var rect = e.rect;
-
-                        //create kendo DOM
-                        kendo.drawing.drawDOM(html)
-                            .done(function (group) {
-                                // Clean-up HTML fragment
-                                html.remove();
-
-                                // Center the label using Layout
-                                var layout = new kendo.drawing.Layout(rect, {
-                                    justifyContent: "center"
-                                });
-                                layout.append(group);
-                                layout.reflow();
-
-                                // Render the content
-                                visual.append(layout);
-                            });
-                    } else {
-
-                        //set checked or not
-                        var catText = '<div style="font-size:18px;cursor: pointer;">' + (catValue.IsUsed ? '☑' : '☐') + '</div>'
-                        //if (catValue.IsUsed) {
-                        //    catText = '<div style="font-size:18px;cursor: pointer;">☑</div>'
-                        //}
-                        var html = $(catText).appendTo(document.body);
-
-                        // Store a reference to the target rectangle, see below
-                        var rect = e.rect;
-
-                        //create kendo DOM
-                        kendo.drawing.drawDOM(html)
-                            .done(function (group) {
-                                // Clean-up HTML fragment
-                                html.remove();
-
-                                // Center the label using Layout
-                                var layout = new kendo.drawing.Layout(rect, {
-                                    justifyContent: "center"
-                                });
-                                layout.append(group);
-                                layout.reflow();
-
-                                // Render the content
-                                visual.append(layout);
-                            });
-
-                    }
-                    return visual;
-                }
-            },
-        },
-        tooltip: {
-            visible: true,
-            template: "${category.MeasurementName}",
-        },
-        chartArea: {
-            width: 675,
-            height: 200,
-            background: "gray",
-            opacity: 0.3
-        },
-        //pannable: {
-        //    lock: "y"
-        //},
-        //zoomable: {
-        //    mousewheel: {
-        //        lock: "y"
-        //    },
-        //    selection: {
-        //        lock: "y"
-        //    }
-        //},
-        //render: renderChartWithBackgroundByCategory,
-        //plotArea: {
-        //    background: "lightgray"
-        //},
-        axisLabelClick: function (e) {
-
-            //get the current clicked category data
-            var currentObj = e.value;
-            //check only one category available or not
-            if (measurementNamesList.length <= 1 && currentObj.IsUsed) {
-                alert(_Resources.selectMeasurementMsg);
-                return false;
-            }
-
-            //check in multiple category
-            var otherMeasurements = $.grep(measurementNamesList, function (elem) {
-                return elem.MeasurementId != currentObj.MeasurementId && (elem.IsUsed || !currentObj.IsUsed)
-            });
-
-            //check atleast one category should checked
-            if (otherMeasurements.length == 0) {
-                alert(_Resources.selectMeasurementMsg);
-                return false;
-            }
-            //api call to update the measurement
-            var apiParameters = {
-                MeasurementId: currentObj.MeasurementId,
-                isMeasurementUsed: !currentObj.IsUsed,
-                IsVerificationProject: $hdnVerification,
-                IsSync1DTypeProject: $hdnSync1DType,
-            };
-
-            $.ajax({
-                url: SERVICE_BASE_URL + 'api/Chart/UpdateMeasurementFromAnalyzeChart',
-                data: apiParameters,
-                type: 'GET',
-                dataType: 'json',
-                success: function (response) {
-                    $hdnCurrentMeasurement.val(MeasurementId);
-                    BindAnalyzeChart();
-                },
-                error: function (xhr, errorType, exception) {
-                    //alert(exception);                    
-                }
-            });
-
-        }
-    });
-}
 
 ////**************** POPULATE THE INK PAPER AB COMPARISION CHART  ****************////
 function PopulateInkPaperChartABComparision() {
@@ -5162,6 +4863,7 @@ function formatMeasurementDateWithTime(d) {
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
     var strTime = month + '/' + day + '/' + year + '<br/>' + hours + ':' + minutes + ':' + seconds + ' ' + ampm;
     return strTime
 }
@@ -5177,8 +4879,9 @@ function BindPageNumber() {
             SetPrevButtonDisabled(true);
             SetNextButtonDisabled(true);
         } else {
+            pageNumber = totalPages;
             SetPrevButtonDisabled(false);
-            SetNextButtonDisabled(false);
+            SetNextButtonDisabled(true);
         }
         $ddlPaging.empty();
         for (var index = 1; index <= totalPages; index++) {
@@ -5187,6 +4890,8 @@ function BindPageNumber() {
                 text: index
             }));
         }
+        $ddlPaging.find('option').last().attr('selected', true);
+        PopulateAnalyzeChart();
     }
 }
 
