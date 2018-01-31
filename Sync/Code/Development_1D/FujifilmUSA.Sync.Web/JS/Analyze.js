@@ -2600,7 +2600,8 @@ function PopulateAnalyzeChart() {
         valueAxis: {
             // name: "valueAxis",
             title: {
-                text: 'Δ' + $selectedDeltaE
+                text: 'Δ' + $selectedDeltaE,
+                font: "12px Arial,Helvetica,sans-serif",
             },
             labels: {
                 format: "{0}"
@@ -2632,7 +2633,7 @@ function PopulateAnalyzeChart() {
                         //
 
                         //set checked or not
-                        var catText = '<div style="font-size:10px;cursor: pointer;">' + formatMeasurementDateWithTime(catValue.MeasurementDate) + '</div>';
+                        var catText = '<div style="font-size:12px;cursor: pointer;">' + formatMeasurementDateWithTime(catValue.MeasurementDate) + '</div>';
                         //if (catValue.IsUsed) {
                         //    catText = '<div style="font-size:18px;cursor: pointer;">☑</div>'
                         //}
@@ -2696,7 +2697,7 @@ function PopulateAnalyzeChart() {
             template: "${category.MeasurementName}",
         },
         chartArea: {
-            width: 675,
+            width: 690,
             height: 200,
             background: "gray",
             opacity: 0.3
