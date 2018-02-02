@@ -260,76 +260,8 @@ $(document).ready(function () {
         }
     }
 
-
-
-    BindAnalyzeChart(); //Bind analyze chart
-
-    var apiParameters = {
-        MeasurementId: measurementID,
-        IsAverageOfMeasurements: $isAverageOfMeasurements,
-        IsVerificationProject: $hdnVerification,
-        IsSync1DTypeProject: $hdnSync1DType,
-        //fromDeltaE: $selectedDeltaE,
-        //validationType: $hdnValidationType
-    };
-
-    kendo.ui.progress($chartLoader, true);
-    $.ajax({
-        //url: SERVICE_BASE_URL + 'api/Chart/GenerateAnalyzeCharts',
-        url: SERVICE_BASE_URL + 'api/Chart/GenerateGrayChart',
-        data: apiParameters,
-        type: 'GET',
-        dataType: 'json',
-        headers: {
-            'Accept-Language': $CurrentCulture
-        },
-        success: function (response) {
-            //console.log(response);
-            jsonTarget = response.data.GamutChartActual;
-            jsonColors = response.data.GamutChart;
-            jsonGray = response.data.LABChart;
-            _Resources = response.data.GlobalResources;
-            BindChartTargetVersusActualAB();
-            BindChartGamutABComparision();
-            BindChartLComparision();
-            BindChartLGrayBalance();
-            kendo.ui.progress($chartLoader, false);
-
-        },
-        error: function (xhr, errorType, exception) {
-            //alert(exception);
-            kendo.ui.progress($chartLoader, false);
-        }
-    });
-
-
-    BindInkPaperChartABComparision();
-
-    BindMeasurementPatchDetails();
-    if ($hdnValidationType == 1) {
-        BindG7Charts();
-    }
-
-    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-
-        BindTVICharts();
-    }
-    //if ($hdnCurrentDlpSubOperation != ELicenseType.Sync1D && $hdnCurrentDlpSubOperation != ELicenseType.Validation) {
-    //    BindDeltaSummaryStatesChart();
-    //}
-    BindDeltaSummaryStatesChart();
-
-    //set the report image on report generation link as per project type
-    SetReportImage();
-    //if ($hdnValidationType == 1) {       
-    //    BindDeltaSummaryStatesChart();
-    //}
-    //else {
-    //    //if ($hdnValidationType == 0) {}
-    //    if ($hdnVerification == 'False' && $hdnSync1DType == 'False') {          
-    //        BindDeltaSummaryStatesChart();
-    //    }
-    //}
+    BindMeasurementSummary();
+    BindAllTabs();  //Bind all charts
 
     $imgEyeABCompLarge.on('click', function (e) {
         e.preventDefault();
@@ -532,6 +464,111 @@ $(document).ready(function () {
 
 });
 
+function BindAllTabs() {
+    BindAnalyzeChart(); //Bind analyze chart
+
+    BindGrayCharts();//Bind gray chart
+
+    BindInkPaperChartABComparision();
+
+    BindMeasurementPatchDetails();
+    if ($hdnValidationType == 1) {
+        BindG7Charts();
+    }
+
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+
+        BindTVICharts();
+    }
+
+    BindDeltaSummaryStatesChart();
+
+    //set the report image on report generation link as per project type
+    SetReportImage();
+}
+
+function BindMeasurementSummary() {
+    var measurementID = parseInt($hdMeasurement);
+    var apiParam = {};
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+
+        apiParameter = {
+            MeasurementId: measurementID,
+            IsAverageOfMeasurements: $isAverageOfMeasurements,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            fromDeltaE: $selectedDeltaE,
+        }
+
+        $.ajax({
+            url: SERVICE_BASE_URL + 'api/Analyze/GetValidationMeasurementSummaryDetails',
+            data: apiParameter,
+            type: 'GET',
+            headers: {
+                "content-type": "application/json",
+            },
+            dataType: 'json',
+            headers: {
+                'Accept-Language': $CurrentCulture
+            },
+            success: function (response) {
+                if (response.data != null) {
+                    if (response.data.length > 0) {
+                        var measurements = response.data;
+                    }
+                }
+            },
+            error: function (xhr, errorType, exception) {
+                alert(exception);
+            }
+        });
+
+    } else {
+
+        apiParameter = {
+            MeasurementId: measurementID,
+            fromDeltaE: $selectedDeltaE,
+            IsVerificationProject: $hdnVerification
+        }
+
+        $.ajax({
+            url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementSummaryDetails',
+            data: apiParameter,
+            type: 'GET',
+            headers: {
+                "content-type": "application/json",
+            },
+            dataType: 'json',
+            headers: {
+                'Accept-Language': $CurrentCulture
+            },
+            success: function (response) {
+                if (response.data != null) {
+                    if (response.data.length > 0) {
+                        var measurements = response.data;
+                        $('#lblMeasurementNameNew').html(measurements[0].MeasurementName);
+                        $('#lblMeasurementID').html(measurements[0].MeasurementId);
+                        $('#lblMeasurementDate').html(formatMeasurementDateWithTime(measurements[0].MeasurementDate));
+                        $('#lblRAvg_ΔE').html(measurements[0].Avg_ΔE);
+                        $('#lblRMax_ΔE').html(measurements[0].Max_ΔE);
+                        $('#lblPri_ΔE').html(measurements[0].Pri_ΔE);
+                        $('#lblPri_ΔH').html(measurements[0].Pri_ΔH);
+                        $('#lblGray_ΔE').html(measurements[0].Gray_ΔE);
+                        $('#lblPercΔE_10').html(measurements[0].PercΔE_10);
+                        $('#lblPercΔE_90').html(measurements[0].PercΔE_90);
+                        $('#lblPercΔE_95').html(measurements[0].PercΔE_95);
+                    }
+                }                
+            },
+            error: function (xhr, errorType, exception) {
+                alert(exception);
+            }
+        });
+    }
+}
+
+
+
 function GetGradingReport(reportDetail) {
 
     var measurementID = parseInt($hdMeasurement);
@@ -604,6 +641,8 @@ function GetGradingReport(reportDetail) {
 
 ////************************ CHART BINDINGS  ***********************////
 
+
+////**************** START BIND THE ANALYZE CHART  ****************////
 function BindAnalyzeChart() {
 
     var apiParameters = {
@@ -639,6 +678,49 @@ function BindAnalyzeChart() {
             }
         },
         error: function (xhr, errorType, exception) {
+            kendo.ui.progress($chartLoader, false);
+        }
+    });
+}
+
+////**************** START BIND THE ANALYZE CHART  ****************////
+function BindGrayCharts() {
+    var measurementID = parseInt($hdMeasurement);
+
+    var apiParameters = {
+        MeasurementId: measurementID,
+        IsAverageOfMeasurements: $isAverageOfMeasurements,
+        IsVerificationProject: $hdnVerification,
+        IsSync1DTypeProject: $hdnSync1DType,
+        //fromDeltaE: $selectedDeltaE,
+        //validationType: $hdnValidationType
+    };
+
+    kendo.ui.progress($chartLoader, true);
+    $.ajax({
+        //url: SERVICE_BASE_URL + 'api/Chart/GenerateAnalyzeCharts',
+        url: SERVICE_BASE_URL + 'api/Chart/GenerateGrayChart',
+        data: apiParameters,
+        type: 'GET',
+        dataType: 'json',
+        headers: {
+            'Accept-Language': $CurrentCulture
+        },
+        success: function (response) {
+            //console.log(response);
+            jsonTarget = response.data.GamutChartActual;
+            jsonColors = response.data.GamutChart;
+            jsonGray = response.data.LABChart;
+            _Resources = response.data.GlobalResources;
+            BindChartTargetVersusActualAB();
+            BindChartGamutABComparision();
+            BindChartLComparision();
+            BindChartLGrayBalance();
+            kendo.ui.progress($chartLoader, false);
+
+        },
+        error: function (xhr, errorType, exception) {
+            //alert(exception);
             kendo.ui.progress($chartLoader, false);
         }
     });
