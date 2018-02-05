@@ -490,8 +490,13 @@ function BindAllTabs() {
 function BindMeasurementSummary() {
     var measurementID = parseInt($hdMeasurement);
     var apiParam = {};
+
+    $("#divMeasurementSummary").css('display', 'none');
+    $("#divValidationSummary").css('display', 'none');
+
     if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
 
+        $("#divValidationSummary").css('display', 'block');
         apiParameter = {
             MeasurementId: measurementID,
             IsAverageOfMeasurements: $isAverageOfMeasurements,
@@ -515,6 +520,9 @@ function BindMeasurementSummary() {
                 if (response.data != null) {
                     if (response.data.length > 0) {
                         var measurements = response.data;
+                        console.log(measurements);
+                        var viewModel = kendo.observable(measurements[0]);
+                        kendo.bind($("#divValidationSummary"), viewModel);
                     }
                 }
             },
@@ -524,6 +532,8 @@ function BindMeasurementSummary() {
         });
 
     } else {
+
+        $("#divMeasurementSummary").css('display', 'block');
 
         apiParameter = {
             MeasurementId: measurementID,
@@ -546,17 +556,21 @@ function BindMeasurementSummary() {
                 if (response.data != null) {
                     if (response.data.length > 0) {
                         var measurements = response.data;
-                        $('#lblMeasurementNameNew').html(measurements[0].MeasurementName);
-                        $('#lblMeasurementID').html(measurements[0].MeasurementId);
-                        $('#lblMeasurementDate').html(formatMeasurementDateWithTime(measurements[0].MeasurementDate));
-                        $('#lblRAvg_ΔE').html(measurements[0].Avg_ΔE);
-                        $('#lblRMax_ΔE').html(measurements[0].Max_ΔE);
-                        $('#lblPri_ΔE').html(measurements[0].Pri_ΔE);
-                        $('#lblPri_ΔH').html(measurements[0].Pri_ΔH);
-                        $('#lblGray_ΔE').html(measurements[0].Gray_ΔE);
-                        $('#lblPercΔE_10').html(measurements[0].PercΔE_10);
-                        $('#lblPercΔE_90').html(measurements[0].PercΔE_90);
-                        $('#lblPercΔE_95').html(measurements[0].PercΔE_95);
+
+                        var viewModel = kendo.observable(measurements[0]);
+                        kendo.bind($("#divMeasurementSummary"), viewModel);
+
+                        //$('#lblMeasurementNameNew').html(measurements[0].MeasurementName);
+                        //$('#lblMeasurementID').html(measurements[0].MeasurementId);
+                        //$('#lblMeasurementDate').html(formatMeasurementDateWithTime(measurements[0].MeasurementDate));
+                        //$('#lblRAvg_ΔE').html(measurements[0].Avg_ΔE);
+                        //$('#lblRMax_ΔE').html(measurements[0].Max_ΔE);
+                        //$('#lblPri_ΔE').html(measurements[0].Pri_ΔE);
+                        //$('#lblPri_ΔH').html(measurements[0].Pri_ΔH);
+                        //$('#lblGray_ΔE').html(measurements[0].Gray_ΔE);
+                        //$('#lblPercΔE_10').html(measurements[0].PercΔE_10);
+                        //$('#lblPercΔE_90').html(measurements[0].PercΔE_90);
+                        //$('#lblPercΔE_95').html(measurements[0].PercΔE_95);
                     }
                 }                
             },
