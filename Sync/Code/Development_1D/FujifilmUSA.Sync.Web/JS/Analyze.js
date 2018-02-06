@@ -522,6 +522,10 @@ function BindMeasurementSummary() {
                         var measurements = response.data;
                         console.log(measurements);
                         var viewModel = kendo.observable(measurements[0]);
+                        if (measurements[0].PatchTolerances.length == 0) {
+
+                            $('#tblPatchTolerance').css('display', 'none');
+                        }
                         kendo.bind($("#divValidationSummary"), viewModel);
                     }
                 }
@@ -2545,7 +2549,7 @@ function BindMeasurementPatchDetails() {
 
 ////**************** POPULATE THE ANALYZE CHART  ****************////
 function PopulateAnalyzeChart() {
-
+    debugger;
     var indexStart = 0;
     var indexEnd = 0;
     viewNumber = parseInt($ddlView.val());
@@ -2596,27 +2600,31 @@ function PopulateAnalyzeChart() {
         });
 
         //get the available list of htmlcodes
-        var htmlPatchCodeList = $.map(analyzeSeriesResult[0].MeasurementPatches, function (e) {
-            return e.HtmlColor;
+        //var htmlPatchCodeList = $.map(analyzeSeriesResult[0].MeasurementPatches, function (e) {
+        //    return e.HtmlColor;
+        //});
+
+        var measurementPatchList = $.map(analyzeSeriesResult[0].MeasurementPatches, function (e) {
+            return e.MeasurementPatchId;
         });
 
         //generate new array to display the patches
-        $.each(htmlPatchCodeList, function (index, htmlCode) {
+        $.each(measurementPatchList, function (index, patchID) {
 
             //check one by one all html code
             $.each(analyzeSeriesResult, function (index, measureObj) {
 
                 //check the current patch in the main list
                 var arr1Obj1 = $.grep(measureObj.MeasurementPatches, function (e) {
-                    return e.HtmlColor == htmlCode;
+                    return e.MeasurementPatchId == patchID;
                 });
 
                 //check the patch is already available in the resulted array
                 var availablePatch = $.grep(patchArray, function (e) {
-                    return e.color == htmlCode;
+                    return e.PatchID == patchID;
                 });
                 //if exists then
-                if (availablePatch.length > 0) {
+                if (availablePatch.length > 0 && arr1Obj1.length>0) {
                     availablePatch[0].data.push(arr1Obj1[0].Δe2000); //add into existing E2000 in data array
                 }
                 else {//add new object in resulted array
@@ -2625,6 +2633,7 @@ function PopulateAnalyzeChart() {
                         var patchObj = {
                             data: [arr1Obj1[0].Δe2000],
                             color: arr1Obj1[0].HtmlColor,
+                            PatchID: patchID
                             //markers: {
                             //    background: arr1Obj1[0].HtmlColor
                             //}

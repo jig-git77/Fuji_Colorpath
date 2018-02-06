@@ -696,4 +696,16 @@
   <data name="ValidationSummaryStatus.Text" xml:space="preserve">
     <value>Status:</value>
   </data>
+  <data name="GridMeasuredValue.Text" xml:space="preserve">
+    <value>Actuel</value>
+  </data>
+  <data name="GridMetricSumName.Text" xml:space="preserve">
+    <value>Métrique</value>
+  </data>
+  <data name="GridTargetValue.Text" xml:space="preserve">
+    <value>Tol</value>
+  </data>
+  <data name="GridPatchTolSampleName.Text" xml:space="preserve">
+    <value>Sample Name</value>
+  </data>
 </root>

@@ -802,4 +802,16 @@
   <data name="ValidationSummaryTimestamp.Text" xml:space="preserve">
     <value>Timestamp:</value>
   </data>
+  <data name="GridMeasuredValue.Text" xml:space="preserve">
+    <value>Actual</value>
+  </data>
+  <data name="GridMetricSumName.Text" xml:space="preserve">
+    <value>Metric</value>
+  </data>
+  <data name="GridPatchTolSampleName.Text" xml:space="preserve">
+    <value>Sample Name</value>
+  </data>
+  <data name="GridTargetValue.Text" xml:space="preserve">
+    <value>Tol</value>
+  </data>
 </root>

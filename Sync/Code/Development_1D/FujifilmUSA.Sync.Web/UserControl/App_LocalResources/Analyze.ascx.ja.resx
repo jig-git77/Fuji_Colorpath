@@ -699,4 +699,16 @@
   <data name="ValidationSummaryStatus.Text" xml:space="preserve">
     <value>ステータス：</value>
   </data>
+  <data name="GridMeasuredValue.Text" xml:space="preserve">
+    <value>実測</value>
+  </data>
+  <data name="GridMetricSumName.Text" xml:space="preserve">
+    <value>判定基準</value>
+  </data>
+  <data name="GridTargetValue.Text" xml:space="preserve">
+    <value>許容</value>
+  </data>
+  <data name="GridPatchTolSampleName.Text" xml:space="preserve">
+    <value>Sample Name</value>
+  </data>
 </root>

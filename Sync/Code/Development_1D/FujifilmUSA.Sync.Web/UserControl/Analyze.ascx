@@ -844,7 +844,7 @@
 
                                                     <table style="width: 100%;border-collapse:collapse;">
                                                         <tr>
-                                                            <td valign="top" style="border: 1px Solid Gray;">
+                                                            <td valign="top" style="width: 63%; border: 1px Solid Gray;">
                                                                 <table class="Validation_Summary" style="width: 100%">
                                                                     <tr class="Gray">
                                                                         <td class="Summary_Left" style="width:150px;">
@@ -938,15 +938,26 @@
                                                             </td>
                                                             <td style="width: 2%;"></td>
                                                             <td valign="top">                                                                
-                                                                    <table>
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Metric</th>
-                                                                            <th>Tolerance</th>
-                                                                            <th>Actual</th>
+                                                                    <table class="k-grid k-widget k-display-block" style="width:100%">
+                                                                    <thead class="k-grid-header">
+                                                                        <tr style="line-height: 25px;">
+                                                                            <th><asp:Localize ID="locGridMetricSumName" runat="server" meta:resourcekey="GridMetricSumName" Text=""></asp:Localize></th>
+                                                                            <th><asp:Localize ID="locGridTarget" runat="server" meta:resourcekey="GridTargetValue" Text=""></asp:Localize></th>
+                                                                            <th><asp:Localize ID="locGridActual" runat="server" meta:resourcekey="GridMeasuredValue" Text=""></asp:Localize></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody data-template="validation-metrics-template" data-bind="source: ValidationMetrics"></tbody>
+                                                                </table>
+                                                                <br />
+                                                                <table id="tblPatchTolerance" class="k-grid k-widget k-display-block" style="width:100%">
+                                                                    <thead class="k-grid-header">
+                                                                        <tr style="line-height: 25px;">
+                                                                            <th><asp:Localize ID="Localize36" runat="server" meta:resourcekey="GridPatchTolSampleName" Text="SampleName"></asp:Localize></th>
+                                                                            <th><asp:Localize ID="Localize37" runat="server" meta:resourcekey="GridTargetValue" Text="Tol"></asp:Localize></th>
+                                                                            <th><asp:Localize ID="Localize38" runat="server" meta:resourcekey="GridMeasuredValue" Text="Actual"></asp:Localize></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody data-template="patch-tolerance-template" data-bind="source: PatchTolerances"></tbody>
                                                                 </table>
                                                             </td>
                                                         </tr>
@@ -957,9 +968,9 @@
                                                     <table id="tblMeasurementSummary" cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin: 0; width: 100%">
                                                         <tr>
                                                             <td>
-                                                                <table>
+                                                                <table cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin: 0">
                                                                     <tr class="Gray">
-                                                                        <td style="font-size: 13px;">
+                                                                        <td style="font-size: 13px;width: 200px;"">
                                                                             <asp:Localize ID="locMeasurementName" runat="server" meta:resourcekey="locMeasurementNameResource1" Text=""></asp:Localize>
                                                                         </td>
                                                                         <td>
@@ -3704,12 +3715,24 @@
     Text="0"></asp:Literal>
 
 <script id="validation-metrics-template" type="text/x-kendo-template">
-     #if(IsNotOK=="False"){#
+     #if(IsNotOK){#
         <tr style="color:black">
     #}else{#
     <tr style="color:green">
     #}#
         <td data-bind="text: Metric"></td>
+        <td data-bind="text: Tolerance"></td>
+        <td data-bind="text: Actual"></td>
+    </tr>
+</script>
+
+<script id="patch-tolerance-template" type="text/x-kendo-template">
+     #if(IsNotOK){#
+        <tr style="color:black">
+    #}else{#
+    <tr style="color:green">
+    #}#
+        <td data-bind="text: SampleName"></td>
         <td data-bind="text: Tolerance"></td>
         <td data-bind="text: Actual"></td>
     </tr>
