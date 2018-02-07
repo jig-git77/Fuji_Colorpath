@@ -200,7 +200,7 @@ $(document).ready(function () {
     $hdnCurrentDlpSubOperation = parseInt($('#hdnCurrentDlpSubOperation').val());
     $hdnReportDLPName = $('#hdnReportDLPName').val();
     $isAverageOfMeasurements = $('#ContentPlaceHolder1_ucAnalyze_chkAnalyzeAverageOfMeasurements').is(':checked');
-    $hdMeasurement = $('#ContentPlaceHolder1_ucAnalyze_hdMeasurement').val();
+    $hdMeasurement = $('#ContentPlaceHolder1_ucAnalyze_hdMeasurement');
     $hdnProjectID = $('#hdnProjectID').val();
     $hdnOptimizationRunID = $('#hdnOptimizationRunID').val();
     $chartLoader = $(".chart-loading");
@@ -249,7 +249,7 @@ $(document).ready(function () {
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
 
-    var measurementID = parseInt($hdMeasurement);
+    var measurementID = parseInt($hdMeasurement.val());
 
     if (!$selectedDeltaE) {
         if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
@@ -260,7 +260,9 @@ $(document).ready(function () {
         }
     }
 
-    BindMeasurementSummary();
+    BindAnalyzeChart(); //Bind analyze chart
+
+    
     BindAllTabs();  //Bind all charts
 
     $imgEyeABCompLarge.on('click', function (e) {
@@ -465,13 +467,15 @@ $(document).ready(function () {
 });
 
 function BindAllTabs() {
-    BindAnalyzeChart(); //Bind analyze chart
+
+    BindMeasurementSummary(); //Bind Summary tab
 
     BindGrayCharts();//Bind gray chart
 
     BindInkPaperChartABComparision();
 
     BindMeasurementPatchDetails();
+
     if ($hdnValidationType == 1) {
         BindG7Charts();
     }
@@ -488,7 +492,7 @@ function BindAllTabs() {
 }
 
 function BindMeasurementSummary() {
-    var measurementID = parseInt($hdMeasurement);
+    var measurementID = parseInt($hdMeasurement.val());
     var apiParam = {};
 
     $("#divMeasurementSummary").css('display', 'none');
@@ -585,11 +589,9 @@ function BindMeasurementSummary() {
     }
 }
 
-
-
 function GetGradingReport(reportDetail) {
 
-    var measurementID = parseInt($hdMeasurement);
+    var measurementID = parseInt($hdMeasurement.val());
     var apiParameter = {
         MeasurementId: measurementID,
         ProjectId: $hdnProjectID,
@@ -703,7 +705,7 @@ function BindAnalyzeChart() {
 
 ////**************** START BIND THE ANALYZE CHART  ****************////
 function BindGrayCharts() {
-    var measurementID = parseInt($hdMeasurement);
+    var measurementID = parseInt($hdMeasurement.val());
 
     var apiParameters = {
         MeasurementId: measurementID,
@@ -1513,7 +1515,7 @@ function BindChartLGrayBalance() {
 
 ////**************** START BIND THE DELTA SUMMARY STATASTICS CHART FOR REPORT  ****************////
 function BindDeltaSummaryStatesChart() {
-    var measurementID = parseInt($hdMeasurement);
+    var measurementID = parseInt($hdMeasurement.val());
     var apiParameters = {
         MeasurementId: measurementID,
         IsAverageOfMeasurements: $isAverageOfMeasurements,
@@ -1547,7 +1549,7 @@ function BindDeltaSummaryStatesChart() {
 
 ////**************** START BIND THE AB COMPARISION INK PAPER CHART  ****************////
 function BindInkPaperChartABComparision() {
-    var measurementID = parseInt($hdMeasurement);
+    var measurementID = parseInt($hdMeasurement.val());
     var apiParameters = {
         MeasurementId: measurementID,
         IsAverageOfMeasurements: $isAverageOfMeasurements,
@@ -1590,7 +1592,7 @@ function BindInkPaperChartABComparision() {
 
 ////**************** START BIND THE G7 CHART  ****************////
 function BindG7Charts() {
-    var measurementID = parseInt($hdMeasurement);
+    var measurementID = parseInt($hdMeasurement.val());
     var apiParameters = {
         MeasurementId: measurementID,
         IsAverageOfMeasurements: $isAverageOfMeasurements,
@@ -1631,7 +1633,7 @@ function BindG7Charts() {
 ////**************** START BIND THE TVI CHARTS  ****************////
 function BindTVICharts() {
 
-    var measurementID = parseInt($hdMeasurement);
+    var measurementID = parseInt($hdMeasurement.val());
     var apiParameters = {
         MeasurementId: measurementID,
         IsAverageOfMeasurements: $isAverageOfMeasurements,
@@ -2123,7 +2125,7 @@ function GenerateG7Charts() {
 
 function BindMeasurementPatchDetails() {
 
-    var measurementID = parseInt($hdMeasurement);
+    var measurementID = parseInt($hdMeasurement.val());
     var apiParameters = {
         MeasurementId: measurementID,
         IsVerificationProject: $hdnVerification,
@@ -2444,7 +2446,7 @@ function BindMeasurementPatchDetails() {
 
     if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
 
-        var measurementID = parseInt($hdMeasurement);
+        var measurementID = parseInt($hdMeasurement.val());
         var params = {
             MeasurementId: measurementID,
             IsVerificationProject: $hdnVerification,
@@ -2488,7 +2490,7 @@ function BindMeasurementPatchDetails() {
         if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
             selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
         }
-        var measurementID = parseInt($hdMeasurement);
+        var measurementID = parseInt($hdMeasurement.val());
         var apiReportParameters = {
             MeasurementId: measurementID,
             IsVerificationProject: $hdnVerification,
@@ -2515,7 +2517,7 @@ function BindMeasurementPatchDetails() {
 
     $divMeasurementPatchDetails.find('#btnExportCFX').on('click', function (e) {
         e.preventDefault();
-        var measurementID = parseInt($hdMeasurement);
+        var measurementID = parseInt($hdMeasurement.val());
 
         var selectedMatricSum = '';
         if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
@@ -2550,6 +2552,7 @@ function BindMeasurementPatchDetails() {
 ////**************** POPULATE THE ANALYZE CHART  ****************////
 function PopulateAnalyzeChart() {
     debugger;
+    var measurementID = 0;
     var indexStart = 0;
     var indexEnd = 0;
     viewNumber = parseInt($ddlView.val());
@@ -2599,11 +2602,9 @@ function PopulateAnalyzeChart() {
             return curObj;
         });
 
-        //get the available list of htmlcodes
-        //var htmlPatchCodeList = $.map(analyzeSeriesResult[0].MeasurementPatches, function (e) {
-        //    return e.HtmlColor;
-        //});
-
+        
+        
+        //get the available list of patch id
         var measurementPatchList = $.map(analyzeSeriesResult[0].MeasurementPatches, function (e) {
             return e.MeasurementPatchId;
         });
@@ -2644,6 +2645,8 @@ function PopulateAnalyzeChart() {
                 }
             });
         });
+
+        
     }
 
 
@@ -2856,6 +2859,9 @@ function PopulateAnalyzeChart() {
 
         }
     });
+
+    $hdMeasurement.val($hdnCurrentMeasurement.val());    
+    BindAllTabs();
 }
 
 
