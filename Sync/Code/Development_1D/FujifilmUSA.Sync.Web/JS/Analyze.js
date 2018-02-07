@@ -90,6 +90,7 @@ var $ddlPaging;
 var $btnNext;
 var $btnLast;
 var $btnFirst;
+var $hdnCurrentProjectLicenseType;
 
 //********** kendo objects *********//
 var drawing = kendo.drawing;
@@ -246,6 +247,7 @@ $(document).ready(function () {
     $btnNext = $('#btnNext');
     $btnLast = $('#btnLast');
     $btnFirst = $('#btnFirst');
+    $hdnCurrentProjectLicenseType = $('#hdnCurrentProjectLicenseType').val();
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
 
@@ -525,12 +527,26 @@ function BindMeasurementSummary() {
                     if (response.data.length > 0) {
                         var measurements = response.data;
                         console.log(measurements);
-                        var viewModel = kendo.observable(measurements[0]);
+                        var measurement = measurements[0];
+                        measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
+                        var viewModel = kendo.observable(measurement);
                         if (measurements[0].PatchTolerances.length == 0) {
 
                             $('#tblPatchTolerance').css('display', 'none');
                         }
                         kendo.bind($("#divValidationSummary"), viewModel);
+
+                        if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1D ) {
+
+                            $('#rowCustomer').hide();
+                            $('#rowPageSurface').hide();
+                            $('#rowJobID').hide();
+                            $('#rowNotes').hide();
+                            if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                                $('#rowCustomer').show();
+                                $('#rowNotes').show();
+                            }
+                        }
                     }
                 }
             },

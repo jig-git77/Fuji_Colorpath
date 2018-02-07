@@ -265,6 +265,8 @@
                 <asp:HiddenField runat="server" ID="hdnProjectID" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnCurrentMeasurement" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnDefaultSelectedDelta" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnCurrentProjectLicenseType" ClientIDMode="Static" />
+                
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">
@@ -859,7 +861,7 @@
                                                                             <asp:Localize ID="Localize26" runat="server" meta:resourcekey="ValidationSummaryStatus"></asp:Localize>
                                                                         </td>
                                                                         <td class="Summary_Right_Alt">
-                                                                            <span data-bind="text: MeasurementStatus"></span>
+                                                                            <span data-bind="text: MeasurementStatus, style: { color: MeasurementStatus == 'OK' ? 'green':'black'}"></span>                                                                                
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -891,10 +893,10 @@
                                                                             <asp:Localize ID="Localize31" runat="server" meta:resourcekey="ValidationSummaryTimestamp"></asp:Localize>
                                                                         </td>
                                                                         <td class="Summary_Right_Alt">
-                                                                            <span data-bind="text: MeasurementDate"></span>
+                                                                            <span data-format="MM/dd/yyyy HH:mm:ss tt" data-bind="text: MeasurementDateFormatted"></span>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
+                                                                    <tr id="rowCustomer">
                                                                         <td class="Summary_Left">
                                                                             <asp:Localize ID="Localize32" runat="server" meta:resourcekey="ValidationSummaryCustomer"></asp:Localize>
                                                                         </td>
@@ -910,7 +912,7 @@
                                                                             <span data-bind="text: dEMethod"></span>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
+                                                                    <tr id="rowPageSurface">
                                                                         <td class="Summary_Left">
                                                                             <asp:Localize ID="Localize29" runat="server" meta:resourcekey="ValidationSummaryPageSurface"></asp:Localize>
                                                                         </td>
@@ -918,7 +920,7 @@
                                                                             <span data-bind="text: PageOrSurface"></span>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
+                                                                    <tr id="rowJobID">
                                                                         <td class="Summary_Left_Alt">
                                                                             <asp:Localize ID="Localize34" runat="server" meta:resourcekey="ValidationSummaryJobID"></asp:Localize>
                                                                         </td>
@@ -926,7 +928,7 @@
                                                                             <span data-bind="text: JDFJobId"></span>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
+                                                                    <tr id="rowNotes">
                                                                         <td class="Summary_Left">
                                                                             <asp:Localize ID="Localize35" runat="server" meta:resourcekey="ValidationSummaryNotes"></asp:Localize>
                                                                         </td>

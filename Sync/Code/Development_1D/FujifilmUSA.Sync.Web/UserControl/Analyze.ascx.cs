@@ -179,6 +179,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnProjectID.Value = SessionManager.Instance.CurrentOptimizeRun.ProjectId.ToString();
                 hdnOptimizationRunID.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
                 hdnValidationType.Value = ValidationType.ToString();
+                hdnCurrentProjectLicenseType.Value = SessionManager.Instance.CurrentProject.LicenseType.ToString();
                 //--Start: Load average Compatibility values
                 chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return CheckAvgCompability();");
                 ChkAvgMeasurementCompatibility();
