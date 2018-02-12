@@ -3,12 +3,13 @@
     return date;
 };
 //here we are adding dummy querystring in URL as IE do not invoke service each and every time rather it takes from cache
-function GetReferenceChart(ProjectID, ReferenceChartDisplayTypeId, IsSpotProjectType) {
+function GetReferenceChart(ProjectID, ReferenceChartDisplayTypeId, IsSpotProjectType,serviceURL) {
    // debugger;
     jQuery.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: "Services/PluginDataService.svc/GetReferenceChart/" + ProjectID + "/" + ReferenceChartDisplayTypeId + "/" + IsSpotProjectType + "?TempId=" + Math.floor(Math.random() * 1000),
+        //url: "Services/PluginDataService.svc/GetReferenceChart/" + ProjectID + "/" + ReferenceChartDisplayTypeId + "/" + IsSpotProjectType + "?TempId=" + Math.floor(Math.random() * 1000),
+        url: serviceURL+  "PluginData.svc/GetReferenceChart/" + ProjectID + "/" + ReferenceChartDisplayTypeId + "/" + IsSpotProjectType + "?TempId=" + Math.floor(Math.random() * 1000),
         processData: false,
         dataType: "json",
         success:
