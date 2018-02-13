@@ -276,7 +276,8 @@
             jQuery.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                url: "Services/PluginDataService.svc/KeepUserSessionAlive/",
+                //url: "Services/PluginDataService.svc/KeepUserSessionAlive/",
+                url: BASE_SERVICE_URL + "PluginData.svc/KeepUserSessionAlive/",
                 dataType: "JSON",
                 success: function (response) { },
                 error: function (XMLHttpRequest, textStatus, errorThrown) { }
