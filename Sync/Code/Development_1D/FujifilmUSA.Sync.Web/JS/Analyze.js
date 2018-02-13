@@ -264,7 +264,7 @@ $(document).ready(function () {
 
     BindAnalyzeChart(); //Bind analyze chart
 
-    
+
     BindAllTabs();  //Bind all charts
 
     $imgEyeABCompLarge.on('click', function (e) {
@@ -536,7 +536,7 @@ function BindMeasurementSummary() {
                         }
                         kendo.bind($("#divValidationSummary"), viewModel);
 
-                        if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1D ) {
+                        if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1D) {
 
                             $('#rowCustomer').hide();
                             $('#rowPageSurface').hide();
@@ -596,7 +596,7 @@ function BindMeasurementSummary() {
                         //$('#lblPercΔE_90').html(measurements[0].PercΔE_90);
                         //$('#lblPercΔE_95').html(measurements[0].PercΔE_95);
                     }
-                }                
+                }
             },
             error: function (xhr, errorType, exception) {
                 alert(exception);
@@ -2599,7 +2599,7 @@ function PopulateAnalyzeChart() {
 
         //check last measurement
         //if ($hdnCurrentMeasurement.val() == '') {
-            $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
+        $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
         //}
 
         //get the name of the measurement name list
@@ -2618,8 +2618,8 @@ function PopulateAnalyzeChart() {
             return curObj;
         });
 
-        
-        
+
+
         //get the available list of patch id
         var measurementPatchList = $.map(analyzeSeriesResult[0].MeasurementPatches, function (e) {
             return e.MeasurementPatchId;
@@ -2641,7 +2641,7 @@ function PopulateAnalyzeChart() {
                     return e.PatchID == patchID;
                 });
                 //if exists then
-                if (availablePatch.length > 0 && arr1Obj1.length>0) {
+                if (availablePatch.length > 0 && arr1Obj1.length > 0) {
                     availablePatch[0].data.push(arr1Obj1[0].Δe2000); //add into existing E2000 in data array
                 }
                 else {//add new object in resulted array
@@ -2662,7 +2662,7 @@ function PopulateAnalyzeChart() {
             });
         });
 
-        
+
     }
 
 
@@ -2711,11 +2711,15 @@ function PopulateAnalyzeChart() {
                 },
                 type: function (e) {
 
-                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation && e.category.MeasurementId != parseInt($hdnCurrentMeasurement.val())) {
-                        if (e.category.MeasurementStatus != 'OK') {
-                            return "triangle";
-                        } else {
+                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                        if (e.category.MeasurementId == parseInt($hdnCurrentMeasurement.val())) {
                             return "circle";
+                        } else {
+                            if (e.category.MeasurementStatus != 'OK') {
+                                return "triangle";
+                            } else {
+                                return "circle";
+                            }
                         }
                     }
                     else {
@@ -2873,10 +2877,18 @@ function PopulateAnalyzeChart() {
                 }
             });
 
+        },
+        seriesClick: function (e) {
+            //alert(1);
+            $hdnCurrentMeasurement.val(e.category.MeasurementId);
+            $hdMeasurement.val($hdnCurrentMeasurement.val());
+            BindAllTabs();
+            
+            $divAnalyzeChart.data('kendoChart').refresh();
         }
     });
 
-    $hdMeasurement.val($hdnCurrentMeasurement.val());    
+    $hdMeasurement.val($hdnCurrentMeasurement.val());
     BindAllTabs();
 }
 
