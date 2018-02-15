@@ -61,6 +61,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="PluginData.svc" />
     <Content Include="Service1.svc" />
     <Content Include="Web.config">
@@ -69,6 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorLog.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="IPluginData.cs" />
     <Compile Include="PluginData.svc.cs">
       <DependentUpon>PluginData.svc</DependentUpon>
