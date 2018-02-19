@@ -112,10 +112,6 @@
       <Project>{050cfe70-aff6-4d52-93e6-2c804cf143d7}</Project>
       <Name>FujifilmUSA.Sync.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FujifilmUSA.Sync.Model\FujifilmUSA.Sync.DataAccess.csproj">
-      <Project>{dfc75611-b7b0-4651-8fa7-a9b7a9ea9ad7}</Project>
-      <Name>FujifilmUSA.Sync.DataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FujifilmUSA.Sync.Presenter\FujifilmUSA.Sync.Presenter.csproj">
       <Project>{05ec147c-dcdc-4470-a7fd-7579e28735ec}</Project>
       <Name>FujifilmUSA.Sync.Presenter</Name>

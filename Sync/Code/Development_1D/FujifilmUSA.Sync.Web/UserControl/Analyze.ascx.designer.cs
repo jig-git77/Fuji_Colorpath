@@ -1417,6 +1417,33 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize Localize13;
         
         /// <summary>
+        /// localGrayHeaderMetric control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localGrayHeaderMetric;
+        
+        /// <summary>
+        /// localGrayHeaderTolerance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localGrayHeaderTolerance;
+        
+        /// <summary>
+        /// localGrayHeaderActual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localGrayHeaderActual;
+        
+        /// <summary>
         /// Localize14 control.
         /// </summary>
         /// <remarks>
@@ -1435,6 +1462,33 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize Localize15;
         
         /// <summary>
+        /// localBlackHeaderMetric control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBlackHeaderMetric;
+        
+        /// <summary>
+        /// localBlackHeaderTolerance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBlackHeaderTolerance;
+        
+        /// <summary>
+        /// localBlackHeaderActual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localBlackHeaderActual;
+        
+        /// <summary>
         /// Localize16 control.
         /// </summary>
         /// <remarks>
@@ -1451,6 +1505,33 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize Localize17;
+        
+        /// <summary>
+        /// localGrayLHeaderMetric control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localGrayLHeaderMetric;
+        
+        /// <summary>
+        /// localGrayLHeaderTolerance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localGrayLHeaderTolerance;
+        
+        /// <summary>
+        /// localGrayLHeaderActual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize localGrayLHeaderActual;
         
         /// <summary>
         /// UpdatePanel4 control.

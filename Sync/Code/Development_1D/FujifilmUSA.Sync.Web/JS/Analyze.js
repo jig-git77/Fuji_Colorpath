@@ -1634,6 +1634,11 @@ function BindG7Charts() {
                 jsonGrayLChartList = response.data.GrayLChartList;
                 jsonBlackNPDChartList = response.data.BlackNPDChartList;
                 jsonGrayNPDChartList = response.data.GrayNPDChartList;
+                
+                kendo.bind($("#divGraySummaryList"), response.data);
+                kendo.bind($("#divBlackSummaryList"), response.data);
+                kendo.bind($("#divGrayLDeltaSummaryList"), response.data);
+                
             }
             GenerateG7Charts();
 

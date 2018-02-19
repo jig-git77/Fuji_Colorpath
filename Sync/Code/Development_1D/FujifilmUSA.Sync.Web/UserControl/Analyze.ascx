@@ -1995,6 +1995,7 @@
                                                         </td>
                                                         <td style="width: 2%;"></td>
                                                         <td style="width: 39%" valign="top">
+                                                            <div id="divGraySummaryList">
                                                             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                                                 <tr>
                                                                     <td class="green-title">&nbsp;
@@ -2003,9 +2004,24 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td valign="top" style="padding: 2px"></td>
+                                                                    <td valign="top" style="padding: 2px">
+                                                                        <table class="k-grid k-widget k-display-block" style="width:100%">
+                                                                            <thead class="k-grid-header">
+                                                                                <tr style="line-height: 25px;">
+                                                                                    <th><asp:Localize Text="Metric" runat="server"
+                                                                                        ID="localGrayHeaderMetric" meta:resourcekey="GridMetricSumName"></asp:Localize></th>
+                                                                                    <th><asp:Localize Text="Tolerance" runat="server"
+                                                                                        ID="localGrayHeaderTolerance" meta:resourcekey="GridToleranceValue"></asp:Localize></th>
+                                                                                    <th><asp:Localize Text="Actual" runat="server"
+                                                                                        ID="localGrayHeaderActual" meta:resourcekey="GridMeasuredValue"></asp:Localize></th>                                                                                    
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody data-template="gray-summary" data-bind="source: GrayFSummaryList"></tbody>
+                                                                        </table>
+                                                                    </td>
                                                                 </tr>
                                                             </table>
+                                                                </div>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -2029,6 +2045,7 @@
                                                         </td>
                                                         <td style="width: 2%;"></td>
                                                         <td style="width: 39%" valign="top">
+                                                            <div id="divBlackSummaryList">
                                                             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                                                 <tr>
                                                                     <td class="green-title">&nbsp;
@@ -2037,9 +2054,24 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td valign="top" style="padding: 2px"></td>
+                                                                    <td valign="top" style="padding: 2px">
+                                                                        <table class="k-grid k-widget k-display-block" style="width:100%">
+                                                                            <thead class="k-grid-header">
+                                                                                <tr style="line-height: 25px;">
+                                                                                    <th><asp:Localize Text="Metric" runat="server"
+                                                                                        ID="localBlackHeaderMetric" meta:resourcekey="GridMetricSumName"></asp:Localize></th>
+                                                                                    <th><asp:Localize Text="Tolerance" runat="server"
+                                                                                        ID="localBlackHeaderTolerance" meta:resourcekey="GridToleranceValue"></asp:Localize></th>
+                                                                                    <th><asp:Localize Text="Actual" runat="server"
+                                                                                        ID="localBlackHeaderActual" meta:resourcekey="GridMeasuredValue"></asp:Localize></th>                                                                                    
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody data-template="gray-summary" data-bind="source: BlackLSummaryList"></tbody>
+                                                                        </table>
+                                                                    </td>
                                                                 </tr>
                                                             </table>
+                                                                </div>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -2071,6 +2103,7 @@
                                                         </td>
                                                         <td style="width: 2%;"></td>
                                                         <td style="width: 39%" valign="top">
+                                                            <div id="divGrayLDeltaSummaryList">
                                                             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                                                 <tr>
                                                                     <td class="green-title">&nbsp;
@@ -2079,9 +2112,24 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td valign="top" style="padding: 2px"></td>
+                                                                    <td valign="top" style="padding: 2px">
+                                                                        <table class="k-grid k-widget k-display-block" style="width:100%">
+                                                                            <thead class="k-grid-header">
+                                                                                <tr style="line-height: 25px;">
+                                                                                    <th><asp:Localize Text="Metric" runat="server"
+                                                                                        ID="localGrayLHeaderMetric" meta:resourcekey="GridMetricSumName"></asp:Localize></th>
+                                                                                    <th><asp:Localize Text="Tolerance" runat="server"
+                                                                                        ID="localGrayLHeaderTolerance" meta:resourcekey="GridToleranceValue"></asp:Localize></th>
+                                                                                    <th><asp:Localize Text="Actual" runat="server"
+                                                                                        ID="localGrayLHeaderActual" meta:resourcekey="GridMeasuredValue"></asp:Localize></th>                                                                                    
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody data-template="gray-summary" data-bind="source: GrayLSummaryList"></tbody>
+                                                                        </table>
+                                                                    </td>
                                                                 </tr>
                                                             </table>
+                                                                </div>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -3737,5 +3785,17 @@
         <td data-bind="text: SampleName"></td>
         <td data-bind="text: Tolerance"></td>
         <td data-bind="text: Actual"></td>
+    </tr>
+</script>
+
+<script id="gray-summary" type="text/x-kendo-template">     
+     #if(IsNotOK){#
+        <tr style="color:black">
+    #}else{#
+    <tr style="color:green">
+    #}#
+        <td data-bind="text: Metric"></td>
+        <td data-bind="text: Tolerance"></td>
+        <td data-bind="text: Actual"></td>        
     </tr>
 </script>

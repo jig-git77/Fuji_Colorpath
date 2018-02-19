@@ -708,4 +708,7 @@
   <data name="GridPatchTolSampleName.Text" xml:space="preserve">
     <value>Sample Name</value>
   </data>
+  <data name="GridToleranceValue.Text" xml:space="preserve">
+    <value>Tolérance</value>
+  </data>
 </root>

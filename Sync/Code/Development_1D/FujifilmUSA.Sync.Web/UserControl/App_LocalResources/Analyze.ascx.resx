@@ -814,4 +814,7 @@
   <data name="GridTargetValue.Text" xml:space="preserve">
     <value>Tol</value>
   </data>
+  <data name="GridToleranceValue.Text" xml:space="preserve">
+    <value>Tolerance</value>
+  </data>
 </root>

@@ -489,11 +489,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     httpResponse.Data = new
                     {
                         GrayFChartList = GrayFChart,
-                        //GrayFSummaryList = GrayFSummary,
+                        GrayFSummaryList = GrayFSummary,
                         BlackLChartList = BlackLChart,
-                        //BlackLSummaryList = BlackLSummary,
+                        BlackLSummaryList = BlackLSummary,
                         GrayLChartList = GrayLChart,
-                        //GrayLSummaryList = GrayLSummary,
+                        GrayLSummaryList = GrayLSummary,
                         BlackNPDChartList = BlackNPDChart,
                         GrayNPDChartList = GrayNPDChart,
 
