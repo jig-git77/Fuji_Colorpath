@@ -15,7 +15,7 @@
     <RootNamespace>FujifilmUSA.Sync.Web</RootNamespace>
     <AssemblyName>FujifilmUSA.Sync.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -102,6 +102,7 @@
     <Content Include="AddPrintStandardType.aspx" />
     <Content Include="AddReferenceChart.aspx" />
     <Content Include="AddSourceProfile.aspx" />
+    <Content Include="AnalyzeMeasurement.aspx" />
     <Content Include="Analyze_SpotColor.aspx" />
     <Content Include="ApplicationConfiguration.aspx" />
     <Content Include="ApplicationError.aspx" />
@@ -912,6 +913,7 @@
     <Content Include="JQuery\numeric.js" />
     <Content Include="JQuery\progressbar.js" />
     <Content Include="JS\Analyze.js" />
+    <Content Include="JS\AnalyzeMeasurement.js" />
     <Content Include="JS\Common.js" />
     <Content Include="JS\DYMO_Label_Framework_2_0_2.js" />
     <Content Include="JS\GlobalResource.fr-FR.js" />
@@ -1993,6 +1995,7 @@
     <Content Include="UserControl\AddDeviceFamily.ascx" />
     <Content Include="UserControl\AddLicenseType.ascx" />
     <Content Include="UserControl\AddLicenseManagement.ascx" />
+    <Content Include="UserControl\AnalyzeMeasurement.ascx" />
     <Content Include="UserControl\Analyze_SpotColor.ascx" />
     <Content Include="UserControl\ApplicationConfiguration.ascx" />
     <Content Include="UserControl\ApplicationError.ascx" />
@@ -2327,6 +2330,13 @@
     </Compile>
     <Compile Include="AdminMaster.Master.designer.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="AnalyzeMeasurement.aspx.cs">
+      <DependentUpon>AnalyzeMeasurement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnalyzeMeasurement.aspx.designer.cs">
+      <DependentUpon>AnalyzeMeasurement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Analyze_SpotColor.aspx.cs">
       <DependentUpon>Analyze_SpotColor.aspx</DependentUpon>
@@ -2865,6 +2875,13 @@
     </Compile>
     <Compile Include="UserControl\AddLicenseManagement.ascx.designer.cs">
       <DependentUpon>AddLicenseManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AnalyzeMeasurement.ascx.cs">
+      <DependentUpon>AnalyzeMeasurement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AnalyzeMeasurement.ascx.designer.cs">
+      <DependentUpon>AnalyzeMeasurement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\Analyze_SpotColor.ascx.cs">
       <DependentUpon>Analyze_SpotColor.ascx</DependentUpon>
@@ -5277,6 +5294,18 @@
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\SpotMeasurement.ascx.ja.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AnalyzeMeasurement.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AnalyzeMeasurement.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AnalyzeMeasurement.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AnalyzeMeasurement.ascx.fr.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -5292,7 +5321,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56067</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/FujifilmUSA.Sync.Web</IISUrl>
+          <IISUrl>http://localhost:56067/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

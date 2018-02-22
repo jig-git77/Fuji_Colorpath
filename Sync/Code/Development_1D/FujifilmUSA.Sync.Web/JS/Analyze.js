@@ -1679,7 +1679,7 @@ function BindTVICharts() {
                 'Accept-Language': $CurrentCulture
             },
             success: function (response) {
-                debugger;
+                
                 if (response.data != null) {
                     jsonDTISOTVIChartList = response.data.DTISOTVIChartList;
                     jsonDTSpreadChartData_CMYKList = response.data.DTSpreadChartData_CMYKList;
@@ -1688,6 +1688,14 @@ function BindTVICharts() {
                     PopulateTVIISOChart();
                     PopulateTVIG7CMYKChart();
                     PopulateTVISpreadChart();
+                    
+                    //$('#chromVariationTable').find('#spnChromeVar20').html(response.data.DTMaxSpreadChartDataList[0].Tone25);
+                    //$('#chromVariationTable #spnChromeVar25').html(response.data.DTMaxSpreadChartDataList[0].Tone25);
+                    //$('#chromVariationTable #spnChromeVar40').html(response.data.DTMaxSpreadChartDataList.Tone25);
+                    //$('#chromVariationTable #spnChromeVar50').html(response.data.DTMaxSpreadChartDataList.Tone25);
+                    //$('#chromVariationTable #spnChromeVar60').html(response.data.DTMaxSpreadChartDataList.Tone25);
+                    //$('#chromVariationTable #spnChromeVar75').html(response.data.DTMaxSpreadChartDataList.Tone25);
+                    //$('#chromVariationTable #spnChromeVar80').html(response.data.DTMaxSpreadChartDataList.Tone25);
                 }
                 //kendo.ui.progress($chartLoader, false);
             },
@@ -2572,7 +2580,7 @@ function BindMeasurementPatchDetails() {
 
 ////**************** POPULATE THE ANALYZE CHART  ****************////
 function PopulateAnalyzeChart() {
-    debugger;
+    
     var measurementID = 0;
     var indexStart = 0;
     var indexEnd = 0;
@@ -3098,8 +3106,7 @@ function PopulateInkPaperChartABComparision() {
             visible: true,
             //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
             //template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
-            template: function (dataItem) {
-                debugger;
+            template: function (dataItem) {                
                 var item = dataItem.dataItem;
                 var toolTipString = "<table>";
                 toolTipString += "<tr><td><b>" + item.title + "</b></td></tr>";

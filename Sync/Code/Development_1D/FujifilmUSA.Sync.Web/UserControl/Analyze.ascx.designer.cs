@@ -2074,6 +2074,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadGrid rgChromVariation;
         
         /// <summary>
+        /// locChromVariation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locChromVariation;
+        
+        /// <summary>
         /// UpdatePanel8 control.
         /// </summary>
         /// <remarks>
