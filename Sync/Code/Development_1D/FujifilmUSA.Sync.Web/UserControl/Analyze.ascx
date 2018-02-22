@@ -3235,7 +3235,7 @@
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>
-                                                                                                <%--<table class="TDBOX" border="0" cellpadding="5" cellspacing="0" width="90%">
+                                                                                                <table class="TDBOX" border="0" cellpadding="5" cellspacing="0" width="90%">
                                                                                                     <tr class="TRTABLEBOX">
                                                                                                         <td class="TDTABLEBOXLEFT">
                                                                                                             <b>
@@ -3246,27 +3246,34 @@
                                                                                                         <td>
                                                                                                             <table class="chromVariationTable">
                                                                                                                 <tr>
-                                                                                                                    <th>20</th>
-                                                                                                                    <th class="td25">25</th>
-                                                                                                                    <th>40</th>
-                                                                                                                    <th>50</th>
-                                                                                                                    <th>60</th>
-                                                                                                                    <th>75</th>
-                                                                                                                    <th>80</th>
+                                                                                                                    <th class="tdChromeVar20">20</th>
+                                                                                                                    <th class="tdChromeVar25">25</th>
+                                                                                                                    <th class="tdChromeVar40">40</th>
+                                                                                                                    <th class="tdChromeVar50">50</th>
+                                                                                                                    <th class="tdChromeVar60">60</th>
+                                                                                                                    <th class="tdChromeVar75">75</th>
+                                                                                                                    <th class="tdChromeVar80">80</th>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td>10</td>
-                                                                                                                    <td>20</td>
-                                                                                                                    <td>30</td>
-                                                                                                                    <td>40</td>
-                                                                                                                    <td>50</td>
-                                                                                                                    <td>60</td>
-                                                                                                                    <td>70</td>
+                                                                                                                    <%--<td class="tdChromeVar20"><span id="spnChromeVar20"></span></td>
+                                                                                                                    <td class="tdChromeVar25"><span id="spnChromeVar25"></span></td>
+                                                                                                                    <td class="tdChromeVar40"><span id="spnChromeVar40"></span></td>
+                                                                                                                    <td class="tdChromeVar50"><span id="spnChromeVar50"></span></td>
+                                                                                                                    <td class="tdChromeVar60"><span id="spnChromeVar60"></span></td>
+                                                                                                                    <td class="tdChromeVar75"><span id="spnChromeVar75"></span></td>
+                                                                                                                    <td class="tdChromeVar80"><span id="spnChromeVar80"></span></td>--%>
+                                                                                                                    <td class="tdChromeVar20">10</td>
+                                                                                                                    <td class="tdChromeVar25">20</td>
+                                                                                                                    <td class="tdChromeVar40">30</td>
+                                                                                                                    <td class="tdChromeVar50">40</td>
+                                                                                                                    <td class="tdChromeVar60">50</td>
+                                                                                                                    <td class="tdChromeVar75">60</td>
+                                                                                                                    <td class="tdChromeVar80">70</td>
                                                                                                                 </tr>
                                                                                                             </table>
                                                                                                         </td>
                                                                                                     </tr>
-                                                                                                </table>--%>
+                                                                                                </table>
 
                                                                                             </td>
                                                                                         </tr>
