@@ -15,7 +15,7 @@
     <RootNamespace>FujifilmUSA.Sync.Web</RootNamespace>
     <AssemblyName>FujifilmUSA.Sync.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>True</UseIISExpress>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>

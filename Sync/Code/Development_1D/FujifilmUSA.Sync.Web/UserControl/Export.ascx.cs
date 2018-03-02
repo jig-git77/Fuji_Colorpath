@@ -67,13 +67,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Div_Chart.Visible = false;
                         header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.ProjectName + ".icc");
                     }
-                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If "Spot Target Library" project type, then skip Measure button and DLP Download button (since we don't have desctination profile in this case).
+                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If "Spot Target Library" project type, then skip Measure button and DLP Download button (since we don't have destination profile in this case).
                     {
                         trSourceProfDownload.Visible = false;
                         trDLPDownload.Visible = true;
+                        if (SessionManager.Instance.CurrentOptimizeRun.RunName == "Run-0" || (SessionManager.Instance.CurrentOptimizeRun.RunName != "Run-0" && SessionManager.Instance.CurrentOptimizeRun.HasProfile)) //Download NamedcolorProfile only visible if it is not run-0 and in certify run mode
+                        {
+                            trAdvancedDownload.Visible = false;
+                        }
                         trDLPDownload1.Visible = false;
                         trDLPDownload2.Visible = false;
-                        trAdvancedDownload.Visible = true;
+                        
                         Div_Chart.Visible = true;
                         lbtnMeasure.Visible = true;
                         locDownloadDLPAndChart.Text = "Download Chart";

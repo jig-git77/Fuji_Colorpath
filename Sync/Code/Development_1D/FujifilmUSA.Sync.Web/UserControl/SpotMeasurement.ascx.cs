@@ -36,7 +36,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns != null &&
                     SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count >= 1)
                 {
-                    LoadData();
+                   // LoadData();
                 }
             }
         }

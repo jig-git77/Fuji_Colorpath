@@ -52,6 +52,7 @@ namespace FujiFilmUSA.Sync.PluginService
 
         public ReferenceChartData GetReferenceChart(string projectId, string referenceChartDisplayType, string IsSpotProjectType)
         {
+            ErrorLog.WriteErrorLog("Error");
             this.ReferenceChartDisType = (EReferenceChartDisType)Enum.Parse(typeof(EReferenceChartDisType), referenceChartDisplayType);
             var presenter = new PresenterPluginDataService(this);
             if (Convert.ToBoolean(IsSpotProjectType) == false)
