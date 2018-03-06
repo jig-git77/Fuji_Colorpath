@@ -589,9 +589,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     _presenterAnalyze.GetISOTVIChart();
                     if (!IsErrorOccured)
                     {
-                        FillISOTVIChart(DTISOTVIChart);
-                        FillSpreadChart(DTSpreadChartData, DTSpreadSplineRangeChartData, DTMaxSpreadChartData);
-                        FillSpreadChart_CMYK(DTSpreadChartData_CMYK);
+                        try
+                        {
+                            FillISOTVIChart(DTISOTVIChart);
+                            FillSpreadChart(DTSpreadChartData, DTSpreadSplineRangeChartData, DTMaxSpreadChartData);
+                            FillSpreadChart_CMYK(DTSpreadChartData_CMYK);
+                        }
+                        catch(Exception ex)
+                        {
+
+                        }
                     }
                     UpdatePanel_TVI_ISO.Visible = true;
                     UpdatePanel_TVI_G7.Visible = false;
