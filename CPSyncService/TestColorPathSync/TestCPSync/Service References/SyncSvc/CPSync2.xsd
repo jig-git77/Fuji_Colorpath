@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:50336/CPSync.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
+  <xs:import schemaLocation="http://localhost:50336/CPSync.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts" />
   <xs:element name="CreateCurve">
     <xs:complexType>
       <xs:sequence>
@@ -40,6 +41,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/" minOccurs="0" name="GetG7NPDCResult" nillable="true" type="q6:Profile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSpotLAB">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts" minOccurs="0" name="req" nillable="true" type="q7:ExtractSpotLABRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSpotLABResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts" minOccurs="0" name="GetSpotLABResult" nillable="true" type="q8:ExtractSpotLABResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
