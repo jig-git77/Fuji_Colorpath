@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ColorPathSync.MessageContracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -21,6 +22,9 @@ namespace ColorPathSync
 
         [OperationContract]
         Profile GetG7NPDC(Curve objCurve);
+
+        [OperationContract]
+        ExtractSpotLABResponse GetSpotLAB(ExtractSpotLABRequest req);
         
     }
    

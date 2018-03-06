@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ColorPathSync.Business;
+using ColorPathSync.MessageContracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -63,6 +65,20 @@ namespace ColorPathSync
             }
         }
 
+        public ExtractSpotLABResponse GetSpotLAB(ExtractSpotLABRequest req)
+        {
+            ExtractSpotLABResponse objPf = new ExtractSpotLABResponse();
+            try
+            {
+                objPf = ExtractSpotLABBusiness.ExtractSpotLABValues(req);
+                return objPf;
+            }
+            catch (Exception ex)
+            {
+                objPf.Message = ex.ToString();
+                return objPf;
+            }
+        }
         
     }
 }
