@@ -309,10 +309,10 @@ namespace TestCPSync
             try
             {
 
-                objCmd.CommandText = "CPSpot.GetSpotCMYK";
+                objCmd.CommandText = "CPSpot.GetSpotTargetLABByOptimizeRun";
                 objCmd.CommandType = CommandType.StoredProcedure;
 
-                objCmd.Parameters.AddWithValue("@OptimizeRunID", 36);
+                objCmd.Parameters.AddWithValue("@OptimizeRunID", 12);
 
                 DataSet objSet = new DataSet();
                 objSet = (new DataAccess()).GetDataSet(objCmd);
