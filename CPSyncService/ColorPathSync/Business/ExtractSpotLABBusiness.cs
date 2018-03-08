@@ -59,9 +59,10 @@ namespace ColorPathSync.Business
                 //and a hacky way to open in the code to read the profile
                 //The named color profile is currently in unmanaged memory, to use in C#
                 //needs to copied to managed memeory to read in C#
-                TYPE_p_p_void NCPSpec = CrossXColor.CLNewFileSpecRef();
-                CrossXColor.CLName2FileSpec(NCPSpec, "NCP2patch.icc");
-                err = CrossXColor.CLWriteProfile(prof, NCPSpec, 0);
+
+                // TYPE_p_p_void NCPSpec = CrossXColor.CLNewFileSpecRef();
+                // CrossXColor.CLName2FileSpec(NCPSpec, "NCP2patch.icc");
+                // err = CrossXColor.CLWriteProfile(prof, NCPSpec, 0);
 
                 response.namedColorProfile = Curve.GetDLP(ref prof);
                 System.Console.WriteLine("CLWriteProfile-Error = {0:d}", err);
@@ -69,9 +70,8 @@ namespace ColorPathSync.Business
                 //now we create the collection for reading the named color profile into
                 List<Patch> listPatch = new List<Patch>();
 
-                //just pass the path to the saved named color profile
-                //this is a hack should be passed in memeory as byte array in managed way
-                listPatch = ICCHelper.readICC("NCP2patch.icc");
+                //just pass the byte array of the named color profile
+                listPatch = ICCHelper.readICC(response.namedColorProfile);
 
                 //Now we setup the transformation and the CMM where we can pass the 
                 //CMYK through the Destination profile and get Predicted LAB values returned

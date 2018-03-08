@@ -9,15 +9,18 @@ namespace ColorPathSync.Helper
 {
     public class ICCHelper
     {
-        public static List<Patch> readICC(string dirInfo)
+        public static List<Patch> readICC(byte[] ncProfile)
         {
             bool status;
             ICCFile iccFile = new ICCFile();
-            //BinaryReader bs2 = new BinaryReader(File.Open(dirInfo.FullName, FileMode.Open));
-            BinaryDataReader bs2 = new BinaryDataReader(File.Open(dirInfo, FileMode.Open));
+
+            MemoryStream stream = new MemoryStream();
+            stream.Write(ncProfile, 0, ncProfile.Length);
+            BinaryDataReader bs2 = new BinaryDataReader(stream);
 
             MemoryStream mb2 = new MemoryStream();
             bs2.BaseStream.CopyTo(mb2);
+
             status = iccFile.readHeader(bs2, mb2);
 
             status = iccFile.readTAG(bs2, mb2);
