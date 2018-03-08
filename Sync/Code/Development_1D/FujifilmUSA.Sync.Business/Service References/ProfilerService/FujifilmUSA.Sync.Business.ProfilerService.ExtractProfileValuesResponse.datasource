@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="ExtractProfileValuesResponse" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse, Service References.ProfilerService.Reference.cs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
+   <TypeInfo>FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse, Service References.ProfilerService.Reference.cs.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

@@ -43,5 +43,12 @@ namespace FujifilmUSA.Sync.Presenter
             OptimizationRunID = projectBusiness.AddDummyData(_viewImportMeasurements.ProjectId, _viewImportMeasurements.OptimizeRunID);
             return OptimizationRunID;
         }
+
+        public void CreateSpotProjectInitialOptimization()
+        {            
+            var projectOptimization = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            projectOptimization.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+            projectOptimization.CreateSpotNamedColorProfile(_viewImportMeasurements.ProjectId, _viewImportMeasurements.OptimizeRunID);            
+        }
     }
 }
