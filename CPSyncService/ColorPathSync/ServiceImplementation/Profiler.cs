@@ -40,11 +40,16 @@ namespace ColorPathSync.ServiceImplementation
         public CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request)
         {
             return ProfilerBusiness.CreateSourceProfile(request);
-        }     
-       
+        }
+
         public ExtractProfileValuesResponse ExtractProfileValues(ExtractProfileValuesRequest request)
         {
             return ProfilerBusiness.ExtractProfileValues(request);
+        }
+
+        public ExtractSpotLABResponse GetSpotLAB(ExtractSpotLABRequest request)
+        {
+            return ExtractSpotLABBusiness.ExtractSpotLABValues(request);
         }
 
 
@@ -58,6 +63,6 @@ namespace ColorPathSync.ServiceImplementation
         //{
         //    return CreateISOCurveProfileBusiness.CreateISOCurve(request);
         //}
-        
+
     }
 }

@@ -368,8 +368,13 @@ namespace TestCPSync
         {
             try
             {
-                SyncSvc.CPSyncClient objSync = new SyncSvc.CPSyncClient();
-                ExtractSpotLABRequest req = new ExtractSpotLABRequest();
+                //SyncSvc.CPSyncClient objSync = new SyncSvc.CPSyncClient();
+                //ExtractSpotLABRequest req = new ExtractSpotLABRequest();
+                //req = BindParamsByCpSync();
+                //var result = objSync.GetSpotLAB(req);
+
+                ProfilerSvc.ProfilerClient objSync = new ProfilerSvc.ProfilerClient();
+                ProfilerSvc.ExtractSpotLABRequest req = new ProfilerSvc.ExtractSpotLABRequest();
                 req = BindParams();
                 var result = objSync.GetSpotLAB(req);
             }
@@ -380,7 +385,51 @@ namespace TestCPSync
             }
         }
 
-        public ExtractSpotLABRequest BindParams()
+        public ProfilerSvc.ExtractSpotLABRequest BindParams()
+        {
+            ProfilerSvc.ExtractSpotLABRequest req = new ProfilerSvc.ExtractSpotLABRequest();
+            ProfilerSvc.Parameter[] paramList = new ProfilerSvc.Parameter[10];
+            paramList[0] = new ProfilerSvc.Parameter() { Name = "MaxChannels", Value = "0" };
+            paramList[1] = new ProfilerSvc.Parameter() { Name = "MaxChannels", Value = "0" };
+            paramList[2] = new ProfilerSvc.Parameter() { Name = "SaveProfilerInfo", Value = "1" };
+            paramList[3] = new ProfilerSvc.Parameter() { Name = "SaveProfilerData", Value = "1" };
+            paramList[4] = new ProfilerSvc.Parameter() { Name = "CalculateDCSMode", Value = "2" };
+            paramList[5] = new ProfilerSvc.Parameter() { Name = "Rendering", Value = "3" };
+            paramList[6] = new ProfilerSvc.Parameter() { Name = "OOGMethod", Value = "dE00" };
+            paramList[7] = new ProfilerSvc.Parameter() { Name = "ClipAbsTolerance", Value = "0" };
+            paramList[8] = new ProfilerSvc.Parameter() { Name = "ClipRelTolerance", Value = "0" };
+            paramList[9] = new ProfilerSvc.Parameter() { Name = "MaxChannels", Value = "0" };
+
+            req.ProfileOptions = paramList;
+
+            DataSet ds = LoadSpotProfileFromDB();
+            req.DestinationProfile = new ProfilerSvc.IccProfile();
+            req.DestinationProfile.ProfileData = (byte[])ds.Tables[0].Rows[0]["DestinationProfile"];
+
+            var ms = new MemoryStream();
+            StreamWriter writer = new StreamWriter(ms);
+
+            writer.WriteLine("BEGIN_DATA_FORMAT");
+            writer.WriteLine("SAMPLE_NAME\tLAB_L\tLAB_A\tLAB_B");
+            writer.WriteLine("END_DATA_FORMAT");
+            writer.WriteLine("BEGIN_DATA");
+
+            if (ds.Tables[1] != null && ds.Tables[1].Rows.Count > 0)
+                foreach (DataRow dr in ds.Tables[1].Rows)
+                    writer.WriteLine("\"" + dr["SpotName"].ToString() + "\"\t" + dr["Target_L*"].ToString() + "\t" + dr["Target_a*"].ToString() + "\t" + dr["Target_b*"].ToString() + "");
+
+
+            //writer.WriteLine("\"PANTONE_Blue_072_C\"\t19.740\t38.140\t-77.580");
+            //writer.WriteLine("\"PANTONE_Reflex_Blue_C\"\t19.030\t25.900\t-67.790");
+            writer.WriteLine("END_DATA");
+            writer.Flush();
+
+            req.TargetProfile = ms.ToArray();
+
+            return req;
+        }
+
+        public ExtractSpotLABRequest BindParamsByCpSync()
         {
             ExtractSpotLABRequest req = new ExtractSpotLABRequest();
             Parameter[] paramList = new Parameter[10];

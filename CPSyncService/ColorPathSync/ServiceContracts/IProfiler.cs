@@ -34,7 +34,10 @@ namespace ColorPathSync.ServiceContracts
               
         [OperationContract]
         ExtractProfileValuesResponse ExtractProfileValues(ExtractProfileValuesRequest request);
-               
+
+        [OperationContract]
+        ExtractSpotLABResponse GetSpotLAB(ExtractSpotLABRequest req);
+
         ////Declaration for the ISO and G7 for Alignment Curve (Old Code)
         //[OperationContract]
         //Profile CreateCurve(Curve objSync);
