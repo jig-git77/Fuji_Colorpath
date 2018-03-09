@@ -51,29 +51,4 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ProfileExtractType" nillable="true" type="tns:ProfileExtractType" />
-  <xs:complexType name="ArrayOfPatch">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Patch" nillable="true" type="tns:Patch" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPatch" nillable="true" type="tns:ArrayOfPatch" />
-  <xs:complexType name="Patch">
-    <xs:sequence>
-      <xs:element name="_x003C_Cie_L_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Cie_a_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Cie_b_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Cmyk_C_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Cmyk_K_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Cmyk_M_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Cmyk_Y_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_ColorName_x003E_k__BackingField" nillable="true" type="xs:string" />
-      <xs:element name="_x003C_PatchID_x003E_k__BackingField" type="xs:int" />
-      <xs:element name="_x003C_Spot1_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Spot2_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_p_Cie_L_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_p_Cie_a_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_p_Cie_b_x003E_k__BackingField" type="xs:double" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Patch" nillable="true" type="tns:Patch" />
 </xs:schema>

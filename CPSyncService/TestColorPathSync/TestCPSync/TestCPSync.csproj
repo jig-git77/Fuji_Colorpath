@@ -163,23 +163,23 @@
     <None Include="Service References\ProfilerSvc\TestCPSync.ProfilerSvc.OptimizeDeviceLinkProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SyncSvc\CPSync1.wsdl" />
-    <None Include="Service References\SyncSvc\CPSync6.xsd">
+    <None Include="Service References\SyncSvc\CPSync.wsdl" />
+    <None Include="Service References\SyncSvc\CPSync.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncSvc\CPSync61.xsd">
+    <None Include="Service References\SyncSvc\CPSync1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncSvc\CPSync62.xsd">
+    <None Include="Service References\SyncSvc\CPSync2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncSvc\CPSync63.xsd">
+    <None Include="Service References\SyncSvc\CPSync3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncSvc\CPSync64.xsd">
+    <None Include="Service References\SyncSvc\CPSync4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncSvc\CPSync65.xsd">
+    <None Include="Service References\SyncSvc\CPSync5.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SyncSvc\TestCPSync.SyncSvc.ExtractSpotLABResponse.datasource">
@@ -214,21 +214,6 @@
     <WCFMetadataStorage Include="Service References\SyncSvc\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\SyncSvc\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SyncSvc\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SyncSvc\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SyncSvc\CPSync1.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\ProfilerSvc\Profiler.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +224,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ProfilerSvc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncSvc\CPSync.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncSvc\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncSvc\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncSvc\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

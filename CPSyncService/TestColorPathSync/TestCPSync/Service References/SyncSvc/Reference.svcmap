@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9575c4d9-0a78-4089-85a1-f1ee880277f2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5dfc7ca2-15cc-4b3b-a21a-add4cd985ba2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -18,17 +18,17 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:50336/CPSync.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/ColorPathSync/CPSync.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="CPSync.xsd" MetadataType="Schema" ID="f1480b1f-572c-4ba6-b46f-ae51711a9015" SourceId="1" SourceUrl="http://localhost:50336/CPSync.svc?xsd=xsd4" />
-    <MetadataFile FileName="CPSync1.xsd" MetadataType="Schema" ID="9d78c198-7f39-4c5b-8073-b9808dc8ad12" SourceId="1" SourceUrl="http://localhost:50336/CPSync.svc?xsd=xsd5" />
-    <MetadataFile FileName="CPSync2.xsd" MetadataType="Schema" ID="9033346e-5daa-414b-8495-9e09e3020fa1" SourceId="1" SourceUrl="http://localhost:50336/CPSync.svc?xsd=xsd0" />
-    <MetadataFile FileName="CPSync3.xsd" MetadataType="Schema" ID="2e7e592d-aeef-4897-95d6-15706812471f" SourceId="1" SourceUrl="http://localhost:50336/CPSync.svc?xsd=xsd1" />
-    <MetadataFile FileName="CPSync4.xsd" MetadataType="Schema" ID="52537c12-d787-417a-a704-4d70aaf05ab8" SourceId="1" SourceUrl="http://localhost:50336/CPSync.svc?xsd=xsd2" />
-    <MetadataFile FileName="CPSync5.xsd" MetadataType="Schema" ID="0e89c6a1-89aa-44ed-9ce8-08b376374505" SourceId="1" SourceUrl="http://localhost:50336/CPSync.svc?xsd=xsd3" />
-    <MetadataFile FileName="CPSync.wsdl" MetadataType="Wsdl" ID="ba834b43-2856-4c5a-9035-46e39e228bf1" SourceId="1" SourceUrl="http://localhost:50336/CPSync.svc?wsdl" />
-    <MetadataFile FileName="CPSync.disco" MetadataType="Disco" ID="cc1a1a1c-02db-4978-86df-d62d5048cf92" SourceId="1" SourceUrl="http://localhost:50336/CPSync.svc?disco" />
+    <MetadataFile FileName="CPSync.disco" MetadataType="Disco" ID="cd9f66e8-5d1f-40d8-a23a-9c613de2d91a" SourceId="1" SourceUrl="http://localhost/ColorPathSync/CPSync.svc?disco" />
+    <MetadataFile FileName="CPSync.xsd" MetadataType="Schema" ID="a76514e4-7c2d-4951-abe3-23ddfc627a1c" SourceId="1" SourceUrl="http://localhost/ColorPathSync/CPSync.svc?xsd=xsd3" />
+    <MetadataFile FileName="CPSync1.xsd" MetadataType="Schema" ID="7d859066-16bf-4e65-a63b-8e4f43232d92" SourceId="1" SourceUrl="http://localhost/ColorPathSync/CPSync.svc?xsd=xsd2" />
+    <MetadataFile FileName="CPSync2.xsd" MetadataType="Schema" ID="64921b96-b639-4760-a0cd-ff39162f0041" SourceId="1" SourceUrl="http://localhost/ColorPathSync/CPSync.svc?xsd=xsd1" />
+    <MetadataFile FileName="CPSync3.xsd" MetadataType="Schema" ID="302c7e16-864d-44b5-be73-cec7f6bc2e4f" SourceId="1" SourceUrl="http://localhost/ColorPathSync/CPSync.svc?xsd=xsd0" />
+    <MetadataFile FileName="CPSync4.xsd" MetadataType="Schema" ID="7731368a-5375-4501-b6c0-ed3f154acf28" SourceId="1" SourceUrl="http://localhost/ColorPathSync/CPSync.svc?xsd=xsd5" />
+    <MetadataFile FileName="CPSync5.xsd" MetadataType="Schema" ID="22cbfb03-edfb-459d-bcb7-4f87e7497564" SourceId="1" SourceUrl="http://localhost/ColorPathSync/CPSync.svc?xsd=xsd4" />
+    <MetadataFile FileName="CPSync.wsdl" MetadataType="Wsdl" ID="a527358a-823c-4331-93b3-be0d6b67aed2" SourceId="1" SourceUrl="http://localhost/ColorPathSync/CPSync.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

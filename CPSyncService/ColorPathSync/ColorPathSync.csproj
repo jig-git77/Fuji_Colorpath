@@ -101,6 +101,8 @@
     <Compile Include="DataContracts\Patch.cs" />
     <Compile Include="DataContracts\PCSDataType.cs" />
     <Compile Include="DataContracts\ProfileExtractType.cs" />
+    <Compile Include="DataContracts\SpotIccProfile.cs" />
+    <Compile Include="DataContracts\SpotParameter.cs" />
     <Compile Include="Helper\BinaryDataReader.cs" />
     <Compile Include="Helper\ICCFile.cs" />
     <Compile Include="Helper\ICCHelper.cs" />

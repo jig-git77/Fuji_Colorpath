@@ -268,7 +268,6 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.CreateISOAlignmentCurveResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.CreateSourceProfileResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse))]
     public partial class BaseResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -643,45 +642,6 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ExtractSpotLABResponse", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
-    [System.SerializableAttribute()]
-    public partial class ExtractSpotLABResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] namedColorProfileField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Patch> spotPatchDetailField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] namedColorProfile {
-            get {
-                return this.namedColorProfileField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.namedColorProfileField, value) != true)) {
-                    this.namedColorProfileField = value;
-                    this.RaisePropertyChanged("namedColorProfile");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Patch> spotPatchDetail {
-            get {
-                return this.spotPatchDetailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.spotPatchDetailField, value) != true)) {
-                    this.spotPatchDetailField = value;
-                    this.RaisePropertyChanged("spotPatchDetail");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CreateDestinationAndDeviceLinkProfileResponse", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
     [System.SerializableAttribute()]
     public partial class CreateDestinationAndDeviceLinkProfileResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse {
@@ -734,245 +694,6 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Warning = 3,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Patch", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts")]
-    [System.SerializableAttribute()]
-    public partial class Patch : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private double Cie_Lk__BackingFieldField;
-        
-        private double Cie_ak__BackingFieldField;
-        
-        private double Cie_bk__BackingFieldField;
-        
-        private double Cmyk_Ck__BackingFieldField;
-        
-        private double Cmyk_Kk__BackingFieldField;
-        
-        private double Cmyk_Mk__BackingFieldField;
-        
-        private double Cmyk_Yk__BackingFieldField;
-        
-        private string ColorNamek__BackingFieldField;
-        
-        private int PatchIDk__BackingFieldField;
-        
-        private double Spot1k__BackingFieldField;
-        
-        private double Spot2k__BackingFieldField;
-        
-        private double p_Cie_Lk__BackingFieldField;
-        
-        private double p_Cie_ak__BackingFieldField;
-        
-        private double p_Cie_bk__BackingFieldField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<Cie_L>k__BackingField", IsRequired=true)]
-        public double Cie_Lk__BackingField {
-            get {
-                return this.Cie_Lk__BackingFieldField;
-            }
-            set {
-                if ((this.Cie_Lk__BackingFieldField.Equals(value) != true)) {
-                    this.Cie_Lk__BackingFieldField = value;
-                    this.RaisePropertyChanged("Cie_Lk__BackingField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<Cie_a>k__BackingField", IsRequired=true)]
-        public double Cie_ak__BackingField {
-            get {
-                return this.Cie_ak__BackingFieldField;
-            }
-            set {
-                if ((this.Cie_ak__BackingFieldField.Equals(value) != true)) {
-                    this.Cie_ak__BackingFieldField = value;
-                    this.RaisePropertyChanged("Cie_ak__BackingField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<Cie_b>k__BackingField", IsRequired=true)]
-        public double Cie_bk__BackingField {
-            get {
-                return this.Cie_bk__BackingFieldField;
-            }
-            set {
-                if ((this.Cie_bk__BackingFieldField.Equals(value) != true)) {
-                    this.Cie_bk__BackingFieldField = value;
-                    this.RaisePropertyChanged("Cie_bk__BackingField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<Cmyk_C>k__BackingField", IsRequired=true)]
-        public double Cmyk_Ck__BackingField {
-            get {
-                return this.Cmyk_Ck__BackingFieldField;
-            }
-            set {
-                if ((this.Cmyk_Ck__BackingFieldField.Equals(value) != true)) {
-                    this.Cmyk_Ck__BackingFieldField = value;
-                    this.RaisePropertyChanged("Cmyk_Ck__BackingField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<Cmyk_K>k__BackingField", IsRequired=true)]
-        public double Cmyk_Kk__BackingField {
-            get {
-                return this.Cmyk_Kk__BackingFieldField;
-            }
-            set {
-                if ((this.Cmyk_Kk__BackingFieldField.Equals(value) != true)) {
-                    this.Cmyk_Kk__BackingFieldField = value;
-                    this.RaisePropertyChanged("Cmyk_Kk__BackingField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<Cmyk_M>k__BackingField", IsRequired=true)]
-        public double Cmyk_Mk__BackingField {
-            get {
-                return this.Cmyk_Mk__BackingFieldField;
-            }
-            set {
-                if ((this.Cmyk_Mk__BackingFieldField.Equals(value) != true)) {
-                    this.Cmyk_Mk__BackingFieldField = value;
-                    this.RaisePropertyChanged("Cmyk_Mk__BackingField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<Cmyk_Y>k__BackingField", IsRequired=true)]
-        public double Cmyk_Yk__BackingField {
-            get {
-                return this.Cmyk_Yk__BackingFieldField;
-            }
-            set {
-                if ((this.Cmyk_Yk__BackingFieldField.Equals(value) != true)) {
-                    this.Cmyk_Yk__BackingFieldField = value;
-                    this.RaisePropertyChanged("Cmyk_Yk__BackingField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<ColorName>k__BackingField", IsRequired=true)]
-        public string ColorNamek__BackingField {
-            get {
-                return this.ColorNamek__BackingFieldField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ColorNamek__BackingFieldField, value) != true)) {
-                    this.ColorNamek__BackingFieldField = value;
-                    this.RaisePropertyChanged("ColorNamek__BackingField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<PatchID>k__BackingField", IsRequired=true)]
-        public int PatchIDk__BackingField {
-            get {
-                return this.PatchIDk__BackingFieldField;
-            }
-            set {
-                if ((this.PatchIDk__BackingFieldField.Equals(value) != true)) {
-                    this.PatchIDk__BackingFieldField = value;
-                    this.RaisePropertyChanged("PatchIDk__BackingField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<Spot1>k__BackingField", IsRequired=true)]
-        public double Spot1k__BackingField {
-            get {
-                return this.Spot1k__BackingFieldField;
-            }
-            set {
-                if ((this.Spot1k__BackingFieldField.Equals(value) != true)) {
-                    this.Spot1k__BackingFieldField = value;
-                    this.RaisePropertyChanged("Spot1k__BackingField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<Spot2>k__BackingField", IsRequired=true)]
-        public double Spot2k__BackingField {
-            get {
-                return this.Spot2k__BackingFieldField;
-            }
-            set {
-                if ((this.Spot2k__BackingFieldField.Equals(value) != true)) {
-                    this.Spot2k__BackingFieldField = value;
-                    this.RaisePropertyChanged("Spot2k__BackingField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<p_Cie_L>k__BackingField", IsRequired=true)]
-        public double p_Cie_Lk__BackingField {
-            get {
-                return this.p_Cie_Lk__BackingFieldField;
-            }
-            set {
-                if ((this.p_Cie_Lk__BackingFieldField.Equals(value) != true)) {
-                    this.p_Cie_Lk__BackingFieldField = value;
-                    this.RaisePropertyChanged("p_Cie_Lk__BackingField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<p_Cie_a>k__BackingField", IsRequired=true)]
-        public double p_Cie_ak__BackingField {
-            get {
-                return this.p_Cie_ak__BackingFieldField;
-            }
-            set {
-                if ((this.p_Cie_ak__BackingFieldField.Equals(value) != true)) {
-                    this.p_Cie_ak__BackingFieldField = value;
-                    this.RaisePropertyChanged("p_Cie_ak__BackingField");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Name="<p_Cie_b>k__BackingField", IsRequired=true)]
-        public double p_Cie_bk__BackingField {
-            get {
-                return this.p_Cie_bk__BackingFieldField;
-            }
-            set {
-                if ((this.p_Cie_bk__BackingFieldField.Equals(value) != true)) {
-                    this.p_Cie_bk__BackingFieldField = value;
-                    this.RaisePropertyChanged("p_Cie_bk__BackingField");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1720,7 +1441,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ExtractSpotLABRequest", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ExtractSpotLABRequest", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
     public partial class ExtractSpotLABRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1728,13 +1449,13 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DestinationProfileField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptionsField;
+        private FujifilmUSA.Sync.Business.ProfilerService.SpotIccProfile DestinationProfileField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private byte[] TargetProfileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.SpotParameter> ProfileOptionsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1746,8 +1467,8 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public FujifilmUSA.Sync.Business.ProfilerService.IccProfile DestinationProfile {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public FujifilmUSA.Sync.Business.ProfilerService.SpotIccProfile DestinationProfile {
             get {
                 return this.DestinationProfileField;
             }
@@ -1759,8 +1480,21 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptions {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public byte[] TargetProfile {
+            get {
+                return this.TargetProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TargetProfileField, value) != true)) {
+                    this.TargetProfileField = value;
+                    this.RaisePropertyChanged("TargetProfile");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.SpotParameter> ProfileOptions {
             get {
                 return this.ProfileOptionsField;
             }
@@ -1772,15 +1506,465 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] TargetProfile {
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SpotIccProfile", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class SpotIccProfile : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] ProfileDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
-                return this.TargetProfileField;
+                return this.extensionDataField;
             }
             set {
-                if ((object.ReferenceEquals(this.TargetProfileField, value) != true)) {
-                    this.TargetProfileField = value;
-                    this.RaisePropertyChanged("TargetProfile");
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public byte[] ProfileData {
+            get {
+                return this.ProfileDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileDataField, value) != true)) {
+                    this.ProfileDataField = value;
+                    this.RaisePropertyChanged("ProfileData");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SpotParameter", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class SpotParameter : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ValueField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Value {
+            get {
+                return this.ValueField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ValueField, value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BaseResponse", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABResponse))]
+    public partial class BaseResponse1 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        private FujifilmUSA.Sync.Business.ProfilerService.MessageSeverity1 SeverityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public FujifilmUSA.Sync.Business.ProfilerService.MessageSeverity1 Severity {
+            get {
+                return this.SeverityField;
+            }
+            set {
+                if ((this.SeverityField.Equals(value) != true)) {
+                    this.SeverityField = value;
+                    this.RaisePropertyChanged("Severity");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ExtractSpotLABResponse", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class ExtractSpotLABResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse1 {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Patch> spotPatchDetailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] namedColorProfileField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Patch> spotPatchDetail {
+            get {
+                return this.spotPatchDetailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.spotPatchDetailField, value) != true)) {
+                    this.spotPatchDetailField = value;
+                    this.RaisePropertyChanged("spotPatchDetail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public byte[] namedColorProfile {
+            get {
+                return this.namedColorProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.namedColorProfileField, value) != true)) {
+                    this.namedColorProfileField = value;
+                    this.RaisePropertyChanged("namedColorProfile");
+                }
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MessageSeverity", Namespace="http://tempuri.org/")]
+    public enum MessageSeverity1 : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Information = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Error = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Warning = 3,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Patch", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class Patch : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private int PatchIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ColorNameField;
+        
+        private double Cmyk_CField;
+        
+        private double Cmyk_MField;
+        
+        private double Cmyk_YField;
+        
+        private double Cmyk_KField;
+        
+        private double Spot1Field;
+        
+        private double Cie_LField;
+        
+        private double Cie_aField;
+        
+        private double Cie_bField;
+        
+        private double p_Cie_LField;
+        
+        private double p_Cie_aField;
+        
+        private double p_Cie_bField;
+        
+        private double Spot2Field;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public int PatchID {
+            get {
+                return this.PatchIDField;
+            }
+            set {
+                if ((this.PatchIDField.Equals(value) != true)) {
+                    this.PatchIDField = value;
+                    this.RaisePropertyChanged("PatchID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string ColorName {
+            get {
+                return this.ColorNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ColorNameField, value) != true)) {
+                    this.ColorNameField = value;
+                    this.RaisePropertyChanged("ColorName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public double Cmyk_C {
+            get {
+                return this.Cmyk_CField;
+            }
+            set {
+                if ((this.Cmyk_CField.Equals(value) != true)) {
+                    this.Cmyk_CField = value;
+                    this.RaisePropertyChanged("Cmyk_C");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public double Cmyk_M {
+            get {
+                return this.Cmyk_MField;
+            }
+            set {
+                if ((this.Cmyk_MField.Equals(value) != true)) {
+                    this.Cmyk_MField = value;
+                    this.RaisePropertyChanged("Cmyk_M");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
+        public double Cmyk_Y {
+            get {
+                return this.Cmyk_YField;
+            }
+            set {
+                if ((this.Cmyk_YField.Equals(value) != true)) {
+                    this.Cmyk_YField = value;
+                    this.RaisePropertyChanged("Cmyk_Y");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=5)]
+        public double Cmyk_K {
+            get {
+                return this.Cmyk_KField;
+            }
+            set {
+                if ((this.Cmyk_KField.Equals(value) != true)) {
+                    this.Cmyk_KField = value;
+                    this.RaisePropertyChanged("Cmyk_K");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
+        public double Spot1 {
+            get {
+                return this.Spot1Field;
+            }
+            set {
+                if ((this.Spot1Field.Equals(value) != true)) {
+                    this.Spot1Field = value;
+                    this.RaisePropertyChanged("Spot1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
+        public double Cie_L {
+            get {
+                return this.Cie_LField;
+            }
+            set {
+                if ((this.Cie_LField.Equals(value) != true)) {
+                    this.Cie_LField = value;
+                    this.RaisePropertyChanged("Cie_L");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=8)]
+        public double Cie_a {
+            get {
+                return this.Cie_aField;
+            }
+            set {
+                if ((this.Cie_aField.Equals(value) != true)) {
+                    this.Cie_aField = value;
+                    this.RaisePropertyChanged("Cie_a");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=9)]
+        public double Cie_b {
+            get {
+                return this.Cie_bField;
+            }
+            set {
+                if ((this.Cie_bField.Equals(value) != true)) {
+                    this.Cie_bField = value;
+                    this.RaisePropertyChanged("Cie_b");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=10)]
+        public double p_Cie_L {
+            get {
+                return this.p_Cie_LField;
+            }
+            set {
+                if ((this.p_Cie_LField.Equals(value) != true)) {
+                    this.p_Cie_LField = value;
+                    this.RaisePropertyChanged("p_Cie_L");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=11)]
+        public double p_Cie_a {
+            get {
+                return this.p_Cie_aField;
+            }
+            set {
+                if ((this.p_Cie_aField.Equals(value) != true)) {
+                    this.p_Cie_aField = value;
+                    this.RaisePropertyChanged("p_Cie_a");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=12)]
+        public double p_Cie_b {
+            get {
+                return this.p_Cie_bField;
+            }
+            set {
+                if ((this.p_Cie_bField.Equals(value) != true)) {
+                    this.p_Cie_bField = value;
+                    this.RaisePropertyChanged("p_Cie_b");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=13)]
+        public double Spot2 {
+            get {
+                return this.Spot2Field;
+            }
+            set {
+                if ((this.Spot2Field.Equals(value) != true)) {
+                    this.Spot2Field = value;
+                    this.RaisePropertyChanged("Spot2");
                 }
             }
         }
@@ -1823,8 +2007,77 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/ExtractProfileValues", ReplyAction="http://tempuri.org/IProfiler/ExtractProfileValuesResponse")]
         FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse ExtractProfileValues(FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesRequest request);
         
+        // CODEGEN: Generating message contract since element name req from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/GetSpotLAB", ReplyAction="http://tempuri.org/IProfiler/GetSpotLABResponse")]
-        FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABResponse GetSpotLAB(FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABRequest req);
+        FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABResponse GetSpotLAB(FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetSpotLABRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetSpotLAB", Namespace="http://tempuri.org/", Order=0)]
+        public FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequestBody Body;
+        
+        public GetSpotLABRequest() {
+        }
+        
+        public GetSpotLABRequest(FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetSpotLABRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABRequest req;
+        
+        public GetSpotLABRequestBody() {
+        }
+        
+        public GetSpotLABRequestBody(FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABRequest req) {
+            this.req = req;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetSpotLABResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetSpotLABResponse", Namespace="http://tempuri.org/", Order=0)]
+        public FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABResponseBody Body;
+        
+        public GetSpotLABResponse() {
+        }
+        
+        public GetSpotLABResponse(FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetSpotLABResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABResponse GetSpotLABResult;
+        
+        public GetSpotLABResponseBody() {
+        }
+        
+        public GetSpotLABResponseBody(FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABResponse GetSpotLABResult) {
+            this.GetSpotLABResult = GetSpotLABResult;
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1886,8 +2139,17 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
             return base.Channel.ExtractProfileValues(request);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABResponse FujifilmUSA.Sync.Business.ProfilerService.IProfiler.GetSpotLAB(FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequest request) {
+            return base.Channel.GetSpotLAB(request);
+        }
+        
         public FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABResponse GetSpotLAB(FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABRequest req) {
-            return base.Channel.GetSpotLAB(req);
+            FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequest inValue = new FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequest();
+            inValue.Body = new FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequestBody();
+            inValue.Body.req = req;
+            FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABResponse retVal = ((FujifilmUSA.Sync.Business.ProfilerService.IProfiler)(this)).GetSpotLAB(inValue);
+            return retVal.Body.GetSpotLABResult;
         }
     }
 }

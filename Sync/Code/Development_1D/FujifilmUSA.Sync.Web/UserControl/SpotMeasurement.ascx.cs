@@ -62,6 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     OptimizeRunID = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                     _presenterImportMeasurements.CreateSpotProjectInitialOptimization();
                     ViewState["LastOptimizationRunID"] = OptimizeRunID;
+                    SessionManager.Instance.CurrentOptimizeRun.HasProfile = true;
                 }                
             }
             catch (Exception ex)

@@ -166,23 +166,4 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="ExtractProfileValuesResponse" nillable="true" type="tns:ExtractProfileValuesResponse" />
-  <xs:complexType name="ExtractSpotLABRequest">
-    <xs:sequence>
-      <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="DestinationProfile" nillable="true" type="q59:IccProfile" />
-      <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="ProfileOptions" nillable="true" type="q60:ArrayOfParameter" />
-      <xs:element minOccurs="0" name="TargetProfile" nillable="true" type="xs:base64Binary" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ExtractSpotLABRequest" nillable="true" type="tns:ExtractSpotLABRequest" />
-  <xs:complexType name="ExtractSpotLABResponse">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:BaseResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="namedColorProfile" nillable="true" type="xs:base64Binary" />
-          <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="spotPatchDetail" nillable="true" type="q61:ArrayOfPatch" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="ExtractSpotLABResponse" nillable="true" type="tns:ExtractSpotLABResponse" />
 </xs:schema>

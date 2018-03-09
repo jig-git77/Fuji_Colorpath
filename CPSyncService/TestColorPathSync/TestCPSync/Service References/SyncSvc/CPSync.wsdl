@@ -10,12 +10,12 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:50336/CPSync.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:50336/CPSync.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:50336/CPSync.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
-      <xsd:import schemaLocation="http://localhost:50336/CPSync.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:50336/CPSync.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts" />
-      <xsd:import schemaLocation="http://localhost:50336/CPSync.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" />
+      <xsd:import schemaLocation="http://localhost/ColorPathSync/CPSync.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost/ColorPathSync/CPSync.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost/ColorPathSync/CPSync.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
+      <xsd:import schemaLocation="http://localhost/ColorPathSync/CPSync.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost/ColorPathSync/CPSync.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts" />
+      <xsd:import schemaLocation="http://localhost/ColorPathSync/CPSync.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ICPSync_CreateCurve_InputMessage">
@@ -102,9 +102,9 @@
   </wsdl:binding>
   <wsdl:service name="CPSync">
     <wsdl:port name="WSHttpBinding_ICPSync" binding="tns:WSHttpBinding_ICPSync">
-      <soap12:address location="http://localhost:50336/CPSync.svc" />
+      <soap12:address location="http://localhost/ColorPathSync/CPSync.svc" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://localhost:50336/CPSync.svc</wsa10:Address>
+        <wsa10:Address>http://localhost/ColorPathSync/CPSync.svc</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
           <Dns>localhost</Dns>
         </Identity>

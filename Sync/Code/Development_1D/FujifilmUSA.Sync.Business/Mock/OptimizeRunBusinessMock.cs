@@ -165,7 +165,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
 
         }
-        public void CreateSpotNamedColorProfile(int spotProjectId, int OptimizeRunID)
+        public void CreateSpotNamedColorProfile(int spotProjectId, int OptimizeRunID, int Status, DateTime EndDate)
         {
         }
         #endregion

@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:50336/CPSync.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" />
-  <xs:complexType name="ExtractSpotLABRequest">
+<xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfdouble">
     <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="DestinationProfile" nillable="true" type="q1:IccProfile" />
-      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="ProfileOptions" nillable="true" type="q2:ArrayOfParameter" />
-      <xs:element minOccurs="0" name="TargetProfile" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="double" type="xs:double" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ExtractSpotLABRequest" nillable="true" type="tns:ExtractSpotLABRequest" />
-  <xs:complexType name="ExtractSpotLABResponse">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:BaseResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="namedColorProfile" nillable="true" type="xs:base64Binary" />
-          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="spotPatchDetail" nillable="true" type="q3:ArrayOfPatch" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="ExtractSpotLABResponse" nillable="true" type="tns:ExtractSpotLABResponse" />
-  <xs:complexType name="BaseResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
-      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="Severity" type="q4:MessageSeverity" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="BaseResponse" nillable="true" type="tns:BaseResponse" />
+  <xs:element name="ArrayOfdouble" nillable="true" type="tns:ArrayOfdouble" />
 </xs:schema>

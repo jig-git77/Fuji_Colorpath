@@ -35,6 +35,7 @@ namespace ColorPathSync.ServiceContracts
         [OperationContract]
         ExtractProfileValuesResponse ExtractProfileValues(ExtractProfileValuesRequest request);
 
+        [System.ServiceModel.XmlSerializerFormatAttribute()]
         [OperationContract]
         ExtractSpotLABResponse GetSpotLAB(ExtractSpotLABRequest req);
 

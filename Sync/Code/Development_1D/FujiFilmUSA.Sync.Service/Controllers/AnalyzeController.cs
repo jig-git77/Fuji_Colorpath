@@ -114,7 +114,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GetMeasurementSummaryDetails(int? MeasurementId, string fromDeltaE, bool? IsVerificationProject)
         {
             IHttpActionResult actionResult = null;
-            BaseResponse<List<MeasurementPatch_AvgDelta>> httpResponse = new BaseResponse<List<MeasurementPatch_AvgDelta>>();
+            Models.BaseResponse<List<MeasurementPatch_AvgDelta>> httpResponse = new Models.BaseResponse<List<MeasurementPatch_AvgDelta>>();
             string validationMessage = "";
             try
             {
@@ -140,7 +140,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
                 errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
@@ -153,7 +153,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         {
             string validationMessage = "";
             IHttpActionResult actionResult = null;
-            BaseResponse<List<Measurement>> httpResponse = new BaseResponse<List<Measurement>>();
+            Models.BaseResponse<List<Measurement>> httpResponse = new Models.BaseResponse<List<Measurement>>();
             try
             {
                 if (MeasurementId == null)
@@ -185,7 +185,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
                 errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;

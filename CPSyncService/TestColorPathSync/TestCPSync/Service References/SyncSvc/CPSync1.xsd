@@ -1,56 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="IccProfile">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost/ColorPathSync/CPSync.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="Curve">
     <xs:sequence>
-      <xs:element minOccurs="0" name="ProfileData" nillable="true" type="xs:base64Binary" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GrayBalance" nillable="true" type="q1:ArrayOfdouble" />
+      <xs:element minOccurs="0" name="ICCProfile" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="LinearizationTVI25" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LinearizationTVI50" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LinearizationTVI75" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UseDLP" type="xs:boolean" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="arrDCS" nillable="true" type="q2:ArrayOfdouble" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="arrDensity" nillable="true" type="q3:ArrayOfdouble" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="arrPCS" nillable="true" type="q4:ArrayOfdouble" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="IccProfile" nillable="true" type="tns:IccProfile" />
-  <xs:complexType name="ArrayOfParameter">
+  <xs:element name="Curve" nillable="true" type="tns:Curve" />
+  <xs:complexType name="Profile">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Parameter" nillable="true" type="tns:Parameter" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Cyan" nillable="true" type="q5:ArrayOfdouble" />
+      <xs:element minOccurs="0" name="ErrorMsg" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ICCProfile" nillable="true" type="xs:base64Binary" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Key" nillable="true" type="q6:ArrayOfdouble" />
+      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Magenta" nillable="true" type="q7:ArrayOfdouble" />
+      <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Yellow" nillable="true" type="q8:ArrayOfdouble" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfParameter" nillable="true" type="tns:ArrayOfParameter" />
-  <xs:complexType name="Parameter">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Parameter" nillable="true" type="tns:Parameter" />
-  <xs:simpleType name="MessageSeverity">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="None" />
-      <xs:enumeration value="Information" />
-      <xs:enumeration value="Error" />
-      <xs:enumeration value="Warning" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="MessageSeverity" nillable="true" type="tns:MessageSeverity" />
-  <xs:complexType name="ArrayOfPatch">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Patch" nillable="true" type="tns:Patch" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPatch" nillable="true" type="tns:ArrayOfPatch" />
-  <xs:complexType name="Patch">
-    <xs:sequence>
-      <xs:element name="_x003C_Cie_L_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Cie_a_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Cie_b_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Cmyk_C_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Cmyk_K_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Cmyk_M_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Cmyk_Y_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_ColorName_x003E_k__BackingField" nillable="true" type="xs:string" />
-      <xs:element name="_x003C_PatchID_x003E_k__BackingField" type="xs:int" />
-      <xs:element name="_x003C_Spot1_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_Spot2_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_p_Cie_L_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_p_Cie_a_x003E_k__BackingField" type="xs:double" />
-      <xs:element name="_x003C_p_Cie_b_x003E_k__BackingField" type="xs:double" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Patch" nillable="true" type="tns:Patch" />
+  <xs:element name="Profile" nillable="true" type="tns:Profile" />
 </xs:schema>

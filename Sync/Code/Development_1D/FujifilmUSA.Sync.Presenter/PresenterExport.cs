@@ -91,5 +91,13 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewExport.ErrorOccured;
             _viewExport.Project = projectBusiness.GetProjectDetail_SpotProject(_viewExport.SpotProjectId);
         }
+
+        public void GetSpotPatchDetailsofMeasurement()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsofMeasurement(_viewExport.OptimizeRunId);
+        }
+
     }
 }

@@ -68,8 +68,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GetProjectDetailsByDeviceID(int deviceID)
         {
             IHttpActionResult actionResult = null;
-            //BaseResponse<List<Project>> httpResponse = new BaseResponse<List<Project>>();
-            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            //Models.BaseResponse<List<Project>> httpResponse = new Models.BaseResponse<List<Project>>();
+            Models.BaseResponse<object> httpResponse = new Models.BaseResponse<object>();
             try
             {
                 DetermineCulture();
@@ -92,7 +92,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
                 errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
@@ -101,8 +101,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GetSpotProjectDetailsByProjectID(int projectID)
         {
             IHttpActionResult actionResult = null;
-            //BaseResponse<List<SpotProjectLibrary>> httpResponse = new BaseResponse<List<SpotProjectLibrary>>();
-            BaseResponse<string> httpResponse = new BaseResponse<string>();
+            //Models.BaseResponse<List<SpotProjectLibrary>> httpResponse = new Models.BaseResponse<List<SpotProjectLibrary>>();
+            Models.BaseResponse<string> httpResponse = new Models.BaseResponse<string>();
             try
             {
                 GenerateResources();
@@ -116,7 +116,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
                 errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
@@ -126,7 +126,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult DeleteProject(int projectID)
         {
             IHttpActionResult actionResult = null;
-            BaseResponse<bool> httpResponse = new BaseResponse<bool>();
+            Models.BaseResponse<bool> httpResponse = new Models.BaseResponse<bool>();
             try
             {
                 ProjectId = projectID;
@@ -138,7 +138,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
                 errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
@@ -148,7 +148,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult DeleteSpotProject(int spotProjectID)
         {
             IHttpActionResult actionResult = null;
-            BaseResponse<bool> httpResponse = new BaseResponse<bool>();
+            Models.BaseResponse<bool> httpResponse = new Models.BaseResponse<bool>();
             try
             {
 
@@ -161,7 +161,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
                 errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;

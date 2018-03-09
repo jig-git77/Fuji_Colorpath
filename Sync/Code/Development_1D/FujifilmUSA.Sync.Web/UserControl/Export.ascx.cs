@@ -9,17 +9,20 @@ using System.Data;
 using System.Collections.Generic;
 using System.Web.UI.DataVisualization.Charting;
 using System.Drawing;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class Export : BaseControl, IViewExport
     {
-        #region Private Variables - Globalization
+        #region Private Variables - Globalization        
         private const string _recDownload = "downloadText";
         private const string _recDLP = "dlpText";
         private const string _recDownloadChartNotAvailable = "downloadChartNotAvailableText";
         private const string locDownloadChartAndPrintThroughWorkflowResourceNCP = "locDownloadChartAndPrintThroughWorkflowResource1NCP";
-        
+
         #endregion
 
         #region Construtor
@@ -77,7 +80,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                         trDLPDownload1.Visible = false;
                         trDLPDownload2.Visible = false;
-                        
+
                         Div_Chart.Visible = true;
                         lbtnMeasure.Visible = true;
                         locDownloadDLPAndChart.Text = "Download Chart";
@@ -184,7 +187,65 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), "spotchart.zip", "spotchart.zip");
+                Wedge wedge = new Wedge();
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;                
+                _presenterExport.GetSpotPatchDetailsofMeasurement();
+
+                List<Patch> listPatch = new List<Patch>();
+                if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dtPatchDetails.Rows)
+                    {
+                        Patch patch = new Patch()
+                        {
+                            PatchID = Convert.ToInt32(dr["SpotID"]),
+                            ColorName = Convert.ToString(dr["SpotName"]),
+                            Cmyk_C = Convert.ToDouble(dr["CMYK_C"]),
+                            Cmyk_M = Convert.ToDouble(dr["CMYK_M"]),
+                            Cmyk_Y = Convert.ToDouble(dr["CMYK_Y"]),
+                            Cmyk_K = Convert.ToDouble(dr["CMYK_K"]),
+                            Cie_L = Convert.ToDouble(dr["CIELAB_L"]),
+                            Cie_a = Convert.ToDouble(dr["CIELAB_a"]),
+                            Cie_b = Convert.ToDouble(dr["CIELAB_b"]),
+                            Spot1 = 0
+                        };
+                        listPatch.Add(patch);
+                    }
+                }
+                wedge.listPatch = listPatch;
+
+                IccFileParams obj = new IccFileParams();
+                obj.Configurations.NumberOfPatches = 1872;
+                obj.Configurations.ChartPages = 1;
+                obj.Configurations.PatchWidth = 27;
+                obj.Configurations.PatchHeight = 27;
+                obj.Configurations.ChartBorder = 40;
+                obj.Configurations.ChartSizeW = 0;
+                obj.Configurations.ChartSizeH = 0;
+                obj.Configurations.RowsPerChart = 24;
+                obj.Configurations.ColumsPerChart = 26;
+                obj.Configurations.Vgap = 2;
+                obj.Configurations.Hgap = 0;
+                obj.Configurations.GapLeval = 75;
+                obj.Configurations.PreviousL = 0;
+                obj.Configurations.ChartName = "Pantone Test Chart";
+                obj.Patches = wedge.listPatch;
+
+
+                string BaseUri = Utilities.ReadConfigValue("BaseCpSpotChartPdfServiceURL");
+                string methodUrl = "api/Chart/GenerateFiles";
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(obj), null, "application/json");
+                    var result = httpClient.PostAsync(BaseUri + methodUrl, content).Result;
+                    var resultString = result.Content.ReadAsStringAsync().Result;
+                    var response = JsonConvert.DeserializeObject<BaseResponse<FileResponse>>(resultString);
+
+                    WebClient client = new WebClient();
+                    client.DownloadFile(response.Data.FilePath, System.Web.HttpContext.Current.Server.MapPath("UploadFiles/") + response.Data.FileName);
+
+                    Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), response.Data.FileName, response.Data.FileName);
+                }
             }
             else
             {
@@ -835,6 +896,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short CurveTypeId { get; set; }
         public Business.Messages.CurveDataResponse CurveData { get; set; }
         public int SpotProjectId { get; set; }
+        public DataTable dtPatchDetails { get; set; }
         #endregion
 
 

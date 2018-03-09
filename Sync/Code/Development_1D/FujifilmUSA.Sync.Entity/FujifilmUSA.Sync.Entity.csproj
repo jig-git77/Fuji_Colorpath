@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
@@ -54,6 +57,7 @@
     <Compile Include="AnalyzeChart_G7.cs" />
     <Compile Include="AnalyzeChart_Gray.cs" />
     <Compile Include="ApplicationConfiguration.cs" />
+    <Compile Include="BaseResponse.cs" />
     <Compile Include="ChartContent.cs" />
     <Compile Include="ColorDensity.cs" />
     <Compile Include="CPSync1D\OptimizeRunCurve.cs" />
@@ -67,6 +71,7 @@
     <Compile Include="Density.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ErrorArgs.cs" />
+    <Compile Include="IccFileParams.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="LogActivity.cs" />
     <Compile Include="MeasurementPatchDetails.cs">
@@ -135,6 +140,7 @@
     <Compile Include="ValidationRule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
