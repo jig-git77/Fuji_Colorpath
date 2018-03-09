@@ -215,22 +215,45 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 wedge.listPatch = listPatch;
 
                 IccFileParams obj = new IccFileParams();
-                obj.Configurations.NumberOfPatches = 1872;
-                obj.Configurations.ChartPages = 1;
-                obj.Configurations.PatchWidth = 27;
-                obj.Configurations.PatchHeight = 27;
-                obj.Configurations.ChartBorder = 40;
-                obj.Configurations.ChartSizeW = 0;
-                obj.Configurations.ChartSizeH = 0;
-                obj.Configurations.RowsPerChart = 24;
-                obj.Configurations.ColumsPerChart = 26;
-                obj.Configurations.Vgap = 2;
-                obj.Configurations.Hgap = 0;
-                obj.Configurations.GapLeval = 75;
-                obj.Configurations.PreviousL = 0;
-                obj.Configurations.ChartName = "Pantone Test Chart";
-                obj.Patches = wedge.listPatch;
 
+                //if (dtPatchDetails.Rows.Count == 1872)
+                //{
+                    obj.Configurations.NumberOfPatches = 1872;
+                    obj.Configurations.ChartPages = 3;
+                    obj.Configurations.PatchWidth = 27;
+                    obj.Configurations.PatchHeight = 27;
+                    obj.Configurations.ChartBorder = 40;
+                    obj.Configurations.ChartSizeW = 0;
+                    obj.Configurations.ChartSizeH = 0;
+                    obj.Configurations.RowsPerChart = 24;
+                    obj.Configurations.ColumsPerChart = 26;
+                    obj.Configurations.Vgap = 2;
+                    obj.Configurations.Hgap = 0;
+                    obj.Configurations.GapLeval = 75;
+                    obj.Configurations.PreviousL = 0;
+                    obj.Configurations.ChartName = "Pantone Test Chart";
+                    obj.Patches = wedge.listPatch;
+                //}
+
+                //else if (dtPatchDetails.Rows.Count == 48)
+                //{
+                //    obj.Configurations.NumberOfPatches = 48;
+                //    obj.Configurations.ChartPages = 1;
+                //    obj.Configurations.PatchWidth = 28;
+                //    obj.Configurations.PatchHeight = 28;
+                //    obj.Configurations.ChartBorder = 40;
+                //    obj.Configurations.ChartSizeW = 0;
+                //    obj.Configurations.ChartSizeH = 0;
+                //    obj.Configurations.RowsPerChart = 2;
+                //    obj.Configurations.ColumsPerChart = 24;
+                //    obj.Configurations.Vgap = 2;
+                //    obj.Configurations.Hgap = 2;
+                //    obj.Configurations.GapLeval = 75;
+                //    obj.Configurations.PreviousL = 0;
+                //    obj.Configurations.ChartName = "Spot Color Test Chart";
+                //    obj.Patches = wedge.listPatch;
+
+                //}
 
                 string BaseUri = Utilities.ReadConfigValue("BaseCpSpotChartPdfServiceURL");
                 string methodUrl = "api/Chart/GenerateFiles";
