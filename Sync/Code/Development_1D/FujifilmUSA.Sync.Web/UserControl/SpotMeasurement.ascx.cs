@@ -24,6 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         int LastOptimizationRunID = 0;
 
         #endregion
+
         protected void Page_Init(object sender, EventArgs e)
         {
             _presenterImportMeasurements = new PresenterImportMeasurements(this);
@@ -41,16 +42,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        public void LoadData()
-        {
-            if (SessionManager.Instance.CurrentProject != null)
-            {
-                ProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
-                OptimizeRunID = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                LastOptimizationRunID = _presenterImportMeasurements.ImportDummyMeasurement();
-                ViewState["LastOptimizationRunID"] = LastOptimizationRunID;
-            }
-        }
 
         public void CalculateSpotNamedColorProfile()
         {
@@ -60,14 +51,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     ProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
                     OptimizeRunID = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                    _presenterImportMeasurements.CreateSpotProjectInitialOptimization();
                     ViewState["LastOptimizationRunID"] = OptimizeRunID;
-                    SessionManager.Instance.CurrentOptimizeRun.HasProfile = true;
-                }                
+                    if (SessionManager.Instance.CurrentOptimizeRun.HasProfile == false) //------If Named Color Profile already created, then don't do anything again----//
+                    {
+                        _presenterImportMeasurements.CreateSpotProjectInitialOptimization();
+                        SessionManager.Instance.CurrentOptimizeRun.HasProfile = true;
+                    }
+                }
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
@@ -79,11 +72,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
                 SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns[0].HasMeasurements = true;
                 SessionManager.Instance.CurrentOptimizeRun.HasMeasurements = true;
-                LastOptimizationRunID = Convert.ToInt32(ViewState["LastOptimizationRunID"]);
-                Response.Redirect("~/Analyze_SpotColor.aspx?OptimizeRunID=" + LastOptimizationRunID.ToString());
+                SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId = Convert.ToInt32(ViewState["LastOptimizationRunID"]);
+                Response.Redirect("~/Analyze_SpotColor.aspx");
             }
         }
 
+        #region IViewImportMeasurements Members
         public List<Project> Projects { get; set; }
         public int ProjectId { get; set; }
         public int DeviceId { get; set; }
@@ -91,5 +85,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<int> Measurements { get; set; }
         public int MeasurementID { get; set; }
         public int OptimizeRunID { get; set; }
+        #endregion  
     }
 }

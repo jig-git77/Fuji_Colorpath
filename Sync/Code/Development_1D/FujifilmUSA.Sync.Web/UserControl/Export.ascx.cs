@@ -74,10 +74,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         trSourceProfDownload.Visible = false;
                         trDLPDownload.Visible = true;
-                        if (SessionManager.Instance.CurrentOptimizeRun.RunName == "Run-0" || (SessionManager.Instance.CurrentOptimizeRun.RunName != "Run-0" && SessionManager.Instance.CurrentOptimizeRun.HasProfile)) //Download NamedcolorProfile only visible if it is not run-0 and in certify run mode
-                        {
-                            trAdvancedDownload.Visible = false;
-                        }
+                        //if (SessionManager.Instance.CurrentOptimizeRun.RunName == "Run-0" || (SessionManager.Instance.CurrentOptimizeRun.RunName != "Run-0" && SessionManager.Instance.CurrentOptimizeRun.HasProfile)) //Download NamedcolorProfile only visible if it is not run-0 and in certify run mode
+                        //{
+                        //    trAdvancedDownload.Visible = false;
+                        //}
                         trDLPDownload1.Visible = false;
                         trDLPDownload2.Visible = false;
 

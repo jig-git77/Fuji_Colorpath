@@ -136,7 +136,7 @@
     <value>Predicted</value>
   </data>
   <data name="locTargetResource.Text" xml:space="preserve">
-    <value>Target en</value>
+    <value>Target</value>
   </data>
   <data name="locT_PResource.Text" xml:space="preserve">
     <value>Delta_T_P</value>

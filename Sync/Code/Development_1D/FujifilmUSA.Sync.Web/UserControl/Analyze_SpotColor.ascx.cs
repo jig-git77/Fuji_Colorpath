@@ -49,7 +49,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     hdnIsNewNCP.Value=IsNewNCP.ToString();
                     hdnIsNcpCreated.Value = IsNCPCreated.ToString();
                     hdfCurrentCulture.Value = getCurrentCultureLanguage();
-                    //BindPatchDetails_Summary();
                 }
 
                 if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId)
@@ -73,48 +72,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                     lbtnDownloadAndSaveNCP.Visible = false;
-            }
-        }
-
-        private void BindPatchDetails_Summary()
-        {
-
-            if (SessionManager.Instance.CurrentOptimizeRun != null)
-            {
-                MeasurementId = 0;
-                
-                //Now we are using DataTable to bind the grid               
-                dtPatchDetails = new DataTable();
-                _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
-
-                if (!IsErrorOccured)
-                {
-                    //Now we are using DataTable as DataSource                    
-
-                    decimal totalDeltaE = 0;
-                    decimal avgDeltaE = 0;
-
-                    //count Avg, Max and Min ΔE
-                    decimal minDtE = int.MaxValue;
-                    decimal maxDtE = int.MinValue;
-
-                    if (dtPatchDetails.Rows.Count > 0)
-                    {
-                        foreach (DataRow dr in dtPatchDetails.Rows)
-                        {
-                            decimal DtE = dr.Field<decimal>("ΔE");
-                            totalDeltaE += DtE;
-                            minDtE = Math.Min(minDtE, DtE);
-                            maxDtE = Math.Max(maxDtE, DtE);
-                        }
-                        avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
-                    }
-
-
-                    lblMinDeltaE.Text = minDtE.ToString();
-                    lblMaxDeltaE.Text = maxDtE.ToString();
-                    lblAvgDeltaE.Text = String.Format("{0:0.###}", avgDeltaE);
-                }
             }
         }
 
@@ -146,39 +103,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Response.Redirect("Export.aspx");
             }
             
-        }
-
-        [WebMethod(EnableSession = true)]
-        public static string GetPatchDetails()
-        {
-            string jsonPathDetails = "";
-            //if (SessionManager.Instance.CurrentOptimizeRun != null)
-            //{
-
-            //    MeasurementId = 0;
-            //    OptimizeRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId);
-            //    //Now we are using DataTable to bind the grid               
-            //    dtPatchDetails = new DataTable();
-            //    _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
-
-            //    if (!IsErrorOccured)
-            //    {
-            //        JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
-            //        List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
-            //        Dictionary<string, object> childRow;
-            //        foreach (DataRow row in dtPatchDetails.Rows)
-            //        {
-            //            childRow = new Dictionary<string, object>();
-            //            foreach (DataColumn col in dtPatchDetails.Columns)
-            //            {
-            //                childRow.Add(col.ColumnName, row[col]);
-            //            }
-            //            parentRow.Add(childRow);
-            //        }
-            //        jsonPathDetails= jsSerializer.Serialize(parentRow);
-            //    }
-            //}
-            return jsonPathDetails;
         }
 
         public bool IsNewNCP

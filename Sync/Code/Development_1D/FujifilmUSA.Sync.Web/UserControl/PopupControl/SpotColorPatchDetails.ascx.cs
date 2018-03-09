@@ -24,6 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         private const string _recDeltaB = "deltaBText";
         decimal T_L, T_a, T_b, P_L, P_a, P_b, M_L, M_a, M_b;
         string htmlColor;
+        string Predicated_htmlColor;
         int MeasurementID;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -43,6 +44,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             MeasurementID = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["measurementID"])) ? 0 : Convert.ToInt32(Request.QueryString["measurementID"]);
 
             htmlColor = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["htmlColor"])) ? "" : ("#" + Convert.ToString(Request.QueryString["htmlColor"]));
+            Predicated_htmlColor = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["P_htmlColor"])) ? "" : ("#" + Convert.ToString(Request.QueryString["P_htmlColor"]));
+
             BindValues();
             FillPaperChart(T_L, T_a, T_b, P_L, P_a, P_b, M_L, M_a, M_b, MeasurementID);
         }
@@ -50,7 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
         public void BindValues()
         {
-            if (MeasurementID > 0) // if optimization-0
+            if (MeasurementID > 0) // if optimization !=0
             {
                 divPatchDetailsRun.Visible = true;
                 decimal Delta_Target_PredictedL, Delta_Measured_TargetL, Delta_Measured_PredictedL,
@@ -120,7 +123,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 lblDeltaA.Text = Delta_a.ToString();
                 lblDeltaB.Text = Delta_b.ToString();
 
-                divActualRun0.Style.Add("background-color", htmlColor);
+                divActualRun0.Style.Add("background-color", Predicated_htmlColor);
                 divTargetRun0.Style.Add("background-color", htmlColor);
             }
             //FillPaperChart(Delta_L, Delta_a, Delta_b);
