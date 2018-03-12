@@ -8,14 +8,15 @@ using System.Web;
 namespace ColorPathSync.MessageContracts
 {
     [DataContract]
-    public class ExtractSpotLABRequest
+    public class OptimizeSpotLibraryRequest
     {
         [DataMember]
         public SpotIccProfile DestinationProfile { get; set; }
         [DataMember]
+        public byte[] previousNamedColorProfile { get; set; }
+        [DataMember]
         public byte[] TargetProfile { get; set; }
         [DataMember]
         public List<SpotParameter> ProfileOptions { get; set; }
-
     }
 }

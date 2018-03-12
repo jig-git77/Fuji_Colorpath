@@ -47,11 +47,15 @@ namespace ColorPathSync.ServiceImplementation
             return ProfilerBusiness.ExtractProfileValues(request);
         }
 
-        public ExtractSpotLABResponse GetSpotLAB(ExtractSpotLABRequest request)
+        public CreateSpotLibraryResponse CreateSpotLABValues(CreateSpotLibraryRequest request)
         {
-            return ExtractSpotLABBusiness.ExtractSpotLABValues(request);
+            return CreateSpotLibraryBusiness.CreateSpotLibraryValues(request);
         }
 
+        public OptimizeSpotLibraryResponse OptimizeSpotLibraryValues(OptimizeSpotLibraryRequest request)
+        {
+            return OptimizeSpotLibraryBusiness.OptimizeSpotLibraryValues(request);
+        }
 
         ////Implementation for the ISO and G7 for Alignment Curve (Old Code)
         //public Profile CreateCurve(Curve request)

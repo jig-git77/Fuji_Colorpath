@@ -9,14 +9,17 @@ using System.Web;
 
 namespace ColorPathSync.Business
 {
-    public class ExtractSpotLABBusiness
+    public class OptimizeSpotLibraryBusiness
     {
-        public static ExtractSpotLABResponse ExtractSpotLABValues(ExtractSpotLABRequest request)
+        public static OptimizeSpotLibraryResponse OptimizeSpotLibraryValues(OptimizeSpotLibraryRequest request)
         {
             try
             {
-                var response = new ExtractSpotLABResponse();
+                var response = new OptimizeSpotLibraryResponse();
                 var ms = new MemoryStream();
+
+                //FOR OPTIMIZATION We are now sending measurement data in the same form as the target data
+                //SAME Steps are used to convert this to a CGATS file
                 //Once the byte array is revcieved from the service it then needs to converted to astring
                 //string str1 = System.Text.Encoding.UTF8.GetString(Pantonebytes, 0, Pantonebytes.Length);
                 string strPCSData = System.Text.Encoding.UTF8.GetString(request.TargetProfile, 0, request.TargetProfile.Length);
@@ -28,7 +31,8 @@ namespace ColorPathSync.Business
 
                 err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujiflm Graphic Systems USA");
                 err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
-                err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "NamedColors");
+                err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "OptimizeColors");
+
 
                 //dont set DCS data this confused the profiler....
                 // err = CrossXColor.CLSetProfilerOption(profiler, "DCSData", str1);
@@ -44,12 +48,18 @@ namespace ColorPathSync.Business
                 TYPE_p_void destProf = CrossXColor.CLNewICCProfileRef();
                 TYPE_p_p_void destSpec = CrossXColor.CLNewFileSpecRef();
 
+                //Set the destination profile, please note the difference in the call from RefProfile to DstProfile in OPtimization
                 Curve.CopyProfileInMemory(request.DestinationProfile.ProfileData, ref destProf);
-                err = CrossXColor.CLSetOptionProfile(profiler, "RefProfile", destProf);
+                err = CrossXColor.CLSetOptionProfile(profiler, "DstProfile", destProf);
+
+                //Set the Source Profile, the Source profile is the previous run created NamedColorprofile
+                Curve.CopyProfileInMemory(request.DestinationProfile.ProfileData, ref destProf);
+                err = CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", destProf);
+
 
                 //Now we have the target file, the params and the destination profile
                 // calc the Nmaed Color Profile in memory
-                System.Console.WriteLine("Calculating NamedColorProfile in Memory");
+                System.Console.WriteLine("Calculating OPtimized NamedColorProfile in Memory");
                 TYPE_p_void prof = CrossXColor.CLNewICCProfileRef();
                 err = CrossXColor.CLCalcProfile(profiler, prof);
                 System.Console.WriteLine("CLCalcProfile-Err = {0:d}", err);
@@ -70,40 +80,13 @@ namespace ColorPathSync.Business
                 //now we create the collection for reading the named color profile into
                 List<Patch> listPatch = new List<Patch>();
 
+
+
                 //just pass the byte array of the named color profile
                 listPatch = ICCHelper.readICC(response.namedColorProfile);
 
-                //Now we setup the transformation and the CMM where we can pass the 
-                //CMYK through the Destination profile and get Predicted LAB values returned
-                //here we still using destProf we are already have in unmanaged memory
-                TYPE_p_void trafo = null;
-                var renderingIntents = new int[] { CrossXColor.icAbsoluteColorimetric };
-
-                var profiles = new TYPE_p_void[1] { destProf };
-                trafo = CrossXColor.CLConcatICCProfileRefs(1, profiles, renderingIntents);
-                if (trafo == null)
-                {
-                    //
-                }
-
-                var input = new double[4];
-                var output = new double[3];
-                //Now we iteraye through the listpatch pass CMYK value through CMM as IN
-                //Get predicted LAB as OUT
-                foreach (var patch in listPatch)
-                {
-
-                    input[0] = Convert.ToDouble(patch.Cmyk_C);
-                    input[1] = Convert.ToDouble(patch.Cmyk_M);
-                    input[2] = Convert.ToDouble(patch.Cmyk_Y);
-                    input[3] = Convert.ToDouble(patch.Cmyk_K);
-
-                    err = CrossXColor.CLDoTrafo(trafo, input, output);
-
-                    patch.p_Cie_L = Math.Round(output[0], 4);
-                    patch.p_Cie_a = Math.Round(output[1], 4);
-                    patch.p_Cie_b = Math.Round(output[2], 4);
-                }
+                //With OPtimization there is NO CMM we just pass back the values from the Named Color Profile
+                //
 
                 response.spotPatchDetail = listPatch;
                 return response;

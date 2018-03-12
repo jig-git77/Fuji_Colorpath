@@ -23,8 +23,6 @@ namespace ColorPathSync
         [OperationContract]
         Profile GetG7NPDC(Curve objCurve);
 
-        [OperationContract]
-        ExtractSpotLABResponse GetSpotLAB(ExtractSpotLABRequest req);
         
     }
    

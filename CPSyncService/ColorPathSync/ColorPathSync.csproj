@@ -93,8 +93,9 @@
     <Compile Include="Business\CreateISOCurveProfileBusiness.cs" />
     <Compile Include="Business\CreateSourceProfileBusiness.cs" />
     <Compile Include="Business\ExtractProfileValuesBusiness.cs" />
-    <Compile Include="Business\ExtractSpotLABBusiness.cs" />
+    <Compile Include="Business\CreateSpotLibraryBusiness.cs" />
     <Compile Include="Business\OptimizeDeviceLinkProfileBusiness.cs" />
+    <Compile Include="Business\OptimizeSpotLibraryBusiness.cs" />
     <Compile Include="DataContracts\IccProfile.cs" />
     <Compile Include="DataContracts\MessageSeverity.cs" />
     <Compile Include="DataContracts\Parameter.cs" />
@@ -118,10 +119,12 @@
     <Compile Include="MessageContracts\CreateISOAlignmentCurveResponse.cs" />
     <Compile Include="MessageContracts\ExtractProfileValuesRequest.cs" />
     <Compile Include="MessageContracts\ExtractProfileValuesResponse.cs" />
-    <Compile Include="MessageContracts\ExtractSpotLABRequest.cs" />
-    <Compile Include="MessageContracts\ExtractSpotLABResponse.cs" />
+    <Compile Include="MessageContracts\CreateSpotLibraryRequest.cs" />
+    <Compile Include="MessageContracts\CreateSpotLibraryResponse.cs" />
     <Compile Include="MessageContracts\OptimizeDeviceLinkProfileRequest.cs" />
     <Compile Include="MessageContracts\OptimizeDeviceLinkProfileResponse.cs" />
+    <Compile Include="MessageContracts\OptimizeSpotLibraryRequest.cs" />
+    <Compile Include="MessageContracts\OptimizeSpotLibraryResponse.cs" />
     <Compile Include="ServiceContracts\IProfiler.cs" />
     <Compile Include="MessageContracts\CreateSourceProfileRequest.cs" />
     <Compile Include="MessageContracts\CreateSourceProfileResponse.cs" />

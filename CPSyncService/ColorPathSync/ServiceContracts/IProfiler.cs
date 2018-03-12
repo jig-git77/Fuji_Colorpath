@@ -37,7 +37,11 @@ namespace ColorPathSync.ServiceContracts
 
         [System.ServiceModel.XmlSerializerFormatAttribute()]
         [OperationContract]
-        ExtractSpotLABResponse GetSpotLAB(ExtractSpotLABRequest req);
+        CreateSpotLibraryResponse CreateSpotLABValues(CreateSpotLibraryRequest request);
+
+        [System.ServiceModel.XmlSerializerFormatAttribute()]
+        [OperationContract]
+        OptimizeSpotLibraryResponse OptimizeSpotLibraryValues(OptimizeSpotLibraryRequest request);
 
         ////Declaration for the ISO and G7 for Alignment Curve (Old Code)
         //[OperationContract]

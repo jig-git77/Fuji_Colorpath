@@ -7,16 +7,16 @@ using System.Web;
 
 namespace ColorPathSync.MessageContracts
 {
-    public class ExtractSpotLABResponse : BaseResponse
+    [DataContract]
+    public class CreateSpotLibraryResponse : BaseResponse
     {
-
-        public ExtractSpotLABResponse()
+        public CreateSpotLibraryResponse()
         {
             spotPatchDetail = new List<Patch>();
         }
         [DataMember]
         public List<Patch> spotPatchDetail { get; set; }
-
+        [DataMember]
         public byte[] namedColorProfile { get; set; }       
     }
 }

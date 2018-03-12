@@ -63,22 +63,7 @@ namespace ColorPathSync
                 objPf.ErrorMsg = ex.ToString();
                 return objPf;
             }
-        }
-
-        public ExtractSpotLABResponse GetSpotLAB(ExtractSpotLABRequest req)
-        {
-            ExtractSpotLABResponse objPf = new ExtractSpotLABResponse();
-            try
-            {
-                objPf = ExtractSpotLABBusiness.ExtractSpotLABValues(req);
-                return objPf;
-            }
-            catch (Exception ex)
-            {
-                objPf.Message = ex.ToString();
-                return objPf;
-            }
-        }
+        }        
         
     }
 }
