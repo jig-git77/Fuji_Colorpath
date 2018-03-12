@@ -172,10 +172,10 @@
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateSourceToSourceDeviceLinkProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse.datasource">
+    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABResponse.datasource">
+    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.OptimizeDeviceLinkProfileResponse.datasource">
@@ -192,6 +192,9 @@
     <None Include="Service References\ProfilerService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ProfilerService\Profiler.wsdl" />
     <None Include="Service References\ProfilerService\Profiler.xsd">
       <SubType>Designer</SubType>

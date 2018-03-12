@@ -37,7 +37,7 @@ namespace ColorPathSync.ServiceContracts
 
         [System.ServiceModel.XmlSerializerFormatAttribute()]
         [OperationContract]
-        CreateSpotLibraryResponse CreateSpotLABValues(CreateSpotLibraryRequest request);
+        CreateSpotLibraryResponse CreateSpotLibraryValues(CreateSpotLibraryRequest request);
 
         [System.ServiceModel.XmlSerializerFormatAttribute()]
         [OperationContract]

@@ -1441,9 +1441,9 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ExtractSpotLABRequest", Namespace="http://tempuri.org/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateSpotLibraryRequest", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
-    public partial class ExtractSpotLABRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class CreateSpotLibraryRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -1626,7 +1626,8 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BaseResponse", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryResponse))]
     public partial class BaseResponse1 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -1685,9 +1686,48 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ExtractSpotLABResponse", Namespace="http://tempuri.org/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OptimizeSpotLibraryResponse", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
-    public partial class ExtractSpotLABResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse1 {
+    public partial class OptimizeSpotLibraryResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse1 {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Patch> spotPatchDetailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] namedColorProfileField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Patch> spotPatchDetail {
+            get {
+                return this.spotPatchDetailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.spotPatchDetailField, value) != true)) {
+                    this.spotPatchDetailField = value;
+                    this.RaisePropertyChanged("spotPatchDetail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public byte[] namedColorProfile {
+            get {
+                return this.namedColorProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.namedColorProfileField, value) != true)) {
+                    this.namedColorProfileField = value;
+                    this.RaisePropertyChanged("namedColorProfile");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreateSpotLibraryResponse", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class CreateSpotLibraryResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse1 {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Patch> spotPatchDetailField;
@@ -1979,6 +2019,99 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OptimizeSpotLibraryRequest", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class OptimizeSpotLibraryRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private FujifilmUSA.Sync.Business.ProfilerService.SpotIccProfile DestinationProfileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] previousNamedColorProfileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] TargetProfileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.SpotParameter> ProfileOptionsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public FujifilmUSA.Sync.Business.ProfilerService.SpotIccProfile DestinationProfile {
+            get {
+                return this.DestinationProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DestinationProfileField, value) != true)) {
+                    this.DestinationProfileField = value;
+                    this.RaisePropertyChanged("DestinationProfile");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public byte[] previousNamedColorProfile {
+            get {
+                return this.previousNamedColorProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.previousNamedColorProfileField, value) != true)) {
+                    this.previousNamedColorProfileField = value;
+                    this.RaisePropertyChanged("previousNamedColorProfile");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public byte[] TargetProfile {
+            get {
+                return this.TargetProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TargetProfileField, value) != true)) {
+                    this.TargetProfileField = value;
+                    this.RaisePropertyChanged("TargetProfile");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.SpotParameter> ProfileOptions {
+            get {
+                return this.ProfileOptionsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileOptionsField, value) != true)) {
+                    this.ProfileOptionsField = value;
+                    this.RaisePropertyChanged("ProfileOptions");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ProfilerService.IProfiler")]
     public interface IProfiler {
@@ -2007,24 +2140,28 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/ExtractProfileValues", ReplyAction="http://tempuri.org/IProfiler/ExtractProfileValuesResponse")]
         FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse ExtractProfileValues(FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesRequest request);
         
-        // CODEGEN: Generating message contract since element name req from namespace http://tempuri.org/ is not marked nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/GetSpotLAB", ReplyAction="http://tempuri.org/IProfiler/GetSpotLABResponse")]
-        FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABResponse GetSpotLAB(FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequest request);
+        // CODEGEN: Generating message contract since element name request from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/CreateSpotLibraryValues", ReplyAction="http://tempuri.org/IProfiler/CreateSpotLibraryValuesResponse")]
+        FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryValuesResponse CreateSpotLibraryValues(FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryValuesRequest request);
+        
+        // CODEGEN: Generating message contract since element name request from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/OptimizeSpotLibraryValues", ReplyAction="http://tempuri.org/IProfiler/OptimizeSpotLibraryValuesResponse")]
+        FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryValuesResponse OptimizeSpotLibraryValues(FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryValuesRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetSpotLABRequest {
+    public partial class CreateSpotLibraryValuesRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetSpotLAB", Namespace="http://tempuri.org/", Order=0)]
-        public FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateSpotLibraryValues", Namespace="http://tempuri.org/", Order=0)]
+        public FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryValuesRequestBody Body;
         
-        public GetSpotLABRequest() {
+        public CreateSpotLibraryValuesRequest() {
         }
         
-        public GetSpotLABRequest(FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequestBody Body) {
+        public CreateSpotLibraryValuesRequest(FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryValuesRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -2033,16 +2170,16 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetSpotLABRequestBody {
+    public partial class CreateSpotLibraryValuesRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABRequest req;
+        public FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryRequest request;
         
-        public GetSpotLABRequestBody() {
+        public CreateSpotLibraryValuesRequestBody() {
         }
         
-        public GetSpotLABRequestBody(FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABRequest req) {
-            this.req = req;
+        public CreateSpotLibraryValuesRequestBody(FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryRequest request) {
+            this.request = request;
         }
     }
     
@@ -2050,15 +2187,15 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetSpotLABResponse {
+    public partial class CreateSpotLibraryValuesResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetSpotLABResponse", Namespace="http://tempuri.org/", Order=0)]
-        public FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateSpotLibraryValuesResponse", Namespace="http://tempuri.org/", Order=0)]
+        public FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryValuesResponseBody Body;
         
-        public GetSpotLABResponse() {
+        public CreateSpotLibraryValuesResponse() {
         }
         
-        public GetSpotLABResponse(FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABResponseBody Body) {
+        public CreateSpotLibraryValuesResponse(FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryValuesResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -2067,16 +2204,84 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetSpotLABResponseBody {
+    public partial class CreateSpotLibraryValuesResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABResponse GetSpotLABResult;
+        public FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryResponse CreateSpotLibraryValuesResult;
         
-        public GetSpotLABResponseBody() {
+        public CreateSpotLibraryValuesResponseBody() {
         }
         
-        public GetSpotLABResponseBody(FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABResponse GetSpotLABResult) {
-            this.GetSpotLABResult = GetSpotLABResult;
+        public CreateSpotLibraryValuesResponseBody(FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryResponse CreateSpotLibraryValuesResult) {
+            this.CreateSpotLibraryValuesResult = CreateSpotLibraryValuesResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class OptimizeSpotLibraryValuesRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="OptimizeSpotLibraryValues", Namespace="http://tempuri.org/", Order=0)]
+        public FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryValuesRequestBody Body;
+        
+        public OptimizeSpotLibraryValuesRequest() {
+        }
+        
+        public OptimizeSpotLibraryValuesRequest(FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryValuesRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class OptimizeSpotLibraryValuesRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryRequest request;
+        
+        public OptimizeSpotLibraryValuesRequestBody() {
+        }
+        
+        public OptimizeSpotLibraryValuesRequestBody(FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryRequest request) {
+            this.request = request;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class OptimizeSpotLibraryValuesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="OptimizeSpotLibraryValuesResponse", Namespace="http://tempuri.org/", Order=0)]
+        public FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryValuesResponseBody Body;
+        
+        public OptimizeSpotLibraryValuesResponse() {
+        }
+        
+        public OptimizeSpotLibraryValuesResponse(FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryValuesResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class OptimizeSpotLibraryValuesResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryResponse OptimizeSpotLibraryValuesResult;
+        
+        public OptimizeSpotLibraryValuesResponseBody() {
+        }
+        
+        public OptimizeSpotLibraryValuesResponseBody(FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryResponse OptimizeSpotLibraryValuesResult) {
+            this.OptimizeSpotLibraryValuesResult = OptimizeSpotLibraryValuesResult;
         }
     }
     
@@ -2140,16 +2345,29 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABResponse FujifilmUSA.Sync.Business.ProfilerService.IProfiler.GetSpotLAB(FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequest request) {
-            return base.Channel.GetSpotLAB(request);
+        FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryValuesResponse FujifilmUSA.Sync.Business.ProfilerService.IProfiler.CreateSpotLibraryValues(FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryValuesRequest request) {
+            return base.Channel.CreateSpotLibraryValues(request);
         }
         
-        public FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABResponse GetSpotLAB(FujifilmUSA.Sync.Business.ProfilerService.ExtractSpotLABRequest req) {
-            FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequest inValue = new FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequest();
-            inValue.Body = new FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABRequestBody();
-            inValue.Body.req = req;
-            FujifilmUSA.Sync.Business.ProfilerService.GetSpotLABResponse retVal = ((FujifilmUSA.Sync.Business.ProfilerService.IProfiler)(this)).GetSpotLAB(inValue);
-            return retVal.Body.GetSpotLABResult;
+        public FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryResponse CreateSpotLibraryValues(FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryRequest request) {
+            FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryValuesRequest inValue = new FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryValuesRequest();
+            inValue.Body = new FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryValuesRequestBody();
+            inValue.Body.request = request;
+            FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryValuesResponse retVal = ((FujifilmUSA.Sync.Business.ProfilerService.IProfiler)(this)).CreateSpotLibraryValues(inValue);
+            return retVal.Body.CreateSpotLibraryValuesResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryValuesResponse FujifilmUSA.Sync.Business.ProfilerService.IProfiler.OptimizeSpotLibraryValues(FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryValuesRequest request) {
+            return base.Channel.OptimizeSpotLibraryValues(request);
+        }
+        
+        public FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryResponse OptimizeSpotLibraryValues(FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryRequest request) {
+            FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryValuesRequest inValue = new FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryValuesRequest();
+            inValue.Body = new FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryValuesRequestBody();
+            inValue.Body.request = request;
+            FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryValuesResponse retVal = ((FujifilmUSA.Sync.Business.ProfilerService.IProfiler)(this)).OptimizeSpotLibraryValues(inValue);
+            return retVal.Body.OptimizeSpotLibraryValuesResult;
         }
     }
 }

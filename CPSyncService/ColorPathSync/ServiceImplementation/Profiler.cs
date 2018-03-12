@@ -47,7 +47,7 @@ namespace ColorPathSync.ServiceImplementation
             return ProfilerBusiness.ExtractProfileValues(request);
         }
 
-        public CreateSpotLibraryResponse CreateSpotLABValues(CreateSpotLibraryRequest request)
+        public CreateSpotLibraryResponse CreateSpotLibraryValues(CreateSpotLibraryRequest request)
         {
             return CreateSpotLibraryBusiness.CreateSpotLibraryValues(request);
         }
