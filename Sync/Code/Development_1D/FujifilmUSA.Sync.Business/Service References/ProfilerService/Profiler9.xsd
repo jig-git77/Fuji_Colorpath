@@ -205,7 +205,7 @@
   <xs:complexType name="OptimizeSpotLibraryRequest">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="1" name="DestinationProfile" type="tns:SpotIccProfile" />
-      <xs:element minOccurs="0" maxOccurs="1" name="previousNamedColorProfile" type="xs:base64Binary" />
+      <xs:element minOccurs="0" maxOccurs="1" name="previousNamedColorProfile" type="tns:SpotIccProfile" />
       <xs:element minOccurs="0" maxOccurs="1" name="TargetProfile" type="xs:base64Binary" />
       <xs:element minOccurs="0" maxOccurs="1" name="ProfileOptions" type="tns:ArrayOfSpotParameter" />
     </xs:sequence>

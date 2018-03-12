@@ -1016,7 +1016,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                  
+
 
                     ProfilerClient client = new ProfilerClient();
 
@@ -1032,89 +1032,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     paramList[7] = new SpotParameter() { Name = "ClipAbsTolerance", Value = "0" };
                     paramList[8] = new SpotParameter() { Name = "ClipRelTolerance", Value = "0" };
                     paramList[9] = new SpotParameter() { Name = "MaxChannels", Value = "0" };
-
-                    req.ProfileOptions = paramList.ToList();
-
-                    var dsSpotTarget = DataAccessFactory.
-                     Instance.
-                     GetDsResult(
-                         "CPSpot.GetSpotTargetLABByOptimizeRun",
-                         new object[]
-                                 {
-                                        OptimizeRunID
-                                 });
-                    
-                    if (dsSpotTarget.Tables[0].Rows.Count > 0)
-                    {
-                        req.DestinationProfile = new SpotIccProfile();
-                        req.DestinationProfile.ProfileData = (byte[])dsSpotTarget.Tables[0].Rows[0]["DestinationProfile"];
-
-                        var ms = new MemoryStream();
-                        StreamWriter writer = new StreamWriter(ms);
-
-                        writer.WriteLine("BEGIN_DATA_FORMAT");
-                        writer.WriteLine("SAMPLE_NAME\tLAB_L\tLAB_A\tLAB_B");
-                        writer.WriteLine("END_DATA_FORMAT");
-                        writer.WriteLine("BEGIN_DATA");
-
-                        if (dsSpotTarget.Tables[1] != null && dsSpotTarget.Tables[1].Rows.Count > 0)
-                            foreach (DataRow dr in dsSpotTarget.Tables[1].Rows)
-                                writer.WriteLine("\"" + dr["SpotName"].ToString() + "\"\t" + dr["Target_L*"].ToString() + "\t" + dr["Target_a*"].ToString() + "\t" + dr["Target_b*"].ToString() + "");
-
-                        writer.WriteLine("END_DATA");
-                        writer.Flush();
-                        req.TargetProfile = ms.ToArray();
-                    }
-
-                    var syncClientResponse = client.CreateSpotLibraryValues(req);
-               
-
-                    List<ProfilerService.Patch> list = syncClientResponse.spotPatchDetail;                    
-
-                    var spotProjectDetails = new XElement("SpotColorDetails",
-                                                       list.
-                                                           Select(x =>
-                                                                  new XElement("SpotColorData",
-                                                                               new XAttribute("OptimizeRunID", OptimizeRunID),
-                                                                               new XAttribute("SpotID", x.PatchID),
-                                                                               new XAttribute("SpotName", x.ColorName),
-                                                                               new XAttribute("CMYK_C", x.Cmyk_C),
-                                                                               new XAttribute("CMYK_M", x.Cmyk_M),
-                                                                               new XAttribute("CMYK_Y", x.Cmyk_Y),
-                                                                               new XAttribute("CMYK_K", x.Cmyk_K),
-                                                                               new XAttribute("Target_L", x.Cie_L),
-                                                                               new XAttribute("Target_A", x.Cie_a),
-                                                                               new XAttribute("Target_B", x.Cie_b),
-                                                                               new XAttribute("Predicted_L", x.p_Cie_L),
-                                                                               new XAttribute("Predicted_A", x.p_Cie_a),
-                                                                               new XAttribute("Predicted_B", x.p_Cie_b)                                                                               
-                                                                      )).ToList());
-
-
-
-                    DataAccessFactory.Instance.ExecuteProcedure("CPSpot.UpdateOptimizeDlp",
-                                                                            new object[] { OptimizeRunID, syncClientResponse.namedColorProfile, Status, EndDate, spotProjectDetails.ToString() });
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateSpotNamedColorProfile"));            
-        }
-
-        public void OptimizeSpotNamedColorProfile(int OptimizeRunID, int MeasurementId, int Status, DateTime EndDate)
-        {
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-
-
-                    ProfilerClient client = new ProfilerClient();
-
-                    CreateSpotLibraryRequest req = new CreateSpotLibraryRequest();
-                    SpotParameter[] paramList = new SpotParameter[10];
-                    paramList[0] = new SpotParameter() { Name = "ProfileSize", Value = "2" };                    
-                    paramList[2] = new SpotParameter() { Name = "SaveProfilerInfo", Value = "1" };
-                    paramList[3] = new SpotParameter() { Name = "SaveProfilerData", Value = "1" };
-                    paramList[4] = new SpotParameter() { Name = "ProfileFormat", Value = "2" };
-                    paramList[5] = new SpotParameter() { Name = "Rendering", Value = "3" };
-
 
                     req.ProfileOptions = paramList.ToList();
 
@@ -1177,6 +1094,84 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     DataAccessFactory.Instance.ExecuteProcedure("CPSpot.UpdateOptimizeDlp",
                                                                             new object[] { OptimizeRunID, syncClientResponse.namedColorProfile, Status, EndDate, spotProjectDetails.ToString() });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateSpotNamedColorProfile"));
+        }
+
+        public void OptimizeSpotNamedColorProfile(int OptimizeRunID, int MeasurementId, int Status, DateTime EndDate)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+
+
+                    ProfilerClient client = new ProfilerClient();
+
+                    OptimizeSpotLibraryRequest req = new OptimizeSpotLibraryRequest();
+                    SpotParameter[] paramList = new SpotParameter[10];
+                    paramList[0] = new SpotParameter() { Name = "ProfileSize", Value = "2" };
+                    paramList[2] = new SpotParameter() { Name = "SaveProfilerInfo", Value = "1" };
+                    paramList[3] = new SpotParameter() { Name = "SaveProfilerData", Value = "1" };
+                    paramList[4] = new SpotParameter() { Name = "ProfileFormat", Value = "2" };
+                    paramList[5] = new SpotParameter() { Name = "Rendering", Value = "3" };
+
+
+                    req.ProfileOptions = paramList.ToList();
+
+                    var dsSpotTarget = DataAccessFactory.
+                     Instance.
+                     GetDsResult(
+                         "CPSpot.GetSpotTargetLABByMeasurementID",
+                         new object[]
+                                 {
+                                        MeasurementId
+                                 });
+
+                    if (dsSpotTarget.Tables[0].Rows.Count > 0)
+                    {
+                        req.DestinationProfile = new SpotIccProfile();
+                        req.DestinationProfile.ProfileData = (byte[])dsSpotTarget.Tables[0].Rows[0]["DestinationProfile"];
+                        req.previousNamedColorProfile.ProfileData = (byte[])dsSpotTarget.Tables[0].Rows[0]["LastOptimizedNCP"];
+
+                        var ms = new MemoryStream();
+                        StreamWriter writer = new StreamWriter(ms);
+
+                        writer.WriteLine("BEGIN_DATA_FORMAT");
+                        writer.WriteLine("SAMPLE_NAME\tLAB_L\tLAB_A\tLAB_B");
+                        writer.WriteLine("END_DATA_FORMAT");
+                        writer.WriteLine("BEGIN_DATA");
+
+                        if (dsSpotTarget.Tables[1] != null && dsSpotTarget.Tables[1].Rows.Count > 0)
+                            foreach (DataRow dr in dsSpotTarget.Tables[1].Rows)
+                                writer.WriteLine("\"" + dr["SpotName"].ToString() + "\"\t" + dr["Measured_L*"].ToString() + "\t" + dr["Measured_a*"].ToString() + "\t" + dr["Measured_b*"].ToString() + "");
+
+                        writer.WriteLine("END_DATA");
+                        writer.Flush();
+                        req.TargetProfile = ms.ToArray();
+                    }
+
+                    var syncClientResponse = client.OptimizeSpotLibraryValues(req);
+
+
+                    List<ProfilerService.Patch> list = syncClientResponse.spotPatchDetail;
+
+                    var spotProjectDetails = new XElement("SpotColorDetails",
+                                                       list.
+                                                           Select(x =>
+                                                                  new XElement("SpotColorData",
+                                                                               new XAttribute("OptimizeRunID", OptimizeRunID),
+                                                                               new XAttribute("SpotID", x.PatchID),
+                                                                               new XAttribute("SpotName", x.ColorName),
+                                                                               new XAttribute("CMYK_C", x.Cmyk_C),
+                                                                               new XAttribute("CMYK_M", x.Cmyk_M),
+                                                                               new XAttribute("CMYK_Y", x.Cmyk_Y),
+                                                                               new XAttribute("CMYK_K", x.Cmyk_K)
+                                                                      )).ToList());
+
+
+
+                    DataAccessFactory.Instance.ExecuteProcedure("CPSpot.UpdateOptimizeDlp",
+                                                                            new object[] { OptimizeRunID, syncClientResponse.namedColorProfile, Status, EndDate, spotProjectDetails.ToString(), false });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateSpotNamedColorProfile"));
         }

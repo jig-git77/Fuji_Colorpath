@@ -13,7 +13,7 @@ namespace ColorPathSync.MessageContracts
         [DataMember]
         public SpotIccProfile DestinationProfile { get; set; }
         [DataMember]
-        public byte[] previousNamedColorProfile { get; set; }
+        public SpotIccProfile previousNamedColorProfile { get; set; }
         [DataMember]
         public byte[] TargetProfile { get; set; }
         [DataMember]

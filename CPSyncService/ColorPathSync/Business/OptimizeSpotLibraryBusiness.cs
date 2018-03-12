@@ -53,7 +53,7 @@ namespace ColorPathSync.Business
                 err = CrossXColor.CLSetOptionProfile(profiler, "DstProfile", destProf);
 
                 //Set the Source Profile, the Source profile is the previous run created NamedColorprofile
-                Curve.CopyProfileInMemory(request.DestinationProfile.ProfileData, ref destProf);
+                Curve.CopyProfileInMemory(request.previousNamedColorProfile.ProfileData, ref destProf);
                 err = CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", destProf);
 
 

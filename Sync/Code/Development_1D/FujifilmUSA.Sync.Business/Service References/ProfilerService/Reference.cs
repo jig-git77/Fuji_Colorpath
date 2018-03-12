@@ -2032,7 +2032,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         private FujifilmUSA.Sync.Business.ProfilerService.SpotIccProfile DestinationProfileField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] previousNamedColorProfileField;
+        private FujifilmUSA.Sync.Business.ProfilerService.SpotIccProfile previousNamedColorProfileField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private byte[] TargetProfileField;
@@ -2064,7 +2064,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public byte[] previousNamedColorProfile {
+        public FujifilmUSA.Sync.Business.ProfilerService.SpotIccProfile previousNamedColorProfile {
             get {
                 return this.previousNamedColorProfileField;
             }
