@@ -181,17 +181,6 @@
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.OptimizeDeviceLinkProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ProfilerService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ProfilerService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ProfilerService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -202,48 +191,33 @@
     <None Include="Service References\ProfilerService\Profiler1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler10.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler11.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler15.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler2.wsdl" />
     <None Include="Service References\ProfilerService\Profiler2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler3.wsdl" />
     <None Include="Service References\ProfilerService\Profiler3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ProfilerService\Profiler4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler6.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler7.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler8.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler9.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ProfilerService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ProfilerService\Profiler.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ProfilerService\Profiler2.disco" />
+    <None Include="Service References\ProfilerService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ProfilerService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ProfilerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

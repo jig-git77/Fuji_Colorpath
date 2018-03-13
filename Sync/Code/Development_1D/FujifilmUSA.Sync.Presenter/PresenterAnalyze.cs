@@ -244,5 +244,16 @@ namespace FujifilmUSA.Sync.Presenter
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             measurementBusiness.UpdateMeasurementByAnalyzeChartFromService(_viewAnalyze.MeasurementId, _viewAnalyze.IsUsed, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
         }
+
+        public void OptmizeSpotLibrary()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            optimizeRunBusiness.OptimizeSpotNamedColorProfile(                    
+                    _viewAnalyze.OptimizeRunId,
+                    //_viewAnalyze.MeasurementId,                    
+                    (int)EOptimizeRunStatus.Closed,
+                    DateTime.Now);
+        }
     }
 }

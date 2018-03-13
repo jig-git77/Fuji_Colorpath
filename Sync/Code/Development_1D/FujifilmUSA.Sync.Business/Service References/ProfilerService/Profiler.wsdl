@@ -65,11 +65,17 @@
   <wsdl:message name="IProfiler_ExtractProfileValues_OutputMessage">
     <wsdl:part name="parameters" element="tns:ExtractProfileValuesResponse" />
   </wsdl:message>
-  <wsdl:message name="IProfiler_GetSpotLAB_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetSpotLAB" />
+  <wsdl:message name="IProfiler_CreateSpotLibraryValues_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSpotLibraryValues" />
   </wsdl:message>
-  <wsdl:message name="IProfiler_GetSpotLAB_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetSpotLABResponse" />
+  <wsdl:message name="IProfiler_CreateSpotLibraryValues_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSpotLibraryValuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfiler_OptimizeSpotLibraryValues_InputMessage">
+    <wsdl:part name="parameters" element="tns:OptimizeSpotLibraryValues" />
+  </wsdl:message>
+  <wsdl:message name="IProfiler_OptimizeSpotLibraryValues_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OptimizeSpotLibraryValuesResponse" />
   </wsdl:message>
   <wsdl:portType name="IProfiler">
     <wsdl:operation name="Ping">
@@ -104,9 +110,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProfiler/ExtractProfileValues" message="tns:IProfiler_ExtractProfileValues_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProfiler/ExtractProfileValuesResponse" message="tns:IProfiler_ExtractProfileValues_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetSpotLAB">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProfiler/GetSpotLAB" message="tns:IProfiler_GetSpotLAB_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProfiler/GetSpotLABResponse" message="tns:IProfiler_GetSpotLAB_OutputMessage" />
+    <wsdl:operation name="CreateSpotLibraryValues">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfiler/CreateSpotLibraryValues" message="tns:IProfiler_CreateSpotLibraryValues_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfiler/CreateSpotLibraryValuesResponse" message="tns:IProfiler_CreateSpotLibraryValues_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OptimizeSpotLibraryValues">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfiler/OptimizeSpotLibraryValues" message="tns:IProfiler_OptimizeSpotLibraryValues_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfiler/OptimizeSpotLibraryValuesResponse" message="tns:IProfiler_OptimizeSpotLibraryValues_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IProfiler" type="tns:IProfiler">
@@ -184,8 +194,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetSpotLAB">
-      <soap12:operation soapAction="http://tempuri.org/IProfiler/GetSpotLAB" style="document" />
+    <wsdl:operation name="CreateSpotLibraryValues">
+      <soap12:operation soapAction="http://tempuri.org/IProfiler/CreateSpotLibraryValues" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OptimizeSpotLibraryValues">
+      <soap12:operation soapAction="http://tempuri.org/IProfiler/OptimizeSpotLibraryValues" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -111,14 +111,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetSpotLAB">
+  <xs:element name="CreateSpotLibraryValues">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="1" name="req" type="tns:ExtractSpotLABRequest" />
+        <xs:element minOccurs="0" maxOccurs="1" name="request" type="tns:CreateSpotLibraryRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:complexType name="ExtractSpotLABRequest">
+  <xs:complexType name="CreateSpotLibraryRequest">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="1" name="DestinationProfile" type="tns:SpotIccProfile" />
       <xs:element minOccurs="0" maxOccurs="1" name="TargetProfile" type="xs:base64Binary" />
@@ -141,14 +141,14 @@
       <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="GetSpotLABResponse">
+  <xs:element name="CreateSpotLibraryValuesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="1" name="GetSpotLABResult" type="tns:ExtractSpotLABResponse" />
+        <xs:element minOccurs="0" maxOccurs="1" name="CreateSpotLibraryValuesResult" type="tns:CreateSpotLibraryResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:complexType name="ExtractSpotLABResponse">
+  <xs:complexType name="CreateSpotLibraryResponse">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseResponse">
         <xs:sequence>
@@ -194,5 +194,37 @@
       <xs:element minOccurs="1" maxOccurs="1" name="p_Cie_b" type="xs:double" />
       <xs:element minOccurs="1" maxOccurs="1" name="Spot2" type="xs:double" />
     </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OptimizeSpotLibraryValues">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="request" type="tns:OptimizeSpotLibraryRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="OptimizeSpotLibraryRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="DestinationProfile" type="tns:SpotIccProfile" />
+      <xs:element minOccurs="0" maxOccurs="1" name="previousNamedColorProfile" type="tns:SpotIccProfile" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TargetProfile" type="xs:base64Binary" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ProfileOptions" type="tns:ArrayOfSpotParameter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OptimizeSpotLibraryValuesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="OptimizeSpotLibraryValuesResult" type="tns:OptimizeSpotLibraryResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="OptimizeSpotLibraryResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="spotPatchDetail" type="tns:ArrayOfPatch" />
+          <xs:element minOccurs="0" maxOccurs="1" name="namedColorProfile" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 </xs:schema>

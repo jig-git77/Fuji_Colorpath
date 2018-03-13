@@ -180,7 +180,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             _presenterConfirmSave.CreateG7AlignmentCurve();
                         else//ISO                                                    
                             _presenterConfirmSave.CreateISOAlignmentCurve();
-                    }
+                    }                   
                     else
                     {
 
@@ -222,7 +222,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 ProjectStatus = Convert.ToInt32(EOptimizeRunStatus.Closed);
-                _presenterConfirmSave.UpdateOptimizeRun_SpotProject();
+                _presenterConfirmSave.OptmizeSpotLibrary();
+
+                //_presenterConfirmSave.UpdateOptimizeRun_SpotProject();
                 if (!IsErrorOccured)
                 {
                     _presenterConfirmSave.GetProjectDetail_SpotProject();

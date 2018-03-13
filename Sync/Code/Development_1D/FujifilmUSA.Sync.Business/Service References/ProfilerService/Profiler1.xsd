@@ -13,6 +13,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Parameter" nillable="true" type="tns:Parameter" />
+  <xs:simpleType name="PCSDataType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Density" />
+      <xs:enumeration value="XYZ" />
+      <xs:enumeration value="Spectral" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PCSDataType" nillable="true" type="tns:PCSDataType" />
   <xs:complexType name="IccProfile">
     <xs:sequence>
       <xs:element minOccurs="0" name="ProfileData" nillable="true" type="xs:base64Binary" />
@@ -28,14 +36,6 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MessageSeverity" nillable="true" type="tns:MessageSeverity" />
-  <xs:simpleType name="PCSDataType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Density" />
-      <xs:enumeration value="XYZ" />
-      <xs:enumeration value="Spectral" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="PCSDataType" nillable="true" type="tns:PCSDataType" />
   <xs:simpleType name="DensityType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Status-T" />

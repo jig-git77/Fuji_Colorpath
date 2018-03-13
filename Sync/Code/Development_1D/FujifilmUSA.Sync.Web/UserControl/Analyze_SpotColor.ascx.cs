@@ -82,7 +82,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnDownloadAndSaveNCP_Click(object sender, EventArgs e)
         {
             if (!IsNCPCreated)
-            {
+            {               
                 SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 ProjectStatus = Convert.ToInt32(EOptimizeRunStatus.Closed);
@@ -100,6 +100,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
+                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                MeasurementId = Convert.ToInt32(hdMeasurement.Value);
+                ProjectStatus = Convert.ToInt32(EOptimizeRunStatus.Closed);
+                _presenterAnalyze.OptmizeSpotLibrary();
                 Response.Redirect("Export.aspx");
             }
             
