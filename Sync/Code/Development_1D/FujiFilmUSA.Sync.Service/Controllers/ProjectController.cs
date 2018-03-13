@@ -1,7 +1,6 @@
 ﻿using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujiFilmUSA.Sync.Service.Models;
 using FujifilmUSA.Sync.Entity.CPSpot;
 using System;
 
@@ -69,7 +68,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         {
             IHttpActionResult actionResult = null;
             //Models.BaseResponse<List<Project>> httpResponse = new Models.BaseResponse<List<Project>>();
-            Models.BaseResponse<object> httpResponse = new Models.BaseResponse<object>();
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
                 DetermineCulture();
@@ -91,8 +90,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
@@ -102,7 +101,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         {
             IHttpActionResult actionResult = null;
             //Models.BaseResponse<List<SpotProjectLibrary>> httpResponse = new Models.BaseResponse<List<SpotProjectLibrary>>();
-            Models.BaseResponse<string> httpResponse = new Models.BaseResponse<string>();
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
             try
             {
                 GenerateResources();
@@ -115,8 +114,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
@@ -126,7 +125,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult DeleteProject(int projectID)
         {
             IHttpActionResult actionResult = null;
-            Models.BaseResponse<bool> httpResponse = new Models.BaseResponse<bool>();
+            BaseResponse<bool> httpResponse = new BaseResponse<bool>();
             try
             {
                 ProjectId = projectID;
@@ -137,8 +136,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
@@ -148,7 +147,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult DeleteSpotProject(int spotProjectID)
         {
             IHttpActionResult actionResult = null;
-            Models.BaseResponse<bool> httpResponse = new Models.BaseResponse<bool>();
+            BaseResponse<bool> httpResponse = new BaseResponse<bool>();
             try
             {
 
@@ -160,8 +159,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;

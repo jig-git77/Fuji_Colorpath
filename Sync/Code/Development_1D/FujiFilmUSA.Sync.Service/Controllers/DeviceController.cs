@@ -2,7 +2,6 @@
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujiFilmUSA.Sync.Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +26,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GetProjectLicenseType(int UserID, int DeviceID)
         {
             IHttpActionResult actionResult = null;
-            Models.BaseResponse<List<LicenseType>> httpResponse = new Models.BaseResponse<List<LicenseType>>();
+            BaseResponse<List<LicenseType>> httpResponse = new BaseResponse<List<LicenseType>>();
             try
             {
                 DeviceId = DeviceID;
@@ -46,8 +45,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;

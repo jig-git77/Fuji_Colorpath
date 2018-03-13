@@ -3,7 +3,6 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujiFilmUSA.Sync.Service.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -123,7 +122,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             IHttpActionResult actionResult = null;
             string validationMessage = "";
 
-            Models.BaseResponse<object> httpResponse = new Models.BaseResponse<object>();
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
                 //if (MeasurementId == null)
@@ -138,8 +137,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)Models.ResponseStatus.ValidationError;
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
                 }
                 else
@@ -175,8 +174,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
 
             }
@@ -190,7 +189,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             IHttpActionResult actionResult = null;
             string validationMessage = "";
 
-            Models.BaseResponse<object> httpResponse = new Models.BaseResponse<object>();
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
                 if (MeasurementId == null)
@@ -208,8 +207,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)Models.ResponseStatus.ValidationError;
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
                 }
                 else
@@ -241,8 +240,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
 
             }
@@ -256,7 +255,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             IHttpActionResult actionResult = null;
             string validationMessage = "";
 
-            Models.BaseResponse<string> httpResponse = new Models.BaseResponse<string>();
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
             try
             {
                 if (chart == null)
@@ -264,8 +263,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     validationMessage = "Invalid Charts, Please try again.";
 
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)Models.ResponseStatus.ValidationError;
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
                 }
                 else
@@ -285,7 +284,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     //objReportPDF.GenerateClientReportPDF();
 
                     string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
-                    httpResponse.status = Models.ResponseStatus.Success;
+                    httpResponse.status = ResponseStatus.Success;
                     httpResponse.Data = ReportPath;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
                 }
@@ -294,8 +293,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
 
             }
@@ -307,7 +306,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GetSpotPatchDetails(int id)
         {
             IHttpActionResult actionResult = null;
-            Models.BaseResponse<object> httpResponse = new Models.BaseResponse<object>();
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
                 DetermineCulture();
@@ -369,8 +368,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
@@ -383,7 +382,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             IHttpActionResult actionResult = null;
             string validationMessage = "";
 
-            Models.BaseResponse<object> httpResponse = new Models.BaseResponse<object>();
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
                 if (MeasurementId == null)
@@ -405,8 +404,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)Models.ResponseStatus.ValidationError;
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
                 }
                 else
@@ -436,8 +435,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
 
             }
@@ -451,7 +450,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             IHttpActionResult actionResult = null;
             string validationMessage = "";
 
-            Models.BaseResponse<object> httpResponse = new Models.BaseResponse<object>();
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
                 if (MeasurementId == null)
@@ -469,8 +468,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)Models.ResponseStatus.ValidationError;
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
                 }
                 else
@@ -507,8 +506,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
 
             }
@@ -521,7 +520,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             IHttpActionResult actionResult = null;
             string validationMessage = "";
 
-            Models.BaseResponse<object> httpResponse = new Models.BaseResponse<object>();
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
                 if (MeasurementId == null)
@@ -539,8 +538,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)Models.ResponseStatus.ValidationError;
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
                 }
                 else
@@ -571,8 +570,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
 
             }
@@ -585,7 +584,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             IHttpActionResult actionResult = null;
             string validationMessage = "";
 
-            Models.BaseResponse<object> httpResponse = new Models.BaseResponse<object>();
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
                 if (MeasurementId == null)
@@ -603,8 +602,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)Models.ResponseStatus.ValidationError;
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
                 }
                 else
@@ -639,8 +638,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
 
             }
@@ -652,7 +651,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject)
         {
             IHttpActionResult actionResult = null;
-            Models.BaseResponse<object> httpResponse = new Models.BaseResponse<object>();
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             string validationMessage = "";
             List<Dictionary<string, object>> patchDetails = new List<Dictionary<string, object>>();
             try
@@ -669,8 +668,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)Models.ResponseStatus.ValidationError;
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
                 }
                 else
@@ -758,8 +757,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
@@ -770,7 +769,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GetCGATSPatchReport(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID)
         {
             IHttpActionResult actionResult = null;
-            Models.BaseResponse<string> httpResponse = new Models.BaseResponse<string>();
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
             string validationMessage = "";
             string ReportFileName = "";
             try
@@ -787,8 +786,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)Models.ResponseStatus.ValidationError;
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
                 }
                 else
@@ -859,8 +858,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
@@ -886,8 +885,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)Models.ResponseStatus.ValidationError;
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
                     httpResponseMessage = Request.CreateResponse<BaseErrorResponse>(HttpStatusCode.PreconditionFailed, errprResponse);
                     //httpResponseMessage.Content = new HttpContent()
                     //httpResponseMessage = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, ));//returns 412 status code
@@ -967,8 +966,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 //actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
                 httpResponseMessage = Request.CreateResponse<BaseErrorResponse>(HttpStatusCode.InternalServerError, errprResponse);
             }
@@ -980,7 +979,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult GetCFXPatchReport(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID)
         {
             IHttpActionResult actionResult = null;
-            Models.BaseResponse<string> httpResponse = new Models.BaseResponse<string>();
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
             string validationMessage = "";
             string ReportFileName = "";
             try
@@ -997,8 +996,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)Models.ResponseStatus.ValidationError;
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
                 }
                 else
@@ -1073,8 +1072,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
@@ -1112,7 +1111,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult UpdateMeasurementFromAnalyzeChart(int? MeasurementId, bool? isMeasurementUsed, bool? IsVerificationProject, bool? IsSync1DTypeProject)
         {
             IHttpActionResult actionResult = null;
-            Models.BaseResponse<bool> httpResponse = new Models.BaseResponse<bool>();
+            BaseResponse<bool> httpResponse = new BaseResponse<bool>();
             string validationMessage = "";
             bool isSuccess = false;
             try
@@ -1139,8 +1138,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
@@ -1152,7 +1151,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             IHttpActionResult actionResult = null;
             string validationMessage = "";
 
-            Models.BaseResponse<object> httpResponse = new Models.BaseResponse<object>();
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             CMYKDensity colorDensity = new CMYKDensity();
             try
             {
@@ -1162,8 +1161,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
                     BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.Message = validationMessage;
-                    errprResponse.Error.Code = (int)Models.ResponseStatus.ValidationError;
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
                 }
                 else
@@ -1196,8 +1195,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.Message = ex.Message;
-                errprResponse.Error.Code = (int)Models.ResponseStatus.InternalServer;
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
 
             }

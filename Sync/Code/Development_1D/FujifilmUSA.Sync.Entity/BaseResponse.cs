@@ -61,19 +61,29 @@ namespace FujifilmUSA.Sync.Entity
         public string InternalMessage { get { return _internalMessage; } set { _internalMessage = value; } }
 
         [JsonIgnore]
+        private int _code = 0;
+
+        [JsonProperty("code")]
+        public int Code { get { return _code; } set { _code = value; } }
+
+
+        [JsonIgnore]
         public Exception exception { get; set; }
     }
+    [Serializable]
     public enum ResponseStatus
     {
+        NoResult = 0,
+
         [Description("Request Success.")]
         Success = 1,
 
-        [Description("Access Denied.")]
-        AccessDenied = -1,
+        [Description("Validation Error.")]
+        ValidationError = -1,
 
-        [Description("Invalid API Key.")]
-        InvalidAPIKey = -2,
-
+        [Description("Internal Server Error")]
+        InternalServer = -2,
+        
         [Description("{0} can not be empty.")]
         Business_EmptyData = -3,
 
@@ -89,5 +99,37 @@ namespace FujifilmUSA.Sync.Entity
 
         ForgotPassword_Success = 2,
 
+        [Description("Access Denied.")]
+        AccessDenied = -8,
+
+        [Description("Invalid API Key.")]
+        InvalidAPIKey = -9,
+
+
+    }
+
+    public class BaseErrorResponse
+    {
+        public BaseErrorResponse()
+        {
+            if (Error == null)
+            {
+                Error = new Error();
+            }
+        }
+
+        [JsonIgnore]
+        public ResponseStatus status { get; set; }
+
+        [JsonIgnore]
+        private Error _error { get; set; }
+
+        [JsonProperty("error")]
+        //[JsonIgnore]
+        public Error Error
+        {
+            get { return status == ResponseStatus.Success ? null : _error; }
+            set { _error = value; }
+        }
     }
 }
