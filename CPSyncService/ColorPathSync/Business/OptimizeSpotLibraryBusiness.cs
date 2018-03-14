@@ -46,23 +46,26 @@ namespace ColorPathSync.Business
                 //In the service it will be from memory as a byte array then converted to a profile
 
                 TYPE_p_void destProf = CrossXColor.CLNewICCProfileRef();
-                TYPE_p_p_void destSpec = CrossXColor.CLNewFileSpecRef();
+                //TYPE_p_p_void destSpec = CrossXColor.CLNewFileSpecRef();
 
                 //Set the destination profile, please note the difference in the call from RefProfile to DstProfile in OPtimization
                 Curve.CopyProfileInMemory(request.DestinationProfile.ProfileData, ref destProf);
                 err = CrossXColor.CLSetOptionProfile(profiler, "DstProfile", destProf);
 
+                TYPE_p_void srcProf = CrossXColor.CLNewICCProfileRef();
+                //TYPE_p_p_void srcSpec = CrossXColor.CLNewFileSpecRef();
+
                 //Set the Source Profile, the Source profile is the previous run created NamedColorprofile
-                Curve.CopyProfileInMemory(request.previousNamedColorProfile.ProfileData, ref destProf);
-                err = CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", destProf);
+                Curve.CopyProfileInMemory(request.previousNamedColorProfile.ProfileData, ref srcProf);
+                err = CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", srcProf);
 
 
                 //Now we have the target file, the params and the destination profile
                 // calc the Nmaed Color Profile in memory
-                System.Console.WriteLine("Calculating OPtimized NamedColorProfile in Memory");
+                // System.Console.WriteLine("Calculating OPtimized NamedColorProfile in Memory");
                 TYPE_p_void prof = CrossXColor.CLNewICCProfileRef();
                 err = CrossXColor.CLCalcProfile(profiler, prof);
-                System.Console.WriteLine("CLCalcProfile-Err = {0:d}", err);
+                //System.Console.WriteLine("CLCalcProfile-Err = {0:d}", err);
 
                 // //            // save profile to disc
                 //Here it just an example
@@ -75,7 +78,7 @@ namespace ColorPathSync.Business
                 // err = CrossXColor.CLWriteProfile(prof, NCPSpec, 0);
 
                 response.namedColorProfile = Curve.GetDLP(ref prof);
-                System.Console.WriteLine("CLWriteProfile-Error = {0:d}", err);
+                //System.Console.WriteLine("CLWriteProfile-Error = {0:d}", err);
 
                 //now we create the collection for reading the named color profile into
                 List<Patch> listPatch = new List<Patch>();
@@ -89,6 +92,13 @@ namespace ColorPathSync.Business
                 //
 
                 response.spotPatchDetail = listPatch;
+
+                CrossXColor.CLFreeCLProfilerRef(profiler);
+                CrossXColor.CLFreeICCProfileRef(prof);
+                CrossXColor.CLFreeICCProfileRef(srcProf);
+                CrossXColor.CLFreeICCProfileRef(destProf);
+
+
                 return response;
             }
             catch (Exception ex)
