@@ -45,7 +45,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Project GetProjectDetail_SpotProject(int projectId);
         int DeleteSpotProject(int spotprojectId);
 
-        int AddDummyData(int spotprojectId,int optimizationRunID);
         byte[] GetNamedColorProfile(int operationId);
         byte[] GetLastOptimizedNamedColorProfile(int spotProjectId);
         ReferenceChartData GetSpotReferenceChartData(int spotProjectId, EReferenceChartDisType referenceChartDisType);

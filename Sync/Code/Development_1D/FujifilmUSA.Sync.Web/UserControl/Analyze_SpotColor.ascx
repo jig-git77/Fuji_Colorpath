@@ -155,6 +155,9 @@
                             },
                             Predicted_HTMLColor: {
                                 from: "Predicted_HTMLColor"
+                            },
+                            Measured_HTMLColor: {
+                                from: "Measured_HTMLColor"
                             }
                         }
                     }
@@ -198,7 +201,7 @@
                     field: "SpotView",
                     filterable: false,
                     title: "<b>View</b>",
-                    template: "<center><a id='lnkView' title='View Patch Details' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#,#=Measured_L#,#=Measured_a#,#=Measured_b#,#=MeasurementID#,\"#=Predicted_HTMLColor.substring(1)#\");'><img src='Images/detail1.png'></img></a></center>",
+                    template: "<center><a id='lnkView' title='View Patch Details' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#,#=Measured_L#,#=Measured_a#,#=Measured_b#,#=MeasurementID#,\"#=Predicted_HTMLColor.substring(1)#\",\"#=Measured_HTMLColor.substring(1)#\");'><img src='Images/detail1.png'></img></a></center>",
                     width: 55
                 },
                 {
@@ -272,13 +275,13 @@
         });
     });
 
-    function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID, P_htmlColor) {
+    function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID, P_htmlColor, M_htmlColor) {
         measuredL = (isNaN(measuredL) || measuredL == null) ? 0 : measuredL;
         measuredA = (isNaN(measuredA) || measuredA == null) ? 0 : measuredA;
         measuredB = (isNaN(measuredB) || measuredB == null) ? 0 : measuredB;
 
         var oWindow;
-        oWindow = window.radopen("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor, "ClosePrintConditionWindow");
+        oWindow = window.radopen("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor, "ClosePrintConditionWindow");
         oWindow.show();
         return false;
     }

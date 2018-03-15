@@ -178,7 +178,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataSet();
         }
-        public DataTable GetSpotPatchDetailsofMeasurement(int OperationID)
+        public DataTable GetSpotPatchDetailsofMeasurement(int OptimizeRunId)
         {
             return new DataTable();
         }

@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         private const string _recDeltaB = "deltaBText";
         decimal T_L, T_a, T_b, P_L, P_a, P_b, M_L, M_a, M_b;
         string htmlColor;
-        string Predicated_htmlColor;
+        string Predicated_htmlColor, Measured_htmlColor;
         int MeasurementID;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -45,6 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
             htmlColor = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["htmlColor"])) ? "" : ("#" + Convert.ToString(Request.QueryString["htmlColor"]));
             Predicated_htmlColor = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["P_htmlColor"])) ? "" : ("#" + Convert.ToString(Request.QueryString["P_htmlColor"]));
+            Measured_htmlColor = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["M_htmlColor"])) ? "" : ("#" + Convert.ToString(Request.QueryString["M_htmlColor"]));
 
             BindValues();
             FillPaperChart(T_L, T_a, T_b, P_L, P_a, P_b, M_L, M_a, M_b, MeasurementID);
@@ -53,7 +54,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
         public void BindValues()
         {
-            if (MeasurementID > 0) // if optimization !=0
+            if (MeasurementID > 0) // if optimization run !=0
             {
                 divPatchDetailsRun.Visible = true;
                 decimal Delta_Target_PredictedL, Delta_Measured_TargetL, Delta_Measured_PredictedL,
@@ -100,11 +101,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 lblMeasured_PredictedA.Text = Delta_Measured_PredictedA.ToString();
                 lblMeasured_PredictedB.Text = Delta_Measured_PredictedB.ToString();
 
-                divActual.Style.Add("background-color", htmlColor);
+                divActual.Style.Add("background-color", Predicated_htmlColor);
                 divTarget.Style.Add("background-color", htmlColor);
-                divMeasured.Style.Add("background-color", htmlColor);
+                divMeasured.Style.Add("background-color", Measured_htmlColor);
             }
-            else
+            else                  //--------------For Optimization Run-0---------------//
             {
                 divPatchDetailsRun0.Visible = true;
                 decimal Delta_L, Delta_a, Delta_b;
@@ -126,7 +127,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 divActualRun0.Style.Add("background-color", Predicated_htmlColor);
                 divTargetRun0.Style.Add("background-color", htmlColor);
             }
-            //FillPaperChart(Delta_L, Delta_a, Delta_b);
         }
 
         #region Fill Paper Chart

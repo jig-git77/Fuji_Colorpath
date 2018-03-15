@@ -1832,10 +1832,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public DataTable GetSpotPatchDetailsofMeasurement(int OperationID)
+        public DataTable GetSpotPatchDetailsofMeasurement(int OptimizeRunId)
         {            
-            // var PatchDetails = new List<MeasurementPatchDetails>();
-            string storedProc = "CPSpot.GetPatchDetailsByMeasurementID";
+            string storedProc = "CPSpot.GetPatchDetailsByOptimizeRunID_ID";
+
             DataTable dtPatchDetails = new DataTable();
             Common.ImplementBusinessLogic(
                 () =>
@@ -1845,7 +1845,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 storedProc,
-                                new object[] { OperationID });
+                                new object[] { OptimizeRunId });
                     if (dsMeasurements.Tables.Count > 0)
                         dtPatchDetails = dsMeasurements.Tables[0];
                 },
@@ -1877,7 +1877,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@MeasurementName", Size = 50, Type = DbType.String, Value = measurement.MeasurementName},
                                                      new Parameters() {ParameterName = "@OptimizeRunID", Type = DbType.Int32, Value = measurement.OptimizeRunId},
                                                      new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
-                                                  //   new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
                                                      new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType)}
                                                  },

@@ -1771,34 +1771,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
-        public int AddDummyData(int spotprojectId, int optimizationRunID)
-        {
-            int returnValue = 0;
-            var outParam = new Parameters() { ParameterName = "@LastOptimizationRunID", Type = DbType.Int32 };
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    DataAccessFactory.
-                        Instance.
-                        ExecuteProcedure("[CPSpot].[InsertDummyMeasurement]",
-                                         new List<Parameters>()
-                                             {
-                                                     new Parameters() {ParameterName = "@SpotProjectID", Type = DbType.Int32, Value = spotprojectId},
-                                                     new Parameters() {ParameterName = "@OptimizationRunID", Type = DbType.Int32, Value = optimizationRunID},
-                                             },
-                                         new List<Parameters>()
-                                             {
-                                                     outParam
-                                             });
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
-            if (outParam.Value != null)
-            {
-                returnValue = Convert.ToInt32(outParam.Value);
-            }
-            return returnValue;
-        }
-
+     
         public byte[] GetNamedColorProfile(int operationId)
         {
             var data = new object();
