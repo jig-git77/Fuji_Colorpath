@@ -420,240 +420,242 @@
                                 </ul>
                                 <div>
                                     <div>
-                                        
-                                                <%--<div id="divValidationSummary" cellpadding="0" cellspacing="0" width="650px">
 
-                                                    <table style="width: 100%;border-collapse:collapse;">
-                                                        <tr>
-                                                            <td valign="top" style="width: 63%; border: 1px Solid Gray;">
-                                                                <table class="Validation_Summary" style="width: 100%">
-                                                                    <tr class="Gray">
-                                                                        <td class="Summary_Left" style="width:150px;">
-                                                                            <asp:Localize ID="Localize25" runat="server" meta:resourcekey="ValidationSummaryMeasurementName"></asp:Localize>
-                                                                        </td>
-                                                                        <td class="Summary_Right">
-                                                                            <span data-bind="text: MeasurementName"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="Summary_Left_Alt">
-                                                                            <asp:Localize ID="Localize26" runat="server" meta:resourcekey="ValidationSummaryStatus"></asp:Localize>
-                                                                        </td>
-                                                                        <td class="Summary_Right_Alt">
-                                                                            <span data-bind="text: MeasurementStatus, style: { color: MeasurementStatus == 'OK' ? 'green':'black'}"></span>                                                                                
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="Summary_Left">
-                                                                            <asp:Localize ID="Localize27" runat="server" meta:resourcekey="ValidationSummaryMetricPreset"></asp:Localize>
-                                                                        </td>
-                                                                        <td class="Summary_Right">
-                                                                            <span data-bind="text: MetricTargetPresetName"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="Summary_Left_Alt">
-                                                                            <asp:Localize ID="Localize28" runat="server" meta:resourcekey="ValidationSummaryPrintStd"></asp:Localize>
-                                                                        </td>
-                                                                        <td class="Summary_Right_Alt">
-                                                                            <span data-bind="text: PrintStandardType"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="Summary_Left">
-                                                                            <asp:Localize ID="Localize30" runat="server" meta:resourcekey="ValidationSummaryMeasurementID"></asp:Localize>
-                                                                        </td>
-                                                                        <td class="Summary_Right">
-                                                                            <span data-bind="text: MeasurementId"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="Summary_Left_Alt">
-                                                                            <asp:Localize ID="Localize31" runat="server" meta:resourcekey="ValidationSummaryTimestamp"></asp:Localize>
-                                                                        </td>
-                                                                        <td class="Summary_Right_Alt">
-                                                                            <span data-format="MM/dd/yyyy HH:mm:ss tt" data-bind="text: MeasurementDateFormatted"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr id="rowCustomer">
-                                                                        <td class="Summary_Left">
-                                                                            <asp:Localize ID="Localize32" runat="server" meta:resourcekey="ValidationSummaryCustomer"></asp:Localize>
-                                                                        </td>
-                                                                        <td class="Summary_Right">
-                                                                            <span data-bind="text: Customer"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="Summary_Left_Alt">
-                                                                            <asp:Localize ID="Localize33" runat="server" meta:resourcekey="ValidationSummaryEType"></asp:Localize>
-                                                                        </td>
-                                                                        <td class="Summary_Right_Alt">
-                                                                            <span data-bind="text: dEMethod"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr id="rowPageSurface">
-                                                                        <td class="Summary_Left">
-                                                                            <asp:Localize ID="Localize29" runat="server" meta:resourcekey="ValidationSummaryPageSurface"></asp:Localize>
-                                                                        </td>
-                                                                        <td class="Summary_Right">
-                                                                            <span data-bind="text: PageOrSurface"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr id="rowJobID">
-                                                                        <td class="Summary_Left_Alt">
-                                                                            <asp:Localize ID="Localize34" runat="server" meta:resourcekey="ValidationSummaryJobID"></asp:Localize>
-                                                                        </td>
-                                                                        <td class="Summary_Right_Alt">
-                                                                            <span data-bind="text: JDFJobId"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr id="rowNotes">
-                                                                        <td class="Summary_Left">
-                                                                            <asp:Localize ID="Localize35" runat="server" meta:resourcekey="ValidationSummaryNotes"></asp:Localize>
-                                                                        </td>
-                                                                        <td class="Summary_Right">
-                                                                            <span data-bind="text: Notes"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                            <td style="width: 2%;"></td>
-                                                            <td valign="top">                                                                
-                                                                    <table class="k-grid k-widget k-display-block" style="width:100%">
-                                                                    <thead class="k-grid-header">
-                                                                        <tr style="line-height: 25px;">
-                                                                            <th><asp:Localize ID="locGridMetricSumName" runat="server" meta:resourcekey="GridMetricSumName" Text=""></asp:Localize></th>
-                                                                            <th><asp:Localize ID="locGridTarget" runat="server" meta:resourcekey="GridTargetValue" Text=""></asp:Localize></th>
-                                                                            <th><asp:Localize ID="locGridActual" runat="server" meta:resourcekey="GridMeasuredValue" Text=""></asp:Localize></th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody data-template="validation-metrics-template" data-bind="source: ValidationMetrics"></tbody>
-                                                                </table>
-                                                                <br />
-                                                                <table id="tblPatchTolerance" class="k-grid k-widget k-display-block" style="width:100%">
-                                                                    <thead class="k-grid-header">
-                                                                        <tr style="line-height: 25px;">
-                                                                            <th><asp:Localize ID="Localize36" runat="server" meta:resourcekey="GridPatchTolSampleName" Text="SampleName"></asp:Localize></th>
-                                                                            <th><asp:Localize ID="Localize37" runat="server" meta:resourcekey="GridTargetValue" Text="Tol"></asp:Localize></th>
-                                                                            <th><asp:Localize ID="Localize38" runat="server" meta:resourcekey="GridMeasuredValue" Text="Actual"></asp:Localize></th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody data-template="patch-tolerance-template" data-bind="source: PatchTolerances"></tbody>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>--%>
+                                        <div id="divValidationSummary" cellpadding="0" cellspacing="0" width="650px">
 
-                                                <div id="divMeasurementSummary">
-                                                    <table id="tblMeasurementSummary" cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin: 0; width: 100%">
-                                                        <tr>
-                                                            <td>
-                                                                <table cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin: 0">
-                                                                    <tr class="Gray">
-                                                                        <td style="font-size: 13px;width: 200px;"">
-                                                                            <asp:Localize ID="locMeasurementName" runat="server" meta:resourcekey="locMeasurementNameResource1" Text=""></asp:Localize>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span data-bind="text: MeasurementName"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="White">
-                                                                        <td style="font-size: 13px;">
-                                                                            <asp:Localize Text="MeasurementID:" ID="Localize24" runat="server" meta:resourcekey="locMeasurementIDResource1"></asp:Localize>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span data-bind="text: MeasurementId"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="Gray">
-                                                                        <td style="font-size: 13px;">
-                                                                            <asp:Localize Text="Upload Date:" ID="locUploadDate" runat="server" meta:resourcekey="locUploadDateResource1"></asp:Localize>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span data-bind="text: MeasurementDate" data-dateformat="yyyy-MM-dd"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="White">
-                                                                        <td style="font-size: 13px;">
-                                                                            <asp:Localize Text="Average Δ" ID="locAverageDelta" runat="server" meta:resourcekey="locAverageDeltaResource1"></asp:Localize>
-                                                                        <td>
-                                                                            <span data-bind="text: Avg_ΔE"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="Gray">
-                                                                        <td style="font-size: 13px;">
-                                                                            <asp:Localize Text="Maximum Δ" ID="locMaximumDelta"
-                                                                                runat="server" meta:resourcekey="locMaximumDeltaResource1"></asp:Localize>
-                                                                            <asp:Label ID="lblMaxΔE" runat="server"></asp:Label></td>
-                                                                        <td>
-                                                                            <span data-bind="text: Max_ΔE"></span>
-                                                                        </td>
-                                                                    </tr>
+                                            <table style="width: 100%; border-collapse: collapse;">
+                                                <tr>
+                                                    <td valign="top" style="width: 63%; border: 1px Solid Gray;">
+                                                        <table class="Validation_Summary" style="width: 100%">
+                                                            <tr class="Gray">
+                                                                <td class="Summary_Left" style="width: 150px;">
+                                                                    <asp:Localize ID="Localize25" runat="server" meta:resourcekey="ValidationSummaryMeasurementName"></asp:Localize>
+                                                                </td>
+                                                                <td class="Summary_Right">
+                                                                    <span data-bind="text: MeasurementName"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="Summary_Left_Alt">
+                                                                    <asp:Localize ID="Localize26" runat="server" meta:resourcekey="ValidationSummaryStatus"></asp:Localize>
+                                                                </td>
+                                                                <td class="Summary_Right_Alt">
+                                                                    <span data-bind="text: MeasurementStatus, style: { color: MeasurementStatus == 'OK' ? 'green' : 'black' }"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="Summary_Left">
+                                                                    <asp:Localize ID="Localize27" runat="server" meta:resourcekey="ValidationSummaryMetricPreset"></asp:Localize>
+                                                                </td>
+                                                                <td class="Summary_Right">
+                                                                    <span data-bind="text: MetricTargetPresetName"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="Summary_Left_Alt">
+                                                                    <asp:Localize ID="Localize28" runat="server" meta:resourcekey="ValidationSummaryPrintStd"></asp:Localize>
+                                                                </td>
+                                                                <td class="Summary_Right_Alt">
+                                                                    <span data-bind="text: PrintStandardType"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="Summary_Left">
+                                                                    <asp:Localize ID="Localize30" runat="server" meta:resourcekey="ValidationSummaryMeasurementID"></asp:Localize>
+                                                                </td>
+                                                                <td class="Summary_Right">
+                                                                    <span data-bind="text: MeasurementId"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="Summary_Left_Alt">
+                                                                    <asp:Localize ID="Localize31" runat="server" meta:resourcekey="ValidationSummaryTimestamp"></asp:Localize>
+                                                                </td>
+                                                                <td class="Summary_Right_Alt">
+                                                                    <span data-format="MM/dd/yyyy HH:mm:ss tt" data-bind="text: MeasurementDateFormatted"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr id="rowCustomer">
+                                                                <td class="Summary_Left">
+                                                                    <asp:Localize ID="Localize32" runat="server" meta:resourcekey="ValidationSummaryCustomer"></asp:Localize>
+                                                                </td>
+                                                                <td class="Summary_Right">
+                                                                    <span data-bind="text: Customer"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="Summary_Left_Alt">
+                                                                    <asp:Localize ID="Localize33" runat="server" meta:resourcekey="ValidationSummaryEType"></asp:Localize>
+                                                                </td>
+                                                                <td class="Summary_Right_Alt">
+                                                                    <span data-bind="text: dEMethod"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr id="rowPageSurface">
+                                                                <td class="Summary_Left">
+                                                                    <asp:Localize ID="Localize29" runat="server" meta:resourcekey="ValidationSummaryPageSurface"></asp:Localize>
+                                                                </td>
+                                                                <td class="Summary_Right">
+                                                                    <span data-bind="text: PageOrSurface"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr id="rowJobID">
+                                                                <td class="Summary_Left_Alt">
+                                                                    <asp:Localize ID="Localize34" runat="server" meta:resourcekey="ValidationSummaryJobID"></asp:Localize>
+                                                                </td>
+                                                                <td class="Summary_Right_Alt">
+                                                                    <span data-bind="text: JDFJobId"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr id="rowNotes">
+                                                                <td class="Summary_Left">
+                                                                    <asp:Localize ID="Localize35" runat="server" meta:resourcekey="ValidationSummaryNotes"></asp:Localize>
+                                                                </td>
+                                                                <td class="Summary_Right">
+                                                                    <span data-bind="text: Notes"></span>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td style="width: 2%;"></td>
+                                                    <td valign="top">
+                                                        <table class="k-grid k-widget k-display-block" style="width: 100%">
+                                                            <thead class="k-grid-header">
+                                                                <tr style="line-height: 25px;">
+                                                                    <th>
+                                                                        <asp:Localize ID="locGridMetricSumName" runat="server" meta:resourcekey="GridMetricSumName" Text=""></asp:Localize></th>
+                                                                    <th>
+                                                                        <asp:Localize ID="locGridTarget" runat="server" meta:resourcekey="GridTargetValue" Text=""></asp:Localize></th>
+                                                                    <th>
+                                                                        <asp:Localize ID="locGridActual" runat="server" meta:resourcekey="GridMeasuredValue" Text=""></asp:Localize></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody data-template="validation-metrics-template" data-bind="source: ValidationMetrics"></tbody>
+                                                        </table>
+                                                        <br />
+                                                        <table id="tblPatchTolerance" class="k-grid k-widget k-display-block" style="width: 100%">
+                                                            <thead class="k-grid-header">
+                                                                <tr style="line-height: 25px;">
+                                                                    <th>
+                                                                        <asp:Localize ID="Localize36" runat="server" meta:resourcekey="GridPatchTolSampleName" Text="SampleName"></asp:Localize></th>
+                                                                    <th>
+                                                                        <asp:Localize ID="Localize37" runat="server" meta:resourcekey="GridTargetValue" Text="Tol"></asp:Localize></th>
+                                                                    <th>
+                                                                        <asp:Localize ID="Localize38" runat="server" meta:resourcekey="GridMeasuredValue" Text="Actual"></asp:Localize></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody data-template="patch-tolerance-template" data-bind="source: PatchTolerances"></tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div id="divMeasurementSummary">
+                                            <table id="tblMeasurementSummary" cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin: 0; width: 100%">
+                                                <tr>
+                                                    <td>
+                                                        <table cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin: 0">
+                                                            <tr class="Gray">
+                                                                <td style="font-size: 13px; width: 200px;">
+                                                                    <asp:Localize ID="locMeasurementName" runat="server" meta:resourcekey="locMeasurementNameResource1" Text=""></asp:Localize>
+                                                                </td>
+                                                                <td>
+                                                                    <span data-bind="text: MeasurementName"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="White">
+                                                                <td style="font-size: 13px;">
+                                                                    <asp:Localize Text="MeasurementID:" ID="Localize24" runat="server" meta:resourcekey="locMeasurementIDResource1"></asp:Localize>
+                                                                </td>
+                                                                <td>
+                                                                    <span data-bind="text: MeasurementId"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="Gray">
+                                                                <td style="font-size: 13px;">
+                                                                    <asp:Localize Text="Upload Date:" ID="locUploadDate" runat="server" meta:resourcekey="locUploadDateResource1"></asp:Localize>
+                                                                </td>
+                                                                <td>
+                                                                    <span data-bind="text: MeasurementDate" data-dateformat="yyyy-MM-dd"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="White">
+                                                                <td style="font-size: 13px;">
+                                                                    <asp:Localize Text="Average Δ" ID="locAverageDelta" runat="server" meta:resourcekey="locAverageDeltaResource1"></asp:Localize>
+                                                                <td>
+                                                                    <span data-bind="text: Avg_ΔE"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="Gray">
+                                                                <td style="font-size: 13px;">
+                                                                    <asp:Localize Text="Maximum Δ" ID="locMaximumDelta"
+                                                                        runat="server" meta:resourcekey="locMaximumDeltaResource1"></asp:Localize>
+                                                                    <asp:Label ID="lblMaxΔE" runat="server"></asp:Label></td>
+                                                                <td>
+                                                                    <span data-bind="text: Max_ΔE"></span>
+                                                                </td>
+                                                            </tr>
 
-                                                                    <tr class="White">
-                                                                        <td style="font-size: 13px;">
-                                                                            <asp:Localize Text="Maximum Primary Δ" runat="server"
-                                                                                ID="locMaxPrimaryDelta" meta:resourcekey="locMaxPrimaryDeltaResource1"></asp:Localize>
-                                                                        <td>
-                                                                            <span data-bind="text: Pri_ΔE"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="Gray">
-                                                                        <td style="font-size: 13px;">
-                                                                            <asp:Localize Text="Maximum Primary ΔH:"
-                                                                                ID="locMaxPrimaryDeltaH" runat="server" meta:resourcekey="locMaxPrimaryDeltaHResource1"></asp:Localize></td>
-                                                                        <td>
-                                                                            <span data-bind="text: Pri_ΔH"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="White">
-                                                                        <td style="font-size: 13px;">
-                                                                            <asp:Localize Text="Gray Average Δ"
-                                                                                ID="locGrayAvgDelta" runat="server" meta:resourcekey="locGrayAvgDeltaResource1"></asp:Localize>
-                                                                        <td>
-                                                                            <span data-bind="text: Gray_ΔE"></span>
-                                                                        </td>
-                                                                    </tr>
+                                                            <tr class="White">
+                                                                <td style="font-size: 13px;">
+                                                                    <asp:Localize Text="Maximum Primary Δ" runat="server"
+                                                                        ID="locMaxPrimaryDelta" meta:resourcekey="locMaxPrimaryDeltaResource1"></asp:Localize>
+                                                                <td>
+                                                                    <span data-bind="text: Pri_ΔE"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="Gray">
+                                                                <td style="font-size: 13px;">
+                                                                    <asp:Localize Text="Maximum Primary ΔH:"
+                                                                        ID="locMaxPrimaryDeltaH" runat="server" meta:resourcekey="locMaxPrimaryDeltaHResource1"></asp:Localize></td>
+                                                                <td>
+                                                                    <span data-bind="text: Pri_ΔH"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="White">
+                                                                <td style="font-size: 13px;">
+                                                                    <asp:Localize Text="Gray Average Δ"
+                                                                        ID="locGrayAvgDelta" runat="server" meta:resourcekey="locGrayAvgDeltaResource1"></asp:Localize>
+                                                                <td>
+                                                                    <span data-bind="text: Gray_ΔE"></span>
+                                                                </td>
+                                                            </tr>
 
-                                                                    <tr class="Gray">
-                                                                        <td style="font-size: 13px;">
-                                                                            <asp:Localize Text="10th Percentile Δ"
-                                                                                ID="loc10PercentileDelta" runat="server"
-                                                                                meta:resourcekey="loc10PercentileDeltaResource1"></asp:Localize>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span data-bind="text: PercΔE_10"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="White">
-                                                                        <td style="font-size: 13px;">
-                                                                            <asp:Localize Text="90th Percentile Δ"
-                                                                                ID="loc90PercentileDelta" runat="server"
-                                                                                meta:resourcekey="loc90PercentileDeltaResource1"></asp:Localize>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span data-bind="text: PercΔE_90"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="Gray">
-                                                                        <td style="font-size: 13px;">
-                                                                            <asp:Localize Text="95th Percentile Δ"
-                                                                                ID="loc95PercentileDelta" runat="server"
-                                                                                meta:resourcekey="loc95PercentileDeltaResource1"></asp:Localize>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span data-bind="text: PercΔE_95"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-
-
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-
+                                                            <tr class="Gray">
+                                                                <td style="font-size: 13px;">
+                                                                    <asp:Localize Text="10th Percentile Δ"
+                                                                        ID="loc10PercentileDelta" runat="server"
+                                                                        meta:resourcekey="loc10PercentileDeltaResource1"></asp:Localize>
+                                                                </td>
+                                                                <td>
+                                                                    <span data-bind="text: PercΔE_10"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="White">
+                                                                <td style="font-size: 13px;">
+                                                                    <asp:Localize Text="90th Percentile Δ"
+                                                                        ID="loc90PercentileDelta" runat="server"
+                                                                        meta:resourcekey="loc90PercentileDeltaResource1"></asp:Localize>
+                                                                </td>
+                                                                <td>
+                                                                    <span data-bind="text: PercΔE_90"></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="Gray">
+                                                                <td style="font-size: 13px;">
+                                                                    <asp:Localize Text="95th Percentile Δ"
+                                                                        ID="loc95PercentileDelta" runat="server"
+                                                                        meta:resourcekey="loc95PercentileDeltaResource1"></asp:Localize>
+                                                                </td>
+                                                                <td>
+                                                                    <span data-bind="text: PercΔE_95"></span>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                                 <div>
@@ -742,27 +744,517 @@
                                 </div>
                                 <div>
                                     <div>
-                                        <p>G7</p>
+                                        <table cellpadding="0" cellspacing="0" width="650px">
+                                            <tr>
+                                                <td valign="top" style="width: 59%">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                        <tr>
+                                                            <td class="green-title">&nbsp;
+                                                                                <asp:Localize Text="Gray Balance ΔCh" runat="server"
+                                                                                    ID="Localize12" meta:resourcekey="locGrayBalanceDeltaCHResource1"></asp:Localize>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top">
+                                                                <div id="divChartG7GrayBalanceDeltaCh"></div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td style="width: 2%;"></td>
+                                                <td style="width: 39%" valign="top">
+                                                    <div id="divGraySummaryList">
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                            <tr>
+                                                                <td class="green-title">&nbsp;
+                                                                                <asp:Localize Text="Gray  ΔCh Summary" runat="server"
+                                                                                    ID="Localize13" meta:resourcekey="locGrayDeltaCHSummaryResource1"></asp:Localize>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top" style="padding: 2px">
+                                                                    <table class="k-grid k-widget k-display-block" style="width: 100%">
+                                                                        <thead class="k-grid-header">
+                                                                            <tr style="line-height: 25px;">
+                                                                                <th>
+                                                                                    <asp:Localize Text="Metric" runat="server"
+                                                                                        ID="localGrayHeaderMetric" meta:resourcekey="GridMetricSumName"></asp:Localize></th>
+                                                                                <th>
+                                                                                    <asp:Localize Text="Tolerance" runat="server"
+                                                                                        ID="localGrayHeaderTolerance" meta:resourcekey="GridToleranceValue"></asp:Localize></th>
+                                                                                <th>
+                                                                                    <asp:Localize Text="Actual" runat="server"
+                                                                                        ID="localGrayHeaderActual" meta:resourcekey="GridMeasuredValue"></asp:Localize></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody data-template="gray-summary" data-bind="source: GrayFSummaryList"></tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table cellpadding="0" cellspacing="0" width="650px">
+                                            <tr>
+                                                <td valign="top" style="width: 59%">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                        <tr>
+                                                            <td class="green-title">&nbsp;
+                                                                                <asp:Localize Text="Black ΔL" runat="server" ID="Localize14"
+                                                                                    meta:resourcekey="locBlackDeltaLResource1"></asp:Localize>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top">
+                                                                <div id="divChartG7BlackDeltaL"></div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td style="width: 2%;"></td>
+                                                <td style="width: 39%" valign="top">
+                                                    <div id="divBlackSummaryList">
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                            <tr>
+                                                                <td class="green-title">&nbsp;
+                                                                                <asp:Localize Text="Black  ΔL Summary" runat="server"
+                                                                                    ID="Localize15" meta:resourcekey="locBlackDeltaLSummaryResource1"></asp:Localize>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top" style="padding: 2px">
+                                                                    <table class="k-grid k-widget k-display-block" style="width: 100%">
+                                                                        <thead class="k-grid-header">
+                                                                            <tr style="line-height: 25px;">
+                                                                                <th>
+                                                                                    <asp:Localize Text="Metric" runat="server"
+                                                                                        ID="localBlackHeaderMetric" meta:resourcekey="GridMetricSumName"></asp:Localize></th>
+                                                                                <th>
+                                                                                    <asp:Localize Text="Tolerance" runat="server"
+                                                                                        ID="localBlackHeaderTolerance" meta:resourcekey="GridToleranceValue"></asp:Localize></th>
+                                                                                <th>
+                                                                                    <asp:Localize Text="Actual" runat="server"
+                                                                                        ID="localBlackHeaderActual" meta:resourcekey="GridMeasuredValue"></asp:Localize></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody data-template="gray-summary" data-bind="source: BlackLSummaryList"></tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table cellpadding="0" cellspacing="0" width="650px">
+                                            <tr>
+                                                <td valign="top" style="width: 59%">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                        <tr>
+                                                            <td class="green-title">&nbsp;
+                                                                                <asp:Localize runat="server" Text="Gray ΔL" ID="Localize16"
+                                                                                    meta:resourcekey="locGrayDeltaLResource1"></asp:Localize>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top">
+                                                                <div id="divChartG7GrayDeltaL"></div>
+                                                            </td>
+                                                        </tr>
+                                                        <%--<tr>
+                                                                    <td>
+                                                                        <span style="color: Blue; font-weight: bolder;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =====</span>
+                                                                        Weighted&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                                            <span style="font-weight: bolder;">=====</span>
+                                                                        Non-Weighted
+                                                                    </td>
+                                                                </tr>--%>
+                                                    </table>
+                                                </td>
+                                                <td style="width: 2%;"></td>
+                                                <td style="width: 39%" valign="top">
+                                                    <div id="divGrayLDeltaSummaryList">
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                            <tr>
+                                                                <td class="green-title">&nbsp;
+                                                                                <asp:Localize runat="server" Text="Gray  ΔL Summary"
+                                                                                    ID="Localize17" meta:resourcekey="locGrayDeltaLSummaryResource1"></asp:Localize>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td valign="top" style="padding: 2px">
+                                                                    <table class="k-grid k-widget k-display-block" style="width: 100%">
+                                                                        <thead class="k-grid-header">
+                                                                            <tr style="line-height: 25px;">
+                                                                                <th>
+                                                                                    <asp:Localize Text="Metric" runat="server"
+                                                                                        ID="localGrayLHeaderMetric" meta:resourcekey="GridMetricSumName"></asp:Localize></th>
+                                                                                <th>
+                                                                                    <asp:Localize Text="Tolerance" runat="server"
+                                                                                        ID="localGrayLHeaderTolerance" meta:resourcekey="GridToleranceValue"></asp:Localize></th>
+                                                                                <th>
+                                                                                    <asp:Localize Text="Actual" runat="server"
+                                                                                        ID="localGrayLHeaderActual" meta:resourcekey="GridMeasuredValue"></asp:Localize></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody data-template="gray-summary" data-bind="source: GrayLSummaryList"></tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table cellpadding="0" cellspacing="0" width="650px">
+                                            <tr>
+                                                <td style="width: 49%">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                        <tr>
+                                                            <td class="green-title">&nbsp; Black NPD
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top">
+                                                                <div id="divChartG7BlackNPD"></div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td style="width: 2%;"></td>
+                                                <td style="width: 49%;">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                        <tr>
+                                                            <td class="green-title">&nbsp; Gray NPD
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div id="divChartG7GrayNPD"></div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                                 <div>
                                     <div>
-                                        <p>Gamut</p>
+                                        <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color: White;">
+                                            <tr>
+                                                <td style="width: 45%;" valign="top" class="CHARTTABLE">
+
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td class="green-title">&nbsp;
+                                                                                <asp:Localize runat="server" Text="Gamut Plot" ID="Localize4"
+                                                                                    meta:resourcekey="locGamutPlotResource1"></asp:Localize>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <table id="Table2" runat="server" cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
+                                                                    <tr id="Tr5" runat="server">
+                                                                        <td id="Td6" class="green-title" runat="server">
+                                                                            <asp:Localize ID="Localize5" runat="server" Text="a* - b* Comparison"
+                                                                                meta:resourcekey="locComparisonResource1"></asp:Localize>
+                                                                            <%--<img style="height: 22px;" src="../Images/eye_blue.png" />--%>
+                                                                            <a id="imgEyeABCompLarge" style="float: right;">
+                                                                                <asp:Image ID="Image1" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" /></a>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td align="center" valign="top">
+                                                                            <div id="kendoChartTargetVersusActualAB" style="min-height: 250px; min-width: 300px;"></div>
+                                                                            <div id="kendoChartTargetVersusActualABLargeArea">
+                                                                                <div id="kendoChartTargetVersusActualABLarge"></div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div style="padding-left: -5px;">
+                                                                                <div id="accordionNew" class="header collapsibleContainerTitle">
+                                                                                    <div>
+                                                                                        <div class="green-title">
+                                                                                            <div style="float: left">
+                                                                                            </div>
+                                                                                            <div style="float: left;">
+                                                                                                <div id="imgHeaderNew" class="expanded">
+                                                                                                    &nbsp;
+                                                                                                </div>
+                                                                                                <asp:Localize ID="Localize6" runat="server" Text="a* - b* Gamut Comparison"></asp:Localize>
+                                                                                            </div>
+                                                                                            <div class="clear">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <asp:Panel ID="panelabGamutComparisonNew" runat="server" BorderStyle="None"
+                                                                                    Width="100%" meta:resourcekey="panelabGamutComparisonResource1">
+                                                                                    <div id="kendoChartGamut_ABComparison" style="min-height: 250px; min-width: 300px;"></div>
+                                                                                </asp:Panel>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr id="Tr6" runat="server">
+                                                                        <td id="Td7" class="green-title" runat="server">
+                                                                            <asp:Localize runat="server" Text="L* Comparison" ID="Localize7"
+                                                                                meta:resourcekey="locLComparisonResource1"></asp:Localize>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr id="Tr7" runat="server">
+                                                                        <td id="Td8" align="center" valign="top" runat="server">
+                                                                            <div id="kendoChartLComaparision" style="min-height: 80px; min-width: 300px;"></div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+
+                                                <td style="width: 55%;" valign="top">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td>
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                                    <tr>
+                                                                        <td class="green-title">&nbsp;
+                                                                                            <asp:Localize runat="server" Text="Gray Balance L* a* b*"
+                                                                                                ID="Localize8" meta:resourcekey="locGrayBalanceLABResource1"></asp:Localize>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 350px;">
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div id="kendoChartLBalanceChart"></div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div id="kendoChartABalanceChart"></div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div id="kendoChartBBalanceChart"></div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <div style="display: none;">
+                                                                                            <div id="kendoChartDummy">
+                                                                                            </div>
+                                                                                            <div id="kendoChartDummyBalanceL"></div>
+                                                                                            <div id="kendoChartDummyBalanceA"></div>
+                                                                                            <div id="kendoChartDummyBalanceB"></div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                                 <div>
                                     <div>
-                                        <p>TVI</p>
+
+                                        <div id="divTVI_ISO">
+                                            <div id="tabstripTVI">
+                                                <ul>
+                                                    <li class="k-state-active">
+                                                        <asp:Localize ID="Localize9" Text="Cyan" runat="server" meta:resourcekey="locTVICyanResource1"></asp:Localize>
+                                                    </li>
+                                                    <li>
+                                                        <asp:Localize ID="Localize10" Text="Magenta" runat="server" meta:resourcekey="locTVIMagentaResource1"></asp:Localize>
+                                                    </li>
+                                                    <li>
+                                                        <asp:Localize ID="Localize11" Text="Yellow" runat="server" meta:resourcekey="locTVIYellowResource1"></asp:Localize>
+                                                    </li>
+                                                </ul>
+                                                <div>
+                                                    <div>
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                            <tr>
+                                                                <td>
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
+                                                                        <tr>
+                                                                            <td class="green-title" align="center"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td valign="top" align="center">
+                                                                                <div id="divChartTVIISO_CYAN"></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
+                                                                        <tr>
+                                                                            <td class="green-title" align="center"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div id="divChartTVIISO_Magenta"></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
+                                                                        <tr>
+                                                                            <td class="green-title" align="center"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div id="divChartTVIISO_Yellow"></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
+                                                                        <tr>
+                                                                            <td class="green-title" align="center">
+                                                                                <asp:Localize ID="Localize20" Text="Black" runat="server" meta:resourcekey="locTVIBlackResource1"></asp:Localize>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div id="divChartTVIISO_Black"></div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div>
+                                                        <div id="divTVI_Spread">
+                                                            <table cellpadding="0" cellspacing="0" width="650px">
+                                                                <tr>
+                                                                    <td valign="top" style="width: 59%">
+                                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                                            <tr>
+                                                                                <td valign="top">
+                                                                                    <div id="divChartTVISpread"></div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <table class="TDBOX" border="0" cellpadding="5" cellspacing="0" width="90%">
+                                                                                        <tr class="TRTABLEBOX">
+                                                                                            <td class="TDTABLEBOXLEFT">
+                                                                                                <b>
+                                                                                                    <asp:Localize ID="locChromVariation" Text="Chromatic Variation" runat="server" meta:resourcekey="locChromaticVariationResource1"></asp:Localize></b>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <table class="chromVariationTable">
+                                                                                                    <tr>
+                                                                                                        <th class="tdChromeVar20">20</th>
+                                                                                                        <th class="tdChromeVar25">25</th>
+                                                                                                        <th class="tdChromeVar40">40</th>
+                                                                                                        <th class="tdChromeVar50">50</th>
+                                                                                                        <th class="tdChromeVar60">60</th>
+                                                                                                        <th class="tdChromeVar75">75</th>
+                                                                                                        <th class="tdChromeVar80">80</th>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td class="tdChromeVar20">10</td>
+                                                                                                        <td class="tdChromeVar25">20</td>
+                                                                                                        <td class="tdChromeVar40">30</td>
+                                                                                                        <td class="tdChromeVar50">40</td>
+                                                                                                        <td class="tdChromeVar60">50</td>
+                                                                                                        <td class="tdChromeVar75">60</td>
+                                                                                                        <td class="tdChromeVar80">70</td>
+                                                                                                    </tr>
+                                                                                                </table>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div>
+                                                        <div id="divChartTVIISO_CMYK"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="divTVI_G7">
+                                            <table cellpadding="0" cellspacing="0" width="650px">
+                                                <tr>
+                                                    <td valign="top" style="width: 59%">
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+
+                                                            <tr>
+                                                                <td valign="top">
+                                                                    <div id="divChartTVISummaryDotGain"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div>
                                     <div>
-                                        <p>Patch Details</p>
+                                        <div id="divMeasurementPatchDetails">
+                                        </div>
+                                        <script type="text/x-kendo-template" id="templatePatchDetails">    
+                                                        <div id="divMetricSum" style="float:left;">
+                                                        <asp:Localize Text="Filter by Metric Sum:" runat="server"
+                                                                            ID="locFilterMetricSumTemplate" meta:resourcekey="locFilterMetricSumResource1"></asp:Localize>
+                                                            <input type="search" id="ddlMatricSum" style="width: 150px"/>
+                                                        </div>
+                                                        <div class="toolbar" style="float:right;">
+                                                            <button id="btnExportCGATS" class="k-button">Export to CGATS</button>
+                                                            <button id="btnExportCFX" class="k-button">Export to CFX</button>
+                                                            
+                                                        </div>
+                                        </script>
                                     </div>
                                 </div>
                                 <div>
                                     <div>
-                                        <p>Report</p>
+                                        <br />
+                                        <%--<asp:Button ID="btnGeneratePDF" ClientIDMode="Static" runat="server" Text="Generate PDF Report" />--%>
+                                        <a id="btnGeneratePDF">
+                                            <img src="Images/processbar.gif" />
+                                        </a>
+                                        <br />
                                     </div>
                                 </div>
                             </div>

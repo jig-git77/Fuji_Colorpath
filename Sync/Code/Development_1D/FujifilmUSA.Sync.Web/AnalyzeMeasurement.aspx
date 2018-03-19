@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="AnalyzeMeasurement.aspx.cs" Inherits="FujifilmUSA.Sync.Web.AnalyzeMeasurement" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="AnalyzeMeasurement.aspx.cs" Inherits="FujifilmUSA.Sync.Web.AnalyzeMeasurement" EnableEventValidation="false" %>
 <%@ Register Src="~/UserControl/AnalyzeMeasurement.ascx" TagName="Analyze" TagPrefix="uc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
