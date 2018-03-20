@@ -56,5 +56,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         int SaveSpotMeasurement(Measurement measurement);
         List<Measurement> GetSpotMeasurementsOnRunId(int optimizeRunId);
         int UpdateMeasurementByAnalyzeChartFromService(int MeasurementId, bool isUsedMeasurement, bool IsVerification = false, bool IsSync1DType = false);
+        DataTable GetSpotPatchDetailsForCMYKExport(int OptimizeRunId);
     }
 }

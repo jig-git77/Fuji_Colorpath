@@ -251,9 +251,15 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             optimizeRunBusiness.OptimizeSpotNamedColorProfile(                    
                     _viewAnalyze.OptimizeRunId,
-                    //_viewAnalyze.MeasurementId,                    
                     (int)EOptimizeRunStatus.Closed,
                     DateTime.Now);
+        }
+
+        public void GetSpotPatchDetailsForCMYKExport()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsForCMYKExport(_viewAnalyze.OptimizeRunId);
         }
     }
 }

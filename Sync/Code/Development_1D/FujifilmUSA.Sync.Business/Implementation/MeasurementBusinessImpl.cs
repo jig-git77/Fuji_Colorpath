@@ -1834,7 +1834,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public DataTable GetSpotPatchDetailsofMeasurement(int OptimizeRunId)
         {            
-            string storedProc = "CPSpot.GetPatchDetailsByOptimizeRunID_ID";
+            string storedProc = "CPSpot.GetPatchDetailsByOptimizeRunID";
 
             DataTable dtPatchDetails = new DataTable();
             Common.ImplementBusinessLogic(
@@ -1916,6 +1916,27 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementsOnRunId"));
             return measurements;
+        }
+
+        public DataTable GetSpotPatchDetailsForCMYKExport(int OptimizeRunId)
+        {
+            string storedProc = "CPSpot.GetCMYKdataByOptimizeRunID";
+
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { OptimizeRunId });
+                    if (dsMeasurements.Tables.Count > 0)
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetCMYKdataByOptimizeRunID"));
+            return dtPatchDetails;
         }
         #endregion
 

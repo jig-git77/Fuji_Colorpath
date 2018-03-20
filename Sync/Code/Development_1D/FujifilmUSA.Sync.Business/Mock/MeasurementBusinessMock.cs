@@ -194,6 +194,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+        public DataTable GetSpotPatchDetailsForCMYKExport(int OptimizeRunId)
+        {
+            return new DataTable();
+        }
         #endregion
 
         #region ITaskBase Members
