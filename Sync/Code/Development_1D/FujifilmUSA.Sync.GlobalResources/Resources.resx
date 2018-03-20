@@ -1281,4 +1281,19 @@
   <data name="Error_Invalid_GradingDetails" xml:space="preserve">
     <value>Invalid Grading details have been provided.</value>
   </data>
+  <data name="actualTVI" xml:space="preserve">
+    <value>Actual TVI:</value>
+  </data>
+  <data name="patchMetricsText" xml:space="preserve">
+    <value>Patch Metrics</value>
+  </data>
+  <data name="targetTVI" xml:space="preserve">
+    <value>Target TVI:</value>
+  </data>
+  <data name="TVIThr" xml:space="preserve">
+    <value>TVI Threashold</value>
+  </data>
+  <data name="percentPatchMetrics" xml:space="preserve">
+    <value>% Patch Metrics</value>
+  </data>
 </root>

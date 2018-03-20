@@ -286,11 +286,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Div_Opt_Header.Visible = true;
 
                     td1DSmoothing.Visible = true;  //Display in Sync1D for Smoothing measurements (Commented out for temporary untill get decided to use this feature)
-                    if (ValidationType == 1)  //G7 type
-                    {
-                        //dvTab_G7.Visible = Tab_G7.Visible = true;
-                        tdAverageOfMeasurements.Visible = true; //Display in Sync1D G7 mode for Averaging measurements
-                    }
+                    //if (ValidationType == 1)  //G7 type
+                    //{
+                    //    //dvTab_G7.Visible = Tab_G7.Visible = true;
+                    //    //tdAverageOfMeasurements.Visible = true; //Display in Sync1D G7 mode for Averaging measurements
+                    //}
 
                 }
                 else

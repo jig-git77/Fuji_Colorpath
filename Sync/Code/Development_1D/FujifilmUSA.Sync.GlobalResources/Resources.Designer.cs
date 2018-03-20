@@ -79,6 +79,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actual TVI:.
+        /// </summary>
+        internal static string actualTVI {
+            get {
+                return ResourceManager.GetString("actualTVI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete all information of selected measurement?.
         /// </summary>
         internal static string AddMeasurement_DeleteMeasurement_Confirmation {
@@ -3256,6 +3265,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Patch Metrics.
+        /// </summary>
+        internal static string patchMetricsText {
+            get {
+                return ResourceManager.GetString("patchMetricsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete selected patch preset?.
         /// </summary>
         internal static string PatchPresetManagement_DeletePatchPreset_Confirmation {
@@ -3297,6 +3315,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string PCSDataTypes_XYZ {
             get {
                 return ResourceManager.GetString("PCSDataTypes_XYZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to % Patch Metrics.
+        /// </summary>
+        internal static string percentPatchMetrics {
+            get {
+                return ResourceManager.GetString("percentPatchMetrics", resourceCulture);
             }
         }
         
@@ -3418,6 +3445,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Target TVI:.
+        /// </summary>
+        internal static string targetTVI {
+            get {
+                return ResourceManager.GetString("targetTVI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click here to sort.
         /// </summary>
         internal static string ToolTipClickToShort {
@@ -3441,6 +3477,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string tripletText {
             get {
                 return ResourceManager.GetString("tripletText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TVI Threashold.
+        /// </summary>
+        internal static string TVIThr {
+            get {
+                return ResourceManager.GetString("TVIThr", resourceCulture);
             }
         }
         

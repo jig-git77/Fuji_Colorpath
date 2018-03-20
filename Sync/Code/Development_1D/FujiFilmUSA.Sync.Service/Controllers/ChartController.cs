@@ -110,6 +110,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("gridAnalyzeHeaderDelta_HResource", "gridAnalyzeHeaderDelta_HResource");
             _resourceValues.Add("gridAnalyzeHeaderDelta_CHResource", "gridAnalyzeHeaderDelta_CHResource");
             _resourceValues.Add("gridAnalyzeHeaderDelta_LResource", "gridAnalyzeHeaderDelta_LResource");
+            _resourceValues.Add("_recPatchMetrics", "patchMetricsText");
+            _resourceValues.Add("_recactualTVI", "actualTVI");
+            _resourceValues.Add("_rectargetTVI", "targetTVI");
+            _resourceValues.Add("_recTVIThr", "TVIThr");
+            _resourceValues.Add("_recpercentPatchMetrics", "percentPatchMetrics");
             _resourceValues.Add("selectMeasurementMsg", "selectMeasurementMsg");
 
 

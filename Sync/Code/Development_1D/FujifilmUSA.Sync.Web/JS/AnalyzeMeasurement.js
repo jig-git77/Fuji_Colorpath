@@ -199,7 +199,7 @@ $(document).ready(function () {
     $hdnValidationType = isNaN(parseInt($('#hdnValidationType').val())) ? 0 : parseInt($('#hdnValidationType').val());
     $hdnCurrentDlpSubOperation = parseInt($('#hdnCurrentDlpSubOperation').val());
     $hdnReportDLPName = $('#hdnReportDLPName').val();
-    $isAverageOfMeasurements = $('#ContentPlaceHolder1_ucAnalyze_chkAnalyzeAverageOfMeasurements').is(':checked');
+    $isAverageOfMeasurements = $('#chkAnalyzeAverageOfMeasurements').is(':checked');
     $hdMeasurement = $('#ContentPlaceHolder1_ucAnalyze_hdMeasurement');
     $hdnProjectID = $('#hdnProjectID').val();
     $hdnOptimizationRunID = $('#hdnOptimizationRunID').val();
@@ -613,6 +613,11 @@ function BindMeasurementSummary() {
 
                                 //Bind TVI charts
                                 BindTVICharts();
+
+                                //show average measurement checkbox
+                                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) {
+                                    $('#ContentPlaceHolder1_ucAnalyze_tdAverageOfMeasurements').css('display', 'block');
+                                }
                             }
                         }
                     }
@@ -1366,13 +1371,8 @@ function BindTVICharts() {
                     PopulateTVIG7CMYKChart();
                     PopulateTVISpreadChart();
 
-                    //$('#chromVariationTable').find('#spnChromeVar20').html(response.data.DTMaxSpreadChartDataList[0].Tone25);
-                    //$('#chromVariationTable #spnChromeVar25').html(response.data.DTMaxSpreadChartDataList[0].Tone25);
-                    //$('#chromVariationTable #spnChromeVar40').html(response.data.DTMaxSpreadChartDataList.Tone25);
-                    //$('#chromVariationTable #spnChromeVar50').html(response.data.DTMaxSpreadChartDataList.Tone25);
-                    //$('#chromVariationTable #spnChromeVar60').html(response.data.DTMaxSpreadChartDataList.Tone25);
-                    //$('#chromVariationTable #spnChromeVar75').html(response.data.DTMaxSpreadChartDataList.Tone25);
-                    //$('#chromVariationTable #spnChromeVar80').html(response.data.DTMaxSpreadChartDataList.Tone25);
+                    var spreadStatesViewModel = response.data.DTMaxSpreadChartDataList[0];
+                    kendo.bind($('#chromVariationTable'), spreadStatesViewModel);
                 }
                 //kendo.ui.progress($chartLoader, false);
             },
@@ -3231,6 +3231,17 @@ function PopulateG7Charts() {
         },
         dataSource: jsonGrayFChartList,
         series: [{
+            name: "Weighted",
+            xField: "Cmyk_Value",
+            yField: "wΔValue",
+            color: "Blue",
+            markers: { background: "Blue", size: 4 },
+            tooltip: {
+                visible: true,
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+            }
+        },
+        {
             xField: "Cmyk_Value",
             yField: "ΔValue",
             color: "Black",
@@ -3240,21 +3251,9 @@ function PopulateG7Charts() {
             //},
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
             }
-        },
-        {
-            name: "Weighted",
-            xField: "Cmyk_Value",
-            yField: "wΔValue",
-            color: "Blue",
-            markers: { background: "Blue", size: 4 },
-            tooltip: {
-                visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
-            }
-        },
-        {
+        }, {
             name: "Non-Weighted",
             xField: "Cmyk_Value",
             yField: "ΔLimit",
@@ -3311,40 +3310,41 @@ function PopulateG7Charts() {
             style: "smooth"
         },
         dataSource: jsonBlackLChartList,
-        series: [{
-            name: "Non-Weighted",
-            xField: "Cmyk_Value",
-            yField: "ΔValue",
-            color: "Black",
-            markers: { background: "Black", size: 4 },
-            //highlight: {
-            //    visible: false
-            //},
-            tooltip: {
-                visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+        series: [
+            {
+                name: "Weighted",
+                xField: "Cmyk_Value",
+                yField: "wΔValue",
+                color: "Blue",
+                markers: { background: "Blue", size: 4 },
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
+                }
+            },
+            {
+                name: "Non-Weighted",
+                xField: "Cmyk_Value",
+                yField: "ΔValue",
+                color: "Black",
+                markers: { background: "Black", size: 4 },
+                //highlight: {
+                //    visible: false
+                //},
+                tooltip: {
+                    visible: true,
+                    template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+                }
+            },
+            {
+                xField: "Cmyk_Value",
+                yField: "ΔLimit",
+                color: "Red",
+                markers: { background: "Red", size: 0 },
+                highlight: {
+                    visible: false
+                }
             }
-        },
-        {
-            name: "Weighted",
-            xField: "Cmyk_Value",
-            yField: "wΔValue",
-            color: "Blue",
-            markers: { background: "Blue", size: 4 },
-            tooltip: {
-                visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
-            }
-        },
-        {
-            xField: "Cmyk_Value",
-            yField: "ΔLimit",
-            color: "Red",
-            markers: { background: "Red", size: 0 },
-            highlight: {
-                visible: false
-            }
-        }
         ],
         xAxis: {
             name: "xAxis",
@@ -3410,7 +3410,7 @@ function PopulateG7Charts() {
             markers: { background: "Blue", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
             }
         },
         {
@@ -3424,7 +3424,7 @@ function PopulateG7Charts() {
             //},
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
             }
         },
         {
@@ -3497,7 +3497,7 @@ function PopulateG7Charts() {
                 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Black Target NPD  #= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> G7NPDC:  #= dataItem.ΔLimit #</td></tr></table>'
+                    template: '<table><tr><td><center><b>Black Target NPD  #= dataItem.Cmyk_Value.toFixed() #% ' + _Resources._recPatchMetrics + '</b></center><td></tr><tr><td> G7NPDC:  #= dataItem.ΔLimit #</td></tr></table>'
                 }
             },
             {
@@ -3510,7 +3510,7 @@ function PopulateG7Charts() {
                 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Black Actual NPD  #= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> G7NPDC Actual:  #= dataItem.ΔValue #</td></tr></table>'
+                    template: '<table><tr><td><center><b>Black Actual NPD  #= dataItem.Cmyk_Value.toFixed() #% ' + _Resources._recPatchMetrics + '</b></center><td></tr><tr><td> G7NPDC Actual:  #= dataItem.ΔValue #</td></tr></table>'
                 }
             }
         ],
@@ -3574,7 +3574,7 @@ function PopulateG7Charts() {
                 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Gray Target NPD  #= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> G7NPDC:  #= dataItem.ΔLimit #</td></tr></table>'
+                    template: '<table><tr><td><center><b>Gray Target NPD  #= dataItem.Cmyk_Value.toFixed() #% ' + _Resources._recPatchMetrics + '</b></center><td></tr><tr><td> G7NPDC:  #= dataItem.ΔLimit #</td></tr></table>'
                 }
             },
             {
@@ -3587,7 +3587,7 @@ function PopulateG7Charts() {
                 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Gray Actual NPD  #= dataItem.Cmyk_Value.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> G7NPDC Actual:  #= dataItem.ΔValue #</td></tr></table>'
+                    template: '<table><tr><td><center><b>Gray Actual NPD  #= dataItem.Cmyk_Value.toFixed() #% ' + _Resources._recPatchMetrics + '</b></center><td></tr><tr><td> G7NPDC Actual:  #= dataItem.ΔValue #</td></tr></table>'
                 }
             }
         ],
@@ -3838,7 +3838,7 @@ function PopulateTVIISOChart() {
                 markers: { background: "Cyan" },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Target TVI:  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> TVI Threashhold:  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + Resources._recCyan + ' #= dataItem.CmykC.toFixed() #% ' + _Resources._recPatchMetrics + '</b></center><td></tr><tr><td> ' + _Resources._recactualTVI + '  #= dataItem.DotGain #%</td></tr><tr><td> ' + _Resources._rectargetTVI + '  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> ' + _Resources._recTVIThr + '  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
                 }
             }
         ],
@@ -3903,7 +3903,8 @@ function PopulateTVIISOChart() {
                 markers: { background: "Magenta" },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Target TVI:  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> TVI Threashhold:  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
+                    //template: '<table><tr><td><center><b>Cyan #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Target TVI:  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> TVI Threashhold:  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + Resources._recMagenta + ' #= dataItem.CmykM.toFixed() #% ' + _Resources._recPatchMetrics + '</b></center><td></tr><tr><td> ' + _Resources._recactualTVI + '  #= dataItem.DotGain #%</td></tr><tr><td> ' + _Resources._rectargetTVI + '  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> ' + _Resources._recTVIThr + '  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
                 }
             }
         ],
@@ -3968,7 +3969,8 @@ function PopulateTVIISOChart() {
                 markers: { background: "Yellow" },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Target TVI:  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> TVI Threashhold:  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
+                    //template: '<table><tr><td><center><b>Cyan #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Target TVI:  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> TVI Threashhold:  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + Resources._recYellow + ' #= dataItem.CmykY.toFixed() #% ' + _Resources._recPatchMetrics + '</b></center><td></tr><tr><td> ' + _Resources._recactualTVI + '  #= dataItem.DotGain #%</td></tr><tr><td> ' + _Resources._rectargetTVI + '  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> ' + _Resources._recTVIThr + '  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
                 }
             }
         ],
@@ -4032,7 +4034,8 @@ function PopulateTVIISOChart() {
                 markers: { background: "Black" },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykK.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Target TVI:  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> TVI Threashhold:  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
+                    //template: '<table><tr><td><center><b>Cyan #= dataItem.CmykK.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Target TVI:  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> TVI Threashhold:  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + Resources._recBlack + ' #= dataItem.CmykK.toFixed() #% ' + _Resources._recPatchMetrics + '</b></center><td></tr><tr><td> ' + _Resources._recactualTVI + '  #= dataItem.DotGain #%</td></tr><tr><td> ' + _Resources._rectargetTVI + '  #= kendo.toString(dataItem.TargetDotGain, "n") #%</td></tr><tr><td> ' + _Resources._recTVIThr + '  #= kendo.toString(dataItem.Threshold, "n") #%</td></tr></table>'
                 }
             }
         ],
@@ -4106,7 +4109,8 @@ function PopulateTVIG7CMYKChart() {
                 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #</td></tr></table>'
+                    //template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + Resources._recCyan + ' #= dataItem.CmykC.toFixed() #% ' + _Resources._recPatchMetrics + '</b></center><td></tr><tr><td> ' + _Resources._recactualTVI + '  #= dataItem.DotGain #</td></tr></table>'
                 },
                 line: {
                     width: 5
@@ -4128,7 +4132,8 @@ function PopulateTVIG7CMYKChart() {
                 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #</td></tr></table>'
+                    //template: '<table><tr><td><center><b>Cyan #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + Resources._recMagenta + ' #= dataItem.CmykM.toFixed() #% ' + _Resources._recPatchMetrics + '</b></center><td></tr><tr><td> ' + _Resources._recactualTVI + '  #= dataItem.DotGain #</td></tr></table>'
                 },
                 highlight: {
                     visible: false
@@ -4150,7 +4155,8 @@ function PopulateTVIG7CMYKChart() {
                 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #</td></tr></table>'
+                    //template: '<table><tr><td><center><b>Cyan #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + Resources._recYellow + ' #= dataItem.CmykY.toFixed() #% ' + _Resources._recPatchMetrics + '</b></center><td></tr><tr><td> ' + _Resources._recactualTVI + '  #= dataItem.DotGain #</td></tr></table>'
                 },
                 highlight: {
                     visible: false
@@ -4164,7 +4170,8 @@ function PopulateTVIG7CMYKChart() {
                 markers: { background: "Black", size: 7 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykK.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #</td></tr></table>'
+                    //template: '<table><tr><td><center><b>Cyan #= dataItem.CmykK.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + Resources._recBlack + ' #= dataItem.CmykK.toFixed() #% ' + _Resources._recPatchMetrics + '</b></center><td></tr><tr><td> ' + _Resources._recactualTVI + '  #= dataItem.DotGain #</td></tr></table>'
                 },
                 highlight: {
                     visible: false
@@ -4205,30 +4212,6 @@ function PopulateTVIG7CMYKChart() {
             }
         },
         render: renderChartWithBackgroundByAxis
-        //render: function (e) {
-        //    var chart = e.sender;
-        //    var xAxis = chart.getAxis("xAxis");
-        //    var yAxis = chart.getAxis("yAxis");
-        //    var xAxisArray = xAxis._axis.children.map(r => parseInt(r.content));
-        //    var yAxisArray = yAxis._axis.children.map(r => parseInt(r.content));
-        //    var xSlot = xAxis.slot(Math.abs(Math.min.apply(Math, xAxisArray)), Math.abs(Math.max.apply(Math, xAxisArray)));
-        //    var ySlot = yAxis.slot(Math.abs(Math.min.apply(Math, yAxisArray)), Math.abs(Math.max.apply(Math, yAxisArray)));
-
-        //    var rect = new geometry.Rect([
-        //        // Origin X, Y
-        //        xSlot.origin.x, ySlot.origin.y
-        //    ], [
-        //            // Width, height
-        //            xSlot.width(), ySlot.height()
-        //        ]);
-
-        //    var path = drawing.Path.fromRect(rect, {
-        //        stroke: null,
-        //        fill: gradientGray
-        //    });
-
-        //    chart.surface.draw(path);
-        //}
     });
 }
 
@@ -4947,4 +4930,34 @@ function formatMeasurementDateWithTime(d) {
     seconds = seconds < 10 ? '0' + seconds : seconds;
     var strTime = month + '/' + day + '/' + year + '<br/>' + hours + ':' + minutes + ':' + seconds + ' ' + ampm;
     return strTime
+}
+
+
+function CheckAvgCompability() {
+    debugger;
+    var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
+    if (answer == "0") {        
+        var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+                
+        $isAverageOfMeasurements = $('#chkAnalyzeAverageOfMeasurements').is(':checked');
+        if ($isAverageOfMeasurements) {
+
+            if (tabStrip.select().index() == 5) {
+                tabStrip.select(0);
+            }
+            //Hide default tabs patch details
+            $(tabStrip.items()[5]).hide();
+        } else {
+            //Show default tabs patch details
+            $(tabStrip.items()[5]).show();
+        }
+        return true;
+    }
+    else if (answer == "1") {
+        jQuery("[id*='lblCompError']").html("Error in different ReferenceCharts, Please select only measurements which used same reference charts.");
+    }
+    else if (answer == "2") {
+        jQuery("[id*='lblCompError']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
+    }   
+    return false;
 }

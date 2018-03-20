@@ -1264,4 +1264,19 @@ erwünschten Format überein.</value>
   <data name="Error_Invalid_GradingDetails" xml:space="preserve">
     <value>Invalid Grading details have been provided.</value>
   </data>
+  <data name="actualTVI" xml:space="preserve">
+    <value>Aktuelle Kompensationskurve</value>
+  </data>
+  <data name="gbPatchMetricsText1" xml:space="preserve">
+    <value>% GB Meßwerte</value>
+  </data>
+  <data name="percentPatchMetrics" xml:space="preserve">
+    <value>% Patch Metrics</value>
+  </data>
+  <data name="targetTVI" xml:space="preserve">
+    <value>Ziel Kompensationskurve</value>
+  </data>
+  <data name="TVIThr" xml:space="preserve">
+    <value>Grenzwert TWZ</value>
+  </data>
 </root>

@@ -1263,4 +1263,19 @@
   <data name="Error_Invalid_GradingDetails" xml:space="preserve">
     <value>Invalid Grading details have been provided.</value>
   </data>
+  <data name="actualTVI" xml:space="preserve">
+    <value>測定値:</value>
+  </data>
+  <data name="patchMetricsText" xml:space="preserve">
+    <value>パッチ</value>
+  </data>
+  <data name="targetTVI" xml:space="preserve">
+    <value>基準値:</value>
+  </data>
+  <data name="TVIThr" xml:space="preserve">
+    <value>許容幅:</value>
+  </data>
+  <data name="percentPatchMetrics" xml:space="preserve">
+    <value>% パッチ</value>
+  </data>
 </root>

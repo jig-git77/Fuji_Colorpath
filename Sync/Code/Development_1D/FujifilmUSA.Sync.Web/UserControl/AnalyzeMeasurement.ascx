@@ -11,34 +11,24 @@
     #divMeasurementPatchDetails .k-grid td {
         line-height: 18px;
     }
+
+    .k-tabstrip > .k-content {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .k-content .k-state-active {
+        /* height: 40px; whatever height you want */
+        /*width:100px;*/
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    ​
 </style>
 <script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>
 <script src="JS/AnalyzeMeasurement.js" type="text/javascript"></script>
 
-<%--<script type="text/javascript">
-
-    function CheckAvgCompability() {
-
-        var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
-
-        if (answer == "0") {
-            setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ucAnalyze$chkAnalyzeAverageOfMeasurements\',\'\')', 0);
-            return true;
-        }
-        else if (answer == "1") {
-            jQuery("[id*='lblCompError']").html("Error in different ReferenceCharts, Please select only measurements which used same reference charts.");
-            return false;
-        }
-        else if (answer == "2") {
-            jQuery("[id*='lblCompError']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
-            return false;
-        }
-        else {
-            return false;
-        }
-    }
-
-</script>--%>
 
 <%--<script type="text/javascript">
     var previewImageCodedString = '';
@@ -197,26 +187,8 @@
 </script>--%>
 
 
-<%--<script language="javascript" type="text/javascript">
+<script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {
-        $("div[id='accordion']").click
-            (
-            function () {
-                var $panel = $("div[id*='panelabGamutComparison']");
-                var $img = $("div[id*='imgHeader']");
-                $panel.slideToggle(500);
-                if ($img.hasClass('expanded')) {
-                    $img.addClass('collapsed').removeClass('expanded');
-                }
-                else {
-                    $img.addClass('expanded').removeClass('collapsed');
-                }
-                return false;
-            }
-            );
-
-        //$("div[id='accordion']").click();
-
         $("#accordionNew").click
             (
             function () {
@@ -230,13 +202,11 @@
                     $img1.addClass('expanded').removeClass('collapsed');
                 }
                 return false;
-            }
-            );
+            });
 
-        //$("#accordionNew").click();
     });
 
-</script>--%>
+</script>
 
 <div class="contant_top">
     &nbsp;
@@ -316,10 +286,10 @@
             <td>
                 <table cellpadding="0" cellspacing="0" style="width: 100%;">
                     <tr>
-                        <td id="tdAverageOfMeasurements" runat="server" visible="false">
+                        <td id="tdAverageOfMeasurements" runat="server" style="display: none;">
                             <%--<asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server" Checked="false" EnableViewState="true"
                                 Font-Bold="true" AutoPostBack="true" OnCheckedChanged="chkAnalyzeAverageOfMeasurements_Click"></asp:CheckBox>--%>
-                            <asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server" Checked="false" EnableViewState="true"
+                            <asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server" Checked="false" EnableViewState="true" ClientIDMode="Static"
                                 Font-Bold="true"></asp:CheckBox>
                             <span style="font-weight: bold; vertical-align: text-top;">
                                 <asp:Localize runat="server" Text="Analyze Average Of Measurements" ID="LocAvgMesurment"
@@ -406,7 +376,7 @@
                                             meta:resourcekey="locGrayResource1"></asp:Localize>
                                     </li>
                                     <li>
-                                        <asp:Localize Text="Report" ID="locTVI" runat="server"
+                                        <asp:Localize Text="TVI" ID="locTVI" runat="server"
                                             meta:resourcekey="locTVIResource1"></asp:Localize>
                                     </li>
                                     <li>
@@ -418,6 +388,8 @@
                                             meta:resourcekey="locReportResource1"></asp:Localize>
                                     </li>
                                 </ul>
+
+                                <%--Measurement summary tab--%>
                                 <div>
                                     <div>
 
@@ -658,6 +630,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <%--Ink paper chart tab--%>
                                 <div>
                                     <div>
                                         <div>
@@ -742,6 +715,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <%--G7 chart tab--%>
                                 <div>
                                     <div>
                                         <table cellpadding="0" cellspacing="0" width="650px">
@@ -944,6 +918,7 @@
                                         </table>
                                     </div>
                                 </div>
+                                <%--Gamut or gray chart tab--%>
                                 <div>
                                     <div>
                                         <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color: White;">
@@ -1072,6 +1047,7 @@
                                         </table>
                                     </div>
                                 </div>
+                                <%--TVI chart tab--%>
                                 <div>
                                     <div>
 
@@ -1079,13 +1055,13 @@
                                             <div id="tabstripTVI">
                                                 <ul>
                                                     <li class="k-state-active">
-                                                        <asp:Localize ID="Localize9" Text="Cyan" runat="server" meta:resourcekey="locTVICyanResource1"></asp:Localize>
+                                                        <asp:Localize ID="Localize9" Text="TVI" runat="server" meta:resourcekey="btnTVIResource1"></asp:Localize>
                                                     </li>
                                                     <li>
-                                                        <asp:Localize ID="Localize10" Text="Magenta" runat="server" meta:resourcekey="locTVIMagentaResource1"></asp:Localize>
+                                                        <asp:Localize ID="Localize10" Text="Spread" runat="server" meta:resourcekey="btnSpreadResource1"></asp:Localize>
                                                     </li>
                                                     <li>
-                                                        <asp:Localize ID="Localize11" Text="Yellow" runat="server" meta:resourcekey="locTVIYellowResource1"></asp:Localize>
+                                                        <asp:Localize ID="Localize11" Text="CMYK" runat="server" meta:resourcekey="btnCMYKResource1"></asp:Localize>
                                                     </li>
                                                 </ul>
                                                 <div>
@@ -1095,11 +1071,14 @@
                                                                 <td>
                                                                     <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
                                                                         <tr>
-                                                                            <td class="green-title" align="center"></td>
+                                                                            <td class="green-title" align="center">
+                                                                                <asp:Localize ID="Localize1" Text="Cyan" runat="server" meta:resourcekey="locTVICyanResource1"></asp:Localize>
+                                                                            </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td valign="top" align="center">
-                                                                                <div id="divChartTVIISO_CYAN"></div>
+                                                                                <div id="divChartTVIISO_CYAN">
+                                                                                </div>
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -1107,7 +1086,9 @@
                                                                 <td>
                                                                     <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
                                                                         <tr>
-                                                                            <td class="green-title" align="center"></td>
+                                                                            <td class="green-title" align="center">
+                                                                                <asp:Localize ID="Localize39" Text="Magenta" runat="server" meta:resourcekey="locTVIMagentaResource1"></asp:Localize>
+                                                                            </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
@@ -1121,11 +1102,14 @@
                                                                 <td>
                                                                     <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
                                                                         <tr>
-                                                                            <td class="green-title" align="center"></td>
+                                                                            <td class="green-title" align="center">
+                                                                                <asp:Localize ID="Localize40" Text="Yellow" runat="server" meta:resourcekey="locTVIYellowResource1"></asp:Localize>
+                                                                            </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
-                                                                                <div id="divChartTVIISO_Yellow"></div>
+                                                                                <div id="divChartTVIISO_Yellow">
+                                                                                </div>
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -1162,8 +1146,8 @@
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
-                                                                                    <table class="TDBOX" border="0" cellpadding="5" cellspacing="0" width="90%">
-                                                                                        <tr class="TRTABLEBOX">
+                                                                                    <table class="TDBOX" border="0" cellpadding="5" cellspacing="0" width="100%" style="text-align: center;">
+                                                                                        <tr class="TRTABLEBOX" style="line-height: 30px;">
                                                                                             <td class="TDTABLEBOXLEFT">
                                                                                                 <b>
                                                                                                     <asp:Localize ID="locChromVariation" Text="Chromatic Variation" runat="server" meta:resourcekey="locChromaticVariationResource1"></asp:Localize></b>
@@ -1171,24 +1155,24 @@
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>
-                                                                                                <table class="chromVariationTable">
+                                                                                                <table id="chromVariationTable" width="100%" style="line-height: 20px;">
                                                                                                     <tr>
-                                                                                                        <th class="tdChromeVar20">20</th>
-                                                                                                        <th class="tdChromeVar25">25</th>
-                                                                                                        <th class="tdChromeVar40">40</th>
-                                                                                                        <th class="tdChromeVar50">50</th>
-                                                                                                        <th class="tdChromeVar60">60</th>
-                                                                                                        <th class="tdChromeVar75">75</th>
-                                                                                                        <th class="tdChromeVar80">80</th>
+                                                                                                        <th data-bind="visible: Tone20 != 0">20</th>
+                                                                                                        <th data-bind="visible: Tone25 != 0">25</th>
+                                                                                                        <th data-bind="visible: Tone40 != 0">40</th>
+                                                                                                        <th data-bind="visible: Tone50 != 0">50</th>
+                                                                                                        <th data-bind="visible: Tone60 != 0">60</th>
+                                                                                                        <th data-bind="visible: Tone75 != 0">75</th>
+                                                                                                        <th data-bind="visible: Tone80 != 0">80</th>
                                                                                                     </tr>
                                                                                                     <tr>
-                                                                                                        <td class="tdChromeVar20">10</td>
-                                                                                                        <td class="tdChromeVar25">20</td>
-                                                                                                        <td class="tdChromeVar40">30</td>
-                                                                                                        <td class="tdChromeVar50">40</td>
-                                                                                                        <td class="tdChromeVar60">50</td>
-                                                                                                        <td class="tdChromeVar75">60</td>
-                                                                                                        <td class="tdChromeVar80">70</td>
+                                                                                                        <td data-bind="visible: Tone20 != 0"><span data-bind="text: Tone20"></span></td>
+                                                                                                        <td data-bind="visible: Tone25 != 0"><span data-bind="text: Tone25"></span></td>
+                                                                                                        <td data-bind="visible: Tone40 != 0"><span data-bind="text: Tone40"></span></td>
+                                                                                                        <td data-bind="visible: Tone50 != 0"><span data-bind="text: Tone50"></span></td>
+                                                                                                        <td data-bind="visible: Tone60 != 0"><span data-bind="text: Tone60"></span></td>
+                                                                                                        <td data-bind="visible: Tone75 != 0"><span data-bind="text: Tone75"></span></td>
+                                                                                                        <td data-bind="visible: Tone80 != 0"><span data-bind="text: Tone80"></span></td>
                                                                                                     </tr>
                                                                                                 </table>
                                                                                             </td>
@@ -1229,7 +1213,8 @@
 
                                     </div>
                                 </div>
-                                <div>
+                                <%--Patch details tab--%>
+                                <div class="tabcontant">
                                     <div>
                                         <div id="divMeasurementPatchDetails">
                                         </div>
@@ -1247,6 +1232,7 @@
                                         </script>
                                     </div>
                                 </div>
+                                <%--report generation tab--%>
                                 <div>
                                     <div>
                                         <br />
