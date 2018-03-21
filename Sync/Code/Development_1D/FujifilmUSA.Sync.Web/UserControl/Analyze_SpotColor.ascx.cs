@@ -27,6 +27,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string DLPName = "";
         #endregion
 
+
         #region Page Method
         protected override void OnInit(EventArgs e)
         {
@@ -56,6 +57,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     header.InnerText = GetResourceString(_recnewPrintCondition);//"New Print Condition - Analyze (No DLP)";
                     DLPName = "No NCP";
+                    BtnExportCMYK.Visible = false;  //----Don't show CMYK export button for Run-0, since there is no previous run's CMYK data to export
                 }
                 else
                 {
@@ -138,13 +140,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         listPatch.Add(patch);
                     }
                 }
-                
-                string CurveFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00");
+
+                //string CurveFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00");
+                string CMYKFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00");
+
                 string SpotName_Header, SpotName_Parameter = "";
 
                 #region Create file and download txt file for CMYK values
                 System.IO.StreamWriter sw;
-                sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CurveFileName + "_CMYKFile.txt");
+                sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName + "_CMYKFile.dbd");
                
                 for (int i = 0; i < listPatch.Count; i++)
                 {
@@ -183,18 +187,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 sw.Close();
 
-                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CurveFileName + "_CMYKFile.txt", CurveFileName + "_CMYKFile.txt");
+                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + "_CMYKFile.dbd", CMYKFileName + "_CMYKFile.dbd");
                 #endregion
             }
         }
+        #endregion
 
 
+        #region Methods
         double GetNdensity(double Lab_L)
         {
             double var_Y;
             if ((Lab_L > 8))
             {
-                var_Y = (100 * Math.Pow(((Lab_L + 16) / 116) ,3));
+                var_Y = (100 * Math.Pow(((Lab_L + 16) / 116), 3));
             }
             else
             {
@@ -210,10 +216,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return 0;
             }
         }
-
-
-        #endregion
-
 
         public bool IsNewNCP
         {
@@ -231,6 +233,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get { return SessionManager.Instance.CurrentOptimizeRun.HasProfile; }
         }
+        #endregion
+
 
         #region IViewAnalyze Members
 
