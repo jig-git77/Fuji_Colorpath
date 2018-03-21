@@ -574,11 +574,16 @@ function BindMeasurementSummary() {
                         $hdnValidationType = measurement.ValidationType;
 
                         var viewModel = kendo.observable(measurement);
+                        viewModel.isSync1DLicenseType = !($hdnCurrentDlpSubOperation == ELicenseType.Sync1D);
+                        viewModel.isCurrentDlpSubOperation = ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) ? ($hdnCurrentDlpSubOperation == ELicenseType.Validation) ? true : false : true;
+
+
                         if (measurements[0].PatchTolerances == null || measurements[0].PatchTolerances.length == 0) {
 
                             $('#tblPatchTolerance').css('display', 'none');
                         }
                         kendo.bind($("#divValidationSummary"), viewModel);
+                        $('#tblAverageMeasurementSummary').css('display', 'none');
 
                         if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1D) {
 
@@ -4932,13 +4937,13 @@ function formatMeasurementDateWithTime(d) {
     return strTime
 }
 
-
+////**************** METHOD TO CHECK AVG COMPATIBILITY  ****************////
 function CheckAvgCompability() {
     debugger;
     var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
-    if (answer == "0") {        
+    if (answer == "0") {
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
-                
+
         $isAverageOfMeasurements = $('#chkAnalyzeAverageOfMeasurements').is(':checked');
         if ($isAverageOfMeasurements) {
 
@@ -4947,9 +4952,17 @@ function CheckAvgCompability() {
             }
             //Hide default tabs patch details
             $(tabStrip.items()[5]).hide();
+
+            //show average measurement summary tab
+            $('#tblAverageMeasurementSummary').css('display', 'block');
+            $('#tblValidationSummary').css('display', 'none');
+
         } else {
             //Show default tabs patch details
             $(tabStrip.items()[5]).show();
+            $('#tblAverageMeasurementSummary').css('display', 'none');
+            //$('#tblValidationSummary').css('display', 'block');
+            $('#tblValidationSummary').css('display', 'block');
         }
         return true;
     }
@@ -4958,6 +4971,6 @@ function CheckAvgCompability() {
     }
     else if (answer == "2") {
         jQuery("[id*='lblCompError']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
-    }   
+    }
     return false;
 }

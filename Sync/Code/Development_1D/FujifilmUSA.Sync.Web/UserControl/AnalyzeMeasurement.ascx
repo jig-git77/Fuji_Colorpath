@@ -303,7 +303,8 @@
                                 Font-Bold="true" AutoPostBack="true"
                                 OnCheckedChanged="chk1DMeasurementSmoothing_CheckedChanged"></asp:CheckBox>--%>
                             <asp:CheckBox ID="chk1DMeasurementSmoothing" runat="server" Checked="false" EnableViewState="true"
-                                Font-Bold="true"></asp:CheckBox>
+                                Font-Bold="true" AutoPostBack="true"
+                                OnCheckedChanged="chk1DMeasurementSmoothing_CheckedChanged"></asp:CheckBox>
                             <span style="font-weight: bold; vertical-align: text-top;">
                                 <asp:Localize runat="server" Text="Enable output smoothing" ID="Localize2"></asp:Localize>
                             </span>
@@ -398,16 +399,16 @@
                                             <table style="width: 100%; border-collapse: collapse;">
                                                 <tr>
                                                     <td valign="top" style="width: 63%; border: 1px Solid Gray;">
-                                                        <table class="Validation_Summary" style="width: 100%">
+                                                        <table id="tblValidationSummary" class="Validation_Summary">
                                                             <tr class="Gray">
-                                                                <td class="Summary_Left" style="width: 150px;">
+                                                                <td class="Summary_Left" style="width: 35%;">
                                                                     <asp:Localize ID="Localize25" runat="server" meta:resourcekey="ValidationSummaryMeasurementName"></asp:Localize>
                                                                 </td>
-                                                                <td class="Summary_Right">
+                                                                <td class="Summary_Right" style="width: 65%;">
                                                                     <span data-bind="text: MeasurementName"></span>
                                                                 </td>
                                                             </tr>
-                                                            <tr>
+                                                            <tr data-bind="visible: isCurrentDlpSubOperation">
                                                                 <td class="Summary_Left_Alt">
                                                                     <asp:Localize ID="Localize26" runat="server" meta:resourcekey="ValidationSummaryStatus"></asp:Localize>
                                                                 </td>
@@ -447,7 +448,7 @@
                                                                     <span data-format="MM/dd/yyyy HH:mm:ss tt" data-bind="text: MeasurementDateFormatted"></span>
                                                                 </td>
                                                             </tr>
-                                                            <tr id="rowCustomer">
+                                                            <tr id="rowCustomer" data-bind="visible: isCurrentDlpSubOperation">
                                                                 <td class="Summary_Left">
                                                                     <asp:Localize ID="Localize32" runat="server" meta:resourcekey="ValidationSummaryCustomer"></asp:Localize>
                                                                 </td>
@@ -463,7 +464,7 @@
                                                                     <span data-bind="text: dEMethod"></span>
                                                                 </td>
                                                             </tr>
-                                                            <tr id="rowPageSurface">
+                                                            <tr id="rowPageSurface" data-bind="visible: isSync1DLicenseType">
                                                                 <td class="Summary_Left">
                                                                     <asp:Localize ID="Localize29" runat="server" meta:resourcekey="ValidationSummaryPageSurface"></asp:Localize>
                                                                 </td>
@@ -471,7 +472,7 @@
                                                                     <span data-bind="text: PageOrSurface"></span>
                                                                 </td>
                                                             </tr>
-                                                            <tr id="rowJobID">
+                                                            <tr id="rowJobID" data-bind="visible: isSync1DLicenseType">
                                                                 <td class="Summary_Left_Alt">
                                                                     <asp:Localize ID="Localize34" runat="server" meta:resourcekey="ValidationSummaryJobID"></asp:Localize>
                                                                 </td>
@@ -479,12 +480,19 @@
                                                                     <span data-bind="text: JDFJobId"></span>
                                                                 </td>
                                                             </tr>
-                                                            <tr id="rowNotes">
+                                                            <tr id="rowNotes" data-bind="visible: isCurrentDlpSubOperation">
                                                                 <td class="Summary_Left">
                                                                     <asp:Localize ID="Localize35" runat="server" meta:resourcekey="ValidationSummaryNotes"></asp:Localize>
                                                                 </td>
                                                                 <td class="Summary_Right">
                                                                     <span data-bind="text: Notes"></span>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table id="tblAverageMeasurementSummary" class="Validation_Summary" style="width: 100%; display: none;">
+                                                            <tr class="Gray">
+                                                                <td style="width: 100%;">
+                                                                    <span>Averaging all measurements!</span>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -630,6 +638,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <%--Ink paper chart tab--%>
                                 <div>
                                     <div>
@@ -715,6 +724,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <%--G7 chart tab--%>
                                 <div>
                                     <div>
@@ -918,6 +928,7 @@
                                         </table>
                                     </div>
                                 </div>
+
                                 <%--Gamut or gray chart tab--%>
                                 <div>
                                     <div>
@@ -1047,6 +1058,7 @@
                                         </table>
                                     </div>
                                 </div>
+
                                 <%--TVI chart tab--%>
                                 <div>
                                     <div>
@@ -1213,6 +1225,7 @@
 
                                     </div>
                                 </div>
+
                                 <%--Patch details tab--%>
                                 <div class="tabcontant">
                                     <div>
@@ -1232,6 +1245,7 @@
                                         </script>
                                     </div>
                                 </div>
+
                                 <%--report generation tab--%>
                                 <div>
                                     <div>
@@ -1253,7 +1267,9 @@
     <div class="clear">
     </div>
 </div>
-
+<div class="contant_bottom">
+    &nbsp;
+</div>
 
 
 

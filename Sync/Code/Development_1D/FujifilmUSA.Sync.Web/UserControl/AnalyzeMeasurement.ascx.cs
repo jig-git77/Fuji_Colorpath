@@ -385,6 +385,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
             Response.Redirect(string.Format("COMeasurement.aspx?id={0}", Guid.NewGuid()));
         }
+        protected void chk1DMeasurementSmoothing_CheckedChanged(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentProject.Is1DMeasurementSmoothing = chk1DMeasurementSmoothing.Checked;
+        }
         #endregion
 
         #region Properties
