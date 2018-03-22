@@ -18,11 +18,12 @@ using System.Web.Http.Controllers;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
-    public class ChartController : BaseController, IViewAnalyze, IViewReportCMYKDensity
+    public class ChartController : BaseController, IViewAnalyze, IViewReportCMYKDensity, IViewExport
     {
         #region Variable Declarations
         private PresenterAnalyze _presenterAnalyze;
         private PresenterReportCMYKDensity _presenterReportCMYKDensity;
+        private PresenterExport _presenterExport;
         private Dictionary<string, string> _resourceValues { get; set; }
         private Dictionary<string, string> _globalResourceValues { get; set; }
         private const string _InvalidMeasurementId = "Error_Invalid_MeasurementId";
@@ -31,6 +32,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private const string _InvalidIsSync1DTypeProject = "Error_Invalid_IsSync1DTypeProject";
         private const string _InvalidDeltaEValue = "Error_Invalid_DeltaEValue";
         private const string _InvalidValidationType = "Error_Invalid_ValidationType";
+        private const string _InvalidOptimizationRunID = "Error_Invalid_OptimizationRunID";
+        private const string _InvalidCurveType = "Error_Invalid_CurveType";
 
         #endregion
 
@@ -38,6 +41,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         {
             _presenterAnalyze = new PresenterAnalyze(this);
             _presenterReportCMYKDensity = new PresenterReportCMYKDensity(this);
+            _presenterExport = new PresenterExport(this);
             _globalResourceValues = new Dictionary<string, string>();
             _resourceValues = new Dictionary<string, string>();
             _resourceValues.Add("_recgbPatchMetrics", "gbPatchMetricsText");
@@ -423,7 +427,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.From_ΔE = fromDeltaE;
 
                     _presenterAnalyze.GetInkPaperChart();
-                    var str = JsonConvert.SerializeObject(DTDeltaEPrimaryPatches);
                     GenerateResources();
                     httpResponse.Data = new
                     {
@@ -1161,7 +1164,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (OptimizationRunId == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -1207,6 +1210,63 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             return actionResult;
         }
+
+        [HttpGet]
+        public IHttpActionResult GenerateCurveChart(int? OptimizationRunId, int? CurveType)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                if (OptimizationRunId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
+
+                if (CurveType == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidCurveType);
+
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    DetermineCulture();
+                    this.OptimizeRunId = Convert.ToInt32(OptimizationRunId);
+                    this.CurveTypeId = Convert.ToInt16(CurveType);
+                    _presenterExport.GetCurveData();
+                    var str = JsonConvert.SerializeObject(CurveData.CurveExportView);
+                    var str1 = JsonConvert.SerializeObject(CurveData.CurveDeltaRefView);
+                    var str2 = JsonConvert.SerializeObject(CurveData.CurveDeltaPrevRunView);
+                    GenerateResources();
+                    httpResponse.Data = new
+                    {
+                        CurveExportView = CurveData.CurveExportView,
+                        CurveDeltaRefView = CurveData.CurveDeltaRefView,
+                        CurveDeltaPrevRunView = CurveData.CurveDeltaPrevRunView,
+                        GlobalResources = _globalResourceValues
+                    };
+
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
 
         [HttpGet]
         public HttpResponseMessage DownloadFile(string filePath)
@@ -1483,6 +1543,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public DataTable DSDensity_M { get; set; }
         public DataTable DSDensity_Y { get; set; }
         public DataTable DSDensity_K { get; set; }
+        #endregion
+
+        #region IViewExport Members
+        public byte[] ChartPreview { get; set; }
+        public byte[] SourceProfile { get; set; }
+        public short ReferenceChartTypeId { get; set; }
+        public short CurveTypeId { get; set; }
+        public FujifilmUSA.Sync.Business.Messages.CurveDataResponse CurveData { get; set; }
         #endregion
     }
 }

@@ -1296,4 +1296,13 @@
   <data name="percentPatchMetrics" xml:space="preserve">
     <value>% Patch Metrics</value>
   </data>
+  <data name="Error_Invalid_CurveType" xml:space="preserve">
+    <value>Invalid curve type value has been provided.</value>
+  </data>
+  <data name="Error_Invalid_OptimizationRunID" xml:space="preserve">
+    <value>Invalid OptimizationRun id value has been provided.</value>
+  </data>
+  <data name="Error_Invalid_ValidationType" xml:space="preserve">
+    <value>Invalid validation type value has been provided.</value>
+  </data>
 </root>

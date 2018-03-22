@@ -124,6 +124,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FujifilmUSA.Sync.Business\FujifilmUSA.Sync.Business.csproj">
+      <Project>{71a9790f-c074-413d-8e34-4c7321bd06e9}</Project>
+      <Name>FujifilmUSA.Sync.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj">
       <Project>{b791085b-2607-458f-b9aa-5ddc581589af}</Project>
       <Name>FujifilmUSA.Sync.Common</Name>

@@ -2185,6 +2185,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid curve type value has been provided..
+        /// </summary>
+        internal static string Error_Invalid_CurveType {
+            get {
+                return ResourceManager.GetString("Error_Invalid_CurveType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid Delta E value has been provided..
         /// </summary>
         internal static string Error_Invalid_DeltaEValue {
@@ -2239,11 +2248,29 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid OptimizationRun id value has been provided..
+        /// </summary>
+        internal static string Error_Invalid_OptimizationRunID {
+            get {
+                return ResourceManager.GetString("Error_Invalid_OptimizationRunID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid ProjectId has been provided..
         /// </summary>
         internal static string Error_Invalid_ProjectId {
             get {
                 return ResourceManager.GetString("Error_Invalid_ProjectId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid validation type value has been provided..
+        /// </summary>
+        internal static string Error_Invalid_ValidationType {
+            get {
+                return ResourceManager.GetString("Error_Invalid_ValidationType", resourceCulture);
             }
         }
         
