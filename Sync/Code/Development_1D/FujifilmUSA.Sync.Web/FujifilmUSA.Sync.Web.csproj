@@ -15,7 +15,7 @@
     <RootNamespace>FujifilmUSA.Sync.Web</RootNamespace>
     <AssemblyName>FujifilmUSA.Sync.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -917,6 +917,7 @@
     <Content Include="JS\AnalyzeMeasurement.js" />
     <Content Include="JS\Common.js" />
     <Content Include="JS\DYMO_Label_Framework_2_0_2.js" />
+    <Content Include="JS\Export.js" />
     <Content Include="JS\GlobalResource.fr-FR.js" />
     <Content Include="JS\GlobalResource.ja-JP.js" />
     <Content Include="JS\GlobalResource.de-DE.js" />
@@ -5330,7 +5331,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

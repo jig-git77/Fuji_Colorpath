@@ -3,6 +3,9 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxtoolkit" %>
 
+<link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
+<script src="JS/Export.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {
         $("div[id*='divAdvancedDownloadsHeader']").click
@@ -373,6 +376,54 @@
                                                     </tr>
                                                 </table>                                                  
                                                                                  
+                                                <br />
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                    <tr>
+                                                        <td colspan="2" style="padding: 5px">
+                                                            <asp:Localize ID="Localize3" runat="server"  Text="Curve Type :" meta:resourcekey="locCurveTypeResource1"></asp:Localize>
+                                                            <asp:DropDownList ID="drpCurveType" ClientIDMode="Static" runat="server" Width="120px">
+                                                                <asp:ListItem Text="1%" meta:resourcekey="onepersResource1" Value="1"></asp:ListItem>
+                                                                <asp:ListItem Text="5%" meta:resourcekey="fivepersResource1" Value="5"></asp:ListItem>
+                                                                <asp:ListItem Text="10%" meta:resourcekey="tenpersResource1" Value="10"></asp:ListItem>
+                                                                <asp:ListItem Text="Rampage" meta:resourcekey="RampageResource1" Value="15"></asp:ListItem>
+                                                                <asp:ListItem Text="XMF" meta:resourcekey="XMFResource1" Value="25"></asp:ListItem>
+                                                                <asp:ListItem Text="Harmony" meta:resourcekey="HarmonyResource1" Value="35"></asp:ListItem>
+                                                                <asp:ListItem Text="Nexus" Value="45" meta:resourcekey="NexusResource1"></asp:ListItem>                                                                
+                                                                <asp:ListItem Text="Caldera" meta:resourcekey="CalderaResource1" Value="55"></asp:ListItem>
+                                                                <asp:ListItem Text="ColorGate-TVI" meta:resourcekey="ColTVIResource1" Value="100"></asp:ListItem>
+                                                                <asp:ListItem Text="ColorGate-CGCX" meta:resourcekey="ColCGCXResource1" Value="101"></asp:ListItem>   
+                                                                <asp:ListItem Text="Onyx G7 Import" meta:resourcekey="OnyxG7ImportResource1" Value="102"></asp:ListItem>                                                           
+                                                            </asp:DropDownList>                                                                                                                        
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="border: solid 1px;">
+                                                        <td style="width: 60%">
+                                                                                                                       
+                                                        <div id="Chart_Curve"></div>
+                                                         </td>
+
+                                                         <td style="width: 40%">                                                               
+                                                              <table id="tblExport" style="width: 100%">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Reference%</th>
+                                                                            <th>C</th>
+                                                                            <th>M</th>
+                                                                            <th>Y</th>
+                                                                            <th>K</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody data-template="export-summary" data-bind="source: CurveExportView"></tbody>
+                                                                </table>                                                                   
+                                                         </td>
+                                                     </tr>
+                                                    <tr>
+                                                        <td colspan="2" align="right" style="padding-right: 15px; padding-top: 10px;">
+                                                           &nbsp;<asp:Button ID="Button2" runat="server" CssClass="BUTTON" Text="Export Curves"
+                                                                                                                OnClick="BtnExportCurvesExportView_Click" meta:resourcekey="BtnExportCurvesExportViewResource1" />
+                                                         </td>
+                                                    </tr>
+                                                </table>
                                             </div>
                                             <div class="clear"></div>                                                  
                                             </div>                                           
@@ -488,6 +539,46 @@
                                                         <asp:PostBackTrigger ControlID="BtnExportCurvesDeltaView" />
                                                     </Triggers>
                                                 </asp:UpdatePanel>--%>
+
+                                                <br />
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%"> 
+                                                     <tr>
+                                                        <td colspan="2">
+                                                          <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="True" 
+                                                                onselectedindexchanged="rbtnDetlaReflist_SelectedIndexChanged" 
+                                                                RepeatDirection="Horizontal">
+                                                            <asp:ListItem Text="&#916;Ref" Value="0" Selected="True" meta:resourcekey="locRefResource1"></asp:ListItem>
+                                                            <asp:ListItem Text="&#916;Previous Run" Value="1" meta:resourcekey="locPreRunResource1"></asp:ListItem>
+                                                          </asp:RadioButtonList>                                                           
+                                                        </td>
+                                                     </tr>
+                                                     <tr style="border: solid 1px;">
+                                                        <td style="width: 60%">
+                                                            <div id="Chart_Delta"></div>                                                      
+                                                         </td>
+                                                         <td style="width: 40%">                                            
+                                                            <table id="tblDeltaView" style="width: 100%">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Reference%</th>
+                                                                        <th>C</th>
+                                                                        <th>M</th>
+                                                                        <th>Y</th>
+                                                                        <th>K</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody data-template="export-summary" data-bind="source: CurveDeltaRefView"></tbody>
+                                                            </table>
+                                                         </td>
+                                                     </tr>
+                                                     <tr>
+                                                        <td colspan="2" align="right" style="padding-right: 15px; padding-top: 10px;">
+                                                           
+                                                            <asp:Button ID="Button1" runat="server" CssClass="BUTTON" Text="Export Delta"
+                                                                OnClick="BtnExportCurvesDeltaView_Click" meta:resourcekey="BtnExportCurvesDeltaViewResource1" />
+                                                        </td>
+                                                    </tr>
+                                                  </table>
                                             </div>
                                             <div class="clear"></div>                                                  
                                             </div>                                          
@@ -514,4 +605,20 @@
     &nbsp;</div>
 <div class="clear">
 </div>
+<%--<td data-bind="text: CMYK_C, style: { backgroundColor: #E0F3FF }"></td>
+        <td data-bind="text: CMYK_M, style: { backgroundColor: #FFEFF9 }" ></td>
+        <td data-bind="text: CMYK_Y, style: { backgroundColor: #FFFDEE }" ></td>
+        <td data-bind="text: CMYK_K, style: { backgroundColor: #E7EBEE }" ></td>--%>
 <asp:HiddenField ID="hdnExportCurveSelectedTabIndex" runat="server" Value="0" />
+<asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
+<asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />
+<asp:HiddenField runat="server" ID="hdnOptimizationRunID" ClientIDMode="Static" />
+<script id="export-summary" type="text/x-kendo-template">   
+    <tr>        
+        <td data-bind="text: ReferenceNo"></td>
+        <td data-bind="text: CMYK_C"></td>
+        <td data-bind="text: CMYK_M" ></td>
+        <td data-bind="text: CMYK_Y" ></td>
+        <td data-bind="text: CMYK_K" ></td>
+    </tr>
+</script>

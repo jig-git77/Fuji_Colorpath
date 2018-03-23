@@ -51,6 +51,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (!IsPostBack)
             {
+                hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
+                hdfCurrentCulture.Value = getCurrentCultureLanguage();
+                hdnOptimizationRunID.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
                 header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLP) + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc");
                 lbtnMeasure.Visible = (SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.Edit);
