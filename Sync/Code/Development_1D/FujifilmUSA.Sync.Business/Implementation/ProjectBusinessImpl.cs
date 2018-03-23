@@ -1913,6 +1913,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return chartData;
         }
 
+
+        public byte[] GetSpotDestinationProfile(int projectId)
+        {
+            var data = new object();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    data = DataAccessFactory.
+                        Instance.
+                        GetScalar(
+                            "CPSpot.GetSpotDestinationProfileData",
+                            new object[]
+                                    {
+                                        projectId
+                                    });
+                    if (data == null || data == DBNull.Value)
+                    {
+                        throw new Exception("Destination profile not found for spot projectId: " + projectId);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotDestinationProfile"));
+            return data == DBNull.Value ? null : (byte[])data;
+        }
         #endregion
 
         #region ITaskBase Members

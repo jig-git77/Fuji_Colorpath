@@ -190,13 +190,20 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new byte[1];
         }
+
         public byte[] GetLastOptimizedNamedColorProfile(int spotProjectId)
         {
             return new byte[1];
         }
+
         public ReferenceChartData GetSpotReferenceChartData(int spotProjectId, EReferenceChartDisType referenceChartDisType)
         {
             return new ReferenceChartData();
+        }
+
+        public byte[] GetSpotDestinationProfile(int projectId)
+        {
+            return new byte[1];
         }
         #endregion
 
