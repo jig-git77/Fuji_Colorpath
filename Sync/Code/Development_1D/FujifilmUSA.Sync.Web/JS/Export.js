@@ -153,7 +153,8 @@ function BindExportView(result) {
             majorUnit: 10,
             labels: {
                 format: "{0}"
-            }
+            },
+           
         },
         //tooltip: {
         //    visible: true,
@@ -228,8 +229,12 @@ function BindDeltaView(result) {
             max: 100,
             majorUnit: 25,
             labels: {
-                format: "{0}"
-            }
+                format: ""
+            },
+            line: {
+                visible: false
+            },
+            //axisCrossingValues: [0, 100]
         },
         yAxis: {
             name: "yAxis",
@@ -245,8 +250,8 @@ function BindDeltaView(result) {
         //    format: "{1}% in {0} minutes"
         //},
         chartArea: {
-            background: "#EFEFEF"
-            //width: 500,
+            background: "#EFEFEF",
+            width: 450,
             //height: 400
         },
         render: renderChartWithBackgroundByAxis
