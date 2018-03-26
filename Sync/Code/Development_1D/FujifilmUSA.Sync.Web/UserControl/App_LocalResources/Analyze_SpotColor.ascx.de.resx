@@ -699,8 +699,11 @@
   <data name="locMinDeltaEResource1.Text" xml:space="preserve">
     <value>Min ΔE</value>
   </data>
-  <data name="locOptDevicePredResource1.Text" xml:space="preserve">
+  <data name="locSummaryHeaderRun0Resource1" xml:space="preserve">
     <value>Optimal Device Prediction</value>
+  </data>
+  <data name="locSummaryHeaderRun1Resource1" xml:space="preserve">
+    <value>Measured Comparison</value>
   </data>
   <data name="locRipSettingsResource1.Text" xml:space="preserve">
     <value>Rip Einstellungen</value>

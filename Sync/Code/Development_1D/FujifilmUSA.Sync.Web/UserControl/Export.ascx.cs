@@ -87,7 +87,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Div_Chart.Visible = true;
                         lbtnMeasure.Visible = true;
                         locDownloadDLPAndChart.Text = "Download Chart";
-                        locDownloadDestinationICC.Text = "Download Named Color Profile ICC";
+                        lbtnNamedColorICC.Visible = true;
                         header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + ".icc");
                         locDownloadChartAndPrintThroughWorkflow.Text = GetResourceString(locDownloadChartAndPrintThroughWorkflowResourceNCP);
                     }
@@ -111,6 +111,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        #region Control Methods
         protected void lbtnMeasure_Click(object sender, EventArgs e)
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
@@ -297,8 +298,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                _presenterExport.GetNamedColorProfile();
+                ProjectId = SessionManager.Instance.CurrentOptimizeRun.ProjectId;
+                _presenterExport.GetSpotDestinationProfile();
                 if (!IsErrorOccured)
                 {
                     if (SourceProfile != null)
@@ -306,9 +307,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                string.Format("{0}.icc",
                                                              SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName));
                 }
-
-                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), "Named Color Profile.icc", "Named Color Profile.icc");
-
             }
             else
             {
@@ -324,125 +322,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private void BindCurve(short _CurveTypeID)
+        protected void lbtnNamedColorICC_Click(object sender, EventArgs e)
         {
-            this.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-            if (_CurveTypeID == 100 || _CurveTypeID == 101) //---Set same value for "ColorGate-TVI" and "ColorGate-CGCX" like "5%" for export curve data
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                _CurveTypeID = 5;
-            }
-            if (_CurveTypeID == 102) //---Set same value for "Onyx G7 Import" like "Nexus" for export curve data
-            {
-                _CurveTypeID = 45;
-            }
-            this.CurveTypeId = _CurveTypeID;
-            _presenterExport.GetCurveData();
-            if (!IsErrorOccured)
-            {
-                SessionManager.Instance.CurveExportView = this.CurveData.CurveExportView;
-                SessionManager.Instance.CurveDeltaRefView = this.CurveData.CurveDeltaRefView;
-                SessionManager.Instance.CurveDeltaPrevRunView = this.CurveData.CurveDeltaPrevRunView;
-                BindCharts(this.CurveData.CurveExportView, this.CurveData.CurveDeltaRefView, this.CurveData.CurveDeltaPrevRunView);
-                rgCurveExportView.Rebind();
-                rgCurveDeltaView.Rebind();
-            }
-        }
-
-        #region Bind Charts
-        private void BindCharts(List<Entity.CPSync1D.OptimizeRunCurve> CurveExportView, List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaRefView, List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaPrevRunView)
-        {
-            BindCurveChart(CurveExportView);
-            BindDeltaChart(CurveDeltaRefView, CurveDeltaPrevRunView);
-        }
-
-        private void BindCurveChart(List<Entity.CPSync1D.OptimizeRunCurve> CurveExportView)
-        {
-            for (int i = 0; i < CurveExportView.Count; i++)
-            {
-                if (Chk_C.Checked == true)
-                    AddPointChartWithColor(i, CHRT_ExportCurve.Series["Series1"], CurveExportView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveExportView[i].CMYK_C).ToString(), Color.Cyan.Name.ToString(), true);
-                if (Chk_M.Checked == true)
-                    AddPointChartWithColor(i, CHRT_ExportCurve.Series["Series2"], CurveExportView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveExportView[i].CMYK_M).ToString(), Color.Magenta.Name.ToString(), true);
-                if (Chk_Y.Checked == true)
-                    AddPointChartWithColor(i, CHRT_ExportCurve.Series["Series3"], CurveExportView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveExportView[i].CMYK_Y).ToString(), Color.Yellow.Name.ToString(), true);
-                if (Chk_K.Checked == true)
-                    AddPointChartWithColor(i, CHRT_ExportCurve.Series["Series4"], CurveExportView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveExportView[i].CMYK_K).ToString(), Color.Black.Name.ToString(), true);
-            }
-        }
-
-        private void BindDeltaChart(List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaRefView, List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaPrevRunView)
-        {
-            Int64 MaxDelta = 0;
-            Int64 MinDelta = 0;
-
-            List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaView = new List<Entity.CPSync1D.OptimizeRunCurve>();
-
-            if (rbtnDetlaReflist.Items[0].Selected == true)
-            {
-                CurveDeltaView = CurveDeltaRefView; //-----Current Run's delta view
-            }
-            else
-            {
-                CurveDeltaView = CurveDeltaPrevRunView; //-----Previous Run's delta view
-            }
-
-            if (CurveDeltaView != null && CurveDeltaView.Count > 0)
-            {
-                #region Fine Max Min
-                if (Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_C)) > MaxDelta)
-                    MaxDelta = Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_C));
-                if (Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_M)) > MaxDelta)
-                    MaxDelta = Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_M));
-                if (Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_Y)) > MaxDelta)
-                    MaxDelta = Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_Y));
-                if (Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_K)) > MaxDelta)
-                    MaxDelta = Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_K));
-
-                if (Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_C)) < MinDelta)
-                    MinDelta = Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_C));
-                if (Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_M)) < MinDelta)
-                    MinDelta = Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_M));
-                if (Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_Y)) < MinDelta)
-                    MinDelta = Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_Y));
-                if (Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_K)) < MinDelta)
-                    MinDelta = Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_K));
-
-
-                MinDelta = (MinDelta * -1);
-
-                MaxDelta = MaxDelta + 1;
-                MinDelta = MinDelta + 1;
-
-                if (MaxDelta > MinDelta)
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                _presenterExport.GetNamedColorProfile();
+                if (!IsErrorOccured)
                 {
-                    MinDelta = (MaxDelta * -1);
+                    if (SourceProfile != null)
+                        Utilities.DownloadFile(SourceProfile,
+                                               string.Format("{0}.icc",
+                                                             SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + " Named Color Profile"));
                 }
-                else
-                {
-                    MaxDelta = MinDelta;
-                    MinDelta = (MinDelta * -1);
-                }
-                CHRT_ExportCurveDeltaRef.ChartAreas["Default"].AxisY.Minimum = MinDelta;
-                CHRT_ExportCurveDeltaRef.ChartAreas["Default"].AxisY.Maximum = MaxDelta;
-                #endregion
-
-                #region BindChart
-                for (int i = 0; i < CurveDeltaView.Count; i++)
-                {
-                    if (Chk_C.Checked == true)
-                        AddPointChartWithColor(i, CHRT_ExportCurveDeltaRef.Series["Series1"], CurveDeltaView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveDeltaView[i].CMYK_C).ToString(), Color.Cyan.Name.ToString(), false);
-                    if (Chk_M.Checked == true)
-                        AddPointChartWithColor(i, CHRT_ExportCurveDeltaRef.Series["Series2"], CurveDeltaView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveDeltaView[i].CMYK_M).ToString(), Color.Magenta.Name.ToString(), false);
-                    if (Chk_Y.Checked == true)
-                        AddPointChartWithColor(i, CHRT_ExportCurveDeltaRef.Series["Series3"], CurveDeltaView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveDeltaView[i].CMYK_Y).ToString(), Color.Yellow.Name.ToString(), false);
-                    if (Chk_K.Checked == true)
-                        AddPointChartWithColor(i, CHRT_ExportCurveDeltaRef.Series["Series4"], CurveDeltaView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveDeltaView[i].CMYK_K).ToString(), Color.Black.Name.ToString(), false);
-                }
-                #endregion
             }
         }
-
-        #endregion
 
         protected void rgCurveExportView_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
         {
@@ -884,6 +778,128 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        #endregion
+
+        #region Methods
+        private void BindCurve(short _CurveTypeID)
+        {
+            this.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            if (_CurveTypeID == 100 || _CurveTypeID == 101) //---Set same value for "ColorGate-TVI" and "ColorGate-CGCX" like "5%" for export curve data
+            {
+                _CurveTypeID = 5;
+            }
+            if (_CurveTypeID == 102) //---Set same value for "Onyx G7 Import" like "Nexus" for export curve data
+            {
+                _CurveTypeID = 45;
+            }
+            this.CurveTypeId = _CurveTypeID;
+            _presenterExport.GetCurveData();
+            if (!IsErrorOccured)
+            {
+                SessionManager.Instance.CurveExportView = this.CurveData.CurveExportView;
+                SessionManager.Instance.CurveDeltaRefView = this.CurveData.CurveDeltaRefView;
+                SessionManager.Instance.CurveDeltaPrevRunView = this.CurveData.CurveDeltaPrevRunView;
+                BindCharts(this.CurveData.CurveExportView, this.CurveData.CurveDeltaRefView, this.CurveData.CurveDeltaPrevRunView);
+                rgCurveExportView.Rebind();
+                rgCurveDeltaView.Rebind();
+            }
+        }
+
+        #region Bind Charts
+        private void BindCharts(List<Entity.CPSync1D.OptimizeRunCurve> CurveExportView, List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaRefView, List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaPrevRunView)
+        {
+            BindCurveChart(CurveExportView);
+            BindDeltaChart(CurveDeltaRefView, CurveDeltaPrevRunView);
+        }
+
+        private void BindCurveChart(List<Entity.CPSync1D.OptimizeRunCurve> CurveExportView)
+        {
+            for (int i = 0; i < CurveExportView.Count; i++)
+            {
+                if (Chk_C.Checked == true)
+                    AddPointChartWithColor(i, CHRT_ExportCurve.Series["Series1"], CurveExportView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveExportView[i].CMYK_C).ToString(), Color.Cyan.Name.ToString(), true);
+                if (Chk_M.Checked == true)
+                    AddPointChartWithColor(i, CHRT_ExportCurve.Series["Series2"], CurveExportView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveExportView[i].CMYK_M).ToString(), Color.Magenta.Name.ToString(), true);
+                if (Chk_Y.Checked == true)
+                    AddPointChartWithColor(i, CHRT_ExportCurve.Series["Series3"], CurveExportView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveExportView[i].CMYK_Y).ToString(), Color.Yellow.Name.ToString(), true);
+                if (Chk_K.Checked == true)
+                    AddPointChartWithColor(i, CHRT_ExportCurve.Series["Series4"], CurveExportView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveExportView[i].CMYK_K).ToString(), Color.Black.Name.ToString(), true);
+            }
+        }
+
+        private void BindDeltaChart(List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaRefView, List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaPrevRunView)
+        {
+            Int64 MaxDelta = 0;
+            Int64 MinDelta = 0;
+
+            List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaView = new List<Entity.CPSync1D.OptimizeRunCurve>();
+
+            if (rbtnDetlaReflist.Items[0].Selected == true)
+            {
+                CurveDeltaView = CurveDeltaRefView; //-----Current Run's delta view
+            }
+            else
+            {
+                CurveDeltaView = CurveDeltaPrevRunView; //-----Previous Run's delta view
+            }
+
+            if (CurveDeltaView != null && CurveDeltaView.Count > 0)
+            {
+                #region Fine Max Min
+                if (Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_C)) > MaxDelta)
+                    MaxDelta = Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_C));
+                if (Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_M)) > MaxDelta)
+                    MaxDelta = Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_M));
+                if (Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_Y)) > MaxDelta)
+                    MaxDelta = Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_Y));
+                if (Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_K)) > MaxDelta)
+                    MaxDelta = Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_K));
+
+                if (Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_C)) < MinDelta)
+                    MinDelta = Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_C));
+                if (Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_M)) < MinDelta)
+                    MinDelta = Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_M));
+                if (Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_Y)) < MinDelta)
+                    MinDelta = Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_Y));
+                if (Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_K)) < MinDelta)
+                    MinDelta = Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_K));
+
+
+                MinDelta = (MinDelta * -1);
+
+                MaxDelta = MaxDelta + 1;
+                MinDelta = MinDelta + 1;
+
+                if (MaxDelta > MinDelta)
+                {
+                    MinDelta = (MaxDelta * -1);
+                }
+                else
+                {
+                    MaxDelta = MinDelta;
+                    MinDelta = (MinDelta * -1);
+                }
+                CHRT_ExportCurveDeltaRef.ChartAreas["Default"].AxisY.Minimum = MinDelta;
+                CHRT_ExportCurveDeltaRef.ChartAreas["Default"].AxisY.Maximum = MaxDelta;
+                #endregion
+
+                #region BindChart
+                for (int i = 0; i < CurveDeltaView.Count; i++)
+                {
+                    if (Chk_C.Checked == true)
+                        AddPointChartWithColor(i, CHRT_ExportCurveDeltaRef.Series["Series1"], CurveDeltaView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveDeltaView[i].CMYK_C).ToString(), Color.Cyan.Name.ToString(), false);
+                    if (Chk_M.Checked == true)
+                        AddPointChartWithColor(i, CHRT_ExportCurveDeltaRef.Series["Series2"], CurveDeltaView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveDeltaView[i].CMYK_M).ToString(), Color.Magenta.Name.ToString(), false);
+                    if (Chk_Y.Checked == true)
+                        AddPointChartWithColor(i, CHRT_ExportCurveDeltaRef.Series["Series3"], CurveDeltaView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveDeltaView[i].CMYK_Y).ToString(), Color.Yellow.Name.ToString(), false);
+                    if (Chk_K.Checked == true)
+                        AddPointChartWithColor(i, CHRT_ExportCurveDeltaRef.Series["Series4"], CurveDeltaView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveDeltaView[i].CMYK_K).ToString(), Color.Black.Name.ToString(), false);
+                }
+                #endregion
+            }
+        }
+
+        #endregion
 
         //Add Point with color on charts
         private void AddPointChartWithColor(int _Index, Series _objSeries, string _XValue, string _YValue, string ColorName, bool ShowMarker)
@@ -910,6 +926,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 throw Ex;
             }
         }
+        #endregion
 
         #region IViewExport Members
         public int ProjectId { get; set; }
@@ -923,8 +940,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Business.Messages.CurveDataResponse CurveData { get; set; }
         public int SpotProjectId { get; set; }
         public DataTable dtPatchDetails { get; set; }
+
         #endregion
 
-
+   
     }
 }

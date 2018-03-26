@@ -215,10 +215,17 @@
                                                 <td>
                                                     <asp:LinkButton ID="lbtnDownloadDestinationICC" runat="server" CssClass="gray_bt"
                                                         OnClick="lbtnDownloadDestinationICC_Click">
-                                                    <span><asp:Localize runat="server" Text="Download Destination ICC" 
+                                                      <span><asp:Localize runat="server" Text="Download Destination ICC" 
                                                         ID="locDownloadDestinationICC" 
                                                         meta:resourcekey="locDownloadDestinationICCResource1"></asp:Localize>
-</span>
+                                                      </span>
+                                                    </asp:LinkButton>
+                                                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                     <asp:LinkButton ID="lbtnNamedColorICC" runat="server" CssClass="gray_bt" Visible="false" OnClick="lbtnNamedColorICC_Click">
+                                                      <span><asp:Localize runat="server" Text="Download Named Color Profile ICC" 
+                                                        ID="Localize4" 
+                                                        meta:resourcekey="locNamedColorICCResource1"></asp:Localize>
+                                                      </span>
                                                     </asp:LinkButton>
                                                 </td>
                                             </tr>

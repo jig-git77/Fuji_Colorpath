@@ -374,8 +374,7 @@
                                                 <table class="PatchDetailsSummaryTable">
                                                     <tr>
                                                         <th colspan="2"><span>
-                                                            <asp:Localize Text="Optimal Device Prediction" runat="server"
-                                                                ID="Localize1" meta:resourcekey="locOptDevicePredResource1"></asp:Localize>
+                                                            <asp:Localize runat="server" ID="locSummary_Header"></asp:Localize>
                                                         </span></th>
                                                     </tr>
                                                     <tr>

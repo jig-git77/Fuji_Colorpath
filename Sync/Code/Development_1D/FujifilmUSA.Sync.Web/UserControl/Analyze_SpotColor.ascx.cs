@@ -24,6 +24,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recNext = "nextText";
         private const string _recnewPrintCondition = "newNCPPrintConditionText";
         private const string _recAnalyze = "analyze";
+        private const string _recSummaryHeaderRun0 = "locSummaryHeaderRun0Resource1";
+        private const string _recSummaryHeaderRun1 = "locSummaryHeaderRun1Resource1";
         public string DLPName = "";
         #endregion
 
@@ -58,12 +60,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     header.InnerText = GetResourceString(_recnewPrintCondition);//"New Print Condition - Analyze (No DLP)";
                     DLPName = "No NCP";
                     BtnExportCMYK.Visible = false;  //----Don't show CMYK export button for Run-0, since there is no previous run's CMYK data to export
+                    locSummary_Header.Text = GetResourceString(_recSummaryHeaderRun0);
                 }
                 else
                 {
                     header.InnerText = string.Format(GetResourceString(_recAnalyze), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Analyze - {0}
                     DLPName = SessionManager.Instance.CurrentOptimizeRun.LastDlpName.Replace(SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + " ", ""); //---DLPName to pass into report
                     DLPName = DLPName.Remove(DLPName.Length - 4);
+                    locSummary_Header.Text = GetResourceString(_recSummaryHeaderRun1);
                 }
 
                 lbtnDownloadAndSaveNCP.Text = IsNewNCP

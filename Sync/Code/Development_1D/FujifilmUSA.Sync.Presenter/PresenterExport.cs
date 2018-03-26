@@ -99,5 +99,11 @@ namespace FujifilmUSA.Sync.Presenter
             _viewExport.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsofMeasurement(_viewExport.OptimizeRunId);
         }
 
+        public void GetSpotDestinationProfile()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.SourceProfile = projectBusiness.GetSpotDestinationProfile(_viewExport.ProjectId);
+        }
     }
 }
