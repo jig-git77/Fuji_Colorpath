@@ -595,7 +595,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             FillSpreadChart(DTSpreadChartData, DTSpreadSplineRangeChartData, DTMaxSpreadChartData);
                             FillSpreadChart_CMYK(DTSpreadChartData_CMYK);
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
 
                         }
@@ -2074,10 +2074,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (Convert.ToInt16(DTSpread[i].CmykC) != 0 && ChkC.Checked)
                         {
                             FilterSpread = DTSpread.Find(item => item.CmykM == DTSpread[i].CmykC);
-                            MagentaValue = Convert.ToInt16(FilterSpread.DotGain);
+                            MagentaValue = Convert.ToInt16(FilterSpread == null ? 0 : FilterSpread.DotGain);
 
                             FilterSpread = DTSpread.Find(item => item.CmykY == DTSpread[i].CmykC);
-                            YellowValue = Convert.ToInt16(FilterSpread.DotGain);
+                            YellowValue = Convert.ToInt16(FilterSpread == null ? 0 : FilterSpread.DotGain);
 
                             DiffrentOne = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - MagentaValue);
                             DiffrentTwo = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - YellowValue);
@@ -2091,10 +2091,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (Convert.ToInt16(DTSpread[i].CmykM) != 0 && ChkM.Checked)
                         {
                             FilterSpread = DTSpread.Find(item => item.CmykC == DTSpread[i].CmykM);
-                            CyanValue = Convert.ToInt16(FilterSpread.DotGain);
+                            CyanValue = Convert.ToInt16(FilterSpread == null ? 0 : FilterSpread.DotGain);
 
                             FilterSpread = DTSpread.Find(item => item.CmykY == DTSpread[i].CmykM);
-                            YellowValue = Convert.ToInt16(FilterSpread.DotGain);
+                            YellowValue = Convert.ToInt16(FilterSpread == null ? 0 : FilterSpread.DotGain);
 
                             DiffrentOne = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - CyanValue);
                             DiffrentTwo = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - YellowValue);
@@ -2108,10 +2108,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (Convert.ToInt16(DTSpread[i].CmykY) != 0 && ChkY.Checked)
                         {
                             FilterSpread = DTSpread.Find(item => item.CmykC == DTSpread[i].CmykY);
-                            CyanValue = Convert.ToInt16(FilterSpread.DotGain);
+                            CyanValue = Convert.ToInt16(FilterSpread == null ? 0 : FilterSpread.DotGain);
 
                             FilterSpread = DTSpread.Find(item => item.CmykM == DTSpread[i].CmykY);
-                            MagentaValue = Convert.ToInt16(FilterSpread.DotGain);
+                            MagentaValue = Convert.ToInt16(FilterSpread == null ? 0 : FilterSpread.DotGain);
 
                             DiffrentOne = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - CyanValue);
                             DiffrentTwo = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - MagentaValue);
@@ -3361,7 +3361,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
 
                         tw.WriteLine("END_DATA");
-                       // tw.Close();
+                        // tw.Close();
 
                         tw.Flush();
                         ms.Position = 0;

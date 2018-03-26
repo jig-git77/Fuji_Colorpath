@@ -3809,8 +3809,9 @@ function PopulateTVIISOChart() {
             }
         ],
         valueAxis: {
+            min: 0,
             name: "valueAxis",
-            majorUnit: 5
+            majorUnit: 5,
         },
         seriesDefaults: {
             line: {
@@ -3874,8 +3875,9 @@ function PopulateTVIISOChart() {
             }
         ],
         valueAxis: {
+            min: 0,
             name: "valueAxis",
-            majorUnit: 5
+            majorUnit: 5,
         },
         seriesDefaults: {
             line: {
@@ -3939,8 +3941,9 @@ function PopulateTVIISOChart() {
             }
         ],
         valueAxis: {
+            min: 0,
             name: "valueAxis",
-            majorUnit: 5
+            majorUnit: 5,            
         },
         seriesDefaults: {
             line: {
@@ -4003,8 +4006,9 @@ function PopulateTVIISOChart() {
             }
         ],
         valueAxis: {
+            min: 0,
             name: "valueAxis",
-            majorUnit: 5
+            majorUnit: 5,            
         },
         seriesDefaults: {
             line: {
@@ -4139,7 +4143,7 @@ function PopulateTVIG7CMYKChart() {
         ],
         xAxis: {
             name: "xAxis",
-            //min: 0,
+            min: 0,
             max: 100,
             majorUnit: 25,
             //axisCrossingValues: [0, 100],
@@ -4155,7 +4159,7 @@ function PopulateTVIG7CMYKChart() {
             //min: 0,
             //max: 20,
             majorUnit: 5,
-            //axisCrossingValues: [0, 20],
+            axisCrossingValues: -100,
             labels: {
                 format: "{0}"
             },
@@ -4224,17 +4228,19 @@ function PopulateTVISpreadChart() {
     splineRangeResultList = splineRangeResultList.sort(function (e, e1) { return e.TVI - e1.TVI });
 
     $.each(jsonSpread_C, function (index, obj) {
-
+        var magValue = 0;
+        var yelValue = 0;
         if (obj.CmykC != 0) {
 
             var Mres = $.grep(jsonSpread_M, function (e) { return e.CmykM == obj.CmykC; });
-            var magValue = Mres[0].DotGain;
+            if (Mres.length > 0) {
+                magValue = Mres[0].DotGain;
+            }
 
-            var Yres = $.grep(jsonSpread_Y, function (e) {
-                return e.CmykY == obj.CmykC;
-            });
-
-            var yelValue = Yres[0].DotGain;
+            var Yres = $.grep(jsonSpread_Y, function (e) { return e.CmykY == obj.CmykC; });
+            if (Yres.length > 0) {
+                yelValue = Yres[0].DotGain;
+            }
 
             var DiffrentOne = obj.DotGain - magValue;
             var DiffrentTwo = obj.DotGain - yelValue;
@@ -4249,14 +4255,20 @@ function PopulateTVISpreadChart() {
 
 
     $.each(jsonSpread_M, function (index, obj) {
-
+        var cynValue = 0;
+        var yelValue = 0;
         if (obj.CmykM != 0) {
 
             var Cres = $.grep(jsonSpread_C, function (e) { return e.CmykC == obj.CmykM; });
-            var cynValue = Cres[0].DotGain;
+            if (Cres.length > 0) {
+                cynValue = Cres[0].DotGain;
+            }
+
 
             var Yres = $.grep(jsonSpread_Y, function (e) { return e.CmykY == obj.CmykM; });
-            var yelValue = Yres[0].DotGain;
+            if (Yres.length > 0) {
+                yelValue = Yres[0].DotGain;
+            }
 
             var DiffrentOne = obj.DotGain - cynValue;
             var DiffrentTwo = obj.DotGain - yelValue;
@@ -4270,14 +4282,19 @@ function PopulateTVISpreadChart() {
     });
 
     $.each(jsonSpread_Y, function (index, obj) {
-
+        var cynValue = 0;
+        var magValue = 0;
         if (obj.CmykY != 0) {
 
             var Cres = $.grep(jsonSpread_C, function (e) { return e.CmykC == obj.CmykY; });
-            var cynValue = Cres[0].DotGain;
+            if (Cres.length > 0) {
+                cynValue = Cres[0].DotGain;
+            }
 
             var Mres = $.grep(jsonSpread_M, function (e) { return e.CmykM == obj.CmykY; });
-            var magValue = Mres[0].DotGain;
+            if (Mres.length > 0) {
+                magValue = Mres[0].DotGain;
+            }
 
             var DiffrentOne = obj.DotGain - cynValue;
             var DiffrentTwo = obj.DotGain - magValue;
@@ -4289,7 +4306,6 @@ function PopulateTVISpreadChart() {
             obj.DifferentTitleTwo = DifferentTitleTwo;
         }
     });
-
 
     $divChartTVISpread.kendoChart({
         //title: {
@@ -4362,9 +4378,10 @@ function PopulateTVISpreadChart() {
                 }
             },
         ],
-        valueAxis: {
+        valueAxis: {            
             name: "valueAxis",
-            majorUnit: 5
+            majorUnit: 5,
+            axisCrossingValues: -100,
         },
         seriesDefaults: {
             line: {
