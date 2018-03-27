@@ -3673,12 +3673,15 @@ function PopulateTVIISOChart() {
             var ThresholdTop = 0;
             var ThresholdBottom = 0;
             var thresHoldValue = obj.Threshold;
+            if (thresHoldValue == 0 && index != 0 && index != isoCyanList.length - 1) {
+                thresHoldValue = (isoCyanList[index - 1].Threshold + isoCyanList[index + 1].Threshold) / 2;
+            }
             ThresholdTop = obj.TargetDotGain + thresHoldValue;
             ThresholdBottom = obj.TargetDotGain - thresHoldValue;
             obj.ThresholdTop = ThresholdTop;
             obj.ThresholdBottom = ThresholdBottom;
         });
-        //console.log(isoCyanList);
+        
     }
 
     if (jsonDTISOTVIChartList.length > 0) {
@@ -3714,6 +3717,9 @@ function PopulateTVIISOChart() {
             var ThresholdTop = 0;
             var ThresholdBottom = 0;
             var thresHoldValue = obj.Threshold;
+            if (thresHoldValue == 0 && index != 0 && index != isoMagentaList.length - 1) {
+                thresHoldValue = (isoMagentaList[index - 1].Threshold + isoMagentaList[index + 1].Threshold) / 2;
+            }
             ThresholdTop = obj.TargetDotGain + thresHoldValue;
             ThresholdBottom = obj.TargetDotGain - thresHoldValue;
             obj.ThresholdTop = ThresholdTop;
@@ -3755,6 +3761,9 @@ function PopulateTVIISOChart() {
             var ThresholdTop = 0;
             var ThresholdBottom = 0;
             var thresHoldValue = obj.Threshold;
+            if (thresHoldValue == 0 && index != 0 && index != isoYellowList.length - 1) {
+                thresHoldValue = (isoYellowList[index - 1].Threshold + isoYellowList[index + 1].Threshold) / 2;
+            }
             ThresholdTop = obj.TargetDotGain + thresHoldValue;
             ThresholdBottom = obj.TargetDotGain - thresHoldValue;
             obj.ThresholdTop = ThresholdTop;
@@ -3796,6 +3805,9 @@ function PopulateTVIISOChart() {
             var ThresholdTop = 0;
             var ThresholdBottom = 0;
             var thresHoldValue = obj.Threshold;
+            if (thresHoldValue == 0 && index != 0 && index != isoBlackList.length - 1) {
+                thresHoldValue = (isoBlackList[index - 1].Threshold + isoBlackList[index + 1].Threshold) / 2;
+            }
             ThresholdTop = obj.TargetDotGain + thresHoldValue;
             ThresholdBottom = obj.TargetDotGain - thresHoldValue;
             obj.ThresholdTop = ThresholdTop;

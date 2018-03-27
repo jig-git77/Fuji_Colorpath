@@ -1157,16 +1157,16 @@
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td>
-                                                                                    <table class="TDBOX" border="0" cellpadding="5" cellspacing="0" width="100%" style="text-align: center;">
+                                                                                <td style="padding-left: 60px;">
+                                                                                    <table class="TDBOX" border="0" cellpadding="5" cellspacing="0" width="90%">
                                                                                         <tr class="TRTABLEBOX" style="line-height: 30px;">
-                                                                                            <td class="TDTABLEBOXLEFT">
+                                                                                            <td class="TDTABLEBOXLEFT" style="text-align: left;">
                                                                                                 <b>
                                                                                                     <asp:Localize ID="locChromVariation" Text="Chromatic Variation" runat="server" meta:resourcekey="locChromaticVariationResource1"></asp:Localize></b>
                                                                                             </td>
                                                                                         </tr>
-                                                                                        <tr>
-                                                                                            <td>
+                                                                                        <tr style="text-align: center;">
+                                                                                                        <td style="padding-left: 40px;">
                                                                                                 <table id="chromVariationTable" width="100%" style="line-height: 20px;">
                                                                                                     <tr>
                                                                                                         <th data-bind="visible: Tone20 != 0">20</th>

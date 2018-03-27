@@ -1689,13 +1689,8 @@ function BindTVICharts() {
                     PopulateTVIG7CMYKChart();
                     PopulateTVISpreadChart();
                     
-                    //$('#chromVariationTable').find('#spnChromeVar20').html(response.data.DTMaxSpreadChartDataList[0].Tone25);
-                    //$('#chromVariationTable #spnChromeVar25').html(response.data.DTMaxSpreadChartDataList[0].Tone25);
-                    //$('#chromVariationTable #spnChromeVar40').html(response.data.DTMaxSpreadChartDataList.Tone25);
-                    //$('#chromVariationTable #spnChromeVar50').html(response.data.DTMaxSpreadChartDataList.Tone25);
-                    //$('#chromVariationTable #spnChromeVar60').html(response.data.DTMaxSpreadChartDataList.Tone25);
-                    //$('#chromVariationTable #spnChromeVar75').html(response.data.DTMaxSpreadChartDataList.Tone25);
-                    //$('#chromVariationTable #spnChromeVar80').html(response.data.DTMaxSpreadChartDataList.Tone25);
+                    var spreadStatesViewModel = response.data.DTMaxSpreadChartDataList[0];
+                    kendo.bind($('#chromVariationTable'), spreadStatesViewModel);
                 }
                 //kendo.ui.progress($chartLoader, false);
             },
@@ -3634,6 +3629,9 @@ function PopulateTVIISOChart() {
             var ThresholdTop = 0;
             var ThresholdBottom = 0;
             var thresHoldValue = obj.Threshold;
+            if (thresHoldValue == 0 && index != 0 && index != isoCyanList.length - 1) {
+                thresHoldValue = (isoCyanList[index - 1].Threshold + isoCyanList[index + 1].Threshold) / 2;
+            }
             ThresholdTop = obj.TargetDotGain + thresHoldValue;
             ThresholdBottom = obj.TargetDotGain - thresHoldValue;
             obj.ThresholdTop = ThresholdTop;
@@ -3675,6 +3673,9 @@ function PopulateTVIISOChart() {
             var ThresholdTop = 0;
             var ThresholdBottom = 0;
             var thresHoldValue = obj.Threshold;
+            if (thresHoldValue == 0 && index != 0 && index != isoMagentaList.length - 1) {
+                thresHoldValue = (isoMagentaList[index - 1].Threshold + isoMagentaList[index + 1].Threshold) / 2;
+            }
             ThresholdTop = obj.TargetDotGain + thresHoldValue;
             ThresholdBottom = obj.TargetDotGain - thresHoldValue;
             obj.ThresholdTop = ThresholdTop;
@@ -3716,6 +3717,9 @@ function PopulateTVIISOChart() {
             var ThresholdTop = 0;
             var ThresholdBottom = 0;
             var thresHoldValue = obj.Threshold;
+            if (thresHoldValue == 0 && index != 0 && index != isoYellowList.length - 1) {
+                thresHoldValue = (isoYellowList[index - 1].Threshold + isoYellowList[index + 1].Threshold) / 2;
+            }
             ThresholdTop = obj.TargetDotGain + thresHoldValue;
             ThresholdBottom = obj.TargetDotGain - thresHoldValue;
             obj.ThresholdTop = ThresholdTop;
@@ -3757,6 +3761,9 @@ function PopulateTVIISOChart() {
             var ThresholdTop = 0;
             var ThresholdBottom = 0;
             var thresHoldValue = obj.Threshold;
+            if (thresHoldValue == 0 && index != 0 && index != isoBlackList.length - 1) {
+                thresHoldValue = (isoBlackList[index - 1].Threshold + isoBlackList[index + 1].Threshold) / 2;
+            }
             ThresholdTop = obj.TargetDotGain + thresHoldValue;
             ThresholdBottom = obj.TargetDotGain - thresHoldValue;
             obj.ThresholdTop = ThresholdTop;
@@ -4252,7 +4259,7 @@ function PopulateTVISpreadChart() {
             obj.DifferentTitleTwo = DifferentTitleTwo;
         }
     });
-
+    
 
     $.each(jsonSpread_M, function (index, obj) {
         var cynValue = 0;
