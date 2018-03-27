@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="AnalyzeMeasurement.aspx.cs" Inherits="FujifilmUSA.Sync.Web.AnalyzeMeasurement" EnableEventValidation="false" %>
-<%@ Register Src="~/UserControl/AnalyzeMeasurement.ascx" TagName="Analyze" TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/Analyze.ascx" TagName="Analyze" TagPrefix="uc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

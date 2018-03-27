@@ -4,7 +4,7 @@
     Inherits="FujifilmUSA.Sync.Web.Analyze"
     MasterPageFile="~/MainMaster.Master" EnableEventValidation="false" %>
 
-<%@ Register Src="~/UserControl/Analyze.ascx" TagName="Analyze" TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/AnalyzeMeasurement.ascx" TagName="Analyze" TagPrefix="uc" %>
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="head">
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
