@@ -305,6 +305,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Div_MetricSumFilter.Visible = false;
                 }
             }
+            if (IsXMFUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+            {
+                if (SessionManager.Instance.CurrentValidationRequest != null)
+                {
+                    lbtnSubmit.Visible = true;
+                }
+                else
+                {
+                    lbtnSubmit.Visible = false;
+                    lbtnMeasurement.Visible = false;
+                }
+                lbtnOptimize.Visible = false;
+                lbtnMeasurementVerification.Visible = false;
+                lbtnDownloadAndSaveDLP.Visible = false;
+            }
+
+            if (IsXMFUser && Request.QueryString["viewonly"] != null && Convert.ToBoolean(Request.QueryString["viewonly"]) == true)
+            {
+                lbtnSubmit.Visible = false;
+                lbtnMeasurement.Visible = false;
+                lbtnOptimize.Visible = false;
+                lbtnMeasurementVerification.Visible = false;
+                lbtnDownloadAndSaveDLP.Visible = false;
+            }
         }
 
 

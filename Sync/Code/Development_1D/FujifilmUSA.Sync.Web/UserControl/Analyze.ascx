@@ -8,7 +8,7 @@
 <%--<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.common-material.min.css" />--%>
 <link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
 <link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
-<%--<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>--%>
+<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>
 <%--<script src="JS/DYMO.Label.Framework.latest.js" type="text/javascript" charset="UTF-8"></script>--%>
 <style>
     /*#ContentPlaceHolder1_ucAnalyze_dvTab_PatchDetails #divMeasurementPatchDetails .k-grid-content-locked {
