@@ -656,7 +656,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
 
         [HttpGet]
-        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject)
+        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID)
         {
             IHttpActionResult actionResult = null;
             BaseResponse<object> httpResponse = new BaseResponse<object>();
@@ -687,13 +687,19 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
                     this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     _presenterAnalyze.GetPatchDetailsofMeasurement();
-                    if (dtPatchDetails.Rows.Count > 0)
+
+                    if (!string.IsNullOrEmpty(metricSumID) && Convert.ToInt32(metricSumID) != -1)
+                        dtFilteredPatchDetails = FilteredPatchDetailsTable(metricSumID, dtPatchDetails);
+                    else
+                        dtFilteredPatchDetails = dtPatchDetails;
+
+                    if (dtFilteredPatchDetails.Rows.Count > 0)
                     {
                         Dictionary<string, object> childRow;
-                        foreach (DataRow row in dtPatchDetails.Rows)
+                        foreach (DataRow row in dtFilteredPatchDetails.Rows)
                         {
                             childRow = new Dictionary<string, object>();
-                            foreach (DataColumn col in dtPatchDetails.Columns)
+                            foreach (DataColumn col in dtFilteredPatchDetails.Columns)
                             {
                                 childRow.Add(col.ColumnName, row[col]);
                             }

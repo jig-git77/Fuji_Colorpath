@@ -18,6 +18,16 @@
     #divMeasurementPatchDetails .k-grid td {
         line-height: 18px;
     }
+    .scrollableTable thead {
+        display: table; /* for displaying purposes */
+        width: calc(100% - 17px); /* - 17px because of the typical scroll-bar width */
+    }
+
+    .scrollableTable tbody {
+        display: block; /* enables vertical scrolling */
+        max-height: 295px; /* adjust to your needs */
+        overflow-y: scroll;
+    }
 
     /*#divMeasurementPatchDetails .k-grid-content-locked {
         height: 290px;
@@ -266,7 +276,7 @@
                 <asp:HiddenField runat="server" ID="hdnCurrentMeasurement" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnDefaultSelectedDelta" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnCurrentProjectLicenseType" ClientIDMode="Static" />
-
+                <asp:HiddenField ID="hdPatchMatricSum" runat="server" Value="-1" ClientIDMode="Static" />
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">
@@ -940,7 +950,7 @@
                                                             </td>
                                                             <td style="width: 2%;"></td>
                                                             <td valign="top">
-                                                                <table class="k-grid k-widget k-display-block" style="width: 100%">
+                                                                <table class="scrollableTable k-grid k-widget k-display-block" style="width: 100%">
                                                                     <thead class="k-grid-header">
                                                                         <tr style="line-height: 25px;">
                                                                             <th>

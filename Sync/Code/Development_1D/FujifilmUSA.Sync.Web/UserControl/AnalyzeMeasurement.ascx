@@ -25,6 +25,20 @@
         padding-left: 0px;
     }
 
+    .scrollableTable thead {
+        display: table; /* for displaying purposes */
+        width: calc(100% - 17px); /* - 17px because of the typical scroll-bar width */
+    }
+
+    .scrollableTable tbody {
+        display: block; /* enables vertical scrolling */
+        max-height: 295px; /* adjust to your needs */
+        overflow-y: scroll;
+    }
+    .k-state-active table:first-child{
+        width:99% !important;
+    }
+
     ​
 </style>
 <script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>
@@ -228,6 +242,7 @@
         <asp:HiddenField runat="server" ID="hdnDefaultSelectedDelta" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hdnCurrentProjectLicenseType" ClientIDMode="Static" />
         <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" ClientIDMode="Static" />
+        <asp:HiddenField ID="hdPatchMatricSum" runat="server" Value="-1" ClientIDMode="Static" />
         <h1 id="header" runat="server">
             <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
         <div class="Information_divAnalyze">
@@ -500,7 +515,7 @@
                                                     </td>
                                                     <td style="width: 2%;"></td>
                                                     <td valign="top">
-                                                        <table class="k-grid k-widget k-display-block" style="width: 100%">
+                                                        <table class="scrollableTable k-grid k-widget k-display-block" style="width: 100%">
                                                             <thead class="k-grid-header">
                                                                 <tr style="line-height: 25px;">
                                                                     <th>
@@ -1079,7 +1094,7 @@
                                                 </ul>
                                                 <div>
                                                     <div>
-                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="99%">
                                                             <tr>
                                                                 <td>
                                                                     <table cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
@@ -1167,7 +1182,7 @@
                                                                                             </td>
                                                                                         </tr>
                                                                                         <tr style="text-align: center;">
-                                                                                                        <td style="padding-left: 40px;">
+                                                                                            <td style="padding-left: 40px;">
                                                                                                 <table id="chromVariationTable" width="100%" style="line-height: 20px;">
                                                                                                     <tr>
                                                                                                         <th data-bind="visible: Tone20 != 0">20</th>

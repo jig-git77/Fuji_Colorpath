@@ -1634,11 +1634,11 @@ function BindG7Charts() {
                 jsonGrayLChartList = response.data.GrayLChartList;
                 jsonBlackNPDChartList = response.data.BlackNPDChartList;
                 jsonGrayNPDChartList = response.data.GrayNPDChartList;
-                
+
                 kendo.bind($("#divGraySummaryList"), response.data);
                 kendo.bind($("#divBlackSummaryList"), response.data);
                 kendo.bind($("#divGrayLDeltaSummaryList"), response.data);
-                
+
             }
             GenerateG7Charts();
 
@@ -1679,7 +1679,7 @@ function BindTVICharts() {
                 'Accept-Language': $CurrentCulture
             },
             success: function (response) {
-                
+
                 if (response.data != null) {
                     jsonDTISOTVIChartList = response.data.DTISOTVIChartList;
                     jsonDTSpreadChartData_CMYKList = response.data.DTSpreadChartData_CMYKList;
@@ -1688,7 +1688,7 @@ function BindTVICharts() {
                     PopulateTVIISOChart();
                     PopulateTVIG7CMYKChart();
                     PopulateTVISpreadChart();
-                    
+
                     var spreadStatesViewModel = response.data.DTMaxSpreadChartDataList[0];
                     kendo.bind($('#chromVariationTable'), spreadStatesViewModel);
                 }
@@ -2150,11 +2150,12 @@ function GenerateG7Charts() {
 function BindMeasurementPatchDetails() {
 
     var measurementID = parseInt($hdMeasurement.val());
-    var apiParameters = {
-        MeasurementId: measurementID,
-        IsVerificationProject: $hdnVerification,
-        IsSync1DTypeProject: $hdnSync1DType
-    };
+    //var apiParameters = {
+    //    MeasurementId: measurementID,
+    //    IsVerificationProject: $hdnVerification,
+    //    IsSync1DTypeProject: $hdnSync1DType,
+    //    metricSumID: '-1'
+    //};
 
 
     $divMeasurementPatchDetails.kendoGrid({
@@ -2164,7 +2165,12 @@ function BindMeasurementPatchDetails() {
                     $.ajax({
                         type: "GET",
                         url: SERVICE_BASE_URL + 'api/Chart/GetMeasurementPatchDetails',
-                        data: apiParameters,
+                        data: {
+                            MeasurementId: measurementID,
+                            IsVerificationProject: $hdnVerification,
+                            IsSync1DTypeProject: $hdnSync1DType,
+                            metricSumID: $('#hdPatchMatricSum').val()
+                        },
                         dataType: "json",
                         headers: {
                             'Accept-Language': $CurrentCulture
@@ -2494,6 +2500,15 @@ function BindMeasurementPatchDetails() {
                         data: params,
                     }
                 }
+            },
+            change: function (e) {
+                var matrixSum = '-1';
+                if (this.value() != '')
+                    matrixSum = this.value();
+
+                $('#hdPatchMatricSum').val(this.value());
+                $divMeasurementPatchDetails.data('kendoGrid').dataSource.read();
+                $divMeasurementPatchDetails.data('kendoGrid').refresh();
             }
         });
 
@@ -2575,7 +2590,7 @@ function BindMeasurementPatchDetails() {
 
 ////**************** POPULATE THE ANALYZE CHART  ****************////
 function PopulateAnalyzeChart() {
-    
+
     var measurementID = 0;
     var indexStart = 0;
     var indexEnd = 0;
@@ -2891,7 +2906,7 @@ function PopulateAnalyzeChart() {
             $hdnCurrentMeasurement.val(e.category.MeasurementId);
             $hdMeasurement.val($hdnCurrentMeasurement.val());
             BindAllTabs();
-            
+
             $divAnalyzeChart.data('kendoChart').refresh();
         }
     });
@@ -3101,7 +3116,7 @@ function PopulateInkPaperChartABComparision() {
             visible: true,
             //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
             //template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " " + _Resources._recL + ": #= dataItem.CielabL # " + _Resources._recA + ": #= dataItem.CielabA # " + _Resources._recB + ": #= dataItem.CielabB # <br/>" + _Resources._recTarget + " " + _Resources._recL + ": #= dataItem.TargetL # " + _Resources._recA + ": #= dataItem.Targeta # " + _Resources._recB + ": #= dataItem.Targetb # <br/>" + _Resources._recDeltaE + ":  #= value #"
-            template: function (dataItem) {                
+            template: function (dataItem) {
                 var item = dataItem.dataItem;
                 var toolTipString = "<table>";
                 toolTipString += "<tr><td><b>" + item.title + "</b></td></tr>";
@@ -3950,7 +3965,7 @@ function PopulateTVIISOChart() {
         valueAxis: {
             min: 0,
             name: "valueAxis",
-            majorUnit: 5,            
+            majorUnit: 5,
         },
         seriesDefaults: {
             line: {
@@ -4015,7 +4030,7 @@ function PopulateTVIISOChart() {
         valueAxis: {
             min: 0,
             name: "valueAxis",
-            majorUnit: 5,            
+            majorUnit: 5,
         },
         seriesDefaults: {
             line: {
@@ -4259,7 +4274,7 @@ function PopulateTVISpreadChart() {
             obj.DifferentTitleTwo = DifferentTitleTwo;
         }
     });
-    
+
 
     $.each(jsonSpread_M, function (index, obj) {
         var cynValue = 0;
@@ -4385,7 +4400,7 @@ function PopulateTVISpreadChart() {
                 }
             },
         ],
-        valueAxis: {            
+        valueAxis: {
             name: "valueAxis",
             majorUnit: 5,
             axisCrossingValues: -100,
