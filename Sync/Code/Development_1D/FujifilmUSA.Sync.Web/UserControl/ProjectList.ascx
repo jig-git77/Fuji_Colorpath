@@ -6,9 +6,9 @@
 <%@ Register Src="~/UserControl/PopupControl/OpenPrintCondition.ascx" TagName="OpenPrintCondition"
     TagPrefix="uc" %>
 
-<link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
-<link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
-<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>
+<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
 <script src="JS/ProjectList.js"></script>
 
 <script type="text/javascript" language="javascript">
