@@ -759,241 +759,241 @@ function BindMeasurementPatchDetails() {
                             console.log(XMLHttpRequest.responseText);
                         }
                     });
-},
+                },
 
             },
-schema: {
-    model: {
-        fields: {
-            SampleID: {
-                from: "SampleID"
+            schema: {
+                model: {
+                    fields: {
+                        SampleID: {
+                            from: "SampleID"
+                        },
+                        SampleName: {
+                            from: "SampleName"
+                        },
+                        CMYK_C: {
+                            from: "CMYK_C"
+                        },
+                        CMYK_M: {
+                            from: "CMYK_M"
+                        },
+                        CMYK_Y: {
+                            from: "CMYK_Y"
+                        },
+                        CMYK_K: {
+                            from: "CMYK_K"
+                        },
+                        HTMLColor: {
+                            from: "HTMLColor"
+                        },
+                        TargetL: {
+                            from: "TargetL"
+                        },
+                        Targeta: {
+                            from: "Targeta"
+                        },
+                        Targetb: {
+                            from: "Targetb"
+                        },
+                        CIELAB_L: {
+                            from: "CIELAB_L"
+                        },
+                        CIELAB_a: {
+                            from: "CIELAB_a"
+                        },
+                        CIELAB_b: {
+                            from: "CIELAB_b"
+                        },
+                        ΔE: {
+                            from: "ΔE"
+                        },
+                        ΔE94: {
+                            from: "ΔE94"
+                        },
+                        ΔE2000: {
+                            from: "ΔE2000"
+                        },
+                        Density_V: {
+                            from: "Density_V"
+                        },
+                        Density_C: {
+                            from: "Density_C"
+                        },
+                        Density_M: {
+                            from: "Density_M"
+                        },
+                        Density_Y: {
+                            from: "Density_Y"
+                        },
+                        PatchTypeID: {
+                            from: "PatchTypeID"
+                        },
+                        ΔH: {
+                            from: "ΔH"
+                        },
+                        ΔCh: {
+                            from: "ΔCh"
+                        },
+                        ΔL: {
+                            from: "ΔL"
+                        }
+                    }
+                }
             },
-            SampleName: {
-                from: "SampleName"
-            },
-            CMYK_C: {
-                from: "CMYK_C"
-            },
-            CMYK_M: {
-                from: "CMYK_M"
-            },
-            CMYK_Y: {
-                from: "CMYK_Y"
-            },
-            CMYK_K: {
-                from: "CMYK_K"
-            },
-            HTMLColor: {
-                from: "HTMLColor"
-            },
-            TargetL: {
-                from: "TargetL"
-            },
-            Targeta: {
-                from: "Targeta"
-            },
-            Targetb: {
-                from: "Targetb"
-            },
-            CIELAB_L: {
-                from: "CIELAB_L"
-            },
-            CIELAB_a: {
-                from: "CIELAB_a"
-            },
-            CIELAB_b: {
-                from: "CIELAB_b"
-            },
-            ΔE: {
-                from: "ΔE"
-            },
-            ΔE94: {
-                from: "ΔE94"
-            },
-            ΔE2000: {
-                from: "ΔE2000"
-            },
-            Density_V: {
-                from: "Density_V"
-            },
-            Density_C: {
-                from: "Density_C"
-            },
-            Density_M: {
-                from: "Density_M"
-            },
-            Density_Y: {
-                from: "Density_Y"
-            },
-            PatchTypeID: {
-                from: "PatchTypeID"
-            },
-            ΔH: {
-                from: "ΔH"
-            },
-            ΔCh: {
-                from: "ΔCh"
-            },
-            ΔL: {
-                from: "ΔL"
-            }
-        }
-    }
-},
-pageSize: 10
+            pageSize: 10
         },
-sortable: true,
-    scrollable: true,
+        sortable: true,
+        scrollable: true,
         filterable: true,
-            //filterable: {
-            //    extra: false,
-            //    operators: {
-            //        string: {
-            //            eq: "Is equal to"
-            //        }
-            //    }
-            //},
-            pageable: {
-    refresh: true,
-        pageSizes: true
-},
-noRecords: {
-    template: ''
-},
-toolbar: kendo.template($("#templatePatchDetails").html()),
-    //toolbar: [{ 'name': 'exportCGATS', template: '<div style="float:left;"><button id="btnExportCGATS" class=\'k-button\'>Export CGATS</button></div>' }],
-    columns: [
-        {
-            field: "HTMLColor",
-            filterable: false,
-            title: "<b>Patch</b>",
-            //template: "<span id='sp' style='display:inline-block;background-color:#FFB700;height:14px;width:30px;'></span>",
-            template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
-            width: "50px",
-            //locked: true,
-            //lockable: false,
+        //filterable: {
+        //    extra: false,
+        //    operators: {
+        //        string: {
+        //            eq: "Is equal to"
+        //        }
+        //    }
+        //},
+        pageable: {
+            refresh: true,
+            pageSizes: true
         },
-        {
-            field: "SampleID",
-            title: "<b>ID</b>",
-            width: "50px",
-            filterable: false,
-            //locked: true,
+        noRecords: {
+            template: ''
         },
-        {
-            field: "SampleName",
-            title: "<b>Name</b>",
-            filterable: false,
-            width: "50px",
-            // locked: true,
-        },
-        {
-            field: "CMYK_C",
-            title: "<b>C</b>",
-            format: "{0:n2}",
-            width: "50px",
-            //locked: true,
-        },
-        {
-            field: "CMYK_M",
-            title: "<b>M</b>",
-            format: "{0:n2}",
-            width: "50px",
-            //locked: true,
-        },
-        {
-            field: "CMYK_Y",
-            title: "<b>Y</b>",
-            format: "{0:n2}",
-            width: "50px",
-            //locked: true,
-        },
-        {
-            field: "CMYK_K",
-            title: "<b>K</b>",
-            format: "{0:n2}",
-            width: "50px",
-            //locked: true,
-        },
-        {
-            field: "ΔE",
-            title: "<b>ΔE</b>",
-            width: "50px",
-            format: "{0:n2}",
-        },
-        {
-            field: "ΔE94",
-            title: "<b>ΔE94</b>",
-            width: "50px",
-            format: "{0:n2}",
-        },
-        {
-            field: "ΔE2000",
-            title: "<b>ΔE2000</b>",
-            width: "80px",
-            format: "{0:n2}",
-        },
-        {
-            field: "TargetL",
-            title: "<b>TargetL</b>",
-            width: "80px",
-            format: "{0:n2}",
-        },
-        {
-            field: "CIELAB_L",
-            title: "<b>CIELAB_L</b>",
-            width: "80px",
-            format: "{0:n2}",
-        },
-        {
-            field: "Targeta",
-            title: "<b>Targeta</b>",
-            width: '80px',
-            format: "{0:n2}",
-        },
-        {
-            field: "CIELAB_a",
-            title: "<b>CIELAB_a</b>",
-            width: "80px",
-            format: "{0:n2}",
-        },
-        {
-            field: "Targetb",
-            title: "<b>Targetb</b>",
-            width: '80px',
-            format: "{0:n2}",
-        },
-        {
-            field: "CIELAB_b",
-            title: "<b>CIELAB_b</b>",
-            width: "80px",
-            format: "{0:n2}",
-        },
-        {
-            field: "Density_V",
-            title: "<b>Density_V</b>",
-            width: "80px",
-            format: "{0:n2}",
-        },
-        {
-            field: "Density_C",
-            title: "<b>Density_C</b>",
-            width: '80px',
-            format: "{0:n2}",
-        },
-        {
-            field: "Density_M",
-            title: "<b>Density_M</b>",
-            width: "80px",
-            format: "{0:n2}",
-        },
-        {
-            field: "Density_Y",
-            title: "<b>Density_Y</b>",
-            width: '80px',
-            format: "{0:n2}",
-        },
-    ],
+        toolbar: kendo.template($("#templatePatchDetails").html()),
+        //toolbar: [{ 'name': 'exportCGATS', template: '<div style="float:left;"><button id="btnExportCGATS" class=\'k-button\'>Export CGATS</button></div>' }],
+        columns: [
+            {
+                field: "HTMLColor",
+                filterable: false,
+                title: "<b>Patch</b>",
+                //template: "<span id='sp' style='display:inline-block;background-color:#FFB700;height:14px;width:30px;'></span>",
+                template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
+                width: "50px",
+                //locked: true,
+                //lockable: false,
+            },
+            {
+                field: "SampleID",
+                title: "<b>ID</b>",
+                width: "50px",
+                filterable: false,
+                //locked: true,
+            },
+            {
+                field: "SampleName",
+                title: "<b>Name</b>",
+                filterable: false,
+                width: "50px",
+                // locked: true,
+            },
+            {
+                field: "CMYK_C",
+                title: "<b>C</b>",
+                format: "{0:n2}",
+                width: "50px",
+                //locked: true,
+            },
+            {
+                field: "CMYK_M",
+                title: "<b>M</b>",
+                format: "{0:n2}",
+                width: "50px",
+                //locked: true,
+            },
+            {
+                field: "CMYK_Y",
+                title: "<b>Y</b>",
+                format: "{0:n2}",
+                width: "50px",
+                //locked: true,
+            },
+            {
+                field: "CMYK_K",
+                title: "<b>K</b>",
+                format: "{0:n2}",
+                width: "50px",
+                //locked: true,
+            },
+            {
+                field: "ΔE",
+                title: "<b>ΔE</b>",
+                width: "50px",
+                format: "{0:n2}",
+            },
+            {
+                field: "ΔE94",
+                title: "<b>ΔE94</b>",
+                width: "50px",
+                format: "{0:n2}",
+            },
+            {
+                field: "ΔE2000",
+                title: "<b>ΔE2000</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },
+            {
+                field: "TargetL",
+                title: "<b>TargetL</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },
+            {
+                field: "CIELAB_L",
+                title: "<b>CIELAB_L</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },
+            {
+                field: "Targeta",
+                title: "<b>Targeta</b>",
+                width: '80px',
+                format: "{0:n2}",
+            },
+            {
+                field: "CIELAB_a",
+                title: "<b>CIELAB_a</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },
+            {
+                field: "Targetb",
+                title: "<b>Targetb</b>",
+                width: '80px',
+                format: "{0:n2}",
+            },
+            {
+                field: "CIELAB_b",
+                title: "<b>CIELAB_b</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },
+            {
+                field: "Density_V",
+                title: "<b>Density_V</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },
+            {
+                field: "Density_C",
+                title: "<b>Density_C</b>",
+                width: '80px',
+                format: "{0:n2}",
+            },
+            {
+                field: "Density_M",
+                title: "<b>Density_M</b>",
+                width: "80px",
+                format: "{0:n2}",
+            },
+            {
+                field: "Density_Y",
+                title: "<b>Density_Y</b>",
+                width: '80px',
+                format: "{0:n2}",
+            },
+        ],
         //dataBound: function (e) {
         //    debugger;
         //    var measurementId = 0;
@@ -1024,115 +1024,115 @@ toolbar: kendo.template($("#templatePatchDetails").html()),
     });
 
 
-if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
 
-    var measurementID = parseInt($hdnCurrentMeasurement.val());
-    var params = {
-        MeasurementId: measurementID,
-        IsVerificationProject: $hdnVerification,
-        IsSync1DTypeProject: $hdnSync1DType,
-        fromDeltaE: $selectedDeltaE,
-        IsAverageOfMeasurements: $isAverageOfMeasurements
-    };
+        var measurementID = parseInt($hdnCurrentMeasurement.val());
+        var params = {
+            MeasurementId: measurementID,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            fromDeltaE: $selectedDeltaE,
+            IsAverageOfMeasurements: $isAverageOfMeasurements
+        };
 
-    $divMeasurementPatchDetails.find("#ddlMatricSum").kendoDropDownList({
-        dataTextField: "Metric",
-        dataValueField: "MetricSumID",
-        autoBind: true,
-        keepOpen: false,
-        optionLabel: "All",
-        dataSource: {
-            transport: {
-                read: {
-                    type: "GET",
-                    url: SERVICE_BASE_URL + 'api/Chart/GetValidationMetrics',
-                    dataType: "json",
-                    data: params,
+        $divMeasurementPatchDetails.find("#ddlMatricSum").kendoDropDownList({
+            dataTextField: "Metric",
+            dataValueField: "MetricSumID",
+            autoBind: true,
+            keepOpen: false,
+            optionLabel: "All",
+            dataSource: {
+                transport: {
+                    read: {
+                        type: "GET",
+                        url: SERVICE_BASE_URL + 'api/Chart/GetValidationMetrics',
+                        dataType: "json",
+                        data: params,
+                    }
                 }
+            },
+            change: function (e) {
+                var matrixSum = '-1';
+                if (this.value() != '')
+                    matrixSum = this.value();
+
+                $('#hdPatchMatricSum').val(this.value());
+                $divMeasurementPatchDetails.data('kendoGrid').dataSource.read();
+                $divMeasurementPatchDetails.data('kendoGrid').refresh();
             }
-        },
-        change: function (e) {                   
-            var matrixSum = '-1';
-            if (this.value() != '')
-                matrixSum = this.value();
+        });
 
-            $('#hdPatchMatricSum').val(this.value());            
-            $divMeasurementPatchDetails.data('kendoGrid').dataSource.read();
-            $divMeasurementPatchDetails.data('kendoGrid').refresh();
-        }
-    });
-
-} else {
-    $divMeasurementPatchDetails.find("#divMetricSum").css('display', 'none');
-}
-
-
-
-
-//$divMeasurementPatchDetails.data('kendoGrid').refresh();
-//$divMeasurementPatchDetails.find('.k-grid-content-locked').css('height', 'unset');
-
-$divMeasurementPatchDetails.find('#btnExportCGATS').on('click', function (e) {
-    e.preventDefault();
-
-    var selectedMatricSum = '';
-    if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
-        selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
+    } else {
+        $divMeasurementPatchDetails.find("#divMetricSum").css('display', 'none');
     }
-    var measurementID = parseInt($hdnCurrentMeasurement.val());
-    var apiReportParameters = {
-        MeasurementId: measurementID,
-        IsVerificationProject: $hdnVerification,
-        IsSync1DTypeProject: $hdnSync1DType,
-        metricSumID: selectedMatricSum
-    };
 
-    $.ajax({
-        type: "GET",
-        url: SERVICE_BASE_URL + 'api/Chart/GetCGATSPatchReport',
-        data: apiReportParameters,
-        dataType: "json",
-        success: function (response) {
-            if (response.data != null) {
-                var fileName = '~' + response.data;
-                window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
-            }
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            console.log(XMLHttpRequest.responseText);
-        }
-    });
-});
 
-$divMeasurementPatchDetails.find('#btnExportCFX').on('click', function (e) {
-    e.preventDefault();
-    var measurementID = parseInt($hdnCurrentMeasurement.val());
-    var selectedMatricSum = '';
-    if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
-        selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
-    }
-    var apiReportParameters = {
-        MeasurementId: measurementID,
-        IsVerificationProject: $hdnVerification,
-        IsSync1DTypeProject: $hdnSync1DType,
-        metricSumID: selectedMatricSum
-    };
-    $.ajax({
-        type: "GET",
-        url: SERVICE_BASE_URL + 'api/Chart/GetCFXPatchReport',
-        data: apiReportParameters,
-        dataType: "json",
-        success: function (response) {
-            if (response.data != null) {
-                var fileName = '~' + response.data;
-                window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
-            }
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            console.log(XMLHttpRequest.responseText);
+
+
+    //$divMeasurementPatchDetails.data('kendoGrid').refresh();
+    //$divMeasurementPatchDetails.find('.k-grid-content-locked').css('height', 'unset');
+
+    $divMeasurementPatchDetails.find('#btnExportCGATS').on('click', function (e) {
+        e.preventDefault();
+
+        var selectedMatricSum = '';
+        if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
+            selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
         }
+        var measurementID = parseInt($hdnCurrentMeasurement.val());
+        var apiReportParameters = {
+            MeasurementId: measurementID,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            metricSumID: selectedMatricSum
+        };
+
+        $.ajax({
+            type: "GET",
+            url: SERVICE_BASE_URL + 'api/Chart/GetCGATSPatchReport',
+            data: apiReportParameters,
+            dataType: "json",
+            success: function (response) {
+                if (response.data != null) {
+                    var fileName = '~' + response.data;
+                    window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.responseText);
+            }
+        });
     });
-});
+
+    $divMeasurementPatchDetails.find('#btnExportCFX').on('click', function (e) {
+        e.preventDefault();
+        var measurementID = parseInt($hdnCurrentMeasurement.val());
+        var selectedMatricSum = '';
+        if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
+            selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
+        }
+        var apiReportParameters = {
+            MeasurementId: measurementID,
+            IsVerificationProject: $hdnVerification,
+            IsSync1DTypeProject: $hdnSync1DType,
+            metricSumID: selectedMatricSum
+        };
+        $.ajax({
+            type: "GET",
+            url: SERVICE_BASE_URL + 'api/Chart/GetCFXPatchReport',
+            data: apiReportParameters,
+            dataType: "json",
+            success: function (response) {
+                if (response.data != null) {
+                    var fileName = '~' + response.data;
+                    window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.responseText);
+            }
+        });
+    });
 }
 
 
@@ -4119,12 +4119,12 @@ function PopulateTVIG7CMYKChart() {
             style: "smooth",
 
         },
-        legend: {
-            position: "top",
-            //labels: {
-            //    template: "Name: #= text #"
-            //}
-        },
+        //legend: {
+        //    position: "top",
+        //    //labels: {
+        //    //    template: "Name: #= text #"
+        //    //}
+        //},
         //dataSource: jsonKResult,
         series: [
             {
@@ -4250,7 +4250,39 @@ function PopulateTVIG7CMYKChart() {
                 color: "black"
             }
         },
-        render: renderChartWithBackgroundByAxis
+        render: renderChartWithBackgroundByAxis,
+        legend: {
+            position: "top",
+            item: {
+                visual: function (e) {
+                    var color = e.options.markers.background;
+                    var labelColor = e.options.labels.color;
+
+                    // Define the target dimensions for the legend item
+                    var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+
+                    // A layout will hold the checkbox and the default visual                    
+                    var layout = new kendo.drawing.Layout(rect, {
+                        spacing: 5,
+                        alignItems: "center"
+                    });
+                    // Cheat a bit by rendering the checkbox using the Unicode ballot symbol
+                    var cbSymbol = e.active ? "☑" : "☐";
+                    var cb = new kendo.drawing.Text(cbSymbol, [0, 0], {
+                        font: "16px sans-serif"
+                    });
+
+                    // This will give us the default box + text
+                    var defaultVisual = e.createVisual();
+
+                    // Reflow them together
+                    layout.append(cb, defaultVisual);
+                    layout.reflow()
+
+                    return layout;
+                }
+            }
+        },
     });
 }
 
@@ -4365,12 +4397,12 @@ function PopulateTVISpreadChart() {
         //    text: "Cyan"
         //},
         renderAs: "canvas",
-        legend: {
-            position: "top",
-            //labels: {
-            //    template: "Name: #= text #"
-            //}
-        },
+        //legend: {
+        //    position: "top",
+        //    //labels: {
+        //    //    template: "Name: #= text #"
+        //    //}
+        //},
         //dataSource: {
         //    data: jsonSpread_C
         //},
@@ -4451,7 +4483,39 @@ function PopulateTVISpreadChart() {
             width: 650,
             height: 350
         },
-        render: renderChartWithBackgroundByCategory
+        render: renderChartWithBackgroundByCategory,
+        legend: {
+            position: "top",
+            item: {
+                visual: function (e) {
+                    var color = e.options.markers.background;
+                    var labelColor = e.options.labels.color;
+
+                    // Define the target dimensions for the legend item
+                    var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+
+                    // A layout will hold the checkbox and the default visual                    
+                    var layout = new kendo.drawing.Layout(rect, {
+                        spacing: 5,
+                        alignItems: "center"
+                    });
+                    // Cheat a bit by rendering the checkbox using the Unicode ballot symbol
+                    var cbSymbol = e.active ? "☑" : "☐";
+                    var cb = new kendo.drawing.Text(cbSymbol, [0, 0], {
+                        font: "16px sans-serif"
+                    });
+
+                    // This will give us the default box + text
+                    var defaultVisual = e.createVisual();
+
+                    // Reflow them together
+                    layout.append(cb, defaultVisual);
+                    layout.reflow()
+
+                    return layout;
+                }
+            }
+        },
     });
 }
 

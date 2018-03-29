@@ -1,9 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Analyze_SpotColor.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze_SpotColor" %>
 <%@ Register Src="~/UserControl/PopupControl/SpotColorPatchDetails.ascx" TagName="SpotColorPatchDetails" TagPrefix="pd" %>
 <%--<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>--%>
-<link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
-<link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
-<%--<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>--%>
+<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
 <style>
     .PatchDetailsSummaryTable {
         line-height: 35px;
@@ -22,7 +22,7 @@
         }
 </style>
 
-<script type="text/javascript">
+<script type="application/javascript">
     var record = 0;
     var SERVICE_BASE_URL = '';
     var Resources = {};
@@ -182,6 +182,8 @@
             noRecords: {
                 template: ''
             },
+            //toolbar: [{ 'name': 'downloadPatch', template: '<div style="float:right;"><button id="btnDownloadSpotPatch" onclick="generateReport(' + optimizationId + ')" class=\'k-button\'>Export to PDF</button></div>' }],
+            toolbar: [{ 'name': 'downloadPatch', template: '<div style="float:right;"><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button\'>Export to PDF</button></div>' }],
             columns: [
                 {
                     field: "SpotID",
@@ -246,7 +248,6 @@
                 }
             ],
             dataBound: function (e) {
-                debugger;
                 var measurementId = 0;
                 if (e.sender.dataSource._view.length > 0) {
                     measurementId = e.sender.dataSource._view[0].MeasurementID;
@@ -273,6 +274,22 @@
                 });
             }
         });
+
+        $('#btnDownloadSpotPatch').on('click', function (e) {
+            e.preventDefault();            
+            var optimizationRun = $(this).attr('data-id');
+            $.ajax({
+                url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReport',
+                data: { OptimizationRunID: optimizationRun },
+                type: 'GET',
+                success: function (response) {
+                    window.open(SERVICE_BASE_URL + response.data, "_blank");
+                },
+                error: function (xhr, errorType, exception) {
+                    alert(exception);
+                }
+            });
+        })
     });
 
     function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID, P_htmlColor, M_htmlColor) {
@@ -286,7 +303,24 @@
         return false;
     }
 
-
+    function generateReport(optimizationRun) {
+        $.ajax({
+            url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReport',
+            data: { OptimizationRunID: optimizationRun },
+            type: 'GET',
+            //headers: {
+            //    "content-type": "application/json",
+            //},
+            success: function (response) {
+                //console.log(response);
+                window.open(SERVICE_BASE_URL + response.data, "_blank");
+            },
+            error: function (xhr, errorType, exception) {
+                debugger;
+                alert(exception);
+            }
+        });
+    }
 </script>
 
 <script type="text/javascript" language="javascript">
@@ -468,7 +502,7 @@
                 <tr>
                     <td>
                         <asp:Button ID="BtnExportCMYK" runat="server" CssClass="BUTTON" Text="Export CMYK"
-                                meta:resourcekey="BtnExportCMYKResource1" OnClick="BtnExportCMYK_Click" />
+                            meta:resourcekey="BtnExportCMYKResource1" OnClick="BtnExportCMYK_Click" />
                     </td>
                 </tr>
             </table>

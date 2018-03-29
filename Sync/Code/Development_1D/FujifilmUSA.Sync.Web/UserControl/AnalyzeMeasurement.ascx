@@ -1173,7 +1173,7 @@
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td style="padding-left: 60px;">
+                                                                                <td style="padding-left: 60px;padding-right: 60px;">
                                                                                     <table class="TDBOX" border="0" cellpadding="5" cellspacing="0" width="90%">
                                                                                         <tr class="TRTABLEBOX" style="line-height: 30px;">
                                                                                             <td class="TDTABLEBOXLEFT" style="text-align: left;">

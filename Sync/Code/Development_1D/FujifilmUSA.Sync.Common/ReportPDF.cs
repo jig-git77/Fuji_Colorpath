@@ -36,6 +36,7 @@ namespace FujifilmUSA.Sync.Common
         bool _IsValidation;
         string _WebURL;
         private ChartContent _chartContent;
+        private DataTable dtPatchDetails;
         #endregion
 
 
@@ -116,6 +117,11 @@ namespace FujifilmUSA.Sync.Common
         {
             get { return _chartContent; }
             set { _chartContent = value; }
+        }
+        public DataTable dtSpotPatchDetails
+        {
+            get { return dtPatchDetails; }
+            set { dtPatchDetails = value; }
         }
         #endregion
 
@@ -1896,6 +1902,80 @@ namespace FujifilmUSA.Sync.Common
         }
         #endregion
 
+        public void GenerateSpotPatchDetailsReport()
+        {
+            try
+            {
+                //========== Object of PDF ==========//
+                Doc theDoc = new Doc();
+
+                //========== Reads the template ==========//
+                StreamReader fp;
+
+                //========== The rectangle for the content on pdf ==========//
+                theDoc.Rect.Left = 0;
+                theDoc.Rect.Bottom = 30;
+                theDoc.Rect.Width = 610;
+                theDoc.Rect.Height = 770;
+
+                //========== The page ID Default is 1 ==========//
+                int theID;
+
+                //========== Adds New Page IN PDF ==========//
+                theDoc.Page = theDoc.AddPage();
+                //========== Adds a counter to Page ==========//
+                theCount++;
+
+                StringBuilder SBStr = new StringBuilder();
+                SBStr.Append("<html><body><table><tr><th>SpotID</th><th>SpotName</th><th>HTMLColor</th></tr>");
+                foreach (DataRow row in dtPatchDetails.Rows)
+                {
+                    SBStr.Append("<tr><td>" + Convert.ToString(row["SpotID"]) + "</td>");
+                    SBStr.Append("<td>" + Convert.ToString(row["SpotName"]) + " </td>");
+                    SBStr.Append("<td>" + Convert.ToString(row["HTMLColor"]) + " </td></tr>");
+                }
+                SBStr.Append("</table></body></html>");
+
+                //========== Assign HTML to theID ==========//
+                //1 : str = The html content.
+                //3 : width(612) = The dimension of the page to fix in A4 size paper.
+                theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
+
+                //========== Leave 30 Px on top of next page ==========//
+                theDoc.Rect.Inset(0, 1);
+
+                //========== Loops till the paging ==========//
+                while (true)
+                {
+                    //========== Create A chanin for a pdf with multiple page ==========//
+                    if (!theDoc.Chainable(theID))
+                        break;
+
+                    theDoc.Page = theDoc.AddPage();
+                    theCount++;
+                    theID = theDoc.AddImageToChain(theID);
+                }
+
+                //========== Reduce the top to start the next page from ==========//
+                theDoc.Rect.Inset(0, -1);
+
+                string pth = PDFPath + PDF_NAME;
+
+                // === If same named pdf file is already available then remove === //
+                if (System.IO.File.Exists(pth))
+                    System.IO.File.Delete(pth);
+
+                theDoc.Save(pth);
+                theDoc.Clear();
+                theDoc.Dispose();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        
     }
 
 
