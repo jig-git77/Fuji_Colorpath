@@ -292,7 +292,7 @@ namespace FujifilmUSA.Sync.Common
             {
                 string str = "";
                 //========== Object of PDF ==========//
-                Doc theDoc = new Doc();                
+                Doc theDoc = new Doc();
 
                 //========== The rectangle for the content on pdf ==========//
                 theDoc.Rect.Left = 0;
@@ -1169,7 +1169,7 @@ namespace FujifilmUSA.Sync.Common
                 string imagesLogoPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
                 SBStr.Replace("##LOGOIMAGES##", imagesLogoPath);
 
-                
+
                 //** Add Images Path ***//
                 string imagesPath = this.BaseWebURL + "Images/";
                 SBStr.Replace("##IMAGES##", imagesPath);
@@ -1295,7 +1295,7 @@ namespace FujifilmUSA.Sync.Common
                 #region ==== Target Vs Actual AB Plot ====
                 SBStr.Replace("###TargetVersusActualAB###", this.chartContent.ABComparisionSpiderChart);
                 #endregion
-                
+
                 #region ==== Summary Delta E Value Graph Image ====
                 DT = DS_Common.Tables[3];
                 StringBuilder SBstrDeltaEValue = new StringBuilder();
@@ -1908,15 +1908,13 @@ namespace FujifilmUSA.Sync.Common
             {
                 //========== Object of PDF ==========//
                 Doc theDoc = new Doc();
-
-                //========== Reads the template ==========//
-                StreamReader fp;
+                
 
                 //========== The rectangle for the content on pdf ==========//
-                theDoc.Rect.Left = 0;
-                theDoc.Rect.Bottom = 30;
-                theDoc.Rect.Width = 610;
-                theDoc.Rect.Height = 770;
+                //theDoc.Rect.Left = 0;
+                //theDoc.Rect.Bottom = 25;
+                //theDoc.Rect.Width = 610;
+                //theDoc.Rect.Height = 770;
 
                 //========== The page ID Default is 1 ==========//
                 int theID;
@@ -1926,15 +1924,51 @@ namespace FujifilmUSA.Sync.Common
                 //========== Adds a counter to Page ==========//
                 theCount++;
 
-                StringBuilder SBStr = new StringBuilder();
-                SBStr.Append("<html><body><table><tr><th>SpotID</th><th>SpotName</th><th>HTMLColor</th></tr>");
+                string FileName = "Templates/kendoPrepressSpotProjectPatch.htm";
+                string FilePath = this._WebURL + FileName;
+
+                //========== Reads the template ==========//
+                var webClient = new System.Net.WebClient();
+                StringBuilder SBStr = new StringBuilder(webClient.DownloadString(FilePath));
+
+
+                string cssFullPath = this._WebURL + "Templates/style.css";
+                SBStr.Replace("#csspath#", cssFullPath);
+
+                //** Add Images Path ***//
+                string imagesLogoPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
+                SBStr.Replace("##LOGOIMAGES##", imagesLogoPath);
+
+
+                //** Add Images Path ***//
+                string imagesPath = this.BaseWebURL + "Images/";
+                SBStr.Replace("##IMAGES##", imagesPath);
+
+
+
+                StringBuilder PatchStr = new StringBuilder();
+                //PatchStr.Append("<html><body><table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>SpotName</th><th>HTMLColor</th>");
+                PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>SpotName</th><th>HTMLColor</th>");
+                int measurementID = dtPatchDetails != null && dtPatchDetails.Rows.Count > 0 ? Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]) : 0;
+                if (measurementID == 0)
+                    PatchStr.Append("<th>pΔL</th><th>pΔa</th><th>pΔb</th></tr>");
+                else
+                    PatchStr.Append("<th>ΔE_T_P</th><th>ΔE_M_T</th><th>ΔE_M_P</th></tr>");
                 foreach (DataRow row in dtPatchDetails.Rows)
                 {
-                    SBStr.Append("<tr><td>" + Convert.ToString(row["SpotID"]) + "</td>");
-                    SBStr.Append("<td>" + Convert.ToString(row["SpotName"]) + " </td>");
-                    SBStr.Append("<td>" + Convert.ToString(row["HTMLColor"]) + " </td></tr>");
+                    PatchStr.Append("<tr><td>" + Convert.ToString(row["SpotID"]) + "</td>");
+                    PatchStr.Append("<td>" + Convert.ToString(row["SpotName"]) + " </td>");
+                    PatchStr.Append("<td>" + Convert.ToString(row["HTMLColor"]) + " </td>");
+                    if (measurementID == 0)
+                        PatchStr.Append("<td>" + Convert.ToString(row["ΔL"]) + "</td><td>" + Convert.ToString(row["Δa"]) + "</td><td>" + Convert.ToString(row["Δb"]) + "</td>");
+                    else
+                        PatchStr.Append("<td>" + Convert.ToString(row["ΔE_T_P"]) + "</td><td>" + Convert.ToString(row["ΔE_M_T"]) + "</td><td>" + Convert.ToString(row["ΔE_M_P"]) + "</td>");
+                    PatchStr.Append("</tr>");
                 }
-                SBStr.Append("</table></body></html>");
+                //PatchStr.Append("</table></body></html>");
+                PatchStr.Append("</table>");
+
+                SBStr.Replace("###SpotProjectPatchDetails###", PatchStr.ToString());
 
                 //========== Assign HTML to theID ==========//
                 //1 : str = The html content.
@@ -1959,6 +1993,29 @@ namespace FujifilmUSA.Sync.Common
                 //========== Reduce the top to start the next page from ==========//
                 theDoc.Rect.Inset(0, -1);
 
+                //#region Add Footer
+                //theDoc.HPos = 0.0;
+                //theDoc.VPos = 0.0;
+                //theDoc.Color.String = "255 255 255";
+                //theDoc.FontSize = 8;
+
+                //theDoc.Rect.String = "-10 0 622 52";
+                //for (int i = 1; i <= theCount; i++)
+                //{
+                //    theDoc.HPos = 0.0;
+                //    theDoc.VPos = 0.0;
+                //    theDoc.PageNumber = i;
+
+                //    string str = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"> " +
+                //            "<tr style=\"height:25px\"><td align=\"center\" valign=\"middle\" bgcolor=\"#C1C1C1\" style=\"color:#000000; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif;\" width=\"150px\" >" + DateTime.Now.ToLongDateString() + "</td> " +
+                //            "<td align=\"center\" valign=\"middle\" bgcolor=\"#C1C1C1\" style=\"color:#000000; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif; \">&copy; Fujifilm " + DateTime.Now.Year.ToString() + "</td> " +
+                //            "<td width=\"112px\" align=\"center\" valign=\"middle\" bgcolor=\"#5A5A5A\" style=\"color:#CCCCCC; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif; \">Page " + i.ToString() + " of " + theCount.ToString() + " </td></tr></table>";
+
+                //    theDoc.AddImageHtml(str);
+                //}
+
+                //#endregion
+
                 string pth = PDFPath + PDF_NAME;
 
                 // === If same named pdf file is already available then remove === //
@@ -1975,7 +2032,7 @@ namespace FujifilmUSA.Sync.Common
                 throw;
             }
         }
-        
+
     }
 
 

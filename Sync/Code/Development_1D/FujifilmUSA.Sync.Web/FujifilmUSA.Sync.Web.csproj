@@ -2404,6 +2404,7 @@
     <Content Include="SpotMeasurement.aspx" />
     <Content Include="Spot_Measurement.aspx" />
     <Content Include="Templates\HelloWorld.htm" />
+    <Content Include="Templates\kendoPrepressSpotProjectPatch.htm" />
     <Content Include="Templates\kendoPrepressSingleMeasurement_ISO.htm" />
     <Content Include="Templates\kendoPrepressSingleMeasurement.htm" />
     <Content Include="Templates\kendoPrepressSingleMeasurement_Default.htm" />
@@ -6178,7 +6179,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
