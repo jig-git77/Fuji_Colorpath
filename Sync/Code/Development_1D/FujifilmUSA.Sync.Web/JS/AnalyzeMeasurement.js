@@ -557,6 +557,7 @@ function BindMeasurementSummary() {
             url: SERVICE_BASE_URL + 'api/Analyze/GetValidationMeasurementSummaryDetails',
             data: apiParameter,
             type: 'GET',
+            async: false,
             headers: {
                 "content-type": "application/json",
             },
@@ -5056,6 +5057,8 @@ function CheckAvgCompability() {
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
 
         $isAverageOfMeasurements = $('#chkAnalyzeAverageOfMeasurements').is(':checked');
+        BindMeasurementSummary();
+
         if ($isAverageOfMeasurements) {
 
             if (tabStrip.select().index() == 5) {
@@ -5065,9 +5068,8 @@ function CheckAvgCompability() {
             $(tabStrip.items()[5]).hide();
 
             //show average measurement summary tab
-            $('#tblAverageMeasurementSummary').css('display', 'block');
             $('#tblValidationSummary').css('display', 'none');
-
+            $('#tblAverageMeasurementSummary').css('display', 'block');            
         } else {
             //Show default tabs patch details
             $(tabStrip.items()[5]).show();
