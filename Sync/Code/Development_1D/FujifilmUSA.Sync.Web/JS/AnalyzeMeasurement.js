@@ -1493,6 +1493,7 @@ function PopulateAnalyzeChart() {
                 IsUsed: e.IsUsed,
                 MeasurementStatus: e.MeasurementStatus,
                 MeasurementDate: e.MeasurementDate,
+                dEMethod: e.dEMethod
             };
             return curObj;
         });
@@ -1759,11 +1760,19 @@ function PopulateAnalyzeChart() {
         },
         seriesClick: function (e) {
             //alert(1);
+            var dMethod = e.category.dEMethod;
+            dMethod = dMethod.substring(1, dMethod.length);
+            $('#hdnDefaultSelectedDelta').val(dMethod);
+            $selectedDeltaE = dMethod;
+
+
             $hdnCurrentMeasurement.val(e.category.MeasurementId);
             $hdMeasurement.val($hdnCurrentMeasurement.val());
             BindAllTabs();
 
-            $divAnalyzeChart.data('kendoChart').refresh();
+            var analyzeChart = $divAnalyzeChart.data('kendoChart');
+            analyzeChart.options.valueAxis.title.text = e.category.dEMethod;
+            analyzeChart.refresh();
         }
     });
 
@@ -1837,7 +1846,8 @@ function PopulateInkPaperChartABComparision() {
         case (maxDeltaLimit >= 20 && maxDeltaLimit < 30): maxValue = 30; marginValue = 5; break;
         case (maxDeltaLimit >= 30 && maxDeltaLimit < 40): maxValue = 40; marginValue = 5; break;
         case (maxDeltaLimit >= 40 && maxDeltaLimit < 50): maxValue = 50; marginValue = 5; break;
-        case (maxDeltaLimit >= 50): maxValue = 50; marginValue = 5; break;
+        case (maxDeltaLimit >= 50 && maxDeltaLimit < 60): maxValue = 60; marginValue = 5; break;
+        default: maxValue = maxDeltaLimit; marginValue = 10; break;
     }
 
     //generate the second stacked chart by max value
@@ -5069,7 +5079,7 @@ function CheckAvgCompability() {
 
             //show average measurement summary tab
             $('#tblValidationSummary').css('display', 'none');
-            $('#tblAverageMeasurementSummary').css('display', 'block');            
+            $('#tblAverageMeasurementSummary').css('display', 'block');
         } else {
             //Show default tabs patch details
             $(tabStrip.items()[5]).show();
