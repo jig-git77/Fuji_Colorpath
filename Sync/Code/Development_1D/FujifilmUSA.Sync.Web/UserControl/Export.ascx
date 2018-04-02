@@ -3,8 +3,10 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxtoolkit" %>
 
-<link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
-<link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
+<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
+
+<script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
 <script src="JS/Export.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {
@@ -410,7 +412,7 @@
                                                          </td>
 
                                                          <td style="width: 40%">                                                               
-                                                              <table id="tblExport" style="width: 100%">
+                                                              <table class="scrollableTable" id="tblExport" style="width: 100%">
                                                                     <thead>
                                                                         <tr>
                                                                             <th>Reference%</th>
@@ -564,7 +566,7 @@
                                                             <div id="Chart_Delta"></div>                                                      
                                                          </td>
                                                          <td style="width: 40%">                                            
-                                                            <table id="tblDeltaView" style="width: 100%">
+                                                            <table class="scrollableTable"  id="tblDeltaView" style="width: 100%">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Reference%</th>

@@ -82,13 +82,20 @@ function BindChart() {
 }
 
 function BindExportView(result) {
-    $("#tblExport tbody").html('');
+    
+    var kendoGrid = $("#tblExport").data("kendoGrid");
     kendo.bind($("#tblExport"), result);
-    $("#tblExport").kendoGrid({
-        pageable: false,
-        scrollable: true,
-        height: 300
-    });
+    
+    if (kendoGrid) {       
+    }
+    else {
+        $("#tblExport").kendoGrid({
+            pageable: false,
+            scrollable: true,
+            height: 300
+        });
+    }
+    
 
     var listC = {
         name: "Cyan",
@@ -170,13 +177,19 @@ function BindExportView(result) {
 }
 
 function BindDeltaView(result) {
+
+    var kendoGrid = $("#tblDeltaView").data("kendoGrid");
     kendo.bind($("#tblDeltaView"), result);
 
-    $("#tblDeltaView").kendoGrid({
-        pageable: false,
-        scrollable: true,
-        height: 300
-    });
+    if (kendoGrid) {
+    }
+    else {
+        $("#tblDeltaView").kendoGrid({
+            pageable: false,
+            scrollable: true,
+            height: 200
+        });
+    }
 
     var listC = {
         name: "Cyan",
