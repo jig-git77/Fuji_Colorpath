@@ -886,7 +886,7 @@ function BindMeasurementPatchDetails() {
                 title: "<b title='Name'>Name</b>",
                 filterable: false,
                 width: "50px",
-                // locked: true,
+                //locked: true,
             },
             {
                 field: "CMYK_C",
@@ -994,7 +994,71 @@ function BindMeasurementPatchDetails() {
                 width: '80px',
                 format: "{0:n2}",
             },
+            {
+                field: "ΔH",
+                title: "<b title='ΔH'>ΔH</b>",
+                width: '80px',
+                format: "{0:n2}",
+                hidden: true,
+            },
+            {
+                field: "ΔCh",
+                title: "<b title='ΔCh'>ΔCh</b>",
+                width: '80px',
+                format: "{0:n2}",
+                hidden: true,
+            },
+            {
+                field: "ΔL",
+                title: "<b title='ΔL'>ΔL</b>",
+                width: '80px',                
+                format: "{0:n2}",
+                hidden: true,
+            },
         ],
+        dataBound: function (e) {
+            debugger;
+            var selectedMatricSum = parseInt($divMeasurementPatchDetails.find("#ddlMatricSum").val())            
+            var grid = $divMeasurementPatchDetails.data("kendoGrid");
+            if (!isNaN(selectedMatricSum)) {
+                switch (selectedMatricSum){
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 25:
+                    case 26:
+                        grid.showColumn(20);
+                        grid.hideColumn(21);
+                        grid.hideColumn(22);
+                        break;
+                    case 8:
+                    case 9:
+                    case 36:
+                    case 37:
+                    case 48:
+                        grid.hideColumn(20);
+                        grid.showColumn(21);
+                        grid.hideColumn(22);
+                        break;
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 38:
+                    case 39:
+                    case 40:
+                    case 41:
+                        grid.hideColumn(20);
+                        grid.hideColumn(21);
+                        grid.showColumn(22);
+                        break;
+                    default:
+                        grid.hideColumn(20);
+                        grid.hideColumn(21);
+                        grid.showColumn(22);
+                }
+            }
+        }
         //dataBound: function (e) {
         //    debugger;
         //    var measurementId = 0;
