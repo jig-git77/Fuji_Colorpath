@@ -373,33 +373,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Button BtnExportCurvesExportView;
         
         /// <summary>
-        /// Localize3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize3;
-        
-        /// <summary>
-        /// drpCurveType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpCurveType;
-        
-        /// <summary>
-        /// Button2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
-        
-        /// <summary>
         /// rbtnDetlaReflist control.
         /// </summary>
         /// <remarks>
@@ -436,13 +409,58 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Button BtnExportCurvesDeltaView;
         
         /// <summary>
-        /// RadioButtonList1 control.
+        /// Localize5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonList1;
+        protected global::System.Web.UI.WebControls.Localize Localize5;
+        
+        /// <summary>
+        /// Localize6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize6;
+        
+        /// <summary>
+        /// Localize3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize3;
+        
+        /// <summary>
+        /// drpCurveType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpCurveType;
+        
+        /// <summary>
+        /// Button2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
+        
+        /// <summary>
+        /// rbtnDetlaReflistClient control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rbtnDetlaReflistClient;
         
         /// <summary>
         /// Button1 control.

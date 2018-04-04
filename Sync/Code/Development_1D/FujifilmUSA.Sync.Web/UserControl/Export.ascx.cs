@@ -107,6 +107,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
                 {
                     rbtnDetlaReflist.Items[1].Enabled = false;
+                    rbtnDetlaReflistClient.Items[1].Enabled = false;
                 }
             }
         }

@@ -2914,7 +2914,7 @@ function PopulateAnalyzeChart() {
             $hdMeasurement.val($hdnCurrentMeasurement.val());
             BindAllTabs();
 
-            var analyzeChart = $divAnalyzeChart.data('kendoChart');            
+            var analyzeChart = $divAnalyzeChart.data('kendoChart');
             analyzeChart.options.valueAxis.title.text = e.category.dEMethod;
             analyzeChart.refresh();
         }
@@ -3478,12 +3478,11 @@ function PopulateTVIG7Chart() {
     var jsonKResult = jsonEmpty.concat(jsonK);
 
     $divChartTVISummaryDotGain.kendoChart({
-        //title: {
-        //    text: "TVI Chart"
-        //},
+        renderAs: "canvas",
         seriesDefaults: {
             type: "scatterLine",
-            style: "smooth"
+            style: "smooth",
+            width: 2
         },
         //dataSource: jsonKResult,
         series: [

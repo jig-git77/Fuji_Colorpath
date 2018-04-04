@@ -1245,10 +1245,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     DetermineCulture();
                     this.OptimizeRunId = Convert.ToInt32(OptimizationRunId);
                     this.CurveTypeId = Convert.ToInt16(CurveType);
-                    _presenterExport.GetCurveData();
-                    var str = JsonConvert.SerializeObject(CurveData.CurveExportView);
-                    var str1 = JsonConvert.SerializeObject(CurveData.CurveDeltaRefView);
-                    var str2 = JsonConvert.SerializeObject(CurveData.CurveDeltaPrevRunView);
+                    _presenterExport.GetCurveData();                    
                     GenerateResources();
                     httpResponse.Data = new
                     {

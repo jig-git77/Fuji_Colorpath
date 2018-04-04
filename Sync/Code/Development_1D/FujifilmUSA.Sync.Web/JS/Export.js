@@ -39,6 +39,8 @@ $(document).ready(function () {
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
     $hdnOptimizationRunID = $('#hdnOptimizationRunID').val();
 
+   
+
     $drpCurveType.kendoDropDownList();
 
   
@@ -47,6 +49,13 @@ $(document).ready(function () {
     $drpCurveType.on('change', function (e) {
         e.preventDefault();
         BindChart();
+    });
+    $("#tabstrip").kendoTabStrip({
+        animation: {
+            open: {
+                effects: "fadeIn"
+            }
+        }
     });
 });
 
@@ -92,7 +101,13 @@ function BindExportView(result) {
         $("#tblExport").kendoGrid({
             pageable: false,
             scrollable: true,
-            height: 300
+            height: 400,
+            dataBound: function (e) {
+                $(e.sender.tbody).find("tr td:nth-child(2)").css('background-color', '#E0F3FF');
+                $(e.sender.tbody).find("tr td:nth-child(3)").css('background-color', '#FFEFF9');
+                $(e.sender.tbody).find("tr td:nth-child(4)").css('background-color', '#FFFDEE');
+                $(e.sender.tbody).find("tr td:nth-child(5)").css('background-color', '#E7EBEE');
+            }
         });
     }
     
@@ -133,6 +148,7 @@ function BindExportView(result) {
 
 
     $("#Chart_Curve").kendoChart({
+        renderAs: "canvas",
         //title: {
         //    text: "Export View"
         //},
@@ -167,11 +183,11 @@ function BindExportView(result) {
         //    visible: true,
         //    format: "{1}% in {0} minutes"
         //},
-        chartArea: {
-            background: "#EFEFEF"
-            //width: 500,
-            //height: 400
-        },
+        //chartArea: {
+        //    background: "#EFEFEF"
+        //    //width: 500,
+        //    //height: 400
+        //},
         render: renderChartWithBackgroundByAxis
     });
 }
@@ -187,7 +203,13 @@ function BindDeltaView(result) {
         $("#tblDeltaView").kendoGrid({
             pageable: false,
             scrollable: true,
-            height: 200
+            height: 400,
+            dataBound: function (e) {
+                $(e.sender.tbody).find("tr td:nth-child(2)").css('background-color', '#E0F3FF');
+                $(e.sender.tbody).find("tr td:nth-child(3)").css('background-color', '#FFEFF9');
+                $(e.sender.tbody).find("tr td:nth-child(4)").css('background-color', '#FFFDEE');
+                $(e.sender.tbody).find("tr td:nth-child(5)").css('background-color', '#E7EBEE');
+            }
         });
     }
 
@@ -223,8 +245,20 @@ function BindDeltaView(result) {
         listB.data.push([obj.ReferenceNo, obj.CMYK_K.toFixed(0)]);
     });
 
+    var minimumX = Math.min.apply(null, $.map(result.CurveDeltaRefView, function (e) {
+        return Math.min(e.CMYK_C, e.CMYK_M, e.CMYK_Y, e.CMYK_K);
+    }));
+
+    var maximumX = Math.max.apply(null, $.map(result.CurveDeltaRefView, function (e) {
+        return Math.max(e.CMYK_C, e.CMYK_M, e.CMYK_Y, e.CMYK_K);
+    }));
+
+    minimumX = parseInt(minimumX.toFixed(0)) - 1;
+    maximumX = parseInt(maximumX.toFixed(0)) + 1;
+    var division = (parseInt(minimumX.toFixed(0)) + parseInt(maximumX.toFixed(0))) / 5;
 
     $("#Chart_Delta").kendoChart({
+        renderAs: "canvas",
         //title: {
         //    text: "ΔView"
         //},
@@ -233,7 +267,8 @@ function BindDeltaView(result) {
             position: 'top'
         },
         seriesDefaults: {
-            type: "scatterLine"
+            type: "scatterLine",
+            width: 2,
         },
         series: [listC, listY, listM, listB],
         xAxis: {
@@ -247,13 +282,16 @@ function BindDeltaView(result) {
             line: {
                 visible: false
             },
-            //axisCrossingValues: [0, 100]
+            axisCrossingValues: [-20, 100]
         },
         yAxis: {
             name: "yAxis",
-            min: -17,
-            max: 17,
-            majorUnit: 6.8,
+            min: minimumX,
+            max: maximumX,
+            axisCrossingValues: [minimumX, 100]
+            //min: minimumX,
+            //max: maximumX,
+            //majorUnit: division,
             //labels: {
             //    format: "{0}"
             //}
@@ -262,11 +300,11 @@ function BindDeltaView(result) {
         //    visible: true,
         //    format: "{1}% in {0} minutes"
         //},
-        chartArea: {
-            background: "#EFEFEF",
-            width: 450,
-            //height: 400
-        },
+        //chartArea: {
+        //    background: "#EFEFEF",
+        //    width: 400,
+        //    //height: 400
+        //},
         render: renderChartWithBackgroundByAxis
     });
 }
@@ -285,16 +323,17 @@ function renderChartWithBackgroundByAxis(e) {
     xSlot = xAxis.slot(Math.abs(Math.min.apply(Math, xAxisArray)), Math.abs(Math.max.apply(Math, xAxisArray)));
     ySlot = yAxis.slot(Math.abs(Math.min.apply(Math, yAxisArray)), Math.abs(Math.max.apply(Math, yAxisArray)));
 
-
+    var yAxisHeight = ySlot.height();
+    if (yAxisHeight == 0) {
+        yAxisHeight = xSlot.origin.y - ySlot.origin.y
+    }
 
     //set the rectangle area on chart
     var rect = new geometry.Rect([
         xSlot.origin.x, ySlot.origin.y
     ], [
-            xSlot.width(), ySlot.height()
+            xSlot.width(), yAxisHeight
         ]);
-
-
 
     path = drawing.Path.fromRect(rect, {
         stroke: null,

@@ -4192,7 +4192,7 @@ function PopulateTVIG7CMYKChart() {
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth",
-
+            width: 2,
         },
         //legend: {
         //    position: "top",
@@ -4226,9 +4226,9 @@ function PopulateTVIG7CMYKChart() {
                     //template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #</td></tr></table>'
                     template: '<table><tr><td><center><b>' + _Resources._recCyan + ' #= dataItem.CmykC.toFixed() #% ' + _Resources._recPatchMetrics + '</b></center><td></tr><tr><td> ' + _Resources._recactualTVI + '  #= dataItem.DotGain #</td></tr></table>'
                 },
-                line: {
-                    width: 5
-                },
+                //line: {
+                //    width: 5
+                //},
             },
             {
                 data: jsonCMYK_M,
@@ -4609,12 +4609,11 @@ function PopulateTVIG7Chart() {
     var jsonKResult = jsonEmpty.concat(jsonK);
 
     $divChartTVISummaryDotGain.kendoChart({
-        //title: {
-        //    text: "TVI Chart"
-        //},
+        renderAs: "canvas",
         seriesDefaults: {
             type: "scatterLine",
-            style: "smooth"
+            style: "smooth",
+            width: 2
         },
         //dataSource: jsonKResult,
         series: [
