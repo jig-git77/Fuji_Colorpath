@@ -1823,20 +1823,27 @@ function PopulateAnalyzeChart() {
 
         },
         seriesClick: function (e) {
-            //alert(1);
-            var dMethod = e.category.dEMethod;
-            dMethod = dMethod.substring(1, dMethod.length);
-            $('#hdnDefaultSelectedDelta').val(dMethod);
-            $selectedDeltaE = dMethod;
+            if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                var dMethod = e.category.dEMethod;
+                dMethod = dMethod.substring(1, dMethod.length);
+                $('#hdnDefaultSelectedDelta').val(dMethod);
+                $selectedDeltaE = dMethod;
 
+                $hdnCurrentMeasurement.val(e.category.MeasurementId);
+                $hdMeasurement.val($hdnCurrentMeasurement.val());
+                BindAllTabs();
 
-            $hdnCurrentMeasurement.val(e.category.MeasurementId);
-            $hdMeasurement.val($hdnCurrentMeasurement.val());
-            BindAllTabs();
+                var analyzeChart = $divAnalyzeChart.data('kendoChart');
+                analyzeChart.options.valueAxis.title.text = e.category.dEMethod;
+                analyzeChart.refresh();
+            }
+            else {
+                $hdnCurrentMeasurement.val(e.category.MeasurementId);
+                $hdMeasurement.val($hdnCurrentMeasurement.val());
+                BindAllTabs();
 
-            var analyzeChart = $divAnalyzeChart.data('kendoChart');
-            analyzeChart.options.valueAxis.title.text = e.category.dEMethod;
-            analyzeChart.refresh();
+                $divAnalyzeChart.data('kendoChart').refresh();
+            }
         }
     });
 
