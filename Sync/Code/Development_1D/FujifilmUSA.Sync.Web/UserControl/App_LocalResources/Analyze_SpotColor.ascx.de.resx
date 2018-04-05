@@ -703,7 +703,7 @@
     <value>Optimal Device Prediction</value>
   </data>
   <data name="locSummaryHeaderRun1Resource1" xml:space="preserve">
-    <value>Measured Comparison</value>
+    <value>Summary Comparison</value>
   </data>
   <data name="locRipSettingsResource1.Text" xml:space="preserve">
     <value>Rip Einstellungen</value>
@@ -713,5 +713,8 @@
   </data>
   <data name="locCreateNCPResource1" xml:space="preserve">
     <value>Create Chart d</value>
+  </data>
+  <data name="locMinimumDeltaResource.Text" xml:space="preserve">
+    <value>Minimum Δ</value>
   </data>
 </root>

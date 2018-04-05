@@ -682,7 +682,7 @@
     <value>Optimal Device Prediction</value>
   </data>
   <data name="locSummaryHeaderRun1Resource1" xml:space="preserve">
-    <value>Measured Comparison</value>
+    <value>Summary Comparison</value>
   </data>
   <data name="locRipSettingsResource1.Text" xml:space="preserve">
     <value>Rip Settings</value>
@@ -695,5 +695,8 @@
   </data>
   <data name="newNCPPrintConditionText" xml:space="preserve">
     <value>New Print Condition - Analyze (No NCP)</value>
+  </data>
+  <data name="locMinimumDeltaResource.Text" xml:space="preserve">
+    <value>Minimum Δ</value>
   </data>
 </root>

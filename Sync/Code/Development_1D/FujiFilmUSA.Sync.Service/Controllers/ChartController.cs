@@ -346,25 +346,48 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             childRow.Add(col.ColumnName, row[col]);
                         }
 
-                        decimal DtE = 0;
-                        if (measurementID > 0)
-                            DtE = string.IsNullOrEmpty(Convert.ToString(row.Field<decimal?>("ΔE_M_T"))) ? 0 : row.Field<decimal>("ΔE_M_T");//for run-1,2,.....
-                        else
-                            DtE = row.Field<decimal?>("ΔE") == null ? 0 : row.Field<decimal>("ΔE");//only for run-0
+                        //decimal DtE = 0;
+                        //if (measurementID > 0)
+                        //    DtE = string.IsNullOrEmpty(Convert.ToString(row.Field<decimal?>("ΔE_M_T"))) ? 0 : row.Field<decimal>("ΔE_M_T");//for run-1,2,.....
+                        //else
+                        //    DtE = row.Field<decimal?>("ΔE") == null ? 0 : row.Field<decimal>("ΔE");//only for run-0
 
-                        totalDeltaE += DtE;
-                        minDtE = Math.Min(minDtE, DtE);
-                        maxDtE = Math.Max(maxDtE, DtE);
+                        //totalDeltaE += DtE;
+                        //minDtE = Math.Min(minDtE, DtE);
+                        //maxDtE = Math.Max(maxDtE, DtE);
 
                         spotAnalyzeDetails.patchDetails.Add(childRow);
                     }
-                    avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
+                    //avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
+                    spotAnalyzeDetails.measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
+                    if (spotAnalyzeDetails.measurementID > 0)
+                    {
+
+                        spotAnalyzeDetails.maxDeltaETP = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxETP"]));
+                        spotAnalyzeDetails.minDeltaETP = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinETP"]));
+                        spotAnalyzeDetails.avgDeltaETP = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgETP"]));
+
+                        spotAnalyzeDetails.maxDeltaEMT = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMT"]));
+                        spotAnalyzeDetails.minDeltaEMT = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMT"]));
+                        spotAnalyzeDetails.avgDeltaEMT = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMT"]));
+
+                        spotAnalyzeDetails.maxDeltaEMP = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMP"]));
+                        spotAnalyzeDetails.minDeltaEMP = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMP"]));
+                        spotAnalyzeDetails.avgDeltaEMP = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMP"]));
+
+                    }
+                    else
+                    {
+                        spotAnalyzeDetails.minDeltaE = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinE"]));
+                        spotAnalyzeDetails.maxDeltaE = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxE"]));
+                        spotAnalyzeDetails.avgDeltaE = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgE"]));
+                    }
                 }
 
 
-                spotAnalyzeDetails.minDeltaE = minDtE.ToString();
-                spotAnalyzeDetails.maxDeltaE = maxDtE.ToString();
-                spotAnalyzeDetails.avgDeltaE = String.Format("{0:0.###}", avgDeltaE);
+                //spotAnalyzeDetails.minDeltaE = minDtE.ToString();
+                //spotAnalyzeDetails.maxDeltaE = maxDtE.ToString();
+                //spotAnalyzeDetails.avgDeltaE = String.Format("{0:0.###}", avgDeltaE);
                 GenerateResources();
                 var objGroup = new
                 {
