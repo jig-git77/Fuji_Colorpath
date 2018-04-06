@@ -1011,17 +1011,17 @@ function BindMeasurementPatchDetails() {
             {
                 field: "ΔL",
                 title: "<b title='ΔL'>ΔL</b>",
-                width: '80px',                
+                width: '80px',
                 format: "{0:n2}",
                 hidden: true,
             },
         ],
         dataBound: function (e) {
-            debugger;
-            var selectedMatricSum = parseInt($divMeasurementPatchDetails.find("#ddlMatricSum").val())            
+
+            var selectedMatricSum = parseInt($divMeasurementPatchDetails.find("#ddlMatricSum").val())
             var grid = $divMeasurementPatchDetails.data("kendoGrid");
             if (!isNaN(selectedMatricSum)) {
-                switch (selectedMatricSum){
+                switch (selectedMatricSum) {
                     case 5:
                     case 6:
                     case 7:
@@ -1229,7 +1229,7 @@ function BindAnalyzeChart() {
                 _Resources = response.data.GlobalResources;
                 if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
                     $('#divAnalyzeHeader').css('display', 'block');
-                    $('#lblNewAnalyzeLabel').html(jsonAnalyzeList.Measurements[0].MeasurementName);
+                    //$('#lblNewAnalyzeLabel').html(jsonAnalyzeList.Measurements[0].MeasurementName);
                 } else {
                     $('#divAnalyzePagingSection').css('display', 'block');
 
@@ -1539,17 +1539,18 @@ function PopulateAnalyzeChart() {
 
     var patchArray = [];
     if (analyzeSeriesResult.length > 0) {
-
+        debugger;
         //check last measurement
-        //if ($hdnCurrentMeasurement.val() == '') {
-        $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
-        //}
+        if ($hdnCurrentMeasurement.val() == '') {
+            $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
 
-        //get the name of the measurement name list
-        //measurementNamesList = $.map(jsonAnalyzeList.Measurements, function (e) {
-        //    return e.MeasurementName;
-        //});
-
+        }
+        
+        //set name of the selected measurement in header lable
+        if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {            
+            $('#lblNewAnalyzeLabel').html($.grep(analyzeSeriesResult, function (e) { return e.MeasurementId == parseInt($hdnCurrentMeasurement.val()); })[0].MeasurementName);
+        }
+        
         measurementNamesList = $.map(analyzeSeriesResult, function (e) {
             var curObj = {
                 MeasurementId: e.MeasurementId,
@@ -1780,7 +1781,9 @@ function PopulateAnalyzeChart() {
         },
 
         axisLabelClick: function (e) {
+            debugger;
 
+            var isChecked = $(e.element).html() != '☑' ? true : false;
             //get the current clicked category data
             var currentObj = e.value;
             //check only one category available or not
@@ -1813,8 +1816,18 @@ function PopulateAnalyzeChart() {
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
+                    debugger;
                     $hdnCurrentMeasurement.val(currentObj.MeasurementId);
+                    $hdMeasurement.val(currentObj.MeasurementId);
                     BindAnalyzeChart();
+
+                    //$hdnCurrentMeasurement.val(currentObj.MeasurementId);
+                    //$hdMeasurement.val($hdnCurrentMeasurement.val());
+                    //BindAllTabs();
+
+                    //$divAnalyzeChart.data('kendoChart').refresh();
+                    ////set the chcked
+                    //$(e.element).html(isChecked ? '☑' : '☐');
                 },
                 error: function (xhr, errorType, exception) {
                     //alert(exception);                    
@@ -1843,11 +1856,10 @@ function PopulateAnalyzeChart() {
                 BindAllTabs();
 
                 $divAnalyzeChart.data('kendoChart').refresh();
+                $('#lblNewAnalyzeLabel').html(e.category.MeasurementName);
             }
         }
     });
-
-    //$hdMeasurement.val($hdnCurrentMeasurement.val());
     BindAllTabs();
 }
 
@@ -5131,7 +5143,7 @@ function formatMeasurementDateWithTime(d) {
 
 ////**************** METHOD TO CHECK AVG COMPATIBILITY  ****************////
 function CheckAvgCompability() {
-    debugger;
+
     var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
     if (answer == "0") {
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
