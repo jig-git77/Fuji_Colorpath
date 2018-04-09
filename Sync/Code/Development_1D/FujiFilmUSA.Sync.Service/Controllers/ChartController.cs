@@ -3,6 +3,7 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujiFilmUSA.Sync.Service.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -328,6 +329,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 decimal totalDeltaE = 0;
                 decimal avgDeltaE = 0;
                 int measurementID = 0;
+                string measurementName = "";
                 //count Avg, Max and Min ΔE
                 decimal minDtE = int.MaxValue;
                 decimal maxDtE = int.MinValue;
@@ -336,6 +338,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 {
                     //get the measurement id 
                     measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
+                    if (measurementID > 0)
+                        measurementName= Convert.ToString(dtPatchDetails.Rows[0]["MeasurementName"]);
 
                     Dictionary<string, object> childRow;
                     foreach (DataRow row in dtPatchDetails.Rows)
@@ -360,6 +364,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     }
                     //avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
                     spotAnalyzeDetails.measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
+                    spotAnalyzeDetails.measurementName = measurementName;
                     if (spotAnalyzeDetails.measurementID > 0)
                     {
 
@@ -1268,7 +1273,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     DetermineCulture();
                     this.OptimizeRunId = Convert.ToInt32(OptimizationRunId);
                     this.CurveTypeId = Convert.ToInt16(CurveType);
-                    _presenterExport.GetCurveData();                    
+                    _presenterExport.GetCurveData();
                     GenerateResources();
                     httpResponse.Data = new
                     {
@@ -1373,7 +1378,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
                 httpResponse.status = ResponseStatus.Success;
                 httpResponse.Data = ReportPath;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));               
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
             }
             catch (Exception ex)
             {
@@ -1384,6 +1389,52 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             return actionResult;
         }
+
+        //[HttpPost]
+        //public IHttpActionResult GetSpotPatchDetailsReport(SortDescription sort)
+        //{
+        //    int OptimizationRunID = 0;
+        //    //SortDescription sort = new SortDescription();
+        //    FilterContainer filter = new FilterContainer();
+        //    IHttpActionResult actionResult = null;
+        //    BaseResponse<object> httpResponse = new BaseResponse<object>();
+        //    try
+        //    {
+        //        DetermineCulture();
+        //        MeasurementId = 0;
+
+        //        OptimizeRunId = Convert.ToInt32(OptimizationRunID);
+        //        _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
+
+        //        DataTable dt = new DataTable();
+        //        dt = GridFilters.GetFilteredResult(dtPatchDetails, sort, filter);
+        //        //logic for filter
+
+        //        ReportPDF objReportPDF = new ReportPDF();
+        //        objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+
+        //        if (!Directory.Exists(objReportPDF.PDFPath))
+        //            Directory.CreateDirectory(objReportPDF.PDFPath);
+
+        //        objReportPDF.dtSpotPatchDetails = dt;
+        //        objReportPDF.PDF_NAME = OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
+        //        objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+
+        //        objReportPDF.GenerateSpotPatchDetailsReport();
+        //        string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
+        //        httpResponse.status = ResponseStatus.Success;
+        //        httpResponse.Data = ReportPath;
+        //        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        BaseErrorResponse errprResponse = new BaseErrorResponse();
+        //        errprResponse.Error.UserMessage = ex.Message;
+        //        errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+        //        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+        //    }
+        //    return actionResult;
+        //}
 
         #region Methods for Patch Details tab
         private DataTable FilteredPatchDetailsTable(string MetricSumID, DataTable dtPatchDetails)

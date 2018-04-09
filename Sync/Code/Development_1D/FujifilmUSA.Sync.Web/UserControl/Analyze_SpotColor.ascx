@@ -71,6 +71,8 @@
                                     Resources = response.data.GlobalResources;
                                     var spotStates = response.data.spotAnalyzeDetails;
                                     $('#lblMeasurementID').html(spotStates.measurementID);
+                                    $('#hdfMeasurementID').val(spotStates.measurementID);
+                                    
                                     if (spotStates.measurementID) {
                                         $('#tblSecondRunDeltas').css('display', 'table');
                                         $('#lblMinETP').html(spotStates.minDeltaETP);
@@ -85,11 +87,15 @@
                                         $('#lblMaxEMP').html(spotStates.maxDeltaEMP);
                                         $('#lblAvgEMP').html(spotStates.avgDeltaEMP);
 
+                                        $('#lblMeasurementName').html(spotStates.measurementName);                                        
                                     } else {
                                         $('#tblFirstRunDeltas').css('display', 'table');
                                         $('#lblMinDeltaE').html(spotStates.minDeltaE);
                                         $('#lblMaxDeltaE').html(spotStates.maxDeltaE);
                                         $('#lblAvgDeltaE').html(spotStates.avgDeltaE);
+
+                                        $('#trMeasurementID').css('display', 'none')
+                                        $('#trMeasurementName').css('display', 'none')
                                     }
 
 
@@ -271,10 +277,10 @@
                 }
             ],
             dataBound: function (e) {
-                var measurementId = 0;
-                if (e.sender.dataSource._view.length > 0) {
-                    measurementId = e.sender.dataSource._view[0].MeasurementID;
-                }
+                var measurementId = parseInt($('#hdfMeasurementID').val());
+                //if (e.sender.dataSource._view.length > 0) {
+                //    measurementId = e.sender.dataSource._view[0].MeasurementID;
+                //}
 
                 if (measurementId > 0) {
                     this.hideColumn(4);
@@ -434,7 +440,7 @@
                                                             <asp:Localize runat="server" ID="locSummary_Header"></asp:Localize>
                                                         </span></th>
                                                     </tr>
-                                                    <tr>
+                                                    <tr id="trMeasurementID">
                                                         <td>
                                                             <span style="font-weight: bold;">
                                                                 <asp:Localize Text="MeasurementID:" ID="Localize24" runat="server" meta:resourcekey="locMeasurementIDResource1"></asp:Localize>
@@ -442,6 +448,16 @@
                                                         </td>
                                                         <td>
                                                             <asp:Label runat="server" ID="lblMeasurementID" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+
+                                                    </tr>
+                                                    <tr id="trMeasurementName">
+                                                        <td>
+                                                            <span style="font-weight: bold;">
+                                                                <asp:Localize Text="Measurement Name:" ID="Localize3" runat="server" meta:resourcekey="locMeasurementNameResource1"></asp:Localize>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label runat="server" ID="lblMeasurementName" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
 
                                                     </tr>
                                                     <tr>
@@ -475,6 +491,15 @@
                                                         </td>
                                                         <td>
                                                             <asp:Label runat="server" ID="lblSpotTarget"></asp:Label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="font-weight: bold;">
+                                                            <asp:Localize runat="server"
+                                                                Text="Spot Target" ID="locDeltaType"
+                                                                meta:resourcekey="locDeltaTypeResource"></asp:Localize></span>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label runat="server" ID="lblDeltaType" Text="ΔE2000"></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="2">
@@ -596,6 +621,8 @@
     &nbsp;
 </div>
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
+
+<asp:HiddenField ID="hdfMeasurementID" runat="server" Value="0" ClientIDMode="Static" />
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True"
     Height="240" Width="900" VisibleStatusbar="false" Title="Patch Details"
     ShowContentDuringLoad="false" Behaviors="Move,Close">

@@ -12,6 +12,7 @@ namespace FujifilmUSA.Sync.Entity
             patchDetails = new List<Dictionary<string, object>>();
         }
         public int measurementID { get; set; }
+        public string measurementName { get; set; }
 
         public string maxDeltaE { get; set; }
         public string minDeltaE { get; set; }

@@ -1942,17 +1942,21 @@ namespace FujifilmUSA.Sync.Common
                 StringBuilder SBStr = new StringBuilder(webClient.DownloadString(FilePath));
 
 
-                string cssFullPath = this._WebURL + "Templates/style.css";
+                //** Add Styles Path ***//
+                //string cssFullPath = this._WebURL + "Templates/style.css";
+                string cssFullPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/style.css");
                 SBStr.Replace("#csspath#", cssFullPath);
 
                 //** Add Images Path ***//
-                string imagesLogoPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
-                SBStr.Replace("##LOGOIMAGES##", imagesLogoPath);
+                string imagesPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
+                SBStr.Replace("##LOGOIMAGES##", imagesPath);
 
 
                 //** Add Images Path ***//
-                string imagesPath = this.BaseWebURL + "Images/";
+                //string imagesPath = this.BaseWebURL + "Images/";
+                //string imagesPath = System.Web.HttpContext.Current.Server.MapPath("Images") + "\\"; ;
                 SBStr.Replace("##IMAGES##", imagesPath);
+
 
 
 
