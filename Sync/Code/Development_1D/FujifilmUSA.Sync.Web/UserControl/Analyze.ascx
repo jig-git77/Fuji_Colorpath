@@ -171,7 +171,6 @@
 
     //According to new or old Project open rad window
     function ChooseRadWindow() {
-
         if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
 
             if (jQuery("input[id$=hdHasMeasurement]").val() == 'True' || jQuery("input[id$=hdHasMeasurement]").val() == 'true') {  //-------------If there are measurements under this opt. run, then only able to create DLP

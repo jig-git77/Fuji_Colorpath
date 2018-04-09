@@ -3,7 +3,7 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujiFilmUSA.Sync.Service.Models;
+//using FujiFilmUSA.Sync.Service.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

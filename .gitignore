@@ -277,3 +277,4 @@ __pycache__/
 # tools/**
 # !tools/packages.config
 /FujiFilmUSA.Sync.Service/FujiFilmUSA.Sync.Service/ChartPDFFiles
+/Sync/Code/Development_1D

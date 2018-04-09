@@ -39,13 +39,36 @@
         width:99% !important;
     }
 
-    ​
 </style>
 <script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>
 <script src="JS/AnalyzeMeasurement.js" type="text/javascript"></script>
 
+<script type="text/javascript">
 
-<%--<script type="text/javascript">
+    function CheckAvgCompability() {
+
+        var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
+
+        if (answer == "0") {
+            setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ucAnalyze$chkAnalyzeAverageOfMeasurements\',\'\')', 0);
+            return true;
+        }
+        else if (answer == "1") {
+            jQuery("[id*='lblCompError']").html("Error in different ReferenceCharts, Please select only measurements which used same reference charts.");
+            return false;
+        }
+        else if (answer == "2") {
+            jQuery("[id*='lblCompError']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
+            return false;
+        }
+        else {
+            return false;
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
     var previewImageCodedString = '';
     var prm = Sys.WebForms.PageRequestManager.getInstance();
     prm.add_initializeRequest(InitializeRequest);
@@ -85,8 +108,8 @@
         }
 
     }    
-</script>--%>
-<%--<script type="text/javascript" language="javascript">
+</script>
+<script type="text/javascript" language="javascript">
     function ConfirmMeasurement() {
         if (confirm('<%= AddMeasurementDeleteMeasurementConfirmation %>'))
             return true;
@@ -127,8 +150,8 @@
         return false;
     }
 
-</script>--%>
-<%--<script type="text/javascript" language="javascript">
+</script>
+<script type="text/javascript" language="javascript">
     $(document).ready(function () {
         if (!IsPrinterInstalled()) {
             $('input[type="image"][id*="ibtnPrintPreview"]').hide();
@@ -150,9 +173,9 @@
             return false;
         });
     });
-</script>--%>
+</script>
 
-<%--<script type="text/javascript" language="javascript">
+<script type="text/javascript" language="javascript">
 
     //According to new or old Project open rad window
     function ChooseRadWindow() {
@@ -180,8 +203,8 @@
         }
     }
 </script>
-<script src="JS/ChartTooltip.js" type="text/javascript"></script>--%>
-<%--<script language="javascript" type="text/javascript">
+<script src="JS/ChartTooltip.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
     function funTVIVisiblity() {
         document.getElementById("trTVI").style.display = "";
         document.getElementById("trSpread").style.display = "none";
@@ -199,7 +222,7 @@
         document.getElementById("trCMYK").style.display = "";
     }
 
-</script>--%>
+</script>
 
 
 <script language="javascript" type="text/javascript">
@@ -227,6 +250,8 @@
     &nbsp;
 </div>
 <div class="contant_middle">
+     <asp:UpdatePanel ID="upCreateDLP" runat="server">
+        <ContentTemplate>
     <div class="head">
         <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hdnCurrentUserID" ClientIDMode="Static" />
@@ -243,6 +268,8 @@
         <asp:HiddenField runat="server" ID="hdnCurrentProjectLicenseType" ClientIDMode="Static" />
         <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" ClientIDMode="Static" />
         <asp:HiddenField ID="hdPatchMatricSum" runat="server" Value="-1" ClientIDMode="Static" />
+        <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" ClientIDMode="Static" />
+
         <h1 id="header" runat="server">
             <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
         <div class="Information_divAnalyze">
@@ -279,6 +306,9 @@
             </asp:LinkButton>
         </div>
     </div>
+             </ContentTemplate>
+    </asp:UpdatePanel>
+
     <div class="listDevice" style="margin-left: 10px;">
         <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
     </div>
@@ -368,6 +398,23 @@
             </td>
         </tr>
     </table>
+
+     <asp:UpdateProgress ID="updateProgress" runat="server" AssociatedUpdatePanelID="upCreateDLP"
+        DisplayAfter="50">
+        <ProgressTemplate>
+            <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Center"
+                VerticalSide="Middle" TargetControlID="updateProgress" HorizontalOffset="325"
+                VerticalOffset="210" runat="server" Enabled="True">
+            </AjaxToolkit:AlwaysVisibleControlExtender>
+            <div style="background: #CCC !important;">
+                <uc:CreateDLP runat="server" ID="ucCreateDLP" />
+            </div>
+            <div class="UpdateProgressBackgroundLessOptimize" style="position: fixed; left: 0px; top: 0px; z-index: 1000; width: 100%; height: 100%;"
+                unselectable="on">
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
     <div class="listDevice" style="margin-left: 10px;">
         <div id="divToRender" runat="server">
             <table cellpadding="0" cellspacing="10" border="0" width="101%">
