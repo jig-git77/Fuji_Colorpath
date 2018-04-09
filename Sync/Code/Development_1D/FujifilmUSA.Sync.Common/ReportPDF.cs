@@ -294,6 +294,9 @@ namespace FujifilmUSA.Sync.Common
                 //========== Object of PDF ==========//
                 Doc theDoc = new Doc();
 
+                //========== Reads the template ==========//
+                StreamReader fp;
+
                 //========== The rectangle for the content on pdf ==========//
                 theDoc.Rect.Left = 0;
                 theDoc.Rect.Bottom = 30;
@@ -330,7 +333,9 @@ namespace FujifilmUSA.Sync.Common
                     FileName = "Templates/kendoScoringMeasurement_Default.htm";
                 }
 
-                string FilePath = this._WebURL + FileName;
+                //string FilePath = this._WebURL + FileName;
+                string FilePath = System.Web.Hosting.HostingEnvironment.MapPath("~/" + FileName);// System.Web.HttpContext.Current.Server.MapPath(FileName);
+
                 if (FilePath.Trim() == "")
                 {
                     throw new Exception("Please Enter Report Type.");
@@ -349,8 +354,11 @@ namespace FujifilmUSA.Sync.Common
                 //int theID;
 
                 //========== Reads the template ==========//
-                var webClient = new System.Net.WebClient();
-                StringBuilder SBStr = new StringBuilder(webClient.DownloadString(FilePath));
+                //var webClient = new System.Net.WebClient();
+                //StringBuilder SBStr = new StringBuilder(webClient.DownloadString(FilePath));
+
+                fp = File.OpenText(FilePath);
+                StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
 
                 SBStr = SetPDFContent(SBStr);
 
@@ -1162,16 +1170,18 @@ namespace FujifilmUSA.Sync.Common
                 //                    System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
 
                 //** Add Styles Path ***//
-                string cssFullPath = this._WebURL + "Templates/style.css";
+                //string cssFullPath = this._WebURL + "Templates/style.css";
+                string cssFullPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/style.css");
                 SBStr.Replace("#csspath#", cssFullPath);
 
                 //** Add Images Path ***//
-                string imagesLogoPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
-                SBStr.Replace("##LOGOIMAGES##", imagesLogoPath);
+                string imagesPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
+                SBStr.Replace("##LOGOIMAGES##", imagesPath);
 
 
                 //** Add Images Path ***//
-                string imagesPath = this.BaseWebURL + "Images/";
+                //string imagesPath = this.BaseWebURL + "Images/";
+                //string imagesPath = System.Web.HttpContext.Current.Server.MapPath("Images") + "\\"; ;
                 SBStr.Replace("##IMAGES##", imagesPath);
 
                 //** Add Content ***//
@@ -1908,7 +1918,7 @@ namespace FujifilmUSA.Sync.Common
             {
                 //========== Object of PDF ==========//
                 Doc theDoc = new Doc();
-                
+
 
                 //========== The rectangle for the content on pdf ==========//
                 //theDoc.Rect.Left = 0;

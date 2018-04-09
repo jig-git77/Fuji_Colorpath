@@ -90,8 +90,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Images\CPSPrintStandardBottomImage.jpg" />
+    <Content Include="Images\FujiFilm.png" />
+    <Content Include="Images\G7AlignmentReportTitle.png" />
+    <Content Include="Images\G7VAlignmentReportTitle.png" />
+    <Content Include="Images\G7_logo_web.gif" />
+    <Content Include="Images\header-left-img.gif" />
+    <Content Include="Images\header-middle-bg.gif" />
+    <Content Include="Images\header-right-img.gif" />
     <Content Include="Images\login_logo.png" />
+    <Content Include="Images\Logo-report.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\Report-Title.png" />
+    <Content Include="Images\summary-icon.png" />
+    <Content Include="Templates\kendoPrepressSingleMeasurement.htm" />
+    <Content Include="Templates\kendoPrepressSingleMeasurement_Default.htm" />
+    <Content Include="Templates\kendoPrepressSingleMeasurement_G7.htm" />
+    <Content Include="Templates\kendoPrepressSingleMeasurement_ISO.htm" />
+    <Content Include="Templates\kendoPrepressSpotProjectPatch.htm" />
+    <Content Include="Templates\kendoScoringMeasurement_Default.htm" />
+    <Content Include="Templates\style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +123,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GridFilters.cs" />
+    <Compile Include="Models\ServerFilteringGrid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -121,7 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FujifilmUSA.Sync.Business\FujifilmUSA.Sync.Business.csproj">

@@ -395,6 +395,7 @@ $(document).ready(function () {
         });
     });
 
+    
     $imgEyeABCompLarge.on('click', function (e) {
         e.preventDefault();
 
@@ -1234,10 +1235,7 @@ function BindAnalyzeChart() {
                     $('#divAnalyzePagingSection').css('display', 'block');
 
                 }
-                //PopulateAnalyzeChart();
-                //PopulateAnalyzeChart1();
                 BindPageNumber();
-                //SetInitialAnalyzeBinding();
             }
         },
         error: function (xhr, errorType, exception) {
@@ -1545,12 +1543,12 @@ function PopulateAnalyzeChart() {
             $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
 
         }
-        
+
         //set name of the selected measurement in header lable
-        if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {            
+        if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
             $('#lblNewAnalyzeLabel').html($.grep(analyzeSeriesResult, function (e) { return e.MeasurementId == parseInt($hdnCurrentMeasurement.val()); })[0].MeasurementName);
         }
-        
+
         measurementNamesList = $.map(analyzeSeriesResult, function (e) {
             var curObj = {
                 MeasurementId: e.MeasurementId,
