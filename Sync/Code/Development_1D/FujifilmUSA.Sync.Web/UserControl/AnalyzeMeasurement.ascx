@@ -13,7 +13,7 @@
         line-height: 18px;
     }
 
-    .k-tabstrip > .k-content {
+    .k-tabstrip .k-content {
         padding-right: 0px;
         padding-left: 0px;
     }

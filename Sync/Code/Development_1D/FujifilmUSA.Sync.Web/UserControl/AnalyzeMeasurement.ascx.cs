@@ -111,15 +111,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             get { return SessionManager.Instance.CurrentOptimizeRun.HasProfile; }
         }
 
-        //public string CreateDLPUpdateProgressClientID
-        //{
-        //    get { return updateProgress.ClientID; }
-        //}
         public string CreateDLPUpdateProgressClientID
         {
-            get;
+            get { return updateProgress.ClientID; }
         }
-
+     
         public string UpdateProgressClientID
         {
             get { return ((UpdateProgress)Page.Master.FindControl("UpdateProgress")).ClientID; }
