@@ -553,10 +553,10 @@
     <value>Max. Δ Primärfarbe</value>
   </data>
   <data name="locMeasurementIDResource1.Text" xml:space="preserve">
-    <value>ID d. Messung:</value>
+    <value>ID d. Messung</value>
   </data>
   <data name="locMeasurementNameResource1.Text" xml:space="preserve">
-    <value>Name der Messung: </value>
+    <value>Name der Messung</value>
   </data>
   <data name="locMeasurementResource1.Text" xml:space="preserve">
     <value>Messung</value>
@@ -718,6 +718,6 @@
     <value>Minimum Δ</value>
   </data>
   <data name="locDeltaTypeResource.Text" xml:space="preserve">
-    <value>ΔE Typ:</value>
+    <value>ΔE Type</value>
   </data>
 </root>

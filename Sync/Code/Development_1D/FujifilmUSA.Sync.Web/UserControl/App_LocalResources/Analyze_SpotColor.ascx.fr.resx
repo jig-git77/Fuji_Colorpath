@@ -517,7 +517,7 @@
     <value>Maximum Primary Δ</value>
   </data>
   <data name="locMeasurementIDResource1.Text" xml:space="preserve">
-    <value>MeasurementID_fr:</value>
+    <value>MeasurementID_fr</value>
   </data>
   <data name="locMeasurementNameResource1.Text" xml:space="preserve">
     <value>Nom de la Mesure</value>
@@ -688,6 +688,6 @@
     <value>Minimum Δ</value>
   </data>
   <data name="locDeltaTypeResource.Text" xml:space="preserve">
-    <value>ΔE Type:</value>
+    <value>ΔE Type</value>
   </data>
 </root>

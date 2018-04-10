@@ -691,6 +691,6 @@
     <value>Minimum Δ</value>
   </data>
   <data name="locDeltaTypeResource.Text" xml:space="preserve">
-    <value>ΔEタイプ：</value>
+    <value>ΔEタイプ</value>
   </data>
 </root>

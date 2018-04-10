@@ -443,7 +443,7 @@
                                                     <tr id="trMeasurementID">
                                                         <td>
                                                             <span style="font-weight: bold;">
-                                                                <asp:Localize Text="MeasurementID:" ID="Localize24" runat="server" meta:resourcekey="locMeasurementIDResource1"></asp:Localize>
+                                                                <asp:Localize Text="MeasurementID" ID="Localize24" runat="server" meta:resourcekey="locMeasurementIDResource1"></asp:Localize>
                                                             </span>
                                                         </td>
                                                         <td>
@@ -453,7 +453,7 @@
                                                     <tr id="trMeasurementName">
                                                         <td>
                                                             <span style="font-weight: bold;">
-                                                                <asp:Localize Text="Measurement Name:" ID="Localize3" runat="server" meta:resourcekey="locMeasurementNameResource1"></asp:Localize>
+                                                                <asp:Localize Text="Measurement Name" ID="Localize3" runat="server" meta:resourcekey="locMeasurementNameResource1"></asp:Localize>
                                                             </span>
                                                         </td>
                                                         <td>
@@ -495,7 +495,7 @@
                                                     <tr>
                                                         <td><span style="font-weight: bold;">
                                                             <asp:Localize runat="server"
-                                                                Text="Spot Target" ID="locDeltaType"
+                                                                Text="ΔE Type" ID="locDeltaType"
                                                                 meta:resourcekey="locDeltaTypeResource"></asp:Localize></span>
                                                         </td>
                                                         <td>
