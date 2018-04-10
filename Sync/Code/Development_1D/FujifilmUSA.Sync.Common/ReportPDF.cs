@@ -1919,6 +1919,8 @@ namespace FujifilmUSA.Sync.Common
                 //========== Object of PDF ==========//
                 Doc theDoc = new Doc();
 
+                //========== Reads the template ==========//
+                StreamReader fp;
 
                 //========== The rectangle for the content on pdf ==========//
                 //theDoc.Rect.Left = 0;
@@ -1938,9 +1940,11 @@ namespace FujifilmUSA.Sync.Common
                 string FilePath = this._WebURL + FileName;
 
                 //========== Reads the template ==========//
-                var webClient = new System.Net.WebClient();
-                StringBuilder SBStr = new StringBuilder(webClient.DownloadString(FilePath));
-
+                //var webClient = new System.Net.WebClient();
+                //StringBuilder SBStr = new StringBuilder(webClient.DownloadString(FilePath));
+                //StringBuilder SBStr = new StringBuilder();// System.Web.HttpContext.Current.Server.MapPath(FileName);
+                fp = File.OpenText(System.Web.Hosting.HostingEnvironment.MapPath("~/" + FileName));
+                StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
 
                 //** Add Styles Path ***//
                 //string cssFullPath = this._WebURL + "Templates/style.css";
