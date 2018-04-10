@@ -35,10 +35,16 @@
         max-height: 295px; /* adjust to your needs */
         overflow-y: scroll;
     }
-    .k-state-active table:first-child{
-        width:99% !important;
+
+    .k-state-active table:first-child {
+        width: 99% !important;
     }
 
+    .gamutChart {
+        background: url('Images/LabBackdrop.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 </style>
 <script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>
 <script src="JS/AnalyzeMeasurement.js" type="text/javascript"></script>
@@ -250,63 +256,63 @@
     &nbsp;
 </div>
 <div class="contant_middle">
-     <asp:UpdatePanel ID="upCreateDLP" runat="server">
+    <asp:UpdatePanel ID="upCreateDLP" runat="server">
         <ContentTemplate>
-    <div class="head">
-        <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hdnCurrentUserID" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hdnVerification" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hdnSync1DType" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hdnValidationType" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hdnCurrentDlpSubOperation" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hdnReportDLPName" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hdnOptimizationRunID" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hdnProjectID" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hdnCurrentMeasurement" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hdnDefaultSelectedDelta" ClientIDMode="Static" />
-        <asp:HiddenField runat="server" ID="hdnCurrentProjectLicenseType" ClientIDMode="Static" />
-        <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" ClientIDMode="Static" />
-        <asp:HiddenField ID="hdPatchMatricSum" runat="server" Value="-1" ClientIDMode="Static" />
-        <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" ClientIDMode="Static" />
+            <div class="head">
+                <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnCurrentUserID" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnVerification" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnSync1DType" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnValidationType" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnCurrentDlpSubOperation" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnReportDLPName" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnOptimizationRunID" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnProjectID" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnCurrentMeasurement" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnDefaultSelectedDelta" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnCurrentProjectLicenseType" ClientIDMode="Static" />
+                <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" ClientIDMode="Static" />
+                <asp:HiddenField ID="hdPatchMatricSum" runat="server" Value="-1" ClientIDMode="Static" />
+                <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" ClientIDMode="Static" />
 
-        <h1 id="header" runat="server">
-            <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
-        <div class="Information_divAnalyze">
-            <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveDLP_Click"
-                OnClientClick="return ChooseRadWindow();">
-                <span>
-                    <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
-                    <asp:Localize runat="server" Text="Create DLP" ID="locCreateDLP" meta:resourcekey="locCreateDLPResource1"></asp:Localize>
-                </span>
-            </asp:LinkButton>
-            <asp:LinkButton ID="lbtnSubmit" CssClass="buttonNormal" runat="server" Visible="false"
-                OnClick="lbtnSubmit_Click">
-                <span>
-                    <asp:Localize runat="server" Text="Submit" ID="locSubmit" meta:resourcekey="locSubmitResource1"></asp:Localize>
-                </span>
-            </asp:LinkButton>
-            &nbsp;
+                <h1 id="header" runat="server">
+                    <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
+                <div class="Information_divAnalyze">
+                    <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveDLP_Click"
+                        OnClientClick="return ChooseRadWindow();">
+                        <span>
+                            <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
+                            <asp:Localize runat="server" Text="Create DLP" ID="locCreateDLP" meta:resourcekey="locCreateDLPResource1"></asp:Localize>
+                        </span>
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="lbtnSubmit" CssClass="buttonNormal" runat="server" Visible="false"
+                        OnClick="lbtnSubmit_Click">
+                        <span>
+                            <asp:Localize runat="server" Text="Submit" ID="locSubmit" meta:resourcekey="locSubmitResource1"></asp:Localize>
+                        </span>
+                    </asp:LinkButton>
+                    &nbsp;
                     <asp:LinkButton ID="lbtnMeasurement" runat="server" CssClass="buttonLeft" OnClick="lbtnMeasurement_Click">
                         <span>
                             <asp:Localize runat="server" Text="Measurement" ID="locMeasurement" meta:resourcekey="locMeasurementResource1"></asp:Localize>
                         </span>
                     </asp:LinkButton>
-            <asp:LinkButton ID="lbtnMeasurementVerification" runat="server" CssClass="button"
-                OnClick="lbtnMeasurementVerification_Click">
-                <span>
-                    <asp:Image ID="imgAnalyze" runat="server" ImageUrl="../Images/analyze.png" />
-                    <asp:Localize runat="server" Text="Measure" ID="locMeasurementVerification" meta:resourcekey="locMeasurementVerificationResource1"></asp:Localize>
-                </span>
-            </asp:LinkButton>
-            <asp:LinkButton ID="lbtnOptimize" CssClass="buttonNormal" runat="server" Visible="false">
-                <span>
-                    <asp:Localize runat="server" Text="Optimize" ID="locOptimize" meta:resourcekey="locOptimizeResource1"></asp:Localize>
-                </span>
-            </asp:LinkButton>
-        </div>
-    </div>
-             </ContentTemplate>
+                    <asp:LinkButton ID="lbtnMeasurementVerification" runat="server" CssClass="button"
+                        OnClick="lbtnMeasurementVerification_Click">
+                        <span>
+                            <asp:Image ID="imgAnalyze" runat="server" ImageUrl="../Images/analyze.png" />
+                            <asp:Localize runat="server" Text="Measure" ID="locMeasurementVerification" meta:resourcekey="locMeasurementVerificationResource1"></asp:Localize>
+                        </span>
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="lbtnOptimize" CssClass="buttonNormal" runat="server" Visible="false">
+                        <span>
+                            <asp:Localize runat="server" Text="Optimize" ID="locOptimize" meta:resourcekey="locOptimizeResource1"></asp:Localize>
+                        </span>
+                    </asp:LinkButton>
+                </div>
+            </div>
+        </ContentTemplate>
     </asp:UpdatePanel>
 
     <div class="listDevice" style="margin-left: 10px;">
@@ -399,7 +405,7 @@
         </tr>
     </table>
 
-     <asp:UpdateProgress ID="updateProgress" runat="server" AssociatedUpdatePanelID="upCreateDLP"
+    <asp:UpdateProgress ID="updateProgress" runat="server" AssociatedUpdatePanelID="upCreateDLP"
         DisplayAfter="50">
         <ProgressTemplate>
             <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Center"
@@ -719,6 +725,7 @@
                                                             <tr>
                                                                 <td style="width: 60%; vertical-align: bottom;" id="TD9" runat="server">
                                                                     <div id="divChartInkPaperABComparision"></div>
+                                                                    
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -1021,9 +1028,9 @@
 
                                                                     <tr>
                                                                         <td align="center" valign="top">
-                                                                            <div id="kendoChartTargetVersusActualAB" style="min-height: 250px; min-width: 300px;"></div>
+                                                                            <div id="kendoChartTargetVersusActualAB" class="gamutChart"></div>
                                                                             <div id="kendoChartTargetVersusActualABLargeArea">
-                                                                                <div id="kendoChartTargetVersusActualABLarge"></div>
+                                                                                <div id="kendoChartTargetVersusActualABLarge" class="gamutChart"></div>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -1047,7 +1054,7 @@
                                                                                 </div>
                                                                                 <asp:Panel ID="panelabGamutComparisonNew" runat="server" BorderStyle="None"
                                                                                     Width="100%" meta:resourcekey="panelabGamutComparisonResource1">
-                                                                                    <div id="kendoChartGamut_ABComparison" style="min-height: 250px; min-width: 300px;"></div>
+                                                                                    <div id="kendoChartGamut_ABComparison" style="min-height: 250px; min-width: 300px;" class="gamutChart"></div>
                                                                                 </asp:Panel>
                                                                             </div>
                                                                         </td>
@@ -1220,7 +1227,7 @@
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td style="padding-left: 60px;padding-right: 60px;">
+                                                                                <td style="padding-left: 60px; padding-right: 60px;">
                                                                                     <table class="TDBOX" border="0" cellpadding="5" cellspacing="0" width="90%">
                                                                                         <tr class="TRTABLEBOX" style="line-height: 30px;">
                                                                                             <td class="TDTABLEBOXLEFT" style="text-align: left;">

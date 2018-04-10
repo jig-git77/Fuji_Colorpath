@@ -700,17 +700,15 @@ function BindAnalyzeChart() {
         success: function (response) {
             if (response.data != null) {
                 jsonAnalyzeList = response.data;
+                _Resources = response.data.GlobalResources;
                 if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
                     $('#divAnalyzeHeader').css('display', 'block');
-                    $('#lblNewAnalyzeLabel').html(jsonAnalyzeList.Measurements[0].MeasurementName);
+                    //$('#lblNewAnalyzeLabel').html(jsonAnalyzeList.Measurements[0].MeasurementName);
                 } else {
                     $('#divAnalyzePagingSection').css('display', 'block');
 
-                }
-                //PopulateAnalyzeChart();
-                //PopulateAnalyzeChart1();
-                BindPageNumber();
-                //SetInitialAnalyzeBinding();
+                }                
+                BindPageNumber();                
             }
         },
         error: function (xhr, errorType, exception) {
@@ -966,14 +964,15 @@ function BindChartTargetVersusActualAB() {
         },
         chartArea: {
             width: 300,
-            height: 250
+            height: 250,
+            //background: ""
         },
-        plotArea: {
-            border: {
-                width: 2,
-                color: "black"
-            }
-        },
+        //plotArea: {
+        //    border: {
+        //        width: 2,
+        //        color: "black"
+        //    }
+        //},
         render: renderChartWithBackgroundByAxis
     });
 
@@ -2619,16 +2618,17 @@ function PopulateAnalyzeChart() {
 
     var patchArray = [];
     if (analyzeSeriesResult.length > 0) {
-
+        debugger;
         //check last measurement
-        //if ($hdnCurrentMeasurement.val() == '') {
-        $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
-        //}
+        if ($hdnCurrentMeasurement.val() == '') {
+            $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
 
-        //get the name of the measurement name list
-        //measurementNamesList = $.map(jsonAnalyzeList.Measurements, function (e) {
-        //    return e.MeasurementName;
-        //});
+        }
+
+        //set name of the selected measurement in header lable
+        if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
+            $('#lblNewAnalyzeLabel').html($.grep(analyzeSeriesResult, function (e) { return e.MeasurementId == parseInt($hdnCurrentMeasurement.val()); })[0].MeasurementName);
+        }
 
         measurementNamesList = $.map(analyzeSeriesResult, function (e) {
             var curObj = {
@@ -2860,7 +2860,9 @@ function PopulateAnalyzeChart() {
         },
 
         axisLabelClick: function (e) {
+            debugger;
 
+            var isChecked = $(e.element).html() != '☑' ? true : false;
             //get the current clicked category data
             var currentObj = e.value;
             //check only one category available or not
@@ -2893,8 +2895,18 @@ function PopulateAnalyzeChart() {
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
+                    debugger;
                     $hdnCurrentMeasurement.val(currentObj.MeasurementId);
+                    $hdMeasurement.val(currentObj.MeasurementId);
                     BindAnalyzeChart();
+
+                    //$hdnCurrentMeasurement.val(currentObj.MeasurementId);
+                    //$hdMeasurement.val($hdnCurrentMeasurement.val());
+                    //BindAllTabs();
+
+                    //$divAnalyzeChart.data('kendoChart').refresh();
+                    ////set the chcked
+                    //$(e.element).html(isChecked ? '☑' : '☐');
                 },
                 error: function (xhr, errorType, exception) {
                     //alert(exception);                    
@@ -2903,24 +2915,30 @@ function PopulateAnalyzeChart() {
 
         },
         seriesClick: function (e) {
-            //alert(1);
-            var dMethod = e.category.dEMethod;
-            dMethod = dMethod.substring(1, dMethod.length);
-            $('#hdnDefaultSelectedDelta').val(dMethod);
-            $selectedDeltaE = dMethod;
+            if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                var dMethod = e.category.dEMethod;
+                dMethod = dMethod.substring(1, dMethod.length);
+                $('#hdnDefaultSelectedDelta').val(dMethod);
+                $selectedDeltaE = dMethod;
 
+                $hdnCurrentMeasurement.val(e.category.MeasurementId);
+                $hdMeasurement.val($hdnCurrentMeasurement.val());
+                BindAllTabs();
 
-            $hdnCurrentMeasurement.val(e.category.MeasurementId);
-            $hdMeasurement.val($hdnCurrentMeasurement.val());
-            BindAllTabs();
+                var analyzeChart = $divAnalyzeChart.data('kendoChart');
+                analyzeChart.options.valueAxis.title.text = e.category.dEMethod;
+                analyzeChart.refresh();
+            }
+            else {
+                $hdnCurrentMeasurement.val(e.category.MeasurementId);
+                $hdMeasurement.val($hdnCurrentMeasurement.val());
+                BindAllTabs();
 
-            var analyzeChart = $divAnalyzeChart.data('kendoChart');
-            analyzeChart.options.valueAxis.title.text = e.category.dEMethod;
-            analyzeChart.refresh();
+                $divAnalyzeChart.data('kendoChart').refresh();
+                $('#lblNewAnalyzeLabel').html(e.category.MeasurementName);
+            }
         }
     });
-
-    $hdMeasurement.val($hdnCurrentMeasurement.val());
     BindAllTabs();
 }
 

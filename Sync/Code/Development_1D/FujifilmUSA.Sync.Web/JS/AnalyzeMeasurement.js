@@ -2551,7 +2551,7 @@ function PopulateChartTargetVersusActualAB() {
 
 
     $chart_TargetVersusActualAB.kendoChart({
-        renderAs: "canvas",
+        //renderAs: "canvas",
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -2603,15 +2603,16 @@ function PopulateChartTargetVersusActualAB() {
         },
         chartArea: {
             width: 300,
-            height: 250
+            height: 250,
+            background:''
         },
-        plotArea: {
-            border: {
-                width: 2,
-                color: "black"
-            }
-        },
-        render: renderChartWithBackgroundByAxis
+        //plotArea: {
+        //    border: {
+        //        width: 2,
+        //        color: "black"
+        //    }
+        //},
+        //render: renderChartWithBackgroundByAxis
     });
 
 
@@ -2756,6 +2757,7 @@ function PopulateChartGamutABComparision() {
         chartArea: {
             width: 300,
             height: 250,
+            background:''
         },
         plotArea: {
             border: {
@@ -2763,7 +2765,7 @@ function PopulateChartGamutABComparision() {
                 color: "black"
             }
         },
-        render: renderChartWithBackgroundByAxis
+        //render: renderChartWithBackgroundByAxis
     });
 }
 
