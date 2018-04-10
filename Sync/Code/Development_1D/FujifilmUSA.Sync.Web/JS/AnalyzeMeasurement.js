@@ -33,6 +33,7 @@ var _Resources = {};
 
 var CURRENT_USER_ID
 var SERVICE_BASE_URL = '';
+var PLUGIN_SERVICE_URL = '';
 var $hdnBaseServiceUrl;
 var $hdnCurrentUserID;
 var $btnGeneratePDF;
@@ -247,6 +248,7 @@ $(document).ready(function () {
     $btnLast = $('#btnLast');
     $btnFirst = $('#btnFirst');
     $hdnCurrentProjectLicenseType = $('#hdnCurrentProjectLicenseType').val();
+    PLUGIN_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
 
@@ -395,7 +397,7 @@ $(document).ready(function () {
         });
     });
 
-    
+
     $imgEyeABCompLarge.on('click', function (e) {
         e.preventDefault();
 
@@ -2604,7 +2606,7 @@ function PopulateChartTargetVersusActualAB() {
         chartArea: {
             width: 300,
             height: 250,
-            background:''
+            background: ''
         },
         //plotArea: {
         //    border: {
@@ -2757,7 +2759,7 @@ function PopulateChartGamutABComparision() {
         chartArea: {
             width: 300,
             height: 250,
-            background:''
+            background: ''
         },
         plotArea: {
             border: {
@@ -5179,3 +5181,4 @@ function CheckAvgCompability() {
     }
     return false;
 }
+

@@ -159,6 +159,7 @@
 </script>
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
+
         if (!IsPrinterInstalled()) {
             $('input[type="image"][id*="ibtnPrintPreview"]').hide();
             $('input[type="image"][id*="ibtnPrintLabel"]').hide();
@@ -178,7 +179,16 @@
 
             return false;
         });
+
+        $('#chk1DMeasurementSmoothing').on('change', function (e) {
+            e.preventDefault();            
+            CallOneDMeasurement($(this).prop('checked'));
+        });
     });
+
+    function CallOneDMeasurement(value) {
+        var res = PageMethods.Set1DMeasurementSmoothingSessionValue(value.toString());       
+    }
 </script>
 
 <script type="text/javascript" language="javascript">
@@ -275,6 +285,7 @@
                 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" ClientIDMode="Static" />
                 <asp:HiddenField ID="hdPatchMatricSum" runat="server" Value="-1" ClientIDMode="Static" />
                 <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
 
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
@@ -355,8 +366,7 @@
                                 Font-Bold="true" AutoPostBack="true"
                                 OnCheckedChanged="chk1DMeasurementSmoothing_CheckedChanged"></asp:CheckBox>--%>
                             <asp:CheckBox ID="chk1DMeasurementSmoothing" runat="server" Checked="false" EnableViewState="true"
-                                Font-Bold="true" AutoPostBack="true"
-                                OnCheckedChanged="chk1DMeasurementSmoothing_CheckedChanged"></asp:CheckBox>
+                                Font-Bold="true" ClientIDMode="Static"></asp:CheckBox>
                             <span style="font-weight: bold; vertical-align: text-top;">
                                 <asp:Localize runat="server" Text="Enable output smoothing" ID="Localize2"></asp:Localize>
                             </span>
@@ -725,7 +735,7 @@
                                                             <tr>
                                                                 <td style="width: 60%; vertical-align: bottom;" id="TD9" runat="server">
                                                                     <div id="divChartInkPaperABComparision"></div>
-                                                                    
+
                                                                 </td>
                                                             </tr>
                                                         </table>

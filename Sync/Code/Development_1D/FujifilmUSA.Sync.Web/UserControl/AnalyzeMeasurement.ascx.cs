@@ -189,6 +189,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!Page.IsPostBack)
             {
                 hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
+                hdnBasePluginServiceUrl.Value = Utilities.ReadConfigValue("BasePluginServiceURL");
                 hdnCurrentUserID.Value = Convert.ToString(SessionManager.Instance.CurrentUser.UserId) ?? "0";
                 hdfCurrentCulture.Value = getCurrentCultureLanguage();
                 hdnProjectID.Value = SessionManager.Instance.CurrentOptimizeRun.ProjectId.ToString();
@@ -414,6 +415,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             SessionManager.Instance.CurrentProject.Is1DMeasurementSmoothing = chk1DMeasurementSmoothing.Checked;
         }
+
+        
         #endregion
 
         #region Properties
