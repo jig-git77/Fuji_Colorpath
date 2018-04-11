@@ -42,63 +42,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _presenterExport = new PresenterExport(this);
             base.Initialize(controllerContext);
         }
-
+        
         [HttpPost]
-        public IHttpActionResult ExportChartReport(ChartContent chart)
-        {
-            IHttpActionResult actionResult = null;
-            string validationMessage = "";
-
-            BaseResponse<string> httpResponse = new BaseResponse<string>();
-            try
-            {
-                if (chart == null)
-                {
-                    validationMessage = "Invalid Charts, Please try again.";
-
-                    BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.UserMessage = validationMessage;
-                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
-                }
-                else
-                {
-
-                    ReportPDF objReportPDF = new ReportPDF();
-                    objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
-
-                    if (!Directory.Exists(objReportPDF.PDFPath))
-                        Directory.CreateDirectory(objReportPDF.PDFPath);
-
-                    objReportPDF.chartContent = chart;
-                    objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
-                    objReportPDF.ReportName = "Single Measurement Report";
-                    objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
-
-                    //objReportPDF.GenerateClientReportPDF();
-
-                    string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
-                    httpResponse.status = ResponseStatus.Success;
-                    httpResponse.Data = ReportPath;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
-                }
-            }
-            catch (Exception ex)
-            {
-
-                BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.UserMessage= ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
-
-            }
-            return actionResult;
-        }
-
-        [HttpPost]
-        //public IHttpActionResult ExportPrepressSingleMeasurementReportTest(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject, string fromDeltaE, int validationType, ChartContent chart)
-        //public IHttpActionResult ExportPrepressSingleMeasurementReportTest(ChartContent chart, int? MeasurementId, bool? IsAverageOfMeasurements, string IsVerificationProject, string IsSync1DTypeProject, string fromDeltaE, int validationType)
-        public IHttpActionResult ExportPrepressSingleMeasurementReportTest(ChartContent chart)
+        public IHttpActionResult ExportAnalyzeChartReport(ChartContent chart)
         {
             IHttpActionResult actionResult = null;
             string validationMessage = "";

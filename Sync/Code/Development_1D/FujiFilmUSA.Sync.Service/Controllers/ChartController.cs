@@ -3,6 +3,7 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujiFilmUSA.Sync.Service.Models;
 //using FujiFilmUSA.Sync.Service.Models;
 using Newtonsoft.Json;
 using System;
@@ -256,62 +257,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
             }
             return actionResult;
-        }
-
-
-        [HttpPost]
-        public IHttpActionResult ExportChartReport(ChartContent chart)
-        {
-            IHttpActionResult actionResult = null;
-            string validationMessage = "";
-
-            BaseResponse<string> httpResponse = new BaseResponse<string>();
-            try
-            {
-                if (chart == null)
-                {
-                    validationMessage = "Invalid Charts, Please try again.";
-
-                    BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.UserMessage = validationMessage;
-                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
-                }
-                else
-                {
-
-                    ReportPDF objReportPDF = new ReportPDF();
-                    objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
-
-                    if (!Directory.Exists(objReportPDF.PDFPath))
-                        Directory.CreateDirectory(objReportPDF.PDFPath);
-
-                    objReportPDF.chartContent = chart;
-                    objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
-                    objReportPDF.ReportName = "Single Measurement Report";
-                    objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
-
-                    //objReportPDF.GenerateClientReportPDF();
-
-                    string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
-                    httpResponse.status = ResponseStatus.Success;
-                    httpResponse.Data = ReportPath;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
-                }
-            }
-            catch (Exception ex)
-            {
-
-                BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.UserMessage = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
-
-            }
-            return actionResult;
-        }
-
-
+        }        
 
         public IHttpActionResult GetSpotPatchDetails(int id)
         {
@@ -339,7 +285,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     //get the measurement id 
                     measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
                     if (measurementID > 0)
-                        measurementName= Convert.ToString(dtPatchDetails.Rows[0]["MeasurementName"]);
+                        measurementName = Convert.ToString(dtPatchDetails.Rows[0]["MeasurementName"]);
 
                     Dictionary<string, object> childRow;
                     foreach (DataRow row in dtPatchDetails.Rows)
@@ -1391,11 +1337,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         //[HttpPost]
-        //public IHttpActionResult GetSpotPatchDetailsReport(SortDescription sort)
+        //public IHttpActionResult GetSpotPatchDetailsReport(ExportViewModel model)
         //{
-        //    int OptimizationRunID = 0;
+        //    //int OptimizationRunID = 0;
         //    //SortDescription sort = new SortDescription();
-        //    FilterContainer filter = new FilterContainer();
+        //    //FilterContainer filter = new FilterContainer();
         //    IHttpActionResult actionResult = null;
         //    BaseResponse<object> httpResponse = new BaseResponse<object>();
         //    try
@@ -1403,11 +1349,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         //        DetermineCulture();
         //        MeasurementId = 0;
 
-        //        OptimizeRunId = Convert.ToInt32(OptimizationRunID);
+        //        OptimizeRunId = Convert.ToInt32(model.OptimizationRunID);
         //        _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
 
         //        DataTable dt = new DataTable();
-        //        dt = GridFilters.GetFilteredResult(dtPatchDetails, sort, filter);
+        //        dt = GridFilters.GetFilteredResult(dtPatchDetails, model.sort, model.filter);
         //        //logic for filter
 
         //        ReportPDF objReportPDF = new ReportPDF();
@@ -1417,7 +1363,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         //            Directory.CreateDirectory(objReportPDF.PDFPath);
 
         //        objReportPDF.dtSpotPatchDetails = dt;
-        //        objReportPDF.PDF_NAME = OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
+        //        objReportPDF.PDF_NAME = model.OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
         //        objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
 
         //        objReportPDF.GenerateSpotPatchDetailsReport();

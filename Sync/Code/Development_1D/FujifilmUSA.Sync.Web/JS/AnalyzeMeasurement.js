@@ -376,7 +376,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: SERVICE_BASE_URL + 'api/Report/ExportPrepressSingleMeasurementReportTest',
+            url: SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReport',
             //url: SERVICE_BASE_URL + 'api/Report/ExportChartReport',
             //data: {},
             //data: JSON.stringify(chartContent),
