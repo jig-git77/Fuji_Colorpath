@@ -257,7 +257,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
             }
             return actionResult;
-        }        
+        }
 
         public IHttpActionResult GetSpotPatchDetails(int id)
         {
@@ -1334,6 +1334,56 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetSpotPatchDetailsReportTest(int OptimizationRunID)
+        {
+            HttpResponseMessage httpResponseMessage = null;
+            try
+            {
+                DetermineCulture();
+                MeasurementId = 0;
+                OptimizeRunId = Convert.ToInt32(OptimizationRunID);
+                _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
+
+                ReportPDF objReportPDF = new ReportPDF();
+                objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+
+                if (!Directory.Exists(objReportPDF.PDFPath))
+                    Directory.CreateDirectory(objReportPDF.PDFPath);
+
+                objReportPDF.dtSpotPatchDetails = dtPatchDetails;
+                objReportPDF.PDF_NAME = OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
+                objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+
+                objReportPDF.GenerateSpotPatchDetailsReport();
+                string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
+
+                //httpResponse.status = ResponseStatus.Success;
+                //httpResponse.Data = ReportPath;
+                //actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+
+                var dataBytes = File.ReadAllBytes(HostingEnvironment.MapPath("~/" + ReportPath));
+                //adding bytes to memory stream   
+                var dataStream = new MemoryStream(dataBytes);
+                httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
+                httpResponseMessage.Content = new StreamContent(dataStream);
+                httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
+                httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
+                httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                httpResponseMessage.Content.Headers.ContentDisposition.FileName = objReportPDF.PDF_NAME;
+                httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
+                
+            }
+            catch (Exception ex)
+            {
+                //BaseErrorResponse errprResponse = new BaseErrorResponse();
+                //errprResponse.Error.UserMessage = ex.Message;
+                //errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                //actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return httpResponseMessage;
         }
 
         //[HttpPost]

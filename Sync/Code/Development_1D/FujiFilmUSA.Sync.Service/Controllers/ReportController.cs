@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -177,6 +178,153 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
             }
             return actionResult;
+        }
+
+        [HttpPost]
+        public HttpResponseMessage ExportAnalyzeChartReportTest(ChartContent chart)
+        {
+            HttpResponseMessage httpResponseMessage = null;
+            string validationMessage = "";
+            //ChartContent chart = new ChartContent();
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
+            //int? MeasurementId= 25204;
+            //bool? IsAverageOfMeasurements= false;
+            //string IsVerificationProject= "false", IsSync1DTypeProject= "true", fromDeltaE= "E2000";
+            //int validationType=-1;
+            try
+            {
+                if (chart == null)
+                {
+                    validationMessage = "Invalid Charts, Please try again.";
+
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    httpResponseMessage = Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse);//returns 412 status code
+                }
+                else
+                {
+                    if (chart.MeasurementId == null)
+                        validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+                    if (chart.IsAverageOfMeasurements == null)
+                        validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+
+                    if (chart.IsVerificationProject == null)
+                        validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+
+                    if (chart.IsSync1DTypeProject == null)
+                        validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+
+                    if (string.IsNullOrEmpty(Convert.ToString(chart.fromDeltaE)))
+                        validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
+
+                    if (string.IsNullOrEmpty(Convert.ToString(chart.validationType)))
+                        validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidValidationType);
+
+                    if (!string.IsNullOrEmpty(validationMessage))
+                    {
+                        BaseErrorResponse errprResponse = new BaseErrorResponse();
+                        errprResponse.Error.UserMessage = validationMessage;
+                        errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                        httpResponseMessage = Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse);//returns 412 status code
+                    }
+                    else
+                    {
+                        MeasurementId = Convert.ToInt32(chart.MeasurementId);
+                        IsVerification = chart.IsVerificationProject == null ? false : Convert.ToBoolean(chart.IsVerificationProject);
+                        IsSync1DType = chart.IsSync1DTypeProject == null ? false : Convert.ToBoolean(chart.IsSync1DTypeProject);
+                        IsAverageOfMeasurements = chart.IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
+                        From_ΔE = Convert.ToString(chart.fromDeltaE);
+                        ValidationType = Convert.ToInt32(chart.validationType);
+
+
+                        ReportPDF objReportPDF = new ReportPDF();
+                        objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+
+                        if (!Directory.Exists(objReportPDF.PDFPath))
+                            Directory.CreateDirectory(objReportPDF.PDFPath);
+
+                        objReportPDF.chartContent = chart;
+                        objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
+                        objReportPDF.From_ΔE = From_ΔE;
+                        objReportPDF.IsValidation = IsVerification;
+                        objReportPDF.DLPName = chart.ReportDLPName;
+                        //objReportPDF.ReportName = "Single Measurement Report";
+                        //objReportPDF.DLPName = "DLP_NAME";
+                        objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+
+                        if (chart.validationType == 1)
+                        {
+                            //code to set the report title
+                            objReportPDF.ReportName = "Validation Report";
+                            if (IsSync1DType)
+                            {
+                                objReportPDF.ReportName = "Press Alignment Report";
+                            }
+
+
+                            DSReport_G7_Vali = new DataSet();
+                            _presenterReportSingleMeasurement.GetReportDataOnMeasurement_G7_Vali();
+                            objReportPDF.DS_Common = DSReport_G7_Vali;
+                            objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_G7;
+                        }
+                        else
+                        {
+                            objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_ISO;
+                            if (ValidationType == 0) //For Default mode in Sync1D ISO, G7 or 4D validation project as choice of MTP
+                            {
+                                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_Default;
+                            }
+                            //code to set the report title
+                            if (IsVerification)
+                            {
+                                objReportPDF.ReportName = "Validation Report";
+                            }
+                            else if (IsSync1DType)
+                            {
+                                objReportPDF.ReportName = "Alignment Curves Report";
+                            }
+                            else
+                            {
+                                objReportPDF.ReportName = "DLP Optimization Report";
+                                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement; //Only in 4D Optimization part
+                            }
+
+                            DSReport = new DataSet();
+                            _presenterReportSingleMeasurement.GetReportDataOnMeasurement();
+                            objReportPDF.DS_Common = DSReport;
+                        }
+
+                        objReportPDF.GenerateClientReportPDF();
+                        string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
+                        //httpResponse.status = ResponseStatus.Success;
+                        //httpResponse.Data = ReportPath;
+                        //httpResponseMessage = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+
+                        var dataBytes = File.ReadAllBytes(HostingEnvironment.MapPath("~/" + ReportPath));
+                        //adding bytes to memory stream   
+                        var dataStream = new MemoryStream(dataBytes);
+                        httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
+                        httpResponseMessage.Content = new StreamContent(dataStream);
+                        httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
+                        httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
+                        httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                        httpResponseMessage.Content.Headers.ContentDisposition.FileName = objReportPDF.PDF_NAME;
+                        httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                httpResponseMessage = Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse);//returns the 500 status code
+
+            }
+            return httpResponseMessage;
         }
 
         //service to bind the summary delta E values for report

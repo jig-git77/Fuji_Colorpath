@@ -20,7 +20,7 @@
         .PatchDetailsSummaryTable td {
             text-align: left;
         }
-    
+
     /*#tblSecondRunDeltas td{
         min-width:60px;
     }*/
@@ -72,7 +72,7 @@
                                     var spotStates = response.data.spotAnalyzeDetails;
                                     $('#lblMeasurementID').html(spotStates.measurementID);
                                     $('#hdfMeasurementID').val(spotStates.measurementID);
-                                    
+
                                     if (spotStates.measurementID) {
                                         $('#tblSecondRunDeltas').css('display', 'table');
                                         $('#lblMinETP').html(spotStates.minDeltaETP);
@@ -87,7 +87,7 @@
                                         $('#lblMaxEMP').html(spotStates.maxDeltaEMP);
                                         $('#lblAvgEMP').html(spotStates.avgDeltaEMP);
 
-                                        $('#lblMeasurementName').html(spotStates.measurementName);                                        
+                                        $('#lblMeasurementName').html(spotStates.measurementName);
                                     } else {
                                         $('#tblFirstRunDeltas').css('display', 'table');
                                         $('#lblMinDeltaE').html(spotStates.minDeltaE);
@@ -305,19 +305,20 @@
         });
 
         $('#btnDownloadSpotPatch').on('click', function (e) {
-            e.preventDefault();
+            e.preventDefault();            
             var optimizationRun = $(this).attr('data-id');
-            $.ajax({
-                url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReport',
-                data: { OptimizationRunID: optimizationRun },
-                type: 'GET',
-                success: function (response) {
-                    window.open(SERVICE_BASE_URL + response.data, "_blank");
-                },
-                error: function (xhr, errorType, exception) {
-                    alert(exception);
-                }
-            });
+            DownloadSpotPatchFile(optimizationRun)
+            //$.ajax({
+            //    url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReport',
+            //    data: { OptimizationRunID: optimizationRun },
+            //    type: 'GET',
+            //    success: function (response) {
+            //        window.open(SERVICE_BASE_URL + response.data, "_blank");
+            //    },
+            //    error: function (xhr, errorType, exception) {
+            //        alert(exception);
+            //    }
+            //});
         })
     });
 
@@ -332,7 +333,7 @@
         return false;
     }
 
-    function generateReport(optimizationRun) {
+    function generateReport(optimizationRun) {        
         $.ajax({
             url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReport',
             data: { OptimizationRunID: optimizationRun },
@@ -345,10 +346,62 @@
                 window.open(SERVICE_BASE_URL + response.data, "_blank");
             },
             error: function (xhr, errorType, exception) {
-                debugger;
                 alert(exception);
             }
         });
+    }
+
+    function DownloadSpotPatchFile(id) {
+        //debugger;
+        //var xhrReq =  $.ajax({
+        //    url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReportTest',
+        //    data: { OptimizationRunID: id },
+        //    dataType: null,            
+        //    type:'GET',
+        //    xhrFields: {
+        //        responseType: 'application/octet-stream'
+        //    },
+        //    success: function (blob) {
+
+        //        debugger;
+        //        console.log(xhrReq);
+        //        console.log(blob.size);
+        //        var link = document.createElement('a');
+        //        link.href = window.URL.createObjectURL(blob);
+        //        link.download = "Dossier_" + new Date() + ".pdf";
+        //        link.click();
+        //    },
+        //    error: function (xhr, errorType, exception) {
+        //        debugger;
+        //        alert(exception);
+        //    }
+        //});
+
+        //var request = new XMLHttpRequest();
+        //request.open("GET", SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReportTest?OptimizationRunID=' + id, true);
+        //request.responseType = "blob";
+        //request.onload = function (e) {
+        //    //debugger;
+        //    if (this.status === 200) {
+        //        // `blob` response
+        //        console.log(this.response);
+        //        // create `objectURL` of `this.response` : `.pdf` as `Blob`
+        //        var file = window.URL.createObjectURL(this.response);
+        //        var a = document.createElement("a");
+        //        a.href = file;
+        //        a.download = this.response.name || "SpotPatch.pdf";
+        //        document.body.appendChild(a);
+        //        a.click();
+        //        // remove `a` following `Save As` dialog, 
+        //        // `window` regains `focus`
+        //        window.onfocus = function () {
+        //            document.body.removeChild(a)
+        //        }
+        //    };
+        //};
+        //request.send();
+
+        location.href = SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReportTest?OptimizationRunID=' + id;
     }
 </script>
 
@@ -503,7 +556,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td colspan="2">
-                                                            <table id="tblFirstRunDeltas" style="display: none;width:100%;">
+                                                            <table id="tblFirstRunDeltas" style="display: none; width: 100%;">
                                                                 <tr>
                                                                     <td style="width: 38%;"><span style="font-weight: bold;">
                                                                         <asp:Localize Text="Min ΔE" runat="server"
@@ -529,7 +582,7 @@
                                                                         <asp:Label runat="server" ID="lblMaxDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                 </tr>
                                                             </table>
-                                                            <table id="tblSecondRunDeltas" style="display: none;width:100%;">
+                                                            <table id="tblSecondRunDeltas" style="display: none; width: 100%;">
                                                                 <tr>
                                                                     <td style="width: 38%;"></td>
                                                                     <td><span style="font-weight: bold;">ΔE_T_P</span></td>
@@ -540,7 +593,7 @@
                                                                     <td><span style="font-weight: bold;">
                                                                         <asp:Localize Text="Average ΔE" runat="server"
                                                                             ID="Localize2" meta:resourcekey="locMinimumDeltaResource"></asp:Localize>
-                                                                        </span></td>
+                                                                    </span></td>
                                                                     <td>
                                                                         <asp:Label runat="server" ID="lblMinETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                     <td>
@@ -552,7 +605,7 @@
                                                                     <td><span style="font-weight: bold;">
                                                                         <asp:Localize Text="Average ΔE" runat="server"
                                                                             ID="Localize1" meta:resourcekey="locMaximumDeltaResource1"></asp:Localize>
-                                                                        </span></td>
+                                                                    </span></td>
                                                                     <td>
                                                                         <asp:Label runat="server" ID="lblMaxETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                     <td>
@@ -561,10 +614,10 @@
                                                                         <asp:Label runat="server" ID="lblMaxEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><span style="font-weight: bold;">                                                                        
-                                                                         <asp:Localize Text="Average ΔE" runat="server"
+                                                                    <td><span style="font-weight: bold;">
+                                                                        <asp:Localize Text="Average ΔE" runat="server"
                                                                             ID="locAverageDelta" meta:resourcekey="locAverageDeltaResource1"></asp:Localize>
-                                                                        </span></td>
+                                                                    </span></td>
                                                                     <td>
                                                                         <asp:Label runat="server" ID="lblAvgETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                     <td>

@@ -118,7 +118,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
      
         public string UpdateProgressClientID
         {
-            get { return ((UpdateProgress)Page.Master.FindControl("UpdateProgress")).ClientID; }
+            get { return ((UpdateProgress)Page.Master.FindControl("UpdateProgress")).ClientID; }            
         }
 
         public string DLPMessage
@@ -193,7 +193,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnValidationType.Value = ValidationType.ToString();
                 hdnCurrentProjectLicenseType.Value = SessionManager.Instance.CurrentProject.LicenseType.ToString();
                 //--Start: Load average Compatibility values
-                chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return CheckAvgCompability();");
+                chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "CheckAvgCompability();");
                 ChkAvgMeasurementCompatibility();
                 //--End
 

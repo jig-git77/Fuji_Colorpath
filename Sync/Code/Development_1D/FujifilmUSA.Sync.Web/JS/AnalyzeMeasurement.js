@@ -375,26 +375,53 @@ $(document).ready(function () {
             //}
         }
 
-        $.ajax({
-            url: SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReport',
-            //url: SERVICE_BASE_URL + 'api/Report/ExportChartReport',
-            //data: {},
-            //data: JSON.stringify(chartContent),
-            data: JSON.stringify(apiParameter),
-            type: 'POST',
-            //dataType: 'json',
-            headers: {
-                "content-type": "application/json",
-            },
-            success: function (response) {
-                //console.log(response);
-                window.open(SERVICE_BASE_URL + response.data, "_blank");
-            },
-            error: function (xhr, errorType, exception) {
-                alert(exception);
+        //$.ajax({
+        //    url: SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReport',
+        //    //url: SERVICE_BASE_URL + 'api/Report/ExportChartReport',
+        //    //data: {},
+        //    //data: JSON.stringify(chartContent),
+        //    data: JSON.stringify(apiParameter),
+        //    type: 'POST',
+        //    //dataType: 'json',
+        //    headers: {
+        //        "content-type": "application/json",
+        //    },
+        //    success: function (response) {
+        //        //console.log(response);
+        //        window.open(SERVICE_BASE_URL + response.data, "_blank");
+        //    },
+        //    error: function (xhr, errorType, exception) {
+        //        alert(exception);
 
-            }
-        });
+        //    }
+        //});
+
+        
+        var request = new XMLHttpRequest();
+        request.open("POST", SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReportTest', true);
+        request.setRequestHeader("content-type", "application/json");
+        request.responseType = "blob";
+        request.onload = function (e) {
+            
+            if (this.status === 200) {
+                // `blob` response
+                console.log(this.response);
+                // create `objectURL` of `this.response` : `.pdf` as `Blob`
+                var file = window.URL.createObjectURL(this.response);
+                var a = document.createElement("a");
+                a.href = file;
+                a.download = this.response.name || "AnalyzeReport.pdf";
+                document.body.appendChild(a);
+                a.click();
+                // remove `a` following `Save As` dialog, 
+                // `window` regains `focus`
+                window.onfocus = function () {
+                    document.body.removeChild(a)
+                }
+            };
+        };
+        request.send(JSON.stringify(apiParameter));
+
     });
 
 
@@ -1538,8 +1565,7 @@ function PopulateAnalyzeChart() {
 
 
     var patchArray = [];
-    if (analyzeSeriesResult.length > 0) {
-        debugger;
+    if (analyzeSeriesResult.length > 0) {        
         //check last measurement
         if ($hdnCurrentMeasurement.val() == '') {
             $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
@@ -5145,7 +5171,7 @@ function formatMeasurementDateWithTime(d) {
 
 ////**************** METHOD TO CHECK AVG COMPATIBILITY  ****************////
 function CheckAvgCompability() {
-
+    debugger;
     var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
     if (answer == "0") {
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");

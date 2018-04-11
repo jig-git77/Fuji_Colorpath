@@ -51,26 +51,27 @@
 
 <script type="text/javascript">
 
-    function CheckAvgCompability() {
+    //function CheckAvgCompability() {
+    //    debugger;
+    //    alert(1);
+    //    var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
 
-        var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
-
-        if (answer == "0") {
-            setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ucAnalyze$chkAnalyzeAverageOfMeasurements\',\'\')', 0);
-            return true;
-        }
-        else if (answer == "1") {
-            jQuery("[id*='lblCompError']").html("Error in different ReferenceCharts, Please select only measurements which used same reference charts.");
-            return false;
-        }
-        else if (answer == "2") {
-            jQuery("[id*='lblCompError']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
-            return false;
-        }
-        else {
-            return false;
-        }
-    }
+    //    if (answer == "0") {
+    //        //setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ucAnalyze$chkAnalyzeAverageOfMeasurements\',\'\')', 0);
+    //        //return false;
+    //    }
+    //    else if (answer == "1") {
+    //        jQuery("[id*='lblCompError']").html("Error in different ReferenceCharts, Please select only measurements which used same reference charts.");
+    //        return false;
+    //    }
+    //    else if (answer == "2") {
+    //        jQuery("[id*='lblCompError']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
+    //        return false;
+    //    }
+    //    else {
+    //        return false;
+    //    }
+    //}
 
 </script>
 
