@@ -1288,4 +1288,10 @@ erwünschten Format überein.</value>
   <data name="Error_Invalid_ValidationType" xml:space="preserve">
     <value>Invalid validation type value has been provided. de</value>
   </data>
+    <data name="SpotProject_Open" xml:space="preserve">
+    <value>Spot Project_de</value>
+  </data>
+  <data name="SpotProject_Certified" xml:space="preserve">
+    <value>Spot Project Certified_de</value>
+  </data>
 </root>

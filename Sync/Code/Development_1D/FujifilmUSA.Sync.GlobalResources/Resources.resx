@@ -1117,7 +1117,7 @@
     <value>Other</value>
   </data>
   <data name="ClearFillterResource" xml:space="preserve">
-    <value>Clear Fillter</value>
+    <value>Clear Filter</value>
   </data>
   <data name="CreateNewLibrary" xml:space="preserve">
     <value>Create New Library</value>
@@ -1304,5 +1304,11 @@
   </data>
   <data name="Error_Invalid_ValidationType" xml:space="preserve">
     <value>Invalid validation type value has been provided.</value>
+  </data>
+  <data name="SpotProject_Open" xml:space="preserve">
+    <value>Spot Project</value>
+  </data>
+  <data name="SpotProject_Certified" xml:space="preserve">
+    <value>Spot Project Certified</value>
   </data>
 </root>

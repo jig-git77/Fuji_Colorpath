@@ -196,7 +196,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear Fillter.
+        ///   Looks up a localized string similar to Clear Filter.
         /// </summary>
         internal static string ClearFillterResource {
             get {
@@ -3459,6 +3459,24 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string SourceProfileManagement_DeleteSourceProfile_Confirmation {
             get {
                 return ResourceManager.GetString("SourceProfileManagement_DeleteSourceProfile_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spot Project Certified.
+        /// </summary>
+        internal static string SpotProject_Certified {
+            get {
+                return ResourceManager.GetString("SpotProject_Certified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spot Project.
+        /// </summary>
+        internal static string SpotProject_Open {
+            get {
+                return ResourceManager.GetString("SpotProject_Open", resourceCulture);
             }
         }
         

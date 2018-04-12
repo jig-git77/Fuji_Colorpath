@@ -568,6 +568,9 @@ function detailInit(e) {
                 if (dataSource.getByUid(row.data('uid')) != undefined) {
 
                     var data = dataSource.getByUid(row.data('uid'));
+                    var SpotprojectTypeImagePath = '';
+                    var SpotprojectTypeTooltip = '';
+
                     switch (data.Status) {
                         case EOptimizeRunStatus.Open:
                             var dateCreate = new Date(data.CreateDate);
@@ -576,13 +579,24 @@ function detailInit(e) {
                             var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
                             row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowOpenPrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + diffDays + "','','" + data.TotalRuns + "',true)");
+                            SpotprojectTypeImagePath = 'Images/SpotProject.png';
+                            SpotprojectTypeTooltip = Resources.SpotProject_Open;
                             break;
                         case EOptimizeRunStatus.Closed:
                             row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','',true)");
+                            SpotprojectTypeImagePath = 'Images/SpotProject.png';
+                            SpotprojectTypeTooltip = Resources.SpotProject_Open;
                             break;
                         case EOptimizeRunStatus.Certify:
                             row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','',true)");
+                            SpotprojectTypeImagePath = 'Images/SpotProject_Certified.png';
+                            SpotprojectTypeTooltip = Resources.SpotProject_Certified;
                             break;
+                    }
+
+                    if (SpotprojectTypeImagePath != '') {
+                        row.find("td #imgSpotProject").attr('src', SpotprojectTypeImagePath);   //set the Spot project type image path
+                        row.find("td #imgSpotProject").attr('title', SpotprojectTypeTooltip);   //set the Spot project type tooltip
                     }
 
                     var gridCurrent = row[0].closest('.k-grid');
@@ -598,8 +612,7 @@ function detailInit(e) {
             {
                 filterable: false,
                 title: "<b></b>",
-                //template: "<center><a onclick='return Redirect(#=SpotProjectId#,\"SelectSpotTargetProject\");'><img title='Open' id='imgspotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
-                template: "<center><a id='lnkSpotProject'><img title='" + Resources.OpenProject + "' id='imgSpotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
+                template: "<center><a id='lnkSpotProject'><img id='imgSpotProject' title=''  src='' style='width: 20px;'></img></a></center>",
                 width: 40
             },
             {
