@@ -1963,7 +1963,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
         public DataTable GetSpotProjectSummary(int OptimizeRunId)
         {
-            string storedProc = "CPSpot.GetSpotPatchSummary";
+            string storedProc = "CPSpot.GetPatchDetailsByOptimizeRunID_Summary";
 
             DataTable dtPatchDetails = new DataTable();
             Common.ImplementBusinessLogic(

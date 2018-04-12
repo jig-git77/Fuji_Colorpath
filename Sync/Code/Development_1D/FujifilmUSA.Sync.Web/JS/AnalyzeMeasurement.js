@@ -1085,7 +1085,7 @@ function BindMeasurementPatchDetails() {
                     default:
                         grid.hideColumn(20);
                         grid.hideColumn(21);
-                        grid.showColumn(22);
+                        grid.hideColumn(22);
                 }
             }
         }
