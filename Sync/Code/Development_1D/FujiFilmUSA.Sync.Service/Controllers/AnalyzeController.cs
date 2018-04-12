@@ -26,6 +26,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private const string _InvalidIsSync1DTypeProject = "Error_Invalid_IsSync1DTypeProject";
         private const string _InvalidDeltaEValue = "Error_Invalid_DeltaEValue";
         private const string _InvalidValidationType = "Error_Invalid_ValidationType";
+        private const string _InvalidOptimizationRunID = "Error_Invalid_OptimizationRunID";
         #endregion
 
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -190,6 +191,31 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+        [HttpGet]
+        public IHttpActionResult GetAverageMeasurementCompatibility(int? OptimizationRunID)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<int> httpResponse = new BaseResponse<int>();
+            string validationMessage = "";
+            try
+            {
+                if (OptimizationRunID == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
+
+                OptimizeRunId = Convert.ToInt32(OptimizationRunID);
+                int CompatibilityNo = _presenterAnalyze.ChkAvgMeasurementCompatibility();
+                httpResponse.Data = CompatibilityNo;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
         #region IViewAnalyze Members
         public int ProjectId { get; set; }
 

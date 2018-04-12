@@ -396,13 +396,13 @@ $(document).ready(function () {
         //    }
         //});
 
-        
+
         var request = new XMLHttpRequest();
         request.open("POST", SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReportTest', true);
         request.setRequestHeader("content-type", "application/json");
         request.responseType = "blob";
         request.onload = function (e) {
-            
+
             if (this.status === 200) {
                 // `blob` response
                 console.log(this.response);
@@ -1565,7 +1565,7 @@ function PopulateAnalyzeChart() {
 
 
     var patchArray = [];
-    if (analyzeSeriesResult.length > 0) {        
+    if (analyzeSeriesResult.length > 0) {
         //check last measurement
         if ($hdnCurrentMeasurement.val() == '') {
             $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
@@ -1807,8 +1807,6 @@ function PopulateAnalyzeChart() {
         },
 
         axisLabelClick: function (e) {
-            debugger;
-
             var isChecked = $(e.element).html() != '☑' ? true : false;
             //get the current clicked category data
             var currentObj = e.value;
@@ -1842,18 +1840,25 @@ function PopulateAnalyzeChart() {
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
-                    debugger;
+
                     $hdnCurrentMeasurement.val(currentObj.MeasurementId);
                     $hdMeasurement.val(currentObj.MeasurementId);
+
+                    
+                    //update the average measurement value 
+                    $.ajax({
+                        url: SERVICE_BASE_URL + 'api/Analyze/GetAverageMeasurementCompatibility',
+                        data: { OptimizationRunID: parseInt($hdnOptimizationRunID) },
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            $('#ContentPlaceHolder1_ucAnalyze_hd_CompError').val(response.data)
+                        },
+                        error: function (xhr, errorType, exception) {                            
+                        }
+                    });
+
                     BindAnalyzeChart();
-
-                    //$hdnCurrentMeasurement.val(currentObj.MeasurementId);
-                    //$hdMeasurement.val($hdnCurrentMeasurement.val());
-                    //BindAllTabs();
-
-                    //$divAnalyzeChart.data('kendoChart').refresh();
-                    ////set the chcked
-                    //$(e.element).html(isChecked ? '☑' : '☐');
                 },
                 error: function (xhr, errorType, exception) {
                     //alert(exception);                    
