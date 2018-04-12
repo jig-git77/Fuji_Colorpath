@@ -1853,6 +1853,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dtPatchDetails;
         }
 
+        
+
         public int SaveSpotMeasurement(Measurement measurement)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
@@ -1936,6 +1938,47 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         dtPatchDetails = dsMeasurements.Tables[0];
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetCMYKdataByOptimizeRunID"));
+            return dtPatchDetails;
+        }
+
+        public DataTable GetSpotPatchDetailsForChart(int OptimizeRunId)
+        {
+            string storedProc = "CPSpot.GetSpotPatchChartByOptimizeRunID";
+
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { OptimizeRunId });
+                    if (dsMeasurements.Tables.Count > 0)
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotPatchChartByOptimizeRunID"));
+            return dtPatchDetails;
+        }
+        public DataTable GetSpotProjectSummary(int OptimizeRunId)
+        {
+            string storedProc = "CPSpot.GetSpotPatchSummary";
+
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { OptimizeRunId });
+                    if (dsMeasurements.Tables.Count > 0)
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotProjectSummary"));
             return dtPatchDetails;
         }
         #endregion

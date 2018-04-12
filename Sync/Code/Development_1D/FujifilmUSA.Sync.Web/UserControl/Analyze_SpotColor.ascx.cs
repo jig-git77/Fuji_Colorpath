@@ -50,7 +50,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
                     OptimizeRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId);
                     hdfOptimizationRunID.Value = OptimizeRunId.ToString();
-                    hdnIsNewNCP.Value=IsNewNCP.ToString();
+                    BindSpotSummary();
+                    hdnIsNewNCP.Value = IsNewNCP.ToString();
                     hdnIsNcpCreated.Value = IsNCPCreated.ToString();
                     hdfCurrentCulture.Value = getCurrentCultureLanguage();
                 }
@@ -89,7 +90,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnDownloadAndSaveNCP_Click(object sender, EventArgs e)
         {
             if (!IsNCPCreated)
-            {               
+            {
                 SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 ProjectStatus = Convert.ToInt32(EOptimizeRunStatus.Closed);
@@ -109,7 +110,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 Response.Redirect("Export.aspx");
             }
-            
+
         }
 
         protected void BtnExportCMYK_Click(object sender, EventArgs e)
@@ -153,7 +154,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #region Create file and download txt file for CMYK values
                 System.IO.StreamWriter sw;
                 sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName + "_CMYKFile.dbd");
-               
+
                 for (int i = 0; i < listPatch.Count; i++)
                 {
                     SpotName_Header = listPatch[i].ColorName.Replace("_", "#20");
@@ -199,6 +200,51 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
 
         #region Methods
+
+        public void BindSpotSummary()
+        {
+            try
+            {
+                _presenterAnalyze.GetSpotPatchSummaryDetails();
+                if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
+                {
+                    if (Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]) > 0)
+                    {
+                        tblSecondRunDeltas.Visible = true;
+                        lblMeasurementID.Text= Convert.ToString(dtPatchDetails.Rows[0]["MeasurementID"]);
+                        lblMeasurementName.Text = Convert.ToString(dtPatchDetails.Rows[0]["MeasurementName"]);                     
+
+                        lblMinETP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxETP"]));
+                        lblMaxETP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinETP"]));
+                        lblAvgETP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgETP"]));
+                                      
+                        lblMinEMT.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMT"]));
+                        lblMaxEMT.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMT"]));
+                        lblAvgEMT.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMT"]));
+                                      
+                        lblMinEMP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMP"]));
+                        lblMaxEMP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMP"]));
+                        lblAvgEMP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMP"]));
+
+                        trMeasurementID.Visible = true;
+                        trMeasurementName.Visible = true;
+                    }
+                    else
+                    {                        
+                        tblFirstRunDeltas.Visible = true;                        
+                        lblMinDeltaE.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinE"]));
+                        lblMaxDeltaE.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxE"]));
+                        lblAvgDeltaE.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgE"]));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         double GetNdensity(double Lab_L)
         {
             double var_Y;

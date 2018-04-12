@@ -157,6 +157,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locSummary_Header;
         
         /// <summary>
+        /// trMeasurementID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trMeasurementID;
+        
+        /// <summary>
         /// Localize24 control.
         /// </summary>
         /// <remarks>
@@ -173,6 +182,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMeasurementID;
+        
+        /// <summary>
+        /// trMeasurementName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trMeasurementName;
         
         /// <summary>
         /// Localize3 control.
@@ -283,6 +301,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblDeltaType;
         
         /// <summary>
+        /// tblFirstRunDeltas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblFirstRunDeltas;
+        
+        /// <summary>
         /// locMinDeltaE control.
         /// </summary>
         /// <remarks>
@@ -335,6 +362,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMaxDeltaE;
+        
+        /// <summary>
+        /// tblSecondRunDeltas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblSecondRunDeltas;
         
         /// <summary>
         /// Localize2 control.

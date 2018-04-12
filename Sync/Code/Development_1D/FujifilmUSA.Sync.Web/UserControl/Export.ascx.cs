@@ -194,7 +194,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 Wedge wedge = new Wedge();
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;                
-                _presenterExport.GetSpotPatchDetailsofMeasurement();
+                _presenterExport.GetSpotPatchDetailsForChart();
 
                 List<Patch> listPatch = new List<Patch>();
                 if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)

@@ -7,7 +7,7 @@
 <style>
     .PatchDetailsSummaryTable {
         line-height: 35px;
-        width: 50%;
+        width: 55%;
     }
 
         .PatchDetailsSummaryTable th {
@@ -70,33 +70,33 @@
                                 if (response.data != null) {
                                     Resources = response.data.GlobalResources;
                                     var spotStates = response.data.spotAnalyzeDetails;
-                                    $('#lblMeasurementID').html(spotStates.measurementID);
-                                    $('#hdfMeasurementID').val(spotStates.measurementID);
+                                    //$('#lblMeasurementID').html(spotStates.measurementID);
+                                    //$('#hdfMeasurementID').val(spotStates.measurementID);
 
-                                    if (spotStates.measurementID) {
-                                        $('#tblSecondRunDeltas').css('display', 'table');
-                                        $('#lblMinETP').html(spotStates.minDeltaETP);
-                                        $('#lblMaxETP').html(spotStates.maxDeltaETP);
-                                        $('#lblAvgETP').html(spotStates.avgDeltaETP);
+                                    //if (spotStates.measurementID) {
+                                    //    $('#tblSecondRunDeltas').css('display', 'table');
+                                    //    $('#lblMinETP').html(spotStates.minDeltaETP);
+                                    //    $('#lblMaxETP').html(spotStates.maxDeltaETP);
+                                    //    $('#lblAvgETP').html(spotStates.avgDeltaETP);
 
-                                        $('#lblMinEMT').html(spotStates.minDeltaEMT);
-                                        $('#lblMaxEMT').html(spotStates.maxDeltaEMT);
-                                        $('#lblAvgEMT').html(spotStates.avgDeltaEMT);
+                                    //    $('#lblMinEMT').html(spotStates.minDeltaEMT);
+                                    //    $('#lblMaxEMT').html(spotStates.maxDeltaEMT);
+                                    //    $('#lblAvgEMT').html(spotStates.avgDeltaEMT);
 
-                                        $('#lblMinEMP').html(spotStates.minDeltaEMP);
-                                        $('#lblMaxEMP').html(spotStates.maxDeltaEMP);
-                                        $('#lblAvgEMP').html(spotStates.avgDeltaEMP);
+                                    //    $('#lblMinEMP').html(spotStates.minDeltaEMP);
+                                    //    $('#lblMaxEMP').html(spotStates.maxDeltaEMP);
+                                    //    $('#lblAvgEMP').html(spotStates.avgDeltaEMP);
 
-                                        $('#lblMeasurementName').html(spotStates.measurementName);
-                                    } else {
-                                        $('#tblFirstRunDeltas').css('display', 'table');
-                                        $('#lblMinDeltaE').html(spotStates.minDeltaE);
-                                        $('#lblMaxDeltaE').html(spotStates.maxDeltaE);
-                                        $('#lblAvgDeltaE').html(spotStates.avgDeltaE);
+                                    //    $('#lblMeasurementName').html(spotStates.measurementName);
+                                    //} else {
+                                    //    $('#tblFirstRunDeltas').css('display', 'table');
+                                    //    $('#lblMinDeltaE').html(spotStates.minDeltaE);
+                                    //    $('#lblMaxDeltaE').html(spotStates.maxDeltaE);
+                                    //    $('#lblAvgDeltaE').html(spotStates.avgDeltaE);
 
-                                        $('#trMeasurementID').css('display', 'none')
-                                        $('#trMeasurementName').css('display', 'none')
-                                    }
+                                    //    $('#trMeasurementID').css('display', 'none')
+                                    //    $('#trMeasurementName').css('display', 'none')
+                                    //}
 
 
                                     $divPathDetails.find("th[data-field=SpotID] b").html(Resources.gridAnalyzeHeaderIDResource);
@@ -493,7 +493,7 @@
                                                             <asp:Localize runat="server" ID="locSummary_Header"></asp:Localize>
                                                         </span></th>
                                                     </tr>
-                                                    <tr id="trMeasurementID">
+                                                    <tr id="trMeasurementID" runat="server" visible="false">
                                                         <td>
                                                             <span style="font-weight: bold;">
                                                                 <asp:Localize Text="MeasurementID" ID="Localize24" runat="server" meta:resourcekey="locMeasurementIDResource1"></asp:Localize>
@@ -503,7 +503,7 @@
                                                             <asp:Label runat="server" ID="lblMeasurementID" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
 
                                                     </tr>
-                                                    <tr id="trMeasurementName">
+                                                    <tr id="trMeasurementName" runat="server" visible="false">
                                                         <td>
                                                             <span style="font-weight: bold;">
                                                                 <asp:Localize Text="Measurement Name" ID="Localize3" runat="server" meta:resourcekey="locMeasurementNameResource1"></asp:Localize>
@@ -556,9 +556,9 @@
                                                     </tr>
                                                     <tr>
                                                         <td colspan="2">
-                                                            <table id="tblFirstRunDeltas" style="display: none; width: 100%;">
+                                                            <table id="tblFirstRunDeltas" runat="server" visible="false" style="width: 100%;">
                                                                 <tr>
-                                                                    <td style="width: 38%;"><span style="font-weight: bold;">
+                                                                    <td style="width: 31%;"><span style="font-weight: bold;">
                                                                         <asp:Localize Text="Min ΔE" runat="server"
                                                                             ID="locMinDeltaE" meta:resourcekey="locMinDeltaEResource1"></asp:Localize>
                                                                     </span></td>
@@ -582,9 +582,9 @@
                                                                         <asp:Label runat="server" ID="lblMaxDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                 </tr>
                                                             </table>
-                                                            <table id="tblSecondRunDeltas" style="display: none; width: 100%;">
+                                                            <table id="tblSecondRunDeltas" runat="server" visible="false" style="width: 100%;">
                                                                 <tr>
-                                                                    <td style="width: 38%;"></td>
+                                                                    <td style="width: 43%;"></td>
                                                                     <td><span style="font-weight: bold;">ΔE_T_P</span></td>
                                                                     <td><span style="font-weight: bold;">ΔE_M_T</span></td>
                                                                     <td><span style="font-weight: bold;">ΔE_M_P</span></td>
