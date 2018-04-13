@@ -1044,6 +1044,7 @@
                                                                             </div>
                                                                             <div id="kendoChartTargetVersusActualABLargeArea">
                                                                                 <div id="kendoChartTargetVersusActualABLarge" class="gamutChart"></div>
+                                                                                </div>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>

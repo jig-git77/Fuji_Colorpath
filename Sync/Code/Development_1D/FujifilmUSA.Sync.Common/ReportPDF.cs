@@ -359,9 +359,9 @@ namespace FujifilmUSA.Sync.Common
 
                 fp = File.OpenText(FilePath);
                 StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
-
+                fp.Close();
                 SBStr = SetPDFContent(SBStr);
-
+                
                 theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
                 theDoc.Rect.Inset(0, 1);
 
@@ -1945,7 +1945,7 @@ namespace FujifilmUSA.Sync.Common
                 //StringBuilder SBStr = new StringBuilder();// System.Web.HttpContext.Current.Server.MapPath(FileName);
                 fp = File.OpenText(System.Web.Hosting.HostingEnvironment.MapPath("~/" + FileName));
                 StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
-
+                fp.Close();
                 //** Add Styles Path ***//
                 //string cssFullPath = this._WebURL + "Templates/style.css";
                 string cssFullPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/style.css");
