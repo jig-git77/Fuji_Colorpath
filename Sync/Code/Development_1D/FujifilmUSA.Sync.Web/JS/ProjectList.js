@@ -593,7 +593,7 @@ function detailInit(e) {
                             SpotprojectTypeTooltip = Resources.SpotProject_Certified;
                             break;
                     }
-
+                    debugger;
                     if (SpotprojectTypeImagePath != '') {
                         row.find("td #imgSpotProject").attr('src', SpotprojectTypeImagePath);   //set the Spot project type image path
                         row.find("td #imgSpotProject").attr('title', SpotprojectTypeTooltip);   //set the Spot project type tooltip

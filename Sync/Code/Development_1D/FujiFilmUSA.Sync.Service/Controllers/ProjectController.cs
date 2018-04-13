@@ -61,6 +61,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("MsgNoRecords", "MsgNoRecords");
             _resourceValues.Add("ClearFillterResource", "ClearFillterResource");
 
+            _resourceValues.Add("SpotProject_Open", "SpotProject_Open");
+            _resourceValues.Add("SpotProject_Certified", "SpotProject_Certified");
+
             base.Initialize(controllerContext);
         }
 
