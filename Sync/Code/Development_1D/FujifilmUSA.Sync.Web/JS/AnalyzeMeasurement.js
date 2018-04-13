@@ -1807,89 +1807,92 @@ function PopulateAnalyzeChart() {
         },
 
         axisLabelClick: function (e) {
-            var isChecked = $(e.element).html() != '☑' ? true : false;
-            //get the current clicked category data
-            var currentObj = e.value;
-            //check only one category available or not
-            if (measurementNamesList.length <= 1 && currentObj.IsUsed) {
-                alert(_Resources.selectMeasurementMsg);
-                return false;
-            }
-
-            //check in multiple category
-            var otherMeasurements = $.grep(measurementNamesList, function (elem) {
-                return elem.MeasurementId != currentObj.MeasurementId && (elem.IsUsed || !currentObj.IsUsed)
-            });
-
-            //check atleast one category should checked
-            if (otherMeasurements.length == 0) {
-                alert(_Resources.selectMeasurementMsg);
-                return false;
-            }
-            //api call to update the measurement
-            var apiParameters = {
-                MeasurementId: currentObj.MeasurementId,
-                isMeasurementUsed: !currentObj.IsUsed,
-                IsVerificationProject: $hdnVerification,
-                IsSync1DTypeProject: $hdnSync1DType,
-            };
-
-            $.ajax({
-                url: SERVICE_BASE_URL + 'api/Chart/UpdateMeasurementFromAnalyzeChart',
-                data: apiParameters,
-                type: 'GET',
-                dataType: 'json',
-                success: function (response) {
-
-                    $hdnCurrentMeasurement.val(currentObj.MeasurementId);
-                    $hdMeasurement.val(currentObj.MeasurementId);
-
-
-                    //update the average measurement value 
-                    $.ajax({
-                        url: SERVICE_BASE_URL + 'api/Analyze/GetAverageMeasurementCompatibility',
-                        data: { OptimizationRunID: parseInt($hdnOptimizationRunID) },
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (response) {
-                            $('#ContentPlaceHolder1_ucAnalyze_hd_CompError').val(response.data)
-                            $("[id*='lblCompError']").html('');
-
-                        },
-                        error: function (xhr, errorType, exception) {
-                        }
-                    });
-
-                    BindAnalyzeChart();
-                },
-                error: function (xhr, errorType, exception) {
-                    //alert(exception);                    
+            if (!$('#chkAnalyzeAverageOfMeasurements').is(':checked')) {
+                var isChecked = $(e.element).html() != '☑' ? true : false;
+                //get the current clicked category data
+                var currentObj = e.value;
+                //check only one category available or not
+                if (measurementNamesList.length <= 1 && currentObj.IsUsed) {
+                    alert(_Resources.selectMeasurementMsg);
+                    return false;
                 }
-            });
 
+                //check in multiple category
+                var otherMeasurements = $.grep(measurementNamesList, function (elem) {
+                    return elem.MeasurementId != currentObj.MeasurementId && (elem.IsUsed || !currentObj.IsUsed)
+                });
+
+                //check atleast one category should checked
+                if (otherMeasurements.length == 0) {
+                    alert(_Resources.selectMeasurementMsg);
+                    return false;
+                }
+                //api call to update the measurement
+                var apiParameters = {
+                    MeasurementId: currentObj.MeasurementId,
+                    isMeasurementUsed: !currentObj.IsUsed,
+                    IsVerificationProject: $hdnVerification,
+                    IsSync1DTypeProject: $hdnSync1DType,
+                };
+
+                $.ajax({
+                    url: SERVICE_BASE_URL + 'api/Chart/UpdateMeasurementFromAnalyzeChart',
+                    data: apiParameters,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (response) {
+
+                        $hdnCurrentMeasurement.val(currentObj.MeasurementId);
+                        $hdMeasurement.val(currentObj.MeasurementId);
+
+
+                        //update the average measurement value 
+                        $.ajax({
+                            url: SERVICE_BASE_URL + 'api/Analyze/GetAverageMeasurementCompatibility',
+                            data: { OptimizationRunID: parseInt($hdnOptimizationRunID) },
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function (response) {
+                                $('#ContentPlaceHolder1_ucAnalyze_hd_CompError').val(response.data)
+                                $("[id*='lblCompError']").html('');
+
+                            },
+                            error: function (xhr, errorType, exception) {
+                            }
+                        });
+
+                        BindAnalyzeChart();
+                    },
+                    error: function (xhr, errorType, exception) {
+                        //alert(exception);                    
+                    }
+                });
+            }
         },
         seriesClick: function (e) {
-            if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-                var dMethod = e.category.dEMethod;
-                dMethod = dMethod.substring(1, dMethod.length);
-                $('#hdnDefaultSelectedDelta').val(dMethod);
-                $selectedDeltaE = dMethod;
+            if (!$('#chkAnalyzeAverageOfMeasurements').is(':checked')) {
+                if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                    var dMethod = e.category.dEMethod;
+                    dMethod = dMethod.substring(1, dMethod.length);
+                    $('#hdnDefaultSelectedDelta').val(dMethod);
+                    $selectedDeltaE = dMethod;
 
-                $hdnCurrentMeasurement.val(e.category.MeasurementId);
-                $hdMeasurement.val($hdnCurrentMeasurement.val());
-                BindAllTabs();
+                    $hdnCurrentMeasurement.val(e.category.MeasurementId);
+                    $hdMeasurement.val($hdnCurrentMeasurement.val());
+                    BindAllTabs();
 
-                var analyzeChart = $divAnalyzeChart.data('kendoChart');
-                analyzeChart.options.valueAxis.title.text = e.category.dEMethod;
-                analyzeChart.refresh();
-            }
-            else {
-                $hdnCurrentMeasurement.val(e.category.MeasurementId);
-                $hdMeasurement.val($hdnCurrentMeasurement.val());
-                BindAllTabs();
+                    var analyzeChart = $divAnalyzeChart.data('kendoChart');
+                    analyzeChart.options.valueAxis.title.text = e.category.dEMethod;
+                    analyzeChart.refresh();
+                }
+                else {
+                    $hdnCurrentMeasurement.val(e.category.MeasurementId);
+                    $hdMeasurement.val($hdnCurrentMeasurement.val());
+                    BindAllTabs();
 
-                $divAnalyzeChart.data('kendoChart').refresh();
-                $('#lblNewAnalyzeLabel').html(e.category.MeasurementName);
+                    $divAnalyzeChart.data('kendoChart').refresh();
+                    $('#lblNewAnalyzeLabel').html(e.category.MeasurementName);
+                }
             }
         }
     });
@@ -5177,7 +5180,7 @@ function formatMeasurementDateWithTime(d) {
 }
 
 ////**************** METHOD TO CHECK AVG COMPATIBILITY  ****************////
-function CheckAvgCompability() {    
+function CheckAvgCompability() {
     var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
     if (answer == "0") {
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
@@ -5203,6 +5206,18 @@ function CheckAvgCompability() {
             //$('#tblValidationSummary').css('display', 'block');
             $('#tblValidationSummary').css('display', 'block');
         }
+
+        //freez the all markers of kendo chart
+        var chart = $divAnalyzeChart.data('kendoChart');
+        if (chart.options.series.length > 0) {
+            $.each(chart.options.series, function (i, item) {
+                item.tooltip.visible = !$isAverageOfMeasurements
+                item.highlight.visible = !$isAverageOfMeasurements
+            });
+            chart.refresh();    
+        }
+        
+
         return true;
     }
     else if (answer == "1") {
