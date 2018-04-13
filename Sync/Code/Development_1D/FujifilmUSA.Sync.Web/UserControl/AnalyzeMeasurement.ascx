@@ -182,13 +182,13 @@
         });
 
         $('#chk1DMeasurementSmoothing').on('change', function (e) {
-            e.preventDefault();            
+            e.preventDefault();
             CallOneDMeasurement($(this).prop('checked'));
         });
     });
 
     function CallOneDMeasurement(value) {
-        var res = PageMethods.Set1DMeasurementSmoothingSessionValue(value.toString());       
+        var res = PageMethods.Set1DMeasurementSmoothingSessionValue(value.toString());
     }
 </script>
 
@@ -1039,7 +1039,9 @@
 
                                                                     <tr>
                                                                         <td align="center" valign="top">
-                                                                            <div id="kendoChartTargetVersusActualAB" class="gamutChart"></div>
+                                                                            <div id="divTest" class="gamutChart">
+                                                                                <div id="kendoChartTargetVersusActualAB" ></div>
+                                                                            </div>
                                                                             <div id="kendoChartTargetVersusActualABLargeArea">
                                                                                 <div id="kendoChartTargetVersusActualABLarge" class="gamutChart"></div>
                                                                         </td>
