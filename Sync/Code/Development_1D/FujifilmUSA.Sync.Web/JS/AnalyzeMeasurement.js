@@ -1844,7 +1844,7 @@ function PopulateAnalyzeChart() {
                     $hdnCurrentMeasurement.val(currentObj.MeasurementId);
                     $hdMeasurement.val(currentObj.MeasurementId);
 
-                    
+
                     //update the average measurement value 
                     $.ajax({
                         url: SERVICE_BASE_URL + 'api/Analyze/GetAverageMeasurementCompatibility',
@@ -1853,8 +1853,10 @@ function PopulateAnalyzeChart() {
                         dataType: 'json',
                         success: function (response) {
                             $('#ContentPlaceHolder1_ucAnalyze_hd_CompError').val(response.data)
+                            $("[id*='lblCompError']").html('');
+
                         },
-                        error: function (xhr, errorType, exception) {                            
+                        error: function (xhr, errorType, exception) {
                         }
                     });
 
@@ -5175,8 +5177,7 @@ function formatMeasurementDateWithTime(d) {
 }
 
 ////**************** METHOD TO CHECK AVG COMPATIBILITY  ****************////
-function CheckAvgCompability() {
-    debugger;
+function CheckAvgCompability() {    
     var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
     if (answer == "0") {
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
