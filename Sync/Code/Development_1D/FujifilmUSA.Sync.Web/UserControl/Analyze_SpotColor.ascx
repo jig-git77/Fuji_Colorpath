@@ -70,35 +70,8 @@
                                 if (response.data != null) {
                                     Resources = response.data.GlobalResources;
                                     var spotStates = response.data.spotAnalyzeDetails;
-                                    //$('#lblMeasurementID').html(spotStates.measurementID);
-                                    //$('#hdfMeasurementID').val(spotStates.measurementID);
-
-                                    //if (spotStates.measurementID) {
-                                    //    $('#tblSecondRunDeltas').css('display', 'table');
-                                    //    $('#lblMinETP').html(spotStates.minDeltaETP);
-                                    //    $('#lblMaxETP').html(spotStates.maxDeltaETP);
-                                    //    $('#lblAvgETP').html(spotStates.avgDeltaETP);
-
-                                    //    $('#lblMinEMT').html(spotStates.minDeltaEMT);
-                                    //    $('#lblMaxEMT').html(spotStates.maxDeltaEMT);
-                                    //    $('#lblAvgEMT').html(spotStates.avgDeltaEMT);
-
-                                    //    $('#lblMinEMP').html(spotStates.minDeltaEMP);
-                                    //    $('#lblMaxEMP').html(spotStates.maxDeltaEMP);
-                                    //    $('#lblAvgEMP').html(spotStates.avgDeltaEMP);
-
-                                    //    $('#lblMeasurementName').html(spotStates.measurementName);
-                                    //} else {
-                                    //    $('#tblFirstRunDeltas').css('display', 'table');
-                                    //    $('#lblMinDeltaE').html(spotStates.minDeltaE);
-                                    //    $('#lblMaxDeltaE').html(spotStates.maxDeltaE);
-                                    //    $('#lblAvgDeltaE').html(spotStates.avgDeltaE);
-
-                                    //    $('#trMeasurementID').css('display', 'none')
-                                    //    $('#trMeasurementName').css('display', 'none')
-                                    //}
-
-
+                                    $('#hdfMeasurementID').val(spotStates.measurementID);
+                               
                                     $divPathDetails.find("th[data-field=SpotID] b").html(Resources.gridAnalyzeHeaderIDResource);
                                     $divPathDetails.find("th[data-field=SpotPatch] b").html(Resources.gridAnalyzeHeaderPatchResource);
                                     $divPathDetails.find("th[data-field=SpotView] b").html(Resources.gridAnalyzeHeaderViewResource);
@@ -281,7 +254,7 @@
                 //if (e.sender.dataSource._view.length > 0) {
                 //    measurementId = e.sender.dataSource._view[0].MeasurementID;
                 //}
-
+               
                 if (measurementId > 0) {
                     this.hideColumn(4);
                     this.hideColumn(5);
