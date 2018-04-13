@@ -338,7 +338,8 @@
                     ControlDisability(0, false, 1, false, 1, true, 1, true);
                     return false;
                 }
-                if (('<%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentDlpSubOperation != FujifilmUSA.Sync.Entity.ELicenseType.Validation).ToString().ToLower() %>' == 'true') && (jQuery("input[id*='hdMeasurementLimit']").val() >= <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit) %>)) {
+               
+             if (('<%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentDlpSubOperation != FujifilmUSA.Sync.Entity.ELicenseType.Validation).ToString().ToLower() %>' == 'true') && (jQuery("input[id*='hdMeasurementLimit']").val() >= <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary ? ApplicationConfiguration.Instance.MeasurementLimitSpotProject : ApplicationConfiguration.Instance.MeasurementsLimit)) %>)) {
                     MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
                     ControlDisability(1, false, 1, false, 1, true, 1, true);
                     return false;

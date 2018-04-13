@@ -29,10 +29,12 @@ namespace FujifilmUSA.Sync.Business
         private bool _enableSingleUserLogin;
         private int _keepUserAliveInSeconds;
         private string _fujifilmPluginVersion;
+        private int _measurementLimitSpotProject;
+
         #endregion
 
         #region Singleton
-        
+
         private ApplicationConfiguration()
         {
             Common.ImplementBusinessLogic(
@@ -101,6 +103,9 @@ namespace FujifilmUSA.Sync.Business
                                                                   break;
                                                               case "MEASUREMENTLIMITSYNC1D":
                                                                   _measurementLimitSync1D = Convert.ToInt32(x.Value);
+                                                                  break;
+                                                              case "MEASUREMENTLIMITSPOTPROJECT":
+                                                                  _measurementLimitSpotProject = Convert.ToInt32(x.Value);
                                                                   break;
                                                           }
                                                       });
@@ -235,6 +240,13 @@ namespace FujifilmUSA.Sync.Business
             get
             {
                 return _fujifilmPluginVersion;
+            }
+        }
+        public int MeasurementLimitSpotProject
+        {
+            get
+            {
+                return _measurementLimitSpotProject;
             }
         }
         #endregion
