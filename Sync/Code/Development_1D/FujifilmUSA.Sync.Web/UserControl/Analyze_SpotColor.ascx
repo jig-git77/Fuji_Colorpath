@@ -547,7 +547,6 @@
                                                         </td>
                                                         <td>
                                                             <asp:Label runat="server" ID="lblMeasurementID" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-
                                                     </tr>
                                                     <tr id="trMeasurementName" runat="server" visible="false">
                                                         <td>
@@ -557,7 +556,15 @@
                                                         </td>
                                                         <td>
                                                             <asp:Label runat="server" ID="lblMeasurementName" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-
+                                                    </tr>
+                                                    <tr id="trMeasurementDate" runat="server" visible="false">
+                                                        <td>
+                                                            <span style="font-weight: bold;">
+                                                                <asp:Localize Text="Measurement Date" ID="Localize4" runat="server" meta:resourcekey="locMeasurementDateResource1"></asp:Localize>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label runat="server" ID="lblMeasurementDate" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><span style="font-weight: bold;">

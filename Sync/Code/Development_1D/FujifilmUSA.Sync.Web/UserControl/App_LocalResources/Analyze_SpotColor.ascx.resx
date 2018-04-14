@@ -702,4 +702,7 @@
   <data name="locDeltaTypeResource.Text" xml:space="preserve">
     <value>ΔE Type</value>
   </data>
+  <data name="locMeasurementDateResource1.Text" xml:space="preserve">
+    <value>Measurement Date</value>
+  </data>
 </root>

@@ -212,29 +212,31 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         tblSecondRunDeltas.Visible = true;
                         lblMeasurementID.Text= Convert.ToString(dtPatchDetails.Rows[0]["MeasurementID"]);
-                        lblMeasurementName.Text = Convert.ToString(dtPatchDetails.Rows[0]["MeasurementName"]);                     
+                        lblMeasurementName.Text = Convert.ToString(dtPatchDetails.Rows[0]["MeasurementName"]);
+                        lblMeasurementDate.Text = Convert.ToString(dtPatchDetails.Rows[0]["MeasurementDate"]);
 
-                        lblMinETP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinETP"]));
-                        lblMaxETP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxETP"]));
-                        lblAvgETP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgETP"]));
-                                      
-                        lblMinEMT.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMT"]));
-                        lblMaxEMT.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMT"]));
-                        lblAvgEMT.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMT"]));
-                                      
-                        lblMinEMP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMP"]));
-                        lblMaxEMP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMP"]));
-                        lblAvgEMP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMP"]));
+                        lblMinETP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MinETP"])).ToString("N2");
+                        lblMaxETP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxETP"])).ToString("N2");
+                        lblAvgETP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgETP"])).ToString("N2");
+
+                        lblMinEMT.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMT"])).ToString("N2");
+                        lblMaxEMT.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMT"])).ToString("N2");
+                        lblAvgEMT.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMT"])).ToString("N2");
+
+                        lblMinEMP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMP"])).ToString("N2");
+                        lblMaxEMP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMP"])).ToString("N2");
+                        lblAvgEMP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMP"])).ToString("N2");
 
                         trMeasurementID.Visible = true;
                         trMeasurementName.Visible = true;
+                        trMeasurementDate.Visible = true;
                     }
                     else
                     {                        
                         tblFirstRunDeltas.Visible = true;                        
-                        lblMinDeltaE.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinE"]));
-                        lblMaxDeltaE.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxE"]));
-                        lblAvgDeltaE.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgE"]));
+                        lblMinDeltaE.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MinE"])).ToString("N2");
+                        lblMaxDeltaE.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxE"])).ToString("N2");
+                        lblAvgDeltaE.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgE"])).ToString("N2");
                     }
                 }
             }
