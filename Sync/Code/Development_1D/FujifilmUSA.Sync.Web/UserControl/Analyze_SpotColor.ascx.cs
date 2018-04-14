@@ -214,16 +214,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lblMeasurementID.Text= Convert.ToString(dtPatchDetails.Rows[0]["MeasurementID"]);
                         lblMeasurementName.Text = Convert.ToString(dtPatchDetails.Rows[0]["MeasurementName"]);                     
 
-                        lblMinETP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxETP"]));
-                        lblMaxETP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinETP"]));
+                        lblMinETP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinETP"]));
+                        lblMaxETP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxETP"]));
                         lblAvgETP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgETP"]));
                                       
-                        lblMinEMT.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMT"]));
-                        lblMaxEMT.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMT"]));
+                        lblMinEMT.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMT"]));
+                        lblMaxEMT.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMT"]));
                         lblAvgEMT.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMT"]));
                                       
-                        lblMinEMP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMP"]));
-                        lblMaxEMP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMP"]));
+                        lblMinEMP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMP"]));
+                        lblMaxEMP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMP"]));
                         lblAvgEMP.Text = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMP"]));
 
                         trMeasurementID.Visible = true;
