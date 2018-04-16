@@ -250,7 +250,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;
-                    Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
+                    //Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Export.aspx';", true);
                 }
             }
             else

@@ -638,13 +638,7 @@
                             </div>
                         </section>
                     </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Button ID="BtnExportCMYK" runat="server" CssClass="BUTTON" Text="Export CMYK"
-                            meta:resourcekey="BtnExportCMYKResource1" OnClick="BtnExportCMYK_Click" />
-                    </td>
-                </tr>
+                </tr>               
             </table>
         </div>
     </div>

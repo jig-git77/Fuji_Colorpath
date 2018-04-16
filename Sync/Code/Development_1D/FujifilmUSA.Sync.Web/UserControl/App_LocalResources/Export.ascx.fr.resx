@@ -225,4 +225,7 @@
   <data name="locDownloadChartAndPrintThroughWorkflowResource1NCP" xml:space="preserve">
     <value>Télécharger la Charte et l'imprimer depuis le Flux de Travail :</value>
   </data>
+  <data name="locExportCMYKResource.Text" xml:space="preserve">
+    <value>Export CMYK</value>
+  </data>
 </root>

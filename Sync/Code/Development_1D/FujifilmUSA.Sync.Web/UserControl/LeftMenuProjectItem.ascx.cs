@@ -51,7 +51,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         else if (CurrentRun.Status == EOptimizeRunStatus.Certify)
                         {
                             lnkMeasurement.Visible = false;
-                            lnkDownload.Visible = false;
+                            //lnkDownload.Visible = false;
 
                             //------If current run is closed (certify) and it is last run of this project--------//
                             if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==

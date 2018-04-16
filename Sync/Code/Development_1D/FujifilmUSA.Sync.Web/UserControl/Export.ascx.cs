@@ -75,21 +75,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If "Spot Target Library" project type, then skip Measure button and DLP Download button (since we don't have destination profile in this case).
                     {
-                        trSourceProfDownload.Visible = false;
                         trDLPDownload.Visible = true;
-                        //if (SessionManager.Instance.CurrentOptimizeRun.RunName == "Run-0" || (SessionManager.Instance.CurrentOptimizeRun.RunName != "Run-0" && SessionManager.Instance.CurrentOptimizeRun.HasProfile)) //Download NamedcolorProfile only visible if it is not run-0 and in certify run mode
-                        //{
-                        //    trAdvancedDownload.Visible = false;
-                        //}
+
+                        trSourceProfDownload.Visible = !(SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify);
                         trDLPDownload1.Visible = false;
                         trDLPDownload2.Visible = false;
 
                         Div_Chart.Visible = true;
-                        lbtnMeasure.Visible = true;
+                        lbtnMeasure.Visible = !(SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify);
                         locDownloadDLPAndChart.Text = "Download Chart";
                         lbtnNamedColorICC.Visible = true;
                         header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + ".icc");
                         locDownloadChartAndPrintThroughWorkflow.Text = GetResourceString(locDownloadChartAndPrintThroughWorkflowResourceNCP);
+
+                        //----Don't show CMYK export button for Run-0, since there is no previous run's CMYK data to export
+                        lbtnExportCMYK.Visible = !(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
+                            SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId);
                     }
                     else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource) //---If "Custom Source Profile" project type, then skip Measure button and Advanced Download button (since we don't have desctination profile in this case).
                     {
@@ -779,6 +780,90 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        protected void lbtnExportCMYK_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile")))
+                Directory.CreateDirectory(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile"));
+
+            //==========  Get Data Table and Bind ==========//
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            {
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                _presenterExport.GetSpotPatchDetailsForCMYKExport();
+
+                List<Patch> listPatch = new List<Patch>();
+                if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dtPatchDetails.Rows)
+                    {
+                        Patch patch = new Patch()
+                        {
+                            PatchID = Convert.ToInt32(dr["SpotID"]),
+                            ColorName = Convert.ToString(dr["SpotName"]),
+                            Cmyk_C = Convert.ToDouble(dr["CMYK_C"]),
+                            Cmyk_M = Convert.ToDouble(dr["CMYK_M"]),
+                            Cmyk_Y = Convert.ToDouble(dr["CMYK_Y"]),
+                            Cmyk_K = Convert.ToDouble(dr["CMYK_K"]),
+                            Cie_L = Convert.ToDouble(dr["TargetL"]),
+                            Cie_a = Convert.ToDouble(dr["Targeta"]),
+                            Cie_b = Convert.ToDouble(dr["Targetb"]),
+                            Spot1 = 0
+                        };
+                        listPatch.Add(patch);
+                    }
+                }
+
+                //string CurveFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00");
+                string CMYKFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00");
+
+                string SpotName_Header, SpotName_Parameter = "";
+
+                #region Create file and download txt file for CMYK values
+                System.IO.StreamWriter sw;
+                sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName + "_CMYKFile.dbd");
+
+                for (int i = 0; i < listPatch.Count; i++)
+                {
+                    SpotName_Header = listPatch[i].ColorName.Replace("_", "#20");
+                    SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
+
+                    sw.WriteLine("%%N:/Proforma/ColorPools/2/ColorPool/" + SpotName_Header);
+                    sw.WriteLine("Color_1:OBJECT Color");
+                    sw.WriteLine("{");
+                    sw.WriteLine("\tName:string = " + "\"" + SpotName_Parameter + "\"");
+                    sw.WriteLine("\tFUJI" + "\\" + "PrintMode:string = " + "\"LargeGumatMerge\";");
+                    sw.WriteLine("\tColorType:string = " + "\"Normal\";");
+                    sw.WriteLine("\tNeutralDensity:double = " + String.Format("{0,12:e15}", GetNdensity(listPatch[i].Cie_L)) + ";");
+                    sw.WriteLine("\tTempLab:double[3] = " + String.Format("{0,12:e15}", listPatch[i].Cie_L) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_a) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_b) + ";");
+                    sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", listPatch[i].Cmyk_C) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_M) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_Y) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_K) + ";");
+                    sw.WriteLine("\tHideCMYK:string = " + "\"ShowAll\";");
+                    sw.WriteLine("\tHideLab:string = " + "\"ShowAll\";");
+                    sw.WriteLine("\tRawName:string = " + "\"\";");
+                    sw.WriteLine("}");
+                    sw.WriteLine("");
+                    sw.WriteLine("%%E:");
+                }
+                //-----Footer portion of file------------//
+                sw.WriteLine("%%N:/Proforma/ColorPools/2/ColorantAliasRules");
+                sw.WriteLine("");
+                sw.WriteLine("%%E:");
+                sw.WriteLine("%%N:/Proforma/ColorPools/2/Info");
+                sw.WriteLine("FUJI" + "\\" + "ColorPoolInfo_1:OBJECT FUJI" + "\\" + "ColorPoolInfo");
+                sw.WriteLine("{");
+                sw.WriteLine("\tName:string = " + "\"CustomSpotLib\";");
+                sw.WriteLine("\tComment:string = " + "\" \";");
+                sw.WriteLine("}");
+                sw.WriteLine("");
+                sw.WriteLine("%%E:");
+                //--------End: Footer-------------------//
+
+                sw.Close();
+
+                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + "_CMYKFile.dbd", CMYKFileName + "_CMYKFile.dbd");
+                #endregion
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -803,6 +888,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindCharts(this.CurveData.CurveExportView, this.CurveData.CurveDeltaRefView, this.CurveData.CurveDeltaPrevRunView);
                 rgCurveExportView.Rebind();
                 rgCurveDeltaView.Rebind();
+            }
+        }
+
+        //Get density of LabL to export CMYK values
+        double GetNdensity(double Lab_L)
+        {
+            double var_Y;
+            if ((Lab_L > 8))
+            {
+                var_Y = (100 * Math.Pow(((Lab_L + 16) / 116), 3));
+            }
+            else
+            {
+                var_Y = (100 * ((108 / 841) * (((Lab_L + 16) / 116) - (4 / 29))));
+            }
+
+            if ((var_Y > 0))
+            {
+                return (0.13353 + Math.Log10((100 / var_Y)));
+            }
+            else
+            {
+                return 0;
             }
         }
 

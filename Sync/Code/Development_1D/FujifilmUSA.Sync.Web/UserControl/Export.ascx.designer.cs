@@ -256,6 +256,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize Localize4;
         
         /// <summary>
+        /// lbtnExportCMYK control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnExportCMYK;
+        
+        /// <summary>
+        /// locExportCMYK control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locExportCMYK;
+        
+        /// <summary>
         /// trExportViewForSync1D control.
         /// </summary>
         /// <remarks>
