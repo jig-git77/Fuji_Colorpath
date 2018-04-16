@@ -95,7 +95,7 @@
                                 <div style="border-style: None; padding: 5px">
                                     <table>
                                         <tbody>
-                                            <tr id="trDLPDownload1" runat="server">
+                                            <tr>
                                                 <td>
                                                     <span>
                                                         <asp:Localize runat="server"
@@ -104,7 +104,7 @@
                                                             meta:resourcekey="locDownloadDLPAndImplementWorkflowResource1"></asp:Localize></span>
                                                 </td>
                                             </tr>
-                                            <tr id="trDLPDownload2" runat="server">
+                                            <tr>
                                                 <td>
                                                     <asp:LinkButton ID="lbtnDownloadDLP" runat="server" CssClass="gray_bt"
                                                         OnClick="lbtnDownloadDLP_Click">
@@ -240,7 +240,10 @@
                                                                  meta:resourcekey="locNamedColorICCResource1"></asp:Localize>
                                                          </span>
                                                      </asp:LinkButton>
-                                                    <br />
+                                                  </td>
+                                               </tr>
+                                               <tr>
+                                               <td>  
                                                     <asp:LinkButton ID="lbtnExportCMYK" runat="server" CssClass="gray_bt" Visible="false" OnClick="lbtnExportCMYK_Click">
                                                          <span>
                                                              <asp:Localize runat="server" Text="Export CMYK"

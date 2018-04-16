@@ -75,14 +75,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If "Spot Target Library" project type, then skip Measure button and DLP Download button (since we don't have destination profile in this case).
                     {
-                        trDLPDownload.Visible = true;
-
-                        trSourceProfDownload.Visible = !(SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify);
-                        trDLPDownload1.Visible = false;
-                        trDLPDownload2.Visible = false;
+                        trDLPDownload.Visible = !(SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify);
+                        lbtnMeasure.Visible = !(SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify);
 
                         Div_Chart.Visible = true;
-                        lbtnMeasure.Visible = !(SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify);
                         locDownloadDLPAndChart.Text = "Download Chart";
                         lbtnNamedColorICC.Visible = true;
                         header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + ".icc");
