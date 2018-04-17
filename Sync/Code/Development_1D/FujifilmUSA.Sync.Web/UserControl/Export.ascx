@@ -95,26 +95,28 @@
                                 <div style="border-style: None; padding: 5px">
                                     <table>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <span>
-                                                        <asp:Localize runat="server"
-                                                            Text="Download DLP and Implement in Workflow :"
-                                                            ID="locDownloadDLPAndImplementWorkflow"
-                                                            meta:resourcekey="locDownloadDLPAndImplementWorkflowResource1"></asp:Localize></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <asp:LinkButton ID="lbtnDownloadDLP" runat="server" CssClass="gray_bt"
-                                                        OnClick="lbtnDownloadDLP_Click">
+                                            <div id="Div_DLP" runat="server">
+                                                <tr>
+                                                    <td>
                                                         <span>
-                                                            <asp:Localize runat="server" Text="Download DLP" ID="locDownloadDLP"
-                                                                meta:resourcekey="locDownloadDLPResource1"></asp:Localize>
-                                                        </span>
-                                                    </asp:LinkButton>
-                                                </td>
-                                            </tr>
+                                                            <asp:Localize runat="server"
+                                                                Text="Download DLP and Implement in Workflow :"
+                                                                ID="locDownloadDLPAndImplementWorkflow"
+                                                                meta:resourcekey="locDownloadDLPAndImplementWorkflowResource1"></asp:Localize></span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="lbtnDownloadDLP" runat="server" CssClass="gray_bt"
+                                                            OnClick="lbtnDownloadDLP_Click">
+                                                            <span>
+                                                                <asp:Localize runat="server" Text="Download DLP" ID="locDownloadDLP"
+                                                                    meta:resourcekey="locDownloadDLPResource1"></asp:Localize>
+                                                            </span>
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                            </div>
                                             <div id="Div_Chart" runat="server">
                                                 <tr>
                                                     <td>

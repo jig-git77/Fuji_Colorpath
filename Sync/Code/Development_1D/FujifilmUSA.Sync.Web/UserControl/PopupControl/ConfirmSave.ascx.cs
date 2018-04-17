@@ -248,10 +248,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterConfirmSave.CertifySpotOptimizeRun();
                 if (!IsErrorOccured)
                 {
-                    SessionManager.Instance.CurrentProject = null;
-                    SessionManager.Instance.CurrentOptimizeRun = null;
-                    //Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
-                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Export.aspx';", true);
+                    SessionManager.Instance.CurrentOptimizeRun.Status = EOptimizeRunStatus.Certify;
+                    Utilities.PopupWindowsRedirect(this, "Export.aspx");
                 }
             }
             else

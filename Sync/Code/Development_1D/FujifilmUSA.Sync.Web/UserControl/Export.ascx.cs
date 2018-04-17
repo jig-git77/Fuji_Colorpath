@@ -75,18 +75,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If "Spot Target Library" project type, then skip Measure button and DLP Download button (since we don't have destination profile in this case).
                     {
-                        trDLPDownload.Visible = !(SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify);
-                        lbtnMeasure.Visible = !(SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify);
-
-                        Div_Chart.Visible = true;
+                        Div_DLP.Visible = false; // Hide Download DLP in optimize mode of spot project
+                        if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
+                        {
+                            lbtnMeasure.Visible = false;
+                            trDLPDownload.Visible = false; //Hide both Download DLP and Chart in Certify mode
+                            //----Don't show CMYK export button for Run-0, since there is no previous run's CMYK data to export
+                            lbtnExportCMYK.Visible = !(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
+                                SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId);
+                        }
                         locDownloadDLPAndChart.Text = "Download Chart";
                         lbtnNamedColorICC.Visible = true;
                         header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + ".icc");
                         locDownloadChartAndPrintThroughWorkflow.Text = GetResourceString(locDownloadChartAndPrintThroughWorkflowResourceNCP);
-
-                        //----Don't show CMYK export button for Run-0, since there is no previous run's CMYK data to export
-                        lbtnExportCMYK.Visible = !(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
-                            SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId);
                     }
                     else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource) //---If "Custom Source Profile" project type, then skip Measure button and Advanced Download button (since we don't have desctination profile in this case).
                     {
