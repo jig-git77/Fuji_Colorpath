@@ -468,7 +468,7 @@
                                                         <td colspan="2">
                                                             <table id="tblFirstRunDeltas" runat="server" visible="false" style="width: 100%;">
                                                                 <tr>
-                                                                    <td style="width: 25%;"><span style="font-weight: bold;">
+                                                                    <td style="width: 31%;"><span style="font-weight: bold;">
                                                                         <asp:Localize Text="Min ΔE" runat="server"
                                                                             ID="locMinDeltaE" meta:resourcekey="locMinDeltaEResource1"></asp:Localize>
                                                                     </span></td>
@@ -492,14 +492,14 @@
                                                                         <asp:Label runat="server" ID="lblMaxDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td colspan="2">
-                                                                        ____________________________________________________________________________________________
+                                                                    <td colspan="2" style="width:100%;">
+                                                                        <hr />
                                                                     </td>
                                                                 </tr>
                                                             </table>
                                                             <table id="tblSecondRunDeltas" runat="server" visible="false" style="width: 100%;">
                                                                 <tr>
-                                                                    <td style="width: 25%;"></td>
+                                                                    <td style="width: 43%;"></td>
                                                                     <td><span style="font-weight: bold;">ΔE_T_P</span></td>
                                                                     <td><span style="font-weight: bold;">ΔE_M_T</span></td>
                                                                     <td><span style="font-weight: bold;">ΔE_M_P</span></td>
@@ -542,7 +542,7 @@
                                                                </tr>
                                                                <tr>
                                                                     <td colspan="4">
-                                                                        ____________________________________________________________________________________________
+                                                                        <hr />
                                                                     </td>
                                                                </tr>
                                                             </table>
@@ -550,7 +550,7 @@
                                                     </tr>
    
                                                     <tr id="trMeasurementID" runat="server" visible="false">
-                                                        <td style="width: 25%;">
+                                                        <td>
                                                             <span style="font-weight: bold;">
                                                                 <asp:Localize Text="MeasurementID" ID="Localize24" runat="server" meta:resourcekey="locMeasurementIDResource1"></asp:Localize>
                                                             </span>
@@ -577,7 +577,7 @@
                                                             <asp:Label runat="server" ID="lblMeasurementDate" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="width: 25%;"><span style="font-weight: bold;">
+                                                        <td><span style="font-weight: bold;">
                                                             <asp:Localize Text="Media" runat="server"
                                                                 ID="locMedia" meta:resourcekey="locMediaResource1"></asp:Localize>
                                                         </span></td>
