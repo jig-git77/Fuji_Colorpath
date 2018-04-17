@@ -95,7 +95,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
                             lnkDownload.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Download;
                             lnkAnalyse.Enabled = lnkDownload.Enabled = CurrentRun.HasMeasurements;
-                            lnkDownload.Enabled = CurrentRun.HasProfile;
+                            lnkDownload.Enabled = CurrentRun.HasProfile || CurrentRun.Status == EOptimizeRunStatus.Certify;
                         }
                         else
                         {
