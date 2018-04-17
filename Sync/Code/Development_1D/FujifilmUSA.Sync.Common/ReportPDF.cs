@@ -1951,10 +1951,10 @@ namespace FujifilmUSA.Sync.Common
 
 
                 StringBuilder PatchStr = new StringBuilder();
-                PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>SpotName</th><th>HTMLColor</th>");
+                PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>SpotName</th><th>Color</th>");
                 int measurementID = dtPatchDetails != null && dtPatchDetails.Rows.Count > 0 ? Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]) : 0;
                 if (measurementID == 0)
-                    PatchStr.Append("<th>pΔL</th><th>pΔa</th><th>pΔb</th></tr>");
+                    PatchStr.Append("<th>pΔL</th><th>pΔa</th><th>pΔb</th><th>pΔE</th></tr>");
                 else
                     PatchStr.Append("<th>ΔE_T_P</th><th>ΔE_M_T</th><th>ΔE_M_P</th></tr>");
                 foreach (DataRow row in dtPatchDetails.Rows)
@@ -1963,7 +1963,7 @@ namespace FujifilmUSA.Sync.Common
                     PatchStr.Append("<td>" + Convert.ToString(row["SpotName"]) + " </td>");
                     PatchStr.Append("<td><span id='sp' style='display:inline-block;background-color:" + Convert.ToString(row["HTMLColor"]) + ";height:14px;width:68px;'></span></td>");
                     if (measurementID == 0)
-                        PatchStr.Append("<td>" + Convert.ToString(row["ΔL"]) + "</td><td>" + Convert.ToString(row["Δa"]) + "</td><td>" + Convert.ToString(row["Δb"]) + "</td>");
+                        PatchStr.Append("<td>" + Convert.ToString(row["ΔL"]) + "</td><td>" + Convert.ToString(row["Δa"]) + "</td><td>" + Convert.ToString(row["Δb"]) + "</td><td>" + Convert.ToString(row["ΔE"]) + "</td>");
                     else
                         PatchStr.Append("<td>" + Convert.ToString(row["ΔE_T_P"]) + "</td><td>" + Convert.ToString(row["ΔE_M_T"]) + "</td><td>" + Convert.ToString(row["ΔE_M_P"]) + "</td>");
                     PatchStr.Append("</tr>");
