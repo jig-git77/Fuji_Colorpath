@@ -5186,7 +5186,8 @@ function CheckAvgCompability() {
         var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
 
         $isAverageOfMeasurements = $('#chkAnalyzeAverageOfMeasurements').is(':checked');
-        BindMeasurementSummary();
+        //BindMeasurementSummary();
+        BindAllTabs();
 
         if ($isAverageOfMeasurements) {
 
