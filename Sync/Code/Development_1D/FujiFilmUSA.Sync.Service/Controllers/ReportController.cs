@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Web;
 using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -43,7 +44,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _presenterExport = new PresenterExport(this);
             base.Initialize(controllerContext);
         }
-        
+
         [HttpPost]
         public IHttpActionResult ExportAnalyzeChartReport(ChartContent chart)
         {
@@ -234,7 +235,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         MeasurementId = Convert.ToInt32(chart.MeasurementId);
                         IsVerification = chart.IsVerificationProject == null ? false : Convert.ToBoolean(chart.IsVerificationProject);
                         IsSync1DType = chart.IsSync1DTypeProject == null ? false : Convert.ToBoolean(chart.IsSync1DTypeProject);
-                        IsAverageOfMeasurements = chart.IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
+                        IsAverageOfMeasurements = chart.IsAverageOfMeasurements == null ? false : Convert.ToBoolean(chart.IsAverageOfMeasurements);
                         From_ΔE = Convert.ToString(chart.fromDeltaE);
                         ValidationType = Convert.ToInt32(chart.validationType);
 
@@ -327,6 +328,191 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return httpResponseMessage;
         }
 
+        //[HttpPost]
+        //public IHttpActionResult ExportAnalyzeChartReportTest(ChartContent chart)
+        //{
+        //    IHttpActionResult actionResult = null;
+        //    string validationMessage = "";
+        //    BaseResponse<string> httpResponse = new BaseResponse<string>();
+        //    try
+        //    {
+        //        if (chart == null)
+        //        {
+        //            validationMessage = "Invalid Charts, Please try again.";
+
+        //            BaseErrorResponse errprResponse = new BaseErrorResponse();
+        //            errprResponse.Error.UserMessage = validationMessage;
+        //            errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+        //            actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+        //        }
+        //        else
+        //        {
+        //            if (chart.MeasurementId == null)
+        //                validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+        //            if (chart.IsAverageOfMeasurements == null)
+        //                validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+
+        //            if (chart.IsVerificationProject == null)
+        //                validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+
+        //            if (chart.IsSync1DTypeProject == null)
+        //                validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+
+        //            if (string.IsNullOrEmpty(Convert.ToString(chart.fromDeltaE)))
+        //                validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
+
+        //            if (string.IsNullOrEmpty(Convert.ToString(chart.validationType)))
+        //                validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidValidationType);
+
+        //            if (!string.IsNullOrEmpty(validationMessage))
+        //            {
+        //                BaseErrorResponse errprResponse = new BaseErrorResponse();
+        //                errprResponse.Error.UserMessage = validationMessage;
+        //                errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+        //                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+        //            }
+        //            else
+        //            {
+        //                MeasurementId = Convert.ToInt32(chart.MeasurementId);
+        //                IsVerification = chart.IsVerificationProject == null ? false : Convert.ToBoolean(chart.IsVerificationProject);
+        //                IsSync1DType = chart.IsSync1DTypeProject == null ? false : Convert.ToBoolean(chart.IsSync1DTypeProject);
+        //                IsAverageOfMeasurements = chart.IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
+        //                From_ΔE = Convert.ToString(chart.fromDeltaE);
+        //                ValidationType = Convert.ToInt32(chart.validationType);
+
+
+        //                ReportPDF objReportPDF = new ReportPDF();
+        //                objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+
+        //                if (!Directory.Exists(objReportPDF.PDFPath))
+        //                    Directory.CreateDirectory(objReportPDF.PDFPath);
+
+        //                objReportPDF.chartContent = chart;
+        //                objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
+        //                objReportPDF.From_ΔE = From_ΔE;
+        //                objReportPDF.IsValidation = IsVerification;
+        //                objReportPDF.DLPName = chart.ReportDLPName;
+        //                //objReportPDF.ReportName = "Single Measurement Report";
+        //                //objReportPDF.DLPName = "DLP_NAME";
+        //                objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+
+        //                if (chart.validationType == 1)
+        //                {
+        //                    //code to set the report title
+        //                    objReportPDF.ReportName = "Validation Report";
+        //                    if (IsSync1DType)
+        //                    {
+        //                        objReportPDF.ReportName = "Press Alignment Report";
+        //                    }
+
+        //                    DSReport_G7_Vali = new DataSet();
+        //                    _presenterReportSingleMeasurement.GetReportDataOnMeasurement_G7_Vali();
+        //                    objReportPDF.DS_Common = DSReport_G7_Vali;
+        //                    objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_G7;
+        //                }
+        //                else
+        //                {
+        //                    objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_ISO;
+        //                    if (ValidationType == 0) //For Default mode in Sync1D ISO, G7 or 4D validation project as choice of MTP
+        //                    {
+        //                        objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_Default;
+        //                    }
+        //                    //code to set the report title
+        //                    if (IsVerification)
+        //                    {
+        //                        objReportPDF.ReportName = "Validation Report";
+        //                    }
+        //                    else if (IsSync1DType)
+        //                    {
+        //                        objReportPDF.ReportName = "Alignment Curves Report";
+        //                    }
+        //                    else
+        //                    {
+        //                        objReportPDF.ReportName = "DLP Optimization Report";
+        //                        objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement; //Only in 4D Optimization part
+        //                    }
+
+        //                    DSReport = new DataSet();
+        //                    _presenterReportSingleMeasurement.GetReportDataOnMeasurement();
+        //                    objReportPDF.DS_Common = DSReport;
+        //                }
+
+        //                objReportPDF.GenerateClientReportPDF();
+        //                string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
+
+        //                var dataBytes = File.ReadAllBytes(HostingEnvironment.MapPath("~/" + ReportPath));
+        //                Guid obj = Guid.NewGuid();
+        //                string guid = obj.ToString();
+        //                var session = HttpContext.Current.Session;
+        //                if(session !=null)
+        //                {
+        //                    HttpContext.Current.Session[guid] = dataBytes;
+        //                    HttpContext.Current.Session[guid + "AttachementFileName"] = objReportPDF.PDF_NAME;
+        //                }
+                        
+        //                httpResponse.status = ResponseStatus.Success;
+        //                httpResponse.Data = guid;
+        //                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        BaseErrorResponse errprResponse = new BaseErrorResponse();
+        //        errprResponse.Error.UserMessage = ex.Message;
+        //        errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+        //        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+        //    }
+        //    return actionResult;
+        //}
+
+        [HttpGet]
+        public HttpResponseMessage DownloadReport(string guid)
+        {
+            HttpResponseMessage httpResponseMessage = null;
+            string validationMessage = "";
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
+            try
+            {
+                if (guid == null)
+                {
+                    validationMessage = "Invalid Charts, Please try again.";
+
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    httpResponseMessage = Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse);//returns 412 status code
+                }
+                else
+                {                   
+                    var dataBytes = (byte[])HttpContext.Current.Session[guid];
+                    string fileName = Convert.ToString(HttpContext.Current.Session[guid + "AttachementFileName"]);
+                    //adding bytes to memory stream   
+                    var dataStream = new MemoryStream(dataBytes);
+                    httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
+                    httpResponseMessage.Content = new StreamContent(dataStream);
+                    httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
+                    httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
+                    httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                    httpResponseMessage.Content.Headers.ContentDisposition.FileName = fileName;
+                    httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                httpResponseMessage = Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse);//returns the 500 status code
+
+            }
+            return httpResponseMessage;
+        }
+
         //service to bind the summary delta E values for report
         [HttpGet]
         public IHttpActionResult GenerateSummaryDeltaCharts(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject,
@@ -404,7 +590,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                                     listStatesLimits.Add(Convert.ToDecimal(DSReport.Tables[2].Rows[index]["TargetValue"]));
                                 }
                             }
-                            
+
                         }
                     httpResponse.Data = new
                     {
@@ -437,7 +623,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             BaseResponse<string> httpResponse = new BaseResponse<string>();
             try
             {
-                
+
 
                 if (chart.MeasurementId == null)
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
@@ -474,7 +660,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                     if (DSReport != null && DSReport.Tables.Count > 0)
                     {
-                        RevisedDataSet(DSReport,chart.grading); //-----Call the function to get two separate DataSets for Avg Scoring and Individual Scoring Measurements list
+                        RevisedDataSet(DSReport, chart.grading); //-----Call the function to get two separate DataSets for Avg Scoring and Individual Scoring Measurements list
 
                         ReportPDF objReportPDF = new ReportPDF();
                         objReportPDF.ReportType = (int)enumReportType.ReportScoringMeasurement_Default;
@@ -484,10 +670,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             Directory.CreateDirectory(objReportPDF.PDFPath);
 
                         objReportPDF.chartContent = chart;
-                        objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";                        
+                        objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
                         objReportPDF.DS_Common = DSReport;
                         objReportPDF.DS_MetricAvgScoring = DSReportTotalAvg;
-                        objReportPDF.DS_ScoringMeasurementList = DSReportRevised;                        
+                        objReportPDF.DS_ScoringMeasurementList = DSReportRevised;
                         objReportPDF.From_ΔE = From_ΔE;
                         objReportPDF.IsValidation = IsVerification;
                         objReportPDF.DLPName = chart.ReportDLPName;
@@ -576,7 +762,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         httpResponse.Data = ReportPath;
                         actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
                         #endregion
-                    }                    
+                    }
                 }
             }
             catch (Exception ex)
@@ -925,7 +1111,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     string ReportPath = "UploadFiles/CurvesFile/" + CurveFileName;
                     httpResponse.status = ResponseStatus.Success;
                     httpResponse.Data = ReportPath;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));                    
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
                 }
             }
             catch (Exception ex)
@@ -940,7 +1126,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
-        private void RevisedDataSet(DataSet DSReport,ReportGrading grading)
+        private void RevisedDataSet(DataSet DSReport, ReportGrading grading)
         {
             decimal CyanAvgScore = 0;
             decimal MagentaAvgScore = 0;
@@ -1104,7 +1290,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             decimal RGBSoc_R, RGBMaxSoc_R, RGBIndPer_R = 0;
             decimal RGBSoc_G, RGBMaxSoc_G, RGBIndPer_G = 0;
             decimal RGBSoc_B, RGBMaxSoc_B, RGBIndPer_B = 0;
-            
+
             decimal CMYSoc_25, CMYMaxSoc_25, CMYIndPer_25 = 0;
             decimal CMYSoc_50, CMYMaxSoc_50, CMYIndPer_50 = 0;
             decimal CMYSoc_75, CMYMaxSoc_75, CMYIndPer_75 = 0;

@@ -587,7 +587,7 @@
         }
         else {
             //deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteMeasurement/" + measurementId;
-            deleteMeasurementUrl = "PluginData.svc/DeleteMeasurement/" + measurementId;
+            deleteMeasurementUrl += "PluginData.svc/DeleteMeasurement/" + measurementId;
         }
         jQuery.ajax({
             type: "POST",
