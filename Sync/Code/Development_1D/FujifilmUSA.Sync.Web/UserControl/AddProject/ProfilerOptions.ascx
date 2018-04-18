@@ -295,7 +295,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div id="panelBlackGeneration" style="padding-left: 10px">
-                                                                    <asp:Panel ID="panelBlackGen" Style="padding: 1px" runat="server" BorderStyle="None" Width="100%" Enabled="true">
+                                                                    <%--<asp:Panel ID="panelBlackGen" Style="padding: 1px" runat="server" BorderStyle="None" Width="100%" Enabled="true">--%>
+                                                                    <asp:Panel ID="panelBlackGen" Style="padding: 1px" runat="server" BorderStyle="None" Width="100%" Enabled="false">
                                                                         <table width="100%">
                                                                         <tr>
                                                                             <td class="style4">
@@ -352,14 +353,16 @@
                                                                                     meta:resourcekey="locInkTotalResource1"></asp:Localize></span>
                                                                             </td>
                                                                             <td style="width: 160px;">
-                                                                                <telerik:RadSlider runat="server" ID="rdsInkTotal" OnValueChanged="rdsInkTotal_ValueChanged" 
+                                                                                <%--<telerik:RadSlider runat="server" ID="rdsInkTotal" OnValueChanged="rdsInkTotal_ValueChanged" 
                                                                                     Width="160px" DbValue="0" Height="22px" Length="160"  MinimumValue="0" MaximumValue="400"
                                                                                     meta:resourcekey="rdsrdsInkTotalResource1" Enabled="true" AutoPostBack="true">
-                                                                                </telerik:RadSlider>
+                                                                                </telerik:RadSlider>--%>
+                                                                                 <asp:TextBox runat="server" ID="txtInkTotal" Width="70px" 
+                                                                                    meta:resourcekey="txtInkTotalResource1" Enabled="false"></asp:TextBox>
                                                                             </td>
                                                                             <td>
-                                                                                <asp:TextBox runat="server" ID="txtInkTotal" Width="30px" 
-                                                                                    meta:resourcekey="txtInkTotalResource1" Enabled="false"></asp:TextBox>
+                                                                                <%--<asp:TextBox runat="server" ID="txtInkTotal" Width="30px" 
+                                                                                    meta:resourcekey="txtInkTotalResource1" Enabled="false"></asp:TextBox>--%>
                                                                             </td>
                                                                             <td>
                                                                             </td>
