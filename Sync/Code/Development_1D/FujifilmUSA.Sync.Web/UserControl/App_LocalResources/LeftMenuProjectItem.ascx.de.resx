@@ -120,6 +120,9 @@
   <data name="btnDLPDeleteResource1.ToolTip" xml:space="preserve">
     <value>DLP löschen</value>
   </data>
+  <data name="btnNCPDeleteResource1" xml:space="preserve">
+    <value>Delete NCP</value>
+  </data>
   <data name="btnRunDeleteResource1.ToolTip" xml:space="preserve">
     <value>Optimierung löschen</value>
   </data>

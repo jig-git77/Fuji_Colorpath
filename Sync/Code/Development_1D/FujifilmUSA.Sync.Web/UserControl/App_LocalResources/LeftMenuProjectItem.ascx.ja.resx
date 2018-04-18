@@ -141,4 +141,7 @@
   <data name="lnkMeasurementResource1.Text" xml:space="preserve">
     <value>測色</value>
   </data>
+  <data name="btnNCPDeleteResource1" xml:space="preserve">
+    <value>Delete NCP</value>
+  </data>
 </root>

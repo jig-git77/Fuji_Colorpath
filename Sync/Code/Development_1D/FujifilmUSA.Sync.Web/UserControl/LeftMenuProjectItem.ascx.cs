@@ -73,6 +73,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                     lnkMeasurement.Visible = false;
                                     //------------Only visible DeleteDLP button, if DLP is created for this last run---------//
                                     btnDLPDelete.Visible = true;
+                                    btnDLPDelete.ToolTip = (string)GetLocalResourceObject("btnNCPDeleteResource1");
                                 }
                                 else
                                 {
