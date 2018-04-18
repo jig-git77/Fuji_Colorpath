@@ -583,12 +583,12 @@ function detailInit(e) {
                             SpotprojectTypeTooltip = Resources.SpotProject_Open;
                             break;
                         case EOptimizeRunStatus.Closed:
-                            row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','',true)");
+                            row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowSpotClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','')");
                             SpotprojectTypeImagePath = 'Images/SpotProject.png';
                             SpotprojectTypeTooltip = Resources.SpotProject_Open;
                             break;
                         case EOptimizeRunStatus.Certify:
-                            row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','',true)");
+                            row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowSpotClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','')");
                             SpotprojectTypeImagePath = 'Images/SpotProject_Certified.png';
                             SpotprojectTypeTooltip = Resources.SpotProject_Certified;
                             break;

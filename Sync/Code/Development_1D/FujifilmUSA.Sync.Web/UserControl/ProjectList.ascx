@@ -48,6 +48,12 @@
         oWindow.show();
         return false;
     }
+    function ShowSpotClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName) {
+        var oWindow;
+        oWindow = window.radopen("PopupSpotClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+        oWindow.show();
+        return false;
+    }
 </script>
 <script language="javascript" type="text/javascript">
     function CloseOpenPrintConditionWindow() {
@@ -212,7 +218,7 @@
     </div>
     <div class="clear">
     </div>
-  
+
     <div class="listDevice">
         <div>
             <div id="kendoProjectList"></div>

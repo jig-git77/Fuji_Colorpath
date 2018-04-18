@@ -939,6 +939,7 @@
     <Content Include="PopupOpenForgotPassword.aspx" />
     <Content Include="PopupReportCMYKDensity.aspx" />
     <Content Include="PopupReportGrading.aspx" />
+    <Content Include="PopupSpotClosePrintCondition.aspx" />
     <Content Include="PopupSpotColorPatchDetails.aspx" />
     <Content Include="PrintPreview.aspx" />
     <Content Include="PrintStandardTypeManagement.aspx" />
@@ -2458,6 +2459,7 @@
     <Content Include="UserControl\PopupControl\ImportMeasurements.ascx" />
     <Content Include="UserControl\PopupControl\ReportCMYKDensity.ascx" />
     <Content Include="UserControl\PopupControl\ReportGrading.ascx" />
+    <Content Include="UserControl\PopupControl\SpotClosePrintCondition.ascx" />
     <Content Include="UserControl\PopupControl\SpotColorPatchDetails.ascx" />
     <Content Include="UserControl\PrintPreview.ascx" />
     <Content Include="UserControl\PrintStandardTypeManagement.ascx" />
@@ -3100,6 +3102,13 @@
     <Compile Include="PopupReportGrading.aspx.designer.cs">
       <DependentUpon>PopupReportGrading.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PopupSpotClosePrintCondition.aspx.cs">
+      <DependentUpon>PopupSpotClosePrintCondition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupSpotClosePrintCondition.aspx.designer.cs">
+      <DependentUpon>PopupSpotClosePrintCondition.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PopupSpotColorPatchDetails.aspx.cs">
       <DependentUpon>PopupSpotColorPatchDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3457,6 +3466,13 @@
     </Compile>
     <Compile Include="UserControl\PopupControl\ReportGrading.ascx.designer.cs">
       <DependentUpon>ReportGrading.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\SpotClosePrintCondition.ascx.cs">
+      <DependentUpon>SpotClosePrintCondition.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\SpotClosePrintCondition.ascx.designer.cs">
+      <DependentUpon>SpotClosePrintCondition.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\PopupControl\SpotColorPatchDetails.ascx.cs">
       <DependentUpon>SpotColorPatchDetails.ascx</DependentUpon>
@@ -6167,6 +6183,16 @@
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AnalyzeMeasurement.ascx.fr.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotClosePrintCondition.ascx.de.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotClosePrintCondition.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotClosePrintCondition.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotClosePrintCondition.ascx.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -6190,7 +6216,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
