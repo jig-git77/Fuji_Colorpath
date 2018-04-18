@@ -1315,13 +1315,16 @@
                                     <div>
                                         <div id="divMeasurementPatchDetails">
                                         </div>
-                                        <script type="text/x-kendo-template" id="templatePatchDetails">    
+                                        <script type="text/x-kendo-template" id="templatePatchDetails">                                                         
                                                         <div id="divMetricSum" style="float:left;">
                                                         <asp:Localize Text="Filter by Metric Sum:" runat="server"
                                                                             ID="locFilterMetricSumTemplate" meta:resourcekey="locFilterMetricSumResource1"></asp:Localize>
                                                             <input type="search" id="ddlMatricSum" style="width: 150px"/>
                                                         </div>
                                                         <div class="toolbar" style="float:right;">
+                                                            <a id='lnkLinkFilter' title='Clear filter'>
+                                                                <img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;margin-top: 5px;margin-right: 5px;'></img>
+                                                            </a>
                                                             <button id="btnExportCGATS" class="k-button">Export to CGATS</button>
                                                             <button id="btnExportCFX" class="k-button">Export to CFX</button>
                                                             

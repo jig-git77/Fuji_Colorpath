@@ -1228,6 +1228,10 @@ function BindMeasurementPatchDetails() {
             }
         });
     });
+
+    $divMeasurementPatchDetails.find('#lnkLinkFilter').on('click', function (e) {        
+        $("form.k-filter-menu button[type='reset']").trigger("click");
+    });
 }
 
 
@@ -5229,4 +5233,3 @@ function CheckAvgCompability() {
     }
     return false;
 }
-
