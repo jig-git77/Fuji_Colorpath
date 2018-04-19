@@ -145,7 +145,7 @@
     <value>Cancel</value>
   </data>
   <data name="locDownloadCertifiedNCPResource1.Text" xml:space="preserve">
-    <value>Certified Downloads</value>
+    <value>View Last Download</value>
   </data>
   <data name="locDownloadCurrentDLPResource1.Text" xml:space="preserve">
     <value>Download Current DLP</value>

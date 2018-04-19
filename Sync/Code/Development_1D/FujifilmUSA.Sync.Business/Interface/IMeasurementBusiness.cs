@@ -59,5 +59,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         DataTable GetSpotPatchDetailsForCMYKExport(int OptimizeRunId);
         DataTable GetSpotPatchDetailsForChart(int OptimizeRunId);
         DataTable GetSpotProjectSummary(int OptimizeRunId);
+        DataTable GetSpotPatchDetailsForChartBySpotProjectID(int SpotProjectId);
     }
 }

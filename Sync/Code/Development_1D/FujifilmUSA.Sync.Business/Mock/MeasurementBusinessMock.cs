@@ -207,6 +207,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataTable();
         }
+        public DataTable GetSpotPatchDetailsForChartBySpotProjectID(int SpotProjectId)
+        {
+            return new DataTable();
+        }
         #endregion
 
         #region ITaskBase Members

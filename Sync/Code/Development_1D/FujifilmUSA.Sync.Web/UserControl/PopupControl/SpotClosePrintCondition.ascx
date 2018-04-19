@@ -23,8 +23,29 @@
         return oWindow;
     }
 
+    function DownloadChart(spotID) {
+        //alert(spotID);
+        var SERVICE_BASE_URL = $('#hdfServicePath').val();
+        var win = window.open(SERVICE_BASE_URL + '/api/Report/DownloadSpotChart?SpotProjectID=' + spotID, "Title", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=780,height=200,top=" + (screen.height - 400) + ",left=" + (screen.width - 840));
+        win.document.body.innerHTML = "Chart is downloading,Please do not close untill file download.";
+
+        //var win = window.open(SERVICE_BASE_URL + '/api/Report/DownloadSpotChart?SpotProjectID=' + spotID, "Title", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=780,height=200,top=" + (screen.height - 400) + ",left=" + (screen.width - 840));
+        //win.document.body.innerHTML = "Chart is downloading,Please do not close untill file download.";
+        //alert(SERVICE_BASE_URL);
+        //window.location.href = SERVICE_BASE_URL + '/api/Report/DownloadSpotChart?SpotProjectID=' + spotID;
+        //window.open(SERVICE_BASE_URL + '/api/Report/DownloadSpotChart?SpotProjectID=' + spotID, "", "width=1,height=1")
+        //window.open(SERVICE_BASE_URL + '/api/Report/DownloadSpotChart?SpotProjectID=' + spotID, "_blank")
+        //window.focus(this.href)
+        //return true;
+        //if (confirm('Do you want to redirect?')) {
+        //    return true;
+        //}
+        return true;
+    }
+
 </script>
 <div style="display: block; margin: 10px;" class="contantbox tabcontant">
+    <asp:HiddenField runat="server" ID="hdfServicePath" ClientIDMode="Static" />
     <div style="margin-bottom: 3px;">
         <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
     </div>

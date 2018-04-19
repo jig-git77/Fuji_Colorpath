@@ -1981,6 +1981,28 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotProjectSummary"));
             return dtPatchDetails;
         }
+
+        public DataTable GetSpotPatchDetailsForChartBySpotProjectID(int SpotProjectId)
+        {
+            string storedProc = "CPSpot.GetSpotPatchChartBySpotProjectID";
+
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { SpotProjectId });
+                    if (dsMeasurements.Tables.Count > 0)
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotPatchDetailsForChartBySpotProjectID"));
+            return dtPatchDetails;
+        }
+
         #endregion
 
         #region ITaskBase Members

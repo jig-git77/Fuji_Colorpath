@@ -77,6 +77,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                     //lbtnDownloadSourceProf.Visible = true;
                     //lbtnViewDetail.Visible = true;
                 }
+                hdfServicePath.Value = Utilities.ReadConfigValue("BaseServiceURL");
+                lbtnReOptimize.Attributes.Add("onclick", "javascript: return DownloadChart(" + Request.QueryString["ProjectId"].ToString() + ")");
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)
@@ -135,26 +137,40 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
         protected void lbtnDownloadCurrentDLP_Click(object sender, EventArgs e)
         {
-            string DLPName = "NCPProfile.icc";
-            if (Request.QueryString["DlpName"] != null && Convert.ToString(Request.QueryString["DlpName"]) != "")
+            if (Request.QueryString["ProjectId"] != null)
             {
-                DLPName = Request.QueryString["DlpName"].ToString();
+                SpotProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                _presenterClosePrintCondition.GetProjectDetail_SpotProject();
+                if (!IsErrorOccured)
+                {
+                    SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentOptimizeRun = Project.SpotTargetProject.OptimizeRuns.Last();
+                    SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.SpotLibrary;
+                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+                    Utilities.PopupWindowsRedirect(this, "Export.aspx");
+                }
             }
 
-            SpotProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
-            _presenterClosePrintCondition.GetCurrentNamedColorProfile();
-            if (!IsErrorOccured)
-            {
-                //CurrentDlp = null;
-                if (CurrentDlp != null)
-                {
-                    Utilities.DownloadFile(CurrentDlp, DLPName);
-                }
-                else
-                {
-                    fujiStatusbar.DisplayMessage(GetResourceString(_recnoNCPText), false);
-                }
-            }
+            //string DLPName = "NCPProfile.icc";
+            //if (Request.QueryString["DlpName"] != null && Convert.ToString(Request.QueryString["DlpName"]) != "")
+            //{
+            //    DLPName = Request.QueryString["DlpName"].ToString();
+            //}
+
+            //SpotProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+            //_presenterClosePrintCondition.GetCurrentNamedColorProfile();
+            //if (!IsErrorOccured)
+            //{
+            //    //CurrentDlp = null;
+            //    if (CurrentDlp != null)
+            //    {
+            //        Utilities.DownloadFile(CurrentDlp, DLPName);
+            //    }
+            //    else
+            //    {
+            //        fujiStatusbar.DisplayMessage(GetResourceString(_recnoNCPText), false);
+            //    }
+            //}
         }
         #endregion
 

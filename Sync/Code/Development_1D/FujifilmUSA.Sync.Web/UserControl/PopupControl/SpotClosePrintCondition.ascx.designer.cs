@@ -13,6 +13,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
     public partial class SpotClosePrintCondition {
         
         /// <summary>
+        /// hdfServicePath control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfServicePath;
+        
+        /// <summary>
         /// fujiStatusbar control.
         /// </summary>
         /// <remarks>

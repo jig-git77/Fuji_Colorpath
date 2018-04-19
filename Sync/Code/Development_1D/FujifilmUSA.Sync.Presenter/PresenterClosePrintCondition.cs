@@ -107,6 +107,6 @@ namespace FujifilmUSA.Sync.Presenter
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
             optimizeRunBusiness.CreateSpotProjectOptimizeRun(_viewClosePrintCondition.SpotProjectId, Convert.ToInt32(EOptimizeRunStatus.Open), DateTime.Now);
-        }
+        }        
     }
 }

@@ -3,6 +3,7 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -328,6 +329,122 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return httpResponseMessage;
         }
 
+        [HttpGet]
+        public HttpResponseMessage DownloadSpotChart(int? SpotProjectID)
+        {
+            HttpResponseMessage httpResponseMessage = null;
+            string validationMessage = "";
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
+            try
+            {
+                if (SpotProjectID == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
+                if (SpotProjectID == null)
+                {
+                    validationMessage = "Invalid Charts, Please try again.";
+
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    httpResponseMessage = Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse);//returns 412 status code
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(validationMessage))
+                    {
+                        BaseErrorResponse errprResponse = new BaseErrorResponse();
+                        errprResponse.Error.UserMessage = validationMessage;
+                        errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                        httpResponseMessage = Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse);//returns 412 status code
+                    }
+                    else
+                    {
+                        SpotProjectId = Convert.ToInt32(SpotProjectID);
+                        Wedge wedge = new Wedge();
+                        _presenterExport.GetSpotPatchDetailsForChartBySpotProject();
+
+                        List<Patch> listPatch = new List<Patch>();
+                        if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
+                        {
+                            foreach (DataRow dr in dtPatchDetails.Rows)
+                            {
+                                Patch patch = new Patch()
+                                {
+                                    PatchID = Convert.ToInt32(dr["SpotID"]),
+                                    ColorName = Convert.ToString(dr["SpotName"]),
+                                    Cmyk_C = Convert.ToDouble(dr["CMYK_C"]),
+                                    Cmyk_M = Convert.ToDouble(dr["CMYK_M"]),
+                                    Cmyk_Y = Convert.ToDouble(dr["CMYK_Y"]),
+                                    Cmyk_K = Convert.ToDouble(dr["CMYK_K"]),
+                                    Cie_L = Convert.ToDouble(dr["CIELAB_L"]),
+                                    Cie_a = Convert.ToDouble(dr["CIELAB_a"]),
+                                    Cie_b = Convert.ToDouble(dr["CIELAB_b"]),
+                                    Spot1 = 0
+                                };
+                                listPatch.Add(patch);
+                            }
+                        }
+                        wedge.listPatch = listPatch;
+
+                        IccFileParams obj = new IccFileParams();
+
+                        obj.Configurations.NumberOfPatches = 1872;
+                        obj.Configurations.ChartPages = 3;
+                        obj.Configurations.PatchWidth = 27;
+                        obj.Configurations.PatchHeight = 27;
+                        obj.Configurations.ChartBorder = 40;
+                        obj.Configurations.ChartSizeW = 0;
+                        obj.Configurations.ChartSizeH = 0;
+                        obj.Configurations.RowsPerChart = 24;
+                        obj.Configurations.ColumsPerChart = 26;
+                        obj.Configurations.Vgap = 2;
+                        obj.Configurations.Hgap = 0;
+                        obj.Configurations.GapLeval = 75;
+                        obj.Configurations.PreviousL = 0;
+                        obj.Configurations.ChartName = "Pantone Test Chart";
+                        obj.Patches = wedge.listPatch;
+
+                        string BaseUri = Utilities.ReadConfigValue("BaseCpSpotChartPdfServiceURL");
+                        string methodUrl = "api/Chart/GenerateFiles";
+                        byte[] dataBytes = null;
+                        string fileName = "";
+                        using (HttpClient httpClient = new HttpClient())
+                        {
+                            StringContent content = new StringContent(JsonConvert.SerializeObject(obj), null, "application/json");
+                            var result = httpClient.PostAsync(BaseUri + methodUrl, content).Result;
+                            var resultString = result.Content.ReadAsStringAsync().Result;
+                            var response = JsonConvert.DeserializeObject<BaseResponse<FileResponse>>(resultString);
+
+                            WebClient client = new WebClient();
+                            client.DownloadFile(response.Data.FilePath, System.Web.HttpContext.Current.Server.MapPath("UploadFiles/") + response.Data.FileName);
+
+                            var webClient = new WebClient();
+                            dataBytes = webClient.DownloadData(response.Data.FilePath);
+                            fileName = response.Data.FileName;
+                        }
+                        //adding bytes to memory stream   
+                        var dataStream = new MemoryStream(dataBytes);
+                        httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
+                        httpResponseMessage.Content = new StreamContent(dataStream);
+                        httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
+                        httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
+                        httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                        httpResponseMessage.Content.Headers.ContentDisposition.FileName = fileName;
+                        httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/zip");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                httpResponseMessage = Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse);//returns the 500 status code
+
+            }
+            return httpResponseMessage;
+        }
         //[HttpPost]
         //public IHttpActionResult ExportAnalyzeChartReportTest(ChartContent chart)
         //{
@@ -450,7 +567,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         //                    HttpContext.Current.Session[guid] = dataBytes;
         //                    HttpContext.Current.Session[guid + "AttachementFileName"] = objReportPDF.PDF_NAME;
         //                }
-                        
+
         //                httpResponse.status = ResponseStatus.Success;
         //                httpResponse.Data = guid;
         //                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
