@@ -39,12 +39,9 @@
         oWindow.show();
         return false;
     }
-    function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName, isSpotProject) {
-        if (isSpotProject === undefined) {
-            isSpotProject = false;
-        }
+    function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName, ) {
         var oWindow;
-        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName + "&isSpotProject=" + isSpotProject, "ClosePrintConditionWindow");
+        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
         oWindow.show();
         return false;
     }
