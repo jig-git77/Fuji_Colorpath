@@ -129,6 +129,9 @@
   <data name="deleteDLPMsg" xml:space="preserve">
     <value>Wollen Sie dieses DLP wirklich löschen?</value>
   </data>
+  <data name="deleteNCPMsg" xml:space="preserve">
+    <value>Are you sure you want to delete this NCP?</value>
+  </data>
   <data name="deleteRunMsg" xml:space="preserve">
     <value>Wollen Sie diese Optimierung wirklich löschen?</value>
   </data>

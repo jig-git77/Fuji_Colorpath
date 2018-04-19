@@ -144,4 +144,7 @@
   <data name="btnNCPDeleteResource1" xml:space="preserve">
     <value>Delete NCP</value>
   </data>
+  <data name="deleteNCPMsg" xml:space="preserve">
+    <value>Are you sure you want to delete this NCP?</value>
+  </data>
 </root>
