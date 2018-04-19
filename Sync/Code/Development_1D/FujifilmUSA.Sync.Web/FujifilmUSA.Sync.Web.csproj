@@ -6184,14 +6184,22 @@
     <Content Include="UserControl\App_LocalResources\AnalyzeMeasurement.ascx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\PopupControl\App_LocalResources\SpotClosePrintCondition.ascx.de.resx" />
-    <Content Include="UserControl\PopupControl\App_LocalResources\SpotClosePrintCondition.ascx.fr.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotClosePrintCondition.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotClosePrintCondition.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\PopupControl\App_LocalResources\SpotClosePrintCondition.ascx.ja.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotClosePrintCondition.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\PopupControl\App_LocalResources\SpotClosePrintCondition.ascx.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotClosePrintCondition.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -6216,7 +6224,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

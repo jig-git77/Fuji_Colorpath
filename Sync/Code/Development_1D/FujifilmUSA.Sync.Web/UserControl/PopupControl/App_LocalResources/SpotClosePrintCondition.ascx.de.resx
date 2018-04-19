@@ -144,8 +144,8 @@
   <data name="locCancelResource1.Text" xml:space="preserve">
     <value>Zurück</value>
   </data>
-  <data name="locDownloadCertifiedNCPResource1.Text" xml:space="preserve">
-    <value>View Last Download</value>
+  <data name="locDownloadChartResource1.Text" xml:space="preserve">
+    <value>Download Chart</value>
   </data>
   <data name="locDownloadCurrentDLPResource1.Text" xml:space="preserve">
     <value>Lade aktuelle DLP</value>
@@ -173,5 +173,8 @@
   </data>
   <data name="printOptionsText" xml:space="preserve">
     <value>Optionen für Druckbedingung "{0}"</value>
+  </data>
+  <data name="spotprintOptionsText" xml:space="preserve">
+    <value>Download the chart to print before re-optimizing or view the last analysis to see the current library performance.</value>
   </data>
 </root>

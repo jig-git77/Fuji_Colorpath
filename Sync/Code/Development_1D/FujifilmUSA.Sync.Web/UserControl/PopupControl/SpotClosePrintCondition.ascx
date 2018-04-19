@@ -24,28 +24,21 @@
     }
 
     function DownloadChart(spotID) {
-        //alert(spotID);
-        var SERVICE_BASE_URL = $('#hdfServicePath').val();
-        var win = window.open(SERVICE_BASE_URL + '/api/Report/DownloadSpotChart?SpotProjectID=' + spotID, "Title", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=780,height=200,top=" + (screen.height - 400) + ",left=" + (screen.width - 840));
-        win.document.body.innerHTML = "Chart is downloading,Please do not close untill file download.";
 
+        var SERVICE_BASE_URL = $('#hdfServicePath').val();
+        window.location.href = SERVICE_BASE_URL + '/api/Report/DownloadSpotChart?SpotProjectID=' + spotID;
+        
+        //----To give option to open up pop up window separately for donwloading chart
         //var win = window.open(SERVICE_BASE_URL + '/api/Report/DownloadSpotChart?SpotProjectID=' + spotID, "Title", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=780,height=200,top=" + (screen.height - 400) + ",left=" + (screen.width - 840));
         //win.document.body.innerHTML = "Chart is downloading,Please do not close untill file download.";
-        //alert(SERVICE_BASE_URL);
-        //window.location.href = SERVICE_BASE_URL + '/api/Report/DownloadSpotChart?SpotProjectID=' + spotID;
-        //window.open(SERVICE_BASE_URL + '/api/Report/DownloadSpotChart?SpotProjectID=' + spotID, "", "width=1,height=1")
-        //window.open(SERVICE_BASE_URL + '/api/Report/DownloadSpotChart?SpotProjectID=' + spotID, "_blank")
-        //window.focus(this.href)
-        //return true;
-        //if (confirm('Do you want to redirect?')) {
-        //    return true;
-        //}
-        return true;
+
+        return false;
     }
 
 </script>
 <div style="display: block; margin: 10px;" class="contantbox tabcontant">
     <asp:HiddenField runat="server" ID="hdfServicePath" ClientIDMode="Static" />
+   
     <div style="margin-bottom: 3px;">
         <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
     </div>
@@ -76,36 +69,22 @@
                         <tr>
                             <td align="left">
                                 <div class="buttonleft" style="padding-left: 3px">
-                                    <asp:UpdatePanel ID="upReOptimize" runat="server">
-                                        <ContentTemplate>
-                                            <asp:LinkButton ID="lbtnReOptimize" runat="server" CssClass="gray_bt"
-                                                OnClick="lbtnReOptimize_Click">
-                                                <span>
-                                                    <asp:Localize runat="server" Text="Re Optimize" ID="locReOptimize"
-                                                        meta:resourcekey="locReOptimizeResource1"></asp:Localize>
-                                                </span>
-                                            </asp:LinkButton>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
+                                    <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt">
+                                        <span>
+                                            <asp:Localize runat="server" Text="Download Chart"
+                                                ID="locDownloadChart" meta:resourcekey="locDownloadChartResource1"></asp:Localize>
+                                        </span>
+                                    </asp:LinkButton>
                                 </div>
                                 <div class="buttonleft">
-                                    <asp:LinkButton ID="lbtnDownloadCertifiedDownloads" runat="server" CssClass="gray_bt"
-                                        OnClick="lbtnDownloadCurrentDLP_Click">
+                                    <asp:LinkButton ID="lbtnReOptimize" runat="server" CssClass="gray_bt"
+                                        OnClick="lbtnReOptimize_Click">
                                         <span>
-                                            <asp:Localize runat="server" Text="Download Current DLP"
-                                                ID="locDownloadCurrentDLP" meta:resourcekey="locDownloadCertifiedNCPResource1"></asp:Localize>
+                                            <asp:Localize runat="server" Text="Re Optimize" ID="locReOptimize"
+                                                meta:resourcekey="locReOptimizeResource1"></asp:Localize>
                                         </span>
                                     </asp:LinkButton>
                                 </div>
-                                <%--<div class="buttonleft">
-                                    <asp:LinkButton ID="lbtnDownloadSourceProf" runat="server" CssClass="gray_bt"
-                                        Visible="false" OnClick="lbtnDownloadSourceProf_Click">
-                                        <span>
-                                            <asp:Localize runat="server" Text="Download Source Profile"
-                                                ID="locDownloadSourceProf" meta:resourcekey="locDownloadSourceProfResource1"></asp:Localize>
-                                        </span>
-                                    </asp:LinkButton>
-                                </div>--%>
                                 <div class="buttonleft">
                                     <asp:LinkButton ID="lbtnViewLastAnalysis" runat="server" CssClass="gray_bt"
                                         OnClick="lbtnViewLastAnalysis_Click">
@@ -139,19 +118,4 @@
         &nbsp;
     </div>
 </div>
-<asp:UpdateProgress ID="updateProgress" runat="server" AssociatedUpdatePanelID="upReOptimize"
-    DisplayAfter="50">
-    <ProgressTemplate>
-        <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" TargetControlID="updateProgress"
-            runat="server" Enabled="True">
-        </AjaxToolkit:AlwaysVisibleControlExtender>
-        <div class="UpdateProgressBackgroundWithNoOpacity" style="position: fixed; left: 0px; top: 0px; z-index: 1000; width: 100%; height: 100%;"
-            unselectable="on">
-            <div style="margin: 10px 0px 10px 3px;">
-                <center>
-                    <uc:CreateDLP runat="server" ID="ucCreateDLP" />
-                </center>
-            </div>
-        </div>
-    </ProgressTemplate>
-</asp:UpdateProgress>
+
