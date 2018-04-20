@@ -1127,6 +1127,7 @@
                                                                                             <div id="kendoChartDummyBalanceL"></div>
                                                                                             <div id="kendoChartDummyBalanceA"></div>
                                                                                             <div id="kendoChartDummyBalanceB"></div>
+                                                                                            <div id="divChartInkPaperDummy"></div>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>

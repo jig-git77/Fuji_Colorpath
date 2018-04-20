@@ -1229,7 +1229,7 @@ function BindMeasurementPatchDetails() {
         });
     });
 
-    $divMeasurementPatchDetails.find('#lnkLinkFilter').on('click', function (e) {        
+    $divMeasurementPatchDetails.find('#lnkLinkFilter').on('click', function (e) {
         $("form.k-filter-menu button[type='reset']").trigger("click");
     });
 }
@@ -1984,6 +1984,9 @@ function PopulateInkPaperChartABComparision() {
 
     var thrashHold = { paths: [] };
 
+    formattedDeltaEPrimaryPatchList = formattedDeltaEPrimaryPatchList.reverse();
+    stackedChart = stackedChart.reverse();
+    patchColorList = patchColorList.reverse();
     $divChartInkPaperABComparision.kendoChart({
         renderAs: "canvas",
         //title: {
@@ -2083,7 +2086,8 @@ function PopulateInkPaperChartABComparision() {
             categories: patchColorList,
             majorGridLines: {
                 visible: false
-            }
+            },
+            reverse: true
         },
         valueAxis: {
             name: "valueAxis",
@@ -3266,7 +3270,10 @@ function PopulateSummaryDeltaChart() {
             //default: categoryList.push(selectedDeltaE); break;
         }
     });
-
+    //reverse the chart bars to show valuesaxis labels to top
+    summarySeries = summarySeries.reverse();
+    stackedChart = stackedChart.reverse();
+    categoryList = categoryList .reverse();
     var thrashHold = { paths: [] };
     $divChartSummaryDeltaChart.kendoChart({
         renderAs: "canvas",
@@ -3327,7 +3334,8 @@ function PopulateSummaryDeltaChart() {
             },
             labels: {
                 font: "12px Arial,Helvetica,sans-serif"
-            }
+            },
+            reverse: true
         },
         valueAxis: {
             name: "valueAxis",
@@ -3343,7 +3351,7 @@ function PopulateSummaryDeltaChart() {
                 font: "12px Arial,Helvetica,sans-serif"
             },
             max: maxValue,
-            margin: marginValue
+            margin: marginValue            
         },
         //tooltip: {
         //    visible: true,
@@ -4975,9 +4983,27 @@ function GetABComparisionSpiderChartImage() {
 }
 
 ////**************** GET IMAGE OF INK PAPER CHART FOR REPORT  ****************////
+//function GetInkPaperPatchChartImage() {
+//    var chart = $divChartInkPaperABComparision.data("kendoChart");
+
+//    return chart.imageDataURL();
+//}
+
 function GetInkPaperPatchChartImage() {
+    debugger;
     var chart = $divChartInkPaperABComparision.data("kendoChart");
-    return chart.imageDataURL();
+    var kendoOptions = $divChartInkPaperABComparision.data("kendoChart").options;
+    var kendodataSource = $divChartInkPaperABComparision.data("kendoChart").dataSource;
+    //kendoOptions.categoryAxis.labels.visible = false;
+    //kendoOptions.categoryAxis.reverse = true;
+    //kendoOptions.series[0].data = kendoOptions.series[0].data.reverse();
+    //kendoOptions.series[1].data = kendoOptions.series[1].data.reverse();
+    $('#divChartInkPaperDummy').kendoChart(kendoOptions);
+    var dummyChart = $('#divChartInkPaperDummy').data('kendoChart');
+    dummyChart.dataSource = kendodataSource;
+    dummyChart.options.transitions = false;
+    dummyChart.refresh();
+    return dummyChart.imageDataURL();
 }
 
 ////**************** GET IMAGE OF ACTUAL VS TARGET CHART FOR REPORT  ****************////
@@ -5219,9 +5245,9 @@ function CheckAvgCompability() {
                 item.tooltip.visible = !$isAverageOfMeasurements
                 item.highlight.visible = !$isAverageOfMeasurements
             });
-            chart.refresh();    
+            chart.refresh();
         }
-        
+
 
         return true;
     }
