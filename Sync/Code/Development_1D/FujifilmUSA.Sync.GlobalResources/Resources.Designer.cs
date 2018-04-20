@@ -880,7 +880,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Spot Color Library.
+        ///   Looks up a localized string similar to Brand Color Optimization.
         /// </summary>
         internal static string ELicenseType_SpotLibrary {
             get {
