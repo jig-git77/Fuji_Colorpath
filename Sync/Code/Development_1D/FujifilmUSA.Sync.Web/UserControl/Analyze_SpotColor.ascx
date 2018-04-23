@@ -184,13 +184,13 @@
                             },
                             MeasurementID: {
                                 from: "MeasurementID",
-                                type: "number"                                
+                                type: "number"
                             },
                             Predicted_HTMLColor: {
-                                from: "Predicted_HTMLColor",                                
+                                from: "Predicted_HTMLColor",
                             },
                             Measured_HTMLColor: {
-                                from: "Measured_HTMLColor",                                
+                                from: "Measured_HTMLColor",
                             },
                             ΔE_T_P: {
                                 from: "ΔE_T_P",
@@ -331,19 +331,40 @@
 
         $('#btnDownloadSpotPatch').on('click', function (e) {
             e.preventDefault();
+            var grid = $('#divPathDetails').data('kendoGrid')
             var optimizationRun = $(this).attr('data-id');
-            DownloadSpotPatchFile(optimizationRun)
-            //$.ajax({
-            //    url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReport',
-            //    data: { OptimizationRunID: optimizationRun },
-            //    type: 'GET',
-            //    success: function (response) {
-            //        window.open(SERVICE_BASE_URL + response.data, "_blank");
-            //    },
-            //    error: function (xhr, errorType, exception) {
-            //        alert(exception);
-            //    }
-            //});
+            var sortObj = null;
+            var filterObj = null;
+            if (grid.dataSource._sort) {
+                sortObj = grid.dataSource._sort[0];
+            }
+            if (grid.dataSource._filter) {
+                filterObj = {
+                    filters : grid.dataSource._filter.filters,
+                    logic : 'AND'
+                };
+            }
+            var filterObj = {
+                OptimizationRunId: optimizationRun,
+                sort: sortObj,
+                filter: filterObj
+            };
+            console.log(filterObj);
+
+
+            //DownloadSpotPatchFile(optimizationRun)
+            $.ajax({
+                url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReport',
+                data: filterObj,
+                type: 'POST',
+                success: function (response) {
+                    console.log(response);
+                    window.open(SERVICE_BASE_URL + response.data, "_blank");
+                },
+                error: function (xhr, errorType, exception) {
+                    alert(exception);
+                }
+            });
         })
     });
 

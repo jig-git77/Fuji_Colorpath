@@ -1386,51 +1386,51 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return httpResponseMessage;
         }
 
-        //[HttpPost]
-        //public IHttpActionResult GetSpotPatchDetailsReport(ExportViewModel model)
-        //{
-        //    //int OptimizationRunID = 0;
-        //    //SortDescription sort = new SortDescription();
-        //    //FilterContainer filter = new FilterContainer();
-        //    IHttpActionResult actionResult = null;
-        //    BaseResponse<object> httpResponse = new BaseResponse<object>();
-        //    try
-        //    {
-        //        DetermineCulture();
-        //        MeasurementId = 0;
+        [HttpPost]
+        public IHttpActionResult GetSpotPatchDetailsReport(ExportViewModel model)
+        {
+            //int OptimizationRunID = 0;
+            //SortDescription sort = new SortDescription();
+            //FilterContainer filter = new FilterContainer();
+            IHttpActionResult actionResult = null;
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                DetermineCulture();
+                MeasurementId = 0;
 
-        //        OptimizeRunId = Convert.ToInt32(model.OptimizationRunID);
-        //        _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
+                OptimizeRunId = Convert.ToInt32(model.OptimizationRunID);
+                _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
 
-        //        DataTable dt = new DataTable();
-        //        dt = GridFilters.GetFilteredResult(dtPatchDetails, model.sort, model.filter);
-        //        //logic for filter
+                DataTable dt = new DataTable();
+                dt = GridFilters.GetFilteredResult(dtPatchDetails, model.sort, model.filter);
+                //logic for filter
 
-        //        ReportPDF objReportPDF = new ReportPDF();
-        //        objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+                ReportPDF objReportPDF = new ReportPDF();
+                objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
 
-        //        if (!Directory.Exists(objReportPDF.PDFPath))
-        //            Directory.CreateDirectory(objReportPDF.PDFPath);
+                if (!Directory.Exists(objReportPDF.PDFPath))
+                    Directory.CreateDirectory(objReportPDF.PDFPath);
 
-        //        objReportPDF.dtSpotPatchDetails = dt;
-        //        objReportPDF.PDF_NAME = model.OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
-        //        objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+                objReportPDF.dtSpotPatchDetails = dt;
+                objReportPDF.PDF_NAME = model.OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
+                objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
 
-        //        objReportPDF.GenerateSpotPatchDetailsReport();
-        //        string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
-        //        httpResponse.status = ResponseStatus.Success;
-        //        httpResponse.Data = ReportPath;
-        //        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        BaseErrorResponse errprResponse = new BaseErrorResponse();
-        //        errprResponse.Error.UserMessage = ex.Message;
-        //        errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-        //        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
-        //    }
-        //    return actionResult;
-        //}
+                objReportPDF.GenerateSpotPatchDetailsReport();
+                string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
+                httpResponse.status = ResponseStatus.Success;
+                httpResponse.Data = ReportPath;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
 
         #region Methods for Patch Details tab
         private DataTable FilteredPatchDetailsTable(string MetricSumID, DataTable dtPatchDetails)

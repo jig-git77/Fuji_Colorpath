@@ -11,40 +11,41 @@ namespace FujiFilmUSA.Sync.Service.Models
         public static DataTable GetFilteredResult(DataTable DT, SortDescription sort, FilterContainer filter)
         {
             DataTable dtFilter = new DataTable();
+            DataTable filteredDT = new DataTable();
             DataView dv = new DataView(DT);
             try
             {
-                
-                foreach (var item in filter.filters)
+                string filterString = "";                
+                if (filter.filters != null)
                 {
-                    //string filterString = item.field + " like " + item.value;
-                    string filterString = item.field + " " + getDataTableOpertors(item.@operator) + " " + item.value;
+                    foreach (var item in filter.filters)
+                    {
+                        //string filterString = item.field + " like " + item.value;
+                        filterString += item.field + " " + getDataTableOpertors(item.@operator) + " " + item.value + " AND ";
+                    }
+                    if (filterString.EndsWith("AND "))
+                        filterString = filterString.Remove(filterString.Length - 5, 5);
                     dv.RowFilter = filterString;
+
                 }
+                filteredDT = dv.ToTable();
 
-
-                //EnumerableRowCollection dtEnum = DT.AsEnumerable();
-                //EnumerableRowCollection<DataRow> dtEnum1 = from customer in DT.AsEnumerable()
-                //                                           select customer;
-                //EnumerableRowCollection<DataRow> filteredDT = null;
-                //foreach (var item in filter.filters)
-                //{
-                //    string str = "";
-                //    Func<DataRow, bool> searchFunc = null;
-                //    string fieldType = DT.Columns[item.field].DataType.ToString();
-
-                //    searchFunc = x => x.Field < typeof(fieldType) > (item.field) == item.value;
-                //    //searchFunc = FilterColumn(item.field, item.value,fieldType);
-                //    filteredDT = dtEnum1.Where(searchFunc);
-                //}
-
+                if (filteredDT.Rows.Count > 0 && sort.dir != null)
+                {
+                    string sortingExpression = sort.field + " " + sort.dir;
+                    //filteredDT.DefaultView.Sort = sortingExpression;
+                    DataView view = filteredDT.DefaultView;
+                    view.Sort = sortingExpression;
+                    DataTable dt = view.ToTable();
+                    filteredDT = dt;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
-            return dv.ToTable();
+            return filteredDT;
         }
 
         public static string getDataTableOpertors(string kendoOperator)
@@ -54,6 +55,12 @@ namespace FujiFilmUSA.Sync.Service.Models
             {
                 case "eq": operators = "="; break;
                 case "neq": operators = "<>"; break;
+                case "gte": operators = ">="; break;
+                case "gt": operators = ">"; break;
+                case "lte": operators = "<="; break;
+                case "lt": operators = "<"; break;
+                    //case "isnull": operators = "<>"; break;
+                    //;case "isnotnull": operators = "<>"; break;
             }
             return operators;
         }
