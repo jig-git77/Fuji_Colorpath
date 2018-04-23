@@ -70,7 +70,7 @@
                                     Resources = response.data.GlobalResources;
                                     var spotStates = response.data.spotAnalyzeDetails;
                                     $('#hdfMeasurementID').val(spotStates.measurementID);
-                               
+
                                     $divPathDetails.find("th[data-field=SpotID] b").html(Resources.gridAnalyzeHeaderIDResource);
                                     $divPathDetails.find("th[data-field=SpotPatch] b").html(Resources.gridAnalyzeHeaderPatchResource);
                                     $divPathDetails.find("th[data-field=SpotView] b").html(Resources.gridAnalyzeHeaderViewResource);
@@ -98,67 +98,114 @@
                     model: {
                         fields: {
                             SpotID: {
-                                from: "SpotID"
+                                from: "SpotID",
+                                type: "number"
                             },
                             SpotName: {
                                 from: "SpotName"
                             },
                             CMYK_C: {
-                                from: "CMYK_C"
+                                from: "CMYK_C",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             CMYK_M: {
-                                from: "CMYK_M"
+                                from: "CMYK_M",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             CMYK_Y: {
-                                from: "CMYK_Y"
+                                from: "CMYK_Y",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             CMYK_K: {
-                                from: "CMYK_K"
+                                from: "CMYK_K",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             HTMLColor: {
                                 from: "HTMLColor"
                             },
                             TargetL: {
-                                from: "TargetL"
+                                from: "TargetL",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             Targeta: {
-                                from: "Targeta"
+                                from: "Targeta",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             Targetb: {
-                                from: "Targetb"
+                                from: "Targetb",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             CIELAB_L: {
-                                from: "CIELAB_L"
+                                from: "CIELAB_L",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             CIELAB_a: {
-                                from: "CIELAB_a"
+                                from: "CIELAB_a",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             ΔL: {
-                                from: "ΔL"
+                                from: "ΔL",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             Δa: {
-                                from: "Δa"
+                                from: "Δa",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             Δb: {
-                                from: "Δb"
+                                from: "Δb",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             Measured_L: {
-                                from: "Measured_L"
+                                from: "Measured_L",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             Measured_a: {
-                                from: "Measured_a"
+                                from: "Measured_a",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             Measured_b: {
-                                from: "Measured_b"
+                                from: "Measured_b",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             MeasurementID: {
-                                from: "MeasurementID"
+                                from: "MeasurementID",
+                                type: "number"                                
                             },
                             Predicted_HTMLColor: {
-                                from: "Predicted_HTMLColor"
+                                from: "Predicted_HTMLColor",                                
                             },
                             Measured_HTMLColor: {
-                                from: "Measured_HTMLColor"
+                                from: "Measured_HTMLColor",                                
+                            },
+                            ΔE_T_P: {
+                                from: "ΔE_T_P",
+                                type: "number",
+                                format: "{n4}"
+                            },
+                            ΔE_M_T: {
+                                from: "ΔE_M_T",
+                                type: "number",
+                                format: "{n4}"
+                            },
+                            ΔE_M_P: {
+                                from: "ΔE_M_P",
+                                type: "number",
+                                format: "{n4}"
                             }
                         }
                     }
@@ -168,14 +215,14 @@
             sortable: true,
             filterable: {
                 extra: false,
-                operators: {
-                    string: {
-                        eq: "Is equal to"
-                    }
-                }
+                //operators: {
+                //    string: {
+                //        eq: "Is equal to"
+                //    }
+                //}
             },
             sortable: true,
-            filterable: true,
+            //filterable: true,
             pageable: {
                 refresh: true,
                 pageSizes: true
@@ -185,7 +232,8 @@
             },
             //toolbar: [{ 'name': 'downloadPatch', template: '<div style="float:right;"><button id="btnDownloadSpotPatch" onclick="generateReport(' + optimizationId + ')" class=\'k-button\'>Export to PDF</button></div>' }],
             toolbar: [{
-                'name': 'downloadPatch', template: '<div style="float:right;"><a id="lnkLinkFilter" title="Clear filter"><img id="imgClearFilter" src="Images/clear-fillter.png" style="width: 15px;margin-top: 5px;margin-right: 5px;"></img></a><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button\'>Export to PDF</button></div>' }],
+                'name': 'downloadPatch', template: '<div style="float:right;"><a id="lnkLinkFilter" title="Clear filter"><img id="imgClearFilter" src="Images/clear-fillter.png" style="width: 15px;margin-top: 5px;margin-right: 5px;"></img></a><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button\'>Export to PDF</button></div>'
+            }],
             columns: [
                 {
                     field: "SpotID",
@@ -211,7 +259,7 @@
                 {
                     field: "SpotName",
                     title: "<b>Spot Name</b>",
-                    width: 150
+                    width: 155
                 },
                 {
                     field: "ΔL",
@@ -236,17 +284,17 @@
                 {
                     field: "ΔE_T_P",
                     title: "<b>ΔE_T_P</b>",
-                    width: 120
+                    width: 110
                 },
                 {
                     field: "ΔE_M_T",
                     title: "<b>ΔE_M_T</b>",
-                    width: 120
+                    width: 110
                 },
                 {
                     field: "ΔE_M_P",
                     title: "<b>ΔE_M_P</b>",
-                    width: 120
+                    width: 110
                 }
             ],
             dataBound: function (e) {
@@ -254,7 +302,7 @@
                 //if (e.sender.dataSource._view.length > 0) {
                 //    measurementId = e.sender.dataSource._view[0].MeasurementID;
                 //}
-               
+
                 if (measurementId > 0) {
                     this.hideColumn(4);
                     this.hideColumn(5);
@@ -277,12 +325,12 @@
             }
         });
 
-        $('#lnkLinkFilter').on('click', function (e) {            
+        $('#lnkLinkFilter').on('click', function (e) {
             $("form.k-filter-menu button[type='reset']").trigger("click");
         })
 
         $('#btnDownloadSpotPatch').on('click', function (e) {
-            e.preventDefault();            
+            e.preventDefault();
             var optimizationRun = $(this).attr('data-id');
             DownloadSpotPatchFile(optimizationRun)
             //$.ajax({
@@ -310,7 +358,7 @@
         return false;
     }
 
-    function generateReport(optimizationRun) {        
+    function generateReport(optimizationRun) {
         $.ajax({
             url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReport',
             data: { OptimizationRunID: optimizationRun },
@@ -462,7 +510,7 @@
                                     <div class="tab_middle">
                                         <div class="combopart">
                                             <div style="padding-left: 10px;">
-                                             
+
                                                 <table class="PatchDetailsSummaryTable">
                                                     <tr>
                                                         <th colspan="2"><span>
@@ -497,7 +545,7 @@
                                                                         <asp:Label runat="server" ID="lblMaxDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td colspan="2" style="width:100%;">
+                                                                    <td colspan="2" style="width: 100%;">
                                                                         <hr />
                                                                     </td>
                                                                 </tr>
@@ -544,16 +592,16 @@
                                                                         <asp:Label runat="server" ID="lblMaxEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                     <td>
                                                                         <asp:Label runat="server" ID="lblMaxEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                               </tr>
-                                                               <tr>
+                                                                </tr>
+                                                                <tr>
                                                                     <td colspan="4">
                                                                         <hr />
                                                                     </td>
-                                                               </tr>
+                                                                </tr>
                                                             </table>
                                                         </td>
                                                     </tr>
-   
+
                                                     <tr id="trMeasurementID" runat="server" visible="false">
                                                         <td>
                                                             <span style="font-weight: bold;">
@@ -653,7 +701,7 @@
                             </div>
                         </section>
                     </td>
-                </tr>               
+                </tr>
             </table>
         </div>
     </div>

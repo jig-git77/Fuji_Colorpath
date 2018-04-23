@@ -797,76 +797,98 @@ function BindMeasurementPatchDetails() {
                 model: {
                     fields: {
                         SampleID: {
-                            from: "SampleID"
+                            from: "SampleID",
+                            type: "number"
                         },
                         SampleName: {
                             from: "SampleName"
                         },
                         CMYK_C: {
-                            from: "CMYK_C"
+                            from: "CMYK_C",
+                            type: "number"
                         },
                         CMYK_M: {
-                            from: "CMYK_M"
+                            from: "CMYK_M",
+                            type: "number"
                         },
                         CMYK_Y: {
-                            from: "CMYK_Y"
+                            from: "CMYK_Y",
+                            type: "number"
                         },
                         CMYK_K: {
-                            from: "CMYK_K"
+                            from: "CMYK_K",
+                            type: "number"
                         },
                         HTMLColor: {
                             from: "HTMLColor"
                         },
                         TargetL: {
-                            from: "TargetL"
+                            from: "TargetL",
+                            type: "number"
                         },
                         Targeta: {
-                            from: "Targeta"
+                            from: "Targeta",
+                            type: "number"
                         },
                         Targetb: {
-                            from: "Targetb"
+                            from: "Targetb",
+                            type: "number"
                         },
                         CIELAB_L: {
-                            from: "CIELAB_L"
+                            from: "CIELAB_L",
+                            type: "number"
                         },
                         CIELAB_a: {
-                            from: "CIELAB_a"
+                            from: "CIELAB_a",
+                            type: "number"
                         },
                         CIELAB_b: {
-                            from: "CIELAB_b"
+                            from: "CIELAB_b",
+                            type: "number"
                         },
                         ΔE: {
-                            from: "ΔE"
+                            from: "ΔE",
+                            type: "number"
                         },
                         ΔE94: {
-                            from: "ΔE94"
+                            from: "ΔE94",
+                            type: "number"
                         },
                         ΔE2000: {
-                            from: "ΔE2000"
+                            from: "ΔE2000",
+                            type: "number"
                         },
                         Density_V: {
-                            from: "Density_V"
+                            from: "Density_V",
+                            type: "number"
                         },
                         Density_C: {
-                            from: "Density_C"
+                            from: "Density_C",
+                            type: "number"
                         },
                         Density_M: {
-                            from: "Density_M"
+                            from: "Density_M",
+                            type: "number"
                         },
                         Density_Y: {
-                            from: "Density_Y"
+                            from: "Density_Y",
+                            type: "number"
                         },
                         PatchTypeID: {
-                            from: "PatchTypeID"
+                            from: "PatchTypeID",
+                            type: "number"
                         },
                         ΔH: {
-                            from: "ΔH"
+                            from: "ΔH",
+                            type: "number"
                         },
                         ΔCh: {
-                            from: "ΔCh"
+                            from: "ΔCh",
+                            type: "number"
                         },
                         ΔL: {
-                            from: "ΔL"
+                            from: "ΔL",
+                            type: "number"
                         }
                     }
                 }
@@ -875,15 +897,15 @@ function BindMeasurementPatchDetails() {
         },
         sortable: true,
         scrollable: true,
-        filterable: true,
-        //filterable: {
-        //    extra: false,
-        //    operators: {
-        //        string: {
-        //            eq: "Is equal to"
-        //        }
-        //    }
-        //},
+        //filterable: true,
+        filterable: {
+            extra: false,
+            //operators: {
+            //    string: {
+            //        eq: "Is equal to"
+            //    }
+            //}
+        },
         pageable: {
             refresh: true,
             pageSizes: true
