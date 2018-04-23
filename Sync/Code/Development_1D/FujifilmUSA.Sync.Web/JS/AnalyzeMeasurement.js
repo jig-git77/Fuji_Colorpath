@@ -396,7 +396,7 @@ $(document).ready(function () {
         //    }
         //});
 
-
+        kendo.ui.progress($('#tabstrip-7'), true);
         var request = new XMLHttpRequest();
         request.open("POST", SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReportTest', true);
         request.setRequestHeader("content-type", "application/json");
@@ -418,10 +418,11 @@ $(document).ready(function () {
                 window.onfocus = function () {
                     document.body.removeChild(a)
                 }
+                kendo.ui.progress($('#tabstrip-7'), false);
             };
         };
         request.send(JSON.stringify(apiParameter));
-
+        kendo.ui.progress($('#tabstrip-7'), false);
     });
 
 
