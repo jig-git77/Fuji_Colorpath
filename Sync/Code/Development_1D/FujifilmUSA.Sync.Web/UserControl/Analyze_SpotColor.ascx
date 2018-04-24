@@ -241,7 +241,7 @@
             },
             //toolbar: [{ 'name': 'downloadPatch', template: '<div style="float:right;"><button id="btnDownloadSpotPatch" onclick="generateReport(' + optimizationId + ')" class=\'k-button\'>Export to PDF</button></div>' }],
             toolbar: [{
-                'name': 'downloadPatch', template: '<div style="float:right;"><button id="btnDownloadSpotPatchExcel" data-id="' + optimizationId + '" class=\'k-button\'>Export to Excel</button><a id="lnkLinkFilter" title="Clear filter"><img id="imgClearFilter" src="Images/clear-fillter.png" style="width: 15px;margin-top: 5px;margin-right: 5px;"></img></a><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button\'>Export to PDF</button></div>'
+                'name': 'downloadPatch', template: '<div style="float:right;"><a id="lnkLinkFilter" title="Clear filter"><img id="imgClearFilter" src="Images/clear-fillter.png" style="width: 15px;margin-top: 5px;margin-right: 5px;"></img></a><button id="btnDownloadSpotPatchExcel" data-id="' + optimizationId + '" class=\'k-button\' style="margin-right: 5px;">Export to Excel</button><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button\'>Export to PDF</button></div>'
             }],
             columns: [
                 {
