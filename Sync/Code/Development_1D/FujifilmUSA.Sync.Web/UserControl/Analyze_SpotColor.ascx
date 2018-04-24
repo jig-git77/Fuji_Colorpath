@@ -371,19 +371,47 @@
 
 
             //DownloadSpotPatchFile(optimizationRun)
-            $.ajax({
-                url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsReport',
-                data: filterObj,
-                type: 'POST',
-                success: function (response) {
-                    console.log(response);
-                    window.open(SERVICE_BASE_URL + response.data, "_blank");
-                },
-                error: function (xhr, errorType, exception) {
-                    alert(exception);
-                }
-            });
+            //$.ajax({
+            //    url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsReport',
+            //    data: filterObj,
+            //    type: 'POST',
+            //    success: function (response) {
+            //        console.log(response);
+            //        window.open(SERVICE_BASE_URL + response.data, "_blank");
+            //    },
+            //    error: function (xhr, errorType, exception) {
+            //        alert(exception);
+            //    }
+            //});
+            kendo.ui.progress($('#tab2'), true);
+            debugger;
+            var request = new XMLHttpRequest();
+            request.open("POST", SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsReport', true);
+            request.setRequestHeader("content-type", "application/json");
+            request.responseType = "blob";
+            request.onload = function (e) {
 
+                if (this.status === 200) {
+                    // `blob` response
+                    console.log(this.response);
+                    // create `objectURL` of `this.response` : `.pdf` as `Blob`
+                    var file = window.URL.createObjectURL(this.response);
+                    var a = document.createElement("a");
+                    a.href = file;
+                    a.download = this.response.name || "SpotPatchDetails.pdf";
+                    document.body.appendChild(a);
+                    a.click();
+                    // remove `a` following `Save As` dialog, 
+                    // `window` regains `focus`
+                    window.onfocus = function () {
+                        document.body.removeChild(a)
+                    }
+                    kendo.ui.progress($('#tab2'), false);
+                };
+            };
+            request.send(JSON.stringify(filterObj));
+
+            kendo.ui.progress($('#tab2'), false);
 
         })
 
@@ -432,6 +460,8 @@
             //        alert(exception);
             //    }
             //});
+            kendo.ui.progress($('#tab2'), true);
+            debugger;
             var request = new XMLHttpRequest();
             request.open("POST", SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsExcelReport', true);
             request.setRequestHeader("content-type", "application/json");
@@ -453,9 +483,12 @@
                     window.onfocus = function () {
                         document.body.removeChild(a)
                     }                    
+                    kendo.ui.progress($('#tab2'), false);
                 };
             };
             request.send(JSON.stringify(filterObj));
+
+            kendo.ui.progress($('#tab2'), false);
         })
         
     });

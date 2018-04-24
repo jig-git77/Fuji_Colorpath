@@ -226,7 +226,7 @@
     <value>Télécharger la Charte et l'imprimer depuis le Flux de Travail :</value>
   </data>
   <data name="locExportCMYKResource.Text" xml:space="preserve">
-    <value>Export CMYK</value>
+    <value>Export Library</value>
   </data>
   <data name="locDownloadCMYKLibraryResource.Text" xml:space="preserve">
     <value>Download CMYK Library_fr</value>

@@ -43,4 +43,16 @@ namespace FujiFilmUSA.Sync.Service.Models
         public SortDescription sort { get; set; }
         public FilterContainer filter { get; set; }
     }
+    public class ExportPatchViewModel
+    {
+        public int? MeasurementId { get; set; }
+        public bool? IsVerificationProject { get; set; }
+        public bool? IsSync1DTypeProject { get; set; }
+        public string metricSumID { get; set; }
+        //public int OptimizationRunID { get; set; }
+        public int CurveType { get; set; }
+        public bool isFirstDeltaRefList { get; set; }
+        public SortDescription sort { get; set; }
+        public FilterContainer filter { get; set; }
+    }
 }

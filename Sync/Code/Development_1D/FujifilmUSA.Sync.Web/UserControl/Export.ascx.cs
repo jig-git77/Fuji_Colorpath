@@ -81,8 +81,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             lbtnMeasure.Visible = false;
                             trDLPDownload.Visible = false; //Hide both Download DLP and Chart in Certify mode
                             //----Don't show CMYK export button for Run-0, since there is no previous run's CMYK data to export
-                            //lbtnExportCMYK.Visible = !(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
-                            //    SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId);
                             trExportCMYKLibrary.Visible = !(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
                                 SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId);
                         }

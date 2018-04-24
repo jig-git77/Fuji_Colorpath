@@ -226,7 +226,7 @@
     <value>Download Chart und mit dem NCP Workflow drucken:</value>
   </data>
   <data name="locExportCMYKResource.Text" xml:space="preserve">
-    <value>Export CMYK</value>
+    <value>Export Library</value>
   </data>
   <data name="locDownloadCMYKLibraryResource.Text" xml:space="preserve">
     <value>Download CMYK Library_de</value>

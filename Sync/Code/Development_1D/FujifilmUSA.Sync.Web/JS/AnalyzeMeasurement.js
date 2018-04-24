@@ -1198,17 +1198,49 @@ function BindMeasurementPatchDetails() {
             selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
         }
         var measurementID = parseInt($hdnCurrentMeasurement.val());
-        var apiReportParameters = {
+        //var apiReportParameters = {
+        //    MeasurementId: measurementID,
+        //    IsVerificationProject: $hdnVerification,
+        //    IsSync1DTypeProject: $hdnSync1DType,
+        //    metricSumID: selectedMatricSum
+        //};
+
+        var grid = $('#divMeasurementPatchDetails').data('kendoGrid')
+        var optimizationRun = $(this).attr('data-id');
+        var sortObj = null;
+        var filterObj = null;
+        //set the sorting parameters
+        if (grid.dataSource._sort) {
+            sortObj = grid.dataSource._sort[0];
+        }
+        //set the filtering parameters
+        if (grid.dataSource._filter) {
+            filterObj = {
+                filters: grid.dataSource._filter.filters,
+                logic: 'AND'
+            };
+            //set the type of filter fields
+            $.each(filterObj.filters, function (index, obj) {
+                obj.dtype = grid.dataSource.options.schema.model.fields[obj.field].type;
+            });
+        }
+
+        //create object
+        var filterObj = {
             MeasurementId: measurementID,
             IsVerificationProject: $hdnVerification,
             IsSync1DTypeProject: $hdnSync1DType,
-            metricSumID: selectedMatricSum
+            metricSumID: selectedMatricSum,
+            sort: sortObj,
+            filter: filterObj
         };
 
+        console.log(filterObj);
+
         $.ajax({
-            type: "GET",
-            url: SERVICE_BASE_URL + 'api/Chart/GetCGATSPatchReport',
-            data: apiReportParameters,
+            type: "POST",
+            url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
+            data: filterObj,
             dataType: "json",
             success: function (response) {
                 if (response.data != null) {
@@ -1220,6 +1252,24 @@ function BindMeasurementPatchDetails() {
                 console.log(XMLHttpRequest.responseText);
             }
         });
+
+
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: SERVICE_BASE_URL + 'api/Chart/GetCGATSPatchReport',
+        //    data: apiReportParameters,
+        //    dataType: "json",
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            var fileName = '~' + response.data;
+        //            window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
+        //        }
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log(XMLHttpRequest.responseText);
+        //    }
+        //});
     });
 
     $divMeasurementPatchDetails.find('#btnExportCFX').on('click', function (e) {
@@ -1229,16 +1279,49 @@ function BindMeasurementPatchDetails() {
         if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
             selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
         }
-        var apiReportParameters = {
+        //var apiReportParameters = {
+        //    MeasurementId: measurementID,
+        //    IsVerificationProject: $hdnVerification,
+        //    IsSync1DTypeProject: $hdnSync1DType,
+        //    metricSumID: selectedMatricSum
+        //};
+
+        var grid = $('#divMeasurementPatchDetails').data('kendoGrid')
+        var optimizationRun = $(this).attr('data-id');
+        var sortObj = null;
+        var filterObj = null;
+        //set the sorting parameters
+        if (grid.dataSource._sort) {
+            sortObj = grid.dataSource._sort[0];
+        }
+        //set the filtering parameters
+        if (grid.dataSource._filter) {
+            filterObj = {
+                filters: grid.dataSource._filter.filters,
+                logic: 'AND'
+            };
+            //set the type of filter fields
+            $.each(filterObj.filters, function (index, obj) {
+                obj.dtype = grid.dataSource.options.schema.model.fields[obj.field].type;
+            });
+        }
+
+        //create object
+        var filterObj = {
             MeasurementId: measurementID,
             IsVerificationProject: $hdnVerification,
             IsSync1DTypeProject: $hdnSync1DType,
-            metricSumID: selectedMatricSum
+            metricSumID: selectedMatricSum,
+            sort: sortObj,
+            filter: filterObj
         };
+
+        console.log(filterObj);
+
         $.ajax({
-            type: "GET",
-            url: SERVICE_BASE_URL + 'api/Chart/GetCFXPatchReport',
-            data: apiReportParameters,
+            type: "POST",
+            url: SERVICE_BASE_URL + 'api/Analyze/GetCFXPatchReport',
+            data: filterObj,
             dataType: "json",
             success: function (response) {
                 if (response.data != null) {
@@ -1250,6 +1333,23 @@ function BindMeasurementPatchDetails() {
                 console.log(XMLHttpRequest.responseText);
             }
         });
+
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: SERVICE_BASE_URL + 'api/Chart/GetCFXPatchReport',
+        //    data: apiReportParameters,
+        //    dataType: "json",
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            var fileName = '~' + response.data;
+        //            window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
+        //        }
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log(XMLHttpRequest.responseText);
+        //    }
+        //});
     });
 
     $divMeasurementPatchDetails.find('#lnkLinkFilter').on('click', function (e) {
