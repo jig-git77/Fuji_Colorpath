@@ -151,6 +151,60 @@
                     </div>
                 </td>
             </tr>
+            <tr id="trExportCMYKLibrary" runat="server" visible="false">
+                <td>
+                    <div style="display: block;" class="contantbox tabcontant">
+                        <div class="section_top">
+                            &nbsp;
+                        </div>
+                        <div class="section_middle">
+                            <div class="combopart">
+                                <div class="header">
+                                    <div class="content">
+                                        <div class="text" style="float: left">
+                                            <asp:Localize runat="server" Text="Download CMYK Library"
+                                                ID="locDownloadCMYKLibraryResource" meta:resourcekey="locDownloadCMYKLibraryResource"></asp:Localize>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="border-style: None; padding: 5px">
+                                    <table>
+                                        <tbody>
+                                            <%--<tr>
+                                                    <td>
+                                                        <span>
+                                                            <asp:Localize runat="server"
+                                                                Text="Download DLP and Implement in Workflow :"
+                                                                ID="Localize8"
+                                                                meta:resourcekey="locDownloadDLPAndImplementWorkflowResource1"></asp:Localize></span>
+                                                    </td>
+                                                </tr>--%>
+                                            <tr>
+                                                <td>
+                                                    <asp:LinkButton ID="lbtnExportCMYK" runat="server" CssClass="gray_bt" OnClick="lbtnExportCMYK_Click">
+                                                        <span>
+                                                            <asp:Localize runat="server" Text="Export CMYK"
+                                                                ID="locExportCMYK"
+                                                                meta:resourcekey="locExportCMYKResource"></asp:Localize>
+                                                        </span>
+                                                    </asp:LinkButton>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section_bottom">
+                            &nbsp;
+                        </div>
+                    </div>
+                </td>
+            </tr>
             <tr id="trSourceProfDownload" runat="server" visible="false">
                 <td>
                     <div style="display: block;" class="contantbox tabcontant">
@@ -242,17 +296,17 @@
                                                                  meta:resourcekey="locNamedColorICCResource1"></asp:Localize>
                                                          </span>
                                                      </asp:LinkButton>
-                                                  </td>
-                                               </tr>
-                                               <tr>
-                                               <td>  
-                                                    <asp:LinkButton ID="lbtnExportCMYK" runat="server" CssClass="gray_bt" Visible="false" OnClick="lbtnExportCMYK_Click">
-                                                         <span>
-                                                             <asp:Localize runat="server" Text="Export CMYK"
-                                                                 ID="locExportCMYK"
-                                                                 meta:resourcekey="locExportCMYKResource"></asp:Localize>
-                                                         </span>
-                                                     </asp:LinkButton>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                   <%-- <asp:LinkButton ID="lbtnExportCMYK" runat="server" CssClass="gray_bt" Visible="false" OnClick="lbtnExportCMYK_Click">
+                                                        <span>
+                                                            <asp:Localize runat="server" Text="Export CMYK"
+                                                                ID="locExportCMYK"
+                                                                meta:resourcekey="locExportCMYKResource"></asp:Localize>
+                                                        </span>
+                                                    </asp:LinkButton>--%>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -553,11 +607,13 @@
                     <div class="demo-section k-content">
                         <div id="tabstrip">
                             <ul>
-                                <li class="k-state-active"><asp:Localize Text="Export View" ID="Localize5"
-                                                        runat="server" meta:resourcekey="locExportViewResource1"></asp:Localize>
+                                <li class="k-state-active">
+                                    <asp:Localize Text="Export View" ID="Localize5"
+                                        runat="server" meta:resourcekey="locExportViewResource1"></asp:Localize>
                                 </li>
-                                <li><asp:Localize Text="ΔView" ID="Localize6"
-                                                        runat="server" meta:resourcekey="locDeltaViewResource1"></asp:Localize>
+                                <li>
+                                    <asp:Localize Text="ΔView" ID="Localize6"
+                                        runat="server" meta:resourcekey="locDeltaViewResource1"></asp:Localize>
                                 </li>
                             </ul>
                             <div>
@@ -582,7 +638,7 @@
                                                 </asp:DropDownList>
                                             </td>
                                         </tr>
-                                        <tr style="border: solid 1px;vertical-align: top;">
+                                        <tr style="border: solid 1px; vertical-align: top;">
                                             <td style="width: 60%">
 
                                                 <div id="Chart_Curve"></div>
@@ -625,7 +681,7 @@
                                                 </asp:RadioButtonList>
                                             </td>
                                         </tr>
-                                        <tr style="border: solid 1px;vertical-align: top;">
+                                        <tr style="border: solid 1px; vertical-align: top;">
                                             <td style="width: 60%">
                                                 <div id="Chart_Delta"></div>
                                             </td>

@@ -81,7 +81,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             lbtnMeasure.Visible = false;
                             trDLPDownload.Visible = false; //Hide both Download DLP and Chart in Certify mode
                             //----Don't show CMYK export button for Run-0, since there is no previous run's CMYK data to export
-                            lbtnExportCMYK.Visible = !(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
+                            //lbtnExportCMYK.Visible = !(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
+                            //    SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId);
+                            trExportCMYKLibrary.Visible = !(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
                                 SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId);
                         }
                         locDownloadDLPAndChart.Text = "Download Chart";
@@ -191,7 +193,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
                 Wedge wedge = new Wedge();
-                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;                
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 _presenterExport.GetSpotPatchDetailsForChart();
 
                 List<Patch> listPatch = new List<Patch>();
@@ -221,21 +223,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 //if (dtPatchDetails.Rows.Count == 1872)
                 //{
-                    obj.Configurations.NumberOfPatches = 1872;
-                    obj.Configurations.ChartPages = 3;
-                    obj.Configurations.PatchWidth = 27;
-                    obj.Configurations.PatchHeight = 27;
-                    obj.Configurations.ChartBorder = 40;
-                    obj.Configurations.ChartSizeW = 0;
-                    obj.Configurations.ChartSizeH = 0;
-                    obj.Configurations.RowsPerChart = 24;
-                    obj.Configurations.ColumsPerChart = 26;
-                    obj.Configurations.Vgap = 2;
-                    obj.Configurations.Hgap = 0;
-                    obj.Configurations.GapLeval = 75;
-                    obj.Configurations.PreviousL = 0;
-                    obj.Configurations.ChartName = "Pantone Test Chart";
-                    obj.Patches = wedge.listPatch;
+                obj.Configurations.NumberOfPatches = 1872;
+                obj.Configurations.ChartPages = 3;
+                obj.Configurations.PatchWidth = 27;
+                obj.Configurations.PatchHeight = 27;
+                obj.Configurations.ChartBorder = 40;
+                obj.Configurations.ChartSizeW = 0;
+                obj.Configurations.ChartSizeH = 0;
+                obj.Configurations.RowsPerChart = 24;
+                obj.Configurations.ColumsPerChart = 26;
+                obj.Configurations.Vgap = 2;
+                obj.Configurations.Hgap = 0;
+                obj.Configurations.GapLeval = 75;
+                obj.Configurations.PreviousL = 0;
+                obj.Configurations.ChartName = "Pantone Test Chart";
+                obj.Patches = wedge.listPatch;
                 //}
 
                 //else if (dtPatchDetails.Rows.Count == 48)
@@ -1049,6 +1051,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-   
+
     }
 }

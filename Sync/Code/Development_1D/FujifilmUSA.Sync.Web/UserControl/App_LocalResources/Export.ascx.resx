@@ -228,4 +228,7 @@
   <data name="locExportCMYKResource.Text" xml:space="preserve">
     <value>Export CMYK</value>
   </data>
+  <data name="locDownloadCMYKLibraryResource.Text" xml:space="preserve">
+    <value>Download CMYK Library</value>
+  </data>
 </root>
