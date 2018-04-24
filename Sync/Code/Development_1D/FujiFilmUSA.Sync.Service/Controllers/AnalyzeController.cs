@@ -1,13 +1,19 @@
-﻿using FujifilmUSA.Sync.Entity;
+﻿using ClosedXML.Excel;
+using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujiFilmUSA.Sync.Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 
@@ -215,6 +221,148 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
+        }
+
+        [HttpPost]
+        public IHttpActionResult GetSpotPatchDetailsReport(ExportViewModel model)
+        {
+            //int OptimizationRunID = 0;
+            //SortDescription sort = new SortDescription();
+            //FilterContainer filter = new FilterContainer();
+            IHttpActionResult actionResult = null;
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                DetermineCulture();
+                MeasurementId = 0;
+
+                OptimizeRunId = Convert.ToInt32(model.OptimizationRunID);
+                _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
+
+                DataTable dt = new DataTable();
+                dt = GridFilters.GetFilteredResult(dtPatchDetails, model.sort, model.filter);
+                //logic for filter
+
+                ReportPDF objReportPDF = new ReportPDF();
+                objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+
+                if (!Directory.Exists(objReportPDF.PDFPath))
+                    Directory.CreateDirectory(objReportPDF.PDFPath);
+
+                objReportPDF.dtSpotPatchDetails = dt;
+                objReportPDF.PDF_NAME = model.OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
+                objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+
+                objReportPDF.GenerateSpotPatchDetailsReport();
+                string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
+                httpResponse.status = ResponseStatus.Success;
+                httpResponse.Data = ReportPath;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+
+        [HttpPost]
+        public HttpResponseMessage GetSpotPatchDetailsExcelReport(ExportViewModel model)
+        {
+            HttpResponseMessage httpResponseMessage = null;
+            try
+            {
+                DetermineCulture();
+                MeasurementId = 0;
+                int measurementID = 0;
+                OptimizeRunId = Convert.ToInt32(model.OptimizationRunID);
+                _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
+                if (dtPatchDetails.Rows.Count > 0)
+                    measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
+
+                DataTable dt = new DataTable();
+                dt = GridFilters.GetFilteredResult(dtPatchDetails, model.sort, model.filter);
+
+                //select specific columns 
+                DataView view = new DataView(dt);
+                DataTable cTable = new DataTable();
+                if (measurementID > 0)
+                    cTable = view.ToTable(false, "SpotID", "SpotName", "HTMLColor", "ΔE_T_P", "ΔE_M_T", "ΔE_M_P");
+                else
+                    cTable = view.ToTable(false, "SpotID", "SpotName", "HTMLColor", "ΔL", "Δa", "Δb", "ΔE");
+
+
+
+
+                //logic for filter
+
+                ReportPDF objReportPDF = new ReportPDF();
+                objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+                objReportPDF.PDF_NAME = "DataGridViewExport.xlsx";
+                if (!Directory.Exists(objReportPDF.PDFPath))
+                    Directory.CreateDirectory(objReportPDF.PDFPath);
+                string filePath = objReportPDF.PDFPath + objReportPDF.PDF_NAME;
+                using (XLWorkbook wb = new XLWorkbook())
+                {
+                    var ws = wb.Worksheets.Add("worksheet");
+                    if (cTable.Rows.Count > 0)
+                    {
+                        // Adding HeaderRow.
+                        ws.Cell("A" + 1).Value = cTable.Columns[0].ColumnName;
+                        ws.Cell("B" + 1).Value = cTable.Columns[1].ColumnName;
+                        ws.Cell("C" + 1).Value = cTable.Columns[2].ColumnName;
+                        ws.Cell("D" + 1).Value = cTable.Columns[3].ColumnName;
+                        ws.Cell("E" + 1).Value = cTable.Columns[4].ColumnName;
+                        ws.Cell("F" + 1).Value = cTable.Columns[5].ColumnName;
+                        if (measurementID == 0)
+                            ws.Cell("G" + 1).Value = cTable.Columns[6].ColumnName;
+
+
+                        // Adding DataRows.
+                        for (int i = 0; i < cTable.Rows.Count; i++)
+                        {
+
+                            ws.Cell("A" + (i + 2)).Value = cTable.Rows[i][0];
+                            ws.Cell("B" + (i + 2)).Value = cTable.Rows[i][1];
+                            ws.Cell("C" + (i + 2)).Value = cTable.Rows[i][2];
+                            ws.Cell("D" + (i + 2)).Value = cTable.Rows[i][3];
+                            ws.Cell("E" + (i + 2)).Value = cTable.Rows[i][4];
+                            ws.Cell("F" + (i + 2)).Value = cTable.Rows[i][5];
+                            if (measurementID == 0)
+                                ws.Cell("G" + (i + 2)).Value = cTable.Rows[i][6];                            ;
+                            
+                            // Changing color to green.
+                            ws.Cells("C" + (i + 2)).Style.Fill.BackgroundColor = XLColor.FromHtml(cTable.Rows[i]["HTMLColor"].ToString());
+                        }
+                    }
+                    wb.SaveAs(filePath);
+                  
+                }
+
+
+                var dataBytes = File.ReadAllBytes(filePath);
+                //adding bytes to memory stream   
+                var dataStream = new MemoryStream(dataBytes);
+                httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
+                httpResponseMessage.Content = new StreamContent(dataStream);
+                httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
+                httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
+                httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                httpResponseMessage.Content.Headers.ContentDisposition.FileName = objReportPDF.PDF_NAME;
+                httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                httpResponseMessage = Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse);//returns the 500 status code
+            }
+            return httpResponseMessage;
         }
         #region IViewAnalyze Members
         public int ProjectId { get; set; }

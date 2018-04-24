@@ -102,7 +102,8 @@
                                 type: "number"
                             },
                             SpotName: {
-                                from: "SpotName"
+                                from: "SpotName",
+                                type: "string"
                             },
                             CMYK_C: {
                                 from: "CMYK_C",
@@ -125,7 +126,8 @@
                                 //format: "{n4}"
                             },
                             HTMLColor: {
-                                from: "HTMLColor"
+                                from: "HTMLColor",
+                                type: "string"
                             },
                             TargetL: {
                                 from: "TargetL",
@@ -188,9 +190,11 @@
                             },
                             Predicted_HTMLColor: {
                                 from: "Predicted_HTMLColor",
+                                type: "string"
                             },
                             Measured_HTMLColor: {
                                 from: "Measured_HTMLColor",
+                                type: "string"
                             },
                             ΔE_T_P: {
                                 from: "ΔE_T_P",
@@ -215,11 +219,16 @@
             sortable: true,
             filterable: {
                 extra: false,
-                //operators: {
-                //    string: {
-                //        eq: "Is equal to"
-                //    }
-                //}
+                operators: {
+                    string: {
+                        eq: "Is equal to",
+                        neq: "Is not equal to",
+                        startswith: "Starts with",
+                        contains: "Contains",
+                        doesnotcontain: "Does not contain",
+                        endswith: "Ends with"
+                    }
+                }
             },
             sortable: true,
             //filterable: true,
@@ -232,7 +241,7 @@
             },
             //toolbar: [{ 'name': 'downloadPatch', template: '<div style="float:right;"><button id="btnDownloadSpotPatch" onclick="generateReport(' + optimizationId + ')" class=\'k-button\'>Export to PDF</button></div>' }],
             toolbar: [{
-                'name': 'downloadPatch', template: '<div style="float:right;"><a id="lnkLinkFilter" title="Clear filter"><img id="imgClearFilter" src="Images/clear-fillter.png" style="width: 15px;margin-top: 5px;margin-right: 5px;"></img></a><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button\'>Export to PDF</button></div>'
+                'name': 'downloadPatch', template: '<div style="float:right;"><button id="btnDownloadSpotPatchExcel" data-id="' + optimizationId + '" class=\'k-button\'>Export to Excel</button><a id="lnkLinkFilter" title="Clear filter"><img id="imgClearFilter" src="Images/clear-fillter.png" style="width: 15px;margin-top: 5px;margin-right: 5px;"></img></a><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button\'>Export to PDF</button></div>'
             }],
             columns: [
                 {
@@ -259,22 +268,22 @@
                 {
                     field: "SpotName",
                     title: "<b>Spot Name</b>",
-                    width: 155
+                    width: 175
                 },
                 {
                     field: "ΔL",
                     title: "<b>pΔL</b>",
-                    width: 80
+                    width: 75
                 },
                 {
                     field: "Δa",
                     title: "<b>pΔa</b>",
-                    width: 80
+                    width: 75
                 },
                 {
                     field: "Δb",
                     title: "<b>pΔb</b>",
-                    width: 80
+                    width: 75
                 },
                 {
                     field: "ΔE",
@@ -284,17 +293,17 @@
                 {
                     field: "ΔE_T_P",
                     title: "<b>ΔE_T_P</b>",
-                    width: 110
+                    width: 100
                 },
                 {
                     field: "ΔE_M_T",
                     title: "<b>ΔE_M_T</b>",
-                    width: 110
+                    width: 100
                 },
                 {
                     field: "ΔE_M_P",
                     title: "<b>ΔE_M_P</b>",
-                    width: 110
+                    width: 100
                 }
             ],
             dataBound: function (e) {
@@ -335,26 +344,35 @@
             var optimizationRun = $(this).attr('data-id');
             var sortObj = null;
             var filterObj = null;
+            //set the sorting parameters
             if (grid.dataSource._sort) {
                 sortObj = grid.dataSource._sort[0];
             }
+            //set the filtering parameters
             if (grid.dataSource._filter) {
                 filterObj = {
-                    filters : grid.dataSource._filter.filters,
-                    logic : 'AND'
+                    filters: grid.dataSource._filter.filters,
+                    logic: 'AND'
                 };
+                //set the type of filter fields
+                $.each(filterObj.filters, function (index, obj) {
+                    obj.dtype = grid.dataSource.options.schema.model.fields[obj.field].type;
+                });
             }
+            
+            //create object
             var filterObj = {
                 OptimizationRunId: optimizationRun,
                 sort: sortObj,
                 filter: filterObj
             };
+
             console.log(filterObj);
 
 
             //DownloadSpotPatchFile(optimizationRun)
             $.ajax({
-                url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReport',
+                url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsReport',
                 data: filterObj,
                 type: 'POST',
                 success: function (response) {
@@ -365,7 +383,81 @@
                     alert(exception);
                 }
             });
+
+
         })
+
+        $('#btnDownloadSpotPatchExcel').on('click', function (e) {
+            e.preventDefault();
+            var grid = $('#divPathDetails').data('kendoGrid')
+            var optimizationRun = $(this).attr('data-id');
+            var sortObj = null;
+            var filterObj = null;
+            //set the sorting parameters
+            if (grid.dataSource._sort) {
+                sortObj = grid.dataSource._sort[0];
+            }
+            //set the filtering parameters
+            if (grid.dataSource._filter) {
+                filterObj = {
+                    filters: grid.dataSource._filter.filters,
+                    logic: 'AND'
+                };
+                //set the type of filter fields
+                $.each(filterObj.filters, function (index, obj) {
+                    obj.dtype = grid.dataSource.options.schema.model.fields[obj.field].type;
+                });
+            }
+           
+            //create object
+            var filterObj = {
+                OptimizationRunId: optimizationRun,
+                sort: sortObj,
+                filter: filterObj
+            };
+
+            console.log(filterObj);
+
+
+            //DownloadSpotPatchFile(optimizationRun)
+            //$.ajax({
+            //    url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsExcelReport',
+            //    data: filterObj,
+            //    type: 'POST',
+            //    success: function (response) {
+            //        console.log(response);
+            //        //window.open(SERVICE_BASE_URL + response.data, "_blank");
+            //    },
+            //    error: function (xhr, errorType, exception) {
+            //        alert(exception);
+            //    }
+            //});
+            var request = new XMLHttpRequest();
+            request.open("POST", SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsExcelReport', true);
+            request.setRequestHeader("content-type", "application/json");
+            request.responseType = "blob";
+            request.onload = function (e) {
+
+                if (this.status === 200) {
+                    // `blob` response
+                    console.log(this.response);
+                    // create `objectURL` of `this.response` : `.pdf` as `Blob`
+                    var file = window.URL.createObjectURL(this.response);
+                    var a = document.createElement("a");
+                    a.href = file;
+                    a.download = this.response.name || "SpotPatchDetails.xlsx";
+                    document.body.appendChild(a);
+                    a.click();
+                    // remove `a` following `Save As` dialog, 
+                    // `window` regains `focus`
+                    window.onfocus = function () {
+                        document.body.removeChild(a)
+                    }                    
+                };
+            };
+            request.send(JSON.stringify(filterObj));
+        })
+        
     });
 
     function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID, P_htmlColor, M_htmlColor) {

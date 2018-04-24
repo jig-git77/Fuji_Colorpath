@@ -15,13 +15,14 @@ namespace FujiFilmUSA.Sync.Service.Models
             DataView dv = new DataView(DT);
             try
             {
-                string filterString = "";                
-                if (filter.filters != null)
+                string filterString = "";
+                if (filter != null && filter.filters != null)
                 {
                     foreach (var item in filter.filters)
                     {
                         //string filterString = item.field + " like " + item.value;
-                        filterString += item.field + " " + getDataTableOpertors(item.@operator) + " " + item.value + " AND ";
+                        //filterString += item.field + " " + getDataTableOpertors(item.@operator) + " " + item.value + " AND ";
+                        filterString += getDataTableOpertors(item.field, item.value, item.@operator, item.dtype) + " AND ";
                     }
                     if (filterString.EndsWith("AND "))
                         filterString = filterString.Remove(filterString.Length - 5, 5);
@@ -30,7 +31,7 @@ namespace FujiFilmUSA.Sync.Service.Models
                 }
                 filteredDT = dv.ToTable();
 
-                if (filteredDT.Rows.Count > 0 && sort.dir != null)
+                if (filteredDT.Rows.Count > 0 && sort != null && sort.dir != null)
                 {
                     string sortingExpression = sort.field + " " + sort.dir;
                     //filteredDT.DefaultView.Sort = sortingExpression;
@@ -48,69 +49,33 @@ namespace FujiFilmUSA.Sync.Service.Models
             return filteredDT;
         }
 
-        public static string getDataTableOpertors(string kendoOperator)
+        public static string getDataTableOpertors(string field, string value, string kendoOperator, string dataType)
         {
-            string operators = "";
+            string expression = field + " ";
             switch (kendoOperator)
             {
-                case "eq": operators = "="; break;
-                case "neq": operators = "<>"; break;
-                case "gte": operators = ">="; break;
-                case "gt": operators = ">"; break;
-                case "lte": operators = "<="; break;
-                case "lt": operators = "<"; break;
-                    //case "isnull": operators = "<>"; break;
-                    //;case "isnotnull": operators = "<>"; break;
+                case "eq":
+                    if (dataType == "number")
+                        expression += "= " + value;
+                    else
+                        expression += "= '" + value + "'";
+                    break;
+                case "neq":
+                    if (dataType == "number")
+                        expression += "<> " + value;
+                    else
+                        expression += "<> '" + value + "'";
+                    break;
+                case "gte": expression += ">= " + value; break;
+                case "gt": expression += "> " + value; break;
+                case "lte": expression += "<= " + value; break;
+                case "lt": expression += "< " + value; break;
+                case "contains": expression += "LIKE '%" + value + "%'"; break;
+                case "doesnotcontain": expression += "NOT LIKE '%" + value + "%'"; break;
+                case "startswith": expression += "LIKE '" + value + "*'"; break;
+                case "endswith": expression += "LIKE '*" + value + "'"; break;
             }
-            return operators;
+            return expression;
         }
-
-
-        //public Func<DataRow, bool> FilterColumn(string searchColumn, string searchValue, Type type)
-        //{
-        //    Func<DataRow, bool> searchFunc = null;
-        //    switch (searchColumn)
-        //    {
-        //        case "EMP_NAME":
-        //            searchFunc = x => x.Field < type.GetType() > (searchColumn) == searchValue;
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //    return searchFunc;
-        //}
-
-        //public Func<POSITION_DETAIL_PS_IPAD_WORK, bool> FilterColumn(string searchColumn, string searchValue)
-        //{
-        //    Func<POSITION_DETAIL_PS_IPAD_WORK, bool> searchFunc = null;
-        //    switch (searchColumn)
-        //    {
-        //        case "EMP_NAME":
-        //            searchFunc = x => x.EMP_NAME == searchValue;
-        //            break;
-        //        case "EMP_CODE":
-        //            searchFunc = x => x.EMP_CODE == searchValue;
-        //            break;
-        //        case "EMAIL_ID":
-        //            searchFunc = x => x.EMAIL_ID == searchValue;
-        //            break;
-        //        case "HQ_NAME":
-        //            searchFunc = x => x.HQ_NAME == searchValue;
-        //            break;
-        //        case "DESIGNATION":
-        //            searchFunc = x => x.DESIGNATION == searchValue;
-        //            break;
-        //        case "MARKET_TYPE_FULL":
-        //            searchFunc = x => x.MARKET_TYPE == (searchValue == "Domestic" ? "D" : "E");
-        //            break;
-        //        case "COUNTRY":
-        //            searchFunc = x => x.COUNTRY == searchValue;
-        //            break;
-        //        default:
-        //            searchFunc = x => x.EMP_NAME == searchValue;
-        //            break;
-        //    }
-        //    return searchFunc;
-        //}
     }
 }

@@ -32,6 +32,7 @@ namespace FujiFilmUSA.Sync.Service.Models
         public string @operator { get; set; }
         public string field { get; set; }
         public string value { get; set; }
+        public string dtype { get; set; }
     }
 
     public class ExportViewModel
