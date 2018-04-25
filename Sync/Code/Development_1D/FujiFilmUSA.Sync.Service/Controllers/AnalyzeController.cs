@@ -292,17 +292,13 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 dt = GridFilters.GetFilteredResult(dtPatchDetails, model.sort, model.filter);
 
                 //select specific columns 
-                DataView view = new DataView(dt);
+                DataView view = new DataView(dt);                
                 DataTable cTable = new DataTable();
                 if (measurementID > 0)
                     cTable = view.ToTable(false, "SpotID", "SpotName", "HTMLColor", "ΔE_T_P", "ΔE_M_T", "ΔE_M_P");
                 else
                     cTable = view.ToTable(false, "SpotID", "SpotName", "HTMLColor", "ΔL", "Δa", "Δb", "ΔE");
-
-
-
-
-                //logic for filter
+                
 
                 ReportPDF objReportPDF = new ReportPDF();
                 objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
@@ -322,8 +318,16 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         ws.Cell("D" + 1).Value = cTable.Columns[3].ColumnName;
                         ws.Cell("E" + 1).Value = cTable.Columns[4].ColumnName;
                         ws.Cell("F" + 1).Value = cTable.Columns[5].ColumnName;
+
+                        //for spot run 0
                         if (measurementID == 0)
-                            ws.Cell("G" + 1).Value = cTable.Columns[6].ColumnName;
+                        {
+                            ws.Cell("D" + 1).Value = "pΔL";
+                            ws.Cell("E" + 1).Value = "pΔa";
+                            ws.Cell("F" + 1).Value = "pΔb";
+                            ws.Cell("G" + 1).Value = "pΔE";
+                        }
+                            
 
 
                         // Adding DataRows.
@@ -336,10 +340,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             ws.Cell("D" + (i + 2)).Value = cTable.Rows[i][3];
                             ws.Cell("E" + (i + 2)).Value = cTable.Rows[i][4];
                             ws.Cell("F" + (i + 2)).Value = cTable.Rows[i][5];
+
+                            //for ΔE in run 0 with
                             if (measurementID == 0)
                                 ws.Cell("G" + (i + 2)).Value = cTable.Rows[i][6]; ;
 
-                            // Changing color to green.
+                            // Changing color to to html color
                             ws.Cells("C" + (i + 2)).Style.Fill.BackgroundColor = XLColor.FromHtml(cTable.Rows[i]["HTMLColor"].ToString());
                         }
                     }
@@ -359,6 +365,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 httpResponseMessage.Content.Headers.ContentDisposition.FileName = objReportPDF.PDF_NAME;
                 httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
 
+                //delete the excel file
+                File.Delete(filePath);
             }
             catch (Exception ex)
             {
@@ -577,6 +585,29 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage DownloadFile(string filePath)
+        {
+            var fullPath = System.Web.Hosting.HostingEnvironment.MapPath(filePath);
+            var fileName = Path.GetFileName(fullPath);
+            var stream = new FileStream(fullPath, FileMode.Open);
+
+            // processing the stream.
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StreamContent(stream)
+            };
+            result.Content.Headers.ContentDisposition =
+                new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = fileName
+                };
+            result.Content.Headers.ContentType =
+                new MediaTypeHeaderValue("application/octet-stream");
+
+            return result;
         }
 
         #region Methods for Patch Details tab

@@ -1245,7 +1245,7 @@ function BindMeasurementPatchDetails() {
             success: function (response) {
                 if (response.data != null) {
                     var fileName = '~' + response.data;
-                    window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
+                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -1326,7 +1326,7 @@ function BindMeasurementPatchDetails() {
             success: function (response) {
                 if (response.data != null) {
                     var fileName = '~' + response.data;
-                    window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
+                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {

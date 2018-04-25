@@ -876,28 +876,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
 
-        [HttpGet]
-        public HttpResponseMessage DownloadFile(string filePath)
-        {
-            var fullPath = System.Web.Hosting.HostingEnvironment.MapPath(filePath);
-            var fileName = Path.GetFileName(fullPath);
-            var stream = new FileStream(fullPath, FileMode.Open);
-
-            // processing the stream.
-            var result = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StreamContent(stream)
-            };
-            result.Content.Headers.ContentDisposition =
-                new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = fileName
-                };
-            result.Content.Headers.ContentType =
-                new MediaTypeHeaderValue("application/octet-stream");
-
-            return result;
-        }
+        
       
         
         [HttpGet]
