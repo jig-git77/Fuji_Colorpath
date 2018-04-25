@@ -2720,7 +2720,7 @@ function PopulateChartTargetVersusActualAB() {
 
 
     $chart_TargetVersusActualAB.kendoChart({
-        //renderAs: "canvas",
+        renderAs: "canvas",
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth"
@@ -2781,7 +2781,7 @@ function PopulateChartTargetVersusActualAB() {
         //        color: "black"
         //    }
         //},
-        //render: renderChartWithBackgroundByAxis
+        render: renderChartWithBackgroundByAxis
     });
 
 
@@ -4986,78 +4986,85 @@ function SetInitialAnalyzeBinding() {
 /////////******************************** METHODS FOR BIND CHART BACKGROUNDS ********************************////////////
 
 function renderChartWithBackgroundByAxis(e) {
+
     var xSlot = {};
     var ySlot = {};
     var path = {};
     var chart = e.sender;
-    var xAxis = chart.getAxis("xAxis");
-    var yAxis = chart.getAxis("yAxis");
-    var xAxisArray = xAxis._axis.children.map(r => parseFloat(r.content));
-    var yAxisArray = yAxis._axis.children.map(r => parseFloat(r.content));
+
+    if (chart.element[0].id != "kendoChartTargetVersusActualAB") {
 
 
-    if (chart.element[0].id == "kendoChartTargetVersusActualAB" || chart.element[0].id == "kendoChartTargetVersusActualABLarge"
-        || chart.element[0].id == "kendoChartGamut_ABComparison" || chart.element[0].id == "kendoChartABalanceChart"
-        || chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartLComaparision"
-        || chart.element[0].id == "divChartInkPaperPaperLab1" || chart.element[0].id == "kendoChartDummyBalanceL"
-        || chart.element[0].id == "kendoChartDummyBalanceA" || chart.element[0].id == "kendoChartDummyBalanceB") {
-        xSlot = xAxis.slot(Math.min.apply(Math, xAxisArray), Math.max.apply(Math, xAxisArray));
-        ySlot = yAxis.slot(Math.min.apply(Math, yAxisArray), Math.max.apply(Math, yAxisArray));
+
+        var xAxis = chart.getAxis("xAxis");
+        var yAxis = chart.getAxis("yAxis");
+        var xAxisArray = xAxis._axis.children.map(r => parseFloat(r.content));
+        var yAxisArray = yAxis._axis.children.map(r => parseFloat(r.content));
 
 
+        if (chart.element[0].id == "kendoChartTargetVersusActualABDummy"
+            || chart.element[0].id == "kendoChartGamut_ABComparison" || chart.element[0].id == "kendoChartABalanceChart"
+            || chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartLComaparision"
+            || chart.element[0].id == "divChartInkPaperPaperLab1" || chart.element[0].id == "kendoChartDummyBalanceL"
+            || chart.element[0].id == "kendoChartDummyBalanceA" || chart.element[0].id == "kendoChartDummyBalanceB") {
+            xSlot = xAxis.slot(Math.min.apply(Math, xAxisArray), Math.max.apply(Math, xAxisArray));
+            ySlot = yAxis.slot(Math.min.apply(Math, yAxisArray), Math.max.apply(Math, yAxisArray));
+
+
+        }
+        else {
+            xSlot = xAxis.slot(Math.abs(Math.min.apply(Math, xAxisArray)), Math.abs(Math.max.apply(Math, xAxisArray)));
+            ySlot = yAxis.slot(Math.abs(Math.min.apply(Math, yAxisArray)), Math.abs(Math.max.apply(Math, yAxisArray)));
+        }
+
+
+        //set the rectangle area on chart
+        var rect = new geometry.Rect([
+            xSlot.origin.x, ySlot.origin.y
+        ], [
+                xSlot.width(), ySlot.height()
+            ]);
+
+
+        if (chart.element[0].id == "kendoChartTargetVersusActualABDummy" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparison" || chart.element[0].id == "divChartInkPaperPaperLab1") {
+            path = drawing.Path.fromRect(rect, {
+                stroke: null,
+                fill: gradientRedGreen
+            });
+        }
+        else if (chart.element[0].id == "kendoChartABalanceChart" || chart.element[0].id == "kendoChartDummyBalanceA") {
+            path = drawing.Path.fromRect(rect, {
+                stroke: null,
+                fill: gradientPinkGreen
+            });
+        }
+        else if (chart.element[0].id == "kendoChartLBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceL") {
+            path = drawing.Path.fromRect(rect, {
+                stroke: null,
+                fill: gradientGray3
+            });
+        }
+        else if (chart.element[0].id == "kendoChartLComaparision") {
+            path = drawing.Path.fromRect(rect, {
+                stroke: null,
+                fill: gradientGray2
+            });
+        }
+        else if (chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceB") {
+            path = drawing.Path.fromRect(rect, {
+                stroke: null,
+                fill: gradientYellowBlue
+            });
+        }
+        else {
+            path = drawing.Path.fromRect(rect, {
+                stroke: null,
+                fill: gradientGray
+            });
+        }
+
+        chart.surface.draw(path);
     }
-    else {
-        xSlot = xAxis.slot(Math.abs(Math.min.apply(Math, xAxisArray)), Math.abs(Math.max.apply(Math, xAxisArray)));
-        ySlot = yAxis.slot(Math.abs(Math.min.apply(Math, yAxisArray)), Math.abs(Math.max.apply(Math, yAxisArray)));
-    }
-
-
-    //set the rectangle area on chart
-    var rect = new geometry.Rect([
-        xSlot.origin.x, ySlot.origin.y
-    ], [
-            xSlot.width(), ySlot.height()
-        ]);
-
-
-    if (chart.element[0].id == "kendoChartTargetVersusActualAB" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparison" || chart.element[0].id == "divChartInkPaperPaperLab1") {
-        path = drawing.Path.fromRect(rect, {
-            stroke: null,
-            fill: gradientRedGreen
-        });
-    }
-    else if (chart.element[0].id == "kendoChartABalanceChart" || chart.element[0].id == "kendoChartDummyBalanceA") {
-        path = drawing.Path.fromRect(rect, {
-            stroke: null,
-            fill: gradientPinkGreen
-        });
-    }
-    else if (chart.element[0].id == "kendoChartLBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceL") {
-        path = drawing.Path.fromRect(rect, {
-            stroke: null,
-            fill: gradientGray3
-        });
-    }
-    else if (chart.element[0].id == "kendoChartLComaparision") {
-        path = drawing.Path.fromRect(rect, {
-            stroke: null,
-            fill: gradientGray2
-        });
-    }
-    else if (chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceB") {
-        path = drawing.Path.fromRect(rect, {
-            stroke: null,
-            fill: gradientYellowBlue
-        });
-    }
-    else {
-        path = drawing.Path.fromRect(rect, {
-            stroke: null,
-            fill: gradientGray
-        });
-    }
-
-    chart.surface.draw(path);
 }
 
 function renderChartWithBackgroundByCategory(e) {
@@ -5101,8 +5108,19 @@ function renderChartWithBackgroundByCategory(e) {
 
 ////**************** GET IMAGE OF AB COMPARSION SPIDER CHART FOR REPORT  ****************////
 function GetABComparisionSpiderChartImage() {
+    //var chart = $chart_TargetVersusActualAB.data("kendoChart");
+    //return chart.imageDataURL();
+
     var chart = $chart_TargetVersusActualAB.data("kendoChart");
-    return chart.imageDataURL();
+    var kendoOptions = chart.options;
+    var kendodataSource = chart.dataSource;
+    $('#kendoChartTargetVersusActualABDummy').kendoChart(kendoOptions)
+    var chartDummy = $('#kendoChartTargetVersusActualABDummy').data('kendoChart')
+    chartDummy.dataSource = kendodataSource;
+    delete chartDummy.options.chartArea.background;
+    chartDummy.options.transitions = false;
+    chartDummy.refresh()
+    return chartDummy.imageDataURL();
 }
 
 ////**************** GET IMAGE OF INK PAPER CHART FOR REPORT  ****************////
@@ -5112,8 +5130,7 @@ function GetABComparisionSpiderChartImage() {
 //    return chart.imageDataURL();
 //}
 
-function GetInkPaperPatchChartImage() {
-    debugger;
+function GetInkPaperPatchChartImage() {    
     var chart = $divChartInkPaperABComparision.data("kendoChart");
     var kendoOptions = $divChartInkPaperABComparision.data("kendoChart").options;
     var kendodataSource = $divChartInkPaperABComparision.data("kendoChart").dataSource;
@@ -5127,12 +5144,24 @@ function GetInkPaperPatchChartImage() {
     dummyChart.options.transitions = false;
     dummyChart.refresh();
     return dummyChart.imageDataURL();
+
 }
 
 ////**************** GET IMAGE OF ACTUAL VS TARGET CHART FOR REPORT  ****************////
 function GetActualVsTargetChartImage() {
+    //var chart = $chart_Gamut_ABComparison.data("kendoChart");
+    //return chart.imageDataURL();
+
     var chart = $chart_Gamut_ABComparison.data("kendoChart");
-    return chart.imageDataURL();
+    var kendoOptions = chart.options;
+    var kendodataSource = chart.dataSource;
+    $('#kendoChartGamut_ABComparisonDummy').kendoChart(kendoOptions)
+    var chartDummy = $('#kendoChartGamut_ABComparisonDummy').data('kendoChart')
+    chartDummy.dataSource = kendodataSource;
+    delete chartDummy.options.chartArea.background;
+    chartDummy.options.transitions = false;
+    chartDummy.refresh()
+    return chartDummy.imageDataURL();
 }
 
 ////**************** GET IMAGE OF L-COMPARSION CHART FOR REPORT  ****************////

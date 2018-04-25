@@ -1040,7 +1040,7 @@
                                                                     <tr>
                                                                         <td align="center" valign="top">
                                                                             <div id="divTest" class="gamutChart">
-                                                                                <div id="kendoChartTargetVersusActualAB" ></div>
+                                                                                <div id="kendoChartTargetVersusActualAB" ></div>                                                                                
                                                                             </div>
                                                                             <div id="kendoChartTargetVersusActualABLargeArea">
                                                                                 <div id="kendoChartTargetVersusActualABLarge" class="gamutChart"></div>
@@ -1127,7 +1127,9 @@
                                                                                             <div id="kendoChartDummyBalanceL"></div>
                                                                                             <div id="kendoChartDummyBalanceA"></div>
                                                                                             <div id="kendoChartDummyBalanceB"></div>
-                                                                                            <div id="divChartInkPaperDummy"></div>
+                                                                                            <div id="divChartInkPaperDummy"></div>   
+                                                                                            <div id="kendoChartGamut_ABComparisonDummy"></div>   
+                                                                                            <div id="kendoChartTargetVersusActualABDummy" ></div>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
