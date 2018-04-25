@@ -4252,6 +4252,205 @@ function PopulateTVIG7CMYKChart() {
 }
 
 ////**************** POPULATE THE TVI SPREAD CHART  ****************////
+//function PopulateTVISpreadChart() {
+
+//    var jsonSpread_C = $.grep(jsonDTSpreadChartDataList, function (element) { return (element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.DotGain == 0) || element.CmykC != 0 });
+//    var jsonSpread_M = $.grep(jsonDTSpreadChartDataList, function (element) { return (element.CmykM == 0 && element.CmykC == 0 && element.CmykY == 0 && element.DotGain == 0) || element.CmykM != 0 });
+//    var jsonSpread_Y = $.grep(jsonDTSpreadChartDataList, function (element) { return (element.CmykY == 0 && element.CmykC == 0 && element.CmykM == 0 && element.DotGain == 0) || element.CmykY != 0 });
+
+//    var splineRangeResultList = $.grep(jsonDTSpreadSplineRangeChartDataList, function (element) { return element.UpperLimit != 0 && element.LowerLimit != 0 });
+
+//    var obj = Object.assign({}, splineRangeResultList[0]);
+//    obj.UpperLimit = null;
+//    obj.LowerLimit = null;
+//    obj.TVI = 0;
+
+//    splineRangeResultList.push(obj);
+
+//    obj = Object.assign({}, splineRangeResultList[0])
+//    obj.UpperLimit = null;
+//    obj.LowerLimit = null;
+//    obj.TVI = 100;
+//    splineRangeResultList.push(obj);
+
+
+//    splineRangeResultList = splineRangeResultList.sort(function (e, e1) { return e.TVI - e1.TVI });
+
+//    $.each(jsonSpread_C, function (index, obj) {
+//        var magValue = 0;
+//        var yelValue = 0;
+//        if (obj.CmykC != 0) {
+
+//            var Mres = $.grep(jsonSpread_M, function (e) { return e.CmykM == obj.CmykC; });
+//            if (Mres.length > 0) {
+//                magValue = Mres[0].DotGain;
+//            }
+
+//            var Yres = $.grep(jsonSpread_Y, function (e) { return e.CmykY == obj.CmykC; });
+//            if (Yres.length > 0) {
+//                yelValue = Yres[0].DotGain;
+//            }
+
+//            var DiffrentOne = obj.DotGain - magValue;
+//            var DiffrentTwo = obj.DotGain - yelValue;
+//            var DifferentTitleOne = "C - M";
+//            var DifferentTitleTwo = "C - Y";
+//            obj.DiffrentOne = Math.abs(DiffrentOne);
+//            obj.DiffrentTwo = Math.abs(DiffrentTwo);
+//            obj.DifferentTitleOne = DifferentTitleOne;
+//            obj.DifferentTitleTwo = DifferentTitleTwo;
+//        }
+//    });
+
+
+//    $.each(jsonSpread_M, function (index, obj) {
+//        var cynValue = 0;
+//        var yelValue = 0;
+//        if (obj.CmykM != 0) {
+
+//            var Cres = $.grep(jsonSpread_C, function (e) { return e.CmykC == obj.CmykM; });
+//            if (Cres.length > 0) {
+//                cynValue = Cres[0].DotGain;
+//            }
+
+
+//            var Yres = $.grep(jsonSpread_Y, function (e) { return e.CmykY == obj.CmykM; });
+//            if (Yres.length > 0) {
+//                yelValue = Yres[0].DotGain;
+//            }
+
+//            var DiffrentOne = obj.DotGain - cynValue;
+//            var DiffrentTwo = obj.DotGain - yelValue;
+//            var DifferentTitleOne = "M - C";
+//            var DifferentTitleTwo = "M - Y";
+//            obj.DiffrentOne = Math.abs(DiffrentOne);
+//            obj.DiffrentTwo = Math.abs(DiffrentTwo);
+//            obj.DifferentTitleOne = DifferentTitleOne;
+//            obj.DifferentTitleTwo = DifferentTitleTwo;
+//        }
+//    });
+
+//    $.each(jsonSpread_Y, function (index, obj) {
+//        var cynValue = 0;
+//        var magValue = 0;
+//        if (obj.CmykY != 0) {
+
+//            var Cres = $.grep(jsonSpread_C, function (e) { return e.CmykC == obj.CmykY; });
+//            if (Cres.length > 0) {
+//                cynValue = Cres[0].DotGain;
+//            }
+
+//            var Mres = $.grep(jsonSpread_M, function (e) { return e.CmykM == obj.CmykY; });
+//            if (Mres.length > 0) {
+//                magValue = Mres[0].DotGain;
+//            }
+
+//            var DiffrentOne = obj.DotGain - cynValue;
+//            var DiffrentTwo = obj.DotGain - magValue;
+//            var DifferentTitleOne = "Y - C";
+//            var DifferentTitleTwo = "Y - M";
+//            obj.DiffrentOne = Math.abs(DiffrentOne);
+//            obj.DiffrentTwo = Math.abs(DiffrentTwo);
+//            obj.DifferentTitleOne = DifferentTitleOne;
+//            obj.DifferentTitleTwo = DifferentTitleTwo;
+//        }
+//    });
+
+//    $divChartTVISpread.kendoChart({
+//        //title: {
+//        //    text: "Cyan"
+//        //},
+//        renderAs: "canvas",
+//        legend: {
+//            position: "top",
+//            //labels: {
+//            //    template: "Name: #= text #"
+//            //}
+//        },
+//        //dataSource: {
+//        //    data: jsonSpread_C
+//        //},
+//        series: [
+
+//            {
+//                data: jsonSpread_C,
+//                type: "line",
+//                field: "DotGain",
+//                color: "Cyan",
+//                name: "C",
+//                markers: { background: "Cyan" },
+//                tooltip: {
+//                    visible: true,
+//                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
+//                }
+//            },
+
+//            {
+//                data: jsonSpread_M,
+//                type: "line",
+//                field: "DotGain",
+//                color: "Magenta",
+//                name: "M",
+//                markers: { background: "Magenta" },
+//                tooltip: {
+//                    visible: true,
+//                    template: '<table><tr><td><center><b>Magenta #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
+//                }
+//            },
+
+//            {
+//                data: jsonSpread_Y,
+//                type: "line",
+//                field: "DotGain",
+//                color: "Yellow",
+//                name: "Y",
+//                markers: { background: "Yellow" },
+//                tooltip: {
+//                    visible: true,
+//                    template: '<table><tr><td><center><b>Yellow #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
+//                }
+//            },
+//            {
+//                data: splineRangeResultList,
+//                type: "rangeArea",
+//                fromField: "LowerLimit",
+//                toField: "UpperLimit",
+//                categoryField: "TVI",
+//                color: "#148787",
+//                line: {
+//                    style: "smooth",
+//                    color: "#058e8e",
+//                    width: 1,
+//                },
+//                highlight: {
+//                    visible: false,
+//                }
+//            },
+//        ],
+//        valueAxis: {
+//            name: "valueAxis",
+//            majorUnit: 5,
+//            axisCrossingValues: -100,
+//        },
+//        seriesDefaults: {
+//            line: {
+//                style: "smooth"
+//            }
+//        },
+//        categoryAxis: {
+//            name: "categoryAxis",
+//            justified: true,
+//            categories: [0, 25, 50, 75, 100],
+//            //min: 0,
+//            //max: 100,
+//        },
+//        chartArea: {
+//            width: 650,
+//            height: 350
+//        },
+//        render: renderChartWithBackgroundByCategory
+//    });
+//}
 function PopulateTVISpreadChart() {
 
     var jsonSpread_C = $.grep(jsonDTSpreadChartDataList, function (element) { return (element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.DotGain == 0) || element.CmykC != 0 });
@@ -4356,6 +4555,127 @@ function PopulateTVISpreadChart() {
         }
     });
 
+    //debugger;
+    var arrC = $.map(jsonSpread_C, function (e) { return e.CmykC; });
+    var arrM = $.map(jsonSpread_M, function (e) { return e.CmykM; });
+    var arrY = $.map(jsonSpread_Y, function (e) { return e.CmykY; });
+    var unionArr = arrayUnique(arrC.concat(arrM));
+    unionArr = arrayUnique(unionArr.concat(arrY));
+
+
+
+    //Calculation for Yellow
+    var arrNewY = [];
+
+    $.each(unionArr, function (index, obj) {
+        if ($.inArray(obj, arrY) == -1) {
+            var newObj = Object.assign({}, jsonSpread_Y[0]);
+            newObj.CmykY = obj;
+            newObj.markerDisplay = false;
+            arrNewY.push(newObj);
+        }
+    });
+
+    jsonSpread_Y = jsonSpread_Y.concat(arrNewY);
+    jsonSpread_Y = jsonSpread_Y.sort(function (a, b) {
+        return a.CmykY - b.CmykY;
+    });
+
+    //
+    $.each(jsonSpread_Y, function (index, yObj) {
+        if (yObj.markerDisplay == undefined) {
+            yObj.markerDisplay = true;
+        }
+    });
+
+
+    //calculation for Magenta
+    var arrNewM = [];
+
+    $.each(unionArr, function (index, obj) {
+        if ($.inArray(obj, arrM) == -1) {
+            var newObj = Object.assign({}, jsonSpread_M[0]);
+            newObj.CmykM = obj;
+            newObj.markerDisplay = false;
+            arrNewM.push(newObj);
+        }
+    });
+
+    jsonSpread_M = jsonSpread_M.concat(arrNewM);
+    jsonSpread_M = jsonSpread_M.sort(function (a, b) {
+        return a.CmykM - b.CmykM;
+    });
+
+
+    $.each(jsonSpread_M, function (index, mObj) {
+        if (mObj.markerDisplay == undefined) {
+            mObj.markerDisplay = true;
+        }
+    });
+
+
+    //Calculation for Cyan
+    var arrNewC = [];
+
+    $.each(unionArr, function (index, obj) {
+        if ($.inArray(obj, arrC) == -1) {
+            var newObj = Object.assign({}, jsonSpread_C[0]);
+            newObj.CmykC = obj;
+            newObj.markerDisplay = false;
+            arrNewC.push(newObj);
+        }
+    });
+
+    jsonSpread_C = jsonSpread_C.concat(arrNewC);
+    jsonSpread_C = jsonSpread_C.sort(function (a, b) {
+        return a.CmykC - b.CmykC;
+    });
+
+    //
+    $.each(jsonSpread_C, function (index, cObj) {
+        if (cObj.markerDisplay == undefined) {
+            cObj.markerDisplay = true;
+        }
+    });
+
+
+    //calculate spline result
+    var splineArray = [];
+    $.each(jsonSpread_C, function (index, elem) {
+
+        var foundTVI = $.grep(splineRangeResultList, function (e) {
+            return e.TVI == elem.CmykC;
+        });
+
+        if (foundTVI.length > 0) {
+            splineArray.push(foundTVI[0]);
+        } else {
+            var newObj = Object.assign({}, splineRangeResultList[0]);
+            newObj.TVI = elem.CmykC;
+            splineArray.push(newObj);
+        }
+    });
+
+
+    $.each(jsonSpread_Y, function (index, obj) {
+        if (obj.DotGain == 0 && index != 0 && index != jsonSpread_Y.length - 1) {
+            obj.DotGain = (jsonSpread_Y[index - 1].DotGain + jsonSpread_Y[index + 1].DotGain) / 2;
+        }
+    });
+
+    $.each(jsonSpread_M, function (index, obj) {
+        if (obj.DotGain == 0 && index != 0 && index != jsonSpread_M.length - 1) {
+            obj.DotGain = (jsonSpread_M[index - 1].DotGain + jsonSpread_M[index + 1].DotGain) / 2;
+        }
+    });
+
+    $.each(jsonSpread_C, function (index, obj) {
+        if (obj.DotGain == 0 && index != 0 && index != jsonSpread_C.length - 1) {
+            obj.DotGain = (jsonSpread_C[index - 1].DotGain + jsonSpread_C[index + 1].DotGain) / 2;
+        }
+    });
+
+
     $divChartTVISpread.kendoChart({
         //title: {
         //    text: "Cyan"
@@ -4378,7 +4698,15 @@ function PopulateTVISpreadChart() {
                 field: "DotGain",
                 color: "Cyan",
                 name: "C",
-                markers: { background: "Cyan" },
+                markers: {
+                    visible: function (e) {
+                        return e.dataItem.markerDisplay;
+                    },
+                    highlight: function (e) {
+                        return e.dataItem.markerDisplay;
+                    },
+                    background: "Cyan"
+                },
                 tooltip: {
                     visible: true,
                     template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
@@ -4391,27 +4719,42 @@ function PopulateTVISpreadChart() {
                 field: "DotGain",
                 color: "Magenta",
                 name: "M",
-                markers: { background: "Magenta" },
+                markers: {
+                    visible: function (e) {
+                        return e.dataItem.markerDisplay;
+                    },
+                    highlight: function (e) {
+                        return e.dataItem.markerDisplay;
+                    },
+                    background: "Magenta"
+                },
                 tooltip: {
                     visible: true,
                     template: '<table><tr><td><center><b>Magenta #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
                 }
             },
-
             {
                 data: jsonSpread_Y,
                 type: "line",
                 field: "DotGain",
                 color: "Yellow",
                 name: "Y",
-                markers: { background: "Yellow" },
+                markers: {
+                    visible: function (e) {
+                        return e.dataItem.markerDisplay;
+                    },
+                    highlight: function (e) {
+                        return e.dataItem.markerDisplay;
+                    },
+                    background: "Yellow"
+                },
                 tooltip: {
                     visible: true,
                     template: '<table><tr><td><center><b>Yellow #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
                 }
             },
             {
-                data: splineRangeResultList,
+                data: splineArray,
                 type: "rangeArea",
                 fromField: "LowerLimit",
                 toField: "UpperLimit",
@@ -4419,7 +4762,7 @@ function PopulateTVISpreadChart() {
                 color: "#148787",
                 line: {
                     style: "smooth",
-                    color: "#058e8e",
+                    color: "green",
                     width: 1,
                 },
                 highlight: {
@@ -4429,7 +4772,7 @@ function PopulateTVISpreadChart() {
         ],
         valueAxis: {
             name: "valueAxis",
-            majorUnit: 5,
+            //majorUnit: 5,
             axisCrossingValues: -100,
         },
         seriesDefaults: {
@@ -4440,9 +4783,10 @@ function PopulateTVISpreadChart() {
         categoryAxis: {
             name: "categoryAxis",
             justified: true,
-            categories: [0, 25, 50, 75, 100],
+            field: "CmykC",
+            //categories: [0, 25, 50, 75, 100],
             //min: 0,
-            //max: 100,
+            max: 100,
         },
         chartArea: {
             width: 650,
@@ -5126,4 +5470,16 @@ function SetInitialAnalyzeBinding() {
     SetNextButtonDisabled(true);
     $ddlPaging.find('option').last().attr('selected', true);
     PopulateAnalyzeChart();
+}
+
+function arrayUnique(array) {
+    var a = array.concat();
+    for (var i = 0; i < a.length; ++i) {
+        for (var j = i + 1; j < a.length; ++j) {
+            if (a[i] == a[j])
+                a.splice(j--, 1);
+        }
+    }
+
+    return a;
 }
