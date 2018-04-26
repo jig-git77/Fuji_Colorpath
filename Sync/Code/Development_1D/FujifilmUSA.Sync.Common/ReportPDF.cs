@@ -1922,6 +1922,12 @@ namespace FujifilmUSA.Sync.Common
                 //========== Reads the template ==========//
                 StreamReader fp;
 
+                //========== The rectangle for the content on pdf ==========//
+                theDoc.Rect.Left = 0;
+                theDoc.Rect.Bottom = 30;
+                theDoc.Rect.Width = 610;
+                theDoc.Rect.Height = 770;
+
                 //========== The page ID Default is 1 ==========//
                 int theID;
 
@@ -1937,6 +1943,64 @@ namespace FujifilmUSA.Sync.Common
                 fp = File.OpenText(System.Web.Hosting.HostingEnvironment.MapPath("~/" + FileName));
                 StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
                 fp.Close();
+
+                int measurementID = 0;
+                int totalPages = 0;
+                if (dtSpotPatchDetails.Rows.Count > 0)
+                {
+                    measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
+                    totalPages = (dtSpotPatchDetails.Rows.Count / 44) + 1;
+                }
+
+                int currentIndex = 0;
+                int rowLimit = 44;
+                StringBuilder mainStr = new StringBuilder();
+                for (int i = 0; i < totalPages; i++)
+                {
+                    //for (int j = 0; j < 10; j++)
+                    {
+                        StreamReader fs = File.OpenText(System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/SpotPatchTableReport.htm"));
+                        StringBuilder FileStr = new StringBuilder(fs.ReadToEnd());
+                        fs.Close();
+
+                        StringBuilder PatchStr = new StringBuilder();
+                        PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>Color</th><th>SpotName</th>");                        
+                        if (measurementID == 0)
+                            PatchStr.Append("<th>pΔL</th><th>pΔa</th><th>pΔb</th><th>pΔE</th></tr>");
+                        else
+                            PatchStr.Append("<th>ΔE_T_P</th><th>ΔE_M_T</th><th>ΔE_M_P</th></tr>");
+                        //foreach (DataRow row in dtPatchDetails.AsEnumerable().fi(5).CopyToDataTable())
+                        for (int j = currentIndex; j < rowLimit; j++)
+                        {
+                            PatchStr.Append("<tr><td>" + Convert.ToString(dtPatchDetails.Rows[j]["SpotID"]) + "</td>");
+                            PatchStr.Append("<td><span id='sp' style='display:inline-block;background-color:" + Convert.ToString(dtPatchDetails.Rows[j]["HTMLColor"]) + ";height:14px;width:68px;'></span></td>");
+                            PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["SpotName"]) + " </td>");                            
+                            if (measurementID == 0)
+                                PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔL"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["Δa"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["Δb"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE"]) + "</td>");
+                            else
+                                PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_T_P"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_T"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_P"]) + "</td>");
+                            PatchStr.Append("</tr>");
+                        }
+                        PatchStr.Append("</table>");
+
+                        FileStr.Replace("###SpotProjectPatchDetails###", PatchStr.ToString());
+
+                        mainStr.Append(FileStr.ToString());
+
+                        
+
+                        currentIndex = rowLimit;
+                        if ((rowLimit + 44) > dtPatchDetails.Rows.Count)
+                            rowLimit = dtPatchDetails.Rows.Count;
+                        else
+                            rowLimit += 44;
+                    }
+                }
+
+                //
+
+                SBStr.Replace("###SpotProjectPatchDetailsMultiplePages###", mainStr.ToString());
+
                 //** Add Styles Path ***//
                 string cssFullPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/style.css");
                 SBStr.Replace("#csspath#", cssFullPath);
@@ -1948,29 +2012,6 @@ namespace FujifilmUSA.Sync.Common
 
                 //** Add Images Path ***//
                 SBStr.Replace("##IMAGES##", imagesPath);
-
-
-                StringBuilder PatchStr = new StringBuilder();
-                PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>SpotName</th><th>Color</th>");
-                int measurementID = dtPatchDetails != null && dtPatchDetails.Rows.Count > 0 ? Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]) : 0;
-                if (measurementID == 0)
-                    PatchStr.Append("<th>pΔL</th><th>pΔa</th><th>pΔb</th><th>pΔE</th></tr>");
-                else
-                    PatchStr.Append("<th>ΔE_T_P</th><th>ΔE_M_T</th><th>ΔE_M_P</th></tr>");
-                foreach (DataRow row in dtPatchDetails.Rows)
-                {
-                    PatchStr.Append("<tr><td>" + Convert.ToString(row["SpotID"]) + "</td>");
-                    PatchStr.Append("<td>" + Convert.ToString(row["SpotName"]) + " </td>");
-                    PatchStr.Append("<td><span id='sp' style='display:inline-block;background-color:" + Convert.ToString(row["HTMLColor"]) + ";height:14px;width:68px;'></span></td>");
-                    if (measurementID == 0)
-                        PatchStr.Append("<td>" + Convert.ToString(row["ΔL"]) + "</td><td>" + Convert.ToString(row["Δa"]) + "</td><td>" + Convert.ToString(row["Δb"]) + "</td><td>" + Convert.ToString(row["ΔE"]) + "</td>");
-                    else
-                        PatchStr.Append("<td>" + Convert.ToString(row["ΔE_T_P"]) + "</td><td>" + Convert.ToString(row["ΔE_M_T"]) + "</td><td>" + Convert.ToString(row["ΔE_M_P"]) + "</td>");
-                    PatchStr.Append("</tr>");
-                }
-                PatchStr.Append("</table>");
-
-                SBStr.Replace("###SpotProjectPatchDetails###", PatchStr.ToString());
 
                 //========== Assign HTML to theID ==========//
                 //1 : str = The html content.
@@ -1994,6 +2035,29 @@ namespace FujifilmUSA.Sync.Common
 
                 //========== Reduce the top to start the next page from ==========//
                 theDoc.Rect.Inset(0, -1);
+                #region Add Footer
+                theDoc.HPos = 0.0;
+                theDoc.VPos = 0.0;
+                theDoc.Color.String = "255 255 255";
+                theDoc.FontSize = 8;
+
+                theDoc.Rect.String = "-10 0 622 47";
+                for (int i = 1; i <= theCount; i++)
+                {
+                    theDoc.HPos = 0.0;
+                    theDoc.VPos = 0.0;
+                    theDoc.PageNumber = i;
+
+
+                    string str = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"> " +
+                            "<tr style=\"height:25px\"><td align=\"center\" valign=\"middle\" bgcolor=\"#C1C1C1\" style=\"color:#000000; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif;\" width=\"150px\" >" + DateTime.Now.ToLongDateString() + "</td> " +
+                            "<td align=\"center\" valign=\"middle\" bgcolor=\"#C1C1C1\" style=\"color:#000000; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif; \">&copy; Fujifilm " + DateTime.Now.Year.ToString() + "</td> " +
+                            "<td width=\"112px\" align=\"center\" valign=\"middle\" bgcolor=\"#5A5A5A\" style=\"color:#CCCCCC; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif; \">Page " + i.ToString() + " of " + theCount.ToString() + " </td></tr></table>";
+
+                    theDoc.AddImageHtml(str);
+                }
+
+                #endregion
 
                 string pth = PDFPath + PDF_NAME;
 
@@ -2011,6 +2075,135 @@ namespace FujifilmUSA.Sync.Common
                 throw;
             }
         }
+
+        //public void GenerateSpotPatchDetailsReport()
+        //{
+        //    try
+        //    {
+        //        //========== Object of PDF ==========//
+        //        Doc theDoc = new Doc();
+
+        //        //========== Reads the template ==========//
+        //        StreamReader fp;
+
+        //        //========== The rectangle for the content on pdf ==========//
+        //        theDoc.Rect.Left = 0;
+        //        theDoc.Rect.Bottom = 30;
+        //        theDoc.Rect.Width = 610;
+        //        theDoc.Rect.Height = 770;
+
+        //        //========== The page ID Default is 1 ==========//
+        //        int theID;
+
+        //        //========== Adds New Page IN PDF ==========//
+        //        theDoc.Page = theDoc.AddPage();
+        //        //========== Adds a counter to Page ==========//
+        //        theCount++;
+
+        //        string FileName = "Templates/kendoPrepressSpotProjectPatch.htm";
+        //        string FilePath = this._WebURL + FileName;
+
+        //        //========== Reads the template ==========//
+        //        fp = File.OpenText(System.Web.Hosting.HostingEnvironment.MapPath("~/" + FileName));
+        //        StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
+        //        fp.Close();
+        //        //** Add Styles Path ***//
+        //        string cssFullPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/style.css");
+        //        SBStr.Replace("#csspath#", cssFullPath);
+
+        //        //** Add Images Path ***//
+        //        string imagesPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
+        //        SBStr.Replace("##LOGOIMAGES##", imagesPath);
+
+
+        //        //** Add Images Path ***//
+        //        SBStr.Replace("##IMAGES##", imagesPath);
+
+
+        //        StringBuilder PatchStr = new StringBuilder();
+        //        PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>SpotName</th><th>Color</th>");
+        //        int measurementID = dtPatchDetails != null && dtPatchDetails.Rows.Count > 0 ? Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]) : 0;
+        //        if (measurementID == 0)
+        //            PatchStr.Append("<th>pΔL</th><th>pΔa</th><th>pΔb</th><th>pΔE</th></tr>");
+        //        else
+        //            PatchStr.Append("<th>ΔE_T_P</th><th>ΔE_M_T</th><th>ΔE_M_P</th></tr>");
+        //        foreach (DataRow row in dtPatchDetails.Rows)
+        //        {
+        //            PatchStr.Append("<tr><td>" + Convert.ToString(row["SpotID"]) + "</td>");
+        //            PatchStr.Append("<td>" + Convert.ToString(row["SpotName"]) + " </td>");
+        //            PatchStr.Append("<td><span id='sp' style='display:inline-block;background-color:" + Convert.ToString(row["HTMLColor"]) + ";height:14px;width:68px;'></span></td>");
+        //            if (measurementID == 0)
+        //                PatchStr.Append("<td>" + Convert.ToString(row["ΔL"]) + "</td><td>" + Convert.ToString(row["Δa"]) + "</td><td>" + Convert.ToString(row["Δb"]) + "</td><td>" + Convert.ToString(row["ΔE"]) + "</td>");
+        //            else
+        //                PatchStr.Append("<td>" + Convert.ToString(row["ΔE_T_P"]) + "</td><td>" + Convert.ToString(row["ΔE_M_T"]) + "</td><td>" + Convert.ToString(row["ΔE_M_P"]) + "</td>");
+        //            PatchStr.Append("</tr>");
+        //        }
+        //        PatchStr.Append("</table>");
+
+        //        SBStr.Replace("###SpotProjectPatchDetails###", PatchStr.ToString());
+
+        //        //========== Assign HTML to theID ==========//
+        //        //1 : str = The html content.
+        //        //3 : width(612) = The dimension of the page to fix in A4 size paper.
+        //        theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
+
+        //        //========== Leave 30 Px on top of next page ==========//
+        //        theDoc.Rect.Inset(0, 1);
+
+        //        //========== Loops till the paging ==========//
+        //        while (true)
+        //        {
+        //            //========== Create A chanin for a pdf with multiple page ==========//
+        //            if (!theDoc.Chainable(theID))
+        //                break;
+
+        //            theDoc.Page = theDoc.AddPage();
+        //            theCount++;
+        //            theID = theDoc.AddImageToChain(theID);
+        //        }
+
+        //        //========== Reduce the top to start the next page from ==========//
+        //        theDoc.Rect.Inset(0, -1);
+        //        #region Add Footer
+        //        theDoc.HPos = 0.0;
+        //        theDoc.VPos = 0.0;
+        //        theDoc.Color.String = "255 255 255";
+        //        theDoc.FontSize = 8;
+
+        //        theDoc.Rect.String = "-10 0 622 52";
+        //        for (int i = 1; i <= theCount; i++)
+        //        {
+        //            theDoc.HPos = 0.0;
+        //            theDoc.VPos = 0.0;
+        //            theDoc.PageNumber = i;
+
+
+        //            string str = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"> " +
+        //                    "<tr style=\"height:25px\"><td align=\"center\" valign=\"middle\" bgcolor=\"#C1C1C1\" style=\"color:#000000; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif;\" width=\"150px\" >" + DateTime.Now.ToLongDateString() + "</td> " +
+        //                    "<td align=\"center\" valign=\"middle\" bgcolor=\"#C1C1C1\" style=\"color:#000000; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif; \">&copy; Fujifilm " + DateTime.Now.Year.ToString() + "</td> " +
+        //                    "<td width=\"112px\" align=\"center\" valign=\"middle\" bgcolor=\"#5A5A5A\" style=\"color:#CCCCCC; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif; \">Page " + i.ToString() + " of " + theCount.ToString() + " </td></tr></table>";
+
+        //            theDoc.AddImageHtml(str);
+        //        }
+
+        //        #endregion
+
+        //        string pth = PDFPath + PDF_NAME;
+
+        //        // === If same named pdf file is already available then remove === //
+        //        if (System.IO.File.Exists(pth))
+        //            System.IO.File.Delete(pth);
+
+        //        theDoc.Save(pth);
+        //        theDoc.Clear();
+        //        theDoc.Dispose();
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw;
+        //    }
+        //}
 
     }
 
