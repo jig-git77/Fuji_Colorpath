@@ -1672,7 +1672,7 @@ function PopulateAnalyzeChart() {
     pageNumber = parseInt($ddlPaging.val());
 
     if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
-        indexEnd = jsonAnalyzeList.Measurements.length > 1 ? (jsonAnalyzeList.Measurements.length - 1) : jsonAnalyzeList.Measurements.length;
+        indexEnd = jsonAnalyzeList.Measurements.length;
         indexStart = 0;
     } else {
         if (viewNumber != -1) {
@@ -4780,22 +4780,8 @@ function PopulateTVISpreadChart() {
     });
 
     $divChartTVISpread.kendoChart({
-        //title: {
-        //    text: "Cyan"
-        //},
         renderAs: "canvas",
-        //legend: {
-        //    position: "top",
-        //    //labels: {
-        //    //    template: "Name: #= text #"
-        //    //}
-        //},
-        //dataSource: {
-        //    data: jsonSpread_C
-        //},
         series: [
-
-
             {
                 data: jsonSpread_C,
                 type: "line",
@@ -4806,17 +4792,16 @@ function PopulateTVISpreadChart() {
                     visible: function (e) {
                         return e.dataItem.markerDisplay;
                     },
-                    highlight: function (e) {
-                        return e.dataItem.markerDisplay;
-                    },
                     background: "Cyan"
+                },
+                highlight: {
+                    visible: false
                 },
                 tooltip: {
                     visible: true,
                     template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
                 }
             },
-
             {
                 data: jsonSpread_M,
                 type: "line",
@@ -4827,10 +4812,10 @@ function PopulateTVISpreadChart() {
                     visible: function (e) {
                         return e.dataItem.markerDisplay;
                     },
-                    highlight: function (e) {
-                        return e.dataItem.markerDisplay;
-                    },
                     background: "Magenta"
+                },
+                highlight: {
+                    visible: false
                 },
                 tooltip: {
                     visible: true,
@@ -4847,10 +4832,10 @@ function PopulateTVISpreadChart() {
                     visible: function (e) {
                         return e.dataItem.markerDisplay;
                     },
-                    highlight: function (e) {
-                        return e.dataItem.markerDisplay;
-                    },
                     background: "Yellow"
+                },
+                highlight: {
+                    visible: false
                 },
                 tooltip: {
                     visible: true,

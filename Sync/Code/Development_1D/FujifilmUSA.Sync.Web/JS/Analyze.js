@@ -2597,7 +2597,7 @@ function PopulateAnalyzeChart() {
     pageNumber = parseInt($ddlPaging.val());
 
     if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
-        indexEnd = jsonAnalyzeList.Measurements.length > 1 ? (jsonAnalyzeList.Measurements.length - 1) : jsonAnalyzeList.Measurements.length;
+        indexEnd = jsonAnalyzeList.Measurements.length;
         indexStart = 0;
     } else {
         if (viewNumber != -1) {
