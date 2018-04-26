@@ -1670,18 +1670,20 @@ function PopulateAnalyzeChart() {
     var indexEnd = 0;
     viewNumber = parseInt($ddlView.val());
     pageNumber = parseInt($ddlPaging.val());
-    if (viewNumber != -1) {
-        //indexEnd = viewNumber * pageNumber;
-        //indexStart = indexEnd - viewNumber;
-        //indexEnd = indexEnd > jsonAnalyzeList.Measurements.length ? jsonAnalyzeList.Measurements.length : indexEnd;
 
-        indexEnd = jsonAnalyzeList.Measurements.length - ((totalPages - pageNumber) * viewNumber);
-        indexStart = (indexEnd - viewNumber) < 0 ? 0 : (indexEnd - viewNumber);
-
-    } else {
-        indexEnd = jsonAnalyzeList.Measurements.length - 1;
+    if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
+        indexEnd = jsonAnalyzeList.Measurements.length > 1 ? (jsonAnalyzeList.Measurements.length - 1) : jsonAnalyzeList.Measurements.length;
         indexStart = 0;
+    } else {
+        if (viewNumber != -1) {
+            indexEnd = jsonAnalyzeList.Measurements.length - ((totalPages - pageNumber) * viewNumber);
+            indexStart = (indexEnd - viewNumber) < 0 ? 0 : (indexEnd - viewNumber);
+        } else {
+            indexEnd = jsonAnalyzeList.Measurements.length - 1;
+            indexStart = 0;
+        }
     }
+
 
     $('#lblPagingMsg').html('Record(s) ' + (indexStart + 1) + ' to ' + (indexEnd) + ' of ' + jsonAnalyzeList.Measurements.length + '');
 
@@ -3396,7 +3398,7 @@ function PopulateSummaryDeltaChart() {
     //reverse the chart bars to show valuesaxis labels to top
     summarySeries = summarySeries.reverse();
     stackedChart = stackedChart.reverse();
-    categoryList = categoryList .reverse();
+    categoryList = categoryList.reverse();
     var thrashHold = { paths: [] };
     $divChartSummaryDeltaChart.kendoChart({
         renderAs: "canvas",
@@ -3474,7 +3476,7 @@ function PopulateSummaryDeltaChart() {
                 font: "12px Arial,Helvetica,sans-serif"
             },
             max: maxValue,
-            margin: marginValue            
+            margin: marginValue
         },
         //tooltip: {
         //    visible: true,
@@ -5274,7 +5276,7 @@ function GetABComparisionSpiderChartImage() {
 //    return chart.imageDataURL();
 //}
 
-function GetInkPaperPatchChartImage() {    
+function GetInkPaperPatchChartImage() {
     var chart = $divChartInkPaperABComparision.data("kendoChart");
     var kendoOptions = $divChartInkPaperABComparision.data("kendoChart").options;
     var kendodataSource = $divChartInkPaperABComparision.data("kendoChart").dataSource;

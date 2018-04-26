@@ -707,8 +707,8 @@ function BindAnalyzeChart() {
                 } else {
                     $('#divAnalyzePagingSection').css('display', 'block');
 
-                }                
-                BindPageNumber();                
+                }
+                BindPageNumber();
             }
         },
         error: function (xhr, errorType, exception) {
@@ -2595,19 +2595,19 @@ function PopulateAnalyzeChart() {
     var indexEnd = 0;
     viewNumber = parseInt($ddlView.val());
     pageNumber = parseInt($ddlPaging.val());
-    if (viewNumber != -1) {
-        //indexEnd = viewNumber * pageNumber;
-        //indexStart = indexEnd - viewNumber;
-        //indexEnd = indexEnd > jsonAnalyzeList.Measurements.length ? jsonAnalyzeList.Measurements.length : indexEnd;
 
-        indexEnd = jsonAnalyzeList.Measurements.length - ((totalPages - pageNumber) * viewNumber);
-        indexStart = (indexEnd - viewNumber) < 0 ? 0 : (indexEnd - viewNumber);
-
-    } else {
-        indexEnd = jsonAnalyzeList.Measurements.length - 1;
+    if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
+        indexEnd = jsonAnalyzeList.Measurements.length > 1 ? (jsonAnalyzeList.Measurements.length - 1) : jsonAnalyzeList.Measurements.length;
         indexStart = 0;
+    } else {
+        if (viewNumber != -1) {
+            indexEnd = jsonAnalyzeList.Measurements.length - ((totalPages - pageNumber) * viewNumber);
+            indexStart = (indexEnd - viewNumber) < 0 ? 0 : (indexEnd - viewNumber);
+        } else {
+            indexEnd = jsonAnalyzeList.Measurements.length - 1;
+            indexStart = 0;
+        }
     }
-
     $('#lblPagingMsg').html('Record(s) ' + (indexStart + 1) + ' to ' + (indexEnd) + ' of ' + jsonAnalyzeList.Measurements.length + '');
 
 
