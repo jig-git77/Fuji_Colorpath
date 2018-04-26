@@ -1959,48 +1959,54 @@ namespace FujifilmUSA.Sync.Common
                 if (dtPatchDetails.Rows.Count < rowPerPage)
                     rowLimit = dtPatchDetails.Rows.Count;
 
-
+                string patchBodyStr = "";
                 StringBuilder mainStr = new StringBuilder();
                 for (int i = 0; i < totalPages; i++)
                 {
-                    //for (int j = 0; j < 10; j++)
+                    StringBuilder FileStr = null;
+                    if (patchBodyStr == "")
                     {
                         StreamReader fs = File.OpenText(System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/SpotPatchTableReport.htm"));
-                        StringBuilder FileStr = new StringBuilder(fs.ReadToEnd());
+                        patchBodyStr = fs.ReadToEnd();
+                        FileStr = new StringBuilder(patchBodyStr);
                         fs.Close();
-
-                        StringBuilder PatchStr = new StringBuilder();
-                        PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>Color</th><th>SpotName</th>");
-                        if (measurementID == 0)
-                            PatchStr.Append("<th>pΔL</th><th>pΔa</th><th>pΔb</th><th>pΔE</th></tr>");
-                        else
-                            PatchStr.Append("<th>ΔE_T_P</th><th>ΔE_M_T</th><th>ΔE_M_P</th></tr>");
-                        //foreach (DataRow row in dtPatchDetails.AsEnumerable().fi(5).CopyToDataTable())
-                        for (int j = currentIndex; j < rowLimit; j++)
-                        {
-                            PatchStr.Append("<tr><td>" + Convert.ToString(dtPatchDetails.Rows[j]["SpotID"]) + "</td>");
-                            PatchStr.Append("<td><span id='sp' style='display:inline-block;background-color:" + Convert.ToString(dtPatchDetails.Rows[j]["HTMLColor"]) + ";height:14px;width:68px;'></span></td>");
-                            PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["SpotName"]) + " </td>");
-                            if (measurementID == 0)
-                                PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔL"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["Δa"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["Δb"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE"]) + "</td>");
-                            else
-                                PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_T_P"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_T"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_P"]) + "</td>");
-                            PatchStr.Append("</tr>");
-                        }
-                        PatchStr.Append("</table>");
-
-                        FileStr.Replace("###SpotProjectPatchDetails###", PatchStr.ToString());
-
-                        mainStr.Append(FileStr.ToString());
-
-
-
-                        currentIndex = rowLimit;
-                        if ((rowLimit + rowPerPage) > dtPatchDetails.Rows.Count)
-                            rowLimit = dtPatchDetails.Rows.Count;
-                        else
-                            rowLimit += rowPerPage;
                     }
+                    else
+                    {
+                        FileStr = new StringBuilder(patchBodyStr);
+                    }
+
+                    StringBuilder PatchStr = new StringBuilder();
+                    PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>Color</th><th>SpotName</th>");
+                    if (measurementID == 0)
+                        PatchStr.Append("<th>pΔL</th><th>pΔa</th><th>pΔb</th><th>pΔE</th></tr>");
+                    else
+                        PatchStr.Append("<th>ΔE_T_P</th><th>ΔE_M_T</th><th>ΔE_M_P</th></tr>");
+                    //foreach (DataRow row in dtPatchDetails.AsEnumerable().fi(5).CopyToDataTable())
+                    for (int j = currentIndex; j < rowLimit; j++)
+                    {
+                        PatchStr.Append("<tr><td>" + Convert.ToString(dtPatchDetails.Rows[j]["SpotID"]) + "</td>");
+                        PatchStr.Append("<td><span id='sp' style='display:inline-block;background-color:" + Convert.ToString(dtPatchDetails.Rows[j]["HTMLColor"]) + ";height:14px;width:68px;'></span></td>");
+                        PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["SpotName"]) + " </td>");
+                        if (measurementID == 0)
+                            PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔL"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["Δa"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["Δb"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE"]) + "</td>");
+                        else
+                            PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_T_P"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_T"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_P"]) + "</td>");
+                        PatchStr.Append("</tr>");
+                    }
+                    PatchStr.Append("</table>");
+
+                    FileStr.Replace("###SpotProjectPatchDetails###", PatchStr.ToString());
+
+                    mainStr.Append(FileStr.ToString());
+
+
+
+                    currentIndex = rowLimit;
+                    if ((rowLimit + rowPerPage) > dtPatchDetails.Rows.Count)
+                        rowLimit = dtPatchDetails.Rows.Count;
+                    else
+                        rowLimit += rowPerPage;
                 }
 
                 //
