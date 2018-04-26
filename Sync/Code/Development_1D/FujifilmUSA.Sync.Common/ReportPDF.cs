@@ -361,7 +361,7 @@ namespace FujifilmUSA.Sync.Common
                 StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
                 fp.Close();
                 SBStr = SetPDFContent(SBStr);
-                
+
                 theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
                 theDoc.Rect.Inset(0, 1);
 
@@ -1916,6 +1916,7 @@ namespace FujifilmUSA.Sync.Common
         {
             try
             {
+                int rowPerPage = 44;
                 //========== Object of PDF ==========//
                 Doc theDoc = new Doc();
 
@@ -1949,11 +1950,16 @@ namespace FujifilmUSA.Sync.Common
                 if (dtSpotPatchDetails.Rows.Count > 0)
                 {
                     measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
-                    totalPages = (dtSpotPatchDetails.Rows.Count / 44) + 1;
+                    totalPages = (dtSpotPatchDetails.Rows.Count / rowPerPage) + 1;
                 }
 
+                int rowLimit = rowPerPage;
+
                 int currentIndex = 0;
-                int rowLimit = 44;
+                if (dtPatchDetails.Rows.Count < rowPerPage)
+                    rowLimit = dtPatchDetails.Rows.Count;
+
+
                 StringBuilder mainStr = new StringBuilder();
                 for (int i = 0; i < totalPages; i++)
                 {
@@ -1964,7 +1970,7 @@ namespace FujifilmUSA.Sync.Common
                         fs.Close();
 
                         StringBuilder PatchStr = new StringBuilder();
-                        PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>Color</th><th>SpotName</th>");                        
+                        PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>Color</th><th>SpotName</th>");
                         if (measurementID == 0)
                             PatchStr.Append("<th>pΔL</th><th>pΔa</th><th>pΔb</th><th>pΔE</th></tr>");
                         else
@@ -1974,7 +1980,7 @@ namespace FujifilmUSA.Sync.Common
                         {
                             PatchStr.Append("<tr><td>" + Convert.ToString(dtPatchDetails.Rows[j]["SpotID"]) + "</td>");
                             PatchStr.Append("<td><span id='sp' style='display:inline-block;background-color:" + Convert.ToString(dtPatchDetails.Rows[j]["HTMLColor"]) + ";height:14px;width:68px;'></span></td>");
-                            PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["SpotName"]) + " </td>");                            
+                            PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["SpotName"]) + " </td>");
                             if (measurementID == 0)
                                 PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔL"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["Δa"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["Δb"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE"]) + "</td>");
                             else
@@ -1987,13 +1993,13 @@ namespace FujifilmUSA.Sync.Common
 
                         mainStr.Append(FileStr.ToString());
 
-                        
+
 
                         currentIndex = rowLimit;
-                        if ((rowLimit + 44) > dtPatchDetails.Rows.Count)
+                        if ((rowLimit + rowPerPage) > dtPatchDetails.Rows.Count)
                             rowLimit = dtPatchDetails.Rows.Count;
                         else
-                            rowLimit += 44;
+                            rowLimit += rowPerPage;
                     }
                 }
 
