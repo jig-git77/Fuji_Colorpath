@@ -5303,18 +5303,17 @@ function GetLComparisionChartImage() {
 
 ////**************** GET IMAGE OF L-BALANCE CHART FOR REPORT  ****************////
 function Get_L_BalanceChartImage() {
-
     if ($hdnValidationType == 2) {
 
         if ($hdnSync1DType == 'True') {
 
             var kendoOptions = $chart_L_BalanceChart.data("kendoChart").options;
-            var kendodataSource = $chart_L_BalanceChart.data("kendoChart").dataSource;
-            kendoOptions.chartArea.width = 600;
-            kendoOptions.chartArea.height = 250;
+            var kendodataSource = $chart_L_BalanceChart.data("kendoChart").dataSource;            
             $('#kendoChartDummyBalanceL').kendoChart(kendoOptions);
             var dummyChart = $('#kendoChartDummyBalanceL').data('kendoChart');
             dummyChart.dataSource = kendodataSource;
+            dummyChart.options.chartArea.width = 600;
+            dummyChart.options.chartArea.height = 250;
             dummyChart.options.transitions = false;
             dummyChart.refresh();
             return dummyChart.imageDataURL();
@@ -5333,11 +5332,11 @@ function Get_A_BalanceChartImage() {
 
             var kendoOptions = $chart_A_BalanceChart.data("kendoChart").options;
             var kendodataSource = $chart_A_BalanceChart.data("kendoChart").dataSource;
-            kendoOptions.chartArea.width = 600;
-            kendoOptions.chartArea.height = 250;
             $('#kendoChartDummyBalanceA').kendoChart(kendoOptions);
             var dummyChart = $('#kendoChartDummyBalanceA').data('kendoChart');
             dummyChart.dataSource = kendodataSource;
+            dummyChart.options.chartArea.width = 600;
+            dummyChart.options.chartArea.height = 250;
             dummyChart.options.transitions = false;
             dummyChart.refresh();
             return dummyChart.imageDataURL();
@@ -5356,11 +5355,11 @@ function Get_B_BalanceChartImage() {
 
             var kendoOptions = $chart_B_BalanceChart.data("kendoChart").options;
             var kendodataSource = $chart_B_BalanceChart.data("kendoChart").dataSource;
-            kendoOptions.chartArea.width = 600;
-            kendoOptions.chartArea.height = 250;
             $('#kendoChartDummyBalanceB').kendoChart(kendoOptions);
             var dummyChart = $('#kendoChartDummyBalanceB').data('kendoChart');
             dummyChart.dataSource = kendodataSource;
+            dummyChart.options.chartArea.width = 600;
+            dummyChart.options.chartArea.height = 250;
             dummyChart.options.transitions = false;
             dummyChart.refresh();
             return dummyChart.imageDataURL();
