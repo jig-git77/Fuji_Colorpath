@@ -796,6 +796,7 @@
     <Content Include="Images\browsericons.png" />
     <Content Include="Images\browsericons_1.png" />
     <Content Include="Images\buttonLeft.png" />
+    <Content Include="Images\buttonloader.gif" />
     <Content Include="Images\buttonNormal.png" />
     <Content Include="Images\buttonRight.png" />
     <Content Include="Images\center-content-whitebg.png" />
@@ -6224,7 +6225,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

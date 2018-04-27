@@ -20,6 +20,29 @@
             text-align: left;
         }
 
+    .spinner {
+        opacity: 0;
+        display: none;
+        width: 20px;
+        height: 10px;
+        margin-bottom: 5px;
+        -webkit-transition: opacity 0.25s, max-width 0.45s;
+        -moz-transition: opacity 0.25s, max-width 0.45s;
+        -o-transition: opacity 0.25s, max-width 0.45s;
+        transition: opacity 0.25s, max-width 0.45s;
+        /* Duration fixed since we animate additional hidden width */
+    }
+
+    .has-spinner.active {
+        cursor: progress;
+    }
+
+        .has-spinner.active .spinner {
+            display: inline-block;
+            opacity: 1;
+            max-width: 50px;
+            /* More than it will ever come, notice that this affects on animation duration */
+        }
     /*#tblSecondRunDeltas td{
         min-width:60px;
     }*/
@@ -241,7 +264,7 @@
             },
             //toolbar: [{ 'name': 'downloadPatch', template: '<div style="float:right;"><button id="btnDownloadSpotPatch" onclick="generateReport(' + optimizationId + ')" class=\'k-button\'>Export to PDF</button></div>' }],
             toolbar: [{
-                'name': 'downloadPatch', template: '<div style="float:right;"><a id="lnkLinkFilter" title="Clear filter"><img id="imgClearFilter" src="Images/clear-fillter.png" style="width: 15px;margin-top: 5px;margin-right: 5px;"></img></a><button id="btnDownloadSpotPatchExcel" data-id="' + optimizationId + '" class=\'k-button\' style="margin-right: 5px;">Export to Excel</button><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button\'>Export to PDF</button></div>'
+                'name': 'downloadPatch', template: '<div style="float:right;"><a id="lnkLinkFilter" title="Clear filter"><img id="imgClearFilter" src="Images/clear-fillter.png" style="width: 15px;margin-top: 5px;margin-right: 5px;"></img></a><button id="btnDownloadSpotPatchExcel" data-id="' + optimizationId + '" class=\'k-button has-spinner\' style="margin-right: 5px;"><span class="spinner"><img src="Images/buttonloader.gif" /></span>Export to Excel</button><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button has-spinner\'><span class="spinner"><img src="Images/buttonloader.gif" /></span>Export to PDF</button></div>'
             }],
             columns: [
                 {
@@ -359,7 +382,7 @@
                     obj.dtype = grid.dataSource.options.schema.model.fields[obj.field].type;
                 });
             }
-            
+
             //create object
             var filterObj = {
                 OptimizationRunId: optimizationRun,
@@ -383,17 +406,18 @@
             //        alert(exception);
             //    }
             //});
-            kendo.ui.progress($('#tab2'), true);
+            //kendo.ui.progress($('#tab2'), true);
+            $('#btnDownloadSpotPatch').addClass('active');
             debugger;
             var request = new XMLHttpRequest();
             request.open("POST", SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsReport', true);
             request.setRequestHeader("content-type", "application/json");
             request.responseType = "blob";
-            request.onload = function (e) {
-
+            request.onload = function (e) {                
+                $('#btnDownloadSpotPatch').removeClass('active');
                 if (this.status === 200) {
                     // `blob` response
-                    console.log(this.response);
+                    //console.log(this.response);
                     // create `objectURL` of `this.response` : `.pdf` as `Blob`
                     var file = window.URL.createObjectURL(this.response);
                     var a = document.createElement("a");
@@ -411,7 +435,7 @@
             };
             request.send(JSON.stringify(filterObj));
 
-            kendo.ui.progress($('#tab2'), false);
+            //kendo.ui.progress($('#tab2'), false);
 
         })
 
@@ -436,7 +460,7 @@
                     obj.dtype = grid.dataSource.options.schema.model.fields[obj.field].type;
                 });
             }
-           
+
             //create object
             var filterObj = {
                 OptimizationRunId: optimizationRun,
@@ -460,17 +484,17 @@
             //        alert(exception);
             //    }
             //});
-            kendo.ui.progress($('#tab2'), true);
+            $('#btnDownloadSpotPatchExcel').addClass('active');
             debugger;
             var request = new XMLHttpRequest();
             request.open("POST", SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsExcelReport', true);
             request.setRequestHeader("content-type", "application/json");
             request.responseType = "blob";
             request.onload = function (e) {
-
+                $('#btnDownloadSpotPatchExcel').removeClass('active');
                 if (this.status === 200) {
                     // `blob` response
-                    console.log(this.response);
+                    //console.log(this.response);
                     // create `objectURL` of `this.response` : `.pdf` as `Blob`
                     var file = window.URL.createObjectURL(this.response);
                     var a = document.createElement("a");
@@ -482,13 +506,13 @@
                     // `window` regains `focus`
                     window.onfocus = function () {
                         document.body.removeChild(a)
-                    }                    
-                    kendo.ui.progress($('#tab2'), false);
+                    }
+
                 };
             };
             request.send(JSON.stringify(filterObj));
 
-            kendo.ui.progress($('#tab2'), false);
+            //kendo.ui.progress($('#tab2'), false);
         })
         
     });
@@ -835,7 +859,7 @@
                                     <div class="tab_middle">
                                         <div class="combopart">
                                             <div style="padding-left: 10px;">
-                                                <div id="divPathDetails"></div>
+                                                <div id="divPathDetails"></div>                                                
                                             </div>
                                             <div class="clear"></div>
                                         </div>

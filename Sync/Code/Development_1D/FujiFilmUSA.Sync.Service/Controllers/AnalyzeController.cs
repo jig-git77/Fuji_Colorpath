@@ -247,11 +247,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                 objReportPDF.dtSpotPatchDetails = dt;
                 objReportPDF.PDF_NAME = model.OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
-                objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");                
+                objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
                 objReportPDF.GenerateSpotPatchDetailsReport();
 
                 string filePath = objReportPDF.PDFPath + objReportPDF.PDF_NAME;
-
+                
                 var dataBytes = File.ReadAllBytes(filePath);
                 //adding bytes to memory stream   
                 var dataStream = new MemoryStream(dataBytes);
@@ -262,7 +262,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
                 httpResponseMessage.Content.Headers.ContentDisposition.FileName = objReportPDF.PDF_NAME;
                 httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
-
             }
             catch (Exception ex)
             {
@@ -295,9 +294,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 DataView view = new DataView(dt);                
                 DataTable cTable = new DataTable();
                 if (measurementID > 0)
-                    cTable = view.ToTable(false, "SpotID", "SpotName", "HTMLColor", "ΔE_T_P", "ΔE_M_T", "ΔE_M_P");
+                    cTable = view.ToTable(false, "SpotID", "HTMLColor", "SpotName", "ΔE_T_P", "ΔE_M_T", "ΔE_M_P");
                 else
-                    cTable = view.ToTable(false, "SpotID", "SpotName", "HTMLColor", "ΔL", "Δa", "Δb", "ΔE");
+                    cTable = view.ToTable(false, "SpotID", "HTMLColor", "SpotName", "ΔL", "Δa", "Δb", "ΔE");
                 
 
                 ReportPDF objReportPDF = new ReportPDF();
@@ -346,7 +345,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                                 ws.Cell("G" + (i + 2)).Value = cTable.Rows[i][6]; ;
 
                             // Changing color to to html color
-                            ws.Cells("C" + (i + 2)).Style.Fill.BackgroundColor = XLColor.FromHtml(cTable.Rows[i]["HTMLColor"].ToString());
+                            ws.Cells("B" + (i + 2)).Style.Fill.BackgroundColor = XLColor.FromHtml(cTable.Rows[i]["HTMLColor"].ToString());
                         }
                     }
                     wb.SaveAs(filePath);

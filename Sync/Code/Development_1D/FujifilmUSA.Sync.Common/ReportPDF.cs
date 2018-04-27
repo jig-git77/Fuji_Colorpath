@@ -1937,7 +1937,7 @@ namespace FujifilmUSA.Sync.Common
                 //========== Adds a counter to Page ==========//
                 theCount++;
 
-                string FileName = "Templates/kendoPrepressSpotProjectPatch.htm";
+                string FileName = "Templates/kendoPrepressSpotProjectPatchNew.htm";
                 string FilePath = this._WebURL + FileName;
 
                 //========== Reads the template ==========//
@@ -2024,7 +2024,6 @@ namespace FujifilmUSA.Sync.Common
 
                 //** Add Images Path ***//
                 SBStr.Replace("##IMAGES##", imagesPath);
-
                 //========== Assign HTML to theID ==========//
                 //1 : str = The html content.
                 //3 : width(612) = The dimension of the page to fix in A4 size paper.
@@ -2070,7 +2069,6 @@ namespace FujifilmUSA.Sync.Common
                 }
 
                 #endregion
-
                 string pth = PDFPath + PDF_NAME;
 
                 // === If same named pdf file is already available then remove === //
@@ -2119,6 +2117,7 @@ namespace FujifilmUSA.Sync.Common
         //        fp = File.OpenText(System.Web.Hosting.HostingEnvironment.MapPath("~/" + FileName));
         //        StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
         //        fp.Close();
+
         //        //** Add Styles Path ***//
         //        string cssFullPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/style.css");
         //        SBStr.Replace("#csspath#", cssFullPath);
@@ -2131,7 +2130,7 @@ namespace FujifilmUSA.Sync.Common
         //        //** Add Images Path ***//
         //        SBStr.Replace("##IMAGES##", imagesPath);
 
-
+                
         //        StringBuilder PatchStr = new StringBuilder();
         //        PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>SpotName</th><th>Color</th>");
         //        int measurementID = dtPatchDetails != null && dtPatchDetails.Rows.Count > 0 ? Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]) : 0;

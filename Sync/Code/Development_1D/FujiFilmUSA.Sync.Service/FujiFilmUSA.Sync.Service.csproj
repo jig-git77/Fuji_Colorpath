@@ -121,6 +121,7 @@
     <Content Include="Templates\kendoPrepressSingleMeasurement_G7.htm" />
     <Content Include="Templates\kendoPrepressSingleMeasurement_ISO.htm" />
     <Content Include="Templates\kendoPrepressSpotProjectPatch.htm" />
+    <Content Include="Templates\kendoPrepressSpotProjectPatchNew.htm" />
     <Content Include="Templates\kendoScoringMeasurement_Default.htm" />
     <Content Include="Templates\SpotPatchTableReport.htm" />
     <Content Include="Templates\style.css" />
