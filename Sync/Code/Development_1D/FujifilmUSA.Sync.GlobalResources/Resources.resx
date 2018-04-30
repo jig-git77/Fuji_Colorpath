@@ -1107,8 +1107,8 @@
   <data name="ESourceProfileCategory_NorthAmericanStandards" xml:space="preserve">
     <value>North American Standards</value>
   </data>
-  <data name="ESourceProfileCategory_EuropianStandards" xml:space="preserve">
-    <value>Europian Standards</value>
+  <data name="ESourceProfileCategory_EuropeanStandards" xml:space="preserve">
+    <value>European Standards</value>
   </data>
   <data name="ESourceProfileCategory_JapanStandards" xml:space="preserve">
     <value>Japan Standards</value>

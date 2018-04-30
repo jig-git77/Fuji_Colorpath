@@ -2590,11 +2590,11 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Europian Standards.
+        ///   Looks up a localized string similar to European Standards.
         /// </summary>
-        internal static string ESourceProfileCategory_EuropianStandards {
+        internal static string ESourceProfileCategory_EuropeanStandards {
             get {
-                return ResourceManager.GetString("ESourceProfileCategory_EuropianStandards", resourceCulture);
+                return ResourceManager.GetString("ESourceProfileCategory_EuropeanStandards", resourceCulture);
             }
         }
         

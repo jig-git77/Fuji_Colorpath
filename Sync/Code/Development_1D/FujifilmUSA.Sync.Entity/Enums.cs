@@ -595,7 +595,7 @@ namespace FujifilmUSA.Sync.Entity
         All = 0,
         [Description("ESourceProfileCategory_NorthAmericanStandards")] //North American Standards
         NorthAmericanStandards = 1,
-        [Description("ESourceProfileCategory_EuropianStandards")] //Europian Standards
+        [Description("ESourceProfileCategory_EuropeanStandards")] //European Standards
         EuropianStandards = 2,
         [Description("ESourceProfileCategory_JapanStandards")] //Japan Standards
         JapanStandards = 3,
