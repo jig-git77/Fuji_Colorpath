@@ -5808,7 +5808,9 @@
     <Content Include="UserControl\App_LocalResources\DownloadSoftwares.ascx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\Export.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\Export.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\Footer.ascx.fr.resx" />
@@ -6225,7 +6227,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
