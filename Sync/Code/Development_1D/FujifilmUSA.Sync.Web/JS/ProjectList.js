@@ -307,8 +307,11 @@ $(document).ready(function () {
                             dataType: "json",
                             success: function (response) {
                                 if (response.data.length > 0) {
+                                    var filterdData = response.data.filter(function (el) {
+                                        return el.LicenseTypeId !== 10;
+                                    });
                                     element.kendoDropDownList({
-                                        dataSource: response.data,
+                                        dataSource: filterdData,
                                         dataTextField: "Type",
                                         dataValueField: "LicenseTypeId",
                                     });

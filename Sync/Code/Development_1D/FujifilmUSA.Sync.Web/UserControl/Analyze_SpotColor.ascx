@@ -192,6 +192,12 @@
                                 type: "number",
                                 //format: "{n4}"
                             },
+                            ΔE: {
+                                from: "ΔE",
+                                type: "number",
+                                //format: "{n4}"
+                            },
+                            
                             Measured_L: {
                                 from: "Measured_L",
                                 type: "number",
@@ -243,6 +249,14 @@
             filterable: {
                 extra: false,
                 operators: {
+                    number: {
+                        eq: "Is equal to",
+                        neq: "Is not equal to",
+                        gte: "Is greater than or equal to",
+                        gt: "Is greater than",
+                        lte: "Is less than or equal to",
+                        lt: "Is less than"
+                    },
                     string: {
                         eq: "Is equal to",
                         neq: "Is not equal to",
