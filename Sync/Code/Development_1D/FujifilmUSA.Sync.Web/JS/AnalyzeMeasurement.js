@@ -1272,7 +1272,7 @@ function BindMeasurementPatchDetails() {
         //});
     });
 
-    $divMeasurementPatchDetails.find('#btnExportCFX').on('click', function (e) {
+    $divMeasurementPatchDetails.find('#btnExportCxF').on('click', function (e) {
         e.preventDefault();
         var measurementID = parseInt($hdnCurrentMeasurement.val());
         var selectedMatricSum = '';

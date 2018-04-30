@@ -1329,7 +1329,7 @@
                                                                 <img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;margin-top: 5px;margin-right: 5px;'></img>
                                                             </a>
                                                             <button id="btnExportCGATS" class="k-button">Export to CGATS</button>
-                                                            <button id="btnExportCFX" class="k-button">Export to CFX</button>
+                                                            <button id="btnExportCxF" class="k-button">Export to CxF</button>
                                                             
                                                         </div>
                                         </script>

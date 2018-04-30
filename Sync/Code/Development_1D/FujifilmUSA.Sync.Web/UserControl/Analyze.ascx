@@ -3679,7 +3679,7 @@
                                                         </div>
                                                         <div class="toolbar" style="float:right;">
                                                             <button id="btnExportCGATS" class="k-button">Export to CGATS</button>
-                                                            <button id="btnExportCFX" class="k-button">Export to CFX</button>
+                                                            <button id="btnExportCxF" class="k-button">Export to CxF</button>
                                                             
                                                         </div>
                                                     </script>
