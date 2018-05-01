@@ -4564,14 +4564,18 @@ function PopulateTVISpreadChart() {
 
     var splineRangeResultList = $.grep(jsonDTSpreadSplineRangeChartDataList, function (element) { return element.UpperLimit != 0 && element.LowerLimit != 0 });
 
-    var obj = Object.assign({}, splineRangeResultList[0]);
+    //var obj = Object.assign({}, splineRangeResultList[0]);
+    var obj = {};
+    CopyObject(splineRangeResultList[0], obj)
     obj.UpperLimit = null;
     obj.LowerLimit = null;
     obj.TVI = 0;
 
     splineRangeResultList.push(obj);
 
-    obj = Object.assign({}, splineRangeResultList[0])
+    obj = {};
+    //obj = Object.assign({}, splineRangeResultList[0])
+    CopyObject(splineRangeResultList[0], obj)
     obj.UpperLimit = null;
     obj.LowerLimit = null;
     obj.TVI = 100;
@@ -4673,7 +4677,9 @@ function PopulateTVISpreadChart() {
 
     $.each(unionArr, function (index, obj) {
         if ($.inArray(obj, arrY) == -1) {
-            var newObj = Object.assign({}, jsonSpread_Y[0]);
+            //var newObj = Object.assign({}, jsonSpread_Y[0]);
+            var newObj = {};
+            CopyObject(jsonSpread_Y[0], newObj)
             newObj.CmykY = obj;
             newObj.markerDisplay = false;
             arrNewY.push(newObj);
@@ -4698,7 +4704,9 @@ function PopulateTVISpreadChart() {
 
     $.each(unionArr, function (index, obj) {
         if ($.inArray(obj, arrM) == -1) {
-            var newObj = Object.assign({}, jsonSpread_M[0]);
+            //var newObj = Object.assign({}, jsonSpread_M[0]);
+            var newObj = {};
+            CopyObject(jsonSpread_M[0], newObj)
             newObj.CmykM = obj;
             newObj.markerDisplay = false;
             arrNewM.push(newObj);
@@ -4723,7 +4731,9 @@ function PopulateTVISpreadChart() {
 
     $.each(unionArr, function (index, obj) {
         if ($.inArray(obj, arrC) == -1) {
-            var newObj = Object.assign({}, jsonSpread_C[0]);
+            //var newObj = Object.assign({}, jsonSpread_C[0]);
+            var newObj = {};
+            CopyObject(jsonSpread_C[0], newObj)
             newObj.CmykC = obj;
             newObj.markerDisplay = false;
             arrNewC.push(newObj);
@@ -4754,7 +4764,9 @@ function PopulateTVISpreadChart() {
         if (foundTVI.length > 0) {
             splineArray.push(foundTVI[0]);
         } else {
-            var newObj = Object.assign({}, splineRangeResultList[0]);
+            //var newObj = Object.assign({}, splineRangeResultList[0]);
+            var newObj = {};
+            CopyObject(splineRangeResultList[0], newObj)
             newObj.TVI = elem.CmykC;
             splineArray.push(newObj);
         }
@@ -5057,7 +5069,10 @@ function PopulateTVIG7Chart() {
 
     //load the chart again to adjust the xAxis lables according to negative values
     var chart = $divChartTVISummaryDotGain.data("kendoChart");
-    var yArray = chart._plotArea.axisY.children.map(r => parseInt(r.content));
+    //var yArray = chart._plotArea.axisY.children.map(r => parseInt(r.content));
+    var yArray = $.map(chart._plotArea.axisY.children, function (elem) {
+        return parseInt(elem.content);
+    });
     var minValue = Math.abs(Math.min.apply(Math, yArray));
     if (minValue > 0) {
         var kendoOptions = chart.options;
@@ -5129,9 +5144,14 @@ function renderChartWithBackgroundByAxis(e) {
 
         var xAxis = chart.getAxis("xAxis");
         var yAxis = chart.getAxis("yAxis");
-        var xAxisArray = xAxis._axis.children.map(r => parseFloat(r.content));
-        var yAxisArray = yAxis._axis.children.map(r => parseFloat(r.content));
-
+        //var xAxisArray = xAxis._axis.children.map(r => parseFloat(r.content));
+        //var yAxisArray = yAxis._axis.children.map(r => parseFloat(r.content));
+        var xAxisArray = $.map(xAxis._axis.children, function (elem) {
+            return parseFloat(elem.content);
+        });
+        var yAxisArray = $.map(yAxis._axis.children, function (elem) {
+            return parseFloat(elem.content);
+        });
 
         if (chart.element[0].id == "kendoChartTargetVersusActualABDummy"
             || chart.element[0].id == "kendoChartGamut_ABComparisonDummy" || chart.element[0].id == "kendoChartABalanceChart"
@@ -5204,7 +5224,11 @@ function renderChartWithBackgroundByCategory(e) {
     //get value axis object
     var valueAxis = chart.getAxis("valueAxis");
     //get maximum value from the value axis
-    var maxValue = Math.abs(Math.max.apply(Math, valueAxis._axis.children.map(r => parseFloat(r.content))))
+    //var maxValue = Math.abs(Math.max.apply(Math, valueAxis._axis.children.map(r => parseFloat(r.content))))
+    var maxValueArray = $.map(valueAxis._axis.children, function (elem) {
+        return elem.content;
+    });
+    var maxValue = Math.abs(Math.max.apply(Math, maxValueArray))
     //get top slot
     var valueSlot = valueAxis.slot(maxValue);
 
@@ -5308,7 +5332,7 @@ function Get_L_BalanceChartImage() {
         if ($hdnSync1DType == 'True') {
 
             var kendoOptions = $chart_L_BalanceChart.data("kendoChart").options;
-            var kendodataSource = $chart_L_BalanceChart.data("kendoChart").dataSource;            
+            var kendodataSource = $chart_L_BalanceChart.data("kendoChart").dataSource;
             $('#kendoChartDummyBalanceL').kendoChart(kendoOptions);
             var dummyChart = $('#kendoChartDummyBalanceL').data('kendoChart');
             dummyChart.dataSource = kendodataSource;
@@ -5552,4 +5576,10 @@ function arrayUnique(array) {
     }
 
     return a;
+}
+
+function CopyObject(sourceObj,destObj) {
+    Object.keys(sourceObj).forEach(function (k) {
+        destObj[k] = sourceObj[k];
+    });
 }

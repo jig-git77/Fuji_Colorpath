@@ -220,7 +220,7 @@
         }
     }
 </script>
-<script src="JS/ChartTooltip.js" type="text/javascript"></script>
+<%--<script src="JS/ChartTooltip.js" type="text/javascript"></script>--%>
 <script language="javascript" type="text/javascript">
     function funTVIVisiblity() {
         document.getElementById("trTVI").style.display = "";
