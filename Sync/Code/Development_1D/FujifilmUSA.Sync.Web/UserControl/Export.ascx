@@ -10,7 +10,7 @@
 <script src="JS/Export.js" type="text/javascript"></script>
 <style>
     .k-grid td {
-        font-size:12px;
+        font-size:11px;
         padding: 0.2em .4em !important;
         text-align: center;
     }    
@@ -341,7 +341,7 @@
                                                     <asp:ListItem Text="Rampage" meta:resourcekey="RampageResource1" Value="15"></asp:ListItem>
                                                     <asp:ListItem Text="XMF" meta:resourcekey="XMFResource1" Value="25"></asp:ListItem>
                                                     <asp:ListItem Text="Harmony" meta:resourcekey="HarmonyResource1" Value="35"></asp:ListItem>
-                                                    <asp:ListItem Text="Nexus" Value="45" meta:resourcekey="NexusResource1"></asp:ListItem>
+                                                    <asp:ListItem Text="Nexus" meta:resourcekey="NexusResource1" Value="45"></asp:ListItem>
                                                     <asp:ListItem Text="Caldera" meta:resourcekey="CalderaResource1" Value="55"></asp:ListItem>
                                                     <asp:ListItem Text="ColorGate-TVI" meta:resourcekey="ColTVIResource1" Value="100"></asp:ListItem>
                                                     <asp:ListItem Text="ColorGate-CGCX" meta:resourcekey="ColCGCXResource1" Value="101"></asp:ListItem>
@@ -387,20 +387,7 @@
                                                 <div id="Chart_Delta"></div>
                                             </td>
                                             <td style="width: 40%">
-                                                <%--<table class="scrollableTable" id="tblDeltaView" style="width: 100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Reference%</th>
-                                                            <th>C</th>
-                                                            <th>M</th>
-                                                            <th>Y</th>
-                                                            <th>K</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody data-template="export-summary" data-bind="source: CurveDeltaRefView"></tbody>
-                                                    
-                                                </table>--%>
-                                    <div class="scrollableTable" id="tblDeltaView" style="width: 100%"></div>
+                                                <div class="scrollableTable" id="tblDeltaView" style="width: 100%"></div>
                                             </td>
                                         </tr>
                                         <tr>

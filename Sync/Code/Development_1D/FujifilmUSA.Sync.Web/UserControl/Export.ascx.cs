@@ -61,6 +61,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     trExportViewForSync1D.Visible = true;
                     trAdvancedDownload.Visible = false;
+                    drpCurveType.SelectedValue = SessionManager.Instance.CurrentProject.CurveTypeID.ToString(); //--Display last time selected value first time page load
                 }
                 else
                 {

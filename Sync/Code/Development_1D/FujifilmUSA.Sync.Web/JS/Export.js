@@ -178,7 +178,7 @@ function BindExportView(result) {
                 field: "ReferenceNo",
                 filterable: false,
                 title: "<center><b title='Reference%'>Reference%</b></center>",
-                width: '85px',
+                width: '80px',
             },
             {
                 field: "CMYK_C",
@@ -358,7 +358,7 @@ function BindDeltaView(result) {
                 field: "ReferenceNo",
                 filterable: false,
                 title: "<center><b title='Reference%'>Reference%</b></center>",
-                width: '85px',
+                width: '80px',
             },
             {
                 field: "CMYK_C",
