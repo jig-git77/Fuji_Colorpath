@@ -602,7 +602,8 @@ function detailInit(e) {
                         row.find("td #imgSpotProject").attr('title', SpotprojectTypeTooltip);   //set the Spot project type tooltip
                     }
 
-                    var gridCurrent = row[0].closest('.k-grid');
+                    var gridCurrent = $(row[0]).closest('.k-grid');
+                    console.log(gridCurrent);
                     if (!data.isAllowSpotProject) {
                         $(gridCurrent).find('.k-grid-toolbar').hide();
                     } else {
@@ -722,5 +723,28 @@ function deleteProject(id) {
 
 function Redirect(projectID, type) {
     document.location.href = 'RedirectFromProjectList.aspx?RedirectType=' + type + '&ProjectID=' + projectID;
+    return false;
+}
+
+function ShowSpotClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName) {
+    var oWindow;
+    oWindow = window.radopen("PopupSpotClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+    oWindow.show();
+    return false;
+}
+
+function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns, isSpotProject) {
+    if (isSpotProject === undefined) {
+        isSpotProject = false;
+    }
+    var oWindow;
+    oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&isSpotProject=" + isSpotProject, "OpenPrintConditionWindow");
+    oWindow.show();
+    return false;
+}
+function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName) {
+    var oWindow;
+    oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+    oWindow.show();
     return false;
 }

@@ -29,29 +29,6 @@
             return false;
     }
 </script>
-<script type="text/javascript" language="javascript">   
-    function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns, isSpotProject) {
-        if (isSpotProject === undefined) {
-            isSpotProject = false;
-        }
-        var oWindow;
-        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&isSpotProject=" + isSpotProject, "OpenPrintConditionWindow");
-        oWindow.show();
-        return false;
-    }
-    function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName, ) {
-        var oWindow;
-        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
-        oWindow.show();
-        return false;
-    }
-    function ShowSpotClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName) {
-        var oWindow;
-        oWindow = window.radopen("PopupSpotClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
-        oWindow.show();
-        return false;
-    }
-</script>
 <script language="javascript" type="text/javascript">
     function CloseOpenPrintConditionWindow() {
         var oWnd = $find("<%= OpenPrintConditionWindow.ClientID %>");
