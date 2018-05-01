@@ -1356,6 +1356,7 @@ namespace FujifilmUSA.Sync.Common
                             SBstrDeltaEValue.Append("</tr>");
                         }
                     }
+
                     SBStr.Replace("###DeltaESummaryDetail###", SBstrDeltaEValue.ToString());
                 }
                 else
@@ -1555,6 +1556,28 @@ namespace FujifilmUSA.Sync.Common
                         SBStr.Replace("###DeltaSummaryDetail###", "");
                     }
                     SBStr.Replace("###ResultSummary_DeltaImage###", this.chartContent.DeltaSummaryChart);
+                    string summaryChartHeight = "";
+                    if (DT.Rows.Count == 3)
+                    {
+                        summaryChartHeight = "120px";
+                    }
+                    else if (DT.Rows.Count == 4)
+                    {
+                        summaryChartHeight = "150px";
+                    }
+                    else if (DT.Rows.Count == 6)
+                    {
+                        summaryChartHeight = "210px";
+                    }
+                    else if (DT.Rows.Count == 12)
+                    {
+                        summaryChartHeight = "400px";
+                    }
+                    else
+                    {
+                        summaryChartHeight = "150px";
+                    }
+                    SBStr.Replace("###Summary_DeltaImageHeight###", summaryChartHeight);
                     #endregion
                 }
 
@@ -2130,7 +2153,7 @@ namespace FujifilmUSA.Sync.Common
         //        //** Add Images Path ***//
         //        SBStr.Replace("##IMAGES##", imagesPath);
 
-                
+
         //        StringBuilder PatchStr = new StringBuilder();
         //        PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>SpotName</th><th>Color</th>");
         //        int measurementID = dtPatchDetails != null && dtPatchDetails.Rows.Count > 0 ? Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]) : 0;
