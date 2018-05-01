@@ -8,6 +8,14 @@
 
 <script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
 <script src="JS/Export.js" type="text/javascript"></script>
+<style>
+    .k-grid td {
+        font-size:12px;
+        padding: 0.2em .4em !important;
+        text-align: center;
+    }    
+    
+</style>
 <script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {
         $("div[id*='divAdvancedDownloadsHeader']").click
@@ -172,15 +180,6 @@
                                 <div style="border-style: None; padding: 5px">
                                     <table>
                                         <tbody>
-                                            <%--<tr>
-                                                    <td>
-                                                        <span>
-                                                            <asp:Localize runat="server"
-                                                                Text="Download DLP and Implement in Workflow :"
-                                                                ID="Localize8"
-                                                                meta:resourcekey="locDownloadDLPAndImplementWorkflowResource1"></asp:Localize></span>
-                                                    </td>
-                                                </tr>--%>
                                             <tr>
                                                 <td>
                                                     <asp:LinkButton ID="lbtnExportCMYK" runat="server" CssClass="gray_bt" OnClick="lbtnExportCMYK_Click">
@@ -298,17 +297,7 @@
                                                      </asp:LinkButton>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                   <%-- <asp:LinkButton ID="lbtnExportCMYK" runat="server" CssClass="gray_bt" Visible="false" OnClick="lbtnExportCMYK_Click">
-                                                        <span>
-                                                            <asp:Localize runat="server" Text="Export CMYK"
-                                                                ID="locExportCMYK"
-                                                                meta:resourcekey="locExportCMYKResource"></asp:Localize>
-                                                        </span>
-                                                    </asp:LinkButton>--%>
-                                                </td>
-                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -325,7 +314,7 @@
             </tr>
             <tr id="trExportViewForSync1D" runat="server" visible="false">
                 <td>
-                   <asp:HiddenField ID="HD_CurveType" runat="server" Value="1"></asp:HiddenField>
+                    <asp:HiddenField ID="HD_CurveType" runat="server" Value="1" ClientIDMode="Static"></asp:HiddenField>
                     <div class="demo-section k-content">
                         <div id="tabstrip">
                             <ul>
@@ -345,7 +334,7 @@
                                         <tr>
                                             <td colspan="2" style="padding: 5px">
                                                 <asp:Localize ID="Localize3" runat="server" Text="Curve Type :" meta:resourcekey="locCurveTypeResource1"></asp:Localize>
-                                                <asp:DropDownList ID="drpCurveType" ClientIDMode="Static" runat="server" Width="120px">
+                                                <asp:DropDownList ID="drpCurveType" ClientIDMode="Static" runat="server" Width="150px">
                                                     <asp:ListItem Text="1%" meta:resourcekey="onepersResource1" Value="1"></asp:ListItem>
                                                     <asp:ListItem Text="5%" meta:resourcekey="fivepersResource1" Value="5"></asp:ListItem>
                                                     <asp:ListItem Text="10%" meta:resourcekey="tenpersResource1" Value="10"></asp:ListItem>
@@ -367,24 +356,13 @@
                                             </td>
 
                                             <td style="width: 40%">
-                                                <table class="scrollableTable" id="tblExport" style="width: 100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Reference%</th>
-                                                            <th>C</th>
-                                                            <th>M</th>
-                                                            <th>Y</th>
-                                                            <th>K</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody data-template="export-summary" data-bind="source: CurveExportView"></tbody>
-                                                </table>
+                                                <div class="scrollableTable" id="tblExport" style="width: 100%"></div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="2" align="right" style="padding-right: 15px; padding-top: 10px;">&nbsp;
-                                                <asp:Button ID="BtnExportCurvesExportView" runat="server" CssClass="BUTTON" Text="Export Curves"
-                                                    OnClick="BtnExportCurvesExportView_Click" meta:resourcekey="BtnExportCurvesExportViewResource1" />
+                                                <asp:Button ID="BtnExportCurvesExportView" runat="server" CssClass="BUTTON" Text="Export Curves" ClientIDMode="Static"
+                                                    meta:resourcekey="BtnExportCurvesExportViewResource1" />
                                             </td>
                                         </tr>
                                     </table>
@@ -409,7 +387,7 @@
                                                 <div id="Chart_Delta"></div>
                                             </td>
                                             <td style="width: 40%">
-                                                <table class="scrollableTable" id="tblDeltaView" style="width: 100%">
+                                                <%--<table class="scrollableTable" id="tblDeltaView" style="width: 100%">
                                                     <thead>
                                                         <tr>
                                                             <th>Reference%</th>
@@ -420,7 +398,9 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody data-template="export-summary" data-bind="source: CurveDeltaRefView"></tbody>
-                                                </table>
+                                                    
+                                                </table>--%>
+                                    <div class="scrollableTable" id="tblDeltaView" style="width: 100%"></div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -446,20 +426,7 @@
 </div>
 <div class="clear">
 </div>
-<%--<td data-bind="text: CMYK_C, style: { backgroundColor: #E0F3FF }"></td>
-        <td data-bind="text: CMYK_M, style: { backgroundColor: #FFEFF9 }" ></td>
-        <td data-bind="text: CMYK_Y, style: { backgroundColor: #FFFDEE }" ></td>
-        <td data-bind="text: CMYK_K, style: { backgroundColor: #E7EBEE }" ></td>--%>
 <asp:HiddenField ID="hdnExportCurveSelectedTabIndex" runat="server" Value="0" />
 <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="hdnOptimizationRunID" ClientIDMode="Static" />
-<script id="export-summary" type="text/x-kendo-template">   
-    <tr>        
-        <td data-bind="text: ReferenceNo"></td>
-        <td data-bind="text: CMYK_C"></td>
-        <td data-bind="text: CMYK_M" ></td>
-        <td data-bind="text: CMYK_Y" ></td>
-        <td data-bind="text: CMYK_K" ></td>
-    </tr>
-</script>

@@ -39,15 +39,18 @@ $(document).ready(function () {
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
     $hdnOptimizationRunID = $('#hdnOptimizationRunID').val();
 
-   
 
-    $drpCurveType.kendoDropDownList();
 
-  
-    
+    $drpCurveType.kendoDropDownList({
+        height: 1000        
+    });
+
+
+
     BindChart();
     $drpCurveType.on('change', function (e) {
         e.preventDefault();
+        $('#HD_CurveType').val($(this).val());
         BindChart();
     });
     $("#tabstrip").kendoTabStrip({
@@ -57,12 +60,53 @@ $(document).ready(function () {
             }
         }
     });
+
+
+    $('#BtnExportCurvesExportView').on('click', function (e) {
+        e.preventDefault();
+        var curveTypeID = parseInt($drpCurveType.val());
+
+        var apiParam = {
+            OptimizationRunId: parseInt($hdnOptimizationRunID),
+            CurveType: curveTypeID
+        };
+
+        $.ajax({
+            type: "GET",
+            url: SERVICE_BASE_URL + 'api/Chart/ExportGenerateCurveChart',
+            data: apiParam,
+            dataType: "json",
+            success: function (response) {
+                if (response.data != null) {
+                    console.log(response.data);
+                    var fileName = '~' + response.data;
+                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.responseText);
+            }
+        });
+
+    });
 });
 
 function BindChart() {
+
+    var curveTypeID = parseInt($drpCurveType.val());
+    //---Set same value for "ColorGate-TVI" and "ColorGate-CGCX" like "5%" for export curve data
+    if (curveTypeID == 100 || curveTypeID == 101) {
+        curveTypeID = 5;
+    }
+
+    //---Set same value for "Onyx G7 Import" like "Nexus" for export curve data
+    if (curveTypeID == 102) {
+        curveTypeID = 45;
+    }
+
     var apiParameters = {
         OptimizationRunId: $hdnOptimizationRunID,
-        CurveType: $drpCurveType.val(),
+        CurveType: curveTypeID,
     };
 
 
@@ -78,8 +122,6 @@ function BindChart() {
         success: function (response) {
             if (response.data != null) {
                 _Resources = response.data.GlobalResources;
-                //BindExportView(response.data.CurveExportView);
-                //BindDeltaView(response.data.CurveDeltaRefView, response.data.CurveDeltaPrevRunView);
                 BindExportView(response.data);
                 BindDeltaView(response.data);
             }
@@ -87,30 +129,91 @@ function BindChart() {
         error: function (xhr, errorType, exception) {
             kendo.ui.progress($chartLoader, false);
         }
-    });    
+    });
 }
 
 function BindExportView(result) {
-    
+
     var kendoGrid = $("#tblExport").data("kendoGrid");
-    kendo.bind($("#tblExport"), result);
-    
-    if (kendoGrid) {       
-    }
-    else {
-        $("#tblExport").kendoGrid({
-            pageable: false,
-            scrollable: true,
-            height: 400,
-            dataBound: function (e) {
-                $(e.sender.tbody).find("tr td:nth-child(2)").css('background-color', '#E0F3FF');
-                $(e.sender.tbody).find("tr td:nth-child(3)").css('background-color', '#FFEFF9');
-                $(e.sender.tbody).find("tr td:nth-child(4)").css('background-color', '#FFFDEE');
-                $(e.sender.tbody).find("tr td:nth-child(5)").css('background-color', '#E7EBEE');
+
+    $("#tblExport").kendoGrid({
+        dataSource: {
+            data: result.CurveExportView
+        },
+        schema: {
+            model: {
+                fields: {
+                    ReferenceNo: {
+                        from: "ReferenceNo",
+                        type: "number",
+                    },
+                    CMYK_C: {
+                        from: "CMYK_C",
+                        type: "number",
+                        format: "{n4}"
+                    },
+                    CMYK_M: {
+                        from: "CMYK_M",
+                        type: "number",
+                        format: "{n4}"
+                    },
+                    CMYK_Y: {
+                        from: "CMYK_Y",
+                        type: "number",
+                        format: "{n4}"
+                    },
+                    CMYK_K: {
+                        from: "CMYK_K",
+                        type: "number",
+                        format: "{n4}"
+                    },
+                }
             }
-        });
-    }
-    
+        },
+        pageable: false,
+        scrollable: true,
+        height: 400,
+        columns: [
+            {
+                field: "ReferenceNo",
+                filterable: false,
+                title: "<center><b title='Reference%'>Reference%</b></center>",
+                width: '85px',
+            },
+            {
+                field: "CMYK_C",
+                filterable: false,
+                title: "<center><b title='C'>C</b></center>",
+                width: '41px'
+            },
+            {
+                field: "CMYK_M",
+                filterable: false,
+                title: "<center><b title='M'>M</b></center>",
+                width: '41px'
+            },
+            {
+                field: "CMYK_Y",
+                filterable: false,
+                title: "<center><b title='Y'>Y</b></center>",
+                width: '41px'
+            },
+            {
+                field: "CMYK_K",
+                filterable: false,
+                title: "<center><b title='K'>K</b></center>",
+                width: '41px'
+            }
+        ],
+        dataBound: function (e) {
+            $(e.sender.tbody).find("tr td:nth-child(2)").css('background-color', '#E0F3FF');
+            $(e.sender.tbody).find("tr td:nth-child(3)").css('background-color', '#FFEFF9');
+            $(e.sender.tbody).find("tr td:nth-child(4)").css('background-color', '#FFFDEE');
+            $(e.sender.tbody).find("tr td:nth-child(5)").css('background-color', '#E7EBEE');
+        }
+    });
+
+
 
     var listC = {
         name: "Cyan",
@@ -177,7 +280,7 @@ function BindExportView(result) {
             labels: {
                 format: "{0}"
             },
-           
+
         },
         //tooltip: {
         //    visible: true,
@@ -194,24 +297,101 @@ function BindExportView(result) {
 
 function BindDeltaView(result) {
 
-    var kendoGrid = $("#tblDeltaView").data("kendoGrid");
-    kendo.bind($("#tblDeltaView"), result);
+    //var kendoGrid = $("#tblDeltaView").data("kendoGrid");
+    //kendo.bind($("#tblDeltaView"), result);
 
-    if (kendoGrid) {
-    }
-    else {
-        $("#tblDeltaView").kendoGrid({
-            pageable: false,
-            scrollable: true,
-            height: 400,
-            dataBound: function (e) {
-                $(e.sender.tbody).find("tr td:nth-child(2)").css('background-color', '#E0F3FF');
-                $(e.sender.tbody).find("tr td:nth-child(3)").css('background-color', '#FFEFF9');
-                $(e.sender.tbody).find("tr td:nth-child(4)").css('background-color', '#FFFDEE');
-                $(e.sender.tbody).find("tr td:nth-child(5)").css('background-color', '#E7EBEE');
+    //if (kendoGrid) {
+    //}
+    //else {
+    //    $("#tblDeltaView").kendoGrid({
+    //        pageable: false,
+    //        scrollable: true,
+    //        height: 400,
+    //        dataBound: function (e) {
+    //            $(e.sender.tbody).find("tr td:nth-child(2)").css('background-color', '#E0F3FF');
+    //            $(e.sender.tbody).find("tr td:nth-child(3)").css('background-color', '#FFEFF9');
+    //            $(e.sender.tbody).find("tr td:nth-child(4)").css('background-color', '#FFFDEE');
+    //            $(e.sender.tbody).find("tr td:nth-child(5)").css('background-color', '#E7EBEE');
+    //        }
+    //    });
+    //}
+
+    $("#tblDeltaView").kendoGrid({
+        dataSource: {
+            data: result.CurveDeltaRefView
+        },
+        schema: {
+            model: {
+                fields: {
+                    ReferenceNo: {
+                        from: "ReferenceNo",
+                        type: "number",
+                    },
+                    CMYK_C: {
+                        from: "CMYK_C",
+                        type: "number",
+                        format: "{n4}"
+                    },
+                    CMYK_M: {
+                        from: "CMYK_M",
+                        type: "number",
+                        format: "{n4}"
+                    },
+                    CMYK_Y: {
+                        from: "CMYK_Y",
+                        type: "number",
+                        format: "{n4}"
+                    },
+                    CMYK_K: {
+                        from: "CMYK_K",
+                        type: "number",
+                        format: "{n4}"
+                    },
+                }
             }
-        });
-    }
+        },
+        pageable: false,
+        scrollable: true,
+        height: 400,
+        columns: [
+            {
+                field: "ReferenceNo",
+                filterable: false,
+                title: "<center><b title='Reference%'>Reference%</b></center>",
+                width: '85px',
+            },
+            {
+                field: "CMYK_C",
+                filterable: false,
+                title: "<center><b title='C'>C</b></center>",
+                width: '41px'
+            },
+            {
+                field: "CMYK_M",
+                filterable: false,
+                title: "<center><b title='M'>M</b></center>",
+                width: '41px'
+            },
+            {
+                field: "CMYK_Y",
+                filterable: false,
+                title: "<center><b title='Y'>Y</b></center>",
+                width: '41px'
+            },
+            {
+                field: "CMYK_K",
+                filterable: false,
+                title: "<center><b title='K'>K</b></center>",
+                width: '41px'
+            }
+        ],
+        dataBound: function (e) {
+            $(e.sender.tbody).find("tr td:nth-child(2)").css('background-color', '#E0F3FF');
+            $(e.sender.tbody).find("tr td:nth-child(3)").css('background-color', '#FFEFF9');
+            $(e.sender.tbody).find("tr td:nth-child(4)").css('background-color', '#FFFDEE');
+            $(e.sender.tbody).find("tr td:nth-child(5)").css('background-color', '#E7EBEE');
+        }
+    });
 
     var listC = {
         name: "Cyan",
