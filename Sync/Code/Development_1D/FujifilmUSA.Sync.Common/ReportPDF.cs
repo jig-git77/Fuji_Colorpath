@@ -1556,28 +1556,6 @@ namespace FujifilmUSA.Sync.Common
                         SBStr.Replace("###DeltaSummaryDetail###", "");
                     }
                     SBStr.Replace("###ResultSummary_DeltaImage###", this.chartContent.DeltaSummaryChart);
-                    string summaryChartHeight = "";
-                    if (DT.Rows.Count == 3)
-                    {
-                        summaryChartHeight = "120px";
-                    }
-                    else if (DT.Rows.Count == 4)
-                    {
-                        summaryChartHeight = "150px";
-                    }
-                    else if (DT.Rows.Count == 6)
-                    {
-                        summaryChartHeight = "210px";
-                    }
-                    else if (DT.Rows.Count == 12)
-                    {
-                        summaryChartHeight = "400px";
-                    }
-                    else
-                    {
-                        summaryChartHeight = "150px";
-                    }
-                    SBStr.Replace("###Summary_DeltaImageHeight###", summaryChartHeight);
                     #endregion
                 }
 

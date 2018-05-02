@@ -3399,6 +3399,40 @@ function PopulateSummaryDeltaChart() {
     summarySeries = summarySeries.reverse();
     stackedChart = stackedChart.reverse();
     categoryList = categoryList.reverse();
+    
+
+    var chartHeight = 150;
+    if (summarySeries.length == 3) {
+        chartHeight = 130;
+    }
+    else if (summarySeries.length == 4) {
+        chartHeight = 170;
+    }
+    else if (summarySeries.length == 5) {
+        chartHeight = 205;
+    }
+    else if (summarySeries.length == 6) {
+        chartHeight = 240;
+    }
+    else if (summarySeries.length == 7) {
+        chartHeight = 268;
+    }
+    else if (summarySeries.length == 8) {
+        chartHeight = 300;
+    }
+    else if (summarySeries.length == 9) {
+        chartHeight = 335;
+    }
+    else if (summarySeries.length == 10) {
+        chartHeight = 375;
+    }
+    else if (summarySeries.length == 11) {
+        chartHeight = 410;
+    }
+    else if (summarySeries.length == 12) {
+        chartHeight = 440;
+    }
+
     var thrashHold = { paths: [] };
     $divChartSummaryDeltaChart.kendoChart({
         renderAs: "canvas",
@@ -3485,7 +3519,7 @@ function PopulateSummaryDeltaChart() {
         //},
         chartArea: {
             width: 400,
-            height: 250
+            height: chartHeight
         },
         render: function (e) {
 
