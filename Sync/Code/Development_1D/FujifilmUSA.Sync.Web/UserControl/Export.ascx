@@ -10,11 +10,10 @@
 <script src="JS/Export.js" type="text/javascript"></script>
 <style>
     .k-grid td {
-        font-size:11px;
+        font-size: 11px;
         padding: 0.2em .4em !important;
         text-align: center;
-    }    
-    
+    }
 </style>
 <script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {
@@ -361,7 +360,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2" align="right" style="padding-right: 15px; padding-top: 10px;">&nbsp;
-                                                <asp:Button ID="BtnExportCurvesExportView" runat="server" CssClass="BUTTON" Text="Export Curves" ClientIDMode="Static"
+                                                <asp:Button ID="BtnExportCurvesExportView" runat="server" CssClass="k-button" Text="Export Curves" ClientIDMode="Static"
                                                     meta:resourcekey="BtnExportCurvesExportViewResource1" />
                                             </td>
                                         </tr>
@@ -373,13 +372,13 @@
                                 <div>
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                         <tr>
-                                            <td colspan="2">
-                                                <asp:RadioButtonList ID="rbtnDetlaReflistClient" runat="server" AutoPostBack="True"
-                                                    OnSelectedIndexChanged="rbtnDetlaReflistClient_SelectedIndexChanged"
-                                                    RepeatDirection="Horizontal">
-                                                    <asp:ListItem Text="&#916;Ref" Value="0" Selected="True" meta:resourcekey="locRefResource1"></asp:ListItem>
-                                                    <asp:ListItem Text="&#916;Previous Run" Value="1" meta:resourcekey="locPreRunResource1"></asp:ListItem>
+                                            <td colspan="2">                                                                                             
+                                                <asp:RadioButtonList ID="rbtnDetlaReflistClient" runat="server" RepeatDirection="Horizontal"
+                                                    CssClass="RadioList" ClientIDMode="Static">
+                                                    <asp:ListItem Text="ΔRef" Value="0" Selected="0"></asp:ListItem>
+                                                    <asp:ListItem Text="ΔPrevious Run" Value="1"></asp:ListItem>
                                                 </asp:RadioButtonList>
+
                                             </td>
                                         </tr>
                                         <tr style="border: solid 1px; vertical-align: top;">
@@ -392,9 +391,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2" align="right" style="padding-right: 15px; padding-top: 10px;">
-
-                                                <asp:Button ID="BtnExportCurvesDeltaView" runat="server" CssClass="BUTTON" Text="Export Delta"
-                                                    OnClick="BtnExportCurvesDeltaView_Click" meta:resourcekey="BtnExportCurvesDeltaViewResource1" />
+                                                <asp:Button ID="BtnExportCurvesDeltaView" runat="server" CssClass="k-button" Text="Export Delta" meta:resourcekey="BtnExportCurvesDeltaViewResource1" ClientIDMode="Static" />
                                             </td>
                                         </tr>
                                     </table>
@@ -417,3 +414,4 @@
 <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="hdnOptimizationRunID" ClientIDMode="Static" />
+<asp:HiddenField runat="server" ID="hdnCurveFileName" ClientIDMode="Static" />

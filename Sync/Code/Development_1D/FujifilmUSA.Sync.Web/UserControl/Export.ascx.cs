@@ -62,6 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trExportViewForSync1D.Visible = true;
                     trAdvancedDownload.Visible = false;
                     drpCurveType.SelectedValue = SessionManager.Instance.CurrentProject.CurveTypeID.ToString(); //--Display last time selected value first time page load
+                    hdnCurveFileName.Value = SessionManager.Instance.CurrentProject.ProjectName + " " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00");
                 }
                 else
                 {
@@ -101,7 +102,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         trAdvancedDownload.Visible = true;
                     }
                 }
-                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
+                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary && 
+                    (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 || 
+                    (SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId == SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId)))
                 {
                     rbtnDetlaReflistClient.Items[1].Enabled = false;
                 }
@@ -418,87 +421,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #endregion
             }
         }
-
-        
-        protected void BtnExportCurvesDeltaView_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (SessionManager.Instance.CurveDeltaRefView == null || SessionManager.Instance.CurveDeltaPrevRunView == null)
-                {
-                    BindCurve(Convert.ToInt16(drpCurveType.SelectedValue)); //-----Rebind session if session is empty.
-                }
-
-                List<Entity.CPSync1D.OptimizeRunCurve> DT_CurveDelta = new List<Entity.CPSync1D.OptimizeRunCurve>();
-                if (rbtnDetlaReflistClient.Items[0].Enabled == true && rbtnDetlaReflistClient.Items[0].Selected == true)
-                {
-                    DT_CurveDelta = (List<Entity.CPSync1D.OptimizeRunCurve>)SessionManager.Instance.CurveDeltaRefView;
-                }
-                else { DT_CurveDelta = (List<Entity.CPSync1D.OptimizeRunCurve>)SessionManager.Instance.CurveDeltaPrevRunView; }
-
-                if (DT_CurveDelta != null)
-                {
-                    if (!Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile")))
-                        Directory.CreateDirectory(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile"));
-
-                    string CurveFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00");
-
-                    #region Create file and download txt file for all curve types
-                    //---------------For all Curve Types -------------------//
-                    System.IO.StreamWriter sw;
-                    sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CurveDelta.txt");
-                    sw.WriteLine("\"Fujifilm Colorpath Sync 1D\"");
-                    sw.WriteLine("BEGIN_DATA_FORMAT");
-                    sw.WriteLine("Reference\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
-                    sw.WriteLine("END_DATA_FORMAT");
-                    sw.WriteLine("NUMBER_OF_SETS\t" + DT_CurveDelta.Count);
-                    sw.WriteLine("BEGIN_DATA");
-                    for (int i = 0; i < DT_CurveDelta.Count; i++)
-                    {
-                        sw.WriteLine(DT_CurveDelta[i].ReferenceNo.ToString() + "\t" + DT_CurveDelta[i].CMYK_C.ToString() + "\t" + DT_CurveDelta[i].CMYK_M.ToString() + "\t" + DT_CurveDelta[i].CMYK_Y.ToString() + "\t" + DT_CurveDelta[i].CMYK_K.ToString());
-                    }
-                    sw.WriteLine("END_DATA");
-                    sw.Close();
-
-                    Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurveDelta.txt", CurveFileName + "_CurveDelta.txt");
-                    #endregion
-                }
-            }
-            catch (Exception Exc)
-            {
-                throw Exc;
-            }
-        }
-
-        protected void rbtnDetlaReflistClient_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BindCurve(Convert.ToInt16(drpCurveType.SelectedValue));
-        }
-
         #endregion
 
-        #region Methods
-        private void BindCurve(short _CurveTypeID)
-        {
-            this.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-            if (_CurveTypeID == 100 || _CurveTypeID == 101) //---Set same value for "ColorGate-TVI" and "ColorGate-CGCX" like "5%" for export curve data
-            {
-                _CurveTypeID = 5;
-            }
-            if (_CurveTypeID == 102) //---Set same value for "Onyx G7 Import" like "Nexus" for export curve data
-            {
-                _CurveTypeID = 45;
-            }
-            this.CurveTypeId = _CurveTypeID;
-            _presenterExport.GetCurveData();
-            if (!IsErrorOccured)
-            {
-                SessionManager.Instance.CurveExportView = this.CurveData.CurveExportView;
-                SessionManager.Instance.CurveDeltaRefView = this.CurveData.CurveDeltaRefView;
-                SessionManager.Instance.CurveDeltaPrevRunView = this.CurveData.CurveDeltaPrevRunView;
-            }
-        }
-
+        #region Methods       
         //Get density of LabL to export CMYK values
         double GetNdensity(double Lab_L)
         {
