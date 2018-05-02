@@ -99,7 +99,7 @@ $(document).ready(function () {
             OptimizationRunId: parseInt($hdnOptimizationRunID),
             CurveType: curveTypeID,
             ExportFileName: $hdnExportFileName,
-            isCurrentRun: true
+            isCurrentRun: isCurrentDeltaSelected
         };
 
         $.ajax({
