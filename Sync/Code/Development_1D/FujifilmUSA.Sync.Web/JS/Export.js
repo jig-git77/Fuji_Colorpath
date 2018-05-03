@@ -503,8 +503,12 @@ function renderChartWithBackgroundByAxis(e) {
     var chart = e.sender;
     var xAxis = chart.getAxis("xAxis");
     var yAxis = chart.getAxis("yAxis");
-    var xAxisArray = xAxis._axis.children.map(r => parseFloat(r.content));
-    var yAxisArray = yAxis._axis.children.map(r => parseFloat(r.content));
+    var xAxisArray = $.map(xAxis._axis.children, function (elem) {
+        return parseFloat(elem.content);
+    });
+    var yAxisArray = $.map(yAxis._axis.children, function (elem) {
+        return parseFloat(elem.content);
+    });
 
 
     xSlot = xAxis.slot(Math.abs(Math.min.apply(Math, xAxisArray)), Math.abs(Math.max.apply(Math, xAxisArray)));
