@@ -2536,7 +2536,7 @@ function PopulateInkPaperChartABComparision() {
             width: 250,
             height: 180
         },
-        render: renderChartWithBackgroundByAxis
+       // render: renderChartWithBackgroundByAxis
         //plotArea: {
         //    background: "lightgray"
         //}
@@ -3183,7 +3183,7 @@ function PopulateChartLGrayBalance() {
             markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB + ': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
+                template: '<table><tr><td><center><b>' + '#= kendo.toString(dataItem.CmykC,"n0") #' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB + ': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
             }
         }],
         xAxis: {
@@ -3249,7 +3249,7 @@ function PopulateChartLGrayBalance() {
             markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB + ': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
+                template: '<table><tr><td><center><b>' + '#= kendo.toString(dataItem.CmykC,"n0") #' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB + ': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
             }
         }],
         xAxis: {
@@ -3314,7 +3314,7 @@ function PopulateChartLGrayBalance() {
             markers: { background: "Black", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>100% ' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB + ': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
+                template: '<table><tr><td><center><b>' + '#= kendo.toString(dataItem.CmykC,"n0") #' + _Resources._recgbPatchMetrics + '</b></center><td></tr><tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ' : #= kendo.toString(dataItem.CielabL,"n") # ' + _Resources._recA + ': #= kendo.toString(dataItem.CielabA,"n")# ' + _Resources._recB + ' #= kendo.toString(dataItem.CielabB,"n")#</td></tr><tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': #=kendo.toString(dataItem.TargetL,"n")# ' + _Resources._recA + ': #=kendo.toString(dataItem.Targeta,"n")# ' + _Resources._recB + ': #=kendo.toString(dataItem.Targetb,"n")#</td></tr><tr><td>' + _Resources._recDeltaL + '   #=kendo.toString(dataItem.ΔL,"n")#</td></tr><tr><td>' + _Resources._recDeltaA + '   #=kendo.toString(dataItem.Δa,"n")#</td></tr><tr><td>' + _Resources._recDeltaB + '   #=kendo.toString(dataItem.Δb,"n")#</td></tr></table>'
             }
         }],
         xAxis: {
@@ -5232,7 +5232,7 @@ function renderChartWithBackgroundByAxis(e) {
             ]);
 
 
-        if (chart.element[0].id == "kendoChartTargetVersusActualABDummy" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparisonDummy" || chart.element[0].id == "divChartInkPaperPaperLab1") {
+        if (chart.element[0].id == "kendoChartTargetVersusActualABDummy" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparisonDummy") {
             path = drawing.Path.fromRect(rect, {
                 stroke: null,
                 fill: gradientRedGreen
