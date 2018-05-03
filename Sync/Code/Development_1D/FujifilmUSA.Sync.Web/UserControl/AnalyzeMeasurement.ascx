@@ -64,18 +64,22 @@
         border: 1px solid;
         font: 12px/16px "segoe ui",arial,sans-serif;
     }
+
         .summaryMetricTable tr {
             pointer-events: none;
         }
+
         .summaryMetricTable th {
             border-bottom: 1px solid Gray;
             text-align: left;
             padding-left: 5px;
         }
+
         .summaryMetricTable td {
             border-width: 0 0 0 0px;
             line-height: 1.3em;
         }
+
         .summaryMetricTable tr:nth-child(even) {
             background: #F2F2F2;
         }
@@ -812,7 +816,9 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <td align="center">
-                                                                                <div id="divChartInkPaperPaperLab1"></div>
+                                                                                <div id="divTest" class="gamutChart">
+                                                                                    <div id="divChartInkPaperPaperLab1"></div>
+                                                                                </div>
                                                                             </td>
 
                                                                             <td align="center">
@@ -1156,6 +1162,7 @@
                                                                                             <div id="divChartInkPaperDummy"></div>
                                                                                             <div id="kendoChartGamut_ABComparisonDummy"></div>
                                                                                             <div id="kendoChartTargetVersusActualABDummy"></div>
+                                                                                            <div id="kendoChartInkPaperLabOneDummy"></div>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>

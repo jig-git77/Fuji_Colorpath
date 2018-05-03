@@ -1202,7 +1202,7 @@ namespace FujifilmUSA.Sync.Common
                     SBStr.Replace("###ProjectName###", Convert.ToString(DT.Rows[0]["ProjectName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ProjectName"]).Trim());
                     SBStr.Replace("###Device###", Convert.ToString(DT.Rows[0]["DeviceName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeviceName"]).Trim());
                     SBStr.Replace("###TimeStamp###", Common.Utilities.GetDateByCultures(Convert.ToDateTime(DT.Rows[0]["MeasurementDate"])));
-                    SBStr.Replace("###OptimizedDLP###", DLPName.Trim() == "" ? "&nbsp;" : DLPName.Trim());
+                    SBStr.Replace("###OptimizedDLP###", string.IsNullOrWhiteSpace(DLPName) ? "&nbsp;" : Convert.ToString(DLPName).Trim());
                     SBStr.Replace("###PrintTarget###", Convert.ToString(DT.Rows[0]["ProfileName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ProfileName"]).Trim());
                     SBStr.Replace("###Media###", Media.Trim() == "" ? "&nbsp;" : Media.Trim());
                     SBStr.Replace("###Colorant###", Colorant.Trim() == "" ? "&nbsp;" : Colorant.Trim());

@@ -394,16 +394,14 @@ $(document).ready(function () {
         //        alert(exception);
 
         //    }
-        //});
-        debugger
-        console.log(apiParameter);
+        //});                
         $.ajax({
             type: "POST",
             url: SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReport',
             data: apiParameter,
             dataType: "json",
             success: function (response) {
-               // $('#btnDownloadSpotPatch').removeClass('active');
+                // $('#btnDownloadSpotPatch').removeClass('active');
                 if (response.data != null) {
                     console.log(response.data);
                     var fileName = '~' + response.data;
@@ -2534,9 +2532,10 @@ function PopulateInkPaperChartABComparision() {
         },
         chartArea: {
             width: 250,
-            height: 180
+            height: 180,
+            background: ''
         },
-       // render: renderChartWithBackgroundByAxis
+        render: renderChartWithBackgroundByAxis
         //plotArea: {
         //    background: "lightgray"
         //}
@@ -2586,7 +2585,7 @@ function PopulateInkPaperChartABComparision() {
             width: 100,
             height: 180
         },
-        render: renderChartWithBackgroundByCategory
+        render: renderChartWithBackgroundByCategoryForPaperL
     });
 
 }
@@ -3420,7 +3419,7 @@ function PopulateSummaryDeltaChart() {
     summarySeries = summarySeries.reverse();
     stackedChart = stackedChart.reverse();
     categoryList = categoryList.reverse();
-    
+
 
     var chartHeight = 150;
     if (summarySeries.length == 3) {
@@ -5211,12 +5210,12 @@ function renderChartWithBackgroundByAxis(e) {
         if (chart.element[0].id == "kendoChartTargetVersusActualABDummy"
             || chart.element[0].id == "kendoChartGamut_ABComparisonDummy" || chart.element[0].id == "kendoChartABalanceChart"
             || chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartLComaparision"
-            || chart.element[0].id == "divChartInkPaperPaperLab1" || chart.element[0].id == "kendoChartDummyBalanceL"
+            || chart.element[0].id == "kendoChartInkPaperLabOneDummy" || chart.element[0].id == "kendoChartDummyBalanceL"
             || chart.element[0].id == "kendoChartDummyBalanceA" || chart.element[0].id == "kendoChartDummyBalanceB") {
             xSlot = xAxis.slot(Math.min.apply(Math, xAxisArray), Math.max.apply(Math, xAxisArray));
             ySlot = yAxis.slot(Math.min.apply(Math, yAxisArray), Math.max.apply(Math, yAxisArray));
 
-
+            
         }
         else {
             xSlot = xAxis.slot(Math.abs(Math.min.apply(Math, xAxisArray)), Math.abs(Math.max.apply(Math, xAxisArray)));
@@ -5232,7 +5231,7 @@ function renderChartWithBackgroundByAxis(e) {
             ]);
 
 
-        if (chart.element[0].id == "kendoChartTargetVersusActualABDummy" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparisonDummy") {
+        if (chart.element[0].id == "kendoChartTargetVersusActualABDummy" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparisonDummy" || chart.element[0].id == "kendoChartInkPaperLabOneDummy") {
             path = drawing.Path.fromRect(rect, {
                 stroke: null,
                 fill: gradientRedGreen
@@ -5312,7 +5311,48 @@ function renderChartWithBackgroundByCategory(e) {
     //set the path
     chart.surface.draw(path);
 }
+function renderChartWithBackgroundByCategoryForPaperL(e) {
+    var chart = e.sender;
+    var path = {};
+    //get value axis object
+    var valueAxis = chart.getAxis("valueAxis");
+    //get maximum value from the value axis
+    //var maxValue = Math.abs(Math.max.apply(Math, valueAxis._axis.children.map(r => parseFloat(r.content))))
+    var maxValueArray = $.map(valueAxis._axis.children, function (elem) {
+        return elem.content;
+    });
 
+    var minValue = Math.min.apply(Math, maxValueArray);
+    var maxValue = Math.abs(Math.max.apply(Math, maxValueArray));
+    //get top slot
+    var valueMaxSlot = valueAxis.slot(maxValue);
+    var valueMinSlot = valueAxis.slot(minValue);
+
+    // Locate right-most category slot                
+    var categoryAxis = chart.getAxis("categoryAxis");
+    var lastCategoryIndex = Math.max(1, categoryAxis.range().max);
+    var minCategorySlot = categoryAxis.slot(0);
+    var maxCategorySlot = categoryAxis.slot(lastCategoryIndex);
+
+    //calculate height and width
+    var plotWidth = maxCategorySlot.origin.x - valueMaxSlot.origin.x;
+    var plotHeight = valueMinSlot.origin.y - valueMaxSlot.origin.y;
+
+    //create ractangle
+    var rect = new geometry.Rect([
+        // Origin X, Y
+        valueMaxSlot.origin.x, valueMaxSlot.origin.y
+    ], [plotWidth, plotHeight]);
+
+    //create path using gradient
+    path = drawing.Path.fromRect(rect, {
+        stroke: null,
+        fill: gradientGray2
+    });
+
+    //set the path
+    chart.surface.draw(path);
+}
 
 /////////******************************** METHODS FOR BIND CHART IMAGES FOR REPORT GENERATIONS ********************************////////////
 
@@ -5451,8 +5491,19 @@ function Get_B_BalanceChartImage() {
 
 ////**************** GET IMAGE OF INK PAPER CHART LAB ONE CHART FOR REPORT  ****************////
 function Get_InkPaperChartLAB_OneChartImage() {
+    //var chart = $divChartInkPaperPaperLab1.data("kendoChart");
+    //return chart.imageDataURL();
+    
     var chart = $divChartInkPaperPaperLab1.data("kendoChart");
-    return chart.imageDataURL();
+    var kendoOptions = chart.options;
+    var kendodataSource = chart.dataSource;
+    $('#kendoChartInkPaperLabOneDummy').kendoChart(kendoOptions)
+    var chartDummy = $('#kendoChartInkPaperLabOneDummy').data('kendoChart')
+    chartDummy.dataSource = kendodataSource;
+    delete chartDummy.options.chartArea.background;
+    chartDummy.options.transitions = false;
+    chartDummy.refresh()
+    return chartDummy.imageDataURL();
 }
 
 ////**************** GET IMAGE OF INK PAPER CHART LAB TWO CHART FOR REPORT  ****************////
@@ -5633,7 +5684,7 @@ function arrayUnique(array) {
     return a;
 }
 
-function CopyObject(sourceObj,destObj) {
+function CopyObject(sourceObj, destObj) {
     Object.keys(sourceObj).forEach(function (k) {
         destObj[k] = sourceObj[k];
     });
