@@ -52,12 +52,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         {
             IHttpActionResult actionResult = null;
             string validationMessage = "";
-            //ChartContent chart = new ChartContent();
-            BaseResponse<string> httpResponse = new BaseResponse<string>();
-            //int? MeasurementId= 25204;
-            //bool? IsAverageOfMeasurements= false;
-            //string IsVerificationProject= "false", IsSync1DTypeProject= "true", fromDeltaE= "E2000";
-            //int validationType=-1;
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
                 if (chart == null)
@@ -101,7 +96,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         MeasurementId = Convert.ToInt32(chart.MeasurementId);
                         IsVerification = chart.IsVerificationProject == null ? false : Convert.ToBoolean(chart.IsVerificationProject);
                         IsSync1DType = chart.IsSync1DTypeProject == null ? false : Convert.ToBoolean(chart.IsSync1DTypeProject);
-                        IsAverageOfMeasurements = chart.IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
+                        IsAverageOfMeasurements = chart.IsAverageOfMeasurements == null ? false : Convert.ToBoolean(chart.IsAverageOfMeasurements);
                         From_ΔE = Convert.ToString(chart.fromDeltaE);
                         ValidationType = Convert.ToInt32(chart.validationType);
 
@@ -164,10 +159,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         }
 
                         objReportPDF.GenerateClientReportPDF();
-                        string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
+                        string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
+                        
                         httpResponse.status = ResponseStatus.Success;
                         httpResponse.Data = ReportPath;
-                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));                        
                     }
                 }
             }

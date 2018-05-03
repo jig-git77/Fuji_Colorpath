@@ -197,6 +197,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+
         [HttpGet]
         public IHttpActionResult GetAverageMeasurementCompatibility(int? OptimizationRunID)
         {
@@ -223,10 +224,61 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+        //[HttpPost]
+        //public HttpResponseMessage GetSpotPatchDetailsReport(ExportViewModel model)
+        //{
+        //    HttpResponseMessage httpResponseMessage = null;
+        //    try
+        //    {
+        //        DetermineCulture();
+        //        MeasurementId = 0;
+
+        //        OptimizeRunId = Convert.ToInt32(model.OptimizationRunID);
+        //        _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
+
+        //        DataTable dt = new DataTable();
+        //        dt = GridFilters.GetFilteredResult(dtPatchDetails, model.sort, model.filter);
+        //        //logic for filter
+
+        //        ReportPDF objReportPDF = new ReportPDF();
+        //        objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+
+        //        if (!Directory.Exists(objReportPDF.PDFPath))
+        //            Directory.CreateDirectory(objReportPDF.PDFPath);
+
+        //        objReportPDF.dtSpotPatchDetails = dt;
+        //        objReportPDF.PDF_NAME = model.OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
+        //        objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+        //        objReportPDF.GenerateSpotPatchDetailsReport();
+
+        //        string filePath = objReportPDF.PDFPath + objReportPDF.PDF_NAME;
+
+        //        var dataBytes = File.ReadAllBytes(filePath);
+        //        //adding bytes to memory stream   
+        //        var dataStream = new MemoryStream(dataBytes);
+        //        httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
+        //        httpResponseMessage.Content = new StreamContent(dataStream);
+        //        httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
+        //        httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
+        //        httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+        //        httpResponseMessage.Content.Headers.ContentDisposition.FileName = objReportPDF.PDF_NAME;
+        //        httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        BaseErrorResponse errprResponse = new BaseErrorResponse();
+        //        errprResponse.Error.UserMessage = ex.Message;
+        //        errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+        //        httpResponseMessage = Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse);//returns the 500 status code
+        //    }
+        //    return httpResponseMessage;
+        //}
+
         [HttpPost]
-        public HttpResponseMessage GetSpotPatchDetailsReport(ExportViewModel model)
+        public IHttpActionResult GetSpotPatchDetailsReport(ExportViewModel model)
         {
-            HttpResponseMessage httpResponseMessage = null;
+            IHttpActionResult actionResult = null;
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
                 DetermineCulture();
@@ -250,33 +302,129 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
                 objReportPDF.GenerateSpotPatchDetailsReport();
 
-                string filePath = objReportPDF.PDFPath + objReportPDF.PDF_NAME;
-                
-                var dataBytes = File.ReadAllBytes(filePath);
-                //adding bytes to memory stream   
-                var dataStream = new MemoryStream(dataBytes);
-                httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
-                httpResponseMessage.Content = new StreamContent(dataStream);
-                httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
-                httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
-                httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-                httpResponseMessage.Content.Headers.ContentDisposition.FileName = objReportPDF.PDF_NAME;
-                httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
+                string ReportFileName = "/UploadFiles/" + objReportPDF.PDF_NAME;                                                
+                httpResponse.Data = ReportFileName;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
             }
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
                 errprResponse.Error.UserMessage = ex.Message;
                 errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                httpResponseMessage = Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse);//returns the 500 status code
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
-            return httpResponseMessage;
+            return actionResult;
         }
 
+        //[HttpPost]
+        //public HttpResponseMessage GetSpotPatchDetailsExcelReport(ExportViewModel model)
+        //{
+        //    HttpResponseMessage httpResponseMessage = null;
+        //    try
+        //    {
+        //        DetermineCulture();
+        //        MeasurementId = 0;
+        //        int measurementID = 0;
+        //        OptimizeRunId = Convert.ToInt32(model.OptimizationRunID);
+        //        _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
+        //        if (dtPatchDetails.Rows.Count > 0)
+        //            measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
+
+        //        DataTable dt = new DataTable();
+        //        dt = GridFilters.GetFilteredResult(dtPatchDetails, model.sort, model.filter);
+
+        //        //select specific columns 
+        //        DataView view = new DataView(dt);                
+        //        DataTable cTable = new DataTable();
+        //        if (measurementID > 0)
+        //            cTable = view.ToTable(false, "SpotID", "HTMLColor", "SpotName", "ΔE_T_P", "ΔE_M_T", "ΔE_M_P");
+        //        else
+        //            cTable = view.ToTable(false, "SpotID", "HTMLColor", "SpotName", "ΔL", "Δa", "Δb", "ΔE");
+
+
+        //        ReportPDF objReportPDF = new ReportPDF();
+        //        objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+        //        objReportPDF.PDF_NAME = OptimizeRunId.ToString() + "_DataGridViewExport.xlsx";
+        //        if (!Directory.Exists(objReportPDF.PDFPath))
+        //            Directory.CreateDirectory(objReportPDF.PDFPath);
+        //        string filePath = objReportPDF.PDFPath + objReportPDF.PDF_NAME;
+        //        using (XLWorkbook wb = new XLWorkbook())
+        //        {
+        //            var ws = wb.Worksheets.Add("worksheet");
+        //            if (cTable.Rows.Count > 0)
+        //            {
+        //                // Adding HeaderRow.
+        //                ws.Cell("A" + 1).Value = cTable.Columns[0].ColumnName;
+        //                ws.Cell("B" + 1).Value = cTable.Columns[1].ColumnName;
+        //                ws.Cell("C" + 1).Value = cTable.Columns[2].ColumnName;
+        //                ws.Cell("D" + 1).Value = cTable.Columns[3].ColumnName;
+        //                ws.Cell("E" + 1).Value = cTable.Columns[4].ColumnName;
+        //                ws.Cell("F" + 1).Value = cTable.Columns[5].ColumnName;
+
+        //                //for spot run 0
+        //                if (measurementID == 0)
+        //                {
+        //                    ws.Cell("D" + 1).Value = "pΔL";
+        //                    ws.Cell("E" + 1).Value = "pΔa";
+        //                    ws.Cell("F" + 1).Value = "pΔb";
+        //                    ws.Cell("G" + 1).Value = "pΔE";
+        //                }
+
+
+
+        //                // Adding DataRows.
+        //                for (int i = 0; i < cTable.Rows.Count; i++)
+        //                {
+
+        //                    ws.Cell("A" + (i + 2)).Value = cTable.Rows[i][0];
+        //                    ws.Cell("B" + (i + 2)).Value = cTable.Rows[i][1];
+        //                    ws.Cell("C" + (i + 2)).Value = cTable.Rows[i][2];
+        //                    ws.Cell("D" + (i + 2)).Value = cTable.Rows[i][3];
+        //                    ws.Cell("E" + (i + 2)).Value = cTable.Rows[i][4];
+        //                    ws.Cell("F" + (i + 2)).Value = cTable.Rows[i][5];
+
+        //                    //for ΔE in run 0 with
+        //                    if (measurementID == 0)
+        //                        ws.Cell("G" + (i + 2)).Value = cTable.Rows[i][6]; ;
+
+        //                    // Changing color to to html color
+        //                    ws.Cells("B" + (i + 2)).Style.Fill.BackgroundColor = XLColor.FromHtml(cTable.Rows[i]["HTMLColor"].ToString());
+        //                }
+        //            }
+        //            wb.SaveAs(filePath);
+
+        //        }
+
+
+        //        var dataBytes = File.ReadAllBytes(filePath);
+        //        //adding bytes to memory stream   
+        //        var dataStream = new MemoryStream(dataBytes);
+        //        httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
+        //        httpResponseMessage.Content = new StreamContent(dataStream);
+        //        httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
+        //        httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
+        //        httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+        //        httpResponseMessage.Content.Headers.ContentDisposition.FileName = objReportPDF.PDF_NAME;
+        //        httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+
+        //        //delete the excel file
+        //        File.Delete(filePath);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        BaseErrorResponse errprResponse = new BaseErrorResponse();
+        //        errprResponse.Error.UserMessage = ex.Message;
+        //        errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+        //        httpResponseMessage = Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse);//returns the 500 status code
+        //    }
+        //    return httpResponseMessage;
+        //}
+
         [HttpPost]
-        public HttpResponseMessage GetSpotPatchDetailsExcelReport(ExportViewModel model)
+        public IHttpActionResult GetSpotPatchDetailsExcelReport(ExportViewModel model)
         {
-            HttpResponseMessage httpResponseMessage = null;
+            IHttpActionResult actionResult = null;
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
                 DetermineCulture();
@@ -291,13 +439,13 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 dt = GridFilters.GetFilteredResult(dtPatchDetails, model.sort, model.filter);
 
                 //select specific columns 
-                DataView view = new DataView(dt);                
+                DataView view = new DataView(dt);
                 DataTable cTable = new DataTable();
                 if (measurementID > 0)
                     cTable = view.ToTable(false, "SpotID", "HTMLColor", "SpotName", "ΔE_T_P", "ΔE_M_T", "ΔE_M_P");
                 else
                     cTable = view.ToTable(false, "SpotID", "HTMLColor", "SpotName", "ΔL", "Δa", "Δb", "ΔE");
-                
+
 
                 ReportPDF objReportPDF = new ReportPDF();
                 objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
@@ -326,7 +474,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             ws.Cell("F" + 1).Value = "pΔb";
                             ws.Cell("G" + 1).Value = "pΔE";
                         }
-                            
+
 
 
                         // Adding DataRows.
@@ -355,26 +503,21 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                 var dataBytes = File.ReadAllBytes(filePath);
                 //adding bytes to memory stream   
-                var dataStream = new MemoryStream(dataBytes);
-                httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
-                httpResponseMessage.Content = new StreamContent(dataStream);
-                httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
-                httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
-                httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-                httpResponseMessage.Content.Headers.ContentDisposition.FileName = objReportPDF.PDF_NAME;
-                httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
-
+                
+                string ReportFileName = "/UploadFiles/" + objReportPDF.PDF_NAME;
+                httpResponse.Data = ReportFileName;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
                 //delete the excel file
-                File.Delete(filePath);
+                //File.Delete(filePath);
             }
             catch (Exception ex)
             {
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
                 errprResponse.Error.UserMessage = ex.Message;
                 errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                httpResponseMessage = Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse);//returns the 500 status code
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
-            return httpResponseMessage;
+            return actionResult;
         }
 
         [HttpPost]
@@ -605,6 +748,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 };
             result.Content.Headers.ContentType =
                 new MediaTypeHeaderValue("application/octet-stream");
+
+            //stream.Close();
+            //GC.Collect();
+            //GC.WaitForPendingFinalizers();
+            //delete the file
+            //File.Delete(fullPath);
 
             return result;
         }

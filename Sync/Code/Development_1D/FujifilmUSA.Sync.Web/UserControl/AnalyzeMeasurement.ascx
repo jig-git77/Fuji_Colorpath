@@ -25,17 +25,6 @@
         padding-left: 0px;
     }
 
-    .scrollableTable thead {
-        display: table; /* for displaying purposes */
-        width: calc(100% - 17px); /* - 17px because of the typical scroll-bar width */
-    }
-
-    .scrollableTable tbody {
-        display: block; /* enables vertical scrolling */
-        max-height: 295px; /* adjust to your needs */
-        overflow-y: scroll;
-    }
-
     .k-state-active table:first-child {
         width: 99% !important;
     }
@@ -45,6 +34,51 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
+
+    .spinner {
+        opacity: 0;
+        display: none;
+        width: 20px;
+        height: 10px;
+        margin-bottom: 5px;
+        -webkit-transition: opacity 0.25s, max-width 0.45s;
+        -moz-transition: opacity 0.25s, max-width 0.45s;
+        -o-transition: opacity 0.25s, max-width 0.45s;
+        transition: opacity 0.25s, max-width 0.45s;
+        /* Duration fixed since we animate additional hidden width */
+    }
+
+    .has-spinner.active {
+        cursor: progress;
+    }
+
+        .has-spinner.active .spinner {
+            display: inline-block;
+            opacity: 1;
+            max-width: 50px;
+            /* More than it will ever come, notice that this affects on animation duration */
+        }
+
+    .summaryMetricTable {
+        border-spacing: 0px;
+        border: 1px solid;
+        font: 12px/16px "segoe ui",arial,sans-serif;
+    }
+        .summaryMetricTable tr {
+            pointer-events: none;
+        }
+        .summaryMetricTable th {
+            border-bottom: 1px solid Gray;
+            text-align: left;
+            padding-left: 5px;
+        }
+        .summaryMetricTable td {
+            border-width: 0 0 0 0px;
+            line-height: 1.3em;
+        }
+        .summaryMetricTable tr:nth-child(even) {
+            background: #F2F2F2;
+        }
 </style>
 <script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>
 <script src="JS/AnalyzeMeasurement.js" type="text/javascript"></script>
@@ -579,7 +613,7 @@
                                                     </td>
                                                     <td style="width: 2%;"></td>
                                                     <td valign="top">
-                                                        <table class="scrollableTable k-grid k-widget k-display-block" style="width: 100%">
+                                                        <table class="summaryMetricTable k-grid k-widget k-display-block" style="width: 100%">
                                                             <thead class="k-grid-header">
                                                                 <tr style="line-height: 25px;">
                                                                     <th>
@@ -593,7 +627,7 @@
                                                             <tbody data-template="validation-metrics-template" data-bind="source: ValidationMetrics"></tbody>
                                                         </table>
                                                         <br />
-                                                        <table id="tblPatchTolerance" class="k-grid k-widget k-display-block" style="width: 100%">
+                                                        <table id="tblPatchTolerance" class="summaryMetricTable k-grid k-widget k-display-block" style="width: 100%">
                                                             <thead class="k-grid-header">
                                                                 <tr style="line-height: 25px;">
                                                                     <th>
@@ -1040,11 +1074,11 @@
                                                                     <tr>
                                                                         <td align="center" valign="top">
                                                                             <div id="divTest" class="gamutChart">
-                                                                                <div id="kendoChartTargetVersusActualAB" ></div>                                                                                
+                                                                                <div id="kendoChartTargetVersusActualAB"></div>
                                                                             </div>
                                                                             <div id="kendoChartTargetVersusActualABLargeArea">
                                                                                 <div id="kendoChartTargetVersusActualABLarge" class="gamutChart"></div>
-                                                                                </div>
+                                                                            </div>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -1127,9 +1161,9 @@
                                                                                             <div id="kendoChartDummyBalanceL"></div>
                                                                                             <div id="kendoChartDummyBalanceA"></div>
                                                                                             <div id="kendoChartDummyBalanceB"></div>
-                                                                                            <div id="divChartInkPaperDummy"></div>   
-                                                                                            <div id="kendoChartGamut_ABComparisonDummy"></div>   
-                                                                                            <div id="kendoChartTargetVersusActualABDummy" ></div>
+                                                                                            <div id="divChartInkPaperDummy"></div>
+                                                                                            <div id="kendoChartGamut_ABComparisonDummy"></div>
+                                                                                            <div id="kendoChartTargetVersusActualABDummy"></div>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -1344,6 +1378,11 @@
                                         <a id="btnGeneratePDF">
                                             <img src="Images/processbar.gif" />
                                         </a>
+                                        <%-- <button id="btnGeneratePDF">
+                                            <span class="spinner">
+                                                <img src="Images/processbar.gif" />
+                                            </span>
+                                        </button>--%>
                                         <br />
                                     </div>
                                 </div>

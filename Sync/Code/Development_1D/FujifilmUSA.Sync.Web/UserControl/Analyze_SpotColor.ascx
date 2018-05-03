@@ -345,9 +345,6 @@
             ],
             dataBound: function (e) {
                 var measurementId = parseInt($('#hdfMeasurementID').val());
-                //if (e.sender.dataSource._view.length > 0) {
-                //    measurementId = e.sender.dataSource._view[0].MeasurementID;
-                //}
 
                 if (measurementId > 0) {
                     this.hideColumn(4);
@@ -399,58 +396,33 @@
 
             //create object
             var filterObj = {
-                OptimizationRunId: optimizationRun,
+                OptimizationRunId: parseInt(optimizationRun),
                 sort: sortObj,
                 filter: filterObj
             };
 
-            console.log(filterObj);
-
-
-            //DownloadSpotPatchFile(optimizationRun)
-            //$.ajax({
-            //    url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsReport',
-            //    data: filterObj,
-            //    type: 'POST',
-            //    success: function (response) {
-            //        console.log(response);
-            //        window.open(SERVICE_BASE_URL + response.data, "_blank");
-            //    },
-            //    error: function (xhr, errorType, exception) {
-            //        alert(exception);
-            //    }
-            //});
-            //kendo.ui.progress($('#tab2'), true);
+            //console.log(filterObj);
             $('#btnDownloadSpotPatch').addClass('active');
-            debugger;
-            var request = new XMLHttpRequest();
-            request.open("POST", SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsReport', true);
-            request.setRequestHeader("content-type", "application/json");
-            request.responseType = "blob";
-            request.onload = function (e) {                
-                $('#btnDownloadSpotPatch').removeClass('active');
-                if (this.status === 200) {
-                    // `blob` response
-                    //console.log(this.response);
-                    // create `objectURL` of `this.response` : `.pdf` as `Blob`
-                    var file = window.URL.createObjectURL(this.response);
-                    var a = document.createElement("a");
-                    a.href = file;
-                    a.download = this.response.name || "SpotPatchDetails.pdf";
-                    document.body.appendChild(a);
-                    a.click();
-                    // remove `a` following `Save As` dialog, 
-                    // `window` regains `focus`
-                    window.onfocus = function () {
-                        document.body.removeChild(a)
+            $.ajax({
+                type: "POST",
+                url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsReport',
+                data: filterObj,
+                dataType: "json",
+                success: function (response) {
+                    $('#btnDownloadSpotPatch').removeClass('active');
+                    if (response.data != null) {
+                        console.log(response.data);
+                        var fileName = '~' + response.data;
+                        window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
                     }
-                    kendo.ui.progress($('#tab2'), false);
-                };
-            };
-            request.send(JSON.stringify(filterObj));
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $('#btnDownloadSpotPatchExcel').removeClass('active');
+                    console.log(XMLHttpRequest.responseText);
+                }
+            });
 
-            //kendo.ui.progress($('#tab2'), false);
-
+            
         })
 
         $('#btnDownloadSpotPatchExcel').on('click', function (e) {
@@ -482,51 +454,27 @@
                 filter: filterObj
             };
 
-            console.log(filterObj);
+            //console.log(filterObj);
 
-
-            //DownloadSpotPatchFile(optimizationRun)
-            //$.ajax({
-            //    url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsExcelReport',
-            //    data: filterObj,
-            //    type: 'POST',
-            //    success: function (response) {
-            //        console.log(response);
-            //        //window.open(SERVICE_BASE_URL + response.data, "_blank");
-            //    },
-            //    error: function (xhr, errorType, exception) {
-            //        alert(exception);
-            //    }
-            //});
             $('#btnDownloadSpotPatchExcel').addClass('active');
-            debugger;
-            var request = new XMLHttpRequest();
-            request.open("POST", SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsExcelReport', true);
-            request.setRequestHeader("content-type", "application/json");
-            request.responseType = "blob";
-            request.onload = function (e) {
-                $('#btnDownloadSpotPatchExcel').removeClass('active');
-                if (this.status === 200) {
-                    // `blob` response
-                    //console.log(this.response);
-                    // create `objectURL` of `this.response` : `.pdf` as `Blob`
-                    var file = window.URL.createObjectURL(this.response);
-                    var a = document.createElement("a");
-                    a.href = file;
-                    a.download = this.response.name || "SpotPatchDetails.xlsx";
-                    document.body.appendChild(a);
-                    a.click();
-                    // remove `a` following `Save As` dialog, 
-                    // `window` regains `focus`
-                    window.onfocus = function () {
-                        document.body.removeChild(a)
+            $.ajax({
+                type: "POST",
+                url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsExcelReport',
+                data: filterObj,
+                dataType: "json",
+                success: function (response) {
+                    $('#btnDownloadSpotPatchExcel').removeClass('active');
+                    if (response.data != null) {
+                        console.log(response.data);
+                        var fileName = '~' + response.data;
+                        window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
                     }
-
-                };
-            };
-            request.send(JSON.stringify(filterObj));
-
-            //kendo.ui.progress($('#tab2'), false);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $('#btnDownloadSpotPatchExcel').removeClass('active');
+                    console.log(XMLHttpRequest.responseText);
+                }
+            });            
         })
         
     });
