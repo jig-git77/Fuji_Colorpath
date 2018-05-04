@@ -281,8 +281,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
                                 dEMethod = DataReader.ReadString(x, "dEMethod"),
-                                MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus")
-                            }).ToList();
+                                MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus"),
+                                MeasurementDateString = String.Format("{0:d}", DataReader.ReadDate(x, "MeasurementDate")) + "-" + String.Format("{0:T}", DataReader.ReadDate(x, "MeasurementDate")) //---Formatted Date                                
+                }).ToList();
 
                     measurements.ForEach(x =>
                     {

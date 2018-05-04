@@ -87,31 +87,6 @@
 <script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>
 <script src="JS/AnalyzeMeasurement.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-
-    //function CheckAvgCompability() {
-    //    debugger;
-    //    alert(1);
-    //    var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
-
-    //    if (answer == "0") {
-    //        //setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ucAnalyze$chkAnalyzeAverageOfMeasurements\',\'\')', 0);
-    //        //return false;
-    //    }
-    //    else if (answer == "1") {
-    //        jQuery("[id*='lblCompError']").html("Error in different ReferenceCharts, Please select only measurements which used same reference charts.");
-    //        return false;
-    //    }
-    //    else if (answer == "2") {
-    //        jQuery("[id*='lblCompError']").html("Error in different MetricTargetPresets, Please select only measurements which used same metric target presets.");
-    //        return false;
-    //    }
-    //    else {
-    //        return false;
-    //    }
-    //}
-
-</script>
 
 <script type="text/javascript">
     var previewImageCodedString = '';

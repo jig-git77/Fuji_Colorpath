@@ -620,7 +620,7 @@ function BindMeasurementSummary() {
             success: function (response) {
                 if (response.data != null) {
                     if (response.data.length > 0) {
-                        
+
                         var measurements = response.data;
                         console.log(measurements);
                         var measurement = measurements[0];
@@ -1740,7 +1740,8 @@ function PopulateAnalyzeChart() {
                 IsUsed: e.IsUsed,
                 MeasurementStatus: e.MeasurementStatus,
                 MeasurementDate: e.MeasurementDate,
-                dEMethod: e.dEMethod
+                dEMethod: e.dEMethod,
+                MeasurementDateString: e.MeasurementDateString
             };
             return curObj;
         });
@@ -1788,11 +1789,7 @@ function PopulateAnalyzeChart() {
                 }
             });
         });
-
-
-    }
-
-
+    }   
 
     $divAnalyzeChart.kendoChart({
         seriesDefaults: {
@@ -1837,7 +1834,6 @@ function PopulateAnalyzeChart() {
                     }
                 },
                 type: function (e) {
-
                     if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
                         if (e.category.MeasurementId == parseInt($hdnCurrentMeasurement.val())) {
                             return "circle";
@@ -1857,7 +1853,6 @@ function PopulateAnalyzeChart() {
         },
         series: patchArray,
         valueAxis: {
-            // name: "valueAxis",
             title: {
                 text: 'Δ' + $selectedDeltaE,
                 font: "12px Arial,Helvetica,sans-serif",
@@ -1882,21 +1877,23 @@ function PopulateAnalyzeChart() {
                 //cursor: "pointer",
                 visual: function (e) {
 
+                    console.log('start');
                     // Create an empty group that will hold the rendered label
                     var visual = new kendo.drawing.Group();
+                    console.log('visual object created');
                     // Build an HTML fragment and append it to the body                    
                     //get the category values
                     var catValue = e.value;
-
+                    debugger
+                    console.log('condition started');
                     if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-                        //
+                        
+                        var arr = catValue.MeasurementDateString.split('-');
 
-                        //set checked or not
-                        var catText = '<div style="font-size:12px;cursor: pointer;text-align:center;">' + formatMeasurementDateWithTime(catValue.MeasurementDate) + '</div>';
-                        //if (catValue.IsUsed) {
-                        //    catText = '<div style="font-size:18px;cursor: pointer;">☑</div>'
-                        //}
+                        //set checked or not                        
+                        var catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1]+'</div></div>';
                         var html = $(catText).appendTo(document.body);
+
 
                         // Store a reference to the target rectangle, see below
                         var rect = e.rect;
@@ -1906,26 +1903,24 @@ function PopulateAnalyzeChart() {
                             .done(function (group) {
                                 // Clean-up HTML fragment
                                 html.remove();
-
+                                
                                 // Center the label using Layout
                                 var layout = new kendo.drawing.Layout(rect, {
                                     justifyContent: "center"
                                 });
                                 layout.append(group);
                                 layout.reflow();
-
                                 // Render the content
                                 visual.append(layout);
                             });
                     } else {
 
+                        console.log('non validtion project started');
+
                         //set checked or not
                         var catText = '<div style="font-size:18px;cursor: pointer;">' + (catValue.IsUsed ? '☑' : '☐') + '</div>'
-                        //if (catValue.IsUsed) {
-                        //    catText = '<div style="font-size:18px;cursor: pointer;">☑</div>'
-                        //}
-                        var html = $(catText).appendTo(document.body);
 
+                        var html = $(catText).appendTo(document.body);
                         // Store a reference to the target rectangle, see below
                         var rect = e.rect;
 
@@ -1934,19 +1929,18 @@ function PopulateAnalyzeChart() {
                             .done(function (group) {
                                 // Clean-up HTML fragment
                                 html.remove();
-
                                 // Center the label using Layout
                                 var layout = new kendo.drawing.Layout(rect, {
                                     justifyContent: "center"
                                 });
                                 layout.append(group);
                                 layout.reflow();
-
                                 // Render the content
                                 visual.append(layout);
                             });
 
                     }
+                    console.log('returned from method');
                     return visual;
                 }
             },
@@ -5223,7 +5217,7 @@ function renderChartWithBackgroundByAxis(e) {
             xSlot = xAxis.slot(Math.min.apply(Math, xAxisArray), Math.max.apply(Math, xAxisArray));
             ySlot = yAxis.slot(Math.min.apply(Math, yAxisArray), Math.max.apply(Math, yAxisArray));
 
-            
+
         }
         else {
             xSlot = xAxis.slot(Math.abs(Math.min.apply(Math, xAxisArray)), Math.abs(Math.max.apply(Math, xAxisArray)));
@@ -5501,7 +5495,7 @@ function Get_B_BalanceChartImage() {
 function Get_InkPaperChartLAB_OneChartImage() {
     //var chart = $divChartInkPaperPaperLab1.data("kendoChart");
     //return chart.imageDataURL();
-    
+
     var chart = $divChartInkPaperPaperLab1.data("kendoChart");
     var kendoOptions = chart.options;
     var kendodataSource = chart.dataSource;
@@ -5612,22 +5606,24 @@ function Get_DeltaSummaryChartImage() {
 
 
 ////**************** GET FORMATTED DATE  ****************////
-function formatMeasurementDateWithTime(d) {
-    var date = new Date(d);
-    var day = date.getDate();
-    var month = date.getMonth() + 1;
-    var year = date.getFullYear();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds = date.getSeconds();
-    var ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    seconds = seconds < 10 ? '0' + seconds : seconds;
-    var strTime = month + '/' + day + '/' + year + '<br/>' + hours + ':' + minutes + ':' + seconds + ' ' + ampm;
-    return strTime
-}
+//function formatMeasurementDateWithTime(d) {
+//    var dtArr = d.split(/[^0-9]/);    
+//    var date = new Date(dtArr[0], dtArr[1] - 1, dtArr[2], dtArr[3], dtArr[4], dtArr[5]);
+//    //var date = new Date(d);
+//    var day = date.getDate();
+//    var month = date.getMonth() + 1;
+//    var year = date.getFullYear();
+//    var hours = date.getHours();
+//    var minutes = date.getMinutes();
+//    var seconds = date.getSeconds();
+//    var ampm = hours >= 12 ? 'PM' : 'AM';
+//    hours = hours % 12;
+//    hours = hours ? hours : 12; // the hour '0' should be '12'
+//    minutes = minutes < 10 ? '0' + minutes : minutes;
+//    seconds = seconds < 10 ? '0' + seconds : seconds;
+//    var strTime = month + '/' + day + '/' + year + '-' + hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+//    return strTime
+//}
 
 ////**************** METHOD TO CHECK AVG COMPATIBILITY  ****************////
 function CheckAvgCompability() {
@@ -5714,10 +5710,10 @@ function PopulateDymoPrinter(obj) {
         headers: {
             "content-type": "application/json",
         },
-        dataType: 'json',       
+        dataType: 'json',
         success: function (response) {
             if (response.data != null) {
-                console.log(response.data);
+                //console.log(response.data);
                 labelPrintXMLString = response.data.labelPrintString;
                 labelPrintStatusIconString = response.data.dymoStatusIcon;
             }
