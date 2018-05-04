@@ -377,6 +377,7 @@ namespace TestCPSync
                 ProfilerSvc.ExtractSpotLABRequest req = new ProfilerSvc.ExtractSpotLABRequest();
                 req = BindParams();
                 var result = objSync.GetSpotLAB(req);
+                var result2 = result;
             }
             catch (Exception ex)
             {

@@ -46,15 +46,18 @@ namespace ColorPathSync.Business
                 //In the service it will be from memory as a byte array then converted to a profile
 
                 TYPE_p_void destProf = CrossXColor.CLNewICCProfileRef();
-                TYPE_p_p_void destSpec = CrossXColor.CLNewFileSpecRef();
+                //TYPE_p_p_void destSpec = CrossXColor.CLNewFileSpecRef();
 
                 //Set the destination profile, please note the difference in the call from RefProfile to DstProfile in OPtimization
                 Curve.CopyProfileInMemory(request.DestinationProfile.ProfileData, ref destProf);
                 err = CrossXColor.CLSetOptionProfile(profiler, "DstProfile", destProf);
 
+                TYPE_p_void srcProf = CrossXColor.CLNewICCProfileRef();
+                //TYPE_p_p_void srcSpec = CrossXColor.CLNewFileSpecRef();
+
                 //Set the Source Profile, the Source profile is the previous run created NamedColorprofile
-                Curve.CopyProfileInMemory(request.previousNamedColorProfile.ProfileData, ref destProf);
-                err = CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", destProf);
+                Curve.CopyProfileInMemory(request.previousNamedColorProfile.ProfileData, ref srcProf);
+                err = CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", srcProf);
 
 
                 //Now we have the target file, the params and the destination profile
