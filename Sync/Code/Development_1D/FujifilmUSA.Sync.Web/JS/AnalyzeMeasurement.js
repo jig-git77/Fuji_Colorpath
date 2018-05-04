@@ -93,6 +93,8 @@ var $btnNext;
 var $btnLast;
 var $btnFirst;
 var $hdnCurrentProjectLicenseType;
+var labelPrintXMLString = '';
+var labelPrintStatusIconString = '';
 
 //********** kendo objects *********//
 var drawing = kendo.drawing;
@@ -618,9 +620,15 @@ function BindMeasurementSummary() {
             success: function (response) {
                 if (response.data != null) {
                     if (response.data.length > 0) {
+                        
                         var measurements = response.data;
                         console.log(measurements);
                         var measurement = measurements[0];
+
+                        //generate dymo printing string to print the dymo label only for validation
+                        if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                            PopulateDymoPrinter(measurement);
+                        }
                         measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
                         $hdnValidationType = measurement.ValidationType;
 
@@ -5688,4 +5696,41 @@ function CopyObject(sourceObj, destObj) {
     Object.keys(sourceObj).forEach(function (k) {
         destObj[k] = sourceObj[k];
     });
+}
+
+function PopulateDymoPrinter(obj) {
+
+    var apiParameter = {
+        LicenseType: $hdnCurrentProjectLicenseType,
+        //LicenseType: 2,
+        DeviceName: $('#hdnCurrentDeviceName').val(),
+        MeasurementSummary: obj
+    };
+
+    $.ajax({
+        url: SERVICE_BASE_URL + 'api/Analyze/GetDymoPrintData',
+        data: JSON.stringify(apiParameter),
+        type: 'POST',
+        headers: {
+            "content-type": "application/json",
+        },
+        dataType: 'json',       
+        success: function (response) {
+            if (response.data != null) {
+                console.log(response.data);
+                labelPrintXMLString = response.data.labelPrintString;
+                labelPrintStatusIconString = response.data.dymoStatusIcon;
+            }
+        },
+        error: function (xhr, errorType, exception) {
+            alert(exception);
+        }
+    });
+}
+
+function GetLabelXml() {
+    return labelPrintXMLString;
+}
+function GetStatusIconImageString() {
+    return labelPrintStatusIconString;
 }

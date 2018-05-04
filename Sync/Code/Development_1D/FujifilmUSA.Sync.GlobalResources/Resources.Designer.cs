@@ -3085,6 +3085,123 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Act..
+        /// </summary>
+        internal static string locLabelAct {
+            get {
+                return ResourceManager.GetString("locLabelAct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer:.
+        /// </summary>
+        internal static string locLabelCustomer {
+            get {
+                return ResourceManager.GetString("locLabelCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        internal static string locLabelDate {
+            get {
+                return ResourceManager.GetString("locLabelDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dE Type:.
+        /// </summary>
+        internal static string locLabeldEType {
+            get {
+                return ResourceManager.GetString("locLabeldEType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device:.
+        /// </summary>
+        internal static string locLabelDevice {
+            get {
+                return ResourceManager.GetString("locLabelDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JDF Job ID:.
+        /// </summary>
+        internal static string locLabelJDFJobID {
+            get {
+                return ResourceManager.GetString("locLabelJDFJobID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job:.
+        /// </summary>
+        internal static string locLabelJob {
+            get {
+                return ResourceManager.GetString("locLabelJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Metric:.
+        /// </summary>
+        internal static string locLabelMetric {
+            get {
+                return ResourceManager.GetString("locLabelMetric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page/Surface:.
+        /// </summary>
+        internal static string locLabelPageOrSurface {
+            get {
+                return ResourceManager.GetString("locLabelPageOrSurface", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signature.
+        /// </summary>
+        internal static string locLabelSignature {
+            get {
+                return ResourceManager.GetString("locLabelSignature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard:.
+        /// </summary>
+        internal static string locLabelStandard {
+            get {
+                return ResourceManager.GetString("locLabelStandard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timestamp:.
+        /// </summary>
+        internal static string locLabelTimestamp {
+            get {
+                return ResourceManager.GetString("locLabelTimestamp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tol..
+        /// </summary>
+        internal static string locLabelTol {
+            get {
+                return ResourceManager.GetString("locLabelTol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ChangeProfile.
         /// </summary>
         internal static string LogActivityType_ChangeProfile {

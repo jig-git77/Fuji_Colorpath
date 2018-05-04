@@ -1311,4 +1311,43 @@
   <data name="SpotProject_Certified" xml:space="preserve">
     <value>Spot Project Certified</value>
   </data>
+  <data name="locLabelAct" xml:space="preserve">
+    <value>Act.</value>
+  </data>
+  <data name="locLabelCustomer" xml:space="preserve">
+    <value>Customer:</value>
+  </data>
+  <data name="locLabelDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="locLabeldEType" xml:space="preserve">
+    <value>dE Type:</value>
+  </data>
+  <data name="locLabelDevice" xml:space="preserve">
+    <value>Device:</value>
+  </data>
+  <data name="locLabelJDFJobID" xml:space="preserve">
+    <value>JDF Job ID:</value>
+  </data>
+  <data name="locLabelJob" xml:space="preserve">
+    <value>Job:</value>
+  </data>
+  <data name="locLabelMetric" xml:space="preserve">
+    <value>Metric:</value>
+  </data>
+  <data name="locLabelPageOrSurface" xml:space="preserve">
+    <value>Page/Surface:</value>
+  </data>
+  <data name="locLabelSignature" xml:space="preserve">
+    <value>Signature</value>
+  </data>
+  <data name="locLabelStandard" xml:space="preserve">
+    <value>Standard:</value>
+  </data>
+  <data name="locLabelTimestamp" xml:space="preserve">
+    <value>Timestamp:</value>
+  </data>
+  <data name="locLabelTol" xml:space="preserve">
+    <value>Tol.</value>
+  </data>
 </root>

@@ -5,7 +5,10 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -192,6 +195,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnOptimizationRunID.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
                 hdnValidationType.Value = ValidationType.ToString();
                 hdnCurrentProjectLicenseType.Value = SessionManager.Instance.CurrentProject.LicenseType.ToString();
+                hdnCurrentDeviceName.Value = SessionManager.Instance.CurrentDevice.DeviceName.ToString();
                 //--Start: Load average Compatibility values
                 chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return CheckAvgCompability();");
                 ChkAvgMeasurementCompatibility();
@@ -327,6 +331,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnMeasurementVerification.Visible = false;
                 lbtnDownloadAndSaveDLP.Visible = false;
             }
+            if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation)  //----Only display print label feature in validation mode
+            {
+                ibtnPrintPreview.Visible = false;
+                ibtnPrintLabel.Visible = false;
+            }
         }
 
 
@@ -412,7 +421,97 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.Is1DMeasurementSmoothing = chk1DMeasurementSmoothing.Checked;
         }
 
-        
+        //#region Print Label Method
+        //public static void PreparePrintLabelXML(Entity.Measurement measurmentSummary)
+        //{
+        //    //Open label template from XML(.label) file            
+        //    StreamReader streamReader = new StreamReader(Server.MapPath(@"Templates\CertifiedLabel.label"));
+        //    //StreamReader streamReader = new StreamReader(@"D:\Chirag.Vidani\Work\FujiFilm\Dymo\Labels\CertifiedLabel.label");
+        //    string labelXML = streamReader.ReadToEnd();
+        //    streamReader.Close();
+        //    //string labelXML = "XML";
+
+        //    //Set the localization values for label caption to placeholder
+        //    labelXML = labelXML.Replace("locJob", GetResourceString(_reclocLabelJob));
+        //    labelXML = labelXML.Replace("locDevice", GetResourceString(_reclocLabelDevice));
+        //    labelXML = labelXML.Replace("locMetric", GetResourceString(_reclocLabelMetric));
+        //    labelXML = labelXML.Replace("locStandard", GetResourceString(_reclocLabelStandard));
+        //    labelXML = labelXML.Replace("locTimestamp", GetResourceString(_reclocLabelTimestamp));
+        //    labelXML = labelXML.Replace("locCustomer", GetResourceString(_reclocLabelCustomer));
+        //    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+        //    {
+        //        labelXML = labelXML.Replace("locPageOrSurface", "");
+        //        labelXML = labelXML.Replace("locJDFJobID", "");
+        //        labelXML = labelXML.Replace("locJob", GetResourceString("locMeasurementNameResource1.Text"));
+        //    }
+        //    else
+        //    {
+        //        labelXML = labelXML.Replace("locPageOrSurface", GetResourceString(_reclocLabelPageOrSurface));
+        //        labelXML = labelXML.Replace("locJDFJobID", GetResourceString(_reclocLabelJDFJobID));
+        //        labelXML = labelXML.Replace("locJob", GetResourceString(_reclocLabelJob));
+        //    }
+        //    labelXML = labelXML.Replace("locdEType", GetResourceString(_reclocLabeldEType));
+        //    labelXML = labelXML.Replace("locTol", GetResourceString(_reclocLabelTol));
+        //    labelXML = labelXML.Replace("locAct", GetResourceString(_reclocLabelAct));
+        //    labelXML = labelXML.Replace("locSignature", GetResourceString(_reclocLabelSignature));
+        //    labelXML = labelXML.Replace("locDate", GetResourceString(_reclocLabelDate));
+
+        //    //Replace 5 sensitive characters of XML before passing them
+        //    Regex badAmpersand = new Regex("&(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+        //    Regex badLessThan = new Regex("<(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+        //    Regex badGreaterThan = new Regex(">(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+        //    Regex badDoubleQuotation = new Regex("\"(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+        //    Regex badapostrophes = new Regex("'(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+        //    const string goodAmpersand = "&amp;";
+        //    const string goodLessThan = "&lt;";
+        //    const string goodGreaterThan = "&gt;";
+        //    const string goodDoubleQuotation = "&quot;";
+        //    const string goodapostrophes = "&apos;";
+
+        //    //Set the values to Placeholder
+        //    labelXML = labelXML.Replace("[Job]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.MeasurementName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if Measurement name contains "&" letter or rest of 4 letters
+        //    labelXML = labelXML.Replace("[Device]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(SessionManager.Instance.CurrentDevice.DeviceName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if Device name contains "&" letter or rest of 4 letters
+        //    labelXML = labelXML.Replace("[Metric]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.MetricTargetPresetName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if MTP name contains "&" letter or rest of 4 letters
+        //    labelXML = labelXML.Replace("[PrintStandard]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.PrintStandardType, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if PrintStandardType name contains "&" letter or rest of 4 letters
+        //    labelXML = labelXML.Replace("[Timestamp]", measurmentSummary.MeasurementDate.ToString("g"));
+        //    labelXML = labelXML.Replace("[Customer]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.Customer, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if Customer name contains "&" letter or rest of 4 letters
+        //    labelXML = labelXML.Replace("[dEType]", measurmentSummary.dEMethod);
+        //    labelXML = labelXML.Replace("[PageOrSurface]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.PageOrSurface, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if PageOrSurface contains "&" letter or rest of 4 letters
+        //    labelXML = labelXML.Replace("[JDFJobId]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.JDFJobId, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if JDFJobId contains "&" letter or rest of 4 letters
+        //                                                                                                                                                                                                                                                                                      //labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
+        //    StringBuilder metricName = new StringBuilder();
+        //    StringBuilder metricTol = new StringBuilder();
+        //    StringBuilder metricActual = new StringBuilder();
+        //    bool appendNewLine = true;
+        //    foreach (var item in measurmentSummary.ValidationMetrics)
+        //    {
+        //        appendNewLine = true;
+        //        if (measurmentSummary.ValidationMetrics.Count == measurmentSummary.ValidationMetrics.IndexOf(item) + 1)
+        //            appendNewLine = false;
+        //        metricName.Append(item.Metric + (appendNewLine ? Environment.NewLine : ""));
+        //        metricTol.Append(item.Tolerance.ToString() + (appendNewLine ? Environment.NewLine : ""));
+        //        metricActual.Append(item.Actual.ToString() + (appendNewLine ? Environment.NewLine : ""));
+        //    }
+        //    labelXML = labelXML.Replace("[MetricCaption]", metricName.ToString());
+        //    labelXML = labelXML.Replace("[dTol]", metricTol.ToString());
+        //    labelXML = labelXML.Replace("[dActual]", metricActual.ToString());
+        //    labelXML = labelXML.Replace("\r\n", @"\ \r\n");
+        //    ScriptManager.RegisterStartupScript(this, this.GetType(), "LabelXML", " function GetLabelXml() { return '" + labelXML.ToString() + "'; };", true);
+
+        //    string imagePath = "";
+        //    if (measurmentSummary.MeasurementStatus.Equals("OK", StringComparison.InvariantCultureIgnoreCase))
+        //        imagePath = Server.MapPath(@"Images\VStatusSuccessIcon.png");
+        //    else
+        //        imagePath = Server.MapPath(@"Images\VStatusFailedIcon.png");
+
+
+        //    byte[] binaryData = File.ReadAllBytes(imagePath);
+        //    string base64String = System.Convert.ToBase64String(binaryData, 0, binaryData.Length);
+        //    ScriptManager.RegisterStartupScript(this, this.GetType(), "ImageString", " function GetStatusIconImageString() { return '" + base64String + "' ;};", true);
+        //}
+        //#endregion
+
+
         #endregion
 
         #region Properties

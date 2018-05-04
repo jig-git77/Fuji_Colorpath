@@ -13,6 +13,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -33,6 +35,21 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private const string _InvalidDeltaEValue = "Error_Invalid_DeltaEValue";
         private const string _InvalidValidationType = "Error_Invalid_ValidationType";
         private const string _InvalidOptimizationRunID = "Error_Invalid_OptimizationRunID";
+
+        //Label localization variables
+        private const string _reclocLabelJob = "locLabelJob";
+        private const string _reclocLabelDevice = "locLabelDevice";
+        private const string _reclocLabelMetric = "locLabelMetric";
+        private const string _reclocLabelStandard = "locLabelStandard";
+        private const string _reclocLabelTimestamp = "locLabelTimestamp";
+        private const string _reclocLabelCustomer = "locLabelCustomer";
+        private const string _reclocLabelPageOrSurface = "locLabelPageOrSurface";
+        private const string _reclocLabelJDFJobID = "locLabelJDFJobID";
+        private const string _reclocLabeldEType = "locLabeldEType";
+        private const string _reclocLabelTol = "locLabelTol";
+        private const string _reclocLabelAct = "locLabelAct";
+        private const string _reclocLabelSignature = "locLabelSignature";
+        private const string _reclocLabelDate = "locLabelDate";
         #endregion
 
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -729,6 +746,117 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+        [HttpPost]
+        public IHttpActionResult GetDymoPrintData(DymoMeasurement model)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+
+                var measurementSummary = model.MeasurementSummary;
+
+                //Open label template from XML(.label) file            
+                StreamReader streamReader = new StreamReader(HostingEnvironment.MapPath("~/Templates/CertifiedLabel.label"));
+                string labelXML = streamReader.ReadToEnd();
+                streamReader.Close();
+                //string labelXML = "XML";
+
+                //Set the localization values for label caption to placeholder
+                labelXML = labelXML.Replace("locJob", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabelJob));
+                labelXML = labelXML.Replace("locDevice", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabelDevice));
+                labelXML = labelXML.Replace("locMetric", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabelMetric));
+                labelXML = labelXML.Replace("locStandard", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabelStandard));
+                labelXML = labelXML.Replace("locTimestamp", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabelTimestamp));
+                labelXML = labelXML.Replace("locCustomer", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabelCustomer));
+                if (model.LicenseType == ELicenseType.Sync1D.ToString())
+                {
+                    labelXML = labelXML.Replace("locPageOrSurface", "");
+                    labelXML = labelXML.Replace("locJDFJobID", "");
+                    labelXML = labelXML.Replace("locJob", GlobalResourceManager.Instance.GetGlobalResourceString("locMeasurementNameResource1.Text"));
+                }
+                else
+                {
+                    labelXML = labelXML.Replace("locPageOrSurface", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabelPageOrSurface));
+                    labelXML = labelXML.Replace("locJDFJobID", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabelJDFJobID));
+                    labelXML = labelXML.Replace("locJob", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabelJob));
+                }
+                labelXML = labelXML.Replace("locdEType", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabeldEType));
+                labelXML = labelXML.Replace("locTol", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabelTol));
+                labelXML = labelXML.Replace("locAct", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabelAct));
+                labelXML = labelXML.Replace("locSignature", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabelSignature));
+                labelXML = labelXML.Replace("locDate", GlobalResourceManager.Instance.GetGlobalResourceString(_reclocLabelDate));
+
+                //Replace 5 sensitive characters of XML before passing them
+                Regex badAmpersand = new Regex("&(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+                Regex badLessThan = new Regex("<(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+                Regex badGreaterThan = new Regex(">(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+                Regex badDoubleQuotation = new Regex("\"(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+                Regex badapostrophes = new Regex("'(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
+                const string goodAmpersand = "&amp;";
+                const string goodLessThan = "&lt;";
+                const string goodGreaterThan = "&gt;";
+                const string goodDoubleQuotation = "&quot;";
+                const string goodapostrophes = "&apos;";
+
+                //Set the values to Placeholder
+                labelXML = labelXML.Replace("[Job]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurementSummary.MeasurementName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if Measurement name contains "&" letter or rest of 4 letters
+                labelXML = labelXML.Replace("[Device]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(model.DeviceName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if Device name contains "&" letter or rest of 4 letters
+                labelXML = labelXML.Replace("[Metric]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurementSummary.MetricTargetPresetName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if MTP name contains "&" letter or rest of 4 letters
+                labelXML = labelXML.Replace("[PrintStandard]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurementSummary.PrintStandardType, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if PrintStandardType name contains "&" letter or rest of 4 letters
+                labelXML = labelXML.Replace("[Timestamp]", measurementSummary.MeasurementDate.ToString("g"));
+                labelXML = labelXML.Replace("[Customer]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurementSummary.Customer, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if Customer name contains "&" letter or rest of 4 letters
+                labelXML = labelXML.Replace("[dEType]", measurementSummary.dEMethod);
+                labelXML = labelXML.Replace("[PageOrSurface]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurementSummary.PageOrSurface, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if PageOrSurface contains "&" letter or rest of 4 letters
+                labelXML = labelXML.Replace("[JDFJobId]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurementSummary.JDFJobId, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if JDFJobId contains "&" letter or rest of 4 letters
+                                                                                                                                                                                                                                                                                                  //labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
+                StringBuilder metricName = new StringBuilder();
+                StringBuilder metricTol = new StringBuilder();
+                StringBuilder metricActual = new StringBuilder();
+                bool appendNewLine = true;
+                foreach (var item in measurementSummary.ValidationMetrics)
+                {
+                    appendNewLine = true;
+                    if (measurementSummary.ValidationMetrics.Count == measurementSummary.ValidationMetrics.IndexOf(item) + 1)
+                        appendNewLine = false;
+                    metricName.Append(item.Metric + (appendNewLine ? Environment.NewLine : ""));
+                    metricTol.Append(item.Tolerance.ToString() + (appendNewLine ? Environment.NewLine : ""));
+                    metricActual.Append(item.Actual.ToString() + (appendNewLine ? Environment.NewLine : ""));
+                }
+                labelXML = labelXML.Replace("[MetricCaption]", metricName.ToString());
+                labelXML = labelXML.Replace("[dTol]", metricTol.ToString());
+                labelXML = labelXML.Replace("[dActual]", metricActual.ToString());
+                labelXML = labelXML.Replace("\r\n", @"\ \r\n");
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "LabelXML", " function GetLabelXml() { return '" + labelXML.ToString() + "'; };", true);
+
+                string imagePath = "";
+                if (measurementSummary.MeasurementStatus.Equals("OK", StringComparison.InvariantCultureIgnoreCase))
+                    imagePath = HostingEnvironment.MapPath("~/Images/VStatusSuccessIcon.png");
+                else
+                    imagePath = HostingEnvironment.MapPath("~/Images/VStatusFailedIcon.png");
+
+
+                byte[] binaryData = File.ReadAllBytes(imagePath);
+                string base64String = System.Convert.ToBase64String(binaryData, 0, binaryData.Length);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "ImageString", " function GetStatusIconImageString() { return '" + base64String + "' ;};", true);
+
+                httpResponse.Data = new
+                {
+                    labelPrintString= Regex.Unescape(labelXML.ToString()),
+                    dymoStatusIcon = base64String
+                };
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+
         [HttpGet]
         public HttpResponseMessage DownloadFile(string filePath)
         {
@@ -757,6 +885,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
             return result;
         }
+
 
         #region Methods for Patch Details tab
         private DataTable FilteredPatchDetailsTable(string MetricSumID, DataTable dtPatchDetails)

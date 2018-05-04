@@ -783,6 +783,7 @@
     <Content Include="Images\4DCertification.png" />
     <Content Include="Images\4DCertification_Certified.png" />
     <Content Include="Images\abChartBackGround.gif" />
+    <Content Include="Images\largeloader.gif" />
     <Content Include="Images\AlignCurve.png" />
     <Content Include="Images\AlignCurve_Certified.png" />
     <Content Include="Images\AlignCurve_G7.png" />
@@ -5664,6 +5665,7 @@
     <Content Include="Scripts\kendo\2018.1.221\cultures\kendo.culture.aa-ET.min.js.map" />
     <Content Include="Scripts\kendo\2018.1.221\cultures\kendo.culture.aa-ER.min.js.map" />
     <Content Include="Scripts\kendo\2018.1.221\cultures\kendo.culture.aa-DJ.min.js.map" />
+    <Content Include="Scripts\kendo\2018.1.221\kendo.all.min.js.map" />
     <None Include="Templates\CertifiedLabel.label" />
     <None Include="Terms\ColorPath SYNC Firefox ESR.pdf" />
     <None Include="Terms\ColorPath Sync TC 2013.pdf" />
@@ -6227,7 +6229,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

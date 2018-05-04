@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FujifilmUSA.Sync.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -54,5 +55,12 @@ namespace FujiFilmUSA.Sync.Service.Models
         public bool isFirstDeltaRefList { get; set; }
         public SortDescription sort { get; set; }
         public FilterContainer filter { get; set; }
+    }
+
+    public class DymoMeasurement
+    {
+        public string LicenseType { get; set; }
+        public string DeviceName { get; set; }
+        public Measurement MeasurementSummary { get; set; }
     }
 }

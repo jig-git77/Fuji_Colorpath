@@ -7,7 +7,7 @@
 <script src="JS/Printing.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
 <link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
-<script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
+<script src="Scripts/kendo/2018.1.221/kendo.all.min.js" type="text/javascript"></script>
 <style>
     #divMeasurementPatchDetails .k-grid td {
         line-height: 18px;
@@ -325,6 +325,7 @@
                 <asp:HiddenField ID="hdPatchMatricSum" runat="server" Value="-1" ClientIDMode="Static" />
                 <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnCurrentDeviceName" ClientIDMode="Static" />
 
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
@@ -513,7 +514,16 @@
                                     <div>
 
                                         <div id="divValidationSummary" cellpadding="0" cellspacing="0" width="650px">
-
+                                            <div style="float: right;padding-top: 2px;position: absolute;top: 0;right: 0;padding-right: 4px;padding-top: 5px">
+                                                <asp:ImageButton ID="ibtnPrintPreview" runat="server"
+                                                    ImageUrl="../Images/DymoPrintPreviewIcon.png" ToolTip="Preview label"
+                                                    OnClientClick="ShowLabelPrintPreview(); return false;"
+                                                    meta:resourcekey="ibtnPrintPreviewResource1" />
+                                                <asp:ImageButton ID="ibtnPrintLabel" runat="server"
+                                                    ImageUrl="../Images/DymoPrintIcon.png" ToolTip="Print label"
+                                                    OnClientClick="PrintLabel(false); return false;"
+                                                    meta:resourcekey="ibtnPrintLabelResource1" />
+                                            </div>
                                             <table style="width: 100%; border-collapse: collapse;">
                                                 <tr>
                                                     <td valign="top" style="width: 63%; border: 1px Solid Gray;">
