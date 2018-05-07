@@ -214,7 +214,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D
                     {
                         //------If project is Sync1D type, Assign 'E' to radiolist, bydefault (because Sync 1D has only dt_E type)----------------//
-                        //rbtnListDeltaE.SelectedValue = "E";
                         hdnDefaultSelectedDelta.Value = rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
                     }
                     if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
@@ -248,10 +247,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
                     //Verification mode
-                    //if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //---Only display Report Grading for Sync4D Validation
-                    //{
-                    //    Div_ReportGrading.Visible = true; //---Disable for time being in Production code
-                    //}
                     lbtnDownloadAndSaveDLP.Visible = false;
                     lbtnMeasurementVerification.Visible = true;
                     if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification) //---If not Sync 4D Certification type of project, then only display Optimize button
@@ -269,15 +264,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                      "','" + Server.UrlEncode(this.CurrentDLPName) + "')");
 
                     trRBtnListDeltaE.Visible = false;
-                    //Div_Validation_Header.Visible = true;
-                    //if (ValidationType == 1)  //G7 type
-                    //{
-                    //    dvTab_G7.Visible = Tab_G7.Visible = true;
-                    //}
-                    //else
-                    //{
-                    //    dvTab_G7.Visible = Tab_G7.Visible = false;
-                    //}
+
                 }
                 else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D
                 {
@@ -288,11 +275,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Div_Opt_Header.Visible = true;
 
                     td1DSmoothing.Visible = true;  //Display in Sync1D for Smoothing measurements (Commented out for temporary untill get decided to use this feature)
-                    //if (ValidationType == 1)  //G7 type
-                    //{
-                    //    //dvTab_G7.Visible = Tab_G7.Visible = true;
-                    //    //tdAverageOfMeasurements.Visible = true; //Display in Sync1D G7 mode for Averaging measurements
-                    //}
+                   
 
                 }
                 else
@@ -301,10 +284,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnMeasurementVerification.Visible = false;
                     lbtnOptimize.Visible = false;
                     trRBtnListDeltaE.Visible = true;
-                    //Div_Opt_Header.Visible = true;
-                    //dvTab_G7.Visible = Tab_G7.Visible = false;
-                    //dvTab_TVI.Visible = Tab_TVI.Visible = false;
-                    //Div_MetricSumFilter.Visible = false;
                 }
             }
             if (IsXMFUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
@@ -408,8 +387,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnSubmit_Click(object sender, EventArgs e)
         {
-            Response.Redirect(string.Format("COValidationCallback.aspx?projectid={0}&result={1}&id={2}", SessionManager.Instance.CurrentProject.ProjectId, ValidationMeasurementStatus, Guid.NewGuid()));
-
+            Response.Redirect(string.Format("COValidationCallback.aspx?projectid={0}&result={1}&id={2}", SessionManager.Instance.CurrentProject.ProjectId, Convert.ToString(hdnValidationMeasurementStatus.Value), Guid.NewGuid()));
         }
         protected void lbtnMeasurement_Click(object sender, EventArgs e)
         {
@@ -421,116 +399,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.Is1DMeasurementSmoothing = chk1DMeasurementSmoothing.Checked;
         }
 
-        //#region Print Label Method
-        //public static void PreparePrintLabelXML(Entity.Measurement measurmentSummary)
-        //{
-        //    //Open label template from XML(.label) file            
-        //    StreamReader streamReader = new StreamReader(Server.MapPath(@"Templates\CertifiedLabel.label"));
-        //    //StreamReader streamReader = new StreamReader(@"D:\Chirag.Vidani\Work\FujiFilm\Dymo\Labels\CertifiedLabel.label");
-        //    string labelXML = streamReader.ReadToEnd();
-        //    streamReader.Close();
-        //    //string labelXML = "XML";
-
-        //    //Set the localization values for label caption to placeholder
-        //    labelXML = labelXML.Replace("locJob", GetResourceString(_reclocLabelJob));
-        //    labelXML = labelXML.Replace("locDevice", GetResourceString(_reclocLabelDevice));
-        //    labelXML = labelXML.Replace("locMetric", GetResourceString(_reclocLabelMetric));
-        //    labelXML = labelXML.Replace("locStandard", GetResourceString(_reclocLabelStandard));
-        //    labelXML = labelXML.Replace("locTimestamp", GetResourceString(_reclocLabelTimestamp));
-        //    labelXML = labelXML.Replace("locCustomer", GetResourceString(_reclocLabelCustomer));
-        //    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-        //    {
-        //        labelXML = labelXML.Replace("locPageOrSurface", "");
-        //        labelXML = labelXML.Replace("locJDFJobID", "");
-        //        labelXML = labelXML.Replace("locJob", GetResourceString("locMeasurementNameResource1.Text"));
-        //    }
-        //    else
-        //    {
-        //        labelXML = labelXML.Replace("locPageOrSurface", GetResourceString(_reclocLabelPageOrSurface));
-        //        labelXML = labelXML.Replace("locJDFJobID", GetResourceString(_reclocLabelJDFJobID));
-        //        labelXML = labelXML.Replace("locJob", GetResourceString(_reclocLabelJob));
-        //    }
-        //    labelXML = labelXML.Replace("locdEType", GetResourceString(_reclocLabeldEType));
-        //    labelXML = labelXML.Replace("locTol", GetResourceString(_reclocLabelTol));
-        //    labelXML = labelXML.Replace("locAct", GetResourceString(_reclocLabelAct));
-        //    labelXML = labelXML.Replace("locSignature", GetResourceString(_reclocLabelSignature));
-        //    labelXML = labelXML.Replace("locDate", GetResourceString(_reclocLabelDate));
-
-        //    //Replace 5 sensitive characters of XML before passing them
-        //    Regex badAmpersand = new Regex("&(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
-        //    Regex badLessThan = new Regex("<(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
-        //    Regex badGreaterThan = new Regex(">(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
-        //    Regex badDoubleQuotation = new Regex("\"(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
-        //    Regex badapostrophes = new Regex("'(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
-        //    const string goodAmpersand = "&amp;";
-        //    const string goodLessThan = "&lt;";
-        //    const string goodGreaterThan = "&gt;";
-        //    const string goodDoubleQuotation = "&quot;";
-        //    const string goodapostrophes = "&apos;";
-
-        //    //Set the values to Placeholder
-        //    labelXML = labelXML.Replace("[Job]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.MeasurementName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if Measurement name contains "&" letter or rest of 4 letters
-        //    labelXML = labelXML.Replace("[Device]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(SessionManager.Instance.CurrentDevice.DeviceName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if Device name contains "&" letter or rest of 4 letters
-        //    labelXML = labelXML.Replace("[Metric]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.MetricTargetPresetName, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if MTP name contains "&" letter or rest of 4 letters
-        //    labelXML = labelXML.Replace("[PrintStandard]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.PrintStandardType, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if PrintStandardType name contains "&" letter or rest of 4 letters
-        //    labelXML = labelXML.Replace("[Timestamp]", measurmentSummary.MeasurementDate.ToString("g"));
-        //    labelXML = labelXML.Replace("[Customer]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.Customer, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if Customer name contains "&" letter or rest of 4 letters
-        //    labelXML = labelXML.Replace("[dEType]", measurmentSummary.dEMethod);
-        //    labelXML = labelXML.Replace("[PageOrSurface]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.PageOrSurface, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if PageOrSurface contains "&" letter or rest of 4 letters
-        //    labelXML = labelXML.Replace("[JDFJobId]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.JDFJobId, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if JDFJobId contains "&" letter or rest of 4 letters
-        //                                                                                                                                                                                                                                                                                      //labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
-        //    StringBuilder metricName = new StringBuilder();
-        //    StringBuilder metricTol = new StringBuilder();
-        //    StringBuilder metricActual = new StringBuilder();
-        //    bool appendNewLine = true;
-        //    foreach (var item in measurmentSummary.ValidationMetrics)
-        //    {
-        //        appendNewLine = true;
-        //        if (measurmentSummary.ValidationMetrics.Count == measurmentSummary.ValidationMetrics.IndexOf(item) + 1)
-        //            appendNewLine = false;
-        //        metricName.Append(item.Metric + (appendNewLine ? Environment.NewLine : ""));
-        //        metricTol.Append(item.Tolerance.ToString() + (appendNewLine ? Environment.NewLine : ""));
-        //        metricActual.Append(item.Actual.ToString() + (appendNewLine ? Environment.NewLine : ""));
-        //    }
-        //    labelXML = labelXML.Replace("[MetricCaption]", metricName.ToString());
-        //    labelXML = labelXML.Replace("[dTol]", metricTol.ToString());
-        //    labelXML = labelXML.Replace("[dActual]", metricActual.ToString());
-        //    labelXML = labelXML.Replace("\r\n", @"\ \r\n");
-        //    ScriptManager.RegisterStartupScript(this, this.GetType(), "LabelXML", " function GetLabelXml() { return '" + labelXML.ToString() + "'; };", true);
-
-        //    string imagePath = "";
-        //    if (measurmentSummary.MeasurementStatus.Equals("OK", StringComparison.InvariantCultureIgnoreCase))
-        //        imagePath = Server.MapPath(@"Images\VStatusSuccessIcon.png");
-        //    else
-        //        imagePath = Server.MapPath(@"Images\VStatusFailedIcon.png");
-
-
-        //    byte[] binaryData = File.ReadAllBytes(imagePath);
-        //    string base64String = System.Convert.ToBase64String(binaryData, 0, binaryData.Length);
-        //    ScriptManager.RegisterStartupScript(this, this.GetType(), "ImageString", " function GetStatusIconImageString() { return '" + base64String + "' ;};", true);
-        //}
-        //#endregion
 
 
         #endregion
 
         #region Properties
         public int JsRandomNumber { get { return new Random().Next(1, 100); } }
-
-        public string ValidationMeasurementStatus
-        {
-            get
-            {
-                if (ViewState["MeasurementStatus"] != null)
-                    return ViewState["MeasurementStatus"].ToString();
-                else
-                    return string.Empty;
-            }
-            set
-            {
-                ViewState["MeasurementStatus"] = value;
-            }
-        }
+        
         #endregion
 
         #region IViewAnalyze Members
@@ -608,29 +483,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_DotGain> DTSpreadSplineRangeChartData { get; set; }
         public DataTable DTMaxSpreadChartData { get; set; }
 
-        //public bool IsAverageOfMeasurements
-        //{
-        //    get
-        //    {
-        //        return chkAnalyzeAverageOfMeasurements.Checked;
-        //    }
-        //    set
-        //    {
-        //        IsAverageOfMeasurements = chkAnalyzeAverageOfMeasurements.Checked;
-        //    }
-        //}
-
-        //public bool Is1DMeasurementSmoothing
-        //{
-        //    get
-        //    {
-        //        return chk1DMeasurementSmoothing.Checked;
-        //    }
-        //    set
-        //    {
-        //        Is1DMeasurementSmoothing = chk1DMeasurementSmoothing.Checked;
-        //    }
-        //}
+       
         public bool IsAverageOfMeasurements
         {
             get;

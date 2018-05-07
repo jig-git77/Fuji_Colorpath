@@ -301,6 +301,7 @@
                 <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnCurrentDeviceName" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdnValidationMeasurementStatus" ClientIDMode="Static" />
 
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>

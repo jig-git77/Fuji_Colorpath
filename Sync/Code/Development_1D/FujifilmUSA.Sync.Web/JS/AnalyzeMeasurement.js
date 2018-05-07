@@ -685,6 +685,9 @@ function BindMeasurementSummary() {
                                 }
                             }
                         }
+
+                        //set validation measurement status value for XMF user 
+                        $('#hdnValidationMeasurementStatus').val(measurement.MeasurementStatus);
                     }
                 }
             },
