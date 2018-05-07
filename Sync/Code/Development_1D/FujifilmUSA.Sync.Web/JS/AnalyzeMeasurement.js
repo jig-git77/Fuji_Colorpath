@@ -282,6 +282,7 @@ $(document).ready(function () {
     //Bind click event for report generation
     $btnGeneratePDF.on('click', function (e) {
         e.preventDefault();
+        kendo.ui.progress($('#divReport'), true);
         var measurementID = parseInt($hdnCurrentMeasurement.val());
         var apiParameter = {
             //chart: chartContent,
@@ -403,7 +404,7 @@ $(document).ready(function () {
             data: apiParameter,
             dataType: "json",
             success: function (response) {
-                // $('#btnDownloadSpotPatch').removeClass('active');
+                kendo.ui.progress($('#divReport'), false);
                 if (response.data != null) {
                     console.log(response.data);
                     var fileName = '~' + response.data;
@@ -411,7 +412,7 @@ $(document).ready(function () {
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                //$('#btnDownloadSpotPatchExcel').removeClass('active');
+                kendo.ui.progress($('#divReport'), false);
                 console.log(XMLHttpRequest.responseText);
             }
         });
@@ -1789,7 +1790,7 @@ function PopulateAnalyzeChart() {
                 }
             });
         });
-    }   
+    }
 
     $divAnalyzeChart.kendoChart({
         seriesDefaults: {
@@ -1876,20 +1877,20 @@ function PopulateAnalyzeChart() {
                 rotation: "auto",
                 //cursor: "pointer",
                 visual: function (e) {
-                    
+
                     // Create an empty group that will hold the rendered label
                     var visual = new kendo.drawing.Group();
-                    
+
                     // Build an HTML fragment and append it to the body                    
                     //get the category values
                     var catValue = e.value;
-                    
+
                     if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-                        
+
                         var arr = catValue.MeasurementDateString.split('-');
 
                         //set checked or not                        
-                        var catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1]+'</div></div>';
+                        var catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';
                         var html = $(catText).appendTo(document.body);
 
 
@@ -1901,7 +1902,7 @@ function PopulateAnalyzeChart() {
                             .done(function (group) {
                                 // Clean-up HTML fragment
                                 html.remove();
-                                
+
                                 // Center the label using Layout
                                 var layout = new kendo.drawing.Layout(rect, {
                                     justifyContent: "center"
@@ -2155,7 +2156,7 @@ function PopulateInkPaperChartABComparision() {
                 //-----For Sync1D projects or validation projects
                 if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
                     if (e.series.index == 0) {
-                        var axis = e.sender.getAxis("valueAxis");                        
+                        var axis = e.sender.getAxis("valueAxis");
 
                         //------Green marker image plot for Previous Run's Avg ΔE
                         if (e.dataItem.PreAvgΔE > 0) {
@@ -3342,12 +3343,12 @@ function PopulateSummaryDeltaChart() {
     //var axis = json.map(function (a) { return a["?E"]; });
     //var axis = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔE; });
     //var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
-    var maxNum = Math.max.apply(Math, jsonSummaryValueList);
+    var maxNum = Math.max.apply(Math, jsonSummaryLimitList);
     var maxValue = 0;
     var marginValue = 1;
     switch (true) {
         case (maxNum < 5): maxValue = 5; marginValue = 1; break;
-        case (maxNum == 5): maxValue = 6; marginValue = 1; break;
+        case (maxNum == 5): maxValue = 6; marginValue = 1; break;        
         case (maxNum >= 5 && maxNum < 10): maxValue = 10; marginValue = 2; break;
         case (maxNum >= 10 && maxNum < 15): maxValue = 15; marginValue = 3; break;
         case (maxNum >= 15 && maxNum < 20): maxValue = 20; marginValue = 5; break;
@@ -5363,9 +5364,9 @@ function GetInkPaperPatchChartImage() {
     var kendoOptions = $divChartInkPaperABComparision.data("kendoChart").options;
     var kendodataSource = $divChartInkPaperABComparision.data("kendoChart").dataSource;
     kendoOptions.categoryAxis.labels.visible = false;
-    kendoOptions.categoryAxis.reverse = true;
-    kendoOptions.series[0].data = kendoOptions.series[0].data.reverse();
-    kendoOptions.series[1].data = kendoOptions.series[1].data.reverse();
+    //kendoOptions.categoryAxis.reverse = true;
+    //kendoOptions.series[0].data = kendoOptions.series[0].data.reverse();
+    //kendoOptions.series[1].data = kendoOptions.series[1].data.reverse();
     $('#divChartInkPaperDummy').kendoChart(kendoOptions);
     var dummyChart = $('#divChartInkPaperDummy').data('kendoChart');
     dummyChart.dataSource = kendodataSource;

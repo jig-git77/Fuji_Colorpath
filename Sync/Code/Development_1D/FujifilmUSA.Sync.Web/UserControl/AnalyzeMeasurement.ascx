@@ -1356,7 +1356,7 @@
 
                                 <%--report generation tab--%>
                                 <div>
-                                    <div>
+                                    <div id="divReport">
                                         <br />
                                         <%--<asp:Button ID="btnGeneratePDF" ClientIDMode="Static" runat="server" Text="Generate PDF Report" />--%>
                                         <a id="btnGeneratePDF">

@@ -833,6 +833,7 @@
     <Content Include="Images\header_bg1.png" />
     <Content Include="Images\InkOptimizeSource.png" />
     <Content Include="Images\LabBackdrop.jpg" />
+    <Content Include="Images\large-loader.gif" />
     <Content Include="Images\Logo-report.png" />
     <Content Include="Images\open_folder_yellow.png" />
     <Content Include="Images\Red.png" />
@@ -6228,7 +6229,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
