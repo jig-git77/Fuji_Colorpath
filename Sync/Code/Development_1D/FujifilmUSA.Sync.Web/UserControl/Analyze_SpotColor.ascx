@@ -644,6 +644,7 @@
                                             <div style="padding-left: 10px;">
 
                                                 <table class="PatchDetailsSummaryTable">
+                                                    <tr><td style="width:42%;"></td><td></td></tr>
                                                     <tr>
                                                         <th colspan="2"><span>
                                                             <asp:Localize runat="server" ID="locSummary_Header"></asp:Localize>
@@ -653,7 +654,7 @@
                                                         <td colspan="2">
                                                             <table id="tblFirstRunDeltas" runat="server" visible="false" style="width: 100%;">
                                                                 <tr>
-                                                                    <td style="width: 31%;"><span style="font-weight: bold;">
+                                                                    <td style="width: 42%;"><span style="font-weight: bold;">
                                                                         <asp:Localize Text="Min ΔE" runat="server"
                                                                             ID="locMinDeltaE" meta:resourcekey="locMinDeltaEResource1"></asp:Localize>
                                                                     </span></td>
@@ -684,7 +685,7 @@
                                                             </table>
                                                             <table id="tblSecondRunDeltas" runat="server" visible="false" style="width: 100%;">
                                                                 <tr>
-                                                                    <td style="width: 43%;"></td>
+                                                                    <td style="width: 42%;"></td>
                                                                     <td><span style="font-weight: bold;">ΔE_T_P</span></td>
                                                                     <td><span style="font-weight: bold;">ΔE_M_T</span></td>
                                                                     <td><span style="font-weight: bold;">ΔE_M_P</span></td>
