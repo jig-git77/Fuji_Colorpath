@@ -1876,16 +1876,14 @@ function PopulateAnalyzeChart() {
                 rotation: "auto",
                 //cursor: "pointer",
                 visual: function (e) {
-
-                    console.log('start');
+                    
                     // Create an empty group that will hold the rendered label
                     var visual = new kendo.drawing.Group();
-                    console.log('visual object created');
+                    
                     // Build an HTML fragment and append it to the body                    
                     //get the category values
                     var catValue = e.value;
-                    debugger
-                    console.log('condition started');
+                    
                     if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
                         
                         var arr = catValue.MeasurementDateString.split('-');
@@ -1915,8 +1913,6 @@ function PopulateAnalyzeChart() {
                             });
                     } else {
 
-                        console.log('non validtion project started');
-
                         //set checked or not
                         var catText = '<div style="font-size:18px;cursor: pointer;">' + (catValue.IsUsed ? '☑' : '☐') + '</div>'
 
@@ -1940,7 +1936,6 @@ function PopulateAnalyzeChart() {
                             });
 
                     }
-                    console.log('returned from method');
                     return visual;
                 }
             },
@@ -2160,27 +2155,7 @@ function PopulateInkPaperChartABComparision() {
                 //-----For Sync1D projects or validation projects
                 if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
                     if (e.series.index == 0) {
-                        var axis = e.sender.getAxis("valueAxis");
-
-                        ////set the path for the green target
-                        // var targetGreen = axis.slot(e.dataItem.PreAvgΔE).origin.x;
-                        // var pathGreen = new kendo.drawing.Path({ stroke: { width: 2, color: "#34E61E" } }).moveTo(targetGreen, e.rect.topRight().y).lineTo(targetGreen, (e.rect.topRight().y + e.rect.size.height));
-                        // visual.append(pathGreen);
-                        // //set the dot on the green target
-                        // var circleGeoGreenPath = new kendo.geometry.Circle([axis.slot(e.dataItem.PreAvgΔE).origin.x, (e.rect.topRight().y + (e.rect.size.height / 2))], 2);
-                        // var circleGreenPath = new kendo.drawing.Circle(circleGeoGreenPath).fill("#34E61E", 1);
-                        // circleGreenPath.options.stroke.color = "#34E61E";
-                        // visual.append(circleGreenPath);
-
-                        // //set the path for the red target
-                        // var targetRed = axis.slot(e.dataItem.ΔELimit).origin.x;
-                        // var pathRed = new kendo.drawing.Path({ stroke: { width: 2, color: "red" } }).moveTo(targetRed, e.rect.topRight().y).lineTo(targetRed, (e.rect.topRight().y + e.rect.size.height));
-                        // visual.append(pathRed);
-                        // //set the dot on the red target
-                        // var circleGeoRedPath = new kendo.geometry.Circle([axis.slot(e.dataItem.ΔELimit).origin.x, (e.rect.topRight().y + (e.rect.size.height / 2))], 2);
-                        // var circleRedPath = new kendo.drawing.Circle(circleGeoRedPath).fill("red", 1);
-                        // circleRedPath.options.stroke.color = "red";
-                        // visual.append(circleRedPath);
+                        var axis = e.sender.getAxis("valueAxis");                        
 
                         //------Green marker image plot for Previous Run's Avg ΔE
                         if (e.dataItem.PreAvgΔE > 0) {
@@ -2203,6 +2178,7 @@ function PopulateInkPaperChartABComparision() {
                             redObj.color = "red";
                             thrashHold.paths.push(redObj);
                         }
+                        //thrashHold.paths = [];
                     }
                 }
                 return visual;
@@ -2295,7 +2271,6 @@ function PopulateInkPaperChartABComparision() {
             height: 325
         },
         render: function (e) {
-
             //-----For Sync1D projects or validation projects
             if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
                 var chart = e.sender;
@@ -2310,6 +2285,7 @@ function PopulateInkPaperChartABComparision() {
                     circlePath.options.stroke.color = obj.color;
                     chart.surface.draw(circlePath);
                 });
+                thrashHold.paths = [];
             }
         }
     });
@@ -3508,8 +3484,8 @@ function PopulateSummaryDeltaChart() {
         }],
         categoryAxis: {
             name: "categoryAxis",
-            categories: categoryList,
-            //categories: [],
+            //categories: categoryList,
+            categories: [],
             majorGridLines: {
                 visible: false
             },
@@ -5386,10 +5362,10 @@ function GetInkPaperPatchChartImage() {
     var chart = $divChartInkPaperABComparision.data("kendoChart");
     var kendoOptions = $divChartInkPaperABComparision.data("kendoChart").options;
     var kendodataSource = $divChartInkPaperABComparision.data("kendoChart").dataSource;
-    //kendoOptions.categoryAxis.labels.visible = false;
-    //kendoOptions.categoryAxis.reverse = true;
-    //kendoOptions.series[0].data = kendoOptions.series[0].data.reverse();
-    //kendoOptions.series[1].data = kendoOptions.series[1].data.reverse();
+    kendoOptions.categoryAxis.labels.visible = false;
+    kendoOptions.categoryAxis.reverse = true;
+    kendoOptions.series[0].data = kendoOptions.series[0].data.reverse();
+    kendoOptions.series[1].data = kendoOptions.series[1].data.reverse();
     $('#divChartInkPaperDummy').kendoChart(kendoOptions);
     var dummyChart = $('#divChartInkPaperDummy').data('kendoChart');
     dummyChart.dataSource = kendodataSource;
