@@ -80,6 +80,7 @@
                 //},
                 transport: {
                     read: function (options) {
+                        kendo.ui.progress($('#divPathDetails .k-grid-content'), true);
                         $.ajax({
                             type: "GET",
                             url: SERVICE_BASE_URL + "api/Chart/GetSpotPatchDetails/",
@@ -89,6 +90,7 @@
                                 'Accept-Language': CurrentCulture
                             },
                             success: function (response) {
+                                kendo.ui.progress($('#divPathDetails .k-grid-content'), false);
                                 if (response.data != null) {
                                     Resources = response.data.GlobalResources;
                                     var spotStates = response.data.spotAnalyzeDetails;
@@ -110,6 +112,7 @@
                                 options.success(spotStates.patchDetails);
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                kendo.ui.progress($('#divPathDetails .k-grid-content'), false);
                                 console.log(XMLHttpRequest);
                                 //alert(XMLHttpRequest);
                             }

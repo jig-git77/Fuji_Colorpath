@@ -771,6 +771,7 @@ function BindMeasurementPatchDetails() {
         dataSource: {
             transport: {
                 read: function (options) {
+                    kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), true);
                     $.ajax({
                         type: "GET",
                         url: SERVICE_BASE_URL + 'api/Chart/GetMeasurementPatchDetails',
@@ -786,6 +787,7 @@ function BindMeasurementPatchDetails() {
                             'Accept-Language': $CurrentCulture
                         },
                         success: function (response) {
+                            kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
                             if (response.data != null) {
                                 Resources = response.data.GlobalResources;
                                 var patches = response.data.measurementPatchDetails;
@@ -816,6 +818,7 @@ function BindMeasurementPatchDetails() {
 
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
                             console.log(XMLHttpRequest.responseText);
                         }
                     });
