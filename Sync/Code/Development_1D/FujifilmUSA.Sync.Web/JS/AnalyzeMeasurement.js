@@ -3346,7 +3346,7 @@ function PopulateSummaryDeltaChart() {
     //var axis = json.map(function (a) { return a["?E"]; });
     //var axis = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔE; });
     //var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
-    var maxNum = Math.max.apply(Math, jsonSummaryLimitList);
+    var maxNum = Math.max.apply(Math, jsonSummaryValueList);
     var maxValue = 0;
     var marginValue = 1;
     switch (true) {
