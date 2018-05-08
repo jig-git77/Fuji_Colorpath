@@ -96,7 +96,7 @@ var $hdnCurrentProjectLicenseType;
 var labelPrintXMLString = '';
 var labelPrintStatusIconString = '';
 var reportGradingPath = '';
-
+var reportCMYKDensityPath='';
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -690,8 +690,10 @@ function BindMeasurementSummary() {
                         $('#hdnValidationMeasurementStatus').val(measurement.MeasurementStatus);
 
                         //create url to open report grading url for scoring report
-                        //ReportGradingWindow.NavigateUrl = "../PopupReportGrading.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType + "&IsAvgMeas=" + IsAverageOfMeasurements;
                         reportGradingPath = 'PopupReportGrading.aspx?MeasurementID=' + measurement.MeasurementId + '&From_ΔE=' + $selectedDeltaE + '&DLPName=' + $hdnReportDLPName + '&Vali_Type=' + $hdnValidationType + '&IsAvgMeas=' + $isAverageOfMeasurements;
+
+                        //create url to open report grading url for CMYK density report
+                        reportCMYKDensityPath = 'PopupReportCMYKDensity.aspx?ProjectID=' + $hdnProjectID + '&OptimizeRunID=' + $hdnOptimizationRunID + '&MeasurementID=' + measurement.MeasurementId;
                     }
                 }
             },
@@ -5814,4 +5816,7 @@ function GetStatusIconImageString() {
 
 function getPathForReportGrading() {
     return reportGradingPath;
+}
+function getPathForCMYKDensityReport() {
+    return reportCMYKDensityPath;
 }

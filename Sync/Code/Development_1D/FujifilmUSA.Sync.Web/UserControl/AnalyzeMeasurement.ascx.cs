@@ -262,7 +262,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Div_Opt_Header.Visible = true;
 
                     td1DSmoothing.Visible = true;  //Display in Sync1D for Smoothing measurements (Commented out for temporary untill get decided to use this feature)
-                   
+                    Div_ReportCMYKDensity.Visible = true;  //---Disable for time being in Production code
 
                 }
                 else

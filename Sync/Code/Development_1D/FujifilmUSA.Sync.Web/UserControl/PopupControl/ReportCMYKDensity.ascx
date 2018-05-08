@@ -1,9 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ReportCMYKDensity.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.PopupControl.ReportCMYKDensity" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <script src="JQuery/jquery-1.9.1.min.js"></script>
-<script src="https://kendo.cdn.telerik.com/2017.3.1026/js/kendo.all.min.js"></script>
-<link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
-<link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
+<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2018.1.221/kendo.all.min.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript">
 
     var jsonCyanDensity = [];
@@ -502,7 +502,7 @@
                 <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
             </td>
         </tr>
-       <tr>
+      <%-- <tr>
         <td style="width: 48%;" valign="top">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                 <tr>
@@ -749,7 +749,7 @@
                 </tr>
             </table>
         </td>
-       </tr>
+       </tr>--%>
          <tr>
         <td style="width: 48%;" valign="top">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">

@@ -162,7 +162,9 @@
     }
 
     function ShowReportCMYKDensityWindow() {
+        var cmykDensityPath = getPathForCMYKDensityReport();
         var oWnd = $find("<%= ReportCMYKDensityWindow.ClientID %>");
+        oWnd.setUrl(cmykDensityPath);
         oWnd.show();
         return false;
     }
