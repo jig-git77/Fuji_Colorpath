@@ -2130,7 +2130,7 @@ function PopulateInkPaperChartABComparision() {
     //    default: maxValue = maxDeltaLimit; marginValue = 10; break;
     //}
 
-    maxValue = maxDeltaLimit + 1;
+    //maxValue = maxDeltaLimit;
     //generate the second stacked chart by max value
     var stackedChart = [];
     $.each(axis, function (index, num) {
@@ -2240,7 +2240,7 @@ function PopulateInkPaperChartABComparision() {
             labels: {
                 rotation: "auto"
             },
-            //max: maxValue,
+            max: maxDeltaLimit,
             margin: marginValue
         },
         tooltip: {
