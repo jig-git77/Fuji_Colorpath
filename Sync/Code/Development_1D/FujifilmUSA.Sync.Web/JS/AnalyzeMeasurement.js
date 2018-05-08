@@ -95,6 +95,7 @@ var $btnFirst;
 var $hdnCurrentProjectLicenseType;
 var labelPrintXMLString = '';
 var labelPrintStatusIconString = '';
+var reportGradingPath = '';
 
 //********** kendo objects *********//
 var drawing = kendo.drawing;
@@ -623,7 +624,6 @@ function BindMeasurementSummary() {
                     if (response.data.length > 0) {
 
                         var measurements = response.data;
-                        console.log(measurements);
                         var measurement = measurements[0];
 
                         //generate dymo printing string to print the dymo label only for validation
@@ -688,6 +688,10 @@ function BindMeasurementSummary() {
 
                         //set validation measurement status value for XMF user 
                         $('#hdnValidationMeasurementStatus').val(measurement.MeasurementStatus);
+
+                        //create url to open report grading url for scoring report
+                        //ReportGradingWindow.NavigateUrl = "../PopupReportGrading.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType + "&IsAvgMeas=" + IsAverageOfMeasurements;
+                        reportGradingPath = 'PopupReportGrading.aspx?MeasurementID=' + measurement.MeasurementId + '&From_ΔE=' + $selectedDeltaE + '&DLPName=' + $hdnReportDLPName + '&Vali_Type=' + $hdnValidationType + '&IsAvgMeas=' + $isAverageOfMeasurements;
                     }
                 }
             },
@@ -695,6 +699,7 @@ function BindMeasurementSummary() {
                 alert(exception);
             }
         });
+        
 
     } else {
 
@@ -731,6 +736,8 @@ function BindMeasurementSummary() {
             }
         });
     }
+
+    
 }
 
 ////**************** SET IMAGE ON LINK TO GENERATE REPORT  ****************////
@@ -2107,20 +2114,21 @@ function PopulateInkPaperChartABComparision() {
 
     var maxValue = 0;
     var marginValue = 1;
-    switch (true) {
-        case (maxDeltaLimit < 5): maxValue = 5; marginValue = 1; break;
-        case (maxDeltaLimit == 5): maxValue = 6; marginValue = 1; break;
-        case (maxDeltaLimit >= 5 && maxDeltaLimit < 8): maxValue = 8; marginValue = 2; break;
-        case (maxDeltaLimit >= 8 && maxDeltaLimit < 10): maxValue = 10; marginValue = 2; break;
-        case (maxDeltaLimit >= 10 && maxDeltaLimit < 15): maxValue = 15; marginValue = 3; break;
-        case (maxDeltaLimit >= 15 && maxDeltaLimit < 20): maxValue = 20; marginValue = 5; break;
-        case (maxDeltaLimit >= 20 && maxDeltaLimit < 30): maxValue = 30; marginValue = 5; break;
-        case (maxDeltaLimit >= 30 && maxDeltaLimit < 40): maxValue = 40; marginValue = 5; break;
-        case (maxDeltaLimit >= 40 && maxDeltaLimit < 50): maxValue = 50; marginValue = 5; break;
-        case (maxDeltaLimit >= 50 && maxDeltaLimit < 60): maxValue = 60; marginValue = 5; break;
-        default: maxValue = maxDeltaLimit; marginValue = 10; break;
-    }
+    //switch (true) {
+    //    case (maxDeltaLimit < 5): maxValue = 5; marginValue = 1; break;
+    //    case (maxDeltaLimit == 5): maxValue = 6; marginValue = 1; break;
+    //    case (maxDeltaLimit >= 5 && maxDeltaLimit < 8): maxValue = 8; marginValue = 2; break;
+    //    case (maxDeltaLimit >= 8 && maxDeltaLimit < 10): maxValue = 10; marginValue = 2; break;
+    //    case (maxDeltaLimit >= 10 && maxDeltaLimit < 15): maxValue = 15; marginValue = 3; break;
+    //    case (maxDeltaLimit >= 15 && maxDeltaLimit < 20): maxValue = 20; marginValue = 5; break;
+    //    case (maxDeltaLimit >= 20 && maxDeltaLimit < 30): maxValue = 30; marginValue = 5; break;
+    //    case (maxDeltaLimit >= 30 && maxDeltaLimit < 40): maxValue = 40; marginValue = 5; break;
+    //    case (maxDeltaLimit >= 40 && maxDeltaLimit < 50): maxValue = 50; marginValue = 5; break;
+    //    case (maxDeltaLimit >= 50 && maxDeltaLimit < 60): maxValue = 60; marginValue = 5; break;
+    //    default: maxValue = maxDeltaLimit; marginValue = 10; break;
+    //}
 
+    maxValue = maxDeltaLimit + 1;
     //generate the second stacked chart by max value
     var stackedChart = [];
     $.each(axis, function (index, num) {
@@ -2230,7 +2238,7 @@ function PopulateInkPaperChartABComparision() {
             labels: {
                 rotation: "auto"
             },
-            max: maxValue,
+            //max: maxValue,
             margin: marginValue
         },
         tooltip: {
@@ -5121,6 +5129,91 @@ function PopulateTVIG7Chart() {
     }
 }
 
+////**************** GENERATE SCORE MEASUREMENT REPORT  ****************////
+function GetGradingReport(reportDetail) {
+
+    var measurementID = parseInt($hdnCurrentMeasurement.val());
+    var apiParameter = {
+        MeasurementId: measurementID,
+        ProjectId: $hdnProjectID,
+        IsAverageOfMeasurements: $isAverageOfMeasurements,
+        IsVerificationProject: $hdnVerification,
+        IsSync1DTypeProject: $hdnSync1DType,
+        fromDeltaE: $selectedDeltaE,
+        validationType: $hdnValidationType,
+        CurrentUserId: CURRENT_USER_ID,
+        ReportDLPName: $hdnReportDLPName,
+        ABComparisionSpiderChart: '',
+        InkPaperPatchChart: '',
+        ABActualTargetChart: '',
+        LComparisionChart: '',
+        LGrayBalanceChart: '',
+        AGrayBalanceChart: '',
+        BGrayBalanceChart: '',
+        DeltaSummaryChart: '',
+        InkPaperLAB1Chart: '',
+        InkPaperLAB2Chart: '',
+        InkPaperDansityChart: '',
+        TVI_ISO_CMYK_Chart: '',
+        TVI_ISO_Cyan_Chart: '',
+        TVI_ISO_Magenta_Chart: '',
+        TVI_ISO_Yellow_Chart: '',
+        TVI_ISO_Black_Chart: '',
+
+        TVI_Summary_Chart: '',
+        GrayBalanceDeltaCH_Chart: '',
+        GrayBalanceDeltaL_Chart: '',
+        BlackBalanceDeltaL_Chart: '',
+        BlackNPDChart: '',
+        GrayNPDChart: '',
+        grading: reportDetail
+    };
+
+    apiParameter.ABComparisionSpiderChart = GetABComparisionSpiderChartImage();
+    apiParameter.InkPaperPatchChart = GetInkPaperPatchChartImage();
+    apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
+    apiParameter.AGrayBalanceChart = Get_A_BalanceChartImage();
+    apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
+    apiParameter.InkPaperLAB1Chart = Get_InkPaperChartLAB_OneChartImage();
+    apiParameter.InkPaperLAB2Chart = Get_InkPaperChartLAB_TwoChartImage();
+
+    $.ajax({
+        type: "POST",
+        url: SERVICE_BASE_URL + 'api/Report/ExportReportGrading',
+        data: apiParameter,
+        dataType: "json",
+        success: function (response) {
+            //kendo.ui.progress($('#divReport'), false);
+            if (response.data != null) {
+                //console.log(response.data);
+                var fileName = '~' + response.data;
+                window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //kendo.ui.progress($('#divReport'), false);
+            console.log(XMLHttpRequest.responseText);
+        }
+    });
+
+    //$.ajax({
+    //    url: SERVICE_BASE_URL + 'api/Report/ExportReportGrading',
+    //    data: JSON.stringify(apiParameter),
+    //    type: 'POST',
+    //    headers: {
+    //        "content-type": "application/json",
+    //    },
+    //    success: function (response) {
+    //        window.open(SERVICE_BASE_URL + response.data, "_blank");
+    //    },
+    //    error: function (xhr, errorType, exception) {
+    //        alert(exception);
+
+    //    }
+    //});
+}
+
+
 
 ////////////////// Analyze chart paging functions //////////////////
 
@@ -5151,25 +5244,21 @@ function BindPageNumber() {
     }
 }
 
+//Method to set enable/disable previous button in treand line chart
 function SetPrevButtonDisabled(enabled) {
     $btnPrevious.prop('disabled', enabled);
     $btnFirst.prop('disabled', enabled);
 }
 
+//Method to set enable/disable next button in treand line chart
 function SetNextButtonDisabled(enabled) {
     $btnNext.prop('disabled', enabled);
     $btnLast.prop('disabled', enabled);
 }
 
-function SetInitialAnalyzeBinding() {
-    SetNextButtonDisabled(true);
-    $ddlPaging.find('option').last().attr('selected', true);
-    PopulateAnalyzeChart();
-}
-
-
 /////////******************************** METHODS FOR BIND CHART BACKGROUNDS ********************************////////////
 
+//Method to set the background in XY charts
 function renderChartWithBackgroundByAxis(e) {
 
     var xSlot = {};
@@ -5257,6 +5346,7 @@ function renderChartWithBackgroundByAxis(e) {
     }
 }
 
+//Method to set the background for category chart
 function renderChartWithBackgroundByCategory(e) {
     var chart = e.sender;
 
@@ -5296,6 +5386,8 @@ function renderChartWithBackgroundByCategory(e) {
     //set the path
     chart.surface.draw(path);
 }
+
+//Method to set the background for category paper L chart
 function renderChartWithBackgroundByCategoryForPaperL(e) {
     var chart = e.sender;
     var path = {};
@@ -5339,6 +5431,9 @@ function renderChartWithBackgroundByCategoryForPaperL(e) {
     chart.surface.draw(path);
 }
 
+
+
+
 /////////******************************** METHODS FOR BIND CHART IMAGES FOR REPORT GENERATIONS ********************************////////////
 
 ////**************** GET IMAGE OF AB COMPARSION SPIDER CHART FOR REPORT  ****************////
@@ -5359,11 +5454,6 @@ function GetABComparisionSpiderChartImage() {
 }
 
 ////**************** GET IMAGE OF INK PAPER CHART FOR REPORT  ****************////
-//function GetInkPaperPatchChartImage() {
-//    var chart = $divChartInkPaperABComparision.data("kendoChart");
-
-//    return chart.imageDataURL();
-//}
 
 function GetInkPaperPatchChartImage() {
     var chart = $divChartInkPaperABComparision.data("kendoChart");
@@ -5609,6 +5699,8 @@ function Get_DeltaSummaryChartImage() {
 //}
 
 ////**************** METHOD TO CHECK AVG COMPATIBILITY  ****************////
+
+//check average compatibility for measurement
 function CheckAvgCompability() {
     var answer = document.getElementById('ContentPlaceHolder1_ucAnalyze_hd_CompError').value;
     if (answer == "0") {
@@ -5659,6 +5751,7 @@ function CheckAvgCompability() {
     return false;
 }
 
+//removes duplicate values from array
 function arrayUnique(array) {
     var a = array.concat();
     for (var i = 0; i < a.length; ++i) {
@@ -5671,12 +5764,14 @@ function arrayUnique(array) {
     return a;
 }
 
+//copy object into other
 function CopyObject(sourceObj, destObj) {
     Object.keys(sourceObj).forEach(function (k) {
         destObj[k] = sourceObj[k];
     });
 }
 
+//set the measurement detail for dymo label printing
 function PopulateDymoPrinter(obj) {
 
     var apiParameter = {
@@ -5707,9 +5802,16 @@ function PopulateDymoPrinter(obj) {
     });
 }
 
+//method to get label string to print in dymo label
 function GetLabelXml() {
     return labelPrintXMLString;
 }
+
+//method to get icon image in label print dymo label
 function GetStatusIconImageString() {
     return labelPrintStatusIconString;
+}
+
+function getPathForReportGrading() {
+    return reportGradingPath;
 }

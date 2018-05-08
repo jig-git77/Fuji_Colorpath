@@ -148,8 +148,10 @@
         var oWnd = $find("<%= ClosePrintConditionWindow.ClientID %>");
         oWnd.close();
     }
-    function ShowReportGradingWindow() {
+    function ShowReportGradingWindow() {        
+        var gradingPath = getPathForReportGrading();
         var oWnd = $find("<%= ReportGradingWindow.ClientID %>");
+        oWnd.setUrl(gradingPath);
         oWnd.show();
         return false;
     }
@@ -490,7 +492,7 @@
                                     <div>
 
                                         <div id="divValidationSummary" cellpadding="0" cellspacing="0" width="650px">
-                                            <div style="float: right;padding-top: 2px;position: absolute;top: 0;right: 0;padding-right: 4px;padding-top: 5px">
+                                            <div style="float: right; padding-top: 2px; position: absolute; top: 0; right: 0; padding-right: 4px; padding-top: 5px">
                                                 <asp:ImageButton ID="ibtnPrintPreview" runat="server"
                                                     ImageUrl="../Images/DymoPrintPreviewIcon.png" ToolTip="Preview label"
                                                     OnClientClick="ShowLabelPrintPreview(); return false;"
@@ -1358,16 +1360,22 @@
                                 <%--report generation tab--%>
                                 <div>
                                     <div id="divReport">
-                                        <br />
-                                        <%--<asp:Button ID="btnGeneratePDF" ClientIDMode="Static" runat="server" Text="Generate PDF Report" />--%>
-                                        <a id="btnGeneratePDF">
-                                            <img src="Images/processbar.gif" />
-                                        </a>
-                                        <%-- <button id="btnGeneratePDF">
-                                            <span class="spinner">
-                                                <img src="Images/processbar.gif" />
-                                            </span>
-                                        </button>--%>
+                                        <table id="TblGeneratePDFReport" runat="server" border="0" width="100%" style="height: 100%;"
+                                            cellpadding="0" cellspacing="0" class="TABLE1">
+                                            <tr id="Tr4" runat="server">
+                                                <td id="Td5" valign="top" runat="server">
+                                                    <a id="btnGeneratePDF"><img src="Images/processbar.gif" style="    padding-left: 10px;" /></a>
+                                                </td>
+                                                <td valign="top">
+                                                    <div id="Div_ReportGrading" runat="server" visible="false" style="float: right; padding-right: 10px;">
+                                                        <asp:ImageButton ID="btnReportGrading" runat="server" ImageUrl="../Images/Sync DLP Scoring Report_preview.jpg" ToolTip="Scoring Report" OnClientClick="javascript:return ShowReportGradingWindow();"></asp:ImageButton>
+                                                    </div>
+                                                    <div id="Div_ReportCMYKDensity" runat="server" visible="false" style="float: right; padding-right: 10px;">
+                                                        <asp:ImageButton ID="btnReportCMYKDensity" runat="server" ImageUrl="../Images/Sync DLP Scoring Report_preview.jpg" ToolTip="CMYK Density Report" OnClientClick="javascript:return ShowReportCMYKDensityWindow();"></asp:ImageButton>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
                                         <br />
                                     </div>
                                 </div>

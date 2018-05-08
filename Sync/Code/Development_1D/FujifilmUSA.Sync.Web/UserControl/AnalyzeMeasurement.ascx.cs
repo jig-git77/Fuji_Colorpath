@@ -161,25 +161,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterGlobal = new PresenterGlobal();
         }
 
-        #region Check Average Measurement Compatibility Mode
-        public void ChkAvgMeasurementCompatibility()
-        {
-            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-            int CompatibilityNo = _presenterAnalyze.ChkAvgMeasurementCompatibility();
-            if (CompatibilityNo == 1)    //Error in different ReferenceCharts throughout whole OptimizationRun
-            {
-                hd_CompError.Value = "1";
-            }
-            else if (CompatibilityNo == 2)   //Error in different MetricTargetPresets throughout whole OptimizationRun
-            {
-                hd_CompError.Value = "2";
-            }
-            else   //Success, No difference
-            {
-                hd_CompError.Value = "0";
-            }
-        }
-        #endregion
+        
 
         #endregion
         protected void Page_Load(object sender, EventArgs e)
@@ -247,6 +229,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
                     //Verification mode
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //---Only display Report Grading for Sync4D Validation
+                    {
+                        Div_ReportGrading.Visible = true; //---Disable for time being in Production code
+                    }
+                    
                     lbtnDownloadAndSaveDLP.Visible = false;
                     lbtnMeasurementVerification.Visible = true;
                     if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification) //---If not Sync 4D Certification type of project, then only display Optimize button
@@ -317,6 +304,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        #region Check Average Measurement Compatibility Mode
+        public void ChkAvgMeasurementCompatibility()
+        {
+            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            int CompatibilityNo = _presenterAnalyze.ChkAvgMeasurementCompatibility();
+            if (CompatibilityNo == 1)    //Error in different ReferenceCharts throughout whole OptimizationRun
+            {
+                hd_CompError.Value = "1";
+            }
+            else if (CompatibilityNo == 2)   //Error in different MetricTargetPresets throughout whole OptimizationRun
+            {
+                hd_CompError.Value = "2";
+            }
+            else   //Success, No difference
+            {
+                hd_CompError.Value = "0";
+            }
+        }
+        #endregion
 
         #region Control Events
         protected void lbtnMeasurementVerification_Click(object sender, EventArgs e)

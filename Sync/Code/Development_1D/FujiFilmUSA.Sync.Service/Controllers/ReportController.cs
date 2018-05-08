@@ -794,7 +794,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         objReportPDF.ReportName = "Scoring Report";
                         objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
                         objReportPDF.GenerateClientReportPDF();
-                        string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
+                        string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
                         httpResponse.status = ResponseStatus.Success;
                         httpResponse.Data = ReportPath;
                         actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
