@@ -1,13 +1,13 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="LeftMenuProjectItem.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.UserControl.LeftMenuProjectItem" %>
 
+    Inherits="FujifilmUSA.Sync.Web.UserControl.LeftMenuProjectItem" %>
 <script type="text/javascript">
     function ConfirmDelete() {
         return confirm('<%= GetResourceString("deleteRunMsg") %>');
     }
 
     function ConfirmDLPDelete() {
-        return confirm('<%= GetResourceString("deleteDLPMsg") %>');
+        return confirm('<%= FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary? GetResourceString("deleteNCPMsg"):GetResourceString("deleteDLPMsg") %>');
     }
 </script>
 

@@ -414,19 +414,22 @@
                     </asp:LinkButton>
                 </div>
                 <div class="buttonright">                                                         
-                    <asp:LinkButton ID="lbtnGenerateReport" runat="server" ValidationGroup="vgSaveWindows" 
+                    <%--<asp:LinkButton ID="lbtnGenerateReport" runat="server" ValidationGroup="vgSaveWindows" 
                         CssClass="gray_bt"
                         OnClientClick="if (!OnClientClick()) {return false;}" 
                         onclick="lbtnGenerateReport_Click" >
                        
                     <span> <asp:Localize ID="locGenReport" runat="server" Text="Generate Report" meta:resourcekey="locGenetareReportResource1" ></asp:Localize> 
                         </span>
+                    </asp:LinkButton>--%>
+                    <asp:LinkButton runat="server" ID="lnkClientGenreateReport" CssClass="gray_bt" OnClientClick="CreateReport()" ValidationGroup="vgSaveWindows">
+                        <span><asp:Localize ID="locGenReport" runat="server" Text="Generate Report" meta:resourcekey="locGenetareReportResource1" ></asp:Localize></span>
                     </asp:LinkButton>
                 </div>
                 <div class="buttonright">
-                    <asp:LinkButton runat="server" ID="lnkClientGenreateReport" CssClass="gray_bt" OnClientClick="CreateReport()" ValidationGroup="vgSaveWindows">
+                    <%--<asp:LinkButton runat="server" ID="lnkClientGenreateReport" CssClass="gray_bt" OnClientClick="CreateReport()" ValidationGroup="vgSaveWindows">
                         <span>Kendo Report</span>
-                    </asp:LinkButton>
+                    </asp:LinkButton>--%>
                 </div>
                   
                 <div class="clear">

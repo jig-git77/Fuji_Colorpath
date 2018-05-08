@@ -281,8 +281,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
                                 dEMethod = DataReader.ReadString(x, "dEMethod"),
-                                MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus")
-                            }).ToList();
+                                MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus"),
+                                MeasurementDateString = String.Format("{0:d}", DataReader.ReadDate(x, "MeasurementDate")) + "-" + String.Format("{0:T}", DataReader.ReadDate(x, "MeasurementDate")) //---Formatted Date                                
+                }).ToList();
 
                     measurements.ForEach(x =>
                     {
@@ -1832,10 +1833,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public DataTable GetSpotPatchDetailsofMeasurement(int OperationID)
+        public DataTable GetSpotPatchDetailsofMeasurement(int OptimizeRunId)
         {            
-            // var PatchDetails = new List<MeasurementPatchDetails>();
-            string storedProc = "CPSpot.GetPatchDetailsByMeasurementID";
+            string storedProc = "CPSpot.GetPatchDetailsByOptimizeRunID";
+
             DataTable dtPatchDetails = new DataTable();
             Common.ImplementBusinessLogic(
                 () =>
@@ -1845,13 +1846,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 storedProc,
-                                new object[] { OperationID });
+                                new object[] { OptimizeRunId });
                     if (dsMeasurements.Tables.Count > 0)
                         dtPatchDetails = dsMeasurements.Tables[0];
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurement"));
             return dtPatchDetails;
         }
+
+        
 
         public int SaveSpotMeasurement(Measurement measurement)
         {
@@ -1877,7 +1880,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@MeasurementName", Size = 50, Type = DbType.String, Value = measurement.MeasurementName},
                                                      new Parameters() {ParameterName = "@OptimizeRunID", Type = DbType.Int32, Value = measurement.OptimizeRunId},
                                                      new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
-                                                  //   new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
                                                      new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType)}
                                                  },
@@ -1918,6 +1920,90 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementsOnRunId"));
             return measurements;
         }
+
+        public DataTable GetSpotPatchDetailsForCMYKExport(int OptimizeRunId)
+        {
+            string storedProc = "CPSpot.GetCMYKdataByOptimizeRunID";
+
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { OptimizeRunId });
+                    if (dsMeasurements.Tables.Count > 0)
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetCMYKdataByOptimizeRunID"));
+            return dtPatchDetails;
+        }
+
+        public DataTable GetSpotPatchDetailsForChart(int OptimizeRunId)
+        {
+            string storedProc = "CPSpot.GetSpotPatchChartByOptimizeRunID";
+
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { OptimizeRunId });
+                    if (dsMeasurements.Tables.Count > 0)
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotPatchChartByOptimizeRunID"));
+            return dtPatchDetails;
+        }
+        public DataTable GetSpotProjectSummary(int OptimizeRunId)
+        {
+            string storedProc = "CPSpot.GetPatchDetailsByOptimizeRunID_Summary";
+
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { OptimizeRunId });
+                    if (dsMeasurements.Tables.Count > 0)
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotProjectSummary"));
+            return dtPatchDetails;
+        }
+
+        public DataTable GetSpotPatchDetailsForChartBySpotProjectID(int SpotProjectId)
+        {
+            string storedProc = "CPSpot.GetSpotPatchChartBySpotProjectID";
+
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { SpotProjectId });
+                    if (dsMeasurements.Tables.Count > 0)
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotPatchDetailsForChartBySpotProjectID"));
+            return dtPatchDetails;
+        }
+
         #endregion
 
         #region ITaskBase Members

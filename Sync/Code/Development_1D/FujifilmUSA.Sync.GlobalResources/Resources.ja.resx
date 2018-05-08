@@ -211,7 +211,7 @@
     <value>Multi Color Custom Source_ja</value>
   </data>
   <data name="ELicenseType_SpotLibrary" xml:space="preserve">
-    <value>Spot Color Library_ja</value>
+    <value>Brand Color Optimization_ja</value>
   </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>無効</value>
@@ -1083,8 +1083,8 @@
   <data name="ESourceProfileCategory_NorthAmericanStandards" xml:space="preserve">
     <value>North American Standards</value>
   </data>
-  <data name="ESourceProfileCategory_EuropianStandards" xml:space="preserve">
-    <value>Europian Standards</value>
+  <data name="ESourceProfileCategory_EuropeanStandards" xml:space="preserve">
+    <value>European Standards</value>
   </data>
   <data name="ESourceProfileCategory_JapanStandards" xml:space="preserve">
     <value>Japan Standards</value>
@@ -1262,5 +1262,74 @@
   </data>
   <data name="Error_Invalid_GradingDetails" xml:space="preserve">
     <value>Invalid Grading details have been provided.</value>
+  </data>
+  <data name="actualTVI" xml:space="preserve">
+    <value>測定値:</value>
+  </data>
+  <data name="patchMetricsText" xml:space="preserve">
+    <value>パッチ</value>
+  </data>
+  <data name="targetTVI" xml:space="preserve">
+    <value>基準値:</value>
+  </data>
+  <data name="TVIThr" xml:space="preserve">
+    <value>許容幅:</value>
+  </data>
+  <data name="percentPatchMetrics" xml:space="preserve">
+    <value>% パッチ</value>
+  </data>
+  <data name="Error_Invalid_CurveType" xml:space="preserve">
+    <value>Invalid curve type value has been provided. ja</value>
+  </data>
+  <data name="Error_Invalid_OptimizationRunID" xml:space="preserve">
+    <value>Invalid OptimizationRun id value has been provided. ja</value>
+  </data>
+  <data name="Error_Invalid_ValidationType" xml:space="preserve">
+    <value>Invalid validation type value has been provided. ja</value>
+  </data>
+  <data name="SpotProject_Open" xml:space="preserve">
+    <value>Spot Project_ja</value>
+  </data>
+  <data name="SpotProject_Certified" xml:space="preserve">
+    <value>Spot Project Certified_ja</value>
+  </data>
+  <data name="locLabelAct" xml:space="preserve">
+    <value>実測</value>
+  </data>
+  <data name="locLabelCustomer" xml:space="preserve">
+    <value>顧客：</value>
+  </data>
+  <data name="locLabelDate" xml:space="preserve">
+    <value>日付：</value>
+  </data>
+  <data name="locLabeldEType" xml:space="preserve">
+    <value>ΔEタイプ：</value>
+  </data>
+  <data name="locLabelDevice" xml:space="preserve">
+    <value>デバイス：</value>
+  </data>
+  <data name="locLabelJDFJobID" xml:space="preserve">
+    <value>JDFジョブID：</value>
+  </data>
+  <data name="locLabelJob" xml:space="preserve">
+    <value>ジョブ：</value>
+  </data>
+  <data name="locLabelMetric" xml:space="preserve">
+    <value>判定基準：</value>
+  </data>
+  <data name="locLabelPageOrSurface" xml:space="preserve">
+    <value>ページ/面：</value>
+  </data>
+  <data name="locLabelSignature" xml:space="preserve">
+    <value>署名</value>
+  </data>
+  <data name="locLabelStandard" xml:space="preserve">
+    <value>標準：</value>
+  </data>
+  <data name="locLabelTimestamp" xml:space="preserve">
+    <value>時間：</value>
+  </data>
+  <data name="locLabelTol" xml:space="preserve">
+    <value>許容</value>
   </data>
 </root>

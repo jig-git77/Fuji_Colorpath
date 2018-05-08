@@ -178,7 +178,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataSet();
         }
-        public DataTable GetSpotPatchDetailsofMeasurement(int OperationID)
+        public DataTable GetSpotPatchDetailsofMeasurement(int OptimizeRunId)
         {
             return new DataTable();
         }
@@ -193,6 +193,23 @@ namespace FujifilmUSA.Sync.Business.Mock
         public int UpdateMeasurementByAnalyzeChartFromService(int MeasurementId, bool isUsedMeasurement, bool IsVerification = false, bool IsSync1DType = false)
         {
             return 0;
+        }
+        public DataTable GetSpotPatchDetailsForCMYKExport(int OptimizeRunId)
+        {
+            return new DataTable();
+        }
+        public DataTable GetSpotPatchDetailsForChart(int OptimizeRunId)
+        {
+            return new DataTable();
+        }
+
+        public DataTable GetSpotProjectSummary(int OptimizeRunId)
+        {
+            return new DataTable();
+        }
+        public DataTable GetSpotPatchDetailsForChartBySpotProjectID(int SpotProjectId)
+        {
+            return new DataTable();
         }
         #endregion
 

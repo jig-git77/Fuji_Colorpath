@@ -3,6 +3,8 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujiFilmUSA.Sync.Service.Models;
+//using FujiFilmUSA.Sync.Service.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,11 +20,12 @@ using System.Web.Http.Controllers;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
-    public class ChartController : BaseController, IViewAnalyze, IViewReportCMYKDensity
+    public class ChartController : BaseController, IViewAnalyze, IViewReportCMYKDensity, IViewExport
     {
         #region Variable Declarations
         private PresenterAnalyze _presenterAnalyze;
         private PresenterReportCMYKDensity _presenterReportCMYKDensity;
+        private PresenterExport _presenterExport;
         private Dictionary<string, string> _resourceValues { get; set; }
         private Dictionary<string, string> _globalResourceValues { get; set; }
         private const string _InvalidMeasurementId = "Error_Invalid_MeasurementId";
@@ -31,6 +34,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private const string _InvalidIsSync1DTypeProject = "Error_Invalid_IsSync1DTypeProject";
         private const string _InvalidDeltaEValue = "Error_Invalid_DeltaEValue";
         private const string _InvalidValidationType = "Error_Invalid_ValidationType";
+        private const string _InvalidOptimizationRunID = "Error_Invalid_OptimizationRunID";
+        private const string _InvalidCurveType = "Error_Invalid_CurveType";
 
         #endregion
 
@@ -38,6 +43,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         {
             _presenterAnalyze = new PresenterAnalyze(this);
             _presenterReportCMYKDensity = new PresenterReportCMYKDensity(this);
+            _presenterExport = new PresenterExport(this);
             _globalResourceValues = new Dictionary<string, string>();
             _resourceValues = new Dictionary<string, string>();
             _resourceValues.Add("_recgbPatchMetrics", "gbPatchMetricsText");
@@ -110,6 +116,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("gridAnalyzeHeaderDelta_HResource", "gridAnalyzeHeaderDelta_HResource");
             _resourceValues.Add("gridAnalyzeHeaderDelta_CHResource", "gridAnalyzeHeaderDelta_CHResource");
             _resourceValues.Add("gridAnalyzeHeaderDelta_LResource", "gridAnalyzeHeaderDelta_LResource");
+            _resourceValues.Add("_recPatchMetrics", "patchMetricsText");
+            _resourceValues.Add("_recactualTVI", "actualTVI");
+            _resourceValues.Add("_rectargetTVI", "targetTVI");
+            _resourceValues.Add("_recTVIThr", "TVIThr");
+            _resourceValues.Add("_recpercentPatchMetrics", "percentPatchMetrics");
             _resourceValues.Add("selectMeasurementMsg", "selectMeasurementMsg");
 
 
@@ -248,61 +259,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
-
-        [HttpPost]
-        public IHttpActionResult ExportChartReport(ChartContent chart)
-        {
-            IHttpActionResult actionResult = null;
-            string validationMessage = "";
-
-            BaseResponse<string> httpResponse = new BaseResponse<string>();
-            try
-            {
-                if (chart == null)
-                {
-                    validationMessage = "Invalid Charts, Please try again.";
-
-                    BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.UserMessage = validationMessage;
-                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
-                }
-                else
-                {
-
-                    ReportPDF objReportPDF = new ReportPDF();
-                    objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
-
-                    if (!Directory.Exists(objReportPDF.PDFPath))
-                        Directory.CreateDirectory(objReportPDF.PDFPath);
-
-                    objReportPDF.chartContent = chart;
-                    objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
-                    objReportPDF.ReportName = "Single Measurement Report";
-                    objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
-
-                    //objReportPDF.GenerateClientReportPDF();
-
-                    string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
-                    httpResponse.status = ResponseStatus.Success;
-                    httpResponse.Data = ReportPath;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
-                }
-            }
-            catch (Exception ex)
-            {
-
-                BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.UserMessage = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
-
-            }
-            return actionResult;
-        }
-
-
-
         public IHttpActionResult GetSpotPatchDetails(int id)
         {
             IHttpActionResult actionResult = null;
@@ -319,6 +275,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 decimal totalDeltaE = 0;
                 decimal avgDeltaE = 0;
                 int measurementID = 0;
+                string measurementName = "";
                 //count Avg, Max and Min ΔE
                 decimal minDtE = int.MaxValue;
                 decimal maxDtE = int.MinValue;
@@ -327,6 +284,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 {
                     //get the measurement id 
                     measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
+                    //if (measurementID > 0)
+                    //    measurementName = Convert.ToString(dtPatchDetails.Rows[0]["MeasurementName"]);
 
                     Dictionary<string, object> childRow;
                     foreach (DataRow row in dtPatchDetails.Rows)
@@ -337,25 +296,49 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             childRow.Add(col.ColumnName, row[col]);
                         }
 
-                        decimal DtE = 0;
-                        if (measurementID > 0)
-                            DtE = string.IsNullOrEmpty(Convert.ToString(row.Field<decimal?>("ΔE_M_T"))) ? 0 : row.Field<decimal>("ΔE_M_T");//for run-1,2,.....
-                        else
-                            DtE = row.Field<decimal?>("ΔE") == null ? 0 : row.Field<decimal>("ΔE");//only for run-0
+                        //decimal DtE = 0;
+                        //if (measurementID > 0)
+                        //    DtE = string.IsNullOrEmpty(Convert.ToString(row.Field<decimal?>("ΔE_M_T"))) ? 0 : row.Field<decimal>("ΔE_M_T");//for run-1,2,.....
+                        //else
+                        //    DtE = row.Field<decimal?>("ΔE") == null ? 0 : row.Field<decimal>("ΔE");//only for run-0
 
-                        totalDeltaE += DtE;
-                        minDtE = Math.Min(minDtE, DtE);
-                        maxDtE = Math.Max(maxDtE, DtE);
+                        //totalDeltaE += DtE;
+                        //minDtE = Math.Min(minDtE, DtE);
+                        //maxDtE = Math.Max(maxDtE, DtE);
 
                         spotAnalyzeDetails.patchDetails.Add(childRow);
                     }
-                    avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
+                    //avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
+                    spotAnalyzeDetails.measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
+                    //spotAnalyzeDetails.measurementName = measurementName;
+                    //if (spotAnalyzeDetails.measurementID > 0)
+                    //{
+
+                    //    spotAnalyzeDetails.maxDeltaETP = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxETP"]));
+                    //    spotAnalyzeDetails.minDeltaETP = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinETP"]));
+                    //    spotAnalyzeDetails.avgDeltaETP = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgETP"]));
+
+                    //    spotAnalyzeDetails.maxDeltaEMT = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMT"]));
+                    //    spotAnalyzeDetails.minDeltaEMT = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMT"]));
+                    //    spotAnalyzeDetails.avgDeltaEMT = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMT"]));
+
+                    //    spotAnalyzeDetails.maxDeltaEMP = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMP"]));
+                    //    spotAnalyzeDetails.minDeltaEMP = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMP"]));
+                    //    spotAnalyzeDetails.avgDeltaEMP = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMP"]));
+
+                    //}
+                    //else
+                    //{
+                    //    spotAnalyzeDetails.minDeltaE = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MinE"]));
+                    //    spotAnalyzeDetails.maxDeltaE = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxE"]));
+                    //    spotAnalyzeDetails.avgDeltaE = String.Format("{0:0.###}", Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgE"]));
+                    //}
                 }
 
 
-                spotAnalyzeDetails.minDeltaE = minDtE.ToString();
-                spotAnalyzeDetails.maxDeltaE = maxDtE.ToString();
-                spotAnalyzeDetails.avgDeltaE = String.Format("{0:0.###}", avgDeltaE);
+                //spotAnalyzeDetails.minDeltaE = minDtE.ToString();
+                //spotAnalyzeDetails.maxDeltaE = maxDtE.ToString();
+                //spotAnalyzeDetails.avgDeltaE = String.Format("{0:0.###}", avgDeltaE);
                 GenerateResources();
                 var objGroup = new
                 {
@@ -375,7 +358,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
-        //public IHttpActionResult GenerateInkPaperChart(int? MeasurementId, string fromDeltaE, bool? IsVerificationProject, bool? IsSync1DTypeProject, bool? IsAverageOfMeasurements)
         [HttpGet]
         public IHttpActionResult GenerateInkPaperChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject, string fromDeltaE)
         {
@@ -418,7 +400,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.From_ΔE = fromDeltaE;
 
                     _presenterAnalyze.GetInkPaperChart();
-                    var str = JsonConvert.SerializeObject(DTDeltaEPrimaryPatches);
                     GenerateResources();
                     httpResponse.Data = new
                     {
@@ -648,7 +629,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
 
         [HttpGet]
-        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject)
+        public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID)
         {
             IHttpActionResult actionResult = null;
             BaseResponse<object> httpResponse = new BaseResponse<object>();
@@ -679,13 +660,19 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
                     this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     _presenterAnalyze.GetPatchDetailsofMeasurement();
-                    if (dtPatchDetails.Rows.Count > 0)
+
+                    if (!string.IsNullOrEmpty(metricSumID) && Convert.ToInt32(metricSumID) != -1)
+                        dtFilteredPatchDetails = FilteredPatchDetailsTable(metricSumID, dtPatchDetails);
+                    else
+                        dtFilteredPatchDetails = dtPatchDetails;
+
+                    if (dtFilteredPatchDetails.Rows.Count > 0)
                     {
                         Dictionary<string, object> childRow;
-                        foreach (DataRow row in dtPatchDetails.Rows)
+                        foreach (DataRow row in dtFilteredPatchDetails.Rows)
                         {
                             childRow = new Dictionary<string, object>();
-                            foreach (DataColumn col in dtPatchDetails.Columns)
+                            foreach (DataColumn col in dtFilteredPatchDetails.Columns)
                             {
                                 childRow.Add(col.ColumnName, row[col]);
                             }
@@ -701,58 +688,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     httpResponse.Data = objGroup;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
                 }
-
-
-                //Now we are using DataTable as DataSource                    
-                //SpotAnalyze spotAnalyzeDetails = new SpotAnalyze();
-                //decimal totalDeltaE = 0;
-                //decimal avgDeltaE = 0;
-                //int measurementID = 0;
-                ////count Avg, Max and Min ΔE
-                //decimal minDtE = int.MaxValue;
-                //decimal maxDtE = int.MinValue;
-
-                //if (dtPatchDetails.Rows.Count > 0)
-                //{
-                //    //get the measurement id 
-                //    measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
-
-                //    Dictionary<string, object> childRow;
-                //    foreach (DataRow row in dtPatchDetails.Rows)
-                //    {
-                //        childRow = new Dictionary<string, object>();
-                //        foreach (DataColumn col in dtPatchDetails.Columns)
-                //        {
-                //            childRow.Add(col.ColumnName, row[col]);
-                //        }
-
-                //        decimal DtE = 0;
-                //        if (measurementID > 0)
-                //            DtE = string.IsNullOrEmpty(Convert.ToString(row.Field<decimal?>("ΔE_M_T"))) ? 0 : row.Field<decimal>("ΔE_M_T");//for run-1,2,.....
-                //        else
-                //            DtE = row.Field<decimal?>("ΔE") == null ? 0 : row.Field<decimal>("ΔE");//only for run-0
-
-                //        totalDeltaE += DtE;
-                //        minDtE = Math.Min(minDtE, DtE);
-                //        maxDtE = Math.Max(maxDtE, DtE);
-
-                //        spotAnalyzeDetails.patchDetails.Add(childRow);
-                //    }
-                //    avgDeltaE = totalDeltaE / dtPatchDetails.Rows.Count;
-                //}
-
-
-                //spotAnalyzeDetails.minDeltaE = minDtE.ToString();
-                //spotAnalyzeDetails.maxDeltaE = maxDtE.ToString();
-                //spotAnalyzeDetails.avgDeltaE = String.Format("{0:0.###}", avgDeltaE);
-                //GenerateResources();
-                //var objGroup = new
-                //{
-                //    spotAnalyzeDetails = spotAnalyzeDetails,
-                //    GlobalResources = _globalResourceValues
-                //};
-                //httpResponse.Data = objGroup;
-                //actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
             }
             catch (Exception ex)
             {
@@ -763,322 +698,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             return actionResult;
         }
-
-
-        [HttpGet]
-        public IHttpActionResult GetCGATSPatchReport(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID)
-        {
-            IHttpActionResult actionResult = null;
-            BaseResponse<string> httpResponse = new BaseResponse<string>();
-            string validationMessage = "";
-            string ReportFileName = "";
-            try
-            {
-                if (MeasurementId == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
-
-                if (IsSync1DTypeProject == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
-
-                if (IsVerificationProject == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
-
-                if (!string.IsNullOrEmpty(validationMessage))
-                {
-                    BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.UserMessage = validationMessage;
-                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
-                }
-                else
-                {
-
-                    this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
-                    _presenterAnalyze.GetPatchDetailsofMeasurement();
-                    //Now we are using DataTable as DataSource                    
-                    dtFilteredPatchDetails = FilteredPatchDetailsTable(metricSumID, dtPatchDetails);
-
-                    #region Generate CGATS .txt file
-                    System.IO.StreamWriter sw;
-                    ReportFileName = "/UploadFiles/" + MeasurementId.ToString() + "_MeasurementFile.txt";
-                    string ReportFilePath = HostingEnvironment.MapPath("~/UploadFiles/") + MeasurementId.ToString() + "_MeasurementFile.txt";
-                    sw = System.IO.File.CreateText(ReportFilePath);
-                    sw.WriteLine(@"ORIGINATOR	""FujiFilm Colorpath Sync""");
-                    sw.WriteLine(@"MEASUREMENT_SOURCE	""WhiteBase=Absolute  Filter=No""");
-                    sw.WriteLine(@"ILLUMINATION_NAME	""D50""");
-                    sw.WriteLine(@"OBSERVER_ANGLE	""2""");
-                    sw.WriteLine(@"KEYWORD	""SampleID""");
-                    sw.WriteLine(@"KEYWORD	""SAMPLE_NAME""");
-
-                    if (IsSync1DType)
-                    {
-                        sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "55"); //-----Only for Sync1D projects, add Spectral data into CGATES file
-                    }
-                    else
-                    {
-                        sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "19");
-                    }
-                    sw.WriteLine("BEGIN_DATA_FORMAT");
-
-                    if (IsSync1DType)
-                    {
-                        sw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS\tnm380\tnm390\tnm400\tnm410\tnm420\tnm430\tnm440\tnm450\tnm460\tnm470\tnm480\tnm490\tnm500\tnm510\tnm520\tnm530\tnm540\tnm550\tnm560\tnm570\tnm580\tnm590\tnm600\tnm610\tnm620\tnm630\tnm640\tnm650\tnm660\tnm670\tnm680\tnm690\tnm700\tnm710\tnm720\tnm730");
-                    }
-                    else
-                    {
-                        sw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS");
-                    }
-                    sw.WriteLine("END_DATA_FORMAT");
-                    sw.WriteLine("NUMBER_OF_SETS" + "\t" + dtFilteredPatchDetails.Rows.Count.ToString());
-                    sw.WriteLine("BEGIN_DATA");
-
-                    for (int i = 0; i < dtFilteredPatchDetails.Rows.Count; i++)
-                    {
-                        if (IsSync1DType)
-                        {
-                            sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm380"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm390"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm400"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm410"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm420"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm430"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm440"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm450"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm460"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm470"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm480"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm490"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm500"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm510"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm520"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm530"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm540"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm550"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm560"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm570"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm580"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm590"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm600"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm610"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm620"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm630"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm640"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm650"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm660"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm670"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm680"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm690"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm700"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm710"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm720"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm730"].ToString());
-                        }
-                        else
-                        {
-                            sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString());
-                        }
-                    }
-                    sw.WriteLine("END_DATA");
-                    sw.Close();
-                    #endregion
-
-                    //var dataBytes = File.ReadAllBytes(ReportFilePath);
-                    //var dataStream = new MemoryStream(dataBytes);
-                    httpResponse.Data = ReportFileName;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
-                }
-            }
-            catch (Exception ex)
-            {
-                BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.UserMessage = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
-            }
-            return actionResult;
-        }
-
-        [HttpGet]
-        public HttpResponseMessage GetCGATSPatchReport2(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID)
-        {
-            HttpResponseMessage httpResponseMessage = null;
-            string validationMessage = "";
-            string ReportFileName = "";
-            try
-            {
-                if (MeasurementId == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
-
-                if (IsSync1DTypeProject == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
-
-                if (IsVerificationProject == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
-
-                if (!string.IsNullOrEmpty(validationMessage))
-                {
-                    BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.UserMessage = validationMessage;
-                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
-                    httpResponseMessage = Request.CreateResponse<BaseErrorResponse>(HttpStatusCode.PreconditionFailed, errprResponse);
-                    //httpResponseMessage.Content = new HttpContent()
-                    //httpResponseMessage = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, ));//returns 412 status code
-                }
-                else
-                {
-
-                    this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
-                    _presenterAnalyze.GetPatchDetailsofMeasurement();
-                    //Now we are using DataTable as DataSource                    
-                    dtFilteredPatchDetails = FilteredPatchDetailsTable(metricSumID, dtPatchDetails);
-
-                    #region Generate CGATS .txt file
-                    System.IO.StreamWriter sw;
-                    //ReportFileName = "/UploadFiles/" + MeasurementId.ToString() + "_MeasurementFile.txt";
-                    string ReportFilePath = HostingEnvironment.MapPath("~/UploadFiles/") + MeasurementId.ToString() + "_MeasurementFile.txt";
-                    ReportFileName = MeasurementId.ToString() + "_MeasurementFile.txt";
-                    sw = System.IO.File.CreateText(ReportFilePath);
-                    sw.WriteLine(@"ORIGINATOR	""FujiFilm Colorpath Sync""");
-                    sw.WriteLine(@"MEASUREMENT_SOURCE	""WhiteBase=Absolute  Filter=No""");
-                    sw.WriteLine(@"ILLUMINATION_NAME	""D50""");
-                    sw.WriteLine(@"OBSERVER_ANGLE	""2""");
-                    sw.WriteLine(@"KEYWORD	""SampleID""");
-                    sw.WriteLine(@"KEYWORD	""SAMPLE_NAME""");
-
-                    if (IsSync1DType)
-                    {
-                        sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "55"); //-----Only for Sync1D projects, add Spectral data into CGATES file
-                    }
-                    else
-                    {
-                        sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "19");
-                    }
-                    sw.WriteLine("BEGIN_DATA_FORMAT");
-
-                    if (IsSync1DType)
-                    {
-                        sw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS\tnm380\tnm390\tnm400\tnm410\tnm420\tnm430\tnm440\tnm450\tnm460\tnm470\tnm480\tnm490\tnm500\tnm510\tnm520\tnm530\tnm540\tnm550\tnm560\tnm570\tnm580\tnm590\tnm600\tnm610\tnm620\tnm630\tnm640\tnm650\tnm660\tnm670\tnm680\tnm690\tnm700\tnm710\tnm720\tnm730");
-                    }
-                    else
-                    {
-                        sw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS");
-                    }
-                    sw.WriteLine("END_DATA_FORMAT");
-                    sw.WriteLine("NUMBER_OF_SETS" + "\t" + dtFilteredPatchDetails.Rows.Count.ToString());
-                    sw.WriteLine("BEGIN_DATA");
-
-                    for (int i = 0; i < dtFilteredPatchDetails.Rows.Count; i++)
-                    {
-                        if (IsSync1DType)
-                        {
-                            sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm380"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm390"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm400"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm410"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm420"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm430"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm440"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm450"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm460"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm470"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm480"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm490"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm500"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm510"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm520"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm530"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm540"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm550"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm560"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm570"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm580"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm590"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm600"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm610"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm620"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm630"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm640"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm650"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm660"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm670"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm680"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm690"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm700"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm710"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm720"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm730"].ToString());
-                        }
-                        else
-                        {
-                            sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString());
-                        }
-                    }
-                    sw.WriteLine("END_DATA");
-                    sw.Close();
-                    #endregion
-
-                    var dataBytes = File.ReadAllBytes(ReportFilePath);
-                    var dataStream = new MemoryStream(dataBytes);
-                    //httpResponse.Data = ReportFileName;
-                    httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
-                    httpResponseMessage.Content = new StreamContent(dataStream);
-                    httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-                    httpResponseMessage.Content.Headers.ContentDisposition.FileName = ReportFileName;
-                    httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
-                    //httpResponseMessage = Request.CreateResponse<BaseErrorResponse>(HttpStatusCode.InternalServerError, errprResponse);
-                    //actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
-                }
-            }
-            catch (Exception ex)
-            {
-                BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.UserMessage = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                //actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
-                httpResponseMessage = Request.CreateResponse<BaseErrorResponse>(HttpStatusCode.InternalServerError, errprResponse);
-            }
-            return httpResponseMessage;
-        }
-
-
-        [HttpGet]
-        public IHttpActionResult GetCFXPatchReport(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID)
-        {
-            IHttpActionResult actionResult = null;
-            BaseResponse<string> httpResponse = new BaseResponse<string>();
-            string validationMessage = "";
-            string ReportFileName = "";
-            try
-            {
-                if (MeasurementId == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
-
-                if (IsSync1DTypeProject == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
-
-                if (IsVerificationProject == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
-
-                if (!string.IsNullOrEmpty(validationMessage))
-                {
-                    BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.UserMessage = validationMessage;
-                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
-                }
-                else
-                {
-
-                    this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
-                    _presenterAnalyze.GetPatchDetailsofMeasurement();
-                    //Now we are using DataTable as DataSource                    
-                    dtFilteredPatchDetails = FilteredPatchDetailsTable(metricSumID, dtPatchDetails);
-                    char qt = '\u0022'; //---Pass " as a char into string
-
-                    ReportFileName = "/UploadFiles/" + MeasurementId.ToString() + "_MeasurementFile.cxf";
-                    string ReportFilePath = HostingEnvironment.MapPath("~/UploadFiles/") + MeasurementId.ToString() + "_MeasurementFile.cxf";
-
-                    #region Generate .Cxf file
-                    System.IO.StreamWriter sw;
-                    sw = System.IO.File.CreateText(ReportFilePath);
-                    sw.WriteLine(@"<?xml version=""1.0"" encoding=""UTF-8"" ?>");
-                    sw.WriteLine(@"<cc:CxF xmlns:xsi=""http:///www.w3.org/2001/XMLSchema-instance"" xmlns:cc=""http://colorexchangeformat.com/CxF3-core"">");
-                    sw.WriteLine(@"    <cc:FileInformation>");
-                    sw.WriteLine(@"        <cc:Creator>Fujifilm</cc:Creator>");
-                    sw.WriteLine(@"        <cc:CreationDate>2016-12-19T16:31:27</cc:CreationDate>");
-                    sw.WriteLine(@"        <cc:Description>Unknown</cc:Description>");
-                    sw.WriteLine(@"    </cc:FileInformation>");
-                    sw.WriteLine(@"    <cc:Resources>");
-                    sw.WriteLine(@"        <cc:ObjectCollection>");
-
-
-                    for (int i = 0; i < dtFilteredPatchDetails.Rows.Count; i++)
-                    {
-                        sw.WriteLine(@"            <cc:Object ObjectType=""Standard"" Name=" + qt + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + qt + " Id=" + qt + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + qt + ">");
-                        sw.WriteLine(@"                <cc:CreationDate>" + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss") + "</cc:CreationDate>");
-                        sw.WriteLine(@"                <cc:ColorValues>");
-                        sw.WriteLine(@"                    <cc:ColorCIELab ColorSpecification=""M0"">");
-                        sw.WriteLine(@"                        <cc:L>" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "</cc:L>");
-                        sw.WriteLine(@"                        <cc:a>" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "</cc:a>");
-                        sw.WriteLine(@"                        <cc:b>" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "</cc:b>");
-                        sw.WriteLine(@"                    </cc:ColorCIELab>");
-                        sw.WriteLine(@"                </cc:ColorValues>");
-                        sw.WriteLine(@"            </cc:Object>");
-                    }
-
-                    sw.WriteLine(@"        </cc:ObjectCollection>");
-                    sw.WriteLine(@"        <cc:ColorSpecificationCollection>");
-                    sw.WriteLine(@"            <cc:ColorSpecification Id=""M0"">");
-                    sw.WriteLine(@"                <cc:MeasurementSpec>");
-                    sw.WriteLine(@"                    <cc:MeasurementType>Colorimetric Reflectance</cc:MeasurementType>");
-                    sw.WriteLine(@"                    <cc:GeometryChoice>");
-                    sw.WriteLine(@"                        <cc:SingleAngle>");
-                    sw.WriteLine(@"                            <cc:SingleAngleConfiguration>Uniplanar</cc:SingleAngleConfiguration>");
-                    sw.WriteLine(@"                            <cc:IlluminationAngle>45</cc:IlluminationAngle>");
-                    sw.WriteLine(@"                            <cc:MeasurementAngle>0</cc:MeasurementAngle>");
-                    sw.WriteLine(@"                        </cc:SingleAngle>");
-                    sw.WriteLine(@"                    </cc:GeometryChoice>");
-                    sw.WriteLine(@"                    <cc:Device>");
-                    sw.WriteLine(@"                        <cc:DeviceIllumination>M0 Incandescent</cc:DeviceIllumination>");
-                    sw.WriteLine(@"                    </cc:Device>");
-                    sw.WriteLine(@"                </cc:MeasurementSpec>");
-                    sw.WriteLine(@"            </cc:ColorSpecification>");
-                    sw.WriteLine(@"        </cc:ColorSpecificationCollection>");
-                    sw.WriteLine(@"    </cc:Resources>");
-                    sw.WriteLine(@"</cc:CxF>");
-                    sw.Close();
-                    #endregion
-
-                    httpResponse.Data = ReportFileName;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
-                }
-            }
-            catch (Exception ex)
-            {
-                BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.UserMessage = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
-            }
-            return actionResult;
-        }
-
 
 
         [HttpGet]
@@ -1156,7 +775,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (OptimizationRunId == null)
-                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -1204,33 +823,149 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
-        public HttpResponseMessage DownloadFile(string filePath)
+        public IHttpActionResult GenerateCurveChart(int? OptimizationRunId, int? CurveType)
         {
-            var fullPath = System.Web.Hosting.HostingEnvironment.MapPath(filePath);
-            var fileName = Path.GetFileName(fullPath);
-            var stream = new FileStream(fullPath, FileMode.Open);
-            //  byte[] dataBytes = new System.Net.WebClient().DownloadData(filePath);
-            //var dataBytes = File.ReadAllBytes(System.Web.Hosting.HostingEnvironment.MapPath(filePath));
-            //  var dataStream = new MemoryStream(dataBytes);
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
 
-            // processing the stream.
-
-            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
             {
-                Content = new StreamContent(stream)
-            };
-            result.Content.Headers.ContentDisposition =
-                new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = fileName
-                };
-            result.Content.Headers.ContentType =
-                new MediaTypeHeaderValue("application/octet-stream");
-            //result.Content.Headers.ContentDisposition.FileName = "test.txt";
+                if (OptimizationRunId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
 
-            return result;
+                if (CurveType == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidCurveType);
+
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    DetermineCulture();
+                    this.OptimizeRunId = Convert.ToInt32(OptimizationRunId);
+                    this.CurveTypeId = Convert.ToInt16(CurveType);
+                    _presenterExport.GetCurveData();
+                    GenerateResources();
+                    httpResponse.Data = new
+                    {
+                        CurveExportView = CurveData.CurveExportView,
+                        CurveDeltaRefView = CurveData.CurveDeltaRefView,
+                        CurveDeltaPrevRunView = CurveData.CurveDeltaPrevRunView,
+                        GlobalResources = _globalResourceValues
+                    };
+
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
         }
 
+
+        
+        [HttpGet]
+        public IHttpActionResult GetSpotPatchDetailsReport(int OptimizationRunID)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                DetermineCulture();
+                MeasurementId = 0;
+                OptimizeRunId = Convert.ToInt32(OptimizationRunID);
+                _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
+
+                ReportPDF objReportPDF = new ReportPDF();
+                objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+
+                if (!Directory.Exists(objReportPDF.PDFPath))
+                    Directory.CreateDirectory(objReportPDF.PDFPath);
+
+                objReportPDF.dtSpotPatchDetails = dtPatchDetails;
+                objReportPDF.PDF_NAME = OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
+                objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+
+                objReportPDF.GenerateSpotPatchDetailsReport();
+                string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
+                httpResponse.status = ResponseStatus.Success;
+                httpResponse.Data = ReportPath;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetSpotPatchDetailsReportTest(int OptimizationRunID)
+        {
+            HttpResponseMessage httpResponseMessage = null;
+            try
+            {
+                DetermineCulture();
+                MeasurementId = 0;
+                OptimizeRunId = Convert.ToInt32(OptimizationRunID);
+                _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
+
+                ReportPDF objReportPDF = new ReportPDF();
+                objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+
+                if (!Directory.Exists(objReportPDF.PDFPath))
+                    Directory.CreateDirectory(objReportPDF.PDFPath);
+
+                objReportPDF.dtSpotPatchDetails = dtPatchDetails;
+                objReportPDF.PDF_NAME = OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
+                objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+
+                objReportPDF.GenerateSpotPatchDetailsReport();
+                string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
+
+                //httpResponse.status = ResponseStatus.Success;
+                //httpResponse.Data = ReportPath;
+                //actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+
+                var dataBytes = File.ReadAllBytes(HostingEnvironment.MapPath("~/" + ReportPath));
+                //adding bytes to memory stream   
+                var dataStream = new MemoryStream(dataBytes);
+                httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
+                httpResponseMessage.Content = new StreamContent(dataStream);
+                httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
+                httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
+                httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                httpResponseMessage.Content.Headers.ContentDisposition.FileName = objReportPDF.PDF_NAME;
+                httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
+
+            }
+            catch (Exception ex)
+            {
+                //BaseErrorResponse errprResponse = new BaseErrorResponse();
+                //errprResponse.Error.UserMessage = ex.Message;
+                //errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                //actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return httpResponseMessage;
+        }
+
+        #region Method for generate resources
         public void GenerateResources()
         {
             foreach (var item in _resourceValues)
@@ -1238,7 +973,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 _globalResourceValues.Add(item.Key, GlobalResourceManager.Instance.GetGlobalResourceString(item.Value));
             }
         }
-
         public List<ColorDensity> GetColorDensityDetails(DataTable dt)
         {
             List<ColorDensity> list = new List<ColorDensity>();
@@ -1255,8 +989,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
             return list;
         }
+        #endregion
 
-        #region Methods for Patch Details tab
+        #region Method for Patch Details tab
         private DataTable FilteredPatchDetailsTable(string MetricSumID, DataTable dtPatchDetails)
         {
             DataTable DT = new DataTable();
@@ -1478,6 +1213,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public DataTable DSDensity_M { get; set; }
         public DataTable DSDensity_Y { get; set; }
         public DataTable DSDensity_K { get; set; }
+        #endregion
+
+        #region IViewExport Members
+        public byte[] ChartPreview { get; set; }
+        public byte[] SourceProfile { get; set; }
+        public short ReferenceChartTypeId { get; set; }
+        public short CurveTypeId { get; set; }
+        public FujifilmUSA.Sync.Business.Messages.CurveDataResponse CurveData { get; set; }
         #endregion
     }
 }

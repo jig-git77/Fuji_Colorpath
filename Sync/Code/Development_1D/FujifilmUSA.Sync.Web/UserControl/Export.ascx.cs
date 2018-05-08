@@ -51,6 +51,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (!IsPostBack)
             {
+                hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
+                hdfCurrentCulture.Value = getCurrentCultureLanguage();
+                hdnOptimizationRunID.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
                 header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLP) + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc");
                 lbtnMeasure.Visible = (SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.Edit);
@@ -58,8 +61,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     trExportViewForSync1D.Visible = true;
                     trAdvancedDownload.Visible = false;
-                    DdlCurveType.SelectedValue = SessionManager.Instance.CurrentProject.CurveTypeID.ToString();
-                    BindCurve(Convert.ToInt16(DdlCurveType.SelectedValue));
+                    drpCurveType.SelectedValue = SessionManager.Instance.CurrentProject.CurveTypeID.ToString(); //--Display last time selected value first time page load
+                    hdnCurveFileName.Value = SessionManager.Instance.CurrentProject.ProjectName + " " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00");
                 }
                 else
                 {
@@ -72,19 +75,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If "Spot Target Library" project type, then skip Measure button and DLP Download button (since we don't have destination profile in this case).
                     {
-                        trSourceProfDownload.Visible = false;
-                        trDLPDownload.Visible = true;
-                        //if (SessionManager.Instance.CurrentOptimizeRun.RunName == "Run-0" || (SessionManager.Instance.CurrentOptimizeRun.RunName != "Run-0" && SessionManager.Instance.CurrentOptimizeRun.HasProfile)) //Download NamedcolorProfile only visible if it is not run-0 and in certify run mode
-                        //{
-                        //    trAdvancedDownload.Visible = false;
-                        //}
-                        trDLPDownload1.Visible = false;
-                        trDLPDownload2.Visible = false;
-
-                        Div_Chart.Visible = true;
-                        lbtnMeasure.Visible = true;
+                        Div_DLP.Visible = false; // Hide Download DLP in optimize mode of spot project
+                        if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
+                        {
+                            lbtnMeasure.Visible = false;
+                            trDLPDownload.Visible = false; //Hide both Download DLP and Chart in Certify mode
+                            //----Don't show CMYK export button for Run-0, since there is no previous run's CMYK data to export
+                            trExportCMYKLibrary.Visible = !(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
+                                SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId);
+                        }
                         locDownloadDLPAndChart.Text = "Download Chart";
-                        locDownloadDestinationICC.Text = "Download Named Color Profile ICC";
+                        lbtnNamedColorICC.Visible = true;
                         header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + ".icc");
                         locDownloadChartAndPrintThroughWorkflow.Text = GetResourceString(locDownloadChartAndPrintThroughWorkflowResourceNCP);
                     }
@@ -101,13 +102,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         trAdvancedDownload.Visible = true;
                     }
                 }
-                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
+                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary && 
+                    (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 || 
+                    (SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId == SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId)))
                 {
-                    rbtnDetlaReflist.Items[1].Enabled = false;
+                    rbtnDetlaReflistClient.Items[1].Enabled = false;
                 }
             }
         }
 
+        #region Control Methods
         protected void lbtnMeasure_Click(object sender, EventArgs e)
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
@@ -188,8 +192,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
                 Wedge wedge = new Wedge();
-                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;                
-                _presenterExport.GetSpotPatchDetailsofMeasurement();
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                _presenterExport.GetSpotPatchDetailsForChart();
 
                 List<Patch> listPatch = new List<Patch>();
                 if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
@@ -218,21 +222,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 //if (dtPatchDetails.Rows.Count == 1872)
                 //{
-                    obj.Configurations.NumberOfPatches = 1872;
-                    obj.Configurations.ChartPages = 3;
-                    obj.Configurations.PatchWidth = 27;
-                    obj.Configurations.PatchHeight = 27;
-                    obj.Configurations.ChartBorder = 40;
-                    obj.Configurations.ChartSizeW = 0;
-                    obj.Configurations.ChartSizeH = 0;
-                    obj.Configurations.RowsPerChart = 24;
-                    obj.Configurations.ColumsPerChart = 26;
-                    obj.Configurations.Vgap = 2;
-                    obj.Configurations.Hgap = 0;
-                    obj.Configurations.GapLeval = 75;
-                    obj.Configurations.PreviousL = 0;
-                    obj.Configurations.ChartName = "Pantone Test Chart";
-                    obj.Patches = wedge.listPatch;
+                obj.Configurations.NumberOfPatches = 1872;
+                obj.Configurations.ChartPages = 3;
+                obj.Configurations.PatchWidth = 27;
+                obj.Configurations.PatchHeight = 27;
+                obj.Configurations.ChartBorder = 40;
+                obj.Configurations.ChartSizeW = 0;
+                obj.Configurations.ChartSizeH = 0;
+                obj.Configurations.RowsPerChart = 24;
+                obj.Configurations.ColumsPerChart = 26;
+                obj.Configurations.Vgap = 2;
+                obj.Configurations.Hgap = 0;
+                obj.Configurations.GapLeval = 75;
+                obj.Configurations.PreviousL = 0;
+                obj.Configurations.ChartName = "Pantone Test Chart";
+                obj.Patches = wedge.listPatch;
                 //}
 
                 //else if (dtPatchDetails.Rows.Count == 48)
@@ -294,8 +298,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                OptimizeRunId = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last().OptimizeRunId;
-                _presenterExport.GetNamedColorProfile();
+                ProjectId = SessionManager.Instance.CurrentOptimizeRun.ProjectId;
+                _presenterExport.GetSpotDestinationProfile();
                 if (!IsErrorOccured)
                 {
                     if (SourceProfile != null)
@@ -303,9 +307,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                string.Format("{0}.icc",
                                                              SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName));
                 }
-
-                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), "Named Color Profile.icc", "Named Color Profile.icc");
-
             }
             else
             {
@@ -321,592 +322,132 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private void BindCurve(short _CurveTypeID)
+        protected void lbtnNamedColorICC_Click(object sender, EventArgs e)
         {
-            this.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-            if (_CurveTypeID == 100 || _CurveTypeID == 101) //---Set same value for "ColorGate-TVI" and "ColorGate-CGCX" like "5%" for export curve data
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                _CurveTypeID = 5;
-            }
-            if (_CurveTypeID == 102) //---Set same value for "Onyx G7 Import" like "Nexus" for export curve data
-            {
-                _CurveTypeID = 45;
-            }
-            this.CurveTypeId = _CurveTypeID;
-            _presenterExport.GetCurveData();
-            if (!IsErrorOccured)
-            {
-                SessionManager.Instance.CurveExportView = this.CurveData.CurveExportView;
-                SessionManager.Instance.CurveDeltaRefView = this.CurveData.CurveDeltaRefView;
-                SessionManager.Instance.CurveDeltaPrevRunView = this.CurveData.CurveDeltaPrevRunView;
-                BindCharts(this.CurveData.CurveExportView, this.CurveData.CurveDeltaRefView, this.CurveData.CurveDeltaPrevRunView);
-                rgCurveExportView.Rebind();
-                rgCurveDeltaView.Rebind();
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                _presenterExport.GetNamedColorProfile();
+                if (!IsErrorOccured)
+                {
+                    if (SourceProfile != null)
+                        Utilities.DownloadFile(SourceProfile,
+                                               string.Format("{0}.icc",
+                                                             SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + " Named Color Profile"));
+                }
             }
         }
 
-        #region Bind Charts
-        private void BindCharts(List<Entity.CPSync1D.OptimizeRunCurve> CurveExportView, List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaRefView, List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaPrevRunView)
+        protected void lbtnExportCMYK_Click(object sender, EventArgs e)
         {
-            BindCurveChart(CurveExportView);
-            BindDeltaChart(CurveDeltaRefView, CurveDeltaPrevRunView);
-        }
+            if (!Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile")))
+                Directory.CreateDirectory(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile"));
 
-        private void BindCurveChart(List<Entity.CPSync1D.OptimizeRunCurve> CurveExportView)
-        {
-            for (int i = 0; i < CurveExportView.Count; i++)
+            //==========  Get Data Table and Bind ==========//
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                if (Chk_C.Checked == true)
-                    AddPointChartWithColor(i, CHRT_ExportCurve.Series["Series1"], CurveExportView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveExportView[i].CMYK_C).ToString(), Color.Cyan.Name.ToString(), true);
-                if (Chk_M.Checked == true)
-                    AddPointChartWithColor(i, CHRT_ExportCurve.Series["Series2"], CurveExportView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveExportView[i].CMYK_M).ToString(), Color.Magenta.Name.ToString(), true);
-                if (Chk_Y.Checked == true)
-                    AddPointChartWithColor(i, CHRT_ExportCurve.Series["Series3"], CurveExportView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveExportView[i].CMYK_Y).ToString(), Color.Yellow.Name.ToString(), true);
-                if (Chk_K.Checked == true)
-                    AddPointChartWithColor(i, CHRT_ExportCurve.Series["Series4"], CurveExportView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveExportView[i].CMYK_K).ToString(), Color.Black.Name.ToString(), true);
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                _presenterExport.GetSpotPatchDetailsForCMYKExport();
+
+                List<Patch> listPatch = new List<Patch>();
+                if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dtPatchDetails.Rows)
+                    {
+                        Patch patch = new Patch()
+                        {
+                            PatchID = Convert.ToInt32(dr["SpotID"]),
+                            ColorName = Convert.ToString(dr["SpotName"]),
+                            Cmyk_C = Convert.ToDouble(dr["CMYK_C"]),
+                            Cmyk_M = Convert.ToDouble(dr["CMYK_M"]),
+                            Cmyk_Y = Convert.ToDouble(dr["CMYK_Y"]),
+                            Cmyk_K = Convert.ToDouble(dr["CMYK_K"]),
+                            Cie_L = Convert.ToDouble(dr["TargetL"]),
+                            Cie_a = Convert.ToDouble(dr["Targeta"]),
+                            Cie_b = Convert.ToDouble(dr["Targetb"]),
+                            Spot1 = 0
+                        };
+                        listPatch.Add(patch);
+                    }
+                }
+
+                //string CurveFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00");
+                string CMYKFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00");
+
+                string SpotName_Header, SpotName_Parameter = "";
+
+                #region Create file and download txt file for CMYK values
+                System.IO.StreamWriter sw;
+                sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName + "_CMYKFile.dbd");
+
+                for (int i = 0; i < listPatch.Count; i++)
+                {
+                    SpotName_Header = listPatch[i].ColorName.Replace("_", "#20");
+                    SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
+
+                    sw.WriteLine("%%N:/Proforma/ColorPools/2/ColorPool/" + SpotName_Header);
+                    sw.WriteLine("Color_1:OBJECT Color");
+                    sw.WriteLine("{");
+                    sw.WriteLine("\tName:string = " + "\"" + SpotName_Parameter + "\"");
+                    sw.WriteLine("\tFUJI" + "\\" + "PrintMode:string = " + "\"LargeGumatMerge\";");
+                    sw.WriteLine("\tColorType:string = " + "\"Normal\";");
+                    sw.WriteLine("\tNeutralDensity:double = " + String.Format("{0,12:e15}", GetNdensity(listPatch[i].Cie_L)) + ";");
+                    sw.WriteLine("\tTempLab:double[3] = " + String.Format("{0,12:e15}", listPatch[i].Cie_L) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_a) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_b) + ";");
+                    sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", listPatch[i].Cmyk_C) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_M) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_Y) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_K) + ";");
+                    sw.WriteLine("\tHideCMYK:string = " + "\"ShowAll\";");
+                    sw.WriteLine("\tHideLab:string = " + "\"ShowAll\";");
+                    sw.WriteLine("\tRawName:string = " + "\"\";");
+                    sw.WriteLine("}");
+                    sw.WriteLine("");
+                    sw.WriteLine("%%E:");
+                }
+                //-----Footer portion of file------------//
+                sw.WriteLine("%%N:/Proforma/ColorPools/2/ColorantAliasRules");
+                sw.WriteLine("");
+                sw.WriteLine("%%E:");
+                sw.WriteLine("%%N:/Proforma/ColorPools/2/Info");
+                sw.WriteLine("FUJI" + "\\" + "ColorPoolInfo_1:OBJECT FUJI" + "\\" + "ColorPoolInfo");
+                sw.WriteLine("{");
+                sw.WriteLine("\tName:string = " + "\"CustomSpotLib\";");
+                sw.WriteLine("\tComment:string = " + "\" \";");
+                sw.WriteLine("}");
+                sw.WriteLine("");
+                sw.WriteLine("%%E:");
+                //--------End: Footer-------------------//
+
+                sw.Close();
+
+                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + "_CMYKFile.dbd", CMYKFileName + "_CMYKFile.dbd");
+                #endregion
             }
         }
+        #endregion
 
-        private void BindDeltaChart(List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaRefView, List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaPrevRunView)
+        #region Methods       
+        //Get density of LabL to export CMYK values
+        double GetNdensity(double Lab_L)
         {
-            Int64 MaxDelta = 0;
-            Int64 MinDelta = 0;
-
-            List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaView = new List<Entity.CPSync1D.OptimizeRunCurve>();
-
-            if (rbtnDetlaReflist.Items[0].Selected == true)
+            double var_Y;
+            if ((Lab_L > 8))
             {
-                CurveDeltaView = CurveDeltaRefView; //-----Current Run's delta view
+                var_Y = (100 * Math.Pow(((Lab_L + 16) / 116), 3));
             }
             else
             {
-                CurveDeltaView = CurveDeltaPrevRunView; //-----Previous Run's delta view
+                var_Y = (100 * ((108 / 841) * (((Lab_L + 16) / 116) - (4 / 29))));
             }
 
-            if (CurveDeltaView != null && CurveDeltaView.Count > 0)
+            if ((var_Y > 0))
             {
-                #region Fine Max Min
-                if (Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_C)) > MaxDelta)
-                    MaxDelta = Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_C));
-                if (Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_M)) > MaxDelta)
-                    MaxDelta = Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_M));
-                if (Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_Y)) > MaxDelta)
-                    MaxDelta = Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_Y));
-                if (Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_K)) > MaxDelta)
-                    MaxDelta = Convert.ToInt64(CurveDeltaView.Max(x => x.CMYK_K));
-
-                if (Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_C)) < MinDelta)
-                    MinDelta = Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_C));
-                if (Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_M)) < MinDelta)
-                    MinDelta = Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_M));
-                if (Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_Y)) < MinDelta)
-                    MinDelta = Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_Y));
-                if (Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_K)) < MinDelta)
-                    MinDelta = Convert.ToInt64(CurveDeltaView.Min(x => x.CMYK_K));
-
-
-                MinDelta = (MinDelta * -1);
-
-                MaxDelta = MaxDelta + 1;
-                MinDelta = MinDelta + 1;
-
-                if (MaxDelta > MinDelta)
-                {
-                    MinDelta = (MaxDelta * -1);
-                }
-                else
-                {
-                    MaxDelta = MinDelta;
-                    MinDelta = (MinDelta * -1);
-                }
-                CHRT_ExportCurveDeltaRef.ChartAreas["Default"].AxisY.Minimum = MinDelta;
-                CHRT_ExportCurveDeltaRef.ChartAreas["Default"].AxisY.Maximum = MaxDelta;
-                #endregion
-
-                #region BindChart
-                for (int i = 0; i < CurveDeltaView.Count; i++)
-                {
-                    if (Chk_C.Checked == true)
-                        AddPointChartWithColor(i, CHRT_ExportCurveDeltaRef.Series["Series1"], CurveDeltaView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveDeltaView[i].CMYK_C).ToString(), Color.Cyan.Name.ToString(), false);
-                    if (Chk_M.Checked == true)
-                        AddPointChartWithColor(i, CHRT_ExportCurveDeltaRef.Series["Series2"], CurveDeltaView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveDeltaView[i].CMYK_M).ToString(), Color.Magenta.Name.ToString(), false);
-                    if (Chk_Y.Checked == true)
-                        AddPointChartWithColor(i, CHRT_ExportCurveDeltaRef.Series["Series3"], CurveDeltaView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveDeltaView[i].CMYK_Y).ToString(), Color.Yellow.Name.ToString(), false);
-                    if (Chk_K.Checked == true)
-                        AddPointChartWithColor(i, CHRT_ExportCurveDeltaRef.Series["Series4"], CurveDeltaView[i].ReferenceNo.ToString(), Convert.ToInt64(CurveDeltaView[i].CMYK_K).ToString(), Color.Black.Name.ToString(), false);
-                }
-                #endregion
+                return (0.13353 + Math.Log10((100 / var_Y)));
+            }
+            else
+            {
+                return 0;
             }
         }
 
         #endregion
-
-        protected void rgCurveExportView_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
-        {
-            if (SessionManager.Instance.CurveExportView != null && SessionManager.Instance.CurveExportView != null && SessionManager.Instance.CurveExportView.Count > 0)
-            {
-                rgCurveExportView.DataSource = SessionManager.Instance.CurveExportView;
-            }
-        }
-
-        protected void rgCurveDeltaView_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
-        {
-            if (rbtnDetlaReflist.SelectedIndex == 0)
-            {
-                if (SessionManager.Instance.CurveDeltaRefView != null && SessionManager.Instance.CurveDeltaRefView != null && SessionManager.Instance.CurveDeltaRefView.Count > 0)
-                {
-                    rgCurveDeltaView.DataSource = SessionManager.Instance.CurveDeltaRefView;
-                }
-            }
-            else
-            {
-                if (SessionManager.Instance.CurveDeltaPrevRunView != null && SessionManager.Instance.CurveDeltaPrevRunView != null && SessionManager.Instance.CurveDeltaPrevRunView.Count > 0)
-                {
-                    rgCurveDeltaView.DataSource = SessionManager.Instance.CurveDeltaPrevRunView;
-                }
-            }
-        }
-
-        protected void BtnExportCurvesExportView_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (SessionManager.Instance.CurveExportView == null)
-                {
-                    BindCurve(Convert.ToInt16(DdlCurveType.SelectedValue));  //-----Rebind session if session is empty.
-                }
-                if (SessionManager.Instance.CurveExportView != null)
-                {
-                    if (!Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile")))
-                        Directory.CreateDirectory(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile"));
-
-                    //==========  Get Data Table and Bind ==========//
-                    List<Entity.CPSync1D.OptimizeRunCurve> DT_CPSyncPressRunCurve = new List<Entity.CPSync1D.OptimizeRunCurve>();
-                    DT_CPSyncPressRunCurve = (List<Entity.CPSync1D.OptimizeRunCurve>)SessionManager.Instance.CurveExportView;
-
-                    string CurveFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00");
-
-                    if (DdlCurveType.SelectedValue == "1" || DdlCurveType.SelectedValue == "5" || DdlCurveType.SelectedValue == "10")
-                    {
-                        #region Create file and download txt file for 1%,5% and 10%
-                        System.IO.StreamWriter sw;
-                        sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CurvesFile.txt");
-                        //const string quote = "\"";
-                        sw.WriteLine("\"Fujifilm Colorpath Sync 1D\"");
-                        sw.WriteLine("BEGIN_DATA_FORMAT");
-                        sw.WriteLine("Reference\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
-                        //sw.WriteLine("SampleID\tSampleName\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
-                        sw.WriteLine("END_DATA_FORMAT");
-                        sw.WriteLine("NUMBER_OF_SETS\t" + DT_CPSyncPressRunCurve.Count);
-                        sw.WriteLine("BEGIN_DATA");
-                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
-                        {
-                            sw.WriteLine(DT_CPSyncPressRunCurve[i].ReferenceNo.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_C.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_M.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_Y.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_K.ToString());
-                        }
-                        sw.WriteLine("END_DATA");
-                        sw.Close();
-
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurvesFile.txt", CurveFileName + "_CurvesFile.txt");
-                        #endregion
-                    }
-                    else if (DdlCurveType.SelectedValue == "15")  // Rampage
-                    {
-                        #region Create Zip file and download file for rampage
-                        System.IO.StreamWriter swC;
-                        System.IO.StreamWriter swM;
-                        System.IO.StreamWriter swY;
-                        System.IO.StreamWriter swK;
-                        swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_C.oli");
-                        swC.WriteLine("2");
-                        swC.WriteLine("0.0000000000");
-                        swC.WriteLine("0.0000000000");
-                        swC.WriteLine("25");
-
-                        swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_M.oli");
-                        swM.WriteLine("2");
-                        swM.WriteLine("0.0000000000");
-                        swM.WriteLine("0.0000000000");
-                        swM.WriteLine("25");
-
-                        swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Y.oli");
-                        swY.WriteLine("2");
-                        swY.WriteLine("0.0000000000");
-                        swY.WriteLine("0.0000000000");
-                        swY.WriteLine("25");
-
-                        swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_K.oli");
-                        swK.WriteLine("2");
-                        swK.WriteLine("0.0000000000");
-                        swK.WriteLine("0.0000000000");
-                        swK.WriteLine("25");
-
-                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
-                        {
-                            swC.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_C).ToString("0.0"));
-                            swM.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_M).ToString("0.0"));
-                            swY.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_Y).ToString("0.0"));
-                            swK.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_K).ToString("0.0"));
-                        }
-                        swC.WriteLine("Version: 2.0");
-                        swC.Close();
-
-                        swM.WriteLine("Version: 2.0");
-                        swM.Close();
-
-                        swY.WriteLine("Version: 2.0");
-                        swY.Close();
-
-                        swK.WriteLine("Version: 2.0");
-                        swK.Close();
-
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_C.oli");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_M.oli");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Y.oli");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_K.oli");
-
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CMYKFile.zip", CurveFileName + "_CMYKFile.zip");
-                        #endregion
-                    }
-                    else if (DdlCurveType.SelectedValue == "25")  // for XMF
-                    {
-                        #region Create file and download txt file for XMF
-                        System.IO.StreamWriter sw;
-                        sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CurvesFile.csv");
-                        sw.WriteLine("Cyan;Magenta;Yellow;Black");
-                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
-                        {
-                            sw.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_C).ToString("0.0000") + ";" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_M).ToString("0.0000") + ";" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_Y).ToString("0.0000") + ";" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_K).ToString("0.0000"));
-                        }
-                        sw.Close();
-
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurvesFile.csv", CurveFileName + "_CurvesFile.csv");
-                        #endregion
-
-                    }
-                    else if (DdlCurveType.SelectedValue == "35")  // Harmony (Prinergy)
-                    {
-                        #region Create Zip file and download file for Harmony
-                        System.IO.StreamWriter swC;
-                        System.IO.StreamWriter swM;
-                        System.IO.StreamWriter swY;
-                        System.IO.StreamWriter swK;
-
-                        //cyan
-                        swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_C.txt");
-
-                        //magenta
-                        swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_M.txt");
-
-                        //yellow    
-                        swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Y.txt");
-
-                        //black
-                        swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_K.txt");
-
-                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
-                        {
-                            swC.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.00") + "\t" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_C).ToString("0.00"));
-                            swM.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.00") + "\t" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_M).ToString("0.00"));
-                            swY.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.00") + "\t" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_Y).ToString("0.00"));
-                            swK.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.00") + "\t" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_K).ToString("0.00"));
-                        }
-
-                        swC.Close();
-                        swM.Close();
-                        swY.Close();
-                        swK.Close();
-
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_C.txt");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_M.txt");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Y.txt");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_K.txt");
-
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_Harmony.zip", CurveFileName + "_Harmony.zip");
-                        #endregion
-                    }
-                    else if (DdlCurveType.SelectedValue == "45")  // nexus
-                    {
-                        #region Create Zip file and download file for nexus
-
-                        //check if file exists and delete it
-                        if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus.zip") == true)
-                            System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus.zip");
-
-                        System.IO.StreamWriter swC;
-                        System.IO.StreamWriter swM;
-                        System.IO.StreamWriter swY;
-                        System.IO.StreamWriter swK;
-                        swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Cya.txt");
-                        swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Mag.txt");
-                        swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Yel.txt");
-                        swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Bla.txt");
-
-
-                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
-                        {
-                            swC.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_C).ToString("0.0000"));
-                            swM.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_M).ToString("0.0000"));
-                            swY.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_Y).ToString("0.0000"));
-                            swK.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_K).ToString("0.0000"));
-                        }
-
-                        swC.Close();
-                        swM.Close();
-                        swY.Close();
-                        swK.Close();
-
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Cya.txt");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Mag.txt");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Yel.txt");
-                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_Nexus_Bla.txt");
-
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_Nexus.zip", CurveFileName + "_Nexus.zip");
-                        #endregion
-                    }
-                    else if (DdlCurveType.SelectedValue == "55")  // for sericol UK Caldera
-                    {
-                        #region Create file and download txt file for sericol UK
-                        System.IO.StreamWriter sw;
-                        sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CurvesFile.ppc");
-                        sw.WriteLine("Device = CMYK");
-                        sw.WriteLine("Max ink = 400");
-                        sw.WriteLine("Max ink reduction = preserve black");
-
-                        string strCyan = "";
-                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
-                        {
-
-                            strCyan = strCyan + "(" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0") + " " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_C).ToString("0.0") + ") , ";
-
-                        }
-                        strCyan = strCyan.Remove(strCyan.Length - 3, 3);
-                        sw.WriteLine("Cyan curve = " + strCyan);
-
-                        string strMagenta = "";
-                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
-                        {
-
-                            strMagenta = strMagenta + "(" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0") + " " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_M).ToString("0.0") + ") , ";
-
-                        }
-                        strMagenta = strMagenta.Remove(strMagenta.Length - 3, 3);
-                        sw.WriteLine("Magenta curve = " + strMagenta);
-
-                        string strYellow = "";
-                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
-                        {
-
-                            strYellow = strYellow + "(" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0") + " " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_Y).ToString("0.0") + ") , ";
-
-                        }
-                        strYellow = strYellow.Remove(strYellow.Length - 3, 3);
-                        sw.WriteLine("Yellow curve = " + strYellow);
-
-                        string strBlack = "";
-                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
-                        {
-
-                            strBlack = strBlack + "(" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0") + " " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_K).ToString("0.0") + ") , ";
-
-                        }
-                        strBlack = strBlack.Remove(strBlack.Length - 3, 3);
-                        sw.WriteLine("Black curve = " + strBlack);
-
-
-                        sw.Close();
-
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurvesFile.ppc", CurveFileName + "_CurvesFile.ppc");
-                        #endregion
-
-                    }
-                    else if (DdlCurveType.SelectedValue == "100")  // for ColorGate-TVI
-                    {
-                        #region Create file and download .ctvx file for ColorGate-TVI
-
-                        //-------For curvetype=100-------Make .ctvx XML file for ColorGate-TVI (Dhruti's Code)-------------------//
-
-                        //-----------------Pass few parameters in "" marks to .ctvx xml file------------------//
-                        string str0 = "\"" + "1.0" + "\"";
-                        string str1 = "\"" + "UTF-8" + "\"";
-                        string str2 = "\"" + "urn:schemas-colorgate-com:tonalvalues" + "\"";
-                        string str3 = "\"" + "1" + "\"";
-
-                        //-----------------Make .ctvx xml file------------------//
-                        System.IO.StreamWriter sw3;
-                        sw3 = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CurveDelta.ctvx");
-                        sw3.WriteLine("<?xml version=" + str0 + " encoding=" + str1 + "?>");
-                        sw3.WriteLine("<TonalValues xmlns=" + str2 + ">");
-
-                        if (DT_CPSyncPressRunCurve.Count > 19)
-                        {
-                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>0</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_K.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[2].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_K.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[5].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_K.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[10].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_K.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[15].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_K.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[18].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
-                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>1</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_C.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[2].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_C.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[5].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_C.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[10].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_C.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[15].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_C.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[18].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
-                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>2</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_M.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[2].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_M.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[5].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_M.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[10].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_M.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[15].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_M.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[18].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
-                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>3</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_Y.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[2].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_Y.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[5].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_Y.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[10].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_Y.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[15].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_Y.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[18].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
-                        }
-                        sw3.WriteLine("</TonalValues>");
-                        sw3.Close();
-
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurveDelta.ctvx", CurveFileName + "_CurveDelta.ctvx");
-
-                        #endregion
-                    }
-                    else if (DdlCurveType.SelectedValue == "101")  // for ColorGate-CGCX
-                    {
-                        #region Create file and download .cgcx file for ColorGate-CGCX
-
-                        //-------For curvetype=101-------Make .cgcx XML file for ColorGate-CGCX (Dhruti's Code)-------------------//
-
-                        //-----------------Pass few parameters in "" marks to .cgcx xml file------------------//
-                        string str0 = "\"" + "1.0" + "\"";
-                        string str1 = "\"" + "UTF-8" + "\"";
-                        string str2 = "\"" + "urn:schemas-colorgate-com:gradation" + "\"";
-                        string str3 = "\"" + "1" + "\"";
-
-                        //-----------------Make .cgcx xml file------------------//
-                        System.IO.StreamWriter sw3;
-                        sw3 = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CurveDelta.cgcx");
-                        sw3.WriteLine("<?xml version=" + str0 + " encoding=" + str1 + "?>");
-                        sw3.WriteLine("<GradationCurves xmlns=" + str2 + ">");
-
-                        if (DT_CPSyncPressRunCurve.Count > 19)
-                        {
-                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>0</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
-                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>1</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
-                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>2</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
-                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>3</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
-                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>4</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer><ColorTansfer version=" + str3 + "><ChannelID>5</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer><ColorTansfer version=" + str3 + "><ChannelID>6</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer><ColorTansfer version=" + str3 + "><ChannelID>7</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer><ColorTansfer version=" + str3 + "><ChannelID>8</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
-                        }
-                        sw3.WriteLine("</GradationCurves>");
-                        sw3.Close();
-
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurveDelta.cgcx", CurveFileName + "_CurveDelta.cgcx");
-
-                        #endregion
-                    }
-                    else if (DdlCurveType.SelectedValue == "102")  // for Onyx G7 Import
-                    {
-                        #region Create file and download txt file for weighted highlight shadow and then 5% increment
-                        System.IO.StreamWriter sw;
-                        sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CurvesFile.txt");
-                        sw.WriteLine("\"Fujifilm Colorpath Sync 1D\"");
-                        sw.WriteLine("BEGIN_DATA_FORMAT");
-                        sw.WriteLine("SampleID\tSampleName\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
-                        sw.WriteLine("END_DATA_FORMAT");
-                        sw.WriteLine("NUMBER_OF_SETS\t" + DT_CPSyncPressRunCurve.Count.ToString());
-                        sw.WriteLine("BEGIN_DATA");
-                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
-                        {
-                            sw.WriteLine("A" + i.ToString() + "\t\"" + DT_CPSyncPressRunCurve[i].ReferenceNo.ToString() + ".00" + "\"\t" + DT_CPSyncPressRunCurve[i].CMYK_C.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_M.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_Y.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_K.ToString());
-                        }
-                        sw.WriteLine("END_DATA");
-                        sw.Close();
-
-                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurvesFile.txt", CurveFileName + "_CurvesFile.txt");
-                        #endregion
-                    }
-                }
-            }
-            catch (Exception Exc)
-            {
-
-            }
-        }
-
-
-
-        protected void DdlCurveType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BindCurve(Convert.ToInt16(DdlCurveType.SelectedValue));
-            HD_CurveType.Value = DdlCurveType.SelectedValue;
-        }
-
-        protected void Chk_CheckedChanged(object sender, EventArgs e)
-        {
-            BindCurve(Convert.ToInt16(DdlCurveType.SelectedValue));
-        }
-
-        protected void rbtnDetlaReflist_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BindCurve(Convert.ToInt16(DdlCurveType.SelectedValue));
-        }
-
-        protected void BtnExportCurvesDeltaView_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (SessionManager.Instance.CurveDeltaRefView == null || SessionManager.Instance.CurveDeltaPrevRunView == null)
-                {
-                    BindCurve(Convert.ToInt16(DdlCurveType.SelectedValue)); //-----Rebind session if session is empty.
-                }
-
-                List<Entity.CPSync1D.OptimizeRunCurve> DT_CurveDelta = new List<Entity.CPSync1D.OptimizeRunCurve>();
-                if (rbtnDetlaReflist.Items[0].Enabled == true && rbtnDetlaReflist.Items[0].Selected == true)
-                {
-                    DT_CurveDelta = (List<Entity.CPSync1D.OptimizeRunCurve>)SessionManager.Instance.CurveDeltaRefView;
-                }
-                else { DT_CurveDelta = (List<Entity.CPSync1D.OptimizeRunCurve>)SessionManager.Instance.CurveDeltaPrevRunView; }
-
-                if (DT_CurveDelta != null)
-                {
-                    if (!Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile")))
-                        Directory.CreateDirectory(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile"));
-
-                    string CurveFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00");
-
-                    #region Create file and download txt file for all curve types
-                    //---------------For all Curve Types -------------------//
-                    System.IO.StreamWriter sw;
-                    sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + CurveFileName + "_CurveDelta.txt");
-                    sw.WriteLine("\"Fujifilm Colorpath Sync 1D\"");
-                    sw.WriteLine("BEGIN_DATA_FORMAT");
-                    sw.WriteLine("Reference\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
-                    sw.WriteLine("END_DATA_FORMAT");
-                    sw.WriteLine("NUMBER_OF_SETS\t" + DT_CurveDelta.Count);
-                    sw.WriteLine("BEGIN_DATA");
-                    for (int i = 0; i < DT_CurveDelta.Count; i++)
-                    {
-                        sw.WriteLine(DT_CurveDelta[i].ReferenceNo.ToString() + "\t" + DT_CurveDelta[i].CMYK_C.ToString() + "\t" + DT_CurveDelta[i].CMYK_M.ToString() + "\t" + DT_CurveDelta[i].CMYK_Y.ToString() + "\t" + DT_CurveDelta[i].CMYK_K.ToString());
-                    }
-                    sw.WriteLine("END_DATA");
-                    sw.Close();
-
-                    Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurveDelta.txt", CurveFileName + "_CurveDelta.txt");
-                    #endregion
-                }
-            }
-            catch (Exception Exc)
-            {
-                throw Exc;
-            }
-        }
-
-
-        //Add Point with color on charts
-        private void AddPointChartWithColor(int _Index, Series _objSeries, string _XValue, string _YValue, string ColorName, bool ShowMarker)
-        {
-            try
-            {
-                _objSeries.ChartType = SeriesChartType.Spline;
-                _objSeries.Points.AddXY(Common.Utilities.DecimalRound(Convert.ToDouble(_XValue)), Common.Utilities.DecimalRound(Convert.ToDouble(_YValue)));
-                if (ShowMarker)
-                {
-                    _objSeries.Points[_Index].MarkerColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
-                    _objSeries.Points[_Index].MarkerStyle = MarkerStyle.Circle;
-                    _objSeries.Points[_Index].MarkerSize = 2;
-                    _objSeries.Points[_Index].BorderWidth = 1;
-                    _objSeries.Points[_Index].MarkerBorderColor = ColorTranslator.FromHtml("#000000");
-                }
-                else
-                {
-                    _objSeries.Points[_Index].MarkerStyle = MarkerStyle.None;
-                }
-            }
-            catch (Exception Ex)
-            {
-                throw Ex;
-            }
-        }
 
         #region IViewExport Members
         public int ProjectId { get; set; }
@@ -920,6 +461,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Business.Messages.CurveDataResponse CurveData { get; set; }
         public int SpotProjectId { get; set; }
         public DataTable dtPatchDetails { get; set; }
+
         #endregion
 
 

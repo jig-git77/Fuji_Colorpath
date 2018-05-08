@@ -211,7 +211,7 @@
     <value>Multi Color Custom Source_fr</value>
   </data>
   <data name="ELicenseType_SpotLibrary" xml:space="preserve">
-    <value>Spot Color Library_fr</value>
+    <value>Brand Color Optimization_fr</value>
   </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>INVALIDE</value>
@@ -1080,8 +1080,8 @@
   <data name="ESourceProfileCategory_NorthAmericanStandards" xml:space="preserve">
     <value>North American Standards</value>
   </data>
-  <data name="ESourceProfileCategory_EuropianStandards" xml:space="preserve">
-    <value>Europian Standards</value>
+  <data name="ESourceProfileCategory_EuropeanStandards" xml:space="preserve">
+    <value>European Standards</value>
   </data>
   <data name="ESourceProfileCategory_JapanStandards" xml:space="preserve">
     <value>Japan Standards</value>
@@ -1259,5 +1259,74 @@
   </data>
   <data name="Error_Invalid_GradingDetails" xml:space="preserve">
     <value>Invalid Grading details have been provided.</value>
+  </data>
+  <data name="actualTVI" xml:space="preserve">
+    <value>Actual TVI:_fr</value>
+  </data>
+  <data name="patchMetricsText" xml:space="preserve">
+    <value>Patch Metrics</value>
+  </data>
+  <data name="targetTVI" xml:space="preserve">
+    <value>Target TVI:_fr</value>
+  </data>
+  <data name="TVIThr" xml:space="preserve">
+    <value>TVI Threashold:_fr</value>
+  </data>
+  <data name="percentPatchMetrics" xml:space="preserve">
+    <value>% Patch Metrics_fr</value>
+  </data>
+  <data name="Error_Invalid_CurveType" xml:space="preserve">
+    <value>Invalid curve type value has been provided. fr</value>
+  </data>
+  <data name="Error_Invalid_OptimizationRunID" xml:space="preserve">
+    <value>Invalid OptimizationRun id value has been provided. fr</value>
+  </data>
+  <data name="Error_Invalid_ValidationType" xml:space="preserve">
+    <value>Invalid validation type value has been provided. fr</value>
+  </data>
+  <data name="SpotProject_Open" xml:space="preserve">
+    <value>Spot Project_fr</value>
+  </data>
+  <data name="SpotProject_Certified" xml:space="preserve">
+    <value>Spot Project Certified_fr</value>
+  </data>
+  <data name="locLabelAct" xml:space="preserve">
+    <value>Act.</value>
+  </data>
+  <data name="locLabelCustomer" xml:space="preserve">
+    <value>Client:</value>
+  </data>
+  <data name="locLabelDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="locLabeldEType" xml:space="preserve">
+    <value>dE Type:</value>
+  </data>
+  <data name="locLabelDevice" xml:space="preserve">
+    <value>Imprimante:</value>
+  </data>
+  <data name="locLabelJDFJobID" xml:space="preserve">
+    <value>JDF Job ID:</value>
+  </data>
+  <data name="locLabelJob" xml:space="preserve">
+    <value>Job:</value>
+  </data>
+  <data name="locLabelMetric" xml:space="preserve">
+    <value>Metric:</value>
+  </data>
+  <data name="locLabelPageOrSurface" xml:space="preserve">
+    <value>Page/Surface:</value>
+  </data>
+  <data name="locLabelSignature" xml:space="preserve">
+    <value>Signature</value>
+  </data>
+  <data name="locLabelStandard" xml:space="preserve">
+    <value>Standard:</value>
+  </data>
+  <data name="locLabelTimestamp" xml:space="preserve">
+    <value>Timestamp:</value>
+  </data>
+  <data name="locLabelTol" xml:space="preserve">
+    <value>Tol.</value>
   </data>
 </root>

@@ -225,4 +225,10 @@
   <data name="locDownloadChartAndPrintThroughWorkflowResource1NCP" xml:space="preserve">
     <value>Download Chart and Print through NCP Workflow :</value>
   </data>
+  <data name="locExportCMYKResource.Text" xml:space="preserve">
+    <value>Export Library</value>
+  </data>
+  <data name="locDownloadCMYKLibraryResource.Text" xml:space="preserve">
+    <value>Download CMYK Library</value>
+  </data>
 </root>

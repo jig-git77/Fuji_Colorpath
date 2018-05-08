@@ -51,7 +51,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         else if (CurrentRun.Status == EOptimizeRunStatus.Certify)
                         {
                             lnkMeasurement.Visible = false;
-                            lnkDownload.Visible = false;
+                            //lnkDownload.Visible = false;
 
                             //------If current run is closed (certify) and it is last run of this project--------//
                             if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
@@ -73,6 +73,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                     lnkMeasurement.Visible = false;
                                     //------------Only visible DeleteDLP button, if DLP is created for this last run---------//
                                     btnDLPDelete.Visible = true;
+                                    btnDLPDelete.ToolTip = (string)GetLocalResourceObject("btnNCPDeleteResource1");
                                 }
                                 else
                                 {
@@ -95,7 +96,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
                             lnkDownload.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Download;
                             lnkAnalyse.Enabled = lnkDownload.Enabled = CurrentRun.HasMeasurements;
-                            lnkDownload.Enabled = CurrentRun.HasProfile;
+                            lnkDownload.Enabled = CurrentRun.HasProfile || CurrentRun.Status == EOptimizeRunStatus.Certify;
                         }
                         else
                         {

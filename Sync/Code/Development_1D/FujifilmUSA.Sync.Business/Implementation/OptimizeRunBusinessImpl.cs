@@ -1016,8 +1016,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
-
-
                     ProfilerClient client = new ProfilerClient();
 
                     CreateSpotLibraryRequest req = new CreateSpotLibraryRequest();

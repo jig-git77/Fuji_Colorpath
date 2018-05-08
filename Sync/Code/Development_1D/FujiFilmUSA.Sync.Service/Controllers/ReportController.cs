@@ -1,8 +1,10 @@
 ﻿using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Entity.CPSync1D;
 using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,16 +12,19 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Web;
 using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
-    public class ReportController : BaseController, IViewReportSingleMeasurement, IViewReportGrading
+    public class ReportController : BaseController, IViewReportSingleMeasurement, IViewReportGrading, IViewExport
     {
         #region Variable Declarations
         private PresenterReportSingleMeasurement _presenterReportSingleMeasurement;
+        private PresenterExport _presenterExport;
         private PresenterReportGrading _presenterReportGrading;
         public decimal DtELimit = 0;
         private const string _InvalidMeasurementId = "Error_Invalid_MeasurementId";
@@ -30,80 +35,24 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private const string _InvalidDeltaEValue = "Error_Invalid_DeltaEValue";
         private const string _InvalidGradingDetails = "Error_Invalid_GradingDetails";
         private const string _InvalidValidationType = "Error_Invalid_ValidationType";
+        private const string _InvalidOptimizationRunID = "Error_Invalid_OptimizationRunID";
+        private const string _InvalidCurveType = "Error_Invalid_CurveType";
         #endregion
 
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             _presenterReportSingleMeasurement = new PresenterReportSingleMeasurement(this);
             _presenterReportGrading = new PresenterReportGrading(this);
+            _presenterExport = new PresenterExport(this);
             base.Initialize(controllerContext);
         }
 
         [HttpPost]
-        public IHttpActionResult ExportChartReport(ChartContent chart)
+        public IHttpActionResult ExportAnalyzeChartReport(ChartContent chart)
         {
             IHttpActionResult actionResult = null;
             string validationMessage = "";
-
-            BaseResponse<string> httpResponse = new BaseResponse<string>();
-            try
-            {
-                if (chart == null)
-                {
-                    validationMessage = "Invalid Charts, Please try again.";
-
-                    BaseErrorResponse errprResponse = new BaseErrorResponse();
-                    errprResponse.Error.UserMessage = validationMessage;
-                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
-                }
-                else
-                {
-
-                    ReportPDF objReportPDF = new ReportPDF();
-                    objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
-
-                    if (!Directory.Exists(objReportPDF.PDFPath))
-                        Directory.CreateDirectory(objReportPDF.PDFPath);
-
-                    objReportPDF.chartContent = chart;
-                    objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
-                    objReportPDF.ReportName = "Single Measurement Report";
-                    objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
-
-                    //objReportPDF.GenerateClientReportPDF();
-
-                    string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
-                    httpResponse.status = ResponseStatus.Success;
-                    httpResponse.Data = ReportPath;
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
-                }
-            }
-            catch (Exception ex)
-            {
-
-                BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.UserMessage= ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
-
-            }
-            return actionResult;
-        }
-
-        [HttpPost]
-        //public IHttpActionResult ExportPrepressSingleMeasurementReportTest(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject, string fromDeltaE, int validationType, ChartContent chart)
-        //public IHttpActionResult ExportPrepressSingleMeasurementReportTest(ChartContent chart, int? MeasurementId, bool? IsAverageOfMeasurements, string IsVerificationProject, string IsSync1DTypeProject, string fromDeltaE, int validationType)
-        public IHttpActionResult ExportPrepressSingleMeasurementReportTest(ChartContent chart)
-        {
-            IHttpActionResult actionResult = null;
-            string validationMessage = "";
-            //ChartContent chart = new ChartContent();
-            BaseResponse<string> httpResponse = new BaseResponse<string>();
-            //int? MeasurementId= 25204;
-            //bool? IsAverageOfMeasurements= false;
-            //string IsVerificationProject= "false", IsSync1DTypeProject= "true", fromDeltaE= "E2000";
-            //int validationType=-1;
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
                 if (chart == null)
@@ -147,7 +96,144 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         MeasurementId = Convert.ToInt32(chart.MeasurementId);
                         IsVerification = chart.IsVerificationProject == null ? false : Convert.ToBoolean(chart.IsVerificationProject);
                         IsSync1DType = chart.IsSync1DTypeProject == null ? false : Convert.ToBoolean(chart.IsSync1DTypeProject);
-                        IsAverageOfMeasurements = chart.IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
+                        IsAverageOfMeasurements = chart.IsAverageOfMeasurements == null ? false : Convert.ToBoolean(chart.IsAverageOfMeasurements);
+                        From_ΔE = Convert.ToString(chart.fromDeltaE);
+                        ValidationType = Convert.ToInt32(chart.validationType);
+
+
+                        ReportPDF objReportPDF = new ReportPDF();
+                        objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+
+                        if (!Directory.Exists(objReportPDF.PDFPath))
+                            Directory.CreateDirectory(objReportPDF.PDFPath);
+
+                        objReportPDF.chartContent = chart;
+                        objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
+                        objReportPDF.From_ΔE = From_ΔE;
+                        objReportPDF.IsValidation = IsVerification;
+                        objReportPDF.DLPName = chart.ReportDLPName;
+                        //objReportPDF.ReportName = "Single Measurement Report";
+                        //objReportPDF.DLPName = "DLP_NAME";
+                        objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+
+                        if (chart.validationType == 1)
+                        {
+                            //code to set the report title
+                            objReportPDF.ReportName = "Validation Report";
+                            if (IsSync1DType)
+                            {
+                                objReportPDF.ReportName = "Press Alignment Report";
+                            }
+
+
+                            DSReport_G7_Vali = new DataSet();
+                            _presenterReportSingleMeasurement.GetReportDataOnMeasurement_G7_Vali();
+                            objReportPDF.DS_Common = DSReport_G7_Vali;
+                            objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_G7;
+                        }
+                        else
+                        {
+                            objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_ISO;
+                            if (ValidationType == 0) //For Default mode in Sync1D ISO, G7 or 4D validation project as choice of MTP
+                            {
+                                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_Default;
+                            }
+                            //code to set the report title
+                            if (IsVerification)
+                            {
+                                objReportPDF.ReportName = "Validation Report";
+                            }
+                            else if (IsSync1DType)
+                            {
+                                objReportPDF.ReportName = "Alignment Curves Report";
+                            }
+                            else
+                            {
+                                objReportPDF.ReportName = "DLP Optimization Report";
+                                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement; //Only in 4D Optimization part
+                            }
+
+                            DSReport = new DataSet();
+                            _presenterReportSingleMeasurement.GetReportDataOnMeasurement();
+                            objReportPDF.DS_Common = DSReport;
+                        }
+
+                        objReportPDF.GenerateClientReportPDF();
+                        string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
+                        
+                        httpResponse.status = ResponseStatus.Success;
+                        httpResponse.Data = ReportPath;
+                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));                        
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
+        [HttpPost]
+        public HttpResponseMessage ExportAnalyzeChartReportTest(ChartContent chart)
+        {
+            HttpResponseMessage httpResponseMessage = null;
+            string validationMessage = "";
+            //ChartContent chart = new ChartContent();
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
+            //int? MeasurementId= 25204;
+            //bool? IsAverageOfMeasurements= false;
+            //string IsVerificationProject= "false", IsSync1DTypeProject= "true", fromDeltaE= "E2000";
+            //int validationType=-1;
+            try
+            {
+                if (chart == null)
+                {
+                    validationMessage = "Invalid Charts, Please try again.";
+
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    httpResponseMessage = Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse);//returns 412 status code
+                }
+                else
+                {
+                    if (chart.MeasurementId == null)
+                        validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+                    if (chart.IsAverageOfMeasurements == null)
+                        validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+
+                    if (chart.IsVerificationProject == null)
+                        validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+
+                    if (chart.IsSync1DTypeProject == null)
+                        validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+
+                    if (string.IsNullOrEmpty(Convert.ToString(chart.fromDeltaE)))
+                        validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
+
+                    if (string.IsNullOrEmpty(Convert.ToString(chart.validationType)))
+                        validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidValidationType);
+
+                    if (!string.IsNullOrEmpty(validationMessage))
+                    {
+                        BaseErrorResponse errprResponse = new BaseErrorResponse();
+                        errprResponse.Error.UserMessage = validationMessage;
+                        errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                        httpResponseMessage = Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse);//returns 412 status code
+                    }
+                    else
+                    {
+                        MeasurementId = Convert.ToInt32(chart.MeasurementId);
+                        IsVerification = chart.IsVerificationProject == null ? false : Convert.ToBoolean(chart.IsVerificationProject);
+                        IsSync1DType = chart.IsSync1DTypeProject == null ? false : Convert.ToBoolean(chart.IsSync1DTypeProject);
+                        IsAverageOfMeasurements = chart.IsAverageOfMeasurements == null ? false : Convert.ToBoolean(chart.IsAverageOfMeasurements);
                         From_ΔE = Convert.ToString(chart.fromDeltaE);
                         ValidationType = Convert.ToInt32(chart.validationType);
 
@@ -211,9 +297,20 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                         objReportPDF.GenerateClientReportPDF();
                         string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
-                        httpResponse.status = ResponseStatus.Success;
-                        httpResponse.Data = ReportPath;
-                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                        //httpResponse.status = ResponseStatus.Success;
+                        //httpResponse.Data = ReportPath;
+                        //httpResponseMessage = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+
+                        var dataBytes = File.ReadAllBytes(HostingEnvironment.MapPath("~/" + ReportPath));
+                        //adding bytes to memory stream   
+                        var dataStream = new MemoryStream(dataBytes);
+                        httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
+                        httpResponseMessage.Content = new StreamContent(dataStream);
+                        httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
+                        httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
+                        httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                        httpResponseMessage.Content.Headers.ContentDisposition.FileName = objReportPDF.PDF_NAME;
+                        httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
                     }
                 }
             }
@@ -223,10 +320,311 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 BaseErrorResponse errprResponse = new BaseErrorResponse();
                 errprResponse.Error.UserMessage = ex.Message;
                 errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+                httpResponseMessage = Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse);//returns the 500 status code
 
             }
-            return actionResult;
+            return httpResponseMessage;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage DownloadSpotChart(int? SpotProjectID)
+        {
+            HttpResponseMessage httpResponseMessage = null;
+            string validationMessage = "";
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
+            try
+            {
+                if (SpotProjectID == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
+                if (SpotProjectID == null)
+                {
+                    validationMessage = "Invalid Charts, Please try again.";
+
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    httpResponseMessage = Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse);//returns 412 status code
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(validationMessage))
+                    {
+                        BaseErrorResponse errprResponse = new BaseErrorResponse();
+                        errprResponse.Error.UserMessage = validationMessage;
+                        errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                        httpResponseMessage = Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse);//returns 412 status code
+                    }
+                    else
+                    {
+                        SpotProjectId = Convert.ToInt32(SpotProjectID);
+                        Wedge wedge = new Wedge();
+                        _presenterExport.GetSpotPatchDetailsForChartBySpotProject();
+
+                        List<Patch> listPatch = new List<Patch>();
+                        if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
+                        {
+                            foreach (DataRow dr in dtPatchDetails.Rows)
+                            {
+                                Patch patch = new Patch()
+                                {
+                                    PatchID = Convert.ToInt32(dr["SpotID"]),
+                                    ColorName = Convert.ToString(dr["SpotName"]),
+                                    Cmyk_C = Convert.ToDouble(dr["CMYK_C"]),
+                                    Cmyk_M = Convert.ToDouble(dr["CMYK_M"]),
+                                    Cmyk_Y = Convert.ToDouble(dr["CMYK_Y"]),
+                                    Cmyk_K = Convert.ToDouble(dr["CMYK_K"]),
+                                    Cie_L = Convert.ToDouble(dr["CIELAB_L"]),
+                                    Cie_a = Convert.ToDouble(dr["CIELAB_a"]),
+                                    Cie_b = Convert.ToDouble(dr["CIELAB_b"]),
+                                    Spot1 = 0
+                                };
+                                listPatch.Add(patch);
+                            }
+                        }
+                        wedge.listPatch = listPatch;
+
+                        IccFileParams obj = new IccFileParams();
+
+                        obj.Configurations.NumberOfPatches = 1872;
+                        obj.Configurations.ChartPages = 3;
+                        obj.Configurations.PatchWidth = 27;
+                        obj.Configurations.PatchHeight = 27;
+                        obj.Configurations.ChartBorder = 40;
+                        obj.Configurations.ChartSizeW = 0;
+                        obj.Configurations.ChartSizeH = 0;
+                        obj.Configurations.RowsPerChart = 24;
+                        obj.Configurations.ColumsPerChart = 26;
+                        obj.Configurations.Vgap = 2;
+                        obj.Configurations.Hgap = 0;
+                        obj.Configurations.GapLeval = 75;
+                        obj.Configurations.PreviousL = 0;
+                        obj.Configurations.ChartName = "Pantone Test Chart";
+                        obj.Patches = wedge.listPatch;
+
+                        string BaseUri = Utilities.ReadConfigValue("BaseCpSpotChartPdfServiceURL");
+                        string methodUrl = "api/Chart/GenerateFiles";
+                        byte[] dataBytes = null;
+                        string fileName = "";
+                        using (HttpClient httpClient = new HttpClient())
+                        {
+                            StringContent content = new StringContent(JsonConvert.SerializeObject(obj), null, "application/json");
+                            var result = httpClient.PostAsync(BaseUri + methodUrl, content).Result;
+                            var resultString = result.Content.ReadAsStringAsync().Result;
+                            var response = JsonConvert.DeserializeObject<BaseResponse<FileResponse>>(resultString);
+
+                            WebClient client = new WebClient();
+                            client.DownloadFile(response.Data.FilePath, System.Web.HttpContext.Current.Server.MapPath("UploadFiles/") + response.Data.FileName);
+
+                            var webClient = new WebClient();
+                            dataBytes = webClient.DownloadData(response.Data.FilePath);
+                            fileName = response.Data.FileName;
+                        }
+                        //adding bytes to memory stream   
+                        var dataStream = new MemoryStream(dataBytes);
+                        httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
+                        httpResponseMessage.Content = new StreamContent(dataStream);
+                        httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
+                        httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
+                        httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                        httpResponseMessage.Content.Headers.ContentDisposition.FileName = fileName;
+                        httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/zip");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                httpResponseMessage = Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse);//returns the 500 status code
+
+            }
+            return httpResponseMessage;
+        }
+        //[HttpPost]
+        //public IHttpActionResult ExportAnalyzeChartReportTest(ChartContent chart)
+        //{
+        //    IHttpActionResult actionResult = null;
+        //    string validationMessage = "";
+        //    BaseResponse<string> httpResponse = new BaseResponse<string>();
+        //    try
+        //    {
+        //        if (chart == null)
+        //        {
+        //            validationMessage = "Invalid Charts, Please try again.";
+
+        //            BaseErrorResponse errprResponse = new BaseErrorResponse();
+        //            errprResponse.Error.UserMessage = validationMessage;
+        //            errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+        //            actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+        //        }
+        //        else
+        //        {
+        //            if (chart.MeasurementId == null)
+        //                validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+        //            if (chart.IsAverageOfMeasurements == null)
+        //                validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+
+        //            if (chart.IsVerificationProject == null)
+        //                validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+
+        //            if (chart.IsSync1DTypeProject == null)
+        //                validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+
+        //            if (string.IsNullOrEmpty(Convert.ToString(chart.fromDeltaE)))
+        //                validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
+
+        //            if (string.IsNullOrEmpty(Convert.ToString(chart.validationType)))
+        //                validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidValidationType);
+
+        //            if (!string.IsNullOrEmpty(validationMessage))
+        //            {
+        //                BaseErrorResponse errprResponse = new BaseErrorResponse();
+        //                errprResponse.Error.UserMessage = validationMessage;
+        //                errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+        //                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+        //            }
+        //            else
+        //            {
+        //                MeasurementId = Convert.ToInt32(chart.MeasurementId);
+        //                IsVerification = chart.IsVerificationProject == null ? false : Convert.ToBoolean(chart.IsVerificationProject);
+        //                IsSync1DType = chart.IsSync1DTypeProject == null ? false : Convert.ToBoolean(chart.IsSync1DTypeProject);
+        //                IsAverageOfMeasurements = chart.IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
+        //                From_ΔE = Convert.ToString(chart.fromDeltaE);
+        //                ValidationType = Convert.ToInt32(chart.validationType);
+
+
+        //                ReportPDF objReportPDF = new ReportPDF();
+        //                objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+
+        //                if (!Directory.Exists(objReportPDF.PDFPath))
+        //                    Directory.CreateDirectory(objReportPDF.PDFPath);
+
+        //                objReportPDF.chartContent = chart;
+        //                objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
+        //                objReportPDF.From_ΔE = From_ΔE;
+        //                objReportPDF.IsValidation = IsVerification;
+        //                objReportPDF.DLPName = chart.ReportDLPName;
+        //                //objReportPDF.ReportName = "Single Measurement Report";
+        //                //objReportPDF.DLPName = "DLP_NAME";
+        //                objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+
+        //                if (chart.validationType == 1)
+        //                {
+        //                    //code to set the report title
+        //                    objReportPDF.ReportName = "Validation Report";
+        //                    if (IsSync1DType)
+        //                    {
+        //                        objReportPDF.ReportName = "Press Alignment Report";
+        //                    }
+
+        //                    DSReport_G7_Vali = new DataSet();
+        //                    _presenterReportSingleMeasurement.GetReportDataOnMeasurement_G7_Vali();
+        //                    objReportPDF.DS_Common = DSReport_G7_Vali;
+        //                    objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_G7;
+        //                }
+        //                else
+        //                {
+        //                    objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_ISO;
+        //                    if (ValidationType == 0) //For Default mode in Sync1D ISO, G7 or 4D validation project as choice of MTP
+        //                    {
+        //                        objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_Default;
+        //                    }
+        //                    //code to set the report title
+        //                    if (IsVerification)
+        //                    {
+        //                        objReportPDF.ReportName = "Validation Report";
+        //                    }
+        //                    else if (IsSync1DType)
+        //                    {
+        //                        objReportPDF.ReportName = "Alignment Curves Report";
+        //                    }
+        //                    else
+        //                    {
+        //                        objReportPDF.ReportName = "DLP Optimization Report";
+        //                        objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement; //Only in 4D Optimization part
+        //                    }
+
+        //                    DSReport = new DataSet();
+        //                    _presenterReportSingleMeasurement.GetReportDataOnMeasurement();
+        //                    objReportPDF.DS_Common = DSReport;
+        //                }
+
+        //                objReportPDF.GenerateClientReportPDF();
+        //                string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
+
+        //                var dataBytes = File.ReadAllBytes(HostingEnvironment.MapPath("~/" + ReportPath));
+        //                Guid obj = Guid.NewGuid();
+        //                string guid = obj.ToString();
+        //                var session = HttpContext.Current.Session;
+        //                if(session !=null)
+        //                {
+        //                    HttpContext.Current.Session[guid] = dataBytes;
+        //                    HttpContext.Current.Session[guid + "AttachementFileName"] = objReportPDF.PDF_NAME;
+        //                }
+
+        //                httpResponse.status = ResponseStatus.Success;
+        //                httpResponse.Data = guid;
+        //                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        BaseErrorResponse errprResponse = new BaseErrorResponse();
+        //        errprResponse.Error.UserMessage = ex.Message;
+        //        errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+        //        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+        //    }
+        //    return actionResult;
+        //}
+
+        [HttpGet]
+        public HttpResponseMessage DownloadReport(string guid)
+        {
+            HttpResponseMessage httpResponseMessage = null;
+            string validationMessage = "";
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
+            try
+            {
+                if (guid == null)
+                {
+                    validationMessage = "Invalid Charts, Please try again.";
+
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    httpResponseMessage = Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse);//returns 412 status code
+                }
+                else
+                {                   
+                    var dataBytes = (byte[])HttpContext.Current.Session[guid];
+                    string fileName = Convert.ToString(HttpContext.Current.Session[guid + "AttachementFileName"]);
+                    //adding bytes to memory stream   
+                    var dataStream = new MemoryStream(dataBytes);
+                    httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
+                    httpResponseMessage.Content = new StreamContent(dataStream);
+                    httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
+                    httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
+                    httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                    httpResponseMessage.Content.Headers.ContentDisposition.FileName = fileName;
+                    httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                httpResponseMessage = Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse);//returns the 500 status code
+
+            }
+            return httpResponseMessage;
         }
 
         //service to bind the summary delta E values for report
@@ -306,7 +704,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                                     listStatesLimits.Add(Convert.ToDecimal(DSReport.Tables[2].Rows[index]["TargetValue"]));
                                 }
                             }
-                            
+
                         }
                     httpResponse.Data = new
                     {
@@ -339,7 +737,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             BaseResponse<string> httpResponse = new BaseResponse<string>();
             try
             {
-                
+
 
                 if (chart.MeasurementId == null)
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
@@ -376,7 +774,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                     if (DSReport != null && DSReport.Tables.Count > 0)
                     {
-                        RevisedDataSet(DSReport,chart.grading); //-----Call the function to get two separate DataSets for Avg Scoring and Individual Scoring Measurements list
+                        RevisedDataSet(DSReport, chart.grading); //-----Call the function to get two separate DataSets for Avg Scoring and Individual Scoring Measurements list
 
                         ReportPDF objReportPDF = new ReportPDF();
                         objReportPDF.ReportType = (int)enumReportType.ReportScoringMeasurement_Default;
@@ -386,17 +784,17 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             Directory.CreateDirectory(objReportPDF.PDFPath);
 
                         objReportPDF.chartContent = chart;
-                        objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";                        
+                        objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
                         objReportPDF.DS_Common = DSReport;
                         objReportPDF.DS_MetricAvgScoring = DSReportTotalAvg;
-                        objReportPDF.DS_ScoringMeasurementList = DSReportRevised;                        
+                        objReportPDF.DS_ScoringMeasurementList = DSReportRevised;
                         objReportPDF.From_ΔE = From_ΔE;
                         objReportPDF.IsValidation = IsVerification;
                         objReportPDF.DLPName = chart.ReportDLPName;
                         objReportPDF.ReportName = "Scoring Report";
                         objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
                         objReportPDF.GenerateClientReportPDF();
-                        string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
+                        string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
                         httpResponse.status = ResponseStatus.Success;
                         httpResponse.Data = ReportPath;
                         actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
@@ -415,7 +813,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
-        private void RevisedDataSet(DataSet DSReport,ReportGrading grading)
+
+        private void RevisedDataSet(DataSet DSReport, ReportGrading grading)
         {
             decimal CyanAvgScore = 0;
             decimal MagentaAvgScore = 0;
@@ -566,6 +965,481 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
         }
 
+        [HttpGet]
+        public IHttpActionResult ExportGenerateCurveChart(int? OptimizationRunId, int? CurveType, string ExportFileName)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                if (OptimizationRunId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
+
+                if (CurveType == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidCurveType);
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    DetermineCulture();
+                    this.OptimizeRunId = Convert.ToInt32(OptimizationRunId);
+                    this.CurveTypeId = Convert.ToInt16(CurveType);
+                    if (Convert.ToInt16(CurveType) == 100 || Convert.ToInt16(CurveType) == 101)
+                        this.CurveTypeId = 5;
+                    if (Convert.ToInt16(CurveType) == 102)
+                        this.CurveTypeId = 45;
+
+                    _presenterExport.GetCurveData();
+
+                    string CurveFileName = "";
+                    string CurveFilePath = HostingEnvironment.MapPath("~/UploadFiles/CurvesFile/");
+                    string ReportFileName = "";
+                    if (!File.Exists(CurveFilePath))
+                        Directory.CreateDirectory(CurveFilePath);
+
+                    if (CurveType == 1 || CurveType == 5 || CurveType == 10)
+                    {
+                        #region Create file and download txt file for 1%,5% and 10%
+                        CurveFileName = ExportFileName + "_CurvesFile.txt";
+                        System.IO.StreamWriter sw;
+                        sw = System.IO.File.CreateText(CurveFilePath + CurveFileName);
+                        //const string quote = "\"";
+                        sw.WriteLine("\"Fujifilm Colorpath Sync 1D\"");
+                        sw.WriteLine("BEGIN_DATA_FORMAT");
+                        sw.WriteLine("Reference\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
+                        //sw.WriteLine("SampleID\tSampleName\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
+                        sw.WriteLine("END_DATA_FORMAT");
+                        sw.WriteLine("NUMBER_OF_SETS\t" + CurveData.CurveExportView.Count);
+                        sw.WriteLine("BEGIN_DATA");
+                        for (int i = 0; i < CurveData.CurveExportView.Count; i++)
+                        {
+                            sw.WriteLine(CurveData.CurveExportView[i].ReferenceNo.ToString() + "\t" + CurveData.CurveExportView[i].CMYK_C.ToString() + "\t" + CurveData.CurveExportView[i].CMYK_M.ToString() + "\t" + CurveData.CurveExportView[i].CMYK_Y.ToString() + "\t" + CurveData.CurveExportView[i].CMYK_K.ToString());
+                        }
+                        sw.WriteLine("END_DATA");
+                        sw.Close();
+                        #endregion
+                    }
+                    else if (CurveType == 15)  // Rampage
+                    {
+                        #region Create Zip file and download file for rampage
+                        CurveFileName = ExportFileName;
+                        string zipCurveFileName = CurveFileName + "_CMYKFile.zip";
+                        ReportFileName = "/UploadFiles/CurvesFile/" + zipCurveFileName;
+
+                        System.IO.StreamWriter swC;
+                        System.IO.StreamWriter swM;
+                        System.IO.StreamWriter swY;
+                        System.IO.StreamWriter swK;
+                        swC = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CurvesFile/") + CurveFileName + "_C.oli");
+                        swC.WriteLine("2");
+                        swC.WriteLine("0.0000000000");
+                        swC.WriteLine("0.0000000000");
+                        swC.WriteLine("25");
+
+                        swM = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CurvesFile/") + CurveFileName + "_M.oli");
+                        swM.WriteLine("2");
+                        swM.WriteLine("0.0000000000");
+                        swM.WriteLine("0.0000000000");
+                        swM.WriteLine("25");
+
+                        swY = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CurvesFile/") + CurveFileName + "_Y.oli");
+                        swY.WriteLine("2");
+                        swY.WriteLine("0.0000000000");
+                        swY.WriteLine("0.0000000000");
+                        swY.WriteLine("25");
+
+                        swK = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CurvesFile/") + CurveFileName + "_K.oli");
+                        swK.WriteLine("2");
+                        swK.WriteLine("0.0000000000");
+                        swK.WriteLine("0.0000000000");
+                        swK.WriteLine("25");
+
+                        for (int i = 0; i < CurveData.CurveExportView.Count; i++)
+                        {
+                            swC.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_C).ToString("0.0"));
+                            swM.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_M).ToString("0.0"));
+                            swY.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_Y).ToString("0.0"));
+                            swK.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_K).ToString("0.0"));
+                        }
+                        swC.WriteLine("Version: 2.0");
+                        swC.Close();
+
+                        swM.WriteLine("Version: 2.0");
+                        swM.Close();
+
+                        swY.WriteLine("Version: 2.0");
+                        swY.Close();
+
+                        swK.WriteLine("Version: 2.0");
+                        swK.Close();
+
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_C.oli");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_M.oli");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Y.oli");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_K.oli");
+
+                        //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CMYKFile.zip", CurveFileName + "_CMYKFile.zip");
+                        #endregion
+                    }
+                    else if (CurveType == 25)  // for XMF
+                    {
+                        #region Create file and download txt file for XMF
+                        CurveFileName = ExportFileName + "_CurvesFile.csv";
+                        System.IO.StreamWriter sw;
+                        sw = System.IO.File.CreateText(CurveFilePath + CurveFileName);
+                        sw.WriteLine("Cyan;Magenta;Yellow;Black");
+                        for (int i = 0; i < CurveData.CurveExportView.Count; i++)
+                        {
+                            sw.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_C).ToString("0.0000") + ";" + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_M).ToString("0.0000") + ";" + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_Y).ToString("0.0000") + ";" + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_K).ToString("0.0000"));
+                        }
+                        sw.Close();
+
+                        //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurvesFile.csv", CurveFileName + "_CurvesFile.csv");
+                        #endregion
+
+                    }
+                    else if (CurveType == 35)  // Harmony (Prinergy)
+                    {
+                        #region Create Zip file and download file for Harmony
+
+                        CurveFileName = ExportFileName;
+                        string zipCurveFileName = CurveFileName + "_Harmony.zip";
+                        ReportFileName = "/UploadFiles/CurvesFile/" + zipCurveFileName;
+
+
+                        System.IO.StreamWriter swC;
+                        System.IO.StreamWriter swM;
+                        System.IO.StreamWriter swY;
+                        System.IO.StreamWriter swK;
+
+                        //cyan
+                        swC = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_C.txt");
+
+                        //magenta
+                        swM = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_M.txt");
+
+                        //yellow    
+                        swY = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_Y.txt");
+
+                        //black
+                        swK = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_K.txt");
+
+                        for (int i = 0; i < CurveData.CurveExportView.Count; i++)
+                        {
+                            swC.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.00") + "\t" + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_C).ToString("0.00"));
+                            swM.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.00") + "\t" + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_M).ToString("0.00"));
+                            swY.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.00") + "\t" + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_Y).ToString("0.00"));
+                            swK.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.00") + "\t" + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_K).ToString("0.00"));
+                        }
+
+                        swC.Close();
+                        swM.Close();
+                        swY.Close();
+                        swK.Close();
+
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_C.txt");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_M.txt");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Y.txt");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_K.txt");
+
+                        //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_Harmony.zip", CurveFileName + "_Harmony.zip");
+                        #endregion
+                    }
+                    else if (CurveType == 45)  // nexus
+                    {
+                        #region Create Zip file and download file for nexus
+
+                        CurveFileName = ExportFileName;
+                        string zipCurveFileName = CurveFileName + "_Nexus.zip";
+                        ReportFileName = "/UploadFiles/CurvesFile/" + zipCurveFileName;
+
+
+                        //check if file exists and delete it
+                        if (System.IO.File.Exists(CurveFilePath + zipCurveFileName))
+                            System.IO.File.Delete(CurveFilePath + zipCurveFileName);
+
+                        System.IO.StreamWriter swC;
+                        System.IO.StreamWriter swM;
+                        System.IO.StreamWriter swY;
+                        System.IO.StreamWriter swK;
+                        swC = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_Nexus_Cya.txt");
+                        swM = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_Nexus_Mag.txt");
+                        swY = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_Nexus_Yel.txt");
+                        swK = System.IO.File.CreateText(CurveFilePath + CurveFileName + "_Nexus_Bla.txt");
+
+
+                        for (int i = 0; i < CurveData.CurveExportView.Count; i++)
+                        {
+                            swC.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0000") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_C).ToString("0.0000"));
+                            swM.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0000") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_M).ToString("0.0000"));
+                            swY.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0000") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_Y).ToString("0.0000"));
+                            swK.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0000") + "    " + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_K).ToString("0.0000"));
+                        }
+
+                        swC.Close();
+                        swM.Close();
+                        swY.Close();
+                        swK.Close();
+
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Nexus_Cya.txt");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Nexus_Mag.txt");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Nexus_Yel.txt");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + CurveFileName + "_Nexus_Bla.txt");
+
+                        //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_Nexus.zip", CurveFileName + "_Nexus.zip");
+                        #endregion
+                    }
+                    else if (CurveType == 55)  // for sericol UK Caldera
+                    {
+                        #region Create file and download txt file for sericol UK
+                        CurveFileName = ExportFileName + "_CurvesFile.ppc";
+
+                        System.IO.StreamWriter sw;
+                        sw = System.IO.File.CreateText(CurveFilePath + CurveFileName);
+                        sw.WriteLine("Device = CMYK");
+                        sw.WriteLine("Max ink = 400");
+                        sw.WriteLine("Max ink reduction = preserve black");
+
+                        string strCyan = "";
+                        for (int i = 0; i < CurveData.CurveExportView.Count; i++)
+                        {
+
+                            strCyan = strCyan + "(" + Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0") + " " + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_C).ToString("0.0") + ") , ";
+
+                        }
+                        strCyan = strCyan.Remove(strCyan.Length - 3, 3);
+                        sw.WriteLine("Cyan curve = " + strCyan);
+
+                        string strMagenta = "";
+                        for (int i = 0; i < CurveData.CurveExportView.Count; i++)
+                        {
+
+                            strMagenta = strMagenta + "(" + Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0") + " " + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_M).ToString("0.0") + ") , ";
+
+                        }
+                        strMagenta = strMagenta.Remove(strMagenta.Length - 3, 3);
+                        sw.WriteLine("Magenta curve = " + strMagenta);
+
+                        string strYellow = "";
+                        for (int i = 0; i < CurveData.CurveExportView.Count; i++)
+                        {
+
+                            strYellow = strYellow + "(" + Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0") + " " + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_Y).ToString("0.0") + ") , ";
+
+                        }
+                        strYellow = strYellow.Remove(strYellow.Length - 3, 3);
+                        sw.WriteLine("Yellow curve = " + strYellow);
+
+                        string strBlack = "";
+                        for (int i = 0; i < CurveData.CurveExportView.Count; i++)
+                        {
+
+                            strBlack = strBlack + "(" + Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0") + " " + Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_K).ToString("0.0") + ") , ";
+
+                        }
+                        strBlack = strBlack.Remove(strBlack.Length - 3, 3);
+                        sw.WriteLine("Black curve = " + strBlack);
+
+
+                        sw.Close();
+
+                        //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurvesFile.ppc", CurveFileName + "_CurvesFile.ppc");
+                        #endregion
+
+                    }
+                    else if (CurveType == 100)  // for ColorGate-TVI
+                    {
+                        #region Create file and download .ctvx file for ColorGate-TVI
+
+                        //-------For curvetype=100-------Make .ctvx XML file for ColorGate-TVI (Dhruti's Code)-------------------//
+                        CurveFileName = ExportFileName + "_CurveDelta.ctvx";
+                        //-----------------Pass few parameters in "" marks to .ctvx xml file------------------//
+                        string str0 = "\"" + "1.0" + "\"";
+                        string str1 = "\"" + "UTF-8" + "\"";
+                        string str2 = "\"" + "urn:schemas-colorgate-com:tonalvalues" + "\"";
+                        string str3 = "\"" + "1" + "\"";
+
+                        //-----------------Make .ctvx xml file------------------//
+                        System.IO.StreamWriter sw3;
+                        sw3 = System.IO.File.CreateText(CurveFilePath + CurveFileName);
+                        sw3.WriteLine("<?xml version=" + str0 + " encoding=" + str1 + "?>");
+                        sw3.WriteLine("<TonalValues xmlns=" + str2 + ">");
+
+                        if (CurveData.CurveExportView.Count > 19)
+                        {
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>0</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[2].CMYK_K.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[2].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[5].CMYK_K.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[5].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[10].CMYK_K.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[10].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[15].CMYK_K.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[15].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[18].CMYK_K.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[18].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>1</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[2].CMYK_C.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[2].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[5].CMYK_C.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[5].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[10].CMYK_C.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[10].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[15].CMYK_C.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[15].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[18].CMYK_C.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[18].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>2</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[2].CMYK_M.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[2].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[5].CMYK_M.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[5].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[10].CMYK_M.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[10].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[15].CMYK_M.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[15].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[18].CMYK_M.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[18].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>3</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[2].CMYK_Y.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[2].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[5].CMYK_Y.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[5].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[10].CMYK_Y.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[10].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[15].CMYK_Y.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[15].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + (Convert.ToDecimal(CurveData.CurveExportView[18].CMYK_Y.ToString()) - Convert.ToDecimal(CurveData.CurveExportView[18].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                        }
+                        sw3.WriteLine("</TonalValues>");
+                        sw3.Close();
+
+                        //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurveDelta.ctvx", CurveFileName + "_CurveDelta.ctvx");
+
+                        #endregion
+                    }
+                    else if (CurveType == 101)  // for ColorGate-CGCX
+                    {
+                        #region Create file and download .cgcx file for ColorGate-CGCX
+
+                        CurveFileName = ExportFileName + "_CurveDelta.cgcx";
+                        //-------For curvetype=101-------Make .cgcx XML file for ColorGate-CGCX (Dhruti's Code)-------------------//
+
+                        //-----------------Pass few parameters in "" marks to .cgcx xml file------------------//
+                        string str0 = "\"" + "1.0" + "\"";
+                        string str1 = "\"" + "UTF-8" + "\"";
+                        string str2 = "\"" + "urn:schemas-colorgate-com:gradation" + "\"";
+                        string str3 = "\"" + "1" + "\"";
+
+                        //-----------------Make .cgcx xml file------------------//
+                        System.IO.StreamWriter sw3;
+                        sw3 = System.IO.File.CreateText(CurveFilePath + CurveFileName);
+                        sw3.WriteLine("<?xml version=" + str0 + " encoding=" + str1 + "?>");
+                        sw3.WriteLine("<GradationCurves xmlns=" + str2 + ">");
+
+                        if (CurveData.CurveExportView.Count > 19)
+                        {
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>0</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[2].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[5].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[10].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[15].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[18].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>1</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[2].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[5].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[10].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[15].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[18].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>2</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[2].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[5].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[10].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[15].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[18].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>3</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[2].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[5].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[10].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[15].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(CurveData.CurveExportView[18].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>4</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer><ColorTansfer version=" + str3 + "><ChannelID>5</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer><ColorTansfer version=" + str3 + "><ChannelID>6</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer><ColorTansfer version=" + str3 + "><ChannelID>7</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer><ColorTansfer version=" + str3 + "><ChannelID>8</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                        }
+                        sw3.WriteLine("</GradationCurves>");
+                        sw3.Close();
+
+                        //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurveDelta.cgcx", CurveFileName + "_CurveDelta.cgcx");
+
+                        #endregion
+                    }
+                    else if (CurveType == 102)  // for Onyx G7 Import
+                    {
+                        #region Create file and download txt file for weighted highlight shadow and then 5% increment
+                        CurveFileName = ExportFileName + "_CurvesFile.txt";
+                        System.IO.StreamWriter sw;
+                        sw = System.IO.File.CreateText(CurveFilePath + CurveFileName);
+                        sw.WriteLine("\"Fujifilm Colorpath Sync 1D\"");
+                        sw.WriteLine("BEGIN_DATA_FORMAT");
+                        sw.WriteLine("SampleID\tSampleName\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
+                        sw.WriteLine("END_DATA_FORMAT");
+                        sw.WriteLine("NUMBER_OF_SETS\t" + CurveData.CurveExportView.Count.ToString());
+                        sw.WriteLine("BEGIN_DATA");
+                        for (int i = 0; i < CurveData.CurveExportView.Count; i++)
+                        {
+                            sw.WriteLine("A" + i.ToString() + "\t\"" + CurveData.CurveExportView[i].ReferenceNo.ToString() + ".00" + "\"\t" + CurveData.CurveExportView[i].CMYK_C.ToString() + "\t" + CurveData.CurveExportView[i].CMYK_M.ToString() + "\t" + CurveData.CurveExportView[i].CMYK_Y.ToString() + "\t" + CurveData.CurveExportView[i].CMYK_K.ToString());
+                        }
+                        sw.WriteLine("END_DATA");
+                        sw.Close();
+
+                        //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurvesFile.txt", CurveFileName + "_CurvesFile.txt");
+                        #endregion
+                    }
+                    if (string.IsNullOrEmpty(ReportFileName))
+                        ReportFileName = "/UploadFiles/CurvesFile/" + CurveFileName;
+                    httpResponse.Data = ReportFileName;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
+        public IHttpActionResult ExportDeltaCurveChart(int? OptimizationRunId, int? CurveType, string ExportFileName, bool isCurrentRun)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                if (OptimizationRunId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
+
+                if (CurveType == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidCurveType);
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    DetermineCulture();
+                    this.OptimizeRunId = Convert.ToInt32(OptimizationRunId);
+                    this.CurveTypeId = Convert.ToInt16(CurveType);
+                    if (Convert.ToInt16(CurveType) == 100 || Convert.ToInt16(CurveType) == 101)
+                        this.CurveTypeId = 5;
+                    if (Convert.ToInt16(CurveType) == 102)
+                        this.CurveTypeId = 45;
+
+                    _presenterExport.GetCurveData();
+
+                    List<OptimizeRunCurve> DT_CurveDelta = new List<OptimizeRunCurve>();
+                    if (isCurrentRun)
+                        DT_CurveDelta = CurveData.CurveDeltaRefView;
+                    else
+                        DT_CurveDelta = CurveData.CurveDeltaPrevRunView;
+
+                    string CurveFileName = ExportFileName + "_CurveDelta.txt";
+                    string CurveFilePath = HostingEnvironment.MapPath("~/UploadFiles/CurvesFile/");
+                    string ReportFileName = "/UploadFiles/CurvesFile/" + CurveFileName; ;
+                    if (!File.Exists(CurveFilePath))
+                        Directory.CreateDirectory(CurveFilePath);
+
+                    #region Create file and download txt file for all curve types
+                    //---------------For all Curve Types -------------------//
+                    System.IO.StreamWriter sw;
+                    sw = System.IO.File.CreateText(CurveFilePath + CurveFileName);
+                    sw.WriteLine("\"Fujifilm Colorpath Sync 1D\"");
+                    sw.WriteLine("BEGIN_DATA_FORMAT");
+                    sw.WriteLine("Reference\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
+                    sw.WriteLine("END_DATA_FORMAT");
+                    sw.WriteLine("NUMBER_OF_SETS\t" + DT_CurveDelta.Count);
+                    sw.WriteLine("BEGIN_DATA");
+                    for (int i = 0; i < DT_CurveDelta.Count; i++)
+                    {
+                        sw.WriteLine(DT_CurveDelta[i].ReferenceNo.ToString() + "\t" + DT_CurveDelta[i].CMYK_C.ToString() + "\t" + DT_CurveDelta[i].CMYK_M.ToString() + "\t" + DT_CurveDelta[i].CMYK_Y.ToString() + "\t" + DT_CurveDelta[i].CMYK_K.ToString());
+                    }
+                    sw.WriteLine("END_DATA");
+                    sw.Close();
+                    #endregion
+
+                    httpResponse.Data = ReportFileName;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
+
         private decimal CalculateGrading(string Orig_ΔE, string OriginFrom, ReportGrading grading)
         {
             decimal ΔEGrade = 0;
@@ -579,7 +1453,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             decimal RGBSoc_R, RGBMaxSoc_R, RGBIndPer_R = 0;
             decimal RGBSoc_G, RGBMaxSoc_G, RGBIndPer_G = 0;
             decimal RGBSoc_B, RGBMaxSoc_B, RGBIndPer_B = 0;
-            
+
             decimal CMYSoc_25, CMYMaxSoc_25, CMYIndPer_25 = 0;
             decimal CMYSoc_50, CMYMaxSoc_50, CMYIndPer_50 = 0;
             decimal CMYSoc_75, CMYMaxSoc_75, CMYIndPer_75 = 0;
@@ -931,6 +1805,20 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public int ProjectId { get; set; }
         public DataSet DSReportRevised { get; set; }
         public DataSet DSReportTotalAvg { get; set; }
+        #endregion
+
+        #region IViewExport Members
+        public int OptimizeRunId { get; set; }
+        public byte[] DeviceLinkProfile { get; set; }
+        public byte[] ChartPreview { get; set; }
+        public byte[] SourceProfile { get; set; }
+        public Project Project { get; set; }
+        public short ReferenceChartTypeId { get; set; }
+        public short CurveTypeId { get; set; }
+        public FujifilmUSA.Sync.Business.Messages.CurveDataResponse CurveData { get; set; }
+        public int SpotProjectId { get; set; }
+        public DataTable dtPatchDetails { get; set; }
+
         #endregion
     }
 }

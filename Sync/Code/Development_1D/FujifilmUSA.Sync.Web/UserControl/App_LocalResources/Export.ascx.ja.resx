@@ -228,4 +228,10 @@
   <data name="locDownloadChartAndPrintThroughWorkflowResource1NCP" xml:space="preserve">
     <value>チャートをダウンロードし、DLPを適用したワークフローで印刷してください：</value>
   </data>
+  <data name="locExportCMYKResource.Text" xml:space="preserve">
+    <value>Export Library</value>
+  </data>
+  <data name="locDownloadCMYKLibraryResource.Text" xml:space="preserve">
+    <value>Download CMYK Library_ja</value>
+  </data>
 </root>

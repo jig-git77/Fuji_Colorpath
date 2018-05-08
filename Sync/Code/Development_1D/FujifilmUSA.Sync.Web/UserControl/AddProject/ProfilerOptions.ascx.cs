@@ -187,7 +187,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (indexMode > 0)
                         {
                             txtMode.Text = SessionManager.Instance.CurrentProject.ProjectOption[indexMode].ProfilerOptionValue;
-                            rdsMode.Value = Convert.ToDecimal(SessionManager.Instance.CurrentProject.ProjectOption[indexMode].ProfilerOptionValue);
+                            //rdsMode.Value = Convert.ToDecimal(SessionManager.Instance.CurrentProject.ProjectOption[indexMode].ProfilerOptionValue);   //---Comment out right now to make it non- editable advanced options
                         }
                         int indexBlackStart = SessionManager.Instance.CurrentProject.ProjectOption.FindIndex(item => item.ProfilerOptionId == 21);
                         if (indexBlackStart > 0)
@@ -205,7 +205,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (indexInkTotal > 0)
                         {
                             txtInkTotal.Text = SessionManager.Instance.CurrentProject.ProjectOption[indexInkTotal].ProfilerOptionValue;
-                            rdsInkTotal.Value = Convert.ToDecimal(SessionManager.Instance.CurrentProject.ProjectOption[indexInkTotal].ProfilerOptionValue);
+                            //rdsInkTotal.Value = Convert.ToDecimal(SessionManager.Instance.CurrentProject.ProjectOption[indexInkTotal].ProfilerOptionValue);   //---Comment out right now to make it non- editable advanced options
                         }
                         int indexInkMax = SessionManager.Instance.CurrentProject.ProjectOption.FindIndex(item => item.ProfilerOptionId == 18);
                         if (indexInkMax > 0)
@@ -434,11 +434,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                             txtBlackPointCustom.Text = x.ProfilerOptionValue;
                                             break;
                                         case EProfilerOption.InkTotal:
-                                            rdsInkTotal.Value = Convert.ToDecimal(x.ProfilerOptionValue);
+                                            //rdsInkTotal.Value = Convert.ToDecimal(x.ProfilerOptionValue);     //---Comment out right now to make it non- editable advanced options
                                             txtInkTotal.Text = x.ProfilerOptionValue;
                                             break;
                                         case EProfilerOption.BlackGeneration:
-                                            rdsMode.Value = Convert.ToDecimal(x.ProfilerOptionValue);
+                                            //rdsMode.Value = Convert.ToDecimal(x.ProfilerOptionValue);     //---Comment out right now to make it non- editable advanced options
                                             txtMode.Text = x.ProfilerOptionValue;
                                             break;
                                         case EProfilerOption.BlackStart:
@@ -629,7 +629,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     switch (option)
                     {
                         case EProfilerOption.BlackGeneration:
-                            x.ProfilerOptionValue = rdsMode.Value.ToString();
+                            //x.ProfilerOptionValue = rdsMode.Value.ToString();     //---Comment out right now to make it non- editable advanced options
                             x.ProfilerOptionValue = txtMode.Text;
                             break;
                         case EProfilerOption.BlackStart:
@@ -641,7 +641,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             x.ProfilerOptionValue = txtBlackWidth.Text;
                             break;
                         case EProfilerOption.InkTotal:
-                            x.ProfilerOptionValue = rdsInkTotal.Value.ToString();
+                            //x.ProfilerOptionValue = rdsInkTotal.Value.ToString();     //---Comment out right now to make it non- editable advanced options
                             x.ProfilerOptionValue = txtInkTotal.Text;
                             break;
                         case EProfilerOption.InkMax:
@@ -702,10 +702,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             txtBlackWidth.Text = (sender as Telerik.Web.UI.RadSlider).Value.ToString();
         }
 
-        protected void rdsInkTotal_ValueChanged(object sender, EventArgs e)
-        {
-            txtInkTotal.Text = (sender as Telerik.Web.UI.RadSlider).Value.ToString();
-        }
+        //protected void rdsInkTotal_ValueChanged(object sender, EventArgs e)       //---Comment out right now to make it non- editable advanced options
+        //{
+        //    txtInkTotal.Text = (sender as Telerik.Web.UI.RadSlider).Value.ToString();
+        //}
         #endregion
 
         #region Methods

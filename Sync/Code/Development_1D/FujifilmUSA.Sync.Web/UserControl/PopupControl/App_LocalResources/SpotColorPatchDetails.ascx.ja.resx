@@ -127,10 +127,10 @@
     <value>Metric</value>
   </data>
   <data name="locM_PResource.Text" xml:space="preserve">
-    <value>Delta_M_P</value>
+    <value>ΔE_M_P</value>
   </data>
   <data name="locM_TResource.Text" xml:space="preserve">
-    <value>Delta_M_T</value>
+    <value>ΔE_M_T</value>
   </data>
   <data name="locPredictedResource.Text" xml:space="preserve">
     <value>Predicted ja</value>
@@ -139,6 +139,6 @@
     <value>Target ja</value>
   </data>
   <data name="locT_PResource.Text" xml:space="preserve">
-    <value>Delta_T_P</value>
+    <value>ΔE_T_P</value>
   </data>
 </root>

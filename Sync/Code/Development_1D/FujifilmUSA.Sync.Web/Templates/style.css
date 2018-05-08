@@ -512,3 +512,8 @@ td.Gray
 {
     background-color:#d3d4d5;
 }
+.gamutChart {
+    background: url('../Images/LabBackdrop.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

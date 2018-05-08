@@ -346,13 +346,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.WebControls.Localize locCancel;
         
         /// <summary>
-        /// lbtnGenerateReport control.
+        /// lnkClientGenreateReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnGenerateReport;
+        protected global::System.Web.UI.WebControls.LinkButton lnkClientGenreateReport;
         
         /// <summary>
         /// locGenReport control.
@@ -362,15 +362,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locGenReport;
-        
-        /// <summary>
-        /// lnkClientGenreateReport control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkClientGenreateReport;
         
         /// <summary>
         /// txt_MeasurementID control.

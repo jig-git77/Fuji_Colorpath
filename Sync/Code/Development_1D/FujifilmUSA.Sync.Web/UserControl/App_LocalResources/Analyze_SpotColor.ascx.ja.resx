@@ -672,8 +672,11 @@
   <data name="locMinDeltaEResource1.Text" xml:space="preserve">
     <value>Min ΔE</value>
   </data>
-  <data name="locOptDevicePredResource1.Text" xml:space="preserve">
+  <data name="locSummaryHeaderRun0Resource1" xml:space="preserve">
     <value>Optimal Device Prediction</value>
+  </data>
+  <data name="locSummaryHeaderRun1Resource1" xml:space="preserve">
+    <value>Summary Comparison</value>
   </data>
   <data name="locRipSettingsResource1.Text" xml:space="preserve">
     <value>RIP設定：</value>
@@ -683,5 +686,14 @@
   </data>
   <data name="locCreateNCPResource1" xml:space="preserve">
     <value>Create Chart</value>
+  </data>
+  <data name="locMinimumDeltaResource.Text" xml:space="preserve">
+    <value>Minimum Δ</value>
+  </data>
+  <data name="locDeltaTypeResource.Text" xml:space="preserve">
+    <value>ΔEタイプ</value>
+  </data>
+  <data name="locMeasurementDateResource1.Text" xml:space="preserve">
+    <value>Measurement Date_ja</value>
   </data>
 </root>

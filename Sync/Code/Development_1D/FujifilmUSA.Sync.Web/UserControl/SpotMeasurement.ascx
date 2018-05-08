@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SpotMeasurement.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.SpotMeasurement" %>
-<link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
-<link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
-<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>
+<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2018.1.221/kendo.all.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function () {
         $loader = $(".contant_middle");

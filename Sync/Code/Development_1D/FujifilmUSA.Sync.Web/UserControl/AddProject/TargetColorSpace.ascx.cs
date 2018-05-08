@@ -225,15 +225,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     txtPaper_a.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetA.ToString();   //Paper a* Value
                     txtPaper_b.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetB.ToString();   //Paper b* Value
 
-                    txtPaper_Black_L.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString();
-                    txtPaper_Black_a.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString();
-                    txtPaper_Black_b.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString();
-
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Project type selection is disable
                     {
                         cmbProjectType.Enabled = false;
                     }
                 }
+                txtPaper_Black_L.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString();
+                txtPaper_Black_a.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString();
+                txtPaper_Black_b.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString();
             }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //-----If it is projecttype SYnc4D, then display New Paper scaling L,a,b values---//
             {

@@ -1,13 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Analyze_SpotColor.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze_SpotColor" %>
-<%@ Register Src="~/UserControl/PopupControl/SpotColorPatchDetails.ascx" TagName="SpotColorPatchDetails" TagPrefix="pd" %>
-<%--<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>--%>
-<link href="Content/kendo/2017.2.621/kendo.common.min.css" rel="stylesheet" />
-<link href="Content/kendo/2017.2.621/kendo.default.min.css" rel="stylesheet" />
-<%--<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>--%>
+
+<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
 <style>
     .PatchDetailsSummaryTable {
         line-height: 35px;
-        width: 50%;
+        width: 55%;
     }
 
         .PatchDetailsSummaryTable th {
@@ -20,9 +19,36 @@
         .PatchDetailsSummaryTable td {
             text-align: left;
         }
+
+    .spinner {
+        opacity: 0;
+        display: none;
+        width: 20px;
+        height: 10px;
+        margin-bottom: 5px;
+        -webkit-transition: opacity 0.25s, max-width 0.45s;
+        -moz-transition: opacity 0.25s, max-width 0.45s;
+        -o-transition: opacity 0.25s, max-width 0.45s;
+        transition: opacity 0.25s, max-width 0.45s;
+        /* Duration fixed since we animate additional hidden width */
+    }
+
+    .has-spinner.active {
+        cursor: progress;
+    }
+
+        .has-spinner.active .spinner {
+            display: inline-block;
+            opacity: 1;
+            max-width: 50px;
+            /* More than it will ever come, notice that this affects on animation duration */
+        }
+    /*#tblSecondRunDeltas td{
+        min-width:60px;
+    }*/
 </style>
 
-<script type="text/javascript">
+<script type="application/javascript">
     var record = 0;
     var SERVICE_BASE_URL = '';
     var Resources = {};
@@ -54,6 +80,7 @@
                 //},
                 transport: {
                     read: function (options) {
+                        kendo.ui.progress($('#divPathDetails .k-grid-content'), true);
                         $.ajax({
                             type: "GET",
                             url: SERVICE_BASE_URL + "api/Chart/GetSpotPatchDetails/",
@@ -63,12 +90,11 @@
                                 'Accept-Language': CurrentCulture
                             },
                             success: function (response) {
+                                kendo.ui.progress($('#divPathDetails .k-grid-content'), false);
                                 if (response.data != null) {
                                     Resources = response.data.GlobalResources;
                                     var spotStates = response.data.spotAnalyzeDetails;
-                                    $('#lblMinDeltaE').html(spotStates.minDeltaE);
-                                    $('#lblMaxDeltaE').html(spotStates.maxDeltaE);
-                                    $('#lblAvgDeltaE').html(spotStates.avgDeltaE);
+                                    $('#hdfMeasurementID').val(spotStates.measurementID);
 
                                     $divPathDetails.find("th[data-field=SpotID] b").html(Resources.gridAnalyzeHeaderIDResource);
                                     $divPathDetails.find("th[data-field=SpotPatch] b").html(Resources.gridAnalyzeHeaderPatchResource);
@@ -86,6 +112,7 @@
                                 options.success(spotStates.patchDetails);
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                kendo.ui.progress($('#divPathDetails .k-grid-content'), false);
                                 console.log(XMLHttpRequest);
                                 //alert(XMLHttpRequest);
                             }
@@ -97,64 +124,124 @@
                     model: {
                         fields: {
                             SpotID: {
-                                from: "SpotID"
+                                from: "SpotID",
+                                type: "number"
                             },
                             SpotName: {
-                                from: "SpotName"
+                                from: "SpotName",
+                                type: "string"
                             },
                             CMYK_C: {
-                                from: "CMYK_C"
+                                from: "CMYK_C",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             CMYK_M: {
-                                from: "CMYK_M"
+                                from: "CMYK_M",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             CMYK_Y: {
-                                from: "CMYK_Y"
+                                from: "CMYK_Y",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             CMYK_K: {
-                                from: "CMYK_K"
+                                from: "CMYK_K",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             HTMLColor: {
-                                from: "HTMLColor"
+                                from: "HTMLColor",
+                                type: "string"
                             },
                             TargetL: {
-                                from: "TargetL"
+                                from: "TargetL",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             Targeta: {
-                                from: "Targeta"
+                                from: "Targeta",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             Targetb: {
-                                from: "Targetb"
+                                from: "Targetb",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             CIELAB_L: {
-                                from: "CIELAB_L"
+                                from: "CIELAB_L",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             CIELAB_a: {
-                                from: "CIELAB_a"
+                                from: "CIELAB_a",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             ΔL: {
-                                from: "ΔL"
+                                from: "ΔL",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             Δa: {
-                                from: "Δa"
+                                from: "Δa",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             Δb: {
-                                from: "Δb"
+                                from: "Δb",
+                                type: "number",
+                                //format: "{n4}"
                             },
+                            ΔE: {
+                                from: "ΔE",
+                                type: "number",
+                                //format: "{n4}"
+                            },
+                            
                             Measured_L: {
-                                from: "Measured_L"
+                                from: "Measured_L",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             Measured_a: {
-                                from: "Measured_a"
+                                from: "Measured_a",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             Measured_b: {
-                                from: "Measured_b"
+                                from: "Measured_b",
+                                type: "number",
+                                //format: "{n4}"
                             },
                             MeasurementID: {
-                                from: "MeasurementID"
+                                from: "MeasurementID",
+                                type: "number"
                             },
                             Predicted_HTMLColor: {
-                                from: "Predicted_HTMLColor"
+                                from: "Predicted_HTMLColor",
+                                type: "string"
+                            },
+                            Measured_HTMLColor: {
+                                from: "Measured_HTMLColor",
+                                type: "string"
+                            },
+                            ΔE_T_P: {
+                                from: "ΔE_T_P",
+                                type: "number",
+                                format: "{n4}"
+                            },
+                            ΔE_M_T: {
+                                from: "ΔE_M_T",
+                                type: "number",
+                                format: "{n4}"
+                            },
+                            ΔE_M_P: {
+                                from: "ΔE_M_P",
+                                type: "number",
+                                format: "{n4}"
                             }
                         }
                     }
@@ -165,13 +252,26 @@
             filterable: {
                 extra: false,
                 operators: {
+                    number: {
+                        eq: "Is equal to",
+                        neq: "Is not equal to",
+                        gte: "Is greater than or equal to",
+                        gt: "Is greater than",
+                        lte: "Is less than or equal to",
+                        lt: "Is less than"
+                    },
                     string: {
-                        eq: "Is equal to"
+                        eq: "Is equal to",
+                        neq: "Is not equal to",
+                        startswith: "Starts with",
+                        contains: "Contains",
+                        doesnotcontain: "Does not contain",
+                        endswith: "Ends with"
                     }
                 }
             },
             sortable: true,
-            filterable: true,
+            //filterable: true,
             pageable: {
                 refresh: true,
                 pageSizes: true
@@ -179,6 +279,10 @@
             noRecords: {
                 template: ''
             },
+            //toolbar: [{ 'name': 'downloadPatch', template: '<div style="float:right;"><button id="btnDownloadSpotPatch" onclick="generateReport(' + optimizationId + ')" class=\'k-button\'>Export to PDF</button></div>' }],
+            toolbar: [{
+                'name': 'downloadPatch', template: '<div style="float:right;"><a id="lnkLinkFilter" title="Clear filter"><img id="imgClearFilter" src="Images/clear-fillter.png" style="width: 15px;margin-top: 5px;margin-right: 5px;"></img></a><button id="btnDownloadSpotPatchExcel" data-id="' + optimizationId + '" class=\'k-button has-spinner\' style="margin-right: 5px;"><span class="spinner"><img src="Images/buttonloader.gif" /></span>Export to Excel</button><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button has-spinner\'><span class="spinner"><img src="Images/buttonloader.gif" /></span>Export to PDF</button></div>'
+            }],
             columns: [
                 {
                     field: "SpotID",
@@ -198,28 +302,28 @@
                     field: "SpotView",
                     filterable: false,
                     title: "<b>View</b>",
-                    template: "<center><a id='lnkView' title='View Patch Details' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#,#=Measured_L#,#=Measured_a#,#=Measured_b#,#=MeasurementID#,\"#=Predicted_HTMLColor.substring(1)#\");'><img src='Images/detail1.png'></img></a></center>",
+                    template: "<center><a id='lnkView' title='View Patch Details' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#,#=Measured_L#,#=Measured_a#,#=Measured_b#,#=MeasurementID#,\"#=Predicted_HTMLColor.substring(1)#\",\"#=Measured_HTMLColor.substring(1)#\");'><img src='Images/detail1.png'></img></a></center>",
                     width: 55
                 },
                 {
                     field: "SpotName",
                     title: "<b>Spot Name</b>",
-                    width: 150
+                    width: 175
                 },
                 {
                     field: "ΔL",
                     title: "<b>pΔL</b>",
-                    width: 80
+                    width: 75
                 },
                 {
                     field: "Δa",
                     title: "<b>pΔa</b>",
-                    width: 80
+                    width: 75
                 },
                 {
                     field: "Δb",
                     title: "<b>pΔb</b>",
-                    width: 80
+                    width: 75
                 },
                 {
                     field: "ΔE",
@@ -229,25 +333,21 @@
                 {
                     field: "ΔE_T_P",
                     title: "<b>ΔE_T_P</b>",
-                    width: 120
+                    width: 100
                 },
                 {
                     field: "ΔE_M_T",
                     title: "<b>ΔE_M_T</b>",
-                    width: 120
+                    width: 100
                 },
                 {
                     field: "ΔE_M_P",
                     title: "<b>ΔE_M_P</b>",
-                    width: 120
+                    width: 100
                 }
             ],
             dataBound: function (e) {
-                debugger;
-                var measurementId = 0;
-                if (e.sender.dataSource._view.length > 0) {
-                    measurementId = e.sender.dataSource._view[0].MeasurementID;
-                }
+                var measurementId = parseInt($('#hdfMeasurementID').val());
 
                 if (measurementId > 0) {
                     this.hideColumn(4);
@@ -270,20 +370,199 @@
                 });
             }
         });
+
+        $('#lnkLinkFilter').on('click', function (e) {
+            $("form.k-filter-menu button[type='reset']").trigger("click");
+        })
+
+        $('#btnDownloadSpotPatch').on('click', function (e) {
+            e.preventDefault();
+            var grid = $('#divPathDetails').data('kendoGrid')
+            var optimizationRun = $(this).attr('data-id');
+            var sortObj = null;
+            var filterObj = null;
+            //set the sorting parameters
+            if (grid.dataSource._sort) {
+                sortObj = grid.dataSource._sort[0];
+            }
+            //set the filtering parameters
+            if (grid.dataSource._filter) {
+                filterObj = {
+                    filters: grid.dataSource._filter.filters,
+                    logic: 'AND'
+                };
+                //set the type of filter fields
+                $.each(filterObj.filters, function (index, obj) {
+                    obj.dtype = grid.dataSource.options.schema.model.fields[obj.field].type;
+                });
+            }
+
+            //create object
+            var filterObj = {
+                OptimizationRunId: parseInt(optimizationRun),
+                sort: sortObj,
+                filter: filterObj
+            };
+
+            //console.log(filterObj);
+            $('#btnDownloadSpotPatch').addClass('active');
+            $.ajax({
+                type: "POST",
+                url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsReport',
+                data: filterObj,
+                dataType: "json",
+                success: function (response) {
+                    $('#btnDownloadSpotPatch').removeClass('active');
+                    if (response.data != null) {
+                        console.log(response.data);
+                        var fileName = '~' + response.data;
+                        window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $('#btnDownloadSpotPatchExcel').removeClass('active');
+                    console.log(XMLHttpRequest.responseText);
+                }
+            });
+
+            
+        })
+
+        $('#btnDownloadSpotPatchExcel').on('click', function (e) {
+            e.preventDefault();
+            var grid = $('#divPathDetails').data('kendoGrid')
+            var optimizationRun = $(this).attr('data-id');
+            var sortObj = null;
+            var filterObj = null;
+            //set the sorting parameters
+            if (grid.dataSource._sort) {
+                sortObj = grid.dataSource._sort[0];
+            }
+            //set the filtering parameters
+            if (grid.dataSource._filter) {
+                filterObj = {
+                    filters: grid.dataSource._filter.filters,
+                    logic: 'AND'
+                };
+                //set the type of filter fields
+                $.each(filterObj.filters, function (index, obj) {
+                    obj.dtype = grid.dataSource.options.schema.model.fields[obj.field].type;
+                });
+            }
+
+            //create object
+            var filterObj = {
+                OptimizationRunId: optimizationRun,
+                sort: sortObj,
+                filter: filterObj
+            };
+
+            //console.log(filterObj);
+
+            $('#btnDownloadSpotPatchExcel').addClass('active');
+            $.ajax({
+                type: "POST",
+                url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsExcelReport',
+                data: filterObj,
+                dataType: "json",
+                success: function (response) {
+                    $('#btnDownloadSpotPatchExcel').removeClass('active');
+                    if (response.data != null) {
+                        console.log(response.data);
+                        var fileName = '~' + response.data;
+                        window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $('#btnDownloadSpotPatchExcel').removeClass('active');
+                    console.log(XMLHttpRequest.responseText);
+                }
+            });            
+        })
+        
     });
 
-    function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID, P_htmlColor) {
+    function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID, P_htmlColor, M_htmlColor) {
         measuredL = (isNaN(measuredL) || measuredL == null) ? 0 : measuredL;
         measuredA = (isNaN(measuredA) || measuredA == null) ? 0 : measuredA;
         measuredB = (isNaN(measuredB) || measuredB == null) ? 0 : measuredB;
 
         var oWindow;
-        oWindow = window.radopen("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor, "ClosePrintConditionWindow");
+        oWindow = window.radopen("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor, "ClosePrintConditionWindow");
         oWindow.show();
         return false;
     }
 
+    function generateReport(optimizationRun) {
+        $.ajax({
+            url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReport',
+            data: { OptimizationRunID: optimizationRun },
+            type: 'GET',
+            //headers: {
+            //    "content-type": "application/json",
+            //},
+            success: function (response) {
+                //console.log(response);
+                window.open(SERVICE_BASE_URL + response.data, "_blank");
+            },
+            error: function (xhr, errorType, exception) {
+                alert(exception);
+            }
+        });
+    }
 
+    function DownloadSpotPatchFile(id) {
+        //debugger;
+        //var xhrReq =  $.ajax({
+        //    url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReportTest',
+        //    data: { OptimizationRunID: id },
+        //    dataType: null,            
+        //    type:'GET',
+        //    xhrFields: {
+        //        responseType: 'application/octet-stream'
+        //    },
+        //    success: function (blob) {
+
+        //        debugger;
+        //        console.log(xhrReq);
+        //        console.log(blob.size);
+        //        var link = document.createElement('a');
+        //        link.href = window.URL.createObjectURL(blob);
+        //        link.download = "Dossier_" + new Date() + ".pdf";
+        //        link.click();
+        //    },
+        //    error: function (xhr, errorType, exception) {
+        //        debugger;
+        //        alert(exception);
+        //    }
+        //});
+
+        //var request = new XMLHttpRequest();
+        //request.open("GET", SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReportTest?OptimizationRunID=' + id, true);
+        //request.responseType = "blob";
+        //request.onload = function (e) {
+        //    //debugger;
+        //    if (this.status === 200) {
+        //        // `blob` response
+        //        console.log(this.response);
+        //        // create `objectURL` of `this.response` : `.pdf` as `Blob`
+        //        var file = window.URL.createObjectURL(this.response);
+        //        var a = document.createElement("a");
+        //        a.href = file;
+        //        a.download = this.response.name || "SpotPatch.pdf";
+        //        document.body.appendChild(a);
+        //        a.click();
+        //        // remove `a` following `Save As` dialog, 
+        //        // `window` regains `focus`
+        //        window.onfocus = function () {
+        //            document.body.removeChild(a)
+        //        }
+        //    };
+        //};
+        //request.send();
+
+        location.href = SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReportTest?OptimizationRunID=' + id;
+    }
 </script>
 
 <script type="text/javascript" language="javascript">
@@ -366,38 +645,125 @@
                                     <div class="tab_middle">
                                         <div class="combopart">
                                             <div style="padding-left: 10px;">
-                                                <%--<pd:SpotColorPatchDetails runat="server" ID="ucSpotColorPathDetails" />--%>
 
                                                 <table class="PatchDetailsSummaryTable">
+                                                    <tr><td style="width:42%;"></td><td></td></tr>
                                                     <tr>
                                                         <th colspan="2"><span>
-                                                            <asp:Localize Text="Optimal Device Prediction" runat="server"
-                                                                ID="Localize1" meta:resourcekey="locOptDevicePredResource1"></asp:Localize>
+                                                            <asp:Localize runat="server" ID="locSummary_Header"></asp:Localize>
                                                         </span></th>
                                                     </tr>
                                                     <tr>
-                                                        <td><span style="font-weight: bold;">
-                                                            <asp:Localize Text="Min ΔE" runat="server"
-                                                                ID="locMinDeltaE" meta:resourcekey="locMinDeltaEResource1"></asp:Localize>
-                                                        </span></td>
-                                                        <td>
-                                                            <asp:Label runat="server" ID="lblMinDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                        <td colspan="2">
+                                                            <table id="tblFirstRunDeltas" runat="server" visible="false" style="width: 100%;">
+                                                                <tr>
+                                                                    <td style="width: 42%;"><span style="font-weight: bold;">
+                                                                        <asp:Localize Text="Min ΔE" runat="server"
+                                                                            ID="locMinDeltaE" meta:resourcekey="locMinDeltaEResource1"></asp:Localize>
+                                                                    </span></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMinDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><span style="font-weight: bold;">
+                                                                        <asp:Localize Text="Average ΔE" runat="server"
+                                                                            ID="locAvgDeltaE" meta:resourcekey="locAvgDeltaEResource1"></asp:Localize>
+                                                                    </span></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblAvgDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><span style="font-weight: bold;">
+                                                                        <asp:Localize Text="Max ΔE" runat="server"
+                                                                            ID="loclocMaxDeltaE" meta:resourcekey="locMaxDeltaEResource1"></asp:Localize>
+                                                                    </span></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMaxDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2" style="width: 100%;">
+                                                                        <hr />
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <table id="tblSecondRunDeltas" runat="server" visible="false" style="width: 100%;">
+                                                                <tr>
+                                                                    <td style="width: 42%;"></td>
+                                                                    <td><span style="font-weight: bold;">ΔE_T_P</span></td>
+                                                                    <td><span style="font-weight: bold;">ΔE_M_T</span></td>
+                                                                    <td><span style="font-weight: bold;">ΔE_M_P</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><span style="font-weight: bold;">
+                                                                        <asp:Localize Text="Average ΔE" runat="server"
+                                                                            ID="Localize2" meta:resourcekey="locMinimumDeltaResource"></asp:Localize>
+                                                                    </span></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMinETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMinEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMinEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><span style="font-weight: bold;">
+                                                                        <asp:Localize Text="Average ΔE" runat="server"
+                                                                            ID="locAverageDelta" meta:resourcekey="locAverageDeltaResource1"></asp:Localize>
+                                                                    </span></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblAvgETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblAvgEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblAvgEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><span style="font-weight: bold;">
+                                                                        <asp:Localize Text="Average ΔE" runat="server"
+                                                                            ID="Localize1" meta:resourcekey="locMaximumDeltaResource1"></asp:Localize>
+                                                                    </span></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMaxETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMaxEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMaxEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="4">
+                                                                        <hr />
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td><span style="font-weight: bold;">
-                                                            <asp:Localize Text="Average ΔE" runat="server"
-                                                                ID="locAvgDeltaE" meta:resourcekey="locAvgDeltaEResource1"></asp:Localize>
-                                                        </span></td>
+
+                                                    <tr id="trMeasurementID" runat="server" visible="false">
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblAvgDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                            <span style="font-weight: bold;">
+                                                                <asp:Localize Text="MeasurementID" ID="Localize24" runat="server" meta:resourcekey="locMeasurementIDResource1"></asp:Localize>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label runat="server" ID="lblMeasurementID" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td><span style="font-weight: bold;">
-                                                            <asp:Localize Text="Max ΔE" runat="server"
-                                                                ID="loclocMaxDeltaE" meta:resourcekey="locMaxDeltaEResource1"></asp:Localize>
-                                                        </span></td>
+                                                    <tr id="trMeasurementName" runat="server" visible="false">
                                                         <td>
-                                                            <asp:Label runat="server" ID="lblMaxDeltaE" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                            <span style="font-weight: bold;">
+                                                                <asp:Localize Text="Measurement Name" ID="Localize3" runat="server" meta:resourcekey="locMeasurementNameResource1"></asp:Localize>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label runat="server" ID="lblMeasurementName" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                    </tr>
+                                                    <tr id="trMeasurementDate" runat="server" visible="false">
+                                                        <td>
+                                                            <span style="font-weight: bold;">
+                                                                <asp:Localize Text="Measurement Date" ID="Localize4" runat="server" meta:resourcekey="locMeasurementDateResource1"></asp:Localize>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label runat="server" ID="lblMeasurementDate" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                     </tr>
                                                     <tr>
                                                         <td><span style="font-weight: bold;">
@@ -431,6 +797,15 @@
                                                         <td>
                                                             <asp:Label runat="server" ID="lblSpotTarget"></asp:Label></td>
                                                     </tr>
+                                                    <tr>
+                                                        <td><span style="font-weight: bold;">
+                                                            <asp:Localize runat="server"
+                                                                Text="ΔE Type" ID="locDeltaType"
+                                                                meta:resourcekey="locDeltaTypeResource"></asp:Localize></span>
+                                                        </td>
+                                                        <td>
+                                                            <asp:Label runat="server" ID="lblDeltaType" Text="ΔE2000"></asp:Label></td>
+                                                    </tr>
                                                 </table>
 
                                             </div>
@@ -450,7 +825,7 @@
                                     <div class="tab_middle">
                                         <div class="combopart">
                                             <div style="padding-left: 10px;">
-                                                <div id="divPathDetails"></div>
+                                                <div id="divPathDetails"></div>                                                
                                             </div>
                                             <div class="clear"></div>
                                         </div>
@@ -471,6 +846,8 @@
     &nbsp;
 </div>
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
+
+<asp:HiddenField ID="hdfMeasurementID" runat="server" Value="0" ClientIDMode="Static" />
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True"
     Height="240" Width="900" VisibleStatusbar="false" Title="Patch Details"
     ShowContentDuringLoad="false" Behaviors="Move,Close">

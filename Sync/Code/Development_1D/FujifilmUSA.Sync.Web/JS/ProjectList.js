@@ -307,8 +307,11 @@ $(document).ready(function () {
                             dataType: "json",
                             success: function (response) {
                                 if (response.data.length > 0) {
+                                    var filterdData = response.data.filter(function (el) {
+                                        return el.LicenseTypeId !== 10;
+                                    });
                                     element.kendoDropDownList({
-                                        dataSource: response.data,
+                                        dataSource: filterdData,
                                         dataTextField: "Type",
                                         dataValueField: "LicenseTypeId",
                                     });
@@ -568,6 +571,9 @@ function detailInit(e) {
                 if (dataSource.getByUid(row.data('uid')) != undefined) {
 
                     var data = dataSource.getByUid(row.data('uid'));
+                    var SpotprojectTypeImagePath = '';
+                    var SpotprojectTypeTooltip = '';
+
                     switch (data.Status) {
                         case EOptimizeRunStatus.Open:
                             var dateCreate = new Date(data.CreateDate);
@@ -576,16 +582,28 @@ function detailInit(e) {
                             var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
                             row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowOpenPrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + diffDays + "','','" + data.TotalRuns + "',true)");
+                            SpotprojectTypeImagePath = 'Images/SpotProject.png';
+                            SpotprojectTypeTooltip = Resources.SpotProject_Open;
                             break;
                         case EOptimizeRunStatus.Closed:
-                            row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','',true)");
+                            row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowSpotClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','')");
+                            SpotprojectTypeImagePath = 'Images/SpotProject.png';
+                            SpotprojectTypeTooltip = Resources.SpotProject_Open;
                             break;
                         case EOptimizeRunStatus.Certify:
-                            row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','',true)");
+                            row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowSpotClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','')");
+                            SpotprojectTypeImagePath = 'Images/SpotProject_Certified.png';
+                            SpotprojectTypeTooltip = Resources.SpotProject_Certified;
                             break;
                     }
+                    debugger;
+                    if (SpotprojectTypeImagePath != '') {
+                        row.find("td #imgSpotProject").attr('src', SpotprojectTypeImagePath);   //set the Spot project type image path
+                        row.find("td #imgSpotProject").attr('title', SpotprojectTypeTooltip);   //set the Spot project type tooltip
+                    }
 
-                    var gridCurrent = row[0].closest('.k-grid');
+                    var gridCurrent = $(row[0]).closest('.k-grid');
+                    console.log(gridCurrent);
                     if (!data.isAllowSpotProject) {
                         $(gridCurrent).find('.k-grid-toolbar').hide();
                     } else {
@@ -598,8 +616,7 @@ function detailInit(e) {
             {
                 filterable: false,
                 title: "<b></b>",
-                //template: "<center><a onclick='return Redirect(#=SpotProjectId#,\"SelectSpotTargetProject\");'><img title='Open' id='imgspotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
-                template: "<center><a id='lnkSpotProject'><img title='" + Resources.OpenProject + "' id='imgSpotProject'  src='Images/open_folder_yellow.png' style='width: 20px;'></img></a></center>",
+                template: "<center><a id='lnkSpotProject'><img id='imgSpotProject' title=''  src='' style='width: 20px;'></img></a></center>",
                 width: 40
             },
             {
@@ -706,5 +723,28 @@ function deleteProject(id) {
 
 function Redirect(projectID, type) {
     document.location.href = 'RedirectFromProjectList.aspx?RedirectType=' + type + '&ProjectID=' + projectID;
+    return false;
+}
+
+function ShowSpotClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName) {
+    var oWindow;
+    oWindow = window.radopen("PopupSpotClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+    oWindow.show();
+    return false;
+}
+
+function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns, isSpotProject) {
+    if (isSpotProject === undefined) {
+        isSpotProject = false;
+    }
+    var oWindow;
+    oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&isSpotProject=" + isSpotProject, "OpenPrintConditionWindow");
+    oWindow.show();
+    return false;
+}
+function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName) {
+    var oWindow;
+    oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+    oWindow.show();
     return false;
 }

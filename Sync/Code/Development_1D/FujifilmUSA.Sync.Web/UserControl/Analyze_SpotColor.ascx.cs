@@ -12,6 +12,7 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
+using System.IO;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -23,8 +24,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recNext = "nextText";
         private const string _recnewPrintCondition = "newNCPPrintConditionText";
         private const string _recAnalyze = "analyze";
+        private const string _recSummaryHeaderRun0 = "locSummaryHeaderRun0Resource1";
+        private const string _recSummaryHeaderRun1 = "locSummaryHeaderRun1Resource1";
         public string DLPName = "";
         #endregion
+
 
         #region Page Method
         protected override void OnInit(EventArgs e)
@@ -46,7 +50,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
                     OptimizeRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId);
                     hdfOptimizationRunID.Value = OptimizeRunId.ToString();
-                    hdnIsNewNCP.Value=IsNewNCP.ToString();
+                    BindSpotSummary();
+                    hdnIsNewNCP.Value = IsNewNCP.ToString();
                     hdnIsNcpCreated.Value = IsNCPCreated.ToString();
                     hdfCurrentCulture.Value = getCurrentCultureLanguage();
                 }
@@ -54,13 +59,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId)
                 {
                     header.InnerText = GetResourceString(_recnewPrintCondition);//"New Print Condition - Analyze (No DLP)";
-                    DLPName = "No NCP";
+                    DLPName = "No NCP";                    
+                    locSummary_Header.Text = GetResourceString(_recSummaryHeaderRun0);
                 }
                 else
                 {
                     header.InnerText = string.Format(GetResourceString(_recAnalyze), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Analyze - {0}
                     DLPName = SessionManager.Instance.CurrentOptimizeRun.LastDlpName.Replace(SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + " ", ""); //---DLPName to pass into report
                     DLPName = DLPName.Remove(DLPName.Length - 4);
+                    locSummary_Header.Text = GetResourceString(_recSummaryHeaderRun1);
                 }
 
                 lbtnDownloadAndSaveNCP.Text = IsNewNCP
@@ -78,11 +85,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
 
-
+        #region Controls Method
         protected void lbtnDownloadAndSaveNCP_Click(object sender, EventArgs e)
         {
             if (!IsNCPCreated)
-            {               
+            {
                 SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 ProjectStatus = Convert.ToInt32(EOptimizeRunStatus.Closed);
@@ -100,15 +107,61 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
-                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                MeasurementId = Convert.ToInt32(hdMeasurement.Value);
-                ProjectStatus = Convert.ToInt32(EOptimizeRunStatus.Closed);
-                _presenterAnalyze.OptmizeSpotLibrary();
                 Response.Redirect("Export.aspx");
             }
-            
+
+        }        
+        #endregion
+
+
+        #region Methods
+
+        public void BindSpotSummary()
+        {
+            try
+            {
+                _presenterAnalyze.GetSpotPatchSummaryDetails();
+                if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
+                {
+                    if (Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]) > 0)
+                    {
+                        tblSecondRunDeltas.Visible = true;
+                        lblMeasurementID.Text= Convert.ToString(dtPatchDetails.Rows[0]["MeasurementID"]);
+                        lblMeasurementName.Text = Convert.ToString(dtPatchDetails.Rows[0]["MeasurementName"]);
+                        lblMeasurementDate.Text = Convert.ToString(dtPatchDetails.Rows[0]["MeasurementDate"]);
+
+                        lblMinETP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MinETP"])).ToString("N2");
+                        lblMaxETP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxETP"])).ToString("N2");
+                        lblAvgETP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgETP"])).ToString("N2");
+
+                        lblMinEMT.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMT"])).ToString("N2");
+                        lblMaxEMT.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMT"])).ToString("N2");
+                        lblAvgEMT.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMT"])).ToString("N2");
+
+                        lblMinEMP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MinEMP"])).ToString("N2");
+                        lblMaxEMP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxEMP"])).ToString("N2");
+                        lblAvgEMP.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgEMP"])).ToString("N2");
+
+                        trMeasurementID.Visible = true;
+                        trMeasurementName.Visible = true;
+                        trMeasurementDate.Visible = true;
+                    }
+                    else
+                    {                        
+                        tblFirstRunDeltas.Visible = true;                        
+                        lblMinDeltaE.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MinE"])).ToString("N2");
+                        lblMaxDeltaE.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["MaxE"])).ToString("N2");
+                        lblAvgDeltaE.Text = (Convert.ToDecimal(dtPatchDetails.Rows[0]["AvgE"])).ToString("N2");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
+        
 
         public bool IsNewNCP
         {
@@ -126,6 +179,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get { return SessionManager.Instance.CurrentOptimizeRun.HasProfile; }
         }
+        #endregion
+
 
         #region IViewAnalyze Members
 
@@ -234,5 +289,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int SpotProjectId { get; set; }
         public bool IsUsed { get; set; }
         #endregion
+
     }
 }

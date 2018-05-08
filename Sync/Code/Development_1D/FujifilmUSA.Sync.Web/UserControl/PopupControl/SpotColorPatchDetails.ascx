@@ -27,195 +27,88 @@
                     <th><asp:Localize runat="server" Text="Predicted" ID="locPredictedHead" meta:resourcekey="locPredictedResource"></asp:Localize></th>
                 </tr>
                 <tr style="height: 75px;">
-                    <td>
-                        <div runat="server" id="divTargetRun0" style="height: 75px;"></div>
-                    </td>
-                    <td>
-                        <div runat="server" id="divActualRun0" style="height: 75px;"></div>
-                    </td>                    
+                    <td style="width:50%;"><div runat="server" id="divTargetRun0" style="height: 75px;"></div></td>
+                    <td style="width:50%;"><div runat="server" id="divActualRun0" style="height: 75px;"></div></td>                    
+                </tr>
+            </table>
+            <table class="PatchDetailsTable">
+                <tr>
+                    <th><asp:Localize runat="server" Text="Metric" ID="locMetrictbl1" meta:resourcekey="locMetricResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Target" ID="locTargetTbl1" meta:resourcekey="locTargetResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Predicted" ID="locPredictedTbl1" meta:resourcekey="locPredictedResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Delta" ID="locDelta" meta:resourcekey="locDeltaResource"></asp:Localize></th>
                 </tr>
                 <tr>
-                    <td>
-                        <table>
-                            <tr>
-                                <th><asp:Localize runat="server" Text="Metric" ID="locMetrictbl1" meta:resourcekey="locMetricResource"></asp:Localize></th>
-                                <th><asp:Localize runat="server" Text="Target" ID="locTargetTbl1" meta:resourcekey="locTargetResource"></asp:Localize></th>
-                            </tr>
-                            <tr>
-                                <td><b>L</b></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTargetLRun0"></asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td><b>A</b></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTargetARun0"></asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td><b>B</b></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTargetBRun0"></asp:Label></td>
-                            </tr>
-                            <%--  <tr>
-                                <td><b>H</b></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTargetH">---</asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td><b>C</b></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTargetC">---</asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td><b>PC</b></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTargetPC">---</asp:Label></td>
-                            </tr>--%>
-                        </table>
-                    </td>
-                    <td>
-                        <table runat="server">
-                            <tr>
-                                <th><asp:Localize runat="server" Text="Predicted" ID="locPredictedTbl1" meta:resourcekey="locPredictedResource"></asp:Localize></th>
-                                <th><asp:Localize runat="server" Text="Delta" ID="locDelta" meta:resourcekey="locDeltaResource"></asp:Localize></th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblActualLRun0"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblDeltaL"></asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblActualARun0"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblDeltaA"></asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblActualBRun0"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblDeltaB">---</asp:Label></td>
-                            </tr>
-                        </table>                        
-                    </td>
-            </tr>
+                    <td><b>L</b></td>
+                    <td><asp:Label runat="server" ID="lblTargetLRun0"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblActualLRun0"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblDeltaL"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td><b>A</b></td>
+                    <td><asp:Label runat="server" ID="lblTargetARun0"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblActualARun0"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblDeltaA"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td><b>B</b></td>
+                    <td><asp:Label runat="server" ID="lblTargetBRun0"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblActualBRun0"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblDeltaB"></asp:Label></td>
+                </tr>                       
             </table>
         </div>
         <div runat="server" id="divPatchDetailsRun"  visible="false" style="float: left; width: 70%;">
             <table class="PatchDetailsTable">
                 <tr>
-                    <th>
-                        <asp:Localize runat="server" Text="Target" 
-                            ID="locTargetHead1" meta:resourcekey="locTargetResource"></asp:Localize>
-                    </th>
-                    <th><asp:Localize runat="server" Text="Predicted" 
-                            ID="locPredictedHead1" meta:resourcekey="locPredictedResource"></asp:Localize></th>
-                    <th><asp:Localize runat="server" Text="Measured" 
-                            ID="locMeasuredHead" meta:resourcekey="locMeasuredResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Target" ID="locTargetHead1" meta:resourcekey="locTargetResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Predicted" ID="locPredictedHead1" meta:resourcekey="locPredictedResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Measured" ID="locMeasuredHead" meta:resourcekey="locMeasuredResource"></asp:Localize></th>
                 </tr>
                 <tr style="height: 75px;">
-                    <td>
-                        <div runat="server" id="divTarget" style="height: 75px;"></div>
-                    </td>
-                    <td>
-                        <div runat="server" id="divActual" style="height: 75px;"></div>
-                    </td>
-                    <td>
-                        <div runat="server" id="divMeasured" style="height: 75px;"></div>
-                    </td>
+                    <td style="width:33%;"><div runat="server" id="divTarget" style="height: 75px;"></div></td>
+                    <td style="width:33%;"><div runat="server" id="divActual" style="height: 75px;"></div></td>
+                    <td style="width:33%;"><div runat="server" id="divMeasured" style="height: 75px;"></div></td>
+                </tr>
+            </table>
+            <table class="PatchDetailsTable">
+                <tr>
+                    <th><asp:Localize runat="server" Text="Metric" ID="locMetricHead1" meta:resourcekey="locMetricResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Target" ID="locTarget" meta:resourcekey="locTargetResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Predicted" ID="locPredicted" meta:resourcekey="locPredictedResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Measured" ID="locMeasured" meta:resourcekey="locMeasuredResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Delta_T_P" ID="locTP" meta:resourcekey="locT_PResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Delta_M_T" ID="locMT" meta:resourcekey="locM_TResource"></asp:Localize></th>
+                    <th><asp:Localize runat="server" Text="Delta_M_P" ID="locMP" meta:resourcekey="locM_PResource"></asp:Localize></th>
                 </tr>
                 <tr>
-                    <td>
-                        <table>
-                            <tr>
-                                <th><asp:Localize runat="server" Text="Metric" 
-                            ID="locMetricHead1" meta:resourcekey="locMetricResource"></asp:Localize></th>
-                                <th>
-                                    <asp:Localize runat="server" Text="Target" 
-                            ID="locTarget" meta:resourcekey="locTargetResource"></asp:Localize>
-                                </th>
-                            </tr>
-                            <tr>
-                                <td><b>L</b></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTargetL"></asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td><b>A</b></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTargetA"></asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td><b>B</b></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTargetB"></asp:Label></td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td>
-                        <table runat="server" id="Table1">
-                            <tr>
-                                <th><asp:Localize runat="server" Text="Predicted" 
-                            ID="locPredicted" meta:resourcekey="locPredictedResource"></asp:Localize></th>
-                                <th><asp:Localize runat="server" Text="Measured" 
-                            ID="locMeasured" meta:resourcekey="locMeasuredResource"></asp:Localize></th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblActualL"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblMeasuredL"></asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblActualA"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblMeasuredA"></asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblActualB"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblMeasuredB">---</asp:Label></td>
-                            </tr>
-                        </table>                        
-                    </td>
-                    <td>
-                        <table>
-                            <tr>
-                                <th><asp:Localize runat="server" Text="Delta_T_P" ID="locTP" meta:resourcekey="locT_PResource"></asp:Localize></th>
-                                <th><asp:Localize runat="server" Text="Delta_M_T" ID="locMT" meta:resourcekey="locM_TResource"></asp:Localize></th>
-                                <th><asp:Localize runat="server" Text="Delta_M_P" ID="locMP" meta:resourcekey="locM_PResource"></asp:Localize></th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTarget_PredictedL" Text="0"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblMeasured_TargetL" Text="0"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblMeasured_PredictedL" Text="0"></asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTarget_PredictedA" Text="0"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblMeasured_TargetA" Text="0"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblMeasured_PredictedA" Text="0"></asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label runat="server" ID="lblTarget_PredictedB" Text="0"></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblMeasured_TargetB" Text="0"></asp:Label></td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblMeasured_PredictedB" Text="0"></asp:Label></td>
-                            </tr>
-                        </table>
-                    </td>
-            </tr>
+                    <td><b>L</b></td>
+                    <td><asp:Label runat="server" ID="lblTargetL"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblActualL"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblMeasuredL"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblTarget_PredictedL" Text="0"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblMeasured_TargetL" Text="0"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblMeasured_PredictedL" Text="0"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td><b>A</b></td>
+                    <td><asp:Label runat="server" ID="lblTargetA"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblActualA"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblMeasuredA"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblTarget_PredictedA" Text="0"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblMeasured_TargetA" Text="0"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblMeasured_PredictedA" Text="0"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td><b>B</b></td>
+                    <td><asp:Label runat="server" ID="lblTargetB"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblActualB"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblMeasuredB"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblTarget_PredictedB" Text="0"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblMeasured_TargetB" Text="0"></asp:Label></td>
+                    <td><asp:Label runat="server" ID="lblMeasured_PredictedB" Text="0"></asp:Label></td>
+                </tr>
+                       
             </table>
         </div>
         <div>

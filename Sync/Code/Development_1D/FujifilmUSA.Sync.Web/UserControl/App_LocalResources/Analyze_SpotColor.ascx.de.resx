@@ -553,10 +553,10 @@
     <value>Max. Δ Primärfarbe</value>
   </data>
   <data name="locMeasurementIDResource1.Text" xml:space="preserve">
-    <value>ID d. Messung:</value>
+    <value>ID d. Messung</value>
   </data>
   <data name="locMeasurementNameResource1.Text" xml:space="preserve">
-    <value>Name der Messung: </value>
+    <value>Name der Messung</value>
   </data>
   <data name="locMeasurementResource1.Text" xml:space="preserve">
     <value>Messung</value>
@@ -699,8 +699,11 @@
   <data name="locMinDeltaEResource1.Text" xml:space="preserve">
     <value>Min ΔE</value>
   </data>
-  <data name="locOptDevicePredResource1.Text" xml:space="preserve">
+  <data name="locSummaryHeaderRun0Resource1" xml:space="preserve">
     <value>Optimal Device Prediction</value>
+  </data>
+  <data name="locSummaryHeaderRun1Resource1" xml:space="preserve">
+    <value>Summary Comparison</value>
   </data>
   <data name="locRipSettingsResource1.Text" xml:space="preserve">
     <value>Rip Einstellungen</value>
@@ -710,5 +713,14 @@
   </data>
   <data name="locCreateNCPResource1" xml:space="preserve">
     <value>Create Chart d</value>
+  </data>
+  <data name="locMinimumDeltaResource.Text" xml:space="preserve">
+    <value>Minimum Δ</value>
+  </data>
+  <data name="locDeltaTypeResource.Text" xml:space="preserve">
+    <value>ΔE Type</value>
+  </data>
+  <data name="locMeasurementDateResource1.Text" xml:space="preserve">
+    <value>Measurement Date_de</value>
   </data>
 </root>

@@ -5,7 +5,10 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -111,18 +114,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             get { return SessionManager.Instance.CurrentOptimizeRun.HasProfile; }
         }
 
-        //public string CreateDLPUpdateProgressClientID
-        //{
-        //    get { return updateProgress.ClientID; }
-        //}
         public string CreateDLPUpdateProgressClientID
         {
-            get;
+            get { return updateProgress.ClientID; }
         }
-
+     
         public string UpdateProgressClientID
         {
-            get { return ((UpdateProgress)Page.Master.FindControl("UpdateProgress")).ClientID; }
+            get { return ((UpdateProgress)Page.Master.FindControl("UpdateProgress")).ClientID; }            
         }
 
         public string DLPMessage
@@ -162,25 +161,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterGlobal = new PresenterGlobal();
         }
 
-        #region Check Average Measurement Compatibility Mode
-        public void ChkAvgMeasurementCompatibility()
-        {
-            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-            int CompatibilityNo = _presenterAnalyze.ChkAvgMeasurementCompatibility();
-            if (CompatibilityNo == 1)    //Error in different ReferenceCharts throughout whole OptimizationRun
-            {
-                hd_CompError.Value = "1";
-            }
-            else if (CompatibilityNo == 2)   //Error in different MetricTargetPresets throughout whole OptimizationRun
-            {
-                hd_CompError.Value = "2";
-            }
-            else   //Success, No difference
-            {
-                hd_CompError.Value = "0";
-            }
-        }
-        #endregion
+        
 
         #endregion
         protected void Page_Load(object sender, EventArgs e)
@@ -189,12 +170,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!Page.IsPostBack)
             {
                 hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
+                hdnBasePluginServiceUrl.Value = Utilities.ReadConfigValue("BasePluginServiceURL");
                 hdnCurrentUserID.Value = Convert.ToString(SessionManager.Instance.CurrentUser.UserId) ?? "0";
                 hdfCurrentCulture.Value = getCurrentCultureLanguage();
                 hdnProjectID.Value = SessionManager.Instance.CurrentOptimizeRun.ProjectId.ToString();
                 hdnOptimizationRunID.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
                 hdnValidationType.Value = ValidationType.ToString();
                 hdnCurrentProjectLicenseType.Value = SessionManager.Instance.CurrentProject.LicenseType.ToString();
+                hdnCurrentDeviceName.Value = SessionManager.Instance.CurrentDevice.DeviceName.ToString();
                 //--Start: Load average Compatibility values
                 chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return CheckAvgCompability();");
                 ChkAvgMeasurementCompatibility();
@@ -213,7 +196,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D
                     {
                         //------If project is Sync1D type, Assign 'E' to radiolist, bydefault (because Sync 1D has only dt_E type)----------------//
-                        //rbtnListDeltaE.SelectedValue = "E";
                         hdnDefaultSelectedDelta.Value = rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
                     }
                     if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
@@ -241,15 +223,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//
                     lbtnDownloadAndSaveDLP.Visible = false;
                 }
+                ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
 
 
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
                     //Verification mode
-                    //if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //---Only display Report Grading for Sync4D Validation
-                    //{
-                    //    Div_ReportGrading.Visible = true; //---Disable for time being in Production code
-                    //}
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //---Only display Report Grading for Sync4D Validation
+                    {
+                        //Div_ReportGrading.Visible = true; //---Disable for time being in Production code
+                    }
+                    
                     lbtnDownloadAndSaveDLP.Visible = false;
                     lbtnMeasurementVerification.Visible = true;
                     if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification) //---If not Sync 4D Certification type of project, then only display Optimize button
@@ -267,15 +251,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                      "','" + Server.UrlEncode(this.CurrentDLPName) + "')");
 
                     trRBtnListDeltaE.Visible = false;
-                    //Div_Validation_Header.Visible = true;
-                    //if (ValidationType == 1)  //G7 type
-                    //{
-                    //    dvTab_G7.Visible = Tab_G7.Visible = true;
-                    //}
-                    //else
-                    //{
-                    //    dvTab_G7.Visible = Tab_G7.Visible = false;
-                    //}
+
                 }
                 else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D
                 {
@@ -286,11 +262,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Div_Opt_Header.Visible = true;
 
                     td1DSmoothing.Visible = true;  //Display in Sync1D for Smoothing measurements (Commented out for temporary untill get decided to use this feature)
-                    if (ValidationType == 1)  //G7 type
-                    {
-                        //dvTab_G7.Visible = Tab_G7.Visible = true;
-                        tdAverageOfMeasurements.Visible = true; //Display in Sync1D G7 mode for Averaging measurements
-                    }
+                    //Div_ReportCMYKDensity.Visible = true;  //---Disable for time being in Production code
 
                 }
                 else
@@ -299,14 +271,58 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnMeasurementVerification.Visible = false;
                     lbtnOptimize.Visible = false;
                     trRBtnListDeltaE.Visible = true;
-                    //Div_Opt_Header.Visible = true;
-                    //dvTab_G7.Visible = Tab_G7.Visible = false;
-                    //dvTab_TVI.Visible = Tab_TVI.Visible = false;
-                    //Div_MetricSumFilter.Visible = false;
                 }
+            }
+            if (IsXMFUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+            {
+                if (SessionManager.Instance.CurrentValidationRequest != null)
+                {
+                    lbtnSubmit.Visible = true;
+                }
+                else
+                {
+                    lbtnSubmit.Visible = false;
+                    lbtnMeasurement.Visible = false;
+                }
+                lbtnOptimize.Visible = false;
+                lbtnMeasurementVerification.Visible = false;
+                lbtnDownloadAndSaveDLP.Visible = false;
+            }
+
+            if (IsXMFUser && Request.QueryString["viewonly"] != null && Convert.ToBoolean(Request.QueryString["viewonly"]) == true)
+            {
+                lbtnSubmit.Visible = false;
+                lbtnMeasurement.Visible = false;
+                lbtnOptimize.Visible = false;
+                lbtnMeasurementVerification.Visible = false;
+                lbtnDownloadAndSaveDLP.Visible = false;
+            }
+            if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation)  //----Only display print label feature in validation mode
+            {
+                ibtnPrintPreview.Visible = false;
+                ibtnPrintLabel.Visible = false;
             }
         }
 
+        #region Check Average Measurement Compatibility Mode
+        public void ChkAvgMeasurementCompatibility()
+        {
+            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            int CompatibilityNo = _presenterAnalyze.ChkAvgMeasurementCompatibility();
+            if (CompatibilityNo == 1)    //Error in different ReferenceCharts throughout whole OptimizationRun
+            {
+                hd_CompError.Value = "1";
+            }
+            else if (CompatibilityNo == 2)   //Error in different MetricTargetPresets throughout whole OptimizationRun
+            {
+                hd_CompError.Value = "2";
+            }
+            else   //Success, No difference
+            {
+                hd_CompError.Value = "0";
+            }
+        }
+        #endregion
 
         #region Control Events
         protected void lbtnMeasurementVerification_Click(object sender, EventArgs e)
@@ -377,33 +393,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnSubmit_Click(object sender, EventArgs e)
         {
-            Response.Redirect(string.Format("COValidationCallback.aspx?projectid={0}&result={1}&id={2}", SessionManager.Instance.CurrentProject.ProjectId, ValidationMeasurementStatus, Guid.NewGuid()));
-
+            Response.Redirect(string.Format("COValidationCallback.aspx?projectid={0}&result={1}&id={2}", SessionManager.Instance.CurrentProject.ProjectId, Convert.ToString(hdnValidationMeasurementStatus.Value), Guid.NewGuid()));
         }
         protected void lbtnMeasurement_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
             Response.Redirect(string.Format("COMeasurement.aspx?id={0}", Guid.NewGuid()));
         }
+        protected void chk1DMeasurementSmoothing_CheckedChanged(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentProject.Is1DMeasurementSmoothing = chk1DMeasurementSmoothing.Checked;
+        }
+
+
+
         #endregion
 
         #region Properties
         public int JsRandomNumber { get { return new Random().Next(1, 100); } }
-
-        public string ValidationMeasurementStatus
-        {
-            get
-            {
-                if (ViewState["MeasurementStatus"] != null)
-                    return ViewState["MeasurementStatus"].ToString();
-                else
-                    return string.Empty;
-            }
-            set
-            {
-                ViewState["MeasurementStatus"] = value;
-            }
-        }
+        
         #endregion
 
         #region IViewAnalyze Members
@@ -481,29 +489,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_DotGain> DTSpreadSplineRangeChartData { get; set; }
         public DataTable DTMaxSpreadChartData { get; set; }
 
-        //public bool IsAverageOfMeasurements
-        //{
-        //    get
-        //    {
-        //        return chkAnalyzeAverageOfMeasurements.Checked;
-        //    }
-        //    set
-        //    {
-        //        IsAverageOfMeasurements = chkAnalyzeAverageOfMeasurements.Checked;
-        //    }
-        //}
-
-        //public bool Is1DMeasurementSmoothing
-        //{
-        //    get
-        //    {
-        //        return chk1DMeasurementSmoothing.Checked;
-        //    }
-        //    set
-        //    {
-        //        Is1DMeasurementSmoothing = chk1DMeasurementSmoothing.Checked;
-        //    }
-        //}
+       
         public bool IsAverageOfMeasurements
         {
             get;

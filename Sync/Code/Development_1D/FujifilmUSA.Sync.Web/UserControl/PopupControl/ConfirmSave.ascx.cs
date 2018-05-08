@@ -162,8 +162,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnOptimize_Click(object sender, EventArgs e)
         {
-            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary) //---If Sync spot library type of project
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If spot library type of project
             {
+                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                ProjectStatus = Convert.ToInt32(EOptimizeRunStatus.Closed);
+                _presenterConfirmSave.OptmizeSpotLibrary();
+
+                if (!IsErrorOccured)
+                {
+                    _presenterConfirmSave.GetProjectDetail_SpotProject();
+                    if (!IsErrorOccured)
+                    {
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last();
+                        ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Export.aspx';", true);
+                    }
+                }
+            }
+            else
+            { 
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
@@ -217,32 +235,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
             }
-            else
-            {
-                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
-                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                ProjectStatus = Convert.ToInt32(EOptimizeRunStatus.Closed);
-                _presenterConfirmSave.OptmizeSpotLibrary();
-
-                //_presenterConfirmSave.UpdateOptimizeRun_SpotProject();
-                if (!IsErrorOccured)
-                {
-                    _presenterConfirmSave.GetProjectDetail_SpotProject();
-                    if (!IsErrorOccured)
-                    {
-                        SessionManager.Instance.CurrentProject = Project;
-                        SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last();
-                        ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Export.aspx';", true);
-                    }
-                }
-            }
-
+         
         }
 
         protected void lbtnYes_Click(object sender, EventArgs e)
         {
-            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary) //---If Sync spot library type of project
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If spot library type of project
             {
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
+                MasterRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
+                _presenterConfirmSave.CertifySpotOptimizeRun();
+                if (!IsErrorOccured)
+                {
+                    SessionManager.Instance.CurrentOptimizeRun.Status = EOptimizeRunStatus.Certify;
+                    Utilities.PopupWindowsRedirect(this, "Export.aspx");
+                }
+            }
+            else
+            { 
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                 MasterRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
@@ -268,19 +279,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
             }
-            else
-            {
-                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
-                MasterRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
-                _presenterConfirmSave.CertifySpotOptimizeRun();
-                if (!IsErrorOccured)
-                {
-                    SessionManager.Instance.CurrentProject = null;
-                    SessionManager.Instance.CurrentOptimizeRun = null;
-                    Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
-                }
-            }
+          
         }
 
         #region IViewConfirmSave Members

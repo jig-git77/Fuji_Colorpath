@@ -85,13 +85,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locDownloadDLPAndChart;
         
         /// <summary>
-        /// trDLPDownload1 control.
+        /// Div_DLP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow trDLPDownload1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_DLP;
         
         /// <summary>
         /// locDownloadDLPAndImplementWorkflow control.
@@ -101,15 +101,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locDownloadDLPAndImplementWorkflow;
-        
-        /// <summary>
-        /// trDLPDownload2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow trDLPDownload2;
         
         /// <summary>
         /// lbtnDownloadDLP control.
@@ -164,6 +155,42 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locDownloadChart;
+        
+        /// <summary>
+        /// trExportCMYKLibrary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trExportCMYKLibrary;
+        
+        /// <summary>
+        /// locDownloadCMYKLibraryResource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDownloadCMYKLibraryResource;
+        
+        /// <summary>
+        /// lbtnExportCMYK control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnExportCMYK;
+        
+        /// <summary>
+        /// locExportCMYK control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locExportCMYK;
         
         /// <summary>
         /// trSourceProfDownload control.
@@ -238,6 +265,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locDownloadDestinationICC;
         
         /// <summary>
+        /// lbtnNamedColorICC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnNamedColorICC;
+        
+        /// <summary>
+        /// Localize4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize4;
+        
+        /// <summary>
         /// trExportViewForSync1D control.
         /// </summary>
         /// <remarks>
@@ -245,42 +290,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow trExportViewForSync1D;
-        
-        /// <summary>
-        /// locExportView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locExportView;
-        
-        /// <summary>
-        /// locDeltaView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locDeltaView;
-        
-        /// <summary>
-        /// locCurveType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locCurveType;
-        
-        /// <summary>
-        /// DdlCurveType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DdlCurveType;
         
         /// <summary>
         /// HD_CurveType control.
@@ -292,58 +301,40 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.HiddenField HD_CurveType;
         
         /// <summary>
-        /// Chk_C control.
+        /// Localize5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox Chk_C;
+        protected global::System.Web.UI.WebControls.Localize Localize5;
         
         /// <summary>
-        /// Chk_M control.
+        /// Localize6 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox Chk_M;
+        protected global::System.Web.UI.WebControls.Localize Localize6;
         
         /// <summary>
-        /// Chk_Y control.
+        /// Localize3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox Chk_Y;
+        protected global::System.Web.UI.WebControls.Localize Localize3;
         
         /// <summary>
-        /// Chk_K control.
+        /// drpCurveType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox Chk_K;
-        
-        /// <summary>
-        /// CHRT_ExportCurve control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_ExportCurve;
-        
-        /// <summary>
-        /// rgCurveExportView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid rgCurveExportView;
+        protected global::System.Web.UI.WebControls.DropDownList drpCurveType;
         
         /// <summary>
         /// BtnExportCurvesExportView control.
@@ -355,31 +346,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Button BtnExportCurvesExportView;
         
         /// <summary>
-        /// rbtnDetlaReflist control.
+        /// rbtnDetlaReflistClient control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbtnDetlaReflist;
-        
-        /// <summary>
-        /// CHRT_ExportCurveDeltaRef control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_ExportCurveDeltaRef;
-        
-        /// <summary>
-        /// rgCurveDeltaView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid rgCurveDeltaView;
+        protected global::System.Web.UI.WebControls.RadioButtonList rbtnDetlaReflistClient;
         
         /// <summary>
         /// BtnExportCurvesDeltaView control.
@@ -398,5 +371,41 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnExportCurveSelectedTabIndex;
+        
+        /// <summary>
+        /// hdnBaseServiceUrl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnBaseServiceUrl;
+        
+        /// <summary>
+        /// hdfCurrentCulture control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfCurrentCulture;
+        
+        /// <summary>
+        /// hdnOptimizationRunID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnOptimizationRunID;
+        
+        /// <summary>
+        /// hdnCurveFileName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnCurveFileName;
     }
 }

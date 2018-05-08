@@ -36,6 +36,7 @@ namespace FujifilmUSA.Sync.Common
         bool _IsValidation;
         string _WebURL;
         private ChartContent _chartContent;
+        private DataTable dtPatchDetails;
         #endregion
 
 
@@ -116,6 +117,11 @@ namespace FujifilmUSA.Sync.Common
         {
             get { return _chartContent; }
             set { _chartContent = value; }
+        }
+        public DataTable dtSpotPatchDetails
+        {
+            get { return dtPatchDetails; }
+            set { dtPatchDetails = value; }
         }
         #endregion
 
@@ -286,7 +292,10 @@ namespace FujifilmUSA.Sync.Common
             {
                 string str = "";
                 //========== Object of PDF ==========//
-                Doc theDoc = new Doc();                
+                Doc theDoc = new Doc();
+
+                //========== Reads the template ==========//
+                StreamReader fp;
 
                 //========== The rectangle for the content on pdf ==========//
                 theDoc.Rect.Left = 0;
@@ -324,7 +333,9 @@ namespace FujifilmUSA.Sync.Common
                     FileName = "Templates/kendoScoringMeasurement_Default.htm";
                 }
 
-                string FilePath = this._WebURL + FileName;
+                //string FilePath = this._WebURL + FileName;
+                string FilePath = System.Web.Hosting.HostingEnvironment.MapPath("~/" + FileName);// System.Web.HttpContext.Current.Server.MapPath(FileName);
+
                 if (FilePath.Trim() == "")
                 {
                     throw new Exception("Please Enter Report Type.");
@@ -343,9 +354,12 @@ namespace FujifilmUSA.Sync.Common
                 //int theID;
 
                 //========== Reads the template ==========//
-                var webClient = new System.Net.WebClient();
-                StringBuilder SBStr = new StringBuilder(webClient.DownloadString(FilePath));
+                //var webClient = new System.Net.WebClient();
+                //StringBuilder SBStr = new StringBuilder(webClient.DownloadString(FilePath));
 
+                fp = File.OpenText(FilePath);
+                StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
+                fp.Close();
                 SBStr = SetPDFContent(SBStr);
 
                 theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
@@ -1156,16 +1170,18 @@ namespace FujifilmUSA.Sync.Common
                 //                    System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
 
                 //** Add Styles Path ***//
-                string cssFullPath = this._WebURL + "Templates/style.css";
+                //string cssFullPath = this._WebURL + "Templates/style.css";
+                string cssFullPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/style.css");
                 SBStr.Replace("#csspath#", cssFullPath);
 
                 //** Add Images Path ***//
-                string imagesLogoPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
-                SBStr.Replace("##LOGOIMAGES##", imagesLogoPath);
+                string imagesPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
+                SBStr.Replace("##LOGOIMAGES##", imagesPath);
 
-                
+
                 //** Add Images Path ***//
-                string imagesPath = this.BaseWebURL + "Images/";
+                //string imagesPath = this.BaseWebURL + "Images/";
+                //string imagesPath = System.Web.HttpContext.Current.Server.MapPath("Images") + "\\"; ;
                 SBStr.Replace("##IMAGES##", imagesPath);
 
                 //** Add Content ***//
@@ -1186,7 +1202,7 @@ namespace FujifilmUSA.Sync.Common
                     SBStr.Replace("###ProjectName###", Convert.ToString(DT.Rows[0]["ProjectName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ProjectName"]).Trim());
                     SBStr.Replace("###Device###", Convert.ToString(DT.Rows[0]["DeviceName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeviceName"]).Trim());
                     SBStr.Replace("###TimeStamp###", Common.Utilities.GetDateByCultures(Convert.ToDateTime(DT.Rows[0]["MeasurementDate"])));
-                    SBStr.Replace("###OptimizedDLP###", DLPName.Trim() == "" ? "&nbsp;" : DLPName.Trim());
+                    SBStr.Replace("###OptimizedDLP###", string.IsNullOrWhiteSpace(DLPName) ? "&nbsp;" : Convert.ToString(DLPName).Trim());
                     SBStr.Replace("###PrintTarget###", Convert.ToString(DT.Rows[0]["ProfileName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ProfileName"]).Trim());
                     SBStr.Replace("###Media###", Media.Trim() == "" ? "&nbsp;" : Media.Trim());
                     SBStr.Replace("###Colorant###", Colorant.Trim() == "" ? "&nbsp;" : Colorant.Trim());
@@ -1289,7 +1305,7 @@ namespace FujifilmUSA.Sync.Common
                 #region ==== Target Vs Actual AB Plot ====
                 SBStr.Replace("###TargetVersusActualAB###", this.chartContent.ABComparisionSpiderChart);
                 #endregion
-                
+
                 #region ==== Summary Delta E Value Graph Image ====
                 DT = DS_Common.Tables[3];
                 StringBuilder SBstrDeltaEValue = new StringBuilder();
@@ -1340,6 +1356,7 @@ namespace FujifilmUSA.Sync.Common
                             SBstrDeltaEValue.Append("</tr>");
                         }
                     }
+
                     SBStr.Replace("###DeltaESummaryDetail###", SBstrDeltaEValue.ToString());
                 }
                 else
@@ -1404,7 +1421,7 @@ namespace FujifilmUSA.Sync.Common
                             #region "AverageDE"
                             if (Convert.IsDBNull(DT.Rows[0]["Avg_ΔE"]))
                             {
-                                SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                                SBstrDeltaValue.Append("<tr style='height: 18px'>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' class='BottomBorder' style='width: 160px;'>Average &Delta;" + From_ΔE + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
@@ -1413,7 +1430,7 @@ namespace FujifilmUSA.Sync.Common
                             }
                             else
                             {
-                                SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                                SBstrDeltaValue.Append("<tr style='height: 18px'>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Average &Delta;" + From_ΔE + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
@@ -1425,7 +1442,7 @@ namespace FujifilmUSA.Sync.Common
                             #region "MaximumDE"
                             if (Convert.IsDBNull(DT.Rows[0]["Max_ΔE"]))
                             {
-                                SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                                SBstrDeltaValue.Append("<tr style='height: 30px'>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Maximum &Delta;" + From_ΔE + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
@@ -1435,7 +1452,7 @@ namespace FujifilmUSA.Sync.Common
                             else
                             {
 
-                                SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                                SBstrDeltaValue.Append("<tr style='height: 30px'>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Maximum &Delta;" + From_ΔE + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
@@ -1447,7 +1464,7 @@ namespace FujifilmUSA.Sync.Common
                             #region "PrimaryDE"
                             if (Convert.IsDBNull(DT.Rows[0]["PriΔE"]))
                             {
-                                SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                                SBstrDeltaValue.Append("<tr style='height: 32px'>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta;" + From_ΔE + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
@@ -1456,7 +1473,7 @@ namespace FujifilmUSA.Sync.Common
                             }
                             else
                             {
-                                SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                                SBstrDeltaValue.Append("<tr style='height: 32px'>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta;" + From_ΔE + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
@@ -1468,7 +1485,7 @@ namespace FujifilmUSA.Sync.Common
                             #region "PrimaryDH"
                             if (Convert.IsDBNull(DT.Rows[0]["PriΔH"]))
                             {
-                                SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                                SBstrDeltaValue.Append("<tr style='height: 32px'>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta;H</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
@@ -1478,7 +1495,7 @@ namespace FujifilmUSA.Sync.Common
                             else
                             {
 
-                                SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                                SBstrDeltaValue.Append("<tr style='height: 32px'>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta;H</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
@@ -1490,7 +1507,7 @@ namespace FujifilmUSA.Sync.Common
                             #region "GrayAverageDE"
                             if (Convert.IsDBNull(DT.Rows[0]["GrayΔE"]))
                             {
-                                SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                                SBstrDeltaValue.Append("<tr style='height: 32px'>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Gray Average &Delta;" + From_ΔE + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
@@ -1500,7 +1517,7 @@ namespace FujifilmUSA.Sync.Common
                             else
                             {
 
-                                SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                                SBstrDeltaValue.Append("<tr style='height: 32px'>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Gray Average &Delta;" + From_ΔE + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
@@ -1513,7 +1530,7 @@ namespace FujifilmUSA.Sync.Common
                             #region "dE_95pct_Patches"
                             if (Convert.IsDBNull(DT.Rows[0]["NinetyFiveΔE"]))
                             {
-                                SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                                SBstrDeltaValue.Append("<tr style='height: 32px'>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95th Percentile &Delta;" + From_ΔE + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
@@ -1523,7 +1540,7 @@ namespace FujifilmUSA.Sync.Common
                             else
                             {
 
-                                SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                                SBstrDeltaValue.Append("<tr style='height: 32px'>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95th Percentile &Delta;" + From_ΔE + "</td>");
                                 SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
@@ -1895,6 +1912,310 @@ namespace FujifilmUSA.Sync.Common
             return SBStr;
         }
         #endregion
+
+        public void GenerateSpotPatchDetailsReport()
+        {
+            try
+            {
+                int rowPerPage = 44;
+                //========== Object of PDF ==========//
+                Doc theDoc = new Doc();
+
+                //========== Reads the template ==========//
+                StreamReader fp;
+
+                //========== The rectangle for the content on pdf ==========//
+                theDoc.Rect.Left = 0;
+                theDoc.Rect.Bottom = 30;
+                theDoc.Rect.Width = 610;
+                theDoc.Rect.Height = 770;
+
+                //========== The page ID Default is 1 ==========//
+                int theID;
+
+                //========== Adds New Page IN PDF ==========//
+                theDoc.Page = theDoc.AddPage();
+                //========== Adds a counter to Page ==========//
+                theCount++;
+
+                string FileName = "Templates/kendoPrepressSpotProjectPatchNew.htm";
+                string FilePath = this._WebURL + FileName;
+
+                //========== Reads the template ==========//
+                fp = File.OpenText(System.Web.Hosting.HostingEnvironment.MapPath("~/" + FileName));
+                StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
+                fp.Close();
+
+                int measurementID = 0;
+                int totalPages = 0;
+                if (dtSpotPatchDetails.Rows.Count > 0)
+                {
+                    measurementID = Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]);
+                    totalPages = (dtSpotPatchDetails.Rows.Count / rowPerPage) + 1;
+                }
+
+                int rowLimit = rowPerPage;
+
+                int currentIndex = 0;
+                if (dtPatchDetails.Rows.Count < rowPerPage)
+                    rowLimit = dtPatchDetails.Rows.Count;
+
+                string patchBodyStr = "";
+                StringBuilder mainStr = new StringBuilder();
+                for (int i = 0; i < totalPages; i++)
+                {
+                    StringBuilder FileStr = null;
+                    if (patchBodyStr == "")
+                    {
+                        StreamReader fs = File.OpenText(System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/SpotPatchTableReport.htm"));
+                        patchBodyStr = fs.ReadToEnd();
+                        FileStr = new StringBuilder(patchBodyStr);
+                        fs.Close();
+                    }
+                    else
+                    {
+                        FileStr = new StringBuilder(patchBodyStr);
+                    }
+
+                    StringBuilder PatchStr = new StringBuilder();
+                    PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>Color</th><th>SpotName</th>");
+                    if (measurementID == 0)
+                        PatchStr.Append("<th>pΔL</th><th>pΔa</th><th>pΔb</th><th>pΔE</th></tr>");
+                    else
+                        PatchStr.Append("<th>ΔE_T_P</th><th>ΔE_M_T</th><th>ΔE_M_P</th></tr>");
+                    //foreach (DataRow row in dtPatchDetails.AsEnumerable().fi(5).CopyToDataTable())
+                    for (int j = currentIndex; j < rowLimit; j++)
+                    {
+                        PatchStr.Append("<tr><td>" + Convert.ToString(dtPatchDetails.Rows[j]["SpotID"]) + "</td>");
+                        PatchStr.Append("<td><span id='sp' style='display:inline-block;background-color:" + Convert.ToString(dtPatchDetails.Rows[j]["HTMLColor"]) + ";height:14px;width:68px;'></span></td>");
+                        PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["SpotName"]) + " </td>");
+                        if (measurementID == 0)
+                            PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔL"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["Δa"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["Δb"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE"]) + "</td>");
+                        else
+                            PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_T_P"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_T"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_P"]) + "</td>");
+                        PatchStr.Append("</tr>");
+                    }
+                    PatchStr.Append("</table>");
+
+                    FileStr.Replace("###SpotProjectPatchDetails###", PatchStr.ToString());
+
+                    mainStr.Append(FileStr.ToString());
+
+
+
+                    currentIndex = rowLimit;
+                    if ((rowLimit + rowPerPage) > dtPatchDetails.Rows.Count)
+                        rowLimit = dtPatchDetails.Rows.Count;
+                    else
+                        rowLimit += rowPerPage;
+                }
+
+                //
+
+                SBStr.Replace("###SpotProjectPatchDetailsMultiplePages###", mainStr.ToString());
+
+                //** Add Styles Path ***//
+                string cssFullPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/style.css");
+                SBStr.Replace("#csspath#", cssFullPath);
+
+                //** Add Images Path ***//
+                string imagesPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
+                SBStr.Replace("##LOGOIMAGES##", imagesPath);
+
+
+                //** Add Images Path ***//
+                SBStr.Replace("##IMAGES##", imagesPath);
+                //========== Assign HTML to theID ==========//
+                //1 : str = The html content.
+                //3 : width(612) = The dimension of the page to fix in A4 size paper.
+                theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
+
+                //========== Leave 30 Px on top of next page ==========//
+                theDoc.Rect.Inset(0, 1);
+
+                //========== Loops till the paging ==========//
+                while (true)
+                {
+                    //========== Create A chanin for a pdf with multiple page ==========//
+                    if (!theDoc.Chainable(theID))
+                        break;
+
+                    theDoc.Page = theDoc.AddPage();
+                    theCount++;
+                    theID = theDoc.AddImageToChain(theID);
+                }
+
+                //========== Reduce the top to start the next page from ==========//
+                theDoc.Rect.Inset(0, -1);
+                #region Add Footer
+                theDoc.HPos = 0.0;
+                theDoc.VPos = 0.0;
+                theDoc.Color.String = "255 255 255";
+                theDoc.FontSize = 8;
+
+                theDoc.Rect.String = "-10 0 622 47";
+                for (int i = 1; i <= theCount; i++)
+                {
+                    theDoc.HPos = 0.0;
+                    theDoc.VPos = 0.0;
+                    theDoc.PageNumber = i;
+
+
+                    string str = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"> " +
+                            "<tr style=\"height:25px\"><td align=\"center\" valign=\"middle\" bgcolor=\"#C1C1C1\" style=\"color:#000000; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif;\" width=\"150px\" >" + DateTime.Now.ToLongDateString() + "</td> " +
+                            "<td align=\"center\" valign=\"middle\" bgcolor=\"#C1C1C1\" style=\"color:#000000; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif; \">&copy; Fujifilm " + DateTime.Now.Year.ToString() + "</td> " +
+                            "<td width=\"112px\" align=\"center\" valign=\"middle\" bgcolor=\"#5A5A5A\" style=\"color:#CCCCCC; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif; \">Page " + i.ToString() + " of " + theCount.ToString() + " </td></tr></table>";
+
+                    theDoc.AddImageHtml(str);
+                }
+
+                #endregion
+                string pth = PDFPath + PDF_NAME;
+
+                // === If same named pdf file is already available then remove === //
+                if (System.IO.File.Exists(pth))
+                    System.IO.File.Delete(pth);
+
+                theDoc.Save(pth);
+                theDoc.Clear();
+                theDoc.Dispose();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        //public void GenerateSpotPatchDetailsReport()
+        //{
+        //    try
+        //    {
+        //        //========== Object of PDF ==========//
+        //        Doc theDoc = new Doc();
+
+        //        //========== Reads the template ==========//
+        //        StreamReader fp;
+
+        //        //========== The rectangle for the content on pdf ==========//
+        //        theDoc.Rect.Left = 0;
+        //        theDoc.Rect.Bottom = 30;
+        //        theDoc.Rect.Width = 610;
+        //        theDoc.Rect.Height = 770;
+
+        //        //========== The page ID Default is 1 ==========//
+        //        int theID;
+
+        //        //========== Adds New Page IN PDF ==========//
+        //        theDoc.Page = theDoc.AddPage();
+        //        //========== Adds a counter to Page ==========//
+        //        theCount++;
+
+        //        string FileName = "Templates/kendoPrepressSpotProjectPatch.htm";
+        //        string FilePath = this._WebURL + FileName;
+
+        //        //========== Reads the template ==========//
+        //        fp = File.OpenText(System.Web.Hosting.HostingEnvironment.MapPath("~/" + FileName));
+        //        StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
+        //        fp.Close();
+
+        //        //** Add Styles Path ***//
+        //        string cssFullPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/style.css");
+        //        SBStr.Replace("#csspath#", cssFullPath);
+
+        //        //** Add Images Path ***//
+        //        string imagesPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
+        //        SBStr.Replace("##LOGOIMAGES##", imagesPath);
+
+
+        //        //** Add Images Path ***//
+        //        SBStr.Replace("##IMAGES##", imagesPath);
+
+
+        //        StringBuilder PatchStr = new StringBuilder();
+        //        PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>SpotName</th><th>Color</th>");
+        //        int measurementID = dtPatchDetails != null && dtPatchDetails.Rows.Count > 0 ? Convert.ToInt32(dtPatchDetails.Rows[0]["MeasurementID"]) : 0;
+        //        if (measurementID == 0)
+        //            PatchStr.Append("<th>pΔL</th><th>pΔa</th><th>pΔb</th><th>pΔE</th></tr>");
+        //        else
+        //            PatchStr.Append("<th>ΔE_T_P</th><th>ΔE_M_T</th><th>ΔE_M_P</th></tr>");
+        //        foreach (DataRow row in dtPatchDetails.Rows)
+        //        {
+        //            PatchStr.Append("<tr><td>" + Convert.ToString(row["SpotID"]) + "</td>");
+        //            PatchStr.Append("<td>" + Convert.ToString(row["SpotName"]) + " </td>");
+        //            PatchStr.Append("<td><span id='sp' style='display:inline-block;background-color:" + Convert.ToString(row["HTMLColor"]) + ";height:14px;width:68px;'></span></td>");
+        //            if (measurementID == 0)
+        //                PatchStr.Append("<td>" + Convert.ToString(row["ΔL"]) + "</td><td>" + Convert.ToString(row["Δa"]) + "</td><td>" + Convert.ToString(row["Δb"]) + "</td><td>" + Convert.ToString(row["ΔE"]) + "</td>");
+        //            else
+        //                PatchStr.Append("<td>" + Convert.ToString(row["ΔE_T_P"]) + "</td><td>" + Convert.ToString(row["ΔE_M_T"]) + "</td><td>" + Convert.ToString(row["ΔE_M_P"]) + "</td>");
+        //            PatchStr.Append("</tr>");
+        //        }
+        //        PatchStr.Append("</table>");
+
+        //        SBStr.Replace("###SpotProjectPatchDetails###", PatchStr.ToString());
+
+        //        //========== Assign HTML to theID ==========//
+        //        //1 : str = The html content.
+        //        //3 : width(612) = The dimension of the page to fix in A4 size paper.
+        //        theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
+
+        //        //========== Leave 30 Px on top of next page ==========//
+        //        theDoc.Rect.Inset(0, 1);
+
+        //        //========== Loops till the paging ==========//
+        //        while (true)
+        //        {
+        //            //========== Create A chanin for a pdf with multiple page ==========//
+        //            if (!theDoc.Chainable(theID))
+        //                break;
+
+        //            theDoc.Page = theDoc.AddPage();
+        //            theCount++;
+        //            theID = theDoc.AddImageToChain(theID);
+        //        }
+
+        //        //========== Reduce the top to start the next page from ==========//
+        //        theDoc.Rect.Inset(0, -1);
+        //        #region Add Footer
+        //        theDoc.HPos = 0.0;
+        //        theDoc.VPos = 0.0;
+        //        theDoc.Color.String = "255 255 255";
+        //        theDoc.FontSize = 8;
+
+        //        theDoc.Rect.String = "-10 0 622 52";
+        //        for (int i = 1; i <= theCount; i++)
+        //        {
+        //            theDoc.HPos = 0.0;
+        //            theDoc.VPos = 0.0;
+        //            theDoc.PageNumber = i;
+
+
+        //            string str = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"> " +
+        //                    "<tr style=\"height:25px\"><td align=\"center\" valign=\"middle\" bgcolor=\"#C1C1C1\" style=\"color:#000000; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif;\" width=\"150px\" >" + DateTime.Now.ToLongDateString() + "</td> " +
+        //                    "<td align=\"center\" valign=\"middle\" bgcolor=\"#C1C1C1\" style=\"color:#000000; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif; \">&copy; Fujifilm " + DateTime.Now.Year.ToString() + "</td> " +
+        //                    "<td width=\"112px\" align=\"center\" valign=\"middle\" bgcolor=\"#5A5A5A\" style=\"color:#CCCCCC; font-weight:bold ; font-size:8px; font-family:Tahoma, Arial, Helvetica, sans-serif; \">Page " + i.ToString() + " of " + theCount.ToString() + " </td></tr></table>";
+
+        //            theDoc.AddImageHtml(str);
+        //        }
+
+        //        #endregion
+
+        //        string pth = PDFPath + PDF_NAME;
+
+        //        // === If same named pdf file is already available then remove === //
+        //        if (System.IO.File.Exists(pth))
+        //            System.IO.File.Delete(pth);
+
+        //        theDoc.Save(pth);
+        //        theDoc.Clear();
+        //        theDoc.Dispose();
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw;
+        //    }
+        //}
 
     }
 

@@ -47,7 +47,7 @@ namespace ColorPathSync.Helper
 
             List<Patch> listPatch = new List<Patch>();
 
-            for (int patchID = 0; patchID <= iccFile.ncl2Count - 1; patchID++)
+            for (int patchID = 1; patchID <= iccFile.ncl2Count; patchID++)
             {
                 Patch patch = new Patch();
                 patch.PatchID = patchID;

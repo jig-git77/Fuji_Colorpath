@@ -17,7 +17,7 @@
     <script src="JQuery/jquery-1.9.1.min.js"></script>
     <script src="JQuery/numeric.js?version=4" type="text/javascript"></script>
     <%--<script src="Scripts/kendo/2017.2.621/kendo.all.min.js"></script>--%>
-    <script src="https://kendo.cdn.telerik.com/2017.3.1026/js/kendo.all.min.js"></script>
+    <%--<script src="https://kendo.cdn.telerik.com/2017.3.1026/js/kendo.all.min.js"></script>--%>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style>
@@ -83,7 +83,7 @@
 </head>
 <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
     <form id="form1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server" AsyncPostBackTimeout="600">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" AsyncPostBackTimeout="600" EnablePageMethods="true">
     </asp:ScriptManager>
     <asp:UpdateProgress ID="UpdateProgress" runat="server" DynamicLayout="true" DisplayAfter="50">
         <ProgressTemplate>

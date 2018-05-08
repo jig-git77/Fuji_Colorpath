@@ -92,12 +92,30 @@ namespace FujifilmUSA.Sync.Presenter
             _viewExport.Project = projectBusiness.GetProjectDetail_SpotProject(_viewExport.SpotProjectId);
         }
 
-        public void GetSpotPatchDetailsofMeasurement()
+        public void GetSpotPatchDetailsForChart()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewExport.ErrorOccured;
-            _viewExport.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsofMeasurement(_viewExport.OptimizeRunId);
+            _viewExport.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsForChart(_viewExport.OptimizeRunId);
         }
 
+        public void GetSpotDestinationProfile()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.SourceProfile = projectBusiness.GetSpotDestinationProfile(_viewExport.ProjectId);
+        }
+        public void GetSpotPatchDetailsForCMYKExport()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsForCMYKExport(_viewExport.OptimizeRunId);
+        }
+        public void GetSpotPatchDetailsForChartBySpotProject()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsForChartBySpotProjectID(_viewExport.SpotProjectId);
+        }
     }
 }

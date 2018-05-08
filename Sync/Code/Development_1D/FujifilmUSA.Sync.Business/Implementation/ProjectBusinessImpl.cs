@@ -1771,34 +1771,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
-        public int AddDummyData(int spotprojectId, int optimizationRunID)
-        {
-            int returnValue = 0;
-            var outParam = new Parameters() { ParameterName = "@LastOptimizationRunID", Type = DbType.Int32 };
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    DataAccessFactory.
-                        Instance.
-                        ExecuteProcedure("[CPSpot].[InsertDummyMeasurement]",
-                                         new List<Parameters>()
-                                             {
-                                                     new Parameters() {ParameterName = "@SpotProjectID", Type = DbType.Int32, Value = spotprojectId},
-                                                     new Parameters() {ParameterName = "@OptimizationRunID", Type = DbType.Int32, Value = optimizationRunID},
-                                             },
-                                         new List<Parameters>()
-                                             {
-                                                     outParam
-                                             });
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
-            if (outParam.Value != null)
-            {
-                returnValue = Convert.ToInt32(outParam.Value);
-            }
-            return returnValue;
-        }
-
+     
         public byte[] GetNamedColorProfile(int operationId)
         {
             var data = new object();
@@ -1940,6 +1913,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return chartData;
         }
 
+
+        public byte[] GetSpotDestinationProfile(int projectId)
+        {
+            var data = new object();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    data = DataAccessFactory.
+                        Instance.
+                        GetScalar(
+                            "CPSpot.GetSpotDestinationProfileData",
+                            new object[]
+                                    {
+                                        projectId
+                                    });
+                    if (data == null || data == DBNull.Value)
+                    {
+                        throw new Exception("Destination profile not found for spot projectId: " + projectId);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotDestinationProfile"));
+            return data == DBNull.Value ? null : (byte[])data;
+        }
         #endregion
 
         #region ITaskBase Members

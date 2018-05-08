@@ -79,6 +79,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actual TVI:.
+        /// </summary>
+        internal static string actualTVI {
+            get {
+                return ResourceManager.GetString("actualTVI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete all information of selected measurement?.
         /// </summary>
         internal static string AddMeasurement_DeleteMeasurement_Confirmation {
@@ -187,7 +196,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear Fillter.
+        ///   Looks up a localized string similar to Clear Filter.
         /// </summary>
         internal static string ClearFillterResource {
             get {
@@ -871,7 +880,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Spot Color Library.
+        ///   Looks up a localized string similar to Brand Color Optimization.
         /// </summary>
         internal static string ELicenseType_SpotLibrary {
             get {
@@ -2176,6 +2185,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid curve type value has been provided..
+        /// </summary>
+        internal static string Error_Invalid_CurveType {
+            get {
+                return ResourceManager.GetString("Error_Invalid_CurveType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid Delta E value has been provided..
         /// </summary>
         internal static string Error_Invalid_DeltaEValue {
@@ -2230,11 +2248,29 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid OptimizationRun id value has been provided..
+        /// </summary>
+        internal static string Error_Invalid_OptimizationRunID {
+            get {
+                return ResourceManager.GetString("Error_Invalid_OptimizationRunID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid ProjectId has been provided..
         /// </summary>
         internal static string Error_Invalid_ProjectId {
             get {
                 return ResourceManager.GetString("Error_Invalid_ProjectId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid validation type value has been provided..
+        /// </summary>
+        internal static string Error_Invalid_ValidationType {
+            get {
+                return ResourceManager.GetString("Error_Invalid_ValidationType", resourceCulture);
             }
         }
         
@@ -2554,11 +2590,11 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Europian Standards.
+        ///   Looks up a localized string similar to European Standards.
         /// </summary>
-        internal static string ESourceProfileCategory_EuropianStandards {
+        internal static string ESourceProfileCategory_EuropeanStandards {
             get {
-                return ResourceManager.GetString("ESourceProfileCategory_EuropianStandards", resourceCulture);
+                return ResourceManager.GetString("ESourceProfileCategory_EuropeanStandards", resourceCulture);
             }
         }
         
@@ -3049,6 +3085,123 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Act..
+        /// </summary>
+        internal static string locLabelAct {
+            get {
+                return ResourceManager.GetString("locLabelAct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer:.
+        /// </summary>
+        internal static string locLabelCustomer {
+            get {
+                return ResourceManager.GetString("locLabelCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        internal static string locLabelDate {
+            get {
+                return ResourceManager.GetString("locLabelDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dE Type:.
+        /// </summary>
+        internal static string locLabeldEType {
+            get {
+                return ResourceManager.GetString("locLabeldEType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device:.
+        /// </summary>
+        internal static string locLabelDevice {
+            get {
+                return ResourceManager.GetString("locLabelDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JDF Job ID:.
+        /// </summary>
+        internal static string locLabelJDFJobID {
+            get {
+                return ResourceManager.GetString("locLabelJDFJobID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job:.
+        /// </summary>
+        internal static string locLabelJob {
+            get {
+                return ResourceManager.GetString("locLabelJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Metric:.
+        /// </summary>
+        internal static string locLabelMetric {
+            get {
+                return ResourceManager.GetString("locLabelMetric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page/Surface:.
+        /// </summary>
+        internal static string locLabelPageOrSurface {
+            get {
+                return ResourceManager.GetString("locLabelPageOrSurface", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signature.
+        /// </summary>
+        internal static string locLabelSignature {
+            get {
+                return ResourceManager.GetString("locLabelSignature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard:.
+        /// </summary>
+        internal static string locLabelStandard {
+            get {
+                return ResourceManager.GetString("locLabelStandard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timestamp:.
+        /// </summary>
+        internal static string locLabelTimestamp {
+            get {
+                return ResourceManager.GetString("locLabelTimestamp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tol..
+        /// </summary>
+        internal static string locLabelTol {
+            get {
+                return ResourceManager.GetString("locLabelTol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ChangeProfile.
         /// </summary>
         internal static string LogActivityType_ChangeProfile {
@@ -3256,6 +3409,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Patch Metrics.
+        /// </summary>
+        internal static string patchMetricsText {
+            get {
+                return ResourceManager.GetString("patchMetricsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete selected patch preset?.
         /// </summary>
         internal static string PatchPresetManagement_DeletePatchPreset_Confirmation {
@@ -3297,6 +3459,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string PCSDataTypes_XYZ {
             get {
                 return ResourceManager.GetString("PCSDataTypes_XYZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to % Patch Metrics.
+        /// </summary>
+        internal static string percentPatchMetrics {
+            get {
+                return ResourceManager.GetString("percentPatchMetrics", resourceCulture);
             }
         }
         
@@ -3409,11 +3580,38 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Spot Project Certified.
+        /// </summary>
+        internal static string SpotProject_Certified {
+            get {
+                return ResourceManager.GetString("SpotProject_Certified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spot Project.
+        /// </summary>
+        internal static string SpotProject_Open {
+            get {
+                return ResourceManager.GetString("SpotProject_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Target.
         /// </summary>
         internal static string targetText {
             get {
                 return ResourceManager.GetString("targetText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target TVI:.
+        /// </summary>
+        internal static string targetTVI {
+            get {
+                return ResourceManager.GetString("targetTVI", resourceCulture);
             }
         }
         
@@ -3441,6 +3639,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string tripletText {
             get {
                 return ResourceManager.GetString("tripletText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TVI Threashold.
+        /// </summary>
+        internal static string TVIThr {
+            get {
+                return ResourceManager.GetString("TVIThr", resourceCulture);
             }
         }
         

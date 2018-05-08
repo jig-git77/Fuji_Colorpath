@@ -2242,6 +2242,7 @@ label {
     line-height: 25px;
     color: #3f6798;
     font-weight: bold;
+    width: 100%;
 }
 
 .Validation_Status_Red {
@@ -2343,5 +2344,5 @@ label {
 
     .chromVariationTable td {
         text-align: center;
-        vertical-align:middle;
+        vertical-align: middle;
     }

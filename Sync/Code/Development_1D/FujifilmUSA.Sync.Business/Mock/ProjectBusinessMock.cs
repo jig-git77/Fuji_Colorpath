@@ -186,22 +186,24 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
-        public int AddDummyData(int spotprojectId, int optimizationRunID)
-        {
-            return 0;
-        }
-
         public byte[] GetNamedColorProfile(int operationId)
         {
             return new byte[1];
         }
+
         public byte[] GetLastOptimizedNamedColorProfile(int spotProjectId)
         {
             return new byte[1];
         }
+
         public ReferenceChartData GetSpotReferenceChartData(int spotProjectId, EReferenceChartDisType referenceChartDisType)
         {
             return new ReferenceChartData();
+        }
+
+        public byte[] GetSpotDestinationProfile(int projectId)
+        {
+            return new byte[1];
         }
         #endregion
 

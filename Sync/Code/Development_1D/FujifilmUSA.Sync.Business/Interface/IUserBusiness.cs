@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Language> GetLanguages();
         int UpdateLanguage(int loginId, string languageCultureCode);
         int UpdateUserDeviceInfo(int loginId, int measurementDeviceId, int densityType, int UVMode);
-        List<MeasurementDevice> GetMeasurementDeviceList(int loginId, int deviceId);
+        List<MeasurementDevice> GetMeasurementDeviceList(int loginId, int deviceId, bool isSpotTargetType = false);
         int InsertLoginActivityLogs(int UserId, string OSName, string BrowserName, string EntryTime);
     }
 }

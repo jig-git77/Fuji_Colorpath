@@ -741,4 +741,7 @@
   <data name="GridToleranceValue.Text" xml:space="preserve">
     <value>Toleranz</value>
   </data>
+  <data name="percentPatchMetrics" xml:space="preserve">
+    <value>% Patch Metrics</value>
+  </data>
 </root>
