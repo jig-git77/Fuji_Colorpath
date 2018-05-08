@@ -843,6 +843,7 @@
     <Content Include="Images\SpotProject.png" />
     <Content Include="Images\SpotProject_Certified.png" />
     <Content Include="Images\Sync DLP Scoring Report_preview.jpg" />
+    <Content Include="Images\Sync1D CMYK Density Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview_G7.jpg" />
     <Content Include="Images\Sync1D Report_preview_Vali.jpg" />
@@ -6229,7 +6230,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
