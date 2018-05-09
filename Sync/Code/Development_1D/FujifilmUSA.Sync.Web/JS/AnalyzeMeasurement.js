@@ -5351,12 +5351,10 @@ function GetInkPaperPatchChartImage() {
     var chart = $divChartInkPaperABComparision.data("kendoChart");
     var kendoOptions = $divChartInkPaperABComparision.data("kendoChart").options;
     var kendodataSource = $divChartInkPaperABComparision.data("kendoChart").dataSource;
-    kendoOptions.categoryAxis.labels.visible = false;
-    //kendoOptions.categoryAxis.reverse = true;
-    //kendoOptions.series[0].data = kendoOptions.series[0].data.reverse();
-    //kendoOptions.series[1].data = kendoOptions.series[1].data.reverse();
+    //kendoOptions.categoryAxis.labels.visible = false;    
     $('#divChartInkPaperDummy').kendoChart(kendoOptions);
     var dummyChart = $('#divChartInkPaperDummy').data('kendoChart');
+    dummyChart.options.categoryAxis.labels.visible = false;    
     dummyChart.dataSource = kendodataSource;
     dummyChart.options.transitions = false;
     dummyChart.refresh();

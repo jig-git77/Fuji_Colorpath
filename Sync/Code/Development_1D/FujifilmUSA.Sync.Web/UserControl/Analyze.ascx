@@ -3724,7 +3724,7 @@
                                                                                     <asp:ImageButton ID="btnReportGrading" runat="server" ImageUrl="../Images/Sync DLP Scoring Report_preview.jpg" ToolTip="Scoring Report" OnClientClick="javascript:return ShowReportGradingWindow();"></asp:ImageButton>
                                                                                 </div>
                                                                                 <div id="Div_ReportCMYKDensity" runat="server" visible="false" style="float: right; padding-right: 10px;">
-                                                                                    <asp:ImageButton ID="btnReportCMYKDensity" runat="server" ImageUrl="../Images/Sync DLP Scoring Report_preview.jpg" ToolTip="CMYK Density Report" OnClientClick="javascript:return ShowReportCMYKDensityWindow();"></asp:ImageButton>
+                                                                                    <asp:ImageButton ID="btnReportCMYKDensity" runat="server" ImageUrl="../Images/Sync1D CMYK Density Report_preview.jpg" ToolTip="CMYK Density Report" OnClientClick="javascript:return ShowReportCMYKDensityWindow();"></asp:ImageButton>
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
