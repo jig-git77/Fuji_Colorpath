@@ -2029,24 +2029,7 @@ function PopulateInkPaperChartABComparision() {
         maxDeltaLimit = (maxDeltaLimit > 4 ? maxDeltaLimit : maxDeltaLimit + 1)
     }
 
-
-    var maxValue = 0;
-    var marginValue = 1;
-    //switch (true) {
-    //    case (maxDeltaLimit < 5): maxValue = 5; marginValue = 1; break;
-    //    case (maxDeltaLimit == 5): maxValue = 6; marginValue = 1; break;
-    //    case (maxDeltaLimit >= 5 && maxDeltaLimit < 8): maxValue = 8; marginValue = 2; break;
-    //    case (maxDeltaLimit >= 8 && maxDeltaLimit < 10): maxValue = 10; marginValue = 2; break;
-    //    case (maxDeltaLimit >= 10 && maxDeltaLimit < 15): maxValue = 15; marginValue = 3; break;
-    //    case (maxDeltaLimit >= 15 && maxDeltaLimit < 20): maxValue = 20; marginValue = 5; break;
-    //    case (maxDeltaLimit >= 20 && maxDeltaLimit < 30): maxValue = 30; marginValue = 5; break;
-    //    case (maxDeltaLimit >= 30 && maxDeltaLimit < 40): maxValue = 40; marginValue = 5; break;
-    //    case (maxDeltaLimit >= 40 && maxDeltaLimit < 50): maxValue = 50; marginValue = 5; break;
-    //    case (maxDeltaLimit >= 50 && maxDeltaLimit < 60): maxValue = 60; marginValue = 5; break;
-    //    default: maxValue = maxDeltaLimit; marginValue = 10; break;
-    //}
-
-    //maxValue = maxDeltaLimit;
+    maxDeltaLimit = Math.trunc(maxDeltaLimit) + 1;     
     //generate the second stacked chart by max value
     var stackedChart = [];
     $.each(axis, function (index, num) {
@@ -2157,7 +2140,7 @@ function PopulateInkPaperChartABComparision() {
                 rotation: "auto"
             },
             max: maxDeltaLimit,
-            margin: marginValue
+            //margin: marginValue
         },
         tooltip: {
             visible: true,
@@ -3272,21 +3255,12 @@ function PopulateChartLGrayBalance() {
 ////**************** POPULATE THE DELTA SUMMARY REPORT CHART  ****************////
 function PopulateSummaryDeltaChart() {
 
-    //var axis = json.map(function (a) { return a["?E"]; });
-    //var axis = jsonDeltaEPrimaryPatchList.map(function (a) { return a.ΔE; });
-    //var patchColorList = formattedDeltaEPrimaryPatchList.map(function (a) { return a.name; });
-    var maxNum = Math.max.apply(Math, jsonSummaryValueList);
-    var maxValue = 0;
-    var marginValue = 1;
-    switch (true) {
-        case (maxNum < 5): maxValue = 5; marginValue = 1; break;
-        case (maxNum == 5): maxValue = 6; marginValue = 1; break;
-        case (maxNum >= 5 && maxNum < 10): maxValue = 10; marginValue = 2; break;
-        case (maxNum >= 10 && maxNum < 15): maxValue = 15; marginValue = 3; break;
-        case (maxNum >= 15 && maxNum < 20): maxValue = 20; marginValue = 5; break;
-        case (maxNum >= 20 && maxNum < 30): maxValue = 30; marginValue = 5; break;
-        case (maxNum >= 30): maxValue = 50; marginValue = 5; break;
-    }
+    var maxValue = Math.max.apply(Math, jsonSummaryValueList);
+    var maxLimit = Math.max.apply(Math, jsonSummaryLimitList);
+    var maxNum = 0;
+    maxNum = maxValue > maxLimit ? maxValue : maxLimit;
+    maxNum = Math.trunc(maxNum) + 1;
+    
 
     //generate the second stacked chart by max value
     var summarySeries = [];
@@ -3305,7 +3279,7 @@ function PopulateSummaryDeltaChart() {
 
         //set the stack chart(upper chart)
         var stack = {
-            value: maxValue - jsonSummaryValueList[i]
+            value: maxNum - jsonSummaryValueList[i]
         };
         stackedChart.push(stack);
     }
@@ -3440,8 +3414,8 @@ function PopulateSummaryDeltaChart() {
                 rotation: "auto",
                 font: "12px Arial,Helvetica,sans-serif"
             },
-            max: maxValue,
-            margin: marginValue
+            max: maxNum,
+            //margin: marginValue
         },
         //tooltip: {
         //    visible: true,
