@@ -96,7 +96,7 @@ var $hdnCurrentProjectLicenseType;
 var labelPrintXMLString = '';
 var labelPrintStatusIconString = '';
 var reportGradingPath = '';
-var reportCMYKDensityPath='';
+var reportCMYKDensityPath = '';
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -365,40 +365,8 @@ $(document).ready(function () {
         }
         else {
             apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
-            //if ($hdnVerification == 'True' || $hdnSync1DType == 'True') {
-            //    apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
-            //    apiParameter.AGrayBalanceChart = Get_A_BalanceChartImage();
-            //    apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
-
-            //    apiParameter.InkPaperLAB1Chart = Get_InkPaperChartLAB_OneChartImage();
-            //    apiParameter.InkPaperLAB2Chart = Get_InkPaperChartLAB_TwoChartImage();
-            //    apiParameter.InkPaperDansityChart = Get_InkPaperChartDansityChartImage();                
-            //}
-            //else {
-            //    apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
-            //}
         }
 
-        //$.ajax({
-        //    url: SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReport',
-        //    //url: SERVICE_BASE_URL + 'api/Report/ExportChartReport',
-        //    //data: {},
-        //    //data: JSON.stringify(chartContent),
-        //    data: JSON.stringify(apiParameter),
-        //    type: 'POST',
-        //    //dataType: 'json',
-        //    headers: {
-        //        "content-type": "application/json",
-        //    },
-        //    success: function (response) {
-        //        //console.log(response);
-        //        window.open(SERVICE_BASE_URL + response.data, "_blank");
-        //    },
-        //    error: function (xhr, errorType, exception) {
-        //        alert(exception);
-
-        //    }
-        //});                
         $.ajax({
             type: "POST",
             url: SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReport',
@@ -417,35 +385,6 @@ $(document).ready(function () {
                 console.log(XMLHttpRequest.responseText);
             }
         });
-
-
-        //kendo.ui.progress($('#tabstrip-7'), true);
-        //var request = new XMLHttpRequest();
-        //request.open("POST", SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReportTest', true);
-        //request.setRequestHeader("content-type", "application/json");
-        //request.responseType = "blob";
-        //request.onload = function (e) {
-
-        //    if (this.status === 200) {
-        //        // `blob` response
-        //        console.log(this.response);
-        //        // create `objectURL` of `this.response` : `.pdf` as `Blob`
-        //        var file = window.URL.createObjectURL(this.response);
-        //        var a = document.createElement("a");
-        //        a.href = file;
-        //        a.download = this.response.name || "AnalyzeReport.pdf";
-        //        document.body.appendChild(a);
-        //        a.click();
-        //        // remove `a` following `Save As` dialog, 
-        //        // `window` regains `focus`
-        //        window.onfocus = function () {
-        //            document.body.removeChild(a)
-        //        }
-        //        kendo.ui.progress($('#tabstrip-7'), false);
-        //    };
-        //};
-        //request.send(JSON.stringify(apiParameter));
-        //kendo.ui.progress($('#tabstrip-7'), false);
     });
 
 
@@ -457,7 +396,6 @@ $(document).ready(function () {
         kendoOptions.chartArea.height = 480;
 
         $chartTargetVersusActualABLarge.kendoChart(kendoOptions);
-        //$chartTargetVersusActualABLarge.render = renderChartWithBackgroundByAxis;
 
         $chartTargetVersusActualABLargeArea.kendoWindow({
             width: "600px",
@@ -556,27 +494,6 @@ function BindAllTabs() {
 
     //Bind gray(Gamut) charts
     BindGrayCharts();
-
-    //check the project type validation or not
-    //if ($hdnValidationType == 1) {
-
-    //    //Show tabs G7
-    //    $(tabStrip.items()[2]).show();
-
-    //    //Bind G7 charts
-    //    BindG7Charts();
-    //}
-
-    //check the project type Sync1D or Validation
-    //if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-
-    //    //Hide default tabs TVI
-    //    $(tabStrip.items()[4]).show();
-
-    //    //Bind TVI charts
-    //    //BindTVICharts();
-    //}
-
 
     //Bind current measurement patch details
     BindMeasurementPatchDetails();
@@ -701,7 +618,7 @@ function BindMeasurementSummary() {
                 alert(exception);
             }
         });
-        
+
 
     } else {
 
@@ -739,7 +656,7 @@ function BindMeasurementSummary() {
         });
     }
 
-    
+
 }
 
 ////**************** SET IMAGE ON LINK TO GENERATE REPORT  ****************////
@@ -771,13 +688,6 @@ function BindReportImage() {
 function BindMeasurementPatchDetails() {
 
     var measurementID = parseInt($hdnCurrentMeasurement.val());
-    //var apiParameters = {
-    //    MeasurementId: measurementID,
-    //    IsVerificationProject: $hdnVerification,
-    //    IsSync1DTypeProject: $hdnSync1DType,
-    //    metricSumID: '-1'
-    //};
-
 
     $divMeasurementPatchDetails.kendoGrid({
         dataSource: {
@@ -1738,10 +1648,18 @@ function PopulateAnalyzeChart() {
 
     var patchArray = [];
     if (analyzeSeriesResult.length > 0) {
-        //check last measurement
+
+        //check last measurement and make the last measurement as current in list
         if ($hdnCurrentMeasurement.val() == '') {
             $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
+        } else {
 
+            //check the current measurement is in current paging list if not then make the last measurement as current in list
+            if ($.inArray(parseInt($hdnCurrentMeasurement.val()), $.map(analyzeSeriesResult, function (e) {
+                return e.MeasurementId
+            })) < 0) {
+                $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
+            } 
         }
 
         //set name of the selected measurement in header lable
@@ -1749,6 +1667,7 @@ function PopulateAnalyzeChart() {
             $('#lblNewAnalyzeLabel').html($.grep(analyzeSeriesResult, function (e) { return e.MeasurementId == parseInt($hdnCurrentMeasurement.val()); })[0].MeasurementName);
         }
 
+        //create the list of measurement in chart
         measurementNamesList = $.map(analyzeSeriesResult, function (e) {
             var curObj = {
                 MeasurementId: e.MeasurementId,
@@ -1795,9 +1714,6 @@ function PopulateAnalyzeChart() {
                             data: [arr1Obj1[0].Δe2000],
                             color: arr1Obj1[0].HtmlColor,
                             PatchID: patchID
-                            //markers: {
-                            //    background: arr1Obj1[0].HtmlColor
-                            //}
                         }
 
                         patchArray.push(patchObj);
@@ -3364,7 +3280,7 @@ function PopulateSummaryDeltaChart() {
     var marginValue = 1;
     switch (true) {
         case (maxNum < 5): maxValue = 5; marginValue = 1; break;
-        case (maxNum == 5): maxValue = 6; marginValue = 1; break;        
+        case (maxNum == 5): maxValue = 6; marginValue = 1; break;
         case (maxNum >= 5 && maxNum < 10): maxValue = 10; marginValue = 2; break;
         case (maxNum >= 10 && maxNum < 15): maxValue = 15; marginValue = 3; break;
         case (maxNum >= 15 && maxNum < 20): maxValue = 20; marginValue = 5; break;
