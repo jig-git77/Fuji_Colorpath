@@ -140,6 +140,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FileHttpResponseMessage.cs" />
     <Compile Include="Models\GridFilters.cs" />
     <Compile Include="Models\ServerFilteringGrid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
