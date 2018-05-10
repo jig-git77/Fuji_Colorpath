@@ -761,10 +761,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             var stream = new FileStream(fullPath, FileMode.Open);
 
             // processing the stream.
-            var result = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StreamContent(stream)
-            };
+            var result = new FileHttpResponseMessage(fullPath);            
+            result.StatusCode = HttpStatusCode.OK;
+            result.Content = new StreamContent(stream);
             result.Content.Headers.ContentDisposition =
                 new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
                 {
@@ -781,6 +780,35 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
             return result;
         }
+
+        //[HttpGet]
+        //public HttpResponseMessage DownloadFile(string filePath)
+        //{
+        //    var fullPath = System.Web.Hosting.HostingEnvironment.MapPath(filePath);
+        //    var fileName = Path.GetFileName(fullPath);
+        //    var stream = new FileStream(fullPath, FileMode.Open);
+
+        //    // processing the stream.
+        //    var result = new HttpResponseMessage(HttpStatusCode.OK)
+        //    {
+        //        Content = new StreamContent(stream)
+        //    };
+        //    result.Content.Headers.ContentDisposition =
+        //        new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+        //        {
+        //            FileName = fileName
+        //        };
+        //    result.Content.Headers.ContentType =
+        //        new MediaTypeHeaderValue("application/octet-stream");
+
+        //    //stream.Close();
+        //    //GC.Collect();
+        //    //GC.WaitForPendingFinalizers();
+        //    //delete the file
+        //    //File.Delete(fullPath);
+
+        //    return result;
+        //}
 
 
         #region Methods for Patch Details tab

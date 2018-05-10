@@ -1216,13 +1216,13 @@ namespace FujifilmUSA.Sync.Common
                         if (IsValidation) //Only show Measurement Status in Validation mode in G7/ ISO / Default/ 4D
                         {
                             SBStr.Replace("###JobStatus###", Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() == "" ? "<tr class='row-2'><td class='row-title'>Meas. Status:</td><td class='row-content'>&nbsp;</td></tr>" : (Convert.ToString(DT.Rows[0]["JobStatus"]).Contains("OK")) ? "<tr class='row-2'><td class='row-title'>Meas. Status:</td><td class='row-content'>" + Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() + "</td></tr>" : "<tr class='row-2'><td class='row-title'  style='color:Red;'>Meas. Status:</td><td class='row-content'  style='color:Red;'>" + Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() + "</td></tr>");
-                            SBStr.Replace("###RunNo###", "&nbsp;");   //-----In validation report there is no run numbers-------//
+                            SBStr.Replace("(##RunNo##)", "&nbsp;");   //-----In validation report there is no run numbers-------//
                             SBStr.Replace("##ReportTitle##", "G7VAlignmentReportTitle");
                         }
                         else
                         {
                             SBStr.Replace("###JobStatus###", "&nbsp;");
-                            SBStr.Replace("###RunNo###", "(" + (Convert.ToString(DT.Rows[0]["RunName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["RunName"]).Trim()) + ")");
+                            SBStr.Replace("(##RunNo##)", "(" + (Convert.ToString(DT.Rows[0]["RunName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["RunName"]).Trim()) + ")");
                             SBStr.Replace("##ReportTitle##", "G7AlignmentReportTitle");
                         }
                         SBStr.Replace("###MetricPreset###", Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim());
