@@ -13,6 +13,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
     public partial class SpotColorPatchDetails {
         
         /// <summary>
+        /// hdnMeasurementID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnMeasurementID;
+        
+        /// <summary>
         /// divPatchDetailsRun0 control.
         /// </summary>
         /// <remarks>
@@ -461,23 +470,5 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMeasured_PredictedB;
-        
-        /// <summary>
-        /// chartPaper1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart chartPaper1;
-        
-        /// <summary>
-        /// chartPaper2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart chartPaper2;
     }
 }

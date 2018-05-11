@@ -42,13 +42,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             M_b = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["measuredB"])) ? 0 : Convert.ToDecimal(Request.QueryString["measuredB"]);
 
             MeasurementID = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["measurementID"])) ? 0 : Convert.ToInt32(Request.QueryString["measurementID"]);
-
+            hdnMeasurementID.Value = MeasurementID.ToString();
             htmlColor = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["htmlColor"])) ? "" : ("#" + Convert.ToString(Request.QueryString["htmlColor"]));
             Predicated_htmlColor = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["P_htmlColor"])) ? "" : ("#" + Convert.ToString(Request.QueryString["P_htmlColor"]));
             Measured_htmlColor = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["M_htmlColor"])) ? "" : ("#" + Convert.ToString(Request.QueryString["M_htmlColor"]));
 
             BindValues();
-            FillPaperChart(T_L, T_a, T_b, P_L, P_a, P_b, M_L, M_a, M_b, MeasurementID);
+            //FillPaperChart(T_L, T_a, T_b, P_L, P_a, P_b, M_L, M_a, M_b, MeasurementID);
         }
 
 
@@ -130,68 +130,68 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         }
 
         #region Fill Paper Chart
-        private void FillPaperChart(decimal Target_L, decimal Target_A, decimal Target_B, decimal Pre_L, decimal Pre_A, decimal Pre_B, decimal Measured_L, decimal Measured_A, decimal Measured_B, int measurementID)
-        {
-            //string FileName;
-            #region Fill Paper 1 Chart
+        //private void FillPaperChart(decimal Target_L, decimal Target_A, decimal Target_B, decimal Pre_L, decimal Pre_A, decimal Pre_B, decimal Measured_L, decimal Measured_A, decimal Measured_B, int measurementID)
+        //{
+        //    //string FileName;
+        //    #region Fill Paper 1 Chart
 
-            chartPaper1.Series["Red"].Points.Clear();
-            chartPaper1.Series["Green"].Points.Clear();
+        //    chartPaper1.Series["Red"].Points.Clear();
+        //    chartPaper1.Series["Green"].Points.Clear();
 
-            chartPaper1.Series["Red"].Points.AddXY(Convert.ToDouble(Target_A), Convert.ToDouble(Target_B));
-            //chartPaper1.Series["Red"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(0));
-            chartPaper1.Series["Red"].ChartType = SeriesChartType.Point;
-            chartPaper1.Series["Red"].Points[0].BorderWidth = 4;
-            chartPaper1.Series["Red"].CustomProperties = "PolarDrawingStyle=Marker";
+        //    chartPaper1.Series["Red"].Points.AddXY(Convert.ToDouble(Target_A), Convert.ToDouble(Target_B));
+        //    //chartPaper1.Series["Red"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(0));
+        //    chartPaper1.Series["Red"].ChartType = SeriesChartType.Point;
+        //    chartPaper1.Series["Red"].Points[0].BorderWidth = 4;
+        //    chartPaper1.Series["Red"].CustomProperties = "PolarDrawingStyle=Marker";
 
-            chartPaper1.Series["Green"].Points.AddXY(Convert.ToDouble(Pre_A), Convert.ToDouble(Pre_B));
-            //chartPaper1.Series["Green"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(0));
-            chartPaper1.Series["Green"].ChartType = SeriesChartType.Point;
-            chartPaper1.Series["Green"].Points[0].BorderWidth = 2;
-            chartPaper1.Series["Green"].CustomProperties = "PolarDrawingStyle=Marker";
+        //    chartPaper1.Series["Green"].Points.AddXY(Convert.ToDouble(Pre_A), Convert.ToDouble(Pre_B));
+        //    //chartPaper1.Series["Green"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(0));
+        //    chartPaper1.Series["Green"].ChartType = SeriesChartType.Point;
+        //    chartPaper1.Series["Green"].Points[0].BorderWidth = 2;
+        //    chartPaper1.Series["Green"].CustomProperties = "PolarDrawingStyle=Marker";
 
-            if (measurementID > 0)
-            {
-                chartPaper1.Series["Blue"].Points.AddXY(Convert.ToDouble(Measured_A), Convert.ToDouble(Measured_B));
-                chartPaper1.Series["Blue"].ChartType = SeriesChartType.Point;
-                chartPaper1.Series["Blue"].Points[0].BorderWidth = 2;
-                chartPaper1.Series["Blue"].CustomProperties = "PolarDrawingStyle=Marker";
-            }
-            else
-            {
-                chartPaper1.Series["Blue"].Enabled = false;
-            }
+        //    if (measurementID > 0)
+        //    {
+        //        chartPaper1.Series["Blue"].Points.AddXY(Convert.ToDouble(Measured_A), Convert.ToDouble(Measured_B));
+        //        chartPaper1.Series["Blue"].ChartType = SeriesChartType.Point;
+        //        chartPaper1.Series["Blue"].Points[0].BorderWidth = 2;
+        //        chartPaper1.Series["Blue"].CustomProperties = "PolarDrawingStyle=Marker";
+        //    }
+        //    else
+        //    {
+        //        chartPaper1.Series["Blue"].Enabled = false;
+        //    }
 
-            #endregion
+        //    #endregion
 
-            #region Fill Paper 2 chart
+        //    #region Fill Paper 2 chart
 
-            chartPaper2.Series["Red"].Points.Clear();
-            chartPaper2.Series["Green"].Points.Clear();
+        //    chartPaper2.Series["Red"].Points.Clear();
+        //    chartPaper2.Series["Green"].Points.Clear();
 
-            chartPaper2.Series["Red"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(Target_L));
-            chartPaper2.Series["Red"].ChartType = SeriesChartType.Point;
-            chartPaper2.Series["Red"].Points[0].BorderWidth = 4;
-            chartPaper2.Series["Red"].CustomProperties = "PolarDrawingStyle=Marker";
+        //    chartPaper2.Series["Red"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(Target_L));
+        //    chartPaper2.Series["Red"].ChartType = SeriesChartType.Point;
+        //    chartPaper2.Series["Red"].Points[0].BorderWidth = 4;
+        //    chartPaper2.Series["Red"].CustomProperties = "PolarDrawingStyle=Marker";
 
-            chartPaper2.Series["Green"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(Pre_L));
-            chartPaper2.Series["Green"].ChartType = SeriesChartType.Point;
-            chartPaper2.Series["Green"].Points[0].BorderWidth = 2;
-            chartPaper2.Series["Green"].CustomProperties = "PolarDrawingStyle=Marker";
+        //    chartPaper2.Series["Green"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(Pre_L));
+        //    chartPaper2.Series["Green"].ChartType = SeriesChartType.Point;
+        //    chartPaper2.Series["Green"].Points[0].BorderWidth = 2;
+        //    chartPaper2.Series["Green"].CustomProperties = "PolarDrawingStyle=Marker";
 
-            if (measurementID > 0)
-            {
-                chartPaper2.Series["Blue"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(Measured_L));
-                chartPaper2.Series["Blue"].ChartType = SeriesChartType.Point;
-                chartPaper2.Series["Blue"].Points[0].BorderWidth = 2;
-                chartPaper2.Series["Blue"].CustomProperties = "PolarDrawingStyle=Marker";
-            }
-            else
-            {
-                chartPaper1.Series["Blue"].Enabled = false;
-            }
-            #endregion
-        }
+        //    if (measurementID > 0)
+        //    {
+        //        chartPaper2.Series["Blue"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(Measured_L));
+        //        chartPaper2.Series["Blue"].ChartType = SeriesChartType.Point;
+        //        chartPaper2.Series["Blue"].Points[0].BorderWidth = 2;
+        //        chartPaper2.Series["Blue"].CustomProperties = "PolarDrawingStyle=Marker";
+        //    }
+        //    else
+        //    {
+        //        chartPaper1.Series["Blue"].Enabled = false;
+        //    }
+        //    #endregion
+        //}
     }
     #endregion
 }
