@@ -211,6 +211,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataTable();
         }
+        public SpotProjectChartSetting GetSpotTargetChartSettingDetails(int SpotProjectId)
+        {
+            return new SpotProjectChartSetting();
+        }
         #endregion
 
         #region ITaskBase Members

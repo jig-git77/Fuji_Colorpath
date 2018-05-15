@@ -49,24 +49,29 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     validationMessage = "Provided chart pages are insuffiecient.";
                     isValidParameter = false;
                 }
-                else if (!(param.Configurations.PatchWidth >= 15 && param.Configurations.PatchWidth < 30))
+                //else if (!(param.Configurations.PatchWidth >= 15 && param.Configurations.PatchWidth < 30))
+                else if (param.Configurations.PatchWidth <= 0)
                 {
-                    validationMessage = "Patch width should be between 15 and 30.";
+                    validationMessage = "Provided patch width are insuffiecient.";
                     isValidParameter = false;
                 }
-                else if (!(param.Configurations.PatchHeight >= 15 && param.Configurations.PatchHeight < 30))
+                //else if (!(param.Configurations.PatchHeight >= 15 && param.Configurations.PatchHeight < 30))
+                else if (param.Configurations.PatchHeight <= 0)
                 {
-                    validationMessage = "Patch height should be between 15 and 30.";
+                    validationMessage = "Provided patch height are insuffiecient.";
                     isValidParameter = false;
                 }
-                else if (!(param.Configurations.RowsPerChart >= 20 && param.Configurations.RowsPerChart < 30))
+
+                //else if (!(param.Configurations.RowsPerChart >= 20 && param.Configurations.RowsPerChart < 30))
+                else if (param.Configurations.RowsPerChart <= 0)
                 {
-                    validationMessage = "Rows per chart should be between 15 and 30.";
+                    validationMessage = "Provided rows per chart are insuffiecient.";
                     isValidParameter = false;
                 }
-                else if (!(param.Configurations.ColumsPerChart >= 20 && param.Configurations.ColumsPerChart < 30))
+                //else if (!(param.Configurations.ColumsPerChart >= 20 && param.Configurations.ColumsPerChart < 30))
+                else if (param.Configurations.ColumsPerChart <= 0)
                 {
-                    validationMessage = "Columns per chart should be between 15 and 30.";
+                    validationMessage = "Provided columns per chart are insuffiecient.";
                     isValidParameter = false;
                 }
                 else if (param.Configurations.Vgap <= 0)

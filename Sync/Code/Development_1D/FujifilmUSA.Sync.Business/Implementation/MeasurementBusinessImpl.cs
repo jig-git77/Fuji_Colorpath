@@ -2004,6 +2004,57 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dtPatchDetails;
         }
 
+        public SpotProjectChartSetting GetSpotTargetChartSettingDetails(int SpotProjectId)
+        {
+            var spotProjectChartSetting = new SpotProjectChartSetting();
+            List<SpotProjectChartSetting> listSetting = new List<SpotProjectChartSetting>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "[CPSpot].[GetSpotReferenceChartSetting]",
+                                new object[]
+                                        {
+                                            SpotProjectId
+                                        });
+                    listSetting =
+                        dsMeasurements.
+                            Tables[0].
+                            AsEnumerable().
+                            Select(x => new SpotProjectChartSetting()
+                            {
+                                SpotProjectChartSettingID = DataReader.ReadInt(x, "SpotProjectChartSettingID"),
+                                SpotProjectID = DataReader.ReadInt(x, "SpotProjectID"),
+                                ChartName = DataReader.ReadString(x, "ChartName"),
+                                NumOfRows = DataReader.ReadInt(x, "NumOfRows"),
+                                NumOfCols = DataReader.ReadInt(x, "NumOfCols"),
+                                ChartSizeX = DataReader.ReadDecimal(x, "ChartSizeX"),
+                                ChartSizeY = DataReader.ReadDecimal(x, "ChartSizeY"),
+                                PatchSizeX = DataReader.ReadDecimal(x, "PatchSizeX"),
+                                PatchSizeY = DataReader.ReadDecimal(x, "PatchSizeY"),
+                                FirstSample = DataReader.ReadString(x, "FirstSample"),
+                                ReadDirection = DataReader.ReadString(x, "ReadDirection"),
+                                ReadMode = DataReader.ReadString(x, "ReadMode"),
+                                Pages = DataReader.ReadInt(x, "Pages"),
+                                RowsPerPage = DataReader.ReadInt(x, "RowsPerPage"),
+                                ChartBorder = DataReader.ReadInt(x, "ChartBorder"),
+                                Vgap = DataReader.ReadInt(x, "Vgap"),
+                                Hgap = DataReader.ReadInt(x, "Hgap"),
+                                GapLeval = DataReader.ReadInt(x, "GapLeval"),
+                                PreviousL = DataReader.ReadInt(x, "PreviousL"),
+                                ChartRes = DataReader.ReadInt(x, "ChartRes")
+                            }).ToList();
+
+                    if (listSetting.Count > 0)
+                        spotProjectChartSetting = listSetting[0];
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetAnalyzeChartMeasurement"));
+            return spotProjectChartSetting;
+        }
+
         #endregion
 
         #region ITaskBase Members

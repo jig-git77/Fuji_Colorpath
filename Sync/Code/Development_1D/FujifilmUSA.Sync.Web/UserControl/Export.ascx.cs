@@ -102,8 +102,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         trAdvancedDownload.Visible = true;
                     }
                 }
-                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary && 
-                    (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 || 
+                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary &&
+                    (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 ||
                     (SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId == SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId)))
                 {
                     rbtnDetlaReflistClient.Items[1].Enabled = false;
@@ -220,44 +220,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 IccFileParams obj = new IccFileParams();
 
-                //if (dtPatchDetails.Rows.Count == 1872)
-                //{
-                obj.Configurations.NumberOfPatches = 1872;
-                obj.Configurations.ChartPages = 3;
-                obj.Configurations.PatchWidth = 27;
-                obj.Configurations.PatchHeight = 27;
-                obj.Configurations.ChartBorder = 40;
-                obj.Configurations.ChartSizeW = 0;
-                obj.Configurations.ChartSizeH = 0;
-                obj.Configurations.RowsPerChart = 24;
-                obj.Configurations.ColumsPerChart = 26;
-                obj.Configurations.Vgap = 2;
-                obj.Configurations.Hgap = 0;
-                obj.Configurations.GapLeval = 75;
-                obj.Configurations.PreviousL = 0;
-                obj.Configurations.ChartName = "Pantone Test Chart";
-                obj.Patches = wedge.listPatch;
-                //}
-
-                //else if (dtPatchDetails.Rows.Count == 48)
-                //{
-                //    obj.Configurations.NumberOfPatches = 48;
-                //    obj.Configurations.ChartPages = 1;
-                //    obj.Configurations.PatchWidth = 28;
-                //    obj.Configurations.PatchHeight = 28;
-                //    obj.Configurations.ChartBorder = 40;
-                //    obj.Configurations.ChartSizeW = 0;
-                //    obj.Configurations.ChartSizeH = 0;
-                //    obj.Configurations.RowsPerChart = 2;
-                //    obj.Configurations.ColumsPerChart = 24;
-                //    obj.Configurations.Vgap = 2;
-                //    obj.Configurations.Hgap = 2;
-                //    obj.Configurations.GapLeval = 75;
-                //    obj.Configurations.PreviousL = 0;
-                //    obj.Configurations.ChartName = "Spot Color Test Chart";
-                //    obj.Patches = wedge.listPatch;
-
-                //}
+                //get spot project chart setting
+                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
+                _presenterExport.GetSpotProjectChartSetting();
+                obj.Configurations.NumberOfPatches = (SpotProjectChartSetting.Pages * SpotProjectChartSetting.NumOfRows * SpotProjectChartSetting.NumOfCols);
+                obj.Configurations.ChartPages = SpotProjectChartSetting.Pages;
+                obj.Configurations.PatchWidth = Convert.ToInt32(SpotProjectChartSetting.PatchSizeX);
+                obj.Configurations.PatchHeight = Convert.ToInt32(SpotProjectChartSetting.PatchSizeY);
+                obj.Configurations.ChartBorder = SpotProjectChartSetting.ChartBorder;
+                obj.Configurations.ChartSizeW = Convert.ToInt32(SpotProjectChartSetting.ChartSizeX);
+                obj.Configurations.ChartSizeH = Convert.ToInt32(SpotProjectChartSetting.ChartSizeY);                
+                obj.Configurations.RowsPerChart = SpotProjectChartSetting.NumOfRows;
+                obj.Configurations.ColumsPerChart = SpotProjectChartSetting.NumOfCols;
+                obj.Configurations.Vgap = SpotProjectChartSetting.Vgap;
+                obj.Configurations.Hgap = SpotProjectChartSetting.Hgap;
+                obj.Configurations.GapLeval = SpotProjectChartSetting.GapLeval;
+                obj.Configurations.PreviousL = SpotProjectChartSetting.PreviousL;
+                obj.Configurations.ChartName = SpotProjectChartSetting.ChartName;
+                obj.Patches = wedge.listPatch;               
 
                 string BaseUri = Utilities.ReadConfigValue("BaseCpSpotChartPdfServiceURL");
                 string methodUrl = "api/Chart/GenerateFiles";
@@ -461,7 +441,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Business.Messages.CurveDataResponse CurveData { get; set; }
         public int SpotProjectId { get; set; }
         public DataTable dtPatchDetails { get; set; }
-
+        public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
         #endregion
 
 

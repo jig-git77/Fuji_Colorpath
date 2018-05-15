@@ -85,6 +85,7 @@
     <Compile Include="CPSpot\SpotProjectLibrary.cs" />
     <Compile Include="CPSpot\SpotTarget.cs" />
     <Compile Include="SpotAnalyze.cs" />
+    <Compile Include="SpotTargetChartSetting.cs" />
     <Compile Include="TempProjectInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
