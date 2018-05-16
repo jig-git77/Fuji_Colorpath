@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Helper\BinaryDataWriter.cs" />
     <Compile Include="Helper\ErrorLog.cs" />
+    <Compile Include="Helper\FileHttpResponseMessage.cs" />
     <Compile Include="Helper\LockBitmap.cs" />
     <Compile Include="Helper\PdfHelper.cs" />
     <Compile Include="Models\BaseResponse.cs" />
@@ -159,7 +160,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55089</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/FujiFilmUSA.Sync.Service</IISUrl>
+          <IISUrl>http://localhost/FujiFilmUSA.Sync.ServicePdf</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

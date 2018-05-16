@@ -229,7 +229,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 obj.Configurations.PatchHeight = Convert.ToInt32(SpotProjectChartSetting.PatchSizeY);
                 obj.Configurations.ChartBorder = SpotProjectChartSetting.ChartBorder;
                 obj.Configurations.ChartSizeW = Convert.ToInt32(SpotProjectChartSetting.ChartSizeX);
-                obj.Configurations.ChartSizeH = Convert.ToInt32(SpotProjectChartSetting.ChartSizeY);                
+                obj.Configurations.ChartSizeH = Convert.ToInt32(SpotProjectChartSetting.ChartSizeY);
                 obj.Configurations.RowsPerChart = SpotProjectChartSetting.NumOfRows;
                 obj.Configurations.ColumsPerChart = SpotProjectChartSetting.NumOfCols;
                 obj.Configurations.Vgap = SpotProjectChartSetting.Vgap;
@@ -237,21 +237,48 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 obj.Configurations.GapLeval = SpotProjectChartSetting.GapLeval;
                 obj.Configurations.PreviousL = SpotProjectChartSetting.PreviousL;
                 obj.Configurations.ChartName = SpotProjectChartSetting.ChartName;
-                obj.Patches = wedge.listPatch;               
+                obj.Patches = wedge.listPatch;
 
                 string BaseUri = Utilities.ReadConfigValue("BaseCpSpotChartPdfServiceURL");
                 string methodUrl = "api/Chart/GenerateFiles";
+
+                string zipFilPath = System.Web.HttpContext.Current.Server.MapPath("UploadFiles/ChartExports/");
+                if (!Directory.Exists(zipFilPath))
+                    Directory.CreateDirectory(zipFilPath);
+
                 using (HttpClient httpClient = new HttpClient())
                 {
                     StringContent content = new StringContent(JsonConvert.SerializeObject(obj), null, "application/json");
                     var result = httpClient.PostAsync(BaseUri + methodUrl, content).Result;
-                    var resultString = result.Content.ReadAsStringAsync().Result;
-                    var response = JsonConvert.DeserializeObject<BaseResponse<FileResponse>>(resultString);
+                    Stream contentStream = null;
+                    string zipFileName = "";
+                    if (result.IsSuccessStatusCode)
+                    {
+                        contentStream = result.Content.ReadAsStreamAsync().Result;
+                        zipFileName = result.Content.Headers.ContentDisposition.FileName;
 
-                    WebClient client = new WebClient();
-                    client.DownloadFile(response.Data.FilePath, System.Web.HttpContext.Current.Server.MapPath("UploadFiles/") + response.Data.FileName);
+                        using (var filestream = File.Create(zipFilPath + zipFileName))
+                        {
+                            contentStream.Seek(0, SeekOrigin.Begin);
+                            contentStream.CopyTo(filestream);
+                        }
+                        Utilities.DownloadExportFile(zipFilPath, zipFileName, zipFileName);
 
-                    Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), response.Data.FileName, response.Data.FileName);
+                        //========== Download File ==========//
+                        //System.IO.FileStream fs = System.IO.File.OpenRead(zipFilPath + zipFileName);
+                        //byte[] data = new byte[fs.Length];
+                        //fs.Read(data, 0, (int)fs.Length);
+                        //System.Web.HttpContext.Current.Response.Clear();
+                        //System.Web.HttpContext.Current.Response.ClearHeaders();
+
+                        //System.Web.HttpContext.Current.Response.AddHeader("Content-Type", "application/*");
+                        //System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=\"" + zipFileName + "\"");
+                        //System.Web.HttpContext.Current.Response.BinaryWrite(data);
+                        //System.Web.HttpContext.Current.Response.Flush();
+                        //if (File.Exists(zipFilPath + zipFileName))
+                        //    File.Delete(zipFilPath + zipFileName);
+                        //System.Web.HttpContext.Current.Response.End();                        
+                    }
                 }
             }
             else
