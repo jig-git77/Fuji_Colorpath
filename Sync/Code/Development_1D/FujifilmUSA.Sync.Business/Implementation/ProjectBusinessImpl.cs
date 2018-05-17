@@ -1495,12 +1495,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 SpotTargetID = DataReader.ReadShort(spotTarget, "SpotTargetID"),
                                 SpotTargetName = DataReader.ReadString(spotTarget, "SpotTargetName"),
                                 MeasurementMode = DataReader.ReadShort(spotTarget, "MeasurementMode"),
-                                OwnerName = DataReader.ReadString(spotTarget, "OwnerName"),
-                                Company = new Company()
-                                {
-                                    CompanyId = DataReader.ReadShort(spotTarget, "CompanyID"),
-                                    CompanyName = DataReader.ReadString(spotTarget, "CompanyName")
-                                }
+                                OwnerName = DataReader.ReadString(spotTarget, "OwnerName")
+                                //Company = new Company()
+                                //{
+                                //    CompanyId = DataReader.ReadShort(spotTarget, "CompanyID"),
+                                //    CompanyName = DataReader.ReadString(spotTarget, "CompanyName")
+                                //}
                             })).ToList();
                     }
                 },
