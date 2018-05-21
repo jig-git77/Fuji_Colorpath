@@ -285,7 +285,22 @@
                             </div>
                             <asp:Localize Text="Sync1D LAB TVI Density Values" runat="server" ID="Localize3"></asp:Localize>
                         </asp:LinkButton>                
-                    </div>        
+                    </div>  
+                    <div id="divSpotTargetSeparator" runat ="server" align="center" valign="bottom" style="float:left;">
+                        <img alt="" src="Images/admin-icon-divider.png" />
+                    </div>
+                  <div id="divSpotTarget" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
+                    <asp:LinkButton ID="lnkSpotTarget" runat="server"
+                        PostBackUrl="~/SpotTargetManagement.aspx" onclick="lnkSpotTarget_Click">                       
+                        <div>
+                            <asp:Image ID="Image10" runat="server" AlternateText="Spot Target"
+                                ImageUrl="~/Images/Reference-Chart.jpg" ToolTip="Spot Target" 
+                                meta:resourcekey="imgSpotTargetResource1" />
+                        </div>
+                        <asp:Localize runat="server" Text="Spot Target" ID="Localize4" 
+                          meta:resourcekey="locSpotTargetResource1"></asp:Localize>                    
+                    </asp:LinkButton>
+                </div>
                 </td>
             </tr>
                 

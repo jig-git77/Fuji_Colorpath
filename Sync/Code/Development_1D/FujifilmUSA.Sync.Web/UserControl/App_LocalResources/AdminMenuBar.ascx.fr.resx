@@ -162,4 +162,7 @@
   <data name="locPatchPresetResource1.Text" xml:space="preserve">
     <value>Patch Preset_fr</value>
   </data>
+  <data name="locSpotTargetResource1.Text" xml:space="preserve">
+    <value>Spot Target</value>
+  </data>
 </root>

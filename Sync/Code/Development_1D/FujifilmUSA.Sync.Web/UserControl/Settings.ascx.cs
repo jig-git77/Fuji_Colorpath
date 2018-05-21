@@ -114,5 +114,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("PatchPresetManagement.aspx");
         }
+
+        protected void lnkSpotTarget_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("SpotTargetManagement.aspx");
+        }
     }
 }

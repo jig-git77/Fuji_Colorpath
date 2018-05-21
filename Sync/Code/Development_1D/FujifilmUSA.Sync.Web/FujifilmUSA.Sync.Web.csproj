@@ -110,6 +110,7 @@
     <Content Include="AddPrintStandardType.aspx" />
     <Content Include="AddReferenceChart.aspx" />
     <Content Include="AddSourceProfile.aspx" />
+    <Content Include="AddSpotTarget.aspx" />
     <Content Include="AnalyzeMeasurement.aspx" />
     <Content Include="Analyze_SpotColor.aspx" />
     <Content Include="ApplicationConfiguration.aspx" />
@@ -2416,6 +2417,7 @@
     <Content Include="JS\MenuBar.js" />
     <Content Include="SourceProfileManagement.aspx" />
     <Content Include="SpotMeasurement.aspx" />
+    <Content Include="SpotTargetManagement.aspx" />
     <Content Include="Spot_Measurement.aspx" />
     <Content Include="Templates\HelloWorld.htm" />
     <Content Include="Templates\kendoPrepressSpotProjectPatch.htm" />
@@ -2440,6 +2442,7 @@
     <Content Include="UserControl\AddProject\ValidationSetup.ascx" />
     <Content Include="UserControl\AddReferenceChart.ascx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
+    <Content Include="UserControl\AddSpotTarget.ascx" />
     <Content Include="UserControl\AddUserManagement.ascx" />
     <Content Include="UserControl\AdminStatusbar.ascx" />
     <Content Include="UserControl\AddDeviceManagement.ascx" />
@@ -2480,6 +2483,7 @@
     <Content Include="UserControl\ReportSingleMeasurement.ascx" />
     <Content Include="UserControl\ReportSingleMeasurement_G7_Vali.ascx" />
     <Content Include="UserControl\SpotMeasurement.ascx" />
+    <Content Include="UserControl\SpotTargetManagement.ascx" />
     <Content Include="UserControl\Spot_Measurement.ascx" />
     <Content Include="UserControl\ValidationContainer.ascx" />
     <Content Include="UserControl\Permission.ascx" />
@@ -2775,6 +2779,13 @@
     </Compile>
     <Compile Include="AddSourceProfile.aspx.designer.cs">
       <DependentUpon>AddSourceProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddSpotTarget.aspx.cs">
+      <DependentUpon>AddSpotTarget.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddSpotTarget.aspx.designer.cs">
+      <DependentUpon>AddSpotTarget.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminMaster.Master.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
@@ -3217,6 +3228,13 @@
     <Compile Include="SpotMeasurement.aspx.designer.cs">
       <DependentUpon>SpotMeasurement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SpotTargetManagement.aspx.cs">
+      <DependentUpon>SpotTargetManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SpotTargetManagement.aspx.designer.cs">
+      <DependentUpon>SpotTargetManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Spot_Measurement.aspx.cs">
       <DependentUpon>Spot_Measurement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3292,6 +3310,13 @@
     </Compile>
     <Compile Include="UserControl\AddSourceProfile.ascx.designer.cs">
       <DependentUpon>AddSourceProfile.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddSpotTarget.ascx.cs">
+      <DependentUpon>AddSpotTarget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddSpotTarget.ascx.designer.cs">
+      <DependentUpon>AddSpotTarget.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddUserManagement.ascx.cs">
       <DependentUpon>AddUserManagement.ascx</DependentUpon>
@@ -3553,6 +3578,13 @@
     </Compile>
     <Compile Include="UserControl\SpotMeasurement.ascx.designer.cs">
       <DependentUpon>SpotMeasurement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SpotTargetManagement.ascx.cs">
+      <DependentUpon>SpotTargetManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SpotTargetManagement.ascx.designer.cs">
+      <DependentUpon>SpotTargetManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\Spot_Measurement.ascx.cs">
       <DependentUpon>Spot_Measurement.ascx</DependentUpon>
@@ -6237,7 +6269,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

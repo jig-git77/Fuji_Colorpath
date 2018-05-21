@@ -122,9 +122,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("AddLookupTVILABDensity.aspx");
         }
+        protected void lbtnSpotTarget_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("SpotTargetManagement.aspx");
+        }
+        #endregion
 
-        #endregion  
 
-       
     }
 }
