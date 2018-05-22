@@ -589,13 +589,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize Localize4;
         
         /// <summary>
-        /// txtOwner control.
+        /// txtDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOwner;
+        protected global::System.Web.UI.WebControls.TextBox txtDescription;
         
         /// <summary>
         /// trPaperScaling_4D control.

@@ -329,7 +329,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="4">
-                                        <asp:TextBox ID="txtOwner" runat="server" Width="100%" Height="50px"
+                                        <asp:TextBox ID="txtDescription" runat="server" Width="100%" Height="50px"
                                             TextMode="MultiLine" Enabled="False" ReadOnly="True"
                                             meta:resourcekey="txtOwnerDescriptionResource1"></asp:TextBox>
                                     </td>

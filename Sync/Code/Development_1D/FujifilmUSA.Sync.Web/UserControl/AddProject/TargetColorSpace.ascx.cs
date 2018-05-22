@@ -401,7 +401,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (ViewState[_vsSpotTarget] != null)
             {
-                txtOwner.Text = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).OwnerName;
+                txtDescription.Text = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).Description;
                 lblMeasMode.Text = "M" + ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).MeasurementMode;
             }
         }

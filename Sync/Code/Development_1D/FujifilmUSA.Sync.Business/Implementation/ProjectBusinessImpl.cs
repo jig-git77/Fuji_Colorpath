@@ -1495,7 +1495,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 SpotTargetID = DataReader.ReadShort(spotTarget, "SpotTargetID"),
                                 SpotTargetName = DataReader.ReadString(spotTarget, "SpotTargetName"),
                                 MeasurementMode = DataReader.ReadShort(spotTarget, "MeasurementMode"),
-                                OwnerName = DataReader.ReadString(spotTarget, "OwnerName")
+                                Description = DataReader.ReadString(spotTarget, "Description")
                                 //Company = new Company()
                                 //{
                                 //    CompanyId = DataReader.ReadShort(spotTarget, "CompanyID"),
@@ -1637,7 +1637,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             {
                                 SpotTargetID = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "SpotTargetID"),
                                 SpotTargetName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "SpotTargetName"),
-                                OwnerName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "OwnerName"),
+                                Description = DataReader.ReadString(dsProject.Tables[0].Rows[0], "Description"),
                                 MeasurementMode = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MeasurementMode")
                             }
                         };

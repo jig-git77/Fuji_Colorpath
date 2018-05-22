@@ -12,7 +12,7 @@ namespace FujifilmUSA.Sync.Entity.CPSpot
         public string SpotTargetName { get; set; }
         public Company Company { get; set; }
         public int MeasurementMode { get; set; }
-        public string OwnerName { get; set; }
-       // public List<CPSync1D.ProjectTargetLAB> PrintStandardLAB { get; set; }
+        public string Description { get; set; }
+        // public List<CPSync1D.ProjectTargetLAB> PrintStandardLAB { get; set; }
     }
 }
