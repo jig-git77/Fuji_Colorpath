@@ -100,6 +100,7 @@
     <Compile Include="PresenterTargetColorspace.cs" />
     <Compile Include="PresenterWebLogActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PresenterSpotTargetManagement.cs" />
     <Compile Include="ViewInterface\IViewAddMetricTargetPreset.cs" />
     <Compile Include="ViewInterface\IViewBrowserTest.cs" />
     <Compile Include="ViewInterface\IViewActivityPrintCondition.cs" />
@@ -130,6 +131,8 @@
     <Compile Include="ViewInterface\IViewReportGrading.cs" />
     <Compile Include="ViewInterface\IViewReportSingleMeasurement.cs" />
     <Compile Include="ViewInterface\IViewSourceProfile.cs" />
+    <Compile Include="ViewInterface\IViewAddSpotTarget.cs" />
+    <Compile Include="ViewInterface\IViewSpotTargetManagement.cs" />
     <Compile Include="ViewInterface\IViewUserManagement.cs" />
     <Compile Include="ViewInterface\IViewAddBranchManagement.cs" />
     <Compile Include="ViewInterface\IViewBranchManagement.cs" />

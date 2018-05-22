@@ -28,4 +28,14 @@ namespace FujifilmUSA.Sync.Entity
         public int PreviousL { get; set; }
         public int ChartRes { get; set; }
     }
+
+    [Serializable]
+    public class SpotTargetLAB
+    {
+        public short SpotID { get; set; }
+        public string SpotName { get; set; }
+        public decimal Target_L { get; set; }
+        public decimal Target_a { get; set; }
+        public decimal Target_b { get; set; }
+    }
 }

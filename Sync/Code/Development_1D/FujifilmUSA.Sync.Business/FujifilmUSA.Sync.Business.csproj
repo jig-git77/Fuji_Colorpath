@@ -72,6 +72,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Implementation\SourceProfileBusinessImpl.cs" />
+    <Compile Include="Implementation\SpotTargetBusinessImpl.cs" />
     <Compile Include="Implementation\UserBusinessImpl.cs" />
     <Compile Include="Implementation\ActivityValidationRuleBusinessImpl.cs" />
     <Compile Include="Interface\IApplicationConfigurationBusiness.cs" />
@@ -90,6 +91,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interface\ISourceProfileBusiness.cs" />
+    <Compile Include="Interface\ISpotTargetBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />
     <Compile Include="Interface\IUserBusiness.cs" />
     <Compile Include="Interface\IActivityValidationRuleBusiness.cs" />
@@ -114,6 +116,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Mock\SourceProfileBusinessMock.cs" />
+    <Compile Include="Mock\SpotTargetBusinessMock.cs" />
     <Compile Include="Mock\UserBusinessImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\ProfilerService\Reference.cs">
