@@ -1,4 +1,5 @@
-﻿using FujifilmUSA.Sync.Entity.CPSpot;
+﻿using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity.CPSpot;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System;
@@ -15,8 +16,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Declaration
         private PresenterSpotTargetManagement _presenterSpotTarget;
+        public string SpotTargetManagement_DeleteSpot_Confirmation
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("SpotTargetManagement_DeleteSpot_Confirmation");
+            }
+        }
         #endregion
-
+        
         #region Page Events
         protected override void OnInit(EventArgs e)
         {
@@ -49,25 +57,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Control Events
         protected void rgSpotTarget_ItemCommand(object sender, GridCommandEventArgs e)
-        {
-            //ReferenceChartType = new Entity.ReferenceChartType();
-            //switch (e.CommandName)
-            //{
-            //    case "ClearFilter":
-            //        foreach (GridColumn column in rgRefChart.MasterTableView.Columns)
-            //        {
-            //            column.CurrentFilterFunction = GridKnownFunction.NoFilter;
-            //            column.CurrentFilterValue = string.Empty;
-            //        }
-            //        rgRefChart.MasterTableView.FilterExpression = string.Empty;
-            //        rgRefChart.MasterTableView.Rebind();
-            //        break;
-            //    case "Edit":
-            //        ReferenceChartType.ReferenceChartTypeId = (short)Convert.ToInt32(e.CommandArgument);
-            //        string parms = Service.Common.Encryption.CryptHelper.EncryptString(ReferenceChartType.ReferenceChartTypeId.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
-            //        Response.Redirect("AddReferenceChart.aspx?RefChartId=" + ContentEncoder.Encode(parms));
-            //        break;
-            //}
+        {            
+            switch (e.CommandName)
+            {
+                case "ClearFilter":
+                    foreach (GridColumn column in rgSpotTarget.MasterTableView.Columns)
+                    {
+                        column.CurrentFilterFunction = GridKnownFunction.NoFilter;
+                        column.CurrentFilterValue = string.Empty;
+                    }
+                    rgSpotTarget.MasterTableView.FilterExpression = string.Empty;
+                    rgSpotTarget.MasterTableView.Rebind();
+                    break;
+                case "Delete":
+                    SpotTargetID = Convert.ToInt32(e.CommandArgument);
+                    _presenterSpotTarget.DeleteSpotTarget();
+                    break;
+                case "Edit":
+                    SpotTargetID = Convert.ToInt32(e.CommandArgument);
+                    string parms = Service.Common.Encryption.CryptHelper.EncryptString(SpotTargetID.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
+                    Response.Redirect("AddSpotTarget.aspx?SpotTargetId=" + ContentEncoder.Encode(parms));
+                    break;
+            }
         }
         protected void rgSpotTarget_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
@@ -87,6 +98,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region IViewSpotTargetManagement Members
         //public SpotMeasurement ReferenceChartType { get; set; }
+        public int SpotTargetID { get; set; }
         public List<SpotTarget> SpotTargetList { get; set; }
         #endregion
     }

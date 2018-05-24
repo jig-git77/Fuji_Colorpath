@@ -1,4 +1,5 @@
-﻿using FujifilmUSA.Sync.Entity.CPSpot;
+﻿using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Entity.CPSpot;
 using System;
 using System.Collections.Generic;
 using System.Linq;

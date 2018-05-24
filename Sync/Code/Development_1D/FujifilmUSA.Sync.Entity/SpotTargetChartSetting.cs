@@ -37,5 +37,6 @@ namespace FujifilmUSA.Sync.Entity
         public decimal Target_L { get; set; }
         public decimal Target_a { get; set; }
         public decimal Target_b { get; set; }
+        public string HTMLColor { get; set; }
     }
 }

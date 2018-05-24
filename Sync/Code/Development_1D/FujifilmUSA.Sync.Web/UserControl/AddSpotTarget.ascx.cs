@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Telerik.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -18,6 +19,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Private Variables - Globalization
         private const string _recSelectCompany = "selectCompanyText";
         private const string _recPlzSelectCompany = "plzSelectCompany";
+        private const string _recEditSpotTarget = "editSpotTarget";                
         private const string vsChartData = "_vsChartData";
         #endregion
 
@@ -27,7 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public AddSpotTarget()
         {
-            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            //this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
         }
 
         #region Page Events
@@ -40,6 +42,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (Page.IsPostBack) return;
             Bindcompany();
+            if (Request.QueryString["SpotTargetId"] != null)
+            {
+                var SpotTargetId = Request.QueryString["SpotTargetId"];
+                var id = ContentEncoder.Decode(Service.Common.Encryption.CryptHelper.DecryptString(SpotTargetId, FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey));
+                int _SpotTargetId;
+                if (Int32.TryParse(id, out _SpotTargetId))
+                {
+                    lblHeader.Text = GetResourceString(_recEditSpotTarget);//"Edit Spot Target";
+                    LoadSpotTarget(_SpotTargetId);
+                }
+            }
         }
         #endregion
 
@@ -83,7 +96,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             #region Converts row to ReferenceChart Object
                             short sampleId;
                             decimal lab;
-                            //SampleID
+                            //SpotID
                             if (short.TryParse(dataRow[0], out sampleId))
                             {
                                 chartDataRow.SpotID = sampleId;
@@ -93,7 +106,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
                             }
 
-                            //SampleName
+                            //SpotName
                             if (!string.IsNullOrEmpty(dataRow[1]))
                             {
                                 chartDataRow.SpotName = dataRow[1];
@@ -103,7 +116,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnEmptyValueOnRow"), rows));
                             }
 
-                            //CMYK_C
+                            //Target L
                             if (decimal.TryParse(dataRow[2], out lab))
                             {
                                 chartDataRow.Target_L = lab;
@@ -113,7 +126,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
                             }
 
-                            //CMYK_M
+                            //Target a
                             if (decimal.TryParse(dataRow[3], out lab))
                             {
                                 chartDataRow.Target_a = lab;
@@ -123,7 +136,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
                             }
 
-                            //CMYK_Y
+                            //Target b
                             if (decimal.TryParse(dataRow[4], out lab))
                             {
                                 chartDataRow.Target_b = lab;
@@ -131,7 +144,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             else
                             {
                                 throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
-                            }                                                       
+                            }
+
                             #endregion
                             refChartImportData.Add(chartDataRow);
                         }
@@ -155,6 +169,65 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 rgChartData.DataSource = ViewState[vsChartData];
             }
         }
+        protected void lbtnSave_Click(object sender, EventArgs e)
+        {
+            SpotTarget = new SpotTarget();
+            SpotTarget.Company = new Company();            
+            SpotTarget.Company.CompanyId = cmbCompany.SelectedValue==""?-1:Convert.ToInt32(cmbCompany.SelectedValue);
+            SpotTarget.SpotTargetName = txtSpotTargetName.Text;
+            SpotTarget.Description = txtDescription.Text;
+            SpotTarget.IsUsed = chkIsUsed.Checked;
+
+            SpotTarget.spotTargetSetting = new SpotProjectChartSetting();
+            SpotTarget.spotTargetSetting.ChartName = txtChartName.Text;
+            SpotTarget.spotTargetSetting.NumOfRows = Convert.ToInt32(txtNumOfRows.Text);
+            SpotTarget.spotTargetSetting.NumOfCols = Convert.ToInt32(txtNumOfCols.Text);
+            SpotTarget.spotTargetSetting.ChartSizeX= Convert.ToDecimal(txtChartSizeX.Text);
+            SpotTarget.spotTargetSetting.ChartSizeY = Convert.ToDecimal(txtChartSizeY.Text);
+            SpotTarget.spotTargetSetting.PatchSizeX = Convert.ToDecimal(txtPatchSizeX.Text);
+            SpotTarget.spotTargetSetting.PatchSizeY = Convert.ToDecimal(txtPatchSizeY.Text);
+            SpotTarget.spotTargetSetting.FirstSample = "TopLeft";
+            SpotTarget.spotTargetSetting.ReadDirection = "LeftToRight";
+            SpotTarget.spotTargetSetting.ReadMode = "Strip";
+            SpotTarget.spotTargetSetting.Pages = Convert.ToInt32(txtPages.Text);
+            SpotTarget.spotTargetSetting.RowsPerPage = Convert.ToInt32(txtRowsPerPage.Text);
+            SpotTarget.spotTargetSetting.ChartBorder= Convert.ToInt32(txtChartBorder.Text);
+            SpotTarget.spotTargetSetting.Vgap = Convert.ToInt32(txtVgap.Text);
+            SpotTarget.spotTargetSetting.Hgap= Convert.ToInt32(txtHgap.Text);
+            SpotTarget.spotTargetSetting.GapLeval= Convert.ToInt32(txtGapLevel.Text);
+            SpotTarget.spotTargetSetting.PreviousL = Convert.ToInt32(txtPreviousL.Text);
+            SpotTarget.spotTargetSetting.ChartRes = Convert.ToInt32(txtChartRes.Text);
+            
+
+            if (hdnSpotTargetID.Value == "0")
+            {
+                if (ViewState[vsChartData] != null)
+                {
+                    SpotTarget.spotTargetLab = ((List<SpotTargetLAB>)ViewState[vsChartData]).
+                                                             Select(x => new SpotTargetLAB()
+                                                             {
+                                                                 SpotID = x.SpotID,
+                                                                 SpotName = x.SpotName,
+                                                                 Target_L = x.Target_L,
+                                                                 Target_a = x.Target_a,
+                                                                 Target_b = x.Target_b
+                                                                 //HTMLColor = x.HTMLColor
+                                                             }).ToList();
+
+                    _presenterSpotTarget.SaveSpotTarget();
+                    if (IsErrorOccured) return;
+                    Response.Redirect("SpotTargetManagement.aspx");
+                }
+            }
+            else
+            {
+                SpotTarget.SpotTargetID = Convert.ToInt32(hdnSpotTargetID.Value);
+                _presenterSpotTarget.UpdateSpotTarget();
+                if (IsErrorOccured) return;
+                Response.Redirect("SpotTargetManagement.aspx");
+            }
+
+        }
         #endregion
 
         #region Methods
@@ -170,6 +243,37 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbCompany.DataSource = Compnaies;
                 cmbCompany.DataBind();
                 cmbCompany.Items.Insert(0, new ListItem(GetResourceString(_recSelectCompany), string.Empty));//--Select Company--
+            }
+        }
+        private void LoadSpotTarget(int SpotTargetId)
+        {
+            SpotTarget = new SpotTarget { SpotTargetID = SpotTargetId };
+            _presenterSpotTarget.GetSpotTarget();
+            if (!IsErrorOccured)
+            {
+                Tr_UploadData.Visible = false;
+                hdnSpotTargetID.Value = Convert.ToString(SpotTargetId);
+                cmbCompany.SelectedValue = Convert.ToString(SpotTarget.Company.CompanyId);
+                txtSpotTargetName.Text = SpotTarget.SpotTargetName.ToString();
+                txtDescription.Text = SpotTarget.Description.ToString();
+
+                txtChartName.Text = SpotTarget.spotTargetSetting.ChartName.ToString();
+                txtNumOfRows.Text = SpotTarget.spotTargetSetting.NumOfRows.ToString();
+                txtNumOfCols.Text = SpotTarget.spotTargetSetting.NumOfCols.ToString();
+                txtChartSizeX.Text = SpotTarget.spotTargetSetting.ChartSizeX.ToString();
+                txtChartSizeY.Text = SpotTarget.spotTargetSetting.ChartSizeY.ToString();
+                txtPatchSizeX.Text = SpotTarget.spotTargetSetting.PatchSizeX.ToString();
+                txtPatchSizeY.Text = SpotTarget.spotTargetSetting.PatchSizeY.ToString();
+                txtPages.Text = SpotTarget.spotTargetSetting.Pages.ToString();
+                txtRowsPerPage.Text = SpotTarget.spotTargetSetting.RowsPerPage.ToString();
+
+                txtChartBorder.Text = SpotTarget.spotTargetSetting.ChartBorder.ToString();
+                txtVgap.Text = SpotTarget.spotTargetSetting.Vgap.ToString();
+                txtHgap.Text = SpotTarget.spotTargetSetting.Hgap.ToString();
+                txtGapLevel.Text = SpotTarget.spotTargetSetting.GapLeval.ToString();
+                txtPreviousL.Text = SpotTarget.spotTargetSetting.PreviousL.ToString();
+                txtChartRes.Text = SpotTarget.spotTargetSetting.ChartRes.ToString();
+                chkIsUsed.Checked = (SpotTarget.IsUsed == true ? true : false);
             }
         }
         #endregion

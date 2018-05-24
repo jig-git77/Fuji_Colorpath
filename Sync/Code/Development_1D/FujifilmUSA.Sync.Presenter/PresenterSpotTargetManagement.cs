@@ -28,11 +28,35 @@ namespace FujifilmUSA.Sync.Presenter
             spotBusiness.ErrorOccured += _viewSpotTargetManagement.ErrorOccured;
             _viewSpotTargetManagement.SpotTargetList = spotBusiness.GetSpotTargetList(0, _viewSpotTargetManagement.CurrentUserId);
         }
+        public void SaveSpotTarget()
+        {
+            var spotBusiness = BusinessFactory<ISpotTargetBusiness>.CreateObject();
+            spotBusiness.ErrorOccured += _viewAddSpotTarget.ErrorOccured;
+            spotBusiness.CreateSpotTarget(_viewAddSpotTarget.SpotTarget);
+        }
+        public void GetSpotTarget()
+        {
+            var spotBusiness = BusinessFactory<ISpotTargetBusiness>.CreateObject();
+            spotBusiness.ErrorOccured += _viewAddSpotTarget.ErrorOccured;
+            _viewAddSpotTarget.SpotTarget = spotBusiness.GetSpotTarget(_viewAddSpotTarget.SpotTarget.SpotTargetID);
+        }
+        public void UpdateSpotTarget()
+        {
+            var spotBusiness = BusinessFactory<ISpotTargetBusiness>.CreateObject();
+            spotBusiness.ErrorOccured += _viewAddSpotTarget.ErrorOccured;
+            spotBusiness.UpdateSpotTarget(_viewAddSpotTarget.SpotTarget);
+        }
         public void GetCompanies()
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddSpotTarget.ErrorOccured;
             _viewAddSpotTarget.Compnaies = miscDataBusiness.GetCompanyList(_viewAddSpotTarget.CurrentUserId);
+        }
+        public void DeleteSpotTarget()
+        {
+            var spotBusiness = BusinessFactory<ISpotTargetBusiness>.CreateObject();
+            spotBusiness.ErrorOccured += _viewSpotTargetManagement.ErrorOccured;
+            spotBusiness.DeleteSpotTarget(_viewSpotTargetManagement.SpotTargetID);
         }
     }
 }

@@ -14,7 +14,9 @@
     <div class="clear">
     </div>
     <div style="margin-left: 0px;">
-        <center><center>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <center><center>
             <fieldset style="width: 92%;">
             <legend>
                         <asp:Label ID="lblHeader" runat="server" Text="Spot Target Chart" 
@@ -396,7 +398,7 @@
                                     <td align="right">
                                         <span style="font-weight: bold;"><asp:Localize runat="server" 
                                             Text="Hgap" ID="locHgapResource" 
-                                            meta:resourcekey="locVgapResource1"></asp:Localize><span style="color: Red;">*</span>
+                                            meta:resourcekey="locHgapResource1"></asp:Localize><span style="color: Red;">*</span>
                                         </span>
                                     </td>
                                     <td>
@@ -629,7 +631,7 @@
                             <td align="left">
                                 <div class="text">
                                     <div style="padding-left: 3px;">
-                                        <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" ValidationGroup="vgAddSpotTarget">
+                                        <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" ValidationGroup="vgAddSpotTarget" OnClick="lbtnSave_Click">
                                                     <span> <asp:Localize runat="server" Text="Save" ID="locSave" 
                                             meta:resourcekey="locSaveResource1" ></asp:Localize> 
                                              </span>
@@ -651,6 +653,11 @@
                 </table>
                 </fieldset>
         </center></center>
+            </ContentTemplate>
+            <Triggers>
+                <asp:PostBackTrigger ControlID="lbtnSave" />
+            </Triggers>
+        </asp:UpdatePanel>
     </div>
 </div>
 <div class="admin_bottom">

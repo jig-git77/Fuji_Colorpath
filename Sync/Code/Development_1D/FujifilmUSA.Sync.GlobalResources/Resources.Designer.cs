@@ -3598,6 +3598,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete selected source target?.
+        /// </summary>
+        internal static string SpotTargetManagement_DeleteSpot_Confirmation {
+            get {
+                return ResourceManager.GetString("SpotTargetManagement_DeleteSpot_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Target.
         /// </summary>
         internal static string targetText {

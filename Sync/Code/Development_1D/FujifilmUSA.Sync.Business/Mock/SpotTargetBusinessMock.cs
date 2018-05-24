@@ -14,7 +14,22 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<SpotTarget>();
         }
-
+        public int CreateSpotTarget(SpotTarget spotTarget)
+        {
+            return 0;
+        }
+        public SpotTarget GetSpotTarget(int SpotTargetID)
+        {
+            return new SpotTarget();
+        }
+        public int UpdateSpotTarget(SpotTarget spotTarget)
+        {
+            return 0;
+        }
+        public bool DeleteSpotTarget(int spotTargetId)
+        {
+            return false;
+        }
         #region ITaskBase Members
 
         public event ErrorHandler ErrorOccured;

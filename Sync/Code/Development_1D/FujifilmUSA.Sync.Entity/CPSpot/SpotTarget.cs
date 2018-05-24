@@ -14,6 +14,7 @@ namespace FujifilmUSA.Sync.Entity.CPSpot
         public int MeasurementMode { get; set; }
         public string Description { get; set; }
         public bool IsUsed { get; set; }
-        // public List<CPSync1D.ProjectTargetLAB> PrintStandardLAB { get; set; }
+        public SpotProjectChartSetting spotTargetSetting {get;set;}
+        public List<SpotTargetLAB> spotTargetLab { get; set; }
     }
 }

@@ -77,6 +77,18 @@
      }
     
 </style>
+<telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+    <script type="text/javascript" language="javascript">
+        function ConfirmDeleteSpotTarget() {
+            if (confirm('<%= SpotTargetManagement_DeleteSpot_Confirmation %>')) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
+</telerik:RadCodeBlock>
 <div class="admin_top">
     &nbsp;
 </div>
@@ -179,7 +191,7 @@
                                                 </div>
                                                 <div style="float: left;">
                                                     <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Spot Target" AlternateText="Delete"
-                                                        ImageUrl="../Images/delete_icon.png" OnClientClick="javascript:return ConfirmDeleteUser()"
+                                                        ImageUrl="../Images/delete_icon.png" OnClientClick="javascript:return ConfirmDeleteSpotTarget()"
                                                         CommandArgument='<%# Eval("SpotTargetID") %>' CommandName="Delete" 
                                                         meta:resourcekey="imgbtnDeleteResource1" />
                                                 </div>

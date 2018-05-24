@@ -1350,4 +1350,7 @@
   <data name="locLabelTol" xml:space="preserve">
     <value>Tol.</value>
   </data>
+  <data name="SpotTargetManagement_DeleteSpot_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete selected source target?</value>
+  </data>
 </root>
