@@ -199,7 +199,7 @@
     <value>Total Rows</value>
   </data>
   <data name="locUploadChartDataResource1.Text" xml:space="preserve">
-    <value>Upload Chart Data (SAMPLEID, SAMPLE_NAME, CMYK_C, CMYK_M, CMYK_Y, CMYK_K, HTML_RGB)</value>
+    <value>Upload Chart Data (SpotID,SpotName,Target_L*,Target_a*,Target_b*)</value>
   </data>
   <data name="locVgapResource1.Text" xml:space="preserve">
     <value>Vertical Gap</value>

@@ -376,6 +376,9 @@ $(document).ready(function () {
                             isnotempty: "Is not empty",
                         }
                     },
+                },
+                attributes: {
+                    style: "word-break: break-all;"
                 }
             },
             {
@@ -397,6 +400,9 @@ $(document).ready(function () {
                             isnotempty: "Is not empty",
                         }
                     },
+                },
+                attributes: {
+                    style: "word-break: break-all;"
                 }
             },
             {
@@ -418,6 +424,9 @@ $(document).ready(function () {
                             isnotempty: "Is not empty",
                         }
                     },
+                },
+                attributes: {
+                    style: "word-break: break-all;"
                 }
             },
             {
@@ -439,6 +448,9 @@ $(document).ready(function () {
                             isnotempty: "Is not empty",
                         }
                     },
+                },
+                attributes: {
+                    style: "word-break: break-all;"
                 }
             },
             {

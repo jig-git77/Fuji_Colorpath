@@ -29,7 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public AddSpotTarget()
         {
-            //this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
         }
 
         #region Page Events

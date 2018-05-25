@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SpotTargetManagement.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.SpotTargetManagement" %>
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="SpotTargetManagement.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.SpotTargetManagement" %>
 <style type="text/css">
     div.RadGrid .rgRow
     {

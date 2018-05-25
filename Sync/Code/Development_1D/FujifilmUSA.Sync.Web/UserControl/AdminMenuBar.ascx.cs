@@ -35,6 +35,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnPatchPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance);
                 lbtnPrintStandardType.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType);
                 lbtnLookupTVILABDensity.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSync1DTVILABDensity);
+                lbtnSpotTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSpotTarget);
             }
         }
         #endregion

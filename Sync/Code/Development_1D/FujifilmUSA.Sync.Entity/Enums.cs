@@ -219,7 +219,9 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ERolePermission_ManageActivityValidationRules")] //Manage Activity Validation Rules
         ManageActivityValidationRules = 17,
         [Description("ERolePermission_ManageDeviceProfileSettings")] //Manage Device Profiler Settings
-        ManageDeviceProfileSettings = 18
+        ManageDeviceProfileSettings = 18,
+        [Description("ERolePermission_ManageSpotTarget")] //Manage Spot Target/Brand Color Optimization
+        ManageSpotTarget = 19
     }
     public enum ECurrentProjectStatus
     {

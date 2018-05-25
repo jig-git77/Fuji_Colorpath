@@ -1,7 +1,15 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddSpotTarget.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.AddSpotTarget" %>
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="AddSpotTarget.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.AddSpotTarget" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
+<script type="text/javascript">
+    function submitFile(sender, e) {
+        //alert(1);
+        //$("#<%= lbtnUploadChartData.ClientID %>").click();
+        //$("<%= lbtnUploadChartData.ClientID %>").click();
+        //document.getElementById('<%# lbtnUploadChartData.ClientID %>').click();
+    }
+</script>
 <div class="admin_top">
     &nbsp;
 </div>
@@ -26,7 +34,7 @@
                         Visible="False" />
             <table width="98%">   
                         <tr>
-                            <td align="right">
+                            <td align="right" style="width: 350px;">
                                 <span style="font-weight: bold;"><asp:Localize Text="Spot Target Name" runat="server" 
                                     ID="locSpotTargetName" meta:resourcekey="locSpotTargetResource1"></asp:Localize><span style="color: Red;">*</span> </span>
                             </td>
@@ -61,7 +69,7 @@
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:DropDownList ID="cmbCompany" runat="server" Width="370px" CssClass="select"
+                                        <asp:DropDownList ID="cmbCompany" runat="server" Width="400px" CssClass="select"
                                             AutoPostBack="True"                                             
                                             meta:resourcekey="cmbCompanyResource1">
                                         </asp:DropDownList>
@@ -87,8 +95,8 @@
                             <td align="left">
                                 <div style="float: left;"> 
                                                                
-                                    <asp:TextBox ID="txtDescription" runat="server" MaxLength="27" Width="400px" Columns="20" Rows="3"
-                                        Height="19px"></asp:TextBox>
+                                    <asp:TextBox ID="txtDescription" runat="server" MaxLength="27" Width="400px" Columns="20" Rows="3" TextMode="MultiLine"
+                                        Height="50px"></asp:TextBox>
                                 </div>
                                 <div style="float: left">
                                    <%-- <asp:RequiredFieldValidator ID="rfvChartName" runat="server" Display="Dynamic" ControlToValidate="txtChartName"
@@ -191,7 +199,7 @@
                             <td align="left">
                                 <div style="float: left;">
                                     <telerik:RadNumericTextBox ID="txtChartSizeX" runat="server" Width="100px" Height="16px"
-                                        MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
+                                        MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="1" Culture="en-US" LabelWidth="">
                                     </telerik:RadNumericTextBox>
                                 </div>
                                 <div style="float: left">
@@ -218,7 +226,7 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <telerik:RadNumericTextBox ID="txtChartSizeY" runat="server" Width="100px" Height="16px"
-                                                MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
+                                                MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="1" Culture="en-US" LabelWidth="">
                                             </telerik:RadNumericTextBox>
                                         </div>
                                         <div style="float: left">
@@ -245,7 +253,7 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <telerik:RadNumericTextBox ID="txtPatchSizeX" runat="server" Width="100px" Height="16px"
-                                                MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
+                                                MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="1" Culture="en-US" LabelWidth="">
                                             </telerik:RadNumericTextBox>
                                         </div>
                                         <div style="float: left">
@@ -272,7 +280,7 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <telerik:RadNumericTextBox ID="txtPatchSizeY" runat="server" Width="100px" Height="16px"
-                                                MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
+                                                MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="1" Culture="en-US" LabelWidth="">
                                             </telerik:RadNumericTextBox>
                                         </div>
                                         <div style="float: left">
@@ -353,7 +361,7 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <telerik:RadNumericTextBox ID="txtChartBorder" runat="server" Width="100px" Height="16px"
-                                                MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
+                                                MaxValue="500" MinValue="0" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
                                             </telerik:RadNumericTextBox>
                                         </div>
                                         <div style="float: left">
@@ -380,7 +388,7 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <telerik:RadNumericTextBox ID="txtVgap" runat="server" Width="100px" Height="16px"
-                                                MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
+                                                MaxValue="500" MinValue="0" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
                                             </telerik:RadNumericTextBox>
                                         </div>
                                         <div style="float: left">
@@ -407,7 +415,7 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <telerik:RadNumericTextBox ID="txtHgap" runat="server" Width="100px" Height="16px"
-                                                MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
+                                                MaxValue="500" MinValue="0" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
                                             </telerik:RadNumericTextBox>
                                         </div>
                                         <div style="float: left">
@@ -434,7 +442,7 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <telerik:RadNumericTextBox ID="txtGapLevel" runat="server" Width="100px" Height="16px"
-                                                MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
+                                                MaxValue="500" MinValue="0" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
                                             </telerik:RadNumericTextBox>
                                         </div>
                                         <div style="float: left">
@@ -461,7 +469,7 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <telerik:RadNumericTextBox ID="txtPreviousL" runat="server" Width="100px" Height="16px"
-                                                MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
+                                                MaxValue="500" MinValue="0" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
                                             </telerik:RadNumericTextBox>
                                         </div>
                                         <div style="float: left">
@@ -488,7 +496,7 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <telerik:RadNumericTextBox ID="txtChartRes" runat="server" Width="100px" Height="16px"
-                                                MaxValue="500" MinValue="1" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
+                                                MaxValue="500" MinValue="0" NumberFormat-DecimalDigits="0" Culture="en-US" LabelWidth="">
                                             </telerik:RadNumericTextBox>
                                         </div>
                                         <div style="float: left">
@@ -503,7 +511,7 @@
                                     </td>
                         </tr>
                         <tr id="Tr_UploadData" runat="server">
-                            <td align="right" style="width:350px;">
+                            <td align="right">
                                 <span style="font-weight: bold;">
                                 <asp:Localize runat="server" 
                                     Text="Upload Chart Data (SAMPLEID, SAMPLE_NAME, CMYK_C, CMYK_M, CMYK_Y, CMYK_K, HTML_RGB)" ID="locUploadChartData" 
@@ -527,7 +535,7 @@
                                         </td>
                                         <td align="right" style="width:200px;">
                                              <asp:LinkButton ID="lbtnUploadChartData" runat="server" CssClass="gray_bt" 
-                                                 Width="170px" OnClick="lbtnUploadChartData_Click"
+                                                 Width="170px" OnClick="lbtnUploadChartData_Click" 
                                                  meta:resourcekey="lbtnUploadChartDataResource1">
                                                     <span> <asp:Localize runat="server" Text="Upload Chart Data" 
                                                  ID="locUploadChartDataButton" 
