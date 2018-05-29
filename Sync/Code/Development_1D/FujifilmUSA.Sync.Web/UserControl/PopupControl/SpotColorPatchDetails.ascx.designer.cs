@@ -22,13 +22,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.WebControls.HiddenField hdnMeasurementID;
         
         /// <summary>
-        /// divPatchDetailsRun0 control.
+        /// tblColorFirstRun control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPatchDetailsRun0;
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblColorFirstRun;
         
         /// <summary>
         /// locTargetHead control.
@@ -38,15 +38,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locTargetHead;
-        
-        /// <summary>
-        /// locPredictedHead control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locPredictedHead;
         
         /// <summary>
         /// divTargetRun0 control.
@@ -67,157 +58,31 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divActualRun0;
         
         /// <summary>
-        /// locMetrictbl1 control.
+        /// locPredictedHead control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locMetrictbl1;
+        protected global::System.Web.UI.WebControls.Localize locPredictedHead;
         
         /// <summary>
-        /// locTargetTbl1 control.
+        /// tblColorMoreRun control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locTargetTbl1;
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblColorMoreRun;
         
         /// <summary>
-        /// locPredictedTbl1 control.
+        /// locTargetHead2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locPredictedTbl1;
-        
-        /// <summary>
-        /// locDelta control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locDelta;
-        
-        /// <summary>
-        /// lblTargetLRun0 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTargetLRun0;
-        
-        /// <summary>
-        /// lblActualLRun0 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblActualLRun0;
-        
-        /// <summary>
-        /// lblDeltaL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDeltaL;
-        
-        /// <summary>
-        /// lblTargetARun0 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTargetARun0;
-        
-        /// <summary>
-        /// lblActualARun0 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblActualARun0;
-        
-        /// <summary>
-        /// lblDeltaA control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDeltaA;
-        
-        /// <summary>
-        /// lblTargetBRun0 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTargetBRun0;
-        
-        /// <summary>
-        /// lblActualBRun0 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblActualBRun0;
-        
-        /// <summary>
-        /// lblDeltaB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDeltaB;
-        
-        /// <summary>
-        /// divPatchDetailsRun control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPatchDetailsRun;
-        
-        /// <summary>
-        /// locTargetHead1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locTargetHead1;
-        
-        /// <summary>
-        /// locPredictedHead1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locPredictedHead1;
-        
-        /// <summary>
-        /// locMeasuredHead control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locMeasuredHead;
+        protected global::System.Web.UI.WebControls.Localize locTargetHead2;
         
         /// <summary>
         /// divTarget control.
@@ -247,67 +112,202 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMeasured;
         
         /// <summary>
-        /// locMetricHead1 control.
+        /// locPredictedHead2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locMetricHead1;
+        protected global::System.Web.UI.WebControls.Localize locPredictedHead2;
         
         /// <summary>
-        /// locTarget control.
+        /// locMeasuredHead2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locTarget;
+        protected global::System.Web.UI.WebControls.Localize locMeasuredHead2;
         
         /// <summary>
-        /// locPredicted control.
+        /// div3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locPredicted;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div3;
         
         /// <summary>
-        /// locMeasured control.
+        /// tblDetailsFirstRun control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locMeasured;
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblDetailsFirstRun;
         
         /// <summary>
-        /// locTP control.
+        /// locTargetTbl1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locTP;
+        protected global::System.Web.UI.WebControls.Localize locTargetTbl1;
         
         /// <summary>
-        /// locMT control.
+        /// locPredictedTbl1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locMT;
+        protected global::System.Web.UI.WebControls.Localize locPredictedTbl1;
         
         /// <summary>
-        /// locMP control.
+        /// lblTargetLRun0 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locMP;
+        protected global::System.Web.UI.WebControls.Label lblTargetLRun0;
+        
+        /// <summary>
+        /// lblActualLRun0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblActualLRun0;
+        
+        /// <summary>
+        /// lblTargetARun0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTargetARun0;
+        
+        /// <summary>
+        /// lblActualARun0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblActualARun0;
+        
+        /// <summary>
+        /// lblTargetBRun0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTargetBRun0;
+        
+        /// <summary>
+        /// lblActualBRun0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblActualBRun0;
+        
+        /// <summary>
+        /// locDeltaTPRun0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDeltaTPRun0;
+        
+        /// <summary>
+        /// lblDeltaTargetPerdiction control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeltaTargetPerdiction;
+        
+        /// <summary>
+        /// Localize1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize1;
+        
+        /// <summary>
+        /// lblDeltaL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeltaL;
+        
+        /// <summary>
+        /// lblDeltaA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeltaA;
+        
+        /// <summary>
+        /// lblDeltaB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeltaB;
+        
+        /// <summary>
+        /// tblDetailsMoreRun control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblDetailsMoreRun;
+        
+        /// <summary>
+        /// locTargetHead1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locTargetHead1;
+        
+        /// <summary>
+        /// locPredictedHead1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locPredictedHead1;
+        
+        /// <summary>
+        /// locMeasuredHead control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasuredHead;
         
         /// <summary>
         /// lblTargetL control.
@@ -337,33 +337,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.WebControls.Label lblMeasuredL;
         
         /// <summary>
-        /// lblTarget_PredictedL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTarget_PredictedL;
-        
-        /// <summary>
-        /// lblMeasured_TargetL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMeasured_TargetL;
-        
-        /// <summary>
-        /// lblMeasured_PredictedL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMeasured_PredictedL;
-        
-        /// <summary>
         /// lblTargetA control.
         /// </summary>
         /// <remarks>
@@ -391,33 +364,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.WebControls.Label lblMeasuredA;
         
         /// <summary>
-        /// lblTarget_PredictedA control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTarget_PredictedA;
-        
-        /// <summary>
-        /// lblMeasured_TargetA control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMeasured_TargetA;
-        
-        /// <summary>
-        /// lblMeasured_PredictedA control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMeasured_PredictedA;
-        
-        /// <summary>
         /// lblTargetB control.
         /// </summary>
         /// <remarks>
@@ -443,6 +389,141 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMeasuredB;
+        
+        /// <summary>
+        /// locDeltaTP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDeltaTP;
+        
+        /// <summary>
+        /// lblDeltaTargetPrediction control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeltaTargetPrediction;
+        
+        /// <summary>
+        /// locDeltaTM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDeltaTM;
+        
+        /// <summary>
+        /// lblDeltaTargetMeasured control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeltaTargetMeasured;
+        
+        /// <summary>
+        /// locDeltaPM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDeltaPM;
+        
+        /// <summary>
+        /// lblDeltaPredictionMeasured control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeltaPredictionMeasured;
+        
+        /// <summary>
+        /// locTP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locTP;
+        
+        /// <summary>
+        /// locMT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMT;
+        
+        /// <summary>
+        /// locMP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMP;
+        
+        /// <summary>
+        /// lblTarget_PredictedL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTarget_PredictedL;
+        
+        /// <summary>
+        /// lblMeasured_TargetL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMeasured_TargetL;
+        
+        /// <summary>
+        /// lblMeasured_PredictedL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMeasured_PredictedL;
+        
+        /// <summary>
+        /// lblTarget_PredictedA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTarget_PredictedA;
+        
+        /// <summary>
+        /// lblMeasured_TargetA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMeasured_TargetA;
+        
+        /// <summary>
+        /// lblMeasured_PredictedA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMeasured_PredictedA;
         
         /// <summary>
         /// lblTarget_PredictedB control.

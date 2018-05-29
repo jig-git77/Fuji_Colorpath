@@ -22,7 +22,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         private const string _recDeltaL = "deltaLText";
         private const string _recDeltaA = "deltaAText";
         private const string _recDeltaB = "deltaBText";
-        decimal T_L, T_a, T_b, P_L, P_a, P_b, M_L, M_a, M_b;
+        decimal T_L, T_a, T_b, P_L, P_a, P_b, M_L, M_a, M_b, deltaE, deltaTP, deltaMT, deltaMP;
         string htmlColor;
         string Predicated_htmlColor, Measured_htmlColor;
         int MeasurementID;
@@ -41,6 +41,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             M_a = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["measuredA"])) ? 0 : Convert.ToDecimal(Request.QueryString["measuredA"]);
             M_b = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["measuredB"])) ? 0 : Convert.ToDecimal(Request.QueryString["measuredB"]);
 
+            deltaE = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["deltaE"])) ? 0 : Convert.ToDecimal(Request.QueryString["deltaE"]);
+            deltaTP = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["deltaTP"])) ? 0 : Convert.ToDecimal(Request.QueryString["deltaTP"]);
+            deltaMT = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["deltaMT"])) ? 0 : Convert.ToDecimal(Request.QueryString["deltaMT"]);
+            deltaMP = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["deltaMP"])) ? 0 : Convert.ToDecimal(Request.QueryString["deltaMP"]);
+
             MeasurementID = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["measurementID"])) ? 0 : Convert.ToInt32(Request.QueryString["measurementID"]);
             hdnMeasurementID.Value = MeasurementID.ToString();
             htmlColor = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["htmlColor"])) ? "" : ("#" + Convert.ToString(Request.QueryString["htmlColor"]));
@@ -48,6 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             Measured_htmlColor = string.IsNullOrEmpty(Convert.ToString(Request.QueryString["M_htmlColor"])) ? "" : ("#" + Convert.ToString(Request.QueryString["M_htmlColor"]));
 
             BindValues();
+            //BindValuesNew();
             //FillPaperChart(T_L, T_a, T_b, P_L, P_a, P_b, M_L, M_a, M_b, MeasurementID);
         }
 
@@ -56,7 +62,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         {
             if (MeasurementID > 0) // if optimization run !=0
             {
-                divPatchDetailsRun.Visible = true;
+                //divPatchDetailsRun.Visible = true;
+                tblDetailsMoreRun.Visible = true;
+                tblColorMoreRun.Visible = true;
                 decimal Delta_Target_PredictedL, Delta_Measured_TargetL, Delta_Measured_PredictedL,
                     Delta_Target_PredictedA, Delta_Measured_TargetA, Delta_Measured_PredictedA,
                     Delta_Target_PredictedB, Delta_Measured_TargetB, Delta_Measured_PredictedB;
@@ -73,41 +81,48 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 Delta_Measured_PredictedA = M_a - P_a;
                 Delta_Measured_PredictedB = M_b - P_b;
 
-                lblTargetL.Text = T_L.ToString();
-                lblTargetA.Text = T_a.ToString();
-                lblTargetB.Text = T_b.ToString();
+                lblTargetL.Text = string.Format("{0:0.00}", T_L);
+                lblTargetA.Text = string.Format("{0:0.00}", T_a);
+                lblTargetB.Text = string.Format("{0:0.00}", T_b);
+                                  
+                lblActualL.Text = string.Format("{0:0.00}", P_L);
+                lblActualA.Text = string.Format("{0:0.00}", P_a);
+                lblActualB.Text = string.Format("{0:0.00}", P_b);
 
-                lblActualL.Text = P_L.ToString();
-                lblActualA.Text = P_a.ToString();
-                lblActualB.Text = P_b.ToString();
+                lblMeasuredL.Text = string.Format("{0:0.00}", M_L);
+                lblMeasuredA.Text = string.Format("{0:0.00}", M_a);
+                lblMeasuredB.Text = string.Format("{0:0.00}", M_b);
+                                    
+                lblMeasuredL.Text = string.Format("{0:0.00}", M_L);
+                lblMeasuredA.Text = string.Format("{0:0.00}", M_a);
+                lblMeasuredB.Text = string.Format("{0:0.00}", M_b);
 
-                lblMeasuredL.Text = M_L.ToString();
-                lblMeasuredA.Text = M_a.ToString();
-                lblMeasuredB.Text = M_b.ToString();
+                lblTarget_PredictedL.Text = string.Format("{0:0.00}", Delta_Target_PredictedL);
+                lblTarget_PredictedA.Text = string.Format("{0:0.00}", Delta_Target_PredictedA);
+                lblTarget_PredictedB.Text = string.Format("{0:0.00}", Delta_Target_PredictedB);
 
-                lblMeasuredL.Text = M_L.ToString();
-                lblMeasuredA.Text = M_a.ToString();
-                lblMeasuredB.Text = M_b.ToString();
+                lblMeasured_TargetL.Text = string.Format("{0:0.00}", Delta_Measured_TargetL);
+                lblMeasured_TargetA.Text = string.Format("{0:0.00}", Delta_Measured_TargetA);
+                lblMeasured_TargetB.Text = string.Format("{0:0.00}", Delta_Measured_TargetB);
 
-                lblTarget_PredictedL.Text = Delta_Target_PredictedL.ToString();
-                lblTarget_PredictedA.Text = Delta_Target_PredictedA.ToString();
-                lblTarget_PredictedB.Text = Delta_Target_PredictedB.ToString();
-
-                lblMeasured_TargetL.Text = Delta_Measured_TargetL.ToString();
-                lblMeasured_TargetA.Text = Delta_Measured_TargetA.ToString();
-                lblMeasured_TargetB.Text = Delta_Measured_TargetB.ToString();
-
-                lblMeasured_PredictedL.Text = Delta_Measured_PredictedL.ToString();
-                lblMeasured_PredictedA.Text = Delta_Measured_PredictedA.ToString();
-                lblMeasured_PredictedB.Text = Delta_Measured_PredictedB.ToString();
+                lblMeasured_PredictedL.Text = string.Format("{0:0.00}", Delta_Measured_PredictedL);
+                lblMeasured_PredictedA.Text = string.Format("{0:0.00}", Delta_Measured_PredictedA);
+                lblMeasured_PredictedB.Text = string.Format("{0:0.00}", Delta_Measured_PredictedB);
 
                 divActual.Style.Add("background-color", Predicated_htmlColor);
                 divTarget.Style.Add("background-color", htmlColor);
                 divMeasured.Style.Add("background-color", Measured_htmlColor);
+
+                lblDeltaTargetPerdiction.Text = string.Format("{0:0.00}", deltaE);
+                lblDeltaTargetPrediction.Text = string.Format("{0:0.00}", deltaTP);
+                lblDeltaTargetMeasured.Text = string.Format("{0:0.00}", deltaMT);
+                lblDeltaPredictionMeasured.Text = string.Format("{0:0.00}", deltaMP);
             }
             else                  //--------------For Optimization Run-0---------------//
             {
-                divPatchDetailsRun0.Visible = true;
+                //divPatchDetailsRun0.Visible = true;
+                tblDetailsFirstRun.Visible = true;
+                tblColorFirstRun.Visible = true;
                 decimal Delta_L, Delta_a, Delta_b;
                 Delta_L = P_L - T_L;
                 Delta_a = P_a - T_a;
@@ -129,6 +144,84 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             }
         }
 
+        //public void BindValuesNew()
+        //{
+        //    if (MeasurementID > 0) // if optimization run !=0
+        //    {
+        //        tblDetailsMoreRun.Visible = true;
+        //        tblColorMoreRun.Visible = true;
+        //        decimal Delta_Target_PredictedL, Delta_Measured_TargetL, Delta_Measured_PredictedL,
+        //            Delta_Target_PredictedA, Delta_Measured_TargetA, Delta_Measured_PredictedA,
+        //            Delta_Target_PredictedB, Delta_Measured_TargetB, Delta_Measured_PredictedB;
+
+        //        Delta_Target_PredictedL = T_L - P_L;
+        //        Delta_Target_PredictedA = T_a - P_a;
+        //        Delta_Target_PredictedB = T_b - P_b;
+
+        //        Delta_Measured_TargetL = M_L - T_L;
+        //        Delta_Measured_TargetA = M_a - T_a;
+        //        Delta_Measured_TargetB = M_b - T_b;
+
+        //        Delta_Measured_PredictedL = M_L - P_L;
+        //        Delta_Measured_PredictedA = M_a - P_a;
+        //        Delta_Measured_PredictedB = M_b - P_b;
+
+        //        lblTargetLNew.Text = T_L.ToString();
+        //        lblTargetANew.Text = T_a.ToString();
+        //        lblTargetBNew.Text = T_b.ToString();
+
+        //        lblActualLNew.Text = P_L.ToString();
+        //        lblActualANew.Text = P_a.ToString();
+        //        lblActualBNew.Text = P_b.ToString();
+
+        //        lblMeasuredLNew.Text = M_L.ToString();
+        //        lblMeasuredANew.Text = M_a.ToString();
+        //        lblMeasuredBNew.Text = M_b.ToString();
+
+        //        lblMeasuredLNew.Text = M_L.ToString();
+        //        lblMeasuredANew.Text = M_a.ToString();
+        //        lblMeasuredBNew.Text = M_b.ToString();
+
+        //        lblTarget_PredictedLNew.Text = Delta_Target_PredictedL.ToString();
+        //        lblTarget_PredictedANew.Text = Delta_Target_PredictedA.ToString();
+        //        lblTarget_PredictedBNew.Text = Delta_Target_PredictedB.ToString();
+
+        //        lblMeasured_TargetLNew.Text = Delta_Measured_TargetL.ToString();
+        //        lblMeasured_TargetANew.Text = Delta_Measured_TargetA.ToString();
+        //        lblMeasured_TargetBNew.Text = Delta_Measured_TargetB.ToString();
+
+        //        lblMeasured_PredictedLNew.Text = Delta_Measured_PredictedL.ToString();
+        //        lblMeasured_PredictedANew.Text = Delta_Measured_PredictedA.ToString();
+        //        lblMeasured_PredictedBNew.Text = Delta_Measured_PredictedB.ToString();
+
+        //        divActualNew.Style.Add("background-color", Predicated_htmlColor);
+        //        divTargetNew.Style.Add("background-color", htmlColor);
+        //        divMeasuredNew.Style.Add("background-color", Measured_htmlColor);
+        //    }
+        //    else
+        //    {
+        //        tblDetailsFirstRun.Visible = true;
+        //        tblColorFirstRun.Visible = true;
+        //        decimal Delta_L, Delta_a, Delta_b;
+        //        Delta_L = P_L - T_L;
+        //        Delta_a = P_a - T_a;
+        //        Delta_b = P_b - T_b;
+
+        //        lblTargetLRun0New.Text = T_L.ToString();
+        //        lblTargetARun0New.Text = T_a.ToString();
+        //        lblTargetBRun0New.Text = T_b.ToString();
+
+        //        lblActualLRun0New.Text = P_L.ToString();
+        //        lblActualARun0New.Text = P_a.ToString();
+        //        lblActualBRun0New.Text = P_b.ToString();
+        //        lblDeltaLNew.Text = Delta_L.ToString();
+        //        lblDeltaANew.Text = Delta_a.ToString();
+        //        lblDeltaBNew.Text = Delta_b.ToString();
+
+        //        divActualRun0New.Style.Add("background-color", Predicated_htmlColor);
+        //        divTargetRun0New.Style.Add("background-color", htmlColor);
+        //    }
+        //}
         #region Fill Paper Chart
         //private void FillPaperChart(decimal Target_L, decimal Target_A, decimal Target_B, decimal Pre_L, decimal Pre_A, decimal Pre_B, decimal Measured_L, decimal Measured_A, decimal Measured_B, int measurementID)
         //{
