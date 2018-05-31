@@ -17,12 +17,12 @@ namespace FujifilmUSA.Sync.Web
                 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(SessionManager.Instance.CurrentUser.LanguageCultureCode);
                 System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(SessionManager.Instance.CurrentUser.LanguageCultureCode);
                 Page.ClientScript.RegisterClientScriptInclude("JSGlobalResource", ResolveUrl("JS/GlobalResource." + System.Threading.Thread.CurrentThread.CurrentUICulture.ToString() + ".js"));
-                Page.ClientScript.RegisterClientScriptInclude("KendoJSGlobalResource", ResolveUrl("Scripts/kendo/2017.2.621/messages/kendo.messages." + System.Threading.Thread.CurrentThread.CurrentUICulture.ToString() + ".min.js"));
+                //Page.ClientScript.RegisterClientScriptInclude("KendoJSGlobalResource", ResolveUrl("Scripts/kendo/2018.1.221/messages/kendo.messages." + System.Threading.Thread.CurrentThread.CurrentUICulture.ToString() + ".min.js"));
             }
             else //Load default English (en-US) .js file
             {
                 Page.ClientScript.RegisterClientScriptInclude("JSGlobalResource", ResolveUrl("JS/GlobalResource.en-US.js"));
-                Page.ClientScript.RegisterClientScriptInclude("KednoJSGlobalResource", ResolveUrl("Scripts/kendo/2017.2.621/messages/kendo.messages.en-US.min.js"));
+                //Page.ClientScript.RegisterClientScriptInclude("KednoJSGlobalResource", ResolveUrl("Scripts/kendo/2018.1.221/messages/kendo.messages.en-US.min.js"));
             }
 
             base.InitializeCulture();

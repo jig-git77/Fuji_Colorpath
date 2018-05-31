@@ -52,7 +52,8 @@
     var record = 0;
     var SERVICE_BASE_URL = '';
     var Resources = {};
-    $(document).ready(function () {
+    var currentSpotName = '';
+    $(document).ready(function () {        
         //Default Action
         $(".hideclass").hide(); //Hide all content
         $("ul.tabs li:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").addClass("active").show(); //Activate first tab
@@ -246,25 +247,26 @@
                         }
                     }
                 },
-                pageSize: 10
-            },
+                pageSize: 20
+            },   
+            resizable: true,
             sortable: true,
             filterable: {
                 extra: false,
                 operators: {
                     number: {
+                        lte: "Is less than or equal to",
                         eq: "Is equal to",
                         neq: "Is not equal to",
                         gte: "Is greater than or equal to",
-                        gt: "Is greater than",
-                        lte: "Is less than or equal to",
+                        gt: "Is greater than",                        
                         lt: "Is less than"
                     },
                     string: {
+                        contains: "Contains",
                         eq: "Is equal to",
                         neq: "Is not equal to",
-                        startswith: "Starts with",
-                        contains: "Contains",
+                        startswith: "Starts with",                        
                         doesnotcontain: "Does not contain",
                         endswith: "Ends with"
                     }
@@ -302,8 +304,8 @@
                     field: "SpotView",
                     filterable: false,
                     title: "<b>View</b>",
-                    template: "<center><a id='lnkView' title='View Patch Details' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#,#=Measured_L#,#=Measured_a#,#=Measured_b#,#=MeasurementID#,\"#=Predicted_HTMLColor.substring(1)#\",\"#=Measured_HTMLColor.substring(1)#\",#=ΔE#,#=ΔE_T_P#,#=ΔE_M_T#,#=ΔE_M_P#,);'><img src='Images/detail1.png'></img></a></center>",
-                    width: 55
+                    template: "<center><a id='lnkView' title='View Patch Details' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#,#=Measured_L#,#=Measured_a#,#=Measured_b#,#=MeasurementID#,\"#=Predicted_HTMLColor.substring(1)#\",\"#=Measured_HTMLColor.substring(1)#\",#=ΔE#,#=ΔE_T_P#,#=ΔE_M_T#,#=ΔE_M_P#,\"#=SpotName#\");'><img src='Images/detail1.png'></img></a></center>",
+                    width: 55,                    
                 },
                 {
                     field: "SpotName",
@@ -414,7 +416,7 @@
                 success: function (response) {
                     $('#btnDownloadSpotPatch').removeClass('active');
                     if (response.data != null) {
-                        console.log(response.data);
+                        //console.log(response.data);
                         var fileName = '~' + response.data;
                         window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
                     }
@@ -482,20 +484,20 @@
         
     });
 
-    function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID, P_htmlColor, M_htmlColor, deltaE, deltaTP, deltaMT, deltaMP) {
+    function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID, P_htmlColor, M_htmlColor, deltaE, deltaTP, deltaMT, deltaMP, SpotName) {
         measuredL = (isNaN(measuredL) || measuredL == null) ? 0 : measuredL;
         measuredA = (isNaN(measuredA) || measuredA == null) ? 0 : measuredA;
-        measuredB = (isNaN(measuredB) || measuredB == null) ? 0 : measuredB;
-
+        measuredB = (isNaN(measuredB) || measuredB == null) ? 0 : measuredB;        
         deltaE = (isNaN(deltaE) || deltaE == null) ? 0 : deltaE;
         deltaTP = (isNaN(deltaTP) || deltaTP == null) ? 0 : deltaTP;
         deltaMT = (isNaN(deltaMT) || deltaMT == null) ? 0 : deltaMT;
         deltaMP = (isNaN(deltaMP) || deltaMP == null) ? 0 : deltaMP;
-
-        console.log("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor);
+        currentSpotName = SpotName;
+        //console.log("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor);
         var oWindow;
-        oWindow = window.radopen("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor + "&deltaE=" + deltaE + "&deltaTP=" + deltaTP + "&deltaMT=" + deltaMT + "&deltaMP=" + deltaMP, "ClosePrintConditionWindow");
+        oWindow = window.radopen("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor + "&deltaE=" + deltaE + "&deltaTP=" + deltaTP + "&deltaMT=" + deltaMT + "&deltaMP=" + deltaMP, "windowPatchDetails");       
         oWindow.show();
+        
         return false;
     }
 
@@ -515,67 +517,22 @@
                 alert(exception);
             }
         });
+    }    
+
+    function OnSpotDetailsLoad(sender, eventArgs) {        
+        sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;">' + currentSpotName + '</td></tr></table>')        
     }
 
-    function DownloadSpotPatchFile(id) {
-        //debugger;
-        //var xhrReq =  $.ajax({
-        //    url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReportTest',
-        //    data: { OptimizationRunID: id },
-        //    dataType: null,            
-        //    type:'GET',
-        //    xhrFields: {
-        //        responseType: 'application/octet-stream'
-        //    },
-        //    success: function (blob) {
-
-        //        debugger;
-        //        console.log(xhrReq);
-        //        console.log(blob.size);
-        //        var link = document.createElement('a');
-        //        link.href = window.URL.createObjectURL(blob);
-        //        link.download = "Dossier_" + new Date() + ".pdf";
-        //        link.click();
-        //    },
-        //    error: function (xhr, errorType, exception) {
-        //        debugger;
-        //        alert(exception);
-        //    }
-        //});
-
-        //var request = new XMLHttpRequest();
-        //request.open("GET", SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReportTest?OptimizationRunID=' + id, true);
-        //request.responseType = "blob";
-        //request.onload = function (e) {
-        //    //debugger;
-        //    if (this.status === 200) {
-        //        // `blob` response
-        //        console.log(this.response);
-        //        // create `objectURL` of `this.response` : `.pdf` as `Blob`
-        //        var file = window.URL.createObjectURL(this.response);
-        //        var a = document.createElement("a");
-        //        a.href = file;
-        //        a.download = this.response.name || "SpotPatch.pdf";
-        //        document.body.appendChild(a);
-        //        a.click();
-        //        // remove `a` following `Save As` dialog, 
-        //        // `window` regains `focus`
-        //        window.onfocus = function () {
-        //            document.body.removeChild(a)
-        //        }
-        //    };
-        //};
-        //request.send();
-
-        location.href = SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReportTest?OptimizationRunID=' + id;
+    function OnSpotDetailsClose(sender, eventArgs) {        
+        sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;"></td></tr></table>')        
     }
+
 </script>
 
 <script type="text/javascript" language="javascript">
 
     //According to new or old Project open rad window
-    function ChooseRadWindow() {
-        debugger;
+    function ChooseRadWindow() {        
         if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
 
             if (jQuery("input[id$=hdHasMeasurement]").val() == 'True' || jQuery("input[id$=hdHasMeasurement]").val() == 'true') {  //-------------If there are measurements under this opt. run, then only able to create DLP
@@ -855,10 +812,10 @@
 
 <asp:HiddenField ID="hdfMeasurementID" runat="server" Value="0" ClientIDMode="Static" />
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True"
-    Height="330" Width="900" VisibleStatusbar="false" Title="Patch Details"
+    Height="330" Width="900" VisibleStatusbar="false"
     ShowContentDuringLoad="false" Behaviors="Move,Close">
     <Windows>
-        <telerik:RadWindow ID="windowPatchDetails" runat="server" ShowContentDuringLoad="false" VisibleStatusbar="false" Title="Patch Detailserere">
+        <telerik:RadWindow ID="windowPatchDetails" runat="server" ShowContentDuringLoad="false" VisibleStatusbar="false" OnClientPageLoad="OnSpotDetailsLoad" OnClientClose="OnSpotDetailsClose">
         </telerik:RadWindow>
         <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
             VisibleStatusbar="false" Title="Choose Next Action" Width="900" Height="330"

@@ -112,8 +112,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 divActual.Style.Add("background-color", Predicated_htmlColor);
                 divTarget.Style.Add("background-color", htmlColor);
                 divMeasured.Style.Add("background-color", Measured_htmlColor);
-
-                lblDeltaTargetPerdiction.Text = string.Format("{0:0.00}", deltaE);
+                
                 lblDeltaTargetPrediction.Text = string.Format("{0:0.00}", deltaTP);
                 lblDeltaTargetMeasured.Text = string.Format("{0:0.00}", deltaMT);
                 lblDeltaPredictionMeasured.Text = string.Format("{0:0.00}", deltaMP);
@@ -139,6 +138,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 lblDeltaA.Text = Delta_a.ToString();
                 lblDeltaB.Text = Delta_b.ToString();
 
+                lblDeltaTargetPerdictionRun0.Text = string.Format("{0:0.00}", deltaE);
                 divActualRun0.Style.Add("background-color", Predicated_htmlColor);
                 divTargetRun0.Style.Add("background-color", htmlColor);
             }

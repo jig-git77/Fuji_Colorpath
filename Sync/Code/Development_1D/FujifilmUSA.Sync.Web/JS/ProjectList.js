@@ -62,7 +62,7 @@ $(document).ready(function () {
                         },
                         success: function (response) {
                             var jsonProjectList = JSON.parse(response.data);
-                            console.log(jsonProjectList);
+                            //console.log(jsonProjectList);
                             Resources = jsonProjectList.GlobalResources;
                             options.success(jsonProjectList.Projects);
                             kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
@@ -503,7 +503,7 @@ $(document).ready(function () {
                 type: "POST",
                 url: SERVICE_BASE_URL + "api/Project/DeleteSpotProject?spotProjectID=" + spotProjectID,
                 success: function (response) {
-                    console.log(JSON.stringify(response));
+                    //console.log(JSON.stringify(response));
                     detailGrid.dataSource.read();
                     detailGrid.refresh();
                 },
@@ -529,9 +529,7 @@ function detailInit(e) {
                         data: { projectID: pID },
                         dataType: "json",
                         success: function (response) {
-                            var jsonSpotProjectList = JSON.parse(response.data);
-                            console.log(response.data);
-                            console.log(jsonSpotProjectList);
+                            var jsonSpotProjectList = JSON.parse(response.data);                            
                             options.success(jsonSpotProjectList);
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -607,15 +605,13 @@ function detailInit(e) {
                             SpotprojectTypeImagePath = 'Images/SpotProject_Certified.png';
                             SpotprojectTypeTooltip = Resources.SpotProject_Certified;
                             break;
-                    }
-                    debugger;
+                    }                    
                     if (SpotprojectTypeImagePath != '') {
                         row.find("td #imgSpotProject").attr('src', SpotprojectTypeImagePath);   //set the Spot project type image path
                         row.find("td #imgSpotProject").attr('title', SpotprojectTypeTooltip);   //set the Spot project type tooltip
                     }
 
-                    var gridCurrent = $(row[0]).closest('.k-grid');
-                    console.log(gridCurrent);
+                    var gridCurrent = $(row[0]).closest('.k-grid');                    
                     if (!data.isAllowSpotProject) {
                         $(gridCurrent).find('.k-grid-toolbar').hide();
                     } else {
@@ -718,8 +714,7 @@ function deleteProject(id) {
         $.ajax({
             type: "POST",
             url: SERVICE_BASE_URL + "api/Project/DeleteProject?projectID=" + id,
-            success: function (response) {
-                console.log(JSON.stringify(response));
+            success: function (response) {                
                 $kendoProjectList.data('kendoGrid').dataSource.read();
                 $kendoProjectList.data('kendoGrid').refresh();
             },

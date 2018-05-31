@@ -60,8 +60,8 @@
     var drawing = kendo.drawing;
     var geometry = kendo.geometry;
     var gradientGray = new drawing.LinearGradient({
-        start: [0, 0], // Bottom left
-        end: [0, 1],   // Top left
+        start: [1, 1], // Bottom left
+        end: [1, 0],   // Top left
         stops: [{
             offset: 0,
             color: "#000",
@@ -341,6 +341,8 @@
             }
         });
     }
+
+    
 </script>
 <div style="display: block;" class="contantbox">
     <asp:HiddenField runat="server" ID="hdnMeasurementID" ClientIDMode="Static" />
@@ -474,7 +476,7 @@
                                 <table style="width:100%">
                                     <tr>
                                         <th><asp:Localize runat="server" Text="ΔE Target-Prediction" ID="locDeltaTPRun0" meta:resourcekey="locDeltaTarget_Prediction"></asp:Localize></th>
-                                        <td><asp:Label runat="server" ID="lblDeltaTargetPerdiction" Text="4.56" ></asp:Label></td>
+                                        <td><asp:Label runat="server" ID="lblDeltaTargetPerdictionRun0" ></asp:Label></td>
                                     </tr>                                   
                                 </table>
                             </td>
@@ -488,7 +490,7 @@
                                     <tr>
                                         <th style="width:80%"></th>
                                         <th style="width:20%;text-align: right;">                                            
-                                            <asp:Localize runat="server" Text="Delta_T_P" ID="Localize1" meta:resourcekey="locT_PResource"></asp:Localize>
+                                            <asp:Localize runat="server" Text="Delta_T_P" ID="locTPresource" meta:resourcekey="locT_PResource"></asp:Localize>
                                         </th>
                                     </tr>
                                 </table>
@@ -519,10 +521,10 @@
                             <td>
                                 <table class="spotTable" style="width:100%">
                                     <tr>
-                                        <th style="width:60%"></th>
-                                        <th style="width:20%"><asp:Localize runat="server" Text="Target" ID="locTargetHead1" meta:resourcekey="locTargetResource"></asp:Localize></th>
-                                        <th style="width:20%"><asp:Localize runat="server" Text="Predicted" ID="locPredictedHead1" meta:resourcekey="locPredictedResource"></asp:Localize></th>
-                                        <th style="width:20%"><asp:Localize runat="server" Text="Measured" ID="locMeasuredHead" meta:resourcekey="locMeasuredResource"></asp:Localize></th>
+                                        <th style="width:30%;"></th>
+                                        <th style="width:20%;text-align:center;">T</th>
+                                        <th style="width:20%;text-align:center;">P</th>
+                                        <th style="width:20%;text-align:center;">M</th>
                                     </tr>
                                 </table>
                             </td>
@@ -559,15 +561,15 @@
                                 <table style="width:100%;height:75px;" >
                                     <tr>
                                         <th><asp:Localize runat="server" Text="ΔE Target-Prediction" ID="locDeltaTP" meta:resourcekey="locDeltaTarget_Prediction"></asp:Localize></th>
-                                        <td><asp:Label runat="server" ID="lblDeltaTargetPrediction" Text="4.56" ClientIDMode="Static"></asp:Label></td>
+                                        <td><asp:Label runat="server" ID="lblDeltaTargetPrediction" ClientIDMode="Static"></asp:Label></td>
                                     </tr>
                                     <tr>
                                         <th><asp:Localize runat="server" Text="ΔE Target-Measured" ID="locDeltaTM" meta:resourcekey="locDeltaTarget_Measured"></asp:Localize></th>
-                                        <td><asp:Label runat="server" ID="lblDeltaTargetMeasured" Text="4.56" ClientIDMode="Static"></asp:Label></td>
+                                        <td><asp:Label runat="server" ID="lblDeltaTargetMeasured" ClientIDMode="Static"></asp:Label></td>
                                     </tr>
                                     <tr>
-                                        <th><asp:Localize runat="server" Text="ΔE Prediction-Measured" ID="locDeltaPM" meta:resourcekey="locDeltaTarget_Measured"></asp:Localize></th>
-                                        <td><asp:Label runat="server" ID="lblDeltaPredictionMeasured" Text="4.56" ClientIDMode="Static"></asp:Label></td>
+                                        <th><asp:Localize runat="server" Text="ΔE Prediction-Measured" ID="locDeltaPM" meta:resourcekey="locDeltaMeasured_Prediction"></asp:Localize></th>
+                                        <td><asp:Label runat="server" ID="lblDeltaPredictionMeasured" ClientIDMode="Static"></asp:Label></td>
                                     </tr>
                                 </table>
                             </td>
@@ -598,7 +600,7 @@
                                 <%--<div runat="server" id="div6" style="height: 100px;background-color: #FFB700;"></div>--%>
                                 <table style="width:100%" class="tblStates">
                                     <tr>
-                                        <th style="width:40%">L*</th>                                        
+                                        <th style="width:38%">L*</th>                                        
                                         <td style="width:20%"><asp:Label runat="server" ID="lblTarget_PredictedL" ClientIDMode="Static"></asp:Label></td>
                                         <td style="width:20%"><asp:Label runat="server" ID="lblMeasured_TargetL" ClientIDMode="Static"></asp:Label></td>
                                         <td style="width:20%"><asp:Label runat="server" ID="lblMeasured_PredictedL" ClientIDMode="Static"></asp:Label></td>

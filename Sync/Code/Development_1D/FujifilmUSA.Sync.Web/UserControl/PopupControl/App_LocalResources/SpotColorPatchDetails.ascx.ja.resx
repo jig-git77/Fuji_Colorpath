@@ -123,9 +123,6 @@
   <data name="locDeltaResource.Text" xml:space="preserve">
     <value>Delta</value>
   </data>
-  <data name="locDeltaTarget_Measured.Text" xml:space="preserve">
-    <value>ΔE Target-Measured</value>
-  </data>
   <data name="locDeltaTarget_Prediction.Text" xml:space="preserve">
     <value>ΔE Target-Prediction</value>
   </data>
@@ -136,10 +133,7 @@
     <value>Metric</value>
   </data>
   <data name="locM_PResource.Text" xml:space="preserve">
-    <value>Δ P_M</value>
-  </data>
-  <data name="locM_TResource.Text" xml:space="preserve">
-    <value>Δ T-M</value>
+    <value>Δ M-P</value>
   </data>
   <data name="locPredictedResource.Text" xml:space="preserve">
     <value>Predicted</value>
@@ -149,5 +143,14 @@
   </data>
   <data name="locT_PResource.Text" xml:space="preserve">
     <value>Δ T-P</value>
+  </data>
+  <data name="locDeltaMeasured_Prediction.Text" xml:space="preserve">
+    <value>ΔE Measured-Prediction</value>
+  </data>
+  <data name="locDeltaTarget_Measured.Text" xml:space="preserve">
+    <value>ΔE Measured-Target</value>
+  </data>
+  <data name="locM_TResource.Text" xml:space="preserve">
+    <value>Δ M-T</value>
   </data>
 </root>

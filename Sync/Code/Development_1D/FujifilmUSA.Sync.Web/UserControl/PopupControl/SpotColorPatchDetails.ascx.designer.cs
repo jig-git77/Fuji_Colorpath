@@ -229,22 +229,22 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.WebControls.Localize locDeltaTPRun0;
         
         /// <summary>
-        /// lblDeltaTargetPerdiction control.
+        /// lblDeltaTargetPerdictionRun0 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDeltaTargetPerdiction;
+        protected global::System.Web.UI.WebControls.Label lblDeltaTargetPerdictionRun0;
         
         /// <summary>
-        /// Localize1 control.
+        /// locTPresource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize1;
+        protected global::System.Web.UI.WebControls.Localize locTPresource;
         
         /// <summary>
         /// lblDeltaL control.
@@ -281,33 +281,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable tblDetailsMoreRun;
-        
-        /// <summary>
-        /// locTargetHead1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locTargetHead1;
-        
-        /// <summary>
-        /// locPredictedHead1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locPredictedHead1;
-        
-        /// <summary>
-        /// locMeasuredHead control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locMeasuredHead;
         
         /// <summary>
         /// lblTargetL control.

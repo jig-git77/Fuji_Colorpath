@@ -79,6 +79,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                     lbtnDownloadAndSaveNCP.Visible = false;
+
+                windowPatchDetails.Shortcuts.Add("Close", "Esc");
             }
         }
 
