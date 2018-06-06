@@ -1316,7 +1316,7 @@ function BindMeasurementPatchDetails() {
 
 ////**************** START BIND THE ANALYZE CHART  ****************////
 function BindAnalyzeChart() {
-
+    kendo.ui.progress($chartLoader, true);
     var apiParameters = {
         ProjectId: $hdnProjectID,
         OptimizeRunId: $hdnOptimizationRunID,
@@ -1879,8 +1879,8 @@ function PopulateAnalyzeChart() {
         chartArea: {
             width: 690,
             height: 200,
-            background: "gray",
-            opacity: 0.3
+            background: "#CECECE",
+            //opacity: 0.3
         },
 
         axisLabelClick: function (e) {

@@ -148,7 +148,7 @@
         var oWnd = $find("<%= ClosePrintConditionWindow.ClientID %>");
         oWnd.close();
     }
-    function ShowReportGradingWindow() {        
+    function ShowReportGradingWindow() {
         var gradingPath = getPathForReportGrading();
         var oWnd = $find("<%= ReportGradingWindow.ClientID %>");
         oWnd.setUrl(gradingPath);
@@ -428,7 +428,12 @@
                         </div>
                     </div>
                     <div class="section_middle">
-                        <center><div id="divAnalyzeChart"></div></center>
+                        <center>
+                            <div class="chart-wrap" style="position: relative;">
+                                <div id="divAnalyzeChart" style="height: 200px;background-color:#CECECE"></div>
+                                <div class="chart-loading"></div>
+                            </div>
+                        </center>
                     </div>
                 </div>
             </td>
@@ -493,7 +498,7 @@
                                 <div>
                                     <div>
 
-                                        <div id="divValidationSummary" cellpadding="0" cellspacing="0" width="650px">
+                                        <div id="divValidationSummary" cellpadding="0" cellspacing="0" width="650px" style="display:none;">
                                             <div style="float: right; padding-top: 2px; position: absolute; top: 0; right: 0; padding-right: 4px; padding-top: 5px">
                                                 <asp:ImageButton ID="ibtnPrintPreview" runat="server"
                                                     ImageUrl="../Images/DymoPrintPreviewIcon.png" ToolTip="Preview label"
@@ -638,7 +643,7 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div id="divMeasurementSummary">
+                                        <div id="divMeasurementSummary"  style="display:none;">
                                             <table id="tblMeasurementSummary" cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin: 0; width: 100%">
                                                 <tr>
                                                     <td>
@@ -1366,7 +1371,8 @@
                                             cellpadding="0" cellspacing="0" class="TABLE1">
                                             <tr id="Tr4" runat="server">
                                                 <td id="Td5" valign="top" runat="server">
-                                                    <a id="btnGeneratePDF"><img src="Images/processbar.gif" style="    padding-left: 10px;" /></a>
+                                                    <a id="btnGeneratePDF">
+                                                        <img src="Images/processbar.gif" style="padding-left: 10px;" /></a>
                                                 </td>
                                                 <td valign="top">
                                                     <div id="Div_ReportGrading" runat="server" visible="false" style="float: right; padding-right: 10px;">
