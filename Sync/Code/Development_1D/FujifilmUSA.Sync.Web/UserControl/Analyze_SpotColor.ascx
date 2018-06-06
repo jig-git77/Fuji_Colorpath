@@ -243,7 +243,15 @@
                                 from: "ΔE_M_P",
                                 type: "number",
                                 format: "{n4}"
-                            }
+                            },
+                            SpotProjectLABID: {
+                                from: "SpotProjectLABID",
+                                type: "number",
+                            },
+                            IsSelected: {
+                                from: "IsSelected",
+                                type: "boolean",
+                            },                            
                         }
                     }
                 },
@@ -273,6 +281,7 @@
                 }
             },
             sortable: true,
+            selectable: "true",
             //filterable: true,
             pageable: {
                 refresh: true,
@@ -283,8 +292,12 @@
             },
             //toolbar: [{ 'name': 'downloadPatch', template: '<div style="float:right;"><button id="btnDownloadSpotPatch" onclick="generateReport(' + optimizationId + ')" class=\'k-button\'>Export to PDF</button></div>' }],
             toolbar: [{
-                'name': 'downloadPatch', template: '<div style="float:right;"><a id="lnkLinkFilter" title="Clear filter"><img id="imgClearFilter" src="Images/clear-fillter.png" style="width: 15px;margin-top: 5px;margin-right: 5px;"></img></a><button id="btnDownloadSpotPatchExcel" data-id="' + optimizationId + '" class=\'k-button has-spinner\' style="margin-right: 5px;"><span class="spinner"><img src="Images/buttonloader.gif" /></span>Export to Excel</button><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button has-spinner\'><span class="spinner"><img src="Images/buttonloader.gif" /></span>Export to PDF</button></div>'
+                'name': 'downloadPatch', template: '<div><button id="btnSaveSpotPatch" data-id="' + optimizationId + '" class=\'k-button has-spinner\'><span class="spinner"><img src="Images/buttonloader.gif" /></span>Save</button> <div style="float:right;"><a id="lnkLinkFilter" title="Clear filter"><img id="imgClearFilter" src="Images/clear-fillter.png" style="width: 15px;margin-top: 5px;margin-right: 5px;"></img></a><button id="btnDownloadSpotPatchExcel" data-id="' + optimizationId + '" class=\'k-button has-spinner\' style="margin-right: 5px;"><span class="spinner"><img src="Images/buttonloader.gif" /></span>Export to Excel</button><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button has-spinner\'><span class="spinner"><img src="Images/buttonloader.gif" /></span>Export to PDF</button></div></div>'
             }],
+            change: function (e) {
+                var item = e.sender.dataItem(e.sender.select());
+                ShowSpotColorPatchDetailsWindow(item.HTMLColor.substring(1), item.CIELAB_L, item.CIELAB_a, item.CIELAB_b, item.TargetL, item.Targeta, item.Targetb, item.Measured_L, item.Measured_a, item.Measured_b, item.MeasurementID, item.Predicted_HTMLColor.substring(1), item.Measured_HTMLColor.substring(1), item.ΔE, item.ΔE_T_P, item.ΔE_M_T, item.ΔE_M_P, item.SpotName);
+            },
             columns: [
                 {
                     field: "SpotID",
@@ -300,12 +313,19 @@
                     template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
                     width: 50
                 },
+                //{
+                //    field: "SpotView",
+                //    filterable: false,
+                //    title: "<b>View</b>",
+                //    template: "<center><a id='lnkView' title='View Patch Details' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#,#=Measured_L#,#=Measured_a#,#=Measured_b#,#=MeasurementID#,\"#=Predicted_HTMLColor.substring(1)#\",\"#=Measured_HTMLColor.substring(1)#\",#=ΔE#,#=ΔE_T_P#,#=ΔE_M_T#,#=ΔE_M_P#,\"#=SpotName#\");'><img src='Images/detail1.png'></img></a></center>",
+                //    width: 55,                    
+                //},
                 {
                     field: "SpotView",
                     filterable: false,
                     title: "<b>View</b>",
-                    template: "<center><a id='lnkView' title='View Patch Details' onclick='return ShowSpotColorPatchDetailsWindow(\"#=HTMLColor.substring(1)#\",#=CIELAB_L#,#=CIELAB_a#,#=CIELAB_b#,#=TargetL#,#=Targeta#,#=Targetb#,#=Measured_L#,#=Measured_a#,#=Measured_b#,#=MeasurementID#,\"#=Predicted_HTMLColor.substring(1)#\",\"#=Measured_HTMLColor.substring(1)#\",#=ΔE#,#=ΔE_T_P#,#=ΔE_M_T#,#=ΔE_M_P#,\"#=SpotName#\");'><img src='Images/detail1.png'></img></a></center>",
-                    width: 55,                    
+                    template: "<center><input type='checkbox' id='chkIsSelected' onclick='spotPatchSelected(this)' /></center>",
+                    width: 55,
                 },
                 {
                     field: "SpotName",
@@ -370,12 +390,25 @@
                     //set resource message
                     row.find('#lnkView').attr('title', Resources.gridAnalyzeToolTipViewResource);
                 });
-            }
+            },
+            
         });
 
         $('#lnkLinkFilter').on('click', function (e) {
             $("form.k-filter-menu button[type='reset']").trigger("click");
-        })
+        });
+
+        $('#btnSaveSpotPatch').on('click', function (e) {
+            e.preventDefault();
+            
+            var dataSource = $('#divPathDetails').data("kendoGrid").dataSource;
+            debugger;
+            var changedSpots = $.grep(dataSource.data(), function (item) {
+                return item.dirty == true;
+            });
+
+
+        });
 
         $('#btnDownloadSpotPatch').on('click', function (e) {
             e.preventDefault();
@@ -495,7 +528,8 @@
         currentSpotName = SpotName;
         //console.log("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor);
         var oWindow;
-        oWindow = window.radopen("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor + "&deltaE=" + deltaE + "&deltaTP=" + deltaTP + "&deltaMT=" + deltaMT + "&deltaMP=" + deltaMP, "windowPatchDetails");       
+        var passingURL = "PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor + "&deltaE=" + deltaE + "&deltaTP=" + deltaTP + "&deltaMT=" + deltaMT + "&deltaMP=" + deltaMP;
+        oWindow = window.radopen(passingURL, "windowPatchDetails");       
         oWindow.show();
         
         return false;
@@ -525,6 +559,15 @@
 
     function OnSpotDetailsClose(sender, eventArgs) {        
         sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;"></td></tr></table>')        
+    }
+
+    function spotPatchSelected(chk) {       
+        debugger;
+        var uid = $(chk).closest("[data-uid]").data("uid")
+        var dataSource = $('#divPathDetails').data("kendoGrid").dataSource;
+        var item = dataSource.getByUid(uid);
+        item.dirty = true;
+        item.IsSelected = $(chk).prop('checked');        
     }
 
 </script>
