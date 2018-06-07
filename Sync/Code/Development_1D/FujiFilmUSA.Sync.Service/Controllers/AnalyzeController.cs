@@ -753,6 +753,27 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+        [HttpPost]
+        public IHttpActionResult SaveSpotProjectLABPatches(SpotProjectLabModel model)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<bool> httpResponse = new BaseResponse<bool>();
+            try
+            {
+                SpotProjectLabs = model.spotProjectLabs;                
+                httpResponse.Data = _presenterAnalyze.UpdateSpotProjectLabValues();
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+
         [HttpGet]
         public HttpResponseMessage DownloadFile(string filePath)
         {
@@ -992,6 +1013,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public List<AnalyzeChart_G7> GrayNPDChart { get; set; }
 
         public DataTable dtPatchDetails { get; set; }
+        public List<SpotProjectLAB> SpotProjectLabs { get; set; }
         public DataTable dtFilteredPatchDetails { get; set; }
         public bool useDLP { get; set; }
         public byte[] DeviceLinkProfile { get; set; }

@@ -3557,6 +3557,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
 
         public DataTable dtPatchDetails { get; set; }
+        public List<SpotProjectLAB> SpotProjectLabs { get; set; }
         public DataTable dtFilteredPatchDetails { get; set; }
 
         public bool useDLP { get; set; }

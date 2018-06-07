@@ -914,6 +914,7 @@
     <Content Include="Images\summary-title-bg.gif" />
     <Content Include="Images\Sync DLP Report_preview.jpg" />
     <Content Include="Images\syncmeasurementdevice-management.png" />
+    <Content Include="Images\tick-mark.png" />
     <Content Include="Images\Title-Bg-Black.gif" />
     <Content Include="Images\user-management.png" />
     <Content Include="Images\Validation Report_G7_preview.jpg" />

@@ -1183,6 +1183,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public List<AnalyzeChart_G7> GrayNPDChart { get; set; }
 
         public DataTable dtPatchDetails { get; set; }
+        public List<SpotProjectLAB> SpotProjectLabs { get; set; }
         public DataTable dtFilteredPatchDetails { get; set; }
         public bool useDLP { get; set; }
         public byte[] DeviceLinkProfile { get; set; }

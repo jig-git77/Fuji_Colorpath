@@ -18,10 +18,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public MeasurementDataResponse GetMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType)
         {
             var response = new MeasurementDataResponse()
-                               {
-                                   DcsData = new List<double>(),
-                                   PcsData = new List<double>()
-                               };
+            {
+                DcsData = new List<double>(),
+                PcsData = new List<double>()
+            };
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -87,7 +87,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_X"));
                                 response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_Y"));
                                 response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_Z"));
-                            }                           
+                            }
                         }
                     }
                 },
@@ -115,45 +115,45 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                   new XAttribute("Density_C", x.Density.Red),
                                                                                   new XAttribute("Density_M", x.Density.Green),
                                                                                   new XAttribute("Density_Y", x.Density.Blue),
-                                                                                  new XAttribute("Density_V", x.Density.Visual)    
-                                                                           
-                                                                                   //---Spectral Data
-                                                                                  //new XAttribute("nm380", x.Spectral.nm380),
-                                                                                  //new XAttribute("nm390", x.Spectral.nm390),
-                                                                                  //new XAttribute("nm400", x.Spectral.nm400),
-                                                                                  //new XAttribute("nm410", x.Spectral.nm410),
-                                                                                  //new XAttribute("nm420", x.Spectral.nm420),
-                                                                                  //new XAttribute("nm430", x.Spectral.nm430),
-                                                                                  //new XAttribute("nm440", x.Spectral.nm440),
-                                                                                  //new XAttribute("nm450", x.Spectral.nm450),
-                                                                                  //new XAttribute("nm460", x.Spectral.nm460),
-                                                                                  //new XAttribute("nm470", x.Spectral.nm470),
-                                                                                  //new XAttribute("nm480", x.Spectral.nm480),
-                                                                                  //new XAttribute("nm490", x.Spectral.nm490),
-                                                                                  //new XAttribute("nm500", x.Spectral.nm500),
-                                                                                  //new XAttribute("nm510", x.Spectral.nm510),
-                                                                                  //new XAttribute("nm520", x.Spectral.nm520),
-                                                                                  //new XAttribute("nm530", x.Spectral.nm530),
-                                                                                  //new XAttribute("nm540", x.Spectral.nm540),
-                                                                                  //new XAttribute("nm550", x.Spectral.nm550),
-                                                                                  //new XAttribute("nm560", x.Spectral.nm560),
-                                                                                  //new XAttribute("nm570", x.Spectral.nm570),
-                                                                                  //new XAttribute("nm580", x.Spectral.nm580),
-                                                                                  //new XAttribute("nm590", x.Spectral.nm590),
-                                                                                  //new XAttribute("nm600", x.Spectral.nm600),
-                                                                                  //new XAttribute("nm610", x.Spectral.nm610),
-                                                                                  //new XAttribute("nm620", x.Spectral.nm620),
-                                                                                  //new XAttribute("nm630", x.Spectral.nm630),
-                                                                                  //new XAttribute("nm640", x.Spectral.nm640),
-                                                                                  //new XAttribute("nm650", x.Spectral.nm650),
-                                                                                  //new XAttribute("nm660", x.Spectral.nm660),
-                                                                                  //new XAttribute("nm670", x.Spectral.nm670),
-                                                                                  //new XAttribute("nm680", x.Spectral.nm680),
-                                                                                  //new XAttribute("nm690", x.Spectral.nm690),
-                                                                                  //new XAttribute("nm700", x.Spectral.nm700),
-                                                                                  //new XAttribute("nm710", x.Spectral.nm710),
-                                                                                  //new XAttribute("nm720", x.Spectral.nm720),
-                                                                                  //new XAttribute("nm730", x.Spectral.nm730)
+                                                                                  new XAttribute("Density_V", x.Density.Visual)
+
+                                                                         //---Spectral Data
+                                                                         //new XAttribute("nm380", x.Spectral.nm380),
+                                                                         //new XAttribute("nm390", x.Spectral.nm390),
+                                                                         //new XAttribute("nm400", x.Spectral.nm400),
+                                                                         //new XAttribute("nm410", x.Spectral.nm410),
+                                                                         //new XAttribute("nm420", x.Spectral.nm420),
+                                                                         //new XAttribute("nm430", x.Spectral.nm430),
+                                                                         //new XAttribute("nm440", x.Spectral.nm440),
+                                                                         //new XAttribute("nm450", x.Spectral.nm450),
+                                                                         //new XAttribute("nm460", x.Spectral.nm460),
+                                                                         //new XAttribute("nm470", x.Spectral.nm470),
+                                                                         //new XAttribute("nm480", x.Spectral.nm480),
+                                                                         //new XAttribute("nm490", x.Spectral.nm490),
+                                                                         //new XAttribute("nm500", x.Spectral.nm500),
+                                                                         //new XAttribute("nm510", x.Spectral.nm510),
+                                                                         //new XAttribute("nm520", x.Spectral.nm520),
+                                                                         //new XAttribute("nm530", x.Spectral.nm530),
+                                                                         //new XAttribute("nm540", x.Spectral.nm540),
+                                                                         //new XAttribute("nm550", x.Spectral.nm550),
+                                                                         //new XAttribute("nm560", x.Spectral.nm560),
+                                                                         //new XAttribute("nm570", x.Spectral.nm570),
+                                                                         //new XAttribute("nm580", x.Spectral.nm580),
+                                                                         //new XAttribute("nm590", x.Spectral.nm590),
+                                                                         //new XAttribute("nm600", x.Spectral.nm600),
+                                                                         //new XAttribute("nm610", x.Spectral.nm610),
+                                                                         //new XAttribute("nm620", x.Spectral.nm620),
+                                                                         //new XAttribute("nm630", x.Spectral.nm630),
+                                                                         //new XAttribute("nm640", x.Spectral.nm640),
+                                                                         //new XAttribute("nm650", x.Spectral.nm650),
+                                                                         //new XAttribute("nm660", x.Spectral.nm660),
+                                                                         //new XAttribute("nm670", x.Spectral.nm670),
+                                                                         //new XAttribute("nm680", x.Spectral.nm680),
+                                                                         //new XAttribute("nm690", x.Spectral.nm690),
+                                                                         //new XAttribute("nm700", x.Spectral.nm700),
+                                                                         //new XAttribute("nm710", x.Spectral.nm710),
+                                                                         //new XAttribute("nm720", x.Spectral.nm720),
+                                                                         //new XAttribute("nm730", x.Spectral.nm730)
                                                                          )).ToList());
 
                     DataAccessFactory.
@@ -193,14 +193,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         Tables[0].
                         AsEnumerable().
                         Select(x => new Measurement()
-                                        {
-                                            MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
-                                            MeasurementName = DataReader.ReadString(x, "MeasurementName"),
-                                            MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
-                                            UploadDate = DataReader.ReadString(x, "MeasurementDate"),
-                                            OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
-                                            IsUsed = DataReader.ReadBoolean(x, "IsUsed")
-                                        }).ToList();
+                        {
+                            MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                            MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                            MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
+                            UploadDate = DataReader.ReadString(x, "MeasurementDate"),
+                            OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
+                            IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                        }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementsOnRunId"));
             return measurements;
@@ -231,11 +231,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Tables[0].
                             AsEnumerable().
                             Select(x => new Measurement()
-                                            {
-                                                MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
-                                                MeasurementName = DataReader.ReadString(x, "MeasurementName"),
-                                                IsUsed = DataReader.ReadBoolean(x, "IsUsed")
-                                            }).ToList();
+                            {
+                                MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                                MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                                IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                            }).ToList();
 
                     measurements.ForEach(x =>
                                              {
@@ -243,12 +243,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      dsMeasurements.Tables[1].AsEnumerable().
                                                          Where(y => DataReader.ReadInt(y, "MeasurementID") == x.MeasurementId).
                                                          Select(y => new MeasurementPatch()
-                                                                         {
-                                                                             MeasurementId = DataReader.ReadInt(y, "MeasurementID"),
-                                                                             MeasurementPatchId = DataReader.ReadShort(y, "PatchTypeID"),
-                                                                             HtmlColor = DataReader.ReadString(y, "HtmlColor"),
-                                                                             Δe2000 = DataReader.ReadDecimal(y, "ΔE2000"),
-                                                                         }).ToList();
+                                                         {
+                                                             MeasurementId = DataReader.ReadInt(y, "MeasurementID"),
+                                                             MeasurementPatchId = DataReader.ReadShort(y, "PatchTypeID"),
+                                                             HtmlColor = DataReader.ReadString(y, "HtmlColor"),
+                                                             Δe2000 = DataReader.ReadDecimal(y, "ΔE2000"),
+                                                         }).ToList();
                                              });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetAnalyzeChartMeasurement"));
@@ -283,7 +283,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 dEMethod = DataReader.ReadString(x, "dEMethod"),
                                 MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus"),
                                 MeasurementDateString = String.Format("{0:d}", DataReader.ReadDate(x, "MeasurementDate")) + "-" + String.Format("{0:T}", DataReader.ReadDate(x, "MeasurementDate")) //---Formatted Date                                
-                }).ToList();
+                            }).ToList();
 
                     measurements.ForEach(x =>
                     {
@@ -295,7 +295,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     MeasurementId = DataReader.ReadInt(y, "MeasurementID"),
                                     MeasurementPatchId = DataReader.ReadShort(y, "PatchTypeID"),
                                     HtmlColor = DataReader.ReadString(y, "HtmlColor"),
-                                    Δe2000 = DataReader.ReadDecimal(y, "ΔE2000")                                   
+                                    Δe2000 = DataReader.ReadDecimal(y, "ΔE2000")
                                 }).ToList();
                     });
                 },
@@ -307,7 +307,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         {
             int returnValue = 0;
             string storedProc = "[CPSync4D].[UpdateMeasurementByAnalyzeChart]";
-            if(IsSync1DType)
+            if (IsSync1DType)
                 storedProc = "[CPSync].[UpdateMeasurementByAnalyzeChart]";
             if (IsVerification)
                 storedProc = "[CPSyncV].[UpdateVMeasurementByAnalyzeChart]";
@@ -330,7 +330,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         }
 
-        public int UpdateMeasurementByAnalyzeChartFromService(int MeasurementId,bool isUsedMeasurement, bool IsVerification = false, bool IsSync1DType = false)
+        public int UpdateMeasurementByAnalyzeChartFromService(int MeasurementId, bool isUsedMeasurement, bool IsVerification = false, bool IsSync1DType = false)
         {
             int returnValue = 0;
             string storedProc = "[CPSync4D].[UpdateMeasurementByAnalyzeChart]";
@@ -359,7 +359,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false)
         {
-            string storedProc = "CPSync4D.GetMeasurementDeltasByMeasurementID";  
+            string storedProc = "CPSync4D.GetMeasurementDeltasByMeasurementID";
             var measurements = new List<MeasurementPatch_AvgDelta>();
             Common.ImplementBusinessLogic(
                 () =>
@@ -397,7 +397,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var VmeasurementSummary = new List<Measurement>();
             string storedProc = "CPSyncV.GetVMeasurementDeltasByMeasurementID";
             if (IsSync1DType)
-                {
+            {
                 storedProc = "CPSync.GetMeasurementDeltasByMeasurementID";
                 if (IsAverageOfMeasurements)
                 {
@@ -423,7 +423,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                               MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
                               Customer = DataReader.ReadString(x, "Customer"),
                               Notes = DataReader.ReadString(x, "Notes"),
-                              PageOrSurface = IsSync1DType? "" : DataReader.ReadString(x, "PageOrSurface"),
+                              PageOrSurface = IsSync1DType ? "" : DataReader.ReadString(x, "PageOrSurface"),
                               JDFJobId = IsSync1DType ? "" : DataReader.ReadString(x, "JDFJobId"),
                               dEMethod = DataReader.ReadString(x, "dEMethod"),
                               MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus"),
@@ -462,7 +462,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
-           // var PatchDetails = new List<MeasurementPatchDetails>();
+            // var PatchDetails = new List<MeasurementPatchDetails>();
             string storedProc = "CPSync4D.GetPatchDetailsByMeasurementID";
             if (IsSync1DType)
                 storedProc = "CPSync.GetPatchDetailsByMeasurementID";
@@ -479,7 +479,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 storedProc,
                                 new object[] { MeasurementId });
                     if (dsMeasurements.Tables.Count > 0)
-                        dtPatchDetails = dsMeasurements.Tables[0];    
+                        dtPatchDetails = dsMeasurements.Tables[0];
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurement"));
             return dtPatchDetails;
@@ -559,13 +559,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper_EPrimaryPatches"));
             return ChartDetailArray;
-        } 
+        }
         #endregion
 
         public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
         {
             var DeltaEPatchDetails = new List<AnalyzeChart>();
-            
+
             string storedProc = "CPSync4D.GetChartData_InkPaper";
             if (IsSync1DType)
                 storedProc = "CPSync.GetChartData_InkPaper";
@@ -580,7 +580,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             GetDsResult(
                                 storedProc,
                                 new object[] { MeasurementId, From_ΔE });
-                                       
+
                     DeltaEPatchDetails = dsMeasurements.Tables[0].
                          AsEnumerable().
                         Select(x => new AnalyzeChart()
@@ -595,7 +595,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             TargetL = DataReader.ReadDecimal(x, "TargetL"),
                             Targeta = DataReader.ReadDecimal(x, "Targeta"),
                             Targetb = DataReader.ReadDecimal(x, "Targetb")
-                        }).ToList();                                       
+                        }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper_EPrimaryPatches"));
             return DeltaEPatchDetails;
@@ -630,7 +630,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Targetb = DataReader.ReadDecimal(x, "Targetb"),
                             ΔL = DataReader.ReadDecimal(x, "ΔL"),
                             Δa = DataReader.ReadDecimal(x, "Δa"),
-                            Δb = DataReader.ReadDecimal(x, "Δb")                      
+                            Δb = DataReader.ReadDecimal(x, "Δb")
                         }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper_PaperLAB"));
@@ -661,7 +661,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             HtmlColor = DataReader.ReadString(x, "HtmlColor"),
                             PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
                             Density = DataReader.ReadDecimal(x, "Density"),
-                            DensityLimit = DataReader.ReadDecimal(x, "DensityLimit")         
+                            DensityLimit = DataReader.ReadDecimal(x, "DensityLimit")
                         }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper_Density"));
@@ -753,7 +753,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_GrayGamut1"));
             return GamutChartData;
-        } 
+        }
         #endregion
 
         public List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
@@ -932,7 +932,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                              GetDsResult(
                                  storedProc,
                                  new object[] { MeasurementId, From_ΔE, ValidationType });
-                  
+
                     measurements = dsMeasurements;
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_Report_GetSingleMeasurement"));
@@ -955,14 +955,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         Tables[0].
                         AsEnumerable().
                         Select(x => new Measurement()
-                                        {
-                                            MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
-                                            MeasurementName = DataReader.ReadString(x, "MeasurementName"),
-                                            MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
-                                            UploadDate = DataReader.ReadString(x, "MeasurementDate"),
-                                            ProjectId = DataReader.ReadInt(x, "ProjectID"),
-                                            IsUsed = DataReader.ReadBoolean(x, "IsUsed")
-                                        }).ToList();
+                        {
+                            MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                            MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                            MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
+                            UploadDate = DataReader.ReadString(x, "MeasurementDate"),
+                            ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                            IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                        }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementsOnRunId"));
             return measurements;
@@ -1280,7 +1280,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return G7ChardDAta;
         }
 
-    
+
         public int Save1DMeasurement(Measurement measurement)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
@@ -1303,7 +1303,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                   new XAttribute("Density_Y", x.Density.Blue),
                                                                                   new XAttribute("Density_V", x.Density.Visual),
 
-                                                                                    //---Spectral Data
+                                                                                  //---Spectral Data
                                                                                   new XAttribute("nm380", x.Spectral.nm380),
                                                                                   new XAttribute("nm390", x.Spectral.nm390),
                                                                                   new XAttribute("nm400", x.Spectral.nm400),
@@ -1415,12 +1415,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     if (dsPcsDcsData.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow row in dsPcsDcsData.Tables[0].Rows)
-                        {         
+                        {
                             response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_C"));
                             response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_M"));
                             response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_Y"));
                             response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_K"));
-                            
+
                             if (PCSDataType == PCSDataTypes.Density)
                             {
                                 response.PcsData.Add(DataReader.ReadDouble(row, "Density_C"));
@@ -1483,7 +1483,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<string, string> GetTargetTVIData(int projectId, bool Is1DMeasurementSmoothing)
         {
             var TVIOptionsList = new Dictionary<string, string>();
-           
+
             string AnswerTVI_CMY = "";
             string AnswerTVI_K = "";
 
@@ -1511,7 +1511,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             }
                         }
                     }
-                   
+
                     //----Table 1 : Pass K TVI values as key value pair
                     if (dsTVIData.Tables[1].Rows.Count > 0)
                     {
@@ -1525,7 +1525,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             }
                         }
                     }
-                   
+
                     TVIOptionsList.Add("LinearizationTVIChannel0", AnswerTVI_CMY);
                     TVIOptionsList.Add("LinearizationTVIChannel1", AnswerTVI_CMY);
                     TVIOptionsList.Add("LinearizationTVIChannel2", AnswerTVI_CMY);
@@ -1657,7 +1657,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             DotGain = DataReader.ReadDecimal(x, "DotGain"),
                             HtmlColor = DataReader.ReadString(x, "HTMLColor"),
                             PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
-                            DotGainSpreadTh = DataReader.ReadDecimal(x, "DotGainSpreadTh")                           
+                            DotGainSpreadTh = DataReader.ReadDecimal(x, "DotGainSpreadTh")
                         }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_ISO_TVI1"));
@@ -1773,13 +1773,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var outParam = new Parameters() { ParameterName = "@CompatibilityNo", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
                 () =>
-                {                   
+                {
                     DataAccessFactory.
                         Instance.
                         ExecuteProcedure("CPSync.ChkAvgMeasurementCompatibility",
                                          new List<Parameters>()
                                                  {
-                                                     new Parameters() {ParameterName = "@OptimizeRunID", Type = DbType.Int32, Value = optimizeRunId}                                                  
+                                                     new Parameters() {ParameterName = "@OptimizeRunID", Type = DbType.Int32, Value = optimizeRunId}
                                                  },
                                          new List<Parameters>()
                                                  {
@@ -1795,17 +1795,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
         {
             var measurements = new DataSet();
             string storedProc = "Report.GetVMeasurementDataForScoring";
-           
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
                     var dsMeasurements = new DataSet();
-                        dsMeasurements = DataAccessFactory.
-                             Instance.
-                             GetDsResult(
-                                 storedProc,
-                                 new object[] { MeasurementId, From_ΔE, ProjectId, IsAverageOfMeasurements});
-                    
+                    dsMeasurements = DataAccessFactory.
+                         Instance.
+                         GetDsResult(
+                             storedProc,
+                             new object[] { MeasurementId, From_ΔE, ProjectId, IsAverageOfMeasurements });
+
                     measurements = dsMeasurements;
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_Report_GetReportGrading"));
@@ -1834,7 +1834,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         public DataTable GetSpotPatchDetailsofMeasurement(int OptimizeRunId)
-        {            
+        {
             string storedProc = "CPSpot.GetPatchDetailsByOptimizeRunID";
 
             DataTable dtPatchDetails = new DataTable();
@@ -1854,7 +1854,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dtPatchDetails;
         }
 
-        
+
 
         public int SaveSpotMeasurement(Measurement measurement)
         {
@@ -1862,15 +1862,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                var measurementPatches = new XElement("MeasurementPatches",
-                                                      measurement.MeasurementPatches.
-                                                          Select(x =>
-                                                                 new XElement("MeasurementPatch",
-                                                                              new XAttribute("SpotName", x.SampleName),
-                                                                              new XAttribute("Measured_L", x.CielabL),
-                                                                              new XAttribute("Measured_a", x.CielabA),
-                                                                              new XAttribute("Measured_b", x.CielabB)
-                                                                         )).ToList());
+                    var measurementPatches = new XElement("MeasurementPatches",
+                                                          measurement.MeasurementPatches.
+                                                              Select(x =>
+                                                                     new XElement("MeasurementPatch",
+                                                                                  new XAttribute("SpotName", x.SampleName),
+                                                                                  new XAttribute("Measured_L", x.CielabL),
+                                                                                  new XAttribute("Measured_a", x.CielabA),
+                                                                                  new XAttribute("Measured_b", x.CielabB)
+                                                                             )).ToList());
 
                     DataAccessFactory.
                         Instance.
@@ -2055,6 +2055,35 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return spotProjectChartSetting;
         }
 
+        public bool SaveSpotProjectLABValues(List<SpotProjectLAB> spotProjectLabs)
+        {
+            string storedProc = "CPSpot.UpdateSpotProjectLAB";
+            var outParam = new Parameters() { ParameterName = "@IsSuccess", Type = DbType.Int32 };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var spotProjectLabXML = new XElement("SpotProjectLabs",
+                                                          spotProjectLabs.
+                                                              Select(x =>
+                                                                     new XElement("Labs",
+                                                                                  new XAttribute("SpotProjectLABID", x.SpotProjectLABID),
+                                                                                  new XAttribute("IsSelected", x.IsSelected)
+                                                                         )).ToList());
+                    DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(storedProc,
+                                         new List<Parameters>()
+                                                 {
+                                                     new Parameters() {ParameterName = "@SpotProjectLabsXML", Value = spotProjectLabXML.ToString()},
+                                                 },
+                                         new List<Parameters>()
+                                                 {
+                                                     outParam
+                                                 });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
+            return Convert.ToInt32(outParam.Value) == 1 ? true : false;
+        }
         #endregion
 
         #region ITaskBase Members

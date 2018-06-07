@@ -5,6 +5,7 @@ using System.Text;
 
 namespace FujifilmUSA.Sync.Entity
 {
+    [Serializable]
     public class SpotProjectChartSetting
     {
         public int SpotProjectChartSettingID { get; set; }
@@ -31,12 +32,35 @@ namespace FujifilmUSA.Sync.Entity
 
     [Serializable]
     public class SpotTargetLAB
-    {
+    {        
         public short SpotID { get; set; }
         public string SpotName { get; set; }
         public decimal Target_L { get; set; }
         public decimal Target_a { get; set; }
         public decimal Target_b { get; set; }
-        public string HTMLColor { get; set; }
+        public string HTMLColor { get; set; }        
+    }
+
+    //[Serializable]
+    public class SpotProjectLAB
+    {
+        public int SpotProjectLABID { get; set; }
+        public int SpotProjectID { get; set; }
+        public short SpotID { get; set; }
+        public string SpotName { get; set; }
+        public decimal Target_L { get; set; }
+        public decimal Target_a { get; set; }
+        public decimal Target_b { get; set; }
+        public decimal Predicted_L { get; set; }
+        public decimal Predicted_a { get; set; }
+        public decimal Predicted_b { get; set; }
+        public decimal deltaE { get; set; }
+        public string Predicted_HTMLColor { get; set; }
+        public bool IsSelected { get; set; }
+    }
+
+    public class SpotProjectLabModel
+    {
+        public List<SpotProjectLAB> spotProjectLabs { get; set; }
     }
 }

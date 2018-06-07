@@ -215,6 +215,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new SpotProjectChartSetting();
         }
+        public bool SaveSpotProjectLABValues(List<SpotProjectLAB> spotProjectLabs)
+        {
+            return false;
+        }
         #endregion
 
         #region ITaskBase Members

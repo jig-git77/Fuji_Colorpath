@@ -46,6 +46,10 @@
     /*#tblSecondRunDeltas td{
         min-width:60px;
     }*/
+
+    .k-i-sort-asc-sm, .k-i-sort-desc-sm{
+        margin-left: 0px !important;
+    }    
 </style>
 
 <script type="application/javascript">
@@ -53,7 +57,7 @@
     var SERVICE_BASE_URL = '';
     var Resources = {};
     var currentSpotName = '';
-    $(document).ready(function () {        
+    $(document).ready(function () {
         //Default Action
         $(".hideclass").hide(); //Hide all content
         $("ul.tabs li:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").addClass("active").show(); //Activate first tab
@@ -201,7 +205,7 @@
                                 type: "number",
                                 //format: "{n4}"
                             },
-                            
+
                             Measured_L: {
                                 from: "Measured_L",
                                 type: "number",
@@ -251,12 +255,12 @@
                             IsSelected: {
                                 from: "IsSelected",
                                 type: "boolean",
-                            },                            
+                            },
                         }
                     }
                 },
                 pageSize: 20
-            },   
+            },
             resizable: true,
             sortable: true,
             filterable: {
@@ -267,14 +271,14 @@
                         eq: "Is equal to",
                         neq: "Is not equal to",
                         gte: "Is greater than or equal to",
-                        gt: "Is greater than",                        
+                        gt: "Is greater than",
                         lt: "Is less than"
                     },
                     string: {
                         contains: "Contains",
                         eq: "Is equal to",
                         neq: "Is not equal to",
-                        startswith: "Starts with",                        
+                        startswith: "Starts with",
                         doesnotcontain: "Does not contain",
                         endswith: "Ends with"
                     }
@@ -311,7 +315,7 @@
                     title: "<b>Patch</b>",
                     //template: "<span id='sp' style='display:inline-block;background-color:#FFB700;height:14px;width:30px;'></span>",
                     template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
-                    width: 50
+                    width: 55
                 },
                 //{
                 //    field: "SpotView",
@@ -321,10 +325,11 @@
                 //    width: 55,                    
                 //},
                 {
-                    field: "SpotView",
+                    field: "IsSelected",
                     filterable: false,
-                    title: "<b>View</b>",
-                    template: "<center><input type='checkbox' id='chkIsSelected' onclick='spotPatchSelected(this)' /></center>",
+                    //title: "<b>View</b>",
+                    title: "<img src='Images/tick-mark.png' style='width: 13px;height: 13px;margin-left: 10px;vertical-align: middle;' />",
+                    template: "<center><input type='checkbox' id='chkIsSelected' onclick='spotPatchSelected(this)' #=IsSelected?'checked':''#/></center>",
                     width: 55,
                 },
                 {
@@ -391,23 +396,11 @@
                     row.find('#lnkView').attr('title', Resources.gridAnalyzeToolTipViewResource);
                 });
             },
-            
+
         });
 
         $('#lnkLinkFilter').on('click', function (e) {
             $("form.k-filter-menu button[type='reset']").trigger("click");
-        });
-
-        $('#btnSaveSpotPatch').on('click', function (e) {
-            e.preventDefault();
-            
-            var dataSource = $('#divPathDetails').data("kendoGrid").dataSource;
-            debugger;
-            var changedSpots = $.grep(dataSource.data(), function (item) {
-                return item.dirty == true;
-            });
-
-
         });
 
         $('#btnDownloadSpotPatch').on('click', function (e) {
@@ -460,7 +453,7 @@
                 }
             });
 
-            
+
         })
 
         $('#btnDownloadSpotPatchExcel').on('click', function (e) {
@@ -512,15 +505,70 @@
                     $('#btnDownloadSpotPatchExcel').removeClass('active');
                     console.log(XMLHttpRequest.responseText);
                 }
-            });            
+            });
         })
-        
+
+        $('#btnSaveSpotPatch').on('click', function (e) {
+            e.preventDefault();
+            var dataSource = $('#divPathDetails').data("kendoGrid").dataSource;
+            debugger;
+            var changedSpots = $.grep(dataSource.data(), function (item) {
+                return item.dirty == true;
+            });
+
+            var spotpatchlab = [];
+            $.each(changedSpots, function (index, item) {
+                var spotlab = {
+                    SpotProjectLABID: item.SpotProjectLABID,                    
+                    //SpotProjectID: 0,
+                    //SpotID: 0,
+                    //SpotName: '',
+                    //Target_L: 0,
+                    //Target_a: 0,
+                    //Target_b: 0,
+                    //Predicted_L: 0,
+                    //Predicted_a: 0,
+                    //Predicted_b: 0,
+                    //deltaE: 0,
+                    //Predicted_HTMLColor: '',
+                    IsSelected: item.IsSelected,
+                };
+                spotpatchlab.push(spotlab);
+            });
+
+            var obj = {
+                spotProjectLabs: spotpatchlab
+            }
+
+            //console.log(filterObj);
+            $('#btnSaveSpotPatch').addClass('active');
+            $.ajax({
+                type: "POST",
+                url: SERVICE_BASE_URL + 'api/Analyze/SaveSpotProjectLABPatches',
+                data: obj,
+                dataType: "json",
+                success: function (response) {
+                    $('#btnSaveSpotPatch').removeClass('active');
+                    //if (response.data != null) {
+                    //    //console.log(response.data);
+                    //    var fileName = '~' + response.data;
+                    //    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                    //}
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $('#btnSaveSpotPatch').removeClass('active');
+                    console.log(XMLHttpRequest.responseText);
+                }
+            });
+
+
+        })
     });
 
     function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID, P_htmlColor, M_htmlColor, deltaE, deltaTP, deltaMT, deltaMP, SpotName) {
         measuredL = (isNaN(measuredL) || measuredL == null) ? 0 : measuredL;
         measuredA = (isNaN(measuredA) || measuredA == null) ? 0 : measuredA;
-        measuredB = (isNaN(measuredB) || measuredB == null) ? 0 : measuredB;        
+        measuredB = (isNaN(measuredB) || measuredB == null) ? 0 : measuredB;
         deltaE = (isNaN(deltaE) || deltaE == null) ? 0 : deltaE;
         deltaTP = (isNaN(deltaTP) || deltaTP == null) ? 0 : deltaTP;
         deltaMT = (isNaN(deltaMT) || deltaMT == null) ? 0 : deltaMT;
@@ -529,9 +577,9 @@
         //console.log("PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor);
         var oWindow;
         var passingURL = "PopupSpotColorPatchDetails.aspx?htmlColor=" + htmlColor + "&actualL=" + actualL + "&actualA=" + actualA + "&actualB=" + actualB + "&targetL=" + targetL + "&targetA=" + targetA + "&targetB=" + targetB + "&measuredL=" + measuredL + "&measuredA=" + measuredA + "&measuredB=" + measuredB + "&measurementID=" + measurementID + "&P_htmlColor=" + P_htmlColor + "&M_htmlColor=" + M_htmlColor + "&deltaE=" + deltaE + "&deltaTP=" + deltaTP + "&deltaMT=" + deltaMT + "&deltaMP=" + deltaMP;
-        oWindow = window.radopen(passingURL, "windowPatchDetails");       
+        oWindow = window.radopen(passingURL, "windowPatchDetails");
         oWindow.show();
-        
+
         return false;
     }
 
@@ -551,23 +599,23 @@
                 alert(exception);
             }
         });
-    }    
-
-    function OnSpotDetailsLoad(sender, eventArgs) {        
-        sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;">' + currentSpotName + '</td></tr></table>')        
     }
 
-    function OnSpotDetailsClose(sender, eventArgs) {        
-        sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;"></td></tr></table>')        
+    function OnSpotDetailsLoad(sender, eventArgs) {
+        sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;">' + currentSpotName + '</td></tr></table>')
     }
 
-    function spotPatchSelected(chk) {       
+    function OnSpotDetailsClose(sender, eventArgs) {
+        sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;"></td></tr></table>')
+    }
+
+    function spotPatchSelected(chk) {
         debugger;
         var uid = $(chk).closest("[data-uid]").data("uid")
         var dataSource = $('#divPathDetails').data("kendoGrid").dataSource;
         var item = dataSource.getByUid(uid);
         item.dirty = true;
-        item.IsSelected = $(chk).prop('checked');        
+        item.IsSelected = $(chk).prop('checked');
     }
 
 </script>
@@ -575,7 +623,7 @@
 <script type="text/javascript" language="javascript">
 
     //According to new or old Project open rad window
-    function ChooseRadWindow() {        
+    function ChooseRadWindow() {
         if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
 
             if (jQuery("input[id$=hdHasMeasurement]").val() == 'True' || jQuery("input[id$=hdHasMeasurement]").val() == 'true') {  //-------------If there are measurements under this opt. run, then only able to create DLP
@@ -653,7 +701,10 @@
                                             <div style="padding-left: 10px;">
 
                                                 <table class="PatchDetailsSummaryTable">
-                                                    <tr><td style="width:42%;"></td><td></td></tr>
+                                                    <tr>
+                                                        <td style="width: 42%;"></td>
+                                                        <td></td>
+                                                    </tr>
                                                     <tr>
                                                         <th colspan="2"><span>
                                                             <asp:Localize runat="server" ID="locSummary_Header"></asp:Localize>
@@ -831,7 +882,7 @@
                                     <div class="tab_middle">
                                         <div class="combopart">
                                             <div style="padding-left: 10px;">
-                                                <div id="divPathDetails"></div>                                                
+                                                <div id="divPathDetails"></div>
                                             </div>
                                             <div class="clear"></div>
                                         </div>
