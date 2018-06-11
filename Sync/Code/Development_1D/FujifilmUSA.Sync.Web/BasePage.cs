@@ -194,6 +194,13 @@ namespace FujifilmUSA.Sync.Web
                     NavigationToNoPermissionPage();
                 }
             }
+            else if (GetType().BaseType == typeof(SpotTargetManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSpotTarget))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
             #endregion
             #region Regular Pages
             else if (GetType().BaseType == typeof(OperationSelection))
