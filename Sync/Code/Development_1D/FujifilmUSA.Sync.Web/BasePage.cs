@@ -201,6 +201,34 @@ namespace FujifilmUSA.Sync.Web
                     NavigationToNoPermissionPage();
                 }
             }
+            else if (GetType().BaseType == typeof(ReferenceChartManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageReferenceChart))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(MetricTargetPresetManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(PrintStandardTypeManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddLookupTVILABDensity))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSync1DTVILABDensity))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
             #endregion
             #region Regular Pages
             else if (GetType().BaseType == typeof(OperationSelection))
