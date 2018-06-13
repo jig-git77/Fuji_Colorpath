@@ -331,6 +331,9 @@
                     title: "<img src='Images/tick-mark.png' style='width: 13px;height: 13px;margin-left: 10px;vertical-align: middle;' />",
                     template: "<center><input type='checkbox' id='chkIsSelected' onclick='spotPatchSelected(this)' #=IsSelected?'checked':''#/></center>",
                     width: 55,
+                    sortable: {
+                        initialDirection: "desc"
+                    }
                 },
                 {
                     field: "SpotName",
