@@ -299,7 +299,11 @@
                 //get value axis object
                 var valueAxis = chart.getAxis("valueAxis");
                 //get maximum value from the value axis
-                var maxValue = Math.abs(Math.max.apply(Math, valueAxis._axis.children.map(r => parseFloat(r.content))))
+                //var maxValue = Math.abs(Math.max.apply(Math, valueAxis._axis.children.map(r => parseFloat(r.content))))
+                var valueArray = $.map(valueAxis._axis.children, function (elem) {
+                    return parseInt(elem.content);
+                });
+                var maxValue = Math.abs(Math.max.apply(Math, valueArray));
                 //get top slot
                 var valueSlot = valueAxis.slot(maxValue);
 

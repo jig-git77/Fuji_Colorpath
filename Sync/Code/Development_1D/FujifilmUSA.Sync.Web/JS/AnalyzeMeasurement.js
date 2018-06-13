@@ -1355,7 +1355,7 @@ function BindAnalyzeChart() {
 
 ////**************** START BIND THE AB COMPARISION INK PAPER CHART  ****************////
 function BindInkPaperChartABComparision() {
-
+    
     var measurementID = parseInt($hdnCurrentMeasurement.val());
     var apiParameters = {
         MeasurementId: measurementID,
@@ -5708,3 +5708,13 @@ function getPathForReportGrading() {
 function getPathForCMYKDensityReport() {
     return reportCMYKDensityPath;
 }
+
+Math.trunc = Math.trunc || function (x) {
+    if (isNaN(x)) {
+        return NaN;
+    }
+    if (x > 0) {
+        return Math.floor(x);
+    }
+    return Math.ceil(x);
+};
