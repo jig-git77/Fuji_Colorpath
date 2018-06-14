@@ -102,7 +102,7 @@
 
         }
 
-        var targetPaperGreenObj = [actualA, actualB];
+        var targetPaperGreenObj = [targetA, targetB];
         var greenSeriesArray = [];
         greenSeriesArray.push(targetPaperGreenObj);
         var kendoGreenSeriseObj = {};
@@ -121,7 +121,7 @@
             visible: false
         }
 
-        var targetPAPERRedObj = [targetA, targetB];
+        var targetPAPERRedObj = [actualA, actualB];
         var redSeriesArray = [];
         redSeriesArray.push(targetPAPERRedObj);
         var kendoRedSeriseObj = {};
@@ -215,7 +215,7 @@
             actualL = parseFloat($('#lblActualLRun0').html());
         }
 
-        var targetPaperGreenObj = [actualL];
+        var targetPaperGreenObj = [targetL];
         var greenSeriesArray = [];
         greenSeriesArray.push(targetPaperGreenObj);
         var kendoGreenSeriseObj = {};
@@ -234,7 +234,7 @@
             visible: false
         }
 
-        var targetPAPERRedObj = [targetL];
+        var targetPAPERRedObj = [actualL];
         var redSeriesArray = [];
         redSeriesArray.push(targetPAPERRedObj);
         var kendoRedSeriseObj = {};
