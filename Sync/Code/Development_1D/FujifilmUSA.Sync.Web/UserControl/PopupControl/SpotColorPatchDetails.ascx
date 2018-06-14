@@ -110,7 +110,7 @@
         kendoGreenSeriseObj.color = 'green';
         kendoGreenSeriseObj.markers = {
             background: 'green',
-            size: 20,
+            size: 16,
             visual: function (e) {
                 var src = kendo.format("Images/greendot.png");
                 var image = new kendo.drawing.Image(src, e.rect);
@@ -129,7 +129,7 @@
         kendoRedSeriseObj.color = 'red';
         kendoRedSeriseObj.markers = {
             background: 'red',
-            size: 15,
+            size: 12,
             visual: function (e) {
                 var src = kendo.format("Images/purpledot.png");
                 var image = new kendo.drawing.Image(src, e.rect);
@@ -148,7 +148,7 @@
         kendoBlueSeriseObj.color = 'blue';
         kendoBlueSeriseObj.markers = {
             background: 'blue',
-            size: 18,
+            size: 15,
             visible: hasMeasurement,
             visual: function (e) {
                 var src = kendo.format("Images/rotateguntarget.png");
@@ -223,7 +223,7 @@
         kendoGreenSeriseObj.color = 'green';
         kendoGreenSeriseObj.markers = {
             background: 'green',
-            size: 22,
+            size: 16,
             visual: function (e) {
                 var src = kendo.format("Images/greendot.png");
                 var image = new kendo.drawing.Image(src, e.rect);
@@ -242,7 +242,7 @@
         kendoRedSeriseObj.color = 'red';
         kendoRedSeriseObj.markers = {
             background: 'red',
-            size: 15,
+            size: 12,
             visual: function (e) {
                 var src = kendo.format("Images/purpledot.png");
                 var image = new kendo.drawing.Image(src, e.rect);
@@ -261,7 +261,7 @@
         kendoBlueSeriseObj.color = 'blue';
         kendoBlueSeriseObj.markers = {
             background: 'blue',
-            size: 15,
+            size: 12,
             visible: hasMeasurement,
             visual: function (e) {
                 var src = kendo.format("Images/guntarget.png");
