@@ -1885,7 +1885,7 @@ function PopulateAnalyzeChart() {
 
         axisLabelClick: function (e) {
             if (!$('#chkAnalyzeAverageOfMeasurements').is(':checked')) {
-                var isChecked = $(e.element).html() != '☑' ? true : false;
+                var isChecked = $(e.element).text() != '☑' ? true : false;
                 //get the current clicked category data
                 var currentObj = e.value;
                 //check only one category available or not
