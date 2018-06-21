@@ -513,8 +513,7 @@
 
         $('#btnSaveSpotPatch').on('click', function (e) {
             e.preventDefault();
-            var dataSource = $('#divPathDetails').data("kendoGrid").dataSource;
-            debugger;
+            var dataSource = $('#divPathDetails').data("kendoGrid").dataSource;            
             var changedSpots = $.grep(dataSource.data(), function (item) {
                 return item.dirty == true;
             });
@@ -604,16 +603,15 @@
         });
     }
 
-    function OnSpotDetailsLoad(sender, eventArgs) {
+    function OnSpotDetailsLoad(sender, eventArgs) {        
         sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;">' + currentSpotName + '</td></tr></table>')
     }
 
-    function OnSpotDetailsClose(sender, eventArgs) {
+    function OnSpotDetailsClose(sender, eventArgs) {        
         sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;"></td></tr></table>')
     }
 
-    function spotPatchSelected(chk) {
-        debugger;
+    function spotPatchSelected(chk) {        
         var uid = $(chk).closest("[data-uid]").data("uid")
         var dataSource = $('#divPathDetails').data("kendoGrid").dataSource;
         var item = dataSource.getByUid(uid);
@@ -909,13 +907,15 @@
 
 <asp:HiddenField ID="hdfMeasurementID" runat="server" Value="0" ClientIDMode="Static" />
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True"
-    Height="330" Width="900" VisibleStatusbar="false"
+    Height="240" Width="900" VisibleStatusbar="false"
     ShowContentDuringLoad="false" Behaviors="Move,Close">
     <Windows>
-        <telerik:RadWindow ID="windowPatchDetails" runat="server" ShowContentDuringLoad="false" VisibleStatusbar="false" OnClientPageLoad="OnSpotDetailsLoad" OnClientClose="OnSpotDetailsClose">
+        <telerik:RadWindow ID="windowPatchDetails" runat="server" ShowContentDuringLoad="false" 
+            VisibleStatusbar="false" Title="Patch Details"  Width="900" Height="330"
+            Behaviors="Move,Close" OnClientClose="OnSpotDetailsClose"  OnClientPageLoad="OnSpotDetailsLoad">
         </telerik:RadWindow>
         <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
-            VisibleStatusbar="false" Title="Choose Next Action" Width="900" Height="330"
+            VisibleStatusbar="false" Title="Choose Next Action" Width="702" Height="250"
             Behaviors="Move,Close" NavigateUrl="~/PopupConfirmSave.aspx" meta:resourcekey="ConfirmSaveWindowResource1">
         </telerik:RadWindow>
     </Windows>
