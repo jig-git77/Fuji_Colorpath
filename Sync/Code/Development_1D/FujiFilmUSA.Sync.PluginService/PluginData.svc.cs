@@ -1,5 +1,6 @@
 ﻿using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
