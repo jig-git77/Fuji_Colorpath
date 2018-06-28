@@ -37,6 +37,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +74,8 @@
     </Compile>
     <None Include="measured_patches.json" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\FujifilmUSA.Sync.Entity.Measurement.datasource" />
+    <None Include="Properties\DataSources\FujifilmUSA.Sync.Entity.ReferenceChartData.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -82,13 +87,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj">
       <Project>{050CFE70-AFF6-4D52-93E6-2C804CF143D7}</Project>
       <Name>FujifilmUSA.Sync.Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

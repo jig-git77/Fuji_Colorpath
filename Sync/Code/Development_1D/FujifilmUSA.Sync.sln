@@ -28,6 +28,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujiFilmUSA.Sync.PluginService", "FujiFilmUSA.Sync.PluginService\FujiFilmUSA.Sync.PluginService.csproj", "{7CFF0E69-F50B-486A-97E4-E1ACE0FF7B7D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.App", "FujifilmUSA.Sync.App\FujifilmUSA.Sync.App.csproj", "{022BEA1F-3256-4787-8AB4-E75B46DAD4B8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7CFF0E69-F50B-486A-97E4-E1ACE0FF7B7D} = {7CFF0E69-F50B-486A-97E4-E1ACE0FF7B7D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

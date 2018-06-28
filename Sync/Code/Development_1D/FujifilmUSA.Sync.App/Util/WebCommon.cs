@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,20 +14,21 @@ namespace FujifilmUSA.Sync.App.Util
 {
     public static class WebCommon
     {
-        public static string BaseUri = "http://localhost/FujifilmUSA.Sync.PluginService/";
+        //public static string BaseUri = "http://localhost/FujifilmUSA.Sync.PluginService/";
+        public static string BaseUri = "http://localhost/FujifilmUSA.Sync.Service/";
         public static ReferenceChartData GetReferenceChart(string projectId, string referenceChartDisplayType, string IsSpotProjectType)
         {
             ReferenceChartData chartData = new ReferenceChartData();
             try
             {
-                string methodUrl = "PluginData.svc/GetReferenceChart/" + projectId + "/" + referenceChartDisplayType + "/" + IsSpotProjectType;
+                string methodUrl = "api/Plugin/GetReferenceChart?projectId=" + projectId + "&referenceChartDisplayType=" + referenceChartDisplayType + "&IsSpotProjectType=" + IsSpotProjectType;
                 using (HttpClient httpClient = new HttpClient())
                 {
                     var result = httpClient.GetAsync(BaseUri + methodUrl).Result;
                     if (result.IsSuccessStatusCode)
                     {
                         var resultString = result.Content.ReadAsStringAsync().Result;
-                        chartData = JsonConvert.DeserializeObject<ReferenceChartData>(resultString);                                               
+                        chartData = JsonConvert.DeserializeObject<ReferenceChartData>(resultString);
                     }
                 }
             }
@@ -39,24 +42,23 @@ namespace FujifilmUSA.Sync.App.Util
 
         public static bool SaveMeasurement(Measurement measurement)
         {
-            bool isResult= false;
+            bool isResult = false;
             try
             {
-                string methodUrl = "PluginData.svc/SaveMeasurement/";
+                string methodUrl = "api/Plugin/SaveMeasurement/";               
                 using (HttpClient httpClient = new HttpClient())
-                {
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(measurement), null, "application/json");
-                    var result = httpClient.PostAsync(BaseUri + methodUrl, content).Result;
+                {                    
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(measurement), Encoding.UTF8, "application/json");
+                    var result = httpClient.PostAsync(BaseUri + methodUrl, content).Result;                    
                     if (result.IsSuccessStatusCode)
-                    {
                         isResult = true;
-                    }
                 }
             }
             catch (Exception ex)
             {
                 throw;
             }
+
             return isResult;
         }
     }
