@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -19,7 +20,7 @@ namespace FujifilmUSA.Sync.App
         public Form1()
         {
             InitializeComponent();
-        }        
+        }
         private void btnGetReferenceChart_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtProjectID.Text))
@@ -28,10 +29,11 @@ namespace FujifilmUSA.Sync.App
                 return;
             }
 
-            lblRefChartPath.Text = "http://localhost/FujifilmUSA.Sync.PluginService/PluginData.svc/GetReferenceChart/";
+            lblRefChartPath.Text = ConfigurationManager.AppSettings["PluginServicePath"].ToString() + "/api/Plugin/GetReferenceChart/";
 
             string projectID = txtProjectID.Text;
             var obj = WebCommon.GetReferenceChart(projectID, "1", "false");
+            dtGrdPatchs.DataSource = null;
             dtGrdPatchs.AutoGenerateColumns = false;
             dtGrdPatchs.ColumnCount = 6;
 
@@ -59,7 +61,10 @@ namespace FujifilmUSA.Sync.App
             dtGrdPatchs.Columns[5].HeaderText = "CmykK";
             dtGrdPatchs.Columns[5].DataPropertyName = "CmykK";
 
-            dtGrdPatchs.DataSource = obj.ReferenceCharts;            
+            dtGrdPatchs.DataSource = obj.ReferenceCharts;
+
+            rtbChartSetting.Text = JsonConvert.SerializeObject(obj.ChartSetting, Formatting.Indented);
+            rtbDeviceSetting.Text = JsonConvert.SerializeObject(obj.DeviceSetting, Formatting.Indented);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -69,6 +74,11 @@ namespace FujifilmUSA.Sync.App
 
         private void btnUploadMeasurement_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtOptimizationRunID.Text))
+            {
+                MessageBox.Show("Please enter OptimizationRunID of ProjectID " + txtProjectID.Text);
+                return;
+            }
             openFileDialog1.InitialDirectory = "c:\\";
             openFileDialog1.Filter =
             "JSON Files (*.json)|*.json|" +
@@ -78,15 +88,89 @@ namespace FujifilmUSA.Sync.App
             openFileDialog1.RestoreDirectory = true;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                string fileContent= File.ReadAllText(openFileDialog1.FileName);
+                string fileContent = File.ReadAllText(openFileDialog1.FileName);
                 Measurement obj = JsonConvert.DeserializeObject<Measurement>(fileContent);
-                bool result =  WebCommon.SaveMeasurement(obj);
+                obj.ProjectId = Convert.ToInt32(txtProjectID.Text);
+                obj.OptimizeRunId = Convert.ToInt32(txtOptimizationRunID.Text);
+                bool result = WebCommon.SaveMeasurement(obj);
                 if (result)
                 {
-                    lblMessage.Text = "Measurement uploaded successfully.";
+                    //lblMessage.Text = "Measurement uploaded successfully.";
+                    BindMeasurements();
+                    MessageBox.Show("Measurement uploaded successfully.");
                 }
-            }            
+                else
+                {
+                    MessageBox.Show("Measurement upload unsuccessful.");
+                }
+            }
 
-        }        
+        }
+
+        private void btnLoadMeasurement_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtOptimizationRunID.Text))
+            {
+                MessageBox.Show("Please enter OptimizationRunID.");
+                return;
+            }
+            BindMeasurements();
+        }
+
+        private void dataGridMeasurement_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridMeasurement.Columns[e.ColumnIndex].Name == "Delete")
+            {
+                if (dataGridMeasurement.Rows.Count != e.RowIndex)
+                {
+                    string measurementID = dataGridMeasurement.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    bool result = WebCommon.DeleteMeasurement(measurementID);
+                    if (result)
+                    {
+                        BindMeasurements();
+                        MessageBox.Show("Measurement deleted successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Measurement delete uncsuccessful.");
+                    }
+                }
+            }
+        }
+
+        void BindMeasurements()
+        {
+
+            List<Measurement> measurements = new List<Measurement>();
+            measurements = WebCommon.GetMeasurementByOptimizationRun(txtOptimizationRunID.Text);
+            dataGridMeasurement.DataSource = null;
+            dataGridMeasurement.AutoGenerateColumns = false;
+            dataGridMeasurement.ColumnCount = 3;
+
+            dataGridMeasurement.Columns[0].Name = "MeasurementId";
+            dataGridMeasurement.Columns[0].HeaderText = "MeasurementId";
+            dataGridMeasurement.Columns[0].DataPropertyName = "MeasurementId";
+
+            dataGridMeasurement.Columns[1].Name = "MeasurementName";
+            dataGridMeasurement.Columns[1].HeaderText = "Measurement Name";
+            dataGridMeasurement.Columns[1].DataPropertyName = "MeasurementName";
+
+            dataGridMeasurement.Columns[2].Name = "UploadDate";
+            dataGridMeasurement.Columns[2].HeaderText = "Upload Date";
+            dataGridMeasurement.Columns[2].DataPropertyName = "UploadDate";
+
+
+            DataGridViewButtonColumn deleteColumn = new DataGridViewButtonColumn();
+            deleteColumn.Name = "Delete";
+            deleteColumn.Text = "Delete";
+            deleteColumn.UseColumnTextForButtonValue = true;
+            dataGridMeasurement.Columns.Add(deleteColumn);
+            dataGridMeasurement.AutoSize = true;
+            dataGridMeasurement.AllowUserToAddRows = false;
+            dataGridMeasurement.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridMeasurement.CellClick += new DataGridViewCellEventHandler(dataGridMeasurement_CellClick);
+            dataGridMeasurement.DataSource = measurements;
+        }
+
     }
 }

@@ -13,18 +13,18 @@ namespace FujiFilmUSA.Sync.PluginService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IPluginData" in both code and config file together.
     [ServiceContract]
-    public interface IPluginData: IViewPluginDataService
+    public interface IPluginData : IViewPluginDataService
     {
         [OperationContract]
         void DoWork();
 
-        [WebInvoke(UriTemplate = "cache", Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, 
+        [WebInvoke(UriTemplate = "cache", Method = "POST", BodyStyle = WebMessageBodyStyle.Bare,
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json)]
         object UpdateCache(Stream messages);
 
 
-        [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurement")]
+        [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurement", RequestFormat = WebMessageFormat.Json)]
         [OperationContract]
         void SaveMeasurement(Measurement measurement);
 
@@ -106,7 +106,7 @@ namespace FujiFilmUSA.Sync.PluginService
         new int CurrentUserId { get; set; }
 
         new void ErrorOccured(object sender, ErrorArgs e);
-        
+
 
         #endregion
     }

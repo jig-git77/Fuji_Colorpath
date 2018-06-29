@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -14,8 +15,8 @@ namespace FujifilmUSA.Sync.App.Util
 {
     public static class WebCommon
     {
-        //public static string BaseUri = "http://localhost/FujifilmUSA.Sync.PluginService/";
-        public static string BaseUri = "http://localhost/FujifilmUSA.Sync.Service/";
+        public static string BaseUri = ConfigurationManager.AppSettings["PluginServicePath"].ToString();
+
         public static ReferenceChartData GetReferenceChart(string projectId, string referenceChartDisplayType, string IsSpotProjectType)
         {
             ReferenceChartData chartData = new ReferenceChartData();
@@ -34,7 +35,6 @@ namespace FujifilmUSA.Sync.App.Util
             }
             catch (Exception ex)
             {
-
                 throw;
             }
             return chartData;
@@ -58,7 +58,50 @@ namespace FujifilmUSA.Sync.App.Util
             {
                 throw;
             }
+            return isResult;
+        }
 
+        public static List<Measurement> GetMeasurementByOptimizationRun(string OptimizationRunId)
+        {
+            List<Measurement> measurements = new List<Measurement>();
+            try
+            {
+                string methodUrl = "api/Plugin/GetMeasurementsByOptimizeId?optimizeRunId=" + OptimizationRunId;
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    var result = httpClient.GetAsync(BaseUri + methodUrl).Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var resultString = result.Content.ReadAsStringAsync().Result;
+                        measurements = JsonConvert.DeserializeObject<List<Measurement>>(resultString);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return measurements;
+        }
+
+        public static bool DeleteMeasurement(string measurementID)
+        {
+            bool isResult = false;
+            try
+            {
+                string methodUrl = "api/Plugin/DeleteMeasurement?measurementId="+ measurementID;
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(measurementID), Encoding.UTF8, "application/json");
+                    var result = httpClient.DeleteAsync(BaseUri + methodUrl).Result;
+                    if (result.IsSuccessStatusCode)
+                        isResult = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
             return isResult;
         }
     }

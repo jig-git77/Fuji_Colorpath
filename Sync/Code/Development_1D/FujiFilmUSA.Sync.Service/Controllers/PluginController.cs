@@ -15,8 +15,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         [HttpGet]
         public IHttpActionResult GetReferenceChart(string projectId, string referenceChartDisplayType, string IsSpotProjectType)
         {
-            IHttpActionResult actionResult = null;
-            BaseResponse<ReferenceChartData> httpResponse = new BaseResponse<ReferenceChartData>();
+            IHttpActionResult actionResult = null;            
             try
             {
                 this.ReferenceChartDisType = (EReferenceChartDisType)Enum.Parse(typeof(EReferenceChartDisType), referenceChartDisplayType);
@@ -31,13 +30,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.SpotProjectId = Convert.ToInt32(projectId);
                     presenter.GetSpotReferenceChartData();
                 }
-                httpResponse.Data = this.ReferenceChartData;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, ReferenceChartData));
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, this.ReferenceChartData));
             }
             catch (Exception ex)
             {
-
-                throw;
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
         }
@@ -46,21 +46,109 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public IHttpActionResult SaveMeasurement(Measurement measurement)
         {
             IHttpActionResult actionResult = null;
-            bool result = false;
             try
             {
                 this.Measurement = measurement;
                 var presenter = new PresenterPluginDataService(this);
                 presenter.SaveMeasurement();
-                result = true;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, true));
             }
             catch (Exception ex)
             {
-                result = false;                
-            }
-            actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, result));
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }            
             return actionResult;
         }
+
+        [HttpPost]
+        public IHttpActionResult SaveVMeasurement(Measurement measurement)
+        {
+            IHttpActionResult actionResult = null;
+            try
+            {
+                this.Measurement = measurement;
+                var presenter = new PresenterPluginDataService(this);
+                presenter.SaveVMeasurement();
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, true));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;            
+        }
+
+        [HttpPost]
+        public IHttpActionResult Save1DMeasurement(Measurement measurement)
+        {
+            IHttpActionResult actionResult = null;
+            try
+            {
+                this.Measurement = measurement;
+                var presenter = new PresenterPluginDataService(this);
+                presenter.Save1DMeasurement();
+
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, true));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetMeasurementsByOptimizeId(string optimizeRunId)
+        {
+            IHttpActionResult actionResult = null;
+            try
+            {
+                this.OptimizeRunId = Convert.ToInt32(optimizeRunId);
+                var presenter = new PresenterPluginDataService(this);
+                presenter.GetMeasurementsOnRunId();
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, Measurements));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+
+
+        [HttpDelete]
+        public IHttpActionResult DeleteMeasurement(string measurementId)
+        {
+            IHttpActionResult actionResult = null;
+            try
+            {
+                MeasurementId = Convert.ToInt32(measurementId);
+                var presenter = new PresenterPluginDataService(this);
+                presenter.DeleteMeasurement();
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, true));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+        
 
         #region IViewPluginDataService Members
         public Measurement Measurement { get; set; }

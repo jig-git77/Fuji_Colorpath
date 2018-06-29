@@ -39,6 +39,7 @@ namespace FujiFilmUSA.Sync.PluginService
 
         public void SaveVMeasurement(Measurement measurement)
         {
+            string str = JsonConvert.SerializeObject(measurement, Formatting.Indented);
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             presenter.SaveVMeasurement();
@@ -46,6 +47,7 @@ namespace FujiFilmUSA.Sync.PluginService
 
         public void Save1DMeasurement(Measurement measurement)
         {
+            string str = JsonConvert.SerializeObject(measurement, Formatting.Indented);
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             presenter.Save1DMeasurement();
