@@ -807,8 +807,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         chartData.DeviceSetting = new MeasurementDevice
                         {
                             SerialNumber = chartData.MeasureDeviceSrNo,
+                            InstrumentTypeId = Convert.ToInt16(DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "InstrumentTypeID")),
                             MeasurementSettings = new MeasurementSetting()
                             {
+                                InstrumentTypeId = Convert.ToInt16(DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "InstrumentTypeID")),
                                 IlluminantName =
                                                                                             DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "IlluminantType"),
                                 ObserverTypeName =
