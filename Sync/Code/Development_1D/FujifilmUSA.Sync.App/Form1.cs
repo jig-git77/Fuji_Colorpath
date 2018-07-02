@@ -29,10 +29,18 @@ namespace FujifilmUSA.Sync.App
                 return;
             }
 
-            lblRefChartPath.Text = ConfigurationManager.AppSettings["PluginServicePath"].ToString() + "/api/Plugin/GetReferenceChart/";
+            
 
             string projectID = txtProjectID.Text;
-            var obj = WebCommon.GetReferenceChart(projectID, "1", "false");
+            bool isSpotProject = rbtnSpot.Checked;
+            string chartType = "1";
+            if (rbtnOptimization.Checked)
+                chartType = "2";
+            else if (rbtnValidation.Checked)
+                chartType = "3";
+            
+
+            var obj = WebCommon.GetReferenceChart(projectID, chartType, isSpotProject.ToString());
             dtGrdPatchs.DataSource = null;
             dtGrdPatchs.AutoGenerateColumns = false;
             dtGrdPatchs.ColumnCount = 6;
@@ -65,6 +73,8 @@ namespace FujifilmUSA.Sync.App
 
             rtbChartSetting.Text = JsonConvert.SerializeObject(obj.ChartSetting, Formatting.Indented);
             rtbDeviceSetting.Text = JsonConvert.SerializeObject(obj.DeviceSetting, Formatting.Indented);
+
+            lblRefChartPath.Text = ConfigurationManager.AppSettings["PluginServicePath"].ToString() + "/api/Plugin/GetReferenceChart?projectId=" + projectID + "&referenceChartDisplayType=" + chartType + "&IsSpotProjectType=" + isSpotProject.ToString();
         }
 
         private void label1_Click(object sender, EventArgs e)

@@ -45,6 +45,10 @@
             this.txtOptimizationRunID = new System.Windows.Forms.TextBox();
             this.btnLoadMeasurement = new System.Windows.Forms.Button();
             this.dataGridMeasurement = new System.Windows.Forms.DataGridView();
+            this.rbtnProfiler = new System.Windows.Forms.RadioButton();
+            this.rbtnValidation = new System.Windows.Forms.RadioButton();
+            this.rbtnOptimization = new System.Windows.Forms.RadioButton();
+            this.rbtnSpot = new System.Windows.Forms.RadioButton();
             lblReferencePath = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrdPatchs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMeasurement)).BeginInit();
@@ -61,7 +65,7 @@
             // 
             // btnGetReferenceChart
             // 
-            this.btnGetReferenceChart.Location = new System.Drawing.Point(232, 8);
+            this.btnGetReferenceChart.Location = new System.Drawing.Point(544, 11);
             this.btnGetReferenceChart.Name = "btnGetReferenceChart";
             this.btnGetReferenceChart.Size = new System.Drawing.Size(137, 23);
             this.btnGetReferenceChart.TabIndex = 0;
@@ -73,7 +77,7 @@
             // 
             this.lblProjectID.AutoSize = true;
             this.lblProjectID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProjectID.Location = new System.Drawing.Point(9, 11);
+            this.lblProjectID.Location = new System.Drawing.Point(9, 15);
             this.lblProjectID.Name = "lblProjectID";
             this.lblProjectID.Size = new System.Drawing.Size(98, 13);
             this.lblProjectID.TabIndex = 1;
@@ -81,7 +85,7 @@
             // 
             // txtProjectID
             // 
-            this.txtProjectID.Location = new System.Drawing.Point(113, 8);
+            this.txtProjectID.Location = new System.Drawing.Point(113, 12);
             this.txtProjectID.Name = "txtProjectID";
             this.txtProjectID.Size = new System.Drawing.Size(100, 20);
             this.txtProjectID.TabIndex = 2;
@@ -195,11 +199,60 @@
             this.dataGridMeasurement.Size = new System.Drawing.Size(669, 100);
             this.dataGridMeasurement.TabIndex = 15;
             // 
+            // rbtnProfiler
+            // 
+            this.rbtnProfiler.AutoSize = true;
+            this.rbtnProfiler.Checked = true;
+            this.rbtnProfiler.Location = new System.Drawing.Point(222, 12);
+            this.rbtnProfiler.Name = "rbtnProfiler";
+            this.rbtnProfiler.Size = new System.Drawing.Size(85, 17);
+            this.rbtnProfiler.TabIndex = 16;
+            this.rbtnProfiler.TabStop = true;
+            this.rbtnProfiler.Text = "Profiler Chart";
+            this.rbtnProfiler.UseVisualStyleBackColor = true;
+            // 
+            // rbtnValidation
+            // 
+            this.rbtnValidation.AutoSize = true;
+            this.rbtnValidation.Location = new System.Drawing.Point(398, 12);
+            this.rbtnValidation.Name = "rbtnValidation";
+            this.rbtnValidation.Size = new System.Drawing.Size(71, 17);
+            this.rbtnValidation.TabIndex = 17;
+            this.rbtnValidation.TabStop = true;
+            this.rbtnValidation.Text = "Validation";
+            this.rbtnValidation.UseVisualStyleBackColor = true;
+            // 
+            // rbtnOptimization
+            // 
+            this.rbtnOptimization.AutoSize = true;
+            this.rbtnOptimization.Location = new System.Drawing.Point(310, 12);
+            this.rbtnOptimization.Name = "rbtnOptimization";
+            this.rbtnOptimization.Size = new System.Drawing.Size(82, 17);
+            this.rbtnOptimization.TabIndex = 18;
+            this.rbtnOptimization.TabStop = true;
+            this.rbtnOptimization.Text = "Optimization";
+            this.rbtnOptimization.UseVisualStyleBackColor = true;
+            // 
+            // rbtnSpot
+            // 
+            this.rbtnSpot.AutoSize = true;
+            this.rbtnSpot.Location = new System.Drawing.Point(475, 13);
+            this.rbtnSpot.Name = "rbtnSpot";
+            this.rbtnSpot.Size = new System.Drawing.Size(47, 17);
+            this.rbtnSpot.TabIndex = 19;
+            this.rbtnSpot.TabStop = true;
+            this.rbtnSpot.Text = "Spot\r\n";
+            this.rbtnSpot.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(695, 757);
+            this.ClientSize = new System.Drawing.Size(733, 757);
+            this.Controls.Add(this.rbtnSpot);
+            this.Controls.Add(this.rbtnOptimization);
+            this.Controls.Add(this.rbtnValidation);
+            this.Controls.Add(this.rbtnProfiler);
             this.Controls.Add(this.dataGridMeasurement);
             this.Controls.Add(this.btnLoadMeasurement);
             this.Controls.Add(this.txtOptimizationRunID);
@@ -243,6 +296,10 @@
         private System.Windows.Forms.TextBox txtOptimizationRunID;
         private System.Windows.Forms.Button btnLoadMeasurement;
         private System.Windows.Forms.DataGridView dataGridMeasurement;
+        private System.Windows.Forms.RadioButton rbtnProfiler;
+        private System.Windows.Forms.RadioButton rbtnValidation;
+        private System.Windows.Forms.RadioButton rbtnOptimization;
+        private System.Windows.Forms.RadioButton rbtnSpot;
     }
 }
 
