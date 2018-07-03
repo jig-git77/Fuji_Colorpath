@@ -23,14 +23,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (Convert.ToBoolean(IsSpotProjectType) == false)
                 {
                     this.ProjectId = Convert.ToInt32(projectId);
-                    presenter.GetReferenceChartData();
+                    presenter.GetPluginReferenceChartData();
                 }
                 else
                 {
                     this.SpotProjectId = Convert.ToInt32(projectId);
-                    presenter.GetSpotReferenceChartData();
+                    presenter.GetPluginSpotReferenceChartData();
                 }
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, this.ReferenceChartData));
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, this.ReferenceChartPlugin));
             }
             catch (Exception ex)
             {
@@ -159,6 +159,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public int MeasurementId { get; set; }
         public EReferenceChartDisType ReferenceChartDisType { get; set; }
         public int SpotProjectId { get; set; }
+        public ReferenceChartPlugin ReferenceChartPlugin { get; set; }
         #endregion
     }
 }

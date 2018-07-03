@@ -17,9 +17,9 @@ namespace FujifilmUSA.Sync.App.Util
     {
         public static string BaseUri = ConfigurationManager.AppSettings["PluginServicePath"].ToString();
 
-        public static ReferenceChartData GetReferenceChart(string projectId, string referenceChartDisplayType, string IsSpotProjectType)
+        public static ReferenceChartPlugin GetReferenceChart(string projectId, string referenceChartDisplayType, string IsSpotProjectType)
         {
-            ReferenceChartData chartData = new ReferenceChartData();
+            ReferenceChartPlugin chartData = new ReferenceChartPlugin();
             try
             {
                 string methodUrl = "api/Plugin/GetReferenceChart?projectId=" + projectId + "&referenceChartDisplayType=" + referenceChartDisplayType + "&IsSpotProjectType=" + IsSpotProjectType;
@@ -29,7 +29,7 @@ namespace FujifilmUSA.Sync.App.Util
                     if (result.IsSuccessStatusCode)
                     {
                         var resultString = result.Content.ReadAsStringAsync().Result;
-                        chartData = JsonConvert.DeserializeObject<ReferenceChartData>(resultString);
+                        chartData = JsonConvert.DeserializeObject<ReferenceChartPlugin>(resultString);
                     }
                 }
             }

@@ -110,5 +110,22 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
             return optimizeRunBusiness.DeleteSpotMeasurement(_viewPluginDataService.MeasurementId);
         }
+
+        public void GetPluginReferenceChartData()
+        {
+            var projectBusiness = Business.BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.ReferenceChartPlugin = projectBusiness.GetPluginReferenceChartData(_viewPluginDataService.ProjectId,
+                                                                                              _viewPluginDataService.ReferenceChartDisType);
+        }
+
+        public void GetPluginSpotReferenceChartData()
+        {
+            var projectBusiness = Business.BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.ReferenceChartPlugin = projectBusiness.GetPluginSpotReferenceChartData(_viewPluginDataService.SpotProjectId,
+                                                                                              _viewPluginDataService.ReferenceChartDisType);
+        }
+
     }
 }

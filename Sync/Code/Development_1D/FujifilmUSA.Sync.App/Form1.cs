@@ -69,7 +69,7 @@ namespace FujifilmUSA.Sync.App
             dtGrdPatchs.Columns[5].HeaderText = "CmykK";
             dtGrdPatchs.Columns[5].DataPropertyName = "CmykK";
 
-            dtGrdPatchs.DataSource = obj.ReferenceCharts;
+            dtGrdPatchs.DataSource = obj.ChartPatches;
 
             rtbChartSetting.Text = JsonConvert.SerializeObject(obj.ChartSetting, Formatting.Indented);
             rtbDeviceSetting.Text = JsonConvert.SerializeObject(obj.DeviceSetting, Formatting.Indented);
