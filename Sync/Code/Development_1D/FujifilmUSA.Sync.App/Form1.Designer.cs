@@ -49,6 +49,10 @@
             this.rbtnValidation = new System.Windows.Forms.RadioButton();
             this.rbtnOptimization = new System.Windows.Forms.RadioButton();
             this.rbtnSpot = new System.Windows.Forms.RadioButton();
+            this.rtbValidationSetting = new System.Windows.Forms.RichTextBox();
+            this.rtbPatchDetails = new System.Windows.Forms.RichTextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             lblReferencePath = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrdPatchs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMeasurement)).BeginInit();
@@ -93,15 +97,15 @@
             // dtGrdPatchs
             // 
             this.dtGrdPatchs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtGrdPatchs.Location = new System.Drawing.Point(12, 66);
+            this.dtGrdPatchs.Location = new System.Drawing.Point(12, 53);
             this.dtGrdPatchs.Name = "dtGrdPatchs";
-            this.dtGrdPatchs.Size = new System.Drawing.Size(669, 191);
+            this.dtGrdPatchs.Size = new System.Drawing.Size(669, 105);
             this.dtGrdPatchs.TabIndex = 3;
             // 
             // lblRefChartPath
             // 
             this.lblRefChartPath.AutoSize = true;
-            this.lblRefChartPath.Location = new System.Drawing.Point(16, 38);
+            this.lblRefChartPath.Location = new System.Drawing.Point(16, 34);
             this.lblRefChartPath.Name = "lblRefChartPath";
             this.lblRefChartPath.Size = new System.Drawing.Size(0, 13);
             this.lblRefChartPath.TabIndex = 5;
@@ -130,17 +134,17 @@
             // 
             // rtbChartSetting
             // 
-            this.rtbChartSetting.Location = new System.Drawing.Point(12, 292);
+            this.rtbChartSetting.Location = new System.Drawing.Point(12, 346);
             this.rtbChartSetting.Name = "rtbChartSetting";
-            this.rtbChartSetting.Size = new System.Drawing.Size(311, 238);
+            this.rtbChartSetting.Size = new System.Drawing.Size(214, 184);
             this.rtbChartSetting.TabIndex = 8;
             this.rtbChartSetting.Text = "";
             // 
             // rtbDeviceSetting
             // 
-            this.rtbDeviceSetting.Location = new System.Drawing.Point(361, 290);
+            this.rtbDeviceSetting.Location = new System.Drawing.Point(239, 346);
             this.rtbDeviceSetting.Name = "rtbDeviceSetting";
-            this.rtbDeviceSetting.Size = new System.Drawing.Size(320, 240);
+            this.rtbDeviceSetting.Size = new System.Drawing.Size(214, 184);
             this.rtbDeviceSetting.TabIndex = 9;
             this.rtbDeviceSetting.Text = "";
             // 
@@ -148,7 +152,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 268);
+            this.label1.Location = new System.Drawing.Point(11, 328);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(81, 13);
             this.label1.TabIndex = 10;
@@ -158,7 +162,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(364, 268);
+            this.label2.Location = new System.Drawing.Point(238, 328);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 13);
             this.label2.TabIndex = 11;
@@ -244,11 +248,51 @@
             this.rbtnSpot.Text = "Spot\r\n";
             this.rbtnSpot.UseVisualStyleBackColor = true;
             // 
+            // rtbValidationSetting
+            // 
+            this.rtbValidationSetting.Location = new System.Drawing.Point(467, 346);
+            this.rtbValidationSetting.Name = "rtbValidationSetting";
+            this.rtbValidationSetting.Size = new System.Drawing.Size(214, 184);
+            this.rtbValidationSetting.TabIndex = 20;
+            this.rtbValidationSetting.Text = "";
+            // 
+            // rtbPatchDetails
+            // 
+            this.rtbPatchDetails.Location = new System.Drawing.Point(12, 179);
+            this.rtbPatchDetails.Name = "rtbPatchDetails";
+            this.rtbPatchDetails.Size = new System.Drawing.Size(669, 146);
+            this.rtbPatchDetails.TabIndex = 21;
+            this.rtbPatchDetails.Text = "";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(464, 328);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(107, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Validation Setting";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(12, 163);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(83, 13);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Patch Details";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(733, 757);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.rtbPatchDetails);
+            this.Controls.Add(this.rtbValidationSetting);
             this.Controls.Add(this.rbtnSpot);
             this.Controls.Add(this.rbtnOptimization);
             this.Controls.Add(this.rbtnValidation);
@@ -300,6 +344,10 @@
         private System.Windows.Forms.RadioButton rbtnValidation;
         private System.Windows.Forms.RadioButton rbtnOptimization;
         private System.Windows.Forms.RadioButton rbtnSpot;
+        private System.Windows.Forms.RichTextBox rtbValidationSetting;
+        private System.Windows.Forms.RichTextBox rtbPatchDetails;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
 

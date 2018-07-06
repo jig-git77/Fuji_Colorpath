@@ -140,6 +140,35 @@
                     </td>
                 </tr>
             </table>
+            <br />
+            <table>
+                <tr runat="server">
+                    <td style="width: 22%;" align="right">
+                        <asp:Label ID="lblProjectID" runat="server" Text="Project ID"></asp:Label>:&nbsp;
+                    </td>
+                    <td style="height: 27px;">
+                        <asp:TextBox ID="txtProjectID" runat="server" ReadOnly="true"></asp:TextBox>
+                    </td>
+                    <td align="right" style="width: 29%;">
+                        <asp:Label ID="lblRunID" runat="server" Text="OptimizationRun ID" ></asp:Label>:&nbsp;
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtRunID" runat="server" ReadOnly="true"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 22%;" align="right">
+                        <asp:Label ID="lblProjectType" runat="server" Text="Project Type"></asp:Label>:&nbsp;
+                    </td>
+                    <td style="height: 27px;">
+                        <asp:TextBox ID="txtProjectType" runat="server" ReadOnly="true"></asp:TextBox>
+                    </td>
+                    <td align="right" style="width: 22%;">
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
         </div>
         <div class="float_r">
             <span>

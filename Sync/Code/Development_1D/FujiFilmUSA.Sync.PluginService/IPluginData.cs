@@ -99,7 +99,7 @@ namespace FujiFilmUSA.Sync.PluginService
         new int MeasurementId { get; set; }
         new EReferenceChartDisType ReferenceChartDisType { get; set; }
         new int SpotProjectId { get; set; }
-        ReferenceChartPlugin ReferenceChartPlugin { get; set; }
+        new ReferenceChartPlugin ReferenceChartPlugin { get; set; }
         #endregion
 
         #region IViewBase Members

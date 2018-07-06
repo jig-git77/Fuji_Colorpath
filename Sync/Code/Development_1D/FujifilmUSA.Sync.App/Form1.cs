@@ -71,9 +71,10 @@ namespace FujifilmUSA.Sync.App
 
             dtGrdPatchs.DataSource = obj.ChartPatches;
 
+            rtbPatchDetails.Text= JsonConvert.SerializeObject(obj.ChartPatches, Formatting.Indented);
             rtbChartSetting.Text = JsonConvert.SerializeObject(obj.ChartSetting, Formatting.Indented);
             rtbDeviceSetting.Text = JsonConvert.SerializeObject(obj.DeviceSetting, Formatting.Indented);
-
+            //rtbValidationSetting.Text = JsonConvert.SerializeObject(obj., Formatting.Indented);
             lblRefChartPath.Text = ConfigurationManager.AppSettings["PluginServicePath"].ToString() + "/api/Plugin/GetReferenceChart?projectId=" + projectID + "&referenceChartDisplayType=" + chartType + "&IsSpotProjectType=" + isSpotProject.ToString();
         }
 
