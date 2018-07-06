@@ -4503,9 +4503,10 @@ function PopulateTVISpreadChart() {
 
     var splineRangeResultList = $.grep(jsonDTSpreadSplineRangeChartDataList, function (element) { return element.UpperLimit != 0 && element.LowerLimit != 0 });
 
-    //var obj = Object.assign({}, splineRangeResultList[0]);
     var obj = {};
-    CopyObject(splineRangeResultList[0], obj)
+    if (splineRangeResultList.length > 0) {
+        CopyObject(splineRangeResultList[0], obj);
+    }    
     obj.UpperLimit = null;
     obj.LowerLimit = null;
     obj.TVI = 0;
@@ -4513,8 +4514,9 @@ function PopulateTVISpreadChart() {
     splineRangeResultList.push(obj);
 
     obj = {};
-    //obj = Object.assign({}, splineRangeResultList[0])
-    CopyObject(splineRangeResultList[0], obj)
+    if (splineRangeResultList.length > 0) {
+        CopyObject(splineRangeResultList[0], obj);
+    }
     obj.UpperLimit = null;
     obj.LowerLimit = null;
     obj.TVI = 100;
