@@ -189,6 +189,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string BrowserName { get; set; }
         public string EntryDate { get; set; }
 
+        public string EncyptedTocken { get; set; }
         #endregion
     }
 }

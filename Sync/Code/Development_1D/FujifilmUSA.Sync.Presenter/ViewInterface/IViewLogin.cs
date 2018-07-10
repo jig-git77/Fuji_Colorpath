@@ -12,5 +12,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         string OSName { get; set; }
         string BrowserName { get; set; }
         string EntryDate { get; set; }
+
+        string EncyptedTocken { get; set; }
     }
 }

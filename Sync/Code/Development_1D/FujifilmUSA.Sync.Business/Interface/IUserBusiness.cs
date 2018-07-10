@@ -25,5 +25,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         int UpdateUserDeviceInfo(int loginId, int measurementDeviceId, int densityType, int UVMode);
         List<MeasurementDevice> GetMeasurementDeviceList(int loginId, int deviceId, bool isSpotTargetType = false);
         int InsertLoginActivityLogs(int UserId, string OSName, string BrowserName, string EntryTime);
+        bool ValidateUser(string tocken);
     }
 }

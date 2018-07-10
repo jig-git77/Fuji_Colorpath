@@ -45,11 +45,11 @@ namespace FujifilmUSA.Sync.App.Util
             bool isResult = false;
             try
             {
-                string methodUrl = "api/Plugin/SaveMeasurement/";               
+                string methodUrl = "api/Plugin/SaveMeasurement/";
                 using (HttpClient httpClient = new HttpClient())
-                {                    
+                {
                     StringContent content = new StringContent(JsonConvert.SerializeObject(measurement), Encoding.UTF8, "application/json");
-                    var result = httpClient.PostAsync(BaseUri + methodUrl, content).Result;                    
+                    var result = httpClient.PostAsync(BaseUri + methodUrl, content).Result;
                     if (result.IsSuccessStatusCode)
                         isResult = true;
                 }
@@ -60,6 +60,29 @@ namespace FujifilmUSA.Sync.App.Util
             }
             return isResult;
         }
+
+        //public static bool SaveMeasurement(Measurement measurement)
+        //{
+        //    bool isResult = false;
+        //    try
+        //    {
+        //        string methodUrl = "PluginData.svc/SaveMeasurement/";
+        //        using (HttpClient httpClient = new HttpClient())
+        //        {
+        //            StringContent content = new StringContent(JsonConvert.SerializeObject(measurement), null, "application/json");
+        //            var result = httpClient.PostAsync("http://localhost/FujiFilmUSA.Sync.PluginService/" + methodUrl, content).Result;
+        //            if (result.IsSuccessStatusCode)
+        //            {
+        //                isResult = true;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //    return isResult;
+        //}
 
         public static List<Measurement> GetMeasurementByOptimizationRun(string OptimizationRunId)
         {

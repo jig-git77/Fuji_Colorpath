@@ -24,14 +24,16 @@ namespace FujiFilmUSA.Sync.PluginService
         {
             using (var streamReader = new StreamReader(messages))
             {
-               string inputString = streamReader.ReadToEnd();
-               // var inputData = JsonConvert.DeserializeObject<List<dynamic>>(inputString);
+                string inputString = streamReader.ReadToEnd();
+                // var inputData = JsonConvert.DeserializeObject<List<dynamic>>(inputString);
             }
             return null;
         }
 
         public void SaveMeasurement(Measurement measurement)
         {
+            string jsonString = JsonConvert.SerializeObject(measurement, Formatting.Indented);
+            ErrorLog.WriteJsonFile(jsonString, measurement.ProjectId.ToString(), measurement.OptimizeRunId.ToString());
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             presenter.SaveMeasurement();
@@ -39,6 +41,8 @@ namespace FujiFilmUSA.Sync.PluginService
 
         public void SaveVMeasurement(Measurement measurement)
         {
+            string jsonString = JsonConvert.SerializeObject(measurement, Formatting.Indented);
+            ErrorLog.WriteJsonFile(jsonString, measurement.ProjectId.ToString(), measurement.OptimizeRunId.ToString());
             string str = JsonConvert.SerializeObject(measurement, Formatting.Indented);
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
@@ -47,6 +51,8 @@ namespace FujiFilmUSA.Sync.PluginService
 
         public void Save1DMeasurement(Measurement measurement)
         {
+            string jsonString = JsonConvert.SerializeObject(measurement, Formatting.Indented);
+            ErrorLog.WriteJsonFile(jsonString, measurement.ProjectId.ToString(), measurement.OptimizeRunId.ToString());
             string str = JsonConvert.SerializeObject(measurement, Formatting.Indented);
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
