@@ -9,6 +9,9 @@ using System.Text;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Entity;
+using System.Data;
+using Newtonsoft.Json;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.Services
 {
@@ -27,6 +30,9 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public void SaveMeasurement(Entity.Measurement measurement)
         {
+            string jsonString = JsonConvert.SerializeObject(measurement, Formatting.Indented);
+            ErrorLog.WriteJsonFile(jsonString, measurement.ProjectId.ToString(), measurement.OptimizeRunId.ToString());
+
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             presenter.SaveMeasurement();
@@ -36,6 +42,9 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public void SaveVMeasurement(Entity.Measurement measurement)
         {
+            string jsonString = JsonConvert.SerializeObject(measurement, Formatting.Indented);
+            ErrorLog.WriteJsonFile(jsonString, measurement.ProjectId.ToString(), measurement.OptimizeRunId.ToString());
+
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             presenter.SaveVMeasurement();
@@ -45,6 +54,9 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public void Save1DMeasurement(Entity.Measurement measurement)
         {
+            string jsonString = JsonConvert.SerializeObject(measurement, Formatting.Indented);
+            ErrorLog.WriteJsonFile(jsonString, measurement.ProjectId.ToString(), measurement.OptimizeRunId.ToString());
+
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             presenter.Save1DMeasurement();
@@ -162,6 +174,9 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public void SaveSpotMeasurement(Entity.Measurement measurement)
         {
+            string jsonString = JsonConvert.SerializeObject(measurement, Formatting.Indented);
+            ErrorLog.WriteJsonFile(jsonString, measurement.ProjectId.ToString(), measurement.OptimizeRunId.ToString());
+
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             presenter.SaveSpotMeasurement();
@@ -200,6 +215,8 @@ namespace FujifilmUSA.Sync.Web.Services
         public EReferenceChartDisType ReferenceChartDisType { get; set; }
         public int SpotProjectId { get; set; }
         public ReferenceChartPlugin ReferenceChartPlugin { get; set; }
+        //public string ProjectType { get; set; }
+        //public DataTable dtMeasurementValidation { get; set; }
         #endregion
 
         #region IViewBase Members

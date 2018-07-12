@@ -33,6 +33,26 @@ namespace FujifilmUSA.Sync.Common
             sw.Flush();
             sw.Close();
         }
+
+        public static void WriteJsonFile(string message, string projectID, string runID)
+        {
+            string ErrorLogPath = Path.Combine(HttpContext.Current.Server.MapPath("~/"), "JsonTemp");
+
+            string FileName = projectID + "_" + runID + "_" + DateTime.Now.ToString("MM-dd-yyyy") + ".json";
+            string FilePath = Path.Combine(ErrorLogPath, FileName);
+
+            if (!Directory.Exists(ErrorLogPath))
+                Directory.CreateDirectory(ErrorLogPath);
+            if (!File.Exists(FilePath))
+            {
+                var myfile = File.Create(FilePath);
+                myfile.Close();
+            }
+            StreamWriter sw = new StreamWriter(FilePath, false);
+            sw.WriteLine(message);
+            sw.Flush();
+            sw.Close();
+        }
     }
 
 }

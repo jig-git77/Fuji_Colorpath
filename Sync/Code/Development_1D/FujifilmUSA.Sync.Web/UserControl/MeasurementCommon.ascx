@@ -305,8 +305,8 @@
             jQuery.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                //url: "Services/PluginDataService.svc/KeepUserSessionAlive/",
-                url: BASE_SERVICE_URL + "PluginData.svc/KeepUserSessionAlive/",
+                url: "Services/PluginDataService.svc/KeepUserSessionAlive/",
+                //url: BASE_SERVICE_URL + "PluginData.svc/KeepUserSessionAlive/",
                 dataType: "JSON",
                 success: function (response) { },
                 error: function (XMLHttpRequest, textStatus, errorThrown) { }
@@ -433,8 +433,8 @@
             var obj;
             saveMeasurementUrl = BASE_SERVICE_URL;
             if (jQuery("input[id$=hdIsVerification]").val() == "true") {
-                //saveMeasurementUrl = "Services/PluginDataService.svc/SaveVMeasurement";
-                saveMeasurementUrl += "PluginData.svc/SaveVMeasurement";
+                saveMeasurementUrl = "Services/PluginDataService.svc/SaveVMeasurement";
+                //saveMeasurementUrl += "PluginData.svc/SaveVMeasurement";
                 
                 obj = {
                     MeasurementName: MsmtName,
@@ -449,8 +449,8 @@
                 };
             }
             else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>') {
-                //saveMeasurementUrl = "Services/PluginDataService.svc/Save1DMeasurement";
-                saveMeasurementUrl += "PluginData.svc/Save1DMeasurement";
+                saveMeasurementUrl = "Services/PluginDataService.svc/Save1DMeasurement";
+                //saveMeasurementUrl += "PluginData.svc/Save1DMeasurement";
                 obj = {
                     MeasurementName: MsmtName,
                     MeasurementDate: MeasurementDateTime,
@@ -461,8 +461,8 @@
                 };
             }
             else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary %>') {
-                //saveMeasurementUrl = "Services/PluginDataService.svc/SaveSpotMeasurement";
-                saveMeasurementUrl += "PluginData.svc/SaveSpotMeasurement";
+                saveMeasurementUrl = "Services/PluginDataService.svc/SaveSpotMeasurement";
+                //saveMeasurementUrl += "PluginData.svc/SaveSpotMeasurement";
                 obj = {
                     MeasurementName: MsmtName,
                     MeasurementDate: MeasurementDateTime,
@@ -473,8 +473,8 @@
                 };
             }
             else {
-                //saveMeasurementUrl = "Services/PluginDataService.svc/SaveMeasurement";
-                saveMeasurementUrl += "PluginData.svc/SaveMeasurement";
+                saveMeasurementUrl = "Services/PluginDataService.svc/SaveMeasurement";
+                //saveMeasurementUrl += "PluginData.svc/SaveMeasurement";
                 obj = {
                     MeasurementName: MsmtName,
                     MeasurementDate: MeasurementDateTime,
@@ -523,20 +523,20 @@
         var ProjectId = jQuery("input[id$=hdProjectId]").val();
         var getMeasurementUrl = BASE_SERVICE_URL;
         if (jQuery("input[id$=hdIsVerification]").val() == "true") {
-            //getMeasurementUrl = "Services/PluginDataService.svc/GetVMeasurementsByProjectId/" + ProjectId;
-            getMeasurementUrl += "PluginData.svc/GetVMeasurementsByProjectId/" + ProjectId;
+            getMeasurementUrl = "Services/PluginDataService.svc/GetVMeasurementsByProjectId/" + ProjectId;
+            //getMeasurementUrl += "PluginData.svc/GetVMeasurementsByProjectId/" + ProjectId;
         }
         else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>') {
-            //getMeasurementUrl = "Services/PluginDataService.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
-            getMeasurementUrl += "PluginData.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
+            getMeasurementUrl = "Services/PluginDataService.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
+            //getMeasurementUrl += "PluginData.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
         }
         else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary %>') {
-            //getMeasurementUrl = "Services/PluginDataService.svc/GetSpotMeasurementsByOptimizeId/" + OptimizeRunId;
-            getMeasurementUrl += "PluginData.svc/GetSpotMeasurementsByOptimizeId/" + OptimizeRunId;
+            getMeasurementUrl = "Services/PluginDataService.svc/GetSpotMeasurementsByOptimizeId/" + OptimizeRunId;
+            //getMeasurementUrl += "PluginData.svc/GetSpotMeasurementsByOptimizeId/" + OptimizeRunId;
         }
         else {
-            //getMeasurementUrl = "Services/PluginDataService.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId;
-            getMeasurementUrl += "PluginData.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId;
+            getMeasurementUrl = "Services/PluginDataService.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId;
+            //getMeasurementUrl += "PluginData.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId;
         }
         jQuery.ajax({
             type: "GET",
@@ -601,22 +601,22 @@
     }
     function deletemeasurement(smeasurementId) {
         var measurementId = $.trim(smeasurementId);
-        var deleteMeasurementUrl = BASE_SERVICE_URL;
+        //var deleteMeasurementUrl = BASE_SERVICE_URL;
         if (jQuery("input[id$=hdIsVerification]").val() == "true") {
-            //deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteVMeasurement/" + measurementId;
-            deleteMeasurementUrl += "PluginData.svc/DeleteVMeasurement/" + measurementId;
+            deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteVMeasurement/" + measurementId;
+            //deleteMeasurementUrl += "PluginData.svc/DeleteVMeasurement/" + measurementId;
         }
         else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>') {
-            //deleteMeasurementUrl = "Services/PluginDataService.svc/Delete1DMeasurement/" + measurementId;
-            deleteMeasurementUrl += "PluginData.svc/Delete1DMeasurement/" + measurementId;
+            deleteMeasurementUrl = "Services/PluginDataService.svc/Delete1DMeasurement/" + measurementId;
+            //deleteMeasurementUrl += "PluginData.svc/Delete1DMeasurement/" + measurementId;
         }
         else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary %>') {
-            //deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteSpotMeasurement/" + measurementId;
-            deleteMeasurementUrl += "PluginData.svc/DeleteSpotMeasurement/" + measurementId;
+            deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteSpotMeasurement/" + measurementId;
+            //deleteMeasurementUrl += "PluginData.svc/DeleteSpotMeasurement/" + measurementId;
         }
         else {
-            //deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteMeasurement/" + measurementId;
-            deleteMeasurementUrl += "PluginData.svc/DeleteMeasurement/" + measurementId;
+            deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteMeasurement/" + measurementId;
+            //deleteMeasurementUrl += "PluginData.svc/DeleteMeasurement/" + measurementId;
         }
         jQuery.ajax({
             type: "POST",
