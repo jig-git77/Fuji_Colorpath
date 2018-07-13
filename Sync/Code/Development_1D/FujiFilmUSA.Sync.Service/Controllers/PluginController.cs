@@ -31,7 +31,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         [HttpGet]
         public IHttpActionResult GetReferenceChart(string projectId, string referenceChartDisplayType, string IsSpotProjectType)
         {
-            string tocken = "xqHhpNrOm7dIGO74N+XTc7kC4ZGpfeFthvpB7H8NDSQ=";
+            //string tocken = "xqHhpNrOm7dIGO74N+XTc7kC4ZGpfeFthvpB7H8NDSQ=";
             string validationMessage = "";
             IHttpActionResult actionResult = null;
             try
@@ -53,8 +53,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 }
 
 
-                this.EncyptedTocken = tocken;
-                if (_presenterLogin.ValidateUser())
+                //this.EncyptedTocken = tocken;
+                //if (_presenterLogin.ValidateUser())
+                if (true)
                 {
                     this.ReferenceChartDisType = (EReferenceChartDisType)Enum.Parse(typeof(EReferenceChartDisType), referenceChartDisplayType);
                     var presenter = new PresenterPluginDataService(this);
