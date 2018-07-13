@@ -48,7 +48,6 @@
             this.rbtnProfiler = new System.Windows.Forms.RadioButton();
             this.rbtnValidation = new System.Windows.Forms.RadioButton();
             this.rbtnOptimization = new System.Windows.Forms.RadioButton();
-            this.rbtnSpot = new System.Windows.Forms.RadioButton();
             this.rtbValidationSetting = new System.Windows.Forms.RichTextBox();
             this.rtbPatchDetails = new System.Windows.Forms.RichTextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -239,17 +238,6 @@
             this.rbtnOptimization.Text = "Optimization";
             this.rbtnOptimization.UseVisualStyleBackColor = true;
             // 
-            // rbtnSpot
-            // 
-            this.rbtnSpot.AutoSize = true;
-            this.rbtnSpot.Location = new System.Drawing.Point(478, 47);
-            this.rbtnSpot.Name = "rbtnSpot";
-            this.rbtnSpot.Size = new System.Drawing.Size(47, 17);
-            this.rbtnSpot.TabIndex = 19;
-            this.rbtnSpot.TabStop = true;
-            this.rbtnSpot.Text = "Spot\r\n";
-            this.rbtnSpot.UseVisualStyleBackColor = true;
-            // 
             // rtbValidationSetting
             // 
             this.rtbValidationSetting.Location = new System.Drawing.Point(467, 388);
@@ -320,7 +308,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.rtbPatchDetails);
             this.Controls.Add(this.rtbValidationSetting);
-            this.Controls.Add(this.rbtnSpot);
             this.Controls.Add(this.rbtnOptimization);
             this.Controls.Add(this.rbtnValidation);
             this.Controls.Add(this.rbtnProfiler);
@@ -370,7 +357,6 @@
         private System.Windows.Forms.RadioButton rbtnProfiler;
         private System.Windows.Forms.RadioButton rbtnValidation;
         private System.Windows.Forms.RadioButton rbtnOptimization;
-        private System.Windows.Forms.RadioButton rbtnSpot;
         private System.Windows.Forms.RichTextBox rtbValidationSetting;
         private System.Windows.Forms.RichTextBox rtbPatchDetails;
         private System.Windows.Forms.Label label4;
