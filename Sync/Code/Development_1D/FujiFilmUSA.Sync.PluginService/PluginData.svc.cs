@@ -3,6 +3,7 @@ using FujifilmUSA.Sync.Presenter;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -186,7 +187,8 @@ namespace FujiFilmUSA.Sync.PluginService
         public EReferenceChartDisType ReferenceChartDisType { get; set; }
         public int SpotProjectId { get; set; }
         public ReferenceChartPlugin ReferenceChartPlugin { get; set; }
-
+        public string ProjectType { get; set; }
+        public DataTable dtMeasurementValidation { get; set; }
         #endregion
 
         #region IViewBase Members

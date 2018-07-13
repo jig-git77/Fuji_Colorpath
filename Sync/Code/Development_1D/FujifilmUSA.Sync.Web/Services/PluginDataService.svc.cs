@@ -215,8 +215,8 @@ namespace FujifilmUSA.Sync.Web.Services
         public EReferenceChartDisType ReferenceChartDisType { get; set; }
         public int SpotProjectId { get; set; }
         public ReferenceChartPlugin ReferenceChartPlugin { get; set; }
-        //public string ProjectType { get; set; }
-        //public DataTable dtMeasurementValidation { get; set; }
+        public string ProjectType { get; set; }
+        public DataTable dtMeasurementValidation { get; set; }
         #endregion
 
         #region IViewBase Members

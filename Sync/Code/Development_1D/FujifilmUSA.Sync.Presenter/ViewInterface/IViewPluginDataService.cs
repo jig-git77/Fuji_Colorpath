@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
+using System.Data;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
@@ -14,5 +15,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         EReferenceChartDisType ReferenceChartDisType { get; set; }
         int SpotProjectId { get; set; }
         ReferenceChartPlugin ReferenceChartPlugin { get; set; }
+        string ProjectType { get; set; }
+        DataTable dtMeasurementValidation { get; set; }
     }
 }

@@ -2084,6 +2084,27 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
             return Convert.ToInt32(outParam.Value) == 1 ? true : false;
         }
+
+        public DataTable GetMeasurementValidation(int ProjectID, int OptimizeRunId, string ProjectType)
+        {
+            string storedProc = "CP.GetValidateMeasurement";
+
+            DataTable dtProjectDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { ProjectID, OptimizeRunId, ProjectType });
+                    if (dsMeasurements.Tables.Count > 0)
+                        dtProjectDetails = dsMeasurements.Tables[0];
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetValidateMeasurement"));
+            return dtProjectDetails;
+        }
         #endregion
 
         #region ITaskBase Members

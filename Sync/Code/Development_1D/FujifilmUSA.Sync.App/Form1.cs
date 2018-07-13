@@ -23,6 +23,8 @@ namespace FujifilmUSA.Sync.App
         }
         private void btnGetReferenceChart_Click(object sender, EventArgs e)
         {
+            string chartType = "1";
+            bool isSpotProject = false;
             if (string.IsNullOrEmpty(txtProjectID.Text))
             {
                 MessageBox.Show("Plese Enter Project ID");
@@ -30,15 +32,18 @@ namespace FujifilmUSA.Sync.App
             }
 
             
-
-            string projectID = txtProjectID.Text;
-            bool isSpotProject = rbtnSpot.Checked;
-            string chartType = "1";
+            if (comboProjectType.SelectedItem.ToString() == "Spot Library")
+            {
+                isSpotProject = true;
+            }
+            else if (comboProjectType.SelectedItem.ToString() == "Validation")
+            {
+                chartType = "3";
+            }
+            
+            string projectID = txtProjectID.Text;            
             if (rbtnOptimization.Checked)
                 chartType = "2";
-            else if (rbtnValidation.Checked)
-                chartType = "3";
-            
 
             var obj = WebCommon.GetReferenceChart(projectID, chartType, isSpotProject.ToString());
             dtGrdPatchs.DataSource = null;
@@ -71,7 +76,7 @@ namespace FujifilmUSA.Sync.App
 
             dtGrdPatchs.DataSource = obj.ChartPatches;
 
-            rtbPatchDetails.Text= JsonConvert.SerializeObject(obj.ChartPatches, Formatting.Indented);
+            rtbPatchDetails.Text = JsonConvert.SerializeObject(obj.ChartPatches, Formatting.Indented);
             rtbChartSetting.Text = JsonConvert.SerializeObject(obj.ChartSetting, Formatting.Indented);
             rtbDeviceSetting.Text = JsonConvert.SerializeObject(obj.DeviceSetting, Formatting.Indented);
             //rtbValidationSetting.Text = JsonConvert.SerializeObject(obj., Formatting.Indented);
@@ -99,14 +104,29 @@ namespace FujifilmUSA.Sync.App
             openFileDialog1.RestoreDirectory = true;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                
+
                 string fileContent = File.ReadAllText(openFileDialog1.FileName);
                 Measurement obj = JsonConvert.DeserializeObject<Measurement>(fileContent);
                 obj.ProjectId = Convert.ToInt32(txtProjectID.Text);
                 obj.OptimizeRunId = Convert.ToInt32(txtOptimizationRunID.Text);
-                bool result = WebCommon.SaveMeasurement(obj);
+
+                string projectType = getCurrentProjectType();
+                //if (projectType == "Spot Library")
+                //    measurementData.isSpotProject = true;
+
+                //int chartType = 1;
+                //if (rbtnOptimization.Checked)
+                //    chartType = 2;
+                //else if (rbtnValidation.Checked)
+                //    chartType = 3;
+
+                //measurementData.chartType = (EReferenceChartDisType)chartType;
+
+
+                bool result = WebCommon.SaveMeasurement(obj, projectType);
                 if (result)
                 {
-                    //lblMessage.Text = "Measurement uploaded successfully.";
                     BindMeasurements();
                     MessageBox.Show("Measurement uploaded successfully.");
                 }
@@ -134,8 +154,9 @@ namespace FujifilmUSA.Sync.App
             {
                 if (dataGridMeasurement.Rows.Count != e.RowIndex)
                 {
+                    string projectType = getCurrentProjectType();
                     string measurementID = dataGridMeasurement.Rows[e.RowIndex].Cells[0].Value.ToString();
-                    bool result = WebCommon.DeleteMeasurement(measurementID);
+                    bool result = WebCommon.DeleteMeasurement(measurementID, projectType);
                     if (result)
                     {
                         BindMeasurements();
@@ -151,9 +172,14 @@ namespace FujifilmUSA.Sync.App
 
         void BindMeasurements()
         {
+            string projectType = getCurrentProjectType();
 
             List<Measurement> measurements = new List<Measurement>();
-            measurements = WebCommon.GetMeasurementByOptimizationRun(txtOptimizationRunID.Text);
+            if(projectType== "Validation")
+                measurements = WebCommon.GetValidationMeasurement(txtProjectID.Text);
+            else
+                measurements = WebCommon.GetMeasurementByOptimizationRun(txtOptimizationRunID.Text, projectType);
+
             dataGridMeasurement.DataSource = null;
             dataGridMeasurement.AutoGenerateColumns = false;
             dataGridMeasurement.ColumnCount = 3;
@@ -183,5 +209,24 @@ namespace FujifilmUSA.Sync.App
             dataGridMeasurement.DataSource = measurements;
         }
 
+        public string getCurrentProjectType()
+        {
+            string projectType = "4D";
+            if (comboProjectType.SelectedItem.ToString() == "1D")
+            {
+                projectType = "1D";
+            }
+            else if (comboProjectType.SelectedItem.ToString() == "Spot Library")
+            {
+                projectType = "Spot Library";
+            }
+            else if (comboProjectType.SelectedItem.ToString() == "Validation")
+            {
+                projectType = "Validation";
+            }
+            return projectType;
+
+            
+        }
     }
 }

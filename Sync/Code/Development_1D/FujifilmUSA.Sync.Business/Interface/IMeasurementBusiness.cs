@@ -62,5 +62,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         DataTable GetSpotPatchDetailsForChartBySpotProjectID(int SpotProjectId);
         SpotProjectChartSetting GetSpotTargetChartSettingDetails(int SpotProjectId);
         bool SaveSpotProjectLABValues(List<SpotProjectLAB> spotProjectLabs);
+        DataTable GetMeasurementValidation(int ProjectID, int OptimizeRunId, string ProjectType);
     }
 }

@@ -127,5 +127,12 @@ namespace FujifilmUSA.Sync.Presenter
                                                                                               _viewPluginDataService.ReferenceChartDisType);
         }
 
+        public void GetMeasurementValidationData()
+        {            
+            var projectMeasurement = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            projectMeasurement.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.dtMeasurementValidation = projectMeasurement.GetMeasurementValidation(_viewPluginDataService.ProjectId, _viewPluginDataService.OptimizeRunId, _viewPluginDataService.ProjectType);
+        }
+
     }
 }
