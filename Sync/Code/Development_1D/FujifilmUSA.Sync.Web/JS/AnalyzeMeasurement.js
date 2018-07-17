@@ -689,6 +689,8 @@ function BindMeasurementPatchDetails() {
 
     var measurementID = parseInt($hdnCurrentMeasurement.val());
 
+    $('#hdPatchMatricSum').val(''); //set the metric sum --All default value
+
     $divMeasurementPatchDetails.kendoGrid({
         dataSource: {
             transport: {
@@ -1121,6 +1123,9 @@ function BindMeasurementPatchDetails() {
                         data: params,
                     }
                 }
+            },
+            dataBound: function (e) {
+                e.sender.select(0); //set default value for matric sum dropdown on measurement change
             },
             change: function (e) {
                 var matrixSum = '-1';
