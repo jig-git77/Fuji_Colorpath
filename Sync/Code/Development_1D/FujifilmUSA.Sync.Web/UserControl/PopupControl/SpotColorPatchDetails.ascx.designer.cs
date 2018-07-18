@@ -418,111 +418,75 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.WebControls.Label lblDeltaPredictionMeasured;
         
         /// <summary>
-        /// locTP control.
+        /// locPredicted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locTP;
+        protected global::System.Web.UI.WebControls.Localize locPredicted;
         
         /// <summary>
-        /// locMT control.
+        /// locMeasured control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locMT;
+        protected global::System.Web.UI.WebControls.Localize locMeasured;
         
         /// <summary>
-        /// locMP control.
+        /// lblPredicted_Target_L control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locMP;
+        protected global::System.Web.UI.WebControls.Label lblPredicted_Target_L;
         
         /// <summary>
-        /// lblTarget_PredictedL control.
+        /// lblMeasured_Target_L control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTarget_PredictedL;
+        protected global::System.Web.UI.WebControls.Label lblMeasured_Target_L;
         
         /// <summary>
-        /// lblMeasured_TargetL control.
+        /// lblPredicted_Target_a control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMeasured_TargetL;
+        protected global::System.Web.UI.WebControls.Label lblPredicted_Target_a;
         
         /// <summary>
-        /// lblMeasured_PredictedL control.
+        /// lblMeasured_Target_a control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMeasured_PredictedL;
+        protected global::System.Web.UI.WebControls.Label lblMeasured_Target_a;
         
         /// <summary>
-        /// lblTarget_PredictedA control.
+        /// lblPredicted_Target_b control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTarget_PredictedA;
+        protected global::System.Web.UI.WebControls.Label lblPredicted_Target_b;
         
         /// <summary>
-        /// lblMeasured_TargetA control.
+        /// lblMeasured_Target_b control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMeasured_TargetA;
-        
-        /// <summary>
-        /// lblMeasured_PredictedA control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMeasured_PredictedA;
-        
-        /// <summary>
-        /// lblTarget_PredictedB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTarget_PredictedB;
-        
-        /// <summary>
-        /// lblMeasured_TargetB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMeasured_TargetB;
-        
-        /// <summary>
-        /// lblMeasured_PredictedB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMeasured_PredictedB;
+        protected global::System.Web.UI.WebControls.Label lblMeasured_Target_b;
     }
 }

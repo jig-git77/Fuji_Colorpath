@@ -86,11 +86,11 @@
             targetA = parseFloat($('#lblTargetA').html());
             targetB = parseFloat($('#lblTargetB').html());
 
-            actualA = parseFloat($('#lblActualA').html());
-            actualB = parseFloat($('#lblActualB').html());
+            actualA = parseFloat($('#lblPredicted_Target_a').html());
+            actualB = parseFloat($('#lblPredicted_Target_b').html());
 
-            measuredA = parseFloat($('#lblMeasuredA').html());
-            measuredB = parseFloat($('#lblMeasuredB').html());
+            measuredA = parseFloat($('#lblMeasured_Target_a').html());
+            measuredB = parseFloat($('#lblMeasured_Target_b').html());
 
         } else {
 
@@ -102,7 +102,7 @@
 
         }
 
-        var targetPaperGreenObj = [targetA, targetB];
+        var targetPaperGreenObj = [0, 0];
         var greenSeriesArray = [];
         greenSeriesArray.push(targetPaperGreenObj);
         var kendoGreenSeriseObj = {};
@@ -159,7 +159,7 @@
         kendoBlueSeriseObj.highlight = {
             visible: false
         }
-
+        
         $("#divChartABComparision").kendoChart({
             seriesDefaults: {
                 type: "scatter",
@@ -171,25 +171,39 @@
             ],
             xAxis: {
                 name: "xAxis",
-                min: -128,
-                max: 128,
-                majorUnit: 128,
-                axisCrossingValues: [-128, 128],
-                //labels: { visible: false },
-                title: { text: "" },
+                min: -10,
+                max: 10,
+                majorUnit: 2.5,
+                axisCrossingValues: [-10, 10],
+                labels: {
+                    step: 2,
+                    template: function (e) {                        
+                        if (e.value == 0)
+                            return 'Target';
+                        return e.value;
+                    }                    
+                },
+                //title: { text: "a*" },
                 //line: { visible: false },
                 //majorGridLines: { visible: false },
                 //majorTicks: { visible: false }
             },
             yAxis: {
                 name: "yAxis",
-                min: -128,
-                max: 128,
-                step: 128,
-                majorUnit: 128,
-                axisCrossingValues: [-128, 128],
-                //labels: { visible: false },
-                title: { text: "" },
+                min: -10,
+                max: 10,
+                majorUnit: 2.5,
+                axisCrossingValues: [-10, 10],
+                labels: {
+                    step: 2,
+                    template: function (e) {
+                        if (e.value == 0)
+                            return 'Target';
+                        return e.value;
+                    },
+                    rotation: 270
+                },
+                //title: { text: "b*" },
                 //line: { visible: false },
                 //majorGridLines: { visible: false },
                 //majorTicks: { visible: false }
@@ -199,6 +213,9 @@
                 height: 250,
                 background: ''
             },
+            plotArea: {
+                background: "white",
+            },
         });
     }
 
@@ -207,8 +224,8 @@
         if (hasMeasurement) {
 
             targetL = parseFloat($('#lblTargetL').html());
-            actualL = parseFloat($('#lblActualL').html());
-            measuredL = parseFloat($('#lblMeasuredL').html());
+            actualL = parseFloat($('#lblPredicted_Target_L').html());
+            measuredL = parseFloat($('#lblMeasured_Target_L').html());
 
         } else {
             targetL = parseFloat($('#lblTargetLRun0').html());
@@ -277,18 +294,18 @@
             seriesDefaults: {
                 type: 'line',
             },
-            series: [kendoGreenSeriseObj, kendoRedSeriseObj,kendoBlueSeriseObj],
+            //series: [kendoGreenSeriseObj, kendoRedSeriseObj,kendoBlueSeriseObj],
+            series: [kendoRedSeriseObj, kendoBlueSeriseObj],
             categoryAxis: {
                 name: "categoryAxis",
                 categories: [],                
             },
             valueAxis: {
                 name: "valueAxis",                
-                axisCrossingValues: [0, 100],
-                min: 0,
-                max: 100,
-                step: 25,
-                majorUnit: 25,               
+                axisCrossingValues: [0, 10],
+                min: -10,
+                max: 10,                
+                majorUnit: 5,               
             },
             chartArea: {
                 width: 120,
@@ -303,9 +320,12 @@
                 var valueArray = $.map(valueAxis._axis.children, function (elem) {
                     return parseInt(elem.content);
                 });
-                var maxValue = Math.abs(Math.max.apply(Math, valueArray));
                 //get top slot
-                var valueSlot = valueAxis.slot(maxValue);
+                var maxValue = Math.abs(Math.max.apply(Math, valueArray));                
+                var maxValueSlot = valueAxis.slot(maxValue);
+
+                var minValue = Math.min.apply(Math, valueArray);
+                var minValueSlot = valueAxis.slot(minValue);
 
                 // Locate right-most category slot                
                 var categoryAxis = chart.getAxis("categoryAxis");
@@ -314,13 +334,13 @@
                 var maxCategorySlot = categoryAxis.slot(lastCategoryIndex);
 
                 //calculate height and width
-                var plotWidth = maxCategorySlot.origin.x - valueSlot.origin.x;
-                var plotHeight = maxCategorySlot.origin.y - valueSlot.origin.y;
+                var plotWidth = maxCategorySlot.origin.x - maxValueSlot.origin.x;
+                var plotHeight = minValueSlot.origin.y - maxValueSlot.origin.y;
 
                 //create ractangle
                 var rect = new geometry.Rect([
                     // Origin X, Y
-                    valueSlot.origin.x, valueSlot.origin.y
+                    maxValueSlot.origin.x, maxValueSlot.origin.y
                 ], [plotWidth, plotHeight]);
 
                 //create path using gradient
@@ -335,7 +355,7 @@
                         width: 1
                     }
                 });
-                var valueSlotLine = valueAxis.slot(targetL);
+                var valueSlotLine = valueAxis.slot(0);
                 line.moveTo(valueSlotLine.origin).lineTo([maxCategorySlot.origin.x, valueSlotLine.origin.y]);
                 var group = new kendo.drawing.Group();
                 group.append(path,line);
@@ -526,9 +546,9 @@
                                 <table class="spotTable" style="width:100%">
                                     <tr>
                                         <th style="width:30%;"></th>
-                                        <th style="width:20%;text-align:center;">T</th>
-                                        <th style="width:20%;text-align:center;">P</th>
-                                        <th style="width:20%;text-align:center;">M</th>
+                                        <th style="width:20%;text-align:center;"><img src="Images/greendot.png" style="width: 12px;margin-top: 1px;" /> T</th>
+                                        <th style="width:20%;text-align:center;"><img src="Images/purpledot.png" style="width: 12px;margin-top: 1px;" /> P</th>
+                                        <th style="width:20%;text-align:center;"><img src="Images/guntarget.png" style="width: 12px;margin-top: 1px;" /> M</th>
                                     </tr>
                                 </table>
                             </td>
@@ -585,24 +605,40 @@
                             <td>
                                 <table style="width:100%" class="spotTable">
                                     <tr>
-                                        <th style="width:42%"></th>
-                                        <th style="width:20%;text-align: center;">                                            
-                                            <asp:Localize runat="server" Text="Delta_T_P" ID="locTP" meta:resourcekey="locT_PResource"></asp:Localize>
+                                        <th style="width:20%"></th>
+                                        <th style="width:40%;text-align: right;"> 
+                                            <img src="Images/purpledot.png" style="width: 12px;margin-top: 1px;" />
+                                            <asp:Localize runat="server" Text="Predicted" ID="locPredicted" meta:resourcekey="locPredictedResource"></asp:Localize>
                                         </th>
-                                        <th style="width:20%;text-align: center;">                                            
-                                            <asp:Localize runat="server" Text="Delta_M_T" ID="locMT" meta:resourcekey="locM_TResource"></asp:Localize>
-                                        </th>
-                                        <th style="width:20%;text-align: center;">                                            
-                                            <asp:Localize runat="server" Text="Delta_M_P" ID="locMP" meta:resourcekey="locM_PResource"></asp:Localize>
-                                        </th>
+                                        <th style="width:40%;text-align: right;">           
+                                            <img src="Images/guntarget.png" style="width: 12px;margin-top: 1px;" />
+                                            <asp:Localize runat="server" Text="Delta_M_T" ID="locMeasured" meta:resourcekey="locMeasuredResource"></asp:Localize>
+                                        </th>                                        
                                     </tr>
                                 </table>
                             </td>
                         </tr>
                         <tr style="height:70px;">
                             <td>
-                                <%--<div runat="server" id="div6" style="height: 100px;background-color: #FFB700;"></div>--%>
                                 <table style="width:100%" class="tblStates">
+                                    <tr>
+                                        <th style="width:20%">L*</th>                                        
+                                        <td style="width:40%"><asp:Label runat="server" ID="lblPredicted_Target_L" ClientIDMode="Static"></asp:Label></td>
+                                        <td style="width:40%"><asp:Label runat="server" ID="lblMeasured_Target_L" ClientIDMode="Static"></asp:Label></td>
+                                    </tr>
+                                    <tr>
+                                        <th>a*</th>
+                                        <td><asp:Label runat="server" ID="lblPredicted_Target_a" ClientIDMode="Static"></asp:Label></td>
+                                        <td><asp:Label runat="server" ID="lblMeasured_Target_a" ClientIDMode="Static"></asp:Label></td>
+                                    </tr>
+                                    <tr>
+                                        <th>b*</th>
+                                        <td><asp:Label runat="server" ID="lblPredicted_Target_b" ClientIDMode="Static"></asp:Label></td>
+                                        <td><asp:Label runat="server" ID="lblMeasured_Target_b" ClientIDMode="Static"></asp:Label></td>
+                                    </tr>
+                                </table>
+                                <%--<div runat="server" id="div6" style="height: 100px;background-color: #FFB700;"></div>--%>
+                                <%--<table style="width:100%" class="tblStates">
                                     <tr>
                                         <th style="width:38%">L*</th>                                        
                                         <td style="width:20%"><asp:Label runat="server" ID="lblTarget_PredictedL" ClientIDMode="Static"></asp:Label></td>
@@ -621,7 +657,7 @@
                                         <td><asp:Label runat="server" ID="lblMeasured_TargetB" ClientIDMode="Static"></asp:Label></td>
                                         <td><asp:Label runat="server" ID="lblMeasured_PredictedB" ClientIDMode="Static"></asp:Label></td>
                                     </tr>
-                                </table>
+                                </table>--%>
                             </td>
                         </tr>
                     </table>

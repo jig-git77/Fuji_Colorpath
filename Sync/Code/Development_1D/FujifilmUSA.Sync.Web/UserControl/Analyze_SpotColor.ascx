@@ -402,6 +402,14 @@
 
         });
 
+
+        $("#divPathDetails").kendoTooltip({
+            filter: "tr", //this filter selects the first column cells
+            position: "right",
+            content: 'Click a row for more detail'
+        }).data("kendoTooltip");
+
+
         $('#lnkLinkFilter').on('click', function (e) {
             $("form.k-filter-menu button[type='reset']").trigger("click");
         });
