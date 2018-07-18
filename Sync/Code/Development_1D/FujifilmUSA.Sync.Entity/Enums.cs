@@ -74,9 +74,9 @@ namespace FujifilmUSA.Sync.Entity
         [Description("EUVIncludedMode_UV")]//M0
         UV = 0,
         [Description("EUVIncludedMode_PlusUV")]//M1
-        UVPlus = 1,       
+        UVPlus = 1,
         [Description("EUVIncludedMode_UVCut")]//M2
-        UVCut = 2      
+        UVCut = 2
     }
 
     public enum EObserverType
@@ -121,18 +121,18 @@ namespace FujifilmUSA.Sync.Entity
         Gray_75 = 30,
 
         //Newly added PatchTypes into CP.PatchType_Sync1D table
-        Cyan_10 = 112,      
+        Cyan_10 = 112,
         Cyan_20 = 113,
         Cyan_25 = 114,
-        Cyan_30 = 115,       
-        Cyan_40 = 116,       
-        Cyan_50 = 117,       
-        Cyan_60 = 118,       
+        Cyan_30 = 115,
+        Cyan_40 = 116,
+        Cyan_50 = 117,
+        Cyan_60 = 118,
         Cyan_70 = 119,
         Cyan_75 = 120,
-        Cyan_80 = 121,       
+        Cyan_80 = 121,
         Cyan_90 = 122,
-        
+
         Magenta_10 = 123,
         Magenta_20 = 124,
         Magenta_25 = 125,
@@ -144,7 +144,7 @@ namespace FujifilmUSA.Sync.Entity
         Magenta_75 = 131,
         Magenta_80 = 132,
         Magenta_90 = 133,
-        
+
         Yellow_10 = 134,
         Yellow_20 = 135,
         Yellow_25 = 136,
@@ -156,7 +156,7 @@ namespace FujifilmUSA.Sync.Entity
         Yellow_75 = 142,
         Yellow_80 = 143,
         Yellow_90 = 144,
-        
+
         Black_10 = 145,
         Black_20 = 146,
         Black_25 = 147,
@@ -168,7 +168,7 @@ namespace FujifilmUSA.Sync.Entity
         Black_75 = 153,
         Black_80 = 154,
         Black_90 = 155
-       
+
     }
     public enum ERole
     {
@@ -418,7 +418,7 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ELicenseType_Validation")]//Color Validation
         Validation = 11,
         [Description("ELicenseType_IccProfiling")]//ICC Profiling
-        IccProfiling = 12       
+        IccProfiling = 12
     }
 
     public enum UserType
@@ -494,7 +494,8 @@ namespace FujifilmUSA.Sync.Entity
         ReportSingleMeasurement_G7 = 16,
         ReportSingleMeasurement_ISO = 17,
         ReportSingleMeasurement_Default = 18,
-        ReportScoringMeasurement_Default = 19
+        ReportScoringMeasurement_Default = 19,
+        ReportSpotColorProject = 20
     }
 
     public enum ValidationRuleType
@@ -522,7 +523,7 @@ namespace FujifilmUSA.Sync.Entity
     }
 
     public enum PCSDataTypes
-    {    
+    {
         [Description("PCSDataTypes_Density")]
         Density = 0,
         [Description("PCSDataTypes_XYZ")]

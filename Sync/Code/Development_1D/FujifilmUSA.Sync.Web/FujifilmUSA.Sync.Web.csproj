@@ -851,6 +851,7 @@
     <Content Include="Images\Report-Title.png" />
     <Content Include="Images\rotateguntarget.png" />
     <Content Include="Images\SpotAB_Bg.gif" />
+    <Content Include="Images\SpotDetailsReport.png" />
     <Content Include="Images\SpotL_Bg.jpg" />
     <Content Include="Images\SpotProject.png" />
     <Content Include="Images\SpotProject_Certified.png" />

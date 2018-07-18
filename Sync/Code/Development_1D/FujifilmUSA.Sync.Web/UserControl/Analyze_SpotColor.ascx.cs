@@ -40,6 +40,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!Page.IsPostBack)
             {
+                hdnCurrentUserID.Value= Convert.ToString(SessionManager.Instance.CurrentUser.UserId) ?? "0";
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
                 if (SessionManager.Instance.CurrentProject.SpotTargetProject != null && SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition != null)
                 {

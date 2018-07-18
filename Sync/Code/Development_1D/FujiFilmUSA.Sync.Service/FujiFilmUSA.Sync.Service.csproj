@@ -115,11 +115,13 @@
     <Content Include="Images\Logo-report.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\Report-Title.png" />
+    <Content Include="Images\SpotProjectReport.png" />
     <Content Include="Images\summary-icon.png" />
     <Content Include="Images\VStatusFailedIcon.png" />
     <Content Include="Images\VStatusSuccessIcon.png" />
     <Content Include="Templates\kendoPrepressSingleMeasurement.htm" />
     <Content Include="Templates\kendoPrepressSingleMeasurement_Default.htm" />
+    <Content Include="Templates\kendoPrepressSingleMeasurement_SpotProject.htm" />
     <Content Include="Templates\kendoPrepressSingleMeasurement_G7.htm" />
     <Content Include="Templates\kendoPrepressSingleMeasurement_ISO.htm" />
     <Content Include="Templates\kendoPrepressSpotProjectPatch.htm" />

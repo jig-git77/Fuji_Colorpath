@@ -573,6 +573,35 @@
 
 
         })
+
+        $('#lnkGenerateSpotReport').on('click', function (e) {
+            e.preventDefault();
+            kendo.ui.progress($('#divReport'), true);
+            var optimizeRunId = parseInt($('#hdfOptimizationRunID').val());
+            var apiParameter = {                
+                OptimizeRunId: optimizeRunId,  
+                CurrentUserId: parseInt($('#hdnCurrentUserID').val())
+            };
+
+            $.ajax({
+                type: "POST",
+                url: SERVICE_BASE_URL + 'api/Report/ExportSpotAnalyzeChartReport',
+                data: apiParameter,
+                dataType: "json",
+                success: function (response) {
+                    kendo.ui.progress($('#divReport'), false);
+                    if (response.data != null) {
+                        console.log(response.data);
+                        var fileName = '~' + response.data;
+                        window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    kendo.ui.progress($('#divReport'), false);
+                    console.log(XMLHttpRequest.responseText);
+                }
+            });
+        });
     });
 
     function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID, P_htmlColor, M_htmlColor, deltaE, deltaTP, deltaMT, deltaMP, SpotName) {
@@ -663,6 +692,7 @@
 <div class="contant_middle">
     <div class="head">
         <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hdnCurrentUserID" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hdnIsNewNCP" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hdnIsNcpCreated" ClientIDMode="Static" />
         <asp:HiddenField ID="hdfOptimizationRunID" runat="server" Value="0" ClientIDMode="Static" />
@@ -697,6 +727,9 @@
                                     <li><span><a href="#tab2">
                                         <asp:Localize Text="Patch Details" ID="locPatchDetails"
                                             runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>
+                                    <li><span><a href="#tab3">
+                                        <asp:Localize Text="Report" ID="locReport"
+                                            runat="server" meta:resourcekey="locReportResource1"></asp:Localize></a></span></li>
                                 </ul>
 
                                 <div class="clear"></div>
@@ -893,6 +926,28 @@
                                             <div style="padding-left: 10px;">
                                                 <div id="divPathDetails"></div>
                                             </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                    <div class="tab_bottom">
+                                        &nbsp;
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div>
+                                <section id="tab3" class="contantbox tabcontant hideclass">
+                                    <div class="tab_top">&nbsp;</div>
+                                    <div class="tab_middle">
+                                        <div class="combopart">
+                                            <div id="divReport" style="padding-left: 10px; height: 450px;">
+                                                <div>
+                                                    <a id="lnkGenerateSpotReport">
+                                                        <img src="Images/SpotDetailsReport.png" alt="Spot Details Report" />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div>*Select colors in the Patch Details tab and click "save" to add colors to the Saved Color Report.</div>
                                             <div class="clear"></div>
                                         </div>
                                     </div>

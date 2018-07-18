@@ -46,4 +46,12 @@ namespace FujifilmUSA.Sync.Entity
 
         public ReportGrading grading { get; set; }
     }
+
+    public class SpotChartContent
+    {
+        public int? SpotProjectId { get; set; }
+        public int? MeasurementId { get; set; }
+        public int? OptimizeRunId { get; set; }
+        public int CurrentUserId { get; set; }
+    }
 }

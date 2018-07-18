@@ -219,6 +219,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return false;
         }
+        public DataSet GetReportDataOnSpotProject(int OptimizationRunId)
+        {
+            return new DataSet();
+        }
+
         #endregion
 
         #region ITaskBase Members
