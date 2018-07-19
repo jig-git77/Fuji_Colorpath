@@ -53,5 +53,33 @@ namespace FujifilmUSA.Sync.Entity
         public int? MeasurementId { get; set; }
         public int? OptimizeRunId { get; set; }
         public int CurrentUserId { get; set; }
+
+        public List<SpotPatchDetails> chartDetailList { get; set; }
+    }
+
+    public class SpotPatchDetails
+    {
+        public string spotName { get; set; }
+
+        public decimal TargetL { get; set; }
+        public decimal Targeta { get; set; }
+        public decimal Targetb { get; set; }
+
+        public decimal CIELAB_L { get; set; }
+        public decimal CIELAB_a { get; set; }
+        public decimal CIELAB_b { get; set; }
+
+        public decimal Measured_L { get; set; }
+        public decimal Measured_a { get; set; }
+        public decimal Measured_b { get; set; }
+    
+        public decimal deltaE_M_P { get; set; }
+        public decimal deltaE_M_T { get; set; }
+        public decimal deltaE_T_P { get; set; }
+
+        public string HTMLColor { get; set; }
+
+        public string patchChart_AB { get; set; }
+        public string patchChart_L { get; set; }
     }
 }
