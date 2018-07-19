@@ -1305,7 +1305,7 @@ namespace FujifilmUSA.Sync.Common
                                 foreach (var item in list)
                                 {
 
-                                    builder.Append("<table cellspacing='10px' style='margin-top:-5px'><tr><td style = 'width:175px;'>");
+                                    builder.Append("<table cellspacing='10px' style='margin-top:-5px;border-bottom: 1px solid black;'><tr><td style = 'width:175px;'>");
                                     builder.Append("<table width='100%' style='height:138px;'><tr><td colspan='2'><b>" + item.spotName + "</b></td></tr>");
                                     builder.Append("<tr><td colspan='2' style='background-color:" + item.HTMLColor + ";height:50px;'></td ></tr>");
                                     builder.Append("<tr><td>ΔE Target_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_T_P) + "</td></tr>");
