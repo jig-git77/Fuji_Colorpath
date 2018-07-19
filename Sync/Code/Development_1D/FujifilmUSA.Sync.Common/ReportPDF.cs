@@ -1276,51 +1276,71 @@ namespace FujifilmUSA.Sync.Common
                         SBStr.Replace("###TotalColors###", Convert.ToString(DT.Rows[0]["TotalColors"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["TotalColors"]).Trim());
                         SBStr.Replace("###SelectedColors###", Convert.ToString(DT.Rows[0]["SelectedColors"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["SelectedColors"]).Trim());
 
-                        StringBuilder builder = new StringBuilder();
+
+
+
+                        StreamReader reader = File.OpenText(System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/SpotChartDetailsPageTemplate.htm"));
+                        StringBuilder template = new StringBuilder(reader.ReadToEnd());
+                        reader.Close();
+
+                        StringBuilder htmlBuilder = new StringBuilder();
 
                         if (_spotChartContent.chartDetailList != null)
                         {
-                            foreach (var item in _spotChartContent.chartDetailList)
-                            {
-                                //builder.Append("<table width='100%' cellpadding='0' cellspacing='0'>");
-                                //builder.Append("<tr><td>");
-                                //builder.Append("<div><img src='" + item.patchChart_L + "' width='300px' height='200px' alt='PaperLab1' /></div><br/>");
-                                //builder.Append("</td></tr>");
-                                //builder.Append("</table>");
+                            int totalPage = _spotChartContent.chartDetailList.Count % 5 == 0 ? _spotChartContent.chartDetailList.Count / 5 : ((_spotChartContent.chartDetailList.Count / 5) + 1);
 
-                                builder.Append("<table cellspacing='10px' style='margin-top:-5px'><tr><td style = 'width:175px;'>");
-                                builder.Append("<table width='100%' style='height:138px;'><tr><td colspan='2'><b>" + item.spotName + "</b></td></tr>");
-                                builder.Append("<tr><td colspan='2' style='background-color:" + item.HTMLColor + ";height:50px;'></td ></tr>");
-                                builder.Append("<tr><td>ΔE Target_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_T_P) + "</td></tr>");
-                                builder.Append("<tr><td>ΔE Measured_Target</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_M_T) + "</td></tr>");
-                                builder.Append("<tr><td>ΔE Measured_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_M_P) + "</td></tr></tr></table></td>");
-                                builder.Append("<td style='width:175px;'><img src=" + item.patchChart_AB + " /></td>");
-                                builder.Append("<td style='width:70px;'><img src=" + item.patchChart_L + " /></td>");
-                                builder.Append("<td style='width:180px;'>");
-                                builder.Append("<table width='100%' cellspacing='2px' style='text-align:right;'>");
-                                builder.Append("<tr><th></th><th>ΔT_P</th><th>ΔM_T</th><th>ΔM_P</th></tr>");
-                                builder.Append("<tr><th>L*</th><td>" + string.Format("{0:0.00}", item.TargetL - item.CIELAB_L) + "</td><td>" + string.Format("{0:0.00}", item.Measured_L - item.TargetL) + "</td><td>" + string.Format("{0:0.00}", item.Measured_L - item.CIELAB_L) + "</td></tr>");
-                                builder.Append("<tr><th>a*</th><td>" + string.Format("{0:0.00}", item.Targeta - item.CIELAB_a) + "</td><td>" + string.Format("{0:0.00}", item.Measured_a - item.Targeta) + "</td><td>" + string.Format("{0:0.00}", item.Measured_a - item.CIELAB_a) + "</td></tr>");
-                                builder.Append("<tr><th>b*</th><td>" + string.Format("{0:0.00}", item.Targetb - item.CIELAB_b) + "</td><td>" + string.Format("{0:0.00}", item.Measured_b - item.Targetb) + "</td><td>" + string.Format("{0:0.00}", item.Measured_b - item.CIELAB_b) + "</td></tr>");
-                                builder.Append("<tr><th></th><th>T</th><th>P</th><th>M</th></tr>");
-                                builder.Append("<tr><th>L*</th><td>" + string.Format("{0:0.00}", item.TargetL) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_L) + "</td><td>" + string.Format("{0:0.00}", item.Measured_L) + "</td></tr>");
-                                builder.Append("<tr><th>a*</th><td>" + string.Format("{0:0.00}", item.Targeta) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_a) + "</td><td>" + string.Format("{0:0.00}", item.Measured_a) + "</td></tr>");
-                                builder.Append("<tr><th>b*</th><td>" + string.Format("{0:0.00}", item.Targetb) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_b) + "</td><td>" + string.Format("{0:0.00}", item.Measured_b) + "</td></tr>");
-                                builder.Append("</table></td></tr></table>");
+                            for (int index = 0; index < totalPage; index++)
+                            {
+                                StringBuilder pageTemplate = new StringBuilder();
+                                pageTemplate = new StringBuilder(template.ToString());
+
+                                pageTemplate.Replace("##IMAGES##", imagesPath);
+                                pageTemplate.Replace("##ReportTitle##", "SpotProjectReport");
+
+                                StringBuilder builder = new StringBuilder();
+                                //int count = index * 5;
+                                //var skipList = _spotChartContent.chartDetailList.Skip(count).ToList();
+                                var list = _spotChartContent.chartDetailList.Skip(index * 5).Take(5).ToList();
+
+                                foreach (var item in list)
+                                {
+
+                                    builder.Append("<table cellspacing='10px' style='margin-top:-5px'><tr><td style = 'width:175px;'>");
+                                    builder.Append("<table width='100%' style='height:138px;'><tr><td colspan='2'><b>" + item.spotName + "</b></td></tr>");
+                                    builder.Append("<tr><td colspan='2' style='background-color:" + item.HTMLColor + ";height:50px;'></td ></tr>");
+                                    builder.Append("<tr><td>ΔE Target_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_T_P) + "</td></tr>");
+                                    builder.Append("<tr><td>ΔE Measured_Target</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_M_T) + "</td></tr>");
+                                    builder.Append("<tr><td>ΔE Measured_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_M_P) + "</td></tr></tr></table></td>");
+                                    builder.Append("<td style='width:175px;'><img src=" + item.patchChart_AB + " /></td>");
+                                    builder.Append("<td style='width:70px;'><img src=" + item.patchChart_L + " /></td>");
+                                    builder.Append("<td style='width:180px;'>");
+                                    builder.Append("<table width='100%' cellspacing='2px' style='text-align:right;'>");
+                                    builder.Append("<tr><th></th><th>ΔT_P</th><th>ΔM_T</th><th>ΔM_P</th></tr>");
+                                    builder.Append("<tr><th>L*</th><td>" + string.Format("{0:0.00}", item.TargetL - item.CIELAB_L) + "</td><td>" + string.Format("{0:0.00}", item.Measured_L - item.TargetL) + "</td><td>" + string.Format("{0:0.00}", item.Measured_L - item.CIELAB_L) + "</td></tr>");
+                                    builder.Append("<tr><th>a*</th><td>" + string.Format("{0:0.00}", item.Targeta - item.CIELAB_a) + "</td><td>" + string.Format("{0:0.00}", item.Measured_a - item.Targeta) + "</td><td>" + string.Format("{0:0.00}", item.Measured_a - item.CIELAB_a) + "</td></tr>");
+                                    builder.Append("<tr><th>b*</th><td>" + string.Format("{0:0.00}", item.Targetb - item.CIELAB_b) + "</td><td>" + string.Format("{0:0.00}", item.Measured_b - item.Targetb) + "</td><td>" + string.Format("{0:0.00}", item.Measured_b - item.CIELAB_b) + "</td></tr>");
+                                    builder.Append("<tr><th></th><th>T</th><th>P</th><th>M</th></tr>");
+                                    builder.Append("<tr><th>L*</th><td>" + string.Format("{0:0.00}", item.TargetL) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_L) + "</td><td>" + string.Format("{0:0.00}", item.Measured_L) + "</td></tr>");
+                                    builder.Append("<tr><th>a*</th><td>" + string.Format("{0:0.00}", item.Targeta) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_a) + "</td><td>" + string.Format("{0:0.00}", item.Measured_a) + "</td></tr>");
+                                    builder.Append("<tr><th>b*</th><td>" + string.Format("{0:0.00}", item.Targetb) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_b) + "</td><td>" + string.Format("{0:0.00}", item.Measured_b) + "</td></tr>");
+                                    builder.Append("</table></td></tr></table>");
+                                }
+                                pageTemplate.Replace("###SpotPatchDetails###", builder.ToString());
+                                htmlBuilder.Append(pageTemplate);
                             }
                         }
                         else
                         {
-                            builder.Append("<table width='100%' cellpadding='0' cellspacing='0'>");
-                            builder.Append("<tr><td>");
-
-                            builder.Append("<div>No patch is selected.</div><br/>");
-                            builder.Append("</td></tr>");
-                            builder.Append("</table>");
+                            htmlBuilder = new StringBuilder(template.ToString());
+                            htmlBuilder.Append("<table width='100%' cellpadding='0' cellspacing='0'>");
+                            htmlBuilder.Append("<tr><td>");
+                            htmlBuilder.Append("<div>No patch is selected.</div><br/>");
+                            htmlBuilder.Append("</td></tr>");
+                            htmlBuilder.Append("</table>");
                         }
 
 
-                        SBStr.Replace("###SpotPatchDetails###", builder.ToString());
+                        SBStr.Replace("###ALL_SPOT_PATCH_DETAIL###", htmlBuilder.ToString());
                     }
                 }
                 else
