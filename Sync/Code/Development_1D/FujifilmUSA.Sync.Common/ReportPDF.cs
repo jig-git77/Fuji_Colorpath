@@ -1332,9 +1332,11 @@ namespace FujifilmUSA.Sync.Common
                         else
                         {
                             htmlBuilder = new StringBuilder(template.ToString());
+                            htmlBuilder.Replace("##IMAGES##", imagesPath);
+                            htmlBuilder.Replace("##ReportTitle##", "SpotProjectReport");
                             htmlBuilder.Append("<table width='100%' cellpadding='0' cellspacing='0'>");
                             htmlBuilder.Append("<tr><td>");
-                            htmlBuilder.Append("<div>No patch is selected.</div><br/>");
+                            htmlBuilder.Replace("###SpotPatchDetails###", "<div>No patch is selected.</div><br/>");
                             htmlBuilder.Append("</td></tr>");
                             htmlBuilder.Append("</table>");
                         }
