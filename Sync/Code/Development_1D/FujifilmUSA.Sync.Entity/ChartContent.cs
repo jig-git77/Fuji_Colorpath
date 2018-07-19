@@ -6,7 +6,7 @@ using System.Text;
 namespace FujifilmUSA.Sync.Entity
 {
     public class ChartContent
-    {        
+    {
         public int? MeasurementId { get; set; }
         public int? ProjectId { get; set; }
         public bool? IsAverageOfMeasurements { get; set; }
@@ -53,7 +53,7 @@ namespace FujifilmUSA.Sync.Entity
         public int? MeasurementId { get; set; }
         public int? OptimizeRunId { get; set; }
         public int CurrentUserId { get; set; }
-
+        public bool hasMeasurement { get; set; }
         public List<SpotPatchDetails> chartDetailList { get; set; }
     }
 
@@ -72,7 +72,9 @@ namespace FujifilmUSA.Sync.Entity
         public decimal Measured_L { get; set; }
         public decimal Measured_a { get; set; }
         public decimal Measured_b { get; set; }
-    
+
+
+        public decimal deltaE { get; set; }
         public decimal deltaE_M_P { get; set; }
         public decimal deltaE_M_T { get; set; }
         public decimal deltaE_T_P { get; set; }

@@ -60,7 +60,7 @@
     //variables for chart 
     var drawing = kendo.drawing;
     var geometry = kendo.geometry;
-
+    var hasMeasurement = false;
     var gradientGray = new drawing.LinearGradient({
         start: [1, 1], // Bottom left
         end: [1, 0],   // Top left
@@ -96,6 +96,7 @@
         SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
         var optimizationId = $('#hdfOptimizationRunID').val();
         var $divPathDetails = $("#divPathDetails");
+        
         $divPathDetails.kendoGrid({
             dataSource: {
                 //transport: {
@@ -120,6 +121,9 @@
                                     var spotStates = response.data.spotAnalyzeDetails;
                                     $('#hdfMeasurementID').val(spotStates.measurementID);
 
+                                    //check base run or not
+                                    hasMeasurement = parseInt($('#hdfMeasurementID').val()) > 0;
+
                                     $divPathDetails.find("th[data-field=SpotID] b").html(Resources.gridAnalyzeHeaderIDResource);
                                     $divPathDetails.find("th[data-field=SpotPatch] b").html(Resources.gridAnalyzeHeaderPatchResource);
                                     $divPathDetails.find("th[data-field=SpotView] b").html(Resources.gridAnalyzeHeaderViewResource);
@@ -132,6 +136,8 @@
                                     $divPathDetails.find("th[data-field=ΔE_M_T] b").html(Resources.gridAnalyzeHeaderEMTResource);
                                     $divPathDetails.find("th[data-field=ΔE_M_P] b").html(Resources.gridAnalyzeHeaderEMPResource);
 
+                                    generateABTargetChart(0, 0, 0, 0, hasMeasurement);
+                                    generateLTargetChart(0, 0, hasMeasurement);
                                 }
                                 options.success(spotStates.patchDetails);
                             },
@@ -597,7 +603,7 @@
             e.preventDefault();
             debugger;
             kendo.ui.progress($('#divReport'), true);
-
+            
             var chartList = [];
             var grid = $("#divPathDetails").data('kendoGrid')
             var selectedPatch = $.grep(grid.dataSource.data(), function (elem) {
@@ -618,12 +624,13 @@
                     Measured_L: item.Measured_L,
                     Measured_a: item.Measured_a,
                     Measured_b: item.Measured_b,
-
+                    
+                    deltaE: item.ΔE,
                     deltaE_M_P: item.ΔE_M_P,
                     deltaE_M_T: item.ΔE_M_T,
                     deltaE_T_P: item.ΔE_T_P,
-
-                    HTMLColor: item.HTMLColor
+                    
+                    HTMLColor: item.HTMLColor,                    
                 };
 
                 var P_T_L = item.CIELAB_L - item.TargetL;
@@ -635,31 +642,17 @@
                 var P_T_B = item.CIELAB_b - item.Targetb;
                 var M_T_B = item.Measured_b - item.Targetb;
 
-                detail.patchChart_AB = generateABTargetChart(P_T_A, M_T_A, P_T_B, M_T_B);
-                detail.patchChart_L = generateLTargetChart(P_T_L, M_T_L);
+                detail.patchChart_AB = generateABTargetChart(P_T_A, M_T_A, P_T_B, M_T_B, hasMeasurement);
+                detail.patchChart_L = generateLTargetChart(P_T_L, M_T_L, hasMeasurement);
 
                 chartList.push(detail);
             });
-
-
-            //var arr = [5, 10];
-            //$.each(arr, function (index,item) {
-
-            //    var detail= {
-            //        patchChart:''
-            //    };
-
-            //    var a = [];
-            //    a.push(item);
-            //    detail.patchChart = generateChart(a);
-            //    chartList.push(detail);
-            //});
-
 
             var optimizeRunId = parseInt($('#hdfOptimizationRunID').val());
             var apiParameter = {
                 OptimizeRunId: optimizeRunId,
                 CurrentUserId: parseInt($('#hdnCurrentUserID').val()),
+                hasMeasurement: hasMeasurement,
                 chartDetailList: chartList
             };
 
@@ -681,13 +674,10 @@
                     console.log(XMLHttpRequest.responseText);
                 }
             });
-        });
-
-        generateABTargetChart(0, 0, 0, 0);
-        generateLTargetChart(0, 0);
+        });        
     });
 
-    function generateABTargetChart(predicredA, measuredA, predicredB, measuredB) {
+    function generateABTargetChart(predicredA, measuredA, predicredB, measuredB, hasMeasurement) {
 
 
         var targetPaperGreenObj = [0, 0];
@@ -737,7 +727,7 @@
         kendoBlueSeriseObj.markers = {
             background: 'blue',
             size: 15,
-            //visible: hasMeasurement,
+            visible: hasMeasurement,
             visual: function (e) {
                 var src = kendo.format("Images/rotateguntarget.png");
                 var image = new kendo.drawing.Image(src, e.rect);
@@ -804,7 +794,7 @@
         return dummyChart.imageDataURL();
     }
 
-    function generateLTargetChart(predicredL, measuredL) {
+    function generateLTargetChart(predicredL, measuredL, hasMeasurement) {
 
         var targetPAPERRedObj = [predicredL];
         var redSeriesArray = [];
@@ -834,7 +824,7 @@
         kendoBlueSeriseObj.markers = {
             background: 'blue',
             size: 12,
-            //visible: hasMeasurement,
+            visible: hasMeasurement,
             visual: function (e) {
                 var src = kendo.format("Images/guntarget.png");
                 var image = new kendo.drawing.Image(src, e.rect);
@@ -1279,7 +1269,7 @@
                                             <div id="divReport" style="padding-left: 10px; height: 450px;">
                                                 <div>
                                                     <a id="lnkGenerateSpotReport">
-                                                        <img src="Images/SpotDetailsReport.png" alt="Spot Details Report" />
+                                                        <img id="imgSpotReport" src="Images/SpotDetailsReport.png" alt="Spot Details Report" />
                                                     </a>
                                                 </div>
                                             </div>

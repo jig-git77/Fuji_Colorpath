@@ -1304,25 +1304,49 @@ namespace FujifilmUSA.Sync.Common
 
                                 foreach (var item in list)
                                 {
-
                                     builder.Append("<table cellspacing='10px' style='margin-top:-5px;border-bottom: 1px solid black;'><tr><td style = 'width:175px;'>");
                                     builder.Append("<table width='100%' style='height:138px;'><tr><td colspan='2'><b>" + item.spotName + "</b></td></tr>");
                                     builder.Append("<tr><td colspan='2' style='background-color:" + item.HTMLColor + ";height:50px;'></td ></tr>");
-                                    builder.Append("<tr><td>ΔE Target_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_T_P) + "</td></tr>");
-                                    builder.Append("<tr><td>ΔE Measured_Target</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_M_T) + "</td></tr>");
-                                    builder.Append("<tr><td>ΔE Measured_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_M_P) + "</td></tr></tr></table></td>");
+                                    
+                                    if (_spotChartContent.hasMeasurement)
+                                    {
+                                        builder.Append("<tr><td>ΔE Target_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_T_P) + "</td></tr>");
+                                        builder.Append("<tr><td>ΔE Measured_Target</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_M_T) + "</td></tr>");
+                                        builder.Append("<tr><td>ΔE Measured_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_M_P) + "</td></tr>");
+                                    }
+                                    else
+                                    {
+                                        builder.Append("<tr><td>ΔE Target_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE) + "</td></tr>");
+                                    }
+                                    builder.Append("</tr></table></td>");                                    
                                     builder.Append("<td style='width:175px;'><img src=" + item.patchChart_AB + " /></td>");
                                     builder.Append("<td style='width:70px;'><img src=" + item.patchChart_L + " /></td>");
                                     builder.Append("<td style='width:180px;'>");
                                     builder.Append("<table width='100%' cellspacing='2px' style='text-align:right;'>");
-                                    builder.Append("<tr><th></th><th>ΔT_P</th><th>ΔM_T</th><th>ΔM_P</th></tr>");
-                                    builder.Append("<tr><th>L*</th><td>" + string.Format("{0:0.00}", item.TargetL - item.CIELAB_L) + "</td><td>" + string.Format("{0:0.00}", item.Measured_L - item.TargetL) + "</td><td>" + string.Format("{0:0.00}", item.Measured_L - item.CIELAB_L) + "</td></tr>");
-                                    builder.Append("<tr><th>a*</th><td>" + string.Format("{0:0.00}", item.Targeta - item.CIELAB_a) + "</td><td>" + string.Format("{0:0.00}", item.Measured_a - item.Targeta) + "</td><td>" + string.Format("{0:0.00}", item.Measured_a - item.CIELAB_a) + "</td></tr>");
-                                    builder.Append("<tr><th>b*</th><td>" + string.Format("{0:0.00}", item.Targetb - item.CIELAB_b) + "</td><td>" + string.Format("{0:0.00}", item.Measured_b - item.Targetb) + "</td><td>" + string.Format("{0:0.00}", item.Measured_b - item.CIELAB_b) + "</td></tr>");
-                                    builder.Append("<tr><th></th><th>T</th><th>P</th><th>M</th></tr>");
-                                    builder.Append("<tr><th>L*</th><td>" + string.Format("{0:0.00}", item.TargetL) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_L) + "</td><td>" + string.Format("{0:0.00}", item.Measured_L) + "</td></tr>");
-                                    builder.Append("<tr><th>a*</th><td>" + string.Format("{0:0.00}", item.Targeta) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_a) + "</td><td>" + string.Format("{0:0.00}", item.Measured_a) + "</td></tr>");
-                                    builder.Append("<tr><th>b*</th><td>" + string.Format("{0:0.00}", item.Targetb) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_b) + "</td><td>" + string.Format("{0:0.00}", item.Measured_b) + "</td></tr>");
+
+                                    if (_spotChartContent.hasMeasurement)
+                                    {
+                                        builder.Append("<tr><th></th><th>ΔT_P</th><th>ΔM_T</th><th>ΔM_P</th></tr>");
+                                        builder.Append("<tr><th>L*</th><td>" + string.Format("{0:0.00}", item.TargetL - item.CIELAB_L) + "</td><td>" + string.Format("{0:0.00}", item.Measured_L - item.TargetL) + "</td><td>" + string.Format("{0:0.00}", item.Measured_L - item.CIELAB_L) + "</td></tr>");
+                                        builder.Append("<tr><th>a*</th><td>" + string.Format("{0:0.00}", item.Targeta - item.CIELAB_a) + "</td><td>" + string.Format("{0:0.00}", item.Measured_a - item.Targeta) + "</td><td>" + string.Format("{0:0.00}", item.Measured_a - item.CIELAB_a) + "</td></tr>");
+                                        builder.Append("<tr><th>b*</th><td>" + string.Format("{0:0.00}", item.Targetb - item.CIELAB_b) + "</td><td>" + string.Format("{0:0.00}", item.Measured_b - item.Targetb) + "</td><td>" + string.Format("{0:0.00}", item.Measured_b - item.CIELAB_b) + "</td></tr>");
+                                        builder.Append("<tr><th></th><th>T</th><th>P</th><th>M</th></tr>");
+                                        builder.Append("<tr><th>L*</th><td>" + string.Format("{0:0.00}", item.TargetL) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_L) + "</td><td>" + string.Format("{0:0.00}", item.Measured_L) + "</td></tr>");
+                                        builder.Append("<tr><th>a*</th><td>" + string.Format("{0:0.00}", item.Targeta) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_a) + "</td><td>" + string.Format("{0:0.00}", item.Measured_a) + "</td></tr>");
+                                        builder.Append("<tr><th>b*</th><td>" + string.Format("{0:0.00}", item.Targetb) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_b) + "</td><td>" + string.Format("{0:0.00}", item.Measured_b) + "</td></tr>");
+                                    }
+                                    else
+                                    {
+                                        builder.Append("<tr><th></th><th colspan='2'>ΔT_P</th></tr>");
+                                        builder.Append("<tr><th>L*</th><td colspan='2'>" + string.Format("{0:0.00}", item.TargetL - item.CIELAB_L) + "</td></tr>");
+                                        builder.Append("<tr><th>a*</th><td colspan='2'>" + string.Format("{0:0.00}", item.Targeta - item.CIELAB_a) + "</td></tr>");
+                                        builder.Append("<tr><th>b*</th><td colspan='2'>" + string.Format("{0:0.00}", item.Targetb - item.CIELAB_b) + "</td></tr>");
+                                        builder.Append("<tr><th></th><th>T</th><th>P</th></tr>");
+                                        builder.Append("<tr><th>L*</th><td>" + string.Format("{0:0.00}", item.TargetL) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_L) + "</td></tr>");
+                                        builder.Append("<tr><th>a*</th><td>" + string.Format("{0:0.00}", item.Targeta) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_a) + "</td></tr>");
+                                        builder.Append("<tr><th>b*</th><td>" + string.Format("{0:0.00}", item.Targetb) + "</td><td>" + string.Format("{0:0.00}", item.CIELAB_b) + "</td></tr>");
+                                    }
+
                                     builder.Append("</table></td></tr></table>");
                                 }
                                 pageTemplate.Replace("###SpotPatchDetails###", builder.ToString());
