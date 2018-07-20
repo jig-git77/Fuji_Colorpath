@@ -641,14 +641,14 @@
                     HTMLColor: item.HTMLColor,                    
                 };
 
-                var P_T_L = item.CIELAB_L - item.TargetL;
-                var M_T_L = item.Measured_L - item.TargetL;
+                var P_T_L = item.TargetL - item.CIELAB_L;
+                var M_T_L = item.TargetL - item.Measured_L;
 
-                var P_T_A = item.CIELAB_a - item.Targeta;
-                var M_T_A = item.Measured_a - item.Targeta;
+                var P_T_A = item.Targeta - item.CIELAB_a;
+                var M_T_A = item.Targeta - item.Measured_a;
 
-                var P_T_B = item.CIELAB_b - item.Targetb;
-                var M_T_B = item.Measured_b - item.Targetb;
+                var P_T_B = item.Targetb - item.CIELAB_b;
+                var M_T_B = item.Targetb - item.Measured_b;
 
                 detail.patchChart_AB = generateABTargetChart(P_T_A, M_T_A, P_T_B, M_T_B, hasMeasurement);
                 detail.patchChart_L = generateLTargetChart(P_T_L, M_T_L, hasMeasurement);
