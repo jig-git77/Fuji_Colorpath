@@ -1319,7 +1319,7 @@ namespace FujifilmUSA.Sync.Common
                                         builder.Append("<tr><td>ΔE Target_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE) + "</td></tr>");
                                     }
                                     builder.Append("</tr></table></td>");                                    
-                                    builder.Append("<td style='width:175px;'><img src=" + item.patchChart_AB + " /></td>");
+                                    builder.Append("<td style='width:175px;'><div style='width:100%' class='gamutChart'><img src=" + item.patchChart_AB + " /></div></td>");
                                     builder.Append("<td style='width:70px;'><img src=" + item.patchChart_L + " /></td>");
                                     builder.Append("<td style='width:180px;'>");
                                     builder.Append("<table width='100%' cellspacing='2px' style='text-align:right;'>");

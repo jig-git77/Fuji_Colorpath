@@ -148,24 +148,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.HtmlControls.HtmlTable tblDetailsFirstRun;
         
         /// <summary>
-        /// locTargetTbl1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locTargetTbl1;
-        
-        /// <summary>
-        /// locPredictedTbl1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locPredictedTbl1;
-        
-        /// <summary>
         /// lblTargetLRun0 control.
         /// </summary>
         /// <remarks>
@@ -238,13 +220,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.WebControls.Label lblDeltaTargetPerdictionRun0;
         
         /// <summary>
-        /// locTPresource control.
+        /// locPredictedRun0 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locTPresource;
+        protected global::System.Web.UI.WebControls.Localize locPredictedRun0;
         
         /// <summary>
         /// lblDeltaL control.

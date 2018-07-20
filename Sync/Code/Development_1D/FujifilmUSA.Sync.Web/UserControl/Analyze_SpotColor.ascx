@@ -50,6 +50,14 @@
     .k-i-sort-asc-sm, .k-i-sort-desc-sm {
         margin-left: 0px !important;
     }
+
+    .chartBackground {
+        background: url('Images/LabBackdrop.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        /*height: 190px;*/
+        /*width: 278px;*/
+    }
 </style>
 
 <script type="application/javascript">
@@ -759,7 +767,8 @@
                         if (e.value == 0)
                             return 'Target';
                         return e.value;
-                    }
+                    },
+                    font: "10px Arial,Helvetica,sans-serif"
                 },
             },
             yAxis: {
@@ -775,16 +784,21 @@
                             return 'Target';
                         return e.value;
                     },
-                    rotation: 270
-                },
+                    rotation: 270,
+                    font: "10px Arial,Helvetica,sans-serif"
+                },                
             },
             chartArea: {
                 width: 175,
                 height: 140,
-                //background: ''
+                background: ''
             },
             plotArea: {
-                background: "white",
+                background: "white",                
+                margin: {
+                    top: 8,                    
+                    right: 8,                    
+                }
             },
         });
 
@@ -851,6 +865,16 @@
                 min: -10,
                 max: 10,
                 majorUnit: 5,
+                labels: {
+                    template: function (e) {
+
+                        if (e.value == 0)
+                            return 'Target';
+                        return e.value;
+                    },
+                    rotation: 270,
+                    font: "10px Arial,Helvetica,sans-serif"
+                },
             },
             chartArea: {
                 width: 70,
@@ -861,10 +885,15 @@
                 //get value axis object
                 var valueAxis = chart.getAxis("valueAxis");
                 //get maximum value from the value axis
-                //var maxValue = Math.abs(Math.max.apply(Math, valueAxis._axis.children.map(r => parseFloat(r.content))))
-                var valueArray = $.map(valueAxis._axis.children, function (elem) {
+                var valueChartArray = $.map(valueAxis._axis.children, function (elem) {
                     return parseInt(elem.content);
                 });
+                //assign all value number with number
+                var valueArray = [];
+                $.each(valueChartArray, function (index, item) {
+                    valueArray.push(isNaN(item) ? 0 : item);
+                });
+
                 //get top slot
                 var maxValue = Math.abs(Math.max.apply(Math, valueArray));
                 var maxValueSlot = valueAxis.slot(maxValue);
@@ -1030,7 +1059,10 @@
         <div id="divToRender" runat="server">
             <%--<div style="display: block; width: 100%">--%>
             <div id="divCharts" style="display: none; width: 100%"></div>
-            <div id="divABCharts" style="display: none; width: 100%"></div>
+            <div style="display: none; width: 100%" class="chartBackground">                                    
+                <div id="divABCharts"></div>
+            </div>
+            
             <%--</div>--%>
             <table cellpadding="0" cellspacing="10" border="0" width="97%">
                 <tr>

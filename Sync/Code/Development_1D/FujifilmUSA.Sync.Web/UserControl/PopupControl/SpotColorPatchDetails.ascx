@@ -97,8 +97,8 @@
             targetA = parseFloat($('#lblTargetARun0').html());
             targetB = parseFloat($('#lblTargetBRun0').html());
 
-            actualA = parseFloat($('#lblActualARun0').html());
-            actualB = parseFloat($('#lblActualBRun0').html());
+            actualA = parseFloat($('#lblDeltaA').html());
+            actualB = parseFloat($('#lblDeltaB').html());
 
         }
 
@@ -225,27 +225,27 @@
 
         } else {
             targetL = parseFloat($('#lblTargetLRun0').html());
-            actualL = parseFloat($('#lblActualLRun0').html());
+            actualL = parseFloat($('#lblDeltaL').html());
         }
 
-        var targetPaperGreenObj = [targetL];
-        var greenSeriesArray = [];
-        greenSeriesArray.push(targetPaperGreenObj);
-        var kendoGreenSeriseObj = {};
-        kendoGreenSeriseObj.data = greenSeriesArray;
-        kendoGreenSeriseObj.color = 'green';
-        kendoGreenSeriseObj.markers = {
-            background: 'green',
-            size: 16,
-            visual: function (e) {
-                var src = kendo.format("Images/greendot.png");
-                var image = new kendo.drawing.Image(src, e.rect);
-                return image;
-            }
-        };
-        kendoGreenSeriseObj.highlight = {
-            visible: false
-        }
+        //var targetPaperGreenObj = [0];
+        //var greenSeriesArray = [];
+        //greenSeriesArray.push(targetPaperGreenObj);
+        //var kendoGreenSeriseObj = {};
+        //kendoGreenSeriseObj.data = greenSeriesArray;
+        //kendoGreenSeriseObj.color = 'green';
+        //kendoGreenSeriseObj.markers = {
+        //    background: 'green',
+        //    size: 16,
+        //    visual: function (e) {
+        //        var src = kendo.format("Images/greendot.png");
+        //        var image = new kendo.drawing.Image(src, e.rect);
+        //        return image;
+        //    }
+        //};
+        //kendoGreenSeriseObj.highlight = {
+        //    visible: false
+        //}
 
         var targetPAPERRedObj = [actualL];
         var redSeriesArray = [];
@@ -477,9 +477,9 @@
                             <td>
                                 <table class="spotTable">
                                     <tr>
-                                        <th style="width:60%"></th>
-                                        <th style="width:20%"><asp:Localize runat="server" Text="Target" ID="locTargetTbl1" meta:resourcekey="locTargetResource"></asp:Localize></th>
-                                        <th style="width:20%"><asp:Localize runat="server" Text="Predicted" ID="locPredictedTbl1" meta:resourcekey="locPredictedResource"></asp:Localize></th>
+                                        <th style="width:63%"></th>
+                                        <th style="width:25%"><img src="Images/greendot.png" style="width: 12px;margin-top: 1px;" /> T</th>
+                                        <th style="width:15%"><img src="Images/purpledot.png" style="width: 12px;margin-top: 1px;" /> P</th>
                                     </tr>
                                 </table>
                             </td>
@@ -521,13 +521,14 @@
                         <tr style="height:2px;background-color: darkgrey;">
                             <td></td>
                         </tr>
-                        <tr style="height:30px;background-color: darkgrey;">
+                        <tr style="height:20px;background-color: darkgrey;">
                             <td>
                                 <table style="width:100%" class="spotTable">
                                     <tr>
-                                        <th style="width:80%"></th>
-                                        <th style="width:20%;text-align: right;">                                            
-                                            <asp:Localize runat="server" Text="Delta_T_P" ID="locTPresource" meta:resourcekey="locT_PResource"></asp:Localize>
+                                        <th style="width:50%"></th>
+                                        <th style="width:50%;text-align: right;">
+                                            <img src="Images/purpledot.png" style="width: 12px;margin-top: 1px;" />
+                                            <asp:Localize runat="server" Text="Predicted" ID="locPredictedRun0" meta:resourcekey="locPredictedResource"></asp:Localize>
                                         </th>
                                     </tr>
                                 </table>
