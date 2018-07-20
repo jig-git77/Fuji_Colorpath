@@ -183,10 +183,6 @@
                         return e.value;
                     }                    
                 },
-                //title: { text: "a*" },
-                //line: { visible: false },
-                //majorGridLines: { visible: false },
-                //majorTicks: { visible: false }
             },
             yAxis: {
                 name: "yAxis",
@@ -202,11 +198,7 @@
                         return e.value;
                     },
                     rotation: 270
-                },
-                //title: { text: "b*" },
-                //line: { visible: false },
-                //majorGridLines: { visible: false },
-                //majorTicks: { visible: false }
+                },                
             },
             chartArea: {
                 width: 300,
@@ -215,6 +207,10 @@
             },
             plotArea: {
                 background: "white",
+                margin: {
+                    top: 12,
+                    right: 12
+                }
             },
         });
     }
@@ -305,21 +301,38 @@
                 axisCrossingValues: [0, 10],
                 min: -10,
                 max: 10,                
-                majorUnit: 5,               
+                majorUnit: 5,  
+                labels: {                    
+                    template: function (e) {
+                        
+                        if (e.value == 0)
+                            return 'Target';
+                        return e.value;
+                    },
+                    rotation: 270
+                },
             },
             chartArea: {
                 width: 120,
                 height: 250,                
             },
             render: function (e) {
+                debugger;
                 var chart = e.sender;
                 //get value axis object
                 var valueAxis = chart.getAxis("valueAxis");
                 //get maximum value from the value axis
                 //var maxValue = Math.abs(Math.max.apply(Math, valueAxis._axis.children.map(r => parseFloat(r.content))))
-                var valueArray = $.map(valueAxis._axis.children, function (elem) {
+
+                var valueChartArray = $.map(valueAxis._axis.children, function (elem) {
                     return parseInt(elem.content);
                 });
+                //assign all value number with number
+                var valueArray = [];
+                $.each(valueChartArray, function (index, item) {                    
+                    valueArray.push(isNaN(item) ? 0 : item);
+                });
+
                 //get top slot
                 var maxValue = Math.abs(Math.max.apply(Math, valueArray));                
                 var maxValueSlot = valueAxis.slot(maxValue);

@@ -910,16 +910,7 @@
             }
         });
 
-
-        //$('#divCharts').kendoChart({
-        //    series: [
-        //        { data: array }
-        //    ],
-        //    chartArea: {
-        //        width: 500
-        //    }
-        //});
-
+        //return base64 string of chart
         var dummyChart = $('#divCharts').data('kendoChart');
         dummyChart.options.transitions = false;
         dummyChart.refresh();
