@@ -897,7 +897,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                 objReportPDF.dtSpotPatchDetails = dtPatchDetails;
                 objReportPDF.PDF_NAME = OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
-                objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+                objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
 
                 objReportPDF.GenerateSpotPatchDetailsReport();
                 string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
@@ -934,7 +934,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                 objReportPDF.dtSpotPatchDetails = dtPatchDetails;
                 objReportPDF.PDF_NAME = OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
-                objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+                objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
 
                 objReportPDF.GenerateSpotPatchDetailsReport();
                 string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;

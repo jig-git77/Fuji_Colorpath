@@ -114,7 +114,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         objReportPDF.DLPName = chart.ReportDLPName;
                         //objReportPDF.ReportName = "Single Measurement Report";
                         //objReportPDF.DLPName = "DLP_NAME";
-                        objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+                        objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
 
                         if (chart.validationType == 1)
                         {
@@ -221,6 +221,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSpotProject.PDF";                                                
                         objReportPDF.ReportName = "Brand Color Optimization";
                         objReportPDF.ReportType = (int)enumReportType.ReportSpotColorProject; //Only in spot color Optimization part
+                        objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
                         DSReport = new DataSet();
                         _presenterReportSingleMeasurement.GetReportDataOnSpotProject();
                         objReportPDF.DS_Common = DSReport;                        
@@ -317,7 +318,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         objReportPDF.DLPName = chart.ReportDLPName;
                         //objReportPDF.ReportName = "Single Measurement Report";
                         //objReportPDF.DLPName = "DLP_NAME";
-                        objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+                        objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
 
                         if (chart.validationType == 1)
                         {
