@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 namespace FujifilmUSA.Sync.Entity
-{
+{    
     public class Measurement
     {
         public int MeasurementId { get; set; }
@@ -26,6 +26,8 @@ namespace FujifilmUSA.Sync.Entity
         public string PrintStandardType { get; set; }
         public int PCSDataType { get; set; }
         public List<Entity.CPSyncV.PatchTolerance> PatchTolerances { get; set; }
-        public string MeasurementDateString { get; set; }        
+        public string MeasurementDateString { get; set; }              
+        
+        public List<MeasurementPatchApp> MeasurementAppPatches { get; set; }
     }
 }

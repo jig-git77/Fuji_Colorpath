@@ -30,43 +30,48 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public void SaveMeasurement(Entity.Measurement measurement)
         {
-            string jsonString = JsonConvert.SerializeObject(measurement, Formatting.Indented);
-            ErrorLog.WriteJsonFile(jsonString, measurement.ProjectId.ToString(), measurement.OptimizeRunId.ToString());
-
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             presenter.SaveMeasurement();
+
+            /*Temp Code Start*/
+            GenerateJSONFile(measurement, "4D");
+            /*Temp Code End*/
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveVMeasurement")]
         [OperationContract]
         public void SaveVMeasurement(Entity.Measurement measurement)
         {
-            string jsonString = JsonConvert.SerializeObject(measurement, Formatting.Indented);
-            ErrorLog.WriteJsonFile(jsonString, measurement.ProjectId.ToString(), measurement.OptimizeRunId.ToString());
 
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             presenter.SaveVMeasurement();
+
+
+            /*Temp Code Start*/
+            GenerateJSONFile(measurement, "Validation");
+            /*Temp Code End*/
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "Save1DMeasurement")]
         [OperationContract]
         public void Save1DMeasurement(Entity.Measurement measurement)
         {
-            string jsonString = JsonConvert.SerializeObject(measurement, Formatting.Indented);
-            ErrorLog.WriteJsonFile(jsonString, measurement.ProjectId.ToString(), measurement.OptimizeRunId.ToString());
-
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             presenter.Save1DMeasurement();
+
+            /*Temp Code Start*/
+            GenerateJSONFile(measurement, "1D");
+            /*Temp Code End*/
         }
 
         [WebGet(UriTemplate = "GetReferenceChart/{projectId}/{referencechartdisplaytype}/{IsSpotProjectType}")]
         [OperationContract]
         public ReferenceChartData GetReferenceChart(string projectId, string referenceChartDisplayType, string IsSpotProjectType)
         {
-            this.ReferenceChartDisType = (EReferenceChartDisType) Enum.Parse(typeof (EReferenceChartDisType), referenceChartDisplayType);
+            this.ReferenceChartDisType = (EReferenceChartDisType)Enum.Parse(typeof(EReferenceChartDisType), referenceChartDisplayType);
             var presenter = new PresenterPluginDataService(this);
             if (Convert.ToBoolean(IsSpotProjectType) == false)
             {
@@ -128,8 +133,8 @@ namespace FujifilmUSA.Sync.Web.Services
         public bool DeleteMeasurement(string measurementId)
         {
             MeasurementId = Convert.ToInt32(measurementId);
-            var presenter = new PresenterPluginDataService(this);           
-            return presenter.DeleteMeasurement();            
+            var presenter = new PresenterPluginDataService(this);
+            return presenter.DeleteMeasurement();
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "DeleteVMeasurement/{measurementId}")]
@@ -159,7 +164,7 @@ namespace FujifilmUSA.Sync.Web.Services
             User user = users.FirstOrDefault(c => c.LoginId == username);
             if (user != null)
                 user.LastPingTime = DateTime.Now;
-            FujifilmUSA.Sync.Common.CacheManager.Instance.ActiveUsers = users;            
+            FujifilmUSA.Sync.Common.CacheManager.Instance.ActiveUsers = users;
             return true;
         }
 
@@ -174,12 +179,13 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public void SaveSpotMeasurement(Entity.Measurement measurement)
         {
-            string jsonString = JsonConvert.SerializeObject(measurement, Formatting.Indented);
-            ErrorLog.WriteJsonFile(jsonString, measurement.ProjectId.ToString(), measurement.OptimizeRunId.ToString());
-
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             presenter.SaveSpotMeasurement();
+
+            /*Temp Code Start*/
+            GenerateJSONFile(measurement, "Spot");
+            /*Temp Code End*/
         }
 
         [WebInvoke(Method = "GET", UriTemplate = "GetSpotMeasurementsByOptimizeId/{optimizeRunId}")]
@@ -203,6 +209,89 @@ namespace FujifilmUSA.Sync.Web.Services
             MeasurementId = Convert.ToInt32(measurementId);
             var presenter = new PresenterPluginDataService(this);
             return presenter.DeleteSpotMeasurement();
+        }
+
+        public void GenerateJSONFile(Entity.Measurement measurement, string type)
+        {
+            Entity.Measurement measurementDummy = new Entity.Measurement();
+            measurementDummy = measurement;
+            measurementDummy.MeasurementAppPatches = new List<MeasurementPatchApp>();
+            foreach (var patch in measurement.MeasurementPatches)
+            {
+                measurementDummy.MeasurementAppPatches.Add(new MeasurementPatchApp()
+                {
+                    MeasurementPatchId = patch.MeasurementPatchId,
+                    MeasurementId = patch.MeasurementId,
+                    SampleName = patch.SampleName,
+                    Ciexyz = new CieXYZ()
+                    {
+                        X = Convert.ToString(patch.CiexyzX),
+                        Y = Convert.ToString(patch.CiexyzY),
+                        Z = Convert.ToString(patch.CiexyzZ),
+                    },
+                    Cielab = new CieLAB()
+                    {
+                        L = Convert.ToString(patch.CielabL),
+                        A = Convert.ToString(patch.CielabA),
+                        B = Convert.ToString(patch.CielabB),
+                    },
+                    Δe = Convert.ToString(patch.Δe),
+                    Δe94 = Convert.ToString(patch.Δe94),
+                    Δe2000 = Convert.ToString(patch.Δe2000),
+                    HtmlColor = patch.HtmlColor,
+                    Density = new DensityApp()
+                    {
+                        Red = Convert.ToString(patch.Density.Red),
+                        Green = Convert.ToString(patch.Density.Green),
+                        Blue = Convert.ToString(patch.Density.Blue),
+                        Visual = Convert.ToString(patch.Density.Visual)
+                    },
+                    Spectral = new SpectralApp()
+                    {
+                        nm380 = Convert.ToString(patch.Spectral.nm380),
+                        nm390 = Convert.ToString(patch.Spectral.nm390),
+                        nm400 = Convert.ToString(patch.Spectral.nm400),
+                        nm410 = Convert.ToString(patch.Spectral.nm410),
+                        nm420 = Convert.ToString(patch.Spectral.nm420),
+                        nm430 = Convert.ToString(patch.Spectral.nm430),
+                        nm440 = Convert.ToString(patch.Spectral.nm440),
+                        nm450 = Convert.ToString(patch.Spectral.nm450),
+                        nm460 = Convert.ToString(patch.Spectral.nm460),
+                        nm470 = Convert.ToString(patch.Spectral.nm470),
+                        nm480 = Convert.ToString(patch.Spectral.nm480),
+                        nm490 = Convert.ToString(patch.Spectral.nm490),
+                        nm500 = Convert.ToString(patch.Spectral.nm500),
+                        nm510 = Convert.ToString(patch.Spectral.nm510),
+                        nm520 = Convert.ToString(patch.Spectral.nm520),
+                        nm530 = Convert.ToString(patch.Spectral.nm530),
+                        nm540 = Convert.ToString(patch.Spectral.nm540),
+                        nm550 = Convert.ToString(patch.Spectral.nm550),
+                        nm560 = Convert.ToString(patch.Spectral.nm560),
+                        nm570 = Convert.ToString(patch.Spectral.nm570),
+                        nm580 = Convert.ToString(patch.Spectral.nm580),
+                        nm590 = Convert.ToString(patch.Spectral.nm590),
+                        nm600 = Convert.ToString(patch.Spectral.nm600),
+                        nm610 = Convert.ToString(patch.Spectral.nm610),
+                        nm620 = Convert.ToString(patch.Spectral.nm620),
+                        nm630 = Convert.ToString(patch.Spectral.nm630),
+                        nm640 = Convert.ToString(patch.Spectral.nm640),
+                        nm650 = Convert.ToString(patch.Spectral.nm650),
+                        nm660 = Convert.ToString(patch.Spectral.nm660),
+                        nm670 = Convert.ToString(patch.Spectral.nm670),
+                        nm680 = Convert.ToString(patch.Spectral.nm680),
+                        nm690 = Convert.ToString(patch.Spectral.nm690),
+                        nm700 = Convert.ToString(patch.Spectral.nm700),
+                        nm710 = Convert.ToString(patch.Spectral.nm710),
+                        nm720 = Convert.ToString(patch.Spectral.nm720),
+                        nm730 = Convert.ToString(patch.Spectral.nm730),
+                    },
+                    SpotId = patch.SpotId,
+                    SpotName = patch.SpotName
+                });
+            }
+            measurementDummy.MeasurementPatches = null;
+            string jsonString = JsonConvert.SerializeObject(measurementDummy, Formatting.Indented);
+            ErrorLog.WriteJsonFile(jsonString, measurement.ProjectId.ToString() + "_" + type, measurement.OptimizeRunId.ToString());
         }
 
         #region IViewPluginDataService Members
