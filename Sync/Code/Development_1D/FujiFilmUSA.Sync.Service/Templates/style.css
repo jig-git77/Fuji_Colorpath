@@ -517,3 +517,8 @@ td.Gray
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.divRight {
+    float: right;
+    width: 50%;
+}
