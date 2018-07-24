@@ -1485,7 +1485,7 @@ namespace FujifilmUSA.Sync.Common
                             for (int i = 0; i < DT.Rows.Count; i++)
                             {
                                 SBstrDeltaEValue.Append("<tr style='height: " + RowHeight + "px'>");
-                                SBstrDeltaEValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
+                                SBstrDeltaEValue.Append("<td valign='middle' align='center' style='width: 20px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                                 SBstrDeltaEValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>" + Convert.ToString(DT.Rows[i]["PatchType"]) + "</td>");
                                 //--------For ISO Reports put Tolerance
                                 if (ReportType == 17 || ReportType == 18 || ReportType == 19)
@@ -1556,7 +1556,7 @@ namespace FujifilmUSA.Sync.Common
                                     else             //------Else keep background color white-----//
                                         SBstrDeltaValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-4' style='height: " + RowHeight + "px'>");
 
-                                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='Metadata-Table Green' style='width: 160px;'> <p class='Body-Text-Bold'>" + DT.Rows[i]["MetricSumName"] + "</p></td>");
+                                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='Metadata-Table Green' style='width: 80px;'> <p class='Body-Text-Bold'>" + DT.Rows[i]["MetricSumName"] + "</p></td>");
                                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["TargetValue"])) + "&nbsp;</p></td>");
                                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["MeasuredValue"])) + "&nbsp;</p></td>");
                                     SBstrDeltaValue.Append("</tr>");
