@@ -1188,10 +1188,10 @@ namespace FujifilmUSA.Sync.Common
                 //** Add Styles Path ***//
                 //string cssFullPath = this._WebURL + "Templates/style.css";
                 string cssFullPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/style.css");
-                SBStr.Replace("#csspath#", cssFullPath);                
-                //SBStr.Replace("#csspath#", BaseServiceURL + "Templates/style.css");
+                //SBStr.Replace("#csspath#", cssFullPath);                
+                SBStr.Replace("#csspath#", BaseServiceURL + "Templates/style.css");
 
-                
+
                 //** Add Images Path ***//
                 string imagesPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
                 SBStr.Replace("##LOGOIMAGES##", imagesPath);
