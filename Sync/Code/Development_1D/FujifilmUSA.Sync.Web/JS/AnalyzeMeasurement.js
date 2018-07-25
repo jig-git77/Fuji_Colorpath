@@ -480,11 +480,18 @@ function BindAllTabs() {
 
     var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
 
+    $(tabStrip.items()[0]).css('display', 'inline-block');
+    $(tabStrip.items()[1]).css('display', 'inline-block');
+    $(tabStrip.items()[3]).css('display', 'inline-block');
+    $(tabStrip.items()[5]).css('display', 'inline-block');
+    $(tabStrip.items()[6]).css('display', 'inline-block');
+    $(tabStrip.items()[7]).css('display', 'inline-block');
+
     //Hide default tabs G7
-    $(tabStrip.items()[2]).hide();
+    //$(tabStrip.items()[2]).hide();
 
     //Hide default tabs TVI
-    $(tabStrip.items()[4]).hide();
+    //$(tabStrip.items()[4]).hide();
 
     //Bind Summary tab
     BindMeasurementSummary()
@@ -581,7 +588,9 @@ function BindMeasurementSummary() {
                             if ($hdnValidationType == 1) {
 
                                 //Show tabs G7
-                                $(tabStrip.items()[2]).show();
+                                //$(tabStrip.items()[2]).show();
+                                $(tabStrip.items()[2]).css('display', 'inline-block');
+
 
                                 //Bind G7 charts
                                 BindG7Charts();
@@ -591,7 +600,8 @@ function BindMeasurementSummary() {
                             if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
 
                                 //Hide default tabs TVI
-                                $(tabStrip.items()[4]).show();
+                                //$(tabStrip.items()[4]).show();
+                                $(tabStrip.items()[4]).css('display', 'inline-block');
 
                                 //Bind TVI charts
                                 BindTVICharts();
@@ -2703,7 +2713,7 @@ function PopulateChartTargetVersusActualAB() {
         //        color: "black"
         //    }
         //},
-        render: renderChartWithBackgroundByAxis
+        //render: renderChartWithBackgroundByAxis
     });
 
 
@@ -2856,7 +2866,7 @@ function PopulateChartGamutABComparision() {
         //        color: "black"
         //    }
         //},
-        render: renderChartWithBackgroundByAxis
+        //render: renderChartWithBackgroundByAxis
     });
 }
 
@@ -5345,7 +5355,7 @@ function GetABComparisionSpiderChartImage() {
     $('#kendoChartTargetVersusActualABDummy').kendoChart(kendoOptions)
     var chartDummy = $('#kendoChartTargetVersusActualABDummy').data('kendoChart')
     chartDummy.dataSource = kendodataSource;
-    delete chartDummy.options.chartArea.background;
+    //delete chartDummy.options.chartArea.background;
     chartDummy.options.transitions = false;
     chartDummy.refresh()
     return chartDummy.imageDataURL();
@@ -5379,7 +5389,7 @@ function GetActualVsTargetChartImage() {
     $('#kendoChartGamut_ABComparisonDummy').kendoChart(kendoOptions)
     var chartDummy = $('#kendoChartGamut_ABComparisonDummy').data('kendoChart')
     chartDummy.dataSource = kendodataSource;
-    delete chartDummy.options.chartArea.background;
+    //delete chartDummy.options.chartArea.background;
     chartDummy.options.transitions = false;
     chartDummy.refresh()
     return chartDummy.imageDataURL();
@@ -5619,7 +5629,8 @@ function CheckAvgCompability() {
             $('#tblAverageMeasurementSummary').css('display', 'block');
         } else {
             //Show default tabs patch details
-            $(tabStrip.items()[5]).show();
+            //$(tabStrip.items()[5]).show();
+            $(tabStrip.items()[5]).css('display', 'inline-block');
             $('#tblAverageMeasurementSummary').css('display', 'none');
             //$('#tblValidationSummary').css('display', 'block');
             $('#tblValidationSummary').css('display', 'block');

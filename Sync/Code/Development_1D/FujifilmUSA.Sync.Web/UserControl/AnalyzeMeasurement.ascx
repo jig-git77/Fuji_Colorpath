@@ -9,6 +9,10 @@
 <link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
 <script src="Scripts/kendo/2018.1.221/kendo.all.min.js" type="text/javascript"></script>
 <style>
+    #tabstrip li {
+        display: none;
+    }
+
     #divMeasurementPatchDetails .k-grid td {
         line-height: 18px;
     }
@@ -498,7 +502,7 @@
                                 <div>
                                     <div>
 
-                                        <div id="divValidationSummary" cellpadding="0" cellspacing="0" width="650px" style="display:none;">
+                                        <div id="divValidationSummary" cellpadding="0" cellspacing="0" width="650px" style="display: none;">
                                             <div style="float: right; padding-top: 2px; position: absolute; top: 0; right: 0; padding-right: 4px; padding-top: 5px">
                                                 <asp:ImageButton ID="ibtnPrintPreview" runat="server"
                                                     ImageUrl="../Images/DymoPrintPreviewIcon.png" ToolTip="Preview label"
@@ -643,7 +647,7 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div id="divMeasurementSummary"  style="display:none;">
+                                        <div id="divMeasurementSummary" style="display: none;">
                                             <table id="tblMeasurementSummary" cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin: 0; width: 100%">
                                                 <tr>
                                                     <td>
