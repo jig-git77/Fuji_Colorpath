@@ -38,6 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 LoadLicenseType();
                 LoadInkOrder();
+                LoadPrintingTypes();
                 LoadDeviceInfoFromSession();
                 LoadProjectInfoFromSession();
                 LoadSpotTargetInfoFromSession();
@@ -104,6 +105,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbInkOrder.SelectedIndex = 0;
         }
 
+        private void LoadPrintingTypes()
+        {
+            if (cmbPrintingType.DataSource != null) return;
+
+            cmbPrintingType.DataValueField = "Key";
+            cmbPrintingType.DataTextField = "Value";
+            cmbPrintingType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EPrintingTypes>();
+            cmbPrintingType.DataBind();
+
+            cmbPrintingType.SelectedIndex = 0;
+        }
+
         private void LoadDeviceInfoFromSession()
         {
             if (SessionManager.Instance.CurrentDevice.DeviceName != null)
@@ -136,6 +149,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                     Tr_OffsetPrintData.Visible = true;
 
+                cmbPrintingType.SelectedIndex = cmbPrintingType.Items.IndexOf(cmbPrintingType.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.PrintCondition.PrintingType)));
                 cmbInkOrder.SelectedIndex = cmbInkOrder.Items.IndexOf(cmbInkOrder.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.PrintCondition.InkOrder)));
                 txtFountainSol.Text = SessionManager.Instance.CurrentProject.PrintCondition.FountainSolution;
                 txtBlanket.Text = SessionManager.Instance.CurrentProject.PrintCondition.Blanket;
@@ -211,6 +225,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 RipSettings = txtRipSetting.Text.Trim(),
                 Notes = txtNotes.Text.Trim(),
                 TechnicianName = txtTechnicianName.Text.Trim(),
+                PrintingType = (EPrintingTypes)Convert.ToInt32(cmbPrintingType.SelectedItem.Value),
                 InkOrder = (EInkOrder)Convert.ToInt32(cmbInkOrder.SelectedItem.Value),
                 FountainSolution = txtFountainSol.Text.Trim(),
                 Blanket = txtBlanket.Text.Trim(),
@@ -268,6 +283,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 RipSettings = txtRipSetting.Text.Trim(),
                 Notes = txtNotes.Text.Trim(),
                 TechnicianName = txtTechnicianName.Text.Trim(),
+                PrintingType = (EPrintingTypes)Convert.ToInt32(cmbPrintingType.SelectedItem.Value),
                 InkOrder = (EInkOrder)Convert.ToInt32(cmbInkOrder.SelectedItem.Value),
                 FountainSolution = txtFountainSol.Text.Trim(),
                 Blanket = txtBlanket.Text.Trim(),

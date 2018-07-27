@@ -957,6 +957,12 @@
   <data name="EInkOrder_YMKC" xml:space="preserve">
     <value>YMKC</value>
   </data>
+  <data name="EPrintingTypes_Offset" xml:space="preserve">
+    <value>Offset</value>
+  </data>
+  <data name="EPrintingTypes_Flexo" xml:space="preserve">
+    <value>Flexo</value>
+  </data>
   <data name="Error_InsertLookupTVILABDensity" xml:space="preserve">
     <value>Error occured while inserting Sync1D TVI LAB and Density values.Please contact your administrator.</value>
   </data>

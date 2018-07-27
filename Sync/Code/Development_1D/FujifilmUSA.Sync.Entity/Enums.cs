@@ -592,6 +592,14 @@ namespace FujifilmUSA.Sync.Entity
         YMKC = 23
     }
 
+    public enum EPrintingTypes
+    {
+        [Description("EPrintingTypes_Offset")]
+        Offset = 0,
+        //[Description("EPrintingTypes_Flexo")]
+        //Flexo = 1
+    }
+
     public enum ESourceProfileCategory
     {
         [Description("ESourceProfileCategory_All")] //All

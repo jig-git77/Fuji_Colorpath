@@ -943,6 +943,24 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Flexo.
+        /// </summary>
+        internal static string EPrintingTypes_Flexo {
+            get {
+                return ResourceManager.GetString("EPrintingTypes_Flexo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Offset.
+        /// </summary>
+        internal static string EPrintingTypes_Offset {
+            get {
+                return ResourceManager.GetString("EPrintingTypes_Offset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AbsLightenerCompensation.
         /// </summary>
         internal static string EProfileRendering_eCLAbsLightenerCompensationRI {

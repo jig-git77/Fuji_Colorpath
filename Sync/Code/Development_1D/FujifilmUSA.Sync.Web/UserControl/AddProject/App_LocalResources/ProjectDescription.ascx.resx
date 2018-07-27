@@ -271,7 +271,7 @@
     <value>Ink Order:</value>
   </data>
   <data name="locOffsetDataResource1.Text" xml:space="preserve">
-    <value>Offset Printing Data</value>
+    <value>Printing Type</value>
   </data>
   <data name="locScreeningRefResource1.Text" xml:space="preserve">
     <value>*Include Type(AM-FM), Dot Shape, Frequency</value>
