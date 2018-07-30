@@ -87,6 +87,14 @@
         .summaryMetricTable tr:nth-child(even) {
             background: #F2F2F2;
         }
+
+    .k-header > .k-grid-filter, .k-header > .k-header-column-menu {
+        display: none;
+    }
+
+    .k-grid-header th.k-with-icon .k-link {
+        margin-right: 0;
+    }
 </style>
 <script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>
 <script src="JS/AnalyzeMeasurement.js" type="text/javascript"></script>

@@ -1461,6 +1461,7 @@ namespace FujifilmUSA.Sync.Common
                         string strStatusImg = "";
 
                         int RowHeight = 280 / (DT.Rows.Count + 2);
+                        RowHeight = DT.Rows.Count == 5 ? 45 : RowHeight;
                         if (ReportType == 16) //--------For G7 Report
                         {
                             RowHeight = 12;

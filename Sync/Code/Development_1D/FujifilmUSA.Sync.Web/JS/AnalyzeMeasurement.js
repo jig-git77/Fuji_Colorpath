@@ -470,7 +470,7 @@ $(document).ready(function () {
         SetPrevButtonDisabled(false);
         SetNextButtonDisabled(true);
         PopulateAnalyzeChart();
-    });
+    });    
 });
 
 
@@ -911,126 +911,126 @@ function BindMeasurementPatchDetails() {
                 field: "CMYK_C",
                 title: "<b title='C'>C</b>",
                 format: "{0:n2}",
-                width: "75px",
+                width: "55px",
                 locked: true,
             },
             {
                 field: "CMYK_M",
                 title: "<b title='M'>M</b>",
                 format: "{0:n2}",
-                width: "75px",
+                width: "55px",
                 locked: true,
             },
             {
                 field: "CMYK_Y",
                 title: "<b title='Y'>Y</b>",
                 format: "{0:n2}",
-                width: "75px",
+                width: "55px",
                 locked: true,
             },
             {
                 field: "CMYK_K",
                 title: "<b title='K'>K</b>",
                 format: "{0:n2}",
-                width: "75px",
+                width: "55px",
                 locked: true,
             },
             {
                 field: "ΔE",
                 title: "<b title='ΔE'>ΔE</b>",
-                width: "80px",
+                width: "55px",
                 format: "{0:n2}",
             },
             {
                 field: "ΔE94",
                 title: "<b title='ΔE94'>ΔE94</b>",
-                width: "94px",
+                width: "55px",
                 format: "{0:n2}",
             },
             {
                 field: "ΔE2000",
                 title: "<b title='ΔE2000'>ΔE2000</b>",
-                width: "110px",
+                width: "70px",
                 format: "{0:n2}",
             },
             {
                 field: "TargetL",
                 title: "<b title='Target L*'>Target L*</b>",
-                width: "115px",
+                width: "75px",
                 format: "{0:n2}",
             },
             {
                 field: "CIELAB_L",
                 title: "<b title='Actual L*'>Actual L*</b>",
-                width: "115px",
+                width: "75px",
                 format: "{0:n2}",
             },
             {
                 field: "Targeta",
                 title: "<b title='Target a*'>Target a*</b>",
-                width: '115px',
+                width: '75px',
                 format: "{0:n2}",
             },
             {
                 field: "CIELAB_a",
                 title: "<b title='Actual a*'>Actual a*</b>",
-                width: "115px",
+                width: "75px",
                 format: "{0:n2}",
             },
             {
                 field: "Targetb",
                 title: "<b title='Target b*'>Target b*</b>",
-                width: '115px',
+                width: '75px',
                 format: "{0:n2}",
             },
             {
                 field: "CIELAB_b",
                 title: "<b title='Actual b*'>Actual b*</b>",
-                width: "115px",
+                width: "75px",
                 format: "{0:n2}",
             },
             {
                 field: "Density_V",
                 title: "<b title='Density_V'>Density_V</b>",
-                width: "122px",
+                width: "90px",
                 format: "{0:n2}",
             },
             {
                 field: "Density_C",
                 title: "<b title='Density_C'>Density_C</b>",
-                width: '122px',
+                width: '90px',
                 format: "{0:n2}",
             },
             {
                 field: "Density_M",
                 title: "<b title='Density_M'>Density_M</b>",
-                width: "123px",
+                width: "90px",
                 format: "{0:n2}",
             },
             {
                 field: "Density_Y",
                 title: "<b title='Density_Y'>Density_Y</b>",
-                width: '122px',
+                width: '90px',
                 format: "{0:n2}",
             },
             {
                 field: "ΔH",
                 title: "<b title='ΔH'>ΔH</b>",
-                width: '80px',
+                width: '55px',
                 format: "{0:n2}",
                 hidden: true,
             },
             {
                 field: "ΔCh",
                 title: "<b title='ΔCh'>ΔCh</b>",
-                width: '80px',
+                width: '55px',
                 format: "{0:n2}",
                 hidden: true,
             },
             {
                 field: "ΔL",
                 title: "<b title='ΔL'>ΔL</b>",
-                width: '80px',
+                width: '55px',
                 format: "{0:n2}",
                 hidden: true,
             },
@@ -1323,6 +1323,12 @@ function BindMeasurementPatchDetails() {
 
     $divMeasurementPatchDetails.find('#lnkLinkFilter').on('click', function (e) {
         $("form.k-filter-menu button[type='reset']").trigger("click");
+    });
+
+    $('#divMeasurementPatchDetails .k-grid-header th.k-header').mouseenter(function () {
+        $(this).find('.k-grid-filter').show();
+    }).mouseleave(function () {
+        $(this).find('.k-grid-filter').hide();
     });
 }
 
