@@ -102,6 +102,14 @@
         <div class="float_l InformationtxtDivWidth">
             <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
             <asp:HiddenField ID="hdnPCSType" runat="server" />
+            
+            <div id="divExtensionNotAvailable">
+                <input type="button" id="btnAddExtension" value="Add Extension" />
+            </div>
+            <div id="divExtensionAvailable" style="display:none;">
+                <input type="button" id="btnOpenApp" value="Open Application" />
+            </div>
+
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                     <td style="width: 22%;" align="right">
