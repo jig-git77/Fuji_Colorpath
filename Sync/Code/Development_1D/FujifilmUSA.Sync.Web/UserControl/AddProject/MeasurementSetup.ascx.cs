@@ -577,7 +577,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
-
-     
+        public short PrintingTypeId { get; set; }
     }
 }

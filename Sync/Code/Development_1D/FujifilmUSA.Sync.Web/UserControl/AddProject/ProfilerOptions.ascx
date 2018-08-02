@@ -78,6 +78,23 @@
 
     }
 
+     function validateHueAngleRange(txtValue) {
+
+        var txtHue = document.getElementById(txtValue.id);
+        var txtHuevalue = document.getElementById(txtValue.id).value;
+        if (txtHuevalue > 400) {
+            <%--alert('<%= ProfilerOptions_JavascriptHueRange %>');--%>
+            alert('out of range');
+            txtHue.value = "";
+            txtHue.SetFocus();
+            return false;
+        }
+
+        else
+            return true;
+
+    }
+
     function clientValueChange(sender, eventArgs) {
         //var myDiv = document.getElementById("myDiv")
         //myDiv.innerHTML = "Old value is:" + eventArgs.get_oldValue()
@@ -836,6 +853,52 @@
                                                                         <asp:TextBox ID="txtDensityK" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateDensityRange(this)"></asp:TextBox>
                                                                     </td>
                                                                 </tr>
+                                                            </table>
+                                                      </div>
+                                             <br />
+                                              <div id="dvHueAngleTargets" style="padding-left: 10px; " runat="server" visible="false">
+                                                            <label><b><asp:Localize runat="server" Text="Hue Angle Targets" ID="Localize8" meta:resourcekey="locHueAngleTargetsResource1"></asp:Localize></b>
+                                                            </label>
+                                                            <br />
+                                                           <table cellspacing="0" cellpadding="0" border="0" width="100%" style="line-height:23px;">
+                                                                <tr style="line-height:15px;">
+                                                                    <td></td>
+                                                                    <td colspan="2" align="left">
+                                                                        <b><asp:Localize runat="server" Text="Targets" ID="Localize9" meta:resourcekey="locTargetsResource1"></asp:Localize></b>
+                                                                   </td>
+                                                                </tr>
+                                                                <tr style="line-height:15px;">
+                                                                    <td align="left">
+                                                                        <span><b><asp:Localize ID="Localize10" runat="server" Text="Patch" meta:resourcekey="locHueAnglePatchPerResource1"></asp:Localize></b></span>
+                                                                    </td>
+                                                                    <td align="left">
+                                                                        <span><b><asp:Localize ID="Localize11" runat="server" Text="Hue Angle" meta:resourcekey="locHueAngleResource1"></asp:Localize></b></span>
+                                                                    </td>  
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><asp:Label ID="Label1" runat="server" Text="C"></asp:Label></td>
+                                                                    <td><asp:TextBox ID="txtHue_C" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><asp:Label ID="Label2" runat="server" Text="M"></asp:Label></td>
+                                                                    <td><asp:TextBox ID="txtHue_M" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><asp:Label ID="Label3" runat="server" Text="Y"></asp:Label></td>
+                                                                    <td><asp:TextBox ID="txtHue_Y" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                                </tr>     
+                                                                <tr>
+                                                                    <td><asp:Label ID="Label4" runat="server" Text="R"></asp:Label></td>
+                                                                    <td><asp:TextBox ID="txtHue_R" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                                </tr> 
+                                                                <tr>
+                                                                    <td><asp:Label ID="Label5" runat="server" Text="G"></asp:Label></td>
+                                                                    <td><asp:TextBox ID="txtHue_G" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                                </tr> 
+                                                                <tr>
+                                                                    <td><asp:Label ID="Label6" runat="server" Text="B"></asp:Label></td>
+                                                                    <td><asp:TextBox ID="txtHue_B" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                                </tr> 
                                                             </table>
                                                       </div>
                                                        

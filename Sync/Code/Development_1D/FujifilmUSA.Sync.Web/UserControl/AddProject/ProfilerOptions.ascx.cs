@@ -78,6 +78,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     GetPrintStandardDensity();
                     BindReTargetList();
 
+                    if (SessionManager.Instance.CurrentProject.PrintCondition.PrintingType == EPrintingTypes.Flexo) //----If Sync1D project's printing type is Flexo then only show Hue angle targets panel
+                    {
+                        dvHueAngleTargets.Visible = true;
+                    }
                     LoadProjectInfoFromSession();
 
                     if (ProjectTypeID == 1) //-----Option only for G7 Sync1D projects
@@ -122,6 +126,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 DeviceFamilyId = SessionManager.Instance.CurrentDevice.DeviceFamily.DeviceFamilyId;
                 LicenseTypeId = (short)SessionManager.Instance.CurrentProject.LicenseType;
+
                 _presenterDeviceFamilyProfilerOption.GetDeviceFamilyProfilerOption();
                 if (!IsErrorOccured)
                 {
@@ -221,6 +226,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {           
             if (ViewState[_vsMetricTargetPreset] == null)
             {
+                PrintingTypeId = (short)SessionManager.Instance.CurrentProject.PrintCondition.PrintingType;
                 _presenterMeasurementSetting.GetMetricTargetPreset();
                 if (!IsErrorOccured)
                 {
@@ -1448,6 +1454,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary);
             }
         }
+        public short PrintingTypeId { get; set; }
+
         #endregion
 
     }

@@ -596,8 +596,8 @@ namespace FujifilmUSA.Sync.Entity
     {
         [Description("EPrintingTypes_Offset")]
         Offset = 0,
-        //[Description("EPrintingTypes_Flexo")]
-        //Flexo = 1
+        [Description("EPrintingTypes_Flexo")]
+        Flexo = 1
     }
 
     public enum ESourceProfileCategory

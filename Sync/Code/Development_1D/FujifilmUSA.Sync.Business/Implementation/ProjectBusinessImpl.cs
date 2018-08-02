@@ -1148,7 +1148,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return data;
         }
 
-        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, bool isVerification = false)
+        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, short PrintingTypeId, bool isVerification = false)
         {
             List<Entity.CPSyncV.MetricTargetPreset> metricPresetList = new List<Entity.CPSyncV.MetricTargetPreset>();
             Common.ImplementBusinessLogic(
@@ -1159,7 +1159,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     if (isVerification)
                         procedureName = "[CPSyncV].[GetMetricTargetPresetList]";
 
-                    var dsMetricTargetPresetList = DataAccessFactory.Instance.GetDsResult(procedureName, new object[] { currentUserId, ProjectTypeId });
+                    var dsMetricTargetPresetList = DataAccessFactory.Instance.GetDsResult(procedureName, new object[] { currentUserId, ProjectTypeId, PrintingTypeId });
 
                     if (dsMetricTargetPresetList != null && dsMetricTargetPresetList.Tables.Count > 0)
                     {
