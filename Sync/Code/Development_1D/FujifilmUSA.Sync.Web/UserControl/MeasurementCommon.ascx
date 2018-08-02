@@ -103,12 +103,16 @@
             <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
             <asp:HiddenField ID="hdnPCSType" runat="server" />
             
+            <div id="divMeasurementDevice">
+                
+            </div>
+            <div id="response">
+                
+            </div>
             <div id="divExtensionNotAvailable">
                 <input type="button" id="btnAddExtension" value="Add Extension" />
             </div>
-            <div id="divExtensionAvailable" style="display:none;">
-                <input type="button" id="btnOpenApp" value="Open Application" />
-            </div>
+            
 
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
@@ -169,7 +173,7 @@
                         <asp:Label ID="lblProjectType" runat="server" Text="Project Type"></asp:Label>:&nbsp;
                     </td>
                     <td style="height: 27px;">
-                        <asp:TextBox ID="txtProjectType" runat="server" ReadOnly="true"></asp:TextBox>
+                        <asp:TextBox ID="txtProjectType" runat="server" ReadOnly="true" ClientIDMode="Static"></asp:TextBox>
                     </td>
                     <td align="right" style="width: 22%;">
                     </td>
@@ -259,8 +263,8 @@
 <asp:HiddenField ID="hdReferenceChartDisplayType" runat="server" />
 <asp:HiddenField ID="hdIsVerification" runat="server" />
 <asp:HiddenField ID="hdLicenseType" runat="server" />
-<asp:HiddenField ID="hdOptimizeRunId" runat="server" />
-<asp:HiddenField ID="hdProjectId" runat="server" />
+<asp:HiddenField ID="hdOptimizeRunId" runat="server" ClientIDMode="Static" />
+<asp:HiddenField ID="hdProjectId" runat="server" ClientIDMode="Static"/>
 <asp:HiddenField ID="hdReferenceChartTypeId" runat="server" />
 <asp:HiddenField ID="hdSerialNumber" runat="server" Value="0" />
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
@@ -321,7 +325,7 @@
             });
         }, (SessionTimeOut * 60 * 1000) - (1 * 60 * 1000));
     });
-    function ControlVisibility() {
+    function ControlVisibility() {        
         jQuery("[id*='btnCalibrate']").css('display', 'none');
         jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
         jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
@@ -337,15 +341,15 @@
 
             //---If plugin is older than 1.9.6 version--> force them to download new version plugin---//
             if (plugin().plugin_version != '1.9.6') {
-                var oWindow;
-                oWindow = window.radopen("PopupDownloadSoftware.aspx", "DownloadSoftwareWindow");
-                oWindow.show();
+                //var oWindow;
+                //oWindow = window.radopen("PopupDownloadSoftware.aspx", "DownloadSoftwareWindow");
+                //oWindow.show();
             }
         }
         else {
-            var oWindow;
-            oWindow = window.radopen("PopupDownloadSoftware.aspx", "DownloadSoftwareWindow");
-            oWindow.show();
+            //var oWindow;
+            //oWindow = window.radopen("PopupDownloadSoftware.aspx", "DownloadSoftwareWindow");
+            //oWindow.show();
         }
     }
 
