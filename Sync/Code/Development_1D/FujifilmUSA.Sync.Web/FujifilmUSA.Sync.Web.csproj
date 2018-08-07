@@ -2470,6 +2470,7 @@
     <Content Include="UserControl\DownloadSoftwares.ascx" />
     <Content Include="UserControl\GlobalActivation.ascx" />
     <Content Include="UserControl\InkOptSourceMiddle.ascx" />
+    <Content Include="UserControl\MeasurementCommonNew.ascx" />
     <Content Include="UserControl\MetricTargetPresetManagement.ascx" />
     <Content Include="UserControl\PatchPresetManagement.ascx" />
     <Content Include="UserControl\PopupControl\DownloadSoftware.ascx" />
@@ -3457,6 +3458,13 @@
     </Compile>
     <Compile Include="UserControl\InkOptSourceMiddle.ascx.designer.cs">
       <DependentUpon>InkOptSourceMiddle.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\MeasurementCommonNew.ascx.cs">
+      <DependentUpon>MeasurementCommonNew.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MeasurementCommonNew.ascx.designer.cs">
+      <DependentUpon>MeasurementCommonNew.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\MetricTargetPresetManagement.ascx.cs">
       <DependentUpon>MetricTargetPresetManagement.ascx</DependentUpon>
@@ -6275,6 +6283,18 @@
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\SpotTargetManagement.ascx.de.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.de.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -6298,7 +6318,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
