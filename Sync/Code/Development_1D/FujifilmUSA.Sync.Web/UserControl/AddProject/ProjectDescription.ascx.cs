@@ -19,6 +19,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recoperationSelectText = "operationSelectText";
         private const string _reclocTargetColorSpaceText = "locTargetColorSpaceText";
         private const string _reclocTargetColorSpaceNextText = "locTargetColorSpaceNextText";
+
+        private const string _reclocPlatesText = "locPlatesText";
+        private const string _reclocRollersText = "locRollersText";
+        private const string _reclocDocBladeText = "locDocBladeText";
+        private const string _reclocMountTapeText = "locMountTapeText";
+        private const string _reclocWashesText = "locWashesText";
+
         private PresenterSaveWindow _presenterSaveWindow;
         #endregion
 
@@ -322,6 +329,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public byte[] ChartPreview { get; set; }
         public Project Project { get; set; }
         public int ProjectId { get; set; }
-        #endregion        
+        #endregion
+
+        protected void cmbPrintingType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbPrintingType.SelectedIndex == 1)
+            {
+                locFountainSol.Text = GetResourceString(_reclocPlatesText);
+                locBlanket.Text = GetResourceString(_reclocRollersText);
+                locBlanketAge.Text = GetResourceString(_reclocDocBladeText);
+                locScreening.Text = GetResourceString(_reclocMountTapeText);
+                locCoating.Text = GetResourceString(_reclocWashesText);
+            }
+        }
     }
 }

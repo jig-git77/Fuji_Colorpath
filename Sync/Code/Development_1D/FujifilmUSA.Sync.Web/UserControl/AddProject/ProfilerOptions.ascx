@@ -36,6 +36,10 @@
     {
         width: 30px;
     }
+    .textwidth50
+    {
+        width: 50px;
+    }
 </style>
 <script type = "text/javascript">
     function validateTVI(evt) {
@@ -877,27 +881,27 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td><asp:Label ID="Label1" runat="server" Text="C"></asp:Label></td>
-                                                                    <td><asp:TextBox ID="txtHue_C" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtHue_C" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><asp:Label ID="Label2" runat="server" Text="M"></asp:Label></td>
-                                                                    <td><asp:TextBox ID="txtHue_M" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtHue_M" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><asp:Label ID="Label3" runat="server" Text="Y"></asp:Label></td>
-                                                                    <td><asp:TextBox ID="txtHue_Y" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtHue_Y" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
                                                                 </tr>     
                                                                 <tr>
                                                                     <td><asp:Label ID="Label4" runat="server" Text="R"></asp:Label></td>
-                                                                    <td><asp:TextBox ID="txtHue_R" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtHue_R" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
                                                                     <td><asp:Label ID="Label5" runat="server" Text="G"></asp:Label></td>
-                                                                    <td><asp:TextBox ID="txtHue_G" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtHue_G" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                                 <tr>
                                                                     <td><asp:Label ID="Label6" runat="server" Text="B"></asp:Label></td>
-                                                                    <td><asp:TextBox ID="txtHue_B" runat="server" CssClass="textwidth35" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtHue_B" runat="server" CssClass="textwidth50" MaxLength="5" onkeypress="return validateTVI(event)"  onchange="return validateHueAngleRange(this)"></asp:TextBox></td>
                                                                 </tr> 
                                                             </table>
                                                       </div>

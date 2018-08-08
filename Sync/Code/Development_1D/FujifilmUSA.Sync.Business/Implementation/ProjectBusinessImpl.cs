@@ -79,6 +79,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     RipSettings = DataReader.ReadString(dsProject.Tables[1].Rows[0], "RipSettings"),
                                     TechnicianName = DataReader.ReadString(dsProject.Tables[1].Rows[0], "TechnicianName"),
                                     Notes = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Notes"),
+                                    PrintingType = (EPrintingTypes)DataReader.ReadInt(dsProject.Tables[1].Rows[0], "PrintingType"),
                                     InkOrder = (EInkOrder)DataReader.ReadInt(dsProject.Tables[1].Rows[0], "InkOrder"),
                                     FountainSolution = DataReader.ReadString(dsProject.Tables[1].Rows[0], "FountainSolution"),
                                     Blanket = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Blanket"),
@@ -248,6 +249,20 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             {
                                 project.ProjectTargetDensity = dsProject.Tables[7].AsEnumerable().
                                     Select(x => new Entity.CPSync1D.ProjectTargetDensity()
+                                    {
+                                        PatchType = new PatchType()
+                                        {
+                                            PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                                            Type = DataReader.ReadString(x, "PatchType")
+                                        },
+                                        Target = DataReader.ReadDecimal(x, "Target")
+                                    }).ToList();
+                            }
+                            //----Select ProjectTargeHueAngle-----------//
+                            if (dsProject.Tables[8].Rows.Count > 0)
+                            {
+                                project.ProjectTargetHueAngle = dsProject.Tables[8].AsEnumerable().
+                                    Select(x => new Entity.CPSync1D.ProjectTargetHueAngle()
                                     {
                                         PatchType = new PatchType()
                                         {
@@ -591,6 +606,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     new XAttribute("Target", x.Target))).ToList());
                         }
 
+                        var projectTargetHueAngle = new XElement("ProjectTargetHueAngle", "");
+                        if (project.ProjectTargetHueAngle != null && project.ProjectTargetHueAngle.Count > 0)
+                        {
+                            projectTargetHueAngle = new XElement("ProjectTargetHueAngle", project.ProjectTargetHueAngle.Select(x => new XElement("TargetHueAngle",
+                                                                                    new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
+                                                                                    new XAttribute("Target", x.Target))).ToList());
+                        }
+
                         DataAccessFactory.
                             Instance.
                             ExecuteProcedure("CPSync4D.UpdateProject",
@@ -604,6 +627,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.PrintCondition.RipSettings,
                                                      project.PrintCondition.TechnicianName,
                                                      project.PrintCondition.Notes,
+                                                     project.PrintCondition.PrintingType,
                                                      project.PrintCondition.InkOrder,
                                                      project.PrintCondition.FountainSolution,
                                                      project.PrintCondition.Blanket,
@@ -628,6 +652,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.MetricTargetPresetId,
                                                      projectTargetLAB.ToString(),
                                                      projectTargetDensity.ToString(),
+                                                     projectTargetHueAngle.ToString(),
                                                      project.ProjectTypeId,
                                                      (project.MeasurementSetting.VUVMode == -1 ? 2 : project.MeasurementSetting.VUVMode),  //---For older project who doen't have VUVMode, so by default it will pass -1 because of NULL, so in that case make it 2 "UVCut"
                                                      (project.MeasurementSetting.VMeasurementCount == -1 ? 0 : project.MeasurementSetting.VMeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
@@ -697,6 +722,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     new XAttribute("Target", x.Target))).ToList());
                         }
 
+                        var projectTargetHueAngle = new XElement("ProjectTargetHueAngle", "");
+                        if (project.ProjectTargetHueAngle != null && project.ProjectTargetHueAngle.Count > 0)
+                        {
+                            projectTargetHueAngle = new XElement("ProjectTargetHueAngle", project.ProjectTargetHueAngle.Select(x => new XElement("TargetHueAngle",
+                                                                                    new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
+                                                                                    new XAttribute("Target", x.Target))).ToList());
+                        }
+
                         DataAccessFactory.
                             Instance.
                             ExecuteProcedure("CPSync4D.CreateProject",
@@ -717,6 +750,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@TechnicalName", Size = 30, Type = DbType.String, Value = project.PrintCondition.TechnicianName},
                                                      new Parameters() {ParameterName = "@Notes", Size = 500, Type = DbType.String, Value = project.PrintCondition.Notes},
 
+                                                     new Parameters() {ParameterName = "@PrintingType", Type = DbType.Int32, Value = (int)project.PrintCondition.PrintingType},
                                                      new Parameters() {ParameterName = "@InkOrder", Type = DbType.Int32, Value = (int)project.PrintCondition.InkOrder},
                                                      new Parameters() {ParameterName = "@FountainSolution", Size = 100, Type = DbType.String, Value = project.PrintCondition.FountainSolution},
                                                      new Parameters() {ParameterName = "@Blanket", Size = 100, Type = DbType.String, Value = project.PrintCondition.Blanket},
@@ -748,6 +782,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters(){ ParameterName="@ProjectTargetTVI", Value = projectTargetTVI.ToString() },
                                                      new Parameters() {ParameterName = "@ProjectTargetLAB", Value = projectTargetLAB.ToString() },
                                                      new Parameters() {ParameterName = "@ProjectTargetDensity", Value = projectTargetDensity.ToString() },
+                                                     new Parameters() {ParameterName = "@ProjectTargetHueAngle", Value = projectTargetHueAngle.ToString() },
                                                      new Parameters() { ParameterName = "@ProjectTypeId" ,Value = project.ProjectTypeId },
 
                                                      new Parameters() {ParameterName = "@VUVMode", Type = DbType.Int16, Value = project.MeasurementSetting.VUVMode},
@@ -1354,6 +1389,30 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
                 }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintStandardDensity"));
             return projectTargetDensityList;
+        }
+
+        public List<Entity.CPSync1D.ProjectTargetHueAngle> GetPrintStandardHueAngle(int printStandardTypeId)
+        {
+            List<Entity.CPSync1D.ProjectTargetHueAngle> projectTargetHueAngleList = new List<Entity.CPSync1D.ProjectTargetHueAngle>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsPrintStandardHueAngleList = DataAccessFactory.Instance.GetDsResult("[CPSync].[GetHueAngleTargetsByPrintStandardTypeID]", new object[] { printStandardTypeId });
+                    if (dsPrintStandardHueAngleList != null && dsPrintStandardHueAngleList.Tables.Count > 0)
+                    {
+                        projectTargetHueAngleList = dsPrintStandardHueAngleList.Tables[0].AsEnumerable().Select(
+                            x => new Entity.CPSync1D.ProjectTargetHueAngle()
+                            {
+                                PatchType = new PatchType()
+                                {
+                                    PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
+                                    Type = DataReader.ReadString(x, "PatchType")
+                                },
+                                Target = DataReader.ReadDecimal(x, "Target")
+                            }).ToList();
+                    }
+                }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintStandardHueAngle"));
+            return projectTargetHueAngleList;
         }
 
         public List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId)

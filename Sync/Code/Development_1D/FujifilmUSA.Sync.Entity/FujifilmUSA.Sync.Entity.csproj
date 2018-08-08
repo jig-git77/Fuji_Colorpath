@@ -62,6 +62,7 @@
     <Compile Include="ColorDensity.cs" />
     <Compile Include="CPSync1D\OptimizeRunCurve.cs" />
     <Compile Include="CPSync1D\ProjectTargetDensity.cs" />
+    <Compile Include="CPSync1D\ProjectTargetHueAngle.cs" />
     <Compile Include="CPSync1D\ProjectTargetLAB.cs" />
     <Compile Include="CPSyncV\MetricSum.cs" />
     <Compile Include="CPSync1D\PrintStandardTVI.cs" />

@@ -268,7 +268,7 @@
                                                     <label class="collapsibleContainerTitle">
                                                         <asp:Localize runat="server" Text="Printing Type" 
                                                         ID="locOffsetData" meta:resourcekey="locOffsetDataResource1"></asp:Localize></label>
-                                                    <asp:DropDownList runat="server" ID="cmbPrintingType" Width="200px" CssClass="select" meta:resourcekey="cmbPrintingTypeResource1">
+                                                    <asp:DropDownList runat="server" ID="cmbPrintingType" Width="200px" CssClass="select" meta:resourcekey="cmbPrintingTypeResource1" AutoPostBack="True" OnSelectedIndexChanged="cmbPrintingType_SelectedIndexChanged">
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div class="clear">

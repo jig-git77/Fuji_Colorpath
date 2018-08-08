@@ -80,6 +80,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     if (SessionManager.Instance.CurrentProject.PrintCondition.PrintingType == EPrintingTypes.Flexo) //----If Sync1D project's printing type is Flexo then only show Hue angle targets panel
                     {
+                        GetPrintStandardHueAngle();
                         dvHueAngleTargets.Visible = true;
                     }
                     LoadProjectInfoFromSession();
@@ -398,6 +399,58 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        private void GetPrintStandardHueAngle()
+        {
+            PrintStandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
+
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            {
+                if (SessionManager.Instance.CurrentProject.ProjectTargetHueAngle == null || SessionManager.Instance.CurrentProject.ProjectTargetHueAngle.Count == 0)
+                {
+                    _presenterDeviceFamilyProfilerOption.GetPrintStandardHueAngle();
+
+                    if (!IsErrorOccured)
+                    {
+                        BindPrintStandardHueAngle(ProjectTargetHueAngle);
+                    }
+                }
+                else // Load from session for existing project
+                {
+                    BindPrintStandardHueAngle(SessionManager.Instance.CurrentProject.ProjectTargetHueAngle);
+                }
+            }
+        }
+
+        private void BindPrintStandardHueAngle(List<Entity.CPSync1D.ProjectTargetHueAngle> ProjectTargetHueAngle)
+        {
+            foreach (var item in ProjectTargetHueAngle)
+            {
+                switch (item.PatchType.Type.ToString())
+                {
+                    case "Cyan":
+                        txtHue_C.Text = item.Target.ToString();
+                        break;
+                    case "Magenta":
+                        txtHue_M.Text = item.Target.ToString();
+                        break;
+                    case "Yellow":
+                        txtHue_Y.Text = item.Target.ToString();
+                        break;
+                    case "Overprint_Red":
+                        txtHue_R.Text = item.Target.ToString();
+                        break;
+                    case "Overprint_Green":
+                        txtHue_G.Text = item.Target.ToString();
+                        break;
+                    case "Overprint_Blue":
+                        txtHue_B.Text = item.Target.ToString();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
         private void BindReTargetList()
         {
             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
@@ -592,6 +645,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.MetricTargetPresetId = Convert.ToInt32(ddlMetricPresets.SelectedValue);
                 SessionManager.Instance.CurrentProject.PrintStandardTVI = GetPrintStandardTVIList();
                 SessionManager.Instance.CurrentProject.ProjectTargetDensity = GetProjectTargetDensityList();
+                SessionManager.Instance.CurrentProject.ProjectTargetHueAngle = GetProjectTargetHueAngleList();
                 SessionManager.Instance.CurrentProject.ReTargetProjectID = Convert.ToInt32(ddlReTargetList.SelectedValue);
 
                 SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
@@ -1293,6 +1347,71 @@ namespace FujifilmUSA.Sync.Web.UserControl
             return ProjectTargetDensityList;
         }
 
+        private List<Entity.CPSync1D.ProjectTargetHueAngle> GetProjectTargetHueAngleList()
+        {
+            List<Entity.CPSync1D.ProjectTargetHueAngle> ProjectTargetHueAngleList = new List<Entity.CPSync1D.ProjectTargetHueAngle>();
+
+            #region ---For CMYRGB Colors
+            ProjectTargetHueAngleList.Add(new Entity.CPSync1D.ProjectTargetHueAngle()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Cyan,
+                    Type = CPPatchType.Cyan.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtHue_C.Text.Trim()) ? "0" : txtHue_C.Text.Trim())),
+            });
+            ProjectTargetHueAngleList.Add(new Entity.CPSync1D.ProjectTargetHueAngle()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Magenta,
+                    Type = CPPatchType.Magenta.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtHue_M.Text.Trim()) ? "0" : txtHue_M.Text.Trim())),
+            });
+            ProjectTargetHueAngleList.Add(new Entity.CPSync1D.ProjectTargetHueAngle()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Yellow,
+                    Type = CPPatchType.Yellow.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtHue_Y.Text.Trim()) ? "0" : txtHue_Y.Text.Trim())),
+            });
+            ProjectTargetHueAngleList.Add(new Entity.CPSync1D.ProjectTargetHueAngle()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Overprint_Red,
+                    Type = CPPatchType.Overprint_Red.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtHue_R.Text.Trim()) ? "0" : txtHue_R.Text.Trim())),
+            });
+            ProjectTargetHueAngleList.Add(new Entity.CPSync1D.ProjectTargetHueAngle()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Overprint_Green,
+                    Type = CPPatchType.Overprint_Green.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtHue_G.Text.Trim()) ? "0" : txtHue_G.Text.Trim())),
+            });
+            ProjectTargetHueAngleList.Add(new Entity.CPSync1D.ProjectTargetHueAngle()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Overprint_Blue,
+                    Type = CPPatchType.Overprint_Blue.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtHue_B.Text.Trim()) ? "0" : txtHue_B.Text.Trim())),
+            });
+            #endregion
+
+            return ProjectTargetHueAngleList;
+        }
+
+        
         private void ClearAdvancedOptionsControls()
         {
             cmbRendering.SelectedValue = "0";
@@ -1342,6 +1461,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int PrintStandardTypeId { get; set; }
         public List<Entity.CPSync1D.PrintStandardTVI> PrintStandardTVI { get; set; }
         public List<Entity.CPSync1D.ProjectTargetDensity> ProjectTargetDensity { get; set; }
+        public List<Entity.CPSync1D.ProjectTargetHueAngle> ProjectTargetHueAngle { get; set; }
         public short LicenseTypeId { get; set; }
         #endregion
 

@@ -40,5 +40,12 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
             _viewDeviceFamilyProfilerOption.ProjectTargetDensity = projectBusiness.GetPrintStandardDensity(_viewDeviceFamilyProfilerOption.PrintStandardTypeId);
         }
+
+        public void GetPrintStandardHueAngle()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
+            _viewDeviceFamilyProfilerOption.ProjectTargetHueAngle = projectBusiness.GetPrintStandardHueAngle(_viewDeviceFamilyProfilerOption.PrintStandardTypeId);
+        }
     }
 }
