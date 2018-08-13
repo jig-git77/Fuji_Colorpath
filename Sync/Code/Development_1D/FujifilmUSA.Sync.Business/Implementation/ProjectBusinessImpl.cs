@@ -1594,7 +1594,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      (project.MeasurementSetting.UVMode == -1 ? 2 : project.MeasurementSetting.UVMode),  //---For older project who doen't have UVMode, so by default it will pass -1 because of NULL, so in that case make it 2 "UVCut"
                                                      (project.MeasurementSetting.MeasurementCount == -1 ? 0 : project.MeasurementSetting.MeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
                                                      project.MeasurementSetting.ReadMode,
-                                                     project.MeasurementSetting.MeasurementDeviceId
+                                                     project.MeasurementSetting.MeasurementDeviceId,
+                                                     project.SpotTargetProject.SpotTarget.ReTargetSpotProjectID
 
                                                  });
                         savedProjectId = project.SpotTargetProject.SpotProjectId;
@@ -1641,7 +1642,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@Status", Type = DbType.Int32, Value = Convert.ToInt32(EOptimizeRunStatus.Open)},
                                                      new Parameters() {ParameterName = "@StartDateTime", Type = DbType.DateTime, Value = DateTime.Now},
                                                      new Parameters() {ParameterName = "@LicenseTypeID", Type = DbType.Int32, Value = (int)project.LicenseType},
-                                                     new Parameters() {ParameterName = "@MasterProjectID", Type = DbType.Int32, Value = project.SpotTargetProject.ProjectId}
+                                                     new Parameters() {ParameterName = "@MasterProjectID", Type = DbType.Int32, Value = project.SpotTargetProject.ProjectId},
+                                                     new Parameters() {ParameterName = "@ReTargetSpotProjectID", Type = DbType.Int32, Value = project.SpotTargetProject.SpotTarget.ReTargetSpotProjectID}
                                                  },
                                              new List<Parameters>()
                                                  {
@@ -1698,7 +1700,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 SpotTargetName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "SpotTargetName"),
                                 Description = DataReader.ReadString(dsProject.Tables[0].Rows[0], "Description"),
                                 MeasurementMode = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MeasurementMode")
-                            }
+                            },
+                            ReTargetSpotProjectID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ReTargetSpotProjectID")
                         };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
@@ -2033,6 +2036,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotDestinationProfile"));
             return data == DBNull.Value ? null : (byte[])data;
+        }
+
+        public Dictionary<int, string> GetReTargetSpotProjectList(int CompanyID)
+        {
+            var dstReTargetSpotProjectList = new Dictionary<int, string>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsReTargetSpotProjectList = DataAccessFactory.Instance.GetDsResult("[CPSpot].[GetReTargetSpotProjectList]", new object[] { CompanyID });
+                    if (dsReTargetSpotProjectList != null && dsReTargetSpotProjectList.Tables.Count > 0)
+                    {
+
+                        dstReTargetSpotProjectList = (dsReTargetSpotProjectList.Tables[0].AsEnumerable().Select(
+                            ReTargetProject => new
+                            {
+                                Value = DataReader.ReadInt(ReTargetProject, "SpotProjectID"),
+                                Text = DataReader.ReadString(ReTargetProject, "ProjectName")
+                            })).
+                            ToDictionary(ReTargetProject => ReTargetProject.Value, ReTargetProject => ReTargetProject.Text);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GeReTargetProjectList"));
+            return dstReTargetSpotProjectList;
         }
         #endregion
 

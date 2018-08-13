@@ -50,5 +50,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         byte[] GetLastOptimizedNamedColorProfile(int spotProjectId);
         ReferenceChartData GetSpotReferenceChartData(int spotProjectId, EReferenceChartDisType referenceChartDisType);
         byte[] GetSpotDestinationProfile(int projectId);
+        Dictionary<int, string> GetReTargetSpotProjectList(int CompanyID);
     }
 }

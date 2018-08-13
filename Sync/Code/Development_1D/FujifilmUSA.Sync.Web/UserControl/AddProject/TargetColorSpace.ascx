@@ -206,24 +206,24 @@
                                                     <asp:Button ID="btn_PaperApply" runat="server" Text="Apply!"
                                                         OnClick="btn_PaperApply_Click" ValidationGroup="a" meta:resourcekey="locbtn_PaperApplyResource1" />
                                             <asp:Button ID="btn_PaperClear" runat="server" OnClick="btn_PaperClear_Click"
-                                                Text="Reset" meta:resourcekey="locbtn_PaperClearResource1" /> 
+                                                Text="Reset" meta:resourcekey="locbtn_PaperClearResource1" />
                                             <br />
 
-                                             <asp:Localize runat="server" Text="Min L* Value:" ID="Localize8" meta:resourcekey="Panel_PaperLABBlackResource1"></asp:Localize>
-                                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                            <asp:Localize runat="server" Text="Min L* Value:" ID="Localize8" meta:resourcekey="Panel_PaperLABBlackResource1"></asp:Localize>
+                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                                             L*<asp:TextBox ID="txtPaper_Black_L" runat="server" CssClass="textwidth40"></asp:TextBox>
                                             <asp:RangeValidator ID="RangeValidator10" runat="server"
                                                 ControlToValidate="txtPaper_Black_L" ErrorMessage="*" ForeColor="Red"
                                                 ValidationGroup="a" MinimumValue="0" MaximumValue="100" Type="Double"></asp:RangeValidator>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtPaper_Black_L" ValidationGroup="a" ForeColor="Red"></asp:RequiredFieldValidator>
-                                          
-                                                    a*<asp:TextBox ID="txtPaper_Black_a" runat="server" CssClass="textwidth40"></asp:TextBox>
+
+                                            a*<asp:TextBox ID="txtPaper_Black_a" runat="server" CssClass="textwidth40"></asp:TextBox>
                                             <asp:RangeValidator ID="RangeValidator11" runat="server"
                                                 ControlToValidate="txtPaper_Black_a" ErrorMessage="*" ForeColor="Red"
                                                 ValidationGroup="a" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="txtPaper_Black_a" ValidationGroup="a" ForeColor="Red"></asp:RequiredFieldValidator>
-                                           
-                                                    b*<asp:TextBox ID="txtPaper_Black_b" runat="server" CssClass="textwidth40"></asp:TextBox>
+
+                                            b*<asp:TextBox ID="txtPaper_Black_b" runat="server" CssClass="textwidth40"></asp:TextBox>
                                             <asp:RangeValidator ID="RangeValidator12" runat="server"
                                                 ControlToValidate="txtPaper_Black_b" ErrorMessage="*" ForeColor="Red"
                                                 ValidationGroup="a" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
@@ -334,7 +334,18 @@
                                             meta:resourcekey="txtOwnerDescriptionResource1"></asp:TextBox>
                                     </td>
                                 </tr>
-
+                                <tr id="trReTargetSpotProject" runat="server" visible="false">
+                                    <td colspan="4">
+                                        <asp:Panel ID="PanelOptionalRetargetSpotProject" runat="server" GroupingText="<b>Optional Retarget</b>" Width="100%">
+                                            <span style="padding-left: 5px;">
+                                                <asp:Localize runat="server" Text="Choose Certified Print Condition:"
+                                                    ID="locReTargetSpotProject" meta:resourcekey="locReTargetResource1"></asp:Localize></span>
+                                            <br />
+                                            &nbsp;<asp:DropDownList ID="ddlSpotReTargetList" runat="server" CssClass="select">
+                                            </asp:DropDownList>
+                                        </asp:Panel>
+                                    </td>
+                                </tr>
 
                             </table>
                         </asp:Panel>
@@ -343,7 +354,7 @@
             </td>
         </tr>
 
-         <tr id="trPaperScaling_4D" runat="server" visible="false">
+        <tr id="trPaperScaling_4D" runat="server" visible="false">
             <td>
                 <div style="display: block;" class="contantbox tabcontant">
                     <div class="section_top">
@@ -392,10 +403,8 @@
                                         </asp:Panel>
                                     </td>
                                 </tr>
-                                 <tr>
-                                    <td style="padding-left: 8px;">
-                                       
-                                    </td>
+                                <tr>
+                                    <td style="padding-left: 8px;"></td>
                                     <td>
                                         <asp:Panel ID="Panel_PaperLAB4D_Black" Style="padding: 5px" runat="server" BorderStyle="None" Enabled="false">
                                             <asp:Localize runat="server" Text="Min L* value:" ID="Localize7" meta:resourcekey="Panel_PaperLABBlackResource1"></asp:Localize>

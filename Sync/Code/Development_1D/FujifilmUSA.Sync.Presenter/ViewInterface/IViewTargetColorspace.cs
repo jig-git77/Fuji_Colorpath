@@ -13,5 +13,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         bool IsSpotTargetType { get; }
         int ProjectTypeId { get; set; }
         int TargetPrintCategory { get; set; }
+        int CompanyID { get; set; }
+        Dictionary<int, string> ReTargetSpotProjectList { get; set; }
     }
 }

@@ -210,6 +210,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new byte[1];
         }
+
+        public Dictionary<int, string> GetReTargetSpotProjectList(int CompanyID)
+        {
+            return new Dictionary<int, string>();
+        }
         #endregion
 
         #region ITaskBase Members
