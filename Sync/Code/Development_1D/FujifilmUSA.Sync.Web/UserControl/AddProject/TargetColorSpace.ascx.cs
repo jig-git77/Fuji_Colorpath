@@ -416,7 +416,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             //for retarget spot project selection panel
-            if (cmbSpotTargetList.SelectedValue.ToString() == "24")
+            if (cmbSpotTargetList.SelectedValue.ToString() == "1") //-----Set no. 1 record for Custom made re target spot project
                 trReTargetSpotProject.Visible = true;
             else
                 trReTargetSpotProject.Visible = false;
