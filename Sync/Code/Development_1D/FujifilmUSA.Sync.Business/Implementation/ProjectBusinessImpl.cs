@@ -1595,7 +1595,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      (project.MeasurementSetting.MeasurementCount == -1 ? 0 : project.MeasurementSetting.MeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
                                                      project.MeasurementSetting.ReadMode,
                                                      project.MeasurementSetting.MeasurementDeviceId,
-                                                     project.SpotTargetProject.SpotTarget.ReTargetSpotProjectID
+                                                     project.SpotTargetProject.ReTargetSpotProjectID
 
                                                  });
                         savedProjectId = project.SpotTargetProject.SpotProjectId;
@@ -1643,7 +1643,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@StartDateTime", Type = DbType.DateTime, Value = DateTime.Now},
                                                      new Parameters() {ParameterName = "@LicenseTypeID", Type = DbType.Int32, Value = (int)project.LicenseType},
                                                      new Parameters() {ParameterName = "@MasterProjectID", Type = DbType.Int32, Value = project.SpotTargetProject.ProjectId},
-                                                     new Parameters() {ParameterName = "@ReTargetSpotProjectID", Type = DbType.Int32, Value = project.SpotTargetProject.SpotTarget.ReTargetSpotProjectID}
+                                                     new Parameters() {ParameterName = "@ReTargetSpotProjectID", Type = DbType.Int32, Value = project.SpotTargetProject.ReTargetSpotProjectID}
                                                  },
                                              new List<Parameters>()
                                                  {

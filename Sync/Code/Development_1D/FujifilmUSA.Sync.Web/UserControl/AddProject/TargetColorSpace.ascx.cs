@@ -262,9 +262,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     cmbSpotTargetList.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID);
                     cmbSpotTargetList_SelectedIndexChanged(null, null);
+                    cmbSpotTargetList.Enabled = false;
+                    ddlSpotReTargetList.Enabled = false;
 
-                    if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID == 1) //-----Set no. 1 record for Custom made re target spot project
-                        ddlSpotReTargetList.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.ReTargetSpotProjectID);
+                    if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID == 1) //-----If Custom made re target spot project, then set original base spot project from where we re-targeted
+                        ddlSpotReTargetList.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.ReTargetSpotProjectID);
                 }                
             }
             BindPCSDataType();
@@ -438,21 +440,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget = new Entity.CPSpot.SpotTarget()
                     {
                         SpotTargetID = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetID,
-                        SpotTargetName = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetName,
-                        ReTargetSpotProjectID = Convert.ToInt32(ddlSpotReTargetList.SelectedValue.ToString())
+                        SpotTargetName = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetName
                     };
                     SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID;
+                    if (cmbSpotTargetList.SelectedValue.ToString() == "1") //-----Set no. 1 record for Custom made re target spot project
+                        SessionManager.Instance.CurrentProject.SpotTargetProject.ReTargetSpotProjectID = Convert.ToInt32(ddlSpotReTargetList.SelectedValue.ToString());
                 }
-
-                //-----Pass Dummy data---------//
-                //SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = 0;
-                //SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
-                //SessionManager.Instance.CurrentProject.ProjectOption.Add(new ProjectOption()
-                //{
-                //    ProfileTypeId = 0,
-                //    ProfilerOptionId = 0,
-                //    ProfilerOptionValue = "",
-                //});
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
             }
             else

@@ -16,6 +16,5 @@ namespace FujifilmUSA.Sync.Entity.CPSpot
         public bool IsUsed { get; set; }
         public SpotProjectChartSetting spotTargetSetting {get;set;}
         public List<SpotTargetLAB> spotTargetLab { get; set; }
-        public int ReTargetSpotProjectID { get; set; }
     }
 }
