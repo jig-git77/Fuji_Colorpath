@@ -259,7 +259,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
                 if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)
+                {
                     cmbSpotTargetList.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID);
+                    cmbSpotTargetList_SelectedIndexChanged(null, null);
+
+                    if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID == 1) //-----Set no. 1 record for Custom made re target spot project
+                        ddlSpotReTargetList.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.ReTargetSpotProjectID);
+                }                
             }
             BindPCSDataType();
             cmbPCSDataType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.PCSDataTypes).ToString(); //PCSDataType Selection
