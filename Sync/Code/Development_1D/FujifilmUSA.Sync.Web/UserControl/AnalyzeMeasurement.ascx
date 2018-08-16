@@ -9,7 +9,7 @@
 <link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
 <script src="Scripts/kendo/2018.1.221/kendo.all.min.js" type="text/javascript"></script>
 <style>
-    #tabstrip li {
+    #tabstrip > ul:first-child > li {
         display: none;
     }
 
