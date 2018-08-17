@@ -13,6 +13,14 @@
         display: none;
     }
 
+    .listDevice .k-tabstrip-wrapper .k-content{
+        height:auto !important;
+    }
+
+    #divMeasurementPatchDetails .k-grid-content-locked{
+        height:auto !important;
+    }
+
     #divMeasurementPatchDetails .k-grid td {
         line-height: 18px;
     }
@@ -97,7 +105,7 @@
     }
 </style>
 <script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>
-<script src="JS/AnalyzeMeasurement.js" type="text/javascript"></script>
+<script src="JS/AnalyzeMeasurement.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 
 
 <script type="text/javascript">

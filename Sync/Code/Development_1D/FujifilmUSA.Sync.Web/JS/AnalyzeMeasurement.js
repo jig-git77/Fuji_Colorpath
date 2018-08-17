@@ -701,413 +701,421 @@ function BindMeasurementPatchDetails() {
 
     $('#hdPatchMatricSum').val(''); //set the metric sum --All default value
 
-    $divMeasurementPatchDetails.kendoGrid({
-        dataSource: {
-            transport: {
-                read: function (options) {
-                    kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), true);
-                    $.ajax({
-                        type: "GET",
-                        url: SERVICE_BASE_URL + 'api/Chart/GetMeasurementPatchDetails',
-                        //data: apiParameters,
-                        data: {
-                            MeasurementId: measurementID,
-                            IsVerificationProject: $hdnVerification,
-                            IsSync1DTypeProject: $hdnSync1DType,
-                            metricSumID: $('#hdPatchMatricSum').val()
-                        },
-                        dataType: "json",
-                        headers: {
-                            'Accept-Language': $CurrentCulture
-                        },
-                        success: function (response) {
-                            kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
-                            if (response.data != null) {
-                                Resources = response.data.GlobalResources;
-                                var patches = response.data.measurementPatchDetails;
-                                options.success(patches);
+    var patchGrid = $divMeasurementPatchDetails.data("kendoGrid");
+    if (patchGrid) {        
+        $divMeasurementPatchDetails.data('kendoGrid').dataSource.read();
+        $divMeasurementPatchDetails.data('kendoGrid').refresh();
+    } else {
+        $divMeasurementPatchDetails.kendoGrid({
+            dataSource: {
+                transport: {
+                    read: function (options) {
+                        kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), true);
+                        $.ajax({
+                            type: "GET",
+                            url: SERVICE_BASE_URL + 'api/Chart/GetMeasurementPatchDetails',
+                            //data: apiParameters,
+                            data: {
+                                MeasurementId: parseInt($hdnCurrentMeasurement.val()),
+                                IsVerificationProject: $hdnVerification,
+                                IsSync1DTypeProject: $hdnSync1DType,
+                                metricSumID: $('#hdPatchMatricSum').val()
+                            },
+                            dataType: "json",
+                            headers: {
+                                'Accept-Language': $CurrentCulture
+                            },
+                            success: function (response) {
+                                kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
+                                if (response.data != null) {
+                                    Resources = response.data.GlobalResources;
+                                    var patches = response.data.measurementPatchDetails;
+                                    options.success(patches);
 
-                                //set the column header
-                                $divMeasurementPatchDetails.find("th[data-field=HTMLColor] b").html(Resources.gridAnalyzeHeaderPatchResource);
-                                $divMeasurementPatchDetails.find("th[data-field=SampleID] b").html(Resources.gridAnalyzeHeaderIDResource);
-                                $divMeasurementPatchDetails.find("th[data-field=SampleName] b").html(Resources.GridTemplateColumnResource3);
-                                $divMeasurementPatchDetails.find("th[data-field=CMYK_C] b").html(Resources.gridAnalyzeHeader_C_Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=CMYK_M] b").html(Resources.gridAnalyzeHeader_M_Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=CMYK_Y] b").html(Resources.gridAnalyzeHeader_Y_Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=CMYK_K] b").html(Resources.gridAnalyzeHeader_K_Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeader_E_Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=ΔE94] b").html(Resources.gridAnalyzeHeaderE94Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=ΔE2000] b").html(Resources.gridAnalyzeHeaderE2000Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=TargetL] b").html(Resources.gridAnalyzeHeaderTargetLResource);
-                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_L] b").html(Resources.gridAnalyzeHeaderCIELAB_LResource);
-                                $divMeasurementPatchDetails.find("th[data-field=Targeta] b").html(Resources.gridAnalyzeHeaderTargetAResource);
-                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_a] b").html(Resources.gridAnalyzeHeaderCIELAB_AResource);
-                                $divMeasurementPatchDetails.find("th[data-field=Targetb] b").html(Resources.gridAnalyzeHeaderTargetBResource);
-                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_b] b").html(Resources.gridAnalyzeHeaderCIELAB_BResource);
-                                $divMeasurementPatchDetails.find("th[data-field=Density_V] b").html(Resources.gridAnalyzeHeaderDensity_VResource);
-                                $divMeasurementPatchDetails.find("th[data-field=Density_C] b").html(Resources.gridAnalyzeHeaderDensity_CResource);
-                                $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
-                                $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
+                                    //set the column header
+                                    $divMeasurementPatchDetails.find("th[data-field=HTMLColor] b").html(Resources.gridAnalyzeHeaderPatchResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=SampleID] b").html(Resources.gridAnalyzeHeaderIDResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=SampleName] b").html(Resources.GridTemplateColumnResource3);
+                                    $divMeasurementPatchDetails.find("th[data-field=CMYK_C] b").html(Resources.gridAnalyzeHeader_C_Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=CMYK_M] b").html(Resources.gridAnalyzeHeader_M_Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=CMYK_Y] b").html(Resources.gridAnalyzeHeader_Y_Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=CMYK_K] b").html(Resources.gridAnalyzeHeader_K_Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeader_E_Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=ΔE94] b").html(Resources.gridAnalyzeHeaderE94Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=ΔE2000] b").html(Resources.gridAnalyzeHeaderE2000Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=TargetL] b").html(Resources.gridAnalyzeHeaderTargetLResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=CIELAB_L] b").html(Resources.gridAnalyzeHeaderCIELAB_LResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Targeta] b").html(Resources.gridAnalyzeHeaderTargetAResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=CIELAB_a] b").html(Resources.gridAnalyzeHeaderCIELAB_AResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Targetb] b").html(Resources.gridAnalyzeHeaderTargetBResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=CIELAB_b] b").html(Resources.gridAnalyzeHeaderCIELAB_BResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Density_V] b").html(Resources.gridAnalyzeHeaderDensity_VResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Density_C] b").html(Resources.gridAnalyzeHeaderDensity_CResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
+                                }
+
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
+                                console.log(XMLHttpRequest.responseText);
                             }
+                        });
+                    },
 
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
-                            console.log(XMLHttpRequest.responseText);
-                        }
-                    });
                 },
-
-            },
-            schema: {
-                model: {
-                    fields: {
-                        SampleID: {
-                            from: "SampleID",
-                            type: "number"
-                        },
-                        SampleName: {
-                            from: "SampleName"
-                        },
-                        CMYK_C: {
-                            from: "CMYK_C",
-                            type: "number"
-                        },
-                        CMYK_M: {
-                            from: "CMYK_M",
-                            type: "number"
-                        },
-                        CMYK_Y: {
-                            from: "CMYK_Y",
-                            type: "number"
-                        },
-                        CMYK_K: {
-                            from: "CMYK_K",
-                            type: "number"
-                        },
-                        HTMLColor: {
-                            from: "HTMLColor"
-                        },
-                        TargetL: {
-                            from: "TargetL",
-                            type: "number"
-                        },
-                        Targeta: {
-                            from: "Targeta",
-                            type: "number"
-                        },
-                        Targetb: {
-                            from: "Targetb",
-                            type: "number"
-                        },
-                        CIELAB_L: {
-                            from: "CIELAB_L",
-                            type: "number"
-                        },
-                        CIELAB_a: {
-                            from: "CIELAB_a",
-                            type: "number"
-                        },
-                        CIELAB_b: {
-                            from: "CIELAB_b",
-                            type: "number"
-                        },
-                        ΔE: {
-                            from: "ΔE",
-                            type: "number"
-                        },
-                        ΔE94: {
-                            from: "ΔE94",
-                            type: "number"
-                        },
-                        ΔE2000: {
-                            from: "ΔE2000",
-                            type: "number"
-                        },
-                        Density_V: {
-                            from: "Density_V",
-                            type: "number"
-                        },
-                        Density_C: {
-                            from: "Density_C",
-                            type: "number"
-                        },
-                        Density_M: {
-                            from: "Density_M",
-                            type: "number"
-                        },
-                        Density_Y: {
-                            from: "Density_Y",
-                            type: "number"
-                        },
-                        PatchTypeID: {
-                            from: "PatchTypeID",
-                            type: "number"
-                        },
-                        ΔH: {
-                            from: "ΔH",
-                            type: "number"
-                        },
-                        ΔCh: {
-                            from: "ΔCh",
-                            type: "number"
-                        },
-                        ΔL: {
-                            from: "ΔL",
-                            type: "number"
+                schema: {
+                    model: {
+                        fields: {
+                            SampleID: {
+                                from: "SampleID",
+                                type: "number"
+                            },
+                            SampleName: {
+                                from: "SampleName"
+                            },
+                            CMYK_C: {
+                                from: "CMYK_C",
+                                type: "number"
+                            },
+                            CMYK_M: {
+                                from: "CMYK_M",
+                                type: "number"
+                            },
+                            CMYK_Y: {
+                                from: "CMYK_Y",
+                                type: "number"
+                            },
+                            CMYK_K: {
+                                from: "CMYK_K",
+                                type: "number"
+                            },
+                            HTMLColor: {
+                                from: "HTMLColor"
+                            },
+                            TargetL: {
+                                from: "TargetL",
+                                type: "number"
+                            },
+                            Targeta: {
+                                from: "Targeta",
+                                type: "number"
+                            },
+                            Targetb: {
+                                from: "Targetb",
+                                type: "number"
+                            },
+                            CIELAB_L: {
+                                from: "CIELAB_L",
+                                type: "number"
+                            },
+                            CIELAB_a: {
+                                from: "CIELAB_a",
+                                type: "number"
+                            },
+                            CIELAB_b: {
+                                from: "CIELAB_b",
+                                type: "number"
+                            },
+                            ΔE: {
+                                from: "ΔE",
+                                type: "number"
+                            },
+                            ΔE94: {
+                                from: "ΔE94",
+                                type: "number"
+                            },
+                            ΔE2000: {
+                                from: "ΔE2000",
+                                type: "number"
+                            },
+                            Density_V: {
+                                from: "Density_V",
+                                type: "number"
+                            },
+                            Density_C: {
+                                from: "Density_C",
+                                type: "number"
+                            },
+                            Density_M: {
+                                from: "Density_M",
+                                type: "number"
+                            },
+                            Density_Y: {
+                                from: "Density_Y",
+                                type: "number"
+                            },
+                            PatchTypeID: {
+                                from: "PatchTypeID",
+                                type: "number"
+                            },
+                            ΔH: {
+                                from: "ΔH",
+                                type: "number"
+                            },
+                            ΔCh: {
+                                from: "ΔCh",
+                                type: "number"
+                            },
+                            ΔL: {
+                                from: "ΔL",
+                                type: "number"
+                            }
                         }
                     }
-                }
+                },
+                pageSize: 10
             },
-            pageSize: 10
-        },
-        sortable: true,
-        scrollable: true,
-        resizable: true,
-        //height: 405,
-        //filterable: true,
-        filterable: {
-            extra: false,
-            //operators: {
-            //    string: {
-            //        eq: "Is equal to"
-            //    }
-            //}
-        },
-        pageable: {
-            refresh: true,
-            pageSizes: true
-        },
-        noRecords: {
-            template: ''
-        },
-        toolbar: kendo.template($("#templatePatchDetails").html()),
-        //toolbar: [{ 'name': 'exportCGATS', template: '<div style="float:left;"><button id="btnExportCGATS" class=\'k-button\'>Export CGATS</button></div>' }],
-        columns: [
-            {
-                field: "HTMLColor",
-                filterable: false,
-                title: "<b title='Patch'>Patch</b>",
-                //template: "<span id='sp' style='display:inline-block;background-color:#FFB700;height:14px;width:30px;'></span>",
-                template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
-                width: "50px",
-                locked: true,
-                sortable: false
-                //lockable: false,
+            sortable: true,
+            scrollable: true,
+            resizable: true,
+            //height: 405,
+            //filterable: true,
+            filterable: {
+                extra: false,
+                //operators: {
+                //    string: {
+                //        eq: "Is equal to"
+                //    }
+                //}
             },
-            {
-                field: "SampleID",
-                title: "<b title='ID'>ID</b>",
-                width: "50px",
-                filterable: false,
-                locked: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true
             },
-            {
-                field: "SampleName",
-                title: "<b title='Name'>Name</b>",
-                filterable: false,
-                width: "75px",
-                locked: true,
+            noRecords: {
+                template: ''
             },
-            {
-                field: "CMYK_C",
-                title: "<b title='C'>C</b>",
-                format: "{0:n2}",
-                width: "55px",
-                locked: true,
-            },
-            {
-                field: "CMYK_M",
-                title: "<b title='M'>M</b>",
-                format: "{0:n2}",
-                width: "58px",
-                locked: true,
-            },
-            {
-                field: "CMYK_Y",
-                title: "<b title='Y'>Y</b>",
-                format: "{0:n2}",
-                width: "55px",
-                locked: true,
-            },
-            {
-                field: "CMYK_K",
-                title: "<b title='K'>K</b>",
-                format: "{0:n2}",
-                width: "55px",
-                locked: true,
-            },
-            {
-                field: "ΔE",
-                title: "<b title='ΔE'>ΔE</b>",
-                width: "65px",
-                format: "{0:n2}",
-            },
-            {
-                field: "ΔE94",
-                title: "<b title='ΔE94'>ΔE94</b>",
-                width: "80px",
-                format: "{0:n2}",
-            },
-            {
-                field: "ΔE2000",
-                title: "<b title='ΔE2000'>ΔE2000</b>",
-                width: "90px",
-                format: "{0:n2}",
-            },
-            {
-                field: "TargetL",
-                title: "<b title='Target L*'>Target L*</b>",
-                width: "100px",
-                format: "{0:n2}",
-            },
-            {
-                field: "CIELAB_L",
-                title: "<b title='Actual L*'>Actual L*</b>",
-                width: "100px",
-                format: "{0:n2}",
-            },
-            {
-                field: "Targeta",
-                title: "<b title='Target a*'>Target a*</b>",
-                width: '100px',
-                format: "{0:n2}",
-            },
-            {
-                field: "CIELAB_a",
-                title: "<b title='Actual a*'>Actual a*</b>",
-                width: "100px",
-                format: "{0:n2}",
-            },
-            {
-                field: "Targetb",
-                title: "<b title='Target b*'>Target b*</b>",
-                width: '100px',
-                format: "{0:n2}",
-            },
-            {
-                field: "CIELAB_b",
-                title: "<b title='Actual b*'>Actual b*</b>",
-                width: "100px",
-                format: "{0:n2}",
-            },
-            {
-                field: "Density_V",
-                title: "<b title='Density_V'>Density_V</b>",
-                width: "110px",
-                format: "{0:n2}",
-            },
-            {
-                field: "Density_C",
-                title: "<b title='Density_C'>Density_C</b>",
-                width: '110px',
-                format: "{0:n2}",
-            },
-            {
-                field: "Density_M",
-                title: "<b title='Density_M'>Density_M</b>",
-                width: "110px",
-                format: "{0:n2}",
-            },
-            {
-                field: "Density_Y",
-                title: "<b title='Density_Y'>Density_Y</b>",
-                width: '110px',
-                format: "{0:n2}",
-            },
-            {
-                field: "ΔH",
-                title: "<b title='ΔH'>ΔH</b>",
-                width: '75px',
-                format: "{0:n2}",
-                hidden: true,
-            },
-            {
-                field: "ΔCh",
-                title: "<b title='ΔCh'>ΔCh</b>",
-                width: '75px',
-                format: "{0:n2}",
-                hidden: true,
-            },
-            {
-                field: "ΔL",
-                title: "<b title='ΔL'>ΔL</b>",
-                width: '75px',
-                format: "{0:n2}",
-                hidden: true,
-            },
-        ],
-        dataBound: function (e) {
+            toolbar: kendo.template($("#templatePatchDetails").html()),
+            //toolbar: [{ 'name': 'exportCGATS', template: '<div style="float:left;"><button id="btnExportCGATS" class=\'k-button\'>Export CGATS</button></div>' }],
+            columns: [
+                {
+                    field: "HTMLColor",
+                    filterable: false,
+                    title: "<b title='Patch'>Patch</b>",
+                    //template: "<span id='sp' style='display:inline-block;background-color:#FFB700;height:14px;width:30px;'></span>",
+                    template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
+                    width: "50px",
+                    locked: true,
+                    sortable: false
+                    //lockable: false,
+                },
+                {
+                    field: "SampleID",
+                    title: "<b title='ID'>ID</b>",
+                    width: "50px",
+                    filterable: false,
+                    locked: true,
+                },
+                {
+                    field: "SampleName",
+                    title: "<b title='Name'>Name</b>",
+                    filterable: false,
+                    width: "75px",
+                    locked: true,
+                },
+                {
+                    field: "CMYK_C",
+                    title: "<b title='C'>C</b>",
+                    format: "{0:n2}",
+                    width: "55px",
+                    locked: true,
+                },
+                {
+                    field: "CMYK_M",
+                    title: "<b title='M'>M</b>",
+                    format: "{0:n2}",
+                    width: "58px",
+                    locked: true,
+                },
+                {
+                    field: "CMYK_Y",
+                    title: "<b title='Y'>Y</b>",
+                    format: "{0:n2}",
+                    width: "55px",
+                    locked: true,
+                },
+                {
+                    field: "CMYK_K",
+                    title: "<b title='K'>K</b>",
+                    format: "{0:n2}",
+                    width: "55px",
+                    locked: true,
+                },
+                {
+                    field: "ΔE",
+                    title: "<b title='ΔE'>ΔE</b>",
+                    width: "65px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "ΔE94",
+                    title: "<b title='ΔE94'>ΔE94</b>",
+                    width: "80px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "ΔE2000",
+                    title: "<b title='ΔE2000'>ΔE2000</b>",
+                    width: "90px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "TargetL",
+                    title: "<b title='Target L*'>Target L*</b>",
+                    width: "100px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "CIELAB_L",
+                    title: "<b title='Actual L*'>Actual L*</b>",
+                    width: "100px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Targeta",
+                    title: "<b title='Target a*'>Target a*</b>",
+                    width: '100px',
+                    format: "{0:n2}",
+                },
+                {
+                    field: "CIELAB_a",
+                    title: "<b title='Actual a*'>Actual a*</b>",
+                    width: "100px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Targetb",
+                    title: "<b title='Target b*'>Target b*</b>",
+                    width: '100px',
+                    format: "{0:n2}",
+                },
+                {
+                    field: "CIELAB_b",
+                    title: "<b title='Actual b*'>Actual b*</b>",
+                    width: "100px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Density_V",
+                    title: "<b title='Density_V'>Density_V</b>",
+                    width: "110px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Density_C",
+                    title: "<b title='Density_C'>Density_C</b>",
+                    width: '110px',
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Density_M",
+                    title: "<b title='Density_M'>Density_M</b>",
+                    width: "110px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Density_Y",
+                    title: "<b title='Density_Y'>Density_Y</b>",
+                    width: '110px',
+                    format: "{0:n2}",
+                },
+                {
+                    field: "ΔH",
+                    title: "<b title='ΔH'>ΔH</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                    hidden: true,
+                },
+                {
+                    field: "ΔCh",
+                    title: "<b title='ΔCh'>ΔCh</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                    hidden: true,
+                },
+                {
+                    field: "ΔL",
+                    title: "<b title='ΔL'>ΔL</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                    hidden: true,
+                },
+            ],
+            dataBound: function (e) {
 
-            var selectedMatricSum = parseInt($divMeasurementPatchDetails.find("#ddlMatricSum").val())
-            var grid = $divMeasurementPatchDetails.data("kendoGrid");
-            if (!isNaN(selectedMatricSum)) {
-                switch (selectedMatricSum) {
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 25:
-                    case 26:
-                        grid.showColumn(20);
-                        grid.hideColumn(21);
-                        grid.hideColumn(22);
-                        break;
-                    case 8:
-                    case 9:
-                    case 36:
-                    case 37:
-                    case 48:
-                        grid.hideColumn(20);
-                        grid.showColumn(21);
-                        grid.hideColumn(22);
-                        break;
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 38:
-                    case 39:
-                    case 40:
-                    case 41:
-                        grid.hideColumn(20);
-                        grid.hideColumn(21);
-                        grid.showColumn(22);
-                        break;
-                    default:
-                        grid.hideColumn(20);
-                        grid.hideColumn(21);
-                        grid.hideColumn(22);
+                var selectedMatricSum = parseInt($divMeasurementPatchDetails.find("#ddlMatricSum").val())
+                var grid = $divMeasurementPatchDetails.data("kendoGrid");
+                if (!isNaN(selectedMatricSum)) {
+                    switch (selectedMatricSum) {
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 25:
+                        case 26:
+                            grid.showColumn(20);
+                            grid.hideColumn(21);
+                            grid.hideColumn(22);
+                            break;
+                        case 8:
+                        case 9:
+                        case 36:
+                        case 37:
+                        case 48:
+                            grid.hideColumn(20);
+                            grid.showColumn(21);
+                            grid.hideColumn(22);
+                            break;
+                        case 10:
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 38:
+                        case 39:
+                        case 40:
+                        case 41:
+                            grid.hideColumn(20);
+                            grid.hideColumn(21);
+                            grid.showColumn(22);
+                            break;
+                        default:
+                            grid.hideColumn(20);
+                            grid.hideColumn(21);
+                            grid.hideColumn(22);
+                    }
                 }
             }
-        }
-        //dataBound: function (e) {
-        //    debugger;
-        //    var measurementId = 0;
-        //    if (e.sender.dataSource._view.length > 0) {
-        //        measurementId = e.sender.dataSource._view[0].MeasurementID;
-        //    }
+            //dataBound: function (e) {
+            //    debugger;
+            //    var measurementId = 0;
+            //    if (e.sender.dataSource._view.length > 0) {
+            //        measurementId = e.sender.dataSource._view[0].MeasurementID;
+            //    }
 
-        //    if (measurementId > 0) {
-        //        this.hideColumn(4);
-        //        this.hideColumn(5);
-        //        this.hideColumn(6);
-        //        this.hideColumn(7);
-        //    }
-        //    else {
-        //        this.hideColumn(8);
-        //        this.hideColumn(9);
-        //        this.hideColumn(10);
-        //    }
+            //    if (measurementId > 0) {
+            //        this.hideColumn(4);
+            //        this.hideColumn(5);
+            //        this.hideColumn(6);
+            //        this.hideColumn(7);
+            //    }
+            //    else {
+            //        this.hideColumn(8);
+            //        this.hideColumn(9);
+            //        this.hideColumn(10);
+            //    }
 
 
-        //    var dataSource = this.dataSource;
-        //    this.element.find('tr').each(function () {
-        //        var row = $(this);
-        //        //set resource message
-        //        row.find('#lnkView').attr('title', _Resources.gridAnalyzeToolTipViewResource);
-        //    });
-        //}
-    });
+            //    var dataSource = this.dataSource;
+            //    this.element.find('tr').each(function () {
+            //        var row = $(this);
+            //        //set resource message
+            //        row.find('#lnkView').attr('title', _Resources.gridAnalyzeToolTipViewResource);
+            //    });
+            //}
+        });
+    }
+
+    
 
 
     if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
