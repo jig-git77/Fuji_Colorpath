@@ -163,6 +163,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtBlanketAge.Text = SessionManager.Instance.CurrentProject.PrintCondition.BlanketAge;
                 txtScreening.Text = SessionManager.Instance.CurrentProject.PrintCondition.Screening;
                 txtCoating.Text = SessionManager.Instance.CurrentProject.PrintCondition.Coating;
+                SetProjectTypeVisisbility();
 
                 if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.Edit) //If project is in Edit mode display Description tab for editing everytime and pop up Next button to move to next page
                 {
@@ -315,6 +316,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void cmbPrintingType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SetProjectTypeVisisbility();
+        }
+        
+        void SetProjectTypeVisisbility()
+        {
             if (cmbPrintingType.SelectedIndex == 1)//flexo printing type
             {
                 locFountainSol.Text = GetResourceString(_reclocPlatesText);
@@ -338,6 +344,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 locRollersMessage.Visible = false;
             }
         }
+    
         #endregion
 
         #region Properties
