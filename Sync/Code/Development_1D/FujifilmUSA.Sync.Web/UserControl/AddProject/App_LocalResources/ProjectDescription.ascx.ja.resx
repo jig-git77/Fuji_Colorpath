@@ -213,4 +213,7 @@
   <data name="locWashesText" xml:space="preserve">
     <value>Washes-Plate/Cylinder:_ja</value>
   </data>
+  <data name="locRollersMessageResource1.Text" xml:space="preserve">
+    <value>*Include Manufacture, Line Count &amp; BCM</value>
+  </data>
 </root>

@@ -119,7 +119,7 @@
                                        meta:resourcekey="panelAddProjectDescriptionResource1">
                                         <table>
                                             <tr>
-                                                <td style="width: 130px">
+                                                <td style="width: 135px">
                                                     <span><asp:Localize runat="server" Text="Press:" ID="locPress" 
                                                         meta:resourcekey="locPressResource1"></asp:Localize></span>
                                                 </td>
@@ -265,11 +265,17 @@
                                                 <div style="float: left;">
                                                     <div id="imgHeader" class="expanded">
                                                         &nbsp;</div>
-                                                    <label class="collapsibleContainerTitle">
-                                                        <asp:Localize runat="server" Text="Printing Type" 
-                                                        ID="locOffsetData" meta:resourcekey="locOffsetDataResource1"></asp:Localize></label>
-                                                    <asp:DropDownList runat="server" ID="cmbPrintingType" Width="200px" CssClass="select" meta:resourcekey="cmbPrintingTypeResource1" AutoPostBack="True" OnSelectedIndexChanged="cmbPrintingType_SelectedIndexChanged">
-                                                    </asp:DropDownList>
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width: 117px"><label class="collapsibleContainerTitle">
+                                                                <asp:Localize runat="server" Text="Printing Type" 
+                                                                    ID="locOffsetData" meta:resourcekey="locOffsetDataResource1"></asp:Localize></label></td>
+                                                            <td style="width: 400px">
+                                                                <asp:DropDownList runat="server" ID="cmbPrintingType" Width="200px" CssClass="select" meta:resourcekey="cmbPrintingTypeResource1" AutoPostBack="True" OnSelectedIndexChanged="cmbPrintingType_SelectedIndexChanged">
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                                                 </div>
                                                 <div class="clear">
                                                 </div>
@@ -280,7 +286,7 @@
                                         Width="100%" meta:resourcekey="panelOffsetDataResource1">
                                          <table>
                                             <tr>
-                                                <td style="width: 130px">
+                                                <td style="width: 135px">
                                                    <span><asp:Localize runat="server" ID="locInkOrder" Text="Ink Order:" 
                                                                     meta:resourcekey="locInkOrderResource1"></asp:Localize>&nbsp; </span>&nbsp;
                                                 </td>
@@ -290,55 +296,57 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 130px">
+                                                <td>
                                                    <span><asp:Localize runat="server" ID="locFountainSol" Text="Fountain Solution:" 
                                                                     meta:resourcekey="locFountainSolResource1"></asp:Localize>&nbsp; </span>&nbsp; 
                                                 </td>
-                                                <td style="width: 500px">
+                                                <td>
                                                      <asp:TextBox ID="txtFountainSol" runat="server" Width="200px" Height="19px" 
                                                         MaxLength="100" meta:resourcekey="txtFountainSolResource1"></asp:TextBox>
-                                                        <span><asp:Localize runat="server" ID="Localize2" Text="*Include Manufacture, Name" 
+                                                        <span><asp:Localize runat="server" ID="locFounSolRef" Text="*Include Manufacture, Name" 
                                                                     meta:resourcekey="locFounSolRefResource1"></asp:Localize>&nbsp; </span> 
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 130px">
+                                                <td>
                                                    <span><asp:Localize runat="server" ID="locBlanket" Text="Blanket:" 
                                                                     meta:resourcekey="locBlanketResource1"></asp:Localize>&nbsp; </span>&nbsp;
                                                 </td>
-                                                <td style="width: 500px">
+                                                <td>
                                                      <asp:TextBox ID="txtBlanket" runat="server" Width="200px" Height="19px" 
                                                         MaxLength="100" meta:resourcekey="txtBlanketResource1"></asp:TextBox>
+                                                    <span><asp:Localize runat="server" ID="locRollersMessage" Text="*Include Manufacture, Line Count & BCM" 
+                                                                    meta:resourcekey="locRollersMessageResource1" Visible="false"></asp:Localize>&nbsp; </span>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 130px">
+                                                <td>
                                                    <span><asp:Localize runat="server" ID="locBlanketAge" Text="Blanket Age:" 
                                                                     meta:resourcekey="locBlanketAgeResource1"></asp:Localize>&nbsp; </span>&nbsp;
                                                 </td>
-                                                <td style="width: 400px">
+                                                <td>
                                                      <asp:TextBox ID="txtBlanketAge" runat="server" Width="200px" Height="19px" 
                                                         MaxLength="100" meta:resourcekey="txtBlanketAgeResource1"></asp:TextBox>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 130px">
+                                                <td>
                                                    <span><asp:Localize runat="server" ID="locScreening" Text="Screening:" 
                                                                     meta:resourcekey="locScreeningResource1"></asp:Localize>&nbsp; </span>&nbsp; 
                                                 </td>
-                                                <td style="width: 500px">
+                                                <td>
                                                      <asp:TextBox ID="txtScreening" runat="server" Width="200px" Height="19px" 
                                                         MaxLength="100" meta:resourcekey="txtScreeningResource1"></asp:TextBox>
-                                                        <span><asp:Localize runat="server" ID="Localize3" Text="*Include Type(AM-FM), Dot Shape, Frequency" 
+                                                        <span><asp:Localize runat="server" ID="locScreeningRef" Text="*Include Type(AM-FM), Dot Shape, Frequency" 
                                                                     meta:resourcekey="locScreeningRefResource1"></asp:Localize>&nbsp; </span>  
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 130px">
+                                                <td>
                                                    <span><asp:Localize runat="server" ID="locCoating" Text="Coating:" 
                                                                     meta:resourcekey="locCoatingResource1"></asp:Localize>&nbsp; </span>&nbsp; 
                                                 </td>
-                                                <td style="width: 500px">
+                                                <td>
                                                      <asp:TextBox ID="txtCoating" runat="server" Width="200px" Height="19px" 
                                                         MaxLength="100" meta:resourcekey="txtCoatingResource1"></asp:TextBox>
                                                 </td>

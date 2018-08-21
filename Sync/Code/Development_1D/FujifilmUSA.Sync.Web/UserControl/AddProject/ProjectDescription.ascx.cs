@@ -312,6 +312,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
+
+        protected void cmbPrintingType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbPrintingType.SelectedIndex == 1)//flexo printing type
+            {
+                locFountainSol.Text = GetResourceString(_reclocPlatesText);
+                locBlanket.Text = GetResourceString(_reclocRollersText);
+                locBlanketAge.Text = GetResourceString(_reclocDocBladeText);
+                locScreening.Text = GetResourceString(_reclocMountTapeText);
+                locCoating.Text = GetResourceString(_reclocWashesText);
+                locRollersMessage.Visible = true;
+                locFounSolRef.Visible = false;
+                locScreeningRef.Visible = false;
+            }
+            else
+            {
+                locFountainSol.Text = (string)GetLocalResourceObject("locFountainSolResource1.Text");
+                locBlanket.Text = (string)GetLocalResourceObject("locBlanketResource1.Text");
+                locBlanketAge.Text = (string)GetLocalResourceObject("locBlanketAgeResource1.Text");
+                locScreening.Text = (string)GetLocalResourceObject("locScreeningResource1.Text");
+                locCoating.Text = (string)GetLocalResourceObject("locCoatingResource1.Text");
+                locFounSolRef.Visible = true;
+                locScreeningRef.Visible = true;
+                locRollersMessage.Visible = false;
+            }
+        }
         #endregion
 
         #region Properties
@@ -331,16 +357,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int ProjectId { get; set; }
         #endregion
 
-        protected void cmbPrintingType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbPrintingType.SelectedIndex == 1)
-            {
-                locFountainSol.Text = GetResourceString(_reclocPlatesText);
-                locBlanket.Text = GetResourceString(_reclocRollersText);
-                locBlanketAge.Text = GetResourceString(_reclocDocBladeText);
-                locScreening.Text = GetResourceString(_reclocMountTapeText);
-                locCoating.Text = GetResourceString(_reclocWashesText);
-            }
-        }
+              
     }
 }
