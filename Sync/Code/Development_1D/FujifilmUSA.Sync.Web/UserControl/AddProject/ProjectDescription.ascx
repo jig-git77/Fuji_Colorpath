@@ -116,7 +116,7 @@
                                 meta:resourcekey="panelAddProjectDescriptionResource1">
                                 <table>
                                     <tr>
-                                        <td style="width: 135px">
+                                        <td style="width: 140px">
                                             <span>
                                                 <asp:Localize runat="server" Text="Press:" ID="locPress"
                                                     meta:resourcekey="locPressResource1"></asp:Localize></span>
@@ -280,7 +280,7 @@
                                             </div>
                                             <table>
                                                 <tr>
-                                                    <td style="width: 117px">
+                                                    <td style="width: 126px">
                                                         <label class="collapsibleContainerTitle">
                                                             <asp:Localize runat="server" Text="Printing Type"
                                                                 ID="locOffsetData" meta:resourcekey="locOffsetDataResource1"></asp:Localize></label></td>
@@ -300,7 +300,7 @@
                                 Width="100%" meta:resourcekey="panelOffsetDataResource1">
                                 <table>
                                     <tr>
-                                        <td style="width: 135px">
+                                        <td style="width: 140px">
                                             <span>
                                                 <asp:Localize runat="server" ID="locInkOrder" Text="Ink Order:"
                                                     meta:resourcekey="locInkOrderResource1"></asp:Localize>&nbsp; </span>&nbsp;
