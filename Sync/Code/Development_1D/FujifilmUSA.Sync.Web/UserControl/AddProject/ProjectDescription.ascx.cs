@@ -157,13 +157,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Tr_OffsetPrintData.Visible = true;
 
                 cmbPrintingType.SelectedIndex = cmbPrintingType.Items.IndexOf(cmbPrintingType.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.PrintCondition.PrintingType)));
+                SetProjectTypeVisisbility();
                 cmbInkOrder.SelectedIndex = cmbInkOrder.Items.IndexOf(cmbInkOrder.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.PrintCondition.InkOrder)));
                 txtFountainSol.Text = SessionManager.Instance.CurrentProject.PrintCondition.FountainSolution;
                 txtBlanket.Text = SessionManager.Instance.CurrentProject.PrintCondition.Blanket;
                 txtBlanketAge.Text = SessionManager.Instance.CurrentProject.PrintCondition.BlanketAge;
                 txtScreening.Text = SessionManager.Instance.CurrentProject.PrintCondition.Screening;
                 txtCoating.Text = SessionManager.Instance.CurrentProject.PrintCondition.Coating;
-                SetProjectTypeVisisbility();
+                
 
                 if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.Edit) //If project is in Edit mode display Description tab for editing everytime and pop up Next button to move to next page
                 {
@@ -342,6 +343,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 locFounSolRef.Visible = true;
                 locScreeningRef.Visible = true;
                 locRollersMessage.Visible = false;
+            }
+            if (SessionManager.Instance.CurrentProject.PrintCondition == null)
+            {
+                cmbInkOrder.SelectedIndex = 0;
+                txtFountainSol.Text = "";
+                txtBlanket.Text = "";
+                txtBlanketAge.Text = "";
+                txtScreening.Text = "";
+                txtCoating.Text = "";
             }
         }
     
