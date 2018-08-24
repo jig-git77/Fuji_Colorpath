@@ -51,7 +51,7 @@
                                    <asp:RequiredFieldValidator ID="rfvSpotTarget" runat="server" Display="Dynamic" ControlToValidate="txtChartName"
                                         ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                         <ucValidationContainer:ValidationContainer ID="rfvSpotTargetNameContainer" runat="server"
-                                            ValidationMsg="Please provide spot target name." Size="200" />
+                                            ValidationMsg="Please provide spot target name." ResourceValidationMsg="SpotTargetNameRequiredResource" Size="200" />
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">
@@ -126,7 +126,7 @@
                                    <asp:RequiredFieldValidator ID="rfvChartName" runat="server" Display="Dynamic" ControlToValidate="txtChartName"
                                         ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                         <ucValidationContainer:ValidationContainer ID="rfvChartNameContainer" runat="server"
-                                            ValidationMsg="Please provide chart name." Size="200" />
+                                            ValidationMsg="Please provide chart name." ResourceValidationMsg="ChartNameRequiredResource" Size="200" />
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">
@@ -152,7 +152,7 @@
                                   <asp:RequiredFieldValidator ID="rfvNumOfRows" runat="server" Display="Dynamic" ControlToValidate="txtNumOfRows"
                                         ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                         <ucValidationContainer:ValidationContainer ID="rfvcNumOfRowsContainer" runat="server"
-                                            ValidationMsg="Please provide total rows." Size="200" />
+                                            ValidationMsg="Please provide total rows." Size="200" ResourceValidationMsg="NumOfRowsRequiredResource"  />
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">
@@ -179,7 +179,7 @@
                                     <asp:RequiredFieldValidator ID="rfvNumOfCols" runat="server" Display="Dynamic" ControlToValidate="txtNumOfCols"
                                         ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                         <ucValidationContainer:ValidationContainer ID="rfvcNumOfColsContainer" runat="server"
-                                            ValidationMsg="Please provide total columns." Size="200" />
+                                            ValidationMsg="Please provide total columns." Size="200" ResourceValidationMsg="NumOfColsRequiredResource" />
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">
@@ -206,7 +206,7 @@
                                     <asp:RequiredFieldValidator ID="rfvChartSizeX" runat="server" Display="Dynamic" ControlToValidate="txtChartSizeX"
                                         ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                         <ucValidationContainer:ValidationContainer ID="rfvcChartSizeXContainer" runat="server"
-                                            ValidationMsg="Please provide chart size x." Size="200" />
+                                            ValidationMsg="Please provide chart size x." Size="200" ResourceValidationMsg="ChartSizeXRequiredResource"  />
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">
@@ -233,7 +233,7 @@
                                             <asp:RequiredFieldValidator ID="rfvChartSizeY" runat="server" Display="Dynamic" ControlToValidate="txtChartSizeY"
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcChartSizeYContainer" runat="server"
-                                                    ValidationMsg="Please provide chart size y." Size="200" />
+                                                    ValidationMsg="Please provide chart size y." Size="200"  ResourceValidationMsg="ChartSizeYRequiredResource"/>
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -260,7 +260,7 @@
                                             <asp:RequiredFieldValidator ID="rfvPatchSizeX" runat="server" Display="Dynamic" ControlToValidate="txtPatchSizeX"
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcPatchSizeXContainer" runat="server"
-                                                    ValidationMsg="Please provide patch size x." Size="200" />
+                                                    ValidationMsg="Please provide patch size x." Size="200"  ResourceValidationMsg="PatchSizeXRequiredResource"/>
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -287,7 +287,7 @@
                                             <asp:RequiredFieldValidator ID="rfvPatchSizeY" runat="server" Display="Dynamic" ControlToValidate="txtPatchSizeY"
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcPatchSizeYContainer" runat="server"
-                                                    ValidationMsg="Please provide patch size y." Size="200" />
+                                                    ValidationMsg="Please provide patch size y." Size="200" ResourceValidationMsg="PatchSizeYRequiredResource" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -314,7 +314,7 @@
                                             <asp:RequiredFieldValidator ID="rfvPages" runat="server" Display="Dynamic" ControlToValidate="txtPages"
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcPagesContainer" runat="server"
-                                                    ValidationMsg="Please provide number of pages." Size="200" />
+                                                    ValidationMsg="Please provide number of pages." Size="200" ResourceValidationMsg="ChartPagesRequiredResource"  />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -341,7 +341,7 @@
                                             <asp:RequiredFieldValidator ID="rfvRowsPerPage" runat="server" Display="Dynamic" ControlToValidate="txtRowsPerPage"
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcRowsPerPageContainer" runat="server"
-                                                    ValidationMsg="Please provide rows per page." Size="200" />
+                                                    ValidationMsg="Please provide rows per page." Size="200" ResourceValidationMsg="ChartRowsPerPageRequiredResource" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -368,7 +368,7 @@
                                             <asp:RequiredFieldValidator ID="rfvChartBorder" runat="server" Display="Dynamic" ControlToValidate="txtChartBorder"
                                                 ForeColor="Red" ValidationGroup="vgAddRefChart">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcChartBorder" runat="server"
-                                                    ValidationMsg="Please provide chart border size." Size="200" />
+                                                    ValidationMsg="Please provide chart border size." Size="200" ResourceValidationMsg="ChartBorderSizeRequiredResource"/>
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -395,7 +395,7 @@
                                             <asp:RequiredFieldValidator ID="rfvVgap" runat="server" Display="Dynamic" ControlToValidate="txtVgap"
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcVgap" runat="server"
-                                                    ValidationMsg="Please provide vertical gap." Size="200" />
+                                                    ValidationMsg="Please provide vertical gap." Size="200" ResourceValidationMsg="ChartVGapRequiredResource" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -422,7 +422,7 @@
                                             <asp:RequiredFieldValidator ID="rfvHgap" runat="server" Display="Dynamic" ControlToValidate="txtHgap"
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcHgap" runat="server"
-                                                    ValidationMsg="Please provide horizontal gap." Size="200" />
+                                                    ValidationMsg="Please provide horizontal gap." Size="200" ResourceValidationMsg="ChartHGapRequiredResource" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -449,7 +449,7 @@
                                             <asp:RequiredFieldValidator ID="rfvGapLevel" runat="server" Display="Dynamic" ControlToValidate="txtGapLevel"
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcGapLevelContainer" runat="server"
-                                                    ValidationMsg="Please provide total columns." Size="200" />
+                                                    ValidationMsg="Please provide total columns." Size="200" ResourceValidationMsg="ChartTotalColumnsRequiredResource" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -476,7 +476,7 @@
                                             <asp:RequiredFieldValidator ID="rfvPreviousL" runat="server" Display="Dynamic" ControlToValidate="txtPreviousL"
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcPreviousLContainer" runat="server"
-                                                    ValidationMsg="Please provide pervious L." Size="200" />
+                                                    ValidationMsg="Please provide pervious L." Size="200" ResourceValidationMsg="ChartPrevLRequiredResource" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -503,7 +503,7 @@
                                             <asp:RequiredFieldValidator ID="rfvChartRes" runat="server" Display="Dynamic" ControlToValidate="txtChartRes"
                                                 ForeColor="Red" ValidationGroup="vgAddSpotTarget">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcChartResContainer" runat="server"
-                                                    ValidationMsg="Please provide chart res." Size="200" />
+                                                    ValidationMsg="Please provide chart res." Size="200" ResourceValidationMsg="ChartResRequiredResource" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">

@@ -42,7 +42,7 @@
                                         <asp:RequiredFieldValidator ID="rfvLicenseType" runat="server" Display="Dynamic"
                                             ControlToValidate="txtLicenseType" ForeColor="Red" 
                                             ValidationGroup="vgAddDeviceFamily"><ucValidationContainer:ValidationContainer ID="rfvLicenseContainer" runat="server"
-                                                ValidationMsg="Please provide license type." Size="200" />
+                                                ValidationMsg="Please provide license type." Size="200" ResourceValidationMsg="LicenseTypeRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">

@@ -46,7 +46,7 @@
                                         <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbCompanyName" ForeColor="Red" 
                                             ValidationGroup="vgAddMeasurementDevice"><ucValidationContainer:ValidationContainer ID="rfvCompnayContainer" runat="server"
-                                                ValidationMsg="Please select company." Size="200" />
+                                                ValidationMsg="Please select company." Size="200"  ResourceValidationMsg="CompanyRequiredResource"  />
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -71,7 +71,7 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvBranch" runat="server" Display="Dynamic" ControlToValidate="cmbBranch"
                                             ForeColor="Red" ValidationGroup="vgAddMeasurementDevice"><ucValidationContainer:ValidationContainer ID="rfvBranchContainer" runat="server"
-                                                ValidationMsg="Please select branch." Size="200" />
+                                                ValidationMsg="Please select branch." Size="200" ResourceValidationMsg="BranchRequiredResource" />
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -98,7 +98,7 @@
                                         <asp:RequiredFieldValidator ID="rfvLicenseType" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbLicenseType" ForeColor="Red" 
                                             ValidationGroup="vgAddMeasurementDevice"><ucValidationContainer:ValidationContainer ID="rfvLicenseContainer" runat="server"
-                                                ValidationMsg="Please select license name." Size="200" />
+                                                ValidationMsg="Please select license name." Size="200"  ResourceValidationMsg="LicenseRequiredResource" />
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -124,7 +124,7 @@
                                         <asp:RequiredFieldValidator ID="rfvSerialNumber" runat="server" Display="Dynamic"
                                             ControlToValidate="txtSerialNumber" ForeColor="Red" 
                                             ValidationGroup="vgAddMeasurementDevice"><ucValidationContainer:ValidationContainer ID="rfvSerialNumberContainer" runat="server"
-                                                ValidationMsg="Please provide serial number." Size="200" />
+                                                ValidationMsg="Please provide serial number." Size="200" ResourceValidationMsg="SerialRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -152,7 +152,7 @@
                                         <asp:RequiredFieldValidator ID="rfvInstrumentType" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbInstrumentType" ForeColor="Red" 
                                             ValidationGroup="vgAddMeasurementDevice"><ucValidationContainer:ValidationContainer ID="rfvInstrumentContainer" runat="server"
-                                                ValidationMsg="Please select instrument type." Size="200" />
+                                                ValidationMsg="Please select instrument type." Size="200" ResourceValidationMsg="InstrumentRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">

@@ -1296,7 +1296,11 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div>*Select colors in the Patch Details tab and click "save" to add colors to the Saved Color Report.</div>
+                                            <div>
+                                                <asp:Localize runat="server"
+                                                                Text="*Select colors in the Patch Details tab and click 'save' to add colors to the Saved Color Report." ID="locSpotReportMessage"
+                                                                meta:resourcekey="locSpotReportMessageResource1"></asp:Localize>
+                                                </div>
                                             <div class="clear"></div>
                                         </div>
                                     </div>

@@ -44,7 +44,7 @@
                                             ControlToValidate="txtDeviceFamilyName" ForeColor="Red" 
                                             ValidationGroup="vgAddDeviceFamily">
                                             <ucValidationContainer:ValidationContainer ID="Validationcontainer1" runat="server"
-                                                ValidationMsg="Please provide device family name." Size="225" />
+                                                ValidationMsg="Please provide device family name." Size="225" ResourceValidationMsg="DeviceFamilyRequiredResource"/>
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">

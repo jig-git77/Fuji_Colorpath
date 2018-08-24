@@ -60,7 +60,7 @@
                                                             <asp:RequiredFieldValidator ID="rfvCompanyName" runat="server" Display="Dynamic"
                                                                 ControlToValidate="txtCompanyName" ForeColor="Red" 
                                                                 ValidationGroup="vgCompanyName"><ucValidationContainer:ValidationContainer ID="rfvcCompanyContainer" runat="server"
-                                                                    ValidationMsg="Please provide company name." Size="200" />
+                                                                    ValidationMsg="Please provide company name." Size="200" ResourceValidationMsg="CompanyNameRequiredResource"/>
 </asp:RequiredFieldValidator>
                                                         </div>
                                                         <div class="clear">
@@ -84,7 +84,7 @@
                                                         <div style="float: left">
                                                             <asp:RequiredFieldValidator ID="rfvRegionName" runat="server" Display="Dynamic" ControlToValidate="cmbRegionName"
                                                                 ForeColor="Red" ValidationGroup="vgCompanyName"><ucValidationContainer:ValidationContainer ID="Validationcontainer1" runat="server"
-                                                                    ValidationMsg="Please select region." Size="200" />
+                                                                    ValidationMsg="Please select region." Size="200" ResourceValidationMsg="RegionRequiredResource"/>
 </asp:RequiredFieldValidator>
                                                         </div>
                                                         <div class="clear">

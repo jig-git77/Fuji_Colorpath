@@ -143,7 +143,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else
                 {
-                    TR_FirstTime.Visible = false;
+                    TR_FirstTime.Visible = true;
                 }
             }
         }
