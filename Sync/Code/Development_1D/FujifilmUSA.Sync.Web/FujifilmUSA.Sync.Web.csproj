@@ -6280,6 +6280,15 @@
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.de.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
