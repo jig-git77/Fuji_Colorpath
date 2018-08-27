@@ -1266,6 +1266,26 @@ namespace FujifilmUSA.Sync.Common
                             SBStr.Replace("###Screening###", Convert.ToString(DT.Rows[0]["Screening"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["Screening"]).Trim());
                             SBStr.Replace("###Coating###", Convert.ToString(DT.Rows[0]["Coating"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["Coating"]).Trim());
                             SBStr.Replace("###Notes###", Convert.ToString(DT.Rows[0]["Notes"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["Notes"]).Trim());
+
+                            //Set the labels print condition as per project type
+                            if (Convert.ToString(DT.Rows[0]["PrintingType"]).Trim() == "0")
+                            {
+                                SBStr.Replace("###ProjectTypeHeader###", "Offset");
+                                SBStr.Replace("###FountainLabel###", "Fountain <br />Solution");
+                                SBStr.Replace("###BlanketLabel###", "Blanket");
+                                SBStr.Replace("###BlanketAgeLabel###", "Blanket Age");
+                                SBStr.Replace("###ScreeningLabel###", "Screening");
+                                SBStr.Replace("###CoatingLabel###", "Coating");
+                            }
+                            else
+                            {
+                                SBStr.Replace("###ProjectTypeHeader###", "Flexo");
+                                SBStr.Replace("###FountainLabel###", "Plates");
+                                SBStr.Replace("###BlanketLabel###", "Anilox Rollers");
+                                SBStr.Replace("###BlanketAgeLabel###", "Doctor Blade");
+                                SBStr.Replace("###ScreeningLabel###", "Mouting Tape");
+                                SBStr.Replace("###CoatingLabel###", "Washes-Plate/Cylinder");
+                            }
                         }
                     }
                     if (ReportType == 20)
@@ -1420,6 +1440,13 @@ namespace FujifilmUSA.Sync.Common
                             SBStr.Replace("###Screening###", "&nbsp;");
                             SBStr.Replace("###Coating###", "&nbsp;");
                             SBStr.Replace("###Notes###", "&nbsp;");
+
+                            SBStr.Replace("###ProjectTypeHeader###", "Offset");
+                            SBStr.Replace("###FountainLabel###", "Fountain <br />Solution");
+                            SBStr.Replace("###BlanketLabel###", "Blanket");
+                            SBStr.Replace("###BlanketAgeLabel###", "Blanket Age");
+                            SBStr.Replace("###ScreeningLabel###", "Screening");
+                            SBStr.Replace("###CoatingLabel###", "Coating");
                         }
                         if (ReportType == 20)
                         {
