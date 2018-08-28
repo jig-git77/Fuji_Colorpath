@@ -152,6 +152,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtRipSetting.Text = SessionManager.Instance.CurrentProject.PrintCondition.RipSettings;
                 txtNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
                 txtTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
+                cmbPrintingType.Enabled = SessionManager.Instance.CurrentProject.PrintCondition.PrintConditionId == 0 ? true : false;
 
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                     Tr_OffsetPrintData.Visible = true;

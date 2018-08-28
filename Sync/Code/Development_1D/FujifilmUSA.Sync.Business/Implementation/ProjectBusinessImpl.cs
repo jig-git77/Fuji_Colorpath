@@ -74,6 +74,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             project.PrintCondition =
                                 new PrintCondition()
                                 {
+                                    PrintConditionId= DataReader.ReadInt(dsProject.Tables[1].Rows[0], "PrintConditionID"),
                                     Media = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Media"),
                                     Colorant = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Colorant"),
                                     RipSettings = DataReader.ReadString(dsProject.Tables[1].Rows[0], "RipSettings"),
