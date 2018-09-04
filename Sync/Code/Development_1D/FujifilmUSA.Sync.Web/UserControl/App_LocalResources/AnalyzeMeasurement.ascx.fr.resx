@@ -711,4 +711,10 @@
   <data name="yellowText" xml:space="preserve">
     <value>Yellow</value>
   </data>
+  <data name="locPaperABResource1.Text" xml:space="preserve">
+    <value>Papier  a* b*</value>
+  </data>
+  <data name="locPaperLResource1.Text" xml:space="preserve">
+    <value>Papier L*</value>
+  </data>
 </root>
