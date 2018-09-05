@@ -104,6 +104,9 @@ var $lnkPaperPaperLab2LargeChart;
 var $lnkGrayBalanceDeltaCHLargeChart;
 var $lnkBlackDeltaLLargeChart;
 var $lnkGrayDeltaLLargeChart;
+var $lnk_A_GrayBalanceLargeChart;
+var $lnk_B_GrayBalanceLargeChart;
+var $lnk_L_GrayBalanceLargeChart;
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -264,7 +267,10 @@ $(document).ready(function () {
     $lnkPaperPaperLab2LargeChart = $('#lnkPaperPaperLab2LargeChart');
     $lnkGrayBalanceDeltaCHLargeChart = $('#lnkGrayBalanceDeltaCHLargeChart');
     $lnkBlackDeltaLLargeChart = $('#lnkBlackDeltaLLargeChart');
-    $lnkGrayDeltaLLargeChart = $('#lnkGrayDeltaLLargeChart');
+    $lnkGrayDeltaLLargeChart = $('#lnkGrayDeltaLLargeChart');    
+    $lnk_A_GrayBalanceLargeChart = $('#lnk_A_GrayBalanceLargeChart');
+    $lnk_B_GrayBalanceLargeChart = $('#lnk_B_GrayBalanceLargeChart');
+    $lnk_L_GrayBalanceLargeChart = $('#lnk_L_GrayBalanceLargeChart');
     PLUGIN_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
@@ -549,6 +555,64 @@ $(document).ready(function () {
         //kendoOptions.chartArea.height = 180;
         
         magnifyG7Chart(kendoOptions, '200px', '600px', $('#spanGrayDeltaL').text().trim());        
+    });
+
+    $lnk_A_GrayBalanceLargeChart.on('click', function (e) {
+        e.preventDefault();
+
+        var kendoOptions = $chart_A_BalanceChart.data("kendoChart").options;
+        kendoOptions.chartArea.width = 580;
+        kendoOptions.chartArea.height = 200;
+
+        $('#kendoChart_A_Balance_Large').kendoChart(kendoOptions);
+
+        $('#kendoChart_A_Balance_LargeArea').kendoWindow({
+            width: "600px",
+            modal: true,
+            height: '225px',
+            resizable: false,
+            title: $('#spanGrayBalanceA').text().trim(),
+            visible: false
+        });
+
+        var popup = $('#kendoChart_A_Balance_LargeArea').data('kendoWindow');
+        popup.open();
+        popup.center();
+    });
+    
+    $lnk_B_GrayBalanceLargeChart.on('click', function (e) {
+        e.preventDefault();
+
+        var kendoOptions = $chart_B_BalanceChart.data("kendoChart").options;
+        kendoOptions.chartArea.width = 580;
+        kendoOptions.chartArea.height = 200;
+
+        $('#kendoChart_B_Balance_Large').kendoChart(kendoOptions);
+
+        $('#kendoChart_B_Balance_LargeArea').kendoWindow({
+            width: "600px",
+            modal: true,
+            height: '225px', 
+            resizable: false,
+            title: $('#spanGrayBalanceB').text().trim(),
+            visible: false
+        });
+
+        var popup = $('#kendoChart_B_Balance_LargeArea').data('kendoWindow');
+        popup.open();
+        popup.center();
+    });
+
+    $lnk_L_GrayBalanceLargeChart.on('click', function (e) {
+        e.preventDefault();
+
+        var kendoOptions = $chart_L_BalanceChart.data("kendoChart").options;
+        kendoOptions.chartArea.width = 580;
+        kendoOptions.chartArea.height = 200;
+
+        magnifyLpaperCharts(kendoOptions, '225px', '600px', $('#spanGrayBalanceL').text().trim());
+
+       
     });
 
     $('[id^=rbtnListDeltaE_]').on('click', function (e) {
@@ -5433,8 +5497,8 @@ function renderChartWithBackgroundByAxis(e) {
             || chart.element[0].id == "kendoChartGamut_ABComparisonDummy" || chart.element[0].id == "kendoChartABalanceChart"
             || chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartLComaparision"
             || chart.element[0].id == "kendoChartInkPaperLabOneDummy" || chart.element[0].id == "kendoChartDummyBalanceL"
-            || chart.element[0].id == "kendoChartDummyBalanceA" || chart.element[0].id == "kendoChartDummyBalanceB"
-            || chart.element[0].id == "kendoChart_L_ComparisionLarge") {
+            || chart.element[0].id == "kendoChartDummyBalanceA" || chart.element[0].id == "kendoChartDummyBalanceB" || chart.element[0].id == "kendoChart_A_Balance_Large"
+            || chart.element[0].id == "kendoChart_L_ComparisionLarge" || chart.element[0].id == "kendoChart_B_Balance_Large") {
             xSlot = xAxis.slot(Math.min.apply(Math, xAxisArray), Math.max.apply(Math, xAxisArray));
             ySlot = yAxis.slot(Math.min.apply(Math, yAxisArray), Math.max.apply(Math, yAxisArray));
 
@@ -5453,20 +5517,20 @@ function renderChartWithBackgroundByAxis(e) {
                 xSlot.width(), ySlot.height()
             ]);
 
-
+        debugger;
         if (chart.element[0].id == "kendoChartTargetVersusActualABDummy" || chart.element[0].id == "kendoChartGamut_ABComparisonDummy" || chart.element[0].id == "kendoChartInkPaperLabOneDummy") {
             path = drawing.Path.fromRect(rect, {
                 stroke: null,
                 fill: gradientRedGreen
             });
         }
-        else if (chart.element[0].id == "kendoChartABalanceChart" || chart.element[0].id == "kendoChartDummyBalanceA") {
+        else if (chart.element[0].id == "kendoChartABalanceChart" || chart.element[0].id == "kendoChartDummyBalanceA" || chart.element[0].id == "kendoChart_A_Balance_Large") {
             path = drawing.Path.fromRect(rect, {
                 stroke: null,
                 fill: gradientPinkGreen
             });
         }
-        else if (chart.element[0].id == "kendoChartLBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceL") {
+        else if (chart.element[0].id == "kendoChartLBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceL" || chart.element[0].id == "kendoChart_L_ComparisionLarge" ) {
             path = drawing.Path.fromRect(rect, {
                 stroke: null,
                 fill: gradientGray3
@@ -5478,7 +5542,7 @@ function renderChartWithBackgroundByAxis(e) {
                 fill: gradientGray2
             });
         }
-        else if (chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceB") {
+        else if (chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceB" || chart.element[0].id == "kendoChart_B_Balance_Large") {
             path = drawing.Path.fromRect(rect, {
                 stroke: null,
                 fill: gradientYellowBlue

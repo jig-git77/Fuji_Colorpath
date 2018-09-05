@@ -1273,6 +1273,60 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize Localize8;
         
         /// <summary>
+        /// locGrayBalanceL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locGrayBalanceL;
+        
+        /// <summary>
+        /// imgLGrayBalanceLargeChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgLGrayBalanceLargeChart;
+        
+        /// <summary>
+        /// locGrayBalanceA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locGrayBalanceA;
+        
+        /// <summary>
+        /// imgAGrayBalanceLargeChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgAGrayBalanceLargeChart;
+        
+        /// <summary>
+        /// locGrayBalanceB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locGrayBalanceB;
+        
+        /// <summary>
+        /// imgBGrayBalanceLargeChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgBGrayBalanceLargeChart;
+        
+        /// <summary>
         /// Localize9 control.
         /// </summary>
         /// <remarks>

@@ -747,4 +747,13 @@
   <data name="locPaperLResource1.Text" xml:space="preserve">
     <value>Papier  L*</value>
   </data>
+  <data name="locGrayBalanceAResource1.Text" xml:space="preserve">
+    <value>Graubalance a*</value>
+  </data>
+  <data name="locGrayBalanceBResource1.Text" xml:space="preserve">
+    <value>Graubalance b*</value>
+  </data>
+  <data name="locGrayBalanceLResource1.Text" xml:space="preserve">
+    <value>Graubalance L*</value>
+  </data>
 </root>

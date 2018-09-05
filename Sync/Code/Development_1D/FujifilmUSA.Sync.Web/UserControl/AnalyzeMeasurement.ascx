@@ -1204,13 +1204,43 @@
                                                                         <td>
                                                                             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 350px;">
                                                                                 <tr>
+                                                                                    <td class="green-title">
+                                                                                        <span id="spanGrayBalanceL">
+                                                                                            <asp:Localize runat="server" Text="Gray Balance L*"
+                                                                                                ID="locGrayBalanceL" meta:resourcekey="locGrayBalanceLResource1"></asp:Localize>
+                                                                                        </span>
+                                                                                        <a id="lnk_L_GrayBalanceLargeChart" style="float: right;margin-right: 5px;">
+                                                                                            <asp:Image ID="imgLGrayBalanceLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" /></a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
                                                                                     <td>
                                                                                         <div id="kendoChartLBalanceChart"></div>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
+                                                                                    <td class="green-title">
+                                                                                        <span id="spanGrayBalanceA">
+                                                                                            <asp:Localize runat="server" Text="Gray Balance a*"
+                                                                                                ID="locGrayBalanceA" meta:resourcekey="locGrayBalanceAResource1"></asp:Localize>
+                                                                                        </span>
+                                                                                        <a id="lnk_A_GrayBalanceLargeChart" style="float: right;margin-right: 5px;">
+                                                                                            <asp:Image ID="imgAGrayBalanceLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" /></a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
                                                                                     <td>
                                                                                         <div id="kendoChartABalanceChart"></div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="green-title">
+                                                                                        <span id="spanGrayBalanceB">
+                                                                                            <asp:Localize runat="server" Text="Gray Balance b*"
+                                                                                                ID="locGrayBalanceB" meta:resourcekey="locGrayBalanceBResource1"></asp:Localize>
+                                                                                        </span>
+                                                                                        <a id="lnk_B_GrayBalanceLargeChart" style="float: right;margin-right: 5px;">
+                                                                                            <asp:Image ID="imgBGrayBalanceLargeChart" ClientIDMode="Static" runat="server" ImageUrl="../Images/eye_blue.png" Style="height: 22px;" /></a>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -1476,6 +1506,12 @@
             <div id="kendoChart_G7_LargeArea">
                 <div id="kendoChart_G7_Large"></div>
             </div>
+            <div id="kendoChart_A_Balance_LargeArea">
+                <div id="kendoChart_A_Balance_Large"></div>
+            </div>
+            <div id="kendoChart_B_Balance_LargeArea">
+                <div id="kendoChart_B_Balance_Large"></div>
+            </div>            
         </div>
     </div>
     <div class="clear">
