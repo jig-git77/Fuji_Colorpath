@@ -433,20 +433,22 @@ $(document).ready(function () {
         kendoOptions.chartArea.width = 580;
         kendoOptions.chartArea.height = 180;
 
-        $('#kendoChart_L_ComparisionLarge').kendoChart(kendoOptions);
+        magnifyLpaperCharts(kendoOptions, '200px', '600px', $('#ContentPlaceHolder1_ucAnalyze_Td7').text().trim());
 
-        $('#kendoChart_L_ComparisionLargeArea').kendoWindow({
-            width: "600px",
-            modal: true,
-            height: '200px',
-            resizable: false,
-            title: $('#ContentPlaceHolder1_ucAnalyze_Td7').text().trim(),
-            visible: false
-        });
+        //$('#kendoChart_L_ComparisionLarge').kendoChart(kendoOptions);
 
-        var popup = $('#kendoChart_L_ComparisionLargeArea').data('kendoWindow');
-        popup.open();
-        popup.center();
+        //$('#kendoChart_L_ComparisionLargeArea').kendoWindow({
+        //    width: "600px",
+        //    modal: true,
+        //    height: '200px',
+        //    resizable: false,
+        //    title: $('#ContentPlaceHolder1_ucAnalyze_Td7').text().trim(),
+        //    visible: false
+        //});
+
+        //var popup = $('#kendoChart_L_ComparisionLargeArea').data('kendoWindow');
+        //popup.open();
+        //popup.center();
     });
 
     $lnkAB_ComparisionLargeChart.on('click', function (e) {
@@ -502,20 +504,22 @@ $(document).ready(function () {
         kendoOptions.chartArea.width = 180;
         kendoOptions.chartArea.height = 375;
 
-        $('#kendoChart_L_ComparisionLarge').kendoChart(kendoOptions);
+        magnifyLpaperCharts(kendoOptions, '400px', '200px', $('#spanlocPaperL').text().trim());
 
-        $('#kendoChart_L_ComparisionLargeArea').kendoWindow({
-            width: "200px",
-            modal: true,
-            height: '400px',
-            resizable: false,
-            title: $('#spanlocPaperL').text().trim(),
-            visible: false
-        });
+        //$('#kendoChart_L_ComparisionLarge').kendoChart(kendoOptions);
 
-        var popup = $('#kendoChart_L_ComparisionLargeArea').data('kendoWindow');
-        popup.open();
-        popup.center();
+        //$('#kendoChart_L_ComparisionLargeArea').kendoWindow({
+        //    width: "200px",
+        //    modal: true,
+        //    height: '400px',
+        //    resizable: false,
+        //    title: $('#spanlocPaperL').text().trim(),
+        //    visible: false
+        //});
+
+        //var popup = $('#kendoChart_L_ComparisionLargeArea').data('kendoWindow');
+        //popup.open();
+        //popup.center();
     });
 
     $lnkGrayBalanceDeltaCHLargeChart.on('click', function (e) {
@@ -525,20 +529,7 @@ $(document).ready(function () {
         kendoOptions.chartArea.width = 580;
         kendoOptions.chartArea.height = 180;
 
-        $('#kendoChart_G7_Large').kendoChart(kendoOptions);
-
-        $('#kendoChart_G7_LargeArea').kendoWindow({
-            width: "600px",
-            modal: true,
-            height: '200px',
-            resizable: false,
-            title: $('#spanGrayBalanceDeltaCH').text().trim(),
-            visible: false
-        });
-
-        var popup = $('#kendoChart_G7_LargeArea').data('kendoWindow');
-        popup.open();
-        popup.center();
+        magnifyG7Chart(kendoOptions, '200px', '600px', $('#spanGrayBalanceDeltaCH').text().trim());
     });
 
     $lnkBlackDeltaLLargeChart.on('click', function (e) {
@@ -548,49 +539,16 @@ $(document).ready(function () {
         kendoOptions.chartArea.width = 580;
         kendoOptions.chartArea.height = 180;
 
-        $('#kendoChart_G7_Large').kendoChart(kendoOptions);
-
-        $('#kendoChart_G7_LargeArea').kendoWindow({
-            width: "600px",
-            modal: true,
-            height: '200px',
-            resizable: false,
-            title: $('#spanBlackDeltaL').text().trim(),
-            visible: false
-        });
-
-        var popup = $('#kendoChart_G7_LargeArea').data('kendoWindow');
-        popup.title = $('#spanBlackDeltaL').text().trim();
-        popup.open();
-        popup.center();
+        magnifyG7Chart(kendoOptions, '200px', '600px', $('#spanBlackDeltaL').text().trim());
     });
 
     $lnkGrayDeltaLLargeChart.on('click', function (e) {
         e.preventDefault();
-
         var kendoOptions = $divChartG7GrayDeltaL.data("kendoChart").options;
-        kendoOptions.chartArea.width = 580;
-        kendoOptions.chartArea.height = 180;
-
-        $('#kendoChart_G7_Large').kendoChart(kendoOptions);
-
-        //if ($('#kendoChart_G7_LargeArea').data("kendoWindow")) {
-        //    $('#kendoChart_G7_LargeArea').kendoWindow({
-        //        title: $('#spanGrayDeltaL').text().trim()
-        //    });
-        //}
-        $('#kendoChart_G7_LargeArea').kendoWindow({
-            width: "600px",
-            modal: true,
-            height: '200px',
-            resizable: false,
-            title: $('#spanGrayDeltaL').text().trim(),
-            visible: false
-        });
-
-        var popup = $('#kendoChart_G7_LargeArea').data('kendoWindow');
-        popup.open();
-        popup.center();
+        //kendoOptions.chartArea.width = 580;
+        //kendoOptions.chartArea.height = 180;
+        
+        magnifyG7Chart(kendoOptions, '200px', '600px', $('#spanGrayDeltaL').text().trim());        
     });
 
     $('[id^=rbtnListDeltaE_]').on('click', function (e) {
@@ -653,6 +611,58 @@ $(document).ready(function () {
         PopulateAnalyzeChart();
     });    
 });
+
+function magnifyG7Chart(chartOptions, heightSize, widthSize, titleText) {
+
+    $('#kendoChart_G7_Large').kendoChart(chartOptions);
+    $('#kendoChart_G7_Large').data('kendoChart').options.legend.visible = false;
+    $('#kendoChart_G7_Large').data('kendoChart').options.chartArea.width = 580;
+    $('#kendoChart_G7_Large').data('kendoChart').options.chartArea.height = 180;
+   
+    if ($('#kendoChart_G7_LargeArea').data('kendoWindow')) {
+        $('#kendoChart_G7_LargeArea').data('kendoWindow').title(titleText);
+    } else {
+        $('#kendoChart_G7_LargeArea').kendoWindow({
+            title: titleText,
+            width: widthSize,
+            height: heightSize,
+            modal: true,
+            resizable: false,
+            visible: false
+        });
+    }
+    
+    var popup = $('#kendoChart_G7_LargeArea').data('kendoWindow');
+    popup.open();
+    popup.center();
+}
+
+function magnifyLpaperCharts(chartOptions, heightSize, widthSize, titleText) {
+    $('#kendoChart_L_ComparisionLarge').kendoChart(chartOptions);
+    
+    
+
+    if ($('#kendoChart_L_ComparisionLargeArea').data('kendoWindow')) {
+        $('#kendoChart_L_ComparisionLargeArea').data('kendoWindow').title(titleText);
+        $('#kendoChart_L_ComparisionLargeArea').data('kendoWindow').setOptions({
+            width: widthSize,
+            height: heightSize
+        });
+    } else {
+        $('#kendoChart_L_ComparisionLargeArea').kendoWindow({
+            title: titleText,
+            width: widthSize,
+            height: heightSize,
+            modal: true,
+            resizable: false,
+            visible: false
+        });
+    }
+
+    var popup = $('#kendoChart_L_ComparisionLargeArea').data('kendoWindow');
+    popup.open();
+    popup.center();
+}
 
 
 
@@ -3371,11 +3381,10 @@ function PopulateChartLGrayBalance() {
         },
         yAxis: {
             name: "yAxis",
-            min: -6,
-            max: 6,
-            step: 2,
-            majorUnit: 2,
-            axisCrossingValues: [-6, 6],
+            min: -12,
+            max: 12,
+            majorUnit: 4,
+            axisCrossingValues: [-12, 12],
             labels: {
                 format: "{0}"
             },
@@ -3439,11 +3448,10 @@ function PopulateChartLGrayBalance() {
         },
         yAxis: {
             name: "yAxis",
-            min: -6,
-            max: 6,
-            step: 2,
-            majorUnit: 2,
-            axisCrossingValues: [-6, 6],
+            min: -12,
+            max: 12,            
+            majorUnit: 4,
+            axisCrossingValues: [-12, 12],
             labels: {
                 format: "{0}"
             },
@@ -5095,9 +5103,12 @@ function PopulateTVIG7Chart() {
     var jsonMResult = jsonEmpty.concat(jsonM);
     var jsonYResult = jsonEmpty.concat(jsonY);
     var jsonKResult = jsonEmpty.concat(jsonK);
-
+    debugger;
     $divChartTVISummaryDotGain.kendoChart({
-        renderAs: "canvas",
+        renderAs: "canvas",        
+        //legend: {
+        //    position: "top",            
+        //},
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth",
@@ -5106,6 +5117,7 @@ function PopulateTVIG7Chart() {
         //dataSource: jsonKResult,
         series: [
             {
+                name: "C",
                 data: jsonCResult,
                 xField: "CmykC",
                 yField: "DotGain",
@@ -5128,6 +5140,7 @@ function PopulateTVIG7Chart() {
                     template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
                 }
             }, {
+                name: "M",
                 data: jsonMResult,
                 xField: "CmykM",
                 yField: "DotGain",
@@ -5148,6 +5161,7 @@ function PopulateTVIG7Chart() {
                     visible: false
                 },
             }, {
+                name: "Y",
                 data: jsonYResult,
                 xField: "CmykY",
                 yField: "DotGain",
@@ -5168,6 +5182,7 @@ function PopulateTVIG7Chart() {
                     visible: false
                 },
             }, {
+                name: "K",
                 data: jsonKResult,
                 xField: "CmykK",
                 yField: "DotGain",
@@ -5192,17 +5207,10 @@ function PopulateTVIG7Chart() {
             labels: {
                 format: "{0}",
                 padding: { top: 0 }
-            },
-            //title: {
-            //    text: ""
-            //}
+            },           
         },
         yAxis: {
-            name: "yAxis",
-            // min: -5,
-            // max: 25,
-            //majorUnit: 5,
-            // axisCrossingValues: [-5, 25],
+            name: "yAxis",            
             labels: {
                 format: "{0}"
             },
@@ -5217,7 +5225,41 @@ function PopulateTVIG7Chart() {
                 color: "black"
             }
         },
-        render: renderChartWithBackgroundByAxis
+        render: renderChartWithBackgroundByAxis,
+        legend: {
+            visible: true,
+            position: "top",
+            item: {
+                visual: function (e) {
+                    debugger;
+                    var color = e.options.markers.background;
+                    var labelColor = e.options.labels.color;
+
+                    // Define the target dimensions for the legend item
+                    var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+
+                    // A layout will hold the checkbox and the default visual                    
+                    var layout = new kendo.drawing.Layout(rect, {
+                        spacing: 5,
+                        alignItems: "center"
+                    });
+                    // Cheat a bit by rendering the checkbox using the Unicode ballot symbol
+                    var cbSymbol = e.active ? "☑" : "☐";
+                    var cb = new kendo.drawing.Text(cbSymbol, [0, 0], {
+                        font: "16px sans-serif"
+                    });
+
+                    // This will give us the default box + text
+                    var defaultVisual = e.createVisual();
+
+                    // Reflow them together
+                    layout.append(cb, defaultVisual);
+                    layout.reflow()
+
+                    return layout;
+                }
+            }
+        },
     });
 
     //load the chart again to adjust the xAxis lables according to negative values

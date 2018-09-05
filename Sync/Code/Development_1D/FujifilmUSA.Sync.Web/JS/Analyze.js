@@ -3503,6 +3503,9 @@ function PopulateTVIG7Chart() {
             style: "smooth",
             width: 2
         },
+        legend: {
+            position: "top"
+        },
         //dataSource: jsonKResult,
         series: [
             {
@@ -3510,6 +3513,7 @@ function PopulateTVIG7Chart() {
                 xField: "CmykC",
                 yField: "DotGain",
                 color: "Cyan",
+                name:"C",
                 markers: {
                     background: "Cyan",
                     size: 6,
@@ -3528,6 +3532,7 @@ function PopulateTVIG7Chart() {
                     template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
                 }
             }, {
+                name: "M",
                 data: jsonMResult,
                 xField: "CmykM",
                 yField: "DotGain",
@@ -3548,6 +3553,7 @@ function PopulateTVIG7Chart() {
                     visible: false
                 },
             }, {
+                name: "Y",
                 data: jsonYResult,
                 xField: "CmykY",
                 yField: "DotGain",
@@ -3568,6 +3574,7 @@ function PopulateTVIG7Chart() {
                     visible: false
                 },
             }, {
+                name: "K",
                 data: jsonKResult,
                 xField: "CmykK",
                 yField: "DotGain",
