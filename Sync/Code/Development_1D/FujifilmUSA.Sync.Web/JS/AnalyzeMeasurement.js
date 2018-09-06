@@ -2801,10 +2801,7 @@ function PopulateChartTargetVersusActualAB() {
     var targetPAPERSeriseObj = {};
 
     $.each(jsonTarget, function (index, element) {
-
         var seriesArray = [];
-
-
 
         //Get colors from the colors array ()
         var colorsArray = $.grep(jsonColors, function (colorObj) { return colorObj.PatchType == element.PatchType });
@@ -2876,7 +2873,11 @@ function PopulateChartTargetVersusActualAB() {
         tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"].toFixed(2) + '</td></tr>';
         tooltipString += '</table>';
 
-        kendoSeriseObj.tooltip = { visible: true, template: tooltipString, shared: true };
+        kendoSeriseObj.tooltip = {
+            visible: true,
+            template: tooltipString,
+            shared: true
+        };
 
         //Calcaulte Targets
         var kendoTargetObj = {};
@@ -3030,6 +3031,48 @@ function PopulateChartGamutABComparision() {
                 }
             }
         };
+
+        //Check patch type for tooltip caption
+        var tooltipCaption = '';
+        switch (jsonTargetColor.PatchType) {
+            case "Cyan":
+                tooltipCaption = _Resources._recCyanPathMetrics;
+                break;
+            case "Magenta":
+                tooltipCaption = _Resources._recMagentaPathMetrics;
+                break;
+            case "Yellow":
+                tooltipCaption = _Resources._recYellowPathMetrics;
+                break;
+            case "Red":
+                tooltipCaption = _Resources._recRedPathMetrics;
+                break;
+            case "Green":
+                tooltipCaption = _Resources._recGreenPathMetrics;
+                break;
+            case "Blue":
+                tooltipCaption = _Resources._recBluePathMetrics;
+                break;
+            case "Paper":
+                tooltipCaption = _Resources._recPaperPathMetrics;
+                break;
+        }
+        
+        //create tool tip
+        var tooltipString = '<table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + jsonTargetColor.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + jsonTargetColor.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + jsonTargetColor.CielabB.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + jsonTargetColor.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + jsonTargetColor.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + jsonTargetColor.Targetb.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + jsonTargetColor["ΔL"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + jsonTargetColor["Δa"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + jsonTargetColor["Δb"].toFixed(2) + '</td></tr>';
+        tooltipString += '</table>';
+
+        actualColorPointObj.tooltip = {
+            visible: true,
+            template: tooltipString,
+            shared: true
+        };
+
         actualColorPointObj.highlight = {
             visible: false
         }
@@ -3058,6 +3101,40 @@ function PopulateChartGamutABComparision() {
     var paperObj = $.grep(jsonTarget, function (element) { return element.PatchType == "Paper"; })[0];
     var targetPAPERObject = [[paperObj.Targeta, paperObj.Targetb]];
     var colorPAPERObject = [[paperObj.CielabA, paperObj.CielabB]];
+    //set actual color points
+    var paperColorPointObj = {};
+    paperColorPointObj.data = colorPAPERObject;
+    paperColorPointObj.color = "White";
+    paperColorPointObj.markers = {
+        background: "White", size: 10,
+        border: {
+            width: 1,
+            color: function (e) {
+                return 'black';
+            }
+        }
+    };
+
+
+    //create tool tip
+    var tooltipString = '<table><tr><td><center><b>' + _Resources._recPaperPathMetrics + '</b></center><td></tr>';
+    tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + paperObj.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + paperObj.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + paperObj.CielabB.toFixed(2) + '</td></tr>';
+    tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + paperObj.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + paperObj.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + paperObj.Targetb.toFixed(2) + '</td></tr>';
+    tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + paperObj["ΔL"].toFixed(2) + '</td></tr>';
+    tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + paperObj["Δa"].toFixed(2) + '</td></tr>';
+    tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + paperObj["Δb"].toFixed(2) + '</td></tr>';
+    tooltipString += '</table>';
+
+    paperColorPointObj.tooltip = {
+        visible: true,
+        template: tooltipString,
+        shared: true
+    };
+
+    paperColorPointObj.highlight = {
+        visible: false
+    }
+    paperColorPointObj.width = 2;
 
 
     $chart_Gamut_ABComparison.kendoChart({
@@ -3089,14 +3166,17 @@ function PopulateChartGamutABComparision() {
             highlight: {
                 visible: false
             }
-        }, {
-            data: colorPAPERObject,
-            color: "Black",
-            markers: { background: "White", size: 10 },
-            highlight: {
-                visible: false
-            }
-        }, targetCYANPoint,
+        }, 
+        //{
+        //    data: colorPAPERObject,
+        //    color: "Black",
+        //    markers: { background: "White", size: 10 },
+        //    highlight: {
+        //        visible: false
+        //    }
+        //    },
+            paperColorPointObj,
+            targetCYANPoint,
             targetMAGENTAPoint,
             targetYELLOWPoint,
             targetREDPoint,
