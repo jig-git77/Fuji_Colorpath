@@ -2684,8 +2684,16 @@ function PopulateInkPaperChartABComparision() {
             max: 10,
             majorUnit: 5,
             axisCrossingValues: [-10, 10],
+            //labels: {
+            //    format: "{0}"
+            //},
             labels: {
-                format: "{0}"
+                //step: 2,
+                template: function (e) {
+                    if (e.value == 0)
+                        return 'Target';
+                    return e.value;
+                }
             },
             title: {
                 //text: _Resources._recDeltaA
@@ -2702,9 +2710,18 @@ function PopulateInkPaperChartABComparision() {
             step: 5,
             majorUnit: 5,
             axisCrossingValues: [-10, 10],
+            //labels: {
+            //    format: "{0}"
+            //},
             labels: {
-                format: "{0}"
-            },
+                //step: 2,
+                template: function (e) {
+                    if (e.value == 0)
+                        return 'Target';
+                    return e.value;
+                },
+                rotation: 270
+            },            
             title: {
                 //text: _Resources._recDeltaB
             }, majorGridLines: {
@@ -2716,6 +2733,13 @@ function PopulateInkPaperChartABComparision() {
             width: 250,
             height: 180,
             background: ''
+        },
+        plotArea: {
+            background: "white",
+            margin: {
+                top: 12,
+                right: 12
+            }
         },
         render: renderChartWithBackgroundByAxis
         //plotArea: {
@@ -2865,19 +2889,41 @@ function PopulateChartTargetVersusActualAB() {
 
         //create tool tip
 
-        var tooltipString = '<table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
+        var bgColor = element.PatchType == "Paper" ? "White" : element.PatchType;
+        var textColor = "white";
+        if (element.PatchType == "Paper" || element.PatchType == "Yellow" || element.PatchType == "Cyan") {
+            textColor = "black";
+        }
+        var tooltipString = '<div style="color: ' + textColor + '; padding: 2px; background-color: ' + bgColor + ';border-radius: 4px;padding: 5px 5px 5px 6px;background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAGXRFW…8beQb+HTWQYgP/DHoD/466cAR4edRAyg38P6hLbIAAAwCnWhhVsxvdCAAAAABJRU5ErkJggg==);"><table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
         tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + element.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + element.CielabB.toFixed(2) + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + element.Targetb.toFixed(2) + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"].toFixed(2) + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"].toFixed(2) + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"].toFixed(2) + '</td></tr>';
-        tooltipString += '</table>';
+        tooltipString += '</table></div>';
+
+        //kendoSeriseObj.tooltip = {
+        //    visible: true,
+        //    template: tooltipString,
+        //    shared: true
+        //};
 
         kendoSeriseObj.tooltip = {
-            visible: true,
-            template: tooltipString,
-            shared: true
+            visible: true, template: function (d) {
+                
+                var seriesData = d.series.data;
+                var lastItem = seriesData[seriesData.length - 1];
+                $(".k-chart-tooltip").addClass('tempTooltip');
+                if (lastItem != d.dataItem) {
+                    setTimeout(function () {
+                        $(".k-chart-tooltip").addClass('tempTooltip');
+                    }, 0);
+                    return "";
+                }
+                return tooltipString;
+            }, shared: false
         };
+
 
         //Calcaulte Targets
         var kendoTargetObj = {};

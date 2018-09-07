@@ -9,6 +9,12 @@
 <link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
 <script src="Scripts/kendo/2018.1.221/kendo.all.min.js" type="text/javascript"></script>
 <style>
+    .tempTooltip {
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        background-image: none !important;
+    }
     #tabstrip > ul:first-child > li {
         display: none;
     }
