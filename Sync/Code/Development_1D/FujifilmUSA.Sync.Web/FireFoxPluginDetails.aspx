@@ -26,20 +26,20 @@
 				In order to continue, please choose from one of the options below:</p>
 				
 				<div class="row">
-					<div class="col-md-4">
-						<h3>1. Firefox ESR <small>(Extended Support Release)</small></h3>
+					<div class="col-md-41">
+						<h3>1. Firefox ESR <small>(Extended Support Release) 52</small></h3>
 						
-						<p>To continue using Firefox, you’ll have to download and install the ESR version.</p>
+						<p>To continue using Firefox, you’ll have to download and install the ESR version 52 and make sure to disable automatic updating.</p>
 						<a class="btn btn-default" href= "Terms/ColorPath SYNC Firefox ESR.pdf" target="_blank" role="button">View instructions for installing the Firefox ESR</a>
 						
 						<br/><br/>
 						
-						<a class="btn btn-success" href= "https://www.mozilla.org/en-US/firefox/organizations/all/?q=English%20(US)" target="_blank" role="button" style="margin-top:5px">Download Firefox ESR - English</a>
-						
-						<a class="btn btn-success" href= "https://www.mozilla.org/en-US/firefox/organizations/all/" target="_blank" role="button" style="margin-top:5px">Download Firefox ESR - Other languages</a>
+                        <a class="btn btn-success" href= "Download/Firefox Setup 52.9.0esr.zip" target="_blank" role="button" style="margin-top:5px">Download Firefox ESR - English</a>
+						<a class="btn btn-success" href= "Download/Firefox Setup 52.9.0esr de.zip" target="_blank" role="button" style="margin-top:5px">Download Firefox ESR - German</a>
+                        <a class="btn btn-success" href= "Download/Firefox Setup 52.9.0esr ja.zip" target="_blank" role="button" style="margin-top:5px">Download Firefox ESR - Japanese</a>
 						
 						<p>Please note when choosing the Firefox ESR for Windows, you must choose the <b>non-64 bit</b> version!</p>
-						<br/>
+						
 					</div>
 					
 					<div class="col-md-4">

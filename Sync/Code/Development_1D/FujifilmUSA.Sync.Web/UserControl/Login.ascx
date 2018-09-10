@@ -96,11 +96,14 @@
             if (fullVersionName > 51) {
 
                 if (PluginVersion == "") {
-                    var r = confirm("This version of FireFox does not support the FujiFilm Measurement Plugin!\n\nPress OK for More Details or Cancel to Exit.");
-                    if (r == true) {
-                        document.location.href = 'FireFoxPluginDetails.aspx';
-                    }
+                    //var r = confirm("This version of FireFox does not support the FujiFilm Measurement Plugin!\n\nPress OK for More Details or Cancel to Exit.");
+                    //if (r == true) {
+                    //    document.location.href = 'FireFoxPluginDetails.aspx';
+                    //}
+                    $("#dialog-confirm").dialog();
+                    $('p').css({ 'display': 'block' });
                 }
+              
             }
         }
         // In MSIE, the true version is after "MSIE" in userAgent
@@ -199,6 +202,32 @@
 
 </script>
 
+<%---Make JQuery Dialog box to display pop up window for firefox plugin version not supported-----%>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script>
+  $( function() {
+      $("#dialog-confirm").dialog({
+      autoOpen: false,
+      resizable: false,
+      height: "auto",
+      width: 400,
+      modal: true,
+      buttons: {
+          "More information": function () {
+            document.location.href = 'FireFoxPluginDetails.aspx';
+        },
+          "Proceed anyway": function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  } );
+  </script>
+
+
 <div id="login_box">
     <div class="curve_top_login">
          <div style="text-align:right; padding-right:40px; padding-top:20px;">
@@ -246,9 +275,7 @@
         </asp:UpdatePanel>     
     </div>
 
-      <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
-            </object>
-            <br />
+     
             <div id="DivTable" runat="server" style="visibility: hidden;">
                 <input id="Hidden_PluginMessage" type="hidden" runat="server" />
                 <input id="Hidden_PluginVersion" type="hidden" runat="server" />
@@ -256,9 +283,20 @@
                  <input id="Hidden_OSName" type="hidden" runat="server" />
                  <input id="Hidden_BrowserName" type="hidden" runat="server" />
             </div>
+
+            <div id="dialog-confirm" title="">
+                <p style="display:none;"><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>This version of Firefox does not support the Fujifilm Measurement plugin. If this is your first time seeing this dialog, then Firefox probably automatically updated.</p>
+            </div>
+
     <div class="curve_bottom">
         &nbsp;</div>
+
+
 </div>
+
+ <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
+            </object>
+            <br />
 
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
     <Windows>
