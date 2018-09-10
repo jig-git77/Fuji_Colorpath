@@ -2913,14 +2913,15 @@ function PopulateChartTargetVersusActualAB() {
 
         kendoSeriseObj.tooltip = {
             visible: true, template: function (d) {
-                
+                //debugger;
                 var seriesData = d.series.data;
                 var lastItem = seriesData[seriesData.length - 1];
                 $(".k-chart-tooltip").addClass('tempTooltip');
                 if (lastItem != d.dataItem) {
                     setTimeout(function () {
                         $(".k-chart-tooltip").addClass('tempTooltip');
-                    }, 0);
+                    //    $(".k-chart-tooltip-inverse").addClass('tempTooltip');
+                    }, 150);
                     return "";
                 }
                 return tooltipString;
@@ -5296,7 +5297,7 @@ function PopulateTVIG7Chart() {
     var jsonMResult = jsonEmpty.concat(jsonM);
     var jsonYResult = jsonEmpty.concat(jsonY);
     var jsonKResult = jsonEmpty.concat(jsonK);
-    debugger;
+    
     $divChartTVISummaryDotGain.kendoChart({
         renderAs: "canvas",        
         //legend: {
@@ -5424,7 +5425,7 @@ function PopulateTVIG7Chart() {
             position: "top",
             item: {
                 visual: function (e) {
-                    debugger;
+                    
                     var color = e.options.markers.background;
                     var labelColor = e.options.labels.color;
 
@@ -5646,7 +5647,7 @@ function renderChartWithBackgroundByAxis(e) {
                 xSlot.width(), ySlot.height()
             ]);
 
-        debugger;
+        
         if (chart.element[0].id == "kendoChartTargetVersusActualABDummy" || chart.element[0].id == "kendoChartGamut_ABComparisonDummy" || chart.element[0].id == "kendoChartInkPaperLabOneDummy") {
             path = drawing.Path.fromRect(rect, {
                 stroke: null,
