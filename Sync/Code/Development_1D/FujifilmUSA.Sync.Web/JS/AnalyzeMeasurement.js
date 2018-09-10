@@ -5912,7 +5912,7 @@ function Get_InkPaperChartLAB_OneChartImage() {
     $('#kendoChartInkPaperLabOneDummy').kendoChart(kendoOptions)
     var chartDummy = $('#kendoChartInkPaperLabOneDummy').data('kendoChart')
     chartDummy.dataSource = kendodataSource;
-    delete chartDummy.options.chartArea.background;
+    //delete chartDummy.options.chartArea.background;
     chartDummy.options.transitions = false;
     chartDummy.refresh()
     return chartDummy.imageDataURL();
