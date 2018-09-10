@@ -765,6 +765,9 @@ function BindAllTabs() {
 
     //Bind delta summary chart to display in report
     BindDeltaSummaryStatesChart();
+
+    $('#divToRender').css('display', 'block');
+    $('#divTabContainerLoading').css('display', 'none');
 }
 
 ////**************** Bind the measurement summary details ****************////
