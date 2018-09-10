@@ -2443,6 +2443,7 @@
     <Content Include="Templates\ScoringMeasurement_Default.htm" />
     <Content Include="Templates\style.css" />
     <Content Include="Templates\kendoPrepressSingleMeasurement_G7.htm" />
+    <Content Include="Terms\ColorPath SYNC Firefox ESR.pdf" />
     <Content Include="UserControl\AccessDenied.ascx" />
     <Content Include="UserControl\ActivityValidationRules.ascx" />
     <Content Include="UserControl\AddDeviceProfilerSettings.ascx" />
@@ -5718,7 +5719,6 @@
     <Content Include="Scripts\kendo\2018.1.221\cultures\kendo.culture.aa-DJ.min.js.map" />
     <Content Include="Scripts\kendo\2018.1.221\kendo.all.min.js.map" />
     <None Include="Templates\CertifiedLabel.label" />
-    <None Include="Terms\ColorPath SYNC Firefox ESR.pdf" />
     <None Include="Terms\ColorPath Sync TC 2013.pdf" />
   </ItemGroup>
   <ItemGroup>
