@@ -261,13 +261,13 @@ $(document).ready(function () {
     $btnLast = $('#btnLast');
     $btnFirst = $('#btnFirst');
     $hdnCurrentProjectLicenseType = $('#hdnCurrentProjectLicenseType').val();
-    $lnkLComparisionLargeChart = $('#lnkLComparisionLargeChart');    
+    $lnkLComparisionLargeChart = $('#lnkLComparisionLargeChart');
     $lnkAB_ComparisionLargeChart = $('#lnkAB_ComparisionLargeChart');
     $lnkPaperPaperLab1LargeChart = $('#lnkPaperPaperLab1LargeChart');
     $lnkPaperPaperLab2LargeChart = $('#lnkPaperPaperLab2LargeChart');
     $lnkGrayBalanceDeltaCHLargeChart = $('#lnkGrayBalanceDeltaCHLargeChart');
     $lnkBlackDeltaLLargeChart = $('#lnkBlackDeltaLLargeChart');
-    $lnkGrayDeltaLLargeChart = $('#lnkGrayDeltaLLargeChart');    
+    $lnkGrayDeltaLLargeChart = $('#lnkGrayDeltaLLargeChart');
     $lnk_A_GrayBalanceLargeChart = $('#lnk_A_GrayBalanceLargeChart');
     $lnk_B_GrayBalanceLargeChart = $('#lnk_B_GrayBalanceLargeChart');
     $lnk_L_GrayBalanceLargeChart = $('#lnk_L_GrayBalanceLargeChart');
@@ -412,10 +412,10 @@ $(document).ready(function () {
         e.preventDefault();
 
         var kendoOptions = $chart_TargetVersusActualAB.data("kendoChart").options;
-        kendoOptions.chartArea.width = 580;
-        kendoOptions.chartArea.height = 480;
-
         $chartTargetVersusActualABLarge.kendoChart(kendoOptions);
+        $chartTargetVersusActualABLarge.data("kendoChart").options.chartArea.width = 580;
+        $chartTargetVersusActualABLarge.data("kendoChart").options.chartArea.height = 480;
+
 
         $chartTargetVersusActualABLargeArea.kendoWindow({
             width: "600px",
@@ -436,35 +436,19 @@ $(document).ready(function () {
         e.preventDefault();
 
         var kendoOptions = $chart_L_Comaparision.data("kendoChart").options;
-        kendoOptions.chartArea.width = 580;
-        kendoOptions.chartArea.height = 180;
+        //kendoOptions.chartArea.width = 580;
+        //kendoOptions.chartArea.height = 180;
 
-        magnifyLpaperCharts(kendoOptions, '200px', '600px', $('#ContentPlaceHolder1_ucAnalyze_Td7').text().trim());
+        magnifyLpaperCharts(kendoOptions, 180, 580, '200px', '600px', $('#ContentPlaceHolder1_ucAnalyze_Td7').text().trim());
 
-        //$('#kendoChart_L_ComparisionLarge').kendoChart(kendoOptions);
-
-        //$('#kendoChart_L_ComparisionLargeArea').kendoWindow({
-        //    width: "600px",
-        //    modal: true,
-        //    height: '200px',
-        //    resizable: false,
-        //    title: $('#ContentPlaceHolder1_ucAnalyze_Td7').text().trim(),
-        //    visible: false
-        //});
-
-        //var popup = $('#kendoChart_L_ComparisionLargeArea').data('kendoWindow');
-        //popup.open();
-        //popup.center();
     });
 
     $lnkAB_ComparisionLargeChart.on('click', function (e) {
-        e.preventDefault();
-
+        e.preventDefault();        
         var kendoOptions = $chart_Gamut_ABComparison.data("kendoChart").options;
-        kendoOptions.chartArea.width = 580;
-        kendoOptions.chartArea.height = 480;
-
         $('#kendoChart_AB_ComparisionLarge').kendoChart(kendoOptions);
+        $('#kendoChart_AB_ComparisionLarge').data("kendoChart").options.chartArea.width = 580;
+        $('#kendoChart_AB_ComparisionLarge').data("kendoChart").options.chartArea.height = 480;
 
         $('#kendoChart_AB_ComparisionLargeArea').kendoWindow({
             width: "600px",
@@ -482,12 +466,10 @@ $(document).ready(function () {
 
     $lnkPaperPaperLab1LargeChart.on('click', function (e) {
         e.preventDefault();
-
         var kendoOptions = $divChartInkPaperPaperLab1.data("kendoChart").options;
-        kendoOptions.chartArea.width = 580;
-        kendoOptions.chartArea.height = 480;
-
         $('#kendoChart_AB_ComparisionLarge').kendoChart(kendoOptions);
+        $('#kendoChart_AB_ComparisionLarge').data("kendoChart").options.chartArea.width = 580;
+        $('#kendoChart_AB_ComparisionLarge').data("kendoChart").options.chartArea.height = 480;
 
         $('#kendoChart_AB_ComparisionLargeArea').kendoWindow({
             width: "600px",
@@ -507,25 +489,10 @@ $(document).ready(function () {
         e.preventDefault();
 
         var kendoOptions = $divChartInkPaperPaperLab2.data("kendoChart").options;
-        kendoOptions.chartArea.width = 180;
-        kendoOptions.chartArea.height = 375;
+        //kendoOptions.chartArea.width = 180;
+        //kendoOptions.chartArea.height = 375;
 
-        magnifyLpaperCharts(kendoOptions, '400px', '200px', $('#spanlocPaperL').text().trim());
-
-        //$('#kendoChart_L_ComparisionLarge').kendoChart(kendoOptions);
-
-        //$('#kendoChart_L_ComparisionLargeArea').kendoWindow({
-        //    width: "200px",
-        //    modal: true,
-        //    height: '400px',
-        //    resizable: false,
-        //    title: $('#spanlocPaperL').text().trim(),
-        //    visible: false
-        //});
-
-        //var popup = $('#kendoChart_L_ComparisionLargeArea').data('kendoWindow');
-        //popup.open();
-        //popup.center();
+        magnifyLpaperCharts(kendoOptions, 375, 180, '400px', '200px', $('#spanlocPaperL').text().trim());
     });
 
     $lnkGrayBalanceDeltaCHLargeChart.on('click', function (e) {
@@ -553,18 +520,19 @@ $(document).ready(function () {
         var kendoOptions = $divChartG7GrayDeltaL.data("kendoChart").options;
         //kendoOptions.chartArea.width = 580;
         //kendoOptions.chartArea.height = 180;
-        
-        magnifyG7Chart(kendoOptions, '200px', '600px', $('#spanGrayDeltaL').text().trim());        
+
+        magnifyG7Chart(kendoOptions, '200px', '600px', $('#spanGrayDeltaL').text().trim());
     });
 
     $lnk_A_GrayBalanceLargeChart.on('click', function (e) {
         e.preventDefault();
 
         var kendoOptions = $chart_A_BalanceChart.data("kendoChart").options;
-        kendoOptions.chartArea.width = 580;
-        kendoOptions.chartArea.height = 200;
-
         $('#kendoChart_A_Balance_Large').kendoChart(kendoOptions);
+        $('#kendoChart_A_Balance_Large').data("kendoChart").options.chartArea.width = 580;
+        $('#kendoChart_A_Balance_Large').data("kendoChart").options.chartArea.height = 200;
+
+
 
         $('#kendoChart_A_Balance_LargeArea').kendoWindow({
             width: "600px",
@@ -579,20 +547,19 @@ $(document).ready(function () {
         popup.open();
         popup.center();
     });
-    
+
     $lnk_B_GrayBalanceLargeChart.on('click', function (e) {
         e.preventDefault();
 
         var kendoOptions = $chart_B_BalanceChart.data("kendoChart").options;
-        kendoOptions.chartArea.width = 580;
-        kendoOptions.chartArea.height = 200;
-
         $('#kendoChart_B_Balance_Large').kendoChart(kendoOptions);
+        $('#kendoChart_B_Balance_Large').data("kendoChart").options.chartArea.width = 580;
+        $('#kendoChart_B_Balance_Large').data("kendoChart").options.chartArea.height = 200;
 
         $('#kendoChart_B_Balance_LargeArea').kendoWindow({
             width: "600px",
             modal: true,
-            height: '225px', 
+            height: '225px',
             resizable: false,
             title: $('#spanGrayBalanceB').text().trim(),
             visible: false
@@ -610,9 +577,9 @@ $(document).ready(function () {
         kendoOptions.chartArea.width = 580;
         kendoOptions.chartArea.height = 200;
 
-        magnifyLpaperCharts(kendoOptions, '225px', '600px', $('#spanGrayBalanceL').text().trim());
+        magnifyLpaperCharts(kendoOptions, 200, 580, '225px', '600px', $('#spanGrayBalanceL').text().trim());
 
-       
+
     });
 
     $('[id^=rbtnListDeltaE_]').on('click', function (e) {
@@ -673,38 +640,39 @@ $(document).ready(function () {
         SetPrevButtonDisabled(false);
         SetNextButtonDisabled(true);
         PopulateAnalyzeChart();
-    });    
+    });
 });
 
-function magnifyG7Chart(chartOptions, heightSize, widthSize, titleText) {
+function magnifyG7Chart(chartOptions, popupHeight, popupWidth, titleText) {
 
     $('#kendoChart_G7_Large').kendoChart(chartOptions);
     $('#kendoChart_G7_Large').data('kendoChart').options.legend.visible = false;
     $('#kendoChart_G7_Large').data('kendoChart').options.chartArea.width = 580;
     $('#kendoChart_G7_Large').data('kendoChart').options.chartArea.height = 180;
-   
+
     if ($('#kendoChart_G7_LargeArea').data('kendoWindow')) {
         $('#kendoChart_G7_LargeArea').data('kendoWindow').title(titleText);
     } else {
         $('#kendoChart_G7_LargeArea').kendoWindow({
             title: titleText,
-            width: widthSize,
-            height: heightSize,
+            width: popupWidth,
+            height: popupHeight,
             modal: true,
             resizable: false,
             visible: false
         });
     }
-    
+
     var popup = $('#kendoChart_G7_LargeArea').data('kendoWindow');
     popup.open();
     popup.center();
 }
 
-function magnifyLpaperCharts(chartOptions, heightSize, widthSize, titleText) {
+function magnifyLpaperCharts(chartOptions, chartHeight, chartWidth, heightSize, widthSize, titleText) {
     $('#kendoChart_L_ComparisionLarge').kendoChart(chartOptions);
-    
-    
+    $('#kendoChart_L_ComparisionLarge').data('kendoChart').options.chartArea.width = chartWidth;
+    $('#kendoChart_L_ComparisionLarge').data('kendoChart').options.chartArea.height = chartHeight;
+
 
     if ($('#kendoChart_L_ComparisionLargeArea').data('kendoWindow')) {
         $('#kendoChart_L_ComparisionLargeArea').data('kendoWindow').title(titleText);
@@ -960,7 +928,7 @@ function BindMeasurementPatchDetails() {
     $('#hdPatchMatricSum').val(''); //set the metric sum --All default value
 
     var patchGrid = $divMeasurementPatchDetails.data("kendoGrid");
-    if (patchGrid) {        
+    if (patchGrid) {
         $divMeasurementPatchDetails.data('kendoGrid').dataSource.read();
         $divMeasurementPatchDetails.data('kendoGrid').refresh();
     } else {
@@ -1373,7 +1341,7 @@ function BindMeasurementPatchDetails() {
         });
     }
 
-    
+
 
 
     if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
@@ -1645,7 +1613,7 @@ function BindAnalyzeChart() {
 
 ////**************** START BIND THE AB COMPARISION INK PAPER CHART  ****************////
 function BindInkPaperChartABComparision() {
-    
+
     var measurementID = parseInt($hdnCurrentMeasurement.val());
     var apiParameters = {
         MeasurementId: measurementID,
@@ -1949,7 +1917,7 @@ function PopulateAnalyzeChart() {
                 return e.MeasurementId
             })) < 0) {
                 $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
-            } 
+            }
         }
 
         //set name of the selected measurement in header lable
@@ -2319,7 +2287,7 @@ function PopulateInkPaperChartABComparision() {
         maxDeltaLimit = (maxDeltaLimit > 4 ? maxDeltaLimit : maxDeltaLimit + 1)
     }
 
-    maxDeltaLimit = Math.trunc(maxDeltaLimit) + 1;     
+    maxDeltaLimit = Math.trunc(maxDeltaLimit) + 1;
     //generate the second stacked chart by max value
     var stackedChart = [];
     $.each(axis, function (index, num) {
@@ -2724,7 +2692,7 @@ function PopulateInkPaperChartABComparision() {
                     return e.value;
                 },
                 rotation: 270
-            },            
+            },
             title: {
                 //text: _Resources._recDeltaB
             }, majorGridLines: {
@@ -2913,16 +2881,19 @@ function PopulateChartTargetVersusActualAB() {
 
         kendoSeriseObj.tooltip = {
             visible: true, template: function (d) {
-                //debugger;
+                debugger;
                 var seriesData = d.series.data;
                 var lastItem = seriesData[seriesData.length - 1];
-                $(".k-chart-tooltip").addClass('tempTooltip');
+                
                 if (lastItem != d.dataItem) {
                     setTimeout(function () {
-                        $(".k-chart-tooltip").addClass('tempTooltip');
-                    //    $(".k-chart-tooltip-inverse").addClass('tempTooltip');
+                        $(".k-chart-tooltip").addClass('tempTooltip');                        
                     }, 150);
                     return "";
+                } else {
+                    setTimeout(function () {
+                        $(".k-chart-tooltip").removeData('tempTooltip');
+                    }, 150);
                 }
                 return tooltipString;
             }, shared: false
@@ -3107,7 +3078,7 @@ function PopulateChartGamutABComparision() {
                 tooltipCaption = _Resources._recPaperPathMetrics;
                 break;
         }
-        
+
         //create tool tip
         var tooltipString = '<table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
         tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + jsonTargetColor.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + jsonTargetColor.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + jsonTargetColor.CielabB.toFixed(2) + '</td></tr>';
@@ -3216,15 +3187,15 @@ function PopulateChartGamutABComparision() {
             highlight: {
                 visible: false
             }
-        }, 
-        //{
-        //    data: colorPAPERObject,
-        //    color: "Black",
-        //    markers: { background: "White", size: 10 },
-        //    highlight: {
-        //        visible: false
-        //    }
-        //    },
+        },
+            //{
+            //    data: colorPAPERObject,
+            //    color: "Black",
+            //    markers: { background: "White", size: 10 },
+            //    highlight: {
+            //        visible: false
+            //    }
+            //    },
             paperColorPointObj,
             targetCYANPoint,
             targetMAGENTAPoint,
@@ -3643,7 +3614,7 @@ function PopulateChartLGrayBalance() {
         yAxis: {
             name: "yAxis",
             min: -12,
-            max: 12,            
+            max: 12,
             majorUnit: 4,
             axisCrossingValues: [-12, 12],
             labels: {
@@ -3676,7 +3647,7 @@ function PopulateSummaryDeltaChart() {
     var maxNum = 0;
     maxNum = maxValue > maxLimit ? maxValue : maxLimit;
     maxNum = Math.trunc(maxNum) + 1;
-    
+
 
     //generate the second stacked chart by max value
     var summarySeries = [];
@@ -5297,9 +5268,9 @@ function PopulateTVIG7Chart() {
     var jsonMResult = jsonEmpty.concat(jsonM);
     var jsonYResult = jsonEmpty.concat(jsonY);
     var jsonKResult = jsonEmpty.concat(jsonK);
-    
+
     $divChartTVISummaryDotGain.kendoChart({
-        renderAs: "canvas",        
+        renderAs: "canvas",
         //legend: {
         //    position: "top",            
         //},
@@ -5401,10 +5372,10 @@ function PopulateTVIG7Chart() {
             labels: {
                 format: "{0}",
                 padding: { top: 0 }
-            },           
+            },
         },
         yAxis: {
-            name: "yAxis",            
+            name: "yAxis",
             labels: {
                 format: "{0}"
             },
@@ -5425,7 +5396,7 @@ function PopulateTVIG7Chart() {
             position: "top",
             item: {
                 visual: function (e) {
-                    
+
                     var color = e.options.markers.background;
                     var labelColor = e.options.labels.color;
 
@@ -5647,7 +5618,7 @@ function renderChartWithBackgroundByAxis(e) {
                 xSlot.width(), ySlot.height()
             ]);
 
-        
+
         if (chart.element[0].id == "kendoChartTargetVersusActualABDummy" || chart.element[0].id == "kendoChartGamut_ABComparisonDummy" || chart.element[0].id == "kendoChartInkPaperLabOneDummy") {
             path = drawing.Path.fromRect(rect, {
                 stroke: null,
@@ -5660,7 +5631,7 @@ function renderChartWithBackgroundByAxis(e) {
                 fill: gradientPinkGreen
             });
         }
-        else if (chart.element[0].id == "kendoChartLBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceL" || chart.element[0].id == "kendoChart_L_ComparisionLarge" ) {
+        else if (chart.element[0].id == "kendoChartLBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceL" || chart.element[0].id == "kendoChart_L_ComparisionLarge") {
             path = drawing.Path.fromRect(rect, {
                 stroke: null,
                 fill: gradientGray3
@@ -5805,7 +5776,7 @@ function GetInkPaperPatchChartImage() {
     //kendoOptions.categoryAxis.labels.visible = false;    
     $('#divChartInkPaperDummy').kendoChart(kendoOptions);
     var dummyChart = $('#divChartInkPaperDummy').data('kendoChart');
-    dummyChart.options.categoryAxis.labels.visible = false;    
+    dummyChart.options.categoryAxis.labels.visible = false;
     dummyChart.dataSource = kendodataSource;
     dummyChart.options.transitions = false;
     dummyChart.refresh();
