@@ -38,13 +38,11 @@
 						<a class="btn btn-success" href= "Download/Firefox Setup 52.9.0esr de.zip" target="_blank" role="button" style="margin-top:5px">Download Firefox ESR - German</a>
                         <a class="btn btn-success" href= "Download/Firefox Setup 52.9.0esr ja.zip" target="_blank" role="button" style="margin-top:5px">Download Firefox ESR - Japanese</a>
 						
-						<p>Please note when choosing the Firefox ESR for Windows, you must choose the <b>non-64 bit</b> version!</p>
-						
 					</div>
 					
 					<div class="col-md-4">
 						<h3>2. Safari <small>(MacOS only)</small></h3>
-					<p>Safari still supports the Fujifilm Color Management plugin. On a Mac, just log in to ColorPath Sync.</p>
+					    <p>Safari still supports the Fujifilm Color Management plugin. On a Mac, just log in to ColorPath Sync.</p>
 					</div>
 					
 					<div class="col-md-4">
