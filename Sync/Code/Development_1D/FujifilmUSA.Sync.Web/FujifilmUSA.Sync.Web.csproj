@@ -787,6 +787,7 @@
     <Content Include="Download\Done.wav" />
     <Content Include="Download\Error.wav" />
     <Content Include="FireFoxPluginDetails.aspx" />
+    <Content Include="GenerateCustomReports.aspx" />
     <Content Include="Global.asax" />
     <Content Include="GlobalActivation.aspx" />
     <Content Include="GlobalMaster.Master" />
@@ -2478,6 +2479,7 @@
     <Content Include="UserControl\COViewOpenProject.ascx" />
     <Content Include="UserControl\CustomReports.ascx" />
     <Content Include="UserControl\DownloadSoftwares.ascx" />
+    <Content Include="UserControl\GenerateCustomReports.ascx" />
     <Content Include="UserControl\GlobalActivation.ascx" />
     <Content Include="UserControl\InkOptSourceMiddle.ascx" />
     <Content Include="UserControl\MetricTargetPresetManagement.ascx" />
@@ -3064,6 +3066,13 @@
     <Compile Include="FireFoxPluginDetails.aspx.designer.cs">
       <DependentUpon>FireFoxPluginDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="GenerateCustomReports.aspx.cs">
+      <DependentUpon>GenerateCustomReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GenerateCustomReports.aspx.designer.cs">
+      <DependentUpon>GenerateCustomReports.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
       <SubType>Code</SubType>
@@ -3475,6 +3484,13 @@
     </Compile>
     <Compile Include="UserControl\DownloadSoftwares.ascx.designer.cs">
       <DependentUpon>DownloadSoftwares.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\GenerateCustomReports.ascx.cs">
+      <DependentUpon>GenerateCustomReports.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\GenerateCustomReports.ascx.designer.cs">
+      <DependentUpon>GenerateCustomReports.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\GlobalActivation.ascx.cs">
       <DependentUpon>GlobalActivation.ascx</DependentUpon>
@@ -6352,7 +6368,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

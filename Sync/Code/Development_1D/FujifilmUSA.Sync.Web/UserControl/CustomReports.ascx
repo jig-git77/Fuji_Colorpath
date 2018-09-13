@@ -19,7 +19,7 @@
             <td align="center">
 
 
-                <asp:LinkButton ID="lbtnReport1" runat="server">
+                <asp:LinkButton ID="lbtnReport1" runat="server" PostBackUrl="~/GenerateCustomReports.aspx">
                     <div>
                         <asp:Image ID="imgReport1" runat="server" AlternateText="DLP Report" ImageUrl="~/Images/Sync DLP Report_preview.jpg"
                             ToolTip="DLP Report" Width="150" />
