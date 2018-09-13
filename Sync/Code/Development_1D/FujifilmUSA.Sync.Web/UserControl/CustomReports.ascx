@@ -29,7 +29,7 @@
             </td>
             <td align="center">
 
-                <asp:LinkButton ID="lbtnReport2" runat="server">
+                <asp:LinkButton ID="lbtnReport2" runat="server" PostBackUrl="~/GenerateCustomReports.aspx">
                     <div>
                         <asp:Image ID="imgReport2" runat="server" AlternateText="G7 Report" ImageUrl="~/Images/Sync1D Report_preview_G7.jpg"
                             ToolTip="G7 Report" Width="150" />
@@ -39,7 +39,7 @@
 
             </td>
             <td align="center">
-                <asp:LinkButton ID="lbtnReport3" runat="server">
+                <asp:LinkButton ID="lbtnReport3" runat="server" PostBackUrl="~/GenerateCustomReports.aspx">
                     <div>
                         <asp:Image ID="imgReport3" runat="server" AlternateText="Validation Report" ImageUrl="~/Images/Sync1D Report_preview_Vali.jpg"
                             ToolTip="Validation Report" Width="150" />
@@ -48,7 +48,7 @@
                 </asp:LinkButton>
             </td>
             <td align="center">
-                <asp:LinkButton ID="lbtnReport4" runat="server">
+                <asp:LinkButton ID="lbtnReport4" runat="server" PostBackUrl="~/GenerateCustomReports.aspx">
                     <div>
                         <asp:Image ID="imgReport4" runat="server" AlternateText="Density Report" ImageUrl="~/Images/Sync1D CMYK Density Report_preview.jpg"
                             ToolTip="Density Report" Width="150" />
