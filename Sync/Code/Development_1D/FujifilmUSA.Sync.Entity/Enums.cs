@@ -179,7 +179,8 @@ namespace FujifilmUSA.Sync.Entity
         CompanyAdmin = 5,
         BranchAdmin = 6,
         SiteUser = 7,
-        PrintBuyer = 8
+        PrintBuyer = 8,
+        CSRUser = 9
     }
 
     public enum ERolePermission
@@ -221,7 +222,9 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ERolePermission_ManageDeviceProfileSettings")] //Manage Device Profiler Settings
         ManageDeviceProfileSettings = 18,
         [Description("ERolePermission_ManageSpotTarget")] //Manage Spot Target/Brand Color Optimization
-        ManageSpotTarget = 19
+        ManageSpotTarget = 19,
+        [Description("ERolePermission_ManageCustomReports")] //Manage Custom Reports
+        ManageCustomReports = 20
     }
     public enum ECurrentProjectStatus
     {

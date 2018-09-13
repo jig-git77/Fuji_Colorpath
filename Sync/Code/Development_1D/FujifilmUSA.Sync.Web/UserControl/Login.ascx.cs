@@ -86,6 +86,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Response.Cookies["SyncFujiPass"].Value = "";                        
                     }
 
+                    if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageCustomReports))
+                    {
+                        if (CheckUsersValidity(UserName))
+                        {
+                            if (SessionManager.Instance.CurrentUser.Role.RoleId == (int)ERole.CSRUser)
+                            {
+                                FormsAuthentication.RedirectFromLoginPage(UserName, false);
+                                Response.Redirect("CustomReports.aspx");
+                            }
+                        }
+                        else
+                        {
+                            fujiStatusbar.DisplayMessage("You are already logged-in from other browser!", false);
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
+                        }
+                    }
+
                     if (SessionManager.Instance.CurrentUser.HasProjectPermission())
                     {
                         if (CheckUsersValidity(UserName))

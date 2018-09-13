@@ -15,7 +15,7 @@
     <RootNamespace>FujifilmUSA.Sync.Web</RootNamespace>
     <AssemblyName>FujifilmUSA.Sync.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -782,6 +782,7 @@
     <Content Include="COViewOpenProject.aspx" />
     <Content Include="CSS\FirefoxPluginStyle.css" />
     <Content Include="CSS\jquery-ui-1.8.16.custom.css" />
+    <Content Include="CustomReports.aspx" />
     <Content Include="DownloadSoftwares.aspx" />
     <Content Include="Download\Done.wav" />
     <Content Include="Download\Error.wav" />
@@ -1420,6 +1421,7 @@
     <Content Include="Download\Firefox Setup 52.9.0esr de.zip" />
     <Content Include="Download\Firefox Setup 52.9.0esr ja.zip" />
     <Content Include="Download\Firefox Setup 52.9.0esr.zip" />
+    <Content Include="ReportMaster.Master" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -2474,6 +2476,7 @@
     <Content Include="UserControl\COTransferSiteControl.ascx" />
     <Content Include="UserControl\COValidationCallback.ascx" />
     <Content Include="UserControl\COViewOpenProject.ascx" />
+    <Content Include="UserControl\CustomReports.ascx" />
     <Content Include="UserControl\DownloadSoftwares.ascx" />
     <Content Include="UserControl\GlobalActivation.ascx" />
     <Content Include="UserControl\InkOptSourceMiddle.ascx" />
@@ -3040,6 +3043,13 @@
     <Compile Include="COViewOpenProject.aspx.designer.cs">
       <DependentUpon>COViewOpenProject.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CustomReports.aspx.cs">
+      <DependentUpon>CustomReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomReports.aspx.designer.cs">
+      <DependentUpon>CustomReports.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DownloadSoftwares.aspx.cs">
       <DependentUpon>DownloadSoftwares.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3204,6 +3214,13 @@
     </Compile>
     <Compile Include="ReportSingleMeasurement_G7_Vali.aspx.designer.cs">
       <DependentUpon>ReportSingleMeasurement_G7_Vali.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportMaster.Master.cs">
+      <DependentUpon>ReportMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportMaster.Master.designer.cs">
+      <DependentUpon>ReportMaster.Master</DependentUpon>
     </Compile>
     <Compile Include="SessionEnd.aspx.cs">
       <DependentUpon>SessionEnd.aspx</DependentUpon>
@@ -3444,6 +3461,13 @@
     </Compile>
     <Compile Include="UserControl\COViewOpenProject.ascx.designer.cs">
       <DependentUpon>COViewOpenProject.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\CustomReports.ascx.cs">
+      <DependentUpon>CustomReports.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\CustomReports.ascx.designer.cs">
+      <DependentUpon>CustomReports.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\DownloadSoftwares.ascx.cs">
       <DependentUpon>DownloadSoftwares.ascx</DependentUpon>
@@ -6293,6 +6317,18 @@
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.de.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CustomReports.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CustomReports.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CustomReports.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CustomReports.ascx.fr.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -6316,7 +6352,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
