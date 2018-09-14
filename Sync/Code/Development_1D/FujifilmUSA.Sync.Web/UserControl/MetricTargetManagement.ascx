@@ -1,27 +1,26 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MetricTargetManagement.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.MetricTargetManagement" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <style type="text/css">
-    div.RadGrid .rgRow
-    {
+    div.RadGrid .rgRow {
         background: #F7F7F7;
     }
-    div.RadGrid .rgAltRow
-    {
+
+    div.RadGrid .rgAltRow {
         background: #F7F7F7;
     }
-    .rgPager table
-    {
+
+    .rgPager table {
         border-top: 0px;
         border-bottom: 1px solid #000000;
         border-spacing: 1pt;
         width: 100%;
     }
-    .RadGrid_Default .rgRow a, .RadGrid_Default .rgAltRow a, .RadGrid_Default .rgEditRow a, .RadGrid_Default tr.rgEditRow a, .RadGrid_Default tr.rgHoveredRow a, .RadGrid_Default tr.rgActiveRow a, .RadGrid_Default .rgFooter a, .RadGrid_Default .rgEditForm a
-    {
+
+    .RadGrid_Default .rgRow a, .RadGrid_Default .rgAltRow a, .RadGrid_Default .rgEditRow a, .RadGrid_Default tr.rgEditRow a, .RadGrid_Default tr.rgHoveredRow a, .RadGrid_Default tr.rgActiveRow a, .RadGrid_Default .rgFooter a, .RadGrid_Default .rgEditForm a {
         color: #003CA9;
     }
-    .RadGrid_Default td.rgPagerCell
-    {
+
+    .RadGrid_Default td.rgPagerCell {
         -moz-border-bottom-colors: none;
         -moz-border-image: none;
         -moz-border-left-colors: none;
@@ -31,45 +30,44 @@
         border-style: solid;
         border-width: 0px 0 0px 0px;
     }
-    .RadGrid_Default .rgRow td, .RadGrid_Default .rgAltRow td, .RadGrid_Default .rgEditRow td, .RadGrid_Default .rgFooter td
-    {
+
+    .RadGrid_Default .rgRow td, .RadGrid_Default .rgAltRow td, .RadGrid_Default .rgEditRow td, .RadGrid_Default .rgFooter td {
         border-style: none;
         border-width: 0 0 1px;
     }
-    .RadGrid_Default .rgRow .rgSorted
-    {
+
+    .RadGrid_Default .rgRow .rgSorted {
         background-color: #F7F7F7;
         border-bottom-color: #F7F7F7;
     }
-    .RadGrid_Default .rgAltRow .rgSorted
-    {
+
+    .RadGrid_Default .rgAltRow .rgSorted {
         background-color: #F7F7F7;
         border-bottom-color: #F7F7F7;
     }
-    
-    .RadGrid_Default th.rgSorted
-    {
+
+    .RadGrid_Default th.rgSorted {
         background-color: #F1F1F1;
         background-position: 0px;
     }
-    .breakWord150
-    {
+
+    .breakWord150 {
         max-width: 150px !important;
         word-break: break-all !important;
         word-wrap: break-word !important;
         vertical-align: top;
         line-height: 15px;
     }
-    .breakWord130
-    {
+
+    .breakWord130 {
         max-width: 130px !important;
         word-break: break-all !important;
         word-wrap: break-word !important;
         vertical-align: top;
         line-height: 15px;
     }
-    .breakWord100
-    {
+
+    .breakWord100 {
         max-width: 100px !important;
         word-break: break-all !important;
         word-wrap: break-word !important;
@@ -79,13 +77,15 @@
 </style>
 
 <div class="admin_top">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="admin_middle">
     <div class="head">
-        <h1><asp:Localize runat="server" ID="locMetricTargetMgmt" Text="Metric Target Management" 
+        <h1>
+            <asp:Localize runat="server" ID="locMetricTargetMgmt" Text="Metric Target Management"
                 meta:resourcekey="locMetricTargetMgmtResource1"></asp:Localize></h1>
-          
-       <%-- <asp:LinkButton ID="likAdd" runat="server" class="button" 
+
+        <%-- <asp:LinkButton ID="likAdd" runat="server" class="button" 
             OnClick="likAdd_Click" >
             <span>
                 <asp:Image ID="imgAdd" runat="server" 
@@ -101,41 +101,76 @@
     <div style="margin-left: 10px;">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
-                <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
+                <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server"
                     Visible="False" />
                 <asp:HiddenField ID="hdSelectedCompanyId" runat="server" Value="0" />
                 <telerik:RadGrid ID="rgMetricTargetPreset" AllowFilteringByColumn="True" AllowSorting="True"
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
                     OnNeedDataSource="rgMetricTargetPreset_NeedDataSource" OnItemCommand="rgMetricTargetPreset_ItemCommand"
-                    Width="98%" CellSpacing="0" GridLines="None" 
+                    Width="98%" CellSpacing="0" GridLines="None"
                     meta:resourcekey="rgMetricTargetPresetResource1">
                     <GroupingSettings CaseSensitive="False" />
                     <HeaderStyle Font-Bold="True" />
                     <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
-                    <MasterTableView DataKeyNames="MetricTargetPresetID,Company.CompanyID,MetricTargetPresetName,IsUsed,IsPatchTolerance">
+                    <MasterTableView DataKeyNames="MetricTargetPresetID">
+                        <DetailTables>
+                            <telerik:GridTableView DataKeyNames="MetricTargetPresetID" Name="MetricTargets" Width="100%" AutoGenerateColumns="false" CommandItemDisplay="Top">
+                                <CommandItemSettings ShowAddNewRecordButton="false" />                                
+                                <Columns>
+                                    <telerik:GridBoundColumn SortExpression="MetricTargetID" HeaderText="MetricSum Name" HeaderButtonType="TextButton"
+                                        DataField="MetricTargetID">
+                                    </telerik:GridBoundColumn>
+                                    <%--<telerik:GridBoundColumn SortExpression="SpotTarget.SpotTargetName" HeaderText="Library" HeaderButtonType="TextButton"
+                                        DataField="SpotTarget.SpotTargetName">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn SortExpression="CreateDate" HeaderText="Last Active" HeaderButtonType="TextButton"
+                                        DataField="CreateDate" DataFormatString="{0:MM/dd/yy hh:mm}" ShowFilterIcon="False">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridTemplateColumn DataField="SpotProjectID" UniqueName="Delete" FilterControlAltText="Filter Delete column"
+                                        meta:resourcekey="GridTemplateColumnResource7">
+                                        <FilterTemplate>
+                                            <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="button" CommandName="ClearFilterSpotTarget"
+                                                ToolTip="Clear Filter">
+                                                <span>
+                                                    <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png"
+                                                        meta:resourcekey="imgClearFillterResource1" />
+                                                </span>
+                                            </asp:LinkButton>
+                                        </FilterTemplate>
+                                        <ItemTemplate>
+                                            <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete SpotProject" AlternateText="Delete"
+                                                ImageUrl="../Images/delete_icon.png" OnClientClick="return ConfirmDeleteSpotProject();"
+                                                CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SpotProjectID") %>' CommandName="DeleteSpotProject"
+                                                meta:resourcekey="imgbtnDeleteResource1" />
+                                        </ItemTemplate>
+                                        <HeaderStyle Width="40px" />
+                                    </telerik:GridTemplateColumn>--%>
+                                </Columns>
+                            </telerik:GridTableView>
+                        </DetailTables>
                         <CommandItemSettings ExportToPdfText="Export to PDF" />
-                        <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" 
+                        <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column"
                             Visible="True">
                         </RowIndicatorColumn>
-                        <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column" 
+                        <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column"
                             Visible="True">
                         </ExpandCollapseColumn>
                         <Columns>
                             <telerik:GridTemplateColumn DataField="MetricTargetPresetName" HeaderText="Preset Name"
-                                UniqueName="MetricTargetPresetName" SortExpression="MetricTargetPresetName" 
-                                FilterControlWidth="90px" AutoPostBackOnFilter="True" 
-                                CurrentFilterFunction="Contains" 
-                                FilterControlAltText="Filter MetricTargetPresetName column" 
+                                UniqueName="MetricTargetPresetName" SortExpression="MetricTargetPresetName"
+                                FilterControlWidth="90px" AutoPostBackOnFilter="True"
+                                CurrentFilterFunction="Contains"
+                                FilterControlAltText="Filter MetricTargetPresetName column"
                                 meta:resourcekey="GridTemplateColumnResource1">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblMetricTargetPresetName" runat="server" Text='<%# Eval("MetricTargetPresetName") %>' 
+                                    <asp:Label ID="lblMetricTargetPresetName" runat="server" Text='<%# Eval("MetricTargetPresetName") %>'
                                         meta:resourcekey="lblMetricTargetPresetNameResource1" />
                                 </ItemTemplate>
                                 <HeaderStyle Width="90px" />
                                 <ItemStyle CssClass="breakWord90" Width="90px" Wrap="True" />
                             </telerik:GridTemplateColumn>
-                            
-<%--                          
+
+                            <%--                          
                             <telerik:GridTemplateColumn DataField="Company.CompanyName"
                                 HeaderText="Company" UniqueName="CompanyName" 
                                 SortExpression="Company.CompanyName" FilterControlWidth="70px" 
@@ -237,7 +272,7 @@
                                 <ItemStyle HorizontalAlign="Center" />
                             </telerik:GridTemplateColumn>--%>
                             <telerik:GridTemplateColumn DataField="MetricTargetPresetID"
-                                UniqueName="Edit" FilterControlAltText="Filter Edit column" 
+                                UniqueName="Edit" FilterControlAltText="Filter Edit column"
                                 meta:resourcekey="GridTemplateColumnResource11">
                                 <FilterTemplate>
                                     <center>
@@ -274,14 +309,15 @@
                                     </div>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                        </Columns>                        
-                    </MasterTableView>                    
+                        </Columns>
+                    </MasterTableView>
                 </telerik:RadGrid>
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
 </div>
 <div class="admin_bottom">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="clear">
 </div>

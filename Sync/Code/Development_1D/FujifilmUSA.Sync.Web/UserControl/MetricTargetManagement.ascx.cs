@@ -22,7 +22,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Page Events
         protected override void OnInit(EventArgs e)
         {
-            _presenterMetricTargetManagement = new PresenterMetricTargetManagement(this);
+            _presenterMetricTargetManagement = new PresenterMetricTargetManagement(this);            
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -82,7 +82,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 rgMetricTargetPreset.DataSource = MetricTargetPresetList;
             }
         }
+        //protected void rgMetricTargetPreset_DetailTableDataBind(object sender, GridDetailTableDataBindEventArgs e)
+        //{
+        //    GridDataItem dataItem = (GridDataItem)e.DetailTableView.ParentItem;
 
+        //    ProjectId = Convert.ToInt32(dataItem.GetDataKeyValue("ProjectId").ToString());
+        //    _presenterProjectList.GetSpotLibraryListByProjectId();
+        //    if (!IsErrorOccured)
+        //    {
+        //        //SessionManager.Instance.ProjectList = Projects;
+        //        e.DetailTableView.DataSource = SpotProjectLibraries;
+        //    }
+        //}
         #endregion
 
         #region Methods   

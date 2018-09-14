@@ -1,6 +1,7 @@
 ﻿using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.DataAccess;
+using FujifilmUSA.Sync.Entity.CPSyncV;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
-    public class MetricTargetBusinessImpl: IMetricTargetBusiness
+    public class MetricTargetBusinessImpl : IMetricTargetBusiness
     {
         #region  IMetricTargetBusiness Members
         public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetList(int currentUserId)
@@ -17,7 +18,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var metricTargets = new List<Entity.CPSyncV.MetricTargetPreset>();
             Common.ImplementBusinessLogic(
                 () =>
-                {                    
+                {
                     var dsmetricTarget = DataAccessFactory.Instance.GetDsResult("[CPSyncV].[MetricTargetPresetList]", new object[] { currentUserId });
                     if (dsmetricTarget != null && dsmetricTarget.Tables.Count > 0 && dsmetricTarget.Tables[0].Rows.Count > 0)
                     {
@@ -38,9 +39,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 //IsUsed = DataReader.ReadBoolean(x, "IsUsed")
                             }).ToList();
 
-                        if(dsmetricTarget.Tables[1].Rows.Count > 0)
+                        if (dsmetricTarget.Tables[1].Rows.Count > 0)
                         {
-
+                            foreach (var item in metricTargets)
+                            {
+                                var metricSums = new List<MetricSum>();
+                                metricSums = dsmetricTarget.Tables[1].AsEnumerable().Where(r => r.Field<short>("MetricTargetPresetID") == item.MetricTargetPresetID).
+                                   Select(x => new Entity.CPSyncV.MetricSum()
+                                   {
+                                       MetricTargetID = DataReader.ReadShort(x, "MetricTargetID"),
+                                       MetricTargetPresetID = DataReader.ReadShort(x, "MetricTargetPresetID"),
+                                       MetricSumId = DataReader.ReadShort(x, "MetricSumID"),
+                                       MetricSumName = DataReader.ReadString(x, "MetricSumName"),
+                                       TargetValue = DataReader.ReadDecimal(x, "TargetValue")
+                                   }).ToList();
+                                item.MetricSumTolerances = metricSums;
+                            }
                         }
                     }
                 },
