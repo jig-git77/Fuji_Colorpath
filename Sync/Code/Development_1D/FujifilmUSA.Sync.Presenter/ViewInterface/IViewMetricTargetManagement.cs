@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace FujifilmUSA.Sync.Presenter.ViewInterface
+{
+    public interface IViewMetricTargetManagement : IViewBase
+    {
+        Entity.CPSyncV.MetricTargetPreset MetricTargetPreset { get; set; }
+        List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPresetList { get; set; }
+    }
+}

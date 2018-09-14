@@ -59,6 +59,7 @@
     <Compile Include="Implementation\ApplicationConfigurationBusinessImpl.cs" />
     <Compile Include="Implementation\CompanyBusinessImpl.cs" />
     <Compile Include="Implementation\BranchBusinessImpl.cs" />
+    <Compile Include="Implementation\MetricTargetBusinessImpl.cs" />
     <Compile Include="Implementation\MetricTargetPresetBusinessImpl.cs" />
     <Compile Include="Implementation\MiscBusinessImpl.cs" />
     <Compile Include="Implementation\LicenseBusinessImpl.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Implementation\UserBusinessImpl.cs" />
     <Compile Include="Implementation\ActivityValidationRuleBusinessImpl.cs" />
     <Compile Include="Interface\IApplicationConfigurationBusiness.cs" />
+    <Compile Include="Interface\IMetricTargetBusiness.cs" />
     <Compile Include="Interface\IMetricTargetPresetBusiness.cs" />
     <Compile Include="Interface\IMiscBusiness.cs" />
     <Compile Include="Interface\ILicenseBusiness.cs" />

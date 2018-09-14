@@ -952,6 +952,7 @@
     <Content Include="JS\jquery.tools.min.js" />
     <Content Include="JS\Printing.js" />
     <Content Include="JS\ProjectList.js" />
+    <Content Include="MetricTargetManagement.aspx" />
     <Content Include="MetricTargetPresetManagement.aspx" />
     <Content Include="PatchPresetManagement.aspx" />
     <Content Include="Permission.aspx" />
@@ -2482,6 +2483,7 @@
     <Content Include="UserControl\GenerateCustomReports.ascx" />
     <Content Include="UserControl\GlobalActivation.ascx" />
     <Content Include="UserControl\InkOptSourceMiddle.ascx" />
+    <Content Include="UserControl\MetricTargetManagement.ascx" />
     <Content Include="UserControl\MetricTargetPresetManagement.ascx" />
     <Content Include="UserControl\PatchPresetManagement.ascx" />
     <Content Include="UserControl\PopupControl\DownloadSoftware.ascx" />
@@ -3098,6 +3100,13 @@
     <Compile Include="InkOptSourceMiddle.aspx.designer.cs">
       <DependentUpon>InkOptSourceMiddle.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MetricTargetManagement.aspx.cs">
+      <DependentUpon>MetricTargetManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MetricTargetManagement.aspx.designer.cs">
+      <DependentUpon>MetricTargetManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MetricTargetPresetManagement.aspx.cs">
       <DependentUpon>MetricTargetPresetManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3504,6 +3513,13 @@
     </Compile>
     <Compile Include="UserControl\InkOptSourceMiddle.ascx.designer.cs">
       <DependentUpon>InkOptSourceMiddle.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\MetricTargetManagement.ascx.cs">
+      <DependentUpon>MetricTargetManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MetricTargetManagement.ascx.designer.cs">
+      <DependentUpon>MetricTargetManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\MetricTargetPresetManagement.ascx.cs">
       <DependentUpon>MetricTargetPresetManagement.ascx</DependentUpon>
@@ -6344,6 +6360,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\CustomReports.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MetricTargetManagement.ascx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
