@@ -67,7 +67,7 @@
                                 </tr>--%>
                                 <tr>
                                     <td colspan="3">
-                                        <asp:GridView runat="server" ID="grdMetricSum" AutoGenerateColumns="false">
+                                        <%--<asp:GridView runat="server" ID="grdMetricSum" AutoGenerateColumns="false">
                                             <Columns>
                                                 <asp:BoundField DataField="MetricSumName" HeaderText="MetricSum Name" />
                                                 <asp:TemplateField HeaderText="Target Value">
@@ -77,6 +77,36 @@
                                                         <asp:TextBox runat="server" ID="txtTargetValue" Width="30"  Text='<%# Bind("TargetValue") %>'  />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
+                                            </Columns>
+                                        </asp:GridView>--%>
+                                        <asp:GridView runat="server" ID="grdMetricSum" AutoGenerateColumns="false" ShowFooter="true" OnRowCreated="grdMetricSum_RowCreated">
+                                            <Columns>
+                                                <%--<asp:BoundField DataField="MetricSumName" HeaderText="MetricSum Name" />--%>
+                                                <asp:TemplateField HeaderText="Target Value">
+                                                    <ItemTemplate>                                                        
+                                                        <asp:DropDownList ID="ddlMetricSum" runat="server" AppendDataBoundItems="true">  
+                                                            <asp:ListItem Value="-1">Select</asp:ListItem>  
+                                                        </asp:DropDownList>  
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Target Value">
+                                                    <ItemTemplate>
+                                                        <asp:HiddenField runat="server" ID="hdfMetricSumId" Value='<%# Bind("MetricSumID") %>' />
+                                                        <asp:HiddenField runat="server" ID="hdfTargetMetricId" Value='<%# Bind("MetricTargetId") %>' />
+                                                        <asp:TextBox runat="server" ID="txtTargetValue" Width="30"  Text='<%# Bind("TargetValue") %>'  />
+                                                    </ItemTemplate>
+                                                     <FooterTemplate>  
+                                                        <asp:Button ID="ButtonAdd" runat="server"   
+                                                                             Text="Add New Row"   
+                                                                             onclick="ButtonAdd_Click" />  
+                                                    </FooterTemplate>  
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>  
+                                                    <ItemTemplate>  
+                                                        <asp:LinkButton ID="lnkRemove" runat="server"   
+                                                                                onclick="lnkRemove_Click">Remove</asp:LinkButton>  
+                                                    </ItemTemplate>  
+                                                </asp:TemplateField>  
                                             </Columns>
                                         </asp:GridView>
                                     </td>

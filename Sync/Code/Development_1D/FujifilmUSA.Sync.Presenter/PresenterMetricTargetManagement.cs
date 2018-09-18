@@ -49,5 +49,12 @@ namespace FujifilmUSA.Sync.Presenter
             metricTargetBusiness.ErrorOccured += _viewMetricTarget.ErrorOccured;
             metricTargetBusiness.UpdateMetricTargetPreset(_viewMetricTarget.MetricTargetPreset.MetricTargetPresetID, _viewMetricTarget.MetricSumList);
         }
+
+        public void GetMetricSums()
+        {
+            var metricTargetBusiness = BusinessFactory<IMetricTargetBusiness>.CreateObject();
+            metricTargetBusiness.ErrorOccured += _viewMetricTarget.ErrorOccured;
+            _viewMetricTarget.MetricSums = metricTargetBusiness.GetAllMetricSumList();
+        }
     }
 }

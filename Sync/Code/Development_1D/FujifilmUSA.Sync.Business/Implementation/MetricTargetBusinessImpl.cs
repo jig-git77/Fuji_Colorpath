@@ -16,55 +16,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
     public class MetricTargetBusinessImpl : IMetricTargetBusiness
     {
         #region  IMetricTargetBusiness Members
-        //public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetList(int currentUserId)
-        //{
-        //    var metricTargets = new List<Entity.CPSyncV.MetricTargetPreset>();
-        //    Common.ImplementBusinessLogic(
-        //        () =>
-        //        {
-        //            var dsmetricTarget = DataAccessFactory.Instance.GetDsResult("[CPSyncV].[MetricTargetPresetList]", new object[] { currentUserId });
-        //            if (dsmetricTarget != null && dsmetricTarget.Tables.Count > 0 && dsmetricTarget.Tables[0].Rows.Count > 0)
-        //            {
-        //                metricTargets = dsmetricTarget.Tables[0].AsEnumerable().
-        //                    Select(x => new Entity.CPSyncV.MetricTargetPreset()
-        //                    {
-        //                        MetricTargetPresetID = DataReader.ReadShort(x, "MetricTargetPresetID"),
-        //                        //Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyID"), CompanyName = DataReader.ReadString(x, "CompanyName") },
-        //                        //Region = new Region() { RegionId = DataReader.ReadShort(x, "RegionID"), RegionName = DataReader.ReadString(x, "Region") },
-        //                        MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName")
-        //                        //MetricTargetPresetDesc = DataReader.ReadString(x, "MetricTargetPresetDesc"),
-        //                        //dEMethod = DataReader.ReadString(x, "dEMethod"),
-        //                        //ValidationType = DataReader.ReadInt(x, "ValidationType"),
-        //                        //IsSync1D = DataReader.ReadBoolean(x, "IsSync1D"),
-        //                        //Validation_1D = DataReader.ReadBoolean(x, "Validation_1D"),
-        //                        //Validation_4D = DataReader.ReadBoolean(x, "Validation_4D"),
-        //                        //IsPatchTolerance = DataReader.ReadBoolean(x, "IsPatchTolerance"),
-        //                        //IsUsed = DataReader.ReadBoolean(x, "IsUsed")
-        //                    }).ToList();
-
-        //                if (dsmetricTarget.Tables[1].Rows.Count > 0)
-        //                {
-        //                    foreach (var item in metricTargets)
-        //                    {
-        //                        var metricSums = new List<MetricSum>();
-        //                        metricSums = dsmetricTarget.Tables[1].AsEnumerable().Where(r => r.Field<short>("MetricTargetPresetID") == item.MetricTargetPresetID).
-        //                           Select(x => new Entity.CPSyncV.MetricSum()
-        //                           {
-        //                               MetricTargetID = DataReader.ReadShort(x, "MetricTargetID"),
-        //                               MetricTargetPresetID = DataReader.ReadShort(x, "MetricTargetPresetID"),
-        //                               MetricSumId = DataReader.ReadShort(x, "MetricSumID"),
-        //                               MetricSumName = DataReader.ReadString(x, "MetricSumName"),
-        //                               TargetValue = DataReader.ReadDecimal(x, "TargetValue")
-        //                           }).ToList();
-        //                        item.MetricSumTolerances = metricSums;
-        //                    }
-        //                }
-        //            }
-        //        },
-        //        new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMetricTargetPresets"));
-        //    return metricTargets;
-        //}
-
+        
 
         public List<Entity.CPSyncV.MetricSum> GetMetricTargetSumList(int MetricTargetPresetID, int currentUserId)
         {
@@ -156,21 +108,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                     new XElement("MetricTarget",
                                                                                  new XAttribute("MetricTargetID", x.MetricTargetID),
                                                                                  new XAttribute("MetricSumID", x.MetricSumId),
-                                                                                 new XAttribute("TargetValue", x.TargetValue)
+                                                                                 new XAttribute("TargetValue", x.TargetValue),
+                                                                                 new XAttribute("MetricTargetPresetID", x.MetricTargetPresetID)
                                                                         )).ToList());
             var outParam = new Parameters() { ParameterName = "@IsSaved", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
                 () =>
-                {
-                    //returnValue = DataAccessFactory.
-                    //    Instance.
-                    //    ExecuteProcedure(
-                    //        "[CPSyncV].[SaveMetricTargetSum]",
-                    //        new object[]
-                    //                {
-                    //                    MetricTargetPresetID,
-                    //                    metricTargetXML.ToString()
-                    //                });
+                {                   
                     DataAccessFactory.
                             Instance.
                             ExecuteProcedure("CPSyncV.SaveMetricTargetSum",
@@ -186,6 +130,34 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateMetricTargetPreset"));
             return Convert.ToInt32(outParam.Value);
+        }
+
+        public Dictionary<int, string> GetAllMetricSumList()
+        {
+            var dsMetricSumList = new Dictionary<int, string>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsmetricSum = DataAccessFactory.Instance.GetDsResult("[CPSyncV].[GetAllMetricSumList]", new object[] {});
+                    if (dsmetricSum != null && dsmetricSum.Tables.Count > 0 && dsmetricSum.Tables[0].Rows.Count > 0)
+                    {
+                        //metricSums = dsmetricSum.Tables[0].AsEnumerable().
+                        //    Select(x => new Entity.CPSyncV.MetricSum()
+                        //    {
+                        //        MetricTargetPresetID = DataReader.ReadShort(x, "MetricSumId"),
+                        //        MetricSumName = DataReader.ReadString(x, "MetricSumName")
+                        //    }).ToList();
+
+                        dsMetricSumList = (dsmetricSum.Tables[0].AsEnumerable().Select(
+                            metric => new
+                            {
+                                Value = DataReader.ReadInt(metric, "MetricSumId"),
+                                Text = DataReader.ReadString(metric, "MetricSumName")
+                            })).ToDictionary(metric => metric.Value, metric => metric.Text);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMetricTargetPresets"));
+            return dsMetricSumList;
         }
         #endregion
 
