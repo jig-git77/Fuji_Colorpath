@@ -11,29 +11,43 @@ namespace FujifilmUSA.Sync.Presenter
     public class PresenterMetricTargetManagement
     {
         private readonly IViewMetricTargetManagement _viewMetricTargetManagement;
-        private readonly IViewMetricTargetPresetManagement _viewMetricTargetPresetManagement;
+        private readonly IViewAddMetricTarget _viewMetricTarget;
 
         public PresenterMetricTargetManagement(IViewMetricTargetManagement viewMetricTargetManagement)
         {
             _viewMetricTargetManagement = viewMetricTargetManagement;
         }
-        public PresenterMetricTargetManagement(IViewMetricTargetPresetManagement viewMetricTargetPresetManagement)
+        public PresenterMetricTargetManagement(IViewAddMetricTarget viewMetricTarget)
         {
-            _viewMetricTargetPresetManagement = viewMetricTargetPresetManagement;
+            _viewMetricTarget = viewMetricTarget;
         }
 
         public void GetMetricTargetPresets()
         {
             var metricTargetPresetBusiness = BusinessFactory<IMetricTargetPresetBusiness>.CreateObject();
-            metricTargetPresetBusiness.ErrorOccured += _viewMetricTargetPresetManagement.ErrorOccured;
-            _viewMetricTargetPresetManagement.MetricTargetPresetList = metricTargetPresetBusiness.GetMetricTargetPreset(0, _viewMetricTargetPresetManagement.CurrentUserId);
+            metricTargetPresetBusiness.ErrorOccured += _viewMetricTargetManagement.ErrorOccured;
+            _viewMetricTargetManagement.MetricTargetPresetList = metricTargetPresetBusiness.GetMetricTargetPreset(0, _viewMetricTargetManagement.CurrentUserId);
         }
 
-        //public void GetMetricTargetPresets()
-        //{
-        //    var metricTargetPresetBusiness = BusinessFactory<IMetricTargetBusiness>.CreateObject();
-        //    metricTargetPresetBusiness.ErrorOccured += _viewMetricTargetManagement.ErrorOccured;
-        //    _viewMetricTargetManagement.MetricTargetPresetList = metricTargetPresetBusiness.GetMetricTargetList(_viewMetricTargetManagement.CurrentUserId);
-        //}
+        public void GetMetricTargetSumList()
+        {
+            var metricTargetPresetBusiness = BusinessFactory<IMetricTargetBusiness>.CreateObject();
+            metricTargetPresetBusiness.ErrorOccured += _viewMetricTargetManagement.ErrorOccured;
+            _viewMetricTargetManagement.MetricSumTolerancesList = metricTargetPresetBusiness.GetMetricTargetSumList(_viewMetricTargetManagement.MetricTargetPresetID,_viewMetricTargetManagement.CurrentUserId);
+        }
+
+        public void GetMetricTargetPreset()
+        {
+            var metricTargetBusiness = BusinessFactory<IMetricTargetBusiness>.CreateObject();
+            metricTargetBusiness.ErrorOccured += _viewMetricTarget.ErrorOccured;
+            _viewMetricTarget.MetricTargetPreset = metricTargetBusiness.GetMetricTargetPreset(_viewMetricTarget.MetricTargetPreset.MetricTargetPresetID, _viewMetricTarget.CurrentUserId);
+        }
+
+        public void UpdateMetricTarget()
+        {
+            var metricTargetBusiness = BusinessFactory<IMetricTargetBusiness>.CreateObject();
+            metricTargetBusiness.ErrorOccured += _viewMetricTarget.ErrorOccured;
+            metricTargetBusiness.UpdateMetricTargetPreset(_viewMetricTarget.MetricTargetPreset.MetricTargetPresetID, _viewMetricTarget.MetricSumList);
+        }
     }
 }

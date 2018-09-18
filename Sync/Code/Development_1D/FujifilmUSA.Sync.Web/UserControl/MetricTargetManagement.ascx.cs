@@ -35,10 +35,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control Events
-        //protected void likAdd_Click(object sender, EventArgs e)
-        //{
-        //    Response.RedirectPermanent("AddMetricTargetPreset.aspx");
-        //}
+        protected void likAdd_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("AddMetricTargetPreset.aspx");
+        }
         protected void rgMetricTargetPreset_ItemCommand(object sender, GridCommandEventArgs e)
         {
             MetricTargetPreset = new Entity.CPSyncV.MetricTargetPreset();
@@ -60,17 +60,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     GridDataItem item = (GridDataItem)e.Item;
                     string parms = Service.Common.Encryption.CryptHelper.EncryptString(MetricTargetPreset.MetricTargetPresetID.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
+                    Response.Redirect("AddMetricTarget.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms));
+                    //Boolean IsPatchTolerance = Convert.ToBoolean(rgMetricTargetPreset.MasterTableView.DataKeyValues[e.Item.ItemIndex]["IsPatchTolerance"]);
 
-                    Boolean IsPatchTolerance = Convert.ToBoolean(rgMetricTargetPreset.MasterTableView.DataKeyValues[e.Item.ItemIndex]["IsPatchTolerance"]);
-
-                    if (IsPatchTolerance == true)
-                    {
-                        Response.Redirect("AddPatchTolerance.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms) + "&&ComingFrom=MTP");
-                    }
-                    else
-                    {
-                        Response.Redirect("AddMetricTargetPreset.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms));
-                    }
+                    //if (IsPatchTolerance == true)
+                    //{
+                    //    Response.Redirect("AddPatchTolerance.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms) + "&&ComingFrom=MTP");
+                    //}
+                    //else
+                    //{
+                        
+                    //}
                     break;
             }
         }
@@ -82,18 +82,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 rgMetricTargetPreset.DataSource = MetricTargetPresetList;
             }
         }
-        //protected void rgMetricTargetPreset_DetailTableDataBind(object sender, GridDetailTableDataBindEventArgs e)
-        //{
-        //    GridDataItem dataItem = (GridDataItem)e.DetailTableView.ParentItem;
+        protected void rgMetricTargetPreset_DetailTableDataBind(object sender, GridDetailTableDataBindEventArgs e)
+        {
+            GridDataItem dataItem = (GridDataItem)e.DetailTableView.ParentItem;
 
-        //    ProjectId = Convert.ToInt32(dataItem.GetDataKeyValue("ProjectId").ToString());
-        //    _presenterProjectList.GetSpotLibraryListByProjectId();
-        //    if (!IsErrorOccured)
-        //    {
-        //        //SessionManager.Instance.ProjectList = Projects;
-        //        e.DetailTableView.DataSource = SpotProjectLibraries;
-        //    }
-        //}
+            MetricTargetPresetID = Convert.ToInt32(dataItem.GetDataKeyValue("MetricTargetPresetID").ToString());
+            _presenterMetricTargetManagement.GetMetricTargetSumList();
+            if (!IsErrorOccured)
+            {
+                //SessionManager.Instance.ProjectList = Projects;
+                e.DetailTableView.DataSource = MetricSumTolerancesList;
+            }
+        }
         #endregion
 
         #region Methods   
@@ -114,8 +114,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Implement Interface IViewMetricTargetManagement
+        public int MetricTargetPresetID { get; set; }
         public Entity.CPSyncV.MetricTargetPreset MetricTargetPreset { get; set; }
         public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPresetList { get; set; }
+        public List<Entity.CPSyncV.MetricSum> MetricSumTolerancesList { get; set; }
         #endregion 
     }
 }

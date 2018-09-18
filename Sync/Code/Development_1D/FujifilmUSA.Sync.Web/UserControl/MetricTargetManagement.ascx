@@ -85,16 +85,16 @@
             <asp:Localize runat="server" ID="locMetricTargetMgmt" Text="Metric Target Management"
                 meta:resourcekey="locMetricTargetMgmtResource1"></asp:Localize></h1>
 
-        <%-- <asp:LinkButton ID="likAdd" runat="server" class="button" 
+        <asp:LinkButton ID="likAdd" runat="server" class="button" 
             OnClick="likAdd_Click" >
             <span>
                 <asp:Image ID="imgAdd" runat="server" 
             ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddMTPResource1" />
                 
-            <asp:Localize runat="server" Text="Add Metric Target Preset" ID="locAddMetricTargetPreset" 
-                        meta:resourcekey="locAddMetricTargetPresetResource1"></asp:Localize>
+            <asp:Localize runat="server" Text="Add Metric Target" ID="locAddMetricTarget" 
+                        meta:resourcekey="locAddMetricTargetResource1"></asp:Localize>
             </span>
-        </asp:LinkButton>--%>
+        </asp:LinkButton>
     </div>
     <div class="clear">
     </div>
@@ -106,7 +106,7 @@
                 <asp:HiddenField ID="hdSelectedCompanyId" runat="server" Value="0" />
                 <telerik:RadGrid ID="rgMetricTargetPreset" AllowFilteringByColumn="True" AllowSorting="True"
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
-                    OnNeedDataSource="rgMetricTargetPreset_NeedDataSource" OnItemCommand="rgMetricTargetPreset_ItemCommand"
+                    OnNeedDataSource="rgMetricTargetPreset_NeedDataSource" OnItemCommand="rgMetricTargetPreset_ItemCommand"  OnDetailTableDataBind="rgMetricTargetPreset_DetailTableDataBind" 
                     Width="98%" CellSpacing="0" GridLines="None"
                     meta:resourcekey="rgMetricTargetPresetResource1">
                     <GroupingSettings CaseSensitive="False" />
@@ -117,13 +117,13 @@
                             <telerik:GridTableView DataKeyNames="MetricTargetPresetID" Name="MetricTargets" Width="100%" AutoGenerateColumns="false" CommandItemDisplay="Top">
                                 <CommandItemSettings ShowAddNewRecordButton="false" />                                
                                 <Columns>
-                                    <telerik:GridBoundColumn SortExpression="MetricTargetID" HeaderText="MetricSum Name" HeaderButtonType="TextButton"
-                                        DataField="MetricTargetID">
+                                    <telerik:GridBoundColumn SortExpression="MetricSumName" HeaderText="MetricSum Name" HeaderButtonType="TextButton"
+                                        DataField="MetricSumName">
                                     </telerik:GridBoundColumn>
-                                    <%--<telerik:GridBoundColumn SortExpression="SpotTarget.SpotTargetName" HeaderText="Library" HeaderButtonType="TextButton"
-                                        DataField="SpotTarget.SpotTargetName">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn SortExpression="CreateDate" HeaderText="Last Active" HeaderButtonType="TextButton"
+                                    <telerik:GridBoundColumn SortExpression="TargetValue" HeaderText="Target Value" HeaderButtonType="TextButton"
+                                        DataField="TargetValue">
+                                    </telerik:GridBoundColumn>                                    
+                                    <%--<telerik:GridBoundColumn SortExpression="CreateDate" HeaderText="Last Active" HeaderButtonType="TextButton"
                                         DataField="CreateDate" DataFormatString="{0:MM/dd/yy hh:mm}" ShowFilterIcon="False">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridTemplateColumn DataField="SpotProjectID" UniqueName="Delete" FilterControlAltText="Filter Delete column"

@@ -13,8 +13,9 @@ namespace FujifilmUSA.Sync.Business.Interface
         //int InsertMetricTargetPreset(Entity.CPSyncV.MetricTargetPreset MetricTargetPreset);
         //int UpdateMetricTargetPreset(Entity.CPSyncV.MetricTargetPreset MetricTargetPreset);
         //bool DeleteMetricTargetPreset(int metricTargetPresetId);
-        //List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPreset(int metricTargetPresetId, int currentUserId);
-        List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetList(int currentUserId);
+        Entity.CPSyncV.MetricTargetPreset GetMetricTargetPreset(int metricTargetPresetId, int currentUserId);
+        List<Entity.CPSyncV.MetricSum> GetMetricTargetSumList(int MetricTargetPresetID, int currentUserId);
+        int UpdateMetricTargetPreset(int MetricTargetPresetID, List<Entity.CPSyncV.MetricSum> MetricTargets);
         //List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0);
         //List<Entity.CPSyncV.MetricSum> GetMetricSumList();
         //List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPatchPreset(int metricTargetPresetId, int currentUserId);

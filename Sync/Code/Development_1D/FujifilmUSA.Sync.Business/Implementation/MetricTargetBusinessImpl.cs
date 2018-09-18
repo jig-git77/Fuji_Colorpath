@@ -1,65 +1,191 @@
-﻿using FujifilmUSA.Sync.Business.Interface;
+﻿using FujifilmUSA.Sync.Business.CustomExceptions;
+using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.DataAccess;
+using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Entity.CPSyncV;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
     public class MetricTargetBusinessImpl : IMetricTargetBusiness
     {
         #region  IMetricTargetBusiness Members
-        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetList(int currentUserId)
+        //public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetList(int currentUserId)
+        //{
+        //    var metricTargets = new List<Entity.CPSyncV.MetricTargetPreset>();
+        //    Common.ImplementBusinessLogic(
+        //        () =>
+        //        {
+        //            var dsmetricTarget = DataAccessFactory.Instance.GetDsResult("[CPSyncV].[MetricTargetPresetList]", new object[] { currentUserId });
+        //            if (dsmetricTarget != null && dsmetricTarget.Tables.Count > 0 && dsmetricTarget.Tables[0].Rows.Count > 0)
+        //            {
+        //                metricTargets = dsmetricTarget.Tables[0].AsEnumerable().
+        //                    Select(x => new Entity.CPSyncV.MetricTargetPreset()
+        //                    {
+        //                        MetricTargetPresetID = DataReader.ReadShort(x, "MetricTargetPresetID"),
+        //                        //Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyID"), CompanyName = DataReader.ReadString(x, "CompanyName") },
+        //                        //Region = new Region() { RegionId = DataReader.ReadShort(x, "RegionID"), RegionName = DataReader.ReadString(x, "Region") },
+        //                        MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName")
+        //                        //MetricTargetPresetDesc = DataReader.ReadString(x, "MetricTargetPresetDesc"),
+        //                        //dEMethod = DataReader.ReadString(x, "dEMethod"),
+        //                        //ValidationType = DataReader.ReadInt(x, "ValidationType"),
+        //                        //IsSync1D = DataReader.ReadBoolean(x, "IsSync1D"),
+        //                        //Validation_1D = DataReader.ReadBoolean(x, "Validation_1D"),
+        //                        //Validation_4D = DataReader.ReadBoolean(x, "Validation_4D"),
+        //                        //IsPatchTolerance = DataReader.ReadBoolean(x, "IsPatchTolerance"),
+        //                        //IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+        //                    }).ToList();
+
+        //                if (dsmetricTarget.Tables[1].Rows.Count > 0)
+        //                {
+        //                    foreach (var item in metricTargets)
+        //                    {
+        //                        var metricSums = new List<MetricSum>();
+        //                        metricSums = dsmetricTarget.Tables[1].AsEnumerable().Where(r => r.Field<short>("MetricTargetPresetID") == item.MetricTargetPresetID).
+        //                           Select(x => new Entity.CPSyncV.MetricSum()
+        //                           {
+        //                               MetricTargetID = DataReader.ReadShort(x, "MetricTargetID"),
+        //                               MetricTargetPresetID = DataReader.ReadShort(x, "MetricTargetPresetID"),
+        //                               MetricSumId = DataReader.ReadShort(x, "MetricSumID"),
+        //                               MetricSumName = DataReader.ReadString(x, "MetricSumName"),
+        //                               TargetValue = DataReader.ReadDecimal(x, "TargetValue")
+        //                           }).ToList();
+        //                        item.MetricSumTolerances = metricSums;
+        //                    }
+        //                }
+        //            }
+        //        },
+        //        new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMetricTargetPresets"));
+        //    return metricTargets;
+        //}
+
+
+        public List<Entity.CPSyncV.MetricSum> GetMetricTargetSumList(int MetricTargetPresetID, int currentUserId)
         {
-            var metricTargets = new List<Entity.CPSyncV.MetricTargetPreset>();
+            var metricTargets = new List<Entity.CPSyncV.MetricSum>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsmetricTarget = DataAccessFactory.Instance.GetDsResult("[CPSyncV].[MetricTargetPresetList]", new object[] { currentUserId });
+                    var dsmetricTarget = DataAccessFactory.Instance.GetDsResult("[CPSyncV].[MetricTargetPresetList]", new object[] { MetricTargetPresetID,currentUserId });
                     if (dsmetricTarget != null && dsmetricTarget.Tables.Count > 0 && dsmetricTarget.Tables[0].Rows.Count > 0)
                     {
                         metricTargets = dsmetricTarget.Tables[0].AsEnumerable().
-                            Select(x => new Entity.CPSyncV.MetricTargetPreset()
+                            Select(x => new Entity.CPSyncV.MetricSum()
                             {
                                 MetricTargetPresetID = DataReader.ReadShort(x, "MetricTargetPresetID"),
-                                //Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyID"), CompanyName = DataReader.ReadString(x, "CompanyName") },
-                                //Region = new Region() { RegionId = DataReader.ReadShort(x, "RegionID"), RegionName = DataReader.ReadString(x, "Region") },
-                                MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName")
-                                //MetricTargetPresetDesc = DataReader.ReadString(x, "MetricTargetPresetDesc"),
-                                //dEMethod = DataReader.ReadString(x, "dEMethod"),
-                                //ValidationType = DataReader.ReadInt(x, "ValidationType"),
-                                //IsSync1D = DataReader.ReadBoolean(x, "IsSync1D"),
-                                //Validation_1D = DataReader.ReadBoolean(x, "Validation_1D"),
-                                //Validation_4D = DataReader.ReadBoolean(x, "Validation_4D"),
-                                //IsPatchTolerance = DataReader.ReadBoolean(x, "IsPatchTolerance"),
-                                //IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                                MetricTargetID= DataReader.ReadShort(x, "MetricTargetID"),
+                                MetricSumId = DataReader.ReadShort(x, "MetricSumID"),
+                                MetricSumName = DataReader.ReadString(x, "MetricSumName"),
+                                TargetValue = DataReader.ReadDecimal(x, "TargetValue")
                             }).ToList();
 
-                        if (dsmetricTarget.Tables[1].Rows.Count > 0)
-                        {
-                            foreach (var item in metricTargets)
-                            {
-                                var metricSums = new List<MetricSum>();
-                                metricSums = dsmetricTarget.Tables[1].AsEnumerable().Where(r => r.Field<short>("MetricTargetPresetID") == item.MetricTargetPresetID).
-                                   Select(x => new Entity.CPSyncV.MetricSum()
-                                   {
-                                       MetricTargetID = DataReader.ReadShort(x, "MetricTargetID"),
-                                       MetricTargetPresetID = DataReader.ReadShort(x, "MetricTargetPresetID"),
-                                       MetricSumId = DataReader.ReadShort(x, "MetricSumID"),
-                                       MetricSumName = DataReader.ReadString(x, "MetricSumName"),
-                                       TargetValue = DataReader.ReadDecimal(x, "TargetValue")
-                                   }).ToList();
-                                item.MetricSumTolerances = metricSums;
-                            }
-                        }
+                        //if (dsmetricTarget.Tables[1].Rows.Count > 0)
+                        //{
+                        //    foreach (var item in metricTargets)
+                        //    {
+                        //        var metricSums = new List<MetricSum>();
+                        //        metricSums = dsmetricTarget.Tables[1].AsEnumerable().Where(r => r.Field<short>("MetricTargetPresetID") == item.MetricTargetPresetID).
+                        //           Select(x => new Entity.CPSyncV.MetricSum()
+                        //           {
+                        //               MetricTargetID = DataReader.ReadShort(x, "MetricTargetID"),
+                        //               MetricTargetPresetID = DataReader.ReadShort(x, "MetricTargetPresetID"),
+                        //               MetricSumId = DataReader.ReadShort(x, "MetricSumID"),
+                        //               MetricSumName = DataReader.ReadString(x, "MetricSumName"),
+                        //               TargetValue = DataReader.ReadDecimal(x, "TargetValue")
+                        //           }).ToList();
+                        //        item.MetricSumTolerances = metricSums;
+                        //    }
+                        //}
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMetricTargetPresets"));
             return metricTargets;
+        }
+
+        public Entity.CPSyncV.MetricTargetPreset GetMetricTargetPreset(int metricTargetPresetId, int currentUserId)
+        {
+            var metricTargetPreset = new Entity.CPSyncV.MetricTargetPreset();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsmetricTargetPresets = DataAccessFactory.Instance.GetDsResult("[CPSyncV].[GetMetricTargetPresetForMetricSum]", new object[] { metricTargetPresetId, currentUserId });
+                    if (dsmetricTargetPresets != null && dsmetricTargetPresets.Tables.Count > 0 && dsmetricTargetPresets.Tables[0].Rows.Count > 0)
+                    {
+                        metricTargetPreset = dsmetricTargetPresets.Tables[0].AsEnumerable().
+                            Select(x => new Entity.CPSyncV.MetricTargetPreset()
+                            {
+                                MetricTargetPresetID = DataReader.ReadShort(x, "MetricTargetPresetID"),
+                                Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyID"), CompanyName = DataReader.ReadString(x, "CompanyName") },
+                                Region = new Region() { RegionId = DataReader.ReadShort(x, "RegionID"), RegionName = DataReader.ReadString(x, "Region") },
+                                MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName"),
+                                MetricTargetPresetDesc = DataReader.ReadString(x, "MetricTargetPresetDesc"),
+                                dEMethod = DataReader.ReadString(x, "dEMethod"),
+                                ValidationType = DataReader.ReadInt(x, "ValidationType"),
+                                //IsSync1D = DataReader.ReadBoolean(x, "IsSync1D"),
+                                //Validation_1D = DataReader.ReadBoolean(x, "Validation_1D"),
+                                //Validation_4D = DataReader.ReadBoolean(x, "Validation_4D"),
+                                //IsPatchTolerance = DataReader.ReadBoolean(x, "IsPatchTolerance"),
+                                IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                            }).First();
+
+                        metricTargetPreset.MetricSumTolerances = dsmetricTargetPresets.Tables[1].AsEnumerable().
+                              Select(x => new Entity.CPSyncV.MetricSum()
+                              {
+                                  MetricTargetID= DataReader.ReadInt(x, "MetricTargetID"),
+                                  MetricSumId = DataReader.ReadInt(x, "MetricSumID"),
+                                  MetricSumName = DataReader.ReadString(x, "MetricSumName"),
+                                  TargetValue = DataReader.ReadDecimal(x, "TargetValue")
+                              }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMetricTargetPresets"));
+            return metricTargetPreset;
+        }
+        
+        public int UpdateMetricTargetPreset(int MetricTargetPresetID,List<Entity.CPSyncV.MetricSum> MetricTargets)
+        {            
+            var metricTargetXML = new XElement("MetricTargetList",
+                                                         MetricTargets.
+                                                             Select(x =>
+                                                                    new XElement("MetricTarget",
+                                                                                 new XAttribute("MetricTargetID", x.MetricTargetID),
+                                                                                 new XAttribute("MetricSumID", x.MetricSumId),
+                                                                                 new XAttribute("TargetValue", x.TargetValue)
+                                                                        )).ToList());
+            var outParam = new Parameters() { ParameterName = "@IsSaved", Type = DbType.Int32 };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    //returnValue = DataAccessFactory.
+                    //    Instance.
+                    //    ExecuteProcedure(
+                    //        "[CPSyncV].[SaveMetricTargetSum]",
+                    //        new object[]
+                    //                {
+                    //                    MetricTargetPresetID,
+                    //                    metricTargetXML.ToString()
+                    //                });
+                    DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure("CPSyncV.SaveMetricTargetSum",
+                                             new List<Parameters>()
+                                                 {
+                                                 new Parameters() {ParameterName = "@MetricTargetPresetID", Type = DbType.Int32, Value = MetricTargetPresetID},
+                                                 new Parameters() {ParameterName = "@MetricTargetSumXML", Value = metricTargetXML.ToString()},
+                                                 },
+                                             new List<Parameters>()
+                                                 {
+                                                 outParam
+                                                 });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateMetricTargetPreset"));
+            return Convert.ToInt32(outParam.Value);
         }
         #endregion
 

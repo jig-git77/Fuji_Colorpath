@@ -106,6 +106,7 @@
     <Content Include="AddDeviceProfilerSettings.aspx" />
     <Content Include="AddLookupTVILABDensity.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
+    <Content Include="AddMetricTarget.aspx" />
     <Content Include="AddMetricTargetPreset.aspx" />
     <Content Include="AddPatchTolerance.aspx" />
     <Content Include="AddPrintStandardType.aspx" />
@@ -2452,6 +2453,7 @@
     <Content Include="UserControl\ActivityValidationRules.ascx" />
     <Content Include="UserControl\AddDeviceProfilerSettings.ascx" />
     <Content Include="UserControl\AddLookupTVILABDensity.ascx" />
+    <Content Include="UserControl\AddMetricTarget.ascx" />
     <Content Include="UserControl\AddMetricTargetPreset.ascx" />
     <Content Include="UserControl\AddPatchTolerance.ascx" />
     <Content Include="UserControl\AddPrintStandardType.ascx" />
@@ -2763,6 +2765,13 @@
     </Compile>
     <Compile Include="AddMeasurementDevice.aspx.designer.cs">
       <DependentUpon>AddMeasurementDevice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddMetricTarget.aspx.cs">
+      <DependentUpon>AddMetricTarget.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddMetricTarget.aspx.designer.cs">
+      <DependentUpon>AddMetricTarget.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddMetricTargetPreset.aspx.cs">
       <DependentUpon>AddMetricTargetPreset.aspx</DependentUpon>
@@ -3316,6 +3325,13 @@
     </Compile>
     <Compile Include="UserControl\AddLookupTVILABDensity.ascx.designer.cs">
       <DependentUpon>AddLookupTVILABDensity.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddMetricTarget.ascx.cs">
+      <DependentUpon>AddMetricTarget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddMetricTarget.ascx.designer.cs">
+      <DependentUpon>AddMetricTarget.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddMetricTargetPreset.ascx.cs">
       <DependentUpon>AddMetricTargetPreset.ascx</DependentUpon>
@@ -6387,7 +6403,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
