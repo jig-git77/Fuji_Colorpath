@@ -114,7 +114,8 @@
                     <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
                     <MasterTableView DataKeyNames="MetricTargetPresetID">
                         <DetailTables>
-                            <telerik:GridTableView DataKeyNames="MetricTargetPresetID" Name="MetricTargets" Width="100%" AutoGenerateColumns="false" CommandItemDisplay="Top">
+                            <telerik:GridTableView  DataKeyNames="MetricTargetPresetID" Name="MetricTargets" Width="100%" 
+                                AutoGenerateColumns="false" CommandItemDisplay="Top" AllowPaging="false" AllowFilteringByColumn="false" CommandItemSettings-ShowRefreshButton="false">
                                 <CommandItemSettings ShowAddNewRecordButton="false" />                                
                                 <Columns>
                                     <telerik:GridBoundColumn SortExpression="MetricSumName" HeaderText="MetricSum Name" HeaderButtonType="TextButton"
@@ -170,7 +171,7 @@
                                 <ItemStyle CssClass="breakWord90" Width="90px" Wrap="True" />
                             </telerik:GridTemplateColumn>
 
-                            <%--                          
+                                                
                             <telerik:GridTemplateColumn DataField="Company.CompanyName"
                                 HeaderText="Company" UniqueName="CompanyName" 
                                 SortExpression="Company.CompanyName" FilterControlWidth="70px" 
@@ -270,7 +271,7 @@
                                 </ItemTemplate>
                                 <HeaderStyle Width="50px" />
                                 <ItemStyle HorizontalAlign="Center" />
-                            </telerik:GridTemplateColumn>--%>
+                            </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="MetricTargetPresetID"
                                 UniqueName="Edit" FilterControlAltText="Filter Edit column"
                                 meta:resourcekey="GridTemplateColumnResource11">
@@ -295,13 +296,7 @@
                                                     <asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit MetricTargetPreset" AlternateText="Edit"
                                                         ImageUrl="../Images/edit_icon.png" CommandArgument='<%# Eval("MetricTargetPresetID") %>'
                                                         CommandName="Edit" meta:resourcekey="imgbtnEditResource1" />
-                                                </div>
-                                                <div style="float: left;">
-                                                    <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete MetricTargetPreset" AlternateText="Delete"
-                                                        ImageUrl="../Images/delete_icon.png" OnClientClick="javascript:return ConfirmDeleteMetricTargetPreset();"
-                                                        CommandArgument='<%# Eval("MetricTargetPresetID") %>' CommandName="Delete" 
-                                                        meta:resourcekey="imgbtnDeleteResource1" />
-                                                </div>
+                                                </div>                                                
                                                 <div class="clear">
                                                 </div>
                                             </div>
@@ -310,7 +305,7 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                         </Columns>
-                    </MasterTableView>
+                    </MasterTableView>                    
                 </telerik:RadGrid>
             </ContentTemplate>
         </asp:UpdatePanel>
