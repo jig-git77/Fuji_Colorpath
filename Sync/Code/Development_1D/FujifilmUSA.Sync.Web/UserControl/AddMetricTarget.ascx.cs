@@ -115,6 +115,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //Set Previous Data on Postbacks  
             SetPreviousData();
         }
+
+
+        protected void lbtnMetricSumSave_Click(object sender, EventArgs e)
+        {
+            MetricSumName = txtMetricSum.Text;
+            _presenterMetricTargetManagement.SaveMetricSum();
+            if (!IsErrorOccured)
+            {
+                Response.Redirect("~/MetricTargetManagement.aspx");
+            }
+        }
         #endregion
 
         #region Methods
@@ -365,17 +376,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Implement IViewAddMetricTargetPreset
-        public Entity.CPSyncV.MetricTargetPreset MetricTargetPreset { get; set; }
-        //public Dictionary<int, string> Companies { get; set; }
-        //public Dictionary<int, string> RegionList { get; set; }
-        //public int RegionId { get; set; }
-        //public List<ReferenceChartType> ReferenceChartType { get; set; }
-        //public int InstrumentId { get; set; }
-        //public Dictionary<int, string> InstrumentTypeList { get; set; }
+        public Entity.CPSyncV.MetricTargetPreset MetricTargetPreset { get; set; }       
         public List<Entity.CPSyncV.MetricSum> MetricSumList { get; set; }
         public Dictionary<int, string> MetricSums { get; set; }
-        //public int ReferenceChartTypeId { get; set; }
-        //public Dictionary<int, string> ChartPatchList { get; set; }
+        public string MetricSumName { get; set; }
         #endregion
     }
 }

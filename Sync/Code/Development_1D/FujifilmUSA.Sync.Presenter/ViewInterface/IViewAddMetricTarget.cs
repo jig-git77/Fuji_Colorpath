@@ -16,6 +16,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         //int InstrumentId { get; set; }
         List<Entity.CPSyncV.MetricSum> MetricSumList { get; set; }
         Dictionary<int, string> MetricSums { get; set; }
+        string MetricSumName { get; set; }
         //int ReferenceChartTypeId { get; set; }
         //Dictionary<int, string> ChartPatchList { get; set; }
     }

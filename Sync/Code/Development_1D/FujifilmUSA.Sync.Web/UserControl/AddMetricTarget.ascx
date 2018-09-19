@@ -36,9 +36,7 @@
                                         <b>&nbsp;:&nbsp;</b>
                                     </td>
                                     <td align="left">
-                                        <div style="float: left;">
-                                            <%--<asp:TextBox ID="txtPresetName" runat="server" MaxLength="50" Width="400px" 
-                                                Height="19px" meta:resourcekey="txtPresetNameResource1"></asp:TextBox>--%>
+                                        <div style="float: left;">                                            
                                             <asp:Label  runat="server" ID="lblPresetName"></asp:Label>
                                             <asp:HiddenField runat="server" ID="hdfTargetPresetID" />
                                         </div>
@@ -46,25 +44,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <%--<tr>
-                                    <td align="right">
-                                        <span style="font-weight: bold;"><asp:Localize Text="Description" ID="locDescription" 
-                                            runat="server" meta:resourcekey="locDescriptionResource1"></asp:Localize>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <b>&nbsp;:&nbsp;</b>
-                                    </td>
-                                    <td align="left">
-                                        <div style="float: left;">
-                                            <asp:TextBox ID="txtDescription" runat="server" MaxLength="50" Width="400px" 
-                                                Height="52px" meta:resourcekey="txtDescriptionResource1" TextMode="MultiLine"></asp:TextBox>
-                                        </div>
-                                       
-                                        <div class="clear">
-                                        </div>
-                                    </td>
-                                </tr>--%>
+                                
                                 <tr>
                                     <td colspan="3">
                                         <%--<asp:GridView runat="server" ID="grdMetricSum" AutoGenerateColumns="false">
@@ -93,7 +73,7 @@
                                                     <ItemTemplate>
                                                         <asp:HiddenField runat="server" ID="hdfMetricSumId" Value='<%# Bind("MetricSumID") %>' />
                                                         <asp:HiddenField runat="server" ID="hdfTargetMetricId" Value='<%# Bind("MetricTargetId") %>' />
-                                                        <asp:TextBox runat="server" ID="txtTargetValue" Width="30"  Text='<%# Bind("TargetValue") %>'  />
+                                                        <asp:TextBox runat="server" ID="txtTargetValue" Width="50"  Text='<%# Bind("TargetValue") %>'  />
                                                     </ItemTemplate>
                                                      <FooterTemplate>  
                                                         <asp:Button ID="ButtonAdd" runat="server"   
@@ -139,6 +119,69 @@
 
                             </fieldset>
                     </center>
+                    <br />
+                    <br />
+                    <center>
+                    <fieldset  style="width: 60%;">
+                        <legend>
+                                <asp:Label ID="Label1" runat="server" Text="Add Metric Sum"  meta:resourcekey="lblHeaderResource1">
+                                  </asp:Label>
+                            </legend>
+                            <ucAdminStatusbar:AdminStatusbar ID="AdminStatusbar1" runat="server" 
+                                Visible="False" />
+                            <table>
+                                                                 
+                                <tr>
+                                    <td align="right">
+                                        <span style="font-weight: bold;"><asp:Localize Text="Metric Sum" 
+                                            Id="Localize1" runat="server" 
+                                            meta:resourcekey="locPresetNameResource1"></asp:Localize><span style="color: Red;">*</span> </span>
+                                    </td>
+                                    <td>
+                                        <b>&nbsp;:&nbsp;</b>
+                                    </td>
+                                    <td align="left">
+                                        <div style="float: left;">
+                                            <asp:TextBox ID="txtMetricSum" runat="server" MaxLength="50" Width="175px" Height="19px" ></asp:TextBox>
+                                        </div>
+                                        <div style="float: left">
+                                            <asp:RequiredFieldValidator ID="rfvPresetName" runat="server" Display="Dynamic" ControlToValidate="txtMetricSum"
+                                                ForeColor="Red" ValidationGroup="vgAddMetricSum">
+                                                <ucValidationContainer:ValidationContainer ID="rfvMetricSumContainer" runat="server"
+                                                    ValidationMsg="Please provide metric sum name." Size="200"/>
+                                            </asp:RequiredFieldValidator>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>
+                                                                   
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td align="left">
+                                        <div class="text">
+                                            <div style="padding-left: 3px;">
+                                                <asp:LinkButton ID="LinkButton1" runat="server" CssClass="gray_bt" ValidationGroup="vgAddMetricSum"
+                                                    OnClick="lbtnMetricSumSave_Click">
+                                                    <span> <asp:Localize Text="Save" ID="Localize2" runat="server" 
+                                                    meta:resourcekey="locSaveResource1"></asp:Localize> </span>
+                                                </asp:LinkButton>
+                                                <asp:LinkButton ID="LinkButton2" runat="server" CssClass="gray_bt"  PostBackUrl="~/MetricTargetManagement.aspx">
+                                                    <span> <asp:Localize Text="Cancel" ID="Localize3" runat="server" 
+                                                    meta:resourcekey="locCancelResource1"></asp:Localize> </span>
+                                                </asp:LinkButton>
+                                            </div>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                    </fieldset>
+                        </center>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </center>

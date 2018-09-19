@@ -159,6 +159,28 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMetricTargetPresets"));
             return dsMetricSumList;
         }
+
+        public int SaveMetricSum(string MetricSumName)
+        {
+            var outParam = new Parameters() { ParameterName = "@IsSaved", Type = DbType.Int32 };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure("CPSyncV.SaveMetricSum",
+                                             new List<Parameters>()
+                                                 {
+                                                 new Parameters() {ParameterName = "@MetricSumName", Type = DbType.String, Value = MetricSumName},                                                 
+                                                 },
+                                             new List<Parameters>()
+                                                 {
+                                                 outParam
+                                                 });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateMetricTargetPreset"));
+            return Convert.ToInt32(outParam.Value);
+        }
         #endregion
 
         #region ITaskBase Members

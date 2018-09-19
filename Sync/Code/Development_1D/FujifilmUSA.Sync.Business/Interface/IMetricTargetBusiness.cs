@@ -10,6 +10,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         Dictionary<int, string> GetAllMetricSumList();
         Entity.CPSyncV.MetricTargetPreset GetMetricTargetPreset(int metricTargetPresetId, int currentUserId);
         List<Entity.CPSyncV.MetricSum> GetMetricTargetSumList(int MetricTargetPresetID, int currentUserId);
-        int UpdateMetricTargetPreset(int MetricTargetPresetID, List<Entity.CPSyncV.MetricSum> MetricTargets);        
+        int UpdateMetricTargetPreset(int MetricTargetPresetID, List<Entity.CPSyncV.MetricSum> MetricTargets);
+        int SaveMetricSum(string MetricSumName);
     }
 }
