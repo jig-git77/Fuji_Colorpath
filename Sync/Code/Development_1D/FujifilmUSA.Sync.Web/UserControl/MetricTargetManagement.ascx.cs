@@ -29,7 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //rgMetricTargetPreset.PageSize = Common.Utilities.PageSize;
             if (!Page.IsPostBack)
             {
-                BindMetricTargets();
+                BindMetricTargets();                
             }
         }
         #endregion

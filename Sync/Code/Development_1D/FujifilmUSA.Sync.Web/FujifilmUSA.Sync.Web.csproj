@@ -15,7 +15,7 @@
     <RootNamespace>FujifilmUSA.Sync.Web</RootNamespace>
     <AssemblyName>FujifilmUSA.Sync.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -111,6 +111,7 @@
     <Content Include="AddPatchTolerance.aspx" />
     <Content Include="AddPrintStandardType.aspx" />
     <Content Include="AddReferenceChart.aspx" />
+    <Content Include="AddReferenceChartPreset.aspx" />
     <Content Include="AddSourceProfile.aspx" />
     <Content Include="AddSpotTarget.aspx" />
     <Content Include="AnalyzeMeasurement.aspx" />
@@ -2459,6 +2460,7 @@
     <Content Include="UserControl\AddPrintStandardType.ascx" />
     <Content Include="UserControl\AddProject\ValidationSetup.ascx" />
     <Content Include="UserControl\AddReferenceChart.ascx" />
+    <Content Include="UserControl\AddReferenceChartPreset.ascx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
     <Content Include="UserControl\AddSpotTarget.ascx" />
     <Content Include="UserControl\AddUserManagement.ascx" />
@@ -2800,6 +2802,13 @@
     </Compile>
     <Compile Include="AddReferenceChart.aspx.designer.cs">
       <DependentUpon>AddReferenceChart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddReferenceChartPreset.aspx.cs">
+      <DependentUpon>AddReferenceChartPreset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddReferenceChartPreset.aspx.designer.cs">
+      <DependentUpon>AddReferenceChartPreset.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddSourceProfile.aspx.cs">
       <DependentUpon>AddSourceProfile.aspx</DependentUpon>
@@ -3366,6 +3375,13 @@
     </Compile>
     <Compile Include="UserControl\AddReferenceChart.ascx.designer.cs">
       <DependentUpon>AddReferenceChart.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddReferenceChartPreset.ascx.cs">
+      <DependentUpon>AddReferenceChartPreset.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddReferenceChartPreset.ascx.designer.cs">
+      <DependentUpon>AddReferenceChartPreset.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddSourceProfile.ascx.cs">
       <DependentUpon>AddSourceProfile.ascx</DependentUpon>

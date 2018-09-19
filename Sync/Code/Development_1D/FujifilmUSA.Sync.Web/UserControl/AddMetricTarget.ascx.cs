@@ -375,11 +375,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        #region Implement IViewAddMetricTargetPreset
+        #region Implement IViewAddMetricTarget
         public Entity.CPSyncV.MetricTargetPreset MetricTargetPreset { get; set; }       
         public List<Entity.CPSyncV.MetricSum> MetricSumList { get; set; }
         public Dictionary<int, string> MetricSums { get; set; }
         public string MetricSumName { get; set; }
+        public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPresetList { get; set; }
+        public DataTable dtPresetRefChart { get; set; }
         #endregion
     }
 }

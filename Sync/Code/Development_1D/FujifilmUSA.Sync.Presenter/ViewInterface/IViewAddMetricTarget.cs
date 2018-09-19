@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -17,6 +18,8 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Entity.CPSyncV.MetricSum> MetricSumList { get; set; }
         Dictionary<int, string> MetricSums { get; set; }
         string MetricSumName { get; set; }
+        List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPresetList { get; set; }
+        DataTable dtPresetRefChart { get; set; } 
         //int ReferenceChartTypeId { get; set; }
         //Dictionary<int, string> ChartPatchList { get; set; }
     }

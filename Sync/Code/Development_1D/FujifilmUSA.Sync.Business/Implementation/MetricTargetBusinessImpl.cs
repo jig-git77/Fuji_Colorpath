@@ -181,6 +181,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateMetricTargetPreset"));
             return Convert.ToInt32(outParam.Value);
         }
+
+        public DataTable GetMetricTargetPresetReferenceCharts(int metricTargetPresetId, int currentUserId)
+        {
+            DataTable dtRefChart = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsmetricTargetPresets = DataAccessFactory.Instance.GetDsResult("[CPSyncV].[GetMetricTargetPresetReferenceCharts]", new object[] { metricTargetPresetId, currentUserId });
+                    if (dsmetricTargetPresets != null && dsmetricTargetPresets.Tables.Count > 0 && dsmetricTargetPresets.Tables[0].Rows.Count > 0)
+                    {
+                        dtRefChart = dsmetricTargetPresets.Tables[0];
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMetricTargetPresets"));
+            return dtRefChart;
+        }
         #endregion
 
         #region ITaskBase Members

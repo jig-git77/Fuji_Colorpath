@@ -29,11 +29,18 @@ namespace FujifilmUSA.Sync.Presenter
             _viewMetricTargetManagement.MetricTargetPresetList = metricTargetPresetBusiness.GetMetricTargetPreset(0, _viewMetricTargetManagement.CurrentUserId);
         }
 
+        public void GetMetricTargetPresetList()
+        {
+            var metricTargetPresetBusiness = BusinessFactory<IMetricTargetPresetBusiness>.CreateObject();
+            metricTargetPresetBusiness.ErrorOccured += _viewMetricTarget.ErrorOccured;
+            _viewMetricTarget.MetricTargetPresetList = metricTargetPresetBusiness.GetMetricTargetPreset(0, _viewMetricTarget.CurrentUserId);
+        }
+
         public void GetMetricTargetSumList()
         {
             var metricTargetPresetBusiness = BusinessFactory<IMetricTargetBusiness>.CreateObject();
             metricTargetPresetBusiness.ErrorOccured += _viewMetricTargetManagement.ErrorOccured;
-            _viewMetricTargetManagement.MetricSumTolerancesList = metricTargetPresetBusiness.GetMetricTargetSumList(_viewMetricTargetManagement.MetricTargetPresetID,_viewMetricTargetManagement.CurrentUserId);
+            _viewMetricTargetManagement.MetricSumTolerancesList = metricTargetPresetBusiness.GetMetricTargetSumList(_viewMetricTargetManagement.MetricTargetPresetID, _viewMetricTargetManagement.CurrentUserId);
         }
 
         public void GetMetricTargetPreset()
@@ -62,6 +69,13 @@ namespace FujifilmUSA.Sync.Presenter
             var metricTargetBusiness = BusinessFactory<IMetricTargetBusiness>.CreateObject();
             metricTargetBusiness.ErrorOccured += _viewMetricTarget.ErrorOccured;
             metricTargetBusiness.SaveMetricSum(_viewMetricTarget.MetricSumName);
+        }
+
+        public void GetMetricTargetPresetReferenceCharts()
+        {
+            var metricTargetBusiness = BusinessFactory<IMetricTargetBusiness>.CreateObject();
+            metricTargetBusiness.ErrorOccured += _viewMetricTarget.ErrorOccured;
+            _viewMetricTarget.dtPresetRefChart = metricTargetBusiness.GetMetricTargetPresetReferenceCharts(_viewMetricTarget.MetricTargetPreset.MetricTargetPresetID, _viewMetricTarget.CurrentUserId);
         }
     }
 }
