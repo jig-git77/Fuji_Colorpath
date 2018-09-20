@@ -77,5 +77,12 @@ namespace FujifilmUSA.Sync.Presenter
             metricTargetBusiness.ErrorOccured += _viewMetricTarget.ErrorOccured;
             _viewMetricTarget.dtPresetRefChart = metricTargetBusiness.GetMetricTargetPresetReferenceCharts(_viewMetricTarget.MetricTargetPreset.MetricTargetPresetID, _viewMetricTarget.CurrentUserId);
         }
+
+        public void UpdateReferenceChartPreset()
+        {
+            var metricTargetBusiness = BusinessFactory<IMetricTargetBusiness>.CreateObject();
+            metricTargetBusiness.ErrorOccured += _viewMetricTarget.ErrorOccured;
+            metricTargetBusiness.UpdateReferenceChartPreset(_viewMetricTarget.MetricTargetPreset.MetricTargetPresetID, _viewMetricTarget.ReferenceChartPresetList);
+        }
     }
 }

@@ -796,6 +796,7 @@
     <Content Include="Images\4DCertification.png" />
     <Content Include="Images\4DCertification_Certified.png" />
     <Content Include="Images\abChartBackGround.gif" />
+    <Content Include="Images\add.png" />
     <Content Include="Images\AlignCurve.png" />
     <Content Include="Images\AlignCurve_Certified.png" />
     <Content Include="Images\AlignCurve_G7.png" />
@@ -854,6 +855,7 @@
     <Content Include="Images\open_folder_yellow.png" />
     <Content Include="Images\purpledot.png" />
     <Content Include="Images\Red.png" />
+    <Content Include="Images\remove.png" />
     <Content Include="Images\Report-Title.png" />
     <Content Include="Images\rotateguntarget.png" />
     <Content Include="Images\SpotAB_Bg.gif" />
@@ -6419,7 +6421,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

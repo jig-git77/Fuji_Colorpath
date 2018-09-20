@@ -68,6 +68,7 @@
     <Compile Include="CPSync1D\PrintStandardTVI.cs" />
     <Compile Include="COErrorMessage.cs" />
     <Compile Include="CPSyncV\PatchTolerance.cs" />
+    <Compile Include="CPSyncV\ReferenceChartPreset.cs" />
     <Compile Include="CPSyncV\TempValidationInfo.cs" />
     <Compile Include="Density.cs" />
     <Compile Include="Enums.cs" />

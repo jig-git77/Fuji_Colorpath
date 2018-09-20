@@ -91,7 +91,7 @@
                 <asp:Image ID="imgAdd" runat="server" 
             ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddMTPResource1" />
                 
-            <asp:Localize runat="server" Text="Add Metric Target" ID="locAddMetricTarget" 
+            <asp:Localize runat="server" Text="Assign Metric Target Preset Reference Chart" ID="locAddMetricTarget" 
                         meta:resourcekey="locAddMetricTargetResource1"></asp:Localize>
             </span>
         </asp:LinkButton>

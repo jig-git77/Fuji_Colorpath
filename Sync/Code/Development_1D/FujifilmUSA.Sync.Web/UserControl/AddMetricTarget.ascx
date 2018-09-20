@@ -8,7 +8,7 @@
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
         <h1>
-            <asp:Localize ID="locMetricTargetPreset" runat="server" Text="Metric Target Management"
+            <asp:Localize ID="locMetricTargetPreset" runat="server" Text="Add Metric Target"
                 meta:resourcekey="locMetricTargetPresetResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
@@ -46,23 +46,12 @@
                                 </tr>
                                 
                                 <tr>
-                                    <td colspan="3">
-                                        <%--<asp:GridView runat="server" ID="grdMetricSum" AutoGenerateColumns="false">
-                                            <Columns>
-                                                <asp:BoundField DataField="MetricSumName" HeaderText="MetricSum Name" />
-                                                <asp:TemplateField HeaderText="Target Value">
-                                                    <ItemTemplate>
-                                                        <asp:HiddenField runat="server" ID="hdfMetricSumId" Value='<%# Bind("MetricSumID") %>' />
-                                                        <asp:HiddenField runat="server" ID="hdfTargetMetricId" Value='<%# Bind("MetricTargetId") %>' />
-                                                        <asp:TextBox runat="server" ID="txtTargetValue" Width="30"  Text='<%# Bind("TargetValue") %>'  />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                            </Columns>
-                                        </asp:GridView>--%>
+                                    <td colspan="3">                                       
                                         <asp:GridView runat="server" ID="grdMetricSum" AutoGenerateColumns="false" ShowFooter="true" OnRowCreated="grdMetricSum_RowCreated">
+                                            <FooterStyle VerticalAlign="Middle" HorizontalAlign="Center" />
                                             <Columns>
                                                 <%--<asp:BoundField DataField="MetricSumName" HeaderText="MetricSum Name" />--%>
-                                                <asp:TemplateField HeaderText="Target Value">
+                                                <asp:TemplateField HeaderText="Metric Sum">
                                                     <ItemTemplate>                                                        
                                                         <asp:DropDownList ID="ddlMetricSum" runat="server" AppendDataBoundItems="true">  
                                                             <asp:ListItem Value="-1">Select</asp:ListItem>  
@@ -76,15 +65,17 @@
                                                         <asp:TextBox runat="server" ID="txtTargetValue" Width="50"  Text='<%# Bind("TargetValue") %>'  />
                                                     </ItemTemplate>
                                                      <FooterTemplate>  
-                                                        <asp:Button ID="ButtonAdd" runat="server"   
+                                                       <%-- <asp:Button ID="ButtonAdd" runat="server"   
                                                                              Text="Add New Row"   
-                                                                             onclick="ButtonAdd_Click" />  
+                                                                             onclick="ButtonAdd_Click" /> --%> 
+                                                         <asp:ImageButton runat="server" ID="ButtonAdd" ImageUrl="~/Images/add.png" ToolTip="Add New Row" onclick="ButtonAdd_Click" Height="20" Width="20" />
                                                     </FooterTemplate>  
                                                 </asp:TemplateField>
-                                                <asp:TemplateField>  
+                                                <asp:TemplateField HeaderText="Delete" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"  >  
                                                     <ItemTemplate>  
-                                                        <asp:LinkButton ID="lnkRemove" runat="server"   
-                                                                                onclick="lnkRemove_Click">Remove</asp:LinkButton>  
+                                                    <%--    <asp:LinkButton ID="lnkRemove" runat="server"   
+                                                                                onclick="lnkRemove_Click">Remove</asp:LinkButton>  --%>
+                                                        <asp:ImageButton runat="server" ID="lnkRemove" ImageUrl="~/Images/remove.png" ToolTip="Remove" onclick="lnkRemove_Click" Height="15" Width="15" />
                                                     </ItemTemplate>  
                                                 </asp:TemplateField>  
                                             </Columns>

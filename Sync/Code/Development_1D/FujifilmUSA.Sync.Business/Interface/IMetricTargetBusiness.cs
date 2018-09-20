@@ -14,5 +14,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         int UpdateMetricTargetPreset(int MetricTargetPresetID, List<Entity.CPSyncV.MetricSum> MetricTargets);
         int SaveMetricSum(string MetricSumName);
         DataTable GetMetricTargetPresetReferenceCharts(int metricTargetPresetId, int currentUserId);
+        int UpdateReferenceChartPreset(int MetricTargetPresetID, List<Entity.CPSyncV.ReferenceChartPreset> ReferenceChartPresets);
     }
 }

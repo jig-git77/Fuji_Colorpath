@@ -37,7 +37,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void likAdd_Click(object sender, EventArgs e)
         {
-            Response.RedirectPermanent("AddMetricTargetPreset.aspx");
+            Response.RedirectPermanent("AddReferenceChartPreset.aspx");
         }
         protected void rgMetricTargetPreset_ItemCommand(object sender, GridCommandEventArgs e)
         {
@@ -60,17 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     GridDataItem item = (GridDataItem)e.Item;
                     string parms = Service.Common.Encryption.CryptHelper.EncryptString(MetricTargetPreset.MetricTargetPresetID.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
-                    Response.Redirect("AddMetricTarget.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms));
-                    //Boolean IsPatchTolerance = Convert.ToBoolean(rgMetricTargetPreset.MasterTableView.DataKeyValues[e.Item.ItemIndex]["IsPatchTolerance"]);
-
-                    //if (IsPatchTolerance == true)
-                    //{
-                    //    Response.Redirect("AddPatchTolerance.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms) + "&&ComingFrom=MTP");
-                    //}
-                    //else
-                    //{
-                        
-                    //}
+                    Response.Redirect("AddMetricTarget.aspx?MetricTargetPresetId=" + ContentEncoder.Encode(parms));                    
                     break;
             }
         }

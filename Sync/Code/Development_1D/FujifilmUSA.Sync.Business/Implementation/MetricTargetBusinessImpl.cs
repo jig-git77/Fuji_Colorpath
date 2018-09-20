@@ -197,6 +197,37 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMetricTargetPresets"));
             return dtRefChart;
         }
+
+        public int UpdateReferenceChartPreset(int MetricTargetPresetID, List<Entity.CPSyncV.ReferenceChartPreset> ReferenceChartPresets)
+        {
+            var ReferenceChartPresetsXML = new XElement("ReferenceChartPresetList",
+                                                         ReferenceChartPresets.
+                                                             Select(x =>
+                                                                    new XElement("ReferenceChartPreset",
+                                                                                 new XAttribute("ReferenceChartTypeID", x.ReferenceChartTypeId),
+                                                                                 new XAttribute("MetricTargetPresetID", x.MetricTargetPresetID)
+                                                                        )).ToList());
+            var outParam = new Parameters() { ParameterName = "@IsSaved", Type = DbType.Int32 };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure("CPSyncV.SaveReferenceChartPreset",
+                                             new List<Parameters>()
+                                                 {
+                                                 new Parameters() {ParameterName = "@MetricTargetPresetID", Type = DbType.Int32, Value = MetricTargetPresetID},
+                                                 new Parameters() {ParameterName = "@ReferenceChartPresetXML", Value = ReferenceChartPresetsXML.ToString()},
+                                                 },
+                                             new List<Parameters>()
+                                                 {
+                                                 outParam
+                                                 });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateMetricTargetPreset"));
+            return Convert.ToInt32(outParam.Value);
+        }
+
         #endregion
 
         #region ITaskBase Members
