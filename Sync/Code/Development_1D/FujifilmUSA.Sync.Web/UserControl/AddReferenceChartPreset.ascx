@@ -25,14 +25,7 @@
                 });
             }            
         }
-        $('#hdfSelectedReference').val(selectedReferences);
-           <%--  var textBox;
-            if (chk.checked)
-            {
-                row.findElement("TextBoxCantidadEquipo").disabled = false;
-                return;
-            }
-            row.findElement("TextBoxCantidadEquipo").disabled = true;     --%>
+        $('#hdfSelectedReference').val(selectedReferences);         
     }
 </script>
 <div class="admin_top">
