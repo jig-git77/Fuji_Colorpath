@@ -431,14 +431,14 @@
                                                         </td>
                                                     </tr> 
                                                     <tr>
-                                                        <td style="width:180px;">
+                                                        <td style="width:180px;vertical-align: top;">
                                                             <span>
                                                             <asp:Localize runat="server" Text="ReTarget Project Description: "
                                                                 ID="Localize11" meta:resourcekey="locReTargetDescriptionResource1"></asp:Localize></span>
                                                         </td>
                                                         <td>
                                                             <div style="float: left">
-                                                            <asp:Label runat="server" ID="lblRetargetDescription" />
+                                                            <asp:Label runat="server" ID="lblRetargetDescription"/>                                                               
                                                                 </div>                                                           
                                                         </td>
                                                     </tr> 

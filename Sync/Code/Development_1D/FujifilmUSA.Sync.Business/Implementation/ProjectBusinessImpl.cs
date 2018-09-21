@@ -2087,13 +2087,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             SpotTarget = new Entity.CPSpot.SpotTarget()
                             {
                                 SpotTargetName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "SpotTargetName"),
+                                Description = DataReader.ReadString(dsProject.Tables[0].Rows[0], "Description")
                             }                            
-                        };
-                        project.PrintCondition =
-                               new PrintCondition()
-                               {
-                                   Notes = DataReader.ReadString(dsProject.Tables[0].Rows[0], "Notes"),
-                               };
+                        };                        
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotProjectDetail"));

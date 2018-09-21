@@ -465,7 +465,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 lblParentProjectName.Text = RetargetSpotProject.ProjectName;
                 lblLibraryName.Text = RetargetSpotProject.SpotTarget.SpotTargetName;
-                lblRetargetDescription.Text = RetargetSpotProject.PrintCondition.Notes;
+                lblRetargetDescription.Text = RetargetSpotProject.SpotTarget.Description;
             }
             divRetargetDetails.Visible = true;
         }
