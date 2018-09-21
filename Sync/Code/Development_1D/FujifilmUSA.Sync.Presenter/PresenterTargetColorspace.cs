@@ -36,7 +36,29 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewTargetColorspace.ErrorOccured;
-            _viewTargetColorspace.ReTargetSpotProjectList = projectBusiness.GetReTargetSpotProjectList(_viewTargetColorspace.CompanyID);
+            _viewTargetColorspace.ReTargetSpotProjectList = projectBusiness.GetReTargetSpotProjectList(_viewTargetColorspace.CompanyID, _viewTargetColorspace.BranchID, _viewTargetColorspace.DeviceID);
+        }
+
+        public void GetBranchByCompany()
+        {
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewTargetColorspace.ErrorOccured;
+            _viewTargetColorspace.Branches = miscDataBusiness.GetBranchList(_viewTargetColorspace.CompanyID, _viewTargetColorspace.CurrentUserId);
+        }
+
+        public void DeviceListById()
+        {
+            var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
+            deviceBusiness.ErrorOccured += _viewTargetColorspace.ErrorOccured;
+            _viewTargetColorspace.Devices = deviceBusiness.GetDeviceListById(_viewTargetColorspace.CompanyID, _viewTargetColorspace.BranchID,
+                                                                          _viewTargetColorspace.CurrentUserId);
+        }
+
+        public void GetSpotReTargetProjectDetails()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewTargetColorspace.ErrorOccured;
+            _viewTargetColorspace.RetargetSpotProject = projectBusiness.GetRetargetSpotProjectDetails(_viewTargetColorspace.ReTargetID);
         }
     }
 }

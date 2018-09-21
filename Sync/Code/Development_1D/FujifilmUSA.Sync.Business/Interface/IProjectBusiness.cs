@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Entity.CPSpot;
 
 namespace FujifilmUSA.Sync.Business.Interface
 {
@@ -50,6 +51,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         byte[] GetLastOptimizedNamedColorProfile(int spotProjectId);
         ReferenceChartData GetSpotReferenceChartData(int spotProjectId, EReferenceChartDisType referenceChartDisType);
         byte[] GetSpotDestinationProfile(int projectId);
-        Dictionary<int, string> GetReTargetSpotProjectList(int CompanyID);
+        Dictionary<int, string> GetReTargetSpotProjectList(int CompanyID, int BranchID, int DeviceID);
+        SpotProjectLibrary GetRetargetSpotProjectDetails(int RetargetSpotprojectID);
     }
 }

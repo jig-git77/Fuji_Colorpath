@@ -174,4 +174,28 @@
   <data name="locbtn_PaperClearResource1.Text" xml:space="preserve">
     <value>リセット</value>
   </data>
+  <data name="locReTargetResource1.Text" xml:space="preserve">
+    <value>Choose Certified Print Condition: </value>
+  </data>
+  <data name="locSelectBranchResource1.Text" xml:space="preserve">
+    <value>Select Branch: </value>
+  </data>
+  <data name="locSelectCompanyResource1.Text" xml:space="preserve">
+    <value>Select Company: </value>
+  </data>
+  <data name="selectText" xml:space="preserve">
+    <value>―選択してください―</value>
+  </data>
+  <data name="locParentProjectNameResource1.Text" xml:space="preserve">
+    <value>Parent Project Name: </value>
+  </data>
+  <data name="locReTargetDescriptionResource1.Text" xml:space="preserve">
+    <value>ReTarget Project Description: </value>
+  </data>
+  <data name="locReTargetLibraryNameResource1.Text" xml:space="preserve">
+    <value>Retarget Project Library Name: </value>
+  </data>
+  <data name="locSelectDeviceResource1.Text" xml:space="preserve">
+    <value>Select Device: </value>
+  </data>
 </root>

@@ -74,7 +74,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             project.PrintCondition =
                                 new PrintCondition()
                                 {
-                                    PrintConditionId= DataReader.ReadInt(dsProject.Tables[1].Rows[0], "PrintConditionID"),
+                                    PrintConditionId = DataReader.ReadInt(dsProject.Tables[1].Rows[0], "PrintConditionID"),
                                     Media = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Media"),
                                     Colorant = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Colorant"),
                                     RipSettings = DataReader.ReadString(dsProject.Tables[1].Rows[0], "RipSettings"),
@@ -2039,13 +2039,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return data == DBNull.Value ? null : (byte[])data;
         }
 
-        public Dictionary<int, string> GetReTargetSpotProjectList(int CompanyID)
+        public Dictionary<int, string> GetReTargetSpotProjectList(int CompanyID, int BranchID, int DeviceID)
         {
             var dstReTargetSpotProjectList = new Dictionary<int, string>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsReTargetSpotProjectList = DataAccessFactory.Instance.GetDsResult("[CPSpot].[GetReTargetSpotProjectList]", new object[] { CompanyID });
+                    var dsReTargetSpotProjectList = DataAccessFactory.Instance.GetDsResult("[CPSpot].[GetReTargetSpotProjectList]", new object[] { CompanyID, BranchID, DeviceID });
                     if (dsReTargetSpotProjectList != null && dsReTargetSpotProjectList.Tables.Count > 0)
                     {
 
@@ -2060,6 +2060,44 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GeReTargetProjectList"));
             return dstReTargetSpotProjectList;
+        }
+
+        public SpotProjectLibrary GetRetargetSpotProjectDetails(int RetargetSpotprojectID)
+        {
+            var project = new SpotProjectLibrary();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProject =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSpot.GetRetargetSpotProjectDetails",
+                                new object[]
+                                        {
+                                            RetargetSpotprojectID
+                                        });
+                    if (dsProject.Tables[0].Rows.Count > 0)
+                    {
+
+                        project = new Entity.CPSpot.SpotProjectLibrary()
+                        {
+                            SpotProjectId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "SpotProjectID"),
+                            ProjectName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProjectName"),                                                        
+                            SpotTarget = new Entity.CPSpot.SpotTarget()
+                            {
+                                SpotTargetName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "SpotTargetName"),
+                            }                            
+                        };
+                        project.PrintCondition =
+                               new PrintCondition()
+                               {
+                                   Notes = DataReader.ReadString(dsProject.Tables[0].Rows[0], "Notes"),
+                               };
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotProjectDetail"));
+            return project;
         }
         #endregion
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Entity.CPSpot;
 
 namespace FujifilmUSA.Sync.Business.Mock
 {
@@ -23,7 +24,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
-        
+
         public Dictionary<string, string> GetProjectOption(int projectId, EProfileType type)
         {
             return new Dictionary<string, string>();
@@ -128,7 +129,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         }
 
         public List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId)
-        {            
+        {
             return new List<Entity.CPSyncV.MetricSum>();
         }
 
@@ -154,7 +155,7 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         public byte[] Get1DLastOptimizedDlp(int projectId)
         {
-            return new byte[1];        
+            return new byte[1];
         }
         public Guid StoreTemporaryValidationInformation(string jobName, string customer, string pageOrSurface, string jdfJobId, int projectId, Guid tempValidationInfoId, string silverlightPostUrl)
         {
@@ -211,9 +212,14 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new byte[1];
         }
 
-        public Dictionary<int, string> GetReTargetSpotProjectList(int CompanyID)
+        public Dictionary<int, string> GetReTargetSpotProjectList(int CompanyID, int BranchID, int DeviceID)
         {
             return new Dictionary<int, string>();
+        }
+
+        public SpotProjectLibrary GetRetargetSpotProjectDetails(int RetargetSpotprojectID)
+        {
+            return new SpotProjectLibrary();
         }
         #endregion
 
@@ -224,6 +230,6 @@ namespace FujifilmUSA.Sync.Business.Mock
         #endregion
 
 
-        
+
     }
 }

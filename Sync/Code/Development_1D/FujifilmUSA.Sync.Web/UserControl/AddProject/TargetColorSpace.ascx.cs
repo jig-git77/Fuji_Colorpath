@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using System.Web.UI.WebControls;
+using FujifilmUSA.Sync.Entity.CPSpot;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -23,6 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private const string _vsPrintStandardType = "vsPrintStandardType";
         private const string _vsSpotTarget = "vsSpotTarget";
+        private const string _recSelect = "selectText";
 
         private PresenterTargetColorspace _presenterTargetColorspace;
         #endregion
@@ -267,7 +269,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID == 1) //-----If Custom made re target spot project, then set original base spot project from where we re-targeted
                         ddlSpotReTargetList.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.ReTargetSpotProjectID);
-                }                
+                }
             }
             BindPCSDataType();
             cmbPCSDataType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.PCSDataTypes).ToString(); //PCSDataType Selection
@@ -388,15 +390,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbSpotTargetList_SelectedIndexChanged(null, null);
             }
 
-            CompanyID = SessionManager.Instance.SelectedCompany;
-            _presenterTargetColorspace.GetSpotReTargetProjectList();
-            if (!IsErrorOccured)
-            {
-                ddlSpotReTargetList.DataValueField = "Key";
-                ddlSpotReTargetList.DataTextField = "Value";
-                ddlSpotReTargetList.DataSource = ReTargetSpotProjectList;
-                ddlSpotReTargetList.DataBind();
-            }
+            //CompanyID = SessionManager.Instance.SelectedCompany;
+            //_presenterTargetColorspace.GetSpotReTargetProjectList();
+            //if (!IsErrorOccured)
+            //{
+            //    ddlSpotReTargetList.DataValueField = "Key";
+            //    ddlSpotReTargetList.DataTextField = "Value";
+            //    ddlSpotReTargetList.DataSource = ReTargetSpotProjectList;
+            //    ddlSpotReTargetList.DataBind();
+            //}
         }
 
         private void BindTargetPrintCategory()
@@ -407,6 +409,67 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbTargetPrintCategory.DataBind();
             cmbTargetPrintCategory.SelectedIndex = 0;
         }
+
+        private void BindBranches()
+        {
+            CompanyID = SessionManager.Instance.SelectedCompany;
+            _presenterTargetColorspace.GetBranchByCompany();
+            if (!IsErrorOccured)
+            {
+                cmbBranch.DataValueField = "Key";
+                cmbBranch.DataTextField = "Value";
+                cmbBranch.DataSource = Branches;
+                cmbBranch.DataBind();
+                cmbBranch.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
+            }
+        }
+
+        private void BindCertifiedSpotProjects()
+        {
+            CompanyID = SessionManager.Instance.SelectedCompany;
+            BranchID = Convert.ToInt32(cmbBranch.SelectedValue.ToString());
+            DeviceID = Convert.ToInt32(cmbDevice.SelectedValue.ToString());
+            _presenterTargetColorspace.GetSpotReTargetProjectList();
+            if (!IsErrorOccured)
+            {
+                ddlSpotReTargetList.DataValueField = "Key";
+                ddlSpotReTargetList.DataTextField = "Value";
+                ddlSpotReTargetList.DataSource = ReTargetSpotProjectList;
+                ddlSpotReTargetList.DataBind();
+                ddlSpotReTargetList.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
+            }
+            divRetarget.Visible = true;
+        }
+
+        private void BindDevices()
+        {
+            CompanyID = SessionManager.Instance.SelectedCompany;
+            BranchID = Convert.ToInt32(cmbBranch.SelectedValue.ToString());
+            _presenterTargetColorspace.DeviceListById();
+            if (!IsErrorOccured)
+            {
+                cmbDevice.DataValueField = "DeviceId";
+                cmbDevice.DataTextField = "DeviceName";
+                cmbDevice.DataSource = Devices;
+                cmbDevice.DataBind();
+                cmbDevice.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
+            }
+            divDevice.Visible = true;
+        }
+
+        private void BindRetargetSpotProjectDetails()
+        {
+            ReTargetID = Convert.ToInt32(ddlSpotReTargetList.SelectedValue.ToString());
+            _presenterTargetColorspace.GetSpotReTargetProjectDetails();
+            if (!IsErrorOccured)
+            {
+                lblParentProjectName.Text = RetargetSpotProject.ProjectName;
+                lblLibraryName.Text = RetargetSpotProject.SpotTarget.SpotTargetName;
+                lblRetargetDescription.Text = RetargetSpotProject.PrintCondition.Notes;
+            }
+            divRetargetDetails.Visible = true;
+        }
+
 
         protected void btn_PaperClear_Click(object sender, EventArgs e)
         {
@@ -425,9 +488,46 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             //for retarget spot project selection panel
             if (cmbSpotTargetList.SelectedValue.ToString() == "1") //-----Set no. 1 record for Custom made re target spot project
-                trReTargetSpotProject.Visible = true;
+            {
+                trReTargetPanel.Visible = true;
+                BindBranches();
+            }
             else
-                trReTargetSpotProject.Visible = false;
+            {
+                trReTargetPanel.Visible = false;
+                divDevice.Visible = false;
+                divRetarget.Visible = false;
+            }
+        }
+
+        protected void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbBranch.SelectedValue.ToString() != "")
+                BindDevices();
+            else
+                divDevice.Visible = false;
+
+            divRetarget.Visible = false;
+            divRetargetDetails.Visible = false;
+        }
+
+        protected void cmbDevice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbDevice.SelectedValue.ToString() != "")
+                BindCertifiedSpotProjects();
+            else
+                divRetarget.Visible = false;
+
+
+            divRetargetDetails.Visible = false;
+        }
+
+        protected void ddlSpotReTargetList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlSpotReTargetList.SelectedValue.ToString() != "")
+                BindRetargetSpotProjectDetails();
+            else
+                divRetargetDetails.Visible = false;
         }
 
         protected void lnkbtnNext_Click(object sender, EventArgs e)
@@ -483,6 +583,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.CPSpot.SpotTarget> SpotTargetList { get; set; }
         public int PrintstandardTypeId { get; set; }
         public int ProjectTypeId { get; set; }
+        public Dictionary<int, string> Branches { get; set; }
         public bool IsSync1DType
         {
             get
@@ -499,7 +600,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         public int TargetPrintCategory { get; set; }
         public int CompanyID { get; set; }
+        public int BranchID { get; set; }
+        public int DeviceID { get; set; }
+        public int ReTargetID { get; set; }
         public Dictionary<int, string> ReTargetSpotProjectList { get; set; }
+        public List<Device> Devices { get; set; }
+        public SpotProjectLibrary RetargetSpotProject { get; set; }
         #endregion
 
     }
