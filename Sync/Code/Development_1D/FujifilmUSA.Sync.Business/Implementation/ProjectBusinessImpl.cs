@@ -1683,6 +1683,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         {
                             DeviceId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CPDeviceID"),
                             LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID"),
+                            ReTargetProjectBranchID= DataReader.ReadInt(dsProject.Tables[0].Rows[0], "RetargetProjectBranchID"),
+                            ReTargetProjectDeviceID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "RetargetProjectDeviceID"),
+                            ReTargetProjectName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "RetargetProjectName")
                         };
 
                         project.SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary()
@@ -1701,6 +1704,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 SpotTargetName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "SpotTargetName"),
                                 Description = DataReader.ReadString(dsProject.Tables[0].Rows[0], "Description"),
                                 MeasurementMode = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MeasurementMode")
+                            },
+                            ReTargetSpotTarget = new Entity.CPSpot.SpotTarget()
+                            {                                
+                                SpotTargetName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "RetargetSpotTargetName"),
+                                Description = DataReader.ReadString(dsProject.Tables[0].Rows[0], "RetargetSpotTargetDescription")                                
                             },
                             ReTargetSpotProjectID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ReTargetSpotProjectID")
                         };

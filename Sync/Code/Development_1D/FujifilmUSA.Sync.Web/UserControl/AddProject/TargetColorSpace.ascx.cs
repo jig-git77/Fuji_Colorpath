@@ -264,11 +264,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     cmbSpotTargetList.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID);
                     cmbSpotTargetList_SelectedIndexChanged(null, null);
-                    cmbSpotTargetList.Enabled = false;
-                    ddlSpotReTargetList.Enabled = false;
+                    cmbSpotTargetList.Enabled = false;                    
 
                     if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID == 1) //-----If Custom made re target spot project, then set original base spot project from where we re-targeted
-                        ddlSpotReTargetList.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.ReTargetSpotProjectID);
+                    {
+                        cmbBranch.SelectedValue= Convert.ToString(SessionManager.Instance.CurrentProject.ReTargetProjectBranchID);
+                        cmbBranch_SelectedIndexChanged(null, null);
+                        cmbDevice.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.ReTargetProjectDeviceID);
+                        cmbDevice_SelectedIndexChanged(null, null);
+                        ddlReTargetProject.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.ReTargetSpotProjectID);
+                        ddlReTargetProject_SelectedIndexChanged(null, null);
+                        cmbBranch.Enabled = false;
+                        cmbDevice.Enabled = false;
+                        ddlReTargetProject.Enabled = false;
+                    }
+                        
                 }
             }
             BindPCSDataType();
@@ -432,11 +442,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterTargetColorspace.GetSpotReTargetProjectList();
             if (!IsErrorOccured)
             {
-                ddlSpotReTargetList.DataValueField = "Key";
-                ddlSpotReTargetList.DataTextField = "Value";
-                ddlSpotReTargetList.DataSource = ReTargetSpotProjectList;
-                ddlSpotReTargetList.DataBind();
-                ddlSpotReTargetList.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
+                ddlReTargetProject.DataValueField = "Key";
+                ddlReTargetProject.DataTextField = "Value";
+                ddlReTargetProject.DataSource = ReTargetSpotProjectList;
+                ddlReTargetProject.DataBind();
+                ddlReTargetProject.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
             }
             divRetarget.Visible = true;
         }
@@ -459,7 +469,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindRetargetSpotProjectDetails()
         {
-            ReTargetID = Convert.ToInt32(ddlSpotReTargetList.SelectedValue.ToString());
+            ReTargetID = Convert.ToInt32(ddlReTargetProject.SelectedValue.ToString());
             _presenterTargetColorspace.GetSpotReTargetProjectDetails();
             if (!IsErrorOccured)
             {
@@ -522,9 +532,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divRetargetDetails.Visible = false;
         }
 
-        protected void ddlSpotReTargetList_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlReTargetProject_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlSpotReTargetList.SelectedValue.ToString() != "")
+            if (ddlReTargetProject.SelectedValue.ToString() != "")
                 BindRetargetSpotProjectDetails();
             else
                 divRetargetDetails.Visible = false;
@@ -544,7 +554,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     };
                     SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID;
                     if (cmbSpotTargetList.SelectedValue.ToString() == "1") //-----Set no. 1 record for Custom made re target spot project
-                        SessionManager.Instance.CurrentProject.SpotTargetProject.ReTargetSpotProjectID = Convert.ToInt32(ddlSpotReTargetList.SelectedValue.ToString());
+                        SessionManager.Instance.CurrentProject.SpotTargetProject.ReTargetSpotProjectID = Convert.ToInt32(ddlReTargetProject.SelectedValue.ToString());
                 }
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
             }

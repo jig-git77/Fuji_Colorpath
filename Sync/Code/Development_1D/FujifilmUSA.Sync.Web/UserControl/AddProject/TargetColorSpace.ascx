@@ -390,11 +390,11 @@
                                                         </td>
                                                         <td>
                                                             <div style="float: left">
-                                                            <asp:DropDownList ID="ddlSpotReTargetList" runat="server" CssClass="select" Width="250" AutoPostBack="true" OnSelectedIndexChanged="ddlSpotReTargetList_SelectedIndexChanged">
+                                                            <asp:DropDownList ID="ddlReTargetProject" runat="server" CssClass="select" Width="250" AutoPostBack="true" OnSelectedIndexChanged="ddlReTargetProject_SelectedIndexChanged">
                                                             </asp:DropDownList>
                                                                 </div>
                                                             <div style="float: left">
-                                                                 <asp:RequiredFieldValidator ID="rfvRetargate" runat="server" Display="Dynamic" ControlToValidate="ddlSpotReTargetList"
+                                                                 <asp:RequiredFieldValidator ID="rfvRetargate" runat="server" Display="Dynamic" ControlToValidate="ddlReTargetProject"
                                                                 ForeColor="Red" ValidationGroup="RetargetValidation" InitialValue="">
                                                                 <ucValidationContainer:ValidationContainer ID="rfvcRetarget" runat="server"
                                                                     ValidationMsg="Please select print condition." Size="200" />
