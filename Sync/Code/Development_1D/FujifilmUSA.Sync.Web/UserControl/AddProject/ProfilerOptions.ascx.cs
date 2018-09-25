@@ -76,7 +76,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     BindMetricPresets();
                     GetPrintStandardTVI();
                     GetPrintStandardDensity();
-                    BindReTargetList();
+                    //BindReTargetList();
+                    BindDevices();
 
                     if (SessionManager.Instance.CurrentProject.PrintCondition.PrintingType == EPrintingTypes.Flexo) //----If Sync1D project's printing type is Flexo then only show Hue angle targets panel
                     {
@@ -154,11 +155,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     if (SessionManager.Instance.CurrentProject.ReTargetProjectID != 0)
                     {
+                        cmbDevice.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.ReTargetProjectDeviceID);
+                        cmbDevice_SelectedIndexChanged(null, null);
                         ddlReTargetList.SelectedValue = SessionManager.Instance.CurrentProject.ReTargetProjectID.ToString();
+                        ddlReTargetList_SelectedIndexChanged(null, null);
                     }
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Project type selection is disable
                     {
                         ddlReTargetList.Enabled = false;
+                        cmbDevice.Enabled = false;
                     }
 
                     if (SessionManager.Instance.CurrentProject.ProjectOption != null && SessionManager.Instance.CurrentProject.ProjectOption.Count > 0) //Profiler options value set from session for existing Sync 1D projects
@@ -453,7 +458,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindReTargetList()
         {
-            DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
+            DeviceId = Convert.ToInt32(cmbDevice.SelectedValue.ToString());
           
             _presenterMeasurementSetting.GetReTargetProjectList();
             if (!IsErrorOccured)
@@ -464,8 +469,51 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ddlReTargetList.DataBind();
                 ddlReTargetList.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), "0"));
             }
+            divRetarget.Visible = true;
         }
 
+        private void BindDevices()
+        {
+            CompanyID = SessionManager.Instance.SelectedCompany;
+            BranchID = SessionManager.Instance.SelectedBranch;
+            _presenterDeviceFamilyProfilerOption.DeviceListById();
+            if (!IsErrorOccured)
+            {
+                cmbDevice.DataValueField = "DeviceId";
+                cmbDevice.DataTextField = "DeviceName";
+                cmbDevice.DataSource = Devices;
+                cmbDevice.DataBind();
+                cmbDevice.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), string.Empty));
+            }
+            divDevice.Visible = true;
+        }
+        private void BindRetargetProjectDetails()
+        {
+            RetargetProjectID = Convert.ToInt32(ddlReTargetList.SelectedValue.ToString());
+            _presenterDeviceFamilyProfilerOption.GetReTargetProjectDetails();
+            if (!IsErrorOccured)
+            {
+                lblPrintStandardTypeName.Text = RetargetPrintStandardTypeName;
+                lblMetricTargetPresetName.Text = RetargetMetricTargetPresetName;
+            }
+            divRetargetDetails.Visible = true;
+        }
+        //private void BindCertifiedProjects()
+        //{
+        //    CompanyID = SessionManager.Instance.SelectedCompany;
+        //    BranchID = SessionManager.Instance.SelectedBranch;
+        //    DeviceID = Convert.ToInt32(cmbDevice.SelectedValue.ToString());
+        //    _presenterTargetColorspace.GetSpotReTargetProjectList();
+        //    if (!IsErrorOccured)
+        //    {
+        //        ddlReTargetProject.DataValueField = "Key";
+        //        ddlReTargetProject.DataTextField = "Value";
+        //        ddlReTargetProject.DataSource = ReTargetSpotProjectList;
+        //        ddlReTargetProject.DataBind();
+        //        ddlReTargetProject.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
+        //    }
+        //    divRetarget.Visible = true;
+        //}
         #endregion
 
         #region Control Events
@@ -670,6 +718,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                                                ProfilerOptionId = 40,
                                                                                ProfilerOptionValue = (chkLinearizationType.Checked) ? "TR015" : "G7",
                                                                            });
+
+                    SessionManager.Instance.CurrentProject.ReTargetProjectDeviceID = Convert.ToInt32(cmbDevice.SelectedValue.ToString());
                 }
                 
             }
@@ -760,6 +810,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rdsBlackWidth_ValueChanged(object sender, EventArgs e)
         {
             txtBlackWidth.Text = (sender as Telerik.Web.UI.RadSlider).Value.ToString();
+        }
+
+        protected void cmbDevice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbDevice.SelectedValue.ToString() != "")
+                BindReTargetList();
+            else
+                divRetarget.Visible = false;
+
+
+            divRetargetDetails.Visible = false;
+        }
+
+        protected void ddlReTargetList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlReTargetList.SelectedValue.ToString() != "")
+                BindRetargetProjectDetails();
+            else
+                divRetargetDetails.Visible = false;
         }
 
         //protected void rdsInkTotal_ValueChanged(object sender, EventArgs e)       //---Comment out right now to make it non- editable advanced options
@@ -1575,7 +1644,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         public short PrintingTypeId { get; set; }
-
+        public List<Device> Devices { get; set; }
+        public int CompanyID { get; set; }
+        public int BranchID { get; set; }
+        public int DeviceID { get; set; }
+        public int RetargetProjectID { get; set; }
+        public string RetargetPrintStandardTypeName { get; set; }
+        public string RetargetMetricTargetPresetName { get; set; }
         #endregion
 
     }

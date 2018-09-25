@@ -23,7 +23,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         Dictionary<int, string> ReTargetProjectList { get; set; }
         byte[] ChartPreview { get; set; }
         bool IsSpotTargetType { get; }
-        short PrintingTypeId { get; set; }
-
+        short PrintingTypeId { get; set; }        
     }
 }

@@ -67,7 +67,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             NewPaper_White_b = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_White_b"),
                             NewPaper_Black_L = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_Black_L"),
                             NewPaper_Black_a = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_Black_a"),
-                            NewPaper_Black_b = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_Black_b")
+                            NewPaper_Black_b = DataReader.ReadDecimal(dsProject.Tables[0].Rows[0], "NewPaper_Black_b"),
+                            ReTargetProjectDeviceID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "RetargetProjectDeviceID")
                         };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
@@ -2103,6 +2104,31 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotProjectDetail"));
             return project;
         }
+
+        public DataTable GetRetargetProjectDetails(int RetargetProjectID)
+        {
+            var dtDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProject =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSync.GetReTargetProjectDetails",
+                                new object[]
+                                        {
+                                            RetargetProjectID
+                                        });
+                    if (dsProject.Tables[0].Rows.Count > 0)
+                        dtDetails= dsProject.Tables[0];          
+                    
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_ProjectDetail"));
+            return dtDetails;
+        }
+
+
         #endregion
 
         #region ITaskBase Members

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using FujifilmUSA.Sync.Entity;
@@ -53,5 +54,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         byte[] GetSpotDestinationProfile(int projectId);
         Dictionary<int, string> GetReTargetSpotProjectList(int CompanyID, int BranchID, int DeviceID);
         SpotProjectLibrary GetRetargetSpotProjectDetails(int RetargetSpotprojectID);
+        DataTable GetRetargetProjectDetails(int RetargetProjectID);
     }
 }

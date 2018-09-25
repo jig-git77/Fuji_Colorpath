@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Entity.CPSpot;
@@ -220,6 +221,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         public SpotProjectLibrary GetRetargetSpotProjectDetails(int RetargetSpotprojectID)
         {
             return new SpotProjectLibrary();
+        }
+
+        public DataTable GetRetargetProjectDetails(int RetargetProjectID)
+        {
+            return new DataTable();
         }
         #endregion
 
