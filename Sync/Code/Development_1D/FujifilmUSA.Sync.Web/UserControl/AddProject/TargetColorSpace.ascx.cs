@@ -554,7 +554,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     };
                     SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID;
                     if (cmbSpotTargetList.SelectedValue.ToString() == "1") //-----Set no. 1 record for Custom made re target spot project
+                    {
                         SessionManager.Instance.CurrentProject.SpotTargetProject.ReTargetSpotProjectID = Convert.ToInt32(ddlReTargetProject.SelectedValue.ToString());
+                        SessionManager.Instance.CurrentProject.ReTargetProjectBranchID= Convert.ToInt32(cmbBranch.SelectedValue.ToString());
+                        SessionManager.Instance.CurrentProject.ReTargetProjectDeviceID = Convert.ToInt32(cmbDevice.SelectedValue.ToString());
+                    }
+                        
                 }
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
             }
