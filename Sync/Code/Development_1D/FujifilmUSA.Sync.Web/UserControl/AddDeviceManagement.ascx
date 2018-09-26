@@ -370,7 +370,7 @@
                                 <td align="right">
                                     <span style="font-weight: bold;">
                                     <asp:Localize ID="locIsFlexo" runat="server" 
-                                        meta:resourcekey="locIsFlexoResource1" Text="Is Flexo?"></asp:Localize>
+                                        meta:resourcekey="locIsFlexoResource1" Text="Is 1D Flexo?"></asp:Localize>
                                     </span>
                                 </td>
                                 <td>
