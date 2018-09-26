@@ -330,4 +330,7 @@
   <data name="PanelOptionalRetarget" xml:space="preserve">
     <value>調整済みカーブからの再補正</value>
   </data>
+  <data name="locSelectDeviceResource1.Text" xml:space="preserve">
+    <value>Select Device: </value>
+  </data>
 </root>

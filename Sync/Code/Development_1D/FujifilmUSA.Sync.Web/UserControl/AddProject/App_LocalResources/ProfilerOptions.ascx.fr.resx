@@ -333,4 +333,7 @@
   <data name="PanelOptionalRetarget" xml:space="preserve">
     <value>Optional Retarget_fr</value>
   </data>
+  <data name="locSelectDeviceResource1.Text" xml:space="preserve">
+    <value>Select Device: </value>
+  </data>
 </root>

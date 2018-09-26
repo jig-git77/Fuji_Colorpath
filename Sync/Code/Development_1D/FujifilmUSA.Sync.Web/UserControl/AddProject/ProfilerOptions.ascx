@@ -698,7 +698,7 @@
                                                             </table>
                                                         </div>
                                                         <div runat="server" id="divRetargetDetails" visible="false">
-                                                            <table>
+                                                            <table style="padding-left: 5px;">
                                                                 <tr>
                                                                     <td style="width: 180px;">
                                                                         <span>

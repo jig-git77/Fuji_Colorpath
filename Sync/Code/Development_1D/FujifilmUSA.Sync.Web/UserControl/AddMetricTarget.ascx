@@ -62,16 +62,15 @@
                                                     <ItemTemplate>
                                                         <asp:HiddenField runat="server" ID="hdfMetricSumId" Value='<%# Bind("MetricSumID") %>' />
                                                         <asp:HiddenField runat="server" ID="hdfTargetMetricId" Value='<%# Bind("MetricTargetId") %>' />
-                                                        <asp:TextBox runat="server" ID="txtTargetValue" Width="50"  Text='<%# Bind("TargetValue") %>'  />
+                                                        <asp:TextBox runat="server" ID="txtTargetValue" Width="50"  Text='<%# Bind("TargetValue") %>' onkeypress="return CheckDouble(this,event)" MaxLength="5" onchange="return CheckRange(this, 0.00, 100.0)" />
                                                     </ItemTemplate>
-                                                     <FooterTemplate>  
-
-                                                         <asp:ImageButton runat="server" ID="ButtonAdd" ImageUrl="~/Images/add.png" ToolTip="Add New Row" onclick="ButtonAdd_Click" Height="20" Width="20" />
+                                                     <FooterTemplate >  
+                                                         <asp:ImageButton runat="server" ID="ButtonAdd" ImageUrl="~/Images/add.png" ToolTip="Add new metric sum." onclick="ButtonAdd_Click" Height="20" Width="20" style="vertical-align: inherit;" />
                                                     </FooterTemplate>  
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Delete" HeaderStyle-Width="50" >  
                                                     <ItemTemplate>  
-                                                        <asp:ImageButton runat="server" ID="lnkRemove" ImageUrl="~/Images/remove.png" ToolTip="Remove" onclick="lnkRemove_Click" Height="15" Width="15" />
+                                                        <asp:ImageButton runat="server" ID="lnkRemove" ImageUrl="~/Images/remove.png" ToolTip="Please click save button to save your delete action." onclick="lnkRemove_Click" Height="15" Width="15" />
                                                     </ItemTemplate>  
                                                 </asp:TemplateField>  
                                             </Columns>
