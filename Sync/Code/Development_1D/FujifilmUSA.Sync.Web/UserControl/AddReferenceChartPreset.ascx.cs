@@ -66,12 +66,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //grdPresetRefChart.DataSource = dtPresetRefChart;
                 //grdPresetRefChart.DataBind();
                 string selectedReferenceCharts = "";
-                var dtSelectedRefCharts = dtPresetRefChart.AsEnumerable().Where(r => r.Field<int>("IsSelected") == 1).CopyToDataTable();
-                foreach (DataRow row in dtSelectedRefCharts.Rows)
+                var dtSelectedRefCharts = new DataTable();
+                if (dtPresetRefChart.AsEnumerable().Any(r => r.Field<int>("IsSelected") == 1))
                 {
-                    selectedReferenceCharts += row["ReferenceChartTypeID"].ToString() + ",";
+                     dtSelectedRefCharts = dtPresetRefChart.AsEnumerable().Where(r => r.Field<int>("IsSelected") == 1).CopyToDataTable();
                 }
-
+                if (dtSelectedRefCharts.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dtSelectedRefCharts.Rows)
+                    {
+                        selectedReferenceCharts += row["ReferenceChartTypeID"].ToString() + ",";
+                    }
+                }
                 //var arrSelectedRefCharts = (from row in dtPresetRefChart.AsEnumerable()
                 //                            where row.Field<int>("IsSelected") == 1
                 //                            select row.Field<byte>("ReferenceChartTypeID")).ToList();
