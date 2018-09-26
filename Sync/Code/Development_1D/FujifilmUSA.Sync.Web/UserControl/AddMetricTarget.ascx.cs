@@ -72,7 +72,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (e.Row.RowIndex == dt.Rows.Count - 1)
                             lnkRemove.Visible = false;
                         else
-                            ddlMetricSum.Enabled = false;
+                            ddlMetricSum.Enabled = string.IsNullOrEmpty(ddlMetricSum.SelectedValue.ToString());
                     }
                     else
                     {
@@ -169,13 +169,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         TextBox txtTargetValue = (TextBox)row.FindControl("txtTargetValue");
                         if (ddlMetricSum.SelectedItem.Value != "-1")
                         {
-                            MetricSumList.Add(new Entity.CPSyncV.MetricSum()
+                            if (!string.IsNullOrEmpty(ddlMetricSum.SelectedItem.Value.ToString()) && !string.IsNullOrEmpty(txtTargetValue.Text) && (Convert.ToDecimal(txtTargetValue.Text) > 0 && Convert.ToDecimal(txtTargetValue.Text) < 100))
                             {
-                                MetricTargetID = Convert.ToInt32(hdfTargetMetricId.Value),
-                                MetricSumId = Convert.ToInt32(ddlMetricSum.SelectedItem.Value),
-                                TargetValue = Convert.ToDecimal(txtTargetValue.Text),
-                                MetricTargetPresetID = MetricTargetPreset.MetricTargetPresetID
-                            });
+                                MetricSumList.Add(new Entity.CPSyncV.MetricSum()
+                                {
+                                    MetricTargetID = Convert.ToInt32(hdfTargetMetricId.Value),
+                                    MetricSumId = Convert.ToInt32(ddlMetricSum.SelectedItem.Value),
+                                    TargetValue = Convert.ToDecimal(txtTargetValue.Text),
+                                    MetricTargetPresetID = MetricTargetPreset.MetricTargetPresetID
+                                });
+                            }
                         }
                     }
                 }
@@ -307,7 +310,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ddl1.DataTextField = "Value";
             ddl1.DataValueField = "Key";
             ddl1.DataSource = MetricSums;
-            ddl1.DataBind();
+            ddl1.DataBind();            
 
             if (grdMetricSum.Rows.Count > 0)
             {
@@ -315,25 +318,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     var row = (GridViewRow)item;
                     if (row.RowType == DataControlRowType.DataRow)
-                    {
-                        //HiddenField hdfMetricSumId = (HiddenField)row.FindControl("hdfMetricSumId");
+                    {                        
                         DropDownList ddlMetricSum = (DropDownList)row.FindControl("ddlMetricSum");
-                        //HiddenField hdfTargetMetricId = (HiddenField)row.FindControl("hdfTargetMetricId");
-                        //TextBox txtTargetValue = (TextBox)row.FindControl("txtTargetValue");
-                        //if (ddlMetricSum.SelectedItem.Value != "-1")
-                        //{
-                        //    MetricSumList.Add(new Entity.CPSyncV.MetricSum()
-                        //    {
-                        //        MetricTargetID = Convert.ToInt32(hdfTargetMetricId.Value),
-                        //        MetricSumId = Convert.ToInt32(ddlMetricSum.SelectedItem.Value),
-                        //        TargetValue = Convert.ToDecimal(txtTargetValue.Text),
-                        //        MetricTargetPresetID = MetricTargetPreset.MetricTargetPresetID
-                        //    });
-                        //}
-                        ddl1.Items.FindByValue(ddlMetricSum.SelectedValue.ToString()).Enabled = false;
+                        if (!string.IsNullOrEmpty(ddlMetricSum.SelectedItem.Value.ToString()))
+                            ddl1.Items.FindByValue(ddlMetricSum.SelectedValue.ToString()).Enabled = false;
                     }
                 }
             }
+            ddl1.Items.Insert(0, new ListItem() { Value = "", Text = "--Select--" });
         }
 
         private void SetPreviousData()

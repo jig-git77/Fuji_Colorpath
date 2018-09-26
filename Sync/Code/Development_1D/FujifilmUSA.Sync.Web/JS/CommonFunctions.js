@@ -103,4 +103,22 @@ function CallPrint(strid)
 	prtContent.innerHTML=strOldOne;
 }
 
+function CheckRange(obj, minValue, maxValue) {
+    var minLimit = parseFloat(minValue);
+    var maxLimit = parseFloat(maxValue);
+    var number = parseFloat(obj.value);
+    if (number <= minLimit) {
+        alert("Please enter number greater than " + minLimit + ".");
+        obj.focus();
+        obj.value = '';
+        return false;
+    }
+    if (number >= maxLimit) {
+        alert("Please enter number less than " + maxLimit + ".");
+        obj.focus();
+        obj.value = '';
+        return false;
+    }
+    return true;
+}
 
