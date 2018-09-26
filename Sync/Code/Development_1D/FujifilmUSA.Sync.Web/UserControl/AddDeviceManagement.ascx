@@ -369,6 +369,25 @@
                             <tr>
                                 <td align="right">
                                     <span style="font-weight: bold;">
+                                    <asp:Localize ID="locIsFlexo" runat="server" 
+                                        meta:resourcekey="locIsFlexoResource1" Text="Is Flexo?"></asp:Localize>
+                                    </span>
+                                </td>
+                                <td>
+                                    &nbsp;:&nbsp;
+                                </td>
+                                <td>
+                                     <div style="float: left;">
+                                        <asp:CheckBox ID="chkIsFlexo" runat="server" Checked="False" 
+                                             meta:resourcekey="chkIsFlexoResource1" />
+                                      </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">
+                                    <span style="font-weight: bold;">
                                     <asp:Localize ID="locIsActive" runat="server" 
                                         meta:resourcekey="locIsActiveResource1" Text="Is Active?"></asp:Localize>
                                     </span>

@@ -77,7 +77,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindDeviceFamily();
             BindBranch();
             BindLicenses();
-            
+
             if (Request.QueryString["DeviceID"] != null)
             {
                 var DeviceID = Request.QueryString["DeviceID"];
@@ -174,7 +174,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     else
                     {
                         cmbLicense.SelectedIndex = 0;
-                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text = "0";                      
+                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text = "0";
                         txtSync1D.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1D).Count() > 0);
                         txtDlp.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLP).Count() > 0);
                         txtInkOpt.Enabled = (License.LicenseType.Where(x => x == ELicenseType.InkOptimization).Count() > 0);
@@ -210,24 +210,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             int? licenseId = Convert.ToInt32(cmbLicense.SelectedValue.Equals(GetResourceString(_recSelect)) ? null : cmbLicense.SelectedValue);//--Select--
             Device = new Device()
-                         {
-                             DeviceName = txtDeviceName.Text,
-                             LicenseId = (int)licenseId,
-                             DeviceFamily =
+            {
+                DeviceName = txtDeviceName.Text,
+                LicenseId = (int)licenseId,
+                DeviceFamily =
                                  new DeviceFamily() { DeviceFamilyId = Convert.ToInt16(cmbDeviceFamily.SelectedValue) },
-                             IsActive = chkIsActive.Checked,
-                             IsValidation = chkIsValidation.Checked
-                         };
+                IsActive = chkIsActive.Checked,
+                IsValidation = chkIsValidation.Checked,
+                IsFlexo = chkIsFlexo.Checked
+            };
 
             if (txtSync1D.Enabled)
                 Device.LicenseTypeProject.Add(ELicenseType.Sync1D, Convert.ToInt32(txtSync1D.Text));
             if (txtDlp.Enabled)
                 Device.LicenseTypeProject.Add(ELicenseType.DLP, Convert.ToInt32(txtDlp.Text));
             if (txtInkOpt.Enabled)
-                Device.LicenseTypeProject.Add(ELicenseType.InkOptimization, Convert.ToInt32(txtInkOpt.Text));           
-            if(txtInkOptSource.Enabled)
-                Device.LicenseTypeProject.Add(ELicenseType.InkOptimizationSource, Convert.ToInt32(txtInkOptSource.Text));        
-            if(txt4DCertify.Enabled)
+                Device.LicenseTypeProject.Add(ELicenseType.InkOptimization, Convert.ToInt32(txtInkOpt.Text));
+            if (txtInkOptSource.Enabled)
+                Device.LicenseTypeProject.Add(ELicenseType.InkOptimizationSource, Convert.ToInt32(txtInkOptSource.Text));
+            if (txt4DCertify.Enabled)
                 Device.LicenseTypeProject.Add(ELicenseType.Sync4DCertification, Convert.ToInt32(txt4DCertify.Text));
             if (txtCustomSourceProfile.Enabled)
                 Device.LicenseTypeProject.Add(ELicenseType.CustomSourceProfile, Convert.ToInt32(txtCustomSourceProfile.Text));
@@ -270,10 +271,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbDeviceFamily.SelectedValue = Device.DeviceFamilyId.ToString();
                 chkIsActive.Checked = Device.IsActive;
                 chkIsValidation.Checked = Device.IsValidation;
-
+                chkIsFlexo.Checked = Device.IsFlexo;
                 //-----------In Edit Device page, put MaxProjects value from DB----------------//
                 foreach (KeyValuePair<ELicenseType, int> item in Device.LicenseTypeProject)
-                {                    
+                {
                     int val = item.Value;
 
                     switch (item.Key)
@@ -288,7 +289,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.InkOptimization:
                             txtInkOpt.Text = val.ToString();
-                            break;     
+                            break;
                         case ELicenseType.InkOptimizationSource:
                             txtInkOptSource.Text = val.ToString();
                             break;
@@ -310,11 +311,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.SpotLibrary:
                             txtSpotLibrary.Text = val.ToString();
                             break;
-                        case ELicenseType.IccProfiling:                            
+                        case ELicenseType.IccProfiling:
                             break;
                         default:
                             break;
-                    }                    
+                    }
                 }
             }
         }

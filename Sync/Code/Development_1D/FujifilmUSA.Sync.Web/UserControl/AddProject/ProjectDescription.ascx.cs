@@ -121,6 +121,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbPrintingType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EPrintingTypes>();
             cmbPrintingType.DataBind();
 
+            if (!SessionManager.Instance.CurrentDevice.IsFlexo)
+                cmbPrintingType.Items.FindByText("Flexo").Enabled = false;
+
             cmbPrintingType.SelectedIndex = 0;
         }
 
