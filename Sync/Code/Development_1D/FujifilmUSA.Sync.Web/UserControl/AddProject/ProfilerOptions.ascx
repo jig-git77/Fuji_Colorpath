@@ -669,7 +669,7 @@
                                                                 <tr>
                                                                     <td style="width: 180px;">
                                                                         <span style="padding-left: 5px;">
-                                                                            <asp:Localize runat="server" Text="Select Branch: "
+                                                                            <asp:Localize runat="server" Text="Select Device: "
                                                                                 ID="locSelectDevice" meta:resourcekey="locSelectDeviceResource1"></asp:Localize></span>
                                                                     </td>
                                                                     <td>

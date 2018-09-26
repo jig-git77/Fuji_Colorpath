@@ -483,7 +483,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbDevice.DataTextField = "DeviceName";
                 cmbDevice.DataSource = Devices;
                 cmbDevice.DataBind();
-                cmbDevice.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), string.Empty));
+                cmbDevice.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), "0"));
             }
             divDevice.Visible = true;
         }
@@ -694,8 +694,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.PrintStandardTVI = GetPrintStandardTVIList();
                 SessionManager.Instance.CurrentProject.ProjectTargetDensity = GetProjectTargetDensityList();
                 SessionManager.Instance.CurrentProject.ProjectTargetHueAngle = GetProjectTargetHueAngleList();
-                SessionManager.Instance.CurrentProject.ReTargetProjectID = Convert.ToInt32(ddlReTargetList.SelectedValue);
-
+                SessionManager.Instance.CurrentProject.ReTargetProjectID = ((ddlReTargetList.Items.Count == 0)? 0 : Convert.ToInt32(ddlReTargetList.SelectedValue));
+                
                 SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
 
                 SessionManager.Instance.CurrentProject.ProjectOption.Add(new ProjectOption()
@@ -719,7 +719,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                                                ProfilerOptionValue = (chkLinearizationType.Checked) ? "TR015" : "G7",
                                                                            });
 
-                    SessionManager.Instance.CurrentProject.ReTargetProjectDeviceID = Convert.ToInt32(cmbDevice.SelectedValue.ToString());
+                    SessionManager.Instance.CurrentProject.ReTargetProjectDeviceID = Convert.ToInt32(cmbDevice.SelectedValue);
                 }
                 
             }
