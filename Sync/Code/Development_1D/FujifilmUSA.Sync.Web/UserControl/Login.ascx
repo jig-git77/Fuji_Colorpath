@@ -117,7 +117,7 @@
         var nameOffset, verOffset, ix;
  
         var PluginVersion = Plugin_load();
-        debugger;
+        
         // In Firefox, the true version is after "Firefox" 
         if ((verOffset = navigatorAgent.indexOf("Firefox")) != -1) {
             browserName = "Firefox";

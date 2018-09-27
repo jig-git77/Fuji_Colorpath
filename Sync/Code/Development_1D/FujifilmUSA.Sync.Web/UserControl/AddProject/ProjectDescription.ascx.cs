@@ -122,7 +122,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbPrintingType.DataBind();
 
             if (!SessionManager.Instance.CurrentDevice.IsFlexo)
-                cmbPrintingType.Items.FindByText("Flexo").Enabled = false;
+                cmbPrintingType.Items.FindByText("Flexo").Enabled = (SessionManager.Instance.CurrentProject != null && 
+                    SessionManager.Instance.CurrentProject.PrintCondition != null &&
+                    SessionManager.Instance.CurrentProject.PrintCondition.PrintConditionId != 0);
 
             cmbPrintingType.SelectedIndex = 0;
         }

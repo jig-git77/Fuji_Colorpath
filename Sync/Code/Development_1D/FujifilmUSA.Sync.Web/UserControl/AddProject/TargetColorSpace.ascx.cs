@@ -507,6 +507,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 trReTargetPanel.Visible = false;
                 divDevice.Visible = false;
                 divRetarget.Visible = false;
+                divRetargetDetails.Visible = false;
             }
         }
 
