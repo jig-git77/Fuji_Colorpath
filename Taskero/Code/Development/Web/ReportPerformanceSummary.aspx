@@ -1,0 +1,48 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/Home.master" AutoEventWireup="true"  EnableEventValidation="false" CodeFile="ReportPerformanceSummary.aspx.cs" Inherits="ReportPerformanceSummary" %>
+
+<%@ Register Src="Common/ReportMenu.ascx" TagName="ReportMenu" TagPrefix="uc1" %>
+<%@ Register Src="ReportPerformanceSummaryCtrl.ascx" TagName="ReportPerformanceSummaryCtrl" TagPrefix="uc2" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <table cellspacing="0" cellpadding="0" align="center" border="0" width="100%">
+        <tr>
+            <td align="center">
+                <table width="940" border="0" cellspacing="0" cellpadding="0" align="center">
+                    <tr>
+                        <td>
+                            <!--Report Menu Conttrol Will Load here-->
+                            <uc1:ReportMenu ID="ReportMenu1" runat="server" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="940" border="0" cellspacing="0" cellpadding="0" align="center">
+                    <tr>
+                        <td>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">                                
+                                <tr>
+                                    <td style="padding: 5px;" class="TABLE1">
+                                        <uc2:ReportPerformanceSummaryCtrl ID="ReportPerformanceSummaryCtrl1" runat="server" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+</asp:Content>
+
