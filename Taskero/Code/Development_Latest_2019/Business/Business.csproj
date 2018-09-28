@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B3FFF4E8-5BB9-447E-AA48-DA1E565F2E4D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fuji.Business</RootNamespace>
+    <AssemblyName>Fuji.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RadCalendar.Net2, Version=2.0.2.0, Culture=neutral, PublicKeyToken=a1432cd341173140, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Web\DLL\RadCalendar.Net2.dll</HintPath>
+    </Reference>
+    <Reference Include="RadGrid.Net2, Version=5.1.2.0, Culture=neutral, PublicKeyToken=ec87bc2939ec45df, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Web\Bin\RadGrid.Net2.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Branch.cs" />
+    <Compile Include="BranchData.cs" />
+    <Compile Include="Categories.cs" />
+    <Compile Include="CategoriesData.cs" />
+    <Compile Include="CategoryUser.cs" />
+    <Compile Include="CategoryUserData.cs" />
+    <Compile Include="CommonFunctions.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="CompanyBranding.cs" />
+    <Compile Include="CompanyBrandingData.cs" />
+    <Compile Include="CompanyData.cs" />
+    <Compile Include="CPDevice.cs" />
+    <Compile Include="CPDeviceData.cs" />
+    <Compile Include="CPDevicePrintTarget.cs" />
+    <Compile Include="CPDevicePrintTargetData.cs" />
+    <Compile Include="CPDeviceStatus.cs" />
+    <Compile Include="CPDeviceStatusData.cs" />
+    <Compile Include="CPDeviceType.cs" />
+    <Compile Include="CPDeviceTypeData.cs" />
+    <Compile Include="CPDongle.cs" />
+    <Compile Include="CPDongleData.cs" />
+    <Compile Include="CPDongleType.cs" />
+    <Compile Include="CPDongleTypeData.cs" />
+    <Compile Include="CPMeasurement.cs" />
+    <Compile Include="CPMeasurementData.cs" />
+    <Compile Include="CPMeasurementType.cs" />
+    <Compile Include="CPMeasurementTypeData.cs" />
+    <Compile Include="CPMeasurement_DotGain.cs" />
+    <Compile Include="CPMeasurement_DotGainData.cs" />
+    <Compile Include="CPMeasurement_Printer.cs" />
+    <Compile Include="CPMeasurement_PrinterData.cs" />
+    <Compile Include="CPMeasurement_PT_Prop.cs" />
+    <Compile Include="CPMeasurement_PT_PropData.cs" />
+    <Compile Include="CPPatchDataLab.cs" />
+    <Compile Include="CPPatchDataLabData.cs" />
+    <Compile Include="CPPatchDataPlate.cs" />
+    <Compile Include="CPPatchDataPlateData.cs" />
+    <Compile Include="CPSyncDevice.cs" />
+    <Compile Include="CPSyncDeviceData.cs" />
+    <Compile Include="CPSyncMeasurement.cs" />
+    <Compile Include="CPSyncMeasurementData.cs" />
+    <Compile Include="CPSyncMeasurementDevice.cs" />
+    <Compile Include="CPSyncMeasurementDeviceData.cs" />
+    <Compile Include="CPSyncProjectSetting.cs" />
+    <Compile Include="CPSyncProjectSettingData.cs" />
+    <Compile Include="CPSyncPress.cs" />
+    <Compile Include="CPSyncPressRun.cs" />
+    <Compile Include="CPSyncPressRunCurve.cs" />
+    <Compile Include="CPSyncPressRunCurveData.cs" />
+    <Compile Include="CPSyncPressRunData.cs" />
+    <Compile Include="CPSyncPressData.cs" />
+    <Compile Include="CPSyncPrintCondition.cs" />
+    <Compile Include="CPSyncPrintConditionData.cs" />
+    <Compile Include="CPSyncPrintStandardData.cs" />
+    <Compile Include="CPSyncPrintStandardType.cs" />
+    <Compile Include="CPSyncPrintStandardTypeData.cs" />
+    <Compile Include="CPSyncPrintTarget.cs" />
+    <Compile Include="CPSyncPrintTargetData.cs" />
+    <Compile Include="CPVMobiJobDevice.cs" />
+    <Compile Include="CPVMobiJobDeviceData.cs" />
+    <Compile Include="ErrorLog.cs" />
+    <Compile Include="ErrorLogData.cs" />
+    <Compile Include="FilterColumnByDate.cs" />
+    <Compile Include="FilteringColumn.cs" />
+    <Compile Include="Permission.cs" />
+    <Compile Include="PermissionData.cs" />
+    <Compile Include="Press.cs" />
+    <Compile Include="PressData.cs" />
+    <Compile Include="PressJobs.cs" />
+    <Compile Include="PressJobsData.cs" />
+    <Compile Include="PressPatchCalculations.cs" />
+    <Compile Include="PressPatchCalculationsData.cs" />
+    <Compile Include="PressType.cs" />
+    <Compile Include="PressTypeData.cs" />
+    <Compile Include="Processor.cs" />
+    <Compile Include="ProcessorData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecentlyVideos.cs" />
+    <Compile Include="RecentlyVideosData.cs" />
+    <Compile Include="Report.cs" />
+    <Compile Include="ReportCPSPrintStandards.cs" />
+    <Compile Include="ReportCPSPrintStandardsData.cs" />
+    <Compile Include="ReportData.cs" />
+    <Compile Include="ReportPressJobRunCertification.cs" />
+    <Compile Include="ReportPressJobRunCertificationData.cs" />
+    <Compile Include="ReportPressMakeReady.cs" />
+    <Compile Include="ReportPressMakeReadyData.cs" />
+    <Compile Include="ReportPrepressSingleMeasurement.cs" />
+    <Compile Include="ReportPrepressSingleMeasurementData.cs" />
+    <Compile Include="ReportTargetMeasurementData.cs" />
+    <Compile Include="ReportType.cs" />
+    <Compile Include="ReportTypeData.cs" />
+    <Compile Include="RolePermission.cs" />
+    <Compile Include="RolePermissionData.cs" />
+    <Compile Include="Roles.cs" />
+    <Compile Include="RolesData.cs" />
+    <Compile Include="SiteLicense.cs" />
+    <Compile Include="SiteLicenseData.cs" />
+    <Compile Include="SQLErrorLog.cs" />
+    <Compile Include="SQLErrorLogData.cs" />
+    <Compile Include="CPSyncPrintStandard.cs" />
+    <Compile Include="TaskeroUser.cs" />
+    <Compile Include="TaskeroUserData.cs" />
+    <Compile Include="TempRHData.cs" />
+    <Compile Include="TempRHDataData.cs" />
+    <Compile Include="TempRHDevice.cs" />
+    <Compile Include="TempRHDeviceData.cs" />
+    <Compile Include="TempRHDeviceType.cs" />
+    <Compile Include="TempRHDeviceTypeData.cs" />
+    <Compile Include="TempRHDevice_CPDevice.cs" />
+    <Compile Include="TempRHDevice_CPDeviceData.cs" />
+    <Compile Include="TrackUserAccessedPages.cs" />
+    <Compile Include="TrackUserAccessedPagesData.cs" />
+    <Compile Include="UserBranch.cs" />
+    <Compile Include="UserBranchData.cs" />
+    <Compile Include="UserCompany.cs" />
+    <Compile Include="UserCompanyData.cs" />
+    <Compile Include="UserDongle.cs" />
+    <Compile Include="UserDongleData.cs" />
+    <Compile Include="UserLog.cs" />
+    <Compile Include="UserLogData.cs" />
+    <Compile Include="Videos.cs" />
+    <Compile Include="VideosData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{95CAD4F3-9F21-4084-93B2-02AD5038BEF6}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{148671CB-CF13-4754-AB36-A3A2A0EE5A05}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\RadCalendar.Net2.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
