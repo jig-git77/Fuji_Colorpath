@@ -123,15 +123,15 @@
             browserName = "Firefox";
             fullVersionName = navigatorAgent.substring(verOffset + 8);
 
-            if (fullVersionName > 51) {
+            if (fullVersionName > 53) {
 
-                if (PluginVersion == "") { //-----If Pluginversion is null means this browesre version not supporting NPAPI plugin, give option to open pop up for more details----//
+                //if (PluginVersion == "") { //-----If Pluginversion is null means this browser version not supporting NPAPI plugin, give option to open pop up for more details----//
                     //var r = confirm("This version of FireFox does not support the FujiFilm Measurement Plugin!\n\nPress OK for More Details or Cancel to Exit.");
                     //if (r == true) {
                     //    document.location.href = 'FireFoxPluginDetails.aspx';
                     //}
                     $('#dialog-confirm').dialog('open');
-                   }
+                 //  }
             }
         }
         // In MSIE, the true version is after "MSIE" in userAgent
@@ -160,6 +160,9 @@
             fullVersionName = navigatorAgent.substring(verOffset + 7);
             if ((verOffset = navigatorAgent.indexOf("Version")) != -1)
                 fullVersionName = navigatorAgent.substring(verOffset + 8);
+            if (fullVersionName > 11) { //this browser version not supporting NPAPI plugin, give option to open pop up for more details----//
+                $('#dialog-confirm').dialog('open');
+            }
         }
 
         // In most other browsers, "name/version" is at the end of userAgent 
