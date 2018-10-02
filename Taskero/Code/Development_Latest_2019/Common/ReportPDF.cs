@@ -82,7 +82,11 @@ namespace Fuji.Common
             if (System.IO.Directory.Exists(Dir2) == false) { System.IO.Directory.CreateDirectory(Dir2); }
             if (System.IO.Directory.Exists(Dir3) == false) { System.IO.Directory.CreateDirectory(Dir3); }
 
-            CSSPath = System.Web.HttpContext.Current.Server.MapPath("Templates/style.css");
+            //CSSPath = System.Web.HttpContext.Current.Server.MapPath("Templates/style.css");
+            string currentBaseUrl = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority +
+                                 System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
+
+            CSSPath = currentBaseUrl + "Templates/style.css";
             DS_Common = new DataSet();
         }
         #endregion
