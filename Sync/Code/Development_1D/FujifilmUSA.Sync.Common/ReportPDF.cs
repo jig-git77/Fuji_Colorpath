@@ -1172,7 +1172,7 @@ namespace FujifilmUSA.Sync.Common
 
             #region Assign Server
             SBStr.Replace("##IMAGES##", strServer);
-            SBStr.Replace("#csspath#", strServerStyleSheet);
+            SBStr.Replace("#csspath#", CSSPath);
             #endregion
 
             return SBStr;

@@ -533,8 +533,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 dvTab_G7.Visible = Tab_G7.Visible = false;
                 path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
-            }
-            iframeGeneratePDFReport.Attributes.Add("src", path);
+            }            
+            iframeGeneratePDFReport.Attributes.Add("src", "~/"+path);
             iframeGeneratePDFReport.Style.Add("display", "");
 
             //-------Assign Report Grading Pop up to load report in "Report" tab--------------//
