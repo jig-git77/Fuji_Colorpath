@@ -118,6 +118,7 @@
     <Content Include="Images\Report-Title.png" />
     <Content Include="Images\SpotProjectReport.png" />
     <Content Include="Images\summary-icon.png" />
+    <Content Include="Images\summary-title-bg.gif" />
     <Content Include="Images\VStatusFailedIcon.png" />
     <Content Include="Images\VStatusSuccessIcon.png" />
     <Content Include="Templates\kendoPrepressSingleMeasurement.htm" />
