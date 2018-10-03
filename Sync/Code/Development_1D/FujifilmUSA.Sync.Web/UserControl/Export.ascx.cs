@@ -378,54 +378,84 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
 
-                //string CurveFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00");
-                string CMYKFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00");
 
                 string SpotName_Header, SpotName_Parameter = "";
 
-                #region Create file and download txt file for CMYK values
+
+                string CMYKFileName = txtFileName.Text;
+
+                #region Create file and download .xml file for Caldera CMYK type
                 System.IO.StreamWriter sw;
-                sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName + "_CMYKFile.dbd");
+                sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName + ".xml");
+
+                //--------Start: Header------------//
+                sw.WriteLine("<MediaDeviceColors>");
+                sw.WriteLine("<ColorList server=" + "\"" + txtServer.Text + "\"" + " model=" + "\"" + txtModel.Text + "\"" + " media=" + "\"" + txtMedia.Text + "\"" + " resolution=" + "\"" + txtResolution.Text + "\"" + " mode=" + "\"" + "CMYK" + "\"" + ">");
+                //--------End: Header--------------//
 
                 for (int i = 0; i < listPatch.Count; i++)
                 {
-                    SpotName_Header = listPatch[i].ColorName.Replace("_", "#20");
                     SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
-
-                    sw.WriteLine("%%N:/Proforma/ColorPools/2/ColorPool/" + SpotName_Header);
-                    sw.WriteLine("Color_1:OBJECT Color");
-                    sw.WriteLine("{");
-                    sw.WriteLine("\tName:string = " + "\"" + SpotName_Parameter + "\"");
-                    sw.WriteLine("\tFUJI" + "\\" + "PrintMode:string = " + "\"LargeGumatMerge\";");
-                    sw.WriteLine("\tColorType:string = " + "\"Normal\";");
-                    sw.WriteLine("\tNeutralDensity:double = " + String.Format("{0,12:e15}", GetNdensity(listPatch[i].Cie_L)) + ";");
-                    sw.WriteLine("\tTempLab:double[3] = " + String.Format("{0,12:e15}", listPatch[i].Cie_L) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_a) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_b) + ";");
-                    sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", listPatch[i].Cmyk_C) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_M) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_Y) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_K) + ";");
-                    sw.WriteLine("\tHideCMYK:string = " + "\"ShowAll\";");
-                    sw.WriteLine("\tHideLab:string = " + "\"ShowAll\";");
-                    sw.WriteLine("\tRawName:string = " + "\"\";");
-                    sw.WriteLine("}");
-                    sw.WriteLine("");
-                    sw.WriteLine("%%E:");
+                    sw.WriteLine("<Color>" + SpotName_Parameter + " : " + "CMYK " + listPatch[i].Cmyk_C.ToString("N1") + " " + listPatch[i].Cmyk_M.ToString("N1") + " " + listPatch[i].Cmyk_Y.ToString("N1") + " " + listPatch[i].Cmyk_K.ToString("N1") + " </Color>");
                 }
-                //-----Footer portion of file------------//
-                sw.WriteLine("%%N:/Proforma/ColorPools/2/ColorantAliasRules");
-                sw.WriteLine("");
-                sw.WriteLine("%%E:");
-                sw.WriteLine("%%N:/Proforma/ColorPools/2/Info");
-                sw.WriteLine("FUJI" + "\\" + "ColorPoolInfo_1:OBJECT FUJI" + "\\" + "ColorPoolInfo");
-                sw.WriteLine("{");
-                sw.WriteLine("\tName:string = " + "\"CustomSpotLib\";");
-                sw.WriteLine("\tComment:string = " + "\" \";");
-                sw.WriteLine("}");
-                sw.WriteLine("");
-                sw.WriteLine("%%E:");
-                //--------End: Footer-------------------//
+                //--------Start: Footer------------//
+                sw.WriteLine("</ColorList>");
+                sw.WriteLine("</MediaDeviceColors>");
+                //--------End: Footer--------------//
 
                 sw.Close();
 
-                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + "_CMYKFile.dbd", CMYKFileName + "_CMYKFile.dbd");
+                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".xml", CMYKFileName + ".xml");
                 #endregion
+
+
+
+                //string CMYKFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00");
+
+                //#region Create file and download .dbd file for CMYK values
+                //System.IO.StreamWriter sw;
+                //sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName + "_CMYKFile.dbd");
+
+                //for (int i = 0; i < listPatch.Count; i++)
+                //{
+                //    SpotName_Header = listPatch[i].ColorName.Replace("_", "#20");
+                //    SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
+
+                //    sw.WriteLine("%%N:/Proforma/ColorPools/2/ColorPool/" + SpotName_Header);
+                //    sw.WriteLine("Color_1:OBJECT Color");
+                //    sw.WriteLine("{");
+                //    sw.WriteLine("\tName:string = " + "\"" + SpotName_Parameter + "\"");
+                //    sw.WriteLine("\tFUJI" + "\\" + "PrintMode:string = " + "\"LargeGumatMerge\";");
+                //    sw.WriteLine("\tColorType:string = " + "\"Normal\";");
+                //    sw.WriteLine("\tNeutralDensity:double = " + String.Format("{0,12:e15}", GetNdensity(listPatch[i].Cie_L)) + ";");
+                //    sw.WriteLine("\tTempLab:double[3] = " + String.Format("{0,12:e15}", listPatch[i].Cie_L) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_a) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_b) + ";");
+                //    sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", listPatch[i].Cmyk_C) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_M) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_Y) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_K) + ";");
+                //    sw.WriteLine("\tHideCMYK:string = " + "\"ShowAll\";");
+                //    sw.WriteLine("\tHideLab:string = " + "\"ShowAll\";");
+                //    sw.WriteLine("\tRawName:string = " + "\"\";");
+                //    sw.WriteLine("}");
+                //    sw.WriteLine("");
+                //    sw.WriteLine("%%E:");
+                //}
+                ////-----Footer portion of file------------//
+                //sw.WriteLine("%%N:/Proforma/ColorPools/2/ColorantAliasRules");
+                //sw.WriteLine("");
+                //sw.WriteLine("%%E:");
+                //sw.WriteLine("%%N:/Proforma/ColorPools/2/Info");
+                //sw.WriteLine("FUJI" + "\\" + "ColorPoolInfo_1:OBJECT FUJI" + "\\" + "ColorPoolInfo");
+                //sw.WriteLine("{");
+                //sw.WriteLine("\tName:string = " + "\"CustomSpotLib\";");
+                //sw.WriteLine("\tComment:string = " + "\" \";");
+                //sw.WriteLine("}");
+                //sw.WriteLine("");
+                //sw.WriteLine("%%E:");
+                ////--------End: Footer-------------------//
+
+                //sw.Close();
+
+                //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + "_CMYKFile.dbd", CMYKFileName + "_CMYKFile.dbd");
+                //#endregion
+
             }
         }
         #endregion

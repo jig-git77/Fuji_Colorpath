@@ -181,6 +181,11 @@
                                         <tbody>
                                             <tr>
                                                 <td>
+                                                    <asp:DropDownList ID="cmbCMYKLibrary" ClientIDMode="Static" runat="server" Width="150px">
+                                                        <asp:ListItem Text="Caldera" meta:resourcekey="CalderaResource1" Value="1"></asp:ListItem>
+                                                        <asp:ListItem Text="ColorGate" meta:resourcekey="ColResource1" Value="2"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                    &nbsp;&nbsp;&nbsp;
                                                     <asp:LinkButton ID="lbtnExportCMYK" runat="server" CssClass="gray_bt" OnClick="lbtnExportCMYK_Click">
                                                         <span>
                                                             <asp:Localize runat="server" Text="Export CMYK"
@@ -188,6 +193,96 @@
                                                                 meta:resourcekey="locExportCMYKResource"></asp:Localize>
                                                         </span>
                                                     </asp:LinkButton>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div style="float: left;">
+                                                     <span>
+                                                        <asp:Localize runat="server" Text="File Name:" ID="locFileName"
+                                                            meta:resourcekey="locFileNameResource1"></asp:Localize><span style="color: Red;">*</span></span>
+                                                    
+                                                    <asp:TextBox ID="txtFileName" runat="server" Width="200px" Height="19px"
+                                                        MaxLength="50" meta:resourcekey="txtFileNameResource1"></asp:TextBox>
+                                                       </div>           
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <table id="Table_Caldera" runat="server" style="width:100%;" >
+                                                            <tr>
+                                                                <td>
+                                                                    <span>
+                                                                        <asp:Localize runat="server" Text="Server:" ID="locServer"
+                                                                            meta:resourcekey="locServerResource1"></asp:Localize><span style="color: Red;">*</span></span>
+                                                                </td>
+                                                                <td>
+                                                                    <div style="float: left;">
+                                                                        <asp:TextBox ID="txtServer" runat="server" Width="200px" Height="19px"
+                                                                            MaxLength="50" meta:resourcekey="txtServerResource1"></asp:TextBox>
+                                                                    </div>
+                                                                    <div style="float: left">
+                                                                       
+                                                                    </div>
+                                                                    <div class="clear">
+                                                                    </div>
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <span>
+                                                                        <asp:Localize runat="server" Text="Model:" ID="locModel"
+                                                                            meta:resourcekey="locModelResource1"></asp:Localize><span style="color: Red;">*</span></span>
+                                                                </td>
+                                                                <td>
+                                                                    <div style="float: left;">
+                                                                        <asp:TextBox ID="txtModel" runat="server" Width="200px" Height="19px"
+                                                                            MaxLength="50" meta:resourcekey="txtModelResource1"></asp:TextBox>
+                                                                    </div>
+                                                                    <div style="float: left">
+                                                                       
+                                                                    </div>
+                                                                    <div class="clear">
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <span>
+                                                                        <asp:Localize runat="server" Text="Media:" ID="locMedia"
+                                                                            meta:resourcekey="locMediaResource1"></asp:Localize><span style="color: Red;">*</span></span>
+                                                                </td>
+                                                                <td>
+                                                                    <div style="float: left;">
+                                                                        <asp:TextBox ID="txtMedia" runat="server" Width="200px" Height="19px"
+                                                                            MaxLength="50" meta:resourcekey="txtMediaResource1"></asp:TextBox>
+                                                                    </div>
+                                                                    <div style="float: left">
+                                                                       
+                                                                    </div>
+                                                                    <div class="clear">
+                                                                    </div>
+                                                                </td>
+                                                                <td style="width:20px;"></td>
+                                                                <td>
+                                                                    <span>
+                                                                        <asp:Localize runat="server" Text="Resolution:" ID="locResolution"
+                                                                            meta:resourcekey="locResolutionResource1"></asp:Localize><span style="color: Red;">*</span></span>
+                                                                </td>
+                                                                <td>
+                                                                    <div style="float: left;">
+                                                                        <asp:TextBox ID="txtResolution" runat="server" Width="200px" Height="19px"
+                                                                            MaxLength="50" meta:resourcekey="txtResolutionResource1"></asp:TextBox>
+                                                                    </div>
+                                                                    <div style="float: left">
+                                                                       
+                                                                    </div>
+                                                                    <div class="clear">
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
