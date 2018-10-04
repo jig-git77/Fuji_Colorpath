@@ -347,69 +347,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnExportCMYK_Click(object sender, EventArgs e)
         {
-            if (!Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile")))
-                Directory.CreateDirectory(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile"));
-
+            
             //==========  Get Data Table and Bind ==========//
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                _presenterExport.GetSpotPatchDetailsForCMYKExport();
-
-                List<Patch> listPatch = new List<Patch>();
-                if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
-                {
-                    foreach (DataRow dr in dtPatchDetails.Rows)
-                    {
-                        Patch patch = new Patch()
-                        {
-                            PatchID = Convert.ToInt32(dr["SpotID"]),
-                            ColorName = Convert.ToString(dr["SpotName"]),
-                            Cmyk_C = Convert.ToDouble(dr["CMYK_C"]),
-                            Cmyk_M = Convert.ToDouble(dr["CMYK_M"]),
-                            Cmyk_Y = Convert.ToDouble(dr["CMYK_Y"]),
-                            Cmyk_K = Convert.ToDouble(dr["CMYK_K"]),
-                            Cie_L = Convert.ToDouble(dr["TargetL"]),
-                            Cie_a = Convert.ToDouble(dr["Targeta"]),
-                            Cie_b = Convert.ToDouble(dr["Targetb"]),
-                            Spot1 = 0
-                        };
-                        listPatch.Add(patch);
-                    }
-                }
-
-
-                string SpotName_Header, SpotName_Parameter = "";
-
-
-                string CMYKFileName = txtFileName.Text;
-
-                #region Create file and download .xml file for Caldera CMYK type
-                System.IO.StreamWriter sw;
-                sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName + ".xml");
-
-                //--------Start: Header------------//
-                sw.WriteLine("<MediaDeviceColors>");
-                sw.WriteLine("<ColorList server=" + "\"" + txtServer.Text + "\"" + " model=" + "\"" + txtModel.Text + "\"" + " media=" + "\"" + txtMedia.Text + "\"" + " resolution=" + "\"" + txtResolution.Text + "\"" + " mode=" + "\"" + "CMYK" + "\"" + ">");
-                //--------End: Header--------------//
-
-                for (int i = 0; i < listPatch.Count; i++)
-                {
-                    SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
-                    sw.WriteLine("<Color>" + SpotName_Parameter + " : " + "CMYK " + listPatch[i].Cmyk_C.ToString("N1") + " " + listPatch[i].Cmyk_M.ToString("N1") + " " + listPatch[i].Cmyk_Y.ToString("N1") + " " + listPatch[i].Cmyk_K.ToString("N1") + " </Color>");
-                }
-                //--------Start: Footer------------//
-                sw.WriteLine("</ColorList>");
-                sw.WriteLine("</MediaDeviceColors>");
-                //--------End: Footer--------------//
-
-                sw.Close();
-
-                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".xml", CMYKFileName + ".xml");
-                #endregion
-
-
-
+               
                 //string CMYKFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00");
 
                 //#region Create file and download .dbd file for CMYK values

@@ -2436,6 +2436,7 @@
     <Content Include="JS\jquery.js" />
     <Content Include="JS\MenuBar.js" />
     <Content Include="SourceProfileManagement.aspx" />
+    <Content Include="PopupSpotLibraryExport.aspx" />
     <Content Include="SpotMeasurement.aspx" />
     <Content Include="SpotTargetManagement.aspx" />
     <Content Include="Spot_Measurement.aspx" />
@@ -2500,6 +2501,7 @@
     <Content Include="UserControl\PopupControl\ReportGrading.ascx" />
     <Content Include="UserControl\PopupControl\SpotClosePrintCondition.ascx" />
     <Content Include="UserControl\PopupControl\SpotColorPatchDetails.ascx" />
+    <Content Include="UserControl\PopupControl\SpotLibraryExport.ascx" />
     <Content Include="UserControl\PrintPreview.ascx" />
     <Content Include="UserControl\PrintStandardTypeManagement.ascx" />
     <Content Include="UserControl\ProfileManagement.ascx" />
@@ -3289,6 +3291,13 @@
     <Compile Include="SourceProfileManagement.aspx.designer.cs">
       <DependentUpon>SourceProfileManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PopupSpotLibraryExport.aspx.cs">
+      <DependentUpon>PopupSpotLibraryExport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupSpotLibraryExport.aspx.designer.cs">
+      <DependentUpon>PopupSpotLibraryExport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SpotMeasurement.aspx.cs">
       <DependentUpon>SpotMeasurement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3618,6 +3627,13 @@
     </Compile>
     <Compile Include="UserControl\PopupControl\SpotColorPatchDetails.ascx.designer.cs">
       <DependentUpon>SpotColorPatchDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\SpotLibraryExport.ascx.cs">
+      <DependentUpon>SpotLibraryExport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\SpotLibraryExport.ascx.designer.cs">
+      <DependentUpon>SpotLibraryExport.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\PrintPreview.ascx.cs">
       <DependentUpon>PrintPreview.ascx</DependentUpon>
@@ -6399,6 +6415,18 @@
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\MetricTargetManagement.ascx.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotLibraryExport.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotLibraryExport.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotLibraryExport.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotLibraryExport.ascx.de.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -6422,7 +6450,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
