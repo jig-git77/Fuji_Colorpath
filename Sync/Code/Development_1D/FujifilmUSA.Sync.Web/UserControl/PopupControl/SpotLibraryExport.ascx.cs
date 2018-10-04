@@ -13,7 +13,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 {
-    public partial class SpotLibraryExport :  BaseControl, IViewExport
+    public partial class SpotLibraryExport : BaseControl, IViewExport
     {
         #region Private Variables - Globalization     
         private PresenterExport _presenterExport;
@@ -72,22 +72,38 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
                 if (cmbCMYKLibrary.SelectedValue.ToString() == "1")
                 {
-                    ExportColradFile(listPatch, txtFileName.Text);
+                    ExportColderaFile(listPatch, txtFileName.Text);
                 }
                 else
                 {
                     ExportColorgateFile(listPatch, txtFileName.Text);
-                } 
-               
+                }
+
             }
+        }
+
+        protected void cmbCMYKLibrary_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbCMYKLibrary.SelectedValue.ToString() == "1")
+            {
+                trCalderaRow1.Visible = true;
+                trCalderaRow2.Visible = true;
+            }
+            else
+            {
+                trCalderaRow1.Visible = false;
+                trCalderaRow2.Visible = false;
+            }
+
         }
         #endregion
 
         #region Methods
+
         #region Create file and download .xml file for Caldera CMYK type
-        private void ExportColradFile(List<Patch> listPatch, string CMYKFileName)
+        private void ExportColderaFile(List<Patch> listPatch, string CMYKFileName)
         {
-            string SpotName_Header, SpotName_Parameter = "";
+            string SpotName_Parameter = "";
 
             System.IO.StreamWriter sw;
             sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName + ".xml");
@@ -110,7 +126,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             sw.Close();
 
             Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".xml", CMYKFileName + ".xml");
-            
+
         }
         #endregion
 
@@ -124,21 +140,21 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
             //--------Start: Header------------//
             sw.WriteLine("<?xml version=" + "\"1.0" + "\"" + " encoding=" + "\"UTF-8" + "\"?>");
-            sw.WriteLine("<ColorTable xmlns=" + "\"urn:schemas-colorgate-com:colortable"+ "\"" + " Name=" + "\"CustomSpotLib_colorgate" + "\"" + " Version=" + "\"2" + ">");
+            sw.WriteLine("<ColorTable xmlns=" + "\"urn:schemas-colorgate-com:colortable" + "\"" + " Name=" + "\"" + CMYKFileName + "\"" + " Version=" + "\"2" + "\">");
             //--------End: Header--------------//
 
             for (int i = 0; i < listPatch.Count; i++)
             {
                 SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
                 sw.WriteLine("<ColorEntry Name=" + "\"" + SpotName_Parameter + "\"" + " ReplacementEnabled=" + "\"true" + "\"" + " ReplacementType=" + "\"23" + "\">");
-                sw.WriteLine("<ColorIn ColorModel=" + "\"Spot"  + "\"/>");
+                sw.WriteLine("<ColorIn ColorModel=" + "\"Spot" + "\"/>");
                 sw.WriteLine("<ColorOut ColorModel=" + "\"Custom" + "\"" + " CustomColorModelId=" + "\"1" + "\"" + " ColorAliasName=" + "\"" + "\">");
                 sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_C.ToString("N0") + "</ComponentValue>");
                 sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_M.ToString("N0") + "</ComponentValue>");
                 sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_Y.ToString("N0") + "</ComponentValue>");
                 sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_K.ToString("N0") + "</ComponentValue>");
                 sw.WriteLine("</ColorOut>");
-                sw.WriteLine("</ColorEntry>");                
+                sw.WriteLine("</ColorEntry>");
             }
             //--------Start: Footer------------//
             sw.WriteLine("</ColorTable>");
@@ -149,8 +165,84 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".cct", CMYKFileName + ".cct");
 
         }
+
+
         #endregion
 
+        #region Create file and download .dbd file for CMYK values
+        //private void ExportCMYK_DBDFile(List<Patch> listPatch, string CMYKFileName)
+        //{
+        //    //string CMYKFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00");
+
+        //    string SpotName_Header, SpotName_Parameter;
+        //    System.IO.StreamWriter sw;
+        //    sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName + "_CMYKFile.dbd");
+
+        //    for (int i = 0; i < listPatch.Count; i++)
+        //    {
+        //        SpotName_Header = listPatch[i].ColorName.Replace("_", "#20");
+        //        SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
+
+        //        sw.WriteLine("%%N:/Proforma/ColorPools/2/ColorPool/" + SpotName_Header);
+        //        sw.WriteLine("Color_1:OBJECT Color");
+        //        sw.WriteLine("{");
+        //        sw.WriteLine("\tName:string = " + "\"" + SpotName_Parameter + "\"");
+        //        sw.WriteLine("\tFUJI" + "\\" + "PrintMode:string = " + "\"LargeGumatMerge\";");
+        //        sw.WriteLine("\tColorType:string = " + "\"Normal\";");
+        //        sw.WriteLine("\tNeutralDensity:double = " + String.Format("{0,12:e15}", GetNdensity(listPatch[i].Cie_L)) + ";");
+        //        sw.WriteLine("\tTempLab:double[3] = " + String.Format("{0,12:e15}", listPatch[i].Cie_L) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_a) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_b) + ";");
+        //        sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", listPatch[i].Cmyk_C) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_M) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_Y) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_K) + ";");
+        //        sw.WriteLine("\tHideCMYK:string = " + "\"ShowAll\";");
+        //        sw.WriteLine("\tHideLab:string = " + "\"ShowAll\";");
+        //        sw.WriteLine("\tRawName:string = " + "\"\";");
+        //        sw.WriteLine("}");
+        //        sw.WriteLine("");
+        //        sw.WriteLine("%%E:");
+        //    }
+        //    //-----Footer portion of file------------//
+        //    sw.WriteLine("%%N:/Proforma/ColorPools/2/ColorantAliasRules");
+        //    sw.WriteLine("");
+        //    sw.WriteLine("%%E:");
+        //    sw.WriteLine("%%N:/Proforma/ColorPools/2/Info");
+        //    sw.WriteLine("FUJI" + "\\" + "ColorPoolInfo_1:OBJECT FUJI" + "\\" + "ColorPoolInfo");
+        //    sw.WriteLine("{");
+        //    sw.WriteLine("\tName:string = " + "\"CustomSpotLib\";");
+        //    sw.WriteLine("\tComment:string = " + "\" \";");
+        //    sw.WriteLine("}");
+        //    sw.WriteLine("");
+        //    sw.WriteLine("%%E:");
+        //    //--------End: Footer-------------------//
+
+        //    sw.Close();
+
+        //    Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + "_CMYKFile.dbd", CMYKFileName + "_CMYKFile.dbd");
+
+        //}
+        #endregion
+
+
+        //Get density of LabL to export CMYK values
+        double GetNdensity(double Lab_L)
+        {
+            double var_Y;
+            if ((Lab_L > 8))
+            {
+                var_Y = (100 * Math.Pow(((Lab_L + 16) / 116), 3));
+            }
+            else
+            {
+                var_Y = (100 * ((108 / 841) * (((Lab_L + 16) / 116) - (4 / 29))));
+            }
+
+            if ((var_Y > 0))
+            {
+                return (0.13353 + Math.Log10((100 / var_Y)));
+            }
+            else
+            {
+                return 0;
+            }
+        }
         #endregion
 
         #region IViewExport Members
@@ -168,19 +260,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
         #endregion
 
-        protected void cmbCMYKLibrary_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbCMYKLibrary.SelectedValue.ToString() == "1")
-            {
-                trColradRow1.Visible = true;
-                trColradRow2.Visible = true;
-            }
-            else
-            {
-                trColradRow1.Visible = false;
-                trColradRow2.Visible = false;
-            }
-            
-        }
+        
     }
 }

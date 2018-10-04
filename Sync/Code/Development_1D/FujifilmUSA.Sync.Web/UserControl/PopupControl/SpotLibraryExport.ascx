@@ -96,11 +96,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr runat="server" id="trColradRow1" visible="false">
-                                            <%--  <td>
-                                                <div>
-                                                    <table id="Table_Caldera" runat="server" style="width: 100%;">
-                                            <tr>--%>
+                                        <tr runat="server" id="trCalderaRow1" visible="false">                                           
                                             <td>
                                                 <span>
                                                     <asp:Localize runat="server" Text="Server:" ID="locServer"
@@ -142,7 +138,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr runat="server" id="trColradRow2" visible="false">
+                                        <tr runat="server" id="trCalderaRow2" visible="false">
                                             <td>
                                                 <span>
                                                     <asp:Localize runat="server" Text="Media:" ID="locMedia"
@@ -183,11 +179,7 @@
                                                 </div>
                                                 <div class="clear">
                                                 </div>
-                                            </td>
-                                            <%--</tr>
-                                             </table>
-                                                </div>
-                                            </td>--%>
+                                            </td>                                          
                                         </tr>
                                     </tbody>
                                 </table>

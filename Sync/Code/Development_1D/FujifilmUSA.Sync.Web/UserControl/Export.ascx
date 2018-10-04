@@ -197,15 +197,7 @@
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                    
-                                                    <%--<asp:LinkButton ID="lbtnExportCMYK" runat="server" CssClass="gray_bt" OnClick="lbtnExportCMYK_Click">
-                                                        <span>
-                                                            <asp:Localize runat="server" Text="Export CMYK"
-                                                                ID="locExportCMYK"
-                                                                meta:resourcekey="locExportCMYKResource"></asp:Localize>
-                                                        </span>
-                                                    </asp:LinkButton>--%>
+                                                <td>                                                                                                      
                                                     <asp:LinkButton ID="lbtnExportCMYK" runat="server" CssClass="gray_bt" OnClientClick="javascript:return ShowSpotLibraryExportWindow();">
                                                         <span>
                                                             <asp:Localize runat="server" Text="Export CMYK"

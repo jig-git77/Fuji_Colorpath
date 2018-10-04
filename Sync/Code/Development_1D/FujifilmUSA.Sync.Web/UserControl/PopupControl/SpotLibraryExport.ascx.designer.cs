@@ -94,13 +94,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer vctxtFileName;
         
         /// <summary>
-        /// trColradRow1 control.
+        /// trCalderaRow1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow trColradRow1;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trCalderaRow1;
         
         /// <summary>
         /// locServer control.
@@ -175,13 +175,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer vctxtModel;
         
         /// <summary>
-        /// trColradRow2 control.
+        /// trCalderaRow2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow trColradRow2;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trCalderaRow2;
         
         /// <summary>
         /// locMedia control.
