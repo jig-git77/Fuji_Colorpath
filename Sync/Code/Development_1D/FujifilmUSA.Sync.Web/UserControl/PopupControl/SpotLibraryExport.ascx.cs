@@ -133,10 +133,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 sw.WriteLine("<ColorEntry Name=" + "\"" + SpotName_Parameter + "\"" + " ReplacementEnabled=" + "\"true" + "\"" + " ReplacementType=" + "\"23" + "\">");
                 sw.WriteLine("<ColorIn ColorModel=" + "\"Spot"  + "\"/>");
                 sw.WriteLine("<ColorOut ColorModel=" + "\"Custom" + "\"" + " CustomColorModelId=" + "\"1" + "\"" + " ColorAliasName=" + "\"" + "\">");
-                sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_C.ToString("N1") + "</ComponentValue>");
-                sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_M.ToString("N1") + "</ComponentValue>");
-                sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_Y.ToString("N1") + "</ComponentValue>");
-                sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_K.ToString("N1") + "</ComponentValue>");
+                sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_C.ToString("N0") + "</ComponentValue>");
+                sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_M.ToString("N0") + "</ComponentValue>");
+                sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_Y.ToString("N0") + "</ComponentValue>");
+                sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_K.ToString("N0") + "</ComponentValue>");
                 sw.WriteLine("</ColorOut>");
                 sw.WriteLine("</ColorEntry>");                
             }
