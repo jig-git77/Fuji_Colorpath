@@ -139,25 +139,25 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName + ".cct");
 
             //--------Start: Header------------//
-            sw.WriteLine("<?xml version=" + "\"1.0" + "\"" + " encoding=" + "\"UTF-8" + "\"?>");
-            sw.WriteLine("<ColorTable xmlns=" + "\"urn:schemas-colorgate-com:colortable" + "\"" + " Name=" + "\"" + CMYKFileName + "\"" + " Version=" + "\"2" + "\">");
+            sw.Write("<?xml version=" + "\"1.0" + "\"" + " encoding=" + "\"UTF-8" + "\"?>");
+            sw.Write("<ColorTable xmlns=" + "\"urn:schemas-colorgate-com:colortable" + "\"" + " Name=" + "\"" + CMYKFileName + "\"" + " Version=" + "\"2" + "\">");
             //--------End: Header--------------//
-
+            
             for (int i = 0; i < listPatch.Count; i++)
             {
                 SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
-                sw.WriteLine("<ColorEntry Name=" + "\"" + SpotName_Parameter + "\"" + " ReplacementEnabled=" + "\"true" + "\"" + " ReplacementType=" + "\"23" + "\">");
-                sw.WriteLine("<ColorIn ColorModel=" + "\"Spot" + "\"/>");
-                sw.WriteLine("<ColorOut ColorModel=" + "\"Custom" + "\"" + " CustomColorModelId=" + "\"1" + "\"" + " ColorAliasName=" + "\"" + "\">");
-                sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_C.ToString("N0") + "</ComponentValue>");
-                sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_M.ToString("N0") + "</ComponentValue>");
-                sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_Y.ToString("N0") + "</ComponentValue>");
-                sw.WriteLine("<ComponentValue>" + listPatch[i].Cmyk_K.ToString("N0") + "</ComponentValue>");
-                sw.WriteLine("</ColorOut>");
-                sw.WriteLine("</ColorEntry>");
+                sw.Write("<ColorEntry Name=" + "\"" + SpotName_Parameter + "\"" + " ReplacementEnabled=" + "\"true" + "\"" + " ReplacementType=" + "\"23" + "\">");
+                sw.Write("<ColorIn ColorModel=" + "\"Spot" + "\"/>");
+                sw.Write("<ColorOut ColorModel=" + "\"Custom" + "\"" + " CustomColorModelId=" + "\"1" + "\"" + " ColorAliasName=" + "\"" + "\">");
+                sw.Write("<ComponentValue>" + listPatch[i].Cmyk_C.ToString("N0") + "</ComponentValue>");
+                sw.Write("<ComponentValue>" + listPatch[i].Cmyk_M.ToString("N0") + "</ComponentValue>");
+                sw.Write("<ComponentValue>" + listPatch[i].Cmyk_Y.ToString("N0") + "</ComponentValue>");
+                sw.Write("<ComponentValue>" + listPatch[i].Cmyk_K.ToString("N0") + "</ComponentValue>");
+                sw.Write("</ColorOut>");
+                sw.Write("</ColorEntry>");
             }
             //--------Start: Footer------------//
-            sw.WriteLine("</ColorTable>");
+            sw.Write("</ColorTable>");
             //--------End: Footer--------------//
 
             sw.Close();
