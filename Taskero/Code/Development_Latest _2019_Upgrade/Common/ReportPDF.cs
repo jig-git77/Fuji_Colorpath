@@ -2019,7 +2019,7 @@ namespace Fuji.Common
                         // === Finish previous Table tag and start with new table tag === //
                         HTMLstr += "</table>";
                         // === Add Page Header === //
-                        HTMLstr += strPageHeader;
+                        HTMLstr += "<br/><br/><br/><br/>" + strPageHeader;
                         // === Add Report Table Header === //
                         HTMLstr += strReportHeader;
 
@@ -4016,7 +4016,7 @@ namespace Fuji.Common
                 SBstrTablePageHeader.Append("<tr><td align='center' valign='top'>###Table###</td></tr></table>");
 
 
-                SBstrTableHeader.Append("<table style='width: 99%; border: 1PX SOLID #C1C1C1' cellspacing='0' cellpadding=0' border='0' align='center'>");
+                SBstrTableHeader.Append("<table style='width: 99%; border: 1PX SOLID #C1C1C1' cellspacing='0' cellpadding=0' border='0' align='center' class='tableStyle'>");
                 SBstrTableHeader.Append("<tr>");
                 SBstrTableHeader.Append("<td style='width: 8%' class='BGRIDTITLE' align='center'>Color<br>T | A</td>");
                 SBstrTableHeader.Append("<td style='width: 7%' class='BGRIDTITLE' align='center'>&Delta; E</td>");
@@ -4071,6 +4071,7 @@ namespace Fuji.Common
 
                     if ((i == (DT.Rows.Count - 1)) && (RecNo <= 42))
                     {
+                        SBstrCompleteTable.Append("<br/><br/><br/><br/>");
                         SBstrCompleteTable.Append(SBstrTablePageHeader.ToString());
                         SBstrCompleteTable.Replace("###Table###", SBstrTableHeader.ToString());
                         SBstrCompleteTable.Replace("###TableDetail###", SBstrTableDetail.ToString() + "</table><br>");
@@ -6260,7 +6261,7 @@ namespace Fuji.Common
                 SBstrTablePageHeader.Append("<tr><td align='center' valign='top'>###Table###</td></tr></table>");
 
 
-                SBstrTableHeader.Append("<table style='width: 99%; border-right: 1PX SOLID #C1C1C1;border-bottom: 1PX SOLID #C1C1C1;' cellspacing='0' cellpadding=0' border='0' align='center'>");
+                SBstrTableHeader.Append("<table style='width: 99%; border-right: 1PX SOLID #C1C1C1;border-bottom: 1PX SOLID #C1C1C1;' cellspacing='0' cellpadding=0' border='0' align='center' class='tableStyle'>");
                 SBstrTableHeader.Append("<tr>");
                 SBstrTableHeader.Append("<td style='width: 5%;font-size:9px;border-left: 1PX SOLID #C1C1C1;border-top: 1PX SOLID #C1C1C1;border-right: 1PX SOLID #C1C1C1;' class='BGRIDTITLE' align='center'>&nbsp;</td>");
                 SBstrTableHeader.Append("<td style='width: 6%;font-size:9px;border-left: 1PX SOLID #C1C1C1;border-top: 1PX SOLID #C1C1C1;border-right: 1PX SOLID #C1C1C1;' class='BGRIDTITLE' align='center'>Sample<br>Name</td>");
@@ -6287,6 +6288,7 @@ namespace Fuji.Common
                 {
                     if (RecNo == 42)
                     {
+                        SBstrCompleteTable.Append("<br/><br/>");
                         SBstrCompleteTable.Append(SBstrTablePageHeader.ToString());
                         SBstrCompleteTable.Replace("###Table###", SBstrTableHeader.ToString());
                         SBstrCompleteTable.Replace("###TableDetail###", SBstrTableDetail.ToString() + "</table><br>");
