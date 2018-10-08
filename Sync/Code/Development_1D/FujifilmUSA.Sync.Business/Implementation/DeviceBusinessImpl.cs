@@ -294,7 +294,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsDeviceList = DataAccessFactory.Instance.GetDsResult("[CPSpot].[GetDeviceListForReTargetSpotProjects]",
+                    var dsDeviceList = DataAccessFactory.Instance.GetDsResult("[CPSpot].[GetDeviceListForCertifiedSpotProjects]",
                                                                               new object[]
                                                                                       {
                                                                                           companyId, branchId,
