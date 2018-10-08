@@ -54,7 +54,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
             deviceBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
-            _viewDeviceFamilyProfilerOption.Devices = deviceBusiness.GetDeviceListForRetarget1DProject(_viewDeviceFamilyProfilerOption.CompanyID, _viewDeviceFamilyProfilerOption.BranchID,
+            _viewDeviceFamilyProfilerOption.Devices = deviceBusiness.GetDeviceListById(_viewDeviceFamilyProfilerOption.CompanyID, _viewDeviceFamilyProfilerOption.BranchID,
                                                                           _viewDeviceFamilyProfilerOption.CurrentUserId);
         }
 

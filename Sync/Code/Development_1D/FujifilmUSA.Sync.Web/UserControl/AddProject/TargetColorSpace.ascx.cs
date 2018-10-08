@@ -25,6 +25,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _vsPrintStandardType = "vsPrintStandardType";
         private const string _vsSpotTarget = "vsSpotTarget";
         private const string _recSelect = "selectText";
+        private const string _recNoCertifiedSpotCondition = "noCertifiedSpotCondition";
 
         private PresenterTargetColorspace _presenterTargetColorspace;
         #endregion
@@ -444,11 +445,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterTargetColorspace.GetSpotReTargetProjectList();
             if (!IsErrorOccured)
             {
-                ddlReTargetProject.DataValueField = "Key";
-                ddlReTargetProject.DataTextField = "Value";
-                ddlReTargetProject.DataSource = ReTargetSpotProjectList;
-                ddlReTargetProject.DataBind();
-                ddlReTargetProject.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
+                if (ReTargetSpotProjectList.Count > 0)
+                {
+                    ddlReTargetProject.DataValueField = "Key";
+                    ddlReTargetProject.DataTextField = "Value";
+                    ddlReTargetProject.DataSource = ReTargetSpotProjectList;
+                    ddlReTargetProject.DataBind();
+                    ddlReTargetProject.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
+                }
+                else
+                {
+                    ddlReTargetProject.Items.Clear();
+                    ddlReTargetProject.Items.Insert(0, new ListItem(GetResourceString(_recNoCertifiedSpotCondition), string.Empty));
+                }
             }
             divRetarget.Visible = true;
         }
@@ -592,7 +601,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtPaper_b_4D_Black.Text = "0";
             }
         }
-    
+
         #endregion
 
         #region IViewTargetColorspace Members

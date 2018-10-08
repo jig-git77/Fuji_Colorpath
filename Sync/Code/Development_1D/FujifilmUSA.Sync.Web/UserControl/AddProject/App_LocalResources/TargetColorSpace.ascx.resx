@@ -198,4 +198,7 @@
   <data name="locSelectDeviceResource1.Text" xml:space="preserve">
     <value>Select Device: </value>
   </data>
+  <data name="noCertifiedSpotCondition" xml:space="preserve">
+    <value>No Certified Print Condition</value>
+  </data>
 </root>
