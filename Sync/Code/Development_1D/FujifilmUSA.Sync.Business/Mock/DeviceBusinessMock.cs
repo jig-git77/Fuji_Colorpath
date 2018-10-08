@@ -48,6 +48,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Device>();
         }
 
+        public List<Device> GetDeviceListForRetarget1DProject(int companyId, int branchId, int currentUserId)
+        {
+            return new List<Device>();
+        }
+
         #endregion
 
         #region ITaskBase Members

@@ -313,6 +313,32 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetDeviceListById"));
             return objDeviceList;
         }
+
+        public List<Device> GetDeviceListForRetarget1DProject(int companyId, int branchId, int currentUserId)
+        {
+            var objDeviceList = new List<Device>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsDeviceList = DataAccessFactory.Instance.GetDsResult("[CPSync].[GetDeviceListForCertified1DProjects]",
+                                                                              new object[]
+                                                                                      {
+                                                                                          companyId, branchId,
+                                                                                          currentUserId
+                                                                                      });
+                    if (dsDeviceList != null && dsDeviceList.Tables[0].Rows.Count > 0)
+                    {
+                        objDeviceList = dsDeviceList.Tables[0].AsEnumerable().
+                            Select(x => new Device()
+                            {
+                                DeviceId = DataReader.ReadInt(x, "DeviceID"),
+                                DeviceName = DataReader.ReadString(x, "DeviceName")
+                            }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetDeviceListById"));
+            return objDeviceList;
+        }
         #endregion
 
         #region ITaskBase Members

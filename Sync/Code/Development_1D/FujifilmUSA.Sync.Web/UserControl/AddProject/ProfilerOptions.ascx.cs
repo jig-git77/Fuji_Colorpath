@@ -510,14 +510,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             CompanyID = SessionManager.Instance.SelectedCompany;
             BranchID = SessionManager.Instance.SelectedBranch;
-            _presenterDeviceFamilyProfilerOption.DeviceListById();
+            _presenterDeviceFamilyProfilerOption.DeviceListCertified1DProjects();
             if (!IsErrorOccured)
             {
                 cmbDevice.DataValueField = "DeviceId";
                 cmbDevice.DataTextField = "DeviceName";
                 cmbDevice.DataSource = Devices;
                 cmbDevice.DataBind();
-                cmbDevice.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), "0"));
+                cmbDevice_SelectedIndexChanged(null, null);
+                //cmbDevice.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), "0"));
             }
             divDevice.Visible = true;
         }

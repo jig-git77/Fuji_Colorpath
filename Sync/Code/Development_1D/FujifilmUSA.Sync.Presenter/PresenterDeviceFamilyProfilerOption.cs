@@ -50,11 +50,11 @@ namespace FujifilmUSA.Sync.Presenter
             _viewDeviceFamilyProfilerOption.ProjectTargetHueAngle = projectBusiness.GetPrintStandardHueAngle(_viewDeviceFamilyProfilerOption.PrintStandardTypeId);
         }
 
-        public void DeviceListById()
+        public void DeviceListCertified1DProjects()
         {
             var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
             deviceBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
-            _viewDeviceFamilyProfilerOption.Devices = deviceBusiness.GetDeviceListById(_viewDeviceFamilyProfilerOption.CompanyID, _viewDeviceFamilyProfilerOption.BranchID,
+            _viewDeviceFamilyProfilerOption.Devices = deviceBusiness.GetDeviceListForRetarget1DProject(_viewDeviceFamilyProfilerOption.CompanyID, _viewDeviceFamilyProfilerOption.BranchID,
                                                                           _viewDeviceFamilyProfilerOption.CurrentUserId);
         }
 
