@@ -47,7 +47,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindTargetPrintCategory();
                 BindProfileSource();
                 BindPCSDataType(); //Load PCSDataType 
-
+                                   //trReTargetPanel.Visible = false;
                 PanelProjectType.GroupingText = "<b>" + GetResourceString("PanelProjectType") + "</b>";
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
                 {
@@ -61,6 +61,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
                 {
                     BindSpotTarget(); //Load Spot Target List
+                    BindBranches();
                     trListHeader.Visible = false;
                     trTargetLAB.Visible = false;
                     trSpotTarget.Visible = true;
@@ -264,11 +265,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     cmbSpotTargetList.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID);
                     cmbSpotTargetList_SelectedIndexChanged(null, null);
-                    cmbSpotTargetList.Enabled = false;                    
+                    cmbSpotTargetList.Enabled = false;
 
                     if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID == 1) //-----If Custom made re target spot project, then set original base spot project from where we re-targeted
                     {
-                        cmbBranch.SelectedValue= Convert.ToString(SessionManager.Instance.CurrentProject.ReTargetProjectBranchID);
+                        cmbBranch.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.ReTargetProjectBranchID);
                         cmbBranch_SelectedIndexChanged(null, null);
                         cmbDevice.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.ReTargetProjectDeviceID);
                         cmbDevice_SelectedIndexChanged(null, null);
@@ -278,7 +279,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         cmbDevice.Enabled = false;
                         ddlReTargetProject.Enabled = false;
                     }
-                        
+
                 }
             }
             BindPCSDataType();
@@ -430,7 +431,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbBranch.DataTextField = "Value";
                 cmbBranch.DataSource = Branches;
                 cmbBranch.DataBind();
-                cmbBranch.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
+                cmbBranch_SelectedIndexChanged(null, null);
+                //cmbBranch.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
             }
         }
 
@@ -455,7 +457,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             CompanyID = SessionManager.Instance.SelectedCompany;
             BranchID = Convert.ToInt32(cmbBranch.SelectedValue.ToString());
-            _presenterTargetColorspace.DeviceListById();
+            _presenterTargetColorspace.DeviceListForRetargetSpotProject();
             if (!IsErrorOccured)
             {
                 cmbDevice.DataValueField = "DeviceId";
@@ -492,23 +494,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (ViewState[_vsSpotTarget] != null)
             {
-                txtDescription.Text = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).Description;
-                lblMeasMode.Text = "M" + ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).MeasurementMode;
+                //txtDescription.Text = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).Description;
+                //lblMeasMode.Text = "M" + ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).MeasurementMode;
+
+                txtDescription.Text = spotTargetViewState.Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).Description;
+                lblMeasMode.Text = "M" + spotTargetViewState.Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).MeasurementMode;
+
             }
 
             //for retarget spot project selection panel
-            if (cmbSpotTargetList.SelectedValue.ToString() == "1") //-----Set no. 1 record for Custom made re target spot project
-            {
-                trReTargetPanel.Visible = true;
-                BindBranches();
-            }
-            else
-            {
-                trReTargetPanel.Visible = false;
-                divDevice.Visible = false;
-                divRetarget.Visible = false;
-                divRetargetDetails.Visible = false;
-            }
+            //if (cmbSpotTargetList.SelectedValue.ToString() == "1") //-----Set no. 1 record for Custom made re target spot project
+            //{
+            //    trReTargetPanel.Visible = true;
+            //    BindBranches();
+            //}
+            //else
+            //{
+            //    trReTargetPanel.Visible = false;
+            //    divDevice.Visible = false;
+            //    divRetarget.Visible = false;
+            //    divRetargetDetails.Visible = false;
+            //}
         }
 
         protected void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
@@ -557,10 +563,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (cmbSpotTargetList.SelectedValue.ToString() == "1") //-----Set no. 1 record for Custom made re target spot project
                     {
                         SessionManager.Instance.CurrentProject.SpotTargetProject.ReTargetSpotProjectID = Convert.ToInt32(ddlReTargetProject.SelectedValue.ToString());
-                        SessionManager.Instance.CurrentProject.ReTargetProjectBranchID= Convert.ToInt32(cmbBranch.SelectedValue.ToString());
+                        SessionManager.Instance.CurrentProject.ReTargetProjectBranchID = Convert.ToInt32(cmbBranch.SelectedValue.ToString());
                         SessionManager.Instance.CurrentProject.ReTargetProjectDeviceID = Convert.ToInt32(cmbDevice.SelectedValue.ToString());
                     }
-                        
+
                 }
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
             }
@@ -591,6 +597,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        public List<Entity.CPSpot.SpotTarget> spotTargetViewState
+        {
+            get { return (List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]; }
+            //set { ViewState("PropertyName") = value; }
+        }
         #endregion
 
         #region IViewTargetColorspace Members

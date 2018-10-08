@@ -46,11 +46,11 @@ namespace FujifilmUSA.Sync.Presenter
             _viewTargetColorspace.Branches = miscDataBusiness.GetBranchList(_viewTargetColorspace.CompanyID, _viewTargetColorspace.CurrentUserId);
         }
 
-        public void DeviceListById()
+        public void DeviceListForRetargetSpotProject()
         {
             var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
             deviceBusiness.ErrorOccured += _viewTargetColorspace.ErrorOccured;
-            _viewTargetColorspace.Devices = deviceBusiness.GetDeviceListById(_viewTargetColorspace.CompanyID, _viewTargetColorspace.BranchID,
+            _viewTargetColorspace.Devices = deviceBusiness.GetDeviceListForRetargetSpotProject(_viewTargetColorspace.CompanyID, _viewTargetColorspace.BranchID,
                                                                           _viewTargetColorspace.CurrentUserId);
         }
 

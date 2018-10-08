@@ -304,7 +304,7 @@
     <value>濃度基準値</value>
   </data>
   <data name="locReTargetResource1.Text" xml:space="preserve">
-    <value>承認済みカーブプロジェクトの選択</value>
+    <value>Select Certified Print Condition:</value>
   </data>
   <data name="locDensityCResource1.Text" xml:space="preserve">
     <value>C</value>
@@ -332,5 +332,11 @@
   </data>
   <data name="locSelectDeviceResource1.Text" xml:space="preserve">
     <value>Select Device: </value>
+  </data>
+  <data name="locParentProjectNameResource1.Text" xml:space="preserve">
+    <value>Print Standard: </value>
+  </data>
+  <data name="locReTargetLibraryNameResource1.Text" xml:space="preserve">
+    <value>Metric Target Preset: </value>
   </data>
 </root>

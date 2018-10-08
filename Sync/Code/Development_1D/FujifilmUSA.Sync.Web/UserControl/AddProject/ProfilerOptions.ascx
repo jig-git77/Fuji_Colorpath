@@ -685,7 +685,7 @@
                                                                 <tr>
                                                                     <td style="width: 200px;">
                                                                         <span style="padding-left: 5px;">
-                                                                            <asp:Localize runat="server" Text="Choose Certified Print Condition:"
+                                                                            <asp:Localize runat="server" Text="Select Certified Print Condition:"
                                                                                 ID="Localize1" meta:resourcekey="locReTargetResource1"></asp:Localize></span>
                                                                     </td>
                                                                     <td>
@@ -714,7 +714,7 @@
                                                                 <tr>
                                                                     <td style="width: 200px;">
                                                                         <span>
-                                                                            <asp:Localize runat="server" Text="MetricTargetPreset Name: "
+                                                                            <asp:Localize runat="server" Text="Metric Target Preset: "
                                                                                 ID="Localize13" meta:resourcekey="locReTargetLibraryNameResource1"></asp:Localize></span>
                                                                     </td>
                                                                     <td>

@@ -175,7 +175,7 @@
     <value>リセット</value>
   </data>
   <data name="locReTargetResource1.Text" xml:space="preserve">
-    <value>Choose Certified Print Condition: </value>
+    <value>Select Certified Library: </value>
   </data>
   <data name="locSelectBranchResource1.Text" xml:space="preserve">
     <value>Select Branch: </value>
@@ -190,10 +190,10 @@
     <value>Parent Project Name: </value>
   </data>
   <data name="locReTargetDescriptionResource1.Text" xml:space="preserve">
-    <value>ReTarget Project Description: </value>
+    <value>Original Library Description: </value>
   </data>
   <data name="locReTargetLibraryNameResource1.Text" xml:space="preserve">
-    <value>Retarget Project Library Name: </value>
+    <value>Original Library:</value>
   </data>
   <data name="locSelectDeviceResource1.Text" xml:space="preserve">
     <value>Select Device: </value>
