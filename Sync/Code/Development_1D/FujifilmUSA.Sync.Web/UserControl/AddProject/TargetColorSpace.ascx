@@ -17,39 +17,6 @@
     }
 </style>
 
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        $('#trReTargetPanel').hide();
-
-
-       <%-- $('#cmbSpotTargetList').on('change', function () {
-            alert('<%= (spotTargetViewState.Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).Description); %>');
-            
-            var selctedValue = $(this).val();
-            //if (selctedValue == '1') {
-            //    $('#trReTargetPanel').show();
-            //} else {
-            //    $('#trReTargetPanel').hide();
-            //}
-        });--%>
-
-
-
-        
-    });
-    function testFunc(obj) {
-        debugger;
-        var selctedValue = obj.value;
-        if (selctedValue == '1') {
-            $('#trReTargetPanel').show();
-        } else {
-            $('#trReTargetPanel').hide();
-        }        
-    }
-
-</script>
-
 <div class="head">
     <h1 id="hTitle" runat="server">
         <asp:Localize runat="server"
@@ -336,7 +303,7 @@
                                     <td colspan="3">
                                         <asp:DropDownList ID="cmbSpotTargetList" runat="server" CssClass="select" DataValueField="Key" ClientIDMode="Static"
                                             DataTextField="Value" OnSelectedIndexChanged="cmbSpotTargetList_SelectedIndexChanged"
-                                            AutoPostBack="True" meta:resourcekey="cmbSpotTargetResource1" onchange="testFunc(this);">
+                                            AutoPostBack="True" meta:resourcekey="cmbSpotTargetResource1">
                                         </asp:DropDownList>
                                     </td>
                                 </tr>
@@ -364,7 +331,7 @@
                                             meta:resourcekey="txtOwnerDescriptionResource1"></asp:TextBox>
                                     </td>
                                 </tr>
-                                <tr id="trReTargetPanel">
+                                <tr id="trReTargetPanel" runat="server" visible="false">
                                     <td colspan="4">
                                         <asp:Panel ID="PanelOptionalRetargetSpotProject" runat="server" GroupingText="<b>Optional Retarget</b>" Width="100%">
                                             <div runat="server" id="divBranch">

@@ -494,27 +494,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (ViewState[_vsSpotTarget] != null)
             {
-                //txtDescription.Text = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).Description;
-                //lblMeasMode.Text = "M" + ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).MeasurementMode;
-
-                txtDescription.Text = spotTargetViewState.Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).Description;
-                lblMeasMode.Text = "M" + spotTargetViewState.Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).MeasurementMode;
-
+                txtDescription.Text = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).Description;
+                lblMeasMode.Text = "M" + ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).MeasurementMode;
             }
 
             //for retarget spot project selection panel
-            //if (cmbSpotTargetList.SelectedValue.ToString() == "1") //-----Set no. 1 record for Custom made re target spot project
-            //{
-            //    trReTargetPanel.Visible = true;
-            //    BindBranches();
-            //}
-            //else
-            //{
-            //    trReTargetPanel.Visible = false;
-            //    divDevice.Visible = false;
-            //    divRetarget.Visible = false;
-            //    divRetargetDetails.Visible = false;
-            //}
+            if (cmbSpotTargetList.SelectedValue.ToString() == "1") //-----Set no. 1 record for Custom made re target spot project
+            {
+                trReTargetPanel.Visible = true;
+                BindBranches();
+            }
+            else
+            {
+                trReTargetPanel.Visible = false;
+                divDevice.Visible = false;
+                divRetarget.Visible = false;
+                divRetargetDetails.Visible = false;
+            }
         }
 
         protected void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
@@ -596,12 +592,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtPaper_b_4D_Black.Text = "0";
             }
         }
-
-        public List<Entity.CPSpot.SpotTarget> spotTargetViewState
-        {
-            get { return (List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]; }
-            //set { ViewState("PropertyName") = value; }
-        }
+    
         #endregion
 
         #region IViewTargetColorspace Members
