@@ -342,7 +342,7 @@
   <data name="locReTargetLibraryNameResource1.Text" xml:space="preserve">
     <value>Metric Target Preset: </value>
   </data>
-  <data name="noCertifiedSpotCondition" xml:space="preserve">
-    <value>No Certified Print Condition</value>
+  <data name="noCertifiedPrintCondition" xml:space="preserve">
+    <value>No Certified Align Print Conditions</value>
   </data>
 </root>

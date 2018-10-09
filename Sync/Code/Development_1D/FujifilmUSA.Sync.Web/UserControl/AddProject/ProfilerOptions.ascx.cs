@@ -49,7 +49,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterDeviceFamilyProfilerOption _presenterDeviceFamilyProfilerOption;
         private PresenterMeasurementSetting _presenterMeasurementSetting;
         private const string _recSelectText = "selectText";
-        private const string _recNoCertifiedSpotCondition = "noCertifiedSpotCondition";
+        private const string _recNoCertifiedPrintCondition = "noCertifiedPrintCondition";
 
         #endregion
 
@@ -509,7 +509,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 else
                 {
                     ddlReTargetList.Items.Clear();
-                    ddlReTargetList.Items.Insert(0, new ListItem(GetResourceString(_recNoCertifiedSpotCondition), "0"));
+                    ddlReTargetList.Items.Insert(0, new ListItem(GetResourceString(_recNoCertifiedPrintCondition), "0"));
                 }
             }
             divRetarget.Visible = true;

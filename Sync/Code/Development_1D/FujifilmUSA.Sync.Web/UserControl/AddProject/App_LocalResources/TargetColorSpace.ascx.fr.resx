@@ -202,6 +202,6 @@
     <value>No Certified Print Condition</value>
   </data>
   <data name="panelRetargetResource1.GroupingText" xml:space="preserve">
-    <value>Optional Retarget</value>
+    <value>&lt;b&gt;Optional Retarget&lt;/b&gt;</value>
   </data>
 </root>
