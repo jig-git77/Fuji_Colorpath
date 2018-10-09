@@ -48,7 +48,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindTargetPrintCategory();
                 BindProfileSource();
                 BindPCSDataType(); //Load PCSDataType 
-                                   //trReTargetPanel.Visible = false;
+                                  
                 PanelProjectType.GroupingText = "<b>" + GetResourceString("PanelProjectType") + "</b>";
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
                 {

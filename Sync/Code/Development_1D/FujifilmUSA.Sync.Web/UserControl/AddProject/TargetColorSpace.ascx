@@ -421,40 +421,40 @@
                                                 </div>
                                             </div>
                                         </asp:Panel>
-                                        <div style="float: right; width: 34%;margin-top:-44px;">
-                                                <table>
-                                                    <tr style="height: 0px;">
-                                                        <td>
-                                                            <asp:RequiredFieldValidator ID="rfvBranch" runat="server" Display="Dynamic" ControlToValidate="cmbBranch"
-                                                                ForeColor="Red" ValidationGroup="RetargetValidation" InitialValue="">
-                                                                <ucValidationContainer:ValidationContainer ID="rfvcBranch" runat="server"
-                                                                    ValidationMsg="Please select branch." Size="200" />
-                                                            </asp:RequiredFieldValidator>
+                                        <div style="float: right; width: 34%; margin-top: -44px;">
+                                            <table>
+                                                <tr style="height: 0px;">
+                                                    <td>
+                                                        <asp:RequiredFieldValidator ID="rfvBranch" runat="server" Display="Dynamic" ControlToValidate="cmbBranch"
+                                                            ForeColor="Red" ValidationGroup="RetargetValidation" InitialValue="">
+                                                            <ucValidationContainer:ValidationContainer ID="rfvcBranch" runat="server"
+                                                                ValidationMsg="Please select branch." Size="200" />
+                                                        </asp:RequiredFieldValidator>
 
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="height: 0px;">
-                                                        <td>
-                                                            <asp:RequiredFieldValidator ID="rfvDevice" runat="server" Display="Dynamic" ControlToValidate="cmbDevice"
-                                                                ForeColor="Red" ValidationGroup="RetargetValidation" InitialValue="">
-                                                                <ucValidationContainer:ValidationContainer ID="rfvcDevice" runat="server"
-                                                                    ValidationMsg="Please select device." Size="200" />
-                                                            </asp:RequiredFieldValidator>
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 0px;">
+                                                    <td>
+                                                        <asp:RequiredFieldValidator ID="rfvDevice" runat="server" Display="Dynamic" ControlToValidate="cmbDevice"
+                                                            ForeColor="Red" ValidationGroup="RetargetValidation" InitialValue="">
+                                                            <ucValidationContainer:ValidationContainer ID="rfvcDevice" runat="server"
+                                                                ValidationMsg="Please select device." Size="200" />
+                                                        </asp:RequiredFieldValidator>
 
-                                                        </td>
-                                                    </tr>
-                                                    <tr style="height: 0px;">
-                                                        <td>
-                                                            <asp:RequiredFieldValidator ID="rfvRetargate" runat="server" Display="Dynamic" ControlToValidate="ddlReTargetProject"
-                                                                ForeColor="Red" ValidationGroup="RetargetValidation" InitialValue="">
-                                                                <ucValidationContainer:ValidationContainer ID="rfvcRetarget" runat="server"
-                                                                    ValidationMsg="Please select print condition." Size="200" />
-                                                            </asp:RequiredFieldValidator>
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 0px;">
+                                                    <td>
+                                                        <asp:RequiredFieldValidator ID="rfvRetargate" runat="server" Display="Dynamic" ControlToValidate="ddlReTargetProject"
+                                                            ForeColor="Red" ValidationGroup="RetargetValidation" InitialValue="">
+                                                            <ucValidationContainer:ValidationContainer ID="rfvcRetarget" runat="server"
+                                                                ValidationMsg="Please select print condition." Size="200" />
+                                                        </asp:RequiredFieldValidator>
 
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
