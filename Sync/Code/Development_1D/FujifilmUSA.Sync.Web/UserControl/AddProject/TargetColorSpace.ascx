@@ -457,52 +457,6 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-
-                                    <%--<td colspan="4">
-                                        <asp:Panel ID="p" runat="server" GroupingText="<b>Optional Retarget</b>" Width="100%">
-
-                                            <table>
-                                                <tr>
-                                                    <td style="width: 180px;"></td>
-                                                    <td>
-                                                        <div style="float: left">
-                                                        </div>
-                                                        <div style="float: left">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <table>
-                                                <tr>
-                                                    <td style="width: 180px;"></td>
-                                                    <td>
-                                                        <div style="float: left">
-                                                        </div>
-                                                        <div style="float: left">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <table>
-                                                <tr>
-                                                    <td style="width: 180px;"></td>
-                                                    <td>
-                                                        <div style="float: left">
-                                                        </div>
-                                                        <div style="float: left">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            </div>
-                                            
-                                        </asp:Panel>
-                                    </td>--%>
-                                </tr>
-
                             </table>
                         </asp:Panel>
                     </ContentTemplate>

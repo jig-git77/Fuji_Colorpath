@@ -401,16 +401,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbSpotTargetList.DataBind();
                 cmbSpotTargetList_SelectedIndexChanged(null, null);
             }
-
-            //CompanyID = SessionManager.Instance.SelectedCompany;
-            //_presenterTargetColorspace.GetSpotReTargetProjectList();
-            //if (!IsErrorOccured)
-            //{
-            //    ddlSpotReTargetList.DataValueField = "Key";
-            //    ddlSpotReTargetList.DataTextField = "Value";
-            //    ddlSpotReTargetList.DataSource = ReTargetSpotProjectList;
-            //    ddlSpotReTargetList.DataBind();
-            //}
         }
 
         private void BindTargetPrintCategory()
@@ -433,7 +423,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbBranch.DataSource = Branches;
                 cmbBranch.DataBind();
                 cmbBranch_SelectedIndexChanged(null, null);
-                //cmbBranch.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
             }
         }
 
