@@ -291,6 +291,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lnkbtNext.Visible = true;
                 lnkbtnTargetColorSpace.Visible = false;
             }
+            else
+            {
+                lnkbtNext.Visible = false;
+            }
         }
 
         private void BindProfileSource()

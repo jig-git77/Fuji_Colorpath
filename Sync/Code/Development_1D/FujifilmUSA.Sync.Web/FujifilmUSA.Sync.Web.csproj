@@ -4158,7 +4158,7 @@
       <Name>FujifilmUSA.Sync.GlobalResources</Name>
     </ProjectReference>
     <ProjectReference Include="..\FujifilmUSA.Sync.Presenter\FujifilmUSA.Sync.Presenter.csproj">
-      <Project>{05EC147C-DCDC-4470-A7FD-7579E28735EC}</Project>
+      <Project>{05ec147c-dcdc-4470-a7fd-7579e28735ec}</Project>
       <Name>FujifilmUSA.Sync.Presenter</Name>
     </ProjectReference>
   </ItemGroup>
@@ -6450,7 +6450,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

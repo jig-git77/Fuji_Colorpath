@@ -44,7 +44,7 @@
         </span>
     </asp:LinkButton>
     <asp:LinkButton ID="lnkbtNext" runat="server" CssClass="button"
-        OnClick="lnkbtnNext_Click" Visible="false" ValidationGroup="RetargetValidation">
+        OnClick="lnkbtnNext_Click" ValidationGroup="RetargetValidation">
         <span>
             <asp:Image ID="Image2" runat="server"
                 ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="imgAddResource11" />
