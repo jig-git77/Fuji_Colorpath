@@ -510,15 +510,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //for retarget spot project selection panel
             if (cmbSpotTargetList.SelectedValue.ToString() == "1") //-----Set no. 1 record for Custom made re target spot project
             {
-                trReTargetPanel.Visible = true;
+                divReTargetPanel.Visible = true;
+                PanelOptionalRetargetSpotProject.Visible = true;
                 BindBranches();
             }
             else
             {
-                trReTargetPanel.Visible = false;
+                divReTargetPanel.Visible = false;
                 divDevice.Visible = false;
                 divRetarget.Visible = false;
                 divRetargetDetails.Visible = false;
+                PanelOptionalRetargetSpotProject.Visible = false;
             }
         }
 
