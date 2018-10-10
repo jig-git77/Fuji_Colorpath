@@ -334,7 +334,7 @@
                                 <tr>
                                     <td colspan="4">
                                         <asp:Panel ID="PanelOptionalRetargetSpotProject" runat="server" GroupingText="<b>Optional Retarget</b>" Width="100%" Visible="false" meta:resourcekey="panelRetargetResource1">
-                                            <div id="divReTargetPanel" runat="server" visible="false" style="float: left; width: 70%;">
+                                            <div id="divReTargetPanel" runat="server" visible="false" style="float: left; width: 100%;">
                                                 <div runat="server" id="divBranch">
                                                     <table>
                                                         <tr>

@@ -690,7 +690,7 @@
                                                                     </td>
                                                                     <td>
                                                                         <div style="float: left">
-                                                                            <asp:DropDownList ID="ddlReTargetList" runat="server" CssClass="select" AutoPostBack="true" OnSelectedIndexChanged="ddlReTargetList_SelectedIndexChanged">
+                                                                            <asp:DropDownList ID="ddlReTargetList" runat="server" CssClass="select" AutoPostBack="true" OnSelectedIndexChanged="ddlReTargetList_SelectedIndexChanged" Width="250">
                                                                             </asp:DropDownList>
                                                                         </div>
                                                                     </td>

@@ -157,7 +157,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentProject.ReTargetProjectID != 0)
                     {
                         cmbDevice.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.ReTargetProjectDeviceID);
-                        cmbDevice_SelectedIndexChanged(null, null);
+                        cmbDevice_SelectedIndexChanged(null, null);                                                
                         ddlReTargetList.SelectedValue = SessionManager.Instance.CurrentProject.ReTargetProjectID.ToString();
                         ddlReTargetList_SelectedIndexChanged(null, null);
                     }
@@ -525,9 +525,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbDevice.DataValueField = "DeviceId";
                 cmbDevice.DataTextField = "DeviceName";
                 cmbDevice.DataSource = Devices;
-                cmbDevice.DataBind();
-                cmbDevice_SelectedIndexChanged(null, null);
-                //cmbDevice.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), "0"));
+                cmbDevice.DataBind();                
+                cmbDevice.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), "0"));
             }
             divDevice.Visible = true;
         }
