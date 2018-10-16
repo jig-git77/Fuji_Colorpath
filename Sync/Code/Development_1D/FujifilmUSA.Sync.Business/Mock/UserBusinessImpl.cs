@@ -90,6 +90,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
+        public bool ValidateUser(string tocken)
+        {
+            return true;
+        }
+
         #endregion
 
         #region ITaskBase Members

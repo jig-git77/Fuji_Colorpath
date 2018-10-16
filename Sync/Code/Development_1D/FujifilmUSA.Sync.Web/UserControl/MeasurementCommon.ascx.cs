@@ -45,7 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     FillValidationDetailsFromXMF();
                 }
-                //hdnBasePluginServiceUrl.Value = Utilities.ReadConfigValue("BasePluginServiceURL");
+                hdnBasePluginServiceUrl.Value = Utilities.ReadConfigValue("BasePluginServiceURL");
                 hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation).ToString().ToLower();
                 hdLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
@@ -88,6 +88,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdSpotProjectType.Value = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary).ToString().ToLower();
             }
             SetVerificationControlVisibility();
+
+            //show the project details doe native app
+            txtProjectID.Text = SessionManager.Instance.CurrentOptimizeRun.ProjectId.ToString();
+            txtRunID.Text= SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
+
+            string projectType = "Profiler";
+            if(SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
+            {
+                if (hdReferenceChartDisplayType.Value == "2")
+                    projectType = "Optimization";
+                else if (hdReferenceChartDisplayType.Value == "3")
+                    projectType = "Validation";
+            }
+            else
+            {
+                lblProjectType.Text = "Spot Project ID";
+                projectType = "Spot Project";
+            }
+            txtProjectType.Text = projectType;
         }
 
         private void FillValidationDetailsFromXMF()

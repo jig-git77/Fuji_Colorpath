@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="Measurement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.Measurement" %>
 <meta http-equiv="Cache-Control" content="no-cache" />
-<%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon"
+<%@ Register Src="~/UserControl/MeasurementCommonNew.ascx" TagName="MeasurementCommon"
     TagPrefix="uc" %>
 <script language="javascript">
     function AllowToAnalyze() {
@@ -20,64 +20,70 @@
 </div>
 <div class="contant_middle">
     <div class="head">
-        <h1 id="header" runat="server"><asp:Localize runat="server" Text="Measurement" 
+        <h1 id="header" runat="server">
+            <asp:Localize runat="server" Text="Measurement"
                 ID="locMeasurement" meta:resourcekey="locMeasurementResource1"></asp:Localize></h1>
-        <div class="Information_divAnalyze"> 
-                        
+        <div class="Information_divAnalyze">
+
             <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" OnClick="btnAnalyze_Click"
                 OnClientClick="return AllowToAnalyze();">
                 <span>
-                    <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/analyze.png" 
-                    meta:resourcekey="imgAddResource1" />
-                    
-                    <asp:Localize runat="server" Text="Analyze" ID="locAnalyze" 
-                                meta:resourcekey="locAnalyzeResource1"></asp:Localize>
+                    <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/analyze.png"
+                        meta:resourcekey="imgAddResource1" />
+
+                    <asp:Localize runat="server" Text="Analyze" ID="locAnalyze"
+                        meta:resourcekey="locAnalyzeResource1"></asp:Localize>
                 </span>
-            </asp:LinkButton>    
-             <asp:LinkButton ID="btnValidationSetup" runat="server" CssClass="buttonLeft" OnClick="btnValidationSetup_Click" Visible="false">
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnValidationSetup" runat="server" CssClass="buttonLeft" OnClick="btnValidationSetup_Click" Visible="false">
                 <span>
-                    <asp:Image ID="Image2" runat="server" 
+                    <asp:Image ID="Image2" runat="server"
                         ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="Image2Resource1" />
-                    <asp:Localize runat="server" Text="Validation Setup" id="locValidationSetup"  meta:resourcekey="locValidationSetupResource1"></asp:Localize>
+                    <asp:Localize runat="server" Text="Validation Setup" ID="locValidationSetup" meta:resourcekey="locValidationSetupResource1"></asp:Localize>
                 </span>
-            </asp:LinkButton>    
-             <asp:LinkButton ID="btnMeasurementSetup" runat="server" CssClass="buttonLeft" 
-                Visible="false" onclick="btnMeasurementSetup_Click">
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnMeasurementSetup" runat="server" CssClass="buttonLeft"
+                Visible="false" OnClick="btnMeasurementSetup_Click">
                 <span>
-                    <asp:Image ID="Image1" runat="server" 
+                    <asp:Image ID="Image1" runat="server"
                         ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="Image2Resource1" />
-                    <asp:Localize runat="server" Text="Measurement Setup" id="locMeasurementSetup"  meta:resourcekey="locMeasurementSetupResource1"></asp:Localize>
+                    <asp:Localize runat="server" Text="Measurement Setup" ID="locMeasurementSetup" meta:resourcekey="locMeasurementSetupResource1"></asp:Localize>
                 </span>
-            </asp:LinkButton>    
-             <asp:LinkButton ID="btnCustomSourceProfile" runat="server" CssClass="button" 
-                Visible="false" onclick="btnCustomSourceProfile_Click"  OnClientClick="return AllowToAnalyze();">
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnCustomSourceProfile" runat="server" CssClass="button"
+                Visible="false" OnClick="btnCustomSourceProfile_Click" OnClientClick="return AllowToAnalyze();">
                 <span>
-                    <asp:Image ID="Image3" runat="server" 
+                    <asp:Image ID="Image3" runat="server"
                         ImageUrl="~/Images/analyze.png" meta:resourcekey="Image2Resource1" />
-                    <asp:Localize runat="server" Text="Next" id="locCustomSourceProf"  meta:resourcekey="locCustomSourceProfResource1"></asp:Localize>
+                    <asp:Localize runat="server" Text="Next" ID="locCustomSourceProf" meta:resourcekey="locCustomSourceProfResource1"></asp:Localize>
                 </span>
-            </asp:LinkButton>                
+            </asp:LinkButton>
         </div>
     </div>
-    <div class="mesurementStatusbar info_form">
-        <div class="top">
-            &nbsp;</div>
-        <div class="middle" runat="server" id="tblMessage">
-            <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning device is not loaded."
-                Style="font-weight: bold; padding-left: 5px;" 
-                meta:resourcekey="lblMessageResource1"></asp:Label>
-            <asp:Label ID="lblPluginMessage" runat="server" Text="loading..." Style="float: right;
-                font-weight: bold; padding-right: 5px;" 
-                meta:resourcekey="lblPluginMessageResource1"></asp:Label>
-            &nbsp;
+    <div id="pluginMessage" runat="server">
+        <div class="mesurementStatusbar info_form">
+            <div class="top">
+                &nbsp;
+            </div>
+            <div class="middle" runat="server" id="tblMessage">
+                <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning device is not loaded."
+                    Style="font-weight: bold; padding-left: 5px;"
+                    meta:resourcekey="lblMessageResource1"></asp:Label>
+                <asp:Label ID="lblPluginMessage" runat="server" Text="loading..." Style="float: right; font-weight: bold; padding-right: 5px;"
+                    meta:resourcekey="lblPluginMessageResource1"></asp:Label>
+                &nbsp;
             <br />
+            </div>
+            <div class="bottom">
+                &nbsp;
+            </div>
         </div>
-        <div class="bottom">
-            &nbsp;</div>
     </div>
-    <uc:MeasurementCommon ID="ucMeasurementCommon" runat="server" Type="Optimization" />
+    <%--<uc:MeasurementCommon ID="ucMeasurementCommon" runat="server" Type="Optimization" />--%>
+    <asp:PlaceHolder ID="placeHolderMeasurement" runat="server"></asp:PlaceHolder>
 </div>
 <div class="contant_bottom">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="clear">
 </div>

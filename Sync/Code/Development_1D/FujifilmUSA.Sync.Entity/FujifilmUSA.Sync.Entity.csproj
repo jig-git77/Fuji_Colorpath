@@ -79,6 +79,7 @@
     <Compile Include="IccFileParams.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="LogActivity.cs" />
+    <Compile Include="MeasurementPatchApp.cs" />
     <Compile Include="MeasurementPatchDetails.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -28,60 +28,60 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
                     {
                         user = new User()
-                                   {
-                                       UserId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserId"),
-                                       LoginId = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LoginId"),
-                                       LastName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LastName"),
-                                       FirstName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "FirstName"),
-                                       Role = new Role()
-                                                  {
-                                                      RoleId = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "RoleId"),
-                                                  },
-                                       Email = DataReader.ReadString(dsUser.Tables[0].Rows[0], "Email"),
-                                       RegionId = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "RegionId"),
-                                       LastModifiedUserId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "LastModifiedUserId"),
-                                       LastModifiedDate = DataReader.ReadDate(dsUser.Tables[0].Rows[0], "LastModifiedDate"),
-                                       IsActive = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActive"),
-                                       AuthenticationKey = DataReader.ReadGuid(dsUser.Tables[0].Rows[0], "AuthenticationKey"),
-                                       SecurityQuestionId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "SecurityQuestionID"),
-                                       SecurityAnswer = DataReader.ReadString(dsUser.Tables[0].Rows[0], "SecurityAnswer"),
-                                       IsActivated = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActivated"),
-                                       UserType = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserType"),
-                                       LanguageCultureCode = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LanguageCultureCode"),
-                                       MeasurementDeviceId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "MeasurementDeviceID"),
-                                       DensityType = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "DensityType"),
-                                       UVMode = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "UVMode"),
-                                   };
+                        {
+                            UserId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserId"),
+                            LoginId = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LoginId"),
+                            LastName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LastName"),
+                            FirstName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "FirstName"),
+                            Role = new Role()
+                            {
+                                RoleId = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "RoleId"),
+                            },
+                            Email = DataReader.ReadString(dsUser.Tables[0].Rows[0], "Email"),
+                            RegionId = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "RegionId"),
+                            LastModifiedUserId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "LastModifiedUserId"),
+                            LastModifiedDate = DataReader.ReadDate(dsUser.Tables[0].Rows[0], "LastModifiedDate"),
+                            IsActive = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActive"),
+                            AuthenticationKey = DataReader.ReadGuid(dsUser.Tables[0].Rows[0], "AuthenticationKey"),
+                            SecurityQuestionId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "SecurityQuestionID"),
+                            SecurityAnswer = DataReader.ReadString(dsUser.Tables[0].Rows[0], "SecurityAnswer"),
+                            IsActivated = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActivated"),
+                            UserType = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserType"),
+                            LanguageCultureCode = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LanguageCultureCode"),
+                            MeasurementDeviceId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "MeasurementDeviceID"),
+                            DensityType = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "DensityType"),
+                            UVMode = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "UVMode"),
+                        };
                         user.Role.RolePermissions = dsUser.Tables[1].AsEnumerable().
                             Select(x => new RolePermission()
-                                            {
-                                                Permission = (ERolePermission)DataReader.ReadInt(x, "PermissionID"),
-                                                Allow = DataReader.ReadBoolean(x, "Allow")
-                                            }).ToList();
+                            {
+                                Permission = (ERolePermission)DataReader.ReadInt(x, "PermissionID"),
+                                Allow = DataReader.ReadBoolean(x, "Allow")
+                            }).ToList();
                         if (dsUser.Tables[2].Rows.Count > 0)
                         {
                             user.UserCompany = new UserCompany()
-                                                   {
-                                                       CompanyId = DataReader.ReadInt(dsUser.Tables[2].Rows[0], "CompanyID"),
-                                                       Company = new Company()
-                                                                     {
-                                                                         CompanyId = DataReader.ReadInt(dsUser.Tables[2].Rows[0], "CompanyID"),
-                                                                         CompanyName = DataReader.ReadString(dsUser.Tables[2].Rows[0], "CompanyName")
-                                                                     }
-                                                   };
+                            {
+                                CompanyId = DataReader.ReadInt(dsUser.Tables[2].Rows[0], "CompanyID"),
+                                Company = new Company()
+                                {
+                                    CompanyId = DataReader.ReadInt(dsUser.Tables[2].Rows[0], "CompanyID"),
+                                    CompanyName = DataReader.ReadString(dsUser.Tables[2].Rows[0], "CompanyName")
+                                }
+                            };
                         }
                         if (dsUser.Tables[3].Rows.Count > 0)
                         {
                             user.UserBranches = dsUser.Tables[3].AsEnumerable().
                                 Select(x => new UserBranch()
-                                                {
-                                                    BranchId = DataReader.ReadInt(x, "BranchID"),
-                                                    Branch = new Branch()
-                                                                 {
-                                                                     BranchId = DataReader.ReadInt(x, "BranchID"),
-                                                                     BranchName = DataReader.ReadString(x, "BranchName")
-                                                                 }
-                                                }).ToList();
+                                {
+                                    BranchId = DataReader.ReadInt(x, "BranchID"),
+                                    Branch = new Branch()
+                                    {
+                                        BranchId = DataReader.ReadInt(x, "BranchID"),
+                                        BranchName = DataReader.ReadString(x, "BranchName")
+                                    }
+                                }).ToList();
                         }
                     }
                 },
@@ -108,46 +108,46 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         objUsers = dsUser.Tables[0].AsEnumerable().
                             Select(x =>
                                    new User()
+                                   {
+                                       UserId = DataReader.ReadInt(x, "UserId"),
+                                       LoginId = DataReader.ReadString(x, "LoginId"),
+                                       //LoginPass = LoginSecurity.Decrypt(DataReader.ReadString(x, "LoginPass")),
+                                       LastName = DataReader.ReadString(x, "LastName"),
+                                       FirstName = DataReader.ReadString(x, "FirstName"),
+                                       Email = DataReader.ReadString(x, "Email"),
+                                       Role = new Role() { RoleId = DataReader.ReadByte(x, "RoleId") },
+                                       RegionId = DataReader.ReadShort(x, "RegionId"),
+                                       LastModifiedUserId = DataReader.ReadInt(x, "LastModifiedUserId"),
+                                       LastModifiedDate = DataReader.ReadDate(x, "LastModifiedDate"),
+                                       IsActive = DataReader.ReadBoolean(x, "IsActive"),
+                                       AuthenticationKey = DataReader.ReadGuid(x, "AuthenticationKey"),
+                                       SecurityQuestionId = DataReader.ReadInt(x, "SecurityQuestionID"),
+                                       SecurityAnswer = DataReader.ReadString(x, "SecurityAnswer"),
+                                       IsActivated = DataReader.ReadBoolean(x, "IsActivated"),
+                                       UserType = DataReader.ReadInt(x, "UserType"),
+                                       LanguageCultureCode = DataReader.ReadString(x, "LanguageCultureCode"),
+                                       MeasurementDeviceId = DataReader.ReadInt(x, "MeasurementDeviceID"),
+                                       DensityType = DataReader.ReadShort(x, "DensityType"),
+                                       UVMode = DataReader.ReadShort(x, "UVMode"),
+                                       Region = new Region()
                                        {
+                                           RegionId = DataReader.ReadByte(x, "CompanyRegionId"),
+                                           RegionName = DataReader.ReadString(x, "Region")
+                                       },
+                                       UserCompany = new UserCompany()
+                                       {
+                                           UserCompanyId = DataReader.ReadInt(x, "UserCompanyId"),
+                                           CompanyId = DataReader.ReadInt(x, "CompanyId"),
                                            UserId = DataReader.ReadInt(x, "UserId"),
-                                           LoginId = DataReader.ReadString(x, "LoginId"),
-                                           //LoginPass = LoginSecurity.Decrypt(DataReader.ReadString(x, "LoginPass")),
-                                           LastName = DataReader.ReadString(x, "LastName"),
-                                           FirstName = DataReader.ReadString(x, "FirstName"),
-                                           Email = DataReader.ReadString(x, "Email"),
-                                           Role = new Role() { RoleId = DataReader.ReadByte(x, "RoleId") },
-                                           RegionId = DataReader.ReadShort(x, "RegionId"),
-                                           LastModifiedUserId = DataReader.ReadInt(x, "LastModifiedUserId"),
-                                           LastModifiedDate = DataReader.ReadDate(x, "LastModifiedDate"),
-                                           IsActive = DataReader.ReadBoolean(x, "IsActive"),
-                                           AuthenticationKey = DataReader.ReadGuid(x, "AuthenticationKey"),
-                                           SecurityQuestionId = DataReader.ReadInt(x, "SecurityQuestionID"),
-                                           SecurityAnswer = DataReader.ReadString(x, "SecurityAnswer"),
-                                           IsActivated = DataReader.ReadBoolean(x, "IsActivated"),
-                                           UserType = DataReader.ReadInt(x, "UserType"),
-                                           LanguageCultureCode = DataReader.ReadString(x, "LanguageCultureCode"),
-                                           MeasurementDeviceId = DataReader.ReadInt(x, "MeasurementDeviceID"),
-                                           DensityType = DataReader.ReadShort(x, "DensityType"),
-                                           UVMode = DataReader.ReadShort(x, "UVMode"),
-                                           Region = new Region()
-                                                        {
-                                                            RegionId = DataReader.ReadByte(x, "CompanyRegionId"),
-                                                            RegionName = DataReader.ReadString(x, "Region")
-                                                        },
-                                           UserCompany = new UserCompany()
-                                                               {
-                                                                   UserCompanyId = DataReader.ReadInt(x, "UserCompanyId"),
-                                                                   CompanyId = DataReader.ReadInt(x, "CompanyId"),
-                                                                   UserId = DataReader.ReadInt(x, "UserId"),
-                                                                   Company =
+                                           Company =
                                                                        new Company()
-                                                                           {
-                                                                               CompanyId = DataReader.ReadInt(x, "CompanyId"),
-                                                                               CompanyName = DataReader.ReadString(x, "CompanyName")
-                                                                           }
-                                                               },
-                                           UserBranches = GetBranchList(DataReader.ReadInt(x, "UserId"), dsUser.Tables[1])
-                                       }).ToList();
+                                                                       {
+                                                                           CompanyId = DataReader.ReadInt(x, "CompanyId"),
+                                                                           CompanyName = DataReader.ReadString(x, "CompanyName")
+                                                                       }
+                                       },
+                                       UserBranches = GetBranchList(DataReader.ReadInt(x, "UserId"), dsUser.Tables[1])
+                                   }).ToList();
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetUser"));
@@ -159,18 +159,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var userbarnch = dt.AsEnumerable().
                  Where(x => DataReader.ReadInt(x, "UserId").Equals(userId)).
                  Select(x => new UserBranch()
-                                       {
-                                           UserBranchId = DataReader.ReadShort(x, "UserBranchId"),
-                                           UserId = DataReader.ReadInt(x, "UserId"),
-                                           BranchId = DataReader.ReadInt(x, "BranchId"),
-                                           Branch = new Branch()
-                                                      {
-                                                          BranchId = DataReader.ReadInt(x, "BranchId"),
-                                                          BranchName = DataReader.ReadString(x, "BranchName"),
-                                                          CompanyId = DataReader.ReadInt(x, "CompanyId"),
-                                                          IsActive = DataReader.ReadBoolean(x, "IsActive")
-                                                      }
-                                       }).ToList();
+                 {
+                     UserBranchId = DataReader.ReadShort(x, "UserBranchId"),
+                     UserId = DataReader.ReadInt(x, "UserId"),
+                     BranchId = DataReader.ReadInt(x, "BranchId"),
+                     Branch = new Branch()
+                     {
+                         BranchId = DataReader.ReadInt(x, "BranchId"),
+                         BranchName = DataReader.ReadString(x, "BranchName"),
+                         CompanyId = DataReader.ReadInt(x, "CompanyId"),
+                         IsActive = DataReader.ReadBoolean(x, "IsActive")
+                     }
+                 }).ToList();
             return userbarnch;
         }
 
@@ -286,17 +286,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
                     {
                         user = new User()
-                                   {
-                                       UserId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserId"),
-                                       LoginId = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LoginId"),
-                                       LastName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LastName"),
-                                       FirstName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "FirstName"),
-                                       Email = DataReader.ReadString(dsUser.Tables[0].Rows[0], "Email"),
-                                       IsActivated = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActivated"),
-                                       SecurityQuestionId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "SecurityQuestionId"),
-                                       SecurityAnswer = DataReader.ReadString(dsUser.Tables[0].Rows[0], "SecurityAnswer"),
-                                       AuthenticationKey = authenticationKey
-                                   };
+                        {
+                            UserId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserId"),
+                            LoginId = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LoginId"),
+                            LastName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LastName"),
+                            FirstName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "FirstName"),
+                            Email = DataReader.ReadString(dsUser.Tables[0].Rows[0], "Email"),
+                            IsActivated = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActivated"),
+                            SecurityQuestionId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "SecurityQuestionId"),
+                            SecurityAnswer = DataReader.ReadString(dsUser.Tables[0].Rows[0], "SecurityAnswer"),
+                            AuthenticationKey = authenticationKey
+                        };
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetUserAuthenticationInformation"));
@@ -553,10 +553,44 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     {
                                        UserId, OSName, BrowserName, EntryTime
                                     });
-                 
+
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertLoginActivityLogs"));
             return returnValue;
+        }
+
+        public bool ValidateUser(string tocken)
+        {
+            bool isValidUser = false;
+            var isValidUserParam = new Parameters() { ParameterName = "@validUser", Type = DbType.Boolean };
+            int UserID = 0;
+            int.TryParse(EncryptionServices.DecryptToString(tocken), out UserID);
+            try
+            {
+                //isValidUser = true;
+                Common.ImplementBusinessLogic(
+                () =>
+                        DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[GetValidateUser]",
+                            new List<Parameters>()
+                            {
+                                new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID},
+                            },
+                             new List<Parameters>()
+                             {
+                                 isValidUserParam
+                             }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_ValidateUser"));
+
+                isValidUser = Convert.ToBoolean(isValidUserParam.Value);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return isValidUser;
         }
 
         #region ITaskBase Members

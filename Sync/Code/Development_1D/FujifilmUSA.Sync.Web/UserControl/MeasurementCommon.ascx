@@ -101,7 +101,14 @@
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
             <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
-            <asp:HiddenField ID="hdnPCSType" runat="server" />
+            <asp:HiddenField ID="hdnPCSType" runat="server" />      
+            <div id="divMeasurementDevice">                
+            </div>
+            <div id="response">                
+            </div>
+            <div id="divExtensionNotAvailable">
+                <input type="button" id="btnAddExtension" value="Add Extension" />
+            </div>
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                     <td style="width: 22%;" align="right">
@@ -137,6 +144,35 @@
                     </td>
                     <td>
                         <asp:TextBox ID="txtJDFJobId" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <table>
+                <tr runat="server">
+                    <td style="width: 22%;" align="right">
+                        <asp:Label ID="lblProjectID" runat="server" Text="Project ID"></asp:Label>:&nbsp;
+                    </td>
+                    <td style="height: 27px;">
+                        <asp:TextBox ID="txtProjectID" runat="server" ReadOnly="true"></asp:TextBox>
+                    </td>
+                    <td align="right" style="width: 29%;">
+                        <asp:Label ID="lblRunID" runat="server" Text="OptimizationRun ID" ></asp:Label>:&nbsp;
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtRunID" runat="server" ReadOnly="true"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 22%;" align="right">
+                        <asp:Label ID="lblProjectType" runat="server" Text="Project Type"></asp:Label>:&nbsp;
+                    </td>
+                    <td style="height: 27px;">
+                        <asp:TextBox ID="txtProjectType" runat="server" ReadOnly="true" ClientIDMode="Static"></asp:TextBox>
+                    </td>
+                    <td align="right" style="width: 22%;">
+                    </td>
+                    <td>
                     </td>
                 </tr>
             </table>
@@ -222,8 +258,8 @@
 <asp:HiddenField ID="hdReferenceChartDisplayType" runat="server" />
 <asp:HiddenField ID="hdIsVerification" runat="server" />
 <asp:HiddenField ID="hdLicenseType" runat="server" />
-<asp:HiddenField ID="hdOptimizeRunId" runat="server" />
-<asp:HiddenField ID="hdProjectId" runat="server" />
+<asp:HiddenField ID="hdOptimizeRunId" runat="server" ClientIDMode="Static" />
+<asp:HiddenField ID="hdProjectId" runat="server" ClientIDMode="Static"/>
 <asp:HiddenField ID="hdReferenceChartTypeId" runat="server" />
 <asp:HiddenField ID="hdSerialNumber" runat="server" Value="0" />
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
@@ -284,7 +320,7 @@
             });
         }, (SessionTimeOut * 60 * 1000) - (1 * 60 * 1000));
     });
-    function ControlVisibility() {
+    function ControlVisibility() {        
         jQuery("[id*='btnCalibrate']").css('display', 'none');
         jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
         jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
@@ -300,15 +336,15 @@
 
             //---If plugin is older than 1.9.6 version--> force them to download new version plugin---//
             if (plugin().plugin_version != '1.9.6') {
-                var oWindow;
-                oWindow = window.radopen("PopupDownloadSoftware.aspx", "DownloadSoftwareWindow");
-                oWindow.show();
+                //var oWindow;
+                //oWindow = window.radopen("PopupDownloadSoftware.aspx", "DownloadSoftwareWindow");
+                //oWindow.show();
             }
         }
         else {
-            var oWindow;
-            oWindow = window.radopen("PopupDownloadSoftware.aspx", "DownloadSoftwareWindow");
-            oWindow.show();
+            //var oWindow;
+            //oWindow = window.radopen("PopupDownloadSoftware.aspx", "DownloadSoftwareWindow");
+            //oWindow.show();
         }
     }
 
@@ -572,7 +608,7 @@
     }
     function deletemeasurement(smeasurementId) {
         var measurementId = $.trim(smeasurementId);
-        var deleteMeasurementUrl = BASE_SERVICE_URL;
+        //var deleteMeasurementUrl = BASE_SERVICE_URL;
         if (jQuery("input[id$=hdIsVerification]").val() == "true") {
             deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteVMeasurement/" + measurementId;
             //deleteMeasurementUrl += "PluginData.svc/DeleteVMeasurement/" + measurementId;
