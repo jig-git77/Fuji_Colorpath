@@ -223,6 +223,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     selectedBranchIds = chkUserBranch.Items.Cast<ListItem>().ToList().FindAll(p => p.Selected).Select(x => x.Value).ToList();
                     selectedBranchIds.ForEach(x => UserInformation.UserBranches.Add(new UserBranch() { BranchId = Convert.ToInt32(x) }));
                     break;
+                case ERole.CSRUser:
+                    UserInformation.UserCompany = new UserCompany() { CompanyId = Convert.ToInt16(cmbCompany.SelectedValue) };
+                    break;
             }
             #endregion
 
@@ -343,6 +346,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     case ERole.SiteUser:
                         break;
                     case ERole.PrintBuyer:
+                        break;
+                    case ERole.CSRUser:
+                        trBranch.Visible = false;
                         break;
                 }
             }

@@ -47,14 +47,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
-            _viewMeasurementSetting.MetricTargetPreset = projectBusiness.GetMetricTargetPresetList(_viewMeasurementSetting.CurrentUserId, _viewMeasurementSetting.ProjectTypeID);
+            _viewMeasurementSetting.MetricTargetPreset = projectBusiness.GetMetricTargetPresetList(_viewMeasurementSetting.CurrentUserId, _viewMeasurementSetting.ProjectTypeID,_viewMeasurementSetting.PrintingTypeId);
         }
 
         public void GetMetricTargetPreset_Verification()
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
-            _viewMeasurementSetting.MetricTargetPreset = projectBusiness.GetMetricTargetPresetList(_viewMeasurementSetting.CurrentUserId, _viewMeasurementSetting.ProjectTypeID, true);
+            _viewMeasurementSetting.MetricTargetPreset = projectBusiness.GetMetricTargetPresetList(_viewMeasurementSetting.CurrentUserId, _viewMeasurementSetting.ProjectTypeID, _viewMeasurementSetting.PrintingTypeId, true);
         }
 
         public void GetReferenceChartTypeImage()

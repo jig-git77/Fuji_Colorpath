@@ -897,7 +897,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                 objReportPDF.dtSpotPatchDetails = dtPatchDetails;
                 objReportPDF.PDF_NAME = OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
-                objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+                objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
 
                 objReportPDF.GenerateSpotPatchDetailsReport();
                 string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
@@ -934,7 +934,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                 objReportPDF.dtSpotPatchDetails = dtPatchDetails;
                 objReportPDF.PDF_NAME = OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
-                objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+                objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
 
                 objReportPDF.GenerateSpotPatchDetailsReport();
                 string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
@@ -1122,11 +1122,54 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         .Where(r => r.Field<byte>("PatchTypeID") == 121 || r.Field<byte>("PatchTypeID") == 132 || r.Field<byte>("PatchTypeID") == 143 || r.Field<byte>("PatchTypeID") == 154)
                         .CopyToDataTable();
             }
+           
+            else if (MetricSumID == "43")    //----For 'CMY ΔE Max'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 1 || r.Field<byte>("PatchTypeID") == 2 || r.Field<byte>("PatchTypeID") == 3)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "44")    //----For 'K ΔE Max'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 4)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "45")    //----For 'K ΔTVI25'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                       .Where(r => r.Field<byte>("PatchTypeID") == 25)
+                       .CopyToDataTable();
+            }
+            else if (MetricSumID == "46")    //----For 'K ΔTVI50'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                       .Where(r => r.Field<byte>("PatchTypeID") == 26)
+                       .CopyToDataTable();
+            }
+            else if (MetricSumID == "47")    //----For 'K ΔTVI75'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                       .Where(r => r.Field<byte>("PatchTypeID") == 27)
+                       .CopyToDataTable();
+            }
             else if (MetricSumID == "48")    //----For 'Fogra Gray ΔCh Avg'
             {
                 DT = dtPatchDetails.AsEnumerable()
                         .Where(r => r.Field<byte>("PatchTypeID") == 9 || r.Field<byte>("PatchTypeID") == 52 || r.Field<byte>("PatchTypeID") == 53 || r.Field<byte>("PatchTypeID") == 54 || r.Field<byte>("PatchTypeID") == 55 || r.Field<byte>("PatchTypeID") == 56 || r.Field<byte>("PatchTypeID") == 57 || r.Field<byte>("PatchTypeID") == 58 || r.Field<byte>("PatchTypeID") == 59 || r.Field<byte>("PatchTypeID") == 60)
                         .CopyToDataTable();
+            }
+            else if (MetricSumID == "49")    //----For 'RGB ∆E Max'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                       .Where(r => r.Field<byte>("PatchTypeID") == 5 || r.Field<byte>("PatchTypeID") == 6 || r.Field<byte>("PatchTypeID") == 7)
+                       .CopyToDataTable();
+            }
+            else if (MetricSumID == "51")    //----For 'Paper ΔE Max'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                       .Where(r => r.Field<byte>("PatchTypeID") == 8)
+                       .CopyToDataTable();
             }
             else
             {

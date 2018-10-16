@@ -180,7 +180,7 @@
                                     ControlToValidate="cmbSecurityQuestion" ForeColor="Red" ValidationGroup="vgSetProfile"
                                     InitialValue="0">
                                     <ucValidationContainer:ValidationContainer ID="rfvSecurityQuestionContainer" runat="server"
-                                        ValidationMsg="Please select security question." Size="200" />
+                                        ValidationMsg="Please select security question." Size="200" ResourceValidationMsg="SelectSecurityQueMessageResource" />
                                 </asp:RequiredFieldValidator>
                             </div>
                             <div class="clear">
@@ -205,7 +205,7 @@
                                     ControlToValidate="txtSecurityAnswer" ForeColor="Red" 
                                     ValidationGroup="vgSetProfile">
                                     <ucValidationContainer:ValidationContainer ID="rfvSecurityAnswerContainer" runat="server"
-                                        ValidationMsg="Please provide security answer." Size="200" />
+                                        ValidationMsg="Please provide security answer." Size="200" ResourceValidationMsg="SelectSecurityAnsMessageResource"  />
                                 </asp:RequiredFieldValidator>
                             </div>
                             <div class="clear">

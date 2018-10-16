@@ -714,4 +714,19 @@
   <data name="yellowText" xml:space="preserve">
     <value>イエロー</value>
   </data>
+  <data name="locPaperABResource1.Text" xml:space="preserve">
+    <value>用紙 a* b*</value>
+  </data>
+  <data name="locPaperLResource1.Text" xml:space="preserve">
+    <value>用紙L*</value>
+  </data>
+  <data name="locGrayBalanceAResource1.Text" xml:space="preserve">
+    <value>グレーバランス a*</value>
+  </data>
+  <data name="locGrayBalanceBResource1.Text" xml:space="preserve">
+    <value>グレーバランス b*</value>
+  </data>
+  <data name="locGrayBalanceLResource1.Text" xml:space="preserve">
+    <value>グレーバランスL*</value>
+  </data>
 </root>

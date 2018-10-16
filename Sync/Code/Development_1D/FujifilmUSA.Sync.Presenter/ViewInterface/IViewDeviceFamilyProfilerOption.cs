@@ -12,6 +12,14 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int PrintStandardTypeId { get; set; }
         List<Entity.CPSync1D.PrintStandardTVI> PrintStandardTVI { get; set; }
         List<Entity.CPSync1D.ProjectTargetDensity> ProjectTargetDensity { get; set; }
+        List<Entity.CPSync1D.ProjectTargetHueAngle> ProjectTargetHueAngle { get; set; }
         short LicenseTypeId { get; set; }
+        List<Device> Devices { get; set; }
+        int CompanyID { get; set; }
+        int BranchID { get; set; }
+        int DeviceID { get; set; }
+        int RetargetProjectID { get; set; }
+        string RetargetPrintStandardTypeName { get; set; }
+        string RetargetMetricTargetPresetName { get; set; }
     }
 }

@@ -114,7 +114,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         objReportPDF.DLPName = chart.ReportDLPName;
                         //objReportPDF.ReportName = "Single Measurement Report";
                         //objReportPDF.DLPName = "DLP_NAME";
-                        objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+                        objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
 
                         if (chart.validationType == 1)
                         {
@@ -164,6 +164,73 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         httpResponse.status = ResponseStatus.Success;
                         httpResponse.Data = ReportPath;
                         actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));                        
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
+        [HttpPost]
+        public IHttpActionResult ExportSpotAnalyzeChartReport(SpotChartContent chart)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                if (chart == null)
+                {
+                    validationMessage = "Invalid Charts, Please try again.";
+
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    if (chart.OptimizeRunId == null)
+                        validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+
+                    if (!string.IsNullOrEmpty(validationMessage))
+                    {
+                        BaseErrorResponse errprResponse = new BaseErrorResponse();
+                        errprResponse.Error.UserMessage = validationMessage;
+                        errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                    }
+                    else
+                    {
+                        OptimizeRunId = Convert.ToInt32(chart.OptimizeRunId);
+                        ReportPDF objReportPDF = new ReportPDF();
+                        objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+
+                        if (!Directory.Exists(objReportPDF.PDFPath))
+                            Directory.CreateDirectory(objReportPDF.PDFPath);
+
+                        objReportPDF.spotChartContent = chart;
+                        objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSpotProject.PDF";                                                
+                        objReportPDF.ReportName = "Brand Color Optimization";
+                        objReportPDF.ReportType = (int)enumReportType.ReportSpotColorProject; //Only in spot color Optimization part
+                        objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
+                        DSReport = new DataSet();
+                        _presenterReportSingleMeasurement.GetReportDataOnSpotProject();
+                        objReportPDF.DS_Common = DSReport;                        
+                        objReportPDF.GenerateClientReportPDF();
+                        string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
+
+                        httpResponse.status = ResponseStatus.Success;
+                        httpResponse.Data = ReportPath;
+                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
                     }
                 }
             }
@@ -251,7 +318,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         objReportPDF.DLPName = chart.ReportDLPName;
                         //objReportPDF.ReportName = "Single Measurement Report";
                         //objReportPDF.DLPName = "DLP_NAME";
-                        objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+                        objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
 
                         if (chart.validationType == 1)
                         {
@@ -1797,8 +1864,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public bool IsSync1DType { get; set; }
         public DataSet DSReport_G7_Vali { get; set; }
         public int ValidationType { get; set; }
-        public bool IsAverageOfMeasurements { get; set; }
-
+        public bool IsAverageOfMeasurements { get; set; }        
         #endregion
 
         #region IViewReportGrading Members

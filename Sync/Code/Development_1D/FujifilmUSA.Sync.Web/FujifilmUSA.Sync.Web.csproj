@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -14,8 +14,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FujifilmUSA.Sync.Web</RootNamespace>
     <AssemblyName>FujifilmUSA.Sync.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -33,6 +33,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <Use64BitIISExpress />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +43,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -50,19 +52,20 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AjaxControlToolkit">
       <HintPath>..\..\Solution References\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Service.Common.Encryption">
       <HintPath>..\..\..\..\Reference\Service.Common.Encryption.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.2.0.20126.16343\lib\net40\System.Net.Http.dll</HintPath>
       <Private>True</Private>
@@ -82,16 +85,14 @@
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Telerik.Web.UI">
       <HintPath>..\..\Solution References\Telerik.Web.UI.dll</HintPath>
     </Reference>
@@ -106,10 +107,12 @@
     <Content Include="AddDeviceProfilerSettings.aspx" />
     <Content Include="AddLookupTVILABDensity.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
+    <Content Include="AddMetricTarget.aspx" />
     <Content Include="AddMetricTargetPreset.aspx" />
     <Content Include="AddPatchTolerance.aspx" />
     <Content Include="AddPrintStandardType.aspx" />
     <Content Include="AddReferenceChart.aspx" />
+    <Content Include="AddReferenceChartPreset.aspx" />
     <Content Include="AddSourceProfile.aspx" />
     <Content Include="AddSpotTarget.aspx" />
     <Content Include="AnalyzeMeasurement.aspx" />
@@ -782,20 +785,24 @@
     <Content Include="COViewOpenProject.aspx" />
     <Content Include="CSS\FirefoxPluginStyle.css" />
     <Content Include="CSS\jquery-ui-1.8.16.custom.css" />
+    <Content Include="CustomReports.aspx" />
     <Content Include="DownloadSoftwares.aspx" />
     <Content Include="Download\Done.wav" />
     <Content Include="Download\Error.wav" />
     <Content Include="FireFoxPluginDetails.aspx" />
+    <Content Include="GenerateCustomReports.aspx" />
     <Content Include="Global.asax" />
     <Content Include="GlobalActivation.aspx" />
     <Content Include="GlobalMaster.Master" />
     <Content Include="Images\4DCertification.png" />
     <Content Include="Images\4DCertification_Certified.png" />
     <Content Include="Images\abChartBackGround.gif" />
+    <Content Include="Images\add.png" />
     <Content Include="Images\AlignCurve.png" />
     <Content Include="Images\AlignCurve_Certified.png" />
     <Content Include="Images\AlignCurve_G7.png" />
     <Content Include="Images\AlignCurve_G7_Certified.png" />
+    <Content Include="Images\analyze-loader.gif" />
     <Content Include="Images\application-configuration-icon.png" />
     <Content Include="Images\application-configuration.png" />
     <Content Include="Images\BGISOPaperGraph1_Sync4D.jpg" />
@@ -849,9 +856,11 @@
     <Content Include="Images\open_folder_yellow.png" />
     <Content Include="Images\purpledot.png" />
     <Content Include="Images\Red.png" />
+    <Content Include="Images\remove.png" />
     <Content Include="Images\Report-Title.png" />
     <Content Include="Images\rotateguntarget.png" />
     <Content Include="Images\SpotAB_Bg.gif" />
+    <Content Include="Images\SpotDetailsReport.png" />
     <Content Include="Images\SpotL_Bg.jpg" />
     <Content Include="Images\SpotProject.png" />
     <Content Include="Images\SpotProject_Certified.png" />
@@ -948,6 +957,7 @@
     <Content Include="JS\jquery.tools.min.js" />
     <Content Include="JS\Printing.js" />
     <Content Include="JS\ProjectList.js" />
+    <Content Include="MetricTargetManagement.aspx" />
     <Content Include="MetricTargetPresetManagement.aspx" />
     <Content Include="PatchPresetManagement.aspx" />
     <Content Include="Permission.aspx" />
@@ -1415,6 +1425,10 @@
     <Content Include="Content\kendo\2018.1.221-source\mobile\android\all.less" />
     <Content Include="Content\kendo\2018.1.221-source\mobile\android\actionsheet.less" />
     <Content Include="Content\kendo\2018.1.221-source\common\transitions.less" />
+    <Content Include="Download\Firefox Setup 52.9.0esr de.zip" />
+    <Content Include="Download\Firefox Setup 52.9.0esr ja.zip" />
+    <Content Include="Download\Firefox Setup 52.9.0esr.zip" />
+    <Content Include="ReportMaster.Master" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -2422,6 +2436,7 @@
     <Content Include="JS\jquery.js" />
     <Content Include="JS\MenuBar.js" />
     <Content Include="SourceProfileManagement.aspx" />
+    <Content Include="PopupSpotLibraryExport.aspx" />
     <Content Include="SpotMeasurement.aspx" />
     <Content Include="SpotTargetManagement.aspx" />
     <Content Include="Spot_Measurement.aspx" />
@@ -2438,15 +2453,18 @@
     <Content Include="Templates\ScoringMeasurement_Default.htm" />
     <Content Include="Templates\style.css" />
     <Content Include="Templates\kendoPrepressSingleMeasurement_G7.htm" />
+    <Content Include="Terms\ColorPath SYNC Firefox ESR.pdf" />
     <Content Include="UserControl\AccessDenied.ascx" />
     <Content Include="UserControl\ActivityValidationRules.ascx" />
     <Content Include="UserControl\AddDeviceProfilerSettings.ascx" />
     <Content Include="UserControl\AddLookupTVILABDensity.ascx" />
+    <Content Include="UserControl\AddMetricTarget.ascx" />
     <Content Include="UserControl\AddMetricTargetPreset.ascx" />
     <Content Include="UserControl\AddPatchTolerance.ascx" />
     <Content Include="UserControl\AddPrintStandardType.ascx" />
     <Content Include="UserControl\AddProject\ValidationSetup.ascx" />
     <Content Include="UserControl\AddReferenceChart.ascx" />
+    <Content Include="UserControl\AddReferenceChartPreset.ascx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
     <Content Include="UserControl\AddSpotTarget.ascx" />
     <Content Include="UserControl\AddUserManagement.ascx" />
@@ -2468,10 +2486,15 @@
     <Content Include="UserControl\COTransferSiteControl.ascx" />
     <Content Include="UserControl\COValidationCallback.ascx" />
     <Content Include="UserControl\COViewOpenProject.ascx" />
+    <Content Include="UserControl\CustomReports.ascx" />
     <Content Include="UserControl\DownloadSoftwares.ascx" />
+    <Content Include="UserControl\GenerateCustomReports.ascx" />
     <Content Include="UserControl\GlobalActivation.ascx" />
     <Content Include="UserControl\InkOptSourceMiddle.ascx" />
     <Content Include="UserControl\MeasurementCommonNew.ascx" />
+
+    <Content Include="UserControl\MetricTargetManagement.ascx" />
+
     <Content Include="UserControl\MetricTargetPresetManagement.ascx" />
     <Content Include="UserControl\PatchPresetManagement.ascx" />
     <Content Include="UserControl\PopupControl\DownloadSoftware.ascx" />
@@ -2481,6 +2504,7 @@
     <Content Include="UserControl\PopupControl\ReportGrading.ascx" />
     <Content Include="UserControl\PopupControl\SpotClosePrintCondition.ascx" />
     <Content Include="UserControl\PopupControl\SpotColorPatchDetails.ascx" />
+    <Content Include="UserControl\PopupControl\SpotLibraryExport.ascx" />
     <Content Include="UserControl\PrintPreview.ascx" />
     <Content Include="UserControl\PrintStandardTypeManagement.ascx" />
     <Content Include="UserControl\ProfileManagement.ascx" />
@@ -2752,6 +2776,13 @@
     <Compile Include="AddMeasurementDevice.aspx.designer.cs">
       <DependentUpon>AddMeasurementDevice.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddMetricTarget.aspx.cs">
+      <DependentUpon>AddMetricTarget.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddMetricTarget.aspx.designer.cs">
+      <DependentUpon>AddMetricTarget.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddMetricTargetPreset.aspx.cs">
       <DependentUpon>AddMetricTargetPreset.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2779,6 +2810,13 @@
     </Compile>
     <Compile Include="AddReferenceChart.aspx.designer.cs">
       <DependentUpon>AddReferenceChart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddReferenceChartPreset.aspx.cs">
+      <DependentUpon>AddReferenceChartPreset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddReferenceChartPreset.aspx.designer.cs">
+      <DependentUpon>AddReferenceChartPreset.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddSourceProfile.aspx.cs">
       <DependentUpon>AddSourceProfile.aspx</DependentUpon>
@@ -3035,6 +3073,13 @@
     <Compile Include="COViewOpenProject.aspx.designer.cs">
       <DependentUpon>COViewOpenProject.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CustomReports.aspx.cs">
+      <DependentUpon>CustomReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomReports.aspx.designer.cs">
+      <DependentUpon>CustomReports.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DownloadSoftwares.aspx.cs">
       <DependentUpon>DownloadSoftwares.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3048,6 +3093,13 @@
     </Compile>
     <Compile Include="FireFoxPluginDetails.aspx.designer.cs">
       <DependentUpon>FireFoxPluginDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GenerateCustomReports.aspx.cs">
+      <DependentUpon>GenerateCustomReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GenerateCustomReports.aspx.designer.cs">
+      <DependentUpon>GenerateCustomReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -3073,6 +3125,13 @@
     </Compile>
     <Compile Include="InkOptSourceMiddle.aspx.designer.cs">
       <DependentUpon>InkOptSourceMiddle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MetricTargetManagement.aspx.cs">
+      <DependentUpon>MetricTargetManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MetricTargetManagement.aspx.designer.cs">
+      <DependentUpon>MetricTargetManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="MetricTargetPresetManagement.aspx.cs">
       <DependentUpon>MetricTargetPresetManagement.aspx</DependentUpon>
@@ -3200,6 +3259,13 @@
     <Compile Include="ReportSingleMeasurement_G7_Vali.aspx.designer.cs">
       <DependentUpon>ReportSingleMeasurement_G7_Vali.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportMaster.Master.cs">
+      <DependentUpon>ReportMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportMaster.Master.designer.cs">
+      <DependentUpon>ReportMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="SessionEnd.aspx.cs">
       <DependentUpon>SessionEnd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3227,6 +3293,13 @@
     </Compile>
     <Compile Include="SourceProfileManagement.aspx.designer.cs">
       <DependentUpon>SourceProfileManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupSpotLibraryExport.aspx.cs">
+      <DependentUpon>PopupSpotLibraryExport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupSpotLibraryExport.aspx.designer.cs">
+      <DependentUpon>PopupSpotLibraryExport.aspx</DependentUpon>
     </Compile>
     <Compile Include="SpotMeasurement.aspx.cs">
       <DependentUpon>SpotMeasurement.aspx</DependentUpon>
@@ -3277,6 +3350,13 @@
     <Compile Include="UserControl\AddLookupTVILABDensity.ascx.designer.cs">
       <DependentUpon>AddLookupTVILABDensity.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\AddMetricTarget.ascx.cs">
+      <DependentUpon>AddMetricTarget.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddMetricTarget.ascx.designer.cs">
+      <DependentUpon>AddMetricTarget.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\AddMetricTargetPreset.ascx.cs">
       <DependentUpon>AddMetricTargetPreset.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3310,6 +3390,13 @@
     </Compile>
     <Compile Include="UserControl\AddReferenceChart.ascx.designer.cs">
       <DependentUpon>AddReferenceChart.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddReferenceChartPreset.ascx.cs">
+      <DependentUpon>AddReferenceChartPreset.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddReferenceChartPreset.ascx.designer.cs">
+      <DependentUpon>AddReferenceChartPreset.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddSourceProfile.ascx.cs">
       <DependentUpon>AddSourceProfile.ascx</DependentUpon>
@@ -3440,12 +3527,26 @@
     <Compile Include="UserControl\COViewOpenProject.ascx.designer.cs">
       <DependentUpon>COViewOpenProject.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\CustomReports.ascx.cs">
+      <DependentUpon>CustomReports.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\CustomReports.ascx.designer.cs">
+      <DependentUpon>CustomReports.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\DownloadSoftwares.ascx.cs">
       <DependentUpon>DownloadSoftwares.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\DownloadSoftwares.ascx.designer.cs">
       <DependentUpon>DownloadSoftwares.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\GenerateCustomReports.ascx.cs">
+      <DependentUpon>GenerateCustomReports.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\GenerateCustomReports.ascx.designer.cs">
+      <DependentUpon>GenerateCustomReports.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\GlobalActivation.ascx.cs">
       <DependentUpon>GlobalActivation.ascx</DependentUpon>
@@ -3466,6 +3567,13 @@
     </Compile>
     <Compile Include="UserControl\MeasurementCommonNew.ascx.designer.cs">
       <DependentUpon>MeasurementCommonNew.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\MetricTargetManagement.ascx.cs">
+      <DependentUpon>MetricTargetManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MetricTargetManagement.ascx.designer.cs">
+      <DependentUpon>MetricTargetManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\MetricTargetPresetManagement.ascx.cs">
       <DependentUpon>MetricTargetPresetManagement.ascx</DependentUpon>
@@ -3529,6 +3637,13 @@
     </Compile>
     <Compile Include="UserControl\PopupControl\SpotColorPatchDetails.ascx.designer.cs">
       <DependentUpon>SpotColorPatchDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\SpotLibraryExport.ascx.cs">
+      <DependentUpon>SpotLibraryExport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\SpotLibraryExport.ascx.designer.cs">
+      <DependentUpon>SpotLibraryExport.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\PrintPreview.ascx.cs">
       <DependentUpon>PrintPreview.ascx</DependentUpon>
@@ -4053,7 +4168,7 @@
       <Name>FujifilmUSA.Sync.GlobalResources</Name>
     </ProjectReference>
     <ProjectReference Include="..\FujifilmUSA.Sync.Presenter\FujifilmUSA.Sync.Presenter.csproj">
-      <Project>{05EC147C-DCDC-4470-A7FD-7579E28735EC}</Project>
+      <Project>{05ec147c-dcdc-4470-a7fd-7579e28735ec}</Project>
       <Name>FujifilmUSA.Sync.Presenter</Name>
     </ProjectReference>
   </ItemGroup>
@@ -5721,7 +5836,6 @@
     <Content Include="Scripts\kendo\2018.1.221\cultures\kendo.culture.aa-DJ.min.js.map" />
     <Content Include="Scripts\kendo\2018.1.221\kendo.all.min.js.map" />
     <None Include="Templates\CertifiedLabel.label" />
-    <None Include="Terms\ColorPath SYNC Firefox ESR.pdf" />
     <None Include="Terms\ColorPath Sync TC 2013.pdf" />
   </ItemGroup>
   <ItemGroup>
@@ -6285,6 +6399,7 @@
     <Content Include="UserControl\App_LocalResources\SpotTargetManagement.ascx.de.resx" />
   </ItemGroup>
   <ItemGroup>
+
     <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -6295,6 +6410,45 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CustomReports.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CustomReports.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CustomReports.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CustomReports.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MetricTargetManagement.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotLibraryExport.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotLibraryExport.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotLibraryExport.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotLibraryExport.ascx.de.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

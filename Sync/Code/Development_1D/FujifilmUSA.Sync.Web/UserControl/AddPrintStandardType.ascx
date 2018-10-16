@@ -45,7 +45,7 @@
                                         <asp:RequiredFieldValidator ID="rfvPrintStandardType" runat="server" Display="Dynamic"
                                                 ControlToValidate="txtPrintStandardType" ForeColor="Red" 
                                                 ValidationGroup="vgAddPrintStandardType" meta:resourcekey="rfvPrintStandardTypeResource1"><ucValidationContainer:ValidationContainer ID="rfvcPrintStandardTypeContainer" runat="server"
-                                                    ValidationMsg="Please provide PrintStandard name." Size="200" />
+                                                    ValidationMsg="Please provide PrintStandard name." Size="200" ResourceValidationMsg="PrintStandardRequiredResource" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -70,7 +70,7 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvSourceProfile" runat="server" Display="Dynamic" ControlToValidate="cmbSourceProfile"
                                             ForeColor="Red" ValidationGroup="vgAddPrintStandardType" meta:resourcekey="rfvSourceProfileResource1"><ucValidationContainer:ValidationContainer ID="rfvSourceProfileContainer" runat="server"
-                                                ValidationMsg="Please select SourceProfile." Size="200" />
+                                                ValidationMsg="Please select SourceProfile." Size="200" ResourceValidationMsg="SelectSourceProfileResource"/>
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">

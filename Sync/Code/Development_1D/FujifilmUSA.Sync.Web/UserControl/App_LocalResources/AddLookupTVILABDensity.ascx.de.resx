@@ -120,6 +120,9 @@
   <data name="lblHeaderResource1.Text" xml:space="preserve">
     <value>Add Sync1D Lookup Values</value>
   </data>
+  <data name="lblNewEntryMsgResource1.Text" xml:space="preserve">
+    <value>Please choose Project Type because this is first time entries for this Print Standard Type:</value>
+  </data>
   <data name="locCancelResource1.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>

@@ -65,26 +65,39 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 //divPatchDetailsRun.Visible = true;
                 tblDetailsMoreRun.Visible = true;
                 tblColorMoreRun.Visible = true;
-                decimal Delta_Target_PredictedL, Delta_Measured_TargetL, Delta_Measured_PredictedL,
-                    Delta_Target_PredictedA, Delta_Measured_TargetA, Delta_Measured_PredictedA,
-                    Delta_Target_PredictedB, Delta_Measured_TargetB, Delta_Measured_PredictedB;
+                //decimal Delta_Target_PredictedL, Delta_Measured_TargetL, Delta_Measured_PredictedL,
+                //    Delta_Target_PredictedA, Delta_Measured_TargetA, Delta_Measured_PredictedA,
+                //    Delta_Target_PredictedB, Delta_Measured_TargetB, Delta_Measured_PredictedB;
 
-                Delta_Target_PredictedL = T_L - P_L;
-                Delta_Target_PredictedA = T_a - P_a;
-                Delta_Target_PredictedB = T_b - P_b;
+                decimal delta_Predicted_Target_L, delta_Measured_Target_L,
+                    delta_Predicted_Target_A, delta_Measured_Target_A,
+                    delta_Predicted_Target_B, delta_Measured_Target_B;
 
-                Delta_Measured_TargetL = M_L - T_L;
-                Delta_Measured_TargetA = M_a - T_a;
-                Delta_Measured_TargetB = M_b - T_b;
+                //Delta_Target_PredictedL = T_L - P_L;
+                //Delta_Target_PredictedA = T_a - P_a;
+                //Delta_Target_PredictedB = T_b - P_b;
 
-                Delta_Measured_PredictedL = M_L - P_L;
-                Delta_Measured_PredictedA = M_a - P_a;
-                Delta_Measured_PredictedB = M_b - P_b;
+                //Delta_Measured_TargetL = M_L - T_L;
+                //Delta_Measured_TargetA = M_a - T_a;
+                //Delta_Measured_TargetB = M_b - T_b;
+
+                //Delta_Measured_PredictedL = M_L - P_L;
+                //Delta_Measured_PredictedA = M_a - P_a;
+                //Delta_Measured_PredictedB = M_b - P_b;
+
+                delta_Predicted_Target_L = P_L - T_L;
+                delta_Measured_Target_L = M_L - T_L;
+
+                delta_Predicted_Target_A = P_a - T_a;
+                delta_Measured_Target_A = M_a - T_a;
+
+                delta_Predicted_Target_B = P_b - T_b;
+                delta_Measured_Target_B = M_b - T_b;
 
                 lblTargetL.Text = string.Format("{0:0.00}", T_L);
                 lblTargetA.Text = string.Format("{0:0.00}", T_a);
                 lblTargetB.Text = string.Format("{0:0.00}", T_b);
-                                  
+
                 lblActualL.Text = string.Format("{0:0.00}", P_L);
                 lblActualA.Text = string.Format("{0:0.00}", P_a);
                 lblActualB.Text = string.Format("{0:0.00}", P_b);
@@ -92,27 +105,40 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 lblMeasuredL.Text = string.Format("{0:0.00}", M_L);
                 lblMeasuredA.Text = string.Format("{0:0.00}", M_a);
                 lblMeasuredB.Text = string.Format("{0:0.00}", M_b);
-                                    
+
                 lblMeasuredL.Text = string.Format("{0:0.00}", M_L);
                 lblMeasuredA.Text = string.Format("{0:0.00}", M_a);
                 lblMeasuredB.Text = string.Format("{0:0.00}", M_b);
 
-                lblTarget_PredictedL.Text = string.Format("{0:0.00}", Delta_Target_PredictedL);
-                lblTarget_PredictedA.Text = string.Format("{0:0.00}", Delta_Target_PredictedA);
-                lblTarget_PredictedB.Text = string.Format("{0:0.00}", Delta_Target_PredictedB);
 
-                lblMeasured_TargetL.Text = string.Format("{0:0.00}", Delta_Measured_TargetL);
-                lblMeasured_TargetA.Text = string.Format("{0:0.00}", Delta_Measured_TargetA);
-                lblMeasured_TargetB.Text = string.Format("{0:0.00}", Delta_Measured_TargetB);
 
-                lblMeasured_PredictedL.Text = string.Format("{0:0.00}", Delta_Measured_PredictedL);
-                lblMeasured_PredictedA.Text = string.Format("{0:0.00}", Delta_Measured_PredictedA);
-                lblMeasured_PredictedB.Text = string.Format("{0:0.00}", Delta_Measured_PredictedB);
+
+
+                lblPredicted_Target_L.Text = getDecimalSign(delta_Predicted_Target_L) + string.Format("{0:0.00}", Math.Abs(delta_Predicted_Target_L));
+                lblMeasured_Target_L.Text = getDecimalSign(delta_Measured_Target_L) + string.Format("{0:0.00}", Math.Abs(delta_Measured_Target_L));
+
+                lblPredicted_Target_a.Text = getDecimalSign(delta_Predicted_Target_A) + string.Format("{0:0.00}", Math.Abs(delta_Predicted_Target_A));
+                lblMeasured_Target_a.Text = getDecimalSign(delta_Measured_Target_A) + string.Format("{0:0.00}", Math.Abs(delta_Measured_Target_A));
+
+                lblPredicted_Target_b.Text = getDecimalSign(delta_Predicted_Target_B) + string.Format("{0:0.00}", Math.Abs(delta_Predicted_Target_B));
+                lblMeasured_Target_b.Text = getDecimalSign(delta_Measured_Target_B) + string.Format("{0:0.00}", Math.Abs(delta_Measured_Target_B));
+
+                //lblTarget_PredictedL.Text = string.Format("{0:0.00}", Delta_Target_PredictedL);
+                //lblTarget_PredictedA.Text = string.Format("{0:0.00}", Delta_Target_PredictedA);
+                //lblTarget_PredictedB.Text = string.Format("{0:0.00}", Delta_Target_PredictedB);
+
+                //lblMeasured_TargetL.Text = string.Format("{0:0.00}", Delta_Measured_TargetL);
+                //lblMeasured_TargetA.Text = string.Format("{0:0.00}", Delta_Measured_TargetA);
+                //lblMeasured_TargetB.Text = string.Format("{0:0.00}", Delta_Measured_TargetB);
+
+                //lblMeasured_PredictedL.Text = string.Format("{0:0.00}", Delta_Measured_PredictedL);
+                //lblMeasured_PredictedA.Text = string.Format("{0:0.00}", Delta_Measured_PredictedA);
+                //lblMeasured_PredictedB.Text = string.Format("{0:0.00}", Delta_Measured_PredictedB);
 
                 divActual.Style.Add("background-color", Predicated_htmlColor);
                 divTarget.Style.Add("background-color", htmlColor);
                 divMeasured.Style.Add("background-color", Measured_htmlColor);
-                
+
                 lblDeltaTargetPrediction.Text = string.Format("{0:0.00}", deltaTP);
                 lblDeltaTargetMeasured.Text = string.Format("{0:0.00}", deltaMT);
                 lblDeltaPredictionMeasured.Text = string.Format("{0:0.00}", deltaMP);
@@ -123,9 +149,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 tblDetailsFirstRun.Visible = true;
                 tblColorFirstRun.Visible = true;
                 decimal Delta_L, Delta_a, Delta_b;
-                Delta_L = P_L - T_L;
-                Delta_a = P_a - T_a;
-                Delta_b = P_b - T_b;
+                Delta_L = T_L - P_L;
+                Delta_a = T_a - P_a;
+                Delta_b = T_b - P_b;
 
                 lblTargetLRun0.Text = T_L.ToString();
                 lblTargetARun0.Text = T_a.ToString();
@@ -142,6 +168,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 divActualRun0.Style.Add("background-color", Predicated_htmlColor);
                 divTargetRun0.Style.Add("background-color", htmlColor);
             }
+        }
+
+        public string getDecimalSign(decimal number)
+        {
+            return number == 0 ? "" : number <= 0 ? "-" : "+";
         }
 
         //public void BindValuesNew()

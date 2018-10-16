@@ -279,6 +279,12 @@
   <data name="EInkOrder_YMKC" xml:space="preserve">
     <value>YMKC</value>
   </data>
+  <data name="EPrintingTypes_Offset" xml:space="preserve">
+    <value>Offset</value>
+  </data>
+  <data name="EPrintingTypes_Flexo" xml:space="preserve">
+    <value>Flexo</value>
+  </data>
   <data name="EInstrumentType_i1IO" xml:space="preserve">
     <value>i1-IO</value>
   </data>

@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="TargetColorSpace.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.TargetColorSpace" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
+    TagPrefix="ucValidationContainer" %>
 <style type="text/css">
     textarea {
         resize: none;
@@ -42,7 +44,7 @@
         </span>
     </asp:LinkButton>
     <asp:LinkButton ID="lnkbtNext" runat="server" CssClass="button"
-        OnClick="lnkbtnNext_Click" Visible="false">
+        OnClick="lnkbtnNext_Click" ValidationGroup="RetargetValidation">
         <span>
             <asp:Image ID="Image2" runat="server"
                 ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="imgAddResource11" />
@@ -206,24 +208,24 @@
                                                     <asp:Button ID="btn_PaperApply" runat="server" Text="Apply!"
                                                         OnClick="btn_PaperApply_Click" ValidationGroup="a" meta:resourcekey="locbtn_PaperApplyResource1" />
                                             <asp:Button ID="btn_PaperClear" runat="server" OnClick="btn_PaperClear_Click"
-                                                Text="Reset" meta:resourcekey="locbtn_PaperClearResource1" /> 
+                                                Text="Reset" meta:resourcekey="locbtn_PaperClearResource1" />
                                             <br />
 
-                                             <asp:Localize runat="server" Text="Min L* Value:" ID="Localize8" meta:resourcekey="Panel_PaperLABBlackResource1"></asp:Localize>
-                                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                            <asp:Localize runat="server" Text="Min L* Value:" ID="Localize8" meta:resourcekey="Panel_PaperLABBlackResource1"></asp:Localize>
+                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                                             L*<asp:TextBox ID="txtPaper_Black_L" runat="server" CssClass="textwidth40"></asp:TextBox>
                                             <asp:RangeValidator ID="RangeValidator10" runat="server"
                                                 ControlToValidate="txtPaper_Black_L" ErrorMessage="*" ForeColor="Red"
                                                 ValidationGroup="a" MinimumValue="0" MaximumValue="100" Type="Double"></asp:RangeValidator>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtPaper_Black_L" ValidationGroup="a" ForeColor="Red"></asp:RequiredFieldValidator>
-                                          
-                                                    a*<asp:TextBox ID="txtPaper_Black_a" runat="server" CssClass="textwidth40"></asp:TextBox>
+
+                                            a*<asp:TextBox ID="txtPaper_Black_a" runat="server" CssClass="textwidth40"></asp:TextBox>
                                             <asp:RangeValidator ID="RangeValidator11" runat="server"
                                                 ControlToValidate="txtPaper_Black_a" ErrorMessage="*" ForeColor="Red"
                                                 ValidationGroup="a" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="txtPaper_Black_a" ValidationGroup="a" ForeColor="Red"></asp:RequiredFieldValidator>
-                                           
-                                                    b*<asp:TextBox ID="txtPaper_Black_b" runat="server" CssClass="textwidth40"></asp:TextBox>
+
+                                            b*<asp:TextBox ID="txtPaper_Black_b" runat="server" CssClass="textwidth40"></asp:TextBox>
                                             <asp:RangeValidator ID="RangeValidator12" runat="server"
                                                 ControlToValidate="txtPaper_Black_b" ErrorMessage="*" ForeColor="Red"
                                                 ValidationGroup="a" MinimumValue="-128" MaximumValue="127" Type="Double"></asp:RangeValidator>
@@ -277,11 +279,6 @@
                                 </tr>
                             </table>
 
-
-
-
-
-
                         </div>
                     </div>
                     <div class="section_bottom">
@@ -304,7 +301,7 @@
                                             <asp:Localize runat="server" Text="Spot Target:" ID="Localize1" meta:resourcekey="locSpotTargetResource1"></asp:Localize></span>
                                     </td>
                                     <td colspan="3">
-                                        <asp:DropDownList ID="cmbSpotTargetList" runat="server" CssClass="select" DataValueField="Key"
+                                        <asp:DropDownList ID="cmbSpotTargetList" runat="server" CssClass="select" DataValueField="Key" ClientIDMode="Static"
                                             DataTextField="Value" OnSelectedIndexChanged="cmbSpotTargetList_SelectedIndexChanged"
                                             AutoPostBack="True" meta:resourcekey="cmbSpotTargetResource1">
                                         </asp:DropDownList>
@@ -334,8 +331,132 @@
                                             meta:resourcekey="txtOwnerDescriptionResource1"></asp:TextBox>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <asp:Panel ID="PanelOptionalRetargetSpotProject" runat="server" GroupingText="<b>Optional Retarget</b>" Width="100%" Visible="false" meta:resourcekey="panelRetargetResource1">
+                                            <div id="divReTargetPanel" runat="server" visible="false" style="float: left; width: 100%;">
+                                                <div runat="server" id="divBranch">
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width: 180px;">
+                                                                <span>
+                                                                    <asp:Localize runat="server" Text="Select Branch: "
+                                                                        ID="locSelectBranch" meta:resourcekey="locSelectBranchResource1"></asp:Localize></span>
+                                                            </td>
+                                                            <td>
+                                                                <asp:DropDownList runat="server" ID="cmbBranch" AutoPostBack="true" CssClass="select" OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" Width="250"></asp:DropDownList>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div runat="server" id="divDevice" visible="false">
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width: 180px;">
+                                                                <span>
+                                                                    <asp:Localize runat="server" Text="Select Device: "
+                                                                        ID="locSelectDevice" meta:resourcekey="locSelectDeviceResource1"></asp:Localize></span>
+                                                            </td>
+                                                            <td>
+                                                                <asp:DropDownList runat="server" ID="cmbDevice" AutoPostBack="true" CssClass="select" OnSelectedIndexChanged="cmbDevice_SelectedIndexChanged" Width="250"></asp:DropDownList>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div runat="server" id="divRetarget" visible="false">
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width: 180px;">
+                                                                <span>
+                                                                    <asp:Localize runat="server" Text="Select Certified Library: "
+                                                                        ID="locReTargetSpotProject" meta:resourcekey="locReTargetResource1"></asp:Localize></span>
+                                                            </td>
+                                                            <td>
+                                                                <asp:DropDownList ID="ddlReTargetProject" runat="server" CssClass="select" Width="250" AutoPostBack="true" OnSelectedIndexChanged="ddlReTargetProject_SelectedIndexChanged">
+                                                                </asp:DropDownList>
 
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div runat="server" id="divRetargetDetails" visible="false">
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width: 180px;">
+                                                                <span>
+                                                                    <asp:Localize runat="server" Text="Parent Project Name: "
+                                                                        ID="Localize9" meta:resourcekey="locParentProjectNameResource1"></asp:Localize></span>
+                                                            </td>
+                                                            <td>
+                                                                <div style="float: left">
+                                                                    <asp:Label runat="server" ID="lblParentProjectName" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 180px;">
+                                                                <span>
+                                                                    <asp:Localize runat="server" Text="Original Library: "
+                                                                        ID="Localize10" meta:resourcekey="locReTargetLibraryNameResource1"></asp:Localize></span>
+                                                            </td>
+                                                            <td>
+                                                                <div style="float: left">
+                                                                    <asp:Label runat="server" ID="lblLibraryName" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 180px; vertical-align: top;">
+                                                                <span>
+                                                                    <asp:Localize runat="server" Text="Original Library Description: "
+                                                                        ID="Localize11" meta:resourcekey="locReTargetDescriptionResource1"></asp:Localize></span>
+                                                            </td>
+                                                            <td>
+                                                                <div style="float: left">
+                                                                    <asp:Label runat="server" ID="lblRetargetDescription" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </asp:Panel>
+                                        <div style="float: right; width: 34%; margin-top: -44px;">
+                                            <table>
+                                                <tr style="height: 0px;">
+                                                    <td>
+                                                        <asp:RequiredFieldValidator ID="rfvBranch" runat="server" Display="Dynamic" ControlToValidate="cmbBranch"
+                                                            ForeColor="Red" ValidationGroup="RetargetValidation" InitialValue="">
+                                                            <ucValidationContainer:ValidationContainer ID="rfvcBranch" runat="server"
+                                                                ValidationMsg="Please select branch." Size="200" />
+                                                        </asp:RequiredFieldValidator>
 
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 0px;">
+                                                    <td>
+                                                        <asp:RequiredFieldValidator ID="rfvDevice" runat="server" Display="Dynamic" ControlToValidate="cmbDevice"
+                                                            ForeColor="Red" ValidationGroup="RetargetValidation" InitialValue="">
+                                                            <ucValidationContainer:ValidationContainer ID="rfvcDevice" runat="server"
+                                                                ValidationMsg="Please select device." Size="200" />
+                                                        </asp:RequiredFieldValidator>
+
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 0px;">
+                                                    <td>
+                                                        <asp:RequiredFieldValidator ID="rfvRetargate" runat="server" Display="Dynamic" ControlToValidate="ddlReTargetProject"
+                                                            ForeColor="Red" ValidationGroup="RetargetValidation" InitialValue="">
+                                                            <ucValidationContainer:ValidationContainer ID="rfvcRetarget" runat="server"
+                                                                ValidationMsg="Please select print condition." Size="200" />
+                                                        </asp:RequiredFieldValidator>
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
                             </table>
                         </asp:Panel>
                     </ContentTemplate>
@@ -343,7 +464,7 @@
             </td>
         </tr>
 
-         <tr id="trPaperScaling_4D" runat="server" visible="false">
+        <tr id="trPaperScaling_4D" runat="server" visible="false">
             <td>
                 <div style="display: block;" class="contantbox tabcontant">
                     <div class="section_top">
@@ -392,10 +513,8 @@
                                         </asp:Panel>
                                     </td>
                                 </tr>
-                                 <tr>
-                                    <td style="padding-left: 8px;">
-                                       
-                                    </td>
+                                <tr>
+                                    <td style="padding-left: 8px;"></td>
                                     <td>
                                         <asp:Panel ID="Panel_PaperLAB4D_Black" Style="padding: 5px" runat="server" BorderStyle="None" Enabled="false">
                                             <asp:Localize runat="server" Text="Min L* value:" ID="Localize7" meta:resourcekey="Panel_PaperLABBlackResource1"></asp:Localize>

@@ -563,7 +563,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return Convert.ToBoolean(txt_IsAvgMeasurement.Text);
             }
         }
-
+        public int OptimizeRunId { get; set; }
         #endregion
     }
 }

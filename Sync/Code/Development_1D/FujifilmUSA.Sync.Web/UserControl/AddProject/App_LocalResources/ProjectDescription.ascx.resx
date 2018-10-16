@@ -271,7 +271,7 @@
     <value>Ink Order:</value>
   </data>
   <data name="locOffsetDataResource1.Text" xml:space="preserve">
-    <value>Offset Printing Data</value>
+    <value>Printing Type</value>
   </data>
   <data name="locScreeningRefResource1.Text" xml:space="preserve">
     <value>*Include Type(AM-FM), Dot Shape, Frequency</value>
@@ -284,5 +284,23 @@
   </data>
   <data name="locProjectDescriptionResource1.Text" xml:space="preserve">
     <value>Project Description</value>
+  </data>
+  <data name="locPlatesText" xml:space="preserve">
+    <value>Plates:</value>
+  </data>
+  <data name="locRollersText" xml:space="preserve">
+    <value>Anilox Rollers:</value>
+  </data>
+  <data name="locDocBladeText" xml:space="preserve">
+    <value>Doctor Blade:</value>
+  </data>
+  <data name="locMountTapeText" xml:space="preserve">
+    <value>Mouting Tape:</value>
+  </data>
+  <data name="locWashesText" xml:space="preserve">
+    <value>Washes-Plate/Cylinder:</value>
+  </data>
+  <data name="locRollersMessageResource1.Text" xml:space="preserve">
+    <value>*Include Manufacture, Line Count &amp; BCM</value>
   </data>
 </root>

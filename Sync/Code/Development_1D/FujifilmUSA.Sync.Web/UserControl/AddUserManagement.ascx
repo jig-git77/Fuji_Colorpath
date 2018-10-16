@@ -184,7 +184,7 @@
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvFirstName" runat="server" Display="Dynamic" ControlToValidate="txtFirstName"
                                                                         ForeColor="Red" ValidationGroup="vgAddUser"><ucValidationContainer:ValidationContainer ID="rfvFirstNameContainer" runat="server"
-                                                                            ValidationMsg="Please provide first name." Size="200" />
+                                                                            ValidationMsg="Please provide first name." Size="200" ResourceValidationMsg="FirstNameRequiredResource" />
 </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -207,7 +207,7 @@
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvLastName" runat="server" Display="Dynamic" ControlToValidate="txtLastName"
                                                                         ForeColor="Red" ValidationGroup="vgAddUser"><ucValidationContainer:ValidationContainer ID="rfvLastNameContainer" runat="server"
-                                                                            ValidationMsg="Please provide last name." Size="200" />
+                                                                            ValidationMsg="Please provide last name." Size="200"  ResourceValidationMsg="LastNameRequiredResource"/>
 </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -230,12 +230,12 @@
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvEmail" runat="server" Display="Dynamic" ControlToValidate="txtEmail"
                                                                         ForeColor="Red" ValidationGroup="vgAddUser"><ucValidationContainer:ValidationContainer ID="rfvEmailContainer" runat="server"
-                                                                            ValidationMsg="Please provide email-address." Size="200" />
+                                                                            ValidationMsg="Please provide email-address." Size="200"  ResourceValidationMsg="EmailRequiredResource"/>
 </asp:RequiredFieldValidator>
                                                                     <asp:RegularExpressionValidator ID="revEmail" ControlToValidate="txtEmail" Display="Dynamic"
                                                                         runat="server" ForeColor="Red" ValidationGroup="vgAddUser" 
                                                                         ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"><ucValidationContainer:ValidationContainer ID="revEmailContainer" runat="server"
-                                                                            ValidationMsg="Please enter proper email-address." Size="200" />
+                                                                            ValidationMsg="Please enter proper email-address." Size="200" ResourceValidationMsg="EmailPatternRequiredResource"/>
 </asp:RegularExpressionValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -258,7 +258,7 @@
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvUserName" runat="server" Display="Dynamic" ControlToValidate="txtAdminUserName"
                                                                         ForeColor="Red" ValidationGroup="vgAddUser"><ucValidationContainer:ValidationContainer ID="rfvUserNameContainer" runat="server"
-                                                                            ValidationMsg="Please provide user name." Size="200" />
+                                                                            ValidationMsg="Please provide user name." Size="200" ResourceValidationMsg="UserNameRequiredResource"/>
 </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -323,7 +323,7 @@
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvRole" runat="server" ControlToValidate="cmbRole"
                                                                         Display="Dynamic" ForeColor="Red" ValidationGroup="vgAddUser"><ucValidationContainer:ValidationContainer ID="rfvRoleContainer" runat="server" ValidationMsg="Please select role."
-                                                                            Size="200" />
+                                                                            Size="200" ResourceValidationMsg="RoleRequiredResource"/>
 </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -347,7 +347,7 @@
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvRegion" runat="server" Display="Dynamic" ControlToValidate="cmbRegion"
                                                                         ForeColor="Red" ValidationGroup="vgAddUser"><ucValidationContainer:ValidationContainer ID="rfvRegionContainer" runat="server"
-                                                                            ValidationMsg="Please select region." Size="200" />
+                                                                            ValidationMsg="Please select region." Size="200"  ResourceValidationMsg="RegionRequiredResource"/>
 </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -371,7 +371,7 @@
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
                                                                         ControlToValidate="cmbCompany" ForeColor="Red" ValidationGroup="vgAddUser"><ucValidationContainer:ValidationContainer ID="rfvCompanyContainer" runat="server"
-                                                                            ValidationMsg="Please select company." Size="200" />
+                                                                            ValidationMsg="Please select company." Size="200" ResourceValidationMsg="CompanyRequiredResource"/>
 </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -394,7 +394,7 @@
                                                                 <div style="float: left">
                                                                     <asp:CustomValidator ID="cvBranch" ClientValidationFunction="ValidateChkList" runat="server"
                                                                         ValidationGroup="vgAddUser"><ucValidationContainer:ValidationContainer ID="cvBranchContainer" runat="server"
-                                                                            ValidationMsg="Please select branch." Size="200" />
+                                                                            ValidationMsg="Please select branch." Size="200" ResourceValidationMsg="BranchRequiredResource" />
 </asp:CustomValidator>
                                                                 </div>
                                                                 <div class="clear">

@@ -49,6 +49,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterDeviceFamilyProfilerOption _presenterDeviceFamilyProfilerOption;
         private PresenterMeasurementSetting _presenterMeasurementSetting;
         private const string _recSelectText = "selectText";
+        private const string _recNoCertifiedPrintCondition = "noCertifiedPrintCondition";
 
         #endregion
 
@@ -76,8 +77,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     BindMetricPresets();
                     GetPrintStandardTVI();
                     GetPrintStandardDensity();
-                    BindReTargetList();
+                    //BindReTargetList();
+                    BindDevices();
 
+                    if (SessionManager.Instance.CurrentProject.PrintCondition.PrintingType == EPrintingTypes.Flexo) //----If Sync1D project's printing type is Flexo then only show Hue angle targets panel
+                    {
+                        GetPrintStandardHueAngle();
+                        dvHueAngleTargets.Visible = true;
+                    }
                     LoadProjectInfoFromSession();
 
                     if (ProjectTypeID == 1) //-----Option only for G7 Sync1D projects
@@ -122,6 +129,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 DeviceFamilyId = SessionManager.Instance.CurrentDevice.DeviceFamily.DeviceFamilyId;
                 LicenseTypeId = (short)SessionManager.Instance.CurrentProject.LicenseType;
+
                 _presenterDeviceFamilyProfilerOption.GetDeviceFamilyProfilerOption();
                 if (!IsErrorOccured)
                 {
@@ -148,11 +156,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     if (SessionManager.Instance.CurrentProject.ReTargetProjectID != 0)
                     {
+                        cmbDevice.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.ReTargetProjectDeviceID);
+                        cmbDevice_SelectedIndexChanged(null, null);                                                
                         ddlReTargetList.SelectedValue = SessionManager.Instance.CurrentProject.ReTargetProjectID.ToString();
+                        ddlReTargetList_SelectedIndexChanged(null, null);
                     }
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Project type selection is disable
                     {
                         ddlReTargetList.Enabled = false;
+                        cmbDevice.Enabled = false;
                     }
 
                     if (SessionManager.Instance.CurrentProject.ProjectOption != null && SessionManager.Instance.CurrentProject.ProjectOption.Count > 0) //Profiler options value set from session for existing Sync 1D projects
@@ -216,11 +228,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
-      
+
         private void BindMetricPresets()
-        {           
+        {
             if (ViewState[_vsMetricTargetPreset] == null)
             {
+                PrintingTypeId = (short)SessionManager.Instance.CurrentProject.PrintCondition.PrintingType;
                 _presenterMeasurementSetting.GetMetricTargetPreset();
                 if (!IsErrorOccured)
                 {
@@ -257,7 +270,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (!IsErrorOccured)
                     {
                         BindPrintStandardTVI(PrintStandardTVI);
-                    }                
+                    }
                 }
                 else // Load from session for existing project
                 {
@@ -273,71 +286,105 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 switch (item.PatchType.Type.ToString())
                 {
                     //--Cyan for all CMY patches----//
-                    case "Cyan10": case "Cyan_10":
+                    case "Cyan10":
+                    case "Cyan_10":
                         txtTVI10CMY.Text = item.TVI.ToString();
                         break;
-                    case "Cyan20": case "Cyan_20":
+                    case "Cyan20":
+                    case "Cyan_20":
                         txtTVI20CMY.Text = item.TVI.ToString();
                         break;
-                    case "Cyan25": case "Cyan_25": case "Cyan Quarter Tone": case "Cyan_Quarter_Tone":
+                    case "Cyan25":
+                    case "Cyan_25":
+                    case "Cyan Quarter Tone":
+                    case "Cyan_Quarter_Tone":
                         txtTVI25CMY.Text = item.TVI.ToString();
                         break;
-                    case "Cyan30": case "Cyan_30":
+                    case "Cyan30":
+                    case "Cyan_30":
                         txtTVI30CMY.Text = item.TVI.ToString();
                         break;
-                    case "Cyan40": case "Cyan_40":
+                    case "Cyan40":
+                    case "Cyan_40":
                         txtTVI40CMY.Text = item.TVI.ToString();
                         break;
-                    case "Cyan50": case "Cyan_50": case "Cyan Half Tone": case "Cyan_Half_Tone":
+                    case "Cyan50":
+                    case "Cyan_50":
+                    case "Cyan Half Tone":
+                    case "Cyan_Half_Tone":
                         txtTVI50CMY.Text = item.TVI.ToString();
                         break;
-                    case "Cyan60": case "Cyan_60":
+                    case "Cyan60":
+                    case "Cyan_60":
                         txtTVI60CMY.Text = item.TVI.ToString();
                         break;
-                    case "Cyan70": case "Cyan_70":
+                    case "Cyan70":
+                    case "Cyan_70":
                         txtTVI70CMY.Text = item.TVI.ToString();
                         break;
-                    case "Cyan75": case "Cyan_75": case "Cyan Three Quarter Tone": case "Cyan_Three_Quarter_Tone":
+                    case "Cyan75":
+                    case "Cyan_75":
+                    case "Cyan Three Quarter Tone":
+                    case "Cyan_Three_Quarter_Tone":
                         txtTVI75CMY.Text = item.TVI.ToString();
                         break;
-                    case "Cyan80": case "Cyan_80":
+                    case "Cyan80":
+                    case "Cyan_80":
                         txtTVI80CMY.Text = item.TVI.ToString();
                         break;
-                    case "Cyan90": case "Cyan_90":
+                    case "Cyan90":
+                    case "Cyan_90":
                         txtTVI90CMY.Text = item.TVI.ToString();
                         break;
                     //----For Black patches----//
-                    case "Black10": case "Black_10":
+                    case "Black10":
+                    case "Black_10":
                         txtTVI10K.Text = item.TVI.ToString();
                         break;
-                    case "Black20": case "Black_20":
+                    case "Black20":
+                    case "Black_20":
                         txtTVI20K.Text = item.TVI.ToString();
                         break;
-                    case "Black25": case "Black_25": case "Black Quarter Tone": case "Black_Quarter_Tone":
+                    case "Black25":
+                    case "Black_25":
+                    case "Black Quarter Tone":
+                    case "Black_Quarter_Tone":
                         txtTVI25K.Text = item.TVI.ToString();
                         break;
-                    case "Black30": case "Black_30":
+                    case "Black30":
+                    case "Black_30":
                         txtTVI30K.Text = item.TVI.ToString();
                         break;
-                    case "Black40": case "Black_40":
+                    case "Black40":
+                    case "Black_40":
                         txtTVI40K.Text = item.TVI.ToString();
                         break;
-                    case "Black50": case "Black_50": case "Black Half Tone": case "Black_Half_Tone":
+                    case "Black50":
+                    case "Black_50":
+                    case "Black Half Tone":
+                    case "Black_Half_Tone":
                         txtTVI50K.Text = item.TVI.ToString();
                         break;
-                    case "Black60": case "Black_60":
+                    case "Black60":
+                    case "Black_60":
                         txtTVI60K.Text = item.TVI.ToString();
                         break;
-                    case "Black70": case "Black_70":
+                    case "Black70":
+                    case "Black_70":
                         txtTVI70K.Text = item.TVI.ToString();
                         break;
-                    case "Black75": case "Black_75": case "Black Three Quarter Tone": case "Black_Three_Quarter_Tone":
+                    case "Black75":
+                    case "Black_75":
+                    case "Black Three Quarter Tone":
+                    case "Black_Three_Quarter_Tone":
                         txtTVI75K.Text = item.TVI.ToString();
                         break;
-                    case "Black80": case "Black_80":
+                    case "Black80":
+                    case "Black_80":
                         txtTVI80K.Text = item.TVI.ToString();
                         break;
-                    case "Black90": case "Black_90":
+                    case "Black90":
+                    case "Black_90":
                         txtTVI90K.Text = item.TVI.ToString();
                         break;
                     default:
@@ -392,21 +439,124 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private void BindReTargetList()
+        private void GetPrintStandardHueAngle()
         {
-            DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
-          
-            _presenterMeasurementSetting.GetReTargetProjectList();
-            if (!IsErrorOccured)
+            PrintStandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
+
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
-                ddlReTargetList.DataValueField = "Key";
-                ddlReTargetList.DataTextField = "Value";
-                ddlReTargetList.DataSource = ReTargetProjectList;
-                ddlReTargetList.DataBind();
-                ddlReTargetList.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), "0"));
+                if (SessionManager.Instance.CurrentProject.ProjectTargetHueAngle == null || SessionManager.Instance.CurrentProject.ProjectTargetHueAngle.Count == 0)
+                {
+                    _presenterDeviceFamilyProfilerOption.GetPrintStandardHueAngle();
+
+                    if (!IsErrorOccured)
+                    {
+                        BindPrintStandardHueAngle(ProjectTargetHueAngle);
+                    }
+                }
+                else // Load from session for existing project
+                {
+                    BindPrintStandardHueAngle(SessionManager.Instance.CurrentProject.ProjectTargetHueAngle);
+                }
             }
         }
 
+        private void BindPrintStandardHueAngle(List<Entity.CPSync1D.ProjectTargetHueAngle> ProjectTargetHueAngle)
+        {
+            foreach (var item in ProjectTargetHueAngle)
+            {
+                switch (item.PatchType.Type.ToString())
+                {
+                    case "Cyan":
+                        txtHue_C.Text = item.Target.ToString();
+                        break;
+                    case "Magenta":
+                        txtHue_M.Text = item.Target.ToString();
+                        break;
+                    case "Yellow":
+                        txtHue_Y.Text = item.Target.ToString();
+                        break;
+                    case "Overprint_Red":
+                        txtHue_R.Text = item.Target.ToString();
+                        break;
+                    case "Overprint_Green":
+                        txtHue_G.Text = item.Target.ToString();
+                        break;
+                    case "Overprint_Blue":
+                        txtHue_B.Text = item.Target.ToString();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void BindReTargetList()
+        {
+            DeviceId = Convert.ToInt32(cmbDevice.SelectedValue.ToString());
+
+            _presenterMeasurementSetting.GetReTargetProjectList();
+            if (!IsErrorOccured)
+            {
+                if (ReTargetProjectList.Count > 0)
+                {
+                    ddlReTargetList.DataValueField = "Key";
+                    ddlReTargetList.DataTextField = "Value";
+                    ddlReTargetList.DataSource = ReTargetProjectList;
+                    ddlReTargetList.DataBind();
+                    ddlReTargetList.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), "0"));
+                }
+                else
+                {
+                    ddlReTargetList.Items.Clear();
+                    ddlReTargetList.Items.Insert(0, new ListItem(GetResourceString(_recNoCertifiedPrintCondition), "0"));
+                }
+            }
+            divRetarget.Visible = true;
+        }
+
+        private void BindDevices()
+        {
+            CompanyID = SessionManager.Instance.SelectedCompany;
+            BranchID = SessionManager.Instance.SelectedBranch;
+            _presenterDeviceFamilyProfilerOption.DeviceListCertified1DProjects();
+            if (!IsErrorOccured)
+            {
+                cmbDevice.DataValueField = "DeviceId";
+                cmbDevice.DataTextField = "DeviceName";
+                cmbDevice.DataSource = Devices;
+                cmbDevice.DataBind();                
+                cmbDevice.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), "0"));
+            }
+            divDevice.Visible = true;
+        }
+        private void BindRetargetProjectDetails()
+        {
+            RetargetProjectID = Convert.ToInt32(ddlReTargetList.SelectedValue.ToString());
+            _presenterDeviceFamilyProfilerOption.GetReTargetProjectDetails();
+            if (!IsErrorOccured)
+            {
+                lblPrintStandardTypeName.Text = RetargetPrintStandardTypeName;
+                lblMetricTargetPresetName.Text = RetargetMetricTargetPresetName;
+            }
+            divRetargetDetails.Visible = true;
+        }
+        //private void BindCertifiedProjects()
+        //{
+        //    CompanyID = SessionManager.Instance.SelectedCompany;
+        //    BranchID = SessionManager.Instance.SelectedBranch;
+        //    DeviceID = Convert.ToInt32(cmbDevice.SelectedValue.ToString());
+        //    _presenterTargetColorspace.GetSpotReTargetProjectList();
+        //    if (!IsErrorOccured)
+        //    {
+        //        ddlReTargetProject.DataValueField = "Key";
+        //        ddlReTargetProject.DataTextField = "Value";
+        //        ddlReTargetProject.DataSource = ReTargetSpotProjectList;
+        //        ddlReTargetProject.DataBind();
+        //        ddlReTargetProject.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
+        //    }
+        //    divRetarget.Visible = true;
+        //}
         #endregion
 
         #region Control Events
@@ -520,7 +670,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                             }
                                             break;
 
-                                            #endregion
+                                        #endregion
                                         case EProfilerOption.DLExceptionRange:
                                             rdsRange.Value = Convert.ToDecimal(x.ProfilerOptionValue);
                                             txtRange.Text = x.ProfilerOptionValue;
@@ -586,32 +736,38 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.MetricTargetPresetId = Convert.ToInt32(ddlMetricPresets.SelectedValue);
                 SessionManager.Instance.CurrentProject.PrintStandardTVI = GetPrintStandardTVIList();
                 SessionManager.Instance.CurrentProject.ProjectTargetDensity = GetProjectTargetDensityList();
-                SessionManager.Instance.CurrentProject.ReTargetProjectID = Convert.ToInt32(ddlReTargetList.SelectedValue);
+                SessionManager.Instance.CurrentProject.ProjectTargetHueAngle = GetProjectTargetHueAngleList();
+
+                //if (ddlReTargetList.SelectedValue.ToString() != "0")
+                    SessionManager.Instance.CurrentProject.ReTargetProjectID = ((ddlReTargetList.Items.Count == 0) ? 0 : Convert.ToInt32(ddlReTargetList.SelectedValue));
 
                 SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
 
                 SessionManager.Instance.CurrentProject.ProjectOption.Add(new ProjectOption()
-                                                                        {
-                                                                            ProfileTypeId = 0,
-                                                                            ProfilerOptionId = 1,
-                                                                            ProfilerOptionValue = "LinearizationDeviceLink",
-                                                                        });
+                {
+                    ProfileTypeId = 0,
+                    ProfilerOptionId = 1,
+                    ProfilerOptionValue = "LinearizationDeviceLink",
+                });
                 SessionManager.Instance.CurrentProject.ProjectOption.Add(new ProjectOption()
-                                                                        {
-                                                                            ProfileTypeId = 0,
-                                                                            ProfilerOptionId = 7,
-                                                                            ProfilerOptionValue = cmbMeaCorrection.SelectedValue,
-                                                                        });
+                {
+                    ProfileTypeId = 0,
+                    ProfilerOptionId = 7,
+                    ProfilerOptionValue = cmbMeaCorrection.SelectedValue,
+                });
                 if (ProjectTypeID == 1) //-----Option only for G7 Sync1D projects
                 {
                     SessionManager.Instance.CurrentProject.ProjectOption.Add(new ProjectOption()
-                                                                           {
-                                                                               ProfileTypeId = 0,
-                                                                               ProfilerOptionId = 40,
-                                                                               ProfilerOptionValue = (chkLinearizationType.Checked) ? "TR015" : "G7",
-                                                                           });
+                    {
+                        ProfileTypeId = 0,
+                        ProfilerOptionId = 40,
+                        ProfilerOptionValue = (chkLinearizationType.Checked) ? "TR015" : "G7",
+                    });
+
+                    //if (cmbDevice.SelectedValue.ToString() != "0")
+                        SessionManager.Instance.CurrentProject.ReTargetProjectDeviceID = Convert.ToInt32(cmbDevice.SelectedValue);
                 }
-                
+
             }
             else
             {
@@ -653,18 +809,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 familyPreset.ProfilerOptionPresets.ForEach(x =>
                                                            SessionManager.Instance.CurrentProject.ProjectOption.
                                                                Add(new ProjectOption()
-                                                                       {
-                                                                           ProfileTypeId = x.ProfileTypeId,
-                                                                           ProfilerOptionId = x.ProfilerOption.ProfilerOptionId,
-                                                                           ProfilerOptionValue = x.ProfilerOptionValue,
-                                                                       }));
+                                                               {
+                                                                   ProfileTypeId = x.ProfileTypeId,
+                                                                   ProfilerOptionId = x.ProfilerOption.ProfilerOptionId,
+                                                                   ProfilerOptionValue = x.ProfilerOptionValue,
+                                                               }));
 
-              
+
             }
 
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If "Ink Optimization Source" project type, then skip Measurement and Validation setup pages.
             {
-              //----Pass dummy data-----//
+                //----Pass dummy data-----//
                 SessionManager.Instance.CurrentProject.MeasurementSetting =
                        new MeasurementSetting()
                        {
@@ -696,10 +852,37 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             txtBlackStart.Text = (sender as Telerik.Web.UI.RadSlider).Value.ToString();
         }
-      
+
         protected void rdsBlackWidth_ValueChanged(object sender, EventArgs e)
         {
             txtBlackWidth.Text = (sender as Telerik.Web.UI.RadSlider).Value.ToString();
+        }
+
+        protected void cmbDevice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbDevice.SelectedValue.ToString() != "0")
+            {
+                BindReTargetList();
+            }
+            else
+            {
+                ddlReTargetList.SelectedValue = "0";
+                divRetarget.Visible = false;
+            }
+
+            divRetargetDetails.Visible = false;
+        }
+
+        protected void ddlReTargetList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlReTargetList.SelectedValue.ToString() != "0")
+            {
+                BindRetargetProjectDetails();
+            }
+            else
+            {
+                divRetargetDetails.Visible = false;
+            }
         }
 
         //protected void rdsInkTotal_ValueChanged(object sender, EventArgs e)       //---Comment out right now to make it non- editable advanced options
@@ -713,7 +896,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVIList()
         {
             List<Entity.CPSync1D.PrintStandardTVI> printStandardTVIList = new List<Entity.CPSync1D.PrintStandardTVI>();
-        
+
             #region ---For Cyan Color
             //--older codes
             printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
@@ -1287,6 +1470,71 @@ namespace FujifilmUSA.Sync.Web.UserControl
             return ProjectTargetDensityList;
         }
 
+        private List<Entity.CPSync1D.ProjectTargetHueAngle> GetProjectTargetHueAngleList()
+        {
+            List<Entity.CPSync1D.ProjectTargetHueAngle> ProjectTargetHueAngleList = new List<Entity.CPSync1D.ProjectTargetHueAngle>();
+
+            #region ---For CMYRGB Colors
+            ProjectTargetHueAngleList.Add(new Entity.CPSync1D.ProjectTargetHueAngle()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Cyan,
+                    Type = CPPatchType.Cyan.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtHue_C.Text.Trim()) ? "0" : txtHue_C.Text.Trim())),
+            });
+            ProjectTargetHueAngleList.Add(new Entity.CPSync1D.ProjectTargetHueAngle()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Magenta,
+                    Type = CPPatchType.Magenta.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtHue_M.Text.Trim()) ? "0" : txtHue_M.Text.Trim())),
+            });
+            ProjectTargetHueAngleList.Add(new Entity.CPSync1D.ProjectTargetHueAngle()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Yellow,
+                    Type = CPPatchType.Yellow.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtHue_Y.Text.Trim()) ? "0" : txtHue_Y.Text.Trim())),
+            });
+            ProjectTargetHueAngleList.Add(new Entity.CPSync1D.ProjectTargetHueAngle()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Overprint_Red,
+                    Type = CPPatchType.Overprint_Red.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtHue_R.Text.Trim()) ? "0" : txtHue_R.Text.Trim())),
+            });
+            ProjectTargetHueAngleList.Add(new Entity.CPSync1D.ProjectTargetHueAngle()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Overprint_Green,
+                    Type = CPPatchType.Overprint_Green.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtHue_G.Text.Trim()) ? "0" : txtHue_G.Text.Trim())),
+            });
+            ProjectTargetHueAngleList.Add(new Entity.CPSync1D.ProjectTargetHueAngle()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Overprint_Blue,
+                    Type = CPPatchType.Overprint_Blue.ToString()
+                },
+                Target = Convert.ToDecimal((string.IsNullOrEmpty(txtHue_B.Text.Trim()) ? "0" : txtHue_B.Text.Trim())),
+            });
+            #endregion
+
+            return ProjectTargetHueAngleList;
+        }
+
+
         private void ClearAdvancedOptionsControls()
         {
             cmbRendering.SelectedValue = "0";
@@ -1336,6 +1584,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int PrintStandardTypeId { get; set; }
         public List<Entity.CPSync1D.PrintStandardTVI> PrintStandardTVI { get; set; }
         public List<Entity.CPSync1D.ProjectTargetDensity> ProjectTargetDensity { get; set; }
+        public List<Entity.CPSync1D.ProjectTargetHueAngle> ProjectTargetHueAngle { get; set; }
         public short LicenseTypeId { get; set; }
         #endregion
 
@@ -1448,6 +1697,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary);
             }
         }
+        public short PrintingTypeId { get; set; }
+        public List<Device> Devices { get; set; }
+        public int CompanyID { get; set; }
+        public int BranchID { get; set; }
+        public int DeviceID { get; set; }
+        public int RetargetProjectID { get; set; }
+        public string RetargetPrintStandardTypeName { get; set; }
+        public string RetargetMetricTargetPresetName { get; set; }
         #endregion
 
     }

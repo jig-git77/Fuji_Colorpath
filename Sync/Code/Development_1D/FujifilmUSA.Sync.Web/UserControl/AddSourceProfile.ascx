@@ -101,7 +101,7 @@
                                         <asp:RequiredFieldValidator ID="rfvSourceProfile" runat="server" Display="Dynamic"
                                             ControlToValidate="txtSourceProfile" ForeColor="Red" 
                                             ValidationGroup="vgSourceProfile" meta:resourcekey="rfvSourceProfileResource1"><ucValidationContainer:ValidationContainer ID="rfvSourceProfileContainer" runat="server"
-                                                ValidationMsg="Please provide source profile name." Size="200" />
+                                                ValidationMsg="Please provide source profile name." Size="200" ResourceValidationMsg="SourceProfileRequiredResource" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -146,7 +146,7 @@
                                         <asp:RequiredFieldValidator ID="rfvProfile" runat="server" Display="Dynamic" ControlToValidate="fuProfile"
                                             ForeColor="Red" ValidationGroup="vgSourceProfile" 
                                             meta:resourcekey="rfvProfileResource1"><ucValidationContainer:ValidationContainer ID="rfvProfileContainer" runat="server"
-                                                ValidationMsg="Please provide source profile file." Size="200" />
+                                                ValidationMsg="Please provide source profile file." Size="200"  ResourceValidationMsg="SourceProfileFileRequiredResource"/>
                                         </asp:RequiredFieldValidator>     
                                     </div>
                                     <div class="clear">

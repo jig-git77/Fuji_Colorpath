@@ -45,7 +45,7 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvcompany" runat="server" Display="Dynamic" ControlToValidate="cmbCompany"
                                             ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="rfvCompanycontainer" runat="server"
-                                                ValidationMsg="Please select company." Size="200" />
+                                                ValidationMsg="Please select company." Size="200" ResourceValidationMsg="CompanyRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -70,7 +70,7 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvBranch" runat="server" Display="Dynamic" ControlToValidate="cmbBranch"
                                             ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="rfvBranchContainer" runat="server"
-                                                ValidationMsg="Please select branch." Size="200" />
+                                                ValidationMsg="Please select branch." Size="200" ResourceValidationMsg="BranchRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -95,7 +95,7 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvLicense" runat="server" Display="Dynamic" ControlToValidate="cmbLicense"
                                             ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="rfvLicenseContainer" runat="server"
-                                                ValidationMsg="Please select license." Size="200" />
+                                                ValidationMsg="Please select license." Size="200" ResourceValidationMsg="LicenseRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -118,7 +118,7 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvDeviceName" runat="server" Display="Dynamic" ControlToValidate="txtDeviceName"
                                             ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="rfvDeviceContainer" runat="server"
-                                                ValidationMsg="Please provide device name." Size="200" />
+                                                ValidationMsg="Please provide device name." Size="200" ResourceValidationMsg="DeviceNameRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -143,7 +143,7 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvDeviceFamily" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbDeviceFamily" ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="rfvDeviceFamilyContainer" runat="server"
-                                                ValidationMsg="Please select device family." Size="200" />
+                                                ValidationMsg="Please select device family." Size="200" ResourceValidationMsg="DeviceFamilyRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -177,7 +177,7 @@
                                                     <asp:RequiredFieldValidator ID="rfvSync1D" runat="server" Display="Dynamic" ControlToValidate="txtSync1D"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice" 
                                                         meta:resourcekey="rfvSync1DResource1"><ucValidationContainer:ValidationContainer ID="rfvNoOfProjectsContainer" runat="server"
-                                                            ValidationMsg="Please provide no.of projects." />
+                                                            ValidationMsg="Please provide no.of projects." ResourceValidationMsg="NoOfProjectsRequiredResource"/>
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
@@ -194,7 +194,7 @@
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvDlp" runat="server" Display="Dynamic" ControlToValidate="txtDlp"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
-                                                            ValidationMsg="Please provide no.of projects." />
+                                                            ValidationMsg="Please provide no.of DLP." ResourceValidationMsg="NoOfProjectsRequiredResource"/>
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
@@ -212,7 +212,7 @@
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvInkOpt" runat="server" Display="Dynamic" ControlToValidate="txtInkOpt"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer3" runat="server"
-                                                            ValidationMsg="Please provide no.of projects." />
+                                                            ValidationMsg="Please provide no.of projects." ResourceValidationMsg="NoOfProjectsRequiredResource"/>
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
@@ -230,7 +230,7 @@
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvInkOptSource" runat="server" Display="Dynamic" ControlToValidate="txtInkOptSource"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer2" runat="server"
-                                                            ValidationMsg="Please provide no.of projects." />
+                                                            ValidationMsg="Please provide no.of projects." ResourceValidationMsg="NoOfProjectsRequiredResource"/>
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
@@ -248,7 +248,7 @@
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfv4DCertify" runat="server" Display="Dynamic" ControlToValidate="txt4DCertify"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer4" runat="server"
-                                                            ValidationMsg="Please provide no.of projects." />
+                                                            ValidationMsg="Please provide no.of projects." ResourceValidationMsg="NoOfProjectsRequiredResource"/>
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
@@ -266,7 +266,7 @@
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvCustomSourceProfile" runat="server" Display="Dynamic" ControlToValidate="txtCustomSourceProfile"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer5" runat="server"
-                                                            ValidationMsg="Please provide no.of projects." />
+                                                            ValidationMsg="Please provide no.of projects." ResourceValidationMsg="NoOfProjectsRequiredResource"/>
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
@@ -284,7 +284,7 @@
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvtxtReProfileCustomSource" runat="server" Display="Dynamic" ControlToValidate="txtReProfileCustomSource"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer6" runat="server"
-                                                            ValidationMsg="Please provide no.of projects." />
+                                                            ValidationMsg="Please provide no.of projects." ResourceValidationMsg="NoOfProjectsRequiredResource"/>
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
@@ -320,7 +320,7 @@
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvtxtMultiColorCustomSource" runat="server" Display="Dynamic" ControlToValidate="txtMultiColorCustomSource"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer8" runat="server"
-                                                            ValidationMsg="Please provide no.of projects." />
+                                                            ValidationMsg="Please provide no.of projects." ResourceValidationMsg="NoOfProjectsRequiredResource"/>
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
@@ -338,7 +338,7 @@
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvtxtSpotLibrary" runat="server" Display="Dynamic" ControlToValidate="txtSpotLibrary"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer9" runat="server"
-                                                            ValidationMsg="Please provide no.of projects." />
+                                                            ValidationMsg="Please provide no.of projects." ResourceValidationMsg="NoOfProjectsRequiredResource"/>
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
@@ -361,6 +361,25 @@
                                      <div style="float: left;">
                                         <asp:CheckBox ID="chkIsValidation" runat="server" Checked="False" 
                                              meta:resourcekey="chkIsValidationResource1" />
+                                      </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">
+                                    <span style="font-weight: bold;">
+                                    <asp:Localize ID="locIsFlexo" runat="server" 
+                                        meta:resourcekey="locIsFlexoResource1" Text="Is 1D Flexo?"></asp:Localize>
+                                    </span>
+                                </td>
+                                <td>
+                                    &nbsp;:&nbsp;
+                                </td>
+                                <td>
+                                     <div style="float: left;">
+                                        <asp:CheckBox ID="chkIsFlexo" runat="server" Checked="False" 
+                                             meta:resourcekey="chkIsFlexoResource1" />
                                       </div>
                                     <div class="clear">
                                     </div>

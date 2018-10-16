@@ -54,7 +54,7 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvcompany" runat="server" Display="Dynamic" ControlToValidate="cmbCompany"
                                             ForeColor="Red" ValidationGroup="vgAddLicense"><ucValidationContainer:ValidationContainer ID="rfvCompanyContainer" runat="server"
-                                                ValidationMsg="Please select company." Size="200" />
+                                                ValidationMsg="Please select company." Size="200" ResourceValidationMsg="CompanyRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -78,7 +78,7 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvBranch" runat="server" Display="Dynamic" ControlToValidate="cmbBranch"
                                             ForeColor="Red" ValidationGroup="vgAddLicense"><ucValidationContainer:ValidationContainer ID="rfvBranchContainer" runat="server"
-                                                ValidationMsg="Please select branch." Size="200" />
+                                                ValidationMsg="Please select branch." Size="200" ResourceValidationMsg="BranchRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -104,7 +104,7 @@
                                     <asp:RequiredFieldValidator ID="rfvLicenseDescription" runat="server" Display="Dynamic"
                                             ControlToValidate="txtLicenseDescription" ForeColor="Red" 
                                             ValidationGroup="vgAddLicense"><ucValidationContainer:ValidationContainer ID="rfvcLicenseDescriptionContainer" runat="server"
-                                                ValidationMsg="Please provide license description." Size="200" />
+                                                ValidationMsg="Please provide license description." Size="200"  ResourceValidationMsg="LicenseDescriptionRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -161,7 +161,7 @@
                                         <asp:RequiredFieldValidator ID="rfvActivationDate" runat="server" Display="Dynamic"
                                             ControlToValidate="txtActivationDate" ForeColor="Red" 
                                             ValidationGroup="vgAddLicense"><ucValidationContainer:ValidationContainer ID="rfvActivateContainer" runat="server"
-                                                ValidationMsg="Please select activation date." Size="200" />
+                                                ValidationMsg="Please select activation date." Size="200" ResourceValidationMsg="ActivationDateRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -188,7 +188,7 @@
                                         <asp:RequiredFieldValidator ID="rfvExpirationDate" runat="server" Display="Dynamic"
                                             ControlToValidate="txtExpirationDate" ForeColor="Red" 
                                             ValidationGroup="vgAddLicense"><ucValidationContainer:ValidationContainer ID="rfvExpiraDateContainer" runat="server"
-                                                ValidationMsg="Please select expiration date." Size="200" />
+                                                ValidationMsg="Please select expiration date." Size="200" ResourceValidationMsg="ExpirationDateRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">

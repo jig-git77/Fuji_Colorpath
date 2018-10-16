@@ -63,7 +63,7 @@
                                     <asp:RequiredFieldValidator ID="rfvChartName" runat="server" Display="Dynamic" ControlToValidate="txtChartName"
                                         ForeColor="Red" ValidationGroup="vgAddRefChart">
                                         <ucValidationContainer:ValidationContainer ID="rfvChartNameContainer" runat="server"
-                                            ValidationMsg="Please provide chart name." Size="200" />
+                                            ValidationMsg="Please provide chart name." Size="200" ResourceValidationMsg="ChartNameRequiredResource" />
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">
@@ -89,7 +89,7 @@
                                     <asp:RequiredFieldValidator ID="rfvNumOfRows" runat="server" Display="Dynamic" ControlToValidate="txtNumOfRows"
                                         ForeColor="Red" ValidationGroup="vgAddRefChart">
                                         <ucValidationContainer:ValidationContainer ID="rfvcNumOfRowsContainer" runat="server"
-                                            ValidationMsg="Please provide total rows." Size="200" />
+                                            ValidationMsg="Please provide total rows." Size="200"  ResourceValidationMsg="NumOfRowsRequiredResource" />
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">
@@ -117,7 +117,7 @@
                                     <asp:RequiredFieldValidator ID="rfvNumOfCols" runat="server" Display="Dynamic" ControlToValidate="txtNumOfCols"
                                         ForeColor="Red" ValidationGroup="vgAddRefChart">
                                         <ucValidationContainer:ValidationContainer ID="rfvcNumOfColsContainer" runat="server"
-                                            ValidationMsg="Please provide total columns." Size="200" />
+                                            ValidationMsg="Please provide total columns." Size="200"  ResourceValidationMsg="ChartTotalColumnsRequiredResource" />
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">
@@ -146,7 +146,7 @@
                                         ControlToValidate="cmbInstrumentType" ForeColor="Red" 
                                         ValidationGroup="vgAddRefChart">
                                         <ucValidationContainer:ValidationContainer ID="rfvcInstrumentTypeContainer" runat="server"
-                                            ValidationMsg="Please select instrument type." Size="200" />
+                                            ValidationMsg="Please select instrument type." Size="200" ResourceValidationMsg="InstrumentRequiredResource"/>
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">
@@ -251,7 +251,7 @@
                                         ControlToValidate="cmbHowManyColors" ForeColor="Red" 
                                         ValidationGroup="vgAddRefChart">
                                         <ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
-                                            ValidationMsg="Please select How Many Colors." Size="200" />
+                                            ValidationMsg="Please select How Many Colors." Size="200"  ResourceValidationMsg="NumberOfColorsRequiredResource"/>
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">

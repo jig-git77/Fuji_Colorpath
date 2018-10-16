@@ -37,10 +37,14 @@ namespace FujifilmUSA.Sync.Entity
 
         public List<CPSync1D.ProjectTargetLAB> ProjectTargetLAB { get; set; }
         public List<CPSync1D.ProjectTargetDensity> ProjectTargetDensity { get; set; }
+        public List<CPSync1D.ProjectTargetHueAngle> ProjectTargetHueAngle { get; set; }
 
         public DensityTypes DensityType { get; set; }
         public PCSDataTypes PCSDataTypes { get; set; }
         public int ReTargetProjectID { get; set; }
+        public string ReTargetProjectName { get; set; }
+        public int ReTargetProjectBranchID { get; set; }
+        public int ReTargetProjectDeviceID { get; set; }
         public short CurveTypeID { get; set; }
         public bool Is1DMeasurementSmoothing { get; set; }
         

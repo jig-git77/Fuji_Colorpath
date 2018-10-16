@@ -144,7 +144,7 @@
                                                 ControlToValidate="ddlLanguages" ForeColor="Red" 
                                                 ValidationGroup="vgChangeLanguage">
                                                 <ucValidationContainer:ValidationContainer ID="rfvucChangeLanguage" runat="server"
-                                                    ValidationMsg="Please select language." Size="200" />
+                                                    ValidationMsg="Please select language." Size="200" ResourceValidationMsg="SelectLanguageMessageResource" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -332,7 +332,7 @@
                                                 ControlToValidate="cmbSecurityQuestion" ForeColor="Red" 
                                                 ValidationGroup="vgChangeSecurity">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcSecurityQuestionContainer" runat="server"
-                                                    ValidationMsg="Please select security question." Size="200" />
+                                                    ValidationMsg="Please select security question." Size="200" ResourceValidationMsg="SelectSecurityQueMessageResource" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -359,7 +359,7 @@
                                                 ControlToValidate="txtSecurityAnswer" ForeColor="Red" 
                                                 ValidationGroup="vgChangeSecurity">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcSecurityAnswerContainer" runat="server"
-                                                    ValidationMsg="Please provide security answer." Size="200" />
+                                                    ValidationMsg="Please provide security answer." Size="200" ResourceValidationMsg="SelectSecurityAnsMessageResource" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -426,7 +426,7 @@
                                                 ControlToValidate="cmbMeasurementDevice" ForeColor="Red" 
                                                 ValidationGroup="vgChangeUserDevice">
                                                 <ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
-                                                    ValidationMsg="Please select device serial number." Size="200" />
+                                                    ValidationMsg="Please select device serial number." Size="200" ResourceValidationMsg="SelectDeviceNumberMessageResource" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">

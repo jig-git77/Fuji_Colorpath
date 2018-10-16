@@ -307,7 +307,7 @@
     <value>Density Targets_fr</value>
   </data>
   <data name="locReTargetResource1.Text" xml:space="preserve">
-    <value>Choose Certified Print Condition:_fr</value>
+    <value>Select Certified Print Condition:</value>
   </data>
   <data name="locDensityCResource1.Text" xml:space="preserve">
     <value>C</value>
@@ -332,5 +332,17 @@
   </data>
   <data name="PanelOptionalRetarget" xml:space="preserve">
     <value>Optional Retarget_fr</value>
+  </data>
+  <data name="locSelectDeviceResource1.Text" xml:space="preserve">
+    <value>Select Device: </value>
+  </data>
+  <data name="locParentProjectNameResource1.Text" xml:space="preserve">
+    <value>Print Standard: </value>
+  </data>
+  <data name="locReTargetLibraryNameResource1.Text" xml:space="preserve">
+    <value>Metric Target Preset: </value>
+  </data>
+  <data name="noCertifiedPrintCondition" xml:space="preserve">
+    <value>No Certified Align Print Conditions</value>
   </data>
 </root>

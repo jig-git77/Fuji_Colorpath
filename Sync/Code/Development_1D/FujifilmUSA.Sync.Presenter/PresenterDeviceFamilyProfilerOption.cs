@@ -1,6 +1,8 @@
 ﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
+using System.Data;
+using System;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -40,5 +42,34 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
             _viewDeviceFamilyProfilerOption.ProjectTargetDensity = projectBusiness.GetPrintStandardDensity(_viewDeviceFamilyProfilerOption.PrintStandardTypeId);
         }
+
+        public void GetPrintStandardHueAngle()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
+            _viewDeviceFamilyProfilerOption.ProjectTargetHueAngle = projectBusiness.GetPrintStandardHueAngle(_viewDeviceFamilyProfilerOption.PrintStandardTypeId);
+        }
+
+        public void DeviceListCertified1DProjects()
+        {
+            var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
+            deviceBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
+            _viewDeviceFamilyProfilerOption.Devices = deviceBusiness.GetDeviceListById(_viewDeviceFamilyProfilerOption.CompanyID, _viewDeviceFamilyProfilerOption.BranchID,
+                                                                          _viewDeviceFamilyProfilerOption.CurrentUserId);
+        }
+
+        public void GetReTargetProjectDetails()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
+            DataTable dtDetails = projectBusiness.GetRetargetProjectDetails(_viewDeviceFamilyProfilerOption.RetargetProjectID);
+
+            if (dtDetails.Rows.Count > 0)
+            {
+                _viewDeviceFamilyProfilerOption.RetargetPrintStandardTypeName = Convert.ToString(dtDetails.Rows[0]["PrintStandard"]);
+                _viewDeviceFamilyProfilerOption.RetargetMetricTargetPresetName = Convert.ToString(dtDetails.Rows[0]["MetricTargetPresetName"]);
+            }
+        }
+
     }
 }

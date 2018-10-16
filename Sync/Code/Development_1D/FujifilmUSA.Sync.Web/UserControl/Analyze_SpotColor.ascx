@@ -47,9 +47,17 @@
         min-width:60px;
     }*/
 
-    .k-i-sort-asc-sm, .k-i-sort-desc-sm{
+    .k-i-sort-asc-sm, .k-i-sort-desc-sm {
         margin-left: 0px !important;
-    }    
+    }
+
+    .chartBackground {
+        background: url('Images/LabBackdrop.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        /*height: 190px;*/
+        /*width: 278px;*/
+    }
 </style>
 
 <script type="application/javascript">
@@ -57,6 +65,25 @@
     var SERVICE_BASE_URL = '';
     var Resources = {};
     var currentSpotName = '';
+    //variables for chart 
+    var drawing = kendo.drawing;
+    var geometry = kendo.geometry;
+    var hasMeasurement = false;
+    var gradientGray = new drawing.LinearGradient({
+        start: [1, 1], // Bottom left
+        end: [1, 0],   // Top left
+        stops: [{
+            offset: 0,
+            color: "#000",
+            opacity: 0.2
+        }, {
+            offset: 1,
+            color: "#000",
+            opacity: 0
+        }]
+    });
+
+
     $(document).ready(function () {
         //Default Action
         $(".hideclass").hide(); //Hide all content
@@ -77,6 +104,7 @@
         SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
         var optimizationId = $('#hdfOptimizationRunID').val();
         var $divPathDetails = $("#divPathDetails");
+        
         $divPathDetails.kendoGrid({
             dataSource: {
                 //transport: {
@@ -101,6 +129,9 @@
                                     var spotStates = response.data.spotAnalyzeDetails;
                                     $('#hdfMeasurementID').val(spotStates.measurementID);
 
+                                    //check base run or not
+                                    hasMeasurement = parseInt($('#hdfMeasurementID').val()) > 0;
+
                                     $divPathDetails.find("th[data-field=SpotID] b").html(Resources.gridAnalyzeHeaderIDResource);
                                     $divPathDetails.find("th[data-field=SpotPatch] b").html(Resources.gridAnalyzeHeaderPatchResource);
                                     $divPathDetails.find("th[data-field=SpotView] b").html(Resources.gridAnalyzeHeaderViewResource);
@@ -113,6 +144,8 @@
                                     $divPathDetails.find("th[data-field=ΔE_M_T] b").html(Resources.gridAnalyzeHeaderEMTResource);
                                     $divPathDetails.find("th[data-field=ΔE_M_P] b").html(Resources.gridAnalyzeHeaderEMPResource);
 
+                                    generateABTargetChart(0, 0, 0, 0, hasMeasurement);
+                                    generateLTargetChart(0, 0, hasMeasurement);
                                 }
                                 options.success(spotStates.patchDetails);
                             },
@@ -402,6 +435,14 @@
 
         });
 
+
+        $("#divPathDetails").kendoTooltip({
+            filter: "tr", //this filter selects the first column cells
+            position: "right",
+            content: 'Click a row for more detail'
+        }).data("kendoTooltip");
+
+
         $('#lnkLinkFilter').on('click', function (e) {
             $("form.k-filter-menu button[type='reset']").trigger("click");
         });
@@ -514,7 +555,6 @@
         $('#btnSaveSpotPatch').on('click', function (e) {
             e.preventDefault();
             var dataSource = $('#divPathDetails').data("kendoGrid").dataSource;
-            debugger;
             var changedSpots = $.grep(dataSource.data(), function (item) {
                 return item.dirty == true;
             });
@@ -522,7 +562,7 @@
             var spotpatchlab = [];
             $.each(changedSpots, function (index, item) {
                 var spotlab = {
-                    SpotProjectLABID: item.SpotProjectLABID,                    
+                    SpotProjectLABID: item.SpotProjectLABID,
                     //SpotProjectID: 0,
                     //SpotID: 0,
                     //SpotName: '',
@@ -566,7 +606,345 @@
 
 
         })
+
+        $('#lnkGenerateSpotReport').on('click', function (e) {
+            e.preventDefault();
+            debugger;
+            kendo.ui.progress($('#divReport'), true);
+            
+            var chartList = [];
+            var grid = $("#divPathDetails").data('kendoGrid')
+            var selectedPatch = $.grep(grid.dataSource.data(), function (elem) {
+                return elem.IsSelected == true;
+            });
+
+            $.each(selectedPatch, function (index, item) {
+                var detail = {
+                    spotName: item.SpotName,
+                    TargetL: item.TargetL,
+                    Targeta: item.Targeta,
+                    Targetb: item.Targetb,
+
+                    CIELAB_L: item.CIELAB_L,
+                    CIELAB_a: item.CIELAB_a,
+                    CIELAB_b: item.CIELAB_b,
+
+                    Measured_L: item.Measured_L,
+                    Measured_a: item.Measured_a,
+                    Measured_b: item.Measured_b,
+                    
+                    deltaE: item.ΔE,
+                    deltaE_M_P: item.ΔE_M_P,
+                    deltaE_M_T: item.ΔE_M_T,
+                    deltaE_T_P: item.ΔE_T_P,
+                    
+                    HTMLColor: item.HTMLColor,                    
+                };
+
+                var P_T_L = item.TargetL - item.CIELAB_L;
+                var M_T_L = item.TargetL - item.Measured_L;
+
+                var P_T_A = item.Targeta - item.CIELAB_a;
+                var M_T_A = item.Targeta - item.Measured_a;
+
+                var P_T_B = item.Targetb - item.CIELAB_b;
+                var M_T_B = item.Targetb - item.Measured_b;
+
+                detail.patchChart_AB = generateABTargetChart(P_T_A, M_T_A, P_T_B, M_T_B, hasMeasurement);
+                detail.patchChart_L = generateLTargetChart(P_T_L, M_T_L, hasMeasurement);
+
+                chartList.push(detail);
+            });
+
+            var optimizeRunId = parseInt($('#hdfOptimizationRunID').val());
+            var apiParameter = {
+                OptimizeRunId: optimizeRunId,
+                CurrentUserId: parseInt($('#hdnCurrentUserID').val()),
+                hasMeasurement: hasMeasurement,
+                chartDetailList: chartList
+            };
+
+            $.ajax({
+                type: "POST",
+                url: SERVICE_BASE_URL + 'api/Report/ExportSpotAnalyzeChartReport',
+                data: apiParameter,
+                dataType: "json",
+                success: function (response) {
+                    kendo.ui.progress($('#divReport'), false);
+                    if (response.data != null) {
+                        console.log(response.data);
+                        var fileName = '~' + response.data;
+                        window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    kendo.ui.progress($('#divReport'), false);
+                    console.log(XMLHttpRequest.responseText);
+                }
+            });
+        });        
     });
+
+    function generateABTargetChart(predicredA, measuredA, predicredB, measuredB, hasMeasurement) {
+
+
+        var targetPaperGreenObj = [0, 0];
+        var greenSeriesArray = [];
+        greenSeriesArray.push(targetPaperGreenObj);
+        var kendoGreenSeriseObj = {};
+        kendoGreenSeriseObj.data = greenSeriesArray;
+        kendoGreenSeriseObj.color = 'green';
+        kendoGreenSeriseObj.markers = {
+            background: 'green',
+            size: 10,
+            visual: function (e) {
+                var src = kendo.format("Images/greendot.png");
+                var image = new kendo.drawing.Image(src, e.rect);
+                return image;
+            }
+        };
+        kendoGreenSeriseObj.highlight = {
+            visible: false
+        }
+
+        var targetPAPERRedObj = [predicredA, predicredB];
+        var redSeriesArray = [];
+        redSeriesArray.push(targetPAPERRedObj);
+        var kendoRedSeriseObj = {};
+        kendoRedSeriseObj.data = redSeriesArray;
+        kendoRedSeriseObj.color = 'red';
+        kendoRedSeriseObj.markers = {
+            background: 'red',
+            size: 7,
+            visual: function (e) {
+                var src = kendo.format("Images/purpledot.png");
+                var image = new kendo.drawing.Image(src, e.rect);
+                return image;
+            }
+        };
+        kendoRedSeriseObj.highlight = {
+            visible: false
+        };
+
+        var measuredPAPERBlueObj = [measuredA, measuredB];
+        var blueSeriesArray = [];
+        blueSeriesArray.push(measuredPAPERBlueObj);
+        var kendoBlueSeriseObj = {};
+        kendoBlueSeriseObj.data = blueSeriesArray;
+        kendoBlueSeriseObj.color = 'blue';
+        kendoBlueSeriseObj.markers = {
+            background: 'blue',
+            size: 15,
+            visible: hasMeasurement,
+            visual: function (e) {
+                var src = kendo.format("Images/rotateguntarget.png");
+                var image = new kendo.drawing.Image(src, e.rect);
+                return image;
+            }
+        };
+        kendoBlueSeriseObj.highlight = {
+            visible: false
+        }
+
+        $("#divABCharts").kendoChart({
+            seriesDefaults: {
+                type: "scatter",
+            },
+            series: [
+                kendoGreenSeriseObj,
+                kendoRedSeriseObj,
+                kendoBlueSeriseObj
+            ],
+            xAxis: {
+                name: "xAxis",
+                min: -10,
+                max: 10,
+                majorUnit: 2.5,
+                axisCrossingValues: [-10, 10],
+                labels: {
+                    step: 2,
+                    template: function (e) {
+                        if (e.value == 0)
+                            return 'Target';
+                        return e.value;
+                    },
+                    font: "10px Arial,Helvetica,sans-serif"
+                },
+            },
+            yAxis: {
+                name: "yAxis",
+                min: -10,
+                max: 10,
+                majorUnit: 2.5,
+                axisCrossingValues: [-10, 10],
+                labels: {
+                    step: 2,
+                    template: function (e) {
+                        if (e.value == 0)
+                            return 'Target';
+                        return e.value;
+                    },
+                    rotation: 270,
+                    font: "10px Arial,Helvetica,sans-serif"
+                },                
+            },
+            chartArea: {
+                width: 175,
+                height: 140,
+                background: ''
+            },
+            plotArea: {
+                background: "white",                
+                margin: {
+                    top: 8,                    
+                    right: 8,                    
+                }
+            },
+        });
+
+        var dummyChart = $('#divABCharts').data('kendoChart');
+        dummyChart.options.transitions = false;
+        dummyChart.refresh();
+        return dummyChart.imageDataURL();
+    }
+
+    function generateLTargetChart(predicredL, measuredL, hasMeasurement) {
+
+        var targetPAPERRedObj = [predicredL];
+        var redSeriesArray = [];
+        redSeriesArray.push(targetPAPERRedObj);
+        var kendoRedSeriseObj = {};
+        kendoRedSeriseObj.data = redSeriesArray;
+        kendoRedSeriseObj.color = 'red';
+        kendoRedSeriseObj.markers = {
+            background: 'red',
+            size: 7,
+            visual: function (e) {
+                var src = kendo.format("Images/purpledot.png");
+                var image = new kendo.drawing.Image(src, e.rect);
+                return image;
+            }
+        };
+        kendoRedSeriseObj.highlight = {
+            visible: false
+        }
+
+        var measuredPAPERBlueObj = [measuredL];
+        var blueSeriesArray = [];
+        blueSeriesArray.push(measuredPAPERBlueObj);
+        var kendoBlueSeriseObj = {};
+        kendoBlueSeriseObj.data = blueSeriesArray;
+        kendoBlueSeriseObj.color = 'blue';
+        kendoBlueSeriseObj.markers = {
+            background: 'blue',
+            size: 12,
+            visible: hasMeasurement,
+            visual: function (e) {
+                var src = kendo.format("Images/guntarget.png");
+                var image = new kendo.drawing.Image(src, e.rect);
+                return image;
+            }
+        };
+        kendoBlueSeriseObj.highlight = {
+            visible: false
+        }
+
+        $("#divCharts").kendoChart({
+            seriesDefaults: {
+                type: 'line',
+            },
+            //series: [kendoGreenSeriseObj, kendoRedSeriseObj,kendoBlueSeriseObj],
+            series: [kendoRedSeriseObj, kendoBlueSeriseObj],
+            categoryAxis: {
+                name: "categoryAxis",
+                categories: [],
+            },
+            valueAxis: {
+                name: "valueAxis",
+                axisCrossingValues: [0, 10],
+                min: -10,
+                max: 10,
+                majorUnit: 5,
+                labels: {
+                    template: function (e) {
+
+                        if (e.value == 0)
+                            return 'Target';
+                        return e.value;
+                    },
+                    rotation: 270,
+                    font: "10px Arial,Helvetica,sans-serif"
+                },
+            },
+            chartArea: {
+                width: 70,
+                height: 140,
+            },
+            render: function (e) {
+                var chart = e.sender;
+                //get value axis object
+                var valueAxis = chart.getAxis("valueAxis");
+                //get maximum value from the value axis
+                var valueChartArray = $.map(valueAxis._axis.children, function (elem) {
+                    return parseInt(elem.content);
+                });
+                //assign all value number with number
+                var valueArray = [];
+                $.each(valueChartArray, function (index, item) {
+                    valueArray.push(isNaN(item) ? 0 : item);
+                });
+
+                //get top slot
+                var maxValue = Math.abs(Math.max.apply(Math, valueArray));
+                var maxValueSlot = valueAxis.slot(maxValue);
+
+                var minValue = Math.min.apply(Math, valueArray);
+                var minValueSlot = valueAxis.slot(minValue);
+
+                // Locate right-most category slot                
+                var categoryAxis = chart.getAxis("categoryAxis");
+                var lastCategoryIndex = Math.max(1, categoryAxis.range().max);
+                var minCategorySlot = categoryAxis.slot(0);
+                var maxCategorySlot = categoryAxis.slot(lastCategoryIndex);
+
+                //calculate height and width
+                var plotWidth = maxCategorySlot.origin.x - maxValueSlot.origin.x;
+                var plotHeight = minValueSlot.origin.y - maxValueSlot.origin.y;
+
+                //create ractangle
+                var rect = new geometry.Rect([
+                    // Origin X, Y
+                    maxValueSlot.origin.x, maxValueSlot.origin.y
+                ], [plotWidth, plotHeight]);
+
+                //create path using gradient
+                var path = drawing.Path.fromRect(rect, {
+                    stroke: null,
+                    fill: gradientGray
+                });
+
+                var line = new kendo.drawing.Path({
+                    stroke: {
+                        color: "green",
+                        width: 1
+                    }
+                });
+                var valueSlotLine = valueAxis.slot(0);
+                line.moveTo(valueSlotLine.origin).lineTo([maxCategorySlot.origin.x, valueSlotLine.origin.y]);
+                var group = new kendo.drawing.Group();
+                group.append(path, line);
+
+                //set the path
+                chart.surface.draw(group);
+            }
+        });
+
+        //return base64 string of chart
+        var dummyChart = $('#divCharts').data('kendoChart');
+        dummyChart.options.transitions = false;
+        dummyChart.refresh();
+        return dummyChart.imageDataURL();
+    }
 
     function ShowSpotColorPatchDetailsWindow(htmlColor, actualL, actualA, actualB, targetL, targetA, targetB, measuredL, measuredA, measuredB, measurementID, P_htmlColor, M_htmlColor, deltaE, deltaTP, deltaMT, deltaMP, SpotName) {
         measuredL = (isNaN(measuredL) || measuredL == null) ? 0 : measuredL;
@@ -613,7 +991,6 @@
     }
 
     function spotPatchSelected(chk) {
-        debugger;
         var uid = $(chk).closest("[data-uid]").data("uid")
         var dataSource = $('#divPathDetails').data("kendoGrid").dataSource;
         var item = dataSource.getByUid(uid);
@@ -657,6 +1034,7 @@
 <div class="contant_middle">
     <div class="head">
         <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hdnCurrentUserID" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hdnIsNewNCP" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hdnIsNcpCreated" ClientIDMode="Static" />
         <asp:HiddenField ID="hdfOptimizationRunID" runat="server" Value="0" ClientIDMode="Static" />
@@ -679,6 +1057,13 @@
     </div>--%>
     <div class="listDevice" style="margin-left: 10px;">
         <div id="divToRender" runat="server">
+            <%--<div style="display: block; width: 100%">--%>
+            <div id="divCharts" style="display: none; width: 100%"></div>
+            <div style="display: none; width: 100%" class="chartBackground">                                    
+                <div id="divABCharts"></div>
+            </div>
+            
+            <%--</div>--%>
             <table cellpadding="0" cellspacing="10" border="0" width="97%">
                 <tr>
                     <td>
@@ -691,6 +1076,9 @@
                                     <li><span><a href="#tab2">
                                         <asp:Localize Text="Patch Details" ID="locPatchDetails"
                                             runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>
+                                    <li><span><a href="#tab3">
+                                        <asp:Localize Text="Report" ID="locReport"
+                                            runat="server" meta:resourcekey="locReportResource1"></asp:Localize></a></span></li>
                                 </ul>
 
                                 <div class="clear"></div>
@@ -895,6 +1283,32 @@
                                     </div>
                                 </section>
                             </div>
+
+                            <div>
+                                <section id="tab3" class="contantbox tabcontant hideclass">
+                                    <div class="tab_top">&nbsp;</div>
+                                    <div class="tab_middle">
+                                        <div class="combopart">
+                                            <div id="divReport" style="padding-left: 10px; height: 450px;">
+                                                <div>
+                                                    <a id="lnkGenerateSpotReport">
+                                                        <img id="imgSpotReport" src="Images/SpotDetailsReport.png" alt="Spot Details Report" />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <asp:Localize runat="server"
+                                                                Text="*Select colors in the Patch Details tab and click 'save' to add colors to the Saved Color Report." ID="locSpotReportMessage"
+                                                                meta:resourcekey="locSpotReportMessageResource1"></asp:Localize>
+                                                </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                    <div class="tab_bottom">
+                                        &nbsp;
+                                    </div>
+                                </section>
+                            </div>
                         </section>
                     </td>
                 </tr>
@@ -909,13 +1323,15 @@
 
 <asp:HiddenField ID="hdfMeasurementID" runat="server" Value="0" ClientIDMode="Static" />
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True"
-    Height="330" Width="900" VisibleStatusbar="false"
+    Height="240" Width="900" VisibleStatusbar="false"
     ShowContentDuringLoad="false" Behaviors="Move,Close">
     <Windows>
-        <telerik:RadWindow ID="windowPatchDetails" runat="server" ShowContentDuringLoad="false" VisibleStatusbar="false" OnClientPageLoad="OnSpotDetailsLoad" OnClientClose="OnSpotDetailsClose">
+        <telerik:RadWindow ID="windowPatchDetails" runat="server" ShowContentDuringLoad="false"
+            VisibleStatusbar="false" Title="Patch Details" Width="900" Height="330"
+            Behaviors="Move,Close" OnClientClose="OnSpotDetailsClose" OnClientPageLoad="OnSpotDetailsLoad">
         </telerik:RadWindow>
         <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
-            VisibleStatusbar="false" Title="Choose Next Action" Width="900" Height="330"
+            VisibleStatusbar="false" Title="Choose Next Action" Width="702" Height="250"
             Behaviors="Move,Close" NavigateUrl="~/PopupConfirmSave.aspx" meta:resourcekey="ConfirmSaveWindowResource1">
         </telerik:RadWindow>
     </Windows>

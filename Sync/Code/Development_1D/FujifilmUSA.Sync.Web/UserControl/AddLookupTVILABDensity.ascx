@@ -128,7 +128,7 @@
                                             <asp:RequiredFieldValidator ID="rfvPrintStandardType" runat="server" Display="Dynamic"
                                                 ControlToValidate="cmbPrintStandardType" ForeColor="Red" InitialValue="0" 
                                                 ValidationGroup="vgAddLookupTVILABDensity"><ucValidationContainer:ValidationContainer ID="rfvcPrintStandardTypeContainer" runat="server"
-                                                    ValidationMsg="Please select PrintStandardType." Size="200" />
+                                                    ValidationMsg="Please select PrintStandardType." Size="200" ResourceValidationMsg="PrintStandardTypeRequiredResource"/>
                                             </asp:RequiredFieldValidator>
                                         </div>                                            
                                         <div class="clear">
@@ -137,7 +137,7 @@
                                 </tr>
                                   <tr id="TR_FirstTime" visible="false" runat="server" >
                                     <td align="left" style="padding-left:10px;" colspan="3">
-                                        <asp:Label ID="lblNewEntryMsg" runat="server" Text="Please choose Project Type because this is first time entries for this Print Standard Type:"></asp:Label>
+                                        <asp:Label ID="lblNewEntryMsg" runat="server" Text="Please choose Project Type because this is first time entries for this Print Standard Type:" meta:resourcekey="lblNewEntryMsgResource1"></asp:Label>
                                         <asp:RadioButtonList ID="rbt_ProjectType" runat="server" AutoPostBack="True" 
                                             onselectedindexchanged="rbt_ProjectType_SelectedIndexChanged" 
                                             RepeatDirection="Horizontal">

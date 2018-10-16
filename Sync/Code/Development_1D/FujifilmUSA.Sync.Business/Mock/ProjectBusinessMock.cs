@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Entity.CPSpot;
 
 namespace FujifilmUSA.Sync.Business.Mock
 {
@@ -23,7 +25,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
-        
+
         public Dictionary<string, string> GetProjectOption(int projectId, EProfileType type)
         {
             return new Dictionary<string, string>();
@@ -109,7 +111,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<string, string>();
         }
 
-        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, bool isVarification = false)
+        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, short PrintingTypeId, bool isVarification = false)
         {
             return new List<Entity.CPSyncV.MetricTargetPreset>();
         }
@@ -128,7 +130,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         }
 
         public List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId)
-        {            
+        {
             return new List<Entity.CPSyncV.MetricSum>();
         }
 
@@ -142,6 +144,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Entity.CPSync1D.ProjectTargetDensity>();
         }
 
+        public List<Entity.CPSync1D.ProjectTargetHueAngle> GetPrintStandardHueAngle(int printStandardTypeId)
+        {
+            return new List<Entity.CPSync1D.ProjectTargetHueAngle>();
+        }
+
         public List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId)
         {
             return new List<Entity.CPSync1D.ProjectTargetLAB>();
@@ -149,7 +156,7 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         public byte[] Get1DLastOptimizedDlp(int projectId)
         {
-            return new byte[1];        
+            return new byte[1];
         }
         public Guid StoreTemporaryValidationInformation(string jobName, string customer, string pageOrSurface, string jdfJobId, int projectId, Guid tempValidationInfoId, string silverlightPostUrl)
         {
@@ -206,6 +213,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new byte[1];
         }
 
+
         public ReferenceChartPlugin GetPluginReferenceChartData(int projectId, EReferenceChartDisType referenceChartDisType)
         {
             return new ReferenceChartPlugin();
@@ -214,6 +222,20 @@ namespace FujifilmUSA.Sync.Business.Mock
         public ReferenceChartPlugin GetPluginSpotReferenceChartData(int spotProjectId, EReferenceChartDisType referenceChartDisType)
         {
             return new ReferenceChartPlugin();
+        }
+        public Dictionary<int, string> GetReTargetSpotProjectList(int CompanyID, int BranchID, int DeviceID)
+        {
+            return new Dictionary<int, string>();
+        }
+
+        public SpotProjectLibrary GetRetargetSpotProjectDetails(int RetargetSpotprojectID)
+        {
+            return new SpotProjectLibrary();
+        }
+
+        public DataTable GetRetargetProjectDetails(int RetargetProjectID)
+        {
+            return new DataTable();
         }
         #endregion
 
@@ -224,6 +246,6 @@ namespace FujifilmUSA.Sync.Business.Mock
         #endregion
 
 
-        
+
     }
 }

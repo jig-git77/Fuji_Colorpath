@@ -33,16 +33,20 @@
                         <td>
                             <br />
                             <br />
-                            <img src="##LOGOIMAGES##login_logo.png" style="width: 330px; height: 63px" />
+                            <div class="divRight">
+                                <img src="##LOGOIMAGES##login_logo.png" style="width: 330px; height: 63px" />
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td style="font-size: 20px; font-weight: bold">
                             <br />
-                            ColorPath Sync<br />
-                            ###ReportName###<br />
+                            <div class="divRight">
+                                ColorPath Sync<br />
+                                ###ReportName###<br />
 
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -50,12 +54,14 @@
                         <td style="font-size: 14px; font-weight: normal;">
                             <br />
                             <br />
-                            ###CompanyName###<br />
-                            ###BranchName###<br />
-                            ###PressName###<br />
-                            ###ProjectName### (##RunNo##)<br />
-                            <br />
-                            ###CurrentDate###
+                            <div class="divRight">
+                                ###CompanyName###<br />
+                                ###BranchName###<br />
+                                ###PressName###<br />
+                                ###ProjectName### (##RunNo##)<br />
+                                <br />
+                                ###CurrentDate###
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -137,14 +143,14 @@
                             <img src="##IMAGES##header-right-img.gif" />
                         </td>
                     </tr>
-                </table>
+                </table>                
             </td>
         </tr>
         <tr>
             <td align="center">
-                <table style="width: 660px" cellspacing="0" cellpadding="0" align="center" border="0">
+                <table style="width: 100%;margin-right: 0px;margin-left: 0px;" cellspacing="0" cellpadding="0" align="center" border="0">
                     <tr>
-                        <td valign="top" rowspan="2" style="width: 392px;">
+                        <td valign="top" rowspan="2" style="width: 380px;">
                             <table border="0" cellspacing="0" cellpadding="0" style="margin: 0 0 0 4px;" width="100%">
 
                                 <tr>
@@ -252,18 +258,24 @@
                                 </tr>
                             </table>
                         </td>
-                        <td style="width: 5px;">
+                        <td style="width: 10px;">
                             &nbsp;
                         </td>
                         <td valign="top">
-                            <img src="###TargetVersusActualAB###" height="218px" width="255px" alt='Target Versus Actual AB'
-                                 id='img2' />
+                            <div class="gamutChart" style="margin-top:13px;">
+                                <img src="###TargetVersusActualAB###" height="232px" width="255px" alt='Target Versus Actual AB'
+                                     id='img2' />
+                            </div>
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
-
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
         <tr>
             <td>
                 <table border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -280,7 +292,7 @@
                                         <table border="0" cellspacing="0" cellpadding="0" width="100%">
                                             <tr>
                                                 <td style="width: 160px;" valign="top" align="left">
-                                                    <table cellpadding="0" cellspacing="0" width="100%" border="0">
+                                                    <table cellpadding="0" cellspacing="0" width="100%" border="0" style="margin-top:8px;">
                                                         <tr style="height: 20px">
                                                             <td valign="middle" style="width: 25px" class="BottomBorder">
                                                                 &nbsp;
@@ -317,10 +329,10 @@
                                 </tr>
                             </table>
                         </td>
-                        <td style="width: 4px;">
+                        <td style="width: 5px;">
                             &nbsp;
                         </td>
-                        <td valign="top" style="width: 276px;">
+                        <td valign="top">
                             <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="height: 560px; overflow: hidden;">
                                 <tr>
                                     <td valign="top" align="left" style="width:100%; border: 2px solid #ccc;">
@@ -391,14 +403,15 @@
                             <img src="##IMAGES##header-right-img.gif" />
                         </td>
                     </tr>
-                </table>
+                </table>         
+                &nbsp;
             </td>
         </tr>
         <tr>
             <td>
                 <table border="0" cellspacing="0" cellpadding="0" width="100%">
                     <tr>
-                        <td valign="top" style="width: 380px;">
+                        <td valign="top" style="width: 250px;">
                             <table border="0" cellspacing="0" cellpadding="0" width="100%">
                                 <tr>
                                     <td class="summary-bg">
@@ -409,13 +422,13 @@
                                     <td style="border: 2px solid #ccc;">
                                         <table border="0" cellspacing="0" cellpadding="0" width="100%">
                                             <tr>
-                                                <td style="
-                                                    width=width 276px;=276px; height=height 169px;=169px; padding-left=padding-left 34px;=34px; padding-bottom=padding-bottom 14px;" =14px;">
-                                                    <img src="###PaperLab1###" width="240px" height="150px" alt='PaperLab1' />
+                                                <td>
+                                                    <div class="gamutChart" style="width: 256px; height: 160px; margin-left: 0px; padding-bottom: 0px;">
+                                                        <img src="###PaperLab1###" width="240px" height="150px" alt='PaperLab1' />
+                                                    </div>
                                                 </td>
-                                                <td style="
-                                                    width=width 104px;=104px; height=height 169px;=169px; padding-left=padding-left 28px;=28px; padding-bottom=padding-bottom 12px;" =12px;">
-                                                    <img src="###PaperLab2###" width="69px" height="138px" alt='PaperLab2' />
+                                                <td style="width:104px; height:169px; padding-left:28px; padding-bottom:0px;">
+                                                    <img src="###PaperLab2###" width="69px" height="138px" alt='PaperLab2' style="margin-right:0px;" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -444,8 +457,7 @@
                     </tr>
                 </table>
             </td>
-        </tr>
-
+        </tr>        
         <tr>
             <td align="center">
                 <table style="width: 660px" cellspacing="0" cellpadding="0" align="center" border="0">
@@ -461,13 +473,13 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td valign="top" align="center" style="width: 100%; border: 2px solid #ccc">                                                    
+                                                <td valign="top" align="center" style="width: 100%; border: 2px solid #ccc">
                                                     <br />
-                                                    <img src="###GrayL###" width="555px" height="190px" alt='Gray L' id='img4' />                                                    
+                                                    <img src="###GrayL###" width="555px" height="185px" alt='Gray L' id='img4' />
                                                     <br />
-                                                    <img src="###GrayA###" width="555px" height="190px" alt='Gray a' id='img7' />
+                                                    <img src="###GrayA###" width="555px" height="185px" alt='Gray a' id='img7' />
                                                     <br />
-                                                    <img src="###GrayB###" width="555px" height="190px" alt='Gray b' id='img8' />
+                                                    <img src="###GrayB###" width="555px" height="185px" alt='Gray b' id='img8' />
                                                 </td>
                                             </tr>
                                         </table>
@@ -517,6 +529,7 @@
                         </td>
                     </tr>
                 </table>
+                &nbsp;
             </td>
         </tr>
         <tr>

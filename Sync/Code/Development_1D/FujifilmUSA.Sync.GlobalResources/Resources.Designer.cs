@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -939,6 +939,24 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string Email_Subject_SendUserCreatedEmail {
             get {
                 return ResourceManager.GetString("Email_Subject_SendUserCreatedEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flexo.
+        /// </summary>
+        internal static string EPrintingTypes_Flexo {
+            get {
+                return ResourceManager.GetString("EPrintingTypes_Flexo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Offset.
+        /// </summary>
+        internal static string EPrintingTypes_Offset {
+            get {
+                return ResourceManager.GetString("EPrintingTypes_Offset", resourceCulture);
             }
         }
         

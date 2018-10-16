@@ -219,10 +219,17 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return false;
         }
+
         public DataTable GetMeasurementValidation(int ProjectID, int OptimizeRunId, string ProjectType)
         {
             return new DataTable();
         }
+
+        public DataSet GetReportDataOnSpotProject(int OptimizationRunId)
+        {
+            return new DataSet();
+        }
+
         #endregion
 
         #region ITaskBase Members

@@ -37,7 +37,7 @@ var PLUGIN_SERVICE_URL = '';
 var $hdnBaseServiceUrl;
 var $hdnCurrentUserID;
 var $btnGeneratePDF;
-var $imgEyeABCompLarge;
+var $lnkABComparisionLargeChart;
 var $chartLoader;
 var $hdMeasurement;
 var $hdnProjectID;
@@ -97,6 +97,16 @@ var labelPrintXMLString = '';
 var labelPrintStatusIconString = '';
 var reportGradingPath = '';
 var reportCMYKDensityPath = '';
+var $lnkLComparisionLargeChart;
+var $lnkAB_ComparisionLargeChart;
+var $lnkPaperPaperLab1LargeChart;
+var $lnkPaperPaperLab2LargeChart;
+var $lnkGrayBalanceDeltaCHLargeChart;
+var $lnkBlackDeltaLLargeChart;
+var $lnkGrayDeltaLLargeChart;
+var $lnk_A_GrayBalanceLargeChart;
+var $lnk_B_GrayBalanceLargeChart;
+var $lnk_L_GrayBalanceLargeChart;
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -208,7 +218,7 @@ $(document).ready(function () {
     $hdnProjectID = $('#hdnProjectID').val();
     $hdnOptimizationRunID = $('#hdnOptimizationRunID').val();
     $chartLoader = $(".chart-loading");
-    $imgEyeABCompLarge = $('#imgEyeABCompLarge');
+    $lnkABComparisionLargeChart = $('#lnkABComparisionLargeChart');
     $btnGeneratePDF = $('#btnGeneratePDF');
     $rbtnListDeltaE = $('#rbtnListDeltaE');
     $chart_TargetVersusActualAB = $("#kendoChartTargetVersusActualAB");
@@ -251,6 +261,16 @@ $(document).ready(function () {
     $btnLast = $('#btnLast');
     $btnFirst = $('#btnFirst');
     $hdnCurrentProjectLicenseType = $('#hdnCurrentProjectLicenseType').val();
+    $lnkLComparisionLargeChart = $('#lnkLComparisionLargeChart');
+    $lnkAB_ComparisionLargeChart = $('#lnkAB_ComparisionLargeChart');
+    $lnkPaperPaperLab1LargeChart = $('#lnkPaperPaperLab1LargeChart');
+    $lnkPaperPaperLab2LargeChart = $('#lnkPaperPaperLab2LargeChart');
+    $lnkGrayBalanceDeltaCHLargeChart = $('#lnkGrayBalanceDeltaCHLargeChart');
+    $lnkBlackDeltaLLargeChart = $('#lnkBlackDeltaLLargeChart');
+    $lnkGrayDeltaLLargeChart = $('#lnkGrayDeltaLLargeChart');
+    $lnk_A_GrayBalanceLargeChart = $('#lnk_A_GrayBalanceLargeChart');
+    $lnk_B_GrayBalanceLargeChart = $('#lnk_B_GrayBalanceLargeChart');
+    $lnk_L_GrayBalanceLargeChart = $('#lnk_L_GrayBalanceLargeChart');
     PLUGIN_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
@@ -388,21 +408,21 @@ $(document).ready(function () {
     });
 
 
-    $imgEyeABCompLarge.on('click', function (e) {
+    $lnkABComparisionLargeChart.on('click', function (e) {
         e.preventDefault();
 
         var kendoOptions = $chart_TargetVersusActualAB.data("kendoChart").options;
-        kendoOptions.chartArea.width = 580;
-        kendoOptions.chartArea.height = 480;
-
         $chartTargetVersusActualABLarge.kendoChart(kendoOptions);
+        $chartTargetVersusActualABLarge.data("kendoChart").options.chartArea.width = 580;
+        $chartTargetVersusActualABLarge.data("kendoChart").options.chartArea.height = 480;
+
 
         $chartTargetVersusActualABLargeArea.kendoWindow({
             width: "600px",
             modal: true,
             height: '500px',
             resizable: false,
-            title: "a* - b* Comparison Chart",
+            title: $('#ContentPlaceHolder1_ucAnalyze_Td6').text().trim(),
             //content: url,
             visible: false
         });
@@ -410,6 +430,156 @@ $(document).ready(function () {
         var popup = $chartTargetVersusActualABLargeArea.data('kendoWindow');
         popup.open();
         popup.center();
+    });
+
+    $lnkLComparisionLargeChart.on('click', function (e) {
+        e.preventDefault();
+
+        var kendoOptions = $chart_L_Comaparision.data("kendoChart").options;
+        //kendoOptions.chartArea.width = 580;
+        //kendoOptions.chartArea.height = 180;
+
+        magnifyLpaperCharts(kendoOptions, 180, 580, '200px', '600px', $('#ContentPlaceHolder1_ucAnalyze_Td7').text().trim());
+
+    });
+
+    $lnkAB_ComparisionLargeChart.on('click', function (e) {
+        e.preventDefault();        
+        var kendoOptions = $chart_Gamut_ABComparison.data("kendoChart").options;
+        $('#kendoChart_AB_ComparisionLarge').kendoChart(kendoOptions);
+        $('#kendoChart_AB_ComparisionLarge').data("kendoChart").options.chartArea.width = 580;
+        $('#kendoChart_AB_ComparisionLarge').data("kendoChart").options.chartArea.height = 480;
+
+        $('#kendoChart_AB_ComparisionLargeArea').kendoWindow({
+            width: "600px",
+            modal: true,
+            height: '500px',
+            resizable: false,
+            title: $('#divABGamutComparision').text().trim(),
+            visible: false
+        });
+
+        var popup = $('#kendoChart_AB_ComparisionLargeArea').data('kendoWindow');
+        popup.open();
+        popup.center();
+    });
+
+    $lnkPaperPaperLab1LargeChart.on('click', function (e) {
+        e.preventDefault();
+        var kendoOptions = $divChartInkPaperPaperLab1.data("kendoChart").options;
+        $('#kendoChart_AB_ComparisionLarge').kendoChart(kendoOptions);
+        $('#kendoChart_AB_ComparisionLarge').data("kendoChart").options.chartArea.width = 580;
+        $('#kendoChart_AB_ComparisionLarge').data("kendoChart").options.chartArea.height = 480;
+
+        $('#kendoChart_AB_ComparisionLargeArea').kendoWindow({
+            width: "600px",
+            modal: true,
+            height: '500px',
+            resizable: false,
+            title: $('#spanlocPaperAB').text().trim(),
+            visible: false
+        });
+
+        var popup = $('#kendoChart_AB_ComparisionLargeArea').data('kendoWindow');
+        popup.open();
+        popup.center();
+    });
+
+    $lnkPaperPaperLab2LargeChart.on('click', function (e) {
+        e.preventDefault();
+
+        var kendoOptions = $divChartInkPaperPaperLab2.data("kendoChart").options;
+        //kendoOptions.chartArea.width = 180;
+        //kendoOptions.chartArea.height = 375;
+
+        magnifyLpaperCharts(kendoOptions, 375, 180, '400px', '200px', $('#spanlocPaperL').text().trim());
+    });
+
+    $lnkGrayBalanceDeltaCHLargeChart.on('click', function (e) {
+        e.preventDefault();
+
+        var kendoOptions = $divChartG7GrayBalanceDeltaCh.data("kendoChart").options;
+        kendoOptions.chartArea.width = 580;
+        kendoOptions.chartArea.height = 180;
+
+        magnifyG7Chart(kendoOptions, '200px', '600px', $('#spanGrayBalanceDeltaCH').text().trim());
+    });
+
+    $lnkBlackDeltaLLargeChart.on('click', function (e) {
+        e.preventDefault();
+
+        var kendoOptions = $divChartG7BlackDeltaL.data("kendoChart").options;
+        kendoOptions.chartArea.width = 580;
+        kendoOptions.chartArea.height = 180;
+
+        magnifyG7Chart(kendoOptions, '200px', '600px', $('#spanBlackDeltaL').text().trim());
+    });
+
+    $lnkGrayDeltaLLargeChart.on('click', function (e) {
+        e.preventDefault();
+        var kendoOptions = $divChartG7GrayDeltaL.data("kendoChart").options;
+        //kendoOptions.chartArea.width = 580;
+        //kendoOptions.chartArea.height = 180;
+
+        magnifyG7Chart(kendoOptions, '200px', '600px', $('#spanGrayDeltaL').text().trim());
+    });
+
+    $lnk_A_GrayBalanceLargeChart.on('click', function (e) {
+        e.preventDefault();
+
+        var kendoOptions = $chart_A_BalanceChart.data("kendoChart").options;
+        $('#kendoChart_A_Balance_Large').kendoChart(kendoOptions);
+        $('#kendoChart_A_Balance_Large').data("kendoChart").options.chartArea.width = 580;
+        $('#kendoChart_A_Balance_Large').data("kendoChart").options.chartArea.height = 200;
+
+
+
+        $('#kendoChart_A_Balance_LargeArea').kendoWindow({
+            width: "600px",
+            modal: true,
+            height: '225px',
+            resizable: false,
+            title: $('#spanGrayBalanceA').text().trim(),
+            visible: false
+        });
+
+        var popup = $('#kendoChart_A_Balance_LargeArea').data('kendoWindow');
+        popup.open();
+        popup.center();
+    });
+
+    $lnk_B_GrayBalanceLargeChart.on('click', function (e) {
+        e.preventDefault();
+
+        var kendoOptions = $chart_B_BalanceChart.data("kendoChart").options;
+        $('#kendoChart_B_Balance_Large').kendoChart(kendoOptions);
+        $('#kendoChart_B_Balance_Large').data("kendoChart").options.chartArea.width = 580;
+        $('#kendoChart_B_Balance_Large').data("kendoChart").options.chartArea.height = 200;
+
+        $('#kendoChart_B_Balance_LargeArea').kendoWindow({
+            width: "600px",
+            modal: true,
+            height: '225px',
+            resizable: false,
+            title: $('#spanGrayBalanceB').text().trim(),
+            visible: false
+        });
+
+        var popup = $('#kendoChart_B_Balance_LargeArea').data('kendoWindow');
+        popup.open();
+        popup.center();
+    });
+
+    $lnk_L_GrayBalanceLargeChart.on('click', function (e) {
+        e.preventDefault();
+
+        var kendoOptions = $chart_L_BalanceChart.data("kendoChart").options;
+        kendoOptions.chartArea.width = 580;
+        kendoOptions.chartArea.height = 200;
+
+        magnifyLpaperCharts(kendoOptions, 200, 580, '225px', '600px', $('#spanGrayBalanceL').text().trim());
+
+
     });
 
     $('[id^=rbtnListDeltaE_]').on('click', function (e) {
@@ -473,6 +643,59 @@ $(document).ready(function () {
     });
 });
 
+function magnifyG7Chart(chartOptions, popupHeight, popupWidth, titleText) {
+
+    $('#kendoChart_G7_Large').kendoChart(chartOptions);
+    $('#kendoChart_G7_Large').data('kendoChart').options.legend.visible = false;
+    $('#kendoChart_G7_Large').data('kendoChart').options.chartArea.width = 580;
+    $('#kendoChart_G7_Large').data('kendoChart').options.chartArea.height = 180;
+
+    if ($('#kendoChart_G7_LargeArea').data('kendoWindow')) {
+        $('#kendoChart_G7_LargeArea').data('kendoWindow').title(titleText);
+    } else {
+        $('#kendoChart_G7_LargeArea').kendoWindow({
+            title: titleText,
+            width: popupWidth,
+            height: popupHeight,
+            modal: true,
+            resizable: false,
+            visible: false
+        });
+    }
+
+    var popup = $('#kendoChart_G7_LargeArea').data('kendoWindow');
+    popup.open();
+    popup.center();
+}
+
+function magnifyLpaperCharts(chartOptions, chartHeight, chartWidth, heightSize, widthSize, titleText) {
+    $('#kendoChart_L_ComparisionLarge').kendoChart(chartOptions);
+    $('#kendoChart_L_ComparisionLarge').data('kendoChart').options.chartArea.width = chartWidth;
+    $('#kendoChart_L_ComparisionLarge').data('kendoChart').options.chartArea.height = chartHeight;
+
+
+    if ($('#kendoChart_L_ComparisionLargeArea').data('kendoWindow')) {
+        $('#kendoChart_L_ComparisionLargeArea').data('kendoWindow').title(titleText);
+        $('#kendoChart_L_ComparisionLargeArea').data('kendoWindow').setOptions({
+            width: widthSize,
+            height: heightSize
+        });
+    } else {
+        $('#kendoChart_L_ComparisionLargeArea').kendoWindow({
+            title: titleText,
+            width: widthSize,
+            height: heightSize,
+            modal: true,
+            resizable: false,
+            visible: false
+        });
+    }
+
+    var popup = $('#kendoChart_L_ComparisionLargeArea').data('kendoWindow');
+    popup.open();
+    popup.center();
+}
+
 
 
 ////**************** START BIND THE ALL TABS  ****************////
@@ -480,11 +703,18 @@ function BindAllTabs() {
 
     var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
 
+    $(tabStrip.items()[0]).css('display', 'inline-block');
+    $(tabStrip.items()[1]).css('display', 'inline-block');
+    $(tabStrip.items()[3]).css('display', 'inline-block');
+    $(tabStrip.items()[5]).css('display', 'inline-block');
+    $(tabStrip.items()[6]).css('display', 'inline-block');
+    $(tabStrip.items()[7]).css('display', 'inline-block');
+
     //Hide default tabs G7
-    $(tabStrip.items()[2]).hide();
+    //$(tabStrip.items()[2]).hide();
 
     //Hide default tabs TVI
-    $(tabStrip.items()[4]).hide();
+    //$(tabStrip.items()[4]).hide();
 
     //Bind Summary tab
     BindMeasurementSummary()
@@ -503,6 +733,9 @@ function BindAllTabs() {
 
     //Bind delta summary chart to display in report
     BindDeltaSummaryStatesChart();
+
+    $('#divToRender').css('display', 'block');
+    $('#divTabContainerLoading').css('display', 'none');
 }
 
 ////**************** Bind the measurement summary details ****************////
@@ -581,7 +814,9 @@ function BindMeasurementSummary() {
                             if ($hdnValidationType == 1) {
 
                                 //Show tabs G7
-                                $(tabStrip.items()[2]).show();
+                                //$(tabStrip.items()[2]).show();
+                                $(tabStrip.items()[2]).css('display', 'inline-block');
+
 
                                 //Bind G7 charts
                                 BindG7Charts();
@@ -591,7 +826,8 @@ function BindMeasurementSummary() {
                             if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
 
                                 //Hide default tabs TVI
-                                $(tabStrip.items()[4]).show();
+                                //$(tabStrip.items()[4]).show();
+                                $(tabStrip.items()[4]).css('display', 'inline-block');
 
                                 //Bind TVI charts
                                 BindTVICharts();
@@ -689,410 +925,423 @@ function BindMeasurementPatchDetails() {
 
     var measurementID = parseInt($hdnCurrentMeasurement.val());
 
-    $divMeasurementPatchDetails.kendoGrid({
-        dataSource: {
-            transport: {
-                read: function (options) {
-                    kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), true);
-                    $.ajax({
-                        type: "GET",
-                        url: SERVICE_BASE_URL + 'api/Chart/GetMeasurementPatchDetails',
-                        //data: apiParameters,
-                        data: {
-                            MeasurementId: measurementID,
-                            IsVerificationProject: $hdnVerification,
-                            IsSync1DTypeProject: $hdnSync1DType,
-                            metricSumID: $('#hdPatchMatricSum').val()
-                        },
-                        dataType: "json",
-                        headers: {
-                            'Accept-Language': $CurrentCulture
-                        },
-                        success: function (response) {
-                            kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
-                            if (response.data != null) {
-                                Resources = response.data.GlobalResources;
-                                var patches = response.data.measurementPatchDetails;
-                                options.success(patches);
+    $('#hdPatchMatricSum').val(''); //set the metric sum --All default value
 
-                                //set the column header
-                                $divMeasurementPatchDetails.find("th[data-field=HTMLColor] b").html(Resources.gridAnalyzeHeaderPatchResource);
-                                $divMeasurementPatchDetails.find("th[data-field=SampleID] b").html(Resources.gridAnalyzeHeaderIDResource);
-                                $divMeasurementPatchDetails.find("th[data-field=SampleName] b").html(Resources.GridTemplateColumnResource3);
-                                $divMeasurementPatchDetails.find("th[data-field=CMYK_C] b").html(Resources.gridAnalyzeHeader_C_Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=CMYK_M] b").html(Resources.gridAnalyzeHeader_M_Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=CMYK_Y] b").html(Resources.gridAnalyzeHeader_Y_Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=CMYK_K] b").html(Resources.gridAnalyzeHeader_K_Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeader_E_Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=ΔE94] b").html(Resources.gridAnalyzeHeaderE94Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=ΔE2000] b").html(Resources.gridAnalyzeHeaderE2000Resource);
-                                $divMeasurementPatchDetails.find("th[data-field=TargetL] b").html(Resources.gridAnalyzeHeaderTargetLResource);
-                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_L] b").html(Resources.gridAnalyzeHeaderCIELAB_LResource);
-                                $divMeasurementPatchDetails.find("th[data-field=Targeta] b").html(Resources.gridAnalyzeHeaderTargetAResource);
-                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_a] b").html(Resources.gridAnalyzeHeaderCIELAB_AResource);
-                                $divMeasurementPatchDetails.find("th[data-field=Targetb] b").html(Resources.gridAnalyzeHeaderTargetBResource);
-                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_b] b").html(Resources.gridAnalyzeHeaderCIELAB_BResource);
-                                $divMeasurementPatchDetails.find("th[data-field=Density_V] b").html(Resources.gridAnalyzeHeaderDensity_VResource);
-                                $divMeasurementPatchDetails.find("th[data-field=Density_C] b").html(Resources.gridAnalyzeHeaderDensity_CResource);
-                                $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
-                                $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
+    var patchGrid = $divMeasurementPatchDetails.data("kendoGrid");
+    if (patchGrid) {
+        $divMeasurementPatchDetails.data('kendoGrid').dataSource.read();
+        $divMeasurementPatchDetails.data('kendoGrid').refresh();
+    } else {
+        $divMeasurementPatchDetails.kendoGrid({
+            dataSource: {
+                transport: {
+                    read: function (options) {
+                        kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), true);
+                        $.ajax({
+                            type: "GET",
+                            url: SERVICE_BASE_URL + 'api/Chart/GetMeasurementPatchDetails',
+                            //data: apiParameters,
+                            data: {
+                                MeasurementId: parseInt($hdnCurrentMeasurement.val()),
+                                IsVerificationProject: $hdnVerification,
+                                IsSync1DTypeProject: $hdnSync1DType,
+                                metricSumID: $('#hdPatchMatricSum').val()
+                            },
+                            dataType: "json",
+                            headers: {
+                                'Accept-Language': $CurrentCulture
+                            },
+                            success: function (response) {
+                                kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
+                                if (response.data != null) {
+                                    Resources = response.data.GlobalResources;
+                                    var patches = response.data.measurementPatchDetails;
+                                    options.success(patches);
+
+                                    //set the column header
+                                    $divMeasurementPatchDetails.find("th[data-field=HTMLColor] b").html(Resources.gridAnalyzeHeaderPatchResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=SampleID] b").html(Resources.gridAnalyzeHeaderIDResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=SampleName] b").html(Resources.GridTemplateColumnResource3);
+                                    $divMeasurementPatchDetails.find("th[data-field=CMYK_C] b").html(Resources.gridAnalyzeHeader_C_Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=CMYK_M] b").html(Resources.gridAnalyzeHeader_M_Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=CMYK_Y] b").html(Resources.gridAnalyzeHeader_Y_Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=CMYK_K] b").html(Resources.gridAnalyzeHeader_K_Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeader_E_Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=ΔE94] b").html(Resources.gridAnalyzeHeaderE94Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=ΔE2000] b").html(Resources.gridAnalyzeHeaderE2000Resource);
+                                    $divMeasurementPatchDetails.find("th[data-field=TargetL] b").html(Resources.gridAnalyzeHeaderTargetLResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=CIELAB_L] b").html(Resources.gridAnalyzeHeaderCIELAB_LResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Targeta] b").html(Resources.gridAnalyzeHeaderTargetAResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=CIELAB_a] b").html(Resources.gridAnalyzeHeaderCIELAB_AResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Targetb] b").html(Resources.gridAnalyzeHeaderTargetBResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=CIELAB_b] b").html(Resources.gridAnalyzeHeaderCIELAB_BResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Density_V] b").html(Resources.gridAnalyzeHeaderDensity_VResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Density_C] b").html(Resources.gridAnalyzeHeaderDensity_CResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
+                                }
+
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
+                                console.log(XMLHttpRequest.responseText);
                             }
+                        });
+                    },
 
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
-                            console.log(XMLHttpRequest.responseText);
-                        }
-                    });
                 },
-
-            },
-            schema: {
-                model: {
-                    fields: {
-                        SampleID: {
-                            from: "SampleID",
-                            type: "number"
-                        },
-                        SampleName: {
-                            from: "SampleName"
-                        },
-                        CMYK_C: {
-                            from: "CMYK_C",
-                            type: "number"
-                        },
-                        CMYK_M: {
-                            from: "CMYK_M",
-                            type: "number"
-                        },
-                        CMYK_Y: {
-                            from: "CMYK_Y",
-                            type: "number"
-                        },
-                        CMYK_K: {
-                            from: "CMYK_K",
-                            type: "number"
-                        },
-                        HTMLColor: {
-                            from: "HTMLColor"
-                        },
-                        TargetL: {
-                            from: "TargetL",
-                            type: "number"
-                        },
-                        Targeta: {
-                            from: "Targeta",
-                            type: "number"
-                        },
-                        Targetb: {
-                            from: "Targetb",
-                            type: "number"
-                        },
-                        CIELAB_L: {
-                            from: "CIELAB_L",
-                            type: "number"
-                        },
-                        CIELAB_a: {
-                            from: "CIELAB_a",
-                            type: "number"
-                        },
-                        CIELAB_b: {
-                            from: "CIELAB_b",
-                            type: "number"
-                        },
-                        ΔE: {
-                            from: "ΔE",
-                            type: "number"
-                        },
-                        ΔE94: {
-                            from: "ΔE94",
-                            type: "number"
-                        },
-                        ΔE2000: {
-                            from: "ΔE2000",
-                            type: "number"
-                        },
-                        Density_V: {
-                            from: "Density_V",
-                            type: "number"
-                        },
-                        Density_C: {
-                            from: "Density_C",
-                            type: "number"
-                        },
-                        Density_M: {
-                            from: "Density_M",
-                            type: "number"
-                        },
-                        Density_Y: {
-                            from: "Density_Y",
-                            type: "number"
-                        },
-                        PatchTypeID: {
-                            from: "PatchTypeID",
-                            type: "number"
-                        },
-                        ΔH: {
-                            from: "ΔH",
-                            type: "number"
-                        },
-                        ΔCh: {
-                            from: "ΔCh",
-                            type: "number"
-                        },
-                        ΔL: {
-                            from: "ΔL",
-                            type: "number"
+                schema: {
+                    model: {
+                        fields: {
+                            SampleID: {
+                                from: "SampleID",
+                                type: "number"
+                            },
+                            SampleName: {
+                                from: "SampleName"
+                            },
+                            CMYK_C: {
+                                from: "CMYK_C",
+                                type: "number"
+                            },
+                            CMYK_M: {
+                                from: "CMYK_M",
+                                type: "number"
+                            },
+                            CMYK_Y: {
+                                from: "CMYK_Y",
+                                type: "number"
+                            },
+                            CMYK_K: {
+                                from: "CMYK_K",
+                                type: "number"
+                            },
+                            HTMLColor: {
+                                from: "HTMLColor"
+                            },
+                            TargetL: {
+                                from: "TargetL",
+                                type: "number"
+                            },
+                            Targeta: {
+                                from: "Targeta",
+                                type: "number"
+                            },
+                            Targetb: {
+                                from: "Targetb",
+                                type: "number"
+                            },
+                            CIELAB_L: {
+                                from: "CIELAB_L",
+                                type: "number"
+                            },
+                            CIELAB_a: {
+                                from: "CIELAB_a",
+                                type: "number"
+                            },
+                            CIELAB_b: {
+                                from: "CIELAB_b",
+                                type: "number"
+                            },
+                            ΔE: {
+                                from: "ΔE",
+                                type: "number"
+                            },
+                            ΔE94: {
+                                from: "ΔE94",
+                                type: "number"
+                            },
+                            ΔE2000: {
+                                from: "ΔE2000",
+                                type: "number"
+                            },
+                            Density_V: {
+                                from: "Density_V",
+                                type: "number"
+                            },
+                            Density_C: {
+                                from: "Density_C",
+                                type: "number"
+                            },
+                            Density_M: {
+                                from: "Density_M",
+                                type: "number"
+                            },
+                            Density_Y: {
+                                from: "Density_Y",
+                                type: "number"
+                            },
+                            PatchTypeID: {
+                                from: "PatchTypeID",
+                                type: "number"
+                            },
+                            ΔH: {
+                                from: "ΔH",
+                                type: "number"
+                            },
+                            ΔCh: {
+                                from: "ΔCh",
+                                type: "number"
+                            },
+                            ΔL: {
+                                from: "ΔL",
+                                type: "number"
+                            }
                         }
                     }
-                }
+                },
+                pageSize: 10
             },
-            pageSize: 10
-        },
-        sortable: true,
-        scrollable: true,
-        //filterable: true,
-        filterable: {
-            extra: false,
-            //operators: {
-            //    string: {
-            //        eq: "Is equal to"
-            //    }
-            //}
-        },
-        pageable: {
-            refresh: true,
-            pageSizes: true
-        },
-        noRecords: {
-            template: ''
-        },
-        toolbar: kendo.template($("#templatePatchDetails").html()),
-        //toolbar: [{ 'name': 'exportCGATS', template: '<div style="float:left;"><button id="btnExportCGATS" class=\'k-button\'>Export CGATS</button></div>' }],
-        columns: [
-            {
-                field: "HTMLColor",
-                filterable: false,
-                title: "<b title='Patch'>Patch</b>",
-                //template: "<span id='sp' style='display:inline-block;background-color:#FFB700;height:14px;width:30px;'></span>",
-                template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
-                width: "50px",
-                //locked: true,
-                //lockable: false,
+            sortable: true,
+            scrollable: true,
+            resizable: true,
+            //height: 405,
+            //filterable: true,
+            filterable: {
+                extra: false,
+                //operators: {
+                //    string: {
+                //        eq: "Is equal to"
+                //    }
+                //}
             },
-            {
-                field: "SampleID",
-                title: "<b title='ID'>ID</b>",
-                width: "50px",
-                filterable: false,
-                //locked: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true
             },
-            {
-                field: "SampleName",
-                title: "<b title='Name'>Name</b>",
-                filterable: false,
-                width: "50px",
-                //locked: true,
+            noRecords: {
+                template: ''
             },
-            {
-                field: "CMYK_C",
-                title: "<b title='C'>C</b>",
-                format: "{0:n2}",
-                width: "50px",
-                //locked: true,
-            },
-            {
-                field: "CMYK_M",
-                title: "<b title='M'>M</b>",
-                format: "{0:n2}",
-                width: "50px",
-                //locked: true,
-            },
-            {
-                field: "CMYK_Y",
-                title: "<b title='Y'>Y</b>",
-                format: "{0:n2}",
-                width: "50px",
-                //locked: true,
-            },
-            {
-                field: "CMYK_K",
-                title: "<b title='K'>K</b>",
-                format: "{0:n2}",
-                width: "50px",
-                //locked: true,
-            },
-            {
-                field: "ΔE",
-                title: "<b title='ΔE'>ΔE</b>",
-                width: "50px",
-                format: "{0:n2}",
-            },
-            {
-                field: "ΔE94",
-                title: "<b title='ΔE94'>ΔE94</b>",
-                width: "50px",
-                format: "{0:n2}",
-            },
-            {
-                field: "ΔE2000",
-                title: "<b title='ΔE2000'>ΔE2000</b>",
-                width: "80px",
-                format: "{0:n2}",
-            },
-            {
-                field: "TargetL",
-                title: "<b title='TargetL'>TargetL</b>",
-                width: "80px",
-                format: "{0:n2}",
-            },
-            {
-                field: "CIELAB_L",
-                title: "<b title='CIELAB_L'>CIELAB_L</b>",
-                width: "80px",
-                format: "{0:n2}",
-            },
-            {
-                field: "Targeta",
-                title: "<b title='Targeta'>Targeta</b>",
-                width: '80px',
-                format: "{0:n2}",
-            },
-            {
-                field: "CIELAB_a",
-                title: "<b title='CIELAB_a'>CIELAB_a</b>",
-                width: "80px",
-                format: "{0:n2}",
-            },
-            {
-                field: "Targetb",
-                title: "<b title='Targetb'>Targetb</b>",
-                width: '80px',
-                format: "{0:n2}",
-            },
-            {
-                field: "CIELAB_b",
-                title: "<b title='CIELAB_b'>CIELAB_b</b>",
-                width: "80px",
-                format: "{0:n2}",
-            },
-            {
-                field: "Density_V",
-                title: "<b title='Density_V'>Density_V</b>",
-                width: "80px",
-                format: "{0:n2}",
-            },
-            {
-                field: "Density_C",
-                title: "<b title='Density_C'>Density_C</b>",
-                width: '80px',
-                format: "{0:n2}",
-            },
-            {
-                field: "Density_M",
-                title: "<b title='Density_M'>Density_M</b>",
-                width: "80px",
-                format: "{0:n2}",
-            },
-            {
-                field: "Density_Y",
-                title: "<b title='Density_Y'>Density_Y</b>",
-                width: '80px',
-                format: "{0:n2}",
-            },
-            {
-                field: "ΔH",
-                title: "<b title='ΔH'>ΔH</b>",
-                width: '80px',
-                format: "{0:n2}",
-                hidden: true,
-            },
-            {
-                field: "ΔCh",
-                title: "<b title='ΔCh'>ΔCh</b>",
-                width: '80px',
-                format: "{0:n2}",
-                hidden: true,
-            },
-            {
-                field: "ΔL",
-                title: "<b title='ΔL'>ΔL</b>",
-                width: '80px',
-                format: "{0:n2}",
-                hidden: true,
-            },
-        ],
-        dataBound: function (e) {
+            toolbar: kendo.template($("#templatePatchDetails").html()),
+            //toolbar: [{ 'name': 'exportCGATS', template: '<div style="float:left;"><button id="btnExportCGATS" class=\'k-button\'>Export CGATS</button></div>' }],
+            columns: [
+                {
+                    field: "HTMLColor",
+                    filterable: false,
+                    title: "<b title='Patch'>Patch</b>",
+                    //template: "<span id='sp' style='display:inline-block;background-color:#FFB700;height:14px;width:30px;'></span>",
+                    template: "<span id='sp' style='display:inline-block;background-color:#=HTMLColor#;height:14px;width:30px;'></span>",
+                    width: "50px",
+                    locked: true,
+                    sortable: false
+                    //lockable: false,
+                },
+                {
+                    field: "SampleID",
+                    title: "<b title='ID'>ID</b>",
+                    width: "50px",
+                    filterable: false,
+                    locked: true,
+                },
+                {
+                    field: "SampleName",
+                    title: "<b title='Name'>Name</b>",
+                    filterable: false,
+                    width: "75px",
+                    locked: true,
+                },
+                {
+                    field: "CMYK_C",
+                    title: "<b title='C'>C</b>",
+                    format: "{0:n2}",
+                    width: "55px",
+                    locked: true,
+                },
+                {
+                    field: "CMYK_M",
+                    title: "<b title='M'>M</b>",
+                    format: "{0:n2}",
+                    width: "58px",
+                    locked: true,
+                },
+                {
+                    field: "CMYK_Y",
+                    title: "<b title='Y'>Y</b>",
+                    format: "{0:n2}",
+                    width: "55px",
+                    locked: true,
+                },
+                {
+                    field: "CMYK_K",
+                    title: "<b title='K'>K</b>",
+                    format: "{0:n2}",
+                    width: "55px",
+                    locked: true,
+                },
+                {
+                    field: "ΔE",
+                    title: "<b title='ΔE'>ΔE</b>",
+                    width: "65px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "ΔE94",
+                    title: "<b title='ΔE94'>ΔE94</b>",
+                    width: "80px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "ΔE2000",
+                    title: "<b title='ΔE2000'>ΔE2000</b>",
+                    width: "90px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "TargetL",
+                    title: "<b title='Target L*'>Target L*</b>",
+                    width: "100px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "CIELAB_L",
+                    title: "<b title='Actual L*'>Actual L*</b>",
+                    width: "100px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Targeta",
+                    title: "<b title='Target a*'>Target a*</b>",
+                    width: '100px',
+                    format: "{0:n2}",
+                },
+                {
+                    field: "CIELAB_a",
+                    title: "<b title='Actual a*'>Actual a*</b>",
+                    width: "100px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Targetb",
+                    title: "<b title='Target b*'>Target b*</b>",
+                    width: '100px',
+                    format: "{0:n2}",
+                },
+                {
+                    field: "CIELAB_b",
+                    title: "<b title='Actual b*'>Actual b*</b>",
+                    width: "100px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Density_V",
+                    title: "<b title='Density_V'>Density_V</b>",
+                    width: "110px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Density_C",
+                    title: "<b title='Density_C'>Density_C</b>",
+                    width: '110px',
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Density_M",
+                    title: "<b title='Density_M'>Density_M</b>",
+                    width: "110px",
+                    format: "{0:n2}",
+                },
+                {
+                    field: "Density_Y",
+                    title: "<b title='Density_Y'>Density_Y</b>",
+                    width: '110px',
+                    format: "{0:n2}",
+                },
+                {
+                    field: "ΔH",
+                    title: "<b title='ΔH'>ΔH</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                    hidden: true,
+                },
+                {
+                    field: "ΔCh",
+                    title: "<b title='ΔCh'>ΔCh</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                    hidden: true,
+                },
+                {
+                    field: "ΔL",
+                    title: "<b title='ΔL'>ΔL</b>",
+                    width: '75px',
+                    format: "{0:n2}",
+                    hidden: true,
+                },
+            ],
+            dataBound: function (e) {
 
-            var selectedMatricSum = parseInt($divMeasurementPatchDetails.find("#ddlMatricSum").val())
-            var grid = $divMeasurementPatchDetails.data("kendoGrid");
-            if (!isNaN(selectedMatricSum)) {
-                switch (selectedMatricSum) {
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 25:
-                    case 26:
-                        grid.showColumn(20);
-                        grid.hideColumn(21);
-                        grid.hideColumn(22);
-                        break;
-                    case 8:
-                    case 9:
-                    case 36:
-                    case 37:
-                    case 48:
-                        grid.hideColumn(20);
-                        grid.showColumn(21);
-                        grid.hideColumn(22);
-                        break;
-                    case 10:
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 38:
-                    case 39:
-                    case 40:
-                    case 41:
-                        grid.hideColumn(20);
-                        grid.hideColumn(21);
-                        grid.showColumn(22);
-                        break;
-                    default:
-                        grid.hideColumn(20);
-                        grid.hideColumn(21);
-                        grid.hideColumn(22);
+                var selectedMatricSum = parseInt($divMeasurementPatchDetails.find("#ddlMatricSum").val())
+                var grid = $divMeasurementPatchDetails.data("kendoGrid");
+                if (!isNaN(selectedMatricSum)) {
+                    switch (selectedMatricSum) {
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 25:
+                        case 26:
+                            grid.showColumn(20);
+                            grid.hideColumn(21);
+                            grid.hideColumn(22);
+                            break;
+                        case 8:
+                        case 9:
+                        case 36:
+                        case 37:
+                        case 48:
+                            grid.hideColumn(20);
+                            grid.showColumn(21);
+                            grid.hideColumn(22);
+                            break;
+                        case 10:
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 38:
+                        case 39:
+                        case 40:
+                        case 41:
+                            grid.hideColumn(20);
+                            grid.hideColumn(21);
+                            grid.showColumn(22);
+                            break;
+                        default:
+                            grid.hideColumn(20);
+                            grid.hideColumn(21);
+                            grid.hideColumn(22);
+                    }
                 }
             }
-        }
-        //dataBound: function (e) {
-        //    debugger;
-        //    var measurementId = 0;
-        //    if (e.sender.dataSource._view.length > 0) {
-        //        measurementId = e.sender.dataSource._view[0].MeasurementID;
-        //    }
+            //dataBound: function (e) {
+            //    debugger;
+            //    var measurementId = 0;
+            //    if (e.sender.dataSource._view.length > 0) {
+            //        measurementId = e.sender.dataSource._view[0].MeasurementID;
+            //    }
 
-        //    if (measurementId > 0) {
-        //        this.hideColumn(4);
-        //        this.hideColumn(5);
-        //        this.hideColumn(6);
-        //        this.hideColumn(7);
-        //    }
-        //    else {
-        //        this.hideColumn(8);
-        //        this.hideColumn(9);
-        //        this.hideColumn(10);
-        //    }
+            //    if (measurementId > 0) {
+            //        this.hideColumn(4);
+            //        this.hideColumn(5);
+            //        this.hideColumn(6);
+            //        this.hideColumn(7);
+            //    }
+            //    else {
+            //        this.hideColumn(8);
+            //        this.hideColumn(9);
+            //        this.hideColumn(10);
+            //    }
 
 
-        //    var dataSource = this.dataSource;
-        //    this.element.find('tr').each(function () {
-        //        var row = $(this);
-        //        //set resource message
-        //        row.find('#lnkView').attr('title', _Resources.gridAnalyzeToolTipViewResource);
-        //    });
-        //}
-    });
+            //    var dataSource = this.dataSource;
+            //    this.element.find('tr').each(function () {
+            //        var row = $(this);
+            //        //set resource message
+            //        row.find('#lnkView').attr('title', _Resources.gridAnalyzeToolTipViewResource);
+            //    });
+            //}
+        });
+    }
+
+
 
 
     if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
@@ -1121,6 +1370,9 @@ function BindMeasurementPatchDetails() {
                         data: params,
                     }
                 }
+            },
+            dataBound: function (e) {
+                e.sender.select(0); //set default value for matric sum dropdown on measurement change
             },
             change: function (e) {
                 var matrixSum = '-1';
@@ -1308,6 +1560,12 @@ function BindMeasurementPatchDetails() {
     $divMeasurementPatchDetails.find('#lnkLinkFilter').on('click', function (e) {
         $("form.k-filter-menu button[type='reset']").trigger("click");
     });
+
+    $('#divMeasurementPatchDetails .k-grid-header th.k-header').mouseenter(function () {
+        $(this).find('.k-grid-filter').show();
+    }).mouseleave(function () {
+        $(this).find('.k-grid-filter').hide();
+    });
 }
 
 
@@ -1355,7 +1613,7 @@ function BindAnalyzeChart() {
 
 ////**************** START BIND THE AB COMPARISION INK PAPER CHART  ****************////
 function BindInkPaperChartABComparision() {
-    
+
     var measurementID = parseInt($hdnCurrentMeasurement.val());
     var apiParameters = {
         MeasurementId: measurementID,
@@ -1659,7 +1917,7 @@ function PopulateAnalyzeChart() {
                 return e.MeasurementId
             })) < 0) {
                 $hdnCurrentMeasurement.val(analyzeSeriesResult[analyzeSeriesResult.length - 1].MeasurementId);
-            } 
+            }
         }
 
         //set name of the selected measurement in header lable
@@ -2029,7 +2287,7 @@ function PopulateInkPaperChartABComparision() {
         maxDeltaLimit = (maxDeltaLimit > 4 ? maxDeltaLimit : maxDeltaLimit + 1)
     }
 
-    maxDeltaLimit = Math.trunc(maxDeltaLimit) + 1;     
+    maxDeltaLimit = Math.trunc(maxDeltaLimit) + 1;
     //generate the second stacked chart by max value
     var stackedChart = [];
     $.each(axis, function (index, num) {
@@ -2356,7 +2614,8 @@ function PopulateInkPaperChartABComparision() {
 
         //bind json data for L chart
         var paperLObject = {
-            color: '#D4CBC5',
+            //color: '#D4CBC5',
+            color: '#FFF',
             //name: patchColor[index].colorName,
             value: paperObj["ΔL"],
         };
@@ -2396,8 +2655,16 @@ function PopulateInkPaperChartABComparision() {
             max: 10,
             majorUnit: 5,
             axisCrossingValues: [-10, 10],
+            //labels: {
+            //    format: "{0}"
+            //},
             labels: {
-                format: "{0}"
+                //step: 2,
+                template: function (e) {
+                    if (e.value == 0)
+                        return 'Target';
+                    return e.value;
+                }
             },
             title: {
                 //text: _Resources._recDeltaA
@@ -2414,8 +2681,17 @@ function PopulateInkPaperChartABComparision() {
             step: 5,
             majorUnit: 5,
             axisCrossingValues: [-10, 10],
+            //labels: {
+            //    format: "{0}"
+            //},
             labels: {
-                format: "{0}"
+                //step: 2,
+                template: function (e) {
+                    if (e.value == 0)
+                        return 'Target';
+                    return e.value;
+                },
+                rotation: 270
             },
             title: {
                 //text: _Resources._recDeltaB
@@ -2428,6 +2704,13 @@ function PopulateInkPaperChartABComparision() {
             width: 250,
             height: 180,
             background: ''
+        },
+        plotArea: {
+            background: "white",
+            margin: {
+                top: 12,
+                right: 12
+            }
         },
         render: renderChartWithBackgroundByAxis
         //plotArea: {
@@ -2513,10 +2796,7 @@ function PopulateChartTargetVersusActualAB() {
     var targetPAPERSeriseObj = {};
 
     $.each(jsonTarget, function (index, element) {
-
         var seriesArray = [];
-
-
 
         //Get colors from the colors array ()
         var colorsArray = $.grep(jsonColors, function (colorObj) { return colorObj.PatchType == element.PatchType });
@@ -2580,15 +2860,45 @@ function PopulateChartTargetVersusActualAB() {
 
         //create tool tip
 
-        var tooltipString = '<table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
+        var bgColor = element.PatchType == "Paper" ? "White" : element.PatchType;
+        var textColor = "white";
+        if (element.PatchType == "Paper" || element.PatchType == "Yellow" || element.PatchType == "Cyan") {
+            textColor = "black";
+        }
+        var tooltipString = '<div style="color: ' + textColor + '; padding: 2px; background-color: ' + bgColor + ';border-radius: 4px;padding: 5px 5px 5px 6px;background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAGXRFW…8beQb+HTWQYgP/DHoD/466cAR4edRAyg38P6hLbIAAAwCnWhhVsxvdCAAAAABJRU5ErkJggg==);"><table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
         tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + element.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + element.CielabB.toFixed(2) + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + element.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + element.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + element.Targetb.toFixed(2) + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + element["ΔL"].toFixed(2) + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + element["Δa"].toFixed(2) + '</td></tr>';
         tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + element["Δb"].toFixed(2) + '</td></tr>';
-        tooltipString += '</table>';
+        tooltipString += '</table></div>';
 
-        kendoSeriseObj.tooltip = { visible: true, template: tooltipString, shared: true };
+        //kendoSeriseObj.tooltip = {
+        //    visible: true,
+        //    template: tooltipString,
+        //    shared: true
+        //};
+
+        kendoSeriseObj.tooltip = {
+            visible: true, template: function (d) {
+                debugger;
+                var seriesData = d.series.data;
+                var lastItem = seriesData[seriesData.length - 1];
+                
+                if (lastItem != d.dataItem) {
+                    setTimeout(function () {
+                        $(".k-chart-tooltip").addClass('tempTooltip');                        
+                    }, 150);
+                    return "";
+                } else {
+                    setTimeout(function () {
+                        $(".k-chart-tooltip").removeData('tempTooltip');
+                    }, 150);
+                }
+                return tooltipString;
+            }, shared: false
+        };
+
 
         //Calcaulte Targets
         var kendoTargetObj = {};
@@ -2697,7 +3007,7 @@ function PopulateChartTargetVersusActualAB() {
         //        color: "black"
         //    }
         //},
-        render: renderChartWithBackgroundByAxis
+        //render: renderChartWithBackgroundByAxis
     });
 
 
@@ -2742,6 +3052,48 @@ function PopulateChartGamutABComparision() {
                 }
             }
         };
+
+        //Check patch type for tooltip caption
+        var tooltipCaption = '';
+        switch (jsonTargetColor.PatchType) {
+            case "Cyan":
+                tooltipCaption = _Resources._recCyanPathMetrics;
+                break;
+            case "Magenta":
+                tooltipCaption = _Resources._recMagentaPathMetrics;
+                break;
+            case "Yellow":
+                tooltipCaption = _Resources._recYellowPathMetrics;
+                break;
+            case "Red":
+                tooltipCaption = _Resources._recRedPathMetrics;
+                break;
+            case "Green":
+                tooltipCaption = _Resources._recGreenPathMetrics;
+                break;
+            case "Blue":
+                tooltipCaption = _Resources._recBluePathMetrics;
+                break;
+            case "Paper":
+                tooltipCaption = _Resources._recPaperPathMetrics;
+                break;
+        }
+
+        //create tool tip
+        var tooltipString = '<table><tr><td><center><b>' + tooltipCaption + '</b></center><td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + jsonTargetColor.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + jsonTargetColor.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + jsonTargetColor.CielabB.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + jsonTargetColor.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + jsonTargetColor.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + jsonTargetColor.Targetb.toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + jsonTargetColor["ΔL"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + jsonTargetColor["Δa"].toFixed(2) + '</td></tr>';
+        tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + jsonTargetColor["Δb"].toFixed(2) + '</td></tr>';
+        tooltipString += '</table>';
+
+        actualColorPointObj.tooltip = {
+            visible: true,
+            template: tooltipString,
+            shared: true
+        };
+
         actualColorPointObj.highlight = {
             visible: false
         }
@@ -2770,6 +3122,40 @@ function PopulateChartGamutABComparision() {
     var paperObj = $.grep(jsonTarget, function (element) { return element.PatchType == "Paper"; })[0];
     var targetPAPERObject = [[paperObj.Targeta, paperObj.Targetb]];
     var colorPAPERObject = [[paperObj.CielabA, paperObj.CielabB]];
+    //set actual color points
+    var paperColorPointObj = {};
+    paperColorPointObj.data = colorPAPERObject;
+    paperColorPointObj.color = "White";
+    paperColorPointObj.markers = {
+        background: "White", size: 10,
+        border: {
+            width: 1,
+            color: function (e) {
+                return 'black';
+            }
+        }
+    };
+
+
+    //create tool tip
+    var tooltipString = '<table><tr><td><center><b>' + _Resources._recPaperPathMetrics + '</b></center><td></tr>';
+    tooltipString += '<tr><td>' + _Resources._recActual + ' ' + _Resources._recL + ': ' + paperObj.CielabL.toFixed(2) + ' ' + _Resources._recA + ': ' + paperObj.CielabA.toFixed(2) + ' ' + _Resources._recB + ': ' + paperObj.CielabB.toFixed(2) + '</td></tr>';
+    tooltipString += '<tr><td>' + _Resources._recTarget + ' ' + _Resources._recL + ': ' + paperObj.TargetL.toFixed(2) + ' ' + _Resources._recA + ': ' + paperObj.Targeta.toFixed(2) + ' ' + _Resources._recB + ': ' + paperObj.Targetb.toFixed(2) + '</td></tr>';
+    tooltipString += '<tr><td>' + _Resources._recDeltaL + '   ' + paperObj["ΔL"].toFixed(2) + '</td></tr>';
+    tooltipString += '<tr><td>' + _Resources._recDeltaA + '   ' + paperObj["Δa"].toFixed(2) + '</td></tr>';
+    tooltipString += '<tr><td>' + _Resources._recDeltaB + '   ' + paperObj["Δb"].toFixed(2) + '</td></tr>';
+    tooltipString += '</table>';
+
+    paperColorPointObj.tooltip = {
+        visible: true,
+        template: tooltipString,
+        shared: true
+    };
+
+    paperColorPointObj.highlight = {
+        visible: false
+    }
+    paperColorPointObj.width = 2;
 
 
     $chart_Gamut_ABComparison.kendoChart({
@@ -2801,14 +3187,17 @@ function PopulateChartGamutABComparision() {
             highlight: {
                 visible: false
             }
-        }, {
-            data: colorPAPERObject,
-            color: "Black",
-            markers: { background: "White", size: 10 },
-            highlight: {
-                visible: false
-            }
-        }, targetCYANPoint,
+        },
+            //{
+            //    data: colorPAPERObject,
+            //    color: "Black",
+            //    markers: { background: "White", size: 10 },
+            //    highlight: {
+            //        visible: false
+            //    }
+            //    },
+            paperColorPointObj,
+            targetCYANPoint,
             targetMAGENTAPoint,
             targetYELLOWPoint,
             targetREDPoint,
@@ -2850,7 +3239,7 @@ function PopulateChartGamutABComparision() {
         //        color: "black"
         //    }
         //},
-        render: renderChartWithBackgroundByAxis
+        //render: renderChartWithBackgroundByAxis
     });
 }
 
@@ -3157,11 +3546,10 @@ function PopulateChartLGrayBalance() {
         },
         yAxis: {
             name: "yAxis",
-            min: -6,
-            max: 6,
-            step: 2,
-            majorUnit: 2,
-            axisCrossingValues: [-6, 6],
+            min: -12,
+            max: 12,
+            majorUnit: 4,
+            axisCrossingValues: [-12, 12],
             labels: {
                 format: "{0}"
             },
@@ -3225,11 +3613,10 @@ function PopulateChartLGrayBalance() {
         },
         yAxis: {
             name: "yAxis",
-            min: -6,
-            max: 6,
-            step: 2,
-            majorUnit: 2,
-            axisCrossingValues: [-6, 6],
+            min: -12,
+            max: 12,
+            majorUnit: 4,
+            axisCrossingValues: [-12, 12],
             labels: {
                 format: "{0}"
             },
@@ -3260,7 +3647,7 @@ function PopulateSummaryDeltaChart() {
     var maxNum = 0;
     maxNum = maxValue > maxLimit ? maxValue : maxLimit;
     maxNum = Math.trunc(maxNum) + 1;
-    
+
 
     //generate the second stacked chart by max value
     var summarySeries = [];
@@ -3720,8 +4107,8 @@ function PopulateG7Charts() {
             {
                 xField: "Cmyk_Value",
                 yField: "ΔLimit",
-                color: "Black",
-                markers: { background: "Black", size: 0 },
+                color: "Green",
+                markers: { background: "Green", size: 0 },
                 highlight: {
                     visible: false
                 },
@@ -3733,8 +4120,8 @@ function PopulateG7Charts() {
             {
                 xField: "Cmyk_Value",
                 yField: "ΔValue",
-                color: "Green",
-                markers: { background: "Green", size: 0 },
+                color: "Black",
+                markers: { background: "Black", size: 0 },
                 highlight: {
                     visible: false
                 },
@@ -3797,8 +4184,8 @@ function PopulateG7Charts() {
             {
                 xField: "Cmyk_Value",
                 yField: "ΔLimit",
-                color: "Black",
-                markers: { background: "Black", size: 0 },
+                color: "Green",
+                markers: { background: "Green", size: 0 },
                 highlight: {
                     visible: false
                 },
@@ -3810,8 +4197,8 @@ function PopulateG7Charts() {
             {
                 xField: "Cmyk_Value",
                 yField: "ΔValue",
-                color: "Green",
-                markers: { background: "Green", size: 0 },
+                color: "Black",
+                markers: { background: "Black", size: 0 },
                 highlight: {
                     visible: false
                 },
@@ -4884,6 +5271,9 @@ function PopulateTVIG7Chart() {
 
     $divChartTVISummaryDotGain.kendoChart({
         renderAs: "canvas",
+        //legend: {
+        //    position: "top",            
+        //},
         seriesDefaults: {
             type: "scatterLine",
             style: "smooth",
@@ -4892,6 +5282,7 @@ function PopulateTVIG7Chart() {
         //dataSource: jsonKResult,
         series: [
             {
+                name: "C",
                 data: jsonCResult,
                 xField: "CmykC",
                 yField: "DotGain",
@@ -4914,6 +5305,7 @@ function PopulateTVIG7Chart() {
                     template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
                 }
             }, {
+                name: "M",
                 data: jsonMResult,
                 xField: "CmykM",
                 yField: "DotGain",
@@ -4934,6 +5326,7 @@ function PopulateTVIG7Chart() {
                     visible: false
                 },
             }, {
+                name: "Y",
                 data: jsonYResult,
                 xField: "CmykY",
                 yField: "DotGain",
@@ -4954,6 +5347,7 @@ function PopulateTVIG7Chart() {
                     visible: false
                 },
             }, {
+                name: "K",
                 data: jsonKResult,
                 xField: "CmykK",
                 yField: "DotGain",
@@ -4979,16 +5373,9 @@ function PopulateTVIG7Chart() {
                 format: "{0}",
                 padding: { top: 0 }
             },
-            //title: {
-            //    text: ""
-            //}
         },
         yAxis: {
             name: "yAxis",
-            // min: -5,
-            // max: 25,
-            //majorUnit: 5,
-            // axisCrossingValues: [-5, 25],
             labels: {
                 format: "{0}"
             },
@@ -5003,7 +5390,41 @@ function PopulateTVIG7Chart() {
                 color: "black"
             }
         },
-        render: renderChartWithBackgroundByAxis
+        render: renderChartWithBackgroundByAxis,
+        legend: {
+            visible: true,
+            position: "top",
+            item: {
+                visual: function (e) {
+
+                    var color = e.options.markers.background;
+                    var labelColor = e.options.labels.color;
+
+                    // Define the target dimensions for the legend item
+                    var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+
+                    // A layout will hold the checkbox and the default visual                    
+                    var layout = new kendo.drawing.Layout(rect, {
+                        spacing: 5,
+                        alignItems: "center"
+                    });
+                    // Cheat a bit by rendering the checkbox using the Unicode ballot symbol
+                    var cbSymbol = e.active ? "☑" : "☐";
+                    var cb = new kendo.drawing.Text(cbSymbol, [0, 0], {
+                        font: "16px sans-serif"
+                    });
+
+                    // This will give us the default box + text
+                    var defaultVisual = e.createVisual();
+
+                    // Reflow them together
+                    layout.append(cb, defaultVisual);
+                    layout.reflow()
+
+                    return layout;
+                }
+            }
+        },
     });
 
     //load the chart again to adjust the xAxis lables according to negative values
@@ -5177,7 +5598,8 @@ function renderChartWithBackgroundByAxis(e) {
             || chart.element[0].id == "kendoChartGamut_ABComparisonDummy" || chart.element[0].id == "kendoChartABalanceChart"
             || chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartLComaparision"
             || chart.element[0].id == "kendoChartInkPaperLabOneDummy" || chart.element[0].id == "kendoChartDummyBalanceL"
-            || chart.element[0].id == "kendoChartDummyBalanceA" || chart.element[0].id == "kendoChartDummyBalanceB") {
+            || chart.element[0].id == "kendoChartDummyBalanceA" || chart.element[0].id == "kendoChartDummyBalanceB" || chart.element[0].id == "kendoChart_A_Balance_Large"
+            || chart.element[0].id == "kendoChart_L_ComparisionLarge" || chart.element[0].id == "kendoChart_B_Balance_Large") {
             xSlot = xAxis.slot(Math.min.apply(Math, xAxisArray), Math.max.apply(Math, xAxisArray));
             ySlot = yAxis.slot(Math.min.apply(Math, yAxisArray), Math.max.apply(Math, yAxisArray));
 
@@ -5197,19 +5619,19 @@ function renderChartWithBackgroundByAxis(e) {
             ]);
 
 
-        if (chart.element[0].id == "kendoChartTargetVersusActualABDummy" || chart.element[0].id == "kendoChartTargetVersusActualABLarge" || chart.element[0].id == "kendoChartGamut_ABComparisonDummy" || chart.element[0].id == "kendoChartInkPaperLabOneDummy") {
+        if (chart.element[0].id == "kendoChartTargetVersusActualABDummy" || chart.element[0].id == "kendoChartGamut_ABComparisonDummy" || chart.element[0].id == "kendoChartInkPaperLabOneDummy") {
             path = drawing.Path.fromRect(rect, {
                 stroke: null,
                 fill: gradientRedGreen
             });
         }
-        else if (chart.element[0].id == "kendoChartABalanceChart" || chart.element[0].id == "kendoChartDummyBalanceA") {
+        else if (chart.element[0].id == "kendoChartABalanceChart" || chart.element[0].id == "kendoChartDummyBalanceA" || chart.element[0].id == "kendoChart_A_Balance_Large") {
             path = drawing.Path.fromRect(rect, {
                 stroke: null,
                 fill: gradientPinkGreen
             });
         }
-        else if (chart.element[0].id == "kendoChartLBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceL") {
+        else if (chart.element[0].id == "kendoChartLBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceL" || chart.element[0].id == "kendoChart_L_ComparisionLarge") {
             path = drawing.Path.fromRect(rect, {
                 stroke: null,
                 fill: gradientGray3
@@ -5221,7 +5643,7 @@ function renderChartWithBackgroundByAxis(e) {
                 fill: gradientGray2
             });
         }
-        else if (chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceB") {
+        else if (chart.element[0].id == "kendoChartBBalanceChart" || chart.element[0].id == "kendoChartDummyBalanceB" || chart.element[0].id == "kendoChart_B_Balance_Large") {
             path = drawing.Path.fromRect(rect, {
                 stroke: null,
                 fill: gradientYellowBlue
@@ -5339,7 +5761,7 @@ function GetABComparisionSpiderChartImage() {
     $('#kendoChartTargetVersusActualABDummy').kendoChart(kendoOptions)
     var chartDummy = $('#kendoChartTargetVersusActualABDummy').data('kendoChart')
     chartDummy.dataSource = kendodataSource;
-    delete chartDummy.options.chartArea.background;
+    //delete chartDummy.options.chartArea.background;
     chartDummy.options.transitions = false;
     chartDummy.refresh()
     return chartDummy.imageDataURL();
@@ -5354,7 +5776,7 @@ function GetInkPaperPatchChartImage() {
     //kendoOptions.categoryAxis.labels.visible = false;    
     $('#divChartInkPaperDummy').kendoChart(kendoOptions);
     var dummyChart = $('#divChartInkPaperDummy').data('kendoChart');
-    dummyChart.options.categoryAxis.labels.visible = false;    
+    dummyChart.options.categoryAxis.labels.visible = false;
     dummyChart.dataSource = kendodataSource;
     dummyChart.options.transitions = false;
     dummyChart.refresh();
@@ -5373,7 +5795,7 @@ function GetActualVsTargetChartImage() {
     $('#kendoChartGamut_ABComparisonDummy').kendoChart(kendoOptions)
     var chartDummy = $('#kendoChartGamut_ABComparisonDummy').data('kendoChart')
     chartDummy.dataSource = kendodataSource;
-    delete chartDummy.options.chartArea.background;
+    //delete chartDummy.options.chartArea.background;
     chartDummy.options.transitions = false;
     chartDummy.refresh()
     return chartDummy.imageDataURL();
@@ -5465,7 +5887,7 @@ function Get_InkPaperChartLAB_OneChartImage() {
     $('#kendoChartInkPaperLabOneDummy').kendoChart(kendoOptions)
     var chartDummy = $('#kendoChartInkPaperLabOneDummy').data('kendoChart')
     chartDummy.dataSource = kendodataSource;
-    delete chartDummy.options.chartArea.background;
+    //delete chartDummy.options.chartArea.background;
     chartDummy.options.transitions = false;
     chartDummy.refresh()
     return chartDummy.imageDataURL();
@@ -5613,7 +6035,8 @@ function CheckAvgCompability() {
             $('#tblAverageMeasurementSummary').css('display', 'block');
         } else {
             //Show default tabs patch details
-            $(tabStrip.items()[5]).show();
+            //$(tabStrip.items()[5]).show();
+            $(tabStrip.items()[5]).css('display', 'inline-block');
             $('#tblAverageMeasurementSummary').css('display', 'none');
             //$('#tblValidationSummary').css('display', 'block');
             $('#tblValidationSummary').css('display', 'block');

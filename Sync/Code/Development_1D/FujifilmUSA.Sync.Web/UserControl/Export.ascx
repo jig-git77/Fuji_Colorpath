@@ -53,6 +53,23 @@
             return false;
         });
     });
+
+    function ShowSpotLibraryExportWindow() {
+        <%--var cmykExportPath = getPathForCMYKDensityReport();
+        var oWnd = $find("<%= ReportCMYKDensityWindow.ClientID %>");
+        oWnd.setUrl(cmykDensityPath);
+        oWnd.show();--%>
+        var oWindow;
+        oWindow = window.radopen("PopupSpotLibraryExport.aspx?OptimizationRunId=101", "ReportSpotLibraryExportWindow");
+        oWindow.show();
+        return false;
+    }
+    function CloseSpotLibraryExportWindow() {
+        var oWnd = $find("<%= ReportSpotLibraryExportWindow.ClientID %>");
+        oWnd.close();
+        return false;
+    }
+
 </script>
 
 <div class="contant_top">
@@ -180,8 +197,8 @@
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                    <asp:LinkButton ID="lbtnExportCMYK" runat="server" CssClass="gray_bt" OnClick="lbtnExportCMYK_Click">
+                                                <td>                                                                                                      
+                                                    <asp:LinkButton ID="lbtnExportCMYK" runat="server" CssClass="gray_bt" OnClientClick="javascript:return ShowSpotLibraryExportWindow();">
                                                         <span>
                                                             <asp:Localize runat="server" Text="Export CMYK"
                                                                 ID="locExportCMYK"
@@ -189,7 +206,7 @@
                                                         </span>
                                                     </asp:LinkButton>
                                                 </td>
-                                            </tr>
+                                            </tr>                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -410,6 +427,15 @@
 </div>
 <div class="clear">
 </div>
+<telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True" meta:resourcekey="RadWindowManagerResource1">
+    <Windows>       
+        <telerik:RadWindow ID="ReportSpotLibraryExportWindow" runat="server" VisibleStatusbar="false"
+            ShowContentDuringLoad="false" Title="Spot Library Export" Width="730" Height="260"
+            Behaviors="Close, Move" Behavior="Close, Move">
+        </telerik:RadWindow>
+    </Windows>
+</telerik:RadWindowManager>
+
 <asp:HiddenField ID="hdnExportCurveSelectedTabIndex" runat="server" Value="0" />
 <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />

@@ -342,17 +342,17 @@ col._idGenTableRowColumn-2 {
 }
 tr._idGenTableRowColumn-3 {
 	background-color:#b6ddc7;
-	min-height:27px;
+	min-height:20px;
 }
 tr._idGenTableRowColumn-4 {
-	min-height:27px;
+	min-height:15px;
 }
 tr._idGenTableRowColumn-5 {
 	background-color:#b6ddc7;
-	min-height:36px;
+	min-height:18px;
 }
 tr._idGenTableRowColumn-6 {
-	min-height:36px;
+	min-height:18px;
 }
 col._idGenTableRowColumn-7 {
 	width:79px;
@@ -384,11 +384,11 @@ col._idGenTableRowColumn-15 {
 }
 tr._idGenTableRowColumn-title {
 	background-color:#22af7c;
-	min-height:27px;
+	min-height:18px;
 }
 tr._idGenTableRowColumn-title-black {
 	background-color:#000000;
-	min-height:27px;
+	min-height:20px;
 }
 
 #_idContainer000 {
@@ -516,4 +516,9 @@ td.Gray
     background: url('../Images/LabBackdrop.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.divRight {
+    float: right;
+    width: 50%;
 }

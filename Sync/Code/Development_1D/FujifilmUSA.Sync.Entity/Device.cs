@@ -18,5 +18,6 @@ namespace FujifilmUSA.Sync.Entity
         public string BranchName { get; set; }
         public Dictionary<ELicenseType,int> LicenseTypeProject { get; set; }
         public bool IsValidation { get; set; }
+        public bool IsFlexo { get; set; }
     }
 }

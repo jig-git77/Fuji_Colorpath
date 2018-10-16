@@ -13,8 +13,8 @@
             <td align="center">
                 <table style="width: 660px" align="center" cellpadding="0" cellspacing="0" border="0">
                     <tr>
-                        <td style="width: 50%"></td>
-                        <td style="width: 50%">
+                        <td></td>
+                        <td>
                             <br />
                             <br />
                             <br />
@@ -33,16 +33,19 @@
                         <td>
                             <br />
                             <br />
-                            <img src="##LOGOIMAGES##login_logo.png" style="width: 330px; height: 63px" />
+                            <div class="divRight">
+                                <img src="##LOGOIMAGES##login_logo.png" style="width: 330px; height: 63px" />
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td style="font-size: 20px; font-weight: bold">
                             <br />
-                            ColorPath Sync<br />
-                            ###ReportName###<br />
-
+                            <div class="divRight">
+                                ColorPath Sync<br />
+                                ###ReportName###<br />
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -50,12 +53,14 @@
                         <td style="font-size: 14px; font-weight: normal;">
                             <br />
                             <br />
-                            ###CompanyName###<br />
-                            ###BranchName###<br />
-                            ###PressName###<br />
-                            ###ProjectName### (##RunNo##)<br />
-                            <br />
-                            ###CurrentDate###
+                            <div class="divRight">
+                                ###CompanyName###<br />
+                                ###BranchName###<br />
+                                ###PressName###<br />
+                                ###ProjectName### (##RunNo##)<br />
+                                <br />
+                                ###CurrentDate###
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -142,9 +147,9 @@
         </tr>
         <tr>
             <td align="center">
-                <table style="width: 660px" cellspacing="0" cellpadding="0" align="center" border="0">
+                <table style="width: 100%;margin-right: 0px;margin-left: 0px;" cellspacing="0" cellpadding="0" align="center" border="0">
                     <tr>
-                        <td valign="top" rowspan="2" style="width: 392px;">
+                        <td valign="top" rowspan="2" style="width: 380px;">
                             <table border="0" cellspacing="0" cellpadding="0" style="margin: 0 0 0 4px;" width="100%">
 
                                 <tr>
@@ -252,12 +257,14 @@
                                 </tr>
                             </table>
                         </td>
-                        <td style="width: 5px;">
+                        <td style="width: 10px;">
                             &nbsp;
                         </td>
                         <td valign="top">
-                            <img src="###TargetVersusActualAB###" height="250px" width="260px" alt='Target Versus Actual AB'
-                                 id='img2' />
+                            <div class="gamutChart">
+                                <img src="###TargetVersusActualAB###" height="250px" width="250px" alt='Target Versus Actual AB'
+                                     id='img2' />
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -282,7 +289,7 @@
                                             </tr>
                                             <tr>
                                                 <td valign="top" align="left" style="width:200px;">
-                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                    <table cellpadding="0" cellspacing="0" width="100%" style="margin-top:10px;">
                                                         <tr style="height: 20px">
                                                             <td valign="middle" style="width: 25px" class="BottomBorder">
                                                                 &nbsp;
@@ -305,14 +312,16 @@
                                                     </table>
                                                 </td>
                                                 <td valign="top">
-                                                    <table width="180" border="0" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td valign="top" style="height:270px; overflow:hidden;">
-                                                                <img src="###ResultSummary_DeltaEImage###" width="180" height="97%" alt='Summary Delta'
-                                                                     id='img1' />
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                    <div style="margin-top:10px;">
+                                                        <table width="180" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td valign="top" style="height:260px; overflow:hidden;">
+                                                                    <img src="###ResultSummary_DeltaEImage###" width="180" height="97%" alt='Summary Delta'
+                                                                         id='img1' />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
                                                 </td>
                                             </tr>
 
@@ -321,7 +330,7 @@
 
                                     <td style="width:5px;"></td>
                                     <td valign="top">
-                                        <table width="270" border="0" cellspacing="0" cellpadding="0">
+                                        <table width="270" border="0" cellspacing="0" cellpadding="0" style="margin-top:6px;">
 
 
                                             <tr>
@@ -337,13 +346,13 @@
                                             </tr>
                                             <tr>
                                                 <td valign="top">
-                                                    <img src="###GrayA###" width="270px" height="92px" alt='Summary Delta'
+                                                    <img src="###GrayA###" width="260px" height="92px" alt='Summary Delta' style="margin-left:8px;"
                                                          id='img9' />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td valign="top">
-                                                    <img src="###GrayB###" width="270px" height="92px" alt='Summary Delta'
+                                                    <img src="###GrayB###" width="260px" height="92px" alt='Summary Delta'  style="margin-left:8px;"
                                                          id='img10' />
                                                 </td>
                                             </tr>
@@ -376,12 +385,13 @@
                                     <td style="border: 2px solid #ccc;">
                                         <table border="0" cellspacing="0" cellpadding="0" width="100%">
                                             <tr>
-                                                <td style="
-                                                                width: 276px; height: 169px; padding-left: 34px; padding-bottom: 14px;">
-                                                    <img src="###PaperLab1###" width="240px" height="160px" alt='PaperLab1' />
+                                                <td>
+                                                    <div class="gamutChart" style="width: 276px; height: 169px; margin-left: 34px; padding-bottom: 0px;">
+                                                        <img src="###PaperLab1###" width="240px" height="160px" alt='PaperLab1' />
+                                                    </div>
+                                                    
                                                 </td>
-                                                <td style="
-                                                                width: 104px; height: 169px; padding-left: 28px; padding-bottom: 12px;">
+                                                <td style="width: 150px; height: 169px; padding-left: 28px; padding-bottom: 12px;">
                                                     <img src="###PaperLab2###" width="69px" height="150px" alt='PaperLab2' />
                                                 </td>
                                             </tr>
@@ -397,7 +407,7 @@
         </tr>
 
         <tr>
-            <td height="3px"></td>
+            <td height="3px">&nbsp;</td>
         </tr>
 
     </table>
@@ -431,6 +441,7 @@
                         </td>
                     </tr>
                 </table>
+                &nbsp;
             </td>
         </tr>
         <tr>
@@ -456,7 +467,7 @@
                 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="height: 750px; overflow: hidden;">
                     <tr>
                         <td valign="top" align="left" style="width:200px;">
-                            <table cellpadding="0" cellspacing="0" width="100%">
+                            <table cellpadding="0" cellspacing="0" width="100%" style="margin-top: 10px;">
                                 <tr style="height: 20px">
                                     <td valign="middle" style="width: 25px" class="BottomBorder">
                                         &nbsp;
@@ -480,7 +491,7 @@
                             </table>
                         </td>
                         <td valign="top">
-                            <table width="350" border="0" cellspacing="0" cellpadding="0">
+                            <table width="350" border="0" cellspacing="0" cellpadding="0" >
                                 <tr>
                                     <td valign="top">
                                         <img src="###ResultSummary_DeltaImage###" width="350px" alt='Summary Delta' id='img3' />

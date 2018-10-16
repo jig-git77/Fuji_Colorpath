@@ -28,6 +28,13 @@ namespace FujifilmUSA.Sync.Presenter
             measurementBusiness.ErrorOccured += _viewReportSingleMeasurement.ErrorOccured;
             _viewReportSingleMeasurement.DSReport_G7_Vali = measurementBusiness.GetReportDataOnMeasurement_G7_Vali(_viewReportSingleMeasurement.MeasurementId, _viewReportSingleMeasurement.From_ΔE, _viewReportSingleMeasurement.IsVerification, _viewReportSingleMeasurement.ValidationType, _viewReportSingleMeasurement.IsSync1DType, _viewReportSingleMeasurement.IsAverageOfMeasurements);
         }
+
+        public void GetReportDataOnSpotProject()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewReportSingleMeasurement.ErrorOccured;
+            _viewReportSingleMeasurement.DSReport = measurementBusiness.GetReportDataOnSpotProject(_viewReportSingleMeasurement.OptimizeRunId);
+        }
     }
 
 }

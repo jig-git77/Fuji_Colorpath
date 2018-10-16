@@ -161,6 +161,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary);
             }
         }
+
+        public short PrintingTypeId { get; set; }
         #endregion
 
         #region IViewBase Members

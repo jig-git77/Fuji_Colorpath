@@ -183,4 +183,7 @@
   <data name="locIsValidationResource1.Text" xml:space="preserve">
     <value>Is Validation?_de</value>
   </data>
+  <data name="locIsFlexoResource1.Text" xml:space="preserve">
+    <value>Is 1D Flexo?</value>
+  </data>
 </root>

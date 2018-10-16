@@ -693,4 +693,7 @@
   <data name="locMeasurementDateResource1.Text" xml:space="preserve">
     <value>Measurement Date_fr</value>
   </data>
+  <data name="locSpotReportMessageResource1.Text" xml:space="preserve">
+    <value>*Select colors in the Patch Details tab and click "save" to add colors to the Saved Color Report.</value>
+  </data>
 </root>

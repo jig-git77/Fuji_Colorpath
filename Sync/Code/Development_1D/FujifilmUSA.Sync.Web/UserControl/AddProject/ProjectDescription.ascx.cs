@@ -19,6 +19,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recoperationSelectText = "operationSelectText";
         private const string _reclocTargetColorSpaceText = "locTargetColorSpaceText";
         private const string _reclocTargetColorSpaceNextText = "locTargetColorSpaceNextText";
+
+        private const string _reclocPlatesText = "locPlatesText";
+        private const string _reclocRollersText = "locRollersText";
+        private const string _reclocDocBladeText = "locDocBladeText";
+        private const string _reclocMountTapeText = "locMountTapeText";
+        private const string _reclocWashesText = "locWashesText";
+
         private PresenterSaveWindow _presenterSaveWindow;
         #endregion
 
@@ -38,6 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 LoadLicenseType();
                 LoadInkOrder();
+                LoadPrintingTypes();
                 LoadDeviceInfoFromSession();
                 LoadProjectInfoFromSession();
                 LoadSpotTargetInfoFromSession();
@@ -104,6 +112,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbInkOrder.SelectedIndex = 0;
         }
 
+        private void LoadPrintingTypes()
+        {
+            if (cmbPrintingType.DataSource != null) return;
+
+            cmbPrintingType.DataValueField = "Key";
+            cmbPrintingType.DataTextField = "Value";
+            cmbPrintingType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EPrintingTypes>();
+            cmbPrintingType.DataBind();
+
+            if (!SessionManager.Instance.CurrentDevice.IsFlexo)
+                cmbPrintingType.Items.FindByText("Flexo").Enabled = (SessionManager.Instance.CurrentProject != null && 
+                    SessionManager.Instance.CurrentProject.PrintCondition != null &&
+                    SessionManager.Instance.CurrentProject.PrintCondition.PrintConditionId != 0);
+
+            cmbPrintingType.SelectedIndex = 0;
+        }
+
         private void LoadDeviceInfoFromSession()
         {
             if (SessionManager.Instance.CurrentDevice.DeviceName != null)
@@ -132,16 +157,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtRipSetting.Text = SessionManager.Instance.CurrentProject.PrintCondition.RipSettings;
                 txtNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
                 txtTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
+                cmbPrintingType.Enabled = SessionManager.Instance.CurrentProject.PrintCondition.PrintConditionId == 0 ? true : false;
 
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                     Tr_OffsetPrintData.Visible = true;
 
+                cmbPrintingType.SelectedIndex = cmbPrintingType.Items.IndexOf(cmbPrintingType.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.PrintCondition.PrintingType)));
+                SetProjectTypeVisisbility();
                 cmbInkOrder.SelectedIndex = cmbInkOrder.Items.IndexOf(cmbInkOrder.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.PrintCondition.InkOrder)));
                 txtFountainSol.Text = SessionManager.Instance.CurrentProject.PrintCondition.FountainSolution;
                 txtBlanket.Text = SessionManager.Instance.CurrentProject.PrintCondition.Blanket;
                 txtBlanketAge.Text = SessionManager.Instance.CurrentProject.PrintCondition.BlanketAge;
                 txtScreening.Text = SessionManager.Instance.CurrentProject.PrintCondition.Screening;
                 txtCoating.Text = SessionManager.Instance.CurrentProject.PrintCondition.Coating;
+                
 
                 if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.Edit) //If project is in Edit mode display Description tab for editing everytime and pop up Next button to move to next page
                 {
@@ -211,6 +240,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 RipSettings = txtRipSetting.Text.Trim(),
                 Notes = txtNotes.Text.Trim(),
                 TechnicianName = txtTechnicianName.Text.Trim(),
+                PrintingType = (EPrintingTypes)Convert.ToInt32(cmbPrintingType.SelectedItem.Value),
                 InkOrder = (EInkOrder)Convert.ToInt32(cmbInkOrder.SelectedItem.Value),
                 FountainSolution = txtFountainSol.Text.Trim(),
                 Blanket = txtBlanket.Text.Trim(),
@@ -268,6 +298,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 RipSettings = txtRipSetting.Text.Trim(),
                 Notes = txtNotes.Text.Trim(),
                 TechnicianName = txtTechnicianName.Text.Trim(),
+                PrintingType = (EPrintingTypes)Convert.ToInt32(cmbPrintingType.SelectedItem.Value),
                 InkOrder = (EInkOrder)Convert.ToInt32(cmbInkOrder.SelectedItem.Value),
                 FountainSolution = txtFountainSol.Text.Trim(),
                 Blanket = txtBlanket.Text.Trim(),
@@ -289,6 +320,47 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
+
+        protected void cmbPrintingType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetProjectTypeVisisbility();
+        }
+        
+        void SetProjectTypeVisisbility()
+        {
+            if (cmbPrintingType.SelectedIndex == 1)//flexo printing type
+            {
+                locFountainSol.Text = GetResourceString(_reclocPlatesText);
+                locBlanket.Text = GetResourceString(_reclocRollersText);
+                locBlanketAge.Text = GetResourceString(_reclocDocBladeText);
+                locScreening.Text = GetResourceString(_reclocMountTapeText);
+                locCoating.Text = GetResourceString(_reclocWashesText);
+                locRollersMessage.Visible = true;
+                locFounSolRef.Visible = false;
+                locScreeningRef.Visible = false;
+            }
+            else
+            {
+                locFountainSol.Text = (string)GetLocalResourceObject("locFountainSolResource1.Text");
+                locBlanket.Text = (string)GetLocalResourceObject("locBlanketResource1.Text");
+                locBlanketAge.Text = (string)GetLocalResourceObject("locBlanketAgeResource1.Text");
+                locScreening.Text = (string)GetLocalResourceObject("locScreeningResource1.Text");
+                locCoating.Text = (string)GetLocalResourceObject("locCoatingResource1.Text");
+                locFounSolRef.Visible = true;
+                locScreeningRef.Visible = true;
+                locRollersMessage.Visible = false;
+            }
+            if (SessionManager.Instance.CurrentProject.PrintCondition == null)
+            {
+                cmbInkOrder.SelectedIndex = 0;
+                txtFountainSol.Text = "";
+                txtBlanket.Text = "";
+                txtBlanketAge.Text = "";
+                txtScreening.Text = "";
+                txtCoating.Text = "";
+            }
+        }
+    
         #endregion
 
         #region Properties
@@ -306,6 +378,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public byte[] ChartPreview { get; set; }
         public Project Project { get; set; }
         public int ProjectId { get; set; }
-        #endregion        
+        #endregion
+
+              
     }
 }
