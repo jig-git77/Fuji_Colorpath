@@ -4704,6 +4704,33 @@ function PopulateTVIG7CMYKChart() {
     var jsonCMYK_K = $.grep(jsonDTSpreadChartData_CMYKList, function (element) { return (element.CmykK != 0 || element.DotGain == 0) });
 
 
+    var arrValues = $.map(jsonDTSpreadChartData_CMYKList, function (elem) { return elem.DotGain; });
+    var maxElement = Math.abs(Math.max.apply(Math, arrValues));
+    var maxValues = 0;
+    
+
+    if (maxElement >= 0 && maxElement < 10) {
+        maxValues = 10
+    } else if (maxElement >= 10 && maxElement < 20) {
+        maxValues = 20;
+    } else if (maxElement >= 20 && maxElement < 30) {
+        maxValues = 30;
+    } else if (maxElement >= 30 && maxElement < 40) {
+        maxValues = 40;
+    } else if (maxElement >= 40 && maxElement < 50) {
+        maxValues = 50;
+    } else if (maxElement >= 50 && maxElement < 60) {
+        maxValues = 60;
+    } else if (maxElement >= 60 && maxElement < 70) {
+        maxValues = 70;
+    } else if (maxElement >= 70 && maxElement < 80) {
+        maxValues = 80;
+    } else if (maxElement >= 80 && maxElement < 90) {
+        maxValues = 90;
+    } else {
+        maxValues = 100;
+    }
+
     $divChartTVIISO_CMYK.kendoChart({
         renderAs: "canvas",
         //title: {
@@ -4828,7 +4855,7 @@ function PopulateTVIG7CMYKChart() {
         yAxis: {
             name: "yAxis",
             min: 0,
-            //max: 20,
+            max: maxValues,
             majorUnit: 5,
             axisCrossingValues: -100,
             labels: {
