@@ -444,7 +444,7 @@ $(document).ready(function () {
     });
 
     $lnkAB_ComparisionLargeChart.on('click', function (e) {
-        e.preventDefault();        
+        e.preventDefault();
         var kendoOptions = $chart_Gamut_ABComparison.data("kendoChart").options;
         $('#kendoChart_AB_ComparisionLarge').kendoChart(kendoOptions);
         $('#kendoChart_AB_ComparisionLarge').data("kendoChart").options.chartArea.width = 580;
@@ -2884,10 +2884,10 @@ function PopulateChartTargetVersusActualAB() {
                 debugger;
                 var seriesData = d.series.data;
                 var lastItem = seriesData[seriesData.length - 1];
-                
+
                 if (lastItem != d.dataItem) {
                     setTimeout(function () {
-                        $(".k-chart-tooltip").addClass('tempTooltip');                        
+                        $(".k-chart-tooltip").addClass('tempTooltip');
                     }, 150);
                     return "";
                 } else {
@@ -5137,7 +5137,7 @@ function PopulateTVISpreadChart() {
                 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + _Resources._recCyan + ' #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
                 }
             },
             {
@@ -5157,7 +5157,7 @@ function PopulateTVISpreadChart() {
                 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Magenta #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + _Resources._recMagenta + ' #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
                 }
             },
             {
@@ -5177,7 +5177,7 @@ function PopulateTVISpreadChart() {
                 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Yellow #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + _Resources._recYellow + ' #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Actual TVI:  #= dataItem.DotGain #%</td></tr><tr><td> Spread Threshold:  #= kendo.toString(dataItem.DotGainSpreadTh, "n") #</td></tr><tr><td> #= dataItem.DifferentTitleOne#: #= dataItem.DiffrentOne.toFixed() #</td></tr><tr><td> #= dataItem.DifferentTitleTwo#: #= dataItem.DiffrentTwo.toFixed() #</td></tr></table>'
                 }
             },
             {
@@ -5257,6 +5257,7 @@ function PopulateTVISpreadChart() {
 
 ////**************** POPULATE THE TVI CHART  ****************////
 function PopulateTVIG7Chart() {
+    debugger;
     var jsonEmpty = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.CmykK == 0; })
 
     var jsonC = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykC != 0; });
@@ -5268,6 +5269,52 @@ function PopulateTVIG7Chart() {
     var jsonMResult = jsonEmpty.concat(jsonM);
     var jsonYResult = jsonEmpty.concat(jsonY);
     var jsonKResult = jsonEmpty.concat(jsonK);
+
+    var arrValues = $.map(jsonTVIG7ChartList, function (elem) { return elem.DotGain; });
+    var minElement = Math.abs(Math.min.apply(Math, arrValues));
+    var maxElement = Math.abs(Math.max.apply(Math, arrValues));
+    var maxValues = 0;
+    var minValues = 0;
+
+    if (minElement > -10 && minElement < 0) {
+        minValues = -10
+    } else if (minElement >= -20 && minElement < -10) {
+        minValues = -20;
+    } else if (minElement >= -30 && minElement < -20) {
+        minValues = -30;
+    } else if (minElement >= -40 && minElement < -30) {
+        minValues = -40;
+    } else if (minElement >= -50 && minElement < -40) {
+        minValues = -50;
+    } else if (minElement >= -60 && minElement < -50) {
+        minValues = -60;
+    } else if (minElement >= -70 && minElement < -60) {
+        minValues = -70;
+    } else if (minElement >= -80 && minElement < -70) {
+        minValues = -80;
+    } 
+
+    if (maxElement >= 0 && maxElement < 10) {
+        maxValues = 10
+    } else if (maxElement >= 10 && maxElement < 20) {
+        maxValues = 20;
+    } else if (maxElement >= 20 && maxElement < 30) {
+        maxValues = 30;
+    } else if (maxElement >= 30 && maxElement < 40) {
+        maxValues = 40;
+    } else if (maxElement >= 40 && maxElement < 50) {
+        maxValues = 50;
+    } else if (maxElement >= 50 && maxElement < 60) {
+        maxValues = 60;
+    } else if (maxElement >= 60 && maxElement < 70) {
+        maxValues = 70;
+    } else if (maxElement >= 70 && maxElement < 80) {
+        maxValues = 80;
+    } else if (maxElement >= 80 && maxElement < 90) {
+        maxValues = 90;
+    } else {
+        maxValues = 100;
+    }
 
     $divChartTVISummaryDotGain.kendoChart({
         renderAs: "canvas",
@@ -5302,7 +5349,7 @@ function PopulateTVIG7Chart() {
                 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + _Resources._recCyan + ' #= dataItem.CmykC.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
                 }
             }, {
                 name: "M",
@@ -5320,7 +5367,7 @@ function PopulateTVIG7Chart() {
                 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + _Resources._recMagenta + ' #= dataItem.CmykM.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
                 },
                 highlight: {
                     visible: false
@@ -5341,7 +5388,7 @@ function PopulateTVIG7Chart() {
                 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + _Resources._recYellow + ' #= dataItem.CmykY.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
                 },
                 highlight: {
                     visible: false
@@ -5355,7 +5402,7 @@ function PopulateTVIG7Chart() {
                 markers: { background: "Black", size: 4 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>Cyan #= dataItem.CmykK.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
+                    template: '<table><tr><td><center><b>' + _Resources._recBlack + ' #= dataItem.CmykK.toFixed() #% Patch Matrics</b></center><td></tr><tr><td> Dot Gain:  #= dataItem.DotGain #</td></tr></table>'
                 },
                 highlight: {
                     visible: false
@@ -5376,6 +5423,8 @@ function PopulateTVIG7Chart() {
         },
         yAxis: {
             name: "yAxis",
+            min: minValues,
+            max: maxValues,
             labels: {
                 format: "{0}"
             },
