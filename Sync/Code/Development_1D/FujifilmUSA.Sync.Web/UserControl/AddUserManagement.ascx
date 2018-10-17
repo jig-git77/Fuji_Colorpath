@@ -4,6 +4,7 @@
 <%@ Register TagPrefix="telerik" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
+<script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <style type="text/css">
     
 </style>
@@ -179,7 +180,7 @@
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:TextBox ID="txtFirstName" runat="server" MaxLength="30" Width="270px" 
-                                                                        Height="19px" meta:resourcekey="txtFirstNameResource1"></asp:TextBox>
+                                                                        Height="19px" meta:resourcekey="txtFirstNameResource1" onkeypress="return validateText(this)"></asp:TextBox>
                                                                 </div>
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvFirstName" runat="server" Display="Dynamic" ControlToValidate="txtFirstName"
@@ -202,7 +203,7 @@
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:TextBox ID="txtLastName" runat="server" MaxLength="30" Width="270px" 
-                                                                        Height="19px" meta:resourcekey="txtLastNameResource1"></asp:TextBox>
+                                                                        Height="19px" meta:resourcekey="txtLastNameResource1" onkeypress="return validateText(this)"></asp:TextBox>
                                                                 </div>
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvLastName" runat="server" Display="Dynamic" ControlToValidate="txtLastName"
@@ -253,7 +254,7 @@
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:TextBox ID="txtAdminUserName" runat="server" MaxLength="50" Width="270px" 
-                                                                        Height="19px" meta:resourcekey="txtAdminUserNameResource1"></asp:TextBox>
+                                                                        Height="19px" meta:resourcekey="txtAdminUserNameResource1" onkeypress="return validateText(this)"></asp:TextBox>
                                                                 </div>
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvUserName" runat="server" Display="Dynamic" ControlToValidate="txtAdminUserName"

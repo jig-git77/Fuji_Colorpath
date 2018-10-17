@@ -122,3 +122,17 @@ function CheckRange(obj, minValue, maxValue) {
     return true;
 }
 
+function validateText(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    var key = String.fromCharCode(charCode);
+    //var value = evt.value + key;
+    var regex = new RegExp('^(?![.\-])(?:[^\\\/:*?"<>|#+])*[^.\-\\\/:*?"<>|#+]$');
+
+    if (!regex.test(key)) {
+        event.preventDefault();
+        return false;
+    }
+    return true;
+}
+
+

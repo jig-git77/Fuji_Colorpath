@@ -3,7 +3,7 @@
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
 <link rel="stylesheet" href="JQuery/datepicker-themes/base/jquery.ui.all.css">
-
+<script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -38,7 +38,7 @@
                                 <td style="width: 370px">
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtPrintStandardType" runat="server" MaxLength="50" Width="370px"
-                                            Height="19px" meta:resourcekey="txtPrintStandardTypeResource1"></asp:TextBox>
+                                            Height="19px" meta:resourcekey="txtPrintStandardTypeResource1" onkeypress="return validateText(this)"></asp:TextBox>
                                              <asp:HiddenField ID="hdnPrintStandardTypeID" runat="server" Value="0" />
                                     </div>
                                     <div style="float: left">

@@ -2,7 +2,7 @@
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
-
+<script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <style type="text/css">    
      .breakWord50
      {
@@ -107,7 +107,7 @@
                                 <div style="float: left;"> 
                                                                
                                     <asp:TextBox ID="txtPresetName" runat="server" MaxLength="50" Width="400px" 
-                                        Height="19px" meta:resourcekey="txtPresetNameResource1"></asp:TextBox>
+                                        Height="19px" meta:resourcekey="txtPresetNameResource1" onkeypress="return validateText(this)"></asp:TextBox>
                                       <asp:HiddenField ID="hdnRefChartID" runat="server" Value="0" />
                                 </div>
                                 <div style="float: left">

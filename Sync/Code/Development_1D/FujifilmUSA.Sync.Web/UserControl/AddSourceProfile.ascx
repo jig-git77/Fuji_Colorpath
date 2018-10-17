@@ -3,6 +3,7 @@
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
+<script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
     <script type="text/javascript">
         function IsRegionSelected(source, arguments) {
             if (document.getElementById('<%= cmbRegion.ClientID %>').value != "0") 
@@ -94,7 +95,7 @@
                                 <td>
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtSourceProfile" runat="server" Width="200px" MaxLength="50" 
-                                            Height="19px" meta:resourcekey="txtSourceProfileResource1"></asp:TextBox>
+                                            Height="19px" meta:resourcekey="txtSourceProfileResource1" onkeypress="return validateText(this)"></asp:TextBox>
                                         <asp:HiddenField ID="hdnSourceProfileID" runat="server" Value="0" />
                                     </div>
                                     <div style="float: left">
