@@ -189,115 +189,132 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)
         {
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            try
             {
-                Wedge wedge = new Wedge();
-                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                _presenterExport.GetSpotPatchDetailsForChart();
-
-                List<Patch> listPatch = new List<Patch>();
-                if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
+                ErrorLog.WriteErrorLog("event start");
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
                 {
-                    foreach (DataRow dr in dtPatchDetails.Rows)
+                    Wedge wedge = new Wedge();
+                    OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                    _presenterExport.GetSpotPatchDetailsForChart();
+
+                    List<Patch> listPatch = new List<Patch>();
+                    if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
                     {
-                        Patch patch = new Patch()
+                        foreach (DataRow dr in dtPatchDetails.Rows)
                         {
-                            PatchID = Convert.ToInt32(dr["SpotID"]),
-                            ColorName = Convert.ToString(dr["SpotName"]),
-                            Cmyk_C = Convert.ToDouble(dr["CMYK_C"]),
-                            Cmyk_M = Convert.ToDouble(dr["CMYK_M"]),
-                            Cmyk_Y = Convert.ToDouble(dr["CMYK_Y"]),
-                            Cmyk_K = Convert.ToDouble(dr["CMYK_K"]),
-                            Cie_L = Convert.ToDouble(dr["CIELAB_L"]),
-                            Cie_a = Convert.ToDouble(dr["CIELAB_a"]),
-                            Cie_b = Convert.ToDouble(dr["CIELAB_b"]),
-                            Spot1 = 0
-                        };
-                        listPatch.Add(patch);
-                    }
-                }
-                wedge.listPatch = listPatch;
-
-                IccFileParams obj = new IccFileParams();
-
-                //get spot project chart setting
-                SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
-                _presenterExport.GetSpotProjectChartSetting();
-                obj.Configurations.NumberOfPatches = (SpotProjectChartSetting.Pages * SpotProjectChartSetting.NumOfRows * SpotProjectChartSetting.NumOfCols);
-                obj.Configurations.ChartPages = SpotProjectChartSetting.Pages;
-                obj.Configurations.PatchWidth = Convert.ToInt32(SpotProjectChartSetting.PatchSizeX);
-                obj.Configurations.PatchHeight = Convert.ToInt32(SpotProjectChartSetting.PatchSizeY);
-                obj.Configurations.ChartBorder = SpotProjectChartSetting.ChartBorder;
-                obj.Configurations.ChartSizeW = Convert.ToInt32(SpotProjectChartSetting.ChartSizeX);
-                obj.Configurations.ChartSizeH = Convert.ToInt32(SpotProjectChartSetting.ChartSizeY);
-                obj.Configurations.RowsPerChart = SpotProjectChartSetting.NumOfRows;
-                obj.Configurations.ColumsPerChart = SpotProjectChartSetting.NumOfCols;
-                obj.Configurations.Vgap = SpotProjectChartSetting.Vgap;
-                obj.Configurations.Hgap = SpotProjectChartSetting.Hgap;
-                obj.Configurations.GapLeval = SpotProjectChartSetting.GapLeval;
-                obj.Configurations.PreviousL = SpotProjectChartSetting.PreviousL;
-                obj.Configurations.ChartName = SpotProjectChartSetting.ChartName;
-                obj.Patches = wedge.listPatch;
-
-                string BaseUri = Utilities.ReadConfigValue("BaseCpSpotChartPdfServiceURL");
-                string methodUrl = "api/Chart/GenerateFiles";
-
-                string zipFilPath = System.Web.HttpContext.Current.Server.MapPath("UploadFiles/ChartExports/");
-                if (!Directory.Exists(zipFilPath))
-                    Directory.CreateDirectory(zipFilPath);
-
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(obj), null, "application/json");
-                    var result = httpClient.PostAsync(BaseUri + methodUrl, content).Result;
-                    Stream contentStream = null;
-                    string zipFileName = "";
-                    if (result.IsSuccessStatusCode)
-                    {
-                        contentStream = result.Content.ReadAsStreamAsync().Result;
-                        zipFileName = result.Content.Headers.ContentDisposition.FileName;
-
-                        using (var filestream = File.Create(zipFilPath + zipFileName))
-                        {
-                            contentStream.Seek(0, SeekOrigin.Begin);
-                            contentStream.CopyTo(filestream);
+                            Patch patch = new Patch()
+                            {
+                                PatchID = Convert.ToInt32(dr["SpotID"]),
+                                ColorName = Convert.ToString(dr["SpotName"]),
+                                Cmyk_C = Convert.ToDouble(dr["CMYK_C"]),
+                                Cmyk_M = Convert.ToDouble(dr["CMYK_M"]),
+                                Cmyk_Y = Convert.ToDouble(dr["CMYK_Y"]),
+                                Cmyk_K = Convert.ToDouble(dr["CMYK_K"]),
+                                Cie_L = Convert.ToDouble(dr["CIELAB_L"]),
+                                Cie_a = Convert.ToDouble(dr["CIELAB_a"]),
+                                Cie_b = Convert.ToDouble(dr["CIELAB_b"]),
+                                Spot1 = 0
+                            };
+                            listPatch.Add(patch);
                         }
-                        Utilities.DownloadExportFile(zipFilPath, zipFileName, zipFileName);
-
-                        //========== Download File ==========//
-                        //System.IO.FileStream fs = System.IO.File.OpenRead(zipFilPath + zipFileName);
-                        //byte[] data = new byte[fs.Length];
-                        //fs.Read(data, 0, (int)fs.Length);
-                        //System.Web.HttpContext.Current.Response.Clear();
-                        //System.Web.HttpContext.Current.Response.ClearHeaders();
-
-                        //System.Web.HttpContext.Current.Response.AddHeader("Content-Type", "application/*");
-                        //System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=\"" + zipFileName + "\"");
-                        //System.Web.HttpContext.Current.Response.BinaryWrite(data);
-                        //System.Web.HttpContext.Current.Response.Flush();
-                        //if (File.Exists(zipFilPath + zipFileName))
-                        //    File.Delete(zipFilPath + zipFileName);
-                        //System.Web.HttpContext.Current.Response.End();                        
                     }
-                }
-            }
-            else
-            {
-                //ReferenceChartTypeId = SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Key;  
-                //Here we are considering optimization chart as export will be visible only once DLP is created (i.e. success of Run0)
-                ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
-                _presenterExport.GetChartPreview();
-                if (!IsErrorOccured)
-                {
-                    if (ChartPreview != null)
-                        Utilities.DownloadFile(ChartPreview, string.Format("{0}.pdf", SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Value), ".pdf");
-                    else
-                        fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
+                    wedge.listPatch = listPatch;
+                    ErrorLog.WriteErrorLog("Total Patches: " + wedge.listPatch.Count.ToString());
+                    IccFileParams obj = new IccFileParams();
+
+                    //get spot project chart setting
+                    SpotProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId;
+                    _presenterExport.GetSpotProjectChartSetting();
+                    obj.Configurations.NumberOfPatches = (SpotProjectChartSetting.Pages * SpotProjectChartSetting.NumOfRows * SpotProjectChartSetting.NumOfCols);
+                    obj.Configurations.ChartPages = SpotProjectChartSetting.Pages;
+                    obj.Configurations.PatchWidth = Convert.ToInt32(SpotProjectChartSetting.PatchSizeX);
+                    obj.Configurations.PatchHeight = Convert.ToInt32(SpotProjectChartSetting.PatchSizeY);
+                    obj.Configurations.ChartBorder = SpotProjectChartSetting.ChartBorder;
+                    obj.Configurations.ChartSizeW = Convert.ToInt32(SpotProjectChartSetting.ChartSizeX);
+                    obj.Configurations.ChartSizeH = Convert.ToInt32(SpotProjectChartSetting.ChartSizeY);
+                    obj.Configurations.RowsPerChart = SpotProjectChartSetting.NumOfRows;
+                    obj.Configurations.ColumsPerChart = SpotProjectChartSetting.NumOfCols;
+                    obj.Configurations.Vgap = SpotProjectChartSetting.Vgap;
+                    obj.Configurations.Hgap = SpotProjectChartSetting.Hgap;
+                    obj.Configurations.GapLeval = SpotProjectChartSetting.GapLeval;
+                    obj.Configurations.PreviousL = SpotProjectChartSetting.PreviousL;
+                    obj.Configurations.ChartName = SpotProjectChartSetting.ChartName;
+                    obj.Patches = wedge.listPatch;
+
+                    string BaseUri = Utilities.ReadConfigValue("BaseCpSpotChartPdfServiceURL");
+                    //string methodUrl = "api/Chart/GenerateFiles";
+                    string methodUrl = "api/Chart/GenerateFile";
+
+                    string zipFilPath = System.Web.HttpContext.Current.Server.MapPath("UploadFiles/ChartExports/");
+                    if (!Directory.Exists(zipFilPath))
+                        Directory.CreateDirectory(zipFilPath);
+                    ErrorLog.WriteErrorLog("Service URL: " + BaseUri + methodUrl);
+                    using (HttpClient httpClient = new HttpClient())
+                    {
+                        StringContent content = new StringContent(JsonConvert.SerializeObject(obj), null, "application/json");
+                        var result = httpClient.PostAsync(BaseUri + methodUrl, content).Result;
+                        Stream contentStream = null;
+                        string zipFileName = "";
+                        if (result.IsSuccessStatusCode)
+                        {
+                            ErrorLog.WriteErrorLog("Service call success");
+                            contentStream = result.Content.ReadAsStreamAsync().Result;
+                            zipFileName = result.Content.Headers.ContentDisposition.FileName;
+
+                            using (var filestream = File.Create(zipFilPath + zipFileName))
+                            {
+                                contentStream.Seek(0, SeekOrigin.Begin);
+                                contentStream.CopyTo(filestream);
+                            }
+                            Utilities.DownloadExportFile(zipFilPath, zipFileName, zipFileName);
+
+                            ErrorLog.WriteErrorLog("Downloaded sucessfully");
+                            //========== Download File ==========//
+                            //System.IO.FileStream fs = System.IO.File.OpenRead(zipFilPath + zipFileName);
+                            //byte[] data = new byte[fs.Length];
+                            //fs.Read(data, 0, (int)fs.Length);
+                            //System.Web.HttpContext.Current.Response.Clear();
+                            //System.Web.HttpContext.Current.Response.ClearHeaders();
+
+                            //System.Web.HttpContext.Current.Response.AddHeader("Content-Type", "application/*");
+                            //System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=\"" + zipFileName + "\"");
+                            //System.Web.HttpContext.Current.Response.BinaryWrite(data);
+                            //System.Web.HttpContext.Current.Response.Flush();
+                            //if (File.Exists(zipFilPath + zipFileName))
+                            //    File.Delete(zipFilPath + zipFileName);
+                            //System.Web.HttpContext.Current.Response.End();                        
+                        }
+                        else
+                        {
+                            ErrorLog.WriteErrorLog("Error: " + result.Content.ReadAsStringAsync().Result);
+                        }
+                    }
                 }
                 else
                 {
-                    fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
+                    //ReferenceChartTypeId = SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Key;  
+                    //Here we are considering optimization chart as export will be visible only once DLP is created (i.e. success of Run0)
+                    ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
+                    _presenterExport.GetChartPreview();
+                    if (!IsErrorOccured)
+                    {
+                        if (ChartPreview != null)
+                            Utilities.DownloadFile(ChartPreview, string.Format("{0}.pdf", SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Value), ".pdf");
+                        else
+                            fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
+                    }
+                    else
+                    {
+                        fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
+                    }
                 }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.WriteErrorLog("From catch error: " + ex.Message); 
+                throw ex;
             }
         }
 
@@ -344,10 +361,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
-        
+
         #endregion
 
-       
+
 
         #region IViewExport Members
         public int ProjectId { get; set; }
