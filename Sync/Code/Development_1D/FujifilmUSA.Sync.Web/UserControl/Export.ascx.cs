@@ -310,6 +310,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
 
             }
+            catch (HttpRequestException ex1)
+            {
+                ErrorLog.WriteErrorLog("From catch HttpRequestException error: " + ex1.InnerException.Message);
+                throw ex1;
+            }
             catch (Exception ex)
             {
                 ErrorLog.WriteErrorLog("From catch error: " + ex.Message); 
