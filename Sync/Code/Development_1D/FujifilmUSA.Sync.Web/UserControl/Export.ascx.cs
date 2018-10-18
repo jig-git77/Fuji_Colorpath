@@ -243,8 +243,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     obj.Patches = wedge.listPatch;
 
                     string BaseUri = Utilities.ReadConfigValue("BaseCpSpotChartPdfServiceURL");
-                    //string methodUrl = "api/Chart/GenerateFiles";
-                    string methodUrl = "api/Chart/GenerateFile";
+                    string methodUrl = "api/Chart/GenerateFiles";
 
                     string zipFilPath = System.Web.HttpContext.Current.Server.MapPath("UploadFiles/ChartExports/");
                     if (!Directory.Exists(zipFilPath))
