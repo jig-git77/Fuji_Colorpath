@@ -107,7 +107,7 @@
                                 <div style="float: left;"> 
                                                                
                                     <asp:TextBox ID="txtPresetName" runat="server" MaxLength="50" Width="400px" 
-                                        Height="19px" meta:resourcekey="txtPresetNameResource1" onkeypress="return validateText(this)"></asp:TextBox>
+                                        Height="19px" meta:resourcekey="txtPresetNameResource1" onkeypress="return validateText(event)"></asp:TextBox>
                                       <asp:HiddenField ID="hdnRefChartID" runat="server" Value="0" />
                                 </div>
                                 <div style="float: left">

@@ -3,6 +3,7 @@
 <meta http-equiv="Cache-Control" content="no-cache" />
 <%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon"
     TagPrefix="uc" %>
+<script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <script language="javascript">
     function AllowToAnalyze() {
         if (document.readyState == 'complete') {

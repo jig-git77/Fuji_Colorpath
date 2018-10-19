@@ -38,7 +38,7 @@
                                 <td style="width: 370px">
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtPrintStandardType" runat="server" MaxLength="50" Width="370px"
-                                            Height="19px" meta:resourcekey="txtPrintStandardTypeResource1" onkeypress="return validateText(this)"></asp:TextBox>
+                                            Height="19px" meta:resourcekey="txtPrintStandardTypeResource1" onkeypress="return validateText(event)"></asp:TextBox>
                                              <asp:HiddenField ID="hdnPrintStandardTypeID" runat="server" Value="0" />
                                     </div>
                                     <div style="float: left">
