@@ -56,7 +56,7 @@
                                 <div style="float: left;"> 
                                                                
                                     <asp:TextBox ID="txtChartName" runat="server" MaxLength="27" Width="400px" 
-                                        Height="19px" meta:resourcekey="txtChartNameResource1" onkeypress="return validateText(this)"></asp:TextBox>
+                                        Height="19px" meta:resourcekey="txtChartNameResource1" onkeypress="return validateText(event)"></asp:TextBox>
                                       <asp:HiddenField ID="hdnRefChartID" runat="server" Value="0" />
                                 </div>
                                 <div style="float: left">

@@ -82,7 +82,7 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <asp:TextBox ID="txtPresetName" runat="server" MaxLength="50" Width="400px" 
-                                                Height="19px" meta:resourcekey="txtPresetNameResource1" onkeypress="return validateText(this)"></asp:TextBox>
+                                                Height="19px" meta:resourcekey="txtPresetNameResource1" onkeypress="return validateText(event)"></asp:TextBox>
                                         </div>
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvPresetName" runat="server" Display="Dynamic" ControlToValidate="txtPresetName"

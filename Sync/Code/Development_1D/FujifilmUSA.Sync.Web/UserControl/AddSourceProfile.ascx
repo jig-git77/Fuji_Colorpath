@@ -95,7 +95,7 @@
                                 <td>
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtSourceProfile" runat="server" Width="200px" MaxLength="50" 
-                                            Height="19px" meta:resourcekey="txtSourceProfileResource1" onkeypress="return validateText(this)"></asp:TextBox>
+                                            Height="19px" meta:resourcekey="txtSourceProfileResource1" onkeypress="return validateText(event)"></asp:TextBox>
                                         <asp:HiddenField ID="hdnSourceProfileID" runat="server" Value="0" />
                                     </div>
                                     <div style="float: left">

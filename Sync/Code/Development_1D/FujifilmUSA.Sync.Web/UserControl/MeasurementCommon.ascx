@@ -108,7 +108,7 @@
                         <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name" meta:resourcekey="lblMeasurementNameResource1"></asp:Label>:&nbsp;
                     </td>
                     <td style="height: 27px;">
-                        <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px" meta:resourcekey="txtMeasurementNameResource1" MaxLength="30"></asp:TextBox>
+                        <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px" meta:resourcekey="txtMeasurementNameResource1" MaxLength="30"  onkeypress="return validateText(event)"></asp:TextBox>
                     </td>
                     <td rowspan="2" id="tdNotesCaption" runat="server" visible="false" align="right">
                         <asp:Label ID="lblNotes" runat="server" Text="Notes" meta:resourcekey="lblNotesResource1"></asp:Label>:&nbsp;

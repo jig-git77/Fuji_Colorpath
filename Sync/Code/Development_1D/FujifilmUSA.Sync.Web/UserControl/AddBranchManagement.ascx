@@ -89,7 +89,7 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <asp:TextBox ID="txtBranchName" runat="server" MaxLength="50" Width="400px" 
-                                                Height="19px" meta:resourcekey="txtBranchNameResource1" onkeypress="return validateText(this)"></asp:TextBox>
+                                                Height="19px" meta:resourcekey="txtBranchNameResource1" onkeypress="return validateText(event)"></asp:TextBox>
                                         </div>
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvBranchName" runat="server" Display="Dynamic" ControlToValidate="txtBranchName"
@@ -112,7 +112,7 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <asp:TextBox ID="txtLocation" runat="server" MaxLength="50" Width="400px" 
-                                                Height="19px" meta:resourcekey="txtLocationResource1" onkeypress="return validateText(this)"></asp:TextBox>
+                                                Height="19px" meta:resourcekey="txtLocationResource1" onkeypress="return validateText(event)"></asp:TextBox>
                                         </div>
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvLocation" runat="server" Display="Dynamic" ControlToValidate="txtLocation"
