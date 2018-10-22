@@ -62,7 +62,7 @@
                                                          ControlToValidate="txtProjectName" ValidationGroup="vgSaveWindows" ValidationExpression='^(?![.\-])(?:[^\\\/:*?"<>|#+])*[^.\-\\\/:*?"<>|#+]$'
                                                          ForeColor="Red" ErrorMessage="RegularExpressionValidator">
                                                              <ucValidationContainer:ValidationContainer ID="rfvProjectContainer1" runat="server"
-                                                            ValidationMsg="Invalid Project name.<br />Special characters (/, \, :, *, ?, &quot;, <, >, |, #, +) and '.' or '-' at first or last positions are not permitted." Size="200" />
+                                                            ValidationMsg="Invalid Project name.<br />Special characters (/, \, :, *, ?, &quot;, <, >, |, #, +,.,-) are not permitted." Size="200" />
                                                          </asp:RegularExpressionValidator>
                                                     <asp:RequiredFieldValidator ID="rfvProjectName" runat="server" Display="Dynamic"
                                                         ControlToValidate="txtProjectName" ForeColor="Red" 
