@@ -6448,6 +6448,9 @@
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\MetricTargetManagement.ascx.fr.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ActivityValidationRules.ascx.fr.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
