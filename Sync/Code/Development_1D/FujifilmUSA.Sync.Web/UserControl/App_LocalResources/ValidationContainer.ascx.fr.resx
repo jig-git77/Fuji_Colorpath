@@ -273,4 +273,7 @@
   <data name="ValidationChartRequiredResource" xml:space="preserve">
     <value>Please select Validation chart.</value>
   </data>
+  <data name="MetricSumRequiredResource" xml:space="preserve">
+    <value>Please provide metric sum name.</value>
+  </data>
 </root>

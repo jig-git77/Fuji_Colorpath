@@ -117,10 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="locAddMetricTargetResource1" xml:space="preserve">
-    <value>Add Metric Target </value>
+  <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
+    <value>Preset Name</value>
   </data>
-  <data name="locMetricTargetMgmtResource1" xml:space="preserve">
+  <data name="GridTemplateColumnResource10.HeaderText" xml:space="preserve">
+    <value>IsUsed?</value>
+  </data>
+  <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
+    <value>dEMethod</value>
+  </data>
+  <data name="GridTemplateColumnResource6.HeaderText" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="GridTemplateColumnResource7.HeaderText" xml:space="preserve">
+    <value>1D?</value>
+  </data>
+  <data name="GridTemplateColumnResource8.HeaderText" xml:space="preserve">
+    <value>V_1D?</value>
+  </data>
+  <data name="GridTemplateColumnResource9.HeaderText" xml:space="preserve">
+    <value>V_4D?</value>
+  </data>
+  <data name="imgbtnDeleteResource1.AlternateText" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="imgbtnDeleteResource1.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="imgbtnDeleteResource1.Tooltip" xml:space="preserve">
+    <value>Delete MetricTarget</value>
+  </data>
+  <data name="imgbtnEditResource1.AlternateText" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="imgbtnEditResource1.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="imgbtnEditResource1.Tootltip" xml:space="preserve">
+    <value>Edit MetricTarget</value>
+  </data>
+  <data name="imgClearFillterResource1.AlternateText" xml:space="preserve">
+    <value>Clear Filter</value>
+  </data>
+  <data name="imgClearFillterResource1.Tooltip" xml:space="preserve">
+    <value>Clear Filter</value>
+  </data>
+  <data name="locAddMetricTargetResource1.Text" xml:space="preserve">
+    <value>Assign Metric Target Preset Reference Chart</value>
+  </data>
+  <data name="locMetricTargetMgmtResource1.Text" xml:space="preserve">
     <value>Metric Target Management</value>
   </data>
 </root>

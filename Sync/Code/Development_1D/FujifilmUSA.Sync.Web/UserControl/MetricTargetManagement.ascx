@@ -123,29 +123,7 @@
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn SortExpression="TargetValue" HeaderText="Target Value" HeaderButtonType="TextButton"
                                         DataField="TargetValue">
-                                    </telerik:GridBoundColumn>                                    
-                                    <%--<telerik:GridBoundColumn SortExpression="CreateDate" HeaderText="Last Active" HeaderButtonType="TextButton"
-                                        DataField="CreateDate" DataFormatString="{0:MM/dd/yy hh:mm}" ShowFilterIcon="False">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridTemplateColumn DataField="SpotProjectID" UniqueName="Delete" FilterControlAltText="Filter Delete column"
-                                        meta:resourcekey="GridTemplateColumnResource7">
-                                        <FilterTemplate>
-                                            <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="button" CommandName="ClearFilterSpotTarget"
-                                                ToolTip="Clear Filter">
-                                                <span>
-                                                    <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png"
-                                                        meta:resourcekey="imgClearFillterResource1" />
-                                                </span>
-                                            </asp:LinkButton>
-                                        </FilterTemplate>
-                                        <ItemTemplate>
-                                            <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete SpotProject" AlternateText="Delete"
-                                                ImageUrl="../Images/delete_icon.png" OnClientClick="return ConfirmDeleteSpotProject();"
-                                                CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SpotProjectID") %>' CommandName="DeleteSpotProject"
-                                                meta:resourcekey="imgbtnDeleteResource1" />
-                                        </ItemTemplate>
-                                        <HeaderStyle Width="40px" />
-                                    </telerik:GridTemplateColumn>--%>
+                                    </telerik:GridBoundColumn>                                                                        
                                 </Columns>
                             </telerik:GridTableView>
                         </DetailTables>
