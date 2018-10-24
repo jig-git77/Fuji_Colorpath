@@ -76,11 +76,7 @@ namespace Fuji.Common
             if (System.IO.Directory.Exists(Dir2) == false) { System.IO.Directory.CreateDirectory(Dir2); }
             if (System.IO.Directory.Exists(Dir3) == false) { System.IO.Directory.CreateDirectory(Dir3); }
 
-            //CSSPath = System.Web.HttpContext.Current.Server.MapPath("Templates/style.css");
-            string currentBaseUrl = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority +
-            System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
-                        CSSPath = currentBaseUrl + "Templates/style.css";
-
+            CSSPath = System.Web.HttpContext.Current.Server.MapPath("Templates/style.css");
             DS_Common = new DataSet();
         }
         #endregion
@@ -2582,7 +2578,7 @@ namespace Fuji.Common
                         PatchStatusColor = "style='background-color:#FFDD00'";// Yellow
                     else if (PatchStatusNo == "2")
                         PatchStatusColor = "";
-                    //PatchStatusColor = "style='background-color:White'";
+                        //PatchStatusColor = "style='background-color:White'";
 
                     strBuild.Append("<td align='center' class='TABLE6CELL' valign='middle'>" + strColorTA + "</td>");
                     strBuild.Append("<td align='center' class='TABLE6CELL' valign='middle'>" + Convert.ToString(DT.Rows[i]["DE"]).Trim() + "</td>");
@@ -2629,19 +2625,19 @@ namespace Fuji.Common
 
             // ===== Check Error Show Or Not ==== //
             if (DS_Common.Tables["IsShowError"] != null && DS_Common.Tables["IsShowError"].Rows.Count > 0 && Convert.ToString(DS_Common.Tables["IsShowError"].Rows[0]["IsShowError"]) == "0")
-            {
+            {   
                 strStatusImageGreen = "";
                 strStatusImageRed = "";
                 strStatusImageCaution = "";
             }
-
+            
             DataTable DT = new DataTable();
 
             str = str.Replace("#csspath#", CSSPath);
 
             // === Table = "JobDetail" : Replace Job Detail In HTML Tamplate ==== //    
             #region ==== Table = 0,  Job Detail  ====                
-            if (DS_Common.Tables["JobDetail"] != null && DS_Common.Tables["JobDetail"].Rows.Count > 0)
+            if (DS_Common.Tables["JobDetail"] != null && DS_Common.Tables["JobDetail"].Rows.Count > 0) 
             {
                 DT = DS_Common.Tables["JobDetail"];
 
@@ -2673,21 +2669,21 @@ namespace Fuji.Common
             #endregion
 
             #region ==== Target Vs Actual AB Plot ====
-            str = str.Replace("###TargetVersusActualAB###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_TargetVersusActualAB_1.Jpeg"));
+            str = str.Replace("###TargetVersusActualAB###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_TargetVersusActualAB_1.Jpeg"));               
             #endregion
 
             // === Table = "ErrorRate" : Target Versus Actual AB === //
             #region ==== Result Summary : Error ====
-            str = str.Replace("###patchErrorImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_ResultSummary_PatchError.Jpeg"));
-            str = str.Replace("###ActualError###", Convert.ToString(DS_Common.Tables["ErrorRate"].Rows[0]["ErrorRate"]));
+             str = str.Replace("###patchErrorImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_ResultSummary_PatchError.Jpeg"));
+             str = str.Replace("###ActualError###", Convert.ToString(DS_Common.Tables["ErrorRate"].Rows[0]["ErrorRate"]));               
             #endregion
 
-            // === Table = "DeltaESummary" : Target Versus Actual AB === //                    
+             // === Table = "DeltaESummary" : Target Versus Actual AB === //                    
             #region ==== Result Summary : Delta E AB Value ====            
-            string strDeltaEABValue = "";
+            string strDeltaEABValue = "";            
             if (DS_Common.Tables["DeltaESummary"] != null && DS_Common.Tables["DeltaESummary"].Rows.Count > 0)
             {
-
+                
                 string strStatusImg = "";
                 for (int i = 0; i < DS_Common.Tables["DeltaESummary"].Rows.Count; i++)
                 {
@@ -2758,7 +2754,7 @@ namespace Fuji.Common
             str = str.Replace("###Page3_DotgainDeviationP###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_DotgainDeviationP.Jpeg"));
             str = str.Replace("###Page3_PrintDeviationP###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_PrintDeviationP.Jpeg"));
             str = str.Replace("###Page3_TrapDeviationP###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_TrapDeviationP.Jpeg"));
-
+     
             #endregion
 
             // === Job Trands Charts === //
@@ -2770,7 +2766,7 @@ namespace Fuji.Common
             str = str.Replace("###Page4_PrintContrast###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_PrintContrast.Jpeg"));
             #endregion
 
-
+            
             #region Assign Server
             str = str.Replace("##IMAGES##", strServer);
             #endregion
@@ -2823,7 +2819,7 @@ namespace Fuji.Common
 
             // === Table = "InkInformation" : Replace Inl Information In HTML Tamplate  ==== //
             #region ==== Ink Detail ====
-            string strInkInformation = "";
+            string strInkInformation = "";            
             if (DS_Common.Tables["InkInformation"] != null && DS_Common.Tables["InkInformation"].Rows.Count > 0)
             {
                 for (int i = 0; i < DS_Common.Tables["InkInformation"].Rows.Count; i++)
@@ -2844,7 +2840,7 @@ namespace Fuji.Common
 
             // === Table = "DeltaESummary" : Target Versus Actual AB === // 
             #region ==== Result Summary : Delta E AB Value ====
-            string strDeltaEABValue = "";
+            string strDeltaEABValue = "";            
             if (DS_Common.Tables["DeltaESummary"] != null && DS_Common.Tables["DeltaESummary"].Rows.Count > 0)
             {
                 string strStatusImg = "";
@@ -2881,7 +2877,7 @@ namespace Fuji.Common
             // === Non Process  Densitometric Summary === //
             #region ==== Non Process  Densitometric Summary  ====
             str = str.Replace("###Page3_DensityDeviationNP###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_DensityDeviationNP.Jpeg"));
-            #endregion
+             #endregion
 
             // === Job Trands Charts === //
             #region ===== Job Trands Charts ===== 
@@ -2931,10 +2927,10 @@ namespace Fuji.Common
                     TmpRepCompanyDetail = TmpRepCompanyDetail.Substring(0, TmpRepCompanyDetail.IndexOf("###End###") + 9);
                     str = str.Replace(TmpRepCompanyDetail, "");
                 }
-                str = str.Replace("###BranchDetail###", Convert.ToString(DS_Common.Tables["MakeReadyDetail"].Rows[0]["BranchSummary"]).Trim());
+                str = str.Replace("###BranchDetail###", Convert.ToString(DS_Common.Tables["MakeReadyDetail"].Rows[0]["BranchSummary"]).Trim());                
             }
             else
-            {
+            {                
                 str = str.Replace("###DateRange###", "");
                 str = str.Replace("###TimeRange###", "");
                 str = str.Replace("###CompanyName###", "");
