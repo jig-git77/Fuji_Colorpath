@@ -106,7 +106,7 @@ public partial class Common_LoginControl : ControlBase
 
                 //========== Check The password ==========//
                 if (TXT_LoginPassword.Text != Password) { LblError1.Text = Resources.Message.InvalidPassword; SetFocus(TXT_LoginPassword); return; }
-                if (Convert.ToInt32(DSet.Tables[0].Rows[0]["IPAccess"]) == 0) { LblError1.Text = "IP restricted for this login."; return; }
+                //if (Convert.ToInt32(DSet.Tables[0].Rows[0]["IPAccess"]) == 0) { LblError1.Text = "IP restricted for this login."; return; }
 
                 //========== Fill The Session ==========//
                 Sessions.SetLoginSessions(DSet);

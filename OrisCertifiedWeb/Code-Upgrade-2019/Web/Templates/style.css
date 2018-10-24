@@ -3,10 +3,10 @@ body { margin:0px; padding:0px; background-color:#fff; }
 table {font-size:11px; color:#333; font-family:Verdana, Tahoma,Arial, Helvetica, sans-serif; text-align:left; }
 .maintable { height:100%; }
 
-/*.green-title { background:url(../images/green-title-white-bg.png) repeat-x left top #38a886; font-family:Tahoma; font-size:11px; color:#fff; line-height:25px;
+/*.green-title { background:url(/images/green-title-white-bg.png) repeat-x left top #38a886; font-family:Tahoma; font-size:11px; color:#fff; line-height:25px;
 font-weight:bold; border:1px solid #38a886; padding-left:15px;padding-top:3px; }*/
-.green-title { background:url(../images/title-bg-black.gif) repeat-x left top #000; font-family:Verdana, Tahoma; font-size:11px; color:#fff; line-height:25px;font-weight:bold; padding-left:15px; padding-top:3px;}
-.green-title1 { background:url(../images/title-bg-black.gif) repeat-x left top #000; font-family:Verdana, Tahoma; font-size:9px; color:#fff; line-height:20px;font-weight:bold; padding-left:15px; padding-top:0px;}
+.green-title { background:url(/images/title-bg-black.gif) repeat-x left top #000; font-family:Verdana, Tahoma; font-size:11px; color:#fff; line-height:25px;font-weight:bold; padding-left:15px; padding-top:3px;}
+.green-title1 { background:url(/images/title-bg-black.gif) repeat-x left top #000; font-family:Verdana, Tahoma; font-size:9px; color:#fff; line-height:20px;font-weight:bold; padding-left:15px; padding-top:0px;}
 .TABLE6 { background-color:#727272; font-family:Verdana, Tahoma;border: SOLID 1PX #c4c4c4; font-size:9px; width:50px; color:#fff; line-height:20px;font-weight:bold; padding-left:0px; padding-top:0px;}
 .TABLE6CELL { font-family:Verdana, Tahoma; font-size:9px; border: SOLID 1PX #c4c4c4; width:50px; line-height:20px; padding-left:0px; padding-top:0px;}
 
@@ -38,7 +38,7 @@ font-weight:bold; border:1px solid #38a886; padding-left:15px;padding-top:3px; }
 .ReportHeader{font-weight:bold;font-size:12px;}
 
 .TITLE1{BACKGROUND-COLOR:#41576C;COLOR:#FFF;HEIGHT:25PX;FONT-SIZE:12PX;FONT-WEIGHT:BOLD;VERTICAL-ALIGN:MIDDLE;PADDING-LEFT:5PX;}
-.TITLE2 { background:url(../images/title-bg-black.gif) repeat-x left top #000; font-family:Verdana, Tahoma; font-size:11px; color:#fff; line-height:25px;font-weight:bold; padding-left:15px;padding-top:3px; }
+.TITLE2 { background:url(/images/title-bg-black.gif) repeat-x left top #000; font-family:Verdana, Tahoma; font-size:11px; color:#fff; line-height:25px;font-weight:bold; padding-left:15px;padding-top:3px; }
 .TITLE3{TEXT-DECORATION:UNDERLINE;FONT-SIZE:11PX;COLOR:#6A511C;FONT-WEIGHT:BOLD;TEXT-ALIGN:CENTER}
 
 .GRIDTITLE{ BACKGROUND:#808080 ; BORDER:0PX SOLID #808080 ; PADDING:2PX ; FONT-SIZE:7PX ; FONT-WEIGHT:BOLD ; COLOR:#FFF; TEXT-ALIGN:CENTER;}
@@ -48,7 +48,7 @@ font-weight:bold; border:1px solid #38a886; padding-left:15px;padding-top:3px; }
 
 .DROPDOWNLIST{ color:#585858; font-weight:normal; font-family:Verdana, Tahoma; font-size:11px; border:1px solid #7f9db9; width:150px; line-height:18px; padding-left:2px; }
 .TEXTBOX{ color:#585858; font-weight:normal; font-family:Verdana, Tahoma; font-size:11px; border:1px solid #7f9db9; width:150px; line-height:18px; padding-left:2px; }
-.BUTTON { background:url(../images/green2-btn-bg.gif) repeat-x top left; border:1px solid #d5f0ed; padding:2px 3px;
+.BUTTON { background:url(/images/green2-btn-bg.gif) repeat-x top left; border:1px solid #d5f0ed; padding:2px 3px;
 font-family:Verdana, Tahoma; font-size:11px; font-weight:bold; color:#fff; cursor:pointer; }
 
 .DATAGRID{BORDER:SOLID 1PX #c4c4c4;BACKGROUND-COLOR:#FFF;border-collapse:collapse}
@@ -62,25 +62,33 @@ font-family:Verdana, Tahoma; font-size:11px; font-weight:bold; color:#fff; curso
 .ALTERNATINGITEMSTYLE A:HOVER{font-weight:BOLD;color:#CC0000;text-decoration:UNDERLINE;}
 
 .popup-table{width:100%;border:1px solid #808080;}
-.popup-top-bar{background:url(../Images/popup-top-title-bg.png) repeat-x top #30a17e;color:#FFF;height:35px;padding-left:25px;border:1px solid #efefef;font-size:12px;font-weight:bold;}
+.popup-top-bar{background:url(/Images/popup-top-title-bg.png) repeat-x top #30a17e;color:#FFF;height:35px;padding-left:25px;border:1px solid #efefef;font-size:12px;font-weight:bold;}
 .BottomBorder
-{border-bottom:1px SOLID #000000};
+{border-bottom:1px SOLID #000000}
  
 /***** Start CSS For Single Measurement Report ****/
- 
-.header-bg {margin:0; padding:0; background:url(../Images/header-middle-bg.gif) repeat-x left top;}
-.Summarychart_header_bg {width: 263px; height: 245px; padding-top: 17px; padding-left: 12px; border: 2px solid #ccc; background:url(../Images/abChartBackGround.gif);}
-.summary-bg { margin:0; padding:0; height:22px; background:url(../Images/summary-title-bg.gif) repeat-x left top;}
+
+.header-bg {
+    margin: 0;
+    padding: 0;
+    background-image: url('/Images/header-middle-bg.gif')
+}
+
+
+.Summarychart_header_bg {width: 263px; height: 245px; padding-top: 17px; padding-left: 12px; border: 2px solid #ccc; background:url(/Images/abChartBackGround.gif);}
+
+.summary-bg { margin:0; padding:0; height:22px; background:url(/Images/summary-title-bg.gif) repeat-x left top;}*
+
 
 .header-title { margin:0; padding:0 0 0 10px; vertical-align:top; font-size:20px; color:#FFF; width:300px; line-height:43px; height:53px; display:block;}
 
-.passed-title-bg { margin:0; padding:0;  width:392px; height:30px; background:url(../Images/passed-title-bg.gif) repeat-x left top;}
+.passed-title-bg { margin:0; padding:0;  width:392px; height:30px; background:url(/Images/passed-title-bg.gif) repeat-x left top;}
 .passed-title-text { margin:0; padding:2px 0 0 0; font-size:18px; color:#2e3c2e; }
 
-.warning-title-bg { margin:0; padding:0; width:392px; height:30px; background:url(../Images/warning-title-bg.gif) repeat-x left top;}
+.warning-title-bg { margin:0; padding:0; width:392px; height:30px; background:url(/Images/warning-title-bg.gif) repeat-x left top;}
 .warning-title-text { margin:0; padding:2px 0 0 0; font-size:18px; color:#5f602b; }
 
-.failed-title-bg { margin:0; padding:0; width:392px; height:30px; background:url(../Images/failed-title-bg.gif) repeat-x left top;}
+.failed-title-bg { margin:0; padding:0; width:392px; height:30px; background:url(/Images/failed-title-bg.gif) repeat-x left top;}
 .failed-title-text { margin:0; padding:2px 0 0 0; font-size:18px; color:#7f1f1f; }
 
 .row-1 { margin:0; padding:0; background-color:#ececec;  }
@@ -91,7 +99,6 @@ font-family:Verdana, Tahoma; font-size:11px; font-weight:bold; color:#fff; curso
 
 .row-content1{ margin:0; padding:2px 0px; font-size:10px; font-weight:normal;}
 
-.summary-bg { margin:0; padding:0; height:22px; }
 .summary-title { margin:0 0 0 8px; padding:0; color:#fff; font-size:14px; }
 .summary-title1 { margin:0 0 0 8px; padding:0; color:#fff; font-size:11px; }
 

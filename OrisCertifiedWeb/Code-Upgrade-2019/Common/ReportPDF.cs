@@ -1902,7 +1902,7 @@ namespace Fuji.Common
                     else if ((i % 29 == 0) && (i / 29 == 1)) // === Add header after adding 32 lines in first page === //
                     {
                         // === Finish previous Table tag and start with new table tag === //
-                        HTMLstr += "</table>";
+                        HTMLstr += "</table><br/><br/><br/><br/>";
                         // === Add Page Header === //
                         HTMLstr += strPageHeader;
                         // === Add Report Table Header === //
@@ -1912,7 +1912,7 @@ namespace Fuji.Common
                     else if ((i - 29) % 35 == 0) // === remaining pdf pages contains 35 lines per page === //
                     {
                         // === Finish previous Table tag and start with new table tag === //
-                        HTMLstr += "</table>";
+                        HTMLstr += "</table><br/><br/><br/><br/>";
                         // === Add Page Header === //
                         HTMLstr += strPageHeader;
                         // === Add Report Table Header === //
@@ -2970,6 +2970,10 @@ namespace Fuji.Common
             DataTable DT = new DataTable();
 
             SBStr.Replace("#csspath#", CSSPath);
+            string currentBaseUrl=  System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority +
+            System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
+            SBStr.Replace("#imagepath#", currentBaseUrl);
+            
 
             // === Table 0 = "JobDetail" : Replace Job Detail In HTML Tamplate ==== //    
             //Fuji.Common.CommonFunctions.FileTimeLog("Start Page 1 JobDetail", false);
