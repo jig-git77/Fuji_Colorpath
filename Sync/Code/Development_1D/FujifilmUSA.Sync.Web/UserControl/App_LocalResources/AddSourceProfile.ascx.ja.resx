@@ -117,14 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="chkIsActiveResource1.Text" xml:space="preserve">
+    <value>使用中</value>
+  </data>
+  <data name="chkIsActiveResource1.ToolTip" xml:space="preserve">
+    <value>使用中</value>
+  </data>
   <data name="editSourceProfile" xml:space="preserve">
     <value>ターゲットプロファイル編集</value>
   </data>
   <data name="lblHeaderResource1.Text" xml:space="preserve">
     <value>パスワード変更</value>
   </data>
-  <data name="locCancelResource1.Text" xml:space="preserve">
+  <data name="lblHeaderResource1.ToolTip" xml:space="preserve">
+    <value>パスワード変更</value>
+  </data>
+  <data name="lbtnCancelResource1.Text" xml:space="preserve">
     <value>キャンセル</value>
+  </data>
+  <data name="lbtnCancelResource1.ToolTip" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="lbtnSaveResource1.Text" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="lbtnSaveResource1.ToolTip" xml:space="preserve">
+    <value>保存</value>
   </data>
   <data name="locCompanyNameResource1.Text" xml:space="preserve">
     <value>企業名</value>
