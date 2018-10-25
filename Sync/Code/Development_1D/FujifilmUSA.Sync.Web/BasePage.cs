@@ -201,7 +201,21 @@ namespace FujifilmUSA.Sync.Web
                     NavigationToNoPermissionPage();
                 }
             }
+            else if (GetType().BaseType == typeof(AddSpotTarget))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSpotTarget))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
             else if (GetType().BaseType == typeof(ReferenceChartManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageReferenceChart))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddReferenceChart))
             {
                 if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageReferenceChart))
                 {
@@ -222,6 +236,13 @@ namespace FujifilmUSA.Sync.Web
                     NavigationToNoPermissionPage();
                 }
             }
+            else if (GetType().BaseType == typeof(AddPrintStandardType))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
             else if (GetType().BaseType == typeof(AddLookupTVILABDensity))
             {
                 if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSync1DTVILABDensity))
@@ -229,6 +250,35 @@ namespace FujifilmUSA.Sync.Web
                     NavigationToNoPermissionPage();
                 }
             }
+            else if (GetType().BaseType == typeof(AddPatchTolerance))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(PatchPresetManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(MetricTargetManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTarget))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddMetricTarget))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTarget))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            
             #endregion
             #region Regular Pages
             else if (GetType().BaseType == typeof(OperationSelection))

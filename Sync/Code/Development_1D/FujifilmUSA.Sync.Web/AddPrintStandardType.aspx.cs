@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class AddPrintStandardType : System.Web.UI.Page
+    public partial class AddPrintStandardType :BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
