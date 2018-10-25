@@ -76,6 +76,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnCreateNewPrintCondition_Click(object sender, EventArgs e)
         {
+            GetProjectList(); //---T0 assign projects list in session-------//
             //------------Create new Project under this Device-----------------//
             SessionManager.Instance.CurrentProject = new Project()
             {
@@ -86,10 +87,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
             Response.Redirect("AddProject.aspx");
         }
-       #endregion
+        #endregion
 
         #region Method
-    
+        private void GetProjectList()
+        {
+            Projects = new List<Project>();
+            DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
+            //Now we are passing LicenseTypeID as None to bring all projects based on DeviceId
+            LicenseTypeID = Convert.ToInt32(ELicenseType.None);
+            _presenterProjectList.GetProjectListByDeviceId();
+            if (!IsErrorOccured)
+            {
+                SessionManager.Instance.ProjectList = Projects;
+            }
+        }
         #endregion
 
         #region IViewProjectList Members
