@@ -227,6 +227,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataTable();
         }
+
+        public int GetProjectLicenseTypeLimit(int DeviceID, int LicenseTypeID)
+        {
+            return 0;
+        }
         #endregion
 
         #region ITaskBase Members

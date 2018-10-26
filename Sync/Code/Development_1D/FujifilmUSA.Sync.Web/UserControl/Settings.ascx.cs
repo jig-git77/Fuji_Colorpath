@@ -40,6 +40,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divLookupTVILABDensity.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSync1DTVILABDensity);
             divPatchPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance);
             divSpotTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSpotTarget);
+            divMetricTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTarget);
             ////seperator image 
             divBranchSeprator.Visible = tdBranch.Visible && tdcompany.Visible;
             divUserSeprator.Visible = tdUser.Visible && tdBranch.Visible;
@@ -57,6 +58,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divMetricTargetPresetSeparator.Visible = divMetricTargetPreset.Visible && dvApplicationConfiguration.Visible;
             divPatchPresetSeparator.Visible = divPatchPreset.Visible && dvApplicationConfiguration.Visible;
             divLookupTVILABDensitySeparator.Visible = divLookupTVILABDensity.Visible && divPrintStandardType.Visible;
+            divSpotTargetSeparator.Visible = divSpotTarget.Visible && divLookupTVILABDensitySeparator.Visible;
+            divMetricTargetSeperator.Visible = divMetricTarget.Visible && divSpotTarget.Visible;
         }
         #endregion
 
@@ -119,5 +122,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("SpotTargetManagement.aspx");
         }
+
     }
 }

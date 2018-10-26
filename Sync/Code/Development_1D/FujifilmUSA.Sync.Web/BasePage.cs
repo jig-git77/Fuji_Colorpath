@@ -222,7 +222,21 @@ namespace FujifilmUSA.Sync.Web
                     NavigationToNoPermissionPage();
                 }
             }
+            else if (GetType().BaseType == typeof(AddReferenceChartPreset))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageReferenceChart))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
             else if (GetType().BaseType == typeof(MetricTargetPresetManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddMetricTargetPreset))
             {
                 if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset))
                 {
@@ -266,18 +280,26 @@ namespace FujifilmUSA.Sync.Web
             }
             else if (GetType().BaseType == typeof(MetricTargetManagement))
             {
-                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTarget))
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset))
                 {
                     NavigationToNoPermissionPage();
                 }
             }
             else if (GetType().BaseType == typeof(AddMetricTarget))
             {
-                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTarget))
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset))
                 {
                     NavigationToNoPermissionPage();
                 }
             }
+            else if (GetType().BaseType == typeof(AddReferenceChartPreset))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            
             
             #endregion
             #region Regular Pages

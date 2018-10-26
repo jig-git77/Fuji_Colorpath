@@ -55,5 +55,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Dictionary<int, string> GetReTargetSpotProjectList(int CompanyID, int BranchID, int DeviceID);
         SpotProjectLibrary GetRetargetSpotProjectDetails(int RetargetSpotprojectID);
         DataTable GetRetargetProjectDetails(int RetargetProjectID);
+        int GetProjectLicenseTypeLimit(int DeviceID, int LicenseTypeID);
     }
 }

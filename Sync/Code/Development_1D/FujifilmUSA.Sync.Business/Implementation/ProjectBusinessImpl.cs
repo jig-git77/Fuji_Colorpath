@@ -1684,7 +1684,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         {
                             DeviceId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CPDeviceID"),
                             LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID"),
-                            ReTargetProjectBranchID= DataReader.ReadInt(dsProject.Tables[0].Rows[0], "RetargetProjectBranchID"),
+                            ReTargetProjectBranchID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "RetargetProjectBranchID"),
                             ReTargetProjectDeviceID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "RetargetProjectDeviceID"),
                             ReTargetProjectName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "RetargetProjectName")
                         };
@@ -1707,9 +1707,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 MeasurementMode = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MeasurementMode")
                             },
                             ReTargetSpotTarget = new Entity.CPSpot.SpotTarget()
-                            {                                
+                            {
                                 SpotTargetName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "RetargetSpotTargetName"),
-                                Description = DataReader.ReadString(dsProject.Tables[0].Rows[0], "RetargetSpotTargetDescription")                                
+                                Description = DataReader.ReadString(dsProject.Tables[0].Rows[0], "RetargetSpotTargetDescription")
                             },
                             ReTargetSpotProjectID = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ReTargetSpotProjectID")
                         };
@@ -2092,13 +2092,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         project = new Entity.CPSpot.SpotProjectLibrary()
                         {
                             SpotProjectId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "SpotProjectID"),
-                            ProjectName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProjectName"),                                                        
+                            ProjectName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProjectName"),
                             SpotTarget = new Entity.CPSpot.SpotTarget()
                             {
                                 SpotTargetName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "SpotTargetName"),
                                 Description = DataReader.ReadString(dsProject.Tables[0].Rows[0], "Description")
-                            }                            
-                        };                        
+                            }
+                        };
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotProjectDetail"));
@@ -2121,13 +2121,28 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             RetargetProjectID
                                         });
                     if (dsProject.Tables[0].Rows.Count > 0)
-                        dtDetails= dsProject.Tables[0];          
-                    
+                        dtDetails = dsProject.Tables[0];
+
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_ProjectDetail"));
             return dtDetails;
         }
 
+        public int GetProjectLicenseTypeLimit(int DeviceID, int LicenseTypeID)
+        {
+            int projectLimit = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsLimit = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetProjectLicenseTypeLimit", new object[] { DeviceID, LicenseTypeID });
+                    if (dsLimit != null && dsLimit.Tables.Count > 0 && dsLimit.Tables[0] != null)
+                    {
+                        projectLimit = Convert.ToInt32(dsLimit.Tables[0].Rows[0]["Limit"]);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetObserverTypeList"));
+            return projectLimit;
+        }
 
         #endregion
 

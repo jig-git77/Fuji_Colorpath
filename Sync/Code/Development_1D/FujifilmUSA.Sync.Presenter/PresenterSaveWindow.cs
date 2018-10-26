@@ -110,5 +110,12 @@ namespace FujifilmUSA.Sync.Presenter
                 referenceChartBusiness.InsertReferenceLabData(referenceChartData, profile, sourceProfileId);
             }
         }
+
+        public int GetProjectLimit(int LicenseID)
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;            
+            return projectBusiness.GetProjectLicenseTypeLimit(_viewSaveWindow.DeviceId, _viewSaveWindow.LicenseId);
+        }
     }
 }

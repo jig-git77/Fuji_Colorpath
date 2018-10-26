@@ -226,7 +226,7 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ERolePermission_ManageCustomReports")] //Manage Custom Reports
         ManageCustomReports = 20,
         [Description("ERolePermission_ManageMetricTarget")] //Manage Metric Target
-        ManageMetricTarget = 20
+        ManageMetricTarget = 21
     }
     public enum ECurrentProjectStatus
     {

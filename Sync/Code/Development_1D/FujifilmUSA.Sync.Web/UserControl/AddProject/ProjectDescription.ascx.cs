@@ -203,8 +203,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             //Check for project limit 
             int currentProjectLimit = 0;
-            if (SessionManager.Instance.ProjectList != null)
-                currentProjectLimit = SessionManager.Instance.ProjectList.Where(p => p.LicenseType == (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.ProjectId).Count();
+            //if (SessionManager.Instance.ProjectList != null)
+            //    currentProjectLimit = SessionManager.Instance.ProjectList.Where(p => p.LicenseType == (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.ProjectId).Count();
+            DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
+            LicenseId = Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
+            currentProjectLimit = _presenterSaveWindow.GetProjectLimit(Convert.ToInt32(ddlLicenseType.SelectedItem.Value));
 
             int maxProjectLimit = 0;
             if (SessionManager.Instance.CurrentDevice.LicenseTypeProject != null)
@@ -378,8 +381,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public byte[] ChartPreview { get; set; }
         public Project Project { get; set; }
         public int ProjectId { get; set; }
+        public int DeviceId { get; set; }
+        public int LicenseId { get; set; }
         #endregion
 
-              
+
     }
 }

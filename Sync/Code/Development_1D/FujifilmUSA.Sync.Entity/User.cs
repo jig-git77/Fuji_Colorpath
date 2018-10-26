@@ -62,8 +62,7 @@ namespace FujifilmUSA.Sync.Entity
                                               (x.Permission == ERolePermission.ManageRegion && x.Allow) ||
                                               (x.Permission == ERolePermission.ManageSourceProfile && x.Allow) ||
                                               (x.Permission == ERolePermission.ManageUser && x.Allow) ||
-                                              (x.Permission == ERolePermission.ManageSpotTarget && x.Allow) ||
-                                              (x.Permission == ERolePermission.ManageMetricTarget && x.Allow)).Count() > 0;
+                                              (x.Permission == ERolePermission.ManageSpotTarget && x.Allow)).Count() > 0;
         }
         public bool HasProjectPermission()
         {

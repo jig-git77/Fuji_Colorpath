@@ -76,7 +76,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnCreateNewPrintCondition_Click(object sender, EventArgs e)
         {
-            GetProjectList(); //---T0 assign projects list in session-------//
+            //GetProjectList(); //---T0 assign projects list in session-------//
             //------------Create new Project under this Device-----------------//
             SessionManager.Instance.CurrentProject = new Project()
             {
