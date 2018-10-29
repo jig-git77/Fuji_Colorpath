@@ -139,6 +139,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locCustomSourceProf;
         
         /// <summary>
+        /// pluginMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pluginMessage;
+        
+        /// <summary>
         /// tblMessage control.
         /// </summary>
         /// <remarks>
@@ -166,12 +175,12 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblPluginMessage;
         
         /// <summary>
-        /// ucMeasurementCommon control.
+        /// placeHolderMeasurement control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.MeasurementCommon ucMeasurementCommon;
+        protected global::System.Web.UI.WebControls.PlaceHolder placeHolderMeasurement;
     }
 }
