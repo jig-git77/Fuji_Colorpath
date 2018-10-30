@@ -32,11 +32,7 @@ namespace FujifilmUSA.Sync.Web.Services
         {
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
-            presenter.SaveMeasurement();
-
-            /*Temp Code Start*/
-            GenerateJSONFile(measurement, "4D");
-            /*Temp Code End*/
+            presenter.SaveMeasurement();           
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveVMeasurement")]
@@ -47,11 +43,6 @@ namespace FujifilmUSA.Sync.Web.Services
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             presenter.SaveVMeasurement();
-
-
-            /*Temp Code Start*/
-            GenerateJSONFile(measurement, "Validation");
-            /*Temp Code End*/
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "Save1DMeasurement")]
@@ -61,10 +52,6 @@ namespace FujifilmUSA.Sync.Web.Services
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             presenter.Save1DMeasurement();
-
-            /*Temp Code Start*/
-            GenerateJSONFile(measurement, "1D");
-            /*Temp Code End*/
         }
 
         [WebGet(UriTemplate = "GetReferenceChart/{projectId}/{referencechartdisplaytype}/{IsSpotProjectType}")]

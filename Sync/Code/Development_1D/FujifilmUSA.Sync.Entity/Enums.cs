@@ -224,9 +224,7 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ERolePermission_ManageSpotTarget")] //Manage Spot Target/Brand Color Optimization
         ManageSpotTarget = 19,
         [Description("ERolePermission_ManageCustomReports")] //Manage Custom Reports
-        ManageCustomReports = 20,
-        [Description("ERolePermission_ManageMetricTarget")] //Manage Metric Target
-        ManageMetricTarget = 21
+        ManageCustomReports = 20        
     }
     public enum ECurrentProjectStatus
     {

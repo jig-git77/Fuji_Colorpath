@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="Measurement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.Measurement" %>
 <meta http-equiv="Cache-Control" content="no-cache" />
-<%@ Register Src="~/UserControl/MeasurementCommonNew.ascx" TagName="MeasurementCommon"
+<%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon"
     TagPrefix="uc" %>
 <script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <script language="javascript">
@@ -61,7 +61,7 @@
             </asp:LinkButton>
         </div>
     </div>
-    <div id="pluginMessage" runat="server">
+    
         <div class="mesurementStatusbar info_form">
             <div class="top">
                 &nbsp;
@@ -78,10 +78,8 @@
             <div class="bottom">
                 &nbsp;
             </div>
-        </div>
-    </div>
-    <%--<uc:MeasurementCommon ID="ucMeasurementCommon" runat="server" Type="Optimization" />--%>
-    <asp:PlaceHolder ID="placeHolderMeasurement" runat="server"></asp:PlaceHolder>
+        </div>    
+    <uc:MeasurementCommon ID="ucMeasurementCommon" runat="server" Type="Optimization" />    
 </div>
 <div class="contant_bottom">
     &nbsp;

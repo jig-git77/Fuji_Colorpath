@@ -42,20 +42,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
-        {
-            if (Request.Browser.Type.Contains("Chrome"))
-            {
-                MeasurementCommonNew ucMeasurement = LoadControl("~/UserControl/MeasurementCommonNew.ascx") as MeasurementCommonNew;
-                placeHolderMeasurement.Controls.Add(ucMeasurement);
-                pluginMessage.Visible = false;
-            }
-            else
-            {
-                MeasurementCommon ucMeasurement = LoadControl("~/UserControl/MeasurementCommon.ascx") as MeasurementCommon;
-                placeHolderMeasurement.Controls.Add(ucMeasurement);                
-            }
-
-
+        {            
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
