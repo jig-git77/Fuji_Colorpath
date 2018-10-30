@@ -1288,6 +1288,7 @@ function BindMeasurementPatchDetails() {
                         case 36:
                         case 37:
                         case 48:
+                        case 56:
                             grid.hideColumn(20);
                             grid.showColumn(21);
                             grid.hideColumn(22);
