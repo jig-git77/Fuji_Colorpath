@@ -203,8 +203,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             //Check for project limit 
             int currentProjectLimit = 0;
-            //if (SessionManager.Instance.ProjectList != null)
-            //    currentProjectLimit = SessionManager.Instance.ProjectList.Where(p => p.LicenseType == (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.ProjectId).Count();
             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
             LicenseId = Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
             currentProjectLimit = _presenterSaveWindow.GetProjectLimit(Convert.ToInt32(ddlLicenseType.SelectedItem.Value));
@@ -216,6 +214,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (currentProjectLimit >= maxProjectLimit)
             {
                 //--------------Project Limit reach, so can not create more projects under this Device now-------//  
+                SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
+                SessionManager.Instance.CurrentProject = null;
+                SessionManager.Instance.CurrentOptimizeRun = null;
                 Response.Redirect("ProjectMaxLimit.aspx");
             }
 
