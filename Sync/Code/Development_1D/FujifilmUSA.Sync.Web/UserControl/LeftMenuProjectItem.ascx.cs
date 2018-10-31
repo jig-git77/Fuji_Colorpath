@@ -214,6 +214,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lnkAddRun.Font.Underline = true;
                 lnkAddRun.ForeColor = System.Drawing.Color.Blue;
             }
+            var currentPage = Request.Url.Segments;
+            if (currentPage[2] == "Measurement.aspx" || currentPage[2] == "Spot_Measurement.aspx")
+                lnkAnalyse.Attributes.Add("onclick", "return AllowToAnalyze();");
         }
 
         #endregion

@@ -96,9 +96,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (isAnalyzeEnabled)
                             lnkAnalyze.Enabled = true;
 
-                        bool isDownloadEnabled = isSpotLibraryProject ? 
+                        bool isDownloadEnabled = isSpotLibraryProject ?
                                                 (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count == 1 ? true : false) : //spot libary project condition
-                                                //SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns[0].HasProfile) :
+                                                                                                                                                    //SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns[0].HasProfile) :
                                                 SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile;
 
                         if (isDownloadEnabled)
@@ -113,7 +113,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                 case ECurrentProjectStatus.Edit:
                     //If verification, then don't enable Measurementsetup, analyze and download links...
-                    if(!isSpotLibraryProject)
+                    if (!isSpotLibraryProject)
                     {
                         if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation)
                         {
@@ -159,7 +159,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             if (SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Count > 0)
                             {
                                 lnkAnalyze.Enabled = true;
-                                lnkDownload.Enabled = true;                                
+                                lnkDownload.Enabled = true;
                             }
                         }
 
@@ -174,7 +174,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                         break;
                     }
-                    
+
                 case ECurrentProjectStatus.Run:
                     //This control won't load...
                     break;
@@ -219,6 +219,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lnkMeasure.ForeColor = lnkMeasure.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
             lnkAnalyze.ForeColor = lnkAnalyze.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
             lnkDownload.ForeColor = lnkDownload.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
+
+            var currentPage = Request.Url.Segments;
+            if (currentPage[2] == "Measurement.aspx" || currentPage[2] == "Spot_Measurement")
+                lnkAnalyze.Attributes.Add("onclick", "return AllowToAnalyze();");
         }
         protected void lnkItem_Click(object sender, EventArgs e)
         {
