@@ -518,8 +518,7 @@
             cache: false,
             dataFilter:
             function (data, type) {
-                var json = jQuery.parseJSON(data);
-
+                var json = jQuery.parseJSON(data);                
                 if (json.length > 0) {
                     jQuery("input[id*='hdHasMeasurement']").val('true');
                     $("#measurementContainer").html("");
@@ -542,7 +541,10 @@
                         }
                     }
                     else {
-                        jQuery("input[id*='hdHasMeasurement']").val('false');
+                    jQuery("input[id*='hdHasMeasurement']").val('false');
+                    //made disable analyze tab when no measurement available
+                    $("#LeftMenu2_ctl01_lnkAnalyse").css("color", "Silver");
+                    $("#LeftMenu2_ctl01_lnkAnalyze").css("color", "Silver");
                         $("#measurementContainer").html("");
                         $("#measurementContainer").append("<div class='no_data_found'>" + '<%= GetResourceString("noRecordsAvailable") %>' + "</div>");
             //----------------Display Import Button--------------//
