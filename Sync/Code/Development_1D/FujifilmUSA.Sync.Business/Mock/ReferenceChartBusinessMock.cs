@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<ReferenceChart>();
         }
 
-        public int InsertReferenceLabData(List<ReferenceChart> referenceCharts, byte[] sourceProfile, short sourceProfileId)
+        public int InsertReferenceLabData(List<ReferenceChart> referenceCharts, byte[] sourceProfile, short sourceProfileId, int CompanyId)
         {
             return 0;
         }

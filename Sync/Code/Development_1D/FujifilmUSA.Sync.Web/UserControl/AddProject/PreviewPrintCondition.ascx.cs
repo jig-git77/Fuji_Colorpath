@@ -357,6 +357,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int ProjectId { get; set; }
         public int DeviceId { get; set; }
         public int LicenseId { get; set; }
+        public int CompanyId { get; set; }
         #endregion
     }
 }

@@ -95,7 +95,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return referenceChartData;
         }
 
-        public int InsertReferenceLabData(List<ReferenceChart> referenceCharts, byte[] sourceProfile, short sourceProfileId)
+        public int InsertReferenceLabData(List<ReferenceChart> referenceCharts, byte[] sourceProfile, short sourceProfileId, int CompanyId)
         {
             var returnValue = 0;
             Common.ImplementBusinessLogic(
@@ -143,7 +143,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         Instance.
                         ExecuteProcedure("CPSync4D.CreateReferenceLabData", new object[]
                                                                                     {
-                                                                                        referenceLabData.ToString()
+                                                                                        referenceLabData.ToString(),
+                                                                                        sourceProfileId,
+                                                                                        CompanyId
                                                                                     });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertReferenceLabData"));

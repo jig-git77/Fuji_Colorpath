@@ -34,7 +34,7 @@ namespace FujifilmUSA.Sync.Presenter
             //check for verification chart
             if (_viewSaveWindow.Project.MeasurementSetting.VReferenceChartType.Key > 0)
             {
-                CreateReferenceLabData(_viewSaveWindow.Project.SourceProfile.SourceProfileId, 
+                CreateReferenceLabData(_viewSaveWindow.Project.SourceProfile.SourceProfileId,
                     _viewSaveWindow.Project.MeasurementSetting.VReferenceChartType.Key);
             }
 
@@ -46,7 +46,7 @@ namespace FujifilmUSA.Sync.Presenter
         }
 
         public void SaveProject_InkOptSource()
-        {  
+        {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
             _viewSaveWindow.ProjectId = projectBusiness.SaveProject(_viewSaveWindow.Project);
@@ -107,14 +107,14 @@ namespace FujifilmUSA.Sync.Presenter
                 var profile = sourceProfileBusiness.GetIccProfileBySourceProfile(sourceProfileId);
 
                 referenceChartBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
-                referenceChartBusiness.InsertReferenceLabData(referenceChartData, profile, sourceProfileId);
+                referenceChartBusiness.InsertReferenceLabData(referenceChartData, profile, sourceProfileId, _viewSaveWindow.CompanyId);
             }
         }
 
         public int GetProjectLimit(int LicenseID)
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
-            projectBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;            
+            projectBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
             return projectBusiness.GetProjectLicenseTypeLimit(_viewSaveWindow.DeviceId, _viewSaveWindow.LicenseId);
         }
     }

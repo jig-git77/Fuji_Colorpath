@@ -54,6 +54,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             SessionManager.Instance.CurrentProject.ProjectName = txtProjectName.Text;
             SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
+            CompanyId = SessionManager.Instance.SelectedCompany;
             Project = SessionManager.Instance.CurrentProject;
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If  "Ink Optimization Source" project type
             {
@@ -207,6 +208,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int ProjectId { get; set; }
         public int DeviceId { get; set; }
         public int LicenseId { get; set; }
+        public int CompanyId { get; set; }
         #endregion
     }
 }

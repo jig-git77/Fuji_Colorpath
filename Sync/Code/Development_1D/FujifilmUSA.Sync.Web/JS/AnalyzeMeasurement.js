@@ -1716,6 +1716,7 @@ function BindDeltaSummaryStatesChart() {
         type: 'GET',
         dataType: 'json',
         success: function (response) {
+            debugger;
             if (response != null) {
                 jsonSummaryNameList = response.data.DTDeltaSummaryLables;
                 jsonSummaryValueList = response.data.DTDeltaSummaryValues;
@@ -3642,7 +3643,7 @@ function PopulateChartLGrayBalance() {
 
 ////**************** POPULATE THE DELTA SUMMARY REPORT CHART  ****************////
 function PopulateSummaryDeltaChart() {
-
+    debugger;
     var maxValue = Math.max.apply(Math, jsonSummaryValueList);
     var maxLimit = Math.max.apply(Math, jsonSummaryLimitList);
     var maxNum = 0;
