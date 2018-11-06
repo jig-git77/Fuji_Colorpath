@@ -891,7 +891,7 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <div style="display: block;">
+                                            <div style="display: none;">
                                                 <table>
                                                     <tr>
                                                         <td>
