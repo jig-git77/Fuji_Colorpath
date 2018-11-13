@@ -188,6 +188,9 @@
             <div id="Div_ImportMeasurements" style="float: right; padding-right: 10px;">
                 <input type="button" id="btnImportMeasurements" value='<%= GetResourceString("btnImportMeasurements") %>' onclick="javascript: return ShowImportWindow();" />
             </div>
+             <div id="Div_ImportMeasurementFile" style="float: right; padding-right: 10px;">
+                <input type="button" id="btnImportMeasurementFile" value='<%= GetResourceString("btnImportMeasurementFile") %>' onclick="javascript: return ShowImportFileWindow();" />
+            </div>
         </div>
         <div class="color_pallate_middle">
             <div id="measurementContainer">
