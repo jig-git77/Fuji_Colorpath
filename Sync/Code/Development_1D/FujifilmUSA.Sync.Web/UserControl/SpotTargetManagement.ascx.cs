@@ -80,7 +80,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SpotTargetID = Convert.ToInt32(e.CommandArgument);
                     int deleteResult = _presenterSpotTarget.DeleteSpotTarget();
                     if (deleteResult == -2)
-                        lblMessage.Text = "This spot target has BCO projects open, so please delete those first before deleting this.";
+                        lblMessage.Text = GetResourceString("MessageSpotTargetAssignedToSpotProject");// "This spot target has BCO projects open, so please delete those first before deleting this.";
                     else
                         lblMessage.Text = "";
                     break;
