@@ -52,11 +52,11 @@ namespace FujifilmUSA.Sync.Presenter
             miscDataBusiness.ErrorOccured += _viewAddSpotTarget.ErrorOccured;
             _viewAddSpotTarget.Compnaies = miscDataBusiness.GetCompanyList(_viewAddSpotTarget.CurrentUserId);
         }
-        public void DeleteSpotTarget()
+        public int DeleteSpotTarget()
         {
             var spotBusiness = BusinessFactory<ISpotTargetBusiness>.CreateObject();
             spotBusiness.ErrorOccured += _viewSpotTargetManagement.ErrorOccured;
-            spotBusiness.DeleteSpotTarget(_viewSpotTargetManagement.SpotTargetID);
+            return  spotBusiness.DeleteSpotTarget(_viewSpotTargetManagement.SpotTargetID);
         }
     }
 }

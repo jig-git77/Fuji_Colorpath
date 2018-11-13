@@ -26,9 +26,9 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
-        public bool DeleteSpotTarget(int spotTargetId)
+        public int DeleteSpotTarget(int spotTargetId)
         {
-            return false;
+            return 0;
         }
         #region ITaskBase Members
 

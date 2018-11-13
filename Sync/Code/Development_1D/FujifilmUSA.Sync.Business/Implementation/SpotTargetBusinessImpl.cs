@@ -189,19 +189,33 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
-        public bool DeleteSpotTarget(int spotTargetId)
+        public int DeleteSpotTarget(int spotTargetId)
         {
+            var outParam = new Parameters() { ParameterName = "@isDeleted", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
-                () => DataAccessFactory.
-                          Instance.
-                          ExecuteProcedure(
-                              "[CPSpot].[DeleteSpotTarget]",
-                              new object[]
-                                  {
-                                      spotTargetId
-                                  }),
+                () =>
+                //DataAccessFactory.
+                //          Instance.
+                //          ExecuteProcedure(
+                //              "[CPSpot].[DeleteSpotTarget]",
+                //              new object[]
+                //                  {
+                //                      spotTargetId
+                //                  })
+                                  DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure("CPSpot.DeleteSpotTarget",
+                                         new List<Parameters>()
+                                             {
+                                                 new Parameters()
+                                                     {ParameterName = "@SpotTargetID", Size = 50, Type = DbType.String, Value = spotTargetId},
+                                             },
+                                         new List<Parameters>()
+                                             {
+                                                 outParam
+                                             }),
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteSpotTarget"));
-            return true;
+            return Convert.ToInt32(outParam.Value);
         }
         #endregion
 

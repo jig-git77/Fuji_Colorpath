@@ -64,7 +64,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Control Events
         protected void rgSpotTarget_ItemCommand(object sender, GridCommandEventArgs e)
-        {            
+        {
             switch (e.CommandName)
             {
                 case "ClearFilter":
@@ -78,7 +78,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                 case "Delete":
                     SpotTargetID = Convert.ToInt32(e.CommandArgument);
-                    _presenterSpotTarget.DeleteSpotTarget();
+                    int deleteResult = _presenterSpotTarget.DeleteSpotTarget();
+                    if (deleteResult == -2)
+                        lblMessage.Text = "This spot target has BCO projects open, so please delete those first before deleting this.";
+                    else
+                        lblMessage.Text = "";
                     break;
                 case "Edit":
                     SpotTargetID = Convert.ToInt32(e.CommandArgument);
@@ -93,7 +97,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 rgSpotTarget.DataSource = SpotTargetList;
-            }            
+            }
         }
 
         protected void likAdd_Click(object sender, EventArgs e)
