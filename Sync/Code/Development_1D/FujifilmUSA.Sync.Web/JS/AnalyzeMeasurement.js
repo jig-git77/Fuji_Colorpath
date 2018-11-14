@@ -1390,11 +1390,27 @@ function BindMeasurementPatchDetails() {
         $divMeasurementPatchDetails.find("#divMetricSum").css('display', 'none');
     }
 
+    $divMeasurementPatchDetails.find('#btnExportMeasurement').on('click', function (e) {
+        e.preventDefault();
 
 
-
-    //$divMeasurementPatchDetails.data('kendoGrid').refresh();
-    //$divMeasurementPatchDetails.find('.k-grid-content-locked').css('height', 'unset');
+        var measurementID = parseInt($hdnCurrentMeasurement.val());
+        $.ajax({
+            type: "POST",
+            url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport?MeasurementId=' + measurementID,
+            //data: { MeasurementId: measurementID },
+            dataType: "json",
+            success: function (response) {
+                if (response.data != null) {
+                    var fileName = '~' + response.data;
+                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.responseText);
+            }
+        });
+    });
 
     $divMeasurementPatchDetails.find('#btnExportCGATS').on('click', function (e) {
         e.preventDefault();
@@ -1458,24 +1474,6 @@ function BindMeasurementPatchDetails() {
                 console.log(XMLHttpRequest.responseText);
             }
         });
-
-
-
-        //$.ajax({
-        //    type: "GET",
-        //    url: SERVICE_BASE_URL + 'api/Chart/GetCGATSPatchReport',
-        //    data: apiReportParameters,
-        //    dataType: "json",
-        //    success: function (response) {
-        //        if (response.data != null) {
-        //            var fileName = '~' + response.data;
-        //            window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
-        //        }
-        //    },
-        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //        console.log(XMLHttpRequest.responseText);
-        //    }
-        //});
     });
 
     $divMeasurementPatchDetails.find('#btnExportCxF').on('click', function (e) {
@@ -4708,7 +4706,7 @@ function PopulateTVIG7CMYKChart() {
     var arrValues = $.map(jsonDTSpreadChartData_CMYKList, function (elem) { return elem.DotGain; });
     var maxElement = Math.abs(Math.max.apply(Math, arrValues));
     var maxValues = 0;
-    
+
 
     if (maxElement >= 0 && maxElement < 10) {
         maxValues = 10
@@ -5320,7 +5318,7 @@ function PopulateTVIG7Chart() {
         minValues = -70;
     } else if (minElement >= -80 && minElement < -70) {
         minValues = -80;
-    } 
+    }
 
     if (maxElement >= 0 && maxElement < 10) {
         maxValues = 10

@@ -1481,6 +1481,7 @@
                                                             <a id='lnkLinkFilter' title='Clear filter'>
                                                                 <img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;margin-top: 5px;margin-right: 5px;'></img>
                                                             </a>
+                                                            <button id="btnExportMeasurement" class="k-button">Export Measurement File</button>
                                                             <button id="btnExportCGATS" class="k-button">Export to CGATS</button>
                                                             <button id="btnExportCxF" class="k-button">Export to CxF</button>
                                                             

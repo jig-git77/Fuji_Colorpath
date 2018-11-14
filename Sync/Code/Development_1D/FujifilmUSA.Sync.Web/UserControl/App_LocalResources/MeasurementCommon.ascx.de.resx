@@ -213,4 +213,7 @@
   <data name="btnCloseModelPopup" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="btnImportMeasurementFile" xml:space="preserve">
+    <value>Import Measurement File</value>
+  </data>
 </root>

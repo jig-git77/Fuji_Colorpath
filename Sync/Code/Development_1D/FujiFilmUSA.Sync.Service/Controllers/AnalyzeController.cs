@@ -5,6 +5,7 @@ using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujiFilmUSA.Sync.Service.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -239,57 +240,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
-        }
-
-        //[HttpPost]
-        //public HttpResponseMessage GetSpotPatchDetailsReport(ExportViewModel model)
-        //{
-        //    HttpResponseMessage httpResponseMessage = null;
-        //    try
-        //    {
-        //        DetermineCulture();
-        //        MeasurementId = 0;
-
-        //        OptimizeRunId = Convert.ToInt32(model.OptimizationRunID);
-        //        _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
-
-        //        DataTable dt = new DataTable();
-        //        dt = GridFilters.GetFilteredResult(dtPatchDetails, model.sort, model.filter);
-        //        //logic for filter
-
-        //        ReportPDF objReportPDF = new ReportPDF();
-        //        objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
-
-        //        if (!Directory.Exists(objReportPDF.PDFPath))
-        //            Directory.CreateDirectory(objReportPDF.PDFPath);
-
-        //        objReportPDF.dtSpotPatchDetails = dt;
-        //        objReportPDF.PDF_NAME = model.OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
-        //        objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
-        //        objReportPDF.GenerateSpotPatchDetailsReport();
-
-        //        string filePath = objReportPDF.PDFPath + objReportPDF.PDF_NAME;
-
-        //        var dataBytes = File.ReadAllBytes(filePath);
-        //        //adding bytes to memory stream   
-        //        var dataStream = new MemoryStream(dataBytes);
-        //        httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
-        //        httpResponseMessage.Content = new StreamContent(dataStream);
-        //        httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
-        //        httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
-        //        httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-        //        httpResponseMessage.Content.Headers.ContentDisposition.FileName = objReportPDF.PDF_NAME;
-        //        httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        BaseErrorResponse errprResponse = new BaseErrorResponse();
-        //        errprResponse.Error.UserMessage = ex.Message;
-        //        errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-        //        httpResponseMessage = Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse);//returns the 500 status code
-        //    }
-        //    return httpResponseMessage;
-        //}
+        }     
 
         [HttpPost]
         public IHttpActionResult GetSpotPatchDetailsReport(ExportViewModel model)
@@ -803,34 +754,57 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return result;
         }
 
-        //[HttpGet]
-        //public HttpResponseMessage DownloadFile(string filePath)
-        //{
-        //    var fullPath = System.Web.Hosting.HostingEnvironment.MapPath(filePath);
-        //    var fileName = Path.GetFileName(fullPath);
-        //    var stream = new FileStream(fullPath, FileMode.Open);
+        [HttpPost]
+        public IHttpActionResult GetMeasurementFileExport(int? MeasurementId)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
+            string validationMessage = "";
+            string ExportFileName = "";
+            try
+            {
+                if (MeasurementId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
 
-        //    // processing the stream.
-        //    var result = new HttpResponseMessage(HttpStatusCode.OK)
-        //    {
-        //        Content = new StreamContent(stream)
-        //    };
-        //    result.Content.Headers.ContentDisposition =
-        //        new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
-        //        {
-        //            FileName = fileName
-        //        };
-        //    result.Content.Headers.ContentType =
-        //        new MediaTypeHeaderValue("application/octet-stream");
 
-        //    //stream.Close();
-        //    //GC.Collect();
-        //    //GC.WaitForPendingFinalizers();
-        //    //delete the file
-        //    //File.Delete(fullPath);
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
 
-        //    return result;
-        //}
+                    this.MeasurementId = Convert.ToInt32(MeasurementId);
+                    _presenterAnalyze.GetPatchDetailsOfMeasurementExport();
+                    
+                    //Now we are using DataTable as DataSource                    
+                    string jsonString = JsonConvert.SerializeObject(Measurement, Formatting.Indented);
+                    #region Generate json file
+                    System.IO.StreamWriter sw;
+                    ExportFileName = "/UploadFiles/" + MeasurementId.ToString() + "_MeasurementFile.json";
+                    string ExportFilePath = HostingEnvironment.MapPath("~/UploadFiles/") + MeasurementId.ToString() + "_MeasurementFile.json";
+                    sw = System.IO.File.CreateText(ExportFilePath);
+                    sw.WriteLine(jsonString);
+                    sw.Flush();
+                    sw.Close();
+                    #endregion
+
+                    httpResponse.Data = ExportFileName;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
 
 
         #region Methods for Patch Details tab

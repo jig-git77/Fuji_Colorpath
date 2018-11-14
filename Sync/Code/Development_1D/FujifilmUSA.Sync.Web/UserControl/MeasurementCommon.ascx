@@ -677,15 +677,28 @@
 
                 function ShowImportWindow() {
                     var oWnd = $find("<%= ImportMeasurementWindow.ClientID %>");
-        oWnd.show();
-        return false;
+                    oWnd.show();
+                    return false;
     }
+
+    function ShowImportFileWindow() {
+                    var oWnd = $find("<%= ImportMeasurementFileWindow.ClientID %>");
+                    oWnd.show();
+                    return false;
+    }
+    
 
     function Close() {
         var oWnd = $find("<%= ImportMeasurementWindow.ClientID %>");
         oWnd.close();
         return false;
     }
+
+    <%--function FileWindowClose() {
+        var oWnd = $find("<%= ImportMeasurementFileWindow.ClientID %>");
+        oWnd.close();
+        return false;
+    }--%>
 </script>
 <div id="divBackgroundProgressMaster" class="UpdateProgressBackground" style="display: none; position: fixed; top: 0px; left: 0px; height: 100%; width: 100%;">
 </div>
@@ -695,6 +708,10 @@
         <telerik:RadWindow ID="ImportMeasurementWindow" runat="server" VisibleStatusbar="false"
             ShowContentDuringLoad="false" Title="Import Measurements" Width="730" Height="400"
             Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupImportMeasurements.aspx">
+        </telerik:RadWindow>
+        <telerik:RadWindow ID="ImportMeasurementFileWindow" runat="server" VisibleStatusbar="false"
+            ShowContentDuringLoad="false" Title="Import Measurement File" Width="730" Height="175"
+            Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupImportMeasurementFile.aspx">
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>

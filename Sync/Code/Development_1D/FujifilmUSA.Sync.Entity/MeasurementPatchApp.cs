@@ -8,17 +8,12 @@ namespace FujifilmUSA.Sync.Entity
     public class MeasurementPatchApp
     {
         public int MeasurementPatchId { get; set; }
-        public int MeasurementId { get; set; }
+        public int MeasurementId { get; set; }        
+        public int SampleID { get; set; }
         public string SampleName { get; set; }
         public CieXYZ Ciexyz { get; set; }
         public CieLAB Cielab { get; set; }
-
-        //public decimal CiexyzX { get; set; }
-        //public decimal CiexyzY { get; set; }
-        //public decimal CiexyzZ { get; set; }
-        //public decimal CielabL { get; set; }
-        //public decimal CielabA { get; set; }
-        //public decimal CielabB { get; set; }
+        //public CMYK Cmyk { get; set; }
 
         public string Δe { get; set; }
         public string Δe94 { get; set; }
@@ -30,6 +25,14 @@ namespace FujifilmUSA.Sync.Entity
         //for spot color measurement pathches properties
         public int SpotId { get; set; }
         public string SpotName { get; set; }
+    }
+
+    public class CMYK
+    {
+        public string C { get; set; }
+        public string M { get; set; }
+        public string Y { get; set; }
+        public string K { get; set; }
     }
 
     public class CieXYZ

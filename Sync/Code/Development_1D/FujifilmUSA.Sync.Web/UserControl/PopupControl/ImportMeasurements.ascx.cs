@@ -132,6 +132,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         public List<int> Measurements { get; set; }
         public int MeasurementID { get; set; }
         public int OptimizeRunID { get; set; }
+        public Entity.Measurement Measurement { get; set; }
         #endregion
     }
 }
