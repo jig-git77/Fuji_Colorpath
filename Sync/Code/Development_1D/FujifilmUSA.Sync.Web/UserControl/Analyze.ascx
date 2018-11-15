@@ -3451,8 +3451,6 @@
                                                                     <asp:Button ID="btnCXFExport" CssClass="button" Width="150px" Text="Export to CXF"
                                                                         runat="server" meta:resourcekey="btnCXFExportResource1"
                                                                         OnClick="btnCXFExport_Click"></asp:Button>
-                                                                    <asp:Button ID="btnMeasurementFileExport" CssClass="button" Width="150px" Text="Export Measurement File"
-                                                                        runat="server"  meta:resourcekey="btnExportMeasurementFileResource1" OnClick="btnMeasurementFileExport_Click"></asp:Button>
 
                                                                     <asp:Button ID="btnExcelExport" CssClass="button" Width="150px"
                                                                         Text="Export to Excel" runat="server" OnClick="btnExcelExport_Click" Visible="False"

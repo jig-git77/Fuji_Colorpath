@@ -2142,31 +2142,16 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 new object[] { MeasurementId });
                     if (dsMeasurements.Tables.Count > 0)
                     {
-                        if (dsMeasurements.Tables[0].Rows.Count > 0)
-                        {
-                            measurement.MeasurementId = Convert.ToInt32(dsMeasurements.Tables[0].Rows[0]["MeasurementID"]);
-                            measurement.MeasurementName = Convert.ToString(dsMeasurements.Tables[0].Rows[0]["MeasurementName"]);
-                            measurement.MeasurementDate = Convert.ToDateTime(dsMeasurements.Tables[0].Rows[0]["MeasurementDate"]);
-                            measurement.ReferenceChartTypeId = Convert.ToInt16(dsMeasurements.Tables[0].Rows[0]["ReferenceChartTypeID"]);
-                        }
-
-                        dtPatchDetails = dsMeasurements.Tables[1];
+                        dtPatchDetails = dsMeasurements.Tables[0];
                         foreach (DataRow dr in dtPatchDetails.Rows)
                         {
 
                             measurement.MeasurementAppPatches.Add(new MeasurementPatchApp()
                             {
-                                //MeasurementPatchId = patch.MeasurementPatchId,
-                                //MeasurementId = patch.MeasurementId,
+                                
                                 SampleID = Convert.ToInt32(dr["SampleID"]),
                                 SampleName = Convert.ToString(dr["SampleName"]),
-                                //Cmyk = new CMYK()
-                                //{
-                                //    C = Convert.ToString(dr["CMYK_C"]),
-                                //    M = Convert.ToString(dr["CMYK_M"]),
-                                //    Y = Convert.ToString(dr["CMYK_Y"]),
-                                //    K = Convert.ToString(dr["CMYK_K"])
-                                //},
+                               
                                 Ciexyz = new CieXYZ()
                                 {
                                     X = Convert.ToString(dr["CIEXYZ_X"]),
@@ -2182,7 +2167,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 Δe = Convert.ToString(dr["ΔE"]),
                                 Δe94 = Convert.ToString(dr["ΔE94"]),
                                 Δe2000 = Convert.ToString(dr["ΔE2000"]),
-                                HtmlColor = Convert.ToString(dr["HTMLColor"]),
+                               
                                 Density = new DensityApp()
                                 {
                                     Red = Convert.ToString(dr["Density_C"]),
