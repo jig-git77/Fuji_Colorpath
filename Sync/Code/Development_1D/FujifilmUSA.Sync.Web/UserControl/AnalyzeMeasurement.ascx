@@ -350,7 +350,7 @@
                 <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnCurrentDeviceName" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnValidationMeasurementStatus" ClientIDMode="Static" />
-
+                <asp:HiddenField runat="server" ID="hdnCurrentUserRole" ClientIDMode="Static" />
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">
@@ -1481,7 +1481,7 @@
                                                             <a id='lnkLinkFilter' title='Clear filter'>
                                                                 <img id='imgClearFilter' src='Images/clear-fillter.png' style='width: 15px;margin-top: 5px;margin-right: 5px;'></img>
                                                             </a>
-                                                            <button id="btnExportMeasurement" class="k-button">Export Measurement File</button>
+                                                            <button id="btnExportMeasurement" class="k-button" style="display:none;">Export Measurement File</button>
                                                             <button id="btnExportCGATS" class="k-button">Export to CGATS</button>
                                                             <button id="btnExportCxF" class="k-button">Export to CxF</button>
                                                             
