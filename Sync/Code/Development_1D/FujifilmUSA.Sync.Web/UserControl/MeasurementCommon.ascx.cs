@@ -48,6 +48,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnBasePluginServiceUrl.Value = Utilities.ReadConfigValue("BasePluginServiceURL");
                 hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation).ToString().ToLower();
                 hdLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
+                btnImportMeasurementFile.Value = GetResourceString("btnImportMeasurementFile");
+                btnImportMeasurementFile.Visible = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) && SessionManager.Instance.CurrentUser.Role.RoleId == (int)ERole.SystemAdmin;
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
                     hdProjectId.Value = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId.ToString();
                 else

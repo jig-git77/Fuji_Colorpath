@@ -107,6 +107,7 @@ var $lnkGrayDeltaLLargeChart;
 var $lnk_A_GrayBalanceLargeChart;
 var $lnk_B_GrayBalanceLargeChart;
 var $lnk_L_GrayBalanceLargeChart;
+var $hdnCurrentUserRole;
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -272,6 +273,7 @@ $(document).ready(function () {
     $lnk_B_GrayBalanceLargeChart = $('#lnk_B_GrayBalanceLargeChart');
     $lnk_L_GrayBalanceLargeChart = $('#lnk_L_GrayBalanceLargeChart');
     PLUGIN_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();
+    $hdnCurrentUserRole = $('#hdnCurrentUserRole');
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
 
@@ -1310,8 +1312,14 @@ function BindMeasurementPatchDetails() {
                             grid.hideColumn(21);
                             grid.hideColumn(22);
                     }
+                }                
+                //show measurement export button visible only for sys admin user
+                if ($hdnCurrentDlpSubOperation == ELicenseType.DLP && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
+                    $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
                 }
             }
+
+            
             //dataBound: function (e) {
             //    debugger;
             //    var measurementId = 0;
