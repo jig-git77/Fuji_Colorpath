@@ -3862,7 +3862,7 @@ function PopulateG7Charts() {
             markers: { background: "Blue", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
             }
         },
         {
@@ -3957,7 +3957,7 @@ function PopulateG7Charts() {
                 //},
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+                    template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔL:  #= dataItem.ΔValue #</td></tr></table>'
                 }
             },
             {
@@ -4048,7 +4048,7 @@ function PopulateG7Charts() {
             //},
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔL:  #= dataItem.ΔValue #</td></tr></table>'
             }
         },
         {
@@ -5290,8 +5290,7 @@ function PopulateTVISpreadChart() {
 }
 
 ////**************** POPULATE THE TVI CHART  ****************////
-function PopulateTVIG7Chart() {
-    debugger;
+function PopulateTVIG7Chart() {    
     var jsonEmpty = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.CmykK == 0; })
 
     var jsonC = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykC != 0; });

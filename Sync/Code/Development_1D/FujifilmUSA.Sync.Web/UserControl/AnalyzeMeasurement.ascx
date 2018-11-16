@@ -28,6 +28,10 @@
         height: auto !important;
     }
 
+    #divMeasurementPatchDetails .k-auto-scrollable tr {
+        height: 31px;
+    }
+
     #divMeasurementPatchDetails .k-grid td {
         line-height: 18px;
     }
