@@ -95,7 +95,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return referenceChartData;
         }
 
-        public int InsertReferenceLabData(List<ReferenceChart> referenceCharts, byte[] sourceProfile, short sourceProfileId, int CompanyId)
+        public int InsertReferenceLabData(List<ReferenceChart> referenceCharts, byte[] sourceProfile, short sourceProfileId, int CompanyId, int ProjectId)
         {
             var returnValue = 0;
             Common.ImplementBusinessLogic(
@@ -145,7 +145,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     {
                                                                                         referenceLabData.ToString(),
                                                                                         sourceProfileId,
-                                                                                        CompanyId
+                                                                                        CompanyId,
+                                                                                         ProjectId
                                                                                     });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertReferenceLabData"));

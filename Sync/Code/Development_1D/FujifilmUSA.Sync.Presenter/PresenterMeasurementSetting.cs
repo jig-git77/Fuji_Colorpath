@@ -103,7 +103,7 @@ namespace FujifilmUSA.Sync.Presenter
                 var profile = sourceProfileBusiness.GetIccProfileBySourceProfile(_viewMeasurementSetting.Project.SourceProfile.SourceProfileId);
 
                 referenceChartBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
-                referenceChartBusiness.InsertReferenceLabData(referenceChartData, profile, _viewMeasurementSetting.Project.SourceProfile.SourceProfileId, Convert.ToInt32(_viewMeasurementSetting.Project.SourceProfile.CompanyId));
+                referenceChartBusiness.InsertReferenceLabData(referenceChartData, profile, _viewMeasurementSetting.Project.SourceProfile.SourceProfileId, Convert.ToInt32(_viewMeasurementSetting.Project.SourceProfile.CompanyId), Convert.ToInt32(_viewMeasurementSetting.Project.ProjectId));
             }
 
             #endregion
