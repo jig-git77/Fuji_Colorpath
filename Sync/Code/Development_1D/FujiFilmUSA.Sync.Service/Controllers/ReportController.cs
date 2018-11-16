@@ -429,7 +429,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     MeasurementId = Convert.ToInt32(chart.MeasurementId);
                     From_ΔE = Convert.ToString(chart.fromDeltaE);
                     IsAverageOfMeasurements = chart.grading.IsAverageOfMeasurements;
-                    ProjectId = Convert.ToInt32(chart.ProjectId);
+                    ProjectId = Convert.ToInt32(chart.ProjectId);                    
                     DSReport = new DataSet();
                     _presenterReportGrading.GetMeasurementDataForScoring();
 
@@ -454,6 +454,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         objReportPDF.DLPName = chart.ReportDLPName;
                         objReportPDF.ReportName = "Scoring Report";
                         objReportPDF.BaseWebURL = Utilities.ReadConfigValue("BaseWebURL");
+                        objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
                         objReportPDF.GenerateClientReportPDF();
                         string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
                         httpResponse.status = ResponseStatus.Success;
