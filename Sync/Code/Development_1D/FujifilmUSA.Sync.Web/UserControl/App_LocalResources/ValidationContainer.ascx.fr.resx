@@ -276,4 +276,13 @@
   <data name="MetricSumRequiredResource" xml:space="preserve">
     <value>Please provide metric sum name.</value>
   </data>
+  <data name="MeasurementFileRequiredResource" xml:space="preserve">
+    <value>Please select measurement file.</value>
+  </data>
+  <data name="MeasurementNameRequiredResource" xml:space="preserve">
+    <value>Please provide measurement name.</value>
+  </data>
+  <data name="ValidMeasurementFileRequiredResource" xml:space="preserve">
+    <value>Please select a valid json file.</value>
+  </data>
 </root>

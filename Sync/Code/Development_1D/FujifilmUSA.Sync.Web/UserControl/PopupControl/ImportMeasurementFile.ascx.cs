@@ -33,43 +33,55 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         #region Control Events
         protected void lbtnImport_Click(object sender, EventArgs e)
         {
-            int parentProjectMeasurementCount = 0;
-            #region Check for current project existing measurement
-            DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
-            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            LicenseTypeID = (int)SessionManager.Instance.CurrentProject.LicenseType;
-            _presenterImportMeasurements.GetMeasurementIDsbyProjectID();
-            #endregion
-            if (!IsErrorOccured)
+            try
             {
-                parentProjectMeasurementCount = Measurements.Count;
-            }
-            if (parentProjectMeasurementCount + Measurements.Count > (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? Business.ApplicationConfiguration.Instance.MeasurementLimitSync1D : Business.ApplicationConfiguration.Instance.MeasurementsLimit))
-            {
-                fujiStatusbar.DisplayMessage("Measurements cannot be imported as total allowed measurement limit exceeded.", false);
-                return;
-            }
 
-            if (fuMeasurement.PostedFile != null)
-            {
-                if (fuMeasurement.PostedFile.ContentLength > 0)
+
+                int parentProjectMeasurementCount = 0;
+                #region Check for current project existing measurement
+                DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
+                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                LicenseTypeID = (int)SessionManager.Instance.CurrentProject.LicenseType;
+                _presenterImportMeasurements.GetMeasurementIDsbyProjectID();
+                #endregion
+                if (!IsErrorOccured)
                 {
-                    string inputContent;
-                    using (StreamReader inputStreamReader = new StreamReader(fuMeasurement.PostedFile.InputStream))
-                    {
-                        inputContent = inputStreamReader.ReadToEnd();
-                    }
+                    parentProjectMeasurementCount = Measurements.Count;
+                }
+                if (parentProjectMeasurementCount + Measurements.Count > (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? Business.ApplicationConfiguration.Instance.MeasurementLimitSync1D : Business.ApplicationConfiguration.Instance.MeasurementsLimit))
+                {
+                    fujiStatusbar.DisplayMessage("Measurements cannot be imported as total allowed measurement limit exceeded.", false);
+                    return;
+                }
 
-                    Measurement = JsonConvert.DeserializeObject<Entity.Measurement>(inputContent);
-                    Measurement.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                    Measurement.PCSDataType = 1;
-                    BindMeasurementPatches(Measurement);
-                    _presenterImportMeasurements.ImportMeasurementFile();
-                    if (!IsErrorOccured)
+                if (fuMeasurement.PostedFile != null)
+                {
+                    if (fuMeasurement.PostedFile.ContentLength > 0)
                     {
-                        Page.ClientScript.RegisterStartupScript(this.GetType(), "radalert", "<script type=text/javascript> CloseImportWindow(); </script>");
+                        string inputContent;
+                        using (StreamReader inputStreamReader = new StreamReader(fuMeasurement.PostedFile.InputStream))
+                        {
+                            inputContent = inputStreamReader.ReadToEnd();
+                        }
+
+                        Measurement = JsonConvert.DeserializeObject<Entity.Measurement>(inputContent);
+                        Measurement.MeasurementName = txtMeasurementName.Text;
+                        Measurement.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                        Measurement.MeasurementDate = DateTime.Now;
+                        Measurement.PCSDataType = 1;
+                        Measurement.ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
+                        BindMeasurementPatches(Measurement);
+                        _presenterImportMeasurements.ImportMeasurementFile();
+                        if (!IsErrorOccured)
+                        {
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "radalert", "<script type=text/javascript> CloseImportWindow(); </script>");
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = GetResourceString("ImportUnsuccessfulMessage");
             }
         }
 
@@ -101,7 +113,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                         Blue = string.IsNullOrEmpty(patch.Density.Blue) ? 0 : Convert.ToDouble(patch.Density.Blue),
                         Visual = string.IsNullOrEmpty(patch.Density.Visual) ? 0 : Convert.ToDouble(patch.Density.Visual)
                     },
-                    Spectral = patch.Spectral==null? null: new Spectral()
+                    Spectral = patch.Spectral == null ? null : new Spectral()
                     {
                         nm380 = string.IsNullOrEmpty(patch.Spectral.nm380) ? 0 : Convert.ToDouble(patch.Spectral.nm380),
                         nm390 = string.IsNullOrEmpty(patch.Spectral.nm390) ? 0 : Convert.ToDouble(patch.Spectral.nm390),

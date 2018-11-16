@@ -6487,6 +6487,18 @@
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\ActivityValidationRules.ascx.fr.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ImportMeasurementFile.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ImportMeasurementFile.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ImportMeasurementFile.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ImportMeasurementFile.ascx.de.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
