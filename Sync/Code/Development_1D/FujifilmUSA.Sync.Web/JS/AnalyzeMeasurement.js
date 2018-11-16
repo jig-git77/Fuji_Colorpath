@@ -3943,7 +3943,7 @@ function PopulateG7Charts() {
                 markers: { background: "Blue", size: 4 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
+                    template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔL*:  #= dataItem.wΔValue #</td></tr></table>'
                 }
             },
             {
@@ -3957,7 +3957,7 @@ function PopulateG7Charts() {
                 //},
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔL:  #= dataItem.ΔValue #</td></tr></table>'
+                    template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔL*:  #= dataItem.ΔValue #</td></tr></table>'
                 }
             },
             {
@@ -4034,7 +4034,7 @@ function PopulateG7Charts() {
             markers: { background: "Blue", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔL*:  #= dataItem.wΔValue #</td></tr></table>'
             }
         },
         {
@@ -4048,7 +4048,7 @@ function PopulateG7Charts() {
             //},
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔL:  #= dataItem.ΔValue #</td></tr></table>'
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔL*:  #= dataItem.ΔValue #</td></tr></table>'
             }
         },
         {
