@@ -156,4 +156,7 @@
   <data name="LocalizeResource1.Text" xml:space="preserve">
     <value>Spot Target Management</value>
   </data>
+  <data name="MessageSpotTargetAssignedToSpotProject" xml:space="preserve">
+    <value>This spot target has BCO projects open, so please delete those first before deleting this.</value>
+  </data>
 </root>

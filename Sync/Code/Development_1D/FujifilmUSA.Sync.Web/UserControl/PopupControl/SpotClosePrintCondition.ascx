@@ -23,17 +23,6 @@
         return oWindow;
     }
 
-    function DownloadChart(spotID) {
-
-        var SERVICE_BASE_URL = $('#hdfServicePath').val();
-        window.location.href = SERVICE_BASE_URL + '/api/Report/DownloadSpotChart?SpotProjectID=' + spotID;
-        
-        //----To give option to open up pop up window separately for donwloading chart
-        //var win = window.open(SERVICE_BASE_URL + '/api/Report/DownloadSpotChart?SpotProjectID=' + spotID, "Title", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=780,height=200,top=" + (screen.height - 400) + ",left=" + (screen.width - 840));
-        //win.document.body.innerHTML = "Chart is downloading,Please do not close untill file download.";
-
-        return false;
-    }
 
 </script>
 <div style="display: block; margin: 10px;" class="contantbox tabcontant">
@@ -69,7 +58,7 @@
                         <tr>
                             <td align="left">
                                 <div class="buttonleft" style="padding-left: 3px">
-                                    <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt">
+                                    <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadChart_Click">
                                         <span>
                                             <asp:Localize runat="server" Text="Download Chart"
                                                 ID="locDownloadChart" meta:resourcekey="locDownloadChartResource1"></asp:Localize>

@@ -107,6 +107,7 @@ var $lnkGrayDeltaLLargeChart;
 var $lnk_A_GrayBalanceLargeChart;
 var $lnk_B_GrayBalanceLargeChart;
 var $lnk_L_GrayBalanceLargeChart;
+var $hdnCurrentUserRole;
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -272,6 +273,7 @@ $(document).ready(function () {
     $lnk_B_GrayBalanceLargeChart = $('#lnk_B_GrayBalanceLargeChart');
     $lnk_L_GrayBalanceLargeChart = $('#lnk_L_GrayBalanceLargeChart');
     PLUGIN_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();
+    $hdnCurrentUserRole = $('#hdnCurrentUserRole');
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
 
@@ -978,7 +980,12 @@ function BindMeasurementPatchDetails() {
                                     $divMeasurementPatchDetails.find("th[data-field=Density_V] b").html(Resources.gridAnalyzeHeaderDensity_VResource);
                                     $divMeasurementPatchDetails.find("th[data-field=Density_C] b").html(Resources.gridAnalyzeHeaderDensity_CResource);
                                     $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);                                    
+                                    if (response.data.measurementPatchDetails[0].IsWeighted) {
+                                        $divMeasurementPatchDetails.find("th[data-field=ΔL] b").html('wΔL');
+                                        $divMeasurementPatchDetails.find("th[data-field=ΔCh] b").html('wΔCh');
+                                    }
+                                    
                                 }
 
                             },
@@ -1269,7 +1276,6 @@ function BindMeasurementPatchDetails() {
                 },
             ],
             dataBound: function (e) {
-
                 var selectedMatricSum = parseInt($divMeasurementPatchDetails.find("#ddlMatricSum").val())
                 var grid = $divMeasurementPatchDetails.data("kendoGrid");
                 if (!isNaN(selectedMatricSum)) {
@@ -1310,8 +1316,18 @@ function BindMeasurementPatchDetails() {
                             grid.hideColumn(21);
                             grid.hideColumn(22);
                     }
+                } else {
+                    grid.hideColumn(20);
+                    grid.hideColumn(21);
+                    grid.hideColumn(22);
+                }
+                //show measurement export button visible only for sys admin user
+                if ($hdnCurrentDlpSubOperation == ELicenseType.DLP && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
+                    $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
                 }
             }
+
+            
             //dataBound: function (e) {
             //    debugger;
             //    var measurementId = 0;
@@ -1390,11 +1406,27 @@ function BindMeasurementPatchDetails() {
         $divMeasurementPatchDetails.find("#divMetricSum").css('display', 'none');
     }
 
+    $divMeasurementPatchDetails.find('#btnExportMeasurement').on('click', function (e) {
+        e.preventDefault();
 
 
-
-    //$divMeasurementPatchDetails.data('kendoGrid').refresh();
-    //$divMeasurementPatchDetails.find('.k-grid-content-locked').css('height', 'unset');
+        var measurementID = parseInt($hdnCurrentMeasurement.val());
+        $.ajax({
+            type: "POST",
+            url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport?MeasurementId=' + measurementID,
+            //data: { MeasurementId: measurementID },
+            dataType: "json",
+            success: function (response) {
+                if (response.data != null) {
+                    var fileName = '~' + response.data;
+                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(XMLHttpRequest.responseText);
+            }
+        });
+    });
 
     $divMeasurementPatchDetails.find('#btnExportCGATS').on('click', function (e) {
         e.preventDefault();
@@ -1458,24 +1490,6 @@ function BindMeasurementPatchDetails() {
                 console.log(XMLHttpRequest.responseText);
             }
         });
-
-
-
-        //$.ajax({
-        //    type: "GET",
-        //    url: SERVICE_BASE_URL + 'api/Chart/GetCGATSPatchReport',
-        //    data: apiReportParameters,
-        //    dataType: "json",
-        //    success: function (response) {
-        //        if (response.data != null) {
-        //            var fileName = '~' + response.data;
-        //            window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
-        //        }
-        //    },
-        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //        console.log(XMLHttpRequest.responseText);
-        //    }
-        //});
     });
 
     $divMeasurementPatchDetails.find('#btnExportCxF').on('click', function (e) {
@@ -3857,7 +3871,7 @@ function PopulateG7Charts() {
             markers: { background: "Blue", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
             }
         },
         {
@@ -3938,7 +3952,7 @@ function PopulateG7Charts() {
                 markers: { background: "Blue", size: 4 },
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
+                    template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔL*:  #= dataItem.wΔValue #</td></tr></table>'
                 }
             },
             {
@@ -3952,7 +3966,7 @@ function PopulateG7Charts() {
                 //},
                 tooltip: {
                     visible: true,
-                    template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+                    template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔL*:  #= dataItem.ΔValue #</td></tr></table>'
                 }
             },
             {
@@ -4029,7 +4043,7 @@ function PopulateG7Charts() {
             markers: { background: "Blue", size: 4 },
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔCh*:  #= dataItem.wΔValue #</td></tr></table>'
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> wΔL*:  #= dataItem.wΔValue #</td></tr></table>'
             }
         },
         {
@@ -4043,7 +4057,7 @@ function PopulateG7Charts() {
             //},
             tooltip: {
                 visible: true,
-                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔCh*:  #= dataItem.ΔValue #</td></tr></table>'
+                template: '<table><tr><td><center><b>#= dataItem.Cmyk_Value.toFixed() #' + _Resources._recpercentPatchMetrics + '</b></center><td></tr><tr><td> ΔL*:  #= dataItem.ΔValue #</td></tr></table>'
             }
         },
         {
@@ -4709,7 +4723,7 @@ function PopulateTVIG7CMYKChart() {
     var arrValues = $.map(jsonDTSpreadChartData_CMYKList, function (elem) { return elem.DotGain; });
     var maxElement = Math.abs(Math.max.apply(Math, arrValues));
     var maxValues = 0;
-    
+
 
     if (maxElement >= 0 && maxElement < 10) {
         maxValues = 10
@@ -5285,8 +5299,7 @@ function PopulateTVISpreadChart() {
 }
 
 ////**************** POPULATE THE TVI CHART  ****************////
-function PopulateTVIG7Chart() {
-    debugger;
+function PopulateTVIG7Chart() {    
     var jsonEmpty = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.CmykK == 0; })
 
     var jsonC = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykC != 0; });
@@ -5321,7 +5334,7 @@ function PopulateTVIG7Chart() {
         minValues = -70;
     } else if (minElement >= -80 && minElement < -70) {
         minValues = -80;
-    } 
+    }
 
     if (maxElement >= 0 && maxElement < 10) {
         maxValues = 10

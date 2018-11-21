@@ -12,6 +12,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         int CreateSpotTarget(SpotTarget spotTarget);
         SpotTarget GetSpotTarget(int SpotTargetID);
         int UpdateSpotTarget(SpotTarget spotTarget);
-        bool DeleteSpotTarget(int spotTargetId);
+        int DeleteSpotTarget(int spotTargetId);
     }
 }

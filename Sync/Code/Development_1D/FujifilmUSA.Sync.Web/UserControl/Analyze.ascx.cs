@@ -3450,8 +3450,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-
-
         protected void lbtnMeasurement_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;

@@ -41,5 +41,12 @@ namespace FujifilmUSA.Sync.Presenter
             projectOptimization.ErrorOccured += _viewImportMeasurements.ErrorOccured;
             projectOptimization.CreateSpotNamedColorProfile(_viewImportMeasurements.ProjectId, _viewImportMeasurements.OptimizeRunID, (int)EOptimizeRunStatus.Closed,DateTime.Now);
         }
+
+        public void ImportMeasurementFile()
+        {
+            var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+            measurementBusiness.SaveMeasurement(_viewImportMeasurements.Measurement);
+        }
     }
 }

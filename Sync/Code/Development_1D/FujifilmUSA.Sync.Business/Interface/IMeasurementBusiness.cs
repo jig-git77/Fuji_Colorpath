@@ -64,6 +64,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         bool SaveSpotProjectLABValues(List<SpotProjectLAB> spotProjectLabs);
         DataTable GetMeasurementValidation(int ProjectID, int OptimizeRunId, string ProjectType);
         DataSet GetReportDataOnSpotProject(int OptimizationRunId);
-
+        Measurement GetMeasurementPatchDetailsForExport(int MeasurementId);
     }
 }

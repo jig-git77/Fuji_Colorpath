@@ -110,8 +110,11 @@
     <div class="clear">
     </div>
     <div style="margin-left: 10px;">
+        
         <asp:UpdatePanel ID="testPanel" runat="server">
             <ContentTemplate>
+                <asp:Label runat="server" ID="lblMessage" style="color:red;"></asp:Label>
+                <br />
                 <telerik:RadGrid ID="rgSpotTarget" AllowFilteringByColumn="True"
                     AllowSorting="True" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
                     EnableLinqExpressions="False" OnNeedDataSource="rgSpotTarget_NeedDataSource" OnItemCommand="rgSpotTarget_ItemCommand"

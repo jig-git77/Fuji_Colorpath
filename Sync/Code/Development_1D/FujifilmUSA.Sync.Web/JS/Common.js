@@ -32,6 +32,19 @@ var EValidationStatus = {
     LastFailed: 5
 }
 
+//Object for E User Role
+var ERole = {
+    SystemAdmin: 1,
+    LicenseAdmin: 2,
+    WebsiteAdmin: 3,
+    RegionAdmin: 4,
+    CompanyAdmin: 5,
+    BranchAdmin: 6,
+    SiteUser: 7,
+    PrintBuyer: 8,
+    CSRUser: 9
+}
+
 
 var CPPatchType = {
     Cyan: 1,
