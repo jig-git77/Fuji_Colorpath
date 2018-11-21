@@ -980,7 +980,12 @@ function BindMeasurementPatchDetails() {
                                     $divMeasurementPatchDetails.find("th[data-field=Density_V] b").html(Resources.gridAnalyzeHeaderDensity_VResource);
                                     $divMeasurementPatchDetails.find("th[data-field=Density_C] b").html(Resources.gridAnalyzeHeaderDensity_CResource);
                                     $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
+                                    $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);                                    
+                                    if (response.data.measurementPatchDetails[0].IsWeighted) {
+                                        $divMeasurementPatchDetails.find("th[data-field=ΔL] b").html('wΔL');
+                                        $divMeasurementPatchDetails.find("th[data-field=ΔCh] b").html('wΔCh');
+                                    }
+                                    
                                 }
 
                             },
@@ -1271,7 +1276,6 @@ function BindMeasurementPatchDetails() {
                 },
             ],
             dataBound: function (e) {
-
                 var selectedMatricSum = parseInt($divMeasurementPatchDetails.find("#ddlMatricSum").val())
                 var grid = $divMeasurementPatchDetails.data("kendoGrid");
                 if (!isNaN(selectedMatricSum)) {
@@ -1312,7 +1316,11 @@ function BindMeasurementPatchDetails() {
                             grid.hideColumn(21);
                             grid.hideColumn(22);
                     }
-                }                
+                } else {
+                    grid.hideColumn(20);
+                    grid.hideColumn(21);
+                    grid.hideColumn(22);
+                }
                 //show measurement export button visible only for sys admin user
                 if ($hdnCurrentDlpSubOperation == ELicenseType.DLP && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
