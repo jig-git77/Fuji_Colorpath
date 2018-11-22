@@ -532,14 +532,17 @@
                         //----------------Display Import Button--------------//  
                         if (jQuery("input[id*='hdDisplayImport']").val() == "yes") {
                             if (json.length < <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit)%>) {
-                                $("#Div_ImportMeasurements").css('visibility', 'visible');
+                                //$("#Div_ImportMeasurements").css('visibility', 'visible');
+                                $("#Div_ImportMeasurements").css('display', 'block');
                             }
                             else {
-                                $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                                //$("#Div_ImportMeasurements").css('visibility', 'hidden');
+                                $("#Div_ImportMeasurements").css('display', 'none');
                             }
                         }
                         else {
-                            $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            //$("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            $("#Div_ImportMeasurements").css('display', 'none');
                         }
                     }
                     else {
@@ -551,10 +554,12 @@
                         $("#measurementContainer").append("<div class='no_data_found'>" + '<%= GetResourceString("noRecordsAvailable") %>' + "</div>");
                         //----------------Display Import Button--------------//
                         if (jQuery("input[id*='hdDisplayImport']").val() == "yes") {
-                            $("#Div_ImportMeasurements").css('visibility', 'visible');
+                            //$("#Div_ImportMeasurements").css('visibility', 'visible');
+                            $("#Div_ImportMeasurements").css('display', 'block');
                         }
                         else {
-                            $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            //$("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            $("#Div_ImportMeasurements").css('display', 'none');
                         }
                     }
                 },

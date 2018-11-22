@@ -48,5 +48,12 @@ namespace FujifilmUSA.Sync.Presenter
             measurementBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
             measurementBusiness.SaveMeasurement(_viewImportMeasurements.Measurement);
         }
+
+        public void ImportSpotMeasurementFile()
+        {
+            var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+            measurementBusiness.SaveSpotMeasurement(_viewImportMeasurements.Measurement);
+        }
     }
 }

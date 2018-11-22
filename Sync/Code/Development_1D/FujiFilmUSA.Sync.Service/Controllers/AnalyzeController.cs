@@ -806,6 +806,57 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+        [HttpPost]
+        public IHttpActionResult GetSpotMeasurementFileExport(int? OptimizeRunId)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<string> httpResponse = new BaseResponse<string>();
+            string validationMessage = "";
+            string ExportFileName = "";
+            try
+            {
+                if (OptimizeRunId == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
+
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+
+                    this.OptimizeRunId = Convert.ToInt32(OptimizeRunId);
+                    _presenterAnalyze.GetSpotPatchDetailsOfMeasurementExport();
+
+                    //Now we are using DataTable as DataSource                    
+                    string jsonString = JsonConvert.SerializeObject(Measurement, Formatting.Indented);
+                    #region Generate json file
+                    System.IO.StreamWriter sw;
+                    ExportFileName = "/UploadFiles/" + OptimizeRunId.ToString() + "_SpotMeasurementFile.json";
+                    string ExportFilePath = HostingEnvironment.MapPath("~/UploadFiles/") + OptimizeRunId.ToString() + "_SpotMeasurementFile.json";
+                    sw = System.IO.File.CreateText(ExportFilePath);
+                    sw.WriteLine(jsonString);
+                    sw.Flush();
+                    sw.Close();
+                    #endregion
+
+                    httpResponse.Data = ExportFileName;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
 
         #region Methods for Patch Details tab
         private DataTable FilteredPatchDetailsTable(string MetricSumID, DataTable dtPatchDetails)

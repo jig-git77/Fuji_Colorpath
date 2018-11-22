@@ -65,6 +65,8 @@
     var SERVICE_BASE_URL = '';
     var Resources = {};
     var currentSpotName = '';
+    var $hdnCurrentUserRole;
+    var $hdnCurrentProjectLicenseType;
     //variables for chart 
     var drawing = kendo.drawing;
     var geometry = kendo.geometry;
@@ -103,8 +105,10 @@
         var CurrentCulture = $("#hdfCurrentCulture").val();
         SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
         var optimizationId = $('#hdfOptimizationRunID').val();
+        $hdnCurrentProjectLicenseType = $('#hdnCurrentProjectLicenseType').val();
+        $hdnCurrentUserRole = parseInt($('#hdnCurrentUserRole').val());
         var $divPathDetails = $("#divPathDetails");
-        
+
         $divPathDetails.kendoGrid({
             dataSource: {
                 //transport: {
@@ -329,7 +333,7 @@
             },
             //toolbar: [{ 'name': 'downloadPatch', template: '<div style="float:right;"><button id="btnDownloadSpotPatch" onclick="generateReport(' + optimizationId + ')" class=\'k-button\'>Export to PDF</button></div>' }],
             toolbar: [{
-                'name': 'downloadPatch', template: '<div><button id="btnSaveSpotPatch" data-id="' + optimizationId + '" class=\'k-button has-spinner\'><span class="spinner"><img src="Images/buttonloader.gif" /></span>Save</button> <div style="float:right;"><a id="lnkLinkFilter" title="Clear filter"><img id="imgClearFilter" src="Images/clear-fillter.png" style="width: 15px;margin-top: 5px;margin-right: 5px;"></img></a><button id="btnDownloadSpotPatchExcel" data-id="' + optimizationId + '" class=\'k-button has-spinner\' style="margin-right: 5px;"><span class="spinner"><img src="Images/buttonloader.gif" /></span>Export to Excel</button><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button has-spinner\'><span class="spinner"><img src="Images/buttonloader.gif" /></span>Export to PDF</button></div></div>'
+                'name': 'downloadPatch', template: '<div><button id="btnSaveSpotPatch" data-id="' + optimizationId + '" class=\'k-button has-spinner\'><span class="spinner"><img src="Images/buttonloader.gif" /></span>Save</button> <div style="float:right;"><a id="lnkLinkFilter" title="Clear filter"><img id="imgClearFilter" src="Images/clear-fillter.png" style="width: 15px;margin-top: 5px;margin-right: 5px;"></img></a><button id="btnExportJsonMeasurement" style="display:none;" data-id="' + optimizationId + '" class=\'k-button has-spinner\' style="margin-right: 5px;"><span class="spinner"><img src="Images/buttonloader.gif" /></span>Export Measurement File</button><button id="btnDownloadSpotPatchExcel" data-id="' + optimizationId + '" class=\'k-button has-spinner\' style="margin-right: 5px;"><span class="spinner"><img src="Images/buttonloader.gif" /></span>Export to Excel</button><button id="btnDownloadSpotPatch" data-id="' + optimizationId + '" class=\'k-button has-spinner\'><span class="spinner"><img src="Images/buttonloader.gif" /></span>Export to PDF</button></div></div>'
             }],
             change: function (e) {
                 var item = e.sender.dataItem(e.sender.select());
@@ -431,6 +435,11 @@
                     //set resource message
                     row.find('#lnkView').attr('title', Resources.gridAnalyzeToolTipViewResource);
                 });
+
+                //show measurement export button visible only for sys admin user
+                if (measurementId > 0 && $hdnCurrentProjectLicenseType == ELicenseType.SpotLibrary && $hdnCurrentUserRole == ERole.SystemAdmin) {
+                    $divPathDetails.find('.k-grid-toolbar #btnExportJsonMeasurement').show();
+                }
             },
 
         });
@@ -550,7 +559,7 @@
                     console.log(XMLHttpRequest.responseText);
                 }
             });
-        })
+        });
 
         $('#btnSaveSpotPatch').on('click', function (e) {
             e.preventDefault();
@@ -605,13 +614,13 @@
             });
 
 
-        })
+        });
 
         $('#lnkGenerateSpotReport').on('click', function (e) {
             e.preventDefault();
             debugger;
             kendo.ui.progress($('#divReport'), true);
-            
+
             var chartList = [];
             var grid = $("#divPathDetails").data('kendoGrid')
             var selectedPatch = $.grep(grid.dataSource.data(), function (elem) {
@@ -632,13 +641,13 @@
                     Measured_L: item.Measured_L,
                     Measured_a: item.Measured_a,
                     Measured_b: item.Measured_b,
-                    
+
                     deltaE: item.ΔE,
                     deltaE_M_P: item.ΔE_M_P,
                     deltaE_M_T: item.ΔE_M_T,
                     deltaE_T_P: item.ΔE_T_P,
-                    
-                    HTMLColor: item.HTMLColor,                    
+
+                    HTMLColor: item.HTMLColor,
                 };
 
                 var P_T_L = item.TargetL - item.CIELAB_L;
@@ -682,7 +691,34 @@
                     console.log(XMLHttpRequest.responseText);
                 }
             });
-        });        
+        });
+
+        $('#btnExportJsonMeasurement').on('click', function (e) {
+            e.preventDefault();
+
+            var optimizationRun = $(this).attr('data-id');
+            $('#btnExportJsonMeasurement').addClass('active');
+            $.ajax({
+                type: "POST",
+                url: SERVICE_BASE_URL + 'api/Analyze/GetSpotMeasurementFileExport?OptimizeRunId=' + optimizationRun,
+                //data: {
+                //    MeasurementId: measurementID,
+                //    IsSpotProject: true
+                //},
+                dataType: "json",
+                success: function (response) {
+                    $('#btnExportJsonMeasurement').removeClass('active');
+                    if (response.data != null) {
+                        var fileName = '~' + response.data;
+                        window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $('#btnExportJsonMeasurement').removeClass('active');
+                    console.log(XMLHttpRequest.responseText);
+                }
+            });
+        });
     });
 
     function generateABTargetChart(predicredA, measuredA, predicredB, measuredB, hasMeasurement) {
@@ -786,7 +822,7 @@
                     },
                     rotation: 270,
                     font: "10px Arial,Helvetica,sans-serif"
-                },                
+                },
             },
             chartArea: {
                 width: 175,
@@ -794,10 +830,10 @@
                 background: ''
             },
             plotArea: {
-                background: "white",                
+                background: "white",
                 margin: {
-                    top: 8,                    
-                    right: 8,                    
+                    top: 8,
+                    right: 8,
                 }
             },
         });
@@ -1041,6 +1077,8 @@
         <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
         <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
         <asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hdnCurrentProjectLicenseType" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hdnCurrentUserRole" ClientIDMode="Static" />
         <h1 id="header" runat="server">
             <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
         <div class="Information_divAnalyze">
@@ -1059,10 +1097,10 @@
         <div id="divToRender" runat="server">
             <%--<div style="display: block; width: 100%">--%>
             <div id="divCharts" style="display: none; width: 100%"></div>
-            <div style="display: none; width: 100%" class="chartBackground">                                    
+            <div style="display: none; width: 100%" class="chartBackground">
                 <div id="divABCharts"></div>
             </div>
-            
+
             <%--</div>--%>
             <table cellpadding="0" cellspacing="10" border="0" width="97%">
                 <tr>
@@ -1298,9 +1336,9 @@
                                             </div>
                                             <div>
                                                 <asp:Localize runat="server"
-                                                                Text="*Select colors in the Patch Details tab and click 'save' to add colors to the Saved Color Report." ID="locSpotReportMessage"
-                                                                meta:resourcekey="locSpotReportMessageResource1"></asp:Localize>
-                                                </div>
+                                                    Text="*Select colors in the Patch Details tab and click 'save' to add colors to the Saved Color Report." ID="locSpotReportMessage"
+                                                    meta:resourcekey="locSpotReportMessageResource1"></asp:Localize>
+                                            </div>
                                             <div class="clear"></div>
                                         </div>
                                     </div>

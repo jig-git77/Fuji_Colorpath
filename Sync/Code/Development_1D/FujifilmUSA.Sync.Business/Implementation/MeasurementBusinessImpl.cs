@@ -2148,10 +2148,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                             measurement.MeasurementAppPatches.Add(new MeasurementPatchApp()
                             {
-                                
+
                                 SampleID = Convert.ToInt32(dr["SampleID"]),
                                 SampleName = Convert.ToString(dr["SampleName"]),
-                               
+
                                 Ciexyz = new CieXYZ()
                                 {
                                     X = Convert.ToString(dr["CIEXYZ_X"]),
@@ -2167,7 +2167,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 Δe = Convert.ToString(dr["ΔE"]),
                                 Δe94 = Convert.ToString(dr["ΔE94"]),
                                 Δe2000 = Convert.ToString(dr["ΔE2000"]),
-                               
+
                                 Density = new DensityApp()
                                 {
                                     Red = Convert.ToString(dr["Density_C"]),
@@ -2226,6 +2226,45 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurement;
         }
 
+        public Measurement GetSpotMeasurementPatchDetailsForExport(int OptimizeRunId)
+        {
+            string storedProc = "CPSpot.GetMeasurementDetails_FileExport";
+            Measurement measurement = new Measurement();
+            measurement.MeasurementAppPatches = new List<MeasurementPatchApp>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    DataTable dtPatchDetails = new DataTable();
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { OptimizeRunId });
+                    if (dsMeasurements.Tables.Count > 0)
+                    {
+                        dtPatchDetails = dsMeasurements.Tables[0];
+
+                        foreach (DataRow dr in dtPatchDetails.Rows)
+                        {
+                            measurement.MeasurementAppPatches.Add(new MeasurementPatchApp()
+                            {
+
+                                SampleID = Convert.ToInt32(dr["SpotID"]),
+                                SampleName = Convert.ToString(dr["SpotName"]),
+                                Cielab = new CieLAB()
+                                {
+                                    L = Convert.ToString(dr["Measured_L"]),
+                                    A = Convert.ToString(dr["Measured_a"]),
+                                    B = Convert.ToString(dr["Measured_b"]),
+                                }
+                            });
+                        }
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementPatchDetailsForExport"));
+            return measurement;
+        }
 
         #endregion
 

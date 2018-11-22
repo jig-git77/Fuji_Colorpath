@@ -71,7 +71,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                         Measurement.PCSDataType = 1;
                         Measurement.ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
                         BindMeasurementPatches(Measurement);
-                        _presenterImportMeasurements.ImportMeasurementFile();
+
+                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+                            _presenterImportMeasurements.ImportSpotMeasurementFile();
+                        else
+                            _presenterImportMeasurements.ImportMeasurementFile();
+
+
                         if (!IsErrorOccured)
                         {
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "radalert", "<script type=text/javascript> CloseImportWindow(); </script>");
@@ -96,17 +102,17 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                     MeasurementPatchId = patch.MeasurementPatchId,
                     MeasurementId = patch.MeasurementId,
                     SampleName = patch.SampleName,
-                    CiexyzX = string.IsNullOrEmpty(patch.Ciexyz.X) ? 0 : Convert.ToDecimal(patch.Ciexyz.X),
-                    CiexyzY = string.IsNullOrEmpty(patch.Ciexyz.Y) ? 0 : Convert.ToDecimal(patch.Ciexyz.Y),
-                    CiexyzZ = string.IsNullOrEmpty(patch.Ciexyz.Z) ? 0 : Convert.ToDecimal(patch.Ciexyz.Z),
-                    CielabL = string.IsNullOrEmpty(patch.Cielab.L) ? 0 : Convert.ToDecimal(patch.Cielab.L),
-                    CielabA = string.IsNullOrEmpty(patch.Cielab.A) ? 0 : Convert.ToDecimal(patch.Cielab.A),
-                    CielabB = string.IsNullOrEmpty(patch.Cielab.B) ? 0 : Convert.ToDecimal(patch.Cielab.B),
+                    CiexyzX = patch.Ciexyz == null ? 0 : string.IsNullOrEmpty(patch.Ciexyz.X) ? 0 : Convert.ToDecimal(patch.Ciexyz.X),
+                    CiexyzY = patch.Ciexyz == null ? 0 : string.IsNullOrEmpty(patch.Ciexyz.Y) ? 0 : Convert.ToDecimal(patch.Ciexyz.Y),
+                    CiexyzZ = patch.Ciexyz == null ? 0 : string.IsNullOrEmpty(patch.Ciexyz.Z) ? 0 : Convert.ToDecimal(patch.Ciexyz.Z),
+                    CielabL = patch.Cielab == null ? 0 : string.IsNullOrEmpty(patch.Cielab.L) ? 0 : Convert.ToDecimal(patch.Cielab.L),
+                    CielabA = patch.Cielab == null ? 0 : string.IsNullOrEmpty(patch.Cielab.A) ? 0 : Convert.ToDecimal(patch.Cielab.A),
+                    CielabB = patch.Cielab == null ? 0 : string.IsNullOrEmpty(patch.Cielab.B) ? 0 : Convert.ToDecimal(patch.Cielab.B),
                     Δe = string.IsNullOrEmpty(patch.Δe) ? 0 : Convert.ToDecimal(patch.Δe),
                     Δe94 = string.IsNullOrEmpty(patch.Δe94) ? 0 : Convert.ToDecimal(patch.Δe94),
                     Δe2000 = string.IsNullOrEmpty(patch.Δe2000) ? 0 : Convert.ToDecimal(patch.Δe2000),
                     HtmlColor = patch.HtmlColor,
-                    Density = new Density()
+                    Density = patch.Density == null ? null : new Density()
                     {
                         Red = string.IsNullOrEmpty(patch.Density.Red) ? 0 : Convert.ToDouble(patch.Density.Red),
                         Green = string.IsNullOrEmpty(patch.Density.Green) ? 0 : Convert.ToDouble(patch.Density.Green),

@@ -85,6 +85,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.HiddenField hdfCurrentCulture;
         
         /// <summary>
+        /// hdnCurrentProjectLicenseType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnCurrentProjectLicenseType;
+        
+        /// <summary>
+        /// hdnCurrentUserRole control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnCurrentUserRole;
+        
+        /// <summary>
         /// header control.
         /// </summary>
         /// <remarks>

@@ -65,5 +65,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         DataTable GetMeasurementValidation(int ProjectID, int OptimizeRunId, string ProjectType);
         DataSet GetReportDataOnSpotProject(int OptimizationRunId);
         Measurement GetMeasurementPatchDetailsForExport(int MeasurementId);
+        Measurement GetSpotMeasurementPatchDetailsForExport(int OptimizeRunId);
     }
 }
