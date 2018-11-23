@@ -52,7 +52,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 {
                     fujiStatusbar.DisplayMessage("Measurements cannot be imported as total allowed measurement limit exceeded.", false);
                     return;
-                }
+                }                
 
                 if (fuMeasurement.PostedFile != null)
                 {
@@ -70,20 +70,47 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                         Measurement.MeasurementDate = DateTime.Now;
                         Measurement.PCSDataType = 1;
                         Measurement.ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
-                        BindMeasurementPatches(Measurement);
 
-                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
-                            _presenterImportMeasurements.ImportSpotMeasurementFile();
-                        else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                            _presenterImportMeasurements.Import1DMeasurementFile();
-                        else
-                            _presenterImportMeasurements.ImportMeasurementFile();
-
-
-                        if (!IsErrorOccured)
+                        if (Measurement.MeasurementAppPatches.Count > 0)
                         {
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "radalert", "<script type=text/javascript> CloseImportWindow(); </script>");
-                        }
+                            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)                            
+                            {
+                                if (Measurement.ReferenceChartTypeId != Measurement.MeasurementAppPatches[0].ReferenceChartTypeID)
+                                {
+                                    fujiStatusbar.DisplayMessage("Reference chart type is different. Please select same reference chart type.", false);
+                                    return;
+                                }
+                            }
+                                
+
+                            if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID != Measurement.MeasurementAppPatches[0].PrintStandardTypeID)
+                            {
+                                fujiStatusbar.DisplayMessage("Print standard type is different. Please select same reference chart type.", false);
+                                return;
+                            }
+
+                            if (SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId != Measurement.MeasurementAppPatches[0].InstrumentTypeID)
+                            {
+                                fujiStatusbar.DisplayMessage("Instrument type is different. Please select same reference chart type.", false);
+                                return;
+                            }
+
+
+                            BindMeasurementPatches(Measurement);
+
+                            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+                                _presenterImportMeasurements.ImportSpotMeasurementFile();
+                            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                                _presenterImportMeasurements.Import1DMeasurementFile();
+                            else
+                                _presenterImportMeasurements.ImportMeasurementFile();
+
+
+                            if (!IsErrorOccured)
+                            {
+                                Page.ClientScript.RegisterStartupScript(this.GetType(), "radalert", "<script type=text/javascript> CloseImportWindow(); </script>");
+                            }
+                        }                        
                     }
                 }
             }

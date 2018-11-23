@@ -2152,6 +2152,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 SampleID = Convert.ToInt32(dr["SampleID"]),
                                 SampleName = Convert.ToString(dr["SampleName"]),
 
+                                PrintStandardTypeID = Convert.ToInt32(dr["PrintStandardTypeID"]),
+                                InstrumentTypeID = Convert.ToInt32(dr["InstrumentTypeID"]),
+                                ReferenceChartTypeID = Convert.ToInt32(dr["ReferenceChartTypeID"]),
+
+
                                 Ciexyz = new CieXYZ()
                                 {
                                     X = Convert.ToString(dr["CIEXYZ_X"]),
@@ -2251,6 +2256,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                                 //SampleID = Convert.ToInt32(dr["SampleID"]),
                                 SampleName = Convert.ToString(dr["SampleName"]),
+
+                                PrintStandardTypeID = Convert.ToInt32(dr["PrintStandardTypeID"]),
+                                InstrumentTypeID = Convert.ToInt32(dr["InstrumentTypeID"]),
+                                ReferenceChartTypeID = Convert.ToInt32(dr["ReferenceChartTypeID"]),
 
                                 Ciexyz = new CieXYZ()
                                 {
