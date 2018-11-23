@@ -2226,6 +2226,103 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurement;
         }
 
+        public Measurement Get1DMeasurementPatchDetailsForExport(int MeasurementId)
+        {
+            string storedProc = "CPSync.GetMeasurementDetails_FileExport";
+            Measurement measurement = new Measurement();
+            measurement.MeasurementAppPatches = new List<MeasurementPatchApp>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    DataTable dtPatchDetails = new DataTable();
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId });
+                    if (dsMeasurements.Tables.Count > 0)
+                    {
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                        foreach (DataRow dr in dtPatchDetails.Rows)
+                        {
+                            measurement.MeasurementAppPatches.Add(new MeasurementPatchApp()
+                            {
+
+                                //SampleID = Convert.ToInt32(dr["SampleID"]),
+                                SampleName = Convert.ToString(dr["SampleName"]),
+
+                                Ciexyz = new CieXYZ()
+                                {
+                                    X = Convert.ToString(dr["CIEXYZ_X"]),
+                                    Y = Convert.ToString(dr["CIEXYZ_Y"]),
+                                    Z = Convert.ToString(dr["CIEXYZ_Z"]),
+                                },
+                                Cielab = new CieLAB()
+                                {
+                                    L = Convert.ToString(dr["CIELAB_L"]),
+                                    A = Convert.ToString(dr["CIELAB_a"]),
+                                    B = Convert.ToString(dr["CIELAB_b"]),
+                                },
+                                //Δe = Convert.ToString(dr["ΔE"]),
+                                //Δe94 = Convert.ToString(dr["ΔE94"]),
+                                //Δe2000 = Convert.ToString(dr["ΔE2000"]),
+
+                                Density = new DensityApp()
+                                {
+                                    Red = Convert.ToString(dr["Density_C"]),
+                                    Green = Convert.ToString(dr["Density_M"]),
+                                    Blue = Convert.ToString(dr["Density_Y"]),
+                                    Visual = Convert.ToString(dr["Density_V"])
+                                },
+                                Spectral = string.IsNullOrEmpty(Convert.ToString(dr["MeasurementPatchSpectralID"])) ? null : new SpectralApp()
+                                {
+                                    nm380 = Convert.ToString(dr["nm380"]),
+                                    nm390 = Convert.ToString(dr["nm390"]),
+                                    nm400 = Convert.ToString(dr["nm400"]),
+                                    nm410 = Convert.ToString(dr["nm410"]),
+                                    nm420 = Convert.ToString(dr["nm420"]),
+                                    nm430 = Convert.ToString(dr["nm430"]),
+                                    nm440 = Convert.ToString(dr["nm440"]),
+                                    nm450 = Convert.ToString(dr["nm450"]),
+                                    nm460 = Convert.ToString(dr["nm460"]),
+                                    nm470 = Convert.ToString(dr["nm470"]),
+                                    nm480 = Convert.ToString(dr["nm480"]),
+                                    nm490 = Convert.ToString(dr["nm490"]),
+                                    nm500 = Convert.ToString(dr["nm500"]),
+                                    nm510 = Convert.ToString(dr["nm510"]),
+                                    nm520 = Convert.ToString(dr["nm520"]),
+                                    nm530 = Convert.ToString(dr["nm530"]),
+                                    nm540 = Convert.ToString(dr["nm540"]),
+                                    nm550 = Convert.ToString(dr["nm550"]),
+                                    nm560 = Convert.ToString(dr["nm560"]),
+                                    nm570 = Convert.ToString(dr["nm570"]),
+                                    nm580 = Convert.ToString(dr["nm580"]),
+                                    nm590 = Convert.ToString(dr["nm590"]),
+                                    nm600 = Convert.ToString(dr["nm600"]),
+                                    nm610 = Convert.ToString(dr["nm610"]),
+                                    nm620 = Convert.ToString(dr["nm620"]),
+                                    nm630 = Convert.ToString(dr["nm630"]),
+                                    nm640 = Convert.ToString(dr["nm640"]),
+                                    nm650 = Convert.ToString(dr["nm650"]),
+                                    nm660 = Convert.ToString(dr["nm660"]),
+                                    nm670 = Convert.ToString(dr["nm670"]),
+                                    nm680 = Convert.ToString(dr["nm680"]),
+                                    nm690 = Convert.ToString(dr["nm690"]),
+                                    nm700 = Convert.ToString(dr["nm700"]),
+                                    nm710 = Convert.ToString(dr["nm710"]),
+                                    nm720 = Convert.ToString(dr["nm720"]),
+                                    nm730 = Convert.ToString(dr["nm730"]),
+                                }
+                            });
+                        }
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_Get1DMeasurementPatchDetailsForExport"));
+            return measurement;
+        }
+
+
         public Measurement GetSpotMeasurementPatchDetailsForExport(int OptimizeRunId)
         {
             string storedProc = "CPSpot.GetMeasurementDetails_FileExport";
@@ -2266,6 +2363,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurement;
         }
 
+        
         #endregion
 
         #region ITaskBase Members

@@ -240,7 +240,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
-        }     
+        }
 
         [HttpPost]
         public IHttpActionResult GetSpotPatchDetailsReport(ExportViewModel model)
@@ -267,10 +267,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                 objReportPDF.dtSpotPatchDetails = dt;
                 objReportPDF.PDF_NAME = model.OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
-                objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");                
+                objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
                 objReportPDF.GenerateSpotPatchDetailsReport();
 
-                string ReportFileName = "/UploadFiles/" + objReportPDF.PDF_NAME;                                                
+                string ReportFileName = "/UploadFiles/" + objReportPDF.PDF_NAME;
                 httpResponse.Data = ReportFileName;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
             }
@@ -282,7 +282,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
             }
             return actionResult;
-        }        
+        }
 
         [HttpPost]
         public IHttpActionResult GetSpotPatchDetailsExcelReport(ExportViewModel model)
@@ -368,7 +368,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                 var dataBytes = File.ReadAllBytes(filePath);
                 //adding bytes to memory stream   
-                
+
                 string ReportFileName = "/UploadFiles/" + objReportPDF.PDF_NAME;
                 httpResponse.Data = ReportFileName;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
@@ -419,7 +419,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     _presenterAnalyze.GetPatchDetailsofMeasurement();
                     //Now we are using DataTable as DataSource                    
                     DataTable dt = FilteredPatchDetailsTable(model.metricSumID, dtPatchDetails);
-                    
+
                     dtFilteredPatchDetails = GridFilters.GetFilteredResult(dt, model.sort, model.filter);
 
                     #region Generate CGATS .txt file
@@ -657,7 +657,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 labelXML = labelXML.Replace("[dEType]", measurementSummary.dEMethod);
                 labelXML = labelXML.Replace("[PageOrSurface]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurementSummary.PageOrSurface, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if PageOrSurface contains "&" letter or rest of 4 letters
                 labelXML = labelXML.Replace("[JDFJobId]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurementSummary.JDFJobId, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if JDFJobId contains "&" letter or rest of 4 letters
-                                                                                                                                                                                                                                                                                                  //labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
+                                                                                                                                                                                                                                                                                                   //labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
                 StringBuilder metricName = new StringBuilder();
                 StringBuilder metricTol = new StringBuilder();
                 StringBuilder metricActual = new StringBuilder();
@@ -690,7 +690,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                 httpResponse.Data = new
                 {
-                    labelPrintString= Regex.Unescape(labelXML.ToString()),
+                    labelPrintString = Regex.Unescape(labelXML.ToString()),
                     dymoStatusIcon = base64String
                 };
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
@@ -712,7 +712,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             BaseResponse<bool> httpResponse = new BaseResponse<bool>();
             try
             {
-                SpotProjectLabs = model.spotProjectLabs;                
+                SpotProjectLabs = model.spotProjectLabs;
                 httpResponse.Data = _presenterAnalyze.UpdateSpotProjectLabValues();
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
             }
@@ -734,7 +734,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             var stream = new FileStream(fullPath, FileMode.Open);
 
             // processing the stream.
-            var result = new FileHttpResponseMessage(fullPath);            
+            var result = new FileHttpResponseMessage(fullPath);
             result.StatusCode = HttpStatusCode.OK;
             result.Content = new StreamContent(stream);
             result.Content.Headers.ContentDisposition =
@@ -755,7 +755,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult GetMeasurementFileExport(int? MeasurementId)
+        public IHttpActionResult GetMeasurementFileExport(int? MeasurementId, int? LicenseType)
         {
             IHttpActionResult actionResult = null;
             BaseResponse<string> httpResponse = new BaseResponse<string>();
@@ -778,8 +778,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 {
 
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    _presenterAnalyze.GetPatchDetailsOfMeasurementExport();
-                    
+                    if (Convert.ToInt32(LicenseType) == (int)ELicenseType.Sync1D)
+                        _presenterAnalyze.Get1DPatchDetailsOfMeasurementExport();
+                    else
+                        _presenterAnalyze.GetPatchDetailsOfMeasurementExport();
+
                     //Now we are using DataTable as DataSource                    
                     string jsonString = JsonConvert.SerializeObject(Measurement, Formatting.Indented);
                     #region Generate json file

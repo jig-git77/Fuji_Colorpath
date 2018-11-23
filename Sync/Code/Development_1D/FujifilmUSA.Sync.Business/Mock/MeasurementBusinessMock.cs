@@ -239,7 +239,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Measurement();
         }
-
+        public Measurement Get1DMeasurementPatchDetailsForExport(int MeasurementId)
+        {
+            return new Measurement();
+        }
         #endregion
 
         #region ITaskBase Members

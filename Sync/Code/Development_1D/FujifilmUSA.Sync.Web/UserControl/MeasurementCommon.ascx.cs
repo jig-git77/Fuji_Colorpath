@@ -50,7 +50,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
                 btnImportMeasurementFile.Value = GetResourceString("btnImportMeasurementFile");
                 btnImportMeasurementFile.Visible = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || 
-                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification || 
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D ||
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) && 
                     SessionManager.Instance.CurrentUser.Role.RoleId == (int)ERole.SystemAdmin;
 

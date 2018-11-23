@@ -74,6 +74,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
                         if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
                             _presenterImportMeasurements.ImportSpotMeasurementFile();
+                        else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                            _presenterImportMeasurements.Import1DMeasurementFile();
                         else
                             _presenterImportMeasurements.ImportMeasurementFile();
 
