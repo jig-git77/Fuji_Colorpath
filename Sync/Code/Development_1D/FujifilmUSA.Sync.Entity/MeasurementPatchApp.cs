@@ -25,6 +25,7 @@ namespace FujifilmUSA.Sync.Entity
         //for spot color measurement pathches properties
         public int SpotId { get; set; }
         public string SpotName { get; set; }
+        public int SpotTargetID { get; set; }
 
         public int PrintStandardTypeID { get; set; }
         public int InstrumentTypeID { get; set; }

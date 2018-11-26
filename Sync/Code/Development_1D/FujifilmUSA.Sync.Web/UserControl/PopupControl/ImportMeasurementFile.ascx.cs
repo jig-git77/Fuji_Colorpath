@@ -80,14 +80,21 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                                     fujiStatusbar.DisplayMessage("Reference chart type is different. Please select same reference chart type.", false);
                                     return;
                                 }
+                                if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID != Measurement.MeasurementAppPatches[0].PrintStandardTypeID)
+                                {
+                                    fujiStatusbar.DisplayMessage("Print standard type is different. Please select same reference chart type.", false);
+                                    return;
+                                }
                             }
-                                
-
-                            if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID != Measurement.MeasurementAppPatches[0].PrintStandardTypeID)
+                            else
                             {
-                                fujiStatusbar.DisplayMessage("Print standard type is different. Please select same reference chart type.", false);
-                                return;
+                                if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID != Measurement.MeasurementAppPatches[0].SpotTargetID)
+                                {
+                                    fujiStatusbar.DisplayMessage("Spot target is different. Please select same spot target.", false);
+                                    return;
+                                }
                             }
+                            
 
                             if (SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId != Measurement.MeasurementAppPatches[0].InstrumentTypeID)
                             {

@@ -2355,7 +2355,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         {
                             measurement.MeasurementAppPatches.Add(new MeasurementPatchApp()
                             {
-
+                                SpotTargetID = Convert.ToInt32(dr["SpotTargetID"]),
+                                InstrumentTypeID = Convert.ToInt32(dr["InstrumentTypeID"]),
                                 SampleID = Convert.ToInt32(dr["SpotID"]),
                                 SampleName = Convert.ToString(dr["SpotName"]),
                                 Cielab = new CieLAB()
