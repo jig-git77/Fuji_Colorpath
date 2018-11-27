@@ -35,24 +35,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         {
             try
             {
-
-
-                int parentProjectMeasurementCount = 0;
-                #region Check for current project existing measurement
-                DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
-                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                 LicenseTypeID = (int)SessionManager.Instance.CurrentProject.LicenseType;
-                _presenterImportMeasurements.GetMeasurementIDsbyProjectID();
-                #endregion
-                if (!IsErrorOccured)
-                {
-                    parentProjectMeasurementCount = Measurements.Count;
-                }
-                if (parentProjectMeasurementCount + Measurements.Count > (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? Business.ApplicationConfiguration.Instance.MeasurementLimitSync1D : Business.ApplicationConfiguration.Instance.MeasurementsLimit))
-                {
-                    fujiStatusbar.DisplayMessage("Measurements cannot be imported as total allowed measurement limit exceeded.", false);
-                    return;
-                }                
 
                 if (fuMeasurement.PostedFile != null)
                 {
@@ -63,7 +46,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                         {
                             inputContent = inputStreamReader.ReadToEnd();
                         }
-
                         Measurement = JsonConvert.DeserializeObject<Entity.Measurement>(inputContent);
                         Measurement.MeasurementName = txtMeasurementName.Text;
                         Measurement.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
@@ -101,10 +83,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                                 fujiStatusbar.DisplayMessage("Instrument type is different. Please select same reference chart type.", false);
                                 return;
                             }
-
-
+                            //bind the measurement patches 
                             BindMeasurementPatches(Measurement);
-
+                            
                             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
                                 _presenterImportMeasurements.ImportSpotMeasurementFile();
                             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
@@ -112,6 +93,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                             else
                                 _presenterImportMeasurements.ImportMeasurementFile();
 
+                            if (this.MeasurementID == -2)
+                            {
+                                fujiStatusbar.DisplayMessage("Total patches are not matched. Please try again.", false);
+                                return;
+                            }
 
                             if (!IsErrorOccured)
                             {

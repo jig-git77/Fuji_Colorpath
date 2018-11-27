@@ -243,6 +243,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Measurement();
         }
+        public int ImportMeasurement(Measurement measurement, int LicenseTypeID)
+        {
+            return 0;
+        }
         #endregion
 
         #region ITaskBase Members

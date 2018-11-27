@@ -2373,7 +2373,126 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurement;
         }
 
-        
+        public int ImportMeasurement(Measurement measurement, int LicenseTypeID)
+        {
+            var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
+            var outParamSaved = new Parameters() { ParameterName = "@IsSaved", Type = DbType.Int32 };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    XElement measurementPatches = null;
+                    if (LicenseTypeID == 2)
+                    {
+                        measurementPatches = new XElement("MeasurementPatches",
+                                                         measurement.MeasurementPatches.
+                                                             Select(x =>
+                                                                    new XElement("MeasurementPatch",
+                                                                                 new XAttribute("SampleName", x.SampleName),
+                                                                                 new XAttribute("CIEXYZ_X", x.CiexyzX),
+                                                                                 new XAttribute("CIEXYZ_Y", x.CiexyzY),
+                                                                                 new XAttribute("CIEXYZ_Z", x.CiexyzZ),
+                                                                                 new XAttribute("CIELAB_L", x.CielabL),
+                                                                                 new XAttribute("CIELAB_a", x.CielabA),
+                                                                                 new XAttribute("CIELAB_b", x.CielabB),
+                                                                                 new XAttribute("Density_C", x.Density.Red),
+                                                                                 new XAttribute("Density_M", x.Density.Green),
+                                                                                 new XAttribute("Density_Y", x.Density.Blue),
+                                                                                 new XAttribute("Density_V", x.Density.Visual)
+                                                                        )).ToList());
+                    }
+
+                    if (LicenseTypeID == 1)
+                    {
+                        measurementPatches = new XElement("MeasurementPatches",
+                                                         measurement.MeasurementPatches.
+                                                             Select(x =>
+                                                                    new XElement("MeasurementPatch",
+                                                                                 new XAttribute("SampleName", x.SampleName),
+                                                                                 new XAttribute("CIEXYZ_X", x.CiexyzX),
+                                                                                 new XAttribute("CIEXYZ_Y", x.CiexyzY),
+                                                                                 new XAttribute("CIEXYZ_Z", x.CiexyzZ),
+                                                                                 new XAttribute("CIELAB_L", x.CielabL),
+                                                                                 new XAttribute("CIELAB_a", x.CielabA),
+                                                                                 new XAttribute("CIELAB_b", x.CielabB),
+                                                                                 new XAttribute("Density_C", x.Density.Red),
+                                                                                 new XAttribute("Density_M", x.Density.Green),
+                                                                                 new XAttribute("Density_Y", x.Density.Blue),
+                                                                                 new XAttribute("Density_V", x.Density.Visual),
+
+                                                                                 //---Spectral Data
+                                                                                 new XAttribute("nm380", x.Spectral.nm380),
+                                                                                 new XAttribute("nm390", x.Spectral.nm390),
+                                                                                 new XAttribute("nm400", x.Spectral.nm400),
+                                                                                 new XAttribute("nm410", x.Spectral.nm410),
+                                                                                 new XAttribute("nm420", x.Spectral.nm420),
+                                                                                 new XAttribute("nm430", x.Spectral.nm430),
+                                                                                 new XAttribute("nm440", x.Spectral.nm440),
+                                                                                 new XAttribute("nm450", x.Spectral.nm450),
+                                                                                 new XAttribute("nm460", x.Spectral.nm460),
+                                                                                 new XAttribute("nm470", x.Spectral.nm470),
+                                                                                 new XAttribute("nm480", x.Spectral.nm480),
+                                                                                 new XAttribute("nm490", x.Spectral.nm490),
+                                                                                 new XAttribute("nm500", x.Spectral.nm500),
+                                                                                 new XAttribute("nm510", x.Spectral.nm510),
+                                                                                 new XAttribute("nm520", x.Spectral.nm520),
+                                                                                 new XAttribute("nm530", x.Spectral.nm530),
+                                                                                 new XAttribute("nm540", x.Spectral.nm540),
+                                                                                 new XAttribute("nm550", x.Spectral.nm550),
+                                                                                 new XAttribute("nm560", x.Spectral.nm560),
+                                                                                 new XAttribute("nm570", x.Spectral.nm570),
+                                                                                 new XAttribute("nm580", x.Spectral.nm580),
+                                                                                 new XAttribute("nm590", x.Spectral.nm590),
+                                                                                 new XAttribute("nm600", x.Spectral.nm600),
+                                                                                 new XAttribute("nm610", x.Spectral.nm610),
+                                                                                 new XAttribute("nm620", x.Spectral.nm620),
+                                                                                 new XAttribute("nm630", x.Spectral.nm630),
+                                                                                 new XAttribute("nm640", x.Spectral.nm640),
+                                                                                 new XAttribute("nm650", x.Spectral.nm650),
+                                                                                 new XAttribute("nm660", x.Spectral.nm660),
+                                                                                 new XAttribute("nm670", x.Spectral.nm670),
+                                                                                 new XAttribute("nm680", x.Spectral.nm680),
+                                                                                 new XAttribute("nm690", x.Spectral.nm690),
+                                                                                 new XAttribute("nm700", x.Spectral.nm700),
+                                                                                 new XAttribute("nm710", x.Spectral.nm710),
+                                                                                 new XAttribute("nm720", x.Spectral.nm720),
+                                                                                 new XAttribute("nm730", x.Spectral.nm730)
+                                                                        )).ToList());
+                    }
+
+                    if (LicenseTypeID == 10)
+                    {
+                        measurementPatches = new XElement("MeasurementPatches",
+                                                          measurement.MeasurementPatches.
+                                                              Select(x =>
+                                                                     new XElement("MeasurementPatch",
+                                                                                  new XAttribute("SpotName", x.SampleName),
+                                                                                  new XAttribute("Measured_L", x.CielabL),
+                                                                                  new XAttribute("Measured_a", x.CielabA),
+                                                                                  new XAttribute("Measured_b", x.CielabB)
+                                                                             )).ToList());
+                    }
+
+                    DataAccessFactory.
+                    Instance.
+                    ExecuteProcedure("CPSync4D.ImportMeasurementDetails",
+                                     new List<Parameters>()
+                                             {
+                                                         new Parameters() {ParameterName = "@MeasurementName", Size = 50, Type = DbType.String, Value = measurement.MeasurementName},
+                                                         new Parameters() {ParameterName = "@OptimizeRunID", Type = DbType.Int32, Value = measurement.OptimizeRunId},
+                                                         new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
+                                                         new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
+                                                         new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
+                                                         new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType) },
+                                                         new Parameters() {ParameterName = "@LicenseType", Type = DbType.Int32, Value = Convert.ToInt32(LicenseTypeID)}
+                                             },
+                                     new List<Parameters>()
+                                             {
+                                                         outParam
+                                             });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
+            return Convert.ToInt32(outParam.Value);
+        }
         #endregion
 
         #region ITaskBase Members

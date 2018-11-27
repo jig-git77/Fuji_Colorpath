@@ -67,5 +67,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Measurement GetMeasurementPatchDetailsForExport(int MeasurementId);
         Measurement Get1DMeasurementPatchDetailsForExport(int MeasurementId);
         Measurement GetSpotMeasurementPatchDetailsForExport(int OptimizeRunId);
+        int ImportMeasurement(Measurement measurement, int LicenseTypeID);
     }
 }
