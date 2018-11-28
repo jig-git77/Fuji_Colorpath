@@ -203,7 +203,9 @@ $(document).ready(function () {
 
                 //set project type image tooltip
                 switch (data.LicenseType) {
-                    case ELicenseType.None: break;
+                    case ELicenseType.None:
+                        projectTypeTooltip = Resources.ELicenseType_None;
+                        break;
                     case ELicenseType.Sync1D:
                         //projectTypeTooltip = 'Alignment Curves';
                         projectTypeTooltip = Resources.ELicenseType_Sync1D;
@@ -220,7 +222,20 @@ $(document).ready(function () {
                     case ELicenseType.Sync4DCertification:
                         projectTypeTooltip = Resources.ELicenseType_Sync4DCertification;
                         break;
+                    case ELicenseType.CustomSourceProfile:
+                        projectTypeTooltip = Resources.ELicenseType_CustomSourceProfile;
+                        break;
+                    case ELicenseType.ReProfileCustomSource:
+                        projectTypeTooltip = Resources.ELicenseType_ReProfileCustomSourceProfile;
+                        break;
+                    case ELicenseType.FullGamutCustomSource:
+                        projectTypeTooltip = Resources.ELicenseType_FullGamutCustomSourceProfile;
+                        break;
+                    case ELicenseType.MultiColorCustomSource:
+                        projectTypeTooltip = Resources.ELicenseType_MultiColorCustomSourceProfile;
+                        break;
                     case ELicenseType.Validation:
+                        projectTypeTooltip = Resources.ELicenseType_Validation;
                         break;
                     case ELicenseType.IccProfiling: break;
                 }
