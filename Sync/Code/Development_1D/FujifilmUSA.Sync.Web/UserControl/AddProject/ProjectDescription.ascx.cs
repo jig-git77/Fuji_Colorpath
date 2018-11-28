@@ -205,21 +205,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
             int currentProjectLimit = 0;
             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
             LicenseId = Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
-            currentProjectLimit = _presenterSaveWindow.GetProjectLimit(Convert.ToInt32(ddlLicenseType.SelectedItem.Value));
 
-            int maxProjectLimit = 0;
-            if (SessionManager.Instance.CurrentDevice.LicenseTypeProject != null)
-                maxProjectLimit = SessionManager.Instance.CurrentDevice.LicenseTypeProject.Where(p => p.Key == (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.Value).FirstOrDefault();
-
-            if (currentProjectLimit >= maxProjectLimit)
+            if (SessionManager.Instance.CurrentProject.ProjectId == 0)
             {
-                //--------------Project Limit reach, so can not create more projects under this Device now-------//  
-                SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
-                SessionManager.Instance.CurrentProject = null;
-                SessionManager.Instance.CurrentOptimizeRun = null;
-                Response.Redirect("ProjectMaxLimit.aspx");
-            }
+                currentProjectLimit = _presenterSaveWindow.GetProjectLimit(Convert.ToInt32(ddlLicenseType.SelectedItem.Value));
 
+                int maxProjectLimit = 0;
+                if (SessionManager.Instance.CurrentDevice.LicenseTypeProject != null)
+                    maxProjectLimit = SessionManager.Instance.CurrentDevice.LicenseTypeProject.Where(p => p.Key == (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.Value).FirstOrDefault();
+
+                if (currentProjectLimit >= maxProjectLimit)
+                {
+                    //--------------Project Limit reach, so can not create more projects under this Device now-------//  
+                    SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
+                    SessionManager.Instance.CurrentProject = null;
+                    SessionManager.Instance.CurrentOptimizeRun = null;
+                    Response.Redirect("ProjectMaxLimit.aspx");
+                }
+            }
+            
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
             {
                 ProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectId;
