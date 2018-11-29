@@ -27,9 +27,9 @@ namespace FujifilmUSA.Sync.Entity
         public string SpotName { get; set; }
         public int SpotTargetID { get; set; }
 
-        public int PrintStandardTypeID { get; set; }
+        //public int PrintStandardTypeID { get; set; }
         public int InstrumentTypeID { get; set; }
-        public int ReferenceChartTypeID { get; set; }
+        //public int ReferenceChartTypeID { get; set; }
     }
 
     public class CMYK

@@ -54,29 +54,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                         Measurement.ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
 
                         if (Measurement.MeasurementAppPatches.Count > 0)
-                        {
-                            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)                            
-                            {
-                                if (Measurement.ReferenceChartTypeId != Measurement.MeasurementAppPatches[0].ReferenceChartTypeID)
-                                {
-                                    fujiStatusbar.DisplayMessage("Reference chart type is different. Please select same reference chart type.", false);
-                                    return;
-                                }
-                                if (SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID != Measurement.MeasurementAppPatches[0].PrintStandardTypeID)
-                                {
-                                    fujiStatusbar.DisplayMessage("Print standard type is different. Please select same reference chart type.", false);
-                                    return;
-                                }
-                            }
-                            else
-                            {
-                                if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID != Measurement.MeasurementAppPatches[0].SpotTargetID)
-                                {
-                                    fujiStatusbar.DisplayMessage("Spot target is different. Please select same spot target.", false);
-                                    return;
-                                }
-                            }
-                            
+                        {                            
 
                             if (SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId != Measurement.MeasurementAppPatches[0].InstrumentTypeID)
                             {
