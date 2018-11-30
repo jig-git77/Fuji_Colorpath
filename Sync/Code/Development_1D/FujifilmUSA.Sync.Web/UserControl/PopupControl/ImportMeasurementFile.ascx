@@ -87,17 +87,17 @@
                                 <table style="width: 100%">
                                     <tbody>
                                         <tr>
-                                            <td colspan="2">
+                                            <td colspan="4">
                                                 <asp:Label runat="server" ID="lblMessage" Style="color: red;"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 25%">
-                                                <asp:Localize runat="server" Text="Enter Measurement Name:" ID="locMeasurementName" meta:resourcekey="locMeasurementNameResource1"></asp:Localize>
+                                            <td align="right">                                                
+                                                <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name" meta:resourcekey="lblMeasurementNameResource1"></asp:Label>:&nbsp;
                                             </td>
                                             <td>
                                                 <div style="float: left">
-                                                    <asp:TextBox ID="txtMeasurementName" runat="server"></asp:TextBox>
+                                                    <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px" onkeypress="return validateText(event)"  MaxLength="30"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvMeasurementName" runat="server" Display="Dynamic"
@@ -108,9 +108,37 @@
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
+                                            <td rowspan="2" id="tdNotesCaption" runat="server" visible="false" align="right">
+                                                <asp:Label ID="lblNotes" runat="server" Text="Notes" meta:resourcekey="lblNotesResource1"></asp:Label>:&nbsp;
+                                            </td>
+                                            <td rowspan="2" id="tdNotes" runat="server" visible="false">
+                                                <asp:TextBox ID="txtNotes" runat="server" Width="178px" Height="50px" TextMode="MultiLine" Style="resize: none;" MaxLength="1000"></asp:TextBox>
+                                            </td>
                                         </tr>
-                                        <tr>
+                                        <tr id="trCustomer" runat="server" visible="false">
+                                            <td align="right">
+                                                <asp:Label ID="lblCustomer" runat="server" Text="Customer" meta:resourcekey="lblCustomerResource1"></asp:Label>:&nbsp;
+                                            </td>
                                             <td>
+                                                <asp:TextBox ID="txtCustomer" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr id="trValidationDetails" runat="server" visible="false">
+                                            <td align="right">
+                                                <asp:Label ID="lblPageOrSurface" runat="server" Text="Page/Surface" meta:resourcekey="lblPageOrSurfaceResource1"></asp:Label>:&nbsp;
+                                            </td>
+                                            <td style="height: 27px;">
+                                                <asp:TextBox ID="txtPageOrSurface" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>
+                                            </td>
+                                            <td align="right">
+                                                <asp:Label ID="lblJDFJobId" runat="server" Text="JDF Job ID" meta:resourcekey="lblJDFJobIdResource1"></asp:Label>:&nbsp;
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="txtJDFJobId" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>
+                                            </td>
+                                        </tr>                                        
+                                        <tr>
+                                            <td align="right">
                                                 <asp:Localize runat="server" Text="Select File:" ID="locSelectMeasurementName" meta:resourcekey="SelectMeasurementNameResource1"></asp:Localize>
                                             </td>
                                             <td>

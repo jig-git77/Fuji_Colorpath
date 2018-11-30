@@ -18,6 +18,7 @@ namespace FujifilmUSA.Sync.Entity
         public string Δe { get; set; }
         public string Δe94 { get; set; }
         public string Δe2000 { get; set; }
+        public string ΔH { get; set; }
         public string HtmlColor { get; set; }
         public DensityApp Density { get; set; }
         public SpectralApp Spectral { get; set; }

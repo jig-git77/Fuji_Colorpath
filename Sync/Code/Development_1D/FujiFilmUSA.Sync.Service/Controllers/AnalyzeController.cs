@@ -780,6 +780,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
                     if (Convert.ToInt32(LicenseType) == (int)ELicenseType.Sync1D)
                         _presenterAnalyze.Get1DPatchDetailsOfMeasurementExport();
+                    else if (Convert.ToInt32(LicenseType) == (int)ELicenseType.Validation)
+                        _presenterAnalyze.GetValidationPatchDetailsOfMeasurementExport();
                     else
                         _presenterAnalyze.GetPatchDetailsOfMeasurementExport();
 

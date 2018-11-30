@@ -27,6 +27,17 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+            {
+                tdNotesCaption.Visible = true;
+                tdNotes.Visible = true;
+                trCustomer.Visible = true;
+                trValidationDetails.Visible = true;
+                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                    lblMeasurementName.Text = GetLocalResourceObject("JobNameCaption").ToString();
+                else
+                    lblMeasurementName.Text = GetLocalResourceObject("MeasurementNameCaption").ToString();
+            }
         }
         #endregion
 
@@ -35,7 +46,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         {
             try
             {
-                LicenseTypeID = (int)SessionManager.Instance.CurrentProject.LicenseType;
+                LicenseTypeID = (int)SessionManager.Instance.CurrentDlpSubOperation;
 
                 if (fuMeasurement.PostedFile != null)
                 {
@@ -51,10 +62,24 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                         Measurement.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                         Measurement.MeasurementDate = DateTime.Now;
                         Measurement.PCSDataType = 1;
-                        Measurement.ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
+                        
+                        Measurement.ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                        //if current project is validation then assign extra information
+                        if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                        {
+                            Measurement.Notes = txtNotes.Text;
+                            Measurement.Customer = txtCustomer.Text;
+                            Measurement.PageOrSurface = txtPageOrSurface.Text;
+                            Measurement.JDFJobId = txtJDFJobId.Text;
+                            Measurement.ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key;
+                        }
+                        else
+                        {
+                            Measurement.ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
+                        }
 
                         if (Measurement.MeasurementAppPatches.Count > 0)
-                        {                            
+                        {
 
                             if (SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId != Measurement.MeasurementAppPatches[0].InstrumentTypeID)
                             {
@@ -63,11 +88,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                             }
                             //bind the measurement patches 
                             BindMeasurementPatches(Measurement);
-                            
-                            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+
+                            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.SpotLibrary)
                                 _presenterImportMeasurements.ImportSpotMeasurementFile();
-                            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                            else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)                            
                                 _presenterImportMeasurements.Import1DMeasurementFile();
+                            else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                                _presenterImportMeasurements.ImportValidationMeasurementFile();
                             else
                                 _presenterImportMeasurements.ImportMeasurementFile();
 
@@ -81,13 +108,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                             {
                                 Page.ClientScript.RegisterStartupScript(this.GetType(), "radalert", "<script type=text/javascript> CloseImportWindow(); </script>");
                             }
-                        }                        
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                lblMessage.Text = GetResourceString("ImportUnsuccessfulMessage");
+                fujiStatusbar.DisplayMessage(GetResourceString("ImportUnsuccessfulMessage"), false);
             }
         }
 

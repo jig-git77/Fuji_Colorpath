@@ -135,4 +135,25 @@
   <data name="SelectMeasurementNameResource1.Text" xml:space="preserve">
     <value>Select File:</value>
   </data>
+  <data name="JobNameCaption" xml:space="preserve">
+    <value>ジョブ名</value>
+  </data>
+  <data name="lblCustomerResource1.Text" xml:space="preserve">
+    <value>顧客</value>
+  </data>
+  <data name="lblJDFJobIdResource1.Text" xml:space="preserve">
+    <value>JDFジョブID</value>
+  </data>
+  <data name="lblMeasurementNameResource1.Text" xml:space="preserve">
+    <value>測色名</value>
+  </data>
+  <data name="lblNotesResource1.Text" xml:space="preserve">
+    <value>メモ</value>
+  </data>
+  <data name="lblPageOrSurfaceResource1.Text" xml:space="preserve">
+    <value>ページ/面</value>
+  </data>
+  <data name="MeasurementNameCaption" xml:space="preserve">
+    <value>測色名</value>
+  </data>
 </root>

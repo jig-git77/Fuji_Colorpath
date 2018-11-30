@@ -239,6 +239,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Measurement();
         }
+        public Measurement GetValidationMeasurementPatchDetailsForExport(int MeasurementId)
+        {
+            return new Measurement();
+        }
         public Measurement Get1DMeasurementPatchDetailsForExport(int MeasurementId)
         {
             return new Measurement();

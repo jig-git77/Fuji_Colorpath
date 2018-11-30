@@ -2220,10 +2220,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     nm730 = Convert.ToString(dr["nm730"]),
                                 }
                             });
-                            if (!string.IsNullOrEmpty(Convert.ToString(dr["MeasurementPatchSpectralID"])))
-                            {
-
-                            }
                         }
                     }
                 },
@@ -2331,6 +2327,61 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurement;
         }
 
+        public Measurement GetValidationMeasurementPatchDetailsForExport(int MeasurementId)
+        {
+            string storedProc = "CPSyncV.GetMeasurementDetails_FileExport";
+            Measurement measurement = new Measurement();
+            measurement.MeasurementAppPatches = new List<MeasurementPatchApp>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    DataTable dtPatchDetails = new DataTable();
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId });
+                    if (dsMeasurements.Tables.Count > 0)
+                    {
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                        foreach (DataRow dr in dtPatchDetails.Rows)
+                        {
+                            measurement.MeasurementAppPatches.Add(new MeasurementPatchApp()
+                            {
+
+                                SampleName = Convert.ToString(dr["SampleName"]),
+                                InstrumentTypeID = Convert.ToInt32(dr["InstrumentTypeID"]),
+                                Ciexyz = new CieXYZ()
+                                {
+                                    X = Convert.ToString(dr["CIEXYZ_X"]),
+                                    Y = Convert.ToString(dr["CIEXYZ_Y"]),
+                                    Z = Convert.ToString(dr["CIEXYZ_Z"]),
+                                },
+                                Cielab = new CieLAB()
+                                {
+                                    L = Convert.ToString(dr["CIELAB_L"]),
+                                    A = Convert.ToString(dr["CIELAB_a"]),
+                                    B = Convert.ToString(dr["CIELAB_b"]),
+                                },
+                                Δe = Convert.ToString(dr["ΔE"]),
+                                Δe94 = Convert.ToString(dr["ΔE94"]),
+                                Δe2000 = Convert.ToString(dr["ΔE2000"]),
+                                ΔH = Convert.ToString(dr["ΔH"]),
+                                Density = new DensityApp()
+                                {
+                                    Red = Convert.ToString(dr["Density_C"]),
+                                    Green = Convert.ToString(dr["Density_M"]),
+                                    Blue = Convert.ToString(dr["Density_Y"]),
+                                    Visual = Convert.ToString(dr["Density_V"])
+                                }
+                            });
+                        }
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementPatchDetailsForExport"));
+            return measurement;
+        }
 
         public Measurement GetSpotMeasurementPatchDetailsForExport(int OptimizeRunId)
         {
@@ -2376,32 +2427,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public int ImportMeasurement(Measurement measurement, int LicenseTypeID)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
-            var outParamSaved = new Parameters() { ParameterName = "@IsSaved", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
                 () =>
                 {
                     XElement measurementPatches = null;
-                    if (LicenseTypeID == 2)
-                    {
-                        measurementPatches = new XElement("MeasurementPatches",
-                                                         measurement.MeasurementPatches.
-                                                             Select(x =>
-                                                                    new XElement("MeasurementPatch",
-                                                                                 new XAttribute("SampleName", x.SampleName),
-                                                                                 new XAttribute("CIEXYZ_X", x.CiexyzX),
-                                                                                 new XAttribute("CIEXYZ_Y", x.CiexyzY),
-                                                                                 new XAttribute("CIEXYZ_Z", x.CiexyzZ),
-                                                                                 new XAttribute("CIELAB_L", x.CielabL),
-                                                                                 new XAttribute("CIELAB_a", x.CielabA),
-                                                                                 new XAttribute("CIELAB_b", x.CielabB),
-                                                                                 new XAttribute("Density_C", x.Density.Red),
-                                                                                 new XAttribute("Density_M", x.Density.Green),
-                                                                                 new XAttribute("Density_Y", x.Density.Blue),
-                                                                                 new XAttribute("Density_V", x.Density.Visual)
-                                                                        )).ToList());
-                    }
-
-                    if (LicenseTypeID == 1)
+                    if (LicenseTypeID == 1)//1D project
                     {
                         measurementPatches = new XElement("MeasurementPatches",
                                                          measurement.MeasurementPatches.
@@ -2459,7 +2489,27 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                         )).ToList());
                     }
 
-                    if (LicenseTypeID == 10)
+                    if (LicenseTypeID == 2 || LicenseTypeID == 5)//dlp and Sync4DCertification project
+                    {
+                        measurementPatches = new XElement("MeasurementPatches",
+                                                         measurement.MeasurementPatches.
+                                                             Select(x =>
+                                                                    new XElement("MeasurementPatch",
+                                                                                 new XAttribute("SampleName", x.SampleName),
+                                                                                 new XAttribute("CIEXYZ_X", x.CiexyzX),
+                                                                                 new XAttribute("CIEXYZ_Y", x.CiexyzY),
+                                                                                 new XAttribute("CIEXYZ_Z", x.CiexyzZ),
+                                                                                 new XAttribute("CIELAB_L", x.CielabL),
+                                                                                 new XAttribute("CIELAB_a", x.CielabA),
+                                                                                 new XAttribute("CIELAB_b", x.CielabB),
+                                                                                 new XAttribute("Density_C", x.Density.Red),
+                                                                                 new XAttribute("Density_M", x.Density.Green),
+                                                                                 new XAttribute("Density_Y", x.Density.Blue),
+                                                                                 new XAttribute("Density_V", x.Density.Visual)
+                                                                        )).ToList());
+                    }
+
+                    if (LicenseTypeID == 10) // spot project
                     {
                         measurementPatches = new XElement("MeasurementPatches",
                                                           measurement.MeasurementPatches.
@@ -2472,6 +2522,27 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                              )).ToList());
                     }
 
+                    if (LicenseTypeID == 11) // validation project
+                    {
+                        measurementPatches = new XElement("MeasurementPatches",
+                                                         measurement.MeasurementPatches.
+                                                             Select(x =>
+                                                                    new XElement("MeasurementPatch",
+                                                                                 new XAttribute("SampleName", x.SampleName),
+                                                                                 new XAttribute("CIEXYZ_X", x.CiexyzX),
+                                                                                 new XAttribute("CIEXYZ_Y", x.CiexyzY),
+                                                                                 new XAttribute("CIEXYZ_Z", x.CiexyzZ),
+                                                                                 new XAttribute("CIELAB_L", x.CielabL),
+                                                                                 new XAttribute("CIELAB_a", x.CielabA),
+                                                                                 new XAttribute("CIELAB_b", x.CielabB),
+                                                                                 new XAttribute("Density_C", x.Density.Red),
+                                                                                 new XAttribute("Density_M", x.Density.Green),
+                                                                                 new XAttribute("Density_Y", x.Density.Blue),
+                                                                                 new XAttribute("Density_V", x.Density.Visual)
+                                                                        )).ToList());
+                    }
+
+
                     DataAccessFactory.
                     Instance.
                     ExecuteProcedure("CPSync4D.ImportMeasurementDetails",
@@ -2483,7 +2554,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                          new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
                                                          new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
                                                          new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType) },
-                                                         new Parameters() {ParameterName = "@LicenseType", Type = DbType.Int32, Value = Convert.ToInt32(LicenseTypeID)}
+                                                         new Parameters() {ParameterName = "@LicenseType", Type = DbType.Int32, Value = Convert.ToInt32(LicenseTypeID)},
+                                                         new Parameters() {ParameterName = "@ProjectID", Type = DbType.Int32, Value = measurement.ProjectId},
+                                                         new Parameters() {ParameterName = "@Notes", Type = DbType.String, Value = measurement.Notes},
+                                                         new Parameters() {ParameterName = "@Customer", Type = DbType.String, Value = measurement.Customer},
+                                                         new Parameters() {ParameterName = "@PageOrSurface", Type = DbType.String, Value = measurement.PageOrSurface},
+                                                         new Parameters() {ParameterName = "@JDFJobId", Type = DbType.String, Value = measurement.JDFJobId}
                                              },
                                      new List<Parameters>()
                                              {

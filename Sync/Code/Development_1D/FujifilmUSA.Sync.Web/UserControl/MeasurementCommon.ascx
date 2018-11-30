@@ -720,7 +720,7 @@
             Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupImportMeasurements.aspx">
         </telerik:RadWindow>
         <telerik:RadWindow ID="ImportMeasurementFileWindow" runat="server" VisibleStatusbar="false"
-            ShowContentDuringLoad="false" Title="Import Measurement File" Width="730" Height="230"
+            ShowContentDuringLoad="false" Title="Import Measurement File" Width="730" Height="285"
             Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupImportMeasurementFile.aspx">
         </telerik:RadWindow>
     </Windows>
