@@ -46,7 +46,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         {
             try
             {
-                LicenseTypeID = (int)SessionManager.Instance.CurrentDlpSubOperation;
+                if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus== ECurrentProjectStatus.New && SessionManager.Instance.CurrentProject.OptimizeRuns.Count() == 1)
+                    LicenseTypeID = (int)SessionManager.Instance.CurrentProject.LicenseType;
+                else
+                    LicenseTypeID = (int)SessionManager.Instance.CurrentDlpSubOperation;
 
                 if (fuMeasurement.PostedFile != null)
                 {
@@ -83,7 +86,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
                             if (SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId != Measurement.MeasurementAppPatches[0].InstrumentTypeID)
                             {
-                                fujiStatusbar.DisplayMessage("Instrument type is different. Please select same reference chart type.", false);
+                                fujiStatusbar.DisplayMessage("Instrument type is different. Please select same Instrument type.", false);
                                 return;
                             }
                             //bind the measurement patches 
