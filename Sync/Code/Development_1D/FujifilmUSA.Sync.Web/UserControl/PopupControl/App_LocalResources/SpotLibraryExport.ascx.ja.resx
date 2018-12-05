@@ -156,4 +156,10 @@
   <data name="Caldera2Resource1.Text" xml:space="preserve">
     <value>Caldera2</value>
   </data>
+  <data name="locQualityResource1.Text" xml:space="preserve">
+    <value>Quality</value>
+  </data>
+  <data name="txtModeResource1.Text" xml:space="preserve">
+    <value>Mode</value>
+  </data>
 </root>

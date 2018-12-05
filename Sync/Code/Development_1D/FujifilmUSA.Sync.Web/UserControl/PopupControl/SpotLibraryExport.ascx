@@ -105,8 +105,7 @@
                                             </td>
                                             <td>
                                                 <div style="float: left;">
-                                                    <asp:TextBox ID="txtServer" runat="server" Width="200px" Height="19px"
-                                                        MaxLength="50" meta:resourcekey="txtServerResource1"></asp:TextBox>
+                                                    <asp:TextBox ID="txtServer" runat="server" Width="200px" Height="19px" MaxLength="50" ></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvtxtServer" runat="server" Display="Dynamic" ControlToValidate="txtServer"
@@ -125,8 +124,7 @@
                                             </td>
                                             <td>
                                                 <div style="float: left;">
-                                                    <asp:TextBox ID="txtModel" runat="server" Width="200px" Height="19px"
-                                                        MaxLength="50" meta:resourcekey="txtModelResource1"></asp:TextBox>
+                                                    <asp:TextBox ID="txtModel" runat="server" Width="200px" Height="19px" MaxLength="50"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvtxtModel" runat="server" Display="Dynamic" ControlToValidate="txtModel"
@@ -147,8 +145,7 @@
                                             </td>
                                             <td>
                                                 <div style="float: left;">
-                                                    <asp:TextBox ID="txtMedia" runat="server" Width="200px" Height="19px"
-                                                        MaxLength="50" meta:resourcekey="txtMediaResource1"></asp:TextBox>
+                                                    <asp:TextBox ID="txtMedia" runat="server" Width="200px" Height="19px" MaxLength="50"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvtxtMedia" runat="server" Display="Dynamic" ControlToValidate="txtMedia"
@@ -167,8 +164,7 @@
                                             </td>
                                             <td>
                                                 <div style="float: left;">
-                                                    <asp:TextBox ID="txtResolution" runat="server" Width="200px" Height="19px"
-                                                        MaxLength="50" meta:resourcekey="txtResolutionResource1"></asp:TextBox>
+                                                    <asp:TextBox ID="txtResolution" runat="server" Width="200px" Height="19px" MaxLength="50" ></asp:TextBox>
                                                 </div>
 
                                                 <div style="float: left">
@@ -185,19 +181,17 @@
                                         <tr runat="server" id="trCaldera2Row1" visible="false">
                                             <td>
                                                 <span>
-                                                    <asp:Localize runat="server" Text="Mode:" ID="Localize2"
-                                                        meta:resourcekey="locMediaResource1"></asp:Localize><span style="color: Red;">*</span></span>
+                                                    <asp:Localize runat="server" Text="Mode:" ID="locMode"
+                                                        meta:resourcekey="locModeResource1"></asp:Localize><span style="color: Red;">*</span></span>
                                             </td>
                                             <td>
                                                 <div style="float: left;">
                                                     <asp:TextBox ID="txtMode" runat="server" Width="200px" Height="19px"
-                                                        MaxLength="50" meta:resourcekey="txtMediaResource1"></asp:TextBox>
+                                                        MaxLength="50" ></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvMode" runat="server" Display="Dynamic" ControlToValidate="txtMode"
                                                         ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
-                                                        <%--<ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
-                                                            ValidationMsg="Please media name." Size="200" />--%>
                                                         <ucValidationContainer:ValidationContainer ID="rfvModeContainer" runat="server"
                                                 ValidationMsg="Please enter mode." Size="200" ResourceValidationMsg="ModeRequiredResource"/>
                                                     </asp:RequiredFieldValidator>
@@ -207,20 +201,18 @@
                                             </td>
                                             <td>
                                                 <span>
-                                                    <asp:Localize runat="server" Text="Quality:" ID="Localize3"
+                                                    <asp:Localize runat="server" Text="Quality:" ID="locQuality"
                                                         meta:resourcekey="locQualityResource1"></asp:Localize><span style="color: Red;">*</span></span>
                                             </td>
                                             <td>
                                                 <div style="float: left;">
                                                     <asp:TextBox ID="txtQuality" runat="server" Width="200px" Height="19px"
-                                                        MaxLength="50" meta:resourcekey="txtResolutionResource1"></asp:TextBox>
+                                                        MaxLength="50"></asp:TextBox>
                                                 </div>
 
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvQuality" runat="server" Display="Dynamic" ControlToValidate="txtQuality"
                                                         ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
-                                                        <%--<ucValidationContainer:ValidationContainer ID="ValidationContainer2" runat="server"
-                                                            ValidationMsg="Please resolution." Size="200" />--%>
                                                         <ucValidationContainer:ValidationContainer ID="rfvQualityContainer" runat="server"
                                                 ValidationMsg="Please enter quality." Size="200" ResourceValidationMsg="QualityRequiredResource"/>
                                                     </asp:RequiredFieldValidator>

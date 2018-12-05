@@ -265,13 +265,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow trCaldera2Row1;
         
         /// <summary>
-        /// Localize2 control.
+        /// locMode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
+        protected global::System.Web.UI.WebControls.Localize locMode;
         
         /// <summary>
         /// txtMode control.
@@ -301,13 +301,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvModeContainer;
         
         /// <summary>
-        /// Localize3 control.
+        /// locQuality control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize3;
+        protected global::System.Web.UI.WebControls.Localize locQuality;
         
         /// <summary>
         /// txtQuality control.
