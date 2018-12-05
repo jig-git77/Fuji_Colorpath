@@ -62,17 +62,18 @@
                                             </td>
                                             <td>
                                                 <div style="float: left">
-                                                    <asp:DropDownList ID="cmbCMYKLibrary" ClientIDMode="Static" runat="server" Width="150px" OnSelectedIndexChanged="cmbCMYKLibrary_SelectedIndexChanged" AutoPostBack="true">
+                                                    <asp:DropDownList ID="cmbCMYKLibrary" ClientIDMode="Static" runat="server"  Height="25px"  Width="204px" OnSelectedIndexChanged="cmbCMYKLibrary_SelectedIndexChanged" AutoPostBack="true">
                                                         <asp:ListItem Text="--Select--" meta:resourcekey="SelectTextResource1" Value=""></asp:ListItem>
                                                         <asp:ListItem Text="Caldera" meta:resourcekey="CalderaResource1" Value="1"></asp:ListItem>
                                                         <asp:ListItem Text="ColorGate" meta:resourcekey="ColorgateResource1" Value="2"></asp:ListItem>
+                                                        <asp:ListItem Text="Caldera2" meta:resourcekey="Caldera2Resource1" Value="3"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvCMYKLibrary" runat="server" Display="Dynamic" ControlToValidate="cmbCMYKLibrary"
                                                         ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
                                                         <ucValidationContainer:ValidationContainer ID="rfvcCMYKLibrary" runat="server"
-                                                            ValidationMsg="Please select library." Size="200" />
+                                                            ValidationMsg="Please select library." Size="200" ResourceValidationMsg="LibraryRequiredResource" />
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
@@ -91,7 +92,7 @@
                                                     <asp:RequiredFieldValidator ID="rfvtxtFileName" runat="server" Display="Dynamic" ControlToValidate="txtFileName"
                                                         ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
                                                         <ucValidationContainer:ValidationContainer ID="vctxtFileName" runat="server"
-                                                            ValidationMsg="Please enter file name." Size="200" />
+                                                            ValidationMsg="Please enter file name." Size="200" ResourceValidationMsg="FileNameRequiredResource" />
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
@@ -111,7 +112,7 @@
                                                     <asp:RequiredFieldValidator ID="rfvtxtServer" runat="server" Display="Dynamic" ControlToValidate="txtServer"
                                                         ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
                                                         <ucValidationContainer:ValidationContainer ID="vctxtServer" runat="server"
-                                                            ValidationMsg="Please server name." Size="200" />
+                                                            ValidationMsg="Please server name." Size="200" ResourceValidationMsg="ServerRequiredResource" />
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                                 <div class="clear">
@@ -131,7 +132,7 @@
                                                     <asp:RequiredFieldValidator ID="rfvtxtModel" runat="server" Display="Dynamic" ControlToValidate="txtModel"
                                                         ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
                                                         <ucValidationContainer:ValidationContainer ID="vctxtModel" runat="server"
-                                                            ValidationMsg="Please model name." Size="200" />
+                                                            ValidationMsg="Please model name." Size="200" ResourceValidationMsg="ModelRequiredResource" />
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                                 <div class="clear">
@@ -153,7 +154,7 @@
                                                     <asp:RequiredFieldValidator ID="rfvtxtMedia" runat="server" Display="Dynamic" ControlToValidate="txtMedia"
                                                         ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
                                                         <ucValidationContainer:ValidationContainer ID="vctxtMedia" runat="server"
-                                                            ValidationMsg="Please media name." Size="200" />
+                                                            ValidationMsg="Please media name." Size="200" ResourceValidationMsg="MediaRequiredResource" />
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                                 <div class="clear">
@@ -174,7 +175,54 @@
                                                     <asp:RequiredFieldValidator ID="rfvtxtResolution" runat="server" Display="Dynamic" ControlToValidate="txtResolution"
                                                         ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
                                                         <ucValidationContainer:ValidationContainer ID="vctxtResolution" runat="server"
-                                                            ValidationMsg="Please resolution." Size="200" />
+                                                            ValidationMsg="Please enter resolution." Size="200" ResourceValidationMsg="ResolutionRequiredResource" />
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                                <div class="clear">
+                                                </div>
+                                            </td>                                          
+                                        </tr>
+                                        <tr runat="server" id="trCaldera2Row1" visible="false">
+                                            <td>
+                                                <span>
+                                                    <asp:Localize runat="server" Text="Mode:" ID="Localize2"
+                                                        meta:resourcekey="locMediaResource1"></asp:Localize><span style="color: Red;">*</span></span>
+                                            </td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtMode" runat="server" Width="200px" Height="19px"
+                                                        MaxLength="50" meta:resourcekey="txtMediaResource1"></asp:TextBox>
+                                                </div>
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfvMode" runat="server" Display="Dynamic" ControlToValidate="txtMode"
+                                                        ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
+                                                        <%--<ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
+                                                            ValidationMsg="Please media name." Size="200" />--%>
+                                                        <ucValidationContainer:ValidationContainer ID="rfvModeContainer" runat="server"
+                                                ValidationMsg="Please enter mode." Size="200" ResourceValidationMsg="ModeRequiredResource"/>
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                                <div class="clear">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <asp:Localize runat="server" Text="Quality:" ID="Localize3"
+                                                        meta:resourcekey="locQualityResource1"></asp:Localize><span style="color: Red;">*</span></span>
+                                            </td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtQuality" runat="server" Width="200px" Height="19px"
+                                                        MaxLength="50" meta:resourcekey="txtResolutionResource1"></asp:TextBox>
+                                                </div>
+
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfvQuality" runat="server" Display="Dynamic" ControlToValidate="txtQuality"
+                                                        ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
+                                                        <%--<ucValidationContainer:ValidationContainer ID="ValidationContainer2" runat="server"
+                                                            ValidationMsg="Please resolution." Size="200" />--%>
+                                                        <ucValidationContainer:ValidationContainer ID="rfvQualityContainer" runat="server"
+                                                ValidationMsg="Please enter quality." Size="200" ResourceValidationMsg="QualityRequiredResource"/>
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                                 <div class="clear">

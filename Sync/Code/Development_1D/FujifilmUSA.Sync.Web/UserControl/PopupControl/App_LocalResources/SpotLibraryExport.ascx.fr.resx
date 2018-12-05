@@ -153,4 +153,7 @@
   <data name="SelectTextResource1.Text" xml:space="preserve">
     <value>-- Select --</value>
   </data>
+  <data name="Caldera2Resource1.Text" xml:space="preserve">
+    <value>Caldera2</value>
+  </data>
 </root>

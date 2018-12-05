@@ -71,13 +71,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 }
 
                 if (cmbCMYKLibrary.SelectedValue.ToString() == "1")
-                {
                     ExportColderaFile(listPatch, txtFileName.Text);
-                }
-                else
-                {
+                else if (cmbCMYKLibrary.SelectedValue.ToString() == "2")
                     ExportColorgateFile(listPatch, txtFileName.Text);
-                }
+                else
+                    ExportColdera2File(listPatch, txtFileName.Text);
 
             }
         }
@@ -88,11 +86,19 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             {
                 trCalderaRow1.Visible = true;
                 trCalderaRow2.Visible = true;
+                trCaldera2Row1.Visible = false;
+            }
+            else if (cmbCMYKLibrary.SelectedValue.ToString() == "3")
+            {
+                trCalderaRow1.Visible = true;
+                trCalderaRow2.Visible = true;
+                trCaldera2Row1.Visible = true;
             }
             else
             {
                 trCalderaRow1.Visible = false;
                 trCalderaRow2.Visible = false;
+                trCaldera2Row1.Visible = false;
             }
 
         }
@@ -167,6 +173,36 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         }
 
 
+        #endregion
+
+        #region Create file and download .xml file for Caldera2 CMYK type
+        private void ExportColdera2File(List<Patch> listPatch, string CMYKFileName)
+        {
+            string SpotName_Parameter = "";
+
+            System.IO.StreamWriter sw;
+            sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName + ".xml");
+
+            //--------Start: Header------------//
+            sw.WriteLine("<MediaDeviceColors>");
+            sw.WriteLine("<ColorList mode=" + "\"" + txtMode.Text + "\"" + " quality=" + "\"" + txtQuality.Text + "\"" + " server=" + "\"" + txtServer.Text + "\"" + " model=" + "\"" + txtModel.Text + "\"" + " media=" + "\"" + txtMedia.Text + "\"" + " resolution=" + "\"" + txtResolution.Text + "\"" + ">");
+            //--------End: Header--------------//
+
+            for (int i = 0; i < listPatch.Count; i++)
+            {
+                SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
+                sw.WriteLine("<Color>" + SpotName_Parameter + " : " + "CMYK " + listPatch[i].Cmyk_C.ToString("N1") + " " + listPatch[i].Cmyk_M.ToString("N1") + " " + listPatch[i].Cmyk_Y.ToString("N1") + " " + listPatch[i].Cmyk_K.ToString("N1") + " </Color>");
+            }
+            //--------Start: Footer------------//
+            sw.WriteLine("</ColorList>");
+            sw.WriteLine("</MediaDeviceColors>");
+            //--------End: Footer--------------//
+
+            sw.Close();
+
+            Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".xml", CMYKFileName + ".xml");
+
+        }
         #endregion
 
         #region Create file and download .dbd file for CMYK values

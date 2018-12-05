@@ -430,7 +430,7 @@
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True" meta:resourcekey="RadWindowManagerResource1">
     <Windows>       
         <telerik:RadWindow ID="ReportSpotLibraryExportWindow" runat="server" VisibleStatusbar="false"
-            ShowContentDuringLoad="false" Title="Spot Library Export" Width="730" Height="260"
+            ShowContentDuringLoad="false" Title="Spot Library Export" Width="730" Height="300"
             Behaviors="Close, Move" Behavior="Close, Move">
         </telerik:RadWindow>
     </Windows>
