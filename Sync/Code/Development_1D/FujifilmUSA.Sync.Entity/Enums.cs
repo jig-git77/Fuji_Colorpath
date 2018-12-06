@@ -419,9 +419,9 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ELicenseType_SpotLibrary")]//Spot Color Library
         SpotLibrary = 10,
         [Description("ELicenseType_Validation")]//Color Validation
-        Validation = 11,
+        Validation = 51,
         [Description("ELicenseType_IccProfiling")]//ICC Profiling
-        IccProfiling = 12
+        IccProfiling = 52
     }
 
     public enum UserType
