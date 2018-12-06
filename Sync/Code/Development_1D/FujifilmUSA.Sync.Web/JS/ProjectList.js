@@ -45,6 +45,7 @@ $(document).ready(function () {
     CurrentDeviceID = $("#hdfCurrentDeviceID").val();
     CurrentUserID = $("#hdfCurrentUser").val();
     CurrentCulture = $("#hdfCurrentCulture").val();
+    hdfSpotProjectAllowed = $("#hdfSpotProjectAllowed");
     //var dID = $hdfCurrentDeviceID.val();
     $kendoProjectList.kendoGrid({
         dataSource: {
@@ -529,8 +530,9 @@ function detailInit(e) {
                         data: { projectID: pID },
                         dataType: "json",
                         success: function (response) {
-                            var jsonSpotProjectList = JSON.parse(response.data);                            
-                            options.success(jsonSpotProjectList);
+                            var result = JSON.parse(response.data);                            
+                            hdfSpotProjectAllowed.val(result.isAllowSpotProject);
+                            options.success(result.SpotProjectLibraries);
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             alert(textStatus);
@@ -574,7 +576,7 @@ function detailInit(e) {
         toolbar: [{ 'name': 'createSpot', template: '<button id="btnCreateSpotProject" onclick="return Redirect(' + pID + ',\'AddSpotProject\');" class=\'k-button\'>' + Resources.CreateNewLibrary + '</button>' }],
         dataBound: function (e) {
             //console.log('chile bound event');
-
+            
             var dataSource = this.dataSource;
             this.element.find('tr').each(function () {
                 var row = $(this);
@@ -611,14 +613,19 @@ function detailInit(e) {
                         row.find("td #imgSpotProject").attr('title', SpotprojectTypeTooltip);   //set the Spot project type tooltip
                     }
 
-                    var gridCurrent = $(row[0]).closest('.k-grid');                    
-                    if (!data.isAllowSpotProject) {
-                        $(gridCurrent).find('.k-grid-toolbar').hide();
-                    } else {
-                        $(gridCurrent).find('.k-grid-toolbar').show();
-                    }
+                    
                 }
+
             });
+
+            //  enable/disabled button as per spot project limit
+            var gridCurrent = $(e.sender.tbody).closest('.k-grid');
+            var spotProjectAllowed = hdfSpotProjectAllowed.val() == 'true';
+            if (!spotProjectAllowed) {
+                $(gridCurrent).find('.k-grid-toolbar').hide();
+            } else {
+                $(gridCurrent).find('.k-grid-toolbar').show();
+            }
         },
         columns: [
             {

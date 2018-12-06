@@ -110,7 +110,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 GenerateResources();
                 ProjectId = projectID;
                 _presenterProjectList.GetSpotLibraryListByProjectId();
-                var json = JsonConvert.SerializeObject(SpotProjectLibraries);
+                var json = JsonConvert.SerializeObject(SpotProjectList);
                 httpResponse.Data = json;
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
             }
@@ -186,7 +186,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public int DeviceId { get; set; }
         public int LicenseTypeID { get; set; }
         public Project Project { get; set; }
-        public List<FujifilmUSA.Sync.Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
+        //public List<FujifilmUSA.Sync.Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
+        public SpotProjectList SpotProjectList { get; set; }
         public int SpotProjectId { get; set; }
 
         #endregion

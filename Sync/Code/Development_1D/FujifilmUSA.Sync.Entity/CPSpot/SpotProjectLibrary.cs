@@ -32,4 +32,10 @@ namespace FujifilmUSA.Sync.Entity.CPSpot
 
         public CPSpot.SpotTarget ReTargetSpotTarget { get; set; }
     }
+
+    public class SpotProjectList
+    {
+        public bool isAllowSpotProject { get; set; }
+        public List<FujifilmUSA.Sync.Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
+    }
 }

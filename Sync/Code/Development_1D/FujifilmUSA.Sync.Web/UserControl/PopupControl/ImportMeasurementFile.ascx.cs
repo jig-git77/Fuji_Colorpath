@@ -46,7 +46,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         {
             try
             {
-                if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus== ECurrentProjectStatus.New && SessionManager.Instance.CurrentProject.OptimizeRuns.Count() == 1)
+                if ((SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New && SessionManager.Instance.CurrentProject.OptimizeRuns.Count() == 1)
+                    || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
                     LicenseTypeID = (int)SessionManager.Instance.CurrentProject.LicenseType;
                 else
                     LicenseTypeID = (int)SessionManager.Instance.CurrentDlpSubOperation;
@@ -65,7 +66,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                         Measurement.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                         Measurement.MeasurementDate = DateTime.Now;
                         Measurement.PCSDataType = 1;
-                        
+
                         Measurement.ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                         //if current project is validation then assign extra information
                         if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
@@ -91,15 +92,16 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                             }
                             //bind the measurement patches 
                             BindMeasurementPatches(Measurement);
+                            _presenterImportMeasurements.ImportMeasurementsFile();
 
-                            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.SpotLibrary)
-                                _presenterImportMeasurements.ImportSpotMeasurementFile();
-                            else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)                            
-                                _presenterImportMeasurements.Import1DMeasurementFile();
-                            else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
-                                _presenterImportMeasurements.ImportValidationMeasurementFile();
-                            else
-                                _presenterImportMeasurements.ImportMeasurementFile();
+                            //if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.SpotLibrary)
+                            //    _presenterImportMeasurements.ImportSpotMeasurementFile();
+                            //else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)
+                            //    _presenterImportMeasurements.Import1DMeasurementFile();
+                            //else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                            //    _presenterImportMeasurements.ImportValidationMeasurementFile();
+                            //else
+                            //    _presenterImportMeasurements.ImportMeasurementFile();
 
                             if (this.MeasurementID == -2)
                             {

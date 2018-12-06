@@ -1491,9 +1491,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstReTargetProjectList;
         }
 
-        public List<Entity.CPSpot.SpotProjectLibrary> GetSpotLibraryListByProjectId(int projectId)
+        public SpotProjectList GetSpotLibraryListByProjectId(int projectId)
         {
-            var objProjectList = new List<Entity.CPSpot.SpotProjectLibrary>();
+            var objSpotProjectList = new SpotProjectList();
+            objSpotProjectList.SpotProjectLibraries = new List<SpotProjectLibrary>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1506,36 +1507,41 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         {
                                             projectId
                                         });
-                    if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
+                    if (dsProjectList != null && dsProjectList.Tables.Count > 0)
                     {
-                        objProjectList = dsProjectList.Tables[0].AsEnumerable().
-                            Select(x => new Entity.CPSpot.SpotProjectLibrary()
-                            {
-                                SpotProjectId = DataReader.ReadInt(x, "SpotProjectID"),
-                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
-                                ProjectName = DataReader.ReadString(x, "ProjectName"),
+                        objSpotProjectList.isAllowSpotProject = dsProjectList.Tables[0].Rows.Count > 0 ? Convert.ToBoolean(dsProjectList.Tables[0].Rows[0]["isAllowSpotProject"]) : false; ;
 
-                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                        if (dsProjectList.Tables[1].Rows.Count > 0)
+                        {
+                            objSpotProjectList.SpotProjectLibraries = dsProjectList.Tables[1].AsEnumerable().
+                                Select(x => new Entity.CPSpot.SpotProjectLibrary()
+                                {
+                                    SpotProjectId = DataReader.ReadInt(x, "SpotProjectID"),
+                                    ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                    ProjectName = DataReader.ReadString(x, "ProjectName"),
+
+                                    IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
 
                                 // TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
 
                                 SpotTarget = new Entity.CPSpot.SpotTarget()
-                                {
-                                    SpotTargetID = DataReader.ReadShort(x, "SpotTargetID"),
-                                    SpotTargetName = DataReader.ReadString(x, "SpotTargetName")
-                                },
+                                    {
+                                        SpotTargetID = DataReader.ReadShort(x, "SpotTargetID"),
+                                        SpotTargetName = DataReader.ReadString(x, "SpotTargetName")
+                                    },
 
-                                CreateDate = DataReader.ReadDate(x, "EndDateTime"),
-                                TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
-                                HasColorProfile = DataReader.ReadBoolean(x, "HasColorProfile"),
-                                LastOptmizeId = DataReader.ReadInt(x, "LastOptimizeID"),
-                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
-                                isAllowSpotProject = DataReader.ReadBoolean(x, "isAllowSpotProject")
+                                    CreateDate = DataReader.ReadDate(x, "EndDateTime"),
+                                    TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
+                                    HasColorProfile = DataReader.ReadBoolean(x, "HasColorProfile"),
+                                    LastOptmizeId = DataReader.ReadInt(x, "LastOptimizeID"),
+                                    Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus")
+                                //isAllowSpotProject = DataReader.ReadBoolean(x, "isAllowSpotProject")
                             }).ToList();
+                        }
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectsByDeviceId"));
-            return objProjectList;
+            return objSpotProjectList;
         }
 
         public List<Entity.CPSpot.SpotTarget> GetSpotTargetList(int currentUserId, bool isSpotTargetType)

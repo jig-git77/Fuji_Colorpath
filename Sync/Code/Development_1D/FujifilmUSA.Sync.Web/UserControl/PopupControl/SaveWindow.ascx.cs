@@ -81,8 +81,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
                     SessionManager.Instance.CurrentProject = Project;
                     SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last();
-                    //SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
-                    //Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
 
                     if (isNewSpotProject)
                     {
@@ -91,10 +89,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else
                     {
-                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                        Utilities.PopupWindowsRedirect(this, "Analyze_SpotColor.aspx?OptimizeRunID=" + SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId);
+                        if (SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                        {
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+                            Utilities.PopupWindowsRedirect(this, "Export.aspx");
+                        }
+                        else if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
+                        {
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                            Utilities.PopupWindowsRedirect(this, "Analyze_SpotColor.aspx");
+                        }
+                        else
+                        {
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                            Utilities.PopupWindowsRedirect(this, "Spot_Measurement.aspx");
+                        }
                     }
-
                 }
             }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //---If  "Custom Source Profile" / "Full Gamut Source Profile" project type
