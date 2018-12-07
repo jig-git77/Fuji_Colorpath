@@ -83,9 +83,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                         }
 
                         if (Measurement.MeasurementAppPatches.Count > 0)
-                        {
-
-                            if (SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId != Measurement.MeasurementAppPatches[0].InstrumentTypeID)
+                        {                            
+                            if (!CheckInstrumentType(Convert.ToInt32(SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId), Measurement.MeasurementAppPatches[0].InstrumentTypeID))
                             {
                                 fujiStatusbar.DisplayMessage("Instrument type is different. Please select same Instrument type.", false);
                                 return;
@@ -195,6 +194,24 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 });
             }
 
+        }
+
+        public bool CheckInstrumentType(int currentProjectInstrumentType, int measurementInstrumentType)
+        {
+            if ((currentProjectInstrumentType == (int)EInstrumentType.i1IO && measurementInstrumentType == (int)EInstrumentType.i1IOPro2)
+                || (currentProjectInstrumentType == (int)EInstrumentType.i1IOPro2 && measurementInstrumentType == (int)EInstrumentType.i1IO))
+                return true;
+            if ((currentProjectInstrumentType == (int)EInstrumentType.i1Pro && measurementInstrumentType == (int)EInstrumentType.i1Pro2)
+                || (currentProjectInstrumentType == (int)EInstrumentType.i1Pro2 && measurementInstrumentType == (int)EInstrumentType.i1Pro))
+                return true;
+            if ((currentProjectInstrumentType == (int)EInstrumentType.i1Sis && measurementInstrumentType == (int)EInstrumentType.i1Sis2)
+                || (currentProjectInstrumentType == (int)EInstrumentType.i1Sis2 && measurementInstrumentType == (int)EInstrumentType.i1Sis))
+                return true;
+
+            if (currentProjectInstrumentType == measurementInstrumentType)
+                return true;
+
+            return false;
         }
         #endregion
 
