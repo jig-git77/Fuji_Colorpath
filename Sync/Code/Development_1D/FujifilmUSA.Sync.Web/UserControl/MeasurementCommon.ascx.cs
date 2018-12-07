@@ -49,7 +49,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation).ToString().ToLower();
                 hdLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
                 btnImportMeasurementFile.Value = GetResourceString("btnImportMeasurementFile");
-                btnImportMeasurementFile.Visible = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) && SessionManager.Instance.CurrentUser.Role.RoleId == (int)ERole.SystemAdmin;
+                //setting btnImportMeasurementFile invisible for time being
+                btnImportMeasurementFile.Visible = false;
+                //btnImportMeasurementFile.Visible = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) && SessionManager.Instance.CurrentUser.Role.RoleId == (int)ERole.SystemAdmin;
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
                     hdProjectId.Value = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId.ToString();
                 else
