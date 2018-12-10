@@ -185,7 +185,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
             //--------Start: Header------------//
             sw.WriteLine("<MediaDeviceColors>");
-            sw.WriteLine("<ColorList mode=" + "\"" + txtMode.Text + "\"" + " quality=" + "\"" + txtQuality.Text + "\"" + " server=" + "\"" + txtServer.Text + "\"" + " model=" + "\"" + txtModel.Text + "\"" + " media=" + "\"" + txtMedia.Text + "\"" + " resolution=" + "\"" + txtResolution.Text + "\"" + ">");
+            sw.WriteLine("<ColorList server=" + "\"" + txtServer.Text + "\"" + " model=" + "\"" + txtModel.Text + "\"" + " media=" + "\"" + txtMedia.Text + "\"" + " resolution=" + "\"" + txtResolution.Text + "\"" + " quality=" + "\"" + txtQuality.Text + "\"" + " mode=" + "\"" + txtMode.Text + "\"" + ">");
             //--------End: Header--------------//
 
             for (int i = 0; i < listPatch.Count; i++)
