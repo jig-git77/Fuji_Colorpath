@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CalderaResource1.Text" xml:space="preserve">
-    <value>Caldera</value>
+    <value>Caldera CMYK</value>
   </data>
   <data name="ColorgateResource1.Text" xml:space="preserve">
     <value>ColorGate</value>
@@ -154,7 +154,7 @@
     <value>-- Select --</value>
   </data>
   <data name="Caldera2Resource1.Text" xml:space="preserve">
-    <value>Caldera2</value>
+    <value>Caldera CMYK+</value>
   </data>
   <data name="locModeResource1.Text" xml:space="preserve">
     <value>Mode: </value>

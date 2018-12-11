@@ -73,10 +73,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 if (cmbCMYKLibrary.SelectedValue.ToString() == "1")
                     ExportColderaFile(listPatch, txtFileName.Text);
                 else if (cmbCMYKLibrary.SelectedValue.ToString() == "2")
-                    ExportColorgateFile(listPatch, txtFileName.Text);
-                else
                     ExportColdera2File(listPatch, txtFileName.Text);
-
+                else
+                    ExportColorgateFile(listPatch, txtFileName.Text);
             }
         }
 
@@ -88,7 +87,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 trCalderaRow2.Visible = true;
                 trCaldera2Row1.Visible = false;
             }
-            else if (cmbCMYKLibrary.SelectedValue.ToString() == "3")
+            else if (cmbCMYKLibrary.SelectedValue.ToString() == "2")
             {
                 trCalderaRow1.Visible = true;
                 trCalderaRow2.Visible = true;

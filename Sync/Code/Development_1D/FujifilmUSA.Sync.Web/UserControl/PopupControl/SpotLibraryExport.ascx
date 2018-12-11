@@ -65,8 +65,8 @@
                                                     <asp:DropDownList ID="cmbCMYKLibrary" ClientIDMode="Static" runat="server"  Height="25px"  Width="204px" OnSelectedIndexChanged="cmbCMYKLibrary_SelectedIndexChanged" AutoPostBack="true">
                                                         <asp:ListItem Text="--Select--" meta:resourcekey="SelectTextResource1" Value=""></asp:ListItem>
                                                         <asp:ListItem Text="Caldera" meta:resourcekey="CalderaResource1" Value="1"></asp:ListItem>
-                                                        <asp:ListItem Text="ColorGate" meta:resourcekey="ColorgateResource1" Value="2"></asp:ListItem>
-                                                        <asp:ListItem Text="Caldera2" meta:resourcekey="Caldera2Resource1" Value="3"></asp:ListItem>
+                                                        <asp:ListItem Text="Caldera2" meta:resourcekey="Caldera2Resource1" Value="2"></asp:ListItem>
+                                                        <asp:ListItem Text="ColorGate" meta:resourcekey="ColorgateResource1" Value="3"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div style="float: left">
