@@ -20,15 +20,15 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
-        public string getMinutesSinceUnixEpoch()
+        public double getMinutesSinceUnixEpoch()
         {
-            string minutesSinceUnixEpoch = "";            
+            double minutesSinceUnixEpoch = 0;            
             try
             {
                 DateTime date = DateTime.Now;
                 DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                 TimeSpan diff = date.ToUniversalTime() - origin;
-                minutesSinceUnixEpoch = Math.Floor(diff.TotalMinutes).ToString();                               
+                minutesSinceUnixEpoch = Math.Floor(diff.TotalMinutes);                               
             }
             catch (Exception ex)
             {
