@@ -2521,7 +2521,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                              )).ToList());
                     }
 
-                    if (LicenseTypeID == 11) // validation project
+                    if (LicenseTypeID == 51) // validation project
                     {
                         measurementPatches = new XElement("MeasurementPatches",
                                                          measurement.MeasurementPatches.
