@@ -1113,7 +1113,7 @@ function BindMeasurementPatchDetails() {
                 //}
             },
             pageable: {
-                refresh: true,
+                refresh: false,
                 pageSizes: true
             },
             noRecords: {
