@@ -209,8 +209,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         #region Create file and download .dbd file for CMYK values
         private void ExportCMYK_DBDFile(List<Patch> listPatch, string CMYKFileName)
         {
-            //string CMYKFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00");
-
             string SpotName_Header, SpotName_Parameter;
             System.IO.StreamWriter sw = null;
             string directoryName = System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName;
@@ -231,12 +229,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 sw.WriteLine("\tName:string = " + "\"" + SpotName_Parameter + "\"");
                 sw.WriteLine("\tFUJI" + "\\" + "PrintMode:string = " + "\"LargeGumatMerge\";");
                 sw.WriteLine("\tColorType:string = " + "\"Normal\";");
-                //sw.WriteLine("\tNeutralDensity:double = " + String.Format("{0,12:e15}", GetNdensity(listPatch[i].Cie_L)) + ";");
-                //sw.WriteLine("\tTempLab:double[3] = " + String.Format("{0,12:e15}", listPatch[i].Cie_L) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_a) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_b) + ";");
-                //sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", listPatch[i].Cmyk_C) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_M) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_Y) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_K) + ";");
-                sw.WriteLine("\tNeutralDensity:double = " + GetNdensity(listPatch[i].Cie_L).ToString("0.000000000000000E+0") + ";");
-                sw.WriteLine("\tTempLab:double[3] = " + listPatch[i].Cie_L.ToString("0.000000000000000E+0") + "," + listPatch[i].Cie_a.ToString("0.000000000000000E+0") + "," + listPatch[i].Cie_b.ToString("0.000000000000000E+0") + ";");
-                sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", listPatch[i].Cmyk_C) + "," + listPatch[i].Cmyk_M.ToString("0.000000000000000E+0") + "," + listPatch[i].Cmyk_Y.ToString("0.000000000000000E+0") + "," + listPatch[i].Cmyk_K.ToString("0.000000000000000E+0") + ";");
+                sw.WriteLine("\tNeutralDensity:double = " + GetNdensity(listPatch[i].Cie_L).ToString("0.000000000000000e+0") + ";");
+                sw.WriteLine("\tTempLab:double[3] = " + listPatch[i].Cie_L.ToString("0.000000000000000e+0") + "," + listPatch[i].Cie_a.ToString("0.000000000000000e+0") + "," + listPatch[i].Cie_b.ToString("0.000000000000000e+0") + ";");
+                sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", listPatch[i].Cmyk_C) + "," + listPatch[i].Cmyk_M.ToString("0.000000000000000e+0") + "," + listPatch[i].Cmyk_Y.ToString("0.000000000000000e+0") + "," + listPatch[i].Cmyk_K.ToString("0.000000000000000e+0") + ";");
                 sw.WriteLine("\tHideCMYK:string = " + "\"ShowAll\";");
                 sw.WriteLine("\tHideLab:string = " + "\"ShowAll\";");
                 sw.WriteLine("\tRawName:string = " + "\"\";");
