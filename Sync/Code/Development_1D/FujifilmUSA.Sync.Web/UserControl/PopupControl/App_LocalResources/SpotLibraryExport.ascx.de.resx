@@ -162,4 +162,7 @@
   <data name="txtModeResource1.Text" xml:space="preserve">
     <value>Mode</value>
   </data>
+  <data name="XMFResource1.Text" xml:space="preserve">
+    <value>XMF</value>
+  </data>
 </root>

@@ -74,8 +74,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                     ExportColderaFile(listPatch, txtFileName.Text);
                 else if (cmbCMYKLibrary.SelectedValue.ToString() == "2")
                     ExportColdera2File(listPatch, txtFileName.Text);
-                else
+                else if (cmbCMYKLibrary.SelectedValue.ToString() == "3")
                     ExportColorgateFile(listPatch, txtFileName.Text);
+                else
+                    ExportCMYK_DBDFile(listPatch, txtFileName.Text);
             }
         }
 
@@ -147,7 +149,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             sw.Write("<?xml version=" + "\"1.0" + "\"" + " encoding=" + "\"UTF-8" + "\"?>");
             sw.Write("<ColorTable xmlns=" + "\"urn:schemas-colorgate-com:colortable" + "\"" + " Name=" + "\"" + CMYKFileName + "\"" + " Version=" + "\"2" + "\">");
             //--------End: Header--------------//
-            
+
             for (int i = 0; i < listPatch.Count; i++)
             {
                 SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
@@ -205,6 +207,77 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         #endregion
 
         #region Create file and download .dbd file for CMYK values
+        private void ExportCMYK_DBDFile(List<Patch> listPatch, string CMYKFileName)
+        {
+            //string CMYKFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00");
+
+            string SpotName_Header, SpotName_Parameter;
+            System.IO.StreamWriter sw = null;
+            string directoryName = System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/") + CMYKFileName;
+            if (!Directory.Exists(directoryName))
+                Directory.CreateDirectory(directoryName);
+            string fileName = "";
+            for (int i = 0; i < listPatch.Count; i++)
+            {
+                fileName = directoryName + "/CustomSpotLib" + i + ".dbi";
+                sw = System.IO.File.CreateText(fileName);
+
+                SpotName_Header = listPatch[i].ColorName.Replace("_", "#20");
+                SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
+
+                sw.WriteLine("%%N:/Proforma/ColorPools/2/ColorPool/" + SpotName_Header);
+                sw.WriteLine("Color_1:OBJECT Color");
+                sw.WriteLine("{");
+                sw.WriteLine("\tName:string = " + "\"" + SpotName_Parameter + "\"");
+                sw.WriteLine("\tFUJI" + "\\" + "PrintMode:string = " + "\"LargeGumatMerge\";");
+                sw.WriteLine("\tColorType:string = " + "\"Normal\";");
+                sw.WriteLine("\tNeutralDensity:double = " + String.Format("{0,12:e15}", GetNdensity(listPatch[i].Cie_L)) + ";");
+                sw.WriteLine("\tTempLab:double[3] = " + String.Format("{0,12:e15}", listPatch[i].Cie_L) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_a) + "," + String.Format("{0,12:e15}", listPatch[i].Cie_b) + ";");
+                sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", listPatch[i].Cmyk_C) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_M) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_Y) + "," + String.Format("{0,12:e15}", listPatch[i].Cmyk_K) + ";");
+                sw.WriteLine("\tHideCMYK:string = " + "\"ShowAll\";");
+                sw.WriteLine("\tHideLab:string = " + "\"ShowAll\";");
+                sw.WriteLine("\tRawName:string = " + "\"\";");
+                sw.WriteLine("\tLibraryType:string = " + "\"ColorPath Optimized\";");
+                sw.WriteLine("}");
+                sw.WriteLine("");
+                sw.WriteLine("%%E:");
+                sw.Close();
+
+                ZipManager.AddFileToZip(directoryName + ".zip", fileName);
+            }
+
+            ////-----Alias file-- START----------//
+            fileName = directoryName + "/CustomSpotLibalias.dbi";
+            sw = System.IO.File.CreateText(fileName);
+            sw.WriteLine("%%N:/Proforma/ColorPools/1001/ColorantAliasRules");
+            sw.WriteLine("");
+            sw.WriteLine("%%E:");
+            sw.Close();
+            ZipManager.AddFileToZip(directoryName + ".zip", fileName);
+            ////-----Alias file-- END----------//
+
+            ////-----Info file-- START----------//
+            fileName = directoryName + "/CustomSpotLibinfo.dbi";
+            sw = System.IO.File.CreateText(fileName);
+            sw.WriteLine("%%N:/Proforma/ColorPools/1001/Info");
+            sw.WriteLine("FUJI" + "\\" + "ColorPoolInfo_1:OBJECT FUJI" + "\\" + "ColorPoolInfo");
+            sw.WriteLine("{");
+            sw.WriteLine("\tName:string = " + "\"CustomSpotLib\";");
+            sw.WriteLine("\tComment:string = " + "\"Ink Pool from Colorpath Sync\";");
+            sw.WriteLine("}");
+            sw.WriteLine("");
+            sw.WriteLine("%%E:");
+            sw.Close();
+            ZipManager.AddFileToZip(directoryName + ".zip", fileName);
+            ////-----Info file-- END----------//
+
+            //Delete the directory
+            if (Directory.Exists(directoryName))
+                Directory.Delete(directoryName, true);
+
+            Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".zip", CMYKFileName + ".zip");
+        }
+
         //private void ExportCMYK_DBDFile(List<Patch> listPatch, string CMYKFileName)
         //{
         //    //string CMYKFileName = SessionManager.Instance.CurrentProject.ProjectName + " " + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00");
@@ -295,6 +368,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
         #endregion
 
-        
+
     }
 }

@@ -162,4 +162,7 @@
   <data name="locQualityResource1.Text" xml:space="preserve">
     <value>Quality: </value>
   </data>
+  <data name="XMFResource1.Text" xml:space="preserve">
+    <value>XMF</value>
+  </data>
 </root>

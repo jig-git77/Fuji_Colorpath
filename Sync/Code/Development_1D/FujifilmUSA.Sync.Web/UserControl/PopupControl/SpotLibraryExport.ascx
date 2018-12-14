@@ -67,6 +67,7 @@
                                                         <asp:ListItem Text="Caldera" meta:resourcekey="CalderaResource1" Value="1"></asp:ListItem>
                                                         <asp:ListItem Text="Caldera2" meta:resourcekey="Caldera2Resource1" Value="2"></asp:ListItem>
                                                         <asp:ListItem Text="ColorGate" meta:resourcekey="ColorgateResource1" Value="3"></asp:ListItem>
+                                                        <asp:ListItem Text="XMF" meta:resourcekey="XMFResource1" Value="4"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div style="float: left">
