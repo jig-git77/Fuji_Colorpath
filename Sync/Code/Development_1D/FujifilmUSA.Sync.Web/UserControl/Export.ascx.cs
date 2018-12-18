@@ -93,7 +93,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         trSourceProfDownload.Visible = true;
                         trDLPDownload.Visible = false;
-                        trAdvancedDownload.Visible = false;
+                        //trAdvancedDownload.Visible = true;
+                        lbtnDownloadSourceProf.Visible = true;
+                        lbtnDownloadDestinationICC.Visible = false;
                         lbtnMeasure.Visible = false;
                         header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.ProjectName + ".icc");
                     }
@@ -343,6 +345,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        protected void lnkGoToDeviceList_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentBranchName = null;
+            SessionManager.Instance.CurrentDevice = null;
+            SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
+            SessionManager.Instance.CurrentProject = null;
+            SessionManager.Instance.CurrentOptimizeRun = null;
+            Response.Redirect("~/Index.aspx");
+        }
         #endregion
 
 
