@@ -2608,6 +2608,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom Source Profile.
+        /// </summary>
+        internal static string ESourceProfileCategory_CustomStandards {
+            get {
+                return ResourceManager.GetString("ESourceProfileCategory_CustomStandards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to European Standards.
         /// </summary>
         internal static string ESourceProfileCategory_EuropeanStandards {

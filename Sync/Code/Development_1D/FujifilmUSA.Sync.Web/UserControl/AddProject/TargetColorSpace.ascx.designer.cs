@@ -175,6 +175,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.DropDownList cmbPrintStandardType;
         
         /// <summary>
+        /// rfvPrintStandardType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPrintStandardType;
+        
+        /// <summary>
+        /// rfvcPrintStandardType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvcPrintStandardType;
+        
+        /// <summary>
         /// locSourceProfile control.
         /// </summary>
         /// <remarks>

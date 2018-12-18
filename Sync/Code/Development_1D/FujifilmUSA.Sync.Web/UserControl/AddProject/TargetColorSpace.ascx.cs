@@ -26,6 +26,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _vsSpotTarget = "vsSpotTarget";
         private const string _recSelect = "selectText";
         private const string _recNoCertifiedSpotCondition = "noCertifiedSpotCondition";
+        private const string _recTargetPrintConditionNotAvailableMessage = "TargetPrintConditionNotAvailableMessage";
+        
 
         private PresenterTargetColorspace _presenterTargetColorspace;
         #endregion
@@ -48,7 +50,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindTargetPrintCategory();
                 BindProfileSource();
                 BindPCSDataType(); //Load PCSDataType 
-                                  
+
                 PanelProjectType.GroupingText = "<b>" + GetResourceString("PanelProjectType") + "</b>";
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
                 {
@@ -137,11 +139,31 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void cmbPrintStandardType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ViewState[_vsPrintStandardType] != null)
+            //List<Entity.CPSync1D.PrintStandardType> listProfileCondition = (List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType];
+
+            //if (ViewState[_vsPrintStandardType] != null && listProfileCondition.Count > 0)
+            //{                
+            //        txtProfileDescription.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileDesc;
+            //        lblSourceProfileName.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileName;
+            //}
+            //else
+            //{
+            //    txtProfileDescription.Text = lblSourceProfileName.Text = GetResourceString(_recTargetPrintConditionNotAvailableMessage);                                 
+            //}
+
+            if (!string.IsNullOrEmpty(cmbPrintStandardType.SelectedValue))
             {
-                txtProfileDescription.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileDesc;
-                lblSourceProfileName.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileName;
+                if (ViewState[_vsPrintStandardType] != null)
+                {
+                    txtProfileDescription.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileDesc;
+                    lblSourceProfileName.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileName;
+                }
             }
+            else
+            {
+                txtProfileDescription.Text = lblSourceProfileName.Text = GetResourceString(_recTargetPrintConditionNotAvailableMessage);
+            }
+            
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                 cmbProjectType_SelectedIndexChanged(null, null);
         }
@@ -305,11 +327,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterTargetColorspace.GetPrintStandardTypeList();
             if (!IsErrorOccured)
             {
-                cmbPrintStandardType.DataValueField = "PrintStandardTypeID";
-                cmbPrintStandardType.DataTextField = "PrintStandard";
-                ViewState[_vsPrintStandardType] = PrintStandardTypeList;
-                cmbPrintStandardType.DataSource = (List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType];
-                cmbPrintStandardType.DataBind();
+                if(PrintStandardTypeList!=null && PrintStandardTypeList.Count>0)
+                {
+                    cmbPrintStandardType.DataValueField = "PrintStandardTypeID";
+                    cmbPrintStandardType.DataTextField = "PrintStandard";
+                    ViewState[_vsPrintStandardType] = PrintStandardTypeList;
+                    cmbPrintStandardType.DataSource = (List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType];
+                    cmbPrintStandardType.DataBind();
+                }
+                else
+                {
+                    cmbPrintStandardType.Items.Clear();
+                    cmbPrintStandardType.Items.Insert(0, new ListItem(GetResourceString(_recTargetPrintConditionNotAvailableMessage), string.Empty));
+                }
+                
                 cmbPrintStandardType_SelectedIndexChanged(null, null);
             }
         }
@@ -414,6 +445,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbTargetPrintCategory.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<ESourceProfileCategory>();
             cmbTargetPrintCategory.DataBind();
             cmbTargetPrintCategory.SelectedIndex = 0;
+
+            //disable for all projects except 4d and spot
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DLP 
+                && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification
+                && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
+                cmbTargetPrintCategory.Items.FindByValue("4").Enabled = false;
         }
 
         private void BindBranches()

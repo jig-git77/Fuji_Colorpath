@@ -1359,4 +1359,7 @@
   <data name="SpotTargetManagement_DeleteSpot_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected source target?</value>
   </data>
+  <data name="ESourceProfileCategory_CustomStandards" xml:space="preserve">
+    <value>Custom Source Profile</value>
+  </data>
 </root>

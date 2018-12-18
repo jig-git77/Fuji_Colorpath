@@ -613,6 +613,8 @@ namespace FujifilmUSA.Sync.Entity
         EuropianStandards = 2,
         [Description("ESourceProfileCategory_JapanStandards")] //Japan Standards
         JapanStandards = 3,
+        [Description("ESourceProfileCategory_CustomStandards")] //Japan Standards
+        CustomSourceProfile = 4,
         [Description("ESourceProfileCategory_Other")] //Other
         Other = 11
     }

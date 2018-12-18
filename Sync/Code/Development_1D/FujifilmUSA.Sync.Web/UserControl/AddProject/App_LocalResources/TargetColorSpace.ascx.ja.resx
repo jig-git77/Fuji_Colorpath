@@ -204,4 +204,7 @@
   <data name="panelRetargetResource1.GroupingText" xml:space="preserve">
     <value>&lt;b&gt;Optional Retarget&lt;/b&gt;</value>
   </data>
+  <data name="TargetPrintConditionNotAvailableMessage" xml:space="preserve">
+    <value>No Target Print Condition</value>
+  </data>
 </root>

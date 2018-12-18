@@ -315,4 +315,7 @@
   <data name="InkPoolIDRequiredResource" xml:space="preserve">
     <value>Please enter Ink Pool ID.</value>
   </data>
+  <data name="TargetPrintConditionRequiredResource" xml:space="preserve">
+    <value>Please select target print condition.</value>
+  </data>
 </root>

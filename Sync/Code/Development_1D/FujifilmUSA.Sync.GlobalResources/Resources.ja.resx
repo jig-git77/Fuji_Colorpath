@@ -1338,4 +1338,7 @@
   <data name="locLabelTol" xml:space="preserve">
     <value>許容</value>
   </data>
+  <data name="ESourceProfileCategory_CustomStandards" xml:space="preserve">
+    <value>Custom Source Profile</value>
+  </data>
 </root>
