@@ -222,6 +222,49 @@
                                                 </div>
                                             </td>                                          
                                         </tr>
+                                        <tr runat="server" id="trXMF" visible="false">
+                                            <td>
+                                                <span>
+                                                    <asp:Localize runat="server" Text="Ink Pool ID: " ID="locInkPoolID"
+                                                        meta:resourcekey="locInkPoolIDResource1"></asp:Localize><span style="color: Red;">*</span></span>
+                                            </td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtInkPoolIOD" runat="server" Width="200px" Height="19px"
+                                                        MaxLength="50" Text="1001"></asp:TextBox>
+                                                </div>
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfvInkPoolID" runat="server" Display="Dynamic" ControlToValidate="txtInkPoolIOD"
+                                                        ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
+                                                        <ucValidationContainer:ValidationContainer ID="rfvInkPoolIDContainer" runat="server"
+                                                ValidationMsg="Please enter Ink Pool ID." Size="200" ResourceValidationMsg="InkPoolIDRequiredResource"/>
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                                <div class="clear">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <asp:Localize runat="server" Text="Comment: " ID="locComment"
+                                                        meta:resourcekey="CommentResource1"></asp:Localize><span style="color: Red;">*</span></span>
+                                            </td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtComment" runat="server" Width="200px" Height="19px"
+                                                        MaxLength="50" Text="Ink Pool from Colorpath Sync"></asp:TextBox>
+                                                </div>
+
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfvComment" runat="server" Display="Dynamic" ControlToValidate="txtComment"
+                                                        ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
+                                                        <ucValidationContainer:ValidationContainer ID="rfvCommentContainer" runat="server"
+                                                ValidationMsg="Please enter comment." Size="200" ResourceValidationMsg="CommentRequiredResource"/>
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                                <div class="clear">
+                                                </div>
+                                            </td>                                          
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

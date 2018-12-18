@@ -83,23 +83,33 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
         protected void cmbCMYKLibrary_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbCMYKLibrary.SelectedValue.ToString() == "1")
+            if (cmbCMYKLibrary.SelectedValue.ToString() == "1")//Caldera option
             {
                 trCalderaRow1.Visible = true;
                 trCalderaRow2.Visible = true;
                 trCaldera2Row1.Visible = false;
+                trXMF.Visible = false;
             }
-            else if (cmbCMYKLibrary.SelectedValue.ToString() == "2")
+            else if (cmbCMYKLibrary.SelectedValue.ToString() == "2")//Caldera2 option
             {
                 trCalderaRow1.Visible = true;
                 trCalderaRow2.Visible = true;
                 trCaldera2Row1.Visible = true;
+                trXMF.Visible = false;
             }
-            else
+            else if (cmbCMYKLibrary.SelectedValue.ToString() == "4")//XMF option
             {
                 trCalderaRow1.Visible = false;
                 trCalderaRow2.Visible = false;
                 trCaldera2Row1.Visible = false;
+                trXMF.Visible = true;
+            }
+            else//ColorGate option
+            {
+                trCalderaRow1.Visible = false;
+                trCalderaRow2.Visible = false;
+                trCaldera2Row1.Visible = false;
+                trXMF.Visible = false;
             }
 
         }
@@ -206,7 +216,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         }
         #endregion
 
-        #region Create file and download .dbd file for CMYK values
+        #region Create file and download .dbd file for XMF CMYK type
         private void ExportCMYK_DBDFile(List<Patch> listPatch, string CMYKFileName)
         {
             string SpotName_Header, SpotName_Parameter;
@@ -223,7 +233,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 SpotName_Header = listPatch[i].ColorName.Replace("_", "#20");
                 SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
 
-                sw.WriteLine("%%N:/Proforma/ColorPools/2/ColorPool/" + SpotName_Header);
+                sw.WriteLine("%%N:/Proforma/ColorPools/" + txtInkPoolIOD.Text + "/ColorPool/" + SpotName_Header);
                 sw.WriteLine("Color_1:OBJECT Color");
                 sw.WriteLine("{");
                 sw.WriteLine("\tName:string = " + "\"" + SpotName_Parameter + "\"");
@@ -247,7 +257,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             ////-----Alias file-- START----------//
             fileName = directoryName + "/CustomSpotLibalias.dbi";
             sw = System.IO.File.CreateText(fileName);
-            sw.WriteLine("%%N:/Proforma/ColorPools/1001/ColorantAliasRules");
+            sw.WriteLine("%%N:/Proforma/ColorPools/" + txtInkPoolIOD.Text + "/ColorantAliasRules");
             sw.WriteLine("");
             sw.WriteLine("%%E:");
             sw.Close();
@@ -257,11 +267,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             ////-----Info file-- START----------//
             fileName = directoryName + "/CustomSpotLibinfo.dbi";
             sw = System.IO.File.CreateText(fileName);
-            sw.WriteLine("%%N:/Proforma/ColorPools/1001/Info");
+            sw.WriteLine("%%N:/Proforma/ColorPools/" + txtInkPoolIOD.Text + "/Info");
             sw.WriteLine("FUJI" + "\\" + "ColorPoolInfo_1:OBJECT FUJI" + "\\" + "ColorPoolInfo");
             sw.WriteLine("{");
             sw.WriteLine("\tName:string = " + "\"CustomSpotLib\";");
-            sw.WriteLine("\tComment:string = " + "\"Ink Pool from Colorpath Sync\";");
+            sw.WriteLine("\tComment:string = " + "\"" + txtComment.Text + "\";");
             sw.WriteLine("}");
             sw.WriteLine("");
             sw.WriteLine("%%E:");
