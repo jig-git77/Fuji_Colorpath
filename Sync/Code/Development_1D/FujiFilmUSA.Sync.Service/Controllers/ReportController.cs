@@ -1536,8 +1536,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         #region Create file and download .xml file for Caldera CMYK type
         private string ExportColderaFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
         {
+
+            string directoryFilePath = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/");
             string fileName = detail.FileName + ".xml";
             string SpotName_Parameter = "";
+            if (!Directory.Exists(directoryFilePath))
+                Directory.CreateDirectory(directoryFilePath);
 
             System.IO.StreamWriter sw;
             sw = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + fileName);
@@ -1567,8 +1571,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         #region Create file and download .cct file for Colorgate CMYK type
         private string ExportColorgateFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
         {
+            string directoryFilePath = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/");
             string fileName = detail.FileName + ".cct";            
             string SpotName_Parameter = "";
+            if (!Directory.Exists(directoryFilePath))
+                Directory.CreateDirectory(directoryFilePath);
 
             System.IO.StreamWriter sw;
             sw = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + fileName);
@@ -1607,8 +1614,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         #region Create file and download .xml file for Caldera2 CMYK type
         private string ExportColdera2File(List<Patch> listPatch, SpotLibrayCMYKExport detail)
         {
+            string directoryFilePath = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/");
             string fileName = detail.FileName + ".xml";
             string SpotName_Parameter = "";
+            if (!Directory.Exists(directoryFilePath))
+                Directory.CreateDirectory(directoryFilePath);                       
 
             System.IO.StreamWriter sw;
             sw = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + fileName);
@@ -1639,8 +1649,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private string ExportCMYK_DBDFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
         {
             string SpotName_Header, SpotName_Parameter;
-            System.IO.StreamWriter sw = null;
-            string CMYKFilePath = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/");
+            System.IO.StreamWriter sw = null;            
             string directoryName = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + detail.FileName;
             if (!Directory.Exists(directoryName))
                 Directory.CreateDirectory(directoryName);
