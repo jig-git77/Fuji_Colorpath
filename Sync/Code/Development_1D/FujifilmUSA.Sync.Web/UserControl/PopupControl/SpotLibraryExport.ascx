@@ -65,16 +65,7 @@
     }
 
     function validate() {
-        var isSuccess = true;        
-        //var controlArray = ["cmbCMYKLibrary", "txtFileName", "txtServer", "txtModel", "txtMedia", "txtResolution", "txtMode", "txtQuality", "txtInkPoolIOD", "txtComment"]
-
-        //$.each(controlArray, function (index, item) {
-        //    if ($('#' + item).val() == "") {
-        //        isSuccess = false;
-        //        $('#' + item).parent("div").next('div').find('span').show();
-        //    }
-        //});
-        //return isSuccess;
+        var isSuccess = true;               
         if ($("#cmbCMYKLibrary").val() == "") {
             isSuccess = false;
             $("#cmbCMYKLibrary").parent("div").next('div').find('span').show();
