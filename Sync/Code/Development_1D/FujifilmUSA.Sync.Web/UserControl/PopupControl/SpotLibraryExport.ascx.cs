@@ -19,6 +19,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         private PresenterExport _presenterExport;
         private const string _recSelectText = "selectText";
         #endregion
+
         #region Construtor
         public SpotLibraryExport()
         {
@@ -70,34 +71,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 trXMF.Visible = false;
             }
 
-        }
-        #endregion
-
-        #region Methods
-
-
-
-        //Get density of LabL to export CMYK values
-        double GetNdensity(double Lab_L)
-        {
-            double var_Y;
-            if ((Lab_L > 8))
-            {
-                var_Y = (100 * Math.Pow(((Lab_L + 16) / 116), 3));
-            }
-            else
-            {
-                var_Y = (100 * ((108 / 841) * (((Lab_L + 16) / 116) - (4 / 29))));
-            }
-
-            if ((var_Y > 0))
-            {
-                return (0.13353 + Math.Log10((100 / var_Y)));
-            }
-            else
-            {
-                return 0;
-            }
         }
         #endregion
 
