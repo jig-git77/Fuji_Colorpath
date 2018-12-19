@@ -1647,7 +1647,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             string fileName = "";
             for (int i = 0; i < listPatch.Count; i++)
             {
-                fileName = directoryName + "/CustomSpotLib" + i + ".dbi";
+                fileName = directoryName + "/" + detail.FileName + i + ".dbi";
                 sw = System.IO.File.CreateText(fileName);
 
                 SpotName_Header = listPatch[i].ColorName.Replace("_", "#20");
@@ -1661,7 +1661,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 sw.WriteLine("\tColorType:string = " + "\"Normal\";");
                 sw.WriteLine("\tNeutralDensity:double = " + GetNdensity(listPatch[i].Cie_L).ToString("0.000000000000000e+0") + ";");
                 sw.WriteLine("\tTempLab:double[3] = " + listPatch[i].Cie_L.ToString("0.000000000000000e+0") + "," + listPatch[i].Cie_a.ToString("0.000000000000000e+0") + "," + listPatch[i].Cie_b.ToString("0.000000000000000e+0") + ";");
-                sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", listPatch[i].Cmyk_C) + "," + listPatch[i].Cmyk_M.ToString("0.000000000000000e+0") + "," + listPatch[i].Cmyk_Y.ToString("0.000000000000000e+0") + "," + listPatch[i].Cmyk_K.ToString("0.000000000000000e+0") + ";");
+                sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", (listPatch[i].Cmyk_C / 100)) + "," + (listPatch[i].Cmyk_M / 100).ToString("0.000000000000000e+0") + "," + (listPatch[i].Cmyk_Y / 100).ToString("0.000000000000000e+0") + "," + (listPatch[i].Cmyk_K / 100).ToString("0.000000000000000e+0") + ";");
                 sw.WriteLine("\tHideCMYK:string = " + "\"ShowAll\";");
                 sw.WriteLine("\tHideLab:string = " + "\"ShowAll\";");
                 sw.WriteLine("\tRawName:string = " + "\"\";");
@@ -1675,7 +1675,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
 
             ////-----Alias file-- START----------//
-            fileName = directoryName + "/CustomSpotLibalias.dbi";
+            fileName = directoryName + "/" + detail.FileName + "alias.dbi";
             sw = System.IO.File.CreateText(fileName);
             sw.WriteLine("%%N:/Proforma/ColorPools/" + detail.InkPoolID + "/ColorantAliasRules");
             sw.WriteLine("");
@@ -1685,7 +1685,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             ////-----Alias file-- END----------//
 
             ////-----Info file-- START----------//
-            fileName = directoryName + "/CustomSpotLibinfo.dbi";
+            fileName = directoryName + "/" + detail.FileName + "info.dbi";
             sw = System.IO.File.CreateText(fileName);
             sw.WriteLine("%%N:/Proforma/ColorPools/" + detail.InkPoolID + "/Info");
             sw.WriteLine("FUJI" + "\\" + "ColorPoolInfo_1:OBJECT FUJI" + "\\" + "ColorPoolInfo");
