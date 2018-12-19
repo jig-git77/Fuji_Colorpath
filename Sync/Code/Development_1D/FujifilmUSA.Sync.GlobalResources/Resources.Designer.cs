@@ -2284,6 +2284,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid library type value has been provided..
+        /// </summary>
+        internal static string Error_Invalid_SpotExportLibraryType {
+            get {
+                return ResourceManager.GetString("Error_Invalid_SpotExportLibraryType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid validation type value has been provided..
         /// </summary>
         internal static string Error_Invalid_ValidationType {

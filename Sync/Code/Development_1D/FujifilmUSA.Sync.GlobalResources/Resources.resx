@@ -1362,4 +1362,7 @@
   <data name="ESourceProfileCategory_CustomStandards" xml:space="preserve">
     <value>Custom Source Profile</value>
   </data>
+  <data name="Error_Invalid_SpotExportLibraryType" xml:space="preserve">
+    <value>Invalid library type value has been provided.</value>
+  </data>
 </root>
