@@ -449,7 +449,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //disable for all projects except 4d and spot
             if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DLP 
                 && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification
-                && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
+                && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary
+                && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimization
+                && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimizationSource)
                 cmbTargetPrintCategory.Items.FindByValue("4").Enabled = false;
         }
 
