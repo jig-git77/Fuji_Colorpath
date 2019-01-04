@@ -232,9 +232,12 @@
     <value>Download CMYK Library_de</value>
   </data>
   <data name="locCustomSourceProfileSucessMsgResource1.Text" xml:space="preserve">
-    <value>The custom source profile was created successfully!&lt;br/&gt;This profile is ready to be used as a target colorspace in new projects.</value>
+    <value>The custom source profile was created successfully!&lt;br/&gt;This profile is ready to be used as a target colorspace in new projects._de</value>
   </data>
   <data name="locDeviceListReturnResource1.Text" xml:space="preserve">
-    <value>Return To Device List</value>
+    <value>Return To Device List_de</value>
+  </data>
+  <data name="locDownloadSourceProfResource1.Text" xml:space="preserve">
+    <value>Source Profile Creation Complete_de</value>
   </data>
 </root>

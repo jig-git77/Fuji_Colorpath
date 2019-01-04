@@ -237,4 +237,7 @@
   <data name="locDeviceListReturnResource1.Text" xml:space="preserve">
     <value>Return To Device List</value>
   </data>
+  <data name="locDownloadSourceProfResource1.Text" xml:space="preserve">
+    <value>Source Profile Creation Complete</value>
+  </data>
 </root>

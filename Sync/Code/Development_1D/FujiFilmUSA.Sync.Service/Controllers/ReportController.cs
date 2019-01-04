@@ -1699,7 +1699,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             sw.WriteLine("%%N:/Proforma/ColorPools/" + detail.InkPoolID + "/Info");
             sw.WriteLine("FUJI" + "\\" + "ColorPoolInfo_1:OBJECT FUJI" + "\\" + "ColorPoolInfo");
             sw.WriteLine("{");
-            sw.WriteLine("\tName:string = " + "\"CustomSpotLib\";");
+            sw.WriteLine("\tName:string = " + "\"" + detail.FileName + "\";");
             sw.WriteLine("\tComment:string = " + "\"" + detail.Comment + "\";");
             sw.WriteLine("}");
             sw.WriteLine("");

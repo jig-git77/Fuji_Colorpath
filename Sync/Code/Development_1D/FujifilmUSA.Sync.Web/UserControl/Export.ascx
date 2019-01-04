@@ -231,7 +231,7 @@
                                 <div id="div1" class="header collapsibleContainerTitle">
                                     <div class="content">
                                         <div class="text" style="float: left">
-                                            <asp:Localize Text="Download Source Profile" runat="server"
+                                            <asp:Localize Text="Source Profile Creation Complete" runat="server"
                                                 ID="Localize1" meta:resourcekey="locDownloadSourceProfResource1"></asp:Localize>
                                         </div>
                                         <div class="clear">
