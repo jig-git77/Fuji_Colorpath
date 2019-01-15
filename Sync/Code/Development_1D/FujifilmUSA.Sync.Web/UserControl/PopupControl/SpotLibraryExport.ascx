@@ -34,7 +34,7 @@
                 FileName: $('#txtFileName').val(),
                 Server: $('#txtServer').val(),
                 Model: $('#txtModel').val(),
-                Media: $('#hdnOptiomizatoinRunID').val(),
+                Media: $('#txtMedia').val(),
                 Resolution: $('#txtResolution').val(),
                 Mode: $('#txtMode').val(),
                 Quality: $('#txtQuality').val(),
