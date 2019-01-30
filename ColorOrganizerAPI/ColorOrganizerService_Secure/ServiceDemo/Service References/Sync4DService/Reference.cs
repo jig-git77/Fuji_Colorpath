@@ -1706,10 +1706,6 @@ namespace ServiceDemo.Sync4DService {
         [System.ServiceModel.FaultContractAttribute(typeof(ServiceDemo.Sync4DService.ServiceFault), Action="http://tempuri.org/ISync4DServiceContract/StoreTempValidationInformationServiceFa" +
             "ultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts")]
         ServiceDemo.Sync4DService.StoreTempValidationInformationResponse StoreTempValidationInformation(ServiceDemo.Sync4DService.StoreTempValidationInformationRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISync4DServiceContract/GetDeviceListSecure", ReplyAction="http://tempuri.org/ISync4DServiceContract/GetDeviceListSecureResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(ServiceDemo.Sync4DService.ServiceFault), Action="http://tempuri.org/ISync4DServiceContract/GetDeviceListSecureServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts")]
-        ServiceDemo.Sync4DService.GetDeviceListResponse GetDeviceListSecure();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1773,10 +1769,6 @@ namespace ServiceDemo.Sync4DService {
         
         public ServiceDemo.Sync4DService.StoreTempValidationInformationResponse StoreTempValidationInformation(ServiceDemo.Sync4DService.StoreTempValidationInformationRequest request) {
             return base.Channel.StoreTempValidationInformation(request);
-        }
-        
-        public ServiceDemo.Sync4DService.GetDeviceListResponse GetDeviceListSecure() {
-            return base.Channel.GetDeviceListSecure();
         }
     }
 }

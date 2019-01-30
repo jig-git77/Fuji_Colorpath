@@ -32,9 +32,9 @@
                     <RadioButton Name="rbtnOther" Content="Other" GroupName="ServiceEndPoint" Click="rbtnServiceEndPoints_Click"></RadioButton>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="0" Margin="5,5,5,5" >
-                    <TextBlock Name="tbLocal" Text="http://localhost/ColorOrganizerService/Sync4D.svc" Visibility="Hidden"></TextBlock>
+                    <TextBlock Name="tbLocal" Text="https://localhost/ColorOrganizerService/Sync4D.svc" Visibility="Hidden"></TextBlock>
                     <TextBlock Name="tbDevTaskero" Text="http://dev.taskero.com/Services/ColorOrganizerService/Sync4D.svc" Visibility="Hidden"></TextBlock>
-                    <TextBox Name="txtOther" Visibility="Hidden" Text="http://localhost/ColorOrganizerService/Sync4D.svc"></TextBox>
+                    <TextBox Name="txtOther" Visibility="Hidden" Text="https://localhost/ColorOrganizerService/Sync4D.svc"></TextBox>
                 </StackPanel>
 
             </Grid>

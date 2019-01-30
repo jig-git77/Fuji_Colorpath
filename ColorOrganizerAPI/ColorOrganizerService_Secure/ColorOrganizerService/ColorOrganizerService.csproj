@@ -81,7 +81,9 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Sync4D.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
@@ -99,6 +101,9 @@
       <Project>{02C21D07-FDB7-4906-B486-CB2A03E01E6A}</Project>
       <Name>ServiceImplementation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

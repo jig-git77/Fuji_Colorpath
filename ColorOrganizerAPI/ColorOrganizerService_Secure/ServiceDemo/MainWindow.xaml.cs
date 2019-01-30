@@ -396,7 +396,7 @@ namespace ServiceDemo
                     epa = new EndpointAddress(txtOther.Text);
                 }
 
-                Sync4DServiceContractClient client = new Sync4DServiceContractClient("WSHttpBinding_ISync4DServiceContract", epa);
+                Sync4DServiceContractClient client = new Sync4DServiceContractClient("BasicHttpBinding_ISync4DServiceContract", epa);
                 return client;
             }
         }
