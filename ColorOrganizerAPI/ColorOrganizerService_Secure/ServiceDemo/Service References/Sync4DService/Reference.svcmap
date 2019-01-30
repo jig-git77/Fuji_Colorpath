@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="800d03db-18fe-43e7-9327-9b79c8c01f79" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/ColorOrganizerService/Sync4D.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Sync4D.xsd" MetadataType="Schema" ID="2f15d20b-2d84-4b44-860f-eaf0a7e62618" SourceId="1" SourceUrl="http://pc156.priyasoft.com/ColorOrganizerService/Sync4D.svc?xsd=xsd6" />
+    <MetadataFile FileName="Sync4D.disco" MetadataType="Disco" ID="42bf1bd0-278a-4e8f-ab9c-25bb34c15127" SourceId="1" SourceUrl="http://pc156.priyasoft.com/ColorOrganizerService/Sync4D.svc?disco" />
+    <MetadataFile FileName="Sync4D1.xsd" MetadataType="Schema" ID="7a1c16de-2748-477f-8a2c-4c5217beb2fb" SourceId="1" SourceUrl="http://pc156.priyasoft.com/ColorOrganizerService/Sync4D.svc?xsd=xsd4" />
+    <MetadataFile FileName="Sync4D2.xsd" MetadataType="Schema" ID="1bbf1e43-19ff-45c8-b87c-5e568715f7ec" SourceId="1" SourceUrl="http://pc156.priyasoft.com/ColorOrganizerService/Sync4D.svc?xsd=xsd5" />
+    <MetadataFile FileName="Sync4DService.wsdl" MetadataType="Wsdl" ID="ea47e002-9c4d-4016-a36f-1c22e669c6ce" SourceId="1" SourceUrl="http://pc156.priyasoft.com/ColorOrganizerService/Sync4D.svc?wsdl" />
+    <MetadataFile FileName="Sync4D3.xsd" MetadataType="Schema" ID="70741940-f884-4ce6-ade3-07be85782955" SourceId="1" SourceUrl="http://pc156.priyasoft.com/ColorOrganizerService/Sync4D.svc?xsd=xsd2" />
+    <MetadataFile FileName="Sync4D4.xsd" MetadataType="Schema" ID="c07c62b4-5093-4322-94ec-dd39c963e004" SourceId="1" SourceUrl="http://pc156.priyasoft.com/ColorOrganizerService/Sync4D.svc?xsd=xsd7" />
+    <MetadataFile FileName="Sync4D5.xsd" MetadataType="Schema" ID="7a01f94a-d700-489f-b62a-997dc7ec01d9" SourceId="1" SourceUrl="http://pc156.priyasoft.com/ColorOrganizerService/Sync4D.svc?xsd=xsd3" />
+    <MetadataFile FileName="Sync4D6.xsd" MetadataType="Schema" ID="8e6e08a8-9d2f-430d-a68e-bd3568ca9a51" SourceId="1" SourceUrl="http://pc156.priyasoft.com/ColorOrganizerService/Sync4D.svc?xsd=xsd1" />
+    <MetadataFile FileName="Sync4D7.xsd" MetadataType="Schema" ID="80ab0e60-0294-42c9-b832-df1740b9ac47" SourceId="1" SourceUrl="http://pc156.priyasoft.com/ColorOrganizerService/Sync4D.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
