@@ -132,7 +132,8 @@
         /*background-color: #eae8e8;*/
     }
 </style>
-<script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>
+<%--<script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>--%>
+<script src="JS/DYMO_Label_Framework_2_0_2.js"></script>
 <script src="JS/AnalyzeMeasurement.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 
 
