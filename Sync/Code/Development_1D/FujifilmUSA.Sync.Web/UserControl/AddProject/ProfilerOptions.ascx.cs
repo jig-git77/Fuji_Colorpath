@@ -569,9 +569,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
                         x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
 
+                //Start:-----If CustomSourceProfile or ReProfile Custom Source Type, then pass different set of preset options
+                int MainProfileTypeID = 0;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource) 
+                {
+                    MainProfileTypeID = Convert.ToInt32(EProfileType.DestinationProfile);
+                }
+                else
+                {
+                    MainProfileTypeID = Convert.ToInt32(EProfileType.DeviceLinkProfile);
+                }
+                //End
+
                 txtProfileDescription.Text = familyOption.ProfilerOptionsDesc;
                 familyOption.
-                    ProfilerOptionPresets.Where(x => x.ProfileTypeId == Convert.ToInt32(EProfileType.DeviceLinkProfile)).ToList().
+                    ProfilerOptionPresets.Where(x => x.ProfileTypeId == MainProfileTypeID).ToList().
                     ForEach(x =>
                                 {
                                     var option = (EProfilerOption)Enum.Parse(typeof(EProfilerOption), x.ProfilerOption.ProfilerOptionId.ToString());
@@ -777,8 +789,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
                         x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
 
+                //Start:-----If CustomSourceProfile or ReProfile Custom Source Type, then pass different set of preset options
+                int MainProfileTypeID = 0;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource)
+                {
+                    MainProfileTypeID = Convert.ToInt32(EProfileType.DestinationProfile);
+                }
+                else
+                {
+                    MainProfileTypeID = Convert.ToInt32(EProfileType.DeviceLinkProfile);
+                }
+                //End
+
                 familyPreset.
-                ProfilerOptionPresets.Where(x => x.ProfileTypeId == Convert.ToInt32(EProfileType.DeviceLinkProfile)).ToList().
+                ProfilerOptionPresets.Where(x => x.ProfileTypeId == MainProfileTypeID).ToList().
                 ForEach(x =>
                 {
                     var option = (EProfilerOption)Enum.Parse(typeof(EProfilerOption), x.ProfilerOption.ProfilerOptionId.ToString());
