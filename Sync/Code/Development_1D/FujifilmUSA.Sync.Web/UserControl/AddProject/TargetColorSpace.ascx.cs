@@ -57,7 +57,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trTargetLAB.Visible = false;
                     trProjectType.Visible = false;
                 }
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification)
                 {
                     trPaperScaling_4D.Visible = true;
                 }
@@ -115,9 +115,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification)
                 {
-                    SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
+                    if(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
+                        SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
+
                     //------If 4D project then pass NewPaperScaling LAB values--------//
                     SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling4D.Checked;
                     SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(txtPaper_L_4D_White.Text);
@@ -260,7 +262,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtPaper_Black_a.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString();
                 txtPaper_Black_b.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString();
             }
-            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //-----If it is projecttype SYnc4D, then display New Paper scaling L,a,b values---//
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) //-----If it is projecttype SYnc4D or 4D Certification, then display New Paper scaling L,a,b values---//
             {
                 chk_IsPaperScaling4D.Checked = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
                 if (chk_IsPaperScaling4D.Checked)
