@@ -41,6 +41,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!Page.IsPostBack)
             {
                 hdnCurrentUserID.Value= Convert.ToString(SessionManager.Instance.CurrentUser.UserId) ?? "0";
+                hdnCurrentProjectLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
                 if (SessionManager.Instance.CurrentProject.SpotTargetProject != null && SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition != null)
                 {
@@ -76,7 +77,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                   : "<span><img id='imgAdd' src='Images/save_icon.png'/>" + GetResourceString(_recNext) + "</span>";//Create DLP - Next
 
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
-
+                hdnCurrentUserRole.Value = SessionManager.Instance.CurrentUser.Role.RoleId.ToString();
                 //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                     lbtnDownloadAndSaveNCP.Visible = false;

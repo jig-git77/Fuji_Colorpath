@@ -2148,10 +2148,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                             measurement.MeasurementAppPatches.Add(new MeasurementPatchApp()
                             {
-                                
+
                                 SampleID = Convert.ToInt32(dr["SampleID"]),
                                 SampleName = Convert.ToString(dr["SampleName"]),
-                               
+
+                                //PrintStandardTypeID = Convert.ToInt32(dr["PrintStandardTypeID"]),
+                                InstrumentTypeID = Convert.ToInt32(dr["InstrumentTypeID"]),
+                                //ReferenceChartTypeID = Convert.ToInt32(dr["ReferenceChartTypeID"]),
+
+
                                 Ciexyz = new CieXYZ()
                                 {
                                     X = Convert.ToString(dr["CIEXYZ_X"]),
@@ -2167,7 +2172,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 Δe = Convert.ToString(dr["ΔE"]),
                                 Δe94 = Convert.ToString(dr["ΔE94"]),
                                 Δe2000 = Convert.ToString(dr["ΔE2000"]),
-                               
+
                                 Density = new DensityApp()
                                 {
                                     Red = Convert.ToString(dr["Density_C"]),
@@ -2215,10 +2220,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     nm730 = Convert.ToString(dr["nm730"]),
                                 }
                             });
-                            if (!string.IsNullOrEmpty(Convert.ToString(dr["MeasurementPatchSpectralID"])))
-                            {
-
-                            }
                         }
                     }
                 },
@@ -2226,7 +2227,347 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurement;
         }
 
+        public Measurement Get1DMeasurementPatchDetailsForExport(int MeasurementId)
+        {
+            string storedProc = "CPSync.GetMeasurementDetails_FileExport";
+            Measurement measurement = new Measurement();
+            measurement.MeasurementAppPatches = new List<MeasurementPatchApp>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    DataTable dtPatchDetails = new DataTable();
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId });
+                    if (dsMeasurements.Tables.Count > 0)
+                    {
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                        foreach (DataRow dr in dtPatchDetails.Rows)
+                        {
+                            measurement.MeasurementAppPatches.Add(new MeasurementPatchApp()
+                            {
 
+                                //SampleID = Convert.ToInt32(dr["SampleID"]),
+                                SampleName = Convert.ToString(dr["SampleName"]),
+
+                                //PrintStandardTypeID = Convert.ToInt32(dr["PrintStandardTypeID"]),
+                                InstrumentTypeID = Convert.ToInt32(dr["InstrumentTypeID"]),
+                                //ReferenceChartTypeID = Convert.ToInt32(dr["ReferenceChartTypeID"]),
+
+                                Ciexyz = new CieXYZ()
+                                {
+                                    X = Convert.ToString(dr["CIEXYZ_X"]),
+                                    Y = Convert.ToString(dr["CIEXYZ_Y"]),
+                                    Z = Convert.ToString(dr["CIEXYZ_Z"]),
+                                },
+                                Cielab = new CieLAB()
+                                {
+                                    L = Convert.ToString(dr["CIELAB_L"]),
+                                    A = Convert.ToString(dr["CIELAB_a"]),
+                                    B = Convert.ToString(dr["CIELAB_b"]),
+                                },
+                                //Δe = Convert.ToString(dr["ΔE"]),
+                                //Δe94 = Convert.ToString(dr["ΔE94"]),
+                                //Δe2000 = Convert.ToString(dr["ΔE2000"]),
+
+                                Density = new DensityApp()
+                                {
+                                    Red = Convert.ToString(dr["Density_C"]),
+                                    Green = Convert.ToString(dr["Density_M"]),
+                                    Blue = Convert.ToString(dr["Density_Y"]),
+                                    Visual = Convert.ToString(dr["Density_V"])
+                                },
+                                Spectral = string.IsNullOrEmpty(Convert.ToString(dr["MeasurementPatchSpectralID"])) ? null : new SpectralApp()
+                                {
+                                    nm380 = Convert.ToString(dr["nm380"]),
+                                    nm390 = Convert.ToString(dr["nm390"]),
+                                    nm400 = Convert.ToString(dr["nm400"]),
+                                    nm410 = Convert.ToString(dr["nm410"]),
+                                    nm420 = Convert.ToString(dr["nm420"]),
+                                    nm430 = Convert.ToString(dr["nm430"]),
+                                    nm440 = Convert.ToString(dr["nm440"]),
+                                    nm450 = Convert.ToString(dr["nm450"]),
+                                    nm460 = Convert.ToString(dr["nm460"]),
+                                    nm470 = Convert.ToString(dr["nm470"]),
+                                    nm480 = Convert.ToString(dr["nm480"]),
+                                    nm490 = Convert.ToString(dr["nm490"]),
+                                    nm500 = Convert.ToString(dr["nm500"]),
+                                    nm510 = Convert.ToString(dr["nm510"]),
+                                    nm520 = Convert.ToString(dr["nm520"]),
+                                    nm530 = Convert.ToString(dr["nm530"]),
+                                    nm540 = Convert.ToString(dr["nm540"]),
+                                    nm550 = Convert.ToString(dr["nm550"]),
+                                    nm560 = Convert.ToString(dr["nm560"]),
+                                    nm570 = Convert.ToString(dr["nm570"]),
+                                    nm580 = Convert.ToString(dr["nm580"]),
+                                    nm590 = Convert.ToString(dr["nm590"]),
+                                    nm600 = Convert.ToString(dr["nm600"]),
+                                    nm610 = Convert.ToString(dr["nm610"]),
+                                    nm620 = Convert.ToString(dr["nm620"]),
+                                    nm630 = Convert.ToString(dr["nm630"]),
+                                    nm640 = Convert.ToString(dr["nm640"]),
+                                    nm650 = Convert.ToString(dr["nm650"]),
+                                    nm660 = Convert.ToString(dr["nm660"]),
+                                    nm670 = Convert.ToString(dr["nm670"]),
+                                    nm680 = Convert.ToString(dr["nm680"]),
+                                    nm690 = Convert.ToString(dr["nm690"]),
+                                    nm700 = Convert.ToString(dr["nm700"]),
+                                    nm710 = Convert.ToString(dr["nm710"]),
+                                    nm720 = Convert.ToString(dr["nm720"]),
+                                    nm730 = Convert.ToString(dr["nm730"]),
+                                }
+                            });
+                        }
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_Get1DMeasurementPatchDetailsForExport"));
+            return measurement;
+        }
+
+        public Measurement GetValidationMeasurementPatchDetailsForExport(int MeasurementId)
+        {
+            string storedProc = "CPSyncV.GetMeasurementDetails_FileExport";
+            Measurement measurement = new Measurement();
+            measurement.MeasurementAppPatches = new List<MeasurementPatchApp>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    DataTable dtPatchDetails = new DataTable();
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId });
+                    if (dsMeasurements.Tables.Count > 0)
+                    {
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                        foreach (DataRow dr in dtPatchDetails.Rows)
+                        {
+                            measurement.MeasurementAppPatches.Add(new MeasurementPatchApp()
+                            {
+
+                                SampleName = Convert.ToString(dr["SampleName"]),
+                                InstrumentTypeID = Convert.ToInt32(dr["InstrumentTypeID"]),
+                                Ciexyz = new CieXYZ()
+                                {
+                                    X = Convert.ToString(dr["CIEXYZ_X"]),
+                                    Y = Convert.ToString(dr["CIEXYZ_Y"]),
+                                    Z = Convert.ToString(dr["CIEXYZ_Z"]),
+                                },
+                                Cielab = new CieLAB()
+                                {
+                                    L = Convert.ToString(dr["CIELAB_L"]),
+                                    A = Convert.ToString(dr["CIELAB_a"]),
+                                    B = Convert.ToString(dr["CIELAB_b"]),
+                                },
+                                Δe = Convert.ToString(dr["ΔE"]),
+                                Δe94 = Convert.ToString(dr["ΔE94"]),
+                                Δe2000 = Convert.ToString(dr["ΔE2000"]),
+                                ΔH = Convert.ToString(dr["ΔH"]),
+                                Density = new DensityApp()
+                                {
+                                    Red = Convert.ToString(dr["Density_C"]),
+                                    Green = Convert.ToString(dr["Density_M"]),
+                                    Blue = Convert.ToString(dr["Density_Y"]),
+                                    Visual = Convert.ToString(dr["Density_V"])
+                                }
+                            });
+                        }
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementPatchDetailsForExport"));
+            return measurement;
+        }
+
+        public Measurement GetSpotMeasurementPatchDetailsForExport(int OptimizeRunId)
+        {
+            string storedProc = "CPSpot.GetMeasurementDetails_FileExport";
+            Measurement measurement = new Measurement();
+            measurement.MeasurementAppPatches = new List<MeasurementPatchApp>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    DataTable dtPatchDetails = new DataTable();
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { OptimizeRunId });
+                    if (dsMeasurements.Tables.Count > 0)
+                    {
+                        dtPatchDetails = dsMeasurements.Tables[0];
+
+                        foreach (DataRow dr in dtPatchDetails.Rows)
+                        {
+                            measurement.MeasurementAppPatches.Add(new MeasurementPatchApp()
+                            {                                
+                                InstrumentTypeID = Convert.ToInt32(dr["InstrumentTypeID"]),
+                                SampleID = Convert.ToInt32(dr["SpotID"]),
+                                SampleName = Convert.ToString(dr["SpotName"]),
+                                Cielab = new CieLAB()
+                                {
+                                    L = Convert.ToString(dr["Measured_L"]),
+                                    A = Convert.ToString(dr["Measured_a"]),
+                                    B = Convert.ToString(dr["Measured_b"]),
+                                }
+                            });
+                        }
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementPatchDetailsForExport"));
+            return measurement;
+        }
+
+        public int ImportMeasurement(Measurement measurement, int LicenseTypeID)
+        {
+            var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    XElement measurementPatches = null;
+                    if (LicenseTypeID == 1)//1D project
+                    {
+                        measurementPatches = new XElement("MeasurementPatches",
+                                                         measurement.MeasurementPatches.
+                                                             Select(x =>
+                                                                    new XElement("MeasurementPatch",
+                                                                                 new XAttribute("SampleName", x.SampleName),
+                                                                                 new XAttribute("CIEXYZ_X", x.CiexyzX),
+                                                                                 new XAttribute("CIEXYZ_Y", x.CiexyzY),
+                                                                                 new XAttribute("CIEXYZ_Z", x.CiexyzZ),
+                                                                                 new XAttribute("CIELAB_L", x.CielabL),
+                                                                                 new XAttribute("CIELAB_a", x.CielabA),
+                                                                                 new XAttribute("CIELAB_b", x.CielabB),
+                                                                                 new XAttribute("Density_C", x.Density.Red),
+                                                                                 new XAttribute("Density_M", x.Density.Green),
+                                                                                 new XAttribute("Density_Y", x.Density.Blue),
+                                                                                 new XAttribute("Density_V", x.Density.Visual),
+
+                                                                                 //---Spectral Data
+                                                                                 new XAttribute("nm380", x.Spectral.nm380),
+                                                                                 new XAttribute("nm390", x.Spectral.nm390),
+                                                                                 new XAttribute("nm400", x.Spectral.nm400),
+                                                                                 new XAttribute("nm410", x.Spectral.nm410),
+                                                                                 new XAttribute("nm420", x.Spectral.nm420),
+                                                                                 new XAttribute("nm430", x.Spectral.nm430),
+                                                                                 new XAttribute("nm440", x.Spectral.nm440),
+                                                                                 new XAttribute("nm450", x.Spectral.nm450),
+                                                                                 new XAttribute("nm460", x.Spectral.nm460),
+                                                                                 new XAttribute("nm470", x.Spectral.nm470),
+                                                                                 new XAttribute("nm480", x.Spectral.nm480),
+                                                                                 new XAttribute("nm490", x.Spectral.nm490),
+                                                                                 new XAttribute("nm500", x.Spectral.nm500),
+                                                                                 new XAttribute("nm510", x.Spectral.nm510),
+                                                                                 new XAttribute("nm520", x.Spectral.nm520),
+                                                                                 new XAttribute("nm530", x.Spectral.nm530),
+                                                                                 new XAttribute("nm540", x.Spectral.nm540),
+                                                                                 new XAttribute("nm550", x.Spectral.nm550),
+                                                                                 new XAttribute("nm560", x.Spectral.nm560),
+                                                                                 new XAttribute("nm570", x.Spectral.nm570),
+                                                                                 new XAttribute("nm580", x.Spectral.nm580),
+                                                                                 new XAttribute("nm590", x.Spectral.nm590),
+                                                                                 new XAttribute("nm600", x.Spectral.nm600),
+                                                                                 new XAttribute("nm610", x.Spectral.nm610),
+                                                                                 new XAttribute("nm620", x.Spectral.nm620),
+                                                                                 new XAttribute("nm630", x.Spectral.nm630),
+                                                                                 new XAttribute("nm640", x.Spectral.nm640),
+                                                                                 new XAttribute("nm650", x.Spectral.nm650),
+                                                                                 new XAttribute("nm660", x.Spectral.nm660),
+                                                                                 new XAttribute("nm670", x.Spectral.nm670),
+                                                                                 new XAttribute("nm680", x.Spectral.nm680),
+                                                                                 new XAttribute("nm690", x.Spectral.nm690),
+                                                                                 new XAttribute("nm700", x.Spectral.nm700),
+                                                                                 new XAttribute("nm710", x.Spectral.nm710),
+                                                                                 new XAttribute("nm720", x.Spectral.nm720),
+                                                                                 new XAttribute("nm730", x.Spectral.nm730)
+                                                                        )).ToList());
+                    }
+
+                    if (LicenseTypeID == 2 || LicenseTypeID == 5)//dlp and Sync4DCertification project
+                    {
+                        measurementPatches = new XElement("MeasurementPatches",
+                                                         measurement.MeasurementPatches.
+                                                             Select(x =>
+                                                                    new XElement("MeasurementPatch",
+                                                                                 new XAttribute("SampleName", x.SampleName),
+                                                                                 new XAttribute("CIEXYZ_X", x.CiexyzX),
+                                                                                 new XAttribute("CIEXYZ_Y", x.CiexyzY),
+                                                                                 new XAttribute("CIEXYZ_Z", x.CiexyzZ),
+                                                                                 new XAttribute("CIELAB_L", x.CielabL),
+                                                                                 new XAttribute("CIELAB_a", x.CielabA),
+                                                                                 new XAttribute("CIELAB_b", x.CielabB),
+                                                                                 new XAttribute("Density_C", x.Density.Red),
+                                                                                 new XAttribute("Density_M", x.Density.Green),
+                                                                                 new XAttribute("Density_Y", x.Density.Blue),
+                                                                                 new XAttribute("Density_V", x.Density.Visual)
+                                                                        )).ToList());
+                    }
+
+                    if (LicenseTypeID == 10) // spot project
+                    {
+                        measurementPatches = new XElement("MeasurementPatches",
+                                                          measurement.MeasurementPatches.
+                                                              Select(x =>
+                                                                     new XElement("MeasurementPatch",
+                                                                                  new XAttribute("SpotName", x.SampleName),
+                                                                                  new XAttribute("Measured_L", x.CielabL),
+                                                                                  new XAttribute("Measured_a", x.CielabA),
+                                                                                  new XAttribute("Measured_b", x.CielabB)
+                                                                             )).ToList());
+                    }
+
+                    if (LicenseTypeID == 51) // validation project
+                    {
+                        measurementPatches = new XElement("MeasurementPatches",
+                                                         measurement.MeasurementPatches.
+                                                             Select(x =>
+                                                                    new XElement("MeasurementPatch",
+                                                                                 new XAttribute("SampleName", x.SampleName),
+                                                                                 new XAttribute("CIEXYZ_X", x.CiexyzX),
+                                                                                 new XAttribute("CIEXYZ_Y", x.CiexyzY),
+                                                                                 new XAttribute("CIEXYZ_Z", x.CiexyzZ),
+                                                                                 new XAttribute("CIELAB_L", x.CielabL),
+                                                                                 new XAttribute("CIELAB_a", x.CielabA),
+                                                                                 new XAttribute("CIELAB_b", x.CielabB),
+                                                                                 new XAttribute("Density_C", x.Density.Red),
+                                                                                 new XAttribute("Density_M", x.Density.Green),
+                                                                                 new XAttribute("Density_Y", x.Density.Blue),
+                                                                                 new XAttribute("Density_V", x.Density.Visual)
+                                                                        )).ToList());
+                    }
+
+
+                    DataAccessFactory.
+                    Instance.
+                    ExecuteProcedure("CPSync4D.ImportMeasurementDetails",
+                                     new List<Parameters>()
+                                             {
+                                                         new Parameters() {ParameterName = "@MeasurementName", Size = 50, Type = DbType.String, Value = measurement.MeasurementName},
+                                                         new Parameters() {ParameterName = "@OptimizeRunID", Type = DbType.Int32, Value = measurement.OptimizeRunId},
+                                                         new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
+                                                         new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
+                                                         new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
+                                                         new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType) },
+                                                         new Parameters() {ParameterName = "@LicenseType", Type = DbType.Int32, Value = Convert.ToInt32(LicenseTypeID)},
+                                                         new Parameters() {ParameterName = "@ProjectID", Type = DbType.Int32, Value = measurement.ProjectId},
+                                                         new Parameters() {ParameterName = "@Notes", Type = DbType.String, Value = measurement.Notes},
+                                                         new Parameters() {ParameterName = "@Customer", Type = DbType.String, Value = measurement.Customer},
+                                                         new Parameters() {ParameterName = "@PageOrSurface", Type = DbType.String, Value = measurement.PageOrSurface},
+                                                         new Parameters() {ParameterName = "@JDFJobId", Type = DbType.String, Value = measurement.JDFJobId}
+                                             },
+                                     new List<Parameters>()
+                                             {
+                                                         outParam
+                                             });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
+            return Convert.ToInt32(outParam.Value);
+        }
         #endregion
 
         #region ITaskBase Members

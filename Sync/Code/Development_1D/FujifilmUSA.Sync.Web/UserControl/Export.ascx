@@ -231,7 +231,7 @@
                                 <div id="div1" class="header collapsibleContainerTitle">
                                     <div class="content">
                                         <div class="text" style="float: left">
-                                            <asp:Localize Text="Download Source Profile" runat="server"
+                                            <asp:Localize Text="Source Profile Creation Complete" runat="server"
                                                 ID="Localize1" meta:resourcekey="locDownloadSourceProfResource1"></asp:Localize>
                                         </div>
                                         <div class="clear">
@@ -242,17 +242,21 @@
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td></td>
+                                                <td>
+                                                    <asp:Localize runat="server" Text=""
+                                                                ID="Localize8"
+                                                                meta:resourcekey="locCustomSourceProfileSucessMsgResource1"></asp:Localize>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:LinkButton ID="lbtnDownloadSourceProf" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadSourceProf_Click">
+                                                    <asp:LinkButton ID="lnkGoToDeviceList" runat="server" CssClass="gray_bt" OnClick="lnkGoToDeviceList_Click">
                                                         <span>
-                                                            <asp:Localize runat="server" Text="Download Source Profile"
-                                                                ID="Localize2"
-                                                                meta:resourcekey="locDownloadSourceProfICCResource1"></asp:Localize>
+                                                            <asp:Localize runat="server" Text="Return To Device List"
+                                                                ID="Localize7"
+                                                                meta:resourcekey="locDeviceListReturnResource1"></asp:Localize>
                                                         </span>
-                                                    </asp:LinkButton>
+                                                    </asp:LinkButton> 
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -295,6 +299,13 @@
                                             </tr>
                                             <tr>
                                                 <td>
+                                                    <asp:LinkButton ID="lbtnDownloadSourceProf" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadSourceProf_Click" Visible="false">
+                                                        <span>
+                                                            <asp:Localize runat="server" Text="Download Source Profile"
+                                                                ID="Localize2"
+                                                                meta:resourcekey="locDownloadSourceProfICCResource1"></asp:Localize>
+                                                        </span>
+                                                    </asp:LinkButton>                                                    
                                                     <asp:LinkButton ID="lbtnDownloadDestinationICC" runat="server" CssClass="gray_bt"
                                                         OnClick="lbtnDownloadDestinationICC_Click">
                                                         <span>

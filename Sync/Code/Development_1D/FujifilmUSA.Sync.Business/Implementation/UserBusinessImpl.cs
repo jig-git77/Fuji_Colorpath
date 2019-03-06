@@ -129,6 +129,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        MeasurementDeviceId = DataReader.ReadInt(x, "MeasurementDeviceID"),
                                        DensityType = DataReader.ReadShort(x, "DensityType"),
                                        UVMode = DataReader.ReadShort(x, "UVMode"),
+                                       LastActiveDate = DataReader.ReadDate(x, "LastActiveDate"),
                                        Region = new Region()
                                        {
                                            RegionId = DataReader.ReadByte(x, "CompanyRegionId"),

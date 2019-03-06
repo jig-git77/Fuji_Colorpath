@@ -10,7 +10,7 @@ namespace FujifilmUSA.Sync.Business.Interface
     {
         int CreateReferenceChart(ReferenceChartType referenceChartType);
         List<ReferenceChart> GetReferenceChartForLabCalculation(short sourceProfileId, short referenceChartTypeId);
-        int InsertReferenceLabData(List<ReferenceChart> referenceCharts, byte[] sourceProfile, short sourceProfileId);
+        int InsertReferenceLabData(List<ReferenceChart> referenceCharts, byte[] sourceProfile, short sourceProfileId, int CompanyId, int ProjectId);
         List<ReferenceChartType> GetReferenceCharts(int RefChartID);
         int UpdateReferenceChart(ReferenceChartType referenceChartType);
         List<ReferenceChartType> GetReferenceChartsForXmf();

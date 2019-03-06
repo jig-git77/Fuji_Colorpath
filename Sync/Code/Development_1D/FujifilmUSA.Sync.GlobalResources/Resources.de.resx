@@ -1339,4 +1339,7 @@ erwünschten Format überein.</value>
   <data name="locLabelTol" xml:space="preserve">
     <value>Tol.</value>
   </data>
+  <data name="ESourceProfileCategory_CustomStandards" xml:space="preserve">
+    <value>Custom Source Profile</value>
+  </data>
 </root>

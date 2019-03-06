@@ -83,10 +83,19 @@
                                     <asp:Localize runat="server" Text="Target Print Condition:" ID="locTargetPrint" meta:resourcekey="locTargetPrintResource1"></asp:Localize></span>
                             </td>
                             <td colspan="3">
-                                <asp:DropDownList ID="cmbPrintStandardType" runat="server" CssClass="select" DataValueField="Key"
-                                    DataTextField="Value" OnSelectedIndexChanged="cmbPrintStandardType_SelectedIndexChanged"
-                                    AutoPostBack="True" meta:resourcekey="cmbSourceProfileResource1">
-                                </asp:DropDownList>
+                                <div style="float: left">
+                                    <asp:DropDownList ID="cmbPrintStandardType" runat="server" CssClass="select" DataValueField="Key"
+                                        DataTextField="Value" OnSelectedIndexChanged="cmbPrintStandardType_SelectedIndexChanged"
+                                        AutoPostBack="True" meta:resourcekey="cmbSourceProfileResource1">
+                                    </asp:DropDownList>
+                                </div>
+                                <div style="float: left">
+                                    <asp:RequiredFieldValidator ID="rfvPrintStandardType" runat="server" Display="Dynamic" ControlToValidate="cmbPrintStandardType"
+                                        ForeColor="Red" ValidationGroup="b" InitialValue="">
+                                        <ucValidationContainer:ValidationContainer ID="rfvcPrintStandardType" runat="server"
+                                            ValidationMsg="Please select target print condition." Size="200" ResourceValidationMsg="TargetPrintConditionRequiredResource" />
+                                    </asp:RequiredFieldValidator>
+                                </div>
                             </td>
                         </tr>
                         <tr>

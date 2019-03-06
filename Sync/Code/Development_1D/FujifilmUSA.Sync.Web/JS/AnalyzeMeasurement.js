@@ -980,12 +980,12 @@ function BindMeasurementPatchDetails() {
                                     $divMeasurementPatchDetails.find("th[data-field=Density_V] b").html(Resources.gridAnalyzeHeaderDensity_VResource);
                                     $divMeasurementPatchDetails.find("th[data-field=Density_C] b").html(Resources.gridAnalyzeHeaderDensity_CResource);
                                     $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);                                    
+                                    $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
                                     if (response.data.measurementPatchDetails[0].IsWeighted) {
                                         $divMeasurementPatchDetails.find("th[data-field=ΔL] b").html('wΔL');
                                         $divMeasurementPatchDetails.find("th[data-field=ΔCh] b").html('wΔCh');
                                     }
-                                    
+
                                 }
 
                             },
@@ -1113,7 +1113,7 @@ function BindMeasurementPatchDetails() {
                 //}
             },
             pageable: {
-                refresh: true,
+                refresh: false,
                 pageSizes: true
             },
             noRecords: {
@@ -1322,12 +1322,12 @@ function BindMeasurementPatchDetails() {
                     grid.hideColumn(22);
                 }
                 //show measurement export button visible only for sys admin user
-                if ($hdnCurrentDlpSubOperation == ELicenseType.DLP && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
+                if (($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnCurrentDlpSubOperation == ELicenseType.Sync4DCertification || $hdnCurrentDlpSubOperation == ELicenseType.Validation) && $hdnCurrentUserRole.val() == ERole.SystemAdmin) {
                     $divMeasurementPatchDetails.find('.k-grid-toolbar #btnExportMeasurement').show();
                 }
             }
 
-            
+
             //dataBound: function (e) {
             //    debugger;
             //    var measurementId = 0;
@@ -1409,12 +1409,17 @@ function BindMeasurementPatchDetails() {
     $divMeasurementPatchDetails.find('#btnExportMeasurement').on('click', function (e) {
         e.preventDefault();
 
-
+        debugger;
         var measurementID = parseInt($hdnCurrentMeasurement.val());
+
         $.ajax({
             type: "POST",
-            url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport?MeasurementId=' + measurementID,
-            //data: { MeasurementId: measurementID },
+            //url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport/',
+            url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport?MeasurementId=' + measurementID + '&LicenseType=' + parseInt($hdnCurrentDlpSubOperation),
+            //data: JSON.stringify({
+            //    MeasurementId: measurementID,
+            //    LicenseType: parseInt($hdnCurrentDlpSubOperation)
+            //}),
             dataType: "json",
             success: function (response) {
                 if (response.data != null) {
@@ -1730,6 +1735,7 @@ function BindDeltaSummaryStatesChart() {
         type: 'GET',
         dataType: 'json',
         success: function (response) {
+            debugger;
             if (response != null) {
                 jsonSummaryNameList = response.data.DTDeltaSummaryLables;
                 jsonSummaryValueList = response.data.DTDeltaSummaryValues;
@@ -3656,7 +3662,7 @@ function PopulateChartLGrayBalance() {
 
 ////**************** POPULATE THE DELTA SUMMARY REPORT CHART  ****************////
 function PopulateSummaryDeltaChart() {
-
+    debugger;
     var maxValue = Math.max.apply(Math, jsonSummaryValueList);
     var maxLimit = Math.max.apply(Math, jsonSummaryLimitList);
     var maxNum = 0;
@@ -5298,7 +5304,7 @@ function PopulateTVISpreadChart() {
 }
 
 ////**************** POPULATE THE TVI CHART  ****************////
-function PopulateTVIG7Chart() {    
+function PopulateTVIG7Chart() {
     var jsonEmpty = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykC == 0 && element.CmykM == 0 && element.CmykY == 0 && element.CmykK == 0; })
 
     var jsonC = $.grep(jsonTVIG7ChartList, function (element) { return element.CmykC != 0; });

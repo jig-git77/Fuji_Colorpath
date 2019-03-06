@@ -13,6 +13,24 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
     public partial class SpotLibraryExport {
         
         /// <summary>
+        /// hdnBaseServiceUrl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnBaseServiceUrl;
+        
+        /// <summary>
+        /// hdnOptiomizatoinRunID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnOptiomizatoinRunID;
+        
+        /// <summary>
         /// locHeader control.
         /// </summary>
         /// <remarks>
@@ -335,6 +353,87 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvQualityContainer;
+        
+        /// <summary>
+        /// trXMF control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trXMF;
+        
+        /// <summary>
+        /// locInkPoolID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locInkPoolID;
+        
+        /// <summary>
+        /// txtInkPoolIOD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtInkPoolIOD;
+        
+        /// <summary>
+        /// rfvInkPoolID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvInkPoolID;
+        
+        /// <summary>
+        /// rfvInkPoolIDContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvInkPoolIDContainer;
+        
+        /// <summary>
+        /// locComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locComment;
+        
+        /// <summary>
+        /// txtComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComment;
+        
+        /// <summary>
+        /// rfvComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvComment;
+        
+        /// <summary>
+        /// rfvCommentContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvCommentContainer;
         
         /// <summary>
         /// lbtnClose control.

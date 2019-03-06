@@ -72,6 +72,7 @@ namespace FujifilmUSA.Sync.Common
                 System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=\"" + ShowOnDialogName + "\"");
                 System.Web.HttpContext.Current.Response.BinaryWrite(data);
                 fs.Close();
+                File.Delete(FolderPath + FileName);
                 System.Web.HttpContext.Current.Response.End();               
             }
             catch (Exception Exc)

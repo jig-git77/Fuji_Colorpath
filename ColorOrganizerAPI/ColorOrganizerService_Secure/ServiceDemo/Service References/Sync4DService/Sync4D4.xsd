@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ServiceFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FaultDetails" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FaultErrorCode" type="tns:ErrorCode" />
+      <xs:element minOccurs="0" name="FaultMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FaultSource" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FaultType" type="tns:ServiceFaultType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceFault" nillable="true" type="tns:ServiceFault" />
+  <xs:simpleType name="ErrorCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="DataNotFound" />
+      <xs:enumeration value="UserNotFound" />
+      <xs:enumeration value="InValidCredential" />
+      <xs:enumeration value="BadRequest" />
+      <xs:enumeration value="UnKnown" />
+      <xs:enumeration value="Internal" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ErrorCode" nillable="true" type="tns:ErrorCode" />
+  <xs:simpleType name="ServiceFaultType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ConnectionError" />
+      <xs:enumeration value="DataBase" />
+      <xs:enumeration value="Application" />
+      <xs:enumeration value="RequestError" />
+      <xs:enumeration value="Unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ServiceFaultType" nillable="true" type="tns:ServiceFaultType" />
+</xs:schema>

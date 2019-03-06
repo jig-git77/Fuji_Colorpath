@@ -135,4 +135,25 @@
   <data name="SelectMeasurementNameResource1.Text" xml:space="preserve">
     <value>Select File:</value>
   </data>
+  <data name="JobNameCaption" xml:space="preserve">
+    <value>Job Name</value>
+  </data>
+  <data name="lblCustomerResource1.Text" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="lblJDFJobIdResource1.Text" xml:space="preserve">
+    <value>JDF Job ID</value>
+  </data>
+  <data name="lblMeasurementNameResource1.Text" xml:space="preserve">
+    <value>Measurement Name</value>
+  </data>
+  <data name="lblNotesResource1.Text" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="lblPageOrSurfaceResource1.Text" xml:space="preserve">
+    <value>Page/Surface</value>
+  </data>
+  <data name="MeasurementNameCaption" xml:space="preserve">
+    <value>Measurement Name</value>
+  </data>
 </root>

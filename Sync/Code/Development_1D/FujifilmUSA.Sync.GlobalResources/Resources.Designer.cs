@@ -2284,6 +2284,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid library type value has been provided..
+        /// </summary>
+        internal static string Error_Invalid_SpotExportLibraryType {
+            get {
+                return ResourceManager.GetString("Error_Invalid_SpotExportLibraryType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid validation type value has been provided..
         /// </summary>
         internal static string Error_Invalid_ValidationType {
@@ -2604,6 +2613,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string ESourceProfileCategory_All {
             get {
                 return ResourceManager.GetString("ESourceProfileCategory_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Source Profile.
+        /// </summary>
+        internal static string ESourceProfileCategory_CustomStandards {
+            get {
+                return ResourceManager.GetString("ESourceProfileCategory_CustomStandards", resourceCulture);
             }
         }
         

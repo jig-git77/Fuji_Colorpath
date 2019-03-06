@@ -37,8 +37,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private const string _InvalidValidationType = "Error_Invalid_ValidationType";
         private const string _InvalidOptimizationRunID = "Error_Invalid_OptimizationRunID";
         private const string _InvalidCurveType = "Error_Invalid_CurveType";
+        private const string _InvalidLibraryType = "Error_Invalid_SpotExportLibraryType";
+
         #endregion
 
+        #region Controller events
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             _presenterReportSingleMeasurement = new PresenterReportSingleMeasurement(this);
@@ -46,7 +49,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _presenterExport = new PresenterExport(this);
             base.Initialize(controllerContext);
         }
+        #endregion
 
+        #region Services
         [HttpPost]
         public IHttpActionResult ExportAnalyzeChartReport(ChartContent chart)
         {
@@ -160,10 +165,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                         objReportPDF.GenerateClientReportPDF();
                         string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
-                        
+
                         httpResponse.status = ResponseStatus.Success;
                         httpResponse.Data = ReportPath;
-                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));                        
+                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
                     }
                 }
             }
@@ -218,13 +223,13 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             Directory.CreateDirectory(objReportPDF.PDFPath);
 
                         objReportPDF.spotChartContent = chart;
-                        objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSpotProject.PDF";                                                
+                        objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSpotProject.PDF";
                         objReportPDF.ReportName = "Brand Color Optimization";
                         objReportPDF.ReportType = (int)enumReportType.ReportSpotColorProject; //Only in spot color Optimization part
                         objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
                         DSReport = new DataSet();
                         _presenterReportSingleMeasurement.GetReportDataOnSpotProject();
-                        objReportPDF.DS_Common = DSReport;                        
+                        objReportPDF.DS_Common = DSReport;
                         objReportPDF.GenerateClientReportPDF();
                         string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
 
@@ -245,7 +250,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             return actionResult;
         }
-              
+
         [HttpGet]
         public HttpResponseMessage DownloadReport(string guid)
         {
@@ -264,7 +269,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     httpResponseMessage = Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse);//returns 412 status code
                 }
                 else
-                {                   
+                {
                     var dataBytes = (byte[])HttpContext.Current.Session[guid];
                     string fileName = Convert.ToString(HttpContext.Current.Session[guid + "AttachementFileName"]);
                     //adding bytes to memory stream   
@@ -390,7 +395,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
 
-
         public IHttpActionResult ExportReportGrading(ChartContent chart)
         {
             IHttpActionResult actionResult = null;
@@ -429,7 +433,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     MeasurementId = Convert.ToInt32(chart.MeasurementId);
                     From_ΔE = Convert.ToString(chart.fromDeltaE);
                     IsAverageOfMeasurements = chart.grading.IsAverageOfMeasurements;
-                    ProjectId = Convert.ToInt32(chart.ProjectId);                    
+                    ProjectId = Convert.ToInt32(chart.ProjectId);
                     DSReport = new DataSet();
                     _presenterReportGrading.GetMeasurementDataForScoring();
 
@@ -475,157 +479,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
-
-        private void RevisedDataSet(DataSet DSReport, ReportGrading grading)
-        {
-            decimal CyanAvgScore = 0;
-            decimal MagentaAvgScore = 0;
-            decimal YellowAvgScore = 0;
-            decimal BlackAvgScore = 0;
-            decimal RedAvgScore = 0;
-            decimal GreenAvgScore = 0;
-            decimal BlueAvgScore = 0;
-            decimal PaperAvgScore = 0;
-            decimal CMY25AvgScore = 0;
-            decimal CMY50AvgScore = 0;
-            decimal CMY75AvgScore = 0;
-            DSReportRevised = new DataSet();
-
-            DataTable dt = new DataTable("MyTable");
-            dt.Columns.Add(new DataColumn("MeasurementID", typeof(int)));
-            dt.Columns.Add(new DataColumn("Name", typeof(string)));
-            dt.Columns.Add(new DataColumn("Date", typeof(string)));
-            dt.Columns.Add(new DataColumn("Cyan", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("Magenta", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("Yellow", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("Black", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("CMYKPri", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("Red", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("Green", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("Blue", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("RGBSec", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("CMY25", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("CMY50", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("CMY75", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("GrayBalance", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("Paper", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("Overall", typeof(decimal)));
-
-            if (DSReport != null && DSReport.Tables.Count > 0)
-            {
-                for (int i = 0; i < DSReport.Tables[4].Rows.Count; i++)
-                {
-                    DataRow dr = dt.NewRow();
-                    dr["MeasurementID"] = DSReport.Tables[4].Rows[i]["MeasurementID"].ToString();
-                    dr["Name"] = DSReport.Tables[4].Rows[i]["MeasurementName"].ToString();
-                    dr["Date"] = DSReport.Tables[4].Rows[i]["MeasurementDate"].ToString();
-                    dr["Cyan"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Cyan"].ToString(), "Cyan", grading);
-                    dr["Magenta"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Magenta"].ToString(), "Magenta", grading);
-                    dr["Yellow"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Yellow"].ToString(), "Yellow", grading);
-                    dr["Black"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Black"].ToString(), "Black", grading);
-                    dr["CMYKPri"] = (CalculateGrading(DSReport.Tables[4].Rows[i]["Cyan"].ToString(), "Cyan", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["Magenta"].ToString(), "Magenta", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["Yellow"].ToString(), "Yellow", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["Black"].ToString(), "Black", grading)) / 4;
-
-                    dr["Red"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Red"].ToString(), "Red", grading);
-                    dr["Green"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Green"].ToString(), "Green", grading);
-                    dr["Blue"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Blue"].ToString(), "Blue", grading);
-                    dr["RGBSec"] = (CalculateGrading(DSReport.Tables[4].Rows[i]["Red"].ToString(), "Red", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["Green"].ToString(), "Green", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["Blue"].ToString(), "Blue", grading)) / 3;
-
-                    dr["CMY25"] = CalculateGrading(DSReport.Tables[4].Rows[i]["CMY25"].ToString(), "CMY25", grading);
-                    dr["CMY50"] = CalculateGrading(DSReport.Tables[4].Rows[i]["CMY50"].ToString(), "CMY50", grading);
-                    dr["CMY75"] = CalculateGrading(DSReport.Tables[4].Rows[i]["CMY75"].ToString(), "CMY75", grading);
-                    dr["GrayBalance"] = (CalculateGrading(DSReport.Tables[4].Rows[i]["CMY25"].ToString(), "CMY25", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["CMY50"].ToString(), "CMY50", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["CMY75"].ToString(), "CMY75", grading)) / 3;
-
-                    dr["Paper"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Paper"].ToString(), "Paper", grading);
-                    dr["Overall"] = (Convert.ToDecimal(dr["CMYKPri"]) + Convert.ToDecimal(dr["RGBSec"]) + Convert.ToDecimal(dr["GrayBalance"]) + Convert.ToDecimal(dr["Paper"])) / 4;
-                    dt.Rows.Add(dr);
-                }
-            }
-            DSReportRevised.Tables.Add(dt);
-
-            DSReportTotalAvg = new DataSet();
-            if (DSReportRevised != null && DSReportRevised.Tables.Count > 0)
-            {
-                DataTable dtAvg = new DataTable("MyTableAvg");
-
-                dtAvg.Columns.Add(new DataColumn("Color", typeof(string)));
-                dtAvg.Columns.Add(new DataColumn("AvgScore", typeof(decimal)));
-
-                for (int i = 0; i < DSReportRevised.Tables[0].Rows.Count; i++)
-                {
-                    CyanAvgScore = CyanAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Cyan"]);
-                    MagentaAvgScore = MagentaAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Magenta"]);
-                    YellowAvgScore = YellowAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Yellow"]);
-                    BlackAvgScore = BlackAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Black"]);
-
-                    RedAvgScore = RedAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Red"]);
-                    GreenAvgScore = GreenAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Green"]);
-                    BlueAvgScore = BlueAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Blue"]);
-
-                    CMY25AvgScore = CMY25AvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["CMY25"]);
-                    CMY50AvgScore = CMY50AvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["CMY50"]);
-                    CMY75AvgScore = CMY75AvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["CMY75"]);
-
-                    PaperAvgScore = PaperAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Paper"]);
-                }
-
-                DataRow dr1 = dtAvg.NewRow();
-                dr1["Color"] = "Cyan";
-                dr1["AvgScore"] = Math.Round((CyanAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
-                dtAvg.Rows.Add(dr1);
-
-                DataRow dr2 = dtAvg.NewRow();
-                dr2["Color"] = "Magenta";
-                dr2["AvgScore"] = Math.Round((MagentaAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
-                dtAvg.Rows.Add(dr2);
-
-                DataRow dr3 = dtAvg.NewRow();
-                dr3["Color"] = "Yellow";
-                dr3["AvgScore"] = Math.Round((YellowAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
-                dtAvg.Rows.Add(dr3);
-
-                DataRow dr4 = dtAvg.NewRow();
-                dr4["Color"] = "Black";
-                dr4["AvgScore"] = Math.Round((BlackAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
-                dtAvg.Rows.Add(dr4);
-
-                DataRow dr5 = dtAvg.NewRow();
-                dr5["Color"] = "Red";
-                dr5["AvgScore"] = Math.Round((RedAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
-                dtAvg.Rows.Add(dr5);
-
-                DataRow dr6 = dtAvg.NewRow();
-                dr6["Color"] = "Green";
-                dr6["AvgScore"] = Math.Round((GreenAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
-                dtAvg.Rows.Add(dr6);
-
-                DataRow dr7 = dtAvg.NewRow();
-                dr7["Color"] = "Blue";
-                dr7["AvgScore"] = Math.Round((BlueAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
-                dtAvg.Rows.Add(dr7);
-
-                DataRow dr8 = dtAvg.NewRow();
-                dr8["Color"] = "CMY25";
-                dr8["AvgScore"] = Math.Round((CMY25AvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
-                dtAvg.Rows.Add(dr8);
-
-                DataRow dr9 = dtAvg.NewRow();
-                dr9["Color"] = "CMY50";
-                dr9["AvgScore"] = Math.Round((CMY50AvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
-                dtAvg.Rows.Add(dr9);
-
-                DataRow dr10 = dtAvg.NewRow();
-                dr10["Color"] = "CMY75";
-                dr10["AvgScore"] = Math.Round((CMY75AvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
-                dtAvg.Rows.Add(dr10);
-
-                DataRow dr11 = dtAvg.NewRow();
-                dr11["Color"] = "Paper";
-                dr11["AvgScore"] = Math.Round((PaperAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
-                dtAvg.Rows.Add(dr11);
-
-                DSReportTotalAvg.Tables.Add(dtAvg);
-            }
-        }
 
         [HttpGet]
         public IHttpActionResult ExportGenerateCurveChart(int? OptimizationRunId, int? CurveType, string ExportFileName)
@@ -1101,6 +954,236 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+        [HttpPost]
+        public IHttpActionResult ExportSpotCMYKLibraray(SpotLibrayCMYKExport model)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                if (model == null)
+                    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidLibraryType);
+
+                //if (LibraryType == null)
+                //    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidLibraryType);
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+                    DetermineCulture();
+                    OptimizeRunId = model.OptimizationRunId;
+                    _presenterExport.GetSpotPatchDetailsForCMYKExport();
+
+                    List<Patch> listPatch = new List<Patch>();
+                    if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dtPatchDetails.Rows)
+                        {
+                            Patch patch = new Patch()
+                            {
+                                PatchID = Convert.ToInt32(dr["SpotID"]),
+                                ColorName = Convert.ToString(dr["SpotName"]),
+                                Cmyk_C = Convert.ToDouble(dr["CMYK_C"]),
+                                Cmyk_M = Convert.ToDouble(dr["CMYK_M"]),
+                                Cmyk_Y = Convert.ToDouble(dr["CMYK_Y"]),
+                                Cmyk_K = Convert.ToDouble(dr["CMYK_K"]),
+                                Cie_L = Convert.ToDouble(dr["TargetL"]),
+                                Cie_a = Convert.ToDouble(dr["Targeta"]),
+                                Cie_b = Convert.ToDouble(dr["Targetb"]),
+                                Spot1 = 0
+                            };
+                            listPatch.Add(patch);
+                        }
+                    }
+
+                    string fileName = "";
+                    if (model.LibraryType == 1)
+                        fileName = ExportColderaFile(listPatch, model);
+                    else if (model.LibraryType == 2)
+                        fileName = ExportColdera2File(listPatch, model);
+                    else if (model.LibraryType == 3)
+                        fileName = ExportColorgateFile(listPatch, model);
+                    else
+                        fileName = ExportCMYK_DBDFile(listPatch, model);
+
+                   
+                    if (!string.IsNullOrEmpty(fileName))
+                        fileName = "/UploadFiles/CMYKFile/" + fileName;
+                    httpResponse.Data = fileName;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+        #endregion
+
+        #region Methods
+        private void RevisedDataSet(DataSet DSReport, ReportGrading grading)
+        {
+            decimal CyanAvgScore = 0;
+            decimal MagentaAvgScore = 0;
+            decimal YellowAvgScore = 0;
+            decimal BlackAvgScore = 0;
+            decimal RedAvgScore = 0;
+            decimal GreenAvgScore = 0;
+            decimal BlueAvgScore = 0;
+            decimal PaperAvgScore = 0;
+            decimal CMY25AvgScore = 0;
+            decimal CMY50AvgScore = 0;
+            decimal CMY75AvgScore = 0;
+            DSReportRevised = new DataSet();
+
+            DataTable dt = new DataTable("MyTable");
+            dt.Columns.Add(new DataColumn("MeasurementID", typeof(int)));
+            dt.Columns.Add(new DataColumn("Name", typeof(string)));
+            dt.Columns.Add(new DataColumn("Date", typeof(string)));
+            dt.Columns.Add(new DataColumn("Cyan", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("Magenta", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("Yellow", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("Black", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("CMYKPri", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("Red", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("Green", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("Blue", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("RGBSec", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("CMY25", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("CMY50", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("CMY75", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("GrayBalance", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("Paper", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("Overall", typeof(decimal)));
+
+            if (DSReport != null && DSReport.Tables.Count > 0)
+            {
+                for (int i = 0; i < DSReport.Tables[4].Rows.Count; i++)
+                {
+                    DataRow dr = dt.NewRow();
+                    dr["MeasurementID"] = DSReport.Tables[4].Rows[i]["MeasurementID"].ToString();
+                    dr["Name"] = DSReport.Tables[4].Rows[i]["MeasurementName"].ToString();
+                    dr["Date"] = DSReport.Tables[4].Rows[i]["MeasurementDate"].ToString();
+                    dr["Cyan"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Cyan"].ToString(), "Cyan", grading);
+                    dr["Magenta"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Magenta"].ToString(), "Magenta", grading);
+                    dr["Yellow"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Yellow"].ToString(), "Yellow", grading);
+                    dr["Black"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Black"].ToString(), "Black", grading);
+                    dr["CMYKPri"] = (CalculateGrading(DSReport.Tables[4].Rows[i]["Cyan"].ToString(), "Cyan", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["Magenta"].ToString(), "Magenta", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["Yellow"].ToString(), "Yellow", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["Black"].ToString(), "Black", grading)) / 4;
+
+                    dr["Red"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Red"].ToString(), "Red", grading);
+                    dr["Green"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Green"].ToString(), "Green", grading);
+                    dr["Blue"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Blue"].ToString(), "Blue", grading);
+                    dr["RGBSec"] = (CalculateGrading(DSReport.Tables[4].Rows[i]["Red"].ToString(), "Red", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["Green"].ToString(), "Green", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["Blue"].ToString(), "Blue", grading)) / 3;
+
+                    dr["CMY25"] = CalculateGrading(DSReport.Tables[4].Rows[i]["CMY25"].ToString(), "CMY25", grading);
+                    dr["CMY50"] = CalculateGrading(DSReport.Tables[4].Rows[i]["CMY50"].ToString(), "CMY50", grading);
+                    dr["CMY75"] = CalculateGrading(DSReport.Tables[4].Rows[i]["CMY75"].ToString(), "CMY75", grading);
+                    dr["GrayBalance"] = (CalculateGrading(DSReport.Tables[4].Rows[i]["CMY25"].ToString(), "CMY25", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["CMY50"].ToString(), "CMY50", grading) + CalculateGrading(DSReport.Tables[4].Rows[i]["CMY75"].ToString(), "CMY75", grading)) / 3;
+
+                    dr["Paper"] = CalculateGrading(DSReport.Tables[4].Rows[i]["Paper"].ToString(), "Paper", grading);
+                    dr["Overall"] = (Convert.ToDecimal(dr["CMYKPri"]) + Convert.ToDecimal(dr["RGBSec"]) + Convert.ToDecimal(dr["GrayBalance"]) + Convert.ToDecimal(dr["Paper"])) / 4;
+                    dt.Rows.Add(dr);
+                }
+            }
+            DSReportRevised.Tables.Add(dt);
+
+            DSReportTotalAvg = new DataSet();
+            if (DSReportRevised != null && DSReportRevised.Tables.Count > 0)
+            {
+                DataTable dtAvg = new DataTable("MyTableAvg");
+
+                dtAvg.Columns.Add(new DataColumn("Color", typeof(string)));
+                dtAvg.Columns.Add(new DataColumn("AvgScore", typeof(decimal)));
+
+                for (int i = 0; i < DSReportRevised.Tables[0].Rows.Count; i++)
+                {
+                    CyanAvgScore = CyanAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Cyan"]);
+                    MagentaAvgScore = MagentaAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Magenta"]);
+                    YellowAvgScore = YellowAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Yellow"]);
+                    BlackAvgScore = BlackAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Black"]);
+
+                    RedAvgScore = RedAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Red"]);
+                    GreenAvgScore = GreenAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Green"]);
+                    BlueAvgScore = BlueAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Blue"]);
+
+                    CMY25AvgScore = CMY25AvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["CMY25"]);
+                    CMY50AvgScore = CMY50AvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["CMY50"]);
+                    CMY75AvgScore = CMY75AvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["CMY75"]);
+
+                    PaperAvgScore = PaperAvgScore + Convert.ToDecimal(DSReportRevised.Tables[0].Rows[i]["Paper"]);
+                }
+
+                DataRow dr1 = dtAvg.NewRow();
+                dr1["Color"] = "Cyan";
+                dr1["AvgScore"] = Math.Round((CyanAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
+                dtAvg.Rows.Add(dr1);
+
+                DataRow dr2 = dtAvg.NewRow();
+                dr2["Color"] = "Magenta";
+                dr2["AvgScore"] = Math.Round((MagentaAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
+                dtAvg.Rows.Add(dr2);
+
+                DataRow dr3 = dtAvg.NewRow();
+                dr3["Color"] = "Yellow";
+                dr3["AvgScore"] = Math.Round((YellowAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
+                dtAvg.Rows.Add(dr3);
+
+                DataRow dr4 = dtAvg.NewRow();
+                dr4["Color"] = "Black";
+                dr4["AvgScore"] = Math.Round((BlackAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
+                dtAvg.Rows.Add(dr4);
+
+                DataRow dr5 = dtAvg.NewRow();
+                dr5["Color"] = "Red";
+                dr5["AvgScore"] = Math.Round((RedAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
+                dtAvg.Rows.Add(dr5);
+
+                DataRow dr6 = dtAvg.NewRow();
+                dr6["Color"] = "Green";
+                dr6["AvgScore"] = Math.Round((GreenAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
+                dtAvg.Rows.Add(dr6);
+
+                DataRow dr7 = dtAvg.NewRow();
+                dr7["Color"] = "Blue";
+                dr7["AvgScore"] = Math.Round((BlueAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
+                dtAvg.Rows.Add(dr7);
+
+                DataRow dr8 = dtAvg.NewRow();
+                dr8["Color"] = "CMY25";
+                dr8["AvgScore"] = Math.Round((CMY25AvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
+                dtAvg.Rows.Add(dr8);
+
+                DataRow dr9 = dtAvg.NewRow();
+                dr9["Color"] = "CMY50";
+                dr9["AvgScore"] = Math.Round((CMY50AvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
+                dtAvg.Rows.Add(dr9);
+
+                DataRow dr10 = dtAvg.NewRow();
+                dr10["Color"] = "CMY75";
+                dr10["AvgScore"] = Math.Round((CMY75AvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
+                dtAvg.Rows.Add(dr10);
+
+                DataRow dr11 = dtAvg.NewRow();
+                dr11["Color"] = "Paper";
+                dr11["AvgScore"] = Math.Round((PaperAvgScore / DSReportRevised.Tables[0].Rows.Count), 2);
+                dtAvg.Rows.Add(dr11);
+
+                DSReportTotalAvg.Tables.Add(dtAvg);
+            }
+        }
 
         private decimal CalculateGrading(string Orig_ΔE, string OriginFrom, ReportGrading grading)
         {
@@ -1450,6 +1533,215 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return ΔEGrade;
         }
 
+        #region Create file and download .xml file for Caldera CMYK type
+        private string ExportColderaFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
+        {
+
+            string directoryFilePath = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/");
+            string fileName = detail.FileName + ".xml";
+            string SpotName_Parameter = "";
+            if (!Directory.Exists(directoryFilePath))
+                Directory.CreateDirectory(directoryFilePath);
+
+            System.IO.StreamWriter sw;
+            sw = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + fileName);
+
+            //--------Start: Header------------//
+            sw.WriteLine("<MediaDeviceColors>");
+            sw.WriteLine("<ColorList server=" + "\"" + detail.Server + "\"" + " model=" + "\"" + detail.Model + "\"" + " media=" + "\"" + detail.Media + "\"" + " resolution=" + "\"" + detail.Resolution + "\"" + " mode=" + "\"" + "CMYK" + "\"" + ">");
+            //--------End: Header--------------//
+
+            for (int i = 0; i < listPatch.Count; i++)
+            {
+                SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
+                sw.WriteLine("<Color>" + SpotName_Parameter + " : " + "CMYK " + listPatch[i].Cmyk_C.ToString("N1") + " " + listPatch[i].Cmyk_M.ToString("N1") + " " + listPatch[i].Cmyk_Y.ToString("N1") + " " + listPatch[i].Cmyk_K.ToString("N1") + " </Color>");
+            }
+            //--------Start: Footer------------//
+            sw.WriteLine("</ColorList>");
+            sw.WriteLine("</MediaDeviceColors>");
+            //--------End: Footer--------------//
+
+            sw.Close();
+
+            //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".xml", CMYKFileName + ".xml");
+            return fileName;
+        }
+        #endregion
+
+        #region Create file and download .cct file for Colorgate CMYK type
+        private string ExportColorgateFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
+        {
+            string directoryFilePath = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/");
+            string fileName = detail.FileName + ".cct";            
+            string SpotName_Parameter = "";
+            if (!Directory.Exists(directoryFilePath))
+                Directory.CreateDirectory(directoryFilePath);
+
+            System.IO.StreamWriter sw;
+            sw = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + fileName);
+
+            //--------Start: Header------------//
+            sw.Write("<?xml version=" + "\"1.0" + "\"" + " encoding=" + "\"UTF-8" + "\"?>");
+            sw.Write("<ColorTable xmlns=" + "\"urn:schemas-colorgate-com:colortable" + "\"" + " Name=" + "\"" + detail.FileName + "\"" + " Version=" + "\"2" + "\">");
+            //--------End: Header--------------//
+
+            for (int i = 0; i < listPatch.Count; i++)
+            {
+                SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
+                sw.Write("<ColorEntry Name=" + "\"" + SpotName_Parameter + "\"" + " ReplacementEnabled=" + "\"true" + "\"" + " ReplacementType=" + "\"23" + "\">");
+                sw.Write("<ColorIn ColorModel=" + "\"Spot" + "\"/>");
+                sw.Write("<ColorOut ColorModel=" + "\"Custom" + "\"" + " CustomColorModelId=" + "\"1" + "\"" + " ColorAliasName=" + "\"" + "\">");
+                sw.Write("<ComponentValue>" + listPatch[i].Cmyk_C.ToString("N0") + "</ComponentValue>");
+                sw.Write("<ComponentValue>" + listPatch[i].Cmyk_M.ToString("N0") + "</ComponentValue>");
+                sw.Write("<ComponentValue>" + listPatch[i].Cmyk_Y.ToString("N0") + "</ComponentValue>");
+                sw.Write("<ComponentValue>" + listPatch[i].Cmyk_K.ToString("N0") + "</ComponentValue>");
+                sw.Write("</ColorOut>");
+                sw.Write("</ColorEntry>");
+            }
+            //--------Start: Footer------------//
+            sw.Write("</ColorTable>");
+            //--------End: Footer--------------//
+
+            sw.Close();
+
+            //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".cct", CMYKFileName + ".cct");
+            return fileName;
+        }
+
+
+        #endregion
+
+        #region Create file and download .xml file for Caldera2 CMYK type
+        private string ExportColdera2File(List<Patch> listPatch, SpotLibrayCMYKExport detail)
+        {
+            string directoryFilePath = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/");
+            string fileName = detail.FileName + ".xml";
+            string SpotName_Parameter = "";
+            if (!Directory.Exists(directoryFilePath))
+                Directory.CreateDirectory(directoryFilePath);                       
+
+            System.IO.StreamWriter sw;
+            sw = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + fileName);
+
+            //--------Start: Header------------//
+            sw.WriteLine("<MediaDeviceColors>");
+            sw.WriteLine("<ColorList server=" + "\"" + detail.Server + "\"" + " model=" + "\"" + detail.Model + "\"" + " media=" + "\"" +detail.Media + "\"" + " resolution=" + "\"" + detail.Resolution + "\"" + " quality=" + "\"" + detail.Quality + "\"" + " mode=" + "\"" + detail.Mode + "\"" + ">");
+            //--------End: Header--------------//
+
+            for (int i = 0; i < listPatch.Count; i++)
+            {
+                SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
+                sw.WriteLine("<Color>" + SpotName_Parameter + " : " + "CMYK " + listPatch[i].Cmyk_C.ToString("N1") + " " + listPatch[i].Cmyk_M.ToString("N1") + " " + listPatch[i].Cmyk_Y.ToString("N1") + " " + listPatch[i].Cmyk_K.ToString("N1") + " </Color>");
+            }
+            //--------Start: Footer------------//
+            sw.WriteLine("</ColorList>");
+            sw.WriteLine("</MediaDeviceColors>");
+            //--------End: Footer--------------//
+
+            sw.Close();
+
+            //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".xml", CMYKFileName + ".xml");
+            return fileName;
+        }
+        #endregion
+
+        #region Create file and download .dbd file for XMF CMYK type
+        private string ExportCMYK_DBDFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
+        {
+            string SpotName_Header, SpotName_Parameter;
+            System.IO.StreamWriter sw = null;            
+            string directoryName = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + detail.FileName;
+            if (!Directory.Exists(directoryName))
+                Directory.CreateDirectory(directoryName);
+            string fileName = "";
+            for (int i = 0; i < listPatch.Count; i++)
+            {
+                fileName = directoryName + "/" + detail.FileName + i + ".dbi";
+                sw = System.IO.File.CreateText(fileName);
+
+                SpotName_Header = listPatch[i].ColorName.Replace("_", "#20");
+                SpotName_Parameter = listPatch[i].ColorName.Replace("_", " ");
+
+                sw.WriteLine("%%N:/Proforma/ColorPools/" + detail.InkPoolID + "/ColorPool/" + SpotName_Header);
+                sw.WriteLine("Color_1:OBJECT Color");
+                sw.WriteLine("{");
+                sw.WriteLine("\tName:string = " + "\"" + SpotName_Parameter + "\"");
+                sw.WriteLine("\tFUJI" + "\\" + "PrintMode:string = " + "\"LargeGumatMerge\";");
+                sw.WriteLine("\tColorType:string = " + "\"Normal\";");
+                sw.WriteLine("\tNeutralDensity:double = " + GetNdensity(listPatch[i].Cie_L).ToString("0.000000000000000e+0") + ";");
+                sw.WriteLine("\tTempLab:double[3] = " + listPatch[i].Cie_L.ToString("0.000000000000000e+0") + "," + listPatch[i].Cie_a.ToString("0.000000000000000e+0") + "," + listPatch[i].Cie_b.ToString("0.000000000000000e+0") + ";");
+                sw.WriteLine("\tCMYK:double[4] = " + String.Format("{0,12:e15}", (listPatch[i].Cmyk_C / 100)) + "," + (listPatch[i].Cmyk_M / 100).ToString("0.000000000000000e+0") + "," + (listPatch[i].Cmyk_Y / 100).ToString("0.000000000000000e+0") + "," + (listPatch[i].Cmyk_K / 100).ToString("0.000000000000000e+0") + ";");
+                sw.WriteLine("\tHideCMYK:string = " + "\"ShowAll\";");
+                sw.WriteLine("\tHideLab:string = " + "\"ShowAll\";");
+                sw.WriteLine("\tRawName:string = " + "\"\";");
+                sw.WriteLine("\tLibraryType:string = " + "\"ColorPath Optimized\";");
+                sw.WriteLine("}");
+                sw.WriteLine("");
+                sw.WriteLine("%%E:");
+                sw.Close();
+
+                ZipManager.AddFileToZip(directoryName + ".zip", fileName);
+            }
+
+            ////-----Alias file-- START----------//
+            fileName = directoryName + "/" + detail.FileName + "alias.dbi";
+            sw = System.IO.File.CreateText(fileName);
+            sw.WriteLine("%%N:/Proforma/ColorPools/" + detail.InkPoolID + "/ColorantAliasRules");
+            sw.WriteLine("");
+            sw.WriteLine("%%E:");
+            sw.Close();
+            ZipManager.AddFileToZip(directoryName + ".zip", fileName);
+            ////-----Alias file-- END----------//
+
+            ////-----Info file-- START----------//
+            fileName = directoryName + "/" + detail.FileName + "info.dbi";
+            sw = System.IO.File.CreateText(fileName);
+            sw.WriteLine("%%N:/Proforma/ColorPools/" + detail.InkPoolID + "/Info");
+            sw.WriteLine("FUJI" + "\\" + "ColorPoolInfo_1:OBJECT FUJI" + "\\" + "ColorPoolInfo");
+            sw.WriteLine("{");
+            sw.WriteLine("\tName:string = " + "\"" + detail.FileName + "\";");
+            sw.WriteLine("\tComment:string = " + "\"" + detail.Comment + "\";");
+            sw.WriteLine("}");
+            sw.WriteLine("");
+            sw.WriteLine("%%E:");
+            sw.Close();
+            ZipManager.AddFileToZip(directoryName + ".zip", fileName);
+            ////-----Info file-- END----------//
+
+            //Delete the directory
+            if (Directory.Exists(directoryName))
+                Directory.Delete(directoryName, true);
+
+            return detail.FileName+".zip";
+            //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".zip", CMYKFileName + ".zip");
+        }
+        #endregion
+
+
+        //Get density of LabL to export CMYK values
+        double GetNdensity(double Lab_L)
+        {
+            double var_Y;
+            if ((Lab_L > 8))
+            {
+                var_Y = (100 * Math.Pow(((Lab_L + 16) / 116), 3));
+            }
+            else
+            {
+                var_Y = (100 * ((108 / 841) * (((Lab_L + 16) / 116) - (4 / 29))));
+            }
+
+            if ((var_Y > 0))
+            {
+                return (0.13353 + Math.Log10((100 / var_Y)));
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        #endregion
+
         #region IViewReportSingleMeasurement Members
 
         public int MeasurementId { get; set; }
@@ -1459,7 +1751,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public bool IsSync1DType { get; set; }
         public DataSet DSReport_G7_Vali { get; set; }
         public int ValidationType { get; set; }
-        public bool IsAverageOfMeasurements { get; set; }        
+        public bool IsAverageOfMeasurements { get; set; }
         #endregion
 
         #region IViewReportGrading Members

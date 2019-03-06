@@ -473,23 +473,23 @@
                 </td>
                 <td style="width: 25%;">
                     <table id="tblDetailsFirstRun" runat="server" style="width: 100%;" visible="false" class="tblStates">
-                        <tr style="height:20px;background-color: darkgrey;">
+                        <tr style="height:20px; background-color: darkgrey;">
                             <td>
-                                <table class="spotTable">
+                                <table class="spotTable" style="width:100%">
                                     <tr>
-                                        <th style="width:63%"></th>
-                                        <th style="width:25%"><img src="Images/greendot.png" style="width: 12px;margin-top: 1px;" /> T</th>
-                                        <th style="width:15%"><img src="Images/purpledot.png" style="width: 12px;margin-top: 1px;" /> P</th>
+                                       <th style="width:50%;"></th>
+                                       <th style="width:20%;text-align:center;"><img src="Images/greendot.png" style="width: 12px;margin-top: 1px;" /> T</th>
+                                       <th style="width:20%;text-align:center;"><img src="Images/purpledot.png" style="width: 12px;margin-top: 1px;" /> P</th>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
                         <tr style="height:70px;">
                             <td>
-                                <table style="width:100%">
+                               <table style="width:100%;height:70px" >
                                     <tr>
-                                        <th style="width:30%">L*</th>
-                                        <td style="width:20%"><asp:Label runat="server" ID="lblTargetLRun0"  ClientIDMode="Static"></asp:Label></td>
+                                        <th style="width:45%">L*</th>
+                                        <td style="width:20%"><asp:Label runat="server" ID="lblTargetLRun0" ClientIDMode="Static"></asp:Label></td>
                                         <td style="width:20%"><asp:Label runat="server" ID="lblActualLRun0" ClientIDMode="Static"></asp:Label></td>
                                     </tr>
                                     <tr>
@@ -539,15 +539,15 @@
                                 <%--<div runat="server" id="div6" style="height: 100px;background-color: #FFB700;"></div>--%>
                                 <table style="width:100%">
                                     <tr>
-                                        <th style="width:80%">L*</th>                                        
+                                        <th style="width:80%">∆L*</th>                                        
                                         <td style="width:20%"><asp:Label runat="server" ID="lblDeltaL" ClientIDMode="Static"></asp:Label></td>
                                     </tr>
                                     <tr>
-                                        <th>a*</th>
+                                        <th>∆a*</th>
                                         <td><asp:Label runat="server" ID="lblDeltaA" ClientIDMode="Static"></asp:Label></td>
                                     </tr>
                                     <tr>
-                                        <th>b*</th>
+                                        <th>∆b*</th>
                                         <td><asp:Label runat="server" ID="lblDeltaB" ClientIDMode="Static"></asp:Label></td>
                                     </tr>
                                 </table>
@@ -636,17 +636,17 @@
                             <td>
                                 <table style="width:100%" class="tblStates">
                                     <tr>
-                                        <th style="width:20%">L*</th>                                        
+                                        <th style="width:20%">∆L*</th>                                        
                                         <td style="width:40%"><asp:Label runat="server" ID="lblPredicted_Target_L" ClientIDMode="Static"></asp:Label></td>
                                         <td style="width:40%"><asp:Label runat="server" ID="lblMeasured_Target_L" ClientIDMode="Static"></asp:Label></td>
                                     </tr>
                                     <tr>
-                                        <th>a*</th>
+                                        <th>∆a*</th>
                                         <td><asp:Label runat="server" ID="lblPredicted_Target_a" ClientIDMode="Static"></asp:Label></td>
                                         <td><asp:Label runat="server" ID="lblMeasured_Target_a" ClientIDMode="Static"></asp:Label></td>
                                     </tr>
                                     <tr>
-                                        <th>b*</th>
+                                        <th>∆b*</th>
                                         <td><asp:Label runat="server" ID="lblPredicted_Target_b" ClientIDMode="Static"></asp:Label></td>
                                         <td><asp:Label runat="server" ID="lblMeasured_Target_b" ClientIDMode="Static"></asp:Label></td>
                                     </tr>

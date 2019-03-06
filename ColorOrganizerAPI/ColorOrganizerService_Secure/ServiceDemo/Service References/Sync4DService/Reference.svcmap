@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="80a03246-a085-440d-8515-45494c1a92d8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://www.softwebsolutions.co.in/WCFPublish/Sync4D.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Sync4D.xsd" MetadataType="Schema" ID="ef45b225-0d16-4229-94c1-6af3e4a45d75" SourceId="1" SourceUrl="https://storage/WCFPublish/Sync4D.svc?xsd=xsd5" />
+    <MetadataFile FileName="Sync4D1.xsd" MetadataType="Schema" ID="bbe0cac1-02ec-41e9-bcb4-c92b917d2444" SourceId="1" SourceUrl="https://storage/WCFPublish/Sync4D.svc?xsd=xsd4" />
+    <MetadataFile FileName="Sync4D2.xsd" MetadataType="Schema" ID="84a46a82-5ea8-4acb-9b83-2fddfd944f30" SourceId="1" SourceUrl="https://storage/WCFPublish/Sync4D.svc?xsd=xsd7" />
+    <MetadataFile FileName="Sync4D3.xsd" MetadataType="Schema" ID="b4abcd42-1f4f-4d53-8d48-9fb48986794b" SourceId="1" SourceUrl="https://storage/WCFPublish/Sync4D.svc?xsd=xsd6" />
+    <MetadataFile FileName="Sync4D4.xsd" MetadataType="Schema" ID="611d2a08-faaf-4b58-b3d0-1703090f842b" SourceId="1" SourceUrl="https://storage/WCFPublish/Sync4D.svc?xsd=xsd2" />
+    <MetadataFile FileName="Sync4DService.wsdl" MetadataType="Wsdl" ID="9935f91d-7d8c-47dd-b741-6dc5629da79f" SourceId="1" SourceUrl="https://storage/WCFPublish/Sync4D.svc?wsdl" />
+    <MetadataFile FileName="Sync4D5.xsd" MetadataType="Schema" ID="5520a240-9c0d-4eaf-9f87-572536b214c1" SourceId="1" SourceUrl="https://storage/WCFPublish/Sync4D.svc?xsd=xsd1" />
+    <MetadataFile FileName="Sync4D6.xsd" MetadataType="Schema" ID="a71c47e5-f599-4f75-b01c-080d35af002f" SourceId="1" SourceUrl="https://storage/WCFPublish/Sync4D.svc?xsd=xsd0" />
+    <MetadataFile FileName="Sync4D7.xsd" MetadataType="Schema" ID="85b16e71-05ea-4be3-9c3b-14babda168e1" SourceId="1" SourceUrl="https://storage/WCFPublish/Sync4D.svc?xsd=xsd3" />
+    <MetadataFile FileName="Sync4D.disco" MetadataType="Disco" ID="d9779df2-a2eb-45fb-8f00-380b647873be" SourceId="1" SourceUrl="https://storage/WCFPublish/Sync4D.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

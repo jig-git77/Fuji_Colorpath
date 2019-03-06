@@ -173,9 +173,9 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
 
-        public List<Entity.CPSpot.SpotProjectLibrary> GetSpotLibraryListByProjectId(int projectId)
+        public SpotProjectList GetSpotLibraryListByProjectId(int projectId)
         {
-            return new List<Entity.CPSpot.SpotProjectLibrary>();
+            return new SpotProjectList();
         }
 
         public List<Entity.CPSpot.SpotTarget> GetSpotTargetList(int currentUserId, bool isSpotTargetType)

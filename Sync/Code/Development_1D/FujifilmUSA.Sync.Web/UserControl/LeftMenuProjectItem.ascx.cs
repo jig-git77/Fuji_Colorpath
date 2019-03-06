@@ -215,7 +215,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lnkAddRun.ForeColor = System.Drawing.Color.Blue;
             }
             var currentPage = Request.Url.Segments;
-            if (currentPage[2] == "Measurement.aspx" || currentPage[2] == "Spot_Measurement.aspx")
+            if (currentPage[currentPage.Length - 1] == "Measurement.aspx" || currentPage[currentPage.Length - 1] == "Spot_Measurement.aspx")
                 lnkAnalyse.Attributes.Add("onclick", "return AllowToAnalyze();");
         }
 

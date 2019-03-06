@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Service.Common.DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Service.Common.DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ResponseMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Severity" type="tns:MessageSeverity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseMessage" nillable="true" type="tns:ResponseMessage" />
+  <xs:simpleType name="MessageSeverity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Exception" />
+      <xs:enumeration value="Information" />
+      <xs:enumeration value="Warning" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MessageSeverity" nillable="true" type="tns:MessageSeverity" />
+</xs:schema>

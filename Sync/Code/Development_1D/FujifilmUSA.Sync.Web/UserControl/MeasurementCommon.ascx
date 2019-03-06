@@ -522,7 +522,7 @@
             dataFilter:
                 function (data, type) {
                     var json = jQuery.parseJSON(data);
-                    if (json.length > 0) {
+                    if (json.length > 0) {                        
                         jQuery("input[id*='hdHasMeasurement']").val('true');
                         $("#measurementContainer").html("");
                         $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
@@ -532,18 +532,22 @@
                         //----------------Display Import Button--------------//  
                         if (jQuery("input[id*='hdDisplayImport']").val() == "yes") {
                             if (json.length < <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit)%>) {
-                                $("#Div_ImportMeasurements").css('visibility', 'visible');
+                                //$("#Div_ImportMeasurements").css('visibility', 'visible');
+                                $("#Div_ImportMeasurements").css('display', 'block');
                             }
                             else {
-                                $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                                //$("#Div_ImportMeasurements").css('visibility', 'hidden');
+                                $("#Div_ImportMeasurements").css('display', 'none');
                             }
                         }
                         else {
-                            $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            //$("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            $("#Div_ImportMeasurements").css('display', 'none');
                         }
                     }
                     else {
                         jQuery("input[id*='hdHasMeasurement']").val('false');
+                        jQuery("input[id*='hdMeasurementsTotal']").val('0'); //set 0 measurement for empty response
                         //made disable analyze tab when no measurement available
                         $("#LeftMenu2_ctl01_lnkAnalyse").css("color", "Silver");
                         $("#LeftMenu2_ctl01_lnkAnalyze").css("color", "Silver");
@@ -551,10 +555,12 @@
                         $("#measurementContainer").append("<div class='no_data_found'>" + '<%= GetResourceString("noRecordsAvailable") %>' + "</div>");
                         //----------------Display Import Button--------------//
                         if (jQuery("input[id*='hdDisplayImport']").val() == "yes") {
-                            $("#Div_ImportMeasurements").css('visibility', 'visible');
+                            //$("#Div_ImportMeasurements").css('visibility', 'visible');
+                            $("#Div_ImportMeasurements").css('display', 'block');
                         }
                         else {
-                            $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            //$("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            $("#Div_ImportMeasurements").css('display', 'none');
                         }
                     }
                 },
@@ -567,7 +573,7 @@
                 }
         });
     }
-    function ConfirmDeleteMeasurement(measurement) {
+    function ConfirmDeleteMeasurement(measurement) {        
         if (confirm('<%= AddMeasurement_DeleteMeasurement_Confirmation %>')) {
             deletemeasurement(measurement.name);
             bindMeasurementData();
@@ -680,7 +686,18 @@
         return false;
     }
 
-    function ShowImportFileWindow() {
+    function ShowImportFileWindow() {        
+        if (('<%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentDlpSubOperation != FujifilmUSA.Sync.Entity.ELicenseType.Validation).ToString().ToLower() %>' == 'true') &&
+        (jQuery("input[id*='hdMeasurementsTotal']").val() >=
+        <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == 
+        FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : 
+        (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary ? 
+        ApplicationConfiguration.Instance.MeasurementLimitSpotProject : ApplicationConfiguration.Instance.MeasurementsLimit)) %>)) {
+                    MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
+                    
+                    return false;
+        }
+
         var oWnd = $find("<%= ImportMeasurementFileWindow.ClientID %>");
         oWnd.show();
         return false;
@@ -703,7 +720,7 @@
             Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupImportMeasurements.aspx">
         </telerik:RadWindow>
         <telerik:RadWindow ID="ImportMeasurementFileWindow" runat="server" VisibleStatusbar="false"
-            ShowContentDuringLoad="false" Title="Import Measurement File" Width="730" Height="230"
+            ShowContentDuringLoad="false" Title="Import Measurement File" Width="730" Height="285"
             Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupImportMeasurementFile.aspx">
         </telerik:RadWindow>
     </Windows>

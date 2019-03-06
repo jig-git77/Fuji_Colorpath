@@ -211,22 +211,31 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize Localize1;
         
         /// <summary>
-        /// lbtnDownloadSourceProf control.
+        /// Localize8 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnDownloadSourceProf;
+        protected global::System.Web.UI.WebControls.Localize Localize8;
         
         /// <summary>
-        /// Localize2 control.
+        /// lnkGoToDeviceList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
+        protected global::System.Web.UI.WebControls.LinkButton lnkGoToDeviceList;
+        
+        /// <summary>
+        /// Localize7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize7;
         
         /// <summary>
         /// trAdvancedDownload control.
@@ -245,6 +254,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locAdvancedDownloads;
+        
+        /// <summary>
+        /// lbtnDownloadSourceProf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnDownloadSourceProf;
+        
+        /// <summary>
+        /// Localize2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize2;
         
         /// <summary>
         /// lbtnDownloadDestinationICC control.

@@ -27,6 +27,17 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+            {
+                tdNotesCaption.Visible = true;
+                tdNotes.Visible = true;
+                trCustomer.Visible = true;
+                trValidationDetails.Visible = true;
+                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                    lblMeasurementName.Text = GetLocalResourceObject("JobNameCaption").ToString();
+                else
+                    lblMeasurementName.Text = GetLocalResourceObject("MeasurementNameCaption").ToString();
+            }
         }
         #endregion
 
@@ -35,24 +46,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         {
             try
             {
-
-
-                int parentProjectMeasurementCount = 0;
-                #region Check for current project existing measurement
-                DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
-                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-                LicenseTypeID = (int)SessionManager.Instance.CurrentProject.LicenseType;
-                _presenterImportMeasurements.GetMeasurementIDsbyProjectID();
-                #endregion
-                if (!IsErrorOccured)
-                {
-                    parentProjectMeasurementCount = Measurements.Count;
-                }
-                if (parentProjectMeasurementCount + Measurements.Count > (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? Business.ApplicationConfiguration.Instance.MeasurementLimitSync1D : Business.ApplicationConfiguration.Instance.MeasurementsLimit))
-                {
-                    fujiStatusbar.DisplayMessage("Measurements cannot be imported as total allowed measurement limit exceeded.", false);
-                    return;
-                }
+                if ((SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New && SessionManager.Instance.CurrentProject.OptimizeRuns.Count() == 1)
+                    || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+                    LicenseTypeID = (int)SessionManager.Instance.CurrentProject.LicenseType;
+                else
+                    LicenseTypeID = (int)SessionManager.Instance.CurrentDlpSubOperation;
 
                 if (fuMeasurement.PostedFile != null)
                 {
@@ -63,25 +61,64 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                         {
                             inputContent = inputStreamReader.ReadToEnd();
                         }
-
                         Measurement = JsonConvert.DeserializeObject<Entity.Measurement>(inputContent);
                         Measurement.MeasurementName = txtMeasurementName.Text;
                         Measurement.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                         Measurement.MeasurementDate = DateTime.Now;
                         Measurement.PCSDataType = 1;
-                        Measurement.ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
-                        BindMeasurementPatches(Measurement);
-                        _presenterImportMeasurements.ImportMeasurementFile();
-                        if (!IsErrorOccured)
+
+                        Measurement.ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                        //if current project is validation then assign extra information
+                        if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                         {
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "radalert", "<script type=text/javascript> CloseImportWindow(); </script>");
+                            Measurement.Notes = txtNotes.Text;
+                            Measurement.Customer = txtCustomer.Text;
+                            Measurement.PageOrSurface = txtPageOrSurface.Text;
+                            Measurement.JDFJobId = txtJDFJobId.Text;
+                            Measurement.ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key;
+                        }
+                        else
+                        {
+                            Measurement.ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
+                        }
+
+                        if (Measurement.MeasurementAppPatches.Count > 0)
+                        {                            
+                            if (!CheckInstrumentType(Convert.ToInt32(SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId), Measurement.MeasurementAppPatches[0].InstrumentTypeID))
+                            {
+                                fujiStatusbar.DisplayMessage("Instrument type is different. Please select same Instrument type.", false);
+                                return;
+                            }
+                            //bind the measurement patches 
+                            BindMeasurementPatches(Measurement);
+                            _presenterImportMeasurements.ImportMeasurementsFile();
+
+                            //if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.SpotLibrary)
+                            //    _presenterImportMeasurements.ImportSpotMeasurementFile();
+                            //else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)
+                            //    _presenterImportMeasurements.Import1DMeasurementFile();
+                            //else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                            //    _presenterImportMeasurements.ImportValidationMeasurementFile();
+                            //else
+                            //    _presenterImportMeasurements.ImportMeasurementFile();
+
+                            if (this.MeasurementID == -2)
+                            {
+                                fujiStatusbar.DisplayMessage("Total patches are not matched. Please try again.", false);
+                                return;
+                            }
+
+                            if (!IsErrorOccured)
+                            {
+                                Page.ClientScript.RegisterStartupScript(this.GetType(), "radalert", "<script type=text/javascript> CloseImportWindow(); </script>");
+                            }
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                lblMessage.Text = GetResourceString("ImportUnsuccessfulMessage");
+                fujiStatusbar.DisplayMessage(GetResourceString("ImportUnsuccessfulMessage"), false);
             }
         }
 
@@ -96,17 +133,17 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                     MeasurementPatchId = patch.MeasurementPatchId,
                     MeasurementId = patch.MeasurementId,
                     SampleName = patch.SampleName,
-                    CiexyzX = string.IsNullOrEmpty(patch.Ciexyz.X) ? 0 : Convert.ToDecimal(patch.Ciexyz.X),
-                    CiexyzY = string.IsNullOrEmpty(patch.Ciexyz.Y) ? 0 : Convert.ToDecimal(patch.Ciexyz.Y),
-                    CiexyzZ = string.IsNullOrEmpty(patch.Ciexyz.Z) ? 0 : Convert.ToDecimal(patch.Ciexyz.Z),
-                    CielabL = string.IsNullOrEmpty(patch.Cielab.L) ? 0 : Convert.ToDecimal(patch.Cielab.L),
-                    CielabA = string.IsNullOrEmpty(patch.Cielab.A) ? 0 : Convert.ToDecimal(patch.Cielab.A),
-                    CielabB = string.IsNullOrEmpty(patch.Cielab.B) ? 0 : Convert.ToDecimal(patch.Cielab.B),
+                    CiexyzX = patch.Ciexyz == null ? 0 : string.IsNullOrEmpty(patch.Ciexyz.X) ? 0 : Convert.ToDecimal(patch.Ciexyz.X),
+                    CiexyzY = patch.Ciexyz == null ? 0 : string.IsNullOrEmpty(patch.Ciexyz.Y) ? 0 : Convert.ToDecimal(patch.Ciexyz.Y),
+                    CiexyzZ = patch.Ciexyz == null ? 0 : string.IsNullOrEmpty(patch.Ciexyz.Z) ? 0 : Convert.ToDecimal(patch.Ciexyz.Z),
+                    CielabL = patch.Cielab == null ? 0 : string.IsNullOrEmpty(patch.Cielab.L) ? 0 : Convert.ToDecimal(patch.Cielab.L),
+                    CielabA = patch.Cielab == null ? 0 : string.IsNullOrEmpty(patch.Cielab.A) ? 0 : Convert.ToDecimal(patch.Cielab.A),
+                    CielabB = patch.Cielab == null ? 0 : string.IsNullOrEmpty(patch.Cielab.B) ? 0 : Convert.ToDecimal(patch.Cielab.B),
                     Δe = string.IsNullOrEmpty(patch.Δe) ? 0 : Convert.ToDecimal(patch.Δe),
                     Δe94 = string.IsNullOrEmpty(patch.Δe94) ? 0 : Convert.ToDecimal(patch.Δe94),
                     Δe2000 = string.IsNullOrEmpty(patch.Δe2000) ? 0 : Convert.ToDecimal(patch.Δe2000),
                     HtmlColor = patch.HtmlColor,
-                    Density = new Density()
+                    Density = patch.Density == null ? null : new Density()
                     {
                         Red = string.IsNullOrEmpty(patch.Density.Red) ? 0 : Convert.ToDouble(patch.Density.Red),
                         Green = string.IsNullOrEmpty(patch.Density.Green) ? 0 : Convert.ToDouble(patch.Density.Green),
@@ -157,6 +194,24 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 });
             }
 
+        }
+
+        public bool CheckInstrumentType(int currentProjectInstrumentType, int measurementInstrumentType)
+        {
+            if ((currentProjectInstrumentType == (int)EInstrumentType.i1IO && measurementInstrumentType == (int)EInstrumentType.i1IOPro2)
+                || (currentProjectInstrumentType == (int)EInstrumentType.i1IOPro2 && measurementInstrumentType == (int)EInstrumentType.i1IO))
+                return true;
+            if ((currentProjectInstrumentType == (int)EInstrumentType.i1Pro && measurementInstrumentType == (int)EInstrumentType.i1Pro2)
+                || (currentProjectInstrumentType == (int)EInstrumentType.i1Pro2 && measurementInstrumentType == (int)EInstrumentType.i1Pro))
+                return true;
+            if ((currentProjectInstrumentType == (int)EInstrumentType.i1Sis && measurementInstrumentType == (int)EInstrumentType.i1Sis2)
+                || (currentProjectInstrumentType == (int)EInstrumentType.i1Sis2 && measurementInstrumentType == (int)EInstrumentType.i1Sis))
+                return true;
+
+            if (currentProjectInstrumentType == measurementInstrumentType)
+                return true;
+
+            return false;
         }
         #endregion
 

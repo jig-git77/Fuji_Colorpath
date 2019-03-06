@@ -59,6 +59,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int ProjectStatus { get; set; }
         Project Project { get; set; }
         int SpotProjectId { get; set; }
-        bool IsUsed { get; set; }
+        bool IsUsed { get; set; }        
     }
 }

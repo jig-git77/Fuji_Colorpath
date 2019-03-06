@@ -235,6 +235,22 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Measurement();
         }
 
+        public Measurement GetSpotMeasurementPatchDetailsForExport(int OptimizeRunId)
+        {
+            return new Measurement();
+        }
+        public Measurement GetValidationMeasurementPatchDetailsForExport(int MeasurementId)
+        {
+            return new Measurement();
+        }
+        public Measurement Get1DMeasurementPatchDetailsForExport(int MeasurementId)
+        {
+            return new Measurement();
+        }
+        public int ImportMeasurement(Measurement measurement, int LicenseTypeID)
+        {
+            return 0;
+        }
         #endregion
 
         #region ITaskBase Members

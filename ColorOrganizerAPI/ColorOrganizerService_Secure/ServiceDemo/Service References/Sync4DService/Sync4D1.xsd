@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://storage/WCFPublish/Sync4D.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Service.Common.DataContracts" />
+  <xs:complexType name="BaseRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SecurityToken" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserPassword" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BaseRequest" nillable="true" type="tns:BaseRequest" />
+  <xs:complexType name="BaseResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Count" type="xs:long" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Service.Common.DataContracts" minOccurs="0" name="Message" nillable="true" type="q1:ResponseMessage" />
+      <xs:element minOccurs="0" name="RequestTotalTime" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BaseResponse" nillable="true" type="tns:BaseResponse" />
+</xs:schema>

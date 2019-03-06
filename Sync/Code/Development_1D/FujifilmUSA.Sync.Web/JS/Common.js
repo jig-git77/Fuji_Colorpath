@@ -18,8 +18,8 @@ var ELicenseType = {
     FullGamutCustomSource: 8,
     MultiColorCustomSource: 9,
     SpotLibrary: 10,
-    Validation: 11,
-    IccProfiling: 12
+    Validation: 51,
+    IccProfiling: 52
 }
 
 //Object for E Validation Status

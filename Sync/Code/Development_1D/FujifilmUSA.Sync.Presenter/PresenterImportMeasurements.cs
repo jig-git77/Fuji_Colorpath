@@ -42,11 +42,39 @@ namespace FujifilmUSA.Sync.Presenter
             projectOptimization.CreateSpotNamedColorProfile(_viewImportMeasurements.ProjectId, _viewImportMeasurements.OptimizeRunID, (int)EOptimizeRunStatus.Closed,DateTime.Now);
         }
 
-        public void ImportMeasurementFile()
+        //public void ImportMeasurementFile()
+        //{
+        //    var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+        //    measurementBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+        //    _viewImportMeasurements.MeasurementID = measurementBusiness.ImportMeasurement(_viewImportMeasurements.Measurement, _viewImportMeasurements.LicenseTypeID);
+        //}
+
+        //public void ImportSpotMeasurementFile()
+        //{
+        //    var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+        //    measurementBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+        //    _viewImportMeasurements.MeasurementID = measurementBusiness.ImportMeasurement(_viewImportMeasurements.Measurement, _viewImportMeasurements.LicenseTypeID);
+        //}
+
+        //public void Import1DMeasurementFile()
+        //{
+        //    var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+        //    measurementBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+        //    _viewImportMeasurements.MeasurementID = measurementBusiness.ImportMeasurement(_viewImportMeasurements.Measurement, _viewImportMeasurements.LicenseTypeID);
+        //}
+
+        //public void ImportValidationMeasurementFile()
+        //{
+        //    var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+        //    measurementBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+        //    _viewImportMeasurements.MeasurementID = measurementBusiness.ImportMeasurement(_viewImportMeasurements.Measurement, _viewImportMeasurements.LicenseTypeID);
+        //}
+
+        public void ImportMeasurementsFile()
         {
             var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
-            measurementBusiness.SaveMeasurement(_viewImportMeasurements.Measurement);
+            _viewImportMeasurements.MeasurementID = measurementBusiness.ImportMeasurement(_viewImportMeasurements.Measurement, _viewImportMeasurements.LicenseTypeID);
         }
     }
 }

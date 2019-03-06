@@ -162,4 +162,13 @@
   <data name="txtModeResource1.Text" xml:space="preserve">
     <value>Mode</value>
   </data>
+  <data name="XMFResource1.Text" xml:space="preserve">
+    <value>XMF</value>
+  </data>
+  <data name="CommentResource1.Text" xml:space="preserve">
+    <value>Comment: </value>
+  </data>
+  <data name="locInkPoolIDResource1.Text" xml:space="preserve">
+    <value>Ink Pool ID: </value>
+  </data>
 </root>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://storage/WCFPublish/Sync4D.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" />
+  <xs:element name="Ping">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PingResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDeviceList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="request" nillable="true" type="q1:GetDeviceListRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDeviceListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="GetDeviceListResult" nillable="true" type="q2:GetDeviceListResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReferenceChartList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="request" nillable="true" type="q3:GetReferenceChartListRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReferenceChartListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="GetReferenceChartListResult" nillable="true" type="q4:GetReferenceChartListResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReferenceChartData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="request" nillable="true" type="q5:GetReferenceChartDataRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReferenceChartDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="GetReferenceChartDataResult" nillable="true" type="q6:GetReferenceChartDataResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProjectInformation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="request" nillable="true" type="q7:GetProjectInformationRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProjectInformationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="GetProjectInformationResult" nillable="true" type="q8:GetProjectInformationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProfile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="request" nillable="true" type="q9:GetProfileRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProfileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="GetProfileResult" nillable="true" type="q10:GetProfileResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StoreTempProjectInformation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="request" nillable="true" type="q11:StoreTempProjectInformationRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StoreTempProjectInformationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="StoreTempProjectInformationResult" nillable="true" type="q12:StoreTempProjectInformationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckUserCredentials">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="request" nillable="true" type="q13:CheckUserCredentialsRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckUserCredentialsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="CheckUserCredentialsResult" nillable="true" type="q14:CheckUserCredentialsResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StoreTempValidationInformation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="request" nillable="true" type="q15:StoreTempValidationInformationRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StoreTempValidationInformationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="StoreTempValidationInformationResult" nillable="true" type="q16:StoreTempValidationInformationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
