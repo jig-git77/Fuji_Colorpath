@@ -60,5 +60,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         SpotProjectLibrary GetRetargetSpotProjectDetails(int RetargetSpotprojectID);
         DataTable GetRetargetProjectDetails(int RetargetProjectID);
         int GetProjectLicenseTypeLimit(int DeviceID, int LicenseTypeID);
+        int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType);
     }
 }

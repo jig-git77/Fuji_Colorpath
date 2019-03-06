@@ -1522,9 +1522,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                                     IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
 
-                                // TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
+                                    // TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
 
-                                SpotTarget = new Entity.CPSpot.SpotTarget()
+                                    SpotTarget = new Entity.CPSpot.SpotTarget()
                                     {
                                         SpotTargetID = DataReader.ReadShort(x, "SpotTargetID"),
                                         SpotTargetName = DataReader.ReadString(x, "SpotTargetName")
@@ -1535,8 +1535,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     HasColorProfile = DataReader.ReadBoolean(x, "HasColorProfile"),
                                     LastOptmizeId = DataReader.ReadInt(x, "LastOptimizeID"),
                                     Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus")
-                                //isAllowSpotProject = DataReader.ReadBoolean(x, "isAllowSpotProject")
-                            }).ToList();
+                                    //isAllowSpotProject = DataReader.ReadBoolean(x, "isAllowSpotProject")
+                                }).ToList();
                         }
                     }
                 },
@@ -1922,9 +1922,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                         chartData.DeviceSetting = new MeasurementDevice
                         {
-                            SerialNumber = chartData.MeasureDeviceSrNo,                            
+                            SerialNumber = chartData.MeasureDeviceSrNo,
                             MeasurementSettings = new MeasurementSetting()
-                            {                                
+                            {
                                 IlluminantName = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "IlluminantType"),
                                 ObserverTypeName = Utilities.GetValueFromDescription<EObserverType>(DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ObserverType")),
                                 UvIncludedName = ((UVMode == 0) ? EUVIncludedMode.UV.ToString() : (UVMode == 1) ? EUVIncludedMode.UVPlus.ToString() : EUVIncludedMode.UVCut.ToString()),
@@ -2059,7 +2059,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             SerialNumber = chartData.MeasureDeviceSrNo,
                             InstrumentTypeId = Convert.ToInt16(DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "InstrumentTypeID")),
                             MeasurementSettings = new MeasurementSettingPlugin()
-                            {                                
+                            {
                                 IlluminantName =
                                                                                             DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "IlluminantType"),
                                 ObserverTypeName =
@@ -2158,7 +2158,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             SerialNumber = chartData.MeasureDeviceSrNo,
                             InstrumentTypeId = Convert.ToInt16(DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "InstrumentTypeID")),
                             MeasurementSettings = new MeasurementSettingPlugin()
-                            {                                
+                            {
                                 IlluminantName = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "IlluminantType"),
                                 ObserverTypeName = Utilities.GetValueFromDescription<EObserverType>(DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ObserverType")),
                                 UvIncludedName = ((UVMode == 0) ? EUVIncludedMode.UV.ToString() : (UVMode == 1) ? EUVIncludedMode.UVPlus.ToString() : EUVIncludedMode.UVCut.ToString()),
@@ -2171,8 +2171,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         chartData.ChartPatches = dsReferenceChart.Tables[1].AsEnumerable().
                             Select(x =>
                                    new ReferenceChart()
-                                   {                                       
-                                       SampleName = DataReader.ReadString(x, "SampleName"),                                      
+                                   {
+                                       SampleName = DataReader.ReadString(x, "SampleName"),
                                        HtmlColor = DataReader.ReadString(x, "HTMLColor")
                                    }).ToList();
 
@@ -2213,7 +2213,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 chartData.ChartSetting.RowsPerPage = DataReader.ReadDecimal(dsReferenceChartSetting.Tables[0].Rows[0], "RowsPerPage");
                             if (dsReferenceChartSetting.Tables[0].Columns.Contains("Pages"))
                                 chartData.ChartSetting.Pages = DataReader.ReadDecimal(dsReferenceChartSetting.Tables[0].Rows[0], "Pages");
-                        }                        
+                        }
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartData"));
@@ -2338,6 +2338,28 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetObserverTypeList"));
             return projectLimit;
         }
+
+        public int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType)
+        {
+            var returnValue = 0;
+
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[InsertMeasurementPluginStatus]",
+                            new object[]
+                                    {
+                                        UserID,ProjectID,OptimizationRunID,ProfileType
+                                    });
+
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateMeasurementPluginStatus"));
+            return returnValue;
+        }
+
 
         #endregion
 

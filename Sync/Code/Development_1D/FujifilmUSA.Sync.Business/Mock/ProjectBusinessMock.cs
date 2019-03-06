@@ -15,8 +15,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Project();
         }
-
-        public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
+public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
         {
             return new List<Project>();
         }
@@ -239,6 +238,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         }
 
         public int GetProjectLicenseTypeLimit(int DeviceID, int LicenseTypeID)
+        {
+            return 0;
+        }
+
+        public int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType)
         {
             return 0;
         }

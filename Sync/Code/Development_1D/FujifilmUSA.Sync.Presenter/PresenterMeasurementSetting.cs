@@ -9,10 +9,16 @@ namespace FujifilmUSA.Sync.Presenter
     public class PresenterMeasurementSetting
     {
         private readonly IViewMeasurementSetting _viewMeasurementSetting;
+        private readonly IViewMeasurement _viewMeasurement;
 
         public PresenterMeasurementSetting(IViewMeasurementSetting viewMeasurementSetting)
         {
             _viewMeasurementSetting = viewMeasurementSetting;
+        }
+
+        public PresenterMeasurementSetting(IViewMeasurement viewMeasurement)
+        {
+            _viewMeasurement = viewMeasurement;
         }
 
         public void GetObserverType()
@@ -136,6 +142,13 @@ namespace FujifilmUSA.Sync.Presenter
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
             _viewMeasurementSetting.ChartPreview = projectBusiness.GetChartPreviewOnReferenceChartTypeId(_viewMeasurementSetting.ReferenceChartTypeId, "Download");
+        }
+
+        public int  CreateMeasurementPluginStatus()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewMeasurement.ErrorOccured;
+            return projectBusiness.CreateMeasurementPluginStatus(_viewMeasurement.CurrentUserId, _viewMeasurement.ProjectId, _viewMeasurement.OptimizeRunId, _viewMeasurement.ProfileType);
         }
     }
 }

@@ -16,9 +16,10 @@
             <div id="divExtensionNotAvailable">
                 <input type="button" id="btnAddExtension" value="Add Extension" />
             </div>
-
-
-
+            
+            <asp:Button runat="server" ID="btnAddPluginStatus" Text="Add PluginStatus"  OnClick="btnAddPluginStatus_Click" />
+            <br />
+            <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
             <br />
             <table>
                 <tr runat="server">
