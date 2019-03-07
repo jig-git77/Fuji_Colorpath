@@ -70,7 +70,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        
+        public int GenerateRandom()
+        {
+            Random rnd = new Random();
+            int randomnumber = rnd.Next(1000);     // creates a number between 0 and 1000
+            return randomnumber;
+        }
+
         #endregion
 
         #region Control Events
@@ -114,17 +120,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 rgUser.DataSource = UserList;
             }
         }
-      
 
-         #endregion
-
-        #region Implement Interface
-        public User User { get; set; }
-        public List<User> UserList { get; set; }
-        public Dictionary<int, string> Compnaies { get; set; }
-        #endregion
-
-     
         protected void likUserReport_Click(object sender, EventArgs e)
         {
             int Filenumber = GenerateRandom();
@@ -134,7 +130,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #region Generate User Activity Report .csv file
                 System.IO.StreamWriter sw;
                 sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/") + Filenumber.ToString() + "_UserActivityReport.csv");
-       
+
                 sw.WriteLine("UserName,FirstName,LastName,Email,Company,Branch,IsActive,LastActiveDate");
 
                 for (int i = 0; i < UserList.Count; i++)
@@ -149,11 +145,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        public int GenerateRandom()
-        {
-            Random rnd = new Random();
-            int randomnumber = rnd.Next(1000);     // creates a number between 0 and 1000
-            return randomnumber;
-        }
+        #endregion
+
+        #region Implement Interface
+        public User User { get; set; }
+        public List<User> UserList { get; set; }
+        public Dictionary<int, string> Compnaies { get; set; }
+        #endregion
+        
     }
 }

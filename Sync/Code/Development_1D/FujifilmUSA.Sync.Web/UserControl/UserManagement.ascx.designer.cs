@@ -22,13 +22,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadCodeBlock RadCodeBlock1;
         
         /// <summary>
-        /// locUserReport control.
+        /// locUserManagment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locUserReport;
+        protected global::System.Web.UI.WebControls.Localize locUserManagment;
         
         /// <summary>
         /// likUserReport control.
@@ -49,13 +49,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
-        /// locUserActReport control.
+        /// Localize1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locUserActReport;
+        protected global::System.Web.UI.WebControls.Localize Localize1;
         
         /// <summary>
         /// likAdd control.
