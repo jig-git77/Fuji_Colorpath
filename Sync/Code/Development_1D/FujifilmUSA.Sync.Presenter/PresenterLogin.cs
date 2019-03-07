@@ -33,5 +33,12 @@ namespace FujifilmUSA.Sync.Presenter
             userBusiness.ErrorOccured += _viewLogin.ErrorOccured;
             return userBusiness.ValidateUser(_viewLogin.EncyptedTocken);
         }
+
+        public void UserLoginFromApplication()
+        {
+            var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
+            userBusiness.ErrorOccured += _viewLogin.ErrorOccured;
+            _viewLogin.UserReferenceChart = userBusiness.UserLoginReferenceChart(_viewLogin.UserName, _viewLogin.Password, UserType.WebSiteUser);
+        }
     }
 }

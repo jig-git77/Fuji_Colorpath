@@ -9,18 +9,19 @@
             <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
             <asp:HiddenField ID="hdnPCSType" runat="server" />
 
-            <div id="divMeasurementDevice">
+            <%--<div id="divMeasurementDevice">
             </div>
             <div id="response">
             </div>
             <div id="divExtensionNotAvailable">
                 <input type="button" id="btnAddExtension" value="Add Extension" />
-            </div>
+            </div>--%>
             
-            <asp:Button runat="server" ID="btnAddPluginStatus" Text="Add PluginStatus"  OnClick="btnAddPluginStatus_Click" />
-            <br />
             <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
             <br />
+            <br />
+            <asp:Button runat="server" ID="btnAddPluginStatus" Text="Add PluginStatus"  OnClick="btnAddPluginStatus_Click" />
+            
             <table>
                 <tr runat="server">
                     <td style="width: 22%;" align="right">

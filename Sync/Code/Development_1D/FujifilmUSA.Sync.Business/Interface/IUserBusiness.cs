@@ -26,5 +26,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<MeasurementDevice> GetMeasurementDeviceList(int loginId, int deviceId, bool isSpotTargetType = false);
         int InsertLoginActivityLogs(int UserId, string OSName, string BrowserName, string EntryTime);
         bool ValidateUser(string tocken);
+        UserReferenceChart UserLoginReferenceChart(string userName, string password, UserType userType);
     }
 }

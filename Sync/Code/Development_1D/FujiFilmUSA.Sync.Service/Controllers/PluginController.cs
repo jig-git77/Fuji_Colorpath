@@ -707,6 +707,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public string EntryDate { get; set; }
 
         public string EncyptedTocken { get; set; }
+        public UserReferenceChart UserReferenceChart { get; set; }
         #endregion
     }
 }
