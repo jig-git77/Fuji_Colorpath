@@ -15,7 +15,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
     {
 
         #region Variable Declarations
-        private PresenterLogin _presenterlogin;        
+        private PresenterLogin _presenterlogin;
         #endregion
 
         protected override void Initialize(HttpControllerContext controllerContext)
@@ -33,17 +33,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             BaseResponse<object> httpResponse = new BaseResponse<object>();
             try
             {
-                //if (MeasurementId == null)
-                //    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                if (UserName == null)
+                    validationMessage = "Please provide User name.";
 
-                //if (IsAverageOfMeasurements == null)
-                //    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+                if (Password == null)
+                    validationMessage = "Please provide password";
 
-                //if (IsVerificationProject == null)
-                //    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
-
-                //if (IsSync1DTypeProject == null)
-                //    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -54,7 +49,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 }
                 else
                 {
-                  
+
                     this.UserName = UserName;
                     this.Password = Password;
                     _presenterlogin.UserLoginFromApplication();
@@ -81,7 +76,62 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         errprResponse.Error.Code = (int)ResponseStatus.Business_InvalidData;
                         actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
                     }
-                  
+
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
+        public IHttpActionResult UserLogInByDevice(string SerialNumber, short? InstrumentType)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+
+                if (SerialNumber == null)
+                    validationMessage = "Please provide Serial Number.";
+
+                if (InstrumentType == null)
+                    validationMessage = "Please provide Instrument Type";
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+
+                    this.DeviceSerialNo = SerialNumber;
+                    this.InstrumentTypeID = Convert.ToInt16(InstrumentType);
+                    _presenterlogin.UserLoginFromApplicationBySerial();
+
+                    if (UserReferenceChart.ReferenceChartData != null)
+                    {
+                        httpResponse.Data = UserReferenceChart;
+                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                    }
+                    else
+                    {
+                        BaseErrorResponse errprResponse = new BaseErrorResponse();
+                        errprResponse.Error.UserMessage = "Reference chart is not available.";
+                        errprResponse.Error.Code = (int)ResponseStatus.Business_InvalidData;
+                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+                    }
                 }
             }
             catch (Exception ex)
@@ -107,6 +157,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         public string EncyptedTocken { get; set; }
         public UserReferenceChart UserReferenceChart { get; set; }
+
+        public string DeviceSerialNo { get; set; }
+        public short InstrumentTypeID { get; set; }
         #endregion
     }
 }

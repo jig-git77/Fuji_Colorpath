@@ -21,7 +21,7 @@
             <br />
             <br />
             <asp:Button runat="server" ID="btnAddPluginStatus" Text="Add PluginStatus"  OnClick="btnAddPluginStatus_Click" />
-            
+            <br />
             <table>
                 <tr runat="server">
                     <td style="width: 22%;" align="right">

@@ -122,7 +122,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     VUVMode = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VUVMode"),
                                     VMeasurementCount = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VMeasurementCount"),
                                     VReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "VReadMode"),
-                                    PresetWeighted = DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "Weighted")
+                                    PresetWeighted = DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "Weighted"),
+                                    DeviceSerialNo= DataReader.ReadString(dsProject.Tables[2].Rows[0], "DeviceSerialNumber")
                                 };
                         }
                         if (dsProject.Tables[3].Rows.Count > 0)
@@ -1750,6 +1751,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     OptReferenceChartType = new KeyValuePair<short, string>(
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "OPTReferenceChartTypeID"),
                                             DataReader.ReadString(dsProject.Tables[2].Rows[0], "OPTChartName")),
+                                    DeviceSerialNo = DataReader.ReadString(dsProject.Tables[2].Rows[0], "DeviceSerialNumber")
                                 };
                         }
                         project.SpotTargetProject.OptimizeRuns = dsProject.Tables[3].AsEnumerable().
@@ -2339,7 +2341,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return projectLimit;
         }
 
-        public int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType)
+        public int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType,string DeviceSerial,short InstrumentTypeId)
         {
             var returnValue = 0;
 
@@ -2352,7 +2354,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             "[CP].[InsertMeasurementPluginStatus]",
                             new object[]
                                     {
-                                        UserID,ProjectID,OptimizationRunID,ProfileType
+                                        UserID,ProjectID,OptimizationRunID,ProfileType,DeviceSerial,InstrumentTypeId
                                     });
 
                 },

@@ -708,6 +708,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         public string EncyptedTocken { get; set; }
         public UserReferenceChart UserReferenceChart { get; set; }
+        public string DeviceSerialNo { get; set; }
+        public short InstrumentTypeID { get; set; }
         #endregion
     }
 }

@@ -13,5 +13,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int OptimizeRunId { get; set; }
         string ProfileType { get; set; }
         ELicenseType LicenseType { get; set; }
+        string DeviceSerialNo { get; set; }
+        short InstrumentTypeID { get; set; }
     }
 }

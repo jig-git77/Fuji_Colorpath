@@ -100,6 +100,10 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new UserReferenceChart();
         }
 
+        public UserReferenceChart UserLoginReferenceChartBySerial(string serial, short InstrumentTypeId)
+        {
+            return new UserReferenceChart();
+        }
         #endregion
 
         #region ITaskBase Members

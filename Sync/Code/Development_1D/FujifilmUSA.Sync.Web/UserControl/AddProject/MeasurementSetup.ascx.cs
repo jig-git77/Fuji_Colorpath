@@ -204,6 +204,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
                 SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
+
+            SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementType = rbtnMeasurementType.SelectedValue.ToString();
             #endregion
 
             //Set next navigation level as ValidationSetup

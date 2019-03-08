@@ -118,7 +118,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             CurrentUserId = SessionManager.Instance.CurrentUser.UserId;
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             ProfileType = projectType;
-            
+            DeviceSerialNo = SessionManager.Instance.CurrentProject.MeasurementSetting.DeviceSerialNo;
+            InstrumentTypeID = Convert.ToInt16(SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId);
         }
 
         protected void btnAddPluginStatus_Click(object sender, EventArgs e)
@@ -167,6 +168,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int OptimizeRunId { get; set; }
         public string ProfileType { get; set; }
         public ELicenseType LicenseType { get; set; }
+        public string DeviceSerialNo { get; set; }
+        public short InstrumentTypeID { get; set; }
         #endregion
     }
 }

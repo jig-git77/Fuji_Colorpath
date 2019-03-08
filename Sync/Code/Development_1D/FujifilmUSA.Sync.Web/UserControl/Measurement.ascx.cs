@@ -92,6 +92,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             true);
                     }
                 }
+
+                if (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementType))
+                {
+                    if (SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementType == "Application")
+                    {
+                        ucMeasurementCommonApp.Visible = true;
+                        ucMeasurementCommon.Visible = false;
+                        divPluginMessage.Visible = false;
+                    }
+                }                
             }
         }
 

@@ -208,6 +208,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public string EncyptedTocken { get; set; }
         public UserReferenceChart UserReferenceChart { get; set; }
+        public string DeviceSerialNo { get; set; }
+        public short InstrumentTypeID { get; set; }
         #endregion
     }
 }
