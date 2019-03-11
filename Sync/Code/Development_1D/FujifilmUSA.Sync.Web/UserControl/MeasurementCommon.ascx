@@ -186,10 +186,10 @@
         <div class="color_pallate_head">
             <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" meta:resourcekey="locRecentUploadResource1"></asp:Localize>
             <div id="Div_ImportMeasurements" style="float: right; padding-right: 10px;">
-                <input type="button" id="btnImportMeasurements" value='<%= GetResourceString("btnImportMeasurements") %>' onclick="javascript: return ShowImportWindow();" />                
+                <input type="button" id="btnImportMeasurements" value='<%= GetResourceString("btnImportMeasurements") %>' onclick="javascript: return ShowImportWindow();" />
             </div>
             <div id="Div_ImportMeasurementFile" style="float: right; padding-right: 10px;">
-                <input type="button" runat="server" id="btnImportMeasurementFile"  onclick="javascript: return ShowImportFileWindow();" />
+                <input type="button" runat="server" id="btnImportMeasurementFile" onclick="javascript: return ShowImportFileWindow();" />
             </div>
         </div>
         <div class="color_pallate_middle">
@@ -471,12 +471,17 @@
                     return data.replace(/"\\\/(Date\([0-9-]+\))\\\/"/gi, 'new $1');
                 },
                 success:
-                    function (response) {
-
-                        bindMeasurementData();
-                        StopProgressBrowserWindow();
-                        jQuery("[id*='lblMessage']").html('<%= GetResourceString("statusText") %>' + " " + '<%= GetResourceString("measurementUploadedSuccess") %>');
-                        ControlDisability(1, false, 0, false, 1, true, 1, true);
+                    function (response) {                        
+                        if (response) {
+                            bindMeasurementData();
+                            StopProgressBrowserWindow();
+                            jQuery("[id*='lblMessage']").html('<%= GetResourceString("statusText") %>' + " " + '<%= GetResourceString("measurementUploadedSuccess") %>');
+                            ControlDisability(1, false, 0, false, 1, true, 1, true);
+                        } else {
+                            StopProgressBrowserWindow();
+                            jQuery("[id*='lblMessage']").html('Error occured while uploading measurements. Please try again');
+                            ControlDisability(1, false, 0, false, 1, true, 1, true);
+                        }
                     },
                 error:
                     function (XMLHttpRequest, textStatus, errorThrown) {
@@ -522,7 +527,7 @@
             dataFilter:
                 function (data, type) {
                     var json = jQuery.parseJSON(data);
-                    if (json.length > 0) {                        
+                    if (json.length > 0) {
                         jQuery("input[id*='hdHasMeasurement']").val('true');
                         $("#measurementContainer").html("");
                         $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
@@ -573,7 +578,7 @@
                 }
         });
     }
-    function ConfirmDeleteMeasurement(measurement) {        
+    function ConfirmDeleteMeasurement(measurement) {
         if (confirm('<%= AddMeasurement_DeleteMeasurement_Confirmation %>')) {
             deletemeasurement(measurement.name);
             bindMeasurementData();
@@ -686,16 +691,16 @@
         return false;
     }
 
-    function ShowImportFileWindow() {        
+    function ShowImportFileWindow() {
         if (('<%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentDlpSubOperation != FujifilmUSA.Sync.Entity.ELicenseType.Validation).ToString().ToLower() %>' == 'true') &&
-        (jQuery("input[id*='hdMeasurementsTotal']").val() >=
+            (jQuery("input[id*='hdMeasurementsTotal']").val() >=
         <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == 
         FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : 
         (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary ? 
         ApplicationConfiguration.Instance.MeasurementLimitSpotProject : ApplicationConfiguration.Instance.MeasurementsLimit)) %>)) {
-                    MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
-                    
-                    return false;
+            MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
+
+            return false;
         }
 
         var oWnd = $find("<%= ImportMeasurementFileWindow.ClientID %>");

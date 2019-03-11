@@ -28,30 +28,30 @@ namespace FujifilmUSA.Sync.Web.Services
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurement")]
         [OperationContract]
-        public void SaveMeasurement(Entity.Measurement measurement)
+        public bool SaveMeasurement(Entity.Measurement measurement)
         {
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
-            presenter.SaveMeasurement();           
+            return presenter.SaveMeasurement();           
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveVMeasurement")]
         [OperationContract]
-        public void SaveVMeasurement(Entity.Measurement measurement)
+        public bool SaveVMeasurement(Entity.Measurement measurement)
         {
 
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
-            presenter.SaveVMeasurement();
+            return presenter.SaveVMeasurement();
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "Save1DMeasurement")]
         [OperationContract]
-        public void Save1DMeasurement(Entity.Measurement measurement)
+        public bool Save1DMeasurement(Entity.Measurement measurement)
         {
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
-            presenter.Save1DMeasurement();
+            return presenter.Save1DMeasurement();
         }
 
         [WebGet(UriTemplate = "GetReferenceChart/{projectId}/{referencechartdisplaytype}/{IsSpotProjectType}")]
@@ -164,14 +164,14 @@ namespace FujifilmUSA.Sync.Web.Services
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveSpotMeasurement")]
         [OperationContract]
-        public void SaveSpotMeasurement(Entity.Measurement measurement)
+        public bool SaveSpotMeasurement(Entity.Measurement measurement)
         {
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
-            presenter.SaveSpotMeasurement();
+            return presenter.SaveSpotMeasurement();
 
             /*Temp Code Start*/
-            GenerateJSONFile(measurement, "Spot");
+            //GenerateJSONFile(measurement, "Spot");
             /*Temp Code End*/
         }
 

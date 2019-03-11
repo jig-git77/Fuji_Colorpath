@@ -95,7 +95,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return response;
         }
 
-        public int SaveMeasurement(Measurement measurement)
+        public bool SaveMeasurement(Measurement measurement)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
@@ -174,7 +174,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
-            return Convert.ToInt32(outParam.Value);
+            return outParam.Value != null || Convert.ToInt32(outParam.Value) > 0;
         }
 
         public List<Measurement> GetMeasurementsOnRunId(int optimizeRunId)
@@ -968,7 +968,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public int SaveVMeasurement(Measurement measurement)
+        public bool SaveVMeasurement(Measurement measurement)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
@@ -1015,7 +1015,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                              });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
-            return Convert.ToInt32(outParam.Value);
+            return outParam.Value != null || Convert.ToInt32(outParam.Value) > 0;
         }
 
         public List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false, bool IsAverageOfMeasurements = false)
@@ -1281,7 +1281,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
 
-        public int Save1DMeasurement(Measurement measurement)
+        public bool Save1DMeasurement(Measurement measurement)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
@@ -1361,7 +1361,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
-            return Convert.ToInt32(outParam.Value);
+
+            return outParam.Value != null || Convert.ToInt32(outParam.Value) > 0;
         }
 
         public List<Measurement> Get1DMeasurementsOnRunId(int optimizeRunId)
@@ -1856,7 +1857,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
 
 
-        public int SaveSpotMeasurement(Measurement measurement)
+        public bool SaveSpotMeasurement(Measurement measurement)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
@@ -1889,7 +1890,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
-            return Convert.ToInt32(outParam.Value);
+            return outParam.Value != null || Convert.ToInt32(outParam.Value) > 0;
         }
 
         public List<Measurement> GetSpotMeasurementsOnRunId(int optimizeRunId)
