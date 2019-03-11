@@ -31,6 +31,6 @@ namespace FujifilmUSA.Sync.Entity
         public bool PresetWeighted { get; set; }
         public string DeviceSerialNo { get; set; }
 
-        public string MeasurementType { get; set; }
+        public bool PluginType { get; set; }
     }
 }

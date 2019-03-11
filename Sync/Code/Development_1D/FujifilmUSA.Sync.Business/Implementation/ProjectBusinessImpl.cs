@@ -123,7 +123,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     VMeasurementCount = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VMeasurementCount"),
                                     VReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "VReadMode"),
                                     PresetWeighted = DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "Weighted"),
-                                    DeviceSerialNo= DataReader.ReadString(dsProject.Tables[2].Rows[0], "DeviceSerialNumber")
+                                    DeviceSerialNo= DataReader.ReadString(dsProject.Tables[2].Rows[0], "DeviceSerialNumber"),
+                                    PluginType=DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "PluginType")
                                 };
                         }
                         if (dsProject.Tables[3].Rows.Count > 0)
@@ -669,7 +670,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.NewPaper_White_b,
                                                      project.NewPaper_Black_L,
                                                      project.NewPaper_Black_a,
-                                                     project.NewPaper_Black_b
+                                                     project.NewPaper_Black_b,
+                                                     project.MeasurementSetting.PluginType
                                                  });
                         savedProjectId = project.ProjectId;
                     },
@@ -801,7 +803,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@NewPaper_White_b", Type = DbType.Decimal, Value = project.NewPaper_White_b},
                                                      new Parameters() {ParameterName = "@NewPaper_Black_L", Type = DbType.Decimal, Value = project.NewPaper_Black_L},
                                                      new Parameters() {ParameterName = "@NewPaper_Black_a", Type = DbType.Decimal, Value = project.NewPaper_Black_a},
-                                                     new Parameters() {ParameterName = "@NewPaper_Black_b", Type = DbType.Decimal, Value = project.NewPaper_Black_b}
+                                                     new Parameters() {ParameterName = "@NewPaper_Black_b", Type = DbType.Decimal, Value = project.NewPaper_Black_b},
+                                                     new Parameters() {ParameterName = "@PluginType", Type = DbType.Boolean, Value = project.MeasurementSetting.PluginType}
 
                                                  },
                                              new List<Parameters>()

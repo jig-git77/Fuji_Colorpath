@@ -42,7 +42,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
-        {            
+        {
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
@@ -93,15 +93,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
 
-                if (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementType))
+                if (!SessionManager.Instance.CurrentProject.MeasurementSetting.PluginType)
                 {
-                    if (SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementType == "Application")
-                    {
-                        ucMeasurementCommonApp.Visible = true;
-                        ucMeasurementCommon.Visible = false;
-                        divPluginMessage.Visible = false;
-                    }
-                }                
+                    ucMeasurementCommonApp.Visible = true;
+                    ucMeasurementCommon.Visible = false;
+                    divPluginMessage.Visible = false;
+                }
             }
         }
 
@@ -135,9 +132,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Response.Redirect(string.Format("InkOptSourceMiddle.aspx"));
         }
 
-        #endregion      
+        #endregion
 
-       
+
 
     }
 }
