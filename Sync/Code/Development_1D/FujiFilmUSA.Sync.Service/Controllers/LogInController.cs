@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using Newtonsoft.Json;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
@@ -58,7 +59,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     {
                         if (UserReferenceChart.ReferenceChartData != null)
                         {
-                            httpResponse.Data = UserReferenceChart;
+                            var jsonReferenceChart = JsonConvert.SerializeObject(UserReferenceChart);
+
+                            httpResponse.Data = jsonReferenceChart;
                             actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
                         }
                         else
@@ -122,7 +125,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                     if (UserReferenceChart.ReferenceChartData != null)
                     {
-                        httpResponse.Data = UserReferenceChart;
+                        var jsonReferenceChart = JsonConvert.SerializeObject(UserReferenceChart);
+
+                        httpResponse.Data = jsonReferenceChart;
                         actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
                     }
                     else
