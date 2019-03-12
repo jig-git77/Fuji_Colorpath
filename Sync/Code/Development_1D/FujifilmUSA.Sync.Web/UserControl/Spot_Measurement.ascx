@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="Spot_Measurement.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Spot_Measurement" %>
 <meta http-equiv="Cache-Control" content="no-cache" />
-<%@ Register Src="~/UserControl/MeasurementCommonNew.ascx" TagName="MeasurementCommon"
+<%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon"
+    TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/MeasurementCommonNew.ascx" TagName="MeasurementCommonApp"
     TagPrefix="uc" %>
 <script language="javascript">
     function AllowToAnalyze() {
@@ -58,7 +60,7 @@
             </asp:LinkButton>                
         </div>
     </div>
-    <%--<div class="mesurementStatusbar info_form">
+    <div id="divPluginMessage" class="mesurementStatusbar info_form"  runat="server">
         <div class="top">
             &nbsp;</div>
         <div class="middle" runat="server" id="tblMessage">
@@ -73,8 +75,9 @@
         </div>
         <div class="bottom">
             &nbsp;</div>
-    </div>--%>
+    </div>
     <uc:MeasurementCommon ID="ucMeasurementCommon" runat="server" Type="Optimization" />
+    <uc:MeasurementCommonApp ID="ucMeasurementCommonApp" runat="server" Type="Optimization" Visible="false" />     
 </div>
 <div class="contant_bottom">
     &nbsp;</div>

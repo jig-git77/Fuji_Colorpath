@@ -1609,7 +1609,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      (project.MeasurementSetting.MeasurementCount == -1 ? 0 : project.MeasurementSetting.MeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
                                                      project.MeasurementSetting.ReadMode,
                                                      project.MeasurementSetting.MeasurementDeviceId,
-                                                     project.SpotTargetProject.ReTargetSpotProjectID
+                                                     project.SpotTargetProject.ReTargetSpotProjectID,
+                                                     project.MeasurementSetting.PluginType
 
                                                  });
                         savedProjectId = project.SpotTargetProject.SpotProjectId;
@@ -1657,7 +1658,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@StartDateTime", Type = DbType.DateTime, Value = DateTime.Now},
                                                      new Parameters() {ParameterName = "@LicenseTypeID", Type = DbType.Int32, Value = (int)project.LicenseType},
                                                      new Parameters() {ParameterName = "@MasterProjectID", Type = DbType.Int32, Value = project.SpotTargetProject.ProjectId},
-                                                     new Parameters() {ParameterName = "@ReTargetSpotProjectID", Type = DbType.Int32, Value = project.SpotTargetProject.ReTargetSpotProjectID}
+                                                     new Parameters() {ParameterName = "@ReTargetSpotProjectID", Type = DbType.Int32, Value = project.SpotTargetProject.ReTargetSpotProjectID},
+                                                     new Parameters() {ParameterName = "@PluginType", Type = DbType.Boolean, Value = project.MeasurementSetting.PluginType}
                                                  },
                                              new List<Parameters>()
                                                  {
@@ -1754,7 +1756,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     OptReferenceChartType = new KeyValuePair<short, string>(
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "OPTReferenceChartTypeID"),
                                             DataReader.ReadString(dsProject.Tables[2].Rows[0], "OPTChartName")),
-                                    DeviceSerialNo = DataReader.ReadString(dsProject.Tables[2].Rows[0], "DeviceSerialNumber")
+                                    DeviceSerialNo = DataReader.ReadString(dsProject.Tables[2].Rows[0], "DeviceSerialNumber"),
+                                    PluginType= DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "PluginType")
                                 };
                         }
                         project.SpotTargetProject.OptimizeRuns = dsProject.Tables[3].AsEnumerable().
