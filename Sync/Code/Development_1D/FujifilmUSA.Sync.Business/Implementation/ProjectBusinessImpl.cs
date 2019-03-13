@@ -1279,6 +1279,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<int> GetMeasurementIDsbyProjectID(int deviceId, int LicenseTypeID, int ProjectID)
         {
             var objMeasurementIDList = new List<int>();
+            string storedProecdure = "CPSync4D.GetMeasurementIDsByProjectID";
+            if (LicenseTypeID == (int)ELicenseType.Sync1D)
+                storedProecdure = "CPSync.GetMeasurementIDsByProjectID";
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1286,7 +1290,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             GetDsResult(
-                                "CPSync4D.GetMeasurementIDsByProjectID",
+                               storedProecdure,
                                 new object[]
                                         {
                                             ProjectID, deviceId, LicenseTypeID
@@ -1303,9 +1307,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return objMeasurementIDList;
         }
 
-        public int ImportMeasurements(int MeasurementID, int OptimizeRunID)
+        public int ImportMeasurements(int MeasurementID, int OptimizeRunID, int LicenseTypeID)
         {
             var returnValue = 0;
+            string storedProecdure = "[CPSync4D].[ImportMeasurements]";
+            if (LicenseTypeID == (int)ELicenseType.Sync1D)
+                storedProecdure = "[CPSync].[ImportMeasurements]";
 
             Common.ImplementBusinessLogic(
                 () =>
@@ -1313,7 +1320,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     returnValue = DataAccessFactory.
                         Instance.
                         ExecuteProcedure(
-                            "[CPSync4D].[ImportMeasurements]",
+                            storedProecdure,
                             new object[]
                                     {
                                         MeasurementID, OptimizeRunID

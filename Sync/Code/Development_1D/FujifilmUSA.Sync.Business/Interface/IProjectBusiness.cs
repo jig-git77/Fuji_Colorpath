@@ -33,7 +33,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, short PrintingTypeId, bool isVarification = false);
         List<Project> GetProjectsForImportMeasurement(int deviceId, int LicenseTypeID, int CurrentProjectID);
         List<int> GetMeasurementIDsbyProjectID(int deviceId, int LicenseTypeID, int CurrentProjectID);
-        int ImportMeasurements(int MeasurementID, int OptimizeRunID);
+        int ImportMeasurements(int MeasurementID, int OptimizeRunID,int LicenseTypeID);
         List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId);
         List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVI(int printStandardTypeId);
         List<Entity.CPSync1D.ProjectTargetDensity> GetPrintStandardDensity(int printStandardTypeId);

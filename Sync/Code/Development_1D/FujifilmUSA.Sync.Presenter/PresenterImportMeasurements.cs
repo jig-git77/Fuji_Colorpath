@@ -32,7 +32,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
-            projectBusiness.ImportMeasurements(_viewImportMeasurements.MeasurementID, _viewImportMeasurements.OptimizeRunID);
+            projectBusiness.ImportMeasurements(_viewImportMeasurements.MeasurementID, _viewImportMeasurements.OptimizeRunID, _viewImportMeasurements.LicenseTypeID);
         }
 
         public void CreateSpotProjectInitialOptimization()
