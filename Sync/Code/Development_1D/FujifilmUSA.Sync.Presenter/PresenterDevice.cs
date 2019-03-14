@@ -70,18 +70,18 @@ namespace FujifilmUSA.Sync.Presenter
             _viewDevice.MeasurementDevice = measurementDeviceBusiness.GetMeasurementDevice(_viewDevice.MeasurementDevice.MeasurementDeviceId, _viewDevice.CurrentUserId).FirstOrDefault();
         }
 
-        public void InsertMeasurementDevice()
+        public int InsertMeasurementDevice()
         {
             var measurementDeviceBusiness = BusinessFactory<IMeasurementDeviceBusiness>.CreateObject();
             measurementDeviceBusiness.ErrorOccured += _viewDevice.ErrorOccured;
-            measurementDeviceBusiness.InsertMeasurementDevice(_viewDevice.MeasurementDevice);
+            return measurementDeviceBusiness.InsertMeasurementDevice(_viewDevice.MeasurementDevice);
         }
 
-        public void UpdateMeasurementDevice()
+        public int UpdateMeasurementDevice()
         {
             var measurementDeviceBusiness = BusinessFactory<IMeasurementDeviceBusiness>.CreateObject();
             measurementDeviceBusiness.ErrorOccured += _viewDevice.ErrorOccured;
-            measurementDeviceBusiness.UpdateMeasurementDevice(_viewDevice.MeasurementDevice);
+            return measurementDeviceBusiness.UpdateMeasurementDevice(_viewDevice.MeasurementDevice);
         }
 
         public void DeleteMeasurementDevice()

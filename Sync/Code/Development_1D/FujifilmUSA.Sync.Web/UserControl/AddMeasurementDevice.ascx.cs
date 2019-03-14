@@ -50,7 +50,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (IsPostBack) return;
-            
+
             BindCompanyDropDown();
             cmbCompanyName_SelectedIndexChanged(null, null);
             cmbBranch_SelectedIndexChanged(null, null);
@@ -110,19 +110,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else
                 MeasurementDevice.IsActive = false;
 
+            int result = 0;
             if (hdnMeasurementDeviceId.Value == "0")
             {
-                _presenterdevice.InsertMeasurementDevice();
-                if (IsErrorOccured) return;
-                Response.Redirect("MeasurementDeviceList.aspx");
+                result = _presenterdevice.InsertMeasurementDevice();
             }
             else
             {
                 MeasurementDevice.MeasurementDeviceId = (short)Convert.ToInt32(hdnMeasurementDeviceId.Value);
-                _presenterdevice.UpdateMeasurementDevice();
-                if (IsErrorOccured) return;
-                Response.Redirect("MeasurementDeviceList.aspx");
+                result = _presenterdevice.UpdateMeasurementDevice();
             }
+            if (IsErrorOccured) return;
+            if (result <= 0)
+            {
+                fujiStatusbar.DisplayMessage("This device is already registered with same serial number and instrument.", false);
+                return;
+            }
+
+            Response.Redirect("MeasurementDeviceList.aspx");
         }
 
         #endregion
@@ -182,9 +187,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void LoadMeasurementDevice(int iMeasurementDeviceId)
         {
             MeasurementDevice = new MeasurementDevice
-                                    {
-                                        MeasurementDeviceId = (short)iMeasurementDeviceId
-                                    };
+            {
+                MeasurementDeviceId = (short)iMeasurementDeviceId
+            };
             _presenterdevice.GetMeasurementDevice();
             if (!IsErrorOccured)
             {
