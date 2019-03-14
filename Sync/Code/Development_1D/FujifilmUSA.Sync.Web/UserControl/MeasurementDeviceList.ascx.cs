@@ -17,6 +17,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Declaration
         private PresenterDevice _presenterdevice;
+        private List<GridFilter> gridFilters;
         public string MeasurementDeviceList_DeleteMeasurementDevice_Confirmation
         {
             get
@@ -30,13 +31,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public MeasurementDeviceList()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
-        } 
+        }
         #endregion
 
         #region Page Events
         protected override void OnInit(EventArgs e)
         {
             _presenterdevice = new PresenterDevice(this);
+            gridFilters = new List<GridFilter>();
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -58,6 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 rgMeasurementDevice.DataSource = MeasurementDevices;
                 rgMeasurementDevice.DataBind();
+                ApplyFiltersToGrid();                
             }
         }
 
@@ -93,6 +96,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgMeasurementDevice_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
+            Session["MeasurementDeviceGridFilters"] = rgMeasurementDevice.MasterTableView.FilterExpression;
+            SetGridFilters();
+
             _presenterdevice.GetMeasurementDevices();
             if (!IsErrorOccured)
             {
@@ -105,10 +111,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (e.Item is GridDataItem)
             {
                 MeasurementDevice device = (MeasurementDevice)e.Item.DataItem;
-
                 CheckBox chkActive = (CheckBox)e.Item.FindControl("chkStatus");
-                chkActive.Attributes.Add("OnClick", "checkboxClicked(event,'"+ device.MeasurementDeviceId + "');");
-                //onclick="checkboxClicked(event, '<%# Convert.ToBoolean(Eval("MeasurementDeviceId")) %>')"
+                chkActive.Attributes.Add("OnClick", "checkboxClicked(event,'" + device.MeasurementDeviceId + "');");
             }
         }
 
@@ -116,6 +120,45 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             //SessionManager.Instance.CurrentMeasurementDevice = null;
             Response.RedirectPermanent("AddMeasurementDevice.aspx");
+        }
+
+        public void SetGridFilters()
+        {
+            string[] columnArray = { "CompanyName", "BranchName", "SerialNumber", "InstrumentType", "Description" };
+            if (Session["CurrentGridFilters"] != null)
+                Session["CurrentGridFilters"] = null;
+
+            foreach (var columnName in columnArray)
+            {
+                GridColumn column = rgMeasurementDevice.MasterTableView.GetColumnSafe(columnName);
+                if (column.CurrentFilterValue != "")
+                {
+                    gridFilters.Add(new GridFilter()
+                    {
+                        ColumnName = columnName,
+                        FilterFunction = column.CurrentFilterFunction,
+                        FilterValue = column.CurrentFilterValue
+                    });
+                }
+            }
+
+            Session["CurrentGridFilters"] = gridFilters;
+        }
+
+        public void ApplyFiltersToGrid()
+        {
+            if (Session["MeasurementDeviceGridFilters"] != null && Session["CurrentGridFilters"] != null)
+            {
+                var filterList = (List<GridFilter>)Session["CurrentGridFilters"];
+                foreach (var filter in filterList)
+                {
+                    GridColumn column = rgMeasurementDevice.MasterTableView.GetColumnSafe(filter.ColumnName);
+                    column.CurrentFilterFunction = filter.FilterFunction;
+                    column.CurrentFilterValue = filter.FilterValue;
+                }
+                rgMeasurementDevice.MasterTableView.FilterExpression = Convert.ToString(Session["MeasurementDeviceGridFilters"]);
+                rgMeasurementDevice.Rebind();
+            }
         }
 
         #endregion
@@ -135,5 +178,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int DeviceId { get; set; }
         public Device SelectedDevice { get; set; }
         #endregion
+    }
+    public class GridFilter
+    {
+        public string ColumnName { get; set; }
+        public GridKnownFunction FilterFunction { get; set; }
+        public string FilterValue { get; set; }
     }
 }
