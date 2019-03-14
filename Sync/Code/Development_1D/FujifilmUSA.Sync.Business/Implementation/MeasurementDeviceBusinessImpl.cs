@@ -133,7 +133,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurementDevices;
         }
 
-      
+        public bool UpdateMeasurementDeviceStatus(int measurementdeviceId)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () => returnValue = DataAccessFactory.
+                          Instance.
+                          ExecuteProcedure(
+                              "[CP].[UpdateMeasurementDeviceStatus]",
+                              new object[]
+                                  {
+                                      measurementdeviceId
+                                  }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteMeasurementDevice"));
+            return returnValue > 0;
+        }
+
         #endregion
 
         #region ITaskBase Members

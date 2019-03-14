@@ -40,6 +40,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
             rgMeasurementDevice.PageSize = Common.Utilities.PageSize;
             if (!Page.IsPostBack)
             {
@@ -96,6 +97,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 rgMeasurementDevice.DataSource = MeasurementDevices;
+            }
+        }
+
+        protected void rgMeasurementDevice_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            if (e.Item is GridDataItem)
+            {
+                MeasurementDevice device = (MeasurementDevice)e.Item.DataItem;
+
+                CheckBox chkActive = (CheckBox)e.Item.FindControl("chkStatus");
+                chkActive.Attributes.Add("OnClick", "checkboxClicked(event,'"+ device.MeasurementDeviceId + "');");
+                //onclick="checkboxClicked(event, '<%# Convert.ToBoolean(Eval("MeasurementDeviceId")) %>')"
             }
         }
 

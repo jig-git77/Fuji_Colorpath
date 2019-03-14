@@ -90,5 +90,12 @@ namespace FujifilmUSA.Sync.Presenter
             measurementDeviceBusiness.ErrorOccured += _viewDevice.ErrorOccured;
             measurementDeviceBusiness.DeleteMeasurementDevice(_viewDevice.MeasurementDevice.MeasurementDeviceId);
         }
+
+        public bool UpdateMeasurementDeviceStatus()
+        {
+            var measurementDeviceBusiness = BusinessFactory<IMeasurementDeviceBusiness>.CreateObject();
+            measurementDeviceBusiness.ErrorOccured += _viewDevice.ErrorOccured;
+            return measurementDeviceBusiness.UpdateMeasurementDeviceStatus(_viewDevice.MeasurementDevice.MeasurementDeviceId);
+        }
     }
 }
