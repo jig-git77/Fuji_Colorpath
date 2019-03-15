@@ -251,6 +251,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+        public List<MeasurementLog> GetMeasurementLogList()
+        {
+            return new List<MeasurementLog>();
+        }
         #endregion
 
         #region ITaskBase Members

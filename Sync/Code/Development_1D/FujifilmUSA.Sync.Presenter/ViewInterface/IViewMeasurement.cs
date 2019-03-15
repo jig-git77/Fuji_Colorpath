@@ -15,5 +15,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         ELicenseType LicenseType { get; set; }
         string DeviceSerialNo { get; set; }
         short InstrumentTypeID { get; set; }
+        List<MeasurementLog> MeasurementLogs { get; set; }
     }
 }

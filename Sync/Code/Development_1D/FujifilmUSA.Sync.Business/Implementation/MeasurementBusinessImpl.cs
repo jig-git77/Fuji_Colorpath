@@ -2569,6 +2569,38 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
             return Convert.ToInt32(outParam.Value);
         }
+
+        public List<MeasurementLog> GetMeasurementLogList()
+        {
+            List<MeasurementLog> logs = new List<MeasurementLog>();
+
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurementLogs =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "dbo.GetMeasurementLog",
+                                new object[] { });
+                    logs = dsMeasurementLogs.
+                        Tables[0].
+                        AsEnumerable().
+                        Select(x => new MeasurementLog()
+                        {
+                            UserName = DataReader.ReadString(x, "UserName"),
+                            SerialNumber = DataReader.ReadString(x, "SerialNumber"),
+                            InstrumentType = DataReader.ReadString(x, "InstrumentType"),
+                            ErrorMessage = DataReader.ReadString(x, "ErrorMessage"),
+                            ErrorDescription = DataReader.ReadString(x, "ErrorDescription"),
+                            EntryDate = DataReader.ReadDate(x, "EntryDate")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementsOnRunId"));
+            return logs;
+        }
+
+
         #endregion
 
         #region ITaskBase Members

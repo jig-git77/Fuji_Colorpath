@@ -170,6 +170,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public ELicenseType LicenseType { get; set; }
         public string DeviceSerialNo { get; set; }
         public short InstrumentTypeID { get; set; }
+        public List<Entity.MeasurementLog> MeasurementLogs { get; set; }
         #endregion
     }
 }
