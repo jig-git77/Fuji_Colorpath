@@ -223,7 +223,7 @@
     <value>Reference%</value>
   </data>
   <data name="locDownloadChartAndPrintThroughWorkflowResource1NCP" xml:space="preserve">
-    <value>Download Chart and Print through NCP Workflow :</value>
+    <value>Download the chart and print it through your workflow. Please note this chart is unique to this optimization run.</value>
   </data>
   <data name="locExportCMYKResource.Text" xml:space="preserve">
     <value>Export Library</value>
