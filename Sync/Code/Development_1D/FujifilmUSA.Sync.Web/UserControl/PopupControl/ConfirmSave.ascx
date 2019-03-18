@@ -103,12 +103,12 @@
                             <td>
                                 <p style="padding-top: 7px;">
                                     <asp:Localize runat="server" 
-                                        Text="Certify sets the state of this DLP to Certified and is considered a confirmation that your are satisfied with the colormatch." 
+                                        Text="Completes this DLP Project and is considered a confirmation that you are satisfied with the color match." 
                                         ID="locSatisfiedColorMatchMsg" 
                                         meta:resourcekey="locSatisfiedColorMatchMsgResource1"  Visible="false"></asp:Localize>
                                     
                                     <asp:Localize runat="server" 
-                                        Text="Certify sets the state of this NCP to Certified and is considered a confirmation that your are satisfied with the colormatch." 
+                                        Text="Completes this NCP Project and is considered a confirmation that you are satisfied with the color match." 
                                         ID="locSatisfiedColorMatchMsgNCP" 
                                         meta:resourcekey="locSatisfiedColorMatchMsgResource1NCP" Visible="false"></asp:Localize>
                                 </p>
@@ -122,11 +122,11 @@
                             <td>
                                 <p style="padding-top: 7px;">
                                     <asp:Localize runat="server" 
-                                        Text="Optimize creates new optimized DLP which should be implemented in your workflow." 
+                                        Text="Creates another iteration of the DLP based on the latest measurements. It should be implemented in your workflow and measured again." 
                                         ID="locOptimizeDLP" meta:resourcekey="locOptimizeDLPResource1"  Visible="false"></asp:Localize>
 
                                     <asp:Localize runat="server" 
-                                        Text="Optimize creates new optimized NCP which should be implemented in your workflow." 
+                                        Text="Creates another iteration of the NCP based on the latest measurements. It should be implemented in your workflow and measured again." 
                                         ID="locOptimizeNCP" meta:resourcekey="locOptimizeDLPResource1NCP"  Visible="false"></asp:Localize>
                                 </p>
                             </td>

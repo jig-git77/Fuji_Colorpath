@@ -139,28 +139,28 @@
     <value>Certify:</value>
   </data>
   <data name="locNoOptimizeResource1.Text" xml:space="preserve">
-    <value>No, Optimize</value>
+    <value>Optimize</value>
   </data>
   <data name="locOptimizeDLPResource1.Text" xml:space="preserve">
-    <value>Optimize creates new optimized DLP which should be implemented in your workflow.</value>
+    <value>Creates another iteration of the DLP based on the latest measurements. It should be implemented in your workflow and measured again.</value>
   </data>
-  <data name="locOptimizeDLPResource1NCP" xml:space="preserve">
-    <value>Optimize creates new optimized NCP which should be implemented in your workflow.</value>
+  <data name="locOptimizeDLPResource1NCP.Text" xml:space="preserve">
+    <value>Creates another iteration of the NCP based on the latest measurements. It should be implemented in your workflow and measured again.</value>
   </data>
   <data name="locOptimizeResource1.Text" xml:space="preserve">
     <value>Optimize:</value>
   </data>
   <data name="locSatisfiedColorMatchMsgResource1.Text" xml:space="preserve">
-    <value>Certify sets the state of this DLP to Certified and is considered a confirmation that your are satisfied with the colormatch.</value>
+    <value>Completes this DLP Project and is considered a confirmation that you are satisfied with the color match.</value>
   </data>
-  <data name="locSatisfiedColorMatchMsgResource1NCP" xml:space="preserve">
-    <value>Certify sets the state of this NCP to Certified and is considered a confirmation that your are satisfied with the colormatch.</value>
+  <data name="locSatisfiedColorMatchMsgResource1NCP.Text" xml:space="preserve">
+    <value>Completes this NCP Project and is considered a confirmation that you are satisfied with the color match.</value>
   </data>
   <data name="locSatisfiedMsgResource1.Text" xml:space="preserve">
-    <value>Are you satisfied with the results?</value>
+    <value>How would you like to proceed?</value>
   </data>
   <data name="locYesCertifyResource1.Text" xml:space="preserve">
-    <value>Yes, Certify</value>
+    <value>Certify</value>
   </data>
   <data name="optimizeCompleteMsg" xml:space="preserve">
     <value>Once optimization is complete, apply {0} to workflow and reprint the {1} chart.</value>
