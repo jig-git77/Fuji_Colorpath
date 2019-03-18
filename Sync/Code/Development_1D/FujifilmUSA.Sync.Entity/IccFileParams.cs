@@ -62,6 +62,8 @@ namespace FujifilmUSA.Sync.Entity
         public double PreviousL { get; set; }
         [JsonProperty("chartName")]
         public string ChartName { get; set; }
+        [JsonProperty("profileName")]
+        public string ProfileName { get; set; }
     }
 
     [Serializable]

@@ -277,7 +277,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     ChartUtility chart = new ChartUtility(property.NumberOfPatches, property.ChartPages, property.PatchWidth,
                         property.PatchHeight, property.ChartBorder, property.ChartSizeW, property.ChartSizeH,
                         property.RowsPerChart, property.ColumsPerChart, property.Vgap, property.Hgap,
-                        property.GapLeval, property.PreviousL, property.ChartName);
+                        property.GapLeval, property.PreviousL, property.ChartName, property.ProfileName);
 
                     //Generate images from the patches
                     var image = await chart.GenerateColorListChart(param.Patches);
@@ -351,7 +351,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     //response.Data = responseUpload;
                     //result = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, response));
 
-                    
+
 
 
                 }

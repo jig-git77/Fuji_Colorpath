@@ -238,6 +238,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 obj.Configurations.GapLeval = SpotProjectChartSetting.GapLeval;
                 obj.Configurations.PreviousL = SpotProjectChartSetting.PreviousL;
                 obj.Configurations.ChartName = SpotProjectChartSetting.ChartName;
+                obj.Configurations.ProfileName = SessionManager.Instance.CurrentDevice.DeviceName + " - " + SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName;
                 obj.Patches = wedge.listPatch;
 
                 string BaseUri = Utilities.ReadConfigValue("BaseCpSpotChartPdfServiceURL");
