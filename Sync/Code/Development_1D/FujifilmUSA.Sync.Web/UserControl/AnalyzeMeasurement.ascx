@@ -131,6 +131,15 @@
         height: 200px;
         /*background-color: #eae8e8;*/
     }
+
+    .k-panelbar .k-tabstrip-items .k-item, .k-tabstrip-items .k-item {
+        position: initial !important;
+    }
+
+    #ContentPlaceHolder1_ucAnalyze_updateProgress {
+        left: unset !important;
+        /*top: unset !important;*/
+    }
 </style>
 <%--<script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>--%>
 <script src="JS/DYMO_Label_Framework_2_0_2.js"></script>
@@ -499,7 +508,7 @@
             <div style="background: #CCC !important;">
                 <uc:CreateDLP runat="server" ID="ucCreateDLP" />
             </div>
-            <div class="UpdateProgressBackgroundLessOptimize" style="position: fixed; left: 0px; top: 0px; z-index: 1000; width: 100%; height: 100%;"
+            <div class="UpdateProgressBackgroundLessOptimize" style="position: fixed; z-index: 1000; width: 100%; height: 100%;"
                 unselectable="on">
             </div>
         </ProgressTemplate>
@@ -507,14 +516,14 @@
 
     <div class="listDevice" style="margin-left: 10px;">
         <div id="divTabContainerLoading" class="analyze-loader-container">
-            <img src="Images/analyze-loader.gif" style="margin-top:50px;" />
+            <img src="Images/analyze-loader.gif" style="margin-top: 50px;" />
         </div>
-        <div id="divToRender" style="display:none;">
+        <div id="divToRender" style="display: none;">
             <table cellpadding="0" cellspacing="10" border="0" width="101%">
                 <tr>
                     <td>
                         <div>
-                            <div id="tabstrip">
+                            <div id="tabstrip" style="position: initial;">
                                 <ul>
                                     <li class="k-state-active">
                                         <asp:Localize Text="Summary" ID="locSummary"
