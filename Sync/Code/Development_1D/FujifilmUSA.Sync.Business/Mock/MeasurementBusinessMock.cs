@@ -16,7 +16,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new MeasurementDataResponse();
         }
 
-        public bool SaveMeasurement(Measurement measurement)
+        public bool SaveMeasurement(Measurement measurement, int UserID)
         {
             return true;
         }
@@ -111,7 +111,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Measurement>();
         }
 
-        public bool SaveVMeasurement(Measurement measurement)
+        public bool SaveVMeasurement(Measurement measurement, int UserID)
         {
             return true;
         }
@@ -122,7 +122,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Measurement>();
         }
 
-        public bool Save1DMeasurement(Measurement measurement)
+        public bool Save1DMeasurement(Measurement measurement, int UserID)
         {
             return true;
         }
@@ -182,7 +182,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataTable();
         }
-        public bool SaveSpotMeasurement(Measurement measurement)
+        public bool SaveSpotMeasurement(Measurement measurement, int UserID)
         {
             return true;
         }

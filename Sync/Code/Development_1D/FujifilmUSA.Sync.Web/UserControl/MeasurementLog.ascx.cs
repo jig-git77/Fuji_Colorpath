@@ -58,8 +58,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterMeasurementSetting.GetMeasurementLogList();
             if (!IsErrorOccured)
             {
-                rgMeasurementLog.DataSource = MeasurementLogs;
-                rgMeasurementLog.DataBind();
+                rgMeasurementLog.DataSource = MeasurementLogs;                
             }
         }
         protected void rgMeasurementLog_ItemCommand(object sender, GridCommandEventArgs e)

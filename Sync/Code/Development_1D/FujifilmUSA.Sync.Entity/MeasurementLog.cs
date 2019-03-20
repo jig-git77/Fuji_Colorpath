@@ -15,6 +15,7 @@ namespace FujifilmUSA.Sync.Entity
         public int ProjectID { get; set; }
         public int MeasurementID { get; set; }
         public string ErrorMessage { get; set; }
+        public string ErrorDescriptionShort { get; set; }
         public string ErrorDescription { get; set; }
         public DateTime EntryDate { get; set; }
         public string UserName { get; set; }

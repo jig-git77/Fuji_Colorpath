@@ -32,6 +32,7 @@ namespace FujifilmUSA.Sync.Web.Services
         {
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
+            UserID = SessionManager.Instance.CurrentUser.UserId;
             return presenter.SaveMeasurement();           
         }
 
@@ -42,6 +43,7 @@ namespace FujifilmUSA.Sync.Web.Services
 
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
+            UserID = SessionManager.Instance.CurrentUser.UserId;
             return presenter.SaveVMeasurement();
         }
 
@@ -51,6 +53,7 @@ namespace FujifilmUSA.Sync.Web.Services
         {
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
+            UserID = SessionManager.Instance.CurrentUser.UserId;
             return presenter.Save1DMeasurement();
         }
 
@@ -168,6 +171,7 @@ namespace FujifilmUSA.Sync.Web.Services
         {
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
+            UserID = SessionManager.Instance.CurrentUser.UserId;
             return presenter.SaveSpotMeasurement();
 
             /*Temp Code Start*/
@@ -293,6 +297,7 @@ namespace FujifilmUSA.Sync.Web.Services
         public ReferenceChartPlugin ReferenceChartPlugin { get; set; }
         public string ProjectType { get; set; }
         public DataTable dtMeasurementValidation { get; set; }
+        public int UserID { get; set; }
         #endregion
 
         #region IViewBase Members

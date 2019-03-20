@@ -91,12 +91,9 @@
     <div style="margin-left: 10px;">
         <asp:UpdatePanel ID="testPanel" runat="server">
 
-            <ContentTemplate>
-                <%--<ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server"
-                    Visible="False" />--%>
-
+            <ContentTemplate>                
                 <telerik:RadGrid ID="rgMeasurementLog" AllowFilteringByColumn="True"
-                    AllowSorting="True" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
+                    AllowSorting="True" AllowPaging="True" PageSize="20" runat="server" AutoGenerateColumns="False"
                     EnableLinqExpressions="False" OnNeedDataSource="rgMeasurementLog_NeedDataSource"
                     OnItemCommand="rgMeasurementLog_ItemCommand" Width="98%"
                     HeaderStyle-Font-Bold="true" CellSpacing="0" GridLines="None">
@@ -202,7 +199,7 @@
                                 CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblErrorDescription" runat="server"
-                                        title='<%# Eval("ErrorDescription") %>' Text='<%# Convert.ToString(Eval("ErrorDescription")).Substring(0,30)+"..." %>'
+                                        title='<%# Eval("ErrorDescription") %>' Text='<%# Convert.ToString(Eval("ErrorDescriptionShort")) %>'
                                         meta:resourcekey="lblErrorMessageResource1" />
                                 </ItemTemplate>
                                 <HeaderStyle Width="100px"></HeaderStyle>

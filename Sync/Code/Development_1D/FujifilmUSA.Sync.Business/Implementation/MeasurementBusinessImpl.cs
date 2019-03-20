@@ -95,7 +95,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return response;
         }
 
-        public bool SaveMeasurement(Measurement measurement)
+        public bool SaveMeasurement(Measurement measurement, int UserID)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
@@ -166,7 +166,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
                                                      new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
-                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType)}
+                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType)},
+                                                     new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID}
                                                  },
                                          new List<Parameters>()
                                                  {
@@ -968,7 +969,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public bool SaveVMeasurement(Measurement measurement)
+        public bool SaveVMeasurement(Measurement measurement, int UserID)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
@@ -1007,7 +1008,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  new Parameters() {ParameterName = "@Notes", Type = DbType.String, Value = measurement.Notes},
                                                  new Parameters() {ParameterName = "@Customer", Type = DbType.String, Value = measurement.Customer},
                                                  new Parameters() {ParameterName = "@PageOrSurface", Type = DbType.String, Value = measurement.PageOrSurface},
-                                                 new Parameters() {ParameterName = "@JDFJobId", Type = DbType.String, Value = measurement.JDFJobId}
+                                                 new Parameters() {ParameterName = "@JDFJobId", Type = DbType.String, Value = measurement.JDFJobId},
+                                                 new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID},
                                              },
                                          new List<Parameters>()
                                              {
@@ -1281,7 +1283,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
 
-        public bool Save1DMeasurement(Measurement measurement)
+        public bool Save1DMeasurement(Measurement measurement, int UserID)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
@@ -1352,8 +1354,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
                                                      new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
-                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = ((int)measurement.PCSDataType)}
-
+                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = ((int)measurement.PCSDataType)},
+                                                     new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID}
                                                  },
                                          new List<Parameters>()
                                                  {
@@ -1857,7 +1859,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
 
 
-        public bool SaveSpotMeasurement(Measurement measurement)
+        public bool SaveSpotMeasurement(Measurement measurement, int UserID)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
@@ -1882,7 +1884,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@OptimizeRunID", Type = DbType.Int32, Value = measurement.OptimizeRunId},
                                                      new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
-                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType)}
+                                                     new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType)},
+                                                     new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID}
                                                  },
                                          new List<Parameters>()
                                                  {
@@ -2592,6 +2595,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             SerialNumber = DataReader.ReadString(x, "SerialNumber"),
                             InstrumentType = DataReader.ReadString(x, "InstrumentType"),
                             ErrorMessage = DataReader.ReadString(x, "ErrorMessage"),
+                            ErrorDescriptionShort = DataReader.ReadString(x, "ErrorDescriptionShort"),
                             ErrorDescription = DataReader.ReadString(x, "ErrorDescription"),
                             EntryDate = DataReader.ReadDate(x, "EntryDate")
                         }).ToList();
