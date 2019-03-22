@@ -89,33 +89,37 @@
 
     }
 
-    
-    function checkboxClicked(e, idFragment) {
-        var x = 0;
-        var hdnBaseServiceUrl = $('#hdnBaseServiceUrl').val();
+    $(document).ready(function () {
 
-        $.ajax({
-            url: hdnBaseServiceUrl + "/api/Device/UpdateMeasurementDeviceStatus/",
-            data: { MeasurementDeviceID: idFragment },
-            type: 'GET',
-            headers: {
-                "content-type": "application/json",
-            },
-            dataType: 'json',
-            success: function (response) {
-                if (response.data != null) {
-                    if (response.data) {
-                        alert("Device has been updated successfully.")
-                    } else {
-                        alert("Error occured while updating device.")
+        $('.rgMasterTable tbody #chkStatus').on('click', function (e) {
+            var hdnBaseServiceUrl = $('#hdnBaseServiceUrl').val();            
+            var $item = $(this);
+            var deviceID = parseInt($item.attr('data-item'));
+            var status =$item.prop('checked');
+            $.ajax({
+                url: hdnBaseServiceUrl + "/api/Device/UpdateMeasurementDeviceStatus/",
+                data: { MeasurementDeviceID: deviceID },
+                type: 'GET',
+                headers: {
+                    "content-type": "application/json",
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.data != null) {
+                        if (response.data) {
+                            alert("Device has been updated successfully.")
+                        } else {                                                        
+                            alert("Please check another active device is already exist with same serial and instrument type.")
+                            $item.prop('checked', !status);
+                        }
                     }
+                },
+                error: function (xhr, errorType, exception) {
+                    alert(exception);
                 }
-            },
-            error: function (xhr, errorType, exception) {
-                alert(exception);
-            }
+            });
         });
-    }
+    });
 </script>
 <div class="admin_top">
     &nbsp;
@@ -254,7 +258,7 @@
                                         ImageUrl='<%# Convert.ToBoolean(Eval("IsActive")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png" %>' 
                                         meta:resourcekey="imgIsActiveResource1" />--%>
 
-                                    <asp:CheckBox ID="chkStatus" runat="server" Checked='<%# Convert.ToBoolean(Eval("IsActive")) %>' />
+                                    <asp:CheckBox ID="chkStatus" ClientIDMode="Static" runat="server" Checked='<%# Convert.ToBoolean(Eval("IsActive")) %>' />
                                 </ItemTemplate>
 
                                 <HeaderStyle Width="40px"></HeaderStyle>

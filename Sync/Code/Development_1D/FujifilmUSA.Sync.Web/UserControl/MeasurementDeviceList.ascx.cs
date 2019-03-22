@@ -112,7 +112,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 MeasurementDevice device = (MeasurementDevice)e.Item.DataItem;
                 CheckBox chkActive = (CheckBox)e.Item.FindControl("chkStatus");
-                chkActive.Attributes.Add("OnClick", "checkboxClicked(event,'" + device.MeasurementDeviceId + "');");
+                chkActive.InputAttributes.Add("data-item", device.MeasurementDeviceId.ToString());
             }
         }
 
