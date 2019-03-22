@@ -126,10 +126,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage("This device is already registered with same serial number and instrument.", false);
                 return;
             }
-
-            Response.Redirect("MeasurementDeviceList.aspx");
+            if (!Page.AppRelativeVirtualPath.Contains("PopupAddMeasurementDevice.aspx"))
+                Response.Redirect("MeasurementDeviceList.aspx");
+            else
+                ScriptManager.RegisterClientScriptBlock((sender as Control), this.GetType(), "alert", "CloseDeviceWindow();", true);
         }
 
+        protected void lbtnCancel_Click(object sender, EventArgs e)
+        {
+            if (!Page.AppRelativeVirtualPath.Contains("PopupAddMeasurementDevice.aspx"))
+                Response.Redirect("MeasurementDeviceList.aspx");
+            else
+                ScriptManager.RegisterClientScriptBlock((sender as Control), this.GetType(), "alert", "CloseDeviceWindow();", true);
+        }
         #endregion
 
         #region Method

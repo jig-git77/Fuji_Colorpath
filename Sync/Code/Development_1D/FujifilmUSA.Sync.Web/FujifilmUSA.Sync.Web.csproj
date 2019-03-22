@@ -962,6 +962,7 @@
     <Content Include="MetricTargetPresetManagement.aspx" />
     <Content Include="PatchPresetManagement.aspx" />
     <Content Include="Permission.aspx" />
+    <Content Include="PopupAddMeasurementDevice.aspx" />
     <Content Include="PopupDownloadSoftware.aspx" />
     <Content Include="PopupImportMeasurementFile.aspx" />
     <Content Include="PopupImportMeasurements.aspx" />
@@ -3162,6 +3163,13 @@
     </Compile>
     <Compile Include="Permission.aspx.designer.cs">
       <DependentUpon>Permission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupAddMeasurementDevice.aspx.cs">
+      <DependentUpon>PopupAddMeasurementDevice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupAddMeasurementDevice.aspx.designer.cs">
+      <DependentUpon>PopupAddMeasurementDevice.aspx</DependentUpon>
     </Compile>
     <Compile Include="PopupDownloadSoftware.aspx.cs">
       <DependentUpon>PopupDownloadSoftware.aspx</DependentUpon>
@@ -6538,7 +6546,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

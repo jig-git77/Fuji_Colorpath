@@ -89,6 +89,11 @@
 
     }
 
+    function ShowMeasurementDeviceWindow() {        
+        var oWnd = $find("<%= AddMeasurementDeviceWindow.ClientID %>");
+        oWnd.show();
+        return false;
+    }    
     $(document).ready(function () {
 
         $('.rgMasterTable tbody #chkStatus').on('click', function (e) {
@@ -129,7 +134,7 @@
         <h1>
             <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
             <asp:Localize runat="server" Text="Measurement Device Management" ID="locMDM"
-                meta:resourcekey="locMDMResource1"></asp:Localize></h1>
+                meta:resourcekey="locMDMResource1"></asp:Localize></h1>      
         <asp:LinkButton ID="likAdd" runat="server" class="button"
             OnClick="likAdd_Click">
             <span>
@@ -140,6 +145,16 @@
                     meta:resourcekey="locAddSyncMeasurementDeviceResource1"></asp:Localize>
             </span>
         </asp:LinkButton>
+        <asp:LinkButton ID="likAddPopup" runat="server" class="button" OnClientClick="javascript: return ShowMeasurementDeviceWindow();">
+            <span>
+                <asp:Image ID="Image1" runat="server"
+                    ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
+                <asp:Localize runat="server" Text="Add Sync Measurement Device Popup"
+                    ID="Localize1"></asp:Localize>
+            </span>
+        </asp:LinkButton>
+
+        
     </div>
     <div class="clear">
     </div>
@@ -310,3 +325,12 @@
 </div>
 <div class="clear">
 </div>
+<telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
+    <Windows>        
+        <telerik:RadWindow ID="AddMeasurementDeviceWindow" runat="server" VisibleStatusbar="false"
+            ShowContentDuringLoad="false" Title="Add Measurement Device" Width="750" Height="440"
+            Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupAddMeasurementDevice.aspx">
+        </telerik:RadWindow>
+    </Windows>
+</telerik:RadWindowManager>
+
