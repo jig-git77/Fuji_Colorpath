@@ -94,6 +94,15 @@
         oWnd.show();
         return false;
     }    
+
+    function ShowEditMeasurementDeviceWindow(id) {
+        var oWindow;
+        var passingURL = "PopupAddMeasurementDevice.aspx?MeasurementDeviceId=" + id;
+        oWindow = window.radopen(passingURL, "windowEditMeasurementDevice");
+        oWindow.show();
+        return false;
+    }
+
     $(document).ready(function () {
 
         $('.rgMasterTable tbody #chkStatus').on('click', function (e) {
@@ -145,14 +154,14 @@
                     meta:resourcekey="locAddSyncMeasurementDeviceResource1"></asp:Localize>
             </span>
         </asp:LinkButton>
-        <asp:LinkButton ID="likAddPopup" runat="server" class="button" OnClientClick="javascript: return ShowMeasurementDeviceWindow();">
+        <%--<asp:LinkButton ID="likAddPopup" runat="server" class="button" OnClientClick="javascript: return ShowMeasurementDeviceWindow();">
             <span>
                 <asp:Image ID="Image1" runat="server"
                     ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
                 <asp:Localize runat="server" Text="Add Sync Measurement Device Popup"
                     ID="Localize1"></asp:Localize>
             </span>
-        </asp:LinkButton>
+        </asp:LinkButton>--%>
 
         
     </div>
@@ -234,8 +243,8 @@
                             <telerik:GridTemplateColumn
                                 UniqueName="InstrumentType" AllowFiltering="true"
                                 HeaderText="Instrument Type" DataField="InstrumentType.InstrumentName" SortExpression="InstrumentType.InstrumentName"
-                                ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width="100"
-                                ItemStyle-CssClass="breakWord100" ItemStyle-Width="100"
+                                ShowFilterIcon="true" FilterControlWidth="80" HeaderStyle-Width="100"
+                                ItemStyle-CssClass="breakWord100" ItemStyle-Width="80"
                                 ItemStyle-Wrap="true" AutoPostBackOnFilter="true"
                                 CurrentFilterFunction="Contains" meta:resourcekey="GridTemplateColumnResource4">
                                 <ItemTemplate>
@@ -278,6 +287,17 @@
 
                                 <HeaderStyle Width="40px"></HeaderStyle>
 
+                                <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn
+                                UniqueName="EditPopup" AllowFiltering="false" HeaderText="Popup Edit?" DataField="MeasurementDeviceId"
+                                ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="20">
+                                <ItemTemplate>
+                                    <%--<asp:LinkButton ID="btnEditPopup" runat="server" Text="Edit"></asp:LinkButton> --%>
+                                    <asp:ImageButton ID="btnEditPopup" runat="server" ToolTip="Edit Measurement Device in Popup"
+                                                        AlternateText="Edit" ImageUrl="../Images/edit_icon.png"/>
+                                </ItemTemplate>
+                                <HeaderStyle Width="40px"></HeaderStyle>
                                 <ItemStyle HorizontalAlign="Center"></ItemStyle>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn
@@ -330,6 +350,11 @@
         <telerik:RadWindow ID="AddMeasurementDeviceWindow" runat="server" VisibleStatusbar="false"
             ShowContentDuringLoad="false" Title="Add Measurement Device" Width="750" Height="440"
             Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupAddMeasurementDevice.aspx">
+        </telerik:RadWindow>
+        <telerik:RadWindow ID="windowEditMeasurementDevice" runat="server" ShowContentDuringLoad="false"
+            VisibleStatusbar="false" Title="Edit Measurement Device"  Width="750" Height="440"
+            Behaviors="Move,Close">
+            <%-- OnClientClose="OnSpotDetailsClose" OnClientPageLoad="OnSpotDetailsLoad">--%>
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>

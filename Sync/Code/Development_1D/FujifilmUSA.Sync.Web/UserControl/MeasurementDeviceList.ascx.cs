@@ -113,6 +113,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 MeasurementDevice device = (MeasurementDevice)e.Item.DataItem;
                 CheckBox chkActive = (CheckBox)e.Item.FindControl("chkStatus");
                 chkActive.InputAttributes.Add("data-item", device.MeasurementDeviceId.ToString());
+
+                ImageButton btnEditPopup = (ImageButton)e.Item.FindControl("btnEditPopup");
+                string parms = Service.Common.Encryption.CryptHelper.EncryptString(device.MeasurementDeviceId.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
+                btnEditPopup.Attributes.Add("onclick", "ShowEditMeasurementDeviceWindow('" + ContentEncoder.Encode(parms) + "')");
             }
         }
 
@@ -131,6 +135,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             foreach (var columnName in columnArray)
             {
                 GridColumn column = rgMeasurementDevice.MasterTableView.GetColumnSafe(columnName);
+                
                 if (column.CurrentFilterValue != "")
                 {
                     gridFilters.Add(new GridFilter()
