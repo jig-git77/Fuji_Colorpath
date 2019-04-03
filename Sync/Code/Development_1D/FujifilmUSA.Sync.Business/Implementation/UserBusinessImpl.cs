@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         password = CryptHelper.DecryptString(password, ApplicationConfiguration.Instance.XmfColorOrganizerEncryptionKey);
                     }
                     var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformation]",
-                                                                        new object[] { userName, LoginSecurity.EncryptPasswords(password), Convert.ToInt32(userType) });
+                                                                        new object[] { userName, LoginSecurity.EncryptPasswords(password), Convert.ToInt32(userType), password });
                     if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
                     {
                         user = new User()
@@ -51,6 +51,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             MeasurementDeviceId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "MeasurementDeviceID"),
                             DensityType = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "DensityType"),
                             UVMode = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "UVMode"),
+                            Token = DataReader.ReadString(dsUser.Tables[0].Rows[0], "Token")
                         };
                         user.Role.RolePermissions = dsUser.Tables[1].AsEnumerable().
                             Select(x => new RolePermission()
@@ -703,8 +704,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     Select(x =>
                                            new ReferenceChart()
                                            {
-                                       SampleName = DataReader.ReadString(x, "SampleName"),
-                                       HtmlColor = DataReader.ReadString(x, "HTMLColor")
+                                               SampleName = DataReader.ReadString(x, "SampleName"),
+                                               HtmlColor = DataReader.ReadString(x, "HTMLColor")
                                            }).ToList();
 
                                 var dsReferenceChartSetting = DataAccessFactory.Instance.GetDsResult("[CPSpot].[GetSpotReferenceChartSetting]",
@@ -744,7 +745,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         user.ReferenceChartData.ChartSetting.RowsPerPage = DataReader.ReadDecimal(dsReferenceChartSetting.Tables[0].Rows[0], "RowsPerPage");
                                     if (dsReferenceChartSetting.Tables[0].Columns.Contains("Pages"))
                                         user.ReferenceChartData.ChartSetting.Pages = DataReader.ReadDecimal(dsReferenceChartSetting.Tables[0].Rows[0], "Pages");
-                                }                                
+                                }
                             }
                         }
                         else
@@ -838,7 +839,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 }
                             }
                         }
-                    }                    
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UserLogin"));
             return user;
@@ -849,10 +850,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var user = new UserReferenceChart();
             Common.ImplementBusinessLogic(
                 () =>
-                {                    
+                {
                     var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformationBySerial]",
                                                                         new object[] { serial, InstrumentTypeId });
-                    
+
 
                     if (dsUser.Tables[0].Rows.Count > 0)
                     {
@@ -1030,6 +1031,38 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UserLogin"));
             return user;
+        }
+
+        public int validateUserByAuthKey(string authToken)
+        {
+            var outParam = new Parameters() { ParameterName = "@valid", Type = DbType.Int32 };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    //returnValue = DataAccessFactory.
+                    //    Instance.
+                    //    ExecuteProcedure(
+                    //        "[CP].[CheckUserAuthentication]",
+                    //        new object[]
+                    //                {
+                    //                    authToken
+                    //                },new List<Parameters>{
+                    //                    );
+
+                    DataAccessFactory.
+                       Instance.
+                       ExecuteProcedure("[CP].[CheckUserAuthentication]",
+                                        new List<Parameters>()
+                                                {
+                                                     new Parameters() {ParameterName = "@authToken", Size = 5000, Type = DbType.String, Value = authToken},
+                                                },
+                                        new List<Parameters>()
+                                                {
+                                                     outParam
+                                                });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateUserDevice"));
+            return outParam.Value != null ? Convert.ToInt32(outParam.Value) : -1; ;
         }
 
         #region ITaskBase Members

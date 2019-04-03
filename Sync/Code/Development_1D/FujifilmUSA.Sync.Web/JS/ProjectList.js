@@ -36,6 +36,7 @@ var CurrentDeviceID;
 var CurrentUserID;
 var Resources = {};
 var CurrentCulture;
+var $hdfToken;
 
 $(document).ready(function () {
 
@@ -46,6 +47,7 @@ $(document).ready(function () {
     CurrentUserID = $("#hdfCurrentUser").val();
     CurrentCulture = $("#hdfCurrentCulture").val();
     hdfSpotProjectAllowed = $("#hdfSpotProjectAllowed");
+    $hdfToken = $('#hdfToken');
     //var dID = $hdfCurrentDeviceID.val();
     $kendoProjectList.kendoGrid({
         dataSource: {
@@ -59,7 +61,8 @@ $(document).ready(function () {
                         data: { deviceID: CurrentDeviceID },
                         dataType: "json",
                         headers: {
-                            'Accept-Language': CurrentCulture
+                            'Accept-Language': CurrentCulture,
+                            'Auth-Key': $hdfToken.val()
                         },
                         success: function (response) {
                             var jsonProjectList = JSON.parse(response.data);
@@ -85,7 +88,16 @@ $(document).ready(function () {
 
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            alert(textStatus);
+                            
+                            if (XMLHttpRequest.status == 412) {
+                                alert("Your login time has expired. Please login again.")
+                            }
+                            else if (XMLHttpRequest.status == 401) {
+                                alert("You are not authorized user. Please login again.")
+                            }
+                            else {
+                                alert(errorThrown);
+                            }                            
                             kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
                         }
                     });

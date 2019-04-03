@@ -14,6 +14,7 @@ using System.Web.Http.Controllers;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using FujifilmUSA.Sync.GlobalResources;
+using FujiFilmUSA.Sync.Service.Models;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
@@ -72,6 +73,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             base.Initialize(controllerContext);
         }
 
+        [CustomAuthentication]
         public IHttpActionResult GetProjectDetailsByDeviceID(int deviceID)
         {
             IHttpActionResult actionResult = null;

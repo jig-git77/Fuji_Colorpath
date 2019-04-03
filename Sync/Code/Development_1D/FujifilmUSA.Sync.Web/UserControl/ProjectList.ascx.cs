@@ -67,6 +67,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdfCurrentUser.Value = Convert.ToString(SessionManager.Instance.CurrentUser.UserId);
                 hdfCurrentDeviceID.Value = Convert.ToString(SessionManager.Instance.CurrentDevice.DeviceId);
                 hdfCurrentCulture.Value = getCurrentCultureLanguage();
+                hdfToken.Value = SessionManager.Instance.CurrentUser.Token;
             }
         }
     

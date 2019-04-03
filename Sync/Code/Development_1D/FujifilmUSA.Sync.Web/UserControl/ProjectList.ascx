@@ -174,6 +174,7 @@
     <asp:HiddenField runat="server" ID="hdfCurrentDeviceID" ClientIDMode="Static" />
     <asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />
     <asp:HiddenField runat="server" ID="hdfSpotProjectAllowed" ClientIDMode="Static" />
+    <asp:HiddenField runat="server" ID="hdfToken" ClientIDMode="Static" />
     &nbsp;
 </div>
 <div class="contant_middle">

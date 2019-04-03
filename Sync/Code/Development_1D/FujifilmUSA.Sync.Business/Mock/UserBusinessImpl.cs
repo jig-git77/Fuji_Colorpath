@@ -104,6 +104,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new UserReferenceChart();
         }
+
+        public int validateUserByAuthKey(string authToken)
+        {
+            return 0;
+        }
         #endregion
 
         #region ITaskBase Members

@@ -28,5 +28,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         bool ValidateUser(string tocken);
         UserReferenceChart UserLoginReferenceChart(string userName, string password, UserType userType);
         UserReferenceChart UserLoginReferenceChartBySerial(string serial, short InstrumentTypeId);
+        int validateUserByAuthKey(string authToken);
     }
 }
