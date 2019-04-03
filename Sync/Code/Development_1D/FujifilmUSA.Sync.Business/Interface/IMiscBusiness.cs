@@ -8,5 +8,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         int InsertLogActivity(LogActivity logActivity);
         List<LogActivity> GetLogActivity(LogActivity logActivity);
         bool Ping();
+        int InsertMeasurementAppErrorLog(AppErrorLog errorLog, int ProjectID, string projectType);
     }
 }

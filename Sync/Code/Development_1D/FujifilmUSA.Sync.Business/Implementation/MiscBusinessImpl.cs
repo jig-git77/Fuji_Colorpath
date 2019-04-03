@@ -89,6 +89,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 }, new BusinessHandlerRequest(this, ErrorOccured, ""));
             return logActivityList;
         }
+
+        public int InsertMeasurementAppErrorLog(AppErrorLog errorLog, int ProjectID, string projectType)
+        {
+            int returnValue = 0;
+            returnValue = DataAccessFactory.
+                Instance.
+                ExecuteProcedure(
+                    "[dbo].[CreateMeasurementLogFromApp]",
+                    new object[]
+                        {
+                            errorLog.UserId,
+                            ProjectID,
+                            errorLog.ExMessage,
+                            errorLog.ExStackTracke,
+                            projectType
+                        });
+            return returnValue;
+        }
         #endregion
 
         #region Browser Test methods
