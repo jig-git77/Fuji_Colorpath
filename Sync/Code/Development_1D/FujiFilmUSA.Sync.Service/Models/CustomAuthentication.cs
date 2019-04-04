@@ -40,7 +40,7 @@ namespace FujiFilmUSA.Sync.Service.Models
         {
             if (actionContext.ControllerContext.Request.Headers.Contains("Auth-Key"))
             {
-                this.EncyptedTocken = actionContext.ControllerContext.Request.Headers.GetValues("Auth-Key").First();                
+                this.EncyptedTocken = actionContext.ControllerContext.Request.Headers.GetValues("Auth-Key").First();
                 int authResult = _presenterlogin.ValidateToken();
                 if (authResult == -1)
                 {
@@ -57,8 +57,12 @@ namespace FujiFilmUSA.Sync.Service.Models
                     base.OnAuthorization(actionContext);
                 }
             }
-            actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
-            return;
+            else
+            {
+                actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                return;
+            }
+            base.OnAuthorization(actionContext);
         }
 
         #region IViewTaskeroUser Members
