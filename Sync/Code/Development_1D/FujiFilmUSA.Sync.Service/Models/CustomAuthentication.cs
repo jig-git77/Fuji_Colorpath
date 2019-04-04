@@ -57,7 +57,8 @@ namespace FujiFilmUSA.Sync.Service.Models
                     base.OnAuthorization(actionContext);
                 }
             }
-            base.OnAuthorization(actionContext);
+            actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+            return;
         }
 
         #region IViewTaskeroUser Members

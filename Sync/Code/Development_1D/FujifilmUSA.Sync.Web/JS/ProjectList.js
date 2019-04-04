@@ -90,13 +90,17 @@ $(document).ready(function () {
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             
                             if (XMLHttpRequest.status == 412) {
-                                alert("Your login time has expired. Please login again.")
+                                //alert("Your login time has expired. Please login again.")
+                                $('#alertMessage').html('Your login time has expired. Please login again.');
+                                $("#windowAlert").data("kendoWindow").open();
                             }
                             else if (XMLHttpRequest.status == 401) {
-                                alert("You are not authorized user. Please login again.")
+                                //alert("You are not authorized user. Please login again.")
+                                $('#alertMessage').html('You are not authorized user. Please login again.');
+                                $("#windowAlert").data("kendoWindow").open();
                             }
                             else {
-                                alert(errorThrown);
+                                alert('Something going wrong. Please try again.');
                             }                            
                             kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
                         }
@@ -543,6 +547,29 @@ $(document).ready(function () {
         }
 
     })
+
+    $("#windowAlert").kendoWindow({
+        width: "300px",
+        height: "100px",
+        modal: true,
+        title: "Alert",
+        visible: false,
+        position: {
+            top: 150,
+            left: 500
+        },
+    });
+
+
+    $('#btnAlertPopup').on('click', function (e) {
+        var locationpath = "";
+        if (window.location.hostname == "localhost") {
+            locationpath = window.location.origin + '/FujifilmUSA.Sync.Web/Login.aspx'
+        } else {
+            locationpath = window.location.origin + '/Login.aspx'
+        }            
+        window.location.href = locationpath;
+    });
 });
 
 function detailInit(e) {
