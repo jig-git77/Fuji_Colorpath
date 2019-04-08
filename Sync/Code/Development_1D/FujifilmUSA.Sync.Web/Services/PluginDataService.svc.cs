@@ -12,18 +12,26 @@ using FujifilmUSA.Sync.Entity;
 using System.Data;
 using Newtonsoft.Json;
 using FujifilmUSA.Sync.Common;
+using System.Security.Authentication;
 
 namespace FujifilmUSA.Sync.Web.Services
 {
     [ServiceContract(Namespace = "")]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class PluginDataService : IViewPluginDataService
+    public class PluginDataService : IViewPluginDataService, IViewLogin
     {
         [WebInvoke(Method = "GET", UriTemplate = "Ping")]
         [OperationContract]
         public bool Ping()
         {
+            int result = IsValidateUser();
+            if (result == -1)
+                throw new WebFaultException(System.Net.HttpStatusCode.Unauthorized);
+            else if (result == -2)
+                throw new WebFaultException(System.Net.HttpStatusCode.BadRequest);
+
             return true;
+         
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurement")]
@@ -33,7 +41,7 @@ namespace FujifilmUSA.Sync.Web.Services
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             UserID = SessionManager.Instance.CurrentUser.UserId;
-            return presenter.SaveMeasurement();           
+            return presenter.SaveMeasurement();
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveVMeasurement")]
@@ -202,6 +210,41 @@ namespace FujifilmUSA.Sync.Web.Services
             return presenter.DeleteSpotMeasurement();
         }
 
+        public int IsValidateUser()
+        {
+            //Getting the user token from client request
+            var _presenterlogin = new PresenterLogin(this);
+            if (!string.IsNullOrEmpty(System.Web.HttpContext.Current.Request.Headers["Auth-Key"]))
+            {
+                this.EncyptedTocken = Convert.ToString(System.Web.HttpContext.Current.Request.Headers["Auth-Key"]);
+                return _presenterlogin.ValidateToken();
+                //if (authResult == -1)
+                //{
+                //    return -1;
+                //}
+                //else if (authResult == -2)
+                //{
+                //}
+            }
+            //else
+            //{
+
+            //}
+
+            //string userIdentityToken = Convert.ToString(OperationContext.Current.IncomingMessageHeaders.GetHeader<string>("TokenHeader", "TokenNameSpace"));
+
+            //Authenticating user with token, if it is validated then returning employee data
+            //if (userIdentityToken == UserToken)
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+            return -3;
+        }
+
         public void GenerateJSONFile(Entity.Measurement measurement, string type)
         {
             Entity.Measurement measurementDummy = new Entity.Measurement();
@@ -309,6 +352,22 @@ namespace FujifilmUSA.Sync.Web.Services
             //Do nothing in the service...
         }
 
+        #endregion
+
+        #region IViewTaskeroUser Members
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public User CurrentUser { get; set; }
+
+        public int UserId { get; set; }
+        public string OSName { get; set; }
+        public string BrowserName { get; set; }
+        public string EntryDate { get; set; }
+
+        public string EncyptedTocken { get; set; }
+        public UserReferenceChart UserReferenceChart { get; set; }
+        public string DeviceSerialNo { get; set; }
+        public short InstrumentTypeID { get; set; }
         #endregion
     }
 }

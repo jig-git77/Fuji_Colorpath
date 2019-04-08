@@ -90,7 +90,6 @@ $(document).ready(function () {
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             
                             if (XMLHttpRequest.status == 412) {
-                                //alert("Your login time has expired. Please login again.")
                                 $('#alertMessage').html('Your login time has expired. Please login again.');
                                 $("#windowAlert").data("kendoWindow").open();
                             }

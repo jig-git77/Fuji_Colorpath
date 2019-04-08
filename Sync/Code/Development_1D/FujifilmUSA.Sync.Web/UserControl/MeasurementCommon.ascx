@@ -14,6 +14,9 @@
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 
+<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
 <style type="text/css">
     .my_rectangle {
         width: 25px;
@@ -101,6 +104,7 @@
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
             <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
+            <asp:HiddenField runat="server" ID="hdfToken" ClientIDMode="Static" />
             <asp:HiddenField ID="hdnPCSType" runat="server" />
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
@@ -201,6 +205,16 @@
         </div>
     </div>
 </div>
+
+<div id="windowAlert" style="display: none;">
+    <span id="alertMessage"></span>
+    <br />
+    <div style="text-align: center;">
+        <button type="button" id="btnAlertPopup" style="line-height: 15px; width: 50px; padding: 5px 0px 5px;">OK</button>
+    </div>
+
+</div>
+
 <!-- modal content -->
 <div id='MeasurementConfirmDialog'>
     <div class='header'>
@@ -282,11 +296,66 @@
                 url: "Services/PluginDataService.svc/KeepUserSessionAlive/",
                 //url: BASE_SERVICE_URL + "PluginData.svc/KeepUserSessionAlive/",
                 dataType: "JSON",
+
                 success: function (response) { },
                 error: function (XMLHttpRequest, textStatus, errorThrown) { }
             });
         }, (SessionTimeOut * 60 * 1000) - (1 * 60 * 1000));
+        debugger;
+        $("#windowAlert").kendoWindow({
+            width: "300px",
+            height: "100px",
+            modal: true,
+            title: "Alert",
+            visible: false,
+            position: {
+                top: 150,
+                left: 500
+            },
+        });
+
+        $('#btnAlertPopup').on('click', function (e) {
+            var locationpath = "";
+            if (window.location.hostname == "localhost") {
+                locationpath = window.location.origin + '/FujifilmUSA.Sync.Web/Login.aspx'
+            } else {
+                locationpath = window.location.origin + '/Login.aspx'
+            }
+            window.location.href = locationpath;
+        });
+
+        GetPing();
     });
+
+    function GetPing() {
+        jQuery.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: "Services/PluginDataService.svc/Ping",
+            dataType: "json",
+            headers: {
+                'Auth-Key': $('#hdfToken').val()
+            },
+            success:function (response) {},
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                if (XMLHttpRequest.status == 400) {
+                    $('#alertMessage').html('Your login time has expired. Please login again.');
+                    $("#windowAlert").data("kendoWindow").open();
+                }
+                else if (XMLHttpRequest.status == 401) {
+                    //jQuery.growlUI('Error', "You are not authorized user. Please login again.");
+                    $('#alertMessage').html('You are not authorized user. Please login again.');
+                    $("#windowAlert").data("kendoWindow").open();
+                }
+                else {
+                    var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                    jQuery.growlUI('Error', "Error Cause:" + jsonFault.Reason + "</ br> Error Detail:" + jsonFault.DetailedInformation, 20000);
+                }
+            }
+        });
+    }
+
     function ControlVisibility() {
         jQuery("[id*='btnCalibrate']").css('display', 'none');
         jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
@@ -471,7 +540,7 @@
                     return data.replace(/"\\\/(Date\([0-9-]+\))\\\/"/gi, 'new $1');
                 },
                 success:
-                    function (response) {                        
+                    function (response) {
                         if (response) {
                             bindMeasurementData();
                             StopProgressBrowserWindow();
