@@ -23,21 +23,16 @@ namespace FujifilmUSA.Sync.Web.Services
         [WebInvoke(Method = "GET", UriTemplate = "Ping")]
         [OperationContract]
         public bool Ping()
-        {
-            int result = IsValidateUser();
-            if (result == -1)
-                throw new WebFaultException(System.Net.HttpStatusCode.Unauthorized);
-            else if (result == -2)
-                throw new WebFaultException(System.Net.HttpStatusCode.BadRequest);
-
-            return true;
-         
+        {       
+            CheckUserValidation();
+            return true;         
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurement")]
         [OperationContract]
         public bool SaveMeasurement(Entity.Measurement measurement)
         {
+            CheckUserValidation();
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             UserID = SessionManager.Instance.CurrentUser.UserId;
@@ -48,7 +43,7 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public bool SaveVMeasurement(Entity.Measurement measurement)
         {
-
+            CheckUserValidation();
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             UserID = SessionManager.Instance.CurrentUser.UserId;
@@ -59,6 +54,7 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public bool Save1DMeasurement(Entity.Measurement measurement)
         {
+            CheckUserValidation();
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             UserID = SessionManager.Instance.CurrentUser.UserId;
@@ -130,6 +126,7 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public bool DeleteMeasurement(string measurementId)
         {
+            CheckUserValidation();
             MeasurementId = Convert.ToInt32(measurementId);
             var presenter = new PresenterPluginDataService(this);
             return presenter.DeleteMeasurement();
@@ -148,6 +145,7 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public bool Delete1DMeasurement(string measurementId)
         {
+            CheckUserValidation();
             MeasurementId = Convert.ToInt32(measurementId);
             var presenter = new PresenterPluginDataService(this);
             return presenter.Delete1DMeasurement();
@@ -177,6 +175,7 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public bool SaveSpotMeasurement(Entity.Measurement measurement)
         {
+            CheckUserValidation();
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
             UserID = SessionManager.Instance.CurrentUser.UserId;
@@ -205,9 +204,20 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public bool DeleteSpotMeasurement(string measurementId)
         {
+            CheckUserValidation();
             MeasurementId = Convert.ToInt32(measurementId);
             var presenter = new PresenterPluginDataService(this);
             return presenter.DeleteSpotMeasurement();
+        }
+
+
+        public void CheckUserValidation()
+        {
+            int result = IsValidateUser();
+            if (result == -1)
+                throw new WebFaultException(System.Net.HttpStatusCode.Unauthorized);
+            else if (result == -2)
+                throw new WebFaultException(System.Net.HttpStatusCode.BadRequest);
         }
 
         public int IsValidateUser()
@@ -218,30 +228,8 @@ namespace FujifilmUSA.Sync.Web.Services
             {
                 this.EncyptedTocken = Convert.ToString(System.Web.HttpContext.Current.Request.Headers["Auth-Key"]);
                 return _presenterlogin.ValidateToken();
-                //if (authResult == -1)
-                //{
-                //    return -1;
-                //}
-                //else if (authResult == -2)
-                //{
-                //}
-            }
-            //else
-            //{
-
-            //}
-
-            //string userIdentityToken = Convert.ToString(OperationContext.Current.IncomingMessageHeaders.GetHeader<string>("TokenHeader", "TokenNameSpace"));
-
-            //Authenticating user with token, if it is validated then returning employee data
-            //if (userIdentityToken == UserToken)
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
+               
+            }                       
             return -3;
         }
 

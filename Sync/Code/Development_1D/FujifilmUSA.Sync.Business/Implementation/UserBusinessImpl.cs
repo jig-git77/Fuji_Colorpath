@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         password = CryptHelper.DecryptString(password, ApplicationConfiguration.Instance.XmfColorOrganizerEncryptionKey);
                     }
                     var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformation]",
-                                                                        new object[] { userName, LoginSecurity.EncryptPasswords(password), Convert.ToInt32(userType), password });
+                                                                        new object[] { userName, LoginSecurity.EncryptPasswords(password), Convert.ToInt32(userType) });
                     if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
                     {
                         user = new User()
@@ -50,8 +50,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             LanguageCultureCode = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LanguageCultureCode"),
                             MeasurementDeviceId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "MeasurementDeviceID"),
                             DensityType = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "DensityType"),
-                            UVMode = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "UVMode"),
-                            Token = DataReader.ReadString(dsUser.Tables[0].Rows[0], "Token")
+                            UVMode = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "UVMode")                            
                         };
                         user.Role.RolePermissions = dsUser.Tables[1].AsEnumerable().
                             Select(x => new RolePermission()

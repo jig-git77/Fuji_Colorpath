@@ -41,7 +41,6 @@ namespace FujifilmUSA.Sync.Entity
         public short DensityType { get; set; }
         public short UVMode { get; set; }
         public DateTime LastActiveDate { get; set; }
-        public string Token { get; set; }
         #endregion
 
         #region extension Methods

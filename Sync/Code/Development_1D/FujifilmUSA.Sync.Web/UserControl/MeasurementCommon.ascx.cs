@@ -78,7 +78,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     hdReferenceChartDisplayType.Value = Convert.ToInt32(EReferenceChartDisType.ProfileChart).ToString();
                 }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
-                hdfToken.Value = SessionManager.Instance.CurrentUser.Token;
+                hdfToken.Value = SessionManager.Instance.CurrentUser.AuthenticationKey.ToString();
                 //----------------"Import Measurements" button only available for "Sync4D" or "Ink Optimization" Project Type and only for initial 1st run (Not shown in any type of Validation)--------------//
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
                 {

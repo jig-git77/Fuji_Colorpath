@@ -301,7 +301,7 @@
                 error: function (XMLHttpRequest, textStatus, errorThrown) { }
             });
         }, (SessionTimeOut * 60 * 1000) - (1 * 60 * 1000));
-        debugger;
+
         $("#windowAlert").kendoWindow({
             width: "300px",
             height: "100px",
@@ -336,7 +336,7 @@
             headers: {
                 'Auth-Key': $('#hdfToken').val()
             },
-            success:function (response) {},
+            success: function (response) { },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
 
                 if (XMLHttpRequest.status == 400) {
@@ -536,6 +536,9 @@
                 processData: false,
                 dataType: "json",
                 data: JSON.stringify(obj),
+                headers: {
+                    'Auth-Key': $('#hdfToken').val()
+                },
                 dataFilter: function (data, type) {
                     return data.replace(/"\\\/(Date\([0-9-]+\))\\\/"/gi, 'new $1');
                 },
@@ -554,9 +557,20 @@
                     },
                 error:
                     function (XMLHttpRequest, textStatus, errorThrown) {
-                        var jsonFault = JSON.parse(XMLHttpRequest.responseText);
                         StopProgressBrowserWindow();
-                        MeasurementDialog('<%= GetResourceString("errorCause") %>' + jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
+                        if (XMLHttpRequest.status == 400) {
+                            $('#alertMessage').html('Your login time has expired. Please login again.');
+                            $("#windowAlert").data("kendoWindow").open();
+                        }
+                        else if (XMLHttpRequest.status == 401) {
+                            $('#alertMessage').html('You are not authorized user. Please login again.');
+                            $("#windowAlert").data("kendoWindow").open();
+                        }
+                        else {
+                            var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                            StopProgressBrowserWindow();
+                            MeasurementDialog('<%= GetResourceString("errorCause") %>' + jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
+                        }
                     }
             });
 
@@ -682,12 +696,27 @@
             dataFilter: function (data, type) {
                 return false;
             },
+            headers: {
+                'Auth-Key': $('#hdfToken').val()
+            },
             success:
                 function (response) {
                 },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                MeasurementDialog('<%= GetResourceString("errorCause") %>' + jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
+
+                if (XMLHttpRequest.status == 400) {
+                    $('#alertMessage').html('Your login time has expired. Please login again.');
+                    $("#windowAlert").data("kendoWindow").open();
+                }
+                else if (XMLHttpRequest.status == 401) {
+                    $('#alertMessage').html('You are not authorized user. Please login again.');
+                    $("#windowAlert").data("kendoWindow").open();
+                }
+                else {
+                    var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                    MeasurementDialog('<%= GetResourceString("errorCause") %>' + jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
+                }
+
             }
         });
     }
