@@ -91,7 +91,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             {
                 if (Measurements.Count == 0)
                 {
-                    fujiStatusbar.DisplayMessage("There is no measurements available in selected project, Please choose different project.", false);
+                    fujiStatusbar.DisplayMessage("There is no measurement available in selected project, Please choose different project.", false);
                     return;
                 }
                 if (parentProjectMeasurementCount + Measurements.Count > (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? Business.ApplicationConfiguration.Instance.MeasurementLimitSync1D : Business.ApplicationConfiguration.Instance.MeasurementsLimit))
