@@ -131,14 +131,9 @@
         height: 200px;
         /*background-color: #eae8e8;*/
     }
-
-    .k-panelbar .k-tabstrip-items .k-item, .k-tabstrip-items .k-item {
-        position: initial !important;
-    }
-
-    #ContentPlaceHolder1_ucAnalyze_updateProgress {
-        left: unset !important;
-        /*top: unset !important;*/
+    
+    #ContentPlaceHolder1_ucAnalyze_updateProgress {        
+            z-index: 100;
     }
 </style>
 <%--<script src="http://www.labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.2.0.2.js" type="text/javascript" charset="UTF-8"> </script>--%>
