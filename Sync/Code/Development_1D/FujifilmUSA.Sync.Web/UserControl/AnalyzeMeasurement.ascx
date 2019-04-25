@@ -518,7 +518,7 @@
                 <tr>
                     <td>
                         <div>
-                            <div id="tabstrip" style="position: initial;">
+                            <div id="tabstrip">
                                 <ul>
                                     <li class="k-state-active">
                                         <asp:Localize Text="Summary" ID="locSummary"
