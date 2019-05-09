@@ -64,7 +64,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
-        public List<ReferenceChart> GetReferenceChartForLabCalculation(short sourceProfileId, short referenceChartTypeId)
+        public List<ReferenceChart> GetReferenceChartForLabCalculation(int sourceProfileId, short referenceChartTypeId)
         {
             var referenceChartData = new List<ReferenceChart>();
             Common.ImplementBusinessLogic(
