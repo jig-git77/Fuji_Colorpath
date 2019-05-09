@@ -858,6 +858,54 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_CurvesFile.txt", CurveFileName + "_CurvesFile.txt");
                         #endregion
                     }
+                    else if (CurveType == 103)  // Hybrid
+                    {
+                        #region Create Zip file and download file for Hybrid
+
+                        CurveFileName = ExportFileName;
+                        string zipCurveFileName = CurveFileName + "_Hybrid.zip";
+                        ReportFileName = "/UploadFiles/CurvesFile/" + zipCurveFileName;
+
+
+                        //check if file exists and delete it
+                        if (System.IO.File.Exists(CurveFilePath + zipCurveFileName))
+                            System.IO.File.Delete(CurveFilePath + zipCurveFileName);
+
+                        System.IO.StreamWriter swC;
+                        System.IO.StreamWriter swM;
+                        System.IO.StreamWriter swY;
+                        System.IO.StreamWriter swK;
+                        swC = System.IO.File.CreateText(CurveFilePath  + "Cyan.csv");
+                        swM = System.IO.File.CreateText(CurveFilePath  + "Magenta.csv");
+                        swY = System.IO.File.CreateText(CurveFilePath  + "Yellow.csv");
+                        swK = System.IO.File.CreateText(CurveFilePath  + "Black.csv");
+
+
+                        for (int i = 0; i < CurveData.CurveExportView.Count; i++)
+                        {
+                            swC.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0"));
+                            swC.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_C).ToString("0.0"));
+                            swM.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0"));
+                            swM.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_M).ToString("0.0"));
+                            swY.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0"));
+                            swY.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_Y).ToString("0.0"));
+                            swK.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].ReferenceNo).ToString("0.0"));
+                            swK.WriteLine(Convert.ToDecimal(CurveData.CurveExportView[i].CMYK_K).ToString("0.0"));
+                        }
+
+                        swC.Close();
+                        swM.Close();
+                        swY.Close();
+                        swK.Close();
+
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath  + "Cyan.csv");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath  + "Magenta.csv");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath  + "Yellow.csv");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath  + "Black.csv");
+
+                        //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_Nexus.zip", CurveFileName + "_Nexus.zip");
+                        #endregion
+                    }
                     if (string.IsNullOrEmpty(ReportFileName))
                         ReportFileName = "/UploadFiles/CurvesFile/" + CurveFileName;
                     httpResponse.Data = ReportFileName;
