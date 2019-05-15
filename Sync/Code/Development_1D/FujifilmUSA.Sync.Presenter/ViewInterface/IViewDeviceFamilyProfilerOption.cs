@@ -21,5 +21,12 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int RetargetProjectID { get; set; }
         string RetargetPrintStandardTypeName { get; set; }
         string RetargetMetricTargetPresetName { get; set; }
+
+        ProfilerOptionPreset ProfilerOptionPreset { get; set; }
+        DeviceFamilyProfilerOption DeviceFamilyProfilerOption { get; set; }
+        int DeviceFamilyProfilerOptionID { get; set; }
+
+        int UserID { get; set; }
+        bool IsCustomPreset { get; set; }
     }
 }

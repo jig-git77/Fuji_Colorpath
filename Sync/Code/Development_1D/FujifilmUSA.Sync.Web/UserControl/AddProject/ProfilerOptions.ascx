@@ -202,16 +202,34 @@
                                                 meta:resourcekey="cmbSelectedPresetsResource1">
                                             </asp:DropDownList>
                                         </td>
+                                        <td>
+                                            <asp:RadioButtonList ID="rdBtnPresetType" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rdBtnPresetType_SelectedIndexChanged">
+                                                <asp:ListItem Text="Regular" Value = "1" Selected="True"></asp:ListItem>
+                                                <asp:ListItem Text="Custom" Value = "2"></asp:ListItem>
+                                            </asp:RadioButtonList>
+                                            <asp:Localize Text="Upload Profiler Settings (only csv)" runat="server" 
+                                                ID="locUploadPofileFile" meta:resourcekey="locUploadProfilerResource1"></asp:Localize>
+                                            <telerik:RadAsyncUpload runat="server" ID="fnUploadProfileSettings"
+                                                MaxFileInputsCount="1" PostbackTriggers="lbtnSave" 
+                                                meta:resourcekey="fncUploadProfileSettingsResource1" >
+                                            </telerik:RadAsyncUpload>  
+                                             <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" ValidationGroup="vgAddProfiles"
+                                            OnClick="lbtnSave_Click">
+                                                    <span> <asp:Localize runat="server" Text="Save" ID="locSave" 
+                                            meta:resourcekey="locSaveResource1" ></asp:Localize> 
+                                             </span>
+                                        </asp:LinkButton>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td valign="top" colspan="2">
+                                        <td valign="top" colspan="3">
                                             <span>
                                                 <asp:Localize runat="server" Text="Preset Description:"
                                                     ID="locPresetDescription" meta:resourcekey="locPresetDescriptionResource1"></asp:Localize></span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">
+                                        <td colspan="3">
                                             <asp:TextBox ID="txtProfileDescription" runat="server" Width="120%" Height="100px"
                                                 TextMode="MultiLine" Enabled="False" ReadOnly="True"
                                                 Text="This preset is best used for analog devices ……"

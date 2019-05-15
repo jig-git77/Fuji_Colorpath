@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -67,6 +68,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             lnkbtnTargetColorSpace.Visible = IsXmfNewProject;
             PanelOptionalRetarget.GroupingText = "<b>" + GetResourceString("PanelOptionalRetarget") + "</b>";
+           
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
                 if (ViewState[_vsMetricTargetPreset] == null)
@@ -125,23 +127,47 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void BindPresets()
         {
-            if (ViewState[_vsDeviceFamilyProfilerOption] == null)
+            //if (ViewState[_vsDeviceFamilyProfilerOption] == null)
             {
                 DeviceFamilyId = SessionManager.Instance.CurrentDevice.DeviceFamily.DeviceFamilyId;
                 LicenseTypeId = (short)SessionManager.Instance.CurrentProject.LicenseType;
+                UserID = SessionManager.Instance.CurrentUser.UserId;
 
-                _presenterDeviceFamilyProfilerOption.GetDeviceFamilyProfilerOption();
-                if (!IsErrorOccured)
+                if (Session["IsCustomOptions"] != null)
                 {
+                    rdBtnPresetType.SelectedIndex = Convert.ToInt16(Session["IsCustomOptions"]);
+                }
+                if (rdBtnPresetType.SelectedIndex == 1)
+                {
+                    IsCustomPreset = true;
+
                     cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
                     cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
-                    ViewState[_vsDeviceFamilyProfilerOption] = ProfileOption;
+
                     cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
                     cmbSelectedPresets.DataBind();
                     cmbSelectedPresets_SelectedIndexChanged(null, null);
+
                 }
+                else
+                {
+                    IsCustomPreset = false;
+
+                    _presenterDeviceFamilyProfilerOption.GetDeviceFamilyProfilerOption();
+                    if (!IsErrorOccured)
+                    {
+                        cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
+                        cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
+                        ViewState[_vsDeviceFamilyProfilerOption] = ProfileOption;
+                        cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
+                        cmbSelectedPresets.DataBind();
+                        cmbSelectedPresets_SelectedIndexChanged(null, null);
+                    }
+                }
+                // cmbSelectedPresets.Items.Insert(cmbSelectedPresets.Items.Count, new ListItem() { Value = "-1", Text = "--Custom--" });
             }
         }
+
         private void LoadProjectInfoFromSession()
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
@@ -1610,6 +1636,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.CPSync1D.ProjectTargetDensity> ProjectTargetDensity { get; set; }
         public List<Entity.CPSync1D.ProjectTargetHueAngle> ProjectTargetHueAngle { get; set; }
         public short LicenseTypeId { get; set; }
+        public int UserID { get; set; }
+        public bool IsCustomPreset { get; set; }
         #endregion
 
         #region IViewMeasurementSetting Members
@@ -1729,7 +1757,170 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int RetargetProjectID { get; set; }
         public string RetargetPrintStandardTypeName { get; set; }
         public string RetargetMetricTargetPresetName { get; set; }
+
+        public ProfilerOptionPreset ProfilerOptionPreset { get; set; }
+        public DeviceFamilyProfilerOption DeviceFamilyProfilerOption { get; set; }
+        public int DeviceFamilyProfilerOptionID { get; set; }
         #endregion
 
+        protected void lbtnSave_Click(object sender, EventArgs e)
+        {
+            short profilerTypeID = 2;
+            short emptyLine = 0;
+            if (fnUploadProfileSettings.UploadedFiles.Count > 0)
+            {
+                var sr = new StreamReader(fnUploadProfileSettings.UploadedFiles[0].InputStream);
+                List<ProfilerOptionPreset> lstProfilerOptionPreset = new List<ProfilerOptionPreset>();
+                var rows = 0;
+
+                while (!sr.EndOfStream)
+                {
+                    bool bEmptyLine = false;
+                    rows++;
+                    ProfilerOptionPreset tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                    if (rows == 1)
+                    {
+                        #region Column Validation
+                        var columns = sr.ReadLine().Split(',');
+                        if (columns.Length != 3)
+                        {
+                            throw new Exception(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatch"));
+                        }
+                        columns.ToList().ForEach(x => x = x.Trim());
+                        if (!columns[0].Equals("ProfilerOptionID", StringComparison.CurrentCultureIgnoreCase) ||
+                            !columns[1].Equals("ProfilerOptionDesc", StringComparison.CurrentCultureIgnoreCase) ||
+                            !columns[2].Equals("ProfilerOptionValue", StringComparison.CurrentCultureIgnoreCase)
+                          )
+                        {
+                            throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
+                        }
+                    }
+                    else
+                    {
+                        var dataRow = sr.ReadLine().Split(',');
+                        if (dataRow.Length != 3)
+                        {
+                            throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatchOnRow"), rows));
+                        }
+                        dataRow.ToList().ForEach(x => x = x.Trim());
+                        short profilerOptionID = 0;
+
+                        if (string.IsNullOrEmpty(dataRow[1]) && string.IsNullOrEmpty(dataRow[2]) && string.IsNullOrEmpty(dataRow[1]))
+                        { emptyLine++; bEmptyLine = true; }
+
+                        //Empty line is given between profile types. if not more than 2 empty lines proceed
+                        if ((emptyLine < 3) && !bEmptyLine)
+                        {
+                            if (short.TryParse(dataRow[0].ToString(), out profilerOptionID))
+                            {
+                                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = profilerOptionID;
+                            }
+                            else
+                            {
+                                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
+                            }
+
+                            //ProfilerOptionDesc is not needed but cannot be empty                               
+                            if ((!string.IsNullOrEmpty(dataRow[2])) || (string.IsNullOrEmpty(dataRow[1])))
+                            {
+                                tmpProfilerOptionPreset.ProfilerOptionValue = dataRow[2];
+                            }
+                            else
+                            {
+                                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnEmptyValueOnRow"), rows));
+                            }
+                            #endregion
+
+                            if (profilerOptionID == 1)
+                            {
+                                switch (dataRow[2].ToUpper())
+                                {
+                                    case "PRINTER":
+                                        profilerTypeID = (short)EProfileType.DestinationProfile;
+                                        break;
+                                    case "DEVICELINK":
+                                        profilerTypeID = (short)EProfileType.DeviceLinkProfile;
+                                        break;
+                                    case "OPTIMIZEDEVICELINK":
+                                        profilerTypeID = (short)EProfileType.OptimizeDlp;
+                                        break;
+                                }
+                            }
+
+                            tmpProfilerOptionPreset.ProfileTypeId = profilerTypeID;
+                            tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                            tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+
+                            lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+                        }
+                    }
+                }
+                AddProfilerOptionSettings(lstProfilerOptionPreset);
+            }
+            else
+            {
+                ///-----------Missing message for Upload .csv file
+                fujiStatusbar.DisplayMessage(Common.ResourceManager.GetResourceMessage("Error_ProfilerSettings_MissingUploadFile"), false);
+            }
+        }
+
+        private void AddProfilerOptionSettings(List<ProfilerOptionPreset> lstProfilerOptionPreset)
+        {
+            List<DeviceFamilyProfilerOption> DeviceOptionList = new List<DeviceFamilyProfilerOption>();
+
+            DeviceFamilyProfilerOption = new DeviceFamilyProfilerOption();
+            DeviceFamilyProfilerOption.DeviceFamilyProfilerOptionId = -1;
+            DeviceFamilyProfilerOption.DeviceFamilyId = 1;
+            DeviceFamilyProfilerOption.ProfilerOptionsName = "Custom";
+            DeviceFamilyProfilerOption.ProfilerOptionsDesc = "Custom Description";
+            DeviceFamilyProfilerOption.ProjectTypeID = 3;
+            DeviceFamilyProfilerOption.UserID = SessionManager.Instance.CurrentUser.UserId;
+
+            var rows = 0;
+            bool bDestProfileType = false;
+            bool bDevProfileType = false;
+            bool bOptProfileType = false;
+
+            #region Validation for ProfileTypes
+            List<ProfilerOptionPreset> lstFilter = new List<ProfilerOptionPreset>();
+            lstFilter = lstProfilerOptionPreset.FindAll(item => item.ProfileTypeId == (short)EProfileType.DestinationProfile);
+            if (lstFilter.Count > 0)
+                bDestProfileType = true;
+            lstFilter = lstProfilerOptionPreset.FindAll(item => item.ProfileTypeId == (short)EProfileType.DeviceLinkProfile);
+            if (lstFilter.Count > 0)
+                bDevProfileType = true;
+            lstFilter = lstProfilerOptionPreset.FindAll(item => item.ProfileTypeId == (short)EProfileType.OptimizeDlp);
+            if (lstFilter.Count > 0)
+                bOptProfileType = true;
+            #endregion
+
+            if (!(bDestProfileType && bDevProfileType && bOptProfileType))
+                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_CSV_ProfilerOptionsPreset"), rows));
+            else
+            {
+                DeviceFamilyProfilerOption.ProfilerOptionPresets = (lstProfilerOptionPreset.
+                                                            Select(x => new ProfilerOptionPreset()
+                                                            {
+                                                                ProfileTypeId = x.ProfileTypeId,
+                                                                ProfilerOption = x.ProfilerOption,
+                                                                ProfilerOptionValue = x.ProfilerOptionValue
+                                                            }).ToList());
+            }
+            DeviceOptionList.Add(DeviceFamilyProfilerOption);
+            ViewState[_vsDeviceFamilyProfilerOption] = DeviceOptionList;
+            BindPresets();
+        }
+
+        protected void rdBtnPresetType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session["IsCustomOptions"] = rdBtnPresetType.SelectedIndex;
+
+            if (rdBtnPresetType.SelectedIndex == 0)
+            {
+                ViewState[_vsDeviceFamilyProfilerOption] = null;
+                BindPresets();
+            }
+        }
     }
 }

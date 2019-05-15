@@ -287,7 +287,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDeviceFamilyProfilerOption"));
             return returnValue;
         }
-        
+  
         #endregion
 
         #region ITaskBase Members
