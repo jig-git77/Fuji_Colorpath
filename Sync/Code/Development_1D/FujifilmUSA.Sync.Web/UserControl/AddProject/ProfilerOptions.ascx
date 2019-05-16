@@ -189,6 +189,70 @@
                             <asp:Panel ID="panelAddProjectDescription" Style="padding: 5px" runat="server"
                                 BorderStyle="None" meta:resourcekey="panelAddProjectDescriptionResource1">
                                 <table>
+                                    <tr runat="server" id="trPresetoptionType" visible="false">
+                                        <td style="width: 110px">
+                                            <span>
+                                                <asp:Localize runat="server" Text="Select Preset Type:"
+                                                    ID="Localize14"></asp:Localize></span>
+                                        </td>
+                                        <td style="width: 450px">
+                                            <asp:RadioButtonList ID="rdBtnPresetType" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rdBtnPresetType_SelectedIndexChanged" RepeatDirection="Horizontal">
+                                                <asp:ListItem Text="Regular" Value="False"></asp:ListItem>
+                                                <asp:ListItem Text="Custom" Value="True"></asp:ListItem>
+                                            </asp:RadioButtonList>
+                                        </td>
+                                    </tr>
+                                    <tr runat="server" id="trPresetUplod" visible="false">
+                                        <td style="width: 110px">
+                                            <span>
+                                                <asp:Localize Text="Upload Profiler Settings (only csv)" runat="server"
+                                                    ID="locUploadPofileFile" meta:resourcekey="locUploadProfilerResource1"></asp:Localize></span>
+                                        </td>
+                                        <td style="width: 450px">
+                                            <telerik:RadAsyncUpload runat="server" ID="fnUploadProfileSettings"
+                                                MaxFileInputsCount="1" PostbackTriggers="lbtnSave"
+                                                meta:resourcekey="fncUploadProfileSettingsResource1">
+                                            </telerik:RadAsyncUpload>
+                                            <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" ValidationGroup="vgAddProfiles"
+                                                OnClick="lbtnSave_Click">
+                                                <span>
+                                                    <asp:Localize runat="server" Text="Save" ID="locSave"
+                                                        meta:resourcekey="locSaveResource1"></asp:Localize>
+                                                </span>
+                                            </asp:LinkButton>
+                                        </td>
+                                    </tr>
+                                    <tr runat="server" id="trSelectPreset">
+                                        <td style="width: 110px">
+                                            <span>
+                                                <asp:Localize runat="server" Text="Selected Presets:"
+                                                    ID="locSelectedPresets" meta:resourcekey="locSelectedPresetsResource1"></asp:Localize></span>
+                                        </td>
+                                        <td style="width: 450px">
+                                            <asp:DropDownList ID="cmbSelectedPresets" runat="server" CssClass="select" DataValueField="Key"
+                                                DataTextField="Value" AutoPostBack="True"
+                                                OnSelectedIndexChanged="cmbSelectedPresets_SelectedIndexChanged"
+                                                meta:resourcekey="cmbSelectedPresetsResource1">
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" colspan="3">
+                                            <span>
+                                                <asp:Localize runat="server" Text="Preset Description:"
+                                                    ID="locPresetDescription" meta:resourcekey="locPresetDescriptionResource1"></asp:Localize></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <asp:TextBox ID="txtProfileDescription" runat="server" Width="120%" Height="100px"
+                                                TextMode="MultiLine" Enabled="False" ReadOnly="True"
+                                                Text="This preset is best used for analog devices ……"
+                                                meta:resourcekey="txtProfileDescriptionResource1"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <%--<table>
                                     <tr>
                                         <td style="width: 100px">
                                             <span>
@@ -204,11 +268,11 @@
                                         </td>
                                         <td>
                                             <asp:RadioButtonList ID="rdBtnPresetType" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rdBtnPresetType_SelectedIndexChanged">
-                                                <asp:ListItem Text="Regular" Value = "1" Selected="True"></asp:ListItem>
-                                                <asp:ListItem Text="Custom" Value = "2"></asp:ListItem>
+                                                <asp:ListItem Text="Regular" Value = "False"></asp:ListItem>
+                                                <asp:ListItem Text="Custom" Value = "True"></asp:ListItem>
                                             </asp:RadioButtonList>
-                                            <asp:Localize Text="Upload Profiler Settings (only csv)" runat="server" 
-                                                ID="locUploadPofileFile" meta:resourcekey="locUploadProfilerResource1"></asp:Localize>
+                                            <asp:Localize runat="server" Text="Selected Presets:"
+                                                    ID="locSelectedPresets" meta:resourcekey="locSelectedPresetsResource1"></asp:Localize>
                                             <telerik:RadAsyncUpload runat="server" ID="fnUploadProfileSettings"
                                                 MaxFileInputsCount="1" PostbackTriggers="lbtnSave" 
                                                 meta:resourcekey="fncUploadProfileSettingsResource1" >
@@ -236,7 +300,7 @@
                                                 meta:resourcekey="txtProfileDescriptionResource1"></asp:TextBox>
                                         </td>
                                     </tr>
-                                </table>
+                                </table>--%>
                             </asp:Panel>
                             <div class="clear">
                             </div>
@@ -740,7 +804,7 @@
                                                                             <asp:Label runat="server" ID="lblMetricTargetPresetName" />
                                                                         </div>
                                                                     </td>
-                                                                </tr>                                                               
+                                                                </tr>
                                                             </table>
                                                         </div>
                                                     </ContentTemplate>
