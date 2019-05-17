@@ -127,17 +127,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void BindPresets()
         {
-            if (!SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
+
+            if (ViewState[_vsDeviceFamilyProfilerOption] == null || !SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
             {
                 DeviceFamilyId = SessionManager.Instance.CurrentDevice.DeviceFamily.DeviceFamilyId;
-                LicenseTypeId = (short)SessionManager.Instance.CurrentProject.LicenseType;                
+                LicenseTypeId = (short)SessionManager.Instance.CurrentProject.LicenseType;
+                UserID = SessionManager.Instance.CurrentUser.UserId;
+                IsCustomPreset = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption;
                 _presenterDeviceFamilyProfilerOption.GetDeviceFamilyProfilerOption();
                 if (!IsErrorOccured)
                 {
+
                     cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
                     cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
                     ViewState[_vsDeviceFamilyProfilerOption] = ProfileOption;
                     cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
+                    if (ProfileOption != null)
+                    {
+                        cmbSelectedPresets.SelectedIndex = 0;
+                        //cmbSelectedPresets.ClearSelection();
+                        //cmbSelectedPresets.SelectedValue = ProfileOption.First().DeviceFamilyProfilerOptionId.ToString();
+                    }
                     cmbSelectedPresets.DataBind();
                     cmbSelectedPresets_SelectedIndexChanged(null, null);
                 }
@@ -151,6 +161,36 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbSelectedPresets.DataBind();
                 cmbSelectedPresets_SelectedIndexChanged(null, null);
             }
+
+            //if (!SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
+            //{
+            //    DeviceFamilyId = SessionManager.Instance.CurrentDevice.DeviceFamily.DeviceFamilyId;
+            //    LicenseTypeId = (short)SessionManager.Instance.CurrentProject.LicenseType;                
+            //    _presenterDeviceFamilyProfilerOption.GetDeviceFamilyProfilerOption();
+            //    if (!IsErrorOccured)
+            //    {
+
+            //        cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
+            //        cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
+            //        ViewState[_vsDeviceFamilyProfilerOption] = ProfileOption;
+            //        cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
+            //        if (ProfileOption != null)
+            //        {
+            //            cmbSelectedPresets.SelectedValue = ProfileOption.First().DeviceFamilyProfilerOptionId.ToString();
+            //        }
+            //        cmbSelectedPresets.DataBind();
+            //        cmbSelectedPresets_SelectedIndexChanged(null, null);
+            //    }
+            //}
+            //else
+            //{
+            //    trSelectPreset.Visible = true;
+            //    cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
+            //    cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
+            //    cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
+            //    cmbSelectedPresets.DataBind();
+            //    cmbSelectedPresets_SelectedIndexChanged(null, null);
+            //}
 
 
 
@@ -1915,6 +1955,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             DeviceFamilyProfilerOption.ProfilerOptionsDesc = "Custom Description";
             DeviceFamilyProfilerOption.ProjectTypeID = 3;
             DeviceFamilyProfilerOption.UserID = SessionManager.Instance.CurrentUser.UserId;
+            
 
             var rows = 0;
             bool bDestProfileType = false;
@@ -1946,7 +1987,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                                 ProfilerOptionValue = x.ProfilerOptionValue
                                                             }).ToList());
             }
+            
             DeviceOptionList.Add(DeviceFamilyProfilerOption);
+            UserID = SessionManager.Instance.CurrentUser.UserId;
+            DeviceFamilyProfilerOption = DeviceFamilyProfilerOption;
+            _presenterDeviceFamilyProfilerOption.InsertCustomDeviceFamilyProfilerOption();
             ViewState[_vsDeviceFamilyProfilerOption] = DeviceOptionList;
 
             BindPresets();
@@ -1965,7 +2010,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 trSelectPreset.Visible = true;
                 trPresetUplod.Visible = false;
-                cmbSelectedPresets.SelectedIndex = -1;
+                //cmbSelectedPresets.SelectedIndex = -1;
+                //cmbSelectedPresets.SelectedValue = "";
                 BindPresets();
             }
 

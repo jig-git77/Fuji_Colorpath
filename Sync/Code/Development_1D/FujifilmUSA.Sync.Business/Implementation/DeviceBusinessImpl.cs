@@ -287,7 +287,36 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDeviceFamilyProfilerOption"));
             return returnValue;
         }
-  
+
+        public int InsertCustomDeviceFamilyProfilerOption(DeviceFamilyProfilerOption deviceFamilyProfilerOption, int UserID)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var profilerOptionPresets = new XElement("ProfilerOptionPresetData",
+                                                       deviceFamilyProfilerOption.ProfilerOptionPresets.
+                                                             Select(x =>
+                                                                    new XElement("ProfilerOptionPreset",
+                                                                                 new XAttribute("ProfileTypeID", x.ProfileTypeId),
+                                                                                 new XAttribute("ProfilerOptionID", x.ProfilerOption.ProfilerOptionId),
+                                                                                 new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)
+                                                                        )).ToList());
+
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[dbo].[InsertCustomDeviceFamilyProfilerOption]",
+                            new object[]
+                                    {
+                                        UserID,
+                                        profilerOptionPresets.ToString()
+
+                                    });                    
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDeviceFamilyProfilerOption"));
+            return returnValue;
+        }
         #endregion
 
         #region ITaskBase Members

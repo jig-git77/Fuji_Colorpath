@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
-            _viewDeviceFamilyProfilerOption.ProfileOption = projectBusiness.GetDeviceFamilyProfilerOptionPreset(_viewDeviceFamilyProfilerOption.DeviceFamilyId,_viewDeviceFamilyProfilerOption.LicenseTypeId);
+            _viewDeviceFamilyProfilerOption.ProfileOption = projectBusiness.GetDeviceFamilyProfilerOptionPreset(_viewDeviceFamilyProfilerOption.DeviceFamilyId,_viewDeviceFamilyProfilerOption.LicenseTypeId, _viewDeviceFamilyProfilerOption.IsCustomPreset, _viewDeviceFamilyProfilerOption.UserID);
         }
 
         public void GetMetricSumTargetValues()
@@ -69,6 +69,13 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewDeviceFamilyProfilerOption.RetargetPrintStandardTypeName = Convert.ToString(dtDetails.Rows[0]["PrintStandard"]);
                 _viewDeviceFamilyProfilerOption.RetargetMetricTargetPresetName = Convert.ToString(dtDetails.Rows[0]["MetricTargetPresetName"]);
             }
+        }
+
+        public void InsertCustomDeviceFamilyProfilerOption()
+        {
+            var profilerSettingsBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
+            profilerSettingsBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
+            _viewDeviceFamilyProfilerOption.DeviceFamilyProfilerOptionID = profilerSettingsBusiness.InsertCustomDeviceFamilyProfilerOption(_viewDeviceFamilyProfilerOption.DeviceFamilyProfilerOption, _viewDeviceFamilyProfilerOption.UserID);
         }
 
     }

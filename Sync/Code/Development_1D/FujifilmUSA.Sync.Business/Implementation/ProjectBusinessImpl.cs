@@ -87,7 +87,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     Blanket = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Blanket"),
                                     BlanketAge = DataReader.ReadString(dsProject.Tables[1].Rows[0], "BlanketAge"),
                                     Screening = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Screening"),
-                                    Coating = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Coating")
+                                    Coating = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Coating"),
+                                    IsCustomProfilerOption = DataReader.ReadBoolean(dsProject.Tables[1].Rows[0], "IsCustomProfilerOption")
                                 };
                         }
                         if (dsProject.Tables[2].Rows.Count > 0)
@@ -420,13 +421,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstSourceList;
         }
 
-        public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId, short LicenseTypeId)
+        public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId, short LicenseTypeId, bool isCustomPreset, int UserID)
         {
             var presetList = new List<DeviceFamilyProfilerOption>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetDeviceFamilyProfilerOption", new object[] { deviceFamilyId, LicenseTypeId });
+                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetDeviceFamilyProfilerOption", new object[] { deviceFamilyId, LicenseTypeId, isCustomPreset,UserID });
                     if (dsPresetList != null && dsPresetList.Tables.Count > 0)
                     {
                         presetList = dsPresetList.Tables[0].AsEnumerable().Select(
@@ -800,8 +801,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@NewPaper_White_b", Type = DbType.Decimal, Value = project.NewPaper_White_b},
                                                      new Parameters() {ParameterName = "@NewPaper_Black_L", Type = DbType.Decimal, Value = project.NewPaper_Black_L},
                                                      new Parameters() {ParameterName = "@NewPaper_Black_a", Type = DbType.Decimal, Value = project.NewPaper_Black_a},
-                                                     new Parameters() {ParameterName = "@NewPaper_Black_b", Type = DbType.Decimal, Value = project.NewPaper_Black_b}
-
+                                                     new Parameters() {ParameterName = "@NewPaper_Black_b", Type = DbType.Decimal, Value = project.NewPaper_Black_b},
+                                                     new Parameters() {ParameterName = "@IsCustomProfilerOption", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomProfilerOption}
                                                  },
                                              new List<Parameters>()
                                                  {
@@ -1160,6 +1161,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         data.Add("deviceFamilyProfilerOptionId", dsPreviewData.Tables[5].Rows[0]["ProfilerOptionsName"].ToString());
                         data.Add("deviceFamilyProfilerOptionDesc", dsPreviewData.Tables[5].Rows[0]["ProfilerOptionsDesc"].ToString());
+                    }
+                    else
+                    {
+                        if (deviceFamilyProfilerOptionId == -1)
+                        {
+                            data.Add("deviceFamilyProfilerOptionId", "Custom");
+                            data.Add("deviceFamilyProfilerOptionDesc", "Custom Description");
+                        }
                     }
                     if (dsPreviewData.Tables[6].Rows.Count > 0)
                     {

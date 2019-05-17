@@ -81,7 +81,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new TempProjectInfo();
         }
 
-        public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId, short LicenseTypeId)
+        public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId, short LicenseTypeId, bool isCustomPreset, int UserID)
         {
             return new List<DeviceFamilyProfilerOption>();
         }

@@ -13,5 +13,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         int InsertDeviceFamily(DeviceFamily deviceFamily);
 
         int InsertDeviceFamilyProfilerOption(DeviceFamilyProfilerOption DeviceFamilyProfilerOption);
+        int InsertCustomDeviceFamilyProfilerOption(DeviceFamilyProfilerOption deviceFamilyProfilerOption, int UserID);
     }
 }
