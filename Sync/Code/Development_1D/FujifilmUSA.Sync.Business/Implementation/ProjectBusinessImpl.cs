@@ -637,6 +637,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.PrintCondition.BlanketAge,
                                                      project.PrintCondition.Screening,
                                                      project.PrintCondition.Coating,
+                                                     project.PrintCondition.IsCustomProfilerOption,
                                                      project.MeasurementSetting.ObserverType,
                                                      project.MeasurementSetting.Illuminant,
                                                      (project.MeasurementSetting.UVMode == -1 ? 2 : project.MeasurementSetting.UVMode),  //---For older project who doen't have UVMode, so by default it will pass -1 because of NULL, so in that case make it 2 "UVCut"

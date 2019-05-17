@@ -197,7 +197,7 @@
                                         </td>
                                         <td style="width: 450px">
                                             <asp:RadioButtonList ID="rdBtnPresetType" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rdBtnPresetType_SelectedIndexChanged" RepeatDirection="Horizontal">
-                                                <asp:ListItem Text="Regular" Value="False"></asp:ListItem>
+                                                <asp:ListItem Text="Regular" Value="False" Selected="True"></asp:ListItem>
                                                 <asp:ListItem Text="Custom" Value="True"></asp:ListItem>
                                             </asp:RadioButtonList>
                                         </td>
