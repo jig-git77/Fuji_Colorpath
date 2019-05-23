@@ -248,8 +248,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                     }
                 }
-                if(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) 
-                    trPresetoptionType.Visible = true;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //If only Sync4D project and selected branch has license allowed for custom presets, then only display option for custom
+                {
+                    if (SessionManager.Instance.CurrentDevice.License.IsCustomProfOptions == true)
+                    {
+                        trPresetoptionType.Visible = true;
+                    }
+                }
                 if (SessionManager.Instance.CurrentProject.PrintCondition != null)
                 {
                     rdBtnPresetType.SelectedValue = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption.ToString();

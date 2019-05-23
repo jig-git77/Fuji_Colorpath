@@ -34,6 +34,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        NumOfDevice = DataReader.ReadShort(x, "NumOfDevice"),
                                        LicenseDesc = DataReader.ReadString(x, "LicenseDesc"),
                                        IsOneOff = DataReader.ReadBoolean(x, "IsOneOff"),
+                                       IsCustomProfOptions = DataReader.ReadBoolean(x, "IsCustomProfOptions"),
                                        IsActive = DataReader.ReadBoolean(x, "IsActive"),
                                        Branch = new Branch()
                                        {
@@ -99,6 +100,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.NumOfDevice
                                         , license.LicenseDesc
                                         , license.IsOneOff
+                                        , license.IsCustomProfOptions
                                         , license.IsActive
                                         , licenseDetails.ToString()
                                     });
@@ -137,6 +139,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.NumOfDevice
                                         , license.LicenseDesc
                                         , license.IsOneOff
+                                        , license.IsCustomProfOptions
                                         , license.IsActive
                                         , licenseDetails.ToString()
                                     });
