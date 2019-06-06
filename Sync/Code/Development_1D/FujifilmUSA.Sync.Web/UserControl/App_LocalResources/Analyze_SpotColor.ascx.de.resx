@@ -541,7 +541,7 @@
     <value>Max ΔE94</value>
   </data>
   <data name="locMaxDeltaEResource1.Text" xml:space="preserve">
-    <value>Max ΔE</value>
+    <value>Maximum Predicted ∆E</value>
   </data>
   <data name="locMaximumDeltaResource1.Text" xml:space="preserve">
     <value>maximales Δ</value>
@@ -697,7 +697,7 @@
     <value>Bedruckstoff</value>
   </data>
   <data name="locMinDeltaEResource1.Text" xml:space="preserve">
-    <value>Min ΔE</value>
+    <value>Minimum Predicted ∆E</value>
   </data>
   <data name="locSummaryHeaderRun0Resource1" xml:space="preserve">
     <value>Optimal Device Prediction</value>

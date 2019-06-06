@@ -724,8 +724,8 @@
                                                                 <td style="font-size: 13px;">
                                                                     <asp:Localize Text="Upload Date:" ID="locUploadDate" runat="server" meta:resourcekey="locUploadDateResource1"></asp:Localize>
                                                                 </td>
-                                                                <td>
-                                                                    <span data-bind="text: MeasurementDate" data-format="MM/dd/yyyy HH:mm:ss tt"></span>
+                                                                <td>                                                                    
+                                                                    <span data-format="MM/dd/yyyy HH:mm:ss tt" data-bind="text: MeasurementDateFormatted"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr class="White">

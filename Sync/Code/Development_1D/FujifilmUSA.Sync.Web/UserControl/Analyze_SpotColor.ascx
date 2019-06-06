@@ -379,37 +379,37 @@
                 },
                 {
                     field: "ΔL",
-                    title: "<b>pΔL</b>",
+                    title: "<b title='Predicted ∆L*'>pΔL</b>",
                     width: 75
                 },
                 {
                     field: "Δa",
-                    title: "<b>pΔa</b>",
+                    title: "<b title='Predicted ∆a*'>pΔa</b>",
                     width: 75
                 },
                 {
                     field: "Δb",
-                    title: "<b>pΔb</b>",
+                    title: "<b title='Predicted ∆b*'>pΔb</b>",
                     width: 75
                 },
                 {
                     field: "ΔE",
-                    title: "<b>pΔE</b>",
+                    title: "<b title='Predicted ∆E'>pΔE</b>",
                     width: 80
                 },
                 {
                     field: "ΔE_T_P",
-                    title: "<b>ΔE_T_P</b>",
+                    title: "<b title='∆E Target-Prediction'>ΔE_T_P</b>",
                     width: 100
                 },
                 {
                     field: "ΔE_M_T",
-                    title: "<b>ΔE_M_T</b>",
+                    title: "<b title='∆E Measured-Target'>ΔE_M_T</b>",
                     width: 100
                 },
                 {
                     field: "ΔE_M_P",
-                    title: "<b>ΔE_M_P</b>",
+                    title: "<b title='∆E Measured-Prediction'>ΔE_M_P</b>",
                     width: 100
                 }
             ],
@@ -421,11 +421,13 @@
                     this.hideColumn(5);
                     this.hideColumn(6);
                     this.hideColumn(7);
+                    $("#lnkPredicationExplainerRun0").css('display', 'none');
                 }
                 else {
                     this.hideColumn(8);
                     this.hideColumn(9);
                     this.hideColumn(10);
+                    $("#lnkPredicationExplainer").css('display', 'none');
                 }
 
 
@@ -444,9 +446,22 @@
 
         });
 
+        $("#lnkPredicationExplainerRun0").kendoTooltip({
+            position: "right",
+            content: '<table style="text-align: left;"><tr><td><b>Target vs. Predicted</b></td><td> Compares the defined target Lab values to the <br/><u>optimal</u> device performance for a given color.</td></tr></table>'
+        }).data("kendoTooltip");
+
+
+        $("#lnkPredicationExplainer").kendoTooltip({
+            position: "right",
+            content: '<table style="text-align: left;"><tr><td><b>Target vs. Predicted</b></td><td> Compares the defined target Lab values to the <br/><u>optimal</u> device performance for a given color.</td></tr>' +
+                '<tr><td><b>Measured vs. Target</b></td><td> Compares the defined target Lab values to the <br/><u>actual</u> device performance for a given color.</td></tr>' +
+                '<tr><td><b>Measured vs. Predicted</b></td><td> Compares the optimal device performance to the <br/>actual device performance for a given color.</td></tr></table>'
+        }).data("kendoTooltip");
+
 
         $("#divPathDetails").kendoTooltip({
-            filter: "tr", //this filter selects the first column cells
+            filter: "tbody tr", //this filter selects the first column cells
             position: "right",
             content: 'Click a row for more detail'
         }).data("kendoTooltip");
@@ -1172,12 +1187,12 @@
                                                                     </td>
                                                                 </tr>
                                                             </table>
-                                                            <table id="tblSecondRunDeltas" runat="server" visible="false" style="width: 100%;">
+                                                            <%--<table id="tblSecondRunDeltas" runat="server" visible="false" style="width: 100%;">
                                                                 <tr>
                                                                     <td style="width: 42%;"></td>
-                                                                    <td><span style="font-weight: bold;">ΔE_T_P</span></td>
-                                                                    <td><span style="font-weight: bold;">ΔE_M_T</span></td>
-                                                                    <td><span style="font-weight: bold;">ΔE_M_P</span></td>
+                                                                    <td><span style="font-weight: bold;">∆E Target-Prediction</span></td>
+                                                                    <td><span style="font-weight: bold;">∆E Measured-Target</span></td>
+                                                                    <td><span style="font-weight: bold;">∆E Measured-Prediction</span></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><span style="font-weight: bold;">
@@ -1214,6 +1229,58 @@
                                                                         <asp:Label runat="server" ID="lblMaxEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                     <td>
                                                                         <asp:Label runat="server" ID="lblMaxEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="4">
+                                                                        <hr />
+                                                                    </td>
+                                                                </tr>
+                                                            </table>--%>
+                                                            <table id="tblSecondRunDeltas" runat="server" visible="false" style="width: 100%;">
+                                                                <tr>
+                                                                    <td style="width: 42%;"></td>
+                                                                    <td><span style="font-weight: bold;">
+                                                                        <asp:Localize Text="Average ΔE" runat="server"
+                                                                            ID="Localize2" meta:resourcekey="locMinimumDeltaResource"></asp:Localize></span>
+                                                                    </td>
+                                                                    <td><span style="font-weight: bold;">
+                                                                        <asp:Localize Text="Average ΔE" runat="server"
+                                                                            ID="locAverageDelta" meta:resourcekey="locAverageDeltaResource1"></asp:Localize></span>
+                                                                    </td>
+                                                                    <td><span style="font-weight: bold;">
+                                                                        <asp:Localize Text="Average ΔE" runat="server"
+                                                                            ID="Localize1" meta:resourcekey="locMaximumDeltaResource1"></asp:Localize>
+                                                                    </span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><span style="font-weight: bold;">∆E Target-Prediction</span></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMinETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblAvgETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMaxETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                        
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><span style="font-weight: bold;">∆E Measured-Target</span></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMinEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>                                                                        
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblAvgEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMaxEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                        
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><span style="font-weight: bold;">∆E Measured-Prediction</span></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMinEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblAvgEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>                                                                        
+                                                                    <td>
+                                                                        <asp:Label runat="server" ID="lblMaxEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
+                                                                        
                                                                 </tr>
                                                                 <tr>
                                                                     <td colspan="4">
@@ -1310,6 +1377,8 @@
                                     <div class="tab_top">&nbsp;</div>
                                     <div class="tab_middle">
                                         <div class="combopart">
+                                            <a id="lnkPredicationExplainerRun0" style="position: absolute; margin-top: -43px; right: 0; margin-right: 50px; color: black; font-size: larger;"><u>What am I looking at?</u></a>
+                                            <a id="lnkPredicationExplainer" style="position: absolute; margin-top: -43px; right: 0; margin-right: 50px; color: black; font-size: larger;"><u>What am I looking at?</u></a>
                                             <div style="padding-left: 10px;">
                                                 <div id="divPathDetails"></div>
                                             </div>

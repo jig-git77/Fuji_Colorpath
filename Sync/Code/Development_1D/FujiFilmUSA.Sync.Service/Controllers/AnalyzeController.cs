@@ -327,17 +327,20 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         ws.Cell("A" + 1).Value = cTable.Columns[0].ColumnName;
                         ws.Cell("B" + 1).Value = cTable.Columns[1].ColumnName;
                         ws.Cell("C" + 1).Value = cTable.Columns[2].ColumnName;
-                        ws.Cell("D" + 1).Value = cTable.Columns[3].ColumnName;
-                        ws.Cell("E" + 1).Value = cTable.Columns[4].ColumnName;
-                        ws.Cell("F" + 1).Value = cTable.Columns[5].ColumnName;
+                        //ws.Cell("D" + 1).Value = cTable.Columns[3].ColumnName;
+                        //ws.Cell("E" + 1).Value = cTable.Columns[4].ColumnName;
+                        //ws.Cell("F" + 1).Value = cTable.Columns[5].ColumnName;
+                        ws.Cell("D" + 1).Value = "∆E Target-Prediction";
+                        ws.Cell("E" + 1).Value = "∆E Measured-Target";
+                        ws.Cell("F" + 1).Value = "∆E Measured-Prediction";
 
                         //for spot run 0
                         if (measurementID == 0)
                         {
-                            ws.Cell("D" + 1).Value = "pΔL";
-                            ws.Cell("E" + 1).Value = "pΔa";
-                            ws.Cell("F" + 1).Value = "pΔb";
-                            ws.Cell("G" + 1).Value = "pΔE";
+                            ws.Cell("D" + 1).Value = "Predicted ∆L*";
+                            ws.Cell("E" + 1).Value = "Predicted ∆a*";
+                            ws.Cell("F" + 1).Value = "Predicted ∆b*";
+                            ws.Cell("G" + 1).Value = "Predicted ∆E";
                         }
 
 

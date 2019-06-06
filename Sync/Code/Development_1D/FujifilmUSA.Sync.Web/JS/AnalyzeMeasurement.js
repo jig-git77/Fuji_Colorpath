@@ -883,7 +883,9 @@ function BindMeasurementSummary() {
                 if (response.data != null) {
                     if (response.data.length > 0) {
                         var measurements = response.data;
-                        var viewModel = kendo.observable(measurements[0]);
+                        var measurement = measurements[0];                        
+                        measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
+                        var viewModel = kendo.observable(measurement);
                         kendo.bind($("#divMeasurementSummary"), viewModel);
                     }
                 }

@@ -1365,7 +1365,7 @@ namespace FujifilmUSA.Sync.Common
                                     }
                                     else
                                     {
-                                        builder.Append("<tr><th></th><th colspan='2'>ΔT_P</th></tr>");
+                                        builder.Append("<tr><th></th><th colspan='2'  style='text-align: right;'>ΔT_P</th></tr>");
                                         builder.Append("<tr><th>L*</th><td colspan='2'>" + string.Format("{0:0.00}", item.TargetL - item.CIELAB_L) + "</td></tr>");
                                         builder.Append("<tr><th>a*</th><td colspan='2'>" + string.Format("{0:0.00}", item.Targeta - item.CIELAB_a) + "</td></tr>");
                                         builder.Append("<tr><th>b*</th><td colspan='2'>" + string.Format("{0:0.00}", item.Targetb - item.CIELAB_b) + "</td></tr>");
@@ -2093,7 +2093,7 @@ namespace FujifilmUSA.Sync.Common
         {
             try
             {
-                int rowPerPage = 44;
+                int rowPerPage = 43;
                 //========== Object of PDF ==========//
                 Doc theDoc = new Doc();
 
@@ -2154,11 +2154,11 @@ namespace FujifilmUSA.Sync.Common
                     }
 
                     StringBuilder PatchStr = new StringBuilder();
-                    PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th>SpotID</th><th>Color</th><th>SpotName</th>");
+                    PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th style='text-align: left;'>SpotID</th><th style='text-align: left;'>Color</th><th style='text-align: left;'>SpotName</th>");
                     if (measurementID == 0)
-                        PatchStr.Append("<th>pΔL</th><th>pΔa</th><th>pΔb</th><th>pΔE</th></tr>");
+                        PatchStr.Append("<th style='text-align: right;'>Predicted ∆L*</th><th style='text-align: right;'>Predicted ∆a*</th><th style='text-align: right;'>Predicted ∆b*</th><th style='text-align: right;'>Predicted ∆E</th></tr>");
                     else
-                        PatchStr.Append("<th>ΔE_T_P</th><th>ΔE_M_T</th><th>ΔE_M_P</th></tr>");
+                        PatchStr.Append("<th style='text-align: right;'>∆E Target-Prediction</th><th style='text-align: right;'>∆E Measured-Target</th><th style='text-align: right;'>∆E Measured-Prediction</th></tr>");
                     //foreach (DataRow row in dtPatchDetails.AsEnumerable().fi(5).CopyToDataTable())
                     for (int j = currentIndex; j < rowLimit; j++)
                     {
@@ -2166,9 +2166,9 @@ namespace FujifilmUSA.Sync.Common
                         PatchStr.Append("<td><span id='sp' style='display:inline-block;background-color:" + Convert.ToString(dtPatchDetails.Rows[j]["HTMLColor"]) + ";height:14px;width:68px;'></span></td>");
                         PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["SpotName"]) + " </td>");
                         if (measurementID == 0)
-                            PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔL"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["Δa"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["Δb"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE"]) + "</td>");
+                            PatchStr.Append("<td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔL"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["Δa"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["Δb"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE"]) + "</td>");
                         else
-                            PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_T_P"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_T"]) + "</td><td>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_P"]) + "</td>");
+                            PatchStr.Append("<td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_T_P"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_T"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_P"]) + "</td>");
                         PatchStr.Append("</tr>");
                     }
                     PatchStr.Append("</table>");

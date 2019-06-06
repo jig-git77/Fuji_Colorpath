@@ -670,7 +670,7 @@
     <value>メディア：</value>
   </data>
   <data name="locMinDeltaEResource1.Text" xml:space="preserve">
-    <value>Min ΔE</value>
+    <value>Minimum Predicted ∆E</value>
   </data>
   <data name="locSummaryHeaderRun0Resource1" xml:space="preserve">
     <value>Optimal Device Prediction</value>
