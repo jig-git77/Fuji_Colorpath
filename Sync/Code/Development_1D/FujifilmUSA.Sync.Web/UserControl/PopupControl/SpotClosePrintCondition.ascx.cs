@@ -205,6 +205,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         public FujifilmUSA.Sync.Business.Messages.CurveDataResponse CurveData { get; set; }
         public DataTable dtPatchDetails { get; set; }
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
+        public string SpotProjectIDs { get; set; }
         #endregion
     }
 }

@@ -2568,6 +2568,27 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
             return Convert.ToInt32(outParam.Value);
         }
+
+        public DataTable GetSpotPatchDetailsForCMYKExportBySpotProject(string spotProjectIds)
+        {
+            string storedProc = "CPSpot.GetCMYKDataBySpotProjectIDs";
+
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { spotProjectIds });
+                    if (dsMeasurements.Tables.Count > 0)
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetCMYKdataByOptimizeRunID"));
+            return dtPatchDetails;
+        }
         #endregion
 
         #region ITaskBase Members

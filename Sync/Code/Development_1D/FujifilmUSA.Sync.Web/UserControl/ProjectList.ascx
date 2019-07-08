@@ -211,6 +211,10 @@
                 ShowContentDuringLoad="false" Title="Close Print Condition" Width="720" Height="200"
                 Behaviors="Move,Close">
             </telerik:RadWindow>
+            <telerik:RadWindow ID="ReportSpotLibraryExportWindow" runat="server" VisibleStatusbar="false"
+                ShowContentDuringLoad="false" Title="Spot Library Export" Width="730" Height="300"
+                Behaviors="Close, Move" Behavior="Close, Move">
+            </telerik:RadWindow>
         </Windows>
     </telerik:RadWindowManager>
     <input id="Hidden_TotalProjects" type="hidden" runat="server" value="0" />

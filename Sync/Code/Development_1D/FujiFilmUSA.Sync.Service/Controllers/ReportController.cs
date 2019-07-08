@@ -875,10 +875,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         System.IO.StreamWriter swM;
                         System.IO.StreamWriter swY;
                         System.IO.StreamWriter swK;
-                        swC = System.IO.File.CreateText(CurveFilePath  + "Cyan.csv");
-                        swM = System.IO.File.CreateText(CurveFilePath  + "Magenta.csv");
-                        swY = System.IO.File.CreateText(CurveFilePath  + "Yellow.csv");
-                        swK = System.IO.File.CreateText(CurveFilePath  + "Black.csv");
+                        swC = System.IO.File.CreateText(CurveFilePath + "Cyan.csv");
+                        swM = System.IO.File.CreateText(CurveFilePath + "Magenta.csv");
+                        swY = System.IO.File.CreateText(CurveFilePath + "Yellow.csv");
+                        swK = System.IO.File.CreateText(CurveFilePath + "Black.csv");
 
 
                         for (int i = 0; i < CurveData.CurveExportView.Count; i++)
@@ -898,10 +898,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         swY.Close();
                         swK.Close();
 
-                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath  + "Cyan.csv");
-                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath  + "Magenta.csv");
-                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath  + "Yellow.csv");
-                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath  + "Black.csv");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + "Cyan.csv");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + "Magenta.csv");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + "Yellow.csv");
+                        ZipManager.AddFileToZip(CurveFilePath + zipCurveFileName, CurveFilePath + "Black.csv");
 
                         //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), CurveFileName + "_Nexus.zip", CurveFileName + "_Nexus.zip");
                         #endregion
@@ -1027,28 +1027,51 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 else
                 {
                     DetermineCulture();
-                    OptimizeRunId = model.OptimizationRunId;
-                    _presenterExport.GetSpotPatchDetailsForCMYKExport();
+
+                    if (!string.IsNullOrEmpty(model.SpotProjectIDs))
+                    {
+                        SpotProjectIDs = model.SpotProjectIDs;
+                        _presenterExport.GetSpotPatchDetailsForCMYKExportBySpotProject();
+                    }
+                    else
+                    {
+                        OptimizeRunId = model.OptimizationRunId;
+                        _presenterExport.GetSpotPatchDetailsForCMYKExport();
+                    }
+
 
                     List<Patch> listPatch = new List<Patch>();
+
                     if (dtPatchDetails != null && dtPatchDetails.Rows.Count > 0)
                     {
-                        foreach (DataRow dr in dtPatchDetails.Rows)
+                        if (dtPatchDetails.Columns.Contains("DuplicatePatchError"))
                         {
-                            Patch patch = new Patch()
+                            if (Convert.ToInt32(dtPatchDetails.Rows[0]["DuplicatePatchError"]) == -1)
                             {
-                                PatchID = Convert.ToInt32(dr["SpotID"]),
-                                ColorName = Convert.ToString(dr["SpotName"]),
-                                Cmyk_C = Convert.ToDouble(dr["CMYK_C"]),
-                                Cmyk_M = Convert.ToDouble(dr["CMYK_M"]),
-                                Cmyk_Y = Convert.ToDouble(dr["CMYK_Y"]),
-                                Cmyk_K = Convert.ToDouble(dr["CMYK_K"]),
-                                Cie_L = Convert.ToDouble(dr["TargetL"]),
-                                Cie_a = Convert.ToDouble(dr["Targeta"]),
-                                Cie_b = Convert.ToDouble(dr["Targetb"]),
-                                Spot1 = 0
-                            };
-                            listPatch.Add(patch);
+                                httpResponse.Data = "-1";
+                                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                                return actionResult;
+                            }
+                        }
+                        else
+                        {
+                            foreach (DataRow dr in dtPatchDetails.Rows)
+                            {
+                                Patch patch = new Patch()
+                                {
+                                    PatchID = Convert.ToInt32(dr["SpotID"]),
+                                    ColorName = Convert.ToString(dr["SpotName"]),
+                                    Cmyk_C = Convert.ToDouble(dr["CMYK_C"]),
+                                    Cmyk_M = Convert.ToDouble(dr["CMYK_M"]),
+                                    Cmyk_Y = Convert.ToDouble(dr["CMYK_Y"]),
+                                    Cmyk_K = Convert.ToDouble(dr["CMYK_K"]),
+                                    Cie_L = Convert.ToDouble(dr["TargetL"]),
+                                    Cie_a = Convert.ToDouble(dr["Targeta"]),
+                                    Cie_b = Convert.ToDouble(dr["Targetb"]),
+                                    Spot1 = 0
+                                };
+                                listPatch.Add(patch);
+                            }
                         }
                     }
 
@@ -1062,7 +1085,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     else
                         fileName = ExportCMYK_DBDFile(listPatch, model);
 
-                   
+
                     if (!string.IsNullOrEmpty(fileName))
                         fileName = "/UploadFiles/CMYKFile/" + fileName;
                     httpResponse.Data = fileName;
@@ -1620,7 +1643,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private string ExportColorgateFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
         {
             string directoryFilePath = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/");
-            string fileName = detail.FileName + ".cct";            
+            string fileName = detail.FileName + ".cct";
             string SpotName_Parameter = "";
             if (!Directory.Exists(directoryFilePath))
                 Directory.CreateDirectory(directoryFilePath);
@@ -1666,14 +1689,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             string fileName = detail.FileName + ".xml";
             string SpotName_Parameter = "";
             if (!Directory.Exists(directoryFilePath))
-                Directory.CreateDirectory(directoryFilePath);                       
+                Directory.CreateDirectory(directoryFilePath);
 
             System.IO.StreamWriter sw;
             sw = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + fileName);
 
             //--------Start: Header------------//
             sw.WriteLine("<MediaDeviceColors>");
-            sw.WriteLine("<ColorList server=" + "\"" + detail.Server + "\"" + " model=" + "\"" + detail.Model + "\"" + " media=" + "\"" +detail.Media + "\"" + " resolution=" + "\"" + detail.Resolution + "\"" + " quality=" + "\"" + detail.Quality + "\"" + " mode=" + "\"" + detail.Mode + "\"" + ">");
+            sw.WriteLine("<ColorList server=" + "\"" + detail.Server + "\"" + " model=" + "\"" + detail.Model + "\"" + " media=" + "\"" + detail.Media + "\"" + " resolution=" + "\"" + detail.Resolution + "\"" + " quality=" + "\"" + detail.Quality + "\"" + " mode=" + "\"" + detail.Mode + "\"" + ">");
             //--------End: Header--------------//
 
             for (int i = 0; i < listPatch.Count; i++)
@@ -1697,7 +1720,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private string ExportCMYK_DBDFile(List<Patch> listPatch, SpotLibrayCMYKExport detail)
         {
             string SpotName_Header, SpotName_Parameter;
-            System.IO.StreamWriter sw = null;            
+            System.IO.StreamWriter sw = null;
             string directoryName = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + detail.FileName;
             if (!Directory.Exists(directoryName))
                 Directory.CreateDirectory(directoryName);
@@ -1760,7 +1783,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             if (Directory.Exists(directoryName))
                 Directory.Delete(directoryName, true);
 
-            return detail.FileName+".zip";
+            return detail.FileName + ".zip";
             //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".zip", CMYKFileName + ".zip");
         }
         #endregion
@@ -1820,6 +1843,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public int SpotProjectId { get; set; }
         public DataTable dtPatchDetails { get; set; }
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
+        public string SpotProjectIDs { get; set; }
         #endregion
     }
 }

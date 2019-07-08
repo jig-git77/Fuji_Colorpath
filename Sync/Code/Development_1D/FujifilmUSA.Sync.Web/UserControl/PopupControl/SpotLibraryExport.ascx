@@ -7,11 +7,11 @@
 <style>
     .tblExport td {
         padding: 3px;
-    }   
+    }
 </style>
 <script type="text/javascript">
 
-    
+
     function Close() {
         var oWindow = GetMeasurementRadWindow();
         GetMeasurementRadWindow().close();
@@ -25,7 +25,7 @@
         return oWindow;
     }
 
-    function test() {     
+    function ExportCMYKPatches() {
         var SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
         if (validate()) {
             var apiParameter = {
@@ -39,23 +39,28 @@
                 Mode: $('#txtMode').val(),
                 Quality: $('#txtQuality').val(),
                 InkPoolID: $('#txtInkPoolIOD').val(),
-                Comment: $('#txtComment').val()
-            }            
+                Comment: $('#txtComment').val(),
+                SpotProjectIDs: $('#hdnSpotProjectIDs').val()
+            }
             kendo.ui.progress($('#divExport'), true);
             $.ajax({
                 type: "POST",
-                url: SERVICE_BASE_URL + 'api/Report/ExportSpotCMYKLibraray',                
+                url: SERVICE_BASE_URL + 'api/Report/ExportSpotCMYKLibraray',
                 data: apiParameter,
                 dataType: "json",
-                success: function (response) {                    
+                success: function (response) {
                     kendo.ui.progress($('#divExport'), false);
                     if (response.data != null) {
-                        console.log(response.data);
-                        var fileName = '~' + response.data;
-                        window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                        if (response.data != "-1") {
+                            var fileName = '~' + response.data;
+                            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                        } else {
+                            alert('Duplicate patches are available in selected spot projects');
+                        }
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    debugger;
                     kendo.ui.progress($('#divExport'), false);
                     console.log(XMLHttpRequest.responseText);
                 }
@@ -65,7 +70,7 @@
     }
 
     function validate() {
-        var isSuccess = true;               
+        var isSuccess = true;
         if ($("#cmbCMYKLibrary").val() == "") {
             isSuccess = false;
             $("#cmbCMYKLibrary").parent("div").next('div').find('span').show();
@@ -116,7 +121,7 @@
                     $("#txtComment").parent("div").next('div').find('span').show();
                 }
             }
-        }        
+        }
         return isSuccess;
     }
 </script>
@@ -138,6 +143,7 @@
                     <div class="section_middle">
                         <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
                         <asp:HiddenField runat="server" ID="hdnOptiomizatoinRunID" ClientIDMode="Static" />
+                        <asp:HiddenField runat="server" ID="hdnSpotProjectIDs" ClientIDMode="Static" />
                         <div class="combopart">
                             <div>
                             </div>
@@ -394,7 +400,7 @@
                     </asp:LinkButton>
                 </div>
                 <div class="buttonright">
-                    <asp:LinkButton runat="server" ID="lbtnExportCMYK" CssClass="gray_bt" OnClientClick="return test()">
+                    <asp:LinkButton runat="server" ID="lbtnExportCMYK" CssClass="gray_bt" OnClientClick="return ExportCMYKPatches()">
                         <span>
                             <asp:Localize ID="locExport" runat="server" Text="Export" meta:resourcekey="locGenetareReportResource1"></asp:Localize></span>
                     </asp:LinkButton>

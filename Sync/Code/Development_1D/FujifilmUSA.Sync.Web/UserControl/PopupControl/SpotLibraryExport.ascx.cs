@@ -35,7 +35,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         protected void Page_Load(object sender, EventArgs e)
         {
             hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
-            hdnOptiomizatoinRunID.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
+            if (string.IsNullOrEmpty(Request.QueryString["SpotProjectIds"]))
+            {
+                hdnOptiomizatoinRunID.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
+            }
+            else
+            {
+                hdnSpotProjectIDs.Value = Convert.ToString(Request.QueryString["SpotProjectIds"]);
+            }
+            
         }
         #endregion
 
@@ -87,6 +95,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         public int SpotProjectId { get; set; }
         public DataTable dtPatchDetails { get; set; }
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
+        public string SpotProjectIDs { get; set; }
         #endregion
 
 

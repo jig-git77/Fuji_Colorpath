@@ -530,7 +530,7 @@ function detailInit(e) {
                         data: { projectID: pID },
                         dataType: "json",
                         success: function (response) {
-                            var result = JSON.parse(response.data);                            
+                            var result = JSON.parse(response.data);
                             hdfSpotProjectAllowed.val(result.isAllowSpotProject);
                             options.success(result.SpotProjectLibraries);
                         },
@@ -573,10 +573,10 @@ function detailInit(e) {
             //template: Resources.MsgNoRecords
             template: ''
         },
-        toolbar: [{ 'name': 'createSpot', template: '<button id="btnCreateSpotProject" onclick="return Redirect(' + pID + ',\'AddSpotProject\');" class=\'k-button\'>' + Resources.CreateNewLibrary + '</button>' }],
+        toolbar: [{ 'name': 'createSpot', template: '<div><div style="float: left;"><button id="btnCreateSpotProject" onclick="return Redirect(' + pID + ',\'AddSpotProject\');" class=\'k-button\'>' + Resources.CreateNewLibrary + '</button></div><div  style="float: right;"><button id="btnExportSpotProject" onclick="return ShowSpotLibraryExportWindow(this);" class=\'k-button\'>Export Combined Library</button></div></div>' }],
         dataBound: function (e) {
             //console.log('chile bound event');
-            
+
             var dataSource = this.dataSource;
             this.element.find('tr').each(function () {
                 var row = $(this);
@@ -606,18 +606,19 @@ function detailInit(e) {
                             row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowSpotClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','')");
                             SpotprojectTypeImagePath = 'Images/SpotProject_Certified.png';
                             SpotprojectTypeTooltip = Resources.SpotProject_Certified;
+                                                                                                                                                                                                                                                   row.find("td #chkCombinedLibrary").prop('disabled', false);
                             break;
-                    }                    
+                    }
                     if (SpotprojectTypeImagePath != '') {
                         row.find("td #imgSpotProject").attr('src', SpotprojectTypeImagePath);   //set the Spot project type image path
                         row.find("td #imgSpotProject").attr('title', SpotprojectTypeTooltip);   //set the Spot project type tooltip
                     }
 
-                    
+
                 }
 
             });
-
+            
             //  enable/disabled button as per spot project limit
             var gridCurrent = $(e.sender.tbody).closest('.k-grid');
             var spotProjectAllowed = hdfSpotProjectAllowed.val() == 'true';
@@ -625,6 +626,9 @@ function detailInit(e) {
                 $(gridCurrent).find('.k-grid-toolbar').hide();
             } else {
                 $(gridCurrent).find('.k-grid-toolbar').show();
+                if (dataSource._data.length == 0) {
+                    $(gridCurrent).find('.k-grid-toolbar').find('#btnExportSpotProject').hide();
+                }
             }
         },
         columns: [
@@ -632,6 +636,12 @@ function detailInit(e) {
                 filterable: false,
                 title: "<b></b>",
                 template: "<center><a id='lnkSpotProject'><img id='imgSpotProject' title=''  src='' style='width: 20px;'></img></a></center>",
+                width: 40
+            },
+            {
+                filterable: false,
+                title: "<b></b>",
+                template: "<center><input type='checkbox' id='chkCombinedLibrary' data-target='#=SpotProjectId#' disabled='disabled'/></center>",
                 width: 40
             },
             {
@@ -721,7 +731,7 @@ function deleteProject(id) {
         $.ajax({
             type: "POST",
             url: SERVICE_BASE_URL + "api/Project/DeleteProject?projectID=" + id,
-            success: function (response) {                
+            success: function (response) {
                 $kendoProjectList.data('kendoGrid').dataSource.read();
                 $kendoProjectList.data('kendoGrid').refresh();
             },
@@ -760,5 +770,21 @@ function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId, Dl
     var oWindow;
     oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
     oWindow.show();
+    return false;
+}
+
+function ShowSpotLibraryExportWindow(btn) {
+    if ($(btn).closest('.k-grid').find('input[type="checkbox"]:checked').length > 0) {
+        var spotIDs = '';
+        $.each($(btn).closest('.k-grid').find('input[type="checkbox"]:checked'), function (index, item) {
+            spotIDs = spotIDs + ($(item).attr('data-target') + ',');
+        });
+        var oWindow;
+        oWindow = window.radopen("PopupSpotLibraryExport.aspx?OptimizationRunId=101&SpotProjectIds=" + spotIDs, "ReportSpotLibraryExportWindow");
+        oWindow.show();
+
+    } else {
+        alert('Please select atleast one certified project.');
+    }    
     return false;
 }

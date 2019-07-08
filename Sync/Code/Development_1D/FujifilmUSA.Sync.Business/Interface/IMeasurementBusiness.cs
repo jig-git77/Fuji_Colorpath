@@ -69,5 +69,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Measurement GetSpotMeasurementPatchDetailsForExport(int OptimizeRunId);
         Measurement GetValidationMeasurementPatchDetailsForExport(int MeasurementId);
         int ImportMeasurement(Measurement measurement, int LicenseTypeID);
+        DataTable GetSpotPatchDetailsForCMYKExportBySpotProject(string spotProjectIds);
     }
 }

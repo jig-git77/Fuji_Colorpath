@@ -251,6 +251,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+        public DataTable GetSpotPatchDetailsForCMYKExportBySpotProject(string spotProjectIds)
+        {
+            return new DataTable();
+        }
         #endregion
 
         #region ITaskBase Members

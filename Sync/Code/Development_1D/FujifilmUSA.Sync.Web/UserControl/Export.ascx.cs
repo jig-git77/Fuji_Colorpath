@@ -372,6 +372,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int SpotProjectId { get; set; }
         public DataTable dtPatchDetails { get; set; }
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
+        public string SpotProjectIDs { get; set; }
         #endregion
 
 

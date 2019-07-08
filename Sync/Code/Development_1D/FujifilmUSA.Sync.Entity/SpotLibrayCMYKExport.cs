@@ -19,5 +19,6 @@ namespace FujifilmUSA.Sync.Entity
         public string Quality { get; set; }
         public string InkPoolID { get; set; }
         public string Comment { get; set; }
+        public string SpotProjectIDs { get; set; }
     }
 }

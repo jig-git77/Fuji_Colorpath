@@ -18,5 +18,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int SpotProjectId { get; set; }
         DataTable dtPatchDetails { get; set; }
         SpotProjectChartSetting SpotProjectChartSetting { get; set; }
+        string SpotProjectIDs { get; set; }
     }
 }

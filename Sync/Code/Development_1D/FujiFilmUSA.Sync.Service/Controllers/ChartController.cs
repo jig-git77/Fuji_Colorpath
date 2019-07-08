@@ -1266,6 +1266,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public short CurveTypeId { get; set; }
         public FujifilmUSA.Sync.Business.Messages.CurveDataResponse CurveData { get; set; }
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
+        public string SpotProjectIDs { get; set; }
         #endregion
     }
 }
