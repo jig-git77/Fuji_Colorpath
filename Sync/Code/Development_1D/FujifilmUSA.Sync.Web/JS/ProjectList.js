@@ -557,6 +557,9 @@ function detailInit(e) {
                         },
                         CreateDate: {
                             from: "CreateDate"
+                        },
+                        IsSelected: {
+                            type: "boolean"
                         }
                     }
                 }
@@ -606,7 +609,7 @@ function detailInit(e) {
                             row.find("td #lnkSpotProject").attr("onclick", "javascript: return ShowSpotClosePrintConditionWindow('" + data.SpotProjectId + "','" + data.ProjectName + "','" + ELicenseType.SpotLibrary + "','')");
                             SpotprojectTypeImagePath = 'Images/SpotProject_Certified.png';
                             SpotprojectTypeTooltip = Resources.SpotProject_Certified;
-                                                                                                                                                                                                                                                   row.find("td #chkCombinedLibrary").prop('disabled', false);
+                            row.find("td #chkCombinedLibrary").prop('disabled', false);
                             break;
                     }
                     if (SpotprojectTypeImagePath != '') {
@@ -618,7 +621,7 @@ function detailInit(e) {
                 }
 
             });
-            
+
             //  enable/disabled button as per spot project limit
             var gridCurrent = $(e.sender.tbody).closest('.k-grid');
             var spotProjectAllowed = hdfSpotProjectAllowed.val() == 'true';
@@ -641,7 +644,8 @@ function detailInit(e) {
             {
                 filterable: false,
                 title: "<b></b>",
-                template: "<center><input type='checkbox' id='chkCombinedLibrary' data-target='#=SpotProjectId#' disabled='disabled'/></center>",
+                //template: "<center><input type='checkbox' id='chkCombinedLibrary' data-target='#=SpotProjectId#' disabled='disabled'/></center>",
+                template: "<center><input type='checkbox' id='chkCombinedLibrary' onclick='spotProjectSelected(this)' #=IsSelected?'checked':''# disabled='disabled'/></center>",
                 width: 40
             },
             {
@@ -744,6 +748,15 @@ function deleteProject(id) {
     }
 }
 
+function spotProjectSelected(chk) {
+    var uid = $(chk).closest("[data-uid]").data("uid")
+    var dataSource = $(chk).closest('.k-grid').data("kendoGrid").dataSource;
+    //var dataSource = $('#divPathDetails').data("kendoGrid").dataSource;
+    var item = dataSource.getByUid(uid);
+    item.dirty = true;
+    item.IsSelected = $(chk).prop('checked');
+}
+
 
 function Redirect(projectID, type) {
     document.location.href = 'RedirectFromProjectList.aspx?RedirectType=' + type + '&ProjectID=' + projectID;
@@ -774,17 +787,22 @@ function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId, Dl
 }
 
 function ShowSpotLibraryExportWindow(btn) {
-    if ($(btn).closest('.k-grid').find('input[type="checkbox"]:checked').length > 0) {
-        var spotIDs = '';
-        $.each($(btn).closest('.k-grid').find('input[type="checkbox"]:checked'), function (index, item) {
-            spotIDs = spotIDs + ($(item).attr('data-target') + ',');
-        });
+    var spotIDs = '';
+    var isSpotProjectSelected = false;
+    var dsSpots = $(btn).closest('.k-grid').data("kendoGrid").dataSource._data;
+    for (var index = 0; index < dsSpots.length; index++) {
+        if (dsSpots[index]['IsSelected']) {
+            spotIDs = spotIDs + (dsSpots[index]['SpotProjectId'] + ',');
+            isSpotProjectSelected = true;
+        }
+    };    
+    if (isSpotProjectSelected) {
         var oWindow;
         oWindow = window.radopen("PopupSpotLibraryExport.aspx?OptimizationRunId=101&SpotProjectIds=" + spotIDs, "ReportSpotLibraryExportWindow");
         oWindow.show();
-
     } else {
         alert('Please select atleast one certified project.');
-    }    
+    }
+   
     return false;
 }
