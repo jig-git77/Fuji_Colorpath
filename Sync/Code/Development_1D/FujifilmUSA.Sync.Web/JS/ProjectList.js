@@ -578,8 +578,6 @@ function detailInit(e) {
         },
         toolbar: [{ 'name': 'createSpot', template: '<div><div style="float: left;"><button id="btnCreateSpotProject" onclick="return Redirect(' + pID + ',\'AddSpotProject\');" class=\'k-button\'>' + Resources.CreateNewLibrary + '</button></div><div  style="float: right;"><button id="btnExportSpotProject" onclick="return ShowSpotLibraryExportWindow(this);" class=\'k-button\'>Export Combined Library</button></div></div>' }],
         dataBound: function (e) {
-            //console.log('chile bound event');
-
             var dataSource = this.dataSource;
             this.element.find('tr').each(function () {
                 var row = $(this);
@@ -621,18 +619,22 @@ function detailInit(e) {
                 }
 
             });
-
+            
             //  enable/disabled button as per spot project limit
             var gridCurrent = $(e.sender.tbody).closest('.k-grid');
             var spotProjectAllowed = hdfSpotProjectAllowed.val() == 'true';
-            if (!spotProjectAllowed) {
-                $(gridCurrent).find('.k-grid-toolbar').hide();
+            if (!spotProjectAllowed) {                
+                $(gridCurrent).find('.k-grid-toolbar #btnCreateSpotProject').hide()
+                if (dataSource._data.length == 0) {
+                    $(gridCurrent).find('.k-grid-toolbar').hide();
+                }
             } else {
-                $(gridCurrent).find('.k-grid-toolbar').show();
+                $(gridCurrent).find('.k-grid-toolbar').show();                
                 if (dataSource._data.length == 0) {
                     $(gridCurrent).find('.k-grid-toolbar').find('#btnExportSpotProject').hide();
                 }
             }
+            
         },
         columns: [
             {
