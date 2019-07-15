@@ -58,12 +58,12 @@
                                                         MaxLength="30" meta:resourcekey="txtProjectNameResource1"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"  Display="Dynamic"
+                                                    <asp:RegularExpressionValidator ID="revProjectName" runat="server"  Display="Dynamic"
                                                          ControlToValidate="txtProjectName" ValidationGroup="vgSaveWindows" ValidationExpression='^(?![.\-])(?:[^\\\/:*?&"<>|#+%])*[^.\-\\\/:*?&"<>|#+%]$'
                                                          ForeColor="Red" ErrorMessage="RegularExpressionValidator">
                                                              <ucValidationContainer:ValidationContainer ID="rfvProjectContainer1" runat="server"
-                                                            ValidationMsg="Invalid Project name.<br />Special characters (/, \, :, *, ?, &, &quot;, <, >, |, #, +, %, ., -) are not permitted." Size="200" />
-                                                         </asp:RegularExpressionValidator>
+                                                            ValidationMsg="Invalid Project name.<br />Special characters (/, \, :, *, ?, &, &quot;, ', <, >, |, #, +, %, ., -) are not permitted." Size="200" />
+                                                         </asp:RegularExpressionValidator>                                        
                                                     <asp:RequiredFieldValidator ID="rfvProjectName" runat="server" Display="Dynamic"
                                                         ControlToValidate="txtProjectName" ForeColor="Red" 
                                                         ValidationGroup="vgSaveWindows">

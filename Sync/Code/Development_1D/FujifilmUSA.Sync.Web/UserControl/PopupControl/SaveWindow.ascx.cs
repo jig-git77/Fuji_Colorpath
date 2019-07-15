@@ -44,7 +44,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     txtProjectName.Text = ProjectName;
                     Page.Title = GetResourceString(_recSaveAs);
-                }
+                }                
+                revProjectName.ValidationExpression = @"^(?![.\-])(?:[^\\\/:*?&'"" <>|#+%])*[^.\-\\\/:*?&'""<>|#+%]$";
             }
         }
         #endregion
