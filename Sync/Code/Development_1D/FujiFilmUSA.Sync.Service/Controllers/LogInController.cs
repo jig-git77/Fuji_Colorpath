@@ -59,10 +59,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     {
                         if (UserReferenceChart.ReferenceChartData != null)
                         {
-                            var jsonReferenceChart = JsonConvert.SerializeObject(UserReferenceChart);
+                            //var jsonReferenceChart = JsonConvert.SerializeObject(UserReferenceChart);
 
-                            httpResponse.Data = jsonReferenceChart;
-                            actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                            //httpResponse.Data = jsonReferenceChart;
+                            actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, UserReferenceChart));
                         }
                         else
                         {
@@ -125,10 +125,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                     if (UserReferenceChart.ReferenceChartData != null)
                     {
-                        var jsonReferenceChart = JsonConvert.SerializeObject(UserReferenceChart);
+                        //var jsonReferenceChart = JsonConvert.SerializeObject(UserReferenceChart);
 
-                        httpResponse.Data = jsonReferenceChart;
-                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+                        //httpResponse.Data = jsonReferenceChart;
+                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, UserReferenceChart));
                     }
                     else
                     {

@@ -50,7 +50,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             LanguageCultureCode = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LanguageCultureCode"),
                             MeasurementDeviceId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "MeasurementDeviceID"),
                             DensityType = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "DensityType"),
-                            UVMode = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "UVMode")                            
+                            UVMode = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "UVMode")
                         };
                         user.Role.RolePermissions = dsUser.Tables[1].AsEnumerable().
                             Select(x => new RolePermission()
@@ -690,6 +690,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     SerialNumber = user.ReferenceChartData.MeasureDeviceSrNo,
                                     MeasurementSettings = new MeasurementSetting()
                                     {
+                                        ProjectId = DataReader.ReadInt(dsUser.Tables[1].Rows[0], "ProjectID"),
                                         IlluminantName = DataReader.ReadString(dsUser.Tables[2].Rows[0], "IlluminantType"),
                                         ObserverTypeName = Utilities.GetValueFromDescription<EObserverType>(DataReader.ReadString(dsUser.Tables[2].Rows[0], "ObserverType")),
                                         UvIncludedName = ((UVMode == 0) ? EUVIncludedMode.UV.ToString() : (UVMode == 1) ? EUVIncludedMode.UVPlus.ToString() : EUVIncludedMode.UVCut.ToString()),
@@ -770,6 +771,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     InstrumentTypeId = Convert.ToInt16(DataReader.ReadInt(dsUser.Tables[2].Rows[0], "InstrumentTypeID")),
                                     MeasurementSettings = new MeasurementSetting()
                                     {
+                                        ProjectId = DataReader.ReadInt(dsUser.Tables[1].Rows[0], "ProjectID"),
                                         InstrumentTypeId = Convert.ToInt16(DataReader.ReadInt(dsUser.Tables[2].Rows[0], "InstrumentTypeID")),
                                         IlluminantName =
                                                                                                     DataReader.ReadString(dsUser.Tables[2].Rows[0], "IlluminantType"),
@@ -958,6 +960,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     InstrumentTypeId = Convert.ToInt16(DataReader.ReadInt(dsUser.Tables[1].Rows[0], "InstrumentTypeID")),
                                     MeasurementSettings = new MeasurementSetting()
                                     {
+                                        ProjectId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "ProjectID"),
                                         InstrumentTypeId = Convert.ToInt16(DataReader.ReadInt(dsUser.Tables[1].Rows[0], "InstrumentTypeID")),
                                         IlluminantName =
                                                                                                     DataReader.ReadString(dsUser.Tables[1].Rows[0], "IlluminantType"),
