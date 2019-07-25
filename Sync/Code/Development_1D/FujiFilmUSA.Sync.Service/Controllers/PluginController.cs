@@ -692,6 +692,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public EReferenceChartDisType ReferenceChartDisType { get; set; }
         public int SpotProjectId { get; set; }
         public ReferenceChartPlugin ReferenceChartPlugin { get; set; }
+        public ReferenceChartApp UserReferenceChartApp { get; set; }
         public string ProjectType { get; set; }
         public DataTable dtMeasurementValidation { get; set; }
         public int UserID { get; set; }

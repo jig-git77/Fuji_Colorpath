@@ -8,6 +8,8 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class UserReferenceChart
     {
+        public int ProjectId { get; set; }
+        public int OptimizationRunID { get; set; }
         public User User { get; set; }
         public ReferenceChartData ReferenceChartData { get; set; }
     }

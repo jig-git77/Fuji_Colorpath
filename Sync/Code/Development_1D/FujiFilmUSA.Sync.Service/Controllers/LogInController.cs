@@ -123,12 +123,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.InstrumentTypeID = Convert.ToInt16(InstrumentType);
                     _presenterlogin.UserLoginFromApplicationBySerial();
 
-                    if (UserReferenceChart.ReferenceChartData != null)
+                    if (UserReferenceChartApp != null)
                     {
                         //var jsonReferenceChart = JsonConvert.SerializeObject(UserReferenceChart);
 
                         //httpResponse.Data = jsonReferenceChart;
-                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, UserReferenceChart));
+                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, UserReferenceChartApp));
                     }
                     else
                     {
@@ -162,7 +162,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         public string EncyptedTocken { get; set; }
         public UserReferenceChart UserReferenceChart { get; set; }
-
+        public ReferenceChartApp UserReferenceChartApp { get; set; }
         public string DeviceSerialNo { get; set; }
         public short InstrumentTypeID { get; set; }
         #endregion
