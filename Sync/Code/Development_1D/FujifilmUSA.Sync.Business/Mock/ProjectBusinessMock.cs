@@ -242,7 +242,7 @@ public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
             return 0;
         }
 
-        public int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType, string DeviceSerial, short InstrumentTypeId)
+        public int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType, string DeviceSerial, short InstrumentTypeId, short LicenseTypeID)
         {
             return 0;
         }

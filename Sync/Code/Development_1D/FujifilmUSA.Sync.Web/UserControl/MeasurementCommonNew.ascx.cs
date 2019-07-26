@@ -120,6 +120,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ProfileType = projectType;
             DeviceSerialNo = SessionManager.Instance.CurrentProject.MeasurementSetting.DeviceSerialNo;
             InstrumentTypeID = Convert.ToInt16(SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId);
+            LicenseType = SessionManager.Instance.CurrentProject.LicenseType;
         }
 
         protected void btnAddPluginStatus_Click(object sender, EventArgs e)

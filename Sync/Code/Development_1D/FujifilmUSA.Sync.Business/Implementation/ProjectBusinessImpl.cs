@@ -2347,7 +2347,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return projectLimit;
         }
 
-        public int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType,string DeviceSerial,short InstrumentTypeId)
+        public int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType,string DeviceSerial,short InstrumentTypeId,short LicenseTypeID)
         {
             var returnValue = 0;
 
@@ -2360,7 +2360,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             "[CP].[InsertMeasurementPluginStatus]",
                             new object[]
                                     {
-                                        UserID,ProjectID,OptimizationRunID,ProfileType,DeviceSerial,InstrumentTypeId
+                                        UserID,ProjectID,OptimizationRunID,ProfileType,DeviceSerial,InstrumentTypeId,LicenseTypeID
                                     });
 
                 },
