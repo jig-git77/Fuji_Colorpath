@@ -46,6 +46,7 @@ $(document).ready(function () {
     CurrentUserID = $("#hdfCurrentUser").val();
     CurrentCulture = $("#hdfCurrentCulture").val();
     hdfSpotProjectAllowed = $("#hdfSpotProjectAllowed");
+    authToken = $("#hdfAuthToken").val();
     //var dID = $hdfCurrentDeviceID.val();
     $kendoProjectList.kendoGrid({
         dataSource: {
@@ -59,7 +60,8 @@ $(document).ready(function () {
                         data: { deviceID: CurrentDeviceID },
                         dataType: "json",
                         headers: {
-                            'Accept-Language': CurrentCulture
+                            'Accept-Language': CurrentCulture,
+                            'Authorization': 'Basic ' + authToken
                         },
                         success: function (response) {
                             var jsonProjectList = JSON.parse(response.data);
@@ -84,8 +86,12 @@ $(document).ready(function () {
                             $kendoProjectList.find('thead').first().find('th').last().find('#imgClearFilter').attr('title', Resources.ClearFillterResource);
 
                         },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            alert(textStatus);
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {                            
+                            if (XMLHttpRequest.status == 401) {
+                                ShowDialog("You are not authorized user. Please login again.", "Message");
+                            } else {
+                                alert(errorThrown);
+                            }                                                       
                             kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
                         }
                     });
@@ -503,12 +509,20 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: SERVICE_BASE_URL + "api/Project/DeleteSpotProject?spotProjectID=" + spotProjectID,
+                headers: {
+                    'Authorization': 'Basic ' + authToken
+                },
                 success: function (response) {
                     //console.log(JSON.stringify(response));
                     detailGrid.dataSource.read();
                     detailGrid.refresh();
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    if (XMLHttpRequest.status == 401) {
+                        ShowDialog("You are not authorized user. Please login again.", "Message");
+                    } else {
+                        alert(errorThrown);
+                    }      
                     console.log(errorThrown);
                 }
             });
@@ -807,4 +821,21 @@ function ShowSpotLibraryExportWindow(btn) {
     }
    
     return false;
+}
+
+function ShowDialog(message, title) {
+    $("#dialog").kendoDialog({
+        width: "400px",
+        title: title,
+        closable: false,
+        modal: false,
+        content: message,
+        actions: [
+            {
+                text: 'OK', primary: true, action: function(e) {
+                    window.location.href = 'login.aspx';
+                }
+            }
+        ]
+    });
 }

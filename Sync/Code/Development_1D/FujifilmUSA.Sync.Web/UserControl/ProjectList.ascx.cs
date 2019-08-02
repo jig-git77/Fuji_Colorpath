@@ -38,6 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("ProjectList_DeleteSpotProject_Confirmation");
             }
         }
+        public int JsRandomNumber { get { return new Random().Next(1, 100); } }
         #endregion
         public ProjectList()
         {
@@ -52,7 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (SessionManager.Instance.CurrentUser != null && !SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
             {
-                lbtnCreateNewPrintCondition.Visible = false;
+                lbtnCreateNewPrintCondition.Visible = false;                
             }
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -67,6 +68,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdfCurrentUser.Value = Convert.ToString(SessionManager.Instance.CurrentUser.UserId);
                 hdfCurrentDeviceID.Value = Convert.ToString(SessionManager.Instance.CurrentDevice.DeviceId);
                 hdfCurrentCulture.Value = getCurrentCultureLanguage();
+                hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
             }
         }
     

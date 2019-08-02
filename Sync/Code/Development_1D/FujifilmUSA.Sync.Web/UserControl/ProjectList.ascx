@@ -9,6 +9,8 @@
 <link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
 <link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
 <script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
+<script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/ProjectList.js"></script>
 
 <script type="text/javascript" language="javascript">
@@ -174,6 +176,7 @@
     <asp:HiddenField runat="server" ID="hdfCurrentDeviceID" ClientIDMode="Static" />
     <asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />
     <asp:HiddenField runat="server" ID="hdfSpotProjectAllowed" ClientIDMode="Static" />
+    <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
     &nbsp;
 </div>
 <div class="contant_middle">
@@ -221,4 +224,7 @@
 </div>
 <div class="contant_bottom">
     &nbsp;
+</div>
+
+<div id='dialog'>   
 </div>

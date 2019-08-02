@@ -22,9 +22,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     if (userType == UserType.XmfColorOrganizerUser)
                     {
                         password = CryptHelper.DecryptString(password, ApplicationConfiguration.Instance.XmfColorOrganizerEncryptionKey);
-                    }
+                    }                    
+                    string apiAuthKey = LoginSecurity.EncryptPasswords(userName + DateTime.Now.ToString("yyyyMMddHHmmssffff"));
                     var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformation]",
-                                                                        new object[] { userName, LoginSecurity.EncryptPasswords(password), Convert.ToInt32(userType) });
+                                                                        new object[] { userName, LoginSecurity.EncryptPasswords(password), Convert.ToInt32(userType), apiAuthKey });
                     if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
                     {
                         user = new User()
@@ -51,6 +52,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             MeasurementDeviceId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "MeasurementDeviceID"),
                             DensityType = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "DensityType"),
                             UVMode = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "UVMode"),
+                            APIAuthKey = DataReader.ReadString(dsUser.Tables[0].Rows[0], "APIAuthKey")
                         };
                         user.Role.RolePermissions = dsUser.Tables[1].AsEnumerable().
                             Select(x => new RolePermission()
@@ -564,8 +566,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
         {
             bool isValidUser = false;
             var isValidUserParam = new Parameters() { ParameterName = "@validUser", Type = DbType.Boolean };
-            int UserID = 0;
-            int.TryParse(EncryptionServices.DecryptToString(tocken), out UserID);
             try
             {
                 //isValidUser = true;
@@ -577,7 +577,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             "[CP].[GetValidateUser]",
                             new List<Parameters>()
                             {
-                                new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID},
+                                new Parameters() {ParameterName = "@Token", Type = DbType.String, Value = tocken},
                             },
                              new List<Parameters>()
                              {
@@ -594,6 +594,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return isValidUser;
         }
 
+        
         #region ITaskBase Members
 
         public event ErrorHandler ErrorOccured;
