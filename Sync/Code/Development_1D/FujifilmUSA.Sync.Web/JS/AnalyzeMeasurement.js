@@ -785,203 +785,204 @@ function BindMeasurementSummary() {
             fromDeltaE: $selectedDeltaE,
         }
 
-        var ajaxParameter = {
-            type: "GET",
-            url: SERVICE_BASE_URL + 'api/Analyze/GetValidationMeasurementSummaryDetails',
-            data: apiParameter,
-            dataType: "json",
-            headers: {
-                "content-type": "application/json",
-                'Accept-Language': $CurrentCulture,
-                'Authorization': 'Basic ' + AUTH_TOKEN
-            }
-        };
-
-        commonAjaxCall(ajaxParameter, function (response) {
-            if (response.data != null) {
-                if (response.data.length > 0) {
-
-                    var measurements = response.data;
-                    var measurement = measurements[0];
-
-                    //generate dymo printing string to print the dymo label only for validation
-                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-                        PopulateDymoPrinter(measurement);
-                    }
-                    measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
-                    $hdnValidationType = measurement.ValidationType;
-
-                    var viewModel = kendo.observable(measurement);
-                    viewModel.isSync1DLicenseType = !($hdnCurrentDlpSubOperation == ELicenseType.Sync1D);
-                    viewModel.isCurrentDlpSubOperation = ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) ? ($hdnCurrentDlpSubOperation == ELicenseType.Validation) ? true : false : true;
-
-
-                    if (measurements[0].PatchTolerances == null || measurements[0].PatchTolerances.length == 0) {
-
-                        $('#tblPatchTolerance').css('display', 'none');
-                    }
-                    kendo.bind($("#divValidationSummary"), viewModel);
-                    $('#tblAverageMeasurementSummary').css('display', 'none');
-
-                    if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1D) {
-
-                        $('#rowCustomer').hide();
-                        $('#rowPageSurface').hide();
-                        $('#rowJobID').hide();
-                        $('#rowNotes').hide();
-                        if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-                            $('#rowCustomer').show();
-                            $('#rowNotes').show();
-                        }
-                    }
-
-                    //check validation type
-                    if ($hdnValidationType == 1 || $hdnValidationType == 2) {
-
-                        var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
-                        if ($hdnValidationType == 1) {
-
-                            //Show tabs G7
-                            //$(tabStrip.items()[2]).show();
-                            $(tabStrip.items()[2]).css('display', 'inline-block');
-
-
-                            //Bind G7 charts
-                            BindG7Charts();
-                        }
-
-                        //check the project type Sync1D or Validation
-                        if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-
-                            //Hide default tabs TVI
-                            //$(tabStrip.items()[4]).show();
-                            $(tabStrip.items()[4]).css('display', 'inline-block');
-
-                            //Bind TVI charts
-                            BindTVICharts();
-
-                            //show average measurement checkbox
-                            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) {
-                                $('#ContentPlaceHolder1_ucAnalyze_tdAverageOfMeasurements').css('display', 'block');
-                            }
-                        }
-                    }
-
-                    //set validation measurement status value for XMF user 
-                    $('#hdnValidationMeasurementStatus').val(measurement.MeasurementStatus);
-
-                    //create url to open report grading url for scoring report
-                    reportGradingPath = 'PopupReportGrading.aspx?MeasurementID=' + measurement.MeasurementId + '&From_ΔE=' + $selectedDeltaE + '&DLPName=' + $hdnReportDLPName + '&Vali_Type=' + $hdnValidationType + '&IsAvgMeas=' + $isAverageOfMeasurements;
-
-                    //create url to open report grading url for CMYK density report
-                    reportCMYKDensityPath = 'PopupReportCMYKDensity.aspx?ProjectID=' + $hdnProjectID + '&OptimizeRunID=' + $hdnOptimizationRunID + '&MeasurementID=' + measurement.MeasurementId;
-                }
-            }
-        }, function (XMLHttpRequest, textStatus, errorThrown) {
-            if (XMLHttpRequest.status == 401) {
-                ShowDialog("You are not authorized user. Please login again.", "Message");
-            } else {
-                alert(errorThrown);
-            }
-        });
-
-        //$.ajax({
+        //var ajaxParameter = {
+        //    type: "GET",
         //    url: SERVICE_BASE_URL + 'api/Analyze/GetValidationMeasurementSummaryDetails',
         //    data: apiParameter,
-        //    type: 'GET',
-        //    async: false,
+        //    dataType: "json",
         //    headers: {
         //        "content-type": "application/json",
+        //        'Accept-Language': $CurrentCulture,
+        //        'Authorization': 'Basic ' + AUTH_TOKEN
         //    },
-        //    dataType: 'json',
-        //    headers: {
-        //        'Accept-Language': $CurrentCulture
-        //    },
-        //    success: function (response) {
-        //        if (response.data != null) {
-        //            if (response.data.length > 0) {
+        //    async: false
+        //};
 
-        //                var measurements = response.data;
-        //                var measurement = measurements[0];
+        //commonAjaxCall(ajaxParameter, function (response) {
+        //    if (response.data != null) {
+        //        debugger;
+        //        if (response.data.length > 0) {
 
-        //                //generate dymo printing string to print the dymo label only for validation
-        //                if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-        //                    PopulateDymoPrinter(measurement);
-        //                }
-        //                measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
-        //                $hdnValidationType = measurement.ValidationType;
+        //            var measurements = response.data;
+        //            var measurement = measurements[0];
 
-        //                var viewModel = kendo.observable(measurement);
-        //                viewModel.isSync1DLicenseType = !($hdnCurrentDlpSubOperation == ELicenseType.Sync1D);
-        //                viewModel.isCurrentDlpSubOperation = ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) ? ($hdnCurrentDlpSubOperation == ELicenseType.Validation) ? true : false : true;
-
-
-        //                if (measurements[0].PatchTolerances == null || measurements[0].PatchTolerances.length == 0) {
-
-        //                    $('#tblPatchTolerance').css('display', 'none');
-        //                }
-        //                kendo.bind($("#divValidationSummary"), viewModel);
-        //                $('#tblAverageMeasurementSummary').css('display', 'none');
-
-        //                if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1D) {
-
-        //                    $('#rowCustomer').hide();
-        //                    $('#rowPageSurface').hide();
-        //                    $('#rowJobID').hide();
-        //                    $('#rowNotes').hide();
-        //                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-        //                        $('#rowCustomer').show();
-        //                        $('#rowNotes').show();
-        //                    }
-        //                }
-
-        //                //check validation type
-        //                if ($hdnValidationType == 1 || $hdnValidationType == 2) {
-
-        //                    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
-        //                    if ($hdnValidationType == 1) {
-
-        //                        //Show tabs G7
-        //                        //$(tabStrip.items()[2]).show();
-        //                        $(tabStrip.items()[2]).css('display', 'inline-block');
-
-
-        //                        //Bind G7 charts
-        //                        BindG7Charts();
-        //                    }
-
-        //                    //check the project type Sync1D or Validation
-        //                    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-
-        //                        //Hide default tabs TVI
-        //                        //$(tabStrip.items()[4]).show();
-        //                        $(tabStrip.items()[4]).css('display', 'inline-block');
-
-        //                        //Bind TVI charts
-        //                        BindTVICharts();
-
-        //                        //show average measurement checkbox
-        //                        if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) {
-        //                            $('#ContentPlaceHolder1_ucAnalyze_tdAverageOfMeasurements').css('display', 'block');
-        //                        }
-        //                    }
-        //                }
-
-        //                //set validation measurement status value for XMF user 
-        //                $('#hdnValidationMeasurementStatus').val(measurement.MeasurementStatus);
-
-        //                //create url to open report grading url for scoring report
-        //                reportGradingPath = 'PopupReportGrading.aspx?MeasurementID=' + measurement.MeasurementId + '&From_ΔE=' + $selectedDeltaE + '&DLPName=' + $hdnReportDLPName + '&Vali_Type=' + $hdnValidationType + '&IsAvgMeas=' + $isAverageOfMeasurements;
-
-        //                //create url to open report grading url for CMYK density report
-        //                reportCMYKDensityPath = 'PopupReportCMYKDensity.aspx?ProjectID=' + $hdnProjectID + '&OptimizeRunID=' + $hdnOptimizationRunID + '&MeasurementID=' + measurement.MeasurementId;
+        //            //generate dymo printing string to print the dymo label only for validation
+        //            if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+        //                PopulateDymoPrinter(measurement);
         //            }
+        //            measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
+        //            $hdnValidationType = measurement.ValidationType;
+
+        //            var viewModel = kendo.observable(measurement);
+        //            viewModel.isSync1DLicenseType = !($hdnCurrentDlpSubOperation == ELicenseType.Sync1D);
+        //            viewModel.isCurrentDlpSubOperation = ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) ? ($hdnCurrentDlpSubOperation == ELicenseType.Validation) ? true : false : true;
+
+
+        //            if (measurements[0].PatchTolerances == null || measurements[0].PatchTolerances.length == 0) {
+
+        //                $('#tblPatchTolerance').css('display', 'none');
+        //            }
+        //            kendo.bind($("#divValidationSummary"), viewModel);
+        //            $('#tblAverageMeasurementSummary').css('display', 'none');
+
+        //            if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1D) {
+
+        //                $('#rowCustomer').hide();
+        //                $('#rowPageSurface').hide();
+        //                $('#rowJobID').hide();
+        //                $('#rowNotes').hide();
+        //                if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+        //                    $('#rowCustomer').show();
+        //                    $('#rowNotes').show();
+        //                }
+        //            }
+
+        //            //check validation type
+        //            if ($hdnValidationType == 1 || $hdnValidationType == 2) {
+
+        //                var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+        //                if ($hdnValidationType == 1) {
+
+        //                    //Show tabs G7
+        //                    //$(tabStrip.items()[2]).show();
+        //                    $(tabStrip.items()[2]).css('display', 'inline-block');
+
+
+        //                    //Bind G7 charts
+        //                    BindG7Charts();
+        //                }
+
+        //                //check the project type Sync1D or Validation
+        //                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+
+        //                    //Hide default tabs TVI
+        //                    //$(tabStrip.items()[4]).show();
+        //                    $(tabStrip.items()[4]).css('display', 'inline-block');
+
+        //                    //Bind TVI charts
+        //                    BindTVICharts();
+
+        //                    //show average measurement checkbox
+        //                    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) {
+        //                        $('#ContentPlaceHolder1_ucAnalyze_tdAverageOfMeasurements').css('display', 'block');
+        //                    }
+        //                }
+        //            }
+
+        //            //set validation measurement status value for XMF user 
+        //            $('#hdnValidationMeasurementStatus').val(measurement.MeasurementStatus);
+
+        //            //create url to open report grading url for scoring report
+        //            reportGradingPath = 'PopupReportGrading.aspx?MeasurementID=' + measurement.MeasurementId + '&From_ΔE=' + $selectedDeltaE + '&DLPName=' + $hdnReportDLPName + '&Vali_Type=' + $hdnValidationType + '&IsAvgMeas=' + $isAverageOfMeasurements;
+
+        //            //create url to open report grading url for CMYK density report
+        //            reportCMYKDensityPath = 'PopupReportCMYKDensity.aspx?ProjectID=' + $hdnProjectID + '&OptimizeRunID=' + $hdnOptimizationRunID + '&MeasurementID=' + measurement.MeasurementId;
         //        }
-        //    },
-        //    error: function (xhr, errorType, exception) {
-        //        alert(exception);
+        //    }
+        //}, function (XMLHttpRequest, textStatus, errorThrown) {
+        //    if (XMLHttpRequest.status == 401) {
+        //        ShowDialog("You are not authorized user. Please login again.", "Message");
+        //    } else {
+        //        alert(errorThrown);
         //    }
         //});
+
+        $.ajax({
+            url: SERVICE_BASE_URL + 'api/Analyze/GetValidationMeasurementSummaryDetails',
+            data: apiParameter,
+            type: 'GET',
+            async: false,
+            dataType: 'json',
+            headers: {
+                'Accept-Language': $CurrentCulture,
+                "content-type": "application/json",
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            },
+            success: function (response) {
+                if (response.data != null) {
+                    if (response.data.length > 0) {
+
+                        var measurements = response.data;
+                        var measurement = measurements[0];
+
+                        //generate dymo printing string to print the dymo label only for validation
+                        if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                            PopulateDymoPrinter(measurement);
+                        }
+                        measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
+                        $hdnValidationType = measurement.ValidationType;
+
+                        var viewModel = kendo.observable(measurement);
+                        viewModel.isSync1DLicenseType = !($hdnCurrentDlpSubOperation == ELicenseType.Sync1D);
+                        viewModel.isCurrentDlpSubOperation = ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) ? ($hdnCurrentDlpSubOperation == ELicenseType.Validation) ? true : false : true;
+
+
+                        if (measurements[0].PatchTolerances == null || measurements[0].PatchTolerances.length == 0) {
+
+                            $('#tblPatchTolerance').css('display', 'none');
+                        }
+                        kendo.bind($("#divValidationSummary"), viewModel);
+                        $('#tblAverageMeasurementSummary').css('display', 'none');
+
+                        if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1D) {
+
+                            $('#rowCustomer').hide();
+                            $('#rowPageSurface').hide();
+                            $('#rowJobID').hide();
+                            $('#rowNotes').hide();
+                            if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                                $('#rowCustomer').show();
+                                $('#rowNotes').show();
+                            }
+                        }
+
+                        //check validation type
+                        if ($hdnValidationType == 1 || $hdnValidationType == 2) {
+
+                            var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+                            if ($hdnValidationType == 1) {
+
+                                //Show tabs G7
+                                //$(tabStrip.items()[2]).show();
+                                $(tabStrip.items()[2]).css('display', 'inline-block');
+
+
+                                //Bind G7 charts
+                                BindG7Charts();
+                            }
+
+                            //check the project type Sync1D or Validation
+                            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+
+                                //Hide default tabs TVI
+                                //$(tabStrip.items()[4]).show();
+                                $(tabStrip.items()[4]).css('display', 'inline-block');
+
+                                //Bind TVI charts
+                                BindTVICharts();
+
+                                //show average measurement checkbox
+                                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) {
+                                    $('#ContentPlaceHolder1_ucAnalyze_tdAverageOfMeasurements').css('display', 'block');
+                                }
+                            }
+                        }
+
+                        //set validation measurement status value for XMF user 
+                        $('#hdnValidationMeasurementStatus').val(measurement.MeasurementStatus);
+
+                        //create url to open report grading url for scoring report
+                        reportGradingPath = 'PopupReportGrading.aspx?MeasurementID=' + measurement.MeasurementId + '&From_ΔE=' + $selectedDeltaE + '&DLPName=' + $hdnReportDLPName + '&Vali_Type=' + $hdnValidationType + '&IsAvgMeas=' + $isAverageOfMeasurements;
+
+                        //create url to open report grading url for CMYK density report
+                        reportCMYKDensityPath = 'PopupReportCMYKDensity.aspx?ProjectID=' + $hdnProjectID + '&OptimizeRunID=' + $hdnOptimizationRunID + '&MeasurementID=' + measurement.MeasurementId;
+                    }
+                }
+            },
+            error: function (xhr, errorType, exception) {
+                alert(exception);
+            }
+        });
 
 
     } else {
