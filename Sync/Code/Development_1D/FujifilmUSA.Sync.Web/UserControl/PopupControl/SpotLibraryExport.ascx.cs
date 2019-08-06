@@ -35,6 +35,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         protected void Page_Load(object sender, EventArgs e)
         {
             hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
+            hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
             if (string.IsNullOrEmpty(Request.QueryString["SpotProjectIds"]))
             {
                 hdnOptiomizatoinRunID.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();

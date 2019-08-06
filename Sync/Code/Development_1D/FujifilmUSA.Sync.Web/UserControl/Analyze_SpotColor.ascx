@@ -63,10 +63,12 @@
 <script type="application/javascript">
     var record = 0;
     var SERVICE_BASE_URL = '';
+    var AUTH_TOKEN = '';
     var Resources = {};
     var currentSpotName = '';
     var $hdnCurrentUserRole;
     var $hdnCurrentProjectLicenseType;
+
     //variables for chart 
     var drawing = kendo.drawing;
     var geometry = kendo.geometry;
@@ -108,57 +110,100 @@
         $hdnCurrentProjectLicenseType = $('#hdnCurrentProjectLicenseType').val();
         $hdnCurrentUserRole = parseInt($('#hdnCurrentUserRole').val());
         var $divPathDetails = $("#divPathDetails");
+        AUTH_TOKEN = $("#hdfAuthToken").val();
 
         $divPathDetails.kendoGrid({
             dataSource: {
-                //transport: {
-                //    //read: "/FujifilmUSA.Sync.Web/Analyze_SpotColor.aspx/GetPatchDetails"
-                //    read: "http://localhost/FujiFilmUSA.Sync.Service/api/Chart/GetPatchDetails/" + oId
-                //},
                 transport: {
                     read: function (options) {
                         kendo.ui.progress($('#divPathDetails .k-grid-content'), true);
-                        $.ajax({
+
+                        var ajaxParameter = {
                             type: "GET",
                             url: SERVICE_BASE_URL + "api/Chart/GetSpotPatchDetails/",
                             data: { id: optimizationId },
                             dataType: "json",
                             headers: {
-                                'Accept-Language': CurrentCulture
-                            },
-                            success: function (response) {
-                                kendo.ui.progress($('#divPathDetails .k-grid-content'), false);
-                                if (response.data != null) {
-                                    Resources = response.data.GlobalResources;
-                                    var spotStates = response.data.spotAnalyzeDetails;
-                                    $('#hdfMeasurementID').val(spotStates.measurementID);
-
-                                    //check base run or not
-                                    hasMeasurement = parseInt($('#hdfMeasurementID').val()) > 0;
-
-                                    $divPathDetails.find("th[data-field=SpotID] b").html(Resources.gridAnalyzeHeaderIDResource);
-                                    $divPathDetails.find("th[data-field=SpotPatch] b").html(Resources.gridAnalyzeHeaderPatchResource);
-                                    $divPathDetails.find("th[data-field=SpotView] b").html(Resources.gridAnalyzeHeaderViewResource);
-                                    $divPathDetails.find("th[data-field=SpotName] b").html(Resources.gridAnalyzeHeaderSpotNameResource);
-                                    $divPathDetails.find("th[data-field=ΔL] b").html(Resources.gridAnalyzeHeaderDeltaLResource);
-                                    $divPathDetails.find("th[data-field=Δa] b").html(Resources.gridAnalyzeHeaderDeltaAResource);
-                                    $divPathDetails.find("th[data-field=Δb] b").html(Resources.gridAnalyzeHeaderDeltaBesource);
-                                    $divPathDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeaderDeltaEResource);
-                                    $divPathDetails.find("th[data-field=ΔE_T_P] b").html(Resources.gridAnalyzeHeaderETPResource);
-                                    $divPathDetails.find("th[data-field=ΔE_M_T] b").html(Resources.gridAnalyzeHeaderEMTResource);
-                                    $divPathDetails.find("th[data-field=ΔE_M_P] b").html(Resources.gridAnalyzeHeaderEMPResource);
-
-                                    generateABTargetChart(0, 0, 0, 0, hasMeasurement);
-                                    generateLTargetChart(0, 0, hasMeasurement);
-                                }
-                                options.success(spotStates.patchDetails);
-                            },
-                            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                kendo.ui.progress($('#divPathDetails .k-grid-content'), false);
-                                console.log(XMLHttpRequest);
-                                //alert(XMLHttpRequest);
+                                'Accept-Language': CurrentCulture,
+                                'Authorization': 'Basic ' + AUTH_TOKEN
                             }
+                        };
+                        commonAjaxCall(ajaxParameter, function (response) {
+                            kendo.ui.progress($('#divPathDetails .k-grid-content'), false);
+                            if (response.data != null) {
+                                Resources = response.data.GlobalResources;
+                                var spotStates = response.data.spotAnalyzeDetails;
+                                $('#hdfMeasurementID').val(spotStates.measurementID);
+
+                                //check base run or not
+                                hasMeasurement = parseInt($('#hdfMeasurementID').val()) > 0;
+
+                                $divPathDetails.find("th[data-field=SpotID] b").html(Resources.gridAnalyzeHeaderIDResource);
+                                $divPathDetails.find("th[data-field=SpotPatch] b").html(Resources.gridAnalyzeHeaderPatchResource);
+                                $divPathDetails.find("th[data-field=SpotView] b").html(Resources.gridAnalyzeHeaderViewResource);
+                                $divPathDetails.find("th[data-field=SpotName] b").html(Resources.gridAnalyzeHeaderSpotNameResource);
+                                $divPathDetails.find("th[data-field=ΔL] b").html(Resources.gridAnalyzeHeaderDeltaLResource);
+                                $divPathDetails.find("th[data-field=Δa] b").html(Resources.gridAnalyzeHeaderDeltaAResource);
+                                $divPathDetails.find("th[data-field=Δb] b").html(Resources.gridAnalyzeHeaderDeltaBesource);
+                                $divPathDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeaderDeltaEResource);
+                                $divPathDetails.find("th[data-field=ΔE_T_P] b").html(Resources.gridAnalyzeHeaderETPResource);
+                                $divPathDetails.find("th[data-field=ΔE_M_T] b").html(Resources.gridAnalyzeHeaderEMTResource);
+                                $divPathDetails.find("th[data-field=ΔE_M_P] b").html(Resources.gridAnalyzeHeaderEMPResource);
+
+                                generateABTargetChart(0, 0, 0, 0, hasMeasurement);
+                                generateLTargetChart(0, 0, hasMeasurement);
+                            }
+                            options.success(spotStates.patchDetails);
+                        }, function (XMLHttpRequest, textStatus, errorThrown) {
+                            if (XMLHttpRequest.status == 401) {
+                                ShowDialog("You are not authorized user. Please login again.", "Message");
+                            } else {
+                                alert(errorThrown);
+                            }
+                            kendo.ui.progress($('#divPathDetails .k-grid-content'), false);
                         });
+
+                        //$.ajax({
+                        //    type: "GET",
+                        //    url: SERVICE_BASE_URL + "api/Chart/GetSpotPatchDetails/",
+                        //    data: { id: optimizationId },
+                        //    dataType: "json",
+                        //    headers: {
+                        //        'Accept-Language': CurrentCulture
+                        //    },
+                        //    success: function (response) {
+                        //        kendo.ui.progress($('#divPathDetails .k-grid-content'), false);
+                        //        if (response.data != null) {
+                        //            Resources = response.data.GlobalResources;
+                        //            var spotStates = response.data.spotAnalyzeDetails;
+                        //            $('#hdfMeasurementID').val(spotStates.measurementID);
+
+                        //            //check base run or not
+                        //            hasMeasurement = parseInt($('#hdfMeasurementID').val()) > 0;
+
+                        //            $divPathDetails.find("th[data-field=SpotID] b").html(Resources.gridAnalyzeHeaderIDResource);
+                        //            $divPathDetails.find("th[data-field=SpotPatch] b").html(Resources.gridAnalyzeHeaderPatchResource);
+                        //            $divPathDetails.find("th[data-field=SpotView] b").html(Resources.gridAnalyzeHeaderViewResource);
+                        //            $divPathDetails.find("th[data-field=SpotName] b").html(Resources.gridAnalyzeHeaderSpotNameResource);
+                        //            $divPathDetails.find("th[data-field=ΔL] b").html(Resources.gridAnalyzeHeaderDeltaLResource);
+                        //            $divPathDetails.find("th[data-field=Δa] b").html(Resources.gridAnalyzeHeaderDeltaAResource);
+                        //            $divPathDetails.find("th[data-field=Δb] b").html(Resources.gridAnalyzeHeaderDeltaBesource);
+                        //            $divPathDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeaderDeltaEResource);
+                        //            $divPathDetails.find("th[data-field=ΔE_T_P] b").html(Resources.gridAnalyzeHeaderETPResource);
+                        //            $divPathDetails.find("th[data-field=ΔE_M_T] b").html(Resources.gridAnalyzeHeaderEMTResource);
+                        //            $divPathDetails.find("th[data-field=ΔE_M_P] b").html(Resources.gridAnalyzeHeaderEMPResource);
+
+                        //            generateABTargetChart(0, 0, 0, 0, hasMeasurement);
+                        //            generateLTargetChart(0, 0, hasMeasurement);
+                        //        }
+                        //        options.success(spotStates.patchDetails);
+                        //    },
+                        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        //        kendo.ui.progress($('#divPathDetails .k-grid-content'), false);
+                        //        console.log(XMLHttpRequest);
+                        //        //alert(XMLHttpRequest);
+                        //    }
+                        //});
                     },
 
                 },
@@ -500,26 +545,54 @@
                 filter: filterObj
             };
 
-            //console.log(filterObj);
-            $('#btnDownloadSpotPatch').addClass('active');
-            $.ajax({
+            var ajaxParameter = {
                 type: "POST",
                 url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsReport',
                 data: filterObj,
                 dataType: "json",
-                success: function (response) {
-                    $('#btnDownloadSpotPatch').removeClass('active');
-                    if (response.data != null) {
-                        //console.log(response.data);
-                        var fileName = '~' + response.data;
-                        window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-                    }
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    $('#btnDownloadSpotPatchExcel').removeClass('active');
-                    console.log(XMLHttpRequest.responseText);
+                headers: {
+                    'Authorization': 'Basic ' + AUTH_TOKEN
                 }
+            };
+            $('#btnDownloadSpotPatch').addClass('active');
+            commonAjaxCall(ajaxParameter, function (response) {
+                $('#btnDownloadSpotPatch').removeClass('active');
+                if (response.data != null) {
+                    //console.log(response.data);
+                    var fileName = '~' + response.data;
+                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                }
+            }, function (XMLHttpRequest, textStatus, errorThrown) {
+                if (XMLHttpRequest.status == 401) {
+                    ShowDialog("You are not authorized user. Please login again.", "Message");
+                } else {
+                    alert(errorThrown);
+                }
+                $('#btnDownloadSpotPatchExcel').removeClass('active');
             });
+
+
+
+            //console.log(filterObj);
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsReport',
+            //    data: filterObj,
+            //    dataType: "json",
+            //    success: function (response) {
+            //        $('#btnDownloadSpotPatch').removeClass('active');
+            //        if (response.data != null) {
+            //            //console.log(response.data);
+            //            var fileName = '~' + response.data;
+            //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            //        }
+            //    },
+            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //        $('#btnDownloadSpotPatchExcel').removeClass('active');
+            //        console.log(XMLHttpRequest.responseText);
+            //    }
+            //});
 
 
         })
@@ -555,25 +628,52 @@
 
             //console.log(filterObj);
 
-            $('#btnDownloadSpotPatchExcel').addClass('active');
-            $.ajax({
+            var ajaxParameter = {
                 type: "POST",
                 url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsExcelReport',
                 data: filterObj,
                 dataType: "json",
-                success: function (response) {
-                    $('#btnDownloadSpotPatchExcel').removeClass('active');
-                    if (response.data != null) {
-                        console.log(response.data);
-                        var fileName = '~' + response.data;
-                        window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-                    }
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    $('#btnDownloadSpotPatchExcel').removeClass('active');
-                    console.log(XMLHttpRequest.responseText);
+                headers: {
+                    'Authorization': 'Basic ' + AUTH_TOKEN
                 }
+            };
+
+            $('#btnDownloadSpotPatchExcel').addClass('active');
+
+            commonAjaxCall(ajaxParameter, function (response) {
+                $('#btnDownloadSpotPatchExcel').removeClass('active');
+                if (response.data != null) {
+                    console.log(response.data);
+                    var fileName = '~' + response.data;
+                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                }
+            }, function (XMLHttpRequest, textStatus, errorThrown) {
+                if (XMLHttpRequest.status == 401) {
+                    ShowDialog("You are not authorized user. Please login again.", "Message");
+                } else {
+                    alert(errorThrown);
+                }
+                $('#btnDownloadSpotPatchExcel').removeClass('active');
             });
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: SERVICE_BASE_URL + 'api/Analyze/GetSpotPatchDetailsExcelReport',
+            //    data: filterObj,
+            //    dataType: "json",
+            //    success: function (response) {
+            //        $('#btnDownloadSpotPatchExcel').removeClass('active');
+            //        if (response.data != null) {
+            //            console.log(response.data);
+            //            var fileName = '~' + response.data;
+            //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            //        }
+            //    },
+            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //        $('#btnDownloadSpotPatchExcel').removeClass('active');
+            //        console.log(XMLHttpRequest.responseText);
+            //    }
+            //});
         });
 
         $('#btnSaveSpotPatch').on('click', function (e) {
@@ -607,33 +707,53 @@
                 spotProjectLabs: spotpatchlab
             }
 
-            //console.log(filterObj);
-            $('#btnSaveSpotPatch').addClass('active');
-            $.ajax({
+            var ajaxParameter = {
                 type: "POST",
                 url: SERVICE_BASE_URL + 'api/Analyze/SaveSpotProjectLABPatches',
                 data: obj,
                 dataType: "json",
-                success: function (response) {
-                    $('#btnSaveSpotPatch').removeClass('active');
-                    //if (response.data != null) {
-                    //    //console.log(response.data);
-                    //    var fileName = '~' + response.data;
-                    //    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-                    //}
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    $('#btnSaveSpotPatch').removeClass('active');
-                    console.log(XMLHttpRequest.responseText);
+                headers: {
+                    'Authorization': 'Basic ' + AUTH_TOKEN
                 }
+            };
+            $('#btnSaveSpotPatch').addClass('active');
+            commonAjaxCall(ajaxParameter, function (response) {
+                $('#btnSaveSpotPatch').removeClass('active');
+            }, function (XMLHttpRequest, textStatus, errorThrown) {
+                if (XMLHttpRequest.status == 401) {
+                    ShowDialog("You are not authorized user. Please login again.", "Message");
+                } else {
+                    alert(errorThrown);
+                }
+                $('#btnSaveSpotPatch').removeClass('active');
             });
+
+            //console.log(filterObj);
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: SERVICE_BASE_URL + 'api/Analyze/SaveSpotProjectLABPatches',
+            //    data: obj,
+            //    dataType: "json",
+            //    success: function (response) {
+            //        $('#btnSaveSpotPatch').removeClass('active');
+            //        //if (response.data != null) {
+            //        //    //console.log(response.data);
+            //        //    var fileName = '~' + response.data;
+            //        //    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            //        //}
+            //    },
+            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //        $('#btnSaveSpotPatch').removeClass('active');
+            //        console.log(XMLHttpRequest.responseText);
+            //    }
+            //});
 
 
         });
 
         $('#lnkGenerateSpotReport').on('click', function (e) {
             e.preventDefault();
-            debugger;
             kendo.ui.progress($('#divReport'), true);
 
             var chartList = [];
@@ -688,24 +808,51 @@
                 chartDetailList: chartList
             };
 
-            $.ajax({
+            var ajaxParameter = {
                 type: "POST",
                 url: SERVICE_BASE_URL + 'api/Report/ExportSpotAnalyzeChartReport',
                 data: apiParameter,
                 dataType: "json",
-                success: function (response) {
-                    kendo.ui.progress($('#divReport'), false);
-                    if (response.data != null) {
-                        console.log(response.data);
-                        var fileName = '~' + response.data;
-                        window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-                    }
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    kendo.ui.progress($('#divReport'), false);
-                    console.log(XMLHttpRequest.responseText);
+                headers: {
+                    'Authorization': 'Basic ' + AUTH_TOKEN
                 }
+            };
+
+            commonAjaxCall(ajaxParameter, function (response) {
+                kendo.ui.progress($('#divReport'), false);
+                if (response.data != null) {
+                    console.log(response.data);
+                    var fileName = '~' + response.data;
+                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                }
+            }, function (XMLHttpRequest, textStatus, errorThrown) {
+                if (XMLHttpRequest.status == 401) {
+                    ShowDialog("You are not authorized user. Please login again.", "Message");
+                } else {
+                    alert(errorThrown);
+                }
+                kendo.ui.progress($('#divReport'), false);
             });
+
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: SERVICE_BASE_URL + 'api/Report/ExportSpotAnalyzeChartReport',
+            //    data: apiParameter,
+            //    dataType: "json",
+            //    success: function (response) {
+            //        kendo.ui.progress($('#divReport'), false);
+            //        if (response.data != null) {
+            //            console.log(response.data);
+            //            var fileName = '~' + response.data;
+            //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            //        }
+            //    },
+            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //        kendo.ui.progress($('#divReport'), false);
+            //        console.log(XMLHttpRequest.responseText);
+            //    }
+            //});
         });
 
         $('#btnExportJsonMeasurement').on('click', function (e) {
@@ -713,26 +860,48 @@
 
             var optimizationRun = $(this).attr('data-id');
             $('#btnExportJsonMeasurement').addClass('active');
-            $.ajax({
+
+            var ajaxParameter = {
                 type: "POST",
                 url: SERVICE_BASE_URL + 'api/Analyze/GetSpotMeasurementFileExport?OptimizeRunId=' + optimizationRun,
-                //data: {
-                //    MeasurementId: measurementID,
-                //    IsSpotProject: true
-                //},
+                data: {},
                 dataType: "json",
-                success: function (response) {
-                    $('#btnExportJsonMeasurement').removeClass('active');
-                    if (response.data != null) {
-                        var fileName = '~' + response.data;
-                        window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-                    }
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    $('#btnExportJsonMeasurement').removeClass('active');
-                    console.log(XMLHttpRequest.responseText);
+                headers: {
+                    'Authorization': 'Basic ' + AUTH_TOKEN
                 }
+            };
+
+            commonAjaxCall(ajaxParameter, function (response) {
+                $('#btnExportJsonMeasurement').removeClass('active');
+                if (response.data != null) {
+                    var fileName = '~' + response.data;
+                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                }
+            }, function (XMLHttpRequest, textStatus, errorThrown) {
+                if (XMLHttpRequest.status == 401) {
+                    ShowDialog("You are not authorized user. Please login again.", "Message");
+                } else {
+                    alert(errorThrown);
+                }
+                $('#btnExportJsonMeasurement').removeClass('active');
             });
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: SERVICE_BASE_URL + 'api/Analyze/GetSpotMeasurementFileExport?OptimizeRunId=' + optimizationRun,
+            //    dataType: "json",
+            //    success: function (response) {
+            //        $('#btnExportJsonMeasurement').removeClass('active');
+            //        if (response.data != null) {
+            //            var fileName = '~' + response.data;
+            //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            //        }
+            //    },
+            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //        $('#btnExportJsonMeasurement').removeClass('active');
+            //        console.log(XMLHttpRequest.responseText);
+            //    }
+            //});
         });
     });
 
@@ -1015,24 +1184,6 @@
         return false;
     }
 
-    function generateReport(optimizationRun) {
-        $.ajax({
-            url: SERVICE_BASE_URL + 'api/Chart/GetSpotPatchDetailsReport',
-            data: { OptimizationRunID: optimizationRun },
-            type: 'GET',
-            //headers: {
-            //    "content-type": "application/json",
-            //},
-            success: function (response) {
-                //console.log(response);
-                window.open(SERVICE_BASE_URL + response.data, "_blank");
-            },
-            error: function (xhr, errorType, exception) {
-                alert(exception);
-            }
-        });
-    }
-
     function OnSpotDetailsLoad(sender, eventArgs) {
         sender.set_title('<table style="width:100%;margin-top: -4px;"><tr><td style="width:45%">Patch Details</td><td style="width:55%;">' + currentSpotName + '</td></tr></table>')
     }
@@ -1094,6 +1245,7 @@
         <asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hdnCurrentProjectLicenseType" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hdnCurrentUserRole" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
         <h1 id="header" runat="server">
             <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
         <div class="Information_divAnalyze">
@@ -1260,27 +1412,27 @@
                                                                         <asp:Label runat="server" ID="lblAvgETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                     <td>
                                                                         <asp:Label runat="server" ID="lblMaxETP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                        
+
                                                                 </tr>
                                                                 <tr>
                                                                     <td><span style="font-weight: bold;">∆E Measured-Target</span></td>
                                                                     <td>
-                                                                        <asp:Label runat="server" ID="lblMinEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>                                                                        
+                                                                        <asp:Label runat="server" ID="lblMinEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                     <td>
                                                                         <asp:Label runat="server" ID="lblAvgEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                     <td>
                                                                         <asp:Label runat="server" ID="lblMaxEMT" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                        
+
                                                                 </tr>
                                                                 <tr>
                                                                     <td><span style="font-weight: bold;">∆E Measured-Prediction</span></td>
                                                                     <td>
                                                                         <asp:Label runat="server" ID="lblMinEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                     <td>
-                                                                        <asp:Label runat="server" ID="lblAvgEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>                                                                        
+                                                                        <asp:Label runat="server" ID="lblAvgEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
                                                                     <td>
                                                                         <asp:Label runat="server" ID="lblMaxEMP" ClientIDMode="Static" Text="Loading..."></asp:Label></td>
-                                                                        
+
                                                                 </tr>
                                                                 <tr>
                                                                     <td colspan="4">
@@ -1425,6 +1577,8 @@
 </div>
 <div class="contant_bottom">
     &nbsp;
+</div>
+<div id="dialog">
 </div>
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
 

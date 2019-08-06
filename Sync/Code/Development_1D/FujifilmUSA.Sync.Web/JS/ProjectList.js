@@ -54,47 +54,82 @@ $(document).ready(function () {
                 read: function (options) {
                     //kendo.ui.progress($kendoProjectList, true);
                     kendo.ui.progress($('#kendoProjectList .k-grid-content'), true);
-                    $.ajax({
+
+                    var ajaxParameter = {
                         type: "GET",
                         url: SERVICE_BASE_URL + "api/Project/GetProjectDetailsByDeviceID/",
                         data: { deviceID: CurrentDeviceID },
-                        dataType: "json",
-                        headers: {
-                            'Accept-Language': CurrentCulture,
-                            'Authorization': 'Basic ' + authToken
-                        },
-                        success: function (response) {
-                            var jsonProjectList = JSON.parse(response.data);
-                            //console.log(jsonProjectList);
-                            Resources = jsonProjectList.GlobalResources;
-                            options.success(jsonProjectList.Projects);
-                            kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
+                        dataType: "json"
+                    };
 
-                            //var grid = $kendoProjectList.data("kendoGrid");
-                            $kendoProjectList.find("th[data-field=LicenseType] b").html(Resources.GridTemplateColumnResource0);
-                            $kendoProjectList.find("th[data-field=ValidationStatus] b").html(Resources.GridTemplateColumnResource1);
-                            $kendoProjectList.find("th[data-field=ProjectName] b").html(Resources.GridTemplateColumnResource3);
-                            $kendoProjectList.find("th[data-field=ProjectName] b").attr("title", Resources.ToolTipClickToShort);
-                            $kendoProjectList.find("th[data-field=SourceProfileName] b").html(Resources.GridTemplateColumnResource4);
-                            $kendoProjectList.find("th[data-field=SourceProfileName] b").attr("title", Resources.ToolTipClickToShort);
-                            $kendoProjectList.find("th[data-field=PrintConditionMedia] b").html(Resources.GridTemplateColumnResource5);
-                            $kendoProjectList.find("th[data-field=PrintConditionMedia] b").attr("title", Resources.ToolTipClickToShort);
-                            $kendoProjectList.find("th[data-field=PrintConditionColorant] b").html(Resources.GridTemplateColumnResource6);
-                            $kendoProjectList.find("th[data-field=PrintConditionColorant] b").attr("title", Resources.ToolTipClickToShort);
-                            $kendoProjectList.find("th[data-field=CreateDate] b").html(Resources.GridDateTimeColumnResource1);
-                            $kendoProjectList.find("th[data-field=CreateDate] b").attr("title", Resources.ToolTipClickToShort);
-                            $kendoProjectList.find('thead').first().find('th').last().find('#imgClearFilter').attr('title', Resources.ClearFillterResource);
+                    commonAjaxCall(ajaxParameter, function (response) {
+                        var jsonProjectList = JSON.parse(response.data);
+                        Resources = jsonProjectList.GlobalResources;
+                        options.success(jsonProjectList.Projects);
+                        kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
 
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {                            
-                            if (XMLHttpRequest.status == 401) {
-                                ShowDialog("You are not authorized user. Please login again.", "Message");
-                            } else {
-                                alert(errorThrown);
-                            }                                                       
-                            kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
+                        $kendoProjectList.find("th[data-field=LicenseType] b").html(Resources.GridTemplateColumnResource0);
+                        $kendoProjectList.find("th[data-field=ValidationStatus] b").html(Resources.GridTemplateColumnResource1);
+                        $kendoProjectList.find("th[data-field=ProjectName] b").html(Resources.GridTemplateColumnResource3);
+                        $kendoProjectList.find("th[data-field=ProjectName] b").attr("title", Resources.ToolTipClickToShort);
+                        $kendoProjectList.find("th[data-field=SourceProfileName] b").html(Resources.GridTemplateColumnResource4);
+                        $kendoProjectList.find("th[data-field=SourceProfileName] b").attr("title", Resources.ToolTipClickToShort);
+                        $kendoProjectList.find("th[data-field=PrintConditionMedia] b").html(Resources.GridTemplateColumnResource5);
+                        $kendoProjectList.find("th[data-field=PrintConditionMedia] b").attr("title", Resources.ToolTipClickToShort);
+                        $kendoProjectList.find("th[data-field=PrintConditionColorant] b").html(Resources.GridTemplateColumnResource6);
+                        $kendoProjectList.find("th[data-field=PrintConditionColorant] b").attr("title", Resources.ToolTipClickToShort);
+                        $kendoProjectList.find("th[data-field=CreateDate] b").html(Resources.GridDateTimeColumnResource1);
+                        $kendoProjectList.find("th[data-field=CreateDate] b").attr("title", Resources.ToolTipClickToShort);
+                        $kendoProjectList.find('thead').first().find('th').last().find('#imgClearFilter').attr('title', Resources.ClearFillterResource);
+
+                    }, function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.status == 401) {
+                            ShowDialog("You are not authorized user. Please login again.", "Message");
+                        } else {
+                            alert(errorThrown);
                         }
+                        kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
                     });
+
+                    //$.ajax({
+                    //    type: "GET",
+                    //    url: SERVICE_BASE_URL + "api/Project/GetProjectDetailsByDeviceID/",
+                    //    data: { deviceID: CurrentDeviceID },
+                    //    dataType: "json",
+                    //    headers: {
+                    //        'Accept-Language': CurrentCulture,
+                    //        'Authorization': 'Basic ' + authToken
+                    //    },
+                    //    success: function (response) {
+                    //        var jsonProjectList = JSON.parse(response.data);
+                    //        Resources = jsonProjectList.GlobalResources;
+                    //        options.success(jsonProjectList.Projects);
+                    //        kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
+
+                    //        $kendoProjectList.find("th[data-field=LicenseType] b").html(Resources.GridTemplateColumnResource0);
+                    //        $kendoProjectList.find("th[data-field=ValidationStatus] b").html(Resources.GridTemplateColumnResource1);
+                    //        $kendoProjectList.find("th[data-field=ProjectName] b").html(Resources.GridTemplateColumnResource3);
+                    //        $kendoProjectList.find("th[data-field=ProjectName] b").attr("title", Resources.ToolTipClickToShort);
+                    //        $kendoProjectList.find("th[data-field=SourceProfileName] b").html(Resources.GridTemplateColumnResource4);
+                    //        $kendoProjectList.find("th[data-field=SourceProfileName] b").attr("title", Resources.ToolTipClickToShort);
+                    //        $kendoProjectList.find("th[data-field=PrintConditionMedia] b").html(Resources.GridTemplateColumnResource5);
+                    //        $kendoProjectList.find("th[data-field=PrintConditionMedia] b").attr("title", Resources.ToolTipClickToShort);
+                    //        $kendoProjectList.find("th[data-field=PrintConditionColorant] b").html(Resources.GridTemplateColumnResource6);
+                    //        $kendoProjectList.find("th[data-field=PrintConditionColorant] b").attr("title", Resources.ToolTipClickToShort);
+                    //        $kendoProjectList.find("th[data-field=CreateDate] b").html(Resources.GridDateTimeColumnResource1);
+                    //        $kendoProjectList.find("th[data-field=CreateDate] b").attr("title", Resources.ToolTipClickToShort);
+                    //        $kendoProjectList.find('thead').first().find('th').last().find('#imgClearFilter').attr('title', Resources.ClearFillterResource);
+
+                    //    },
+                    //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //        if (XMLHttpRequest.status == 401) {
+                    //            ShowDialog("You are not authorized user. Please login again.", "Message");
+                    //        } else {
+                    //            alert(errorThrown);
+                    //        }
+                    //        kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
+                    //    }
+                    //});
                     //kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
                     //kendo.ui.progress($kendoProjectList, false);
                 },
@@ -307,27 +342,54 @@ $(document).ready(function () {
                     },
                     ui: function (element) {
 
-                        $.ajax({
+                        var ajaxParameter = {
                             type: "GET",
                             url: SERVICE_BASE_URL + "api/Device/GetProjectLicenseType/",
                             data: { UserID: CurrentUserID, DeviceID: CurrentDeviceID },
-                            dataType: "json",
-                            success: function (response) {
-                                if (response.data.length > 0) {
-                                    var filterdData = response.data.filter(function (el) {
-                                        return el.LicenseTypeId !== 10;
-                                    });
-                                    element.kendoDropDownList({
-                                        dataSource: filterdData,
-                                        dataTextField: "Type",
-                                        dataValueField: "LicenseTypeId",
-                                    });
-                                }
-                            },
-                            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                console.log(errorThrown);
+                            dataType: "json"
+                        };
+
+                        commonAjaxCall(ajaxParameter, function (response) {
+                            if (response.data.length > 0) {
+                                var filterdData = response.data.filter(function (el) {
+                                    return el.LicenseTypeId !== 10;
+                                });
+                                element.kendoDropDownList({
+                                    dataSource: filterdData,
+                                    dataTextField: "Type",
+                                    dataValueField: "LicenseTypeId",
+                                });
                             }
+                        }, function (XMLHttpRequest, textStatus, errorThrown) {
+                            if (XMLHttpRequest.status == 401) {
+                                ShowDialog("You are not authorized user. Please login again.", "Message");
+                            } else {
+                                alert(errorThrown);
+                            }
+                            kendo.ui.progress($kendoProjectList, false);
                         });
+
+                        //$.ajax({
+                        //    type: "GET",
+                        //    url: SERVICE_BASE_URL + "api/Device/GetProjectLicenseType/",
+                        //    data: { UserID: CurrentUserID, DeviceID: CurrentDeviceID },
+                        //    dataType: "json",
+                        //    success: function (response) {
+                        //        if (response.data.length > 0) {
+                        //            var filterdData = response.data.filter(function (el) {
+                        //                return el.LicenseTypeId !== 10;
+                        //            });
+                        //            element.kendoDropDownList({
+                        //                dataSource: filterdData,
+                        //                dataTextField: "Type",
+                        //                dataValueField: "LicenseTypeId",
+                        //            });
+                        //        }
+                        //    },
+                        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        //        console.log(errorThrown);
+                        //    }
+                        //});
                     }
                 }
             },
@@ -506,27 +568,48 @@ $(document).ready(function () {
         if (confirm('Are you sure you want to delete all information of selected Spot Target Project?')) {
             kendo.ui.progress($('#kendoProjectList .k-grid-content'), true);
             //kendo.ui.progress($kendoProjectList, true);
-            $.ajax({
+
+            var ajaxParameter = {
                 type: "POST",
                 url: SERVICE_BASE_URL + "api/Project/DeleteSpotProject?spotProjectID=" + spotProjectID,
-                headers: {
-                    'Authorization': 'Basic ' + authToken
-                },
-                success: function (response) {
-                    //console.log(JSON.stringify(response));
-                    detailGrid.dataSource.read();
-                    detailGrid.refresh();
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    if (XMLHttpRequest.status == 401) {
-                        ShowDialog("You are not authorized user. Please login again.", "Message");
-                    } else {
-                        alert(errorThrown);
-                    }      
-                    console.log(errorThrown);
+                data: {},
+                dataType: "json"
+            };
+
+            commonAjaxCall(ajaxParameter, function (response) {
+                detailGrid.dataSource.read();
+                detailGrid.refresh();
+                kendo.ui.progress($kendoProjectList, false);
+            }, function (XMLHttpRequest, textStatus, errorThrown) {
+                if (XMLHttpRequest.status == 401) {
+                    ShowDialog("You are not authorized user. Please login again.", "Message");
+                } else {
+                    alert(errorThrown);
                 }
+                kendo.ui.progress($kendoProjectList, false);
             });
-            kendo.ui.progress($kendoProjectList, false);
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: SERVICE_BASE_URL + "api/Project/DeleteSpotProject?spotProjectID=" + spotProjectID,
+            //    headers: {
+            //        'Authorization': 'Basic ' + authToken
+            //    },
+            //    success: function (response) {
+            //        //console.log(JSON.stringify(response));
+            //        detailGrid.dataSource.read();
+            //        detailGrid.refresh();
+            //    },
+            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //        if (XMLHttpRequest.status == 401) {
+            //            ShowDialog("You are not authorized user. Please login again.", "Message");
+            //        } else {
+            //            alert(errorThrown);
+            //        }
+            //        console.log(errorThrown);
+            //    }
+            //});
+            //kendo.ui.progress($kendoProjectList, false);
         }
 
     })
@@ -538,20 +621,40 @@ function detailInit(e) {
         dataSource: {
             transport: {
                 read: function (options) {
-                    $.ajax({
+
+                    var ajaxParameter = {
                         type: "GET",
                         url: SERVICE_BASE_URL + "api/Project/GetSpotProjectDetailsByProjectID/",
                         data: { projectID: pID },
-                        dataType: "json",
-                        success: function (response) {
-                            var result = JSON.parse(response.data);
-                            hdfSpotProjectAllowed.val(result.isAllowSpotProject);
-                            options.success(result.SpotProjectLibraries);
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            alert(textStatus);
-                        }
+                        dataType: "json"
+                    };
+
+                    commonAjaxCall(ajaxParameter, function (response) {
+                        var result = JSON.parse(response.data);
+                        hdfSpotProjectAllowed.val(result.isAllowSpotProject);
+                        options.success(result.SpotProjectLibraries);
+                    }, function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.status == 401) {
+                            ShowDialog("You are not authorized user. Please login again.", "Message");
+                        } else {
+                            alert(errorThrown);
+                        }                        
                     });
+
+                    //$.ajax({
+                    //    type: "GET",
+                    //    url: SERVICE_BASE_URL + "api/Project/GetSpotProjectDetailsByProjectID/",
+                    //    data: { projectID: pID },
+                    //    dataType: "json",
+                    //    success: function (response) {
+                    //        var result = JSON.parse(response.data);
+                    //        hdfSpotProjectAllowed.val(result.isAllowSpotProject);
+                    //        options.success(result.SpotProjectLibraries);
+                    //    },
+                    //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //        alert(textStatus);
+                    //    }
+                    //});
                 },
             },
             schema: {
@@ -633,22 +736,22 @@ function detailInit(e) {
                 }
 
             });
-            
+
             //  enable/disabled button as per spot project limit
             var gridCurrent = $(e.sender.tbody).closest('.k-grid');
             var spotProjectAllowed = hdfSpotProjectAllowed.val() == 'true';
-            if (!spotProjectAllowed) {                
+            if (!spotProjectAllowed) {
                 $(gridCurrent).find('.k-grid-toolbar #btnCreateSpotProject').hide()
                 if (dataSource._data.length == 0) {
                     $(gridCurrent).find('.k-grid-toolbar').hide();
                 }
             } else {
-                $(gridCurrent).find('.k-grid-toolbar').show();                
+                $(gridCurrent).find('.k-grid-toolbar').show();
                 if (dataSource._data.length == 0) {
                     $(gridCurrent).find('.k-grid-toolbar').find('#btnExportSpotProject').hide();
                 }
             }
-            
+
         },
         columns: [
             {
@@ -748,18 +851,37 @@ function clearNestGridFilters(btn) {
 function deleteProject(id) {
     if (confirm('Are you sure you want to delete all information of selected Project?')) {
         kendo.ui.progress($kendoProjectList, true);
-        $.ajax({
+
+        var ajaxParameter = {
             type: "POST",
             url: SERVICE_BASE_URL + "api/Project/DeleteProject?projectID=" + id,
-            success: function (response) {
-                $kendoProjectList.data('kendoGrid').dataSource.read();
-                $kendoProjectList.data('kendoGrid').refresh();
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(errorThrown);
+            data: {},
+            dataType: ""
+        };
 
+        commonAjaxCall(ajaxParameter, function (response) {
+            $kendoProjectList.data('kendoGrid').dataSource.read();
+            $kendoProjectList.data('kendoGrid').refresh();
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
             }
         });
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: SERVICE_BASE_URL + "api/Project/DeleteProject?projectID=" + id,
+        //    success: function (response) {
+        //        $kendoProjectList.data('kendoGrid').dataSource.read();
+        //        $kendoProjectList.data('kendoGrid').refresh();
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log(errorThrown);
+
+        //    }
+        //});
         kendo.ui.progress($kendoProjectList, false);
     }
 }
@@ -811,7 +933,7 @@ function ShowSpotLibraryExportWindow(btn) {
             spotIDs = spotIDs + (dsSpots[index]['SpotProjectId'] + ',');
             isSpotProjectSelected = true;
         }
-    };    
+    };
     if (isSpotProjectSelected) {
         var oWindow;
         oWindow = window.radopen("PopupSpotLibraryExport.aspx?OptimizationRunId=101&SpotProjectIds=" + spotIDs, "ReportSpotLibraryExportWindow");
@@ -819,8 +941,33 @@ function ShowSpotLibraryExportWindow(btn) {
     } else {
         alert('Please select atleast one certified project.');
     }
-   
+
     return false;
+}
+
+
+function commonAjaxCall(options, success_call, error_call) {
+    var ajaxType = options.type;
+    var ajaxUrl = options.url;
+    var ajaxData = options.data;
+    var ajaxDataType = options.dataType;
+
+    $.ajax({
+        type: ajaxType,
+        url: ajaxUrl,
+        data: ajaxData,
+        dataType: ajaxDataType,
+        headers: {
+            'Accept-Language': CurrentCulture,
+            'Authorization': 'Basic ' + authToken
+        },
+        success: function (response) {
+            success_call(response);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            error_call(XMLHttpRequest, textStatus, errorThrown);
+        }
+    });
 }
 
 function ShowDialog(message, title) {
@@ -832,7 +979,7 @@ function ShowDialog(message, title) {
         content: message,
         actions: [
             {
-                text: 'OK', primary: true, action: function(e) {
+                text: 'OK', primary: true, action: function (e) {
                     window.location.href = 'login.aspx';
                 }
             }

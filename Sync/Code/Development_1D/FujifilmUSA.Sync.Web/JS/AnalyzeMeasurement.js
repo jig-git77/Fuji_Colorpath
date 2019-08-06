@@ -108,6 +108,7 @@ var $lnk_A_GrayBalanceLargeChart;
 var $lnk_B_GrayBalanceLargeChart;
 var $lnk_L_GrayBalanceLargeChart;
 var $hdnCurrentUserRole;
+var AUTH_TOKEN = '';
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -276,7 +277,7 @@ $(document).ready(function () {
     $hdnCurrentUserRole = $('#hdnCurrentUserRole');
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
-
+    AUTH_TOKEN = $("#hdfAuthToken").val();
     //check deltaE is underfined in validation project
     if (!$selectedDeltaE) {
         if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
@@ -389,24 +390,49 @@ $(document).ready(function () {
             apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
         }
 
-        $.ajax({
+        var ajaxParameter = {
             type: "POST",
             url: SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReport',
             data: apiParameter,
             dataType: "json",
-            success: function (response) {
-                kendo.ui.progress($('#divReport'), false);
-                if (response.data != null) {
-                    console.log(response.data);
-                    var fileName = '~' + response.data;
-                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                kendo.ui.progress($('#divReport'), false);
-                console.log(XMLHttpRequest.responseText);
+            headers: {
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            kendo.ui.progress($('#divReport'), false);
+            if (response.data != null) {
+                var filename = '~' + response.data;
+                window.location.href = SERVICE_BASE_URL + '/api/analyze/downloadfile?filepath=' + filename;
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            kendo.ui.progress($('#divReport'), false);
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
             }
         });
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: SERVICE_BASE_URL + 'api/Report/ExportAnalyzeChartReport',
+        //    data: apiParameter,
+        //    dataType: "json",
+        //    success: function (response) {
+        //        kendo.ui.progress($('#divReport'), false);
+        //        if (response.data != null) {
+        //            console.log(response.data);
+        //            var fileName = '~' + response.data;
+        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+        //        }
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        kendo.ui.progress($('#divReport'), false);
+        //        console.log(XMLHttpRequest.responseText);
+        //    }
+        //});
     });
 
 
@@ -759,103 +785,203 @@ function BindMeasurementSummary() {
             fromDeltaE: $selectedDeltaE,
         }
 
-        $.ajax({
+        var ajaxParameter = {
+            type: "GET",
             url: SERVICE_BASE_URL + 'api/Analyze/GetValidationMeasurementSummaryDetails',
             data: apiParameter,
-            type: 'GET',
-            async: false,
+            dataType: "json",
             headers: {
                 "content-type": "application/json",
-            },
-            dataType: 'json',
-            headers: {
-                'Accept-Language': $CurrentCulture
-            },
-            success: function (response) {
-                if (response.data != null) {
-                    if (response.data.length > 0) {
+                'Accept-Language': $CurrentCulture,
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
 
-                        var measurements = response.data;
-                        var measurement = measurements[0];
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                if (response.data.length > 0) {
 
-                        //generate dymo printing string to print the dymo label only for validation
-                        if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-                            PopulateDymoPrinter(measurement);
-                        }
-                        measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
-                        $hdnValidationType = measurement.ValidationType;
+                    var measurements = response.data;
+                    var measurement = measurements[0];
 
-                        var viewModel = kendo.observable(measurement);
-                        viewModel.isSync1DLicenseType = !($hdnCurrentDlpSubOperation == ELicenseType.Sync1D);
-                        viewModel.isCurrentDlpSubOperation = ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) ? ($hdnCurrentDlpSubOperation == ELicenseType.Validation) ? true : false : true;
-
-
-                        if (measurements[0].PatchTolerances == null || measurements[0].PatchTolerances.length == 0) {
-
-                            $('#tblPatchTolerance').css('display', 'none');
-                        }
-                        kendo.bind($("#divValidationSummary"), viewModel);
-                        $('#tblAverageMeasurementSummary').css('display', 'none');
-
-                        if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1D) {
-
-                            $('#rowCustomer').hide();
-                            $('#rowPageSurface').hide();
-                            $('#rowJobID').hide();
-                            $('#rowNotes').hide();
-                            if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-                                $('#rowCustomer').show();
-                                $('#rowNotes').show();
-                            }
-                        }
-
-                        //check validation type
-                        if ($hdnValidationType == 1 || $hdnValidationType == 2) {
-
-                            var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
-                            if ($hdnValidationType == 1) {
-
-                                //Show tabs G7
-                                //$(tabStrip.items()[2]).show();
-                                $(tabStrip.items()[2]).css('display', 'inline-block');
-
-
-                                //Bind G7 charts
-                                BindG7Charts();
-                            }
-
-                            //check the project type Sync1D or Validation
-                            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
-
-                                //Hide default tabs TVI
-                                //$(tabStrip.items()[4]).show();
-                                $(tabStrip.items()[4]).css('display', 'inline-block');
-
-                                //Bind TVI charts
-                                BindTVICharts();
-
-                                //show average measurement checkbox
-                                if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) {
-                                    $('#ContentPlaceHolder1_ucAnalyze_tdAverageOfMeasurements').css('display', 'block');
-                                }
-                            }
-                        }
-
-                        //set validation measurement status value for XMF user 
-                        $('#hdnValidationMeasurementStatus').val(measurement.MeasurementStatus);
-
-                        //create url to open report grading url for scoring report
-                        reportGradingPath = 'PopupReportGrading.aspx?MeasurementID=' + measurement.MeasurementId + '&From_ΔE=' + $selectedDeltaE + '&DLPName=' + $hdnReportDLPName + '&Vali_Type=' + $hdnValidationType + '&IsAvgMeas=' + $isAverageOfMeasurements;
-
-                        //create url to open report grading url for CMYK density report
-                        reportCMYKDensityPath = 'PopupReportCMYKDensity.aspx?ProjectID=' + $hdnProjectID + '&OptimizeRunID=' + $hdnOptimizationRunID + '&MeasurementID=' + measurement.MeasurementId;
+                    //generate dymo printing string to print the dymo label only for validation
+                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                        PopulateDymoPrinter(measurement);
                     }
+                    measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
+                    $hdnValidationType = measurement.ValidationType;
+
+                    var viewModel = kendo.observable(measurement);
+                    viewModel.isSync1DLicenseType = !($hdnCurrentDlpSubOperation == ELicenseType.Sync1D);
+                    viewModel.isCurrentDlpSubOperation = ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) ? ($hdnCurrentDlpSubOperation == ELicenseType.Validation) ? true : false : true;
+
+
+                    if (measurements[0].PatchTolerances == null || measurements[0].PatchTolerances.length == 0) {
+
+                        $('#tblPatchTolerance').css('display', 'none');
+                    }
+                    kendo.bind($("#divValidationSummary"), viewModel);
+                    $('#tblAverageMeasurementSummary').css('display', 'none');
+
+                    if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1D) {
+
+                        $('#rowCustomer').hide();
+                        $('#rowPageSurface').hide();
+                        $('#rowJobID').hide();
+                        $('#rowNotes').hide();
+                        if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                            $('#rowCustomer').show();
+                            $('#rowNotes').show();
+                        }
+                    }
+
+                    //check validation type
+                    if ($hdnValidationType == 1 || $hdnValidationType == 2) {
+
+                        var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+                        if ($hdnValidationType == 1) {
+
+                            //Show tabs G7
+                            //$(tabStrip.items()[2]).show();
+                            $(tabStrip.items()[2]).css('display', 'inline-block');
+
+
+                            //Bind G7 charts
+                            BindG7Charts();
+                        }
+
+                        //check the project type Sync1D or Validation
+                        if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+
+                            //Hide default tabs TVI
+                            //$(tabStrip.items()[4]).show();
+                            $(tabStrip.items()[4]).css('display', 'inline-block');
+
+                            //Bind TVI charts
+                            BindTVICharts();
+
+                            //show average measurement checkbox
+                            if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) {
+                                $('#ContentPlaceHolder1_ucAnalyze_tdAverageOfMeasurements').css('display', 'block');
+                            }
+                        }
+                    }
+
+                    //set validation measurement status value for XMF user 
+                    $('#hdnValidationMeasurementStatus').val(measurement.MeasurementStatus);
+
+                    //create url to open report grading url for scoring report
+                    reportGradingPath = 'PopupReportGrading.aspx?MeasurementID=' + measurement.MeasurementId + '&From_ΔE=' + $selectedDeltaE + '&DLPName=' + $hdnReportDLPName + '&Vali_Type=' + $hdnValidationType + '&IsAvgMeas=' + $isAverageOfMeasurements;
+
+                    //create url to open report grading url for CMYK density report
+                    reportCMYKDensityPath = 'PopupReportCMYKDensity.aspx?ProjectID=' + $hdnProjectID + '&OptimizeRunID=' + $hdnOptimizationRunID + '&MeasurementID=' + measurement.MeasurementId;
                 }
-            },
-            error: function (xhr, errorType, exception) {
-                alert(exception);
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
             }
         });
+
+        //$.ajax({
+        //    url: SERVICE_BASE_URL + 'api/Analyze/GetValidationMeasurementSummaryDetails',
+        //    data: apiParameter,
+        //    type: 'GET',
+        //    async: false,
+        //    headers: {
+        //        "content-type": "application/json",
+        //    },
+        //    dataType: 'json',
+        //    headers: {
+        //        'Accept-Language': $CurrentCulture
+        //    },
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            if (response.data.length > 0) {
+
+        //                var measurements = response.data;
+        //                var measurement = measurements[0];
+
+        //                //generate dymo printing string to print the dymo label only for validation
+        //                if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+        //                    PopulateDymoPrinter(measurement);
+        //                }
+        //                measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
+        //                $hdnValidationType = measurement.ValidationType;
+
+        //                var viewModel = kendo.observable(measurement);
+        //                viewModel.isSync1DLicenseType = !($hdnCurrentDlpSubOperation == ELicenseType.Sync1D);
+        //                viewModel.isCurrentDlpSubOperation = ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) ? ($hdnCurrentDlpSubOperation == ELicenseType.Validation) ? true : false : true;
+
+
+        //                if (measurements[0].PatchTolerances == null || measurements[0].PatchTolerances.length == 0) {
+
+        //                    $('#tblPatchTolerance').css('display', 'none');
+        //                }
+        //                kendo.bind($("#divValidationSummary"), viewModel);
+        //                $('#tblAverageMeasurementSummary').css('display', 'none');
+
+        //                if ($hdnCurrentProjectLicenseType == ELicenseType.Sync1D) {
+
+        //                    $('#rowCustomer').hide();
+        //                    $('#rowPageSurface').hide();
+        //                    $('#rowJobID').hide();
+        //                    $('#rowNotes').hide();
+        //                    if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+        //                        $('#rowCustomer').show();
+        //                        $('#rowNotes').show();
+        //                    }
+        //                }
+
+        //                //check validation type
+        //                if ($hdnValidationType == 1 || $hdnValidationType == 2) {
+
+        //                    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+        //                    if ($hdnValidationType == 1) {
+
+        //                        //Show tabs G7
+        //                        //$(tabStrip.items()[2]).show();
+        //                        $(tabStrip.items()[2]).css('display', 'inline-block');
+
+
+        //                        //Bind G7 charts
+        //                        BindG7Charts();
+        //                    }
+
+        //                    //check the project type Sync1D or Validation
+        //                    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+
+        //                        //Hide default tabs TVI
+        //                        //$(tabStrip.items()[4]).show();
+        //                        $(tabStrip.items()[4]).css('display', 'inline-block');
+
+        //                        //Bind TVI charts
+        //                        BindTVICharts();
+
+        //                        //show average measurement checkbox
+        //                        if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) {
+        //                            $('#ContentPlaceHolder1_ucAnalyze_tdAverageOfMeasurements').css('display', 'block');
+        //                        }
+        //                    }
+        //                }
+
+        //                //set validation measurement status value for XMF user 
+        //                $('#hdnValidationMeasurementStatus').val(measurement.MeasurementStatus);
+
+        //                //create url to open report grading url for scoring report
+        //                reportGradingPath = 'PopupReportGrading.aspx?MeasurementID=' + measurement.MeasurementId + '&From_ΔE=' + $selectedDeltaE + '&DLPName=' + $hdnReportDLPName + '&Vali_Type=' + $hdnValidationType + '&IsAvgMeas=' + $isAverageOfMeasurements;
+
+        //                //create url to open report grading url for CMYK density report
+        //                reportCMYKDensityPath = 'PopupReportCMYKDensity.aspx?ProjectID=' + $hdnProjectID + '&OptimizeRunID=' + $hdnOptimizationRunID + '&MeasurementID=' + measurement.MeasurementId;
+        //            }
+        //        }
+        //    },
+        //    error: function (xhr, errorType, exception) {
+        //        alert(exception);
+        //    }
+        //});
 
 
     } else {
@@ -868,32 +994,63 @@ function BindMeasurementSummary() {
             IsVerificationProject: $hdnVerification
         }
 
-        $.ajax({
+        var ajaxParameter = {
+            type: "GET",
             url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementSummaryDetails',
             data: apiParameter,
-            type: 'GET',
+            dataType: "json",
             headers: {
                 "content-type": "application/json",
-            },
-            dataType: 'json',
-            headers: {
-                'Accept-Language': $CurrentCulture
-            },
-            success: function (response) {
-                if (response.data != null) {
-                    if (response.data.length > 0) {
-                        var measurements = response.data;
-                        var measurement = measurements[0];                        
-                        measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
-                        var viewModel = kendo.observable(measurement);
-                        kendo.bind($("#divMeasurementSummary"), viewModel);
-                    }
+                'Accept-Language': $CurrentCulture,
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                if (response.data.length > 0) {
+                    var measurements = response.data;
+                    var measurement = measurements[0];
+                    measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
+                    var viewModel = kendo.observable(measurement);
+                    kendo.bind($("#divMeasurementSummary"), viewModel);
                 }
-            },
-            error: function (xhr, errorType, exception) {
-                alert(exception);
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
             }
         });
+
+
+        //$.ajax({
+        //    url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementSummaryDetails',
+        //    data: apiParameter,
+        //    type: 'GET',
+        //    headers: {
+        //        "content-type": "application/json",
+        //    },
+        //    dataType: 'json',
+        //    headers: {
+        //        'Accept-Language': $CurrentCulture
+        //    },
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            if (response.data.length > 0) {
+        //                var measurements = response.data;
+        //                var measurement = measurements[0];
+        //                measurement.MeasurementDateFormatted = new Date(measurement.MeasurementDate);
+        //                var viewModel = kendo.observable(measurement);
+        //                kendo.bind($("#divMeasurementSummary"), viewModel);
+        //            }
+        //        }
+        //    },
+        //    error: function (xhr, errorType, exception) {
+        //        alert(exception);
+        //    }
+        //});
     }
 
 
@@ -941,10 +1098,11 @@ function BindMeasurementPatchDetails() {
                 transport: {
                     read: function (options) {
                         kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), true);
-                        $.ajax({
+
+
+                        var ajaxParameter = {
                             type: "GET",
                             url: SERVICE_BASE_URL + 'api/Chart/GetMeasurementPatchDetails',
-                            //data: apiParameters,
                             data: {
                                 MeasurementId: parseInt($hdnCurrentMeasurement.val()),
                                 IsVerificationProject: $hdnVerification,
@@ -953,49 +1111,109 @@ function BindMeasurementPatchDetails() {
                             },
                             dataType: "json",
                             headers: {
-                                'Accept-Language': $CurrentCulture
-                            },
-                            success: function (response) {
-                                kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
-                                if (response.data != null) {
-                                    Resources = response.data.GlobalResources;
-                                    var patches = response.data.measurementPatchDetails;
-                                    options.success(patches);
+                                'Accept-Language': $CurrentCulture,
+                                'Authorization': 'Basic ' + AUTH_TOKEN
+                            }
+                        };
 
-                                    //set the column header
-                                    $divMeasurementPatchDetails.find("th[data-field=HTMLColor] b").html(Resources.gridAnalyzeHeaderPatchResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=SampleID] b").html(Resources.gridAnalyzeHeaderIDResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=SampleName] b").html(Resources.GridTemplateColumnResource3);
-                                    $divMeasurementPatchDetails.find("th[data-field=CMYK_C] b").html(Resources.gridAnalyzeHeader_C_Resource);
-                                    $divMeasurementPatchDetails.find("th[data-field=CMYK_M] b").html(Resources.gridAnalyzeHeader_M_Resource);
-                                    $divMeasurementPatchDetails.find("th[data-field=CMYK_Y] b").html(Resources.gridAnalyzeHeader_Y_Resource);
-                                    $divMeasurementPatchDetails.find("th[data-field=CMYK_K] b").html(Resources.gridAnalyzeHeader_K_Resource);
-                                    $divMeasurementPatchDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeader_E_Resource);
-                                    $divMeasurementPatchDetails.find("th[data-field=ΔE94] b").html(Resources.gridAnalyzeHeaderE94Resource);
-                                    $divMeasurementPatchDetails.find("th[data-field=ΔE2000] b").html(Resources.gridAnalyzeHeaderE2000Resource);
-                                    $divMeasurementPatchDetails.find("th[data-field=TargetL] b").html(Resources.gridAnalyzeHeaderTargetLResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=CIELAB_L] b").html(Resources.gridAnalyzeHeaderCIELAB_LResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=Targeta] b").html(Resources.gridAnalyzeHeaderTargetAResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=CIELAB_a] b").html(Resources.gridAnalyzeHeaderCIELAB_AResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=Targetb] b").html(Resources.gridAnalyzeHeaderTargetBResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=CIELAB_b] b").html(Resources.gridAnalyzeHeaderCIELAB_BResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=Density_V] b").html(Resources.gridAnalyzeHeaderDensity_VResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=Density_C] b").html(Resources.gridAnalyzeHeaderDensity_CResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
-                                    $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
-                                    if (response.data.measurementPatchDetails[0].IsWeighted) {
-                                        $divMeasurementPatchDetails.find("th[data-field=ΔL] b").html('wΔL');
-                                        $divMeasurementPatchDetails.find("th[data-field=ΔCh] b").html('wΔCh');
-                                    }
+                        commonAjaxCall(ajaxParameter, function (response) {
+                            kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
+                            if (response.data != null) {
+                                Resources = response.data.GlobalResources;
+                                var patches = response.data.measurementPatchDetails;
+                                options.success(patches);
 
+                                //set the column header
+                                $divMeasurementPatchDetails.find("th[data-field=HTMLColor] b").html(Resources.gridAnalyzeHeaderPatchResource);
+                                $divMeasurementPatchDetails.find("th[data-field=SampleID] b").html(Resources.gridAnalyzeHeaderIDResource);
+                                $divMeasurementPatchDetails.find("th[data-field=SampleName] b").html(Resources.GridTemplateColumnResource3);
+                                $divMeasurementPatchDetails.find("th[data-field=CMYK_C] b").html(Resources.gridAnalyzeHeader_C_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=CMYK_M] b").html(Resources.gridAnalyzeHeader_M_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=CMYK_Y] b").html(Resources.gridAnalyzeHeader_Y_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=CMYK_K] b").html(Resources.gridAnalyzeHeader_K_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeader_E_Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=ΔE94] b").html(Resources.gridAnalyzeHeaderE94Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=ΔE2000] b").html(Resources.gridAnalyzeHeaderE2000Resource);
+                                $divMeasurementPatchDetails.find("th[data-field=TargetL] b").html(Resources.gridAnalyzeHeaderTargetLResource);
+                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_L] b").html(Resources.gridAnalyzeHeaderCIELAB_LResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Targeta] b").html(Resources.gridAnalyzeHeaderTargetAResource);
+                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_a] b").html(Resources.gridAnalyzeHeaderCIELAB_AResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Targetb] b").html(Resources.gridAnalyzeHeaderTargetBResource);
+                                $divMeasurementPatchDetails.find("th[data-field=CIELAB_b] b").html(Resources.gridAnalyzeHeaderCIELAB_BResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Density_V] b").html(Resources.gridAnalyzeHeaderDensity_VResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Density_C] b").html(Resources.gridAnalyzeHeaderDensity_CResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
+                                $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
+                                if (response.data.measurementPatchDetails[0].IsWeighted) {
+                                    $divMeasurementPatchDetails.find("th[data-field=ΔL] b").html('wΔL');
+                                    $divMeasurementPatchDetails.find("th[data-field=ΔCh] b").html('wΔCh');
                                 }
 
-                            },
-                            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
-                                console.log(XMLHttpRequest.responseText);
                             }
+                        }, function (XMLHttpRequest, textStatus, errorThrown) {
+                            if (XMLHttpRequest.status == 401) {
+                                ShowDialog("You are not authorized user. Please login again.", "Message");
+                            } else {
+                                alert(errorThrown);
+                            }
+                            kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
                         });
+
+                        //$.ajax({
+                        //    type: "GET",
+                        //    url: SERVICE_BASE_URL + 'api/Chart/GetMeasurementPatchDetails',
+                        //    //data: apiParameters,
+                        //    data: {
+                        //        MeasurementId: parseInt($hdnCurrentMeasurement.val()),
+                        //        IsVerificationProject: $hdnVerification,
+                        //        IsSync1DTypeProject: $hdnSync1DType,
+                        //        metricSumID: $('#hdPatchMatricSum').val()
+                        //    },
+                        //    dataType: "json",
+                        //    headers: {
+                        //        'Accept-Language': $CurrentCulture
+                        //    },
+                        //    success: function (response) {
+                        //        kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
+                        //        if (response.data != null) {
+                        //            Resources = response.data.GlobalResources;
+                        //            var patches = response.data.measurementPatchDetails;
+                        //            options.success(patches);
+
+                        //            //set the column header
+                        //            $divMeasurementPatchDetails.find("th[data-field=HTMLColor] b").html(Resources.gridAnalyzeHeaderPatchResource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=SampleID] b").html(Resources.gridAnalyzeHeaderIDResource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=SampleName] b").html(Resources.GridTemplateColumnResource3);
+                        //            $divMeasurementPatchDetails.find("th[data-field=CMYK_C] b").html(Resources.gridAnalyzeHeader_C_Resource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=CMYK_M] b").html(Resources.gridAnalyzeHeader_M_Resource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=CMYK_Y] b").html(Resources.gridAnalyzeHeader_Y_Resource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=CMYK_K] b").html(Resources.gridAnalyzeHeader_K_Resource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=ΔE] b").html(Resources.gridAnalyzeHeader_E_Resource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=ΔE94] b").html(Resources.gridAnalyzeHeaderE94Resource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=ΔE2000] b").html(Resources.gridAnalyzeHeaderE2000Resource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=TargetL] b").html(Resources.gridAnalyzeHeaderTargetLResource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=CIELAB_L] b").html(Resources.gridAnalyzeHeaderCIELAB_LResource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=Targeta] b").html(Resources.gridAnalyzeHeaderTargetAResource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=CIELAB_a] b").html(Resources.gridAnalyzeHeaderCIELAB_AResource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=Targetb] b").html(Resources.gridAnalyzeHeaderTargetBResource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=CIELAB_b] b").html(Resources.gridAnalyzeHeaderCIELAB_BResource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=Density_V] b").html(Resources.gridAnalyzeHeaderDensity_VResource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=Density_C] b").html(Resources.gridAnalyzeHeaderDensity_CResource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=Density_M] b").html(Resources.gridAnalyzeHeaderDensity_MResource);
+                        //            $divMeasurementPatchDetails.find("th[data-field=Density_Y] b").html(Resources.gridAnalyzeHeaderDensity_YResource);
+                        //            if (response.data.measurementPatchDetails[0].IsWeighted) {
+                        //                $divMeasurementPatchDetails.find("th[data-field=ΔL] b").html('wΔL');
+                        //                $divMeasurementPatchDetails.find("th[data-field=ΔCh] b").html('wΔCh');
+                        //            }
+
+                        //        }
+
+                        //    },
+                        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        //        kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
+                        //        console.log(XMLHttpRequest.responseText);
+                        //    }
+                        //});
                     },
 
                 },
@@ -1411,28 +1629,45 @@ function BindMeasurementPatchDetails() {
     $divMeasurementPatchDetails.find('#btnExportMeasurement').on('click', function (e) {
         e.preventDefault();
 
-        debugger;
         var measurementID = parseInt($hdnCurrentMeasurement.val());
 
-        $.ajax({
+        var ajaxParameter = {
             type: "POST",
-            //url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport/',
             url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport?MeasurementId=' + measurementID + '&LicenseType=' + parseInt($hdnCurrentDlpSubOperation),
-            //data: JSON.stringify({
-            //    MeasurementId: measurementID,
-            //    LicenseType: parseInt($hdnCurrentDlpSubOperation)
-            //}),
+            data: {},
             dataType: "json",
-            success: function (response) {
-                if (response.data != null) {
-                    var fileName = '~' + response.data;
-                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(XMLHttpRequest.responseText);
+            headers: {
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                var fileName = '~' + response.data;
+                window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
             }
         });
+
+        //$.ajax({
+        //    type: "POST",            
+        //    url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport?MeasurementId=' + measurementID + '&LicenseType=' + parseInt($hdnCurrentDlpSubOperation),           
+        //    dataType: "json",
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            var fileName = '~' + response.data;
+        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+        //        }
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log(XMLHttpRequest.responseText);
+        //    }
+        //});
     });
 
     $divMeasurementPatchDetails.find('#btnExportCGATS').on('click', function (e) {
@@ -1480,23 +1715,45 @@ function BindMeasurementPatchDetails() {
             filter: filterObj
         };
 
-        console.log(filterObj);
-
-        $.ajax({
+        var ajaxParameter = {
             type: "POST",
             url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
             data: filterObj,
             dataType: "json",
-            success: function (response) {
-                if (response.data != null) {
-                    var fileName = '~' + response.data;
-                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(XMLHttpRequest.responseText);
+            headers: {
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                var fileName = '~' + response.data;
+                window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
             }
         });
+
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
+        //    data: filterObj,
+        //    dataType: "json",
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            var fileName = '~' + response.data;
+        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+        //        }
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log(XMLHttpRequest.responseText);
+        //    }
+        //});
     });
 
     $divMeasurementPatchDetails.find('#btnExportCxF').on('click', function (e) {
@@ -1543,40 +1800,45 @@ function BindMeasurementPatchDetails() {
             filter: filterObj
         };
 
-        console.log(filterObj);
-
-        $.ajax({
+        var ajaxParameter = {
             type: "POST",
             url: SERVICE_BASE_URL + 'api/Analyze/GetCFXPatchReport',
             data: filterObj,
             dataType: "json",
-            success: function (response) {
-                if (response.data != null) {
-                    var fileName = '~' + response.data;
-                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(XMLHttpRequest.responseText);
+            headers: {
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                var fileName = '~' + response.data;
+                window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
             }
         });
-
+        
 
         //$.ajax({
-        //    type: "GET",
-        //    url: SERVICE_BASE_URL + 'api/Chart/GetCFXPatchReport',
-        //    data: apiReportParameters,
+        //    type: "POST",
+        //    url: SERVICE_BASE_URL + 'api/Analyze/GetCFXPatchReport',
+        //    data: filterObj,
         //    dataType: "json",
         //    success: function (response) {
         //        if (response.data != null) {
         //            var fileName = '~' + response.data;
-        //            window.location.href = SERVICE_BASE_URL + '/api/Chart/DownloadFile?filePath=' + fileName;
+        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
         //        }
         //    },
         //    error: function (XMLHttpRequest, textStatus, errorThrown) {
         //        console.log(XMLHttpRequest.responseText);
         //    }
-        //});
+        //});       
     });
 
     $divMeasurementPatchDetails.find('#lnkLinkFilter').on('click', function (e) {
@@ -1605,32 +1867,67 @@ function BindAnalyzeChart() {
         ProjectType: $hdnCurrentDlpSubOperation
     };
 
-    $.ajax({
+    var ajaxParameter = {
+        type: "GET",
         url: SERVICE_BASE_URL + 'api/Chart/GenerateAnalyzeChart',
         data: apiParameters,
-        type: 'GET',
-        dataType: 'json',
+        dataType: "json",
         headers: {
-            'Accept-Language': $CurrentCulture
+            'Accept-Language': $CurrentCulture,
+            'Authorization': 'Basic ' + AUTH_TOKEN
         },
-        success: function (response) {
-            if (response.data != null) {
-                jsonAnalyzeList = response.data;
-                _Resources = response.data.GlobalResources;
-                if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
-                    $('#divAnalyzeHeader').css('display', 'block');
-                    //$('#lblNewAnalyzeLabel').html(jsonAnalyzeList.Measurements[0].MeasurementName);
-                } else {
-                    $('#divAnalyzePagingSection').css('display', 'block');
+    };
 
-                }
-                BindPageNumber();
+    commonAjaxCall(ajaxParameter, function (response) {
+        if (response.data != null) {
+            jsonAnalyzeList = response.data;
+            _Resources = response.data.GlobalResources;
+            if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
+                $('#divAnalyzeHeader').css('display', 'block');
+            } else {
+                $('#divAnalyzePagingSection').css('display', 'block');
+
             }
-        },
-        error: function (xhr, errorType, exception) {
-            kendo.ui.progress($chartLoader, false);
+            BindPageNumber();
         }
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.status == 401) {
+            ShowDialog("You are not authorized user. Please login again.", "Message");
+        } else {
+            alert(errorThrown);
+        }
+        kendo.ui.progress($chartLoader, false);
     });
+
+
+
+
+    //$.ajax({
+    //    url: SERVICE_BASE_URL + 'api/Chart/GenerateAnalyzeChart',
+    //    data: apiParameters,
+    //    type: 'GET',
+    //    dataType: 'json',
+    //    headers: {
+    //        'Accept-Language': $CurrentCulture
+    //    },
+    //    success: function (response) {
+    //        if (response.data != null) {
+    //            jsonAnalyzeList = response.data;
+    //            _Resources = response.data.GlobalResources;
+    //            if ($hdnCurrentDlpSubOperation != ELicenseType.Validation) {
+    //                $('#divAnalyzeHeader').css('display', 'block');
+    //                //$('#lblNewAnalyzeLabel').html(jsonAnalyzeList.Measurements[0].MeasurementName);
+    //            } else {
+    //                $('#divAnalyzePagingSection').css('display', 'block');
+
+    //            }
+    //            BindPageNumber();
+    //        }
+    //    },
+    //    error: function (xhr, errorType, exception) {
+    //        kendo.ui.progress($chartLoader, false);
+    //    }
+    //});
 }
 
 ////**************** START BIND THE AB COMPARISION INK PAPER CHART  ****************////
@@ -1645,36 +1942,71 @@ function BindInkPaperChartABComparision() {
         fromDeltaE: $selectedDeltaE,
     };
 
-    kendo.ui.progress($chartLoader, true);
-    $.ajax({
+    var ajaxParameter = {
+        type: "GET",
         url: SERVICE_BASE_URL + 'api/Chart/GenerateInkPaperChart',
         data: apiParameters,
-        type: 'GET',
-        dataType: 'json',
+        dataType: "json",
         headers: {
-            'Accept-Language': $CurrentCulture
-        },
-        success: function (response) {
-            //console.log('Ink paper chart');
-            //console.log(response);
-            if (response.data != null) {
-                jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
-                if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
-                    $tblDensityChart.css('display', 'none');
-                }
-                jsonDensityList = response.data.DensityList;
-                jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
-                _Resources = response.data.GlobalResources;
-            }
-
-            PopulateInkPaperChartABComparision();
-            kendo.ui.progress($chartLoader, false);
-        },
-        error: function (xhr, errorType, exception) {
-            //alert(exception);
-            kendo.ui.progress($chartLoader, false);
+            'Accept-Language': $CurrentCulture,
+            'Authorization': 'Basic ' + AUTH_TOKEN
         }
+    };
+
+    kendo.ui.progress($chartLoader, true);
+    commonAjaxCall(ajaxParameter, function (response) {
+        if (response.data != null) {
+            jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
+            if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
+                $tblDensityChart.css('display', 'none');
+            }
+            jsonDensityList = response.data.DensityList;
+            jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
+            _Resources = response.data.GlobalResources;
+        }
+
+        PopulateInkPaperChartABComparision();
+        kendo.ui.progress($chartLoader, false);
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.status == 401) {
+            ShowDialog("You are not authorized user. Please login again.", "Message");
+        } else {
+            alert(errorThrown);
+        }
+        kendo.ui.progress($chartLoader, false);
     });
+
+
+
+    //$.ajax({
+    //    url: SERVICE_BASE_URL + 'api/Chart/GenerateInkPaperChart',
+    //    data: apiParameters,
+    //    type: 'GET',
+    //    dataType: 'json',
+    //    headers: {
+    //        'Accept-Language': $CurrentCulture
+    //    },
+    //    success: function (response) {
+    //        //console.log('Ink paper chart');
+    //        //console.log(response);
+    //        if (response.data != null) {
+    //            jsonDeltaEPrimaryPatchList = response.data.DeltaEPrimaryPatchList;
+    //            if ($hdnCurrentDlpSubOperation == ELicenseType.DLP || $hdnValidationType == 0) {
+    //                $tblDensityChart.css('display', 'none');
+    //            }
+    //            jsonDensityList = response.data.DensityList;
+    //            jsonDeltaPaperLAB_1 = response.data.PaperPatchList;
+    //            _Resources = response.data.GlobalResources;
+    //        }
+
+    //        PopulateInkPaperChartABComparision();
+    //        kendo.ui.progress($chartLoader, false);
+    //    },
+    //    error: function (xhr, errorType, exception) {
+    //        //alert(exception);
+    //        kendo.ui.progress($chartLoader, false);
+    //    }
+    //});
 }
 
 ////**************** START BIND THE INK PAPER (GAMUT) CHARTS  ****************////
@@ -1688,34 +2020,65 @@ function BindGrayCharts() {
         IsSync1DTypeProject: $hdnSync1DType,
     };
 
-    kendo.ui.progress($chartLoader, true);
-    $.ajax({
-        //url: SERVICE_BASE_URL + 'api/Chart/GenerateAnalyzeCharts',
+    var ajaxParameter = {
+        type: "GET",
         url: SERVICE_BASE_URL + 'api/Chart/GenerateGrayChart',
         data: apiParameters,
-        type: 'GET',
-        dataType: 'json',
+        dataType: "json",
         headers: {
-            'Accept-Language': $CurrentCulture
-        },
-        success: function (response) {
-            //console.log(response);
-            jsonTarget = response.data.GamutChartActual;
-            jsonColors = response.data.GamutChart;
-            jsonGray = response.data.LABChart;
-            _Resources = response.data.GlobalResources;
-            PopulateChartTargetVersusActualAB();
-            PopulateChartGamutABComparision();
-            PopulateChartLComparision();
-            PopulateChartLGrayBalance();
-            kendo.ui.progress($chartLoader, false);
-
-        },
-        error: function (xhr, errorType, exception) {
-            //alert(exception);
-            kendo.ui.progress($chartLoader, false);
+            'Accept-Language': $CurrentCulture,
+            'Authorization': 'Basic ' + AUTH_TOKEN
         }
+    };
+
+
+    kendo.ui.progress($chartLoader, true);
+    commonAjaxCall(ajaxParameter, function (response) {
+        jsonTarget = response.data.GamutChartActual;
+        jsonColors = response.data.GamutChart;
+        jsonGray = response.data.LABChart;
+        _Resources = response.data.GlobalResources;
+        PopulateChartTargetVersusActualAB();
+        PopulateChartGamutABComparision();
+        PopulateChartLComparision();
+        PopulateChartLGrayBalance();
+        kendo.ui.progress($chartLoader, false);
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.status == 401) {
+            ShowDialog("You are not authorized user. Please login again.", "Message");
+        } else {
+            alert(errorThrown);
+        }
+        kendo.ui.progress($chartLoader, false);
     });
+
+    //$.ajax({
+    //    //url: SERVICE_BASE_URL + 'api/Chart/GenerateAnalyzeCharts',
+    //    url: SERVICE_BASE_URL + 'api/Chart/GenerateGrayChart',
+    //    data: apiParameters,
+    //    type: 'GET',
+    //    dataType: 'json',
+    //    headers: {
+    //        'Accept-Language': $CurrentCulture
+    //    },
+    //    success: function (response) {
+    //        //console.log(response);
+    //        jsonTarget = response.data.GamutChartActual;
+    //        jsonColors = response.data.GamutChart;
+    //        jsonGray = response.data.LABChart;
+    //        _Resources = response.data.GlobalResources;
+    //        PopulateChartTargetVersusActualAB();
+    //        PopulateChartGamutABComparision();
+    //        PopulateChartLComparision();
+    //        PopulateChartLGrayBalance();
+    //        kendo.ui.progress($chartLoader, false);
+
+    //    },
+    //    error: function (xhr, errorType, exception) {
+    //        //alert(exception);
+    //        kendo.ui.progress($chartLoader, false);
+    //    }
+    //});
 }
 
 
@@ -1731,25 +2094,50 @@ function BindDeltaSummaryStatesChart() {
         validationType: $hdnValidationType
     };
 
-    $.ajax({
+    var ajaxParameter = {
+        type: "GET",
         url: SERVICE_BASE_URL + 'api/Report/GenerateSummaryDeltaCharts',
         data: apiParameters,
-        type: 'GET',
-        dataType: 'json',
-        success: function (response) {
-            debugger;
-            if (response != null) {
-                jsonSummaryNameList = response.data.DTDeltaSummaryLables;
-                jsonSummaryValueList = response.data.DTDeltaSummaryValues;
-                jsonSummaryLimitList = response.data.DTDeltaSummaryLimits;
-            }
-            PopulateSummaryDeltaChart();
-        },
-        error: function (xhr, errorType, exception) {
-            //alert(exception);
-            kendo.ui.progress($chartLoader, false);
+        dataType: "json",
+        headers: {
+            'Authorization': 'Basic ' + AUTH_TOKEN
+        }
+    };
+
+
+    commonAjaxCall(ajaxParameter, function (response) {
+        if (response != null) {
+            jsonSummaryNameList = response.data.DTDeltaSummaryLables;
+            jsonSummaryValueList = response.data.DTDeltaSummaryValues;
+            jsonSummaryLimitList = response.data.DTDeltaSummaryLimits;
+        }
+        PopulateSummaryDeltaChart();
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.status == 401) {
+            ShowDialog("You are not authorized user. Please login again.", "Message");
+        } else {
+            alert(errorThrown);
         }
     });
+
+    //$.ajax({
+    //    url: SERVICE_BASE_URL + 'api/Report/GenerateSummaryDeltaCharts',
+    //    data: apiParameters,
+    //    type: 'GET',
+    //    dataType: 'json',
+    //    success: function (response) {
+    //        if (response != null) {
+    //            jsonSummaryNameList = response.data.DTDeltaSummaryLables;
+    //            jsonSummaryValueList = response.data.DTDeltaSummaryValues;
+    //            jsonSummaryLimitList = response.data.DTDeltaSummaryLimits;
+    //        }
+    //        PopulateSummaryDeltaChart();
+    //    },
+    //    error: function (xhr, errorType, exception) {
+    //        //alert(exception);
+    //        kendo.ui.progress($chartLoader, false);
+    //    }
+    //});
 
 
 }
@@ -1763,40 +2151,75 @@ function BindG7Charts() {
         IsVerificationProject: $hdnVerification,
     };
 
-    //kendo.ui.progress($chartLoader, true);
-    $.ajax({
+    var ajaxParameter = {
+        type: "GET",
         url: SERVICE_BASE_URL + 'api/Chart/GenerateG7Chart',
         data: apiParameters,
-        type: 'GET',
-        dataType: 'json',
+        dataType: "json",
         headers: {
-            'Accept-Language': $CurrentCulture
-        },
-        success: function (response) {
-            //console.log('G7 Chart data');
-            //console.log(response);
-            //console.log(JSON.stringify(response));
-            if (response.data != null) {
-                jsonGrayFChartList = response.data.GrayFChartList;
-                jsonBlackLChartList = response.data.BlackLChartList;
-                jsonGrayLChartList = response.data.GrayLChartList;
-                jsonBlackNPDChartList = response.data.BlackNPDChartList;
-                jsonGrayNPDChartList = response.data.GrayNPDChartList;
-
-                kendo.bind($("#divGraySummaryList"), response.data);
-                kendo.bind($("#divBlackSummaryList"), response.data);
-                kendo.bind($("#divGrayLDeltaSummaryList"), response.data);
-
-            }
-            PopulateG7Charts();
-
-            //kendo.ui.progress($chartLoader, false);
-        },
-        error: function (xhr, errorType, exception) {
-            //alert(exception);
-            kendo.ui.progress($chartLoader, false);
+            'Accept-Language': $CurrentCulture,
+            'Authorization': 'Basic ' + AUTH_TOKEN
         }
+    };
+
+    commonAjaxCall(ajaxParameter, function (response) {
+        if (response.data != null) {
+            jsonGrayFChartList = response.data.GrayFChartList;
+            jsonBlackLChartList = response.data.BlackLChartList;
+            jsonGrayLChartList = response.data.GrayLChartList;
+            jsonBlackNPDChartList = response.data.BlackNPDChartList;
+            jsonGrayNPDChartList = response.data.GrayNPDChartList;
+
+            kendo.bind($("#divGraySummaryList"), response.data);
+            kendo.bind($("#divBlackSummaryList"), response.data);
+            kendo.bind($("#divGrayLDeltaSummaryList"), response.data);
+
+        }
+        PopulateG7Charts();
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.status == 401) {
+            ShowDialog("You are not authorized user. Please login again.", "Message");
+        } else {
+            alert(errorThrown);
+        }
+        kendo.ui.progress($chartLoader, false);
     });
+
+
+    //kendo.ui.progress($chartLoader, true);
+    //$.ajax({
+    //    url: SERVICE_BASE_URL + 'api/Chart/GenerateG7Chart',
+    //    data: apiParameters,
+    //    type: 'GET',
+    //    dataType: 'json',
+    //    headers: {
+    //        'Accept-Language': $CurrentCulture
+    //    },
+    //    success: function (response) {
+    //        //console.log('G7 Chart data');
+    //        //console.log(response);
+    //        //console.log(JSON.stringify(response));
+    //        if (response.data != null) {
+    //            jsonGrayFChartList = response.data.GrayFChartList;
+    //            jsonBlackLChartList = response.data.BlackLChartList;
+    //            jsonGrayLChartList = response.data.GrayLChartList;
+    //            jsonBlackNPDChartList = response.data.BlackNPDChartList;
+    //            jsonGrayNPDChartList = response.data.GrayNPDChartList;
+
+    //            kendo.bind($("#divGraySummaryList"), response.data);
+    //            kendo.bind($("#divBlackSummaryList"), response.data);
+    //            kendo.bind($("#divGrayLDeltaSummaryList"), response.data);
+
+    //        }
+    //        PopulateG7Charts();
+
+    //        //kendo.ui.progress($chartLoader, false);
+    //    },
+    //    error: function (xhr, errorType, exception) {
+    //        //alert(exception);
+    //        kendo.ui.progress($chartLoader, false);
+    //    }
+    //});
 }
 
 ////**************** START BIND THE TVI CHARTS  ****************////
@@ -1818,44 +2241,74 @@ function BindTVICharts() {
         IsSync1DTypeProject: $hdnSync1DType
     };
 
-
     if ($hdnValidationType == 2) {
-
-
         $divTVI_G7.css('display', 'none');
         $divTVI_ISO.css('display', 'block');
 
-
-        //kendo.ui.progress($chartLoader, true);
-        $.ajax({
+        var ajaxParameter = {
+            type: "GET",
             url: SERVICE_BASE_URL + 'api/Chart/GenerateISOTVIChart',
             data: apiParameters,
-            type: 'GET',
-            dataType: 'json',
+            dataType: "json",
             headers: {
-                'Accept-Language': $CurrentCulture
-            },
-            success: function (response) {
-
-                if (response.data != null) {
-                    jsonDTISOTVIChartList = response.data.DTISOTVIChartList;
-                    jsonDTSpreadChartData_CMYKList = response.data.DTSpreadChartData_CMYKList;
-                    jsonDTSpreadChartDataList = response.data.DTSpreadChartDataList;
-                    jsonDTSpreadSplineRangeChartDataList = response.data.DTSpreadSplineRangeChartDataList;
-                    PopulateTVIISOChart();
-                    PopulateTVIG7CMYKChart();
-                    PopulateTVISpreadChart();
-
-                    var spreadStatesViewModel = response.data.DTMaxSpreadChartDataList[0];
-                    kendo.bind($('#chromVariationTable'), spreadStatesViewModel);
-                }
-                //kendo.ui.progress($chartLoader, false);
-            },
-            error: function (xhr, errorType, exception) {
-                //alert(exception);
-                kendo.ui.progress($chartLoader, false);
+                'Accept-Language': $CurrentCulture,
+                'Authorization': 'Basic ' + AUTH_TOKEN
             }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                jsonDTISOTVIChartList = response.data.DTISOTVIChartList;
+                jsonDTSpreadChartData_CMYKList = response.data.DTSpreadChartData_CMYKList;
+                jsonDTSpreadChartDataList = response.data.DTSpreadChartDataList;
+                jsonDTSpreadSplineRangeChartDataList = response.data.DTSpreadSplineRangeChartDataList;
+                PopulateTVIISOChart();
+                PopulateTVIG7CMYKChart();
+                PopulateTVISpreadChart();
+
+                var spreadStatesViewModel = response.data.DTMaxSpreadChartDataList[0];
+                kendo.bind($('#chromVariationTable'), spreadStatesViewModel);
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
+            }
+            kendo.ui.progress($chartLoader, false);
         });
+
+
+        //kendo.ui.progress($chartLoader, true);
+        //$.ajax({
+        //    url: SERVICE_BASE_URL + 'api/Chart/GenerateISOTVIChart',
+        //    data: apiParameters,
+        //    type: 'GET',
+        //    dataType: 'json',
+        //    headers: {
+        //        'Accept-Language': $CurrentCulture
+        //    },
+        //    success: function (response) {
+
+        //        if (response.data != null) {
+        //            jsonDTISOTVIChartList = response.data.DTISOTVIChartList;
+        //            jsonDTSpreadChartData_CMYKList = response.data.DTSpreadChartData_CMYKList;
+        //            jsonDTSpreadChartDataList = response.data.DTSpreadChartDataList;
+        //            jsonDTSpreadSplineRangeChartDataList = response.data.DTSpreadSplineRangeChartDataList;
+        //            PopulateTVIISOChart();
+        //            PopulateTVIG7CMYKChart();
+        //            PopulateTVISpreadChart();
+
+        //            var spreadStatesViewModel = response.data.DTMaxSpreadChartDataList[0];
+        //            kendo.bind($('#chromVariationTable'), spreadStatesViewModel);
+        //        }
+        //        //kendo.ui.progress($chartLoader, false);
+        //    },
+        //    error: function (xhr, errorType, exception) {
+        //        //alert(exception);
+        //        kendo.ui.progress($chartLoader, false);
+        //    }
+        //});
     }
 
 
@@ -1863,30 +2316,55 @@ function BindTVICharts() {
         $divTVI_G7.css('display', 'block');
         $divTVI_ISO.css('display', 'none');
 
-        //kendo.ui.progress($chartLoader, true);
-        $.ajax({
+        var ajaxParameter = {
+            type: "GET",
             url: SERVICE_BASE_URL + 'api/Chart/GenerateTVIChart',
             data: apiParameters,
-            type: 'GET',
-            dataType: 'json',
+            dataType: "json",
             headers: {
-                'Accept-Language': $CurrentCulture
-            },
-            success: function (response) {
-
-                if (response.data != null) {
-
-                    jsonTVIG7ChartList = response.data.DTTVIChartList;
-                    PopulateTVIG7Chart();
-                }
-
-                //kendo.ui.progress($chartLoader, false);
-            },
-            error: function (xhr, errorType, exception) {
-                //alert(exception);
-                kendo.ui.progress($chartLoader, false);
+                'Accept-Language': $CurrentCulture,
+                'Authorization': 'Basic ' + AUTH_TOKEN
             }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                jsonTVIG7ChartList = response.data.DTTVIChartList;
+                PopulateTVIG7Chart();
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
+            }
+            kendo.ui.progress($chartLoader, false);
         });
+
+        //kendo.ui.progress($chartLoader, true);
+        //$.ajax({
+        //    url: SERVICE_BASE_URL + 'api/Chart/GenerateTVIChart',
+        //    data: apiParameters,
+        //    type: 'GET',
+        //    dataType: 'json',
+        //    headers: {
+        //        'Accept-Language': $CurrentCulture
+        //    },
+        //    success: function (response) {
+
+        //        if (response.data != null) {
+
+        //            jsonTVIG7ChartList = response.data.DTTVIChartList;
+        //            PopulateTVIG7Chart();
+        //        }
+
+        //        //kendo.ui.progress($chartLoader, false);
+        //    },
+        //    error: function (xhr, errorType, exception) {
+        //        //alert(exception);
+        //        kendo.ui.progress($chartLoader, false);
+        //    }
+        //});
 
     }
 
@@ -2193,38 +2671,77 @@ function PopulateAnalyzeChart() {
                     IsSync1DTypeProject: $hdnSync1DType,
                 };
 
-                $.ajax({
+                var ajaxParameter = {
+                    type: "GET",
                     url: SERVICE_BASE_URL + 'api/Chart/UpdateMeasurementFromAnalyzeChart',
                     data: apiParameters,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (response) {
+                    dataType: "json",
+                    headers: {
+                        'Authorization': 'Basic ' + AUTH_TOKEN
+                    }
+                };
 
-                        $hdnCurrentMeasurement.val(currentObj.MeasurementId);
-                        $hdMeasurement.val(currentObj.MeasurementId);
+                commonAjaxCall(ajaxParameter, function (response) {
+                    $hdnCurrentMeasurement.val(currentObj.MeasurementId);
+                    $hdMeasurement.val(currentObj.MeasurementId);
 
 
-                        //update the average measurement value 
-                        $.ajax({
-                            url: SERVICE_BASE_URL + 'api/Analyze/GetAverageMeasurementCompatibility',
-                            data: { OptimizationRunID: parseInt($hdnOptimizationRunID) },
-                            type: 'GET',
-                            dataType: 'json',
-                            success: function (response) {
-                                $('#ContentPlaceHolder1_ucAnalyze_hd_CompError').val(response.data)
-                                $("[id*='lblCompError']").html('');
+                    //update the average measurement value 
+                    $.ajax({
+                        url: SERVICE_BASE_URL + 'api/Analyze/GetAverageMeasurementCompatibility',
+                        data: { OptimizationRunID: parseInt($hdnOptimizationRunID) },
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            $('#ContentPlaceHolder1_ucAnalyze_hd_CompError').val(response.data)
+                            $("[id*='lblCompError']").html('');
 
-                            },
-                            error: function (xhr, errorType, exception) {
-                            }
-                        });
+                        },
+                        error: function (xhr, errorType, exception) {
+                        }
+                    });
 
-                        BindAnalyzeChart();
-                    },
-                    error: function (xhr, errorType, exception) {
-                        //alert(exception);                    
+                    BindAnalyzeChart();
+                }, function (XMLHttpRequest, textStatus, errorThrown) {
+                    if (XMLHttpRequest.status == 401) {
+                        ShowDialog("You are not authorized user. Please login again.", "Message");
+                    } else {
+                        alert(errorThrown);
                     }
                 });
+
+                //$.ajax({
+                //    url: SERVICE_BASE_URL + 'api/Chart/UpdateMeasurementFromAnalyzeChart',
+                //    data: apiParameters,
+                //    type: 'GET',
+                //    dataType: 'json',
+                //    success: function (response) {
+
+                //        $hdnCurrentMeasurement.val(currentObj.MeasurementId);
+                //        $hdMeasurement.val(currentObj.MeasurementId);
+
+
+                //        //update the average measurement value 
+                //        $.ajax({
+                //            url: SERVICE_BASE_URL + 'api/Analyze/GetAverageMeasurementCompatibility',
+                //            data: { OptimizationRunID: parseInt($hdnOptimizationRunID) },
+                //            type: 'GET',
+                //            dataType: 'json',
+                //            success: function (response) {
+                //                $('#ContentPlaceHolder1_ucAnalyze_hd_CompError').val(response.data)
+                //                $("[id*='lblCompError']").html('');
+
+                //            },
+                //            error: function (xhr, errorType, exception) {
+                //            }
+                //        });
+
+                //        BindAnalyzeChart();
+                //    },
+                //    error: function (xhr, errorType, exception) {
+                //        //alert(exception);                    
+                //    }
+                //});
             }
         },
         seriesClick: function (e) {
@@ -3664,7 +4181,6 @@ function PopulateChartLGrayBalance() {
 
 ////**************** POPULATE THE DELTA SUMMARY REPORT CHART  ****************////
 function PopulateSummaryDeltaChart() {
-    debugger;
     var maxValue = Math.max.apply(Math, jsonSummaryValueList);
     var maxLimit = Math.max.apply(Math, jsonSummaryLimitList);
     var maxNum = 0;
@@ -5588,40 +6104,50 @@ function GetGradingReport(reportDetail) {
     apiParameter.InkPaperLAB1Chart = Get_InkPaperChartLAB_OneChartImage();
     apiParameter.InkPaperLAB2Chart = Get_InkPaperChartLAB_TwoChartImage();
 
-    $.ajax({
+    var ajaxParameter = {
         type: "POST",
         url: SERVICE_BASE_URL + 'api/Report/ExportReportGrading',
         data: apiParameter,
         dataType: "json",
-        success: function (response) {
-            //kendo.ui.progress($('#divReport'), false);
-            if (response.data != null) {
-                //console.log(response.data);
-                var fileName = '~' + response.data;
-                window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-            }
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            //kendo.ui.progress($('#divReport'), false);
-            console.log(XMLHttpRequest.responseText);
+        headers: {
+            'Authorization': 'Basic ' + AUTH_TOKEN
+        }
+    };
+
+
+    commonAjaxCall(ajaxParameter, function (response) {
+        //kendo.ui.progress($('#divReport'), false);
+        if (response.data != null) {
+            //console.log(response.data);
+            var fileName = '~' + response.data;
+            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+        }
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.status == 401) {
+            ShowDialog("You are not authorized user. Please login again.", "Message");
+        } else {
+            alert(errorThrown);
         }
     });
 
     //$.ajax({
+    //    type: "POST",
     //    url: SERVICE_BASE_URL + 'api/Report/ExportReportGrading',
-    //    data: JSON.stringify(apiParameter),
-    //    type: 'POST',
-    //    headers: {
-    //        "content-type": "application/json",
-    //    },
+    //    data: apiParameter,
+    //    dataType: "json",
     //    success: function (response) {
-    //        window.open(SERVICE_BASE_URL + response.data, "_blank");
+    //        //kendo.ui.progress($('#divReport'), false);
+    //        if (response.data != null) {
+    //            //console.log(response.data);
+    //            var fileName = '~' + response.data;
+    //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+    //        }
     //    },
-    //    error: function (xhr, errorType, exception) {
-    //        alert(exception);
-
+    //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+    //        //kendo.ui.progress($('#divReport'), false);
+    //        console.log(XMLHttpRequest.responseText);
     //    }
-    //});
+    //});    
 }
 
 
@@ -6192,25 +6718,49 @@ function PopulateDymoPrinter(obj) {
         MeasurementSummary: obj
     };
 
-    $.ajax({
+    var ajaxParameter = {
+        type: "POST",
         url: SERVICE_BASE_URL + 'api/Analyze/GetDymoPrintData',
         data: JSON.stringify(apiParameter),
-        type: 'POST',
+        dataType: "json",
         headers: {
             "content-type": "application/json",
-        },
-        dataType: 'json',
-        success: function (response) {
-            if (response.data != null) {
-                //console.log(response.data);
-                labelPrintXMLString = response.data.labelPrintString;
-                labelPrintStatusIconString = response.data.dymoStatusIcon;
-            }
-        },
-        error: function (xhr, errorType, exception) {
-            alert(exception);
+            'Authorization': 'Basic ' + AUTH_TOKEN
+        }
+    };
+
+    commonAjaxCall(ajaxParameter, function (response) {
+        if (response.data != null) {
+            labelPrintXMLString = response.data.labelPrintString;
+            labelPrintStatusIconString = response.data.dymoStatusIcon;
+        }
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.status == 401) {
+            ShowDialog("You are not authorized user. Please login again.", "Message");
+        } else {
+            alert(errorThrown);
         }
     });
+
+    //$.ajax({
+    //    url: SERVICE_BASE_URL + 'api/Analyze/GetDymoPrintData',
+    //    data: JSON.stringify(apiParameter),
+    //    type: 'POST',
+    //    headers: {
+    //        "content-type": "application/json",
+    //    },
+    //    dataType: 'json',
+    //    success: function (response) {
+    //        if (response.data != null) {
+    //            //console.log(response.data);
+    //            labelPrintXMLString = response.data.labelPrintString;
+    //            labelPrintStatusIconString = response.data.dymoStatusIcon;
+    //        }
+    //    },
+    //    error: function (xhr, errorType, exception) {
+    //        alert(exception);
+    //    }
+    //});
 }
 
 //method to get label string to print in dymo label
@@ -6239,3 +6789,48 @@ Math.trunc = Math.trunc || function (x) {
     }
     return Math.ceil(x);
 };
+
+
+//function commonAjaxCall(options, success_call, error_call) {
+//    var ajaxType = options.type;
+//    var ajaxUrl = options.url;
+//    var ajaxData = options.data;
+//    var ajaxDataType = options.dataType;
+//    var ajaxHeaders = options.headers;
+//    var ajaxAsync = true;
+//    if (options.async) {
+//        ajaxAsync = options.async;
+//    }
+
+//    $.ajax({
+//        type: ajaxType,
+//        url: ajaxUrl,
+//        data: ajaxData,
+//        async: ajaxAsync,
+//        dataType: ajaxDataType,
+//        headers: ajaxHeaders,
+//        success: function (response) {
+//            success_call(response);
+//        },
+//        error: function (XMLHttpRequest, textStatus, errorThrown) {
+//            error_call(XMLHttpRequest, textStatus, errorThrown);
+//        }
+//    });
+//}
+
+//function ShowDialog(message, title) {
+//    $("#dialog").kendoDialog({
+//        width: "400px",
+//        title: title,
+//        closable: false,
+//        modal: false,
+//        content: message,
+//        actions: [
+//            {
+//                text: 'OK', primary: true, action: function (e) {
+//                    window.location.href = 'login.aspx';
+//                }
+//            }
+//        ]
+//    });
+//}

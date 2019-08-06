@@ -360,6 +360,7 @@
                 <asp:HiddenField runat="server" ID="hdnCurrentDeviceName" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnValidationMeasurementStatus" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnCurrentUserRole" ClientIDMode="Static" />
+                <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
                 <h1 id="header" runat="server">
                     <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">
@@ -1552,6 +1553,8 @@
 </div>
 <div class="contant_bottom">
     &nbsp;
+</div>
+<div id='dialog'>   
 </div>
 
 

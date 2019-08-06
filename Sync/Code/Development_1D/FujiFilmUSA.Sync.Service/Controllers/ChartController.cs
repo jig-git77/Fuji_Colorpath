@@ -39,6 +39,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         #endregion
 
+        #region Contoller Events
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             _presenterAnalyze = new PresenterAnalyze(this);
@@ -126,8 +127,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
             base.Initialize(controllerContext);
         }
+        #endregion
 
+        #region RESTfull Services
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GenerateAnalyzeChart(int? ProjectId, int? OptimizeRunId, bool? IsSync1DTypeProject, string fromDeltaE, int ProjectType)
         {
             IHttpActionResult actionResult = null;
@@ -195,6 +199,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
 
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GenerateGrayChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject)
         {
             IHttpActionResult actionResult = null;
@@ -259,6 +264,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+        [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GetSpotPatchDetails(int id)
         {
             IHttpActionResult actionResult = null;
@@ -359,6 +366,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GenerateInkPaperChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject, string fromDeltaE)
         {
             IHttpActionResult actionResult = null;
@@ -426,6 +434,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
 
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GenerateG7Chart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject)
         {
             IHttpActionResult actionResult = null;
@@ -496,6 +505,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GenerateTVIChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject)
         {
             IHttpActionResult actionResult = null;
@@ -560,6 +570,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GenerateISOTVIChart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSync1DTypeProject)
         {
             IHttpActionResult actionResult = null;
@@ -629,6 +640,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
 
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GetMeasurementPatchDetails(int? MeasurementId, bool? IsVerificationProject, bool? IsSync1DTypeProject, string metricSumID)
         {
             IHttpActionResult actionResult = null;
@@ -727,6 +739,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult UpdateMeasurementFromAnalyzeChart(int? MeasurementId, bool? isMeasurementUsed, bool? IsVerificationProject, bool? IsSync1DTypeProject)
         {
             IHttpActionResult actionResult = null;
@@ -765,6 +778,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GetColorDensityChart(int? OptimizationRunId)
         {
             IHttpActionResult actionResult = null;
@@ -823,6 +837,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GenerateCurveChart(int? OptimizationRunId, int? CurveType)
         {
             IHttpActionResult actionResult = null;
@@ -875,95 +890,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
-
-        
-        [HttpGet]
-        public IHttpActionResult GetSpotPatchDetailsReport(int OptimizationRunID)
-        {
-            IHttpActionResult actionResult = null;
-            BaseResponse<object> httpResponse = new BaseResponse<object>();
-            try
-            {
-                DetermineCulture();
-                MeasurementId = 0;
-                OptimizeRunId = Convert.ToInt32(OptimizationRunID);
-                _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
-
-                ReportPDF objReportPDF = new ReportPDF();
-                objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
-
-                if (!Directory.Exists(objReportPDF.PDFPath))
-                    Directory.CreateDirectory(objReportPDF.PDFPath);
-
-                objReportPDF.dtSpotPatchDetails = dtPatchDetails;
-                objReportPDF.PDF_NAME = OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
-                objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
-
-                objReportPDF.GenerateSpotPatchDetailsReport();
-                string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
-                httpResponse.status = ResponseStatus.Success;
-                httpResponse.Data = ReportPath;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
-            }
-            catch (Exception ex)
-            {
-                BaseErrorResponse errprResponse = new BaseErrorResponse();
-                errprResponse.Error.UserMessage = ex.Message;
-                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
-            }
-            return actionResult;
-        }
-
-        [HttpGet]
-        public HttpResponseMessage GetSpotPatchDetailsReportTest(int OptimizationRunID)
-        {
-            HttpResponseMessage httpResponseMessage = null;
-            try
-            {
-                DetermineCulture();
-                MeasurementId = 0;
-                OptimizeRunId = Convert.ToInt32(OptimizationRunID);
-                _presenterAnalyze.GetSpotPatchDetailsofMeasurement();
-
-                ReportPDF objReportPDF = new ReportPDF();
-                objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
-
-                if (!Directory.Exists(objReportPDF.PDFPath))
-                    Directory.CreateDirectory(objReportPDF.PDFPath);
-
-                objReportPDF.dtSpotPatchDetails = dtPatchDetails;
-                objReportPDF.PDF_NAME = OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
-                objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
-
-                objReportPDF.GenerateSpotPatchDetailsReport();
-                string ReportPath = "UploadFiles/" + objReportPDF.PDF_NAME;
-
-                //httpResponse.status = ResponseStatus.Success;
-                //httpResponse.Data = ReportPath;
-                //actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
-
-                var dataBytes = File.ReadAllBytes(HostingEnvironment.MapPath("~/" + ReportPath));
-                //adding bytes to memory stream   
-                var dataStream = new MemoryStream(dataBytes);
-                httpResponseMessage = Request.CreateResponse(HttpStatusCode.OK);
-                httpResponseMessage.Content = new StreamContent(dataStream);
-                httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Accept-Ranges, Content-Encoding, Content-Length, Content-Range");
-                httpResponseMessage.Content.Headers.ContentRange = new ContentRangeHeaderValue(dataStream.Length);
-                httpResponseMessage.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-                httpResponseMessage.Content.Headers.ContentDisposition.FileName = objReportPDF.PDF_NAME;
-                httpResponseMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
-
-            }
-            catch (Exception ex)
-            {
-                //BaseErrorResponse errprResponse = new BaseErrorResponse();
-                //errprResponse.Error.UserMessage = ex.Message;
-                //errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
-                //actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
-            }
-            return httpResponseMessage;
-        }
+        #endregion
 
         #region Method for generate resources
         public void GenerateResources()

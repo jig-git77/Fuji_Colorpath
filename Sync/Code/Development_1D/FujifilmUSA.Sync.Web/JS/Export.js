@@ -1,11 +1,13 @@
 ﻿////*********** Declarations ***********////
 var CURRENT_USER_ID
 var SERVICE_BASE_URL = '';
+var AUTH_TOKEN = '';
 var $hdnBaseServiceUrl;
 var $CurrentCulture;
 var $hdnOptimizationRunID;
 var $drpCurveType;
 var $rbtnDetlaReflistClient;
+var $hdnCurrentDlpSubOperation;
 var objectResult = {};
 var _Resources = {};
 var isCurrentDeltaSelected = true;
@@ -42,12 +44,16 @@ $(document).ready(function () {
     $hdnOptimizationRunID = $('#hdnOptimizationRunID').val();
     $hdnExportFileName = $('#hdnCurveFileName').val();
     $rbtnDetlaReflistClient = $('#rbtnDetlaReflistClient');
-
+    $hdnCurrentDlpSubOperation = parseInt($('#hdnCurrentDlpSubOperation').val());
+    AUTH_TOKEN = $("#hdfAuthToken").val();
     $drpCurveType.kendoDropDownList({
         height: 1000
     });
 
-    BindChart();
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D) {
+        BindChart();
+    }
+
     $drpCurveType.on('change', function (e) {
         e.preventDefault();
         $('#HD_CurveType').val($(this).val());
@@ -72,22 +78,46 @@ $(document).ready(function () {
             ExportFileName: $hdnExportFileName
         };
 
-        $.ajax({
+        var ajaxParameter = {
             type: "GET",
             url: SERVICE_BASE_URL + 'api/Report/ExportGenerateCurveChart',
             data: apiParam,
             dataType: "json",
-            success: function (response) {
-                if (response.data != null) {
-                    console.log(response.data);
-                    var fileName = '~' + response.data;
-                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(XMLHttpRequest.responseText);
+            headers: {
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                console.log(response.data);
+                var fileName = '~' + response.data;
+                window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
             }
         });
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: SERVICE_BASE_URL + 'api/Report/ExportGenerateCurveChart',
+        //    data: apiParam,
+        //    dataType: "json",
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            console.log(response.data);
+        //            var fileName = '~' + response.data;
+        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+        //        }
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log(XMLHttpRequest.responseText);
+        //    }
+        //});
 
     });
 
@@ -102,22 +132,46 @@ $(document).ready(function () {
             isCurrentRun: isCurrentDeltaSelected
         };
 
-        $.ajax({
+        var ajaxParameter = {
             type: "GET",
             url: SERVICE_BASE_URL + 'api/Report/ExportDeltaCurveChart',
             data: apiParam,
             dataType: "json",
-            success: function (response) {
-                if (response.data != null) {
-                    console.log(response.data);
-                    var fileName = '~' + response.data;
-                    window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(XMLHttpRequest.responseText);
+            headers: {
+                'Authorization': 'Basic ' + AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                console.log(response.data);
+                var fileName = '~' + response.data;
+                window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            }
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
             }
         });
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: SERVICE_BASE_URL + 'api/Report/ExportDeltaCurveChart',
+        //    data: apiParam,
+        //    dataType: "json",
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            console.log(response.data);
+        //            var fileName = '~' + response.data;
+        //            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+        //        }
+        //    },
+        //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log(XMLHttpRequest.responseText);
+        //    }
+        //});
 
     });
 
@@ -147,26 +201,52 @@ function BindChart() {
         CurveType: curveTypeID,
     };
 
-    $.ajax({
+    var ajaxParameter = {
+        type: "GET",
         url: SERVICE_BASE_URL + 'api/Chart/GenerateCurveChart',
         data: apiParameters,
-        type: 'GET',
-        dataType: 'json',
+        dataType: "json",
         headers: {
-            'Accept-Language': $CurrentCulture
-        },
-        success: function (response) {
-            if (response.data != null) {
-                _Resources = response.data.GlobalResources;
-                objectResult = response.data;
-                BindExportView(objectResult);
-                BindDeltaView(objectResult);
-            }
-        },
-        error: function (xhr, errorType, exception) {
-            kendo.ui.progress($chartLoader, false);
+            'Accept-Language': $CurrentCulture,
+            'Authorization': 'Basic ' + AUTH_TOKEN
         }
+    };
+
+    commonAjaxCall(ajaxParameter, function (response) {
+        if (response.data != null) {
+            _Resources = response.data.GlobalResources;
+            objectResult = response.data;
+            BindExportView(objectResult);
+            BindDeltaView(objectResult);
+        }
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.status == 401) {
+            ShowDialog("You are not authorized user. Please login again.", "Message");
+        } else {
+            alert(errorThrown);
+        }        
     });
+
+    //$.ajax({
+    //    url: SERVICE_BASE_URL + 'api/Chart/GenerateCurveChart',
+    //    data: apiParameters,
+    //    type: 'GET',
+    //    dataType: 'json',
+    //    headers: {
+    //        'Accept-Language': $CurrentCulture
+    //    },
+    //    success: function (response) {
+    //        if (response.data != null) {
+    //            _Resources = response.data.GlobalResources;
+    //            objectResult = response.data;
+    //            BindExportView(objectResult);
+    //            BindDeltaView(objectResult);
+    //        }
+    //    },
+    //    error: function (xhr, errorType, exception) {
+    //        kendo.ui.progress($chartLoader, false);
+    //    }
+    //});
 }
 
 function BindExportView(result) {

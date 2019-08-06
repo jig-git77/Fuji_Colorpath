@@ -18,6 +18,7 @@ using FujiFilmUSA.Sync.Service.Models;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
+    [CustomAuthentication]
     public class ProjectController : BaseController, IViewProjectList
     {
         #region Variable Declarations
@@ -25,6 +26,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private Dictionary<string, string> _resourceValues { get; set; }
         private Dictionary<string, string> _globalResourceValues { get; set; }
         #endregion
+
+        #region Contoller Events
+
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             _presenterProjectList = new PresenterProjectList(this);
@@ -67,8 +71,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
             base.Initialize(controllerContext);
         }
-        
-        //[CustomAuthentication]
+        #endregion
+
+        #region RESTfull Services
+        [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GetProjectDetailsByDeviceID(int deviceID)
         {
             IHttpActionResult actionResult = null;
@@ -102,6 +109,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+        [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GetSpotProjectDetailsByProjectID(int projectID)
         {
             IHttpActionResult actionResult = null;
@@ -127,6 +136,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult DeleteProject(int projectID)
         {
             IHttpActionResult actionResult = null;
@@ -147,9 +157,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             return actionResult;
         }
-
-        [CustomAuthentication]
+        
         [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult DeleteSpotProject(int spotProjectID)
         {
             IHttpActionResult actionResult = null;
@@ -171,8 +181,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             return actionResult;
         }
+        #endregion
 
-
+        #region Method for generate resources
         public void GenerateResources()
         {
             foreach (var item in _resourceValues)
@@ -180,6 +191,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 _globalResourceValues.Add(item.Key, GlobalResourceManager.Instance.GetGlobalResourceString(item.Value));
             }
         }
+        #endregion
 
         #region IViewProjectList Members
         public List<Project> Projects { get; set; }

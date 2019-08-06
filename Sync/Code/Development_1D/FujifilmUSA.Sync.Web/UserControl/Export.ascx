@@ -7,6 +7,7 @@
 <link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
 
 <script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
+
 <script src="JS/Export.js" type="text/javascript"></script>
 <style>
     .k-grid td {
@@ -453,3 +454,5 @@
 <asp:HiddenField runat="server" ID="hdfCurrentCulture" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="hdnOptimizationRunID" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="hdnCurveFileName" ClientIDMode="Static" />
+<asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
+<asp:HiddenField runat="server" ID="hdnCurrentDlpSubOperation" ClientIDMode="Static" />

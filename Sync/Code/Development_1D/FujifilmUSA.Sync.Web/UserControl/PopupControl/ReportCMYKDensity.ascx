@@ -35,13 +35,18 @@
             OptimizationRunId: document.getElementById('<%= txt_OptimizeRunID.ClientID %>').value
         };
 
-        $.ajax({
+        var ajaxParameter = {
+            type: "GET",
             url: parent.SERVICE_BASE_URL + 'api/Chart/GetColorDensityChart',
             data: apiParameters,
-            type: 'GET',
-            dataType: 'json',            
-            success: function (response) {
-                if (response.data != null) {
+            dataType: "json",
+            headers: {
+                'Authorization': 'Basic ' + parent.AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
                     jsonCyanDensity = response.data.CMYKDensity.CyanList;
                     jsonMagentaDensity = response.data.CMYKDensity.MagentaList;
                     jsonYellowDensity = response.data.CMYKDensity.YellowList;
@@ -51,12 +56,36 @@
                 BindMagentaDensity();
                 BindYellowDensity()
                 BindBlackDensity();
-            },
-            error: function (xhr, errorType, exception) {
-                //alert(exception);
-                kendo.ui.progress($chartLoader, false);
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
             }
         });
+
+        //$.ajax({
+        //    url: parent.SERVICE_BASE_URL + 'api/Chart/GetColorDensityChart',
+        //    data: apiParameters,
+        //    type: 'GET',
+        //    dataType: 'json',            
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            jsonCyanDensity = response.data.CMYKDensity.CyanList;
+        //            jsonMagentaDensity = response.data.CMYKDensity.MagentaList;
+        //            jsonYellowDensity = response.data.CMYKDensity.YellowList;
+        //            jsonBlackDensity = response.data.CMYKDensity.BlackList;
+        //        }
+        //        BindCyanDensity();
+        //        BindMagentaDensity();
+        //        BindYellowDensity()
+        //        BindBlackDensity();
+        //    },
+        //    error: function (xhr, errorType, exception) {
+        //        //alert(exception);
+        //        kendo.ui.progress($chartLoader, false);
+        //    }
+        //});
     });
 
     function BindCyanDensity() {

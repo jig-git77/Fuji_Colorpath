@@ -1,4 +1,51 @@
-﻿//Object for Current Run Status
+﻿
+function commonAjaxCall(options, success_call, error_call) {
+    var ajaxType = options.type;
+    var ajaxUrl = options.url;
+    var ajaxData = options.data;
+    var ajaxDataType = options.dataType;
+    var ajaxHeaders = options.headers;
+    var ajaxAsync = true;
+    if (options.async) {
+        ajaxAsync = options.async;
+    }
+
+    $.ajax({
+        type: ajaxType,
+        url: ajaxUrl,
+        data: ajaxData,
+        async: ajaxAsync,
+        dataType: ajaxDataType,
+        headers: ajaxHeaders,
+        success: function (response) {
+            success_call(response);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            error_call(XMLHttpRequest, textStatus, errorThrown);
+        }
+    });
+}
+
+function ShowDialog(message, title) {
+    $("#dialog").kendoDialog({
+        width: "400px",
+        title: title,
+        closable: false,
+        modal: false,
+        content: message,
+        actions: [
+            {
+                text: 'OK', primary: true, action: function (e) {
+                    window.location.href = 'login.aspx';
+                }
+            }
+        ]
+    });
+}
+
+
+
+//Object for Current Run Status
 var EOptimizeRunStatus = {
     Open: 1,
     Closed: 2,

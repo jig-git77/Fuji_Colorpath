@@ -4,6 +4,7 @@ using FujifilmUSA.Sync.Entity.CPSync1D;
 using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujiFilmUSA.Sync.Service.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -51,8 +52,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
         #endregion
 
-        #region Services
+        #region RESTfull Services
         [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult ExportAnalyzeChartReport(ChartContent chart)
         {
             IHttpActionResult actionResult = null;
@@ -185,6 +187,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult ExportSpotAnalyzeChartReport(SpotChartContent chart)
         {
             IHttpActionResult actionResult = null;
@@ -297,6 +300,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         //service to bind the summary delta E values for report
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GenerateSummaryDeltaCharts(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject,
                                                             bool? IsSync1DTypeProject, string fromDeltaE, int validationType)
         {
@@ -395,6 +399,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
 
+        [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult ExportReportGrading(ChartContent chart)
         {
             IHttpActionResult actionResult = null;
@@ -481,6 +487,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
 
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult ExportGenerateCurveChart(int? OptimizationRunId, int? CurveType, string ExportFileName)
         {
             IHttpActionResult actionResult = null;
@@ -924,6 +931,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult ExportDeltaCurveChart(int? OptimizationRunId, int? CurveType, string ExportFileName, bool isCurrentRun)
         {
             IHttpActionResult actionResult = null;
@@ -1003,6 +1011,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult ExportSpotCMYKLibraray(SpotLibrayCMYKExport model)
         {
             IHttpActionResult actionResult = null;

@@ -21,13 +21,16 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private PresenterPluginDataService _presenterPlugin;
         #endregion
 
+        #region Contoller Events
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             _presenterLogin = new PresenterLogin(this);
             _presenterPlugin = new PresenterPluginDataService(this);
             base.Initialize(controllerContext);
         }
+        #endregion
 
+        #region RESTfull Services
         [HttpGet]
         public IHttpActionResult GetReferenceChart(string projectId, string referenceChartDisplayType, string IsSpotProjectType)
         {
@@ -573,6 +576,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+        #endregion
+
+        #region Public Methods
         public bool CheckMeasurementValidation(ref IHttpActionResult actionResult)
         {
             _presenterPlugin.GetMeasurementValidationData();
@@ -681,6 +687,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
 
         }
+
+        #endregion
 
         #region IViewPluginDataService Members
         public Measurement Measurement { get; set; }

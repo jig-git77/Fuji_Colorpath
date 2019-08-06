@@ -27,6 +27,7 @@
 
     function ExportCMYKPatches() {
         var SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
+        var AUTH_TOKEN = $("#hdfAuthToken").val();
         if (validate()) {
             var apiParameter = {
                 OptimizationRunId: parseInt($('#hdnOptiomizatoinRunID').val()),
@@ -42,29 +43,59 @@
                 Comment: $('#txtComment').val(),
                 SpotProjectIDs: $('#hdnSpotProjectIDs').val()
             }
-            kendo.ui.progress($('#divExport'), true);
-            $.ajax({
+
+            var ajaxParameter = {
                 type: "POST",
                 url: SERVICE_BASE_URL + 'api/Report/ExportSpotCMYKLibraray',
                 data: apiParameter,
                 dataType: "json",
-                success: function (response) {
-                    kendo.ui.progress($('#divExport'), false);
-                    if (response.data != null) {
-                        if (response.data != "-1") {
-                            var fileName = '~' + response.data;
-                            window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
-                        } else {
-                            alert('Duplicate patches are available in selected spot projects');
-                        }
-                    }
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    debugger;
-                    kendo.ui.progress($('#divExport'), false);
-                    console.log(XMLHttpRequest.responseText);
+                headers: {
+                    'Authorization': 'Basic ' + AUTH_TOKEN
                 }
+            };
+
+            kendo.ui.progress($('#divExport'), true);
+
+            commonAjaxCall(ajaxParameter, function (response) {
+                kendo.ui.progress($('#divExport'), false);
+                if (response.data != null) {
+                    if (response.data != "-1") {
+                        var fileName = '~' + response.data;
+                        window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+                    } else {
+                        alert('Duplicate patches are available in selected spot projects');
+                    }
+                }
+            }, function (XMLHttpRequest, textStatus, errorThrown) {
+                if (XMLHttpRequest.status == 401) {
+                    ShowDialog("You are not authorized user. Please login again.", "Message");
+                } else {
+                    alert(errorThrown);
+                }
+                kendo.ui.progress($('#divExport'), false);
             });
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: SERVICE_BASE_URL + 'api/Report/ExportSpotCMYKLibraray',
+            //    data: apiParameter,
+            //    dataType: "json",
+            //    success: function (response) {
+            //        kendo.ui.progress($('#divExport'), false);
+            //        if (response.data != null) {
+            //            if (response.data != "-1") {
+            //                var fileName = '~' + response.data;
+            //                window.location.href = SERVICE_BASE_URL + '/api/Analyze/DownloadFile?filePath=' + fileName;
+            //            } else {
+            //                alert('Duplicate patches are available in selected spot projects');
+            //            }
+            //        }
+            //    },
+            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //        kendo.ui.progress($('#divExport'), false);
+            //        console.log(XMLHttpRequest.responseText);
+            //    }
+            //});
         }
         return false;
     }
@@ -144,6 +175,7 @@
                         <asp:HiddenField runat="server" ID="hdnBaseServiceUrl" ClientIDMode="Static" />
                         <asp:HiddenField runat="server" ID="hdnOptiomizatoinRunID" ClientIDMode="Static" />
                         <asp:HiddenField runat="server" ID="hdnSpotProjectIDs" ClientIDMode="Static" />
+                        <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
                         <div class="combopart">
                             <div>
                             </div>

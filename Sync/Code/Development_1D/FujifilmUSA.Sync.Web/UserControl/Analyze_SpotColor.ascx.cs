@@ -42,6 +42,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 hdnCurrentUserID.Value= Convert.ToString(SessionManager.Instance.CurrentUser.UserId) ?? "0";
                 hdnCurrentProjectLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
+                hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
                 if (SessionManager.Instance.CurrentProject.SpotTargetProject != null && SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition != null)
                 {

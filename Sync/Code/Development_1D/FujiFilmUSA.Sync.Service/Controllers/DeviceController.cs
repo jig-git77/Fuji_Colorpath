@@ -2,6 +2,7 @@
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujiFilmUSA.Sync.Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             base.Initialize(controllerContext);
         }
 
+        [CustomAuthentication]
         public IHttpActionResult GetProjectLicenseType(int UserID, int DeviceID)
         {
             IHttpActionResult actionResult = null;

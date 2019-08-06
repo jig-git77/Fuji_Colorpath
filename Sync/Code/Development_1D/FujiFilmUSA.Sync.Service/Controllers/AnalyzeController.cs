@@ -53,6 +53,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         private const string _reclocLabelDate = "locLabelDate";
         #endregion
 
+        #region Contoller Events
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             _presenterAnalyze = new PresenterAnalyze(this);
@@ -133,8 +134,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
             base.Initialize(controllerContext);
         }
+        #endregion
 
+        #region RESTfull Services
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GetMeasurementSummaryDetails(int? MeasurementId, string fromDeltaE, bool? IsVerificationProject)
         {
             IHttpActionResult actionResult = null;
@@ -170,9 +174,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
-
-
         [HttpGet]
+        [CustomAuthentication]
         public IHttpActionResult GetValidationMeasurementSummaryDetails(int? MeasurementId, string fromDeltaE, bool? IsVerificationProject, bool? IsSync1DTypeProject, bool? IsAverageOfMeasurements)
         {
             string validationMessage = "";
@@ -215,7 +218,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
-
         [HttpGet]
         public IHttpActionResult GetAverageMeasurementCompatibility(int? OptimizationRunID)
         {
@@ -243,6 +245,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult GetSpotPatchDetailsReport(ExportViewModel model)
         {
             IHttpActionResult actionResult = null;
@@ -285,6 +288,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult GetSpotPatchDetailsExcelReport(ExportViewModel model)
         {
             IHttpActionResult actionResult = null;
@@ -389,6 +393,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult GetCGATSPatchReport(ExportPatchViewModel model)
         {
             IHttpActionResult actionResult = null;
@@ -491,6 +496,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult GetCFXPatchReport(ExportPatchViewModel model)
         {
             IHttpActionResult actionResult = null;
@@ -598,6 +604,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult GetDymoPrintData(DymoMeasurement model)
         {
             IHttpActionResult actionResult = null;
@@ -709,6 +716,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult SaveSpotProjectLABPatches(SpotProjectLabModel model)
         {
             IHttpActionResult actionResult = null;
@@ -758,6 +766,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult GetMeasurementFileExport(int? MeasurementId, int? LicenseType)
         {
             IHttpActionResult actionResult = null;
@@ -815,6 +824,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpPost]
+        [CustomAuthentication]
         public IHttpActionResult GetSpotMeasurementFileExport(int? OptimizeRunId)
         {
             IHttpActionResult actionResult = null;
@@ -865,6 +875,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             return actionResult;
         }
+        #endregion
 
         #region Methods for Patch Details tab
         private DataTable FilteredPatchDetailsTable(string MetricSumID, DataTable dtPatchDetails)
