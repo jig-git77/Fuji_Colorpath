@@ -307,7 +307,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     returnValue = DataAccessFactory.
                         Instance.
                         ExecuteProcedure(
-                            "[dbo].[InsertCustomDeviceFamilyProfilerOption]",
+                            "[CPSync4D].[InsertCustomDeviceFamilyProfilerOption]",
                             new object[]
                                     {
                                         UserID,
