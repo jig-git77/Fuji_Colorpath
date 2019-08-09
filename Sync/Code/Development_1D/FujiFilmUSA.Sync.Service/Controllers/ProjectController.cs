@@ -15,10 +15,11 @@ using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using FujifilmUSA.Sync.GlobalResources;
 using FujiFilmUSA.Sync.Service.Models;
+using FujifilmUSA.Sync.Common;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
-    [CustomAuthentication]
+    //[CustomAuthentication]
     public class ProjectController : BaseController, IViewProjectList
     {
         #region Variable Declarations

@@ -85,7 +85,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Response.Cookies["SyncFujiLogin"].Value = "";
                         Response.Cookies["SyncFujiPass"].Value = "";                        
                     }
-
                     if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageCustomReports))
                     {
                         if (CheckUsersValidity(UserName))
@@ -108,7 +107,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (CheckUsersValidity(UserName))
                         {
                             FormsAuthentication.RedirectFromLoginPage(UserName, false);
-                            Response.Redirect("Index.aspx");
+                            Response.Redirect("Index.aspx",false);
                         }
                         else
                         {

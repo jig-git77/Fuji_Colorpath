@@ -22,10 +22,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     if (userType == UserType.XmfColorOrganizerUser)
                     {
                         password = CryptHelper.DecryptString(password, ApplicationConfiguration.Instance.XmfColorOrganizerEncryptionKey);
-                    }                    
+                    }
                     string apiAuthKey = LoginSecurity.EncryptPasswords(userName + DateTime.Now.ToString("yyyyMMddHHmmssffff"));
                     var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformation]",
                                                                         new object[] { userName, LoginSecurity.EncryptPasswords(password), Convert.ToInt32(userType), apiAuthKey });
+
                     if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
                     {
                         user = new User()
