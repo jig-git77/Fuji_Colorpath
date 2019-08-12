@@ -79,9 +79,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 trCaldera2Row1.Visible = false;
                 trXMF.Visible = false;
             }
-
+           
         }
-        #endregion
+
+
+        #endregion       
 
         #region IViewExport Members
         public int ProjectId { get; set; }

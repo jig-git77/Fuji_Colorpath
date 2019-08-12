@@ -957,10 +957,12 @@
     <Content Include="JS\jquery.tools.min.js" />
     <Content Include="JS\Printing.js" />
     <Content Include="JS\ProjectList.js" />
+    <Content Include="MeasurementLog.aspx" />
     <Content Include="MetricTargetManagement.aspx" />
     <Content Include="MetricTargetPresetManagement.aspx" />
     <Content Include="PatchPresetManagement.aspx" />
     <Content Include="Permission.aspx" />
+    <Content Include="PopupAddMeasurementDevice.aspx" />
     <Content Include="PopupDownloadSoftware.aspx" />
     <Content Include="PopupImportMeasurementFile.aspx" />
     <Content Include="PopupImportMeasurements.aspx" />
@@ -2493,6 +2495,7 @@
     <Content Include="UserControl\GlobalActivation.ascx" />
     <Content Include="UserControl\InkOptSourceMiddle.ascx" />
     <Content Include="UserControl\MeasurementCommonNew.ascx" />
+    <Content Include="UserControl\MeasurementLog.ascx" />
     <Content Include="UserControl\MetricTargetManagement.ascx" />
     <Content Include="UserControl\MetricTargetPresetManagement.ascx" />
     <Content Include="UserControl\PatchPresetManagement.ascx" />
@@ -3126,6 +3129,13 @@
     <Compile Include="InkOptSourceMiddle.aspx.designer.cs">
       <DependentUpon>InkOptSourceMiddle.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MeasurementLog.aspx.cs">
+      <DependentUpon>MeasurementLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MeasurementLog.aspx.designer.cs">
+      <DependentUpon>MeasurementLog.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MetricTargetManagement.aspx.cs">
       <DependentUpon>MetricTargetManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3153,6 +3163,13 @@
     </Compile>
     <Compile Include="Permission.aspx.designer.cs">
       <DependentUpon>Permission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupAddMeasurementDevice.aspx.cs">
+      <DependentUpon>PopupAddMeasurementDevice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupAddMeasurementDevice.aspx.designer.cs">
+      <DependentUpon>PopupAddMeasurementDevice.aspx</DependentUpon>
     </Compile>
     <Compile Include="PopupDownloadSoftware.aspx.cs">
       <DependentUpon>PopupDownloadSoftware.aspx</DependentUpon>
@@ -3574,6 +3591,13 @@
     </Compile>
     <Compile Include="UserControl\MeasurementCommonNew.ascx.designer.cs">
       <DependentUpon>MeasurementCommonNew.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\MeasurementLog.ascx.cs">
+      <DependentUpon>MeasurementLog.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MeasurementLog.ascx.designer.cs">
+      <DependentUpon>MeasurementLog.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\MetricTargetManagement.ascx.cs">
       <DependentUpon>MetricTargetManagement.ascx</DependentUpon>

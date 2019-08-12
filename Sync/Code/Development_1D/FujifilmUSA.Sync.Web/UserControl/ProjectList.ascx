@@ -42,7 +42,7 @@
     }
 </script>
 <style type="text/css">
-    .RadGrid .rgRow td, .RadGrid .rgAltRow td, .RadGrid .rgEditRow td, .RadGrid .rgFooter td, .RadGrid .rgFilterRow td, .RadGrid .rgHeader, .RadGrid .rgResizeCol, .RadGrid .rgGroupHeader td {
+    /*.RadGrid .rgRow td, .RadGrid .rgAltRow td, .RadGrid .rgEditRow td, .RadGrid .rgFooter td, .RadGrid .rgFilterRow td, .RadGrid .rgHeader, .RadGrid .rgResizeCol, .RadGrid .rgGroupHeader td {
         padding-right: 0px !important;
     }
 
@@ -111,7 +111,7 @@
         word-wrap: break-word !important;
         vertical-align: top;
         line-height: 15px;
-    }
+    }*/
 
     .k-grid-header {
         padding-right: 0 !important;
@@ -123,6 +123,25 @@
 
     .k-grid td {
         line-height: 2em;
+    }
+
+    .k-window-action {
+        visibility: hidden;
+    }
+
+    .k-window-titlebar {
+        background: #3A9977;
+        //border: 2px solid #3A9977;
+    }
+
+    div.k-window {
+        background: #3A9977;
+        font: 16px/22px 'Trebuchet MS', Verdana, Arial;
+    }
+
+    .k-window-title {
+        color: white;
+        font-weight: bold;
     }
 </style>
 
@@ -221,6 +240,15 @@
         </Windows>
     </telerik:RadWindowManager>
     <input id="Hidden_TotalProjects" type="hidden" runat="server" value="0" />
+
+    <div id="windowAlert" style="display: none;">
+        <span id="alertMessage"></span>
+        <br />        
+        <div style="text-align:center;">
+            <button type="button" id="btnAlertPopup" style="line-height: 15px;width: 50px;padding: 5px 0px 5px;">OK</button>
+        </div>
+        
+    </div>
 </div>
 <div class="contant_bottom">
     &nbsp;

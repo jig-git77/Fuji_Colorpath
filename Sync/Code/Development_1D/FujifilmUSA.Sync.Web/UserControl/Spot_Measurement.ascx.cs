@@ -95,6 +95,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             true);
                     }
                 }
+
+                if (!SessionManager.Instance.CurrentProject.MeasurementSetting.PluginType)
+                {
+                    ucMeasurementCommonApp.Visible = true;
+                    ucMeasurementCommon.Visible = false;
+                    divPluginMessage.Visible = false;
+                }
             }
         }
 

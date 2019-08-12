@@ -60,6 +60,10 @@ namespace FujiFilmUSA.Sync.Service.Models
         public string EntryDate { get; set; }
 
         public string EncyptedTocken { get; set; }
+        public UserReferenceChart UserReferenceChart { get; set; }
+        public ReferenceChartApp UserReferenceChartApp { get; set; }
+        public string DeviceSerialNo { get; set; }
+        public short InstrumentTypeID { get; set; }
         #endregion
 
         #region IViewBase Members

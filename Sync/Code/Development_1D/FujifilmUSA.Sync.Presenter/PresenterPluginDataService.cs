@@ -12,25 +12,25 @@ namespace FujifilmUSA.Sync.Presenter
             _viewPluginDataService = viewPluginDataService;
         }
 
-        public void SaveMeasurement()
+        public bool SaveMeasurement()
         {
             var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
-            measurementBusiness.SaveMeasurement(_viewPluginDataService.Measurement);
+            return measurementBusiness.SaveMeasurement(_viewPluginDataService.Measurement, _viewPluginDataService.UserID);
         }
 
-        public void SaveVMeasurement()
+        public bool SaveVMeasurement()
         {
             var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
-            measurementBusiness.SaveVMeasurement(_viewPluginDataService.Measurement);
+            return measurementBusiness.SaveVMeasurement(_viewPluginDataService.Measurement, _viewPluginDataService.UserID);
         }
 
-        public void Save1DMeasurement()
+        public bool Save1DMeasurement()
         {
             var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
-            measurementBusiness.Save1DMeasurement(_viewPluginDataService.Measurement);
+            return measurementBusiness.Save1DMeasurement(_viewPluginDataService.Measurement,_viewPluginDataService.UserID);
         }
 
         public void GetReferenceChartData()
@@ -97,11 +97,11 @@ namespace FujifilmUSA.Sync.Presenter
                                                                                               _viewPluginDataService.ReferenceChartDisType);
         }
 
-        public void SaveSpotMeasurement()
+        public bool SaveSpotMeasurement()
         {
             var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
-            measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
-            measurementBusiness.SaveSpotMeasurement(_viewPluginDataService.Measurement);
+            measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;            
+            return measurementBusiness.SaveSpotMeasurement(_viewPluginDataService.Measurement, _viewPluginDataService.UserID);
         }
 
         public bool DeleteSpotMeasurement()

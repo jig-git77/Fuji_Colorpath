@@ -21,17 +21,47 @@ namespace FujifilmUSA.Sync.Business
         public static void WriteLog(Exception e, BusinessHandlerRequest request, bool SendEmail = true)
         {
             var appErrorLog = new AppErrorLog
-                                  {
-                                      ExMessage = e.Message,
-                                      ExStackTracke = e.StackTrace,
-                                      TimeStamp = DateTime.Now,
-                                      UserId =
+            {
+                ExMessage = e.Message,
+                ExStackTracke = e.StackTrace,
+                TimeStamp = DateTime.Now,
+                UserId =
                                           (SessionManager.Instance.CurrentUser != null)
                                               ? SessionManager.Instance.CurrentUser.UserId
                                               : 0
-                                  };
+            };
             var errorHandlingBusiness = BusinessFactory<IMiscBusiness>.CreateObject();
             errorHandlingBusiness.InsertAppErrorLog(appErrorLog);
+
+            string currentUrl = System.Web.HttpContext.Current.Request.Url != null ? System.Web.HttpContext.Current.Request.Url.ToString() : "";
+            if (currentUrl != "" && currentUrl.Contains("PluginDataService.svc"))
+            {
+                int ProjectID = 0;
+                string ProjectType = "";
+                if (SessionManager.Instance.CurrentProject != null)
+                {
+                    ProjectID = SessionManager.Instance.CurrentProject.ProjectId;
+                    if (currentUrl.Contains("/SaveMeasurement") || currentUrl.Contains("/GetMeasurementsByOptimizeId") || currentUrl.Contains("/DeleteMeasurement"))
+                    {
+                        ProjectType = "Sync4D";
+                    }
+                    else if (currentUrl.Contains("/Save1DMeasurement") || currentUrl.Contains("/Get1DMeasurementsByOptimizeId") || currentUrl.Contains("/Delete1DMeasurement"))
+                    {
+                        ProjectType = "Sync1D";
+                    }
+                    else if (currentUrl.Contains("/SaveVMeasurement") || currentUrl.Contains("/GetVMeasurementsByProjectId") || currentUrl.Contains("/DeleteVMeasurement"))
+                    {
+                        ProjectType = "SyncValidation";
+                    }
+                    else if (currentUrl.Contains("/SaveSpotMeasurement") || currentUrl.Contains("/GetSpotMeasurementsByOptimizeId") || currentUrl.Contains("/DeleteSpotMeasurement"))
+                    {
+                        ProjectType = "SyncSpot";
+                    }
+
+                    if (ProjectType != "")
+                        errorHandlingBusiness.InsertMeasurementAppErrorLog(appErrorLog, SessionManager.Instance.CurrentProject.ProjectId, ProjectType);
+                }
+            }
 
             if (ApplicationConfiguration.Instance.SendEmailNotificationOnError && SendEmail)
             {
@@ -41,12 +71,12 @@ namespace FujifilmUSA.Sync.Business
         }
 
         public static void SendErrorEmail(AppErrorLog log)
-        {            
+        {
             var errorMessage = new MailMessage
-                                   {
-                                       Subject = ApplicationConfiguration.Instance.SendEmailNotificationOnErrorSubject,
-                                       IsBodyHtml = true,
-                                       Body = "ErrorMessage: " + log.ExMessage + "<br/><br/>" + "ErrorStackTrace: " + log.ExStackTracke + "<br/><br/>" + "GeneratedTime: " + log.TimeStamp + "<br/><br/>" + "UserName: " +
+            {
+                Subject = ApplicationConfiguration.Instance.SendEmailNotificationOnErrorSubject,
+                IsBodyHtml = true,
+                Body = "ErrorMessage: " + log.ExMessage + "<br/><br/>" + "ErrorStackTrace: " + log.ExStackTracke + "<br/><br/>" + "GeneratedTime: " + log.TimeStamp + "<br/><br/>" + "UserName: " +
                                                 ((SessionManager.Instance.CurrentUser != null)
                                                   ? (SessionManager.Instance.CurrentUser.FirstName + " " + SessionManager.Instance.CurrentUser.LastName)
                                                   : "NULL")
@@ -54,7 +84,7 @@ namespace FujifilmUSA.Sync.Business
                                                 ((SessionManager.Instance.CurrentUser != null)
                                                      ? (SessionManager.Instance.CurrentUser.Email)
                                                      : "NULL")
-                                   };
+            };
             errorMessage.To.Add(ApplicationConfiguration.Instance.SendEmailNotificationOnErrorTo);
             var mySmtpClient = new SmtpClient();
             mySmtpClient.Send(errorMessage);

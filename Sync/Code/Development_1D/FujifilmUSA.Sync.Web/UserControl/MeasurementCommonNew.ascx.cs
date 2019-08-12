@@ -1,5 +1,7 @@
 ﻿using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class MeasurementCommonNew : BaseControl
+    public partial class MeasurementCommonNew : BaseControl, IViewMeasurement
     {
         #region Declaration
         public string AddMeasurement_DeleteMeasurement_Confirmation
@@ -19,7 +21,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("AddMeasurement_DeleteMeasurement_Confirmation");
             }
         }
-
+        private PresenterMeasurementSetting _presenterMeasurementSetting;
         public int JsRandomNumber { get { return new Random().Next(1, 100); } }
 
         //public void SetVerificationControlVisibility()
@@ -35,6 +37,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         //    hdnPCSType.Value = Convert.ToInt32(SessionManager.Instance.CurrentProject.PCSDataTypes).ToString();
         //}
         #endregion
+
+        protected override void OnInit(EventArgs e)
+        {
+            _presenterMeasurementSetting = new PresenterMeasurementSetting(this);
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -106,8 +113,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 projectType = "Spot Project";
             }
             txtProjectType.Text = projectType;
+
+            ProjectId = SessionManager.Instance.CurrentOptimizeRun.ProjectId;
+            CurrentUserId = SessionManager.Instance.CurrentUser.UserId;
+            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            ProfileType = projectType;
+            DeviceSerialNo = SessionManager.Instance.CurrentProject.MeasurementSetting.DeviceSerialNo;
+            InstrumentTypeID = Convert.ToInt16(SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId);
+            LicenseType = SessionManager.Instance.CurrentProject.LicenseType;
         }
 
+        protected void btnAddPluginStatus_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int result = _presenterMeasurementSetting.CreateMeasurementPluginStatus();
+                if (result > 0)
+                    lblMessage.Text = "Project status has been saved. Please measure the reference chart in application.";
+                else
+                    lblMessage.Text = "";
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         //private void FillValidationDetailsFromXMF()
         //{
         //    if (SessionManager.Instance.CurrentValidationRequest != null)
@@ -131,6 +162,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
             }
         }
+        #endregion
+
+        #region IViewMeasurement
+        public int ProjectId { get; set; }
+        public int OptimizeRunId { get; set; }
+        public string ProfileType { get; set; }
+        public ELicenseType LicenseType { get; set; }
+        public string DeviceSerialNo { get; set; }
+        public short InstrumentTypeID { get; set; }
+        public List<Entity.MeasurementLog> MeasurementLogs { get; set; }
         #endregion
     }
 }

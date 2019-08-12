@@ -17,6 +17,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Declaration
         private PresenterDevice _presenterdevice;
+        private List<GridFilter> gridFilters;
         public string MeasurementDeviceList_DeleteMeasurementDevice_Confirmation
         {
             get
@@ -30,16 +31,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public MeasurementDeviceList()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
-        } 
+        }
         #endregion
 
         #region Page Events
         protected override void OnInit(EventArgs e)
         {
             _presenterdevice = new PresenterDevice(this);
+            gridFilters = new List<GridFilter>();
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
             rgMeasurementDevice.PageSize = Common.Utilities.PageSize;
             if (!Page.IsPostBack)
             {
@@ -57,6 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 rgMeasurementDevice.DataSource = MeasurementDevices;
                 rgMeasurementDevice.DataBind();
+                ApplyFiltersToGrid();                
             }
         }
 
@@ -92,6 +96,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgMeasurementDevice_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
+            Session["MeasurementDeviceGridFilters"] = rgMeasurementDevice.MasterTableView.FilterExpression;
+            SetGridFilters();
+
             _presenterdevice.GetMeasurementDevices();
             if (!IsErrorOccured)
             {
@@ -99,10 +106,64 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        protected void rgMeasurementDevice_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            if (e.Item is GridDataItem)
+            {
+                MeasurementDevice device = (MeasurementDevice)e.Item.DataItem;
+                CheckBox chkActive = (CheckBox)e.Item.FindControl("chkStatus");
+                chkActive.InputAttributes.Add("data-item", device.MeasurementDeviceId.ToString());
+
+                ImageButton btnEditPopup = (ImageButton)e.Item.FindControl("btnEditPopup");
+                string parms = Service.Common.Encryption.CryptHelper.EncryptString(device.MeasurementDeviceId.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
+                btnEditPopup.Attributes.Add("onclick", "ShowEditMeasurementDeviceWindow('" + ContentEncoder.Encode(parms) + "')");
+            }
+        }
+
         protected void likAdd_Click(object sender, EventArgs e)
         {
             //SessionManager.Instance.CurrentMeasurementDevice = null;
             Response.RedirectPermanent("AddMeasurementDevice.aspx");
+        }
+
+        public void SetGridFilters()
+        {
+            string[] columnArray = { "CompanyName", "BranchName", "SerialNumber", "InstrumentType", "Description" };
+            if (Session["CurrentGridFilters"] != null)
+                Session["CurrentGridFilters"] = null;
+
+            foreach (var columnName in columnArray)
+            {
+                GridColumn column = rgMeasurementDevice.MasterTableView.GetColumnSafe(columnName);
+                
+                if (column.CurrentFilterValue != "")
+                {
+                    gridFilters.Add(new GridFilter()
+                    {
+                        ColumnName = columnName,
+                        FilterFunction = column.CurrentFilterFunction,
+                        FilterValue = column.CurrentFilterValue
+                    });
+                }
+            }
+
+            Session["CurrentGridFilters"] = gridFilters;
+        }
+
+        public void ApplyFiltersToGrid()
+        {
+            if (Session["MeasurementDeviceGridFilters"] != null && Session["CurrentGridFilters"] != null)
+            {
+                var filterList = (List<GridFilter>)Session["CurrentGridFilters"];
+                foreach (var filter in filterList)
+                {
+                    GridColumn column = rgMeasurementDevice.MasterTableView.GetColumnSafe(filter.ColumnName);
+                    column.CurrentFilterFunction = filter.FilterFunction;
+                    column.CurrentFilterValue = filter.FilterValue;
+                }
+                rgMeasurementDevice.MasterTableView.FilterExpression = Convert.ToString(Session["MeasurementDeviceGridFilters"]);
+                rgMeasurementDevice.Rebind();
+            }
         }
 
         #endregion
@@ -122,5 +183,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int DeviceId { get; set; }
         public Device SelectedDevice { get; set; }
         #endregion
+    }
+    public class GridFilter
+    {
+        public string ColumnName { get; set; }
+        public GridKnownFunction FilterFunction { get; set; }
+        public string FilterValue { get; set; }
     }
 }

@@ -14,5 +14,10 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         string EntryDate { get; set; }
 
         string EncyptedTocken { get; set; }
+
+        UserReferenceChart UserReferenceChart { get; set; }
+        ReferenceChartApp UserReferenceChartApp { get; set; }
+        string DeviceSerialNo { get; set; }
+        short InstrumentTypeID { get; set; }
     }
 }
