@@ -205,7 +205,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else
                 SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
 
-            SessionManager.Instance.CurrentProject.MeasurementSetting.PluginType = rbtnMeasurementType.SelectedValue.ToString() == "Plugin";
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
+                SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin = rbtnMeasurementType.SelectedValue.ToString() == "Custom";
+            else
+                SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.IsCustomPlugin = rbtnMeasurementType.SelectedValue.ToString() == "Custom";
             #endregion
 
             //Set next navigation level as ValidationSetup
@@ -299,12 +302,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trMeasCount.Visible = true;
                 }
 
-                rbtnMeasurementType.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.PluginType ? "Plugin" : "Application";
+                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
+                    rbtnMeasurementType.SelectedValue = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin ? "Custom" : "Plugin";
+                else
+                    rbtnMeasurementType.SelectedValue = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.IsCustomPlugin ? "Custom" : "Plugin";
             }
 
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
                 Tr_Charts.Visible = false;
+            }
+
+            if (SessionManager.Instance.CurrentDevice.License.IsCustomPlugin == true)
+            {
+                trCustomPlugin.Visible = true;
             }
         }
 

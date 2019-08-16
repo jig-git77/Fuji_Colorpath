@@ -97,6 +97,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        {
                                            LicenseId = DataReader.ReadInt(x, "LicenseId"),
                                            IsCustomProfOptions = DataReader.ReadBoolean(x, "IsCustomProfOptions"),
+                                           IsCustomPlugin = DataReader.ReadBoolean(x, "IsCustomPlugin"),
                                            Branch = new Branch()
                                            {
                                                BranchId = DataReader.ReadInt(x, "BranchId"),

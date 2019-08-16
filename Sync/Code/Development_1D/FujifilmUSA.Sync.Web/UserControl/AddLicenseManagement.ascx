@@ -215,7 +215,7 @@
                              <tr>
                                 <td style="width: 130px" align="right">
                                     <span style="font-weight: bold;"><asp:Localize Text="Is Custom Profiler Options?" runat="server" 
-                                        ID="Localize2" meta:resourcekey="locIsCustomProfOptionsResource1"></asp:Localize></span>
+                                        ID="locIsCustomProfOptionsResource1" meta:resourcekey="locIsCustomProfOptionsResource1"></asp:Localize></span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
@@ -224,6 +224,22 @@
                                     <div style="float: left;">
                                         <asp:CheckBox ID="chkIsCustomProfOptions" runat="server" Checked="False" 
                                             meta:resourcekey="chkIsCustomProfOptionsResource1" />
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 130px" align="right">
+                                    <span style="font-weight: bold;"><asp:Localize Text="Is Custom Plugin?" runat="server" 
+                                        ID="locIsCustomPlugin" meta:resourcekey="locIsCustomPluginResource1"></asp:Localize></span>
+                                </td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
+                                <td style="width: 370px">
+                                    <div style="float: left;">
+                                        <asp:CheckBox ID="chkIsCustomPlugin" runat="server" Checked="False"  />
                                     </div>
                                     <div class="clear">
                                     </div>

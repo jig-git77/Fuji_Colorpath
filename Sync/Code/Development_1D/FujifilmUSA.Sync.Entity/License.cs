@@ -22,5 +22,6 @@ namespace FujifilmUSA.Sync.Entity
         public Branch Branch { get; set; }
         public List<ELicenseType> LicenseType { get; set; }
         public bool IsCustomProfOptions { get; set; }
+        public bool IsCustomPlugin { get; set; }
     }
 }

@@ -249,7 +249,7 @@
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
-                                    <tr runat="server">
+                                    <tr runat="server" id="trCustomPlugin" visible="false">
                                         <td>
                                             <span>
                                                 <asp:Localize runat="server" Text="Measurement Type:" ID="Localize3" meta:resourcekey="locMeasurementTypeResource12"></asp:Localize></span>
@@ -257,7 +257,7 @@
                                         <td>
                                             <asp:RadioButtonList runat="server" ID="rbtnMeasurementType" RepeatDirection="Horizontal" ClientIDMode="Static">
                                                 <asp:ListItem Value="Plugin" Selected="True">Measurement Plugin</asp:ListItem>
-                                                <asp:ListItem Value="Application">Third Party Application</asp:ListItem>
+                                                <asp:ListItem Value="Custom">Third Party Application</asp:ListItem>
                                             </asp:RadioButtonList>
                                             <%--<asp:RadioButton runat="server" ID="rbtnMeasurementTypePlugin" GroupName="MeasurementType" Checked="true"/> Measurement Plugin
                                             <asp:RadioButton runat="server" ID="rbtnMeasurementTypeApp" GroupName="MeasurementType" /> Third Party Application--%>

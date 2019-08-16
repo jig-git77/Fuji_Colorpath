@@ -93,7 +93,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
 
-                if (!SessionManager.Instance.CurrentProject.MeasurementSetting.PluginType)
+                if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin)
                 {
                     ucMeasurementCommonApp.Visible = true;
                     ucMeasurementCommon.Visible = false;

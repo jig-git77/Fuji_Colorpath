@@ -88,7 +88,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     BlanketAge = DataReader.ReadString(dsProject.Tables[1].Rows[0], "BlanketAge"),
                                     Screening = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Screening"),
                                     Coating = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Coating"),
-                                    IsCustomProfilerOption = DataReader.ReadBoolean(dsProject.Tables[1].Rows[0], "IsCustomProfilerOption")
+                                    IsCustomProfilerOption = DataReader.ReadBoolean(dsProject.Tables[1].Rows[0], "IsCustomProfilerOption"),
+                                    IsCustomPlugin = DataReader.ReadBoolean(dsProject.Tables[1].Rows[0], "IsCustomPlugin")
                                 };
                         }
                         if (dsProject.Tables[2].Rows.Count > 0)
@@ -124,8 +125,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     VMeasurementCount = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VMeasurementCount"),
                                     VReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "VReadMode"),
                                     PresetWeighted = DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "Weighted"),
-                                    DeviceSerialNo= DataReader.ReadString(dsProject.Tables[2].Rows[0], "DeviceSerialNumber"),
-                                    PluginType=DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "PluginType")
+                                    DeviceSerialNo = DataReader.ReadString(dsProject.Tables[2].Rows[0], "DeviceSerialNumber")
+                                    //,PluginType=DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "PluginType")
                                 };
                         }
                         if (dsProject.Tables[3].Rows.Count > 0)
@@ -429,7 +430,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetDeviceFamilyProfilerOption", new object[] { deviceFamilyId, LicenseTypeId, isCustomPreset,UserID });
+                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetDeviceFamilyProfilerOption", new object[] { deviceFamilyId, LicenseTypeId, isCustomPreset, UserID });
                     if (dsPresetList != null && dsPresetList.Tables.Count > 0)
                     {
                         presetList = dsPresetList.Tables[0].AsEnumerable().Select(
@@ -639,7 +640,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.PrintCondition.BlanketAge,
                                                      project.PrintCondition.Screening,
                                                      project.PrintCondition.Coating,
-                                                     project.PrintCondition.IsCustomProfilerOption,
                                                      project.MeasurementSetting.ObserverType,
                                                      project.MeasurementSetting.Illuminant,
                                                      (project.MeasurementSetting.UVMode == -1 ? 2 : project.MeasurementSetting.UVMode),  //---For older project who doen't have UVMode, so by default it will pass -1 because of NULL, so in that case make it 2 "UVCut"
@@ -673,7 +673,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.NewPaper_Black_L,
                                                      project.NewPaper_Black_a,
                                                      project.NewPaper_Black_b,
-                                                     project.MeasurementSetting.PluginType
+                                                     project.PrintCondition.IsCustomProfilerOption,
+                                                     project.PrintCondition.IsCustomPlugin
                                                  });
                         savedProjectId = project.ProjectId;
                     },
@@ -807,8 +808,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@NewPaper_Black_a", Type = DbType.Decimal, Value = project.NewPaper_Black_a},
                                                      new Parameters() {ParameterName = "@NewPaper_Black_b", Type = DbType.Decimal, Value = project.NewPaper_Black_b},
                                                      new Parameters() {ParameterName = "@IsCustomProfilerOption", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomProfilerOption},
-                                                     new Parameters() {ParameterName = "@NewPaper_Black_b", Type = DbType.Decimal, Value = project.NewPaper_Black_b},
-                                                     new Parameters() {ParameterName = "@PluginType", Type = DbType.Boolean, Value = project.MeasurementSetting.PluginType}
+                                                     new Parameters() {ParameterName = "@IsCustomPlugin", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomPlugin}
 
                                                  },
                                              new List<Parameters>()
@@ -1629,7 +1629,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.MeasurementSetting.ReadMode,
                                                      project.MeasurementSetting.MeasurementDeviceId,
                                                      project.SpotTargetProject.ReTargetSpotProjectID,
-                                                     project.MeasurementSetting.PluginType
+                                                     project.SpotTargetProject.PrintCondition.IsCustomPlugin
 
                                                  });
                         savedProjectId = project.SpotTargetProject.SpotProjectId;
@@ -1678,7 +1678,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@LicenseTypeID", Type = DbType.Int32, Value = (int)project.LicenseType},
                                                      new Parameters() {ParameterName = "@MasterProjectID", Type = DbType.Int32, Value = project.SpotTargetProject.ProjectId},
                                                      new Parameters() {ParameterName = "@ReTargetSpotProjectID", Type = DbType.Int32, Value = project.SpotTargetProject.ReTargetSpotProjectID},
-                                                     new Parameters() {ParameterName = "@PluginType", Type = DbType.Boolean, Value = project.MeasurementSetting.PluginType}
+                                                     new Parameters() {ParameterName = "@IsCustomPlugin", Type = DbType.Boolean, Value = project.SpotTargetProject.PrintCondition.IsCustomPlugin}
                                                  },
                                              new List<Parameters>()
                                                  {
@@ -1755,7 +1755,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     Notes = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Notes"),
                                     Media = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Media"),
                                     Colorant = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Colorant"),
-                                    RipSettings = DataReader.ReadString(dsProject.Tables[1].Rows[0], "RipSettings")
+                                    RipSettings = DataReader.ReadString(dsProject.Tables[1].Rows[0], "RipSettings"),
+                                    IsCustomPlugin = DataReader.ReadBoolean(dsProject.Tables[1].Rows[0], "IsCustomPlugin"),
                                 };
                         }
                         if (dsProject.Tables[2].Rows.Count > 0)
@@ -1775,8 +1776,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     OptReferenceChartType = new KeyValuePair<short, string>(
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "OPTReferenceChartTypeID"),
                                             DataReader.ReadString(dsProject.Tables[2].Rows[0], "OPTChartName")),
-                                    DeviceSerialNo = DataReader.ReadString(dsProject.Tables[2].Rows[0], "DeviceSerialNumber"),
-                                    PluginType= DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "PluginType")
+                                    DeviceSerialNo = DataReader.ReadString(dsProject.Tables[2].Rows[0], "DeviceSerialNumber")
+                                    //PluginType= DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "PluginType")
                                 };
                         }
                         project.SpotTargetProject.OptimizeRuns = dsProject.Tables[3].AsEnumerable().
@@ -2366,7 +2367,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return projectLimit;
         }
 
-        public int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType,string DeviceSerial,short InstrumentTypeId,short LicenseTypeID)
+        public int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType, string DeviceSerial, short InstrumentTypeId, short LicenseTypeID)
         {
             var returnValue = 0;
 
