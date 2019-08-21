@@ -121,7 +121,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                     this.DeviceSerialNo = SerialNumber;
                     this.InstrumentTypeID = Convert.ToInt16(InstrumentType);
-                    //_presenterlogin.UserLoginFromApplicationBySerial();
+                    _presenterlogin.UserLoginFromApplicationBySerial();
 
                     if (UserReferenceChartApp != null)
                     {
