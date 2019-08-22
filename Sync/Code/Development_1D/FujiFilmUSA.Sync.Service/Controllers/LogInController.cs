@@ -53,7 +53,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                     this.UserName = UserName;
                     this.Password = Password;
-                    //_presenterlogin.UserLoginFromApplication();
+                    _presenterlogin.UserLoginFromApplication();
 
                     if (UserReferenceChart.User != null && UserReferenceChart.User.LoginId != null)
                     {
