@@ -42,7 +42,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public void BindMeasurementLogList()
         {
-            _presenterMeasurementSetting.GetMeasurementLogList();
+            _presenterMeasurementSetting.GetMeasurementErrorLogList();
             if (!IsErrorOccured)
             {
                 rgMeasurementLog.DataSource = MeasurementLogs;
@@ -55,7 +55,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void rgMeasurementLog_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            _presenterMeasurementSetting.GetMeasurementLogList();
+            _presenterMeasurementSetting.GetMeasurementErrorLogList();
             if (!IsErrorOccured)
             {
                 rgMeasurementLog.DataSource = MeasurementLogs;                

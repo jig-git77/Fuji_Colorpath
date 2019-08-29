@@ -96,7 +96,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             returnValue = DataAccessFactory.
                 Instance.
                 ExecuteProcedure(
-                    "[dbo].[CreateMeasurementLogFromApp]",
+                    "[dbo].[CreateMeasurementErrorLogFromApp]",
                     new object[]
                         {
                             errorLog.UserId,

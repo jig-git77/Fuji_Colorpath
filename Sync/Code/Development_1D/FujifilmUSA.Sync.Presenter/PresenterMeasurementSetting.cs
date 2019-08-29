@@ -151,11 +151,11 @@ namespace FujifilmUSA.Sync.Presenter
             return projectBusiness.CreateMeasurementPluginStatus(_viewMeasurement.CurrentUserId, _viewMeasurement.ProjectId, _viewMeasurement.OptimizeRunId, _viewMeasurement.ProfileType, _viewMeasurement.DeviceSerialNo, _viewMeasurement.InstrumentTypeID, (short)_viewMeasurement.LicenseType);
         }
 
-        public void GetMeasurementLogList()
+        public void GetMeasurementErrorLogList()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewMeasurement.ErrorOccured;
-            _viewMeasurement.MeasurementLogs = measurementBusiness.GetMeasurementLogList();
+            _viewMeasurement.MeasurementLogs = measurementBusiness.GetMeasurementErrorLogList();
         }
 
     }

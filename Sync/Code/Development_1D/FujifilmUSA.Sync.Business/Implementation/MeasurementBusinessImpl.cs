@@ -2594,7 +2594,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dtPatchDetails;
         }
 
-        public List<MeasurementLog> GetMeasurementLogList()
+        public List<MeasurementLog> GetMeasurementErrorLogList()
         {
             List<MeasurementLog> logs = new List<MeasurementLog>();
 
@@ -2605,7 +2605,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             GetDsResult(
-                                "dbo.GetMeasurementLog",
+                                "dbo.GetMeasurementErrorLog",
                                 new object[] { });
                     logs = dsMeasurementLogs.
                         Tables[0].

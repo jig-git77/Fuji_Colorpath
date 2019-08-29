@@ -251,7 +251,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
-        public List<MeasurementLog> GetMeasurementLogList()
+        public List<MeasurementLog> GetMeasurementErrorLogList()
         {
             return new List<MeasurementLog>();
         }
