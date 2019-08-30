@@ -23,9 +23,9 @@ namespace FujifilmUSA.Sync.Web.Services
         [WebInvoke(Method = "GET", UriTemplate = "Ping")]
         [OperationContract]
         public bool Ping()
-        {       
+        {
             CheckUserValidation();
-            return true;         
+            return true;
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurement")]
@@ -136,6 +136,7 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public bool DeleteVMeasurement(string measurementId)
         {
+            CheckUserValidation();
             MeasurementId = Convert.ToInt32(measurementId);
             var presenter = new PresenterPluginDataService(this);
             return presenter.DeleteVMeasurement();
@@ -213,24 +214,48 @@ namespace FujifilmUSA.Sync.Web.Services
 
         public void CheckUserValidation()
         {
-            int result = IsValidateUser();
-            if (result == -1)
-                throw new WebFaultException(System.Net.HttpStatusCode.Unauthorized);
-            else if (result == -2)
-                throw new WebFaultException(System.Net.HttpStatusCode.BadRequest);
+            if (!IsValidateUser())
+                throw new WebFaultException(System.Net.HttpStatusCode.Unauthorized);            
         }
 
-        public int IsValidateUser()
+        //public void CheckUserValidation()
+        //{
+        //    int result = IsValidateUser();
+        //    if (result == -1)
+        //        throw new WebFaultException(System.Net.HttpStatusCode.Unauthorized);
+        //    else if (result == -2)
+        //        throw new WebFaultException(System.Net.HttpStatusCode.BadRequest);
+        //}
+
+        //public int IsValidateUser()
+        //{
+        //    //Getting the user token from client request
+        //    var _presenterlogin = new PresenterLogin(this);
+        //    if (!string.IsNullOrEmpty(System.Web.HttpContext.Current.Request.Headers["Auth-Key"]))
+        //    {
+        //        this.EncyptedTocken = Convert.ToString(System.Web.HttpContext.Current.Request.Headers["Auth-Key"]);
+        //        //return _presenterlogin.ValidateToken();
+
+        //    }                       
+        //    return -3;
+        //}
+
+        public bool IsValidateUser()
         {
             //Getting the user token from client request
             var _presenterlogin = new PresenterLogin(this);
-            if (!string.IsNullOrEmpty(System.Web.HttpContext.Current.Request.Headers["Auth-Key"]))
+            var authRequest = System.Web.HttpContext.Current.Request.Headers["Authorization"];
+            if (!string.IsNullOrEmpty(authRequest))
             {
-                this.EncyptedTocken = Convert.ToString(System.Web.HttpContext.Current.Request.Headers["Auth-Key"]);
-                //return _presenterlogin.ValidateToken();
-               
-            }                       
-            return -3;
+                var auth = authRequest.Split(' ');
+                if (!string.IsNullOrEmpty(auth[1]) && auth[0] == "Basic")
+                {
+                    this.EncyptedTocken = Convert.ToString(auth[1]);
+                    return _presenterlogin.ValidateUser();
+                }
+            }
+
+            return false;
         }
 
         public void GenerateJSONFile(Entity.Measurement measurement, string type)

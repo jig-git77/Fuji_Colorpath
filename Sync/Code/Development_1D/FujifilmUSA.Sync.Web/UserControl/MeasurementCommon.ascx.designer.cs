@@ -22,13 +22,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.HiddenField hdnBasePluginServiceUrl;
         
         /// <summary>
-        /// hdfToken control.
+        /// hdfAuthToken control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdfToken;
+        protected global::System.Web.UI.WebControls.HiddenField hdfAuthToken;
         
         /// <summary>
         /// hdnPCSType control.

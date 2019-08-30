@@ -104,7 +104,7 @@
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
             <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
-            <asp:HiddenField runat="server" ID="hdfToken" ClientIDMode="Static" />
+            <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
             <asp:HiddenField ID="hdnPCSType" runat="server" />
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
@@ -333,8 +333,8 @@
             contentType: "application/json; charset=utf-8",
             url: "Services/PluginDataService.svc/Ping",
             dataType: "json",
-            headers: {
-                'Auth-Key': $('#hdfToken').val()
+            headers: {                
+                'Authorization': 'Basic ' + $('#hdfAuthToken').val()
             },
             success: function (response) { },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -537,7 +537,7 @@
                 dataType: "json",
                 data: JSON.stringify(obj),
                 headers: {
-                    'Auth-Key': $('#hdfToken').val()
+                    'Authorization': 'Basic ' + $('#hdfAuthToken').val()
                 },
                 dataFilter: function (data, type) {
                     return data.replace(/"\\\/(Date\([0-9-]+\))\\\/"/gi, 'new $1');
@@ -697,7 +697,7 @@
                 return false;
             },
             headers: {
-                'Auth-Key': $('#hdfToken').val()
+                'Authorization': 'Basic ' + $('#hdfAuthToken').val()
             },
             success:
                 function (response) {

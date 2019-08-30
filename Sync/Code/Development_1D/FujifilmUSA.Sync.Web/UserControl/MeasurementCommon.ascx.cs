@@ -49,6 +49,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation).ToString().ToLower();
                 hdLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
                 btnImportMeasurementFile.Value = GetResourceString("btnImportMeasurementFile");
+                hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
                 btnImportMeasurementFile.Visible = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || 
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification ||
                     SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D ||

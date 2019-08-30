@@ -46,7 +46,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Page.Title = GetResourceString(_recSaveAs);
                 }               
                 //set the regex pattern for project name text box
-                revProjectName.ValidationExpression = @"^(?![.\-])(?:[^\\\/:*?&'"" <>|#+%])*[^.\-\\\/:*?&'""<>|#+%]$";
+                revProjectName.ValidationExpression = @"^(?![.\-])(?:[^\\\/:*?&'""<>|#+%$@!=;])*[^.\-\\\/:*?&'""<>|#+%$@!=;]$";
             }
         }
         #endregion
