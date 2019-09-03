@@ -356,8 +356,8 @@ $(document).ready(function () {
             apiParameter.InkPaperDansityChart = Get_InkPaperChartDansityChartImage();
             apiParameter.TVI_Summary_Chart = Get_TVISummaryDotGainChartImage();
             apiParameter.GrayBalanceDeltaCH_Chart = Get_GrayBalanceDelta_CH_ChartImage();
-            apiParameter.GrayBalanceDeltaL_Chart = Get_BlackDelta_L_ChartImage();
-            apiParameter.BlackBalanceDeltaL_Chart = Get_GrayDelta_L_ChartImage();
+            apiParameter.GrayBalanceDeltaL_Chart = Get_GrayDelta_L_ChartImage();
+            apiParameter.BlackBalanceDeltaL_Chart = Get_BlackDelta_L_ChartImage();
             apiParameter.BlackNPDChart = Get_Black_NPD_ChartImage();
             apiParameter.GrayNPDChart = Get_Gray_NPD_ChartImage();
             apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
