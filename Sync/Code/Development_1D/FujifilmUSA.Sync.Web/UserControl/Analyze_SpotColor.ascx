@@ -1588,7 +1588,7 @@
     ShowContentDuringLoad="false" Behaviors="Move,Close">
     <Windows>
         <telerik:RadWindow ID="windowPatchDetails" runat="server" ShowContentDuringLoad="false"
-            VisibleStatusbar="false" Title="Patch Details" Width="900" Height="330"
+            VisibleStatusbar="false" Title="Patch Details" Width="900" Height="347"
             Behaviors="Move,Close" OnClientClose="OnSpotDetailsClose" OnClientPageLoad="OnSpotDetailsLoad">
         </telerik:RadWindow>
         <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
