@@ -56,6 +56,11 @@
 </style>
 <script type="application/javascript">
     var hasMeasurement = true;
+    var abComparisionLimit = [-15, 15];
+    var abCompMin = -10;
+    var abCompMax = 10;
+    var abCompMajorUnit = 2.5;
+    var LCompMajorUnit = 5;
     var targetA = 0, targetB = 0, actualA = 0, actualB = 0, measuredA = 0, measuredB = 0, targetL = 0, actualL = 0, measuredL = 0;
     var drawing = kendo.drawing;
     var geometry = kendo.geometry;
@@ -76,11 +81,7 @@
         if (parseInt($('#hdnMeasurementID').val()) <= 0) {
             hasMeasurement = false;
         }
-        PopulatePaperOneChart();
-        PopulatePaperSecondChart();
-    });
-
-    function PopulatePaperOneChart() {
+        
         if (hasMeasurement) {
 
             targetA = parseFloat($('#lblTargetA').html());
@@ -92,6 +93,10 @@
             measuredA = parseFloat($('#lblMeasured_Target_a').html());
             measuredB = parseFloat($('#lblMeasured_Target_b').html());
 
+            targetL = parseFloat($('#lblTargetL').html());
+            actualL = parseFloat($('#lblPredicted_Target_L').html());
+            measuredL = parseFloat($('#lblMeasured_Target_L').html());
+
         } else {
 
             targetA = parseFloat($('#lblTargetARun0').html());
@@ -100,7 +105,41 @@
             actualA = parseFloat($('#lblDeltaA').html());
             actualB = parseFloat($('#lblDeltaB').html());
 
+            targetL = parseFloat($('#lblTargetLRun0').html());
+            actualL = parseFloat($('#lblDeltaL').html());
         }
+
+
+        //interval calculations
+        var values = [actualA, actualB, measuredA, measuredB, actualL, measuredL];
+        var mx = Math.max.apply(Math, values);
+        var mxInterval = Math.ceil(mx);
+        var mn = Math.min.apply(Math, values);
+
+        if (Math.abs(mx) < Math.abs(mn)) {
+            mxInterval = Math.ceil(Math.abs(mn));
+        }
+
+        if (mxInterval > 10) {
+            var numInterval = mxInterval;
+            if ((mxInterval % 5) != 0) {
+                numInterval = (Math.floor(mxInterval / 5) * 5) + 5;
+            } 
+            abCompMax = numInterval;
+            abCompMin = 0 - numInterval;            
+            abCompMajorUnit = numInterval / 4;
+            LCompMajorUnit= numInterval / 2;
+            abComparisionLimit = [abCompMin, abCompMax];
+            $('#tblAbComparisonScaleMsg').css('display', 'block');
+        }
+
+
+        PopulatePaperOneChart();
+        PopulatePaperSecondChart();
+    });
+
+    function PopulatePaperOneChart() {
+        
 
         var targetPaperGreenObj = [0, 0];
         var greenSeriesArray = [];
@@ -159,6 +198,8 @@
         kendoBlueSeriseObj.highlight = {
             visible: false
         }
+
+        
         
         $("#divChartABComparision").kendoChart({
             seriesDefaults: {
@@ -171,10 +212,10 @@
             ],
             xAxis: {
                 name: "xAxis",
-                min: -10,
-                max: 10,
-                majorUnit: 2.5,
-                axisCrossingValues: [-10, 10],
+                min: abCompMin,
+                max: abCompMax,
+                majorUnit: abCompMajorUnit,
+                axisCrossingValues: abComparisionLimit,
                 labels: {
                     step: 2,
                     template: function (e) {                        
@@ -186,10 +227,10 @@
             },
             yAxis: {
                 name: "yAxis",
-                min: -10,
-                max: 10,
-                majorUnit: 2.5,
-                axisCrossingValues: [-10, 10],
+                min: abCompMin,
+                max: abCompMax,
+                majorUnit: abCompMajorUnit,
+                axisCrossingValues: abComparisionLimit,
                 labels: {
                     step: 2,
                     template: function (e) {
@@ -215,37 +256,7 @@
         });
     }
 
-    function PopulatePaperSecondChart() {        
-        targetL = 0, actualL = 0, measuredL = 0;
-        if (hasMeasurement) {
-
-            targetL = parseFloat($('#lblTargetL').html());
-            actualL = parseFloat($('#lblPredicted_Target_L').html());
-            measuredL = parseFloat($('#lblMeasured_Target_L').html());
-
-        } else {
-            targetL = parseFloat($('#lblTargetLRun0').html());
-            actualL = parseFloat($('#lblDeltaL').html());
-        }
-
-        //var targetPaperGreenObj = [0];
-        //var greenSeriesArray = [];
-        //greenSeriesArray.push(targetPaperGreenObj);
-        //var kendoGreenSeriseObj = {};
-        //kendoGreenSeriseObj.data = greenSeriesArray;
-        //kendoGreenSeriseObj.color = 'green';
-        //kendoGreenSeriseObj.markers = {
-        //    background: 'green',
-        //    size: 16,
-        //    visual: function (e) {
-        //        var src = kendo.format("Images/greendot.png");
-        //        var image = new kendo.drawing.Image(src, e.rect);
-        //        return image;
-        //    }
-        //};
-        //kendoGreenSeriseObj.highlight = {
-        //    visible: false
-        //}
+    function PopulatePaperSecondChart() {                        
 
         var targetPAPERRedObj = [actualL];
         var redSeriesArray = [];
@@ -298,10 +309,10 @@
             },
             valueAxis: {
                 name: "valueAxis",                
-                axisCrossingValues: [0, 10],
-                min: -10,
-                max: 10,                
-                majorUnit: 5,  
+                axisCrossingValues: [0, abCompMax],
+                min: abCompMin,
+                max: abCompMax,            
+                majorUnit: LCompMajorUnit,  
                 labels: {                    
                     template: function (e) {
                         
@@ -316,8 +327,7 @@
                 width: 120,
                 height: 250,                
             },
-            render: function (e) {
-                debugger;
+            render: function (e) {                
                 var chart = e.sender;
                 //get value axis object
                 var valueAxis = chart.getAxis("valueAxis");
@@ -676,6 +686,19 @@
                         </tr>
                     </table>
                 </td>
+            </tr>
+        </table>
+
+        <table id="tblAbComparisonScaleMsg" style="display: none;">
+            <tr>
+                <td style="width: 21%;"></td>
+                <td style="width: 29%;">
+                     <div style="background-color: white;text-align: center;width: 100%;border:2px solid red;">
+                        Graph scaled to compensate for large ∆a* or ∆b*
+                    </div>
+                </td>
+                <td style="width: 10%;"></td>
+                <td style="width: 23%;"></td>
             </tr>
         </table>
     </div>
