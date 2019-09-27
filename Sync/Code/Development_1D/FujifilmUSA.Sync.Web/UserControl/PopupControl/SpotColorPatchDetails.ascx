@@ -55,6 +55,7 @@
     }
 </style>
 <script type="application/javascript">
+    var varFillerValue = 2.0;
     var hasMeasurement = true;
     var abComparisionLimit = [-15, 15];
     var abCompMin = -10;
@@ -109,7 +110,6 @@
             actualL = parseFloat($('#lblDeltaL').html());
         }
 
-
         //interval calculations
         var values = [actualA, actualB, measuredA, measuredB, actualL, measuredL];
         var mx = Math.max.apply(Math, values);
@@ -121,9 +121,9 @@
         }
 
         if (mxInterval > 10) {
-            var numInterval = mxInterval;
+            var numInterval = mxInterval + varFillerValue;
             if ((mxInterval % 5) != 0) {
-                numInterval = (Math.floor(mxInterval / 5) * 5) + 5;
+                numInterval = (Math.ceil(mxInterval / 5) * 5) + 5;
             } 
             abCompMax = numInterval;
             abCompMin = 0 - numInterval;            
