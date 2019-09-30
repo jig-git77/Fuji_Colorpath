@@ -1,0 +1,57 @@
+using System;
+
+namespace Lynx
+{
+	[Flags]
+	public enum Db_user_privileges : long
+	{
+		k_manage_system = 1,
+		k_manage_dealers = 2,
+		k_role_dealer = 4,
+		k_role_user = 8,
+		k_select_group = 16,
+		k_change_password = 32,
+		k_change_contact = 64,
+		k_see_all_options = 128,
+		k_mod_all_options = 256,
+		k_receive_registration_requests = 512,
+		k_debug_system = 1024,
+		k_recover_deleted_items = 2048,
+		k_any_license_shop_url = 4096,
+		k_call_certification = 8192,
+		k_call_ink_saver = 16384,
+		k_call_evaluation = 32768,
+		k_system_users = 65536,
+		k_system_events = 131072,
+		k_system_licenses = 262144,
+		k_system_testcharts = 524288,
+		k_system_iccprofiles = 1048576,
+		k_system_printer_devices = 2097152,
+		k_system_print_targets = 4194304,
+		k_system_print_media = 8388608,
+		k_system_settings = 16777216,
+		k_dealer_create = 33554432,
+		k_dealer_delete = 67108864,
+		k_dealer_contact = 134217728,
+		k_dealer_options = 268435456,
+		k_dealer_accounts = 536870912,
+		k_dealer_licenses = 1073741824,
+		k_customer_create = 2147483648,
+		k_customer_delete = 4294967296,
+		k_customer_contact = 8589934592,
+		k_customer_options = 17179869184,
+		k_customer_accounts = 34359738368,
+		k_customer_licenses = 68719476736,
+		k_change_company_contact = 137438953472,
+		k_change_company_style = 274877906944,
+		k_license_history = 549755813888,
+		k_select_dealer = 1099511627776,
+		k_member_of_any_group = 2199023255552,
+		k_manage_company_links = 4398046511104,
+		k_company_link_edit_get = 8796093022208,
+		k_company_link_edit_put = 17592186044416,
+		k_company_link_delete = 35184372088832,
+		k_company_link_utilize = 70368744177664,
+		k_enable_g7_calcs = 140737488355328
+	}
+}
