@@ -238,11 +238,16 @@ namespace FujifilmUSA.Sync.Common
         /// <returns></returns>
         public static string ReadConfigValue(string key)
         {
+            string sslValue = System.Web.HttpContext.Current.Request.Url.Scheme;
             if (key == "BaseServiceURL")
             {
-                string sslValue = System.Web.HttpContext.Current.Request.Url.Scheme;
                 if(sslValue=="https")
-                    return ConfigurationManager.AppSettings["BaseServiceURLSSL"];
+                    return ConfigurationManager.AppSettings["BaseServiceURLSSL"];                
+            }
+            else if (key == "BaseCpSpotChartPdfServiceURL")
+            {
+                if (sslValue == "https")
+                    return ConfigurationManager.AppSettings["BaseCpSpotChartPdfServiceURLSSL"];
             }
             return ConfigurationManager.AppSettings[key];
         }
