@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace FujiFilmDesktopApp.TaskeroColorTuner
 {
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public interface IColorpathTunerChannel : IColorpathTuner, IClientChannel, IContextChannel, IChannel, ICommunicationObject, IExtensibleObject<IContextChannel>, IDisposable
-    {
+    //[GeneratedCode("System.ServiceModel", "4.0.0.0")]
+    //public interface IColorpathTunerChannel : IColorpathTuner, IClientChannel, IContextChannel, IChannel, ICommunicationObject, IExtensibleObject<IContextChannel>, IDisposable
+    //{
 
-    }
+    //}
 }

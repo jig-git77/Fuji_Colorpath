@@ -26,32 +26,19 @@ namespace FujiFilmDesktopApp
 
         private void btnUploadMeasurement_Click(object sender, EventArgs e)
         {
-            bool flag;
-            int num;
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(UnhandledExceptionEventRaised);
             try
             {
-                string value = "http://www.taskero.com/services/colorpathtuner/ColorpathTuner.svc";
+                foreach (string item in openFileDialog1.FileNames)
                 {
-                    {
-                        string xMLPath = GetXMLPath();
-                        if (Directory.Exists(xMLPath))
-                        {
-                            FileInfo[] files = (new DirectoryInfo(xMLPath)).GetFiles("*.xml");
-                            Array.Sort(files, new clsCompareFileInfo());
-                            FileInfo[] fileInfoArray = files;
-                            for (int i = 0; i < (int)fileInfoArray.Length; i++)
-                            {
-                                FileInfo fileInfo = fileInfoArray[i];
-                                Thread.Sleep(5000);
-                                DataSet dataSet = new DataSet();
-                                dataSet.ReadXml(fileInfo.FullName);
-                                SendDataToTaskero(dataSet);
-                                File.Delete(fileInfo.FullName);
-                            }
-                        }
-                    }
+                    FileInfo fileInfo = new FileInfo(item);
+                    Thread.Sleep(1000);
+                    DataSet dataSet = new DataSet();
+                    dataSet.ReadXml(fileInfo.FullName);
+                    SendDataToTaskero(dataSet);                    
                 }
+                txtFilePath.Text = "";
+                MessageBox.Show("File uploaded successfully.");                               
             }
             catch (Exception exception1)
             {
@@ -80,52 +67,23 @@ namespace FujiFilmDesktopApp
             string str = location.Substring(length, location.Length - length);
             str = str.Substring(0, str.Length - 4);
             string folderPath = @"D:\Docs\FujiFilm\senddataTU3\senddataTU3\SendData\senddata_example\XML\";
-            //Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-            //location = string.Concat(folderPath, "\\CGS", str, "\\");
             return folderPath;
         }
 
         private static void SendDataToTaskero(DataSet DS)
         {
-            ColorpathTunerClient colorpathTunerClient = null;
-
-            // wsHttpBinding binding = new wsHttpBinding();
-
-            //Specify the address to be used for the client.
-            //EndpointAddress address =
-            // new EndpointAddress("http://www.taskero.com/services/colorpathtuner/ColorpathTuner.svc");
-
-
-            // Create a client that is configured with this address and binding.
-            //CalculatorClient client = new CalculatorClient(binding, address);
-
-
-
+            ColorpathTunerClient colorpathTunerClient = null;           
             try
             {
                 try
                 {
-                    colorpathTunerClient = new ColorpathTunerClient();
-                    // string str = "http://www.taskero.com/services/colorpathtuner/ColorpathTuner.svc";
-                    //string str = colorpathTunerClient.Endpoint.Address.Uri.ToString();
-                    //EventLog eventLog = new EventLog()
-                    //{
-                    //    Source = "TaskeroColorTunerWeb"
-                    //};
-                    //eventLog.WriteEntry(string.Concat("Data send to ", str));
+                    colorpathTunerClient = new ColorpathTunerClient();                   
                     colorpathTunerClient.GetData(DS);
                 }
                 catch (Exception exception)
-                {
-                    //EventLog eventLog = new EventLog();
-                    //{
-                    //    Source = "TaskeroColorTunerWeb" 
-                    //};
-                    //eventLog.WriteEntry(string.Concat("Exception ", exception.ToString()));
-
+                {                   
                     EventLog.WriteEntry("IN Application Exception Create", exception.Message + "Trace" +
    exception.StackTrace, EventLogEntryType.Error, 121, short.MaxValue);
-
                     throw new Exception(string.Concat("Error in Module Send Data To Taskero: ", exception.ToString()));
                 }
             }
@@ -183,6 +141,15 @@ namespace FujiFilmDesktopApp
         {           
             public SendData_db_context(string p_odbc_connection_string) : base(p_odbc_connection_string)
             {
+            }
+        }
+
+        private void btnSelectFile_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK) // Test result.
+            {
+                txtFilePath.Text = openFileDialog1.FileName;
             }
         }
     }
