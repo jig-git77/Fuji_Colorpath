@@ -110,7 +110,7 @@
             actualL = parseFloat($('#lblDeltaL').html());
         }
 
-        //interval calculations
+        //interval calculations                
         var values = [actualA, actualB, measuredA, measuredB, actualL, measuredL];
         var mx = Math.max.apply(Math, values);
         var mxInterval = Math.ceil(mx);
@@ -122,8 +122,8 @@
 
         if (mxInterval > 10) {
             var numInterval = mxInterval + varFillerValue;
-            if ((mxInterval % 5) != 0) {
-                numInterval = (Math.ceil(mxInterval / 5) * 5) + 5;
+            if ((numInterval % 5) != 0) {
+                numInterval = (Math.round(mxInterval / 5) * 5) + 5;
             } 
             abCompMax = numInterval;
             abCompMin = 0 - numInterval;            
