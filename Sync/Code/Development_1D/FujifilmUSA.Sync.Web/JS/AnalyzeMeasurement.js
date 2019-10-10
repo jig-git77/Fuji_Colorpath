@@ -1155,7 +1155,8 @@ function BindMeasurementPatchDetails() {
                             if (XMLHttpRequest.status == 401) {
                                 ShowDialog("You are not authorized user. Please login again.", "Message");
                             } else {
-                                alert(errorThrown);
+                                //alert(errorThrown);
+                                console.log(errorThrown);
                             }
                             kendo.ui.progress($('#divMeasurementPatchDetails .k-grid-content'), false);
                         });
@@ -2048,7 +2049,8 @@ function BindGrayCharts() {
         if (XMLHttpRequest.status == 401) {
             ShowDialog("You are not authorized user. Please login again.", "Message");
         } else {
-            alert(errorThrown);
+            //alert(errorThrown);
+            console.log(errorThrown);
         }
         kendo.ui.progress($chartLoader, false);
     });

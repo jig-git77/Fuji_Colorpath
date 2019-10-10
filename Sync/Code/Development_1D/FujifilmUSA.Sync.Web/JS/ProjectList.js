@@ -977,12 +977,24 @@ function ShowDialog(message, title) {
         closable: false,
         modal: false,
         content: message,
+        open: function () {
+            $($('.k-dialog-buttongroup button')[1]).kendoTooltip({
+                content: "Help Details will come Later!",
+                position: "bottom"
+            });
+        },
         actions: [
             {
                 text: 'OK', primary: true, action: function (e) {
                     window.location.href = 'login.aspx';
                 }
-            }
+            },
+             {
+                 text: 'Help', primary: true, action: function (e) {
+                     //alert("Help will come later.");
+                     window.location.href = 'login.aspx';
+                 }
+             }
         ]
     });
 }
