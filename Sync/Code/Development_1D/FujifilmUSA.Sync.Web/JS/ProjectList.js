@@ -975,7 +975,7 @@ function ShowDialog(message, title) {
         width: "400px",
         title: title,
         closable: false,
-        modal: false,
+        modal: true,
         content: message,
         open: function () {
             $($('.k-dialog-buttongroup button')[1]).kendoTooltip({
