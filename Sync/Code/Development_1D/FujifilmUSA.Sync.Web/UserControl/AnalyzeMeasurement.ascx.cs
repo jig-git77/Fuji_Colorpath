@@ -412,8 +412,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Properties
-        public int JsRandomNumber { get { return new Random().Next(1, 100); } }
-        
+        //public int JsRandomNumber { get { return new Random().Next(1, 100); } }
+        public string JsRandomNumber { get { return Guid.NewGuid().ToString(); } }
+
         #endregion
 
         #region IViewAnalyze Members
