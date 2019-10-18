@@ -39,6 +39,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         public int JsRandomNumber { get { return new Random().Next(1, 100); } }
+        public string JsRandomGuid { get { return Guid.NewGuid().ToString(); } }
         #endregion
         public ProjectList()
         {
@@ -104,7 +105,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.ProjectList = Projects;
             }
         }
-        #endregion
+        #endregion       
 
         #region IViewProjectList Members
         public List<Project> Projects { get; set; }

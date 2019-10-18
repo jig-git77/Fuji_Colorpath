@@ -11,7 +11,7 @@
 <script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
-<script src="JS/ProjectList.js"></script>
+<script src="JS/ProjectList.js?version=<%=JsRandomGuid %>"></script>
 
 <script type="text/javascript" language="javascript">
 
