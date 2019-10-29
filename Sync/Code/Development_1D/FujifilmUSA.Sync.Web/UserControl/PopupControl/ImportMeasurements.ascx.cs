@@ -123,7 +123,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
             if (!IsErrorOccured)
             {
-                Projects.RemoveAll(item => item.ProjectId == SessionManager.Instance.CurrentProject.ProjectId); //-----Remove the current project from project list------//
+                Projects.RemoveAll(item => item.MeasurementSetting.ReferenceChartType.Key != SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key); //-----Remove the current project from project list, if reference chart type doesn't match with current selected one------//
                 rgProjectList.DataSource = Projects;
             }           
         }

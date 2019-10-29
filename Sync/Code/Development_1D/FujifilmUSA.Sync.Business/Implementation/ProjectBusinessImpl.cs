@@ -1235,10 +1235,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             GetDsResult(
-                                "CPSync4D.GetProjectList",
+                                "CPSync4D.GetProjectList_Import",
                                 new object[]
                                         {
-                                            deviceId, LicenseTypeID
+                                            deviceId, LicenseTypeID, CurrentProjectID
                                         });
                     if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
                     {
@@ -1248,21 +1248,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 ProjectId = DataReader.ReadInt(x, "ProjectID"),
                                 ProjectName = DataReader.ReadString(x, "ProjectName"),
                                 DeviceId = DataReader.ReadInt(x, "CpDeviceId"),
-                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
                                 LicenseType = (ELicenseType)DataReader.ReadInt(x, "LicenseTypeID"),
-                                TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
-                                HasDLP = DataReader.ReadBoolean(x, "HasDLP"),
+                                CreateDate = DataReader.ReadDate(x, "EndDateTime"),
                                 SourceProfile = new SourceProfile()
                                 {
                                     SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),
                                     ProfileName = DataReader.ReadString(x, "ProfileName")
                                 },
-                                PrintStandardType = new Entity.CPSync1D.PrintStandardType()
-                                {
-                                    PrintStandardTypeID = DataReader.ReadShort(x, "PrintStandardTypeID"),
-                                    PrintStandard = DataReader.ReadString(x, "PrintStandard"),
-                                },
-                                CreateDate = DataReader.ReadDate(x, "EndDateTime"),
                                 PrintCondition =
                                     new PrintCondition()
                                     {
@@ -1270,14 +1262,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         Colorant = DataReader.ReadString(x, "Colorant"),
                                         RipSettings = DataReader.ReadString(x, "RipSettings")
                                     },
-                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
-                                CurrentDlpName = (DataReader.ReadInt(x, "CurrentDlpNo").ToString("000").Contains("-001")) ? String.Format("{0} DLP {1}.icc",
-                                                               DataReader.ReadString(x, "ProjectName"),
-                                                               DataReader.ReadInt(x, "CurrentDlpNo").ToString("000"))
-                                                               : String.Format("{0} DLP{1}.icc",
-                                                               DataReader.ReadString(x, "ProjectName"),
-                                                               DataReader.ReadDate(x, "EndDateTime").Month.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Day.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Hour.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Minute.ToString("00")),
-                                MetricTargetPresetId = DataReader.ReadInt(x, "MetricTargetPresetId")
+                                MeasurementSetting = new MeasurementSetting()
+                                {
+                                    ReferenceChartType = new KeyValuePair<short, string>(
+                                            DataReader.ReadShort(x, "ReferenceChartTypeID"),
+                                            DataReader.ReadString(x, "ChartName")),
+                                }
 
                             }).ToList();
                     }
