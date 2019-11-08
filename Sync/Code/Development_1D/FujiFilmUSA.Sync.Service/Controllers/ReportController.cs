@@ -238,7 +238,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             Directory.CreateDirectory(objReportPDF.PDFPath);
 
                         objReportPDF.spotChartContent = chart;
-                        objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSpotProject.PDF";
+                        objReportPDF.PDF_NAME = chart.SpotProjectName + "-" + DateTime.Now.ToString("MMddyyHHmm") + ".PDF"; //chart.CurrentUserId.ToString() + "_ReportSpotProject.PDF";
                         objReportPDF.ReportName = "Brand Color Optimization";
                         objReportPDF.ReportType = (int)enumReportType.ReportSpotColorProject; //Only in spot color Optimization part
                         objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");

@@ -43,6 +43,7 @@ namespace FujiFilmUSA.Sync.Service.Models
         public bool isFirstDeltaRefList { get; set; }
         public SortDescription sort { get; set; }
         public FilterContainer filter { get; set; }
+        public string SpotProjectName { get; set; }
     }
     public class ExportPatchViewModel
     {

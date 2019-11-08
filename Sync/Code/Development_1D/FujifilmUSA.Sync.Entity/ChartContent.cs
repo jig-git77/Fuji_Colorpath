@@ -55,6 +55,7 @@ namespace FujifilmUSA.Sync.Entity
         public int CurrentUserId { get; set; }
         public bool hasMeasurement { get; set; }
         public List<SpotPatchDetails> chartDetailList { get; set; }
+        public string SpotProjectName { get; set; }
     }
 
     public class SpotPatchDetails
