@@ -166,7 +166,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 string zipFileName = "";
                 if (result.IsSuccessStatusCode)
                 {
+                    string prjName = Convert.ToString(Request.QueryString["projectName"]);
                     contentStream = result.Content.ReadAsStreamAsync().Result;
+                    result.Content.Headers.ContentDisposition.FileName = prjName + "-" + DateTime.Now.ToString("MMddyyHHmm") + ".zip";
                     zipFileName = result.Content.Headers.ContentDisposition.FileName;
 
                     using (var filestream = File.Create(zipFilPath + zipFileName))

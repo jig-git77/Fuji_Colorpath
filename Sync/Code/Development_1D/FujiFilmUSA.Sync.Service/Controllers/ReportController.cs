@@ -163,6 +163,18 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             DSReport = new DataSet();
                             _presenterReportSingleMeasurement.GetReportDataOnMeasurement();
                             objReportPDF.DS_Common = DSReport;
+                            if (objReportPDF.DS_Common.Tables.Count > 0)
+                            {
+                                if (objReportPDF.DS_Common.Tables[0].Rows.Count > 0)
+                                {
+                                    string pdfName = string.Empty;
+                                    string flName = string.Empty;
+                                    flName = !IsAverageOfMeasurements ? objReportPDF.DS_Common.Tables[0].Rows[0]["MeasurementName"].ToString() : "Avg";
+                                    pdfName = objReportPDF.DS_Common.Tables[0].Rows[0]["ProjectName"].ToString() + "-" + flName + ".PDF";
+                                    objReportPDF.PDF_NAME = string.Empty;
+                                    objReportPDF.PDF_NAME = pdfName;
+                                }
+                            }                            
                         }
 
                         objReportPDF.GenerateClientReportPDF();
