@@ -269,7 +269,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     Directory.CreateDirectory(objReportPDF.PDFPath);
 
                 objReportPDF.dtSpotPatchDetails = dt;
-                objReportPDF.PDF_NAME = model.OptimizationRunID.ToString() + "_ReportSpotPatchDetails.PDF";
+                objReportPDF.PDF_NAME = model.SpotProjectName + "-" + DateTime.Now.ToString("MMddyyHHmm") + ".PDF";
                 objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
                 objReportPDF.GenerateSpotPatchDetailsReport();
 
@@ -317,7 +317,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                 ReportPDF objReportPDF = new ReportPDF();
                 objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
-                objReportPDF.PDF_NAME = OptimizeRunId.ToString() + "_DataGridViewExport.xlsx";
+                objReportPDF.PDF_NAME = model.SpotProjectName + "-" + DateTime.Now.ToString("MMddyyHHmm") + ".xlsx";
                 objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
                 if (!Directory.Exists(objReportPDF.PDFPath))
                     Directory.CreateDirectory(objReportPDF.PDFPath);

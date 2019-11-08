@@ -542,7 +542,8 @@
             var filterObj = {
                 OptimizationRunId: parseInt(optimizationRun),
                 sort: sortObj,
-                filter: filterObj
+                filter: filterObj,
+                SpotProjectName: $("#hdnSpotProjectName").val()
             };
 
             var ajaxParameter = {
@@ -623,7 +624,8 @@
             var filterObj = {
                 OptimizationRunId: optimizationRun,
                 sort: sortObj,
-                filter: filterObj
+                filter: filterObj,
+                SpotProjectName: $("#hdnSpotProjectName").val()
             };
 
             //console.log(filterObj);
@@ -805,7 +807,8 @@
                 OptimizeRunId: optimizeRunId,
                 CurrentUserId: parseInt($('#hdnCurrentUserID').val()),
                 hasMeasurement: hasMeasurement,
-                chartDetailList: chartList
+                chartDetailList: chartList,
+                SpotProjectName:$("#hdnSpotProjectName").val()
             };
 
             var ajaxParameter = {
@@ -1246,6 +1249,7 @@
         <asp:HiddenField runat="server" ID="hdnCurrentProjectLicenseType" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hdnCurrentUserRole" ClientIDMode="Static" />
         <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
+        <asp:HiddenField runat="server" ID="hdnSpotProjectName" ClientIDMode="Static" />
         <h1 id="header" runat="server">
             <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
         <div class="Information_divAnalyze">

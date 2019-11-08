@@ -57,6 +57,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     hdnIsNewNCP.Value = IsNewNCP.ToString();
                     hdnIsNcpCreated.Value = IsNCPCreated.ToString();
                     hdfCurrentCulture.Value = getCurrentCultureLanguage();
+                    hdnSpotProjectName.Value = SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName;
                 }
 
                 if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First().OptimizeRunId)
