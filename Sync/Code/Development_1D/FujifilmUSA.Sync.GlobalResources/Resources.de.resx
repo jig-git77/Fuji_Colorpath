@@ -1342,4 +1342,28 @@ erwünschten Format überein.</value>
   <data name="ESourceProfileCategory_CustomStandards" xml:space="preserve">
     <value>Custom Source Profile</value>
   </data>
+  <data name="EPerceptualRenderingCustomProfile_AbsoluteCompression" xml:space="preserve">
+    <value>Absolute Compression</value>
+  </data>
+  <data name="EPerceptualRenderingCustomProfile_BlackpointCompression" xml:space="preserve">
+    <value>Blackpoint Compression</value>
+  </data>
+  <data name="EPerceptualRenderingCustomProfile_MinimumCompression" xml:space="preserve">
+    <value>Minimum Compression</value>
+  </data>
+  <data name="EPerceptualRenderingCustomProfile_StandardCompression" xml:space="preserve">
+    <value>Standard Compression</value>
+  </data>
+  <data name="EBlackCalculationCustomProfile_BalanceCMYK" xml:space="preserve">
+    <value>BalanceCMYK</value>
+  </data>
+  <data name="EBlackCalculationCustomProfile_Custom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="EBlackCalculationCustomProfile_Darkest" xml:space="preserve">
+    <value>Darkest</value>
+  </data>
+  <data name="EBlackCalculationCustomProfile_GCR" xml:space="preserve">
+    <value>Auto</value>
+  </data>
 </root>

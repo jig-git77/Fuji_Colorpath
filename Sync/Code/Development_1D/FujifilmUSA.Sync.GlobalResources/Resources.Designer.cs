@@ -511,6 +511,87 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BalanceCMYK.
+        /// </summary>
+        internal static string EBlackCalculationCustomProfile_BalanceCMYK {
+            get {
+                return ResourceManager.GetString("EBlackCalculationCustomProfile_BalanceCMYK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom.
+        /// </summary>
+        internal static string EBlackCalculationCustomProfile_Custom {
+            get {
+                return ResourceManager.GetString("EBlackCalculationCustomProfile_Custom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Darkest.
+        /// </summary>
+        internal static string EBlackCalculationCustomProfile_Darkest {
+            get {
+                return ResourceManager.GetString("EBlackCalculationCustomProfile_Darkest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto.
+        /// </summary>
+        internal static string EBlackCalculationCustomProfile_GCR {
+            get {
+                return ResourceManager.GetString("EBlackCalculationCustomProfile_GCR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto.
+        /// </summary>
+        internal static string EBlackGenerationCustomProfile_Auto {
+            get {
+                return ResourceManager.GetString("EBlackGenerationCustomProfile_Auto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GCR.
+        /// </summary>
+        internal static string EBlackGenerationCustomProfile_GCR {
+            get {
+                return ResourceManager.GetString("EBlackGenerationCustomProfile_GCR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max K.
+        /// </summary>
+        internal static string EBlackGenerationCustomProfile_MaxK {
+            get {
+                return ResourceManager.GetString("EBlackGenerationCustomProfile_MaxK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min K.
+        /// </summary>
+        internal static string EBlackGenerationCustomProfile_MinK {
+            get {
+                return ResourceManager.GetString("EBlackGenerationCustomProfile_MinK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UCR.
+        /// </summary>
+        internal static string EBlackGenerationCustomProfile_UCR {
+            get {
+                return ResourceManager.GetString("EBlackGenerationCustomProfile_UCR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CKMY.
         /// </summary>
         internal static string EInkOrder_CKMY {
@@ -939,6 +1020,42 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string Email_Subject_SendUserCreatedEmail {
             get {
                 return ResourceManager.GetString("Email_Subject_SendUserCreatedEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Absolute Compression.
+        /// </summary>
+        internal static string EPerceptualRenderingCustomProfile_AbsoluteCompression {
+            get {
+                return ResourceManager.GetString("EPerceptualRenderingCustomProfile_AbsoluteCompression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blackpoint Compression.
+        /// </summary>
+        internal static string EPerceptualRenderingCustomProfile_BlackpointCompression {
+            get {
+                return ResourceManager.GetString("EPerceptualRenderingCustomProfile_BlackpointCompression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Compression.
+        /// </summary>
+        internal static string EPerceptualRenderingCustomProfile_MinimumCompression {
+            get {
+                return ResourceManager.GetString("EPerceptualRenderingCustomProfile_MinimumCompression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard Compression.
+        /// </summary>
+        internal static string EPerceptualRenderingCustomProfile_StandardCompression {
+            get {
+                return ResourceManager.GetString("EPerceptualRenderingCustomProfile_StandardCompression", resourceCulture);
             }
         }
         

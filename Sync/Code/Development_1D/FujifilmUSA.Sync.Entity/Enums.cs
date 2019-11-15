@@ -618,4 +618,41 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ESourceProfileCategory_Other")] //Other
         Other = 11
     }
+
+    public enum EPerceptualRenderingCustomProfile
+    {
+        [Description("EPerceptualRenderingCustomProfile_StandardCompression")] //Standard Compression
+        StandardCompression = 1,
+        [Description("EPerceptualRenderingCustomProfile_AbsoluteCompression")] //Absolute Compression
+        AbsoluteCompression = 2,
+        [Description("EPerceptualRenderingCustomProfile_BlackpointCompression")] //Blackpoint Compression
+        BlackpointCompression = 3,
+        [Description("EPerceptualRenderingCustomProfile_MinimumCompression")] //Minimum Compression
+        MinimumCompression = 4,
+    }
+    public enum EBlackGenerationCustomProfile
+    {
+        [Description("EBlackGenerationCustomProfile_GCR")] //GCR
+        GCR = 1,
+        [Description("EBlackGenerationCustomProfile_Auto")] //Auto
+        Auto = 2,
+        [Description("EBlackGenerationCustomProfile_UCR")] //UCR
+        UCR = 3,
+        [Description("EBlackGenerationCustomProfile_MinK")] //Min K
+        MinK = 4,
+        [Description("EBlackGenerationCustomProfile_MaxK")] //Max K
+        MaxK = 5,
+    }
+    public enum EBlackCalculationCustomProfile
+    {
+        [Description("EBlackCalculationCustomProfile_GCR")] //Auto
+        Auto = 1,
+        [Description("EBlackCalculationCustomProfile_BalanceCMYK")] //BalanceCMYK
+        BalanceCMYK = 2,
+        [Description("EBlackCalculationCustomProfile_Darkest")] //Darkest
+        Darkest = 3,
+        [Description("EBlackCalculationCustomProfile_Custom")] //Custom
+        Custom = 4,
+
+    }
 }

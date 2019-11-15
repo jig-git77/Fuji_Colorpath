@@ -498,4 +498,58 @@
   <data name="noCertifiedPrintCondition" xml:space="preserve">
     <value>No Certified Align Print Conditions</value>
   </data>
+  <data name="locDestinationProfile.Text" xml:space="preserve">
+    <value>Destination Profile</value>
+  </data>
+  <data name="locDeviceLink.Text" xml:space="preserve">
+    <value>Device Link</value>
+  </data>
+  <data name="chkBrightenerCompensationResource1.Text" xml:space="preserve">
+    <value>Brightener Compensation</value>
+  </data>
+  <data name="chkMeasurementCorrectionResource1.Text" xml:space="preserve">
+    <value>Measurement Correction</value>
+  </data>
+  <data name="fldBlackCalculation.Text" xml:space="preserve">
+    <value>Black Calculation</value>
+  </data>
+  <data name="fldBlackGeneration.Text" xml:space="preserve">
+    <value>Black Generation</value>
+  </data>
+  <data name="fldMeasurementProcessing.Text" xml:space="preserve">
+    <value>Measurement Processing</value>
+  </data>
+  <data name="fldPerceptualRendering.Text" xml:space="preserve">
+    <value>Perceptual Rendering</value>
+  </data>
+  <data name="lblAdvancedPerceptualRendering.Text" xml:space="preserve">
+    <value>Advanced Perceptual Rendering</value>
+  </data>
+  <data name="lblBlackStart.Text" xml:space="preserve">
+    <value>Black Start</value>
+  </data>
+  <data name="lblBlackTAC.Text" xml:space="preserve">
+    <value>Black TAC</value>
+  </data>
+  <data name="lblBlackWidth.Text" xml:space="preserve">
+    <value>Black Width</value>
+  </data>
+  <data name="lblCooler.Text" xml:space="preserve">
+    <value>Cooler</value>
+  </data>
+  <data name="lblGCRAmount.Text" xml:space="preserve">
+    <value>GCR Amount</value>
+  </data>
+  <data name="lblGrayBalance.Text" xml:space="preserve">
+    <value>Gray Balance</value>
+  </data>
+  <data name="lblMaxBlack.Text" xml:space="preserve">
+    <value>Max Black</value>
+  </data>
+  <data name="lblTAC.Text" xml:space="preserve">
+    <value>TAC</value>
+  </data>
+  <data name="lblWarmer.Text" xml:space="preserve">
+    <value>Warmer</value>
+  </data>
 </root>

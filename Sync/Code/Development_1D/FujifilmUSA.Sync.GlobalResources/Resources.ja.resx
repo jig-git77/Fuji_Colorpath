@@ -1341,4 +1341,58 @@
   <data name="ESourceProfileCategory_CustomStandards" xml:space="preserve">
     <value>Custom Source Profile</value>
   </data>
+  <data name="EPerceptualRenderingCustomProfile_AbsoluteCompression" xml:space="preserve">
+    <value>Absolute Compression</value>
+  </data>
+  <data name="EPerceptualRenderingCustomProfile_BlackpointCompression" xml:space="preserve">
+    <value>Blackpoint Compression</value>
+  </data>
+  <data name="EPerceptualRenderingCustomProfile_MinimumCompression" xml:space="preserve">
+    <value>Minimum Compression</value>
+  </data>
+  <data name="EPerceptualRenderingCustomProfile_StandardCompression" xml:space="preserve">
+    <value>Standard Compression</value>
+  </data>
+  <data name="EBlackGenerationCustomProfile_Auto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="EBlackGenerationCustomProfile_GCR" xml:space="preserve">
+    <value>GCR</value>
+  </data>
+  <data name="EBlackGenerationCustomProfile_MaxK" xml:space="preserve">
+    <value>Max K</value>
+  </data>
+  <data name="EBlackGenerationCustomProfile_MinK" xml:space="preserve">
+    <value>Min K</value>
+  </data>
+  <data name="EBlackGenerationCustomProfile_UCR" xml:space="preserve">
+    <value>UCR</value>
+  </data>
+  <data name="EBlackGenerationCustomProfile_Auto1" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="EBlackGenerationCustomProfile_GCR1" xml:space="preserve">
+    <value>GCR</value>
+  </data>
+  <data name="EBlackGenerationCustomProfile_MaxK1" xml:space="preserve">
+    <value>Max K</value>
+  </data>
+  <data name="EBlackGenerationCustomProfile_MinK1" xml:space="preserve">
+    <value>Min K</value>
+  </data>
+  <data name="EBlackGenerationCustomProfile_UCR1" xml:space="preserve">
+    <value>UCR</value>
+  </data>
+  <data name="EBlackCalculationCustomProfile_BalanceCMYK" xml:space="preserve">
+    <value>BalanceCMYK</value>
+  </data>
+  <data name="EBlackCalculationCustomProfile_Custom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="EBlackCalculationCustomProfile_Darkest" xml:space="preserve">
+    <value>Darkest</value>
+  </data>
+  <data name="EBlackCalculationCustomProfile_GCR" xml:space="preserve">
+    <value>Auto</value>
+  </data>
 </root>

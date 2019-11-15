@@ -104,7 +104,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     tbMetricPreset.Visible = false;
                     BindProfileRenderings();
                     BindPresets();
-
+                    BindPerceptualRenderingCustomProfile();
+                    BindBlackGenerationCustomProfile();
+                    BindBlackCalculationCustomProfile();
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) //-----If Sync4D Certification Type, disable Preset Selection box
                     {
                         cmbSelectedPresets.Enabled = false;
@@ -209,9 +211,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
             else
-            {                
+            {
                 if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId != 0)
-                {                    
+                {
                     cmbSelectedPresets.SelectedValue = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId.ToString();
                     cmbSelectedPresets_SelectedIndexChanged(null, null);
 
@@ -261,6 +263,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
                     {
                         trPresetUplod.Visible = true;
+                        tblCustomProfileSetting.Visible = true;
+                        tblregularProfileSetting.Visible = false;
+                    }
+                    else
+                    {
+                        tblCustomProfileSetting.Visible = false;
+                        tblregularProfileSetting.Visible = true;
                     }
                 }
             }
@@ -634,6 +643,38 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindPresets();
         }
 
+        //Custom Profile Binding
+        private void BindPerceptualRenderingCustomProfile()
+        {
+            if (ViewState[_vsProfileRendering] == null)
+            {
+                cmbPerceptualRendering.DataValueField = "Key";
+                cmbPerceptualRendering.DataTextField = "Value";
+                cmbPerceptualRendering.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EPerceptualRenderingCustomProfile>();
+                cmbPerceptualRendering.DataBind();
+            }
+        }
+        private void BindBlackGenerationCustomProfile()
+        {
+            if (ViewState[_vsProfileRendering] == null)
+            {
+                cmbBlackGeneration.DataValueField = "Key";
+                cmbBlackGeneration.DataTextField = "Value";
+                cmbBlackGeneration.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EBlackGenerationCustomProfile>();
+                cmbBlackGeneration.DataBind();
+            }
+        }
+        private void BindBlackCalculationCustomProfile()
+        {
+            if (ViewState[_vsProfileRendering] == null)
+            {
+                cmbBlackCalculation.DataValueField = "Key";
+                cmbBlackCalculation.DataTextField = "Value";
+                cmbBlackCalculation.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EBlackCalculationCustomProfile>();
+                cmbBlackCalculation.DataBind();
+            }
+        }
+        //Custom ProfileBindingEnd
 
         #endregion
 
@@ -1097,11 +1138,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 trSelectPreset.Visible = false;
                 trPresetUplod.Visible = true;
                 txtProfileDescription.Text = "";
+                tblregularProfileSetting.Visible = false;
+                tblCustomProfileSetting.Visible = true;
             }
             else
             {
                 trSelectPreset.Visible = true;
                 trPresetUplod.Visible = false;
+                tblregularProfileSetting.Visible = true;
+                tblCustomProfileSetting.Visible = false;
                 BindPresets();
             }
         }
