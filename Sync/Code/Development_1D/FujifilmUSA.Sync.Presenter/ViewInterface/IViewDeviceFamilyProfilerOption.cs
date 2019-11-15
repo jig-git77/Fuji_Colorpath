@@ -28,5 +28,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 
         int UserID { get; set; }
         bool IsCustomPreset { get; set; }
+        bool IsImportPreset { get; set; }
     }
 }

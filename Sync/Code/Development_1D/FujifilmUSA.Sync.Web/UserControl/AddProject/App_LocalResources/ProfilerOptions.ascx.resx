@@ -552,4 +552,22 @@
   <data name="lblWarmer.Text" xml:space="preserve">
     <value>Warmer</value>
   </data>
+  <data name="chk100BlackCustom.Text" xml:space="preserve">
+    <value>100% Black</value>
+  </data>
+  <data name="chkPureGray.Text" xml:space="preserve">
+    <value>Pure Gray</value>
+  </data>
+  <data name="lblChromaResources.Text" xml:space="preserve">
+    <value>Chroma</value>
+  </data>
+  <data name="lblLightnessResources.Text" xml:space="preserve">
+    <value>Lightness</value>
+  </data>
+  <data name="lblSaturationResources.Text" xml:space="preserve">
+    <value>Saturation</value>
+  </data>
+  <data name="lblCustomPresetName.Text" xml:space="preserve">
+    <value>Custom Preset Name</value>
+  </data>
 </root>

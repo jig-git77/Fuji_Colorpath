@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
-using FujifilmUSA.Sync.Common;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
-using System.Web.UI.WebControls;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -56,7 +56,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public ProfilerOptions()
         {
-            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            Load += (sender, e) => ExceptionHandling(Page_Load, sender, e);
         }
 
         #region "Page Events"
@@ -132,12 +132,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindPresets()
         {
 
-            if (ViewState[_vsDeviceFamilyProfilerOption] == null || !SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
+            if (ViewState[_vsDeviceFamilyProfilerOption] == null || (!SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption && !SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption))
             {
                 DeviceFamilyId = SessionManager.Instance.CurrentDevice.DeviceFamily.DeviceFamilyId;
                 LicenseTypeId = (short)SessionManager.Instance.CurrentProject.LicenseType;
                 UserID = SessionManager.Instance.CurrentUser.UserId;
                 IsCustomPreset = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption;
+                IsImportPreset = SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption;
                 _presenterDeviceFamilyProfilerOption.GetDeviceFamilyProfilerOption();
                 if (!IsErrorOccured)
                 {
@@ -259,17 +260,56 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 if (SessionManager.Instance.CurrentProject.PrintCondition != null)
                 {
-                    rdBtnPresetType.SelectedValue = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption.ToString();
                     if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
+                    {
+                        rdBtnPresetType.SelectedValue = "3";
+                    }
+                    else if (SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption)
+                    {
+                        rdBtnPresetType.SelectedValue = "2";
+                    }
+                    else
+                    {
+                        rdBtnPresetType.SelectedValue = "1";
+                    }
+
+                    if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
+                    {
+                        trPresetUplod.Visible = false;
+                        tblCustomProfileSetting.Visible = true;
+                        tblregularProfileSetting.Visible = false;
+                        txtCustomPresetName.Enabled = true;
+                        txtCustomPresetName.ReadOnly = true;
+                        trCustomPresetName.Visible = true;
+                        txtProfileDescription.Enabled = true;
+                        txtProfileDescription.ReadOnly = false;
+                        trSelectPreset.Visible = false;
+
+
+                    }
+                    else if (SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption)
                     {
                         trPresetUplod.Visible = true;
                         tblCustomProfileSetting.Visible = true;
                         tblregularProfileSetting.Visible = false;
+                        txtCustomPresetName.Enabled = false;
+                        txtCustomPresetName.ReadOnly = false;
+                        trCustomPresetName.Visible = false;
+                        txtProfileDescription.Enabled = false;
+                        txtProfileDescription.ReadOnly = true;
+                        trSelectPreset.Visible = false;
+
                     }
                     else
                     {
                         tblCustomProfileSetting.Visible = false;
                         tblregularProfileSetting.Visible = true;
+                        txtCustomPresetName.Enabled = false;
+                        txtCustomPresetName.ReadOnly = false;
+                        trCustomPresetName.Visible = false;
+                        txtProfileDescription.Enabled = false;
+                        txtProfileDescription.ReadOnly = true;
+                        trSelectPreset.Visible = true;
                     }
                 }
             }
@@ -590,7 +630,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divRetargetDetails.Visible = true;
         }
 
-        private void AddProfilerOptionSettings(List<ProfilerOptionPreset> lstProfilerOptionPreset)
+        private void AddProfilerOptionImportSettings(List<ProfilerOptionPreset> lstProfilerOptionPreset)
         {
             List<DeviceFamilyProfilerOption> DeviceOptionList = new List<DeviceFamilyProfilerOption>();
 
@@ -612,17 +652,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
             List<ProfilerOptionPreset> lstFilter = new List<ProfilerOptionPreset>();
             lstFilter = lstProfilerOptionPreset.FindAll(item => item.ProfileTypeId == (short)EProfileType.DestinationProfile);
             if (lstFilter.Count > 0)
+            {
                 bDestProfileType = true;
+            }
+
             lstFilter = lstProfilerOptionPreset.FindAll(item => item.ProfileTypeId == (short)EProfileType.DeviceLinkProfile);
             if (lstFilter.Count > 0)
+            {
                 bDevProfileType = true;
+            }
+
             lstFilter = lstProfilerOptionPreset.FindAll(item => item.ProfileTypeId == (short)EProfileType.OptimizeDlp);
             if (lstFilter.Count > 0)
+            {
                 bOptProfileType = true;
+            }
             #endregion
 
             if (!(bDestProfileType && bDevProfileType && bOptProfileType))
+            {
                 throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_CSV_ProfilerOptionsPreset"), rows));
+            }
             else
             {
                 DeviceFamilyProfilerOption.ProfilerOptionPresets = (lstProfilerOptionPreset.
@@ -641,6 +691,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ViewState[_vsDeviceFamilyProfilerOption] = DeviceOptionList;
 
             BindPresets();
+        }
+
+        private void AddProfilerCustomOptionSettings()
+        {
+            List<DeviceFamilyProfilerOption> DeviceOptionList = new List<DeviceFamilyProfilerOption>();
+
+            DeviceFamilyProfilerOption = new DeviceFamilyProfilerOption();
+            DeviceFamilyProfilerOption.DeviceFamilyProfilerOptionId = -1;
+            DeviceFamilyProfilerOption.DeviceFamilyId = 1;
+            DeviceFamilyProfilerOption.ProfilerOptionsName = txtCustomPresetName.Text;
+            DeviceFamilyProfilerOption.ProfilerOptionsDesc = txtProfileDescription.Text;
+            DeviceFamilyProfilerOption.ProjectTypeID = 2;
+            DeviceFamilyProfilerOption.UserID = SessionManager.Instance.CurrentUser.UserId;
         }
 
         //Custom Profile Binding
@@ -1121,7 +1184,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                     }
                 }
-                AddProfilerOptionSettings(lstProfilerOptionPreset);
+                AddProfilerOptionImportSettings(lstProfilerOptionPreset);
             }
             else
             {
@@ -1132,14 +1195,50 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void rdBtnPresetType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption = Convert.ToBoolean(rdBtnPresetType.SelectedValue);
+            if (rdBtnPresetType.SelectedValue == "2") //Import
+            {
+                SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption = false;
+                SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption = true;
+
+            }
+            else if (rdBtnPresetType.SelectedValue == "3") //Custom
+            {
+                SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption = true;
+                SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption = false;
+            }
+
+            else
+            { //regular
+                SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption = false;
+                SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption = false;
+            }
+
+
             if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
+            {
+                trSelectPreset.Visible = false;
+                trPresetUplod.Visible = false;
+                txtProfileDescription.Text = "";
+                txtProfileDescription.Enabled = true;
+                txtProfileDescription.ReadOnly = false;
+                tblregularProfileSetting.Visible = false;
+                tblCustomProfileSetting.Visible = true;
+                txtCustomPresetName.Enabled = true;
+                txtCustomPresetName.ReadOnly = false;
+                trCustomPresetName.Visible = true;
+            }
+            else if (SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption)
             {
                 trSelectPreset.Visible = false;
                 trPresetUplod.Visible = true;
                 txtProfileDescription.Text = "";
-                tblregularProfileSetting.Visible = false;
-                tblCustomProfileSetting.Visible = true;
+                txtProfileDescription.Enabled = false;
+                txtProfileDescription.ReadOnly = false;
+                tblregularProfileSetting.Visible = true;
+                tblCustomProfileSetting.Visible = false;
+                txtCustomPresetName.Enabled = false;
+                txtCustomPresetName.ReadOnly = true;
+                trCustomPresetName.Visible = false;
             }
             else
             {
@@ -1147,6 +1246,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 trPresetUplod.Visible = false;
                 tblregularProfileSetting.Visible = true;
                 tblCustomProfileSetting.Visible = false;
+                txtCustomPresetName.Enabled = false;
+                txtCustomPresetName.ReadOnly = true;
+                trCustomPresetName.Visible = false;
+                txtProfileDescription.Enabled = false;
+                txtProfileDescription.ReadOnly = false;
                 BindPresets();
             }
         }
@@ -1850,6 +1954,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short LicenseTypeId { get; set; }
         public int UserID { get; set; }
         public bool IsCustomPreset { get; set; }
+        public bool IsImportPreset { get; set; }
         #endregion
 
         #region IViewMeasurementSetting Members

@@ -88,7 +88,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     BlanketAge = DataReader.ReadString(dsProject.Tables[1].Rows[0], "BlanketAge"),
                                     Screening = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Screening"),
                                     Coating = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Coating"),
-                                    IsCustomProfilerOption = DataReader.ReadBoolean(dsProject.Tables[1].Rows[0], "IsCustomProfilerOption")
+                                    IsCustomProfilerOption = DataReader.ReadBoolean(dsProject.Tables[1].Rows[0], "IsCustomProfilerOption"),
+                                    IsImportProfilerOption = DataReader.ReadBoolean(dsProject.Tables[1].Rows[0], "IsImportProfilerOption")
                                 };
                         }
                         if (dsProject.Tables[2].Rows.Count > 0)
@@ -803,7 +804,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@NewPaper_Black_L", Type = DbType.Decimal, Value = project.NewPaper_Black_L},
                                                      new Parameters() {ParameterName = "@NewPaper_Black_a", Type = DbType.Decimal, Value = project.NewPaper_Black_a},
                                                      new Parameters() {ParameterName = "@NewPaper_Black_b", Type = DbType.Decimal, Value = project.NewPaper_Black_b},
-                                                     new Parameters() {ParameterName = "@IsCustomProfilerOption", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomProfilerOption}
+                                                     new Parameters() {ParameterName = "@IsCustomProfilerOption", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomProfilerOption},
+                                                     new Parameters() {ParameterName = "@IsImportProfilerOption", Type = DbType.Boolean, Value = project.PrintCondition.IsImportProfilerOption}
+                                                     
                                                  },
                                              new List<Parameters>()
                                                  {
