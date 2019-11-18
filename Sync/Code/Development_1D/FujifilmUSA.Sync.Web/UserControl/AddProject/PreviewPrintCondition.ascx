@@ -556,7 +556,7 @@
             </td>
             <td style="width: 0px">
             </td>
-            <td valign="top">
+            <td style="vertical-align:top;">
                 <div id="Div_ValidationChart" runat="server" visible="false" style="display: block;">
                     <div class="section_small_top">
                         &nbsp;</div>
@@ -575,7 +575,7 @@
                             </div>
                             <asp:Panel ID="panel_ValidationChart" runat="server" Style="padding-left: 5px" 
                                 BorderStyle="None" meta:resourcekey="panelAlignmentChartResource1">
-                                <table width="100%">
+                                <table style="width:100%;">
                                     <tr>
                                         <td style="width: 40%">
                                             <span style="font-weight: bold;"><asp:Localize runat="server" 

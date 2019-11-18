@@ -29,5 +29,12 @@ namespace FujifilmUSA.Sync.Entity
         public string VReadMode { get; set; }
 
         public bool PresetWeighted { get; set; }
+
+        public string ValidationMetricDescription { get; set; }
+        
+        
+
+        public string MeasurementDeviceName { get; set; }
+        public string UNModeName { get; set; }
     }
 }

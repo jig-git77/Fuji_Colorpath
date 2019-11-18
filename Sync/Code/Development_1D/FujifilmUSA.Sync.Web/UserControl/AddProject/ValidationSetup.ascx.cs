@@ -112,7 +112,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             SessionManager.Instance.CurrentProject.MeasurementSetting.VUVMode = short.Parse(cmbUVSettings.SelectedValue);
             SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementCount = short.Parse(cmbMeasurementCount.SelectedValue);
             SessionManager.Instance.CurrentProject.MeasurementSetting.VReadMode = (trReadMode.Visible == true ? cmbReadMode.SelectedValue : null);
-
+            SessionManager.Instance.CurrentProject.MeasurementSetting.ValidationMetricDescription = txtMTPDesc.Text.Trim();
+            
+            
             //Load save control         
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();

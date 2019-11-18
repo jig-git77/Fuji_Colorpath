@@ -62,5 +62,7 @@ namespace FujifilmUSA.Sync.Entity
         public decimal NewPaper_Black_b { get; set; }
 
         public short IsCustomProfileOptions { get; set; }
+
+        public string RetargetDeviceName { get; set; }
     }
 }

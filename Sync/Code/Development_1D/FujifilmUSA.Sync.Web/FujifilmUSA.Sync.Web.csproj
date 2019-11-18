@@ -2463,6 +2463,7 @@
     <Content Include="UserControl\AddMetricTargetPreset.ascx" />
     <Content Include="UserControl\AddPatchTolerance.ascx" />
     <Content Include="UserControl\AddPrintStandardType.ascx" />
+    <Content Include="UserControl\AddProject\PreviewPrintConditionNew.ascx" />
     <Content Include="UserControl\AddProject\ValidationSetup.ascx" />
     <Content Include="UserControl\AddReferenceChart.ascx" />
     <Content Include="UserControl\AddReferenceChartPreset.ascx" />
@@ -3384,6 +3385,13 @@
     </Compile>
     <Compile Include="UserControl\AddPrintStandardType.ascx.designer.cs">
       <DependentUpon>AddPrintStandardType.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddProject\PreviewPrintConditionNew.ascx.cs">
+      <DependentUpon>PreviewPrintConditionNew.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddProject\PreviewPrintConditionNew.ascx.designer.cs">
+      <DependentUpon>PreviewPrintConditionNew.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddProject\ValidationSetup.ascx.cs">
       <DependentUpon>ValidationSetup.ascx</DependentUpon>
@@ -6522,7 +6530,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

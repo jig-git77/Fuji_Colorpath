@@ -42,7 +42,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ph.Controls.Add(ctrl);
                     break;
                 case ELeftMenuItemLevel.Save:
-                    ctrl = this.LoadControl("~/UserControl/AddProject/PreviewPrintCondition.ascx");
+                    //ctrl = this.LoadControl("~/UserControl/AddProject/PreviewPrintCondition.ascx");
+                    ctrl = this.LoadControl("~/UserControl/AddProject/PreviewPrintConditionNew.ascx");
                     ctrl.ID = "ctrl_SavePrintCondition";
                     ph.Controls.Add(ctrl);
                     break;

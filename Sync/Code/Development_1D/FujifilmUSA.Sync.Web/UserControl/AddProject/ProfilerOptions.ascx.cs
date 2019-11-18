@@ -934,6 +934,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 //if (ddlReTargetList.SelectedValue.ToString() != "0")
                 SessionManager.Instance.CurrentProject.ReTargetProjectID = ((ddlReTargetList.Items.Count == 0) ? 0 : Convert.ToInt32(ddlReTargetList.SelectedValue));
+                SessionManager.Instance.CurrentProject.ReTargetProjectName = ((ddlReTargetList.Items.Count == 0) ? string.Empty : Convert.ToString(ddlReTargetList.SelectedItem.Text));
+                SessionManager.Instance.CurrentProject.RetargetDeviceName = ((cmbDevice.Items.Count == 0) ? string.Empty : Convert.ToString(cmbDevice.SelectedItem.Text));
 
                 SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
 

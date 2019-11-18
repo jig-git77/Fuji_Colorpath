@@ -197,6 +197,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementCount = short.Parse(cmbMeasurementCount.SelectedValue);
             SessionManager.Instance.CurrentProject.MeasurementSetting.ReadMode = (trReadMode.Visible == true ? cmbReadMode.SelectedValue : null);
 
+            SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceName = cmbMeasurementDevice.SelectedItem.Text.Trim();
+            SessionManager.Instance.CurrentProject.MeasurementSetting.UNModeName = cmbUVSettings.SelectedItem.Text.Trim();
+
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
                 SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue),

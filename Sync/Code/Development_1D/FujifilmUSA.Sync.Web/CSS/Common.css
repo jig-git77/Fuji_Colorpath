@@ -2346,3 +2346,53 @@ label {
         text-align: center;
         vertical-align: middle;
     }
+
+
+/**** Section Large Group ***/
+.section_top_large {
+    background: url(../Images/section_contant_top.png) no-repeat top left;
+    height: 7px;
+}
+
+.section_large {
+    background: url(../Images/tab_contant_bg.png) repeat-y top left;
+    overflow: hidden;
+}
+
+    .section_large .combopart {
+        margin: 0;
+    }
+
+        .section_large .combopart .header {
+            background: url(../Images/section_line_bg.png) repeat-x bottom left;
+            padding: 5px;
+            line-height: 24px;
+        }
+
+            .section_large .combopart .header .content {
+                padding: -20px 5px 0px 5px;
+            }
+
+                .section_large .combopart .header .content .text {
+                    font-weight: bold;
+                    font-size: 14px;
+                }
+
+                .section_large .combopart .header .content .textright {
+                    font-weight: bold;
+                    font-size: 12px;
+                }
+
+
+        .section_large .combopart .area {
+            padding: 5px;
+        }
+
+.section_bottom_large {
+    background: url(../Images/tab_contant_bottom.png) no-repeat bottom left;
+    height: 7px;
+}
+/**************************
+}
+
+/**************************/
