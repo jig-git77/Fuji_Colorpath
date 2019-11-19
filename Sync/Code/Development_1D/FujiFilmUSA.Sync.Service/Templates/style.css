@@ -522,3 +522,74 @@ td.Gray
     float: right;
     width: 50%;
 }
+
+.section_top_large {
+    background: url(../Images/section_contant_top.png) no-repeat top left;
+    height: 7px;
+}
+
+.section_large {
+    background: url(../Images/tab_contant_bg.png) repeat-y top left;
+    overflow: hidden;
+}
+
+    .section_large .combopart {
+        margin: 0;
+    }
+
+        .section_large .combopart .header {
+            background: url(../Images/section_line_bg.png) repeat-x bottom left;
+            padding: 5px;
+            line-height: 24px;
+        }
+
+            .section_large .combopart .header .content .text {
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+            .section_large .combopart .header .content {
+                padding: -20px 5px 0px 5px;
+            }
+
+.section_bottom_large {
+    background: url(../Images/tab_contant_bottom.png) no-repeat bottom left;
+    height: 7px;
+}
+
+
+.section_small_top {
+    background: url(../Images/section_smallbox_top.png) no-repeat top left;
+    height: 7px;
+}
+
+.section_small_middle {
+    background: url(../Images/section_smallbox_bg.png) repeat-y top left;
+    overflow: hidden;
+}
+
+    .section_small_middle .combopart {
+        margin: 0;
+    }
+
+        .section_small_middle .combopart .header {
+            background: url(../Images/section_line_bg.png) repeat-x bottom left;
+            padding: 5px;
+            line-height: 24px;
+        }
+
+            .section_small_middle .combopart .header .content .text {
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+.section_small_bottom {
+    background: url(../Images/section_smallbox_bottom.png) no-repeat bottom left;
+    height: 7px;
+}
+
+.clear {
+    clear: both;
+    font-size: 1px;
+    height: 0;
+    o

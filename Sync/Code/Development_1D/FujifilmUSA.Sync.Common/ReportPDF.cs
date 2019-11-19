@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using FujifilmUSA.Sync.Entity;
+using System;
 using System.Data;
 using System.IO;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
+using System.Linq;
 using System.Text;
+using System.Web.UI.WebControls;
 using WebSupergoo.ABCpdf8;
-using WebSupergoo.ABCpdf8.Atoms;
-using WebSupergoo.ABCpdf8.Objects;
-using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Common
 {
@@ -135,6 +131,8 @@ namespace FujifilmUSA.Sync.Common
             get { return _spotChartContent; }
             set { _spotChartContent = value; }
         }
+
+        public ReportPreviewPrintCondition PreviewPrintCondition { get; set; }
         #endregion
 
         #region Constructor
@@ -232,7 +230,9 @@ namespace FujifilmUSA.Sync.Common
                 {
                     //========== Create A chanin for a pdf with multiple page ==========//
                     if (!theDoc.Chainable(theID))
+                    {
                         break;
+                    }
 
                     theDoc.Page = theDoc.AddPage();
                     theCount++;
@@ -287,7 +287,9 @@ namespace FujifilmUSA.Sync.Common
 
                 // === If same named pdf file is already available then remove === //
                 if (System.IO.File.Exists(pth))
+                {
                     System.IO.File.Delete(pth);
+                }
 
                 theDoc.Save(pth);
                 theDoc.Clear();
@@ -348,6 +350,10 @@ namespace FujifilmUSA.Sync.Common
                 {
                     FileName = "Templates/kendoPrepressSingleMeasurement_SpotProject.htm";
                 }
+                else if (ReportType == 21)//---For Preview Print Condition PDF Export
+                {
+                    FileName = "Templates/kendoPrepressPreviewCondition.htm";
+                }
 
                 //string FilePath = this._WebURL + FileName;
                 string FilePath = System.Web.Hosting.HostingEnvironment.MapPath("~/" + FileName);// System.Web.HttpContext.Current.Server.MapPath(FileName);
@@ -376,7 +382,7 @@ namespace FujifilmUSA.Sync.Common
                 fp = File.OpenText(FilePath);
                 StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
                 fp.Close();
-                SBStr = SetPDFContent(SBStr);
+                SBStr = ReportType == 21?SetPreviewPrintCondition(SBStr)  : SetPDFContent(SBStr);
 
                 theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
                 theDoc.Rect.Inset(0, 1);
@@ -385,7 +391,9 @@ namespace FujifilmUSA.Sync.Common
                 {
                     //========== Create A chanin for a pdf with multiple page ==========//
                     if (!theDoc.Chainable(theID))
+                    {
                         break;
+                    }
 
                     theDoc.Page = theDoc.AddPage();
                     theCount++;
@@ -432,7 +440,9 @@ namespace FujifilmUSA.Sync.Common
                 string pth = PDFPath + PDF_NAME;
 
                 if (System.IO.File.Exists(pth))
+                {
                     System.IO.File.Delete(pth);
+                }
 
                 theDoc.Save(pth);
                 theDoc.Clear();
@@ -543,9 +553,13 @@ namespace FujifilmUSA.Sync.Common
                 if (ReportType == 16 || ReportType == 17 || ReportType == 18 || ReportType == 19)
                 {
                     if (IsValidation) //Only show Measurement STatus in Validation mode in G7/ ISO / Default/ 4D
+                    {
                         SBStr.Replace("###JobStatus###", "<tr class='row-2'><td class='row-title'>Meas. Status:</td><td class='row-content'>&nbsp;</td></tr>");
+                    }
                     else
+                    {
                         SBStr.Replace("###JobStatus###", "&nbsp;");
+                    }
 
                     SBStr.Replace("###MetricPreset###", "&nbsp;");
                     SBStr.Replace("###CompanyName###", "&nbsp;");
@@ -617,9 +631,13 @@ namespace FujifilmUSA.Sync.Common
                         for (int i = 0; i < DT.Rows.Count; i++)
                         {
                             if ((i % 2) == 0) //----If even row then make background color green----//
+                            {
                                 SBstrDeltaValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-3' style='height: " + RowHeight + "px'>");
+                            }
                             else             //------Else keep background color white-----//
+                            {
                                 SBstrDeltaValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-4' style='height: " + RowHeight + "px'>");
+                            }
 
                             SBstrDeltaValue.Append("<td valign='middle' align='left' class='Metadata-Table Green' style='width: 160px;'> <p class='Body-Text-Bold'>" + DT.Rows[i]["MetricSumName"] + "</p></td>");
                             SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["TargetValue"])) + "&nbsp;</p></td>");
@@ -814,10 +832,15 @@ namespace FujifilmUSA.Sync.Common
                                 SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔELimit"])) + "&nbsp;</td>");
                             }
                             else
+                            {
                                 SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'> &nbsp;</td>");
+                            }
                         }
                         else
+                        {
                             SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + "&nbsp;</td>");
+                        }
+
                         SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔE"])) + "&nbsp;</td>");
                         SBstrDeltaEValue.Append("</tr>");
                     }
@@ -1203,7 +1226,7 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("##IMAGES##", imagesPath);
 
                 //** Add Content ***//
-                SBStr.Replace("###ReportName###", this.ReportName);
+                SBStr.Replace("###ReportName###", ReportName);
 
                 #region ==== Table = 0,  Job Detail  ====
                 if (DS_Common.Tables[0] != null && DS_Common.Tables[0].Rows.Count > 0)
@@ -1335,7 +1358,7 @@ namespace FujifilmUSA.Sync.Common
                                     builder.Append("<table cellspacing='10px' style='margin-top:-5px;border-bottom: 1px solid black;'><tr><td style = 'width:175px;'>");
                                     builder.Append("<table width='100%' style='height:138px;'><tr><td colspan='2'><b>" + item.spotName + "</b></td></tr>");
                                     builder.Append("<tr><td colspan='2' style='background-color:" + item.HTMLColor + ";height:50px;'></td ></tr>");
-                                    
+
                                     if (_spotChartContent.hasMeasurement)
                                     {
                                         builder.Append("<tr><td>ΔE Target_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_T_P) + "</td></tr>");
@@ -1346,7 +1369,7 @@ namespace FujifilmUSA.Sync.Common
                                     {
                                         builder.Append("<tr><td>ΔE Target_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE) + "</td></tr>");
                                     }
-                                    builder.Append("</tr></table></td>");                                    
+                                    builder.Append("</tr></table></td>");
                                     builder.Append("<td style='width:175px;'><div style='width:100%' class='gamutChart'><img src=" + item.patchChart_AB + " /></div></td>");
                                     builder.Append("<td style='width:70px;'><img src=" + item.patchChart_L + " /></td>");
                                     builder.Append("<td style='width:180px;'>");
@@ -1415,9 +1438,13 @@ namespace FujifilmUSA.Sync.Common
                     if (ReportType == 16 || ReportType == 17 || ReportType == 18 || ReportType == 19 || ReportType == 20)
                     {
                         if (IsValidation) //Only show Measurement STatus in Validation mode in G7/ ISO / Default/ 4D
+                        {
                             SBStr.Replace("###JobStatus###", "<tr class='row-2'><td class='row-title'>Meas. Status:</td><td class='row-content'>&nbsp;</td></tr>");
+                        }
                         else
+                        {
                             SBStr.Replace("###JobStatus###", "&nbsp;");
+                        }
 
                         SBStr.Replace("###MetricPreset###", "&nbsp;");
                         SBStr.Replace("###CompanyName###", "&nbsp;");
@@ -1472,12 +1499,13 @@ namespace FujifilmUSA.Sync.Common
 
                 #endregion
 
+
                 if (ReportType != 20)
                 {
 
                     // === Table 1 = Chart of Target Vs Actual AB Plot === //           
                     #region ==== Target Vs Actual AB Plot ====
-                    SBStr.Replace("###TargetVersusActualAB###", this.chartContent.ABComparisionSpiderChart);
+                    SBStr.Replace("###TargetVersusActualAB###", chartContent.ABComparisionSpiderChart);
                     #endregion
 
                     #region ==== Summary Delta E Value Graph Image ====
@@ -1523,10 +1551,15 @@ namespace FujifilmUSA.Sync.Common
                                         SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔELimit"])) + "&nbsp;</td>");
                                     }
                                     else
+                                    {
                                         SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'> &nbsp;</td>");
+                                    }
                                 }
                                 else
+                                {
                                     SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + "&nbsp;</td>");
+                                }
+
                                 SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔE"])) + "&nbsp;</td>");
                                 SBstrDeltaEValue.Append("</tr>");
                             }
@@ -1538,7 +1571,7 @@ namespace FujifilmUSA.Sync.Common
                     {
                         SBStr.Replace("###DeltaESummaryDetail###", "");
                     }
-                    SBStr.Replace("###ResultSummary_DeltaEImage###", this.chartContent.InkPaperPatchChart);
+                    SBStr.Replace("###ResultSummary_DeltaEImage###", chartContent.InkPaperPatchChart);
                     #endregion
 
                     if (ReportType != 19) //---Only if not 4D Validation Scoring Report
@@ -1580,9 +1613,13 @@ namespace FujifilmUSA.Sync.Common
                                 for (int i = 0; i < DT.Rows.Count; i++)
                                 {
                                     if ((i % 2) == 0) //----If even row then make background color green----//
+                                    {
                                         SBstrDeltaValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-3' style='height: " + RowHeight + "px'>");
+                                    }
                                     else             //------Else keep background color white-----//
+                                    {
                                         SBstrDeltaValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-4' style='height: " + RowHeight + "px'>");
+                                    }
 
                                     SBstrDeltaValue.Append("<td valign='middle' align='left' class='Metadata-Table Green' style='width: 80px;'> <p class='Body-Text-Bold'>" + DT.Rows[i]["MetricSumName"] + "</p></td>");
                                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["TargetValue"])) + "&nbsp;</p></td>");
@@ -1730,7 +1767,7 @@ namespace FujifilmUSA.Sync.Common
                         {
                             SBStr.Replace("###DeltaSummaryDetail###", "");
                         }
-                        SBStr.Replace("###ResultSummary_DeltaImage###", this.chartContent.DeltaSummaryChart);
+                        SBStr.Replace("###ResultSummary_DeltaImage###", chartContent.DeltaSummaryChart);
                         #endregion
                     }
 
@@ -1738,24 +1775,24 @@ namespace FujifilmUSA.Sync.Common
                     {
                         // === Table 4 = Chart of Paper L*A*B* === //           
                         #region ==== Paper  L*A*B* (Part 1)====
-                        SBStr.Replace("###PaperLab1###", this.chartContent.InkPaperLAB1Chart);
+                        SBStr.Replace("###PaperLab1###", chartContent.InkPaperLAB1Chart);
                         #endregion
 
                         // === Table 5 = Chart of Paper L*A*B* === //           
                         #region ==== Paper  L*A*B* (Part 2)====
-                        SBStr.Replace("###PaperLab2###", this.chartContent.InkPaperLAB2Chart);
+                        SBStr.Replace("###PaperLab2###", chartContent.InkPaperLAB2Chart);
                         #endregion
 
                         if (ReportType == 17) //For ISO Opti / Validation Report & 4D ISO validation report
                         {
                             // === Table 6 = Chart of Density === //           
                             #region ==== Density ====
-                            SBStr.Replace("###DensityChart###", this.chartContent.InkPaperDansityChart);
+                            SBStr.Replace("###DensityChart###", chartContent.InkPaperDansityChart);
                             #endregion
 
                             // === Table 7 = Chart of TVISpread === //           
                             #region ==== TVISpread ====
-                            SBStr.Replace("###TVISpread###", this.chartContent.TVI_ISO_CMYK_Chart);
+                            SBStr.Replace("###TVISpread###", chartContent.TVI_ISO_CMYK_Chart);
                             #endregion
 
                             // === Table 8 = Chart of TVISpread Data === //           
@@ -1837,38 +1874,38 @@ namespace FujifilmUSA.Sync.Common
 
                             // === Table 9 = Chart of CyanTVI === //           
                             #region ==== CyanTVI ====
-                            SBStr.Replace("###CyanTVI###", this.chartContent.TVI_ISO_Cyan_Chart);
+                            SBStr.Replace("###CyanTVI###", chartContent.TVI_ISO_Cyan_Chart);
                             #endregion
 
                             // === Table 10 = Chart of MagentaTVI === //           
                             #region ==== MagentaTVI ====
-                            SBStr.Replace("###MagentaTVI###", this.chartContent.TVI_ISO_Magenta_Chart);
+                            SBStr.Replace("###MagentaTVI###", chartContent.TVI_ISO_Magenta_Chart);
                             #endregion
 
                             // === Table 11 = Chart of YellowTVI === //           
                             #region ==== YellowTVI ====
-                            SBStr.Replace("###YellowTVI###", this.chartContent.TVI_ISO_Yellow_Chart);
+                            SBStr.Replace("###YellowTVI###", chartContent.TVI_ISO_Yellow_Chart);
                             #endregion
 
                             // === Table 12 = Chart of BlackTVI === //           
                             #region ==== BlackTVI ====
-                            SBStr.Replace("###BlackTVI###", this.chartContent.TVI_ISO_Black_Chart);
+                            SBStr.Replace("###BlackTVI###", chartContent.TVI_ISO_Black_Chart);
                             #endregion
 
                             // === Table 13 = >Gray Balance L*a*b* === //           
                             #region ==== Gray LAB* ====
-                            SBStr.Replace("###GrayL###", this.chartContent.LGrayBalanceChart);
-                            SBStr.Replace("###GrayA###", this.chartContent.AGrayBalanceChart);
-                            SBStr.Replace("###GrayB###", this.chartContent.BGrayBalanceChart);
+                            SBStr.Replace("###GrayL###", chartContent.LGrayBalanceChart);
+                            SBStr.Replace("###GrayA###", chartContent.AGrayBalanceChart);
+                            SBStr.Replace("###GrayB###", chartContent.BGrayBalanceChart);
                             #endregion
                         }
                         else if (ReportType == 18 || ReportType == 19) //For Default mode report OR 4D Validation Scoring Report
                         {
                             // === Table 13 = >Gray Balance L*a*b* === //           
                             #region ==== Gray LAB* ====
-                            SBStr.Replace("###GrayL###", this.chartContent.LGrayBalanceChart);
-                            SBStr.Replace("###GrayA###", this.chartContent.AGrayBalanceChart);
-                            SBStr.Replace("###GrayB###", this.chartContent.BGrayBalanceChart);
+                            SBStr.Replace("###GrayL###", chartContent.LGrayBalanceChart);
+                            SBStr.Replace("###GrayA###", chartContent.AGrayBalanceChart);
+                            SBStr.Replace("###GrayB###", chartContent.BGrayBalanceChart);
                             #endregion
                         }
                     }
@@ -1878,49 +1915,49 @@ namespace FujifilmUSA.Sync.Common
                     {
                         // === Table 4 = for Chart of Gray ΔCh === //           
                         #region ==== Gray ΔCh Chart ====
-                        SBStr.Replace("###ResultSummary_DeltaChImage###", this.chartContent.GrayBalanceDeltaCH_Chart);
+                        SBStr.Replace("###ResultSummary_DeltaChImage###", chartContent.GrayBalanceDeltaCH_Chart);
                         #endregion
 
                         // === Table 5 = for Chart of Black ΔL === //           
                         #region ==== Black ΔL Chart ====
-                        SBStr.Replace("###ResultSummary_BlackDeltaLImage###", this.chartContent.BlackBalanceDeltaL_Chart);
+                        SBStr.Replace("###ResultSummary_BlackDeltaLImage###", chartContent.BlackBalanceDeltaL_Chart);
                         #endregion
 
                         // === Table 6 = for Chart of Gray ΔL === //           
                         #region ==== Gray ΔL Chart ====
-                        SBStr.Replace("###ResultSummary_GrayDeltaLImage###", this.chartContent.GrayBalanceDeltaL_Chart);
+                        SBStr.Replace("###ResultSummary_GrayDeltaLImage###", chartContent.GrayBalanceDeltaL_Chart);
                         #endregion
 
                         // === Table 7 = for Chart of Gray Balance L* === //           
                         #region ==== Gray Balance L* Chart ====
-                        SBStr.Replace("###ResultSummary_GrayLImage###", this.chartContent.LGrayBalanceChart);
+                        SBStr.Replace("###ResultSummary_GrayLImage###", chartContent.LGrayBalanceChart);
                         #endregion
 
                         // === Table 8 = for Chart of Gray Balance a* === //           
                         #region ==== Gray Balance a* Chart ====
-                        SBStr.Replace("###ResultSummary_GrayaImage###", this.chartContent.AGrayBalanceChart);
+                        SBStr.Replace("###ResultSummary_GrayaImage###", chartContent.AGrayBalanceChart);
                         #endregion
 
                         // === Table 9 = for Chart of Gray Balance b* === //           
                         #region ==== Gray Balance b* Chart ====
-                        SBStr.Replace("###ResultSummary_GraybImage###", this.chartContent.BGrayBalanceChart);
+                        SBStr.Replace("###ResultSummary_GraybImage###", chartContent.BGrayBalanceChart);
                         #endregion
 
                         // === Table 10 = for Chart of Black NPD === //           
                         #region ==== Black NPD Chart ====
-                        SBStr.Replace("###ResultSummary_BlackNPDImage###", this.chartContent.BlackNPDChart);
+                        SBStr.Replace("###ResultSummary_BlackNPDImage###", chartContent.BlackNPDChart);
                         #endregion
 
                         // === Table 11 = for Chart of Gray NPD === //           
                         #region ==== Gray NPD Chart ====
-                        SBStr.Replace("###ResultSummary_GrayNPDImage###", this.chartContent.GrayNPDChart);
+                        SBStr.Replace("###ResultSummary_GrayNPDImage###", chartContent.GrayNPDChart);
                         #endregion
 
                         //-------Extra items for new G7 formatted reports--------------//
-                        SBStr.Replace("###DensityChart###", this.chartContent.InkPaperDansityChart);
-                        SBStr.Replace("###ABComparison###", this.chartContent.ABActualTargetChart);
-                        SBStr.Replace("###LComparison###", this.chartContent.LComparisionChart);
-                        SBStr.Replace("###ResultSummary_TVIImage###", this.chartContent.TVI_Summary_Chart);
+                        SBStr.Replace("###DensityChart###", chartContent.InkPaperDansityChart);
+                        SBStr.Replace("###ABComparison###", chartContent.ABActualTargetChart);
+                        SBStr.Replace("###LComparison###", chartContent.LComparisionChart);
+                        SBStr.Replace("###ResultSummary_TVIImage###", chartContent.TVI_Summary_Chart);
 
                         //------Region: for Density Data----//
                         DT = DS_Common.Tables[5];
@@ -2074,6 +2111,51 @@ namespace FujifilmUSA.Sync.Common
                 }
 
 
+
+                if (ReportType == 21) // Preview Print Condition
+                {
+                    SBStr.Replace("###Media###", PreviewPrintCondition.Description_Media);
+                    SBStr.Replace("###Colorant###", PreviewPrintCondition.Description_Colorant);
+                    SBStr.Replace("###RipSettings###", PreviewPrintCondition.Description_Colorant);
+                    SBStr.Replace("###Notes###", PreviewPrintCondition.Description_Notes);
+                    SBStr.Replace("###TechnicianName###", PreviewPrintCondition.Description_TechincalName);
+
+                    SBStr.Replace("###TargetPrintCondition###", PreviewPrintCondition.Metric_TargetPrintCond);
+                    SBStr.Replace("###SourceProfile###", PreviewPrintCondition.Metric_TargetPrintCond);
+                    SBStr.Replace("###RelativePaperScalingStatus###", PreviewPrintCondition.Metric_RelativePaperScaling);
+                    SBStr.Replace("###PaperL*a*b*Values###", PreviewPrintCondition.Metric_PaperLabValues);
+                    SBStr.Replace("###MinL*PatchValues###", PreviewPrintCondition.Metric_MinLPatchValues);
+                    SBStr.Replace("###SelectedPresets###", PreviewPrintCondition.Metric_SelectedPereset);
+                    SBStr.Replace("###PresetDescription###", PreviewPrintCondition.Metric_PresetDescription);
+
+                    SBStr.Replace("###MeasurementDevice###", PreviewPrintCondition.Measurement_Device);
+                    SBStr.Replace("###Illuminant###", PreviewPrintCondition.Measurement_Illuminat);
+                    SBStr.Replace("###Observer###", PreviewPrintCondition.Measurement_Observer);
+                    SBStr.Replace("###DensityType###", PreviewPrintCondition.Measurement_DensityType);
+                    SBStr.Replace("###UVMode###", PreviewPrintCondition.Measurement_UVMode);
+                    SBStr.Replace("###BaseChartName###", PreviewPrintCondition.Measurement_BaseChart);
+                    SBStr.Replace("###OptimizationChartName###", PreviewPrintCondition.Measurement_OptimizationChart);
+
+                    SBStr.Replace("###ValidationMetric###", PreviewPrintCondition.Validation_Metric);
+                    SBStr.Replace("###MetricDescription###", PreviewPrintCondition.Validation_MetricDescription);
+                    SBStr.Replace("###ValidationDevice###", PreviewPrintCondition.Validation_MeasurementDevice);
+                    SBStr.Replace("###UVModeValidation###", PreviewPrintCondition.Validation_UVMode); ;
+                    SBStr.Replace("###ValidationChartName###", PreviewPrintCondition.Validation_ValidationChart);
+
+                    SBStr.Replace("###InkOrder###", PreviewPrintCondition.OffSetPrinting_InkOrder);
+                    SBStr.Replace("###FountainSolution###", PreviewPrintCondition.OffSetPrinting_FountainSolution);
+                    SBStr.Replace("###Blanket###", PreviewPrintCondition.OffSetPrinting_Blanket);
+                    SBStr.Replace("###BlanketAge###", PreviewPrintCondition.OffSetPrinting_BlanketAge);
+                    SBStr.Replace("###Screening###", PreviewPrintCondition.OffSetPrinting_Screening);
+                    SBStr.Replace("###Coating###", PreviewPrintCondition.OffSetPrinting_Coating);
+                    SBStr.Replace("###ProjectType###", PreviewPrintCondition.OffSetPrinting_ProjectType);
+
+                    SBStr.Replace("###RetargetDeviceName###", PreviewPrintCondition.Retargeting_Device);
+                    SBStr.Replace("###RetargetPrintCondition###", PreviewPrintCondition.Retargeting_PrintCondition);
+
+
+                }
+
                 //SBStr.Replace("###LComparison###", this.chartContent.LComparisionChart);
                 //SBStr.Replace("###GrayL###", this.chartContent.LGrayBalanceChart);
                 //SBStr.Replace("###GrayA###", this.chartContent.AGrayBalanceChart);
@@ -2087,7 +2169,94 @@ namespace FujifilmUSA.Sync.Common
 
             return SBStr;
         }
-        #endregion
+
+        public StringBuilder SetPreviewPrintCondition(StringBuilder SBStr)
+        {
+            DataTable DT = new DataTable();
+            try
+            {
+                //string currentBaseUrl = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority +
+                //                    System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
+
+                //** Add Styles Path ***//
+                //string cssFullPath = this._WebURL + "Templates/style.css";
+                string cssFullPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/style.css");
+                //SBStr.Replace("#csspath#", cssFullPath);                
+                SBStr.Replace("#csspath#", BaseServiceURL + "Templates/style.css");
+
+
+                //** Add Images Path ***//
+                string imagesPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
+                SBStr.Replace("##LOGOIMAGES##", imagesPath);
+
+
+                //** Add Images Path ***//
+                //string imagesPath = this.BaseWebURL + "Images/";
+                //string imagesPath = System.Web.HttpContext.Current.Server.MapPath("Images") + "\\"; ;
+                SBStr.Replace("##IMAGES##", imagesPath);
+
+                //** Add Content ***//
+                SBStr.Replace("###ReportName###", ReportName);
+
+                
+                if (ReportType == 21) // Preview Print Condition
+                {
+                    SBStr.Replace("###Media###", PreviewPrintCondition.Description_Media);
+                    SBStr.Replace("###Colorant###", PreviewPrintCondition.Description_Colorant);
+                    SBStr.Replace("###RipSettings###", PreviewPrintCondition.Description_Colorant);
+                    SBStr.Replace("###Notes###", PreviewPrintCondition.Description_Notes);
+                    SBStr.Replace("###TechnicianName###", PreviewPrintCondition.Description_TechincalName);
+
+                    SBStr.Replace("###TargetPrintCondition###", PreviewPrintCondition.Metric_TargetPrintCond);
+                    SBStr.Replace("###SourceProfile###", PreviewPrintCondition.Metric_TargetPrintCond);
+                    SBStr.Replace("###RelativePaperScalingStatus###", PreviewPrintCondition.Metric_RelativePaperScaling);
+                    SBStr.Replace("###PaperL*a*b*Values###", PreviewPrintCondition.Metric_PaperLabValues);
+                    SBStr.Replace("###MinL*PatchValues###", PreviewPrintCondition.Metric_MinLPatchValues);
+                    SBStr.Replace("###SelectedPresets###", PreviewPrintCondition.Metric_SelectedPereset);
+                    SBStr.Replace("###PresetDescription###", PreviewPrintCondition.Metric_PresetDescription);
+
+                    SBStr.Replace("###MeasurementDevice###", PreviewPrintCondition.Measurement_Device);
+                    SBStr.Replace("###Illuminant###", PreviewPrintCondition.Measurement_Illuminat);
+                    SBStr.Replace("###Observer###", PreviewPrintCondition.Measurement_Observer);
+                    SBStr.Replace("###DensityType###", PreviewPrintCondition.Measurement_DensityType);
+                    SBStr.Replace("###UVMode###", PreviewPrintCondition.Measurement_UVMode);
+                    SBStr.Replace("###BaseChartName###", PreviewPrintCondition.Measurement_BaseChart);
+                    SBStr.Replace("###OptimizationChartName###", PreviewPrintCondition.Measurement_OptimizationChart);
+
+                    SBStr.Replace("###ValidationMetric###", PreviewPrintCondition.Validation_Metric);
+                    SBStr.Replace("###MetricDescription###", PreviewPrintCondition.Validation_MetricDescription);
+                    SBStr.Replace("###ValidationDevice###", PreviewPrintCondition.Validation_MeasurementDevice);
+                    SBStr.Replace("###UVModeValidation###", PreviewPrintCondition.Validation_UVMode); ;
+                    SBStr.Replace("###ValidationChartName###", PreviewPrintCondition.Validation_ValidationChart);
+
+                    SBStr.Replace("###InkOrder###", PreviewPrintCondition.OffSetPrinting_InkOrder);
+                    SBStr.Replace("###FountainSolution###", PreviewPrintCondition.OffSetPrinting_FountainSolution);
+                    SBStr.Replace("###Blanket###", PreviewPrintCondition.OffSetPrinting_Blanket);
+                    SBStr.Replace("###BlanketAge###", PreviewPrintCondition.OffSetPrinting_BlanketAge);
+                    SBStr.Replace("###Screening###", PreviewPrintCondition.OffSetPrinting_Screening);
+                    SBStr.Replace("###Coating###", PreviewPrintCondition.OffSetPrinting_Coating);
+                    SBStr.Replace("###ProjectType###", PreviewPrintCondition.OffSetPrinting_ProjectType);
+
+                    SBStr.Replace("###RetargetDeviceName###", PreviewPrintCondition.Retargeting_Device);
+                    SBStr.Replace("###RetargetPrintCondition###", PreviewPrintCondition.Retargeting_PrintCondition);
+
+
+                }
+
+                //SBStr.Replace("###LComparison###", this.chartContent.LComparisionChart);
+                //SBStr.Replace("###GrayL###", this.chartContent.LGrayBalanceChart);
+                //SBStr.Replace("###GrayA###", this.chartContent.AGrayBalanceChart);
+                //SBStr.Replace("###GrayB###", this.chartContent.BGrayBalanceChart);
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return SBStr;
+        }
+
 
         public void GenerateSpotPatchDetailsReport()
         {
@@ -2115,7 +2284,7 @@ namespace FujifilmUSA.Sync.Common
                 theCount++;
 
                 string FileName = "Templates/kendoPrepressSpotProjectPatchNew.htm";
-                string FilePath = this._WebURL + FileName;
+                string FilePath = _WebURL + FileName;
 
                 //========== Reads the template ==========//
                 fp = File.OpenText(System.Web.Hosting.HostingEnvironment.MapPath("~/" + FileName));
@@ -2134,7 +2303,9 @@ namespace FujifilmUSA.Sync.Common
 
                 int currentIndex = 0;
                 if (dtPatchDetails.Rows.Count < rowPerPage)
+                {
                     rowLimit = dtPatchDetails.Rows.Count;
+                }
 
                 string patchBodyStr = "";
                 StringBuilder mainStr = new StringBuilder();
@@ -2156,9 +2327,13 @@ namespace FujifilmUSA.Sync.Common
                     StringBuilder PatchStr = new StringBuilder();
                     PatchStr.Append("<table width='100%' style='text-align:left;'><tr><th style='text-align: left;'>SpotID</th><th style='text-align: left;'>Color</th><th style='text-align: left;'>SpotName</th>");
                     if (measurementID == 0)
+                    {
                         PatchStr.Append("<th style='text-align: right;'>Predicted ∆L*</th><th style='text-align: right;'>Predicted ∆a*</th><th style='text-align: right;'>Predicted ∆b*</th><th style='text-align: right;'>Predicted ∆E</th></tr>");
+                    }
                     else
+                    {
                         PatchStr.Append("<th style='text-align: right;'>∆E Target-Prediction</th><th style='text-align: right;'>∆E Measured-Target</th><th style='text-align: right;'>∆E Measured-Prediction</th></tr>");
+                    }
                     //foreach (DataRow row in dtPatchDetails.AsEnumerable().fi(5).CopyToDataTable())
                     for (int j = currentIndex; j < rowLimit; j++)
                     {
@@ -2166,9 +2341,14 @@ namespace FujifilmUSA.Sync.Common
                         PatchStr.Append("<td><span id='sp' style='display:inline-block;background-color:" + Convert.ToString(dtPatchDetails.Rows[j]["HTMLColor"]) + ";height:14px;width:68px;'></span></td>");
                         PatchStr.Append("<td>" + Convert.ToString(dtPatchDetails.Rows[j]["SpotName"]) + " </td>");
                         if (measurementID == 0)
+                        {
                             PatchStr.Append("<td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔL"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["Δa"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["Δb"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE"]) + "</td>");
+                        }
                         else
+                        {
                             PatchStr.Append("<td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_T_P"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_T"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_P"]) + "</td>");
+                        }
+
                         PatchStr.Append("</tr>");
                     }
                     PatchStr.Append("</table>");
@@ -2181,9 +2361,13 @@ namespace FujifilmUSA.Sync.Common
 
                     currentIndex = rowLimit;
                     if ((rowLimit + rowPerPage) > dtPatchDetails.Rows.Count)
+                    {
                         rowLimit = dtPatchDetails.Rows.Count;
+                    }
                     else
+                    {
                         rowLimit += rowPerPage;
+                    }
                 }
 
                 //
@@ -2215,7 +2399,9 @@ namespace FujifilmUSA.Sync.Common
                 {
                     //========== Create A chanin for a pdf with multiple page ==========//
                     if (!theDoc.Chainable(theID))
+                    {
                         break;
+                    }
 
                     theDoc.Page = theDoc.AddPage();
                     theCount++;
@@ -2251,7 +2437,9 @@ namespace FujifilmUSA.Sync.Common
 
                 // === If same named pdf file is already available then remove === //
                 if (System.IO.File.Exists(pth))
+                {
                     System.IO.File.Delete(pth);
+                }
 
                 theDoc.Save(pth);
                 theDoc.Clear();
@@ -2262,8 +2450,8 @@ namespace FujifilmUSA.Sync.Common
 
                 throw;
             }
-        }     
-
+        }
+        #endregion
     }
 
 

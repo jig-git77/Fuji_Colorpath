@@ -44,8 +44,12 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
+            hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
             btnValidationSetup.Visible = IsXmfNewProject;
             LoadRecord();
+
         }
 
         protected void btnValidationSetup_Click(object sender, EventArgs e)
@@ -89,6 +93,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         }
 
+        protected void lnkbtnDownloadReport_Click(object sender, EventArgs e)
+        {
+
+        }
         protected void LoadRecord()
         {
             if (SessionManager.Instance.CurrentProject.PrintCondition != null)
@@ -181,9 +189,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
                     {
                         trRelativePaper.Visible = true;
+                        hdnShowRetargeting.Value = "1";
                         lblMetric_RelationScaling.Text = (SessionManager.Instance.CurrentProject.EnabledPaperScaling) ? "Enabled" : "Disabled";
-                        lblMetric_PaperLABValues.Text = string.Format("L*{0} a*{1} b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString());
-                        lblMetric_MinPatchValue.Text = string.Format("L*{0} a*{1} b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString());
+                        lblMetric_PaperLABValues.Text = string.Format(" L*{0}  a*{1}  b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString());
+                        lblMetric_MinPatchValue.Text = string.Format("  L*{0}  a*{1}  b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString());
                     }
                 }
                 //dvMetricPreset.Visible = false;
@@ -234,9 +243,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
                     {
                         trRelativePaper.Visible = true;
+                        hdnShowRetargeting.Value = "1";
                         lblMetric_RelationScaling.Text = (SessionManager.Instance.CurrentProject.EnabledPaperScaling) ? "Enabled" : "Disabled";
-                        lblMetric_PaperLABValues.Text = string.Format("L*{0} a*{1} b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString());
-                        lblMetric_MinPatchValue.Text = string.Format("L*{0} a*{1} b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString());
+                        lblMetric_PaperLABValues.Text = string.Format(" L*{0}  a*{1}  b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString());
+                        lblMetric_MinPatchValue.Text = string.Format("  L*{0}  a*{1}  b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString());
                     }
 
                     lblMeasurementDevice.Text = Data["MeasurementDeviceId"];
@@ -247,10 +257,12 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     lblUVMode.Text = "M" + SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode.ToString();
 
                     imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId) + "&Preview=1";
+                    hdnBaseChartId.Value = Convert.ToString(ReferenceChartTypeId);
                     if (Opt_ReferenceChartTypeId != 0)
                     {
                         lblOptimizationChart.Text = Data["opt_referenceChartTypeId"];
                         Image_OptimizationChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key) + "&Preview=1";
+                        hdnOptimizationChartId.Value = Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key);
                     }
                     //trUVSettings.Visible = (lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis))
                     //                       || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro2))
@@ -280,6 +292,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                     {
                         trOffSetPrintingInfo.Visible = true;
+                        hdnShowOffSetPrinting.Value = "1";
                         lblInkOderTxt.Text = ((EInkOrder)SessionManager.Instance.CurrentProject.PrintCondition.InkOrder).ToString();
                         lblFountainSolution.Text = SessionManager.Instance.CurrentProject.PrintCondition.FountainSolution;
                         lblBlanket.Text = SessionManager.Instance.CurrentProject.PrintCondition.Blanket;
@@ -309,10 +322,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                             lblRetargetingPrintCondition.Text = SessionManager.Instance.CurrentProject.ReTargetProjectName;
                             lblRetargetingDeviceName.Text = SessionManager.Instance.CurrentProject.RetargetDeviceName;
                         }
-                        
+
                         if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
                         {
                             trRelativePaper.Visible = true;
+                            hdnShowRetargeting.Value = "1";
                             lblMetric_RelationScaling.Text = (SessionManager.Instance.CurrentProject.EnabledPaperScaling) ? "Enabled" : "Disabled";
                             lblMetric_PaperLABValues.Text = string.Format(" L*{0}  a*{1}  b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString());
                             lblMetric_MinPatchValue.Text = string.Format("  L*{0}  a*{1}  b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString());
@@ -321,11 +335,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     else
                     {
                         trOffSetPrintingInfo.Visible = false;
+                        hdnShowOffSetPrinting.Value = "0";
                         lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
                         lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
                         if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
                         {
                             trRelativePaper.Visible = true;
+                            hdnShowRetargeting.Value = "1";
                             lblMetric_RelationScaling.Text = (SessionManager.Instance.CurrentProject.EnabledPaperScaling) ? "Enabled" : "Disabled";
                             lblMetric_PaperLABValues.Text = string.Format(" L*{0}  a*{1}  b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString());
                             lblMetric_MinPatchValue.Text = string.Format("  L*{0}  a*{1}  b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString());
@@ -335,16 +351,19 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     }
 
                     imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId) + "&Preview=1";
+                    hdnBaseChartId.Value = Convert.ToString(ReferenceChartTypeId);
                     lblVali_MeaDevice.Text = Data["V_MeasurementDeviceId"];
                     if (Opt_ReferenceChartTypeId != 0)
                     {
                         lblOptimizationChart.Text = Data["opt_referenceChartTypeId"];
                         Image_OptimizationChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key) + "&Preview=1";
+                        hdnOptimizationChartId.Value = Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key);
                     }
                     if (V_ReferenceChartTypeId != 0)
                     {
                         lblValiChart.Text = Data["v_referenceChartTypeId"];
                         Image_ValiChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key) + "&Preview=1";
+                        hdnValidationChartId.Value = Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key);
                     }
                 }
                 //trUVSettings.Visible = (lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis))
@@ -364,9 +383,12 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     lblVali_Metric_Description.Text = string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.MeasurementSetting.ValidationMetricDescription) ? "N/A" : SessionManager.Instance.CurrentProject.MeasurementSetting.ValidationMetricDescription;
                     lblVali_Metric_UVMode.Text = "M" + SessionManager.Instance.CurrentProject.MeasurementSetting.VUVMode.ToString();
                     tdValidationSetting.Visible = true;
+                    hdnShowValidationBox.Value = "1";
                 }
-                else {
+                else
+                {
                     tdValidationSetting.Visible = false;
+                    hdnShowValidationBox.Value = "0";
                 }
 
             }

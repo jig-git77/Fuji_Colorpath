@@ -5,12 +5,10 @@ using FujifilmUSA.Sync.GlobalResources;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujiFilmUSA.Sync.Service.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -74,22 +72,34 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 else
                 {
                     if (chart.MeasurementId == null)
+                    {
                         validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                    }
 
                     if (chart.IsAverageOfMeasurements == null)
+                    {
                         validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+                    }
 
                     if (chart.IsVerificationProject == null)
+                    {
                         validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+                    }
 
                     if (chart.IsSync1DTypeProject == null)
+                    {
                         validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+                    }
 
                     if (string.IsNullOrEmpty(Convert.ToString(chart.fromDeltaE)))
+                    {
                         validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
+                    }
 
                     if (string.IsNullOrEmpty(Convert.ToString(chart.validationType)))
+                    {
                         validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidValidationType);
+                    }
 
                     if (!string.IsNullOrEmpty(validationMessage))
                     {
@@ -112,7 +122,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
 
                         if (!Directory.Exists(objReportPDF.PDFPath))
+                        {
                             Directory.CreateDirectory(objReportPDF.PDFPath);
+                        }
 
                         objReportPDF.chartContent = chart;
                         objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
@@ -174,7 +186,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                                     objReportPDF.PDF_NAME = string.Empty;
                                     objReportPDF.PDF_NAME = pdfName;
                                 }
-                            }                            
+                            }
                         }
 
                         objReportPDF.GenerateClientReportPDF();
@@ -219,7 +231,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 else
                 {
                     if (chart.OptimizeRunId == null)
+                    {
                         validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                    }
 
                     if (!string.IsNullOrEmpty(validationMessage))
                     {
@@ -235,7 +249,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
 
                         if (!Directory.Exists(objReportPDF.PDFPath))
+                        {
                             Directory.CreateDirectory(objReportPDF.PDFPath);
+                        }
 
                         objReportPDF.spotChartContent = chart;
                         objReportPDF.PDF_NAME = chart.SpotProjectName + "-" + DateTime.Now.ToString("MMddyyHHmm") + ".PDF"; //chart.CurrentUserId.ToString() + "_ReportSpotProject.PDF";
@@ -265,6 +281,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             return actionResult;
         }
+
 
         [HttpGet]
         public HttpResponseMessage DownloadReport(string guid)
@@ -323,22 +340,34 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (MeasurementId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                }
 
                 if (IsAverageOfMeasurements == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
+                }
 
                 if (IsVerificationProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsVerificationProject);
+                }
 
                 if (IsSync1DTypeProject == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsSync1DTypeProject);
+                }
 
                 if (string.IsNullOrEmpty(Convert.ToString(fromDeltaE)))
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
+                }
 
                 if (string.IsNullOrEmpty(Convert.ToString(validationType)))
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidValidationType);
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -350,11 +379,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 else
                 {
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
-                    this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
-                    this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                    IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
+                    IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
                     this.IsAverageOfMeasurements = IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
-                    this.From_ΔE = Convert.ToString(fromDeltaE);
-                    this.ValidationType = Convert.ToInt32(validationType);
+                    From_ΔE = Convert.ToString(fromDeltaE);
+                    ValidationType = Convert.ToInt32(validationType);
 
                     _presenterReportSingleMeasurement.GetReportDataOnMeasurement();
                     //List<Dictionary<string, decimal>> listDeltaSummary = new List<Dictionary<string, decimal>>();
@@ -362,6 +391,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     List<decimal> listStatesValues = new List<decimal>();
                     List<decimal> listStatesLimits = new List<decimal>();
                     if (DSReport != null)
+                    {
                         if (DSReport.Tables[2] != null)
                         {
                             //foreach (DataColumn dc in DSReport.Tables[2].Columns)
@@ -372,10 +402,17 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             if (!IsVerification && !IsSync1DType)
                             {
                                 for (int index = 0; index < DSReport.Tables[2].Columns.Count - 1; index++)
+                                {
                                     listStatesNames.Add(DSReport.Tables[2].Columns[index].ColumnName);
+                                }
+
                                 if (DSReport.Tables[2].Rows.Count > 0)
+                                {
                                     foreach (string columnName in listStatesNames)
+                                    {
                                         listStatesValues.Add(DataReader.ReadDecimal(DSReport.Tables[2].Rows[0], columnName));
+                                    }
+                                }
                             }
                             else
                             {
@@ -388,6 +425,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                             }
 
                         }
+                    }
+
                     httpResponse.Data = new
                     {
                         DTDeltaSummaryLables = listStatesNames,
@@ -423,21 +462,29 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
 
                 if (chart.MeasurementId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidMeasurementId);
+                }
 
                 if (chart.IsAverageOfMeasurements == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidIsAverageOfMeasurements);
-
+                }
 
                 if (chart.ProjectId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidProjectId);
+                }
 
                 if (string.IsNullOrEmpty(Convert.ToString(chart.fromDeltaE)))
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidDeltaEValue);
+                }
 
                 if (chart.grading == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidGradingDetails);
-
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -464,7 +511,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
 
                         if (!Directory.Exists(objReportPDF.PDFPath))
+                        {
                             Directory.CreateDirectory(objReportPDF.PDFPath);
+                        }
 
                         objReportPDF.chartContent = chart;
                         objReportPDF.PDF_NAME = chart.CurrentUserId.ToString() + "_ReportSingleMeasurement.PDF";
@@ -509,10 +558,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (OptimizationRunId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
+                }
 
                 if (CurveType == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidCurveType);
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -524,12 +577,17 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 else
                 {
                     DetermineCulture();
-                    this.OptimizeRunId = Convert.ToInt32(OptimizationRunId);
-                    this.CurveTypeId = Convert.ToInt16(CurveType);
+                    OptimizeRunId = Convert.ToInt32(OptimizationRunId);
+                    CurveTypeId = Convert.ToInt16(CurveType);
                     if (Convert.ToInt16(CurveType) == 100 || Convert.ToInt16(CurveType) == 101)
-                        this.CurveTypeId = 5;
+                    {
+                        CurveTypeId = 5;
+                    }
+
                     if (Convert.ToInt16(CurveType) == 102)
-                        this.CurveTypeId = 45;
+                    {
+                        CurveTypeId = 45;
+                    }
 
                     _presenterExport.GetCurveData();
 
@@ -537,7 +595,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     string CurveFilePath = HostingEnvironment.MapPath("~/UploadFiles/CurvesFile/");
                     string ReportFileName = "";
                     if (!File.Exists(CurveFilePath))
+                    {
                         Directory.CreateDirectory(CurveFilePath);
+                    }
 
                     if (CurveType == 1 || CurveType == 5 || CurveType == 10)
                     {
@@ -698,7 +758,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                         //check if file exists and delete it
                         if (System.IO.File.Exists(CurveFilePath + zipCurveFileName))
+                        {
                             System.IO.File.Delete(CurveFilePath + zipCurveFileName);
+                        }
 
                         System.IO.StreamWriter swC;
                         System.IO.StreamWriter swM;
@@ -888,7 +950,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                         //check if file exists and delete it
                         if (System.IO.File.Exists(CurveFilePath + zipCurveFileName))
+                        {
                             System.IO.File.Delete(CurveFilePath + zipCurveFileName);
+                        }
 
                         System.IO.StreamWriter swC;
                         System.IO.StreamWriter swM;
@@ -926,7 +990,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                         #endregion
                     }
                     if (string.IsNullOrEmpty(ReportFileName))
+                    {
                         ReportFileName = "/UploadFiles/CurvesFile/" + CurveFileName;
+                    }
+
                     httpResponse.Data = ReportFileName;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
                 }
@@ -953,10 +1020,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (OptimizationRunId == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidOptimizationRunID);
+                }
 
                 if (CurveType == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidCurveType);
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -968,26 +1039,37 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 else
                 {
                     DetermineCulture();
-                    this.OptimizeRunId = Convert.ToInt32(OptimizationRunId);
-                    this.CurveTypeId = Convert.ToInt16(CurveType);
+                    OptimizeRunId = Convert.ToInt32(OptimizationRunId);
+                    CurveTypeId = Convert.ToInt16(CurveType);
                     if (Convert.ToInt16(CurveType) == 100 || Convert.ToInt16(CurveType) == 101)
-                        this.CurveTypeId = 5;
+                    {
+                        CurveTypeId = 5;
+                    }
+
                     if (Convert.ToInt16(CurveType) == 102)
-                        this.CurveTypeId = 45;
+                    {
+                        CurveTypeId = 45;
+                    }
 
                     _presenterExport.GetCurveData();
 
                     List<OptimizeRunCurve> DT_CurveDelta = new List<OptimizeRunCurve>();
                     if (isCurrentRun)
+                    {
                         DT_CurveDelta = CurveData.CurveDeltaRefView;
+                    }
                     else
+                    {
                         DT_CurveDelta = CurveData.CurveDeltaPrevRunView;
+                    }
 
                     string CurveFileName = ExportFileName + "_CurveDelta.txt";
                     string CurveFilePath = HostingEnvironment.MapPath("~/UploadFiles/CurvesFile/");
                     string ReportFileName = "/UploadFiles/CurvesFile/" + CurveFileName; ;
                     if (!File.Exists(CurveFilePath))
+                    {
                         Directory.CreateDirectory(CurveFilePath);
+                    }
 
                     #region Create file and download txt file for all curve types
                     //---------------For all Curve Types -------------------//
@@ -1033,7 +1115,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (model == null)
+                {
                     validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidLibraryType);
+                }
 
                 //if (LibraryType == null)
                 //    validationMessage = GlobalResourceManager.Instance.GetGlobalResourceString(_InvalidLibraryType);
@@ -1098,17 +1182,27 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                     string fileName = "";
                     if (model.LibraryType == 1)
+                    {
                         fileName = ExportColderaFile(listPatch, model);
+                    }
                     else if (model.LibraryType == 2)
+                    {
                         fileName = ExportColdera2File(listPatch, model);
+                    }
                     else if (model.LibraryType == 3)
+                    {
                         fileName = ExportColorgateFile(listPatch, model);
+                    }
                     else
+                    {
                         fileName = ExportCMYK_DBDFile(listPatch, model);
-
+                    }
 
                     if (!string.IsNullOrEmpty(fileName))
+                    {
                         fileName = "/UploadFiles/CMYKFile/" + fileName;
+                    }
+
                     httpResponse.Data = fileName;
                     actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
                 }
@@ -1123,6 +1217,49 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             return actionResult;
         }
+
+        [HttpPost]
+        [CustomAuthentication]
+        public IHttpActionResult ExportPreviewPrintCondition(ReportPreviewPrintCondition reportPreviewPrintCondition)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+                ReportPDF objReportPDF = new ReportPDF();
+                objReportPDF.PDFPath = HostingEnvironment.MapPath("~/UploadFiles/");
+
+                if (!Directory.Exists(objReportPDF.PDFPath))
+                {
+                    Directory.CreateDirectory(objReportPDF.PDFPath);
+                }
+                objReportPDF.PDF_NAME = reportPreviewPrintCondition.Metric_TargetPrintCond+ "_ReportPreviewPrintCondition.PDF";                
+                objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
+                objReportPDF.ReportType = (int)enumReportType.ReportPrintPreviewCondition;
+                objReportPDF.PreviewPrintCondition = reportPreviewPrintCondition;
+
+
+                objReportPDF.GenerateClientReportPDF();
+                string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
+                httpResponse.status = ResponseStatus.Success;
+                httpResponse.Data = "Sucess";
+                httpResponse.Data = ReportPath;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+
+
+        }
+
         #endregion
 
         #region Methods
@@ -1633,7 +1770,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             string fileName = detail.FileName + ".xml";
             string SpotName_Parameter = "";
             if (!Directory.Exists(directoryFilePath))
+            {
                 Directory.CreateDirectory(directoryFilePath);
+            }
 
             System.IO.StreamWriter sw;
             sw = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + fileName);
@@ -1667,7 +1806,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             string fileName = detail.FileName + ".cct";
             string SpotName_Parameter = "";
             if (!Directory.Exists(directoryFilePath))
+            {
                 Directory.CreateDirectory(directoryFilePath);
+            }
 
             System.IO.StreamWriter sw;
             sw = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + fileName);
@@ -1710,7 +1851,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             string fileName = detail.FileName + ".xml";
             string SpotName_Parameter = "";
             if (!Directory.Exists(directoryFilePath))
+            {
                 Directory.CreateDirectory(directoryFilePath);
+            }
 
             System.IO.StreamWriter sw;
             sw = System.IO.File.CreateText(HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + fileName);
@@ -1744,7 +1887,10 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             System.IO.StreamWriter sw = null;
             string directoryName = HostingEnvironment.MapPath("~/UploadFiles/CMYKFile/") + detail.FileName;
             if (!Directory.Exists(directoryName))
+            {
                 Directory.CreateDirectory(directoryName);
+            }
+
             string fileName = "";
             for (int i = 0; i < listPatch.Count; i++)
             {
@@ -1802,7 +1948,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
             //Delete the directory
             if (Directory.Exists(directoryName))
+            {
                 Directory.Delete(directoryName, true);
+            }
 
             return detail.FileName + ".zip";
             //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CMYKFile/"), CMYKFileName + ".zip", CMYKFileName + ".zip");

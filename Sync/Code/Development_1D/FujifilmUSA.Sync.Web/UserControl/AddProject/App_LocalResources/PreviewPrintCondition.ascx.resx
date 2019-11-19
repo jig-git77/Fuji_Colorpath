@@ -204,4 +204,70 @@
   <data name="locSpotTargetResource1.Text" xml:space="preserve">
     <value>Spot Target</value>
   </data>
+  <data name="lblBlanket.Text" xml:space="preserve">
+    <value>Blanket</value>
+  </data>
+  <data name="lblBlanketAge.Text" xml:space="preserve">
+    <value>Blanket Age</value>
+  </data>
+  <data name="lblCoating.Text" xml:space="preserve">
+    <value>Coating</value>
+  </data>
+  <data name="lblDensityType.Text" xml:space="preserve">
+    <value>Density Type</value>
+  </data>
+  <data name="lblDevice.Text" xml:space="preserve">
+    <value>Device</value>
+  </data>
+  <data name="lblFountainSolution.Text" xml:space="preserve">
+    <value>Fountain Solution</value>
+  </data>
+  <data name="lblInkOrder.Text" xml:space="preserve">
+    <value>Ink Order</value>
+  </data>
+  <data name="lblMeasurmentSettings.Text" xml:space="preserve">
+    <value>Measurment Settings</value>
+  </data>
+  <data name="lblMetricDescription.Text" xml:space="preserve">
+    <value>Metric Description</value>
+  </data>
+  <data name="lblMetricSettings.Text" xml:space="preserve">
+    <value>Metric Settings</value>
+  </data>
+  <data name="locMinLPatchValues.Text" xml:space="preserve">
+    <value>Min L* Patch Values</value>
+  </data>
+  <data name="lblOffsetPrintingInformation.Text" xml:space="preserve">
+    <value>Offset Printing Information</value>
+  </data>
+  <data name="locPaperLabValues.Text" xml:space="preserve">
+    <value>Paper L*a*b Values</value>
+  </data>
+  <data name="lblPrintCondition.Text" xml:space="preserve">
+    <value>Print Condition</value>
+  </data>
+  <data name="lblProjectType.Text" xml:space="preserve">
+    <value>Project Type</value>
+  </data>
+  <data name="lblRelativePaperScaling.Text" xml:space="preserve">
+    <value>Relative Paper Scaling</value>
+  </data>
+  <data name="lblRetargeting.Text" xml:space="preserve">
+    <value>Retargeting</value>
+  </data>
+  <data name="lblScreening.Text" xml:space="preserve">
+    <value>Screening</value>
+  </data>
+  <data name="lblUVMode.Text" xml:space="preserve">
+    <value>UV Mode</value>
+  </data>
+  <data name="lblValidationChart.Text" xml:space="preserve">
+    <value>Validation Chart</value>
+  </data>
+  <data name="lblValidationMetric.Text" xml:space="preserve">
+    <value>Validation Metric</value>
+  </data>
+  <data name="lblValidationSettings.Text" xml:space="preserve">
+    <value>Validation Settings</value>
+  </data>
 </root>
