@@ -123,7 +123,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 V_MeasurementDeviceId = 0;
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource)
                 {
-                    Div_TargetColorSpace.Visible = false;
+                    //Div_TargetColorSpace.Visible = false;
                 }
                 IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
                 ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
@@ -142,8 +142,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 V_ReferenceChartTypeId = MetricTargetPresetId = 0;
                 V_MeasurementDeviceId = 0;
 
-                Div_TargetColorSpace.Visible = false;
-                Div_SpotTarget.Visible = true;
+                //Div_TargetColorSpace.Visible = false;
+                //Div_SpotTarget.Visible = true;
 
                 IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
                 ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
@@ -180,7 +180,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
                     if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
                     {
-                        Div_RelativePaper.Visible = true;
+                        trRelativePaper.Visible = true;
                         lblMetric_RelationScaling.Text = (SessionManager.Instance.CurrentProject.EnabledPaperScaling) ? "Enabled" : "Disabled";
                         lblMetric_PaperLABValues.Text = string.Format("L*{0} a*{1} b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString());
                         lblMetric_MinPatchValue.Text = string.Format("L*{0} a*{1} b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString());
@@ -204,7 +204,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                         lblRipSettings.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.RipSettings;
                         lblNotes.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Notes;
                         lblTechnicianName.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.TechnicianName;
-                        lblSpotTarget.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetName;
+                        //lblSpotTarget.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetName;
                     }
 
                     lblMeasurementDevice.Text = Data["MeasurementDeviceId"];
@@ -233,7 +233,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
                     if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
                     {
-                        Div_RelativePaper.Visible = true;
+                        trRelativePaper.Visible = true;
                         lblMetric_RelationScaling.Text = (SessionManager.Instance.CurrentProject.EnabledPaperScaling) ? "Enabled" : "Disabled";
                         lblMetric_PaperLABValues.Text = string.Format("L*{0} a*{1} b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString());
                         lblMetric_MinPatchValue.Text = string.Format("L*{0} a*{1} b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString());
@@ -279,7 +279,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                     {
-                        
+                        trOffSetPrintingInfo.Visible = true;
                         lblInkOderTxt.Text = ((EInkOrder)SessionManager.Instance.CurrentProject.PrintCondition.InkOrder).ToString();
                         lblFountainSolution.Text = SessionManager.Instance.CurrentProject.PrintCondition.FountainSolution;
                         lblBlanket.Text = SessionManager.Instance.CurrentProject.PrintCondition.Blanket;
@@ -309,21 +309,26 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                             lblRetargetingPrintCondition.Text = SessionManager.Instance.CurrentProject.ReTargetProjectName;
                             lblRetargetingDeviceName.Text = SessionManager.Instance.CurrentProject.RetargetDeviceName;
                         }
-                        else {
-                            trRetragetting.Visible = false;
+                        
+                        if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
+                        {
+                            trRelativePaper.Visible = true;
+                            lblMetric_RelationScaling.Text = (SessionManager.Instance.CurrentProject.EnabledPaperScaling) ? "Enabled" : "Disabled";
+                            lblMetric_PaperLABValues.Text = string.Format(" L*{0}  a*{1}  b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString());
+                            lblMetric_MinPatchValue.Text = string.Format("  L*{0}  a*{1}  b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString());
                         }
-
                     }
                     else
                     {
+                        trOffSetPrintingInfo.Visible = false;
                         lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
                         lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
                         if (SessionManager.Instance.CurrentProject.EnabledPaperScaling)
                         {
-                            Div_RelativePaper.Visible = true;
+                            trRelativePaper.Visible = true;
                             lblMetric_RelationScaling.Text = (SessionManager.Instance.CurrentProject.EnabledPaperScaling) ? "Enabled" : "Disabled";
-                            lblMetric_PaperLABValues.Text = string.Format("L*{0} a*{1} b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString());
-                            lblMetric_MinPatchValue.Text = string.Format("L*{0} a*{1} b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString());
+                            lblMetric_PaperLABValues.Text = string.Format(" L*{0}  a*{1}  b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString());
+                            lblMetric_MinPatchValue.Text = string.Format("  L*{0}  a*{1}  b*{2} ", SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString(), SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString());
                         }
                         //dvMetricPreset.Visible = false;
                         //dvOptionPreset.Visible = true;
@@ -358,9 +363,12 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     lblVali_Metric.Text = SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Value;
                     lblVali_Metric_Description.Text = string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.MeasurementSetting.ValidationMetricDescription) ? "N/A" : SessionManager.Instance.CurrentProject.MeasurementSetting.ValidationMetricDescription;
                     lblVali_Metric_UVMode.Text = "M" + SessionManager.Instance.CurrentProject.MeasurementSetting.VUVMode.ToString();
-                    
+                    tdValidationSetting.Visible = true;
                 }
-                
+                else {
+                    tdValidationSetting.Visible = false;
+                }
+
             }
         }
 

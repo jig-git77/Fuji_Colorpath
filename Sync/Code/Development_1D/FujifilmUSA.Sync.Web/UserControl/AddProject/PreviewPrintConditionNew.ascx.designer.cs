@@ -193,15 +193,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::System.Web.UI.WebControls.Label lblTechnicianName;
         
         /// <summary>
-        /// Div_TargetColorSpace control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_TargetColorSpace;
-        
-        /// <summary>
         /// locTargetPrintCondition control.
         /// </summary>
         /// <remarks>
@@ -238,40 +229,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::System.Web.UI.WebControls.Label lblSourceProfile;
         
         /// <summary>
-        /// Div_SpotTarget control.
+        /// trRelativePaper control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_SpotTarget;
-        
-        /// <summary>
-        /// Localize3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize3;
-        
-        /// <summary>
-        /// lblSpotTarget control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSpotTarget;
-        
-        /// <summary>
-        /// Div_RelativePaper control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_RelativePaper;
+        protected global::System.Web.UI.WebControls.Panel trRelativePaper;
         
         /// <summary>
         /// lblMetric_RelationScaling control.
@@ -463,13 +427,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::System.Web.UI.WebControls.Image Image_OptimizationChart;
         
         /// <summary>
-        /// Div_OptChart control.
+        /// tdValidationSetting control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_OptChart;
+        protected global::System.Web.UI.WebControls.Panel tdValidationSetting;
         
         /// <summary>
         /// Panel_ValidationSeting control.
@@ -544,13 +508,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::System.Web.UI.WebControls.Image Image_ValiChart;
         
         /// <summary>
-        /// Div_OffSetPrintingInformation control.
+        /// trOffSetPrintingInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_OffSetPrintingInformation;
+        protected global::System.Web.UI.WebControls.Panel trOffSetPrintingInfo;
         
         /// <summary>
         /// panel_OffsetPrintingInformation control.

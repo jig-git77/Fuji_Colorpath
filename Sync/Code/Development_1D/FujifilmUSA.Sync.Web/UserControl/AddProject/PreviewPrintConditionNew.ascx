@@ -68,14 +68,14 @@
     <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
     <table cellpadding="0" cellspacing="10" border="0" style="width: 100%; vertical-align: top;">
         <tr>
-            <td valign="top" style="width: 320px">
+            <td valign="top" style="width: 100%">
                 <div style="display: block;">
                     <div class="section_top_large">
                         &nbsp;
                     </div>
                     <div class="section_large">
                         <div class="combopart">
-                            <div class="header" style="width: 980px;">
+                            <div class="header" style="width: 670px;">
                                 <div class="content">
                                     <div class="text" style="float: left">
                                         <label>
@@ -88,7 +88,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="panelDescription" style="padding-left: 10px; width: 980px;">
+                            <div id="panelDescription" style="padding-left: 10px; width: 670px;">
                                 <table style="vertical-align: top; width: 100%;">
                                     <tr>
                                         <td style="vertical-align: top; width: 50%;">
@@ -184,14 +184,14 @@
             </td>
         </tr>
         <tr>
-            <td valign="top" style="width: 320px">
+            <td valign="top" style="width: 100%">
                 <div style="display: block;">
                     <div class="section_top_large">
                         &nbsp;
                     </div>
                     <div class="section_large">
                         <div class="combopart">
-                            <div class="header" style="width: 980px;">
+                            <div class="header" style="width: 670px;">
                                 <div class="content">
                                     <div class="text" style="float: left">
                                         <label>
@@ -203,39 +203,38 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="panelMetricSettings" style="padding-left: 10px; width: 980px;">
+                            <div id="panelMetricSettings" style="padding-left: 10px; width: 670px;">
                                 <table style="vertical-align: top; width: 100%;">
-                                    <div id="Div_TargetColorSpace" runat="server">
-                                        <tr>
-                                            <td class="breakWord90">
-                                                <span style="font-weight: bold;">
-                                                    <asp:Localize runat="server"
-                                                        Text="Target Print Condition" ID="locTargetPrintCondition" meta:resourcekey="locTargetPrintConditionResource1"></asp:Localize></span>
-                                            </td>
-                                            <td style="width: 10px;">
-                                                <span style="font-weight: bold;">:</span>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lblTargetPrintCondition" runat="server" CssClass="breakWord100"></asp:Label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="breakWord90">
-                                                <span style="font-weight: bold;">
-                                                    <asp:Localize runat="server"
-                                                        Text="Source Profile" ID="locSourceProfile"
-                                                        meta:resourcekey="locSourceProfileResource1"></asp:Localize></span>
-                                            </td>
-                                            <td style="width: 10px;">
-                                                <span style="font-weight: bold;">:</span>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lblSourceProfile" runat="server" CssClass="breakWord100"
-                                                    meta:resourcekey="lblSourceProfileResource1"></asp:Label>
-                                            </td>
-                                        </tr>
-                                    </div>
-                                    <div id="Div_SpotTarget" runat="server" visible="false">
+                                    <tr>
+                                        <td class="breakWord90">
+                                            <span style="font-weight: bold;">
+                                                <asp:Localize runat="server"
+                                                    Text="Target Print Condition" ID="locTargetPrintCondition" meta:resourcekey="locTargetPrintConditionResource1"></asp:Localize></span>
+                                        </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblTargetPrintCondition" runat="server" CssClass="breakWord100"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="breakWord90">
+                                            <span style="font-weight: bold;">
+                                                <asp:Localize runat="server"
+                                                    Text="Source Profile" ID="locSourceProfile"
+                                                    meta:resourcekey="locSourceProfileResource1"></asp:Localize></span>
+                                        </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblSourceProfile" runat="server" CssClass="breakWord100"
+                                                meta:resourcekey="lblSourceProfileResource1"></asp:Label>
+                                        </td>
+                                    </tr>
+
+                                    <%-- <div id="Div_SpotTarget" runat="server" visible="false">
                                         <tr>
                                             <td class="breakWord90">
                                                 <span style="font-weight: bold;">
@@ -250,8 +249,8 @@
                                             </td>
                                         </tr>
 
-                                    </div>
-                                    <div id="Div_RelativePaper" runat="server" visible="false">
+                                    </div>   --%>
+                                    <asp:Panel ID="trRelativePaper" runat="server" Visible="false">
                                         <tr>
                                             <td class="breakWord90">
                                                 <span style="font-weight: bold;">Relative paer Scaling
@@ -260,8 +259,8 @@
                                             <td style="width: 10px;">
                                                 <span style="font-weight: bold;">:</span>
                                             </td>
-                                            <td><asp:Label ID="lblMetric_RelationScaling" runat="server"
-                                                    ></asp:Label>
+                                            <td>
+                                                <asp:Label ID="lblMetric_RelationScaling" runat="server"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
@@ -272,7 +271,8 @@
                                             <td style="width: 10px;">
                                                 <span style="font-weight: bold;">:</span>
                                             </td>
-                                            <td><asp:Label ID="lblMetric_PaperLABValues" runat="server"></asp:Label>
+                                            <td>
+                                                <asp:Label ID="lblMetric_PaperLABValues" runat="server"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
@@ -283,42 +283,38 @@
                                             <td style="width: 10px;">
                                                 <span style="font-weight: bold;">:</span>
                                             </td>
-                                            <td><asp:Label ID="lblMetric_MinPatchValue" runat="server"></asp:Label>
-                                            </td>
-                                        </tr>
-                                    </div>
-                                    <div id="Div2" style="padding-left: 10px">
-                                        <tr style="line-height: 16px;">
                                             <td>
-                                                <span style="font-weight: bold;">
-                                                    <asp:Localize runat="server"
-                                                        Text="Selected Presets:" ID="locSelectedPresets"
-                                                        meta:resourcekey="locSelectedPresetsResource1"></asp:Localize>
-                                                </span>
+                                                <asp:Label ID="lblMetric_MinPatchValue" runat="server"></asp:Label>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td style="padding-left: 20px;">
-                                                <asp:Label ID="lblSelectedPresets" runat="server"
-                                                    meta:resourcekey="lblSelectedPresetsResource1"></asp:Label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="line-height: 16px;">
-                                                <span style="font-weight: bold;">
-                                                    <asp:Localize runat="server"
-                                                        Text="Preset Description:" ID="locPresetDesc"
-                                                        meta:resourcekey="locPresetDescResource1"></asp:Localize>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding-left: 20px;">
-                                                <asp:Label ID="lblPresetDescription" runat="server"
-                                                    meta:resourcekey="lblPresetDescriptionResource1"></asp:Label>
-                                            </td>
-                                        </tr>
-                                    </div>
+                                    </asp:Panel>
+
+                                    <tr style="line-height: 16px;">
+                                        <td>
+                                            <span style="font-weight: bold;">
+                                                <asp:Localize runat="server"
+                                                    Text="Selected Presets:" ID="locSelectedPresets"
+                                                    meta:resourcekey="locSelectedPresetsResource1"></asp:Localize>
+                                            </span>
+                                        </td>
+                                        <td style="padding-left: 20px;" colspan="2">
+                                            <asp:Label ID="lblSelectedPresets" runat="server"
+                                                meta:resourcekey="lblSelectedPresetsResource1"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="line-height: 16px;">
+                                            <span style="font-weight: bold;">
+                                                <asp:Localize runat="server"
+                                                    Text="Preset Description:" ID="locPresetDesc"
+                                                    meta:resourcekey="locPresetDescResource1"></asp:Localize>
+                                            </span>
+                                        </td>
+                                        <td style="padding-left: 20px;" colspan="2">
+                                            <asp:Label ID="lblPresetDescription" runat="server"
+                                                meta:resourcekey="lblPresetDescriptionResource1"></asp:Label>
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                             <div class="clear">
@@ -332,14 +328,14 @@
             </td>
         </tr>
         <tr>
-            <td valign="top" style="width: 320px">
+            <td valign="top" style="width: 100%">
                 <div style="display: block;">
                     <div class="section_top_large">
                         &nbsp;
                     </div>
                     <div class="section_large">
                         <div class="combopart">
-                            <div class="header" style="width: 980px;">
+                            <div class="header" style="width: 670px;">
                                 <div class="content">
                                     <div class="text" style="float: left">
                                         <label>
@@ -351,48 +347,54 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="header" style="width: 980px;">
+                            <div class="header" style="width: 670px;">
                                 <div class="content">
                                     <div class="text" style="float: left">
                                         <table style="width: 100%">
                                             <tr>
                                                 <td>
-                                                    <span style="font-weight: bold; font-size: 12px;"><asp:Localize runat="server" 
-                                                Text="Measurement Device" ID="locMeasurementDevice" 
-                                                meta:resourcekey="locMeasurementDeviceResource1"></asp:Localize>
+                                                    <span style="font-weight: bold; font-size: 12px;">
+                                                        <asp:Localize runat="server"
+                                                            Text="Measurement Device" ID="locMeasurementDevice"
+                                                            meta:resourcekey="locMeasurementDeviceResource1"></asp:Localize>
                                                     </span>
                                                 </td>
                                                 <td style="width: 10px;">
                                                     <span style="font-weight: bold;">:</span>
                                                 </td>
-                                                <td style="font-weight: normal; font-size: 12px;"><asp:Label ID="lblMeasurementDevice" runat="server" 
-                                                meta:resourcekey="lblMeasurementDeviceResource1"></asp:Label>
+                                                <td style="font-weight: normal; font-size: 12px;">
+                                                    <asp:Label ID="lblMeasurementDevice" runat="server"
+                                                        meta:resourcekey="lblMeasurementDeviceResource1"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <span style="font-weight: bold; font-size: 12px;"><asp:Localize runat="server" Text="Illuminant" 
-                                                ID="locIlluminant" meta:resourcekey="locIlluminantResource1"></asp:Localize>t
+                                                    <span style="font-weight: bold; font-size: 12px;">
+                                                        <asp:Localize runat="server" Text="Illuminant"
+                                                            ID="locIlluminant" meta:resourcekey="locIlluminantResource1"></asp:Localize>t
                                                     </span>
                                                 </td>
                                                 <td>
                                                     <span style="font-weight: bold;">:</span>
                                                 </td>
-                                                <td style="font-weight: normal; font-size: 12px;"><asp:Label ID="lblIlluminant" runat="server" 
-                                                meta:resourcekey="lblIlluminantResource1"></asp:Label>
+                                                <td style="font-weight: normal; font-size: 12px;">
+                                                    <asp:Label ID="lblIlluminant" runat="server"
+                                                        meta:resourcekey="lblIlluminantResource1"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <span style="font-weight: bold; font-size: 12px;"><asp:Localize runat="server" Text="Observer" 
-                                                ID="locObserver" meta:resourcekey="locObserverResource1"></asp:Localize>
+                                                    <span style="font-weight: bold; font-size: 12px;">
+                                                        <asp:Localize runat="server" Text="Observer"
+                                                            ID="locObserver" meta:resourcekey="locObserverResource1"></asp:Localize>
                                                     </span>
                                                 </td>
                                                 <td style="width: 10px;">
                                                     <span style="font-weight: bold;">:</span>
                                                 </td>
-                                                <td style="font-weight: normal; font-size: 12px;"> <asp:Label ID="lblObserver" runat="server" 
-                                                meta:resourcekey="lblObserverResource1"></asp:Label>
+                                                <td style="font-weight: normal; font-size: 12px;">
+                                                    <asp:Label ID="lblObserver" runat="server"
+                                                        meta:resourcekey="lblObserverResource1"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -403,7 +405,8 @@
                                                 <td style="width: 10px;">
                                                     <span style="font-weight: bold;">:</span>
                                                 </td>
-                                                <td style="font-weight: normal; font-size: 12px;"><asp:Label ID="lblDesitytype" runat="server"></asp:Label>
+                                                <td style="font-weight: normal; font-size: 12px;">
+                                                    <asp:Label ID="lblDesitytype" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -414,7 +417,8 @@
                                                 <td style="width: 10px;">
                                                     <span style="font-weight: bold;">:</span>
                                                 </td>
-                                                <td style="font-weight: normal; font-size: 12px;"><asp:Label ID="lblUVMode" runat="server" ></asp:Label>
+                                                <td style="font-weight: normal; font-size: 12px;">
+                                                    <asp:Label ID="lblUVMode" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
@@ -425,7 +429,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="panelMeasurmentSettings" style="padding-left: 10px; width: 980px;">
+                            <div id="panelMeasurmentSettings" style="padding-left: 10px; width: 670px;">
                                 <table style="vertical-align: top; width: 100%;">
                                     <tr>
                                         <td style="width: 50%; vertical-align: top;">
@@ -485,7 +489,12 @@
                                     </tr>
                                 </table>
                             </div>
+                            <div class="clear">
+                            </div>
                         </div>
+                    </div>
+                    <div class="section_bottom_large">
+                        &nbsp;
                     </div>
                 </div>
             </td>
@@ -494,12 +503,12 @@
             <td>
                 <table style="width: 100%; vertical-align: top;">
                     <tr>
-                        <td style="vertical-align: top;">
-                            <div id="Div_OptChart"  runat="server" style="display: block;">
+                        <td style="vertical-align: top; width: 320px;">
+                            <asp:Panel ID="tdValidationSetting" runat="server" Visible="false">
                                 <div class="section_small_top">
                                     &nbsp;
                                 </div>
-                                <div class="section_small_middle">
+                                <div class="section_small_middle" style="height: auto; min-height: 320px !important;">
                                     <div class="combopart">
                                         <div class="header">
                                             <div class="content">
@@ -542,15 +551,16 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="width: 40%">
-                                                        <span style="font-weight: bold;"><asp:Localize runat="server" 
-                                                            Text="Validation Device" ID="locVali_MeaDevice" 
-                                                            meta:resourcekey="locVali_MeaDeviceResource1"></asp:Localize></span>
+                                                        <span style="font-weight: bold;">
+                                                            <asp:Localize runat="server"
+                                                                Text="Validation Device" ID="locVali_MeaDevice"
+                                                                meta:resourcekey="locVali_MeaDeviceResource1"></asp:Localize></span>
                                                     </td>
                                                     <td style="width: 10px;">
                                                         <span style="font-weight: bold;">:</span>
                                                     </td>
                                                     <td>
-                                                        <asp:Label ID="lblVali_MeaDevice" runat="server" 
+                                                        <asp:Label ID="lblVali_MeaDevice" runat="server"
                                                             meta:resourcekey="lblVali_MeaDeviceResource1"></asp:Label>
                                                     </td>
                                                 </tr>
@@ -594,11 +604,11 @@
                                 <div class="section_small_bottom">
                                     &nbsp;
                                 </div>
-                            </div>
+                            </asp:Panel>
                         </td>
                         <td style="width: 0px"></td>
-                        <td style="vertical-align: top;">
-                            <div id="Div_OffSetPrintingInformation" runat="server" style="display: block;">
+                        <td style="vertical-align: top; width: 320px;">
+                            <asp:Panel ID="trOffSetPrintingInfo" runat="server" Visible="false">
                                 <div class="section_small_top">
                                     &nbsp;
                                 </div>
@@ -625,7 +635,8 @@
                                                     <td style="width: 10px;">
                                                         <span style="font-weight: bold;">:</span>
                                                     </td>
-                                                    <td> <asp:Label ID="lblInkOderTxt" runat="server"></asp:Label>
+                                                    <td>
+                                                        <asp:Label ID="lblInkOderTxt" runat="server"></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -635,7 +646,8 @@
                                                     <td style="width: 10px;">
                                                         <span style="font-weight: bold;">:</span>
                                                     </td>
-                                                    <td><asp:Label ID="lblFountainSolution" runat="server"></asp:Label>
+                                                    <td>
+                                                        <asp:Label ID="lblFountainSolution" runat="server"></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -645,7 +657,8 @@
                                                     <td style="width: 10px;">
                                                         <span style="font-weight: bold;">:</span>
                                                     </td>
-                                                    <td><asp:Label ID="lblBlanket" runat="server"></asp:Label>
+                                                    <td>
+                                                        <asp:Label ID="lblBlanket" runat="server"></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -655,7 +668,8 @@
                                                     <td style="width: 10px;">
                                                         <span style="font-weight: bold;">:</span>
                                                     </td>
-                                                    <td><asp:Label ID="lblBlanketAge" runat="server"></asp:Label>
+                                                    <td>
+                                                        <asp:Label ID="lblBlanketAge" runat="server"></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -665,7 +679,8 @@
                                                     <td style="width: 10px;">
                                                         <span style="font-weight: bold;">:</span>
                                                     </td>
-                                                    <td><asp:Label ID="lblScreening" runat="server"></asp:Label>
+                                                    <td>
+                                                        <asp:Label ID="lblScreening" runat="server"></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -675,7 +690,8 @@
                                                     <td style="width: 10px;">
                                                         <span style="font-weight: bold;">:</span>
                                                     </td>
-                                                    <td><asp:Label ID="lblCoating" runat="server"></asp:Label>
+                                                    <td>
+                                                        <asp:Label ID="lblCoating" runat="server"></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -685,7 +701,8 @@
                                                     <td style="width: 10px;">
                                                         <span style="font-weight: bold;">:</span>
                                                     </td>
-                                                    <td><asp:Label ID="lblProjctType" runat="server"></asp:Label>
+                                                    <td>
+                                                        <asp:Label ID="lblProjctType" runat="server"></asp:Label>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -695,15 +712,15 @@
                                 <div class="section_small_bottom">
                                     &nbsp;
                                 </div>
-                            </div>
+                            </asp:Panel>
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
         <tr id="trRetragetting" runat="server" visible="false">
-            <td>
-                <table style="width: 100%; vertical-align: top;">
+            <td style="vertical-align: top; width: 320px;">
+                <table style="width: 50%; vertical-align: top;">
                     <tr>
                         <td style="vertical-align: top;">
                             <div id="Div1" runat="server" style="display: block;">
@@ -712,7 +729,7 @@
                                 </div>
                                 <div class="section_small_middle">
                                     <div class="combopart">
-                                        <div class="header">
+                                        <div class="header" style="width: 310px;">
                                             <div class="content">
                                                 <div class="text" style="float: left">
                                                     <label>
@@ -723,31 +740,36 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <table style="width: 100%; vertical-align: top;">
+                                        <table style="vertical-align: top;">
                                             <tr>
-                                                <td style="width: 40%">
+                                                <td style="vertical-align: top;">
                                                     <span style="font-weight: bold;">Device
                                                     </span>&nbsp;
                                                 </td>
-                                                <td style="width: 10px;">
+                                                <td style="vertical-align: top;">
                                                     <span style="font-weight: bold;">:</span>
                                                 </td>
-                                                <td><asp:Label ID="lblRetargetingDeviceName" runat="server"></asp:Label>
+                                                <td style="vertical-align: top; width: 60%">
+                                                    <asp:Label ID="lblRetargetingDeviceName" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 40%">
+                                                <td style="vertical-align: top;">
                                                     <span style="font-weight: bold;">Print Condition
                                                     </span>&nbsp;
                                                 </td>
-                                                <td style="width: 10px;">
+                                                <td style="vertical-align: top;">
                                                     <span style="font-weight: bold;">:</span>
                                                 </td>
-                                                <td><asp:Label ID="lblRetargetingPrintCondition" runat="server"></asp:Label>
+                                                <td style="vertical-align: top; width: 60%;">
+                                                    <asp:Label ID="lblRetargetingPrintCondition" runat="server"></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
+                                </div>
+                                <div class="section_small_bottom">
+                                    &nbsp;
                                 </div>
                             </div>
 

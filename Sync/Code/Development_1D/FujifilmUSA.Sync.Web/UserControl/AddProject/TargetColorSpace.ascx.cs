@@ -106,6 +106,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
 
                 //------If 1D project then pass NewPaperScaling LAB values--------//
+                SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling.Checked;
                 SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(txtPaper_L.Text);
                 SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(txtPaper_a.Text);
                 SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(txtPaper_b.Text);
