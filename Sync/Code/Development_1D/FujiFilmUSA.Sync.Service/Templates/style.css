@@ -566,6 +566,7 @@ td.Gray
 .section_small_middle {
     background: url(../Images/section_smallbox_bg.png) repeat-y top left;
     overflow: hidden;
+
 }
 
     .section_small_middle .combopart {
@@ -592,4 +593,20 @@ td.Gray
     clear: both;
     font-size: 1px;
     height: 0;
-    o
+    overflow: hidden;
+}
+.breakWord100 {
+    width: 20% !important;
+    /*max-width: 100px !important;*/
+    word-break: break-all !important;
+    word-wrap: break-word !important;
+    line-height: 15px;
+}
+
+.breakWord90 {
+    width: 20% !important;
+    /*max-width: 20% !important;*/
+    word-break: break-all !important;
+    word-wrap: break-word !important;
+    line-height: 15px;
+}

@@ -1,10 +1,11 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <title>Spot Project Patch Details</title>
     <link href="#csspath#" rel="stylesheet" type="text/css" />
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />   
 </head>
 <body>
     <!--------------------------------------- : Page 1 : ------------------------------------------------>
@@ -176,7 +177,7 @@
                                         <div style="padding-left: 10px; width: 670px;">
                                             <table style="vertical-align: top; width: 100%;">
                                                 <tr>
-                                                    <td class="breakWord90">
+                                                    <td class="breakWord90" style="width:25% !important;">
                                                         <span style="font-weight: bold;">
                                                             Target Print Condition
                                                         </span>
@@ -201,52 +202,7 @@
                                                         <span class="breakWord100">###SourceProfile###</span>
                                                     </td>
                                                 </tr>
-
-
-                                                <div>
-
-                                                    <tr>
-                                                        <td class="breakWord90">
-                                                            <span style="font-weight: bold;">
-                                                                Relative Paper Scaling
-                                                            </span>
-                                                        </td>
-                                                        <td style="width: 10px;">
-                                                            <span style="font-weight: bold;">:</span>
-                                                        </td>
-                                                        <td>
-                                                            <span>###RelativePaperScalingStatus###</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="breakWord90">
-                                                            <span style="font-weight: bold;">
-                                                                &nbsp;&nbsp; Paper L* a* b* Values
-                                                            </span>
-                                                        </td>
-                                                        <td style="width: 10px;">
-                                                            <span style="font-weight: bold;">:</span>
-                                                        </td>
-                                                        <td>
-                                                            <span> ###PaperL*a*b*Values### </span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="breakWord90">
-                                                            <span style="font-weight: bold;">
-                                                                &nbsp;&nbsp; Min L* Patch Values
-                                                            </span>
-                                                        </td>
-                                                        <td style="width: 10px;">
-                                                            <span style="font-weight: bold;">:</span>
-                                                        </td>
-                                                        <td>
-                                                            <span> ###MinL*PatchValues### </span>
-                                                        </td>
-                                                    </tr>
-
-                                                </div>
-
+                                               ###RelativeScallingBlock###
                                                 <tr style="line-height: 16px;">
                                                     <td>
                                                         <span style="font-weight: bold;">
@@ -405,7 +361,7 @@
                                                             <tr>
                                                                 <td colspan="3">
 
-                                                                    <img src="###BaseChartContent###" />
+                                                                    <img src="data:image/png;base64,###BaseChartContent###" />
 
                                                                 </td>
                                                             </tr>
@@ -429,7 +385,7 @@
                                                             <tr>
                                                                 <td colspan="3">
 
-                                                                    <img src="###OptimizationChartContent###" />
+                                                                    <img src="data:image/png;base64,###OptimizationChartContent###" />
 
                                                                 </td>
                                                             </tr>
@@ -454,285 +410,18 @@
                             <table style="width: 100%; vertical-align: top;">
                                 <tr>
                                     <td style="vertical-align: top; width: 320px;">
-                                        <div>
-
-                                            <div class="section_small_top">
-                                                &nbsp;
-                                            </div>
-                                            <div class="section_small_middle" style="height: auto; min-height: 320px !important;">
-                                                <div class="combopart">
-                                                    <div class="header">
-                                                        <div class="content">
-                                                            <div class="text" style="float: left">
-                                                                <label>
-                                                                    Validation Settings
-                                                                </label>
-                                                            </div>
-                                                            <div class="clear">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div style="border-style:None;padding-left: 5px">
-
-                                                        <table width="100%">
-                                                            <tr>
-                                                                <td style="width: 40%">
-                                                                    <span style="font-weight: bold;">
-                                                                        Validation Metric
-                                                                    </span>&nbsp;
-                                                                </td>
-                                                                <td style="width: 10px;">
-                                                                    <span style="font-weight: bold;">:</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span>###ValidationMetric###</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 40%">
-                                                                    <span style="font-weight: bold;">
-                                                                        Metric Description
-                                                                    </span>&nbsp;
-                                                                </td>
-                                                                <td style="width: 10px;">
-                                                                    <span style="font-weight: bold;">:</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span>###MetricDescription###</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 40%">
-                                                                    <span style="font-weight: bold;">
-                                                                        Validation Device
-                                                                    </span>
-                                                                </td>
-                                                                <td style="width: 10px;">
-                                                                    <span style="font-weight: bold;">:</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span>###ValidationDevice###</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 40%">
-                                                                    <span style="font-weight: bold;">
-                                                                        UV Mode
-                                                                    </span>&nbsp;
-                                                                </td>
-                                                                <td style="width: 10px;">
-                                                                    <span style="font-weight: bold;">:</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span>###UVModeValidation###</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 40%">
-                                                                    <span style="font-weight: bold;">
-                                                                        Validation Chart
-                                                                    </span>&nbsp;
-                                                                </td>
-                                                                <td style="width: 10px;">
-                                                                    <span style="font-weight: bold;">:</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span>###ValidationChartName###</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="3">
-                                                                    <img src="###ValidationChartContent###" />
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="section_small_bottom">
-                                                &nbsp;
-                                            </div>
-
-                                        </div>
+                                        ###ValidationTab###
                                     </td>
                                     <td style="width: 0px"></td>
                                     <td style="vertical-align: top; width: 320px;">
-                                        <div>
-                                            <div class="section_small_top">
-                                                &nbsp;
-                                            </div>
-                                            <div class="section_small_middle">
-                                                <div class="combopart">
-                                                    <div class="header">
-                                                        <div class="content">
-                                                            <div class="text" style="float: left">
-                                                                <label>
-                                                                    Offset Printing Information
-                                                                </label>
-                                                            </div>
-                                                            <div class="clear">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div style="border-style:None;padding-left: 5px">
-
-                                                        <table style="width: 100%;">
-                                                            <tr>
-                                                                <td style="width: 40%">
-                                                                    <span style="font-weight: bold;">Ink Order</span> &nbsp;
-                                                                </td>
-                                                                <td style="width: 10px;">
-                                                                    <span style="font-weight: bold;">:</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span>###InkOrder###</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 40%">
-                                                                    <span style="font-weight: bold;">Fountain Solution</span> &nbsp;
-                                                                </td>
-                                                                <td style="width: 10px;">
-                                                                    <span style="font-weight: bold;">:</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span>###FountainSolution###</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 40%">
-                                                                    <span style="font-weight: bold;">Blanket</span> &nbsp;
-                                                                </td>
-                                                                <td style="width: 10px;">
-                                                                    <span style="font-weight: bold;">:</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span>###Blanket###</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 40%">
-                                                                    <span style="font-weight: bold;">&nbsp;&nbsp; Blanket Age</span> &nbsp;
-                                                                </td>
-                                                                <td style="width: 10px;">
-                                                                    <span style="font-weight: bold;">:</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span>###BlanketAge###</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 40%">
-                                                                    <span style="font-weight: bold;">Screening</span> &nbsp;
-                                                                </td>
-                                                                <td style="width: 10px;">
-                                                                    <span style="font-weight: bold;">:</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span>###Screening###</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 40%">
-                                                                    <span style="font-weight: bold;">Coating</span> &nbsp;
-                                                                </td>
-                                                                <td style="width: 10px;">
-                                                                    <span style="font-weight: bold;">:</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span>###Coating###</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 40%">
-                                                                    <span style="font-weight: bold;">Project Type</span> &nbsp;
-                                                                </td>
-                                                                <td style="width: 10px;">
-                                                                    <span style="font-weight: bold;">:</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span>###ProjectType###</span>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="section_small_bottom">
-                                                &nbsp;
-                                            </div>
-
-                                        </div>
+                                        ###OfFSetPrintingTab###
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
+                    ###RetargetingTab###
 
-                    <tr>
-                        <td style="vertical-align: top; width: 320px;">
-                            <table style="width: 50%; vertical-align: top;">
-                                <tr>
-                                    <td style="vertical-align: top;">
-                                        <div style="display: block;">
-                                            <div class="section_small_top">
-                                                &nbsp;
-                                            </div>
-                                            <div class="section_small_middle">
-                                                <div class="combopart">
-                                                    <div class="header" style="width: 310px;">
-                                                        <div class="content">
-                                                            <div class="text" style="float: left">
-                                                                <label>
-                                                                    Retargeting
-                                                                </label>
-                                                            </div>
-                                                            <div class="clear">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <table style="vertical-align: top;">
-                                                        <tr>
-                                                            <td style="vertical-align: top;">
-                                                                <span style="font-weight: bold;">
-                                                                    Device
-                                                                </span>&nbsp;
-                                                            </td>
-                                                            <td style="vertical-align: top;">
-                                                                <span style="font-weight: bold;">:</span>
-                                                            </td>
-                                                            <td style="vertical-align: top; width: 60%">
-                                                                <span>###RetargetDeviceName###</span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="vertical-align: top;">
-                                                                <span style="font-weight: bold;">
-                                                                    Print Condition
-                                                                </span>&nbsp;
-                                                            </td>
-                                                            <td style="vertical-align: top;">
-                                                                <span style="font-weight: bold;">:</span>
-                                                            </td>
-                                                            <td style="vertical-align: top; width: 60%;">
-                                                                <span>###RetargetPrintCondition###</span>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="section_small_bottom">
-                                                &nbsp;
-                                            </div>
-                                        </div>
-
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
                 </table>
             </td>
         </tr>

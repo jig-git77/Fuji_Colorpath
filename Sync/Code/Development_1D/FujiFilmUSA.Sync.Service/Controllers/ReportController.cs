@@ -8,6 +8,8 @@ using FujiFilmUSA.Sync.Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -19,12 +21,13 @@ using System.Web.Http.Controllers;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
-    public class ReportController : BaseController, IViewReportSingleMeasurement, IViewReportGrading, IViewExport
+    public class ReportController : BaseController, IViewReportSingleMeasurement, IViewReportGrading, IViewExport, IViewMeasurementSetting
     {
         #region Variable Declarations
         private PresenterReportSingleMeasurement _presenterReportSingleMeasurement;
         private PresenterExport _presenterExport;
         private PresenterReportGrading _presenterReportGrading;
+        private PresenterMeasurementSetting _presenterMeasurementSetting;
         public decimal DtELimit = 0;
         private const string _InvalidMeasurementId = "Error_Invalid_MeasurementId";
         private const string _InvalidIsAverageOfMeasurements = "Error_Invalid_IsAverageOfMeasurements";
@@ -46,6 +49,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _presenterReportSingleMeasurement = new PresenterReportSingleMeasurement(this);
             _presenterReportGrading = new PresenterReportGrading(this);
             _presenterExport = new PresenterExport(this);
+            _presenterMeasurementSetting = new PresenterMeasurementSetting(this);
             base.Initialize(controllerContext);
         }
         #endregion
@@ -1233,11 +1237,18 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 {
                     Directory.CreateDirectory(objReportPDF.PDFPath);
                 }
-                objReportPDF.PDF_NAME = reportPreviewPrintCondition.Metric_TargetPrintCond+ "_ReportPreviewPrintCondition.PDF";                
+                if (reportPreviewPrintCondition.Show_ValidationBox)
+                {
+                    reportPreviewPrintCondition.ValidationChart_image = GenerateImageForPreviewPrintCondition((short)reportPreviewPrintCondition.ValidationChartId);
+                }
+                reportPreviewPrintCondition.BaseChart_image = GenerateImageForPreviewPrintCondition((short)reportPreviewPrintCondition.BaseChartId);
+                reportPreviewPrintCondition.OptimizationChart_image = GenerateImageForPreviewPrintCondition((short)reportPreviewPrintCondition.OptimizationChartId);
+
+                objReportPDF.PDF_NAME = reportPreviewPrintCondition.Metric_TargetPrintCond + "_ReportPreviewPrintCondition.PDF";
                 objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
                 objReportPDF.ReportType = (int)enumReportType.ReportPrintPreviewCondition;
                 objReportPDF.PreviewPrintCondition = reportPreviewPrintCondition;
-
+                
 
                 objReportPDF.GenerateClientReportPDF();
                 string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
@@ -1980,6 +1991,61 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 return 0;
             }
         }
+
+        private string GenerateImageForPreviewPrintCondition(short imageid)
+        {
+            string base64String = string.Empty;
+            byte[] image = null;
+            ReferenceChartTypeId = imageid;
+            _presenterMeasurementSetting.GetReferenceChartTypeImage();
+            image = ReferenceChartTypeImage;
+            var stream = new MemoryStream();
+            stream.Write(image, 0, image.Length);
+            var bitmap = new Bitmap(stream);
+            base64String=Convert.ToBase64String(stream.ToArray());
+            //Image ImageResize = (Image)bitmap;
+            //base64String = SetImageSize(ImageResize);
+            return base64String.ToString();
+
+        }
+        private string SetImageSize(Image ImageResize)
+        {
+            string base64String = string.Empty;
+            double aw = 300;
+            double ah = 245;
+            double iw = ImageResize.Width;
+            double ih = ImageResize.Height;
+
+            double rw = aw / iw;
+            double rh = ah / ih;
+            double ratio;
+            if (rw < rh)
+            {
+                ratio = rw;
+            }
+            else
+            {
+                ratio = rh;
+            }
+            int nw = Convert.ToInt32(iw * ratio);
+            int nh = Convert.ToInt32(ih * ratio);
+
+            System.Drawing.Bitmap resizedImage = new System.Drawing.Bitmap(nw, nh);
+            System.Drawing.Graphics.FromImage((System.Drawing.Image)resizedImage).DrawImage(ImageResize, 0, 0, nw, nh);
+
+            System.Web.HttpContext.Current.Response.ContentType = "image/jpg";
+            resizedImage.Save(System.Web.HttpContext.Current.Response.OutputStream, ImageFormat.Jpeg);
+            using (MemoryStream m = new MemoryStream())
+            {
+                ImageResize.Save(m, ImageResize.RawFormat);
+                byte[] imageBytes = m.ToArray();
+
+                // Convert byte[] to Base64 String
+                base64String = Convert.ToBase64String(imageBytes);
+                return base64String;
+            }
+        }
+
         #endregion
 
         #region IViewReportSingleMeasurement Members
@@ -2013,6 +2079,40 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public DataTable dtPatchDetails { get; set; }
         public SpotProjectChartSetting SpotProjectChartSetting { get; set; }
         public string SpotProjectIDs { get; set; }
+        #endregion
+
+        #region IViewMeasurementSetting Members
+        public List<Illuminant> Illumin { get; set; }
+        public List<ObserverType> Observer { get; set; }
+        public int DeviceId { get; set; }
+        public List<MeasurementDevice> MeasurementDevices { get; set; }
+        public int MeasurementDeviceId { get; set; }
+        public List<ReferenceChartType> ReferenceChartType { get; set; }
+        public byte[] ReferenceChartTypeImage { get; set; }
+
+        public int ChartDisplayType { get; set; }
+        public List<FujifilmUSA.Sync.Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
+
+        public ELicenseType LicenseType { get; set; }
+        public int ProjectTypeID
+        {
+            get
+            {
+                return SessionManager.Instance.CurrentProject.ProjectTypeId;
+            }
+        }
+
+        public int MetricTargetPresetID { get; set; }
+        public Dictionary<int, string> ReTargetProjectList { get; set; }
+        public bool IsSpotTargetType
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary);
+            }
+        }
+
+        public short PrintingTypeId { get; set; }
         #endregion
     }
 }

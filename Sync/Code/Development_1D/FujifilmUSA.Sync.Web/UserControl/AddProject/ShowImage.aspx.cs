@@ -109,6 +109,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             resizedImage.Save(System.Web.HttpContext.Current.Response.OutputStream, ImageFormat.Jpeg);           
         }
 
+        
 
         //public void DownloadImageFromUrl(string imageUrl)
         //{

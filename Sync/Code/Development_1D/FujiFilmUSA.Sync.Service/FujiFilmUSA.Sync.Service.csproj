@@ -116,11 +116,17 @@
     <Content Include="Images\Logo-report.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\Report-Title.png" />
+    <Content Include="Images\section_contant_top.png" />
+    <Content Include="Images\section_line_bg.png" />
+    <Content Include="Images\section_smallbox_bg.png" />
+    <Content Include="Images\section_smallbox_bottom.png" />
+    <Content Include="Images\section_smallbox_top.png" />
     <Content Include="Images\SpotProjectReport.png" />
     <Content Include="Images\summary-icon.png" />
     <Content Include="Images\summary-title-bg.gif" />
     <Content Include="Images\VStatusFailedIcon.png" />
     <Content Include="Images\VStatusSuccessIcon.png" />
+    <Content Include="Templates\kendoPrepressPreviewCondition.htm" />
     <Content Include="Templates\kendoPrepressSingleMeasurement.htm" />
     <Content Include="Templates\kendoPrepressSingleMeasurement_Default.htm" />
     <Content Include="Templates\kendoPrepressSingleMeasurement_SpotProject.htm" />

@@ -44,7 +44,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lnkbtnDownloadReport.Attributes.Add("onClick", "return false;");
             hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
             hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
             btnValidationSetup.Visible = IsXmfNewProject;

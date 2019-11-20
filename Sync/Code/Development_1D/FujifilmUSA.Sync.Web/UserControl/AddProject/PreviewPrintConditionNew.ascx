@@ -25,7 +25,19 @@
         SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
         AUTH_TOKEN = $("#hdfAuthToken").val();
     });
-    function DownloadPrintPreviewReport(obj) {
+    function DownloadPrintPreviewReport() {
+        var Show_ValidationBox_hdn = false;
+        var Show_OffSetPrintingBox_hdn = false;
+        var Show_RetargetingBox_hdn = false;
+        if ($("#<%= hdnShowValidationBox.ClientID %>").val() == "1") {
+            Show_ValidationBox_hdn = true;
+        }
+        if ($("#<%= hdnShowOffSetPrinting.ClientID %>").val() == "1") {
+            Show_OffSetPrintingBox_hdn = true;
+        }
+        if ($("#<%= hdnShowRetargeting.ClientID %>").val() == "1") {
+            Show_RetargetingBox_hdn = true;
+        }
 
         var apiParameter = {
             Description_Media: $("#<%= lblMedia.ClientID %>").text(),
@@ -62,9 +74,9 @@
             Retargeting_Device: $("#<%= lblRetargetingDeviceName.ClientID %>").text(),
             Retargeting_PrintCondition: $("#<%= lblRetargetingPrintCondition.ClientID %>").text(),
 
-            Show_ValidationBox: $("#<%= hdnShowValidationBox.ClientID %>").val(),
-            Show_OffSetPrintingBox: $("#<%= hdnShowOffSetPrinting.ClientID %>").val(),
-            Show_RetargetingBox: $("#<%= hdnShowRetargeting.ClientID %>").val(),
+            Show_ValidationBox:  Show_ValidationBox_hdn,
+            Show_OffSetPrintingBox: Show_OffSetPrintingBox_hdn,
+            Show_RetargetingBox: Show_RetargetingBox_hdn,
             BaseChartId: $("#<%= hdnBaseChartId.ClientID %>").val(),
             OptimizationChartId: $("#<%= hdnOptimizationChartId.ClientID %>").val(),
             ValidationChartId: $("#<%= hdnValidationChartId.ClientID %>").val(),
@@ -84,8 +96,7 @@
                 var filename = '~' + response.data;
                 window.location.href = SERVICE_BASE_URL + '/api/analyze/downloadfile?filepath=' + filename;
             }
-        }, function (XMLHttpRequest, textStatus, errorThrown) {
-            kendo.ui.progress($('#divReport'), false);
+        }, function (XMLHttpRequest, textStatus, errorThrown) {           
             if (XMLHttpRequest.status == 401) {
                 ShowDialog("You are not authorized user. Please login again.", "Message");
             } else {
@@ -128,7 +139,7 @@
                 meta:resourcekey="locSaveResource1"></asp:Localize>
         </span>
     </asp:LinkButton>
-    <asp:LinkButton ID="lnkbtnDownloadReport" runat="server" CssClass="button" OnClientClick="javascript:DownloadPrintPreviewReport(this);">
+    <asp:LinkButton ID="lnkbtnDownloadReport" runat="server" CssClass="button" OnClientClick="javascript:DownloadPrintPreviewReport();">
         <span>
             <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/save_icon.png"
                 meta:resourcekey="Image1Resource1" />
