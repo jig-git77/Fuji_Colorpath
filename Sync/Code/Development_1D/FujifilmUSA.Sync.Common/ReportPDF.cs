@@ -352,7 +352,8 @@ namespace FujifilmUSA.Sync.Common
                 }
                 else if (ReportType == 21)//---For Preview Print Condition PDF Export
                 {
-                    FileName = "Templates/kendoPrepressPreviewCondition.htm";
+                      FileName = "Templates/kendoPrepressPreviewCondition.htm";
+                    //FileName = "Templates/kendoPrepressPreviewCondition - Copy.htm";
                 }
 
                 //string FilePath = this._WebURL + FileName;
@@ -2112,50 +2113,6 @@ namespace FujifilmUSA.Sync.Common
 
 
 
-                if (ReportType == 21) // Preview Print Condition
-                {
-                    SBStr.Replace("###Media###", PreviewPrintCondition.Description_Media);
-                    SBStr.Replace("###Colorant###", PreviewPrintCondition.Description_Colorant);
-                    SBStr.Replace("###RipSettings###", PreviewPrintCondition.Description_Colorant);
-                    SBStr.Replace("###Notes###", PreviewPrintCondition.Description_Notes);
-                    SBStr.Replace("###TechnicianName###", PreviewPrintCondition.Description_TechincalName);
-
-                    SBStr.Replace("###TargetPrintCondition###", PreviewPrintCondition.Metric_TargetPrintCond);
-                    SBStr.Replace("###SourceProfile###", PreviewPrintCondition.Metric_TargetPrintCond);
-                    SBStr.Replace("###RelativePaperScalingStatus###", PreviewPrintCondition.Metric_RelativePaperScaling);
-                    SBStr.Replace("###PaperL*a*b*Values###", PreviewPrintCondition.Metric_PaperLabValues);
-                    SBStr.Replace("###MinL*PatchValues###", PreviewPrintCondition.Metric_MinLPatchValues);
-                    SBStr.Replace("###SelectedPresets###", PreviewPrintCondition.Metric_SelectedPereset);
-                    SBStr.Replace("###PresetDescription###", PreviewPrintCondition.Metric_PresetDescription);
-
-                    SBStr.Replace("###MeasurementDevice###", PreviewPrintCondition.Measurement_Device);
-                    SBStr.Replace("###Illuminant###", PreviewPrintCondition.Measurement_Illuminat);
-                    SBStr.Replace("###Observer###", PreviewPrintCondition.Measurement_Observer);
-                    SBStr.Replace("###DensityType###", PreviewPrintCondition.Measurement_DensityType);
-                    SBStr.Replace("###UVMode###", PreviewPrintCondition.Measurement_UVMode);
-                    SBStr.Replace("###BaseChartName###", PreviewPrintCondition.Measurement_BaseChart);
-                    SBStr.Replace("###OptimizationChartName###", PreviewPrintCondition.Measurement_OptimizationChart);
-
-                    SBStr.Replace("###ValidationMetric###", PreviewPrintCondition.Validation_Metric);
-                    SBStr.Replace("###MetricDescription###", PreviewPrintCondition.Validation_MetricDescription);
-                    SBStr.Replace("###ValidationDevice###", PreviewPrintCondition.Validation_MeasurementDevice);
-                    SBStr.Replace("###UVModeValidation###", PreviewPrintCondition.Validation_UVMode); ;
-                    SBStr.Replace("###ValidationChartName###", PreviewPrintCondition.Validation_ValidationChart);
-
-                    SBStr.Replace("###InkOrder###", PreviewPrintCondition.OffSetPrinting_InkOrder);
-                    SBStr.Replace("###FountainSolution###", PreviewPrintCondition.OffSetPrinting_FountainSolution);
-                    SBStr.Replace("###Blanket###", PreviewPrintCondition.OffSetPrinting_Blanket);
-                    SBStr.Replace("###BlanketAge###", PreviewPrintCondition.OffSetPrinting_BlanketAge);
-                    SBStr.Replace("###Screening###", PreviewPrintCondition.OffSetPrinting_Screening);
-                    SBStr.Replace("###Coating###", PreviewPrintCondition.OffSetPrinting_Coating);
-                    SBStr.Replace("###ProjectType###", PreviewPrintCondition.OffSetPrinting_ProjectType);
-
-                    SBStr.Replace("###RetargetDeviceName###", PreviewPrintCondition.Retargeting_Device);
-                    SBStr.Replace("###RetargetPrintCondition###", PreviewPrintCondition.Retargeting_PrintCondition);
-
-
-                }
-
                 //SBStr.Replace("###LComparison###", this.chartContent.LComparisionChart);
                 //SBStr.Replace("###GrayL###", this.chartContent.LGrayBalanceChart);
                 //SBStr.Replace("###GrayA###", this.chartContent.AGrayBalanceChart);
@@ -2172,11 +2129,8 @@ namespace FujifilmUSA.Sync.Common
 
         public StringBuilder SetPreviewPrintCondition(StringBuilder SBStr)
         {
-            StringBuilder validationStr = new StringBuilder();
-            StringBuilder offSetPrintingStr = new StringBuilder();
-            StringBuilder retargetingStr = new StringBuilder();
-            StringBuilder relativePaperSaclling = new StringBuilder();
-            DataTable DT = new DataTable();
+            StringBuilder validationStr = new StringBuilder();           
+            
             try
             {
                 //string currentBaseUrl = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority +
@@ -2216,381 +2170,76 @@ namespace FujifilmUSA.Sync.Common
 
                     if (!string.IsNullOrEmpty(PreviewPrintCondition.Metric_RelativePaperScaling) && Convert.ToString(PreviewPrintCondition.Metric_RelativePaperScaling).ToLower() == "enabled")
                     {
-
-                        relativePaperSaclling.Append("<div>");
-                        relativePaperSaclling.Append("<tr>");
-                        relativePaperSaclling.Append("<td class=\"breakWord90\">");
-                        relativePaperSaclling.Append("<span style =\"font-weight:bold;\" >");
-                        relativePaperSaclling.Append("Relative Paper Scaling");
-                        relativePaperSaclling.Append("</span>");
-                        relativePaperSaclling.Append("</td>");
-                        relativePaperSaclling.Append("<td style =\"width:10px;\" >");
-                        relativePaperSaclling.Append("<span style=\"font-weight: bold;\" >:</span>");
-                        relativePaperSaclling.Append("</td>");
-                        relativePaperSaclling.Append("<td>");
-                        relativePaperSaclling.Append("<span>###RelativePaperScalingStatus###</span>");
-                        relativePaperSaclling.Append("</td>");
-                        relativePaperSaclling.Append("</tr>");
-                        relativePaperSaclling.Append("<tr>");
-                        relativePaperSaclling.Append("<td class=\"breakWord90\">");
-                        relativePaperSaclling.Append("<span style =\"font-weight: bold;\" >");
-                        relativePaperSaclling.Append("&nbsp;&nbsp; Paper L* a* b* Values");
-                        relativePaperSaclling.Append("</span>");
-                        relativePaperSaclling.Append("</td>");
-                        relativePaperSaclling.Append("<td style =\"width:10px;\">");
-                        relativePaperSaclling.Append("<span style=\"font-weight: bold;\">:</span>");
-                        relativePaperSaclling.Append("</td>");
-                        relativePaperSaclling.Append("<td>");
-                        relativePaperSaclling.Append("<span> ###PaperL*a*b*Values### </span>");
-                        relativePaperSaclling.Append("</td>");
-                        relativePaperSaclling.Append("</tr>");
-                        relativePaperSaclling.Append("<tr>");
-                        relativePaperSaclling.Append("<td class=\"breakWord90\">");
-                        relativePaperSaclling.Append("<span style =\"font-weight: bold;\" >");
-                        relativePaperSaclling.Append("&nbsp;&nbsp; Min L* Patch Values");
-                        relativePaperSaclling.Append("</span>");
-                        relativePaperSaclling.Append("</td>");
-                        relativePaperSaclling.Append("<td style =\"width:10px;\" >");
-                        relativePaperSaclling.Append("<span style=\"font-weight: bold;\" >:</span>");
-                        relativePaperSaclling.Append("</td>");
-                        relativePaperSaclling.Append("<td>");
-                        relativePaperSaclling.Append("<span> ###MinL*PatchValues### </span>");
-                        relativePaperSaclling.Append("</td>");
-                        relativePaperSaclling.Append("</tr>");
-                        relativePaperSaclling.Append("</div>");
-
-
-                        relativePaperSaclling.Replace("###RelativePaperScalingStatus###", GetStringValue(PreviewPrintCondition.Metric_RelativePaperScaling));
-                        relativePaperSaclling.Replace("###PaperL*a*b*Values###", GetStringValue(PreviewPrintCondition.Metric_PaperLabValues));
-                        relativePaperSaclling.Replace("###MinL*PatchValues###", GetStringValue(PreviewPrintCondition.Metric_MinLPatchValues));
-                        relativePaperSaclling.Replace("###SelectedPresets###", GetStringValue(PreviewPrintCondition.Metric_SelectedPereset));
-                        relativePaperSaclling.Replace("###PresetDescription###", GetStringValue(PreviewPrintCondition.Metric_PresetDescription));
-                        SBStr.Replace("###RelativeScallingBlock###", relativePaperSaclling.ToString());
+                        SBStr.Replace("###RelativePaperScalingStatus###", GetStringValue(PreviewPrintCondition.Metric_RelativePaperScaling));
+                        SBStr.Replace("###PaperL*a*b*Values###", GetStringValue(PreviewPrintCondition.Metric_PaperLabValues));
+                        SBStr.Replace("###MinL*PatchValues###", GetStringValue(PreviewPrintCondition.Metric_MinLPatchValues));
+                        SBStr.Replace("###SelectedPresets###", GetStringValue(PreviewPrintCondition.Metric_SelectedPereset));
+                        SBStr.Replace("###PresetDescription###", GetStringValue(PreviewPrintCondition.Metric_PresetDescription));
+                        
+                        SBStr.Replace("###RelativePaperScalingBlock###", string.Empty);
+                        SBStr.Replace("###PaperlabvaluesBlock###", string.Empty);
+                        SBStr.Replace("###MinLpatchBlock###", string.Empty);
                     }
-                    else { SBStr.Replace("###RelativeScallingBlock###", string.Empty); }
+                    else {
+                        //SBStr.Replace("###RelativeScallingBlock###", string.Empty);
+                        SBStr.Replace("###RelativePaperScalingBlock###", "blank-tr");
+                        SBStr.Replace("###PaperlabvaluesBlock###", "blank-tr");
+                        SBStr.Replace("###MinLpatchBlock###", "blank-tr");
+                    }
 
                     SBStr.Replace("###MeasurementDevice###", GetStringValue(PreviewPrintCondition.Measurement_Device));
                     SBStr.Replace("###Illuminant###", GetStringValue(PreviewPrintCondition.Measurement_Illuminat));
                     SBStr.Replace("###Observer###", GetStringValue(PreviewPrintCondition.Measurement_Observer));
                     SBStr.Replace("###DensityType###", GetStringValue(PreviewPrintCondition.Measurement_DensityType));
                     SBStr.Replace("###UVMode###", GetStringValue(PreviewPrintCondition.Measurement_UVMode));
-                    SBStr.Replace("###BaseChartName###", GetStringValue(PreviewPrintCondition.Measurement_BaseChart));
+                    SBStr.Replace("###BaseChartName###", GetStringValue(PreviewPrintCondition.Measurement_BaseChart));                    
                     SBStr.Replace("###BaseChartContent###", PreviewPrintCondition.BaseChart_image);
                     SBStr.Replace("###OptimizationChartName###", GetStringValue(PreviewPrintCondition.Measurement_OptimizationChart));
                     SBStr.Replace("###OptimizationChartContent###", PreviewPrintCondition.OptimizationChart_image);
 
-
-
                     if (PreviewPrintCondition.Show_ValidationBox)
                     {
-                        validationStr.Append("<div>");
-                        validationStr.Append("<div class=\"section_small_top\">");
-                        validationStr.Append("&nbsp;");
-                        validationStr.Append("</div>");
-                        validationStr.Append("<div class=\"section_small_middle\" style=\"height:auto;min-height:320px !important;\">");
-                        validationStr.Append("<div class=\"combopart\">");
-                        validationStr.Append("<div class=\"header\">");
-                        validationStr.Append("<div class=\"content\">");
-                        validationStr.Append("<div class=\"text\" style=\"float:left\">");
-                        validationStr.Append("<label>");
-                        validationStr.Append("Validation Settings");
-                        validationStr.Append("</label>");
-                        validationStr.Append("</div>");
-                        validationStr.Append("<div class=\"clear\">");
-                        validationStr.Append("</div>");
-                        validationStr.Append("</div>");
-                        validationStr.Append("</div>");
-                        validationStr.Append("<div style =\"border-style:none;padding-left:5px;\" >");
-                        validationStr.Append("<table width=\"100%\">");
-                        validationStr.Append("<tr>");
-                        validationStr.Append("<td style =\"width:40%\">");
-                        validationStr.Append("<span style=\"font-weight: bold;\">");
-                        validationStr.Append("Validation Metric");
-                        validationStr.Append("</span>&nbsp;");
-                        validationStr.Append("</td>");
-                        validationStr.Append("<td style =\"width: 10px;\">");
-                        validationStr.Append("<span style=\"font-weight: bold;\">:</span>");
-                        validationStr.Append("</td>");
-                        validationStr.Append("<td>");
-                        validationStr.Append("<span>###ValidationMetric###</span>");
-                        validationStr.Append("</td>");
-                        validationStr.Append("</tr>");
-                        validationStr.Append("<tr>");
-                        validationStr.Append("<td style =\"width: 40%\">");
-                        validationStr.Append("<span style=\"font-weight: bold;\">");
-                        validationStr.Append("Metric Description");
-                        validationStr.Append("</span>&nbsp;");
-                        validationStr.Append("</td>");
-                        validationStr.Append("<td style =\"width: 10px;\" >");
-                        validationStr.Append("<span style=\"font-weight: bold;\">:</span>");
-                        validationStr.Append("</td>");
-                        validationStr.Append("<td>");
-                        validationStr.Append("<span>###MetricDescription###</span>");
-                        validationStr.Append("</td>");
-                        validationStr.Append("</tr>");
-                        validationStr.Append("<tr>");
-                        validationStr.Append("<td style =\"width: 40%\">");
-                        validationStr.Append("<span style=\"font-weight: bold;\">");
-                        validationStr.Append("Validation Device");
-                        validationStr.Append("</span>");
-                        validationStr.Append("</td>");
-                        validationStr.Append("<td style =\"width: 10px;\">");
-                        validationStr.Append("<span style=\"font-weight: bold;\" >:</span>");
-                        validationStr.Append("</td>");
-                        validationStr.Append("<td>");
-                        validationStr.Append("<span>###ValidationDevice###</span>");
-                        validationStr.Append("</td>");
-                        validationStr.Append("</tr>");
-                        validationStr.Append("<tr>");
-                        validationStr.Append("<td style =\"width:40%\">");
-                        validationStr.Append("<span style=\"font-weight: bold;\">");
-                        validationStr.Append("UV Mode");
-                        validationStr.Append("</span>&nbsp;");
-                        validationStr.Append("</td>");
-                        validationStr.Append("<td style =\"width: 10px;\">");
-                        validationStr.Append("<span style=\"font-weight: bold;\">:</span>");
-                        validationStr.Append("</td>");
-                        validationStr.Append("<td>");
-                        validationStr.Append("<span>###UVModeValidation###</span>");
-                        validationStr.Append("</td>");
-                        validationStr.Append("</tr>");
-                        validationStr.Append("<tr>");
-                        validationStr.Append("<td style =\"width: 40%\">");
-                        validationStr.Append("<span style=\"font-weight:bold;\">");
-                        validationStr.Append("Validation Chart");
-                        validationStr.Append("</span>&nbsp;");
-                        validationStr.Append("</td>");
-                        validationStr.Append("<td style =\"width: 10px;\">");
-                        validationStr.Append("<span style=\"font-weight:bold;\">:</span>");
-                        validationStr.Append("</td>");
-                        validationStr.Append("<td>");
-                        validationStr.Append("<span>###ValidationChartName###</span>");
-                        validationStr.Append("</td>");
-                        validationStr.Append("</tr>");
-                        validationStr.Append("<tr>");
-                        validationStr.Append("<td colspan = \"3\">");
-                        validationStr.Append("<img src=\"data:image/png;base64,###ValidationChartContent###\"/>");
-                        validationStr.Append("</td>");
-                        validationStr.Append("</tr>");
-                        validationStr.Append("</table>");
-                        validationStr.Append("</div>");
-                        validationStr.Append("</div>");
-                        validationStr.Append("</div>");
-                        validationStr.Append("<div class=\"section_small_bottom\">");
-                        validationStr.Append("&nbsp;");
-                        validationStr.Append("</div>");
-                        validationStr.Append("</div>");
 
-
-                        validationStr.Replace("###ValidationMetric###", GetStringValue(PreviewPrintCondition.Validation_Metric));
-                        validationStr.Replace("###MetricDescription###", GetStringValue(PreviewPrintCondition.Validation_MetricDescription));
-                        validationStr.Replace("###ValidationDevice###", GetStringValue(PreviewPrintCondition.Validation_MeasurementDevice));
-                        validationStr.Replace("###UVModeValidation###", GetStringValue(PreviewPrintCondition.Validation_UVMode)); 
-                        validationStr.Replace("###ValidationChartName###", GetStringValue(PreviewPrintCondition.Validation_ValidationChart));
-                        validationStr.Replace("###ValidationChartContent###", PreviewPrintCondition.ValidationChart_image);
-                        
-                        SBStr.Replace("###ValidationTab###", validationStr.ToString());
+                        SBStr.Replace("###ValidationMetric###", GetStringValue(PreviewPrintCondition.Validation_Metric));
+                        SBStr.Replace("###MetricDescription###", GetStringValue(PreviewPrintCondition.Validation_MetricDescription));
+                        SBStr.Replace("###ValidationDevice###", GetStringValue(PreviewPrintCondition.Validation_MeasurementDevice));
+                        SBStr.Replace("###UVModeValidation###", GetStringValue(PreviewPrintCondition.Validation_UVMode));
+                        SBStr.Replace("###ValidationChartName###", GetStringValue(PreviewPrintCondition.Validation_ValidationChart));
+                        SBStr.Replace("###ValidationChartContent###", PreviewPrintCondition.ValidationChart_image);
+                       
+                        SBStr.Replace("###ValidationTab###", string.Empty);
                     }
                     else
-                    {
-                        SBStr.Replace("###ValidationTab###", "&nbsp;");
+                    { SBStr.Replace("###ValidationTab###", "blank-td");
                     }
+
                     if (PreviewPrintCondition.Show_OffSetPrintingBox)
                     {
-                        offSetPrintingStr.Append("<div>");
-                        offSetPrintingStr.Append("<div class=\"section_small_top\">");
-                        offSetPrintingStr.Append("&nbsp;");
-                        offSetPrintingStr.Append("</div>");
-                        offSetPrintingStr.Append("<div class=\"section_small_middle\">");
-                        offSetPrintingStr.Append("<div class=\"combopart\">");
-                        offSetPrintingStr.Append("<div class=\"header\">");
-                        offSetPrintingStr.Append("<div class=\"content\">");
-                        offSetPrintingStr.Append("<div class=\"text\" style=\"float: left;\">");
-                        offSetPrintingStr.Append("<label>");
-                        offSetPrintingStr.Append("Offset Printing Information");
-                        offSetPrintingStr.Append("</label>");
-                        offSetPrintingStr.Append("</div>");
-                        offSetPrintingStr.Append("<div class=\"clear\">");
-                        offSetPrintingStr.Append("</div>");
-                        offSetPrintingStr.Append("</div>");
-                        offSetPrintingStr.Append("</div>");
-                        offSetPrintingStr.Append("<div style =\"border-style:none; padding-left:5px\" >");
-                        offSetPrintingStr.Append("<table style=\"width:100%;\">");
-                        offSetPrintingStr.Append("<tr>");
-                        offSetPrintingStr.Append("<td style =\"width: 40%\">");
-                        offSetPrintingStr.Append("<span style=\"font-weight: bold;\">Ink Order</span> &nbsp;");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td style =\"width:10px;\">");
-                        offSetPrintingStr.Append("<span style=\"font-weight:bold;\">:</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td>");
-                        offSetPrintingStr.Append("<span>###InkOrder###</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("</tr>");
-                        offSetPrintingStr.Append("<tr>");
-                        offSetPrintingStr.Append("<td style =\"width:40%\">");
-                        offSetPrintingStr.Append("<span style=\"font-weight:bold;\">Fountain Solution</span> &nbsp;");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td style =\"width:10px;\">");
-                        offSetPrintingStr.Append("<span style=\"font-weight: bold;\">:</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td>");
-                        offSetPrintingStr.Append("<span>###FountainSolution###</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("</tr>");
-                        offSetPrintingStr.Append("<tr>");
-                        offSetPrintingStr.Append("<td style =\"width:40%\">");
-                        offSetPrintingStr.Append("<span style=\"font-weight:bold;\">Blanket</span> &nbsp;");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td style =\"width:10px;\">");
-                        offSetPrintingStr.Append("<span style=\"font-weight:bold;\">:</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td>");
-                        offSetPrintingStr.Append("<span>###Blanket###</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("</tr>");
-                        offSetPrintingStr.Append("<tr>");
-                        offSetPrintingStr.Append("<td style =\"width:40%\">");
-                        offSetPrintingStr.Append("<span style=\"font-weight: bold;\">&nbsp;&nbsp; Blanket Age</span> &nbsp;");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td style =\"width:10px;\" >");
-                        offSetPrintingStr.Append("<span style=\"font-weight:bold;\">:</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td>");
-                        offSetPrintingStr.Append("<span>###BlanketAge###</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("</tr>");
-                        offSetPrintingStr.Append("<tr>");
-                        offSetPrintingStr.Append("<td style =\"width:40%\">");
-                        offSetPrintingStr.Append("<span style=\"font-weight:bold;\">Screening</span> &nbsp;");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td style =\"width:10px;\" >");
-                        offSetPrintingStr.Append("<span style=\"font-weight:bold;\">:</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td>");
-                        offSetPrintingStr.Append("<span>###Screening###</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("</tr>");
-                        offSetPrintingStr.Append("<tr>");
-                        offSetPrintingStr.Append("<td style =\"width:40%\">");
-                        offSetPrintingStr.Append("<span style=\"font-weight: bold;\">Coating</span> &nbsp;");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td style =\"width:10px;\">");
-                        offSetPrintingStr.Append("<span style=\"font-weight:bold;\">:</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td>");
-                        offSetPrintingStr.Append("<span>###Coating###</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("</tr>");
-                        offSetPrintingStr.Append("<tr>");
-                        offSetPrintingStr.Append("<td style =\"width:40%\">");
-                        offSetPrintingStr.Append("<span style=\"font-weight:bold;\">Project Type</span> &nbsp;");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td style =\"width:10px;\">");
-                        offSetPrintingStr.Append("<span style=\"font-weight: bold;\">:</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("<td>");
-                        offSetPrintingStr.Append("<span>###ProjectType###</span>");
-                        offSetPrintingStr.Append("</td>");
-                        offSetPrintingStr.Append("</tr>");
-                        offSetPrintingStr.Append("</table>");
-                        offSetPrintingStr.Append("</div>");
-                        offSetPrintingStr.Append("</div>");
-                        offSetPrintingStr.Append("</div>");
-                        offSetPrintingStr.Append("<div class=\"section_small_bottom\">");
-                        offSetPrintingStr.Append("&nbsp;");
-                        offSetPrintingStr.Append("</div>");
-                        offSetPrintingStr.Append("</div>");
+                        SBStr.Replace("###InkOrder###", GetStringValue(PreviewPrintCondition.OffSetPrinting_InkOrder));
+                        SBStr.Replace("###FountainSolution###", GetStringValue(PreviewPrintCondition.OffSetPrinting_FountainSolution));
+                        SBStr.Replace("###Blanket###", GetStringValue(PreviewPrintCondition.OffSetPrinting_Blanket));
+                        SBStr.Replace("###BlanketAge###", GetStringValue(PreviewPrintCondition.OffSetPrinting_BlanketAge));
+                        SBStr.Replace("###Screening###", GetStringValue(PreviewPrintCondition.OffSetPrinting_Screening));
+                        SBStr.Replace("###Coating###", GetStringValue(PreviewPrintCondition.OffSetPrinting_Coating));
+                        SBStr.Replace("###ProjectType###", GetStringValue(PreviewPrintCondition.OffSetPrinting_ProjectType));
 
-                        offSetPrintingStr.Replace("###InkOrder###", GetStringValue(PreviewPrintCondition.OffSetPrinting_InkOrder));
-                        offSetPrintingStr.Replace("###FountainSolution###", GetStringValue(PreviewPrintCondition.OffSetPrinting_FountainSolution));
-                        offSetPrintingStr.Replace("###Blanket###", GetStringValue(PreviewPrintCondition.OffSetPrinting_Blanket));
-                        offSetPrintingStr.Replace("###BlanketAge###", GetStringValue(PreviewPrintCondition.OffSetPrinting_BlanketAge));
-                        offSetPrintingStr.Replace("###Screening###", GetStringValue(PreviewPrintCondition.OffSetPrinting_Screening));
-                        offSetPrintingStr.Replace("###Coating###", GetStringValue(PreviewPrintCondition.OffSetPrinting_Coating));
-                        offSetPrintingStr.Replace("###ProjectType###", GetStringValue(PreviewPrintCondition.OffSetPrinting_ProjectType));
-
-                        SBStr.Replace("###OfFSetPrintingTab###", offSetPrintingStr.ToString());
+                        SBStr.Replace("###OffsetTab###", string.Empty);
                     }
-                    else { SBStr.Replace("###OfFSetPrintingTab### ", "&nbsp;"); }
+                    else {
+                        SBStr.Replace("###OffsetTab###", "blank-td");
+                    }
 
                     if (PreviewPrintCondition.Show_RetargetingBox)
                     {
+                        SBStr.Replace("###RetargetDeviceName###", GetStringValue(PreviewPrintCondition.Retargeting_Device));
+                        SBStr.Replace("###RetargetPrintCondition###", GetStringValue(PreviewPrintCondition.Retargeting_PrintCondition));
 
-                        retargetingStr.Append("<tr>");
-                        retargetingStr.Append("<td style=\"vertical-align:top; width: 320px;\" >");
-                        retargetingStr.Append("<table style =\"width:50%; vertical-align: top;\" >");
-                        retargetingStr.Append("<tr>");
-                        retargetingStr.Append("<td style =\"vertical-align:top;\" >");
-                        retargetingStr.Append("<div style =\"display:block;\">");
-                        retargetingStr.Append("<div class=\"section_small_top\">");
-                        retargetingStr.Append("&nbsp;");
-                        retargetingStr.Append("</div>");
-                        retargetingStr.Append("<div class=\"section_small_middle\">");
-                        retargetingStr.Append("<div class=\"combopart\">");
-                        retargetingStr.Append("<div class=\"header\" style=\"width: 310px;\">");
-                        retargetingStr.Append("<div class=\"content\">");
-                        retargetingStr.Append("<div class=\"text\" style=\"float: left\">");
-                        retargetingStr.Append("<label>");
-                        retargetingStr.Append("Retargeting");
-                        retargetingStr.Append("</label>");
-                        retargetingStr.Append("</div>");
-                        retargetingStr.Append("<div class=\"clear\">");
-                        retargetingStr.Append("</div>");
-                        retargetingStr.Append("</div>");
-                        retargetingStr.Append("</div>");
-                        retargetingStr.Append("<table style =\"vertical-align:top;\">");
-                        retargetingStr.Append("<tr>");
-                        retargetingStr.Append("<td style=\"vertical-align:top;\">");
-                        retargetingStr.Append("<span style =\"font-weight: bold;\" >");
-                        retargetingStr.Append("Device");
-                        retargetingStr.Append("</ span > &nbsp;");
-                        retargetingStr.Append("</td>");
-                        retargetingStr.Append("<td style =\"vertical-align:top;\" >");
-                        retargetingStr.Append("<span style=\"font-weight:bold;\">:</span>");
-                        retargetingStr.Append("</td>");
-                        retargetingStr.Append("<td style =\"vertical-align:top; width:60%;\" >");
-                        retargetingStr.Append("<span>###RetargetDeviceName###</span>");
-                        retargetingStr.Append("</td>");
-                        retargetingStr.Append("</tr>");
-                        retargetingStr.Append("<tr>");
-                        retargetingStr.Append("<td style=\"vertical-align:top;\">");
-                        retargetingStr.Append("<span style =\"font-weight: bold;\" >");
-                        retargetingStr.Append("Print Condition");
-                        retargetingStr.Append("</span>&nbsp;");
-                        retargetingStr.Append("</td>");
-                        retargetingStr.Append("<td style =\"vertical-align: top;\" >");
-                        retargetingStr.Append("<span style=\"font-weight: bold;\">:</span>");
-                        retargetingStr.Append("</td>");
-                        retargetingStr.Append("<td style =\"vertical-align: top; width: 60%;\" >");
-                        retargetingStr.Append("<span >###RetargetPrintCondition###</span>");
-                        retargetingStr.Append("</td>");
-                        retargetingStr.Append("</tr >");
-                        retargetingStr.Append("</table >");
-                        retargetingStr.Append("</div >");
-                        retargetingStr.Append("</div >");
-                        retargetingStr.Append("<div class=\"section_small_bottom\">");
-                        retargetingStr.Append("&nbsp;");
-                        retargetingStr.Append("</div>");
-                        retargetingStr.Append("</div>");
-                        retargetingStr.Append("</td>");
-                        retargetingStr.Append("</tr>");
-                        retargetingStr.Append("</table>");
-                        retargetingStr.Append("</td>");
-                        retargetingStr.Append("</tr>");
-
-
-                        retargetingStr.Replace("###RetargetDeviceName###", GetStringValue(PreviewPrintCondition.Retargeting_Device));
-                        retargetingStr.Replace("###RetargetPrintCondition###", GetStringValue(PreviewPrintCondition.Retargeting_PrintCondition));
-
-                        SBStr.Replace("###RetargetingTab###", retargetingStr.ToString());
+                        SBStr.Replace("###RetargetingTab###", "block;");
                     }
                     else
                     {
-                        SBStr.Replace("###RetargetingTab###", string.Empty);
+                        SBStr.Replace("###RetargetingTab###", "none;");
                     }
-
-
                 }
 
 
@@ -2610,7 +2259,7 @@ namespace FujifilmUSA.Sync.Common
             {
                 return valuestr;
             }
-            else { return string.Empty; }
+            else { return ""; }
         }
         public void GenerateSpotPatchDetailsReport()
         {

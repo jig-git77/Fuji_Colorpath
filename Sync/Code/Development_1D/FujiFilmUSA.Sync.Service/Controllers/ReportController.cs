@@ -1240,15 +1240,16 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (reportPreviewPrintCondition.Show_ValidationBox)
                 {
                     reportPreviewPrintCondition.ValidationChart_image = GenerateImageForPreviewPrintCondition((short)reportPreviewPrintCondition.ValidationChartId);
-                }
+                }                
                 reportPreviewPrintCondition.BaseChart_image = GenerateImageForPreviewPrintCondition((short)reportPreviewPrintCondition.BaseChartId);
                 reportPreviewPrintCondition.OptimizationChart_image = GenerateImageForPreviewPrintCondition((short)reportPreviewPrintCondition.OptimizationChartId);
 
-                objReportPDF.PDF_NAME = reportPreviewPrintCondition.Metric_TargetPrintCond + "_ReportPreviewPrintCondition.PDF";
+
+                objReportPDF.PDF_NAME = reportPreviewPrintCondition.Metric_TargetPrintCond.Trim()+"_ReportPreviewPrintCondition.PDF";
                 objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
                 objReportPDF.ReportType = (int)enumReportType.ReportPrintPreviewCondition;
                 objReportPDF.PreviewPrintCondition = reportPreviewPrintCondition;
-                
+
 
                 objReportPDF.GenerateClientReportPDF();
                 string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
@@ -2002,12 +2003,50 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             var stream = new MemoryStream();
             stream.Write(image, 0, image.Length);
             var bitmap = new Bitmap(stream);
-            base64String=Convert.ToBase64String(stream.ToArray());
+             base64String = Convert.ToBase64String(stream.ToArray());
             //Image ImageResize = (Image)bitmap;
             //base64String = SetImageSize(ImageResize);
             return base64String.ToString();
 
         }
+
+        private string GenerateImageForPreviewPrintConditionV2(short imageid, out int height, out int width)
+        {
+            string base64String = string.Empty;
+            byte[] image = null;
+            ReferenceChartTypeId = imageid;
+            _presenterMeasurementSetting.GetReferenceChartTypeImage();
+            image = ReferenceChartTypeImage;
+            var stream = new MemoryStream();
+            stream.Write(image, 0, image.Length);
+            var bitmap = new Bitmap(stream);
+            base64String = Convert.ToBase64String(stream.ToArray());
+            Image ImageResize = (Image)bitmap;
+
+            double aw = 300;
+            double ah = 245;
+            double iw = ImageResize.Width;
+            double ih = ImageResize.Height;
+
+            double rw = aw / iw;
+            double rh = ah / ih;
+            double ratio;
+            if (rw < rh)
+            {
+                ratio = rw;
+            }
+            else
+            {
+                ratio = rh;
+            }
+            height = Convert.ToInt32(iw * ratio);
+            width = Convert.ToInt32(ih * ratio);
+
+            //base64String = SetImageSize(ImageResize);
+            return base64String.ToString();
+        }
+
+
         private string SetImageSize(Image ImageResize)
         {
             string base64String = string.Empty;
