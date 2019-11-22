@@ -352,7 +352,7 @@ namespace FujifilmUSA.Sync.Common
                 }
                 else if (ReportType == 21)//---For Preview Print Condition PDF Export
                 {
-                      FileName = "Templates/kendoPrepressPreviewCondition.htm";
+                    FileName = "Templates/kendoPrepressPreviewCondition.htm";
                 }
 
                 //string FilePath = this._WebURL + FileName;
@@ -2128,8 +2128,8 @@ namespace FujifilmUSA.Sync.Common
 
         public StringBuilder SetPreviewPrintCondition(StringBuilder SBStr)
         {
-            StringBuilder validationStr = new StringBuilder();           
-            
+            StringBuilder validationStr = new StringBuilder();
+
             try
             {
                 //string currentBaseUrl = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority +
@@ -2174,13 +2174,14 @@ namespace FujifilmUSA.Sync.Common
                         SBStr.Replace("###RelativePaperScalingStatus###", GetStringValue(PreviewPrintCondition.Metric_RelativePaperScaling));
                         SBStr.Replace("###PaperL*a*b*Values###", GetStringValue(PreviewPrintCondition.Metric_PaperLabValues));
                         SBStr.Replace("###MinL*PatchValues###", GetStringValue(PreviewPrintCondition.Metric_MinLPatchValues));
-                        
-                        
+
+
                         SBStr.Replace("###RelativePaperScalingBlock###", string.Empty);
                         SBStr.Replace("###PaperlabvaluesBlock###", string.Empty);
                         SBStr.Replace("###MinLpatchBlock###", string.Empty);
                     }
-                    else {
+                    else
+                    {
                         //SBStr.Replace("###RelativeScallingBlock###", string.Empty);
                         SBStr.Replace("###RelativePaperScalingBlock###", "blank-tr");
                         SBStr.Replace("###PaperlabvaluesBlock###", "blank-tr");
@@ -2192,7 +2193,7 @@ namespace FujifilmUSA.Sync.Common
                     SBStr.Replace("###Observer###", GetStringValue(PreviewPrintCondition.Measurement_Observer));
                     SBStr.Replace("###DensityType###", GetStringValue(PreviewPrintCondition.Measurement_DensityType));
                     SBStr.Replace("###UVMode###", GetStringValue(PreviewPrintCondition.Measurement_UVMode));
-                    SBStr.Replace("###BaseChartName###", GetStringValue(PreviewPrintCondition.Measurement_BaseChart));                    
+                    SBStr.Replace("###BaseChartName###", GetStringValue(PreviewPrintCondition.Measurement_BaseChart));
                     SBStr.Replace("###BaseChartContent###", PreviewPrintCondition.BaseChart_image);
                     SBStr.Replace("###OptimizationChartName###", GetStringValue(PreviewPrintCondition.Measurement_OptimizationChart));
                     SBStr.Replace("###OptimizationChartContent###", PreviewPrintCondition.OptimizationChart_image);
@@ -2206,11 +2207,12 @@ namespace FujifilmUSA.Sync.Common
                         SBStr.Replace("###UVModeValidation###", GetStringValue(PreviewPrintCondition.Validation_UVMode));
                         SBStr.Replace("###ValidationChartName###", GetStringValue(PreviewPrintCondition.Validation_ValidationChart));
                         SBStr.Replace("###ValidationChartContent###", PreviewPrintCondition.ValidationChart_image);
-                       
+
                         SBStr.Replace("###ValidationTab###", string.Empty);
                     }
                     else
-                    { SBStr.Replace("###ValidationTab###", "blank-td");
+                    {
+                        SBStr.Replace("###ValidationTab###", "blank-td");
                     }
 
                     if (PreviewPrintCondition.Show_OffSetPrintingBox)
@@ -2225,10 +2227,19 @@ namespace FujifilmUSA.Sync.Common
 
                         SBStr.Replace("###OffsetTab###", string.Empty);
                     }
-                    else {
+                    else
+                    {
                         SBStr.Replace("###OffsetTab###", "blank-td");
                     }
-
+                    ///##ValidationOffSetTab###
+                    if (PreviewPrintCondition.Show_ValidationBox || PreviewPrintCondition.Show_OffSetPrintingBox)
+                    {
+                        SBStr.Replace("###ValidationOffSetTab###", "block;");
+                    }
+                    else
+                    {
+                        SBStr.Replace("###ValidationOffSetTab###", "none;");
+                    }
                     if (PreviewPrintCondition.Show_RetargetingBox)
                     {
                         SBStr.Replace("###RetargetDeviceName###", GetStringValue(PreviewPrintCondition.Retargeting_Device));
@@ -2239,6 +2250,17 @@ namespace FujifilmUSA.Sync.Common
                     else
                     {
                         SBStr.Replace("###RetargetingTab###", "none;");
+                    }
+
+                    //Page break after measurment setting
+                    //If validationbox or offset printing or retarget exist
+                    if (PreviewPrintCondition.Show_ValidationBox || PreviewPrintCondition.Show_OffSetPrintingBox || PreviewPrintCondition.Show_RetargetingBox)
+                    {
+                        SBStr.Replace("###MeasurmentSetingAfterpageBreak###", "page-break-after: always");
+                    }
+                    else
+                    {
+                        SBStr.Replace("###MeasurmentSetingAfterpageBreak###", string.Empty);
                     }
                 }
 
