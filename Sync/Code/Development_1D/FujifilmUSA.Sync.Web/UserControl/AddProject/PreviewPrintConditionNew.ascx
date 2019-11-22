@@ -44,14 +44,16 @@
             Description_Colorant: $("#<%= lblColorant.ClientID %>").text(),
             Description_RipSettings: $("#<%= lblRipSettings.ClientID %>").text(),
             Description_Notes: $("#<%= lblNotes.ClientID %>").text(),
-            Description_TechincalName: $("#<%= lblSourceProfile.ClientID %>").text(),
+            Description_TechincalName: $("#<%= lblTechnicianName.ClientID %>").text(),
+
             Metric_TargetPrintCond: $("#<%= lblTargetPrintCondition.ClientID %>").text(),
-            Metric_SourceProfile: $("#<%= lblMedia.ClientID %>").text(),
+            Metric_SourceProfile: $("#<%= lblSourceProfile.ClientID %>").text(),
             Metric_RelativePaperScaling: $("#<%= lblMetric_RelationScaling.ClientID %>").text(),
             Metric_PaperLabValues: $("#<%= lblMetric_PaperLABValues.ClientID %>").text(),
             Metric_MinLPatchValues: $("#<%= lblMetric_MinPatchValue.ClientID %>").text(),
             Metric_SelectedPereset: $("#<%= lblSelectedPresets.ClientID %>").text(),
             Metric_PresetDescription: $("#<%= lblPresetDescription.ClientID %>").text(),
+
             Measurement_Device: $("#<%= lblMeasurementDevice.ClientID %>").text(),
             Measurement_Illuminat: $("#<%= lblIlluminant.ClientID %>").text(),
             Measurement_Observer: $("#<%= lblObserver.ClientID %>").text(),
@@ -59,11 +61,13 @@
             Measurement_UVMode: $("#<%= lblUVMode.ClientID %>").text(),
             Measurement_BaseChart: $("#<%= lblAlignmentChart.ClientID %>").text(),
             Measurement_OptimizationChart: $("#<%= lblOptimizationChart.ClientID %>").text(),
+
             Validation_Metric: $("#<%= lblVali_Metric.ClientID %>").text(),
             Validation_MetricDescription: $("#<%= lblVali_Metric_Description.ClientID %>").text(),
             Validation_MeasurementDevice: $("#<%= lblVali_MeaDevice.ClientID %>").text(),
             Validation_UVMode: $("#<%= lblVali_Metric_UVMode.ClientID %>").text(),
             Validation_ValidationChart: $("#<%= lblValiChart.ClientID %>").text(),
+
             OffSetPrinting_InkOrder: $("#<%= lblInkOderTxt.ClientID %>").text(),
             OffSetPrinting_FountainSolution: $("#<%= lblFountainSolution.ClientID %>").text(),
             OffSetPrinting_Blanket: $("#<%= lblBlanket.ClientID %>").text(),
@@ -71,6 +75,7 @@
             OffSetPrinting_Screening: $("#<%= lblScreening.ClientID %>").text(),
             OffSetPrinting_Coating: $("#<%= lblCoating.ClientID %>").text(),
             OffSetPrinting_ProjectType: $("#<%= lblProjctType.ClientID %>").text(),
+
             Retargeting_Device: $("#<%= lblRetargetingDeviceName.ClientID %>").text(),
             Retargeting_PrintCondition: $("#<%= lblRetargetingPrintCondition.ClientID %>").text(),
 
@@ -365,7 +370,7 @@
                                         <tr>
                                             <td class="breakWord90">
                                                 <span style="font-weight: bold;">
-                                                    <asp:Localize runat="server" Text="Paper L*a*b Values" ID="lblPaperLabValues"
+                                                    <asp:Localize runat="server" Text="PaperL *a *b Values" ID="lblPaperLabValues"
                                                         meta:resourcekey="locPaperLabValues"></asp:Localize>
                                                 </span>
                                             </td>
@@ -379,7 +384,7 @@
                                         <tr>
                                             <td class="breakWord90">
                                                 <span style="font-weight: bold;">
-                                                    <asp:Localize runat="server" Text="Min L* Patch Values" ID="lblMinLPatchValues"
+                                                    <asp:Localize runat="server" Text="MinL* Patch Values" ID="lblMinLPatchValues"
                                                         meta:resourcekey="locMinLPatchValues"></asp:Localize>
                                                 </span>
                                             </td>

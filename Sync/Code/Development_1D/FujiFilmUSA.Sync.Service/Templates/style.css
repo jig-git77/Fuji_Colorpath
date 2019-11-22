@@ -1064,10 +1064,12 @@ td.Gray {
     text-align: left;
     font-size: 14px;
 }
-.data_table_new img {
+
+/*.data_table_new img {*/
     /*height: 220px;*/
-    width: 150px !important;
-}
+    /*width: 150px !important;*/
+/*}*/
+
 .blank-td {width: 50%;}
 .blank-td .data_table_new {display: none;}
 .blank-tr { display:none;}

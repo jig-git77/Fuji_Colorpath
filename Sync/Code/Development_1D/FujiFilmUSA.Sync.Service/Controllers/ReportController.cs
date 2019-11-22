@@ -1240,12 +1240,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 if (reportPreviewPrintCondition.Show_ValidationBox)
                 {
                     reportPreviewPrintCondition.ValidationChart_image = GenerateImageForPreviewPrintCondition((short)reportPreviewPrintCondition.ValidationChartId);
-                }                
+                }
                 reportPreviewPrintCondition.BaseChart_image = GenerateImageForPreviewPrintCondition((short)reportPreviewPrintCondition.BaseChartId);
                 reportPreviewPrintCondition.OptimizationChart_image = GenerateImageForPreviewPrintCondition((short)reportPreviewPrintCondition.OptimizationChartId);
 
 
-                objReportPDF.PDF_NAME = reportPreviewPrintCondition.Metric_TargetPrintCond.Trim()+"_ReportPreviewPrintCondition.PDF";
+                objReportPDF.PDF_NAME = reportPreviewPrintCondition.Metric_TargetPrintCond.Trim() + "_ReportPreviewPrintCondition.PDF";
                 objReportPDF.BaseServiceURL = Utilities.ReadConfigValue("BaseServiceURL");
                 objReportPDF.ReportType = (int)enumReportType.ReportPrintPreviewCondition;
                 objReportPDF.PreviewPrintCondition = reportPreviewPrintCondition;
@@ -2000,91 +2000,51 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             ReferenceChartTypeId = imageid;
             _presenterMeasurementSetting.GetReferenceChartTypeImage();
             image = ReferenceChartTypeImage;
-            var stream = new MemoryStream();
-            stream.Write(image, 0, image.Length);
-            var bitmap = new Bitmap(stream);
-             base64String = Convert.ToBase64String(stream.ToArray());
+            base64String = SetImageSize(image);
+            //var stream = new MemoryStream();
+            //stream.Write(image, 0, image.Length);
+            //var bitmap = new Bitmap(stream);
+            //base64String = Convert.ToBase64String(stream.ToArray());
             //Image ImageResize = (Image)bitmap;
-            //base64String = SetImageSize(ImageResize);
-            return base64String.ToString();
-
-        }
-
-        private string GenerateImageForPreviewPrintConditionV2(short imageid, out int height, out int width)
-        {
-            string base64String = string.Empty;
-            byte[] image = null;
-            ReferenceChartTypeId = imageid;
-            _presenterMeasurementSetting.GetReferenceChartTypeImage();
-            image = ReferenceChartTypeImage;
-            var stream = new MemoryStream();
-            stream.Write(image, 0, image.Length);
-            var bitmap = new Bitmap(stream);
-            base64String = Convert.ToBase64String(stream.ToArray());
-            Image ImageResize = (Image)bitmap;
-
-            double aw = 300;
-            double ah = 245;
-            double iw = ImageResize.Width;
-            double ih = ImageResize.Height;
-
-            double rw = aw / iw;
-            double rh = ah / ih;
-            double ratio;
-            if (rw < rh)
-            {
-                ratio = rw;
-            }
-            else
-            {
-                ratio = rh;
-            }
-            height = Convert.ToInt32(iw * ratio);
-            width = Convert.ToInt32(ih * ratio);
-
-            //base64String = SetImageSize(ImageResize);
+            //string temp_base64String = SetImageSize(ImageResize);
             return base64String.ToString();
         }
-
-
-        private string SetImageSize(Image ImageResize)
+        private string SetImageSize(byte[] data)
         {
             string base64String = string.Empty;
-            double aw = 300;
-            double ah = 245;
-            double iw = ImageResize.Width;
-            double ih = ImageResize.Height;
-
-            double rw = aw / iw;
-            double rh = ah / ih;
-            double ratio;
-            if (rw < rh)
+            using (var ms = new MemoryStream(data))
             {
-                ratio = rw;
-            }
-            else
-            {
-                ratio = rh;
-            }
-            int nw = Convert.ToInt32(iw * ratio);
-            int nh = Convert.ToInt32(ih * ratio);
+                var image = Image.FromStream(ms);
+                double aw = 300;
+                double ah = 245;
+                double iw = image.Width;
+                double ih = image.Height;
 
-            System.Drawing.Bitmap resizedImage = new System.Drawing.Bitmap(nw, nh);
-            System.Drawing.Graphics.FromImage((System.Drawing.Image)resizedImage).DrawImage(ImageResize, 0, 0, nw, nh);
+                double rw = aw / iw;
+                double rh = ah / ih;
+                double ratio;
+                if (rw < rh)
+                {
+                    ratio = rw;
+                }
+                else
+                {
+                    ratio = rh;
+                }
+                int nw = Convert.ToInt32(iw * ratio);
+                int nh = Convert.ToInt32(ih * ratio);
 
-            System.Web.HttpContext.Current.Response.ContentType = "image/jpg";
-            resizedImage.Save(System.Web.HttpContext.Current.Response.OutputStream, ImageFormat.Jpeg);
-            using (MemoryStream m = new MemoryStream())
-            {
-                ImageResize.Save(m, ImageResize.RawFormat);
-                byte[] imageBytes = m.ToArray();
+                System.Drawing.Bitmap resizedImage = new System.Drawing.Bitmap(nw, nh);
+                System.Drawing.Graphics.FromImage((System.Drawing.Image)resizedImage).DrawImage(image, 0, 0, nw, nh);
+                Bitmap bmp = new Bitmap(resizedImage);
+                ImageConverter converter = new ImageConverter();
+                data = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
+                base64String = Convert.ToBase64String(data);
 
-                // Convert byte[] to Base64 String
-                base64String = Convert.ToBase64String(imageBytes);
-                return base64String;
             }
+
+            return base64String.ToString();
         }
-
         #endregion
 
         #region IViewReportSingleMeasurement Members

@@ -235,13 +235,13 @@
     <value>Metric Settings</value>
   </data>
   <data name="locMinLPatchValues.Text" xml:space="preserve">
-    <value>Min L* Patch Values</value>
+    <value>Min L*  Patch Values</value>
   </data>
   <data name="lblOffsetPrintingInformation.Text" xml:space="preserve">
     <value>Offset Printing Information</value>
   </data>
   <data name="locPaperLabValues.Text" xml:space="preserve">
-    <value>Paper L*a*b Values</value>
+    <value>PaperL *a *b Values</value>
   </data>
   <data name="lblPrintCondition.Text" xml:space="preserve">
     <value>Print Condition</value>
