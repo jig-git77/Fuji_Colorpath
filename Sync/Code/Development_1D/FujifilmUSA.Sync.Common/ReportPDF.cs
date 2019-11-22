@@ -353,7 +353,6 @@ namespace FujifilmUSA.Sync.Common
                 else if (ReportType == 21)//---For Preview Print Condition PDF Export
                 {
                       FileName = "Templates/kendoPrepressPreviewCondition.htm";
-                    //FileName = "Templates/kendoPrepressPreviewCondition - Copy.htm";
                 }
 
                 //string FilePath = this._WebURL + FileName;
@@ -2167,14 +2166,15 @@ namespace FujifilmUSA.Sync.Common
 
                     SBStr.Replace("###TargetPrintCondition###", GetStringValue(PreviewPrintCondition.Metric_TargetPrintCond));
                     SBStr.Replace("###SourceProfile###", GetStringValue(PreviewPrintCondition.Metric_TargetPrintCond));
+                    SBStr.Replace("###SelectedPresets###", GetStringValue(PreviewPrintCondition.Metric_SelectedPereset));
+                    SBStr.Replace("###PresetDescription###", GetStringValue(PreviewPrintCondition.Metric_PresetDescription));
 
                     if (!string.IsNullOrEmpty(PreviewPrintCondition.Metric_RelativePaperScaling) && Convert.ToString(PreviewPrintCondition.Metric_RelativePaperScaling).ToLower() == "enabled")
                     {
                         SBStr.Replace("###RelativePaperScalingStatus###", GetStringValue(PreviewPrintCondition.Metric_RelativePaperScaling));
                         SBStr.Replace("###PaperL*a*b*Values###", GetStringValue(PreviewPrintCondition.Metric_PaperLabValues));
                         SBStr.Replace("###MinL*PatchValues###", GetStringValue(PreviewPrintCondition.Metric_MinLPatchValues));
-                        SBStr.Replace("###SelectedPresets###", GetStringValue(PreviewPrintCondition.Metric_SelectedPereset));
-                        SBStr.Replace("###PresetDescription###", GetStringValue(PreviewPrintCondition.Metric_PresetDescription));
+                        
                         
                         SBStr.Replace("###RelativePaperScalingBlock###", string.Empty);
                         SBStr.Replace("###PaperlabvaluesBlock###", string.Empty);
