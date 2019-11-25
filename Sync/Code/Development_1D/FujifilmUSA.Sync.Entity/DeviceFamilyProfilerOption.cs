@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Entity
 {
@@ -13,5 +13,7 @@ namespace FujifilmUSA.Sync.Entity
         public List<ProfilerOptionPreset> ProfilerOptionPresets { get; set; }
         public int ProjectTypeID { get; set; }
         public int UserID { get; set; }
+        public bool IsCustomOption { get; set; }
+     
     }
 }

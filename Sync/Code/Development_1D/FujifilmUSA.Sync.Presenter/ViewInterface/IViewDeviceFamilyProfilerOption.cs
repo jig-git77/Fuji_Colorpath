@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using FujifilmUSA.Sync.Entity;
+﻿using FujifilmUSA.Sync.Entity;
+using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {

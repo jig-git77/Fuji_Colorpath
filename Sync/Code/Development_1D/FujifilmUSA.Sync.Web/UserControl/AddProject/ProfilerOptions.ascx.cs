@@ -632,15 +632,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void AddProfilerOptionImportSettings(List<ProfilerOptionPreset> lstProfilerOptionPreset)
         {
+            
             List<DeviceFamilyProfilerOption> DeviceOptionList = new List<DeviceFamilyProfilerOption>();
 
-            DeviceFamilyProfilerOption = new DeviceFamilyProfilerOption();
+            DeviceFamilyProfilerOption = new DeviceFamilyProfilerOption();           
             DeviceFamilyProfilerOption.DeviceFamilyProfilerOptionId = -1;
             DeviceFamilyProfilerOption.DeviceFamilyId = 1;
-            DeviceFamilyProfilerOption.ProfilerOptionsName = "Custom";
-            DeviceFamilyProfilerOption.ProfilerOptionsDesc = "Custom Description";
+            DeviceFamilyProfilerOption.ProfilerOptionsName = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption ? txtProfileDescription.Text : "Import";
+            DeviceFamilyProfilerOption.ProfilerOptionsDesc = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption ? txtProfileDescription.Text : "Import Description";
             DeviceFamilyProfilerOption.ProjectTypeID = 3;
             DeviceFamilyProfilerOption.UserID = SessionManager.Instance.CurrentUser.UserId;
+            DeviceFamilyProfilerOption.IsCustomOption = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption;
+            
+
 
 
             var rows = 0;
@@ -1956,7 +1960,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short LicenseTypeId { get; set; }
         public int UserID { get; set; }
         public bool IsCustomPreset { get; set; }
-        public bool IsImportPreset { get; set; }
+        public bool IsImportPreset { get; set; }        
         #endregion
 
         #region IViewMeasurementSetting Members

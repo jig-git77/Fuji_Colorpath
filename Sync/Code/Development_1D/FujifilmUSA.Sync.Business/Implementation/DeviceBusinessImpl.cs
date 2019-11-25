@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using FujifilmUSA.Sync.Business.CustomExceptions;
 using FujifilmUSA.Sync.Business.Interface;
-using FujifilmUSA.Sync.Entity;
-using System.Data;
-using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Common;
-using FujifilmUSA.Sync.Business.CustomExceptions;
+using FujifilmUSA.Sync.DataAccess;
+using FujifilmUSA.Sync.Entity;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace FujifilmUSA.Sync.Business.Implementation
@@ -311,9 +311,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             new object[]
                                     {
                                         UserID,
-                                        profilerOptionPresets.ToString()
+                                        profilerOptionPresets.ToString(),
+                                        deviceFamilyProfilerOption.DeviceFamilyProfilerOptionId,
+                                        deviceFamilyProfilerOption.ProfilerOptionsName,
+                                        deviceFamilyProfilerOption.ProfilerOptionsDesc,
+                                        deviceFamilyProfilerOption.ProjectTypeID,
+                                        deviceFamilyProfilerOption.IsCustomOption
 
-                                    });                    
+                                    });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDeviceFamilyProfilerOption"));
             return returnValue;

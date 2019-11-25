@@ -2031,8 +2031,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 {
                     ratio = rh;
                 }
-                int nw = Convert.ToInt32(iw * ratio);
-                int nh = Convert.ToInt32(ih * ratio);
+                int nw = (int)Math.Ceiling((Convert.ToInt32(iw * ratio)) / 1.6);
+                int nh =(int)Math.Ceiling((Convert.ToInt32(ih * ratio)) /1.6);
 
                 System.Drawing.Bitmap resizedImage = new System.Drawing.Bitmap(nw, nh);
                 System.Drawing.Graphics.FromImage((System.Drawing.Image)resizedImage).DrawImage(image, 0, 0, nw, nh);

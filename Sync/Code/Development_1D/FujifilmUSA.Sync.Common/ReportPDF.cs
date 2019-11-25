@@ -2256,11 +2256,14 @@ namespace FujifilmUSA.Sync.Common
                     //If validationbox or offset printing or retarget exist
                     if (PreviewPrintCondition.Show_ValidationBox || PreviewPrintCondition.Show_OffSetPrintingBox || PreviewPrintCondition.Show_RetargetingBox)
                     {
-                        SBStr.Replace("###MeasurmentSetingAfterpageBreak###", "page-break-after: always");
+                        SBStr.Replace("###MeasurmentSetingAfterpageBreak###", "page-break-after: always;");
+                        SBStr.Replace("###MeasurmentSetingAfterpageBreakTabDisplay###", "block;");
+
                     }
                     else
                     {
                         SBStr.Replace("###MeasurmentSetingAfterpageBreak###", string.Empty);
+                        SBStr.Replace("###MeasurmentSetingAfterpageBreakTabDisplay###", "none;");
                     }
                 }
 
