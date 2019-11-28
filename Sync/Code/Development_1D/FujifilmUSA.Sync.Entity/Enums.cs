@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using System;
+﻿using System;
+using System.ComponentModel;
 namespace FujifilmUSA.Sync.Entity
 {
     public enum ELeftMenuItemLevel
@@ -224,7 +224,7 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ERolePermission_ManageSpotTarget")] //Manage Spot Target/Brand Color Optimization
         ManageSpotTarget = 19,
         [Description("ERolePermission_ManageCustomReports")] //Manage Custom Reports
-        ManageCustomReports = 20        
+        ManageCustomReports = 20
     }
     public enum ECurrentProjectStatus
     {
@@ -499,7 +499,7 @@ namespace FujifilmUSA.Sync.Entity
         ReportSingleMeasurement_Default = 18,
         ReportScoringMeasurement_Default = 19,
         ReportSpotColorProject = 20,
-        ReportPrintPreviewCondition=21
+        ReportPrintPreviewCondition = 21
     }
 
     public enum ValidationRuleType
@@ -623,26 +623,26 @@ namespace FujifilmUSA.Sync.Entity
     public enum EPerceptualRenderingCustomProfile
     {
         [Description("EPerceptualRenderingCustomProfile_StandardCompression")] //Standard Compression
-        StandardCompression = 1,
+        StandardCompression = 14,
         [Description("EPerceptualRenderingCustomProfile_AbsoluteCompression")] //Absolute Compression
-        AbsoluteCompression = 2,
+        AbsoluteCompression = 10,
         [Description("EPerceptualRenderingCustomProfile_BlackpointCompression")] //Blackpoint Compression
-        BlackpointCompression = 3,
+        BlackpointCompression = 16,
         [Description("EPerceptualRenderingCustomProfile_MinimumCompression")] //Minimum Compression
-        MinimumCompression = 4,
+        MinimumCompression = 28,
     }
     public enum EBlackGenerationCustomProfile
     {
         [Description("EBlackGenerationCustomProfile_GCR")] //GCR
         GCR = 1,
-        [Description("EBlackGenerationCustomProfile_Auto")] //Auto
-        Auto = 2,
+        //[Description("EBlackGenerationCustomProfile_Auto")] //Auto
+        //Auto = 2,
         [Description("EBlackGenerationCustomProfile_UCR")] //UCR
-        UCR = 3,
+        UCR = 2,
+        [Description("EBlackGenerationCustomProfile_MaxK")] //Max K
+        MaxK = 3,
         [Description("EBlackGenerationCustomProfile_MinK")] //Min K
         MinK = 4,
-        [Description("EBlackGenerationCustomProfile_MaxK")] //Max K
-        MaxK = 5,
     }
     public enum EBlackCalculationCustomProfile
     {

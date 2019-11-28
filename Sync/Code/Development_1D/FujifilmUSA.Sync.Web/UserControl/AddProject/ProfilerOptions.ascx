@@ -127,26 +127,36 @@
     var rdsGCRAmountSilderCustom;
     var rdsBlackStartSliderCustom;
     var rdsBlackWidthSliderCustom;
+    /*  Max and Min Value for GCR SlideBar */
+    var MAXCustomGCRValue = -1;
+    var MINCustomGCRValue = -2;
+    var SettingBlackGeneration = "1.75";
     function clientValueChangerdsGrayBalance(sender, eventArgs) {
         var txtGrayBalance = document.getElementById("<%=txtGrayBalance.ClientID%>")
         txtGrayBalance.value = sender.get_value();
+        AdvancedPerceptualRenderingControl(txtGrayBalance.value);
     }
     function clientValueChangerdsCoolerWarmer(sender, eventArgs) {
         var txtCoolerWarmer = document.getElementById("<%=txtCoolerWarmer.ClientID%>")
         txtCoolerWarmer.value = sender.get_value();
+        $("#<%=lblSettingPerceptualGrayCorrection.ClientID%>").text(txtCoolerWarmer.value);
     }
 
     function clientValueChangerdsGCRAmount(sender, eventArgs) {
         var txtGCRAmount = document.getElementById("<%=txtGCRAmount.ClientID%>")
         txtGCRAmount.value = sender.get_value();
+        SettingBlackGeneration = parseFloat(MINCustomGCRValue) + parseFloat(sender.get_value() / 100);
+        $("#<%=lblSettingBlackGeneration.ClientID%>").text(SettingBlackGeneration);
     }
     function clientValueChangerdsBlackStartCustom(sender, eventArgs) {
         var txtBlackStartCustom = document.getElementById("<%=txtBlackStartCustom.ClientID%>")
         txtBlackStartCustom.value = sender.get_value();
+        $("#<%=lblSettingBlackStart.ClientID%>").text(txtBlackStartCustom.value);
     }
     function clientValueChangerdsBlackWidthCustom(sender, eventArgs) {
         var txtBlackWidthCustom = document.getElementById("<%=txtBlackWidthCustom.ClientID%>")
         txtBlackWidthCustom.value = sender.get_value();
+        $("#<%=lblSettingBlackWidth.ClientID%>").text(txtBlackWidthCustom.value);
     }
 
 
@@ -154,33 +164,42 @@
     function OnClientLoadrdsGrayBalance(sender, eventArgs) {
         var txtGrayBalance = document.getElementById("<%=txtGrayBalance.ClientID%>")
         txtGrayBalance.value = sender.get_value();
+        AdvancedPerceptualRenderingControl(txtGrayBalance.value);
     }
     function OnClientLoadrdsCoolerWarmer(sender, eventArgs) {
         var txtCoolerWarmer = document.getElementById("<%=txtCoolerWarmer.ClientID%>")
         txtCoolerWarmer.value = sender.get_value();
+        $("#<%=lblSettingPerceptualGrayCorrection.ClientID%>").text(txtCoolerWarmer.value);
     }
     function OnClientLoadrdsGCRAmount(sender, eventArgs) {
         rdsGCRAmountSilderCustom = sender;
         var txtGCRAmount = document.getElementById("<%=txtGCRAmount.ClientID%>")
         txtGCRAmount.value = sender.get_value();
+        SettingBlackGeneration = parseFloat(MINCustomGCRValue) + parseFloat(sender.get_value() / 100);
+        $("#<%=lblSettingBlackGeneration.ClientID%>").text(SettingBlackGeneration);
     }
     function OnClientLoadrdsBlackStartCustom(sender, eventArgs) {
         rdsBlackStartSliderCustom = sender;
         var txtBlackStartCustom = document.getElementById("<%=txtBlackStartCustom.ClientID%>")
         txtBlackStartCustom.value = sender.get_value();
+        $("#<%=lblSettingBlackStart.ClientID%>").text(txtBlackStartCustom.value);
     }
     function OnClientLoadrdsBlackWidthCustom(sender, eventArgs) {
         rdsBlackWidthSliderCustom = sender;
         var txtBlackWidthCustom = document.getElementById("<%=txtBlackWidthCustom.ClientID%>")
         txtBlackWidthCustom.value = sender.get_value();
+        $("#<%=lblSettingBlackWidth.ClientID%>").text(txtBlackWidthCustom.value);
     }
     function OnClientLoadrdsTAC(sender, eventArgs) {
         var txtTAC = document.getElementById("<%=txtTAC.ClientID%>")
         txtTAC.value = sender.get_value();
+        $("#<%=lblSettingInTotal.ClientID%>").text(txtTAC.value);
     }
     function OnClientLoadrdsBlackTAC(sender, eventArgs) {
         var txtBlackTAC = document.getElementById("<%=txtBlackTAC.ClientID%>")
         txtBlackTAC.value = sender.get_value();
+
+        $("#<%=lblSettingBlackTAC.ClientID%>").text(txtBlackTAC.value);
     }
     function OnClientLoadrdsMaxBlack(sender, eventArgs) {
         var txtMaxBlack = document.getElementById("<%=txtMaxBlack.ClientID%>")
@@ -191,10 +210,14 @@
     function clientValueChangerdsTAC(sender, eventArgs) {
         var txtTAC = document.getElementById("<%=txtTAC.ClientID%>")
         txtTAC.value = sender.get_value();
+
+        $("#<%=lblSettingInTotal.ClientID%>").text(txtTAC.value);
     }
     function clientValueChangerdsBlackTAC(sender, eventArgs) {
         var txtBlackTAC = document.getElementById("<%=txtBlackTAC.ClientID%>")
         txtBlackTAC.value = sender.get_value();
+
+        $("#<%=lblSettingBlackTAC.ClientID%>").text(txtBlackTAC.value);
     }
     function clientValueChangerdsMaxBlack(sender, eventArgs) {
         var txtMaxBlack = document.getElementById("<%=txtMaxBlack.ClientID%>")
@@ -202,21 +225,37 @@
     }
     function OnChangecmbBalckGeneration() {
         var cmbBlackGeneration = document.getElementById("<%=cmbBlackGeneration.ClientID%>")
-
-        if ($(cmbBlackGeneration).val() == "2" || $(cmbBlackGeneration).val() == "3") {
+        if ($(cmbBlackGeneration).val() == "2") { //UCR 
             rdsGCRAmountSilderCustom.set_enabled(false);
             rdsBlackStartSliderCustom.set_enabled(true);
             rdsBlackWidthSliderCustom.set_enabled(true);
+            $("#<%=lblSettingBlackGeneration.ClientID%>").text($('#<%=cmbBlackGeneration.ClientID %> option:selected').text());
+            $("#<%=trSettingBlackStart.ClientID%>").show();
+            $("#<%=trSettingBlackWidth.ClientID%>").show();
         }
-        else if ($(cmbBlackGeneration).val() == "4" || $(cmbBlackGeneration).val() == "5") {
+        else if ($(cmbBlackGeneration).val() == "3") { //MaxK
+            rdsGCRAmountSilderCustom.set_enabled(false);
+            rdsBlackStartSliderCustom.set_enabled(true);
+            rdsBlackWidthSliderCustom.set_enabled(false);
+            $("#<%=lblSettingBlackGeneration.ClientID%>").text($('#<%=cmbBlackGeneration.ClientID %> option:selected').text());
+            $("#<%=trSettingBlackWidth.ClientID%>").hide();
+
+        }
+        else if ($(cmbBlackGeneration).val() == "4") { //MinK
             rdsGCRAmountSilderCustom.set_enabled(false);
             rdsBlackStartSliderCustom.set_enabled(false);
             rdsBlackWidthSliderCustom.set_enabled(false);
+            $("#<%=lblSettingBlackGeneration.ClientID%>").text($('#<%=cmbBlackGeneration.ClientID %> option:selected').text());
+            $("#<%=trSettingBlackStart.ClientID%>").hide();
+            $("#<%=trSettingBlackWidth.ClientID%>").hide();
         }
         else {
             rdsGCRAmountSilderCustom.set_enabled(true);
             rdsBlackStartSliderCustom.set_enabled(true);
             rdsBlackWidthSliderCustom.set_enabled(true);
+            $("#<%=lblSettingBlackGeneration.ClientID%>").text(SettingBlackGeneration);
+            $("#<%=trSettingBlackStart.ClientID%>").show();
+            $("#<%=trSettingBlackWidth.ClientID%>").show();
         }
     }
     function OnChangecmbBlackCalculation() {
@@ -238,11 +277,58 @@
             $(txtCustomYellow).hide();
             $(txtCustomBlack).hide();
         }
+        if ($(cmbBlackCalculation).val() == "1" || $(cmbBlackCalculation).val() == "2") {
+            $("#<%=lblSettingInmax.ClientID%>").text($('#<%=cmbBlackCalculation.ClientID %> option:selected').text());
+        }
+        else {
+            $("#<%=lblSettingInmax.ClientID%>").text("");
+        }
+    }
+    function OnChangecmbPerceptualRendering() {
+        var cmbPerceptualRendering = document.getElementById("<%=cmbPerceptualRendering.ClientID%>")
+        $("#<%=lblSettingSaturationCompression.ClientID%>").text($(cmbPerceptualRendering).val());
+        $("#<%=lblSettingPerceptualCompression.ClientID%>").text($(cmbPerceptualRendering).val());
 
     }
 
+    function AdvancedPerceptualRenderingControl(rdsGrayBalanceValue) {
+        var advancedperceptualRenderingValue = $('input[name$=rdBtnAdvancedPerceptualRendering]:checked').val();
+        if (advancedperceptualRenderingValue == "1") { //Chroma
+
+            $("#<%=trPerceptualChromaCompression.ClientID%>").show();
+            $("#<%=trSaturationChromaCompression.ClientID%>").show();
+            $("#<%=trPerceptualLightnessCorrection.ClientID%>").hide();
+            $("#<%=trSaturationLightnessCorrection.ClientID%>").hide();
+
+            $("#<%=lblSettingPerceptualChromaCompression.ClientID%>").text(rdsGrayBalanceValue);
+            $("#<%=lblSettingSaturationChromaCompression.ClientID%>").text(rdsGrayBalanceValue);
+
+        }
+        else if (advancedperceptualRenderingValue == "2") { //Saturation
+
+            $("#<%=trPerceptualChromaCompression.ClientID%>").show();
+            $("#<%=trSaturationChromaCompression.ClientID%>").show();
+            $("#<%=trPerceptualLightnessCorrection.ClientID%>").show();
+            $("#<%=trSaturationLightnessCorrection.ClientID%>").show();
+
+            $("#<%=lblSettingPerceptualChromaCompression.ClientID%>").text(rdsGrayBalanceValue);
+            $("#<%=lblSettingSaturationChromaCompression.ClientID%>").text(rdsGrayBalanceValue);
+            $("#<%=lblSettingPerceptualLightnessCorrection.ClientID%>").text(rdsGrayBalanceValue);
+            $("#<%=lblSettingSaturationLightnessCorrection.ClientID%>").text(rdsGrayBalanceValue);
+        }
+        else if (advancedperceptualRenderingValue == "3") { //Lightness
+            $("#<%=trPerceptualChromaCompression.ClientID%>").hide();
+            $("#<%=trSaturationChromaCompression.ClientID%>").hide();
+            $("#<%=trPerceptualLightnessCorrection.ClientID%>").show();
+            $("#<%=trSaturationLightnessCorrection.ClientID%>").show();
+
+            $("#<%=lblSettingPerceptualLightnessCorrection.ClientID%>").text(rdsGrayBalanceValue);
+            $("#<%=lblSettingSaturationLightnessCorrection.ClientID%>").text(rdsGrayBalanceValue);
+        }
+    }
+
 </script>
-<script language="javascript" type="text/javascript">
+<script lang="javascript" type="text/javascript">
 
     jQuery(document).ready(function () {
         $("#tabstrip").kendoTabStrip({
@@ -275,6 +361,42 @@
         $('input[id*="txtTVI"]').each(function () {
             $(this).numeric({ allow: '.' });
         });
+
+        $("#<%=chk100BlackCustom.ClientID%>").click(function () {
+            var exceptionValue = $("#<%=lblSettingExceptions.ClientID%>").text();
+            if ($(this).is(':checked')) {
+                $("#<%=lblSettingExceptions.ClientID%>").text(parseInt(exceptionValue) + parseInt(1));
+            }
+            else {
+
+                $("#<%=lblSettingExceptions.ClientID%>").text(parseInt(exceptionValue) - parseInt(1));
+            }
+        });
+        $("#<%=chkPureGray.ClientID%>").click(function () {
+            var exceptionValue = $("#<%=lblSettingExceptions.ClientID%>").text();
+            if ($(this).is(':checked')) {
+                $("#<%=lblSettingExceptions.ClientID%>").text(parseInt(exceptionValue) + parseInt(4));
+            }
+            else {
+                $("#<%=lblSettingExceptions.ClientID%>").text(parseInt(exceptionValue) - parseInt(4));
+            }
+        });
+
+        $("#<%=chkBrightenerCmp.ClientID%>").click(function () {
+            if ($(this).is(':checked')) {
+                $("#<%=lblSettingBrightenerCorrection.ClientID%>").text("0.50000");
+                $("#<%=lblSettingMeasurementCorrection.ClientID%>").text("3");
+            }
+            else {
+                $("#<%=lblSettingBrightenerCorrection.ClientID%>").text("0");
+                $("#<%=lblSettingMeasurementCorrection.ClientID%>").text("0");
+            }
+        });
+        $("#<%=rdBtnAdvancedPerceptualRendering.ClientID%>").click(function () {
+            var txtGrayBalance = $("#<%=txtGrayBalance.ClientID%>").val();
+            AdvancedPerceptualRenderingControl(txtGrayBalance);
+        });
+
     });
 </script>
 <div class="head">
@@ -347,7 +469,7 @@
                                         <td style="width: 450px">
                                             <asp:RadioButtonList ID="rdBtnPresetType" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rdBtnPresetType_SelectedIndexChanged" RepeatDirection="Horizontal">
                                                 <asp:ListItem Text="Predefined" Value="1" Selected="True"></asp:ListItem>
-                                                <asp:ListItem Text="Import" Value="2" ></asp:ListItem>
+                                                <asp:ListItem Text="Import" Value="2"></asp:ListItem>
                                                 <asp:ListItem Text="Custom" Value="3"></asp:ListItem>
                                             </asp:RadioButtonList>
                                         </td>
@@ -388,13 +510,13 @@
                                     </tr>
                                     <tr runat="server" id="trCustomPresetName">
                                         <td style="width: 130px">
-                                              <span>
+                                            <span>
                                                 <asp:Localize runat="server" Text="SCustom Preset Name"
                                                     ID="lblCustomPresetName" meta:resourcekey="lblCustomPresetName"></asp:Localize></span>
-                                            
+
                                         </td>
                                         <td style="width: 450px">
-                                           <asp:TextBox ID="txtCustomPresetName" runat="server" Enabled="False" ReadOnly="True"
+                                            <asp:TextBox ID="txtCustomPresetName" runat="server" Enabled="False" ReadOnly="True"
                                                 Text=""></asp:TextBox>
                                         </td>
                                     </tr>
@@ -844,8 +966,7 @@
                                                                             <asp:Localize Text="Summary" ID="locDeviceLink"
                                                                                 runat="server" meta:resourcekey="locDeviceLink"></asp:Localize>
                                                                         </li>
-                                                                        <li>
-                                                                            Settings
+                                                                        <li>Settings
                                                                         </li>
                                                                     </ul>
                                                                     <div>
@@ -862,29 +983,29 @@
                                                                                                             </asp:Localize>
                                                                                                         </b></legend>
                                                                                                         <asp:Panel ID="panel3" Style="padding: 1px" runat="server" BorderStyle="None" Width="100%">
-                                                                                                            <table cellpadding="0" cellspacing="3" border="0" width="100%" style="vertical-align: top;padding-top:10px;">
+                                                                                                            <table cellpadding="0" cellspacing="3" border="0" width="100%" style="vertical-align: top; padding-top: 10px;">
                                                                                                                 <tr>
                                                                                                                     <td style="vertical-align: top;">
-                                                                                                                        <asp:DropDownList ID="cmbPerceptualRendering" runat="server" CssClass="select" DataValueField="Key"
+                                                                                                                        <asp:DropDownList ID="cmbPerceptualRendering" runat="server" CssClass="select" DataValueField="Key" onchange="OnChangecmbPerceptualRendering()"
                                                                                                                             meta:resourcekey="cmbRenderingResource1">
                                                                                                                         </asp:DropDownList>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top;padding-top:10px;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 10px;">
                                                                                                                         <asp:Localize Text="Summary" ID="lblAdvancedPerceptualRendering" runat="server" meta:resourcekey="lblAdvancedPerceptualRendering"></asp:Localize></td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top;font-size:12px;">
+                                                                                                                    <td style="vertical-align: top; font-size: 12px;">
                                                                                                                         <asp:RadioButtonList ID="rdBtnAdvancedPerceptualRendering" runat="server" RepeatDirection="Horizontal">
-                                                                                                                            <asp:ListItem Text="Chroma" Value="1" Selected="True"  meta:resourcekey="lblChromaResources"></asp:ListItem>
+                                                                                                                            <asp:ListItem Text="Chroma" Value="1" Selected="True" meta:resourcekey="lblChromaResources"></asp:ListItem>
                                                                                                                             <asp:ListItem Text="Saturation" Value="2" meta:resourcekey="lblSaturationResources"></asp:ListItem>
                                                                                                                             <asp:ListItem Text="Lightness" Value="3" meta:resourcekey="lblLightnessResources"></asp:ListItem>
                                                                                                                         </asp:RadioButtonList>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top;padding-top:15px;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 15px;">
                                                                                                                         <table cellpadding="0" cellspacing="0" border="0" width="100%" style="vertical-align: top;">
                                                                                                                             <tr>
                                                                                                                                 <td style="width: 85%; vertical-align: top;">
@@ -899,12 +1020,12 @@
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top;padding-top:15px;text-align:center;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 15px; text-align: center;">
                                                                                                                         <asp:Localize Text="Summary" ID="lblGrayBalance" runat="server" meta:resourcekey="lblGrayBalance"></asp:Localize>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top;padding-top:15px;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 15px;">
                                                                                                                         <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                                                                                                             <tr>
                                                                                                                                 <td style="width: 160px; vertical-align: top;">
@@ -919,7 +1040,7 @@
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top;padding-top:15px;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 15px;">
                                                                                                                         <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                                                                                                             <tr>
                                                                                                                                 <td style="text-align: center; width: 15%;">
@@ -938,12 +1059,12 @@
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <tr>
-                                                                                                <td style="vertical-align: top;padding-top:15px;">
-                                                                                                    <fieldset style="margin-bottom: 10px;height:190px;">
+                                                                                                <td style="vertical-align: top; padding-top: 15px;">
+                                                                                                    <fieldset style="margin-bottom: 10px; height: 190px;">
                                                                                                         <legend><b>
                                                                                                             <asp:Localize Text="Summary" ID="fldMeasurementProcessing" runat="server" meta:resourcekey="fldMeasurementProcessing"></asp:Localize></b></legend>
-                                                                                                        <asp:Panel ID="panel4" Style="padding: 1px; font-size: 10px;margin-top:25px;" runat="server" BorderStyle="None" Width="100%">
-                                                                                                            <table style="vertical-align: top;padding-top:15px;padding-left:15px;" cellpadding="0" cellspacing="5" border="0">
+                                                                                                        <asp:Panel ID="panel4" Style="padding: 1px; font-size: 10px; margin-top: 25px;" runat="server" BorderStyle="None" Width="100%">
+                                                                                                            <table style="vertical-align: top; padding-top: 15px; padding-left: 15px;" cellpadding="0" cellspacing="5" border="0">
                                                                                                                 <tr>
                                                                                                                     <td style="vertical-align: top;">
                                                                                                                         <asp:CheckBox runat="server" ID="chkMeasurementCorrection" Text="  Measurement Correction " CssClass="checkboxFont Label" meta:resourcekey="chkMeasurementCorrectionResource1" />
@@ -964,61 +1085,61 @@
                                                                                     <td style="width: 50%; vertical-align: top">
                                                                                         <table style="width: 100%; vertical-align: top;" cellpadding="0" cellspacing="0" border="0">
                                                                                             <tr>
-                                                                                                <td style="vertical-align: top;padding-bottom:25px;">
+                                                                                                <td style="vertical-align: top; padding-bottom: 25px;">
                                                                                                     <fieldset>
                                                                                                         <legend><b>
                                                                                                             <asp:Localize Text="Summary" ID="fldBlackGeneration" runat="server" meta:resourcekey="fldBlackGeneration"></asp:Localize></b></legend>
-                                                                                                        <asp:Panel ID="panel5" Style="padding: 1px;padding-top:15px;height:222px;" runat="server" BorderStyle="None" Width="100%">
+                                                                                                        <asp:Panel ID="panel5" Style="padding: 1px; padding-top: 15px; height: 222px;" runat="server" BorderStyle="None" Width="100%">
                                                                                                             <table style="width: 100%" cellpadding="0" cellspacing="2" border="0">
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top; margin-left: 5px;width: 100%" colspan="3">
+                                                                                                                    <td style="vertical-align: top; margin-left: 5px; width: 100%" colspan="3">
                                                                                                                         <asp:DropDownList ID="cmbBlackGeneration" runat="server" CssClass="select" DataValueField="Key"
                                                                                                                             DataTextField="Value" AutoPostBack="false" onchange="OnChangecmbBalckGeneration()">
                                                                                                                         </asp:DropDownList>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top;padding-top:15px; width: 25%;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 15px; width: 25%;">
                                                                                                                         <asp:Localize Text="Summary" ID="lblGCRAmount" runat="server" meta:resourcekey="lblGCRAmount"></asp:Localize></td>
-                                                                                                                    <td style="vertical-align: top;padding-top:15px; width: 60%">
+                                                                                                                    <td style="vertical-align: top; padding-top: 15px; width: 60%">
                                                                                                                         <telerik:RadSlider ID="rdsGCRAmount" runat="server" OnClientValueChanged="clientValueChangerdsGCRAmount" OnClientLoad="OnClientLoadrdsGCRAmount" AutoPostBack="false" DbValue="25" Enabled="true" Height="22px" Length="180" MinimumValue="0" MaximumValue="100" SmallChange="5" LargeChange="10" Width="160px">
                                                                                                                         </telerik:RadSlider>
                                                                                                                     </td>
-                                                                                                                    <td style="vertical-align: top;padding-top:15px; width: 15%;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 15px; width: 15%;">
                                                                                                                         <asp:TextBox ID="txtGCRAmount" runat="server" Enabled="false" Width="30px"></asp:TextBox>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top;padding-top:15px; width: 25%;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 15px; width: 25%;">
                                                                                                                         <asp:Localize Text="Summary" ID="lblBlackStart" runat="server" meta:resourcekey="lblBlackStart"></asp:Localize></td>
-                                                                                                                    <td style="vertical-align: top;padding-top:15px; width: 60%;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 15px; width: 60%;">
                                                                                                                         <telerik:RadSlider ID="rdsBlackStartCustom" runat="server" AutoPostBack="false" OnClientValueChanged="clientValueChangerdsBlackStartCustom" OnClientLoad="OnClientLoadrdsBlackStartCustom" DbValue="0" Enabled="true" Height="22px" Length="180" MinimumValue="0" MaximumValue="100" SmallChange="5" LargeChange="10" Width="160px">
                                                                                                                         </telerik:RadSlider>
                                                                                                                     </td>
-                                                                                                                    <td style="vertical-align: top;padding-top:15px; width: 15%;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 15px; width: 15%;">
                                                                                                                         <asp:TextBox ID="txtBlackStartCustom" runat="server" Enabled="false" Width="30px"></asp:TextBox>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top;padding-top:15px; width: 25%;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 15px; width: 25%;">
                                                                                                                         <asp:Localize Text="Summary" ID="lblBlackWidth" runat="server" meta:resourcekey="lblBlackWidth"></asp:Localize></td>
-                                                                                                                    <td style="vertical-align: top;padding-top:15px; width: 60%;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 15px; width: 60%;">
                                                                                                                         <telerik:RadSlider ID="rdsBlackWidthCustom" runat="server" AutoPostBack="false" OnClientValueChanged="clientValueChangerdsBlackWidthCustom" OnClientLoad="OnClientLoadrdsBlackWidthCustom" DbValue="100" Enabled="true" Height="22px" Length="180" MinimumValue="0" MaximumValue="100" SmallChange="5" LargeChange="10" Width="160px">
                                                                                                                         </telerik:RadSlider>
                                                                                                                     </td>
-                                                                                                                    <td style="vertical-align: top;padding-top:15px; width: 15%;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 15px; width: 15%;">
                                                                                                                         <asp:TextBox ID="txtBlackWidthCustom" runat="server" Enabled="false" Width="30px"></asp:TextBox>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top; margin-left: 5px;padding-top:15px;padding-left:25px; width: 100%" colspan="3">
+                                                                                                                    <td style="vertical-align: top; margin-left: 5px; padding-top: 15px; padding-left: 25px; width: 100%" colspan="3">
                                                                                                                         <table style="vertical-align: top;" cellpadding="0" cellspacing="5" border="0">
                                                                                                                             <tr>
                                                                                                                                 <td style="vertical-align: top;">
                                                                                                                                     <asp:CheckBox runat="server" ID="chk100BlackCustom" Text="  100% Black  " CssClass="checkboxFont Label" meta:resourcekey="chk100BlackCustom" />
                                                                                                                                 </td>
                                                                                                                                 <td style="vertical-align: top;">
-                                                                                                                                    <asp:CheckBox runat="server" ID="chkPureGray" Text="  Pure Gray " CssClass="checkboxFont Label" meta:resourcekey="chkPureGray"  />
+                                                                                                                                    <asp:CheckBox runat="server" ID="chkPureGray" Text="  Pure Gray " CssClass="checkboxFont Label" meta:resourcekey="chkPureGray" />
                                                                                                                                 </td>
                                                                                                                             </tr>
                                                                                                                         </table>
@@ -1037,7 +1158,7 @@
                                                                                                         <asp:Panel ID="panel6" Style="padding: 1px" runat="server" BorderStyle="None" Width="100%">
                                                                                                             <table style="width: 100%">
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top;padding-top:10px;" colspan="3">
+                                                                                                                    <td style="vertical-align: top; padding-top: 10px;" colspan="3">
                                                                                                                         <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                                                                                                             <tr>
                                                                                                                                 <td style="vertical-align: top;">
@@ -1049,61 +1170,61 @@
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top;padding-top:10px; width: 45%">
+                                                                                                                    <td style="vertical-align: top; padding-top: 10px; width: 45%">
                                                                                                                         <asp:Localize Text="Summary" ID="lblTAC" runat="server" meta:resourcekey="lblTAC"></asp:Localize></td>
-                                                                                                                    <td style="width: 40%;padding-top:10px;">
+                                                                                                                    <td style="width: 40%; padding-top: 10px;">
                                                                                                                         <telerik:RadSlider ID="rdsTAC" runat="server" AutoPostBack="false" OnClientValueChanged="clientValueChangerdsTAC" OnClientLoad="OnClientLoadrdsTAC" DbValue="320" Enabled="true" Height="22px" Length="200" MinimumValue="0" MaximumValue="400" SelectionStart="20" SmallChange="10" LargeChange="20" Width="160px">
                                                                                                                         </telerik:RadSlider>
                                                                                                                     </td>
-                                                                                                                    <td style="vertical-align: top; width: 15%;padding-top:10px;">
+                                                                                                                    <td style="vertical-align: top; width: 15%; padding-top: 10px;">
                                                                                                                         <asp:TextBox ID="txtTAC" runat="server" Enabled="false" Width="30px"></asp:TextBox>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top; width: 45%;padding-top:10px;">
+                                                                                                                    <td style="vertical-align: top; width: 45%; padding-top: 10px;">
                                                                                                                         <asp:Localize Text="Summary" ID="lblBlackTAC" runat="server" meta:resourcekey="lblBlackTAC"></asp:Localize></td>
-                                                                                                                    <td style="width: 40%;padding-top:10px;">
+                                                                                                                    <td style="width: 40%; padding-top: 10px;">
                                                                                                                         <telerik:RadSlider ID="rdsBlackTAC" runat="server" AutoPostBack="false" OnClientValueChanged="clientValueChangerdsBlackTAC" OnClientLoad="OnClientLoadrdsBlackTAC" DbValue="320" Enabled="true" Height="22px" Length="200" MinimumValue="0" MaximumValue="400" SelectionStart="20" SmallChange="10" LargeChange="20" Width="160px">
                                                                                                                         </telerik:RadSlider>
                                                                                                                     </td>
-                                                                                                                    <td style="vertical-align: top;padding-top:10px;width: 14%">
+                                                                                                                    <td style="vertical-align: top; padding-top: 10px; width: 14%">
                                                                                                                         <asp:TextBox ID="txtBlackTAC" runat="server" Enabled="false" Width="30px"></asp:TextBox>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="vertical-align: top;padding-top:10px; width: 45%;">
+                                                                                                                    <td style="vertical-align: top; padding-top: 10px; width: 45%;">
                                                                                                                         <asp:Localize Text="Summary" ID="lblMaxBlack" runat="server" meta:resourcekey="lblMaxBlack"></asp:Localize></td>
-                                                                                                                    <td style="width: 40%;padding-top:15px;">
+                                                                                                                    <td style="width: 40%; padding-top: 15px;">
                                                                                                                         <telerik:RadSlider ID="rdsMaxBlack" runat="server" AutoPostBack="false" OnClientValueChanged="clientValueChangerdsMaxBlack" OnClientLoad="OnClientLoadrdsMaxBlack" DbValue="100" Enabled="true" Height="22px" Length="200" MinimumValue="0" MaximumValue="100" SelectionStart="10" SmallChange="5" LargeChange="20" Width="160px">
                                                                                                                         </telerik:RadSlider>
                                                                                                                     </td>
-                                                                                                                    <td style="vertical-align: top;padding-top:10px; width: 14%">
+                                                                                                                    <td style="vertical-align: top; padding-top: 10px; width: 14%">
                                                                                                                         <asp:TextBox ID="txtMaxBlack" runat="server" Enabled="false" Width="30px"></asp:TextBox>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td colspan="3" style="width: 100%;padding-top:5px; vertical-align: top">
+                                                                                                                    <td colspan="3" style="width: 100%; padding-top: 5px; vertical-align: top">
                                                                                                                         <table style="width: 100%; vertical-align: top">
                                                                                                                             <tr>
-                                                                                                                                <td style="width: 10%;vertical-align:top;">
+                                                                                                                                <td style="width: 10%; vertical-align: top;">
                                                                                                                                     <div style="background-color: CYAN; border: solid 1px; border-color: black; width: 15px; height: 15px;"></div>
                                                                                                                                 </td>
-                                                                                                                                <td style="width: 25%;vertical-align:top;">
+                                                                                                                                <td style="width: 25%; vertical-align: top;">
                                                                                                                                     <asp:TextBox ID="txtCustomCYAN" runat="server" Width="30px"></asp:TextBox></td>
-                                                                                                                                <td style="width: 10%;vertical-align:top;">
+                                                                                                                                <td style="width: 10%; vertical-align: top;">
                                                                                                                                     <div style="background-color: MAGENTA; border: solid 1px; border-color: black; width: 15px; height: 15px;"></div>
                                                                                                                                 </td>
-                                                                                                                                <td style="width: 25%;vertical-align:top;">
+                                                                                                                                <td style="width: 25%; vertical-align: top;">
                                                                                                                                     <asp:TextBox ID="txtCustomMagenta" runat="server" Width="30px"></asp:TextBox></td>
-                                                                                                                                <td style="width: 10%;vertical-align:top;">
+                                                                                                                                <td style="width: 10%; vertical-align: top;">
                                                                                                                                     <div style="background-color: YELLOW; border: solid 1px; border-color: black; width: 15px; height: 15px;"></div>
                                                                                                                                 </td>
-                                                                                                                                <td style="width: 25%;vertical-align:top;">
+                                                                                                                                <td style="width: 25%; vertical-align: top;">
                                                                                                                                     <asp:TextBox ID="txtCustomYellow" runat="server" Width="30px"></asp:TextBox></td>
-                                                                                                                                <td style="width: 10%;vertical-align:top;">
+                                                                                                                                <td style="width: 10%; vertical-align: top;">
                                                                                                                                     <div style="background-color: black; border: solid 1px; border-color: black; width: 15px; height: 15px;"></div>
                                                                                                                                 </td>
-                                                                                                                                <td style="width: 25%;vertical-align:top;">
+                                                                                                                                <td style="width: 25%; vertical-align: top;">
                                                                                                                                     <asp:TextBox ID="txtCustomBlack" runat="server" Width="30px"></asp:TextBox>
                                                                                                                                 </td>
                                                                                                                             </tr>
@@ -1129,9 +1250,190 @@
                                                                             Device Link Tab
                                                                         </div>
                                                                     </div>
-                                                                     <div>
+                                                                    <div>
                                                                         <div>
-                                                                            Settings Tab
+                                                                            <asp:Panel ID="panel7" Style="padding: 1px" runat="server" BorderStyle="None" Width="100%">
+                                                                                <table style="width: 100%; vertical-align: top">
+                                                                                    <tr>
+                                                                                        <td style="vertical-align: top; width: 15%;">BlackGeneration
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top; width: 5%;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top; width: 75%;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingBlackGeneration" Text="-1.75" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr id="trSettingBlackStart" runat="server">
+                                                                                        <td style="vertical-align: top;">BlackStart
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingBlackStart" Text="0" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr id="trSettingBlackWidth" runat="server">
+                                                                                        <td style="vertical-align: top;">BlackWidth
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingBlackWidth" Text="100" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="vertical-align: top;">Exceptions
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingExceptions" Text="0" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="vertical-align: top;">InkMax
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingInmax" Text="Auto" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="vertical-align: top;">InkTotal
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingInTotal" Text="280" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="vertical-align: top;">BlackTAC
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingBlackTAC" Text="240" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="vertical-align: top;">BrightenerCorrection
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingBrightenerCorrection" Text="0" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="vertical-align: top;">MeasurementCorrection
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingMeasurementCorrection" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="vertical-align: top;">SaturationCompression
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingSaturationCompression" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="vertical-align: top;">PerceptualCompression
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingPerceptualCompression" Text="14" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr id="trPerceptualChromaCompression" runat="server">
+                                                                                        <td style="vertical-align: top;">PerceptualChromaCompression
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingPerceptualChromaCompression" Text="0" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr id="trPerceptualLightnessCorrection" runat="server">
+                                                                                        <td style="vertical-align: top;">PerceptualLightnessCorrection
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingPerceptualLightnessCorrection" Text="0" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr id="trSaturationLightnessCorrection" runat="server">
+                                                                                        <td style="vertical-align: top;">SaturationLightnessCorrection
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingSaturationLightnessCorrection" Text="0" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr id="trSaturationChromaCompression" runat="server">
+                                                                                        <td style="vertical-align: top;">SaturationChromaCompression
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingSaturationChromaCompression" Text="0" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="vertical-align: top;">PerceptualGrayCorrection
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;"><b>:</b>
+                                                                                        </td>
+                                                                                        <td style="vertical-align: top;">
+                                                                                            <div style="float: left">
+                                                                                                <asp:Label runat="server" ID="lblSettingPerceptualGrayCorrection" Text="0" />
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                </table>
+                                                                            </asp:Panel>
+
                                                                         </div>
                                                                     </div>
                                                             </td>
@@ -1630,3 +1932,4 @@
         </tr>
     </table>
 </div>
+
