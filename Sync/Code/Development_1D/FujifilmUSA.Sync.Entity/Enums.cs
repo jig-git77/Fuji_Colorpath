@@ -301,7 +301,23 @@ namespace FujifilmUSA.Sync.Entity
         Attributes1 = 36,
         SaveProfilerInfo = 37,
         SaveProfilerData = 38,
-        Version = 39
+        Version = 39,
+        LinearizationType = 40,
+        OOGMethod = 41,
+        InKSaveMode = 42,
+        DLSrcWhite = 43,
+        DLSrcBlack = 44,
+        PerceptualChromaCompression = 45,
+        PerceptualCompression = 46,
+        PerceptualGrayCorrection = 47,
+        PerceptualLightnessCorrection = 48,
+        SaturationChromaCompression = 49,
+        SaturationCompression = 50,
+        SaturationGrayCorrection = 51,
+        SaturationLightnessCorrection = 52,
+        Exceptions = 53,
+        BlackTAC=54,
+
     }
 
     [Flags]

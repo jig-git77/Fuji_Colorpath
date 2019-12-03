@@ -27,7 +27,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ph.Controls.Add(ctrl);
                     break;
                 case ELeftMenuItemLevel.ProfilerOption:
-                    ctrl = this.LoadControl("~/UserControl/AddProject/ProfilerOptions.ascx");
+                    ctrl = this.LoadControl("~/UserControl/AddProject/ProfilerOptions.ascx");                    
                     ctrl.ID = "ctrl_ProfilerOptions";
                     ph.Controls.Add(ctrl);
                     break;

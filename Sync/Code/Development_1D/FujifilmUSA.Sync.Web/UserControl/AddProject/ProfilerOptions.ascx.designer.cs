@@ -706,6 +706,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtRange;
         
         /// <summary>
+        /// pnlCustomSetting control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCustomSetting;
+        
+        /// <summary>
         /// tblCustomProfileSetting control.
         /// </summary>
         /// <remarks>
@@ -1165,6 +1174,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblSettingBlackGeneration;
         
         /// <summary>
+        /// hdnSettingBlackGeneration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingBlackGeneration;
+        
+        /// <summary>
         /// trSettingBlackStart control.
         /// </summary>
         /// <remarks>
@@ -1181,6 +1199,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSettingBlackStart;
+        
+        /// <summary>
+        /// hdnSettingBlackStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingBlackStart;
         
         /// <summary>
         /// trSettingBlackWidth control.
@@ -1201,6 +1228,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblSettingBlackWidth;
         
         /// <summary>
+        /// hdnSettingBlackWidth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingBlackWidth;
+        
+        /// <summary>
         /// lblSettingExceptions control.
         /// </summary>
         /// <remarks>
@@ -1208,6 +1244,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSettingExceptions;
+        
+        /// <summary>
+        /// hdnSettingExceptions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingExceptions;
         
         /// <summary>
         /// lblSettingInmax control.
@@ -1219,6 +1264,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblSettingInmax;
         
         /// <summary>
+        /// hdnSettingInmax control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingInmax;
+        
+        /// <summary>
         /// lblSettingInTotal control.
         /// </summary>
         /// <remarks>
@@ -1226,6 +1280,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSettingInTotal;
+        
+        /// <summary>
+        /// hdnSettingInTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingInTotal;
         
         /// <summary>
         /// lblSettingBlackTAC control.
@@ -1237,6 +1300,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblSettingBlackTAC;
         
         /// <summary>
+        /// hdnSettingBlackTAC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingBlackTAC;
+        
+        /// <summary>
         /// lblSettingBrightenerCorrection control.
         /// </summary>
         /// <remarks>
@@ -1244,6 +1316,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSettingBrightenerCorrection;
+        
+        /// <summary>
+        /// hdnSettingBrightenerCorrection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingBrightenerCorrection;
         
         /// <summary>
         /// lblSettingMeasurementCorrection control.
@@ -1255,6 +1336,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblSettingMeasurementCorrection;
         
         /// <summary>
+        /// hdnSettingMeasurementCorrection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingMeasurementCorrection;
+        
+        /// <summary>
         /// lblSettingSaturationCompression control.
         /// </summary>
         /// <remarks>
@@ -1264,6 +1354,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblSettingSaturationCompression;
         
         /// <summary>
+        /// hdnSettingSaturationCompression control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingSaturationCompression;
+        
+        /// <summary>
         /// lblSettingPerceptualCompression control.
         /// </summary>
         /// <remarks>
@@ -1271,6 +1370,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSettingPerceptualCompression;
+        
+        /// <summary>
+        /// hdnSettingPerceptualCompression control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingPerceptualCompression;
         
         /// <summary>
         /// trPerceptualChromaCompression control.
@@ -1291,6 +1399,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblSettingPerceptualChromaCompression;
         
         /// <summary>
+        /// hdnSettingPerceptualChromaCompression control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingPerceptualChromaCompression;
+        
+        /// <summary>
         /// trPerceptualLightnessCorrection control.
         /// </summary>
         /// <remarks>
@@ -1307,6 +1424,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSettingPerceptualLightnessCorrection;
+        
+        /// <summary>
+        /// hdnSettingPerceptualLightnessCorrection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingPerceptualLightnessCorrection;
         
         /// <summary>
         /// trSaturationLightnessCorrection control.
@@ -1327,6 +1453,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblSettingSaturationLightnessCorrection;
         
         /// <summary>
+        /// hdnSettingSaturationLightnessCorrection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingSaturationLightnessCorrection;
+        
+        /// <summary>
         /// trSaturationChromaCompression control.
         /// </summary>
         /// <remarks>
@@ -1345,6 +1480,42 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblSettingSaturationChromaCompression;
         
         /// <summary>
+        /// hdnSettingSaturationChromaCompression control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingSaturationChromaCompression;
+        
+        /// <summary>
+        /// trSaturationGrayCorrection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trSaturationGrayCorrection;
+        
+        /// <summary>
+        /// lblSettingSaturationGrayCorrection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSettingSaturationGrayCorrection;
+        
+        /// <summary>
+        /// hdnSettingSaturationGrayCorrection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingSaturationGrayCorrection;
+        
+        /// <summary>
         /// lblSettingPerceptualGrayCorrection control.
         /// </summary>
         /// <remarks>
@@ -1352,6 +1523,42 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSettingPerceptualGrayCorrection;
+        
+        /// <summary>
+        /// hdnSettingPerceptualGrayCorrection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSettingPerceptualGrayCorrection;
+        
+        /// <summary>
+        /// pnlbtnSaveCustom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel pnlbtnSaveCustom;
+        
+        /// <summary>
+        /// lnkCustomProfileSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkCustomProfileSave;
+        
+        /// <summary>
+        /// Localize15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize15;
         
         /// <summary>
         /// updateProgress control.

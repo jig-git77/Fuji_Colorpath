@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
@@ -103,10 +104,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     tbOptionPreset.Visible = true;
                     tbMetricPreset.Visible = false;
                     BindProfileRenderings();
-                    BindPresets();
                     BindPerceptualRenderingCustomProfile();
                     BindBlackGenerationCustomProfile();
                     BindBlackCalculationCustomProfile();
+                    BindPresets();
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) //-----If Sync4D Certification Type, disable Preset Selection box
                     {
                         cmbSelectedPresets.Enabled = false;
@@ -213,7 +214,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId != 0)
+                if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId != 0 && !SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
                 {
                     cmbSelectedPresets.SelectedValue = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId.ToString();
                     cmbSelectedPresets_SelectedIndexChanged(null, null);
@@ -251,7 +252,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                     }
                 }
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //If only Sync4D project and selected branch has license allowed for custom presets, then only display option for custom
+                if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId != 0 && SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
+                {
+                    cmbSelectedPresets.SelectedValue = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId.ToString();
+                    cmbSelectedPresets_SelectedIndexChanged(null, null);
+                }
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //If only Sync4D project and selected branch has license allowed for custom presets, then only display option for custom
                 {
                     if (SessionManager.Instance.CurrentDevice.License.IsCustomProfOptions == true)
                     {
@@ -632,10 +638,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void AddProfilerOptionImportSettings(List<ProfilerOptionPreset> lstProfilerOptionPreset)
         {
-            
+
             List<DeviceFamilyProfilerOption> DeviceOptionList = new List<DeviceFamilyProfilerOption>();
 
-            DeviceFamilyProfilerOption = new DeviceFamilyProfilerOption();           
+            DeviceFamilyProfilerOption = new DeviceFamilyProfilerOption();
             DeviceFamilyProfilerOption.DeviceFamilyProfilerOptionId = -1;
             DeviceFamilyProfilerOption.DeviceFamilyId = 1;
             DeviceFamilyProfilerOption.ProfilerOptionsName = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption ? txtProfileDescription.Text : "Import";
@@ -643,7 +649,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             DeviceFamilyProfilerOption.ProjectTypeID = 3;
             DeviceFamilyProfilerOption.UserID = SessionManager.Instance.CurrentUser.UserId;
             DeviceFamilyProfilerOption.IsCustomOption = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption;
-            
+
 
 
 
@@ -673,9 +679,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             #endregion
 
-            if (!(bDestProfileType && bDevProfileType && bOptProfileType))
+            if (SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption)
             {
-                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_CSV_ProfilerOptionsPreset"), rows));
+                if (!(bDestProfileType && bDevProfileType && bOptProfileType))
+                {
+                    throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_CSV_ProfilerOptionsPreset"), rows));
+                }
+                else
+                {
+                    DeviceFamilyProfilerOption.ProfilerOptionPresets = (lstProfilerOptionPreset.
+                                                                Select(x => new ProfilerOptionPreset()
+                                                                {
+                                                                    ProfileTypeId = x.ProfileTypeId,
+                                                                    ProfilerOption = x.ProfilerOption,
+                                                                    ProfilerOptionValue = x.ProfilerOptionValue
+                                                                }).ToList());
+                }
             }
             else
             {
@@ -695,6 +714,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ViewState[_vsDeviceFamilyProfilerOption] = DeviceOptionList;
 
             BindPresets();
+            ScriptManager.RegisterStartupScript(this, GetType(), "callJSFunction", "renderkendoTabStrip();", true);
         }
 
         private void AddProfilerCustomOptionSettings()
@@ -749,7 +769,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void cmbSelectedPresets_SelectedIndexChanged(object sender, EventArgs e)
         {
             ClearAdvancedOptionsControls();
-            if (ViewState[_vsDeviceFamilyProfilerOption] != null)
+            if (ViewState[_vsDeviceFamilyProfilerOption] != null && !SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
             {
                 var familyOption =
                     ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
@@ -908,6 +928,157 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                     }
                                 });
             }
+
+            else if (ViewState[_vsDeviceFamilyProfilerOption] != null && SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
+            {
+                var familyOption =
+                    ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
+                        x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
+
+                //Start:-----If CustomSourceProfile or ReProfile Custom Source Type, then pass different set of preset options
+                /// int MainProfileTypeID = 0;
+                /// if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource)
+                /// {
+                ///     MainProfileTypeID = Convert.ToInt32(EProfileType.DestinationProfile);
+                /// }
+                /// else
+                /// {
+                ///     MainProfileTypeID = Convert.ToInt32(EProfileType.DeviceLinkProfile);
+                /// }
+                //End
+
+
+                txtProfileDescription.Text = familyOption.ProfilerOptionsDesc;
+                familyOption.
+                    ProfilerOptionPresets.ToList().
+                    ForEach(x =>
+                    {
+                        var option = (EProfilerOption)Enum.Parse(typeof(EProfilerOption), x.ProfilerOption.ProfilerOptionId.ToString());
+                        switch (option)
+                        {
+                            #region Perceptual Rendering
+                            case EProfilerOption.SaturationCompression:
+                                hdnSettingSaturationCompression.Value = x.ProfilerOptionValue;
+                                lblSettingSaturationCompression.Text = x.ProfilerOptionValue;
+                                cmbPerceptualRendering.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.PerceptualCompression:
+                                hdnSettingPerceptualCompression.Value = x.ProfilerOptionValue;
+                                lblSettingPerceptualCompression.Text = x.ProfilerOptionValue;
+                                cmbPerceptualRendering.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.PerceptualChromaCompression:
+                                hdnSettingPerceptualChromaCompression.Value = x.ProfilerOptionValue;
+                                lblSettingPerceptualChromaCompression.Text = x.ProfilerOptionValue;
+                                rdsGrayBalance.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.SaturationChromaCompression:
+                                hdnSettingSaturationChromaCompression.Value = x.ProfilerOptionValue;
+                                lblSettingSaturationChromaCompression.Text = x.ProfilerOptionValue;
+                                rdsGrayBalance.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.PerceptualGrayCorrection:
+                                hdnSettingPerceptualGrayCorrection.Value = x.ProfilerOptionValue;
+                                lblSettingPerceptualGrayCorrection.Text = x.ProfilerOptionValue;
+                                rdsCoolerWarmer.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.SaturationGrayCorrection:
+                                hdnSettingSaturationGrayCorrection.Value = x.ProfilerOptionValue;
+                                lblSettingSaturationGrayCorrection.Text = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.PerceptualLightnessCorrection:
+                                hdnSettingPerceptualLightnessCorrection.Value = x.ProfilerOptionValue;
+                                lblSettingPerceptualLightnessCorrection.Text = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.SaturationLightnessCorrection:
+                                hdnSettingSaturationLightnessCorrection.Value = x.ProfilerOptionValue;
+                                lblSettingSaturationLightnessCorrection.Text = x.ProfilerOptionValue;
+                                break;
+                            #endregion
+
+                            #region Measurement Processing
+                            case EProfilerOption.BrightenerCorrection:
+                                hdnSettingBrightenerCorrection.Value = x.ProfilerOptionValue;
+                                lblSettingBrightenerCorrection.Text = x.ProfilerOptionValue;
+                                chkBrightenerCmp.Checked = true;
+                                break;
+                            case EProfilerOption.MeasurementCorrection:
+                                hdnSettingMeasurementCorrection.Value = x.ProfilerOptionValue;
+                                lblSettingMeasurementCorrection.Text = x.ProfilerOptionValue;
+                                chkMeasurementCorrection.Checked = true;
+                                break;
+                            #endregion
+
+                            #region Black Generation
+                            case EProfilerOption.BlackGeneration:
+                                hdnSettingBlackGeneration.Value = x.ProfilerOptionValue;
+                                lblSettingBlackGeneration.Text = x.ProfilerOptionValue;
+                                if ((x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.UCR.ToString().Trim()) || (x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.MinK.ToString().Trim()) || (x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.MaxK.ToString().Trim()))
+                                {
+                                    cmbBlackGeneration.SelectedItem.Text = x.ProfilerOptionValue.ToString().Trim();
+                                    rdsGCRAmount.SelectedValue = Convert.ToString("25");
+
+                                }
+                                else
+                                {
+                                    cmbBlackGeneration.SelectedValue = Convert.ToInt16(EBlackGenerationCustomProfile.GCR).ToString();
+                                    rdsGCRAmount.SelectedValue = Convert.ToString(((Convert.ToDouble(x.ProfilerOptionValue.ToString()) + 2) * 100));
+                                }
+
+                                break;
+                            case EProfilerOption.BlackStart:
+                                hdnSettingBlackStart.Value = x.ProfilerOptionValue;
+                                lblSettingBlackStart.Text = x.ProfilerOptionValue;
+                                rdsBlackStartCustom.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.BlackWidth:
+                                hdnSettingBlackWidth.Value = x.ProfilerOptionValue;
+                                lblSettingBlackWidth.Text = x.ProfilerOptionValue;
+                                rdsBlackWidthCustom.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.Exceptions:
+                                hdnSettingExceptions.Value = x.ProfilerOptionValue;
+                                lblSettingExceptions.Text = x.ProfilerOptionValue;
+
+                                if (x.ProfilerOptionValue.Trim() == "4")
+                                {
+                                    chk100BlackCustom.Checked = true;
+                                }
+                                if (x.ProfilerOptionValue.Trim() == "1")
+                                {
+                                    chkPureGray.Checked = true;
+
+                                }
+                                if (x.ProfilerOptionValue.Trim() == "5")
+                                {
+                                    chkPureGray.Checked = true;
+                                    chk100BlackCustom.Checked = true;
+
+                                }
+                                break;
+                            #endregion
+
+                            #region Black Calculation
+                            case EProfilerOption.InkMax:
+                                hdnSettingInmax.Value = x.ProfilerOptionValue;
+                                lblSettingInmax.Text = x.ProfilerOptionValue;
+                                cmbBlackCalculation.SelectedItem.Text = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.InkTotal:
+                                hdnSettingInTotal.Value = x.ProfilerOptionValue;
+                                lblSettingInTotal.Text = x.ProfilerOptionValue;
+                                rdsTAC.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.BlackTAC:
+                                hdnSettingBlackTAC.Value = x.ProfilerOptionValue;
+                                lblSettingBlackTAC.Text = x.ProfilerOptionValue;
+                                rdsBlackTAC.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                                #endregion
+                        }
+                    });
+
+            }
         }
 
         protected void ddlMetricPresets_SelectedIndexChanged(object sender, EventArgs e)
@@ -919,6 +1090,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindTolerances();
             }
         }
+
+
 
         protected void lnkbtnTargetColorSpace_Click(object sender, EventArgs e)
         {
@@ -971,6 +1144,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
+                if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
+                {
+                    SetCustomProfileOptionData();
+                }
+
                 SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = Convert.ToInt32(cmbSelectedPresets.SelectedValue);
                 SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
                 var familyPreset =
@@ -1261,6 +1439,334 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        protected void lnkCustomProfileSave_Click(object sender, EventArgs e)
+        {
+            List<ProfilerOptionPreset> lstProfilerOptionPreset = new List<ProfilerOptionPreset>();
+            ProfilerOptionPreset tmpProfilerOptionPreset;
+
+
+            #region Perceptual Rendering
+
+            if (rdBtnAdvancedPerceptualRendering.SelectedValue == "1") // Chroma
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualChromaCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualChromaCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationChromaCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationChromaCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualGrayCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualGrayCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+
+            }
+            else if (rdBtnAdvancedPerceptualRendering.SelectedValue == "2") // Saturation
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualChromaCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualChromaCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationChromaCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationChromaCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualGrayCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualGrayCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationGrayCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationGrayCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualLightnessCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualLightnessCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationLightnessCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationLightnessCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+            }
+            else if (rdBtnAdvancedPerceptualRendering.SelectedValue == "3") // Lightness
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualGrayCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualGrayCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationGrayCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationGrayCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualLightnessCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualLightnessCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationLightnessCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationLightnessCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+            }
+
+
+            #endregion
+
+            #region Measurement Processing
+            if (chkMeasurementCorrection.Checked || chkBrightenerCmp.Checked)
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BrightenerCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBrightenerCorrection.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.MeasurementCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingMeasurementCorrection.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+            }
+            #endregion
+
+            #region Black Generation
+            if (cmbBlackGeneration.SelectedValue == "1" || cmbBlackGeneration.SelectedValue == "2") //GCR  AND UCR
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackGeneration);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBlackGeneration.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackStart);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBlackStart.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackWidth);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBlackWidth.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+            }
+            else if (cmbBlackGeneration.SelectedValue == "3") //Max K
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackGeneration);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBlackGeneration.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackStart);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBlackStart.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+            }
+            else if (cmbBlackGeneration.SelectedValue == "4") //Min K
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackGeneration);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBlackGeneration.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+            }
+            tmpProfilerOptionPreset = new ProfilerOptionPreset();
+            tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+            tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.Exceptions);
+            tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingExceptions.Value;
+            tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+            tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+            tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+            lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+            #endregion
+
+            #region Black Calculation
+
+            tmpProfilerOptionPreset = new ProfilerOptionPreset();
+            tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+            tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.InkMax);
+            tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingInmax.Value;
+            tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+            tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+            tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+            lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+            tmpProfilerOptionPreset = new ProfilerOptionPreset();
+            tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+            tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.InkTotal);
+            tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingInTotal.Value;
+            tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+            tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+            tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+            lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+            tmpProfilerOptionPreset = new ProfilerOptionPreset();
+            tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+            tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackTAC);
+            tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingInTotal.Value;
+            tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+            tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+            tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+            lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+            #endregion
+
+            if (lstProfilerOptionPreset.Count > 0)
+            {
+                AddProfilerOptionImportSettings(lstProfilerOptionPreset);
+            }
+        }
         #endregion
 
         #region Methods
@@ -1941,10 +2447,376 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rdsRange.Value = rdsRange.MinimumValue;
             txtRange.Text = string.Empty;
         }
+        private void ClearCustomAdvancedProfileOptionControls()
+        {
+
+            cmbPerceptualRendering.SelectedValue = "0";
+            rdBtnAdvancedPerceptualRendering.SelectedValue = "0";
+            rdsGrayBalance.SelectedValue = "0";
+            rdsCoolerWarmer.SelectedValue = "0";
+
+            chkMeasurementCorrection.Checked = false;
+            chkBrightenerCmp.Checked = false;
+
+            cmbBlackGeneration.SelectedValue = "0";
+            rdsGCRAmount.SelectedValue = "0";
+            rdsBlackStartCustom.SelectedValue = "0";
+            rdsBlackWidthCustom.SelectedValue = "0";
+            chk100BlackCustom.Checked = false;
+            chkPureGray.Checked = false;
+
+            cmbBlackCalculation.SelectedValue = "0";
+            rdsTAC.SelectedValue = "0";
+            rdsBlackTAC.SelectedValue = "0";
+            rdsMaxBlack.SelectedValue = "0";
+        }
 
         private void ClearMetricPresetAdvancedOptionsControls()
         {
 
+        }
+        private void SetCustomProfileOptionData()
+        {
+            List<DeviceFamilyProfilerOption> DeviceOptionList = new List<DeviceFamilyProfilerOption>();
+            List<ProfilerOptionPreset> lstProfilerOptionPreset = new List<ProfilerOptionPreset>();
+            ProfilerOptionPreset tmpProfilerOptionPreset;
+            DeviceFamilyProfilerOption = new DeviceFamilyProfilerOption();
+            DeviceFamilyProfilerOption.DeviceFamilyProfilerOptionId = -1;
+            DeviceFamilyProfilerOption.DeviceFamilyId = 1;
+            DeviceFamilyProfilerOption.ProfilerOptionsName = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption ? txtProfileDescription.Text : "Import";
+            DeviceFamilyProfilerOption.ProfilerOptionsDesc = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption ? txtProfileDescription.Text : "Import Description";
+            DeviceFamilyProfilerOption.ProjectTypeID = 3;
+            DeviceFamilyProfilerOption.UserID = SessionManager.Instance.CurrentUser.UserId;
+            DeviceFamilyProfilerOption.IsCustomOption = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption;
+
+            #region Perceptual Rendering
+            tmpProfilerOptionPreset = new ProfilerOptionPreset();
+            tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+            tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+            tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+            tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+            tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.ProfileType);
+            tmpProfilerOptionPreset.ProfilerOptionValue = "Printer";
+            lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+            if (rdBtnAdvancedPerceptualRendering.SelectedValue == "1") // Chroma
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualChromaCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualChromaCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationChromaCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationChromaCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualGrayCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualGrayCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+
+            }
+            else if (rdBtnAdvancedPerceptualRendering.SelectedValue == "2") // Saturation
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualChromaCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualChromaCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationChromaCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationChromaCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualGrayCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualGrayCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationGrayCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationGrayCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualLightnessCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualLightnessCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationLightnessCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationLightnessCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+            }
+            else if (rdBtnAdvancedPerceptualRendering.SelectedValue == "3") // Lightness
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualCompression);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualCompression.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualGrayCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualGrayCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationGrayCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationGrayCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.PerceptualLightnessCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingPerceptualLightnessCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.SaturationLightnessCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingSaturationLightnessCorrection.Value;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+            }
+
+
+            #endregion
+
+            #region Measurement Processing
+            if (chkMeasurementCorrection.Checked || chkBrightenerCmp.Checked)
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BrightenerCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBrightenerCorrection.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.MeasurementCorrection);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingMeasurementCorrection.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+            }
+            #endregion
+
+            #region Black Generation
+            if (cmbBlackGeneration.SelectedValue == "1" || cmbBlackGeneration.SelectedValue == "2") //GCR  AND UCR
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackGeneration);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBlackGeneration.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackStart);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBlackStart.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackWidth);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBlackWidth.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+            }
+            else if (cmbBlackGeneration.SelectedValue == "3") //Max K
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackGeneration);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBlackGeneration.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackStart);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBlackStart.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+            }
+            else if (cmbBlackGeneration.SelectedValue == "4") //Min K
+            {
+                tmpProfilerOptionPreset = new ProfilerOptionPreset();
+                tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+                tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackGeneration);
+                tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBlackGeneration.Value;
+                tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+                tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+                tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+                lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+            }
+            tmpProfilerOptionPreset = new ProfilerOptionPreset();
+            tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+            tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.Exceptions);
+            tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingExceptions.Value;
+            tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+            tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+            tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+            lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+            #endregion
+
+            #region Black Calculation
+
+            tmpProfilerOptionPreset = new ProfilerOptionPreset();
+            tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+            tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.InkMax);
+            tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingInmax.Value;
+            tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+            tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+            tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+            lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+            tmpProfilerOptionPreset = new ProfilerOptionPreset();
+            tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+            tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.InkTotal);
+            tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingInTotal.Value;
+            tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+            tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+            tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+            lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+            tmpProfilerOptionPreset = new ProfilerOptionPreset();
+            tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+            tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackTAC);
+            tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingInTotal.Value;
+            tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
+            tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+            tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+            lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+            #endregion
+            DeviceFamilyProfilerOption.ProfilerOptionPresets = lstProfilerOptionPreset;
+            DeviceOptionList.Add(DeviceFamilyProfilerOption);
+            ViewState[_vsDeviceFamilyProfilerOption] = DeviceOptionList;
+            BindPresets();
         }
         #endregion
 
@@ -1960,7 +2832,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short LicenseTypeId { get; set; }
         public int UserID { get; set; }
         public bool IsCustomPreset { get; set; }
-        public bool IsImportPreset { get; set; }        
+        public bool IsImportPreset { get; set; }
         #endregion
 
         #region IViewMeasurementSetting Members
@@ -2087,3 +2959,4 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
     }
 }
+
