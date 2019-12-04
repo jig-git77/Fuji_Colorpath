@@ -670,6 +670,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     if (dsUser.Tables[1].Rows.Count > 0)
                     {
                         user.ProjectId = DataReader.ReadInt(dsUser.Tables[1].Rows[0], "ProjectID");
+                        user.ProjectName = DataReader.ReadString(dsUser.Tables[1].Rows[0], "ProjectName");
+                        
                         user.OptimizationRunID = DataReader.ReadInt(dsUser.Tables[1].Rows[0], "OptimizationRunID");
                         if (Convert.ToInt32(dsUser.Tables[1].Rows[0]["ProfileTypeID"]) == (int)ELicenseType.SpotLibrary)//spot project
                         {
@@ -868,6 +870,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             if (dsUser.Tables[1].Rows.Count > 0)
                             {
                                 user.ProjectId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "ProjectID");
+                                user.ProjectName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "ProjectName");
                                 user.OptimizationRunID = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "OptimizationRunID");
                                 user.ReferenceChartTypeId = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "ReferenceChartTypeID");
                                 user.ChartName = DataReader.ReadString(dsUser.Tables[1].Rows[0], "ChartName");

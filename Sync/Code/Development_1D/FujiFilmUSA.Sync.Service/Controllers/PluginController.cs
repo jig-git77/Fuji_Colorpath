@@ -576,6 +576,48 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+        [HttpGet]
+        public IHttpActionResult ValidateApplicationMeasurement(string optimizationRunID,string projectId,string userId)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+            try
+            {
+
+                if (string.IsNullOrEmpty(optimizationRunID))
+                    validationMessage = "Invalid optimizeRunId.";
+                if (string.IsNullOrEmpty(projectId))
+                    validationMessage = "Invalid projectid.";
+                if (string.IsNullOrEmpty(userId))
+                    validationMessage = "Invalid userId.";
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+                    return actionResult;
+                }
+
+
+                this.OptimizeRunId = Convert.ToInt32(optimizationRunID);
+                this.ProjectId = Convert.ToInt32(projectId);
+                this.UserID = Convert.ToInt32(userId);
+                var presenter = new PresenterPluginDataService(this);
+                presenter.ValidateApplicationMeasurement();
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, dtMeasurementValidation));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+
+        }
         #endregion
 
         #region Public Methods
@@ -625,12 +667,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     MeasurementPatchId = patch.MeasurementPatchId,
                     MeasurementId = patch.MeasurementId,
                     SampleName = patch.SampleName,
-                    CiexyzX = string.IsNullOrEmpty(patch.Ciexyz.X) ? 0 : Convert.ToDecimal(patch.Ciexyz.X),
-                    CiexyzY = string.IsNullOrEmpty(patch.Ciexyz.Y) ? 0 : Convert.ToDecimal(patch.Ciexyz.Y),
-                    CiexyzZ = string.IsNullOrEmpty(patch.Ciexyz.Z) ? 0 : Convert.ToDecimal(patch.Ciexyz.Z),
-                    CielabL = string.IsNullOrEmpty(patch.Cielab.L) ? 0 : Convert.ToDecimal(patch.Cielab.L),
-                    CielabA = string.IsNullOrEmpty(patch.Cielab.A) ? 0 : Convert.ToDecimal(patch.Cielab.A),
-                    CielabB = string.IsNullOrEmpty(patch.Cielab.B) ? 0 : Convert.ToDecimal(patch.Cielab.B),
+                    CiexyzX = string.IsNullOrEmpty(patch.Ciexyz != null ? patch.Ciexyz.X : string.Empty) ? 0 : Convert.ToDecimal(patch.Ciexyz.X),
+                    CiexyzY = string.IsNullOrEmpty(patch.Ciexyz != null ? patch.Ciexyz.Y : string.Empty) ? 0 : Convert.ToDecimal(patch.Ciexyz.Y),
+                    CiexyzZ = string.IsNullOrEmpty(patch.Ciexyz != null ? patch.Ciexyz.Z : string.Empty) ? 0 : Convert.ToDecimal(patch.Ciexyz.Z),
+                    CielabL = string.IsNullOrEmpty(patch.Ciexyz != null ? patch.Cielab.L : string.Empty) ? 0 : Convert.ToDecimal(patch.Cielab.L),
+                    CielabA = string.IsNullOrEmpty(patch.Ciexyz != null ? patch.Cielab.A : string.Empty) ? 0 : Convert.ToDecimal(patch.Cielab.A),
+                    CielabB = string.IsNullOrEmpty(patch.Ciexyz != null ? patch.Cielab.B : string.Empty) ? 0 : Convert.ToDecimal(patch.Cielab.B),
                     Δe = string.IsNullOrEmpty(patch.Δe) ? 0 : Convert.ToDecimal(patch.Δe),
                     Δe94 = string.IsNullOrEmpty(patch.Δe94) ? 0 : Convert.ToDecimal(patch.Δe94),
                     Δe2000 = string.IsNullOrEmpty(patch.Δe2000) ? 0 : Convert.ToDecimal(patch.Δe2000),
@@ -644,42 +686,42 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     },
                     Spectral = new Spectral()
                     {
-                        nm380 = string.IsNullOrEmpty(patch.Spectral.nm380) ? 0 : Convert.ToDouble(patch.Spectral.nm380),
-                        nm390 = string.IsNullOrEmpty(patch.Spectral.nm390) ? 0 : Convert.ToDouble(patch.Spectral.nm390),
-                        nm400 = string.IsNullOrEmpty(patch.Spectral.nm400) ? 0 : Convert.ToDouble(patch.Spectral.nm400),
-                        nm410 = string.IsNullOrEmpty(patch.Spectral.nm410) ? 0 : Convert.ToDouble(patch.Spectral.nm410),
-                        nm420 = string.IsNullOrEmpty(patch.Spectral.nm420) ? 0 : Convert.ToDouble(patch.Spectral.nm420),
-                        nm430 = string.IsNullOrEmpty(patch.Spectral.nm430) ? 0 : Convert.ToDouble(patch.Spectral.nm430),
-                        nm440 = string.IsNullOrEmpty(patch.Spectral.nm440) ? 0 : Convert.ToDouble(patch.Spectral.nm440),
-                        nm450 = string.IsNullOrEmpty(patch.Spectral.nm450) ? 0 : Convert.ToDouble(patch.Spectral.nm450),
-                        nm460 = string.IsNullOrEmpty(patch.Spectral.nm460) ? 0 : Convert.ToDouble(patch.Spectral.nm460),
-                        nm470 = string.IsNullOrEmpty(patch.Spectral.nm470) ? 0 : Convert.ToDouble(patch.Spectral.nm470),
-                        nm480 = string.IsNullOrEmpty(patch.Spectral.nm480) ? 0 : Convert.ToDouble(patch.Spectral.nm480),
-                        nm490 = string.IsNullOrEmpty(patch.Spectral.nm490) ? 0 : Convert.ToDouble(patch.Spectral.nm490),
-                        nm500 = string.IsNullOrEmpty(patch.Spectral.nm500) ? 0 : Convert.ToDouble(patch.Spectral.nm500),
-                        nm510 = string.IsNullOrEmpty(patch.Spectral.nm510) ? 0 : Convert.ToDouble(patch.Spectral.nm510),
-                        nm520 = string.IsNullOrEmpty(patch.Spectral.nm520) ? 0 : Convert.ToDouble(patch.Spectral.nm520),
-                        nm530 = string.IsNullOrEmpty(patch.Spectral.nm530) ? 0 : Convert.ToDouble(patch.Spectral.nm530),
-                        nm540 = string.IsNullOrEmpty(patch.Spectral.nm540) ? 0 : Convert.ToDouble(patch.Spectral.nm540),
-                        nm550 = string.IsNullOrEmpty(patch.Spectral.nm550) ? 0 : Convert.ToDouble(patch.Spectral.nm550),
-                        nm560 = string.IsNullOrEmpty(patch.Spectral.nm560) ? 0 : Convert.ToDouble(patch.Spectral.nm560),
-                        nm570 = string.IsNullOrEmpty(patch.Spectral.nm570) ? 0 : Convert.ToDouble(patch.Spectral.nm570),
-                        nm580 = string.IsNullOrEmpty(patch.Spectral.nm580) ? 0 : Convert.ToDouble(patch.Spectral.nm580),
-                        nm590 = string.IsNullOrEmpty(patch.Spectral.nm590) ? 0 : Convert.ToDouble(patch.Spectral.nm590),
-                        nm600 = string.IsNullOrEmpty(patch.Spectral.nm600) ? 0 : Convert.ToDouble(patch.Spectral.nm600),
-                        nm610 = string.IsNullOrEmpty(patch.Spectral.nm610) ? 0 : Convert.ToDouble(patch.Spectral.nm610),
-                        nm620 = string.IsNullOrEmpty(patch.Spectral.nm620) ? 0 : Convert.ToDouble(patch.Spectral.nm620),
-                        nm630 = string.IsNullOrEmpty(patch.Spectral.nm630) ? 0 : Convert.ToDouble(patch.Spectral.nm630),
-                        nm640 = string.IsNullOrEmpty(patch.Spectral.nm640) ? 0 : Convert.ToDouble(patch.Spectral.nm640),
-                        nm650 = string.IsNullOrEmpty(patch.Spectral.nm650) ? 0 : Convert.ToDouble(patch.Spectral.nm650),
-                        nm660 = string.IsNullOrEmpty(patch.Spectral.nm660) ? 0 : Convert.ToDouble(patch.Spectral.nm660),
-                        nm670 = string.IsNullOrEmpty(patch.Spectral.nm670) ? 0 : Convert.ToDouble(patch.Spectral.nm670),
-                        nm680 = string.IsNullOrEmpty(patch.Spectral.nm680) ? 0 : Convert.ToDouble(patch.Spectral.nm680),
-                        nm690 = string.IsNullOrEmpty(patch.Spectral.nm690) ? 0 : Convert.ToDouble(patch.Spectral.nm690),
-                        nm700 = string.IsNullOrEmpty(patch.Spectral.nm700) ? 0 : Convert.ToDouble(patch.Spectral.nm700),
-                        nm710 = string.IsNullOrEmpty(patch.Spectral.nm710) ? 0 : Convert.ToDouble(patch.Spectral.nm710),
-                        nm720 = string.IsNullOrEmpty(patch.Spectral.nm720) ? 0 : Convert.ToDouble(patch.Spectral.nm720),
-                        nm730 = string.IsNullOrEmpty(patch.Spectral.nm730) ? 0 : Convert.ToDouble(patch.Spectral.nm730),
+                        nm380 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm380 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm380),
+                        nm390 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm390: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm390),
+                        nm400 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm400: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm400),
+                        nm410 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm410: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm410),
+                        nm420 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm420: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm420),
+                        nm430 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm430: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm430),
+                        nm440 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm440: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm440),
+                        nm450 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm450: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm450),
+                        nm460 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm460: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm460),
+                        nm470 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm470: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm470),
+                        nm480 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm480: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm480),
+                        nm490 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm490: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm490),
+                        nm500 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm500: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm500),
+                        nm510 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm510: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm510),
+                        nm520 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm520: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm520),
+                        nm530 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm530: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm530),
+                        nm540 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm540: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm540),
+                        nm550 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm550: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm550),
+                        nm560 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm560: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm560),
+                        nm570 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm570: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm570),
+                        nm580 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm580: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm580),
+                        nm590 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm590: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm590),
+                        nm600 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm600: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm600),
+                        nm610 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm610: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm610),
+                        nm620 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm620: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm620),
+                        nm630 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm630: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm630),
+                        nm640 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm640: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm640),
+                        nm650 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm650: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm650),
+                        nm660 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm660: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm660),
+                        nm670 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm670: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm670),
+                        nm680 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm680: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm680),
+                        nm690 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm690: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm690),
+                        nm700 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm700: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm700),
+                        nm710 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm710: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm710),
+                        nm720 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm720: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm720),
+                        nm730 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm730 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm730),
                     },
                     SpotId = patch.SpotId,
                     SpotName = patch.SpotName

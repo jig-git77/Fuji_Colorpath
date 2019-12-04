@@ -259,6 +259,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataTable();
         }
+        public DataTable ValidateApplicationMeasurement(int optimizationRunId, int projectId, int userId)
+        {
+            return new DataTable();
+        }
         #endregion
 
         #region ITaskBase Members

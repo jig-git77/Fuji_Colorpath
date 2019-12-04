@@ -9,6 +9,7 @@ namespace FujifilmUSA.Sync.Entity
     public class ReferenceChartApp : ReferenceChartType
     {
         public int ProjectId { get; set; }
+        public string ProjectName { get; set; }
         public int OptimizationRunID { get; set; }
         public ChartSetting ChartSetting { get; set; }
         public MeasurementSettingApp MeasurementSettings { get; set; }
