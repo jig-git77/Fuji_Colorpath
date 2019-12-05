@@ -18,5 +18,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         string ProjectType { get; set; }
         DataTable dtMeasurementValidation { get; set; }
         int UserID { get; set; }
+        string MeaDeviceSerialNo { get; set; }
     }
 }

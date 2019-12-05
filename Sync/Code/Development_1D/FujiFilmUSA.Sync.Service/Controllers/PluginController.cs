@@ -577,7 +577,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult ValidateApplicationMeasurement(string optimizationRunID,string projectId,string userId)
+        public IHttpActionResult ValidateApplicationMeasurement(string optimizationRunID,string projectId,string SerialNo)
         {
             IHttpActionResult actionResult = null;
             string validationMessage = "";
@@ -588,8 +588,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     validationMessage = "Invalid optimizeRunId.";
                 if (string.IsNullOrEmpty(projectId))
                     validationMessage = "Invalid projectid.";
-                if (string.IsNullOrEmpty(userId))
-                    validationMessage = "Invalid userId.";
+                if (string.IsNullOrEmpty(SerialNo))
+                    validationMessage = "Invalid Serial Number.";
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -603,7 +603,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                 this.OptimizeRunId = Convert.ToInt32(optimizationRunID);
                 this.ProjectId = Convert.ToInt32(projectId);
-                this.UserID = Convert.ToInt32(userId);
+                this.MeaDeviceSerialNo = SerialNo;
                 var presenter = new PresenterPluginDataService(this);
                 presenter.ValidateApplicationMeasurement();
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, dtMeasurementValidation));
@@ -746,6 +746,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public string ProjectType { get; set; }
         public DataTable dtMeasurementValidation { get; set; }
         public int UserID { get; set; }
+        public string MeaDeviceSerialNo { get; set; }
         #endregion
 
         #region IViewTaskeroUser Members

@@ -2626,10 +2626,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
 
-        public DataTable ValidateApplicationMeasurement(int optimizationRunId,int projectId,int userId)
+        public DataTable ValidateApplicationMeasurement(int optimizationRunId,int projectId,string SerialNo)
         {
             var measurements = new DataSet();
-            string storedProc = "CP.ValidateApplicationMesaurment";         
+            string storedProc = "CP.ValidateApplicationMeasurement";         
             DataTable dtPatchDetails = new DataTable();
             Common.ImplementBusinessLogic(
                 () =>
@@ -2639,7 +2639,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 storedProc,
-                             new object[] { optimizationRunId, projectId, userId });
+                             new object[] { optimizationRunId, projectId, SerialNo });
                     if (dsMeasurements.Tables.Count > 0)
                         dtPatchDetails = dsMeasurements.Tables[0];
                 },
