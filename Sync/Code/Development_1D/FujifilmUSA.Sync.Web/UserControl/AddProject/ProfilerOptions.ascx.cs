@@ -133,39 +133,41 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindPresets()
         {
 
-            if (ViewState[_vsDeviceFamilyProfilerOption] == null || (!SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption && !SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption))
+            if (!SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
             {
-                DeviceFamilyId = SessionManager.Instance.CurrentDevice.DeviceFamily.DeviceFamilyId;
-                LicenseTypeId = (short)SessionManager.Instance.CurrentProject.LicenseType;
-                UserID = SessionManager.Instance.CurrentUser.UserId;
-                IsCustomPreset = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption;
-                IsImportPreset = SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption;
-                _presenterDeviceFamilyProfilerOption.GetDeviceFamilyProfilerOption();
-                if (!IsErrorOccured)
+                if (ViewState[_vsDeviceFamilyProfilerOption] == null || !SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption)
                 {
+                    DeviceFamilyId = SessionManager.Instance.CurrentDevice.DeviceFamily.DeviceFamilyId;
+                    LicenseTypeId = (short)SessionManager.Instance.CurrentProject.LicenseType;
+                    UserID = SessionManager.Instance.CurrentUser.UserId;
+                    IsCustomPreset = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption;
+                    IsImportPreset = SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption;
+                    _presenterDeviceFamilyProfilerOption.GetDeviceFamilyProfilerOption();
+                    if (!IsErrorOccured)
+                    {
 
+                        cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
+                        cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
+                        ViewState[_vsDeviceFamilyProfilerOption] = ProfileOption;
+                        cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
+                        if (ProfileOption != null)
+                        {
+                            cmbSelectedPresets.SelectedIndex = 0;
+                        }
+                        cmbSelectedPresets.DataBind();
+                        cmbSelectedPresets_SelectedIndexChanged(null, null);
+                    }
+                }
+                else
+                {
+                    trSelectPreset.Visible = true;
                     cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
                     cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
-                    ViewState[_vsDeviceFamilyProfilerOption] = ProfileOption;
                     cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
-                    if (ProfileOption != null)
-                    {
-                        cmbSelectedPresets.SelectedIndex = 0;
-                    }
                     cmbSelectedPresets.DataBind();
                     cmbSelectedPresets_SelectedIndexChanged(null, null);
                 }
             }
-            else
-            {
-                trSelectPreset.Visible = true;
-                cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
-                cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
-                cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
-                cmbSelectedPresets.DataBind();
-                cmbSelectedPresets_SelectedIndexChanged(null, null);
-            }
-
         }
 
         private void LoadProjectInfoFromSession()
@@ -254,10 +256,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId != 0 && SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
                 {
-                    cmbSelectedPresets.SelectedValue = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId.ToString();
-                    cmbSelectedPresets_SelectedIndexChanged(null, null);
+                    BindCustomProfileOptionData();
+
                 }
-                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //If only Sync4D project and selected branch has license allowed for custom presets, then only display option for custom
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //If only Sync4D project and selected branch has license allowed for custom presets, then only display option for custom
                 {
                     if (SessionManager.Instance.CurrentDevice.License.IsCustomProfOptions == true)
                     {
@@ -769,7 +771,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void cmbSelectedPresets_SelectedIndexChanged(object sender, EventArgs e)
         {
             ClearAdvancedOptionsControls();
-            if (ViewState[_vsDeviceFamilyProfilerOption] != null && !SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
+            if (ViewState[_vsDeviceFamilyProfilerOption] != null)
             {
                 var familyOption =
                     ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
@@ -928,157 +930,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                     }
                                 });
             }
-
-            else if (ViewState[_vsDeviceFamilyProfilerOption] != null && SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
-            {
-                var familyOption =
-                    ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
-                        x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
-
-                //Start:-----If CustomSourceProfile or ReProfile Custom Source Type, then pass different set of preset options
-                /// int MainProfileTypeID = 0;
-                /// if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource)
-                /// {
-                ///     MainProfileTypeID = Convert.ToInt32(EProfileType.DestinationProfile);
-                /// }
-                /// else
-                /// {
-                ///     MainProfileTypeID = Convert.ToInt32(EProfileType.DeviceLinkProfile);
-                /// }
-                //End
-
-
-                txtProfileDescription.Text = familyOption.ProfilerOptionsDesc;
-                familyOption.
-                    ProfilerOptionPresets.ToList().
-                    ForEach(x =>
-                    {
-                        var option = (EProfilerOption)Enum.Parse(typeof(EProfilerOption), x.ProfilerOption.ProfilerOptionId.ToString());
-                        switch (option)
-                        {
-                            #region Perceptual Rendering
-                            case EProfilerOption.SaturationCompression:
-                                hdnSettingSaturationCompression.Value = x.ProfilerOptionValue;
-                                lblSettingSaturationCompression.Text = x.ProfilerOptionValue;
-                                cmbPerceptualRendering.SelectedValue = x.ProfilerOptionValue;
-                                break;
-                            case EProfilerOption.PerceptualCompression:
-                                hdnSettingPerceptualCompression.Value = x.ProfilerOptionValue;
-                                lblSettingPerceptualCompression.Text = x.ProfilerOptionValue;
-                                cmbPerceptualRendering.SelectedValue = x.ProfilerOptionValue;
-                                break;
-                            case EProfilerOption.PerceptualChromaCompression:
-                                hdnSettingPerceptualChromaCompression.Value = x.ProfilerOptionValue;
-                                lblSettingPerceptualChromaCompression.Text = x.ProfilerOptionValue;
-                                rdsGrayBalance.SelectedValue = x.ProfilerOptionValue;
-                                break;
-                            case EProfilerOption.SaturationChromaCompression:
-                                hdnSettingSaturationChromaCompression.Value = x.ProfilerOptionValue;
-                                lblSettingSaturationChromaCompression.Text = x.ProfilerOptionValue;
-                                rdsGrayBalance.SelectedValue = x.ProfilerOptionValue;
-                                break;
-                            case EProfilerOption.PerceptualGrayCorrection:
-                                hdnSettingPerceptualGrayCorrection.Value = x.ProfilerOptionValue;
-                                lblSettingPerceptualGrayCorrection.Text = x.ProfilerOptionValue;
-                                rdsCoolerWarmer.SelectedValue = x.ProfilerOptionValue;
-                                break;
-                            case EProfilerOption.SaturationGrayCorrection:
-                                hdnSettingSaturationGrayCorrection.Value = x.ProfilerOptionValue;
-                                lblSettingSaturationGrayCorrection.Text = x.ProfilerOptionValue;
-                                break;
-                            case EProfilerOption.PerceptualLightnessCorrection:
-                                hdnSettingPerceptualLightnessCorrection.Value = x.ProfilerOptionValue;
-                                lblSettingPerceptualLightnessCorrection.Text = x.ProfilerOptionValue;
-                                break;
-                            case EProfilerOption.SaturationLightnessCorrection:
-                                hdnSettingSaturationLightnessCorrection.Value = x.ProfilerOptionValue;
-                                lblSettingSaturationLightnessCorrection.Text = x.ProfilerOptionValue;
-                                break;
-                            #endregion
-
-                            #region Measurement Processing
-                            case EProfilerOption.BrightenerCorrection:
-                                hdnSettingBrightenerCorrection.Value = x.ProfilerOptionValue;
-                                lblSettingBrightenerCorrection.Text = x.ProfilerOptionValue;
-                                chkBrightenerCmp.Checked = true;
-                                break;
-                            case EProfilerOption.MeasurementCorrection:
-                                hdnSettingMeasurementCorrection.Value = x.ProfilerOptionValue;
-                                lblSettingMeasurementCorrection.Text = x.ProfilerOptionValue;
-                                chkMeasurementCorrection.Checked = true;
-                                break;
-                            #endregion
-
-                            #region Black Generation
-                            case EProfilerOption.BlackGeneration:
-                                hdnSettingBlackGeneration.Value = x.ProfilerOptionValue;
-                                lblSettingBlackGeneration.Text = x.ProfilerOptionValue;
-                                if ((x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.UCR.ToString().Trim()) || (x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.MinK.ToString().Trim()) || (x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.MaxK.ToString().Trim()))
-                                {
-                                    cmbBlackGeneration.SelectedItem.Text = x.ProfilerOptionValue.ToString().Trim();
-                                    rdsGCRAmount.SelectedValue = Convert.ToString("25");
-
-                                }
-                                else
-                                {
-                                    cmbBlackGeneration.SelectedValue = Convert.ToInt16(EBlackGenerationCustomProfile.GCR).ToString();
-                                    rdsGCRAmount.SelectedValue = Convert.ToString(((Convert.ToDouble(x.ProfilerOptionValue.ToString()) + 2) * 100));
-                                }
-
-                                break;
-                            case EProfilerOption.BlackStart:
-                                hdnSettingBlackStart.Value = x.ProfilerOptionValue;
-                                lblSettingBlackStart.Text = x.ProfilerOptionValue;
-                                rdsBlackStartCustom.SelectedValue = x.ProfilerOptionValue;
-                                break;
-                            case EProfilerOption.BlackWidth:
-                                hdnSettingBlackWidth.Value = x.ProfilerOptionValue;
-                                lblSettingBlackWidth.Text = x.ProfilerOptionValue;
-                                rdsBlackWidthCustom.SelectedValue = x.ProfilerOptionValue;
-                                break;
-                            case EProfilerOption.Exceptions:
-                                hdnSettingExceptions.Value = x.ProfilerOptionValue;
-                                lblSettingExceptions.Text = x.ProfilerOptionValue;
-
-                                if (x.ProfilerOptionValue.Trim() == "4")
-                                {
-                                    chk100BlackCustom.Checked = true;
-                                }
-                                if (x.ProfilerOptionValue.Trim() == "1")
-                                {
-                                    chkPureGray.Checked = true;
-
-                                }
-                                if (x.ProfilerOptionValue.Trim() == "5")
-                                {
-                                    chkPureGray.Checked = true;
-                                    chk100BlackCustom.Checked = true;
-
-                                }
-                                break;
-                            #endregion
-
-                            #region Black Calculation
-                            case EProfilerOption.InkMax:
-                                hdnSettingInmax.Value = x.ProfilerOptionValue;
-                                lblSettingInmax.Text = x.ProfilerOptionValue;
-                                cmbBlackCalculation.SelectedItem.Text = x.ProfilerOptionValue;
-                                break;
-                            case EProfilerOption.InkTotal:
-                                hdnSettingInTotal.Value = x.ProfilerOptionValue;
-                                lblSettingInTotal.Text = x.ProfilerOptionValue;
-                                rdsTAC.SelectedValue = x.ProfilerOptionValue;
-                                break;
-                            case EProfilerOption.BlackTAC:
-                                hdnSettingBlackTAC.Value = x.ProfilerOptionValue;
-                                lblSettingBlackTAC.Text = x.ProfilerOptionValue;
-                                rdsBlackTAC.SelectedValue = x.ProfilerOptionValue;
-                                break;
-                                #endregion
-                        }
-                    });
-
-            }
         }
 
         protected void ddlMetricPresets_SelectedIndexChanged(object sender, EventArgs e)
@@ -1146,56 +997,59 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
                 {
-                    SetCustomProfileOptionData();
+                    GetCustomProfileOptionData();
                 }
 
                 SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = Convert.ToInt32(cmbSelectedPresets.SelectedValue);
                 SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
                 var familyPreset =
-                    ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
-                        x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
+                 ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
+                     x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
+                if (!SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
+                {
+                 
 
-                //Start:-----If CustomSourceProfile or ReProfile Custom Source Type, then pass different set of preset options
-                int MainProfileTypeID = 0;
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource)
-                {
-                    MainProfileTypeID = Convert.ToInt32(EProfileType.DestinationProfile);
-                }
-                else
-                {
-                    MainProfileTypeID = Convert.ToInt32(EProfileType.DeviceLinkProfile);
-                }
-                //End
-
-                familyPreset.
-                ProfilerOptionPresets.Where(x => x.ProfileTypeId == MainProfileTypeID).ToList().
-                ForEach(x =>
-                {
-                    var option = (EProfilerOption)Enum.Parse(typeof(EProfilerOption), x.ProfilerOption.ProfilerOptionId.ToString());
-                    switch (option)
+                    //Start:-----If CustomSourceProfile or ReProfile Custom Source Type, then pass different set of preset options
+                    int MainProfileTypeID = 0;
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource)
                     {
-                        case EProfilerOption.BlackGeneration:
+                        MainProfileTypeID = Convert.ToInt32(EProfileType.DestinationProfile);
+                    }
+                    else
+                    {
+                        MainProfileTypeID = Convert.ToInt32(EProfileType.DeviceLinkProfile);
+                    }
+                    //End
+
+                    familyPreset.
+                    ProfilerOptionPresets.Where(x => x.ProfileTypeId == MainProfileTypeID).ToList().
+                    ForEach(x =>
+                    {
+                        var option = (EProfilerOption)Enum.Parse(typeof(EProfilerOption), x.ProfilerOption.ProfilerOptionId.ToString());
+                        switch (option)
+                        {
+                            case EProfilerOption.BlackGeneration:
                             //x.ProfilerOptionValue = rdsMode.Value.ToString();     //---Comment out right now to make it non- editable advanced options
                             x.ProfilerOptionValue = txtMode.Text;
-                            break;
-                        case EProfilerOption.BlackStart:
-                            x.ProfilerOptionValue = rdsBlackStart.Value.ToString();
-                            x.ProfilerOptionValue = txtBlackStart.Text;
-                            break;
-                        case EProfilerOption.BlackWidth:
-                            x.ProfilerOptionValue = rdsBlackWidth.Value.ToString();
-                            x.ProfilerOptionValue = txtBlackWidth.Text;
-                            break;
-                        case EProfilerOption.InkTotal:
+                                break;
+                            case EProfilerOption.BlackStart:
+                                x.ProfilerOptionValue = rdsBlackStart.Value.ToString();
+                                x.ProfilerOptionValue = txtBlackStart.Text;
+                                break;
+                            case EProfilerOption.BlackWidth:
+                                x.ProfilerOptionValue = rdsBlackWidth.Value.ToString();
+                                x.ProfilerOptionValue = txtBlackWidth.Text;
+                                break;
+                            case EProfilerOption.InkTotal:
                             //x.ProfilerOptionValue = rdsInkTotal.Value.ToString();     //---Comment out right now to make it non- editable advanced options
                             x.ProfilerOptionValue = txtInkTotal.Text;
-                            break;
-                        case EProfilerOption.InkMax:
-                            x.ProfilerOptionValue = txtBlackPointCustom.Text;
-                            break;
-                    }
-                });
-
+                                break;
+                            case EProfilerOption.InkMax:
+                                x.ProfilerOptionValue = txtBlackPointCustom.Text;
+                                break;
+                        }
+                    });
+                }
                 familyPreset.ProfilerOptionPresets.ForEach(x =>
                                                            SessionManager.Instance.CurrentProject.ProjectOption.
                                                                Add(new ProjectOption()
@@ -2475,7 +2329,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
 
         }
-        private void SetCustomProfileOptionData()
+        private void GetCustomProfileOptionData()
         {
             List<DeviceFamilyProfilerOption> DeviceOptionList = new List<DeviceFamilyProfilerOption>();
             List<ProfilerOptionPreset> lstProfilerOptionPreset = new List<ProfilerOptionPreset>();
@@ -2816,7 +2670,182 @@ namespace FujifilmUSA.Sync.Web.UserControl
             DeviceFamilyProfilerOption.ProfilerOptionPresets = lstProfilerOptionPreset;
             DeviceOptionList.Add(DeviceFamilyProfilerOption);
             ViewState[_vsDeviceFamilyProfilerOption] = DeviceOptionList;
-            BindPresets();
+            cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
+            cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
+            cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
+            cmbSelectedPresets.DataBind();
+        }
+        private void BindCustomProfileOptionData()
+        {
+            List<DeviceFamilyProfilerOption> DeviceOptionList = new List<DeviceFamilyProfilerOption>();
+            DeviceFamilyProfilerOption deviceFamilyProfilerOption = new DeviceFamilyProfilerOption();
+            deviceFamilyProfilerOption.ProfilerOptionPresets = new List<ProfilerOptionPreset>();
+            SessionManager.Instance.CurrentProject.ProjectOption.ForEach(x =>
+                                                           deviceFamilyProfilerOption.ProfilerOptionPresets.
+                                                               Add(new ProfilerOptionPreset()
+                                                               {
+                                                                   ProfileTypeId = x.ProfileTypeId,
+                                                                   ProfilerOption = new ProfilerOption() {ProfilerOptionId=x.ProfilerOptionId }, 
+                                                                   ProfilerOptionValue = x.ProfilerOptionValue,
+                                                               }));
+            DeviceOptionList.Add(deviceFamilyProfilerOption);
+            ProfileOption = DeviceOptionList;
+            ViewState[_vsDeviceFamilyProfilerOption] = ProfileOption;
+            cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
+            cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
+            cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
+            cmbSelectedPresets.DataBind();
+
+            if (ViewState[_vsDeviceFamilyProfilerOption] != null && SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
+            {
+                var familyOption =
+                    ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
+                        x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
+
+                //Start:-----If CustomSourceProfile or ReProfile Custom Source Type, then pass different set of preset options
+                /// int MainProfileTypeID = 0;
+                /// if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource)
+                /// {
+                ///     MainProfileTypeID = Convert.ToInt32(EProfileType.DestinationProfile);
+                /// }
+                /// else
+                /// {
+                ///     MainProfileTypeID = Convert.ToInt32(EProfileType.DeviceLinkProfile);
+                /// }
+                //End
+
+
+                txtProfileDescription.Text = familyOption.ProfilerOptionsDesc;
+                familyOption.
+                    ProfilerOptionPresets.ToList().
+                    ForEach(x =>
+                    {
+                        var option = (EProfilerOption)Enum.Parse(typeof(EProfilerOption), x.ProfilerOption.ProfilerOptionId.ToString());
+                        switch (option)
+                        {
+                            #region Perceptual Rendering
+                            case EProfilerOption.SaturationCompression:
+                                hdnSettingSaturationCompression.Value = x.ProfilerOptionValue;
+                                lblSettingSaturationCompression.Text = x.ProfilerOptionValue;
+                                cmbPerceptualRendering.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.PerceptualCompression:
+                                hdnSettingPerceptualCompression.Value = x.ProfilerOptionValue;
+                                lblSettingPerceptualCompression.Text = x.ProfilerOptionValue;
+                                cmbPerceptualRendering.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.PerceptualChromaCompression:
+                                hdnSettingPerceptualChromaCompression.Value = x.ProfilerOptionValue;
+                                lblSettingPerceptualChromaCompression.Text = x.ProfilerOptionValue;
+                                rdsGrayBalance.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.SaturationChromaCompression:
+                                hdnSettingSaturationChromaCompression.Value = x.ProfilerOptionValue;
+                                lblSettingSaturationChromaCompression.Text = x.ProfilerOptionValue;
+                                rdsGrayBalance.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.PerceptualGrayCorrection:
+                                hdnSettingPerceptualGrayCorrection.Value = x.ProfilerOptionValue;
+                                lblSettingPerceptualGrayCorrection.Text = x.ProfilerOptionValue;
+                                rdsCoolerWarmer.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.SaturationGrayCorrection:
+                                hdnSettingSaturationGrayCorrection.Value = x.ProfilerOptionValue;
+                                lblSettingSaturationGrayCorrection.Text = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.PerceptualLightnessCorrection:
+                                hdnSettingPerceptualLightnessCorrection.Value = x.ProfilerOptionValue;
+                                lblSettingPerceptualLightnessCorrection.Text = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.SaturationLightnessCorrection:
+                                hdnSettingSaturationLightnessCorrection.Value = x.ProfilerOptionValue;
+                                lblSettingSaturationLightnessCorrection.Text = x.ProfilerOptionValue;
+                                break;
+                            #endregion
+
+                            #region Measurement Processing
+                            case EProfilerOption.BrightenerCorrection:
+                                hdnSettingBrightenerCorrection.Value = x.ProfilerOptionValue;
+                                lblSettingBrightenerCorrection.Text = x.ProfilerOptionValue;
+                                chkBrightenerCmp.Checked = true;
+                                break;
+                            case EProfilerOption.MeasurementCorrection:
+                                hdnSettingMeasurementCorrection.Value = x.ProfilerOptionValue;
+                                lblSettingMeasurementCorrection.Text = x.ProfilerOptionValue;
+                                chkMeasurementCorrection.Checked = true;
+                                break;
+                            #endregion
+
+                            #region Black Generation
+                            case EProfilerOption.BlackGeneration:
+                                hdnSettingBlackGeneration.Value = x.ProfilerOptionValue;
+                                lblSettingBlackGeneration.Text = x.ProfilerOptionValue;
+                                if ((x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.UCR.ToString().Trim()) || (x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.MinK.ToString().Trim()) || (x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.MaxK.ToString().Trim()))
+                                {
+                                    cmbBlackGeneration.SelectedItem.Text = x.ProfilerOptionValue.ToString().Trim();
+                                    rdsGCRAmount.SelectedValue = Convert.ToString("25");
+
+                                }
+                                else
+                                {
+                                    cmbBlackGeneration.SelectedValue = Convert.ToInt16(EBlackGenerationCustomProfile.GCR).ToString();
+                                    rdsGCRAmount.SelectedValue = Convert.ToString(((Convert.ToDouble(x.ProfilerOptionValue.ToString()) + 2) * 100));
+                                }
+
+                                break;
+                            case EProfilerOption.BlackStart:
+                                hdnSettingBlackStart.Value = x.ProfilerOptionValue;
+                                lblSettingBlackStart.Text = x.ProfilerOptionValue;
+                                rdsBlackStartCustom.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.BlackWidth:
+                                hdnSettingBlackWidth.Value = x.ProfilerOptionValue;
+                                lblSettingBlackWidth.Text = x.ProfilerOptionValue;
+                                rdsBlackWidthCustom.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.Exceptions:
+                                hdnSettingExceptions.Value = x.ProfilerOptionValue;
+                                lblSettingExceptions.Text = x.ProfilerOptionValue;
+
+                                if (x.ProfilerOptionValue.Trim() == "4")
+                                {
+                                    chk100BlackCustom.Checked = true;
+                                }
+                                if (x.ProfilerOptionValue.Trim() == "1")
+                                {
+                                    chkPureGray.Checked = true;
+
+                                }
+                                if (x.ProfilerOptionValue.Trim() == "5")
+                                {
+                                    chkPureGray.Checked = true;
+                                    chk100BlackCustom.Checked = true;
+
+                                }
+                                break;
+                            #endregion
+
+                            #region Black Calculation
+                            case EProfilerOption.InkMax:
+                                hdnSettingInmax.Value = x.ProfilerOptionValue;
+                                lblSettingInmax.Text = x.ProfilerOptionValue;
+                                cmbBlackCalculation.SelectedItem.Text = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.InkTotal:
+                                hdnSettingInTotal.Value = x.ProfilerOptionValue;
+                                lblSettingInTotal.Text = x.ProfilerOptionValue;
+                                rdsTAC.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                            case EProfilerOption.BlackTAC:
+                                hdnSettingBlackTAC.Value = x.ProfilerOptionValue;
+                                lblSettingBlackTAC.Text = x.ProfilerOptionValue;
+                                rdsBlackTAC.SelectedValue = x.ProfilerOptionValue;
+                                break;
+                                #endregion
+                        }
+                    });
+
+            }
         }
         #endregion
 

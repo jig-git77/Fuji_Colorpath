@@ -178,7 +178,6 @@
         var txtGrayBalance = document.getElementById("<%=txtGrayBalance.ClientID%>")
         txtGrayBalance.value = rdsGrayBalanceSliderCustom.get_value();
         AdvancedPerceptualRenderingControl(txtGrayBalance.value);
-        alert($("#<%=hdnSettingPerceptualGrayCorrection.ClientID%>").val());
     }
     function OnClientLoadrdsCoolerWarmer(sender, eventArgs) {
         rdsCoolerWarmerSliderCustom = sender;
