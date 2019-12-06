@@ -115,6 +115,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     LoadProjectInfoFromSession();
                 }
             }
+            
         }
         #endregion
 
@@ -287,7 +288,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         tblCustomProfileSetting.Visible = true;
                         tblregularProfileSetting.Visible = false;
                         txtCustomPresetName.Enabled = true;
-                        txtCustomPresetName.ReadOnly = true;
+                        txtCustomPresetName.ReadOnly = false;
                         trCustomPresetName.Visible = true;
                         txtProfileDescription.Enabled = true;
                         txtProfileDescription.ReadOnly = false;
@@ -301,7 +302,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         tblCustomProfileSetting.Visible = true;
                         tblregularProfileSetting.Visible = false;
                         txtCustomPresetName.Enabled = false;
-                        txtCustomPresetName.ReadOnly = false;
+                        txtCustomPresetName.ReadOnly = true;
                         trCustomPresetName.Visible = false;
                         txtProfileDescription.Enabled = false;
                         txtProfileDescription.ReadOnly = true;
@@ -1007,7 +1008,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                      x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
                 if (!SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
                 {
-                 
+
 
                     //Start:-----If CustomSourceProfile or ReProfile Custom Source Type, then pass different set of preset options
                     int MainProfileTypeID = 0;
@@ -1029,8 +1030,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         switch (option)
                         {
                             case EProfilerOption.BlackGeneration:
-                            //x.ProfilerOptionValue = rdsMode.Value.ToString();     //---Comment out right now to make it non- editable advanced options
-                            x.ProfilerOptionValue = txtMode.Text;
+                                //x.ProfilerOptionValue = rdsMode.Value.ToString();     //---Comment out right now to make it non- editable advanced options
+                                x.ProfilerOptionValue = txtMode.Text;
                                 break;
                             case EProfilerOption.BlackStart:
                                 x.ProfilerOptionValue = rdsBlackStart.Value.ToString();
@@ -1041,8 +1042,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 x.ProfilerOptionValue = txtBlackWidth.Text;
                                 break;
                             case EProfilerOption.InkTotal:
-                            //x.ProfilerOptionValue = rdsInkTotal.Value.ToString();     //---Comment out right now to make it non- editable advanced options
-                            x.ProfilerOptionValue = txtInkTotal.Text;
+                                //x.ProfilerOptionValue = rdsInkTotal.Value.ToString();     //---Comment out right now to make it non- editable advanced options
+                                x.ProfilerOptionValue = txtInkTotal.Text;
                                 break;
                             case EProfilerOption.InkMax:
                                 x.ProfilerOptionValue = txtBlackPointCustom.Text;
@@ -1243,6 +1244,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption = true;
                 SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption = false;
+                SetDefaultCustomAdvancedProfileOptionControls();
             }
 
             else
@@ -2301,28 +2303,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rdsRange.Value = rdsRange.MinimumValue;
             txtRange.Text = string.Empty;
         }
-        private void ClearCustomAdvancedProfileOptionControls()
+        private void SetDefaultCustomAdvancedProfileOptionControls()
         {
 
-            cmbPerceptualRendering.SelectedValue = "0";
-            rdBtnAdvancedPerceptualRendering.SelectedValue = "0";
-            rdsGrayBalance.SelectedValue = "0";
-            rdsCoolerWarmer.SelectedValue = "0";
+            cmbPerceptualRendering.SelectedValue = "14";            
+
+            rdBtnAdvancedPerceptualRendering.SelectedValue = "1";
+            rdsGrayBalance.Value = 0;
+            rdsCoolerWarmer.Value = 0;
 
             chkMeasurementCorrection.Checked = false;
             chkBrightenerCmp.Checked = false;
 
-            cmbBlackGeneration.SelectedValue = "0";
-            rdsGCRAmount.SelectedValue = "0";
-            rdsBlackStartCustom.SelectedValue = "0";
-            rdsBlackWidthCustom.SelectedValue = "0";
+            cmbBlackGeneration.SelectedValue = "1";
+            rdsGCRAmount.Value = 25;
+            rdsBlackStartCustom.Value = 15;
+            rdsBlackWidthCustom.Value = 100;
             chk100BlackCustom.Checked = false;
             chkPureGray.Checked = false;
 
-            cmbBlackCalculation.SelectedValue = "0";
-            rdsTAC.SelectedValue = "0";
-            rdsBlackTAC.SelectedValue = "0";
-            rdsMaxBlack.SelectedValue = "0";
+            cmbBlackCalculation.SelectedValue = "1";
+            rdsTAC.Value = 320;
+            rdsBlackTAC.Value = 320;
+            rdsMaxBlack.Value = 100;
         }
 
         private void ClearMetricPresetAdvancedOptionsControls()
@@ -2334,16 +2337,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             List<DeviceFamilyProfilerOption> DeviceOptionList = new List<DeviceFamilyProfilerOption>();
             List<ProfilerOptionPreset> lstProfilerOptionPreset = new List<ProfilerOptionPreset>();
             ProfilerOptionPreset tmpProfilerOptionPreset;
+
             DeviceFamilyProfilerOption = new DeviceFamilyProfilerOption();
             DeviceFamilyProfilerOption.DeviceFamilyProfilerOptionId = -1;
             DeviceFamilyProfilerOption.DeviceFamilyId = 1;
-            DeviceFamilyProfilerOption.ProfilerOptionsName = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption ? txtProfileDescription.Text : "Import";
+            DeviceFamilyProfilerOption.ProfilerOptionsName = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption ? txtCustomPresetName.Text : "Import";
             DeviceFamilyProfilerOption.ProfilerOptionsDesc = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption ? txtProfileDescription.Text : "Import Description";
             DeviceFamilyProfilerOption.ProjectTypeID = 3;
             DeviceFamilyProfilerOption.UserID = SessionManager.Instance.CurrentUser.UserId;
             DeviceFamilyProfilerOption.IsCustomOption = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption;
 
-            #region Perceptual Rendering
+            #region Default Value
             tmpProfilerOptionPreset = new ProfilerOptionPreset();
             tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
             tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
@@ -2352,6 +2356,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
             tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.ProfileType);
             tmpProfilerOptionPreset.ProfilerOptionValue = "Printer";
             lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+
+            tmpProfilerOptionPreset = new ProfilerOptionPreset();
+            tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
+            tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DestinationProfile;
+            tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
+            tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
+            tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.ProfileType);
+            tmpProfilerOptionPreset.ProfilerOptionValue = "DeviceLink";
+            lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
+            #endregion
+
+            #region Perceptual Rendering
+
 
             if (rdBtnAdvancedPerceptualRendering.SelectedValue == "1") // Chroma
             {
@@ -2660,13 +2677,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             tmpProfilerOptionPreset = new ProfilerOptionPreset();
             tmpProfilerOptionPreset.ProfilerOption = new ProfilerOption();
             tmpProfilerOptionPreset.ProfilerOption.ProfilerOptionId = Convert.ToInt16(EProfilerOption.BlackTAC);
-            tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingInTotal.Value;
+            tmpProfilerOptionPreset.ProfilerOptionValue = hdnSettingBlackTAC.Value;
             tmpProfilerOptionPreset.ProfileTypeId = (short)EProfileType.DeviceLinkProfile;
             tmpProfilerOptionPreset.DeviceFamilyProfilerOptionId = 0;
             tmpProfilerOptionPreset.ProfilerOptionPresetId = 0;
             lstProfilerOptionPreset.Add(tmpProfilerOptionPreset);
 
             #endregion
+
             DeviceFamilyProfilerOption.ProfilerOptionPresets = lstProfilerOptionPreset;
             DeviceOptionList.Add(DeviceFamilyProfilerOption);
             ViewState[_vsDeviceFamilyProfilerOption] = DeviceOptionList;
@@ -2674,6 +2692,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
             cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
             cmbSelectedPresets.DataBind();
+            DeviceFamilyProfilerOption = DeviceFamilyProfilerOption;
+            _presenterDeviceFamilyProfilerOption.InsertCustomDeviceFamilyProfilerOption();
         }
         private void BindCustomProfileOptionData()
         {
@@ -2685,7 +2705,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                                Add(new ProfilerOptionPreset()
                                                                {
                                                                    ProfileTypeId = x.ProfileTypeId,
-                                                                   ProfilerOption = new ProfilerOption() {ProfilerOptionId=x.ProfilerOptionId }, 
+                                                                   ProfilerOption = new ProfilerOption() { ProfilerOptionId = x.ProfilerOptionId },
                                                                    ProfilerOptionValue = x.ProfilerOptionValue,
                                                                }));
             DeviceOptionList.Add(deviceFamilyProfilerOption);
@@ -2737,17 +2757,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             case EProfilerOption.PerceptualChromaCompression:
                                 hdnSettingPerceptualChromaCompression.Value = x.ProfilerOptionValue;
                                 lblSettingPerceptualChromaCompression.Text = x.ProfilerOptionValue;
-                                rdsGrayBalance.SelectedValue = x.ProfilerOptionValue;
+                                rdsGrayBalance.Value = Convert.ToDecimal(x.ProfilerOptionValue);
                                 break;
                             case EProfilerOption.SaturationChromaCompression:
                                 hdnSettingSaturationChromaCompression.Value = x.ProfilerOptionValue;
                                 lblSettingSaturationChromaCompression.Text = x.ProfilerOptionValue;
-                                rdsGrayBalance.SelectedValue = x.ProfilerOptionValue;
+                                rdsGrayBalance.Value = Convert.ToDecimal(x.ProfilerOptionValue);
                                 break;
                             case EProfilerOption.PerceptualGrayCorrection:
                                 hdnSettingPerceptualGrayCorrection.Value = x.ProfilerOptionValue;
                                 lblSettingPerceptualGrayCorrection.Text = x.ProfilerOptionValue;
-                                rdsCoolerWarmer.SelectedValue = x.ProfilerOptionValue;
+                                rdsCoolerWarmer.Value = Convert.ToDecimal(x.ProfilerOptionValue);
                                 break;
                             case EProfilerOption.SaturationGrayCorrection:
                                 hdnSettingSaturationGrayCorrection.Value = x.ProfilerOptionValue;
@@ -2783,25 +2803,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 if ((x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.UCR.ToString().Trim()) || (x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.MinK.ToString().Trim()) || (x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.MaxK.ToString().Trim()))
                                 {
                                     cmbBlackGeneration.SelectedItem.Text = x.ProfilerOptionValue.ToString().Trim();
-                                    rdsGCRAmount.SelectedValue = Convert.ToString("25");
+                                    rdsGCRAmount.Value = 25;
 
                                 }
                                 else
                                 {
                                     cmbBlackGeneration.SelectedValue = Convert.ToInt16(EBlackGenerationCustomProfile.GCR).ToString();
-                                    rdsGCRAmount.SelectedValue = Convert.ToString(((Convert.ToDouble(x.ProfilerOptionValue.ToString()) + 2) * 100));
+                                    rdsGCRAmount.Value = Convert.ToDecimal(((Convert.ToDouble(x.ProfilerOptionValue.ToString()) + 2) * 100));
                                 }
 
                                 break;
                             case EProfilerOption.BlackStart:
                                 hdnSettingBlackStart.Value = x.ProfilerOptionValue;
                                 lblSettingBlackStart.Text = x.ProfilerOptionValue;
-                                rdsBlackStartCustom.SelectedValue = x.ProfilerOptionValue;
+                                rdsBlackStartCustom.Value = Convert.ToDecimal(x.ProfilerOptionValue);
                                 break;
                             case EProfilerOption.BlackWidth:
                                 hdnSettingBlackWidth.Value = x.ProfilerOptionValue;
                                 lblSettingBlackWidth.Text = x.ProfilerOptionValue;
-                                rdsBlackWidthCustom.SelectedValue = x.ProfilerOptionValue;
+                                rdsBlackWidthCustom.Value = Convert.ToDecimal(x.ProfilerOptionValue);
                                 break;
                             case EProfilerOption.Exceptions:
                                 hdnSettingExceptions.Value = x.ProfilerOptionValue;
@@ -2834,12 +2854,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             case EProfilerOption.InkTotal:
                                 hdnSettingInTotal.Value = x.ProfilerOptionValue;
                                 lblSettingInTotal.Text = x.ProfilerOptionValue;
-                                rdsTAC.SelectedValue = x.ProfilerOptionValue;
+                                rdsTAC.Value = Convert.ToDecimal(x.ProfilerOptionValue);
                                 break;
                             case EProfilerOption.BlackTAC:
                                 hdnSettingBlackTAC.Value = x.ProfilerOptionValue;
                                 lblSettingBlackTAC.Text = x.ProfilerOptionValue;
-                                rdsBlackTAC.SelectedValue = x.ProfilerOptionValue;
+                                rdsBlackTAC.Value = Convert.ToDecimal(x.ProfilerOptionValue);
                                 break;
                                 #endregion
                         }

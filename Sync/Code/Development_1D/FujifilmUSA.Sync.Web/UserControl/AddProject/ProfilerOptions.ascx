@@ -174,14 +174,14 @@
     /*OnClientLoad RadSlider*/
     function OnClientLoadrdsGrayBalance(sender, eventArgs) {
         rdsGrayBalanceSliderCustom = sender;
-        rdsGrayBalanceSliderCustom.set_value('0');
+        //rdsGrayBalanceSliderCustom.set_value('0');
         var txtGrayBalance = document.getElementById("<%=txtGrayBalance.ClientID%>")
         txtGrayBalance.value = rdsGrayBalanceSliderCustom.get_value();
         AdvancedPerceptualRenderingControl(txtGrayBalance.value);
     }
     function OnClientLoadrdsCoolerWarmer(sender, eventArgs) {
         rdsCoolerWarmerSliderCustom = sender;
-        rdsCoolerWarmerSliderCustom.set_value('0');
+        //rdsCoolerWarmerSliderCustom.set_value('0');
 
         var txtCoolerWarmer = document.getElementById("<%=txtCoolerWarmer.ClientID%>")
         txtCoolerWarmer.value = rdsCoolerWarmerSliderCustom.get_value();
@@ -191,13 +191,14 @@
     }
     function OnClientLoadrdsGCRAmount(sender, eventArgs) {
         rdsGCRAmountSilderCustom = sender;
-        rdsGCRAmountSilderCustom.set_value('25');
+        //rdsGCRAmountSilderCustom.set_value('25');
         var txtGCRAmount = document.getElementById("<%=txtGCRAmount.ClientID%>")
         txtGCRAmount.value = rdsGCRAmountSilderCustom.get_value();
 
         SettingBlackGeneration = parseFloat(MINCustomGCRValue) + parseFloat(sender.get_value() / 100);
         $("#<%=lblSettingBlackGeneration.ClientID%>").text(SettingBlackGeneration);
-        $("#<%=hdnSettingBlackGeneration.ClientID%>").val(SettingBlackGeneration);
+        $("#<%=hdnSettingBlackGeneration.ClientID%>").val(SettingBlackGeneration);        
+        
         rdsGCRAmountSilderCustom.set_enabled(true);
 
         $("#<%=trSettingBlackStart.ClientID%>").show();
@@ -207,7 +208,7 @@
     function OnClientLoadrdsBlackStartCustom(sender, eventArgs) {
         rdsBlackStartSliderCustom = sender;
         rdsBlackStartSliderCustom.set_enabled(true);
-        rdsBlackStartSliderCustom.set_value('15');
+        //rdsBlackStartSliderCustom.set_value('15');
 
         var txtBlackStartCustom = document.getElementById("<%=txtBlackStartCustom.ClientID%>")
         txtBlackStartCustom.value = rdsBlackStartSliderCustom.get_value();
@@ -219,7 +220,7 @@
     function OnClientLoadrdsBlackWidthCustom(sender, eventArgs) {
         rdsBlackWidthSliderCustom = sender;
         rdsBlackWidthSliderCustom.set_enabled(true);
-        rdsBlackWidthSliderCustom.set_value('100');
+        //rdsBlackWidthSliderCustom.set_value('100');
         var txtBlackWidthCustom = document.getElementById("<%=txtBlackWidthCustom.ClientID%>")
         txtBlackWidthCustom.value = rdsBlackWidthSliderCustom.get_value();
         $("#<%=lblSettingBlackWidth.ClientID%>").text(txtBlackWidthCustom.value);
@@ -229,7 +230,7 @@
     }
     function OnClientLoadrdsTAC(sender, eventArgs) {
         rdsTACSliderCustom = sender;
-        rdsTACSliderCustom.set_value('320');
+        //rdsTACSliderCustom.set_value('320');
         var txtTAC = document.getElementById("<%=txtTAC.ClientID%>")
         txtTAC.value = rdsTACSliderCustom.get_value();
         $("#<%=lblSettingInTotal.ClientID%>").text(txtTAC.value);
@@ -238,7 +239,7 @@
     }
     function OnClientLoadrdsBlackTAC(sender, eventArgs) {
         rdsBlackTACSliderCustom = sender;
-        rdsBlackTACSliderCustom.set_value('320');
+        //rdsBlackTACSliderCustom.set_value('320');
         var txtBlackTAC = document.getElementById("<%=txtBlackTAC.ClientID%>")
         txtBlackTAC.value = rdsBlackTACSliderCustom.get_value();
         $("#<%=lblSettingBlackTAC.ClientID%>").text(txtBlackTAC.value);
@@ -248,7 +249,7 @@
     }
     function OnClientLoadrdsMaxBlack(sender, eventArgs) {
         rdsMaxBlackSliderCustom = sender;
-        rdsMaxBlackSliderCustom.set_value('100');
+        //rdsMaxBlackSliderCustom.set_value('100');
         var txtMaxBlack = document.getElementById("<%=txtMaxBlack.ClientID%>")
         txtMaxBlack.value = rdsMaxBlackSliderCustom.get_value();
 
@@ -1240,7 +1241,7 @@
                                                                                                                         <td style="vertical-align: top; padding-top: 15px; width: 25%;">
                                                                                                                             <asp:Localize Text="Summary" ID="lblGCRAmount" runat="server" meta:resourcekey="lblGCRAmount"></asp:Localize></td>
                                                                                                                         <td style="vertical-align: top; padding-top: 15px; width: 60%">
-                                                                                                                            <telerik:RadSlider ID="rdsGCRAmount" runat="server" OnClientValueChanged="clientValueChangerdsGCRAmount" OnClientLoad="OnClientLoadrdsGCRAmount" AutoPostBack="false" DbValue="25" Enabled="true" Height="22px" Length="180" MinimumValue="0" MaximumValue="100" SmallChange="5" LargeChange="10" Width="160px">
+                                                                                                                            <telerik:RadSlider ID="rdsGCRAmount" runat="server" OnClientValueChanged="clientValueChangerdsGCRAmount" OnClientLoad="OnClientLoadrdsGCRAmount" AutoPostBack="false"  Enabled="true" Height="22px" Length="180" MinimumValue="0" MaximumValue="100" SmallChange="5" LargeChange="10" Width="160px">
                                                                                                                             </telerik:RadSlider>
                                                                                                                         </td>
                                                                                                                         <td style="vertical-align: top; padding-top: 15px; width: 15%;">
