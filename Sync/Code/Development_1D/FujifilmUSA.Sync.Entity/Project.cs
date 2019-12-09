@@ -64,5 +64,8 @@ namespace FujifilmUSA.Sync.Entity
         public short IsCustomProfileOptions { get; set; }
 
         public string RetargetDeviceName { get; set; }
+
+        public string ProfilerOptionsName { get; set; }
+        public string ProfilerOptionsDesc { get; set; }
     }
 }

@@ -112,10 +112,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         cmbSelectedPresets.Enabled = false;
                     }
+                    SetDefaultValueCustomProfile();
                     LoadProjectInfoFromSession();
                 }
             }
-            
+
         }
         #endregion
 
@@ -1244,7 +1245,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption = true;
                 SessionManager.Instance.CurrentProject.PrintCondition.IsImportProfilerOption = false;
-                SetDefaultCustomAdvancedProfileOptionControls();
+                //SetDefaultCustomAdvancedProfileOptionControls();
             }
 
             else
@@ -2306,7 +2307,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void SetDefaultCustomAdvancedProfileOptionControls()
         {
 
-            cmbPerceptualRendering.SelectedValue = "14";            
+            cmbPerceptualRendering.SelectedValue = "14";
 
             rdBtnAdvancedPerceptualRendering.SelectedValue = "1";
             rdsGrayBalance.Value = 0;
@@ -2346,6 +2347,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             DeviceFamilyProfilerOption.ProjectTypeID = 3;
             DeviceFamilyProfilerOption.UserID = SessionManager.Instance.CurrentUser.UserId;
             DeviceFamilyProfilerOption.IsCustomOption = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption;
+            SessionManager.Instance.CurrentProject.ProfilerOptionsName = DeviceFamilyProfilerOption.ProfilerOptionsName;
+            SessionManager.Instance.CurrentProject.ProfilerOptionsDesc = DeviceFamilyProfilerOption.ProfilerOptionsDesc;
 
             #region Default Value
             tmpProfilerOptionPreset = new ProfilerOptionPreset();
@@ -2716,6 +2719,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
             cmbSelectedPresets.DataBind();
 
+            txtCustomPresetName.Text = SessionManager.Instance.CurrentProject.ProfilerOptionsName;
+            txtProfileDescription.Text = SessionManager.Instance.CurrentProject.ProfilerOptionsDesc;
+
             if (ViewState[_vsDeviceFamilyProfilerOption] != null && SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption)
             {
                 var familyOption =
@@ -2798,20 +2804,37 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                             #region Black Generation
                             case EProfilerOption.BlackGeneration:
-                                hdnSettingBlackGeneration.Value = x.ProfilerOptionValue;
-                                lblSettingBlackGeneration.Text = x.ProfilerOptionValue;
-                                if ((x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.UCR.ToString().Trim()) || (x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.MinK.ToString().Trim()) || (x.ProfilerOptionValue.ToString().Trim() == EBlackGenerationCustomProfile.MaxK.ToString().Trim()))
+                                if ((x.ProfilerOptionValue.Replace(" ", "").ToString().Trim() == EBlackGenerationCustomProfile.UCR.ToString().Trim()) || (x.ProfilerOptionValue.Replace(" ", "").ToString().Trim() == EBlackGenerationCustomProfile.MinK.ToString().Trim()) || (x.ProfilerOptionValue.Replace(" ", "").ToString().Trim() == EBlackGenerationCustomProfile.MaxK.ToString().Trim()))
                                 {
-                                    cmbBlackGeneration.SelectedItem.Text = x.ProfilerOptionValue.ToString().Trim();
-                                    rdsGCRAmount.Value = 25;
+                                    if (x.ProfilerOptionValue.Replace(" ", "").ToString().Trim() == EBlackGenerationCustomProfile.UCR.ToString().Trim())
+                                    {
+                                        rdsGCRAmount.Enabled = false;
+                                        cmbBlackGeneration.SelectedValue = Convert.ToInt16(EBlackGenerationCustomProfile.UCR).ToString();
+
+                                    }
+                                    else if (x.ProfilerOptionValue.Replace(" ", "").ToString().Trim() == EBlackGenerationCustomProfile.MinK.ToString().Trim())
+                                    {
+                                        rdsGCRAmount.Enabled = false;
+                                        rdsBlackStartCustom.Enabled = false;
+                                        rdsBlackWidthCustom.Enabled = false;
+                                        cmbBlackGeneration.SelectedValue = Convert.ToInt16(EBlackGenerationCustomProfile.MinK).ToString();
+                                    }
+                                    else if (x.ProfilerOptionValue.Replace(" ", "").ToString().Trim() == EBlackGenerationCustomProfile.MaxK.ToString().Trim())
+                                    {
+                                        rdsGCRAmount.Enabled = false;
+                                        rdsBlackStartCustom.Enabled = true;
+                                        rdsBlackWidthCustom.Enabled = false;
+                                        cmbBlackGeneration.SelectedValue = Convert.ToInt16(EBlackGenerationCustomProfile.MaxK).ToString();
+                                    }
 
                                 }
                                 else
                                 {
                                     cmbBlackGeneration.SelectedValue = Convert.ToInt16(EBlackGenerationCustomProfile.GCR).ToString();
                                     rdsGCRAmount.Value = Convert.ToDecimal(((Convert.ToDouble(x.ProfilerOptionValue.ToString()) + 2) * 100));
+                                    hdnSettingBlackGeneration.Value = x.ProfilerOptionValue;
+                                    lblSettingBlackGeneration.Text = x.ProfilerOptionValue;
                                 }
-
                                 break;
                             case EProfilerOption.BlackStart:
                                 hdnSettingBlackStart.Value = x.ProfilerOptionValue;
@@ -2849,7 +2872,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             case EProfilerOption.InkMax:
                                 hdnSettingInmax.Value = x.ProfilerOptionValue;
                                 lblSettingInmax.Text = x.ProfilerOptionValue;
-                                cmbBlackCalculation.SelectedItem.Text = x.ProfilerOptionValue;
+                                cmbBlackCalculation.SelectedValue = x.ProfilerOptionValue;
+                                if (x.ProfilerOptionValue == "Custom")
+                                {
+                                    txtCustomCYAN.Visible = true;
+                                    txtCustomBlack.Visible = true;
+                                    txtCustomMagenta.Visible = true;
+                                    txtCustomYellow.Visible = true;
+                                }
                                 break;
                             case EProfilerOption.InkTotal:
                                 hdnSettingInTotal.Value = x.ProfilerOptionValue;
@@ -2866,6 +2896,99 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     });
 
             }
+        }
+        private void SetDefaultValueCustomProfile()
+        {
+            //Perceptual Rendering
+            //var cmbPerceptualRendering = document.getElementById("<%=cmbPerceptualRendering.ClientID%>");
+            cmbPerceptualRendering.SelectedValue = "10";
+            lblSettingSaturationCompression.Text = cmbPerceptualRendering.SelectedValue;
+            lblSettingPerceptualCompression.Text = cmbPerceptualRendering.SelectedValue;
+            hdnSettingSaturationCompression.Value = cmbPerceptualRendering.SelectedValue;
+            hdnSettingPerceptualCompression.Value = cmbPerceptualRendering.SelectedValue;
+            rdBtnAdvancedPerceptualRendering.SelectedValue = "1";
+            rdsGrayBalance.Value = 0;
+            txtGrayBalance.Text = "0";
+            rdsCoolerWarmer.Value = 0;
+            txtCoolerWarmer.Text = "0";
+
+            lblSettingPerceptualChromaCompression.Text = "0";
+            hdnSettingPerceptualChromaCompression.Value = "0";
+
+            lblSettingSaturationChromaCompression.Text = "0";
+            hdnSettingSaturationChromaCompression.Value = "0";
+
+            lblSettingPerceptualGrayCorrection.Text = "0";
+            hdnSettingPerceptualGrayCorrection.Value = "0";
+
+            lblSettingPerceptualGrayCorrection.Text = "0";
+            hdnSettingPerceptualGrayCorrection.Value = "0";
+
+            //Perceptual Rendering Ending
+
+            //Measurement Processing
+            chkMeasurementCorrection.Checked = false;
+            chkBrightenerCmp.Checked = false;
+            lblSettingBrightenerCorrection.Text = "0";
+            lblSettingMeasurementCorrection.Text = "0";
+            hdnSettingMeasurementCorrection.Value = "0";
+            hdnSettingBrightenerCorrection.Value = "0";
+            //Measurement Processing Ending
+
+            //Black Generation Start
+            cmbBlackGeneration.SelectedValue = "1"; // Default GCR Selected                  
+            rdsGCRAmount.Enabled = true;
+            rdsBlackStartCustom.Enabled = true;
+            rdsBlackWidthCustom.Enabled = true;
+            rdsGCRAmount.Value = 25;
+            txtGCRAmount.Text = "25";
+            lblSettingBlackGeneration.Text = "1.75";
+            hdnSettingBlackGeneration.Value = "1.75";
+
+            rdsBlackStartCustom.Value = 15;
+            txtBlackStartCustom.Text = "15";
+            lblSettingBlackStart.Text = "15";
+            hdnSettingBlackStart.Value = "15";
+
+            rdsBlackWidthCustom.Value = 100;
+            txtBlackWidthCustom.Text = "100";
+            lblSettingBlackWidth.Text = "100";
+            hdnSettingBlackWidth.Value = "100";
+
+            trSettingBlackStart.Visible = true;
+            trSettingBlackWidth.Visible = true;
+            //Black Generation ending
+
+            ///Black Calculation
+            cmbBlackCalculation.SelectedValue = "1";
+            lblSettingInmax.Text = cmbBlackCalculation.SelectedItem.Text;
+            hdnSettingInmax.Value = cmbBlackCalculation.SelectedItem.Text;
+
+            chk100BlackCustom.Checked = false;
+            chkPureGray.Checked = false;
+            lblSettingExceptions.Text = "0";
+            hdnSettingExceptions.Value = "0";
+
+            //OnChangecmbBlackCalculation();            
+
+            rdsTAC.Value = 320;
+            txtTAC.Text = "320";
+            lblSettingInTotal.Text = "320";
+            hdnSettingInTotal.Value = "320";
+
+            rdsBlackTAC.Value = 320;
+            txtBlackTAC.Text = "320";
+            lblSettingBlackTAC.Text = "320";
+            hdnSettingBlackTAC.Value = "320";
+
+            rdsMaxBlack.Value = 100;
+            txtMaxBlack.Text = "100";
+
+            txtCustomCYAN.Visible = (cmbBlackCalculation.SelectedValue == "4");
+            txtCustomMagenta.Visible = (cmbBlackCalculation.SelectedValue == "4");
+            txtCustomYellow.Visible = (cmbBlackCalculation.SelectedValue == "4");
+            txtCustomBlack.Visible = (cmbBlackCalculation.SelectedValue == "4");
+           
         }
         #endregion
 

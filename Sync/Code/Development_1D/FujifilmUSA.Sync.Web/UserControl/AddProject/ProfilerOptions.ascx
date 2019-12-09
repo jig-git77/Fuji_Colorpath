@@ -156,6 +156,7 @@
         SettingBlackGeneration = parseFloat(MINCustomGCRValue) + parseFloat(sender.get_value() / 100);
         $("#<%=lblSettingBlackGeneration.ClientID%>").text(SettingBlackGeneration);
         $("#<%=hdnSettingBlackGeneration.ClientID%>").val(SettingBlackGeneration);
+     
     }
     function clientValueChangerdsBlackStartCustom(sender, eventArgs) {
         var txtBlackStartCustom = document.getElementById("<%=txtBlackStartCustom.ClientID%>")
@@ -169,93 +170,6 @@
         $("#<%=lblSettingBlackWidth.ClientID%>").text(txtBlackWidthCustom.value);
         $("#<%=hdnSettingBlackWidth.ClientID%>").val(txtBlackWidthCustom.value);
     }
-
-
-    /*OnClientLoad RadSlider*/
-    function OnClientLoadrdsGrayBalance(sender, eventArgs) {
-        rdsGrayBalanceSliderCustom = sender;
-        //rdsGrayBalanceSliderCustom.set_value('0');
-        var txtGrayBalance = document.getElementById("<%=txtGrayBalance.ClientID%>")
-        txtGrayBalance.value = rdsGrayBalanceSliderCustom.get_value();
-        AdvancedPerceptualRenderingControl(txtGrayBalance.value);
-    }
-    function OnClientLoadrdsCoolerWarmer(sender, eventArgs) {
-        rdsCoolerWarmerSliderCustom = sender;
-        //rdsCoolerWarmerSliderCustom.set_value('0');
-
-        var txtCoolerWarmer = document.getElementById("<%=txtCoolerWarmer.ClientID%>")
-        txtCoolerWarmer.value = rdsCoolerWarmerSliderCustom.get_value();
-
-        $("#<%=lblSettingPerceptualGrayCorrection.ClientID%>").text(txtCoolerWarmer.value);
-        $("#<%=hdnSettingPerceptualGrayCorrection.ClientID%>").val(txtCoolerWarmer.value);
-    }
-    function OnClientLoadrdsGCRAmount(sender, eventArgs) {
-        rdsGCRAmountSilderCustom = sender;
-        //rdsGCRAmountSilderCustom.set_value('25');
-        var txtGCRAmount = document.getElementById("<%=txtGCRAmount.ClientID%>")
-        txtGCRAmount.value = rdsGCRAmountSilderCustom.get_value();
-
-        SettingBlackGeneration = parseFloat(MINCustomGCRValue) + parseFloat(sender.get_value() / 100);
-        $("#<%=lblSettingBlackGeneration.ClientID%>").text(SettingBlackGeneration);
-        $("#<%=hdnSettingBlackGeneration.ClientID%>").val(SettingBlackGeneration);        
-        
-        rdsGCRAmountSilderCustom.set_enabled(true);
-
-        $("#<%=trSettingBlackStart.ClientID%>").show();
-        $("#<%=trSettingBlackWidth.ClientID%>").show();
-
-    }
-    function OnClientLoadrdsBlackStartCustom(sender, eventArgs) {
-        rdsBlackStartSliderCustom = sender;
-        rdsBlackStartSliderCustom.set_enabled(true);
-        //rdsBlackStartSliderCustom.set_value('15');
-
-        var txtBlackStartCustom = document.getElementById("<%=txtBlackStartCustom.ClientID%>")
-        txtBlackStartCustom.value = rdsBlackStartSliderCustom.get_value();
-        $("#<%=lblSettingBlackStart.ClientID%>").text(txtBlackStartCustom.value);
-        $("#<%=hdnSettingBlackStart.ClientID%>").val(txtBlackStartCustom.value);
-
-
-    }
-    function OnClientLoadrdsBlackWidthCustom(sender, eventArgs) {
-        rdsBlackWidthSliderCustom = sender;
-        rdsBlackWidthSliderCustom.set_enabled(true);
-        //rdsBlackWidthSliderCustom.set_value('100');
-        var txtBlackWidthCustom = document.getElementById("<%=txtBlackWidthCustom.ClientID%>")
-        txtBlackWidthCustom.value = rdsBlackWidthSliderCustom.get_value();
-        $("#<%=lblSettingBlackWidth.ClientID%>").text(txtBlackWidthCustom.value);
-        $("#<%=hdnSettingBlackWidth.ClientID%>").val(txtBlackWidthCustom.value);
-
-
-    }
-    function OnClientLoadrdsTAC(sender, eventArgs) {
-        rdsTACSliderCustom = sender;
-        //rdsTACSliderCustom.set_value('320');
-        var txtTAC = document.getElementById("<%=txtTAC.ClientID%>")
-        txtTAC.value = rdsTACSliderCustom.get_value();
-        $("#<%=lblSettingInTotal.ClientID%>").text(txtTAC.value);
-        $("#<%=hdnSettingInTotal.ClientID%>").val(txtTAC.value);
-
-    }
-    function OnClientLoadrdsBlackTAC(sender, eventArgs) {
-        rdsBlackTACSliderCustom = sender;
-        //rdsBlackTACSliderCustom.set_value('320');
-        var txtBlackTAC = document.getElementById("<%=txtBlackTAC.ClientID%>")
-        txtBlackTAC.value = rdsBlackTACSliderCustom.get_value();
-        $("#<%=lblSettingBlackTAC.ClientID%>").text(txtBlackTAC.value);
-        $("#<%=hdnSettingBlackTAC.ClientID%>").val(txtBlackTAC.value);
-
-
-    }
-    function OnClientLoadrdsMaxBlack(sender, eventArgs) {
-        rdsMaxBlackSliderCustom = sender;
-        //rdsMaxBlackSliderCustom.set_value('100');
-        var txtMaxBlack = document.getElementById("<%=txtMaxBlack.ClientID%>")
-        txtMaxBlack.value = rdsMaxBlackSliderCustom.get_value();
-
-    }
-
-
     function clientValueChangerdsTAC(sender, eventArgs) {
         var txtTAC = document.getElementById("<%=txtTAC.ClientID%>")
         txtTAC.value = sender.get_value();
@@ -274,6 +188,99 @@
         var txtMaxBlack = document.getElementById("<%=txtMaxBlack.ClientID%>")
         txtMaxBlack.value = sender.get_value();
     }
+
+    /*OnClientLoad RadSlider*/
+    function OnClientLoadrdsGrayBalance(sender, eventArgs) {
+        rdsGrayBalanceSliderCustom = sender;
+        //rdsGrayBalanceSliderCustom.set_value('0');
+        var txtGrayBalance = document.getElementById("<%=txtGrayBalance.ClientID%>")
+        txtGrayBalance.value = rdsGrayBalanceSliderCustom.get_value();
+        AdvancedPerceptualRenderingControl(txtGrayBalance.value);
+    }
+    function OnClientLoadrdsCoolerWarmer(sender, eventArgs) {
+        rdsCoolerWarmerSliderCustom = sender;
+        //rdsCoolerWarmerSliderCustom.set_value('0');
+
+        var txtCoolerWarmer = document.getElementById("<%=txtCoolerWarmer.ClientID%>")
+        txtCoolerWarmer.value = rdsCoolerWarmerSliderCustom.get_value();
+
+        //$("#<%=lblSettingPerceptualGrayCorrection.ClientID%>").text(txtCoolerWarmer.value);
+        //$("#<%=hdnSettingPerceptualGrayCorrection.ClientID%>").val(txtCoolerWarmer.value);
+    }
+    function OnClientLoadrdsGCRAmount(sender, eventArgs) {
+        rdsGCRAmountSilderCustom = sender;
+        //rdsGCRAmountSilderCustom.set_value('25');
+        //rdsGCRAmountSilderCustom.set_enabled(true);
+
+       <%--  var cmbBlackGeneration = document.getElementById("<%=cmbBlackGeneration.ClientID%>");
+       if ($(cmbBlackGeneration).val() == "1") { //GCR value
+            SettingBlackGeneration = parseFloat(MINCustomGCRValue) + parseFloat(sender.get_value() / 100);
+        }
+        else {
+            SettingBlackGeneration = $('#<%=cmbBlackGeneration.ClientID %> option:selected').text();
+        }--%>
+
+        var txtGCRAmount = document.getElementById("<%=txtGCRAmount.ClientID%>")
+        txtGCRAmount.value = rdsGCRAmountSilderCustom.get_value();
+
+        //SettingBlackGeneration = parseFloat(MINCustomGCRValue) + parseFloat(sender.get_value() / 100);
+        //$("#<%=lblSettingBlackGeneration.ClientID%>").text(SettingBlackGeneration);
+        //$("#<%=hdnSettingBlackGeneration.ClientID%>").val(SettingBlackGeneration);        
+        
+
+        //$("#<%=trSettingBlackStart.ClientID%>").show();
+        //$("#<%=trSettingBlackWidth.ClientID%>").show();
+    }
+    function OnClientLoadrdsBlackStartCustom(sender, eventArgs) {
+        rdsBlackStartSliderCustom = sender;
+        //rdsBlackStartSliderCustom.set_enabled(true);
+        //rdsBlackStartSliderCustom.set_value('15');
+
+        var txtBlackStartCustom = document.getElementById("<%=txtBlackStartCustom.ClientID%>")
+        txtBlackStartCustom.value = rdsBlackStartSliderCustom.get_value();
+       //$("#<%=lblSettingBlackStart.ClientID%>").text(txtBlackStartCustom.value);
+       //$("#<%=hdnSettingBlackStart.ClientID%>").val(txtBlackStartCustom.value);
+
+
+    }
+    function OnClientLoadrdsBlackWidthCustom(sender, eventArgs) {
+        rdsBlackWidthSliderCustom = sender;
+        //rdsBlackWidthSliderCustom.set_enabled(true);
+        //rdsBlackWidthSliderCustom.set_value('100');
+        var txtBlackWidthCustom = document.getElementById("<%=txtBlackWidthCustom.ClientID%>")
+        txtBlackWidthCustom.value = rdsBlackWidthSliderCustom.get_value();
+        //$("#<%=lblSettingBlackWidth.ClientID%>").text(txtBlackWidthCustom.value);
+        //$("#<%=hdnSettingBlackWidth.ClientID%>").val(txtBlackWidthCustom.value);
+
+
+    }
+    function OnClientLoadrdsTAC(sender, eventArgs) {
+        rdsTACSliderCustom = sender;
+        //rdsTACSliderCustom.set_value('320');
+        var txtTAC = document.getElementById("<%=txtTAC.ClientID%>")
+        txtTAC.value = rdsTACSliderCustom.get_value();
+        //$("#<%=lblSettingInTotal.ClientID%>").text(txtTAC.value);
+        //$("#<%=hdnSettingInTotal.ClientID%>").val(txtTAC.value);
+
+    }
+    function OnClientLoadrdsBlackTAC(sender, eventArgs) {
+        rdsBlackTACSliderCustom = sender;
+        //rdsBlackTACSliderCustom.set_value('320');
+        var txtBlackTAC = document.getElementById("<%=txtBlackTAC.ClientID%>")
+        txtBlackTAC.value = rdsBlackTACSliderCustom.get_value();
+       //$("#<%=lblSettingBlackTAC.ClientID%>").text(txtBlackTAC.value);
+       //$("#<%=hdnSettingBlackTAC.ClientID%>").val(txtBlackTAC.value);
+
+
+    }
+    function OnClientLoadrdsMaxBlack(sender, eventArgs) {
+        rdsMaxBlackSliderCustom = sender;
+        //rdsMaxBlackSliderCustom.set_value('100');
+        var txtMaxBlack = document.getElementById("<%=txtMaxBlack.ClientID%>")
+        txtMaxBlack.value = rdsMaxBlackSliderCustom.get_value();
+    }
+
+    
     function OnChangecmbBalckGeneration() {
         var cmbBlackGeneration = document.getElementById("<%=cmbBlackGeneration.ClientID%>")
         if ($(cmbBlackGeneration).val() == "2") { //UCR 
@@ -488,18 +495,20 @@
             AdvancedPerceptualRenderingControl(txtGrayBalance);
         });
 
-        SetDefaultValueCustomProfiler();
+        //SetDefaultValueCustomProfiler();
+        
     });
 
     function SetDefaultValueCustomProfiler() {
+        
         //Perceptual Rendering
-        var cmbPerceptualRendering = document.getElementById("<%=cmbPerceptualRendering.ClientID%>");
-        $(cmbPerceptualRendering).val('10');
-        $("#<%=lblSettingSaturationCompression.ClientID%>").text($(cmbPerceptualRendering).val());
-        $("#<%=lblSettingPerceptualCompression.ClientID%>").text($(cmbPerceptualRendering).val());
-        $("#<%=hdnSettingSaturationCompression.ClientID%>").val($(cmbPerceptualRendering).val());
-        $("#<%=hdnSettingPerceptualCompression.ClientID%>").val($(cmbPerceptualRendering).val());
-        $('input[name$=rdBtnAdvancedPerceptualRendering]:checked').val('1');
+         var cmbPerceptualRendering = document.getElementById("<%=cmbPerceptualRendering.ClientID%>");
+         $(cmbPerceptualRendering).val('10');
+         $("#<%=lblSettingSaturationCompression.ClientID%>").text($(cmbPerceptualRendering).val());
+         $("#<%=lblSettingPerceptualCompression.ClientID%>").text($(cmbPerceptualRendering).val());
+         $("#<%=hdnSettingSaturationCompression.ClientID%>").val($(cmbPerceptualRendering).val());
+         $("#<%=hdnSettingPerceptualCompression.ClientID%>").val($(cmbPerceptualRendering).val());
+         $('input[name$=rdBtnAdvancedPerceptualRendering]:checked').val('1');
         //Perceptual Rendering Ending
 
         //Measurement Processing
