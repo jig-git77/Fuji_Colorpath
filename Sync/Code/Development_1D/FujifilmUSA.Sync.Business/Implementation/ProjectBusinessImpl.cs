@@ -2387,7 +2387,35 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateMeasurementPluginStatus"));
             return returnValue;
         }
-
+        /// <summary>
+        /// This method used for Check into Third party application we check project is active measurement
+        /// </summary>
+        /// <param name="ProjectID"></param>
+        /// <param name="OptimizationRunID"></param>
+        /// <param name="DeviceSerial"></param>
+        /// <returns></returns>
+        public bool CheckMeasurementPluginStatus(int ProjectID, int OptimizationRunID, string DeviceSerial)
+        {
+            bool returnValue = false;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsResult = DataAccessFactory.
+                        Instance.
+                        GetDsResult(
+                            "[CP].[CheckMeasurementPluginStatus]",
+                            new object[]
+                                    {
+                                        ProjectID,OptimizationRunID,DeviceSerial
+                                    });
+                    if (dsResult != null && dsResult.Tables.Count > 0 && dsResult.Tables[0] != null)
+                    {
+                        returnValue = Convert.ToBoolean(dsResult.Tables[0].Rows[0][0]);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CheckMeasurementPluginStatus"));
+            return returnValue;
+        }
 
         #endregion
 

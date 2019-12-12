@@ -8,6 +8,7 @@
         <div class="float_l InformationtxtDivWidth">
             <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
             <asp:HiddenField ID="hdnPCSType" runat="server" />
+            <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
 
             <%--<div id="divMeasurementDevice">
             </div>
@@ -231,7 +232,7 @@
         }
         return false;
     }
-    function deletemeasurement(smeasurementId) {
+    function deletemeasurement(smeasurementId) {       
         var measurementId = $.trim(smeasurementId);
         //var deleteMeasurementUrl = BASE_SERVICE_URL;
         if (jQuery("input[id$=hdIsVerification]").val() == "true") {
@@ -258,6 +259,9 @@
             dataType: "json",
             dataFilter: function (data, type) {
                 return false;
+            },
+            headers: {
+                'Authorization': 'Basic ' + $('#hdfAuthToken').val()
             },
             success:
             function (response) {

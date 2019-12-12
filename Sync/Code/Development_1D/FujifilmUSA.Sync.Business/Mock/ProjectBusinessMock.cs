@@ -246,6 +246,17 @@ public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
         {
             return 0;
         }
+        /// <summary>
+        /// This method used for Check into Third party application we check project is active measurement
+        /// </summary>
+        /// <param name="ProjectID"></param>
+        /// <param name="OptimizationRunID"></param>
+        /// <param name="DeviceSerial"></param>
+        /// <returns></returns>
+        public bool CheckMeasurementPluginStatus(int ProjectID, int OptimizationRunID, string DeviceSerial)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region ITaskBase Members

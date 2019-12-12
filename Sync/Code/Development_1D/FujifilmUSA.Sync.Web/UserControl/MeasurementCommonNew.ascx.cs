@@ -5,9 +5,6 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -54,10 +51,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnBasePluginServiceUrl.Value = Utilities.ReadConfigValue("BasePluginServiceURL");
                 hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation).ToString().ToLower();
                 hdLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
+                hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
+                {
                     hdProjectId.Value = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId.ToString();
+                }
                 else
+                {
                     hdProjectId.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
+                }
 
                 hdOptimizeRunId.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
                 hdDeviceType.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId.ToString();
@@ -103,9 +105,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
             {
                 if (hdReferenceChartDisplayType.Value == "2")
+                {
                     projectType = "Optimization";
+                }
                 else if (hdReferenceChartDisplayType.Value == "3")
+                {
                     projectType = "Validation";
+                }
             }
             else
             {
@@ -121,6 +127,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             DeviceSerialNo = SessionManager.Instance.CurrentProject.MeasurementSetting.DeviceSerialNo;
             InstrumentTypeID = Convert.ToInt16(SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId);
             LicenseType = SessionManager.Instance.CurrentProject.LicenseType;
+
+            if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin)
+            {
+                if (!SessionManager.Instance.CurrentProject.PrintCondition.IsCustomDevicePluginMeasurmentWorking)
+                {
+                    bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
+                    lblMessage.Text = resultMesaurment ? "Project status has been saved. Please measure the reference chart in application." : string.Empty;
+                }
+                SessionManager.Instance.CurrentProject.PrintCondition.IsCustomDevicePluginMeasurmentWorking = true;
+            }
         }
 
         protected void btnAddPluginStatus_Click(object sender, EventArgs e)
@@ -129,9 +145,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 int result = _presenterMeasurementSetting.CreateMeasurementPluginStatus();
                 if (result > 0)
+                {
                     lblMessage.Text = "Project status has been saved. Please measure the reference chart in application.";
+                }
                 else
+                {
                     lblMessage.Text = "";
+                }
             }
             catch (Exception ex)
             {
