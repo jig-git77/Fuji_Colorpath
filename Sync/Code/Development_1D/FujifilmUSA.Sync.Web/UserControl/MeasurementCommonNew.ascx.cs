@@ -130,12 +130,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin)
             {
-                if (!SessionManager.Instance.CurrentProject.PrintCondition.IsCustomDevicePluginMeasurmentWorking)
+
+                bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
+                if (resultMesaurment)
                 {
-                    bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
                     lblMessage.Text = resultMesaurment ? "Project status has been saved. Please measure the reference chart in application." : string.Empty;
+                    btnAddPluginStatus.Enabled = false;
                 }
-                SessionManager.Instance.CurrentProject.PrintCondition.IsCustomDevicePluginMeasurmentWorking = true;
+                else
+                {
+                    lblMessage.Text = string.Empty;
+                    btnAddPluginStatus.Enabled = true;
+                }
+
             }
         }
 
@@ -147,6 +154,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (result > 0)
                 {
                     lblMessage.Text = "Project status has been saved. Please measure the reference chart in application.";
+                    btnAddPluginStatus.Enabled = false;
                 }
                 else
                 {
