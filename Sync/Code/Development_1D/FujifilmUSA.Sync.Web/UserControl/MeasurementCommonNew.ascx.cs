@@ -128,21 +128,43 @@ namespace FujifilmUSA.Sync.Web.UserControl
             InstrumentTypeID = Convert.ToInt16(SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId);
             LicenseType = SessionManager.Instance.CurrentProject.LicenseType;
 
-            if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin)
+            if (SessionManager.Instance.CurrentProject.PrintCondition != null)
             {
-
-                bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
-                if (resultMesaurment)
+                if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin)
                 {
-                    lblMessage.Text = resultMesaurment ? "Project status has been saved. Please measure the reference chart in application." : string.Empty;
-                    btnAddPluginStatus.Enabled = false;
-                }
-                else
-                {
-                    lblMessage.Text = string.Empty;
-                    btnAddPluginStatus.Enabled = true;
-                }
 
+                    bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
+                    if (resultMesaurment)
+                    {
+                        lblMessage.Text = resultMesaurment ? "Project status has been saved. Please measure the reference chart in application." : string.Empty;
+                        btnAddPluginStatus.Enabled = false;
+                    }
+                    else
+                    {
+                        lblMessage.Text = string.Empty;
+                        btnAddPluginStatus.Enabled = true;
+                    }
+
+                }
+            }
+            if (SessionManager.Instance.CurrentProject.SpotTargetProject != null)
+            {
+                if (SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.IsCustomPlugin)
+                {
+
+                    bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
+                    if (resultMesaurment)
+                    {
+                        lblMessage.Text = resultMesaurment ? "Project status has been saved. Please measure the reference chart in application." : string.Empty;
+                        btnAddPluginStatus.Enabled = false;
+                    }
+                    else
+                    {
+                        lblMessage.Text = string.Empty;
+                        btnAddPluginStatus.Enabled = true;
+                    }
+
+                }
             }
         }
 
