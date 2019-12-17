@@ -878,6 +878,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 user.NumOfRows = DataReader.ReadInt(dsUser.Tables[1].Rows[0], "NumOfRows");
                                 user.TotalPatches = DataReader.ReadInt(dsUser.Tables[1].Rows[0], "TotalPatches");
                                 user.InstrumentTypeId = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "InstrumentTypeID");
+                                user.ProjectType = new ProjectType()
+                                    {
+                                        ProjectTypeId = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID"),
+                                        ProjectTypeName= Convert.ToString((ELicenseType)DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID")),
+                                } ;
                                 //user.MeasureDeviceSrNo = DataReader.ReadString(dsUser.Tables[1].Rows[0], "MeasureDeviceSrNo");
                                 //user.ActivationKey =
                                 //    Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + user.ReferenceChartData.MeasureDeviceSrNo);
@@ -956,6 +961,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 user.NumOfRows = DataReader.ReadInt(dsUser.Tables[1].Rows[0], "NumOfRows");
                                 user.TotalPatches = DataReader.ReadInt(dsUser.Tables[1].Rows[0], "TotalPatches");
                                 user.InstrumentTypeId = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "InstrumentTypeID");
+                                user.ProjectType = new ProjectType()
+                                {
+                                    ProjectTypeId = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID"),
+                                    ProjectTypeName = Convert.ToString((ELicenseType)DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID")),
+                                };
                                 //user1.MeasureDeviceSrNo = DataReader.ReadString(dsUser.Tables[1].Rows[0], "MeasureDeviceSrNo");
                                 //user1.ActivationKey =
                                 //  Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + user.ReferenceChartData.MeasureDeviceSrNo);
