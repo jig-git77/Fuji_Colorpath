@@ -880,8 +880,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 user.InstrumentTypeId = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "InstrumentTypeID");
                                 user.ProjectType = new ProjectType()
                                     {
-                                        ProjectTypeId = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID"),
-                                        ProjectTypeName= Convert.ToString((ELicenseType)DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID")),
+                                        ProjectTypeId = Convert.ToInt32(dsUser.Tables[0].Rows[0]["ProfileTypeID"]) != 3 ? DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID") : (short)51 ,
+                                        ProjectTypeName= Convert.ToInt32(dsUser.Tables[0].Rows[0]["ProfileTypeID"]) != 3 ? Convert.ToString((ELicenseType)DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID")) : Convert.ToString((ELicenseType)51),
                                 } ;
                                 //user.MeasureDeviceSrNo = DataReader.ReadString(dsUser.Tables[1].Rows[0], "MeasureDeviceSrNo");
                                 //user.ActivationKey =
@@ -963,8 +963,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 user.InstrumentTypeId = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "InstrumentTypeID");
                                 user.ProjectType = new ProjectType()
                                 {
-                                    ProjectTypeId = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID"),
-                                    ProjectTypeName = Convert.ToString((ELicenseType)DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID")),
+                                    ProjectTypeId = Convert.ToInt32(dsUser.Tables[0].Rows[0]["ProfileTypeID"]) != 3 ? DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID") : (short)51,
+                                    ProjectTypeName = Convert.ToInt32(dsUser.Tables[0].Rows[0]["ProfileTypeID"]) != 3 ? Convert.ToString((ELicenseType)DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID")) : Convert.ToString((ELicenseType)51),
                                 };
                                 //user1.MeasureDeviceSrNo = DataReader.ReadString(dsUser.Tables[1].Rows[0], "MeasureDeviceSrNo");
                                 //user1.ActivationKey =
