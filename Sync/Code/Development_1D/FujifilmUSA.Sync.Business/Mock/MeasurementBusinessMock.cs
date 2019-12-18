@@ -263,6 +263,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataTable();
         }
+        public void SaveMeasurementErrorFile(int measurementId, int optimizeRunId, int projectid, string requestMeasurement)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region ITaskBase Members

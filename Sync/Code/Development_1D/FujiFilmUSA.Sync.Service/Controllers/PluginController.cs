@@ -1,12 +1,10 @@
-﻿using FujifilmUSA.Sync.Common;
-using FujifilmUSA.Sync.Entity;
+﻿using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -40,11 +38,19 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (projectId == null)
+                {
                     validationMessage = "Invalid Project ID.";
+                }
+
                 if (referenceChartDisplayType == null)
+                {
                     validationMessage = "Invalid Reference Chart Display Type.";
+                }
+
                 if (IsSpotProjectType == null)
+                {
                     validationMessage = "Invalid Is spot project type.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -60,19 +66,19 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 //if (_presenterLogin.ValidateUser())
                 if (true)
                 {
-                    this.ReferenceChartDisType = (EReferenceChartDisType)Enum.Parse(typeof(EReferenceChartDisType), referenceChartDisplayType);
+                    ReferenceChartDisType = (EReferenceChartDisType)Enum.Parse(typeof(EReferenceChartDisType), referenceChartDisplayType);
                     var presenter = new PresenterPluginDataService(this);
                     if (Convert.ToBoolean(IsSpotProjectType) == false)
                     {
-                        this.ProjectId = Convert.ToInt32(projectId);
+                        ProjectId = Convert.ToInt32(projectId);
                         presenter.GetPluginReferenceChartData();
                     }
                     else
                     {
-                        this.SpotProjectId = Convert.ToInt32(projectId);
+                        SpotProjectId = Convert.ToInt32(projectId);
                         presenter.GetPluginSpotReferenceChartData();
                     }
-                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, this.ReferenceChartPlugin));
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, ReferenceChartPlugin));
 
                 }
                 else
@@ -92,7 +98,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             }
             return actionResult;
         }
-
         [HttpPost]
         public IHttpActionResult SaveMeasurement(Measurement measurement)
         {
@@ -102,7 +107,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (measurement == null)
+                {
                     validationMessage = "Invalid measurements.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -113,18 +120,23 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     return actionResult;
                 }
 
-                this.Measurement = measurement;
-                this.ProjectId = measurement.ProjectId;
-                this.OptimizeRunId = measurement.OptimizeRunId;
-                this.ProjectType = "Sync4D";
+                Measurement = measurement;
+                ProjectId = measurement.ProjectId;
+                OptimizeRunId = measurement.OptimizeRunId;
+                ProjectType = "Sync4D";
 
                 bool isValid = CheckMeasurementValidation(ref actionResult);
                 if (!isValid)
+                {
                     return actionResult;
+                }
 
                 BindMeasurementPatches(measurement);
 
                 _presenterPlugin.SaveMeasurement();
+                var objJsonRequest = JsonConvert.SerializeObject(Measurement);
+                RequestMeasurment = objJsonRequest;
+                _presenterPlugin.SaveMeasurementErrorFile();
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, true));
 
                 //var presenter = new PresenterPluginDataService(this);                
@@ -180,7 +192,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (measurement == null)
+                {
                     validationMessage = "Invalid measurements.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -191,18 +205,23 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     return actionResult;
                 }
 
-                this.Measurement = measurement;
-                this.ProjectId = measurement.ProjectId;
-                this.OptimizeRunId = measurement.OptimizeRunId;
-                this.ProjectType = "Validation";
+                Measurement = measurement;
+                ProjectId = measurement.ProjectId;
+                OptimizeRunId = measurement.OptimizeRunId;
+                ProjectType = "Validation";
 
                 bool isValid = CheckMeasurementValidation(ref actionResult);
                 if (!isValid)
+                {
                     return actionResult;
+                }
 
                 BindMeasurementPatches(measurement);
-                this.Measurement = measurement;
+                Measurement = measurement;
                 _presenterPlugin.SaveVMeasurement();
+                var objJsonRequest = JsonConvert.SerializeObject(Measurement);
+                RequestMeasurment = objJsonRequest;
+                _presenterPlugin.SaveMeasurementErrorFile();
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, true));
             }
             catch (Exception ex)
@@ -224,7 +243,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (measurement == null)
+                {
                     validationMessage = "Invalid measurements.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -235,18 +256,23 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     return actionResult;
                 }
 
-                this.Measurement = measurement;
-                this.ProjectId = measurement.ProjectId;
-                this.OptimizeRunId = measurement.OptimizeRunId;
-                this.ProjectType = "Sync1D";
+                Measurement = measurement;
+                ProjectId = measurement.ProjectId;
+                OptimizeRunId = measurement.OptimizeRunId;
+                ProjectType = "Sync1D";
 
                 bool isValid = CheckMeasurementValidation(ref actionResult);
                 if (!isValid)
+                {
                     return actionResult;
+                }
 
                 BindMeasurementPatches(measurement);
                 //var presenter = new PresenterPluginDataService(this);
                 _presenterPlugin.Save1DMeasurement();
+                var objJsonRequest = JsonConvert.SerializeObject(Measurement);
+                RequestMeasurment = objJsonRequest;
+                _presenterPlugin.SaveMeasurementErrorFile();
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, true));
             }
             catch (Exception ex)
@@ -268,7 +294,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (measurement == null)
+                {
                     validationMessage = "Invalid spot measurements.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -279,11 +307,18 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     return actionResult;
                 }
 
+                Measurement = measurement;
+                ProjectId = measurement.ProjectId;
+                OptimizeRunId = measurement.OptimizeRunId;
+                ProjectType = "Spot Project";
+
                 BindMeasurementPatches(measurement);
-                this.Measurement = measurement;
+
                 var presenter = new PresenterPluginDataService(this);
                 presenter.SaveSpotMeasurement();
-
+                var objJsonRequest = JsonConvert.SerializeObject(Measurement);
+                RequestMeasurment = objJsonRequest;
+                _presenterPlugin.SaveMeasurementErrorFile();
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, true));
             }
             catch (Exception ex)
@@ -305,7 +340,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (optimizeRunId == null)
+                {
                     validationMessage = "Invalid optimizeRunId.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -316,7 +353,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     return actionResult;
                 }
 
-                this.OptimizeRunId = Convert.ToInt32(optimizeRunId);
+                OptimizeRunId = Convert.ToInt32(optimizeRunId);
                 var presenter = new PresenterPluginDataService(this);
                 presenter.GetMeasurementsOnRunId();
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, Measurements));
@@ -340,7 +377,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (optimizeRunId == null)
+                {
                     validationMessage = "Invalid optimizeRunId.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -352,7 +391,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 }
 
 
-                this.OptimizeRunId = Convert.ToInt32(optimizeRunId);
+                OptimizeRunId = Convert.ToInt32(optimizeRunId);
                 var presenter = new PresenterPluginDataService(this);
                 presenter.Get1DMeasurementsOnRunId();
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, Measurements));
@@ -376,7 +415,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (projectId == null)
+                {
                     validationMessage = "Invalid projectId.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -388,7 +429,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 }
 
 
-                this.ProjectId = Convert.ToInt32(projectId);
+                ProjectId = Convert.ToInt32(projectId);
                 var presenter = new PresenterPluginDataService(this);
                 presenter.GetVMeasurementsOnProjectId();
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, Measurements));
@@ -412,7 +453,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (optimizeRunId == null)
+                {
                     validationMessage = "Invalid optimizeRunId.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -423,7 +466,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     return actionResult;
                 }
 
-                this.OptimizeRunId = Convert.ToInt32(optimizeRunId);
+                OptimizeRunId = Convert.ToInt32(optimizeRunId);
                 var presenter = new PresenterPluginDataService(this);
                 presenter.GetSpotMeasurementsOnRunId();
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, Measurements));
@@ -448,7 +491,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (measurementId == null)
+                {
                     validationMessage = "Invalid measurementId.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -483,7 +528,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (measurementId == null)
+                {
                     validationMessage = "Invalid measurementId.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -517,7 +564,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (measurementId == null)
+                {
                     validationMessage = "Invalid measurementId.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -551,7 +600,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (measurementId == null)
+                {
                     validationMessage = "Invalid measurementId.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -577,7 +628,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult ValidateApplicationMeasurement(string optimizationRunID,string projectId,string SerialNo)
+        public IHttpActionResult ValidateApplicationMeasurement(string optimizationRunID, string projectId, string SerialNo)
         {
             IHttpActionResult actionResult = null;
             string validationMessage = "";
@@ -585,11 +636,19 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (string.IsNullOrEmpty(optimizationRunID))
+                {
                     validationMessage = "Invalid optimizeRunId.";
+                }
+
                 if (string.IsNullOrEmpty(projectId))
+                {
                     validationMessage = "Invalid projectid.";
+                }
+
                 if (string.IsNullOrEmpty(SerialNo))
+                {
                     validationMessage = "Invalid Serial Number.";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -601,9 +660,9 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 }
 
 
-                this.OptimizeRunId = Convert.ToInt32(optimizationRunID);
-                this.ProjectId = Convert.ToInt32(projectId);
-                this.MeaDeviceSerialNo = SerialNo;
+                OptimizeRunId = Convert.ToInt32(optimizationRunID);
+                ProjectId = Convert.ToInt32(projectId);
+                MeaDeviceSerialNo = SerialNo;
                 var presenter = new PresenterPluginDataService(this);
                 presenter.ValidateApplicationMeasurement();
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, dtMeasurementValidation));
@@ -631,13 +690,13 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 {
                     errorMessage = "Project is not available.";
                 }
-                else if (this.ProjectType != "Validation" && !Convert.ToBoolean(dtMeasurementValidation.Rows[0]["OptimizationRunAvailable"]))
+                else if (ProjectType != "Validation" && !Convert.ToBoolean(dtMeasurementValidation.Rows[0]["OptimizationRunAvailable"]))
                 {
                     errorMessage = "OptimizeRun is not available.";
                 }
                 else
                 {
-                    if (this.ProjectType != "Validation" && Convert.ToInt16(dtMeasurementValidation.Rows[0]["OptimizationRunAvailable"]) != (int)EOptimizeRunStatus.Open)
+                    if (ProjectType != "Validation" && Convert.ToInt16(dtMeasurementValidation.Rows[0]["OptimizationRunAvailable"]) != (int)EOptimizeRunStatus.Open)
                     {
                         errorMessage = "OptimizeRun is not in open status.";
                     }
@@ -687,40 +746,40 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     Spectral = new Spectral()
                     {
                         nm380 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm380 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm380),
-                        nm390 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm390: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm390),
-                        nm400 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm400: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm400),
-                        nm410 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm410: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm410),
-                        nm420 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm420: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm420),
-                        nm430 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm430: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm430),
-                        nm440 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm440: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm440),
-                        nm450 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm450: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm450),
-                        nm460 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm460: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm460),
-                        nm470 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm470: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm470),
-                        nm480 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm480: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm480),
-                        nm490 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm490: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm490),
-                        nm500 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm500: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm500),
-                        nm510 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm510: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm510),
-                        nm520 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm520: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm520),
-                        nm530 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm530: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm530),
-                        nm540 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm540: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm540),
-                        nm550 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm550: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm550),
-                        nm560 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm560: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm560),
-                        nm570 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm570: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm570),
-                        nm580 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm580: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm580),
-                        nm590 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm590: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm590),
-                        nm600 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm600: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm600),
-                        nm610 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm610: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm610),
-                        nm620 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm620: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm620),
-                        nm630 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm630: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm630),
-                        nm640 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm640: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm640),
-                        nm650 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm650: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm650),
-                        nm660 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm660: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm660),
-                        nm670 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm670: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm670),
-                        nm680 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm680: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm680),
-                        nm690 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm690: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm690),
-                        nm700 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm700: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm700),
-                        nm710 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm710: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm710),
-                        nm720 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm720: string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm720),
+                        nm390 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm390 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm390),
+                        nm400 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm400 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm400),
+                        nm410 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm410 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm410),
+                        nm420 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm420 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm420),
+                        nm430 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm430 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm430),
+                        nm440 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm440 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm440),
+                        nm450 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm450 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm450),
+                        nm460 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm460 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm460),
+                        nm470 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm470 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm470),
+                        nm480 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm480 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm480),
+                        nm490 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm490 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm490),
+                        nm500 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm500 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm500),
+                        nm510 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm510 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm510),
+                        nm520 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm520 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm520),
+                        nm530 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm530 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm530),
+                        nm540 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm540 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm540),
+                        nm550 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm550 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm550),
+                        nm560 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm560 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm560),
+                        nm570 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm570 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm570),
+                        nm580 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm580 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm580),
+                        nm590 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm590 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm590),
+                        nm600 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm600 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm600),
+                        nm610 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm610 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm610),
+                        nm620 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm620 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm620),
+                        nm630 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm630 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm630),
+                        nm640 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm640 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm640),
+                        nm650 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm650 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm650),
+                        nm660 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm660 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm660),
+                        nm670 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm670 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm670),
+                        nm680 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm680 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm680),
+                        nm690 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm690 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm690),
+                        nm700 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm700 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm700),
+                        nm710 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm710 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm710),
+                        nm720 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm720 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm720),
                         nm730 = string.IsNullOrEmpty(patch.Spectral != null ? patch.Spectral.nm730 : string.Empty) ? 0 : Convert.ToDouble(patch.Spectral.nm730),
                     },
                     SpotId = patch.SpotId,
@@ -731,7 +790,6 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         #endregion
-
         #region IViewPluginDataService Members
         public Measurement Measurement { get; set; }
         public int ProjectId { get; set; }
@@ -747,6 +805,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public DataTable dtMeasurementValidation { get; set; }
         public int UserID { get; set; }
         public string MeaDeviceSerialNo { get; set; }
+        public string RequestMeasurment { get; set; }
         #endregion
 
         #region IViewTaskeroUser Members

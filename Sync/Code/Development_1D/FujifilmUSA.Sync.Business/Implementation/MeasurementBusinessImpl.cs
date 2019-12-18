@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Data;
-using FujifilmUSA.Sync.Business.Interface;
+﻿using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business.Messages;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.DataAccess;
-using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace FujifilmUSA.Sync.Business.Implementation
@@ -173,6 +173,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  {
                                                      outParam
                                                  });
+                    measurement.MeasurementId = Convert.ToInt32(outParam.Value);
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
             return outParam.Value != null || Convert.ToInt32(outParam.Value) > 0;
@@ -213,7 +214,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
             string storedProc = "[CPSync4D].[GetAnalyzeChartMeasurement]";
             if (IsSync1DType)
+            {
                 storedProc = "[CPSync].[GetAnalyzeChartMeasurement]";
+            }
 
             Common.ImplementBusinessLogic(
                 () =>
@@ -309,9 +312,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             int returnValue = 0;
             string storedProc = "[CPSync4D].[UpdateMeasurementByAnalyzeChart]";
             if (IsSync1DType)
+            {
                 storedProc = "[CPSync].[UpdateMeasurementByAnalyzeChart]";
+            }
+
             if (IsVerification)
+            {
                 storedProc = "[CPSyncV].[UpdateVMeasurementByAnalyzeChart]";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -336,9 +345,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             int returnValue = 0;
             string storedProc = "[CPSync4D].[UpdateMeasurementByAnalyzeChart]";
             if (IsSync1DType)
+            {
                 storedProc = "[CPSync].[UpdateMeasurementByAnalyzeChart]";
+            }
+
             if (IsVerification)
+            {
                 storedProc = "[CPSyncV].[UpdateVMeasurementByAnalyzeChart]";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -466,9 +481,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             // var PatchDetails = new List<MeasurementPatchDetails>();
             string storedProc = "CPSync4D.GetPatchDetailsByMeasurementID";
             if (IsSync1DType)
+            {
                 storedProc = "CPSync.GetPatchDetailsByMeasurementID";
+            }
+
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVPatchDetailsByMeasurementID";
+            }
+
             DataTable dtPatchDetails = new DataTable();
             Common.ImplementBusinessLogic(
                 () =>
@@ -480,7 +501,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 storedProc,
                                 new object[] { MeasurementId });
                     if (dsMeasurements.Tables.Count > 0)
+                    {
                         dtPatchDetails = dsMeasurements.Tables[0];
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurement"));
             return dtPatchDetails;
@@ -501,7 +524,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 }
             }
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_InkPaper";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -569,9 +595,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
             string storedProc = "CPSync4D.GetChartData_InkPaper";
             if (IsSync1DType)
+            {
                 storedProc = "CPSync.GetChartData_InkPaper";
+            }
+
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_InkPaper";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -607,9 +639,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var PaperPatchDetails = new List<AnalyzeChart>();
             string storedProc = "CPSync4D.GetChartData_InkPaper";
             if (IsSync1DType)
+            {
                 storedProc = "CPSync.GetChartData_InkPaper";
+            }
+
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_InkPaper";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -643,9 +681,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var DensityPatchDetails = new List<AnalyzeChart>();
             string storedProc = "CPSync4D.GetChartData_InkPaper";
             if (IsSync1DType)
+            {
                 storedProc = "CPSync.GetChartData_InkPaper";
+            }
+
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_InkPaper";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -684,7 +728,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 }
             }
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_Gray";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -762,9 +809,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var GamutChartDetails = new List<AnalyzeChart_Gray>();
             string storedProc = "CPSync4D.GetChartData_Gray";
             if (IsSync1DType)
+            {
                 storedProc = "CPSync.GetChartData_Gray";
+            }
+
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_Gray";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -801,9 +854,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var GamutChartDetails = new List<AnalyzeChart_Gray>();
             string storedProc = "CPSync4D.GetChartData_Gray";
             if (IsSync1DType)
+            {
                 storedProc = "CPSync.GetChartData_Gray";
+            }
+
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_Gray";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -837,9 +896,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var LABChartDetails = new List<AnalyzeChart_Gray>();
             string storedProc = "CPSync4D.GetChartData_Gray";
             if (IsSync1DType)
+            {
                 storedProc = "CPSync.GetChartData_Gray";
+            }
+
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_Gray";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -886,7 +951,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 }
             }
             if (IsVerification)
+            {
                 storedProc = "Report.GetSingleVMeasurement";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1015,8 +1083,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                              {
                                                  outParam
                                              });
+                    measurement.MeasurementId = Convert.ToInt32(outParam.Value);
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveVMeasurement"));
             return outParam.Value != null || Convert.ToInt32(outParam.Value) > 0;
         }
 
@@ -1030,7 +1099,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 storedProc = "CPSync.GetChartData_G7_Avg";
             }
             if (IsVerification)
+            {
                 storedProc = "[CPSyncV].[GetVChartData_G7]";
+            }
 
 
             #region Get Data logic for the GrayF
@@ -1361,8 +1432,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  {
                                                      outParam
                                                  });
+                    measurement.MeasurementId = Convert.ToInt32(outParam.Value);
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_Save1DMeasurement"));
 
             return outParam.Value != null || Convert.ToInt32(outParam.Value) > 0;
         }
@@ -1560,7 +1632,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 storedProc = "CPSync.GetChartData_DotGain_Avg";
             }
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_DotGain";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1598,7 +1673,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 }
             }
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_ISO_DotGain";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1639,7 +1717,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 }
             }
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_ISO_DotGain";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1679,7 +1760,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 }
             }
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_ISO_DotGain";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1714,7 +1798,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 }
             }
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_ISO_DotGain";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1743,7 +1830,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 }
             }
             if (IsVerification)
+            {
                 storedProc = "CPSyncV.GetVChartData_ISO_DotGain";
+            }
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1851,7 +1941,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 storedProc,
                                 new object[] { OptimizeRunId });
                     if (dsMeasurements.Tables.Count > 0)
+                    {
                         dtPatchDetails = dsMeasurements.Tables[0];
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurement"));
             return dtPatchDetails;
@@ -1891,6 +1983,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  {
                                                      outParam
                                                  });
+                    measurement.MeasurementId = Convert.ToInt32(outParam.Value);
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
             return outParam.Value != null || Convert.ToInt32(outParam.Value) > 0;
@@ -1940,7 +2033,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 storedProc,
                                 new object[] { OptimizeRunId });
                     if (dsMeasurements.Tables.Count > 0)
+                    {
                         dtPatchDetails = dsMeasurements.Tables[0];
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetCMYKdataByOptimizeRunID"));
             return dtPatchDetails;
@@ -1961,7 +2056,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 storedProc,
                                 new object[] { OptimizeRunId });
                     if (dsMeasurements.Tables.Count > 0)
+                    {
                         dtPatchDetails = dsMeasurements.Tables[0];
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotPatchChartByOptimizeRunID"));
             return dtPatchDetails;
@@ -1981,7 +2078,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 storedProc,
                                 new object[] { OptimizeRunId });
                     if (dsMeasurements.Tables.Count > 0)
+                    {
                         dtPatchDetails = dsMeasurements.Tables[0];
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotProjectSummary"));
             return dtPatchDetails;
@@ -2002,7 +2101,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 storedProc,
                                 new object[] { SpotProjectId });
                     if (dsMeasurements.Tables.Count > 0)
+                    {
                         dtPatchDetails = dsMeasurements.Tables[0];
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSpotPatchDetailsForChartBySpotProjectID"));
             return dtPatchDetails;
@@ -2053,7 +2154,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             }).ToList();
 
                     if (listSetting.Count > 0)
+                    {
                         spotProjectChartSetting = listSetting[0];
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetAnalyzeChartMeasurement"));
             return spotProjectChartSetting;
@@ -2105,7 +2208,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 storedProc,
                                 new object[] { ProjectID, OptimizeRunId, ProjectType });
                     if (dsMeasurements.Tables.Count > 0)
+                    {
                         dtProjectDetails = dsMeasurements.Tables[0];
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetValidateMeasurement"));
             return dtProjectDetails;
@@ -2409,7 +2514,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         foreach (DataRow dr in dtPatchDetails.Rows)
                         {
                             measurement.MeasurementAppPatches.Add(new MeasurementPatchApp()
-                            {                                
+                            {
                                 InstrumentTypeID = Convert.ToInt32(dr["InstrumentTypeID"]),
                                 SampleID = Convert.ToInt32(dr["SpotID"]),
                                 SampleName = Convert.ToString(dr["SpotName"]),
@@ -2588,7 +2693,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 storedProc,
                                 new object[] { spotProjectIds });
                     if (dsMeasurements.Tables.Count > 0)
+                    {
                         dtPatchDetails = dsMeasurements.Tables[0];
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetCMYKdataByOptimizeRunID"));
             return dtPatchDetails;
@@ -2626,10 +2733,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
 
-        public DataTable ValidateApplicationMeasurement(int optimizationRunId,int projectId,string SerialNo)
+        public DataTable ValidateApplicationMeasurement(int optimizationRunId, int projectId, string SerialNo)
         {
             var measurements = new DataSet();
-            string storedProc = "CP.ValidateApplicationMeasurement";         
+            string storedProc = "CP.ValidateApplicationMeasurement";
             DataTable dtPatchDetails = new DataTable();
             Common.ImplementBusinessLogic(
                 () =>
@@ -2641,10 +2748,34 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 storedProc,
                              new object[] { optimizationRunId, projectId, SerialNo });
                     if (dsMeasurements.Tables.Count > 0)
+                    {
                         dtPatchDetails = dsMeasurements.Tables[0];
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_ValidateApplicationMeasurement"));
             return dtPatchDetails;
+        }
+
+        public void SaveMeasurementErrorFile(int measurementId, int optimizeRunId, int projectid, string requestMeasurement)
+        {
+
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[dbo].[InsertMeasurementErrorFile]",
+                            new object[]
+                                    {
+                                       measurementId,
+                                      optimizeRunId,
+                                      projectid,
+                                      requestMeasurement
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurementErrorFile"));
         }
         #endregion
 

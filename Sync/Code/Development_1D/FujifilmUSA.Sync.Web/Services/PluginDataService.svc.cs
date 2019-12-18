@@ -355,6 +355,7 @@ namespace FujifilmUSA.Sync.Web.Services
         public DataTable dtMeasurementValidation { get; set; }
         public int UserID { get; set; }
         public string MeaDeviceSerialNo { get; set; }
+        public string RequestMeasurment { get; set; }
         #endregion
 
         #region IViewBase Members
