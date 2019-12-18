@@ -143,7 +143,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectMeasurement = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
             projectMeasurement.ErrorOccured += _viewPluginDataService.ErrorOccured;
-             projectMeasurement.SaveMeasurementErrorFile(_viewPluginDataService.Measurement.MeasurementId, _viewPluginDataService.Measurement.OptimizeRunId, _viewPluginDataService.Measurement.ProjectId,_viewPluginDataService.RequestMeasurment);
+             projectMeasurement.SaveMeasurementErrorFile(_viewPluginDataService.Measurement.OptimizeRunId, _viewPluginDataService.Measurement.ProjectId,_viewPluginDataService.RequestMeasurment);
 
         }
 

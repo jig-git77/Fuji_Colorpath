@@ -6,8 +6,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[MeasurementError_File](
- [MeasurementErrorFileID] [int] IDENTITY(1,1) NOT NULL,
- [MeasurementID] [int] NULL,
+ [MeasurementErrorFileID] [int] IDENTITY(1,1) NOT NULL, 
  [OptimizationRunID] [int] NOT NULL,
  [ProjectID] [int] NOT NULL,
  [MeasurementFile] [nvarchar](max) NOT NULL,

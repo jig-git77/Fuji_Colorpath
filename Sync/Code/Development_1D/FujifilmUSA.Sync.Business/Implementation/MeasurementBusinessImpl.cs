@@ -173,7 +173,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  {
                                                      outParam
                                                  });
-                    measurement.MeasurementId = Convert.ToInt32(outParam.Value);
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
             return outParam.Value != null || Convert.ToInt32(outParam.Value) > 0;
@@ -1083,7 +1082,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                              {
                                                  outParam
                                              });
-                    measurement.MeasurementId = Convert.ToInt32(outParam.Value);
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveVMeasurement"));
             return outParam.Value != null || Convert.ToInt32(outParam.Value) > 0;
@@ -1432,7 +1430,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  {
                                                      outParam
                                                  });
-                    measurement.MeasurementId = Convert.ToInt32(outParam.Value);
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_Save1DMeasurement"));
 
@@ -1983,7 +1980,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  {
                                                      outParam
                                                  });
-                    measurement.MeasurementId = Convert.ToInt32(outParam.Value);
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
             return outParam.Value != null || Convert.ToInt32(outParam.Value) > 0;
@@ -2756,7 +2752,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dtPatchDetails;
         }
 
-        public void SaveMeasurementErrorFile(int measurementId, int optimizeRunId, int projectid, string requestMeasurement)
+        public void SaveMeasurementErrorFile(int optimizeRunId, int projectid, string requestMeasurement)
         {
 
             int returnValue = 0;
@@ -2769,7 +2765,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             "[dbo].[InsertMeasurementErrorFile]",
                             new object[]
                                     {
-                                       measurementId,
                                       optimizeRunId,
                                       projectid,
                                       requestMeasurement

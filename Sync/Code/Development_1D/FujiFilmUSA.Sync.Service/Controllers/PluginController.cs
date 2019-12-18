@@ -133,10 +133,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                 BindMeasurementPatches(measurement);
 
-                _presenterPlugin.SaveMeasurement();
                 var objJsonRequest = JsonConvert.SerializeObject(Measurement);
                 RequestMeasurment = objJsonRequest;
                 _presenterPlugin.SaveMeasurementErrorFile();
+
+                _presenterPlugin.SaveMeasurement();               
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, true));
 
                 //var presenter = new PresenterPluginDataService(this);                
@@ -218,10 +219,12 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                 BindMeasurementPatches(measurement);
                 Measurement = measurement;
-                _presenterPlugin.SaveVMeasurement();
+
                 var objJsonRequest = JsonConvert.SerializeObject(Measurement);
                 RequestMeasurment = objJsonRequest;
                 _presenterPlugin.SaveMeasurementErrorFile();
+
+                _presenterPlugin.SaveVMeasurement();                
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, true));
             }
             catch (Exception ex)
@@ -267,12 +270,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     return actionResult;
                 }
 
-                BindMeasurementPatches(measurement);
                 //var presenter = new PresenterPluginDataService(this);
-                _presenterPlugin.Save1DMeasurement();
+                BindMeasurementPatches(measurement);
+
                 var objJsonRequest = JsonConvert.SerializeObject(Measurement);
                 RequestMeasurment = objJsonRequest;
                 _presenterPlugin.SaveMeasurementErrorFile();
+
+                _presenterPlugin.Save1DMeasurement();                
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, true));
             }
             catch (Exception ex)
@@ -315,10 +320,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 BindMeasurementPatches(measurement);
 
                 var presenter = new PresenterPluginDataService(this);
-                presenter.SaveSpotMeasurement();
                 var objJsonRequest = JsonConvert.SerializeObject(Measurement);
                 RequestMeasurment = objJsonRequest;
                 _presenterPlugin.SaveMeasurementErrorFile();
+
+                presenter.SaveSpotMeasurement();                
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, true));
             }
             catch (Exception ex)
