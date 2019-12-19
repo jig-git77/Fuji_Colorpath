@@ -182,6 +182,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     lblMessage.Text = "";
                 }
+
             }
             catch (Exception ex)
             {

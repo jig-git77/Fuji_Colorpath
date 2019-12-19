@@ -21,7 +21,7 @@
             <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
             <br />
             <br />
-            <asp:Button runat="server" ID="btnAddPluginStatus" Text="Add PluginStatus"  OnClick="btnAddPluginStatus_Click" OnClientClick="return false;" />
+            <asp:Button runat="server" ID="btnAddPluginStatus" Text="Add PluginStatus" OnClick="btnAddPluginStatus_Click"  />
             <br />
             <table>
                 <tr runat="server">
