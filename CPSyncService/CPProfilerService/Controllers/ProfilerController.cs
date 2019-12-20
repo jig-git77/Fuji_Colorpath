@@ -17,16 +17,20 @@ namespace CPProfilerService.Controllers
         {
 
         }
+        [HttpGet]
+        [Route("Ping")]
         public bool Ping()
         {
             return true;
         }
+
+        [HttpPost]
+        [Route("api/Profiler/CreateDLP")]
         public CreateDestinationAndDeviceLinkProfileResponse CreateDestinationAndDeviceLinkProfile(CreateDestinationAndDeviceLinkProfileRequest request)
         {
             return ProfilerApiBusiness.CreateDestinationAndDeviceLinkProfile(request);
             
         }
 
-        
     }
 }

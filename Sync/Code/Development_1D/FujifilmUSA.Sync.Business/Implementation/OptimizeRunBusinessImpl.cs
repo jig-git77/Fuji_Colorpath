@@ -11,6 +11,7 @@ using FujifilmUSA.Sync.Business.Messages;
 using System.Xml.Linq;
 using FujifilmUSA.Sync.Business.CustomExceptions;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -152,9 +153,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
 
+                    /* WebClient Example */
+                    System.Net.WebClient webClient = new System.Net.WebClient();
+                    webClient.Headers.Add("Content-Type", "text/json");
+                    var dataString = JsonConvert.SerializeObject(request);
+                    var result = webClient.UploadString("http://localhost/CPProfilerService/api/Profiler/CreateDLP","POST", dataString);
+                    var jsonresult = JsonConvert.DeserializeObject<string[]>(result);
+
+
                     using (var client = new ProfilerClient())
                     {
                         var response = client.CreateDestinationAndDeviceLinkProfile(request);
+
                         if (response.DeviceLinkProfile.ProfileData == null || response.DestinationProfile.ProfileData == null)
                         {
                             //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Destination and device link profile not generated."), null, false);
