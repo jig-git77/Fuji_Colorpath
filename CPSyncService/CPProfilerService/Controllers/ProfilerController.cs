@@ -18,18 +18,30 @@ namespace CPProfilerService.Controllers
 
         }
         [HttpGet]
-        [Route("Ping")]
+        [Route("api/Profiler/Ping")]
         public bool Ping()
         {
             return true;
         }
 
-        [HttpPost]
+        [HttpPost]                
         [Route("api/Profiler/CreateDLP")]
         public CreateDestinationAndDeviceLinkProfileResponse CreateDestinationAndDeviceLinkProfile(CreateDestinationAndDeviceLinkProfileRequest request)
         {
             return ProfilerApiBusiness.CreateDestinationAndDeviceLinkProfile(request);
             
+        }
+        [HttpPost]
+        [Route("api/Profiler/OptimizeDLP")]
+        public OptimizeDeviceLinkProfileResponse OptimizeDeviceLinkProfile(OptimizeDeviceLinkProfileRequest request)
+        {
+            return ProfilerApiBusiness.OptimizeDeviceLinkProfile(request);
+        }
+        [HttpPost]
+        [Route("api/Profiler/CreateSourceDLP")]
+        public CreateSourceToSourceDeviceLinkProfileResponse CreateSourceToSourceDeviceLinkProfile(CreateSourceToSourceDeviceLinkProfileRequest request)
+        {
+            return ProfilerApiBusiness.CreateSourceToSourceDeviceLinkProfile(request);
         }
 
     }

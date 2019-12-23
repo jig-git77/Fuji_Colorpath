@@ -1,17 +1,19 @@
-﻿using System;
-using System.Configuration;
-using System.Security.Cryptography;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.UI;
-using System.Threading;
-using System.ComponentModel;
-using System.Reflection;
-using FujifilmUSA.Sync.Entity;
+﻿using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.GlobalResources;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Net;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
+using System.Web.UI;
+
 namespace FujifilmUSA.Sync.Common
 {
     public class Utilities
@@ -241,13 +243,17 @@ namespace FujifilmUSA.Sync.Common
             string sslValue = System.Web.HttpContext.Current.Request.Url.Scheme;
             if (key == "BaseServiceURL")
             {
-                if(sslValue=="https")
-                    return ConfigurationManager.AppSettings["BaseServiceURLSSL"];                
+                if (sslValue == "https")
+                {
+                    return ConfigurationManager.AppSettings["BaseServiceURLSSL"];
+                }
             }
             else if (key == "BaseCpSpotChartPdfServiceURL")
             {
                 if (sslValue == "https")
+                {
                     return ConfigurationManager.AppSettings["BaseCpSpotChartPdfServiceURLSSL"];
+                }
             }
             return ConfigurationManager.AppSettings[key];
         }
@@ -255,7 +261,9 @@ namespace FujifilmUSA.Sync.Common
         public static long DbValueToLong(object dbValue)
         {
             if (dbValue == DBNull.Value)
+            {
                 return 0;
+            }
             else
             {
                 try
@@ -271,25 +279,37 @@ namespace FujifilmUSA.Sync.Common
         public static int DbValueToInt(object dbValue)
         {
             if (dbValue == DBNull.Value)
+            {
                 return 0;
+            }
             else
+            {
                 return Convert.ToInt32(dbValue);
+            }
         }
 
         public static bool DbValueToBool(object dbValue)
         {
             if (dbValue == DBNull.Value)
+            {
                 return false;
+            }
             else
+            {
                 return Convert.ToBoolean(dbValue);
+            }
         }
 
         public static string DbValueToString(object dbValue)
         {
             if (dbValue == DBNull.Value)
+            {
                 return "";
+            }
             else
+            {
                 return Convert.ToString(dbValue);
+            }
         }
 
         public static string GetMd5Hash(string input)
@@ -319,12 +339,16 @@ namespace FujifilmUSA.Sync.Common
                 if (attribute != null)
                 {
                     if (attribute.Description == description)
+                    {
                         return field.GetValue(null).ToString();
+                    }
                 }
                 else
                 {
                     if (field.Name == description)
+                    {
                         return field.GetValue(null).ToString();
+                    }
                 }
             }
             return string.Empty;
@@ -471,6 +495,45 @@ namespace FujifilmUSA.Sync.Common
             {
                 return Value;
             }
+        }
+        #endregion
+
+        #region ProfilerClientCall
+        public static T GetProfilerServiceClientCall<TU, T>(TU request, ProfilerCallMethod callerMethod, ProfilerRequestCall profilerRequestCall)
+        {
+            string requestURL = string.Empty;
+            requestURL = string.Concat(ReadConfigValue("BaseProfilerSericeURL"), "api/Profiler/", callerMethod);
+            var responseContent="";
+            using (var webClient = new WebClient())
+            {
+                webClient.Headers.Add("Content-Type", "text/json");
+                if (profilerRequestCall == ProfilerRequestCall.HttpPost)
+                {
+                 
+                    var requestContent = JsonConvert.SerializeObject(request);
+                    responseContent = webClient.UploadString(requestURL, "POST", requestContent);
+                    
+                }
+                else if (profilerRequestCall == ProfilerRequestCall.HttpGet)
+                {
+                    responseContent = webClient.DownloadString(requestURL);
+                }
+                return JsonConvert.DeserializeObject<T>(responseContent);
+            }
+
+        }
+        public enum ProfilerCallMethod
+        {
+            Ping,
+            CreateDLP,
+            OptimizeDLP,
+            CreateSourceDLP,
+
+        }
+        public enum ProfilerRequestCall
+        {
+            HttpPost,
+            HttpGet
         }
         #endregion
 

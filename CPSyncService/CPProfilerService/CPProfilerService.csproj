@@ -107,8 +107,12 @@
     <Compile Include="Models\Entity\Parameter.cs" />
     <Compile Include="Models\Interface\IProfiler.cs" />
     <Compile Include="Models\Request\CreateDestinationAndDeviceLinkProfileRequest.cs" />
+    <Compile Include="Models\Request\CreateSourceToSourceDeviceLinkProfileRequest.cs" />
+    <Compile Include="Models\Request\OptimizeDeviceLinkProfileRequest.cs" />
     <Compile Include="Models\Response\BaseResponse.cs" />
     <Compile Include="Models\Response\CreateDestinationAndDeviceLinkProfileResponse.cs" />
+    <Compile Include="Models\Response\CreateSourceToSourceDeviceLinkProfileResponse.cs" />
+    <Compile Include="Models\Response\OptimizeDeviceLinkProfileResponse.cs" />
     <Compile Include="Models\Wrappers\CLVectorDataSet.cs" />
     <Compile Include="Models\Wrappers\CrossXColor.cs" />
     <Compile Include="Models\Wrappers\CrossXColorPINVOKE.cs" />

@@ -153,12 +153,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
 
-                    /* WebClient Example */
-                    System.Net.WebClient webClient = new System.Net.WebClient();
-                    webClient.Headers.Add("Content-Type", "text/json");
-                    var dataString = JsonConvert.SerializeObject(request);
-                    var result = webClient.UploadString("http://localhost/CPProfilerService/api/Profiler/CreateDLP","POST", dataString);
-                    var jsonresult = JsonConvert.DeserializeObject<FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse>(result);
+                    /* WebClient Example */                   
+                    var responseCreateDLP= Utilities.GetProfilerServiceClientCall<CreateDestinationAndDeviceLinkProfileRequest, CreateDestinationAndDeviceLinkProfileResponse>(request, Utilities.ProfilerCallMethod.CreateDLP,Utilities.ProfilerRequestCall.HttpPost);
+
+                    //System.Net.WebClient webClient = new System.Net.WebClient();
+                    //webClient.Headers.Add("Content-Type", "text/json");
+                    //var dataString = JsonConvert.SerializeObject(request);
+                    //var result = webClient.UploadString("http://localhost/CPProfilerService/api/Profiler/CreateDLP","POST", dataString);
+                    //var jsonresult = JsonConvert.DeserializeObject<FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse>(result);
 
 
                     using (var client = new ProfilerClient())
