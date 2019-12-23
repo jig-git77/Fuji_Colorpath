@@ -71,7 +71,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         int ImportMeasurement(Measurement measurement, int LicenseTypeID);
         List<MeasurementLog> GetMeasurementErrorLogList();
         DataTable GetSpotPatchDetailsForCMYKExportBySpotProject(string spotProjectIds);
-        DataTable ValidateApplicationMeasurement(int optimizationRunId, int projectId, string SerialNo);
+        DataTable ValidateApplicationMeasurement(int optimizationRunId, int projectId, string SerialNo, string entryDate);
         void SaveMeasurementErrorFile(int optimizeRunId, int projectid, string requestMeasurement);
     }
 }

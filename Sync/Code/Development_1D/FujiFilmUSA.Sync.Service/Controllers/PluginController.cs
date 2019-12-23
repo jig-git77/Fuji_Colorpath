@@ -634,7 +634,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult ValidateApplicationMeasurement(string optimizationRunID, string projectId, string SerialNo)
+        public IHttpActionResult ValidateApplicationMeasurement(string optimizationRunID, string projectId, string SerialNo, string entryDate)
         {
             IHttpActionResult actionResult = null;
             string validationMessage = "";
@@ -669,6 +669,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 OptimizeRunId = Convert.ToInt32(optimizationRunID);
                 ProjectId = Convert.ToInt32(projectId);
                 MeaDeviceSerialNo = SerialNo;
+                MToolEntryDate = entryDate;
                 var presenter = new PresenterPluginDataService(this);
                 presenter.ValidateApplicationMeasurement();
                 actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, dtMeasurementValidation));
@@ -812,6 +813,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public int UserID { get; set; }
         public string MeaDeviceSerialNo { get; set; }
         public string RequestMeasurment { get; set; }
+        public string MToolEntryDate { get; set; }
         #endregion
 
         #region IViewTaskeroUser Members

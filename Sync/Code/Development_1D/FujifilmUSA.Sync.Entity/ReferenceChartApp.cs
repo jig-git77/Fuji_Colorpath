@@ -13,6 +13,7 @@ namespace FujifilmUSA.Sync.Entity
         public int OptimizationRunID { get; set; }
         public ChartSetting ChartSetting { get; set; }
         public MeasurementSettingApp MeasurementSettings { get; set; }
+        public string EntryDate { get; set; }
     }
 
     public class MeasurementSettingApp

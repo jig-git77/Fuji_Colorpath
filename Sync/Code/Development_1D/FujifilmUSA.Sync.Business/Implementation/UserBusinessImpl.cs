@@ -883,6 +883,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         ProjectTypeId = Convert.ToInt32(dsUser.Tables[0].Rows[0]["ProfileTypeID"]) != 3 ? DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID") : (short)51 ,
                                         ProjectTypeName= Convert.ToInt32(dsUser.Tables[0].Rows[0]["ProfileTypeID"]) != 3 ? Convert.ToString((ELicenseType)DataReader.ReadShort(dsUser.Tables[0].Rows[0], "LicenseTypeID")) : Convert.ToString((ELicenseType)51),
                                 } ;
+                                user.EntryDate = DataReader.ReadString(dsUser.Tables[0].Rows[0], "EntryDate");
                                 //user.MeasureDeviceSrNo = DataReader.ReadString(dsUser.Tables[1].Rows[0], "MeasureDeviceSrNo");
                                 //user.ActivationKey =
                                 //    Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + user.ReferenceChartData.MeasureDeviceSrNo);
