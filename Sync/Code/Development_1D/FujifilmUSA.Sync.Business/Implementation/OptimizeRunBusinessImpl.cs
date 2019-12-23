@@ -158,7 +158,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     webClient.Headers.Add("Content-Type", "text/json");
                     var dataString = JsonConvert.SerializeObject(request);
                     var result = webClient.UploadString("http://localhost/CPProfilerService/api/Profiler/CreateDLP","POST", dataString);
-                    var jsonresult = JsonConvert.DeserializeObject<string[]>(result);
+                    var jsonresult = JsonConvert.DeserializeObject<FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse>(result);
 
 
                     using (var client = new ProfilerClient())
