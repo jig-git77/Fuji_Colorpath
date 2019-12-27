@@ -1,5 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="MeasurementSetup.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementSetup" %>
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="MeasurementSetup.ascx.cs"  Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementSetup" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
@@ -257,7 +256,7 @@
                                         <td>
                                             <asp:RadioButtonList runat="server" ID="rbtnMeasurementType" RepeatDirection="Horizontal" ClientIDMode="Static">
                                                 <asp:ListItem Value="Plugin" Selected="True">Measurement Plugin</asp:ListItem>
-                                                <asp:ListItem Value="Custom">Third Party Application</asp:ListItem>
+                                                <asp:ListItem Value="Custom">MTool</asp:ListItem>
                                             </asp:RadioButtonList>
                                             <%--<asp:RadioButton runat="server" ID="rbtnMeasurementTypePlugin" GroupName="MeasurementType" Checked="true"/> Measurement Plugin
                                             <asp:RadioButton runat="server" ID="rbtnMeasurementTypeApp" GroupName="MeasurementType" /> Third Party Application--%>

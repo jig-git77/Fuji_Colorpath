@@ -5,59 +5,43 @@
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <div>
     <div class="info_form">
-        <div class="float_l InformationtxtDivWidth">
-            <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
-            <asp:HiddenField ID="hdnPCSType" runat="server" />
-            <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
-
-            <%--<div id="divMeasurementDevice">
-            </div>
-            <div id="response">
-            </div>
-            <div id="divExtensionNotAvailable">
-                <input type="button" id="btnAddExtension" value="Add Extension" />
-            </div>--%>
-            
-            <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
-            <br />
-            <br />
-            <asp:Button runat="server" ID="btnAddPluginStatus" Text="Add PluginStatus" OnClick="btnAddPluginStatus_Click"  />
-            <br />
-            <table>
-                <tr runat="server">
-                    <td style="width: 22%;" align="right">
-                        <asp:Label ID="lblProjectID" runat="server" Text="Project ID"></asp:Label>:&nbsp;
-                    </td>
-                    <td style="height: 27px;">
-                        <asp:TextBox ID="txtProjectID" runat="server" ReadOnly="true"></asp:TextBox>
-                    </td>
-                    <td align="right" style="width: 29%;">
-                        <asp:Label ID="lblRunID" runat="server" Text="OptimizationRun ID"></asp:Label>:&nbsp;
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txtRunID" runat="server" ReadOnly="true"></asp:TextBox>
-                    </td>
-                </tr>
+        <div class="greencornersbox" style="height: 30px !important;">
+            <table style="width: 100%; vertical-align: top;">
                 <tr>
-                    <td style="width: 22%;" align="right">
-                        <asp:Label ID="lblProjectType" runat="server" Text="Project Type"></asp:Label>:&nbsp;
+                    <td style="width: 80%; vertical-align:top; text-align: left;">
+                        <asp:Label ID="lblMessage" runat="server" Text="" CssClass="mtoolmessage"></asp:Label>
                     </td>
-                    <td style="height: 27px;">
-                        <asp:TextBox ID="txtProjectType" runat="server" ReadOnly="true" ClientIDMode="Static"></asp:TextBox>
+                    <td style="width: 20%; vertical-align:top; text-align:center; float:none;">
+                        <asp:UpdatePanel ID="pluginUpdatePnl" runat="server" RenderMode="Block" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                            <ContentTemplate>                               
+                            <asp:LinkButton ID="btnAddPluginStatus" runat="server" CssClass="green_bt" OnClick="btnAddPluginStatus_Click">
+                                <span>
+                                    <asp:Localize runat="server" Text="Activate" ID="btnlocAddPluginStatus"
+                                        meta:resourcekey="btnlocAddPluginStatus"></asp:Localize>
+                                </span>
+                            </asp:LinkButton>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btnAddPluginStatus" />
+                            </Triggers>                           
+                        </asp:UpdatePanel>
+                       
                     </td>
-                    <td align="right" style="width: 22%;"></td>
-                    <td></td>
                 </tr>
             </table>
         </div>
         <div class="clear">
         </div>
     </div>
+    <br />
+    <br />
     <div class="color_pallate">
         <div class="color_pallate_head">
             <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" meta:resourcekey="locRecentUploadResource1"></asp:Localize>
             <div id="Div_ImportMeasurements" style="float: right; padding-right: 10px;">
-                <input type="button" id="btnImportMeasurements" value='<%= GetResourceString("btnImportMeasurements") %>' onclick="javascript: return ShowImportWindow();" />
+                <input type="button" id="btnImportMeasurements" class="link-button" style="width: 150px;" value='<%= GetResourceString("btnImportMeasurements") %>' onclick="javascript: return ShowImportWindow();" />
+                <a class="link-button help-icon" href="javascript:void()" onclick="alert('help button');"></a>
+                <a class="link-button refresh-icon" href="javascript:void()" onclick="bindMeasurementData();"></a>
             </div>
         </div>
         <div class="color_pallate_middle">
@@ -65,10 +49,41 @@
             </div>
         </div>
         <div class="color_pallate_bottom">
-            &nbsp;
+            &nbsp; 
         </div>
     </div>
+    <div style="float: right; margin-right: 20px;">
+        <table style="width: 100%; vertical-align: top; text-align: center;">
+            <tr>
+                <td style="vertical-align: text-top; text-align: left;">
+                    <span class="greycolorText">SN:</span>
+                </td>
+                <td style="vertical-align: text-top; text-align: left;">
+                    <asp:Label ID="lblSN" runat="server" Text="30369" CssClass="greycolorText"></asp:Label>
+                </td>
+                <td style="vertical-align: text-top; text-align: left; padding-left: 5px;"></td>
+                <td style="vertical-align: text-top; text-align: left;">
+                    <span class="greycolorText">PID: </span>
+                </td>
+                <td style="vertical-align: text-top; text-align: left;">
+                    <asp:Label ID="lblPID" runat="server" Text="12345" CssClass="greycolorText"></asp:Label>
+                </td>
+                <td style="vertical-align: text-top; text-align: left; padding-left: 5px;"></td>
+                <td style="vertical-align: text-top; text-align: left;">
+                    <span class="greycolorText">ORID:</span>
+                </td>
+                <td style="vertical-align: text-top; text-align: left;">
+                    <asp:Label ID="lblORID" runat="server" Text="54321" CssClass="greycolorText"></asp:Label>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
 </div>
+<asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
+<asp:HiddenField ID="hdnPCSType" runat="server" />
+<asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
 <asp:HiddenField ID="hdReferenceChartDisplayType" runat="server" />
 <asp:HiddenField ID="hdIsVerification" runat="server" />
 <asp:HiddenField ID="hdLicenseType" runat="server" />
@@ -81,6 +96,9 @@
 <asp:HiddenField ID="hdDisplayImport" runat="server" Value="no" />
 <asp:HiddenField ID="hdDeviceType" runat="server" />
 <asp:HiddenField ID="hdSpotProjectType" runat="server" />
+<asp:HiddenField ID="hdnbtnAnalyzeParent" runat="server" />
+
+
 
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
     <Windows>
@@ -109,6 +127,9 @@
 <script id="MeasurementHeaderTemplate" type="text/x-jQuery-tmpl">
     <tr>
         <th scope="col">
+            <b>#</b>
+        </th>
+        <th scope="col">
             <%= GetResourceString("measurementName") %>
         </th>
         <th scope="col">
@@ -122,6 +143,9 @@
 
 <script id="MeasurementDetailTemplate" type="text/x-jQuery-tmpl">
     <tr id="${MeasurementId}">
+        <td align="center">
+            <span id="lblAutoincr">${Autoincrement()}</span>
+        </td>
         <td align="center">
             <span id="lblMeasurementName">${MeasurementName}</span>
         </td>
@@ -143,8 +167,9 @@
 
 
 
-<script language="javascript" type="text/javascript">
+<script lang="javascript" type="text/javascript">
     var BASE_SERVICE_URL = '';
+    var AutoNumber = 0;
     jQuery(document).ready(function () {
         BASE_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();
         bindMeasurementData();
@@ -170,6 +195,7 @@
             getMeasurementUrl = "Services/PluginDataService.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId;
             //getMeasurementUrl += "PluginData.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId;
         }
+
         jQuery.ajax({
             type: "GET",
             contentType: "application/json; charset=utf-8",
@@ -178,50 +204,54 @@
             dataType: "json",
             cache: false,
             dataFilter:
-            function (data, type) {
-                var json = jQuery.parseJSON(data);
+                function (data, type) {
+                    var json = jQuery.parseJSON(data);
+                    if (json.length > 0) {
+                        json = json.sort((a, b) => b.MeasurementId - a.MeasurementId); // Descending order                         
+                        AutoNumber = json.length+1;
+                        $('#' + $('#<%=hdnbtnAnalyzeParent.ClientID%>').val() + '').show();
 
-                if (json.length > 0) {
-                    jQuery("input[id*='hdHasMeasurement']").val('true');
-                    $("#measurementContainer").html("");
-                    $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
-                    $("#MeasurementHeaderTemplate").tmpl().appendTo("#lvMeasurement1");
-                    $("#MeasurementDetailTemplate").tmpl(json).appendTo("#lvMeasurement1");
-                    jQuery("input[id*='hdMeasurementsTotal']").val(json.length);  //----------Set MeasurementLimit in hiddeninput-------------//      
-                    //----------------Display Import Button--------------//  
-                    if (jQuery("input[id*='hdDisplayImport']").val() == "yes") {
-                        if (json.length < <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit)%>)
-                        {
-                            $("#Div_ImportMeasurements").css('visibility', 'visible');
+                        jQuery("input[id*='hdHasMeasurement']").val('true');
+                        $("#measurementContainer").html("");
+                        $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
+                        $("#MeasurementHeaderTemplate").tmpl().appendTo("#lvMeasurement1");
+                        $("#MeasurementDetailTemplate").tmpl(json).appendTo("#lvMeasurement1");
+                        jQuery("input[id*='hdMeasurementsTotal']").val(json.length);  //----------Set MeasurementLimit in hiddeninput-------------//      
+                        //----------------Display Import Button--------------//  
+                        if (jQuery("input[id*='hdDisplayImport']").val() == "yes") {
+                            if (json.length < <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit)%>) {
+                                $("#Div_ImportMeasurements").css('visibility', 'visible');
+                            }
+                            else {
+                                $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            }
                         }
                         else {
                             $("#Div_ImportMeasurements").css('visibility', 'hidden');
                         }
                     }
                     else {
-                        $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                        $('#' + $('#<%=hdnbtnAnalyzeParent.ClientID%>').val() + '').hide();
+
+                        jQuery("input[id*='hdHasMeasurement']").val('false');
+                        $("#measurementContainer").html("");
+                        $("#measurementContainer").append("<div class='no_data_found'>" + '<%= GetResourceString("noRecordsAvailable") %>' + "</div>");
+                        //----------------Display Import Button--------------//
+                        if (jQuery("input[id*='hdDisplayImport']").val() == "yes") {
+                            $("#Div_ImportMeasurements").css('visibility', 'visible');
+                        }
+                        else {
+                            $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                        }
                     }
-                }
-                else {
-                    jQuery("input[id*='hdHasMeasurement']").val('false');
-                    $("#measurementContainer").html("");
-                    $("#measurementContainer").append("<div class='no_data_found'>" + '<%= GetResourceString("noRecordsAvailable") %>' + "</div>");
-                    //----------------Display Import Button--------------//
-                    if (jQuery("input[id*='hdDisplayImport']").val() == "yes") {
-                        $("#Div_ImportMeasurements").css('visibility', 'visible');
-                    }
-                    else {
-                        $("#Div_ImportMeasurements").css('visibility', 'hidden');
-                    }
-                }
-            },
+                },
             success:
-            function (response) { },
+                function (response) { },
             error:
-            function (XMLHttpRequest, textStatus, errorThrown) {
-                var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                MeasurementDialog('<%= GetResourceString("errorCause") %>' + jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
-            }
+                function (XMLHttpRequest, textStatus, errorThrown) {
+                    var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                    MeasurementDialog('<%= GetResourceString("errorCause") %>' + jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
+                }
         });
     }
 
@@ -232,7 +262,11 @@
         }
         return false;
     }
-    function deletemeasurement(smeasurementId) {       
+    function Autoincrement() {        
+        AutoNumber = parseInt(AutoNumber) - 1;
+        return AutoNumber
+    }
+    function deletemeasurement(smeasurementId) {
         var measurementId = $.trim(smeasurementId);
         //var deleteMeasurementUrl = BASE_SERVICE_URL;
         if (jQuery("input[id$=hdIsVerification]").val() == "true") {
@@ -264,8 +298,8 @@
                 'Authorization': 'Basic ' + $('#hdfAuthToken').val()
             },
             success:
-            function (response) {
-            },
+                function (response) {
+                },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 var jsonFault = JSON.parse(XMLHttpRequest.responseText);
                 MeasurementDialog('<%= GetResourceString("errorCause") %>' + jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
@@ -341,7 +375,7 @@
         return false;
     }
 
-   function Close() {
+    function Close() {
         var oWnd = $find("<%= ImportMeasurementWindow.ClientID %>");
         oWnd.close();
         return false;
@@ -362,3 +396,4 @@
     }
 
 </script>
+

@@ -849,6 +849,7 @@
     <Content Include="Images\greendot.png" />
     <Content Include="Images\guntarget.png" />
     <Content Include="Images\header_bg1.png" />
+    <Content Include="Images\help-web-button.png" />
     <Content Include="Images\InkOptimizeSource.png" />
     <Content Include="Images\LabBackdrop.jpg" />
     <Content Include="Images\large-loader.gif" />
@@ -856,6 +857,7 @@
     <Content Include="Images\open_folder_yellow.png" />
     <Content Include="Images\purpledot.png" />
     <Content Include="Images\Red.png" />
+    <Content Include="Images\refresh-button.png" />
     <Content Include="Images\remove.png" />
     <Content Include="Images\Report-Title.png" />
     <Content Include="Images\rotateguntarget.png" />
@@ -3402,6 +3404,26 @@
     <Compile Include="UserControl\AddPrintStandardType.ascx.designer.cs">
       <DependentUpon>AddPrintStandardType.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MeasurementSetup.ascx.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MeasurementSetup.ascx.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MeasurementSetup.ascx.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.ja.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MeasurementSetup.ascx.ja.resx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\AddProject\ValidationSetup.ascx.cs">
       <DependentUpon>ValidationSetup.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3505,6 +3527,26 @@
     </Compile>
     <Compile Include="UserControl\ApplicationError.ascx.designer.cs">
       <DependentUpon>ApplicationError.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MeasurementCommonNew.ascx.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MeasurementCommonNew.ascx.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MeasurementCommonNew.ascx.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.ja.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MeasurementCommonNew.ascx.ja.resx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\BaseControl.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -4618,14 +4660,20 @@
   <ItemGroup>
     <Content Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MeasurementSetup.ascx.Designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.de.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MeasurementSetup.ascx.de.Designer.cs</LastGenOutput>
     </Content>
     <Content Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.ja.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MeasurementSetup.ascx.ja.Designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -6198,6 +6246,8 @@
   <ItemGroup>
     <Content Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.fr.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MeasurementSetup.ascx.fr.Designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -6437,16 +6487,28 @@
     <Content Include="UserControl\App_LocalResources\SpotTargetManagement.ascx.de.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.resx" />
+    <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MeasurementCommonNew.ascx.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.ja.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MeasurementCommonNew.ascx.ja.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MeasurementCommonNew.ascx.fr.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\MeasurementCommonNew.ascx.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MeasurementCommonNew.ascx.de.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\ValidationContainer.ascx.resx" />

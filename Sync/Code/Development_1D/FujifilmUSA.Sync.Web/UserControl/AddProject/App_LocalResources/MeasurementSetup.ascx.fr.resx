@@ -177,4 +177,10 @@
   <data name="locReadModeResource1.Text" xml:space="preserve">
     <value>Read Mode:_fr</value>
   </data>
+  <data name="locrbtnCustomMeasurementType" xml:space="preserve">
+    <value>MTool</value>
+  </data>
+  <data name="locrbtnPluginMeasurementType" xml:space="preserve">
+    <value>Measurement Plugin</value>
+  </data>
 </root>
