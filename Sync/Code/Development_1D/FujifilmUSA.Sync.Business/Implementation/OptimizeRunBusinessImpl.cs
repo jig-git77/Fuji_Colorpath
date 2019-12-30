@@ -114,13 +114,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         BusinessFactory<IProjectBusiness>.
                             CreateObject().
                             GetSourceProfile(projectId);
-                    var request = new CreateDestinationAndDeviceLinkProfileRequest()
+                    var request = new FujifilmUSA.Sync.Business.ProfilerServiceClient.Request.CreateDestinationAndDeviceLinkProfileRequest()
                     {
                         PcsData = new List<double>(),
                         DcsData = new List<double>(),
-                        SourceProfile = new IccProfile() { ProfileData = sourceProfile },
-                        DestinationProfileOptions = new List<Parameter>(),
-                        ProfileOptions = new List<Parameter>()
+                        SourceProfile = new FujifilmUSA.Sync.Business.ProfilerServiceClient.IccProfile() { ProfileData = sourceProfile },
+                        DestinationProfileOptions = new List<FujifilmUSA.Sync.Business.ProfilerServiceClient.Parameter>(),
+                        ProfileOptions = new List<FujifilmUSA.Sync.Business.ProfilerServiceClient.Parameter>()
                     };
 
                     var measurementDataResponse =
@@ -136,25 +136,25 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             GetProjectOption(projectId, EProfileType.DestinationProfile);
                     foreach (KeyValuePair<string, string> option in destinationOptions)
                     {
-                        request.DestinationProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                        request.DestinationProfileOptions.Add(new FujifilmUSA.Sync.Business.ProfilerServiceClient.Parameter() { Name = option.Key, Value = option.Value });
                     }
-                    request.DestinationProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = destinationDescription });
+                    request.DestinationProfileOptions.Add(new FujifilmUSA.Sync.Business.ProfilerServiceClient.Parameter() { Name = Common.ProfileDescriptionKey, Value = destinationDescription });
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Destination profile option added to request object."), null, false);
 
                     var profileOptions = profilerOptionBusiness.GetProjectOption(projectId, EProfileType.DeviceLinkProfile);
                     foreach (KeyValuePair<string, string> option in profileOptions)
                     {
-                        request.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                        request.ProfileOptions.Add(new FujifilmUSA.Sync.Business.ProfilerServiceClient.Parameter() { Name = option.Key, Value = option.Value });
                     }
-                    request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
+                    request.ProfileOptions.Add(new FujifilmUSA.Sync.Business.ProfilerServiceClient.Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
 
                     request.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
 
                     /* WebClient Example */                   
-                    var responseCreateDLP= Utilities.GetProfilerServiceClientCall<CreateDestinationAndDeviceLinkProfileRequest, CreateDestinationAndDeviceLinkProfileResponse>(request, Utilities.ProfilerCallMethod.CreateDLP,Utilities.ProfilerRequestCall.HttpPost);
+                    var response = Utilities.GetProfilerServiceClientCall<FujifilmUSA.Sync.Business.ProfilerServiceClient.Request.CreateDestinationAndDeviceLinkProfileRequest, FujifilmUSA.Sync.Business.ProfilerServiceClient.Response.CreateDestinationAndDeviceLinkProfileResponse>(request, Utilities.ProfilerCallMethod.CreateDLP,Utilities.ProfilerRequestCall.HttpPost);
 
                     //System.Net.WebClient webClient = new System.Net.WebClient();
                     //webClient.Headers.Add("Content-Type", "text/json");
@@ -165,7 +165,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     using (var client = new ProfilerClient())
                     {
-                        var response = client.CreateDestinationAndDeviceLinkProfile(request);
+                       // var response = client.CreateDestinationAndDeviceLinkProfile(request);
 
                         if (response.DeviceLinkProfile.ProfileData == null || response.DestinationProfile.ProfileData == null)
                         {
