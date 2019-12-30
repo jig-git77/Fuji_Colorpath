@@ -25,6 +25,23 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             base.Initialize(controllerContext);
         }
 
+        [HttpGet]        
+        public bool Ping()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="getValue"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public string Ping(string getValue)
+        {
+            return getValue;
+        }
+
         [HttpGet]
         public IHttpActionResult UserLogIn(string UserName, string Password)
         {
