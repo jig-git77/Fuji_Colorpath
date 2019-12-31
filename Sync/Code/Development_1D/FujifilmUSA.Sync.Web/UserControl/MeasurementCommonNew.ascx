@@ -201,6 +201,7 @@
             contentType: "application/json; charset=utf-8",
             url: getMeasurementUrl,
             processData: false,
+            async: false,
             dataType: "json",
             cache: false,
             dataFilter:
@@ -220,14 +221,14 @@
                         //----------------Display Import Button--------------//  
                         if (jQuery("input[id*='hdDisplayImport']").val() == "yes") {
                             if (json.length < <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit)%>) {
-                                $("#Div_ImportMeasurements").css('visibility', 'visible');
+                                $("#btnImportMeasurements").css('visibility', 'visible');
                             }
                             else {
-                                $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                                $("#btnImportMeasurements").css('visibility', 'hidden');
                             }
                         }
                         else {
-                            $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            $("#btnImportMeasurements").css('visibility', 'hidden');
                         }
                     }
                     else {
@@ -238,10 +239,10 @@
                         $("#measurementContainer").append("<div class='no_data_found'>" + '<%= GetResourceString("noRecordsAvailable") %>' + "</div>");
                         //----------------Display Import Button--------------//
                         if (jQuery("input[id*='hdDisplayImport']").val() == "yes") {
-                            $("#Div_ImportMeasurements").css('visibility', 'visible');
+                            $("#btnImportMeasurements").css('visibility', 'visible');
                         }
                         else {
-                            $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            $("#btnImportMeasurements").css('visibility', 'hidden');
                         }
                     }
                 },
@@ -291,6 +292,7 @@
             url: deleteMeasurementUrl,
             processData: false,
             dataType: "json",
+            async: false,
             dataFilter: function (data, type) {
                 return false;
             },

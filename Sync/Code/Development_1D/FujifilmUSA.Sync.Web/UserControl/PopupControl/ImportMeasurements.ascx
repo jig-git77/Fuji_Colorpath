@@ -33,8 +33,7 @@
 
     function OnClientClick() {
         var checking = false;
-        var answer;
-        debugger;
+        var answer;       
         var inputs = document.getElementsByTagName("input");
         for (var i = 0; i < inputs.length; i++) {
             if (inputs[i].checked == true) {
