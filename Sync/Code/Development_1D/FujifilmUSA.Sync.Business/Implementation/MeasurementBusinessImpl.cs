@@ -167,7 +167,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
                                                      new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType)},
-                                                     new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID}
+                                                     new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID},
+                                                     new Parameters() {ParameterName = "@MeasurementInfo",Type=DbType.String,Size=500,Value=measurement.MeasurementInfo }
                                                  },
                                          new List<Parameters>()
                                                  {
@@ -1077,6 +1078,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  new Parameters() {ParameterName = "@PageOrSurface", Type = DbType.String, Value = measurement.PageOrSurface},
                                                  new Parameters() {ParameterName = "@JDFJobId", Type = DbType.String, Value = measurement.JDFJobId},
                                                  new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID},
+                                                 new Parameters() {ParameterName = "@MeasurementInfo",Type=DbType.String,Size=500,Value=measurement.MeasurementInfo }
                                              },
                                          new List<Parameters>()
                                              {
@@ -1424,7 +1426,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
                                                      new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = ((int)measurement.PCSDataType)},
-                                                     new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID}
+                                                     new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID},
+                                                     new Parameters() {ParameterName = "@MeasurementInfo",Type=DbType.String,Size=500,Value=measurement.MeasurementInfo }
                                                  },
                                          new List<Parameters>()
                                                  {
@@ -1974,7 +1977,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
                                                      new Parameters() {ParameterName = "@PCSDataType", Type = DbType.Int32, Value = Convert.ToInt32(measurement.PCSDataType)},
-                                                     new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID}
+                                                     new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID},
+                                                     new Parameters() {ParameterName = "@MeasurementInfo",Type=DbType.String,Size=500,Value=measurement.MeasurementInfo }
                                                  },
                                          new List<Parameters>()
                                                  {

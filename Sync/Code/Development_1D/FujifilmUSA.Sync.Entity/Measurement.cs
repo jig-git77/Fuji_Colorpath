@@ -26,8 +26,10 @@ namespace FujifilmUSA.Sync.Entity
         public string PrintStandardType { get; set; }
         public int PCSDataType { get; set; }
         public List<Entity.CPSyncV.PatchTolerance> PatchTolerances { get; set; }
-        public string MeasurementDateString { get; set; }              
-        
+        public string MeasurementDateString { get; set; }    
+        public string MeasurementInfo { get; set; }
+ 
+
         public List<MeasurementPatchApp> MeasurementAppPatches { get; set; }
     }
 }
