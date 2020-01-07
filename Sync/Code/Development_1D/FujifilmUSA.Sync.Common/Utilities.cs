@@ -528,6 +528,12 @@ namespace FujifilmUSA.Sync.Common
             CreateDLP,
             OptimizeDLP,
             CreateSourceDLP,
+            CreateG7Alignment,
+            CreateISOAlignment,
+            CreateSourceProfile,
+            ExtractProfile,
+            CreateSpotLibrary,
+            OptimizeSpotLibrary,
 
         }
         public enum ProfilerRequestCall
