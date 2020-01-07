@@ -44,5 +44,43 @@ namespace CPProfilerService.Controllers
             return ProfilerApiBusiness.CreateSourceToSourceDeviceLinkProfile(request);
         }
 
+        [HttpPost]
+        [Route("api/Profiler/CreateG7Alignment")]
+        public CreateG7AlignmentCurveResponse CreateG7AlignmentCurve(CreateG7AlignmentCurveRequest request)
+        {
+            return ProfilerApiBusiness.CreateG7AlignmentCurve(request);
+        }
+
+        [HttpPost]
+        [Route("api/Profiler/CreateISOAlignment")]
+        public CreateISOAlignmentCurveResponse CreateISOAlignmentCurve(CreateISOAlignmentCurveRequest request)
+        {
+            return ProfilerApiBusiness.CreateISOAlignmentCurve(request);
+        }
+
+        [HttpPost]
+        [Route("api/Profiler/CreateSourceProfile")]
+        public CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request)
+        {
+            return ProfilerApiBusiness.CreateSourceProfile(request);
+        }
+        [HttpPost]
+        [Route("api/Profiler/ExtractProfile")]
+        public ExtractProfileValuesResponse ExtractProfileValues(ExtractProfileValuesRequest request)
+        {
+            return ProfilerApiBusiness.ExtractProfileValues(request);
+        }
+        [HttpPost]
+        [Route("api/Profiler/CreateSpotLibrary")]
+        public CreateSpotLibraryResponse CreateSpotLibraryValues(CreateSpotLibraryRequest request)
+        {
+            return ProfilerApiBusiness.CreateSpotLibraryValues(request);
+        }
+        [HttpPost]
+        [Route("api/Profiler/OptimizeSpotLibrary")]
+        public OptimizeSpotLibraryResponse OptimizeSpotLibraryValues(OptimizeSpotLibraryRequest request)
+        {
+            return ProfilerApiBusiness.OptimizeSpotLibraryValues(request);
+        }
     }
 }

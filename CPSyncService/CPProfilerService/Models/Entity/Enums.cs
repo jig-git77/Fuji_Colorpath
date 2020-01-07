@@ -37,5 +37,14 @@ namespace CPProfilerService.Models.Entity
             [EnumMember]
             Warning = 3
         }
+        public enum ProfileExtractType
+        {
+            [EnumMember]
+            None = 0,
+            [EnumMember]
+            Xyz = 1,
+            [EnumMember]
+            CMYK = 2
+        }
     }
 }

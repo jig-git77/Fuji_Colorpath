@@ -9,6 +9,11 @@ namespace CPProfilerService.Models.Interface
         CreateDestinationAndDeviceLinkProfileResponse CreateDestinationAndDeviceLinkProfile(CreateDestinationAndDeviceLinkProfileRequest request);
         OptimizeDeviceLinkProfileResponse OptimizeDeviceLinkProfile(OptimizeDeviceLinkProfileRequest request);
         CreateSourceToSourceDeviceLinkProfileResponse CreateSourceToSourceDeviceLinkProfile(CreateSourceToSourceDeviceLinkProfileRequest request);
-
+        CreateG7AlignmentCurveResponse CreateG7AlignmentCurve(CreateG7AlignmentCurveRequest request);
+        CreateISOAlignmentCurveResponse CreateISOAlignmentCurve(CreateISOAlignmentCurveRequest request);
+        CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request);
+        ExtractProfileValuesResponse ExtractProfileValues(ExtractProfileValuesRequest request);
+        CreateSpotLibraryResponse CreateSpotLibraryValues(CreateSpotLibraryRequest request);
+        OptimizeSpotLibraryResponse OptimizeSpotLibraryValues(OptimizeSpotLibraryRequest request);
     }
 }
