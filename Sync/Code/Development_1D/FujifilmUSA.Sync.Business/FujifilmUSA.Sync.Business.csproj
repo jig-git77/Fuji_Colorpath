@@ -131,12 +131,22 @@
     <Compile Include="ProfilerServiceClient\IccProfile.cs" />
     <Compile Include="ProfilerServiceClient\Parameter.cs" />
     <Compile Include="ProfilerServiceClient\Request\CreateDestinationAndDeviceLinkProfileRequest.cs" />
+    <Compile Include="ProfilerServiceClient\Request\CreateG7AlignmentCurveRequest.cs" />
+    <Compile Include="ProfilerServiceClient\Request\CreateISOAlignmentCurveRequest.cs" />
+    <Compile Include="ProfilerServiceClient\Request\CreateSourceProfileRequest.cs" />
     <Compile Include="ProfilerServiceClient\Request\CreateSourceToSourceDeviceLinkProfileRequest.cs" />
+    <Compile Include="ProfilerServiceClient\Request\ExtractProfileValuesRequest.cs" />
     <Compile Include="ProfilerServiceClient\Request\OptimizeDeviceLinkProfileRequest.cs" />
     <Compile Include="ProfilerServiceClient\Response\BaseResponse.cs" />
     <Compile Include="ProfilerServiceClient\Response\CreateDestinationAndDeviceLinkProfileResponse.cs" />
+    <Compile Include="ProfilerServiceClient\Response\CreateG7AlignmentCurveResponse.cs" />
+    <Compile Include="ProfilerServiceClient\Response\CreateISOAlignmentCurveResponse.cs" />
+    <Compile Include="ProfilerServiceClient\Response\CreateSourceProfileResponse.cs" />
     <Compile Include="ProfilerServiceClient\Response\CreateSourceToSourceDeviceLinkProfileResponse.cs" />
+    <Compile Include="ProfilerServiceClient\Response\ExtractProfileValuesResponse.cs" />
     <Compile Include="ProfilerServiceClient\Response\OptimizeDeviceLinkProfileResponse.cs" />
+    <Compile Include="ProfilerServiceClient\SpotIccProfile.cs" />
+    <Compile Include="ProfilerServiceClient\SpotParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\ProfilerService\Reference.cs">
       <AutoGen>True</AutoGen>

@@ -38,5 +38,14 @@ namespace FujifilmUSA.Sync.Business.ProfilerServiceClient
             [EnumMember]
             Warning = 3
         }
+        public enum ProfileExtractType
+        {
+            [EnumMember]
+            None = 0,
+            [EnumMember]
+            Xyz = 1,
+            [EnumMember]
+            CMYK = 2
+        }
     }
 }

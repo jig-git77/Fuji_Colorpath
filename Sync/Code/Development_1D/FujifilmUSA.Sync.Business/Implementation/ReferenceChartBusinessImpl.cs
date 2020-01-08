@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using FujifilmUSA.Sync.Business.CustomExceptions;
 using FujifilmUSA.Sync.Business.Interface;
-using FujifilmUSA.Sync.Entity;
-using FujifilmUSA.Sync.DataAccess;
-using System.Data;
-using System.Xml.Linq;
 using FujifilmUSA.Sync.Common;
-using FujifilmUSA.Sync.Business.ProfilerService;
-using FujifilmUSA.Sync.Business.CustomExceptions;
+using FujifilmUSA.Sync.DataAccess;
+using FujifilmUSA.Sync.Entity;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -43,10 +41,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     referenceChartType.ChartName,
                                                                                     referenceChartType.NumOfRows,
                                                                                     referenceChartType.NumOfCols,
-                                                                                    referenceChartType.InstrumentTypeId,                                                                                  
+                                                                                    referenceChartType.InstrumentTypeId,
                                                                                     referenceChartType.ChartPreview,
                                                                                     referenceChartType.OriginalChart,
-                                                                                    referenceChartType.IsUsed,                                               
+                                                                                    referenceChartType.IsUsed,
                                                                                     referenceChartData.ToString(),
                                                                                     referenceChartType.IsSync1D_ISO,
                                                                                     referenceChartType.IsSync1D_G7,
@@ -103,30 +101,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 {
                     //call service and retrieve lab data. insert this lab data to database.
                     var referenceLabs = new List<ReferenceLab>();
-                    using (var client = new ProfilerClient())
+                    ProfilerServiceClient.Request.ExtractProfileValuesRequest extractProfileValuesRequest = new ProfilerServiceClient.Request.ExtractProfileValuesRequest()
                     {
-                        var response = client.ExtractProfileValues(
-                            new ExtractProfileValuesRequest()
-                            {
-                                ExtractType = ProfileExtractType.Xyz,
-                                Profile = new IccProfile() { ProfileData = sourceProfile },
-                                C_X = referenceCharts.Select(x => Convert.ToDouble(x.CmykC)).ToList(),
-                                M_Y = referenceCharts.Select(x => Convert.ToDouble(x.CmykM)).ToList(),
-                                Y_Z = referenceCharts.Select(x => Convert.ToDouble(x.CmykY)).ToList(),
-                                K = referenceCharts.Select(x => Convert.ToDouble(x.CmykK)).ToList()
-                            });
-                        for (int i = 0; i < referenceCharts.Count; i++)
+                        ExtractType = ProfilerServiceClient.Enums.ProfileExtractType.Xyz,
+                        Profile = new ProfilerServiceClient.IccProfile() { ProfileData = sourceProfile },
+                        C_X = referenceCharts.Select(x => Convert.ToDouble(x.CmykC)).ToList(),
+                        M_Y = referenceCharts.Select(x => Convert.ToDouble(x.CmykM)).ToList(),
+                        Y_Z = referenceCharts.Select(x => Convert.ToDouble(x.CmykY)).ToList(),
+                        K = referenceCharts.Select(x => Convert.ToDouble(x.CmykK)).ToList()
+                    };
+                    //var response = client.ExtractProfileValues(extractProfileValuesRequest);
+                    var response = Utilities.GetProfilerServiceClientCall<ProfilerServiceClient.Request.ExtractProfileValuesRequest, ProfilerServiceClient.Response.ExtractProfileValuesResponse>(extractProfileValuesRequest, Utilities.ProfilerCallMethod.ExtractProfile, Utilities.ProfilerRequestCall.HttpPost);
+                    for (int i = 0; i < referenceCharts.Count; i++)
+                    {
+                        referenceLabs.Add(new ReferenceLab()
                         {
-                            referenceLabs.Add(new ReferenceLab()
-                            {
-                                ReferenceChartId = referenceCharts[i].ReferenceChartId,
-                                SourceProfileId = sourceProfileId,
-                                TargetL = Convert.ToDecimal(response.C_X[i]),
-                                Targeta = Convert.ToDecimal(response.M_Y[i]),
-                                Targetb = Convert.ToDecimal(response.Y_Z[i]),
-                            });
-                        }
+                            ReferenceChartId = referenceCharts[i].ReferenceChartId,
+                            SourceProfileId = sourceProfileId,
+                            TargetL = Convert.ToDecimal(response.C_X[i]),
+                            Targeta = Convert.ToDecimal(response.M_Y[i]),
+                            Targetb = Convert.ToDecimal(response.Y_Z[i]),
+                        });
                     }
+
 
                     var referenceLabData = new XElement("ReferenceLabData",
                                                         referenceLabs.
@@ -174,8 +171,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 {
                                     InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
                                     InstrumentName = DataReader.ReadString(x, "InstrumentName")
-                                },                               
-                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),                              
+                                },
+                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
                                 ChartPreview = DataReader.ReadByteArray(x, "ChartPreview"),
                                 OriginalChart = DataReader.ReadByteArray(x, "OriginalChart"),
                                 IsSync1D_ISO = DataReader.ReadShort(x, "IsSync1D_ISO"),
@@ -207,9 +204,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         referenceChartType.ReferenceChartTypeId,
                                         referenceChartType.ChartName,
                                         referenceChartType.NumOfRows,
-                                        referenceChartType.NumOfCols,                                       
-                                        referenceChartType.InstrumentTypeId,                                       
-                                        referenceChartType.IsUsed,                                      
+                                        referenceChartType.NumOfCols,
+                                        referenceChartType.InstrumentTypeId,
+                                        referenceChartType.IsUsed,
                                         referenceChartType.ChartPreview,
                                         referenceChartType.OriginalChart,
                                         referenceChartType.IsSync1D_ISO,
@@ -243,25 +240,25 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         referenceCharts = dsReferenceChart.Tables[0].AsEnumerable().
                             Select(x => new ReferenceChartType()
-                                            {
-                                                ReferenceChartTypeId = DataReader.ReadShort(x, "ReferenceChartTypeId"),
-                                                ChartName = DataReader.ReadString(x, "ChartName"),
-                                                NumOfRows = DataReader.ReadInt(x, "NumOfRows"),
-                                                NumOfCols = DataReader.ReadInt(x, "NumOfCols"),
-                                                TotalPatches = DataReader.ReadInt(x, "TotalPatches"),
-                                                InstrumentType = new InstrumentType()
-                                                                     {
-                                                                         InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
-                                                                         InstrumentName = DataReader.ReadString(x, "InstrumentName")
-                                                                     },
-                                                ProjectType = new ProjectType()
-                                                                  {
-                                                                      ProjectTypeId = DataReader.ReadShort(x, "ProjectTypeId"),
-                                                                      ProjectTypeName = DataReader.ReadString(x, "ProjectType")
-                                                                  },
-                                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                                                ChartDisplayType = DataReader.ReadInt(x, "ChartDisplayType")
-                                            }).ToList();
+                            {
+                                ReferenceChartTypeId = DataReader.ReadShort(x, "ReferenceChartTypeId"),
+                                ChartName = DataReader.ReadString(x, "ChartName"),
+                                NumOfRows = DataReader.ReadInt(x, "NumOfRows"),
+                                NumOfCols = DataReader.ReadInt(x, "NumOfCols"),
+                                TotalPatches = DataReader.ReadInt(x, "TotalPatches"),
+                                InstrumentType = new InstrumentType()
+                                {
+                                    InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
+                                    InstrumentName = DataReader.ReadString(x, "InstrumentName")
+                                },
+                                ProjectType = new ProjectType()
+                                {
+                                    ProjectTypeId = DataReader.ReadShort(x, "ProjectTypeId"),
+                                    ProjectTypeName = DataReader.ReadString(x, "ProjectType")
+                                },
+                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                ChartDisplayType = DataReader.ReadInt(x, "ChartDisplayType")
+                            }).ToList();
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartsForXmf"));
@@ -278,7 +275,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                     {
-                        var dsReferenceChart = DataAccessFactory.Instance.GetDsResult("[CP].[GetReferenceChartDataForXmf]", new object[] {refChartId});
+                        var dsReferenceChart = DataAccessFactory.Instance.GetDsResult("[CP].[GetReferenceChartDataForXmf]", new object[] { refChartId });
                         if (dsReferenceChart != null && dsReferenceChart.Tables.Count > 0 && dsReferenceChart.Tables[0].Rows.Count > 0)
                         {
                             referenceChart.ReferenceChartTypeId = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "ReferenceChartTypeID");
