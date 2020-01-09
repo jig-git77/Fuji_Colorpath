@@ -1005,18 +1005,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 {
                     ProfilerClient client = new ProfilerClient();
 
-                    CreateSpotLibraryRequest req = new CreateSpotLibraryRequest();
-                    SpotParameter[] paramList = new SpotParameter[10];
-                    paramList[0] = new SpotParameter() { Name = "MaxChannels", Value = "0" };
-                    paramList[1] = new SpotParameter() { Name = "MaxChannels", Value = "0" };
-                    paramList[2] = new SpotParameter() { Name = "SaveProfilerInfo", Value = "1" };
-                    paramList[3] = new SpotParameter() { Name = "SaveProfilerData", Value = "1" };
-                    paramList[4] = new SpotParameter() { Name = "CalculateDCSMode", Value = "2" };
-                    paramList[5] = new SpotParameter() { Name = "Rendering", Value = "3" };
-                    paramList[6] = new SpotParameter() { Name = "OOGMethod", Value = "dE00" };
-                    paramList[7] = new SpotParameter() { Name = "ClipAbsTolerance", Value = "0" };
-                    paramList[8] = new SpotParameter() { Name = "ClipRelTolerance", Value = "0" };
-                    paramList[9] = new SpotParameter() { Name = "MaxChannels", Value = "0" };
+                    ProfilerServiceClient.Request.CreateSpotLibraryRequest req = new ProfilerServiceClient.Request.CreateSpotLibraryRequest();
+                    ProfilerServiceClient.SpotParameter[] paramList = new ProfilerServiceClient.SpotParameter[10];
+                    paramList[0] = new ProfilerServiceClient.SpotParameter() { Name = "MaxChannels", Value = "0" };
+                    paramList[1] = new ProfilerServiceClient.SpotParameter() { Name = "MaxChannels", Value = "0" };
+                    paramList[2] = new ProfilerServiceClient.SpotParameter() { Name = "SaveProfilerInfo", Value = "1" };
+                    paramList[3] = new ProfilerServiceClient.SpotParameter() { Name = "SaveProfilerData", Value = "1" };
+                    paramList[4] = new ProfilerServiceClient.SpotParameter() { Name = "CalculateDCSMode", Value = "2" };
+                    paramList[5] = new ProfilerServiceClient.SpotParameter() { Name = "Rendering", Value = "3" };
+                    paramList[6] = new ProfilerServiceClient.SpotParameter() { Name = "OOGMethod", Value = "dE00" };
+                    paramList[7] = new ProfilerServiceClient.SpotParameter() { Name = "ClipAbsTolerance", Value = "0" };
+                    paramList[8] = new ProfilerServiceClient.SpotParameter() { Name = "ClipRelTolerance", Value = "0" };
+                    paramList[9] = new ProfilerServiceClient.SpotParameter() { Name = "MaxChannels", Value = "0" };
 
                     req.ProfileOptions = paramList.ToList();
 
@@ -1031,7 +1031,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     if (dsSpotTarget.Tables[0].Rows.Count > 0)
                     {
-                        req.DestinationProfile = new SpotIccProfile();
+                        req.DestinationProfile = new ProfilerServiceClient.SpotIccProfile();
                         req.DestinationProfile.ProfileData = (byte[])dsSpotTarget.Tables[0].Rows[0]["DestinationProfile"];
 
                         var ms = new MemoryStream();
@@ -1055,10 +1055,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         req.TargetProfile = ms.ToArray();
                     }
 
-                    var syncClientResponse = client.CreateSpotLibraryValues(req);
+                    //var syncClientResponse = client.CreateSpotLibraryValues(req);
+                    var syncClientResponse = Utilities.GetProfilerServiceClientCall<ProfilerServiceClient.Request.CreateSpotLibraryRequest, ProfilerServiceClient.Response.CreateSpotLibraryResponse>(req, Utilities.ProfilerCallMethod.CreateSpotLibrary, Utilities.ProfilerRequestCall.HttpPost);
 
 
-                    List<ProfilerService.Patch> list = syncClientResponse.spotPatchDetail;
+                    List<ProfilerServiceClient.Patch> list = syncClientResponse.spotPatchDetail;
 
                     var spotProjectDetails = new XElement("SpotColorDetails",
                                                        list.
