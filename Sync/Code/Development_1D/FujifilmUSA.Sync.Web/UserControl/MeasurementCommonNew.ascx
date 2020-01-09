@@ -8,7 +8,7 @@
         <div class="greencornersbox" style="height: 30px !important;">
             <table style="width: 100%; vertical-align: top;">
                 <tr>
-                    <td style="width: 80%; vertical-align:top; text-align: left;">
+                    <td style="width: 80%; vertical-align:top; text-align: left; padding:0px 0px 0px 0px;">
                         <asp:Label ID="lblMessage" runat="server" Text="" CssClass="mtoolmessage"></asp:Label>
                     </td>
                     <td style="width: 20%; vertical-align:top; text-align:center; float:none;">

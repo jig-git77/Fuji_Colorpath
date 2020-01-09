@@ -230,7 +230,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 str.Append("<b>This project is currently activated for measurement.</b>");
                 str.Append("<br />");
-                str.Append("<b>Measure charts and upload using the ColorPath MTool,Return here when you're done.</b>");
+                str.Append("<b>Measure charts and upload using the ColorPath MTool, Return here when you're done.</b>");
             }
             else
             {
