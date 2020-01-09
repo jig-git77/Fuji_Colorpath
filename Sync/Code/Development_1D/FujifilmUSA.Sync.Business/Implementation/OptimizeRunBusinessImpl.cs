@@ -1092,17 +1092,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
-
-
                     ProfilerClient client = new ProfilerClient();
 
-                    OptimizeSpotLibraryRequest req = new OptimizeSpotLibraryRequest();
-                    SpotParameter[] paramList = new SpotParameter[5];
-                    paramList[0] = new SpotParameter() { Name = "ProfileSize", Value = "2" };
-                    paramList[1] = new SpotParameter() { Name = "SaveProfilerInfo", Value = "1" };
-                    paramList[2] = new SpotParameter() { Name = "SaveProfilerData", Value = "1" };
-                    paramList[3] = new SpotParameter() { Name = "ProfileFormat", Value = "2" };
-                    paramList[4] = new SpotParameter() { Name = "Rendering", Value = "3" };
+                    ProfilerServiceClient.Request.OptimizeSpotLibraryRequest req = new ProfilerServiceClient.Request.OptimizeSpotLibraryRequest();
+                    ProfilerServiceClient.SpotParameter[] paramList = new ProfilerServiceClient.SpotParameter[5];
+                    paramList[0] = new ProfilerServiceClient.SpotParameter() { Name = "ProfileSize", Value = "2" };
+                    paramList[1] = new ProfilerServiceClient.SpotParameter() { Name = "SaveProfilerInfo", Value = "1" };
+                    paramList[2] = new ProfilerServiceClient.SpotParameter() { Name = "SaveProfilerData", Value = "1" };
+                    paramList[3] = new ProfilerServiceClient.SpotParameter() { Name = "ProfileFormat", Value = "2" };
+                    paramList[4] = new ProfilerServiceClient.SpotParameter() { Name = "Rendering", Value = "3" };
 
 
                     req.ProfileOptions = paramList.ToList();
@@ -1118,8 +1116,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     if (dsSpotTarget.Tables[0].Rows.Count > 0)
                     {
-                        req.DestinationProfile = new SpotIccProfile();
-                        req.previousNamedColorProfile = new SpotIccProfile();
+                        req.DestinationProfile = new ProfilerServiceClient.SpotIccProfile();
+                        req.previousNamedColorProfile = new ProfilerServiceClient.SpotIccProfile();
                         req.DestinationProfile.ProfileData = (byte[])dsSpotTarget.Tables[0].Rows[0]["DestinationProfile"];
                         req.previousNamedColorProfile.ProfileData = (byte[])dsSpotTarget.Tables[0].Rows[0]["LastOptimizedNCP"];
 
@@ -1144,10 +1142,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         req.TargetProfile = ms.ToArray();
                     }
 
-                    var syncClientResponse = client.OptimizeSpotLibraryValues(req);
+                    //var syncClientResponse = client.OptimizeSpotLibraryValues(req);
+                    var syncClientResponse  = Utilities.GetProfilerServiceClientCall<ProfilerServiceClient.Request.OptimizeSpotLibraryRequest, ProfilerServiceClient.Response.OptimizeSpotLibraryResponse>(req, Utilities.ProfilerCallMethod.OptimizeSpotLibrary, Utilities.ProfilerRequestCall.HttpPost);
 
 
-                    List<ProfilerService.Patch> list = syncClientResponse.spotPatchDetail;
+                    List< ProfilerServiceClient.Patch> list = syncClientResponse.spotPatchDetail;
 
                     var spotProjectDetails = new XElement("SpotColorDetails",
                                                        list.
