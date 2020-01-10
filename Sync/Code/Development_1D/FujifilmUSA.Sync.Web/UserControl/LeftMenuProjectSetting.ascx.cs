@@ -219,7 +219,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lnkMeasure.ForeColor = lnkMeasure.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
             lnkAnalyze.ForeColor = lnkAnalyze.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
             lnkDownload.ForeColor = lnkDownload.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
-
             var currentPage = Request.Url.Segments;
             if (currentPage[currentPage.Length - 1] == "Measurement.aspx" || currentPage[currentPage.Length - 1] == "Spot_Measurement.aspx")
                 lnkAnalyze.Attributes.Add("onclick", "return AllowToAnalyze();");
