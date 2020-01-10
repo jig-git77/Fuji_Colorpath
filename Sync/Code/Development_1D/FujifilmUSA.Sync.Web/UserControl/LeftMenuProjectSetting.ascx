@@ -29,7 +29,7 @@
                     OnClick="lnkItem_Click" meta:resourcekey="lnkValidationSetupResource1"></asp:LinkButton>
             </li>
             <li>
-                <asp:LinkButton runat="server" ID="lnkSave" Text="6. Save" 
+                <asp:LinkButton runat="server" ID="lnkSave" Text="6. Review" 
                     style="padding: 7px 0 6px 30px;" OnClick="lnkItem_Click" 
                     meta:resourcekey="lnkSaveResource1"></asp:LinkButton>
             </li>
