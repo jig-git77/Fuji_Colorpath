@@ -1,6 +1,5 @@
-﻿using FujifilmUSA.Sync.Business.ProfilerService;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using static FujifilmUSA.Sync.Business.ProfilerServiceClient.Enums;
 
 namespace FujifilmUSA.Sync.Business.ProfilerServiceClient.Request
 {

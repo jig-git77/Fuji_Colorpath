@@ -1,5 +1,8 @@
 ﻿using FujifilmUSA.Sync.Business.CustomExceptions;
 using FujifilmUSA.Sync.Business.Interface;
+using FujifilmUSA.Sync.Business.ProfilerServiceClient;
+using FujifilmUSA.Sync.Business.ProfilerServiceClient.Request;
+using FujifilmUSA.Sync.Business.ProfilerServiceClient.Response;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Entity;
@@ -101,17 +104,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 {
                     //call service and retrieve lab data. insert this lab data to database.
                     var referenceLabs = new List<ReferenceLab>();
-                    ProfilerServiceClient.Request.ExtractProfileValuesRequest extractProfileValuesRequest = new ProfilerServiceClient.Request.ExtractProfileValuesRequest()
+                    ExtractProfileValuesRequest extractProfileValuesRequest = new ExtractProfileValuesRequest()
                     {
-                        ExtractType = ProfilerServiceClient.Enums.ProfileExtractType.Xyz,
-                        Profile = new ProfilerServiceClient.IccProfile() { ProfileData = sourceProfile },
+                        ExtractType = Enums.ProfileExtractType.Xyz,
+                        Profile = new IccProfile() { ProfileData = sourceProfile },
                         C_X = referenceCharts.Select(x => Convert.ToDouble(x.CmykC)).ToList(),
                         M_Y = referenceCharts.Select(x => Convert.ToDouble(x.CmykM)).ToList(),
                         Y_Z = referenceCharts.Select(x => Convert.ToDouble(x.CmykY)).ToList(),
                         K = referenceCharts.Select(x => Convert.ToDouble(x.CmykK)).ToList()
                     };
                     //var response = client.ExtractProfileValues(extractProfileValuesRequest);
-                    var response = Utilities.GetProfilerServiceClientCall<ProfilerServiceClient.Request.ExtractProfileValuesRequest, ProfilerServiceClient.Response.ExtractProfileValuesResponse>(extractProfileValuesRequest, Utilities.ProfilerCallMethod.ExtractProfile, Utilities.ProfilerRequestCall.HttpPost);
+                    var response = Utilities.GetProfilerServiceClientCall<ExtractProfileValuesRequest,ExtractProfileValuesResponse>(extractProfileValuesRequest, Utilities.ProfilerCallMethod.ExtractProfile, Utilities.ProfilerRequestCall.HttpPost);
                     for (int i = 0; i < referenceCharts.Count; i++)
                     {
                         referenceLabs.Add(new ReferenceLab()

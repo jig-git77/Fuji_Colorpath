@@ -153,11 +153,6 @@
     <Compile Include="ProfilerServiceClient\SpotIccProfile.cs" />
     <Compile Include="ProfilerServiceClient\SpotParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\ProfilerService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="ValidationRule\NotificationRules\CreateDLPErrorValidationRule.cs" />
     <Compile Include="ValidationRule\NotificationRules\CreateDLPValidationRule.cs" />
     <Compile Include="ValidationRule\NotificationRules\LoggedInValidationRule.cs" />
@@ -195,67 +190,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateG7AlignmentCurveResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateISOAlignmentCurveResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateSourceProfileResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateSourceToSourceDeviceLinkProfileResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateSpotLibraryResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.ExtractProfileValuesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.OptimizeDeviceLinkProfileResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.OptimizeSpotLibraryResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler.wsdl" />
-    <None Include="Service References\ProfilerService\Profiler.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ProfilerService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ProfilerService\Profiler.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ProfilerService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ProfilerService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ProfilerService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
