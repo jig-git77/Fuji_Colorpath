@@ -31,22 +31,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.UpdatePanel pluginUpdatePnl;
         
         /// <summary>
-        /// btnAddPluginStatus control.
+        /// btnAddPluginStatusTemp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAddPluginStatus;
-        
-        /// <summary>
-        /// btnlocAddPluginStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize btnlocAddPluginStatus;
+        protected global::System.Web.UI.WebControls.Button btnAddPluginStatusTemp;
         
         /// <summary>
         /// locRecentUpload control.

@@ -135,30 +135,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
             
             if (SessionManager.Instance.CurrentProject.PrintCondition != null)
             {
-                ErrorLog.WriteErrorLog("SessionManager.Instance.CurrentProject.PrintCondition");
                 if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin)
                 {
-                    ErrorLog.WriteErrorLog("SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin");
                     bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
                     if (resultMesaurment)
                     {
-                        ErrorLog.WriteErrorLog("resultMesaurment"+"Yes");
                         //lblMessage.Text = resultMesaurment ? GetMToolMessage(1) : string.Empty;
                         GetMToolMessage(1);
                         //btnAddPluginStatus.Enabled = false;
                         //btnAddPluginStatus.CssClass = "green_btnotactive";
-                        btnAddPluginStatus.Attributes.Add("cssClass", "green_btnotactive");
-                        ErrorLog.WriteErrorLog("btnAddPluginStatus" + "green_btnotactive");
+                        btnAddPluginStatusTemp.Enabled = false;
+                        
 
                     }
                     else
                     {
-                        ErrorLog.WriteErrorLog("resultMesaurment" + "No");
+                        
                         GetMToolMessage(0);
                         //btnAddPluginStatus.Enabled = true;
-                       // btnAddPluginStatus.CssClass = "green_bt";
-                        btnAddPluginStatus.Attributes.Add("cssClass", "green_bt");
-                        ErrorLog.WriteErrorLog("btnAddPluginStatus" + "green_bt");
+                        //btnAddPluginStatus.CssClass = "green_bt";     
+                        btnAddPluginStatusTemp.Enabled = true;
+                       
                     }
 
                 }
@@ -168,27 +165,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ErrorLog.WriteErrorLog("SessionManager.Instance.CurrentProject.SpotTargetProject");
                 if (SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.IsCustomPlugin)
                 {
-                    ErrorLog.WriteErrorLog("SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.IsCustomPlugin");
                     bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
                     if (resultMesaurment)
                     {
-                        ErrorLog.WriteErrorLog("SPOT::>resultMesaurment" + "Yes");
                         //lblMessage.Text = resultMesaurment ? GetMToolMessage(1) : string.Empty;
                         GetMToolMessage(1);
                         //btnAddPluginStatus.Enabled = false;                        
-                       // btnAddPluginStatus.CssClass = "green_btnotactive";
-                        btnAddPluginStatus.Attributes.Add("cssClass", "green_btnotactive");
-                        ErrorLog.WriteErrorLog("SPOT::>btnAddPluginStatus" + "green_btnotactive");
+                        //btnAddPluginStatus.CssClass = "green_btnotactive";       
+                        btnAddPluginStatusTemp.Enabled = false;
+
                     }
                     else
                     {
-                        ErrorLog.WriteErrorLog("SPOT::>resultMesaurment" + "No");
                         //lblMessage.Text = GetMToolMessage(0);
-                        //btnAddPluginStatus.Enabled = true;
-                        GetMToolMessage(0);
-                        btnAddPluginStatus.Attributes.Add("cssClass", "green_bt");
+                        //btnAddPluginStatus.Enabled = true;                                                
                         //btnAddPluginStatus.CssClass = "green_bt";
-                        ErrorLog.WriteErrorLog("SPOT::>btnAddPluginStatus" + "green_bt");
+                        GetMToolMessage(0);                        
+                        btnAddPluginStatusTemp.Enabled = true;
                     }
 
                 }
@@ -196,7 +189,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
             hdnbtnAnalyzeParent.Value = ((LinkButton)NamingContainer.FindControl("btnAnalyze")).ClientID;
         }
 
-        protected void btnAddPluginStatus_Click(object sender, EventArgs e)
+        //protected void btnAddPluginStatus_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        int result = _presenterMeasurementSetting.CreateMeasurementPluginStatus();
+        //        if (result > 0)
+        //        {
+        //            //lblMessage.Text = GetMToolMessage(1);                   
+        //            GetMToolMessage(1);
+        //            Response.Redirect(Request.Url.ToString());
+        //        }
+        //        else
+        //        {
+        //            lblMessage.Text = "";
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //}
+        protected void btnAddPluginStatusTemp_Click(object sender, EventArgs e)
         {
             try
             {
@@ -217,6 +231,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 throw;
             }
         }
+
         //private void FillValidationDetailsFromXMF()
         //{
         //    if (SessionManager.Instance.CurrentValidationRequest != null)
