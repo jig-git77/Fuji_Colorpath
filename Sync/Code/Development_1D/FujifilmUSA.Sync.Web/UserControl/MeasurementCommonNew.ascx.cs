@@ -144,7 +144,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         GetMToolMessage(1);
                         //btnAddPluginStatus.Enabled = false;
                         //btnAddPluginStatus.CssClass = "green_btnotactive";
-                        btnAddPluginStatusTemp.Enabled = false;
+                        
                         
 
                     }
@@ -154,7 +154,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         GetMToolMessage(0);
                         //btnAddPluginStatus.Enabled = true;
                         //btnAddPluginStatus.CssClass = "green_bt";     
-                        btnAddPluginStatusTemp.Enabled = true;
+                        
                        
                     }
 
@@ -172,7 +172,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         GetMToolMessage(1);
                         //btnAddPluginStatus.Enabled = false;                        
                         //btnAddPluginStatus.CssClass = "green_btnotactive";       
-                        btnAddPluginStatusTemp.Enabled = false;
+                       
 
                     }
                     else
@@ -181,7 +181,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         //btnAddPluginStatus.Enabled = true;                                                
                         //btnAddPluginStatus.CssClass = "green_bt";
                         GetMToolMessage(0);                        
-                        btnAddPluginStatusTemp.Enabled = true;
+                       
                     }
 
                 }
@@ -219,7 +219,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     //lblMessage.Text = GetMToolMessage(1);                   
                     GetMToolMessage(1);
-                    Response.Redirect(Request.Url.ToString());
+                    //Response.Redirect(Request.Url.ToString());
                 }
                 else
                 {
@@ -262,10 +262,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 str.Append("<b>This project is currently activated for measurement.</b>");
                 str.Append("<br />");
                 str.Append("<b>Measure charts and upload using the ColorPath MTool, Return here when you're done.</b>");
+                btnAddPluginStatusTemp.Enabled = false;
             }
             else
             {
                 str.Append("<b>This project is not currently activated for measurement.</b>");
+                btnAddPluginStatusTemp.Enabled = true;
             }
             lblMessage.Text = str.ToString();
         }
