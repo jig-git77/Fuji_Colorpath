@@ -140,22 +140,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
                     if (resultMesaurment)
                     {
-                        //lblMessage.Text = resultMesaurment ? GetMToolMessage(1) : string.Empty;
-                        GetMToolMessage(1);
+                        GetMToolMessage(1);                        
+                        btnAddPluginStatus.CssClass = "green_btnotactive";
                         //btnAddPluginStatus.Enabled = false;
-                        //btnAddPluginStatus.CssClass = "green_btnotactive";
-                        
-                        
-
                     }
                     else
                     {
-                        
-                        GetMToolMessage(0);
+                        GetMToolMessage(0);                        
+                        btnAddPluginStatus.CssClass = "green_bt";
                         //btnAddPluginStatus.Enabled = true;
-                        //btnAddPluginStatus.CssClass = "green_bt";     
-                        
-                       
                     }
 
                 }
@@ -168,20 +161,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
                     if (resultMesaurment)
                     {
-                        //lblMessage.Text = resultMesaurment ? GetMToolMessage(1) : string.Empty;
-                        GetMToolMessage(1);
-                        //btnAddPluginStatus.Enabled = false;                        
-                        //btnAddPluginStatus.CssClass = "green_btnotactive";       
-                       
-
+                        GetMToolMessage(1);                        
+                        btnAddPluginStatus.CssClass = "green_btnotactive";
+                        //btnAddPluginStatus.Enabled = false;
                     }
                     else
                     {
-                        //lblMessage.Text = GetMToolMessage(0);
-                        //btnAddPluginStatus.Enabled = true;                                                
-                        //btnAddPluginStatus.CssClass = "green_bt";
-                        GetMToolMessage(0);                        
-                       
+                        GetMToolMessage(0);
+                        btnAddPluginStatus.CssClass = "green_bt";                        
+                        //btnAddPluginStatus.Enabled = true;
                     }
 
                 }
@@ -189,37 +177,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             hdnbtnAnalyzeParent.Value = ((LinkButton)NamingContainer.FindControl("btnAnalyze")).ClientID;
         }
 
-        //protected void btnAddPluginStatus_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        int result = _presenterMeasurementSetting.CreateMeasurementPluginStatus();
-        //        if (result > 0)
-        //        {
-        //            //lblMessage.Text = GetMToolMessage(1);                   
-        //            GetMToolMessage(1);
-        //            Response.Redirect(Request.Url.ToString());
-        //        }
-        //        else
-        //        {
-        //            lblMessage.Text = "";
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw;
-        //    }
-        //}
-        protected void btnAddPluginStatusTemp_Click(object sender, EventArgs e)
+        protected void btnAddPluginStatus_Click(object sender, EventArgs e)
         {
             try
             {
                 int result = _presenterMeasurementSetting.CreateMeasurementPluginStatus();
                 if (result > 0)
                 {
-                    //lblMessage.Text = GetMToolMessage(1);                   
                     GetMToolMessage(1);
-                    //Response.Redirect(Request.Url.ToString());
+                    Response.Redirect(Request.Url.ToString());
                 }
                 else
                 {
@@ -231,6 +197,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 throw;
             }
         }
+
 
         //private void FillValidationDetailsFromXMF()
         //{
@@ -262,12 +229,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 str.Append("<b>This project is currently activated for measurement.</b>");
                 str.Append("<br />");
                 str.Append("<b>Measure charts and upload using the ColorPath MTool, Return here when you're done.</b>");
-                btnAddPluginStatusTemp.Enabled = false;
+                
             }
             else
             {
                 str.Append("<b>This project is not currently activated for measurement.</b>");
-                btnAddPluginStatusTemp.Enabled = true;
+                
             }
             lblMessage.Text = str.ToString();
         }

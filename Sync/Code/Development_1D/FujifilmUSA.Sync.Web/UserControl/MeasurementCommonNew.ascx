@@ -4,56 +4,7 @@
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 
-<%--<style type="text/css"> 
-    .green_bt {
-    background: url(../Images/green_bt_left.png) no-repeat top left;
-    display: inline-block;
-    height: 34px;
-    line-height: 30px;
-    padding-left: 8px;
-}
 
-    .green_bt span {
-        background: url(../Images/green_bt_right.png) no-repeat top right;
-        display: block;
-        padding: 0 25px 4px 18px;
-        font-size: 14px;
-        color: #fff;
-    }
-
-    .green_bt:hover {
-        background: url(../Images/green_bt_left_hover.png) no-repeat top left;
-    }
-
-        .green_bt:hover span {
-            background: url(../Images/green_bt_right_hover.png) no-repeat top right;
-        }
-
-.gray_bt {
-    background: url(../Images/gray_bt_left.png) no-repeat top left;
-    display: inline-block;
-    height: 34px;
-    line-height: 30px;
-    padding-left: 8px;
-}
-
-    .gray_bt span {
-        background: url(../Images/gray_bt_right.png) no-repeat top right;
-        display: block;
-        padding: 0 25px 4px 18px;
-        font-size: 14px;
-        color: #fff;
-    }
-
-    .gray_bt:hover {
-        background: url(../Images/green_bt_left.png) no-repeat top left;
-    }
-
-        .gray_bt:hover span {
-            background: url(../Images/green_bt_right.png) no-repeat top right;
-        }
-</style>--%>
- 
 
 
 <div>
@@ -67,18 +18,16 @@
                     <td style="width: 20%; vertical-align:top; text-align:center; float:none;">
                         <asp:UpdatePanel ID="pluginUpdatePnl" runat="server" RenderMode="Block" ChildrenAsTriggers="false" UpdateMode="Conditional">
                             <ContentTemplate>                               
-                                <%--CssClass="green_bt" --%>
-                           <%-- <asp:LinkButton ID="btnAddPluginStatus" runat="server" OnClick="btnAddPluginStatus_Click">
+                              
+                            <asp:LinkButton ID="btnAddPluginStatus" runat="server" CssClass="green_bt" OnClick="btnAddPluginStatus_Click">
                                 <span>
                                     <asp:Localize runat="server" Text="Activate" ID="btnlocAddPluginStatus"
                                         meta:resourcekey="btnlocAddPluginStatus"></asp:Localize>
                                 </span>
-                            </asp:LinkButton>--%>
-                                <asp:Button ID="btnAddPluginStatusTemp" runat="server" Text="Active" OnClick="btnAddPluginStatusTemp_Click" Width="130px" Height="30px" />
-                                
+                            </asp:LinkButton>
                             </ContentTemplate>
                             <Triggers>
-                                <asp:AsyncPostBackTrigger ControlID="btnAddPluginStatusTemp" />
+                                <asp:AsyncPostBackTrigger ControlID="btnAddPluginStatus" />
                             </Triggers>                           
                         </asp:UpdatePanel>
                        
