@@ -132,51 +132,63 @@ namespace FujifilmUSA.Sync.Web.UserControl
             InstrumentTypeID = Convert.ToInt16(SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId);
             LicenseType = SessionManager.Instance.CurrentProject.LicenseType;
 
+            
             if (SessionManager.Instance.CurrentProject.PrintCondition != null)
             {
+                ErrorLog.WriteErrorLog("SessionManager.Instance.CurrentProject.PrintCondition");
                 if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin)
                 {
-
+                    ErrorLog.WriteErrorLog("SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin");
                     bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
                     if (resultMesaurment)
                     {
+                        ErrorLog.WriteErrorLog("resultMesaurment"+"Yes");
                         //lblMessage.Text = resultMesaurment ? GetMToolMessage(1) : string.Empty;
                         GetMToolMessage(1);
                         //btnAddPluginStatus.Enabled = false;
-                        btnAddPluginStatus.CssClass = "green_btnotactive";
+                        //btnAddPluginStatus.CssClass = "green_btnotactive";
                         btnAddPluginStatus.Attributes.Add("cssClass", "green_btnotactive");
+                        ErrorLog.WriteErrorLog("btnAddPluginStatus" + "green_btnotactive");
+
                     }
                     else
                     {
-                         GetMToolMessage(0);
+                        ErrorLog.WriteErrorLog("resultMesaurment" + "No");
+                        GetMToolMessage(0);
                         //btnAddPluginStatus.Enabled = true;
-                        btnAddPluginStatus.CssClass = "green_bt";
+                       // btnAddPluginStatus.CssClass = "green_bt";
                         btnAddPluginStatus.Attributes.Add("cssClass", "green_bt");
+                        ErrorLog.WriteErrorLog("btnAddPluginStatus" + "green_bt");
                     }
 
                 }
             }
             if (SessionManager.Instance.CurrentProject.SpotTargetProject != null)
             {
+                ErrorLog.WriteErrorLog("SessionManager.Instance.CurrentProject.SpotTargetProject");
                 if (SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.IsCustomPlugin)
                 {
-
+                    ErrorLog.WriteErrorLog("SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.IsCustomPlugin");
                     bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
                     if (resultMesaurment)
                     {
+                        ErrorLog.WriteErrorLog("SPOT::>resultMesaurment" + "Yes");
                         //lblMessage.Text = resultMesaurment ? GetMToolMessage(1) : string.Empty;
                         GetMToolMessage(1);
                         //btnAddPluginStatus.Enabled = false;                        
-                        btnAddPluginStatus.CssClass = "green_btnotactive";
+                       // btnAddPluginStatus.CssClass = "green_btnotactive";
                         btnAddPluginStatus.Attributes.Add("cssClass", "green_btnotactive");
-
+                        ErrorLog.WriteErrorLog("SPOT::>btnAddPluginStatus" + "green_btnotactive");
                     }
                     else
                     {
+                        ErrorLog.WriteErrorLog("SPOT::>resultMesaurment" + "No");
                         //lblMessage.Text = GetMToolMessage(0);
                         //btnAddPluginStatus.Enabled = true;
                         GetMToolMessage(0);
-                        btnAddPluginStatus.CssClass = "green_bt";
+                        btnAddPluginStatus.Attributes.Add("cssClass", "green_bt");
+                        //btnAddPluginStatus.CssClass = "green_bt";
+                        ErrorLog.WriteErrorLog("SPOT::>btnAddPluginStatus" + "green_bt");
                     }
 
                 }
