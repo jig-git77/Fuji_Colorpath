@@ -144,12 +144,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         GetMToolMessage(1);
                         //btnAddPluginStatus.Enabled = false;
                         btnAddPluginStatus.CssClass = "green_btnotactive";
+                        btnAddPluginStatus.Attributes.Add("cssClass", "green_btnotactive");
                     }
                     else
                     {
                          GetMToolMessage(0);
                         //btnAddPluginStatus.Enabled = true;
                         btnAddPluginStatus.CssClass = "green_bt";
+                        btnAddPluginStatus.Attributes.Add("cssClass", "green_bt");
                     }
 
                 }
@@ -164,8 +166,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         //lblMessage.Text = resultMesaurment ? GetMToolMessage(1) : string.Empty;
                         GetMToolMessage(1);
-                        //btnAddPluginStatus.Enabled = false;
+                        //btnAddPluginStatus.Enabled = false;                        
                         btnAddPluginStatus.CssClass = "green_btnotactive";
+                        btnAddPluginStatus.Attributes.Add("cssClass", "green_btnotactive");
+
                     }
                     else
                     {

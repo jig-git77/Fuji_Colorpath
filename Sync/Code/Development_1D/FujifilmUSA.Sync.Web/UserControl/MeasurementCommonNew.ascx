@@ -14,7 +14,8 @@
                     <td style="width: 20%; vertical-align:top; text-align:center; float:none;">
                         <asp:UpdatePanel ID="pluginUpdatePnl" runat="server" RenderMode="Block" ChildrenAsTriggers="false" UpdateMode="Conditional">
                             <ContentTemplate>                               
-                            <asp:LinkButton ID="btnAddPluginStatus" runat="server" CssClass="green_bt" OnClick="btnAddPluginStatus_Click">
+                                <%--CssClass="green_bt" --%>
+                            <asp:LinkButton ID="btnAddPluginStatus" runat="server" OnClick="btnAddPluginStatus_Click">
                                 <span>
                                     <asp:Localize runat="server" Text="Activate" ID="btnlocAddPluginStatus"
                                         meta:resourcekey="btnlocAddPluginStatus"></asp:Localize>

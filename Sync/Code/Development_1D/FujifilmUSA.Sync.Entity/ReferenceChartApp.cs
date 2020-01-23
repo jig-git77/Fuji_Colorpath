@@ -14,6 +14,7 @@ namespace FujifilmUSA.Sync.Entity
         public ChartSetting ChartSetting { get; set; }
         public MeasurementSettingApp MeasurementSettings { get; set; }
         public string EntryDate { get; set; }
+        public string DeviceName { get; set; }
     }
 
     public class MeasurementSettingApp
