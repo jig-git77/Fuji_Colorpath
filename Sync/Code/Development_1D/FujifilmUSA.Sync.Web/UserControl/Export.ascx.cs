@@ -257,8 +257,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     string zipFileName = "";
                     if (result.IsSuccessStatusCode)
                     {
+                        string tempFileName = SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName;
+                        tempFileName = tempFileName.Replace(" ", "");
                         contentStream = result.Content.ReadAsStreamAsync().Result;
-                        result.Content.Headers.ContentDisposition.FileName = SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName + "-" + DateTime.Now.ToString("MMddyyHHmm") + ".zip";
+                        result.Content.Headers.ContentDisposition.FileName = tempFileName + "-" + DateTime.Now.ToString("MMddyyHHmm") + ".zip";
                         zipFileName = result.Content.Headers.ContentDisposition.FileName;
 
                         using (var filestream = File.Create(zipFilPath + zipFileName))
