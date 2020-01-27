@@ -45,14 +45,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-
             if (!IsPostBack)
             {
                 if (IsXmfUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
                     //FillValidationDetailsFromXMF();
                 }
+
                 hdnBasePluginServiceUrl.Value = Utilities.ReadConfigValue("BasePluginServiceURL");
                 hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation).ToString().ToLower();
                 hdLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
@@ -155,7 +154,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             if (SessionManager.Instance.CurrentProject.SpotTargetProject != null)
             {
-                ErrorLog.WriteErrorLog("SessionManager.Instance.CurrentProject.SpotTargetProject");
                 if (SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.IsCustomPlugin)
                 {
                     bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
@@ -172,7 +170,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         //btnAddPluginStatus.Enabled = true;
                     }
 
-                }
+                } 
             }
             hdnbtnAnalyzeParent.Value = ((LinkButton)NamingContainer.FindControl("btnAnalyze")).ClientID;
         }

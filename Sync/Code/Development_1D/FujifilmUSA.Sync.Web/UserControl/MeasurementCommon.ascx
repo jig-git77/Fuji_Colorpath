@@ -395,10 +395,8 @@
 
         ControlDisability(1, false, 1, false, 1, true, 1, true);
         jQuery("[id*='btnCalibrate']").click(function () {
-            debugger;
             ControlDisability(1, true, 0, false, 0, false, 0, false);
             calibrateDevice(g_ScannerList);
-
             return false;
         });
         jQuery("[id*='btnMeasureAndUploadChart']").click(function () {

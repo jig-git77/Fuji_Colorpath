@@ -27,7 +27,7 @@
                             </asp:LinkButton>
                             </ContentTemplate>
                             <Triggers>
-                                <asp:AsyncPostBackTrigger ControlID="btnAddPluginStatus" />
+                                <asp:AsyncPostBackTrigger ControlID="btnAddPluginStatus" EventName="Click" />
                             </Triggers>                           
                         </asp:UpdatePanel>
                        
@@ -176,7 +176,7 @@
     var BASE_SERVICE_URL = '';
     var AutoNumber = 0;
     jQuery(document).ready(function () {
-        BASE_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();
+        BASE_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();                      
         bindMeasurementData();
     });
 
@@ -184,6 +184,8 @@
         var OptimizeRunId = jQuery("input[id$=hdOptimizeRunId]").val();
         var ProjectId = jQuery("input[id$=hdProjectId]").val();
         var getMeasurementUrl = BASE_SERVICE_URL;
+       
+        
         if (jQuery("input[id$=hdIsVerification]").val() == "true") {
             getMeasurementUrl = "Services/PluginDataService.svc/GetVMeasurementsByProjectId/" + ProjectId;
             //getMeasurementUrl += "PluginData.svc/GetVMeasurementsByProjectId/" + ProjectId;
@@ -192,14 +194,15 @@
             getMeasurementUrl = "Services/PluginDataService.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
             //getMeasurementUrl += "PluginData.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
         }
-        else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary %>') {
+        else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary %>') {            
             getMeasurementUrl = "Services/PluginDataService.svc/GetSpotMeasurementsByOptimizeId/" + OptimizeRunId;
             //getMeasurementUrl += "PluginData.svc/GetSpotMeasurementsByOptimizeId/" + OptimizeRunId;
         }
-        else {
+        else{            
             getMeasurementUrl = "Services/PluginDataService.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId;
             //getMeasurementUrl += "PluginData.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId;
         }
+        
 
         jQuery.ajax({
             type: "GET",
@@ -252,7 +255,12 @@
                     }
                 },
             success:
-                function (response) { },
+                function (data) {                   
+                   <%-- var json = jQuery.parseJSON(data);
+                    if (json == null || json.length == 0) {                        
+                        '<%FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentOptimizeRun.HasMeasurements =false; %>';
+                    }--%>
+                },
             error:
                 function (XMLHttpRequest, textStatus, errorThrown) {
                     var jsonFault = JSON.parse(XMLHttpRequest.responseText);
