@@ -2582,15 +2582,20 @@ function PopulateAnalyzeChart() {
                     if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
 
                         var arr = catValue.MeasurementDateString.split('-');
-
+                        var catText = "";
+                        if (viewNumber > 10) {
+                            catText = '<div style="transform: rotate(-90deg);font-size:10px"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';
+                        }
+                        else {
+                            catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';
+                        }
                         //set checked or not                        
-                        var catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';                        
+                       // var catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';                       
+                        
                         var html = $(catText).appendTo(document.body);
-
 
                         // Store a reference to the target rectangle, see below
                         var rect = e.rect;
-
                         //create kendo DOM
                         kendo.drawing.drawDOM(html)
                             .done(function (group) {
@@ -2599,12 +2604,17 @@ function PopulateAnalyzeChart() {
 
                                 // Center the label using Layout
                                 var layout = new kendo.drawing.Layout(rect, {
-                                    justifyContent: "center"                                    
+                                    justifyContent: "center"
                                 });
                                 layout.append(group);
                                 layout.reflow();
                                 // Render the content
                                 visual.append(layout);
+                                if (viewNumber > 10) {
+                                    visual.options.tooltip = {
+                                        content: '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>'
+                                    };
+                                }
                             });
                     } else {
 
