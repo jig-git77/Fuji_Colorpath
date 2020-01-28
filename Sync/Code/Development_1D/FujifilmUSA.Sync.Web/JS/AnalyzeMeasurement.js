@@ -287,7 +287,6 @@ $(document).ready(function () {
             $selectedDeltaE = 'E2000';  //set default value for sync1D projects
         }
     }
-
     //Bind analyze main chart
     BindAnalyzeChart();
 
@@ -617,7 +616,7 @@ $(document).ready(function () {
     });
 
     //------------ Analyze paging feture events -------------//
-    $ddlView.on('change', function (e) {
+    $ddlView.on('change', function (e) {        
         e.preventDefault();
         BindPageNumber();
         PopulateAnalyzeChart();
@@ -1627,7 +1626,7 @@ function BindMeasurementPatchDetails() {
         $divMeasurementPatchDetails.find("#divMetricSum").css('display', 'none');
     }
 
-    $divMeasurementPatchDetails.find('#btnExportMeasurement').on('click', function (e) {
+    $divMeasurementPatchDetails.find('#btnExportMeasurement').unbind("click").on('click', function (e) {
         e.preventDefault();
 
         var measurementID = parseInt($hdnCurrentMeasurement.val());
@@ -1637,6 +1636,7 @@ function BindMeasurementPatchDetails() {
             url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport?MeasurementId=' + measurementID + '&LicenseType=' + parseInt($hdnCurrentDlpSubOperation),
             data: {},
             dataType: "json",
+            async: false,
             headers: {
                 'Authorization': 'Basic ' + AUTH_TOKEN
             }
@@ -1671,9 +1671,10 @@ function BindMeasurementPatchDetails() {
         //});
     });
 
-    $divMeasurementPatchDetails.find('#btnExportCGATS').on('click', function (e) {
+   
+    $divMeasurementPatchDetails.find('#btnExportCGATS').unbind("click").on('click', function (e) {
         e.preventDefault();
-
+       
         var selectedMatricSum = '';
         if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
             selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
@@ -1721,6 +1722,7 @@ function BindMeasurementPatchDetails() {
             url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
             data: filterObj,
             dataType: "json",
+            async: false,
             headers: {
                 'Authorization': 'Basic ' + AUTH_TOKEN
             }
@@ -1739,7 +1741,7 @@ function BindMeasurementPatchDetails() {
             }
         });
 
-
+      
         //$.ajax({
         //    type: "POST",
         //    url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
@@ -1756,8 +1758,8 @@ function BindMeasurementPatchDetails() {
         //    }
         //});
     });
-
-    $divMeasurementPatchDetails.find('#btnExportCxF').on('click', function (e) {
+  
+    $divMeasurementPatchDetails.find('#btnExportCxF').unbind("click").on('click', function (e) {
         e.preventDefault();
         var measurementID = parseInt($hdnCurrentMeasurement.val());
         var selectedMatricSum = '';
@@ -1806,6 +1808,7 @@ function BindMeasurementPatchDetails() {
             url: SERVICE_BASE_URL + 'api/Analyze/GetCFXPatchReport',
             data: filterObj,
             dataType: "json",
+            async: false,
             headers: {
                 'Authorization': 'Basic ' + AUTH_TOKEN
             }
@@ -2566,7 +2569,7 @@ function PopulateAnalyzeChart() {
             },
             labels: {
                 rotation: "auto",
-                //cursor: "pointer",
+                //cursor: "pointer",                
                 visual: function (e) {
 
                     // Create an empty group that will hold the rendered label
@@ -2581,7 +2584,7 @@ function PopulateAnalyzeChart() {
                         var arr = catValue.MeasurementDateString.split('-');
 
                         //set checked or not                        
-                        var catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';
+                        var catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';                        
                         var html = $(catText).appendTo(document.body);
 
 
@@ -2596,7 +2599,7 @@ function PopulateAnalyzeChart() {
 
                                 // Center the label using Layout
                                 var layout = new kendo.drawing.Layout(rect, {
-                                    justifyContent: "center"
+                                    justifyContent: "center"                                    
                                 });
                                 layout.append(group);
                                 layout.reflow();
