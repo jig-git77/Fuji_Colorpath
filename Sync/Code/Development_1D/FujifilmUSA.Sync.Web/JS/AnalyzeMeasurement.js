@@ -2587,7 +2587,8 @@ function PopulateAnalyzeChart() {
 
                         var catText = "";
                         if (viewNumber > 10) {
-                            catText = '<div style="transform: rotate(-90deg);font-size:10px"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';
+                            //catText = '<div style="transform: rotate(-90deg);font-size:10px"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';
+                            catText = '<div style="transform: rotate(-90deg);font-size:9px"><div>' + arr[0] + '</div></div>';
                         }
                         else {
                             catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';
