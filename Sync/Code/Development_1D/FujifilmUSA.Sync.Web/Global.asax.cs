@@ -19,12 +19,13 @@ namespace FujifilmUSA.Sync.Web
 
         protected void Session_Start(object sender, EventArgs e)
         {
-
+            Session.Timeout = 90;
+            HttpContext.Current.Session.Timeout = 90;
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+           
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
