@@ -1628,7 +1628,7 @@ function BindMeasurementPatchDetails() {
         $divMeasurementPatchDetails.find("#divMetricSum").css('display', 'none');
     }
 
-    $divMeasurementPatchDetails.find('#btnExportMeasurement').on('click', function (e) {
+    $divMeasurementPatchDetails.find('#btnExportMeasurement').unbind("click").on('click', function (e) {
         e.preventDefault();
 
         var measurementID = parseInt($hdnCurrentMeasurement.val());
@@ -1638,6 +1638,7 @@ function BindMeasurementPatchDetails() {
             url: SERVICE_BASE_URL + 'api/Analyze/GetMeasurementFileExport?MeasurementId=' + measurementID + '&LicenseType=' + parseInt($hdnCurrentDlpSubOperation),
             data: {},
             dataType: "json",
+            async: false,
             headers: {
                 'Authorization': 'Basic ' + AUTH_TOKEN
             }
@@ -1672,7 +1673,7 @@ function BindMeasurementPatchDetails() {
         //});
     });
 
-    $divMeasurementPatchDetails.find('#btnExportCGATS').on('click', function (e) {
+    $divMeasurementPatchDetails.find('#btnExportCGATS').unbind("click").on('click', function (e) {
         e.preventDefault();
 
         var selectedMatricSum = '';
@@ -1722,6 +1723,7 @@ function BindMeasurementPatchDetails() {
             url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
             data: filterObj,
             dataType: "json",
+            async: false,
             headers: {
                 'Authorization': 'Basic ' + AUTH_TOKEN
             }
@@ -1758,7 +1760,7 @@ function BindMeasurementPatchDetails() {
         //});
     });
 
-    $divMeasurementPatchDetails.find('#btnExportCxF').on('click', function (e) {
+    $divMeasurementPatchDetails.find('#btnExportCxF').unbind("click").on('click', function (e) {
         e.preventDefault();
         var measurementID = parseInt($hdnCurrentMeasurement.val());
         var selectedMatricSum = '';
@@ -1807,6 +1809,7 @@ function BindMeasurementPatchDetails() {
             url: SERVICE_BASE_URL + 'api/Analyze/GetCFXPatchReport',
             data: filterObj,
             dataType: "json",
+            async: false,
             headers: {
                 'Authorization': 'Basic ' + AUTH_TOKEN
             }
