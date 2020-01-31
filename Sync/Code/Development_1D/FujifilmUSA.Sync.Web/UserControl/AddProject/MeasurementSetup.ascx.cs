@@ -327,17 +327,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterMeasurementSetting.GetMeasurementDevice();
             if (SessionManager.Instance.CurrentColorOrgRequest != null)
             {
-                if (SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId == 1) //I1-Pro and I1-Pro2
+                if (SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId == 1) //I1-Pro and I1-Pro2 and I1-Pro3
                 {
-                    MeasurementDevices = MeasurementDevices.Where(x => x.InstrumentTypeId == 1 || x.InstrumentTypeId == 4).ToList();
+                    MeasurementDevices = MeasurementDevices.Where(x => x.InstrumentTypeId == 1 || x.InstrumentTypeId == 4 || x.InstrumentTypeId == 9).ToList();
                 }
                 else if (SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId == 2)  //I1-iSis and I1-iSis2
                 {
                     MeasurementDevices = MeasurementDevices.Where(x => x.InstrumentTypeId == 2 || x.InstrumentTypeId == 8).ToList();
                 }
-                else if (SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId == 3)  //I1-IO and I1-IO-Pro2
+                else if (SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId == 3)  //I1-IO and I1-IO-Pro2 and I1-IO-Pro3
                 {
-                    MeasurementDevices = MeasurementDevices.Where(x => x.InstrumentTypeId == 3 || x.InstrumentTypeId == 5).ToList();
+                    MeasurementDevices = MeasurementDevices.Where(x => x.InstrumentTypeId == 3 || x.InstrumentTypeId == 5 || x.InstrumentTypeId == 10).ToList();
                 }
             }
             if (!IsErrorOccured)
@@ -520,12 +520,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                     || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1Pro2)
                                     || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2)
                                     || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.eXact)
-                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1Sis2));
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1Sis2)
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1Pro3)
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro3));
             trReadMode.Visible = (MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IO)
-                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2));
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2)
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro3));
 
             trMeasCount.Visible = ((MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IO)
-                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2)) && cmbReadMode.SelectedValue == "Point");
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2)
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro3)) && cmbReadMode.SelectedValue == "Point");
             BindUVSettings();
         }
 
