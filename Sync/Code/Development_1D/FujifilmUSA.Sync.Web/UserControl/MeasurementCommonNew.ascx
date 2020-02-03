@@ -45,7 +45,7 @@
             <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" meta:resourcekey="locRecentUploadResource1"></asp:Localize>
             <div id="Div_ImportMeasurements" style="float: right; padding-right: 10px;">
                 <input type="button" id="btnImportMeasurements" class="link-button" style="width: 150px;" value='<%= GetResourceString("btnImportMeasurements") %>' onclick="javascript: return ShowImportWindow();" />
-                <a class="link-button help-icon" href="javascript:void()" onclick="alert('help button');"></a>
+                <a class="link-button help-icon" href="javascript:void()" onclick="location.href='Measure://';"></a>
                 <a class="link-button refresh-icon" href="javascript:void()" onclick="bindMeasurementData();"></a>
             </div>
         </div>
