@@ -150,7 +150,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
                     request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
 
-                    request.PCSDataType =(Enums.PCSDataType) SessionManager.Instance.CurrentProject.PCSDataTypes;
+                    request.PCSDataType =(Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
 
