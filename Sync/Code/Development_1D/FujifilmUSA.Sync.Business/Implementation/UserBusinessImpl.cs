@@ -1230,7 +1230,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformationByLAB]",
+                    var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformationBySerial_LAB]",
                                                                         new object[] { serial, InstrumentTypeId });
 
 
