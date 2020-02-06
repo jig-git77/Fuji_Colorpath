@@ -47,6 +47,12 @@ namespace FujifilmUSA.Sync.Presenter
             userBusiness.ErrorOccured += _viewLogin.ErrorOccured;
             _viewLogin.UserReferenceChartApp = userBusiness.UserLoginReferenceChartBySerial(_viewLogin.DeviceSerialNo, _viewLogin.InstrumentTypeID);
         }
+        public void UserLogInByDeviceLAB()
+        {
+            var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
+            userBusiness.ErrorOccured += _viewLogin.ErrorOccured;
+            _viewLogin.UserReferenceChartApp = userBusiness.UserLogInByDeviceLAB(_viewLogin.DeviceSerialNo, _viewLogin.InstrumentTypeID);
+        }
 
         public int ValidateToken()
         {

@@ -2,13 +2,10 @@
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
-using Newtonsoft.Json;
 
 namespace FujiFilmUSA.Sync.Service.Controllers
 {
@@ -25,7 +22,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             base.Initialize(controllerContext);
         }
 
-        [HttpGet]        
+        [HttpGet]
         public bool Ping()
         {
             return true;
@@ -52,11 +49,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             try
             {
                 if (UserName == null)
+                {
                     validationMessage = "Please provide User name.";
+                }
 
                 if (Password == null)
+                {
                     validationMessage = "Please provide password";
-
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -121,10 +121,14 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             {
 
                 if (SerialNumber == null)
+                {
                     validationMessage = "Please provide Serial Number.";
+                }
 
                 if (InstrumentType == null)
+                {
                     validationMessage = "Please provide Instrument Type";
+                }
 
                 if (!string.IsNullOrEmpty(validationMessage))
                 {
@@ -136,9 +140,71 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 else
                 {
 
-                    this.DeviceSerialNo = SerialNumber;
-                    this.InstrumentTypeID = Convert.ToInt16(InstrumentType);
+                    DeviceSerialNo = SerialNumber;
+                    InstrumentTypeID = Convert.ToInt16(InstrumentType);
                     _presenterlogin.UserLoginFromApplicationBySerial();
+
+                    if (UserReferenceChartApp != null)
+                    {
+                        //var jsonReferenceChart = JsonConvert.SerializeObject(UserReferenceChart);
+
+                        //httpResponse.Data = jsonReferenceChart;
+                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, UserReferenceChartApp));
+                    }
+                    else
+                    {
+                        BaseErrorResponse errprResponse = new BaseErrorResponse();
+                        errprResponse.Error.UserMessage = "Reference chart is not available.";
+                        errprResponse.Error.Code = (int)ResponseStatus.Business_InvalidData;
+                        actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+
+            }
+            return actionResult;
+        }
+
+
+        [HttpGet]
+        public IHttpActionResult UserLogInByDeviceLAB(string SerialNumber, short? InstrumentType)
+        {
+            IHttpActionResult actionResult = null;
+            string validationMessage = "";
+
+            BaseResponse<object> httpResponse = new BaseResponse<object>();
+            try
+            {
+
+                if (SerialNumber == null)
+                {
+                    validationMessage = "Please provide Serial Number.";
+                }
+
+                if (InstrumentType == null)
+                {
+                    validationMessage = "Please provide Instrument Type";
+                }
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.ValidationError;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.PreconditionFailed, errprResponse));//returns 412 status code
+                }
+                else
+                {
+
+                    DeviceSerialNo = SerialNumber;
+                    InstrumentTypeID = Convert.ToInt16(InstrumentType);
+                    _presenterlogin.UserLogInByDeviceLAB();
 
                     if (UserReferenceChartApp != null)
                     {

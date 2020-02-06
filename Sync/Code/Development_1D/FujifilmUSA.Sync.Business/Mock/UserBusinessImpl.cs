@@ -104,7 +104,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new ReferenceChartApp();
         }
-
+        public ReferenceChartApp UserLogInByDeviceLAB(string serial, short InstrumentTypeId)
+        {
+            return new ReferenceChartApp();
+        }
         public int validateUserByAuthKey(string authToken)
         {
             return 0;
