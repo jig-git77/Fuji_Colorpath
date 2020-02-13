@@ -804,8 +804,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@NewPaper_Black_a", Type = DbType.Decimal, Value = project.NewPaper_Black_a},
                                                      new Parameters() {ParameterName = "@NewPaper_Black_b", Type = DbType.Decimal, Value = project.NewPaper_Black_b},
                                                      new Parameters() {ParameterName = "@IsCustomProfilerOption", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomProfilerOption},
-                                                     new Parameters() {ParameterName = "@IsImportProfilerOption", Type = DbType.Boolean, Value = project.PrintCondition.IsCustomProfilerOption}
-                                                     
                                                  },
                                              new List<Parameters>()
                                                  {
