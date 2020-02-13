@@ -19,9 +19,9 @@ namespace FujifilmUSA.Sync.Entity
         public short PatchTypeId { get; set; }
         public bool? IsOuterGamut { get; set; }
         public string HtmlColor { get; set; }
-        public decimal? LabL { get; set; }
-        public decimal? LabA { get; set; }
-        public decimal? LabB { get; set; }
+        public decimal LabL { get; set; }
+        public decimal LabA { get; set; }
+        public decimal LabB { get; set; }
 
 
         //public ReferenceLab ReferenceLABs { get; set; }

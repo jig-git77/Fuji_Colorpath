@@ -266,28 +266,7 @@ namespace FujifilmUSA.Sync.Common
             }
             return dRetVal;
         }
-        /// <summary>
-        /// To read a decimal column value from datarow.
-        /// </summary>
-        /// <param name="objRow"></param>
-        /// <param name="columnName"></param>
-        /// <returns>decimal</returns>
-        public static decimal? ReadDecimalNullValue(DataRow objRow, string columnName)
-        {
-            decimal? dRetVal = null;
-            try
-            {
-                if (objRow.IsNull(columnName))
-                    return dRetVal;
-                else
-                    dRetVal = Convert.ToDecimal(objRow[columnName]);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return dRetVal;
-        }
+       
 
         /// <summary>
         /// To read a string column value from datarow.

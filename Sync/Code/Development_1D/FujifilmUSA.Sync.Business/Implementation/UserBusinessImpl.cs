@@ -1280,9 +1280,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                            {
                                                SampleName = DataReader.ReadString(x, "SampleName"),
                                                HtmlColor = DataReader.ReadString(x, "HTMLColor"),
-                                               LabL = DataReader.ReadDecimalNullValue(x, "LabL"),
-                                               LabA = DataReader.ReadDecimalNullValue(x, "LabA"),
-                                               LabB = DataReader.ReadDecimalNullValue(x, "LabB")
+                                               LabL = DataReader.ReadDecimal(x, "LabL"),
+                                               LabA = DataReader.ReadDecimal(x, "LabA"),
+                                               LabB = DataReader.ReadDecimal(x, "LabB")
                                            }).ToList();
 
                                 var dsReferenceChartSetting = DataAccessFactory.Instance.GetDsResult("[CPSpot].[GetSpotReferenceChartSetting]",
@@ -1375,9 +1375,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
                                                PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
                                                HtmlColor = DataReader.ReadString(x, "HTMLColor"),
-                                               LabL = DataReader.ReadDecimalNullValue(x, "LabL"),
-                                               LabA = DataReader.ReadDecimalNullValue(x, "LabA"),
-                                               LabB = DataReader.ReadDecimalNullValue(x, "LabB")
+                                               LabL = DataReader.ReadDecimal(x, "LabL"),
+                                               LabA = DataReader.ReadDecimal(x, "LabA"),
+                                               LabB = DataReader.ReadDecimal(x, "LabB")
                                                
                                            }).ToList();
 
