@@ -28,7 +28,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return string.Empty;
         }
-
+        public int InsertMeasurementAppErrorLog(AppErrorLog errorLog, int ProjectID, string projectType)
+        {
+            return 0;
+        }
         #endregion
 
         #region ITaskBase Members

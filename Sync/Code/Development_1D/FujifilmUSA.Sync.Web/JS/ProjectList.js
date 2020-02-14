@@ -36,6 +36,7 @@ var CurrentDeviceID;
 var CurrentUserID;
 var Resources = {};
 var CurrentCulture;
+var $hdfToken;
 
 $(document).ready(function () {
 
@@ -245,7 +246,9 @@ $(document).ready(function () {
 
                 //set project type image tooltip
                 switch (data.LicenseType) {
-                    case ELicenseType.None: break;
+                    case ELicenseType.None:
+                        projectTypeTooltip = Resources.ELicenseType_None;
+                        break;
                     case ELicenseType.Sync1D:
                         //projectTypeTooltip = 'Alignment Curves';
                         projectTypeTooltip = Resources.ELicenseType_Sync1D;
@@ -262,7 +265,20 @@ $(document).ready(function () {
                     case ELicenseType.Sync4DCertification:
                         projectTypeTooltip = Resources.ELicenseType_Sync4DCertification;
                         break;
+                    case ELicenseType.CustomSourceProfile:
+                        projectTypeTooltip = Resources.ELicenseType_CustomSourceProfile;
+                        break;
+                    case ELicenseType.ReProfileCustomSource:
+                        projectTypeTooltip = Resources.ELicenseType_ReProfileCustomSourceProfile;
+                        break;
+                    case ELicenseType.FullGamutCustomSource:
+                        projectTypeTooltip = Resources.ELicenseType_FullGamutCustomSourceProfile;
+                        break;
+                    case ELicenseType.MultiColorCustomSource:
+                        projectTypeTooltip = Resources.ELicenseType_MultiColorCustomSourceProfile;
+                        break;
                     case ELicenseType.Validation:
+                        projectTypeTooltip = Resources.ELicenseType_Validation;
                         break;
                     case ELicenseType.IccProfiling: break;
                 }
@@ -613,6 +629,29 @@ $(document).ready(function () {
         }
 
     })
+
+    $("#windowAlert").kendoWindow({
+        width: "300px",
+        height: "100px",
+        modal: true,
+        title: "Alert",
+        visible: false,
+        position: {
+            top: 150,
+            left: 500
+        },
+    });
+
+
+    $('#btnAlertPopup').on('click', function (e) {
+        var locationpath = "";
+        if (window.location.hostname == "localhost") {
+            locationpath = window.location.origin + '/FujifilmUSA.Sync.Web/Login.aspx'
+        } else {
+            locationpath = window.location.origin + '/Login.aspx'
+        }            
+        window.location.href = locationpath;
+    });
 });
 
 function detailInit(e) {
@@ -901,9 +940,12 @@ function Redirect(projectID, type) {
     return false;
 }
 
+
 function ShowSpotClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName) {
+  
     var oWindow;
-    oWindow = window.radopen("PopupSpotClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+    //oWindow = window.radopen("PopupSpotClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+    oWindow = GetRadWindowManager().open("PopupSpotClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
     oWindow.show();
     return false;
 }
@@ -912,14 +954,17 @@ function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, Tot
     if (isSpotProject === undefined) {
         isSpotProject = false;
     }
+    
     var oWindow;
-    oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&isSpotProject=" + isSpotProject, "OpenPrintConditionWindow");
+    //oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&isSpotProject=" + isSpotProject, "OpenPrintConditionWindow");
+    oWindow = GetRadWindowManager().open("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&isSpotProject=" + isSpotProject, "OpenPrintConditionWindow");
     oWindow.show();
     return false;
 }
 function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName) {
     var oWindow;
-    oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+    //oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+    oWindow = GetRadWindowManager().open("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
     oWindow.show();
     return false;
 }
@@ -936,7 +981,8 @@ function ShowSpotLibraryExportWindow(btn) {
     };
     if (isSpotProjectSelected) {
         var oWindow;
-        oWindow = window.radopen("PopupSpotLibraryExport.aspx?OptimizationRunId=101&SpotProjectIds=" + spotIDs, "ReportSpotLibraryExportWindow");
+        //oWindow = window.radopen("PopupSpotLibraryExport.aspx?OptimizationRunId=101&SpotProjectIds=" + spotIDs, "ReportSpotLibraryExportWindow");
+        oWindow = GetRadWindowManager().open("PopupSpotLibraryExport.aspx?OptimizationRunId=101&SpotProjectIds=" + spotIDs, "ReportSpotLibraryExportWindow");
         oWindow.show();
     } else {
         alert('Please select atleast one certified project.');

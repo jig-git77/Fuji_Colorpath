@@ -49,6 +49,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.ReProfileCustomSource || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //---If custom Source profile / ReProfile Custom Source / Full Gamut Custom Source, then directly pass on to next middle page instead of Analyze page
                 {
                     btnCustomSourceProfile.Visible = true;
@@ -94,6 +95,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                           SessionManager.Instance.CurrentColorOrgRequest.SilverlightPostUrl),
                             true);
                     }
+                }
+              
+                //if (!SessionManager.Instance.CurrentProject.MeasurementSetting.PluginType)
+                if (SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.IsCustomPlugin)
+                {
+                    ucMeasurementCommonApp.Visible = true;
+                    ucMeasurementCommon.Visible = false;
+                    divPluginMessage.Visible = false;
                 }
             }
         }

@@ -17,5 +17,9 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         ReferenceChartPlugin ReferenceChartPlugin { get; set; }
         string ProjectType { get; set; }
         DataTable dtMeasurementValidation { get; set; }
+        int UserID { get; set; }
+        string MeaDeviceSerialNo { get; set; }
+        string RequestMeasurment { get; set; }
+        string MToolEntryDate { get; set; }
     }
 }

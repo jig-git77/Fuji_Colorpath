@@ -287,7 +287,6 @@ $(document).ready(function () {
             $selectedDeltaE = 'E2000';  //set default value for sync1D projects
         }
     }
-
     //Bind analyze main chart
     BindAnalyzeChart();
 
@@ -617,7 +616,7 @@ $(document).ready(function () {
     });
 
     //------------ Analyze paging feture events -------------//
-    $ddlView.on('change', function (e) {
+    $ddlView.on('change', function (e) {        
         e.preventDefault();
         BindPageNumber();
         PopulateAnalyzeChart();
@@ -1673,9 +1672,10 @@ function BindMeasurementPatchDetails() {
         //});
     });
 
+   
     $divMeasurementPatchDetails.find('#btnExportCGATS').unbind("click").on('click', function (e) {
         e.preventDefault();
-
+       
         var selectedMatricSum = '';
         if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
             selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
@@ -1742,7 +1742,7 @@ function BindMeasurementPatchDetails() {
             }
         });
 
-
+      
         //$.ajax({
         //    type: "POST",
         //    url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
@@ -1759,7 +1759,7 @@ function BindMeasurementPatchDetails() {
         //    }
         //});
     });
-
+  
     $divMeasurementPatchDetails.find('#btnExportCxF').unbind("click").on('click', function (e) {
         e.preventDefault();
         var measurementID = parseInt($hdnCurrentMeasurement.val());
@@ -2571,7 +2571,7 @@ function PopulateAnalyzeChart() {
             },
             labels: {
                 rotation: "auto",
-                //cursor: "pointer",
+                //cursor: "pointer",                
                 visual: function (e) {
 
                     // Create an empty group that will hold the rendered label
@@ -2584,7 +2584,6 @@ function PopulateAnalyzeChart() {
                     if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
 
                         var arr = catValue.MeasurementDateString.split('-');
-
                         var catText = "";
                         if (viewNumber > 10) {
                             //catText = '<div style="transform: rotate(-90deg);font-size:10px"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';
@@ -2594,13 +2593,12 @@ function PopulateAnalyzeChart() {
                             catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';
                         }
                         //set checked or not                        
-                        //var catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';
+                       // var catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';                       
+                        
                         var html = $(catText).appendTo(document.body);
-
 
                         // Store a reference to the target rectangle, see below
                         var rect = e.rect;
-
                         //create kendo DOM
                         kendo.drawing.drawDOM(html)
                             .done(function (group) {

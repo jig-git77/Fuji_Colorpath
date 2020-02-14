@@ -54,6 +54,30 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             return actionResult;
         }
 
+        [HttpGet]
+        public IHttpActionResult UpdateMeasurementDeviceStatus(short MeasurementDeviceID)
+        {
+            IHttpActionResult actionResult = null;
+            BaseResponse<bool> httpResponse = new BaseResponse<bool>();
+            try
+            {
+                MeasurementDevice = new MeasurementDevice();
+                this.MeasurementDevice.MeasurementDeviceId = MeasurementDeviceID;
+                bool result = _presenterdevice.UpdateMeasurementDeviceStatus();
+                httpResponse.Data = result;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
+
+
         #region IViewDevice Members
         public int TaskeroUserId { get; set; }
         public int RoleId { get; set; }

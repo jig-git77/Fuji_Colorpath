@@ -1,16 +1,18 @@
 ﻿using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
+using System.Text;
 using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class MeasurementCommonNew : BaseControl
+    public partial class MeasurementCommonNew : BaseControl, IViewMeasurement
     {
+
         #region Declaration
         public string AddMeasurement_DeleteMeasurement_Confirmation
         {
@@ -19,7 +21,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("AddMeasurement_DeleteMeasurement_Confirmation");
             }
         }
-
+        private PresenterMeasurementSetting _presenterMeasurementSetting;
         public int JsRandomNumber { get { return new Random().Next(1, 100); } }
 
         //public void SetVerificationControlVisibility()
@@ -36,6 +38,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         //}
         #endregion
 
+        protected override void OnInit(EventArgs e)
+        {
+            _presenterMeasurementSetting = new PresenterMeasurementSetting(this);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -44,13 +51,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     //FillValidationDetailsFromXMF();
                 }
+
                 hdnBasePluginServiceUrl.Value = Utilities.ReadConfigValue("BasePluginServiceURL");
                 hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation).ToString().ToLower();
                 hdLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
+                hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
+                {
                     hdProjectId.Value = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId.ToString();
+                }
                 else
+                {
                     hdProjectId.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
+                }
 
                 hdOptimizeRunId.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
                 hdDeviceType.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId.ToString();
@@ -88,25 +101,101 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             //SetVerificationControlVisibility();
 
-            //show the project details doe native app
-            txtProjectID.Text = SessionManager.Instance.CurrentOptimizeRun.ProjectId.ToString();
-            txtRunID.Text = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
+            //show the project details doe native app            
+            lblPID.Text = SessionManager.Instance.CurrentOptimizeRun.ProjectId.ToString();
+            lblORID.Text = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
+            lblSN.Text = SessionManager.Instance.CurrentProject.MeasurementSetting.DeviceSerialNo;
 
             string projectType = "Profiler";
             if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
             {
                 if (hdReferenceChartDisplayType.Value == "2")
+                {
                     projectType = "Optimization";
+                }
                 else if (hdReferenceChartDisplayType.Value == "3")
+                {
                     projectType = "Validation";
+                }
             }
             else
             {
-                lblProjectType.Text = "Spot Project ID";
                 projectType = "Spot Project";
             }
-            txtProjectType.Text = projectType;
+
+            ProjectId = SessionManager.Instance.CurrentOptimizeRun.ProjectId;
+            CurrentUserId = SessionManager.Instance.CurrentUser.UserId;
+            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            ProfileType = projectType;
+            DeviceSerialNo = SessionManager.Instance.CurrentProject.MeasurementSetting.DeviceSerialNo;
+            InstrumentTypeID = Convert.ToInt16(SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId);
+            LicenseType = SessionManager.Instance.CurrentProject.LicenseType;
+
+            
+            if (SessionManager.Instance.CurrentProject.PrintCondition != null)
+            {
+                if (SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin)
+                {
+                    bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
+                    if (resultMesaurment)
+                    {
+                        GetMToolMessage(1);                        
+                        btnAddPluginStatus.CssClass = "green_btnotactive";
+                        //btnAddPluginStatus.Enabled = false;
+                    }
+                    else
+                    {
+                        GetMToolMessage(0);                        
+                        btnAddPluginStatus.CssClass = "green_bt";
+                        //btnAddPluginStatus.Enabled = true;
+                    }
+
+                }
+            }
+            if (SessionManager.Instance.CurrentProject.SpotTargetProject != null)
+            {
+                if (SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.IsCustomPlugin)
+                {
+                    bool resultMesaurment = _presenterMeasurementSetting.CheckMeasurementPluginStatus();
+                    if (resultMesaurment)
+                    {
+                        GetMToolMessage(1);                        
+                        btnAddPluginStatus.CssClass = "green_btnotactive";
+                        //btnAddPluginStatus.Enabled = false;
+                    }
+                    else
+                    {
+                        GetMToolMessage(0);
+                        btnAddPluginStatus.CssClass = "green_bt";                        
+                        //btnAddPluginStatus.Enabled = true;
+                    }
+
+                } 
+            }
+            hdnbtnAnalyzeParent.Value = ((LinkButton)NamingContainer.FindControl("btnAnalyze")).ClientID;
         }
+
+        protected void btnAddPluginStatus_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int result = _presenterMeasurementSetting.CreateMeasurementPluginStatus();
+                if (result > 0)
+                {
+                    GetMToolMessage(1);
+                    Response.Redirect(Request.Url.ToString());
+                }
+                else
+                {
+                    lblMessage.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
 
         //private void FillValidationDetailsFromXMF()
         //{
@@ -123,6 +212,31 @@ namespace FujifilmUSA.Sync.Web.UserControl
         //    }
         //}
 
+
+        #region Method
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="recordExists"></param>
+        /// <returns></returns>
+        public void GetMToolMessage(byte recordExists)
+        {
+            StringBuilder str = new StringBuilder();
+            if (recordExists == 1)
+            {
+                str.Append("<b>This project is currently activated for measurement.</b>");
+                str.Append("<br />");
+                str.Append("<b>Measure charts and upload using the ColorPath MTool, Return here when you're done.</b>");
+                
+            }
+            else
+            {
+                str.Append("<b>This project is not currently activated for measurement.</b>");
+                
+            }
+            lblMessage.Text = str.ToString();
+        }
+        #endregion
         #region Properties
         public bool IsXmfUser
         {
@@ -132,5 +246,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
+
+        #region IViewMeasurement
+        public int ProjectId { get; set; }
+        public int OptimizeRunId { get; set; }
+        public string ProfileType { get; set; }
+        public ELicenseType LicenseType { get; set; }
+        public string DeviceSerialNo { get; set; }
+        public short InstrumentTypeID { get; set; }
+        public List<Entity.MeasurementLog> MeasurementLogs { get; set; }
+
+        #endregion
+
+       
     }
 }

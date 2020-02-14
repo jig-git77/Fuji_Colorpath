@@ -1,0 +1,8 @@
+ALTER TABLE CPSync.PrintStandardDensity
+ALTER COLUMN PrintStandardTypeID INT NOT NULL
+
+ALTER TABLE CPSync.PrintStandardLAB
+ALTER COLUMN PrintStandardTypeID INT NOT NULL
+
+ALTER TABLE CPSync.PrintStandardTVI
+ALTER COLUMN PrintStandardTypeID INT NOT NULL

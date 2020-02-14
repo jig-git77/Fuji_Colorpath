@@ -213,4 +213,7 @@
   <data name="uploadMeasurement" xml:space="preserve">
     <value>アップロード管理</value>
   </data>
+  <data name="btnlocAddPluginStatus" xml:space="preserve">
+    <value>Activate</value>
+  </data>
 </root>

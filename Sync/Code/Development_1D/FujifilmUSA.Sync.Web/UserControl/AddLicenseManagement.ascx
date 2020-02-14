@@ -14,10 +14,12 @@
 
 </script>
 <div class="admin_top">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1><asp:Localize ID="locLicenseMgmt" runat="server" Text="License Management" 
+        <h1>
+            <asp:Localize ID="locLicenseMgmt" runat="server" Text="License Management"
                 meta:resourcekey="locLicenseMgmtResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
@@ -35,7 +37,7 @@
                             Visible="False" />
                         <table width="100%">
                             <tr>
-                                <td align="right">
+                                <td align="right" style="width:26%;">
                                     <span style="font-weight: bold;"><asp:Localize Text="Company Name" 
                                         ID="locCompanyName" runat="server" meta:resourcekey="locCompanyNameResource1"></asp:Localize><span style="color: Red;">*</span>
                                     </span>
@@ -121,20 +123,59 @@
                                     <b>&nbsp;:&nbsp;</b>
                                 </td>
                                 <td style="width: 370px">
-                                    <div style="float: left;">
-                                        <asp:CheckBox runat="server" ID="chkSync1D" CssClass="checkListBox" 
-                                            meta:resourcekey="chkSync1DResource1"/>
-                                        <asp:CheckBox runat="server" ID="chkDlp" CssClass="checkListBox" 
-                                            meta:resourcekey="chkDlpResource1"/>
-                                        <asp:CheckBox runat="server" ID="chkInk" CssClass="checkListBox" 
-                                            meta:resourcekey="chkInkResource1"/>    
-                                        <asp:CheckBox runat="server" ID="chkInk_Source" CssClass="checkListBox"/>
-                                        <asp:CheckBox runat="server" ID="chkSync4D_Certification" CssClass="checkListBox"/>       
-                                         <asp:CheckBox runat="server" ID="chkCustomSourceProfile" CssClass="checkListBox" Visible="true"/>  
-                                         <asp:CheckBox runat="server" ID="chkReProfileCustomSource" CssClass="checkListBox" Visible="true"/>    
-                                         <asp:CheckBox runat="server" ID="chkFullGamutCustomSource" CssClass="checkListBox" Visible="true"/> 
-                                         <asp:CheckBox runat="server" ID="chkMultiColorCustomSource" CssClass="checkListBox" Visible="true"/>   
-                                         <asp:CheckBox runat="server" ID="chkSpotLibrary" CssClass="checkListBox" Visible="true"/>                  
+                                    <div>
+                                        <table style="width:100%;">
+                                            <tr>
+                                                <td style="width:35%">
+                                                    <asp:CheckBox runat="server" ID="chkSync1D" CssClass="checkListBox" meta:resourcekey="chkSync1DResource1"/>
+                                                </td>
+                                                <td style="width:30%">
+                                                    <asp:CheckBox runat="server" ID="chkDlp" CssClass="checkListBox" meta:resourcekey="chkDlpResource1"/>
+                                                </td>
+                                                <td style="width:35%">
+                                                    <asp:CheckBox runat="server" ID="chkInk" CssClass="checkListBox" meta:resourcekey="chkInkResource1"/>
+                                                </td>                                               
+                                            </tr>
+                                            <tr>
+                                                 <td>
+                                                    <asp:CheckBox runat="server" ID="chkInk_Source" CssClass="checkListBox"/>
+                                                </td>                                                
+                                                <td>
+                                                    <asp:CheckBox runat="server" ID="chkSync4D_Certification" CssClass="checkListBox"/>       
+                                                </td>
+                                                <td>
+                                                    <asp:CheckBox runat="server" ID="chkCustomSourceProfile" CssClass="checkListBox" Visible="true"/>  
+                                                </td>                                                
+                                            </tr> 
+                                             <tr>
+                                                 <td>
+                                                     <asp:CheckBox runat="server" ID="chkReProfileCustomSource" CssClass="checkListBox" Visible="true"/>    
+                                                </td>                                                
+                                                <td colspan="2">
+                                                    <asp:CheckBox runat="server" ID="chkFullGamutCustomSource" CssClass="checkListBox" Visible="true"/> 
+                                                </td>                                                
+                                            </tr>   
+                                        </table>
+                                        <table>
+                                                 
+                                           <tr>
+                                                <td><asp:CheckBox runat="server" ID="chkMultiColorCustomSource" CssClass="checkListBox" Visible="true"/>                                                       
+                                                </td>
+                                                <td>
+                                                    <asp:CheckBox runat="server" ID="chkSpotLibrary" CssClass="checkListBox" Visible="true"/>                  
+                                                </td>                                                
+                                            </tr>
+                                        </table>
+                                        
+                                        
+                                            
+                                        
+                                        
+                                         
+                                         
+                                         
+                                         
+                                         
                                     </div>
                                     <div style="float: left">
                                     </div>
@@ -215,15 +256,30 @@
                              <tr>
                                 <td style="width: 130px" align="right">
                                     <span style="font-weight: bold;"><asp:Localize Text="Is Custom Profiler Options?" runat="server" 
-                                        ID="Localize2" meta:resourcekey="locIsCustomProfOptionsResource1"></asp:Localize></span>
+                                        ID="locIsCustomProfOptionsResource1" meta:resourcekey="locIsCustomProfOptionsResource1"></asp:Localize></span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
                                 </td>
                                 <td style="width: 370px">
                                     <div style="float: left;">
-                                        <asp:CheckBox ID="chkIsCustomProfOptions" runat="server" Checked="False" 
-                                            meta:resourcekey="chkIsCustomProfOptionsResource1" />
+                                        <asp:CheckBox ID="chkIsCustomProfOptions" runat="server" Checked="False"  />
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 130px" align="right">
+                                    <span style="font-weight: bold;"><asp:Localize Text="Is Custom Plugin?" runat="server" 
+                                        ID="locIsCustomPlugin" meta:resourcekey="locIsCustomPluginResource1"></asp:Localize></span>
+                                </td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
+                                <td style="width: 370px">
+                                    <div style="float: left;">
+                                        <asp:CheckBox ID="chkIsCustomPlugin" runat="server" Checked="False"  />
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -281,6 +337,7 @@
     </div>
 </div>
 <div class="admin_bottom">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="clear">
 </div>

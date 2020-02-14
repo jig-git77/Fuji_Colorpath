@@ -318,6 +318,21 @@
                           meta:resourcekey="locMetricTargetResource1"></asp:Localize>                    
                     </asp:LinkButton>
                 </div>
+                    <div id="divMeasurementLogSeperator" runat ="server" align="center" valign="bottom" style="float:left;">
+                        <img alt="" src="Images/admin-icon-divider.png" />
+                    </div> 
+                    <div id="divMeasurementLog" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
+                    <asp:LinkButton ID="lnkMeasurementLog" runat="server"
+                        PostBackUrl="~/MeasurementLog.aspx">                       
+                        <div>
+                            <asp:Image ID="ImgMeasurementLog" runat="server" AlternateText="Measurement Log"
+                                ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Measurement Log" 
+                                meta:resourcekey="imgMeasurementLogResource1" />
+                        </div>
+                        <asp:Localize runat="server" Text="Measurement Log" ID="Localize6" 
+                          meta:resourcekey="locMeasurementLogResource1"></asp:Localize>                    
+                    </asp:LinkButton>
+                </div>
                 </td>
             </tr>
                 

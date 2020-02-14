@@ -213,4 +213,7 @@
   <data name="uploadMeasurement" xml:space="preserve">
     <value>Messwerte hochladen</value>
   </data>
+  <data name="btnlocAddPluginStatus" xml:space="preserve">
+    <value>Activate</value>
+  </data>
 </root>

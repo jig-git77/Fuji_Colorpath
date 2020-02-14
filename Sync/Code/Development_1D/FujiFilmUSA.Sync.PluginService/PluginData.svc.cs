@@ -189,6 +189,10 @@ namespace FujiFilmUSA.Sync.PluginService
         public ReferenceChartPlugin ReferenceChartPlugin { get; set; }
         public string ProjectType { get; set; }
         public DataTable dtMeasurementValidation { get; set; }
+        public int UserID { get; set; }
+        public string MeaDeviceSerialNo { get; set; }
+        public string RequestMeasurment { get; set; }
+        public string MToolEntryDate { get; set; }
         #endregion
 
         #region IViewBase Members

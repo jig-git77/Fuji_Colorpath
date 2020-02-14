@@ -1,0 +1,73 @@
+USE [ColorPathStage]
+GO
+/****** Object:  StoredProcedure [CPSpot].[CreateOptimizeRun]    Script Date: 1/27/2020 12:16:39 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [CPSpot].[CreateOptimizeRun]    
+ @SpotProjectID INT,    
+ @Status INT, 
+ @StartDateTime DATETIME
+AS    
+ BEGIN TRY  
+	
+    DECLARE @MasterRunID INT             
+    SELECT TOP 1 @MasterRunID=OptimizeRunID FROM CPSpot.OptimizeRun WHERE SpotProjectID = @SpotProjectID ORDER BY OptimizeRunID DESC    
+  
+    DECLARE @RunCount INT            
+    SELECT @RunCount = COUNT(*) FROM CPSpot.OptimizeRun WHERE SpotProjectID = @SpotProjectID            
+
+	DECLARE @vOptimizeRunID INT,@vProfileType NVARCHAR(50)
+
+    INSERT INTO CPSpot.OptimizeRun    
+     (RunName,    
+     SpotProjectID,    
+     Status,    
+     StartDateTime,    
+     EndDateTime,    
+     NamedColorProfile,    
+     MasterRunID,    
+     IsUsed)    
+    VALUES(    
+     'Run-' + CONVERT(VARCHAR(3),@RunCount),          
+     @SpotProjectID,            
+     @Status,        
+     @StartDateTime,            
+     NULL,    
+     NULL,    
+     @MasterRunID,    
+     1)  
+	 SET @vOptimizeRunID=SCOPE_IDENTITY();
+		-------Update LastActiveDate for Project as Today's date-------
+		UPDATE [CPSync4D].[Project] SET LastActiveDate = GETDATE()
+				 WHERE ProjectID = 
+						(SELECT SP.ProjectID FROM CPSpot.SpotProject AS SP 
+								WHERE SP.SpotProjectID = @SpotProjectID)
+		
+		
+		--If user is using third party app then update its run status
+	IF(@Status = 1)
+	BEGIN
+			IF(@RunCount = 0)
+			BEGIN
+				SET @vProfileType='Spot Project Profiler'
+			END
+			ELSE IF(@RunCount > 0)
+			BEGIN
+				SET @vProfileType='Spot Project Optimization'
+			END
+			EXEC [CP].[UpdateMeasurementPluginStatus] @ProjectID = @SpotProjectID,@IsActive=1,@IsAllowDelete=0,@vProfileType=@vProfileType,@vOptimizationRunID=@vOptimizeRunID
+	END
+
+ END TRY  
+ BEGIN CATCH  
+   DECLARE @ERROR_NUMBER INT     
+   DECLARE @ERROR_SEVERITY INT    
+   DECLARE @ERROR_STATE INT     
+   DECLARE @ERROR_PROCEDURE NVARCHAR(252)     
+   DECLARE @ERROR_LINE INT     
+   DECLARE @ERROR_MESSAGE NVARCHAR(4000)     
+   SELECT @ERROR_NUMBER = ERROR_NUMBER()  , @ERROR_NUMBER = ERROR_NUMBER() , @ERROR_SEVERITY = ERROR_SEVERITY() , @ERROR_STATE = ERROR_STATE() , @ERROR_PROCEDURE = ERROR_PROCEDURE() , @ERROR_LINE = ERROR_LINE() , @ERROR_MESSAGE = ERROR_MESSAGE()     
+   EXEC InsertSQLErrorLog @ERROR_NUMBER , @ERROR_SEVERITY , @ERROR_STATE , @ERROR_PROCEDURE , @ERROR_LINE , @ERROR_MESSAGE     
+ END CATCH

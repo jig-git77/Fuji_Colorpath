@@ -318,4 +318,28 @@
   <data name="TargetPrintConditionRequiredResource" xml:space="preserve">
     <value>Please select target print condition.</value>
   </data>
+  <data name="FileNameRequiredResource" xml:space="preserve">
+    <value>Please enter file name.</value>
+  </data>
+  <data name="LibraryRequiredResource" xml:space="preserve">
+    <value>Please select library.</value>
+  </data>
+  <data name="MediaRequiredResource" xml:space="preserve">
+    <value>Please media name.</value>
+  </data>
+  <data name="ModelRequiredResource" xml:space="preserve">
+    <value>Please model name.</value>
+  </data>
+  <data name="ModeRequiredResource" xml:space="preserve">
+    <value>Please enter mode name.</value>
+  </data>
+  <data name="QualityRequiredResource" xml:space="preserve">
+    <value>Please enter quality name.</value>
+  </data>
+  <data name="ResolutionRequiredResource" xml:space="preserve">
+    <value>Please enter resolution.</value>
+  </data>
+  <data name="ServerRequiredResource" xml:space="preserve">
+    <value>Please server name.</value>
+  </data>
 </root>

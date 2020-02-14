@@ -1,0 +1,87 @@
+USE [ColorPathStage]
+GO
+/****** Object:  StoredProcedure [CP].[UpdateMeasurementPluginStatus]    Script Date: 1/27/2020 12:16:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/*
+EXEC [CP].[UpdateMeasurementPluginStatus]
+	@ProjectID = 13872
+*/
+
+ALTER PROCEDURE [CP].[UpdateMeasurementPluginStatus]
+	--@UserID INT,
+	@ProjectID INT =0,
+	@IsActive BIT=NULL,
+	@IsAllowDelete BIT=NULL,
+	@vProfileType NVARCHAR(50)=NULL,
+	@vOptimizationRunID INT=NULL
+AS    
+
+
+	BEGIN TRY	 	
+
+	DECLARE @isThirdParty BIT
+	DECLARE @LicenseType VARCHAR(50)
+	DECLARE @ProfileType  VARCHAR(50)	
+	SELECT @ProfileType =ProfileType FROM Cp.MeasurementPluginStatus
+	WHERE ProjectID=@ProjectID
+
+	
+	IF(@ProfileType='Spot Project' OR @ProfileType='Spot Project Optimization')
+	BEGIN
+		
+		IF EXISTS(SELECT 1 FROM CPSpot.MeasurementSetting 
+			WHERE SpotProjectID=@ProjectID AND ISNULL(PluginType,0)=0)
+		BEGIN
+			
+			SET @isThirdParty = 1
+		END	
+	END
+	ELSE 
+	BEGIN 
+		IF EXISTS(SELECT 1 FROM CPSync4D.MeasurementSetting 
+			where ProjectID=@ProjectID AND ISNULL(PluginType,0)=0)
+		BEGIN
+			SET @isThirdParty = 1
+		END
+	END
+
+	
+	
+	
+	
+	IF (@isThirdParty=1)
+	BEGIN
+			IF(ISNULL(@IsAllowDelete,0) = 0)
+			BEGIN
+				UPDATE [CP].[MeasurementPluginStatus]
+				SET 	
+						EntryDate = GETDATE(),
+						IsActive =@IsActive,
+						ProfileType=ISNULL(@vProfileType,ProfileType),
+						OptimizationRunID=ISNULL(@vOptimizationRunID,OptimizationRunID)
+					WHERE ProjectID=@ProjectID
+			END
+			ELSE
+			BEGIN
+				DELETE FROM [CP].[MeasurementPluginStatus] WHERE ProjectID=@ProjectID
+			END
+	END	
+
+	END TRY
+	BEGIN CATCH
+	
+	
+	  
+      DECLARE @ERROR_NUMBER INT   
+	  DECLARE @ERROR_SEVERITY INT  
+	  DECLARE @ERROR_STATE INT   
+	  DECLARE @ERROR_PROCEDURE NVARCHAR(252)   
+	  DECLARE @ERROR_LINE INT   
+	  DECLARE @ERROR_MESSAGE NVARCHAR(4000)   
+	  SELECT @ERROR_NUMBER = ERROR_NUMBER()  , @ERROR_NUMBER = ERROR_NUMBER() , @ERROR_SEVERITY = ERROR_SEVERITY() , @ERROR_STATE = ERROR_STATE() , @ERROR_PROCEDURE = ERROR_PROCEDURE() , @ERROR_LINE = ERROR_LINE() , @ERROR_MESSAGE = ERROR_MESSAGE()   
+	  EXEC InsertSQLErrorLog @ERROR_NUMBER , @ERROR_SEVERITY , @ERROR_STATE , @ERROR_PROCEDURE , @ERROR_LINE , @ERROR_MESSAGE   
+	  
+	END CATCH

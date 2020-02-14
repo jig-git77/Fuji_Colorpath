@@ -15,8 +15,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Project();
         }
-
-        public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
+public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
         {
             return new List<Project>();
         }
@@ -241,6 +240,22 @@ namespace FujifilmUSA.Sync.Business.Mock
         public int GetProjectLicenseTypeLimit(int DeviceID, int LicenseTypeID)
         {
             return 0;
+        }
+
+        public int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType, string DeviceSerial, short InstrumentTypeId, short LicenseTypeID)
+        {
+            return 0;
+        }
+        /// <summary>
+        /// This method used for Check into Third party application we check project is active measurement
+        /// </summary>
+        /// <param name="ProjectID"></param>
+        /// <param name="OptimizationRunID"></param>
+        /// <param name="DeviceSerial"></param>
+        /// <returns></returns>
+        public bool CheckMeasurementPluginStatus(int ProjectID, int OptimizationRunID, string DeviceSerial)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

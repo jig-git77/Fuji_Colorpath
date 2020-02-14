@@ -79,6 +79,7 @@
     <Compile Include="IccFileParams.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="LogActivity.cs" />
+    <Compile Include="MeasurementLog.cs" />
     <Compile Include="MeasurementPatchApp.cs" />
     <Compile Include="MeasurementPatchDetails.cs">
       <SubType>Code</SubType>
@@ -86,6 +87,7 @@
     <Compile Include="MeasurementPatch_AvgDelta.cs" />
     <Compile Include="CPSyncV\MetricTargetPreset.cs" />
     <Compile Include="CPSync1D\PrintStandardType.cs" />
+    <Compile Include="ReferenceChartApp.cs" />
     <Compile Include="ReportGrading.cs" />
     <Compile Include="Spectral.cs" />
     <Compile Include="CPSpot\SpotProjectLibrary.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="UserBranch.cs" />
     <Compile Include="UserCompany.cs" />
     <Compile Include="UserLicense.cs" />
+    <Compile Include="UserReferenceChart.cs" />
     <Compile Include="ValidationMetrics.cs" />
     <Compile Include="ValidationRule.cs" />
   </ItemGroup>

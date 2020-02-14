@@ -55,6 +55,11 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("ELicenseType_InkOptimization_Source", "ELicenseType_InkOptimization_Source");
             _resourceValues.Add("ELicenseType_SpotLibrary", "ELicenseType_SpotLibrary");
             _resourceValues.Add("ELicenseType_Validation", "ELicenseType_Validation");
+            _resourceValues.Add("ELicenseType_None", "ELicenseType_None");
+            _resourceValues.Add("ELicenseType_CustomSourceProfile", "ELicenseType_CustomSourceProfile");
+            _resourceValues.Add("ELicenseType_ReProfileCustomSourceProfile", "ELicenseType_ReProfileCustomSourceProfile");
+            _resourceValues.Add("ELicenseType_FullGamutCustomSourceProfile", "ELicenseType_FullGamutCustomSourceProfile");
+            _resourceValues.Add("ELicenseType_MultiColorCustomSourceProfile", "ELicenseType_MultiColorCustomSourceProfile");
             _resourceValues.Add("ValidationStatus_LastOK", "ValidationStatus_LastOK");
             _resourceValues.Add("ValidationStatus_NotCertified", "ValidationStatus_NotCertified");
             _resourceValues.Add("ValidationStatus_LastFailed", "ValidationStatus_LastFailed");

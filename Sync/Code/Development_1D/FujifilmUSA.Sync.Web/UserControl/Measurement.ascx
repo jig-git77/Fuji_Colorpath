@@ -3,6 +3,8 @@
 <meta http-equiv="Cache-Control" content="no-cache" />
 <%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon"
     TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/MeasurementCommonNew.ascx" TagName="MeasurementCommonApp"
+    TagPrefix="uc" %>
 <script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <script language="javascript">
     function AllowToAnalyze() {
@@ -62,7 +64,7 @@
         </div>
     </div>
     
-        <div class="mesurementStatusbar info_form">
+        <div id="divPluginMessage" class="mesurementStatusbar info_form" runat="server">
             <div class="top">
                 &nbsp;
             </div>
@@ -78,8 +80,9 @@
             <div class="bottom">
                 &nbsp;
             </div>
-        </div>    
-    <uc:MeasurementCommon ID="ucMeasurementCommon" runat="server" Type="Optimization" />    
+        </div>   
+    <uc:MeasurementCommon ID="ucMeasurementCommon" runat="server" Type="Optimization" />     
+    <uc:MeasurementCommonApp ID="ucMeasurementCommonApp" runat="server" Type="Optimization" Visible="false" />     
 </div>
 <div class="contant_bottom">
     &nbsp;

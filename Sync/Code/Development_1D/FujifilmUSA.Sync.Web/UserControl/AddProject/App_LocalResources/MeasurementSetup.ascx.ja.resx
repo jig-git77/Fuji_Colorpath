@@ -183,4 +183,10 @@
   <data name="locReadModeStripResource1.Text" xml:space="preserve">
     <value>スキャン測定</value>
   </data>
+  <data name="locrbtnCustomMeasurementType" xml:space="preserve">
+    <value>MTool</value>
+  </data>
+  <data name="locrbtnPluginMeasurementType" xml:space="preserve">
+    <value>Measurement Plugin</value>
+  </data>
 </root>

@@ -12,46 +12,53 @@ using FujifilmUSA.Sync.Entity;
 using System.Data;
 using Newtonsoft.Json;
 using FujifilmUSA.Sync.Common;
+using System.Security.Authentication;
 
 namespace FujifilmUSA.Sync.Web.Services
 {
     [ServiceContract(Namespace = "")]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class PluginDataService : IViewPluginDataService
+    public class PluginDataService : IViewPluginDataService, IViewLogin
     {
         [WebInvoke(Method = "GET", UriTemplate = "Ping")]
         [OperationContract]
         public bool Ping()
         {
+            CheckUserValidation();
             return true;
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurement")]
         [OperationContract]
-        public void SaveMeasurement(Entity.Measurement measurement)
+        public bool SaveMeasurement(Entity.Measurement measurement)
         {
+            CheckUserValidation();
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
-            presenter.SaveMeasurement();           
+            UserID = SessionManager.Instance.CurrentUser.UserId;
+            return presenter.SaveMeasurement();
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveVMeasurement")]
         [OperationContract]
-        public void SaveVMeasurement(Entity.Measurement measurement)
+        public bool SaveVMeasurement(Entity.Measurement measurement)
         {
-
+            CheckUserValidation();
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
-            presenter.SaveVMeasurement();
+            UserID = SessionManager.Instance.CurrentUser.UserId;
+            return presenter.SaveVMeasurement();
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "Save1DMeasurement")]
         [OperationContract]
-        public void Save1DMeasurement(Entity.Measurement measurement)
+        public bool Save1DMeasurement(Entity.Measurement measurement)
         {
+            CheckUserValidation();
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
-            presenter.Save1DMeasurement();
+            UserID = SessionManager.Instance.CurrentUser.UserId;
+            return presenter.Save1DMeasurement();
         }
 
         [WebGet(UriTemplate = "GetReferenceChart/{projectId}/{referencechartdisplaytype}/{IsSpotProjectType}")]
@@ -119,6 +126,7 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public bool DeleteMeasurement(string measurementId)
         {
+            CheckUserValidation();
             MeasurementId = Convert.ToInt32(measurementId);
             var presenter = new PresenterPluginDataService(this);
             return presenter.DeleteMeasurement();
@@ -128,6 +136,7 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public bool DeleteVMeasurement(string measurementId)
         {
+            CheckUserValidation();
             MeasurementId = Convert.ToInt32(measurementId);
             var presenter = new PresenterPluginDataService(this);
             return presenter.DeleteVMeasurement();
@@ -137,6 +146,7 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public bool Delete1DMeasurement(string measurementId)
         {
+            CheckUserValidation();
             MeasurementId = Convert.ToInt32(measurementId);
             var presenter = new PresenterPluginDataService(this);
             return presenter.Delete1DMeasurement();
@@ -164,14 +174,16 @@ namespace FujifilmUSA.Sync.Web.Services
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveSpotMeasurement")]
         [OperationContract]
-        public void SaveSpotMeasurement(Entity.Measurement measurement)
+        public bool SaveSpotMeasurement(Entity.Measurement measurement)
         {
+            CheckUserValidation();
             this.Measurement = measurement;
             var presenter = new PresenterPluginDataService(this);
-            presenter.SaveSpotMeasurement();
+            UserID = SessionManager.Instance.CurrentUser.UserId;
+            return presenter.SaveSpotMeasurement();
 
             /*Temp Code Start*/
-            GenerateJSONFile(measurement, "Spot");
+            //GenerateJSONFile(measurement, "Spot");
             /*Temp Code End*/
         }
 
@@ -193,9 +205,57 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public bool DeleteSpotMeasurement(string measurementId)
         {
+            CheckUserValidation();
             MeasurementId = Convert.ToInt32(measurementId);
             var presenter = new PresenterPluginDataService(this);
             return presenter.DeleteSpotMeasurement();
+        }
+
+
+        public void CheckUserValidation()
+        {
+            if (!IsValidateUser())
+                throw new WebFaultException(System.Net.HttpStatusCode.Unauthorized);            
+        }
+
+        //public void CheckUserValidation()
+        //{
+        //    int result = IsValidateUser();
+        //    if (result == -1)
+        //        throw new WebFaultException(System.Net.HttpStatusCode.Unauthorized);
+        //    else if (result == -2)
+        //        throw new WebFaultException(System.Net.HttpStatusCode.BadRequest);
+        //}
+
+        //public int IsValidateUser()
+        //{
+        //    //Getting the user token from client request
+        //    var _presenterlogin = new PresenterLogin(this);
+        //    if (!string.IsNullOrEmpty(System.Web.HttpContext.Current.Request.Headers["Auth-Key"]))
+        //    {
+        //        this.EncyptedTocken = Convert.ToString(System.Web.HttpContext.Current.Request.Headers["Auth-Key"]);
+        //        //return _presenterlogin.ValidateToken();
+
+        //    }                       
+        //    return -3;
+        //}
+
+        public bool IsValidateUser()
+        {
+            //Getting the user token from client request
+            var _presenterlogin = new PresenterLogin(this);
+            var authRequest = System.Web.HttpContext.Current.Request.Headers["Authorization"];
+            if (!string.IsNullOrEmpty(authRequest))
+            {
+                var auth = authRequest.Split(' ');
+                if (!string.IsNullOrEmpty(auth[1]) && auth[0] == "Basic")
+                {
+                    this.EncyptedTocken = Convert.ToString(auth[1]);
+                    return _presenterlogin.ValidateUser();
+                }
+            }
+
+            return false;
         }
 
         public void GenerateJSONFile(Entity.Measurement measurement, string type)
@@ -293,6 +353,10 @@ namespace FujifilmUSA.Sync.Web.Services
         public ReferenceChartPlugin ReferenceChartPlugin { get; set; }
         public string ProjectType { get; set; }
         public DataTable dtMeasurementValidation { get; set; }
+        public int UserID { get; set; }
+        public string MeaDeviceSerialNo { get; set; }
+        public string RequestMeasurment { get; set; }
+        public string MToolEntryDate { get; set; }
         #endregion
 
         #region IViewBase Members
@@ -304,6 +368,23 @@ namespace FujifilmUSA.Sync.Web.Services
             //Do nothing in the service...
         }
 
+        #endregion
+
+        #region IViewTaskeroUser Members
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public User CurrentUser { get; set; }
+
+        public int UserId { get; set; }
+        public string OSName { get; set; }
+        public string BrowserName { get; set; }
+        public string EntryDate { get; set; }
+
+        public string EncyptedTocken { get; set; }
+        public UserReferenceChart UserReferenceChart { get; set; }
+        public ReferenceChartApp UserReferenceChartApp { get; set; }
+        public string DeviceSerialNo { get; set; }
+        public short InstrumentTypeID { get; set; }
         #endregion
     }
 }

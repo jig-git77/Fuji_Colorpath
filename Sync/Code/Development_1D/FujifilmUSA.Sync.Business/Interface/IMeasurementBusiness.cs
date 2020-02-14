@@ -8,8 +8,8 @@ namespace FujifilmUSA.Sync.Business.Interface
     public interface IMeasurementBusiness : ITaskBase
     {
         MeasurementDataResponse GetMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType);
-        int SaveMeasurement(Measurement measurement);
-        int SaveVMeasurement(Measurement measurement);
+        bool SaveMeasurement(Measurement measurement, int UserID);
+        bool SaveVMeasurement(Measurement measurement, int UserID);
         List<Measurement> GetMeasurementsOnRunId(int optimizeRunId);
         List<Measurement> GetVMeasurementsOnProjectId(int projectId);
         List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId, string From_ΔE, bool IsSync1DType = false);
@@ -36,7 +36,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false, bool IsAverageOfMeasurements = false);
 
     
-        int Save1DMeasurement(Measurement measurement);
+        bool Save1DMeasurement(Measurement measurement, int UserID);
         List<Measurement> Get1DMeasurementsOnRunId(int optimizeRunId);
         MeasurementDataResponse Get1DMeasurementData(List<int> measurementIds, PCSDataTypes PCSDataType);
 
@@ -53,7 +53,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         DataSet GetMeasurementDataForScoring(int MeasurementId, string From_ΔE, int ProjectId, bool IsAverageOfMeasurements = false);
         DataSet GetDensityData_C(int OptimizeRunId);
         DataTable GetSpotPatchDetailsofMeasurement(int OptimizeRunId);
-        int SaveSpotMeasurement(Measurement measurement);
+        bool SaveSpotMeasurement(Measurement measurement, int UserID);
         List<Measurement> GetSpotMeasurementsOnRunId(int optimizeRunId);
         int UpdateMeasurementByAnalyzeChartFromService(int MeasurementId, bool isUsedMeasurement, bool IsVerification = false, bool IsSync1DType = false);
         DataTable GetSpotPatchDetailsForCMYKExport(int OptimizeRunId);
@@ -69,6 +69,9 @@ namespace FujifilmUSA.Sync.Business.Interface
         Measurement GetSpotMeasurementPatchDetailsForExport(int OptimizeRunId);
         Measurement GetValidationMeasurementPatchDetailsForExport(int MeasurementId);
         int ImportMeasurement(Measurement measurement, int LicenseTypeID);
+        List<MeasurementLog> GetMeasurementErrorLogList();
         DataTable GetSpotPatchDetailsForCMYKExportBySpotProject(string spotProjectIds);
+        DataTable ValidateApplicationMeasurement(int optimizationRunId, int projectId, string SerialNo, string entryDate);
+        void SaveMeasurementErrorFile(int optimizeRunId, int projectid, string requestMeasurement);
     }
 }
