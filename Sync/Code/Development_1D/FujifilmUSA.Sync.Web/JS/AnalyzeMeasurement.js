@@ -33,7 +33,7 @@ var _Resources = {};
 
 var CURRENT_USER_ID
 var SERVICE_BASE_URL = '';
-var PLUGIN_SERVICE_URL = '';
+//var PLUGIN_SERVICE_URL = '';
 var $hdnBaseServiceUrl;
 var $hdnCurrentUserID;
 var $btnGeneratePDF;
@@ -273,7 +273,7 @@ $(document).ready(function () {
     $lnk_A_GrayBalanceLargeChart = $('#lnk_A_GrayBalanceLargeChart');
     $lnk_B_GrayBalanceLargeChart = $('#lnk_B_GrayBalanceLargeChart');
     $lnk_L_GrayBalanceLargeChart = $('#lnk_L_GrayBalanceLargeChart');
-    PLUGIN_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();
+    //PLUGIN_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();
     $hdnCurrentUserRole = $('#hdnCurrentUserRole');
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;

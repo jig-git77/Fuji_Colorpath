@@ -356,7 +356,7 @@
                 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" ClientIDMode="Static" />
                 <asp:HiddenField ID="hdPatchMatricSum" runat="server" Value="-1" ClientIDMode="Static" />
                 <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" ClientIDMode="Static" />
-                <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
+                <%--<asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />--%>
                 <asp:HiddenField runat="server" ID="hdnCurrentDeviceName" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnValidationMeasurementStatus" ClientIDMode="Static" />
                 <asp:HiddenField runat="server" ID="hdnCurrentUserRole" ClientIDMode="Static" />

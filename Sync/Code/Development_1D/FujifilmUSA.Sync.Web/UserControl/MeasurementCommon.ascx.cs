@@ -45,7 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     FillValidationDetailsFromXMF();
                 }
-                hdnBasePluginServiceUrl.Value = Utilities.ReadConfigValue("BasePluginServiceURL");
+                //hdnBasePluginServiceUrl.Value = Utilities.ReadConfigValue("BasePluginServiceURL");
                 hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation).ToString().ToLower();
                 hdLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
                 btnImportMeasurementFile.Value = GetResourceString("btnImportMeasurementFile");

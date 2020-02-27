@@ -103,7 +103,7 @@
 <div>
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
-            <asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
+            <%--<asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />--%>
             <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
             <asp:HiddenField ID="hdnPCSType" runat="server" />
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -287,7 +287,7 @@
     var refreshTry = 0;
     var BASE_SERVICE_URL = '';
     $(document).ready(function () {
-        BASE_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();
+        //BASE_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();
         var SessionTimeOut = <%= Session.Timeout %>;
         setInterval(function () {
             jQuery.ajax({

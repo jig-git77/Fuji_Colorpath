@@ -86,7 +86,7 @@
     </div>
 
 </div>
-<asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />
+<%--<asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />--%>
 <asp:HiddenField ID="hdnPCSType" runat="server" />
 <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
 <asp:HiddenField ID="hdReferenceChartDisplayType" runat="server" />
@@ -176,7 +176,7 @@
     var BASE_SERVICE_URL = '';
     var AutoNumber = 0;
     jQuery(document).ready(function () {
-        BASE_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();                      
+        //BASE_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();                      
         bindMeasurementData();
     });
 
