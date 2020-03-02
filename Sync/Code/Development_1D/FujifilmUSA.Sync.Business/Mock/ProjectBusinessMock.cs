@@ -123,7 +123,7 @@ public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
         {
             return new List<int>();
         }
-        public int ImportMeasurements(int MeasurementID, int OptimizeRunID, int LicenseTypeID)
+        public int ImportMeasurements(int MeasurementID, int OptimizeRunID, int LicenseTypeID, int UserID)
         {
             return 0;
         }

@@ -1313,7 +1313,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return objMeasurementIDList;
         }
 
-        public int ImportMeasurements(int MeasurementID, int OptimizeRunID, int LicenseTypeID)
+        public int ImportMeasurements(int MeasurementID, int OptimizeRunID, int LicenseTypeID, int UserID)
         {
             var returnValue = 0;
             string storedProecdure = "[CPSync4D].[ImportMeasurements]";
@@ -1329,7 +1329,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             storedProecdure,
                             new object[]
                                     {
-                                        MeasurementID, OptimizeRunID
+                                        MeasurementID, OptimizeRunID, UserID
                                     });
 
                 },

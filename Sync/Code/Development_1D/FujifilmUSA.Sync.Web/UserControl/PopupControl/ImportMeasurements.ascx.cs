@@ -105,6 +105,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 {
                     MeasurementID = Convert.ToInt32(Measurements[i].ToString());
                     OptimizeRunID = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                    UserID = SessionManager.Instance.CurrentUser.UserId;
                     _presenterImportMeasurements.ImportMeasurements();
                 }
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "radalert", "<script type=text/javascript> CloseImportWindow(); </script>");  
@@ -137,6 +138,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         public List<int> Measurements { get; set; }
         public int MeasurementID { get; set; }
         public int OptimizeRunID { get; set; }
+        public int UserID { get; set; }
         public Entity.Measurement Measurement { get; set; }
         #endregion
     }
