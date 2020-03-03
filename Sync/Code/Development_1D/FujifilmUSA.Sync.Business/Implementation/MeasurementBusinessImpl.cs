@@ -2532,7 +2532,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurement;
         }
 
-        public int ImportMeasurement(Measurement measurement, int LicenseTypeID)
+        public int ImportMeasurement(Measurement measurement, int LicenseTypeID,int UserID)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
@@ -2667,7 +2667,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                          new Parameters() {ParameterName = "@Notes", Type = DbType.String, Value = measurement.Notes},
                                                          new Parameters() {ParameterName = "@Customer", Type = DbType.String, Value = measurement.Customer},
                                                          new Parameters() {ParameterName = "@PageOrSurface", Type = DbType.String, Value = measurement.PageOrSurface},
-                                                         new Parameters() {ParameterName = "@JDFJobId", Type = DbType.String, Value = measurement.JDFJobId}
+                                                         new Parameters() {ParameterName = "@JDFJobId", Type = DbType.String, Value = measurement.JDFJobId},
+                                                         new Parameters() {ParameterName = "@UserID", Type = DbType.Int32, Value = UserID}
                                              },
                                      new List<Parameters>()
                                              {

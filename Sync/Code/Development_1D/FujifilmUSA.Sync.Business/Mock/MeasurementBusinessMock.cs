@@ -247,7 +247,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Measurement();
         }
-        public int ImportMeasurement(Measurement measurement, int LicenseTypeID)
+        public int ImportMeasurement(Measurement measurement, int LicenseTypeID,int UserID)
         {
             return 0;
         }

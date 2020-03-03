@@ -91,6 +91,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                             }
                             //bind the measurement patches 
                             BindMeasurementPatches(Measurement);
+                            UserID = SessionManager.Instance.CurrentUser.UserId;
                             _presenterImportMeasurements.ImportMeasurementsFile();
 
                             //if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.SpotLibrary)
