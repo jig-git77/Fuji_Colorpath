@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1022
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Common", "FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj", "{B791085B-2607-458F-B9AA-5DDC581589AF}"
 EndProject
@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.App", "Fuj
 	ProjectSection(ProjectDependencies) = postProject
 		{7CFF0E69-F50B-486A-97E4-E1ACE0FF7B7D} = {7CFF0E69-F50B-486A-97E4-E1ACE0FF7B7D}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujiFilmUSA.Sync.MToolService", "FujiFilmUSA.Sync.MToolService\FujiFilmUSA.Sync.MToolService.csproj", "{A7D237AC-1083-4E78-8349-A4D4606A2EA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -372,9 +374,48 @@ Global
 		{022BEA1F-3256-4787-8AB4-E75B46DAD4B8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{022BEA1F-3256-4787-8AB4-E75B46DAD4B8}.Release|x86.ActiveCfg = Release|Any CPU
 		{022BEA1F-3256-4787-8AB4-E75B46DAD4B8}.Release|x86.Build.0 = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Debug|x86.Build.0 = Debug|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Dev|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Dev|Any CPU.Build.0 = Debug|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Dev|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Dev|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Dev|x86.ActiveCfg = Debug|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Dev|x86.Build.0 = Debug|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Jay_Local|Any CPU.ActiveCfg = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Jay_Local|Any CPU.Build.0 = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Jay_Local|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Jay_Local|Mixed Platforms.Build.0 = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Jay_Local|x86.ActiveCfg = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Jay_Local|x86.Build.0 = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Local|Any CPU.ActiveCfg = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Local|Any CPU.Build.0 = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Local|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Local|Mixed Platforms.Build.0 = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Local|x86.ActiveCfg = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Local|x86.Build.0 = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Production|Any CPU.ActiveCfg = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Production|Any CPU.Build.0 = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Production|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Production|Mixed Platforms.Build.0 = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Production|x86.ActiveCfg = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Production|x86.Build.0 = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Release|x86.ActiveCfg = Release|Any CPU
+		{A7D237AC-1083-4E78-8349-A4D4606A2EA1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C02E283-F398-4771-9D76-93859DB7E9AA}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FujifilmUSA.Sync.vsmdi
