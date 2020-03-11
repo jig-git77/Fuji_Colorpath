@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FujiFilmDesktopApp.TaskeroColorTuner {
+namespace TaskeroTestApp.TaskeroColorTuner {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -29,12 +29,12 @@ namespace FujiFilmDesktopApp.TaskeroColorTuner {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IColorpathTunerChannel : FujiFilmDesktopApp.TaskeroColorTuner.IColorpathTuner, System.ServiceModel.IClientChannel {
+    public interface IColorpathTunerChannel : TaskeroTestApp.TaskeroColorTuner.IColorpathTuner, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ColorpathTunerClient : System.ServiceModel.ClientBase<FujiFilmDesktopApp.TaskeroColorTuner.IColorpathTuner>, FujiFilmDesktopApp.TaskeroColorTuner.IColorpathTuner {
+    public partial class ColorpathTunerClient : System.ServiceModel.ClientBase<TaskeroTestApp.TaskeroColorTuner.IColorpathTuner>, TaskeroTestApp.TaskeroColorTuner.IColorpathTuner {
         
         public ColorpathTunerClient() {
         }

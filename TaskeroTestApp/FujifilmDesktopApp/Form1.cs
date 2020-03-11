@@ -13,9 +13,9 @@ using System.Collections;
 using System.Threading;
 using System.Diagnostics;
 using Oris.DB_interface;
-using FujiFilmDesktopApp.TaskeroColorTuner;
+using TaskeroTestApp.TaskeroColorTuner;
 
-namespace FujiFilmDesktopApp
+namespace TaskeroTestApp
 {
     public partial class Form1 : Form
     {
