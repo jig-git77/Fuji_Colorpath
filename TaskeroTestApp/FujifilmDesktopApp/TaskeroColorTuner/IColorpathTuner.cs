@@ -7,7 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FujiFilmDesktopApp.TaskeroColorTuner
+namespace TaskeroTestApp.TaskeroColorTuner
 {
     //[GeneratedCode("System.ServiceModel", "4.0.0.0")]
     //[ServiceContract(Namespace = "http://www.taskero.com", ConfigurationName = "TaskeroColorTuner.IColorpathTuner")]

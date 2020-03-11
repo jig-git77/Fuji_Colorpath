@@ -7,7 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FujiFilmDesktopApp.TaskeroColorTuner
+namespace TaskeroTestApp.TaskeroColorTuner
 {
     //[GeneratedCode("System.ServiceModel", "4.0.0.0")]
     //public interface IColorpathTunerChannel : IColorpathTuner, IClientChannel, IContextChannel, IChannel, ICommunicationObject, IExtensibleObject<IContextChannel>, IDisposable

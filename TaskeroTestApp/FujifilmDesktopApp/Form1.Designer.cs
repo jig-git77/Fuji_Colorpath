@@ -1,4 +1,4 @@
-﻿namespace FujiFilmDesktopApp
+﻿namespace TaskeroTestApp
 {
     partial class Form1
     {

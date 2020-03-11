@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7A647B1B-981C-4BF9-B609-9BA1850AC101}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>FujiFilmDesktopApp</RootNamespace>
-    <AssemblyName>FujiFilmDesktopApp</AssemblyName>
+    <RootNamespace>TaskeroTestApp</RootNamespace>
+    <AssemblyName>TaskeroTestApp</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -166,6 +166,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Connected Services\TaskeroColorTuner\service.xsd">
       <SubType>Designer</SubType>

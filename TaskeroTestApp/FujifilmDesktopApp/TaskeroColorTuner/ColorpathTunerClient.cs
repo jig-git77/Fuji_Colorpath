@@ -9,7 +9,7 @@ using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FujiFilmDesktopApp.TaskeroColorTuner
+namespace TaskeroTestApp.TaskeroColorTuner
 {
     //[DebuggerStepThrough]
     //[GeneratedCode("System.ServiceModel", "4.0.0.0")]
