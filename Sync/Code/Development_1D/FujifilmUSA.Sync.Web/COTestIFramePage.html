@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+    <title>Color Organizer IFrame Test NEW FF Browser</title>
+    <script type="text/javascript">
+        function postYourAdd() {
+
+            var iframe = $("#forPostyouradd");
+            //iframe.attr("src", iframe.data("http://dev.colorpathsync.com/COProcessRequest.ashx?action=add&uid=psylvester&pwd=Em3r9y5D8NcbWSTzDHMeTdeMRps=&projinfoid=f1d4ad46-733e-46de-ae53-72357a5e852e&deviceid=953"));
+            iframe.attr("src", iframe.data("https://www.google.com/"));
+        }
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#button').click(function () {
+                if (!$('#iframe').length) {
+                    $('#iframeHolder').html('<iframe id="iframe" src="http://dev.colorpathsync.com/COProcessRequest.ashx?action=add&uid=vuke2@wowway.com&pwd=eldMZqS+WzXU0VaVZfIY0A==&projinfoid=f1d4ad46-733e-46de-ae53-72357a5e852e&deviceid=953" width="700" height="450"></iframe>');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <!--<button id="postYourAdd" onclick="postYourAdd()">Click..!</button>
+    <iframe id="forPostyouradd" data-src="http://www.w3schools.com" src="about:blank" width="800" height="300" style="background:#ffffff"></iframe>-->
+    <button id="button">Click me..!</button>
+    <div id="iframeHolder"></div>
+</body>
+</html>
