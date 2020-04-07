@@ -209,7 +209,7 @@
             contentType: "application/json; charset=utf-8",
             url: getMeasurementUrl,
             processData: false,
-            async: false,
+            //async: false,
             dataType: "json",
             cache: false,
             dataFilter:
@@ -305,7 +305,7 @@
             url: deleteMeasurementUrl,
             processData: false,
             dataType: "json",
-            async: false,
+            //async: false,
             dataFilter: function (data, type) {
                 return false;
             },
