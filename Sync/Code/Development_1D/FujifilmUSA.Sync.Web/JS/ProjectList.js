@@ -942,29 +942,35 @@ function Redirect(projectID, type) {
 
 
 function ShowSpotClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName) {
-  
+    // Need a random item in the querystring so the RadWindow does not pull from cache.
+    var WinId = "Win" + Math.random().toString();
     var oWindow;
     //oWindow = window.radopen("PopupSpotClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
-    oWindow = GetRadWindowManager().open("PopupSpotClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+    oWindow = GetRadWindowManager().open("PopupSpotClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName + "&wid=" + WinId, "ClosePrintConditionWindow");
     oWindow.show();
     return false;
 }
 
 function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns, isSpotProject) {
+    // Need a random item in the querystring so the RadWindow does not pull from cache.
+    var WinId = "Win" + Math.random().toString();
+
     if (isSpotProject === undefined) {
         isSpotProject = false;
     }
     
     var oWindow;
     //oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&isSpotProject=" + isSpotProject, "OpenPrintConditionWindow");
-    oWindow = GetRadWindowManager().open("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&isSpotProject=" + isSpotProject, "OpenPrintConditionWindow");
+    oWindow = GetRadWindowManager().open("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&isSpotProject=" + isSpotProject + "&wid=" + WinId, "OpenPrintConditionWindow");
     oWindow.show();
     return false;
 }
 function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName) {
+    // Need a random item in the querystring so the RadWindow does not pull from cache.
+    var WinId = "Win" + Math.random().toString();
     var oWindow;
     //oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
-    oWindow = GetRadWindowManager().open("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+    oWindow = GetRadWindowManager().open("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName + "&wid=" + WinId, "ClosePrintConditionWindow");
     oWindow.show();
     return false;
 }
