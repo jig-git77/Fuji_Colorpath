@@ -112,6 +112,24 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.WebControls.TextBox txtFileName;
         
         /// <summary>
+        /// revtxtFileName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtxtFileName;
+        
+        /// <summary>
+        /// revFileNameContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer revFileNameContainer;
+        
+        /// <summary>
         /// rfvtxtFileName control.
         /// </summary>
         /// <remarks>
