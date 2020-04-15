@@ -110,7 +110,9 @@
             var type = $("#cmbCMYKLibrary").val();
 
             if ($("#txtFileName").val() == "") {
-                var spanError = $("#txtFileName").parent("div").next('div').find('span')[1];
+                //var spanError = $("#txtFileName").parent("div").next('div').find('span')[1];
+                var requiedFileName = $('#<%=rfvtxtFileName.ClientID%>');                                
+                var spanError = $("#txtFileName").parent("div").next('div').find(requiedFileName);
                 isSuccess = false;
                 //$("#txtFileName").parent("div").next('div').find('span')[1].show();
                 $(spanError).show();
@@ -121,7 +123,9 @@
             if (result != null) {
                 isSuccess = false;
                 //$("#txtFileName").parent("div").next('div').find('span')[0].show();
-                var spanError = $("#txtFileName").parent("div").next('div').find('span')[0];
+                //var spanError = $("#txtFileName").parent("div").next('div').find('span')[0];
+                var blankSpaceValidationFileName = $('#<%=revtxtFileName.ClientID%>');                                
+                var spanError = $("#txtFileName").parent("div").next('div').find(blankSpaceValidationFileName);                
                 $(spanError).show();
             }
 
