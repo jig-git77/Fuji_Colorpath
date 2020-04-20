@@ -179,7 +179,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
                         objReportPDF.GenerateClientReportPDF();
                         string ReportPath = "/UploadFiles/" + objReportPDF.PDF_NAME;
-
+                        ReportPath = HttpUtility.UrlEncode(ReportPath);
                         httpResponse.status = ResponseStatus.Success;
                         httpResponse.Data = ReportPath;
                         actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, httpResponse));
