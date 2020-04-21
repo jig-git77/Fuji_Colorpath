@@ -4,6 +4,7 @@ using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using System.Threading;
 using FujifilmUSA.Sync.Presenter;
+using System.Web.UI;
 
 namespace FujifilmUSA.Sync.Web
 {
@@ -29,6 +30,7 @@ namespace FujifilmUSA.Sync.Web
         }
         protected override void OnLoad(EventArgs e)
         {
+            ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
             IsLogin();
 
             #region Display error message in Statusbar control
