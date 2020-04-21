@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Single Measurement Report Process</title>
+    <link href="#csspath#" rel="stylesheet" type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!--------------------------------------- : Page 0 - Front Page : ------------------------------------------------>
+    <table style="width: 660px" cellspacing="0" cellpadding="0" align="center" border="0">
+        <tr>
+            <td align="center">
+                <table style="width: 660px" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td style="width: 50%">
+                        </td>
+                        <td style="width: 50%">
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border-bottom-color: Black; border-bottom-style: solid; border-bottom-width: 1px;">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <br />
+                            <br />
+                            <div class="divRight">
+                                <img src="##LOGOIMAGES##login_logo.png" style="width: 330px; height: 63px" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 20px; font-weight: bold">
+                            <br />
+                            <div class="divRight">
+                                ColorPath Sync<br />
+                                ###ReportName###<br />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-size: 14px; font-weight: normal;">
+                            <br />
+                            <br />
+                            <div class="divRight">
+                                ###CompanyName###<br />
+                                ###BranchName###<br />
+                                ###PressName###<br />
+                                ###ProjectName### (##RunNo##)<br />
+                                <br />
+                                ###CurrentDate###
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <img src="##IMAGES##CPSPrintStandardBottomImage.jpg" style="width: 660px; height: 80px" /><br />
+                            <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border-top-color: Black; border-top-style: solid; border-top-width: 1px;">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align="right" style="font-size: 9px; font-weight: bold;">
+                            FUJIFILM<br />
+
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <!--------------------------------------- : Page 1 : ------------------------------------------------>
+    <table style="width: 660px" cellspacing="0" cellpadding="0" align="center" border="0">
+        <tr>
+            <td align="center">
+                <table style="width: 660px" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td width="9">
+                            <img src="##IMAGES##header-left-img.gif" />
+                        </td>
+                        <td class="header-bg">
+                            <table width="642" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="header-title">
+                                        ###ReportName###
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td width="116" valign="middle" style="padding-top:5px;">
+                                        <img src="##LOGOIMAGES##logo.png" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="9">
+                            <img src="##IMAGES##header-right-img.gif" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <table style="width: 100%;margin-right: 0px;margin-left: 0px;" cellspacing="0" cellpadding="0" align="center" border="0">
+                    <tr>
+                        <td valign="top" rowspan="2" style="width: 380px;">
+                            <table border="0" cellspacing="0" cellpadding="0" style="margin: 0 0 0 4px;" width="100%">
+
+                                <tr>
+                                    <td>
+                                        <table border="0" align="center" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr class="row-1">
+                                                <td class="row-title">
+                                                    Job:
+                                                </td>
+                                                <td class="row-content">
+                                                    ###JobName###
+                                                </td>
+                                            </tr>
+                                            ###JobStatus###
+                                            <!--<tr class="row-2">
+                                                <td class="row-title">
+                                                    Meas. Status:
+                                                </td>
+                                                <td class="row-content">
+                                                    ###JobStatus###
+                                                </td>
+                                            </tr>-->
+                                            <tr class="row-1">
+                                                <td class="row-title">
+                                                    Print Condition:
+                                                </td>
+                                                <td class="row-content">
+                                                    ###ProjectName###
+                                                </td>
+                                            </tr>
+                                            <tr class="row-2">
+                                                <td class="row-title">
+                                                    Device:
+                                                </td>
+                                                <td class="row-content">
+                                                    ###Device###
+                                                </td>
+                                            </tr>
+                                            <tr class="row-1">
+                                                <td class="row-title">
+                                                    Timestamp:
+                                                </td>
+                                                <td class="row-content">
+                                                    ###TimeStamp###
+                                                </td>
+                                            </tr>
+                                            <tr class="row-2">
+                                                <td class="row-title">
+                                                    Print Target:
+                                                </td>
+                                                <td class="row-content">
+                                                    ###PrintTarget###
+                                                </td>
+                                            </tr>
+                                            <tr class="row-1">
+                                                <td class="row-title">
+                                                    Substrate:
+                                                </td>
+                                                <td class="row-content">
+                                                    ###Media###
+                                                </td>
+                                            </tr>
+                                            <tr class="row-2">
+                                                <td class="row-title">
+                                                    Colorant:
+                                                </td>
+                                                <td class="row-content">
+                                                    ###Colorant###
+                                                </td>
+                                            </tr>
+                                            <tr class="row-1">
+                                                <td class="row-title">
+                                                    Rip Settings:
+                                                </td>
+                                                <td class="row-content">
+                                                    ###RipSettings###
+                                                </td>
+                                            </tr>
+                                            <tr class="row-2">
+                                                <td class="row-title">
+                                                    Location:
+                                                </td>
+                                                <td class="row-content">
+                                                    ###Location###
+                                                </td>
+                                            </tr>
+                                            <tr class="row-1">
+                                                <td class="row-title">
+                                                    Metric Preset:
+                                                </td>
+                                                <td class="row-content">
+                                                    ###MetricPreset###
+                                                </td>
+                                            </tr>
+                                            <tr class="row-2">
+                                                <td class="row-title">
+                                                    ΔE Type:
+                                                </td>
+                                                <td class="row-content">
+                                                    ###DeltaEFormula###
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 10px;">
+                            &nbsp;
+                        </td>
+                        <td valign="top">
+                            <div class="gamutChart">
+                                <img src="###TargetVersusActualAB###" height="250px" width="250px" alt='Target Versus Actual AB'
+                                     id='img2' />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td align="center">
+                <table width="660" border="0" cellspacing="0" cellpadding="0">
+
+                    <tr>
+                        <td style="border: 2px solid #ccc; padding-left: 2px;">
+                            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+
+                                <tr>
+                                    <td>
+                                        <table width="380px" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td class="summary-bg" colspan="2">
+                                                    <img src="##IMAGES##summary-icon.png" width="12" height="11" style="margin: 2px 0 0 5px;" /><span class="summary-title">###DeltaEFormula### Values</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top" align="left" style="width:200px;">
+                                                    <table cellpadding="0" cellspacing="0" width="100%" style="margin-top:10px;">
+                                                        <tr style="height: 20px">
+                                                            <td valign="middle" style="width: 25px" class="BottomBorder">
+                                                                &nbsp;
+                                                            </td>
+                                                            <td valign="bottom" style="width: 60%" class="BottomBorder">
+                                                                <span class="graph-title-text">Metric</span>
+                                                            </td>
+                                                            <td valign="bottom" align="center" style="width: 20%" class="BottomBorder">
+                                                                <span class="graph-title-text">Tol</span>
+                                                            </td>
+                                                            <td valign="bottom" align="center" style="width: 20%" class="BottomBorder">
+                                                                <span class="graph-title-text">Actual</span>
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="3" style="height: 2px"></td>
+                                                        </tr>
+                                                        ###DeltaESummaryDetail###
+                                                    </table>
+                                                </td>
+                                                <td valign="top">
+                                                    <div style="margin-top:10px;">
+                                                        <table width="180" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td valign="top" style="height:260px; overflow:hidden;">
+                                                                    <img src="###ResultSummary_DeltaEImage###" width="180" height="97%" alt='Summary Delta'
+                                                                         id='img1' />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+
+                                    <td style="width:5px;"></td>
+                                    <td valign="top">
+                                        <table width="270" border="0" cellspacing="0" cellpadding="0" style="margin-top:6px;">
+
+
+                                            <tr>
+                                                <td class="summary-bg">
+                                                    <span class="summary-title">Gray Balance L*a*b*</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top">
+                                                    <img src="###GrayL###" width="270px" height="92px" alt='Summary Delta'
+                                                         id='img8' />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top">
+                                                    <img src="###GrayA###" width="260px" height="92px" alt='Summary Delta' style="margin-left:8px;"
+                                                         id='img9' />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top">
+                                                    <img src="###GrayB###" width="260px" height="92px" alt='Summary Delta'  style="margin-left:8px;"
+                                                         id='img10' />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+
+
+
+
+        <tr>
+            <td>
+                <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                    <tr>
+                        <td valign="top" style="width: 660px;">
+                            <table border="0" cellspacing="0" cellpadding="0" width="100%" style="margin-top:10px;">
+                                <tr>
+                                    <td class="summary-bg">
+                                        <span class="summary-title1">ΔPaper L* a* b*</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 2px solid #ccc;">
+                                        <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                                            <tr>
+                                                <td>
+                                                    <div class="gamutChart" style="width: 276px; height: 169px; margin-left: 34px; padding-bottom: 0px;">
+                                                        <img src="###PaperLab1###" width="240px" height="160px" alt='PaperLab1' />
+                                                    </div>
+                                                    
+                                                </td>
+                                                <td style="width: 150px; height: 169px; padding-left: 28px; padding-bottom: 12px;">
+                                                    <img src="###PaperLab2###" width="69px" height="138px" alt='PaperLab2' />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td height="3px"></td>
+        </tr>
+
+    </table>
+
+    <!--------------------------------------- : Page 2 : ------------------------------------------------>
+    <table style="width: 660px" cellspacing="0" cellpadding="0" align="center" border="0">
+        <tr>
+            <td align="center">
+                <table style="width: 660px" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td width="9">
+                            <img src="##IMAGES##header-left-img.gif" />
+                        </td>
+                        <td class="header-bg">
+                            <table width="642" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="header-title">
+                                        ###ReportName###
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td width="116" valign="middle" style="padding-top:5px;">
+                                        <img src="##LOGOIMAGES##logo.png" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="9">
+                            <img src="##IMAGES##header-right-img.gif" />
+                        </td>
+                    </tr>
+                </table>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <table width="660" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                            <table width="660" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="summary-bg">
+                                        <img src="##IMAGES##summary-icon.png" width="12" height="11" style="margin: 2px 0 0 5px;top:50px;" /><span class="summary-title">Summary &Delta;</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="border: 2px solid #ccc; padding-left: 2px;">
+                <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="height: 750px; overflow: hidden;">
+                    <tr>
+                        <td valign="top" align="left" style="width:200px;">
+                            <table cellpadding="0" cellspacing="0" width="100%" style="margin-top: 10px;">
+                                <tr style="height: 20px">
+                                    <td valign="middle" style="width: 25px" class="BottomBorder">
+                                        &nbsp;
+                                    </td>
+                                    <td valign="bottom" style="width: 60%" class="BottomBorder">
+                                        <span class="graph-title-text">Metric</span>
+                                    </td>
+                                    <td valign="bottom" align="center" style="width: 20%" class="BottomBorder">
+                                        <span class="graph-title-text">Tol</span>
+                                    </td>
+                                    <td valign="bottom" align="center" style="width: 20%" class="BottomBorder">
+                                        <span class="graph-title-text">Actual</span>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="height: 0px"></td>
+                                </tr>
+                                ###DeltaSummaryDetail###
+
+                            </table>
+                        </td>
+                        <td valign="top">
+                            <table width="350" border="0" cellspacing="0" cellpadding="0" >
+                                <tr>
+                                    <td valign="top">
+                                        <img src="###ResultSummary_DeltaImage###" width="350px" alt='Summary Delta' id='img3' />
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td height="3px"></td>
+        </tr>
+
+    </table>
+
+
+
+</body>
+</html>

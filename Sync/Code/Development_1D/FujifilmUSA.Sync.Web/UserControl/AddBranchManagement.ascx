@@ -45,7 +45,7 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvRegion" runat="server" Display="Dynamic" ControlToValidate="cmbRegion"
                                             ForeColor="Red" ValidationGroup="vgAddBranch" InitialValue="0"><ucValidationContainer:ValidationContainer ID="rfvRegionContainer" runat="server"
-                                                ValidationMsg="Please select region." Size="200" />
+                                                ValidationMsg="Please select region." Size="200" ResourceValidationMsg="RegionRequiredResource"/>
 </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -71,7 +71,7 @@
                                             <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
                                                 ControlToValidate="cmbCompanyName" ForeColor="Red" 
                                                 ValidationGroup="vgAddBranch"><ucValidationContainer:ValidationContainer ID="rfvcCompanyContainer" runat="server"
-                                                    ValidationMsg="Please select company." Size="200" />
+                                                    ValidationMsg="Please select company." Size="200" ResourceValidationMsg="CompanyRequiredResource"/>
 </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -89,12 +89,12 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <asp:TextBox ID="txtBranchName" runat="server" MaxLength="50" Width="400px" 
-                                                Height="19px" meta:resourcekey="txtBranchNameResource1"></asp:TextBox>
+                                                Height="19px" meta:resourcekey="txtBranchNameResource1" onkeypress="return validateText(event)"></asp:TextBox>
                                         </div>
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvBranchName" runat="server" Display="Dynamic" ControlToValidate="txtBranchName"
                                                 ForeColor="Red" ValidationGroup="vgAddBranch"><ucValidationContainer:ValidationContainer ID="rfvBranchContainer" runat="server"
-                                                    ValidationMsg="Please provide branch name." Size="200" />
+                                                    ValidationMsg="Please provide branch name." Size="200"  ResourceValidationMsg="BranchNameRequiredResource"/>
 </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -112,12 +112,12 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <asp:TextBox ID="txtLocation" runat="server" MaxLength="50" Width="400px" 
-                                                Height="19px" meta:resourcekey="txtLocationResource1"></asp:TextBox>
+                                                Height="19px" meta:resourcekey="txtLocationResource1" onkeypress="return validateText(event)"></asp:TextBox>
                                         </div>
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvLocation" runat="server" Display="Dynamic" ControlToValidate="txtLocation"
                                                 ForeColor="Red" ValidationGroup="vgAddBranch"><ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
-                                                    ValidationMsg="Please provide location." Size="200" />
+                                                    ValidationMsg="Please provide location." Size="200" ResourceValidationMsg="LocationRequiredResource"/>
 </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">

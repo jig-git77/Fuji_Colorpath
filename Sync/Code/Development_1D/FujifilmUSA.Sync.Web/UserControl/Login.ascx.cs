@@ -85,13 +85,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Response.Cookies["SyncFujiLogin"].Value = "";
                         Response.Cookies["SyncFujiPass"].Value = "";                        
                     }
+                    if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageCustomReports))
+                    {
+                        if (CheckUsersValidity(UserName))
+                        {
+                            if (SessionManager.Instance.CurrentUser.Role.RoleId == (int)ERole.CSRUser)
+                            {
+                                FormsAuthentication.RedirectFromLoginPage(UserName, false);
+                                Response.Redirect("CustomReports.aspx");
+                            }
+                        }
+                        else
+                        {
+                            fujiStatusbar.DisplayMessage("You are already logged-in from other browser!", false);
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
+                        }
+                    }
 
                     if (SessionManager.Instance.CurrentUser.HasProjectPermission())
                     {
                         if (CheckUsersValidity(UserName))
                         {
                             FormsAuthentication.RedirectFromLoginPage(UserName, false);
-                            Response.Redirect("Index.aspx");
+                            Response.Redirect("Index.aspx",false);
                         }
                         else
                         {
@@ -189,6 +205,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string BrowserName { get; set; }
         public string EntryDate { get; set; }
 
+        public string EncyptedTocken { get; set; }
+        public UserReferenceChart UserReferenceChart { get; set; }
+        public string DeviceSerialNo { get; set; }
+        public short InstrumentTypeID { get; set; }
+        public ReferenceChartApp UserReferenceChartApp { get; set; }
         #endregion
     }
 }

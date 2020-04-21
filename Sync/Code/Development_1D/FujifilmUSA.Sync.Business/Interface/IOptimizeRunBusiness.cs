@@ -32,5 +32,18 @@ namespace FujifilmUSA.Sync.Business.Interface
         void CreateSourceToSourceDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime);
         void CreateCustomSourceProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime);
         void CreateReTargetProject(int projectId, int optimizeRunId, int status, DateTime endDateTime);
+
+        void CreateSpotProjectOptimizeRun(int spotProjectId, int status, DateTime startDateTime);
+        void UpdateSpotProjectOptimizeRun(int optimizeRunID, int status, DateTime startDateTime);
+        void DeleteSpotOptimizeRun(int OptimizeRunID, int SpotProjectID, int MasterRunID, EOptimizeRunStatus RunStatus);
+
+        bool DeleteSpotMeasurement(int measurementId);
+        void DeleteSpotOptimizeRunDLP(int OptimizeRunID, int SpotProjectID);
+        void CertifySpotOptimizeRun(int optimizeRunId, int SpotProjectId, int MasterRunId, int status, DateTime endDateTime);
+        EOptimizeRunStatus GetSpotLastRunStatus(int OptimizeRunID);
+        void OptimizeNamedColoredProfile(int projectId, int optimizeRunId, List<int> measurementIds, string description, int status, DateTime endDateTime);
+
+        void CreateSpotNamedColorProfile(int spotProjectId, int OptimizeRunID, int Status, DateTime EndDate);
+        void OptimizeSpotNamedColorProfile(int OptimizeRunID, int Status, DateTime EndDate);
     }
 }

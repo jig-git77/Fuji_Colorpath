@@ -97,15 +97,25 @@
     <div class="head">
         <h1><asp:Localize ID="locUserManagment" runat="server" Text="User Management" 
                 meta:resourcekey="locUserManagmentResource1"></asp:Localize></h1>
+         <asp:LinkButton ID="likUserReport" runat="server" class="button" 
+            OnClick="likUserReport_Click" Visible="false">
+            <span>
+                <asp:Image ID="Image1" runat="server" 
+            ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgUserReportResource1" />
+                
+            <asp:Localize runat="server" Text="User Report" Id="Localize1" 
+                        meta:resourcekey="locUserReportResource1"></asp:Localize>
+            </span>
+        </asp:LinkButton>
         <asp:LinkButton ID="likAdd" runat="server" class="button" 
             OnClick="likAdd_Click">
             <span>
                 <asp:Image ID="imgAdd" runat="server" 
             ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
                 
-<asp:Localize runat="server" Text="Add User" Id="locAddUser" 
-            meta:resourcekey="locAddUserResource1"></asp:Localize>
-</span>
+            <asp:Localize runat="server" Text="Add User" Id="locAddUser" 
+                        meta:resourcekey="locAddUserResource1"></asp:Localize>
+            </span>
         </asp:LinkButton>
     </div>
     <div class="clear">

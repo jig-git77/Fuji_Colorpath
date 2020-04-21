@@ -90,6 +90,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\ProfilerSvc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SyncSvc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -108,45 +118,79 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Service References\SyncSvc\CPSync.wsdl" />
-    <None Include="Service References\SyncSvc\CPSync.xsd" />
-    <None Include="Service References\SyncSvc\CPSync1.xsd" />
-    <None Include="Service References\SyncSvc\CPSync2.xsd" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Service References\SyncSvc\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
+    <None Include="Service References\ProfilerSvc\Profiler.wsdl" />
+    <None Include="Service References\ProfilerSvc\Profiler.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProfilerSvc\Profiler1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProfilerSvc\Profiler2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProfilerSvc\Profiler3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProfilerSvc\Profiler4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProfilerSvc\TestCPSync.ProfilerSvc.CreateDestinationAndDeviceLinkProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\SyncSvc\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SyncSvc\CPSync.disco" />
-    <None Include="Service References\SyncSvc\CPSync3.xsd" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SyncSvc\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SyncSvc\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SyncSvc\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ProfilerSvc\TestCPSync.ProfilerSvc.CreateG7AlignmentCurveResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProfilerSvc\TestCPSync.ProfilerSvc.CreateISOAlignmentCurveResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProfilerSvc\TestCPSync.ProfilerSvc.CreateSourceProfileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProfilerSvc\TestCPSync.ProfilerSvc.CreateSourceToSourceDeviceLinkProfileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProfilerSvc\TestCPSync.ProfilerSvc.ExtractProfileValuesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProfilerSvc\TestCPSync.ProfilerSvc.ExtractSpotLABResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProfilerSvc\TestCPSync.ProfilerSvc.OptimizeDeviceLinkProfileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SyncSvc\CPSync.wsdl" />
+    <None Include="Service References\SyncSvc\CPSync.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncSvc\CPSync1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncSvc\CPSync2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncSvc\CPSync3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncSvc\CPSync4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncSvc\CPSync5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncSvc\TestCPSync.SyncSvc.ExtractSpotLABResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SyncSvc\TestCPSync.SyncSvc.Profile.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -164,6 +208,40 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ProfilerSvc\" />
+    <WCFMetadataStorage Include="Service References\SyncSvc\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ProfilerSvc\Profiler.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ProfilerSvc\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ProfilerSvc\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ProfilerSvc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncSvc\CPSync.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncSvc\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncSvc\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SyncSvc\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Entity.CPSpot;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
@@ -12,6 +13,8 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int ProjectId { get; set; }
         int LicenseTypeID { get; set; }
         Project Project { get; set; }
-        List<Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
+        //List<Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
+        SpotProjectList SpotProjectList { get; set; }
+        int SpotProjectId { get; set; }
     }
 }

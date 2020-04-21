@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Entity.CPSpot;
 
 namespace FujifilmUSA.Sync.Business.Mock
 {
@@ -13,8 +15,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Project();
         }
-
-        public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
+public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
         {
             return new List<Project>();
         }
@@ -23,13 +24,13 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
-        
+
         public Dictionary<string, string> GetProjectOption(int projectId, EProfileType type)
         {
             return new Dictionary<string, string>();
         }
 
-        public List<Entity.CPSync1D.PrintStandardType> GetPrintStandardTypeList(int currentUserId, bool isSync1DType)
+        public List<Entity.CPSync1D.PrintStandardType> GetPrintStandardTypeList(int currentUserId, bool isSync1DType, int TargetPrintCategory = 0)
         {
             return new List<Entity.CPSync1D.PrintStandardType>();
         }
@@ -79,7 +80,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new TempProjectInfo();
         }
 
-        public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId, short LicenseTypeId)
+        public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId, short LicenseTypeId, bool isCustomPreset, int UserID)
         {
             return new List<DeviceFamilyProfilerOption>();
         }
@@ -109,7 +110,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<string, string>();
         }
 
-        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, bool isVarification = false)
+        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, short PrintingTypeId, bool isVarification = false)
         {
             return new List<Entity.CPSyncV.MetricTargetPreset>();
         }
@@ -122,13 +123,13 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<int>();
         }
-        public int ImportMeasurements(int MeasurementID, int OptimizeRunID)
+        public int ImportMeasurements(int MeasurementID, int OptimizeRunID, int LicenseTypeID, int UserID)
         {
             return 0;
         }
 
         public List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId)
-        {            
+        {
             return new List<Entity.CPSyncV.MetricSum>();
         }
 
@@ -142,6 +143,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Entity.CPSync1D.ProjectTargetDensity>();
         }
 
+        public List<Entity.CPSync1D.ProjectTargetHueAngle> GetPrintStandardHueAngle(int printStandardTypeId)
+        {
+            return new List<Entity.CPSync1D.ProjectTargetHueAngle>();
+        }
+
         public List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId)
         {
             return new List<Entity.CPSync1D.ProjectTargetLAB>();
@@ -149,7 +155,7 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         public byte[] Get1DLastOptimizedDlp(int projectId)
         {
-            return new byte[1];        
+            return new byte[1];
         }
         public Guid StoreTemporaryValidationInformation(string jobName, string customer, string pageOrSurface, string jdfJobId, int projectId, Guid tempValidationInfoId, string silverlightPostUrl)
         {
@@ -166,9 +172,9 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
 
-        public List<Entity.CPSpot.SpotProjectLibrary> GetSpotLibraryListByProjectId(int projectId)
+        public SpotProjectList GetSpotLibraryListByProjectId(int projectId)
         {
-            return new List<Entity.CPSpot.SpotProjectLibrary>();
+            return new SpotProjectList();
         }
 
         public List<Entity.CPSpot.SpotTarget> GetSpotTargetList(int currentUserId, bool isSpotTargetType)
@@ -180,6 +186,77 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Project();
         }
+
+        public int DeleteSpotProject(int spotprojectId)
+        {
+            return 0;
+        }
+
+        public byte[] GetNamedColorProfile(int operationId)
+        {
+            return new byte[1];
+        }
+
+        public byte[] GetLastOptimizedNamedColorProfile(int spotProjectId)
+        {
+            return new byte[1];
+        }
+
+        public ReferenceChartData GetSpotReferenceChartData(int spotProjectId, EReferenceChartDisType referenceChartDisType)
+        {
+            return new ReferenceChartData();
+        }
+
+        public byte[] GetSpotDestinationProfile(int projectId)
+        {
+            return new byte[1];
+        }
+
+
+        public ReferenceChartPlugin GetPluginReferenceChartData(int projectId, EReferenceChartDisType referenceChartDisType)
+        {
+            return new ReferenceChartPlugin();
+        }
+
+        public ReferenceChartPlugin GetPluginSpotReferenceChartData(int spotProjectId, EReferenceChartDisType referenceChartDisType)
+        {
+            return new ReferenceChartPlugin();
+        }
+        public Dictionary<int, string> GetReTargetSpotProjectList(int CompanyID, int BranchID, int DeviceID)
+        {
+            return new Dictionary<int, string>();
+        }
+
+        public SpotProjectLibrary GetRetargetSpotProjectDetails(int RetargetSpotprojectID)
+        {
+            return new SpotProjectLibrary();
+        }
+
+        public DataTable GetRetargetProjectDetails(int RetargetProjectID)
+        {
+            return new DataTable();
+        }
+
+        public int GetProjectLicenseTypeLimit(int DeviceID, int LicenseTypeID)
+        {
+            return 0;
+        }
+
+        public int CreateMeasurementPluginStatus(int UserID, int ProjectID, int OptimizationRunID, string ProfileType, string DeviceSerial, short InstrumentTypeId, short LicenseTypeID)
+        {
+            return 0;
+        }
+        /// <summary>
+        /// This method used for Check into Third party application we check project is active measurement
+        /// </summary>
+        /// <param name="ProjectID"></param>
+        /// <param name="OptimizationRunID"></param>
+        /// <param name="DeviceSerial"></param>
+        /// <returns></returns>
+        public bool CheckMeasurementPluginStatus(int ProjectID, int OptimizationRunID, string DeviceSerial)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region ITaskBase Members
@@ -189,6 +266,6 @@ namespace FujifilmUSA.Sync.Business.Mock
         #endregion
 
 
-        
+
     }
 }

@@ -19,5 +19,11 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewOpenPrintCondition.ErrorOccured;
             _viewOpenPrintCondition.Project = projectBusiness.GetProjectDetail(_viewOpenPrintCondition.ProjectId);
         }
+        public void GetProjectDetail_SpotProject()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewOpenPrintCondition.ErrorOccured;
+            _viewOpenPrintCondition.Project = projectBusiness.GetProjectDetail_SpotProject(_viewOpenPrintCondition.SpotProjectId);
+        }
     }
 }

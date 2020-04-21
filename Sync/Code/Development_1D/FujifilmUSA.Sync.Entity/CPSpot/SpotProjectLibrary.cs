@@ -8,7 +8,7 @@ namespace FujifilmUSA.Sync.Entity.CPSpot
         public int SpotProjectId { get; set; }
         public int ProjectId { get; set; }
         public int DeviceId { get; set; }
-
+        public PrintCondition PrintCondition { get; set; }
         public string ProjectName { get; set; }
         public DateTime CreateDate { get; set; }
         public int CurrDlpId { get; set; }
@@ -21,10 +21,21 @@ namespace FujifilmUSA.Sync.Entity.CPSpot
      
         public ECurrentProjectStatus CurrentDisplayStatus { set; get; }
         public EOptimizeRunStatus Status { get; set; }
-        public int TotalRuns { get; set; }
-      
+       
         public KeyValuePair<short, string> Measurements { get; set; }
-     
+      
+        public int TotalRuns { get; set; }
+        public bool HasColorProfile { get; set; }
+        public int LastOptmizeId { get; set; }
+        public bool isAllowSpotProject { get; set; }
+        public int ReTargetSpotProjectID { get; set; }
 
+        public CPSpot.SpotTarget ReTargetSpotTarget { get; set; }
+    }
+
+    public class SpotProjectList
+    {
+        public bool isAllowSpotProject { get; set; }
+        public List<FujifilmUSA.Sync.Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
     }
 }

@@ -17,9 +17,13 @@ namespace FujifilmUSA.Sync.Web
                 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(SessionManager.Instance.CurrentUser.LanguageCultureCode);
                 System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(SessionManager.Instance.CurrentUser.LanguageCultureCode);
                 Page.ClientScript.RegisterClientScriptInclude("JSGlobalResource", ResolveUrl("JS/GlobalResource." + System.Threading.Thread.CurrentThread.CurrentUICulture.ToString() + ".js"));
+                //Page.ClientScript.RegisterClientScriptInclude("KendoJSGlobalResource", ResolveUrl("Scripts/kendo/2018.1.221/messages/kendo.messages." + System.Threading.Thread.CurrentThread.CurrentUICulture.ToString() + ".min.js"));
             }
             else //Load default English (en-US) .js file
+            {
                 Page.ClientScript.RegisterClientScriptInclude("JSGlobalResource", ResolveUrl("JS/GlobalResource.en-US.js"));
+                //Page.ClientScript.RegisterClientScriptInclude("KednoJSGlobalResource", ResolveUrl("Scripts/kendo/2018.1.221/messages/kendo.messages.en-US.min.js"));
+            }
 
             base.InitializeCulture();
         }
@@ -190,6 +194,113 @@ namespace FujifilmUSA.Sync.Web
                     NavigationToNoPermissionPage();
                 }
             }
+            else if (GetType().BaseType == typeof(SpotTargetManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSpotTarget))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddSpotTarget))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSpotTarget))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(ReferenceChartManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageReferenceChart))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddReferenceChart))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageReferenceChart))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddReferenceChartPreset))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageReferenceChart))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(MetricTargetPresetManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddMetricTargetPreset))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(PrintStandardTypeManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddPrintStandardType))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddLookupTVILABDensity))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSync1DTVILABDensity))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddPatchTolerance))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(PatchPresetManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(MetricTargetManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddMetricTarget))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddReferenceChartPreset))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            
+            
             #endregion
             #region Regular Pages
             else if (GetType().BaseType == typeof(OperationSelection))
@@ -320,6 +431,8 @@ namespace FujifilmUSA.Sync.Web
             //{
             //    //Do Nothing
             //}
+            Session.Timeout = 90;
+            HttpContext.Current.Session.Timeout = 90;
             base.OnLoad(e);
         }
         protected override void OnError(EventArgs e)

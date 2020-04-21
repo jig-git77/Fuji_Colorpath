@@ -14,23 +14,24 @@
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 
+<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
 <style type="text/css">
-    .my_rectangle
-    {
+    .my_rectangle {
         width: 25px;
         height: 25px;
         background: pink;
     }
-    .tooltipclass
-    {
+
+    .tooltipclass {
         background: #fbfacd;
         border-width: 1px;
         border-style: solid;
         border-color: #000;
     }
-    
-    .pluginImageTooltipClass
-    {
+
+    .pluginImageTooltipClass {
         background: #fbfacd;
         border-width: 1px;
         border-style: solid;
@@ -38,8 +39,8 @@
         font-family: Tahoma;
         font-size: 11px;
     }
-    #modalBackground
-    {
+
+    #modalBackground {
         position: fixed;
         left: 0;
         top: 0;
@@ -51,8 +52,8 @@
         opacity: 0.40;
         filter: alpha(opacity=40);
     }
-    #modalWindow
-    {
+
+    #modalWindow {
         position: fixed;
         left: 0;
         top: 0;
@@ -62,10 +63,9 @@
         width: 40em;
         height: 10em;
     }
-    
+
     /************ Progress bar ***************/
-    .UpdateProgressBackground
-    {
+    .UpdateProgressBackground {
         z-index: 3003;
         position: fixed !important;
         filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=10);
@@ -103,7 +103,8 @@
 <div>
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
-           
+            <%--<asp:HiddenField runat="server" ID="hdnBasePluginServiceUrl" ClientIDMode="Static" />--%>
+            <asp:HiddenField runat="server" ID="hdfAuthToken" ClientIDMode="Static" />
             <asp:HiddenField ID="hdnPCSType" runat="server" />
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
@@ -111,38 +112,38 @@
                         <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name" meta:resourcekey="lblMeasurementNameResource1"></asp:Label>:&nbsp;
                     </td>
                     <td style="height: 27px;">
-                        <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px" meta:resourcekey="txtMeasurementNameResource1" MaxLength="30"></asp:TextBox>        
-                    </td>                    
-                    <td rowspan="2" ID="tdNotesCaption" runat="server" visible="false" align="right">
+                        <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px" meta:resourcekey="txtMeasurementNameResource1" MaxLength="30" onkeypress="return validateText(event)"></asp:TextBox>
+                    </td>
+                    <td rowspan="2" id="tdNotesCaption" runat="server" visible="false" align="right">
                         <asp:Label ID="lblNotes" runat="server" Text="Notes" meta:resourcekey="lblNotesResource1"></asp:Label>:&nbsp;
                     </td>
-                    <td rowspan="2" ID="tdNotes" runat="server" visible="false">
-                        <asp:TextBox ID="txtNotes" runat="server" Width="178px" Height="50px" TextMode="MultiLine" style="resize: none;" MaxLength="1000"></asp:TextBox>
+                    <td rowspan="2" id="tdNotes" runat="server" visible="false">
+                        <asp:TextBox ID="txtNotes" runat="server" Width="178px" Height="50px" TextMode="MultiLine" Style="resize: none;" MaxLength="1000"></asp:TextBox>
                     </td>
                 </tr>
-                <tr ID="trCustomer" runat="server" visible="false">
-                    <td align="right">            
+                <tr id="trCustomer" runat="server" visible="false">
+                    <td align="right">
                         <asp:Label ID="lblCustomer" runat="server" Text="Customer" meta:resourcekey="lblCustomerResource1"></asp:Label>:&nbsp;
                     </td>
                     <td>
                         <asp:TextBox ID="txtCustomer" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>
-                    </td>                   
+                    </td>
                 </tr>
                 <tr id="trValidationDetails" runat="server" visible="false">
                     <td align="right">
-                        <asp:Label ID="lblPageOrSurface" runat="server" Text="Page/Surface"  meta:resourcekey="lblPageOrSurfaceResource1"></asp:Label>:&nbsp;
+                        <asp:Label ID="lblPageOrSurface" runat="server" Text="Page/Surface" meta:resourcekey="lblPageOrSurfaceResource1"></asp:Label>:&nbsp;
                     </td>
                     <td style="height: 27px;">
-                        <asp:TextBox ID="txtPageOrSurface" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>        
+                        <asp:TextBox ID="txtPageOrSurface" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>
                     </td>
                     <td align="right">
-                        <asp:Label ID="lblJDFJobId" runat="server" Text="JDF Job ID"  meta:resourcekey="lblJDFJobIdResource1"></asp:Label>:&nbsp;
+                        <asp:Label ID="lblJDFJobId" runat="server" Text="JDF Job ID" meta:resourcekey="lblJDFJobIdResource1"></asp:Label>:&nbsp;
                     </td>
                     <td>
-                        <asp:TextBox ID="txtJDFJobId" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>                          
+                        <asp:TextBox ID="txtJDFJobId" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>
                     </td>
                 </tr>
-            </table>                               
+            </table>
         </div>
         <div class="float_r">
             <span>
@@ -165,7 +166,8 @@
     </div>
     <div class="color_pallate">
         <div class="color_pallate_head">
-            <asp:Localize runat="server" Text="Colorbar" ID="locColorBar" meta:resourcekey="locColorBarResource1"></asp:Localize></div>
+            <asp:Localize runat="server" Text="Colorbar" ID="locColorBar" meta:resourcekey="locColorBarResource1"></asp:Localize>
+        </div>
         <div class="color_pallate_middle">
             <div id='divProgressImageMaster' style="display: none;">
                 <div style="width: 200px; text-align: center; margin-left: 150px;">
@@ -181,13 +183,17 @@
             </div>
         </div>
         <div class="color_pallate_bottom">
-            &nbsp;</div>
+            &nbsp;
+        </div>
     </div>
     <div class="color_pallate">
         <div class="color_pallate_head">
             <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" meta:resourcekey="locRecentUploadResource1"></asp:Localize>
-              <div id="Div_ImportMeasurements" style="float:right; padding-right:10px;">
-                <input type="button" id="btnImportMeasurements"  value='<%= GetResourceString("btnImportMeasurements") %>' onclick="javascript:return ShowImportWindow();" />             
+            <div id="Div_ImportMeasurements" style="float: right; padding-right: 10px;">
+                <input type="button" id="btnImportMeasurements" value='<%= GetResourceString("btnImportMeasurements") %>' onclick="javascript: return ShowImportWindow();" />
+            </div>
+            <div id="Div_ImportMeasurementFile" style="float: right; padding-right: 10px;">
+                <input type="button" runat="server" id="btnImportMeasurementFile" onclick="javascript: return ShowImportFileWindow();" />
             </div>
         </div>
         <div class="color_pallate_middle">
@@ -195,9 +201,20 @@
             </div>
         </div>
         <div class="color_pallate_bottom">
-            &nbsp;</div>
+            &nbsp;
+        </div>
     </div>
 </div>
+
+<div id="windowAlert" style="display: none;">
+    <span id="alertMessage"></span>
+    <br />
+    <div style="text-align: center;">
+        <button type="button" id="btnAlertPopup" style="line-height: 15px; width: 50px; padding: 5px 0px 5px;">OK</button>
+    </div>
+
+</div>
+
 <!-- modal content -->
 <div id='MeasurementConfirmDialog'>
     <div class='header'>
@@ -207,8 +224,8 @@
     </div>
     <div class='buttons'>
         <div class='no simplemodal-close'>
-            <input type="button" id="btnCloseModelPopup" value='<%= GetResourceString("btnCloseModelPopup") %>' style="border: none; background-color: transparent;
-                padding-top: 4px" /></div>
+            <input type="button" id="btnCloseModelPopup" value='<%= GetResourceString("btnCloseModelPopup") %>' style="border: none; background-color: transparent; padding-top: 4px" />
+        </div>
     </div>
 </div>
 <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Modal="True">
@@ -222,67 +239,123 @@
 <asp:HiddenField ID="hdReferenceChartDisplayType" runat="server" />
 <asp:HiddenField ID="hdIsVerification" runat="server" />
 <asp:HiddenField ID="hdLicenseType" runat="server" />
-<asp:HiddenField ID="hdOptimizeRunId" runat="server" />
-<asp:HiddenField ID="hdProjectId" runat="server" />
+<asp:HiddenField ID="hdOptimizeRunId" runat="server" ClientIDMode="Static" />
+<asp:HiddenField ID="hdProjectId" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="hdReferenceChartTypeId" runat="server" />
 <asp:HiddenField ID="hdSerialNumber" runat="server" Value="0" />
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
-<asp:HiddenField ID="hdMeasurementLimit" runat="server" Value="0" />
+<asp:HiddenField ID="hdMeasurementsTotal" runat="server" Value="0" />
 <asp:HiddenField ID="hdDisplayImport" runat="server" Value="no" />
-<asp:HiddenField ID="hdDeviceType" runat="server"/>
+<asp:HiddenField ID="hdDeviceType" runat="server" />
+<asp:HiddenField ID="hdSpotProjectType" runat="server" />
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
 <span id="dummy"></span>
 <script id="MeasurementHeaderTemplate" type="text/x-jQuery-tmpl">
-          <tr>
-                <th scope="col">                
-                    <%= GetResourceString("measurementName") %>
-                </th>
-                <th scope="col">
-                    <%= GetResourceString("uploadDateTime") %>
-                </th>
-                <th scope="col">
-                    <%= GetResourceString("deleteButton") %>
-                </th>
-          </tr>
+    <tr>
+        <th scope="col">
+            <%= GetResourceString("measurementName") %>
+        </th>
+        <th scope="col">
+            <%= GetResourceString("uploadDateTime") %>
+        </th>
+        <th scope="col">
+            <%= GetResourceString("deleteButton") %>
+        </th>
+    </tr>
 </script>
 <script id="MeasurementDetailTemplate" type="text/x-jQuery-tmpl">
-         <tr id = "${MeasurementId}">
-                <td align="center">
-                    <span id="lblMeasurementName">
-                        ${MeasurementName}</span>
-                </td>
-                <td align="center">
-                    <span id="lblMeasurementDate">
-                       ${UploadDate}</span>
-                </td>
-                <td align="center">
-                    <input 
-                           type="image" 
-                            onclick="javascript:return ConfirmDeleteMeasurement(this);" 
-                            alt="Delete"
-                            src="Images/delete_icon.png" title="Delete Measurement" 
-                            id="imgbtnDelete"
-                            name=" ${MeasurementId}"
-                            >
-                </td>
-         </tr>
+    <tr id="${MeasurementId}">
+        <td align="center">
+            <span id="lblMeasurementName">${MeasurementName}</span>
+        </td>
+        <td align="center">
+            <span id="lblMeasurementDate">${UploadDate}</span>
+        </td>
+        <td align="center">
+            <input
+                type="image"
+                onclick="javascript: return ConfirmDeleteMeasurement(this);"
+                alt="Delete"
+                src="Images/delete_icon.png" title="Delete Measurement"
+                id="imgbtnDelete"
+                name=" ${MeasurementId}">
+        </td>
+    </tr>
 </script>
 <script language="javascript" type="text/javascript">
     var refreshTry = 0;
-    $(document).ready(function(){
+    var BASE_SERVICE_URL = '';
+    $(document).ready(function () {
+        //BASE_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();
         var SessionTimeOut = <%= Session.Timeout %>;
-        setInterval(function(){ 
+        setInterval(function () {
             jQuery.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 url: "Services/PluginDataService.svc/KeepUserSessionAlive/",
-                dataType: "JSON",             
+                //url: BASE_SERVICE_URL + "PluginData.svc/KeepUserSessionAlive/",
+                dataType: "JSON",
+
                 success: function (response) { },
                 error: function (XMLHttpRequest, textStatus, errorThrown) { }
             });
-         },(SessionTimeOut * 60 * 1000) - (1 * 60 * 1000));
+        }, (SessionTimeOut * 60 * 1000) - (1 * 60 * 1000));
+
+        $("#windowAlert").kendoWindow({
+            width: "300px",
+            height: "100px",
+            modal: true,
+            title: "Alert",
+            visible: false,
+            position: {
+                top: 150,
+                left: 500
+            },
+        });
+
+        $('#btnAlertPopup').on('click', function (e) {
+            var locationpath = "";
+            if (window.location.hostname == "localhost") {
+                locationpath = window.location.origin + '/FujifilmUSA.Sync.Web/Login.aspx'
+            } else {
+                locationpath = window.location.origin + '/Login.aspx'
+            }
+            window.location.href = locationpath;
+        });
+
+        GetPing();
     });
+
+    function GetPing() {
+        jQuery.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: "Services/PluginDataService.svc/Ping",
+            dataType: "json",
+            headers: {                
+                'Authorization': 'Basic ' + $('#hdfAuthToken').val()
+            },
+            success: function (response) { },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                if (XMLHttpRequest.status == 400) {
+                    $('#alertMessage').html('Your login time has expired. Please login again.');
+                    $("#windowAlert").data("kendoWindow").open();
+                }
+                else if (XMLHttpRequest.status == 401) {
+                    //jQuery.growlUI('Error', "You are not authorized user. Please login again.");
+                    $('#alertMessage').html('You are not authorized user. Please login again.');
+                    $("#windowAlert").data("kendoWindow").open();
+                }
+                else {
+                    var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                    jQuery.growlUI('Error', "Error Cause:" + jsonFault.Reason + "</ br> Error Detail:" + jsonFault.DetailedInformation, 20000);
+                }
+            }
+        });
+    }
+
     function ControlVisibility() {
         jQuery("[id*='btnCalibrate']").css('display', 'none');
         jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
@@ -290,89 +363,83 @@
         jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
         jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
         jQuery("[id*='btnRewindMeasurement']").css('display', 'none');
-      
-        if(load('<%= ApplicationConfiguration.Instance.FujiFilmPluginVersion %>'))   //first you have to load the plugin
-        {        
+
+        if (load('<%= ApplicationConfiguration.Instance.FujiFilmPluginVersion %>'))   //first you have to load the plugin
+        {
             //Proceed further
             ListDevices();
-            GetRefChartData();    
-            
+            GetRefChartData();
+
             //---If plugin is older than 1.9.6 version--> force them to download new version plugin---//
-            if(plugin().plugin_version != '1.9.6')
-            {
+            if (plugin().plugin_version != '1.9.6') {
                 var oWindow;
                 oWindow = window.radopen("PopupDownloadSoftware.aspx", "DownloadSoftwareWindow");
                 oWindow.show();
-            } 
+            }
         }
-        else
-        {
+        else {
             var oWindow;
             oWindow = window.radopen("PopupDownloadSoftware.aspx", "DownloadSoftwareWindow");
             oWindow.show();
-        }        
+        }
     }
-    
+
     function GetRefChartData() {
         jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
         jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
         var ReferenceChartTypeId = '';
         var SerialNo;
-        GetReferenceChart(jQuery("[id*='hdProjectId']").val(), jQuery("input[id$=hdReferenceChartDisplayType]").val());
+        GetReferenceChart(jQuery("[id*='hdProjectId']").val(), jQuery("input[id$=hdReferenceChartDisplayType]").val(), jQuery("[id*='hdSpotProjectType']").val(), BASE_SERVICE_URL);
     }
-    jQuery(document).ready(function () {   
-        
-        ControlDisability(1,false,1,false,1,true,1,true);
-   
-        jQuery("[id*='btnCalibrate']").click(function () {    
-       
-            ControlDisability(1,true,0,false,0,false,0,false);              
-            calibrateDevice(g_ScannerList);     
+    jQuery(document).ready(function () {
+
+        ControlDisability(1, false, 1, false, 1, true, 1, true);
+        jQuery("[id*='btnCalibrate']").click(function () {
+            ControlDisability(1, true, 0, false, 0, false, 0, false);
+            calibrateDevice(g_ScannerList);
             return false;
         });
         jQuery("[id*='btnMeasureAndUploadChart']").click(function () {
-            if (jQuery("[id*='hdMeasureAndUploadChart']").val() == 'measurechart') 
-            {              
-                ControlDisability(1,true,1,true,1,false,1,true);
+            if (jQuery("[id*='hdMeasureAndUploadChart']").val() == 'measurechart') {
+                ControlDisability(1, true, 1, true, 1, false, 1, true);
                 var MeasurementName = jQuery("[id*='txtMeasurementName']").val();
-                if (jQuery.trim(MeasurementName).length < 4) 
-                {
+                if (jQuery.trim(MeasurementName).length < 4) {
                     MeasurementDialog('<%= GetResourceString("measurementNameLengthMsg") %>', '<%= GetResourceString("errorText") %>');
-                    ControlDisability(0,false,1,false,1,true,1,true);
+                    ControlDisability(0, false, 1, false, 1, true, 1, true);
                     return false;
                 }
-                if(('<%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentDlpSubOperation != FujifilmUSA.Sync.Entity.ELicenseType.Validation).ToString().ToLower() %>' == 'true') && (jQuery("input[id*='hdMeasurementLimit']").val() >= <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit) %>))
-                {
+
+                if (('<%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentDlpSubOperation != FujifilmUSA.Sync.Entity.ELicenseType.Validation).ToString().ToLower() %>' == 'true') && (jQuery("input[id*='hdMeasurementsTotal']").val() >= <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary ? ApplicationConfiguration.Instance.MeasurementLimitSpotProject : ApplicationConfiguration.Instance.MeasurementsLimit)) %>)) {
                     MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
-                    ControlDisability(1,false,1,false,1,true,1,true);
+                    ControlDisability(1, false, 1, false, 1, true, 1, true);
                     return false;
-                }            
+                }
                 scan(g_ScannerList, g_Chart["ReadCS"], g_Chart);
             }
             else if (jQuery("[id*='hdMeasureAndUploadChart']").val() == 'uploadmeasurement') {
                 upload();
             }
         });
-        jQuery("[id*='btnCancelMeasurement']").click(function () {  
-                          
+        jQuery("[id*='btnCancelMeasurement']").click(function () {
+
             jQuery("[id*='lblMessage']").html("Status : Cancelling...");
-            OnCancel();       
-            ControlDisability(1,false,1,false,1,true,1,true);
+            OnCancel();
+            ControlDisability(1, false, 1, false, 1, true, 1, true);
         });
-        jQuery("[id*='btnRewindMeasurement']").click(function () {  
-                          
+        jQuery("[id*='btnRewindMeasurement']").click(function () {
+
             jQuery("[id*='lblMessage']").html("Status : Rewinding...");
-            OnRewind();       
-            ControlDisability(1,false,1,true,1,false,1,false);
+            OnRewind();
+            ControlDisability(1, false, 1, true, 1, false, 1, false);
         });
         bindMeasurementData();
         ControlVisibility();
     });
-    
+
     function MeasurementDialog(message, type) {
         jQuery("[id*='MeasurementConfirmDialog']").modal({
             closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
-            position: ["20%", ],
+            position: ["20%",],
             overlayId: 'MeasurementConfirmDialog-overlay',
             containerId: 'MeasurementConfirmDialog-container',
             onShow: function (dialog) {
@@ -380,7 +447,7 @@
                 jQuery('.message', dialog.data[0]).append(message);
                 jQuery('.header', dialog.data[0]).append(type);
             }
-        });       
+        });
     }
 
 
@@ -391,24 +458,25 @@
             MeasurementDialog('<%= GetResourceString("measurementNameLengthMsg") %>', '<%= GetResourceString("errorText") %>');
             return false;
         }
-        else
-        {
-             //Load progress bar
+        else {
+            //Load progress bar
             LoadProgressBrowserWindow();
 
             var dt = new Date();
             var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), dt.getHours(), dt.getMinutes(), dt.getSeconds(), dt.getMilliseconds()));
-            var MeasurementDateTime = dt1.toMSJSON();     
+            var MeasurementDateTime = dt1.toMSJSON();
             var OptimizeRunId = jQuery("input[id$=hdOptimizeRunId]").val();
             var ProjectId = jQuery("input[id$=hdProjectId]").val();
             var ReferenceChartTypeId = jQuery("input[id$=hdReferenceChartTypeId]").val();
-            var MsmtName = jQuery("input[id*='txtMeasurementName']").val();                        
-            var saveMeasurementUrl="";
+            var MsmtName = jQuery("input[id*='txtMeasurementName']").val();
+            var saveMeasurementUrl = "";
             var PCSDataType = jQuery("input[id*='hdnPCSType']").val();
             var obj;
-            if(jQuery("input[id$=hdIsVerification]").val() == "true")
-            {
-                saveMeasurementUrl="Services/PluginDataService.svc/SaveVMeasurement";
+            saveMeasurementUrl = BASE_SERVICE_URL;
+            if (jQuery("input[id$=hdIsVerification]").val() == "true") {
+                saveMeasurementUrl = "Services/PluginDataService.svc/SaveVMeasurement";
+                //saveMeasurementUrl += "PluginData.svc/SaveVMeasurement";
+
                 obj = {
                     MeasurementName: MsmtName,
                     MeasurementDate: MeasurementDateTime,
@@ -421,31 +489,43 @@
                     JDFJobId: jQuery('input[id*="txtJDFJobId"]').val()
                 };
             }
-            else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>')
-            {
-                saveMeasurementUrl="Services/PluginDataService.svc/Save1DMeasurement";
+            else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>') {
+                saveMeasurementUrl = "Services/PluginDataService.svc/Save1DMeasurement";
+                //saveMeasurementUrl += "PluginData.svc/Save1DMeasurement";
                 obj = {
                     MeasurementName: MsmtName,
                     MeasurementDate: MeasurementDateTime,
                     OptimizeRunId: OptimizeRunId,
                     ReferenceChartTypeId: ReferenceChartTypeId,
                     MeasurementPatches: MeasuredPatches,
-                    PCSDataType :PCSDataType
+                    PCSDataType: PCSDataType
                 };
             }
-            else
-            {
-                saveMeasurementUrl="Services/PluginDataService.svc/SaveMeasurement";
+            else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary %>') {
+                saveMeasurementUrl = "Services/PluginDataService.svc/SaveSpotMeasurement";
+                //saveMeasurementUrl += "PluginData.svc/SaveSpotMeasurement";
                 obj = {
                     MeasurementName: MsmtName,
                     MeasurementDate: MeasurementDateTime,
                     OptimizeRunId: OptimizeRunId,
                     ReferenceChartTypeId: ReferenceChartTypeId,
                     MeasurementPatches: MeasuredPatches,
-                    PCSDataType :PCSDataType
+                    PCSDataType: PCSDataType
                 };
             }
-            
+            else {
+                saveMeasurementUrl = "Services/PluginDataService.svc/SaveMeasurement";
+                //saveMeasurementUrl += "PluginData.svc/SaveMeasurement";
+                obj = {
+                    MeasurementName: MsmtName,
+                    MeasurementDate: MeasurementDateTime,
+                    OptimizeRunId: OptimizeRunId,
+                    ReferenceChartTypeId: ReferenceChartTypeId,
+                    MeasurementPatches: MeasuredPatches,
+                    PCSDataType: PCSDataType
+                };
+            }
+
             //Make ajax request...
             jQuery.ajax({
                 type: "POST",
@@ -454,25 +534,44 @@
                 processData: false,
                 dataType: "json",
                 data: JSON.stringify(obj),
+                headers: {
+                    'Authorization': 'Basic ' + $('#hdfAuthToken').val()
+                },
                 dataFilter: function (data, type) {
                     return data.replace(/"\\\/(Date\([0-9-]+\))\\\/"/gi, 'new $1');
                 },
                 success:
                     function (response) {
-                       
-                        bindMeasurementData();
-                        StopProgressBrowserWindow();
-                        jQuery("[id*='lblMessage']").html('<%= GetResourceString("statusText") %>' + " " + '<%= GetResourceString("measurementUploadedSuccess") %>');                       
-                        ControlDisability(1,false,0,false,1,true,1,true);
+                        if (response) {
+                            bindMeasurementData();
+                            StopProgressBrowserWindow();
+                            jQuery("[id*='lblMessage']").html('<%= GetResourceString("statusText") %>' + " " + '<%= GetResourceString("measurementUploadedSuccess") %>');
+                            ControlDisability(1, false, 0, false, 1, true, 1, true);
+                        } else {
+                            StopProgressBrowserWindow();
+                            jQuery("[id*='lblMessage']").html('Error occured while uploading measurements. Please try again');
+                            ControlDisability(1, false, 0, false, 1, true, 1, true);
+                        }
                     },
                 error:
                     function (XMLHttpRequest, textStatus, errorThrown) {
-                        var jsonFault = JSON.parse(XMLHttpRequest.responseText);
                         StopProgressBrowserWindow();
-                        MeasurementDialog('<%= GetResourceString("errorCause") %>'+ jsonFault.Reason +  " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
+                        if (XMLHttpRequest.status == 400) {
+                            $('#alertMessage').html('Your login time has expired. Please login again.');
+                            $("#windowAlert").data("kendoWindow").open();
+                        }
+                        else if (XMLHttpRequest.status == 401) {
+                            $('#alertMessage').html('You are not authorized user. Please login again.');
+                            $("#windowAlert").data("kendoWindow").open();
+                        }
+                        else {
+                            var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                            StopProgressBrowserWindow();
+                            MeasurementDialog('<%= GetResourceString("errorCause") %>' + jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
+                        }
                     }
             });
-     
+
             refreshCanvas();
             jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
             jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
@@ -482,18 +581,22 @@
     function bindMeasurementData() {
         var OptimizeRunId = jQuery("input[id$=hdOptimizeRunId]").val();
         var ProjectId = jQuery("input[id$=hdProjectId]").val();
-        var getMeasurementUrl = "";
-        if(jQuery("input[id$=hdIsVerification]").val() == "true")
-        {
+        var getMeasurementUrl = BASE_SERVICE_URL;
+        if (jQuery("input[id$=hdIsVerification]").val() == "true") {
             getMeasurementUrl = "Services/PluginDataService.svc/GetVMeasurementsByProjectId/" + ProjectId;
+            //getMeasurementUrl += "PluginData.svc/GetVMeasurementsByProjectId/" + ProjectId;
         }
-        else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>')
-        {
+        else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>') {
             getMeasurementUrl = "Services/PluginDataService.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
+            //getMeasurementUrl += "PluginData.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
         }
-        else
-        {
+        else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary %>') {
+            getMeasurementUrl = "Services/PluginDataService.svc/GetSpotMeasurementsByOptimizeId/" + OptimizeRunId;
+            //getMeasurementUrl += "PluginData.svc/GetSpotMeasurementsByOptimizeId/" + OptimizeRunId;
+        }
+        else {
             getMeasurementUrl = "Services/PluginDataService.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId;
+            //getMeasurementUrl += "PluginData.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId;
         }
         jQuery.ajax({
             type: "GET",
@@ -503,46 +606,48 @@
             dataType: "json",
             cache: false,
             dataFilter:
-                function (data, type) {               
+                function (data, type) {
                     var json = jQuery.parseJSON(data);
-                
                     if (json.length > 0) {
                         jQuery("input[id*='hdHasMeasurement']").val('true');
                         $("#measurementContainer").html("");
                         $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
                         $("#MeasurementHeaderTemplate").tmpl().appendTo("#lvMeasurement1");
                         $("#MeasurementDetailTemplate").tmpl(json).appendTo("#lvMeasurement1");
-                        jQuery("input[id*='hdMeasurementLimit']").val(json.length);  //----------Set MeasurementLimit in hiddeninput-------------//      
+                        jQuery("input[id*='hdMeasurementsTotal']").val(json.length);  //----------Set MeasurementLimit in hiddeninput-------------//      
                         //----------------Display Import Button--------------//  
-                        if(jQuery("input[id*='hdDisplayImport']").val() == "yes")
-                        {
-                            if(json.length < <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit)%>)
-                            {                               
-                                $("#Div_ImportMeasurements").css('visibility', 'visible');
-                            }    
-                            else
-                            {                               
-                                $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                        if (jQuery("input[id*='hdDisplayImport']").val() == "yes") {
+                            if (json.length < <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : ApplicationConfiguration.Instance.MeasurementsLimit)%>) {
+                                //$("#Div_ImportMeasurements").css('visibility', 'visible');
+                                $("#Div_ImportMeasurements").css('display', 'block');
                             }
-                        } 
-                        else
-                        {
-                             $("#Div_ImportMeasurements").css('visibility', 'hidden');
-                        }                  
+                            else {
+                                //$("#Div_ImportMeasurements").css('visibility', 'hidden');
+                                $("#Div_ImportMeasurements").css('display', 'none');
+                            }
+                        }
+                        else {
+                            //$("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            $("#Div_ImportMeasurements").css('display', 'none');
+                        }
                     }
                     else {
                         jQuery("input[id*='hdHasMeasurement']").val('false');
+                        jQuery("input[id*='hdMeasurementsTotal']").val('0'); //set 0 measurement for empty response
+                        //made disable analyze tab when no measurement available
+                        $("#LeftMenu2_ctl01_lnkAnalyse").css("color", "Silver");
+                        $("#LeftMenu2_ctl01_lnkAnalyze").css("color", "Silver");
                         $("#measurementContainer").html("");
                         $("#measurementContainer").append("<div class='no_data_found'>" + '<%= GetResourceString("noRecordsAvailable") %>' + "</div>");
                         //----------------Display Import Button--------------//
-                        if(jQuery("input[id*='hdDisplayImport']").val() == "yes")
-                        {
-                             $("#Div_ImportMeasurements").css('visibility', 'visible');
+                        if (jQuery("input[id*='hdDisplayImport']").val() == "yes") {
+                            //$("#Div_ImportMeasurements").css('visibility', 'visible');
+                            $("#Div_ImportMeasurements").css('display', 'block');
                         }
-                        else
-                        {
-                             $("#Div_ImportMeasurements").css('visibility', 'hidden');
-                        } 
+                        else {
+                            //$("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            $("#Div_ImportMeasurements").css('display', 'none');
+                        }
                     }
                 },
             success:
@@ -550,7 +655,7 @@
             error:
                 function (XMLHttpRequest, textStatus, errorThrown) {
                     var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                    MeasurementDialog('<%= GetResourceString("errorCause") %>'+ jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
+                    MeasurementDialog('<%= GetResourceString("errorCause") %>' + jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
                 }
         });
     }
@@ -563,18 +668,22 @@
     }
     function deletemeasurement(smeasurementId) {
         var measurementId = $.trim(smeasurementId);
-        var deleteMeasurementUrl = "";
-        if(jQuery("input[id$=hdIsVerification]").val() == "true")
-        {
+        //var deleteMeasurementUrl = BASE_SERVICE_URL;
+        if (jQuery("input[id$=hdIsVerification]").val() == "true") {
             deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteVMeasurement/" + measurementId;
+            //deleteMeasurementUrl += "PluginData.svc/DeleteVMeasurement/" + measurementId;
         }
-        else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>')
-        {
+        else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>') {
             deleteMeasurementUrl = "Services/PluginDataService.svc/Delete1DMeasurement/" + measurementId;
+            //deleteMeasurementUrl += "PluginData.svc/Delete1DMeasurement/" + measurementId;
         }
-        else
-        {
+        else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary %>') {
+            deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteSpotMeasurement/" + measurementId;
+            //deleteMeasurementUrl += "PluginData.svc/DeleteSpotMeasurement/" + measurementId;
+        }
+        else {
             deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteMeasurement/" + measurementId;
+            //deleteMeasurementUrl += "PluginData.svc/DeleteMeasurement/" + measurementId;
         }
         jQuery.ajax({
             type: "POST",
@@ -585,12 +694,27 @@
             dataFilter: function (data, type) {
                 return false;
             },
+            headers: {
+                'Authorization': 'Basic ' + $('#hdfAuthToken').val()
+            },
             success:
-                    function (response) {
-                    },
+                function (response) {
+                },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                MeasurementDialog('<%= GetResourceString("errorCause") %>' + jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
+
+                if (XMLHttpRequest.status == 400) {
+                    $('#alertMessage').html('Your login time has expired. Please login again.');
+                    $("#windowAlert").data("kendoWindow").open();
+                }
+                else if (XMLHttpRequest.status == 401) {
+                    $('#alertMessage').html('You are not authorized user. Please login again.');
+                    $("#windowAlert").data("kendoWindow").open();
+                }
+                else {
+                    var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                    MeasurementDialog('<%= GetResourceString("errorCause") %>' + jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
+                }
+
             }
         });
     }
@@ -601,51 +725,39 @@
 
 
     function ControlDisability(btnCalibrate, CalibrateFlag, btnMeasure, MeasureFlag, btnCancel, CancelFlag, btnRewind, RewindFlag) {
-        if(btnCalibrate == 1)
-        {
-            if(CalibrateFlag == true)
-            {
+        if (btnCalibrate == 1) {
+            if (CalibrateFlag == true) {
                 jQuery("[id*='btnCalibrate']").attr('disabled', '');
             }
-            else
-            {
+            else {
                 jQuery("[id*='btnCalibrate']").removeAttr('disabled', '');
             }
         }
-        if(btnMeasure == 1)
-        {
-            if(MeasureFlag == true)
-            {
+        if (btnMeasure == 1) {
+            if (MeasureFlag == true) {
                 jQuery("[id*='btnMeasureAndUploadChart']").attr('disabled', '');
             }
-            else
-            {
+            else {
                 jQuery("[id*='btnMeasureAndUploadChart']").removeAttr('disabled', '');
             }
         }
-        if(btnCancel == 1)
-        {
-            if(CancelFlag == true)
-            {
+        if (btnCancel == 1) {
+            if (CancelFlag == true) {
                 jQuery("[id*='btnCancelMeasurement']").attr('disabled', '');
             }
-            else
-            {
+            else {
                 jQuery("[id*='btnCancelMeasurement']").removeAttr('disabled', '');
             }
         }
-        if(btnRewind == 1)
-        {
-            if(RewindFlag == true)
-            {
-                jQuery("[id*='btnRewindMeasurement']").attr('disabled', '');                
+        if (btnRewind == 1) {
+            if (RewindFlag == true) {
+                jQuery("[id*='btnRewindMeasurement']").attr('disabled', '');
             }
-            else
-            {
-                jQuery("[id*='btnRewindMeasurement']").removeAttr('disabled', '');            
+            else {
+                jQuery("[id*='btnRewindMeasurement']").removeAttr('disabled', '');
             }
         }
-    }    
+    }
 
     /************ Progress bar ***************/
     function LoadProgressBrowserWindow() {
@@ -669,20 +781,37 @@
         jQuery("[id*='divProgressImageMaster']").hide();
     }
 
-     function ShowImportWindow() {      
+    function ShowImportWindow() {
         var oWnd = $find("<%= ImportMeasurementWindow.ClientID %>");
         oWnd.show();
         return false;
     }
 
-      function Close() {
+    function ShowImportFileWindow() {
+        if (('<%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentDlpSubOperation != FujifilmUSA.Sync.Entity.ELicenseType.Validation).ToString().ToLower() %>' == 'true') &&
+            (jQuery("input[id*='hdMeasurementsTotal']").val() >=
+        <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == 
+        FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : 
+        (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary ? 
+        ApplicationConfiguration.Instance.MeasurementLimitSpotProject : ApplicationConfiguration.Instance.MeasurementsLimit)) %>)) {
+            MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
+
+            return false;
+        }
+
+        var oWnd = $find("<%= ImportMeasurementFileWindow.ClientID %>");
+        oWnd.show();
+        return false;
+    }
+
+
+    function Close() {
         var oWnd = $find("<%= ImportMeasurementWindow.ClientID %>");
         oWnd.close();
         return false;
     }
 </script>
-<div id="divBackgroundProgressMaster" class="UpdateProgressBackground" style="display: none;
-    position: fixed; top: 0px; left: 0px; height: 100%; width: 100%;">
+<div id="divBackgroundProgressMaster" class="UpdateProgressBackground" style="display: none; position: fixed; top: 0px; left: 0px; height: 100%; width: 100%;">
 </div>
 
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
@@ -690,6 +819,10 @@
         <telerik:RadWindow ID="ImportMeasurementWindow" runat="server" VisibleStatusbar="false"
             ShowContentDuringLoad="false" Title="Import Measurements" Width="730" Height="400"
             Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupImportMeasurements.aspx">
+        </telerik:RadWindow>
+        <telerik:RadWindow ID="ImportMeasurementFileWindow" runat="server" VisibleStatusbar="false"
+            ShowContentDuringLoad="false" Title="Import Measurement File" Width="730" Height="285"
+            Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupImportMeasurementFile.aspx">
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>

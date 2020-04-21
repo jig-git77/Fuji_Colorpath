@@ -64,7 +64,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
-        public List<ReferenceChart> GetReferenceChartForLabCalculation(short sourceProfileId, short referenceChartTypeId)
+        public List<ReferenceChart> GetReferenceChartForLabCalculation(int sourceProfileId, short referenceChartTypeId)
         {
             var referenceChartData = new List<ReferenceChart>();
             Common.ImplementBusinessLogic(
@@ -95,7 +95,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return referenceChartData;
         }
 
-        public int InsertReferenceLabData(List<ReferenceChart> referenceCharts, byte[] sourceProfile, short sourceProfileId)
+        public int InsertReferenceLabData(List<ReferenceChart> referenceCharts, byte[] sourceProfile, short sourceProfileId, int CompanyId, int ProjectId)
         {
             var returnValue = 0;
             Common.ImplementBusinessLogic(
@@ -143,7 +143,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         Instance.
                         ExecuteProcedure("CPSync4D.CreateReferenceLabData", new object[]
                                                                                     {
-                                                                                        referenceLabData.ToString()
+                                                                                        referenceLabData.ToString(),
+                                                                                        sourceProfileId,
+                                                                                        CompanyId,
+                                                                                         ProjectId
                                                                                     });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertReferenceLabData"));

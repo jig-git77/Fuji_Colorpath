@@ -517,6 +517,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.CheckBox chkIsValidation;
         
         /// <summary>
+        /// locIsFlexo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locIsFlexo;
+        
+        /// <summary>
+        /// chkIsFlexo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkIsFlexo;
+        
+        /// <summary>
         /// locIsActive control.
         /// </summary>
         /// <remarks>

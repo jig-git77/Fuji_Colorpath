@@ -2,7 +2,7 @@
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
-
+<script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <style type="text/css">    
      .breakWord50
      {
@@ -57,7 +57,7 @@
                                         ControlToValidate="ddlProjectType" ForeColor="Red" 
                                         ValidationGroup="vgAddProfiles">
                                         <ucValidationContainer:ValidationContainer ID="rfvcProjectTypeContainer" runat="server"
-                                            ValidationMsg="Please select project type." Size="200" />
+                                            ValidationMsg="Please select project type." Size="200" ResourceValidationMsg="ProjectTypeRequiredResource"/>
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">
@@ -87,7 +87,7 @@
                                         ControlToValidate="ddlDeviceFamily" ForeColor="Red" 
                                         ValidationGroup="vgAddProfiles">
                                         <ucValidationContainer:ValidationContainer ID="rfvcDeviceFamilyContainer" runat="server"
-                                            ValidationMsg="Please select Device Family." Size="200" />
+                                            ValidationMsg="Please select Device Family." Size="200" ResourceValidationMsg="DeviceFamilyRequiredResource" />
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">
@@ -107,14 +107,14 @@
                                 <div style="float: left;"> 
                                                                
                                     <asp:TextBox ID="txtPresetName" runat="server" MaxLength="50" Width="400px" 
-                                        Height="19px" meta:resourcekey="txtPresetNameResource1"></asp:TextBox>
+                                        Height="19px" meta:resourcekey="txtPresetNameResource1" onkeypress="return validateText(event)"></asp:TextBox>
                                       <asp:HiddenField ID="hdnRefChartID" runat="server" Value="0" />
                                 </div>
                                 <div style="float: left">
                                     <asp:RequiredFieldValidator ID="rfvPresetName" runat="server" Display="Dynamic" ControlToValidate="txtPresetName"
                                         ForeColor="Red" ValidationGroup="vgAddProfiles">
                                         <ucValidationContainer:ValidationContainer ID="rfvPresetNameContainer" runat="server"
-                                            ValidationMsg="Please provide Preset name." Size="200" />
+                                            ValidationMsg="Please provide Preset name." Size="200" ResourceValidationMsg="PresetNameRequiredResource" />
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">
@@ -142,7 +142,7 @@
                                     <asp:RequiredFieldValidator ID="rfvPresetDesc" runat="server" Display="Dynamic" ControlToValidate="txtPresetDesc"
                                         ForeColor="Red" ValidationGroup="vgAddProfiles">
                                         <ucValidationContainer:ValidationContainer ID="rfvPresetDescContainer" runat="server"
-                                            ValidationMsg="Please provide Preset Description." Size="200" />
+                                            ValidationMsg="Please provide Preset Description." Size="200" ResourceValidationMsg="PresetDescriptionRequiredResource" />
                                     </asp:RequiredFieldValidator>
                                 </div>
                                 <div class="clear">

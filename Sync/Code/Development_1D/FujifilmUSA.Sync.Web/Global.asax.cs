@@ -12,6 +12,27 @@ namespace FujifilmUSA.Sync.Web
 {
     public class Global : System.Web.HttpApplication
     {
+        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        {
+            if (HttpContext.Current.Session != null)
+            {
+                DateTime started = (DateTime)HttpContext.Current.Session["SessionStarted"];
+                DateTime current = DateTime.Now;
+                double totalMinutesIdle = current.Subtract(started).TotalMinutes;
+                if (totalMinutesIdle >= 90)
+                {
+                    Session.Abandon();
+                    HttpContext.Current.Session.Abandon();
+                    HttpContext.Current.Session.Contents.Abandon();
+                }
+                else {
+                    Session["SessionStarted"] = DateTime.Now;
+                    Session.Timeout = 90;
+                    HttpContext.Current.Session.Timeout = 90;
+                    HttpContext.Current.Session.Contents.Timeout = 90;
+                }
+            }
+        }
         protected void Application_Start(object sender, EventArgs e)
         {
 
@@ -19,12 +40,15 @@ namespace FujifilmUSA.Sync.Web
 
         protected void Session_Start(object sender, EventArgs e)
         {
-
+            // Code that runs when a new session is started
+            Session["SessionStarted"] = DateTime.Now;
+            Session.Timeout = 90;
+            HttpContext.Current.Session.Timeout = 90;
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+           
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

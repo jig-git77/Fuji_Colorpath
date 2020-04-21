@@ -772,7 +772,7 @@ namespace FujifilmUSA.Sync.Common
             return LabtoXYZ(lab.L, lab.A, lab.B);
         }
 
-        public static CIELab CalcPaperScaleLAB(double currentpaper_X, double currentpaper_Y, double currentpaper_Z, double newpaper_X, double newpaper_Y, double newpaper_Z, double patch_L, double patch_A, double patch_B)
+        public static CIELab CalcPaperScaleLAB(double currentpaper_X, double currentpaper_Y, double currentpaper_Z, double newpaper_X, double newpaper_Y, double newpaper_Z, double newmin_X, double newmin_Y, double newmin_Z, double patch_L, double patch_A, double patch_B)
         {
             CIELab lab = new CIELab(0, 0, 0);
             CIEXYZ xyz = new CIEXYZ(0, 0, 0);
@@ -780,18 +780,13 @@ namespace FujifilmUSA.Sync.Common
             //convert current patch's LAB to XYZ
             xyz = LabtoXYZ(patch_L, patch_A, patch_B);
 
-            ///set the CMYK 100,100,100,100 to zero for now
-            var cmyk100_X = 0;
-            var cmyk100_Y = 0;
-            var cmyk100_Z = 0;
+            var X_C1 = (newpaper_X -currentpaper_X) / (currentpaper_X -  newmin_X);
+            var Y_C1 = (newpaper_Y - currentpaper_Y) / (currentpaper_Y - newmin_Y);
+            var Z_C1 = (newpaper_Z - currentpaper_Z) / (currentpaper_Z - newmin_Z);
 
-            var X_C1 = (newpaper_X -currentpaper_X) / (currentpaper_X -  cmyk100_X);
-            var Y_C1 = (newpaper_Y - currentpaper_Y) / (currentpaper_Y - cmyk100_Y);
-            var Z_C1 = (newpaper_Z - currentpaper_Z) / (currentpaper_Z - cmyk100_Z);
-
-            var X_C2 = X_C1 * cmyk100_X;
-            var Y_C2 = Y_C1 * cmyk100_Y;
-            var Z_C2 = Z_C1 * cmyk100_Z;
+            var X_C2 = X_C1 * newmin_X;
+            var Y_C2 = Y_C1 * newmin_Y;
+            var Z_C2 = Z_C1 * newmin_Z;
 
             var NewX = (xyz.X * (1 + X_C1)) - X_C2;
             var NewY = (xyz.Y * (1 + Y_C1)) - Y_C2;

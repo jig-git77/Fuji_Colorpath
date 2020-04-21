@@ -9,5 +9,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int OptimizeRunID { get; set; }
         int MasterRunID { get; set; }
         EOptimizeRunStatus RunStatus { get; set; }
+        int SpotProjectId { get; set; }
     }
 }

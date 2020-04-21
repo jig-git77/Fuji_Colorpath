@@ -211,7 +211,7 @@
     <value>Multi Color Custom Source</value>
   </data>
   <data name="ELicenseType_SpotLibrary" xml:space="preserve">
-    <value>Spot Color Library</value>
+    <value>Brand Color Optimization</value>
   </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>INVALID</value>
@@ -957,6 +957,12 @@
   <data name="EInkOrder_YMKC" xml:space="preserve">
     <value>YMKC</value>
   </data>
+  <data name="EPrintingTypes_Offset" xml:space="preserve">
+    <value>Offset</value>
+  </data>
+  <data name="EPrintingTypes_Flexo" xml:space="preserve">
+    <value>Flexo</value>
+  </data>
   <data name="Error_InsertLookupTVILABDensity" xml:space="preserve">
     <value>Error occured while inserting Sync1D TVI LAB and Density values.Please contact your administrator.</value>
   </data>
@@ -983,5 +989,380 @@
   </data>
   <data name="ProfilerOptions_JavascriptDensityRange" xml:space="preserve">
     <value>Density value should be between 0 to 2</value>
+  </data>
+  <data name="actualText" xml:space="preserve">
+    <value>Actual</value>
+  </data>
+  <data name="aText" xml:space="preserve">
+    <value>a*</value>
+  </data>
+  <data name="bText" xml:space="preserve">
+    <value>b*</value>
+  </data>
+  <data name="deltaAText" xml:space="preserve">
+    <value>Δa*</value>
+  </data>
+  <data name="deltaBText" xml:space="preserve">
+    <value>Δb*</value>
+  </data>
+  <data name="deltaLText" xml:space="preserve">
+    <value>ΔL*</value>
+  </data>
+  <data name="gbPatchMetricsText" xml:space="preserve">
+    <value>% GB Patch Metrics</value>
+  </data>
+  <data name="lText" xml:space="preserve">
+    <value>L*</value>
+  </data>
+  <data name="targetText" xml:space="preserve">
+    <value>Target</value>
+  </data>
+  <data name="blackPathMetrics" xml:space="preserve">
+    <value>Black Patch Metrics</value>
+  </data>
+  <data name="bluePathMetrics" xml:space="preserve">
+    <value>Blue Patch Metrics</value>
+  </data>
+  <data name="cyanPathMetrics" xml:space="preserve">
+    <value>Cyan Patch Metrics</value>
+  </data>
+  <data name="greenPathMetrics" xml:space="preserve">
+    <value>Green Patch Metrics</value>
+  </data>
+  <data name="magentaPathMetrics" xml:space="preserve">
+    <value>Magenta Patch Metrics</value>
+  </data>
+  <data name="paperPathMetrics" xml:space="preserve">
+    <value>Paper Patch Metrics</value>
+  </data>
+  <data name="redPathMetrics" xml:space="preserve">
+    <value>Red Patch Metrics</value>
+  </data>
+  <data name="yellowPathMetrics" xml:space="preserve">
+    <value>Yellow Patch Metrics</value>
+  </data>
+  <data name="aBalanceChartTitle" xml:space="preserve">
+    <value>a* Balance Gray Chart</value>
+  </data>
+  <data name="bBalanceChartTitle" xml:space="preserve">
+    <value>b* Balance Gray Chart</value>
+  </data>
+  <data name="lBalanceChartTitle" xml:space="preserve">
+    <value>L* Balance Gray Chart</value>
+  </data>
+  <data name="Error_Invalid_IsAverageOfMeasurements" xml:space="preserve">
+    <value>Invalid IsAverageOfMeasurements have been provided.</value>
+  </data>
+  <data name="Error_Invalid_IsSync1DTypeProject" xml:space="preserve">
+    <value>Invalid Sync1DType have been provided.</value>
+  </data>
+  <data name="Error_Invalid_IsVerificationProject" xml:space="preserve">
+    <value>Invalid varification have been provided.</value>
+  </data>
+  <data name="Error_Invalid_MeasurementId" xml:space="preserve">
+    <value>Invalid MeasurementId have been provided.</value>
+  </data>
+  <data name="ProjectList_DeleteSpotProject_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete all information of selected Spot Target Project?</value>
+  </data>
+  <data name="GridDateTimeColumnResource1" xml:space="preserve">
+    <value>Last Active</value>
+  </data>
+  <data name="GridTemplateColumnResource0" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="GridTemplateColumnResource1" xml:space="preserve">
+    <value>Validation</value>
+  </data>
+  <data name="GridTemplateColumnResource2" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="GridTemplateColumnResource3" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="GridTemplateColumnResource4" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="GridTemplateColumnResource5" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="GridTemplateColumnResource6" xml:space="preserve">
+    <value>Colorant</value>
+  </data>
+  <data name="GridTemplateColumnResourceLibrary" xml:space="preserve">
+    <value>Library</value>
+  </data>
+  <data name="ToolTipClickToShort" xml:space="preserve">
+    <value>Click here to sort</value>
+  </data>
+  <data name="Error_DeleteOptimizeRunNCP" xml:space="preserve">
+    <value>Error occured while deleting optimize run's NCP.Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetLastOptimizedNamedColorProfile" xml:space="preserve">
+    <value>Error occured while retrieving last optimized named color profile. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetSpotProjectDetail" xml:space="preserve">
+    <value>Error occured while retrieving spot project detail. Please contact your administrator.</value>
+  </data>
+  <data name="Error_OptimizeNamedColorProfile" xml:space="preserve">
+    <value>Error occured while optimizing named color profile. Please contact your administrator.</value>
+  </data>
+  <data name="ESourceProfileCategory_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="ESourceProfileCategory_NorthAmericanStandards" xml:space="preserve">
+    <value>North American Standards</value>
+  </data>
+  <data name="ESourceProfileCategory_EuropeanStandards" xml:space="preserve">
+    <value>European Standards</value>
+  </data>
+  <data name="ESourceProfileCategory_JapanStandards" xml:space="preserve">
+    <value>Japan Standards</value>
+  </data>
+  <data name="ESourceProfileCategory_Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="ClearFillterResource" xml:space="preserve">
+    <value>Clear Filter</value>
+  </data>
+  <data name="CreateNewLibrary" xml:space="preserve">
+    <value>Create New Library</value>
+  </data>
+  <data name="MsgDeleteProject" xml:space="preserve">
+    <value>Delete Project</value>
+  </data>
+  <data name="OpenProject" xml:space="preserve">
+    <value>Open Project</value>
+  </data>
+  <data name="MsgNoRecords" xml:space="preserve">
+    <value>No records to display.</value>
+  </data>
+  <data name="gridAnalyzeHeaderDeltaAResource" xml:space="preserve">
+    <value>pΔa</value>
+  </data>
+  <data name="gridAnalyzeHeaderDeltaBesource" xml:space="preserve">
+    <value>pΔb</value>
+  </data>
+  <data name="gridAnalyzeHeaderDeltaEResource" xml:space="preserve">
+    <value>pΔE</value>
+  </data>
+  <data name="gridAnalyzeHeaderDeltaLResource" xml:space="preserve">
+    <value>pΔL</value>
+  </data>
+  <data name="gridAnalyzeHeaderEMPResource" xml:space="preserve">
+    <value>ΔE_M_P</value>
+  </data>
+  <data name="gridAnalyzeHeaderEMTResource" xml:space="preserve">
+    <value>ΔE_M_T</value>
+  </data>
+  <data name="gridAnalyzeHeaderETPResource" xml:space="preserve">
+    <value>ΔE_T_P</value>
+  </data>
+  <data name="gridAnalyzeHeaderIDResource" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="gridAnalyzeHeaderPatchResource" xml:space="preserve">
+    <value>Patch</value>
+  </data>
+  <data name="gridAnalyzeHeaderSpotNameResource" xml:space="preserve">
+    <value>Spot Name</value>
+  </data>
+  <data name="gridAnalyzeHeaderViewResource" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="gridAnalyzeToolTipViewResource" xml:space="preserve">
+    <value>View Patch Details</value>
+  </data>
+  <data name="NCPText" xml:space="preserve">
+    <value>NCP</value>
+  </data>
+  <data name="blackText" xml:space="preserve">
+    <value>Black</value>
+  </data>
+  <data name="blueText" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="cyanText" xml:space="preserve">
+    <value>Cyan</value>
+  </data>
+  <data name="Error_Invalid_DeltaEValue" xml:space="preserve">
+    <value>Invalid Delta E value has been provided.</value>
+  </data>
+  <data name="greenText" xml:space="preserve">
+    <value>Green</value>
+  </data>
+  <data name="magentaText" xml:space="preserve">
+    <value>Magenta</value>
+  </data>
+  <data name="paperText" xml:space="preserve">
+    <value>Paper</value>
+  </data>
+  <data name="redText" xml:space="preserve">
+    <value>Red</value>
+  </data>
+  <data name="tripletPathMetrics" xml:space="preserve">
+    <value>3-C Patch Metrics</value>
+  </data>
+  <data name="tripletText" xml:space="preserve">
+    <value>3-C</value>
+  </data>
+  <data name="yellowText" xml:space="preserve">
+    <value>Yellow</value>
+  </data>
+  <data name="deltaEText" xml:space="preserve">
+    <value>ΔE</value>
+  </data>
+  <data name="PreviousText" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="PreDeltaE" xml:space="preserve">
+    <value>Previous ΔE</value>
+  </data>
+  <data name="gridAnalyzeHeaderCIELAB_AResource" xml:space="preserve">
+    <value>Actual a*</value>
+  </data>
+  <data name="gridAnalyzeHeaderCIELAB_BResource" xml:space="preserve">
+    <value>Actual b*</value>
+  </data>
+  <data name="gridAnalyzeHeaderCIELAB_LResource" xml:space="preserve">
+    <value>Actual L*</value>
+  </data>
+  <data name="gridAnalyzeHeaderDelta_CHResource" xml:space="preserve">
+    <value>ΔCh</value>
+  </data>
+  <data name="gridAnalyzeHeaderDelta_HResource" xml:space="preserve">
+    <value>ΔH</value>
+  </data>
+  <data name="gridAnalyzeHeaderDelta_LResource" xml:space="preserve">
+    <value>ΔL</value>
+  </data>
+  <data name="gridAnalyzeHeaderDensity_CResource" xml:space="preserve">
+    <value>Density_C</value>
+  </data>
+  <data name="gridAnalyzeHeaderDensity_MResource" xml:space="preserve">
+    <value>Density_M</value>
+  </data>
+  <data name="gridAnalyzeHeaderDensity_VResource" xml:space="preserve">
+    <value>Density_V</value>
+  </data>
+  <data name="gridAnalyzeHeaderDensity_YResource" xml:space="preserve">
+    <value>Density_Y</value>
+  </data>
+  <data name="gridAnalyzeHeaderE2000Resource" xml:space="preserve">
+    <value>ΔE2000</value>
+  </data>
+  <data name="gridAnalyzeHeaderE94Resource" xml:space="preserve">
+    <value>ΔE94</value>
+  </data>
+  <data name="gridAnalyzeHeaderTargetAResource" xml:space="preserve">
+    <value>Target a*</value>
+  </data>
+  <data name="gridAnalyzeHeaderTargetBResource" xml:space="preserve">
+    <value>Target b*</value>
+  </data>
+  <data name="gridAnalyzeHeaderTargetLResource" xml:space="preserve">
+    <value>Target L*</value>
+  </data>
+  <data name="gridAnalyzeHeader_C_Resource" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="gridAnalyzeHeader_E_Resource" xml:space="preserve">
+    <value>ΔE</value>
+  </data>
+  <data name="gridAnalyzeHeader_K_Resource" xml:space="preserve">
+    <value>K</value>
+  </data>
+  <data name="gridAnalyzeHeader_M_Resource" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="gridAnalyzeHeader_Y_Resource" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="selectMeasurementMsg" xml:space="preserve">
+    <value>Atleast one measurement should be checked</value>
+  </data>
+  <data name="Error_Invalid_ProjectId" xml:space="preserve">
+    <value>Invalid ProjectId has been provided.</value>
+  </data>
+  <data name="Error_Invalid_GradingDetails" xml:space="preserve">
+    <value>Invalid Grading details have been provided.</value>
+  </data>
+  <data name="actualTVI" xml:space="preserve">
+    <value>Actual TVI:</value>
+  </data>
+  <data name="patchMetricsText" xml:space="preserve">
+    <value>Patch Metrics</value>
+  </data>
+  <data name="targetTVI" xml:space="preserve">
+    <value>Target TVI:</value>
+  </data>
+  <data name="TVIThr" xml:space="preserve">
+    <value>TVI Threashold</value>
+  </data>
+  <data name="percentPatchMetrics" xml:space="preserve">
+    <value>% Patch Metrics</value>
+  </data>
+  <data name="Error_Invalid_CurveType" xml:space="preserve">
+    <value>Invalid curve type value has been provided.</value>
+  </data>
+  <data name="Error_Invalid_OptimizationRunID" xml:space="preserve">
+    <value>Invalid OptimizationRun id value has been provided.</value>
+  </data>
+  <data name="Error_Invalid_ValidationType" xml:space="preserve">
+    <value>Invalid validation type value has been provided.</value>
+  </data>
+  <data name="SpotProject_Open" xml:space="preserve">
+    <value>Spot Project</value>
+  </data>
+  <data name="SpotProject_Certified" xml:space="preserve">
+    <value>Spot Project Certified</value>
+  </data>
+  <data name="locLabelAct" xml:space="preserve">
+    <value>Act.</value>
+  </data>
+  <data name="locLabelCustomer" xml:space="preserve">
+    <value>Customer:</value>
+  </data>
+  <data name="locLabelDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="locLabeldEType" xml:space="preserve">
+    <value>dE Type:</value>
+  </data>
+  <data name="locLabelDevice" xml:space="preserve">
+    <value>Device:</value>
+  </data>
+  <data name="locLabelJDFJobID" xml:space="preserve">
+    <value>JDF Job ID:</value>
+  </data>
+  <data name="locLabelJob" xml:space="preserve">
+    <value>Job:</value>
+  </data>
+  <data name="locLabelMetric" xml:space="preserve">
+    <value>Metric:</value>
+  </data>
+  <data name="locLabelPageOrSurface" xml:space="preserve">
+    <value>Page/Surface:</value>
+  </data>
+  <data name="locLabelSignature" xml:space="preserve">
+    <value>Signature</value>
+  </data>
+  <data name="locLabelStandard" xml:space="preserve">
+    <value>Standard:</value>
+  </data>
+  <data name="locLabelTimestamp" xml:space="preserve">
+    <value>Timestamp:</value>
+  </data>
+  <data name="locLabelTol" xml:space="preserve">
+    <value>Tol.</value>
+  </data>
+  <data name="SpotTargetManagement_DeleteSpot_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete selected source target?</value>
+  </data>
+  <data name="ESourceProfileCategory_CustomStandards" xml:space="preserve">
+    <value>Custom Source Profile</value>
+  </data>
+  <data name="Error_Invalid_SpotExportLibraryType" xml:space="preserve">
+    <value>Invalid library type value has been provided.</value>
   </data>
 </root>

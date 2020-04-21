@@ -201,4 +201,7 @@
   <data name="locReTargetProjResource1.Text" xml:space="preserve">
     <value>再補正での元プロジェクト：</value>
   </data>
+  <data name="locSpotTargetResource1.Text" xml:space="preserve">
+    <value>Spot Target</value>
+  </data>
 </root>

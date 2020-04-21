@@ -37,15 +37,33 @@ namespace FujifilmUSA.Sync.Entity
 
         public List<CPSync1D.ProjectTargetLAB> ProjectTargetLAB { get; set; }
         public List<CPSync1D.ProjectTargetDensity> ProjectTargetDensity { get; set; }
+        public List<CPSync1D.ProjectTargetHueAngle> ProjectTargetHueAngle { get; set; }
 
         public DensityTypes DensityType { get; set; }
         public PCSDataTypes PCSDataTypes { get; set; }
         public int ReTargetProjectID { get; set; }
+        public string ReTargetProjectName { get; set; }
+        public int ReTargetProjectBranchID { get; set; }
+        public int ReTargetProjectDeviceID { get; set; }
         public short CurveTypeID { get; set; }
         public bool Is1DMeasurementSmoothing { get; set; }
         
        // public List<CPSpot.SpotProjectLibrary> SpotProjectLibraryList { get; set; }
         public CPSpot.SpotProjectLibrary SpotTargetProject { get; set; }
         public int SpotTargetMasterProjectID { get; set; }
+<<<<<<< HEAD
+=======
+        public bool HasSpotProject { get; set; }
+
+        public bool EnabledPaperScaling { get; set; }
+        public decimal NewPaper_White_L { get; set; }
+        public decimal NewPaper_White_a { get; set; }
+        public decimal NewPaper_White_b { get; set; }
+        public decimal NewPaper_Black_L { get; set; }
+        public decimal NewPaper_Black_a { get; set; }
+        public decimal NewPaper_Black_b { get; set; }
+
+        public short IsCustomProfileOptions { get; set; }
+>>>>>>> ColorPath-Production
     }
 }

@@ -204,7 +204,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
 
         public DataTable dtPatchDetails { get; set; }
-
+        public List<SpotProjectLAB> SpotProjectLabs { get; set; }
         public bool useDLP { get; set; }
         public byte[] DeviceLinkProfile { get; set; }
 
@@ -228,9 +228,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public bool IsAverageOfMeasurements { get; set; }
         public bool Is1DMeasurementSmoothing { get; set; }
-
+        public int ProjectStatus { get; set; }
+        public Project Project { get; set; }
+        public int SpotProjectId { get; set; }
+        public bool IsUsed { get; set; }
         #endregion
 
-       
+
     }
 }

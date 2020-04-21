@@ -663,4 +663,55 @@
   <data name="PreviousText" xml:space="preserve">
     <value>Previous_ja</value>
   </data>
+  <data name="ValidationSummaryCustomer.Text" xml:space="preserve">
+    <value>顧客：</value>
+  </data>
+  <data name="ValidationSummaryEType.Text" xml:space="preserve">
+    <value>ΔEタイプ：</value>
+  </data>
+  <data name="ValidationSummaryJob.Text" xml:space="preserve">
+    <value>ジョブ：</value>
+  </data>
+  <data name="ValidationSummaryJobID.Text" xml:space="preserve">
+    <value>JDFジョブID：</value>
+  </data>
+  <data name="ValidationSummaryMeasurementID.Text" xml:space="preserve">
+    <value>測色ID：</value>
+  </data>
+  <data name="ValidationSummaryMetricPreset.Text" xml:space="preserve">
+    <value>判定基準プリセット：</value>
+  </data>
+  <data name="ValidationSummaryNotes.Text" xml:space="preserve">
+    <value>メモ：</value>
+  </data>
+  <data name="ValidationSummaryPageSurface.Text" xml:space="preserve">
+    <value>ページ/面：</value>
+  </data>
+  <data name="ValidationSummaryPrintStd.Text" xml:space="preserve">
+    <value>印刷標準：</value>
+  </data>
+  <data name="ValidationSummaryTimestamp.Text" xml:space="preserve">
+    <value>時間：</value>
+  </data>
+  <data name="ValidationSummaryMeasurementName.Text" xml:space="preserve">
+    <value>測色名:</value>
+  </data>
+  <data name="ValidationSummaryStatus.Text" xml:space="preserve">
+    <value>ステータス：</value>
+  </data>
+  <data name="GridMeasuredValue.Text" xml:space="preserve">
+    <value>実測</value>
+  </data>
+  <data name="GridMetricSumName.Text" xml:space="preserve">
+    <value>判定基準</value>
+  </data>
+  <data name="GridTargetValue.Text" xml:space="preserve">
+    <value>許容</value>
+  </data>
+  <data name="GridPatchTolSampleName.Text" xml:space="preserve">
+    <value>Sample Name</value>
+  </data>
+  <data name="GridToleranceValue.Text" xml:space="preserve">
+    <value>許容誤差</value>
+  </data>
 </root>

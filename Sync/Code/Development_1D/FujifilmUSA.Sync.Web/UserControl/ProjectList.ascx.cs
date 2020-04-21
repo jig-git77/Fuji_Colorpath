@@ -7,6 +7,8 @@ using Telerik.Web.UI;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using System.Linq;
+using FujifilmUSA.Sync.Entity.CPSpot;
+using Newtonsoft.Json;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -17,7 +19,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recvalidationStatusNotCertified = "validationStatusNotCertified";
         private const string _recvalidationStatusDisabled = "validationStatusDisabled";
         private const string _recvalidationStatusLastOK = "validationStatusLastOK";
-        private const string _recvalidationStatusLastFailed = "validationStatusLastFailed"; 
+        private const string _recvalidationStatusLastFailed = "validationStatusLastFailed";
         #endregion
 
         #region Variable Declaration
@@ -29,12 +31,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("ProjectList_DeleteProject_Confirmation");
             }
         }
+        public string ProjectListDeleteSpotProjectConfirmation
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("ProjectList_DeleteSpotProject_Confirmation");
+            }
+        }
+        public int JsRandomNumber { get { return new Random().Next(1, 100); } }
+        public string JsRandomGuid { get { return Guid.NewGuid().ToString(); } }
         #endregion
         public ProjectList()
         {
             this.Init += (sender, e) => this.ExceptionHandling(Page_Init, sender, e);
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
-            this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
         }
 
         #region Page Events
@@ -44,73 +54,43 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (SessionManager.Instance.CurrentUser != null && !SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
             {
-                lbtnCreateNewPrintCondition.Visible = false;
+                lbtnCreateNewPrintCondition.Visible = false;                
             }
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            rgProjectList.PageSize = Common.Utilities.PageSize;
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Device;
                 //set dlpsuboperation session to none everytime page loads fresh(!ispostback)...
                 SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
+                hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
+                hdfHasDeletePermission.Value = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject).ToString();
+                hdfCurrentUser.Value = Convert.ToString(SessionManager.Instance.CurrentUser.UserId);
+                hdfCurrentDeviceID.Value = Convert.ToString(SessionManager.Instance.CurrentDevice.DeviceId);
+                hdfCurrentCulture.Value = getCurrentCultureLanguage();
+                hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
             }
         }
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-            //------------Apply default CurrentFilterFunction for "CreateDate" column of rgProjectList RadGrid-----------------//
-            rgProjectList.Columns.FindByDataField("CreateDate").CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;
-        }
+    
         #endregion
 
         #region Control events
-        protected void rgProjectList_ItemCreated(object sender, GridItemEventArgs e)
-        {
-            if (e.Item.ItemType == GridItemType.FilteringItem)
-            {
 
-                RadComboBox rcmbLicenseType = e.Item.FindControl("rcmbLicenseType") as RadComboBox;
-                if (rcmbLicenseType != null)
-                {
-                    if (SessionManager.Instance.CurrentDevice != null && SessionManager.Instance.CurrentDevice.LicenseTypeProject != null && SessionManager.Instance.CurrentDevice.LicenseTypeProject.Count > 0)
-                    {
-                        foreach (KeyValuePair<ELicenseType, int> item in SessionManager.Instance.CurrentDevice.LicenseTypeProject)
-                        {
-                            rcmbLicenseType.Items.Add(new RadComboBoxItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = item.Key.ToString() });
-                        }
-
-                        rcmbLicenseType.Items.Insert(0, new RadComboBoxItem() { Text = GetResourceString(_recallText), Value = "" });
-                        rcmbLicenseType.SelectedIndex = 0;
-                    }
-                }
-
-                RadComboBox rcmbValidationStatus = e.Item.FindControl("rcmbValidationStatus") as RadComboBox;
-                if (rcmbValidationStatus != null)
-                {
-                    rcmbValidationStatus.Items.Clear();
-                    rcmbValidationStatus.Items.Add(new RadComboBoxItem() { Text = GetResourceString(_recvalidationStatusNotCertified), Value = "NotCertified" });
-                    rcmbValidationStatus.Items.Add(new RadComboBoxItem() { Text = GetResourceString(_recvalidationStatusDisabled), Value = "Disabled" });
-                    rcmbValidationStatus.Items.Add(new RadComboBoxItem() { Text = GetResourceString(_recvalidationStatusLastOK), Value = "LastOK" });
-                    rcmbValidationStatus.Items.Add(new RadComboBoxItem() { Text = GetResourceString(_recvalidationStatusLastFailed), Value = "LastFailed" });
-
-                    rcmbValidationStatus.Items.Insert(0, new RadComboBoxItem() { Text = GetResourceString(_recallText), Value = "" });
-                    rcmbValidationStatus.SelectedIndex = 0;
-                }
-            }
-        }
         protected void lbtnCreateNewPrintCondition_Click(object sender, EventArgs e)
         {
+            //GetProjectList(); //---T0 assign projects list in session-------//
             //------------Create new Project under this Device-----------------//
             SessionManager.Instance.CurrentProject = new Project()
-                                                         {
-                                                             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
-                                                             IsUsed = true,
-                                                             CurrentDisplayStatus = ECurrentProjectStatus.New
-                                                         };
+            {
+                DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
+                IsUsed = true,
+                CurrentDisplayStatus = ECurrentProjectStatus.New
+            };
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
             Response.Redirect("AddProject.aspx");
         }
+<<<<<<< HEAD
         protected void rgProjectList_ItemCommand(object sender, GridCommandEventArgs e)
         {
             switch (e.CommandName)
@@ -391,26 +371,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
             var dateValue = item.OwnerTableView.GetColumn("CreateDate").CurrentFilterValue.Split(' ')[0];
             return DateTime.Parse(dateValue);
         }
+=======
+        #endregion
+
+        #region Method
+>>>>>>> ColorPath-Production
         private void GetProjectList()
         {
             Projects = new List<Project>();
             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
             //Now we are passing LicenseTypeID as None to bring all projects based on DeviceId
-            //LicenseTypeID = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
             LicenseTypeID = Convert.ToInt32(ELicenseType.None);
             _presenterProjectList.GetProjectListByDeviceId();
             if (!IsErrorOccured)
             {
                 SessionManager.Instance.ProjectList = Projects;
-                rgProjectList.DataSource = Projects;
             }
         }
-        private void DeleteProject(int projectId)
-        {
-            ProjectId = projectId;
-            _presenterProjectList.DeleteProject();
-        }
-        #endregion
+        #endregion       
 
         #region IViewProjectList Members
         public List<Project> Projects { get; set; }
@@ -420,7 +398,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int DeviceId { get; set; }
         public int LicenseTypeID { get; set; }
         public Project Project { get; set; }
-        public List<Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
+        //public List<Entity.CPSpot.SpotProjectLibrary> SpotProjectLibraries { get; set; }
+        public SpotProjectList SpotProjectList { get; set; }
+        public int SpotProjectId { get; set; }
 
         #endregion
     }

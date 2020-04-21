@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="FujiFilmUSA.Sync.PluginService.Service1" CodeBehind="Service1.svc.cs" %>

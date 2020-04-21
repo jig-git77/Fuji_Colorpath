@@ -52,6 +52,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         sourceProfile.ProfileName,
                                         sourceProfile.ProfileDesc,
                                         sourceProfile.Profile,
+                                        sourceProfile.Category,
                                         sourceProfile.IsUsed
                                     });
                     if (returnValue == -1)
@@ -81,6 +82,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         sourceProfile.ProfileName,
                                         sourceProfile.ProfileDesc,
                                         sourceProfile.Profile,
+                                        sourceProfile.Category,
                                         sourceProfile.IsUsed
                                     });
                     if (returnValue == -1)
@@ -125,6 +127,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 ProfileName = DataReader.ReadString(x, "ProfileName"),
                                                 ProfileDesc = DataReader.ReadString(x, "ProfileDesc"),
                                                 Profile = DataReader.ReadByteArray(x, "Profile"),
+                                                Category = DataReader.ReadInt(x, "Category"),
                                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
                                                 Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyID"), CompanyName = DataReader.ReadString(x, "CompanyName") },
                                                 Region = new Region() { RegionId = DataReader.ReadShort(x, "RegionId"), RegionName = DataReader.ReadString(x, "Region") }

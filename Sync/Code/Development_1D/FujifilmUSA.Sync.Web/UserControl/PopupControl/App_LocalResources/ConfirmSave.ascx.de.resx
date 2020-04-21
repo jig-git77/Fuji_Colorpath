@@ -162,4 +162,10 @@
   <data name="optimizeCompleteMsg" xml:space="preserve">
     <value>Wenn die Optimierung fertig ist, {0} auf den Workflow anwenden und das Chart {1} noch einmal drucken.</value>
   </data>
+  <data name="locOptimizeDLPResource1NCP" xml:space="preserve">
+    <value>Optimize creates new optimized NCP which should be implemented in your workflow.</value>
+  </data>
+  <data name="locSatisfiedColorMatchMsgResource1NCP" xml:space="preserve">
+    <value>Certify sets the state of this NCP to Certified and is considered a confirmation that your are satisfied with the colormatch.</value>
+  </data>
 </root>

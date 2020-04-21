@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A647B1B-981C-4BF9-B609-9BA1850AC101}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TaskeroTestApp</RootNamespace>
+    <AssemblyName>TaskeroTestApp</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connected Services\TaskeroColorTuner\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lynx\Db_certification_actions_done.cs" />
+    <Compile Include="Lynx\Db_certification_delta_e_type.cs" />
+    <Compile Include="Lynx\Db_certification_result.cs" />
+    <Compile Include="Lynx\Db_chan_usage.cs" />
+    <Compile Include="Lynx\Db_company_link_event.cs" />
+    <Compile Include="Lynx\Db_company_link_op.cs" />
+    <Compile Include="Lynx\Db_company_link_purpose.cs" />
+    <Compile Include="Lynx\Db_company_link_status.cs" />
+    <Compile Include="Lynx\Db_delta_e_type.cs" />
+    <Compile Include="Lynx\Db_devlink_options.cs" />
+    <Compile Include="Lynx\Db_devlink_settings.cs" />
+    <Compile Include="Lynx\Db_icc_color_space.cs" />
+    <Compile Include="Lynx\Db_iter_options.cs" />
+    <Compile Include="Lynx\Db_iter_status.cs" />
+    <Compile Include="Lynx\Db_job_options.cs" />
+    <Compile Include="Lynx\Db_job_prio_class.cs" />
+    <Compile Include="Lynx\Db_license_costly_ops.cs" />
+    <Compile Include="Lynx\Db_link_log_operation.cs" />
+    <Compile Include="Lynx\Db_manufacturer_products.cs" />
+    <Compile Include="Lynx\Db_measure_mode.cs" />
+    <Compile Include="Lynx\Db_name_or_rule.cs" />
+    <Compile Include="Lynx\Db_preferred_profiler.cs" />
+    <Compile Include="Lynx\Db_process_color.cs" />
+    <Compile Include="Lynx\Db_profile_type.cs" />
+    <Compile Include="Lynx\Db_proof_standard_code.cs" />
+    <Compile Include="Lynx\Db_rendering_intent.cs" />
+    <Compile Include="Lynx\Db_user_denied_reason.cs" />
+    <Compile Include="Lynx\Db_user_expire_type.cs" />
+    <Compile Include="Lynx\Db_user_log_operation.cs" />
+    <Compile Include="Lynx\Db_user_privileges.cs" />
+    <Compile Include="Lynx\NDLG_CPMeasurement.cs" />
+    <Compile Include="Lynx\NDLG_CPMeasurePatchField.cs" />
+    <Compile Include="Lynx\NDLG_CPMeasureValue.cs" />
+    <Compile Include="Lynx\NDLG_CPPrintObject.cs" />
+    <Compile Include="Lynx\NDLG_Dealer.cs" />
+    <Compile Include="Lynx\NDLG_DealerICCProfileSet.cs" />
+    <Compile Include="Lynx\NDLG_DealerPrinterSet.cs" />
+    <Compile Include="Lynx\NDLG_DealerStyleAttribute.cs" />
+    <Compile Include="Lynx\NDLG_DealerTestchartSet.cs" />
+    <Compile Include="Lynx\NDLG_DeviceLinkGen.cs" />
+    <Compile Include="Lynx\NDLG_DeviceLinkIter.cs" />
+    <Compile Include="Lynx\NDLG_DeviceLinkLog.cs" />
+    <Compile Include="Lynx\NDLG_KnownICCProfile.cs" />
+    <Compile Include="Lynx\NDLG_KnownManufacturer.cs" />
+    <Compile Include="Lynx\NDLG_KnownPaper.cs" />
+    <Compile Include="Lynx\NDLG_KnownPrinter.cs" />
+    <Compile Include="Lynx\NDLG_KnownPrinterType.cs" />
+    <Compile Include="Lynx\NDLG_KnownTestchart.cs" />
+    <Compile Include="Lynx\NDLG_LicenseFlatrate.cs" />
+    <Compile Include="Lynx\NDLG_LicensePool.cs" />
+    <Compile Include="Lynx\NDLG_SystemParameter.cs" />
+    <Compile Include="Lynx\NDLG_TestAccountPurpose.cs" />
+    <Compile Include="Lynx\NDLG_TLicenseLog.cs" />
+    <Compile Include="Lynx\NDLG_User.cs" />
+    <Compile Include="Lynx\NDLG_UserAndGroupLog.cs" />
+    <Compile Include="Lynx\NDLG_UserGroup.cs" />
+    <Compile Include="Lynx\NDLG_UserGroupCompanyLink.cs" />
+    <Compile Include="Lynx\NDLG_UserGroupICCProfileSet.cs" />
+    <Compile Include="Lynx\NDLG_UserGroupLinkItem.cs" />
+    <Compile Include="Lynx\NDLG_UserGroupLinkLog.cs" />
+    <Compile Include="Lynx\NDLG_UserGroupMembership.cs" />
+    <Compile Include="Lynx\NDLG_UserGroupPrinterSet.cs" />
+    <Compile Include="Lynx\NDLG_UserGroupTestchartSet.cs" />
+    <Compile Include="Lynx\NDLG_UserPrinterSet.cs" />
+    <Compile Include="Lynx\NDLG_UserSession.cs" />
+    <Compile Include="Lynx\NJM_Job.cs" />
+    <Compile Include="Oris\DB_interface\Column_description.cs" />
+    <Compile Include="Oris\DB_interface\Column_manager.cs" />
+    <Compile Include="Oris\DB_interface\Column_type.cs" />
+    <Compile Include="Oris\DB_interface\Constants.cs" />
+    <Compile Include="Oris\DB_interface\DateAttribute.cs" />
+    <Compile Include="Oris\DB_interface\Db_key_description.cs" />
+    <Compile Include="Oris\DB_interface\Db_key_type.cs" />
+    <Compile Include="Oris\DB_interface\DefaultValueAttribute.cs" />
+    <Compile Include="Oris\DB_interface\Fk_constraint.cs" />
+    <Compile Include="Oris\DB_interface\ForeignKeyAttribute.cs" />
+    <Compile Include="Oris\DB_interface\IndexAttribute.cs" />
+    <Compile Include="Oris\DB_interface\KeyAttribute.cs" />
+    <Compile Include="Oris\DB_interface\LongTextAttribute.cs" />
+    <Compile Include="Oris\DB_interface\NoDefaultAttribute.cs" />
+    <Compile Include="Oris\DB_interface\Oris_db_context.cs" />
+    <Compile Include="Oris\DB_interface\Oris_db_set_TABLE_CLASS_.cs" />
+    <Compile Include="Oris\DB_interface\RequiredAttribute.cs" />
+    <Compile Include="Oris\DB_interface\StringLengthAttribute.cs" />
+    <Compile Include="Oris\DB_interface\TableAttribute.cs" />
+    <Compile Include="Oris\DB_interface\TextAttribute.cs" />
+    <Compile Include="Oris\DB_interface\TimestampAttribute.cs" />
+    <Compile Include="Oris\Lynx_DB_query.cs" />
+    <Compile Include="Oris\Lynx_odbc_intf.cs" />
+    <Compile Include="Oris\Odbc_intf.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaskeroColorTuner\ColorpathTunerClient.cs" />
+    <Compile Include="TaskeroColorTuner\IColorpathTuner.cs" />
+    <Compile Include="TaskeroColorTuner\IColorpathTunerChannel.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Connected Services\TaskeroColorTuner\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TaskeroColorTuner\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TaskeroColorTuner\www.taskero.com.wsdl" />
+    <None Include="Connected Services\TaskeroColorTuner\www.taskero.com.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SendData\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\TaskeroColorTuner\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TaskeroColorTuner\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TaskeroColorTuner\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TaskeroColorTuner\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

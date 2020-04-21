@@ -150,6 +150,9 @@
   <data name="Panel_PaperLABResource1.Text" xml:space="preserve">
     <value>新しい用紙の値：</value>
   </data>
+  <data name="Panel_PaperLABBlackResource1.Text" xml:space="preserve">
+    <value>Min L* value:_ja</value>
+  </data>
   <data name="locChooseMethodResource1.Text" xml:space="preserve">
     <value>カーブ補正方式の選択：</value>
   </data>
@@ -170,5 +173,38 @@
   </data>
   <data name="locbtn_PaperClearResource1.Text" xml:space="preserve">
     <value>リセット</value>
+  </data>
+  <data name="locReTargetResource1.Text" xml:space="preserve">
+    <value>Select Certified Library: </value>
+  </data>
+  <data name="locSelectBranchResource1.Text" xml:space="preserve">
+    <value>Select Branch: </value>
+  </data>
+  <data name="locSelectCompanyResource1.Text" xml:space="preserve">
+    <value>Select Company: </value>
+  </data>
+  <data name="selectText" xml:space="preserve">
+    <value>―選択してください―</value>
+  </data>
+  <data name="locParentProjectNameResource1.Text" xml:space="preserve">
+    <value>Parent Project Name: </value>
+  </data>
+  <data name="locReTargetDescriptionResource1.Text" xml:space="preserve">
+    <value>Original Library Description: </value>
+  </data>
+  <data name="locReTargetLibraryNameResource1.Text" xml:space="preserve">
+    <value>Original Library:</value>
+  </data>
+  <data name="locSelectDeviceResource1.Text" xml:space="preserve">
+    <value>Select Device: </value>
+  </data>
+  <data name="noCertifiedSpotCondition" xml:space="preserve">
+    <value>No Certified Print Condition</value>
+  </data>
+  <data name="panelRetargetResource1.GroupingText" xml:space="preserve">
+    <value>&lt;b&gt;Optional Retarget&lt;/b&gt;</value>
+  </data>
+  <data name="TargetPrintConditionNotAvailableMessage" xml:space="preserve">
+    <value>No Target Print Condition</value>
   </data>
 </root>

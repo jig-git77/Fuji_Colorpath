@@ -16,5 +16,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int ValidationType { get; set; }
         bool IsSync1DType { get; }
         bool IsAverageOfMeasurements { get; }
+        int OptimizeRunId { get; set; }
     }
 }

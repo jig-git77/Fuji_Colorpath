@@ -204,4 +204,7 @@
   <data name="locAlignmentChart1Resource1.Text1" xml:space="preserve">
     <value>Kontrollelement</value>
   </data>
+  <data name="locSpotTargetResource1.Text" xml:space="preserve">
+    <value>Spot Target de</value>
+  </data>
 </root>

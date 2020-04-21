@@ -32,7 +32,49 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
-            projectBusiness.ImportMeasurements(_viewImportMeasurements.MeasurementID, _viewImportMeasurements.OptimizeRunID);
+            projectBusiness.ImportMeasurements(_viewImportMeasurements.MeasurementID, _viewImportMeasurements.OptimizeRunID, _viewImportMeasurements.LicenseTypeID, _viewImportMeasurements.UserID);
+        }
+
+        public void CreateSpotProjectInitialOptimization()
+        {            
+            var projectOptimization = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            projectOptimization.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+            projectOptimization.CreateSpotNamedColorProfile(_viewImportMeasurements.ProjectId, _viewImportMeasurements.OptimizeRunID, (int)EOptimizeRunStatus.Closed,DateTime.Now);
+        }
+
+        //public void ImportMeasurementFile()
+        //{
+        //    var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+        //    measurementBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+        //    _viewImportMeasurements.MeasurementID = measurementBusiness.ImportMeasurement(_viewImportMeasurements.Measurement, _viewImportMeasurements.LicenseTypeID);
+        //}
+
+        //public void ImportSpotMeasurementFile()
+        //{
+        //    var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+        //    measurementBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+        //    _viewImportMeasurements.MeasurementID = measurementBusiness.ImportMeasurement(_viewImportMeasurements.Measurement, _viewImportMeasurements.LicenseTypeID);
+        //}
+
+        //public void Import1DMeasurementFile()
+        //{
+        //    var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+        //    measurementBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+        //    _viewImportMeasurements.MeasurementID = measurementBusiness.ImportMeasurement(_viewImportMeasurements.Measurement, _viewImportMeasurements.LicenseTypeID);
+        //}
+
+        //public void ImportValidationMeasurementFile()
+        //{
+        //    var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+        //    measurementBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+        //    _viewImportMeasurements.MeasurementID = measurementBusiness.ImportMeasurement(_viewImportMeasurements.Measurement, _viewImportMeasurements.LicenseTypeID);
+        //}
+
+        public void ImportMeasurementsFile()
+        {
+            var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+            _viewImportMeasurements.MeasurementID = measurementBusiness.ImportMeasurement(_viewImportMeasurements.Measurement, _viewImportMeasurements.LicenseTypeID,_viewImportMeasurements.UserID);
         }
     }
 }

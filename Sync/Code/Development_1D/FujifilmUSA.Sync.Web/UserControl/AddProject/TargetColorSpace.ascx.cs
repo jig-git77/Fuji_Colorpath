@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using System.Web.UI.WebControls;
+using FujifilmUSA.Sync.Entity.CPSpot;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -23,6 +24,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private const string _vsPrintStandardType = "vsPrintStandardType";
         private const string _vsSpotTarget = "vsSpotTarget";
+        private const string _recSelect = "selectText";
+        private const string _recNoCertifiedSpotCondition = "noCertifiedSpotCondition";
+        private const string _recTargetPrintConditionNotAvailableMessage = "TargetPrintConditionNotAvailableMessage";
+        
 
         private PresenterTargetColorspace _presenterTargetColorspace;
         #endregion
@@ -42,20 +47,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (ViewState[_vsPrintStandardType] == null)
             {
                 btn_PaperClear.Visible = false;
+                BindTargetPrintCategory();
                 BindProfileSource();
                 BindPCSDataType(); //Load PCSDataType 
-                BindSpotTarget(); //Load Spot Target List
+
                 PanelProjectType.GroupingText = "<b>" + GetResourceString("PanelProjectType") + "</b>";
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
                 {
                     trTargetLAB.Visible = false;
                     trProjectType.Visible = false;
                 }
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification)
+                {
+                    trPaperScaling_4D.Visible = true;
+                }
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
                 {
+                    BindSpotTarget(); //Load Spot Target List
+                    BindBranches();
                     trListHeader.Visible = false;
                     trTargetLAB.Visible = false;
                     trSpotTarget.Visible = true;
+                    trMeasurementMode.Visible = false;
                 }
                 LoadProjectInfoFromSession();
             }
@@ -91,16 +104,36 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentProject.ProjectTargetLAB = GetTargetLAB();
                 SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
+
+                //------If 1D project then pass NewPaperScaling LAB values--------//
+                SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(txtPaper_L.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(txtPaper_a.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(txtPaper_b.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_Black_L = Convert.ToDecimal(txtPaper_Black_L.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_Black_a = Convert.ToDecimal(txtPaper_Black_a.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_Black_b = Convert.ToDecimal(txtPaper_Black_b.Text);
             }
             else
             {
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
-                    SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification)
+                {
+                    if(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
+                        SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
+
+                    //------If 4D project then pass NewPaperScaling LAB values--------//
+                    SessionManager.Instance.CurrentProject.EnabledPaperScaling = chk_IsPaperScaling4D.Checked;
+                    SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(txtPaper_L_4D_White.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(txtPaper_a_4D_White.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(txtPaper_b_4D_White.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_Black_L = Convert.ToDecimal(txtPaper_L_4D_Black.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_Black_a = Convert.ToDecimal(txtPaper_a_4D_Black.Text);
+                    SessionManager.Instance.CurrentProject.NewPaper_Black_b = Convert.ToDecimal(txtPaper_b_4D_Black.Text);
+                }
                 else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
                     SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.InkOptimization;
             }
             SessionManager.Instance.CurrentProject.PCSDataTypes = (PCSDataTypes)Convert.ToInt16(cmbPCSDataType.SelectedValue); //PCSDataType Selection 
-            
+
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
 
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
@@ -108,20 +141,40 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void cmbPrintStandardType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ViewState[_vsPrintStandardType] != null)
+            //List<Entity.CPSync1D.PrintStandardType> listProfileCondition = (List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType];
+
+            //if (ViewState[_vsPrintStandardType] != null && listProfileCondition.Count > 0)
+            //{                
+            //        txtProfileDescription.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileDesc;
+            //        lblSourceProfileName.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileName;
+            //}
+            //else
+            //{
+            //    txtProfileDescription.Text = lblSourceProfileName.Text = GetResourceString(_recTargetPrintConditionNotAvailableMessage);                                 
+            //}
+
+            if (!string.IsNullOrEmpty(cmbPrintStandardType.SelectedValue))
             {
-                txtProfileDescription.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileDesc;
-                lblSourceProfileName.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileName;
+                if (ViewState[_vsPrintStandardType] != null)
+                {
+                    txtProfileDescription.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileDesc;
+                    lblSourceProfileName.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileName;
+                }
             }
+            else
+            {
+                txtProfileDescription.Text = lblSourceProfileName.Text = GetResourceString(_recTargetPrintConditionNotAvailableMessage);
+            }
+            
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                 cmbProjectType_SelectedIndexChanged(null, null);
+                cmbProjectType_SelectedIndexChanged(null, null);
         }
 
         protected void cmbProjectType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
-                if(ViewState[_vsPrintStandardType] != null)
+                if (ViewState[_vsPrintStandardType] != null)
                 {
                     BindTargetLAB();
                 }
@@ -144,6 +197,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 CIELab Finallab = new CIELab(0, 0, 0);
                 CIEXYZ CurrentPaperxyz = new CIEXYZ(0, 0, 0);
                 CIEXYZ NewPaperxyz = new CIEXYZ(0, 0, 0);
+                CIEXYZ NewMinxyz = new CIEXYZ(0, 0, 0);
+
 
                 //Create list for Paper Patch
                 List<Entity.CPSync1D.ProjectTargetLAB> PaperProjectTargetList = new List<Entity.CPSync1D.ProjectTargetLAB>();
@@ -154,13 +209,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 //convert new Paper's LAB to XYZ
                 NewPaperxyz = ColorMath.LabtoXYZ(Convert.ToDouble(txtPaper_L.Text), Convert.ToDouble(txtPaper_a.Text), Convert.ToDouble(txtPaper_b.Text));
+                NewMinxyz = ColorMath.LabtoXYZ(Convert.ToDouble(txtPaper_Black_L.Text), Convert.ToDouble(txtPaper_Black_a.Text), Convert.ToDouble(txtPaper_Black_b.Text));
 
                 //convert current Paper's LAB to XYZ
                 CurrentPaperxyz = ColorMath.LabtoXYZ(Convert.ToDouble(PaperProjectTargetList[0].TargetL), Convert.ToDouble(PaperProjectTargetList[0].TargetA), Convert.ToDouble(PaperProjectTargetList[0].TargetB));
 
                 for (int i = 0; i < this.ProjectTargetLABList.Count; i++)
                 {
-                    Finallab = ColorMath.CalcPaperScaleLAB(CurrentPaperxyz.X, CurrentPaperxyz.Y, CurrentPaperxyz.Z, NewPaperxyz.X, NewPaperxyz.Y, NewPaperxyz.Z, Convert.ToDouble(ProjectTargetLABList[i].TargetL), Convert.ToDouble(ProjectTargetLABList[i].TargetA), Convert.ToDouble(ProjectTargetLABList[i].TargetB));
+                    Finallab = ColorMath.CalcPaperScaleLAB(CurrentPaperxyz.X, CurrentPaperxyz.Y, CurrentPaperxyz.Z, NewPaperxyz.X, NewPaperxyz.Y, NewPaperxyz.Z, NewMinxyz.X, NewMinxyz.Y, NewMinxyz.Z, Convert.ToDouble(ProjectTargetLABList[i].TargetL), Convert.ToDouble(ProjectTargetLABList[i].TargetA), Convert.ToDouble(ProjectTargetLABList[i].TargetB));
                     NewProjectTargetList.Add(new Entity.CPSync1D.ProjectTargetLAB() { PatchType = this.ProjectTargetLABList[i].PatchType, TargetL = (decimal)Finallab.L, TargetA = (decimal)Finallab.A, TargetB = (decimal)Finallab.B });
                 }
                 //Assign new ProjectTargetLAB list
@@ -202,6 +258,54 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         cmbProjectType.Enabled = false;
                     }
                 }
+                txtPaper_Black_L.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString();
+                txtPaper_Black_a.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString();
+                txtPaper_Black_b.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString();
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) //-----If it is projecttype SYnc4D or 4D Certification, then display New Paper scaling L,a,b values---//
+            {
+                chk_IsPaperScaling4D.Checked = SessionManager.Instance.CurrentProject.EnabledPaperScaling;
+                if (chk_IsPaperScaling4D.Checked)
+                {
+                    Panel_PaperLAB4D_White.Enabled = true;
+                    Panel_PaperLAB4D_Black.Enabled = true;
+                }
+                txtPaper_L_4D_White.Text = SessionManager.Instance.CurrentProject.NewPaper_White_L.ToString();
+                txtPaper_a_4D_White.Text = SessionManager.Instance.CurrentProject.NewPaper_White_a.ToString();
+                txtPaper_b_4D_White.Text = SessionManager.Instance.CurrentProject.NewPaper_White_b.ToString();
+                txtPaper_L_4D_Black.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString();
+                txtPaper_a_4D_Black.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString();
+                txtPaper_b_4D_Black.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString();
+
+                if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Paper Scaling L,a,b selection is disable
+                {
+                    chk_IsPaperScaling4D.Enabled = false;
+                    Panel_PaperLAB4D_White.Enabled = false;
+                    Panel_PaperLAB4D_Black.Enabled = false;
+                }
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            {
+                if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget != null)
+                {
+                    cmbSpotTargetList.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID);
+                    cmbSpotTargetList_SelectedIndexChanged(null, null);
+                    cmbSpotTargetList.Enabled = false;
+
+                    if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget.SpotTargetID == 1) //-----If Custom made re target spot project, then set original base spot project from where we re-targeted
+                    {
+                        cmbBranch.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.ReTargetProjectBranchID);
+                        cmbBranch_SelectedIndexChanged(null, null);
+                        cmbDevice.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.ReTargetProjectDeviceID);
+                        cmbDevice_SelectedIndexChanged(null, null);
+                        ddlReTargetProject.SelectedValue = Convert.ToString(SessionManager.Instance.CurrentProject.SpotTargetProject.ReTargetSpotProjectID);
+                        ddlReTargetProject_SelectedIndexChanged(null, null);
+                        cmbBranch.Enabled = false;
+                        cmbDevice.Enabled = false;
+                        ddlReTargetProject.Enabled = false;
+                    }
+
+                }
             }
             BindPCSDataType();
             cmbPCSDataType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.PCSDataTypes).ToString(); //PCSDataType Selection
@@ -211,20 +315,34 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lnkbtNext.Visible = true;
                 lnkbtnTargetColorSpace.Visible = false;
             }
+            else
+            {
+                lnkbtNext.Visible = false;
+            }
         }
 
         private void BindProfileSource()
         {
-            if (ViewState[_vsPrintStandardType] != null) return;
+            TargetPrintCategory = Convert.ToInt32(cmbTargetPrintCategory.SelectedValue);
+            // if (ViewState[_vsPrintStandardType] != null) return;
 
             _presenterTargetColorspace.GetPrintStandardTypeList();
             if (!IsErrorOccured)
             {
-                cmbPrintStandardType.DataValueField = "PrintStandardTypeID";
-                cmbPrintStandardType.DataTextField = "PrintStandard";
-                ViewState[_vsPrintStandardType] = PrintStandardTypeList;
-                cmbPrintStandardType.DataSource = (List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType];
-                cmbPrintStandardType.DataBind();
+                if(PrintStandardTypeList!=null && PrintStandardTypeList.Count>0)
+                {
+                    cmbPrintStandardType.DataValueField = "PrintStandardTypeID";
+                    cmbPrintStandardType.DataTextField = "PrintStandard";
+                    ViewState[_vsPrintStandardType] = PrintStandardTypeList;
+                    cmbPrintStandardType.DataSource = (List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType];
+                    cmbPrintStandardType.DataBind();
+                }
+                else
+                {
+                    cmbPrintStandardType.Items.Clear();
+                    cmbPrintStandardType.Items.Insert(0, new ListItem(GetResourceString(_recTargetPrintConditionNotAvailableMessage), string.Empty));
+                }
+                
                 cmbPrintStandardType_SelectedIndexChanged(null, null);
             }
         }
@@ -279,6 +397,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtPaper_L.Text = "0";   //Paper L* Value
                 txtPaper_a.Text = "0";   //Paper a* Value
                 txtPaper_b.Text = "0";   //Paper b* Value
+                txtPaper_Black_L.Text = "0";
+                txtPaper_Black_a.Text = "0";
+                txtPaper_Black_b.Text = "0";
             }
         }
 
@@ -287,7 +408,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbPCSDataType.DataValueField = "Key";
             cmbPCSDataType.DataTextField = "Value";
             cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>();
-     
+
             if (cmbProjectType.SelectedItem.Text == "G7" || SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D) //If 1D then G7 type, or for all other Projects 4D,etc...
             {
                 cmbPCSDataType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<PCSDataTypes>().Where(p => p.Value != Common.Utilities.GetEnumDescriptionAttributeValue(PCSDataTypes.Density)).ToDictionary(p => p.Key, p => p.Value);
@@ -319,6 +440,219 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        private void BindTargetPrintCategory()
+        {
+            cmbTargetPrintCategory.DataValueField = "Key";
+            cmbTargetPrintCategory.DataTextField = "Value";
+            cmbTargetPrintCategory.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<ESourceProfileCategory>();
+            cmbTargetPrintCategory.DataBind();
+            cmbTargetPrintCategory.SelectedIndex = 0;
+
+            //disable for all projects except 4d and spot
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.DLP 
+                && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification
+                && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary
+                && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimization
+                && SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimizationSource)
+                cmbTargetPrintCategory.Items.FindByValue("4").Enabled = false;
+        }
+
+        private void BindBranches()
+        {
+            CompanyID = SessionManager.Instance.SelectedCompany;
+            _presenterTargetColorspace.GetBranchByCompany();
+            if (!IsErrorOccured)
+            {
+                cmbBranch.DataValueField = "Key";
+                cmbBranch.DataTextField = "Value";
+                cmbBranch.DataSource = Branches;
+                cmbBranch.DataBind();
+                cmbBranch_SelectedIndexChanged(null, null);
+            }
+        }
+
+        private void BindCertifiedSpotProjects()
+        {
+            CompanyID = SessionManager.Instance.SelectedCompany;
+            BranchID = Convert.ToInt32(cmbBranch.SelectedValue.ToString());
+            DeviceID = Convert.ToInt32(cmbDevice.SelectedValue.ToString());
+            _presenterTargetColorspace.GetSpotReTargetProjectList();
+            if (!IsErrorOccured)
+            {
+                if (ReTargetSpotProjectList.Count > 0)
+                {
+                    ddlReTargetProject.DataValueField = "Key";
+                    ddlReTargetProject.DataTextField = "Value";
+                    ddlReTargetProject.DataSource = ReTargetSpotProjectList;
+                    ddlReTargetProject.DataBind();
+                    ddlReTargetProject.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
+                }
+                else
+                {
+                    ddlReTargetProject.Items.Clear();
+                    ddlReTargetProject.Items.Insert(0, new ListItem(GetResourceString(_recNoCertifiedSpotCondition), string.Empty));
+                }
+            }
+            divRetarget.Visible = true;
+        }
+
+        private void BindDevices()
+        {
+            CompanyID = SessionManager.Instance.SelectedCompany;
+            BranchID = Convert.ToInt32(cmbBranch.SelectedValue.ToString());
+            _presenterTargetColorspace.DeviceListForRetargetSpotProject();
+            if (!IsErrorOccured)
+            {
+                cmbDevice.DataValueField = "DeviceId";
+                cmbDevice.DataTextField = "DeviceName";
+                cmbDevice.DataSource = Devices;
+                cmbDevice.DataBind();
+                cmbDevice.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
+            }
+            divDevice.Visible = true;
+        }
+
+        private void BindRetargetSpotProjectDetails()
+        {
+            ReTargetID = Convert.ToInt32(ddlReTargetProject.SelectedValue.ToString());
+            _presenterTargetColorspace.GetSpotReTargetProjectDetails();
+            if (!IsErrorOccured)
+            {
+                lblParentProjectName.Text = RetargetSpotProject.ProjectName;
+                lblLibraryName.Text = RetargetSpotProject.SpotTarget.SpotTargetName;
+                lblRetargetDescription.Text = RetargetSpotProject.SpotTarget.Description;
+            }
+            divRetargetDetails.Visible = true;
+        }
+
+
+        protected void btn_PaperClear_Click(object sender, EventArgs e)
+        {
+            BindTargetLAB();    //Apply old Target LAB from Main look up table
+            btn_PaperApply.Visible = true;
+            btn_PaperClear.Visible = false;
+        }
+
+        protected void cmbSpotTargetList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ViewState[_vsSpotTarget] != null)
+            {
+                txtDescription.Text = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).Description;
+                lblMeasMode.Text = "M" + ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).MeasurementMode;
+            }
+
+            //for retarget spot project selection panel
+            if (cmbSpotTargetList.SelectedValue.ToString() == "1") //-----Set no. 1 record for Custom made re target spot project
+            {
+                divReTargetPanel.Visible = true;
+                PanelOptionalRetargetSpotProject.Visible = true;
+                BindBranches();
+            }
+            else
+            {
+                divReTargetPanel.Visible = false;
+                divDevice.Visible = false;
+                divRetarget.Visible = false;
+                divRetargetDetails.Visible = false;
+                PanelOptionalRetargetSpotProject.Visible = false;
+            }
+        }
+
+        protected void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbBranch.SelectedValue.ToString() != "")
+                BindDevices();
+            else
+                divDevice.Visible = false;
+
+            divRetarget.Visible = false;
+            divRetargetDetails.Visible = false;
+        }
+
+        protected void cmbDevice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbDevice.SelectedValue.ToString() != "")
+                BindCertifiedSpotProjects();
+            else
+                divRetarget.Visible = false;
+
+
+            divRetargetDetails.Visible = false;
+        }
+
+        protected void ddlReTargetProject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlReTargetProject.SelectedValue.ToString() != "")
+                BindRetargetSpotProjectDetails();
+            else
+                divRetargetDetails.Visible = false;
+        }
+
+        protected void lnkbtnNext_Click(object sender, EventArgs e)
+        {
+
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //Skip Profiler Options page for Spot Target project type
+            {
+                if (SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget == null)
+                {
+                    SessionManager.Instance.CurrentProject.SpotTargetProject.SpotTarget = new Entity.CPSpot.SpotTarget()
+                    {
+                        SpotTargetID = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetID,
+                        SpotTargetName = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetName
+<<<<<<< HEAD
+                    },
+                    ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID
+                };
+                //-----Pass Dummy data---------//
+                SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = 0;
+                SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
+                SessionManager.Instance.CurrentProject.ProjectOption.Add(new ProjectOption()
+                {
+                    ProfileTypeId = 0,
+                    ProfilerOptionId = 0,
+                    ProfilerOptionValue = "",
+                });
+=======
+                    };
+                    SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID;
+                    if (cmbSpotTargetList.SelectedValue.ToString() == "1") //-----Set no. 1 record for Custom made re target spot project
+                    {
+                        SessionManager.Instance.CurrentProject.SpotTargetProject.ReTargetSpotProjectID = Convert.ToInt32(ddlReTargetProject.SelectedValue.ToString());
+                        SessionManager.Instance.CurrentProject.ReTargetProjectBranchID = Convert.ToInt32(cmbBranch.SelectedValue.ToString());
+                        SessionManager.Instance.CurrentProject.ReTargetProjectDeviceID = Convert.ToInt32(cmbDevice.SelectedValue.ToString());
+                    }
+
+                }
+>>>>>>> ColorPath-Production
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
+            }
+            else
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
+            }
+             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
+
+        }
+
+        protected void cmbTargetPrintCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BindProfileSource();
+        }
+
+        protected void chk_IsPaperScaling4D_CheckedChanged(object sender, EventArgs e)
+        {
+            Panel_PaperLAB4D_White.Enabled = Panel_PaperLAB4D_Black.Enabled = chk_IsPaperScaling4D.Checked;
+            if (!chk_IsPaperScaling4D.Checked)
+            {
+                txtPaper_L_4D_White.Text = "0";
+                txtPaper_a_4D_White.Text = "0";
+                txtPaper_b_4D_White.Text = "0";
+                txtPaper_L_4D_Black.Text = "0";
+                txtPaper_a_4D_Black.Text = "0";
+                txtPaper_b_4D_Black.Text = "0";
+            }
+        }
+
         #endregion
 
         #region IViewTargetColorspace Members
@@ -327,6 +661,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.CPSpot.SpotTarget> SpotTargetList { get; set; }
         public int PrintstandardTypeId { get; set; }
         public int ProjectTypeId { get; set; }
+        public Dictionary<int, string> Branches { get; set; }
         public bool IsSync1DType
         {
             get
@@ -341,55 +676,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary);
             }
         }
-        #endregion        
+        public int TargetPrintCategory { get; set; }
+        public int CompanyID { get; set; }
+        public int BranchID { get; set; }
+        public int DeviceID { get; set; }
+        public int ReTargetID { get; set; }
+        public Dictionary<int, string> ReTargetSpotProjectList { get; set; }
+        public List<Device> Devices { get; set; }
+        public SpotProjectLibrary RetargetSpotProject { get; set; }
+        #endregion
 
-        protected void btn_PaperClear_Click(object sender, EventArgs e)
-        {
-            BindTargetLAB();    //Apply old Target LAB from Main look up table
-            btn_PaperApply.Visible = true; 
-            btn_PaperClear.Visible = false;
-        }
-
-        protected void cmbSpotTargetList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ViewState[_vsSpotTarget] != null)
-            {
-                txtOwner.Text = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).OwnerName;
-                lblMeasMode.Text = "M" + ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).MeasurementMode;
-            }
-        }
-
-        protected void lnkbtnNext_Click(object sender, EventArgs e)
-        {
-
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //Skip Profiler Options page for Spot Target project type
-            {
-                SessionManager.Instance.CurrentProject.SpotTargetProject = new Entity.CPSpot.SpotProjectLibrary()
-                {
-                    SpotTarget = new Entity.CPSpot.SpotTarget()
-                    {
-                        SpotTargetID = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetID,
-                        SpotTargetName = ((List<Entity.CPSpot.SpotTarget>)ViewState[_vsSpotTarget]).Single(x => x.SpotTargetID.ToString() == cmbSpotTargetList.SelectedValue).SpotTargetName
-                    },
-                    ProjectId = SessionManager.Instance.CurrentProject.SpotTargetMasterProjectID
-                };
-                //-----Pass Dummy data---------//
-                SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = 0;
-                SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
-                SessionManager.Instance.CurrentProject.ProjectOption.Add(new ProjectOption()
-                {
-                    ProfileTypeId = 0,
-                    ProfilerOptionId = 0,
-                    ProfilerOptionValue = "",
-                });
-                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
-            }
-            else
-            {
-                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
-            }
-            ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
-
-        }
     }
 }

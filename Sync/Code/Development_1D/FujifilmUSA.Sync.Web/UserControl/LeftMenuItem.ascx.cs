@@ -68,7 +68,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                                     
                 case ELeftMenuItemLevel.Project:
-                    SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.First();
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+                        SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.First();
+                    else
+                        SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.First();
+
                     SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
                     SessionManager.Instance.CurrentNavigation =
                         SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation

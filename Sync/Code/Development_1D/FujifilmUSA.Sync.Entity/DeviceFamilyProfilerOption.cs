@@ -12,5 +12,6 @@ namespace FujifilmUSA.Sync.Entity
         public string ProfilerOptionsDesc { get; set; }
         public List<ProfilerOptionPreset> ProfilerOptionPresets { get; set; }
         public int ProjectTypeID { get; set; }
+        public int UserID { get; set; }
     }
 }

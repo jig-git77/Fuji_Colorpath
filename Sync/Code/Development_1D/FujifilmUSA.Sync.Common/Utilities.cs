@@ -72,7 +72,8 @@ namespace FujifilmUSA.Sync.Common
                 System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=\"" + ShowOnDialogName + "\"");
                 System.Web.HttpContext.Current.Response.BinaryWrite(data);
                 fs.Close();
-                System.Web.HttpContext.Current.Response.End();               
+                File.Delete(FolderPath + FileName);
+                System.Web.HttpContext.Current.Response.End();
             }
             catch (Exception Exc)
             { string str = Exc.Message; }
@@ -350,7 +351,7 @@ namespace FujifilmUSA.Sync.Common
 
         public static string GetEnumDescriptionAttributeValue(Enum value)
         {
-            return  GlobalResourceManager.Instance.GetGlobalResourceString(((DescriptionAttribute)Attribute.GetCustomAttribute(value.GetType().GetField(Enum.GetName(value.GetType(), value)), typeof(DescriptionAttribute))).Description);
+            return GlobalResourceManager.Instance.GetGlobalResourceString(((DescriptionAttribute)Attribute.GetCustomAttribute(value.GetType().GetField(Enum.GetName(value.GetType(), value)), typeof(DescriptionAttribute))).Description);
         }
 
         public static void PopupWindowsRedirect(UserControl ucControl, string url)
@@ -378,11 +379,11 @@ namespace FujifilmUSA.Sync.Common
 
         public EProfilerException GetProfilerException(string exception)
         {
-            return (EProfilerException) Enum.Parse(typeof (EProfilerException), exception);
+            return (EProfilerException)Enum.Parse(typeof(EProfilerException), exception);
         }
 
         #region Decimal Round Function
-     
+
         public static Double DecimalRound(Double Del)
         {
             return System.Math.Round(Del, 2);
@@ -421,7 +422,7 @@ namespace FujifilmUSA.Sync.Common
 
         #region Encryipt / Decript
         public static string Decrypt(string Value)
-        {            
+        {
             byte[] key = System.Text.Encoding.UTF8.GetBytes("@" + System.Configuration.ConfigurationManager.AppSettings["CypherKey"]);
             byte[] IV = { 18, 52, 86, 120, 144, 171, 205, 239 };
             if (Value.Trim().Length > 0)

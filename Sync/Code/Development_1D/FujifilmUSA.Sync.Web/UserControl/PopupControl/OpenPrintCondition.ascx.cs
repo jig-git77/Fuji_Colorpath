@@ -74,26 +74,54 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnContinue_Click(object sender, EventArgs e)
         {
-            ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);            
-            _presenterOpenPrintCondition.GetProjectDetail();
-            if (!IsErrorOccured)
+            if (Convert.ToString(Request.QueryString["isSpotProject"]) != "" && Convert.ToBoolean(Request.QueryString["isSpotProject"]))
             {
-                SessionManager.Instance.CurrentProject = Project;
-                SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D && (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile)) //---If Sync 1D, ReTargeted project and in Run-0 mode only, then go directly to Export page, since there is no Analyze Page for Run - 0
+                SpotProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                _presenterOpenPrintCondition.GetProjectDetail_SpotProject();
+                if (!IsErrorOccured)
                 {
-                    Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
+                    SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentOptimizeRun = Project.SpotTargetProject.OptimizeRuns.Last();
+
+                    if (Project.SpotTargetProject.OptimizeRuns.Count == 1)
+                        Utilities.PopupWindowsRedirect(this, "Analyze_SpotColor.aspx");
+                    else
+                    {
+                        Utilities.PopupWindowsRedirect(this,
+                                                           SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
+                                                               ? "Analyze_SpotColor.aspx"
+                                                               : "Spot_Measurement.aspx");
+                    }
+
+                    //Utilities.PopupWindowsRedirect(this,
+                    //                                   SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
+                    //                                       ? "Analyze_SpotColor.aspx"
+                    //                                       : "Spot_Measurement.aspx");
                 }
-                else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource && (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile)) //---If Source to Source project and in Run-0 mode only, then go directly to Middle Create DLP page, since there is no Measurement and Analyze Pages
+            }
+            else
+            {
+                ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                _presenterOpenPrintCondition.GetProjectDetail();
+                if (!IsErrorOccured)
                 {
-                    Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
-                }
-                else
-                {
-                    Utilities.PopupWindowsRedirect(this,
-                                                   SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
-                                                       ? "Analyze.aspx"
-                                                       : "Measurement.aspx");
+                    SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D && (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && SessionManager.Instance.CurrentProject.ReTargetProjectID > 0 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile)) //---If Sync 1D, ReTargeted project and in Run-0 mode only, then go directly to Export page, since there is no Analyze Page for Run - 0
+                    {
+                        Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
+                    }
+                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource && (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile)) //---If Source to Source project and in Run-0 mode only, then go directly to Middle Create DLP page, since there is no Measurement and Analyze Pages
+                    {
+                        Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
+                    }
+                    else
+                    {
+                        Utilities.PopupWindowsRedirect(this,
+                                                       SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
+                                                           ? "Analyze.aspx"
+                                                           : "Measurement.aspx");
+                    }
                 }
             }
         }
@@ -101,6 +129,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewOpenPrintCondition Members
         public int ProjectId { get; set; }
         public Project Project { get; set; }
+        public int SpotProjectId { get; set; }
         #endregion
     }
 }

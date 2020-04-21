@@ -139,6 +139,50 @@
         top.location.href = top.location.href.replace("#", "");
     }
 
+    function CreateReport() {    
+        var gradingParam = {
+
+            IsAverageOfMeasurements: document.getElementById('<%= chkAverageOfMeasurements.ClientID %>').checked,
+            CmykTolerance1: GetTextValue(document.getElementById('<%= txtCMYKTol1.ClientID %>').value),
+            CmykScore1: GetTextValue(document.getElementById('<%= txtCMYKSco1.ClientID %>').value),
+            CmykTolerance2: GetTextValue(document.getElementById('<%= txtCMYKTol2.ClientID %>').value),
+            CmykScore2: GetTextValue(document.getElementById('<%= txtCMYKSco2.ClientID %>').value),
+            CmykTolerance3: GetTextValue(document.getElementById('<%= txtCMYKTol3.ClientID %>').value),
+            CmykScore3: GetTextValue(document.getElementById('<%= txtCMYKSco3.ClientID %>').value),
+            CmykMaxScore: GetTextValue(document.getElementById('<%= lblCMYKMaxSoc.ClientID %>').innerText),
+            
+
+            RgbTolerance1: GetTextValue(document.getElementById('<%= txtRGBTol1.ClientID %>').value),
+            RgbScore1: GetTextValue(document.getElementById('<%= txtRGBSco1.ClientID %>').value),
+            RgbTolerance2: GetTextValue(document.getElementById('<%= txtRGBTol2.ClientID %>').value),
+            RgbScore2: GetTextValue(document.getElementById('<%= txtRGBSco2.ClientID %>').value),
+            RgbTolerance3: GetTextValue(document.getElementById('<%= txtRGBTol3.ClientID %>').value),
+            RgbScore3: GetTextValue(document.getElementById('<%= txtRGBSco3.ClientID %>').value),
+            RgbMaxScore: GetTextValue(document.getElementById('<%= lblRGBMaxSoc.ClientID %>').innerText),
+
+            CmyTolerance1: GetTextValue(document.getElementById('<%= txtCMYTol1.ClientID %>').value),
+            CmyScore1: GetTextValue(document.getElementById('<%= txtCMYSco1.ClientID %>').value),
+            CmyTolerance2: GetTextValue(document.getElementById('<%= txtCMYTol2.ClientID %>').value),
+            CmyScore2: GetTextValue(document.getElementById('<%= txtCMYSco2.ClientID %>').value),
+            CmyTolerance3: GetTextValue(document.getElementById('<%= txtCMYTol3.ClientID %>').value),
+            CmyScore3: GetTextValue(document.getElementById('<%= txtCMYSco3.ClientID %>').value),
+            CmyMaxScore: GetTextValue(document.getElementById('<%= lblCMYMaxSoc.ClientID %>').innerText),
+
+            PaperTolerance1: GetTextValue(document.getElementById('<%= txtPaperTol1.ClientID %>').value),
+            PaperScore1: GetTextValue(document.getElementById('<%= txtPaperSco1.ClientID %>').value),
+            PaperTolerance2: GetTextValue(document.getElementById('<%= txtPaperTol2.ClientID %>').value),
+            PaperScore2: GetTextValue(document.getElementById('<%= txtPaperSco2.ClientID %>').value),
+            PaperTolerance3: GetTextValue(document.getElementById('<%= txtPaperTol3.ClientID %>').value),
+            PaperScore3: GetTextValue(document.getElementById('<%= txtPaperSco3.ClientID %>').value),
+            PaperMaxScore: GetTextValue(document.getElementById('<%= lblPaperMaxSoc.ClientID %>').innerText),
+
+        }               
+        parent.GetGradingReport(gradingParam);
+    }
+
+    function  GetTextValue(txtValue) {
+        return txtValue == '' ? 0 : parseFloat(txtValue);
+    }
 </script>
 
 <style type="text/css">
@@ -369,18 +413,25 @@
                                 </span>
                     </asp:LinkButton>
                 </div>
-                <div class="buttonright">
-                    <asp:LinkButton ID="lbtnGenerateReport" runat="server" ValidationGroup="vgSaveWindows" 
+                <div class="buttonright">                                                         
+                    <%--<asp:LinkButton ID="lbtnGenerateReport" runat="server" ValidationGroup="vgSaveWindows" 
                         CssClass="gray_bt"
                         OnClientClick="if (!OnClientClick()) {return false;}" 
                         onclick="lbtnGenerateReport_Click" >
                        
                     <span> <asp:Localize ID="locGenReport" runat="server" Text="Generate Report" meta:resourcekey="locGenetareReportResource1" ></asp:Localize> 
-                        
- 
                         </span>
+                    </asp:LinkButton>--%>
+                    <asp:LinkButton runat="server" ID="lnkClientGenreateReport" CssClass="gray_bt" OnClientClick="CreateReport()" ValidationGroup="vgSaveWindows">
+                        <span><asp:Localize ID="locGenReport" runat="server" Text="Generate Report" meta:resourcekey="locGenetareReportResource1" ></asp:Localize></span>
                     </asp:LinkButton>
                 </div>
+                <div class="buttonright">
+                    <%--<asp:LinkButton runat="server" ID="lnkClientGenreateReport" CssClass="gray_bt" OnClientClick="CreateReport()" ValidationGroup="vgSaveWindows">
+                        <span>Kendo Report</span>
+                    </asp:LinkButton>--%>
+                </div>
+                  
                 <div class="clear">
                 </div>
             </td>

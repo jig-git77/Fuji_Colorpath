@@ -89,6 +89,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
             if (!IsErrorOccured)
             {
+                if (Measurements.Count == 0)
+                {
+                    fujiStatusbar.DisplayMessage("There is no measurement available in selected project, Please choose different project.", false);
+                    return;
+                }
                 if (parentProjectMeasurementCount + Measurements.Count > (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? Business.ApplicationConfiguration.Instance.MeasurementLimitSync1D : Business.ApplicationConfiguration.Instance.MeasurementsLimit))
                 {
                     fujiStatusbar.DisplayMessage("Measurements cannot be imported as total allowed measurement limit exceeded.", false);
@@ -100,6 +105,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 {
                     MeasurementID = Convert.ToInt32(Measurements[i].ToString());
                     OptimizeRunID = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                    UserID = SessionManager.Instance.CurrentUser.UserId;
                     _presenterImportMeasurements.ImportMeasurements();
                 }
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "radalert", "<script type=text/javascript> CloseImportWindow(); </script>");  
@@ -118,7 +124,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
             if (!IsErrorOccured)
             {
-                Projects.RemoveAll(item => item.ProjectId == SessionManager.Instance.CurrentProject.ProjectId); //-----Remove the current project from project list------//
+                Projects.RemoveAll(item => item.MeasurementSetting.ReferenceChartType.Key != SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key); //-----Remove the current project from project list, if reference chart type doesn't match with current selected one------//
                 rgProjectList.DataSource = Projects;
             }           
         }
@@ -132,6 +138,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         public List<int> Measurements { get; set; }
         public int MeasurementID { get; set; }
         public int OptimizeRunID { get; set; }
+        public int UserID { get; set; }
+        public Entity.Measurement Measurement { get; set; }
         #endregion
     }
 }

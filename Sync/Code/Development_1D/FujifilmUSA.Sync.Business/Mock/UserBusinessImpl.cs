@@ -80,7 +80,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
-        public List<MeasurementDevice> GetMeasurementDeviceList(int loginId, int deviceId)
+        public List<MeasurementDevice> GetMeasurementDeviceList(int loginId, int deviceId, bool isSpotTargetType = false)
         {
             return new List<MeasurementDevice>();
         }
@@ -90,6 +90,28 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
+        public bool ValidateUser(string tocken)
+        {
+            return true;
+        }
+
+        public UserReferenceChart UserLoginReferenceChart(string userName, string password, UserType userType)
+        {
+            return new UserReferenceChart();
+        }
+
+        public ReferenceChartApp UserLoginReferenceChartBySerial(string serial, short InstrumentTypeId)
+        {
+            return new ReferenceChartApp();
+        }
+        public ReferenceChartApp UserLogInByDeviceLAB(string serial, short InstrumentTypeId)
+        {
+            return new ReferenceChartApp();
+        }
+        public int validateUserByAuthKey(string authToken)
+        {
+            return 0;
+        }
         #endregion
 
         #region ITaskBase Members

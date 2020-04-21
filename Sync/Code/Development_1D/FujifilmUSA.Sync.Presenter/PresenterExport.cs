@@ -70,5 +70,65 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.ErrorOccured += _viewExport.ErrorOccured;
             _viewExport.DeviceLinkProfile = optimizeRunBusiness.Get1DDeviceLinkProfile(_viewExport.OptimizeRunId);
         }
+
+        public void GetNamedColorProfile()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.SourceProfile = projectBusiness.GetNamedColorProfile(_viewExport.OptimizeRunId);
+        }
+
+        public void CreateOptimizeRun_SpotProject()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            optimizeRunBusiness.CreateSpotProjectOptimizeRun(_viewExport.SpotProjectId, Convert.ToInt32(EOptimizeRunStatus.Open), DateTime.Now);
+        }
+
+        public void GetProjectDetail_SpotProject()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.Project = projectBusiness.GetProjectDetail_SpotProject(_viewExport.SpotProjectId);
+        }
+
+        public void GetSpotPatchDetailsForChart()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsForChart(_viewExport.OptimizeRunId);
+        }
+
+        public void GetSpotDestinationProfile()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.SourceProfile = projectBusiness.GetSpotDestinationProfile(_viewExport.ProjectId);
+        }
+        public void GetSpotPatchDetailsForCMYKExport()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsForCMYKExport(_viewExport.OptimizeRunId);
+        }
+        public void GetSpotPatchDetailsForChartBySpotProject()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsForChartBySpotProjectID(_viewExport.SpotProjectId);
+        }
+
+        public void GetSpotProjectChartSetting()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.SpotProjectChartSetting = measurementBusiness.GetSpotTargetChartSettingDetails(_viewExport.SpotProjectId);
+        }
+        public void GetSpotPatchDetailsForCMYKExportBySpotProject()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            _viewExport.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsForCMYKExportBySpotProject(_viewExport.SpotProjectIDs);
+        }
     }
 }

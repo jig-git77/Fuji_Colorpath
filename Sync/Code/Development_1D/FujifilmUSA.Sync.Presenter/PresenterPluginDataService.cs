@@ -12,25 +12,25 @@ namespace FujifilmUSA.Sync.Presenter
             _viewPluginDataService = viewPluginDataService;
         }
 
-        public void SaveMeasurement()
+        public bool SaveMeasurement()
         {
             var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
-            measurementBusiness.SaveMeasurement(_viewPluginDataService.Measurement);
+            return measurementBusiness.SaveMeasurement(_viewPluginDataService.Measurement, _viewPluginDataService.UserID);
         }
 
-        public void SaveVMeasurement()
+        public bool SaveVMeasurement()
         {
             var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
-            measurementBusiness.SaveVMeasurement(_viewPluginDataService.Measurement);
+            return measurementBusiness.SaveVMeasurement(_viewPluginDataService.Measurement, _viewPluginDataService.UserID);
         }
 
-        public void Save1DMeasurement()
+        public bool Save1DMeasurement()
         {
             var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
-            measurementBusiness.Save1DMeasurement(_viewPluginDataService.Measurement);
+            return measurementBusiness.Save1DMeasurement(_viewPluginDataService.Measurement,_viewPluginDataService.UserID);
         }
 
         public void GetReferenceChartData()
@@ -82,5 +82,70 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
             return optimizeRunBusiness.Delete1DMeasurement(_viewPluginDataService.MeasurementId);
         }
+
+        public void GetSpotMeasurementsOnRunId()
+        {
+            var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.Measurements = measurementBusiness.GetSpotMeasurementsOnRunId(_viewPluginDataService.OptimizeRunId);
+        }
+        public void GetSpotReferenceChartData()
+        {
+            var projectBusiness = Business.BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.ReferenceChartData = projectBusiness.GetSpotReferenceChartData(_viewPluginDataService.SpotProjectId,
+                                                                                              _viewPluginDataService.ReferenceChartDisType);
+        }
+
+        public bool SaveSpotMeasurement()
+        {
+            var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;            
+            return measurementBusiness.SaveSpotMeasurement(_viewPluginDataService.Measurement, _viewPluginDataService.UserID);
+        }
+
+        public bool DeleteSpotMeasurement()
+        {
+            var optimizeRunBusiness = Business.BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            return optimizeRunBusiness.DeleteSpotMeasurement(_viewPluginDataService.MeasurementId);
+        }
+
+        public void GetPluginReferenceChartData()
+        {
+            var projectBusiness = Business.BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.ReferenceChartPlugin = projectBusiness.GetPluginReferenceChartData(_viewPluginDataService.ProjectId,
+                                                                                              _viewPluginDataService.ReferenceChartDisType);
+        }
+
+        public void GetPluginSpotReferenceChartData()
+        {
+            var projectBusiness = Business.BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.ReferenceChartPlugin = projectBusiness.GetPluginSpotReferenceChartData(_viewPluginDataService.SpotProjectId,
+                                                                                              _viewPluginDataService.ReferenceChartDisType);
+        }
+
+        public void GetMeasurementValidationData()
+        {            
+            var projectMeasurement = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            projectMeasurement.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.dtMeasurementValidation = projectMeasurement.GetMeasurementValidation(_viewPluginDataService.ProjectId, _viewPluginDataService.OptimizeRunId, _viewPluginDataService.ProjectType);
+        }
+        public void ValidateApplicationMeasurement()
+        {
+            var projectMeasurement = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            projectMeasurement.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.dtMeasurementValidation = projectMeasurement.ValidateApplicationMeasurement(_viewPluginDataService.OptimizeRunId, _viewPluginDataService.ProjectId, _viewPluginDataService.MeaDeviceSerialNo, _viewPluginDataService.MToolEntryDate);
+        }
+        public void SaveMeasurementErrorFile()
+        {
+            var projectMeasurement = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            projectMeasurement.ErrorOccured += _viewPluginDataService.ErrorOccured;
+             projectMeasurement.SaveMeasurementErrorFile(_viewPluginDataService.Measurement.OptimizeRunId, _viewPluginDataService.Measurement.ProjectId,_viewPluginDataService.RequestMeasurment);
+
+        }
+
     }
 }

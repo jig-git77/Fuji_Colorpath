@@ -546,6 +546,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary);
             }
         }
+        public short PrintingTypeId { get; set; }
+
         #endregion
 
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)

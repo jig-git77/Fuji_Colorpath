@@ -112,6 +112,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locSatisfiedColorMatchMsg;
         
         /// <summary>
+        /// locSatisfiedColorMatchMsgNCP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locSatisfiedColorMatchMsgNCP;
+        
+        /// <summary>
         /// Tr_Optimize control.
         /// </summary>
         /// <remarks>
@@ -137,6 +146,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locOptimizeDLP;
+        
+        /// <summary>
+        /// locOptimizeNCP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locOptimizeNCP;
         
         /// <summary>
         /// lbtnClose control.

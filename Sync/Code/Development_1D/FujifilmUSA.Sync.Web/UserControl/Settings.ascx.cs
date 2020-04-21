@@ -38,7 +38,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset); 
             divPrintStandardType.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePrintStandardType);
             divLookupTVILABDensity.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSync1DTVILABDensity);
-            divPatchPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance); 
+            divPatchPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManagePatchTolerance);
+            divSpotTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSpotTarget);
+            divMetricTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
+            divMeasurementLog.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementLogs);
             
             ////seperator image 
             divBranchSeprator.Visible = tdBranch.Visible && tdcompany.Visible;
@@ -57,6 +60,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divMetricTargetPresetSeparator.Visible = divMetricTargetPreset.Visible && dvApplicationConfiguration.Visible;
             divPatchPresetSeparator.Visible = divPatchPreset.Visible && dvApplicationConfiguration.Visible;
             divLookupTVILABDensitySeparator.Visible = divLookupTVILABDensity.Visible && divPrintStandardType.Visible;
+            divSpotTargetSeparator.Visible = divSpotTarget.Visible && divLookupTVILABDensitySeparator.Visible;
+            divMetricTargetSeperator.Visible = divMetricTarget.Visible && divSpotTarget.Visible;
+            divMeasurementLogSeperator.Visible = divMeasurementLog.Visible && divMetricTarget.Visible;
         }
         #endregion
 
@@ -114,5 +120,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("PatchPresetManagement.aspx");
         }
+
+        protected void lnkSpotTarget_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("SpotTargetManagement.aspx");
+        }
+
     }
 }

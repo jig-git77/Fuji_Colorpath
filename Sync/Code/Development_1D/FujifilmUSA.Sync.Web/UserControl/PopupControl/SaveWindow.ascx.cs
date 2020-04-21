@@ -34,11 +34,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Tr_DownloadChart.Visible = false;
                     Page.Title = GetResourceString(_recSaveProjInkOptSource);
                 }
-                if (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName))
+
+                //check the current project is spot or not
+                string ProjectName = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary ?
+                                    SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName :
+                                    SessionManager.Instance.CurrentProject.ProjectName;
+
+                if (!string.IsNullOrEmpty(ProjectName))
                 {
-                    txtProjectName.Text = SessionManager.Instance.CurrentProject.ProjectName;
+                    txtProjectName.Text = ProjectName;
                     Page.Title = GetResourceString(_recSaveAs);
-                }
+                }               
+                //set the regex pattern for project name text box
+                revProjectName.ValidationExpression = @"^(?![.\-])(?:[^\\\/:*?&'""<>|#+%$@!=;])*[^.\-\\\/:*?&'""<>|#+%$@!=;]$";
             }
         }
         #endregion
@@ -48,6 +56,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             SessionManager.Instance.CurrentProject.ProjectName = txtProjectName.Text;
             SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
+            CompanyId = SessionManager.Instance.SelectedCompany;
             Project = SessionManager.Instance.CurrentProject;
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If  "Ink Optimization Source" project type
             {
@@ -64,15 +73,40 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) //---If  "Spot Target Library" project type
             {
+                bool isNewSpotProject = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId == 0 ? true : false;
+                SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectName = txtProjectName.Text;
+                SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
                 _presenterSaveWindow.SaveProject_SpotTargetProject(); //---Call save project function, w/o any ref charts details
                 if (!IsErrorOccured)
                 {
                     _presenterSaveWindow.GetProjectDetail_SpotProject();
                     WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
                     SessionManager.Instance.CurrentProject = Project;
-                    SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
-                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
-                    Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
+                    SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last();
+
+                    if (isNewSpotProject)
+                    {
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                        Utilities.PopupWindowsRedirect(this, "SpotMeasurement.aspx");                        
+                    }
+                    else
+                    {
+                        if (SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                        {
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+                            Utilities.PopupWindowsRedirect(this, "Export.aspx");
+                        }
+                        else if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
+                        {
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                            Utilities.PopupWindowsRedirect(this, "Analyze_SpotColor.aspx");
+                        }
+                        else
+                        {
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                            Utilities.PopupWindowsRedirect(this, "Spot_Measurement.aspx");
+                        }
+                    }
                 }
             }
             else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.CustomSourceProfile || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.FullGamutCustomSource) //---If  "Custom Source Profile" / "Full Gamut Source Profile" project type
@@ -184,6 +218,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public byte[] ChartPreview { get; set; }
         public Project Project { get; set; }
         public int ProjectId { get; set; }
+        public int DeviceId { get; set; }
+        public int LicenseId { get; set; }
+        public int CompanyId { get; set; }
         #endregion
     }
 }

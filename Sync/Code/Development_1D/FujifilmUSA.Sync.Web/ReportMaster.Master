@@ -1,0 +1,70 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ReportMaster.Master.cs" Inherits="FujifilmUSA.Sync.Web.ReportMaster" %>
+
+<%@ Register Src="~/UserControl/Header.ascx" TagName="Header" TagPrefix="uc1" %>
+<%@ Register Src="~/UserControl/Footer.ascx" TagName="Footer" TagPrefix="uc1" %>
+<!DOCTYPE html>
+<html>
+
+<head id="Head1" runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Fujifilm Color Path</title>
+    <link href="CSS/Common.css?version=4" rel="stylesheet" type="text/css" />
+    <script src="JS/html5.js?version=4" type="text/javascript"></script>
+    <script src="JQuery/jquery-1.7.1.min.js?version=4" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+        </script>
+    <script type="text/javascript" language="javascript">
+    
+        $(document).ready(function () {
+            MakeUserAliveRequest();
+            if (typeof (opera) != 'undefined') { // only do for Opera        
+                if (window.name != "") { // will be '' if page not prev loaded            
+                    window.name = ""; // reset to prevent infinite loop
+                    window.location.reload(true);
+                }
+                window.name = new Date().getTime();
+            }
+        });
+
+        function KeepUserAlive(userId) {                 
+            jQuery.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "Services/PluginDataService.svc/KeepUserAlive/" + userId,
+                dataType: "JSON",
+                success: function (response) { },
+                error: function (XMLHttpRequest, textStatus, errorThrown) { }
+            });
+        }        
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+    <section id="bodyWrapper"> 
+  <!--Start PageWrapper-->
+  <div class="curve_top">&nbsp;</div>
+  <section id="pageWrapper">
+    <uc1:Header ID="ucHeader" runat="server" />       
+    <section id="containar">
+     
+      <section id="contant" class="admin">
+          <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+      </section>
+      <div class="clear"></div>
+    </section>
+  </section>
+  <div class="curve_bottom">&nbsp;</div>
+  <!--End PageWrapper--> 
+  <uc1:Footer ID="ucFooter" runat="server" />
+</section>
+    </form>
+</body>
+</html>

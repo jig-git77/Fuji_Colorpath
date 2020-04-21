@@ -364,6 +364,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblUVSettings;
         
         /// <summary>
+        /// Tr_Validation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow Tr_Validation;
+        
+        /// <summary>
         /// locEnable_Vali control.
         /// </summary>
         /// <remarks>
@@ -425,6 +434,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblVali_Metric;
+        
+        /// <summary>
+        /// Div_Presets control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_Presets;
         
         /// <summary>
         /// dvOptionPreset control.

@@ -114,5 +114,43 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewConfirmSave.Is1DMeasurementSmoothing);
 
         }
+
+        public void GetSpotLastRunStatus()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
+            _viewConfirmSave.LastRunStatus = optimizeRunBusiness.GetSpotLastRunStatus(_viewConfirmSave.OptimizeRunId);
+        }
+
+        public void CertifySpotOptimizeRun()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
+            optimizeRunBusiness.CertifySpotOptimizeRun(_viewConfirmSave.OptimizeRunId, _viewConfirmSave.SpotProjectId, _viewConfirmSave.MasterRunId, Convert.ToInt32(EOptimizeRunStatus.Certify), DateTime.Now);
+        }
+        public void UpdateOptimizeRun_SpotProject()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
+            optimizeRunBusiness.UpdateSpotProjectOptimizeRun(_viewConfirmSave.OptimizeRunId, _viewConfirmSave.ProjectStatus, DateTime.Now);
+        }
+
+        public void GetProjectDetail_SpotProject()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
+            _viewConfirmSave.Project = projectBusiness.GetProjectDetail_SpotProject(_viewConfirmSave.SpotProjectId);
+        }
+
+        public void OptmizeSpotLibrary()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
+            optimizeRunBusiness.OptimizeSpotNamedColorProfile(
+                    _viewConfirmSave.OptimizeRunId,
+                    //_viewAnalyze.MeasurementId,                    
+                    (int)EOptimizeRunStatus.Closed,
+                    DateTime.Now);
+        }
     }
 }

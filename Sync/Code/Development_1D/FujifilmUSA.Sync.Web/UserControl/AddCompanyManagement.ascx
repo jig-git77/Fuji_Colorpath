@@ -3,9 +3,9 @@
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
+<script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <style type="text/css">
-    #inner
-    {
+    #inner {
         width: 200px;
         float: left;
         margin-right: 2%;
@@ -17,11 +17,14 @@
         -moz-border-radius: 3px 3px 3px 3px;
     }
 </style>
+
 <div class="admin_top">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1><asp:Localize Text="Company Management" runat="server" ID="locCompanyMgmt" 
+        <h1>
+            <asp:Localize Text="Company Management" runat="server" ID="locCompanyMgmt"
                 meta:resourcekey="locCompanyMgmtResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
@@ -54,13 +57,13 @@
                                                     <td align="left">
                                                         <div style="float: left;">
                                                             <asp:TextBox ID="txtCompanyName" runat="server" Width="370px" MaxLength="50" 
-                                                                Height="19px" meta:resourcekey="txtCompanyNameResource1"></asp:TextBox>
+                                                                Height="19px" meta:resourcekey="txtCompanyNameResource1" onkeypress="return validateText(event)"></asp:TextBox>
                                                         </div>
                                                         <div style="float: left">
                                                             <asp:RequiredFieldValidator ID="rfvCompanyName" runat="server" Display="Dynamic"
                                                                 ControlToValidate="txtCompanyName" ForeColor="Red" 
                                                                 ValidationGroup="vgCompanyName"><ucValidationContainer:ValidationContainer ID="rfvcCompanyContainer" runat="server"
-                                                                    ValidationMsg="Please provide company name." Size="200" />
+                                                                    ValidationMsg="Please provide company name." Size="200" ResourceValidationMsg="CompanyNameRequiredResource"/>
 </asp:RequiredFieldValidator>
                                                         </div>
                                                         <div class="clear">
@@ -84,7 +87,7 @@
                                                         <div style="float: left">
                                                             <asp:RequiredFieldValidator ID="rfvRegionName" runat="server" Display="Dynamic" ControlToValidate="cmbRegionName"
                                                                 ForeColor="Red" ValidationGroup="vgCompanyName"><ucValidationContainer:ValidationContainer ID="Validationcontainer1" runat="server"
-                                                                    ValidationMsg="Please select region." Size="200" />
+                                                                    ValidationMsg="Please select region." Size="200" ResourceValidationMsg="RegionRequiredResource"/>
 </asp:RequiredFieldValidator>
                                                         </div>
                                                         <div class="clear">
@@ -151,6 +154,7 @@
     </div>
 </div>
 <div class="admin_bottom">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="clear">
 </div>

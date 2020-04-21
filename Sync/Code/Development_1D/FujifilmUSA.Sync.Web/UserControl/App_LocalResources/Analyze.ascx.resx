@@ -766,4 +766,55 @@
   <data name="PreviousText" xml:space="preserve">
     <value>Previous</value>
   </data>
+  <data name="ValidationSummaryCustomer.Text" xml:space="preserve">
+    <value>Customer:</value>
+  </data>
+  <data name="ValidationSummaryEType.Text" xml:space="preserve">
+    <value>ΔE Type:</value>
+  </data>
+  <data name="ValidationSummaryJob.Text" xml:space="preserve">
+    <value>Job:</value>
+  </data>
+  <data name="ValidationSummaryJobID.Text" xml:space="preserve">
+    <value>JDF Job ID:</value>
+  </data>
+  <data name="ValidationSummaryMeasurementID.Text" xml:space="preserve">
+    <value>Measurement ID:</value>
+  </data>
+  <data name="ValidationSummaryMeasurementName.Text" xml:space="preserve">
+    <value>Measurement Name:</value>
+  </data>
+  <data name="ValidationSummaryMetricPreset.Text" xml:space="preserve">
+    <value>Metric Preset:</value>
+  </data>
+  <data name="ValidationSummaryNotes.Text" xml:space="preserve">
+    <value>Notes:</value>
+  </data>
+  <data name="ValidationSummaryPageSurface.Text" xml:space="preserve">
+    <value>Page/Surface:</value>
+  </data>
+  <data name="ValidationSummaryPrintStd.Text" xml:space="preserve">
+    <value>Print Standard:</value>
+  </data>
+  <data name="ValidationSummaryStatus.Text" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="ValidationSummaryTimestamp.Text" xml:space="preserve">
+    <value>Timestamp:</value>
+  </data>
+  <data name="GridMeasuredValue.Text" xml:space="preserve">
+    <value>Actual</value>
+  </data>
+  <data name="GridMetricSumName.Text" xml:space="preserve">
+    <value>Metric</value>
+  </data>
+  <data name="GridPatchTolSampleName.Text" xml:space="preserve">
+    <value>Sample Name</value>
+  </data>
+  <data name="GridTargetValue.Text" xml:space="preserve">
+    <value>Tol</value>
+  </data>
+  <data name="GridToleranceValue.Text" xml:space="preserve">
+    <value>Tolerance</value>
+  </data>
 </root>

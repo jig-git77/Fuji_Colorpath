@@ -45,9 +45,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     FillValidationDetailsFromXMF();
                 }
+                //hdnBasePluginServiceUrl.Value = Utilities.ReadConfigValue("BasePluginServiceURL");
                 hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation).ToString().ToLower();
                 hdLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
-                hdProjectId.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
+                btnImportMeasurementFile.Value = GetResourceString("btnImportMeasurementFile");
+                hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
+                btnImportMeasurementFile.Visible = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || 
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D ||
+                    SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary) && 
+                    SessionManager.Instance.CurrentUser.Role.RoleId == (int)ERole.SystemAdmin;
+
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
+                    hdProjectId.Value = SessionManager.Instance.CurrentProject.SpotTargetProject.SpotProjectId.ToString();
+                else
+                    hdProjectId.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
+
                 hdOptimizeRunId.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
                 hdDeviceType.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.InstrumentTypeId.ToString();
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
@@ -66,17 +79,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     hdReferenceChartDisplayType.Value = Convert.ToInt32(EReferenceChartDisType.ProfileChart).ToString();
                 }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
-                //----------------"Import Measurements" button only available for "Sync4D" or "Ink Optimization" Project Type and only for initial 1st run (Not shown in any type of Validation)--------------//
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
+                //----------------"Import Measurements" button only available for "Sync4D", "Ink Optimization" and "Sync1D" Project Type and only for initial 1st run (Not shown in any type of Validation)--------------//
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                 {
                     if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation)
                     {
                         if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
                         {
-                            hdDisplayImport.Value = "yes";
+                            //if (SessionManager.Instance.CurrentProject.EnabledPaperScaling == false) //---If project has paper scalling enabled, then don't give option to import measurements
+                            //{
+                                hdDisplayImport.Value = "yes";
+                            //}
                         }
                     }
                 }
+                hdSpotProjectType.Value = (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary).ToString().ToLower();
             }
             SetVerificationControlVisibility();
         }

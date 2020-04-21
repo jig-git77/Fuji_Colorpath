@@ -21,7 +21,7 @@ namespace FujiFilmUSA.Sync.Service.App_Start
         {
             try
             {
-                ErrorLog.WriteErrorLog("Owin Start");
+                // ErrorLog.WriteErrorLog("Owin Start");
                 double inteval = Convert.ToDouble(ConfigurationManager.AppSettings["ExecutionMinuteInterval"]);
                 Timer timer = new Timer();
                 timer.Elapsed += async (sender, e) => await DeleteFiles();

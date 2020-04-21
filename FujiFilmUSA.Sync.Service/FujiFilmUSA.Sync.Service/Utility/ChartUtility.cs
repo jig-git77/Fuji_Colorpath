@@ -28,12 +28,13 @@ namespace FujiFilmUSA.Sync.Service.Utility
         int gapLeval = 75;
         double previousL = 0;
         string chartName = "Pantone Test Chart";
+        string profileName = "";
 
         //counstructor
         public ChartUtility() { }
         public ChartUtility(int numberOfPatchs, int chartpages, int patchwidth, int patchHeight,
             int chartborder, int chartsizeW, int chartsizeH, int rowsperchart, int columsperchart,
-            int vgap, int hgap, int gapLval, double previousL, string chartname)
+            int vgap, int hgap, int gapLval, double previousL, string chartname,string profileName)
         {
             //check value passed or not otherwise default
             if (numberOfPatchs != 0)
@@ -78,6 +79,8 @@ namespace FujiFilmUSA.Sync.Service.Utility
             if (!string.IsNullOrEmpty(chartname))
                 this.chartName = chartname;
 
+            if (!string.IsNullOrEmpty(profileName))
+                this.profileName = profileName;            
         }
 
         public async Task<List<Bitmap>> GenerateColorListChart(List<Patch> patchs)
@@ -180,9 +183,6 @@ namespace FujiFilmUSA.Sync.Service.Utility
                         }
                     }
 
-
-                    string chartinfo = "Profile Name: ";
-
                     string pagedchartname = chartName + " page# " + Convert.ToString(thispage) + " of " + Convert.ToString(chartPages);
 
                     //For Main Text
@@ -198,12 +198,12 @@ namespace FujiFilmUSA.Sync.Service.Utility
 
                     //For DataTime details
                     Font fontSub = new Font("Arial", 7);
-                    string dateTimeString = "Creation Date/Time: " + DateTime.Now.ToString();
+                    string dateTimeString = "Created " + DateTime.Now.ToString();
                     graphics2.DrawString(dateTimeString, fontSub, k_Brush, new PointF(10, 20));
 
 
                     //For Profile details                    
-                    string profileString = "Profile Name";
+                    string profileString = profileName;
                     graphics2.DrawString(profileString, fontSub, k_Brush, new PointF(10, 10));
 
                     await ProcessUsingLockbits(image, image2);

@@ -14,12 +14,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
-        public List<ReferenceChart> GetReferenceChartForLabCalculation(short sourceProfileId, short referenceChartTypeId)
+        public List<ReferenceChart> GetReferenceChartForLabCalculation(int sourceProfileId, short referenceChartTypeId)
         {
             return new List<ReferenceChart>();
         }
 
-        public int InsertReferenceLabData(List<ReferenceChart> referenceCharts, byte[] sourceProfile, short sourceProfileId)
+        public int InsertReferenceLabData(List<ReferenceChart> referenceCharts, byte[] sourceProfile, short sourceProfileId, int CompanyId, int ProjectId)
         {
             return 0;
         }

@@ -690,4 +690,58 @@
   <data name="PreviousText" xml:space="preserve">
     <value>vorheriges</value>
   </data>
+  <data name="ValidationSummaryCustomer.Text" xml:space="preserve">
+    <value>Kundenname:</value>
+  </data>
+  <data name="ValidationSummaryEType.Text" xml:space="preserve">
+    <value>ΔE Typ:</value>
+  </data>
+  <data name="ValidationSummaryJob.Text" xml:space="preserve">
+    <value>Job:</value>
+  </data>
+  <data name="ValidationSummaryJobID.Text" xml:space="preserve">
+    <value>JDF Job ID:</value>
+  </data>
+  <data name="ValidationSummaryMeasurementID.Text" xml:space="preserve">
+    <value>Messwert ID:</value>
+  </data>
+  <data name="ValidationSummaryMetricPreset.Text" xml:space="preserve">
+    <value>Voreinstellungen:</value>
+  </data>
+  <data name="ValidationSummaryNotes.Text" xml:space="preserve">
+    <value>Anmerkungen:</value>
+  </data>
+  <data name="ValidationSummaryPageSurface.Text" xml:space="preserve">
+    <value>Seite/Oberfläche:</value>
+  </data>
+  <data name="ValidationSummaryPrintStd.Text" xml:space="preserve">
+    <value>Druckbedingung:</value>
+  </data>
+  <data name="ValidationSummaryTimestamp.Text" xml:space="preserve">
+    <value>Zeit:</value>
+  </data>
+  <data name="ValidationSummaryMeasurementName.Text" xml:space="preserve">
+    <value>Name der Messung:</value>
+  </data>
+  <data name="ValidationSummaryStatus.Text" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="GridMeasuredValue.Text" xml:space="preserve">
+    <value>Aktuell</value>
+  </data>
+  <data name="GridMetricSumName.Text" xml:space="preserve">
+    <value>Metric</value>
+  </data>
+  <data name="GridTargetValue.Text" xml:space="preserve">
+    <value>Toleranz</value>
+  </data>
+  <data name="GridPatchTolSampleName.Text" xml:space="preserve">
+    <value>Sample Name</value>
+  </data>
+  <data name="GridToleranceValue.Text" xml:space="preserve">
+    <value>Toleranz</value>
+  </data>
+  <data name="percentPatchMetrics" xml:space="preserve">
+    <value>% Patch Metrics</value>
+  </data>
 </root>

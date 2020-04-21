@@ -8,5 +8,8 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         byte[] ChartPreview { get; set; }
         Project Project { get; set; }
         int ProjectId { get; set; }
+        int DeviceId { get; set; }
+        int LicenseId { get; set; }
+        int CompanyId { get; set; }
     }
 }

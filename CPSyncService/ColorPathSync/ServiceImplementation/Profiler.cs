@@ -40,13 +40,22 @@ namespace ColorPathSync.ServiceImplementation
         public CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request)
         {
             return ProfilerBusiness.CreateSourceProfile(request);
-        }     
-       
+        }
+
         public ExtractProfileValuesResponse ExtractProfileValues(ExtractProfileValuesRequest request)
         {
             return ProfilerBusiness.ExtractProfileValues(request);
         }
 
+        public CreateSpotLibraryResponse CreateSpotLibraryValues(CreateSpotLibraryRequest request)
+        {
+            return CreateSpotLibraryBusiness.CreateSpotLibraryValues(request);
+        }
+
+        public OptimizeSpotLibraryResponse OptimizeSpotLibraryValues(OptimizeSpotLibraryRequest request)
+        {
+            return OptimizeSpotLibraryBusiness.OptimizeSpotLibraryValues(request);
+        }
 
         ////Implementation for the ISO and G7 for Alignment Curve (Old Code)
         //public Profile CreateCurve(Curve request)
@@ -58,6 +67,6 @@ namespace ColorPathSync.ServiceImplementation
         //{
         //    return CreateISOCurveProfileBusiness.CreateISOCurve(request);
         //}
-        
+
     }
 }

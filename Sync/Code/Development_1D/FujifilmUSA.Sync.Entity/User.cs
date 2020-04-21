@@ -40,6 +40,8 @@ namespace FujifilmUSA.Sync.Entity
         public int MeasurementDeviceId { get; set; }
         public short DensityType { get; set; }
         public short UVMode { get; set; }
+        public DateTime LastActiveDate { get; set; }
+        public string APIAuthKey { get; set; }
         #endregion
 
         #region extension Methods
@@ -61,7 +63,8 @@ namespace FujifilmUSA.Sync.Entity
                                               (x.Permission == ERolePermission.ManageMeasurementDevice && x.Allow) ||
                                               (x.Permission == ERolePermission.ManageRegion && x.Allow) ||
                                               (x.Permission == ERolePermission.ManageSourceProfile && x.Allow) ||
-                                              (x.Permission == ERolePermission.ManageUser && x.Allow)).Count() > 0;
+                                              (x.Permission == ERolePermission.ManageUser && x.Allow) ||
+                                              (x.Permission == ERolePermission.ManageSpotTarget && x.Allow)).Count() > 0;
         }
         public bool HasProjectPermission()
         {

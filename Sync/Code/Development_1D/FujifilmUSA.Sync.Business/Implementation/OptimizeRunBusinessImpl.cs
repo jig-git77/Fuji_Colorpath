@@ -10,6 +10,7 @@ using FujifilmUSA.Sync.Business.ProfilerService;
 using FujifilmUSA.Sync.Business.Messages;
 using System.Xml.Linq;
 using FujifilmUSA.Sync.Business.CustomExceptions;
+using System.IO;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -28,7 +29,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         new object[]
                             {
                                 projectId,
-                                status,                               
+                                status,
                                 startDateTime
                             }),
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateOptimizeRun"));
@@ -113,18 +114,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             CreateObject().
                             GetSourceProfile(projectId);
                     var request = new CreateDestinationAndDeviceLinkProfileRequest()
-                                      {
-                                          PcsData = new List<double>(),
-                                          DcsData = new List<double>(),
-                                          SourceProfile = new IccProfile() { ProfileData = sourceProfile },
-                                          DestinationProfileOptions = new List<Parameter>(),
-                                          ProfileOptions = new List<Parameter>()
-                                      };
+                    {
+                        PcsData = new List<double>(),
+                        DcsData = new List<double>(),
+                        SourceProfile = new IccProfile() { ProfileData = sourceProfile },
+                        DestinationProfileOptions = new List<Parameter>(),
+                        ProfileOptions = new List<Parameter>()
+                    };
 
                     var measurementDataResponse =
                         BusinessFactory<IMeasurementBusiness>.
                             CreateObject().GetMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
-                   
+
                     request.PcsData = measurementDataResponse.PcsData;
                     request.DcsData = measurementDataResponse.DcsData;
 
@@ -150,7 +151,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     request.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
-                    
+
                     using (var client = new ProfilerClient())
                     {
                         var response = client.CreateDestinationAndDeviceLinkProfile(request);
@@ -212,14 +213,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     var destinationProfile = BusinessFactory<IProjectBusiness>.CreateObject().GetDestinationProfile(projectId);
                     var deviceLinkProfile = BusinessFactory<IProjectBusiness>.CreateObject().GetLastOptimizedDlp(projectId);
                     var request = new OptimizeDeviceLinkProfileRequest()
-                                      {
-                                          PCSData = new List<double>(),
-                                          DCSData = new List<double>(),
-                                          SourceProfile = new IccProfile() { ProfileData = sourceProfile },
-                                          DestinationProfile = new IccProfile() { ProfileData = destinationProfile },
-                                          DeviceLinkProfile = new IccProfile() { ProfileData = deviceLinkProfile },
-                                          ProfileOptions = new List<Parameter>()
-                                      };
+                    {
+                        PCSData = new List<double>(),
+                        DCSData = new List<double>(),
+                        SourceProfile = new IccProfile() { ProfileData = sourceProfile },
+                        DestinationProfile = new IccProfile() { ProfileData = destinationProfile },
+                        DeviceLinkProfile = new IccProfile() { ProfileData = deviceLinkProfile },
+                        ProfileOptions = new List<Parameter>()
+                    };
 
                     var measurementDataResponse = BusinessFactory<IMeasurementBusiness>.CreateObject().GetMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
                     request.PCSData = measurementDataResponse.PcsData;
@@ -364,7 +365,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastRunStatus"));
             return (EOptimizeRunStatus)LastRunStatus;
-        }        
+        }
 
         public EOptimizeRunStatus Get1DLastRunStatus(int OptimizeRunId)
         {
@@ -436,7 +437,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         new object[]
                             {
                                 projectId,
-                                status,                               
+                                status,
                                 startDateTime,
                                 CurveTypeId
                             }),
@@ -460,22 +461,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     alignmentCurveRequest.DCSData = new List<double>();          //DSCData as CMYK Data           
                     for (int i = 0; i < measurementDataResponse.DcsData.Count; i++)
                     {
-                        alignmentCurveRequest.DCSData.Add(measurementDataResponse.DcsData[i]);                        
+                        alignmentCurveRequest.DCSData.Add(measurementDataResponse.DcsData[i]);
                     }
 
                     alignmentCurveRequest.PCSData = new List<double>();         //PCSData as either Spectral Data or XYZ Data            
                     for (int i = 0; i < measurementDataResponse.PcsData.Count; i++)
                     {
-                        alignmentCurveRequest.PCSData.Add(measurementDataResponse.PcsData[i]);                        
-                    }                   
+                        alignmentCurveRequest.PCSData.Add(measurementDataResponse.PcsData[i]);
+                    }
 
                     alignmentCurveRequest.UseDLP = useDLP;
                     if (useDLP)
                     {
-                        var dlp = BusinessFactory<IProjectBusiness>.CreateObject().Get1DLastOptimizedDlp(projectId);                        
+                        var dlp = BusinessFactory<IProjectBusiness>.CreateObject().Get1DLastOptimizedDlp(projectId);
                         alignmentCurveRequest.DeviceLinkProfile = new IccProfile();
                         alignmentCurveRequest.DeviceLinkProfile.ProfileData = dlp;
-                    }                 
+                    }
 
                     var ProfOption = BusinessFactory<IMeasurementBusiness>.CreateObject().GetTargetTVIData(projectId, Is1DMeasurementSmoothing);
                     alignmentCurveRequest.ProfileOptions = new List<Parameter>();
@@ -487,10 +488,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     //alignmentCurveRequest.PCSDataType = PCSDataType.XYZ;//(PCSDataType)Enum.Parse(typeof(PCSDataType), pcsDataType.ToString());                    
                     alignmentCurveRequest.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
-                   
+
                     //alignmentCurveRequest.DensityType = (ProfilerService.DensityType)SessionManager.Instance.CurrentProject.DensityType;  
 
-                    CreateG7AlignmentCurveResponse syncClientResponse = new CreateG7AlignmentCurveResponse();                    
+                    CreateG7AlignmentCurveResponse syncClientResponse = new CreateG7AlignmentCurveResponse();
                     syncClientResponse = syncClient.CreateG7AlignmentCurve(alignmentCurveRequest);
 
                     int n = 101;
@@ -528,25 +529,25 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     ProfilerClient syncClient = new ProfilerClient();
 
                     CreateISOAlignmentCurveRequest alignmentCurveRequest = new CreateISOAlignmentCurveRequest();
-                   
+
                     alignmentCurveRequest.DCSData = new List<double>();    //DSCData as CMYK Data
                     for (int i = 0; i < measurementDataResponse.DcsData.Count; i++)
                     {
-                        alignmentCurveRequest.DCSData.Add(measurementDataResponse.DcsData[i]);                        
+                        alignmentCurveRequest.DCSData.Add(measurementDataResponse.DcsData[i]);
                     }
 
                     alignmentCurveRequest.PCSData = new List<double>();    //PCSData as either Spectral Data or Density Data                
                     for (int i = 0; i < measurementDataResponse.PcsData.Count; i++)
                     {
-                        alignmentCurveRequest.PCSData.Add(measurementDataResponse.PcsData[i]);                        
-                    } 
-                 
+                        alignmentCurveRequest.PCSData.Add(measurementDataResponse.PcsData[i]);
+                    }
+
                     alignmentCurveRequest.UseDLP = useDLP;
                     if (useDLP)
                     {
                         var dlp = BusinessFactory<IProjectBusiness>.CreateObject().Get1DLastOptimizedDlp(projectId);
-                        alignmentCurveRequest.DeviceLinkProfile = new IccProfile();                        
-                        alignmentCurveRequest.DeviceLinkProfile.ProfileData = dlp;                        
+                        alignmentCurveRequest.DeviceLinkProfile = new IccProfile();
+                        alignmentCurveRequest.DeviceLinkProfile.ProfileData = dlp;
                     }
 
                     //---Pass TVI values into Profiler Options, so now we don't need to pass Linearization TVIs----//
@@ -562,9 +563,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     alignmentCurveRequest.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
 
                     //alignmentCurveRequest.DensityType = ProfilerService.DensityType.StatusE;
-                    alignmentCurveRequest.DensityType = (ProfilerService.DensityType)SessionManager.Instance.CurrentProject.DensityType;    
+                    alignmentCurveRequest.DensityType = (ProfilerService.DensityType)SessionManager.Instance.CurrentProject.DensityType;
 
-                    CreateISOAlignmentCurveResponse syncClientResponse = new CreateISOAlignmentCurveResponse();                    
+                    CreateISOAlignmentCurveResponse syncClientResponse = new CreateISOAlignmentCurveResponse();
                     syncClientResponse = syncClient.CreateISOAlignmentCurve(alignmentCurveRequest);
 
 
@@ -616,7 +617,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        optimizeRunId,
                                        OptimizeRunCurveData.ToString()
                                     });
-        }      
+        }
 
         public CurveDataResponse GetCurveData(int optimizeRunId, short curveTypeId)
         {
@@ -712,14 +713,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     var sourceProfile =
                         BusinessFactory<IProjectBusiness>.
                             CreateObject().
-                            GetSourceProfile(projectId);                  
+                            GetSourceProfile(projectId);
 
                     var request = new CreateSourceToSourceDeviceLinkProfileRequest()
                     {
                         SourceProfile = new IccProfile() { ProfileData = sourceProfile },
                         ProfileOptions = new List<Parameter>()
                     };
-              
+
                     var profilerOptionBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
 
                     var profileOptions = profilerOptionBusiness.GetProjectOption(projectId, EProfileType.DeviceLinkProfile);
@@ -728,7 +729,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         request.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
                     }
                     request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
-                  
+
                     using (var client = new ProfilerClient())
                     {
                         var response = client.CreateSourceToSourceDeviceLinkProfile(request);
@@ -742,7 +743,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                "CPSync4D.UpdateInitialDlp",
                                new object[]
                                     {
-                                        optimizeRunId,                                       
+                                        optimizeRunId,
                                         response.DeviceLinkProfile.ProfileData,
                                         status,
                                         endDateTime
@@ -763,7 +764,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                            CreateObject().
                            GetSourceProfile(projectId);
 
-                  
+
                     var sourcerequest = new CreateSourceProfileRequest()
                     {
                         PCSData = new List<double>(),
@@ -790,7 +791,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     sourcerequest.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = destinationDescription });
 
                     sourcerequest.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
-                
+
                     using (var client = new ProfilerClient())
                     {
                         var sourceresponse = client.CreateSourceProfile(sourcerequest);
@@ -812,7 +813,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         sourceresponse.Profile.ProfileData,
                                         true
                                     });
-                       
+
                     }
 
                 },
@@ -831,11 +832,347 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         new object[]
                             {
                                 projectId,
-                                optimizeRunId,                               
+                                optimizeRunId,
                                 status,
                                 endDateTime
                             }),
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateReTargetProject"));
+        }
+
+        public void CreateSpotProjectOptimizeRun(int spotProjectId, int status, DateTime startDateTime)
+        {
+            Common.ImplementBusinessLogic(
+               () =>
+               DataAccessFactory.
+                   Instance.
+                   ExecuteProcedure(
+                       "[CPSpot].[CreateOptimizeRun]",
+                       new object[]
+                           {
+                                spotProjectId,
+                                status,
+                                startDateTime
+                           }),
+               new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateOptimizeRun"));
+        }
+
+        public void UpdateSpotProjectOptimizeRun(int optimizeRunID, int status, DateTime startDateTime)
+        {
+            Common.ImplementBusinessLogic(
+               () =>
+               DataAccessFactory.
+                   Instance.
+                   ExecuteProcedure(
+                       "[CPSpot].[UpdateOptimizeDlp]",
+                       new object[]
+                           {
+                                optimizeRunID,
+                                //ProfileData,
+                                status,
+                                startDateTime
+                           }),
+               new BusinessHandlerRequest(this, ErrorOccured, "Error_OptimizeNamedColorProfile"));
+        }
+
+        public void DeleteSpotOptimizeRun(int OptimizeRunID, int SpotProjectID, int MasterRunID, EOptimizeRunStatus RunStatus)
+        {
+            Common.ImplementBusinessLogic(
+               () =>
+               DataAccessFactory.
+                   Instance.
+                   ExecuteProcedure(
+                      "[CPSpot].[DeleteOptimizeRun]",
+                       new object[]
+                           {
+                                OptimizeRunID,
+                                SpotProjectID,
+                                MasterRunID,
+                                (int)RunStatus
+                           }),
+               new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteOptimizeRun"));
+        }
+
+        public bool DeleteSpotMeasurement(int measurementId)
+        {
+            int affectedRow = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    affectedRow = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CPSpot].[DeleteMeasurement]",
+                            new object[]
+                                    {
+                                        measurementId
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteSpotMeasurement"));
+            return (affectedRow > 0);
+        }
+
+        public void DeleteSpotOptimizeRunDLP(int OptimizeRunID, int SpotProjectID)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                DataAccessFactory.
+                    Instance.
+                    ExecuteProcedure(
+                        "CPSpot.DeleteOptimizeRunDLP",
+                        new object[]
+                            {
+                                OptimizeRunID,
+                                SpotProjectID
+                            }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteOptimizeRunNCP"));
+        }
+
+        public EOptimizeRunStatus GetSpotLastRunStatus(int OptimizeRunId)
+        {
+            int LastRunStatus = 1;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    LastRunStatus =
+                        Convert.ToInt32(
+                            DataAccessFactory.
+                                Instance.
+                                GetScalar(
+                                    "CPSpot.GetLastRunStatus",
+                                    new object[]
+                                            {
+                                                OptimizeRunId
+                                            }));
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastRunStatus"));
+            return (EOptimizeRunStatus)LastRunStatus;
+        }
+
+        public void CertifySpotOptimizeRun(int optimizeRunId, int SpotProjectId, int MasterRunId, int status, DateTime endDateTime)
+        {
+            Common.ImplementBusinessLogic(
+                () => DataAccessFactory.
+                          Instance.
+                          ExecuteProcedure(
+                              "CPSpot.CertifyOptimizeRun",
+                              new object[]
+                                  {
+                                      optimizeRunId,
+                                      SpotProjectId,
+                                      MasterRunId,
+                                      status,
+                                      endDateTime
+                                  }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CloseOptimizeRun"));
+        }
+
+        public void OptimizeNamedColoredProfile(int projectId, int optimizeRunId, List<int> measurementIds, string description, int status, DateTime endDateTime)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var sourceProfile = BusinessFactory<IProjectBusiness>.CreateObject().GetSourceProfile(projectId);
+                    var destinationProfile = BusinessFactory<IProjectBusiness>.CreateObject().GetDestinationProfile(projectId);
+                    var deviceLinkProfile = BusinessFactory<IProjectBusiness>.CreateObject().GetLastOptimizedDlp(projectId);
+                    var request = new OptimizeDeviceLinkProfileRequest()
+                    {
+                        PCSData = new List<double>(),
+                        DCSData = new List<double>(),
+                        SourceProfile = new IccProfile() { ProfileData = sourceProfile },
+                        DestinationProfile = new IccProfile() { ProfileData = destinationProfile },
+                        DeviceLinkProfile = new IccProfile() { ProfileData = deviceLinkProfile },
+                        ProfileOptions = new List<Parameter>()
+                    };
+
+                    var measurementDataResponse = BusinessFactory<IMeasurementBusiness>.CreateObject().GetMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
+                    request.PCSData = measurementDataResponse.PcsData;
+                    request.DCSData = measurementDataResponse.DcsData;
+
+                    var profileOptions = BusinessFactory<IProjectBusiness>.CreateObject().GetProjectOption(projectId, EProfileType.OptimizeDlp);
+                    foreach (KeyValuePair<string, string> option in profileOptions)
+                    {
+                        request.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                    }
+                    request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = description });
+
+                    request.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+
+                    using (var client = new ProfilerClient())
+                    {
+                        var response = client.OptimizeDeviceLinkProfile(request);
+                        if (response.OptimizedProfile.ProfileData == null)
+                        {
+                            throw new Exception("Optimized device link profile has not been generated successfully from service for runId:" + optimizeRunId + " Error: " + response.Message);
+                        }
+                        DataAccessFactory.Instance.ExecuteProcedure("CPSync4D.UpdateOptimizeDlp",
+                                                                    new object[] { optimizeRunId, response.OptimizedProfile.ProfileData, status, endDateTime });
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_OptimizeNamedColorProfile"));
+        }
+
+        public void CreateSpotNamedColorProfile(int spotProjectId, int OptimizeRunID, int Status, DateTime EndDate)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    ProfilerClient client = new ProfilerClient();
+
+                    CreateSpotLibraryRequest req = new CreateSpotLibraryRequest();
+                    SpotParameter[] paramList = new SpotParameter[10];
+                    paramList[0] = new SpotParameter() { Name = "MaxChannels", Value = "0" };
+                    paramList[1] = new SpotParameter() { Name = "MaxChannels", Value = "0" };
+                    paramList[2] = new SpotParameter() { Name = "SaveProfilerInfo", Value = "1" };
+                    paramList[3] = new SpotParameter() { Name = "SaveProfilerData", Value = "1" };
+                    paramList[4] = new SpotParameter() { Name = "CalculateDCSMode", Value = "2" };
+                    paramList[5] = new SpotParameter() { Name = "Rendering", Value = "3" };
+                    paramList[6] = new SpotParameter() { Name = "OOGMethod", Value = "dE00" };
+                    paramList[7] = new SpotParameter() { Name = "ClipAbsTolerance", Value = "0" };
+                    paramList[8] = new SpotParameter() { Name = "ClipRelTolerance", Value = "0" };
+                    paramList[9] = new SpotParameter() { Name = "MaxChannels", Value = "0" };
+
+                    req.ProfileOptions = paramList.ToList();
+
+                    var dsSpotTarget = DataAccessFactory.
+                     Instance.
+                     GetDsResult(
+                         "CPSpot.GetSpotTargetLABByOptimizeRun",
+                         new object[]
+                                 {
+                                        OptimizeRunID
+                                 });
+
+                    if (dsSpotTarget.Tables[0].Rows.Count > 0)
+                    {
+                        req.DestinationProfile = new SpotIccProfile();
+                        req.DestinationProfile.ProfileData = (byte[])dsSpotTarget.Tables[0].Rows[0]["DestinationProfile"];
+
+                        var ms = new MemoryStream();
+                        StreamWriter writer = new StreamWriter(ms);
+
+                        writer.WriteLine("BEGIN_DATA_FORMAT");
+                        writer.WriteLine("SAMPLE_NAME\tLAB_L\tLAB_A\tLAB_B");
+                        writer.WriteLine("END_DATA_FORMAT");
+                        writer.WriteLine("BEGIN_DATA");
+
+                        if (dsSpotTarget.Tables[1] != null && dsSpotTarget.Tables[1].Rows.Count > 0)
+                            foreach (DataRow dr in dsSpotTarget.Tables[1].Rows)
+                                writer.WriteLine("\"" + dr["SpotName"].ToString() + "\"\t" + dr["Target_L*"].ToString() + "\t" + dr["Target_a*"].ToString() + "\t" + dr["Target_b*"].ToString() + "");
+
+                        writer.WriteLine("END_DATA");
+                        writer.Flush();
+                        req.TargetProfile = ms.ToArray();
+                    }
+
+                    var syncClientResponse = client.CreateSpotLibraryValues(req);
+
+
+                    List<ProfilerService.Patch> list = syncClientResponse.spotPatchDetail;
+
+                    var spotProjectDetails = new XElement("SpotColorDetails",
+                                                       list.
+                                                           Select(x =>
+                                                                  new XElement("SpotColorData",
+                                                                               new XAttribute("OptimizeRunID", OptimizeRunID),
+                                                                               new XAttribute("SpotID", x.PatchID),
+                                                                               new XAttribute("SpotName", x.ColorName),
+                                                                               new XAttribute("CMYK_C", x.Cmyk_C),
+                                                                               new XAttribute("CMYK_M", x.Cmyk_M),
+                                                                               new XAttribute("CMYK_Y", x.Cmyk_Y),
+                                                                               new XAttribute("CMYK_K", x.Cmyk_K),
+                                                                               new XAttribute("Target_L", x.Cie_L),
+                                                                               new XAttribute("Target_A", x.Cie_a),
+                                                                               new XAttribute("Target_B", x.Cie_b),
+                                                                               new XAttribute("Predicted_L", x.p_Cie_L),
+                                                                               new XAttribute("Predicted_A", x.p_Cie_a),
+                                                                               new XAttribute("Predicted_B", x.p_Cie_b)
+                                                                      )).ToList());
+
+
+
+                    DataAccessFactory.Instance.ExecuteProcedure("CPSpot.UpdateOptimizeDlp",
+                                                                            new object[] { OptimizeRunID, syncClientResponse.namedColorProfile, Status, EndDate, spotProjectDetails.ToString(), true });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateSpotNamedColorProfile"));
+        }
+
+        public void OptimizeSpotNamedColorProfile(int OptimizeRunID, int Status, DateTime EndDate)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+
+
+                    ProfilerClient client = new ProfilerClient();
+
+                    OptimizeSpotLibraryRequest req = new OptimizeSpotLibraryRequest();
+                    SpotParameter[] paramList = new SpotParameter[5];
+                    paramList[0] = new SpotParameter() { Name = "ProfileSize", Value = "2" };
+                    paramList[1] = new SpotParameter() { Name = "SaveProfilerInfo", Value = "1" };
+                    paramList[2] = new SpotParameter() { Name = "SaveProfilerData", Value = "1" };
+                    paramList[3] = new SpotParameter() { Name = "ProfileFormat", Value = "2" };
+                    paramList[4] = new SpotParameter() { Name = "Rendering", Value = "3" };
+
+
+                    req.ProfileOptions = paramList.ToList();
+
+                    var dsSpotTarget = DataAccessFactory.
+                     Instance.
+                     GetDsResult(
+                         "CPSpot.GetSpotTargetLABByMeasurementID",
+                         new object[]
+                                 {
+                                        OptimizeRunID
+                                 });
+
+                    if (dsSpotTarget.Tables[0].Rows.Count > 0)
+                    {
+                        req.DestinationProfile = new SpotIccProfile();
+                        req.previousNamedColorProfile = new SpotIccProfile();
+                        req.DestinationProfile.ProfileData = (byte[])dsSpotTarget.Tables[0].Rows[0]["DestinationProfile"];
+                        req.previousNamedColorProfile.ProfileData = (byte[])dsSpotTarget.Tables[0].Rows[0]["LastOptimizedNCP"];
+
+                        var ms = new MemoryStream();
+                        StreamWriter writer = new StreamWriter(ms);
+
+                        writer.WriteLine("BEGIN_DATA_FORMAT");
+                        writer.WriteLine("SAMPLE_NAME\tLAB_L\tLAB_A\tLAB_B");
+                        writer.WriteLine("END_DATA_FORMAT");
+                        writer.WriteLine("BEGIN_DATA");
+
+                        if (dsSpotTarget.Tables[1] != null && dsSpotTarget.Tables[1].Rows.Count > 0)
+                            foreach (DataRow dr in dsSpotTarget.Tables[1].Rows)
+                                writer.WriteLine("\"" + dr["SpotName"].ToString() + "\"\t" + dr["Measured_L*"].ToString() + "\t" + dr["Measured_a*"].ToString() + "\t" + dr["Measured_b*"].ToString() + "");
+
+                        writer.WriteLine("END_DATA");
+                        writer.Flush();
+                        req.TargetProfile = ms.ToArray();
+                    }
+
+                    var syncClientResponse = client.OptimizeSpotLibraryValues(req);
+
+
+                    List<ProfilerService.Patch> list = syncClientResponse.spotPatchDetail;
+
+                    var spotProjectDetails = new XElement("SpotColorDetails",
+                                                       list.
+                                                           Select(x =>
+                                                                  new XElement("SpotColorData",
+                                                                               new XAttribute("OptimizeRunID", OptimizeRunID),
+                                                                               new XAttribute("SpotID", x.PatchID),
+                                                                               new XAttribute("SpotName", x.ColorName),
+                                                                               new XAttribute("CMYK_C", x.Cmyk_C),
+                                                                               new XAttribute("CMYK_M", x.Cmyk_M),
+                                                                               new XAttribute("CMYK_Y", x.Cmyk_Y),
+                                                                               new XAttribute("CMYK_K", x.Cmyk_K)
+                                                                      )).ToList());
+
+
+
+                    DataAccessFactory.Instance.ExecuteProcedure("CPSpot.UpdateOptimizeDlp",
+                                                                            new object[] { OptimizeRunID, syncClientResponse.namedColorProfile, Status, EndDate, spotProjectDetails.ToString(), false });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateSpotNamedColorProfile"));
         }
 
         #endregion

@@ -3,7 +3,7 @@
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
 <link rel="stylesheet" href="JQuery/datepicker-themes/base/jquery.ui.all.css">
-
+<script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -38,14 +38,14 @@
                                 <td style="width: 370px">
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtPrintStandardType" runat="server" MaxLength="50" Width="370px"
-                                            Height="19px" meta:resourcekey="txtPrintStandardTypeResource1"></asp:TextBox>
+                                            Height="19px" meta:resourcekey="txtPrintStandardTypeResource1" onkeypress="return validateText(event)"></asp:TextBox>
                                              <asp:HiddenField ID="hdnPrintStandardTypeID" runat="server" Value="0" />
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvPrintStandardType" runat="server" Display="Dynamic"
                                                 ControlToValidate="txtPrintStandardType" ForeColor="Red" 
                                                 ValidationGroup="vgAddPrintStandardType" meta:resourcekey="rfvPrintStandardTypeResource1"><ucValidationContainer:ValidationContainer ID="rfvcPrintStandardTypeContainer" runat="server"
-                                                    ValidationMsg="Please provide PrintStandard name." Size="200" />
+                                                    ValidationMsg="Please provide PrintStandard name." Size="200" ResourceValidationMsg="PrintStandardRequiredResource" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -70,7 +70,7 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvSourceProfile" runat="server" Display="Dynamic" ControlToValidate="cmbSourceProfile"
                                             ForeColor="Red" ValidationGroup="vgAddPrintStandardType" meta:resourcekey="rfvSourceProfileResource1"><ucValidationContainer:ValidationContainer ID="rfvSourceProfileContainer" runat="server"
-                                                ValidationMsg="Please select SourceProfile." Size="200" />
+                                                ValidationMsg="Please select SourceProfile." Size="200" ResourceValidationMsg="SelectSourceProfileResource"/>
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">

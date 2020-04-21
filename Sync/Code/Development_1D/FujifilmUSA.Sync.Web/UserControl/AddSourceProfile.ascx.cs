@@ -52,6 +52,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Page.Form.Attributes.Add("enctype", "multipart/form-data");
             BindRegionDropDown();
             cmbRegion_SelectedIndexChanged(null, null);
+            BindProfileCategory();
             if (Request.QueryString["SourceProfileId"] != null)
             {
                 var SourceProfileId = Request.QueryString["SourceProfileId"];
@@ -90,7 +91,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SourceProfile.CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue);
             SourceProfile.ProfileName = txtSourceProfile.Text.Trim();
             SourceProfile.ProfileDesc = txtProfileDescription.Text;
-
+            SourceProfile.Category = Convert.ToInt32(cmbProfileCategory.SelectedValue);
             //Read source profile from file
             if (fuProfile.PostedFile != null)
             {
@@ -186,8 +187,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbCompanyName.SelectedValue = Convert.ToString(SourceProfile.Company.CompanyId);
                 txtSourceProfile.Text = SourceProfile.ProfileName;
                 txtProfileDescription.Text = SourceProfile.ProfileDesc;
+                cmbProfileCategory.SelectedValue = Convert.ToString(SourceProfile.Category);
                 chkIsActive.Checked = (SourceProfile.IsUsed == true ? true : false);
             }
+        }
+
+        private void BindProfileCategory()
+        {
+            cmbProfileCategory.DataValueField = "Key";
+            cmbProfileCategory.DataTextField = "Value";
+            cmbProfileCategory.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<ESourceProfileCategory>();
+            cmbProfileCategory.DataBind();
+            cmbProfileCategory.SelectedIndex = 0;
         }
 
         #endregion
@@ -204,8 +215,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<SourceProfile> SourceProfiles { get; set; }
         public Dictionary<int, string> CompanyList { get; set; }
         public Dictionary<int, string> RegionList { get; set; }
+
         #endregion
 
-
+      
     }
 }

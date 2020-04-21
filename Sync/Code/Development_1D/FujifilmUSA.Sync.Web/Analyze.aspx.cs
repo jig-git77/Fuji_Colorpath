@@ -7,6 +7,10 @@ namespace FujifilmUSA.Sync.Web
         {
         }
 
-      
+        [System.Web.Services.WebMethod]
+        public static void Set1DMeasurementSmoothingSessionValue(string value)
+        {
+            Common.SessionManager.Instance.CurrentProject.Is1DMeasurementSmoothing = Convert.ToBoolean(value);
+        }
     }
 }

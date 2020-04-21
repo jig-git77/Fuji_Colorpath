@@ -346,6 +346,42 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.CheckBox chkIsOneOff;
         
         /// <summary>
+        /// locIsCustomProfOptionsResource1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locIsCustomProfOptionsResource1;
+        
+        /// <summary>
+        /// chkIsCustomProfOptions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkIsCustomProfOptions;
+        
+        /// <summary>
+        /// locIsCustomPlugin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locIsCustomPlugin;
+        
+        /// <summary>
+        /// chkIsCustomPlugin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkIsCustomPlugin;
+        
+        /// <summary>
         /// locIsActive control.
         /// </summary>
         /// <remarks>

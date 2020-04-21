@@ -3,9 +3,12 @@ using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using System.Collections.Generic;
 using System.Linq;
+using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class ProjectDescription : BaseControl
+    public partial class ProjectDescription : BaseControl, IViewSaveWindow
     {
 
         #region Private Variables - Globalization
@@ -16,6 +19,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recoperationSelectText = "operationSelectText";
         private const string _reclocTargetColorSpaceText = "locTargetColorSpaceText";
         private const string _reclocTargetColorSpaceNextText = "locTargetColorSpaceNextText";
+
+        private const string _reclocPlatesText = "locPlatesText";
+        private const string _reclocRollersText = "locRollersText";
+        private const string _reclocDocBladeText = "locDocBladeText";
+        private const string _reclocMountTapeText = "locMountTapeText";
+        private const string _reclocWashesText = "locWashesText";
+
+        private PresenterSaveWindow _presenterSaveWindow;
         #endregion
 
         public ProjectDescription()
@@ -23,6 +34,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
         }
 
+        protected override void OnInit(EventArgs e)
+        {
+            _presenterSaveWindow = new PresenterSaveWindow(this);
+        }
         #region Page Events
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,6 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 LoadLicenseType();
                 LoadInkOrder();
+                LoadPrintingTypes();
                 LoadDeviceInfoFromSession();
                 LoadProjectInfoFromSession();
                 LoadSpotTargetInfoFromSession();
@@ -58,7 +74,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 && SessionManager.Instance.CurrentDevice.LicenseTypeProject != null
                     && SessionManager.Instance.CurrentDevice.LicenseTypeProject.Count > 0)
             {
-              
+
                 foreach (KeyValuePair<ELicenseType, int> item in SessionManager.Instance.CurrentDevice.LicenseTypeProject)
                 {
                     //if (Common.Utilities.GetEnumDescriptionAttributeValue(item.Key) != Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary))
@@ -71,7 +87,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ddlLicenseType.SelectedIndex = 0;
             }
 
-            if (SessionManager.Instance.CurrentProject != null &&                
+            if (SessionManager.Instance.CurrentProject != null &&
                 SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.None)
             {
                 ddlLicenseType.SelectedIndex = ddlLicenseType.Items.IndexOf(ddlLicenseType.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.LicenseType)));
@@ -81,7 +97,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     locTargetColorSpace.Text = GetResourceString(_reclocTargetColorSpaceNextText);
                 }
             }
-           
+
         }
 
         private void LoadInkOrder()
@@ -96,6 +112,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbInkOrder.SelectedIndex = 0;
         }
 
+        private void LoadPrintingTypes()
+        {
+            if (cmbPrintingType.DataSource != null) return;
+
+            cmbPrintingType.DataValueField = "Key";
+            cmbPrintingType.DataTextField = "Value";
+            cmbPrintingType.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EPrintingTypes>();
+            cmbPrintingType.DataBind();
+
+            if (!SessionManager.Instance.CurrentDevice.IsFlexo)
+                cmbPrintingType.Items.FindByText("Flexo").Enabled = (SessionManager.Instance.CurrentProject != null && 
+                    SessionManager.Instance.CurrentProject.PrintCondition != null &&
+                    SessionManager.Instance.CurrentProject.PrintCondition.PrintConditionId != 0);
+
+            cmbPrintingType.SelectedIndex = 0;
+        }
+
         private void LoadDeviceInfoFromSession()
         {
             if (SessionManager.Instance.CurrentDevice.DeviceName != null)
@@ -106,6 +139,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void LoadProjectInfoFromSession()
         {
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary &&
+                SessionManager.Instance.CurrentProject.SpotTargetProject != null &&
+                SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition != null)
+            {
+                txtMedia.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Media;
+                txtColorant.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Colorant;
+                txtRipSetting.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.RipSettings;
+                txtNotes.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Notes;
+                txtTechnicianName.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.TechnicianName;
+            }
+
             if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.PrintCondition != null)
             {
                 txtMedia.Text = SessionManager.Instance.CurrentProject.PrintCondition.Media;
@@ -113,16 +157,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtRipSetting.Text = SessionManager.Instance.CurrentProject.PrintCondition.RipSettings;
                 txtNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
                 txtTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
+                cmbPrintingType.Enabled = SessionManager.Instance.CurrentProject.PrintCondition.PrintConditionId == 0 ? true : false;
 
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                     Tr_OffsetPrintData.Visible = true;
 
+                cmbPrintingType.SelectedIndex = cmbPrintingType.Items.IndexOf(cmbPrintingType.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.PrintCondition.PrintingType)));
+                SetProjectTypeVisisbility();
                 cmbInkOrder.SelectedIndex = cmbInkOrder.Items.IndexOf(cmbInkOrder.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.PrintCondition.InkOrder)));
                 txtFountainSol.Text = SessionManager.Instance.CurrentProject.PrintCondition.FountainSolution;
                 txtBlanket.Text = SessionManager.Instance.CurrentProject.PrintCondition.Blanket;
                 txtBlanketAge.Text = SessionManager.Instance.CurrentProject.PrintCondition.BlanketAge;
                 txtScreening.Text = SessionManager.Instance.CurrentProject.PrintCondition.Screening;
                 txtCoating.Text = SessionManager.Instance.CurrentProject.PrintCondition.Coating;
+                
 
                 if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.Edit) //If project is in Edit mode display Description tab for editing everytime and pop up Next button to move to next page
                 {
@@ -136,12 +184,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
             {
-                txtMedia.Text = "none";
-                txtColorant.Text = "none";
-                txtRipSetting.Text = "none";
+                //if (SessionManager.Instance.CurrentProject.SpotTargetProject != null && SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition != null)
+                //{
+                //txtMedia.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Media;
+                //txtColorant.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.Colorant;
+                //txtRipSetting.Text = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.RipSettings;
                 Tr_Media.Visible = false;
                 Tr_Rip.Visible = false;
                 Tr_Colorant.Visible = false;
+                //}
             }
         }
 
@@ -152,26 +203,52 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             //Check for project limit 
             int currentProjectLimit = 0;
-            if (SessionManager.Instance.ProjectList != null)
-                currentProjectLimit = SessionManager.Instance.ProjectList.Where(p => p.LicenseType == (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.ProjectId).Count();
+            DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
+            LicenseId = Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
 
-            int maxProjectLimit = 0;
-            if (SessionManager.Instance.CurrentDevice.LicenseTypeProject != null)
-                maxProjectLimit = SessionManager.Instance.CurrentDevice.LicenseTypeProject.Where(p => p.Key == (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.Value).FirstOrDefault();
-
-            if (currentProjectLimit >= maxProjectLimit)
+            if (SessionManager.Instance.CurrentProject.ProjectId == 0)
             {
-                //--------------Project Limit reach, so can not create more projects under this Device now-------//  
-                Response.Redirect("ProjectMaxLimit.aspx");
+                currentProjectLimit = _presenterSaveWindow.GetProjectLimit(Convert.ToInt32(ddlLicenseType.SelectedItem.Value));
+
+                int maxProjectLimit = 0;
+                if (SessionManager.Instance.CurrentDevice.LicenseTypeProject != null)
+                    maxProjectLimit = SessionManager.Instance.CurrentDevice.LicenseTypeProject.Where(p => p.Key == (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.Value).FirstOrDefault();
+
+                if (currentProjectLimit >= maxProjectLimit)
+                {
+                    //--------------Project Limit reach, so can not create more projects under this Device now-------//  
+                    SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
+                    SessionManager.Instance.CurrentProject = null;
+                    SessionManager.Instance.CurrentOptimizeRun = null;
+                    Response.Redirect("ProjectMaxLimit.aspx");
+                }
+            }
+            
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
+            {
+                ProjectId = SessionManager.Instance.CurrentProject.SpotTargetProject.ProjectId;
+                _presenterSaveWindow.GetProjectDetail();
+                if (!IsErrorOccured)
+                {
+                    if (Project.PrintCondition != null)
+                    {
+                        txtMedia.Text = Project.PrintCondition.Media;
+                        txtColorant.Text = Project.PrintCondition.Colorant;
+                        txtRipSetting.Text = Project.PrintCondition.RipSettings;
+                    }
+                }
             }
 
-            SessionManager.Instance.CurrentProject.PrintCondition = new FujifilmUSA.Sync.Entity.PrintCondition
+
+            ///adding print condition for spot libaray
+            PrintCondition PrintConditionObject = new PrintCondition
             {
                 Media = txtMedia.Text.Trim(),
                 Colorant = txtColorant.Text.Trim(),
                 RipSettings = txtRipSetting.Text.Trim(),
                 Notes = txtNotes.Text.Trim(),
                 TechnicianName = txtTechnicianName.Text.Trim(),
+                PrintingType = (EPrintingTypes)Convert.ToInt32(cmbPrintingType.SelectedItem.Value),
                 InkOrder = (EInkOrder)Convert.ToInt32(cmbInkOrder.SelectedItem.Value),
                 FountainSolution = txtFountainSol.Text.Trim(),
                 Blanket = txtBlanket.Text.Trim(),
@@ -179,6 +256,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Screening = txtScreening.Text.Trim(),
                 Coating = txtCoating.Text.Trim()
             };
+
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
+                SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition = PrintConditionObject;
+            else
+                SessionManager.Instance.CurrentProject.PrintCondition = PrintConditionObject;
 
             SessionManager.Instance.CurrentProject.LicenseType = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
             if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomSourceProfile || (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.FullGamutCustomSource)
@@ -216,6 +298,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkbtnNext_Click(object sender, EventArgs e)
         {
+
             SessionManager.Instance.CurrentProject.PrintCondition = new FujifilmUSA.Sync.Entity.PrintCondition
             {
                 Media = txtMedia.Text.Trim(),
@@ -223,6 +306,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 RipSettings = txtRipSetting.Text.Trim(),
                 Notes = txtNotes.Text.Trim(),
                 TechnicianName = txtTechnicianName.Text.Trim(),
+                PrintingType = (EPrintingTypes)Convert.ToInt32(cmbPrintingType.SelectedItem.Value),
                 InkOrder = (EInkOrder)Convert.ToInt32(cmbInkOrder.SelectedItem.Value),
                 FountainSolution = txtFountainSol.Text.Trim(),
                 Blanket = txtBlanket.Text.Trim(),
@@ -230,6 +314,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Screening = txtScreening.Text.Trim(),
                 Coating = txtCoating.Text.Trim()
             };
+
+
 
             SessionManager.Instance.CurrentProject.LicenseType = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
             if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //--If validation send it to Validation Setup page
@@ -242,6 +328,47 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
+
+        protected void cmbPrintingType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetProjectTypeVisisbility();
+        }
+        
+        void SetProjectTypeVisisbility()
+        {
+            if (cmbPrintingType.SelectedIndex == 1)//flexo printing type
+            {
+                locFountainSol.Text = GetResourceString(_reclocPlatesText);
+                locBlanket.Text = GetResourceString(_reclocRollersText);
+                locBlanketAge.Text = GetResourceString(_reclocDocBladeText);
+                locScreening.Text = GetResourceString(_reclocMountTapeText);
+                locCoating.Text = GetResourceString(_reclocWashesText);
+                locRollersMessage.Visible = true;
+                locFounSolRef.Visible = false;
+                locScreeningRef.Visible = false;
+            }
+            else
+            {
+                locFountainSol.Text = (string)GetLocalResourceObject("locFountainSolResource1.Text");
+                locBlanket.Text = (string)GetLocalResourceObject("locBlanketResource1.Text");
+                locBlanketAge.Text = (string)GetLocalResourceObject("locBlanketAgeResource1.Text");
+                locScreening.Text = (string)GetLocalResourceObject("locScreeningResource1.Text");
+                locCoating.Text = (string)GetLocalResourceObject("locCoatingResource1.Text");
+                locFounSolRef.Visible = true;
+                locScreeningRef.Visible = true;
+                locRollersMessage.Visible = false;
+            }
+            if (SessionManager.Instance.CurrentProject.PrintCondition == null)
+            {
+                cmbInkOrder.SelectedIndex = 0;
+                txtFountainSol.Text = "";
+                txtBlanket.Text = "";
+                txtBlanketAge.Text = "";
+                txtScreening.Text = "";
+                txtCoating.Text = "";
+            }
+        }
+    
         #endregion
 
         #region Properties
@@ -253,6 +380,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
+
+        #region IViewSaveWindow Members
+        public short ReferenceChartTypeId { get; set; }
+        public byte[] ChartPreview { get; set; }
+        public Project Project { get; set; }
+        public int ProjectId { get; set; }
+        public int DeviceId { get; set; }
+        public int LicenseId { get; set; }
+        public int CompanyId { get; set; }
+        #endregion
+
 
     }
 }

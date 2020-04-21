@@ -138,6 +138,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (Request.QueryString["ProjectId"] != null)
             {
+
                 #region Verification mode - Check for querystring of DLP Sub Operation
                 if (Request.QueryString["ToSubOperation"] != null && Convert.ToInt32(Request.QueryString["ToSubOperation"]) == (int)ELicenseType.None)
                 {
@@ -178,7 +179,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
             }
-
         }
 
         protected void lbtnViewDetail_Click(object sender, EventArgs e)
@@ -192,7 +192,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentProject = Project;
                     SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                     SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
-                   
+
                     SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
                     Utilities.PopupWindowsRedirect(this, "Export.aspx");
                 }
@@ -202,20 +202,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnDownloadCurrentDLP_Click(object sender, EventArgs e)
         {
             string DLPName = "Profile.icc";
-            if (Request.QueryString["DlpName"] != null)
+            if (Request.QueryString["DlpName"] != null && Convert.ToString(Request.QueryString["DlpName"]) != "")
             {
                 DLPName = Request.QueryString["DlpName"].ToString();
             }
 
-            ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
             if (Request.QueryString["licenseTypeId"] != null)
             {
+                ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
                 if ((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync1D)
                     _presenterClosePrintCondition.Get1DCurrentDeviceLinkProfile();
                 else
                     _presenterClosePrintCondition.GetCurrentDeviceLinkProfile();
-
             }
+
             if (!IsErrorOccured)
             {
                 //CurrentDlp = null;
@@ -240,6 +240,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Entity.Project Project { get; set; }
 
         public string DeviceName { get; set; }
+        public int SpotProjectId { get; set; }
 
         #endregion
 

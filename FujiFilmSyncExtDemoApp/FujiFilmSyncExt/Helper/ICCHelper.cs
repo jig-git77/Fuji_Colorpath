@@ -65,15 +65,16 @@ namespace FujiFilmSyncExt.Helper
                 colorant3 = bs2.ReadUInt16() / 655.35;
                 colorant4 = bs2.ReadUInt16() / 655.35;
 
-                patch.ColorName = ColorName;
-                patch.Cie_L = pcsL;
-                patch.Cie_a = pcsA;
-                patch.Cie_b = pcsB;
+                patch.ColorName = ColorName.TrimEnd('\0');
+                patch.Cie_L = Math.Round(pcsL, 3);
+                patch.Cie_a = Math.Round(pcsA, 3);
+                patch.Cie_b = Math.Round(pcsB, 3);
                 patch.Spot1 = 0;
-                patch.Cmyk_C = colorant1;
-                patch.Cmyk_M = colorant2;
-                patch.Cmyk_Y = colorant3;
-                patch.Cmyk_K = colorant4;
+                patch.Cmyk_C = Math.Round(colorant1, 3);
+                patch.Cmyk_M = Math.Round(colorant2, 3);
+                patch.Cmyk_Y = Math.Round(colorant3, 3);
+                patch.Cmyk_K = Math.Round(colorant4, 3);
+
 
                 listPatch.Add(patch);
             }

@@ -266,6 +266,7 @@ namespace FujifilmUSA.Sync.Common
             }
             return dRetVal;
         }
+       
 
         /// <summary>
         /// To read a string column value from datarow.

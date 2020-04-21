@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ColorPathSync.Business;
+using ColorPathSync.MessageContracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -61,8 +63,7 @@ namespace ColorPathSync
                 objPf.ErrorMsg = ex.ToString();
                 return objPf;
             }
-        }
-
+        }        
         
     }
 }

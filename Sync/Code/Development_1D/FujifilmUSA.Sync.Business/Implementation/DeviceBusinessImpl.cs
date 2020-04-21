@@ -30,26 +30,26 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         objDeviceList = dsDeviceList.Tables[0].AsEnumerable().
                             Select(x => new Device()
-                                            {
-                                                DeviceId = DataReader.ReadInt(x, "DeviceID"),
-                                                DeviceName = DataReader.ReadString(x, "DeviceName"),
-                                                DeviceFamily = new DeviceFamily()
-                                                                   {
-                                                                       DeviceFamilyId = DataReader.ReadShort(x, "DeviceFamilyID"),
-                                                                       DeviceFamilyDesc = DataReader.ReadString(x, "DeviceFamilyDesc")
-                                                                   },
-                                                BranchName = DataReader.ReadString(x, "BranchName")
-                                            }).ToList();
+                            {
+                                DeviceId = DataReader.ReadInt(x, "DeviceID"),
+                                DeviceName = DataReader.ReadString(x, "DeviceName"),
+                                DeviceFamily = new DeviceFamily()
+                                {
+                                    DeviceFamilyId = DataReader.ReadShort(x, "DeviceFamilyID"),
+                                    DeviceFamilyDesc = DataReader.ReadString(x, "DeviceFamilyDesc")
+                                },
+                                BranchName = DataReader.ReadString(x, "BranchName")
+                            }).ToList();
                         if (dsDeviceList.Tables[1].Rows.Count > 0)
                         {
                             var licenseDetails = dsDeviceList.Tables[1].
                                 AsEnumerable().
                                 Select(x => new
-                                                {
-                                                    DeviceId = DataReader.ReadInt(x, "DeviceID"),
-                                                    licenseTypeId = DataReader.ReadShort(x, "LicenseTypeID"),
-                                                    NumOfProject = DataReader.ReadInt(x, "NumOfProject")
-                                                }).ToList();
+                                {
+                                    DeviceId = DataReader.ReadInt(x, "DeviceID"),
+                                    licenseTypeId = DataReader.ReadShort(x, "LicenseTypeID"),
+                                    NumOfProject = DataReader.ReadInt(x, "NumOfProject")
+                                }).ToList();
                             objDeviceList.ForEach(x =>
                                                       {
                                                           if (licenseDetails.Where(y => y.DeviceId == x.DeviceId).Count() > 0)
@@ -80,33 +80,36 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         objDeviceList = dsDeviceList.Tables[0].AsEnumerable().
                             Select(x =>
                                    new Device()
+                                   {
+                                       DeviceId = DataReader.ReadInt(x, "DeviceID"),
+                                       DeviceName = DataReader.ReadString(x, "DeviceName"),
+                                       DeviceFamilyId = DataReader.ReadByte(x, "DeviceFamilyID"),
+                                       IsActive = DataReader.ReadBoolean(x, "IsActive"),
+                                       IsValidation = DataReader.ReadBoolean(x, "IsValidation"),
+                                       IsFlexo = DataReader.ReadBoolean(x, "IsFlexo"),
+                                       LicenseId = DataReader.ReadInt(x, "LicenseId"),
+                                       DeviceFamily = new DeviceFamily()
                                        {
-                                           DeviceId = DataReader.ReadInt(x, "DeviceID"),
-                                           DeviceName = DataReader.ReadString(x, "DeviceName"),
-                                           DeviceFamilyId = DataReader.ReadByte(x, "DeviceFamilyID"),
-                                           IsActive = DataReader.ReadBoolean(x, "IsActive"),
-                                           IsValidation = DataReader.ReadBoolean(x, "IsValidation"),
+                                           DeviceFamilyId = DataReader.ReadShort(x, "DeviceFamilyID"),
+                                           DeviceFamilyDesc = DataReader.ReadString(x, "DeviceFamilyDesc")
+                                       },
+                                       License = new License()
+                                       {
                                            LicenseId = DataReader.ReadInt(x, "LicenseId"),
-                                           DeviceFamily = new DeviceFamily()
-                                                              {
-                                                                  DeviceFamilyId = DataReader.ReadShort(x, "DeviceFamilyID"),
-                                                                  DeviceFamilyDesc = DataReader.ReadString(x, "DeviceFamilyDesc")
-                                                              },
-                                           License = new License()
-                                                         {
-                                                             LicenseId = DataReader.ReadInt(x, "LicenseId"),
-                                                             Branch = new Branch()
-                                                                          {
-                                                                              BranchId = DataReader.ReadInt(x, "BranchId"),
-                                                                              BranchName = DataReader.ReadString(x, "BranchName"),
-                                                                              Company = new Company()
-                                                                                            {
-                                                                                                CompanyId = DataReader.ReadInt(x, "CompanyId"),
-                                                                                                CompanyName = DataReader.ReadString(x, "CompanyName")
-                                                                                            }
-                                                                          }
-                                                         }
-                                       }).ToList();
+                                           IsCustomProfOptions = DataReader.ReadBoolean(x, "IsCustomProfOptions"),
+                                           IsCustomPlugin = DataReader.ReadBoolean(x, "IsCustomPlugin"),
+                                           Branch = new Branch()
+                                           {
+                                               BranchId = DataReader.ReadInt(x, "BranchId"),
+                                               BranchName = DataReader.ReadString(x, "BranchName"),
+                                               Company = new Company()
+                                               {
+                                                   CompanyId = DataReader.ReadInt(x, "CompanyId"),
+                                                   CompanyName = DataReader.ReadString(x, "CompanyName")
+                                               }
+                                           }
+                                       }
+                                   }).ToList();
 
                         if (dsDeviceList.Tables[1].Rows.Count > 0)
                         {
@@ -161,7 +164,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.DeviceFamily.DeviceFamilyId,
                                         device.IsActive,
                                         device.IsValidation,
-                                        licenseDetails.ToString()
+                                        licenseDetails.ToString(),
+                                        device.IsFlexo
                                     });
                         if (returnValue == -1)
                         {
@@ -198,7 +202,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.DeviceFamily.DeviceFamilyId,
                                         device.IsActive,
                                         device.IsValidation,
-                                        licenseDetails.ToString()
+                                        licenseDetails.ToString(),
+                                        device.IsFlexo
                                     });
                         if (returnValue == -1)
                         {
@@ -246,7 +251,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDeviceFamily"));
             return returnValue;
-        }       
+        }
 
         public int InsertDeviceFamilyProfilerOption(DeviceFamilyProfilerOption deviceFamilyProfilerOption)
         {
@@ -260,7 +265,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                     new XElement("ProfilerOptionPreset",
                                                                                  new XAttribute("ProfileTypeID", x.ProfileTypeId),
                                                                                  new XAttribute("ProfilerOptionID", x.ProfilerOption.ProfilerOptionId),
-                                                                                 new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)                                                                              
+                                                                                 new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)
                                                                         )).ToList());
 
                     returnValue = DataAccessFactory.
@@ -273,8 +278,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         deviceFamilyProfilerOption.ProfilerOptionsName,
                                         deviceFamilyProfilerOption.ProfilerOptionsDesc,
                                         deviceFamilyProfilerOption.ProjectTypeID,
-                                        profilerOptionPresets.ToString()                             
-                                        
+                                        profilerOptionPresets.ToString()
+
                                     });
                     if (returnValue == -1)
                     {
@@ -285,6 +290,35 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
+        public int InsertCustomDeviceFamilyProfilerOption(DeviceFamilyProfilerOption deviceFamilyProfilerOption, int UserID)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var profilerOptionPresets = new XElement("ProfilerOptionPresetData",
+                                                       deviceFamilyProfilerOption.ProfilerOptionPresets.
+                                                             Select(x =>
+                                                                    new XElement("ProfilerOptionPreset",
+                                                                                 new XAttribute("ProfileTypeID", x.ProfileTypeId),
+                                                                                 new XAttribute("ProfilerOptionID", x.ProfilerOption.ProfilerOptionId),
+                                                                                 new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)
+                                                                        )).ToList());
+
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CPSync4D].[InsertCustomDeviceFamilyProfilerOption]",
+                            new object[]
+                                    {
+                                        UserID,
+                                        profilerOptionPresets.ToString()
+
+                                    });                    
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDeviceFamilyProfilerOption"));
+            return returnValue;
+        }
         #endregion
 
         #region ITaskBase Members

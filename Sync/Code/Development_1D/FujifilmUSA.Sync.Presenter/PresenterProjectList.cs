@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewProjectList.ErrorOccured;
-            _viewProjectList.Projects = projectBusiness.GetProjectsByDeviceId(_viewProjectList.DeviceId,_viewProjectList.LicenseTypeID);
+            _viewProjectList.Projects = projectBusiness.GetProjectsByDeviceId(_viewProjectList.DeviceId,_viewProjectList.LicenseTypeID);             
         }
 
         public void DeleteProject()
@@ -45,7 +45,28 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewProjectList.ErrorOccured;
-            _viewProjectList.SpotProjectLibraries = projectBusiness.GetSpotLibraryListByProjectId(_viewProjectList.ProjectId);
+            _viewProjectList.SpotProjectList = projectBusiness.GetSpotLibraryListByProjectId(_viewProjectList.ProjectId);
+        }
+
+        public void DeleteSpotProject()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewProjectList.ErrorOccured;
+            projectBusiness.DeleteSpotProject(_viewProjectList.SpotProjectId);
+        }
+
+        public void GetProjectDetail_SpotProject()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewProjectList.ErrorOccured;
+            _viewProjectList.Project = projectBusiness.GetProjectDetail_SpotProject(_viewProjectList.ProjectId);
+        }
+
+        public void GetProjectDetail()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewProjectList.ErrorOccured;
+            _viewProjectList.Project = projectBusiness.GetProjectDetail(_viewProjectList.ProjectId);
         }
     }
 }

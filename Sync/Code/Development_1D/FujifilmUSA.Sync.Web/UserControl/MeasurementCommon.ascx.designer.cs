@@ -13,6 +13,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class MeasurementCommon {
         
         /// <summary>
+        /// hdfAuthToken control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfAuthToken;
+        
+        /// <summary>
         /// hdnPCSType control.
         /// </summary>
         /// <remarks>
@@ -175,6 +184,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locRecentUpload;
         
         /// <summary>
+        /// btnImportMeasurementFile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputButton btnImportMeasurementFile;
+        
+        /// <summary>
         /// RadWindowManager1 control.
         /// </summary>
         /// <remarks>
@@ -265,13 +283,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.HiddenField hdHasMeasurement;
         
         /// <summary>
-        /// hdMeasurementLimit control.
+        /// hdMeasurementsTotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdMeasurementLimit;
+        protected global::System.Web.UI.WebControls.HiddenField hdMeasurementsTotal;
         
         /// <summary>
         /// hdDisplayImport control.
@@ -292,6 +310,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.HiddenField hdDeviceType;
         
         /// <summary>
+        /// hdSpotProjectType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdSpotProjectType;
+        
+        /// <summary>
         /// RadWindowManager control.
         /// </summary>
         /// <remarks>
@@ -308,5 +335,14 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadWindow ImportMeasurementWindow;
+        
+        /// <summary>
+        /// ImportMeasurementFileWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindow ImportMeasurementFileWindow;
     }
 }

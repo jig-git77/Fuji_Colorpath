@@ -79,6 +79,13 @@ namespace FujifilmUSA.Sync.Presenter
             _viewAnalyze.dtPatchDetails = measurementBusiness.GetPatchDetailsofMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
         }
 
+        public void GetSpotPatchDetailsofMeasurement()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.dtPatchDetails = measurementBusiness.GetSpotPatchDetailsofMeasurement(_viewAnalyze.OptimizeRunId);
+        }
+
         public void GetInkPaperChart()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
@@ -86,7 +93,7 @@ namespace FujifilmUSA.Sync.Presenter
             var charData = measurementBusiness.GetChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements);
             _viewAnalyze.DTDeltaEPrimaryPatches = charData[0];
             _viewAnalyze.DTPaperPatches = charData[1];
-            _viewAnalyze.DTDensity = charData[2];            
+            _viewAnalyze.DTDensity = charData[2];
         }
 
         public void GetGrayChart()
@@ -96,7 +103,7 @@ namespace FujifilmUSA.Sync.Presenter
             var GaumatChartData = measurementBusiness.GetGamutChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements);
             _viewAnalyze.DTGaumatChart1 = GaumatChartData[0];
             _viewAnalyze.DTGaumatChart2 = GaumatChartData[1];
-            _viewAnalyze.DTLABChart = GaumatChartData[2];             
+            _viewAnalyze.DTLABChart = GaumatChartData[2];
         }
 
         public void GetG7Chart()
@@ -129,7 +136,7 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewAnalyze.ProjectId,
                 _viewAnalyze.OptimizeRunId,
                 _viewAnalyze.MeasurementIds,
-                _viewAnalyze.useDLP,              
+                _viewAnalyze.useDLP,
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
                 DateTime.Now,
                 _viewAnalyze.Is1DMeasurementSmoothing);
@@ -144,7 +151,7 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewAnalyze.ProjectId,
                 _viewAnalyze.OptimizeRunId,
                 _viewAnalyze.MeasurementIds,
-                _viewAnalyze.useDLP,                
+                _viewAnalyze.useDLP,
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
                 DateTime.Now,
                 _viewAnalyze.Is1DMeasurementSmoothing);
@@ -215,6 +222,76 @@ namespace FujifilmUSA.Sync.Presenter
                     _viewAnalyze.OptimizeRunId,
                     Convert.ToInt32(EOptimizeRunStatus.Closed),
                     DateTime.Now);
+        }
+
+        public void UpdateOptimizeRun_SpotProject()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            optimizeRunBusiness.UpdateSpotProjectOptimizeRun(_viewAnalyze.OptimizeRunId, _viewAnalyze.ProjectStatus, DateTime.Now);
+        }
+
+        public void GetProjectDetail_SpotProject()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.Project = projectBusiness.GetProjectDetail_SpotProject(_viewAnalyze.SpotProjectId);
+        }
+
+        public void UpdateMeasurementByAnalyzeChartFromService()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            measurementBusiness.UpdateMeasurementByAnalyzeChartFromService(_viewAnalyze.MeasurementId, _viewAnalyze.IsUsed, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+        }
+
+        public void OptmizeSpotLibrary()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            optimizeRunBusiness.OptimizeSpotNamedColorProfile(                    
+                    _viewAnalyze.OptimizeRunId,
+                    (int)EOptimizeRunStatus.Closed,
+                    DateTime.Now);
+        }
+
+        public void GetSpotPatchSummaryDetails()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.dtPatchDetails = measurementBusiness.GetSpotProjectSummary(_viewAnalyze.OptimizeRunId);
+        }
+
+        public bool UpdateSpotProjectLabValues()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            return measurementBusiness.SaveSpotProjectLABValues(_viewAnalyze.SpotProjectLabs);
+        }
+
+        public void GetPatchDetailsOfMeasurementExport()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.Measurement = measurementBusiness.GetMeasurementPatchDetailsForExport(_viewAnalyze.MeasurementId);
+        }
+        public void GetSpotPatchDetailsOfMeasurementExport()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.Measurement = measurementBusiness.GetSpotMeasurementPatchDetailsForExport(_viewAnalyze.OptimizeRunId);
+        }        
+        public void Get1DPatchDetailsOfMeasurementExport()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.Measurement = measurementBusiness.Get1DMeasurementPatchDetailsForExport(_viewAnalyze.MeasurementId);
+        }
+        public void GetValidationPatchDetailsOfMeasurementExport()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.Measurement = measurementBusiness.GetValidationMeasurementPatchDetailsForExport(_viewAnalyze.MeasurementId);
         }
     }
 }

@@ -82,12 +82,12 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <asp:TextBox ID="txtPresetName" runat="server" MaxLength="50" Width="400px" 
-                                                Height="19px" meta:resourcekey="txtPresetNameResource1"></asp:TextBox>
+                                                Height="19px" meta:resourcekey="txtPresetNameResource1" onkeypress="return validateText(event)"></asp:TextBox>
                                         </div>
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvPresetName" runat="server" Display="Dynamic" ControlToValidate="txtPresetName"
                                                 ForeColor="Red" ValidationGroup="vgAddMetricTargetPreset"><ucValidationContainer:ValidationContainer ID="rfvPresetContainer" runat="server"
-                                                    ValidationMsg="Please provide Preset name." Size="200" />
+                                                    ValidationMsg="Please provide Preset name." Size="200" ResourceValidationMsg="PresetNameRequiredResource"/>
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">

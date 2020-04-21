@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
+using System.Data;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
@@ -11,6 +12,14 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int OptimizeRunId { get; set; }
         List<Measurement> Measurements { get; set; }
         int MeasurementId { get; set; }
-        EReferenceChartDisType ReferenceChartDisType { get; set; }        
+        EReferenceChartDisType ReferenceChartDisType { get; set; }
+        int SpotProjectId { get; set; }
+        ReferenceChartPlugin ReferenceChartPlugin { get; set; }
+        string ProjectType { get; set; }
+        DataTable dtMeasurementValidation { get; set; }
+        int UserID { get; set; }
+        string MeaDeviceSerialNo { get; set; }
+        string RequestMeasurment { get; set; }
+        string MToolEntryDate { get; set; }
     }
 }

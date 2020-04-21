@@ -15,5 +15,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         PCSDataTypes PCSDataTypes { get; set; }
         DensityTypes DensityType { get; set; }
         bool Is1DMeasurementSmoothing { get; }
+        int SpotProjectId { get; set; }
+        int ProjectStatus { get; set; }
     }
 }

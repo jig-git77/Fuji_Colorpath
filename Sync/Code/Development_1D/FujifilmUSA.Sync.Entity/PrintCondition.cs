@@ -9,12 +9,15 @@ namespace FujifilmUSA.Sync.Entity
         public string RipSettings { get; set; }
         public string TechnicianName { get; set; }
         public string Notes { get; set; }
+        public EPrintingTypes PrintingType { get; set; }
         public EInkOrder InkOrder { get; set; }
         public string FountainSolution { get; set; }
         public string Blanket { get; set; }
         public string BlanketAge { get; set; }
         public string Screening { get; set; }
         public string Coating { get; set; }
+        public bool IsCustomProfilerOption { get; set; }
+        public bool IsCustomPlugin { get; set; }       
         //public Project Project { get; set; }
     }
 }

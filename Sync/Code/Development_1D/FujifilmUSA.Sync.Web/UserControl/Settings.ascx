@@ -2,16 +2,18 @@
 
 
 <script type="text/javascript">
-      jQuery(document).ready(function () {
-          $('#dock').hide();
+    jQuery(document).ready(function () {
+        $('#dock').hide();
     });   
 </script>
 
 <div class="admin_top">
-    &nbsp;</div>
+    &nbsp;
+</div>
 <div class="admin_middle">
     <div class="head">
-        <h1><asp:Localize runat="server" Text="Admin" ID="locAdmin" 
+        <h1>
+            <asp:Localize runat="server" Text="Admin" ID="locAdmin"
                 meta:resourcekey="locAdminResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
@@ -285,7 +287,52 @@
                             </div>
                             <asp:Localize Text="Sync1D LAB TVI Density Values" runat="server" ID="Localize3"></asp:Localize>
                         </asp:LinkButton>                
-                    </div>        
+                    </div>  
+                    <div id="divSpotTargetSeparator" runat ="server" align="center" valign="bottom" style="float:left;">
+                        <img alt="" src="Images/admin-icon-divider.png" />
+                    </div>
+                  <div id="divSpotTarget" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
+                    <asp:LinkButton ID="lnkSpotTarget" runat="server"
+                        PostBackUrl="~/SpotTargetManagement.aspx" onclick="lnkSpotTarget_Click">                       
+                        <div>
+                            <asp:Image ID="Image10" runat="server" AlternateText="Spot Target"
+                                ImageUrl="~/Images/Reference-Chart.jpg" ToolTip="Spot Target" 
+                                meta:resourcekey="imgSpotTargetResource1" />
+                        </div>
+                        <asp:Localize runat="server" Text="Spot Target" ID="Localize4" 
+                          meta:resourcekey="locSpotTargetResource1"></asp:Localize>                    
+                    </asp:LinkButton>
+                </div>
+                    <div id="divMetricTargetSeperator" runat ="server" align="center" valign="bottom" style="float:left;">
+                        <img alt="" src="Images/admin-icon-divider.png" />
+                    </div> 
+                    <div id="divMetricTarget" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
+                    <asp:LinkButton ID="lnkMetricTarget" runat="server"
+                        PostBackUrl="~/MetricTargetManagement.aspx">                       
+                        <div>
+                            <asp:Image ID="Image11" runat="server" AlternateText="Spot Target"
+                                ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Metric Target" 
+                                meta:resourcekey="imgMetricTargetResource1" />
+                        </div>
+                        <asp:Localize runat="server" Text="Metric Target" ID="Localize5" 
+                          meta:resourcekey="locMetricTargetResource1"></asp:Localize>                    
+                    </asp:LinkButton>
+                </div>
+                    <div id="divMeasurementLogSeperator" runat ="server" align="center" valign="bottom" style="float:left;">
+                        <img alt="" src="Images/admin-icon-divider.png" />
+                    </div> 
+                    <div id="divMeasurementLog" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
+                    <asp:LinkButton ID="lnkMeasurementLog" runat="server"
+                        PostBackUrl="~/MeasurementLog.aspx">                       
+                        <div>
+                            <asp:Image ID="ImgMeasurementLog" runat="server" AlternateText="Measurement Log"
+                                ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Measurement Log" 
+                                meta:resourcekey="imgMeasurementLogResource1" />
+                        </div>
+                        <asp:Localize runat="server" Text="Measurement Log" ID="Localize6" 
+                          meta:resourcekey="locMeasurementLogResource1"></asp:Localize>                    
+                    </asp:LinkButton>
+                </div>
                 </td>
             </tr>
                 
@@ -300,4 +347,5 @@
     </center>
 </div>
 <div class="admin_bottom">
-    &nbsp;</div>
+    &nbsp;
+</div>

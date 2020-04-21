@@ -133,6 +133,45 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
 
         }
+        public void CreateSpotProjectOptimizeRun(int spotProjectId, int status, DateTime startDateTime)
+        {
+
+        }
+        public void UpdateSpotProjectOptimizeRun(int optimizeRunID, int status, DateTime startDateTime)
+        {
+
+        }
+        public void DeleteSpotOptimizeRun(int OptimizeRunID, int SpotProjectID, int MasterRunID, EOptimizeRunStatus RunStatus)
+        {
+
+        }
+        public bool DeleteSpotMeasurement(int measurementId)
+        {
+            return true;
+        }
+        public void DeleteSpotOptimizeRunDLP(int OptimizeRunID, int SpotProjectID)
+        {
+
+        }
+        public EOptimizeRunStatus GetSpotLastRunStatus(int OptimizeRunID)
+        {
+            return default(EOptimizeRunStatus);
+        }
+        public void CertifySpotOptimizeRun(int optimizeRunId, int SpotProjectId, int MasterRunId, int status, DateTime endDateTime)
+        {
+
+        }
+        public void OptimizeNamedColoredProfile(int projectId, int optimizeRunId, List<int> measurementIds, string description, int status, DateTime endDateTime)
+        {
+
+        }
+        public void CreateSpotNamedColorProfile(int spotProjectId, int OptimizeRunID, int Status, DateTime EndDate)
+        {
+        }
+        public void OptimizeSpotNamedColorProfile(int OptimizeRunID, int Status, DateTime EndDate)
+        {
+
+        }
         #endregion
 
         #region ITaskBase Members

@@ -342,10 +342,10 @@ col._idGenTableRowColumn-2 {
 }
 tr._idGenTableRowColumn-3 {
 	background-color:#b6ddc7;
-	min-height:27px;
+	min-height:20px;
 }
 tr._idGenTableRowColumn-4 {
-	min-height:27px;
+	min-height:15px;
 }
 tr._idGenTableRowColumn-5 {
 	background-color:#b6ddc7;
@@ -511,4 +511,9 @@ td.CMY
 td.Gray
 {
     background-color:#d3d4d5;
+}
+.gamutChart {
+    background: url('../Images/LabBackdrop.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }

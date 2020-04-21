@@ -24,6 +24,11 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +51,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -84,12 +93,20 @@
     <Compile Include="Business\CreateISOCurveProfileBusiness.cs" />
     <Compile Include="Business\CreateSourceProfileBusiness.cs" />
     <Compile Include="Business\ExtractProfileValuesBusiness.cs" />
+    <Compile Include="Business\CreateSpotLibraryBusiness.cs" />
     <Compile Include="Business\OptimizeDeviceLinkProfileBusiness.cs" />
+    <Compile Include="Business\OptimizeSpotLibraryBusiness.cs" />
     <Compile Include="DataContracts\IccProfile.cs" />
     <Compile Include="DataContracts\MessageSeverity.cs" />
     <Compile Include="DataContracts\Parameter.cs" />
+    <Compile Include="DataContracts\Patch.cs" />
     <Compile Include="DataContracts\PCSDataType.cs" />
     <Compile Include="DataContracts\ProfileExtractType.cs" />
+    <Compile Include="DataContracts\SpotIccProfile.cs" />
+    <Compile Include="DataContracts\SpotParameter.cs" />
+    <Compile Include="Helper\BinaryDataReader.cs" />
+    <Compile Include="Helper\ICCFile.cs" />
+    <Compile Include="Helper\ICCHelper.cs" />
     <Compile Include="ICPSync.cs" />
     <Compile Include="MessageContracts\BaseResponse.cs" />
     <Compile Include="MessageContracts\CreateDestinationAndDeviceLinkProfileRequest.cs" />
@@ -102,8 +119,12 @@
     <Compile Include="MessageContracts\CreateISOAlignmentCurveResponse.cs" />
     <Compile Include="MessageContracts\ExtractProfileValuesRequest.cs" />
     <Compile Include="MessageContracts\ExtractProfileValuesResponse.cs" />
+    <Compile Include="MessageContracts\CreateSpotLibraryRequest.cs" />
+    <Compile Include="MessageContracts\CreateSpotLibraryResponse.cs" />
     <Compile Include="MessageContracts\OptimizeDeviceLinkProfileRequest.cs" />
     <Compile Include="MessageContracts\OptimizeDeviceLinkProfileResponse.cs" />
+    <Compile Include="MessageContracts\OptimizeSpotLibraryRequest.cs" />
+    <Compile Include="MessageContracts\OptimizeSpotLibraryResponse.cs" />
     <Compile Include="ServiceContracts\IProfiler.cs" />
     <Compile Include="MessageContracts\CreateSourceProfileRequest.cs" />
     <Compile Include="MessageContracts\CreateSourceProfileResponse.cs" />
@@ -123,7 +144,12 @@
     <Compile Include="DataAccess\DataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\Folder.pubxml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

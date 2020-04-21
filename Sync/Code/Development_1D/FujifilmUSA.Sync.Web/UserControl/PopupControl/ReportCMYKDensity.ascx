@@ -1,6 +1,498 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ReportCMYKDensity.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.PopupControl.ReportCMYKDensity" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<script src="JQuery/jquery-1.9.1.min.js"></script>
+<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2018.1.221/kendo.all.min.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript">
+
+    var jsonCyanDensity = [];
+    var jsonMagentaDensity = [];
+    var jsonYellowDensity = [];
+    var jsonBlackDensity = [];
+    //********** kendo objects *********//
+    var drawing = kendo.drawing;
+    var geometry = kendo.geometry;
+    //********** Gradient kendo objects *********//
+
+    var gradientGray = new drawing.LinearGradient({
+        start: [0, 0], // Bottom left
+        end: [0, 1],   // Top left
+        stops: [{
+            offset: 0,
+            color: "#000",
+            opacity: 0.2
+        }, {
+            offset: 1,
+            color: "#000",
+            opacity: 0
+        }]
+    });
+
+    $(document).ready(function () {
+
+        var apiParameters = {
+            OptimizationRunId: document.getElementById('<%= txt_OptimizeRunID.ClientID %>').value
+        };
+
+        var ajaxParameter = {
+            type: "GET",
+            url: parent.SERVICE_BASE_URL + 'api/Chart/GetColorDensityChart',
+            data: apiParameters,
+            dataType: "json",
+            headers: {
+                'Authorization': 'Basic ' + parent.AUTH_TOKEN
+            }
+        };
+
+        commonAjaxCall(ajaxParameter, function (response) {
+            if (response.data != null) {
+                    jsonCyanDensity = response.data.CMYKDensity.CyanList;
+                    jsonMagentaDensity = response.data.CMYKDensity.MagentaList;
+                    jsonYellowDensity = response.data.CMYKDensity.YellowList;
+                    jsonBlackDensity = response.data.CMYKDensity.BlackList;
+                }
+                BindCyanDensity();
+                BindMagentaDensity();
+                BindYellowDensity()
+                BindBlackDensity();
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status == 401) {
+                ShowDialog("You are not authorized user. Please login again.", "Message");
+            } else {
+                alert(errorThrown);
+            }
+        });
+
+        //$.ajax({
+        //    url: parent.SERVICE_BASE_URL + 'api/Chart/GetColorDensityChart',
+        //    data: apiParameters,
+        //    type: 'GET',
+        //    dataType: 'json',            
+        //    success: function (response) {
+        //        if (response.data != null) {
+        //            jsonCyanDensity = response.data.CMYKDensity.CyanList;
+        //            jsonMagentaDensity = response.data.CMYKDensity.MagentaList;
+        //            jsonYellowDensity = response.data.CMYKDensity.YellowList;
+        //            jsonBlackDensity = response.data.CMYKDensity.BlackList;
+        //        }
+        //        BindCyanDensity();
+        //        BindMagentaDensity();
+        //        BindYellowDensity()
+        //        BindBlackDensity();
+        //    },
+        //    error: function (xhr, errorType, exception) {
+        //        //alert(exception);
+        //        kendo.ui.progress($chartLoader, false);
+        //    }
+        //});
+    });
+
+    function BindCyanDensity() {
+
+        var cyanList = [];
+        var seriesCyan = [];
+        var seriesCyanLimit = [];
+        var minΔECyan = 0;
+        var maxΔECyan = 0;
+
+        var DeltaEValues = $.map(jsonCyanDensity, function (element) { return element.ΔE; });
+        maxΔECyan = Math.max.apply(Math, DeltaEValues);
+        minΔECyan = Math.min.apply(Math, DeltaEValues);
+
+        var kendoTargetObj = {};
+        kendoTargetObj.data = [];
+        kendoTargetObj.color = "Red";
+        kendoTargetObj.markers = { background: "Red" };
+        kendoTargetObj.highlight = {
+            visible: false
+        }
+
+
+        $.each(jsonCyanDensity, function (index, obj) {
+            var markerSize = 5;
+            if (obj.ΔE == minΔECyan) {
+                markerSize = 10;
+            }
+
+            var element = {
+                xValue: obj.Density.toFixed(2),
+                yValue: obj.ΔE.toFixed(2),
+                color: 'blue',
+                markerSize: markerSize,
+            }
+            seriesCyan.push(element);
+
+            var limitArr1 = [1, obj.ΔElimit];
+            kendoTargetObj.data.push(limitArr1);
+            var limitArr2 = [2, obj.ΔElimit];
+            kendoTargetObj.data.push(limitArr2);
+        });
+
+       
+
+        $("#divDensityCyan").kendoChart({
+            renderAs: "canvas",
+            seriesDefaults: {
+                type: "scatterLine",
+                style: "smooth"
+            },
+            //title: {
+            //    text: "Cyan Density"
+            //},
+            dataSource: seriesCyan,
+            series: [
+                {
+                    xField: "xValue",
+                    yField: "yValue",
+                    color: "blue",
+                    markers: { background: function (e) { return e.dataItem.color; }, size: function (e) { return e.dataItem.markerSize; } },
+
+                    tooltip: {
+                        visible: true,
+                        template: '<table><tr><td><b>Density : </b>#= dataItem.xValue #</td></tr><tr><td><b>ΔE :</b>#= dataItem.yValue #</td></tr></table>'
+                    }
+                },
+                kendoTargetObj
+            ],
+            xAxis: {
+                name: "xAxis",
+                min: 1,
+                max: 2,
+                majorUnit: 0.1,
+                labels: {
+                    format: "{0}"
+                },
+            },
+            yAxis: {
+                name: "yAxis",                
+                min: 0,
+                max: 10,
+                majorUnit: 1,
+                labels: {
+                    format: "{0}"
+                },
+            },
+            chartArea: {
+                width: 320,
+                height: 320
+            },
+            plotArea: {
+                background: "white"
+            },
+            render: renderChartWithBackgroundByAxis
+        });
+    }
+
+    function BindMagentaDensity() {
+
+        var seriesMagenta = [];
+        var seriesMagentaLimit = [];
+        var minΔEMagenta = 0;
+        var maxΔEMagenta = 0;
+
+        var DeltaEValues = $.map(jsonMagentaDensity, function (element) { return element.ΔE; });
+        maxΔEMagenta = Math.max.apply(Math, DeltaEValues);
+        minΔEMagenta = Math.min.apply(Math, DeltaEValues);
+
+        var densityLimit = {};
+        densityLimit.data = [];
+        densityLimit.color = "Red";
+        densityLimit.markers = { background: "Red" };
+        densityLimit.highlight = {
+            visible: false
+        }
+        $.each(jsonMagentaDensity, function (index, obj) {
+            var markerSize = 5;
+            if (obj.ΔE == minΔEMagenta) {
+                markerSize = 10;
+            }
+
+            var element = {
+                xValue: obj.Density.toFixed(2),
+                yValue: obj.ΔE.toFixed(2),
+                color: 'blue',
+                markerSize: markerSize,
+            }
+            seriesMagenta.push(element);
+
+            var limitArr1 = [1, obj.ΔElimit];
+            densityLimit.data.push(limitArr1);
+            var limitArr2 = [2, obj.ΔElimit];
+            densityLimit.data.push(limitArr2);
+        });
+
+
+
+        $("#divMagentaCyan").kendoChart({
+            renderAs: "canvas",
+            seriesDefaults: {
+                type: "scatterLine",
+                style: "smooth"
+            },
+            //title: {
+            //    text: "Magenta Density"
+            //},
+            dataSource: seriesMagenta,
+            series: [
+                {
+                    xField: "xValue",
+                    yField: "yValue",
+                    color: "blue",
+                    markers: { background: function (e) { return e.dataItem.color; }, size: function (e) { return e.dataItem.markerSize; } },
+                    tooltip: {
+                        visible: true,
+                        template: '<table><tr><td><b>Density : </b>#= dataItem.xValue #</td></tr><tr><td><b>ΔE :</b>#= dataItem.yValue #</td></tr></table>'
+                    }
+                },
+                densityLimit
+            ],
+            xAxis: {
+                name: "xAxis",
+                min: 1,
+                max: 2,
+                majorUnit: 0.1,
+                labels: {
+                    format: "{0}"
+                },
+            },
+            yAxis: {
+                name: "yAxis",
+                min: 0,
+                max: 10,
+                majorUnit: 1,
+                labels: {
+                    format: "{0}"
+                },
+            },
+            chartArea: {
+                width: 320,
+                height: 320
+            },
+            plotArea: {
+                background: "white"
+            },
+            render: renderChartWithBackgroundByAxis
+        });
+    }
+
+    function BindYellowDensity() {
+
+        var seriesYellow = [];
+        var seriesYellowLimit = [];
+        var minΔEYellow = 0;
+        var maxΔEYellow = 0;
+
+        var DeltaEValues = $.map(jsonYellowDensity, function (element) { return element.ΔE; });
+        maxΔEYellow = Math.max.apply(Math, DeltaEValues);
+        minΔEYellow = Math.min.apply(Math, DeltaEValues);
+
+        var densityLimit = {};
+        densityLimit.data = [];
+        densityLimit.color = "Red";
+        densityLimit.markers = { background: "Red" };
+        densityLimit.highlight = {
+            visible: false
+        }
+
+        $.each(jsonYellowDensity, function (index, obj) {
+            var markerSize = 5;
+            if (obj.ΔE == minΔEYellow) {
+                markerSize = 10;
+            }
+
+            var element = {
+                xValue: obj.Density.toFixed(2),
+                yValue: obj.ΔE.toFixed(2),
+                color: 'blue',
+                markerSize: markerSize,
+            }
+            seriesYellow.push(element);
+
+            var limitArr1 = [1, obj.ΔElimit];
+            densityLimit.data.push(limitArr1);
+            var limitArr2 = [2, obj.ΔElimit];
+            densityLimit.data.push(limitArr2);
+        });
+
+
+
+        $("#divYellowCyan").kendoChart({
+            renderAs: "canvas",
+            seriesDefaults: {
+                type: "scatterLine",
+                style: "smooth"
+            },
+            //title: {
+            //    text: "Yellow Density"
+            //},
+            dataSource: seriesYellow,
+            series: [
+                {
+                    xField: "xValue",
+                    yField: "yValue",
+                    color: "blue",
+                    markers: { background: function (e) { return e.dataItem.color; }, size: function (e) { return e.dataItem.markerSize; } },
+                    tooltip: {
+                        visible: true,
+                        template: '<table><tr><td><b>Density : </b>#= dataItem.xValue #</td></tr><tr><td><b>ΔE :</b>#= dataItem.yValue #</td></tr></table>'
+                    }
+                },
+                densityLimit
+            ],
+            xAxis: {
+                name: "xAxis",
+                min: 1,
+                max: 2,
+                majorUnit: 0.1,
+                labels: {
+                    format: "{0}"
+                },
+            },
+            yAxis: {
+                name: "yAxis",
+                min: 0,
+                max: 10,
+                majorUnit: 1,
+                labels: {
+                    format: "{0}"
+                },
+            },
+            chartArea: {
+                width: 320,
+                height: 320
+            },
+            plotArea: {
+                background: "white"
+            },
+            render: renderChartWithBackgroundByAxis
+        });
+    }
+
+    function BindBlackDensity() {
+
+        var seriesBlack = [];
+        var seriesBlackLimit = [];
+        var minΔEBlack = 0;
+        var maxΔEBlack = 0;
+
+        var DeltaEValues = $.map(jsonBlackDensity, function (element) { return element.ΔE; });
+        maxΔEBlack = Math.max.apply(Math, DeltaEValues);
+        minΔEBlack = Math.min.apply(Math, DeltaEValues);
+
+        var densityLimit = {};
+        densityLimit.data = [];
+        densityLimit.color = "Red";
+        densityLimit.markers = { background: "Red" };
+        densityLimit.highlight = {
+            visible: false
+        }
+
+        $.each(jsonBlackDensity, function (index, obj) {
+            var markerSize = 5;
+            if (obj.ΔE == minΔEBlack) {
+                markerSize = 10;
+            }
+
+            var element = {
+                xValue: obj.Density.toFixed(2),
+                yValue: obj.ΔE.toFixed(2),
+                color: 'blue',
+                markerSize: markerSize,
+            }
+            seriesBlack.push(element);
+
+            var limitArr1 = [1, obj.ΔElimit];
+            densityLimit.data.push(limitArr1);
+            var limitArr2 = [2, obj.ΔElimit];
+            densityLimit.data.push(limitArr2);
+        });
+
+        $("#divBlackCyan").kendoChart({
+            renderAs: "canvas",
+            seriesDefaults: {
+                type: "scatterLine",
+                style: "smooth"
+            },
+            //title: {
+            //    text: "Black Density"
+            //},
+            dataSource: seriesBlack,
+            series: [
+                {
+                    xField: "xValue",
+                    yField: "yValue",
+                    color: "blue",
+                    markers: { background: function (e) { return e.dataItem.color; }, size: function (e) { return e.dataItem.markerSize; } },
+                    tooltip: {
+                        visible: true,
+                        template: '<table><tr><td><b>Density : </b>#= dataItem.xValue #</td></tr><tr><td><b>ΔE :</b>#= dataItem.yValue #</td></tr></table>'
+                    }
+                },
+                densityLimit
+            ],
+            xAxis: {
+                name: "xAxis",
+                min: 1,
+                max: 2,
+                majorUnit: 0.1,
+                labels: {
+                    format: "{0}"
+                },
+            },
+            yAxis: {
+                name: "yAxis",
+                min: 0,
+                max: 10,
+                majorUnit: 1,
+                labels: {
+                    format: "{0}"
+                },
+            },
+            chartArea: {
+                width: 320,
+                height: 320
+            },
+            plotArea: {
+                background: "white"
+            },
+            render: renderChartWithBackgroundByAxis
+        });
+    }
+
+    function renderChartWithBackgroundByAxis(e) {
+        var xSlot = {};
+        var ySlot = {};
+        var path = {};
+        var chart = e.sender;
+        var xAxis = chart.getAxis("xAxis");
+        var yAxis = chart.getAxis("yAxis");
+        var xAxisArray = xAxis._axis.children.map(r => parseFloat(r.content));
+        var yAxisArray = yAxis._axis.children.map(r => parseFloat(r.content));
+
+
+       xSlot = xAxis.slot(Math.abs(Math.min.apply(Math, xAxisArray)), Math.abs(Math.max.apply(Math, xAxisArray)));
+            ySlot = yAxis.slot(Math.abs(Math.min.apply(Math, yAxisArray)), Math.abs(Math.max.apply(Math, yAxisArray)));
+       
+
+
+        //set the rectangle area on chart
+        var rect = new geometry.Rect([
+            xSlot.origin.x, ySlot.origin.y
+        ], [
+                xSlot.width(), ySlot.height()
+            ]);
+
+
+        
+            path = drawing.Path.fromRect(rect, {
+                stroke: null,
+                fill: gradientGray
+            });
+
+        chart.surface.draw(path);
+    }
+
     function Close() {
         var oWindow = GetMeasurementRadWindow();
         GetMeasurementRadWindow().close();
@@ -39,7 +531,7 @@
                 <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
             </td>
         </tr>
-       <tr>
+      <%-- <tr>
         <td style="width: 48%;" valign="top">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                 <tr>
@@ -282,6 +774,70 @@
                                 </asp:ChartArea>
                             </ChartAreas>
                         </asp:Chart>
+                    </td>
+                </tr>
+            </table>
+        </td>
+       </tr>--%>
+         <tr>
+        <td style="width: 48%;" valign="top">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                <tr>
+                    <td class="green-title">
+                        &nbsp; <asp:Localize Text="Cyan" runat="server" 
+                            ID="Localize4" meta:resourcekey="locCMYKDensityCyanResource1"></asp:Localize>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" style="padding: 2px">                        
+                        <div id="divDensityCyan"></div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td style="width: 48%;" valign="top">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                <tr>
+                    <td class="green-title">
+                        &nbsp; <asp:Localize Text="Magenta" runat="server" 
+                            ID="Localize5" meta:resourcekey="locCMYKDensityCyanResource1"></asp:Localize>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" style="padding: 2px">
+                        <div id="divMagentaCyan"></div>                         
+                    </td>
+                </tr>
+            </table>
+        </td>
+       </tr>
+         <tr>
+        <td style="width: 48%;" valign="top">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                <tr>
+                    <td class="green-title">
+                        &nbsp; <asp:Localize Text="Yellow" runat="server" 
+                            ID="Localize6" meta:resourcekey="locCMYKDensityCyanResource1"></asp:Localize>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" style="padding: 2px">
+                         <div id="divYellowCyan"></div>                         
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td style="width: 48%;" valign="top">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                <tr>
+                    <td class="green-title">
+                        &nbsp; <asp:Localize Text="Black" runat="server" 
+                            ID="Localize7" meta:resourcekey="locCMYKDensityCyanResource1"></asp:Localize>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" style="padding: 2px">
+                         <div id="divBlackCyan"></div>                         
                     </td>
                 </tr>
             </table>

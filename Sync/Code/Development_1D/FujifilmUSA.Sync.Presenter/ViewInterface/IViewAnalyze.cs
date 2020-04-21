@@ -37,7 +37,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
 
         DataTable dtPatchDetails { get; set; }
-
+        List<SpotProjectLAB> SpotProjectLabs { get; set; }
         bool useDLP { get; set; }
         byte[] DeviceLinkProfile { get; set; }
         bool IsSync1DType { get; }
@@ -56,5 +56,9 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 
         bool IsAverageOfMeasurements { get; set; }
         bool Is1DMeasurementSmoothing { get; set; }
+        int ProjectStatus { get; set; }
+        Project Project { get; set; }
+        int SpotProjectId { get; set; }
+        bool IsUsed { get; set; }        
     }
 }

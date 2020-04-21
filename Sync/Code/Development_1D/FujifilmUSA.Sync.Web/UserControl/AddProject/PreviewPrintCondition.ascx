@@ -193,6 +193,10 @@
                                                 <asp:Label ID="lblSpotTarget" runat="server" CssClass="breakWord100"></asp:Label>
                                             </td>
                                         </tr>
+<<<<<<< HEAD
+=======
+                                        
+>>>>>>> ColorPath-Production
                                     </div>
                                 </table>
                             </div>
@@ -280,7 +284,7 @@
                                                 meta:resourcekey="lblUVSettingsResource1"></asp:Label>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr id="Tr_Validation" runat="server">
                                         <td>
                                             <span style="font-weight: bold;"><asp:Localize runat="server" 
                                                 Text="Enable Validation" ID="locEnable_Vali" 
@@ -339,7 +343,11 @@
         </tr>
         <tr>
             <td valign="top">
+<<<<<<< HEAD
                 <div id="dvOptionPreset" runat="server" style="display: block;">
+=======
+                <div id="Div_Presets" runat="server"  style="display: block;">
+>>>>>>> ColorPath-Production
                     <div class="section_small_top">
                         &nbsp;</div>
                     <div class="section_small_middle">

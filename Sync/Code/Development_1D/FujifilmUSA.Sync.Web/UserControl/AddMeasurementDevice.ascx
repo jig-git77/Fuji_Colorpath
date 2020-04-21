@@ -4,6 +4,21 @@
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
 <script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
+<script type="text/javascript" language="javascript">
+    
+    function GetMeasurementRadWindow() {
+        var oWindow = null;
+        if (window.radWindow) oWindow = window.radWindow;
+        else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
+        return oWindow;
+    }
+    function CloseDeviceWindow() {           
+        var oWindow = GetMeasurementRadWindow();
+        GetMeasurementRadWindow().close();
+        //top.location.href = top.location.href.replace("#","");
+        parent.window.location = top.location.href.replace("#", "");
+    }
+</script>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -46,8 +61,7 @@
                                         <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbCompanyName" ForeColor="Red" 
                                             ValidationGroup="vgAddMeasurementDevice"><ucValidationContainer:ValidationContainer ID="rfvCompnayContainer" runat="server"
-                                                ValidationMsg="Please select company." Size="200" />
-</asp:RequiredFieldValidator>
+                                                ValidationMsg="Please select company." Size="200"  ResourceValidationMsg="CompanyRequiredResource"  /></asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -71,8 +85,7 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvBranch" runat="server" Display="Dynamic" ControlToValidate="cmbBranch"
                                             ForeColor="Red" ValidationGroup="vgAddMeasurementDevice"><ucValidationContainer:ValidationContainer ID="rfvBranchContainer" runat="server"
-                                                ValidationMsg="Please select branch." Size="200" />
-</asp:RequiredFieldValidator>
+                                                ValidationMsg="Please select branch." Size="200" ResourceValidationMsg="BranchRequiredResource" /></asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -98,8 +111,7 @@
                                         <asp:RequiredFieldValidator ID="rfvLicenseType" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbLicenseType" ForeColor="Red" 
                                             ValidationGroup="vgAddMeasurementDevice"><ucValidationContainer:ValidationContainer ID="rfvLicenseContainer" runat="server"
-                                                ValidationMsg="Please select license name." Size="200" />
-</asp:RequiredFieldValidator>
+                                                ValidationMsg="Please select license name." Size="200"  ResourceValidationMsg="LicenseRequiredResource" /></asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -124,8 +136,7 @@
                                         <asp:RequiredFieldValidator ID="rfvSerialNumber" runat="server" Display="Dynamic"
                                             ControlToValidate="txtSerialNumber" ForeColor="Red" 
                                             ValidationGroup="vgAddMeasurementDevice"><ucValidationContainer:ValidationContainer ID="rfvSerialNumberContainer" runat="server"
-                                                ValidationMsg="Please provide serial number." Size="200" />
-</asp:RequiredFieldValidator>
+                                                ValidationMsg="Please provide serial number." Size="200" ResourceValidationMsg="SerialRequiredResource"/></asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -152,8 +163,7 @@
                                         <asp:RequiredFieldValidator ID="rfvInstrumentType" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbInstrumentType" ForeColor="Red" 
                                             ValidationGroup="vgAddMeasurementDevice"><ucValidationContainer:ValidationContainer ID="rfvInstrumentContainer" runat="server"
-                                                ValidationMsg="Please select instrument type." Size="200" />
-</asp:RequiredFieldValidator>
+                                                ValidationMsg="Please select instrument type." Size="200" ResourceValidationMsg="InstrumentRequiredResource"/></asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -208,25 +218,22 @@
                                             <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" ValidationGroup="vgAddMeasurementDevice"
                                                 OnClick="lbtnSave_Click">
                                                     <span> <asp:Localize Text="Save" runat="server" ID="locSave" 
-                                                meta:resourcekey="locSaveResource1"></asp:Localize>
- </span>
+                                                meta:resourcekey="locSaveResource1"></asp:Localize></span>
                                             </asp:LinkButton>
-                                            <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" 
-                                                PostBackUrl="~/MeasurementDeviceList.aspx">
+                                            <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt"  OnClick="lbtnCancel_Click">
                                                     <span> <asp:Localize Text="Cancel" runat="server" ID="locCancel" 
-                                                meta:resourcekey="locCancelResource1"></asp:Localize>
- </span>
+                                                meta:resourcekey="locCancelResource1"></asp:Localize></span>
                                             </asp:LinkButton>
                                         </div>
                                     </div>
                                     <div class="clear">
                                     </div>
                                 </td>
-                            </tr>
+                            </tr>                            
                         </table>
                     </fieldset>
                 </center>
-            </ContentTemplate>
+           </ContentTemplate>
         </asp:UpdatePanel>
     </div>
 </div>

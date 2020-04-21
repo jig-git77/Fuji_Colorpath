@@ -734,6 +734,7 @@ pre code {
 .col-md-2,
 .col-md-3,
 .col-md-4,
+.col-md-41,
 .col-md-5,
 .col-md-6,
 .col-md-7,
@@ -1112,6 +1113,7 @@ pre code {
     .col-md-2,
     .col-md-3,
     .col-md-4,
+    .col-md-41,
     .col-md-5,
     .col-md-6,
     .col-md-7,
@@ -1144,7 +1146,10 @@ pre code {
         width: 41.66666667%
     }
     .col-md-4 {
-        width: 33.33333333%
+        width: 32%
+    }
+    .col-md-41 {
+        width: 36%
     }
     .col-md-3 {
         width: 25%

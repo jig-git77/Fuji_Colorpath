@@ -10,6 +10,7 @@ using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System.Data;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -45,6 +46,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!Page.IsPostBack)
             {
                 BindUsers();
+                if(SessionManager.Instance.CurrentUser.Role.RoleId < 5) //----Only Region Admin (RoleID = 4) and beyond higher level users can only have this report access----//
+                {
+                    likUserReport.Visible = true;
+                }
             }
         }
         #endregion
@@ -65,7 +70,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        
+        public int GenerateRandom()
+        {
+            Random rnd = new Random();
+            int randomnumber = rnd.Next(1000);     // creates a number between 0 and 1000
+            return randomnumber;
+        }
+
         #endregion
 
         #region Control Events
@@ -109,14 +120,38 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 rgUser.DataSource = UserList;
             }
         }
-      
 
-         #endregion
+        protected void likUserReport_Click(object sender, EventArgs e)
+        {
+            int Filenumber = GenerateRandom();
+            _presenterUserManagement.GetUsers();
+            if (!IsErrorOccured)
+            {
+                #region Generate User Activity Report .csv file
+                System.IO.StreamWriter sw;
+                sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/") + Filenumber.ToString() + "_UserActivityReport.csv");
+
+                sw.WriteLine("UserName,FirstName,LastName,Email,Company,Branch,IsActive,LastActiveDate");
+
+                for (int i = 0; i < UserList.Count; i++)
+                {
+                    sw.WriteLine(UserList[i].LoginId + "," + UserList[i].FirstName + "," + UserList[i].LastName + "," + UserList[i].Email + "," + UserList[i].UserCompany.Company.CompanyName.Replace(",", " ") + "," + UserList[i].BranchNames.Replace("</Br>", ";") + "," + UserList[i].IsActive + "," + UserList[i].LastActiveDate);
+                }
+
+                sw.Close();
+
+                Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), Filenumber.ToString() + "_UserActivityReport.csv", Filenumber.ToString() + "_UserActivityReport.csv");
+                #endregion
+            }
+        }
+
+        #endregion
 
         #region Implement Interface
         public User User { get; set; }
         public List<User> UserList { get; set; }
         public Dictionary<int, string> Compnaies { get; set; }
         #endregion
+        
     }
 }

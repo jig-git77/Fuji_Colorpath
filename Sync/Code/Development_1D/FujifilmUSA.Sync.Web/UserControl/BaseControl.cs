@@ -1,6 +1,8 @@
 ﻿using System;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Common;
+using System.Globalization;
+using System.Threading;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -28,8 +30,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsGlobal)                                   
                 return (GetLocalResourceObject(key) as string);
             return key;
-        }   
-        
+        }
+
+        public string getCurrentCultureLanguage()
+        {
+            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            return currentCulture.Name.ToString();
+        }
+
         #region IViewBase Members
 
         public int CurrentUserId { get; set; }

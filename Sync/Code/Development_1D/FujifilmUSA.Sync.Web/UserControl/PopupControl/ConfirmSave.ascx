@@ -96,31 +96,36 @@
                 <div style="float: left; line-height: 24px">
                     <table cellpadding="0" cellspacing="0">
                         <tr id="Tr_Certify" runat="server">
-                            <td style="font-weight: bold;">
+                            <td style="font-weight: bold; vertical-align: top; padding-top:7px;">
                                 <asp:Localize runat="server" Text="Certify:" ID="locCertify" 
-                                    meta:resourcekey="locCertifyResource1"></asp:Localize>&nbsp;
+                                    meta:resourcekey="locCertifyResource1"></asp:Localize>&nbsp;&nbsp;&nbsp;
                             </td>
-                            <td>
-                                <p style="padding-top: 7px;">
+                            <td style="padding-top:7px;">
                                     <asp:Localize runat="server" 
-                                        Text="Certify sets the state of this DLP to Certified and is considered a confirmation that your are satisfied with the colormatch." 
+                                        Text="Completes this DLP Project and is considered a confirmation that you are satisfied with the color match." 
                                         ID="locSatisfiedColorMatchMsg" 
-                                        meta:resourcekey="locSatisfiedColorMatchMsgResource1"></asp:Localize>
+                                        meta:resourcekey="locSatisfiedColorMatchMsgResource1"  Visible="false"></asp:Localize>
                                     
-                                </p>
+                                    <asp:Localize runat="server" 
+                                        Text="Completes this NCP Project and is considered a confirmation that you are satisfied with the color match." 
+                                        ID="locSatisfiedColorMatchMsgNCP" 
+                                        meta:resourcekey="locSatisfiedColorMatchMsgResource1NCP" Visible="false"></asp:Localize>
                             </td>
                         </tr>
+                        
                         <tr id="Tr_Optimize" runat="server">
-                            <td style="font-weight: bold;">
+                            <td style="font-weight: bold; vertical-align: top; padding-top:7px;">
                                 <asp:Localize runat="server" Text="Optimize:" ID="locOptimize" 
-                                    meta:resourcekey="locOptimizeResource1"></asp:Localize>&nbsp;
+                                    meta:resourcekey="locOptimizeResource1"></asp:Localize>&nbsp;&nbsp;&nbsp;
                             </td>
-                            <td>
-                                <p style="padding-top: 7px;">
+                            <td style="padding-top:7px;">
                                     <asp:Localize runat="server" 
-                                        Text="Optimize creates new optimized DLP which should be implemented in your workflow." 
-                                        ID="locOptimizeDLP" meta:resourcekey="locOptimizeDLPResource1"></asp:Localize>
-                                </p>
+                                        Text="Creates another iteration of the DLP based on the latest measurements. It should be implemented in your workflow and measured again." 
+                                        ID="locOptimizeDLP" meta:resourcekey="locOptimizeDLPResource1"  Visible="false"></asp:Localize>
+
+                                    <asp:Localize runat="server" 
+                                        Text="Creates another iteration of the NCP based on the latest measurements. It should be implemented in your workflow and measured again." 
+                                        ID="locOptimizeNCP" meta:resourcekey="locOptimizeDLPResource1NCP"  Visible="false"></asp:Localize>
                             </td>
                         </tr>
                     </table>

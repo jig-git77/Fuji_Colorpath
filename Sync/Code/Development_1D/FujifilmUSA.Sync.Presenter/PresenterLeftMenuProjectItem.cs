@@ -64,5 +64,29 @@ namespace FujifilmUSA.Sync.Presenter
                 DateTime.Now,
                 1);
         }
+        public void DeleteSpotOptimizeRun()
+        {
+            var optimizeRun = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRun.ErrorOccured += _viewLeftMenuProjectItem.ErrorOccured;
+            optimizeRun.DeleteSpotOptimizeRun(_viewLeftMenuProjectItem.OptimizeRunID, _viewLeftMenuProjectItem.SpotProjectId, _viewLeftMenuProjectItem.MasterRunID, _viewLeftMenuProjectItem.RunStatus);
+        }
+        public void GetProjectDetail_SpotProject()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewLeftMenuProjectItem.ErrorOccured;
+            _viewLeftMenuProjectItem.Project = projectBusiness.GetProjectDetail_SpotProject(_viewLeftMenuProjectItem.SpotProjectId);
+        }
+        public void CreateOptimizeRun_SpotProject()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewLeftMenuProjectItem.ErrorOccured;
+            optimizeRunBusiness.CreateSpotProjectOptimizeRun(_viewLeftMenuProjectItem.SpotProjectId, Convert.ToInt32(EOptimizeRunStatus.Open), DateTime.Now);
+        }
+        public void DeleteSpotOptimizeRunDLP()
+        {
+            var optimizeRun = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRun.ErrorOccured += _viewLeftMenuProjectItem.ErrorOccured;
+            optimizeRun.DeleteSpotOptimizeRunDLP(_viewLeftMenuProjectItem.OptimizeRunID, _viewLeftMenuProjectItem.SpotProjectId);
+        }
     }
 }

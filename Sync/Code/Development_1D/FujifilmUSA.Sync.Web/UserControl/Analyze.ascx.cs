@@ -83,7 +83,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _reclocLabelTol = "locLabelTol";
         private const string _reclocLabelAct = "locLabelAct";
         private const string _reclocLabelSignature = "locLabelSignature";
-        private const string _reclocLabelDate = "locLabelDate";        
+        private const string _reclocLabelDate = "locLabelDate";
 
         public DateTime EndDate;
         public decimal DtELimit = 0;
@@ -173,6 +173,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (!Page.IsPostBack)
             {
+                hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
+                hdnCurrentUserID.Value = Convert.ToString(SessionManager.Instance.CurrentUser.UserId) ?? "0";
+                hdfCurrentCulture.Value = getCurrentCultureLanguage();
+                hdnProjectID.Value = SessionManager.Instance.CurrentOptimizeRun.ProjectId.ToString();
+                hdnOptimizationRunID.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
+                hdnValidationType.Value = ValidationType.ToString();
+                hdnCurrentProjectLicenseType.Value = SessionManager.Instance.CurrentProject.LicenseType.ToString();
                 //--Start: Load average Compatibility values
                 chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return CheckAvgCompability();");
                 ChkAvgMeasurementCompatibility();
@@ -186,7 +193,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     header.InnerText = GetResourceString(_recValidationAnalyzeHeaderText); //"Validation - Analyze";
                     //------Assign dEMethod value to radiolist, based on selected MetricTargetPresetID----------------//
-                    rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
+                    hdnDefaultSelectedDelta.Value = rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
                 }
                 else
                 {
@@ -195,7 +202,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         //------If project is Sync1D type, Assign 'E' to radiolist, bydefault (because Sync 1D has only dt_E type)----------------//
                         //rbtnListDeltaE.SelectedValue = "E";
-                        rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
+                        hdnDefaultSelectedDelta.Value = rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
                     }
                     if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
                     {
@@ -207,6 +214,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         header.InnerText = string.Format(GetResourceString(_recAnalyze), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Analyze - {0}
                         DLPName = SessionManager.Instance.CurrentOptimizeRun.LastDlpName.Replace(SessionManager.Instance.CurrentProject.ProjectName + " ", ""); //---DLPName to pass into report
                         DLPName = DLPName.Remove(DLPName.Length - 4);
+                        hdnReportDLPName.Value = DLPName;
                     }
                 }
                 lbtnDownloadAndSaveDLP.Text = IsNewDlp
@@ -214,6 +222,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                   : "<span><img id='imgAdd' src='Images/save_icon.png'/>" + GetResourceString(_recNext) + "</span>";//Create DLP - Next
 
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
+                hdnVerification.Value = IsVerification.ToString();
+                hdnCurrentDlpSubOperation.Value = ((int)SessionManager.Instance.CurrentDlpSubOperation).ToString();
+                hdnSync1DType.Value = IsSync1DType.ToString();
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                 {
                     //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//
@@ -229,9 +240,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Verification mode
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //---Only display Report Grading for Sync4D Validation
                     {
-                       // Div_ReportGrading.Visible = true; //---Disable for time being in Production code
+                        Div_ReportGrading.Visible = true; //---Disable for time being in Production code
                     }
-                    
+
                     lbtnDownloadAndSaveDLP.Visible = false;
                     lbtnMeasurementVerification.Visible = true;
                     if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification) //---If not Sync 4D Certification type of project, then only display Optimize button
@@ -262,8 +273,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     //Hide Verification button
                     lbtnMeasurementVerification.Visible = false;
-                    lbtnOptimize.Visible = false; 
-                    trRBtnListDeltaE.Visible = false; 
+                    lbtnOptimize.Visible = false;
+                    trRBtnListDeltaE.Visible = false;
                     Div_Opt_Header.Visible = true;
                     td1DSmoothing.Visible = true;  //Display in Sync1D for Smoothing measurements (Commented out for temporary untill get decided to use this feature)
 
@@ -286,7 +297,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         dvTab_TVI.Visible = Tab_TVI.Visible = false;
                     }
                     Div_MetricSumFilter.Visible = true;
-                    //Div_ReportCMYKDensity.Visible = true;  //---Disable for time being in Production code
+                    Div_ReportCMYKDensity.Visible = true;  //---Disable for time being in Production code
                 }
                 else   //-----DLP Optimization
                 {
@@ -331,7 +342,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-   
+
         #endregion
 
         #region Methods
@@ -421,9 +432,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         tbOptSummary.Visible = false;
                         ValidationType = MeasurementSummary[0].ValidationType;
-
+                        hdnValidationType.Value = ValidationType.ToString();
                         if (!IsAverageOfMeasurements)   //--Normal display Mode
-                        {                            
+                        {
                             dvValidationSummary.DataSource = MeasurementSummary;
                             dvValidationSummary.DataBind();
                         }
@@ -434,7 +445,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             chartAnalyze.MapAreas.Clear();
                             chartAnalyze.IsMapEnabled = false;
                         }
-                        
+
 
                         if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                         {
@@ -522,8 +533,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 dvTab_G7.Visible = Tab_G7.Visible = false;
                 path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
-            }
-            iframeGeneratePDFReport.Attributes.Add("src", path);
+            }            
+            iframeGeneratePDFReport.Attributes.Add("src", "~/"+path);
             iframeGeneratePDFReport.Style.Add("display", "");
 
             //-------Assign Report Grading Pop up to load report in "Report" tab--------------//
@@ -531,7 +542,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             //-------Assign Report CMYK Density Pop up to load report in "Report" tab--------------//
             ReportCMYKDensityWindow.NavigateUrl = "../PopupReportCMYKDensity.aspx?ProjectID=" + SessionManager.Instance.CurrentProject.ProjectId + "&OptimizeRunID=" + SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId + "&MeasurementID=" + MeasurementId;
-       
+
         }
 
         #endregion
@@ -578,9 +589,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     _presenterAnalyze.GetISOTVIChart();
                     if (!IsErrorOccured)
                     {
-                        FillISOTVIChart(DTISOTVIChart);
-                        FillSpreadChart(DTSpreadChartData, DTSpreadSplineRangeChartData, DTMaxSpreadChartData);
-                        FillSpreadChart_CMYK(DTSpreadChartData_CMYK);
+                        try
+                        {
+                            FillISOTVIChart(DTISOTVIChart);
+                            FillSpreadChart(DTSpreadChartData, DTSpreadSplineRangeChartData, DTMaxSpreadChartData);
+                            FillSpreadChart_CMYK(DTSpreadChartData_CMYK);
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
                     }
                     UpdatePanel_TVI_ISO.Visible = true;
                     UpdatePanel_TVI_G7.Visible = false;
@@ -611,11 +629,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (Paper != null)
                 FillPaperChart(Paper);
             if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.DLP || ValidationType == 0)  //If Default view in Validation of Sync4D or Normal Sync4D optimization mode, don't display Density chart
-            {        
+            {
                 Table_Density.Visible = false;
             }
             else
-            {              
+            {
                 Table_Density.Visible = true;
                 if (DTDensity != null)
                     FillDensityChart(DTDensity);
@@ -780,7 +798,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Y2 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))));
             Y3 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))));
             Y4 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].PreAvgΔE.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].PreAvgΔE.ToString()))));
-       
+
             // === When Actual value is not available then no series will display and no marker will display
             if (Y2 == 0)
                 Y1 = Y2;
@@ -794,7 +812,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //-----For Sync1D projects or validation projects
             {
                 objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
-                if(Y4 > 0)
+                if (Y4 > 0)
                     objSeries3.Points.AddXY((Double)0, Y4); //------Green marker image plot for Previous Run's Avg ΔE
             }
 
@@ -1309,7 +1327,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append(" " + GetResourceString(_recA) + ListFilter[i].Targeta.ToString());
                     toolTip.Append(" " + GetResourceString(_recB) + ListFilter[i].Targetb.ToString());
                     toolTip.Append("</td></tr>");
-                   
+
                     toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>"); //ΔL*
                     toolTip.Append(ListFilter[i].ΔL.ToString());
                     toolTip.Append("</td></tr>");
@@ -1687,7 +1705,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             CHRT_BlackNPD.SaveImage(Server.MapPath(FileName));
 
             CHRT_GrayNPD.Series["Series0"].Points.Clear();
-            CHRT_GrayNPD.Series["Series0Point"].Points.Clear();           
+            CHRT_GrayNPD.Series["Series0Point"].Points.Clear();
 
             CHRT_GrayNPD.Series["Series0"]["TooltipOffset"] = "True";
             CHRT_GrayNPD.Series["Series0Point"]["TooltipOffset"] = "True";
@@ -1838,10 +1856,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Filter DT1 = "(PatchTypeID in (1,8,16,17,18))";
                     List<AnalyzeChart_DotGain> ListCyan = new List<AnalyzeChart_DotGain>();
                     ListCyan = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Three_Quarter_Tone)
-                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_10) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_20) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_25) 
-                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_30) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_40)  || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_50)
-                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_60)    || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_70)  || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_75) 
-                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_80) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_90) )).OrderBy(item => item.CmykC).ToList();
+                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_10) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_20) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_25)
+                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_30) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_40) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_50)
+                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_60) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_70) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_75)
+                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_80) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_90))).OrderBy(item => item.CmykC).ToList();
 
                     if (ListCyan.Count > 0)
                     {
@@ -1859,7 +1877,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                             ThresholdTop = Convert.ToDouble(ListCyan[i].TargetDotGain) + ThresholdValue;
                             ThresholdBottom = Convert.ToDouble(ListCyan[i].TargetDotGain) - ThresholdValue;
-                            
+
                             //CHRT_DotgainISOCyan.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListCyan[i].CmykC.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
                             if ((Convert.ToDouble(ListCyan[i].CmykC.ToString()) > 0 && Convert.ToDouble(ListCyan[i].CmykC.ToString()) < 100 && ThresholdValue > 0) || Convert.ToDouble(ListCyan[i].CmykC.ToString()) == 0 || Convert.ToDouble(ListCyan[i].CmykC.ToString()) == 100)//---If ThresholdValue is 0, then don't make entry on chart, because it will display screwy spread (Only if it is not starting 0 or ending 100 point patch)
                             {
@@ -1879,7 +1897,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     //Filter DT1 = "(PatchTypeID in (2,8,19,20,21))";
                     List<AnalyzeChart_DotGain> ListMagenta = new List<AnalyzeChart_DotGain>();
-                   // ListMagenta = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Three_Quarter_Tone))).OrderBy(item => item.CmykM).ToList();
+                    // ListMagenta = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Three_Quarter_Tone))).OrderBy(item => item.CmykM).ToList();
                     ListMagenta = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Three_Quarter_Tone)
                                                || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_10) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_20) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_25)
                                                || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_30) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_40) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_50)
@@ -2056,10 +2074,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (Convert.ToInt16(DTSpread[i].CmykC) != 0 && ChkC.Checked)
                         {
                             FilterSpread = DTSpread.Find(item => item.CmykM == DTSpread[i].CmykC);
-                            MagentaValue = Convert.ToInt16(FilterSpread.DotGain);
+                            MagentaValue = Convert.ToInt16(FilterSpread == null ? 0 : FilterSpread.DotGain);
 
                             FilterSpread = DTSpread.Find(item => item.CmykY == DTSpread[i].CmykC);
-                            YellowValue = Convert.ToInt16(FilterSpread.DotGain);
+                            YellowValue = Convert.ToInt16(FilterSpread == null ? 0 : FilterSpread.DotGain);
 
                             DiffrentOne = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - MagentaValue);
                             DiffrentTwo = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - YellowValue);
@@ -2073,10 +2091,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (Convert.ToInt16(DTSpread[i].CmykM) != 0 && ChkM.Checked)
                         {
                             FilterSpread = DTSpread.Find(item => item.CmykC == DTSpread[i].CmykM);
-                            CyanValue = Convert.ToInt16(FilterSpread.DotGain);
+                            CyanValue = Convert.ToInt16(FilterSpread == null ? 0 : FilterSpread.DotGain);
 
                             FilterSpread = DTSpread.Find(item => item.CmykY == DTSpread[i].CmykM);
-                            YellowValue = Convert.ToInt16(FilterSpread.DotGain);
+                            YellowValue = Convert.ToInt16(FilterSpread == null ? 0 : FilterSpread.DotGain);
 
                             DiffrentOne = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - CyanValue);
                             DiffrentTwo = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - YellowValue);
@@ -2090,10 +2108,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (Convert.ToInt16(DTSpread[i].CmykY) != 0 && ChkY.Checked)
                         {
                             FilterSpread = DTSpread.Find(item => item.CmykC == DTSpread[i].CmykY);
-                            CyanValue = Convert.ToInt16(FilterSpread.DotGain);
+                            CyanValue = Convert.ToInt16(FilterSpread == null ? 0 : FilterSpread.DotGain);
 
                             FilterSpread = DTSpread.Find(item => item.CmykM == DTSpread[i].CmykY);
-                            MagentaValue = Convert.ToInt16(FilterSpread.DotGain);
+                            MagentaValue = Convert.ToInt16(FilterSpread == null ? 0 : FilterSpread.DotGain);
 
                             DiffrentOne = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - CyanValue);
                             DiffrentTwo = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - MagentaValue);
@@ -2111,7 +2129,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #region Spread Spline Range (green boundries)
                 if (DTSpreadSplineRange != null && DTSpreadSplineRange.Count > 0)
                 {
-                   // CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(0), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
+                    // CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(0), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
                     for (int i = 0; i < DTSpreadSplineRange.Count; i++)
                     {
                         if (DTSpreadSplineRange[i].UpperLimit != 0 && DTSpreadSplineRange[i].LowerLimit != 0) //When chart has 20-40-60-80 patches then dont display 25-50-75 patches and vice versa
@@ -2119,7 +2137,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].TVI.ToString())), Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].UpperLimit.ToString())), Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].LowerLimit.ToString())));
                         }
                     }
-                   // CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(100), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
+                    // CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(100), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
                 }
                 #endregion
 
@@ -2129,9 +2147,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     rgChromVariation.DataSource = DTMaxSpreasTable;
                     rgChromVariation.DataBind();
                 }
-               
+
                 #endregion
-             
+
                 FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_SummaryISODotgain.ImageLocation) + "." + CHRT_SummaryISODotgain.ImageType;
                 CHRT_SummaryISODotgain.SaveImage(Server.MapPath(FileName));
             }
@@ -2155,7 +2173,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 CHRT_SummaryISODotgain_CMYK.Series["Series2Point"].Points.Clear();
                 CHRT_SummaryISODotgain_CMYK.Series["Series3Point"].Points.Clear();
                 CHRT_SummaryISODotgain_CMYK.Series["Series4Point"].Points.Clear();
-             
+
                 #endregion
 
                 #region Dotgain Spread CMYK Chart
@@ -2207,7 +2225,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 #endregion
 
-             
+
                 FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_SummaryISODotgain_CMYK.ImageLocation) + "." + CHRT_SummaryISODotgain_CMYK.ImageType;
                 CHRT_SummaryISODotgain_CMYK.SaveImage(Server.MapPath(FileName));
             }
@@ -2783,7 +2801,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             labelXML = labelXML.Replace("locAct", GetResourceString(_reclocLabelAct));
             labelXML = labelXML.Replace("locSignature", GetResourceString(_reclocLabelSignature));
             labelXML = labelXML.Replace("locDate", GetResourceString(_reclocLabelDate));
-            
+
             //Replace 5 sensitive characters of XML before passing them
             Regex badAmpersand = new Regex("&(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
             Regex badLessThan = new Regex("<(?![a-zA-Z]{2,6};|#[0-9]{2,4};)");
@@ -2806,14 +2824,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             labelXML = labelXML.Replace("[dEType]", measurmentSummary.dEMethod);
             labelXML = labelXML.Replace("[PageOrSurface]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.PageOrSurface, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if PageOrSurface contains "&" letter or rest of 4 letters
             labelXML = labelXML.Replace("[JDFJobId]", badapostrophes.Replace(badDoubleQuotation.Replace(badGreaterThan.Replace(badLessThan.Replace(badAmpersand.Replace(measurmentSummary.JDFJobId, goodAmpersand), goodLessThan), goodGreaterThan), goodDoubleQuotation), goodapostrophes)); //Here "&" is replaced by "&amp" and so on other 4 sesitive characters in XML in order to display correctly if JDFJobId contains "&" letter or rest of 4 letters
-            //labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
-            //labelXML = labelXML.Replace("[Device]", SessionManager.Instance.CurrentDevice.DeviceName);
-            //labelXML = labelXML.Replace("[Metric]", measurmentSummary.MetricTargetPresetName);
-            //labelXML = labelXML.Replace("[PrintStandard]", measurmentSummary.PrintStandardType);
-            //labelXML = labelXML.Replace("[Customer]", measurmentSummary.Customer);
-            //labelXML = labelXML.Replace("[PageOrSurface]", measurmentSummary.PageOrSurface);
-            //labelXML = labelXML.Replace("[JDFJobId]", measurmentSummary.JDFJobId);
-            
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[Device]", SessionManager.Instance.CurrentDevice.DeviceName);
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[Metric]", measurmentSummary.MetricTargetPresetName);
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[PrintStandard]", measurmentSummary.PrintStandardType);
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[Customer]", measurmentSummary.Customer);
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[PageOrSurface]", measurmentSummary.PageOrSurface);
+                                                                                                                                                                                                                                                                                              //labelXML = labelXML.Replace("[JDFJobId]", measurmentSummary.JDFJobId);
+
             System.Text.StringBuilder metricName = new StringBuilder();
             System.Text.StringBuilder metricTol = new StringBuilder();
             System.Text.StringBuilder metricActual = new StringBuilder();
@@ -2980,7 +2998,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgPatchDetails_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             MeasurementId = 0;
-            
+
             if (hdMeasurement.Value != "" && hdMeasurement.Value != "0")
             {
                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above                   
@@ -3024,7 +3042,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     #endregion
                 }
-            } 
+            }
         }
 
         protected void rgPatchDetails_ItemDataBound(object sender, GridItemEventArgs e)
@@ -3270,55 +3288,89 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Now we are using DataTable as DataSource                    
                     dtFilteredPatchDetails = FilteredPatchDetailsTable(ViewState["MetricSumID"].ToString(), dtPatchDetails);
 
-                    #region Generate CGATS .txt file
-                    System.IO.StreamWriter sw;
-                    sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/") + MeasurementId.ToString() + "_MeasurementFile.txt");
-                    sw.WriteLine(@"ORIGINATOR	""FujiFilm Colorpath Sync""");
-                    sw.WriteLine(@"MEASUREMENT_SOURCE	""WhiteBase=Absolute  Filter=No""");
-                    sw.WriteLine(@"ILLUMINATION_NAME	""D50""");
-                    sw.WriteLine(@"OBSERVER_ANGLE	""2""");
-                    sw.WriteLine(@"KEYWORD	""SampleID""");
-                    sw.WriteLine(@"KEYWORD	""SAMPLE_NAME""");
+                    //#region Generate CGATS .txt file
+                    //System.IO.StreamWriter sw;
+                    //sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/") + MeasurementId.ToString() + "_MeasurementFile.txt");
+                    //sw.WriteLine(@"ORIGINATOR	""FujiFilm Colorpath Sync""");
+                    //sw.WriteLine(@"MEASUREMENT_SOURCE	""WhiteBase=Absolute  Filter=No""");
+                    //sw.WriteLine(@"ILLUMINATION_NAME	""D50""");
+                    //sw.WriteLine(@"OBSERVER_ANGLE	""2""");
+                    //sw.WriteLine(@"KEYWORD	""SampleID""");
+                    //sw.WriteLine(@"KEYWORD	""SAMPLE_NAME""");
 
-                    if (IsSync1DType)
-                    {
-                        sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "55"); //-----Only for Sync1D projects, add Spectral data into CGATES file
-                    }
-                    else
-                    {
-                        sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "19");
-                    }
-                    sw.WriteLine("BEGIN_DATA_FORMAT");
+                    //if (IsSync1DType)
+                    //{
+                    //    sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "55"); //-----Only for Sync1D projects, add Spectral data into CGATES file
+                    //}
+                    //else
+                    //{
+                    //    sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "19");
+                    //}
+                    //sw.WriteLine("BEGIN_DATA_FORMAT");
 
-                    if (IsSync1DType)
-                    {
-                        sw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS\tnm380\tnm390\tnm400\tnm410\tnm420\tnm430\tnm440\tnm450\tnm460\tnm470\tnm480\tnm490\tnm500\tnm510\tnm520\tnm530\tnm540\tnm550\tnm560\tnm570\tnm580\tnm590\tnm600\tnm610\tnm620\tnm630\tnm640\tnm650\tnm660\tnm670\tnm680\tnm690\tnm700\tnm710\tnm720\tnm730");
-                    }
-                    else
-                    {
-                        sw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS");
-                    }
-                    sw.WriteLine("END_DATA_FORMAT");
-                    sw.WriteLine("NUMBER_OF_SETS" + "\t" + dtFilteredPatchDetails.Rows.Count.ToString());
-                    sw.WriteLine("BEGIN_DATA");
+                    //if (IsSync1DType)
+                    //{
+                    //    sw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS\tnm380\tnm390\tnm400\tnm410\tnm420\tnm430\tnm440\tnm450\tnm460\tnm470\tnm480\tnm490\tnm500\tnm510\tnm520\tnm530\tnm540\tnm550\tnm560\tnm570\tnm580\tnm590\tnm600\tnm610\tnm620\tnm630\tnm640\tnm650\tnm660\tnm670\tnm680\tnm690\tnm700\tnm710\tnm720\tnm730");
+                    //}
+                    //else
+                    //{
+                    //    sw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS");
+                    //}
+                    //sw.WriteLine("END_DATA_FORMAT");
+                    //sw.WriteLine("NUMBER_OF_SETS" + "\t" + dtFilteredPatchDetails.Rows.Count.ToString());
+                    //sw.WriteLine("BEGIN_DATA");
 
-                    for (int i = 0; i < dtFilteredPatchDetails.Rows.Count; i++)
+                    //for (int i = 0; i < dtFilteredPatchDetails.Rows.Count; i++)
+                    //{
+                    //    if (IsSync1DType)
+                    //    {
+                    //        sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm380"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm390"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm400"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm410"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm420"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm430"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm440"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm450"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm460"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm470"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm480"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm490"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm500"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm510"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm520"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm530"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm540"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm550"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm560"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm570"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm580"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm590"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm600"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm610"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm620"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm630"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm640"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm650"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm660"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm670"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm680"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm690"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm700"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm710"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm720"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm730"].ToString());
+                    //    }
+                    //    else
+                    //    {
+                    //        sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString());
+                    //    }
+                    //}
+
+                    //sw.WriteLine("END_DATA");
+                    //sw.Close();
+
+                    //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), MeasurementId.ToString() + "_MeasurementFile.txt", MeasurementId.ToString() + "_MeasurementFile.txt");
+                    //#endregion
+
+                    byte[] bytes = null;
+                    using (var ms = new MemoryStream())
                     {
-                        if (IsSync1DType)
+                        TextWriter tw = new StreamWriter(ms);
+                        tw.WriteLine(@"ORIGINATOR	""FujiFilm Colorpath Sync""");
+                        tw.WriteLine(@"MEASUREMENT_SOURCE	""WhiteBase=Absolute  Filter=No""");
+                        tw.WriteLine(@"ILLUMINATION_NAME	""D50""");
+                        tw.WriteLine(@"OBSERVER_ANGLE	""2""");
+                        tw.WriteLine(@"KEYWORD	""SampleID""");
+                        tw.WriteLine(@"KEYWORD	""SAMPLE_NAME""");
+                        tw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "19");
+
+                        tw.WriteLine("BEGIN_DATA_FORMAT");
+                        tw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tDE\tDE94\tDE2000\tLAB_L_TARGET\tLAB_A_TARGET\tLAB_B_TARGET\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS");
+                        tw.WriteLine("END_DATA_FORMAT");
+                        tw.WriteLine("NUMBER_OF_SETS" + "\t" + dtFilteredPatchDetails.Rows.Count.ToString());
+                        tw.WriteLine("BEGIN_DATA");
+                        for (int i = 0; i < dtFilteredPatchDetails.Rows.Count; i++)
                         {
-                            sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm380"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm390"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm400"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm410"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm420"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm430"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm440"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm450"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm460"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm470"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm480"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm490"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm500"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm510"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm520"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm530"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm540"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm550"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm560"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm570"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm580"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm590"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm600"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm610"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm620"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm630"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm640"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm650"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm660"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm670"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm680"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm690"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm700"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm710"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm720"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["nm730"].ToString());
+                            tw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString());
                         }
-                        else
-                        {
-                            sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString());
-                        }
+
+                        tw.WriteLine("END_DATA");
+                        // tw.Close();
+
+                        tw.Flush();
+                        ms.Position = 0;
+                        bytes = ms.ToArray();
+
+
+                        //string str = System.Text.Encoding.UTF8.GetString(bytes);
+                        string s2 = BitConverter.ToString(bytes);
                     }
-
-                    sw.WriteLine("END_DATA");
-                    sw.Close();
-
-                    Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), MeasurementId.ToString() + "_MeasurementFile.txt", MeasurementId.ToString() + "_MeasurementFile.txt");
-                    #endregion
                 }
             }
         }
@@ -3359,12 +3411,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     for (int i = 0; i < dtFilteredPatchDetails.Rows.Count; i++)
                     {
                         sw.WriteLine(@"            <cc:Object ObjectType=""Standard"" Name=" + qt + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + qt + " Id=" + qt + dtFilteredPatchDetails.Rows[i]["SampleName"].ToString() + qt + ">");
-                        sw.WriteLine(@"                <cc:CreationDate>" + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss")+ "</cc:CreationDate>");
+                        sw.WriteLine(@"                <cc:CreationDate>" + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss") + "</cc:CreationDate>");
                         sw.WriteLine(@"                <cc:ColorValues>");
                         sw.WriteLine(@"                    <cc:ColorCIELab ColorSpecification=""M0"">");
-                        sw.WriteLine(@"                        <cc:L>" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() +"</cc:L>");
-                        sw.WriteLine(@"                        <cc:a>" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() +"</cc:a>");
-                        sw.WriteLine(@"                        <cc:b>" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() +"</cc:b>");
+                        sw.WriteLine(@"                        <cc:L>" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "</cc:L>");
+                        sw.WriteLine(@"                        <cc:a>" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "</cc:a>");
+                        sw.WriteLine(@"                        <cc:b>" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "</cc:b>");
                         sw.WriteLine(@"                    </cc:ColorCIELab>");
                         sw.WriteLine(@"                </cc:ColorValues>");
                         sw.WriteLine(@"            </cc:Object>");
@@ -3397,8 +3449,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
-
-
 
         protected void lbtnMeasurement_Click(object sender, EventArgs e)
         {
@@ -3444,7 +3494,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        protected void chk1DMeasurementSmoothing_CheckedChanged(object sender, EventArgs e) 
+        protected void chk1DMeasurementSmoothing_CheckedChanged(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject.Is1DMeasurementSmoothing = chk1DMeasurementSmoothing.Checked;
         }
@@ -3505,6 +3555,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
 
         public DataTable dtPatchDetails { get; set; }
+        public List<SpotProjectLAB> SpotProjectLabs { get; set; }
         public DataTable dtFilteredPatchDetails { get; set; }
 
         public bool useDLP { get; set; }
@@ -3537,7 +3588,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IsAverageOfMeasurements = chkAnalyzeAverageOfMeasurements.Checked;
             }
         }
-      
+
         public bool Is1DMeasurementSmoothing
         {
             get
@@ -3551,7 +3602,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         public string FileName;
-        #endregion     
-     
+        public int ProjectStatus { get; set; }
+        public Project Project { get; set; }
+        public int SpotProjectId { get; set; }
+        public bool IsUsed { get; set; }
+        #endregion
+
     }
 }

@@ -382,6 +382,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locOffsetData;
         
         /// <summary>
+        /// cmbPrintingType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbPrintingType;
+        
+        /// <summary>
         /// panelOffsetData control.
         /// </summary>
         /// <remarks>
@@ -427,13 +436,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtFountainSol;
         
         /// <summary>
-        /// Localize2 control.
+        /// locFounSolRef control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
+        protected global::System.Web.UI.WebControls.Localize locFounSolRef;
         
         /// <summary>
         /// locBlanket control.
@@ -452,6 +461,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtBlanket;
+        
+        /// <summary>
+        /// locRollersMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locRollersMessage;
         
         /// <summary>
         /// locBlanketAge control.
@@ -490,13 +508,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtScreening;
         
         /// <summary>
-        /// Localize3 control.
+        /// locScreeningRef control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize3;
+        protected global::System.Web.UI.WebControls.Localize locScreeningRef;
         
         /// <summary>
         /// locCoating control.

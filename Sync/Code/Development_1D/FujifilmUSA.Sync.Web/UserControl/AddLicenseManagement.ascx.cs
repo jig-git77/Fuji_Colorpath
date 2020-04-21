@@ -144,7 +144,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text),
                 LicenseDesc = txtLicenseDescription.Text,
                 IsOneOff = chkIsOneOff.Checked,
-                IsActive = chkIsActive.Checked
+                IsActive = chkIsActive.Checked,
+                IsCustomProfOptions = chkIsCustomProfOptions.Checked,
+                IsCustomPlugin = chkIsCustomPlugin.Checked
             };
             if (chkSync1D.Checked)
                 License.LicenseType.Add(ELicenseType.Sync1D);
@@ -230,6 +232,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtActivationDate.Text = Convert.ToDateTime(License.ActivationDate).ToString("d");
                 txtExpirationDate.Text = Convert.ToDateTime(License.ExpirationDate).ToString("d");
                 chkIsOneOff.Checked = License.IsOneOff;
+                chkIsCustomProfOptions.Checked = License.IsCustomProfOptions;
+                chkIsCustomPlugin.Checked = License.IsCustomPlugin;
                 chkIsActive.Checked = License.IsActive;
                 if (chkIsActive.Checked == false)
                 {
