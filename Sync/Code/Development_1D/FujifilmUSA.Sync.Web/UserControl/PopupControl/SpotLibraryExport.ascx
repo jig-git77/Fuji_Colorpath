@@ -110,8 +110,23 @@
             var type = $("#cmbCMYKLibrary").val();
 
             if ($("#txtFileName").val() == "") {
+                //var spanError = $("#txtFileName").parent("div").next('div').find('span')[1];
+                var requiedFileName = $('#<%=rfvtxtFileName.ClientID%>');                                
+                var spanError = $("#txtFileName").parent("div").next('div').find(requiedFileName);
                 isSuccess = false;
-                $("#txtFileName").parent("div").next('div').find('span').show();
+                //$("#txtFileName").parent("div").next('div').find('span')[1].show();
+                $(spanError).show();
+            }
+
+            var patt1 = /\s/g;
+            var result = $("#txtFileName").val().match(patt1);
+            if (result != null) {
+                isSuccess = false;
+                //$("#txtFileName").parent("div").next('div').find('span')[0].show();
+                //var spanError = $("#txtFileName").parent("div").next('div').find('span')[0];
+                var blankSpaceValidationFileName = $('#<%=revtxtFileName.ClientID%>');                                
+                var spanError = $("#txtFileName").parent("div").next('div').find(blankSpaceValidationFileName);                
+                $(spanError).show();
             }
 
             if (type == "1" || type == "2") {
@@ -231,6 +246,12 @@
                                                     <asp:TextBox ID="txtFileName" runat="server" Width="200px" Height="19px" MaxLength="50" ClientIDMode="Static"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
+                                                <asp:RegularExpressionValidator ID="revtxtFileName" ControlToValidate="txtFileName" 
+                                                    ValidationGroup="vgExportLibrary" Display="Dynamic"  runat="server" ForeColor="Red"  
+                                                                        ErrorMessage="Spaces are not allowed!" ValidationExpression="[^\s]+">
+                                                    <ucValidationContainer:ValidationContainer ID="revFileNameContainer" runat="server"
+                                                                            ValidationMsg="Spaces are not allowed!" Size="200" />
+                                                    </asp:RegularExpressionValidator>                                        
                                                     <asp:RequiredFieldValidator ID="rfvtxtFileName" runat="server" Display="Dynamic" ControlToValidate="txtFileName"
                                                         ForeColor="Red" ValidationGroup="vgExportLibrary" InitialValue="">
                                                         <ucValidationContainer:ValidationContainer ID="vctxtFileName" runat="server"

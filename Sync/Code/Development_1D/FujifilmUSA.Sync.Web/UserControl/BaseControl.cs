@@ -3,6 +3,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Common;
 using System.Globalization;
 using System.Threading;
+using System.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -18,6 +19,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected override void OnLoad(EventArgs e)
         {
+            ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
             if (SessionManager.Instance.CurrentUser != null)
             {
                 CurrentUserId = SessionManager.Instance.CurrentUser.UserId;
