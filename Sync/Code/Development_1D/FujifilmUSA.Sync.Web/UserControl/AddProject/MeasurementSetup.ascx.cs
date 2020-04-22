@@ -197,15 +197,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementCount = short.Parse(cmbMeasurementCount.SelectedValue);
             SessionManager.Instance.CurrentProject.MeasurementSetting.ReadMode = (trReadMode.Visible == true ? cmbReadMode.SelectedValue : null);
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-            {
-                //SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue),
-                //                                cmbAlignmentChart.SelectedItem.Text);
-                SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue),
-                                               cmbOptimizationChart.SelectedItem.Text);
-            }
-            else
-                SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
+
+            //if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            //{
+            //    //SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue),
+            //    //                                cmbAlignmentChart.SelectedItem.Text);
+            //    SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue),
+            //                                   cmbOptimizationChart.SelectedItem.Text);
+            //}
+            //else
+            //    SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
+
+            SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
+
 
             if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
                 SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin = rbtnMeasurementType.SelectedValue.ToString() == "Custom";
