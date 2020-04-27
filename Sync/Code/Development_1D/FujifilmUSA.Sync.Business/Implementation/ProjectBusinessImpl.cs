@@ -633,7 +633,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.PrintCondition.RipSettings,
                                                      project.PrintCondition.TechnicianName,
                                                      project.PrintCondition.Notes,
-                                                     project.PrintCondition.PrintingType,
+                                                    Convert.ToInt16(project.PrintCondition.PrintingType),
                                                      project.PrintCondition.InkOrder,
                                                      project.PrintCondition.FountainSolution,
                                                      project.PrintCondition.Blanket,

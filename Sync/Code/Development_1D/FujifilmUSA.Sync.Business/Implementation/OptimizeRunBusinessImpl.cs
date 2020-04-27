@@ -1,16 +1,18 @@
-﻿using System;
-using System.Data;
-using System.Linq;
-using FujifilmUSA.Sync.Business.Interface;
-using FujifilmUSA.Sync.Entity;
-using FujifilmUSA.Sync.DataAccess;
-using System.Collections.Generic;
-using FujifilmUSA.Sync.Common;
-using FujifilmUSA.Sync.Business.ProfilerService;
+﻿using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business.Messages;
-using System.Xml.Linq;
-using FujifilmUSA.Sync.Business.CustomExceptions;
+using FujifilmUSA.Sync.Business.ProfilerServiceClient;
+using FujifilmUSA.Sync.Business.ProfilerServiceClient.Request;
+using FujifilmUSA.Sync.Business.ProfilerServiceClient.Response;
+using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.DataAccess;
+using FujifilmUSA.Sync.Entity;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.IO;
+using System.Linq;
+using System.Xml.Linq;
+
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -148,33 +150,32 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
                     request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
 
-                    request.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+                    request.PCSDataType =(Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
 
-                    using (var client = new ProfilerClient())
+                    /* WebClient Example */
+                    var response = Utilities.GetProfilerServiceClientCall<CreateDestinationAndDeviceLinkProfileRequest,CreateDestinationAndDeviceLinkProfileResponse>(request, Utilities.ProfilerCallMethod.CreateDLP, Utilities.ProfilerRequestCall.HttpPost);
+                    if (response.DeviceLinkProfile.ProfileData == null || response.DestinationProfile.ProfileData == null)
                     {
-                        var response = client.CreateDestinationAndDeviceLinkProfile(request);
-                        if (response.DeviceLinkProfile.ProfileData == null || response.DestinationProfile.ProfileData == null)
-                        {
-                            //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Destination and device link profile not generated."), null, false);
-                            throw new Exception("Destination and Device link profile has not been generated successfully from service for runId: " + optimizeRunId + " Error: " + response.Message);
-                        }
-                        //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - CPSync4D.UpdateInitialDestinationAndDlp call invoked."), null, false);
-                        DataAccessFactory.
-                            Instance.
-                            ExecuteProcedure(
-                                "CPSync4D.UpdateInitialDestinationAndDlp",
-                                new object[]
-                                    {
+                        //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Destination and device link profile not generated."), null, false);
+                        throw new Exception("Destination and Device link profile has not been generated successfully from service for runId: " + optimizeRunId + " Error: " + response.Message);
+                    }
+                    //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - CPSync4D.UpdateInitialDestinationAndDlp call invoked."), null, false);
+                    DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "CPSync4D.UpdateInitialDestinationAndDlp",
+                            new object[]
+                                {
                                         optimizeRunId,
                                         response.DestinationProfile.ProfileData,
                                         response.DeviceLinkProfile.ProfileData,
                                         status,
                                         endDateTime
-                                    });
-                        //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - CPSync4D.UpdateInitialDestinationAndDlp call finished."), null, false);
-                    }
+                                });
+                    //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - CPSync4D.UpdateInitialDestinationAndDlp call finished."), null, false);
+
 
                     //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - End"), null, false);
                 },
@@ -233,18 +234,16 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
                     request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = description });
 
-                    request.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
-
-                    using (var client = new ProfilerClient())
+                    request.PCSDataType = (ProfilerServiceClient.Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+                    var response = Utilities.GetProfilerServiceClientCall<OptimizeDeviceLinkProfileRequest, OptimizeDeviceLinkProfileResponse>(request, Utilities.ProfilerCallMethod.OptimizeDLP, Utilities.ProfilerRequestCall.HttpPost);
+                    ///var response = client.OptimizeDeviceLinkProfile(request);
+                    if (response.OptimizedProfile.ProfileData == null)
                     {
-                        var response = client.OptimizeDeviceLinkProfile(request);
-                        if (response.OptimizedProfile.ProfileData == null)
-                        {
-                            throw new Exception("Optimized device link profile has not been generated successfully from service for runId:" + optimizeRunId + " Error: " + response.Message);
-                        }
-                        DataAccessFactory.Instance.ExecuteProcedure("CPSync4D.UpdateOptimizeDlp",
-                                                                    new object[] { optimizeRunId, response.OptimizedProfile.ProfileData, status, endDateTime });
+                        throw new Exception("Optimized device link profile has not been generated successfully from service for runId:" + optimizeRunId + " Error: " + response.Message);
                     }
+                    DataAccessFactory.Instance.ExecuteProcedure("CPSync4D.UpdateOptimizeDlp",
+                                                                new object[] { optimizeRunId, response.OptimizedProfile.ProfileData, status, endDateTime });
+
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_OptimizeDeviceLinkProfile"));
         }
@@ -453,7 +452,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     MeasurementBusinessImpl measurementBusiness = new MeasurementBusinessImpl();
                     MeasurementDataResponse measurementDataResponse = measurementBusiness.Get1DMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
 
-                    ProfilerClient syncClient = new ProfilerClient();
+                    //ProfilerClient syncClient = new ProfilerClient();
 
                     CreateG7AlignmentCurveRequest alignmentCurveRequest = new CreateG7AlignmentCurveRequest();
 
@@ -487,12 +486,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
 
                     //alignmentCurveRequest.PCSDataType = PCSDataType.XYZ;//(PCSDataType)Enum.Parse(typeof(PCSDataType), pcsDataType.ToString());                    
-                    alignmentCurveRequest.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+                    alignmentCurveRequest.PCSDataType = (ProfilerServiceClient.Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
 
                     //alignmentCurveRequest.DensityType = (ProfilerService.DensityType)SessionManager.Instance.CurrentProject.DensityType;  
 
                     CreateG7AlignmentCurveResponse syncClientResponse = new CreateG7AlignmentCurveResponse();
-                    syncClientResponse = syncClient.CreateG7AlignmentCurve(alignmentCurveRequest);
+                    //syncClientResponse = syncClient.CreateG7AlignmentCurve(alignmentCurveRequest);
+                    syncClientResponse = Utilities.GetProfilerServiceClientCall<CreateG7AlignmentCurveRequest, CreateG7AlignmentCurveResponse>(alignmentCurveRequest, Utilities.ProfilerCallMethod.CreateG7Alignment, Utilities.ProfilerRequestCall.HttpPost);
 
                     int n = 101;
 
@@ -526,7 +526,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     MeasurementBusinessImpl measurementBusiness = new MeasurementBusinessImpl();
                     MeasurementDataResponse measurementDataResponse = measurementBusiness.Get1DMeasurementData(measurementIds, SessionManager.Instance.CurrentProject.PCSDataTypes);
 
-                    ProfilerClient syncClient = new ProfilerClient();
+                    //ProfilerClient syncClient = new ProfilerClient();
 
                     CreateISOAlignmentCurveRequest alignmentCurveRequest = new CreateISOAlignmentCurveRequest();
 
@@ -560,14 +560,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
 
                     //alignmentCurveRequest.PCSDataType = PCSDataType.Density; // (PCSDataType)Enum.Parse(typeof(PCSDataType), pcsDataType.ToString());
-                    alignmentCurveRequest.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+                    alignmentCurveRequest.PCSDataType = (Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
 
                     //alignmentCurveRequest.DensityType = ProfilerService.DensityType.StatusE;
-                    alignmentCurveRequest.DensityType = (ProfilerService.DensityType)SessionManager.Instance.CurrentProject.DensityType;
+                    alignmentCurveRequest.DensityType = (Enums.DensityType)SessionManager.Instance.CurrentProject.DensityType;
 
                     CreateISOAlignmentCurveResponse syncClientResponse = new CreateISOAlignmentCurveResponse();
-                    syncClientResponse = syncClient.CreateISOAlignmentCurve(alignmentCurveRequest);
-
+                    //syncClientResponse = syncClient.CreateISOAlignmentCurve(alignmentCurveRequest);
+                    syncClientResponse = Utilities.GetProfilerServiceClientCall<CreateISOAlignmentCurveRequest, CreateISOAlignmentCurveResponse>(alignmentCurveRequest, Utilities.ProfilerCallMethod.CreateISOAlignment, Utilities.ProfilerRequestCall.HttpPost);
 
                     int n = 101;
 
@@ -729,26 +729,23 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         request.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
                     }
                     request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
-
-                    using (var client = new ProfilerClient())
+                    var response = Utilities.GetProfilerServiceClientCall<CreateSourceToSourceDeviceLinkProfileRequest, CreateSourceToSourceDeviceLinkProfileResponse>(request, Utilities.ProfilerCallMethod.CreateSourceDLP, Utilities.ProfilerRequestCall.HttpPost);
+                    if (response.DeviceLinkProfile.ProfileData == null)
                     {
-                        var response = client.CreateSourceToSourceDeviceLinkProfile(request);
-                        if (response.DeviceLinkProfile.ProfileData == null)
-                        {
-                            throw new Exception("Device link profile has not been generated successfully from service for runId: " + optimizeRunId);
-                        }
-                        DataAccessFactory.
-                           Instance.
-                           ExecuteProcedure(
-                               "CPSync4D.UpdateInitialDlp",
-                               new object[]
-                                    {
+                        throw new Exception("Device link profile has not been generated successfully from service for runId: " + optimizeRunId);
+                    }
+                    DataAccessFactory.
+                       Instance.
+                       ExecuteProcedure(
+                           "CPSync4D.UpdateInitialDlp",
+                           new object[]
+                                {
                                         optimizeRunId,
                                         response.DeviceLinkProfile.ProfileData,
                                         status,
                                         endDateTime
-                                    });
-                    }
+                                });
+
 
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateInitialDestinationAndDeviceLinkProfiles"));
@@ -769,8 +766,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         PCSData = new List<double>(),
                         DCSData = new List<double>(),
-                        SourceProfile = new IccProfile() { ProfileData = sourceProfile },
-                        ProfileOptions = new List<Parameter>()
+                        SourceProfile = new ProfilerServiceClient.IccProfile() { ProfileData = sourceProfile },
+                        ProfileOptions = new List<ProfilerServiceClient.Parameter>()
                     };
 
                     var SourcemeasurementDataResponse =
@@ -790,31 +787,27 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
                     sourcerequest.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = destinationDescription });
 
-                    sourcerequest.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
-
-                    using (var client = new ProfilerClient())
+                    sourcerequest.PCSDataType = (Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+                    //var sourceresponse = client.CreateSourceProfile(sourcerequest);
+                    var sourceresponse = Utilities.GetProfilerServiceClientCall<CreateSourceProfileRequest, CreateSourceProfileResponse>(sourcerequest, Utilities.ProfilerCallMethod.CreateSourceProfile, Utilities.ProfilerRequestCall.HttpPost);
+                    if (sourceresponse.Profile.ProfileData == null || sourceresponse.Profile.ProfileData == null)
                     {
-                        var sourceresponse = client.CreateSourceProfile(sourcerequest);
-                        if (sourceresponse.Profile.ProfileData == null || sourceresponse.Profile.ProfileData == null)
-                        {
 
-                            throw new Exception("Custom Source profile has not been generated successfully from service for runId: " + optimizeRunId + " Error: " + sourceresponse.Message);
-                        }
+                        throw new Exception("Custom Source profile has not been generated successfully from service for runId: " + optimizeRunId + " Error: " + sourceresponse.Message);
+                    }
 
-                        DataAccessFactory.
-                            Instance.
-                            ExecuteProcedure(
-                                "CP.InsertCustomSourceProfile",
-                                new object[]
-                                    {
+                    DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "CP.InsertCustomSourceProfile",
+                            new object[]
+                                {
                                         projectId,
                                         destinationDescription,
                                         destinationDescription,
                                         sourceresponse.Profile.ProfileData,
                                         true
-                                    });
-
-                    }
+                                });
 
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateInitialDestinationAndDeviceLinkProfiles"));
@@ -995,18 +988,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
                     request.ProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = description });
 
-                    request.PCSDataType = (PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
-
-                    using (var client = new ProfilerClient())
+                    request.PCSDataType = (Enums.PCSDataType)SessionManager.Instance.CurrentProject.PCSDataTypes;
+                    var response = Utilities.GetProfilerServiceClientCall<OptimizeDeviceLinkProfileRequest, OptimizeDeviceLinkProfileResponse>(request, Utilities.ProfilerCallMethod.OptimizeDLP, Utilities.ProfilerRequestCall.HttpPost);
+                    if (response.OptimizedProfile.ProfileData == null)
                     {
-                        var response = client.OptimizeDeviceLinkProfile(request);
-                        if (response.OptimizedProfile.ProfileData == null)
-                        {
-                            throw new Exception("Optimized device link profile has not been generated successfully from service for runId:" + optimizeRunId + " Error: " + response.Message);
-                        }
-                        DataAccessFactory.Instance.ExecuteProcedure("CPSync4D.UpdateOptimizeDlp",
-                                                                    new object[] { optimizeRunId, response.OptimizedProfile.ProfileData, status, endDateTime });
+                        throw new Exception("Optimized device link profile has not been generated successfully from service for runId:" + optimizeRunId + " Error: " + response.Message);
                     }
+                    DataAccessFactory.Instance.ExecuteProcedure("CPSync4D.UpdateOptimizeDlp",
+                                                                new object[] { optimizeRunId, response.OptimizedProfile.ProfileData, status, endDateTime });
+
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_OptimizeNamedColorProfile"));
         }
@@ -1016,7 +1006,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    ProfilerClient client = new ProfilerClient();
+                    //ProfilerClient client = new ProfilerClient();
 
                     CreateSpotLibraryRequest req = new CreateSpotLibraryRequest();
                     SpotParameter[] paramList = new SpotParameter[10];
@@ -1056,18 +1046,23 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         writer.WriteLine("BEGIN_DATA");
 
                         if (dsSpotTarget.Tables[1] != null && dsSpotTarget.Tables[1].Rows.Count > 0)
+                        {
                             foreach (DataRow dr in dsSpotTarget.Tables[1].Rows)
+                            {
                                 writer.WriteLine("\"" + dr["SpotName"].ToString() + "\"\t" + dr["Target_L*"].ToString() + "\t" + dr["Target_a*"].ToString() + "\t" + dr["Target_b*"].ToString() + "");
+                            }
+                        }
 
                         writer.WriteLine("END_DATA");
                         writer.Flush();
                         req.TargetProfile = ms.ToArray();
                     }
 
-                    var syncClientResponse = client.CreateSpotLibraryValues(req);
+                    //var syncClientResponse = client.CreateSpotLibraryValues(req);
+                    var syncClientResponse = Utilities.GetProfilerServiceClientCall<CreateSpotLibraryRequest, CreateSpotLibraryResponse>(req, Utilities.ProfilerCallMethod.CreateSpotLibrary, Utilities.ProfilerRequestCall.HttpPost);
 
 
-                    List<ProfilerService.Patch> list = syncClientResponse.spotPatchDetail;
+                    List<ProfilerServiceClient.Patch> list = syncClientResponse.spotPatchDetail;
 
                     var spotProjectDetails = new XElement("SpotColorDetails",
                                                        list.
@@ -1101,9 +1096,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
-
-
-                    ProfilerClient client = new ProfilerClient();
+                    //ProfilerClient client = new ProfilerClient();
 
                     OptimizeSpotLibraryRequest req = new OptimizeSpotLibraryRequest();
                     SpotParameter[] paramList = new SpotParameter[5];
@@ -1141,18 +1134,23 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         writer.WriteLine("BEGIN_DATA");
 
                         if (dsSpotTarget.Tables[1] != null && dsSpotTarget.Tables[1].Rows.Count > 0)
+                        {
                             foreach (DataRow dr in dsSpotTarget.Tables[1].Rows)
+                            {
                                 writer.WriteLine("\"" + dr["SpotName"].ToString() + "\"\t" + dr["Measured_L*"].ToString() + "\t" + dr["Measured_a*"].ToString() + "\t" + dr["Measured_b*"].ToString() + "");
+                            }
+                        }
 
                         writer.WriteLine("END_DATA");
                         writer.Flush();
                         req.TargetProfile = ms.ToArray();
                     }
 
-                    var syncClientResponse = client.OptimizeSpotLibraryValues(req);
+                    //var syncClientResponse = client.OptimizeSpotLibraryValues(req);
+                    var syncClientResponse  = Utilities.GetProfilerServiceClientCall<OptimizeSpotLibraryRequest, OptimizeSpotLibraryResponse>(req, Utilities.ProfilerCallMethod.OptimizeSpotLibrary, Utilities.ProfilerRequestCall.HttpPost);
 
 
-                    List<ProfilerService.Patch> list = syncClientResponse.spotPatchDetail;
+                    List< ProfilerServiceClient.Patch> list = syncClientResponse.spotPatchDetail;
 
                     var spotProjectDetails = new XElement("SpotColorDetails",
                                                        list.

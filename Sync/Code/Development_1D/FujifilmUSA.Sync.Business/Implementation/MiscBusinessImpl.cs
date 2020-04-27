@@ -113,12 +113,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public bool Ping()
         {
             bool returnValue = false;
-            using (ProfilerService.ProfilerClient client = new ProfilerService.ProfilerClient())
-            {
-                Common.ImplementBusinessLogic(() =>
-                     returnValue = client.Ping(),
-                  new BusinessHandlerRequest(this, ErrorOccured, string.Empty));
-            }
+            returnValue=Utilities.GetProfilerServiceClientCall<string,bool>(string.Empty,Utilities.ProfilerCallMethod.Ping,Utilities.ProfilerRequestCall.HttpGet);
+            //using (ProfilerService.ProfilerClient client = new ProfilerService.ProfilerClient())
+            //{
+            //    
+            //    Common.ImplementBusinessLogic(() =>
+            //         returnValue = client.Ping(),
+            //      new BusinessHandlerRequest(this, ErrorOccured, string.Empty));
+            //}
             return returnValue;
         }
         #endregion
