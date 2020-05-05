@@ -873,16 +873,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 user.ProjectName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "ProjectName");
                                 user.OptimizationRunID = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "OptimizationRunID");
                                 user.DeviceName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "DeviceName");
-
-                                user.PaperScaling = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "PaperScaling");
-                                user.NewPaper_White_L = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_White_L");
-                                user.NewPaper_White_a = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_White_a");
-                                user.NewPaper_White_b = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_White_b");
-                                user.NewPaper_Black_L = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_Black_L");
-                                user.NewPaper_Black_a = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_Black_a");
-                                user.NewPaper_Black_b = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_Black_b");
-
-                                user.ReferenceChartTypeId = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "ReferenceChartTypeID");                              
+                                user.ReferenceChartTypeId = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "ReferenceChartTypeID");
                                 user.ChartName = DataReader.ReadString(dsUser.Tables[1].Rows[0], "ChartName");
                                 user.NumOfCols = DataReader.ReadInt(dsUser.Tables[1].Rows[0], "NumOfCols");
                                 user.NumOfRows = DataReader.ReadInt(dsUser.Tables[1].Rows[0], "NumOfRows");
@@ -967,15 +958,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 user.ProjectName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "ProjectName");
                                 user.OptimizationRunID = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "OptimizationRunID");
                                 user.DeviceName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "DeviceName");
-
-                                user.PaperScaling = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "PaperScaling");
-                                user.NewPaper_White_L = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_White_L");
-                                user.NewPaper_White_a = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_White_a");
-                                user.NewPaper_White_b = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_White_b");
-                                user.NewPaper_Black_L = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_Black_L");
-                                user.NewPaper_Black_a = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_Black_a");
-                                user.NewPaper_Black_b = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_Black_b");
-
                                 user.ReferenceChartTypeId = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "ReferenceChartTypeID");
                                 user.ChartName = DataReader.ReadString(dsUser.Tables[1].Rows[0], "ChartName");
                                 user.NumOfCols = DataReader.ReadInt(dsUser.Tables[1].Rows[0], "NumOfCols");
@@ -1262,15 +1244,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 user.ProjectName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "ProjectName");
                                 user.OptimizationRunID = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "OptimizationRunID");
                                 user.DeviceName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "DeviceName");
-
-                                user.PaperScaling = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "PaperScaling");
-                                user.NewPaper_White_L = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_White_L");
-                                user.NewPaper_White_a = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_White_a");
-                                user.NewPaper_White_b = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_White_b");
-                                user.NewPaper_Black_L = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_Black_L");
-                                user.NewPaper_Black_a = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_Black_a");
-                                user.NewPaper_Black_b = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_Black_b");
-
                                 user.ReferenceChartTypeId = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "ReferenceChartTypeID");
                                 user.ChartName = DataReader.ReadString(dsUser.Tables[1].Rows[0], "ChartName");
                                 user.NumOfCols = DataReader.ReadInt(dsUser.Tables[1].Rows[0], "NumOfCols");
@@ -1360,15 +1333,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 user.ProjectName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "ProjectName");
                                 user.OptimizationRunID = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "OptimizationRunID");
                                 user.DeviceName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "DeviceName");
-
-                                user.PaperScaling = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "PaperScaling");
-                                user.NewPaper_White_L = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_White_L");
-                                user.NewPaper_White_a = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_White_a");
-                                user.NewPaper_White_b = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_White_b");
-                                user.NewPaper_Black_L = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_Black_L");
-                                user.NewPaper_Black_a = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_Black_a");
-                                user.NewPaper_Black_b = DataReader.ReadDecimal(dsUser.Tables[0].Rows[0], "NewPaper_Black_b");
-
                                 user.ReferenceChartTypeId = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "ReferenceChartTypeID");
                                 user.ChartName = DataReader.ReadString(dsUser.Tables[1].Rows[0], "ChartName");
                                 user.NumOfCols = DataReader.ReadInt(dsUser.Tables[1].Rows[0], "NumOfCols");

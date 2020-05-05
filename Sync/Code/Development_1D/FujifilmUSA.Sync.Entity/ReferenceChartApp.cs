@@ -16,13 +16,6 @@ namespace FujifilmUSA.Sync.Entity
         public string EntryDate { get; set; }
         public string DeviceName { get; set; }
         public string PrintStandardType { get; set; }
-        public bool PaperScaling { get; set; }
-        public decimal NewPaper_White_L { get; set; }
-        public decimal NewPaper_White_a { get; set; }
-        public decimal NewPaper_White_b { get; set; }
-        public decimal NewPaper_Black_L { get; set; }
-        public decimal NewPaper_Black_a { get; set; }
-        public decimal NewPaper_Black_b { get; set; }
     }
 
     public class MeasurementSettingApp
