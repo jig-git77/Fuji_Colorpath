@@ -271,7 +271,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px" align="right">
-                                    <span style="font-weight: bold;"><asp:Localize Text="Is Custom Plugin?" runat="server" 
+                                    <span style="font-weight: bold;"><asp:Localize Text="Measure App" runat="server" 
                                         ID="locIsCustomPlugin" meta:resourcekey="locIsCustomPluginResource1"></asp:Localize></span>
                                 </td>
                                 <td>
