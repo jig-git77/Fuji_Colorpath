@@ -149,9 +149,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                 tblDetailsFirstRun.Visible = true;
                 tblColorFirstRun.Visible = true;
                 decimal Delta_L, Delta_a, Delta_b;
-                Delta_L = T_L - P_L;
-                Delta_a = T_a - P_a;
-                Delta_b = T_b - P_b;
+                Delta_L = P_L - T_L;
+                Delta_a = P_a - T_a;
+                Delta_b = P_b - T_b;
 
                 lblTargetLRun0.Text = T_L.ToString();
                 lblTargetARun0.Text = T_a.ToString();
