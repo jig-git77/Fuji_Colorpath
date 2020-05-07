@@ -12,25 +12,25 @@
         <div class="greencornersbox" style="height: 30px !important;">
             <table style="width: 100%; vertical-align: top;">
                 <tr>
-                    <td style="width: 80%; vertical-align:top; text-align: left; padding:0px 0px 0px 0px;">
+                    <td style="width: 80%; vertical-align: top; text-align: left; padding: 0px 0px 0px 0px;">
                         <asp:Label ID="lblMessage" runat="server" Text="" CssClass="mtoolmessage"></asp:Label>
                     </td>
-                    <td style="width: 20%; vertical-align:top; text-align:center; float:none;">
+                    <td style="width: 20%; vertical-align: top; text-align: center; float: none;">
                         <asp:UpdatePanel ID="pluginUpdatePnl" runat="server" RenderMode="Block" ChildrenAsTriggers="false" UpdateMode="Conditional">
-                            <ContentTemplate>                               
-                              
-                            <asp:LinkButton ID="btnAddPluginStatus" runat="server" CssClass="green_bt" OnClick="btnAddPluginStatus_Click">
-                                <span>
-                                    <asp:Localize runat="server" Text="Activate" ID="btnlocAddPluginStatus"
-                                        meta:resourcekey="btnlocAddPluginStatus"></asp:Localize>
-                                </span>
-                            </asp:LinkButton>
+                            <ContentTemplate>
+
+                                <asp:LinkButton ID="btnAddPluginStatus" runat="server" CssClass="green_bt" OnClick="btnAddPluginStatus_Click">
+                                    <span>
+                                        <asp:Localize runat="server" Text="Activate" ID="btnlocAddPluginStatus"
+                                            meta:resourcekey="btnlocAddPluginStatus"></asp:Localize>
+                                    </span>
+                                </asp:LinkButton>
                             </ContentTemplate>
                             <Triggers>
                                 <asp:AsyncPostBackTrigger ControlID="btnAddPluginStatus" EventName="Click" />
-                            </Triggers>                           
+                            </Triggers>
                         </asp:UpdatePanel>
-                       
+
                     </td>
                 </tr>
             </table>
@@ -47,6 +47,9 @@
                 <input type="button" id="btnImportMeasurements" class="link-button" style="width: 150px;" value='<%= GetResourceString("btnImportMeasurements") %>' onclick="javascript: return ShowImportWindow();" />
                 <a class="link-button help-icon" href="javascript:void()" onclick="location.href='Measure://';"></a>
                 <a class="link-button refresh-icon" href="javascript:void()" onclick="bindMeasurementData();"></a>
+            </div>
+            <div id="Div_ImportMeasurementFile" style="float: right; padding-right: 10px;">                
+                <input type="button" runat="server" id="btnImportMeasurementFile" class="link-button" style="width: 165px;" onclick="javascript: return ShowImportFileWindow();" />
             </div>
         </div>
         <div class="color_pallate_middle">
@@ -110,6 +113,10 @@
         <telerik:RadWindow ID="ImportMeasurementWindow" runat="server" VisibleStatusbar="false"
             ShowContentDuringLoad="false" Title="Import Measurements" Width="730" Height="400"
             Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupImportMeasurements.aspx">
+        </telerik:RadWindow>
+        <telerik:RadWindow ID="ImportMeasurementFileWindow" runat="server" VisibleStatusbar="false"
+            ShowContentDuringLoad="false" Title="Import Measurement File" Width="730" Height="285"
+            Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupImportMeasurementFile.aspx">
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>
@@ -184,8 +191,8 @@
         var OptimizeRunId = jQuery("input[id$=hdOptimizeRunId]").val();
         var ProjectId = jQuery("input[id$=hdProjectId]").val();
         var getMeasurementUrl = BASE_SERVICE_URL;
-       
-        
+
+
         if (jQuery("input[id$=hdIsVerification]").val() == "true") {
             getMeasurementUrl = "Services/PluginDataService.svc/GetVMeasurementsByProjectId/" + ProjectId;
             //getMeasurementUrl += "PluginData.svc/GetVMeasurementsByProjectId/" + ProjectId;
@@ -194,15 +201,15 @@
             getMeasurementUrl = "Services/PluginDataService.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
             //getMeasurementUrl += "PluginData.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
         }
-        else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary %>') {            
+        else if (jQuery("input[id$=hdLicenseType]").val() == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary %>') {
             getMeasurementUrl = "Services/PluginDataService.svc/GetSpotMeasurementsByOptimizeId/" + OptimizeRunId;
             //getMeasurementUrl += "PluginData.svc/GetSpotMeasurementsByOptimizeId/" + OptimizeRunId;
         }
-        else{            
+        else {
             getMeasurementUrl = "Services/PluginDataService.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId;
             //getMeasurementUrl += "PluginData.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId;
         }
-        
+
 
         jQuery.ajax({
             type: "GET",
@@ -217,7 +224,7 @@
                     var json = jQuery.parseJSON(data);
                     if (json.length > 0) {
                         json = json.sort((a, b) => b.MeasurementId - a.MeasurementId); // Descending order                         
-                        AutoNumber = json.length+1;
+                        AutoNumber = json.length + 1;
                         $('#' + $('#<%=hdnbtnAnalyzeParent.ClientID%>').val() + '').show();
 
                         jQuery("input[id*='hdHasMeasurement']").val('true');
@@ -255,7 +262,7 @@
                     }
                 },
             success:
-                function (data) {                   
+                function (data) {
                    <%-- var json = jQuery.parseJSON(data);
                     if (json == null || json.length == 0) {                        
                         '<%FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentOptimizeRun.HasMeasurements =false; %>';
@@ -276,7 +283,7 @@
         }
         return false;
     }
-    function Autoincrement() {        
+    function Autoincrement() {
         AutoNumber = parseInt(AutoNumber) - 1;
         return AutoNumber
     }
@@ -409,6 +416,23 @@
             }
         });
     }
+   function ShowImportFileWindow() {
+        if (('<%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentDlpSubOperation != FujifilmUSA.Sync.Entity.ELicenseType.Validation).ToString().ToLower() %>' == 'true') &&
+            (jQuery("input[id*='hdMeasurementsTotal']").val() >=
+        <%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == 
+        FujifilmUSA.Sync.Entity.ELicenseType.Sync1D ? ApplicationConfiguration.Instance.MeasurementLimitSync1D : 
+        (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentProject.LicenseType == FujifilmUSA.Sync.Entity.ELicenseType.SpotLibrary ? 
+        ApplicationConfiguration.Instance.MeasurementLimitSpotProject : ApplicationConfiguration.Instance.MeasurementsLimit)) %>)) {
+            MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
+
+            return false;
+        }
+
+        var oWnd = $find("<%= ImportMeasurementFileWindow.ClientID %>");
+        oWnd.show();
+        return false;
+    }
+
 
 </script>
 

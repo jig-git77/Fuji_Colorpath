@@ -58,6 +58,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locRecentUpload;
         
         /// <summary>
+        /// btnImportMeasurementFile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputButton btnImportMeasurementFile;
+        
+        /// <summary>
         /// lblSN control.
         /// </summary>
         /// <remarks>
@@ -236,5 +245,14 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadWindow ImportMeasurementWindow;
+        
+        /// <summary>
+        /// ImportMeasurementFileWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindow ImportMeasurementFileWindow;
     }
 }
