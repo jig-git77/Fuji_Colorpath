@@ -70,6 +70,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import Measurement File.
+        /// </summary>
+        internal static string btnImportMeasurementFile {
+            get {
+                return ResourceManager.GetString("btnImportMeasurementFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import Measurements.
         /// </summary>
         internal static string btnImportMeasurements {
