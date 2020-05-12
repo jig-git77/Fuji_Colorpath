@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using System;
+﻿using System;
+using System.ComponentModel;
 namespace FujifilmUSA.Sync.Entity
 {
     public enum ELeftMenuItemLevel
@@ -625,5 +625,16 @@ namespace FujifilmUSA.Sync.Entity
         CustomSourceProfile = 4,
         [Description("ESourceProfileCategory_Other")] //Other
         Other = 11
+    }
+
+    public enum EMeasureTool
+    {
+        [Description("EMeasureTool_Both")] //Both
+        BOTH = 0,
+        [Description("ESourceProfileCategory_NPAPIPlugin")] //NPAPIPlugin
+        NPAPIPlugin = 1,
+        [Description("ESourceProfileCategory_SYNCMeasureApp")] //SYNCMeasureApp
+        SYNCMeasureApp = 2
+
     }
 }

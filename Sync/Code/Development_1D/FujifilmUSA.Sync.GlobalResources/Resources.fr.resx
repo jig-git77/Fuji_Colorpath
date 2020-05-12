@@ -1338,4 +1338,13 @@
   <data name="ESourceProfileCategory_CustomStandards" xml:space="preserve">
     <value>Custom Source Profile</value>
   </data>
+  <data name="EMeasureTool_Both" xml:space="preserve">
+    <value>Both</value>
+  </data>
+  <data name="ESourceProfileCategory_NPAPIPlugin" xml:space="preserve">
+    <value>NPAPI Plugin</value>
+  </data>
+  <data name="ESourceProfileCategory_SYNCMeasureApp" xml:space="preserve">
+    <value>SYNC Measure App</value>
+  </data>
 </root>

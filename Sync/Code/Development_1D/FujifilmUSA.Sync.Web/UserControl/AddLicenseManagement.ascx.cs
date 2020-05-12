@@ -51,6 +51,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Bindcompany();
             BindLicenseType();
             BindBranch();
+            BindMeasureTool();
             lblHeader.Text = GetResourceString(_recAddLicense); //"Add License";
             if (Request.QueryString["LicenseId"] != null)
             {
@@ -146,7 +147,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IsOneOff = chkIsOneOff.Checked,
                 IsActive = chkIsActive.Checked,
                 IsCustomProfOptions = chkIsCustomProfOptions.Checked,
-                IsCustomPlugin = chkIsCustomPlugin.Checked
+                MeasureTool =(EMeasureTool)Convert.ToInt16(cmbMeasureTool.SelectedValue.ToString())//chkIsCustomPlugin.Checked
             };
             if (chkSync1D.Checked)
                 License.LicenseType.Add(ELicenseType.Sync1D);
@@ -233,7 +234,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtExpirationDate.Text = Convert.ToDateTime(License.ExpirationDate).ToString("d");
                 chkIsOneOff.Checked = License.IsOneOff;
                 chkIsCustomProfOptions.Checked = License.IsCustomProfOptions;
-                chkIsCustomPlugin.Checked = License.IsCustomPlugin;
+                //chkIsCustomPlugin.Checked = License.IsCustomPlugin;
+                cmbMeasureTool.SelectedValue =Convert.ToString((short)License.MeasureTool);
                 chkIsActive.Checked = License.IsActive;
                 if (chkIsActive.Checked == false)
                 {
@@ -241,6 +243,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     chkSync1D.Enabled = chkDlp.Enabled = chkInk.Enabled = chkInk_Source.Enabled = chkSync4D_Certification.Enabled = chkCustomSourceProfile.Enabled = chkReProfileCustomSource.Enabled = chkFullGamutCustomSource.Enabled = chkMultiColorCustomSource.Enabled = chkSpotLibrary.Enabled = false;
                 }
             }
+        }
+        private void BindMeasureTool()
+        {
+            cmbMeasureTool.Items.Clear();
+            cmbMeasureTool.DataValueField = "Key";
+            cmbMeasureTool.DataTextField = "Value";
+            cmbMeasureTool.DataSource = Utilities.GetEnumDescriptionAttributeDropdown<EMeasureTool>();
+            cmbMeasureTool.DataBind();
+            cmbMeasureTool.SelectedIndex = 0;
         }
         #endregion
 

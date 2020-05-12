@@ -36,7 +36,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        IsOneOff = DataReader.ReadBoolean(x, "IsOneOff"),
                                        IsCustomProfOptions = DataReader.ReadBoolean(x, "IsCustomProfOptions"),
                                        IsActive = DataReader.ReadBoolean(x, "IsActive"),
-                                       IsCustomPlugin = DataReader.ReadBoolean(x, "IsCustomPlugin"),
+                                       MeasureTool =(EMeasureTool)DataReader.ReadShort(x, "IsCustomPlugin"),
                                        Branch = new Branch()
                                        {
                                            BranchId = DataReader.ReadInt(x, "BranchId"),
@@ -104,7 +104,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.IsCustomProfOptions
                                         , license.IsActive
                                         , licenseDetails.ToString()
-                                        , license.IsCustomPlugin
+                                        , license.MeasureTool
                                     });
                     if (returnValue == -1)
                     {
@@ -144,7 +144,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.IsCustomProfOptions
                                         , license.IsActive
                                         , licenseDetails.ToString()
-                                        , license.IsCustomPlugin
+                                        , license.MeasureTool
                                     });
                     if (returnValue == -1)
                     {

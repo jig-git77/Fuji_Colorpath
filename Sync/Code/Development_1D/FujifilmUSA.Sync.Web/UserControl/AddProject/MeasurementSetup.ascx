@@ -256,7 +256,7 @@
                                         <td>
                                             <asp:RadioButtonList runat="server" ID="rbtnMeasurementType" RepeatDirection="Horizontal" ClientIDMode="Static">
                                                 <asp:ListItem Value="Plugin" Selected="True">Measurement Plugin</asp:ListItem>
-                                                <asp:ListItem Value="Custom">MTool</asp:ListItem>
+                                                <asp:ListItem Value="Custom">SYNC Measure App</asp:ListItem>
                                             </asp:RadioButtonList>
                                             <%--<asp:RadioButton runat="server" ID="rbtnMeasurementTypePlugin" GroupName="MeasurementType" Checked="true"/> Measurement Plugin
                                             <asp:RadioButton runat="server" ID="rbtnMeasurementTypeApp" GroupName="MeasurementType" /> Third Party Application--%>

@@ -373,13 +373,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locIsCustomPlugin;
         
         /// <summary>
-        /// chkIsCustomPlugin control.
+        /// cmbMeasureTool control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkIsCustomPlugin;
+        protected global::System.Web.UI.WebControls.DropDownList cmbMeasureTool;
         
         /// <summary>
         /// locIsActive control.

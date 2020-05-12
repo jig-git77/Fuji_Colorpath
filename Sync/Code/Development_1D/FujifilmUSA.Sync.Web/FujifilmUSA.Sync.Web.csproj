@@ -849,6 +849,7 @@
     <Content Include="Images\greendot.png" />
     <Content Include="Images\guntarget.png" />
     <Content Include="Images\header_bg1.png" />
+    <Content Include="Images\help-web-button-OLD.png" />
     <Content Include="Images\help-web-button.png" />
     <Content Include="Images\InkOptimizeSource.png" />
     <Content Include="Images\LabBackdrop.jpg" />
@@ -4374,7 +4375,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.ja.resx">
       <SubType>Designer</SubType>
     </Content>

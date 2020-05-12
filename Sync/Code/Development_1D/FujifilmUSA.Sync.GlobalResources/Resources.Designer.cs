@@ -943,6 +943,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Both.
+        /// </summary>
+        internal static string EMeasureTool_Both {
+            get {
+                return ResourceManager.GetString("EMeasureTool_Both", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Flexo.
         /// </summary>
         internal static string EPrintingTypes_Flexo {
@@ -2653,11 +2662,29 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NPAPI Plugin.
+        /// </summary>
+        internal static string ESourceProfileCategory_NPAPIPlugin {
+            get {
+                return ResourceManager.GetString("ESourceProfileCategory_NPAPIPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Other.
         /// </summary>
         internal static string ESourceProfileCategory_Other {
             get {
                 return ResourceManager.GetString("ESourceProfileCategory_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SYNC Measure App.
+        /// </summary>
+        internal static string ESourceProfileCategory_SYNCMeasureApp {
+            get {
+                return ResourceManager.GetString("ESourceProfileCategory_SYNCMeasureApp", resourceCulture);
             }
         }
         
