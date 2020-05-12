@@ -1365,4 +1365,13 @@
   <data name="Error_Invalid_SpotExportLibraryType" xml:space="preserve">
     <value>Invalid library type value has been provided.</value>
   </data>
+  <data name="EMeasureTool_Both" xml:space="preserve">
+    <value>Both</value>
+  </data>
+  <data name="ESourceProfileCategory_NPAPIPlugin" xml:space="preserve">
+    <value>NPAPI Plugin</value>
+  </data>
+  <data name="ESourceProfileCategory_SYNCMeasureApp" xml:space="preserve">
+    <value>SYNC Measure App</value>
+  </data>
 </root>

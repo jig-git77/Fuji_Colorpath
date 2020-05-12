@@ -271,7 +271,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px" align="right">
-                                    <span style="font-weight: bold;"><asp:Localize Text="Measure App" runat="server" 
+                                    <span style="font-weight: bold;"><asp:Localize Text="Measure Tool" runat="server" 
                                         ID="locIsCustomPlugin" meta:resourcekey="locIsCustomPluginResource1"></asp:Localize></span>
                                 </td>
                                 <td>
@@ -279,7 +279,10 @@
                                 </td>
                                 <td style="width: 370px">
                                     <div style="float: left;">
-                                        <asp:CheckBox ID="chkIsCustomPlugin" runat="server" Checked="False"  />
+                                        <%--<asp:CheckBox ID="chkIsCustomPlugin" runat="server" Checked="False"  />--%>                                         
+                                         <asp:DropDownList ID="cmbMeasureTool" runat="server" Width="170px" CssClass="select" 
+                                            meta:resourcekey="cmbMeasureTool1">
+                                        </asp:DropDownList>
                                     </div>
                                     <div class="clear">
                                     </div>
