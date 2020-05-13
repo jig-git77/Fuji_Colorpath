@@ -121,13 +121,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 if (SessionManager.Instance.CurrentDevice.License.MeasureTool == EMeasureTool.SYNCMeasureApp)
                 {
-                    trCustomPlugin.Visible = true;                    
+                    trCustomPlugin.Visible = false;
                     rbtnMeasurementType.Items[0].Attributes.CssStyle.Add("visibility", "hidden");
+                    rbtnMeasurementType.Items[1].Attributes.CssStyle.Add("visibility", "hidden");
                 }
                 else if (SessionManager.Instance.CurrentDevice.License.MeasureTool == EMeasureTool.NPAPIPlugin)
                 {
-                    trCustomPlugin.Visible = true;
+                    trCustomPlugin.Visible = false;
+                    rbtnMeasurementType.Items[0].Attributes.CssStyle.Add("visibility", "hidden");
                     rbtnMeasurementType.Items[1].Attributes.CssStyle.Add("visibility", "hidden");
+                }
+                else {
+                    trCustomPlugin.Visible = true;
                 }
             }
 
@@ -349,7 +354,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trMeasCount.Visible = true;
                 }
 
-                trCustomPlugin.Visible = true;
+                
 
                 if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.SpotLibrary)
                 {
@@ -359,23 +364,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     rbtnMeasurementType.SelectedValue = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.IsCustomPlugin ? "Custom" : "Plugin";
                 }
+                if (SessionManager.Instance.CurrentDevice.License.MeasureTool == EMeasureTool.BOTH)
+                {
+                    trCustomPlugin.Visible = true;
+                }
             }
             else
             {
                 if (SessionManager.Instance.CurrentDevice.License.MeasureTool == EMeasureTool.SYNCMeasureApp)
                 {
-                    trCustomPlugin.Visible = true;
+                    trCustomPlugin.Visible = false;
                     rbtnMeasurementType.SelectedValue = "Custom";
                     rbtnMeasurementType.SelectedIndex = 1;
                     //rbtnMeasurementType.Items.FindByValue("Plugin").vis
                     rbtnMeasurementType.Items[0].Attributes.CssStyle.Add("visibility", "hidden");
+                    rbtnMeasurementType.Items[1].Attributes.CssStyle.Add("visibility", "hidden");
                 }
                 else if (SessionManager.Instance.CurrentDevice.License.MeasureTool == EMeasureTool.NPAPIPlugin)
                 {
-                    trCustomPlugin.Visible = true;
+                    trCustomPlugin.Visible = false;
                     rbtnMeasurementType.SelectedValue = "Plugin";
                     rbtnMeasurementType.SelectedIndex = 0;
+                    rbtnMeasurementType.Items[0].Attributes.CssStyle.Add("visibility", "hidden");
                     rbtnMeasurementType.Items[1].Attributes.CssStyle.Add("visibility", "hidden");
+                    
                 }
                 else
                 {
