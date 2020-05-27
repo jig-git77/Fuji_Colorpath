@@ -794,6 +794,7 @@
     <Content Include="Global.asax" />
     <Content Include="GlobalActivation.aspx" />
     <Content Include="GlobalMaster.Master" />
+    <Content Include="Help-Button.html" />
     <Content Include="Images\4DCertification.png" />
     <Content Include="Images\4DCertification_Certified.png" />
     <Content Include="Images\abChartBackGround.gif" />
@@ -4826,7 +4827,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AddUserManagement.ascx.resx" />
+    <Content Include="UserControl\App_LocalResources\AddUserManagement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddUserManagement.ascx.de.resx">
@@ -6034,7 +6037,9 @@
     <Content Include="UserControl\App_LocalResources\AddSourceProfile.ascx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AddUserManagement.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\AddUserManagement.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AdminMenuBar.ascx.fr.resx" />
@@ -6147,10 +6152,14 @@
     <Content Include="UserControl\App_LocalResources\Settings.ascx.fr.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\SourceProfileManagement.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\SourceProfileManagement.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\UserManagement.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\UserManagement.ascx.fr.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\ClosePrintCondition.ascx.fr.resx">
