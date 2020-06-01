@@ -3,9 +3,7 @@ using System;
 using System.Data;
 using System.Collections.Generic;
 using System.Text;
-using WebSupergoo.ABCpdf8;
-using WebSupergoo.ABCpdf8.Atoms;
-using WebSupergoo.ABCpdf8.Objects;
+using WebSupergoo.ABCpdf11;
 #endregion
 #region Others
 using System.IO;
@@ -20,8 +18,9 @@ namespace Fuji.Common
     {
         #region Declaration
 
-        //string strServer = System.Web.HttpContext.Current.Request.Url.AbsoluteUri.Substring(0, System.Web.HttpContext.Current.Request.Url.AbsoluteUri.LastIndexOf("/") + 1);
-        string strServer = System.Web.HttpContext.Current.Server.MapPath("Images") + "\\";
+        //string strServer = System.Web.HttpContext.Current.Server.MapPath("Images") + "\\";
+        string strServer = "";
+        string currentBaseUrl = "";
         int _ReportType = 0;
         string _PDFPath;
         string _PDF_NAME;
@@ -76,7 +75,11 @@ namespace Fuji.Common
             if (System.IO.Directory.Exists(Dir2) == false) { System.IO.Directory.CreateDirectory(Dir2); }
             if (System.IO.Directory.Exists(Dir3) == false) { System.IO.Directory.CreateDirectory(Dir3); }
 
-            CSSPath = System.Web.HttpContext.Current.Server.MapPath("Templates/style.css");
+            currentBaseUrl = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority +
+                                System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
+
+            CSSPath = currentBaseUrl + "Templates/style.css";
+            strServer = currentBaseUrl + "Images/";
             DS_Common = new DataSet();
         }
         #endregion
@@ -1040,8 +1043,8 @@ namespace Fuji.Common
             string HTMLstr = "";
             str = str.Replace("#csspath#", CSSPath);
 
-            str = str.Replace("##Chart1_PDF##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_DeviceReport1.Jpeg"));
-            str = str.Replace("##Chart2_PDF##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_DeviceReport2.Jpeg"));
+            str = str.Replace("##Chart1_PDF##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_DeviceReport1.Jpeg");
+            str = str.Replace("##Chart2_PDF##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_DeviceReport2.Jpeg");
 
             #region ====  Basic Info  ====
             if (DS_Common.Tables["BasicInfo"] != null && DS_Common.Tables["BasicInfo"].Rows.Count > 0)
@@ -1085,7 +1088,7 @@ namespace Fuji.Common
             #endregion
 
             #region ====  Failure Rate  ====
-            str = str.Replace("##ColorDetail_1##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_ColorDetail_1.Jpeg"));
+            str = str.Replace("##ColorDetail_1##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_ColorDetail_1.Jpeg");
 
             if (DS_Common.Tables["FailureRate"] != null && DS_Common.Tables["FailureRate"].Rows.Count > 0)
             {
@@ -1309,11 +1312,11 @@ namespace Fuji.Common
             #endregion
 
             #region Show Hide Images
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_MaxDeltaE1"] == true) { str = str.Replace("##CHART_MaxDeltaE_1##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_MaxDeltaE_Shift1.Jpeg")).Replace("##MAXDELTAE_O##", "").Replace("##MAXDELTAE_C##", ""); } else { str = str.Replace("##MAXDELTAE_O##", "<!--").Replace("##MAXDELTAE_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_Density1"] == true) { str = str.Replace("##CHART_Density_1##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_Density_Shift1.Jpeg")).Replace("##DENSITY_O##", "").Replace("##DENSITY_C##", ""); } else { str = str.Replace("##DENSITY_O##", "<!--").Replace("##DENSITY_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_DotGain1"] == true) { str = str.Replace("##DotGain_Shift1##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_DotGain_Shift1.Jpeg")).Replace("##DOTGAIN_O##", "").Replace("##DOTGAIN_C##", ""); } else { str = str.Replace("##DOTGAIN_O##", "<!--").Replace("##DOTGAIN_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_PaperWhite1"] == true) { str = str.Replace("##CHART_PaperWhite_1##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_PaperWhite_Shift1.Jpeg")).Replace("##PAPERWHITE_O##", "").Replace("##PAPERWHITE_C##", ""); } else { str = str.Replace("##PAPERWHITE_O##", "<!--").Replace("##PAPERWHITE_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_TempHumidity1"] == true) { str = str.Replace("##CHART_TempHumidity_1##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_TempHumidity_Shift1.Jpeg")).Replace("##HUMIDITY_O##", "").Replace("##HUMIDITY_C##", ""); } else { str = str.Replace("##HUMIDITY_O##", "<!--").Replace("##HUMIDITY_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_MaxDeltaE1"] == true) { str = str.Replace("##CHART_MaxDeltaE_1##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_MaxDeltaE_Shift1.Jpeg").Replace("##MAXDELTAE_O##", "").Replace("##MAXDELTAE_C##", ""); } else { str = str.Replace("##MAXDELTAE_O##", "<!--").Replace("##MAXDELTAE_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_Density1"] == true) { str = str.Replace("##CHART_Density_1##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_Density_Shift1.Jpeg").Replace("##DENSITY_O##", "").Replace("##DENSITY_C##", ""); } else { str = str.Replace("##DENSITY_O##", "<!--").Replace("##DENSITY_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_DotGain1"] == true) { str = str.Replace("##DotGain_Shift1##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_DotGain_Shift1.Jpeg").Replace("##DOTGAIN_O##", "").Replace("##DOTGAIN_C##", ""); } else { str = str.Replace("##DOTGAIN_O##", "<!--").Replace("##DOTGAIN_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_PaperWhite1"] == true) { str = str.Replace("##CHART_PaperWhite_1##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_PaperWhite_Shift1.Jpeg").Replace("##PAPERWHITE_O##", "").Replace("##PAPERWHITE_C##", ""); } else { str = str.Replace("##PAPERWHITE_O##", "<!--").Replace("##PAPERWHITE_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_TempHumidity1"] == true) { str = str.Replace("##CHART_TempHumidity_1##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_TempHumidity_Shift1.Jpeg").Replace("##HUMIDITY_O##", "").Replace("##HUMIDITY_C##", ""); } else { str = str.Replace("##HUMIDITY_O##", "<!--").Replace("##HUMIDITY_C##", "-->"); }
             #endregion
 
             #region Assign Server
@@ -1343,11 +1346,11 @@ namespace Fuji.Common
             #endregion
 
             #region Show Hide Images
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_MaxDeltaE2"] == true) { str = str.Replace("##CHART_MaxDeltaE_2##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_MaxDeltaE_Shift2.Jpeg")).Replace("##MAXDELTAE_O##", "").Replace("##MAXDELTAE_C##", ""); } else { str = str.Replace("##MAXDELTAE_O##", "<!--").Replace("##MAXDELTAE_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_Density2"] == true) { str = str.Replace("##CHART_Density_2##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_Density_Shift2.Jpeg")).Replace("##DENSITY_O##", "").Replace("##DENSITY_C##", ""); } else { str = str.Replace("##DENSITY_O##", "<!--").Replace("##DENSITY_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_DotGain2"] == true) { str = str.Replace("##Chart_Dotgain2##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_DotGain_Shift2.Jpeg")).Replace("##DOTGAIN_O##", "").Replace("##DOTGAIN_C##", ""); } else { str = str.Replace("##DOTGAIN_O##", "<!--").Replace("##DOTGAIN_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_PaperWhite2"] == true) { str = str.Replace("##CHART_PaperWhite_2##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_PaperWhite_Shift2.Jpeg")).Replace("##PAPERWHITE_O##", "").Replace("##PAPERWHITE_C##", ""); } else { str = str.Replace("##PAPERWHITE_O##", "<!--").Replace("##PAPERWHITE_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_TempHumidity2"] == true) { str = str.Replace("##CHART_TempHumidity_2##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_TempHumidity_Shift2.Jpeg")).Replace("##HUMIDITY_O##", "").Replace("##HUMIDITY_C##", ""); } else { str = str.Replace("##HUMIDITY_O##", "<!--").Replace("##HUMIDITY_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_MaxDeltaE2"] == true) { str = str.Replace("##CHART_MaxDeltaE_2##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_MaxDeltaE_Shift2.Jpeg").Replace("##MAXDELTAE_O##", "").Replace("##MAXDELTAE_C##", ""); } else { str = str.Replace("##MAXDELTAE_O##", "<!--").Replace("##MAXDELTAE_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_Density2"] == true) { str = str.Replace("##CHART_Density_2##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_Density_Shift2.Jpeg").Replace("##DENSITY_O##", "").Replace("##DENSITY_C##", ""); } else { str = str.Replace("##DENSITY_O##", "<!--").Replace("##DENSITY_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_DotGain2"] == true) { str = str.Replace("##Chart_Dotgain2##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_DotGain_Shift2.Jpeg").Replace("##DOTGAIN_O##", "").Replace("##DOTGAIN_C##", ""); } else { str = str.Replace("##DOTGAIN_O##", "<!--").Replace("##DOTGAIN_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_PaperWhite2"] == true) { str = str.Replace("##CHART_PaperWhite_2##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_PaperWhite_Shift2.Jpeg").Replace("##PAPERWHITE_O##", "").Replace("##PAPERWHITE_C##", ""); } else { str = str.Replace("##PAPERWHITE_O##", "<!--").Replace("##PAPERWHITE_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_TempHumidity2"] == true) { str = str.Replace("##CHART_TempHumidity_2##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_TempHumidity_Shift2.Jpeg").Replace("##HUMIDITY_O##", "").Replace("##HUMIDITY_C##", ""); } else { str = str.Replace("##HUMIDITY_O##", "<!--").Replace("##HUMIDITY_C##", "-->"); }
             #endregion
 
             #region Assign Server
@@ -1450,11 +1453,11 @@ namespace Fuji.Common
             #endregion
 
             #region Show Hide Images
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_MaxDeltaE1"] == true) { str = str.Replace("##CHART_MaxDeltaE_1##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_MaxDeltaE_Device_1.Jpeg")).Replace("##MAXDELTAE_O##", "").Replace("##MAXDELTAE_C##", ""); } else { str = str.Replace("##MAXDELTAE_O##", "<!--").Replace("##MAXDELTAE_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_Density1"] == true) { str = str.Replace("##CHART_Density_1##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_Density_Device_1.Jpeg")).Replace("##DENSITY_O##", "").Replace("##DENSITY_C##", ""); } else { str = str.Replace("##DENSITY_O##", "<!--").Replace("##DENSITY_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_DotGain1"] == true) { str = str.Replace("##Chart_DotGain_Device_1##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_DotGain_Device_1.Jpeg")).Replace("##DOTGAIN_O##", "").Replace("##DOTGAIN_C##", ""); } else { str = str.Replace("##DOTGAIN_O##", "<!--").Replace("##DOTGAIN_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_PaperWhite1"] == true) { str = str.Replace("##CHART_PaperWhite_1##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_PaperWhite_Device_1.Jpeg")).Replace("##PAPERWHITE_O##", "").Replace("##PAPERWHITE_C##", ""); } else { str = str.Replace("##PAPERWHITE_O##", "<!--").Replace("##PAPERWHITE_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_TempHumidity1"] == true) { str = str.Replace("##CHART_TempHumidity_1##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_TempHumidity_Device_1.Jpeg")).Replace("##HUMIDITY_O##", "").Replace("##HUMIDITY_C##", ""); } else { str = str.Replace("##HUMIDITY_O##", "<!--").Replace("##HUMIDITY_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_MaxDeltaE1"] == true) { str = str.Replace("##CHART_MaxDeltaE_1##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_MaxDeltaE_Device_1.Jpeg").Replace("##MAXDELTAE_O##", "").Replace("##MAXDELTAE_C##", ""); } else { str = str.Replace("##MAXDELTAE_O##", "<!--").Replace("##MAXDELTAE_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_Density1"] == true) { str = str.Replace("##CHART_Density_1##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_Density_Device_1.Jpeg").Replace("##DENSITY_O##", "").Replace("##DENSITY_C##", ""); } else { str = str.Replace("##DENSITY_O##", "<!--").Replace("##DENSITY_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_DotGain1"] == true) { str = str.Replace("##Chart_DotGain_Device_1##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_DotGain_Device_1.Jpeg").Replace("##DOTGAIN_O##", "").Replace("##DOTGAIN_C##", ""); } else { str = str.Replace("##DOTGAIN_O##", "<!--").Replace("##DOTGAIN_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_PaperWhite1"] == true) { str = str.Replace("##CHART_PaperWhite_1##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_PaperWhite_Device_1.Jpeg").Replace("##PAPERWHITE_O##", "").Replace("##PAPERWHITE_C##", ""); } else { str = str.Replace("##PAPERWHITE_O##", "<!--").Replace("##PAPERWHITE_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_TempHumidity1"] == true) { str = str.Replace("##CHART_TempHumidity_1##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_TempHumidity_Device_1.Jpeg").Replace("##HUMIDITY_O##", "").Replace("##HUMIDITY_C##", ""); } else { str = str.Replace("##HUMIDITY_O##", "<!--").Replace("##HUMIDITY_C##", "-->"); }
             #endregion
 
             #region Assign Server
@@ -1484,11 +1487,11 @@ namespace Fuji.Common
             #endregion
 
             #region Show Hide Images
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_MaxDeltaE2"] == true) { str = str.Replace("##CHART_MaxDeltaE_2##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_MaxDeltaE_Device_2.Jpeg")).Replace("##MAXDELTAE_O##", "").Replace("##MAXDELTAE_C##", ""); } else { str = str.Replace("##MAXDELTAE_O##", "<!--").Replace("##MAXDELTAE_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_Density2"] == true) { str = str.Replace("##CHART_Density_2##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_Density_Device_2.Jpeg")).Replace("##DENSITY_O##", "").Replace("##DENSITY_C##", ""); } else { str = str.Replace("##DENSITY_O##", "<!--").Replace("##DENSITY_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_DotGain2"] == true) { str = str.Replace("##Chart_Dotgain_device2##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_Dotgain_device2.Jpeg")).Replace("##DOTGAIN_O##", "").Replace("##DOTGAIN_C##", ""); } else { str = str.Replace("##DOTGAIN_O##", "<!--").Replace("##DOTGAIN_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_PaperWhite2"] == true) { str = str.Replace("##CHART_PaperWhite_2##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_PaperWhite_Device_2.Jpeg")).Replace("##PAPERWHITE_O##", "").Replace("##PAPERWHITE_C##", ""); } else { str = str.Replace("##PAPERWHITE_O##", "<!--").Replace("##PAPERWHITE_C##", "-->"); }
-            if ((bool)System.Web.HttpContext.Current.Session["CHRT_TempHumidity2"] == true) { str = str.Replace("##CHART_TempHumidity_2##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_TempHumidity_Device_2.Jpeg")).Replace("##HUMIDITY_O##", "").Replace("##HUMIDITY_C##", ""); } else { str = str.Replace("##HUMIDITY_O##", "<!--").Replace("##HUMIDITY_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_MaxDeltaE2"] == true) { str = str.Replace("##CHART_MaxDeltaE_2##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_MaxDeltaE_Device_2.Jpeg").Replace("##MAXDELTAE_O##", "").Replace("##MAXDELTAE_C##", ""); } else { str = str.Replace("##MAXDELTAE_O##", "<!--").Replace("##MAXDELTAE_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_Density2"] == true) { str = str.Replace("##CHART_Density_2##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_Density_Device_2.Jpeg").Replace("##DENSITY_O##", "").Replace("##DENSITY_C##", ""); } else { str = str.Replace("##DENSITY_O##", "<!--").Replace("##DENSITY_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_DotGain2"] == true) { str = str.Replace("##Chart_Dotgain_device2##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_Dotgain_device2.Jpeg").Replace("##DOTGAIN_O##", "").Replace("##DOTGAIN_C##", ""); } else { str = str.Replace("##DOTGAIN_O##", "<!--").Replace("##DOTGAIN_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_PaperWhite2"] == true) { str = str.Replace("##CHART_PaperWhite_2##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_PaperWhite_Device_2.Jpeg").Replace("##PAPERWHITE_O##", "").Replace("##PAPERWHITE_C##", ""); } else { str = str.Replace("##PAPERWHITE_O##", "<!--").Replace("##PAPERWHITE_C##", "-->"); }
+            if ((bool)System.Web.HttpContext.Current.Session["CHRT_TempHumidity2"] == true) { str = str.Replace("##CHART_TempHumidity_2##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_TempHumidity_Device_2.Jpeg").Replace("##HUMIDITY_O##", "").Replace("##HUMIDITY_C##", ""); } else { str = str.Replace("##HUMIDITY_O##", "<!--").Replace("##HUMIDITY_C##", "-->"); }
             #endregion
 
             #region Assign Server
@@ -1504,8 +1507,8 @@ namespace Fuji.Common
         {
             str = str.Replace("#csspath#", CSSPath);
 
-            str = str.Replace("##ColorDetail_1##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_ColorDetail_1.Jpeg"));
-            str = str.Replace("##ColorDetail_2##", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_ColorDetail_2.Jpeg"));
+            str = str.Replace("##ColorDetail_1##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_ColorDetail_1.Jpeg");
+            str = str.Replace("##ColorDetail_2##", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_ColorDetail_2.Jpeg");
 
 
             string HTMLstr = "";
@@ -2224,7 +2227,7 @@ namespace Fuji.Common
             #region ==== Target Vs Actual AB Plot ====
             // === Report-1 : Target Versus Actual AB === //
             if (DS_Common.Tables[1] != null && DS_Common.Tables[1].Rows.Count > 0)
-                str = str.Replace("###TargetVersusActualAB###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_TargetMeasurement_TargetVersusActualAB_1.Jpeg"));
+                str = str.Replace("###TargetVersusActualAB###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_TargetMeasurement_TargetVersusActualAB_1.Jpeg");
             else
                 str = str.Replace("###TargetVersusActualAB###", "");
 
@@ -2311,7 +2314,7 @@ namespace Fuji.Common
                 str = str.Replace("###ThresholdOuter###", "");
 
                 // === Report-2 : SummaryDelta === //
-                str = str.Replace("###SummaryDelta_2###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_TargetMeasurement_SummaryDelta_2.Jpeg"));
+                str = str.Replace("###SummaryDelta_2###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_TargetMeasurement_SummaryDelta_2.Jpeg");
 
             }
             else
@@ -2462,7 +2465,7 @@ namespace Fuji.Common
                 str = str.Replace("###ThresholdGray75###", Convert.ToString(DT.Rows[9]["TOL"]).Trim());
 
                 // === Report-2 : Chart Delta E 2000 === //
-                str = str.Replace("###ChartDeltaE2000###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_TargetMeasurement_ChartDeltaE2000_3.Jpeg"));
+                str = str.Replace("###ChartDeltaE2000###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_TargetMeasurement_ChartDeltaE2000_3.Jpeg");
 
             }
             else
@@ -2491,7 +2494,7 @@ namespace Fuji.Common
                 str = str.Replace("###ThresholdGray75###", "");
 
                 // === Report-2 : Chart Delta E 2000 === //
-                str = str.Replace("###ChartDeltaE2000###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_TargetMeasurement_ChartDeltaE2000_3.Jpeg"));
+                str = str.Replace("###ChartDeltaE2000###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_TargetMeasurement_ChartDeltaE2000_3.Jpeg");
             }
             #endregion
 
@@ -2669,12 +2672,12 @@ namespace Fuji.Common
             #endregion
 
             #region ==== Target Vs Actual AB Plot ====
-            str = str.Replace("###TargetVersusActualAB###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_TargetVersusActualAB_1.Jpeg"));               
+            str = str.Replace("###TargetVersusActualAB###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_TargetVersusActualAB_1.Jpeg");               
             #endregion
 
             // === Table = "ErrorRate" : Target Versus Actual AB === //
             #region ==== Result Summary : Error ====
-             str = str.Replace("###patchErrorImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_ResultSummary_PatchError.Jpeg"));
+             str = str.Replace("###patchErrorImage###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_ResultSummary_PatchError.Jpeg");
              str = str.Replace("###ActualError###", Convert.ToString(DS_Common.Tables["ErrorRate"].Rows[0]["ErrorRate"]));               
             #endregion
 
@@ -2708,62 +2711,62 @@ namespace Fuji.Common
             {
                 str = str.Replace("###DeltaESummaryDetail###", "");
             }
-            str = str.Replace("###ResultSummary_DeltaEValue###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_ResultSummary_DeltaEValue.Jpeg"));
+            str = str.Replace("###ResultSummary_DeltaEValue###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_ResultSummary_DeltaEValue.Jpeg");
             #endregion
 
             // === Gray Balance AB 25 === //
             #region ==== Gray Balance : Gray_25 ====
-            str = str.Replace("###GrayBalanceAB25###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page2_AB25.Jpeg"));
+            str = str.Replace("###GrayBalanceAB25###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page2_AB25.Jpeg");
             #endregion
 
             // === Gray Balance AB 50 === //
             #region ==== Gray Balance : Gray_50 ====
-            str = str.Replace("###GrayBalanceAB50###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page2_AB50.Jpeg"));
+            str = str.Replace("###GrayBalanceAB50###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page2_AB50.Jpeg");
             #endregion
 
             // === Gray Balance AB 75 === //
             #region ==== Gray Balance : Gray_75 ====
-            str = str.Replace("###GrayBalanceAB75###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page2_AB75.Jpeg"));
+            str = str.Replace("###GrayBalanceAB75###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page2_AB75.Jpeg");
             #endregion
 
             // === Gray Balance L* Chart === //
             #region === Gray Balance L* Chart ===
-            str = str.Replace("###GrayBalanceL###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page2_GrayBalance_L.Jpeg"));
+            str = str.Replace("###GrayBalanceL###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page2_GrayBalance_L.Jpeg");
             #endregion
 
 
             // === Gray_NPD === //
             #region ==== Gray Balance : Gray_NPD ====
-            str = str.Replace("###Page2_GrayNPD###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page2_GrayNPD.Jpeg"));
+            str = str.Replace("###Page2_GrayNPD###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page2_GrayNPD.Jpeg");
             #endregion
 
             // === K_NPD === //
             #region ==== Gray Balance : K_NPD ====
-            str = str.Replace("###Page2_KNPD###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page2_KNPD.Jpeg"));
+            str = str.Replace("###Page2_KNPD###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page2_KNPD.Jpeg");
             #endregion
 
 
             //----------------- Page 3 ---------------- //
 
-            //str = str.Replace("###Page3_TrendDeltaE###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page3_TrendDeltaE.Jpeg"));
-            str = str.Replace("###Page3_ZoneDeltaE###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page3_ZoneDeltaE.Jpeg"));
+            //str = str.Replace("###Page3_TrendDeltaE###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page3_TrendDeltaE.Jpeg");
+            str = str.Replace("###Page3_ZoneDeltaE###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page3_ZoneDeltaE.Jpeg");
 
             // === Process  Densitometric Summary === //
             #region ==== Process  Densitometric Summary  ====
-            str = str.Replace("###Page3_DensityDeviationP###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_DensityDeviationP.Jpeg"));
-            str = str.Replace("###Page3_DotgainDeviationP###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_DotgainDeviationP.Jpeg"));
-            str = str.Replace("###Page3_PrintDeviationP###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_PrintDeviationP.Jpeg"));
-            str = str.Replace("###Page3_TrapDeviationP###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_TrapDeviationP.Jpeg"));
+            str = str.Replace("###Page3_DensityDeviationP###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_DensityDeviationP.Jpeg");
+            str = str.Replace("###Page3_DotgainDeviationP###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_DotgainDeviationP.Jpeg");
+            str = str.Replace("###Page3_PrintDeviationP###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_PrintDeviationP.Jpeg");
+            str = str.Replace("###Page3_TrapDeviationP###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_TrapDeviationP.Jpeg");
      
             #endregion
 
             // === Job Trands Charts === //
             #region ===== Job Trands Charts ===== 
-            str = str.Replace("###Page4_TrendLine###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_TrendLine.Jpeg"));
-            str = str.Replace("###Page4_DeltaE###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DeltaE.Jpeg"));
-            str = str.Replace("###Page4_Density###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Density.Jpeg"));
-            str = str.Replace("###Page4_Dotgain###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Dotgain.Jpeg"));
-            str = str.Replace("###Page4_PrintContrast###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_PrintContrast.Jpeg"));
+            str = str.Replace("###Page4_TrendLine###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_TrendLine.Jpeg");
+            str = str.Replace("###Page4_DeltaE###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DeltaE.Jpeg");
+            str = str.Replace("###Page4_Density###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Density.Jpeg");
+            str = str.Replace("###Page4_Dotgain###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Dotgain.Jpeg");
+            str = str.Replace("###Page4_PrintContrast###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_PrintContrast.Jpeg");
             #endregion
 
             
@@ -2829,12 +2832,12 @@ namespace Fuji.Common
             #endregion
 
             #region ==== Target Vs Actual AB Plot ====
-            str = str.Replace("###TargetVersusActualAB###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_TargetVersusActualAB_1.Jpeg"));
+            str = str.Replace("###TargetVersusActualAB###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_TargetVersusActualAB_1.Jpeg");
             #endregion
 
             // === Table = "ErrorRate" : Target Versus Actual AB === //
             #region ==== Result Summary : Error ====
-            str = str.Replace("###patchErrorImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_ResultSummary_PatchError.Jpeg"));
+            str = str.Replace("###patchErrorImage###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_ResultSummary_PatchError.Jpeg");
             str = str.Replace("###ActualError###", Convert.ToString(DS_Common.Tables["ErrorRate"].Rows[0]["ErrorRate"]));
             #endregion
 
@@ -2867,25 +2870,25 @@ namespace Fuji.Common
             {
                 str = str.Replace("###DeltaESummaryDetail###", "");
             }
-            str = str.Replace("###ResultSummary_DeltaEValue###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_ResultSummary_DeltaEValue.Jpeg"));
+            str = str.Replace("###ResultSummary_DeltaEValue###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_ResultSummary_DeltaEValue.Jpeg");
             #endregion
 
             //----------------- Page 2 ---------------- //
-            //str = str.Replace("###Page3_TrendDeltaE###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page3_TrendDeltaE.Jpeg"));
-            str = str.Replace("###Page3_ZoneDeltaE###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page3_ZoneDeltaE.Jpeg"));
+            //str = str.Replace("###Page3_TrendDeltaE###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page3_TrendDeltaE.Jpeg");
+            str = str.Replace("###Page3_ZoneDeltaE###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Page3_ZoneDeltaE.Jpeg");
 
             // === Non Process  Densitometric Summary === //
             #region ==== Non Process  Densitometric Summary  ====
-            str = str.Replace("###Page3_DensityDeviationNP###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_DensityDeviationNP.Jpeg"));
+            str = str.Replace("###Page3_DensityDeviationNP###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DensitometricSummary_DensityDeviationNP.Jpeg");
              #endregion
 
             // === Job Trands Charts === //
             #region ===== Job Trands Charts ===== 
-            str = str.Replace("###Page4_TrendLine###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_TrendLine.Jpeg"));
-            str = str.Replace("###Page4_DeltaE###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DeltaE.Jpeg"));
-            str = str.Replace("###Page4_Density###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Density.Jpeg"));
-            str = str.Replace("###Page4_Dotgain###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Dotgain.Jpeg"));
-            str = str.Replace("###Page4_PrintContrast###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_PrintContrast.Jpeg"));
+            str = str.Replace("###Page4_TrendLine###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_TrendLine.Jpeg");
+            str = str.Replace("###Page4_DeltaE###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_DeltaE.Jpeg");
+            str = str.Replace("###Page4_Density###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Density.Jpeg");
+            str = str.Replace("###Page4_Dotgain###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_Dotgain.Jpeg");
+            str = str.Replace("###Page4_PrintContrast###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_JobRunCertification_PrintContrast.Jpeg");
             #endregion
 
             //str = str.Replace("###DensitometricSummary###", strDensitometricSummary);
@@ -3027,7 +3030,7 @@ namespace Fuji.Common
             // === Table 1 = Chart of Target Vs Actual AB Plot === //
             //Fuji.Common.CommonFunctions.FileTimeLog("Start Page 1 a* b* ", false);
             #region ==== Target Vs Actual AB Plot ====
-            SBStr.Replace("###TargetVersusActualAB###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page1_TargetVersusActualAB.Jpeg"));
+            SBStr.Replace("###TargetVersusActualAB###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page1_TargetVersusActualAB.Jpeg");
             #endregion
 
             // === Table 2 = Chart of Summary Delta Value Graph Image And Table Value Ploted === //
@@ -3228,7 +3231,7 @@ namespace Fuji.Common
             {
                 SBStr.Replace("###DeltaSummaryDetail###", "");
             }
-            SBStr.Replace("###ResultSummary_DeltaImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page1_ResultSummary_Delta.Jpeg"));
+            SBStr.Replace("###ResultSummary_DeltaImage###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page1_ResultSummary_Delta.Jpeg");
             #endregion
 
             // === Table 3 = Chart of Summary Delta E Value Graph Image And Table Value Ploted  === //
@@ -3261,7 +3264,7 @@ namespace Fuji.Common
             {
                 SBStr.Replace("###DeltaESummaryDetail###", "");
             }
-            SBStr.Replace("###ResultSummary_DeltaEImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page1_ResultSummary_DeltaEValue.Jpeg"));
+            SBStr.Replace("###ResultSummary_DeltaEImage###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page1_ResultSummary_DeltaEValue.Jpeg");
             #endregion
 
             // === Table 4 = Chart of Gray L* a* b* Graph Image And Table Value Ploted  === //
@@ -3283,9 +3286,9 @@ namespace Fuji.Common
             if (DT != null && DT.Rows.Count > 0 && DT.Rows[0][0].ToString() != "NO DATA")
             {
                 SBStr.Replace("###DBP###", "2px");
-                SBStr.Replace("###GrayLDeviation_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td class='summary-bg' ><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray L* Deviation Graph</span></td></tr><tr><td ><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayDeviation_L.Jpeg") + "' height='110px' width='658px' alt='Gray L* Deviation' id='img2' /></td></tr></table>");
-                SBStr.Replace("###GrayADeviation_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td class='summary-bg' ><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray a* Deviation Graph</span></td></tr><tr><td ><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayDeviation_A.Jpeg") + "' height='110px' width='658px' alt='Gray a* Deviation' id='img5' /></td></tr></table>");
-                SBStr.Replace("###GrayBDeviation_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td class='summary-bg' ><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray b* Deviation Graph</span></td></tr><tr><td ><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayDeviation_B.Jpeg") + "' height='110px' width='658px' alt='Gray b* Deviation' id='img6' /></td></tr></table>");
+                SBStr.Replace("###GrayLDeviation_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td class='summary-bg' ><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray L* Deviation Graph</span></td></tr><tr><td ><img src='" + currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayDeviation_L.Jpeg" + "' height='110px' width='658px' alt='Gray L* Deviation' id='img2' /></td></tr></table>");
+                SBStr.Replace("###GrayADeviation_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td class='summary-bg' ><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray a* Deviation Graph</span></td></tr><tr><td ><img src='" + currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayDeviation_A.Jpeg" + "' height='110px' width='658px' alt='Gray a* Deviation' id='img5' /></td></tr></table>");
+                SBStr.Replace("###GrayBDeviation_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td class='summary-bg' ><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray b* Deviation Graph</span></td></tr><tr><td ><img src='" + currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayDeviation_B.Jpeg" + "' height='110px' width='658px' alt='Gray b* Deviation' id='img6' /></td></tr></table>");
 
                 SBstrGrayLABValue.Append("<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td><table width='660' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' ><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray Patch Values</span></td></tr></table></td></tr><tr><td><table cellpadding='0' cellspacing='0' width='100%' border='0'>###VALUE###</table></td></tr></table>");
 
@@ -3327,7 +3330,7 @@ namespace Fuji.Common
                 StringBuilder SBstrNPDGrayPatch = new StringBuilder();
                 StringBuilder SBstrNPDGrayActual = new StringBuilder();
 
-                SBStr.Replace("###GrayNPD_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0' ><tr><td style='width:310px; height:270px'><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayNPD.Jpeg") + "' height='270px' width='310px' alt='Gray NPD' id='img7' /></td></tr><tr><td height='3'></td></tr><tr><td align='center'>###NPDGrayValue###</td></tr></table>");
+                SBStr.Replace("###GrayNPD_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0' ><tr><td style='width:310px; height:270px'><img src='" + currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayNPD.Jpeg" + "' height='270px' width='310px' alt='Gray NPD' id='img7' /></td></tr><tr><td height='3'></td></tr><tr><td align='center'>###NPDGrayValue###</td></tr></table>");
                 SBstrGrayNPDValue.Append("<table cellpadding='0' cellspacing='0' width='100%' border='0'>");
 
                 SBstrNPDGrayPatch.Append("<tr class='row-1' style='BACKGROUND-COLOR:#333333;COLOR:#FFF;'><td class='row-content1'>&nbsp;</td>");
@@ -3353,7 +3356,7 @@ namespace Fuji.Common
             // === Table 5 = Chart of Black NPD Graph Image === //
             //Fuji.Common.CommonFunctions.FileTimeLog("Start Page 2 Balck NPD", false);
             #region ==== Black NPD Graph ====
-            SBStr.Replace("###BlackNPD_GraphImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_BlackNPD.Jpeg"));
+            SBStr.Replace("###BlackNPD_GraphImage###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_BlackNPD.Jpeg");
             DT = DS_Common.Tables[5];
             if (DT != null && DT.Rows.Count > 0 && DT.Rows[0][0].ToString() != "NO DATA")
             {
@@ -3406,7 +3409,7 @@ namespace Fuji.Common
             {
 
 
-                SBStr.Replace("###DotgainActual_GraphImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_CHRT_DotgainActual.Jpeg"));
+                SBStr.Replace("###DotgainActual_GraphImage###", currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_CHRT_DotgainActual.Jpeg");
                 SBstrDotGainValue.Append("<table cellpadding='0' cellspacing='0' width='100%' border='0' style='border: SOLID 2PX #000'><tr><td align='center'><table width='660' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' ><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Patch DG Data</span></td></tr></table></td></tr><tr><td><table cellpadding='0' cellspacing='0' width='100%' border='0'>###VALUE###</table></td></tr></table>");
 
                 for (int i = 0; i < DT.Rows.Count; i++)
@@ -3517,7 +3520,7 @@ namespace Fuji.Common
             if (DT != null && DT.Rows.Count > 0 && DT.Rows[0][0].ToString() != "NO DATA")
             {
 
-                SBStr.Replace("###DotgainDeviation_GraphImage###", "<td><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' align='center' ><span class='summary-title1'>Dotgain Deviation</span></td></tr><tr><td><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_DotgainDeviation.Jpeg") + "' height='330px' width='220px' alt='Dotgain Deviation' id='img11' /></td></tr></table></td>");
+                SBStr.Replace("###DotgainDeviation_GraphImage###", "<td><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' align='center' ><span class='summary-title1'>Dotgain Deviation</span></td></tr><tr><td><img src='" + currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_DotgainDeviation.Jpeg" + "' height='330px' width='220px' alt='Dotgain Deviation' id='img11' /></td></tr></table></td>");
 
                 SBstrDotgainDeviationValue.Append("<table cellpadding='0' cellspacing='0' width='100%' border='0'>###VALUE###</table>");
                 for (int i = 0; i < DT.Rows.Count; i++)
@@ -3563,7 +3566,7 @@ namespace Fuji.Common
             SBstrDenActual.Append("<tr class='row-1'><td class='row-content1' style='padding-left:2px'>Act</td>");
             if (DT != null && DT.Rows.Count > 0 && DT.Rows[0][0].ToString() != "NO DATA")
             {
-                SBStr.Replace("###DensityDeviation_GraphImage###", "<td><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' align='center' ><span class='summary-title1'>Density Deviation</span></td></tr><tr><td><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_DensityDeviation.Jpeg") + "' height='330px' width='220px' alt='Density Deviation' id='img13' /></td></tr></table></td>");
+                SBStr.Replace("###DensityDeviation_GraphImage###", "<td><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' align='center' ><span class='summary-title1'>Density Deviation</span></td></tr><tr><td><img src='" + currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_DensityDeviation.Jpeg" + "' height='330px' width='220px' alt='Density Deviation' id='img13' /></td></tr></table></td>");
                 SBstrDensityDeviationValue.Append("<table cellpadding='0' cellspacing='0' width='100%' border='0'>###VALUE###</table>");
                 for (int i = 0; i < DT.Rows.Count; i++)
                 {
@@ -3610,7 +3613,7 @@ namespace Fuji.Common
             SBstrPrintActual.Append("<tr class='row-1'><td class='row-content1' style='padding-left:2px'>Act</td>");
             if (DT != null && DT.Rows.Count > 0 && DT.Rows[0][0].ToString() != "NO DATA")
             {
-                SBStr.Replace("###PrintContrastDeviation_GraphImage###", "<td><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' align='center' ><span class='summary-title1'>Print Contrast Deviation</span></td></tr><tr><td><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_PrintContrastDeviation.Jpeg") + "' height='330px' width='220px' alt='Print Contrast Deviation' id='img15' /></td></tr></table></td>");
+                SBStr.Replace("###PrintContrastDeviation_GraphImage###", "<td><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' align='center' ><span class='summary-title1'>Print Contrast Deviation</span></td></tr><tr><td><img src='" + currentBaseUrl + "UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_PrintContrastDeviation.Jpeg" + "' height='330px' width='220px' alt='Print Contrast Deviation' id='img15' /></td></tr></table></td>");
                 SBstrPrintConDeviationValue.Append("<table cellpadding='0' cellspacing='0' width='100%' border='0'>###VALUE###</table>");
                 for (int i = 0; i < DT.Rows.Count; i++)
                 {
