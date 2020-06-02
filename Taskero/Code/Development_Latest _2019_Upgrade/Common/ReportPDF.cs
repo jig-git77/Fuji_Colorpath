@@ -96,7 +96,8 @@ namespace Fuji.Common
 
                 //========== Object of PDF ==========//
                 Doc theDoc = new Doc();
-                
+                theDoc.HtmlOptions.Engine = EngineType.MSHtml;
+
                 //========== Reads the template ==========//
                 StreamReader fp;
 
