@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="MeasurementPlugInSvc.PluginService" CodeBehind="~/App_Code/PluginService.cs" %>
