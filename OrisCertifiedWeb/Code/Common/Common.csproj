@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="CommonFunctions.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="ErrorLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportPDF.cs" />
     <Compile Include="Sessions.cs" />

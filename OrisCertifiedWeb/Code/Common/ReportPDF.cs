@@ -472,8 +472,11 @@ namespace Fuji.Common
 
                     #region Case 6 : Patch Detail Report
                     case (int)Fuji.Common.Enums.enumReportType.PatchDetailReport:
-                        //========== Adds New Page IN PDF ==========//
 
+                        //======SET PAGE FORMATTING===================== //
+                        theDoc.HtmlOptions.Engine = EngineType.Gecko;
+
+                        //========== Adds New Page IN PDF ==========//
                         theDoc.Page = theDoc.AddPage();
 
                         //========== Adds a counter to Page ==========//
@@ -762,6 +765,8 @@ namespace Fuji.Common
 
                     #region Case 13 : Prepress Single Measurement ReportSingleMeasurement
                     case (int)Fuji.Common.Enums.enumReportType.ReportSingleMeasurement:
+                        //======SET PAGE FORMATTING===================== //
+                        theDoc.HtmlOptions.Engine = EngineType.Gecko;
 
                         //========== Adds New Page IN PDF ==========//
                         theDoc.Page = theDoc.AddPage();
