@@ -793,6 +793,9 @@ namespace Fuji.Common
                     #region Case 13 : Prepress Single Measurement ReportSingleMeasurement
                     case (int)Fuji.Common.Enums.enumReportType.ReportSingleMeasurement:
 
+                        //======SET PAGE FORMATTING===================== //
+                        theDoc.HtmlOptions.Engine = EngineType.Gecko;
+
                         //========== Adds New Page IN PDF ==========//
                         theDoc.Page = theDoc.AddPage();
 
@@ -2040,7 +2043,7 @@ namespace Fuji.Common
                         // === Finish previous Table tag and start with new table tag === //
                         HTMLstr += "</table>";
                         // === Add Page Header === //
-                        HTMLstr += "<br/><br/><br/><br/>" + strPageHeader;
+                        HTMLstr += "<br/><br/>" + strPageHeader;
                         // === Add Report Table Header === //
                         HTMLstr += strReportHeader;
 
@@ -2050,7 +2053,7 @@ namespace Fuji.Common
                         // === Finish previous Table tag and start with new table tag === //
                         HTMLstr += "</table>";
                         // === Add Page Header === //
-                        HTMLstr += strPageHeader;
+                        HTMLstr += "<br/><br/><br/><br/><br/>" + strPageHeader;
                         // === Add Report Table Header === //
                         HTMLstr += strReportHeader;
                     }
@@ -4092,7 +4095,7 @@ namespace Fuji.Common
 
                     if ((i == (DT.Rows.Count - 1)) && (RecNo <= 42))
                     {
-                        SBstrCompleteTable.Append("<br/><br/><br/><br/>");
+                        SBstrCompleteTable.Append("<br/>");
                         SBstrCompleteTable.Append(SBstrTablePageHeader.ToString());
                         SBstrCompleteTable.Replace("###Table###", SBstrTableHeader.ToString());
                         SBstrCompleteTable.Replace("###TableDetail###", SBstrTableDetail.ToString() + "</table><br>");
