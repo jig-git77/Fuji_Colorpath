@@ -96,7 +96,8 @@ namespace Fuji.Common
 
                 //========== Object of PDF ==========//
                 Doc theDoc = new Doc();
-               
+                //======SET PAGE FORMATTING===================== //
+                theDoc.HtmlOptions.Engine = EngineType.MSHtml;
 
                 //========== Reads the template ==========//
                 StreamReader fp;
@@ -115,10 +116,6 @@ namespace Fuji.Common
                     #region Case 1 : Branch Summery
 
                     case (int)Fuji.Common.Enums.enumReportType.BranchSummaryReport:
-
-                        //======SET PAGE FORMATTING===================== //
-                        theDoc.HtmlOptions.Engine = EngineType.MSHtml;
-
                         //========== Adds New Page IN PDF ==========//
                         theDoc.Page = theDoc.AddPage();
 
@@ -159,9 +156,6 @@ namespace Fuji.Common
 
                     #region Case 2 : Device Report
                     case (int)Fuji.Common.Enums.enumReportType.DeviceReport:
-
-                        //======SET PAGE FORMATTING===================== //
-                        theDoc.HtmlOptions.Engine = EngineType.MSHtml;
 
                         //========== Adds New Page IN PDF ==========//
                         theDoc.Page = theDoc.AddPage();
@@ -206,9 +200,6 @@ namespace Fuji.Common
                     case (int)Fuji.Common.Enums.enumReportType.ShiftVariabilityReport:
 
                         #region Page 1 settings
-
-                        //======SET PAGE FORMATTING===================== //
-                        theDoc.HtmlOptions.Engine = EngineType.MSHtml;
 
                         //========== Adds New Page IN PDF ==========//
                         theDoc.Page = theDoc.AddPage();
@@ -327,8 +318,7 @@ namespace Fuji.Common
 
                     #region Case 4 : Shift Variability Report
                     case (int)Fuji.Common.Enums.enumReportType.DeviceVariabilityReport:
-                        //======SET PAGE FORMATTING===================== //
-                        theDoc.HtmlOptions.Engine = EngineType.MSHtml;
+                
                         #region Page 1 Settings
                         //========== Adds New Page IN PDF ==========//
                         theDoc.Page = theDoc.AddPage();
@@ -446,8 +436,7 @@ namespace Fuji.Common
                     #region Case 5 : Color Detail Report
                     case (int)Fuji.Common.Enums.enumReportType.ColorDetailReport:
 
-                        //======SET PAGE FORMATTING===================== //
-                        theDoc.HtmlOptions.Engine = EngineType.MSHtml;
+                       
 
                         //========== Adds New Page IN PDF ==========//
                         theDoc.Page = theDoc.AddPage();
@@ -532,8 +521,6 @@ namespace Fuji.Common
                     #region Case 7 : Productivity Report
                     case (int)Fuji.Common.Enums.enumReportType.ProductivityReport:
 
-                        //======SET PAGE FORMATTING===================== //
-                        theDoc.HtmlOptions.Engine = EngineType.MSHtml;
 
                         //========== Adds New Page IN PDF ==========//
                         theDoc.Page = theDoc.AddPage();
@@ -576,8 +563,7 @@ namespace Fuji.Common
 
                     case (int)Fuji.Common.Enums.enumReportType.ReportPerformanceSummary:
 
-                        //======SET PAGE FORMATTING===================== //
-                        theDoc.HtmlOptions.Engine = EngineType.MSHtml;
+                   
 
                         //========== Adds New Page IN PDF ==========//
                         theDoc.Page = theDoc.AddPage();
@@ -621,8 +607,6 @@ namespace Fuji.Common
 
                     case (int)Fuji.Common.Enums.enumReportType.ReportTargetMeasurement:
 
-                        //======SET PAGE FORMATTING===================== //
-                        theDoc.HtmlOptions.Engine = EngineType.MSHtml;
 
                         //========== Adds New Page IN PDF ==========//
                         theDoc.Page = theDoc.AddPage();
@@ -666,8 +650,7 @@ namespace Fuji.Common
 
                     case (int)Fuji.Common.Enums.enumReportType.ReportJobRunCertificationProcess:
 
-                        //======SET PAGE FORMATTING===================== //
-                        theDoc.HtmlOptions.Engine = EngineType.MSHtml;
+                 
                         //========== Adds New Page IN PDF ==========//
                         theDoc.Page = theDoc.AddPage();
 
