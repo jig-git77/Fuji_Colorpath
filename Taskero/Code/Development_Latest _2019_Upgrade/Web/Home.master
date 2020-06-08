@@ -73,7 +73,7 @@
                                                                     <tr>
                                                                         <td><a href="Home.aspx" title="Home">Home</a></td>
                                                                          <td width="5"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
-                                                                        <td runat="server" id="TD_Processor"><a href="SyncDetail.aspx" title="Sync">Sync</a></td>
+                                                                        <td runat="server" id="TD_Processor"><a href="SyncDetail_New.aspx" title="Sync">Sync</a></td>
                                                                         <td width="5" runat="server"  id="TD_Processor_Spacer"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
                                                                         <td><a href="TaskeroReports.aspx" title="Report">Report</a></td>
                                                                         <td width="5" runat="server" id="TD_Admin_Spacer"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
