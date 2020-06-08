@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+    <title>Color Organizer IFrame Test NEW FF Browser</title>
+   <script type="text/javascript" language="javascript">
+        function OpenSkype() {
+            var skypename = 'jaysparikh';
+            //window.location = 'skype:' + skypename + '?chat';
+             window.location = 'skype:?chat';
+        }
+        function version() {
+           // var os = navigator.appVersion;
+            var OSName = "Unknown OS";
+            if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
+            if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
+            if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
+            if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux"; 
+            // Display the OS details 
+            //document.getElementById("OS").innerHTML = os;
+            alert(OSName);
+        }  
+        //
+        function OpenMTool() {            
+            window.location = 'Spark://?';
+        }
+    </script>
+</head>
+<body>
+    <a href="file:///D:\Project-Document\ColorPath_Measure_113C\Windows\Measure.exe" type="application/octet-stream">Click Here Exe</a>
+    <br />
+    <a href="file:///C:\Users\milin.katwala\Desktop\PC4102-.doc" type="application/octet-stream">Click Here DOC</a>
+    <br />
+    <a class="link-button help-icon" href="javascript:void()" onclick="location.href='Measure://';">Click Here Mac</a>
+    <br />
+    <a href="javascript:void()" onclick="location.href='file:///D:\Project-Document\ColorPath_Measure_113C\Windows\Measure.exe';" type="application/octet-stream">Location Click Here Exe</a>
+    <br />
+    <a href="javascript:void()" onclick="location.href='file:///C:\Users\milin.katwala\Desktop\PC4102-.doc'">Location Click Here DOC</a>
+    <br />
+    <a href="C:\\Users\\milin.katwala\\Pictures\\Screenshots">
+        Click here to open the folder
+    </a>
+    <br />
+    <a href="javascript:void()" onclick="file:///C:\Users\milin.katwala\Pictures\Screenshots">
+        Location Click here to Open the folder
+    </a>
+    <br />
+    <a href="javascript:void()" onclick="javascript: OpenSkype();">
+        Open Skype Account
+    </a>
+    <br />
+    <a href="javascript:void()" onclick="javascript: version();">
+        OS Version
+    </a>
+    <br />
+    <a href="javascript:void()" onclick="javascript: OpenMTool();">
+        Maps
+    </a>
+    <br />
+    <!--<a href="c:\windows\Notepad.exe"
+       type="application/octet-stream">Launch Notepad</a>-->
+</body>
+</html>

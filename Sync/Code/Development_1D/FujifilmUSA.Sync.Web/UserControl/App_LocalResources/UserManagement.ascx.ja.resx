@@ -165,4 +165,7 @@
 	<data name="locUserManagmentResource1.Text" xml:space="preserve">
     <value>ユーザ管理</value>
   </data>
+  <data name="locUserReportResource1.Text" xml:space="preserve">
+    <value>User Report</value>
+  </data>
 </root>
