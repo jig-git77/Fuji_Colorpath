@@ -28,7 +28,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 DateTime date = DateTime.Now;
                 DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                 TimeSpan diff = date.ToUniversalTime() - origin;
-                minutesSinceUnixEpoch = Math.Floor(diff.TotalMinutes);                               
+                minutesSinceUnixEpoch = Math.Floor(diff.TotalMinutes);
+                minutesSinceUnixEpoch = 26516460; // Hard coded time for right now, published on apistage
             }
             catch (Exception ex)
             {
