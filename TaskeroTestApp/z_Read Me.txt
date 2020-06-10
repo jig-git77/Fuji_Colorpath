@@ -1,0 +1,16 @@
+You can import sample file "z_Sample_mytest.xml" from this folder and upload to Taskero or OrisCertifiedWeb directly 
+to check if colortuner service is working fine or not.
+
+In sample file you need to change below fields before uploading:
+
+<CPSerialNumber>U14992</CPSerialNumber>
+first needs to go to website in admin --> Dongle management to check this U14992 is available , if not then here chnage this tag to some other available dongal from website.
+
+<CreatedDT> pass today's date so it will be easy to find under home page's job list
+
+<JobName> only if you like to give unique name
+
+
+
+In "App.config" file from project, you can change and point service to oriscertiedweb before importing data to that site with this test app.
+  <endpoint address="http://www.oriscertifiedweb.com/Services/colorpathtuner/ColorpathTuner.svc"
