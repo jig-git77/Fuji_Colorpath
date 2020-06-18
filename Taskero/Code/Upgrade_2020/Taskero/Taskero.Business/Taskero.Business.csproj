@@ -36,16 +36,20 @@
       <HintPath>..\..\..\Development_Latest _2019_Upgrade\Taskero.Business\bin\Debug\ABCpdf.dll</HintPath>
     </Reference>
     <Reference Include="Formulas">
-      <HintPath>..\..\..\Development_Latest _2019_Upgrade\Taskero.Business\bin\Debug\Formulas.dll</HintPath>
+      <HintPath>..\TaskeroWeb\DLL\Formulas.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RadCalendar.Net2">
-      <HintPath>..\..\..\Development_Latest _2019_Upgrade\Taskero.Business\bin\Debug\RadCalendar.Net2.dll</HintPath>
+      <HintPath>..\TaskeroWeb\DLL\RadCalendar.Net2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RadGrid.Net2">
-      <HintPath>..\..\..\Development_Latest _2019_Upgrade\Taskero.Business\bin\Debug\RadGrid.Net2.dll</HintPath>
+      <HintPath>..\TaskeroWeb\DLL\RadGrid.Net2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RadInput.Net2">
-      <HintPath>..\..\..\Development_Latest _2019_Upgrade\Taskero.Business\bin\Debug\RadInput.Net2.dll</HintPath>
+      <HintPath>..\TaskeroWeb\DLL\RadInput.Net2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
