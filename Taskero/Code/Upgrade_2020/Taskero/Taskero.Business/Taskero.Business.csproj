@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{892BB7B9-999B-470B-8D63-63C3FE8B2916}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Taskero.Business</RootNamespace>
+    <AssemblyName>Taskero.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ABCpdf, Version=11.3.0.3, Culture=neutral, PublicKeyToken=a7a0b3f5184f2169, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Development_Latest _2019_Upgrade\Taskero.Business\bin\Debug\ABCpdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Formulas">
+      <HintPath>..\..\..\Development_Latest _2019_Upgrade\Taskero.Business\bin\Debug\Formulas.dll</HintPath>
+    </Reference>
+    <Reference Include="RadCalendar.Net2">
+      <HintPath>..\..\..\Development_Latest _2019_Upgrade\Taskero.Business\bin\Debug\RadCalendar.Net2.dll</HintPath>
+    </Reference>
+    <Reference Include="RadGrid.Net2">
+      <HintPath>..\..\..\Development_Latest _2019_Upgrade\Taskero.Business\bin\Debug\RadGrid.Net2.dll</HintPath>
+    </Reference>
+    <Reference Include="RadInput.Net2">
+      <HintPath>..\..\..\Development_Latest _2019_Upgrade\Taskero.Business\bin\Debug\RadInput.Net2.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Branch.cs" />
+    <Compile Include="BranchData.cs" />
+    <Compile Include="Categories.cs" />
+    <Compile Include="CategoriesData.cs" />
+    <Compile Include="CategoryUser.cs" />
+    <Compile Include="CategoryUserData.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="CompanyBranding.cs" />
+    <Compile Include="CompanyBrandingData.cs" />
+    <Compile Include="CompanyData.cs" />
+    <Compile Include="CPDevice.cs" />
+    <Compile Include="CPDeviceData.cs" />
+    <Compile Include="CPDevicePrintTarget.cs" />
+    <Compile Include="CPDevicePrintTargetData.cs" />
+    <Compile Include="CPDeviceStatus.cs" />
+    <Compile Include="CPDeviceStatusData.cs" />
+    <Compile Include="CPDeviceType.cs" />
+    <Compile Include="CPDeviceTypeData.cs" />
+    <Compile Include="CPDongle.cs" />
+    <Compile Include="CPDongleData.cs" />
+    <Compile Include="CPDongleType.cs" />
+    <Compile Include="CPDongleTypeData.cs" />
+    <Compile Include="CPMeasurement.cs" />
+    <Compile Include="CPMeasurementData.cs" />
+    <Compile Include="CPMeasurementType.cs" />
+    <Compile Include="CPMeasurementTypeData.cs" />
+    <Compile Include="CPMeasurement_DotGain.cs" />
+    <Compile Include="CPMeasurement_DotGainData.cs" />
+    <Compile Include="CPMeasurement_Printer.cs" />
+    <Compile Include="CPMeasurement_PrinterData.cs" />
+    <Compile Include="CPMeasurement_PT_Prop.cs" />
+    <Compile Include="CPMeasurement_PT_PropData.cs" />
+    <Compile Include="CPPatchDataLab.cs" />
+    <Compile Include="CPPatchDataLabData.cs" />
+    <Compile Include="CPPatchDataPlate.cs" />
+    <Compile Include="CPPatchDataPlateData.cs" />
+    <Compile Include="CPSyncDevice.cs" />
+    <Compile Include="CPSyncDeviceData.cs" />
+    <Compile Include="CPSyncMeasurement.cs" />
+    <Compile Include="CPSyncMeasurementData.cs" />
+    <Compile Include="CPSyncMeasurementDevice.cs" />
+    <Compile Include="CPSyncMeasurementDeviceData.cs" />
+    <Compile Include="CPSyncPress.cs" />
+    <Compile Include="CPSyncPressData.cs" />
+    <Compile Include="CPSyncPressRun.cs" />
+    <Compile Include="CPSyncPressRunCurve.cs" />
+    <Compile Include="CPSyncPressRunCurveData.cs" />
+    <Compile Include="CPSyncPressRunData.cs" />
+    <Compile Include="CPSyncPrintCondition.cs" />
+    <Compile Include="CPSyncPrintConditionData.cs" />
+    <Compile Include="CPSyncPrintStandard.cs" />
+    <Compile Include="CPSyncPrintStandardData.cs" />
+    <Compile Include="CPSyncPrintStandardType.cs" />
+    <Compile Include="CPSyncPrintStandardTypeData.cs" />
+    <Compile Include="CPSyncPrintTarget.cs" />
+    <Compile Include="CPSyncPrintTargetData.cs" />
+    <Compile Include="CPSyncProjectSetting.cs" />
+    <Compile Include="CPSyncProjectSettingData.cs" />
+    <Compile Include="CPVMobiJobDevice.cs" />
+    <Compile Include="CPVMobiJobDeviceData.cs" />
+    <Compile Include="ErrorLog.cs" />
+    <Compile Include="ErrorLogData.cs" />
+    <Compile Include="FilterColumnByDate.cs" />
+    <Compile Include="FilteringColumn.cs" />
+    <Compile Include="Permission.cs" />
+    <Compile Include="PermissionData.cs" />
+    <Compile Include="Press.cs" />
+    <Compile Include="PressData.cs" />
+    <Compile Include="PressJobs.cs" />
+    <Compile Include="PressJobsData.cs" />
+    <Compile Include="PressPatchCalculations.cs" />
+    <Compile Include="PressPatchCalculationsData.cs" />
+    <Compile Include="PressType.cs" />
+    <Compile Include="PressTypeData.cs" />
+    <Compile Include="Processor.cs" />
+    <Compile Include="ProcessorData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecentlyVideos.cs" />
+    <Compile Include="RecentlyVideosData.cs" />
+    <Compile Include="Report.cs" />
+    <Compile Include="ReportCPSPrintStandards.cs" />
+    <Compile Include="ReportCPSPrintStandardsData.cs" />
+    <Compile Include="ReportData.cs" />
+    <Compile Include="ReportPrepressSingleMeasurement.cs" />
+    <Compile Include="ReportPrepressSingleMeasurementData.cs" />
+    <Compile Include="ReportPressJobRunCertification.cs" />
+    <Compile Include="ReportPressJobRunCertificationData.cs" />
+    <Compile Include="ReportPressMakeReady.cs" />
+    <Compile Include="ReportPressMakeReadyData.cs" />
+    <Compile Include="ReportTargetMeasurementData.cs" />
+    <Compile Include="ReportType.cs" />
+    <Compile Include="ReportTypeData.cs" />
+    <Compile Include="RolePermission.cs" />
+    <Compile Include="RolePermissionData.cs" />
+    <Compile Include="Roles.cs" />
+    <Compile Include="RolesData.cs" />
+    <Compile Include="SiteLicense.cs" />
+    <Compile Include="SiteLicenseData.cs" />
+    <Compile Include="SQLErrorLog.cs" />
+    <Compile Include="SQLErrorLogData.cs" />
+    <Compile Include="TaskeroUser.cs" />
+    <Compile Include="TaskeroUserData.cs" />
+    <Compile Include="TempRHData.cs" />
+    <Compile Include="TempRHDataData.cs" />
+    <Compile Include="TempRHDevice.cs" />
+    <Compile Include="TempRHDeviceData.cs" />
+    <Compile Include="TempRHDeviceType.cs" />
+    <Compile Include="TempRHDeviceTypeData.cs" />
+    <Compile Include="TempRHDevice_CPDevice.cs" />
+    <Compile Include="TempRHDevice_CPDeviceData.cs" />
+    <Compile Include="TrackUserAccessedPages.cs" />
+    <Compile Include="TrackUserAccessedPagesData.cs" />
+    <Compile Include="UserBranch.cs" />
+    <Compile Include="UserBranchData.cs" />
+    <Compile Include="UserCompany.cs" />
+    <Compile Include="UserCompanyData.cs" />
+    <Compile Include="UserDongle.cs" />
+    <Compile Include="UserDongleData.cs" />
+    <Compile Include="UserLog.cs" />
+    <Compile Include="UserLogData.cs" />
+    <Compile Include="Videos.cs" />
+    <Compile Include="VideosData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Taskero.Common\Taskero.Common.csproj">
+      <Project>{2f924268-f1dd-4c16-8628-fb500a513691}</Project>
+      <Name>Taskero.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taskero.DataAccess\Taskero.DataAccess.csproj">
+      <Project>{4e8c328e-adaa-4b7f-b013-bc9200d65013}</Project>
+      <Name>Taskero.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
