@@ -584,8 +584,8 @@
     <Content Include="Images\YellowStar.gif" />
     <Content Include="Images\YellowStar.jpg" />
     <Content Include="Images\Yes.png" />
-    <Content Include="Index.html" />
-    <Content Include="IsisChart.html" />
+    <Content Include="Index.htm" />
+    <Content Include="IsisChart.htm" />
     <Content Include="JobRunAdmin.aspx" />
     <Content Include="JobRunAdminNonProcess.aspx" />
     <Content Include="JobsReport.aspx" />
