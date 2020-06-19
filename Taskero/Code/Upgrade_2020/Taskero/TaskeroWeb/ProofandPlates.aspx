@@ -5,7 +5,7 @@
 <%@ Register Assembly="DundasWebChart" Namespace="Dundas.Charting.WebControl" TagPrefix="DCWC" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
-<%@ Register Src="Common/StausMenu.ascx" TagName="StausMenu" TagPrefix="uc2" %>
+<%@ Register Src="~/Common/StausMenu.ascx" TagName="StausMenu" TagPrefix="uc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
         <tr>

@@ -19,7 +19,7 @@ namespace TaskeroWeb {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl ReportMenu1;
+        protected global::TaskeroWeb.Common.ReportMenu ReportMenu1;
         
         /// <summary>
         /// ReportPerformanceSummaryCtrl1 control.

@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" EnableEventValidation="false" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="Videos.aspx.cs" Inherits="TaskeroWeb.Videos" %>
 
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
-<%@ Register Src="Common/Menu.ascx" TagName="AdminMenu" TagPrefix="uc1" %>
+<%@ Register Src="~/Common/Menu.ascx" TagName="AdminMenu" TagPrefix="uc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajax" %>
 <%@ Register Assembly="RadGrid.Net2" Namespace="Telerik.WebControls" TagPrefix="rad" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">

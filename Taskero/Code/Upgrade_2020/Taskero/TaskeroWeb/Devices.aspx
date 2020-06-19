@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Devices.aspx.cs" Inherits="TaskeroWeb.Devices" %>
 
-<%@ Register Src="Common/HomeMenu.ascx" TagName="HomeMenu" TagPrefix="uc1" %>
+<%@ Register Src="~/Common/HomeMenu.ascx" TagName="HomeMenu" TagPrefix="uc1" %>
 <%@ Register Assembly="RadGrid.Net2" Namespace="Telerik.WebControls" TagPrefix="rad" %>
 <%@ Register TagPrefix="custom" Namespace="Taskero.Business" Assembly="Taskero.Business" %>
 

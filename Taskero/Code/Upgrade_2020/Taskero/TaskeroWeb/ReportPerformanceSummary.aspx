@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true"  EnableEventValidation="false" CodeBehind="ReportPerformanceSummary.aspx.cs" Inherits="TaskeroWeb.ReportPerformanceSummary" %>
 
-<%@ Register Src="~/sCommon/ReportMenu.ascx" TagName="ReportMenu" TagPrefix="uc1" %>
+<%@ Register Src="~/Common/ReportMenu.ascx" TagName="ReportMenu" TagPrefix="uc1" %>
 <%@ Register Src="ReportPerformanceSummaryCtrl.ascx" TagName="ReportPerformanceSummaryCtrl" TagPrefix="uc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <table cellspacing="0" cellpadding="0" align="center" border="0" width="100%">
