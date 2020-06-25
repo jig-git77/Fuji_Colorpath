@@ -1,0 +1,133 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Home.master.cs" Inherits="OrisWeb.Home" %>
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
+
+<%@ Register src="~/Common/ProgressBar.ascx" tagname="ProgressBar" tagprefix="uc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>CGS Publishing Technologies International</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name="keywords" content="CGS Publishing Technologies International." />
+    <meta name="description" content="CGS Publishing Technologies International." />
+    <link href="CSS/Default.css" rel="stylesheet" type="text/css" />
+    <link href="RadControls/ToolTip/Skins/Black/ToolTip.FujiFilm.css" type="text/css" rel="Stylesheet" />  
+</head>
+<body>
+    <form id="form1" runat="server">    
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>            
+    <asp:Literal ID="LtrlCSS" runat="server"></asp:Literal>
+    <uc1:ProgressBar ID="ProgressBar1" runat="server" />
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="maintable">
+        <tr>
+            <td valign="top">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td valign="top">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="header-top-border"></td>
+                                </tr>
+                                <tr>
+                                    <td height="106" align="center" valign="top" class="header">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td align="center">
+                                                    <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                                                        <tr>
+                                                            <td valign="bottom">
+                                                                &nbsp;
+                                                            </td>
+                                                            <td width="130" height="50" valign="bottom">
+                                                                <a href="index.htm" title="CGS">
+                                                                    <img id="IMG_LogoImage" runat="server" src="images/cgs_logo_sm.gif"  alt="CGS" border="0"  /></a>
+                                                            </td>
+                                                            <td width="810" align="right" valign="top">
+                                                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                    <tr>
+                                                                        <td class="top-status">Your IP-Address: <%=Request.UserHostAddress %> &nbsp; | &nbsp; Logged 
+                                                                            in as: <%=Oris.Common.Sessions.Username %>-<%=Oris.Common.Sessions.FirstName %> <%=Oris.Common.Sessions.LastName %> 
+                                                                            &nbsp; | &nbsp; <a href="Logout.aspx" title="Logout">Logout</a> &nbsp; | &nbsp; <%=Oris.Common.Sessions.LanguageName %></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td valign="top">
+                                                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                    <tr>
+                                                                        <td class="top-status2">
+                                                                            &nbsp;
+                                                                        </td>
+                                                                    </tr>
+                                                                </table> 
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" valign="top" class="top-menu-bottom-border">
+                                                    <table width="940" border="0" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td valign="bottom">
+                                                                <table border="0" cellspacing="0" cellpadding="0" class="top-menu">
+                                                                    <tr>
+                                                                        <td><a href="Home.aspx" title="Home">Home</a></td>
+                                                                        <td width="5"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
+                                                                        <td><a href="Reports.aspx" title="Report">Report</a></td>
+                                                                        <td width="5" runat="server" id="TD_Admin_Spacer"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
+                                                                        <td runat="server" id="TD_Admin"><a href="AdminMain.aspx" title="Admin">Admin</a></td>
+                                                                        <td width="5"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
+                                                                        <td><a href="MyAccount.aspx" title="My Account">My Account</a></td>
+                                                                        <td width="5"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
+                                                                        <td><a href="Logout.aspx" title="Logout">Logout</a></td>
+                                                                        <td>&nbsp;</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td width="150" height="55" align="right" valign="top">
+                                                                &nbsp;</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="header-bottom-border"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content-top-borderr">
+                            <img src="images/spacer.gif" alt="FujiFilm" border="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top" align="center" class="content-bg">
+                            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>                            
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td height="60" valign="bottom">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="footer">
+                    <tr>
+                        <td>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                     <td class="copyright">© <%=System.DateTime.Now.Year %> CGS Publishing Technologies International&nbsp;&nbsp; </td>   
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>    
+    </form>
+</body>
+</html>
+
