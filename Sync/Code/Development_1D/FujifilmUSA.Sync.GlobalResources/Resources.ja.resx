@@ -793,7 +793,7 @@
     <value>なし</value>
   </data>
   <data name="ValidationStatus_NotCertified" xml:space="preserve">
-    <value>承認なし</value>
+    <value>Validation(Print Condition is Open)</value>
   </data>
   <data name="ERolePermission_ManageActivityValidationRules" xml:space="preserve">
     <value>Manage Activity Validation Rules_ja</value>
@@ -1042,7 +1042,7 @@
     <value> L*</value>
   </data>
   <data name="GridDateTimeColumnResource1" xml:space="preserve">
-    <value>最新承認日時</value>
+    <value>Last Activity</value>
   </data>
   <data name="GridTemplateColumnResource0" xml:space="preserve">
     <value>タイプ</value>
@@ -1054,10 +1054,10 @@
     <value>名</value>
   </data>
   <data name="GridTemplateColumnResource3" xml:space="preserve">
-    <value>印刷条件名</value>
+    <value>Print Condition</value>
   </data>
   <data name="GridTemplateColumnResource4" xml:space="preserve">
-    <value>ターゲット</value>
+    <value>Target Colorspace</value>
   </data>
   <data name="GridTemplateColumnResource5" xml:space="preserve">
     <value>メディア</value>
@@ -1069,7 +1069,7 @@
     <value>Library</value>
   </data>
   <data name="ToolTipClickToShort" xml:space="preserve">
-    <value>Click here to sort</value>
+    <value>Click here to short</value>
   </data>
   <data name="Error_DeleteOptimizeRunNCP" xml:space="preserve">
     <value>Error occured while deleting optimize run's NCP.Please contact your administrator.</value>

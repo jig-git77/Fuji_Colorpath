@@ -3040,7 +3040,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Last Active.
+        ///   Looks up a localized string similar to Last Activity.
         /// </summary>
         internal static string GridDateTimeColumnResource1 {
             get {
@@ -3076,7 +3076,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to Print Condition.
         /// </summary>
         internal static string GridTemplateColumnResource3 {
             get {
@@ -3085,7 +3085,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Standard.
+        ///   Looks up a localized string similar to Target Colorspace.
         /// </summary>
         internal static string GridTemplateColumnResource4 {
             get {
@@ -3688,7 +3688,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click here to sort.
+        ///   Looks up a localized string similar to Click here to short.
         /// </summary>
         internal static string ToolTipClickToShort {
             get {
@@ -3805,7 +3805,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Validation can not be opened as the project is not in a Certified state.
+        ///   Looks up a localized string similar to Validation(Print Condition is Open).
         /// </summary>
         internal static string ValidationStatus_NotCertified {
             get {

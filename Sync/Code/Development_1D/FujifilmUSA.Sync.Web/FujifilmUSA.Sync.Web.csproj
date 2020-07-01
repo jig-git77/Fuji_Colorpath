@@ -961,6 +961,9 @@
     <Content Include="JS\jquery.tools.min.js" />
     <Content Include="JS\Printing.js" />
     <Content Include="JS\ProjectList.js" />
+    <Content Include="JS\ProjectListNew.js" />
+    <Content Include="JS\SpotProjectListNew.js" />
+    <Content Include="KendoGridSearchPanel.html" />
     <Content Include="MeasurementLog.aspx" />
     <Content Include="MetricTargetManagement.aspx" />
     <Content Include="MetricTargetPresetManagement.aspx" />
@@ -975,9 +978,12 @@
     <Content Include="PopupReportGrading.aspx" />
     <Content Include="PopupSpotClosePrintCondition.aspx" />
     <Content Include="PopupSpotColorPatchDetails.aspx" />
+    <Content Include="PopupSpotProjectList.aspx" />
+    <Content Include="PopupSpotProjectOpenPrintCondition.aspx" />
     <Content Include="PrintPreview.aspx" />
     <Content Include="PrintStandardTypeManagement.aspx" />
     <Content Include="ProfileManagement.aspx" />
+    <Content Include="ProjectListTemplate.html" />
     <Content Include="ProjectMaxLimit.aspx" />
     <Content Include="RedirectFromProjectList.aspx" />
     <Content Include="ReferenceChartManagement.aspx" />
@@ -2512,9 +2518,12 @@
     <Content Include="UserControl\PopupControl\SpotClosePrintCondition.ascx" />
     <Content Include="UserControl\PopupControl\SpotColorPatchDetails.ascx" />
     <Content Include="UserControl\PopupControl\SpotLibraryExport.ascx" />
+    <Content Include="UserControl\PopupControl\SpotProjectList.ascx" />
+    <Content Include="UserControl\PopupControl\SpotProjectOpenPrintCondition.ascx" />
     <Content Include="UserControl\PrintPreview.ascx" />
     <Content Include="UserControl\PrintStandardTypeManagement.ascx" />
     <Content Include="UserControl\ProfileManagement.ascx" />
+    <Content Include="UserControl\ProjectListNew.ascx" />
     <Content Include="UserControl\ProjectMaxLimit.ascx" />
     <Content Include="UserControl\RedirectFromProjectList.ascx" />
     <Content Include="UserControl\ReferenceChartManagement.ascx" />
@@ -3231,6 +3240,20 @@
     <Compile Include="PopupSpotColorPatchDetails.aspx.designer.cs">
       <DependentUpon>PopupSpotColorPatchDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PopupSpotProjectList.aspx.cs">
+      <DependentUpon>PopupSpotProjectList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupSpotProjectList.aspx.designer.cs">
+      <DependentUpon>PopupSpotProjectList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupSpotProjectOpenPrintCondition.aspx.cs">
+      <DependentUpon>PopupSpotProjectOpenPrintCondition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupSpotProjectOpenPrintCondition.aspx.designer.cs">
+      <DependentUpon>PopupSpotProjectOpenPrintCondition.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PrintPreview.aspx.cs">
       <DependentUpon>PrintPreview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3727,6 +3750,20 @@
     <Compile Include="UserControl\PopupControl\SpotLibraryExport.ascx.designer.cs">
       <DependentUpon>SpotLibraryExport.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\PopupControl\SpotProjectList.ascx.cs">
+      <DependentUpon>SpotProjectList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\SpotProjectList.ascx.designer.cs">
+      <DependentUpon>SpotProjectList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\SpotProjectOpenPrintCondition.ascx.cs">
+      <DependentUpon>SpotProjectOpenPrintCondition.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\SpotProjectOpenPrintCondition.ascx.designer.cs">
+      <DependentUpon>SpotProjectOpenPrintCondition.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\PrintPreview.ascx.cs">
       <DependentUpon>PrintPreview.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3747,6 +3784,13 @@
     </Compile>
     <Compile Include="UserControl\ProfileManagement.ascx.designer.cs">
       <DependentUpon>ProfileManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ProjectListNew.ascx.cs">
+      <DependentUpon>ProjectListNew.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ProjectListNew.ascx.designer.cs">
+      <DependentUpon>ProjectListNew.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ProjectMaxLimit.ascx.cs">
       <DependentUpon>ProjectMaxLimit.ascx</DependentUpon>
@@ -6617,6 +6661,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\ReferenceChartManagement.ascx.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotProjectOpenPrintCondition.ascx.de.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotProjectOpenPrintCondition.ascx.fr.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotProjectOpenPrintCondition.ascx.ja.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\SpotProjectOpenPrintCondition.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ProjectListNew.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\ProjectListNew.ascx.fr.resx" />
+    <Content Include="UserControl\App_LocalResources\ProjectListNew.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\ProjectListNew.ascx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

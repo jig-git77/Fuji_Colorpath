@@ -811,7 +811,7 @@
     <value>Aucun</value>
   </data>
   <data name="ValidationStatus_NotCertified" xml:space="preserve">
-    <value>Non Certifié</value>
+    <value>Validation(Print Condition is Open)</value>
   </data>
   <data name="ERolePermission_ManageActivityValidationRules" xml:space="preserve">
     <value>Gestions des règles de validation d'activité</value>
@@ -1051,10 +1051,10 @@
     <value>Status</value>
   </data>
   <data name="GridTemplateColumnResource3" xml:space="preserve">
-    <value>Nom</value>
+    <value>Print Condition</value>
   </data>
   <data name="GridTemplateColumnResource4" xml:space="preserve">
-    <value>Standard</value>
+    <value>Target Colorspace</value>
   </data>
   <data name="GridTemplateColumnResource5" xml:space="preserve">
     <value>Supprot</value>
@@ -1066,7 +1066,7 @@
     <value>Library</value>
   </data>
   <data name="ToolTipClickToShort" xml:space="preserve">
-    <value>Click here to sort</value>
+    <value>Click here to short</value>
   </data>
   <data name="Error_DeleteOptimizeRunNCP" xml:space="preserve">
     <value>Error occured while deleting optimize run's NCP.Please contact your administrator.</value>
@@ -1346,5 +1346,8 @@
   </data>
   <data name="ESourceProfileCategory_SYNCMeasureApp" xml:space="preserve">
     <value>SYNC Measure App</value>
+  </data>
+  <data name="GridDateTimeColumnResource1" xml:space="preserve">
+    <value>Last Activity</value>
   </data>
 </root>

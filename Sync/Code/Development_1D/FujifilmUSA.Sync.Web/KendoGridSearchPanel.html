@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Kendo UI Snippet</title>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.default-v2.min.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>
+    
+</head>
+<body>
+
+    <div id="grid"></div>
+    <script>
+$("#grid").kendoGrid({
+  columns: [
+    { field: "name" },
+    { field: "age" }
+  ],
+  dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+  toolbar:["search"],
+  search: {
+      fields: ["name", "age"] // Or, specify multiple fields by adding them to the array, e.g ["name", "age"]
+  }
+});
+    </script>
+</body>
+</html>

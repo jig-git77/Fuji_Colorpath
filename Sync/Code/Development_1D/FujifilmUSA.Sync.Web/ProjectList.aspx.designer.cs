@@ -19,6 +19,6 @@ namespace FujifilmUSA.Sync.Web {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.ProjectList ucProjectList;
+        protected global::FujifilmUSA.Sync.Web.UserControl.ProjectListNew ucProjectList;
     }
 }

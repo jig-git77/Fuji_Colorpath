@@ -80,7 +80,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                         SessionManager.Instance.CurrentProject = Project;
                         SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.SpotTargetProject.OptimizeRuns.Last();
                         SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
-                        Utilities.PopupWindowsRedirect(this, "Spot_Measurement.aspx");
+                        Utilities.PopupWindowsRedirectFromParent(this, "Spot_Measurement.aspx");
                         //ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Spot_Measurement.aspx';", true);
                     }
                 }
@@ -98,7 +98,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
                     SessionManager.Instance.CurrentOptimizeRun = Project.SpotTargetProject.OptimizeRuns.Last();
                     SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.SpotLibrary;
                     SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                    Utilities.PopupWindowsRedirect(this, "Analyze_SpotColor.aspx");
+                    Utilities.PopupWindowsRedirectFromParent(this, "Analyze_SpotColor.aspx");
                 }
             }
         }

@@ -378,6 +378,11 @@ namespace FujifilmUSA.Sync.Common
         {
             ucControl.Page.ClientScript.RegisterClientScriptBlock(ucControl.GetType(), "UniqueKey", string.Format("window.parent.location='{0}';", url), true);
         }
+        public static void PopupWindowsRedirectFromParent(UserControl ucControl, string url)
+        {
+            //window.parent.parent.location
+            ucControl.Parent.Page.ClientScript.RegisterClientScriptBlock(ucControl.GetType(), "UniqueKey", string.Format("window.top.location='{0}';", url), true);
+        }
 
 
         public static string Fields_Marked_With_Are_Required
