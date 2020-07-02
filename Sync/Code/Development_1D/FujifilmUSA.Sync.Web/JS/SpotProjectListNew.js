@@ -6,10 +6,10 @@ var Resources = {};
 var CurrentCulture;
 var $hdfProjectID;
 
-$(document).ready(function () {    
+$(document).ready(function () {
     $kendoSpotProjectList = $("#kendoSpotProjectList");
-    SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();   
-    $hdfHasDeletePermission = $("#hdfHasDeletePermission");    
+    SERVICE_BASE_URL = $('#hdnBaseServiceUrl').val();
+    $hdfHasDeletePermission = $("#hdfHasDeletePermission");
     CurrentUserID = $("#hdfCurrentUser").val();
     CurrentCulture = $("#hdfCurrentCulture").val();
     hdfSpotProjectAllowed = $("#hdfSpotProjectAllowed");
@@ -75,7 +75,7 @@ $(document).ready(function () {
             refresh: true,
             pageSizes: true
         },
-        noRecords: {            
+        noRecords: {
             template: ''
         },
         dataBound: function (e) {
@@ -121,14 +121,11 @@ $(document).ready(function () {
 
             });
 
-            //  enable/disabled button as per spot project limit
-            var gridCurrent = $(e.sender.tbody).closest('.k-grid');
+            //  enable/disabled button as per spot project limit            
             var spotProjectAllowed = hdfSpotProjectAllowed.val() == 'true';
             if (!spotProjectAllowed) {
-                //$(gridCurrent).find('.k-grid-toolbar #btnCreateSpotProject').hide()
                 $("<%= btnCreateSpotProject.ClientID %>").hide();
                 if (dataSource._data.length == 0) {
-                   // $(gridCurrent).find('.k-grid-toolbar').hide();                  
                     $("<%= btnExportSpotProject.ClientID %>").hide();
                 }
             } else {
@@ -155,16 +152,16 @@ $(document).ready(function () {
             },
             {
                 field: "ProjectName",
-                title: "<b> Brand Color Library</b>",                
+                title: "<b> Brand Color Library</b>",
             },
             {
                 field: "LibraryName",
-                title: "<b>Target Library</b>",                
+                title: "<b>Target Library</b>",
             },
             {
                 field: "CreateDate",
                 title: "<b>Last Activity</b>",
-                template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm") #',                
+                template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm") #',
                 ui: "datetimepicker" // use Kendo UI DateTimePicker
             },
             {
@@ -242,7 +239,7 @@ function Redirect(projectID, type) {
 }
 function ShowSpotLibraryExportWindow(btn) {
     var spotIDs = '';
-    var isSpotProjectSelected = false;        
+    var isSpotProjectSelected = false;
     var dsSpots = $kendoSpotProjectList.data("kendoGrid").dataSource.data();
     for (var index = 0; index < dsSpots.length; index++) {
         if (dsSpots[index]['IsSelected']) {

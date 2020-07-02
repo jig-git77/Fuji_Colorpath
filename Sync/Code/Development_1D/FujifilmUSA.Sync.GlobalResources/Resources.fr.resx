@@ -1350,4 +1350,7 @@
   <data name="GridDateTimeColumnResource1" xml:space="preserve">
     <value>Last Activity</value>
   </data>
+  <data name="ProjectList_BcoButtonToolTip" xml:space="preserve">
+    <value>Brand Color Optimizer(Print Condition is Open)</value>
+  </data>
 </root>

@@ -3589,6 +3589,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brand Color Optimizer(Print Condition is Open).
+        /// </summary>
+        internal static string ProjectList_BcoButtonToolTip {
+            get {
+                return ResourceManager.GetString("ProjectList_BcoButtonToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete all information of selected Project?.
         /// </summary>
         internal static string ProjectList_DeleteProject_Confirmation {

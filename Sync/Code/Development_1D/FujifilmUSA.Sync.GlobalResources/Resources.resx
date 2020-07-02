@@ -1374,4 +1374,7 @@
   <data name="ESourceProfileCategory_SYNCMeasureApp" xml:space="preserve">
     <value>SYNC Measure App</value>
   </data>
+  <data name="ProjectList_BcoButtonToolTip" xml:space="preserve">
+    <value>Brand Color Optimizer(Print Condition is Open)</value>
+  </data>
 </root>

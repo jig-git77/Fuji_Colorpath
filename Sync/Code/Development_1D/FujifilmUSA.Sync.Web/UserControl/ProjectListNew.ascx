@@ -25,7 +25,7 @@
     </span>
     </a>
     </li>
-    <li><a class='linktbutton' id='lnkSpotProjectIcon'><span style="display: flex; align-items: center;white-space: nowrap;"><img style="margin-right: 5px;" width="20px;" src='Images/SpotProject.png'>BCO</span></a></li>
+    <li><a class='linktbutton' id='lnkSpotProjectIcon'><span style="display: flex; align-items: center;white-space: nowrap;"><img id='imgprojectBCO' style="margin-right: 5px;" width="20px;" src='Images/SpotProject.png'>BCO</span></a></li>
     <li><a class='linktbutton' id='lnkValidationIcon'><span style="display: flex; align-items: center;white-space: nowrap;"><img id='imgprojectValidation' style="margin-right: 5px;" width="20px;" src=''>Validation</span></a></li>
 </ul>
     </td>
@@ -40,8 +40,9 @@
 <script src="JS/ProjectListNew.js?version=<%=JsRandomGuid %>"></script>
 
 
+
 <script type="text/javascript" language="javascript">
-        function ConfirmDeleteProject() {
+    function ConfirmDeleteProject() {
         if (confirm('<%= ProjectListDeleteProjectConfirmation %>'))
             return true;
         else
@@ -152,6 +153,7 @@
             margin-right: 10px;
         }
 
+
     .linktbutton {
         background-color: #ffffff;
         border: #d5d5d5 solid 1px;
@@ -161,6 +163,7 @@
         margin-top: 10px;
         cursor: pointer;
     }
+
     .linktbuttonDisabled {
         background-color: #ffffff;
         border: #d5d5d5 solid 1px;
@@ -169,7 +172,7 @@
         border-radius: 10px;
         margin-top: 10px;
         cursor: pointer;
-        opacity:0.5
+        opacity: 0.5
     }
 
     .k-grid-header {
