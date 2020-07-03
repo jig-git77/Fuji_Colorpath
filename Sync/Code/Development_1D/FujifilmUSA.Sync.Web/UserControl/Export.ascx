@@ -3,10 +3,10 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxtoolkit" %>
 
-<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
-<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
+<link href="Content/kendo/2020.2.617/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2020.2.617/kendo.default.min.css" rel="stylesheet" />
 
-<script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
+<script src="Scripts/kendo/2020.2.617/kendo.all.min.js"></script>
 
 <script src="JS/Export.js" type="text/javascript"></script>
 <style>

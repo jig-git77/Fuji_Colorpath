@@ -116,10 +116,10 @@ $(document).ready(function () {
         resizable: false,
         sortable: true,
         filterable: true,         
-        //toolbar: ["search"],      
-        //search: {
-        //    fields: ["ProjectName", "SourceProfileName", "PrintConditionMedia","CreateDate"]
-        //},
+        toolbar: ["search"],      
+        search: {
+            fields: ["ProjectName", "SourceProfileName", "PrintConditionMedia","CreateDate"]
+        },
         pageable: {
             refresh: true,
             pageSizes: true,
