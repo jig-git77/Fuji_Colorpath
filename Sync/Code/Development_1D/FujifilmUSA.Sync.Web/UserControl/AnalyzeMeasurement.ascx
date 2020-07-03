@@ -5,9 +5,9 @@
     TagPrefix="uc" %>
 
 <script src="JS/Printing.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
-<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
-<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
-<script src="Scripts/kendo/2018.1.221/kendo.all.min.js" type="text/javascript"></script>
+<link href="Content/kendo/2020.2.617/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2020.2.617/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2020.2.617/kendo.all.min.js" type="text/javascript"></script>
 <style>
     .tempTooltip {
         background-color: transparent !important;

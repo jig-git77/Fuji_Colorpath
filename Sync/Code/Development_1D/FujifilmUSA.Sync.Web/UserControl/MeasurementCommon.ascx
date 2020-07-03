@@ -14,9 +14,9 @@
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 
-<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
-<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
-<script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
+<link href="Content/kendo/2020.2.617/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2020.2.617/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2020.2.617/kendo.all.min.js"></script>
 <style type="text/css">
     .my_rectangle {
         width: 25px;

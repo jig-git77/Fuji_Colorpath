@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SpotColorPatchDetails.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.PopupControl.SpotColorPatchDetails" %>
-<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
-<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
-<script src="Scripts/kendo/2018.1.221/kendo.all.min.js"></script>
+<link href="Content/kendo/2020.2.617/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2020.2.617/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2020.2.617/kendo.all.min.js"></script>
 <style>
     /*body,html{
         background:'' !important;

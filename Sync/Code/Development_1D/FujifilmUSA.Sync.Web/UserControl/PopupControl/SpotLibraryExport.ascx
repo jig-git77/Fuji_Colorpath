@@ -1,9 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SpotLibraryExport.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.PopupControl.SpotLibraryExport" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
-<link href="Content/kendo/2018.1.221/kendo.common.min.css" rel="stylesheet" />
-<link href="Content/kendo/2018.1.221/kendo.default.min.css" rel="stylesheet" />
-<script src="Scripts/kendo/2018.1.221/kendo.all.min.js" type="text/javascript"></script>
+<link href="Content/kendo/2020.2.617/kendo.common.min.css" rel="stylesheet" />
+<link href="Content/kendo/2020.2.617/kendo.default.min.css" rel="stylesheet" />
+<script src="Scripts/kendo/2020.2.617/kendo.all.min.js" type="text/javascript"></script>
 <style>
     .tblExport td {
         padding: 3px;
