@@ -6,7 +6,7 @@
     TagPrefix="uc" %>
 
 <script id="licenseType-printName-template" type="text/x-kendo-template">
-   <table width="100%" cellpadding="1" cellspacing="1">
+   <table class="tablecss" width="100%" cellpadding="1" cellspacing="1">
         <tr>
             <td  style="vertical-align:middle;">
                 <span style="display:flex;align-items:center;">
@@ -153,6 +153,9 @@
             margin-right: 10px;
         }
 
+    .tablecss tbody tr:hover {
+        background: unset !important;
+    }
 
     .linktbutton {
         background-color: #ffffff;
@@ -247,6 +250,10 @@
 
     #kendoProjectList > .k-grid-content {
         min-height: 100px;
+    }
+
+    .k-grid .k-header .k-textbox {
+        float: left;
     }
 </style>
 

@@ -118,7 +118,7 @@ $(document).ready(function () {
         filterable: true,         
         //toolbar: ["search"],      
         //search: {
-        //    fields: ["ProjectName", "SourceProfileName","PrintConditionMedia"]
+        //    fields: ["ProjectName", "SourceProfileName", "PrintConditionMedia","CreateDate"]
         //},
         pageable: {
             refresh: true,
@@ -316,8 +316,8 @@ $(document).ready(function () {
                     row.find("td #lnkSpotProjectIcon").attr('onclick', '');
                     row.find("td #lnkSpotProjectIcon").addClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
                     row.find("td #lnkSpotProjectIcon").removeClass("linktbutton");  //set the Spotproject button disabled/enable class
-                    row.find("td #lnkSpotProjectIcon").attr('title', Resources.ProjectList_BcoButtonToolTip);   //set the project type image path
-                    row.find("td #imgprojectBCO").attr('title', Resources.ProjectList_BcoButtonToolTip);   //set the project type image path
+                    row.find("td #lnkSpotProjectIcon").attr('title', Resources.ProjectList_BcoButtonToolTip); //set the spotproject tooltip
+                    row.find("td #imgprojectBCO").attr('title', Resources.ProjectList_BcoButtonToolTip);   //set the spotproject tooltip
                 }
 
                 switch (data.Status) {
