@@ -1,17 +1,19 @@
-﻿using System;
-using System.Configuration;
-using System.Security.Cryptography;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.UI;
-using System.Threading;
-using System.ComponentModel;
-using System.Reflection;
-using FujifilmUSA.Sync.Entity;
+﻿using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.GlobalResources;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Net;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
+using System.Web.UI;
+
 namespace FujifilmUSA.Sync.Common
 {
     public class Utilities
@@ -244,7 +246,9 @@ namespace FujifilmUSA.Sync.Common
         public static long DbValueToLong(object dbValue)
         {
             if (dbValue == DBNull.Value)
+            {
                 return 0;
+            }
             else
             {
                 try
@@ -260,25 +264,37 @@ namespace FujifilmUSA.Sync.Common
         public static int DbValueToInt(object dbValue)
         {
             if (dbValue == DBNull.Value)
+            {
                 return 0;
+            }
             else
+            {
                 return Convert.ToInt32(dbValue);
+            }
         }
 
         public static bool DbValueToBool(object dbValue)
         {
             if (dbValue == DBNull.Value)
+            {
                 return false;
+            }
             else
+            {
                 return Convert.ToBoolean(dbValue);
+            }
         }
 
         public static string DbValueToString(object dbValue)
         {
             if (dbValue == DBNull.Value)
+            {
                 return "";
+            }
             else
+            {
                 return Convert.ToString(dbValue);
+            }
         }
 
         public static string GetMd5Hash(string input)
@@ -308,12 +324,16 @@ namespace FujifilmUSA.Sync.Common
                 if (attribute != null)
                 {
                     if (attribute.Description == description)
+                    {
                         return field.GetValue(null).ToString();
+                    }
                 }
                 else
                 {
                     if (field.Name == description)
+                    {
                         return field.GetValue(null).ToString();
+                    }
                 }
             }
             return string.Empty;
@@ -459,6 +479,106 @@ namespace FujifilmUSA.Sync.Common
             catch
             {
                 return Value;
+            }
+        }
+        #endregion
+
+        #region ProfilerClientCall
+        public static T GetProfilerServiceClientCall<TU, T>(TU request, ProfilerCallMethod callerMethod, ProfilerRequestCall profilerRequestCall)
+        {
+            string requestURL = string.Empty;
+            requestURL = string.Concat(ReadConfigValue("BaseProfilerSericeURL"), "api/Profiler/", callerMethod);
+            var responseContent = "";
+            using (var webClient = new WebClient())
+            {
+                webClient.Headers.Add("Content-Type", "text/json");
+                webClient.Headers.Add("Authorization", string.Format("{0} {1}", "Basic", EncryptProfilerClient()));
+                if (profilerRequestCall == ProfilerRequestCall.HttpPost)
+                {
+
+                    var requestContent = JsonConvert.SerializeObject(request);
+                    responseContent = webClient.UploadString(requestURL, "POST", requestContent);
+
+                }
+                else if (profilerRequestCall == ProfilerRequestCall.HttpGet)
+                {
+                    responseContent = webClient.DownloadString(requestURL);
+                }
+                return JsonConvert.DeserializeObject<T>(responseContent);
+            }
+
+        }
+        public enum ProfilerCallMethod
+        {
+            Ping,
+            CreateDLP,
+            OptimizeDLP,
+            CreateSourceDLP,
+            CreateG7Alignment,
+            CreateISOAlignment,
+            CreateSourceProfile,
+            ExtractProfile,
+            CreateSpotLibrary,
+            OptimizeSpotLibrary,
+
+        }
+        public enum ProfilerRequestCall
+        {
+            HttpPost,
+            HttpGet
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string EncryptProfilerClient()
+        {
+            try
+            {
+                string Key = "sblw-3hn8-sqoy19";
+                string input = "fujiflim";
+                byte[] inputArray = UTF8Encoding.UTF8.GetBytes(input);
+                TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider();
+                tripleDES.Key = UTF8Encoding.UTF8.GetBytes(Key);
+                tripleDES.Mode = CipherMode.ECB;
+                tripleDES.Padding = PaddingMode.PKCS7;
+                ICryptoTransform cTransform = tripleDES.CreateEncryptor();
+                byte[] resultArray = cTransform.TransformFinalBlock(inputArray, 0, inputArray.Length);
+                tripleDES.Clear();
+                return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static bool DecryptProfilerClient(string input)
+        {
+            try
+            {
+                string mainString = "fujiflim";
+                string Key = "sblw-3hn8-sqoy19";
+                byte[] inputArray = Convert.FromBase64String(input);
+                TripleDESCryptoServiceProvider tripleDES = new TripleDESCryptoServiceProvider();
+                tripleDES.Key = UTF8Encoding.UTF8.GetBytes(Key);
+                tripleDES.Mode = CipherMode.ECB;
+                tripleDES.Padding = PaddingMode.PKCS7;
+                ICryptoTransform cTransform = tripleDES.CreateDecryptor();
+                byte[] resultArray = cTransform.TransformFinalBlock(inputArray, 0, inputArray.Length);
+                tripleDES.Clear();
+                string actualString = UTF8Encoding.UTF8.GetString(resultArray);
+                return (actualString.Trim() == mainString.Trim());
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
         #endregion

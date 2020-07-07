@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using FujifilmUSA.Sync.Entity;
+using System;
 using System.Data;
 using System.IO;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
+using System.Linq;
 using System.Text;
-using WebSupergoo.ABCpdf8;
-using WebSupergoo.ABCpdf8.Atoms;
-using WebSupergoo.ABCpdf8.Objects;
-using FujifilmUSA.Sync.Entity;
+using System.Web.UI.WebControls;
+using WebSupergoo.ABCpdf11;
 
 namespace FujifilmUSA.Sync.Common
 {
