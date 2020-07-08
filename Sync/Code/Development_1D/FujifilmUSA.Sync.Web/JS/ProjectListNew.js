@@ -471,6 +471,15 @@ $(document).ready(function () {
         }
         window.location.href = locationpath;
     });
+
+    $('.k-textbox input').on("keydown",function (e) {
+      
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
 });
 
 
@@ -608,4 +617,7 @@ function ShowDialog(message, title) {
         ]
     });
 }
+
+//k-textbox k-grid-search k-display-flex
+//('.k-textbox k-grid-search k-display-flex input')
 
