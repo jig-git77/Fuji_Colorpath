@@ -170,11 +170,11 @@ $(document).ready(function () {
                                 break;
                             case ELicenseType.Sync4DCertification:
                                 projectTypeImagePath = 'Images/4DCertification.png';
-                                projectTypeImageTitle = '4D';
+                                projectTypeImageTitle = 'Certification';
                                 break;
                             case ELicenseType.CustomSourceProfile:
                                 projectTypeImagePath = 'Images/DLPSource.png';
-                                projectTypeImageTitle = 'DLP Source';
+                                projectTypeImageTitle = 'Source Profile';
                                 break;
                             case ELicenseType.ReProfileCustomSource:
                                 projectTypeImagePath = 'Images/DLPReProfileSource.png';
@@ -206,7 +206,7 @@ $(document).ready(function () {
                                 break;
                             case ELicenseType.Sync4DCertification:
                                 projectTypeImagePath = 'Images/4DCertification_Certified.png';
-                                projectTypeImageTitle = '4D';
+                                projectTypeImageTitle = 'Certification';
                                 break;
                             case ELicenseType.Validation:
                                 break;
@@ -372,7 +372,7 @@ $(document).ready(function () {
                 width: 30,
                 filterable: false,
                 attributes: {
-                    style: "word-break: break-all;"
+                    //style: "word-break: break-all;"
                 }
             },
             {
@@ -381,18 +381,9 @@ $(document).ready(function () {
                 width: 30,
                 filterable: false,                
                 attributes: {
-                    style: "word-break: break-all;"
+                    //style: "word-break: break-all;"
                 }
             },
-            //{
-            //    field: "PrintConditionColorant",
-            //    title: "<b title='Click here to sort'></b>",
-            //    width: 50,
-            //    filterable: false,
-            //    attributes: {
-            //        style: "word-break: break-all;"
-            //    }
-            //},
             {
                 field: "CreateDate",
                 title: "<b title='Click here to sort'></b>",

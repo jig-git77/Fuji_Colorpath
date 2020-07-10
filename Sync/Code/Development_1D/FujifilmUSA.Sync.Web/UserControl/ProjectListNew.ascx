@@ -10,7 +10,7 @@
         <tr>
             <td  style="vertical-align:middle;">
                 <span style="display:flex;align-items:center;">
-                    <a id='lnkProjectType'><img id='imgprojectType' src=''></a><strong style="cursor:pointer;">#: ProjectName #</strong>
+                    <a id='lnkProjectType'><img id='imgprojectType' src=''>&nbsp;&nbsp;</a><strong style="cursor:pointer;">#: ProjectName #</strong>
                 </span>
             </td>
         </tr>
@@ -182,12 +182,17 @@
         padding-right: 0 !important;
     }
 
+    .k-grid-header th.k-header {
+         border: none;
+    }
+
     .k-grid-content {
         overflow-y: hidden;
     }
 
     .k-grid td {
         line-height: 2em;
+         border: none;
     }
 
     .k-window-action {
@@ -196,7 +201,7 @@
 
     .k-window-titlebar {
         background: #3A9977;
-        //border: 2px solid #3A9977;
+        /*border: 2px solid #3A9977;*/
     }
 
     div.k-window {
@@ -270,7 +275,7 @@
 <div class="contant_middle">
     <div class="head">
         <h1>
-            <asp:Label ID="lblTitle" runat="server" Text="Project List" meta:resourcekey="lblTitleResource1"></asp:Label>
+            <asp:Label ID="lblTitle" runat="server" Text="Print Conditions" meta:resourcekey="lblTitleResource1"></asp:Label>
         </h1>
         <asp:LinkButton ID="lbtnCreateNewPrintCondition" runat="server" CssClass="button"
             ValidationGroup="vgDestination"

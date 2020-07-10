@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GridDateTimeColumnResource1.HeaderText" xml:space="preserve">
-    <value>Last Active</value>
+    <value>Last Activity</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GridDateTimeColumnResource1.HtmlEncode" type="System.Boolean, mscorlib">
@@ -128,10 +128,10 @@
     <value>Status</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>Name</value>
+    <value>Print Condition</value>
   </data>
   <data name="GridTemplateColumnResource4.HeaderText" xml:space="preserve">
-    <value>Standard</value>
+    <value>Target Colorspace</value>
   </data>
   <data name="GridTemplateColumnResource5.HeaderText" xml:space="preserve">
     <value>Media</value>
@@ -158,7 +158,7 @@
     <value>Clear Fillter</value>
   </data>
   <data name="lblTitleResource1.Text" xml:space="preserve">
-    <value>Project List</value>
+    <value>Print Conditions</value>
   </data>
   <data name="lbtnClearFillterResource1.ToolTip" xml:space="preserve">
     <value>Clear Fillter</value>
