@@ -307,7 +307,7 @@ $(document).ready(function () {
                 }
                 if (showSpotProject == true) {                    
                     //row.find("td #lnkSpotProjectIcon").show();  //set the project validation visibility
-                    row.find("td #lnkSpotProjectIcon").attr("onclick", "javascript: return OpenSpotProjectListWindow('" + data.ProjectId + "','" + data.ProjectName + "')");
+                    row.find("td #lnkSpotProjectIcon").attr("onclick", "javascript: return OpenSpotProjectListWindow('" + data.ProjectId + "','" + data.ProjectName + "')");                   
                     row.find("td #lnkSpotProjectIcon").addClass("linktbutton");  //set the Spotproject button disabled/enable class
                     row.find("td #lnkSpotProjectIcon").removeClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
                 }
@@ -318,6 +318,9 @@ $(document).ready(function () {
                     row.find("td #lnkSpotProjectIcon").removeClass("linktbutton");  //set the Spotproject button disabled/enable class
                     row.find("td #lnkSpotProjectIcon").attr('title', Resources.ProjectList_BcoButtonToolTip); //set the spotproject tooltip
                     row.find("td #imgprojectBCO").attr('title', Resources.ProjectList_BcoButtonToolTip);   //set the spotproject tooltip
+                    if (data.LicenseType != ELicenseType.DLP) {
+                        row.find("td #lnkSpotProjectIcon").hide();  //set Spot Project button hide if DLP is not project
+                    }
                 }
 
                 switch (data.Status) {
@@ -393,7 +396,7 @@ $(document).ready(function () {
             {
                 field: "CreateDate",
                 title: "<b title='Click here to sort'></b>",
-                template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm") #',
+                template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm tt") #',
                 width: 20,
                 filterable: false, attributes: {
                     style: "word-break: break-all;"

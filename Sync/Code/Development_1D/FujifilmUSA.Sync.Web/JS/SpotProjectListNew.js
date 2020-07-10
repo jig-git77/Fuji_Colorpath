@@ -67,13 +67,14 @@ $(document).ready(function () {
                     }
                 }
             },
-            pageSize: 5
+            pageSize: 10
         },
         sortable: true,
         filterable: false,
         pageable: {
             refresh: true,
-            pageSizes: true
+            alwaysVisible: false,
+            pageSizes: true,
         },
         noRecords: {
             template: ''
@@ -161,7 +162,7 @@ $(document).ready(function () {
             {
                 field: "CreateDate",
                 title: "<b>Last Activity</b>",
-                template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm") #',
+                template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm tt") #',
                 ui: "datetimepicker" // use Kendo UI DateTimePicker
             },
             {

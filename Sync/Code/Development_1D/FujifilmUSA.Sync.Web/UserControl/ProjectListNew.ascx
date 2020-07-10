@@ -10,7 +10,7 @@
         <tr>
             <td  style="vertical-align:middle;">
                 <span style="display:flex;align-items:center;">
-                    <a id='lnkProjectType'><img id='imgprojectType' src=''></a><strong>#: ProjectName #</strong>
+                    <a id='lnkProjectType'><img id='imgprojectType' src=''></a><strong style="cursor:pointer;">#: ProjectName #</strong>
                 </span>
             </td>
         </tr>
@@ -18,16 +18,16 @@
     <td  style="vertical-align:middle;">
     <ul class="list-of-button">
 	<li>
-    <a class='linktbutton' id='lnkProjectTypeIcon'>
-    <span style="display: flex; align-items: center;white-space: nowrap;">
-    <img id='imgprojectTypeIcon' style="margin-right: 5px;width:20px;" src=''>
-    <label id='spanImagePrjTypeTitle' style="font-weight:normal;"><label>
-    </span>
-    </a>
+        <a class='linktbutton' id='lnkProjectTypeIcon'>
+            <span style="display: flex; align-items: center;white-space: nowrap;cursor:pointer;">
+            <img id='imgprojectTypeIcon' style="margin-right: 5px;width:20px;" src='' />
+            <label id='spanImagePrjTypeTitle' style="font-weight:normal;cursor:pointer;"><label>
+        </span>
+        </a>
     </li>
-    <li><a class='linktbutton' id='lnkSpotProjectIcon'><span style="display: flex; align-items: center;white-space: nowrap;"><img id='imgprojectBCO' style="margin-right: 5px;" width="20px;" src='Images/SpotProject.png'>BCO</span></a></li>
-    <li><a class='linktbutton' id='lnkValidationIcon'><span style="display: flex; align-items: center;white-space: nowrap;"><img id='imgprojectValidation' style="margin-right: 5px;" width="20px;" src=''>Validation</span></a></li>
-</ul>
+    <li><a class='linktbutton' id='lnkSpotProjectIcon'><span style="display: flex; align-items: center;white-space: nowrap;"><img id='imgprojectBCO' style="margin-right: 5px;" width="20px;" src='Images/SpotProject.png' />BCO</span></a></li>
+    <li><a class='linktbutton' id='lnkValidationIcon'><span style="display: flex; align-items: center;white-space: nowrap;"><img id='imgprojectValidation' style="margin-right: 5px;" width="20px;" src='' />Validation</span></a></li>
+    </ul>
     </td>
         </tr>
     </table>
@@ -307,7 +307,7 @@
                 Behaviors="Close, Move" Behavior="Close, Move">
             </telerik:RadWindow>
             <telerik:RadWindow ID="ShowSpotProjectListWindow" runat="server" VisibleStatusbar="false"
-                ShowContentDuringLoad="false" Title="Brand Color Optimization" Width="830" Height="430"
+                ShowContentDuringLoad="false" Title="Brand Color Optimization" Width="930" Height="530"
                 Behaviors="Close, Move" Behavior="Close, Move">
             </telerik:RadWindow>
         </Windows>
