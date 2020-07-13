@@ -3598,6 +3598,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brand Color Optimization.
+        /// </summary>
+        internal static string ProjectList_BcoEnableButtonToolTip {
+            get {
+                return ResourceManager.GetString("ProjectList_BcoEnableButtonToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete all information of selected Project?.
         /// </summary>
         internal static string ProjectList_DeleteProject_Confirmation {

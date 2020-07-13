@@ -1377,4 +1377,7 @@
   <data name="ProjectList_BcoButtonToolTip" xml:space="preserve">
     <value>Brand Color Optimizer(Print Condition is Open)</value>
   </data>
+  <data name="ProjectList_BcoEnableButtonToolTip" xml:space="preserve">
+    <value>Brand Color Optimization</value>
+  </data>
 </root>

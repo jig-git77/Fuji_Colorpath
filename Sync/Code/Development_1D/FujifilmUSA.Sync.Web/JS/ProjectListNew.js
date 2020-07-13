@@ -310,6 +310,8 @@ $(document).ready(function () {
                     row.find("td #lnkSpotProjectIcon").attr("onclick", "javascript: return OpenSpotProjectListWindow('" + data.ProjectId + "','" + data.ProjectName + "')");                   
                     row.find("td #lnkSpotProjectIcon").addClass("linktbutton");  //set the Spotproject button disabled/enable class
                     row.find("td #lnkSpotProjectIcon").removeClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
+                    row.find("td #lnkSpotProjectIcon").attr('title', Resources.ProjectList_BcoEnableButtonToolTip); //set the spotproject tooltip
+                    row.find("td #imgprojectBCO").attr('title', Resources.ProjectList_BcoEnableButtonToolTip);   //set the spotproject tooltip
                 }
                 else {                    
                     //row.find("td #lnkSpotProjectIcon").hide();  //set the project validation visibility

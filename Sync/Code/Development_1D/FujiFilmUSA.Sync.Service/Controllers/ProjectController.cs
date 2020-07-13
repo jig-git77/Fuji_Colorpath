@@ -75,7 +75,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
             _resourceValues.Add("SpotProject_Open", "SpotProject_Open");
             _resourceValues.Add("SpotProject_Certified", "SpotProject_Certified");
             _resourceValues.Add("ProjectList_BcoButtonToolTip", "ProjectList_BcoButtonToolTip");
-
+            _resourceValues.Add("ProjectList_BcoEnableButtonToolTip", "ProjectList_BcoEnableButtonToolTip");
             base.Initialize(controllerContext);
         }
         #endregion
