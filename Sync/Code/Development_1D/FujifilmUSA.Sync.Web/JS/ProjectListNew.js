@@ -388,7 +388,7 @@ $(document).ready(function () {
                 field: "CreateDate",
                 title: "<b title='Click here to sort'></b>",
                 template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm tt") #',
-                width: 20,
+                width: 30,
                 filterable: false, attributes: {
                     style: "word-break: break-all;"
                 }
