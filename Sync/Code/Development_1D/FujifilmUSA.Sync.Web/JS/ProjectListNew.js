@@ -378,7 +378,7 @@ $(document).ready(function () {
             {
                 field: "PrintConditionMedia",
                 title: "<b title='Click here to sort'></b>",
-                width: 30,
+                width: 25,
                 filterable: false,                
                 attributes: {
                     //style: "word-break: break-all;"
@@ -388,9 +388,9 @@ $(document).ready(function () {
                 field: "CreateDate",
                 title: "<b title='Click here to sort'></b>",
                 template: '#=kendo.toString(new Date(CreateDate), "MM/dd/yyyy hh:mm tt") #',
-                width: 30,
+                width: 25,
                 filterable: false, attributes: {
-                    style: "word-break: break-all;"
+                    //style: "word-break: break-all;"
                 }
             },
             {
