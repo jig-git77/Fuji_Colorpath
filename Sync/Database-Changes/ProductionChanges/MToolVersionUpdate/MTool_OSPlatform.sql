@@ -93,3 +93,34 @@ INSERT INTO [CP].[MTool_OSPlatformDetails]
            ,'No value'
            ,'More Details will come later')
 GO
+
+
+/*********** StoredProcedure [CP].[CheckMToolVersionUpdateStatus] ********/
+USE [ColorPathSync_Stage]
+GO
+/****** Object:  StoredProcedure [CP].[CheckMToolVersionUpdateStatus]    Script Date: 7/14/2020 10:12:10 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [CP].[CheckMToolVersionUpdateStatus]
+	@OSPlatformID TINYINT
+AS
+BEGIN
+			SELECT
+				[OSPlatformID],
+				[LatestVersion],
+				[MinReqVersion],
+				[URLlocation],
+				[UpdateInfo]
+			FROM
+				[CP].[MTool_OSPlatformDetails]
+			WHERE
+				[OSPlatformID] = @OSPlatformID AND [IsUsed] = 1 
+				
+			ORDER BY
+				[OSPlatformDetailsID]
+END
+
+
+
