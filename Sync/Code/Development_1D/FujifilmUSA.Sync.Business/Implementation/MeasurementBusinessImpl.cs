@@ -2532,7 +2532,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurement;
         }
 
-        public int ImportMeasurement(Measurement measurement, int LicenseTypeID,int UserID)
+        public int ImportMeasurement(Measurement measurement, int LicenseTypeID, int UserID)
         {
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
@@ -2755,6 +2755,35 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_ValidateApplicationMeasurement"));
             return dtPatchDetails;
+        }
+
+        public MToolVersion CheckMToolVersionUpdate(int oSPlatformID)
+        {
+            MToolVersion mToolVersion = new MToolVersion();
+            string storedProc = "CP.CheckMToolVersionUpdateStatus";
+            DataTable dtPatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                             new object[] { oSPlatformID });
+                    if (dsMeasurements.Tables.Count > 0)
+                    {
+                        dtPatchDetails = dsMeasurements.Tables[0];
+                        mToolVersion.OSPlatformID = Convert.ToInt16(dtPatchDetails.Rows[0]["OSPlatformID"]);
+                        mToolVersion.LatestVersion = Convert.ToString(dtPatchDetails.Rows[0]["LatestVersion"]);
+                        mToolVersion.MinReqVersion = Convert.ToString(dtPatchDetails.Rows[0]["MinReqVersion"]);
+                        mToolVersion.URLlocation = Convert.ToString(dtPatchDetails.Rows[0]["URLlocation"]);
+                        mToolVersion.UpdateInfo = Convert.ToString(dtPatchDetails.Rows[0]["UpdateInfo"]);
+                        
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_ValidateApplicationMeasurement"));
+            return mToolVersion;
         }
 
         public void SaveMeasurementErrorFile(int optimizeRunId, int projectid, string requestMeasurement)

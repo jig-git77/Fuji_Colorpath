@@ -146,6 +146,13 @@ namespace FujifilmUSA.Sync.Presenter
              projectMeasurement.SaveMeasurementErrorFile(_viewPluginDataService.Measurement.OptimizeRunId, _viewPluginDataService.Measurement.ProjectId,_viewPluginDataService.RequestMeasurment);
 
         }
+        public void CheckMToolVersionUpdate()
+        {
+            var projectMeasurement = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            projectMeasurement.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.MTVersion= projectMeasurement.CheckMToolVersionUpdate(_viewPluginDataService.OSPlatformId);
+
+        }
 
     }
 }

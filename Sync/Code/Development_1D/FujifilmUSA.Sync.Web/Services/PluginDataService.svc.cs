@@ -357,6 +357,8 @@ namespace FujifilmUSA.Sync.Web.Services
         public string MeaDeviceSerialNo { get; set; }
         public string RequestMeasurment { get; set; }
         public string MToolEntryDate { get; set; }
+        public int OSPlatformId { get; set; }
+        public MToolVersion MTVersion { get; set; }
         #endregion
 
         #region IViewBase Members

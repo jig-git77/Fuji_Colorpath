@@ -267,6 +267,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             throw new NotImplementedException();
         }
+        public MToolVersion CheckMToolVersionUpdate(int oSPlatformID)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region ITaskBase Members

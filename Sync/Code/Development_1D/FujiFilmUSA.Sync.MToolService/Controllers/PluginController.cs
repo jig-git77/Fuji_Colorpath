@@ -686,6 +686,30 @@ namespace FujiFilmUSA.Sync.MToolService.Controllers
         }
         #endregion
 
+        #region MToolVersionCheckService
+        [HttpGet]
+        public IHttpActionResult CheckMToolVersionUpdate(int oSPlatformID)
+        {
+            IHttpActionResult actionResult = null;
+            try
+            {
+                OSPlatformId = oSPlatformID;                
+                var presenter = new PresenterPluginDataService(this);
+                presenter.CheckMToolVersionUpdate();
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, MTVersion));
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+
+        }
+        #endregion
+
         #region Public Methods
         public bool CheckMeasurementValidation(ref IHttpActionResult actionResult)
         {
@@ -830,6 +854,8 @@ namespace FujiFilmUSA.Sync.MToolService.Controllers
         public UserReferenceChart UserReferenceChart { get; set; }
         public string DeviceSerialNo { get; set; }
         public short InstrumentTypeID { get; set; }
+        public int OSPlatformId { get; set; }        
+        public MToolVersion MTVersion { get; set; }
         #endregion
     }
 }

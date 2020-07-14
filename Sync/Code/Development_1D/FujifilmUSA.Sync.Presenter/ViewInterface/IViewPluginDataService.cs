@@ -21,5 +21,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         string MeaDeviceSerialNo { get; set; }
         string RequestMeasurment { get; set; }
         string MToolEntryDate { get; set; }
+        int OSPlatformId { get; set; }       
+        MToolVersion MTVersion { get; set; }
     }
 }
