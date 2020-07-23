@@ -9,7 +9,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [CP].[MTool_OSPlatform](
-	[OSPlatformID] [tinyint] NOT NULL,
+	[OSPlatformID] [tinyint] IDENTITY(1,1) NOT NULL,
 	[OSPlatformName] [nvarchar](50) NOT NULL,
  CONSTRAINT [PK_MTool_OSPlatform_OSPlatformID] PRIMARY KEY CLUSTERED 
 (
@@ -30,7 +30,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [CP].[MTool_OSPlatformDetails](
-	[OSPlatformDetailsID] [smallint] NOT NULL,
+	[OSPlatformDetailsID] [smallint] IDENTITY(1,1) NOT NULL,
 	[OSPlatformID] [tinyint] NOT NULL,
 	[LatestVersion] [nvarchar](50) NOT NULL,
 	[MinReqVersion] [nvarchar](50) NOT NULL,
