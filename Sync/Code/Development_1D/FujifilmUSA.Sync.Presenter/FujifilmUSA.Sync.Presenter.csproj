@@ -78,6 +78,7 @@
     <Compile Include="PresenterLookupTVILABDensity.cs" />
     <Compile Include="PresenterMetricTargetManagement.cs" />
     <Compile Include="PresenterMetricTargetPresetManagement.cs" />
+    <Compile Include="PresenterMToolVersionManagement.cs" />
     <Compile Include="PresenterPrintStandardType.cs" />
     <Compile Include="PresenterProfileManagement.cs">
       <SubType>Code</SubType>
@@ -130,6 +131,7 @@
     <Compile Include="ViewInterface\IViewMeasurement.cs" />
     <Compile Include="ViewInterface\IViewMetricTargetManagement.cs" />
     <Compile Include="ViewInterface\IViewMetricTargetPresetManagement.cs" />
+    <Compile Include="ViewInterface\IViewMToolVersionManagement.cs" />
     <Compile Include="ViewInterface\IViewPrintStandardType.cs" />
     <Compile Include="ViewInterface\IViewProfileManagement.cs" />
     <Compile Include="ViewInterface\IViewReferenceChartManagement.cs" />

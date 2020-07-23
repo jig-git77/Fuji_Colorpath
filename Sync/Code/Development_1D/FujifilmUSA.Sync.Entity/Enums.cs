@@ -226,7 +226,9 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ERolePermission_ManageCustomReports")] //Manage Custom Reports
         ManageCustomReports = 20,
         [Description("ERolePermission_ManageMeasurementLog")] //Manage Measurement Logs
-        ManageMeasurementLogs = 21
+        ManageMeasurementLogs = 21,
+        [Description("ManageMToolVersion")] //Manage ManageMTool Version
+        ManageMToolVersion = 22
     }
     public enum ECurrentProjectStatus
     {

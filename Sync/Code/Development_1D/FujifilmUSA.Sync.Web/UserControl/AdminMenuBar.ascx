@@ -186,6 +186,15 @@
                         ID="Localize1" meta:resourcekey="locMetricTargetResource1"></asp:Localize>
                 </span>
             </asp:LinkButton>
+            <asp:LinkButton ID="lbtnMToolVersion" runat="server"
+                CssClass="dock-item overlapobject"
+                OnClick="lbtnMToolVersion_Click">
+                <img src="Images/application-configuration.png" style="position: relative; z-index: 1;" alt="Metric Target" />
+                <span>
+                    <asp:Localize Text="MToolVersion" runat="server"
+                        ID="Localize2"></asp:Localize>
+                </span>
+            </asp:LinkButton>
         </div>
     </div>
 </div>

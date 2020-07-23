@@ -109,6 +109,7 @@
     <Content Include="AddMeasurementDevice.aspx" />
     <Content Include="AddMetricTarget.aspx" />
     <Content Include="AddMetricTargetPreset.aspx" />
+    <Content Include="AddMToolVersionManagement.aspx" />
     <Content Include="AddPatchTolerance.aspx" />
     <Content Include="AddPrintStandardType.aspx" />
     <Content Include="AddReferenceChart.aspx" />
@@ -1303,6 +1304,7 @@
     <Content Include="MeasurementLog.aspx" />
     <Content Include="MetricTargetManagement.aspx" />
     <Content Include="MetricTargetPresetManagement.aspx" />
+    <Content Include="MToolVersionManagement.aspx" />
     <Content Include="PatchPresetManagement.aspx" />
     <Content Include="Permission.aspx" />
     <Content Include="PopupAddMeasurementDevice.aspx" />
@@ -3953,6 +3955,7 @@
     <Content Include="UserControl\AddLookupTVILABDensity.ascx" />
     <Content Include="UserControl\AddMetricTarget.ascx" />
     <Content Include="UserControl\AddMetricTargetPreset.ascx" />
+    <Content Include="UserControl\AddMToolVersionManagement.ascx" />
     <Content Include="UserControl\AddPatchTolerance.ascx" />
     <Content Include="UserControl\AddPrintStandardType.ascx" />
     <Content Include="UserControl\AddProject\ValidationSetup.ascx" />
@@ -3992,6 +3995,7 @@
     <Content Include="UserControl\MeasurementLog.ascx" />
     <Content Include="UserControl\MetricTargetManagement.ascx" />
     <Content Include="UserControl\MetricTargetPresetManagement.ascx" />
+    <Content Include="UserControl\MToolVersionManagement.ascx" />
     <Content Include="UserControl\PatchPresetManagement.ascx" />
     <Content Include="UserControl\PopupControl\DownloadSoftware.ascx" />
     <Content Include="UserControl\PopupControl\ForgotPassword.ascx" />
@@ -4289,6 +4293,13 @@
     </Compile>
     <Compile Include="AddMetricTargetPreset.aspx.designer.cs">
       <DependentUpon>AddMetricTargetPreset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddMToolVersionManagement.aspx.cs">
+      <DependentUpon>AddMToolVersionManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddMToolVersionManagement.aspx.designer.cs">
+      <DependentUpon>AddMToolVersionManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddPatchTolerance.aspx.cs">
       <DependentUpon>AddPatchTolerance.aspx</DependentUpon>
@@ -4647,6 +4658,13 @@
     <Compile Include="MetricTargetPresetManagement.aspx.designer.cs">
       <DependentUpon>MetricTargetPresetManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MToolVersionManagement.aspx.cs">
+      <DependentUpon>MToolVersionManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MToolVersionManagement.aspx.designer.cs">
+      <DependentUpon>MToolVersionManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PatchPresetManagement.aspx.cs">
       <DependentUpon>PatchPresetManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4898,6 +4916,13 @@
     </Compile>
     <Compile Include="UserControl\AddMetricTargetPreset.ascx.designer.cs">
       <DependentUpon>AddMetricTargetPreset.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddMToolVersionManagement.ascx.cs">
+      <DependentUpon>AddMToolVersionManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddMToolVersionManagement.ascx.designer.cs">
+      <DependentUpon>AddMToolVersionManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddPatchTolerance.ascx.cs">
       <DependentUpon>AddPatchTolerance.ascx</DependentUpon>
@@ -5163,6 +5188,13 @@
     </Compile>
     <Compile Include="UserControl\MetricTargetPresetManagement.ascx.designer.cs">
       <DependentUpon>MetricTargetPresetManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\MToolVersionManagement.ascx.cs">
+      <DependentUpon>MToolVersionManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MToolVersionManagement.ascx.designer.cs">
+      <DependentUpon>MToolVersionManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\PatchPresetManagement.ascx.cs">
       <DependentUpon>PatchPresetManagement.ascx</DependentUpon>
@@ -9222,7 +9254,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

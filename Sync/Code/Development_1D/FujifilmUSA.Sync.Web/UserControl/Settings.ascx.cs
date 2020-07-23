@@ -42,7 +42,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divSpotTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSpotTarget);
             divMetricTarget.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMetricTargetPreset);
             divMeasurementLog.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementLogs);
-            
+            divMToolVersion.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementLogs);
+
             ////seperator image 
             divBranchSeprator.Visible = tdBranch.Visible && tdcompany.Visible;
             divUserSeprator.Visible = tdUser.Visible && tdBranch.Visible;

@@ -301,8 +301,14 @@ namespace FujifilmUSA.Sync.Web
                     NavigationToNoPermissionPage();
                 }
             }
-            
-            
+            else if (GetType().BaseType == typeof(AddMToolVersionManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMToolVersion))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+
             #endregion
             #region Regular Pages
             else if (GetType().BaseType == typeof(OperationSelection))

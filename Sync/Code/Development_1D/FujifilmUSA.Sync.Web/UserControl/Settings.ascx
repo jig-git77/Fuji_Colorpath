@@ -333,9 +333,29 @@
                           meta:resourcekey="locMeasurementLogResource1"></asp:Localize>                    
                     </asp:LinkButton>
                 </div>
+                  
+              
                 </td>
             </tr>
-                
+              
+             <tr>
+                <td style="height:50px;">
+                </td>
+            </tr>   
+             <tr style="vertical-align:central;" >
+                <td style="vertical-align:central;" >                    
+                     <div id="divMToolVersion" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
+                    <asp:LinkButton ID="lnkMToolVersion" runat="server"
+                        PostBackUrl="~/MToolVersionManagement.aspx">                       
+                        <div>
+                            <asp:Image ID="ImgMToolVersion" runat="server" AlternateText="MTool Version"
+                                ImageUrl="~/Images/application-configuration-icon.png" ToolTip="MTool Version" />
+                        </div>
+                        <asp:Localize runat="server" Text="MTool Version" ID="Localize7"></asp:Localize>                    
+                    </asp:LinkButton>
+                         </div>
+                    </td>
+                 </tr>
             <tr>
             <td style="height:50px;">
             </td>
