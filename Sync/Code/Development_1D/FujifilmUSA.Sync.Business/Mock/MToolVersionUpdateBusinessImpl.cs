@@ -32,6 +32,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
 
+        public bool DeleteMToolVersion(int oSPlatformDetailsID)
+        {
+            return false;
+        }
+
 
         #endregion
 

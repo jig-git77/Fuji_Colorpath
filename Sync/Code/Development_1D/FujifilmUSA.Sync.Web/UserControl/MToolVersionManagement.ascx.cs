@@ -17,6 +17,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         private PresenterMToolVersionManagement _presenterMToolVersionManagement;
 
+        #region Declaration
+        public string MToolVersionManagement_DeleteMToolVersion_Confirmation
+        {
+            get
+            {
+                return "Are your sure want to delete this version?";
+            }
+        }
+        #endregion
         public MToolVersionManagement()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
@@ -79,6 +88,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     GridDataItem item = (GridDataItem)e.Item;
                     string parms = Service.Common.Encryption.CryptHelper.EncryptString(MToolVersion.OSPlatformDetailsID.ToString(), FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.EncryptionKey);
                     Response.Redirect("AddMToolVersionManagement.aspx?OSPlatformDetailsID=" + ContentEncoder.Encode(parms));
+                    break;
+                case "Delete":
+                    MToolVersion.OSPlatformDetailsID = Convert.ToInt16(e.CommandArgument);
+                    _presenterMToolVersionManagement.DeleteMToolVersion();
                     break;
             }
         }

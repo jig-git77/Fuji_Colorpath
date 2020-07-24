@@ -13,5 +13,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<MToolVersionUpdateList> GetMToolUpdateVersionList();
         MToolVersionUpdateList GetMToolVersionSelect(short oSPlatformDetailsID);
         Dictionary<int, string> GetMToolOSPlatformList();
+        bool DeleteMToolVersion(int oSPlatformDetailsID);
     }
 }

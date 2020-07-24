@@ -135,6 +135,21 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMToolOSPlatform"));
             return dstOSPlatformList;
         }
+        public bool DeleteMToolVersion(int oSPlatformDetailsID)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                DataAccessFactory.
+                    Instance.
+                    ExecuteProcedure(
+                        "[CP].[DeleteMToolVersion]",
+                        new object[]
+                            {
+                                oSPlatformDetailsID
+                            }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteMToolVersion"));
+            return true;
+        }
         #endregion
 
         #region ITaskBase Members

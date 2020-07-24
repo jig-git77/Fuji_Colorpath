@@ -45,5 +45,11 @@ namespace FujifilmUSA.Sync.Presenter
             mToolVersionBusiness.ErrorOccured += _viewMToolVersionManagement.ErrorOccured;
             _viewMToolVersionManagement.OSPlatformNameList = mToolVersionBusiness.GetMToolOSPlatformList();
         }
+        public bool DeleteMToolVersion()
+        {
+            var mToolVersionBusiness = BusinessFactory<IMToolVersionListBusiness>.CreateObject();
+            mToolVersionBusiness.ErrorOccured += _viewMToolVersionManagement.ErrorOccured;
+            return mToolVersionBusiness.DeleteMToolVersion(_viewMToolVersionManagement.MToolVersion.OSPlatformDetailsID);
+        }
     }
 }

@@ -75,7 +75,16 @@
         line-height: 15px;
     }
 </style>
-
+<telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+    <script type="text/javascript" language="javascript">
+        function ConfirmDeleteMToolVersion() {
+            if (confirm('<%= MToolVersionManagement_DeleteMToolVersion_Confirmation %>'))
+                return true;
+            else
+                return false;
+        }
+    </script>
+</telerik:RadCodeBlock>
 <div class="admin_top">
     &nbsp;
 </div>
@@ -210,6 +219,12 @@
                                                     <asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit MToolVersion" AlternateText="Edit"
                                                         ImageUrl="../Images/edit_icon.png" CommandArgument='<%# Eval("OSPlatformDetailsID") %>'
                                                         CommandName="Edit" meta:resourcekey="imgbtnEditResource1" />
+                                                </div>
+                                                <div style="float: left;">
+                                                    <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete MToolVersion" AlternateText="Delete"
+                                                        ImageUrl="../Images/delete_icon.png" OnClientClick="javascript:return ConfirmDeleteMToolVersion();"
+                                                        CommandArgument='<%# Eval("OSPlatformDetailsID") %>' CommandName="Delete" 
+                                                        meta:resourcekey="imgbtnDeleteResource1" />
                                                 </div>
                                                 <div class="clear">
                                                 </div>
