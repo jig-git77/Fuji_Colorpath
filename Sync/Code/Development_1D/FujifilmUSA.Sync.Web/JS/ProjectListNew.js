@@ -70,11 +70,11 @@ $(document).ready(function () {
                         kendo.ui.progress($('#kendoProjectList .k-grid-content'), false);
 
                         $kendoProjectList.find("th[data-field=ProjectName] b").html(Resources.GridTemplateColumnResource3);
-                        $kendoProjectList.find("th[data-field=ProjectName] b").attr("title", Resources.GridTemplateColumnResource3);                        
+                        $kendoProjectList.find("th[data-field=ProjectName] b").attr("title", Resources.GridTemplateColumnResource3);
                         $kendoProjectList.find("th[data-field=SourceProfileName] b").html(Resources.GridTemplateColumnResource4);
-                        $kendoProjectList.find("th[data-field=SourceProfileName] b").attr("title", Resources.GridTemplateColumnResource4);                                                
+                        $kendoProjectList.find("th[data-field=SourceProfileName] b").attr("title", Resources.GridTemplateColumnResource4);
                         $kendoProjectList.find("th[data-field=PrintConditionMedia] b").html(Resources.GridTemplateColumnResource5);
-                        $kendoProjectList.find("th[data-field=PrintConditionMedia] b").attr("title", Resources.GridTemplateColumnResource5);                        
+                        $kendoProjectList.find("th[data-field=PrintConditionMedia] b").attr("title", Resources.GridTemplateColumnResource5);
                         $kendoProjectList.find("th[data-field=CreateDate] b").html(Resources.GridDateTimeColumnResource1);
                         $kendoProjectList.find("th[data-field=CreateDate] b").attr("title", Resources.GridDateTimeColumnResource1);
 
@@ -115,10 +115,10 @@ $(document).ready(function () {
         //scrollable: false,
         resizable: false,
         sortable: true,
-        filterable: true,         
-        toolbar: ["search"],      
+        filterable: true,
+        toolbar: ["search"],
         search: {
-            fields: ["ProjectName", "SourceProfileName", "PrintConditionMedia","CreateDate"]
+            fields: ["ProjectName", "SourceProfileName", "PrintConditionMedia", "CreateDate"]
         },
         pageable: {
             refresh: true,
@@ -127,7 +127,7 @@ $(document).ready(function () {
         },
         noRecords: {
             template: ''
-        },        
+        },
         dataBound: function (e) {
 
             var projectTypeImagePath = '';
@@ -136,15 +136,41 @@ $(document).ready(function () {
             var projectTypeTooltip = '';
             var dataSource = this.dataSource;
             var showSpotProject = false;
+            var showSpotButtonEnableProject = false;
             var projectTypeImageTitle = '';
             this.element.find('tr[data-uid]').each(function () {
                 var row = $(this);
                 var data = dataSource.getByUid(row.data('uid'));
-                if (!(data.Status === EOptimizeRunStatus.Certify && data.LicenseType === ELicenseType.DLP && data.HasSpotProject === true)) {
-                    showSpotProject = false;
-                }
-                else { showSpotProject = true; }
+                //if (!(data.Status === EOptimizeRunStatus.Certify && data.LicenseType === ELicenseType.DLP && data.HasSpotProject === true)) {
+                //    showSpotProject = false;
 
+                //}
+                //else { showSpotProject = true; }
+
+                if (data.LicenseType == ELicenseType.DLP && data.Status == EOptimizeRunStatus.Certify && data.HasSpotProject == true) {
+                    showSpotProject = true;//BUTON VISIBLE
+                    showSpotButtonEnableProject = true; //BUTTON ENABLE 
+                }
+                else if (data.LicenseType == ELicenseType.DLP && data.Status != EOptimizeRunStatus.Certify && data.HasSpotProject == true) {
+                    showSpotProject = true;//BUTON VISIBLE
+                    showSpotButtonEnableProject = false; //BUTTON DISABLE
+                }
+                else if (data.LicenseType == ELicenseType.DLP && data.Status == EOptimizeRunStatus.Certify && data.HasSpotProject == false) {
+                    showSpotProject = false;//BUTON NOT VISIBLE
+                    showSpotButtonEnableProject = false; //BUTTON DISABLE
+                }
+                else if (data.LicenseType == ELicenseType.DLP && data.Status != EOptimizeRunStatus.Certify && data.HasSpotProject == false) {
+                    showSpotProject = false;//BUTON NOT VISIBLE
+                    showSpotButtonEnableProject = false; //BUTTON DISABLE
+                }
+                else if (data.LicenseType != ELicenseType.DLP) {
+                    showSpotProject = false;//BUTON NOT VISIBLE
+                    showSpotButtonEnableProject = false; //BUTTON DISABLE
+                }
+                else {
+                    showSpotProject = false;
+                    showSpotButtonEnableProject = false; //BUTTON DISABLE
+                }
 
                 //set project type image
                 switch (data.Status) {
@@ -257,7 +283,7 @@ $(document).ready(function () {
                 //set project validation image
                 switch (data.ValidationStatus) {
                     case EValidationStatus.NotCertified:
-                        projectValidationImagePath = 'Images/Validation_Not_Certified.png';                        
+                        projectValidationImagePath = 'Images/Validation_Not_Certified.png';
                         row.find("td #lnkValidationIcon").attr('onclick', '');
                         row.find("td #lnkValidationIcon").removeClass("linktbutton");  //set the project validation button disabled/enable class
                         row.find("td #lnkValidationIcon").addClass("linktbuttonDisabled");  //set the project validation button disabled/enable class
@@ -305,25 +331,43 @@ $(document).ready(function () {
                     row.find("td #lnkValidationIcon").attr('title', projectValidationTooltip);   //set the project validation tooltip
                     row.find("td #lnkValidationIcon").show();  //set the project validation visibility
                 }
-                if (showSpotProject == true) {                    
-                    //row.find("td #lnkSpotProjectIcon").show();  //set the project validation visibility
-                    row.find("td #lnkSpotProjectIcon").attr("onclick", "javascript: return OpenSpotProjectListWindow('" + data.ProjectId + "','" + data.ProjectName + "')");                   
-                    row.find("td #lnkSpotProjectIcon").addClass("linktbutton");  //set the Spotproject button disabled/enable class
-                    row.find("td #lnkSpotProjectIcon").removeClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
-                    row.find("td #lnkSpotProjectIcon").attr('title', Resources.ProjectList_BcoEnableButtonToolTip); //set the spotproject tooltip
-                    row.find("td #imgprojectBCO").attr('title', Resources.ProjectList_BcoEnableButtonToolTip);   //set the spotproject tooltip
-                }
-                else {                    
-                    //row.find("td #lnkSpotProjectIcon").hide();  //set the project validation visibility
-                    row.find("td #lnkSpotProjectIcon").attr('onclick', '');
-                    row.find("td #lnkSpotProjectIcon").addClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
-                    row.find("td #lnkSpotProjectIcon").removeClass("linktbutton");  //set the Spotproject button disabled/enable class
+                if (showSpotProject == true) {
+                    row.find("td #lnkSpotProjectIcon").show();
                     row.find("td #lnkSpotProjectIcon").attr('title', Resources.ProjectList_BcoButtonToolTip); //set the spotproject tooltip
                     row.find("td #imgprojectBCO").attr('title', Resources.ProjectList_BcoButtonToolTip);   //set the spotproject tooltip
-                    if (data.LicenseType != ELicenseType.DLP) {
-                        row.find("td #lnkSpotProjectIcon").hide();  //set Spot Project button hide if DLP is not project
+                    if (showSpotButtonEnableProject == true) {                        
+                        row.find("td #lnkSpotProjectIcon").attr("onclick", "javascript: return OpenSpotProjectListWindow('" + data.ProjectId + "','" + data.ProjectName + "')");
+                        row.find("td #lnkSpotProjectIcon").addClass("linktbutton");  //set the Spotproject button disabled/enable class
+                        row.find("td #lnkSpotProjectIcon").removeClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
+                    }
+                    if (showSpotButtonEnableProject == false) {
+                        row.find("td #lnkSpotProjectIcon").attr('onclick', '');
+                        row.find("td #lnkSpotProjectIcon").addClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
+                        row.find("td #lnkSpotProjectIcon").removeClass("linktbutton");  //set the Spotproject button disabled/enable class
                     }
                 }
+                else {
+                    row.find("td #lnkSpotProjectIcon").hide();  //set Spot Project button hide if DLP is not project
+                }
+                //if (showSpotProject == true) {
+                //    //row.find("td #lnkSpotProjectIcon").show();  //set the project validation visibility
+                //    row.find("td #lnkSpotProjectIcon").attr("onclick", "javascript: return OpenSpotProjectListWindow('" + data.ProjectId + "','" + data.ProjectName + "')");
+                //    row.find("td #lnkSpotProjectIcon").addClass("linktbutton");  //set the Spotproject button disabled/enable class
+                //    row.find("td #lnkSpotProjectIcon").removeClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
+                //    row.find("td #lnkSpotProjectIcon").attr('title', Resources.ProjectList_BcoEnableButtonToolTip); //set the spotproject tooltip
+                //    row.find("td #imgprojectBCO").attr('title', Resources.ProjectList_BcoEnableButtonToolTip);   //set the spotproject tooltip
+                //}
+                //else {
+                //    //row.find("td #lnkSpotProjectIcon").hide();  //set the project validation visibility
+                //    row.find("td #lnkSpotProjectIcon").attr('onclick', '');
+                //    row.find("td #lnkSpotProjectIcon").addClass("linktbuttonDisabled");  //set the Spotproject button disabled/enable class
+                //    row.find("td #lnkSpotProjectIcon").removeClass("linktbutton");  //set the Spotproject button disabled/enable class
+                //    row.find("td #lnkSpotProjectIcon").attr('title', Resources.ProjectList_BcoButtonToolTip); //set the spotproject tooltip
+                //    row.find("td #imgprojectBCO").attr('title', Resources.ProjectList_BcoButtonToolTip);   //set the spotproject tooltip
+                //    if (data.LicenseType != ELicenseType.DLP) {
+                //        row.find("td #lnkSpotProjectIcon").hide();  //set Spot Project button hide if DLP is not project
+                //    }
+                //}
 
                 switch (data.Status) {
                     case EOptimizeRunStatus.Open:
@@ -351,13 +395,15 @@ $(document).ready(function () {
                 projectValidationImagePath = '';
                 projectValidationTooltip = '';
                 projectTypeTooltip = '';
-                projectTypeImageTitle = '';    
+                projectTypeImageTitle = '';
                 showSpotProject = false;
+                showSpotButtonEnableProject = false;
+
             });
-            
+
         },
-        
-        columns: [          
+
+        columns: [
             {
                 template: kendo.template($("#licenseType-printName-template").html()),
                 field: "ProjectName",
@@ -381,7 +427,7 @@ $(document).ready(function () {
                 field: "PrintConditionMedia",
                 title: "<b title='Click here to sort'></b>",
                 width: 25,
-                filterable: false,                
+                filterable: false,
                 attributes: {
                     //style: "word-break: break-all;"
                 }
@@ -397,7 +443,7 @@ $(document).ready(function () {
             },
             {
                 filterable: false,
-                title: "",                
+                title: "",
                 template: "<center><a id='lnkDeleteProject' title='Delete Project' onclick='return deleteProject(#=id#);'><img id='imgspotProject' src='Images/delete_icon.png' style='width: 15px;'></img></a></center>",
                 width: 10
             }
@@ -468,8 +514,8 @@ $(document).ready(function () {
         window.location.href = locationpath;
     });
 
-    $('.k-textbox input').on("keydown",function (e) {
-      
+    $('.k-textbox input').on("keydown", function (e) {
+
         if (e.keyCode == 13) {
             e.preventDefault();
             return false;
