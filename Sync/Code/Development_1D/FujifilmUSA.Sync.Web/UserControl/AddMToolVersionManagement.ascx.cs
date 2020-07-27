@@ -48,6 +48,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 short _OSPlatformDetailsID;
                 if (Int16.TryParse(id, out _OSPlatformDetailsID))
                 {
+                    cmbOSPlatForm.Enabled = false;
                     SetMToolVerion(_OSPlatformDetailsID);
                     lblHeader.Text = "Edit MTool Version";
                 }
