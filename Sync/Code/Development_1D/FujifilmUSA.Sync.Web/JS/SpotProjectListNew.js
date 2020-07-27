@@ -123,17 +123,17 @@ $(document).ready(function () {
             });
 
             //  enable/disabled button as per spot project limit            
-            var spotProjectAllowed = hdfSpotProjectAllowed.val() == 'true';
+            var spotProjectAllowed = hdfSpotProjectAllowed.val() == 'true';           
+            if (dataSource._data.length == 0) {
+               // $("<%= btnExportSpotProject.ClientID %>").hide();                
+                $("#ContentPlaceHolder1_ucSpotProjectList_btnExportSpotProject").hide();                
+            }
             if (!spotProjectAllowed) {
-                $("<%= btnCreateSpotProject.ClientID %>").hide();
-                if (dataSource._data.length == 0) {
-                    $("<%= btnExportSpotProject.ClientID %>").hide();
-                }
+                //$("<%= btnCreateSpotProject.ClientID %>").hide();
+                $("#ContentPlaceHolder1_ucSpotProjectList_btnCreateSpotProject").hide();               
             } else {
-                $("<%= btnCreateSpotProject.ClientID %>").hide();
-                if (dataSource._data.length == 0) {
-                    $("<%= btnExportSpotProject.ClientID %>").hide();
-                }
+                //$("<%= btnCreateSpotProject.ClientID %>").hide();
+                $("#ContentPlaceHolder1_ucSpotProjectList_btnCreateSpotProject").show();
             }
 
         },
