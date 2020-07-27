@@ -113,6 +113,7 @@ namespace FujifilmUSA.Sync.DataAccess
         {
 
             var command = Database.GetStoredProcCommand(procName, parameters);
+            command.CommandTimeout = 600;//600 Second // 10 min
             return Database.ExecuteNonQuery(command);
         }
 
@@ -121,6 +122,7 @@ namespace FujifilmUSA.Sync.DataAccess
             var command = Database.GetStoredProcCommand(procName);
             inParameters.ForEach(x => Database.AddInParameter(command, x.ParameterName, x.Type, x.Value));
             outParameters.ForEach(x => Database.AddOutParameter(command, x.ParameterName, x.Type, x.Size));
+            command.CommandTimeout = 600;//600 Second // 10 min.
             Database.ExecuteNonQuery(command);
             outParameters.ForEach(x => x.Value = Database.GetParameterValue(command, x.ParameterName));
             return outParameters;
