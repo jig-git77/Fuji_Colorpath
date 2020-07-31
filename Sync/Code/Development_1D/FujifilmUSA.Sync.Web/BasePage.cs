@@ -301,6 +301,13 @@ namespace FujifilmUSA.Sync.Web
                     NavigationToNoPermissionPage();
                 }
             }
+            else if (GetType().BaseType == typeof(MToolVersionManagement))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMToolVersion))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
             else if (GetType().BaseType == typeof(AddMToolVersionManagement))
             {
                 if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMToolVersion))
@@ -308,6 +315,7 @@ namespace FujifilmUSA.Sync.Web
                     NavigationToNoPermissionPage();
                 }
             }
+          
 
             #endregion
             #region Regular Pages
