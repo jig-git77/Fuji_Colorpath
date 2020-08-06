@@ -1,4 +1,4 @@
-USE [ColorPathSync_Stage]
+
 GO
 
 /****** Object:  Table [CP].[MTool_OSPlatform]    Script Date: 7/13/2020 6:37:47 PM ******/
@@ -19,7 +19,7 @@ CREATE TABLE [CP].[MTool_OSPlatform](
 GO
 
 
-USE [ColorPathSync_Stage]
+
 GO
 
 /****** Object:  Table [CP].[MTool_OSPlatformDetails]    Script Date: 7/13/2020 6:38:03 PM ******/
@@ -57,7 +57,7 @@ GO
 
 
 /***************Fill look up data**************/
-USE [ColorPathSync_Stage]
+
 GO
 
 INSERT INTO [CP].[MTool_OSPlatform]
@@ -77,6 +77,14 @@ INSERT INTO [CP].[MTool_OSPlatform]
 GO
 
 
+INSERT INTO [CP].[MTool_OSPlatform]
+           ([OSPlatformID]
+           ,[OSPlatformName])
+     VALUES
+           (3
+           ,'Mac Test')
+GO
+
 
 INSERT INTO [CP].[MTool_OSPlatformDetails]
            ([OSPlatformDetailsID]
@@ -88,15 +96,32 @@ INSERT INTO [CP].[MTool_OSPlatformDetails]
      VALUES
            (1
            ,1
-           ,'1.2.1'
-           ,'1.2'
-           ,'No value'
+           ,'1.15'
+           ,'1.14'
+           ,'http://stage.colorpathsync.com/Download/MTool/measure_10_14.dmg'
+           ,'More Details will come later')
+GO
+
+
+INSERT INTO [CP].[MTool_OSPlatformDetails]
+           ([OSPlatformDetailsID]
+           ,[OSPlatformID]
+           ,[LatestVersion]
+           ,[MinReqVersion]
+           ,[URLlocation]
+           ,[UpdateInfo])
+     VALUES
+           (1
+           ,3
+           ,'1.15'
+           ,'1.14'
+           ,'http://stage.colorpathsync.com/Download/MTool/measure_10_14_d.dmg'
            ,'More Details will come later')
 GO
 
 
 /*********** StoredProcedure [CP].[CheckMToolVersionUpdateStatus] ********/
-USE [ColorPathSync_Stage]
+
 GO
 /****** Object:  StoredProcedure [CP].[CheckMToolVersionUpdateStatus]    Script Date: 7/14/2020 10:12:10 AM ******/
 SET ANSI_NULLS ON
