@@ -3122,16 +3122,17 @@ function PopulateInkPaperChartABComparision() {
         },
         tooltip: {
             visible: true,
-            //template: "#= dataItem.title # <br/> Actual L: *#= dataItem.CielabL # a: *#= dataItem.CielabA # b: *#= dataItem.CielabB # <br/>Target L: *#= dataItem.TargetL # a: *#= dataItem.Targeta # b: *#= dataItem.Targetb # <br/>E:   #= value # (Thr.0.00)"
-            //template: "<b>#= dataItem.title #</b> <br/> " + _Resources._recActual + " :    #= dataItem.density # <br/>" + _Resources._recTarget + " :    #= dataItem.densityLimit # <br/>" + _Resources._recPrevious + " :    #= dataItem.preAvgDensity #"
             template: function (e) {
                 var item = e.dataItem;
-                var tooltipString = "<b>" + item.title + "</b><br/>";
-                tooltipString += "<b>" + _Resources._recActual + ":</b> " + item.density.toFixed(2) + "<br/>";
-                tooltipString += "<b>" + _Resources._recTarget + ":</b> " + item.densityLimit.toFixed(2) + "<br/>";
+                
+                tooltipString = '<table><tr><td><center><b>' + item.title + '</b></center><td></tr>';
+                tooltipString += '<tr><td>' + _Resources._recActual + ":</b> " + item.density.toFixed(2) + '</td></tr>';
+                tooltipString += '<tr><td>' + _Resources._recTarget + ":</b> " + item.densityLimit.toFixed(2) + '</td></tr>';
                 if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D && item.preAvgDensity > 0) {
-                    tooltipString += "<b>" + _Resources._recPrevious + ":</b> " + item.preAvgDensity.toFixed(2);
+                    tooltipString += '<tr><td>' + _Resources._recPrevious + ":</b> " + item.preAvgDensity.toFixed(2) + '</td></tr>';
                 }
+                tooltipString += '</table>';
+
                 return tooltipString;
             }
         },
