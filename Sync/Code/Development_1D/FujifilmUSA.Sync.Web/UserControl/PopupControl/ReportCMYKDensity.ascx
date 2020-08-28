@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ReportCMYKDensity.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.PopupControl.ReportCMYKDensity" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
-<script src="JQuery/jquery-1.9.1.min.js"></script>
+<%--<script src="JQuery/jquery-1.9.1.min.js"></script>--%>
+<script src="JQuery/jquery-3.5.1.min.js"></script>
 <link href="Content/kendo/2020.2.617/kendo.common.min.css" rel="stylesheet" />
 <link href="Content/kendo/2020.2.617/kendo.default.min.css" rel="stylesheet" />
 <script src="Scripts/kendo/2020.2.617/kendo.all.min.js" type="text/javascript"></script>

@@ -1116,7 +1116,7 @@
     <Content Include="Content\kendo\2020.2.617\Uniform\sprite_kpi.png" />
     <Content Include="Content\kendo\2020.2.617\Uniform\sprite_kpi_2x.png" />
     <Content Include="COProjectMaxLimit.aspx" />
-    <Content Include="COTestIFramePage.html" />
+    <Content Include="COXMFTestPage.html" />
     <Content Include="COTransferSiteControl.aspx" />
     <Content Include="COValidationCallback.aspx" />
     <Content Include="COValidationSetup.aspx" />
@@ -1283,6 +1283,7 @@
     <Content Include="Images\VStatusSuccessIcon.png" />
     <Content Include="InkOptSourceMiddle.aspx" />
     <Content Include="JQuery\jquery-1.9.1.min.js" />
+    <Content Include="JQuery\jquery-3.5.1.min.js" />
     <Content Include="JQuery\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="JQuery\numeric.js" />
     <Content Include="JQuery\progressbar.js" />
@@ -1328,7 +1329,9 @@
     <Content Include="ReferenceChartManagement.aspx" />
     <Content Include="ReportSingleMeasurement.aspx" />
     <Content Include="ReportSingleMeasurement_G7_Vali.aspx" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\kendo\2018.1.221\kendo.uniform.mobile.min.css.map" />
     <Content Include="Content\kendo\2018.1.221\kendo.uniform.min.css.map" />
     <Content Include="Content\kendo\2018.1.221\kendo.silver.mobile.min.css.map" />
@@ -9258,7 +9261,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
