@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Entity
         public decimal NewPaper_Black_L { get; set; }
         public decimal NewPaper_Black_a { get; set; }
         public decimal NewPaper_Black_b { get; set; }
-
+        public short RunStatus { get; set; }
     }
 
     public class MeasurementSettingApp

@@ -1292,6 +1292,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 //    Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + user.ReferenceChartData.MeasureDeviceSrNo);
                                 var UVMode = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "UVMode");
                                 var DensityType = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "DensityType");
+                                user.RunStatus = DataReader.ReadShort(dsUser.Tables[3].Rows[0], "RunStatus");
 
                                 user.MeasurementSettings = new MeasurementSettingApp()
                                 {
@@ -1391,6 +1392,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 //  Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + user.ReferenceChartData.MeasureDeviceSrNo);
                                 var UVMode = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "UVMode");
                                 var DensityType = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "DensityType");
+                                user.RunStatus = DataReader.ReadShort(dsUser.Tables[3].Rows[0], "RunStatus");
 
                                 user.MeasurementSettings = new MeasurementSettingApp()
                                 {
