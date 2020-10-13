@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Common
         }
         public ExtendedWebClient(Uri address)
         {
-            this.timeout = 900000;//In Milli seconds
+            this.timeout = 300000;//In Milli seconds - 5 minutes duration
             var objWebClient = GetWebRequest(address);
         }
         protected override WebRequest GetWebRequest(Uri address)
