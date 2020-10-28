@@ -144,13 +144,4 @@
   <data name="locSourceProfileResource1.Text" xml:space="preserve">
     <value>Source Profile</value>
   </data>
-  <data name="locSourceProfileResource1.ToolTip" xml:space="preserve">
-    <value>Source Profile</value>
-  </data>
-  <data name="txtPrintStandardTypeResource1.Text" xml:space="preserve">
-    <value>Print Standard Name</value>
-  </data>
-  <data name="txtPrintStandardTypeResource1.ToolTip" xml:space="preserve">
-    <value>Print Standard Name</value>
-  </data>
 </root>
