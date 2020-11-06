@@ -257,10 +257,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Coating = txtCoating.Text.Trim()
             };
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary && SessionManager.Instance.CurrentProject.SpotTargetProject != null)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
+            {
+                if (SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition != null) //If it is existing Spot Target Project, then pass values from session
+                {
+                    PrintConditionObject.IsCustomPlugin = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.IsCustomPlugin;
+                    PrintConditionObject.IsCustomProfilerOption = SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition.IsCustomProfilerOption;
+                }
                 SessionManager.Instance.CurrentProject.SpotTargetProject.PrintCondition = PrintConditionObject;
+            }
             else
+            {
+                if (SessionManager.Instance.CurrentProject.PrintCondition != null)  //If it is existing Project, then pass values from session
+                {
+                    PrintConditionObject.IsCustomProfilerOption = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomProfilerOption;
+                    PrintConditionObject.IsCustomPlugin = SessionManager.Instance.CurrentProject.PrintCondition.IsCustomPlugin;
+                }
                 SessionManager.Instance.CurrentProject.PrintCondition = PrintConditionObject;
+            }
 
             SessionManager.Instance.CurrentProject.LicenseType = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
             if ((ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.CustomSourceProfile || (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value) == ELicenseType.FullGamutCustomSource)
