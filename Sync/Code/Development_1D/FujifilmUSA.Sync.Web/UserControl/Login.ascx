@@ -139,15 +139,15 @@
             browserName = "Firefox";
             fullVersionName = navigatorAgent.substring(verOffset + 8);
 
-            if (fullVersionName > 53) {
+            //if (fullVersionName > 53) {
 
-                //if (PluginVersion == "") { //-----If Pluginversion is null means this browser version not supporting NPAPI plugin, give option to open pop up for more details----//
-                    //var r = confirm("This version of FireFox does not support the FujiFilm Measurement Plugin!\n\nPress OK for More Details or Cancel to Exit.");
-                    //if (r == true) {
-                    //    document.location.href = 'FireFoxPluginDetails.aspx';
-                    //}
-                    $('#dialog-confirm').dialog('open');
-                 //  }
+            //    //if (PluginVersion == "") { //-----If Pluginversion is null means this browser version not supporting NPAPI plugin, give option to open pop up for more details----//
+            //        //var r = confirm("This version of FireFox does not support the FujiFilm Measurement Plugin!\n\nPress OK for More Details or Cancel to Exit.");
+            //        //if (r == true) {
+            //        //    document.location.href = 'FireFoxPluginDetails.aspx';
+            //        //}
+            //        $('#dialog-confirm').dialog('open');
+            //     //  }
             }
         }
         // In MSIE, the true version is after "MSIE" in userAgent
@@ -174,12 +174,10 @@
         else if ((verOffset = navigatorAgent.indexOf("Safari")) != -1) {
             browserName = "Safari";
             fullVersionName = navigatorAgent.substring(navigatorAgent.indexOf("Version") + 8, verOffset);            
-            //fullVersionName = navigatorAgent.substring(verOffset + 7);
-            //if ((verOffset = navigatorAgent.indexOf("Version")) != -1)
-            //    fullVersionName = navigatorAgent.substring(verOffset + 8);
-            if (parseFloat(fullVersionName.trim()) >= 12) { //this browser version not supporting NPAPI plugin, give option to open pop up for more details----//
-                $('#dialog-confirm-safari').dialog('open');
-            }
+
+            //if (parseFloat(fullVersionName.trim()) >= 12) { //this browser version not supporting NPAPI plugin, give option to open pop up for more details----//
+            //    $('#dialog-confirm-safari').dialog('open');
+            //}
         }
 
         // In most other browsers, "name/version" is at the end of userAgent 

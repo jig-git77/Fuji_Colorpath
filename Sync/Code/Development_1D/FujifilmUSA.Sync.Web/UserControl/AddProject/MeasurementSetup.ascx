@@ -64,7 +64,7 @@
             if (fullVersionName > 53) {                
                 $("#rbtnMeasurementType input[value='Plugin']").prop('disabled',true)
                 $("#rbtnMeasurementType input[value='Application']").prop('checked', true);
-                $('#dialog-confirm').dialog('open');                
+                //$('#dialog-confirm').dialog('open');                
             }
         }
         // In Safari, the true version is after "Safari" or after "Version" 
@@ -74,7 +74,7 @@
             if (parseFloat(fullVersionName.trim()) >= 12) { //this browser version not supporting NPAPI plugin, give option to open pop up for more details----//
                 $("#rbtnMeasurementType input[value='Plugin']").prop('disabled',true)
                 $("#rbtnMeasurementType input[value='Application']").prop('checked', true);
-                $('#dialog-confirm-safari').dialog('open');
+                //$('#dialog-confirm-safari').dialog('open');
             }
         }
     });
