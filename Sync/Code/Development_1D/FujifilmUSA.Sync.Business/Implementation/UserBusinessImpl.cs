@@ -1293,6 +1293,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 var UVMode = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "UVMode");
                                 var DensityType = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "DensityType");
                                 user.RunStatus = DataReader.ReadShort(dsUser.Tables[3].Rows[0], "RunStatus");
+                                user.RunName = DataReader.ReadString(dsUser.Tables[3].Rows[0], "RunName");
 
                                 user.MeasurementSettings = new MeasurementSettingApp()
                                 {
@@ -1393,6 +1394,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 var UVMode = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "UVMode");
                                 var DensityType = DataReader.ReadShort(dsUser.Tables[1].Rows[0], "DensityType");
                                 user.RunStatus = DataReader.ReadShort(dsUser.Tables[3].Rows[0], "RunStatus");
+                                user.RunName = DataReader.ReadString(dsUser.Tables[3].Rows[0], "RunName");
 
                                 user.MeasurementSettings = new MeasurementSettingApp()
                                 {

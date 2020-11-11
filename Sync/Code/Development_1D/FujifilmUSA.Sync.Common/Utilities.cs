@@ -493,17 +493,17 @@ namespace FujifilmUSA.Sync.Common
         {
             string requestURL = string.Empty;
             requestURL = string.Concat(ReadConfigValue("BaseProfilerSericeURL"), "api/Profiler/", callerMethod);
+            Uri requestURI = new Uri(requestURL);
             var responseContent = "";
-            using (var webClient = new WebClient())
+            //using (var webClient = new WebClient())
+            using (var webClient = new ExtendedWebClient(requestURI)) //-----Placed this line to call service for allowing bigger DLP excetion time like 2 minutes or more
             {
                 webClient.Headers.Add("Content-Type", "text/json");
                 webClient.Headers.Add("Authorization", string.Format("{0} {1}", "Basic", EncryptProfilerClient()));
                 if (profilerRequestCall == ProfilerRequestCall.HttpPost)
                 {
-
                     var requestContent = JsonConvert.SerializeObject(request);
                     responseContent = webClient.UploadString(requestURL, "POST", requestContent);
-
                 }
                 else if (profilerRequestCall == ProfilerRequestCall.HttpGet)
                 {
@@ -511,8 +511,8 @@ namespace FujifilmUSA.Sync.Common
                 }
                 return JsonConvert.DeserializeObject<T>(responseContent);
             }
-
         }
+   
         public enum ProfilerCallMethod
         {
             Ping,
