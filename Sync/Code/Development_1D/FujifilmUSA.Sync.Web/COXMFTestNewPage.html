@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+    <title>Color Organizer IFrame Test NEW FF Browser</title>
+    <script type="text/javascript">
+        $(function () {
+            $('#button').click(function () {
+                var url = $("#txtURL").val();
+                $("#lblURL").html($("#txtURL").val());
+                if (!$('#iframe').length) {
+                    $('#iframeHolder').html('<iframe id="iframe" src="' + url + '" width="700" height="450"></iframe>');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <button id="button">Click me..!</button>
+    <input type="text" id="txtURL" width="400" height="200" value="https://stage.colorpathsync.com/COProcessRequest.ashx?action=add&uid=vuke2@wowway.com&pwd=eldMZqS+WzXU0VaVZfIY0A==&projinfoid=e1b792ee-d30d-4e67-ade2-f24890e0d38f&deviceid=329" />
+    <br />
+    <label><b>Below  sample URL</b></label>
+    <br />
+    <br />
+    <label>https://stage.colorpathsync.com/COProcessRequest.ashx?action=add&uid=vuke2@wowway.com&pwd=eldMZqS+WzXU0VaVZfIY0A==&projinfoid=e1b792ee-d30d-4e67-ade2-f24890e0d38f&deviceid=329</label>
+    <br />
+    <br />
+    <label><b>Below  URL in iframe</b></label>
+    <br />
+    <br />
+    <label id="lblURL"></label>
+    <br />
+    <br />
+    <div id="iframeHolder"></div>
+</body>
+</html>
