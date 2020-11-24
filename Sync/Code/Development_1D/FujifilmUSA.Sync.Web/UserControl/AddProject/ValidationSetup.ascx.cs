@@ -254,7 +254,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     }
                 }
 
-                if (SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.HasValue && SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.Value > 0)
+                if (EnableValidationValue == true && SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.HasValue && SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.Value > 0)
                     cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.Value.ToString();
                 else
                     cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId.ToString();
