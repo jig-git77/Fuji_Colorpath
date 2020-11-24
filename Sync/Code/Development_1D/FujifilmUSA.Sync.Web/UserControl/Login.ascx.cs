@@ -75,15 +75,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (chkRememberMe.Checked == true)
                     {
                         var objCookie = new HttpCookie("SyncFujiLogin") { Value = txtUserName.Text, Expires = System.DateTime.Now.AddDays(20) };
+                        //objCookie.Secure = true;
+                        //objCookie.HttpOnly = false;
+                        //objCookie.SameSite = SameSiteMode.None;
                         Response.SetCookie(objCookie);
 
                         objCookie = new HttpCookie("SyncFujiPass") { Value = Password, Expires = System.DateTime.Now.AddDays(20) };
+                        //objCookie.Secure = true;
+                        //objCookie.HttpOnly = false;
+                        //objCookie.SameSite = SameSiteMode.None;
                         Response.SetCookie(objCookie);                        
                     }
                     else
                     {
                         Response.Cookies["SyncFujiLogin"].Value = "";
-                        Response.Cookies["SyncFujiPass"].Value = "";                        
+                        //Response.Cookies["SyncFujiLogin"].HttpOnly = false;
+                        Response.Cookies["SyncFujiPass"].Value = "";
+                        //Response.Cookies["SyncFujiLogin"].HttpOnly = false;
                     }
                     if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageCustomReports))
                     {
