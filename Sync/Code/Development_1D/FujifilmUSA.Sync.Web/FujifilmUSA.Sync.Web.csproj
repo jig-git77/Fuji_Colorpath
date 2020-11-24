@@ -1116,6 +1116,7 @@
     <Content Include="Content\kendo\2020.2.617\Uniform\sprite_kpi.png" />
     <Content Include="Content\kendo\2020.2.617\Uniform\sprite_kpi_2x.png" />
     <Content Include="COProjectMaxLimit.aspx" />
+    <Content Include="COXMFTestNewPage.html" />
     <Content Include="COXMFTestPage.html" />
     <Content Include="COTransferSiteControl.aspx" />
     <Content Include="COValidationCallback.aspx" />
@@ -1780,9 +1781,6 @@
     <Content Include="Content\kendo\2018.1.221-source\mobile\android\all.less" />
     <Content Include="Content\kendo\2018.1.221-source\mobile\android\actionsheet.less" />
     <Content Include="Content\kendo\2018.1.221-source\common\transitions.less" />
-    <Content Include="Download\Firefox Setup 52.9.0esr de.zip" />
-    <Content Include="Download\Firefox Setup 52.9.0esr ja.zip" />
-    <Content Include="Download\Firefox Setup 52.9.0esr.zip" />
     <Content Include="ReportMaster.Master" />
     <Content Include="Content\kendo\2020.2.617\fonts\DejaVu\DejaVuSans-Bold.ttf" />
     <Content Include="Content\kendo\2020.2.617\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
