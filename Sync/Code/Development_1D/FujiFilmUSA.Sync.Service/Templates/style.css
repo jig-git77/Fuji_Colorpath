@@ -349,10 +349,10 @@ tr._idGenTableRowColumn-4 {
 }
 tr._idGenTableRowColumn-5 {
 	background-color:#b6ddc7;
-	min-height:18px;
+	min-height:36px;
 }
 tr._idGenTableRowColumn-6 {
-	min-height:18px;
+	min-height:36px;
 }
 col._idGenTableRowColumn-7 {
 	width:79px;
@@ -384,11 +384,11 @@ col._idGenTableRowColumn-15 {
 }
 tr._idGenTableRowColumn-title {
 	background-color:#22af7c;
-	min-height:18px;
+	min-height:27px;
 }
 tr._idGenTableRowColumn-title-black {
 	background-color:#000000;
-	min-height:20px;
+	min-height:27px;
 }
 
 #_idContainer000 {
@@ -404,9 +404,11 @@ tr._idGenTableRowColumn-title-black {
 }
 #_idContainer018 {
 	display:inline-block;
-	height:65px;
+	height:140px;
 	width:164px;
+
 }
+
 #_idContainer019 {
 	display:inline-block;
 	height:148px;
@@ -516,9 +518,4 @@ td.Gray
     background: url('../Images/LabBackdrop.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-}
-
-.divRight {
-    float: right;
-    width: 50%;
 }

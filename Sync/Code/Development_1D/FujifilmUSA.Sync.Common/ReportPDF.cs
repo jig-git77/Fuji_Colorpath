@@ -21,6 +21,7 @@ namespace FujifilmUSA.Sync.Common
         string _PDFPath;
         string _PDF_NAME;
         string CSSPath = "";
+        string IMAGEPath = "";
         int theCount = 0;
         private DataSet _DS_Common;
         private DataSet _DS_MetricAvgScoring;
@@ -147,8 +148,8 @@ namespace FujifilmUSA.Sync.Common
                                   System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
 
             CSSPath = currentBaseUrl + "Templates/style.css";
+            IMAGEPath = currentBaseUrl + "Images/";
 
-            //CSSPath = System.Web.HttpContext.Current.Server.MapPath("Templates/style.css");
             DS_Common = new DataSet();
         }
         #endregion
@@ -264,7 +265,8 @@ namespace FujifilmUSA.Sync.Common
                     {
                         str = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"> " +
                        "<tr style=\"height:52px\"><td align=\"left\" valign=\"middle\" bgcolor=\"#22af7c\" style=\"color:#000000; font-size:10px; font-family: Arial; padding: 0 0 0 50px; \" width=\"218px\" >" + DateTime.Now.ToLongDateString() + "</td> " +
-                       "<td width=\"443px\" align=\"right\" valign=\"middle\" bgcolor=\"#b5ddc6\" style=\"color:#000000; font-size:10px; font-family: Arial; \">© Fujifilm North America Corporation, Graphic Systems Division " + " </td></tr></table>";
+                       "<td width=\"443px\" align=\"right\" valign=\"middle\" bgcolor=\"#b5ddc6\" style=\"color:#000000; font-size:10px; font-family: Arial; \">" +
+                       "<span style = \"padding-right:50px; \">© Fujifilm North America Corporation, Graphic Systems Division " + "</span> </td></tr></table>";
 
                     }
                     else
@@ -322,8 +324,7 @@ namespace FujifilmUSA.Sync.Common
                 theCount++;
 
                 string FileName = "Templates/kendoPrepressSingleMeasurement.htm";
-                //CSSPath = this.BaseWebURL + "Templates/style.css";
-                CSSPath = strServerStyleSheet;
+
                 if (ReportType == 16) //----For G7 Opti / Validation Report + 4D G7 validation report
                 {
                     FileName = "Templates/kendoPrepressSingleMeasurement_G7.htm";
@@ -345,14 +346,12 @@ namespace FujifilmUSA.Sync.Common
                     FileName = "Templates/kendoPrepressSingleMeasurement_SpotProject.htm";
                 }
 
-                //string FilePath = this._WebURL + FileName;
                 string FilePath = System.Web.Hosting.HostingEnvironment.MapPath("~/" + FileName);// System.Web.HttpContext.Current.Server.MapPath(FileName);
 
                 if (FilePath.Trim() == "")
                 {
                     throw new Exception("Please Enter Report Type.");
                 }
-
 
 
                 ////========== The rectangle for the content on pdf ==========//
@@ -366,9 +365,6 @@ namespace FujifilmUSA.Sync.Common
                 //int theID;
 
                 //========== Reads the template ==========//
-                //var webClient = new System.Net.WebClient();
-                //StringBuilder SBStr = new StringBuilder(webClient.DownloadString(FilePath));
-
                 fp = File.OpenText(FilePath);
                 StringBuilder SBStr = new StringBuilder(fp.ReadToEnd());
                 fp.Close();
@@ -377,6 +373,7 @@ namespace FujifilmUSA.Sync.Common
                 theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
                 theDoc.Rect.Inset(0, 1);
 
+               
                 while (true)
                 {
                     //========== Create A chanin for a pdf with multiple page ==========//
@@ -410,7 +407,8 @@ namespace FujifilmUSA.Sync.Common
                     {
                         str = "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"> " +
                        "<tr style=\"height:52px\"><td align=\"left\" valign=\"middle\" bgcolor=\"#22af7c\" style=\"color:#000000; font-size:10px; font-family: Arial; padding: 0 0 0 50px; \" width=\"218px\" >" + DateTime.Now.ToLongDateString() + "</td> " +
-                       "<td width=\"443px\" align=\"right\" valign=\"middle\" bgcolor=\"#b5ddc6\" style=\"color:#000000; font-size:10px; font-family: Arial; \">© Fujifilm North America Corporation, Graphic Systems Division " + " </td></tr></table>";
+                       "<td width=\"443px\" align=\"right\" valign=\"middle\" bgcolor=\"#b5ddc6\" style=\"color:#000000; font-size:10px; font-family: Arial; \">" +
+                       "<span style = \"padding-right:50px; \">© Fujifilm North America Corporation, Graphic Systems Division " + "</span> </td></tr></table>";
 
                     }
                     else
@@ -450,7 +448,6 @@ namespace FujifilmUSA.Sync.Common
 
             DataTable DT = new DataTable();
 
-            //SBStr.Replace("#csspath#", CSSPath);  //-- It was commented out passing path this way since it was giving error after putting KendoChart
             SBStr.Replace("###ReportName###", ReportName);
 
             // === Table 0 = "JobDetail" : Replace Job Detail In HTML Template ==== //    
@@ -1167,7 +1164,7 @@ namespace FujifilmUSA.Sync.Common
 
 
             #region Assign Server
-            SBStr.Replace("##IMAGES##", strServer);
+            SBStr.Replace("##IMAGES##", IMAGEPath);
             SBStr.Replace("#csspath#", CSSPath);
             #endregion
 
@@ -1178,25 +1175,12 @@ namespace FujifilmUSA.Sync.Common
             DataTable DT = new DataTable();
             try
             {
-                //string currentBaseUrl = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority +
-                //                    System.Web.HttpContext.Current.Request.ApplicationPath.TrimEnd('/') + "/";
-
                 //** Add Styles Path ***//
-                //string cssFullPath = this._WebURL + "Templates/style.css";
-                string cssFullPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/style.css");
-                //SBStr.Replace("#csspath#", cssFullPath);                
-                SBStr.Replace("#csspath#", BaseServiceURL + "Templates/style.css");
-
+                SBStr.Replace("#csspath#", CSSPath);
 
                 //** Add Images Path ***//
-                string imagesPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
-                SBStr.Replace("##LOGOIMAGES##", imagesPath);
-
-
-                //** Add Images Path ***//
-                //string imagesPath = this.BaseWebURL + "Images/";
-                //string imagesPath = System.Web.HttpContext.Current.Server.MapPath("Images") + "\\"; ;
-                SBStr.Replace("##IMAGES##", imagesPath);
+                SBStr.Replace("##LOGOIMAGES##", IMAGEPath);
+                SBStr.Replace("##IMAGES##", IMAGEPath);
 
                 //** Add Content ***//
                 SBStr.Replace("###ReportName###", this.ReportName);
@@ -1318,7 +1302,7 @@ namespace FujifilmUSA.Sync.Common
                                 StringBuilder pageTemplate = new StringBuilder();
                                 pageTemplate = new StringBuilder(template.ToString());
 
-                                pageTemplate.Replace("##IMAGES##", imagesPath);
+                                pageTemplate.Replace("##IMAGES##", IMAGEPath);
                                 pageTemplate.Replace("##ReportTitle##", "SpotProjectReport");
 
                                 StringBuilder builder = new StringBuilder();
@@ -1380,7 +1364,7 @@ namespace FujifilmUSA.Sync.Common
                         else
                         {
                             htmlBuilder = new StringBuilder(template.ToString());
-                            htmlBuilder.Replace("##IMAGES##", imagesPath);
+                            htmlBuilder.Replace("##IMAGES##", IMAGEPath);
                             htmlBuilder.Replace("##ReportTitle##", "SpotProjectReport");
                             htmlBuilder.Append("<table width='100%' cellpadding='0' cellspacing='0'>");
                             htmlBuilder.Append("<tr><td>");
@@ -2167,7 +2151,7 @@ namespace FujifilmUSA.Sync.Common
                             PatchStr.Append("<td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_T_P"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_T"]) + "</td><td style='text-align: right;'>" + Convert.ToString(dtPatchDetails.Rows[j]["ΔE_M_P"]) + "</td>");
                         PatchStr.Append("</tr>");
                     }
-                    PatchStr.Append("</table>");
+                    PatchStr.Append("</table></br></br></br>");
 
                     FileStr.Replace("###SpotProjectPatchDetails###", PatchStr.ToString());
 
@@ -2187,17 +2171,12 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("###SpotProjectPatchDetailsMultiplePages###", mainStr.ToString());
 
                 //** Add Styles Path ***//
-                string cssFullPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Templates/style.css");
-                //SBStr.Replace("#csspath#", cssFullPath);
-                SBStr.Replace("#csspath#", BaseServiceURL + "Templates/style.css");
+                SBStr.Replace("#csspath#", CSSPath);
 
                 //** Add Images Path ***//
-                string imagesPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images") + "\\";
-                SBStr.Replace("##LOGOIMAGES##", imagesPath);
+                SBStr.Replace("##LOGOIMAGES##", IMAGEPath);
+                SBStr.Replace("##IMAGES##", IMAGEPath);
 
-
-                //** Add Images Path ***//
-                SBStr.Replace("##IMAGES##", imagesPath);
                 //========== Assign HTML to theID ==========//
                 //1 : str = The html content.
                 //3 : width(612) = The dimension of the page to fix in A4 size paper.
