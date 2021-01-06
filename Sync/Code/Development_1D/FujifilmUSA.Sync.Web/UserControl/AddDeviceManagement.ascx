@@ -6,6 +6,14 @@
 <script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <div class="admin_top">
     &nbsp;</div>
+
+<script type="text/javascript" >    
+    function CopyDLPPlus() {
+        var btnIdDLPPlus = '<%= txtDlpPlus.ClientID %>';
+        var btnIdDLP = '<%= txtDlp.ClientID %>';
+        $('#'+btnIdDLPPlus).val($('#'+btnIdDLP).val());
+    }
+</script>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
         <h1><asp:Localize ID="locDeviceManagement" runat="server" Text="Device Management" 
@@ -160,7 +168,7 @@
                                     &nbsp;:&nbsp;
                                 </td>
                                 <td>
-                                    <div style="line-height: 30px; overflow-y: scroll; height: 322px; border-width: 1px;
+                                    <div style="line-height: 30px; overflow-y: scroll; height: 355px; border-width: 1px;
                                                                     border-style: solid; width: 240px">
                                     <table width="100%">
                                         <tr>
@@ -189,7 +197,7 @@
                                             <td>
                                                 <div style="float: left;">
                                                     <asp:TextBox ID="txtDlp" runat="server" Height="19px" Width="50px" MaxLength="4"
-                                                        onkeypress="return CheckNumeric(event)" meta:resourcekey="txtDlpResource1"></asp:TextBox>
+                                                        onkeypress="return CheckNumeric(event)" onChange="javascript:CopyDLPPlus();" meta:resourcekey="txtDlpResource1"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvDlp" runat="server" Display="Dynamic" ControlToValidate="txtDlp"
@@ -338,6 +346,23 @@
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvtxtSpotLibrary" runat="server" Display="Dynamic" ControlToValidate="txtSpotLibrary"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer9" runat="server"
+                                                            ValidationMsg="Please provide no.of projects." ResourceValidationMsg="NoOfProjectsRequiredResource"/>
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                 <span>
+                                                    <%=ELicenseDLpPlusText%> &nbsp;</span></td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtDlpPlus" runat="server" Height="19px" Width="50px" MaxLength="4" Enabled="false"
+                                                        onkeypress="return CheckNumeric(event)"></asp:TextBox>
+                                                </div>
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfvtxtDlpPlus" runat="server" Display="Dynamic" ControlToValidate="txtDlpPlus"
+                                                        ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer10" runat="server"
                                                             ValidationMsg="Please provide no.of projects." ResourceValidationMsg="NoOfProjectsRequiredResource"/>
                                                     </asp:RequiredFieldValidator>
                                                 </div>

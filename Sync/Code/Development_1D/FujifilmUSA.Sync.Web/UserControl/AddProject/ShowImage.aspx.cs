@@ -173,8 +173,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         {
             IsErrorOccured = true;
         }
+        public bool IsDLPPlus { get; set; }
+        #endregion
 
-        #endregion        
-    
     }
 }

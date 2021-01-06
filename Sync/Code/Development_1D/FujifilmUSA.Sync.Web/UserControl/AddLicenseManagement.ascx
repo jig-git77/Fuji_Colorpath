@@ -11,6 +11,13 @@
         jQuery("[id*='txtActivationDate']").datepicker();
         jQuery("[id*='txtExpirationDate']").datepicker();
     }
+    function CopyDLPPlusChecked() {
+        var btnIdDLP = '#' + '<%= chkDlp.ClientID %>';
+        var btnIdDLPPlus = '#' + '<%= chkDLPPlus.ClientID %>';
+
+        $(btnIdDLPPlus).prop('checked', $(btnIdDLP).is(':checked'));
+        
+    }
 
 </script>
 <div class="admin_top">
@@ -127,10 +134,10 @@
                                         <table style="width:100%;">
                                             <tr>
                                                 <td style="width:35%">
-                                                    <asp:CheckBox runat="server" ID="chkSync1D" CssClass="checkListBox" meta:resourcekey="chkSync1DResource1"/>
+                                                    <asp:CheckBox runat="server" ID="chkSync1D" CssClass="checkListBox" meta:resourcekey="chkSync1DResource1" />
                                                 </td>
                                                 <td style="width:30%">
-                                                    <asp:CheckBox runat="server" ID="chkDlp" CssClass="checkListBox" meta:resourcekey="chkDlpResource1"/>
+                                                    <asp:CheckBox runat="server" ID="chkDlp" CssClass="checkListBox" meta:resourcekey="chkDlpResource1" Onchange="javascript:CopyDLPPlusChecked()"/>
                                                 </td>
                                                 <td style="width:35%">
                                                     <asp:CheckBox runat="server" ID="chkInk" CssClass="checkListBox" meta:resourcekey="chkInkResource1"/>
@@ -163,9 +170,13 @@
                                                 </td>
                                                 <td>
                                                     <asp:CheckBox runat="server" ID="chkSpotLibrary" CssClass="checkListBox" Visible="true"/>                  
-                                                </td>                                                
+                                                </td>   
+                                                <td>
+                                                    <asp:CheckBox runat="server" ID="chkDLPPlus" CssClass="checkListBox" Visible="true" Enabled="false"/>                  
+                                                </td> 
                                             </tr>
                                         </table>
+
                                         
                                         
                                             

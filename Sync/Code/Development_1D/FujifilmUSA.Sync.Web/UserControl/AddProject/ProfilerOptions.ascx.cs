@@ -96,6 +96,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
             }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+            {
+                if (ViewState[_vsMetricTargetPreset] == null && ViewState[_vsDeviceFamilyProfilerOption] == null)
+                {
+                    tbMetricPreset.Visible = true;
+                    PanelOptionalRetarget.Visible = false;
+                    tbOptionPreset.Visible = true;
+                    spanMetricSetting.Visible = true;
+                    trAdvancedOptions.Visible = false;
+                    RadToolTipTolerancesDlpPlus.Visible = true;
+                    BindProfileRenderings();
+                    BindPresets();
+                    BindMetricPresets();
+
+                    LoadProjectInfoFromSession();
+                }
+            }
             else
             {
                 if (ViewState[_vsDeviceFamilyProfilerOption] == null)
@@ -248,7 +265,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                     }
                 }
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP) //If only Sync4D project and selected branch has license allowed for custom presets, then only display option for custom
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus) //If only Sync4D project and selected branch has license allowed for custom presets, then only display option for custom
                 {
                     if (SessionManager.Instance.CurrentDevice.License.IsCustomProfOptions == true)
                     {
@@ -292,6 +309,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 lvTolerances.DataSource = MetricSumTargetValues;
                 lvTolerances.DataBind();
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+                {
+                    lvTolerancesDlpPlus.DataSource = MetricSumTargetValues;
+                    lvTolerancesDlpPlus.DataBind();
+                }
             }
         }
 
@@ -1928,6 +1950,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public ProfilerOptionPreset ProfilerOptionPreset { get; set; }
         public DeviceFamilyProfilerOption DeviceFamilyProfilerOption { get; set; }
         public int DeviceFamilyProfilerOptionID { get; set; }
+        public bool IsDLPPlus { get; set; }
         #endregion
     }
 }

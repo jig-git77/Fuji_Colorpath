@@ -817,6 +817,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DLP Plus.
+        /// </summary>
+        internal static string ELicenseType_DLP_PLUS {
+            get {
+                return ResourceManager.GetString("ELicenseType_DLP_PLUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Full Gamut Custom Source.
         /// </summary>
         internal static string ELicenseType_FullGamutCustomSourceProfile {

@@ -213,6 +213,10 @@ $(document).ready(function () {
                             case ELicenseType.Validation:
                                 break;
                             case ELicenseType.IccProfiling: break;
+                            case ELicenseType.DLPPlus:
+                                projectTypeImagePath = 'Images/DLP.png';
+                                projectTypeImageTitle = 'DLPPlus';
+                                break;
                         }
                         break;
                     case EOptimizeRunStatus.Certify:
@@ -237,6 +241,10 @@ $(document).ready(function () {
                             case ELicenseType.Validation:
                                 break;
                             case ELicenseType.IccProfiling: break;
+                            case ELicenseType.DLPPlus:
+                                projectTypeImagePath = 'Images/DLP_Certified.png';
+                                projectTypeImageTitle = 'DLPPlus';
+                                break;
                         }
                         break;
                 }
@@ -278,6 +286,9 @@ $(document).ready(function () {
                         projectTypeTooltip = Resources.ELicenseType_Validation;
                         break;
                     case ELicenseType.IccProfiling: break;
+                    case ELicenseType.DLPPlus:
+                        projectTypeTooltip = "DLPPlus";
+                        break;
                 }
 
                 //set project validation image

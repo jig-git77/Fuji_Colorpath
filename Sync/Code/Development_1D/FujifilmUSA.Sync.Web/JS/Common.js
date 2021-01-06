@@ -78,7 +78,8 @@ var ELicenseType = {
     MultiColorCustomSource: 9,
     SpotLibrary: 10,
     Validation: 51,
-    IccProfiling: 52
+    IccProfiling: 52,
+    DLPPlus:11
 }
 
 //Object for E Validation Status

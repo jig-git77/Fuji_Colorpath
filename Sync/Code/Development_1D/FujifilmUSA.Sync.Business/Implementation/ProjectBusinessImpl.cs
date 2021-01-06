@@ -218,6 +218,25 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     ? ECurrentProjectStatus.New
                                     : ECurrentProjectStatus.Run;
                         }
+                        if (project.LicenseType == ELicenseType.DLPPlus)
+                        {
+                            //----Select ProjectTargetLAB-----------//
+                            if (dsProject.Tables[5].Rows.Count > 0)
+                            {
+                                project.ProjectTargetLAB = dsProject.Tables[5].AsEnumerable().
+                                    Select(x => new Entity.CPSync1D.ProjectTargetLAB()
+                                    {
+                                        PatchType = new PatchType()
+                                        {
+                                            PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                                            Type = DataReader.ReadString(x, "PatchType")
+                                        },
+                                        TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                                        TargetA = DataReader.ReadDecimal(x, "TargetA"),
+                                        TargetB = DataReader.ReadDecimal(x, "TargetB")
+                                    }).ToList();
+                            }
+                        }
                         if (project.LicenseType == ELicenseType.Sync1D)
                         {
                             //----Select ProjectTargetLAB-----------//
@@ -1101,13 +1120,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurementDevice;
         }
 
-        public List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0)
+        public List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0, int InstrumentTypeID = 0,bool IsDLPPlus=false)
         {
             var presetList = new List<ReferenceChartType>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartTypeList", new object[] { measurementDeviceId, ChartDisplayType, ProjectTypeId, MetricTargetPresetID, InstrumentTypeID });
+                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartTypeList", new object[] { measurementDeviceId, ChartDisplayType, ProjectTypeId, MetricTargetPresetID, InstrumentTypeID, IsDLPPlus });
                     if (dsPresetList != null && dsPresetList.Tables.Count > 0)
                     {
                         presetList = dsPresetList.Tables[0].AsEnumerable().Select(

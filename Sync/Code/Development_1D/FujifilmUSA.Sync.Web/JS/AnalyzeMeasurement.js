@@ -934,6 +934,10 @@ function BindMeasurementSummary() {
                                 $('#rowNotes').show();
                             }
                         }
+                        if ($hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+
+                          
+                        }
 
                         //check validation type
                         if ($hdnValidationType == 1 || $hdnValidationType == 2) {
@@ -1020,7 +1024,7 @@ function BindMeasurementSummary() {
             if (XMLHttpRequest.status == 401) {
                 ShowDialog("You are not authorized user. Please login again.", "Message");
             } else {
-                alert(errorThrown);
+                alert(errorThrown + ' ' + XMLHttpRequest.responseText);
             }
         });
 
@@ -3045,6 +3049,10 @@ function PopulateInkPaperChartABComparision() {
 
 
     var densityPatchColorList = ['C', 'M', 'Y', 'K'];
+
+    if ($hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
+        $("#tblDensityChart").hide();
+    }
     $divChartInkPaperDansityChart.kendoChart({
         renderAs: "canvas",
         //title: {

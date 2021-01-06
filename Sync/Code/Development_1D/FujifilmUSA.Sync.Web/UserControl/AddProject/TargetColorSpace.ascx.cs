@@ -61,6 +61,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     trPaperScaling_4D.Visible = true;
                 }
+
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.SpotLibrary)
                 {
                     BindSpotTarget(); //Load Spot Target List
@@ -69,6 +70,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trTargetLAB.Visible = false;
                     trSpotTarget.Visible = true;
                     trMeasurementMode.Visible = false;
+                }
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+                {
+                    trTargetLAB.Visible = true;
+                    trProjectType.Visible = true;
+                    cmbProjectType.Enabled = false;
+                    txtProjectTypeDesc.Enabled = false;
                 }
                 LoadProjectInfoFromSession();
             }
@@ -113,6 +121,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.NewPaper_Black_a = Convert.ToDecimal(txtPaper_Black_a.Text);
                 SessionManager.Instance.CurrentProject.NewPaper_Black_b = Convert.ToDecimal(txtPaper_Black_b.Text);
             }
+           else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+            {
+                SessionManager.Instance.CurrentProject.ProjectTargetLAB = GetTargetLAB();
+                SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
+
+                //------If 1D project then pass NewPaperScaling LAB values--------//
+                SessionManager.Instance.CurrentProject.NewPaper_White_L = Convert.ToDecimal(txtPaper_L.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_White_a = Convert.ToDecimal(txtPaper_a.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_White_b = Convert.ToDecimal(txtPaper_b.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_Black_L = Convert.ToDecimal(txtPaper_Black_L.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_Black_a = Convert.ToDecimal(txtPaper_Black_a.Text);
+                SessionManager.Instance.CurrentProject.NewPaper_Black_b = Convert.ToDecimal(txtPaper_Black_b.Text);
+            }
             else
             {
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification)
@@ -132,6 +153,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
                     SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.InkOptimization;
             }
+
             SessionManager.Instance.CurrentProject.PCSDataTypes = (PCSDataTypes)Convert.ToInt16(cmbPCSDataType.SelectedValue); //PCSDataType Selection 
 
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
@@ -173,6 +195,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void cmbProjectType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            {
+                if (ViewState[_vsPrintStandardType] != null)
+                {
+                    BindTargetLAB();
+                }
+                BindPCSDataType();
+            }
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
             {
                 if (ViewState[_vsPrintStandardType] != null)
                 {
@@ -306,6 +336,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
 
                 }
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+            {
+                cmbProjectType.SelectedValue = SessionManager.Instance.CurrentProject.ProjectTypeId.ToString();
+                cmbProjectType_SelectedIndexChanged(null, null);
+                if (SessionManager.Instance.CurrentProject.ProjectTargetLAB != null && SessionManager.Instance.CurrentProject.ProjectTargetLAB.Count > 0) //If open the existing project, then load from session
+                {
+                    chk_IsPaperScaling.Enabled = false; //Disable Paper Scaling when project is already created
+                    //Load Target LAB Listview
+                    lvTargetLAB.DataSource = SessionManager.Instance.CurrentProject.ProjectTargetLAB;
+                    lvTargetLAB.DataBind();
+                    //Load Paper LAB values into top Textboxes from List
+                    txtPaper_L.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetL.ToString();   //Paper L* Value
+                    txtPaper_a.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetA.ToString();   //Paper a* Value
+                    txtPaper_b.Text = SessionManager.Instance.CurrentProject.ProjectTargetLAB.ToList().Where(p => p.PatchType.PatchTypeId == 8).ToList()[0].TargetB.ToString();   //Paper b* Value
+
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0) //Once project is saved, Project type selection is disable
+                    {
+                        cmbProjectType.Enabled = false;
+                    }
+                }
+                txtPaper_Black_L.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_L.ToString();
+                txtPaper_Black_a.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_a.ToString();
+                txtPaper_Black_b.Text = SessionManager.Instance.CurrentProject.NewPaper_Black_b.ToString();
             }
             BindPCSDataType();
             cmbPCSDataType.SelectedValue = Convert.ToInt16(SessionManager.Instance.CurrentProject.PCSDataTypes).ToString(); //PCSDataType Selection
@@ -651,7 +705,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D);
+                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus);
             }
         }
         public bool IsSpotTargetType

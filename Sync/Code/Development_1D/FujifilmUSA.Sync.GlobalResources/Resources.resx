@@ -1380,4 +1380,7 @@
   <data name="ProjectList_BcoEnableButtonToolTip" xml:space="preserve">
     <value>Brand Color Optimization</value>
   </data>
+  <data name="ELicenseType_DLP_PLUS" xml:space="preserve">
+    <value>DLP Plus</value>
+  </data>
 </root>

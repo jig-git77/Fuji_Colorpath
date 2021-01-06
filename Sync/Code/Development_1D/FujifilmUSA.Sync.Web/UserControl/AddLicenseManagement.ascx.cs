@@ -71,7 +71,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindLicenseType()
         {
             chkSync1D.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
-            chkDlp.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
+            chkDlp.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);                     
             chkInk.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
             chkInk_Source.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimizationSource);
             chkSync4D_Certification.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync4DCertification);
@@ -80,6 +80,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chkFullGamutCustomSource.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.FullGamutCustomSource);
             chkMultiColorCustomSource.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.MultiColorCustomSource);
             chkSpotLibrary.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary);
+            chkDLPPlus.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPPlus);
         }
         private void Bindcompany()
         {
@@ -152,7 +153,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (chkSync1D.Checked)
                 License.LicenseType.Add(ELicenseType.Sync1D);
             if (chkDlp.Checked)
+            { 
                 License.LicenseType.Add(ELicenseType.DLP);
+                License.LicenseType.Add(ELicenseType.DLPPlus);
+            }
             if (chkInk.Checked)
                 License.LicenseType.Add(ELicenseType.InkOptimization);
             if (chkInk_Source.Checked)
@@ -169,7 +173,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 License.LicenseType.Add(ELicenseType.MultiColorCustomSource);
             if (chkSpotLibrary.Checked)
                 License.LicenseType.Add(ELicenseType.SpotLibrary);
-            
+           
+                
+
             if (LId == 0) // Add New company
             {
                 _presenterLicenseManagement.InsertLicense();
@@ -201,7 +207,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             chkSync1D.Checked = true;
                             break;
                         case ELicenseType.DLP:
-                            chkDlp.Checked = true;
+                            chkDlp.Checked = true;                            
                             break;
                         case ELicenseType.InkOptimization:
                             chkInk.Checked = true;
@@ -226,6 +232,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.SpotLibrary:
                             chkSpotLibrary.Checked = true;
+                            break;
+                        case ELicenseType.DLPPlus:
+                            chkDLPPlus.Checked = true;
                             break;
                     }
                 });

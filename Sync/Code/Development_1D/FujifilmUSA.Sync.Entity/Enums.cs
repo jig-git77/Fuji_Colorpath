@@ -431,7 +431,9 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ELicenseType_Validation")]//Color Validation
         Validation = 51,
         [Description("ELicenseType_IccProfiling")]//ICC Profiling
-        IccProfiling = 52
+        IccProfiling = 52,
+        [Description("ELicenseType_DLP_PLUS")]//DLP Plus
+        DLPPlus = 11,
     }
 
     public enum UserType

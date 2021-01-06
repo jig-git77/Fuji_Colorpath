@@ -22,6 +22,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string ELicenseFullGamutCustomSourceText { get; set; }
         public string ELicenseMultiColorCustomSourceText { get; set; }
         public string ELicenseSpotLibraryText { get; set; }
+        public string ELicenseDLpPlusText { get; set; }
 
         #region Private Variables - Globalization
         private const string _recAddDevice = "addDeviceText";
@@ -69,6 +70,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ELicenseFullGamutCustomSourceText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.FullGamutCustomSource);
             ELicenseMultiColorCustomSourceText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.MultiColorCustomSource);
             ELicenseSpotLibraryText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary);
+            ELicenseDLpPlusText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPPlus);
 
             if (Page.IsPostBack) return;
 
@@ -170,11 +172,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtFullGamutCustomSource.Enabled = false;
                         txtMultiColorCustomSource.Enabled = false;
                         txtSpotLibrary.Enabled = false;
+                        txtDlpPlus.Enabled = false;
                     }
                     else
                     {
                         cmbLicense.SelectedIndex = 0;
-                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text = "0";
+                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text =txtDlpPlus.Text = "0";
                         txtSync1D.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1D).Count() > 0);
                         txtDlp.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLP).Count() > 0);
                         txtInkOpt.Enabled = (License.LicenseType.Where(x => x == ELicenseType.InkOptimization).Count() > 0);
@@ -185,6 +188,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         txtFullGamutCustomSource.Enabled = (License.LicenseType.Where(x => x == ELicenseType.FullGamutCustomSource).Count() > 0);
                         txtMultiColorCustomSource.Enabled = (License.LicenseType.Where(x => x == ELicenseType.MultiColorCustomSource).Count() > 0);
                         txtSpotLibrary.Enabled = (License.LicenseType.Where(x => x == ELicenseType.SpotLibrary).Count() > 0);
+                        txtDlpPlus.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLPPlus).Count() > 0);
+                        txtDlpPlus.Enabled = false;
                     }
                 }
             }
@@ -240,6 +245,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Device.LicenseTypeProject.Add(ELicenseType.MultiColorCustomSource, Convert.ToInt32(txtMultiColorCustomSource.Text));
             if (txtSpotLibrary.Enabled)
                 Device.LicenseTypeProject.Add(ELicenseType.SpotLibrary, Convert.ToInt32(txtSpotLibrary.Text));
+           // if (txtDlpPlus.Enabled)
+                Device.LicenseTypeProject.Add(ELicenseType.DLPPlus, Convert.ToInt32(txtDlpPlus.Text));
 
             if (DId == 0) // Add New company
             {
@@ -312,6 +319,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             txtSpotLibrary.Text = val.ToString();
                             break;
                         case ELicenseType.IccProfiling:
+                            break;
+                        case ELicenseType.DLPPlus:
+                            txtDlpPlus.Text = val.ToString();
                             break;
                         default:
                             break;

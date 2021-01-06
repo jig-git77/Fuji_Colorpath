@@ -24,5 +24,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         byte[] ChartPreview { get; set; }
         bool IsSpotTargetType { get; }
         short PrintingTypeId { get; set; }        
+        bool IsDLPPlus { get; set; }
     }
 }

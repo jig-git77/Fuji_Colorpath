@@ -18,6 +18,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
 
         }
+        public void CreateInitialDestinationAndDeviceLinkProfilesPlus(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
+        {
+
+        }
 
         public byte[] GetDeviceLinkProfile(int optimizeRunId)
         {

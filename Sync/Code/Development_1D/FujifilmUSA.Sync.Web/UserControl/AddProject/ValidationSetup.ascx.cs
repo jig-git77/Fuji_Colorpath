@@ -1,13 +1,11 @@
-﻿using System;
+﻿using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujifilmUSA.Sync.Presenter;
-using FujifilmUSA.Sync.Entity;
-using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 {
@@ -15,7 +13,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
     {
         public ValidationSetup()
         {
-            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            Load += (sender, e) => ExceptionHandling(Page_Load, sender, e);
         }
 
         #region Private Variables - Globalization
@@ -62,7 +60,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     btnValidationMeasure.Visible = true;
                 }
                 else
+                {
                     btnValidationMeasure.Visible = false;
+                }
             }
             else
             {
@@ -78,7 +78,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 BindMeasurementDevice();
                 SetUVSettings();
 
-                LoadProjectInfoFromSession();               
+                LoadProjectInfoFromSession();
                 ViewState[vsIsPostBack] = true;
 
                 if (!SessionManager.Instance.CurrentDevice.IsValidation) //---If this device doesn't have permission for Validation, disable radiobuttonlist------//
@@ -126,7 +126,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(ValidationChartSelectedValue), cmbValidationChart.SelectedItem.Text);
             SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset = new KeyValuePair<int, string>(Convert.ToInt32(cmbMetricTargetPreset.SelectedItem.Value), cmbMetricTargetPreset.SelectedItem.Text);
             SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
-            this.Project = SessionManager.Instance.CurrentProject;
+            Project = SessionManager.Instance.CurrentProject;
             _presenterMeasurementSetting.SaveProject();
 
             if (!IsErrorOccured)
@@ -162,7 +162,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         {
             if (ViewState[_vsMetricTargetPreset] != null)
             {
-                txtMTPDesc.Text = ((List<Entity.CPSyncV.MetricTargetPreset>)ViewState[_vsMetricTargetPreset]).Where(c => c.MetricTargetPresetID == Convert.ToInt32(cmbMetricTargetPreset.SelectedValue)).Select(c => c.MetricTargetPresetDesc).FirstOrDefault();               
+                txtMTPDesc.Text = ((List<Entity.CPSyncV.MetricTargetPreset>)ViewState[_vsMetricTargetPreset]).Where(c => c.MetricTargetPresetID == Convert.ToInt32(cmbMetricTargetPreset.SelectedValue)).Select(c => c.MetricTargetPresetDesc).FirstOrDefault();
                 BindMeasurementDevice(); //---Display Metric Target Presets based on selected Validation Chart
             }
         }
@@ -177,6 +177,14 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 cmbMetricTargetPreset.Enabled = true;
                 cmbMeasurementDevice.Enabled = true;
                 cmbValidationChart.Enabled = true;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+                {
+                    cmbMetricTargetPreset.SelectedValue = "11";
+                    cmbMetricTargetPreset.Enabled = false;
+                    cmbMetricTargetPreset_SelectedIndexChanged(null, null);
+                }
+
+
             }
             else
             {
@@ -193,7 +201,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             }
         }
 
-         protected void cmbReadMode_SelectedIndexChanged(object sender, EventArgs e)
+        protected void cmbReadMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IO)
                                                            || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2)) && cmbReadMode.SelectedValue == "Point")
@@ -233,16 +241,24 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     else
                     {
                         EnableValidationValue = true;
+
                     }
                 }
                 else
+                {
                     EnableValidationValue = SessionManager.Instance.CurrentProject.EnabledValidation;
-               
+                }
+
                 if (EnableValidationValue == true) //Make all disable selection enabled, if they have Validation enabled
                 {
                     cmbMetricTargetPreset.Enabled = true;
                     cmbMeasurementDevice.Enabled = true;
                     cmbValidationChart.Enabled = true;
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+                    {
+                        cmbMetricTargetPreset.SelectedValue = "11";
+                        cmbMetricTargetPreset.Enabled = false;
+                    }
                 }
 
                 if (SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Key > 0)
@@ -255,9 +271,14 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 }
 
                 if (EnableValidationValue == true && SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.HasValue && SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.Value > 0)
+                {
                     cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.Value.ToString();
+                }
                 else
+                {
                     cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId.ToString();
+                }
+
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
 
                 if (SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key > 0)
@@ -286,7 +307,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         private void BindMeasurementDevice()
         {
-            if (cmbMeasurementDevice.DataSource != null) return;
+            if (cmbMeasurementDevice.DataSource != null)
+            {
+                return;
+            }
 
             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
             _presenterMeasurementSetting.GetMeasurementDevice();
@@ -314,6 +338,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         private void BindValidationChart()
         {
+            IsDLPPlus = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus;
             MeasurementDeviceId = MeasurementDeviceSelectedValue;
             ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.ValidationChart);
             MetricTargetPresetID = Convert.ToInt32(cmbMetricTargetPreset.SelectedValue);
@@ -332,7 +357,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         private void BindMetricTargetPreset()
         {
-            if (cmbMetricTargetPreset.DataSource != null) return;
+            if (cmbMetricTargetPreset.DataSource != null)
+            {
+                return;
+            }
 
             _presenterMeasurementSetting.GetMetricTargetPreset_Verification();
             if (!IsErrorOccured)
@@ -352,7 +380,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             get
             {
                 if (!string.IsNullOrEmpty(cmbMeasurementDevice.SelectedValue.Trim()))
+                {
                     return Convert.ToInt32(cmbMeasurementDevice.SelectedValue.Trim());
+                }
+
                 return 0;
             }
         }
@@ -362,7 +393,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             get
             {
                 if (!string.IsNullOrEmpty(cmbValidationChart.SelectedValue.Trim()))
+                {
                     return Convert.ToInt32(cmbValidationChart.SelectedValue.Trim());
+                }
+
                 return 0;
             }
         }
@@ -384,11 +418,17 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             get
             {
                 if (rbtnEnableValidation.SelectedIndex == 0)
+                {
                     return true;
+                }
                 else if (rbtnEnableValidation.SelectedIndex == 1)
+                {
                     return false;
+                }
                 else
+                {
                     return false;
+                }
             }
             set
             {
@@ -421,7 +461,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             trUVSettings.Visible = (MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1Sis)
                                     || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1Pro2)
                                     || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2)
-                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.eXact) 
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.eXact)
                                     || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1Sis2)
                                     || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1Pro3)
                                     || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro3));
@@ -462,8 +502,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 cmbMeasurementCount.Items.Add(new ListItem("5", "5"));
             }
             else
+            {
                 //-----0 for Strip reading for all other instruments type
-                cmbMeasurementCount.Items.Add(new ListItem("0", "0"));          
+                cmbMeasurementCount.Items.Add(new ListItem("0", "0"));
+            }
         }
 
         private void BindReadMode()
@@ -490,9 +532,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             get
             {
                 if (ViewState["vsMeasurementDevice"] == null)
+                {
                     return new Dictionary<int, EInstrumentType>();
+                }
                 else
+                {
                     return (Dictionary<int, EInstrumentType>)ViewState["vsMeasurementDevice"];
+                }
             }
             set
             {
@@ -551,7 +597,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             }
         }
         public short PrintingTypeId { get; set; }
-
+        public bool IsDLPPlus { get; set; }
         #endregion
 
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)
@@ -566,9 +612,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 if (!IsErrorOccured)
                 {
                     if (ChartPreview != null)
+                    {
                         Utilities.DownloadFile(ChartPreview, string.Format("{0}.pdf", ChartName), ".pdf");
+                    }
                     else
+                    {
                         fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
+                    }
                 }
             }
             else

@@ -91,6 +91,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            IsDLPPlus = SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus;
             lnkbtnProfilerOptions.Visible = IsXmfNewProject;
             if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser) && SessionManager.Instance.CurrentProject.ProjectId > 0)
             {
@@ -689,7 +690,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int ChartDisplayType { get; set; }
         public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
         public ELicenseType LicenseType { get; set; }
-
+        public bool IsDLPPlus { get; set; }
         public int ProjectTypeID
         {
             get

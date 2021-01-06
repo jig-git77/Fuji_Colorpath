@@ -14,10 +14,12 @@ namespace FujifilmUSA.Sync.Entity
         public List<ReferenceChart> ReferenceCharts { get; set; }
         public InstrumentType InstrumentType { get; set; }
         public short? IsSync1D_ISO { get; set; }
-        public short? IsSync1D_G7 { get; set; }
+        public short? IsSync1D_G7 { get; set; }        
         public short? Validation_1D { get; set; }
-        public short? IsSync4D { get; set; }
-        public short? Validation_4D { get; set; }      
+        public short? IsSync4D { get; set; }        
+        public short? Validation_4D { get; set; }
+        public short? IsSync4D_Plus { get; set; }
+        public short? Validation_4DPlus { get; set; }
         public bool? IsUsed { get; set; }
         public string ChartSettingXML { get; set; }
 

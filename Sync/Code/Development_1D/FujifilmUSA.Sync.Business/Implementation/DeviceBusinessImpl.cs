@@ -120,7 +120,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     DeviceId = DataReader.ReadInt(x, "DeviceID"),
                                     licenseTypeId = DataReader.ReadShort(x, "LicenseTypeID"),
                                     NumOfProject = DataReader.ReadInt(x, "NumOfProject")
-                                }).ToList();
+                                }).ToList();                            
                             objDeviceList.ForEach(x =>
                             {
                                 if (licenseDetails.Where(y => y.DeviceId == x.DeviceId).Count() > 0)

@@ -1,0 +1,7 @@
+IF EXISTS(SELECT *
+          FROM   INFORMATION_SCHEMA.COLUMNS
+          WHERE  TABLE_NAME = 'CPSync4D.Measurement'
+                 AND COLUMN_NAME = 'IsOK') 
+BEGIN
+		ALTER TABLE CPSync4D.Measurement ADD IsOK BIT NOT NULL DEFAULT 0;
+END

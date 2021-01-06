@@ -107,6 +107,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (chklist_Validation.Items[1].Selected == true)
                 ReferenceChartType.Validation_4D = short.Parse(cmbValidation_4D.SelectedValue);
 
+            if (chklist_ProjectType.Items[3].Selected == true)
+                ReferenceChartType.IsSync4D_Plus = short.Parse(cmbSync4DPlus.SelectedValue);
+            if (chklist_Validation.Items[2].Selected == true)
+                ReferenceChartType.Validation_4DPlus = short.Parse(cmbValidation4DPlus.SelectedValue);
+
             if ((fucUploadChartPreview.UploadedFiles.Count > 0 || Convert.ToInt32(Hidden_ChartPreview.Value) > 0) && (fucUploadOriginalChart.UploadedFiles.Count > 0 || Convert.ToInt32(Hidden_OriginalChart.Value) > 0))
             {
                 if (fucUploadOriginalChart.UploadedFiles.Count > 0)
@@ -418,6 +423,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     chklist_Validation.Items[1].Selected = true;
                     cmbValidation_4D.SelectedValue = ReferenceChartType.Validation_4D.ToString();
+                }
+
+                if (ReferenceChartType.IsSync4D_Plus >= 1)
+                {
+                    chklist_ProjectType.Items[3].Selected = true;
+                    cmbSync4DPlus.SelectedValue = ReferenceChartType.IsSync4D_Plus.ToString();
+                }
+                if (ReferenceChartType.Validation_4DPlus >= 1)
+                {
+                    chklist_Validation.Items[2].Selected = true;
+                    cmbValidation4DPlus.SelectedValue = ReferenceChartType.Validation_4DPlus.ToString();
                 }
 
                 if (ReferenceChartType.ChartPreview != null)

@@ -360,6 +360,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         else//ISO                                                    
                             _presenterAnalyze.CreateISOAlignmentCurve();
                     }
+                    else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+                    {
+                        EndDate = System.DateTime.Now;
+                        //Pass use DLP as false for initial call
+                        useDLP = false;
+                        DeviceLinkProfile = null;
+                        _presenterAnalyze.CreateDestinationAndDlpPlus();
+                    }
                     else
                     {
                         EndDate = System.DateTime.Now;
