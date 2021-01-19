@@ -60,5 +60,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         Project Project { get; set; }
         int SpotProjectId { get; set; }
         bool IsUsed { get; set; }        
+        bool IsSyncDLPPlusType { get; }
     }
 }

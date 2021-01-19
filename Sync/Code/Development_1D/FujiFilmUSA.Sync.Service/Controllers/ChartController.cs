@@ -435,7 +435,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         [HttpGet]
         [CustomAuthentication]
-        public IHttpActionResult GenerateG7Chart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject)
+        public IHttpActionResult GenerateG7Chart(int? MeasurementId, bool? IsAverageOfMeasurements, bool? IsVerificationProject, bool? IsSyncDlpPlusTypeProject)
         {
             IHttpActionResult actionResult = null;
             string validationMessage = "";
@@ -468,7 +468,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                     this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
                     this.MeasurementId = Convert.ToInt32(MeasurementId);
                     this.IsAverageOfMeasurements = Convert.ToBoolean(IsAverageOfMeasurements);
-
+                    this.IsSyncDLPPlusType = IsSyncDlpPlusTypeProject == null ? false : Convert.ToBoolean(IsSyncDlpPlusTypeProject);
                     //-------------Only call G7 tab data if it is G7 type of Validation / Sync 1D / Sync 4D Project
                     _presenterAnalyze.GetG7Chart();
 
@@ -1177,6 +1177,8 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public Project Project { get; set; }
         public int SpotProjectId { get; set; }
         public bool IsUsed { get; set; }
+        public bool IsSyncDLPPlusType { get; set; }
+        
         #endregion
 
         #region IViewReportCMYKDensity Members

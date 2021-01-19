@@ -408,7 +408,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false, bool IsSyncDLPPlusType = false)
         {
             var VmeasurementSummary = new List<Measurement>();
             string storedProc = "CPSyncV.GetVMeasurementDeltasByMeasurementID";
@@ -420,6 +420,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     storedProc = "CPSync.GetMeasurementDeltasByMeasurementID_Avg";
                 }
             }
+            if (IsSyncDLPPlusType)
+            {
+                storedProc = "CPSync4DPlus.GetMeasurementDeltasByMeasurementID";
+            }
+            if (IsSyncDLPPlusType && IsAverageOfMeasurements)
+            {
+                storedProc = "CPSync4DPlus.GetMeasurementDeltasByMeasurementID_Avg";
+            }
+            
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -439,8 +448,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                               MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
                               Customer = DataReader.ReadString(x, "Customer"),
                               Notes = DataReader.ReadString(x, "Notes"),
-                              PageOrSurface = IsSync1DType ? "" : DataReader.ReadString(x, "PageOrSurface"),
-                              JDFJobId = IsSync1DType ? "" : DataReader.ReadString(x, "JDFJobId"),
+                              PageOrSurface = (IsSync1DType || IsSyncDLPPlusType) ? "" : DataReader.ReadString(x, "PageOrSurface"),
+                              JDFJobId = (IsSync1DType || IsSyncDLPPlusType) ? "" : DataReader.ReadString(x, "JDFJobId"),
                               dEMethod = DataReader.ReadString(x, "dEMethod"),
                               MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus"),
                               MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName"),
@@ -458,7 +467,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                IsNotOK = DataReader.ReadBoolean(x, "IsNotOK")
                            }).ToList();
 
-                        if (IsSync1DType == false) //----Patch Tolerance is only available for Validation projects
+                        if (IsSync1DType == false && IsSyncDLPPlusType == false) //----Patch Tolerance is only available for Validation projects
                         {
                             VmeasurementSummary[0].PatchTolerances = dsMeasurements.Tables[2].AsEnumerable().
                                Select(x => new Entity.CPSyncV.PatchTolerance()
@@ -1089,10 +1098,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return outParam.Value != null || Convert.ToInt32(outParam.Value) > 0;
         }
 
-        public List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false, bool IsAverageOfMeasurements = false, bool IsSyncDLPPlusType = false)
         {
-            var G7ChardDAta = new List<AnalyzeChart_G7>[8];
-
+            var G7ChardDAta = new List<AnalyzeChart_G7>[8];            
             string storedProc = "[CPSync].[GetChartData_G7]";
             if (IsAverageOfMeasurements)
             {
@@ -1102,7 +1110,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             {
                 storedProc = "[CPSyncV].[GetVChartData_G7]";
             }
-
+            if (IsSyncDLPPlusType)
+            {
+                storedProc = "[CPSync4DPlus].[GetChartData_G7]";
+            }
+            if (IsSyncDLPPlusType && IsAverageOfMeasurements)
+            {
+                storedProc = "[CPSync4DPlus].[GetChartData_G7_Avg]";
+            }
+            
 
             #region Get Data logic for the GrayF
             Common.ImplementBusinessLogic(

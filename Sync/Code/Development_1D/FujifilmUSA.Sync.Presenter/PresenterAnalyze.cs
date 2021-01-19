@@ -83,7 +83,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.MeasurementSummary = measurementBusiness.GetVMeasurementSummary(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements);
+            _viewAnalyze.MeasurementSummary = measurementBusiness.GetVMeasurementSummary(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType, _viewAnalyze.IsAverageOfMeasurements,_viewAnalyze.IsSyncDLPPlusType);
         }
 
         public void GetPatchDetailsofMeasurement()
@@ -124,7 +124,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            var G7ChardData = measurementBusiness.GetG7ChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsAverageOfMeasurements);
+            var G7ChardData = measurementBusiness.GetG7ChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsAverageOfMeasurements,_viewAnalyze.IsSyncDLPPlusType);
             _viewAnalyze.GrayFChart = G7ChardData[0];
             _viewAnalyze.GrayFSummary = G7ChardData[1];
             _viewAnalyze.BlackLChart = G7ChardData[2];

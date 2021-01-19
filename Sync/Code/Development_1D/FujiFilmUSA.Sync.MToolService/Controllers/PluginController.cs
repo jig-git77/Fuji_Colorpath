@@ -684,6 +684,59 @@ namespace FujiFilmUSA.Sync.MToolService.Controllers
             return actionResult;
 
         }
+        [HttpPost]
+        public IHttpActionResult SaveDlpPlusMeasurement(Measurement measurement)
+        {
+            string validationMessage = "";
+            IHttpActionResult actionResult = null;
+            try
+            {
+
+                if (measurement == null)
+                {
+                    validationMessage = "Invalid measurements.";
+                }
+
+                if (!string.IsNullOrEmpty(validationMessage))
+                {
+                    BaseErrorResponse errprResponse = new BaseErrorResponse();
+                    errprResponse.Error.UserMessage = validationMessage;
+                    errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                    actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+                    return actionResult;
+                }
+
+                Measurement = measurement;
+                ProjectId = measurement.ProjectId;
+                OptimizeRunId = measurement.OptimizeRunId;
+                ProjectType = "SyncDLPPlus";
+
+                bool isValid = CheckMeasurementValidation(ref actionResult);
+                if (!isValid)
+                {
+                    return actionResult;
+                }
+
+                BindMeasurementPatches(measurement);
+
+                var objJsonRequest = JsonConvert.SerializeObject(Measurement);
+                RequestMeasurment = objJsonRequest;
+                _presenterPlugin.SaveMeasurementErrorFile();
+
+                _presenterPlugin.SaveMeasurement();
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, true));
+
+              
+            }
+            catch (Exception ex)
+            {
+                BaseErrorResponse errprResponse = new BaseErrorResponse();
+                errprResponse.Error.UserMessage = ex.Message;
+                errprResponse.Error.Code = (int)ResponseStatus.InternalServer;
+                actionResult = ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, errprResponse));//returns the 500 status code
+            }
+            return actionResult;
+        }
         #endregion
 
         #region MToolVersionCheckService

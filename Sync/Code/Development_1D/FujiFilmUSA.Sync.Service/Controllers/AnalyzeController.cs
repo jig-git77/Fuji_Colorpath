@@ -176,7 +176,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
 
         [HttpGet]
         [CustomAuthentication]
-        public IHttpActionResult GetValidationMeasurementSummaryDetails(int? MeasurementId, string fromDeltaE, bool? IsVerificationProject, bool? IsSync1DTypeProject, bool? IsAverageOfMeasurements)
+        public IHttpActionResult GetValidationMeasurementSummaryDetails(int? MeasurementId, string fromDeltaE, bool? IsVerificationProject, bool? IsSync1DTypeProject, bool? IsAverageOfMeasurements, bool? IsSyncDlpPlusTypeProject)
         {
             string validationMessage = "";
             IHttpActionResult actionResult = null;
@@ -201,6 +201,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
                 this.MeasurementId = Convert.ToInt32(MeasurementId);
                 this.IsVerification = IsVerificationProject == null ? false : Convert.ToBoolean(IsVerificationProject);
                 this.IsSync1DType = IsSync1DTypeProject == null ? false : Convert.ToBoolean(IsSync1DTypeProject);
+                this.IsSyncDLPPlusType = IsSyncDlpPlusTypeProject == null ? false : Convert.ToBoolean(IsSyncDlpPlusTypeProject);
                 this.IsAverageOfMeasurements = IsAverageOfMeasurements == null ? false : Convert.ToBoolean(IsAverageOfMeasurements);
                 this.From_ΔE = fromDeltaE;
 
@@ -1082,6 +1083,7 @@ namespace FujiFilmUSA.Sync.Service.Controllers
         public Project Project { get; set; }
         public int SpotProjectId { get; set; }
         public bool IsUsed { get; set; }
+        public bool IsSyncDLPPlusType { get; set; }
         #endregion
     }
 }

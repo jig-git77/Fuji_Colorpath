@@ -62,7 +62,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             throw new NotImplementedException();
         }
 
-        public List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false, bool IsAverageOfMeasurements = false)
+        public List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false, bool IsAverageOfMeasurements = false, bool IsSyncDLPPlusType = false)
         {
             throw new NotImplementedException();
         }
@@ -117,7 +117,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         }
 
 
-        public List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false)
+        public List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false, bool IsAverageOfMeasurements = false, bool IsSyncDLPPlusType = false)
         {
             return new List<Measurement>();
         }
