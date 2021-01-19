@@ -3606,6 +3606,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Project Project { get; set; }
         public int SpotProjectId { get; set; }
         public bool IsUsed { get; set; }
+        public bool IsSyncDLPPlusType
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.DLPPlus);
+            }
+        }
         #endregion
 
     }

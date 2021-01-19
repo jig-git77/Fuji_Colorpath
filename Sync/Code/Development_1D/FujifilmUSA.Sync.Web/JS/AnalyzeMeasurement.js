@@ -109,6 +109,7 @@ var $lnk_B_GrayBalanceLargeChart;
 var $lnk_L_GrayBalanceLargeChart;
 var $hdnCurrentUserRole;
 var AUTH_TOKEN = '';
+var $hdnSyncDlpPlusType;
 //********** kendo objects *********//
 var drawing = kendo.drawing;
 var geometry = kendo.geometry;
@@ -278,6 +279,7 @@ $(document).ready(function () {
     CURRENT_USER_ID = parseInt($hdnCurrentUserID);
     SERVICE_BASE_URL = $hdnBaseServiceUrl;
     AUTH_TOKEN = $("#hdfAuthToken").val();
+    $hdnSyncDlpPlusType = $('#hdnSyncDlpPlusType').val();
     //check deltaE is underfined in validation project
     if (!$selectedDeltaE) {
         if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
@@ -616,7 +618,7 @@ $(document).ready(function () {
     });
 
     //------------ Analyze paging feture events -------------//
-    $ddlView.on('change', function (e) {        
+    $ddlView.on('change', function (e) {
         e.preventDefault();
         BindPageNumber();
         PopulateAnalyzeChart();
@@ -773,7 +775,7 @@ function BindMeasurementSummary() {
     $("#divMeasurementSummary").css('display', 'none');
     $("#divValidationSummary").css('display', 'none');
 
-    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+    if ($hdnCurrentDlpSubOperation == ELicenseType.Sync1D || $hdnCurrentDlpSubOperation == ELicenseType.Validation || $hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
 
         $("#divValidationSummary").css('display', 'block');
         apiParameter = {
@@ -782,6 +784,7 @@ function BindMeasurementSummary() {
             IsVerificationProject: $hdnVerification,
             IsSync1DTypeProject: $hdnSync1DType,
             fromDeltaE: $selectedDeltaE,
+            IsSyncDlpPlusTypeProject: $hdnSyncDlpPlusType
         }
 
         //var ajaxParameter = {
@@ -936,7 +939,21 @@ function BindMeasurementSummary() {
                         }
                         if ($hdnCurrentDlpSubOperation == ELicenseType.DLPPlus) {
 
-                          
+                            $('#rowCustomer').hide();
+                            $('#rowPageSurface').hide();
+                            $('#rowJobID').hide();
+                            $('#rowNotes').hide();
+                            if ($hdnCurrentDlpSubOperation == ELicenseType.Validation) {
+                                $('#rowCustomer').show();
+                                $('#rowNotes').show();
+                            }
+                            var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+                            $(tabStrip.items()[2]).css('display', 'inline-block');
+                            //Bind G7 charts
+                            BindG7Charts();
+                            //show average measurement checkbox
+                            $('#ContentPlaceHolder1_ucAnalyze_tdAverageOfMeasurements').css('display', 'block');
+
                         }
 
                         //check validation type
@@ -1676,10 +1693,10 @@ function BindMeasurementPatchDetails() {
         //});
     });
 
-   
+
     $divMeasurementPatchDetails.find('#btnExportCGATS').unbind("click").on('click', function (e) {
         e.preventDefault();
-       
+
         var selectedMatricSum = '';
         if ($divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList")) {
             selectedMatricSum = $divMeasurementPatchDetails.find("#ddlMatricSum").data("kendoDropDownList").value();
@@ -1746,7 +1763,7 @@ function BindMeasurementPatchDetails() {
             }
         });
 
-      
+
         //$.ajax({
         //    type: "POST",
         //    url: SERVICE_BASE_URL + 'api/Analyze/GetCGATSPatchReport',
@@ -1763,7 +1780,7 @@ function BindMeasurementPatchDetails() {
         //    }
         //});
     });
-  
+
     $divMeasurementPatchDetails.find('#btnExportCxF').unbind("click").on('click', function (e) {
         e.preventDefault();
         var measurementID = parseInt($hdnCurrentMeasurement.val());
@@ -1831,7 +1848,7 @@ function BindMeasurementPatchDetails() {
                 alert(errorThrown);
             }
         });
-        
+
 
         //$.ajax({
         //    type: "POST",
@@ -2159,6 +2176,7 @@ function BindG7Charts() {
         MeasurementId: measurementID,
         IsAverageOfMeasurements: $isAverageOfMeasurements,
         IsVerificationProject: $hdnVerification,
+        IsSyncDlpPlusTypeProject: $hdnSyncDlpPlusType
     };
 
     var ajaxParameter = {
@@ -2597,8 +2615,8 @@ function PopulateAnalyzeChart() {
                             catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';
                         }
                         //set checked or not                        
-                       // var catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';                       
-                        
+                        // var catText = '<div style="text-align:center;"><div>' + arr[0] + '</div><div>' + arr[1] + '</div></div>';                       
+
                         var html = $(catText).appendTo(document.body);
 
                         // Store a reference to the target rectangle, see below
@@ -3132,7 +3150,7 @@ function PopulateInkPaperChartABComparision() {
             visible: true,
             template: function (e) {
                 var item = e.dataItem;
-                
+
                 tooltipString = '<table><tr><td><center><b>' + item.title + '</b></center><td></tr>';
                 tooltipString += '<tr><td>' + _Resources._recActual + ":</b> " + item.density.toFixed(2) + '</td></tr>';
                 tooltipString += '<tr><td>' + _Resources._recTarget + ":</b> " + item.densityLimit.toFixed(2) + '</td></tr>';
@@ -6265,8 +6283,8 @@ function renderChartWithBackgroundByAxis(e) {
         var rect = new geometry.Rect([
             xSlot.origin.x, ySlot.origin.y
         ], [
-                xSlot.width(), ySlot.height()
-            ]);
+            xSlot.width(), ySlot.height()
+        ]);
 
 
         if (chart.element[0].id == "kendoChartTargetVersusActualABDummy" || chart.element[0].id == "kendoChartGamut_ABComparisonDummy" || chart.element[0].id == "kendoChartInkPaperLabOneDummy") {

@@ -180,6 +180,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnCurrentDeviceName.Value = SessionManager.Instance.CurrentDevice.DeviceName.ToString();
                 hdnCurrentUserRole.Value = SessionManager.Instance.CurrentUser.Role.RoleId.ToString();
                 hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
+                hdnSyncDlpPlusType.Value = IsSyncDLPPlusType.ToString();
                 //--Start: Load average Compatibility values
                 chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return CheckAvgCompability();");
                 ChkAvgMeasurementCompatibility();
@@ -363,9 +364,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
                     {
                         EndDate = System.DateTime.Now;
-                        //Pass use DLP as false for initial call
-                        useDLP = false;
-                        DeviceLinkProfile = null;
+                        DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
+                        DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
                         _presenterAnalyze.CreateDestinationAndDlpPlus();
                     }
                     else
@@ -519,6 +519,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Project Project { get; set; }
         public int SpotProjectId { get; set; }
         public bool IsUsed { get; set; }
+        public bool IsSyncDLPPlusType
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.DLPPlus);
+            }
+        }
         #endregion
     }
 }

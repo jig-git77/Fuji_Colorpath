@@ -942,7 +942,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             }
 
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If "Ink Optimization Source" project type, then skip Measurement and Validation setup pages.
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLPPlus)
+            {
+                SessionManager.Instance.CurrentProject.MetricTargetPresetId = Convert.ToInt32(ddlMetricPresets.SelectedValue);
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
+            }
+            else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If "Ink Optimization Source" project type, then skip Measurement and Validation setup pages.
             {
                 //----Pass dummy data-----//
                 SessionManager.Instance.CurrentProject.MeasurementSetting =
