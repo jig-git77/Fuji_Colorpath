@@ -142,8 +142,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     BranchId = Convert.ToInt32(cmbBranch.SelectedValue)
                 },
-                ActivationDate = Convert.ToDateTime(txtActivationDate.Text),
-                ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text),
+                //ActivationDate = Convert.ToDateTime(txtActivationDate.Text),
+                ActivationDate = txtActivationDateNew.SelectedDate.Value.Date,
+                //ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text),
+                ExpirationDate = txtExpirationDateNew.SelectedDate.Value.Date,
                 LicenseDesc = txtLicenseDescription.Text,
                 IsOneOff = chkIsOneOff.Checked,
                 IsActive = chkIsActive.Checked,
@@ -239,8 +241,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 });
                 txtLicenseDescription.Text = License.LicenseDesc;
-                txtActivationDate.Text = Convert.ToDateTime(License.ActivationDate).ToString("d");
-                txtExpirationDate.Text = Convert.ToDateTime(License.ExpirationDate).ToString("d");
+                //txtActivationDate.Text = Convert.ToDateTime(License.ActivationDate).ToString("d");
+                txtActivationDateNew.SelectedDate = Convert.ToDateTime(License.ActivationDate.Date);
+                //txtExpirationDate.Text = Convert.ToDateTime(License.ExpirationDate).ToString("d");
+                txtExpirationDateNew.SelectedDate = Convert.ToDateTime(License.ExpirationDate.Date);
                 chkIsOneOff.Checked = License.IsOneOff;
                 chkIsCustomProfOptions.Checked = License.IsCustomProfOptions;
                 //chkIsCustomPlugin.Checked = License.IsCustomPlugin;

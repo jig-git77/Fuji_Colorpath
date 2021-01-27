@@ -274,13 +274,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locActivationDate;
         
         /// <summary>
-        /// txtActivationDate control.
+        /// txtActivationDateNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtActivationDate;
+        protected global::Telerik.Web.UI.RadDatePicker txtActivationDateNew;
         
         /// <summary>
         /// rfvActivationDate control.
@@ -310,13 +310,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locExpirationDate;
         
         /// <summary>
-        /// txtExpirationDate control.
+        /// txtExpirationDateNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExpirationDate;
+        protected global::Telerik.Web.UI.RadDatePicker txtExpirationDateNew;
         
         /// <summary>
         /// rfvExpirationDate control.

@@ -191,6 +191,12 @@ namespace FujifilmUSA.Sync.Web
         {
             //do nothing
         }
-        #endregion     
+        #endregion
+
+        protected void btnDate_Click(object sender, EventArgs e)
+        {
+           
+            lblDate.Text = RadDatePicker1.SelectedDate.Value.ToShortDateString();
+        }
     }
 }

@@ -290,7 +290,7 @@ $(document).ready(function () {
                         projectTypeTooltip = "DLPPlus";
                         break;
                 }
-
+               
                 //set project validation image
                 switch (data.ValidationStatus) {
                     case EValidationStatus.NotCertified:
@@ -409,6 +409,9 @@ $(document).ready(function () {
                 projectTypeImageTitle = '';
                 showSpotProject = false;
                 showSpotButtonEnableProject = false;
+                if ($hdfHasDeletePermission.val() !== 'True') {
+                    row.find("td #lnkDeleteProject").hide();
+                }
 
             });
 
@@ -464,9 +467,9 @@ $(document).ready(function () {
 
     var grid = $kendoProjectList.data("kendoGrid");
 
-    if ($hdfHasDeletePermission.val() !== 'True') {
-        grid.hideColumn(4);
-    }
+    //if ($hdfHasDeletePermission.val() !== 'True') {
+    //    grid.hideColumn(4);
+    //}
 
     $kendoProjectList.on('click', '#lnkDeleteSpotProject', function (e) {
         var spotProjectID = $(this).attr('data-spot');

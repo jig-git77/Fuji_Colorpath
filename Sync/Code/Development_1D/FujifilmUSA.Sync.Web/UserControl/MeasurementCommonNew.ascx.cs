@@ -179,6 +179,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 } 
             }
             hdnbtnAnalyzeParent.Value = ((LinkButton)NamingContainer.FindControl("btnAnalyze")).ClientID;
+            hdfHasDeletePermission.Value = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject).ToString();
         }
 
         protected void btnAddPluginStatus_Click(object sender, EventArgs e)

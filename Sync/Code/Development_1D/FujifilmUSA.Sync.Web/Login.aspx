@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <title>Login</title>
     <link href="CSS/Common.css?version=4" rel="stylesheet" type="text/css" />
-    <script src="JQuery/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="JQuery/jquery-3.5.1.min.js" type="text/javascript"></script>
 
 </head>
 <script type="text/javascript">

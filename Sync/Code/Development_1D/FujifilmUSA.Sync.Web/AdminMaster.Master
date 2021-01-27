@@ -9,10 +9,11 @@
 
 <head id="Head1" runat="server">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <title>Fujifilm Color Path</title>
+    <title>Fujifilm Color Path</title>    
     <link href="CSS/Common.css?version=4" rel="stylesheet" type="text/css" />
     <script src="JS/html5.js?version=4" type="text/javascript"></script>
-    <script src="JQuery/jquery-1.7.1.min.js?version=4" type="text/javascript"></script>
+<%--    <script src="JQuery/jquery-3.5.1.min.js?version=4" type="text/javascript"></script>--%>
+    <%--<script src="JQuery/jquery-1.7.1.min.js?version=4" type="text/javascript"></script>--%>
     <script type="text/javascript">
         window.history.forward();
         function noBack() {

@@ -11,7 +11,17 @@
 <script src="Scripts/kendo/2020.2.617/kendo.all.min.js"></script>
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<%--<script src="JQuery/jquery.simplemodal-1.4.4.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>--%>
 <script src="JS/ProjectList.js?version=<%=JsRandomGuid %>"></script>
+<%--<script type="text/javascript" lang="javascript">
+    (function ($) {
+    $.fn.extend({
+        size: function () {
+            return $(this).length;
+        }
+    });
+})(jQuery);
+</script>--%>
 
 <script type="text/javascript" language="javascript">
 

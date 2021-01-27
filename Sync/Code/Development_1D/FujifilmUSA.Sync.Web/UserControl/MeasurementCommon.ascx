@@ -3,16 +3,20 @@
 <%@ Import Namespace="FujifilmUSA.Sync.Business" %>
 <%--<script src="JS/wz_jsgraphics.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>--%>
 <script src="jQuery/json2.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
-<script src="jQuery/jquery-blockUI.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<%--<script src="jQuery/jquery-blockUI.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>--%>
+<script src="jQuery/jquery.blockUI-2.70.0.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="jQuery/wtooltip.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/excanvas.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/chartread.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/i1read.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/isisread.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/WebComm.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
-<script src="jQuery/jquery-1.7.1.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="jQuery/jquery-3.5.1.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-1.9.0.js?version=<%=JsRandomNumber %>"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js?version=<%=JsRandomNumber %>"></script>
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+
 
 <link href="Content/kendo/2020.2.617/kendo.common.min.css" rel="stylesheet" />
 <link href="Content/kendo/2020.2.617/kendo.default.min.css" rel="stylesheet" />
@@ -85,6 +89,15 @@
  "<embed src=\"" + soundfile + "\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
     }
 </script>--%>
+<script type="text/javascript" lang="javascript">
+    (function ($) {
+    $.fn.extend({
+        size: function () {
+            return $(this).length;
+        }
+    });
+})(jQuery);
+</script>
 
 <script language="javascript" type="text/javascript">
     function playSound(soundfile) {

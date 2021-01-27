@@ -148,7 +148,7 @@
             //        //}
             //        $('#dialog-confirm').dialog('open');
             //     //  }
-            }
+            //}
         }
         // In MSIE, the true version is after "MSIE" in userAgent
         else if ((verOffset = navigatorAgent.indexOf("MSIE")) != -1) {

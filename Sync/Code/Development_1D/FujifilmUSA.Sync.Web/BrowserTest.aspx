@@ -6,7 +6,7 @@
 <head id="Head1" runat="server">
     <title>Browser Test</title>
     <link href="CSS/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
-    <script src="JQuery/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="JQuery/jquery-3.5.1.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="JQuery/jquery-ui-1.8.16.custom.min.js"></script>
     <script type="text/javascript" src="JQuery/progressbar.js"></script>
     <script src="JS/DYMO.Label.Framework.latest.js" type="text/javascript"></script>
@@ -286,6 +286,41 @@
                 </td>                
             </tr>           
         </table>
+         <table id="Table1" runat="server" width="100%">
+             <tr>
+                <td align="center">   Date:*<telerik:RadDatePicker DateInput-DateFormat="yyyy-MM-dd" RenderMode="Lightweight" ID="RadDatePicker1" Width="50%" ClientEvents-OnDateSelected="OnDateSelected" runat="server" DateInput-Label="From Date">
+                               
+        </telerik:RadDatePicker>
+                    </td>
+
+                </tr>
+             <tr>
+                <td align="center"><asp:Label ID="lblDate" runat="server"></asp:Label>
+                    </td>
+
+                </tr>
+             <tr>
+                <td align="center"> <asp:Button ID="btnDate" runat="server" Text="DateSave" OnClick="btnDate_Click" />
+                    </td>
+
+                </tr>
+             </table>
+        <telerik:RadScriptBlock runat="server">
+        <script type="text/javascript">
+ 
+            //<![CDATA[
+ 
+            function OnDateSelected(sender, eventArgs) {
+                var date1 = sender.get_selectedDate();
+                date1.setDate(date1.getDate() + 31);
+                var datepicker = $find("<%= RadDatePicker1.ClientID %>");
+                datepicker.set_maxDate(date1);
+            }
+ 
+ 
+            //]]>
+        </script>
+            </telerik:RadScriptBlock>
     </div>
     <br />
     <div>
@@ -408,6 +443,7 @@
                                     Display="Dynamic" ErrorMessage="Please Provide Notes." ForeColor="Red" ValidationGroup="a"></asp:RequiredFieldValidator>
                             </td>
                         </tr>
+                        
                     </table>
                 </asp:Panel>
             </div>

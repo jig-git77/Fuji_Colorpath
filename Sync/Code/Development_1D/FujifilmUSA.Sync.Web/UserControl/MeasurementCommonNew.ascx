@@ -1,8 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementCommonNew.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementCommonNew" %>
 <%@ Import Namespace="FujifilmUSA.Sync.Business" %>
-<script src="jQuery/jquery-1.7.1.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
-<script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="jQuery/jquery-3.5.1.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-1.9.0.js?version=<%=JsRandomNumber %>"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js?version=<%=JsRandomNumber %>"></script>
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+
+<script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<%--<script src="JQuery/jquery.simplemodal-1.4.4.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>--%>
 
 
 
@@ -105,6 +109,7 @@
 <asp:HiddenField ID="hdDeviceType" runat="server" />
 <asp:HiddenField ID="hdSpotProjectType" runat="server" />
 <asp:HiddenField ID="hdnbtnAnalyzeParent" runat="server" />
+<asp:HiddenField ID="hdfHasDeletePermission" runat="server" />
 
 
 
@@ -172,21 +177,34 @@
                 src="Images/delete_icon.png" title="Delete Measurement"
                 id="imgbtnDelete"
                 name=" ${MeasurementId}">
+            
         </td>
     </tr>
 </script>
 
 
 
-
 <script lang="javascript" type="text/javascript">
+    function MeasurementDialog(message, type) {
+        jQuery("[id*='MeasurementConfirmDialog']").modal({
+            closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
+            position: ["20%",],
+            overlayId: 'MeasurementConfirmDialog-overlay',
+            containerId: 'MeasurementConfirmDialog-container',
+            onShow: function (dialog) {
+                var modal = this;
+                jQuery('.message', dialog.data[0]).append(message);
+                jQuery('.header', dialog.data[0]).append(type);
+            }
+        });
+    }
     var BASE_SERVICE_URL = '';
     var AutoNumber = 0;
     jQuery(document).ready(function () {
-        //BASE_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();                      
-        bindMeasurementData();
+        //BASE_SERVICE_URL = $('#hdnBasePluginServiceUrl').val();                             
+        bindMeasurementData();     
     });
-
+      
     function bindMeasurementData() {
         var OptimizeRunId = jQuery("input[id$=hdOptimizeRunId]").val();
         var ProjectId = jQuery("input[id$=hdProjectId]").val();
@@ -231,6 +249,7 @@
                         $("#measurementContainer").html("");
                         $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
                         $("#MeasurementHeaderTemplate").tmpl().appendTo("#lvMeasurement1");
+                       
                         $("#MeasurementDetailTemplate").tmpl(json).appendTo("#lvMeasurement1");
                         jQuery("input[id*='hdMeasurementsTotal']").val(json.length);  //----------Set MeasurementLimit in hiddeninput-------------//      
                         //----------------Display Import Button--------------//  
@@ -403,19 +422,7 @@
         return false;
     }
 
-    function MeasurementDialog(message, type) {
-        jQuery("[id*='MeasurementConfirmDialog']").modal({
-            closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
-            position: ["20%",],
-            overlayId: 'MeasurementConfirmDialog-overlay',
-            containerId: 'MeasurementConfirmDialog-container',
-            onShow: function (dialog) {
-                var modal = this;
-                jQuery('.message', dialog.data[0]).append(message);
-                jQuery('.header', dialog.data[0]).append(type);
-            }
-        });
-    }
+    
    function ShowImportFileWindow() {
         if (('<%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentDlpSubOperation != FujifilmUSA.Sync.Entity.ELicenseType.Validation).ToString().ToLower() %>' == 'true') &&
             (jQuery("input[id*='hdMeasurementsTotal']").val() >=

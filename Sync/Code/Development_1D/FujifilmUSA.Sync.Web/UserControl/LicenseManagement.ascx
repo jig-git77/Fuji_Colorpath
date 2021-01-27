@@ -160,7 +160,7 @@
 
                             <telerik:GridDateTimeColumn DataField="ActivationDate" HeaderText="Activation Date"
                                 SortExpression="ActivationDate" UniqueName="ActivationDate" Display="true" DataFormatString="{0:yyyy-MM-dd}"
-                                ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100" 
+                                ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100"  
                                 AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThanOrEqualTo" 
                                 meta:resourcekey="GridDateTimeColumnResource1">
                                 <HeaderStyle Width="100px"></HeaderStyle>

@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PrintPreview.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.PrintPreview" %>
-<script src="JQuery/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="JQuery/jquery-3.5.1.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var imgPreview = document.getElementById("<%= imgPreview.ClientID %>");
