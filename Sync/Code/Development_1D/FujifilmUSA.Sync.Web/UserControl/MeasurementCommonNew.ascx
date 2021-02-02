@@ -6,7 +6,7 @@
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
-<%--<script src="JQuery/jquery.simplemodal-1.4.4.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>--%>
+
 
 
 
