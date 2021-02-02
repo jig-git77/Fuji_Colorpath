@@ -323,7 +323,8 @@ namespace FujifilmUSA.Sync.Common
                 //========== Adds a counter to Page ==========//
                 theCount++;
 
-                string FileName = "Templates/kendoPrepressSingleMeasurement.htm";
+                //string FileName = "Templates/kendoPrepressSingleMeasurement.htm";
+                string FileName = "Templates/kendoPrepressSingleMeasurement_New.htm";
 
                 if (ReportType == 16) //----For G7 Opti / Validation Report + 4D G7 validation report
                 {
@@ -336,12 +337,13 @@ namespace FujifilmUSA.Sync.Common
                 else if (ReportType == 18) //----For Default mode in Sync1D ISO, G7 or 4D validation project as choice of MTP
                 {
                     FileName = "Templates/kendoPrepressSingleMeasurement_Default.htm";
+                    //FileName = "Templates/kendoPrepressSingleMeasurement_New.htm";
                 }
                 else if (ReportType == 19) //----For Default mode in Sync4D validation project for Scoring report
                 {
                     FileName = "Templates/kendoScoringMeasurement_Default.htm";
                 }
-                else if (ReportType == 20) //----For Default mode in Sync4D validation project for Scoring report
+                else if (ReportType == 20) //----For Spot Project report
                 {
                     FileName = "Templates/kendoPrepressSingleMeasurement_SpotProject.htm";
                 }
@@ -373,7 +375,7 @@ namespace FujifilmUSA.Sync.Common
                 theID = theDoc.AddImageHtml(SBStr.ToString(), true, 700, false);
                 theDoc.Rect.Inset(0, 1);
 
-               
+
                 while (true)
                 {
                     //========== Create A chanin for a pdf with multiple page ==========//
@@ -1209,6 +1211,25 @@ namespace FujifilmUSA.Sync.Common
                     SBStr.Replace("###DeltaEFormula###", Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim());
                     SBStr.Replace("###OffsetNA###", Convert.ToString(DT.Rows[0]["LicenseTypeID"]).Trim() == "2" ? "(N/A)" : "&nbsp;"); //----Display "N/A" in offset printing data label for Sync 4D project types---//
 
+                    if (ReportType == 13) //----Start:- ------Added data for New Sync4D one page single measurement report change to 3 pages new format one---------
+                    {
+                        SBStr.Replace("###ProfilerPreset###", Convert.ToString(DT.Rows[0]["ProfilerOptionsName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ProfilerOptionsName"]).Trim());
+                        SBStr.Replace("###CompanyName###", Convert.ToString(DT.Rows[0]["CompanyName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["CompanyName"]).Trim());
+                        SBStr.Replace("###BranchName###", Convert.ToString(DT.Rows[0]["BranchName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["BranchName"]).Trim());
+                        SBStr.Replace("###PressName###", Convert.ToString(DT.Rows[0]["DeviceName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeviceName"]).Trim());
+                        SBStr.Replace("###ProjectName###", Convert.ToString(DT.Rows[0]["ProjectName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ProjectName"]).Trim());
+                        SBStr.Replace("###CurrentDate###", System.DateTime.Now.ToString("dddd, MMMM dd, yyyy"));
+                        SBStr.Replace("(##RunNo##)", "(" + (Convert.ToString(DT.Rows[0]["RunName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["RunName"]).Trim()) + ")");
+                        SBStr.Replace("###MeasurementType###", Convert.ToString(DT.Rows[0]["MeasurementName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MeasurementName"]).Trim().Contains("Averaging") == true ? "This report details an average of measurements." : "This report details a single measurement.");
+                        SBStr.Replace("###Technician###", Convert.ToString(DT.Rows[0]["TechnicianName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["TechnicianName"]).Trim());
+                        SBStr.Replace("###MeasurementDevice###", Convert.ToString(DT.Rows[0]["InstrumentType"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["InstrumentType"]).Trim());
+                        SBStr.Replace("###SerialNumber###", Convert.ToString(DT.Rows[0]["SerialNumber"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["SerialNumber"]).Trim());
+                        SBStr.Replace("###UVMode###", Convert.ToString(DT.Rows[0]["UVMode"]).Trim() == "" ? "&nbsp;" : 'M' + Convert.ToString(DT.Rows[0]["UVMode"]).Trim());
+                        SBStr.Replace("###DLPChart###", Convert.ToString(DT.Rows[0]["ChartName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ChartName"]).Trim());
+                        SBStr.Replace("###OptiChart###", Convert.ToString(DT.Rows[0]["OPTChartName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["OPTChartName"]).Trim());
+                        SBStr.Replace("###Notes###", Convert.ToString(DT.Rows[0]["Notes"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["Notes"]).Trim());
+                    }  //-----End:------
+
                     if (ReportType == 16 || ReportType == 17 || ReportType == 18 || ReportType == 19)
                     {
                         if (IsValidation) //Only show Measurement Status in Validation mode in G7/ ISO / Default/ 4D
@@ -1315,7 +1336,7 @@ namespace FujifilmUSA.Sync.Common
                                     builder.Append("<table cellspacing='10px' style='margin-top:-5px;border-bottom: 1px solid black;'><tr><td style = 'width:175px;'>");
                                     builder.Append("<table width='100%' style='height:138px;'><tr><td colspan='2'><b>" + item.spotName + "</b></td></tr>");
                                     builder.Append("<tr><td colspan='2' style='background-color:" + item.HTMLColor + ";height:50px;'></td ></tr>");
-                                    
+
                                     if (_spotChartContent.hasMeasurement)
                                     {
                                         builder.Append("<tr><td>ΔE Target_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE_T_P) + "</td></tr>");
@@ -1326,7 +1347,7 @@ namespace FujifilmUSA.Sync.Common
                                     {
                                         builder.Append("<tr><td>ΔE Target_Prediction</td><td style='text-align:right;'>" + string.Format("{0:0.00}", item.deltaE) + "</td></tr>");
                                     }
-                                    builder.Append("</tr></table></td>");                                    
+                                    builder.Append("</tr></table></td>");
                                     builder.Append("<td style='width:175px;'><div style='width:100%' class='gamutChart'><img src=" + item.patchChart_AB + " /></div></td>");
                                     builder.Append("<td style='width:70px;'><img src=" + item.patchChart_L + " /></td>");
                                     builder.Append("<td style='width:180px;'>");
@@ -1484,6 +1505,24 @@ namespace FujifilmUSA.Sync.Common
                                 SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["Actuala"])) + "&nbsp;</p></td>");
                                 SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["Actualb"])) + "&nbsp;</p></td>");
                                 SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Gray'> <p class='Body-Text-Center'>" + (DT.Rows[i]["ΔELimit"].ToString() == "0.00" ? "N/A" : Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔELimit"]))) + "&nbsp;</p></td>");
+                                SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔE"])) + "&nbsp;</p></td>");
+                                SBstrDeltaEValue.Append("</tr>");
+                            }
+                        }
+                        else if (ReportType == 13)
+                        {
+                            RowHeight = 12;
+
+                            for (int i = 0; i < DT.Rows.Count; i++)
+                            {
+                                SBstrDeltaEValue.Append("<tr class = 'Metadata-Table _idGenTableRowColumn-4'>");
+                                SBstrDeltaEValue.Append("<td valign='middle' align='left' class='Metadata-Table " + DT.Rows[i]["ShortPatchType"] + "'> <p class='Body-Text-Bold'>" + DT.Rows[i]["ShortPatchType"] + "</p></td>");
+                                SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["TargetL"])) + "&nbsp;</p></td>");
+                                SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["Targeta"])) + "&nbsp;</p></td>");
+                                SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["Targetb"])) + "&nbsp;</p></td>");
+                                SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ActualL"])) + "&nbsp;</p></td>");
+                                SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["Actuala"])) + "&nbsp;</p></td>");
+                                SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["Actualb"])) + "&nbsp;</p></td>");
                                 SBstrDeltaEValue.Append("<td valign='middle' align='center' class='Metadata-Table Green'> <p class='Body-Text-Center'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔE"])) + "&nbsp;</p></td>");
                                 SBstrDeltaEValue.Append("</tr>");
                             }
@@ -2051,13 +2090,29 @@ namespace FujifilmUSA.Sync.Common
                         //SBStr.Replace("###ResultSummary_DeltaImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_SingleMeasurement_Page1_ResultSummary_Delta.Jpeg"));
                         #endregion
                     }
+
+                    //----------For new Sync4D / IO (custom) projects/ and 4D Certification projects report changes---------
+                    if (ReportType == 13) //----Start:- ------Added data for New Sync4D one page single measurement report change to 3 pages new format one---------
+                    {
+                        SBStr.Replace("###ABComparison###", this.chartContent.ABActualTargetChart);
+                        SBStr.Replace("###LComparison###", this.chartContent.LComparisionChart);
+
+                        // === Table 7 = for Chart of Gray Balance L* === //           
+                        #region ==== Gray Balance L* Chart ====
+                        SBStr.Replace("###ResultSummary_GrayLImage###", this.chartContent.LGrayBalanceChart);
+                        #endregion
+
+                        // === Table 8 = for Chart of Gray Balance a* === //           
+                        #region ==== Gray Balance a* Chart ====
+                        SBStr.Replace("###ResultSummary_GrayaImage###", this.chartContent.AGrayBalanceChart);
+                        #endregion
+
+                        // === Table 9 = for Chart of Gray Balance b* === //           
+                        #region ==== Gray Balance b* Chart ====
+                        SBStr.Replace("###ResultSummary_GraybImage###", this.chartContent.BGrayBalanceChart);
+                        #endregion
+                    }  //End:------
                 }
-
-
-                //SBStr.Replace("###LComparison###", this.chartContent.LComparisionChart);
-                //SBStr.Replace("###GrayL###", this.chartContent.LGrayBalanceChart);
-                //SBStr.Replace("###GrayA###", this.chartContent.AGrayBalanceChart);
-                //SBStr.Replace("###GrayB###", this.chartContent.BGrayBalanceChart);
 
             }
             catch (Exception ex)
@@ -2237,7 +2292,7 @@ namespace FujifilmUSA.Sync.Common
 
                 throw;
             }
-        }     
+        }
 
     }
 

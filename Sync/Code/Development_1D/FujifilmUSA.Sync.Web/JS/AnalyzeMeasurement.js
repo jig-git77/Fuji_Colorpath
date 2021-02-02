@@ -389,6 +389,13 @@ $(document).ready(function () {
         }
         else {
             apiParameter.DeltaSummaryChart = Get_DeltaSummaryChartImage();
+            //Start: - ------Extra charts added to support new version of 4D single page report-----------	
+            apiParameter.ABActualTargetChart = GetActualVsTargetChartImage();
+            apiParameter.LComparisionChart = GetLComparisionChartImage();
+            apiParameter.LGrayBalanceChart = Get_L_BalanceChartImage();
+            apiParameter.AGrayBalanceChart = Get_A_BalanceChartImage();
+            apiParameter.BGrayBalanceChart = Get_B_BalanceChartImage();
+            //End:
         }
 
         var ajaxParameter = {
