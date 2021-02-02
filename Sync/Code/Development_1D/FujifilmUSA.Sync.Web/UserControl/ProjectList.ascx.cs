@@ -65,7 +65,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //set dlpsuboperation session to none everytime page loads fresh(!ispostback)...
                 SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
                 hdnBaseServiceUrl.Value = Utilities.ReadConfigValue("BaseServiceURL");
-                hdfHasDeletePermission.Value = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject).ToString();
+                hdfHasDeletePermission.Value = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject).ToString();
                 hdfCurrentUser.Value = Convert.ToString(SessionManager.Instance.CurrentUser.UserId);
                 hdfCurrentDeviceID.Value = Convert.ToString(SessionManager.Instance.CurrentDevice.DeviceId);
                 hdfCurrentCulture.Value = getCurrentCultureLanguage();

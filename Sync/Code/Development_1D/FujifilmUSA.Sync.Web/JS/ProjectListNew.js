@@ -409,6 +409,7 @@ $(document).ready(function () {
                 projectTypeImageTitle = '';
                 showSpotProject = false;
                 showSpotButtonEnableProject = false;
+                //--------Hide "Delete Project" button , if user doesn't have permission to Delete like "Site users role"-------//
                 if ($hdfHasDeletePermission.val() !== 'True') {
                     row.find("td #lnkDeleteProject").hide();
                 }
