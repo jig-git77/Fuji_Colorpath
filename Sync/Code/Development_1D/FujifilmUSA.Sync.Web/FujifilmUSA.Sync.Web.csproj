@@ -1122,7 +1122,6 @@
     <Content Include="COValidationCallback.aspx" />
     <Content Include="COValidationSetup.aspx" />
     <Content Include="COViewOpenProject.aspx" />
-    <Content Include="CSS\AdminHorizonalMenu.css" />
     <Content Include="CSS\FirefoxPluginStyle.css" />
     <Content Include="CSS\jquery-ui-1.8.16.custom.css" />
     <Content Include="CustomReports.aspx" />
@@ -1290,7 +1289,6 @@
     <Content Include="JQuery\jquery.blockUI-2.70.0.js" />
     <Content Include="JQuery\numeric.js" />
     <Content Include="JQuery\progressbar.js" />
-    <Content Include="JS\AdminHorizonalMenu.js" />
     <Content Include="JS\Analyze.js" />
     <Content Include="JS\AnalyzeMeasurement.js" />
     <Content Include="JS\Common.js" />
