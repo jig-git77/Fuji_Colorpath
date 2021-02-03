@@ -1,10 +1,10 @@
-﻿using System;
-using System.Web.UI.WebControls;
-using System.Linq;
-using FujifilmUSA.Sync.Entity;
+﻿using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
 
@@ -50,7 +50,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
         public AddDeviceManagement()
         {
-            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            Load += (sender, e) => ExceptionHandling(Page_Load, sender, e);
         }
         #region Page Events
         protected override void OnInit(EventArgs e)
@@ -72,7 +72,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ELicenseSpotLibraryText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.SpotLibrary);
             ELicenseDLpPlusText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLPPlus);
 
-            if (Page.IsPostBack) return;
+            if (Page.IsPostBack)
+            {
+                return;
+            }
 
             lblHeader.Text = GetResourceString(_recAddDevice); //"Add Device";
             Bindcompany();
@@ -177,7 +180,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     else
                     {
                         cmbLicense.SelectedIndex = 0;
-                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text =txtDlpPlus.Text = "0";
+                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtInkOptSource.Text = txt4DCertify.Text = txtCustomSourceProfile.Text = txtReProfileCustomSource.Text = txtFullGamutCustomSource.Text = txtMultiColorCustomSource.Text = txtSpotLibrary.Text = txtDlpPlus.Text = "0";
                         txtSync1D.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1D).Count() > 0);
                         txtDlp.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLP).Count() > 0);
                         txtInkOpt.Enabled = (License.LicenseType.Where(x => x == ELicenseType.InkOptimization).Count() > 0);
@@ -224,40 +227,75 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IsValidation = chkIsValidation.Checked,
                 IsFlexo = chkIsFlexo.Checked
             };
-
+            txtDlpPlus.Text = txtDlp.Text;
             if (txtSync1D.Enabled)
+            {
                 Device.LicenseTypeProject.Add(ELicenseType.Sync1D, Convert.ToInt32(txtSync1D.Text));
+            }
+
             if (txtDlp.Enabled)
+            {
                 Device.LicenseTypeProject.Add(ELicenseType.DLP, Convert.ToInt32(txtDlp.Text));
+            }
+
             if (txtInkOpt.Enabled)
+            {
                 Device.LicenseTypeProject.Add(ELicenseType.InkOptimization, Convert.ToInt32(txtInkOpt.Text));
+            }
+
             if (txtInkOptSource.Enabled)
+            {
                 Device.LicenseTypeProject.Add(ELicenseType.InkOptimizationSource, Convert.ToInt32(txtInkOptSource.Text));
+            }
+
             if (txt4DCertify.Enabled)
+            {
                 Device.LicenseTypeProject.Add(ELicenseType.Sync4DCertification, Convert.ToInt32(txt4DCertify.Text));
+            }
+
             if (txtCustomSourceProfile.Enabled)
+            {
                 Device.LicenseTypeProject.Add(ELicenseType.CustomSourceProfile, Convert.ToInt32(txtCustomSourceProfile.Text));
+            }
+
             if (txtReProfileCustomSource.Enabled)
+            {
                 Device.LicenseTypeProject.Add(ELicenseType.ReProfileCustomSource, Convert.ToInt32(txtReProfileCustomSource.Text));
+            }
+
             if (txtFullGamutCustomSource.Enabled)
+            {
                 Device.LicenseTypeProject.Add(ELicenseType.FullGamutCustomSource, Convert.ToInt32(txtFullGamutCustomSource.Text));
+            }
+
             if (txtMultiColorCustomSource.Enabled)
+            {
                 Device.LicenseTypeProject.Add(ELicenseType.MultiColorCustomSource, Convert.ToInt32(txtMultiColorCustomSource.Text));
+            }
+
             if (txtSpotLibrary.Enabled)
+            {
                 Device.LicenseTypeProject.Add(ELicenseType.SpotLibrary, Convert.ToInt32(txtSpotLibrary.Text));
-           // if (txtDlpPlus.Enabled)
-                Device.LicenseTypeProject.Add(ELicenseType.DLPPlus, Convert.ToInt32(txtDlpPlus.Text));
+            }
+            // if (txtDlpPlus.Enabled)
+            Device.LicenseTypeProject.Add(ELicenseType.DLPPlus, Convert.ToInt32(txtDlpPlus.Text));
 
             if (DId == 0) // Add New company
             {
                 _presenterDeviceManagement.InsertDevice();
-                if (IsErrorOccured) return;
+                if (IsErrorOccured)
+                {
+                    return;
+                }
             }
             else // Edit New company
             {
                 Device.DeviceId = DId;
                 _presenterDeviceManagement.UpdateDevice();
-                if (IsErrorOccured) return;
+                if (IsErrorOccured)
+                {
+                    return;
+                }
             }
             Response.Redirect("DeviceManagement.aspx");
         }
@@ -292,7 +330,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             txtSync1D.Text = val.ToString();
                             break;
                         case ELicenseType.DLP:
-                            txtDlp.Text = val.ToString();
+                            {
+                                txtDlp.Text = val.ToString();
+                                txtDlpPlus.Text = val.ToString();
+                            }
+
                             break;
                         case ELicenseType.InkOptimization:
                             txtInkOpt.Text = val.ToString();

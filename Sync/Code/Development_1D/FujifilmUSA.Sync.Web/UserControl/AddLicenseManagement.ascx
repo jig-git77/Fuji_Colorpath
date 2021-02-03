@@ -4,6 +4,7 @@
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
 
+
 <%--<link rel="stylesheet" href="JQuery/datepicker-themes/base/jquery.ui.all.css">
 <script type="text/javascript" src="JQuery/jquery.ui.core.js"></script>
 <script type="text/javascript" src="JQuery/jquery.ui.datepicker.js"></script>--%>
@@ -29,8 +30,8 @@ jQuery.browser.version = RegExp.$1;
     function CopyDLPPlusChecked() {
         var btnIdDLP = '#' + '<%= chkDlp.ClientID %>';
         var btnIdDLPPlus = '#' + '<%= chkDLPPlus.ClientID %>';
-
-        $(btnIdDLPPlus).prop('checked', $(btnIdDLP).is(':checked'));
+        $(btnIdDLPPlus).attr("checked", $(btnIdDLP).is(':checked'));
+        
 
     }
 
@@ -191,17 +192,6 @@ jQuery.browser.version = RegExp.$1;
                                                 </td> 
                                             </tr>
                                         </table>
-
-                                        
-                                        
-                                            
-                                        
-                                        
-                                         
-                                         
-                                         
-                                         
-                                         
                                     </div>
                                     <div style="float: left">
                                     </div>
@@ -225,8 +215,7 @@ jQuery.browser.version = RegExp.$1;
                                             meta:resourcekey="txtActivationDateResource1"></asp:TextBox>
                                     </div>--%>
                                     <div style="float:left;">
-                                        <telerik:RadDatePicker RenderMode="Lightweight" ID="txtActivationDateNew" Height="19px" Width="100px" DateInput-ClientEvents-OnKeyPress="OnDateKeyPress" DateInput-DateFormat="MM/dd/yyyy" ClientEvents-OnDateSelected="OnActivationDateSelected" runat="server" >
-        </telerik:RadDatePicker>
+                                        <telerik:RadDatePicker RenderMode="Lightweight" ID="txtActivationDateNew" Height="19px" Width="100px"  DateInput-DateFormat="MM/dd/yyyy" runat="server" ></telerik:RadDatePicker>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvActivationDate" runat="server" Display="Dynamic"
@@ -237,25 +226,7 @@ jQuery.browser.version = RegExp.$1;
                                     </div>
                                     <div class="clear">
                                     </div>
-                                     <telerik:RadScriptBlock runat="server">
-        <script type="text/javascript">
-
-            //<![CDATA[
-            function OnDateKeyPress(sender, eventArgs) {
-
-                return false;
-            }
-            function OnActivationDateSelected(sender, eventArgs) {
-                var date1 = sender.get_selectedDate();
-                date1.setDate(date1.getDate() + 31);
-                var datepicker = $find("<%= txtActivationDateNew.ClientID %>");
-                datepicker.set_maxDate(date1);
-            }
-
-
-            //]]>
-        </script>
-            </telerik:RadScriptBlock>
+    
                                 </td>
                             </tr>
                             <tr>
@@ -275,37 +246,19 @@ jQuery.browser.version = RegExp.$1;
                                             meta:resourcekey="txtExpirationDateResource1"></asp:TextBox>
                                     </div>--%>
                                      <div style="float:left;">
-                                        <telerik:RadDatePicker RenderMode="Lightweight" ID="txtExpirationDateNew" Height="19px" Width="100px" DateInput-ClientEvents-OnKeyPress="OnExpirationDateKeyPress" DateInput-DateFormat="MM/dd/yyyy" ClientEvents-OnDateSelected="OnExpirationDateSelected" runat="server" >
-        </telerik:RadDatePicker>
+                                        <telerik:RadDatePicker RenderMode="Lightweight" ID="txtExpirationDateNew" Height="19px" Width="100px"  DateInput-DateFormat="MM/dd/yyyy"  runat="server" >
+                                        </telerik:RadDatePicker>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvExpirationDate" runat="server" Display="Dynamic"
                                             ControlToValidate="txtExpirationDateNew" ForeColor="Red" 
                                             ValidationGroup="vgAddLicense"><ucValidationContainer:ValidationContainer ID="rfvExpiraDateContainer" runat="server"
                                                 ValidationMsg="Please select expiration date." Size="200" ResourceValidationMsg="ExpirationDateRequiredResource"/>
-</asp:RequiredFieldValidator>
+                                            </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
-                                        <telerik:RadScriptBlock runat="server">
-        <script type="text/javascript">
-
-            //<![CDATA[
-            function OnExpirationDateKeyPress(sender, eventArgs) {
-
-                return false;
-            }
-            function OnExpirationDateSelected(sender, eventArgs) {
-                var date1 = sender.get_selectedDate();
-                date1.setDate(date1.getDate() + 31);
-                var datepicker = $find("<%= txtExpirationDateNew.ClientID %>");
-                datepicker.set_maxDate(date1);
-            }
-
-
-            //]]>
-        </script>
-            </telerik:RadScriptBlock>
+       
                                 </td>
                             </tr>
                              <tr>

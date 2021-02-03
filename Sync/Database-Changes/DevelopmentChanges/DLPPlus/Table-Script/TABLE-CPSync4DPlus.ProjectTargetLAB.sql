@@ -1,4 +1,4 @@
-USE [ColorPathSync_Prod]
+
 GO
 
 /****** Object:  Table [CPSync].[ProjectTargetLAB]    Script Date: 12/28/2020 4:36:56 PM ******/

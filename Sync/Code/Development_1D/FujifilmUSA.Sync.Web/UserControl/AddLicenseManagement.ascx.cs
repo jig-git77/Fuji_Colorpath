@@ -209,7 +209,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             chkSync1D.Checked = true;
                             break;
                         case ELicenseType.DLP:
-                            chkDlp.Checked = true;                            
+                            {
+                                chkDlp.Checked = true;
+                                chkDLPPlus.Checked = true;
+                            }
+                            
                             break;
                         case ELicenseType.InkOptimization:
                             chkInk.Checked = true;

@@ -1,4 +1,4 @@
-IF NOT EXISTS(SELECT * FROM CP.LicenseType WHERE LicenseTypeID=11 AND LicenseType='DLP Plus')
+IF NOT EXISTS(SELECT * FROM CP.LicenseType WHERE  LicenseType='DLP Plus')
 BEGIN
-	INSERT INTO CP.LicenseType(LicenseTypeID,LicenseType) VALUES(11,'DLP Plus')
+	INSERT INTO CP.LicenseType(LicenseType) VALUES('DLP Plus')
 END

@@ -1,4 +1,4 @@
-IF EXISTS(SELECT *
+IF NOT EXISTS(SELECT *
           FROM   INFORMATION_SCHEMA.COLUMNS
           WHERE  TABLE_NAME = 'CPSync4D.Measurement'
                  AND COLUMN_NAME = 'IsOK') 

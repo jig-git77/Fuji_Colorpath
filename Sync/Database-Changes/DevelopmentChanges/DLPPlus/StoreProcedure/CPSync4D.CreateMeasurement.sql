@@ -8,7 +8,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [CPSync4D].[CreateMeasurement]
+ALTER PROCEDURE [CPSync4D].[CreateMeasurement]
 	@MeasurementName NVARCHAR(50),
 	@OptimizeRunID INT,
 	@MeasurementDate DATETIME,

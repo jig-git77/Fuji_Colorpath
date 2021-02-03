@@ -288,7 +288,7 @@
         </table>
          <table id="Table1" runat="server" width="100%">
              <tr>
-                <td align="center">   Date:*<telerik:RadDatePicker DateInput-DateFormat="yyyy-MM-dd" RenderMode="Lightweight" ID="RadDatePicker1" Width="50%" ClientEvents-OnDateSelected="OnDateSelected" runat="server" DateInput-Label="From Date">
+                <td align="center">   Date:*<telerik:RadDatePicker DateInput-DateFormat="yyyy-MM-dd" RenderMode="Lightweight" ID="RadDatePicker1" Width="50%" runat="server" DateInput-Label="From Date">
                                
         </telerik:RadDatePicker>
                     </td>
@@ -305,7 +305,7 @@
 
                 </tr>
              </table>
-        <telerik:RadScriptBlock runat="server">
+        <%--<telerik:RadScriptBlock runat="server">
         <script type="text/javascript">
  
             //<![CDATA[
@@ -320,7 +320,7 @@
  
             //]]>
         </script>
-            </telerik:RadScriptBlock>
+            </telerik:RadScriptBlock>--%>
     </div>
     <br />
     <div>
