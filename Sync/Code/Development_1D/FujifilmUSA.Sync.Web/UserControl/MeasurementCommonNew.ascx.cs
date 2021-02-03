@@ -190,7 +190,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (result > 0)
                 {
                     GetMToolMessage(1);
-                    Response.Redirect(Request.Url.ToString());
+                    //Devlopment/prodcuction support only HTTP.
+                    //Response.Redirect(Request.Url.ToString());
+                    //Stage Code support only HTTPS.
+                    Response.Redirect(Request.Url.ToString().Replace("http", "https")); //----This line is only for stage, move back to upper commented line for production future publish
                 }
                 else
                 {
@@ -240,7 +243,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 str.Append("<b>This project is not currently activated for measurement.</b>");
                 
-            }
+            }            
             lblMessage.Text = str.ToString();
         }
         #endregion
