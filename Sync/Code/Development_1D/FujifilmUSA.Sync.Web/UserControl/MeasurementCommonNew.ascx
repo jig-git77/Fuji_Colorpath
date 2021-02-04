@@ -1,10 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementCommonNew.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementCommonNew" %>
 <%@ Import Namespace="FujifilmUSA.Sync.Business" %>
 <script src="jQuery/jquery-3.5.1.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
-<script src="http://code.jquery.com/jquery-1.9.0.js?version=<%=JsRandomNumber %>"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.js?version=<%=JsRandomNumber %>"></script>
+<script src="JQuery/jquery-3.5.2.js?version=<%=JsRandomNumber %>"></script>
+<script src="JQuery/jquery-migrate-3.5.1.js?version=<%=JsRandomNumber %>"></script> 
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
-
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 
 

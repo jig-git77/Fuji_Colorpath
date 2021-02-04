@@ -1285,6 +1285,8 @@
     <Content Include="InkOptSourceMiddle.aspx" />
     <Content Include="JQuery\jquery-1.9.1.min.js" />
     <Content Include="JQuery\jquery-3.5.1.min.js" />
+    <Content Include="JQuery\jquery-3.5.2.js" />
+    <Content Include="JQuery\jquery-migrate-3.5.1.js" />
     <Content Include="JQuery\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="JQuery\jquery.blockUI-2.70.0.js" />
     <Content Include="JQuery\numeric.js" />
@@ -9261,7 +9263,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
