@@ -12,7 +12,7 @@
 <script src="JS/isisread.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/WebComm.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="jQuery/jquery-3.5.1.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
-<script src="JQuery/jquery-3.5.2.js?version=<%=JsRandomNumber %>"></script>
+<script src="JQuery/jquery-3.5.1.js?version=<%=JsRandomNumber %>"></script>
 <script src="JQuery/jquery-migrate-3.5.1.js?version=<%=JsRandomNumber %>"></script> 
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
