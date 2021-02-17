@@ -179,8 +179,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnCurrentProjectLicenseType.Value = SessionManager.Instance.CurrentProject.LicenseType.ToString();
                 hdnCurrentDeviceName.Value = SessionManager.Instance.CurrentDevice.DeviceName.ToString();
                 hdnCurrentUserRole.Value = SessionManager.Instance.CurrentUser.Role.RoleId.ToString();
-                hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;
-                hdnSyncDlpPlusType.Value = IsSyncDLPPlusType.ToString();
+                hdfAuthToken.Value = SessionManager.Instance.CurrentUser.APIAuthKey;               
                 //--Start: Load average Compatibility values
                 chkAnalyzeAverageOfMeasurements.Attributes.Add("onclick", "return CheckAvgCompability();");
                 ChkAvgMeasurementCompatibility();
@@ -221,6 +220,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnVerification.Value = IsVerification.ToString();
                 hdnCurrentDlpSubOperation.Value = ((int)SessionManager.Instance.CurrentDlpSubOperation).ToString();
                 hdnSync1DType.Value = IsSync1DType.ToString();
+                hdnSyncDlpPlusType.Value = IsSyncDLPPlusType.ToString();
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                 {
                     //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//
